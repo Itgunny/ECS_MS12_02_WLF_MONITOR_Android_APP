@@ -2609,10 +2609,10 @@ void _Close_UART1(JNIEnv *env, jobject this) {
 	//else if ( status == EINVAL ) {
 	//	__android_log_print(ANDROID_LOG_INFO, "NATIVE", "Thread ID[%d] is yet alive\n", p_thread[1]);
 	//}
-	else {
-		__android_log_print(ANDROID_LOG_INFO, "NATIVE",
-				"Thread ID[%d] kill fail\n", p_thread[1]);
-	}
+//	else {
+//		__android_log_print(ANDROID_LOG_INFO, "NATIVE",
+//				"Thread ID[%d] kill fail\n", p_thread[1]);
+//	}
 
 	timer_delete(&firstTimerID);
 }
@@ -2665,10 +2665,10 @@ void _Close_UART3(JNIEnv *env, jobject this) {
 	//else if ( status == EINVAL ) {
 	//	__android_log_print(ANDROID_LOG_INFO, "NATIVE", "Thread ID[%d] is yet alive\n", p_thread[3]);
 	//}
-	else {
-		__android_log_print(ANDROID_LOG_INFO, "NATIVE",
-				"Thread ID[%d] kill fail\n", p_thread[3]);
-	}
+//	else {
+//		__android_log_print(ANDROID_LOG_INFO, "NATIVE",
+//				"Thread ID[%d] kill fail\n", p_thread[3]);
+//	}
 }
 
 jint _Write_UART1(JNIEnv *env, jobject this, jbyteArray arr, jint size) {

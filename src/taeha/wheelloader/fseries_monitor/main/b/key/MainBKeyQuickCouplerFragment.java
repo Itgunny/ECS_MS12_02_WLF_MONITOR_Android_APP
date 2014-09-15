@@ -110,10 +110,10 @@ public class MainBKeyQuickCouplerFragment extends ParentFragment{
 	}
 	/////////////////////////////////////////////////////////////////////	
 	public void ClickLock(){
-		
+		ParentActivity.showQuickCouplerPopupLocking1();
 	}
 	public void ClickUnlock(){
-		
+		ParentActivity.showQuickCouplerPopupUnlocking1();
 	}
 	public void ClickOK(){
 		

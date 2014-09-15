@@ -2,11 +2,17 @@ package taeha.wheelloader.fseries_monitor.main;
 
 import java.lang.ref.WeakReference;
 
+import taeha.wheelloader.fseries_monitor.popup.QuickCouplerPopupLocking1;
+import taeha.wheelloader.fseries_monitor.popup.QuickCouplerPopupLocking2;
+import taeha.wheelloader.fseries_monitor.popup.QuickCouplerPopupUnlocking1;
+import taeha.wheelloader.fseries_monitor.popup.QuickCouplerPopupUnlocking2;
+
 import android.os.Bundle;
 import android.os.IBinder;
 import android.os.Message;
 import android.os.RemoteException;
 import android.app.Activity;
+import android.app.Dialog;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
@@ -47,8 +53,10 @@ public class Home extends Activity {
 	public static final int SCREEN_STATE_MAIN_B_KEY_WORKLIGHT							= 0x06200000;
 	public static final int SCREEN_STATE_MAIN_B_KEY_AUTOGREASE							= 0x06300000;
 	public static final int SCREEN_STATE_MAIN_B_KEY_QUICKCOUPLER						= 0x06400000;
-	public static final int SCREEN_STATE_MAIN_B_KEY_QUICKCOUPLER_POPUP1					= 0x06410000;
-	public static final int SCREEN_STATE_MAIN_B_KEY_QUICKCOUPLER_POPUP2					= 0x06420000;
+	public static final int SCREEN_STATE_MAIN_B_KEY_QUICKCOUPLER_POPUP_LOCKING1			= 0x06410000;
+	public static final int SCREEN_STATE_MAIN_B_KEY_QUICKCOUPLER_POPUP_LOCKING2			= 0x06420000;
+	public static final int SCREEN_STATE_MAIN_B_KEY_QUICKCOUPLER_POPUP_UNLOCKING1		= 0x06430000;
+	public static final int SCREEN_STATE_MAIN_B_KEY_QUICKCOUPLER_POPUP_UNLOCKING2		= 0x06440000;
 	public static final int SCREEN_STATE_MAIN_B_KEY_RIDECONTROL							= 0x06500000;
 	public static final int SCREEN_STATE_MAIN_B_KEY_RIDECONTROL_SPEED					= 0x06510000;
 	public static final int SCREEN_STATE_MAIN_B_KEY_WORKLOAD							= 0x06600000;
@@ -78,6 +86,13 @@ public class Home extends Activity {
 	
 	// Thread
 	private Thread threadRead = null;
+	
+	// Dialog
+	Dialog HomeDialog;
+	QuickCouplerPopupLocking1 _QuickCouplerPopupLocking1;
+	QuickCouplerPopupUnlocking1 _QuickCouplerPopupUnlocking1;
+	QuickCouplerPopupLocking2 _QuickCouplerPopupLocking2;
+	QuickCouplerPopupUnlocking2 _QuickCouplerPopupUnlocking2;
 	////////////////////////////////////////////////////
 	
 	//Fragment//////////////////////////////////////////
@@ -92,6 +107,7 @@ public class Home extends Activity {
 		
 		InitResource();
 		InitFragment();
+		InitPopup();
 		InitValuable();
 		InitAnimation();
 		
@@ -148,6 +164,14 @@ public class Home extends Activity {
 	}
 	public void InitFragment(){
 		_MainBBaseFragment = new MainBBaseFragment();
+	}
+	public void InitPopup(){
+		HomeDialog = null;
+		_QuickCouplerPopupLocking1 = new QuickCouplerPopupLocking1(this);
+		_QuickCouplerPopupUnlocking1 = new QuickCouplerPopupUnlocking1(this);
+		_QuickCouplerPopupLocking2 = new QuickCouplerPopupLocking2(this);
+		_QuickCouplerPopupUnlocking2 = new QuickCouplerPopupUnlocking2(this);
+		
 	}
 	public void InitAnimation(){
 		
@@ -221,6 +245,10 @@ public class Home extends Activity {
 			
 			threadRead.start();
 			CAN1Comm.SetScreenTopFlag(true);
+			
+			CAN1Comm.TxCMDToMCU(CAN1CommManager.CMD_STARTCAN);
+			
+			
 			
 		}
 	};
@@ -360,6 +388,44 @@ public class Home extends Activity {
 			}
 		});
 		
+	}
+	/////////////////////////////////////////////////////
+	//Popup//////////////////////////////////////////////
+	public void showQuickCouplerPopupLocking1(){
+		if(HomeDialog != null){
+			HomeDialog.dismiss();
+			HomeDialog = null;
+		}
+		
+		HomeDialog = _QuickCouplerPopupLocking1;
+		HomeDialog.show();
+	}
+	public void showQuickCouplerPopupUnlocking1(){
+		if(HomeDialog != null){
+			HomeDialog.dismiss();
+			HomeDialog = null;
+		}
+		
+		HomeDialog = _QuickCouplerPopupUnlocking1;
+		HomeDialog.show();
+	}
+	public void showQuickCouplerPopupLocking2(){
+		if(HomeDialog != null){
+			HomeDialog.dismiss();
+			HomeDialog = null;
+		}
+		
+		HomeDialog = _QuickCouplerPopupLocking2;
+		HomeDialog.show();
+	}
+	public void showQuickCouplerPopupUnlocking2(){
+		if(HomeDialog != null){
+			HomeDialog.dismiss();
+			HomeDialog = null;
+		}
+		
+		HomeDialog = _QuickCouplerPopupUnlocking2;
+		HomeDialog.show();
 	}
 	/////////////////////////////////////////////////////
 }

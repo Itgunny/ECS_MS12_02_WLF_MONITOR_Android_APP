@@ -2,5 +2,6 @@
 <resources>
     <color name="main_title_amber">#ffffbf00</color>
     <color name="main_quick_help_blue">#ff57b6ee</color>
-    <color name="black">#00000000</color>
+    <color name="black">#ff000000</color>
+    <color name="gray">#ff888888</color>
 </resources>

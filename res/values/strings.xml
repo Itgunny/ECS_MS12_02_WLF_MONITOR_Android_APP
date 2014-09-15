@@ -93,5 +93,9 @@
     <string name="Save_Position">Save Position</string>
     <string name="Forward">Forward</string>
     <string name="Backward">Backward</string>
+    <string name="Excute_Locking_Attachment">Excute Locking Attachment.</string>
+    <string name="Excuting_Locking_Attachment">Excuting Locking Attachment.</string>
+    <string name="Excute_Unlocking_Attachment">Excute Unlocking Attachment.</string>
+    <string name="Excuting_Unlocking_Attachment">Excuting Unlocking Attachment.</string>
     <!-- Key End -->
 </resources>

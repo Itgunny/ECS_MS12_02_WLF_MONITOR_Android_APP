@@ -10,19 +10,21 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="95dp"
-        android:layout_marginTop="95dp" >
+        android:layout_marginTop="75dp" >
         
         <ImageView
             android:id="@+id/imageView_key_main_b_ridecontrol_speed_forward_point"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
             android:src="@drawable/menu_bluedot" />
 
         <TextView
             android:id="@+id/textView_key_main_b_ridecontrol_speed_forward_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="5dp"
+            android:layout_marginLeft="15dp"
+            android:layout_marginTop="20dp"
             android:layout_toRightOf="@+id/imageView_key_main_b_ridecontrol_speed_forward_point"
             android:text="@string/Forward"
             android:textAppearance="?android:attr/textAppearanceLarge" />
@@ -35,25 +37,34 @@
             android:layout_below="@+id/textView_key_main_b_ridecontrol_speed_forward_title"
             android:text="10 km/h"
             android:textAppearance="?android:attr/textAppearanceLarge" />
-
+        
         <TextView
             android:id="@+id/textView_key_main_b_ridecontrol_speed_forward_min"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_alignLeft="@+id/RelativeLayout_key_main_b_ridecontrol_speed_forward_seekbar"
+            android:layout_below="@+id/RelativeLayout_key_main_b_ridecontrol_speed_forward_seekbar"
+            android:layout_marginTop="-10dp"
             android:text="5 km/h"
-            android:textAppearance="?android:attr/textAppearanceLarge" />
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:textColor="@color/gray" />
+
         <TextView
             android:id="@+id/textView_key_main_b_ridecontrol_speed_forward_max"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_alignRight="@+id/RelativeLayout_key_main_b_ridecontrol_speed_forward_seekbar"
+            android:layout_below="@+id/RelativeLayout_key_main_b_ridecontrol_speed_forward_seekbar"
+            android:layout_marginTop="-10dp"
             android:text="20 km/h"
-            android:textAppearance="?android:attr/textAppearanceLarge" />
-
-        
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:textColor="@color/gray" />
 
         <RelativeLayout
+            android:id="@+id/RelativeLayout_key_main_b_ridecontrol_speed_forward_seekbar"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content" >
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="140dp" >
             
             <ImageView
                 android:id="@+id/imageView_key_main_b_ridecontrol_speed_seekbar_bg"
@@ -64,6 +75,7 @@
         
 	        <SeekBar
 	            android:id="@+id/seekBar_key_main_b_ridecontrol_speed_forward"
+	            style="@style/RideControlSpeedSeekBar"
 	            android:layout_width="wrap_content"
 	            android:layout_height="wrap_content"
 	            android:layout_alignLeft="@+id/imageView_key_main_b_ridecontrol_speed_seekbar_bg"
@@ -71,8 +83,95 @@
 	            android:minHeight="5dip"
 	            android:paddingLeft="20dp"
 	            android:paddingRight="20dp"
-	            android:progressDrawable="@drawable/_seekbar_ridecontrol_speed"
 	            android:thumb="@drawable/_selector_seekbar_thumb" />
+	        
+	        
+
+        </RelativeLayout>
+
+    </RelativeLayout>
+    
+<RelativeLayout
+    android:id="@+id/RelativeLayout_key_main_b_ridecontrol_speed_backward"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_below="@+id/RelativeLayout_key_main_b_ridecontrol_speed_forward"
+    android:layout_marginLeft="95dp" >
+        
+        <ImageView
+            android:id="@+id/imageView_key_main_b_ridecontrol_speed_backward_point"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+            android:src="@drawable/menu_bluedot" />
+
+        <TextView
+            android:id="@+id/textView_key_main_b_ridecontrol_speed_backward_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="15dp"
+            android:layout_marginTop="20dp"
+            android:layout_toRightOf="@+id/imageView_key_main_b_ridecontrol_speed_backward_point"
+            android:text="@string/Backward"
+            android:textAppearance="?android:attr/textAppearanceLarge" />
+        
+        <TextView
+            android:id="@+id/textView_key_main_b_ridecontrol_speed_backward_value"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@+id/textView_key_main_b_ridecontrol_speed_backward_title"
+            android:layout_below="@+id/textView_key_main_b_ridecontrol_speed_backward_title"
+            android:text="10 km/h"
+            android:textAppearance="?android:attr/textAppearanceLarge" />
+        
+        <TextView
+            android:id="@+id/textView_key_main_b_ridecontrol_speed_backward_min"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@+id/RelativeLayout_key_main_b_ridecontrol_speed_backward_seekbar"
+            android:layout_below="@+id/RelativeLayout_key_main_b_ridecontrol_speed_backward_seekbar"
+            android:layout_marginTop="-10dp"
+            android:text="5 km/h"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:textColor="@color/gray" />
+
+        <TextView
+            android:id="@+id/textView_key_main_b_ridecontrol_speed_backward_max"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignRight="@+id/RelativeLayout_key_main_b_ridecontrol_speed_backward_seekbar"
+            android:layout_below="@+id/RelativeLayout_key_main_b_ridecontrol_speed_backward_seekbar"
+            android:layout_marginTop="-10dp"
+            android:text="20 km/h"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:textColor="@color/gray" />
+
+        <RelativeLayout
+            android:id="@+id/RelativeLayout_key_main_b_ridecontrol_speed_backward_seekbar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="140dp" >
+            
+            <ImageView
+                android:id="@+id/imageView_key_main_b_ridecontrol_speed_seekbar_bg"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:src="@drawable/main_key_ridecontrol_slide_bg" />
+        
+	        <SeekBar
+	            android:id="@+id/seekBar_key_main_b_ridecontrol_speed_backward"
+	            style="@style/RideControlSpeedSeekBar"
+	            android:layout_width="wrap_content"
+	            android:layout_height="wrap_content"
+	            android:layout_alignLeft="@+id/imageView_key_main_b_ridecontrol_speed_seekbar_bg"
+	            android:layout_alignRight="@+id/imageView_key_main_b_ridecontrol_speed_seekbar_bg"
+	            android:minHeight="5dip"
+	            android:paddingLeft="20dp"
+	            android:paddingRight="20dp"
+	            android:thumb="@drawable/_selector_seekbar_thumb" />
+	        
+	        
 
         </RelativeLayout>
 

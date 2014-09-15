@@ -1,12 +1,13 @@
+<!-- 
 <layer-list xmlns:android="http://schemas.android.com/apk/res/android">
   <item android:id="@android:id/background">
 	<shape>
 	   <corners android:radius="50dip" />
 	   <gradient
-		android:startColor="#ff9d9e9d"
-		android:centerColor="#ff5a5d5a"
+		android:startColor="#009d9e9d"
+		android:centerColor="#005a5d5a"
 		android:centerY="0.75"
-		android:endColor="#ff747674"
+		android:endColor="#00747674"
 		android:angle="270" />
 	</shape>
   </item>
@@ -35,5 +36,17 @@
 		     android:angle="270" />
 	   </shape>
 	</clip>
+  </item>
+</layer-list>
+ -->
+ <layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+  <item android:id="@android:id/background"
+      	android:drawable="@drawable/main_key_ridecontrol_slide_bar_gray">
+	
+  </item>
+
+  <item android:id="@android:id/progress">
+      	<scale android:drawable="@drawable/main_key_ridecontrol_slide_bar" 
+      	    	android:scaleWidth="100%"/>
   </item>
 </layer-list>

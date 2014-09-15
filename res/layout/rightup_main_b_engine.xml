@@ -48,7 +48,6 @@
             android:layout_alignParentBottom="true"
             android:layout_alignParentRight="true"
             android:layout_marginRight="25dp"
-            android:text="@string/ECONO"
             android:textAppearance="?android:attr/textAppearanceLarge"
             android:textStyle="italic" />
 
@@ -81,7 +80,6 @@
             android:layout_alignParentRight="true"
             android:layout_below="@+id/textView_rightup_main_b_engine_warmingup_title"
             android:layout_marginRight="25dp"
-            android:text="@string/ON"
             android:textAppearance="?android:attr/textAppearanceLarge"
             android:textStyle="italic" />
 

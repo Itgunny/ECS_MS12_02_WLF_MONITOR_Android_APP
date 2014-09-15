@@ -8,8 +8,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.TextView;
+import taeha.wheelloader.fseries_monitor.animation.TextViewXAxisFlipAnimation;
+import taeha.wheelloader.fseries_monitor.main.CAN1CommManager;
 import taeha.wheelloader.fseries_monitor.main.ParentFragment;
 import taeha.wheelloader.fseries_monitor.main.R;
+import taeha.wheelloader.fseries_monitor.main.R.string;
 
 public class MainBRightUpEngineFragment extends ParentFragment{
 	//CONSTANT////////////////////////////////////////
@@ -27,11 +30,14 @@ public class MainBRightUpEngineFragment extends ParentFragment{
 	//////////////////////////////////////////////////
 	
 	//VALUABLE////////////////////////////////////////
+	int EngineMode;
+	int EngineWarmingUp;
 	boolean ClickFlag;
 	//////////////////////////////////////////////////
 	
 	//ANIMATION///////////////////////////////////////
-
+	TextViewXAxisFlipAnimation EngineModeDataAnimation;
+	TextViewXAxisFlipAnimation EngineWarmingUpDataAnimation;
 	///////////////////////////////////////////////////
 	
 	//TEST////////////////////////////////////////////
@@ -79,6 +85,9 @@ public class MainBRightUpEngineFragment extends ParentFragment{
 		// TODO Auto-generated method stub
 		super.InitValuables();
 		
+		EngineModeDataAnimation = new TextViewXAxisFlipAnimation(ParentActivity);
+		EngineWarmingUpDataAnimation = new TextViewXAxisFlipAnimation(ParentActivity);
+				
 	}
 	@Override
 	protected void InitButtonListener() {
@@ -106,15 +115,58 @@ public class MainBRightUpEngineFragment extends ParentFragment{
 	@Override
 	protected void GetDataFromNative() {
 		// TODO Auto-generated method stub
-		
+		EngineMode = CAN1Comm.Get_EnginePowerMode_347_PGN65350();
+		EngineWarmingUp = CAN1Comm.Get_EngineAlternateLowIdelSwitch_348_PGN65350();
 	}
 
 	@Override
 	protected void UpdateUI() {
 		// TODO Auto-generated method stub
-		
+		EngineModeDisplay(EngineMode);
+		EngineWarmingUpDisplay(EngineWarmingUp);
 	}
 	/////////////////////////////////////////////////////////////////////	
+	
+	public void EngineModeDisplay(int _EngineMode){
+		try {
+			switch (_EngineMode) {
+			case CAN1CommManager.DATA_STATE_ENGINE_MODE_PWR:
+				EngineModeDataAnimation.FlipAnimation(textViewModeData,getResources().getString(string.POWER));
+				break;
+			case CAN1CommManager.DATA_STATE_ENGINE_MODE_STD:
+				EngineModeDataAnimation.FlipAnimation(textViewModeData,getResources().getString(string.STANDARD));
+				break;
+			case CAN1CommManager.DATA_STATE_ENGINE_MODE_ECONO:
+				EngineModeDataAnimation.FlipAnimation(textViewModeData,getResources().getString(string.ECONO));
+				break;
+			default:
+				break;
+			}
+		} catch (IllegalStateException e) {
+			// TODO: handle exception
+			Log.e(TAG,"IllegalStateException");
+		}
+		
+	}
+	public void EngineWarmingUpDisplay(int _EngineWarmingUp){
+		try {
+			switch (_EngineWarmingUp) {
+			case CAN1CommManager.DATA_STATE_ENGINE_WARMINGUP_OFF:
+				EngineWarmingUpDataAnimation.FlipAnimation(textViewWarmingUpData,getResources().getString(string.OFF));
+				break;
+			case CAN1CommManager.DATA_STATE_ENGINE_WARMINGUP_ON:
+				EngineWarmingUpDataAnimation.FlipAnimation(textViewWarmingUpData,getResources().getString(string.ON));
+				break;
+			default:
+				break;
+
+			}
+		} catch (IllegalStateException e) {
+			// TODO: handle exception
+			Log.e(TAG,"IllegalStateException");
+		}
+		
+	}
 	
 	public void ClickMode(){
 		ParentActivity._MainBBaseFragment._MainBCenterFragment.setClickEnable(false);

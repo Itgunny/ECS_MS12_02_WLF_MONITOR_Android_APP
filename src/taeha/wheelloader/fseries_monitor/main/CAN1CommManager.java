@@ -88,6 +88,15 @@ public class CAN1CommManager extends ICAN1CommManager.Stub{		// ttySAC1(Linux), 
 	public static final int POWER_OFF 			= 0x000000F5;
 	///////////////////////////////////////////////////////////////
 	
+	////////////////////CAN Data SPN///////////////////////////////
+	public static final int DATA_STATE_ENGINE_MODE_PWR 		= 0;
+	public static final int DATA_STATE_ENGINE_MODE_STD 		= 1;
+	public static final int DATA_STATE_ENGINE_MODE_ECONO 	= 2;
+
+	public static final int DATA_STATE_ENGINE_WARMINGUP_OFF = 0;
+	public static final int DATA_STATE_ENGINE_WARMINGUP_ON 	= 1;
+	///////////////////////////////////////////////////////////////
+	
 	////////////////////Shutdown State/////////////////////////////
 	public static final int SHUTDOWN_MODE_OFF				= 0x00;
 	public static final int SHUTDOWN_MODE_DELAY				= 0x01;
