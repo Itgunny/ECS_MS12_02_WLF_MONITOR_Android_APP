@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/RelativeLayout_key_main_b_mirrorheat"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/main_key_bg" >
+    
+    <RadioGroup
+        android:id="@+id/radioGroup_key_main_b_mirrorheat"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="111dp"
+        android:layout_marginTop="121dp" >
+
+       <RadioButton
+           android:id="@+id/radioButton_key_main_b_mirrorheat_off"
+           android:layout_width="wrap_content"
+           android:layout_height="wrap_content"
+           android:button="@drawable/_selector_radio_btn"
+           android:text="@string/Off"
+           android:textColor="@drawable/_selector_radio_txt_white_amber"
+           android:textSize="25sp"
+           android:textStyle="bold" />
+
+       <RadioButton
+           android:id="@+id/radioButton_key_main_b_mirrorheat_on"
+           android:layout_width="wrap_content"
+           android:layout_height="wrap_content"
+           android:layout_marginTop="60dp"
+           android:button="@drawable/_selector_radio_btn"
+           android:text="@string/On"
+           android:textColor="@drawable/_selector_radio_txt_white_amber"
+           android:textSize="25sp"
+           android:textStyle="bold" />
+       
+       
+
+   </RadioGroup>
+
+</RelativeLayout>

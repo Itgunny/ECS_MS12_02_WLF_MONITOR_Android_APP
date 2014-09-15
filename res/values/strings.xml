@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<resources>
+    <string name="app_name">Wheel_Loader_F_Series_UI</string>
+    <string name="action_settings">Settings</string>
+    <string name="hello_world">Hello world!</string>
+    <!-- Common Start-->
+    <string name="Hr">Hr</string>
+    <string name="C">ºC</string>
+    <string name="F">ºF</string>
+    <string name="ton">ton</string>
+    <string name="lb">lb</string>
+    <string name="AM">AM</string>
+    <string name="PM">PM</string>
+    <string name="OK">OK</string>
+    <string name="Cancel">Cancel</string>
+    <string name="Active_Fault">Active Fault</string>
+    <string name="Maintenance">Maintenance</string>
+    <string name="On">On</string>
+    <string name="Off">Off</string>
+    <string name="On_Always">On, Alwyas</string>
+    <string name="Default">Default</string>
+    <string name="Manual">Manual</string>
+    <string name="Automatic">Automatic</string>
+    <string name="Boom">Boom</string>
+    <string name="Bucket">Bucket</string>
+    <string name="Initialization">Initialization</string>
+    <!-- Common End-->
+    <!-- Main Start-->
+    <string name="ENGINE_MODE">ENGINE MODE</string>
+    <string name="WARMING_UP">WARMING UP</string>
+    <string name="CCO_MODE">C.C.O. MODE</string>
+    <string name="SHIFT_MODE">SHIFT MODE</string>
+    <string name="TC_LOCK_UP">T.C. LOCK UP</string>
+    <string name="TOTAL_HOURMETER">TOTAL HOURMETER</string>
+    <string name="LATEST_HOURMETER">LATEST HOURMETER</string>
+    <string name="TOTAL_ODOMETER">TOTAL ODOMETER</string>
+    <string name="LATEST_ODOMETER">LATEST ODOMETER</string>
+    <string name="ECONO">ECONO</string>
+    <string name="STANDARD">STANDARD</string>
+    <string name="POWER">POWER</string>
+    <string name="ON">ON</string>
+    <string name="OFF">OFF</string>
+    <string name="L">L</string>
+    <string name="M">M</string>
+    <string name="H">H</string>
+    <string name="MANUAL">MANUAL</string>
+    <string name="AL">AL</string>
+    <string name="AN">AN</string>
+    <string name="AH">AH</string>
+    <string name="Total_Hourmeter">Total Hourmeter</string>
+    <string name="Latest_Hourmeter">Latest Hourmeter</string>
+    <string name="Total_Odometer">Total Odometer</string>
+    <string name="Latest_Odometer">Latest Odometer</string>
+    <string name="HYD_Temp">HYD Temp.</string>
+    <string name="TM_Oil_Temp">TM Oil Temp.</string>
+    <string name="Battery_Volt">Battery Volt.</string>
+    <string name="Weighing_System">Weighing System</string>
+    <string name="Coolant_Temp">Coolant Temp.</string>
+    <string name="User_Switching">User Switching</string>
+    <string name="Help">Help</string>
+    <!-- Main End -->
+    <!-- Key Start-->
+    <string name="Main_Light">Main Light</string>
+    <string name="Work_Light">Work Light</string>
+    <string name="Auto_Grease">Auto Grease</string>
+    <string name="Quick_Coupler">Quick Coupler</string>
+    <string name="Ride_Control">Ride Control</string>
+    <string name="Work_Load">Work Load</string>
+    <string name="Beacon_Lamp">Beacon Lamp</string>
+    <string name="Rear_Wiper">Rear Wiper</string>
+    <string name="Mirror_Heat">Mirror Heat</string>
+    <string name="Detent_Setting">Detent Setting</string>
+    <string name="Fine_Modulation">Fine Modulation</string>
+    <string name="FN">FN</string>
+    <string name="Position_Lamp">Position Lamp</string>
+    <string name="Head_Lamp">Head Lamp</string>
+    <string name="Front">Front</string>
+    <string name="Rear">Rear</string>
+    <string name="Locking_Attachment">Locking Attachment</string>
+    <string name="Unlocking_Attachment">Unlocking Attachment</string>
+    <string name="On_Conditional_Speed">On, Conditional Speed</string>
+    <string name="Weighing_System_Mode">Weighing System Mode</string>
+    <string name="Weighing_Display">Weighing Display</string>
+    <string name="Error_Detection">Error Detection</string>
+    <string name="Boom_Pressure_Calibration">Boom Pressure Calibration</string>
+    <string name="Daily">Daily</string>
+    <string name="Total_A">Total A</string>
+    <string name="Total_B">Total B</string>
+    <string name="Total_C">Total C</string>
+    <string name="Intermittent">Intermittent</string>
+    <string name="Low">Low</string>
+    <string name="Washer">Washer</string>
+    <string name="Save_Position">Save Position</string>
+    <string name="Forward">Forward</string>
+    <string name="Backward">Backward</string>
+    <!-- Key End -->
+</resources>

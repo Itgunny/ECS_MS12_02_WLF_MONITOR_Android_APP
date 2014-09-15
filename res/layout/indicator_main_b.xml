@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<AbsoluteLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/AbsoluteLayout1"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
+
+    <ImageView
+        android:id="@+id/imageView_indicator_main_b_WarmingUp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_x="5dp"
+        android:layout_y="0dp"
+        android:src="@drawable/main_indicator_warmimgup" />
+
+    <ImageView
+        android:id="@+id/imageView_indicator_main_b_FuelWarmer"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_x="77dp"
+        android:layout_y="0dp"
+        android:src="@drawable/main_indicator_fuelwamer" />
+
+    <ImageView
+        android:id="@+id/imageView_indicator_main_b_PreHeat"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_x="149dp"
+        android:layout_y="0dp"
+        android:src="@drawable/main_indicator_preheat" />
+
+    <ImageView
+        android:id="@+id/imageView_indicator_main_b_RideControl"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_x="5dp"
+        android:layout_y="57dp"
+        android:src="@drawable/main_indicator_rideoff" />
+
+    <ImageView
+        android:id="@+id/imageView_indicator_main_b_FloatingMode"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_x="77dp"
+        android:layout_y="57dp"
+        android:src="@drawable/main_indicator_floatmode" />
+
+    <ImageView
+        android:id="@+id/imageView_indicator_main_b_ReverseFan"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_x="149dp"
+        android:layout_y="57dp"
+        android:src="@drawable/main_indicator_fanreverse" />
+
+    <ImageView
+        android:id="@+id/imageView_indicator_main_b_ClutchCutOff"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_x="221dp"
+        android:layout_y="57dp"
+        android:src="@drawable/main_indicator_clutchcutoff" />
+
+    <ImageView
+        android:id="@+id/imageView_indicator_main_b_LockUpClutch"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_x="293dp"
+        android:layout_y="35dp"
+        android:src="@drawable/main_indicator_lockupclutch" />
+
+    <ImageView
+        android:id="@+id/imageView_indicator_main_b_SeatBelt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_x="365dp"
+        android:layout_y="35dp"
+        android:src="@drawable/main_indicator_seatbelt" />
+
+    <ImageView
+        android:id="@+id/imageView_indicator_main_b_EngineAutoShutdown"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_x="437dp"
+        android:layout_y="35dp"
+        android:src="@drawable/main_indicator_engineautoshutdown" />
+
+    <ImageView
+        android:id="@+id/imageView_indicator_main_b_EngineDelayShutdown"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_x="509dp"
+        android:layout_y="57dp"
+        android:src="@drawable/main_indicator_enginedelayshutdown" />
+
+</AbsoluteLayout>

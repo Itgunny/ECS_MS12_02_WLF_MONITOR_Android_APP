@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/RelativeLayout_rightdown_main_b_tmccomode"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/main_bg_right_down_ani" >
+    
+    <TextView
+        android:id="@+id/textView_rightup_main_b_tmccomode_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignRight="@+id/imageView_rightup_main_b_tmccomode_line"
+        android:layout_marginRight="40dp"
+        android:layout_marginTop="84dp"
+        android:text="@string/CCO_MODE"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textColor="@color/main_title_amber"
+        android:textStyle="bold" />
+
+    <ImageView
+        android:id="@+id/imageView_rightup_main_b_tmccomode_line"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="278dp"
+        android:layout_marginTop="12dp"
+        android:src="@drawable/main_popup_line" />
+    
+	<RadioButton
+	    android:id="@+id/radioButton_rightup_main_b_tmccomode_off"
+	    android:layout_width="wrap_content"
+	    android:layout_height="wrap_content"
+	    android:layout_marginLeft="328dp"
+	    android:layout_marginTop="84dp"
+	    android:button="@drawable/_selector_radio_btn"
+	    android:text="@string/OFF"
+	    android:textColor="@drawable/_selector_radio_txt_white_amber"
+	    android:textSize="25sp"
+	    android:textStyle="bold" />
+	
+	<RadioButton
+	    android:id="@+id/radioButton_rightup_main_b_tmccomode_l"
+	    android:layout_width="wrap_content"
+	    android:layout_height="wrap_content"
+	    android:layout_marginLeft="502dp"
+	    android:layout_marginTop="84dp"
+	    android:button="@drawable/_selector_radio_btn"
+	    android:text="@string/L"
+	    android:textColor="@drawable/_selector_radio_txt_white_amber"
+	    android:textSize="25sp"
+	    android:textStyle="bold" />
+	
+	<RadioButton
+	    android:id="@+id/radioButton_rightup_main_b_tmccomode_m"
+	    android:layout_width="wrap_content"
+	    android:layout_height="wrap_content"
+	    android:layout_marginLeft="328dp"
+	    android:layout_marginTop="163dp"
+	    android:button="@drawable/_selector_radio_btn"
+	    android:text="@string/M"
+	    android:textColor="@drawable/_selector_radio_txt_white_amber"
+	    android:textSize="25sp"
+	    android:textStyle="bold" />
+	
+	<RadioButton
+	    android:id="@+id/radioButton_rightup_main_b_tmccomode_h"
+	    android:layout_width="wrap_content"
+	    android:layout_height="wrap_content"
+	    android:layout_marginLeft="502dp"
+	    android:layout_marginTop="163dp"
+	    android:button="@drawable/_selector_radio_btn"
+	    android:text="@string/H"
+	    android:textColor="@drawable/_selector_radio_txt_white_amber"
+	    android:textSize="25sp"
+	    android:textStyle="bold" />
+
+</RelativeLayout>
