@@ -31,6 +31,7 @@ public class MainBCenterFragment extends ParentFragment{
 	
 	//VALUABLE////////////////////////////////////////
 	boolean ClickFlag;
+	protected int RPM;
 	//////////////////////////////////////////////////
 	
 	//ANIMATION///////////////////////////////////////
@@ -95,7 +96,7 @@ public class MainBCenterFragment extends ParentFragment{
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
 				if(ClickFlag == true)
-				ClickOption();
+					ClickBG();
 			}
 		});
 	}
@@ -103,18 +104,33 @@ public class MainBCenterFragment extends ParentFragment{
 	@Override
 	protected void GetDataFromNative() {
 		// TODO Auto-generated method stub
-		
+		RPM = CAN1Comm.Get_EngineSpeed_310_PGN65431();
 	}
 
 	@Override
 	protected void UpdateUI() {
 		// TODO Auto-generated method stub
-		
+		RPMDisplay(RPM);
 	}
-	/////////////////////////////////////////////////////////////////////	
+	/////////////////////////////////////////////////////////////////////
+	public void RPMDisplay(int Data){
+		if(Data == 0xFFFF)
+			Data = 0;
+		else if(Data > 9999)
+			Data = 9999;
+		try {
+			textViewRPMData.setText(Integer.toString(Data));
+		} catch (IllegalStateException e) {
+			// TODO: handle exception
+			Log.e(TAG,"IllegalStateException");
+		}
+	}
 	
-	public void ClickOption(){
-
+	public void ClickBG(){
+		if(ParentActivity.AnimationRunningFlag == true)
+			return;
+		else
+			ParentActivity.StartAnimationRunningTimer();
 		ParentActivity._MainBBaseFragment.showQuickScreenAnimation();
 		Log.d(TAG,"ClickOption");
 	}

@@ -89,12 +89,99 @@ public class CAN1CommManager extends ICAN1CommManager.Stub{		// ttySAC1(Linux), 
 	///////////////////////////////////////////////////////////////
 	
 	////////////////////CAN Data SPN///////////////////////////////
+	public static final int DATA_STATE_LAMP_OFF		 		= 0;
+	public static final int DATA_STATE_LAMP_ON		 		= 1;
+	
+	public static final int DATA_STATE_OFF		 			= 0;
+	public static final int DATA_STATE_ON		 			= 1;
+	
 	public static final int DATA_STATE_ENGINE_MODE_PWR 		= 0;
 	public static final int DATA_STATE_ENGINE_MODE_STD 		= 1;
 	public static final int DATA_STATE_ENGINE_MODE_ECONO 	= 2;
 
 	public static final int DATA_STATE_ENGINE_WARMINGUP_OFF = 0;
 	public static final int DATA_STATE_ENGINE_WARMINGUP_ON 	= 1;
+	
+	public static final int DATA_STATE_TM_CLUTCHCUTOFF_OFF		 = 0;
+	public static final int DATA_STATE_TM_CLUTCHCUTOFF_L		 = 1;
+	public static final int DATA_STATE_TM_CLUTCHCUTOFF_M		 = 2;
+	public static final int DATA_STATE_TM_CLUTCHCUTOFF_H		 = 3;
+  
+ 	public static final int DATA_STATE_TM_SHIFTMODE_MANUAL		 = 0;
+	public static final int DATA_STATE_TM_SHIFTMODE_AL			 = 1;
+	public static final int DATA_STATE_TM_SHIFTMODE_AN			 = 2;
+	public static final int DATA_STATE_TM_SHIFTMODE_AH			 = 3; 
+  
+  	public static final int DATA_STATE_TM_LOCKUPCLUTCH_OFF		 = 0;
+	public static final int DATA_STATE_TM_LOCKUPCLUTCH_ON		 = 1;
+	
+	public static final int DATA_STATE_HOURMETER_TOTAL 			= 0;
+	public static final int DATA_STATE_HOURMETER_LATEST 		= 1;
+	public static final int DATA_STATE_ODOMETER_TOTAL 			= 2;
+	public static final int DATA_STATE_ODOMETER_LATEST 			= 3;
+	
+	public static final int DATA_STATE_MACHINESTATUS_NOSELECT	= 0;
+	public static final int DATA_STATE_MACHINESTATUS_HYD		= 1;
+	public static final int DATA_STATE_MACHINESTATUS_BATTERY	= 2;
+	public static final int DATA_STATE_MACHINESTATUS_COOLANT	= 3;
+	public static final int DATA_STATE_MACHINESTATUS_TMOIL		= 4;
+	public static final int DATA_STATE_MACHINESTATUS_WEIGHING	= 5;
+	
+	
+	public static final int DATA_STATE_WEIGHINGDISPLAY_TOTAL_A	= 0;
+	public static final int DATA_STATE_WEIGHINGDISPLAY_TOTAL_B	= 1;
+	public static final int DATA_STATE_WEIGHINGDISPLAY_TOTAL_C	= 2;
+	public static final int DATA_STATE_WEIGHINGDISPLAY_DAILY	= 3;
+	
+	public static final int DATA_STATE_WEIGHING_ERRORDETECT_OFF	= 0;
+	public static final int DATA_STATE_WEIGHING_ERRORDETECT_ON	= 1;
+	
+	public static final int DATA_STATE_WEIGHING_ACCUMULATION_MANUAL	= 1;
+	public static final int DATA_STATE_WEIGHING_ACCUMULATION_AUTO	= 3;
+	
+	public static final int DATA_STATE_RIDECONTROL_OFF			= 0;
+	public static final int DATA_STATE_RIDECONTROL_ON			= 1;
+	public static final int DATA_STATE_RIDECONTROL_AUTO			= 2;
+	
+	public static final int DATA_STATE_REVERSEFAN_OFF			= 0;
+	public static final int DATA_STATE_REVERSEFAN_FORWARD		= 1;
+	public static final int DATA_STATE_REVERSEFAN_REVERSE		= 2;
+	
+	public static final int DATA_STATE_KEY_MAINLIGHT_OFF		= 0;
+	public static final int DATA_STATE_KEY_MAINLIGHT_LV1		= 1;
+	public static final int DATA_STATE_KEY_MAINLIGHT_LV2		= 2;
+	
+	public static final int DATA_STATE_KEY_WORKLIGHT_OFF		= 0;
+	public static final int DATA_STATE_KEY_WORKLIGHT_LV1		= 1;
+	public static final int DATA_STATE_KEY_WORKLIGHT_LV2		= 2;
+	
+	public static final int DATA_STATE_KEY_QUICKCOUPLER_OFF			= 2;
+	public static final int DATA_STATE_KEY_QUICKCOUPLER_LOCK		= 1;
+	public static final int DATA_STATE_KEY_QUICKCOUPLER_UNLOCK		= 0;
+	
+	public static final int DATA_STATE_KEY_RIDECONTROL_OFF		= 0;
+	public static final int DATA_STATE_KEY_RIDECONTROL_MANUAL	= 1;
+	public static final int DATA_STATE_KEY_RIDECONTROL_AUTO		= 2;
+	
+	public static final int DATA_STATE_KEY_REARWIPER_SPEED_OFF		= 0;
+	public static final int DATA_STATE_KEY_REARWIPER_SPEED_INT		= 1;
+	public static final int DATA_STATE_KEY_REARWIPER_SPEED_LOW		= 2;
+	
+	public static final int DATA_STATE_KEY_REARWIPER_WASHER_OFF		= 0;
+	public static final int DATA_STATE_KEY_REARWIPER_WASHER_ON		= 1;
+	
+	public static final int DATA_STATE_KEY_DETENT_BOOM_OFF			= 0;
+	public static final int DATA_STATE_KEY_DETENT_BOOM_UP			= 1;
+	public static final int DATA_STATE_KEY_DETENT_BOOM_DOWN			= 2;
+	public static final int DATA_STATE_KEY_DETENT_BOOM_UPDOWN		= 3;
+	
+	public static final int DATA_STATE_KEY_DETENT_BUCKET_OFF		= 0;
+	public static final int DATA_STATE_KEY_DETENT_BUCKET_IN			= 1;
+	public static final int DATA_STATE_KEY_DETENT_BUCKET_OUT		= 2;
+	public static final int DATA_STATE_KEY_DETENT_BUCKET_INOUT		= 3;
+	
+	public static final int DATA_STATE_KEY_DETENT_BOOM_POS			= 0;
+	public static final int DATA_STATE_KEY_DETENT_BUCKET_POS		= 2;
 	///////////////////////////////////////////////////////////////
 	
 	////////////////////Shutdown State/////////////////////////////

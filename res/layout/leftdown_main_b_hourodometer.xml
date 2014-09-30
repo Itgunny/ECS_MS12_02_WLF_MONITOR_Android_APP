@@ -31,8 +31,8 @@
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:textColor="@color/main_title_amber"
         android:textStyle="bold|italic" />
-
-    <TextView
+<!-- 
+	<TextView
         android:id="@+id/textView_leftdown_hourodometer_data"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -51,6 +51,32 @@
         android:layout_alignParentRight="true"
         android:layout_below="@+id/textView_leftdown_hourodometer_title"
         android:layout_marginRight="60dp"
+        android:layout_marginTop="20dp"
+        android:alpha="0.5"
+        android:text="@string/Hr"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
+	
+
+ -->
+    <TextView
+        android:id="@+id/textView_leftdown_hourodometer_data"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/textView_leftdown_hourodometer_unit"
+        android:layout_marginRight="10dp"
+        android:layout_toLeftOf="@+id/textView_leftdown_hourodometer_unit"
+        android:text="123,456,789,0"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textSize="30sp"
+        android:textStyle="bold|italic" />
+
+    <TextView
+        android:id="@+id/textView_leftdown_hourodometer_unit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/textView_leftdown_hourodometer_title"
+        android:layout_marginRight="40dp"
         android:layout_marginTop="20dp"
         android:alpha="0.5"
         android:text="@string/Hr"

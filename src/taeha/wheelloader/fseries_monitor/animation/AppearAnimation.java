@@ -14,7 +14,7 @@ public class AppearAnimation extends View{
 	
 	final static private String TAG = "AppearAnimation";
 	
-	final static private int AnimationSpeed = 200;
+	private int AnimationSpeed = 200;
 	
 	public Home ParentActivity;
 	public View viewItem;
@@ -85,6 +85,10 @@ public class AppearAnimation extends View{
 	}
 	public boolean GetAnimationStatus(){
 		return AnimiationRunning;
+	}
+	public void SetAnimaitionTime(int Time){
+		AnimationSpeed = Time;
+		Animation.setTarget(viewItem);
 	}
 	
 }

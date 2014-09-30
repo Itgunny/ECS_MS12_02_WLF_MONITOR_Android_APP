@@ -22,8 +22,7 @@
         android:layout_marginBottom="10dp"
         android:layout_marginLeft="10dp"
         android:text="@string/Error_Detection"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:textStyle="bold" />
+        android:textAppearance="?android:attr/textAppearanceLarge" />
     
     <RadioGroup
         android:id="@+id/radioGroup_key_main_b_workload_errordetect"
@@ -39,8 +38,7 @@
            android:button="@drawable/_selector_radio_btn"
            android:text="@string/Off"
            android:textColor="@drawable/_selector_radio_txt_white_amber"
-           android:textSize="25sp"
-           android:textStyle="bold" />
+           android:textSize="25sp" />
 
        <RadioButton
            android:id="@+id/radioButton_key_main_b_workload_errordetect_on"
@@ -50,8 +48,7 @@
            android:button="@drawable/_selector_radio_btn"
            android:text="@string/On"
            android:textColor="@drawable/_selector_radio_txt_white_amber"
-           android:textSize="25sp"
-           android:textStyle="bold" />
+           android:textSize="25sp" />
 
    </RadioGroup>
 

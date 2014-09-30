@@ -97,7 +97,10 @@ public class MainBLeftDownQuickFragment extends ParentFragment{
 	/////////////////////////////////////////////////////////////////////	
 	
 	public void ClickHelp(){
-		
+		if(ParentActivity.AnimationRunningFlag == true)
+			return;
+		else
+			ParentActivity.StartAnimationRunningTimer();
 	}
 	
 	

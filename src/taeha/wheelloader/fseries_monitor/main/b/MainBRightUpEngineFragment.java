@@ -87,6 +87,8 @@ public class MainBRightUpEngineFragment extends ParentFragment{
 		
 		EngineModeDataAnimation = new TextViewXAxisFlipAnimation(ParentActivity);
 		EngineWarmingUpDataAnimation = new TextViewXAxisFlipAnimation(ParentActivity);
+		
+	
 				
 	}
 	@Override
@@ -169,33 +171,56 @@ public class MainBRightUpEngineFragment extends ParentFragment{
 	}
 	
 	public void ClickMode(){
+		if(ParentActivity.AnimationRunningFlag == true)
+			return;
+		else
+			ParentActivity.StartAnimationRunningTimer();
+		ParentActivity._MainBBaseFragment._MainBCenterEngineFragment = new MainBCenterEngineFragment();
+		ParentActivity._MainBBaseFragment._MainBRightUpEngineModeFragment = new MainBRightUpEngineModeFragment();
 		ParentActivity._MainBBaseFragment._MainBCenterFragment.setClickEnable(false);
 		ParentActivity._MainBBaseFragment._MainBodyShiftAnimation.StartShiftRightUpAnimation();
 		ParentActivity._MainBBaseFragment.CenterAnimation.StartChangeAnimation(ParentActivity._MainBBaseFragment._MainBCenterEngineFragment);
 		ParentActivity._MainBBaseFragment.RightUpChangeAnimation.StartChangeAnimation(ParentActivity._MainBBaseFragment._MainBRightUpEngineModeFragment);
 		
-		ParentActivity._MainBBaseFragment.RightDownChangeAnimation.StartDisappearAnimation();
-		ParentActivity._MainBBaseFragment.LeftUpChangeAnimation.StartDisappearAnimation();
-		ParentActivity._MainBBaseFragment.LeftDownChangeAnimation.StartDisappearAnimation();
-		ParentActivity._MainBBaseFragment.VirtualKeyChangeAnimation.StartDisappearAnimation();
+		ParentActivity._MainBBaseFragment._CenterBGDisappearAnimation.StartAnimation();
+		ParentActivity._MainBBaseFragment._RightDownDisappearAnimation.StartAnimation();
+		ParentActivity._MainBBaseFragment._LeftUpDisappearAnimation.StartAnimation();
+		ParentActivity._MainBBaseFragment._LeftDownDisappearAnimation.StartAnimation();
+		ParentActivity._MainBBaseFragment._RightDownBGDisappearAnimation.StartAnimation();
+		ParentActivity._MainBBaseFragment._LeftUpBGDisappearAnimation.StartAnimation();
+		ParentActivity._MainBBaseFragment._LeftDownBGDisappearAnimation.StartAnimation();
+		ParentActivity._MainBBaseFragment._VirtualKeyDisappearAnimation.StartAnimation();
 		
-		ParentActivity._MainBBaseFragment.KeyTitleChangeAnimation.StartDisappearAnimation();
-		ParentActivity._MainBBaseFragment.KeyBodyChangeAnimation.StartDisappearAnimation();
+		ParentActivity._MainBBaseFragment._KeyTitleDisappearAnimation.StartAnimation();
+		ParentActivity._MainBBaseFragment._KeyBodyDisappearAnimation.StartAnimation();
+		
+		ParentActivity._MainBBaseFragment._MainBIndicatorFragment.DisableVirtualKey();
 		
 	}
 	public void ClickWarmingUp(){
+		if(ParentActivity.AnimationRunningFlag == true)
+			return;
+		else
+			ParentActivity.StartAnimationRunningTimer();
+		ParentActivity._MainBBaseFragment._MainBCenterEngineFragment = new MainBCenterEngineFragment();
+		ParentActivity._MainBBaseFragment._MainBRightUpEngineWarmingUpFragment = new MainBRightUpEngineWarmingUpFragment();
 		ParentActivity._MainBBaseFragment._MainBCenterFragment.setClickEnable(false);
 		ParentActivity._MainBBaseFragment._MainBodyShiftAnimation.StartShiftRightUpAnimation();
 		ParentActivity._MainBBaseFragment.CenterAnimation.StartChangeAnimation(ParentActivity._MainBBaseFragment._MainBCenterEngineFragment);
 		ParentActivity._MainBBaseFragment.RightUpChangeAnimation.StartChangeAnimation(ParentActivity._MainBBaseFragment._MainBRightUpEngineWarmingUpFragment);
 		
-		ParentActivity._MainBBaseFragment.RightDownChangeAnimation.StartDisappearAnimation();
-		ParentActivity._MainBBaseFragment.LeftUpChangeAnimation.StartDisappearAnimation();
-		ParentActivity._MainBBaseFragment.LeftDownChangeAnimation.StartDisappearAnimation();
-		ParentActivity._MainBBaseFragment.VirtualKeyChangeAnimation.StartDisappearAnimation();
+		ParentActivity._MainBBaseFragment._CenterBGDisappearAnimation.StartAnimation();
+		ParentActivity._MainBBaseFragment._RightDownDisappearAnimation.StartAnimation();
+		ParentActivity._MainBBaseFragment._LeftUpDisappearAnimation.StartAnimation();
+		ParentActivity._MainBBaseFragment._LeftDownDisappearAnimation.StartAnimation();
+		ParentActivity._MainBBaseFragment._RightDownBGDisappearAnimation.StartAnimation();
+		ParentActivity._MainBBaseFragment._LeftUpBGDisappearAnimation.StartAnimation();
+		ParentActivity._MainBBaseFragment._LeftDownBGDisappearAnimation.StartAnimation();
+		ParentActivity._MainBBaseFragment._VirtualKeyDisappearAnimation.StartAnimation();
 		
-		ParentActivity._MainBBaseFragment.KeyTitleChangeAnimation.StartDisappearAnimation();
-		ParentActivity._MainBBaseFragment.KeyBodyChangeAnimation.StartDisappearAnimation();
+		ParentActivity._MainBBaseFragment._KeyTitleDisappearAnimation.StartAnimation();
+		ParentActivity._MainBBaseFragment._KeyBodyDisappearAnimation.StartAnimation();
+		ParentActivity._MainBBaseFragment._MainBIndicatorFragment.DisableVirtualKey();
 	}
 	
 	public void setClickEnable(boolean flag){

@@ -21,7 +21,7 @@
         android:layout_alignTop="@+id/imageView_leftdown_main_b_quick_icon"
         android:layout_marginLeft="20dp"
         android:layout_toRightOf="@+id/imageView_leftdown_main_b_quick_icon"
-        android:gravity="center"
+        android:gravity="center_vertical"
         android:text="@string/Help"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:textColor="@color/main_quick_help_blue"

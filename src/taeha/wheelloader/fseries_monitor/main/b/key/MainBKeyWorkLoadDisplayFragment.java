@@ -1,5 +1,6 @@
 package taeha.wheelloader.fseries_monitor.main.b.key;
 
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -7,7 +8,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.RadioButton;
 import android.widget.TextView;
+import taeha.wheelloader.fseries_monitor.main.CAN1CommManager;
 import taeha.wheelloader.fseries_monitor.main.ParentFragment;
 import taeha.wheelloader.fseries_monitor.main.R;
 
@@ -17,8 +20,14 @@ public class MainBKeyWorkLoadDisplayFragment extends ParentFragment{
 	private static final String TAG = "MainBKeyWorkLoadDisplayFragment";
 	//////////////////////////////////////////////////
 	//RESOURCE////////////////////////////////////////
+	RadioButton radioDaily;
+	RadioButton radioTotalA;
+	RadioButton radioTotalB;
+	RadioButton radioTotalC;
 	
+	ImageButton imgbtnOK;
 	
+	TextView textViewInitialization;
 	//////////////////////////////////////////////////
 	
 	//VALUABLE////////////////////////////////////////
@@ -45,16 +54,31 @@ public class MainBKeyWorkLoadDisplayFragment extends ParentFragment{
 		InitButtonListener();
 
 		ParentActivity.ScreenIndex = ParentActivity.SCREEN_STATE_MAIN_B_KEY_WORKLOAD_DISPLAY;
+		WeighingDisplayDisplay(ParentActivity.WeighingDisplayIndex);
 		return mRoot;
 	}
 
 	////////////////////////////////////////////////
 	
+	@Override
+	public void onDestroyView() {
+		// TODO Auto-generated method stub
+		super.onDestroyView();
+		SavePref();
+	}
+
 	//Common Function//////////////////////////////
 	@Override
 	protected void InitResource() {
 		// TODO Auto-generated method stub
-
+		radioDaily = (RadioButton)mRoot.findViewById(R.id.radioButton_key_main_b_workload_display_daily);
+		radioTotalA = (RadioButton)mRoot.findViewById(R.id.radioButton_key_main_b_workload_display_totala);
+		radioTotalB = (RadioButton)mRoot.findViewById(R.id.radioButton_key_main_b_workload_display_totalb);
+		radioTotalC = (RadioButton)mRoot.findViewById(R.id.radioButton_key_main_b_workload_display_totalc);
+			
+		
+		textViewInitialization = (TextView)mRoot.findViewById(R.id.textView_key_main_b_workload_display_init);
+		imgbtnOK = (ImageButton)mRoot.findViewById(R.id.ImageButton_key_main_b_workload_display_low_ok);
 	}
 	
 	protected void InitValuables() {
@@ -65,6 +89,54 @@ public class MainBKeyWorkLoadDisplayFragment extends ParentFragment{
 	@Override
 	protected void InitButtonListener() {
 		// TODO Auto-generated method stub
+		radioDaily.setOnClickListener(new View.OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				ClickDaily();
+			}
+		});
+		radioTotalA.setOnClickListener(new View.OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				ClickTotalA();
+			}
+		});
+		radioTotalB.setOnClickListener(new View.OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				ClickTotalB();
+			}
+		});
+		radioTotalC.setOnClickListener(new View.OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				ClickTotalC();
+			}
+		});
+		textViewInitialization.setOnClickListener(new View.OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				ClickInit();
+			}
+		});
+		imgbtnOK.setOnClickListener(new View.OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				ClickOK();
+			}
+		});
 		
 		
 	}
@@ -81,7 +153,105 @@ public class MainBKeyWorkLoadDisplayFragment extends ParentFragment{
 		
 	}
 	/////////////////////////////////////////////////////////////////////	
+	public void WeighingDisplayDisplay(int Data){
+		switch (Data) {
+		case CAN1CommManager.DATA_STATE_WEIGHINGDISPLAY_DAILY:
+			radioDaily.setChecked(true);
+			radioTotalA.setChecked(false);
+			radioTotalB.setChecked(false);
+			radioTotalC.setChecked(false);
+			
+			break;
+		case CAN1CommManager.DATA_STATE_WEIGHINGDISPLAY_TOTAL_A:
+			radioDaily.setChecked(false);
+			radioTotalA.setChecked(true);
+			radioTotalB.setChecked(false);
+			radioTotalC.setChecked(false);
+			
+			break;
+		case CAN1CommManager.DATA_STATE_WEIGHINGDISPLAY_TOTAL_B:
+			radioDaily.setChecked(false);
+			radioTotalA.setChecked(false);
+			radioTotalB.setChecked(true);
+			radioTotalC.setChecked(false);
+			
+			break;
+		case CAN1CommManager.DATA_STATE_WEIGHINGDISPLAY_TOTAL_C:
+			radioDaily.setChecked(false);
+			radioTotalA.setChecked(false);
+			radioTotalB.setChecked(false);
+			radioTotalC.setChecked(true);
+			
+			break;
+		
+		default:
+			break;
+		}
+		
+	}
 	
+	public void ClickDaily(){
+		ParentActivity.WeighingDisplayIndex = CAN1CommManager.DATA_STATE_WEIGHINGDISPLAY_DAILY;
+		CAN1Comm.Set_WeighingDisplayMode1_1910_PGN61184_62(ParentActivity.WeighingDisplayIndex);
+		CAN1Comm.TxCANToMCU(62);
+		CAN1Comm.Set_WeighingDisplayMode1_1910_PGN61184_62(15);
+		textViewInitialization.setText(ParentActivity.getResources().getString(R.string.Daily) 
+				+ " " + ParentActivity.getResources().getString(R.string.Initialization));
+		WeighingDisplayDisplay(ParentActivity.WeighingDisplayIndex);
+	}
+	public void ClickTotalA(){
+		ParentActivity.WeighingDisplayIndex = CAN1CommManager.DATA_STATE_WEIGHINGDISPLAY_TOTAL_A;
+		CAN1Comm.Set_WeighingDisplayMode1_1910_PGN61184_62(ParentActivity.WeighingDisplayIndex);
+		CAN1Comm.TxCANToMCU(62);
+		CAN1Comm.Set_WeighingDisplayMode1_1910_PGN61184_62(15);
+		textViewInitialization.setText(ParentActivity.getResources().getString(R.string.Total_A) 
+				+ " " + ParentActivity.getResources().getString(R.string.Initialization));
+		WeighingDisplayDisplay(ParentActivity.WeighingDisplayIndex);
+	}
+	public void ClickTotalB(){
+		ParentActivity.WeighingDisplayIndex = CAN1CommManager.DATA_STATE_WEIGHINGDISPLAY_TOTAL_B;
+		CAN1Comm.Set_WeighingDisplayMode1_1910_PGN61184_62(ParentActivity.WeighingDisplayIndex);
+		CAN1Comm.TxCANToMCU(62);
+		CAN1Comm.Set_WeighingDisplayMode1_1910_PGN61184_62(15);
+		textViewInitialization.setText(ParentActivity.getResources().getString(R.string.Total_B) 
+				+ " " + ParentActivity.getResources().getString(R.string.Initialization));
+		WeighingDisplayDisplay(ParentActivity.WeighingDisplayIndex);
+	}
+	public void ClickTotalC(){
+		ParentActivity.WeighingDisplayIndex = CAN1CommManager.DATA_STATE_WEIGHINGDISPLAY_TOTAL_C;
+		CAN1Comm.Set_WeighingDisplayMode1_1910_PGN61184_62(ParentActivity.WeighingDisplayIndex);
+		CAN1Comm.TxCANToMCU(62);
+		CAN1Comm.Set_WeighingDisplayMode1_1910_PGN61184_62(15);
+		textViewInitialization.setText(ParentActivity.getResources().getString(R.string.Total_C) 
+				+ " " + ParentActivity.getResources().getString(R.string.Initialization));
+		WeighingDisplayDisplay(ParentActivity.WeighingDisplayIndex);
+	}
+	public void ClickInit(){
+		CAN1Comm.Set_RequestTotalWorkWeightReset_PGN61184_62(ParentActivity.WeighingDisplayIndex);
+		CAN1Comm.Set_RequestReweighing_PGN61184_62(3);
+		CAN1Comm.TxCANToMCU(62);
+		CAN1Comm.Set_RequestTotalWorkWeightReset_PGN61184_62(15);
+	}
+	public void ClickOK(){
+		showWorkLoadAnimation();
+	}
+	public void showWorkLoadAnimation(){
+		if(ParentActivity.AnimationRunningFlag == true)
+			return;
+		else
+			ParentActivity.StartAnimationRunningTimer();
+
+		ParentActivity.ScreenIndex = ParentActivity.SCREEN_STATE_MAIN_B_KEY_WORKLOAD;
+		ParentActivity._MainBBaseFragment._MainBKeyWorkLoadFragment = new MainBKeyWorkLoadFragment();
+		ParentActivity._MainBBaseFragment.KeyBodyChangeAnimation.StartChangeAnimation(ParentActivity._MainBBaseFragment._MainBKeyWorkLoadFragment);
+	}
 	
+	public void SavePref(){
+		SharedPreferences SharePref = ParentActivity.getSharedPreferences("Home", 0);
+		SharedPreferences.Editor edit = SharePref.edit();
+		edit.putInt("WeighingDisplayIndex", ParentActivity.WeighingDisplayIndex);
+		edit.commit();
+		Log.d(TAG,"SavePref");
+	}
 	
 }

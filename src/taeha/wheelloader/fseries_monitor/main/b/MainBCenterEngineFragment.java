@@ -69,7 +69,7 @@ public class MainBCenterEngineFragment extends ParentFragment{
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
-				ParentActivity._MainBBaseFragment.showDefaultScreenAnimation();
+				ClickBG();
 				
 			}
 		});
@@ -88,7 +88,12 @@ public class MainBCenterEngineFragment extends ParentFragment{
 	}
 	/////////////////////////////////////////////////////////////////////	
 	
-	public void ClickOption(){
+	public void ClickBG(){
+		if(ParentActivity.AnimationRunningFlag == true)
+			return;
+		else
+			ParentActivity.StartAnimationRunningTimer();
 		
+		ParentActivity._MainBBaseFragment.showRightUptoDefaultScreenAnimation();
 	}
 }

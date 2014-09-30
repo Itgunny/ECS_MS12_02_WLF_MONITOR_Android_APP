@@ -14,8 +14,7 @@
         android:button="@drawable/_selector_radio_btn"
         android:text="@string/Total_Hourmeter"
         android:textColor="@drawable/_selector_radio_txt_white_amber"
-        android:textSize="25sp"
-        android:textStyle="bold" />
+        android:textSize="25sp" />
 	
 	<RadioButton
 	    android:id="@+id/radioButton_leftdown_main_b_hourodometer_select_totalodometer"
@@ -26,8 +25,7 @@
 	    android:button="@drawable/_selector_radio_btn"
 	    android:text="@string/Total_Odometer"
 	    android:textColor="@drawable/_selector_radio_txt_white_amber"
-	    android:textSize="25sp"
-	    android:textStyle="bold" />
+	    android:textSize="25sp" />
 	
 	<RadioButton
 	    android:id="@+id/radioButton_leftdown_main_b_hourodometer_select_latesthourmeter"
@@ -38,8 +36,7 @@
 	    android:button="@drawable/_selector_radio_btn"
 	    android:text="@string/Latest_Hourmeter"
 	    android:textColor="@drawable/_selector_radio_txt_white_amber"
-	    android:textSize="25sp"
-	    android:textStyle="bold" />
+	    android:textSize="25sp" />
 	
 	<RadioButton
 	    android:id="@+id/radioButton_leftdown_main_b_hourodometer_select_latestodometer"
@@ -50,7 +47,6 @@
 	    android:button="@drawable/_selector_radio_btn"
 	    android:text="@string/Latest_Odometer"
 	    android:textColor="@drawable/_selector_radio_txt_white_amber"
-	    android:textSize="25sp"
-	    android:textStyle="bold" />
+	    android:textSize="25sp" />
 
 </RelativeLayout>

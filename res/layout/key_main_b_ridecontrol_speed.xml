@@ -35,7 +35,6 @@
             android:layout_height="wrap_content"
             android:layout_alignLeft="@+id/textView_key_main_b_ridecontrol_speed_forward_title"
             android:layout_below="@+id/textView_key_main_b_ridecontrol_speed_forward_title"
-            android:text="10 km/h"
             android:textAppearance="?android:attr/textAppearanceLarge" />
         
         <TextView
@@ -45,9 +44,9 @@
             android:layout_alignLeft="@+id/RelativeLayout_key_main_b_ridecontrol_speed_forward_seekbar"
             android:layout_below="@+id/RelativeLayout_key_main_b_ridecontrol_speed_forward_seekbar"
             android:layout_marginTop="-10dp"
-            android:text="5 km/h"
             android:textAppearance="?android:attr/textAppearanceLarge"
-            android:textColor="@color/gray" />
+            android:textColor="@color/gray"
+            android:textSize="20sp" />
 
         <TextView
             android:id="@+id/textView_key_main_b_ridecontrol_speed_forward_max"
@@ -56,9 +55,9 @@
             android:layout_alignRight="@+id/RelativeLayout_key_main_b_ridecontrol_speed_forward_seekbar"
             android:layout_below="@+id/RelativeLayout_key_main_b_ridecontrol_speed_forward_seekbar"
             android:layout_marginTop="-10dp"
-            android:text="20 km/h"
             android:textAppearance="?android:attr/textAppearanceLarge"
-            android:textColor="@color/gray" />
+            android:textColor="@color/gray"
+            android:textSize="20sp" />
 
         <RelativeLayout
             android:id="@+id/RelativeLayout_key_main_b_ridecontrol_speed_forward_seekbar"
@@ -121,7 +120,6 @@
             android:layout_height="wrap_content"
             android:layout_alignLeft="@+id/textView_key_main_b_ridecontrol_speed_backward_title"
             android:layout_below="@+id/textView_key_main_b_ridecontrol_speed_backward_title"
-            android:text="10 km/h"
             android:textAppearance="?android:attr/textAppearanceLarge" />
         
         <TextView
@@ -131,9 +129,9 @@
             android:layout_alignLeft="@+id/RelativeLayout_key_main_b_ridecontrol_speed_backward_seekbar"
             android:layout_below="@+id/RelativeLayout_key_main_b_ridecontrol_speed_backward_seekbar"
             android:layout_marginTop="-10dp"
-            android:text="5 km/h"
             android:textAppearance="?android:attr/textAppearanceLarge"
-            android:textColor="@color/gray" />
+            android:textColor="@color/gray"
+            android:textSize="20sp" />
 
         <TextView
             android:id="@+id/textView_key_main_b_ridecontrol_speed_backward_max"
@@ -142,9 +140,9 @@
             android:layout_alignRight="@+id/RelativeLayout_key_main_b_ridecontrol_speed_backward_seekbar"
             android:layout_below="@+id/RelativeLayout_key_main_b_ridecontrol_speed_backward_seekbar"
             android:layout_marginTop="-10dp"
-            android:text="20 km/h"
             android:textAppearance="?android:attr/textAppearanceLarge"
-            android:textColor="@color/gray" />
+            android:textColor="@color/gray"
+            android:textSize="20sp" />
 
         <RelativeLayout
             android:id="@+id/RelativeLayout_key_main_b_ridecontrol_speed_backward_seekbar"
@@ -221,14 +219,6 @@
 	        android:layout_alignBottom="@+id/imageView_key_main_b_ridecontrol_speed_low_bg"
 	        android:layout_toLeftOf="@+id/imageView_key_main_b_ridecontrol_speed_low_line_1"
 	        android:background="@drawable/_selector_key_centerright_btn1" />
-	    
-	    <ImageButton
-	        android:id="@+id/ImageButton_key_main_b_ridecontrol_speed_low_default"
-	        android:layout_width="wrap_content"
-	        android:layout_height="wrap_content"
-	        android:layout_alignBottom="@+id/imageView_key_main_b_ridecontrol_speed_low_bg"
-	        android:layout_toLeftOf="@+id/imageView_key_main_b_ridecontrol_speed_low_line_2"
-	        android:background="@drawable/_selector_key_left_btn1" />
 	
 	    <RelativeLayout
 	        android:layout_width="wrap_content"

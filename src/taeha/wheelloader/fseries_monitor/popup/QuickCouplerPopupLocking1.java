@@ -43,6 +43,13 @@ public class QuickCouplerPopupLocking1 extends ParentPopup{
 		mRoot = inflater.inflate(R.layout.popup_key_quickcoupler_locking_1, null);
 		this.addContentView(mRoot,  new LayoutParams(448,288));
 		this.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+		
+	}
+	
+	@Override
+	public void show() {
+		// TODO Auto-generated method stub
+		super.show();
 		InitResource();
 		InitButtonListener();
 		InitValuable();
@@ -50,7 +57,7 @@ public class QuickCouplerPopupLocking1 extends ParentPopup{
 		
 		ParentActivity.ScreenIndex = ParentActivity.SCREEN_STATE_MAIN_B_KEY_QUICKCOUPLER_POPUP_LOCKING1;
 	}
-	
+
 	@Override
 	public void dismiss() {
 		// TODO Auto-generated method stub

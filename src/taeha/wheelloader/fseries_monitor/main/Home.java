@@ -1,7 +1,12 @@
 package taeha.wheelloader.fseries_monitor.main;
 
 import java.lang.ref.WeakReference;
+import java.text.NumberFormat;
+import java.util.Locale;
+import java.util.Timer;
+import java.util.TimerTask;
 
+import taeha.wheelloader.fseries_monitor.animation.ChangeFragmentAnimation;
 import taeha.wheelloader.fseries_monitor.popup.QuickCouplerPopupLocking1;
 import taeha.wheelloader.fseries_monitor.popup.QuickCouplerPopupLocking2;
 import taeha.wheelloader.fseries_monitor.popup.QuickCouplerPopupUnlocking1;
@@ -17,6 +22,7 @@ import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.ServiceConnection;
+import android.content.SharedPreferences;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.Menu;
@@ -28,51 +34,67 @@ public class Home extends Activity {
 	// TAG
 	private static final String TAG = "Home";
 	
-	public static final int SCREEN_STATE_MAIN_B_TOP 									= 0x00000000;
+	public static final int SCREEN_STATE_MAIN_B_TOP 									= 0x10000000;
 	
-	public static final int SCREEN_STATE_MAIN_B_RIGHTUP_TOP								= 0x01000000;
-	public static final int SCREEN_STATE_MAIN_B_RIGHTUP_ENGINE_MODE						= 0x01100000;
-	public static final int SCREEN_STATE_MAIN_B_RIGHTUP_ENGINE_WARMINGUP				= 0x01200000;
+	public static final int SCREEN_STATE_MAIN_B_RIGHTUP_TOP								= 0x11000000;
+	public static final int SCREEN_STATE_MAIN_B_RIGHTUP_ENGINE_MODE						= 0x11100000;
+	public static final int SCREEN_STATE_MAIN_B_RIGHTUP_ENGINE_WARMINGUP				= 0x11200000;
 	
-	public static final int SCREEN_STATE_MAIN_B_RIGHTDOWN_TOP							= 0x02000000;
-	public static final int SCREEN_STATE_MAIN_B_RIGHTDOWN_CCOMODE						= 0x02100000;
-	public static final int SCREEN_STATE_MAIN_B_RIGHTDOWN_SHIFTMODE						= 0x02200000;
-	public static final int SCREEN_STATE_MAIN_B_RIGHTDOWN_TCLOCKUP						= 0x02300000;
+	public static final int SCREEN_STATE_MAIN_B_RIGHTDOWN_TOP							= 0x12000000;
+	public static final int SCREEN_STATE_MAIN_B_RIGHTDOWN_CCOMODE						= 0x12100000;
+	public static final int SCREEN_STATE_MAIN_B_RIGHTDOWN_SHIFTMODE						= 0x12200000;
+	public static final int SCREEN_STATE_MAIN_B_RIGHTDOWN_TCLOCKUP						= 0x12300000;
 	
 	
-	public static final int SCREEN_STATE_MAIN_B_LEFTUP_TOP								= 0x03000000;
-	public static final int SCREEN_STATE_MAIN_B_LEFTUP_MACHINESTATUS					= 0x03100000;
+	public static final int SCREEN_STATE_MAIN_B_LEFTUP_TOP								= 0x13000000;
+	public static final int SCREEN_STATE_MAIN_B_LEFTUP_MACHINESTATUS					= 0x13100000;
 	
-	public static final int SCREEN_STATE_MAIN_B_LEFTDOWN_TOP							= 0x04000000;
-	public static final int SCREEN_STATE_MAIN_B_LEFTDOWN_HOURODOMETER					= 0x04100000;
+	public static final int SCREEN_STATE_MAIN_B_LEFTDOWN_TOP							= 0x14000000;
+	public static final int SCREEN_STATE_MAIN_B_LEFTDOWN_HOURODOMETER					= 0x14100000;
 	
-	public static final int SCREEN_STATE_MAIN_B_QUICK_TOP								= 0x05000000;
+	public static final int SCREEN_STATE_MAIN_B_QUICK_TOP								= 0x15000000;
 	
-	public static final int SCREEN_STATE_MAIN_B_KEY_TOP									= 0x06000000;
-	public static final int SCREEN_STATE_MAIN_B_KEY_MAINLIGHT							= 0x06100000;
-	public static final int SCREEN_STATE_MAIN_B_KEY_WORKLIGHT							= 0x06200000;
-	public static final int SCREEN_STATE_MAIN_B_KEY_AUTOGREASE							= 0x06300000;
-	public static final int SCREEN_STATE_MAIN_B_KEY_QUICKCOUPLER						= 0x06400000;
-	public static final int SCREEN_STATE_MAIN_B_KEY_QUICKCOUPLER_POPUP_LOCKING1			= 0x06410000;
-	public static final int SCREEN_STATE_MAIN_B_KEY_QUICKCOUPLER_POPUP_LOCKING2			= 0x06420000;
-	public static final int SCREEN_STATE_MAIN_B_KEY_QUICKCOUPLER_POPUP_UNLOCKING1		= 0x06430000;
-	public static final int SCREEN_STATE_MAIN_B_KEY_QUICKCOUPLER_POPUP_UNLOCKING2		= 0x06440000;
-	public static final int SCREEN_STATE_MAIN_B_KEY_RIDECONTROL							= 0x06500000;
-	public static final int SCREEN_STATE_MAIN_B_KEY_RIDECONTROL_SPEED					= 0x06510000;
-	public static final int SCREEN_STATE_MAIN_B_KEY_WORKLOAD							= 0x06600000;
-	public static final int SCREEN_STATE_MAIN_B_KEY_WORKLOAD_ACCUMULATION				= 0x06610000;
-	public static final int SCREEN_STATE_MAIN_B_KEY_WORKLOAD_DISPLAY					= 0x06620000;
-	public static final int SCREEN_STATE_MAIN_B_KEY_WORKLOAD_ERRORDETECT				= 0x06630000;
+	public static final int SCREEN_STATE_MAIN_B_KEY_TOP									= 0x16000000;
+	public static final int SCREEN_STATE_MAIN_B_KEY_MAINLIGHT							= 0x16100000;
+	public static final int SCREEN_STATE_MAIN_B_KEY_WORKLIGHT							= 0x16200000;
+	public static final int SCREEN_STATE_MAIN_B_KEY_AUTOGREASE							= 0x16300000;
+	public static final int SCREEN_STATE_MAIN_B_KEY_QUICKCOUPLER						= 0x16400000;
+	public static final int SCREEN_STATE_MAIN_B_KEY_QUICKCOUPLER_POPUP_LOCKING1			= 0x16410000;
+	public static final int SCREEN_STATE_MAIN_B_KEY_QUICKCOUPLER_POPUP_LOCKING2			= 0x16420000;
+	public static final int SCREEN_STATE_MAIN_B_KEY_QUICKCOUPLER_POPUP_UNLOCKING1		= 0x16430000;
+	public static final int SCREEN_STATE_MAIN_B_KEY_QUICKCOUPLER_POPUP_UNLOCKING2		= 0x16440000;
+	public static final int SCREEN_STATE_MAIN_B_KEY_RIDECONTROL							= 0x16500000;
+	public static final int SCREEN_STATE_MAIN_B_KEY_RIDECONTROL_SPEED					= 0x16510000;
+	public static final int SCREEN_STATE_MAIN_B_KEY_WORKLOAD							= 0x16600000;
+	public static final int SCREEN_STATE_MAIN_B_KEY_WORKLOAD_ACCUMULATION				= 0x16610000;
+	public static final int SCREEN_STATE_MAIN_B_KEY_WORKLOAD_DISPLAY					= 0x16620000;
+	public static final int SCREEN_STATE_MAIN_B_KEY_WORKLOAD_ERRORDETECT				= 0x16630000;
+	public static final int SCREEN_STATE_MAIN_B_KEY_BEACONLAMP							= 0x16700000;
+	public static final int SCREEN_STATE_MAIN_B_KEY_REARWIPER							= 0x16800000;
+	public static final int SCREEN_STATE_MAIN_B_KEY_MIRRORHEAT							= 0x16900000;
+	public static final int SCREEN_STATE_MAIN_B_KEY_DETENT								= 0x16A00000;
+	public static final int SCREEN_STATE_MAIN_B_KEY_FINEMODULATION						= 0x16B00000;
+	public static final int SCREEN_STATE_MAIN_B_KEY_FN									= 0x16C00000;
 	
-	public static final int SCREEN_STATE_MAIN_B_KEY_BEACONLAMP							= 0x06700000;
-	public static final int SCREEN_STATE_MAIN_B_KEY_REARWIPER							= 0x06800000;
-	public static final int SCREEN_STATE_MAIN_B_KEY_MIRRORHEAT							= 0x06900000;
-	public static final int SCREEN_STATE_MAIN_B_KEY_DETENT								= 0x06A00000;
-	public static final int SCREEN_STATE_MAIN_B_KEY_FINEMODULATION						= 0x06B00000;
-	public static final int SCREEN_STATE_MAIN_B_KEY_FN									= 0x06C00000;
+	public static final int SCREEN_STATE_MENU_TOP 										= 0x20000000;
 
 	
+	public static final int UNIT_ODO_KM 			= 0;
+	public static final int UNIT_ODO_MILE 			= 1;
 	
+	public static final int UNIT_TEMP_F 			= 1;
+	public static final int UNIT_TEMP_C 			= 0;
+	
+	public static final int UNIT_WEIGHT_TON 		= 0;
+	public static final int UNIT_WEIGHT_LB 			= 1;
+	
+	public static final int UNIT_PRESSURE_BAR 		= 0;
+	public static final int UNIT_PRESSURE_MPA 		= 1;
+	public static final int UNIT_PRESSURE_KGF 		= 2;
+	public static final int UNIT_PRESSURE_PSI 		= 3;
+	
+	public static final int CLOCK_AM		 		= 0;
+	public static final int CLOCK_PM		 		= 1;
 	////////////////////////////////////////////////////
 	
 	//Resource//////////////////////////////////////////
@@ -80,6 +102,28 @@ public class Home extends Activity {
 	////////////////////////////////////////////////////
 	//Valuable//////////////////////////////////////////
 	public int ScreenIndex;
+	
+	// Unit
+	public int UnitOdo;
+	public int UnitTemp;
+	public int UnitWeight;
+	
+	// HourOdometer Index
+	public int HourOdometerIndex;
+	
+	// MachineStatus Index
+	public int MachineStatusUpperIndex;
+	public int MachineStatusLowerIndex;
+	
+	// Weighing Display Index
+	
+	
+	// SeatBelt
+	public int SeatBelt;
+	
+	// Weighing
+	public int WeighingDisplayIndex;
+	public int WeighingErrorDetect;
 	
 	// CAN1CommManager
 	private static CAN1CommManager CAN1Comm = null;	
@@ -93,10 +137,34 @@ public class Home extends Activity {
 	QuickCouplerPopupUnlocking1 _QuickCouplerPopupUnlocking1;
 	QuickCouplerPopupLocking2 _QuickCouplerPopupLocking2;
 	QuickCouplerPopupUnlocking2 _QuickCouplerPopupUnlocking2;
+	
+	// Timer
+	private Timer mSeatBeltTimer = null;
+	private Timer mAutoGreaseStopTimer = null;
+	private Timer mAnimationRunningTimer = null;
+	private Timer mMirrorHeatPreHeatTimer = null;
+	private Timer mMirrorHeatTimer = null;
+	
+	// Flag
+	public boolean AnimationRunningFlag;
+	
+	// Data
+	int PreHeat;
+	int RPM;
+	
+	// MirrorHeat
+	boolean MirrorHeatPreHeatFlag;
+	int MirrorHeatCount;
+	boolean MirrorHeatTimerFlag;
 	////////////////////////////////////////////////////
 	
 	//Fragment//////////////////////////////////////////
 	public MainBBaseFragment _MainBBaseFragment;
+	public MenuBaseFragment _MenuBaseFragment;
+	////////////////////////////////////////////////////
+	
+	//Animation/////////////////////////////////////////
+	public ChangeFragmentAnimation _MainChangeAnimation;
 	////////////////////////////////////////////////////
 
 	//Lift Cycle Function///////////////////////////////
@@ -110,8 +178,9 @@ public class Home extends Activity {
 		InitPopup();
 		InitValuable();
 		InitAnimation();
+		LoadPref();
 		
-		showMainBFragment();
+		StartSeatBeltTimer();
 	}
 
 	@Override
@@ -161,9 +230,16 @@ public class Home extends Activity {
 	}
 	public void InitValuable(){
 		ScreenIndex = SCREEN_STATE_MAIN_B_TOP;
+		SeatBelt = CAN1CommManager.DATA_STATE_LAMP_ON;
+		AnimationRunningFlag = false;
+		MirrorHeatPreHeatFlag = false;
+		MirrorHeatCount = 0;
+		
+		_MainChangeAnimation = new ChangeFragmentAnimation(this, framelayoutMain, R.id.FrameLayout_main, null);
 	}
 	public void InitFragment(){
 		_MainBBaseFragment = new MainBBaseFragment();
+		_MenuBaseFragment = new MenuBaseFragment();
 	}
 	public void InitPopup(){
 		HomeDialog = null;
@@ -176,6 +252,34 @@ public class Home extends Activity {
 	public void InitAnimation(){
 		
 	}
+	public void SavePref(){
+		SharedPreferences SharePref = getSharedPreferences("Home", 0);
+		SharedPreferences.Editor edit = SharePref.edit();
+		edit.putInt("UnitOdo", UnitOdo);
+		edit.putInt("UnitTemp", UnitTemp);
+		edit.putInt("UnitWeight", UnitWeight);
+		edit.putInt("HourOdometerIndex", HourOdometerIndex);
+		edit.putInt("MachineStatusUpperIndex", MachineStatusUpperIndex);
+		edit.putInt("MachineStatusLowerIndex", MachineStatusLowerIndex);
+		edit.putInt("WeighingDisplayIndex", WeighingDisplayIndex);
+		edit.putInt("WeighingErrorDetect", WeighingErrorDetect);
+		
+		edit.commit();
+		Log.d(TAG,"SavePref");
+	}
+	public void LoadPref(){
+		SharedPreferences SharePref = getSharedPreferences("Home", 0);
+		UnitOdo = SharePref.getInt("UnitOdo", UNIT_ODO_KM);
+		UnitOdo = SharePref.getInt("UnitTemp", UNIT_TEMP_C);
+		UnitOdo = SharePref.getInt("UnitWeight", UNIT_WEIGHT_TON);
+		HourOdometerIndex = SharePref.getInt("HourOdometerIndex", CAN1CommManager.DATA_STATE_HOURMETER_TOTAL);
+		MachineStatusUpperIndex = SharePref.getInt("MachineStatusUpperIndex", CAN1CommManager.DATA_STATE_MACHINESTATUS_NOSELECT);
+		MachineStatusLowerIndex = SharePref.getInt("MachineStatusLowerIndex", CAN1CommManager.DATA_STATE_MACHINESTATUS_NOSELECT);
+		WeighingDisplayIndex = SharePref.getInt("WeighingDisplayIndex", CAN1CommManager.DATA_STATE_WEIGHINGDISPLAY_TOTAL_A);
+		WeighingErrorDetect = SharePref.getInt("WeighingErrorDetect", CAN1CommManager.DATA_STATE_WEIGHING_ERRORDETECT_OFF);
+		
+		Log.d(TAG,"LoadPref");
+	}
 	/////////////////////////////////////////////////////
 	
 	//Main Screen Fragment///////////////////////////////
@@ -185,6 +289,14 @@ public class Home extends Activity {
 		//transaction.addToBackStack("Main_Upper");
 		transaction.commit();
 	}
+	//Menu Screen Fragment
+	public void showMenuFragment(){
+		android.app.FragmentTransaction transaction = getFragmentManager().beginTransaction();
+		transaction.replace(R.id.FrameLayout_main, _MenuBaseFragment);
+		//transaction.addToBackStack("Main_Upper");
+		transaction.commit();
+	}
+	
 	/////////////////////////////////////////////////////
 	//Communication//////////////////////////////////////
 	// Communication Service Start
@@ -248,7 +360,8 @@ public class Home extends Activity {
 			
 			CAN1Comm.TxCMDToMCU(CAN1CommManager.CMD_STARTCAN);
 			
-			
+			//showMainBFragment();
+			_MainChangeAnimation.StartChangeAnimation(_MainBBaseFragment);
 			
 		}
 	};
@@ -262,7 +375,12 @@ public class Home extends Activity {
 			// TODO Auto-generated method stub
 			Log.i(TAG,"KeyButton Callback : 0x" + Integer.toHexString(Data));
 			if(CAN1Comm.GetScreenTopFlag() == true){
-				KeyButtonClick(Data);
+				try {
+					KeyButtonClick(Data);
+				} catch (NullPointerException e) {
+					// TODO: handle exception
+					Log.e(TAG,"NullPointerException");
+				}
 			}
 				
 		}
@@ -335,12 +453,12 @@ public class Home extends Activity {
 				Log.e(TAG,"RuntimeException");
 			}
 		}
-	
 	}
 	
 	public void GetDataFromNative(){
-		
-		
+		PreHeat = CAN1Comm.Get_MirrorHeaterStatus_724_PGN65428();
+		RPM = CAN1Comm.Get_EngineSpeed_310_PGN65431();;
+		CheckMirrorHeatPreHeat(PreHeat,RPM);
 	}
 	public void UpdateUI() {
 		// TODO Auto-generated method stub
@@ -384,7 +502,15 @@ public class Home extends Activity {
 			@Override
 			public void run() {
 				// TODO Auto-generated method stub
-				_MainBBaseFragment.KeyButtonClick(Data);
+				if((ScreenIndex & SCREEN_STATE_MAIN_B_TOP) == SCREEN_STATE_MAIN_B_TOP){
+					Log.d(TAG,"Click Main Key");
+					_MainBBaseFragment.KeyButtonClick(Data);
+				}else if((ScreenIndex & SCREEN_STATE_MENU_TOP) == SCREEN_STATE_MENU_TOP){
+					Log.d(TAG,"Click Menu Key");
+					_MenuBaseFragment.KeyButtonClick(Data);
+				}
+				
+
 			}
 		});
 		
@@ -426,6 +552,400 @@ public class Home extends Activity {
 		
 		HomeDialog = _QuickCouplerPopupUnlocking2;
 		HomeDialog.show();
+	}
+	/////////////////////////////////////////////////////
+	//Timer//////////////////////////////////////////////
+	public class SeatBeltTimerClass extends TimerTask{
+
+		@Override
+		public void run() {
+			// TODO Auto-generated method stub
+			runOnUiThread(new Runnable() {
+				
+				@Override
+				public void run() {
+					// TODO Auto-generated method stub
+					SeatBelt = CAN1CommManager.DATA_STATE_LAMP_OFF;
+				}
+			});
+			
+		}
+		
+	}
+	
+	public void StartSeatBeltTimer(){
+		CancelSeatBeltTimer();
+		mSeatBeltTimer = new Timer();
+		mSeatBeltTimer.schedule(new SeatBeltTimerClass(),5000);	
+	}
+	
+	public void CancelSeatBeltTimer(){
+		if(mSeatBeltTimer != null){
+			mSeatBeltTimer.cancel();
+			mSeatBeltTimer.purge();
+			mSeatBeltTimer = null;
+		}
+		
+	}
+	
+	public class AutoGreaseStopTimerClass extends TimerTask{
+
+		@Override
+		public void run() {
+			// TODO Auto-generated method stub
+			runOnUiThread(new Runnable() {
+				
+				@Override
+				public void run() {
+					// TODO Auto-generated method stub
+					CAN1Comm.Set_AutoGreaseOperationStatus_3449_PGN65527(CAN1CommManager.DATA_STATE_OFF);
+					CAN1Comm.TxCANToMCU(247);
+					CAN1Comm.Set_AutoGreaseOperationStatus_3449_PGN65527(3);
+				}
+			});
+			
+		}
+		
+	}
+	
+	public void StartAutoGreaseStopTimer(){
+		CancelAutoGreaseStopTimer();
+		mAutoGreaseStopTimer = new Timer();
+		mAutoGreaseStopTimer.schedule(new AutoGreaseStopTimerClass(),60000);	
+	}
+	
+	public void CancelAutoGreaseStopTimer(){
+		if(mAutoGreaseStopTimer != null){
+			mAutoGreaseStopTimer.cancel();
+			mAutoGreaseStopTimer.purge();
+			mAutoGreaseStopTimer = null;
+		}
+		
+	}
+	
+	public class AnimationRunningTimerClass extends TimerTask{
+
+		@Override
+		public void run() {
+			// TODO Auto-generated method stub
+			runOnUiThread(new Runnable() {
+				
+				@Override
+				public void run() {
+					// TODO Auto-generated method stub
+					AnimationRunningFlag = false;
+					Log.d(TAG,"Animation Timer Finish");
+				}
+			});
+			
+		}
+		
+	}
+	
+	public void StartAnimationRunningTimer(){
+		Log.d(TAG,"Animation Timer Start");
+		AnimationRunningFlag = true;
+		CancelAnimationRunningTimer();
+		mAnimationRunningTimer = new Timer();
+		mAnimationRunningTimer.schedule(new AnimationRunningTimerClass(),500);	
+	}
+	
+	public void CancelAnimationRunningTimer(){
+		if(mAnimationRunningTimer != null){
+			mAnimationRunningTimer.cancel();
+			mAnimationRunningTimer.purge();
+			mAnimationRunningTimer = null;
+		}
+		
+	}
+	
+	
+	
+			// Mirror Heat
+	public class MirrorHeatTimerClass extends TimerTask{
+
+		@Override
+		public void run() {
+			// TODO Auto-generated method stub
+			runOnUiThread(new Runnable() {
+				
+				@Override
+				public void run() {
+					// TODO Auto-generated method stub
+					if(MirrorHeatCount < 60*15){
+						CAN1Comm.Set_MirrorHeatOperationStatus_3450_PGN65527(CAN1CommManager.DATA_STATE_ON);
+						CAN1Comm.TxCANToMCU(247);
+						CAN1Comm.Set_MirrorHeatOperationStatus_3450_PGN65527(3);
+						Log.d(TAG,"MirrorHeat On");
+					}else if(MirrorHeatCount <60 * 15 + 5){
+						CAN1Comm.Set_MirrorHeatOperationStatus_3450_PGN65527(CAN1CommManager.DATA_STATE_OFF);
+						CAN1Comm.TxCANToMCU(247);
+						CAN1Comm.Set_MirrorHeatOperationStatus_3450_PGN65527(3);
+						Log.d(TAG,"MirrorHeat Off");
+					}else{
+						MirrorHeatCount = 0;
+						CancelMirrorHeatTimer();
+						Log.d(TAG,"MirrorHeat Timer timer");
+					}
+					if(MirrorHeatTimerFlag == false){
+						CAN1Comm.Set_MirrorHeatOperationStatus_3450_PGN65527(CAN1CommManager.DATA_STATE_OFF);
+						CAN1Comm.TxCANToMCU(247);
+						CAN1Comm.Set_MirrorHeatOperationStatus_3450_PGN65527(3);
+					}
+					MirrorHeatCount++;
+					Log.d(TAG,"MirrorHeat timer");
+				}
+			});
+			
+		}
+		
+	}
+	
+	public void StartMirrorHeatTimer(){
+		Log.d(TAG,"MirrorHeat Timer Start");
+		MirrorHeatCount = 0;
+		MirrorHeatTimerFlag = true;
+		CancelMirrorHeatTimer();
+		mMirrorHeatTimer = new Timer();
+		mMirrorHeatTimer.schedule(new MirrorHeatTimerClass(),1,1000);	
+	}
+	
+	public void CancelMirrorHeatTimer(){
+	
+		if(mMirrorHeatTimer != null){
+			MirrorHeatTimerFlag = false;
+			mMirrorHeatTimer.cancel();
+			mMirrorHeatTimer.purge();
+			mMirrorHeatTimer = null;
+		}
+		
+	}
+	
+	public class MirrorHeatPreHeatTimerClass extends TimerTask{
+
+		@Override
+		public void run() {
+			// TODO Auto-generated method stub
+			runOnUiThread(new Runnable() {
+				
+				@Override
+				public void run() {
+					// TODO Auto-generated method stub
+					StartMirrorHeatTimer();
+					Log.d(TAG,"MirrorHeatPreHeat timer");
+				}
+			});
+			
+		}
+		
+	}
+	
+	public void StartMirrorHeatPreHeatTimer(){
+		Log.d(TAG,"MirrorHeatPreHeat Timer Start");
+		CancelMirrorHeatPreHeatTimer();
+		mMirrorHeatPreHeatTimer = new Timer();
+		mMirrorHeatPreHeatTimer.schedule(new MirrorHeatPreHeatTimerClass(),60000);	
+	}
+	
+	public void CancelMirrorHeatPreHeatTimer(){
+		if(mMirrorHeatPreHeatTimer != null){
+			mMirrorHeatPreHeatTimer.cancel();
+			mMirrorHeatPreHeatTimer.purge();
+			mMirrorHeatPreHeatTimer = null;
+		}
+		
+	}
+	public void CheckMirrorHeatPreHeat(int _PreHeat, int _RPM){
+		if(MirrorHeatPreHeatFlag == false){
+			if(_RPM > 500 && _PreHeat == CAN1CommManager.DATA_STATE_ON){
+				MirrorHeatPreHeatFlag = true;
+				StartMirrorHeatPreHeatTimer();
+			}
+		}
+	}
+	/////////////////////////////////////////////////////
+	//Calculate//////////////////////////////////////////
+	public String GetNumberString(long _Number){
+		String strNumber;
+		strNumber = NumberFormat.getNumberInstance(Locale.US).format(_Number);
+		return strNumber;
+	}
+
+	public String GetHourmeterString(int _Hourmeter){
+		String strHourmeter;
+		long long_Hour;
+		int Hour;
+		int Min;
+		
+		long_Hour = _Hourmeter & 0xFFFFFFFFL;
+		if(long_Hour == 0xFFFFFFFFL){
+			long_Hour = 0;
+		}
+		Hour = (int) (long_Hour / 3600);
+		Min = (int) (((long_Hour % 3600) / 60) / 6);
+		strHourmeter = GetNumberString(Hour) + "." + Integer.toString(Min);
+		return strHourmeter;
+	}
+	public String GetOdometerStrng(int _Odometer, int Unit){
+		String strOdometer = "";
+		long long_Odo;
+		long nOdo;
+		long nOdo_Under;
+		
+		long_Odo = (_Odometer  & 0xFFFFFFFFL);
+		if(long_Odo == 0xFFFFFFFFL){
+			long_Odo = 0;
+		}
+		long_Odo *= 125;
+		if(Unit == UNIT_ODO_MILE){
+			long_Odo *= 62137;
+			nOdo =  (long_Odo / 100000000);
+			nOdo_Under = ( (long_Odo % 100000000) / 10000000);
+		}else{
+			nOdo = (int) (long_Odo / 1000);
+			nOdo_Under = ((int) (long_Odo % 1000) / 100);
+		}
+		
+		strOdometer = GetNumberString(nOdo) + "." + Long.toString(nOdo_Under);
+		return strOdometer;
+	}
+	public String GetWeighit(int _Weighit, int Unit){
+		String strWeight = "";
+		long long_Weight;
+		long nWeight;
+		long nWeight_Under;
+		
+		long_Weight = (_Weighit  & 0xFFFFFFFFL);
+		if(long_Weight == 0xFFFFFFFFL){
+			long_Weight = 0;
+		}
+		if(Unit == UNIT_WEIGHT_LB){
+			long_Weight *= 220462;
+			nWeight =  (long_Weight / 1000);
+			nWeight_Under = ( (long_Weight % 1000) / 100);
+		}else{
+			nWeight =  (long_Weight / 10);
+			nWeight_Under =  (long_Weight % 10);
+		}
+				
+		strWeight = GetNumberString(nWeight) + "." + Long.toString(nWeight_Under);
+		return strWeight;
+	}
+	public String GetBattery(int _Battery){
+		String strBattery = "";
+		long long_Battery;
+		int nBattery;
+		int nBattery_Under;
+		
+		long_Battery = (_Battery  & 0xFFFFFFFFL);
+		if(long_Battery > 500){
+			long_Battery = 0;
+		}
+		
+		nBattery = (int) (long_Battery / 10);
+		nBattery_Under = (int) (long_Battery % 10);
+		strBattery = GetNumberString(nBattery) + "." + Integer.toString(nBattery_Under);
+		return strBattery;
+	}
+	public String GetTemp(int _Temp, int Unit){
+		String strTemp;
+		int nTemp;
+		
+		nTemp = GetTemp(_Temp);
+		if(Unit == UNIT_TEMP_F){
+			nTemp *= 18;
+			nTemp = nTemp / 10;
+			nTemp += 32;
+			strTemp = GetNumberString(nTemp);
+		}else{
+			strTemp = GetNumberString(nTemp);
+		}
+		
+		return strTemp;
+		
+	}
+	public int GetTemp(int _Temp){
+		long long_Temp;
+		int nTemp;
+		
+		long_Temp = (_Temp  & 0xFFFFFFFFL);
+		if(long_Temp >= 0xFFL){
+			long_Temp = 0;
+		}
+		nTemp = (int) (long_Temp - 40);
+		
+		return nTemp;
+	}
+	public String GetHour(int _Hour){
+		String strHour = "";
+		int AbsHour;
+		AbsHour = Math.abs(_Hour);
+		
+		if(AbsHour > 12){
+			AbsHour = AbsHour - 12;
+		}
+		
+		if(AbsHour == 0){
+			AbsHour = 12;
+		}
+		if(AbsHour < 10)
+			strHour = "0" + Integer.toString(AbsHour);
+		else
+			strHour = Integer.toString(AbsHour);
+		
+		return strHour;
+	}
+	public String GetMin(int _Min){
+		String strMin = "";
+		int AbsMin;
+		
+		AbsMin = Math.abs(_Min);
+		if(AbsMin >= 60){
+			AbsMin = 0;
+		}
+		
+		if(AbsMin < 10)
+			strMin = "0" + Integer.toString(AbsMin);
+		else
+			strMin = Integer.toString(AbsMin);
+	
+		
+		return strMin;
+	}
+	public int GetAMPM(int _Hour){
+		int AbsHour;
+		int AMPM;
+		
+		AbsHour = Math.abs(_Hour);
+		if(AbsHour >= 12){
+			AMPM = CLOCK_PM;
+		}else{
+			AMPM = CLOCK_AM;
+		}
+		
+		return AMPM;
+	}
+	public String GetRideControlSpeed(int _Speed, int Unit){
+		String strSpeed = "";
+		long long_Speed;
+		long nSpeed;
+		
+		
+		long_Speed = (_Speed  & 0xFFFFFFFFL);
+		if(long_Speed == 0xFFFFFFFFL){
+			long_Speed = 0;
+		}
+		if(Unit == UNIT_ODO_MILE){
+			long_Speed *= 62137;
+			nSpeed =  (long_Speed / 100000);
+			
+		}else{
+			nSpeed =  long_Speed;
+			
+		}
+				
+		strSpeed = GetNumberString(nSpeed);
+		return strSpeed;
 	}
 	/////////////////////////////////////////////////////
 }

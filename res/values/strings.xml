@@ -7,6 +7,7 @@
     <string name="Hr">Hr</string>
     <string name="C">ºC</string>
     <string name="F">ºF</string>
+    <string name="V">V</string>
     <string name="ton">ton</string>
     <string name="lb">lb</string>
     <string name="AM">AM</string>
@@ -24,6 +25,8 @@
     <string name="Boom">Boom</string>
     <string name="Bucket">Bucket</string>
     <string name="Initialization">Initialization</string>
+    <string name="km_h">km/h</string>
+    <string name="mph">mph</string>
     <!-- Common End-->
     <!-- Main Start-->
     <string name="ENGINE_MODE">ENGINE MODE</string>
@@ -98,4 +101,11 @@
     <string name="Excute_Unlocking_Attachment">Excute Unlocking Attachment.</string>
     <string name="Excuting_Unlocking_Attachment">Excuting Unlocking Attachment.</string>
     <!-- Key End -->
+    <!-- Menu Start -->
+    <string name="Mode">Mode</string>
+    <string name="Monitoring">Monitoring</string>
+    <string name="Management">Management</string>
+    <string name="Preference">Preference</string>
+    <string name="Multimedia">Multimedia</string>
+    <!-- Menu End -->
 </resources>

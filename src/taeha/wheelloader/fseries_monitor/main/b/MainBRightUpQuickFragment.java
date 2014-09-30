@@ -97,7 +97,10 @@ public class MainBRightUpQuickFragment extends ParentFragment{
 	/////////////////////////////////////////////////////////////////////	
 	
 	public void ClickActiveFault(){
-		
+		if(ParentActivity.AnimationRunningFlag == true)
+			return;
+		else
+			ParentActivity.StartAnimationRunningTimer();
 	}
 	
 }

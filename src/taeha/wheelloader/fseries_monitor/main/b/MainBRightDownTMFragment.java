@@ -7,8 +7,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.TextView;
+import taeha.wheelloader.fseries_monitor.animation.TextViewXAxisFlipAnimation;
+import taeha.wheelloader.fseries_monitor.main.CAN1CommManager;
 import taeha.wheelloader.fseries_monitor.main.ParentFragment;
 import taeha.wheelloader.fseries_monitor.main.R;
+import taeha.wheelloader.fseries_monitor.main.R.string;
 
 public class MainBRightDownTMFragment extends ParentFragment{
 	//CONSTANT////////////////////////////////////////
@@ -30,10 +33,16 @@ public class MainBRightDownTMFragment extends ParentFragment{
 	
 	//VALUABLE////////////////////////////////////////
 	boolean ClickFlag;
+	
+	int CCOMode;
+	int ShiftMode;
+	int TCLockUp;
 	//////////////////////////////////////////////////
 	
 	//ANIMATION///////////////////////////////////////
-
+	TextViewXAxisFlipAnimation TMCCOModeDataAnimation;
+	TextViewXAxisFlipAnimation TMShiftModeDataAnimation;
+	TextViewXAxisFlipAnimation TMTCLockUpDataAnimation;
 	///////////////////////////////////////////////////
 	
 	//TEST////////////////////////////////////////////
@@ -85,7 +94,9 @@ public class MainBRightDownTMFragment extends ParentFragment{
 	protected void InitValuables() {
 		// TODO Auto-generated method stub
 		super.InitValuables();
-		
+		TMCCOModeDataAnimation = new TextViewXAxisFlipAnimation(ParentActivity);
+		TMShiftModeDataAnimation = new TextViewXAxisFlipAnimation(ParentActivity);
+		TMTCLockUpDataAnimation = new TextViewXAxisFlipAnimation(ParentActivity);
 	}
 	@Override
 	protected void InitButtonListener() {
@@ -122,54 +133,154 @@ public class MainBRightDownTMFragment extends ParentFragment{
 	@Override
 	protected void GetDataFromNative() {
 		// TODO Auto-generated method stub
-		
+		CCOMode = CAN1Comm.Get_ClutchCutoffMode_544_PGN65434();
+		ShiftMode = CAN1Comm.Get_TransmissionShiftMode_543_PGN65434();
+		TCLockUp = CAN1Comm.Get_TransmissionTCLockupEngaged_568_PGN65434();
 	}
 
 	@Override
 	protected void UpdateUI() {
 		// TODO Auto-generated method stub
-		
+		TMCCOModeDisplay(CCOMode);
+		TMShiftModeDisplay(ShiftMode);
+		TMTCLockUpDisplay(TCLockUp);
 	}
 	/////////////////////////////////////////////////////////////////////	
 	
+	public void TMCCOModeDisplay(int Data){
+		try {
+			switch (Data) {
+			case CAN1CommManager.DATA_STATE_TM_CLUTCHCUTOFF_OFF:
+				TMCCOModeDataAnimation.FlipAnimation(textViewCCOModeData,getResources().getString(string.OFF));
+				break;
+			case CAN1CommManager.DATA_STATE_TM_CLUTCHCUTOFF_L:
+				TMCCOModeDataAnimation.FlipAnimation(textViewCCOModeData,getResources().getString(string.L));
+				break;
+			case CAN1CommManager.DATA_STATE_TM_CLUTCHCUTOFF_M:
+				TMCCOModeDataAnimation.FlipAnimation(textViewCCOModeData,getResources().getString(string.M));
+				break;
+			case CAN1CommManager.DATA_STATE_TM_CLUTCHCUTOFF_H:
+				TMCCOModeDataAnimation.FlipAnimation(textViewCCOModeData,getResources().getString(string.H));
+				break;
+			default:
+				break;
+			}
+		} catch (IllegalStateException e) {
+			// TODO: handle exception
+			Log.e(TAG,"IllegalStateException");
+		}
+	}
+	public void TMShiftModeDisplay(int Data){
+		try {
+			switch (Data) {
+			case CAN1CommManager.DATA_STATE_TM_SHIFTMODE_MANUAL:
+				TMShiftModeDataAnimation.FlipAnimation(textViewShiftModeData,getResources().getString(string.MANUAL));
+				break;
+			case CAN1CommManager.DATA_STATE_TM_SHIFTMODE_AL:
+				TMShiftModeDataAnimation.FlipAnimation(textViewShiftModeData,getResources().getString(string.AL));
+				break;
+			case CAN1CommManager.DATA_STATE_TM_SHIFTMODE_AN:
+				TMShiftModeDataAnimation.FlipAnimation(textViewShiftModeData,getResources().getString(string.AN));
+				break;
+			case CAN1CommManager.DATA_STATE_TM_SHIFTMODE_AH:
+				TMShiftModeDataAnimation.FlipAnimation(textViewShiftModeData,getResources().getString(string.AH));
+				break;
+			default:
+				break;
+			}
+		} catch (IllegalStateException e) {
+			// TODO: handle exception
+			Log.e(TAG,"IllegalStateException");
+		}
+	}
+	public void TMTCLockUpDisplay(int Data){
+		try {
+			switch (Data) {
+			case CAN1CommManager.DATA_STATE_TM_LOCKUPCLUTCH_OFF:
+				TMTCLockUpDataAnimation.FlipAnimation(textViewTCLockUpData,getResources().getString(string.OFF));
+				break;
+			case CAN1CommManager.DATA_STATE_TM_LOCKUPCLUTCH_ON:
+				TMTCLockUpDataAnimation.FlipAnimation(textViewTCLockUpData,getResources().getString(string.ON));
+				break;
+			default:
+				break;
+			}
+		} catch (IllegalStateException e) {
+			// TODO: handle exception
+			Log.e(TAG,"IllegalStateException");
+		}
+	}
 	public void ClickCCOMode(){
+		if(ParentActivity.AnimationRunningFlag == true)
+			return;
+		else
+			ParentActivity.StartAnimationRunningTimer();
+		ParentActivity._MainBBaseFragment._MainBCenterTMFragment = new MainBCenterTMFragment();
+		ParentActivity._MainBBaseFragment._MainBRightDownTMCCOModeFragment = new MainBRightDownTMCCOModeFragment();
 		ParentActivity._MainBBaseFragment._MainBodyShiftAnimation.StartShiftRightDownAnimation();
 		ParentActivity._MainBBaseFragment.CenterAnimation.StartChangeAnimation(ParentActivity._MainBBaseFragment._MainBCenterTMFragment);
 		ParentActivity._MainBBaseFragment.RightDownChangeAnimation.StartChangeAnimation(ParentActivity._MainBBaseFragment._MainBRightDownTMCCOModeFragment);
 
-		ParentActivity._MainBBaseFragment.RightUpChangeAnimation.StartDisappearAnimation();
-		ParentActivity._MainBBaseFragment.LeftUpChangeAnimation.StartDisappearAnimation();
-		ParentActivity._MainBBaseFragment.LeftDownChangeAnimation.StartDisappearAnimation();
-		ParentActivity._MainBBaseFragment.VirtualKeyChangeAnimation.StartDisappearAnimation();
+		ParentActivity._MainBBaseFragment._RightUpDisappearAnimation.StartAnimation();
+		ParentActivity._MainBBaseFragment._LeftUpDisappearAnimation.StartAnimation();
+		ParentActivity._MainBBaseFragment._LeftDownDisappearAnimation.StartAnimation();
+		ParentActivity._MainBBaseFragment._RightUpBGDisappearAnimation.StartAnimation();
+		ParentActivity._MainBBaseFragment._LeftUpBGDisappearAnimation.StartAnimation();
+		ParentActivity._MainBBaseFragment._LeftDownBGDisappearAnimation.StartAnimation();
+		ParentActivity._MainBBaseFragment._VirtualKeyDisappearAnimation.StartAnimation();
 		
-		ParentActivity._MainBBaseFragment.KeyTitleChangeAnimation.StartDisappearAnimation();
-		ParentActivity._MainBBaseFragment.KeyBodyChangeAnimation.StartDisappearAnimation();
+		ParentActivity._MainBBaseFragment._KeyTitleDisappearAnimation.StartAnimation();
+		ParentActivity._MainBBaseFragment._KeyBodyDisappearAnimation.StartAnimation();
+		
+		ParentActivity._MainBBaseFragment._MainBIndicatorFragment.DisableVirtualKey();
 	}
 	public void ClickShiftMode(){
+		if(ParentActivity.AnimationRunningFlag == true)
+			return;
+		else
+			ParentActivity.StartAnimationRunningTimer();
+		ParentActivity._MainBBaseFragment._MainBCenterTMFragment = new MainBCenterTMFragment();
+		ParentActivity._MainBBaseFragment._MainBRightDownTMShiftModeFragment = new MainBRightDownTMShiftModeFragment();
 		ParentActivity._MainBBaseFragment._MainBodyShiftAnimation.StartShiftRightDownAnimation();
 		ParentActivity._MainBBaseFragment.CenterAnimation.StartChangeAnimation(ParentActivity._MainBBaseFragment._MainBCenterTMFragment);
 		ParentActivity._MainBBaseFragment.RightDownChangeAnimation.StartChangeAnimation(ParentActivity._MainBBaseFragment._MainBRightDownTMShiftModeFragment);
 
-		ParentActivity._MainBBaseFragment.RightUpChangeAnimation.StartDisappearAnimation();
-		ParentActivity._MainBBaseFragment.LeftUpChangeAnimation.StartDisappearAnimation();
-		ParentActivity._MainBBaseFragment.LeftDownChangeAnimation.StartDisappearAnimation();
-		ParentActivity._MainBBaseFragment.VirtualKeyChangeAnimation.StartDisappearAnimation();
+		ParentActivity._MainBBaseFragment._RightUpDisappearAnimation.StartAnimation();
+		ParentActivity._MainBBaseFragment._LeftUpDisappearAnimation.StartAnimation();
+		ParentActivity._MainBBaseFragment._LeftDownDisappearAnimation.StartAnimation();
+		ParentActivity._MainBBaseFragment._RightUpBGDisappearAnimation.StartAnimation();
+		ParentActivity._MainBBaseFragment._LeftUpBGDisappearAnimation.StartAnimation();
+		ParentActivity._MainBBaseFragment._LeftDownBGDisappearAnimation.StartAnimation();
+		ParentActivity._MainBBaseFragment._VirtualKeyDisappearAnimation.StartAnimation();
 		
-		ParentActivity._MainBBaseFragment.KeyTitleChangeAnimation.StartDisappearAnimation();
-		ParentActivity._MainBBaseFragment.KeyBodyChangeAnimation.StartDisappearAnimation();
+		ParentActivity._MainBBaseFragment._KeyTitleDisappearAnimation.StartAnimation();
+		ParentActivity._MainBBaseFragment._KeyBodyDisappearAnimation.StartAnimation();
+		
+		ParentActivity._MainBBaseFragment._MainBIndicatorFragment.DisableVirtualKey();
 	}
 	public void ClickTCLockUp(){
+		if(ParentActivity.AnimationRunningFlag == true)
+			return;
+		else
+			ParentActivity.StartAnimationRunningTimer();
+		ParentActivity._MainBBaseFragment._MainBCenterTMFragment = new MainBCenterTMFragment();
+		ParentActivity._MainBBaseFragment._MainBRightDownTMTCLockUpFragment = new MainBRightDownTMTCLockUpFragment();
 		ParentActivity._MainBBaseFragment._MainBodyShiftAnimation.StartShiftRightDownAnimation();
 		ParentActivity._MainBBaseFragment.CenterAnimation.StartChangeAnimation(ParentActivity._MainBBaseFragment._MainBCenterTMFragment);
 		ParentActivity._MainBBaseFragment.RightDownChangeAnimation.StartChangeAnimation(ParentActivity._MainBBaseFragment._MainBRightDownTMTCLockUpFragment);
 
-		ParentActivity._MainBBaseFragment.RightUpChangeAnimation.StartDisappearAnimation();
-		ParentActivity._MainBBaseFragment.LeftUpChangeAnimation.StartDisappearAnimation();
-		ParentActivity._MainBBaseFragment.LeftDownChangeAnimation.StartDisappearAnimation();
-		ParentActivity._MainBBaseFragment.VirtualKeyChangeAnimation.StartDisappearAnimation();
+		ParentActivity._MainBBaseFragment._RightUpDisappearAnimation.StartAnimation();
+		ParentActivity._MainBBaseFragment._LeftUpDisappearAnimation.StartAnimation();
+		ParentActivity._MainBBaseFragment._LeftDownDisappearAnimation.StartAnimation();
+		ParentActivity._MainBBaseFragment._RightUpBGDisappearAnimation.StartAnimation();
+		ParentActivity._MainBBaseFragment._LeftUpBGDisappearAnimation.StartAnimation();
+		ParentActivity._MainBBaseFragment._LeftDownBGDisappearAnimation.StartAnimation();
+		ParentActivity._MainBBaseFragment._VirtualKeyDisappearAnimation.StartAnimation();
 		
-		ParentActivity._MainBBaseFragment.KeyTitleChangeAnimation.StartDisappearAnimation();
-		ParentActivity._MainBBaseFragment.KeyBodyChangeAnimation.StartDisappearAnimation();
+		ParentActivity._MainBBaseFragment._KeyTitleDisappearAnimation.StartAnimation();
+		ParentActivity._MainBBaseFragment._KeyBodyDisappearAnimation.StartAnimation();
+		
+		ParentActivity._MainBBaseFragment._MainBIndicatorFragment.DisableVirtualKey();
 	}
 	public void setClickEnable(boolean flag){
 		ClickFlag = flag;

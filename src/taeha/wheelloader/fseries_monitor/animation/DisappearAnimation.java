@@ -76,7 +76,6 @@ public class DisappearAnimation extends View{
 		}
 	}
 	public void StartAnimation(){
-		
 		try {
 			Animation.start();
 		} catch (NullPointerException e) {

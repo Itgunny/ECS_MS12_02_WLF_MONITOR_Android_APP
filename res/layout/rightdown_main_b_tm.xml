@@ -56,7 +56,6 @@
             android:layout_alignParentBottom="true"
             android:layout_alignParentRight="true"
             android:layout_marginRight="25dp"
-            android:text="@string/OFF"
             android:textAppearance="?android:attr/textAppearanceLarge"
             android:textStyle="italic" />
 
@@ -89,7 +88,6 @@
             android:layout_alignParentRight="true"
             android:layout_below="@+id/textView_rightdown_main_b_tm_shiftmode_title"
             android:layout_marginRight="25dp"
-            android:text="@string/MANUAL"
             android:textAppearance="?android:attr/textAppearanceLarge"
             android:textStyle="italic" />
 
@@ -122,7 +120,6 @@
             android:layout_alignParentRight="true"
             android:layout_below="@+id/textView_rightdown_main_b_tm_tclockup_title"
             android:layout_marginRight="25dp"
-            android:text="@string/ON"
             android:textAppearance="?android:attr/textAppearanceLarge"
             android:textStyle="italic" />
 

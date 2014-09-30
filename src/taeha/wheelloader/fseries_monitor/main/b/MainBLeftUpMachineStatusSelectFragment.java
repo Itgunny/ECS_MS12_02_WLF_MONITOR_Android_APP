@@ -9,6 +9,7 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.TextView;
+import taeha.wheelloader.fseries_monitor.main.CAN1CommManager;
 import taeha.wheelloader.fseries_monitor.main.ParentFragment;
 import taeha.wheelloader.fseries_monitor.main.R;
 import taeha.wheelloader.fseries_monitor.main.R.string;
@@ -19,6 +20,9 @@ public class MainBLeftUpMachineStatusSelectFragment extends ParentFragment{
 	private static final String TAG = "MainBLeftUpMachineStatusSelectFragment";
 	
 	private static final String TAB = "         ";
+	
+	private static final int SELECT_UPPER = 0;
+	private static final int SELECT_LOWER = 1;
 	//////////////////////////////////////////////////
 	//RESOURCE////////////////////////////////////////
 	RadioButton radioHYDTemp;
@@ -39,7 +43,7 @@ public class MainBLeftUpMachineStatusSelectFragment extends ParentFragment{
 	//////////////////////////////////////////////////
 	
 	//VALUABLE////////////////////////////////////////
-
+	int SelectFlag;
 	//////////////////////////////////////////////////
 	
 	//ANIMATION///////////////////////////////////////
@@ -67,6 +71,13 @@ public class MainBLeftUpMachineStatusSelectFragment extends ParentFragment{
 
 	////////////////////////////////////////////////
 	
+	@Override
+	public void onResume() {
+		// TODO Auto-generated method stub
+		super.onResume();
+		MachineStatusDisplay(ParentActivity.MachineStatusUpperIndex,ParentActivity.MachineStatusLowerIndex);
+	}
+
 	//Common Function//////////////////////////////
 	@Override
 	protected void InitResource() {
@@ -100,17 +111,57 @@ public class MainBLeftUpMachineStatusSelectFragment extends ParentFragment{
 	protected void InitValuables() {
 		// TODO Auto-generated method stub
 		super.InitValuables();
-		
+		SelectFlag = SELECT_UPPER;
 	}
 	@Override
 	protected void InitButtonListener() {
 		// TODO Auto-generated method stub
+		radioHYDTemp.setOnClickListener(new View.OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				ClickHYD();
+			}
+		});
+		radioTMOilTemp.setOnClickListener(new View.OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				ClickTMOil();
+			}
+		});
+		radioBatteryVoltage.setOnClickListener(new View.OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				ClickBattery();
+			}
+		});
+		radioWeighingSystem.setOnClickListener(new View.OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				ClickWeighing();
+			}
+		});
+		radioCoolantTemp.setOnClickListener(new View.OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				ClickCoolant();
+			}
+		});
 		imgbtnOK.setOnClickListener(new View.OnClickListener() {
 			
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
-				ParentActivity._MainBBaseFragment.showDefaultScreenAnimation();
+				ClickOK();
 			}
 		});
 	}
@@ -124,14 +175,143 @@ public class MainBLeftUpMachineStatusSelectFragment extends ParentFragment{
 	@Override
 	protected void UpdateUI() {
 		// TODO Auto-generated method stub
-		
+		MachineStatusDisplay(ParentActivity.MachineStatusUpperIndex,ParentActivity.MachineStatusLowerIndex);
 	}
 	/////////////////////////////////////////////////////////////////////	
+	public void MachineStatusDisplay(int Upper, int Lower){
 	
-	public void ClickMode(){
+		radioHYDTemp.setChecked(false);
+		radioTMOilTemp.setChecked(false);
+		radioBatteryVoltage.setChecked(false);
+		radioWeighingSystem.setChecked(false);
+		radioCoolantTemp.setChecked(false);
 		
-	}
-	public void ClickWarmingUp(){
+		switch (Upper) {
+		case CAN1CommManager.DATA_STATE_MACHINESTATUS_HYD:
+			radioHYDTemp.setChecked(true);
+			break;
+		case CAN1CommManager.DATA_STATE_MACHINESTATUS_TMOIL:
+			radioTMOilTemp.setChecked(true);
+			break;
+		case CAN1CommManager.DATA_STATE_MACHINESTATUS_BATTERY:
+			radioBatteryVoltage.setChecked(true);
+			break;
+		case CAN1CommManager.DATA_STATE_MACHINESTATUS_WEIGHING:
+			radioWeighingSystem.setChecked(true);
+			break;
+		case CAN1CommManager.DATA_STATE_MACHINESTATUS_COOLANT:
+			radioCoolantTemp.setChecked(true);
+			break;
 
+		default:
+			break;
+		}
+		switch (Lower) {
+		case CAN1CommManager.DATA_STATE_MACHINESTATUS_HYD:
+			radioHYDTemp.setChecked(true);
+			break;
+		case CAN1CommManager.DATA_STATE_MACHINESTATUS_TMOIL:
+			radioTMOilTemp.setChecked(true);
+			break;
+		case CAN1CommManager.DATA_STATE_MACHINESTATUS_BATTERY:
+			radioBatteryVoltage.setChecked(true);
+			break;
+		case CAN1CommManager.DATA_STATE_MACHINESTATUS_WEIGHING:
+			radioWeighingSystem.setChecked(true);
+			break;
+		case CAN1CommManager.DATA_STATE_MACHINESTATUS_COOLANT:
+			radioCoolantTemp.setChecked(true);
+			break;
+
+		default:
+			break;
+		}
 	}
+	public void ClickRadio(int ID){
+		if(ParentActivity.MachineStatusUpperIndex != CAN1CommManager.DATA_STATE_MACHINESTATUS_WEIGHING){
+			if(ParentActivity.MachineStatusUpperIndex == ID){
+				ParentActivity.MachineStatusUpperIndex = CAN1CommManager.DATA_STATE_MACHINESTATUS_NOSELECT;
+				return;
+			}
+			if(ParentActivity.MachineStatusLowerIndex == ID){
+				ParentActivity.MachineStatusLowerIndex = CAN1CommManager.DATA_STATE_MACHINESTATUS_NOSELECT;
+				return;
+			}
+			if(ParentActivity.MachineStatusUpperIndex == CAN1CommManager.DATA_STATE_MACHINESTATUS_NOSELECT){
+				ParentActivity.MachineStatusUpperIndex = ID;
+				return;
+			}
+			if(ParentActivity.MachineStatusLowerIndex == CAN1CommManager.DATA_STATE_MACHINESTATUS_NOSELECT){
+				ParentActivity.MachineStatusLowerIndex = ID;
+				return;
+			}
+				
+			if(SelectFlag == SELECT_UPPER){
+				ParentActivity.MachineStatusUpperIndex = ID;
+				SelectFlag = SELECT_LOWER;
+			}else{
+				ParentActivity.MachineStatusLowerIndex = ID;
+				SelectFlag = SELECT_UPPER;
+			}
+		}else{
+			ParentActivity.MachineStatusUpperIndex = ID;
+			ParentActivity.MachineStatusLowerIndex = CAN1CommManager.DATA_STATE_MACHINESTATUS_NOSELECT;
+		}
+	}
+	public void ClickHYD(){
+		if(ParentActivity.AnimationRunningFlag == true)
+			return;
+		else
+			ParentActivity.StartAnimationRunningTimer();
+		ClickRadio(CAN1CommManager.DATA_STATE_MACHINESTATUS_HYD);
+		MachineStatusDisplay(ParentActivity.MachineStatusUpperIndex,ParentActivity.MachineStatusLowerIndex);
+		ParentActivity.SavePref();
+	}
+	public void ClickTMOil(){
+		if(ParentActivity.AnimationRunningFlag == true)
+			return;
+		else
+			ParentActivity.StartAnimationRunningTimer();
+		ClickRadio(CAN1CommManager.DATA_STATE_MACHINESTATUS_TMOIL);
+		MachineStatusDisplay(ParentActivity.MachineStatusUpperIndex,ParentActivity.MachineStatusLowerIndex);
+		ParentActivity.SavePref();
+	}
+	public void ClickBattery(){
+		if(ParentActivity.AnimationRunningFlag == true)
+			return;
+		else
+			ParentActivity.StartAnimationRunningTimer();
+		ClickRadio(CAN1CommManager.DATA_STATE_MACHINESTATUS_BATTERY);
+		MachineStatusDisplay(ParentActivity.MachineStatusUpperIndex,ParentActivity.MachineStatusLowerIndex);
+		ParentActivity.SavePref();
+	}
+	public void ClickWeighing(){
+		if(ParentActivity.AnimationRunningFlag == true)
+			return;
+		else
+			ParentActivity.StartAnimationRunningTimer();
+		SelectFlag = SELECT_UPPER;
+		if(ParentActivity.MachineStatusUpperIndex == CAN1CommManager.DATA_STATE_MACHINESTATUS_WEIGHING){
+			ParentActivity.MachineStatusUpperIndex = CAN1CommManager.DATA_STATE_MACHINESTATUS_NOSELECT;
+			ParentActivity.MachineStatusLowerIndex = CAN1CommManager.DATA_STATE_MACHINESTATUS_NOSELECT;
+		}else{
+			ParentActivity.MachineStatusUpperIndex = CAN1CommManager.DATA_STATE_MACHINESTATUS_WEIGHING;
+			ParentActivity.MachineStatusLowerIndex = CAN1CommManager.DATA_STATE_MACHINESTATUS_WEIGHING;
+		}
+		MachineStatusDisplay(ParentActivity.MachineStatusUpperIndex,ParentActivity.MachineStatusLowerIndex);
+		ParentActivity.SavePref();
+	}
+	public void ClickCoolant(){
+		if(ParentActivity.AnimationRunningFlag == true)
+			return;
+		else
+			ParentActivity.StartAnimationRunningTimer();
+		ClickRadio(CAN1CommManager.DATA_STATE_MACHINESTATUS_COOLANT);
+		MachineStatusDisplay(ParentActivity.MachineStatusUpperIndex,ParentActivity.MachineStatusLowerIndex);
+		ParentActivity.SavePref();
+	}
+	public void ClickOK(){
+		ParentActivity._MainBBaseFragment.showLeftUptoDefaultScreenAnimation();
+	}
+	
 }

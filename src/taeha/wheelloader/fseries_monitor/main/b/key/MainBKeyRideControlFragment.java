@@ -9,6 +9,7 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.TextView;
+import taeha.wheelloader.fseries_monitor.main.CAN1CommManager;
 import taeha.wheelloader.fseries_monitor.main.ParentFragment;
 import taeha.wheelloader.fseries_monitor.main.R;
 
@@ -26,7 +27,7 @@ public class MainBKeyRideControlFragment extends ParentFragment{
 	//////////////////////////////////////////////////
 	
 	//VALUABLE////////////////////////////////////////
-
+	int RideControl;
 	//////////////////////////////////////////////////
 	
 	//ANIMATION///////////////////////////////////////
@@ -49,6 +50,7 @@ public class MainBKeyRideControlFragment extends ParentFragment{
 		InitButtonListener();
 
 		ParentActivity.ScreenIndex = ParentActivity.SCREEN_STATE_MAIN_B_KEY_RIDECONTROL;
+		RideControlDisplay(RideControl);
 		return mRoot;
 	}
 
@@ -68,7 +70,7 @@ public class MainBKeyRideControlFragment extends ParentFragment{
 	protected void InitValuables() {
 		// TODO Auto-generated method stub
 		super.InitValuables();
-		
+		RideControl = CAN1Comm.Get_RideControlOperationStatus_3447_PGN65527();
 	}
 	@Override
 	protected void InitButtonListener() {
@@ -120,17 +122,42 @@ public class MainBKeyRideControlFragment extends ParentFragment{
 		
 	}
 	/////////////////////////////////////////////////////////////////////	
+	public void RideControlDisplay(int Data){
+		switch (Data) {
+		case CAN1CommManager.DATA_STATE_KEY_RIDECONTROL_OFF:
+			radioOff.setChecked(true);
+			radioOnAlways.setChecked(false);
+			radioOnConditional.setChecked(false);
+			break;
+		case CAN1CommManager.DATA_STATE_KEY_RIDECONTROL_MANUAL:
+			radioOff.setChecked(false);
+			radioOnAlways.setChecked(true);
+			radioOnConditional.setChecked(false);
+			break;
+		case CAN1CommManager.DATA_STATE_KEY_RIDECONTROL_AUTO:
+			radioOff.setChecked(false);
+			radioOnAlways.setChecked(false);
+			radioOnConditional.setChecked(true);
+			break;
+		default:
+			break;
+		}
+	}
 	public void ClickOff(){
-		
+		CAN1Comm.Set_RideControlOperationStatus_3447_PGN65527(CAN1CommManager.DATA_STATE_KEY_RIDECONTROL_OFF);	// Off
+		CAN1Comm.TxCANToMCU(247);
+		ParentActivity._MainBBaseFragment.showKeytoDefaultScreenAnimation();
 	}
 	public void ClickOnAlways(){
-			
+		CAN1Comm.Set_RideControlOperationStatus_3447_PGN65527(CAN1CommManager.DATA_STATE_KEY_RIDECONTROL_MANUAL);	// Off
+		CAN1Comm.TxCANToMCU(247);
+		ParentActivity._MainBBaseFragment.showKeytoDefaultScreenAnimation();	
 	}
 	public void ClickOnConditional(){
 		ParentActivity._MainBBaseFragment.showRideControlSpeedAnimation();
 	}
 	public void ClickOK(){
-		
+		ParentActivity._MainBBaseFragment.showKeytoDefaultScreenAnimation();	
 	}
 	
 	

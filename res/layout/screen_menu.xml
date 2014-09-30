@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<AbsoluteLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/AbsoluteLayout_menu"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/black" >
+    
+	<ImageView
+        android:id="@+id/imageView_menu_title_bg"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/menu_title_bg" />
+	
+	<AbsoluteLayout
+	    android:id="@+id/AbsoluteLayout_menu_inter"
+	    android:layout_width="match_parent"
+	    android:layout_height="match_parent"
+	    android:visibility="invisible" >
+        
+        <FrameLayout
+            android:id="@+id/FrameLayout_menu_inter_title"
+            android:layout_width="800dp"
+            android:layout_height="83dp"
+            android:layout_x="0dp"
+            android:layout_y="0dp" >
+
+        </FrameLayout>
+        
+        <FrameLayout
+            android:id="@+id/FrameLayout_menu_inter_body"
+            android:layout_width="800dp"
+            android:layout_height="332dp"
+            android:layout_x="0dp"
+            android:layout_y="83dp" >
+
+        </FrameLayout>
+        
+        <FrameLayout
+            android:id="@+id/FrameLayout_menu_inter_low"
+            android:layout_width="800dp"
+            android:layout_height="65dp"
+            android:layout_x="0dp"
+            android:layout_y="415dp"
+            android:background="@drawable/menu_low_bg" >
+
+        </FrameLayout>
+
+    </AbsoluteLayout>
+	
+    <AbsoluteLayout
+        android:id="@+id/AbsoluteLayout_menu_list"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" >
+        
+        <FrameLayout
+            android:id="@+id/FrameLayout_menu_list_title"
+            android:layout_width="630dp"
+            android:layout_height="83dp"
+            android:layout_x="170dp"
+            android:layout_y="0dp" >
+
+        </FrameLayout>
+
+        <FrameLayout
+            android:id="@+id/FrameLayout_menu_list_left"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/menu_bg" >
+
+        </FrameLayout>
+        
+        <FrameLayout
+            android:id="@+id/FrameLayout_menu_list_body"
+            android:layout_width="630dp"
+            android:layout_height="397dp"
+            android:layout_x="170dp"
+            android:layout_y="83dp" >
+
+        </FrameLayout>
+
+    </AbsoluteLayout>
+
+    
+
+</AbsoluteLayout>

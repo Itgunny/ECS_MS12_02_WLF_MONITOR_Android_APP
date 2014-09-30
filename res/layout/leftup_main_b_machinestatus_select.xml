@@ -6,16 +6,15 @@
     android:background="@drawable/main_bg_left_up" >
     
     <RadioButton
-	    android:id="@+id/radioButton_leftup_main_b_machinestatus_select_hydtemp"
-	    android:layout_width="wrap_content"
-	    android:layout_height="wrap_content"
-	    android:layout_marginLeft="141dp"
-	    android:layout_marginTop="32dp"
-	    android:button="@drawable/_selector_radio_btn"
-	    android:text="@string/HYD_Temp"
-	    android:textColor="@drawable/_selector_radio_txt_white_amber"
-	    android:textSize="25sp"
-	    android:textStyle="bold" />
+        android:id="@+id/radioButton_leftup_main_b_machinestatus_select_hydtemp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="141dp"
+        android:layout_marginTop="32dp"
+        android:button="@drawable/_selector_radio_btn"
+        android:text="@string/HYD_Temp"
+        android:textColor="@drawable/_selector_radio_txt_white_amber"
+        android:textSize="25sp" />
     
     <RadioButton
         android:id="@+id/radioButton_leftup_main_b_machinestatus_select_tmoiltemp"
@@ -26,8 +25,7 @@
         android:button="@drawable/_selector_radio_btn"
         android:text="@string/TM_Oil_Temp"
         android:textColor="@drawable/_selector_radio_txt_white_amber"
-        android:textSize="25sp"
-        android:textStyle="bold" />
+        android:textSize="25sp" />
     
     <RadioButton
         android:id="@+id/radioButton_leftup_main_b_machinestatus_select_battery"
@@ -38,8 +36,7 @@
         android:button="@drawable/_selector_radio_btn"
         android:text="@string/Battery_Volt"
         android:textColor="@drawable/_selector_radio_txt_white_amber"
-        android:textSize="25sp"
-        android:textStyle="bold" />
+        android:textSize="25sp" />
     
     <RadioButton
         android:id="@+id/radioButton_leftup_main_b_machinestatus_select_weighing"
@@ -50,8 +47,7 @@
         android:button="@drawable/_selector_radio_btn"
         android:text="@string/Weighing_System"
         android:textColor="@drawable/_selector_radio_txt_white_amber"
-        android:textSize="25sp"
-        android:textStyle="bold" />
+        android:textSize="25sp" />
     
     <RadioButton
         android:id="@+id/radioButton_leftup_main_b_machinestatus_select_coolanttemp"
@@ -62,8 +58,7 @@
         android:button="@drawable/_selector_radio_btn"
         android:text="@string/Coolant_Temp"
         android:textColor="@drawable/_selector_radio_txt_white_amber"
-        android:textSize="25sp"
-        android:textStyle="bold" />
+        android:textSize="25sp" />
 
     <ImageView
         android:id="@+id/imageView_leftup_main_b_machinestatus_select_hydtemp"

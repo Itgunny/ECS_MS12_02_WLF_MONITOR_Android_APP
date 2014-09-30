@@ -47,14 +47,14 @@ public abstract class ParentPopup extends Dialog{
 		// TODO Auto-generated method stub
 		super.dismiss();
 		Log.d(TAG,"dismiss");
-		threadRead.interrupt();
+//		threadRead.interrupt();
 	}
 	
 	public void InitValuable(){
 		CAN1Comm = CAN1CommManager.getInstance();	
 
-		threadRead = new Thread(new ReadThread(this));
-		threadRead.start();
+//		threadRead = new Thread(new ReadThread(this));
+//		threadRead.start();
 	}
 	
 

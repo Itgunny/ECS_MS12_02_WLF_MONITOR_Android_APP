@@ -55,6 +55,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AbsoluteLayout;
 import android.widget.FrameLayout;
+import android.widget.ImageView;
 
 public class MainBBaseFragment extends ParentFragment{
 	//CONSTANT////////////////////////////////////////
@@ -63,6 +64,8 @@ public class MainBBaseFragment extends ParentFragment{
 	//////////////////////////////////////////////////
 	//RESOURCE////////////////////////////////////////
 	AbsoluteLayout LayoutBody;
+	AbsoluteLayout LayoutTop;
+	AbsoluteLayout LayoutKey;
 	
 	FrameLayout framelayoutCenter;
 	FrameLayout framelayoutLeftUp;
@@ -74,6 +77,14 @@ public class MainBBaseFragment extends ParentFragment{
 	FrameLayout framelayoutVirtualKey;
 	FrameLayout framelayoutKeyTitle;
 	FrameLayout framelayoutKeyBody;
+	
+	ImageView imgViewKeyTitleBG;
+	ImageView imgViewKeyBodyBG;
+	ImageView imgViewCenterBG;
+	ImageView imgViewRightUpBG;
+	ImageView imgViewRightDownBG;
+	ImageView imgViewLeftUp;
+	ImageView imgViewLeftDown;
 	//////////////////////////////////////////////////
 	
 	//VALUABLE////////////////////////////////////////
@@ -151,6 +162,12 @@ public class MainBBaseFragment extends ParentFragment{
 	public LeftRightShiftAnimation _LeftDownShiftAnimation;
 	public LeftRightShiftAnimation _KeyTitleShiftAnimation;
 	public LeftRightShiftAnimation _KeyBodyShiftAnimation;
+	public LeftRightShiftAnimation _KeyTitleBGShiftAnimation;
+	public LeftRightShiftAnimation _KeyBodyBGShiftAnimation;
+	public LeftRightShiftAnimation _RightUpBGShiftAnimation;
+	public LeftRightShiftAnimation _RightDownBGShiftAnimation;
+	public LeftRightShiftAnimation _LeftUpBGShiftAnimation;
+	public LeftRightShiftAnimation _LeftDownBGShiftAnimation;
 	
 	public DisappearAnimation _CenterDisappearAnimation; 
 	public DisappearAnimation _RightUpDisappearAnimation;
@@ -159,6 +176,16 @@ public class MainBBaseFragment extends ParentFragment{
 	public DisappearAnimation _LeftDownDisappearAnimation;
 	public DisappearAnimation _KeyTitleDisappearAnimation;
 	public DisappearAnimation _KeyBodyDisappearAnimation;
+	public DisappearAnimation _KeyTitleBGDisappearAnimation;
+	public DisappearAnimation _KeyBodyBGDisappearAnimation;
+	public DisappearAnimation _BodyDisappearAnimation;
+	public DisappearAnimation _KeyDisappearAnimation;
+	public DisappearAnimation _RightUpBGDisappearAnimation;
+	public DisappearAnimation _RightDownBGDisappearAnimation;
+	public DisappearAnimation _LeftUpBGDisappearAnimation;
+	public DisappearAnimation _LeftDownBGDisappearAnimation;
+	public DisappearAnimation _CenterBGDisappearAnimation;
+	public DisappearAnimation _VirtualKeyDisappearAnimation;
 	
 	public AppearAnimation _CenterAppearAnimation;
 	public AppearAnimation _RightUpAppearAnimation;
@@ -167,6 +194,16 @@ public class MainBBaseFragment extends ParentFragment{
 	public AppearAnimation _LeftDownAppearAnimation;
 	public AppearAnimation _KeyTitleAppearAnimation;
 	public AppearAnimation _KeyBodyAppearAnimation;
+	public AppearAnimation _KeyTitleBGAppearAnimation;
+	public AppearAnimation _KeyBodyBGAppearAnimation;
+	public AppearAnimation _BodyAppearAnimation;
+	public AppearAnimation _KeyAppearAnimation;
+	public AppearAnimation _RightUpBGAppearAnimation;
+	public AppearAnimation _RightDownBGAppearAnimation;
+	public AppearAnimation _LeftUpBGAppearAnimation;
+	public AppearAnimation _LeftDownBGAppearAnimation;
+	public AppearAnimation _CenterBGAppearAnimation;
+	public AppearAnimation _VirtualKeyAppearAnimation;
 	///////////////////////////////////////////////////
 	
 	//TEST////////////////////////////////////////////
@@ -194,6 +231,16 @@ public class MainBBaseFragment extends ParentFragment{
 		showLeftUpMachineStatus();
 		showUpperMenuBar();
 		showVirtualKey();
+
+		_BodyAppearAnimation.StartAnimation();
+		_RightUpShiftAnimation.StartShiftAnimation();
+		_RightDownShiftAnimation.StartShiftAnimation();
+		_LeftUpShiftAnimation.StartShiftAnimation();
+		_LeftDownShiftAnimation.StartShiftAnimation();
+		_RightUpBGShiftAnimation.StartShiftAnimation();
+		_RightDownBGShiftAnimation.StartShiftAnimation();
+		_LeftUpBGShiftAnimation.StartShiftAnimation();
+		_LeftDownBGShiftAnimation.StartShiftAnimation();
 		
 		ParentActivity.ScreenIndex = ParentActivity.SCREEN_STATE_MAIN_B_TOP;
 		return mRoot;
@@ -208,6 +255,8 @@ public class MainBBaseFragment extends ParentFragment{
 	protected void InitResource() {
 		// TODO Auto-generated method stub
 		LayoutBody = (AbsoluteLayout)mRoot.findViewById(R.id.AbsoluteLayout_screen_main_b_body);
+		LayoutTop = (AbsoluteLayout)mRoot.findViewById(R.id.AbsoluteLayout_screen_main_b);
+		LayoutKey = (AbsoluteLayout)mRoot.findViewById(R.id.AbsoluteLayout_screen_main_b_key);
 		
 		framelayoutCenter = (FrameLayout)mRoot.findViewById(R.id.FrameLayout_screen_main_b_center);
 		framelayoutLeftUp = (FrameLayout)mRoot.findViewById(R.id.FrameLayout_screen_main_b_leftup);
@@ -219,6 +268,19 @@ public class MainBBaseFragment extends ParentFragment{
 		framelayoutVirtualKey = (FrameLayout)mRoot.findViewById(R.id.FrameLayout_screen_main_b_virtualkey);
 		framelayoutKeyTitle = (FrameLayout)mRoot.findViewById(R.id.FrameLayout_screen_main_b_key_title);
 		framelayoutKeyBody = (FrameLayout)mRoot.findViewById(R.id.FrameLayout_screen_main_b_key_body);
+		
+		imgViewKeyTitleBG = (ImageView)mRoot.findViewById(R.id.imageView_screen_main_b_key_title_bg);
+		imgViewKeyBodyBG = (ImageView)mRoot.findViewById(R.id.imageView_screen_main_b_key_body_bg);
+		
+		imgViewCenterBG = (ImageView)mRoot.findViewById(R.id.imageView_screen_main_b_center_bg);
+		imgViewRightUpBG = (ImageView)mRoot.findViewById(R.id.imageView_screen_main_b_rightup_bg);
+		imgViewRightDownBG = (ImageView)mRoot.findViewById(R.id.imageView_screen_main_b_rightdown_bg);
+		imgViewLeftUp = (ImageView)mRoot.findViewById(R.id.imageView_screen_main_b_leftup_bg);
+		imgViewLeftDown = (ImageView)mRoot.findViewById(R.id.imageView_screen_main_b_leftdown_bg);
+		
+		
+		ImageView imgViewKeyTitleBG;
+		ImageView imgViewKeyBodyBG;
 		
 		framelayoutKeyTitle.setVisibility(View.INVISIBLE);
 		framelayoutKeyBody.setVisibility(View.INVISIBLE);
@@ -297,7 +359,17 @@ public class MainBBaseFragment extends ParentFragment{
 		_LeftDownShiftAnimation = new LeftRightShiftAnimation(ParentActivity, framelayoutLeftDown,-600,400);
 		_KeyTitleShiftAnimation = new LeftRightShiftAnimation(ParentActivity, framelayoutKeyTitle,-400,0);
 		_KeyBodyShiftAnimation = new LeftRightShiftAnimation(ParentActivity, framelayoutKeyBody,1800,0);
-		
+		_KeyTitleBGShiftAnimation = new LeftRightShiftAnimation(ParentActivity, imgViewKeyTitleBG,-400,0);
+		_KeyBodyBGShiftAnimation = new LeftRightShiftAnimation(ParentActivity, imgViewKeyBodyBG,1800,0);
+		_RightUpBGShiftAnimation = new LeftRightShiftAnimation(ParentActivity, imgViewRightUpBG,600,-400);
+		_RightDownBGShiftAnimation = new LeftRightShiftAnimation(ParentActivity, imgViewRightDownBG,600,400);
+		_LeftUpBGShiftAnimation = new LeftRightShiftAnimation(ParentActivity, imgViewLeftUp,-600,-400);
+		_LeftDownBGShiftAnimation = new LeftRightShiftAnimation(ParentActivity, imgViewLeftDown,-600,400);
+		_RightUpShiftAnimation = new LeftRightShiftAnimation(ParentActivity, framelayoutRightUp,600,-400);
+		_RightDownShiftAnimation = new LeftRightShiftAnimation(ParentActivity, framelayoutRightDown,600,400);
+		_LeftUpShiftAnimation = new LeftRightShiftAnimation(ParentActivity, framelayoutLeftUp,-600,-400);
+		_LeftDownShiftAnimation = new LeftRightShiftAnimation(ParentActivity, framelayoutLeftDown,-600,400);
+
 		_CenterDisappearAnimation = new DisappearAnimation(ParentActivity, framelayoutCenter);
 		_RightUpDisappearAnimation = new DisappearAnimation(ParentActivity, framelayoutRightUp);
 		_RightDownDisappearAnimation = new DisappearAnimation(ParentActivity, framelayoutRightDown);
@@ -305,6 +377,16 @@ public class MainBBaseFragment extends ParentFragment{
 		_LeftDownDisappearAnimation = new DisappearAnimation(ParentActivity, framelayoutLeftDown);
 		_KeyTitleDisappearAnimation = new DisappearAnimation(ParentActivity, framelayoutKeyTitle);
 		_KeyBodyDisappearAnimation = new DisappearAnimation(ParentActivity, framelayoutKeyBody);
+		_KeyTitleBGDisappearAnimation = new DisappearAnimation(ParentActivity, imgViewKeyTitleBG);
+		_KeyBodyBGDisappearAnimation = new DisappearAnimation(ParentActivity, imgViewKeyBodyBG);
+		_BodyDisappearAnimation = new DisappearAnimation(ParentActivity, LayoutBody);
+		_KeyDisappearAnimation = new DisappearAnimation(ParentActivity, LayoutKey);
+		_RightUpBGDisappearAnimation = new DisappearAnimation(ParentActivity, imgViewRightUpBG);
+		_RightDownBGDisappearAnimation = new DisappearAnimation(ParentActivity, imgViewRightDownBG);
+		_LeftUpBGDisappearAnimation = new DisappearAnimation(ParentActivity, imgViewLeftUp);
+		_LeftDownBGDisappearAnimation = new DisappearAnimation(ParentActivity, imgViewLeftDown);
+		_CenterBGDisappearAnimation = new DisappearAnimation(ParentActivity, imgViewCenterBG);
+		_VirtualKeyDisappearAnimation = new DisappearAnimation(ParentActivity, framelayoutVirtualKey);
 		
 		_CenterAppearAnimation = new AppearAnimation(ParentActivity, framelayoutCenter);
 		_RightUpAppearAnimation = new AppearAnimation(ParentActivity, framelayoutRightUp);
@@ -313,12 +395,24 @@ public class MainBBaseFragment extends ParentFragment{
 		_LeftDownAppearAnimation = new AppearAnimation(ParentActivity, framelayoutLeftDown);
 		_KeyTitleAppearAnimation = new AppearAnimation(ParentActivity, framelayoutKeyTitle);
 		_KeyBodyAppearAnimation = new AppearAnimation(ParentActivity, framelayoutKeyBody);
+		_KeyTitleBGAppearAnimation = new AppearAnimation(ParentActivity, imgViewKeyTitleBG);
+		_KeyBodyBGAppearAnimation = new AppearAnimation(ParentActivity, imgViewKeyBodyBG);
+		_BodyAppearAnimation = new AppearAnimation(ParentActivity, LayoutBody);
+		_KeyAppearAnimation = new AppearAnimation(ParentActivity, LayoutKey);
+		_RightUpBGAppearAnimation = new AppearAnimation(ParentActivity, imgViewRightUpBG);
+		_RightDownBGAppearAnimation = new AppearAnimation(ParentActivity, imgViewRightDownBG);
+		_LeftUpBGAppearAnimation = new AppearAnimation(ParentActivity, imgViewLeftUp);
+		_LeftDownBGAppearAnimation = new AppearAnimation(ParentActivity, imgViewLeftDown);
+		_CenterBGAppearAnimation = new AppearAnimation(ParentActivity, imgViewCenterBG);
+		_VirtualKeyAppearAnimation = new AppearAnimation(ParentActivity, framelayoutVirtualKey);
+		
+	
 		
 	}
 	@Override
 	protected void InitButtonListener() {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
@@ -600,7 +694,9 @@ public class MainBBaseFragment extends ParentFragment{
 	/////////////////////////////////////////////////////////////////////
 	public void showDefaultScreenAnimation(){
 		ParentActivity.ScreenIndex = ParentActivity.SCREEN_STATE_MAIN_B_TOP;
+		
 		_MainBodyShiftAnimation.StartShiftZeroAnimation();
+		
 		CenterAnimation.StartChangeAnimation(_MainBCenterFragment);
 		RightUpChangeAnimation.StartChangeAnimation(_MainBRightUpEngineFragment);
 		RightDownChangeAnimation.StartChangeAnimation(_MainBRightDownTMFragment);
@@ -612,13 +708,182 @@ public class MainBBaseFragment extends ParentFragment{
 		_RightDownShiftAnimation.StartShiftAnimation();
 		_LeftUpShiftAnimation.StartShiftAnimation();
 		_LeftDownShiftAnimation.StartShiftAnimation();
+		_RightUpBGShiftAnimation.StartShiftAnimation();
+		_RightDownBGShiftAnimation.StartShiftAnimation();
+		_LeftUpBGShiftAnimation.StartShiftAnimation();
+		_LeftDownBGShiftAnimation.StartShiftAnimation();
 		
 		KeyTitleChangeAnimation.StartDisappearAnimation();
 		KeyBodyChangeAnimation.StartDisappearAnimation();
+
+		
+		_MainBIndicatorFragment.EnableVirtualKey();
+		
+		
+	}
+	
+	public void showRightUptoDefaultScreenAnimation(){
+		ParentActivity.ScreenIndex = ParentActivity.SCREEN_STATE_MAIN_B_TOP;
+		
+		_MainBodyShiftAnimation.StartShiftZeroAnimation();
+		
+		CenterAnimation.StartChangeAnimation(_MainBCenterFragment);
+		RightUpChangeAnimation.StartChangeAnimation(_MainBRightUpEngineFragment);
+		
+		
+		_RightDownAppearAnimation.StartAnimation();
+		_LeftUpAppearAnimation.StartAnimation();
+		_LeftDownAppearAnimation.StartAnimation();
+		
+		_CenterBGAppearAnimation.StartAnimation();
+		_RightDownBGAppearAnimation.StartAnimation();
+		_LeftUpBGAppearAnimation.StartAnimation();
+		_LeftDownBGAppearAnimation.StartAnimation();
+		
+		_VirtualKeyAppearAnimation.StartAnimation();
+		
+		
+		_RightDownShiftAnimation.StartShiftAnimation();
+		_LeftUpShiftAnimation.StartShiftAnimation();
+		_LeftDownShiftAnimation.StartShiftAnimation();
+		_RightDownBGShiftAnimation.StartShiftAnimation();
+		_LeftUpBGShiftAnimation.StartShiftAnimation();
+		_LeftDownBGShiftAnimation.StartShiftAnimation();
+				
+			
+		_MainBIndicatorFragment.EnableVirtualKey();
+		
+		
+	}
+	public void showRightDowntoDefaultScreenAnimation(){
+		ParentActivity.ScreenIndex = ParentActivity.SCREEN_STATE_MAIN_B_TOP;
+		
+		_MainBodyShiftAnimation.StartShiftZeroAnimation();
+		
+		CenterAnimation.StartChangeAnimation(_MainBCenterFragment);
+		RightDownChangeAnimation.StartChangeAnimation(_MainBRightDownTMFragment);
+		
+		
+		_RightUpAppearAnimation.StartAnimation();
+		_LeftUpAppearAnimation.StartAnimation();
+		_LeftDownAppearAnimation.StartAnimation();
+		
+		_CenterBGAppearAnimation.StartAnimation();
+		_RightUpBGAppearAnimation.StartAnimation();
+		_LeftUpBGAppearAnimation.StartAnimation();
+		_LeftDownBGAppearAnimation.StartAnimation();
+		_VirtualKeyAppearAnimation.StartAnimation();
+		
+		_RightUpShiftAnimation.StartShiftAnimation();
+		_LeftUpShiftAnimation.StartShiftAnimation();
+		_LeftDownShiftAnimation.StartShiftAnimation();
+		
+		_RightUpBGShiftAnimation.StartShiftAnimation();
+		_LeftUpBGShiftAnimation.StartShiftAnimation();
+		_LeftDownBGShiftAnimation.StartShiftAnimation();
+				
+			
+		_MainBIndicatorFragment.EnableVirtualKey();
+		
+		
+	}
+	
+	public void showLeftDowntoDefaultScreenAnimation(){
+		ParentActivity.ScreenIndex = ParentActivity.SCREEN_STATE_MAIN_B_TOP;
+		
+		_MainBodyShiftAnimation.StartShiftZeroAnimation();
+		
+		CenterAnimation.StartChangeAnimation(_MainBCenterFragment);
+		LeftDownChangeAnimation.StartChangeAnimation(_MainBLeftDownHourOdoFragment);
+		
+		
+		_RightUpAppearAnimation.StartAnimation();
+		_LeftUpAppearAnimation.StartAnimation();
+		_RightDownAppearAnimation.StartAnimation();
+		
+		_CenterBGAppearAnimation.StartAnimation();
+		_RightUpBGAppearAnimation.StartAnimation();
+		_LeftUpBGAppearAnimation.StartAnimation();
+		_RightDownBGAppearAnimation.StartAnimation();
+		
+		_VirtualKeyAppearAnimation.StartAnimation();
+		
+		_RightUpShiftAnimation.StartShiftAnimation();
+		_LeftUpShiftAnimation.StartShiftAnimation();
+		_RightDownShiftAnimation.StartShiftAnimation();
+		
+		_RightUpBGShiftAnimation.StartShiftAnimation();
+		_LeftUpBGShiftAnimation.StartShiftAnimation();
+		_RightDownBGShiftAnimation.StartShiftAnimation();
+				
+			
+		_MainBIndicatorFragment.EnableVirtualKey();
+		
+		
+	}
+	public void showLeftUptoDefaultScreenAnimation(){
+		ParentActivity.ScreenIndex = ParentActivity.SCREEN_STATE_MAIN_B_TOP;
+		
+		_MainBodyShiftAnimation.StartShiftZeroAnimation();
+		
+		CenterAnimation.StartChangeAnimation(_MainBCenterFragment);
+		LeftUpChangeAnimation.StartChangeAnimation(_MainBLeftUpMachineStatusFragment);
+		
+		
+		_RightUpAppearAnimation.StartAnimation();
+		_LeftDownAppearAnimation.StartAnimation();
+		_RightDownAppearAnimation.StartAnimation();
+		
+		_CenterBGAppearAnimation.StartAnimation();
+		_RightUpBGAppearAnimation.StartAnimation();
+		_LeftDownBGAppearAnimation.StartAnimation();
+		_RightDownBGAppearAnimation.StartAnimation();
+		
+		_VirtualKeyAppearAnimation.StartAnimation();
+		
+		_RightUpShiftAnimation.StartShiftAnimation();
+		_LeftDownShiftAnimation.StartShiftAnimation();
+		_RightDownShiftAnimation.StartShiftAnimation();
+		
+		_RightUpBGShiftAnimation.StartShiftAnimation();
+		_LeftDownBGShiftAnimation.StartShiftAnimation();
+		_RightDownBGShiftAnimation.StartShiftAnimation();
+				
+			
+		_MainBIndicatorFragment.EnableVirtualKey();
+		
+		
+	}
+	
+	public void showKeytoDefaultScreenAnimation(){
+		ParentActivity.ScreenIndex = ParentActivity.SCREEN_STATE_MAIN_B_TOP;
+		_MainBodyShiftAnimation.StartShiftZeroAnimation();
+		
+		_BodyAppearAnimation.StartAnimation();
+		_KeyDisappearAnimation.StartAnimation();
+		
+		CenterAnimation.StartChangeAnimation(_MainBCenterFragment);
+		RightUpChangeAnimation.StartChangeAnimation(_MainBRightUpEngineFragment);
+		RightDownChangeAnimation.StartChangeAnimation(_MainBRightDownTMFragment);
+		LeftUpChangeAnimation.StartChangeAnimation(_MainBLeftUpMachineStatusFragment);
+		LeftDownChangeAnimation.StartChangeAnimation(_MainBLeftDownHourOdoFragment);
+		VirtualKeyChangeAnimation.StartChangeAnimation(_MainBVirtualKeyFragment);
+		
+		_RightUpShiftAnimation.StartShiftAnimation();
+		_RightDownShiftAnimation.StartShiftAnimation();
+		_LeftUpShiftAnimation.StartShiftAnimation();
+		_LeftDownShiftAnimation.StartShiftAnimation();
+		_RightUpBGShiftAnimation.StartShiftAnimation();
+		_RightDownBGShiftAnimation.StartShiftAnimation();
+		_LeftUpBGShiftAnimation.StartShiftAnimation();
+		_LeftDownBGShiftAnimation.StartShiftAnimation();
+		
+		KeyTitleChangeAnimation.StartDisappearAnimation();
+		KeyBodyChangeAnimation.StartDisappearAnimation();
+
 		
 		_MainBIndicatorFragment.EnableVirtualKey();
 	}
-	
 	public void showQuickScreenAnimation(){
 		
 		_MainBodyShiftAnimation.StartShiftZeroAnimation();
@@ -634,6 +899,10 @@ public class MainBBaseFragment extends ParentFragment{
 		_RightDownShiftAnimation.StartShiftAnimation();
 		_LeftUpShiftAnimation.StartShiftAnimation();
 		_LeftDownShiftAnimation.StartShiftAnimation();
+		_RightUpBGShiftAnimation.StartShiftAnimation();
+		_RightDownBGShiftAnimation.StartShiftAnimation();
+		_LeftUpBGShiftAnimation.StartShiftAnimation();
+		_LeftDownBGShiftAnimation.StartShiftAnimation();
 		
 		KeyTitleChangeAnimation.StartDisappearAnimation();
 		KeyBodyChangeAnimation.StartDisappearAnimation();
@@ -643,129 +912,189 @@ public class MainBBaseFragment extends ParentFragment{
 	
 	public void showKeyScreenAnimation(){
 		
-		_CenterDisappearAnimation.StartAnimation();
-		_RightUpDisappearAnimation.StartAnimation();
-		_RightDownDisappearAnimation.StartAnimation();
-		_LeftUpDisappearAnimation.StartAnimation();
-		_LeftDownDisappearAnimation.StartAnimation();
+		if((ParentActivity.ScreenIndex & ParentActivity.SCREEN_STATE_MAIN_B_KEY_TOP) != ParentActivity.SCREEN_STATE_MAIN_B_KEY_TOP){
+			_BodyDisappearAnimation.StartAnimation();
+			_KeyAppearAnimation.StartAnimation();
+			_KeyTitleShiftAnimation.StartShiftAnimation();
+			_KeyBodyShiftAnimation.StartShiftAnimation();
+			_KeyTitleBGAppearAnimation.StartAnimation();
+			_KeyBodyBGAppearAnimation.StartAnimation();
+			_KeyTitleBGShiftAnimation.StartShiftAnimation();
+			_KeyBodyBGShiftAnimation.StartShiftAnimation();
+			VirtualKeyChangeAnimation.StartDisappearAnimation();
+			
+			_MainBIndicatorFragment.DisableVirtualKey();
+		}else{
+
+		}
 		
-		_KeyTitleAppearAnimation.StartAnimation();
-		_KeyBodyAppearAnimation.StartAnimation();
 		
-		_KeyTitleShiftAnimation.StartShiftAnimation();
-		_KeyBodyShiftAnimation.StartShiftAnimation();
 		
-		VirtualKeyChangeAnimation.StartDisappearAnimation();
-		
-		_MainBIndicatorFragment.DisableVirtualKey();
 		Log.d(TAG,"showKeyScreenAnimation");
 		
 	}
 	public void showMainLightAnimation(){
+		ParentActivity.StartAnimationRunningTimer();
 		showKeyScreenAnimation();
+		ParentActivity.ScreenIndex = ParentActivity.SCREEN_STATE_MAIN_B_KEY_MAINLIGHT;
+		_MainBKeyTitleFragment = new MainBKeyTitleFragment();
+		_MainBKeyMainLightFragment = new MainBKeyMainLightFragment();
+		
 		_MainBKeyTitleFragment.setTitleIcon(ParentActivity.getResources().getDrawable(R.drawable.main_key_title_mainlight));
 		_MainBKeyTitleFragment.setTitleText(ParentActivity.getResources().getString(string.Main_Light));
 		KeyTitleChangeAnimation.StartChangeAnimation(_MainBKeyTitleFragment);
 		KeyBodyChangeAnimation.StartChangeAnimation(_MainBKeyMainLightFragment);
 	}
 	public void showWorkLightAnimation(){
+		ParentActivity.StartAnimationRunningTimer();
 		showKeyScreenAnimation();
+		ParentActivity.ScreenIndex = ParentActivity.SCREEN_STATE_MAIN_B_KEY_WORKLIGHT;
+		_MainBKeyTitleFragment = new MainBKeyTitleFragment();
+		_MainBKeyWorkLightFragment = new MainBKeyWorkLightFragment();
 		_MainBKeyTitleFragment.setTitleIcon(ParentActivity.getResources().getDrawable(R.drawable.main_key_title_worklight));
 		_MainBKeyTitleFragment.setTitleText(ParentActivity.getResources().getString(string.Work_Light));
 		KeyTitleChangeAnimation.StartChangeAnimation(_MainBKeyTitleFragment);
 		KeyBodyChangeAnimation.StartChangeAnimation(_MainBKeyWorkLightFragment);
 	}
 	public void showAutoGreaseAnimation(){
+		ParentActivity.StartAnimationRunningTimer();
 		showKeyScreenAnimation();
+		ParentActivity.ScreenIndex = ParentActivity.SCREEN_STATE_MAIN_B_KEY_AUTOGREASE;
+		_MainBKeyTitleFragment = new MainBKeyTitleFragment();
+		_MainBKeyAutoGreaseFragment = new MainBKeyAutoGreaseFragment();
 		_MainBKeyTitleFragment.setTitleIcon(ParentActivity.getResources().getDrawable(R.drawable.main_key_title_auto_grease));
 		_MainBKeyTitleFragment.setTitleText(ParentActivity.getResources().getString(string.Auto_Grease));
 		KeyTitleChangeAnimation.StartChangeAnimation(_MainBKeyTitleFragment);
 		KeyBodyChangeAnimation.StartChangeAnimation(_MainBKeyAutoGreaseFragment);
 	}
 	public void showQuickCouplerAnimation(){
+		ParentActivity.StartAnimationRunningTimer();
 		showKeyScreenAnimation();
+		ParentActivity.ScreenIndex = ParentActivity.SCREEN_STATE_MAIN_B_KEY_QUICKCOUPLER;
+		_MainBKeyTitleFragment = new MainBKeyTitleFragment();
+		_MainBKeyQuickCouplerFragment = new MainBKeyQuickCouplerFragment();
 		_MainBKeyTitleFragment.setTitleIcon(ParentActivity.getResources().getDrawable(R.drawable.main_key_title_quick));
 		_MainBKeyTitleFragment.setTitleText(ParentActivity.getResources().getString(string.Quick_Coupler));
 		KeyTitleChangeAnimation.StartChangeAnimation(_MainBKeyTitleFragment);
 		KeyBodyChangeAnimation.StartChangeAnimation(_MainBKeyQuickCouplerFragment);
 	}
 	public void showRideControlAnimation(){
+		ParentActivity.StartAnimationRunningTimer();
 		showKeyScreenAnimation();
+		ParentActivity.ScreenIndex = ParentActivity.SCREEN_STATE_MAIN_B_KEY_RIDECONTROL;
+		_MainBKeyTitleFragment = new MainBKeyTitleFragment();
+		_MainBKeyRideControlFragment = new MainBKeyRideControlFragment();
 		_MainBKeyTitleFragment.setTitleIcon(ParentActivity.getResources().getDrawable(R.drawable.main_key_title_ridecontrol));
 		_MainBKeyTitleFragment.setTitleText(ParentActivity.getResources().getString(string.Ride_Control));
 		KeyTitleChangeAnimation.StartChangeAnimation(_MainBKeyTitleFragment);
 		KeyBodyChangeAnimation.StartChangeAnimation(_MainBKeyRideControlFragment);
 	}
 	public void showWorkLoadAnimation(){
+		ParentActivity.StartAnimationRunningTimer();
 		showKeyScreenAnimation();
+		ParentActivity.ScreenIndex = ParentActivity.SCREEN_STATE_MAIN_B_KEY_WORKLOAD;
+		_MainBKeyTitleFragment = new MainBKeyTitleFragment();
+		_MainBKeyWorkLoadFragment = new MainBKeyWorkLoadFragment();
 		_MainBKeyTitleFragment.setTitleIcon(ParentActivity.getResources().getDrawable(R.drawable.main_key_title_workmode));
 		_MainBKeyTitleFragment.setTitleText(ParentActivity.getResources().getString(string.Work_Load));
 		KeyTitleChangeAnimation.StartChangeAnimation(_MainBKeyTitleFragment);
 		KeyBodyChangeAnimation.StartChangeAnimation(_MainBKeyWorkLoadFragment);
 	}
 	public void showBeaconLampAnimation(){
+		ParentActivity.StartAnimationRunningTimer();
 		showKeyScreenAnimation();
+		ParentActivity.ScreenIndex = ParentActivity.SCREEN_STATE_MAIN_B_KEY_BEACONLAMP;
+		_MainBKeyTitleFragment = new MainBKeyTitleFragment();
+		_MainBKeyBeaconLampFragment = new MainBKeyBeaconLampFragment();
 		_MainBKeyTitleFragment.setTitleIcon(ParentActivity.getResources().getDrawable(R.drawable.main_key_title_beacon));
 		_MainBKeyTitleFragment.setTitleText(ParentActivity.getResources().getString(string.Beacon_Lamp));
 		KeyTitleChangeAnimation.StartChangeAnimation(_MainBKeyTitleFragment);
 		KeyBodyChangeAnimation.StartChangeAnimation(_MainBKeyBeaconLampFragment);
 	}
 	public void showRearWiperAnimation(){
+		ParentActivity.StartAnimationRunningTimer();
 		showKeyScreenAnimation();
+		ParentActivity.ScreenIndex = ParentActivity.SCREEN_STATE_MAIN_B_KEY_REARWIPER;
+		_MainBKeyTitleFragment = new MainBKeyTitleFragment();
+		_MainBKeyRearWiperFragment = new MainBKeyRearWiperFragment();
 		_MainBKeyTitleFragment.setTitleIcon(ParentActivity.getResources().getDrawable(R.drawable.main_key_title_rearwiper));
 		_MainBKeyTitleFragment.setTitleText(ParentActivity.getResources().getString(string.Rear_Wiper));
 		KeyTitleChangeAnimation.StartChangeAnimation(_MainBKeyTitleFragment);
 		KeyBodyChangeAnimation.StartChangeAnimation(_MainBKeyRearWiperFragment);
 	}
 	public void showMirrorHeatAnimation(){
+		ParentActivity.StartAnimationRunningTimer();
 		showKeyScreenAnimation();
+		ParentActivity.ScreenIndex = ParentActivity.SCREEN_STATE_MAIN_B_KEY_MIRRORHEAT;
+		_MainBKeyTitleFragment = new MainBKeyTitleFragment();
+		_MainBKeyMirrorHeatFragment = new MainBKeyMirrorHeatFragment();
 		_MainBKeyTitleFragment.setTitleIcon(ParentActivity.getResources().getDrawable(R.drawable.main_key_title_mirror));
 		_MainBKeyTitleFragment.setTitleText(ParentActivity.getResources().getString(string.Mirror_Heat));
 		KeyTitleChangeAnimation.StartChangeAnimation(_MainBKeyTitleFragment);
 		KeyBodyChangeAnimation.StartChangeAnimation(_MainBKeyMirrorHeatFragment);
 	}
 	public void showDetentAnimation(){
+		ParentActivity.StartAnimationRunningTimer();
 		showKeyScreenAnimation();
+		ParentActivity.ScreenIndex = ParentActivity.SCREEN_STATE_MAIN_B_KEY_DETENT;
+		_MainBKeyTitleFragment = new MainBKeyTitleFragment();
+		_MainBKeyDetentFragment = new MainBKeyDetentFragment();
 		_MainBKeyTitleFragment.setTitleIcon(ParentActivity.getResources().getDrawable(R.drawable.main_key_title_autoposition));
 		_MainBKeyTitleFragment.setTitleText(ParentActivity.getResources().getString(string.Detent_Setting));
 		KeyTitleChangeAnimation.StartChangeAnimation(_MainBKeyTitleFragment);
 		KeyBodyChangeAnimation.StartChangeAnimation(_MainBKeyDetentFragment);
 	}
 	public void showFineModulationAnimation(){
+		ParentActivity.StartAnimationRunningTimer();
 		showKeyScreenAnimation();
+		ParentActivity.ScreenIndex = ParentActivity.SCREEN_STATE_MAIN_B_KEY_FINEMODULATION;
+		_MainBKeyTitleFragment = new MainBKeyTitleFragment();
+		_MainBKeyFineModulationFragment = new MainBKeyFineModulationFragment();
 		_MainBKeyTitleFragment.setTitleIcon(ParentActivity.getResources().getDrawable(R.drawable.main_key_title_fine));
 		_MainBKeyTitleFragment.setTitleText(ParentActivity.getResources().getString(string.Fine_Modulation));
 		KeyTitleChangeAnimation.StartChangeAnimation(_MainBKeyTitleFragment);
 		KeyBodyChangeAnimation.StartChangeAnimation(_MainBKeyFineModulationFragment);
 	}
 	public void showWorkLoadAccumulationAnimation(){
-	//	showKeyScreenAnimation();
+		ParentActivity.StartAnimationRunningTimer();
+//		showKeyScreenAnimation();
+		ParentActivity.ScreenIndex = ParentActivity.SCREEN_STATE_MAIN_B_KEY_WORKLOAD_ACCUMULATION;
+		_MainBKeyWorkLoadAccumulationFragment = new MainBKeyWorkLoadAccumulationFragment();
 		_MainBKeyTitleFragment.setTitleIcon(ParentActivity.getResources().getDrawable(R.drawable.main_key_title_workmode));
 		_MainBKeyTitleFragment.setTitleText(ParentActivity.getResources().getString(string.Work_Load));
 	//	KeyTitleChangeAnimation.StartChangeAnimation(_MainBKeyTitleFragment);
 		KeyBodyChangeAnimation.StartChangeAnimation(_MainBKeyWorkLoadAccumulationFragment);
 	}
 	public void showWorkLoadDisplayAnimation(){
-	//	showKeyScreenAnimation();
+		ParentActivity.StartAnimationRunningTimer();
+//		showKeyScreenAnimation();
+		ParentActivity.ScreenIndex = ParentActivity.SCREEN_STATE_MAIN_B_KEY_WORKLOAD_DISPLAY;
+		_MainBKeyWorkLoadDisplayFragment = new MainBKeyWorkLoadDisplayFragment();
 		_MainBKeyTitleFragment.setTitleIcon(ParentActivity.getResources().getDrawable(R.drawable.main_key_title_workmode));
 		_MainBKeyTitleFragment.setTitleText(ParentActivity.getResources().getString(string.Work_Load));
 	//	KeyTitleChangeAnimation.StartChangeAnimation(_MainBKeyTitleFragment);
 		KeyBodyChangeAnimation.StartChangeAnimation(_MainBKeyWorkLoadDisplayFragment);
 	}
 	public void showWorkLoadErrorDetectionAnimation(){
-	//	showKeyScreenAnimation();
+		ParentActivity.StartAnimationRunningTimer();
+//		showKeyScreenAnimation();
+		ParentActivity.ScreenIndex = ParentActivity.SCREEN_STATE_MAIN_B_KEY_WORKLOAD_ERRORDETECT;
+		_MainBKeyWorkLoadErrorDetectionFragment = new MainBKeyWorkLoadErrorDetectionFragment();
 		_MainBKeyTitleFragment.setTitleIcon(ParentActivity.getResources().getDrawable(R.drawable.main_key_title_workmode));
 		_MainBKeyTitleFragment.setTitleText(ParentActivity.getResources().getString(string.Work_Load));
 	//	KeyTitleChangeAnimation.StartChangeAnimation(_MainBKeyTitleFragment);
 		KeyBodyChangeAnimation.StartChangeAnimation(_MainBKeyWorkLoadErrorDetectionFragment);
 	}
 	public void showRideControlSpeedAnimation(){
-		//	showKeyScreenAnimation();
-			_MainBKeyTitleFragment.setTitleIcon(ParentActivity.getResources().getDrawable(R.drawable.main_key_title_ridecontrol));
-			_MainBKeyTitleFragment.setTitleText(ParentActivity.getResources().getString(string.Ride_Control));
-		//	KeyTitleChangeAnimation.StartChangeAnimation(_MainBKeyTitleFragment);
-			KeyBodyChangeAnimation.StartChangeAnimation(_MainBKeyRideControlSpeedFragment);
-		}
+		ParentActivity.StartAnimationRunningTimer();
+//		showKeyScreenAnimation();
+		ParentActivity.ScreenIndex = ParentActivity.SCREEN_STATE_MAIN_B_KEY_RIDECONTROL_SPEED;
+		_MainBKeyRideControlSpeedFragment = new MainBKeyRideControlSpeedFragment();
+		_MainBKeyTitleFragment.setTitleIcon(ParentActivity.getResources().getDrawable(R.drawable.main_key_title_ridecontrol));
+		_MainBKeyTitleFragment.setTitleText(ParentActivity.getResources().getString(string.Ride_Control));
+	//	KeyTitleChangeAnimation.StartChangeAnimation(_MainBKeyTitleFragment);
+		KeyBodyChangeAnimation.StartChangeAnimation(_MainBKeyRideControlSpeedFragment);
+	}
 	
 	/////////////////////////////////////////////////////////////////////
 	public void KeyButtonClick(final int key){
@@ -777,48 +1106,81 @@ public class MainBBaseFragment extends ParentFragment{
 				// TODO Auto-generated method stub
 				switch (key) {
 				case CAN1CommManager.MAINLIGHT:
-
-					showMainLightAnimation();
+					if(ParentActivity.AnimationRunningFlag == true)
+						return;
+					if(ParentActivity.ScreenIndex != ParentActivity.SCREEN_STATE_MAIN_B_KEY_MAINLIGHT)
+						showMainLightAnimation();
+					else
+						_MainBKeyMainLightFragment.ClickHardKey();
 					break;
 				case CAN1CommManager.WORKLIGHT:
-
-					showWorkLightAnimation();
+					if(ParentActivity.AnimationRunningFlag == true)
+						return;
+					if(ParentActivity.ScreenIndex != ParentActivity.SCREEN_STATE_MAIN_B_KEY_WORKLIGHT)
+						showWorkLightAnimation();
+					else
+						_MainBKeyWorkLightFragment.ClickHardKey();
 					break;
 				case CAN1CommManager.AUTO_GREASE:
-
-					showAutoGreaseAnimation();
+					if(ParentActivity.AnimationRunningFlag == true)
+						return;
+					if(ParentActivity.ScreenIndex != ParentActivity.SCREEN_STATE_MAIN_B_KEY_AUTOGREASE)
+						showAutoGreaseAnimation();
+					else
+						_MainBKeyAutoGreaseFragment.ClickHardKey();
 					break;
 				case CAN1CommManager.QUICK_COUPLER:
-
+					if(ParentActivity.AnimationRunningFlag == true)
+						return;
+					
 					showQuickCouplerAnimation();
 					break;
 				case CAN1CommManager.RIDE_CONTROL:
-
+					if(ParentActivity.AnimationRunningFlag == true)
+						return;
 					showRideControlAnimation();
 					break;
 				case CAN1CommManager.WORK_LOAD:
-
+					if(ParentActivity.AnimationRunningFlag == true)
+						return;
 					showWorkLoadAnimation();
 					break;
 				case CAN1CommManager.BEACON_LAMP:
-
-					showBeaconLampAnimation();
+					if(ParentActivity.AnimationRunningFlag == true)
+						return;
+					if(ParentActivity.ScreenIndex != ParentActivity.SCREEN_STATE_MAIN_B_KEY_BEACONLAMP)
+						showBeaconLampAnimation();
+					else
+						_MainBKeyBeaconLampFragment.ClickHardKey();
 					break;
 				case CAN1CommManager.REAR_WIPER:
-
-					showRearWiperAnimation();
+					if(ParentActivity.AnimationRunningFlag == true)
+						return;
+					if(ParentActivity.ScreenIndex != ParentActivity.SCREEN_STATE_MAIN_B_KEY_REARWIPER)
+						showRearWiperAnimation();
+					else
+						_MainBKeyRearWiperFragment.ClickHardKey();
 					break;
 				case CAN1CommManager.MIRROR_HEAT:
-
-					showMirrorHeatAnimation();
+					if(ParentActivity.AnimationRunningFlag == true)
+						return;
+					if(ParentActivity.ScreenIndex != ParentActivity.SCREEN_STATE_MAIN_B_KEY_MIRRORHEAT)
+						showMirrorHeatAnimation();
+					else
+						_MainBKeyMirrorHeatFragment.ClickHardKey();
 					break;
 				case CAN1CommManager.AUTOPOSITION:
-
+					if(ParentActivity.AnimationRunningFlag == true)
+						return;
 					showDetentAnimation();
 					break;
 				case CAN1CommManager.FINEMODULATION:
-
-					showFineModulationAnimation();
+					if(ParentActivity.AnimationRunningFlag == true)
+						return;
+					if(ParentActivity.ScreenIndex != ParentActivity.SCREEN_STATE_MAIN_B_KEY_FINEMODULATION)
+						showFineModulationAnimation();
+					else
+						_MainBKeyFineModulationFragment.ClickHardKey();
 					break;
 				default:
 					break;

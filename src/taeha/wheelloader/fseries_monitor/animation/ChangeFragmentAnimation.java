@@ -15,7 +15,8 @@ public class ChangeFragmentAnimation extends View{
 	
 	final static private String TAG = "ChangeFragmentAnimation";
 	
-	final static private int AnimationSpeed = 200;
+	private int DisappearAnimationSpeed = 200;
+	private int AppearAnimationSpeed = 200;
 	
 	public Home ParentActivity;
 	public View viewItem;
@@ -41,14 +42,15 @@ public class ChangeFragmentAnimation extends View{
 		
 		AnimationDisappear = (ObjectAnimator)AnimatorInflater.loadAnimator(_context, R.anim.disappear);
 		AnimationDisappear.setTarget(viewItem);
-		AnimationDisappear.setDuration(AnimationSpeed);
+		AnimationDisappear.setDuration(DisappearAnimationSpeed);
 		
 		AnimationAppear = (ObjectAnimator)AnimatorInflater.loadAnimator(_context, R.anim.appear);
 		AnimationAppear.setTarget(viewItem);
-		AnimationAppear.setDuration(AnimationSpeed);
+		AnimationAppear.setDuration(AppearAnimationSpeed);
 	
 		AnimationListener();
 	}
+	
 	
 	public void AnimationListener(){
 		AnimationDisappear.addListener(new AnimatorListener() {
@@ -74,6 +76,19 @@ public class ChangeFragmentAnimation extends View{
 				if(ChangeFlag == true){
 					showNextFragment(NextFragment);
 					StartAppearAnimation();
+				}else{
+					if(CurrentFragment != null){
+						try {
+							android.app.FragmentTransaction transaction = ParentActivity.getFragmentManager().beginTransaction();
+							transaction.remove(CurrentFragment);
+							transaction.commit();
+							CurrentFragment = null;
+						} catch (NullPointerException e) {
+							// TODO: handle exception
+							Log.e(TAG,"NullPointerException");
+						}
+					}
+					
 				}
 				
 			}
@@ -134,16 +149,17 @@ public class ChangeFragmentAnimation extends View{
 		}
 	}
 	public void StartChangeAnimation(Fragment _fragment){
-			NextFragment = _fragment;
-			ChangeFlag = true;
-			try {
-				AnimationDisappear.start();
-			} catch (NullPointerException e) {
-				// TODO: handle exception
-				Log.e(TAG,"StartAnimation NullPointerException");
-			}	
-	
 		
+		NextFragment = _fragment;
+		ChangeFlag = true;
+		try {
+			AnimationDisappear.start();
+		} catch (NullPointerException e) {
+			// TODO: handle exception
+			Log.e(TAG,"StartAnimation NullPointerException");
+		}	
+	
+
 	}
 	public void CancelAppearAnimation(){
 		try {
@@ -151,6 +167,24 @@ public class ChangeFragmentAnimation extends View{
 		} catch (NullPointerException e) {
 			// TODO: handle exception
 			Log.e(TAG,"CancelAnimation NullPointerException");
+		}
+	}
+	public void StartAppearAnimation(Fragment _fragment){
+		
+		try {
+			if(_fragment != CurrentFragment){
+				android.app.FragmentTransaction transaction = ParentActivity.getFragmentManager().beginTransaction();
+				transaction.replace(nFrameLayoutID, _fragment);
+				transaction.commit();
+				CurrentFragment = _fragment;
+				AnimationAppear.start();
+			}
+		
+		} catch (NullPointerException e) {
+			// TODO: handle exception
+			Log.e(TAG,"StartAnimation NullPointerException");
+		}	catch(IllegalStateException e){
+			Log.e(TAG,"StartAnimation IllegalStateException");
 		}
 	}
 	public void StartAppearAnimation(){
@@ -179,5 +213,14 @@ public class ChangeFragmentAnimation extends View{
 		catch (RuntimeException e){
 			Log.e(TAG,"RuntimeException");
 		}
+	}
+	
+	public void SetDisappearTime(int Time){
+		DisappearAnimationSpeed = Time;
+		AnimationDisappear.setDuration(DisappearAnimationSpeed);
+	}
+	public void SetAppearTime(int Time){
+		AppearAnimationSpeed = Time;
+		AnimationAppear.setDuration(AppearAnimationSpeed);
 	}
 }

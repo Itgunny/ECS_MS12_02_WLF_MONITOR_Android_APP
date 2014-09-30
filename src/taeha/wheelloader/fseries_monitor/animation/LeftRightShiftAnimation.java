@@ -10,7 +10,7 @@ public class LeftRightShiftAnimation {
 	
 	final static private String TAG = "LeftRightShiftAnimation";
 	
-	final static private int AnimationSpeed = 400;
+	final static private int AnimationSpeed = 200;
 	
 	int START_POSITION_X = 600;
 	int START_POSITION_Y = -400;

@@ -54,6 +54,13 @@ public class MainBRightUpEngineModeFragment extends ParentFragment{
 
 	////////////////////////////////////////////////
 	
+	@Override
+	public void onResume() {
+		// TODO Auto-generated method stub
+		super.onResume();
+		EngineModeDisplay(EngineMode);
+	}
+
 	//Common Function//////////////////////////////
 	@Override
 	protected void InitResource() {
@@ -68,7 +75,7 @@ public class MainBRightUpEngineModeFragment extends ParentFragment{
 		// TODO Auto-generated method stub
 		super.InitValuables();
 		EngineMode = CAN1Comm.Get_EnginePowerMode_347_PGN65350();
-		EngineModeDisplay(EngineMode);
+		
 	}
 	@Override
 	protected void InitButtonListener() {
@@ -133,18 +140,30 @@ public class MainBRightUpEngineModeFragment extends ParentFragment{
 		}
 	}
 	public void ClickPower(){
+		if(ParentActivity.AnimationRunningFlag == true)
+			return;
+		else
+			ParentActivity.StartAnimationRunningTimer();
 		CAN1Comm.Set_EnginePowerMode_347_PGN61184_101(CAN1CommManager.DATA_STATE_ENGINE_MODE_PWR);
 		CAN1Comm.TxCANToMCU(101);
-		ParentActivity._MainBBaseFragment.showDefaultScreenAnimation();
+		ParentActivity._MainBBaseFragment.showRightUptoDefaultScreenAnimation();
 	}
 	public void ClickStandard(){
+		if(ParentActivity.AnimationRunningFlag == true)
+			return;
+		else
+			ParentActivity.StartAnimationRunningTimer();
 		CAN1Comm.Set_EnginePowerMode_347_PGN61184_101(CAN1CommManager.DATA_STATE_ENGINE_MODE_STD);
 		CAN1Comm.TxCANToMCU(101);
-		ParentActivity._MainBBaseFragment.showDefaultScreenAnimation();
+		ParentActivity._MainBBaseFragment.showRightUptoDefaultScreenAnimation();
 	}
 	public void ClickEcono(){
+		if(ParentActivity.AnimationRunningFlag == true)
+			return;
+		else
+			ParentActivity.StartAnimationRunningTimer();
 		CAN1Comm.Set_EnginePowerMode_347_PGN61184_101(CAN1CommManager.DATA_STATE_ENGINE_MODE_ECONO);
 		CAN1Comm.TxCANToMCU(101);
-		ParentActivity._MainBBaseFragment.showDefaultScreenAnimation();
+		ParentActivity._MainBBaseFragment.showRightUptoDefaultScreenAnimation();
 	}
 }

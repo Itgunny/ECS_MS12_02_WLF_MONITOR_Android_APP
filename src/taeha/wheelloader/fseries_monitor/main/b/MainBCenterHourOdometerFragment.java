@@ -69,7 +69,7 @@ public class MainBCenterHourOdometerFragment extends ParentFragment{
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
-				ParentActivity._MainBBaseFragment.showDefaultScreenAnimation();
+				ClickOption();
 				
 			}
 		});
@@ -89,6 +89,11 @@ public class MainBCenterHourOdometerFragment extends ParentFragment{
 	/////////////////////////////////////////////////////////////////////	
 	
 	public void ClickOption(){
+		if(ParentActivity.AnimationRunningFlag == true)
+			return;
+		else
+			ParentActivity.StartAnimationRunningTimer();
 		
+		ParentActivity._MainBBaseFragment.showLeftDowntoDefaultScreenAnimation();
 	}
 }

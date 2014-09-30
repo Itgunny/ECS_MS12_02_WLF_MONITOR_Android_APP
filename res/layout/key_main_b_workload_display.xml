@@ -31,8 +31,7 @@
         android:layout_marginBottom="10dp"
         android:layout_marginLeft="10dp"
         android:text="@string/Weighing_Display"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:textStyle="bold" />
+        android:textAppearance="?android:attr/textAppearanceLarge" />
     
     <RadioButton
         android:id="@+id/radioButton_key_main_b_workload_display_daily"
@@ -45,8 +44,7 @@
         android:button="@drawable/_selector_radio_btn"
         android:text="@string/Daily"
         android:textColor="@drawable/_selector_radio_txt_white_amber"
-        android:textSize="25sp"
-        android:textStyle="bold" />
+        android:textSize="25sp" />
 	
 	<RadioButton
 	    android:id="@+id/radioButton_key_main_b_workload_display_totala"
@@ -58,8 +56,7 @@
 	    android:button="@drawable/_selector_radio_btn"
 	    android:text="@string/Total_A"
 	    android:textColor="@drawable/_selector_radio_txt_white_amber"
-	    android:textSize="25sp"
-	    android:textStyle="bold" />
+	    android:textSize="25sp" />
 	
 	<RadioButton
 	    android:id="@+id/radioButton_key_main_b_workload_display_totalb"
@@ -71,8 +68,7 @@
 	    android:button="@drawable/_selector_radio_btn"
 	    android:text="@string/Total_B"
 	    android:textColor="@drawable/_selector_radio_txt_white_amber"
-	    android:textSize="25sp"
-	    android:textStyle="bold" />
+	    android:textSize="25sp" />
 	
 	<RadioButton
 	    android:id="@+id/radioButton_key_main_b_workload_display_totalc"
@@ -83,8 +79,7 @@
 	    android:button="@drawable/_selector_radio_btn"
 	    android:text="@string/Total_C"
 	    android:textColor="@drawable/_selector_radio_txt_white_amber"
-	    android:textSize="25sp"
-	    android:textStyle="bold" />
+	    android:textSize="25sp" />
 	
 	<RelativeLayout
         android:id="@+id/RelativeLayout_key_main_b_workload_display_init"

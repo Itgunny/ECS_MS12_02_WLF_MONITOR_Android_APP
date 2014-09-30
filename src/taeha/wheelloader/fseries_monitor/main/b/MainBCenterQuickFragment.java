@@ -78,14 +78,18 @@ public class MainBCenterQuickFragment extends MainBCenterFragment{
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
 				if(ClickFlag == true)
-					ClickOption();
+					ClickBG();
 			}
 		});
 	}
 
 	/////////////////////////////////////////////////////////////////////	
 	
-	public void ClickOption(){
+	public void ClickBG(){
+		if(ParentActivity.AnimationRunningFlag == true)
+			return;
+		else
+			ParentActivity.StartAnimationRunningTimer();
 		ParentActivity._MainBBaseFragment.showDefaultScreenAnimation();
 		Log.d(TAG,"ClickOption");
 	}

@@ -97,7 +97,10 @@ public class MainBRightDownQuickFragment extends ParentFragment{
 	/////////////////////////////////////////////////////////////////////	
 	
 	public void ClickMaintenance(){
-		
+		if(ParentActivity.AnimationRunningFlag == true)
+			return;
+		else
+			ParentActivity.StartAnimationRunningTimer();
 	}
 	
 }

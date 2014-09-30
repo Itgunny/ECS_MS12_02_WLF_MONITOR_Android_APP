@@ -6,19 +6,19 @@
     android:background="@drawable/main_bg_right_down_ani" >
     
     <TextView
-        android:id="@+id/textView_rightup_main_b_tmshiftmode_title"
+        android:id="@+id/textView_rightdown_main_b_tmshiftmode_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignRight="@+id/imageView_rightup_main_b_tmshiftmode_line"
+        android:layout_alignRight="@+id/imageView_rightdown_main_b_tmshiftmode_line"
         android:layout_marginRight="40dp"
         android:layout_marginTop="84dp"
         android:text="@string/SHIFT_MODE"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:textColor="@color/main_title_amber"
-        android:textStyle="bold" />
+        android:textSize="25sp" />
 
     <ImageView
-        android:id="@+id/imageView_rightup_main_b_tmshiftmode_line"
+        android:id="@+id/imageView_rightdown_main_b_tmshiftmode_line"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="278dp"
@@ -26,7 +26,7 @@
         android:src="@drawable/main_popup_line" />
     
        <RadioButton
-           android:id="@+id/radioButton_rightup_main_b_tmshiftmode_manual"
+           android:id="@+id/radioButton_rightdown_main_b_tmshiftmode_manual"
            android:layout_width="wrap_content"
            android:layout_height="wrap_content"
            android:layout_marginLeft="328dp"
@@ -34,11 +34,10 @@
            android:button="@drawable/_selector_radio_btn"
            android:text="@string/MANUAL"
            android:textColor="@drawable/_selector_radio_txt_white_amber"
-           android:textSize="25sp"
-           android:textStyle="bold" />
+           android:textSize="25sp" />
 
        <RadioButton
-           android:id="@+id/radioButton_rightup_main_b_tmshiftmode_al"
+           android:id="@+id/radioButton_rightdown_main_b_tmshiftmode_al"
            android:layout_width="wrap_content"
            android:layout_height="wrap_content"
            android:layout_marginLeft="502dp"
@@ -46,11 +45,10 @@
            android:button="@drawable/_selector_radio_btn"
            android:text="@string/AL"
            android:textColor="@drawable/_selector_radio_txt_white_amber"
-           android:textSize="25sp"
-           android:textStyle="bold" />
+           android:textSize="25sp" />
        
        <RadioButton
-           android:id="@+id/radioButton_rightup_main_b_tmshiftmode_an"
+           android:id="@+id/radioButton_rightdown_main_b_tmshiftmode_an"
            android:layout_width="wrap_content"
            android:layout_height="wrap_content"
            android:layout_marginLeft="328dp"
@@ -58,11 +56,10 @@
            android:button="@drawable/_selector_radio_btn"
            android:text="@string/AN"
            android:textColor="@drawable/_selector_radio_txt_white_amber"
-           android:textSize="25sp"
-           android:textStyle="bold" />
+           android:textSize="25sp" />
        
        <RadioButton
-           android:id="@+id/radioButton_rightup_main_b_tmshiftmode_ah"
+           android:id="@+id/radioButton_rightdown_main_b_tmshiftmode_ah"
            android:layout_width="wrap_content"
            android:layout_height="wrap_content"
            android:layout_marginLeft="502dp"
@@ -71,6 +68,6 @@
            android:text="@string/AH"
            android:textColor="@drawable/_selector_radio_txt_white_amber"
            android:textSize="25sp"
-           android:textStyle="bold" />
+           android:textStyle="normal" />
 
 </RelativeLayout>

@@ -7,20 +7,42 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.SeekBar;
 import android.widget.TextView;
+import taeha.wheelloader.fseries_monitor.main.CAN1CommManager;
 import taeha.wheelloader.fseries_monitor.main.ParentFragment;
 import taeha.wheelloader.fseries_monitor.main.R;
+import taeha.wheelloader.fseries_monitor.main.R.string;
 
 public class MainBKeyRideControlSpeedFragment extends ParentFragment{
 	//CONSTANT////////////////////////////////////////
 	// TAG
 	private static final String TAG = "MainBKeyRideControlSpeedFragment";
+	
+	private static final int MAX_LEVEL	 	= 20;
+	private static final int MIN_LEVEL 		= 5;
+	
+	private static final int TOTAL_STEP		= 100;
+	private static final int STEP			= 4;
 	//////////////////////////////////////////////////
 	//RESOURCE////////////////////////////////////////
+	TextView textViewForwardData;
+	TextView textViewBackwardData;
+	TextView textViewForwardMax;
+	TextView textViewForwardMin;
+	TextView textViewBackwardMax;
+	TextView textViewBackwardMin;
 	
+	ImageButton imgbtnOK;
+	ImageButton imgbtnCancel;
+	
+	SeekBar seekBarForward;
+	SeekBar seekBarBackward;
 	//////////////////////////////////////////////////
 	
 	//VALUABLE////////////////////////////////////////
+	int SpeedForward;
+	int SpeedBackward;
 
 	//////////////////////////////////////////////////
 	
@@ -44,33 +66,89 @@ public class MainBKeyRideControlSpeedFragment extends ParentFragment{
 		InitButtonListener();
 
 		ParentActivity.ScreenIndex = ParentActivity.SCREEN_STATE_MAIN_B_KEY_RIDECONTROL_SPEED;
+		
+		SpeedDisplay(textViewForwardMax,MAX_LEVEL,ParentActivity.UnitOdo);
+		SpeedDisplay(textViewForwardMin,MIN_LEVEL,ParentActivity.UnitOdo);
+		SpeedDisplay(textViewBackwardMax,MAX_LEVEL,ParentActivity.UnitOdo);
+		SpeedDisplay(textViewBackwardMin,MIN_LEVEL,ParentActivity.UnitOdo);
+		SpeedDisplay(textViewForwardData,SpeedForward,ParentActivity.UnitOdo);
+		SpeedDisplay(textViewBackwardData,SpeedBackward,ParentActivity.UnitOdo);
+		SetSeekBarPosition(seekBarForward,SpeedForward);
+		SetSeekBarPosition(seekBarBackward,SpeedBackward);
 		return mRoot;
 	}
-
-	////////////////////////////////////////////////
 	
+	////////////////////////////////////////////////
+
 	//Common Function//////////////////////////////
 	@Override
 	protected void InitResource() {
 		// TODO Auto-generated method stub
+		textViewForwardData = (TextView)mRoot.findViewById(R.id.textView_key_main_b_ridecontrol_speed_forward_value);
+		textViewBackwardData = (TextView)mRoot.findViewById(R.id.textView_key_main_b_ridecontrol_speed_backward_value);
+		textViewForwardMax = (TextView)mRoot.findViewById(R.id.textView_key_main_b_ridecontrol_speed_forward_max);
+		textViewForwardMin = (TextView)mRoot.findViewById(R.id.textView_key_main_b_ridecontrol_speed_forward_min);
+		textViewBackwardMax = (TextView)mRoot.findViewById(R.id.textView_key_main_b_ridecontrol_speed_backward_max);
+		textViewBackwardMin = (TextView)mRoot.findViewById(R.id.textView_key_main_b_ridecontrol_speed_backward_min);
 		
+		imgbtnOK = (ImageButton)mRoot.findViewById(R.id.ImageButton_key_main_b_ridecontrol_speed_low_ok);
+		imgbtnCancel = (ImageButton)mRoot.findViewById(R.id.ImageButton_key_main_b_ridecontrol_speed_low_cancel);
+
+		seekBarForward = (SeekBar)mRoot.findViewById(R.id.seekBar_key_main_b_ridecontrol_speed_forward);
+		seekBarBackward = (SeekBar)mRoot.findViewById(R.id.seekBar_key_main_b_ridecontrol_speed_backward);
+		
+		
+		seekBarForward.setMax(TOTAL_STEP);
+		seekBarForward.setOnSeekBarChangeListener(SpeedForwardSeekBarListener);
+		seekBarForward.incrementProgressBy(1);
+		
+		seekBarBackward.setMax(TOTAL_STEP);
+		seekBarBackward.setOnSeekBarChangeListener(SpeedBackwardSeekBarListener);
+		seekBarBackward.incrementProgressBy(1);
 	}
 	
 	protected void InitValuables() {
 		// TODO Auto-generated method stub
 		super.InitValuables();
+		SpeedForward = CAN1Comm.Get_RideControlOperatingSpeedForward_PGN65527();
+		SpeedBackward = CAN1Comm.Get_RideControlOperatingSpeedBackward_PGN65527();
 		
+		if(SpeedForward < MIN_LEVEL)
+			SpeedForward = MIN_LEVEL;
+		else if(SpeedForward > MAX_LEVEL)
+			SpeedForward = MAX_LEVEL;
+		
+		if(SpeedBackward < MIN_LEVEL)
+			SpeedBackward = MIN_LEVEL;
+		else if(SpeedBackward > MAX_LEVEL)
+			SpeedBackward = MAX_LEVEL;
+
 	}
 	@Override
 	protected void InitButtonListener() {
 		// TODO Auto-generated method stub
-		
+		imgbtnOK.setOnClickListener(new View.OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				ClickOK();
+			}
+		});
+		imgbtnCancel.setOnClickListener(new View.OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				ClickCancel();
+			}
+		});
 	}
 
 	@Override
 	protected void GetDataFromNative() {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
@@ -79,6 +157,147 @@ public class MainBKeyRideControlSpeedFragment extends ParentFragment{
 		
 	}
 	/////////////////////////////////////////////////////////////////////	
+	public void SpeedDisplay(TextView textview, int Data, int Unit){
+		String strSpeed;
+		strSpeed = ParentActivity.GetRideControlSpeed(Data, Unit);
+		if(Unit == ParentActivity.UNIT_ODO_MILE){
+			textview.setText(strSpeed + " " + ParentActivity.getResources().getString(R.string.mph));
+		}else{
+			textview.setText(strSpeed + " " + ParentActivity.getResources().getString(R.string.km_h));
+		}
+	}
+	public void SetSeekBarPosition(SeekBar _seekbar, int _Speed){
+		int Progress;
+		
+		if(_Speed < 7){
+			Progress = 0;
+		}else if(_Speed < 12){
+			Progress = 33;
+		}else if(_Speed < 17){
+			Progress = 66;
+		}else{
+			Progress = 100;
+		}
+		
+		_seekbar.setProgress(Progress);
+	}
 	
+	public void ClickOK(){
+		CAN1Comm.Set_RideControlOperationStatus_3447_PGN65527(CAN1CommManager.DATA_STATE_RIDECONTROL_AUTO);
+		CAN1Comm.TxCANToMCU(247);
+		
+		CAN1Comm.Set_RideControlOperatingSpeedForward_PGN65527(SpeedForward);
+		CAN1Comm.Set_RideControlOperatingSpeedBackward_PGN65527(SpeedBackward);
+		CAN1Comm.TxCANToMCU(247);
+		CAN1Comm.Set_RideControlOperatingSpeedForward_PGN65527(0xF);
+		CAN1Comm.Set_RideControlOperatingSpeedBackward_PGN65527(0xF);
+		showRideControlAnimation();
+	}
+	public void ClickCancel(){
+		showRideControlAnimation();
+	}
+	//Progress////////////////////////////////////////////////////////////
+	private SeekBar.OnSeekBarChangeListener SpeedForwardSeekBarListener = new SeekBar.OnSeekBarChangeListener() {
+		
+		@Override
+		public void onStopTrackingTouch(SeekBar seekBar) {
+			// TODO Auto-generated method stub
+			int progress = seekBar.getProgress();
+		
+			if(progress < 16){
+				SpeedForward = 5;
+			}else if(progress < 49){
+				SpeedForward = 10;
+			}
+			else if(progress < 82){
+				SpeedForward = 15;
+			}else{
+				SpeedForward = 20;
+			}
+			SetSeekBarPosition(seekBar, SpeedForward);
+			SpeedDisplay(textViewForwardData,SpeedForward,ParentActivity.UnitOdo);
+		}
+		
+		@Override
+		public void onStartTrackingTouch(SeekBar seekBar) {
+			// TODO Auto-generated method stub
+		}
+		
+		@Override
+		public void onProgressChanged(SeekBar seekBar, int progress,
+				boolean fromUser) {
+			// TODO Auto-generated method stub
+
+			if(progress < 16){
+				SpeedForward = 5;
+			}else if(progress < 49){
+				SpeedForward = 10;
+			}
+			else if(progress < 82){
+				SpeedForward = 15;
+			}else{
+				SpeedForward = 20;
+			}
+			SpeedDisplay(textViewForwardData,SpeedForward,ParentActivity.UnitOdo);
+			
+		}
+	};
+	private SeekBar.OnSeekBarChangeListener SpeedBackwardSeekBarListener = new SeekBar.OnSeekBarChangeListener() {
+		
+		@Override
+		public void onStopTrackingTouch(SeekBar seekBar) {
+			// TODO Auto-generated method stub
+			int progress = seekBar.getProgress();
+
+			if(progress < 16){
+				SpeedBackward = 5;
+			}else if(progress < 49){
+				SpeedBackward = 10;
+			}
+			else if(progress < 82){
+				SpeedBackward = 15;
+			}else{
+				SpeedBackward = 20;
+			}
+			SetSeekBarPosition(seekBar, SpeedBackward);
+			SpeedDisplay(textViewBackwardData,SpeedBackward,ParentActivity.UnitOdo);
+		}
+		
+		@Override
+		public void onStartTrackingTouch(SeekBar seekBar) {
+			// TODO Auto-generated method stub
+			
+		}
+		
+		@Override
+		public void onProgressChanged(SeekBar seekBar, int progress,
+				boolean fromUser) {
+			// TODO Auto-generated method stub
+		
+			if(progress < 16){
+				SpeedBackward = 5;
+			}else if(progress < 49){
+				SpeedBackward = 10;
+			}
+			else if(progress < 82){
+				SpeedBackward = 15;
+			}else{
+				SpeedBackward = 20;
+			}
+			SpeedDisplay(textViewBackwardData,SpeedBackward,ParentActivity.UnitOdo);
+		}
+	};
+	//////////////////////////////////////////////////////////////////////
+	//Back////////////////////////////////////////////////////////////////
+	public void showRideControlAnimation(){
+		if(ParentActivity.AnimationRunningFlag == true)
+			return;
+		else
+			ParentActivity.StartAnimationRunningTimer();
+		ParentActivity.ScreenIndex = ParentActivity.SCREEN_STATE_MAIN_B_KEY_RIDECONTROL;
+		ParentActivity._MainBBaseFragment._MainBKeyRideControlFragment = new MainBKeyRideControlFragment();
+		ParentActivity._MainBBaseFragment.KeyBodyChangeAnimation.StartChangeAnimation(ParentActivity._MainBBaseFragment._MainBKeyRideControlFragment);
+	}
+	//////////////////////////////////////////////////////////////////////
 	
 }

@@ -20,7 +20,7 @@ public class MainBodyShiftAnimation {
 	final static private int SHIFT_POSITION_RIGHT_DOWN_Y = -140;
 	
 	final static private int SHIFT_POSITION_LEFT_DOWN_X = 345;
-	final static private int SHIFT_POSITION_LEFT_DOWN_Y = -106;
+	final static private int SHIFT_POSITION_LEFT_DOWN_Y = -166;
 	
 	final static private int SHIFT_POSITION_LEFT_UP_X = 345;
 	final static private int SHIFT_POSITION_LEFT_UP_Y = 106;

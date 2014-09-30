@@ -66,7 +66,16 @@ public abstract class ParentFragment extends Fragment{
 			@Override
 			public void run() {
 				// TODO Auto-generated method stub
-				UpdateUI();
+				try {
+					UpdateUI();
+				} catch (IllegalStateException e) {
+					// TODO: handle exception
+					Log.e(TAG,"IllegalStateException");
+				}catch (NullPointerException e) {
+					// TODO: handle exception
+					Log.e(TAG,"NullPointerException");
+				}
+				
 			}
 		});
 	}
