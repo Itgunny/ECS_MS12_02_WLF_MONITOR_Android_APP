@@ -8,9 +8,9 @@ import android.view.animation.TranslateAnimation;
 
 public class LeftRightShiftAnimation {
 	
-	final static private String TAG = "LeftRightShiftAnimation";
+	final private String TAG = "LeftRightShiftAnimation";
 	
-	final static private int AnimationSpeed = 200;
+	final private int AnimationSpeed = 200;
 	
 	int START_POSITION_X = 600;
 	int START_POSITION_Y = -400;
@@ -30,6 +30,7 @@ public class LeftRightShiftAnimation {
 		ShiftAnimation.setDuration(AnimationSpeed);
 	}
 	
+
 	public LeftRightShiftAnimation(Context _context, View _Body, int _StartPositionX, int _StartPositionY){
 		ParentAcitivty = (Home)_context;
 		

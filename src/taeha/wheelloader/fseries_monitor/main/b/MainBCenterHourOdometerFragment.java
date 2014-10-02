@@ -14,8 +14,7 @@ import taeha.wheelloader.fseries_monitor.main.R;
 
 public class MainBCenterHourOdometerFragment extends ParentFragment{
 	//CONSTANT////////////////////////////////////////
-	// TAG
-	private static final String TAG = "MainBCenterHourOdometerFragment";
+	
 	//////////////////////////////////////////////////
 	//RESOURCE////////////////////////////////////////
 	RelativeLayout LayoutTop;
@@ -38,6 +37,7 @@ public class MainBCenterHourOdometerFragment extends ParentFragment{
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
+		TAG = "MainBCenterHourOdometerFragment";
 		Log.d(TAG, "onCreateView");
 		mRoot = inflater.inflate(R.layout.center_main_b_hourodometer, null);
 		InitResource();

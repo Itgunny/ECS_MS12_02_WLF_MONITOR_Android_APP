@@ -21,8 +21,7 @@ import android.widget.ImageView;
 
 public class MenuBaseFragment extends ParentFragment{
 	//CONSTANT////////////////////////////////////////
-	// TAG
-	private static final String TAG = "MenuBaseFragment";
+	
 	//////////////////////////////////////////////////
 	//RESOURCE////////////////////////////////////////
 	AbsoluteLayout LayoutInter;
@@ -60,6 +59,7 @@ public class MenuBaseFragment extends ParentFragment{
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
+		TAG = "MenuBaseFragment";
 		Log.d(TAG, "onCreateView");
 		mRoot = inflater.inflate(R.layout.screen_menu, null);
 		InitResource();
@@ -74,10 +74,14 @@ public class MenuBaseFragment extends ParentFragment{
 		ParentActivity.ScreenIndex = ParentActivity.SCREEN_STATE_MENU_TOP;
 		return mRoot;
 	}
-	
+	@Override
+	public void onDestroyView() {
+		// TODO Auto-generated method stub
+		super.onDestroyView();
+		DestroyFragment();
+	//	Runtime.getRuntime().gc();
+	}
 	////////////////////////////////////////////////
-	
-	
 
 	//Common Function//////////////////////////////
 	@Override
@@ -114,6 +118,14 @@ public class MenuBaseFragment extends ParentFragment{
 
 	}
 
+	public void DestroyFragment(){
+		android.app.FragmentTransaction transaction = getFragmentManager().beginTransaction();
+		
+		transaction.detach(_MenuListLeftFragment);
+		transaction.detach(_MenuListTitleFragment);
+		transaction.commit();	
+		
+	}
 	@Override
 	protected void GetDataFromNative() {
 		// TODO Auto-generated method stub

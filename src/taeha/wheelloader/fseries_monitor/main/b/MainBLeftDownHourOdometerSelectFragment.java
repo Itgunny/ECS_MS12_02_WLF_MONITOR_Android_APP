@@ -15,8 +15,7 @@ import taeha.wheelloader.fseries_monitor.main.R;
 
 public class MainBLeftDownHourOdometerSelectFragment extends ParentFragment{
 	//CONSTANT////////////////////////////////////////
-	// TAG
-	private static final String TAG = "MainBLeftDownHourOdometerSelectFragment";
+	
 	//////////////////////////////////////////////////
 	//RESOURCE////////////////////////////////////////
 	RadioButton radioTotalHour;
@@ -42,6 +41,7 @@ public class MainBLeftDownHourOdometerSelectFragment extends ParentFragment{
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
+		TAG = "MainBLeftDownHourOdometerSelectFragment";
 		Log.d(TAG, "onCreateView");
 		mRoot = inflater.inflate(R.layout.leftdown_main_b_hourodometer_select, null);
 		InitResource();

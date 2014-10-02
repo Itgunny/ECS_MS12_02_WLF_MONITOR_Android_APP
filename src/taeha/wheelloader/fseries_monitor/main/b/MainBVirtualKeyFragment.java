@@ -19,8 +19,7 @@ import taeha.wheelloader.fseries_monitor.main.R;
 
 public class MainBVirtualKeyFragment extends ParentFragment{
 	//CONSTANT////////////////////////////////////////
-	// TAG
-	private static final String TAG = "MainBVirtualKeyFragment";
+	
 	//////////////////////////////////////////////////
 	//RESOURCE////////////////////////////////////////
 	RelativeLayout layoutBG;
@@ -43,6 +42,7 @@ public class MainBVirtualKeyFragment extends ParentFragment{
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
+		TAG = "MainBVirtualKeyFragment";
 		Log.d(TAG, "onCreateView");
 		mRoot = inflater.inflate(R.layout.lower_main_b_virtualkey, null);
 		InitResource();
@@ -51,10 +51,12 @@ public class MainBVirtualKeyFragment extends ParentFragment{
 
 		return mRoot;
 	}
+
 	@Override
 	public void onPause() {
 		// TODO Auto-generated method stub
 		super.onPause();
+		Log.d(TAG,"onPause");
 		CancelClickTimer();
 	}
 

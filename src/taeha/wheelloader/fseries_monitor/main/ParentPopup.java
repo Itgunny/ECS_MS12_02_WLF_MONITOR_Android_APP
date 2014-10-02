@@ -14,14 +14,14 @@ import android.view.View;
 import android.view.ViewGroup.LayoutParams;
 
 public abstract class ParentPopup extends Dialog{
-	private static final String TAG = "ParentPopup";
+	public String TAG = "ParentPopup";
 	
 	// CAN1CommManager
-	protected static CAN1CommManager CAN1Comm;
-	protected static Home ParentActivity;
+	protected  CAN1CommManager CAN1Comm;
+	protected  Home ParentActivity;
 	
 	// Thread Sleep Time
-	private static int ThreadSleepTime;
+	private  int ThreadSleepTime;
 	
 	// Thread
 	protected Thread threadRead = null;
@@ -77,7 +77,7 @@ public abstract class ParentPopup extends Dialog{
 	}
 	
 	// Read Thread
-	public static class ReadThread implements Runnable {
+	public class ReadThread implements Runnable {
 		private WeakReference<ParentPopup> DialogRef = null;
 		public Message msg = null;
 		public ReadThread(ParentPopup _dialog){

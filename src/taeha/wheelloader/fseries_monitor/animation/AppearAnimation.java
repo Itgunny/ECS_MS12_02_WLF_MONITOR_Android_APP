@@ -12,7 +12,7 @@ import android.animation.Animator.AnimatorListener;
 
 public class AppearAnimation extends View{
 	
-	final static private String TAG = "AppearAnimation";
+	final private String TAG = "AppearAnimation";
 	
 	private int AnimationSpeed = 200;
 	

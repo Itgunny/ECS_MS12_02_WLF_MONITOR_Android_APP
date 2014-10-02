@@ -16,8 +16,7 @@ import taeha.wheelloader.fseries_monitor.main.R;
 
 public class MainBKeyRearWiperFragment extends ParentFragment{
 	//CONSTANT////////////////////////////////////////
-	// TAG
-	private static final String TAG = "MainBKeyRearWiperFragment";
+	
 	//////////////////////////////////////////////////
 	//RESOURCE////////////////////////////////////////
 	RadioButton radioOff;
@@ -49,6 +48,7 @@ public class MainBKeyRearWiperFragment extends ParentFragment{
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
+		TAG = "MainBKeyRearWiperFragment";
 		Log.d(TAG, "onCreateView");
 		mRoot = inflater.inflate(R.layout.key_main_b_rearwiper, null);
 		InitResource();

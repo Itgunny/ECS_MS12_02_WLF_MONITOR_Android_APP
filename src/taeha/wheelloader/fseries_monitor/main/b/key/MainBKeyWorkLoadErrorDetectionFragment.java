@@ -18,8 +18,7 @@ import taeha.wheelloader.fseries_monitor.main.b.MainBKeyTitleFragment;
 
 public class MainBKeyWorkLoadErrorDetectionFragment extends ParentFragment{
 	//CONSTANT////////////////////////////////////////
-	// TAG
-	private static final String TAG = "MainBKeyWorkLoadErrorDetectionFragment";
+
 	//////////////////////////////////////////////////
 	//RESOURCE////////////////////////////////////////
 	RadioButton radioOff;
@@ -44,6 +43,7 @@ public class MainBKeyWorkLoadErrorDetectionFragment extends ParentFragment{
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
+		TAG = "MainBKeyWorkLoadErrorDetectionFragment";
 		Log.d(TAG, "onCreateView");
 		mRoot = inflater.inflate(R.layout.key_main_b_workload_errordetect, null);
 		InitResource();

@@ -22,8 +22,7 @@ import android.widget.TextView;
 
 public class MenuListTitleFragment extends ParentFragment{
 	//CONSTANT////////////////////////////////////////
-	// TAG
-	private static final String TAG = "MenuListTitleFragment";
+	
 	//////////////////////////////////////////////////
 	//RESOURCE////////////////////////////////////////
 	TextView textViewTitle;
@@ -52,13 +51,15 @@ public class MenuListTitleFragment extends ParentFragment{
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
+		 TAG = "MenuListTitleFragment";
 		Log.d(TAG, "onCreateView");
 		mRoot = inflater.inflate(R.layout.menu_list_title, null);
 		InitResource();
 		InitValuables();
-		
 		InitButtonListener();
 		
+		
+		setBackButtonEnable(false);
 		return mRoot;
 	}
 	
@@ -119,14 +120,25 @@ public class MenuListTitleFragment extends ParentFragment{
 	/////////////////////////////////////////////////////////////////////	
 	
 	/////////////////////////////////////////////////////////////////////
+	public void SetTitleText(String str){
+		textViewTitle.setText(str);
+	}
+	public void setBackButtonEnable(boolean flag){
+		if(flag == true)
+			imgbtnBack.setVisibility(View.VISIBLE);
+		else
+			imgbtnBack.setVisibility(View.GONE);
+	}
 	public void ClickBack(){
 		
 	}
 	public void ClickHome(){
 		if(ParentActivity.AnimationRunningFlag == true)
 			return;
-		ParentActivity.StartAnimationRunningTimer();
+		else
+			ParentActivity.StartAnimationRunningTimer();
 		ParentActivity._MainChangeAnimation.StartChangeAnimation(ParentActivity._MainBBaseFragment);
+	//	ParentActivity.showMainBFragment();
 	}
 	/////////////////////////////////////////////////////////////////////
 	

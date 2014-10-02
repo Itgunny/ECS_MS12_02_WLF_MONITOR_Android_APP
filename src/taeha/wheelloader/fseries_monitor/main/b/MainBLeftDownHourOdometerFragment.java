@@ -15,8 +15,7 @@ import taeha.wheelloader.fseries_monitor.main.R.string;
 
 public class MainBLeftDownHourOdometerFragment extends ParentFragment{
 	//CONSTANT////////////////////////////////////////
-	// TAG
-	private static final String TAG = "MainBLeftDownHourOdometerFragment";
+	
 	//////////////////////////////////////////////////
 	//RESOURCE////////////////////////////////////////
 	TextView textViewHourOdoTitle;
@@ -47,6 +46,7 @@ public class MainBLeftDownHourOdometerFragment extends ParentFragment{
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
+		TAG = "MainBLeftDownHourOdometerFragment";
 		Log.d(TAG, "onCreateView");
 		mRoot = inflater.inflate(R.layout.leftdown_main_b_hourodometer, null);
 		InitResource();
@@ -108,14 +108,8 @@ public class MainBLeftDownHourOdometerFragment extends ParentFragment{
 	@Override
 	protected void UpdateUI() {
 		// TODO Auto-generated method stub
-		try {
-			HourOdometerTitleDisplay(ParentActivity.HourOdometerIndex);
-			HourOdometerDataDisplay(ParentActivity.HourOdometerIndex,TotalHourmeter,LatestHourmeter,TotalOdometer,LatestOdometer);
-		} catch (IllegalStateException e) {
-			// TODO: handle exception
-			Log.e("TAG","IllegalStateException");
-		}
-	
+		HourOdometerTitleDisplay(ParentActivity.HourOdometerIndex);
+		HourOdometerDataDisplay(ParentActivity.HourOdometerIndex,TotalHourmeter,LatestHourmeter,TotalOdometer,LatestOdometer);
 	}
 	/////////////////////////////////////////////////////////////////////	
 	public void HourOdometerTitleDisplay(int _Index){

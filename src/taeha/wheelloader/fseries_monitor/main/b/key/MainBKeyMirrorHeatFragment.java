@@ -15,8 +15,7 @@ import taeha.wheelloader.fseries_monitor.main.R;
 
 public class MainBKeyMirrorHeatFragment extends ParentFragment{
 	//CONSTANT////////////////////////////////////////
-	// TAG
-	private static final String TAG = "MainBKeyMirrorHeatFragment";
+	
 	//////////////////////////////////////////////////
 	//RESOURCE////////////////////////////////////////
 	RadioButton radioOff;
@@ -41,6 +40,7 @@ public class MainBKeyMirrorHeatFragment extends ParentFragment{
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
+		TAG = "MainBKeyMirrorHeatFragment";
 		Log.d(TAG, "onCreateView");
 		mRoot = inflater.inflate(R.layout.key_main_b_mirrorheat, null);
 		InitResource();

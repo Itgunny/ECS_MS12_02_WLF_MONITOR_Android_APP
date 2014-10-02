@@ -20,8 +20,7 @@ import taeha.wheelloader.fseries_monitor.popup.QuickCouplerPopupLocking2.QuickCo
 
 public class QuickCouplerPopupUnlocking2 extends ParentPopup{
 	//CONSTANT////////////////////////////////////////
-	// TAG
-	private static final String TAG = "QuickCouplerPopupUnlocking2";
+	
 	//////////////////////////////////////////////////
 	//RESOURCE////////////////////////////////////////
 	RelativeLayout LayoutBG;
@@ -42,6 +41,7 @@ public class QuickCouplerPopupUnlocking2 extends ParentPopup{
 	public QuickCouplerPopupUnlocking2(Context _context) {
 		super(_context);
 		// TODO Auto-generated constructor stub
+		TAG = "QuickCouplerPopupUnlocking2";
 		ParentActivity = (Home)_context;
 		inflater = (LayoutInflater)_context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 		mRoot = inflater.inflate(R.layout.popup_key_quickcoupler_unlocking_2, null);

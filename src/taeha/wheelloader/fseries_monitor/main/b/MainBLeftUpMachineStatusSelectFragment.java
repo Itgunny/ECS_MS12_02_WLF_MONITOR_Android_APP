@@ -16,13 +16,12 @@ import taeha.wheelloader.fseries_monitor.main.R.string;
 
 public class MainBLeftUpMachineStatusSelectFragment extends ParentFragment{
 	//CONSTANT////////////////////////////////////////
-	// TAG
-	private static final String TAG = "MainBLeftUpMachineStatusSelectFragment";
 	
-	private static final String TAB = "         ";
 	
-	private static final int SELECT_UPPER = 0;
-	private static final int SELECT_LOWER = 1;
+	private  final String TAB = "         ";
+	
+	private  final int SELECT_UPPER = 0;
+	private  final int SELECT_LOWER = 1;
 	//////////////////////////////////////////////////
 	//RESOURCE////////////////////////////////////////
 	RadioButton radioHYDTemp;
@@ -59,6 +58,7 @@ public class MainBLeftUpMachineStatusSelectFragment extends ParentFragment{
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
+		TAG = "MainBLeftUpMachineStatusSelectFragment";
 		Log.d(TAG, "onCreateView");
 		mRoot = inflater.inflate(R.layout.leftup_main_b_machinestatus_select, null);
 		InitResource();

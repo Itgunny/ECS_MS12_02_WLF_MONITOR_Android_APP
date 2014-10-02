@@ -13,8 +13,7 @@ import taeha.wheelloader.fseries_monitor.main.R;
 
 public class MainBKeyQuickCouplerFragment extends ParentFragment{
 	//CONSTANT////////////////////////////////////////
-	// TAG
-	private static final String TAG = "MainBKeyQuickCouplerFragment";
+	
 	//////////////////////////////////////////////////
 	//RESOURCE////////////////////////////////////////
 	TextView textViewLock;
@@ -40,6 +39,7 @@ public class MainBKeyQuickCouplerFragment extends ParentFragment{
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
+		TAG = "MainBKeyQuickCouplerFragment";
 		Log.d(TAG, "onCreateView");
 		mRoot = inflater.inflate(R.layout.key_main_b_quickcoupler, null);
 		InitResource();

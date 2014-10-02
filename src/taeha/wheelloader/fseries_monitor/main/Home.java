@@ -32,69 +32,69 @@ import android.widget.FrameLayout;
 public class Home extends Activity {
 	//CONSTANT//////////////////////////////////////////
 	// TAG
-	private static final String TAG = "Home";
+	private  final String TAG = "Home";
 	
-	public static final int SCREEN_STATE_MAIN_B_TOP 									= 0x10000000;
+	public  final int SCREEN_STATE_MAIN_B_TOP 									= 0x10000000;
 	
-	public static final int SCREEN_STATE_MAIN_B_RIGHTUP_TOP								= 0x11000000;
-	public static final int SCREEN_STATE_MAIN_B_RIGHTUP_ENGINE_MODE						= 0x11100000;
-	public static final int SCREEN_STATE_MAIN_B_RIGHTUP_ENGINE_WARMINGUP				= 0x11200000;
+	public  final int SCREEN_STATE_MAIN_B_RIGHTUP_TOP								= 0x11000000;
+	public  final int SCREEN_STATE_MAIN_B_RIGHTUP_ENGINE_MODE						= 0x11100000;
+	public  final int SCREEN_STATE_MAIN_B_RIGHTUP_ENGINE_WARMINGUP				= 0x11200000;
 	
-	public static final int SCREEN_STATE_MAIN_B_RIGHTDOWN_TOP							= 0x12000000;
-	public static final int SCREEN_STATE_MAIN_B_RIGHTDOWN_CCOMODE						= 0x12100000;
-	public static final int SCREEN_STATE_MAIN_B_RIGHTDOWN_SHIFTMODE						= 0x12200000;
-	public static final int SCREEN_STATE_MAIN_B_RIGHTDOWN_TCLOCKUP						= 0x12300000;
+	public  final int SCREEN_STATE_MAIN_B_RIGHTDOWN_TOP							= 0x12000000;
+	public  final int SCREEN_STATE_MAIN_B_RIGHTDOWN_CCOMODE						= 0x12100000;
+	public  final int SCREEN_STATE_MAIN_B_RIGHTDOWN_SHIFTMODE						= 0x12200000;
+	public  final int SCREEN_STATE_MAIN_B_RIGHTDOWN_TCLOCKUP						= 0x12300000;
 	
 	
-	public static final int SCREEN_STATE_MAIN_B_LEFTUP_TOP								= 0x13000000;
-	public static final int SCREEN_STATE_MAIN_B_LEFTUP_MACHINESTATUS					= 0x13100000;
+	public  final int SCREEN_STATE_MAIN_B_LEFTUP_TOP								= 0x13000000;
+	public  final int SCREEN_STATE_MAIN_B_LEFTUP_MACHINESTATUS					= 0x13100000;
 	
-	public static final int SCREEN_STATE_MAIN_B_LEFTDOWN_TOP							= 0x14000000;
-	public static final int SCREEN_STATE_MAIN_B_LEFTDOWN_HOURODOMETER					= 0x14100000;
+	public  final int SCREEN_STATE_MAIN_B_LEFTDOWN_TOP							= 0x14000000;
+	public  final int SCREEN_STATE_MAIN_B_LEFTDOWN_HOURODOMETER					= 0x14100000;
 	
-	public static final int SCREEN_STATE_MAIN_B_QUICK_TOP								= 0x15000000;
+	public  final int SCREEN_STATE_MAIN_B_QUICK_TOP								= 0x15000000;
 	
-	public static final int SCREEN_STATE_MAIN_B_KEY_TOP									= 0x16000000;
-	public static final int SCREEN_STATE_MAIN_B_KEY_MAINLIGHT							= 0x16100000;
-	public static final int SCREEN_STATE_MAIN_B_KEY_WORKLIGHT							= 0x16200000;
-	public static final int SCREEN_STATE_MAIN_B_KEY_AUTOGREASE							= 0x16300000;
-	public static final int SCREEN_STATE_MAIN_B_KEY_QUICKCOUPLER						= 0x16400000;
-	public static final int SCREEN_STATE_MAIN_B_KEY_QUICKCOUPLER_POPUP_LOCKING1			= 0x16410000;
-	public static final int SCREEN_STATE_MAIN_B_KEY_QUICKCOUPLER_POPUP_LOCKING2			= 0x16420000;
-	public static final int SCREEN_STATE_MAIN_B_KEY_QUICKCOUPLER_POPUP_UNLOCKING1		= 0x16430000;
-	public static final int SCREEN_STATE_MAIN_B_KEY_QUICKCOUPLER_POPUP_UNLOCKING2		= 0x16440000;
-	public static final int SCREEN_STATE_MAIN_B_KEY_RIDECONTROL							= 0x16500000;
-	public static final int SCREEN_STATE_MAIN_B_KEY_RIDECONTROL_SPEED					= 0x16510000;
-	public static final int SCREEN_STATE_MAIN_B_KEY_WORKLOAD							= 0x16600000;
-	public static final int SCREEN_STATE_MAIN_B_KEY_WORKLOAD_ACCUMULATION				= 0x16610000;
-	public static final int SCREEN_STATE_MAIN_B_KEY_WORKLOAD_DISPLAY					= 0x16620000;
-	public static final int SCREEN_STATE_MAIN_B_KEY_WORKLOAD_ERRORDETECT				= 0x16630000;
-	public static final int SCREEN_STATE_MAIN_B_KEY_BEACONLAMP							= 0x16700000;
-	public static final int SCREEN_STATE_MAIN_B_KEY_REARWIPER							= 0x16800000;
-	public static final int SCREEN_STATE_MAIN_B_KEY_MIRRORHEAT							= 0x16900000;
-	public static final int SCREEN_STATE_MAIN_B_KEY_DETENT								= 0x16A00000;
-	public static final int SCREEN_STATE_MAIN_B_KEY_FINEMODULATION						= 0x16B00000;
-	public static final int SCREEN_STATE_MAIN_B_KEY_FN									= 0x16C00000;
+	public  final int SCREEN_STATE_MAIN_B_KEY_TOP									= 0x16000000;
+	public  final int SCREEN_STATE_MAIN_B_KEY_MAINLIGHT							= 0x16100000;
+	public  final int SCREEN_STATE_MAIN_B_KEY_WORKLIGHT							= 0x16200000;
+	public  final int SCREEN_STATE_MAIN_B_KEY_AUTOGREASE							= 0x16300000;
+	public  final int SCREEN_STATE_MAIN_B_KEY_QUICKCOUPLER						= 0x16400000;
+	public  final int SCREEN_STATE_MAIN_B_KEY_QUICKCOUPLER_POPUP_LOCKING1			= 0x16410000;
+	public  final int SCREEN_STATE_MAIN_B_KEY_QUICKCOUPLER_POPUP_LOCKING2			= 0x16420000;
+	public  final int SCREEN_STATE_MAIN_B_KEY_QUICKCOUPLER_POPUP_UNLOCKING1		= 0x16430000;
+	public  final int SCREEN_STATE_MAIN_B_KEY_QUICKCOUPLER_POPUP_UNLOCKING2		= 0x16440000;
+	public  final int SCREEN_STATE_MAIN_B_KEY_RIDECONTROL							= 0x16500000;
+	public  final int SCREEN_STATE_MAIN_B_KEY_RIDECONTROL_SPEED					= 0x16510000;
+	public  final int SCREEN_STATE_MAIN_B_KEY_WORKLOAD							= 0x16600000;
+	public  final int SCREEN_STATE_MAIN_B_KEY_WORKLOAD_ACCUMULATION				= 0x16610000;
+	public  final int SCREEN_STATE_MAIN_B_KEY_WORKLOAD_DISPLAY					= 0x16620000;
+	public  final int SCREEN_STATE_MAIN_B_KEY_WORKLOAD_ERRORDETECT				= 0x16630000;
+	public  final int SCREEN_STATE_MAIN_B_KEY_BEACONLAMP							= 0x16700000;
+	public  final int SCREEN_STATE_MAIN_B_KEY_REARWIPER							= 0x16800000;
+	public  final int SCREEN_STATE_MAIN_B_KEY_MIRRORHEAT							= 0x16900000;
+	public  final int SCREEN_STATE_MAIN_B_KEY_DETENT								= 0x16A00000;
+	public  final int SCREEN_STATE_MAIN_B_KEY_FINEMODULATION						= 0x16B00000;
+	public  final int SCREEN_STATE_MAIN_B_KEY_FN									= 0x16C00000;
 	
-	public static final int SCREEN_STATE_MENU_TOP 										= 0x20000000;
+	public  final int SCREEN_STATE_MENU_TOP 										= 0x20000000;
 
 	
-	public static final int UNIT_ODO_KM 			= 0;
-	public static final int UNIT_ODO_MILE 			= 1;
+	public  final int UNIT_ODO_KM 			= 0;
+	public  final int UNIT_ODO_MILE 			= 1;
 	
-	public static final int UNIT_TEMP_F 			= 1;
-	public static final int UNIT_TEMP_C 			= 0;
+	public  final int UNIT_TEMP_F 			= 1;
+	public  final int UNIT_TEMP_C 			= 0;
 	
-	public static final int UNIT_WEIGHT_TON 		= 0;
-	public static final int UNIT_WEIGHT_LB 			= 1;
+	public  final int UNIT_WEIGHT_TON 		= 0;
+	public  final int UNIT_WEIGHT_LB 			= 1;
 	
-	public static final int UNIT_PRESSURE_BAR 		= 0;
-	public static final int UNIT_PRESSURE_MPA 		= 1;
-	public static final int UNIT_PRESSURE_KGF 		= 2;
-	public static final int UNIT_PRESSURE_PSI 		= 3;
+	public  final int UNIT_PRESSURE_BAR 		= 0;
+	public  final int UNIT_PRESSURE_MPA 		= 1;
+	public  final int UNIT_PRESSURE_KGF 		= 2;
+	public  final int UNIT_PRESSURE_PSI 		= 3;
 	
-	public static final int CLOCK_AM		 		= 0;
-	public static final int CLOCK_PM		 		= 1;
+	public  final int CLOCK_AM		 		= 0;
+	public  final int CLOCK_PM		 		= 1;
 	////////////////////////////////////////////////////
 	
 	//Resource//////////////////////////////////////////
@@ -126,7 +126,7 @@ public class Home extends Activity {
 	public int WeighingErrorDetect;
 	
 	// CAN1CommManager
-	private static CAN1CommManager CAN1Comm = null;	
+	private CAN1CommManager CAN1Comm = null;	
 	
 	// Thread
 	private Thread threadRead = null;
@@ -145,6 +145,8 @@ public class Home extends Activity {
 	private Timer mMirrorHeatPreHeatTimer = null;
 	private Timer mMirrorHeatTimer = null;
 	
+	private Timer mTestTimer = null;
+	
 	// Flag
 	public boolean AnimationRunningFlag;
 	
@@ -159,8 +161,8 @@ public class Home extends Activity {
 	////////////////////////////////////////////////////
 	
 	//Fragment//////////////////////////////////////////
-	public MainBBaseFragment _MainBBaseFragment;
-	public MenuBaseFragment _MenuBaseFragment;
+	public  MainBBaseFragment _MainBBaseFragment;
+	public  MenuBaseFragment _MenuBaseFragment;
 	////////////////////////////////////////////////////
 	
 	//Animation/////////////////////////////////////////
@@ -181,6 +183,8 @@ public class Home extends Activity {
 		LoadPref();
 		
 		StartSeatBeltTimer();
+		
+		StartTestTimer();
 	}
 
 	@Override
@@ -284,16 +288,17 @@ public class Home extends Activity {
 	
 	//Main Screen Fragment///////////////////////////////
 	public void showMainBFragment(){
+		_MainBBaseFragment = new MainBBaseFragment();
 		android.app.FragmentTransaction transaction = getFragmentManager().beginTransaction();
 		transaction.replace(R.id.FrameLayout_main, _MainBBaseFragment);
-		//transaction.addToBackStack("Main_Upper");
 		transaction.commit();
+		
 	}
 	//Menu Screen Fragment
 	public void showMenuFragment(){
+		_MenuBaseFragment = new MenuBaseFragment();
 		android.app.FragmentTransaction transaction = getFragmentManager().beginTransaction();
 		transaction.replace(R.id.FrameLayout_main, _MenuBaseFragment);
-		//transaction.addToBackStack("Main_Upper");
 		transaction.commit();
 	}
 	
@@ -424,7 +429,7 @@ public class Home extends Activity {
 
 	};
 	// Thread Class
-	public static class ReadThread implements Runnable {
+	public  class ReadThread implements Runnable {
 		private WeakReference<Home> activityRef = null;
 		public Message msg = null;
 		public ReadThread(Home activity){
@@ -436,13 +441,10 @@ public class Home extends Activity {
 		@Override
 		public void run() {
 			try{
-				//while(!Thread.currentThread().isInterrupted())
 				while(!activityRef.get().threadRead.currentThread().isInterrupted())
 				{
-				//	activityRef.get().SaveSatellitePhoneNum();
 					activityRef.get().GetDataFromNative();
 					activityRef.get().UpdateUI();
-				//	activityRef.get().Test();
 					Thread.sleep(200);
 				}
 			}
@@ -649,7 +651,13 @@ public class Home extends Activity {
 		mAnimationRunningTimer = new Timer();
 		mAnimationRunningTimer.schedule(new AnimationRunningTimerClass(),500);	
 	}
-	
+	public void StartAnimationRunningTimer(int Time){
+		Log.d(TAG,"Animation Timer Start");
+		AnimationRunningFlag = true;
+		CancelAnimationRunningTimer();
+		mAnimationRunningTimer = new Timer();
+		mAnimationRunningTimer.schedule(new AnimationRunningTimerClass(),Time);	
+	}
 	public void CancelAnimationRunningTimer(){
 		if(mAnimationRunningTimer != null){
 			mAnimationRunningTimer.cancel();
@@ -763,6 +771,66 @@ public class Home extends Activity {
 			}
 		}
 	}
+	
+	
+	
+	
+	
+	
+	
+	int TestFlag = 0;
+	long Memory = 0;
+	public class TestTimerClass extends TimerTask{
+
+		@Override
+		public void run() {
+			// TODO Auto-generated method stub
+			runOnUiThread(new Runnable() {
+				
+				@Override
+				public void run() {
+					// TODO Auto-generated method stub
+					try {
+						if(TestFlag == 0){
+							TestFlag = 1;
+						//	showMenuFragment();
+							_MainBBaseFragment._MainBUpperMenuBarFragment.ClickMenu();
+							Log.d(TAG,"Go to Sub");
+						}else if (TestFlag == 1){
+							TestFlag = 0;
+						//	showMainBFragment();
+							_MenuBaseFragment._MenuListTitleFragment.ClickHome();
+							Log.d(TAG,"Go to Main");
+						}
+					} catch (NullPointerException e) {
+						// TODO: handle exception
+						Log.e(TAG,"NullPointerException");
+					}
+					
+				}
+			});
+			
+		}
+	}
+	public void StartTestTimer(){
+		Log.d(TAG,"Test Timer Start");
+
+		CancelTestTimer();
+		mTestTimer = new Timer();
+		mTestTimer.schedule(new TestTimerClass(),1,1000);	
+	}
+	
+	public void CancelTestTimer(){
+		if(mTestTimer != null){
+			mTestTimer.cancel();
+			mTestTimer.purge();
+			mTestTimer = null;
+		}
+	}
+	
+	
+	
+	
 	/////////////////////////////////////////////////////
 	//Calculate//////////////////////////////////////////
 	public String GetNumberString(long _Number){

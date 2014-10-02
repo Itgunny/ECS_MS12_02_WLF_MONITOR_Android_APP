@@ -15,8 +15,7 @@ import taeha.wheelloader.fseries_monitor.main.R;
 
 public class MainBRightDownTMShiftModeFragment extends ParentFragment{
 	//CONSTANT////////////////////////////////////////
-	// TAG
-	private static final String TAG = "MainBRightDownTMShiftModeFragment";
+	
 	//////////////////////////////////////////////////
 	//RESOURCE////////////////////////////////////////
 	RadioButton radioManual;
@@ -42,6 +41,7 @@ public class MainBRightDownTMShiftModeFragment extends ParentFragment{
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
+		TAG = "MainBRightDownTMShiftModeFragment";
 		Log.d(TAG, "onCreateView");
 		mRoot = inflater.inflate(R.layout.rightdown_main_b_tmshiftmode, null);
 		InitResource();

@@ -16,8 +16,7 @@ import taeha.wheelloader.fseries_monitor.main.R;
 
 public class MainBKeyWorkLoadDisplayFragment extends ParentFragment{
 	//CONSTANT////////////////////////////////////////
-	// TAG
-	private static final String TAG = "MainBKeyWorkLoadDisplayFragment";
+	
 	//////////////////////////////////////////////////
 	//RESOURCE////////////////////////////////////////
 	RadioButton radioDaily;
@@ -47,6 +46,7 @@ public class MainBKeyWorkLoadDisplayFragment extends ParentFragment{
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
+		 TAG = "MainBKeyWorkLoadDisplayFragment";
 		Log.d(TAG, "onCreateView");
 		mRoot = inflater.inflate(R.layout.key_main_b_workload_display, null);
 		InitResource();

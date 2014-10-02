@@ -14,8 +14,7 @@ import taeha.wheelloader.fseries_monitor.main.R;
 
 public class MainBRightDownQuickFragment extends ParentFragment{
 	//CONSTANT////////////////////////////////////////
-	// TAG
-	private static final String TAG = "MainBRightDownQuickFragment";
+	
 	//////////////////////////////////////////////////
 	//RESOURCE////////////////////////////////////////
 	RelativeLayout LayoutBG;
@@ -42,6 +41,7 @@ public class MainBRightDownQuickFragment extends ParentFragment{
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
+		TAG = "MainBRightDownQuickFragment";
 		Log.d(TAG, "onCreateView");
 		mRoot = inflater.inflate(R.layout.rightdown_main_b_quick, null);
 		InitResource();

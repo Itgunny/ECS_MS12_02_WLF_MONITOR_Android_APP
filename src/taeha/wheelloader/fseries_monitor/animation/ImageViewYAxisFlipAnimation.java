@@ -19,9 +19,9 @@ import android.widget.ImageView;
 
 public class ImageViewYAxisFlipAnimation extends View{
 
-	final static private String TAG = "ImageViewYAxisFlipAnimation";
+	final private String TAG = "ImageViewYAxisFlipAnimation";
 	
-	final static private int AnimationSpeed = 200;
+	final private int AnimationSpeed = 200;
 	
 	private Context context;
 	private int CurrentDrawable;

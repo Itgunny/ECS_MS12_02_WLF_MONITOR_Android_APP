@@ -59,8 +59,7 @@ import android.widget.ImageView;
 
 public class MainBBaseFragment extends ParentFragment{
 	//CONSTANT////////////////////////////////////////
-	// TAG
-	private static final String TAG = "MainBBaseFragment";
+
 	//////////////////////////////////////////////////
 	//RESOURCE////////////////////////////////////////
 	AbsoluteLayout LayoutBody;
@@ -215,6 +214,7 @@ public class MainBBaseFragment extends ParentFragment{
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
+		TAG = "MainBBaseFragment";
 		Log.d(TAG, "onCreateView");
 		mRoot = inflater.inflate(R.layout.screen_main_b, null);
 		InitResource();
@@ -222,7 +222,7 @@ public class MainBBaseFragment extends ParentFragment{
 		InitValuables();
 		
 		InitButtonListener();
-		
+	
 		showCenter();
 		showIndicator();
 		showRightUpEngine();
@@ -232,24 +232,30 @@ public class MainBBaseFragment extends ParentFragment{
 		showUpperMenuBar();
 		showVirtualKey();
 
-		_BodyAppearAnimation.StartAnimation();
-		_RightUpShiftAnimation.StartShiftAnimation();
-		_RightDownShiftAnimation.StartShiftAnimation();
-		_LeftUpShiftAnimation.StartShiftAnimation();
-		_LeftDownShiftAnimation.StartShiftAnimation();
-		_RightUpBGShiftAnimation.StartShiftAnimation();
-		_RightDownBGShiftAnimation.StartShiftAnimation();
-		_LeftUpBGShiftAnimation.StartShiftAnimation();
-		_LeftDownBGShiftAnimation.StartShiftAnimation();
+//		_BodyAppearAnimation.StartAnimation();
+//		_RightUpShiftAnimation.StartShiftAnimation();
+//		_RightDownShiftAnimation.StartShiftAnimation();
+//		_LeftUpShiftAnimation.StartShiftAnimation();
+//		_LeftDownShiftAnimation.StartShiftAnimation();
+//		_RightUpBGShiftAnimation.StartShiftAnimation();
+//		_RightDownBGShiftAnimation.StartShiftAnimation();
+//		_LeftUpBGShiftAnimation.StartShiftAnimation();
+//		_LeftDownBGShiftAnimation.StartShiftAnimation();
 		
 		ParentActivity.ScreenIndex = ParentActivity.SCREEN_STATE_MAIN_B_TOP;
 		return mRoot;
 	}
-	
+	@Override
+	public void onDestroyView() {
+		// TODO Auto-generated method stub
+		super.onDestroyView();
+		DestroyFragment();
+		DestroyAnimation();
+	//	Runtime.getRuntime().gc();
+	}
 	////////////////////////////////////////////////
-	
-	
 
+	
 	//Common Function//////////////////////////////
 	@Override
 	protected void InitResource() {
@@ -405,10 +411,9 @@ public class MainBBaseFragment extends ParentFragment{
 		_LeftDownBGAppearAnimation = new AppearAnimation(ParentActivity, imgViewLeftDown);
 		_CenterBGAppearAnimation = new AppearAnimation(ParentActivity, imgViewCenterBG);
 		_VirtualKeyAppearAnimation = new AppearAnimation(ParentActivity, framelayoutVirtualKey);
-		
-	
-		
+
 	}
+	
 	@Override
 	protected void InitButtonListener() {
 		// TODO Auto-generated method stub
@@ -425,6 +430,176 @@ public class MainBBaseFragment extends ParentFragment{
 	protected void UpdateUI() {
 		// TODO Auto-generated method stub
 		
+	}
+	public void DestroyKeyFragment(){
+		android.app.FragmentTransaction transaction = getFragmentManager().beginTransaction();
+		transaction.detach(_MainBKeyTitleFragment);
+		transaction.detach(_MainBKeyMainLightFragment);
+		transaction.detach(_MainBKeyWorkLightFragment);
+		transaction.detach(_MainBKeyAutoGreaseFragment);
+		transaction.detach(_MainBKeyQuickCouplerFragment);
+		transaction.detach(_MainBKeyRideControlFragment);
+		transaction.detach(_MainBKeyWorkLoadFragment);
+		transaction.detach(_MainBKeyBeaconLampFragment);
+		transaction.detach(_MainBKeyRearWiperFragment);
+		transaction.detach(_MainBKeyMirrorHeatFragment);
+		transaction.detach(_MainBKeyDetentFragment);
+		transaction.detach(_MainBKeyFineModulationFragment);
+		transaction.detach(_MainBKeyWorkLoadAccumulationFragment);
+		transaction.detach(_MainBKeyWorkLoadDisplayFragment);
+		transaction.detach(_MainBKeyWorkLoadErrorDetectionFragment);
+		transaction.detach(_MainBKeyRideControlSpeedFragment);
+
+		transaction.commit();		
+	}
+	public void DestroyBodyFragment(){
+		android.app.FragmentTransaction transaction = getFragmentManager().beginTransaction();
+		transaction.detach(_MainBCenterFragment);
+		transaction.detach(_MainBCenterEngineFragment);
+		transaction.detach(_MainBCenterTMFragment);
+		transaction.detach(_MainBCenterHourOdometerFragment);
+		transaction.detach(_MainBCenterMachineStatusFragment);
+		transaction.detach(_MainBCenterQuickFragment);
+		transaction.detach(_MainBIndicatorFragment);
+		transaction.detach(_MainBRightUpEngineFragment);
+		transaction.detach(_MainBRightUpEngineModeFragment);
+		transaction.detach(_MainBRightUpEngineWarmingUpFragment);
+		transaction.detach(_MainBRightUpQuickFragment);
+		transaction.detach(_MainBRightDownTMFragment);
+		transaction.detach(_MainBRightDownTMCCOModeFragment);
+		transaction.detach(_MainBRightDownTMShiftModeFragment);
+		transaction.detach(_MainBRightDownTMTCLockUpFragment);
+		transaction.detach(_MainBRightDownQuickFragment);
+		transaction.detach(_MainBLeftDownHourOdoFragment);
+		transaction.detach(_MainBLeftDownHourOdometerSelectFragment);
+		transaction.detach(_MainBLeftDownQuickFragment);
+		transaction.detach(_MainBLeftUpMachineStatusFragment);
+		transaction.detach(_MainBLeftUpMachineStatusSelectFragment);
+		transaction.detach(_MainBLeftUpQuickFragment);
+		transaction.detach(_MainBUpperMenuBarFragment);
+		transaction.detach(_MainBVirtualKeyFragment);
+		transaction.commit();
+	}
+	public void DestroyFragment(){
+		DestroyKeyFragment();
+		DestroyBodyFragment();
+		_MainBCenterFragment 	 = null;
+		_MainBCenterEngineFragment 	 = null;
+		_MainBCenterTMFragment 	 = null;
+		_MainBCenterHourOdometerFragment 	 = null;
+		_MainBCenterMachineStatusFragment 	 = null;
+		_MainBCenterQuickFragment 	 = null;
+			
+		_MainBIndicatorFragment 	 = null;
+			
+		_MainBRightUpEngineFragment 	 = null;
+		_MainBRightUpEngineModeFragment 	 = null;
+		_MainBRightUpEngineWarmingUpFragment 	 = null;
+		_MainBRightUpQuickFragment 	 = null;
+			
+		_MainBRightDownTMFragment 	 = null;
+		_MainBRightDownTMCCOModeFragment 	 = null;
+		_MainBRightDownTMShiftModeFragment 	 = null;
+		_MainBRightDownTMTCLockUpFragment 	 = null;
+		_MainBRightDownQuickFragment 	 = null;
+			
+		_MainBLeftDownHourOdoFragment 	 = null;
+		_MainBLeftDownHourOdometerSelectFragment 	 = null;
+		_MainBLeftDownQuickFragment 	 = null;
+			
+		_MainBLeftUpMachineStatusFragment 	 = null;
+		_MainBLeftUpMachineStatusSelectFragment 	 = null;
+		_MainBLeftUpQuickFragment 	 = null;
+			
+		_MainBUpperMenuBarFragment 	 = null;
+			
+		_MainBVirtualKeyFragment 	 = null;
+		
+		
+		_MainBKeyTitleFragment 	 = null;
+		
+		_MainBKeyMainLightFragment 	 = null;
+		_MainBKeyWorkLightFragment 	 = null;
+		_MainBKeyAutoGreaseFragment 	 = null;
+		_MainBKeyQuickCouplerFragment 	 = null;
+		_MainBKeyRideControlFragment 	 = null;
+		_MainBKeyWorkLoadFragment 	 = null;
+		_MainBKeyBeaconLampFragment 	 = null;
+		_MainBKeyRearWiperFragment 	 = null;
+		_MainBKeyMirrorHeatFragment 	 = null;
+		_MainBKeyDetentFragment 	 = null;
+		_MainBKeyFineModulationFragment 	 = null;
+		_MainBKeyWorkLoadAccumulationFragment 	 = null;
+		_MainBKeyWorkLoadDisplayFragment 	 = null;
+		_MainBKeyWorkLoadErrorDetectionFragment 	 = null;
+		_MainBKeyRideControlSpeedFragment 	 = null;
+	}
+	public void DestroyAnimation(){
+		_MainBodyShiftAnimation.CancelShiftLayoutTimer();
+		_MainBodyShiftAnimation 	 = null;
+		CenterAnimation 	 = null;
+		RightUpChangeAnimation 	 = null;
+		RightDownChangeAnimation 	 = null;
+		LeftUpChangeAnimation 	 = null;
+		LeftDownChangeAnimation 	 = null;
+		IndicatorChangeAnimation 	 = null;
+		VirtualKeyChangeAnimation 	 = null;
+		KeyTitleChangeAnimation 	 = null;
+		KeyBodyChangeAnimation 	 = null;
+			
+		_RightUpShiftAnimation 	 = null;
+		_RightDownShiftAnimation 	 = null;
+		_LeftUpShiftAnimation 	 = null;
+		_LeftDownShiftAnimation 	 = null;
+		_KeyTitleShiftAnimation 	 = null;
+		_KeyBodyShiftAnimation 	 = null;
+		_KeyTitleBGShiftAnimation 	 = null;
+		_KeyBodyBGShiftAnimation 	 = null;
+		_RightUpBGShiftAnimation 	 = null;
+		_RightDownBGShiftAnimation 	 = null;
+		_LeftUpBGShiftAnimation 	 = null;
+		_LeftDownBGShiftAnimation 	 = null;
+		_RightUpShiftAnimation 	 = null;
+		_RightDownShiftAnimation 	 = null;
+		_LeftUpShiftAnimation 	 = null;
+		_LeftDownShiftAnimation 	 = null;
+			
+		_CenterDisappearAnimation 	 = null;
+		_RightUpDisappearAnimation 	 = null;
+		_RightDownDisappearAnimation 	 = null;
+		_LeftUpDisappearAnimation 	 = null;
+		_LeftDownDisappearAnimation 	 = null;
+		_KeyTitleDisappearAnimation 	 = null;
+		_KeyBodyDisappearAnimation 	 = null;
+		_KeyTitleBGDisappearAnimation 	 = null;
+		_KeyBodyBGDisappearAnimation 	 = null;
+		_BodyDisappearAnimation 	 = null;
+		_KeyDisappearAnimation 	 = null;
+		_RightUpBGDisappearAnimation 	 = null;
+		_RightDownBGDisappearAnimation 	 = null;
+		_LeftUpBGDisappearAnimation 	 = null;
+		_LeftDownBGDisappearAnimation 	 = null;
+		_CenterBGDisappearAnimation 	 = null;
+		_VirtualKeyDisappearAnimation 	 = null;
+			
+		_CenterAppearAnimation 	 = null;
+		_RightUpAppearAnimation 	 = null;
+		_RightDownAppearAnimation 	 = null;
+		_LeftUpAppearAnimation 	 = null;
+		_LeftDownAppearAnimation 	 = null;
+		_KeyTitleAppearAnimation 	 = null;
+		_KeyBodyAppearAnimation 	 = null;
+		_KeyTitleBGAppearAnimation 	 = null;
+		_KeyBodyBGAppearAnimation 	 = null;
+		_BodyAppearAnimation 	 = null;
+		_KeyAppearAnimation 	 = null;
+		_RightUpBGAppearAnimation 	 = null;
+		_RightDownBGAppearAnimation 	 = null;
+		_LeftUpBGAppearAnimation 	 = null;
+		_LeftDownBGAppearAnimation 	 = null;
+		_CenterBGAppearAnimation 	 = null;
+		_VirtualKeyAppearAnimation 	 = null;
+
 	}
 	/////////////////////////////////////////////////////////////////////	
 	

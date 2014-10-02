@@ -12,9 +12,9 @@ import android.animation.Animator.AnimatorListener;
 
 public class DisappearAnimation extends View{
 	
-	final static private String TAG = "DisappearAnimation";
+	final private String TAG = "DisappearAnimation";
 	
-	final static private int AnimationSpeed = 200;
+	final private int AnimationSpeed = 200;
 	
 	public Home ParentActivity;
 	public View viewItem;

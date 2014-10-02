@@ -12,8 +12,7 @@ import android.widget.TextView;
 
 public class MainBCenterQuickFragment extends MainBCenterFragment{
 	//CONSTANT////////////////////////////////////////
-	// TAG
-	private static final String TAG = "MainBCenterQuickFragment";
+	
 	//////////////////////////////////////////////////
 	//RESOURCE////////////////////////////////////////
 	
@@ -36,7 +35,7 @@ public class MainBCenterQuickFragment extends MainBCenterFragment{
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
-
+		TAG = "MainBCenterQuickFragment";
 		Log.d(TAG, "onCreateView");
 		mRoot = inflater.inflate(R.layout.center_main_b, null);
 		InitResource();

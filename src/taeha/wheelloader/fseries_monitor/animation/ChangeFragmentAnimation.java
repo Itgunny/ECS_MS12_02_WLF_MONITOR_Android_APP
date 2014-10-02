@@ -13,7 +13,7 @@ import android.app.Fragment;
 
 public class ChangeFragmentAnimation extends View{
 	
-	final static private String TAG = "ChangeFragmentAnimation";
+	final private String TAG = "ChangeFragmentAnimation";
 	
 	private int DisappearAnimationSpeed = 200;
 	private int AppearAnimationSpeed = 200;
@@ -209,10 +209,10 @@ public class ChangeFragmentAnimation extends View{
 			
 		} catch (IllegalStateException e){
 			Log.e(TAG,"IllegalStateException");
-		}
-		catch (RuntimeException e){
+		} catch (RuntimeException e){
 			Log.e(TAG,"RuntimeException");
 		}
+		
 	}
 	
 	public void SetDisappearTime(int Time){

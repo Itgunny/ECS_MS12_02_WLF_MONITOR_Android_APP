@@ -7,7 +7,6 @@
         android:id="@+id/imageButton_menu_list_title_back"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerVertical="true"
         android:background="@drawable/_selector_menu_title_back_btn" />
 
     <ImageButton
@@ -15,7 +14,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
-        android:layout_centerVertical="true"
         android:background="@drawable/_selector_menu_title_home_btn" />
 
     <TextView
@@ -24,7 +22,6 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_alignParentTop="true"
-        android:layout_centerVertical="true"
         android:layout_toLeftOf="@+id/imageButton_menu_list_title_home"
         android:layout_toRightOf="@+id/imageButton_menu_list_title_back"
         android:gravity="center"

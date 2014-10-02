@@ -4,38 +4,39 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.TranslateAnimation;
 import taeha.wheelloader.fseries_monitor.main.Home;
 
-public class MainBodyShiftAnimation {
+public class MainBodyShiftAnimation{
 	
-	final static private String TAG = "MainBodyShiftAnimation";
+	final private String TAG = "MainBodyShiftAnimation";
 	
-	final static private int SHIFT_POSITION_RIGHT_UP_X = -345;
-	final static private int SHIFT_POSITION_RIGHT_UP_Y = 106;
+	final private int SHIFT_POSITION_RIGHT_UP_X = -345;
+	final private int SHIFT_POSITION_RIGHT_UP_Y = 106;
 	
-	final static private int SHIFT_POSITION_RIGHT_DOWN_X = -345;
-	final static private int SHIFT_POSITION_RIGHT_DOWN_Y = -140;
+	final private int SHIFT_POSITION_RIGHT_DOWN_X = -345;
+	final private int SHIFT_POSITION_RIGHT_DOWN_Y = -140;
 	
-	final static private int SHIFT_POSITION_LEFT_DOWN_X = 345;
-	final static private int SHIFT_POSITION_LEFT_DOWN_Y = -166;
+	final private int SHIFT_POSITION_LEFT_DOWN_X = 345;
+	final private int SHIFT_POSITION_LEFT_DOWN_Y = -166;
 	
-	final static private int SHIFT_POSITION_LEFT_UP_X = 345;
-	final static private int SHIFT_POSITION_LEFT_UP_Y = 106;
+	final  private int SHIFT_POSITION_LEFT_UP_X = 345;
+	final  private int SHIFT_POSITION_LEFT_UP_Y = 106;
 	
-	final static private int ShiftSpeed = 2;
-	final static private int AnimationSpeed = 250;
-	final static private int MOVE_STEP_X			= 5;	
-	final static private int MOVE_STEP_Y			= 2;	
+	final  private int ShiftSpeed = 2;
+	final  private int AnimationSpeed = 250;
+	final  private int MOVE_STEP_X			= 5;	
+	final  private int MOVE_STEP_Y			= 2;	
 	
 	public Home ParentActivity;
 	
 	View Body;
 	
 	// Timer
-	private Timer ShiftLayoutTimer;
+	private Timer ShiftLayoutTimer = null;
 	int PositionX = 0;
 	int PositionY = 0;
 	
@@ -48,6 +49,14 @@ public class MainBodyShiftAnimation {
 		StartShiftLayoutTimer();
 	}
 	
+	@Override
+	protected void finalize() throws Throwable {
+		// TODO Auto-generated method stub
+		super.finalize();
+		Log.d(TAG,"finalize");
+		CancelShiftLayoutTimer();
+	}
+
 	///////////////////Shift Animation//////////////////////////
 	public void StartShiftZeroAnimation(){
 		SetShiftPositionX(0);
@@ -82,12 +91,13 @@ public class MainBodyShiftAnimation {
 		return PositionY;
 	}
 	
-	private void StartShiftLayoutTimer(){
+	public void StartShiftLayoutTimer(){
+		CancelShiftLayoutTimer();
 		ShiftLayoutTimer = new Timer();
 		ShiftLayoutTimer.schedule(new ShiftLayoutTimerClass(),1,ShiftSpeed);	
 	}
 	
-	private void CancelShiftLayoutTimer(){
+	public void CancelShiftLayoutTimer(){
 		if(ShiftLayoutTimer != null){
 			ShiftLayoutTimer.cancel();
 			ShiftLayoutTimer.purge();

@@ -731,7 +731,7 @@ public final class R {
         public static final int textView_menu_list_left_management=0x7f0b0113;
         public static final int textView_menu_list_left_mode=0x7f0b0111;
         public static final int textView_menu_list_left_monitoring=0x7f0b0112;
-        public static final int textView_menu_list_left_mumtimedia=0x7f0b0115;
+        public static final int textView_menu_list_left_multimedia=0x7f0b0115;
         public static final int textView_menu_list_left_preference=0x7f0b0114;
         public static final int textView_menu_list_title_text=0x7f0b0118;
         public static final int textView_popup_key_quickcoupler_locking_1_cancel=0x7f0b0120;

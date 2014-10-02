@@ -16,14 +16,13 @@ import taeha.wheelloader.fseries_monitor.main.R.string;
 
 public class MainBKeyRideControlSpeedFragment extends ParentFragment{
 	//CONSTANT////////////////////////////////////////
-	// TAG
-	private static final String TAG = "MainBKeyRideControlSpeedFragment";
+
 	
-	private static final int MAX_LEVEL	 	= 20;
-	private static final int MIN_LEVEL 		= 5;
+	private  final int MAX_LEVEL	 	= 20;
+	private  final int MIN_LEVEL 		= 5;
 	
-	private static final int TOTAL_STEP		= 100;
-	private static final int STEP			= 4;
+	private  final int TOTAL_STEP		= 100;
+	private  final int STEP			= 4;
 	//////////////////////////////////////////////////
 	//RESOURCE////////////////////////////////////////
 	TextView textViewForwardData;
@@ -59,6 +58,7 @@ public class MainBKeyRideControlSpeedFragment extends ParentFragment{
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
+		 TAG = "MainBKeyRideControlSpeedFragment";
 		Log.d(TAG, "onCreateView");
 		mRoot = inflater.inflate(R.layout.key_main_b_ridecontrol_speed, null);
 		InitResource();

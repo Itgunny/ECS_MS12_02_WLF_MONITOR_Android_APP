@@ -11,13 +11,13 @@ import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
+import taeha.wheelloader.fseries_monitor.main.MainBBaseFragment;
 import taeha.wheelloader.fseries_monitor.main.ParentFragment;
 import taeha.wheelloader.fseries_monitor.main.R;
 
 public class MainBUpperMenuBarFragment extends ParentFragment{
 	//CONSTANT////////////////////////////////////////
-	// TAG
-	private static final String TAG = "MainBUpperMenuBarFragment";
+	
 	//////////////////////////////////////////////////
 	//RESOURCE////////////////////////////////////////
 	TextView textViewTimeAM;
@@ -71,6 +71,7 @@ public class MainBUpperMenuBarFragment extends ParentFragment{
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
+		TAG = "MainBUpperMenuBarFragment";
 		Log.d(TAG, "onCreateView");
 		mRoot = inflater.inflate(R.layout.upper_main_b_menubar, null);
 		InitResource();
@@ -252,16 +253,17 @@ public class MainBUpperMenuBarFragment extends ParentFragment{
 		
 	}
 	public void ClickWiper(){
-		
+		ParentActivity.StartTestTimer();
 	}
 	public void ClickCamera(){
-		
+		ParentActivity.CancelTestTimer();
 	}
 	public void ClickMenu(){
 		if(ParentActivity.AnimationRunningFlag == true)
 			return;
-		ParentActivity.StartAnimationRunningTimer();
+		else
+			ParentActivity.StartAnimationRunningTimer();
 		ParentActivity._MainChangeAnimation.StartChangeAnimation(ParentActivity._MenuBaseFragment);
-		
+		//ParentActivity.showMenuFragment();
 	}
 }	

@@ -15,8 +15,7 @@ import taeha.wheelloader.fseries_monitor.main.R;
 
 public class MainBRightDownTMTCLockUpFragment extends ParentFragment{
 	//CONSTANT////////////////////////////////////////
-	// TAG
-	private static final String TAG = "MainBRightDownTMTCLockUpFragment";
+
 	//////////////////////////////////////////////////
 	//RESOURCE////////////////////////////////////////
 	RadioButton radioOff;
@@ -40,6 +39,7 @@ public class MainBRightDownTMTCLockUpFragment extends ParentFragment{
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
+		TAG = "MainBRightDownTMTCLockUpFragment";
 		Log.d(TAG, "onCreateView");
 		mRoot = inflater.inflate(R.layout.rightdown_main_b_tmtclockup, null);
 		InitResource();

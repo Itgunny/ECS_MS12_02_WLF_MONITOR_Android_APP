@@ -14,8 +14,7 @@ import taeha.wheelloader.fseries_monitor.main.R;
 
 public class MainBCenterFragment extends ParentFragment{
 	//CONSTANT////////////////////////////////////////
-	// TAG
-	private static final String TAG = "MainBCenterFragment";
+	
 	//////////////////////////////////////////////////
 	//RESOURCE////////////////////////////////////////
 	TextView textViewRPMData;
@@ -47,6 +46,7 @@ public class MainBCenterFragment extends ParentFragment{
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
+		TAG = "MainBCenterFragment";
 		Log.d(TAG, "onCreateView");
 		mRoot = inflater.inflate(R.layout.center_main_b, null);
 		InitResource();
@@ -56,9 +56,6 @@ public class MainBCenterFragment extends ParentFragment{
 		ParentActivity.ScreenIndex = ParentActivity.SCREEN_STATE_MAIN_B_TOP;
 		return mRoot;
 	}
-
-	////////////////////////////////////////////////
-	
 	@Override
 	public void onResume() {
 		// TODO Auto-generated method stub
@@ -67,6 +64,18 @@ public class MainBCenterFragment extends ParentFragment{
 		setClickEnable(ClickFlag);
 	}
 
+	@Override
+	public void onPause() {
+		// TODO Auto-generated method stub
+		super.onPause();
+		Log.d(TAG, "onPause");
+	}
+	////////////////////////////////////////////////
+	
+	
+
+	
+	
 	//Common Function//////////////////////////////
 	@Override
 	protected void InitResource() {

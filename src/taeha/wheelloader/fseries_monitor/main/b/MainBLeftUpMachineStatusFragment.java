@@ -17,8 +17,8 @@ import taeha.wheelloader.fseries_monitor.main.R.string;
 
 public class MainBLeftUpMachineStatusFragment extends ParentFragment{
 	//CONSTANT////////////////////////////////////////
-	// TAG
-	private static final String TAG = "MainBLeftUpMachineStatusFragment";
+	
+	
 	//////////////////////////////////////////////////
 	//RESOURCE////////////////////////////////////////
 	RelativeLayout LayoutNormalUpper;
@@ -83,6 +83,7 @@ public class MainBLeftUpMachineStatusFragment extends ParentFragment{
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
+		TAG = "MainBLeftUpMachineStatusFragment";
 		Log.d(TAG, "onCreateView");
 		mRoot = inflater.inflate(R.layout.leftup_main_b_machinestatus, null);
 		InitResource();

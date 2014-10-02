@@ -14,7 +14,7 @@ import android.view.ViewGroup;
 
 public abstract class ParentFragment extends Fragment{
 	/////////////////CONSTANT////////////////////////////////////////////
-	private static final String TAG = "ParentFragment";
+	public String TAG = "ParentFragment";
 	/////////////////////////////////////////////////////////////////////
 	/////////////////////RESOURCE////////////////////////////////////////
 	// Fragment Root
@@ -27,14 +27,14 @@ public abstract class ParentFragment extends Fragment{
 	protected Home ParentActivity;
 	
 	// CAN1CommManager
-	protected static CAN1CommManager CAN1Comm = null;
+	protected  CAN1CommManager CAN1Comm = null;
 	
 	// Thread
 	protected Thread threadRead = null;
 	
 	// Thread Sleep Time
-	private static int ThreadSleepTime;
-	
+	private  int ThreadSleepTime;
+
 	/////////////////////////////////////////////////////////////////////	
 	
 	///////////////////ANIMATION/////////////////////////////////////////
@@ -52,7 +52,7 @@ public abstract class ParentFragment extends Fragment{
 		CAN1Comm = CAN1CommManager.getInstance();	
 		
 		threadRead = new Thread(new ReadThread(this));
-		threadRead.start();
+		
 	}
 	protected void SetThreadSleepTime(int Time){
 		ThreadSleepTime = Time;
@@ -81,7 +81,7 @@ public abstract class ParentFragment extends Fragment{
 	}
 	
 	// Read Thread
-	public static class ReadThread implements Runnable {
+	public class ReadThread implements Runnable {
 		private WeakReference<ParentFragment> fragmentRef = null;
 		public Message msg = null;
 		public ReadThread(ParentFragment fragment){
@@ -107,6 +107,13 @@ public abstract class ParentFragment extends Fragment{
 			}
 		}
 	
+	}
+	
+	public void StopReadThread(){
+		threadRead.interrupt();
+	}
+	public void StartReadThread(){
+		threadRead.start();
 	}
 	////////////////////////////////////////////////////////////////////
 	
@@ -161,7 +168,7 @@ public abstract class ParentFragment extends Fragment{
 		// TODO Auto-generated method stub
 		Log.d(TAG, "onDestroyView");
 		super.onDestroyView();
-		threadRead.interrupt();
+		
 	}
 
 	@Override
@@ -176,7 +183,7 @@ public abstract class ParentFragment extends Fragment{
 		// TODO Auto-generated method stub
 		Log.d(TAG, "onPause");
 		super.onPause();
-
+		StopReadThread();
 	}
 
 	@Override
@@ -184,7 +191,7 @@ public abstract class ParentFragment extends Fragment{
 		// TODO Auto-generated method stub
 		Log.d(TAG, "onResume");
 		super.onResume();
-
+		StartReadThread();
 	}
 
 	@Override

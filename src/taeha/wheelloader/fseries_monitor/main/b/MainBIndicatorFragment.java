@@ -13,11 +13,10 @@ import taeha.wheelloader.fseries_monitor.main.R;
 
 public class MainBIndicatorFragment extends ParentFragment{
 	//CONSTANT////////////////////////////////////////
-	// TAG
-	private static final String TAG = "MainBIndicatorFragment";
+
 	
-	private static final float DARK = (float)0.15;
-	private static final float LIGHT = (float)1;
+	private  final float DARK = (float)0.15;
+	private  final float LIGHT = (float)1;
 	//////////////////////////////////////////////////
 	//RESOURCE////////////////////////////////////////
 	ImageView imgViewWarmingUp;
@@ -70,6 +69,7 @@ public class MainBIndicatorFragment extends ParentFragment{
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
+		TAG = "MainBIndicatorFragment";
 		Log.d(TAG, "onCreateView");
 		mRoot = inflater.inflate(R.layout.indicator_main_b, null);
 		InitResource();

@@ -16,9 +16,9 @@ import android.widget.TextView;
 
 public class TextViewXAxisFlipAnimation extends View{
 
-	final static private String TAG = "TextViewXAxisFlipAnimation";
+	final  private String TAG = "TextViewXAxisFlipAnimation";
 	
-	final static private int AnimationSpeed = 200;
+	final  private int AnimationSpeed = 200;
 	
 	private Context context;
 	private String CurrentString;
