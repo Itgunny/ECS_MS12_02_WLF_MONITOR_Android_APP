@@ -1087,7 +1087,7 @@ public class MainBBaseFragment extends ParentFragment{
 	
 	public void showKeyScreenAnimation(){
 		
-		if((ParentActivity.ScreenIndex & ParentActivity.SCREEN_STATE_MAIN_B_KEY_TOP) != ParentActivity.SCREEN_STATE_MAIN_B_KEY_TOP){
+		if((ParentActivity.ScreenIndex < ParentActivity.SCREEN_STATE_MAIN_B_KEY_TOP) || (ParentActivity.ScreenIndex > ParentActivity.SCREEN_STATE_MAIN_B_KEY_END)){
 			_BodyDisappearAnimation.StartAnimation();
 			_KeyAppearAnimation.StartAnimation();
 			_KeyTitleShiftAnimation.StartShiftAnimation();

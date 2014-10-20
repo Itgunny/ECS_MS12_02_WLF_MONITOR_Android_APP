@@ -857,6 +857,12 @@ jint Get_EcoGaugeLevel_1304_PGN65390(JNIEnv *env, jobject this) {
 jint Get_EcoGaugeStatus_1305_PGN65390(JNIEnv *env, jobject this) {
 	return RX_FUEL_INFORMATION_ECO_GAUGE_65390.EcoGaugeStatus_1305;
 }
+jint Get_AverageFuelRate_PGN65390(JNIEnv *env, jobject this) {
+	return RX_FUEL_INFORMATION_ECO_GAUGE_65390.AverageFuelRate;
+}
+jint Get_CurrentFuelRate_PGN65390(JNIEnv *env, jobject this) {
+	return RX_FUEL_INFORMATION_ECO_GAUGE_65390.CurrentFuelRate;
+}
 //////////////////////////////////////////////////////////////////////////////////////////
 //////RX_CYLINDER_ANGLE_STROKE1_65395///////
 jint Get_BoomLinkAngle_1920_PGN65395(JNIEnv * env, jobject this) {
@@ -3041,7 +3047,10 @@ jint _Get_RecvESL_Flag(JNIEnv *env, jobject this) {
 	return gRecvESL;
 }
 jint _Get_RecvSMK_Flag(JNIEnv *env, jobject this) {
-	return gRecvSMK;
+	int result;
+	result = gRecvSMK;
+	gRecvSMK = 0;
+	return result;
 }
 jint _Get_SmkAuthResult(JNIEnv *env, jobject this) {
 	return rx_smk_result.SMK_Auth_Result;
@@ -3693,6 +3702,9 @@ static JNINativeMethod methods[] =
 				{"Get_FuelLevel_302_PGN65390", "()I", (void*) Get_FuelLevel_302_PGN65390 },
 				{"Get_EcoGaugeLevel_1304_PGN65390", "()I",(void*) Get_EcoGaugeLevel_1304_PGN65390 },
 				{"Get_EcoGaugeStatus_1305_PGN65390", "()I",(void*) Get_EcoGaugeStatus_1305_PGN65390 },
+				{"Get_AverageFuelRate_PGN65390", "()I",(void*) Get_AverageFuelRate_PGN65390 },
+				{"Get_CurrentFuelRate_PGN65390", "()I",(void*) Get_CurrentFuelRate_PGN65390 },
+
 				//////RX_CYLINDER_ANGLE_STROKE1_65395///////
 				{ "Get_BoomLinkAngle_1920_PGN65395", "()I",
 						(void*) Get_BoomLinkAngle_1920_PGN65395 }, {

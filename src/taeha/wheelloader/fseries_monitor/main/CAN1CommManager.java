@@ -723,6 +723,8 @@ public class CAN1CommManager extends ICAN1CommManager.Stub{		// ttySAC1(Linux), 
 	public int Get_FuelLevel_302_PGN65390(){ return service.Get_FuelLevel_302_PGN65390();}
 	public int Get_EcoGaugeLevel_1304_PGN65390(){ return service.Get_EcoGaugeLevel_1304_PGN65390();}
 	public int Get_EcoGaugeStatus_1305_PGN65390(){ return service.Get_EcoGaugeStatus_1305_PGN65390();}
+	public int Get_AverageFuelRate_PGN65390(){ return service.Get_AverageFuelRate_PGN65390();}
+	public int Get_CurrentFuelRate_PGN65390(){ return service.Get_CurrentFuelRate_PGN65390();}
 	//////RX_CYLINDER_ANGLE_STROKE1_65395///////
 	public int Get_BoomLinkAngle_1920_PGN65395(){ return service.Get_BoomLinkAngle_1920_PGN65395();}
 	public int Get_BellCrankAngle_1921_PGN65395(){ return service.Get_BellCrankAngle_1921_PGN65395();}

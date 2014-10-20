@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
+
+    <TextView
+        android:id="@+id/TextView_menu_body_mode_tab_engine"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/_selector_menu_body_mode_tab_left_btn"
+        android:gravity="center"
+        android:text="@string/Eng"
+        android:textColor="@drawable/_selector_menu_body_mode_tab_txt"
+        android:textSize="23sp" />
+
+    <TextView
+        android:id="@+id/TextView_menu_body_mode_tab_hyd"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@+id/TextView_menu_body_mode_tab_engine"
+        android:background="@drawable/_selector_menu_body_mode_tab_center_btn"
+        android:gravity="center"
+        android:text="@string/HYD"
+        android:textColor="@drawable/_selector_menu_body_mode_tab_txt"
+        android:textSize="23sp" />
+
+    <TextView
+        android:id="@+id/TextView_menu_body_mode_tab_etc"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@+id/TextView_menu_body_mode_tab_hyd"
+        android:background="@drawable/_selector_menu_body_mode_tab_right_btn"
+        android:gravity="center"
+        android:text="@string/ETC"
+        android:textColor="@drawable/_selector_menu_body_mode_tab_txt"
+        android:textSize="23sp" />
+
+</RelativeLayout>

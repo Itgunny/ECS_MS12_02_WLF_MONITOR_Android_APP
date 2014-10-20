@@ -383,6 +383,8 @@ public class CommService extends Service{
 	public native int Get_FuelLevel_302_PGN65390();
 	public native int Get_EcoGaugeLevel_1304_PGN65390();
 	public native int Get_EcoGaugeStatus_1305_PGN65390();
+	public native int Get_AverageFuelRate_PGN65390();
+	public native int Get_CurrentFuelRate_PGN65390();
 	//////RX_CYLINDER_ANGLE_STROKE1_65395///////
 	public native int Get_BoomLinkAngle_1920_PGN65395();
 	public native int Get_BellCrankAngle_1921_PGN65395();

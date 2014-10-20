@@ -106,6 +106,7 @@ jclass jObject;
 #define		MULTI_BUF_SIZE				400
 
 #define 	TIMER1_INTERVAL				5
+#define 	KEYBUTTON_CNT_MAX			50
 //////////////////Variable//////////////////////////
 unsigned char		UART1_TxBuff[RINGBUFF_SIZE][UART1_TXPACKET_SIZE];
 unsigned int		TxRingBuffHead;
@@ -208,7 +209,7 @@ unsigned char 		gRecvSMK;
 
 unsigned int		CommErrCnt;
 
-
+unsigned int		KeyButtonCount;
 
 pthread_mutex_t mutex_UART3 = PTHREAD_MUTEX_INITIALIZER;
 

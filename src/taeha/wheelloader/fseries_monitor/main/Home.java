@@ -34,50 +34,67 @@ public class Home extends Activity {
 	// TAG
 	private  final String TAG = "Home";
 	
-	public  final int SCREEN_STATE_MAIN_B_TOP 									= 0x10000000;
+	public  final int SCREEN_STATE_MAIN_B_TOP 										= 0x10000000;
 	
 	public  final int SCREEN_STATE_MAIN_B_RIGHTUP_TOP								= 0x11000000;
 	public  final int SCREEN_STATE_MAIN_B_RIGHTUP_ENGINE_MODE						= 0x11100000;
-	public  final int SCREEN_STATE_MAIN_B_RIGHTUP_ENGINE_WARMINGUP				= 0x11200000;
+	public  final int SCREEN_STATE_MAIN_B_RIGHTUP_ENGINE_WARMINGUP					= 0x11200000;
+	public  final int SCREEN_STATE_MAIN_B_RIGHTUP_END								= 0x11FFFFFF;
 	
-	public  final int SCREEN_STATE_MAIN_B_RIGHTDOWN_TOP							= 0x12000000;
-	public  final int SCREEN_STATE_MAIN_B_RIGHTDOWN_CCOMODE						= 0x12100000;
+	public  final int SCREEN_STATE_MAIN_B_RIGHTDOWN_TOP								= 0x12000000;
+	public  final int SCREEN_STATE_MAIN_B_RIGHTDOWN_CCOMODE							= 0x12100000;
 	public  final int SCREEN_STATE_MAIN_B_RIGHTDOWN_SHIFTMODE						= 0x12200000;
 	public  final int SCREEN_STATE_MAIN_B_RIGHTDOWN_TCLOCKUP						= 0x12300000;
-	
+	public  final int SCREEN_STATE_MAIN_B_RIGHTDOWN_END								= 0x12FFFFFF;
 	
 	public  final int SCREEN_STATE_MAIN_B_LEFTUP_TOP								= 0x13000000;
-	public  final int SCREEN_STATE_MAIN_B_LEFTUP_MACHINESTATUS					= 0x13100000;
+	public  final int SCREEN_STATE_MAIN_B_LEFTUP_MACHINESTATUS						= 0x13100000;
+	public  final int SCREEN_STATE_MAIN_B_LEFTUP_END								= 0x13FFFFFF;
 	
-	public  final int SCREEN_STATE_MAIN_B_LEFTDOWN_TOP							= 0x14000000;
-	public  final int SCREEN_STATE_MAIN_B_LEFTDOWN_HOURODOMETER					= 0x14100000;
+	public  final int SCREEN_STATE_MAIN_B_LEFTDOWN_TOP								= 0x14000000;
+	public  final int SCREEN_STATE_MAIN_B_LEFTDOWN_HOURODOMETER						= 0x14100000;
+	public  final int SCREEN_STATE_MAIN_B_LEFTDOWN_END								= 0x14FFFFFF;
 	
-	public  final int SCREEN_STATE_MAIN_B_QUICK_TOP								= 0x15000000;
+	public  final int SCREEN_STATE_MAIN_B_QUICK_TOP									= 0x15000000;
+	public  final int SCREEN_STATE_MAIN_B_QUICK_END									= 0x15FFFFFF;
 	
 	public  final int SCREEN_STATE_MAIN_B_KEY_TOP									= 0x16000000;
-	public  final int SCREEN_STATE_MAIN_B_KEY_MAINLIGHT							= 0x16100000;
-	public  final int SCREEN_STATE_MAIN_B_KEY_WORKLIGHT							= 0x16200000;
+	public  final int SCREEN_STATE_MAIN_B_KEY_MAINLIGHT								= 0x16100000;
+	public  final int SCREEN_STATE_MAIN_B_KEY_WORKLIGHT								= 0x16200000;
 	public  final int SCREEN_STATE_MAIN_B_KEY_AUTOGREASE							= 0x16300000;
-	public  final int SCREEN_STATE_MAIN_B_KEY_QUICKCOUPLER						= 0x16400000;
+	public  final int SCREEN_STATE_MAIN_B_KEY_QUICKCOUPLER							= 0x16400000;
 	public  final int SCREEN_STATE_MAIN_B_KEY_QUICKCOUPLER_POPUP_LOCKING1			= 0x16410000;
 	public  final int SCREEN_STATE_MAIN_B_KEY_QUICKCOUPLER_POPUP_LOCKING2			= 0x16420000;
-	public  final int SCREEN_STATE_MAIN_B_KEY_QUICKCOUPLER_POPUP_UNLOCKING1		= 0x16430000;
-	public  final int SCREEN_STATE_MAIN_B_KEY_QUICKCOUPLER_POPUP_UNLOCKING2		= 0x16440000;
+	public  final int SCREEN_STATE_MAIN_B_KEY_QUICKCOUPLER_POPUP_UNLOCKING1			= 0x16430000;
+	public  final int SCREEN_STATE_MAIN_B_KEY_QUICKCOUPLER_POPUP_UNLOCKING2			= 0x16440000;
 	public  final int SCREEN_STATE_MAIN_B_KEY_RIDECONTROL							= 0x16500000;
-	public  final int SCREEN_STATE_MAIN_B_KEY_RIDECONTROL_SPEED					= 0x16510000;
-	public  final int SCREEN_STATE_MAIN_B_KEY_WORKLOAD							= 0x16600000;
-	public  final int SCREEN_STATE_MAIN_B_KEY_WORKLOAD_ACCUMULATION				= 0x16610000;
-	public  final int SCREEN_STATE_MAIN_B_KEY_WORKLOAD_DISPLAY					= 0x16620000;
-	public  final int SCREEN_STATE_MAIN_B_KEY_WORKLOAD_ERRORDETECT				= 0x16630000;
+	public  final int SCREEN_STATE_MAIN_B_KEY_RIDECONTROL_SPEED						= 0x16510000;
+	public  final int SCREEN_STATE_MAIN_B_KEY_WORKLOAD								= 0x16600000;
+	public  final int SCREEN_STATE_MAIN_B_KEY_WORKLOAD_ACCUMULATION					= 0x16610000;
+	public  final int SCREEN_STATE_MAIN_B_KEY_WORKLOAD_DISPLAY						= 0x16620000;
+	public  final int SCREEN_STATE_MAIN_B_KEY_WORKLOAD_ERRORDETECT					= 0x16630000;
 	public  final int SCREEN_STATE_MAIN_B_KEY_BEACONLAMP							= 0x16700000;
-	public  final int SCREEN_STATE_MAIN_B_KEY_REARWIPER							= 0x16800000;
+	public  final int SCREEN_STATE_MAIN_B_KEY_REARWIPER								= 0x16800000;
 	public  final int SCREEN_STATE_MAIN_B_KEY_MIRRORHEAT							= 0x16900000;
 	public  final int SCREEN_STATE_MAIN_B_KEY_DETENT								= 0x16A00000;
 	public  final int SCREEN_STATE_MAIN_B_KEY_FINEMODULATION						= 0x16B00000;
 	public  final int SCREEN_STATE_MAIN_B_KEY_FN									= 0x16C00000;
+	public  final int SCREEN_STATE_MAIN_B_KEY_END									= 0x16FFFFFF;
+	
+	public  final int SCREEN_STATE_MAIN_B_END 										= 0x1FFFFFFF;
 	
 	public  final int SCREEN_STATE_MENU_TOP 										= 0x20000000;
-
+	
+	public  final int SCREEN_STATE_MENU_MODE_TOP									= 0x21000000;
+	public  final int SCREEN_STATE_MENU_MODE_ENGINE_TOP								= 0x21100000;
+	public  final int SCREEN_STATE_MENU_MODE_ENGINE_END								= 0x211FFFFF;
+	public  final int SCREEN_STATE_MENU_MODE_HYD_TOP								= 0x21200000;
+	public  final int SCREEN_STATE_MENU_MODE_HYD_END								= 0x212FFFFF;
+	public  final int SCREEN_STATE_MENU_MODE_ETC_TOP								= 0x21300000;
+	public  final int SCREEN_STATE_MENU_MODE_ETC_END								= 0x213FFFFF;
+	public  final int SCREEN_STATE_MENU_MODE_END									= 0x21FFFFFF;
+	
+	public  final int SCREEN_STATE_MENU_END 										= 0x2FFFFFFF;
 	
 	public  final int UNIT_ODO_KM 			= 0;
 	public  final int UNIT_ODO_MILE 			= 1;
@@ -145,7 +162,6 @@ public class Home extends Activity {
 	private Timer mMirrorHeatPreHeatTimer = null;
 	private Timer mMirrorHeatTimer = null;
 	
-	private Timer mTestTimer = null;
 	
 	// Flag
 	public boolean AnimationRunningFlag;
@@ -184,7 +200,6 @@ public class Home extends Activity {
 		
 		StartSeatBeltTimer();
 		
-		StartTestTimer();
 	}
 
 	@Override
@@ -775,58 +790,6 @@ public class Home extends Activity {
 	
 	
 	
-	
-	
-	
-	int TestFlag = 0;
-	long Memory = 0;
-	public class TestTimerClass extends TimerTask{
-
-		@Override
-		public void run() {
-			// TODO Auto-generated method stub
-			runOnUiThread(new Runnable() {
-				
-				@Override
-				public void run() {
-					// TODO Auto-generated method stub
-					try {
-						if(TestFlag == 0){
-							TestFlag = 1;
-						//	showMenuFragment();
-							_MainBBaseFragment._MainBUpperMenuBarFragment.ClickMenu();
-							Log.d(TAG,"Go to Sub");
-						}else if (TestFlag == 1){
-							TestFlag = 0;
-						//	showMainBFragment();
-							_MenuBaseFragment._MenuListTitleFragment.ClickHome();
-							Log.d(TAG,"Go to Main");
-						}
-					} catch (NullPointerException e) {
-						// TODO: handle exception
-						Log.e(TAG,"NullPointerException");
-					}
-					
-				}
-			});
-			
-		}
-	}
-	public void StartTestTimer(){
-		Log.d(TAG,"Test Timer Start");
-
-		CancelTestTimer();
-		mTestTimer = new Timer();
-		mTestTimer.schedule(new TestTimerClass(),1,1000);	
-	}
-	
-	public void CancelTestTimer(){
-		if(mTestTimer != null){
-			mTestTimer.cancel();
-			mTestTimer.purge();
-			mTestTimer = null;
-		}
-	}
 	
 	
 	

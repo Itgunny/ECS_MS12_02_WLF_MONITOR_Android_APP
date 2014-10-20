@@ -74,7 +74,7 @@ public class MenuListLeftFragment extends ParentFragment{
 		
 		InitButtonListener();
 		
-		ClickMode();
+		setClickMode();
 		return mRoot;
 	}
 	
@@ -175,9 +175,30 @@ public class MenuListLeftFragment extends ParentFragment{
 		
 	}
 	/////////////////////////////////////////////////////////////////////	
-	
-	/////////////////////////////////////////////////////////////////////
 	public void ClickMode(){
+		
+		if((ParentActivity.ScreenIndex < ParentActivity.SCREEN_STATE_MENU_MODE_TOP) || (ParentActivity.ScreenIndex > ParentActivity.SCREEN_STATE_MENU_MODE_END)){
+			setClickMode();
+			ParentActivity._MenuBaseFragment.showBodyMode();
+		}
+		
+	}
+	public void ClickMonitoring(){
+		setClickMonitoring();
+	}
+	public void ClickManagement(){
+		setClickManagement();
+	}
+	public void ClickPreference(){
+		setClickPreference();
+	}
+	public void ClickMultimedia(){
+		setClickMultimedia();
+	}
+
+	/////////////////////////////////////////////////////////////////////
+	
+	public void setClickMode(){
 		imgViewMode.setImageDrawable(ParentActivity.getResources().getDrawable(R.drawable.menu_icon_mode_selected));
 		imgViewMonitoring.setImageDrawable(ParentActivity.getResources().getDrawable(R.drawable.menu_icon_monitoring_normal));
 		imgViewManagement.setImageDrawable(ParentActivity.getResources().getDrawable(R.drawable.menu_icon_management_normal));
@@ -190,7 +211,7 @@ public class MenuListLeftFragment extends ParentFragment{
 		textViewPreference.setTextColor(ParentActivity.getResources().getColor(R.color.menu_left_gray));
 		textViewMultimedia.setTextColor(ParentActivity.getResources().getColor(R.color.menu_left_gray));
 	}
-	public void ClickMonitoring(){
+	public void setClickMonitoring(){
 		imgViewMode.setImageDrawable(ParentActivity.getResources().getDrawable(R.drawable.menu_icon_mode_normal));
 		imgViewMonitoring.setImageDrawable(ParentActivity.getResources().getDrawable(R.drawable.menu_icon_monitoring_selected));
 		imgViewManagement.setImageDrawable(ParentActivity.getResources().getDrawable(R.drawable.menu_icon_management_normal));
@@ -203,7 +224,7 @@ public class MenuListLeftFragment extends ParentFragment{
 		textViewPreference.setTextColor(ParentActivity.getResources().getColor(R.color.menu_left_gray));
 		textViewMultimedia.setTextColor(ParentActivity.getResources().getColor(R.color.menu_left_gray));
 	}
-	public void ClickManagement(){
+	public void setClickManagement(){
 		imgViewMode.setImageDrawable(ParentActivity.getResources().getDrawable(R.drawable.menu_icon_mode_normal));
 		imgViewMonitoring.setImageDrawable(ParentActivity.getResources().getDrawable(R.drawable.menu_icon_monitoring_normal));
 		imgViewManagement.setImageDrawable(ParentActivity.getResources().getDrawable(R.drawable.menu_icon_management_selected));
@@ -216,7 +237,7 @@ public class MenuListLeftFragment extends ParentFragment{
 		textViewPreference.setTextColor(ParentActivity.getResources().getColor(R.color.menu_left_gray));
 		textViewMultimedia.setTextColor(ParentActivity.getResources().getColor(R.color.menu_left_gray));
 	}
-	public void ClickPreference(){
+	public void setClickPreference(){
 		imgViewMode.setImageDrawable(ParentActivity.getResources().getDrawable(R.drawable.menu_icon_mode_normal));
 		imgViewMonitoring.setImageDrawable(ParentActivity.getResources().getDrawable(R.drawable.menu_icon_monitoring_normal));
 		imgViewManagement.setImageDrawable(ParentActivity.getResources().getDrawable(R.drawable.menu_icon_management_normal));
@@ -229,7 +250,7 @@ public class MenuListLeftFragment extends ParentFragment{
 		textViewPreference.setTextColor(ParentActivity.getResources().getColor(R.color.menu_left_amber));
 		textViewMultimedia.setTextColor(ParentActivity.getResources().getColor(R.color.menu_left_gray));
 	}
-	public void ClickMultimedia(){
+	public void setClickMultimedia(){
 		imgViewMode.setImageDrawable(ParentActivity.getResources().getDrawable(R.drawable.menu_icon_mode_normal));
 		imgViewMonitoring.setImageDrawable(ParentActivity.getResources().getDrawable(R.drawable.menu_icon_monitoring_normal));
 		imgViewManagement.setImageDrawable(ParentActivity.getResources().getDrawable(R.drawable.menu_icon_management_normal));

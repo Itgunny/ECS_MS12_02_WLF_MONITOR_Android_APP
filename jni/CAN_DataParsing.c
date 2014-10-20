@@ -20,7 +20,9 @@ static void timer_handler( int sig, siginfo_t *si, void *uc )
     		Send_RTSData(&RTSData[0],nRTSDataLength,SA_MCU);
     		nCTSFlag_MCU = 0;
     	}
-
+		if(KeyButtonCount < KEYBUTTON_CNT_MAX){
+			KeyButtonCount++;
+		}
     	//sleep(0);
     	//timer_delete(*tidp);		// Timer Kill
     }
@@ -639,6 +641,8 @@ void InitNewProtoclValuable() {
 	TxRingBuffTail = 0;
 	RxRingBuffHead = 0;
 	RxRingBuffTail = 0;
+
+	KeyButtonCount = 0;
 }
 
 
@@ -1777,7 +1781,12 @@ void UART3_SeparateData(unsigned char RES_Kind) {
 
 	switch (RES_Kind) {
 	case KeyRES:
-		KeyButtonCallback(cUART3_RxData[2] + (cUART3_RxData[3] << 8) + (cUART3_RxData[4] << 16) + (cUART3_RxData[5] << 24));
+		if(KeyButtonCount >= KEYBUTTON_CNT_MAX){
+			KeyButtonCallback(cUART3_RxData[2] + (cUART3_RxData[3] << 8) + (cUART3_RxData[4] << 16) + (cUART3_RxData[5] << 24));
+			KeyButtonCount = 0;
+			__android_log_print(ANDROID_LOG_INFO, "NATIVE", "KeyButtonCallback");
+		}
+
 		memcpy((unsigned char*) &RX_RES_KEY, &cUART3_RxData[2], 8);
 
 		__android_log_print(ANDROID_LOG_INFO, "NATIVE", "Key[0x%x][0x%x][0x%x][0x%x][0x%x][0x%x][0x%x][0x%x]",
@@ -2132,7 +2141,9 @@ void *Thread_Read_UART1(void *data)
 			}
 			else
 			{
+				pthread_mutex_lock(&mutex_UART1);
 				UART1_DataParsing(UART1_ReadBuff);
+				pthread_mutex_unlock(&mutex_UART1);
 			}
 		}
 		else if (UART1ReadFlag == 0)
@@ -2155,7 +2166,9 @@ void *Thread_Read_UART1(void *data)
 						UART1_ReadBuff[dwUART1ReadCnt] = UART1_SingleBuff;
 						dwUART1ReadCnt = 0;
 						UART1ReadFlag = 1;
+						pthread_mutex_lock(&mutex_UART1);
 						UART1_DataParsing(UART1_ReadBuff);
+						pthread_mutex_unlock(&mutex_UART1);
 //						__android_log_print(ANDROID_LOG_INFO, "NATIVE", "UART1_ReadBuff [0x%x][0x%x][0x%x][0x%x][0x%x][0x%x][0x%x][0x%x][0x%x][0x%x][0x%x][0x%x][0x%x][0x%x][0x%x][0x%x][0x%x]\n",
 //													UART1_ReadBuff[0],UART1_ReadBuff[1],UART1_ReadBuff[2],UART1_ReadBuff[3],UART1_ReadBuff[4],UART1_ReadBuff[5],UART1_ReadBuff[6],UART1_ReadBuff[7],UART1_ReadBuff[8],UART1_ReadBuff[9],
 //													UART1_ReadBuff[10],UART1_ReadBuff[11],UART1_ReadBuff[12],UART1_ReadBuff[13],UART1_ReadBuff[14],UART1_ReadBuff[15],UART1_ReadBuff[16]);
@@ -2239,7 +2252,9 @@ void *Thread_Read_UART3(void *data) {
 			}
 			else
 			{
+				pthread_mutex_lock(&mutex_UART3);
 				UART3_DataParsing(UART3_ReadBuff);
+				pthread_mutex_unlock(&mutex_UART3);
 			}
 		}
 		else if (UART3ReadFlag == 0)
@@ -2262,7 +2277,9 @@ void *Thread_Read_UART3(void *data) {
 						UART3_ReadBuff[dwUART3ReadCnt] = UART3_SingleBuff;
 						dwUART3ReadCnt = 0;
 						UART3ReadFlag = 1;
+						pthread_mutex_lock(&mutex_UART3);
 						UART3_DataParsing(UART3_ReadBuff);
+						pthread_mutex_unlock(&mutex_UART3);
 					}else
 					{
 						UART3_ReadBuff[dwUART3ReadCnt] = UART3_SingleBuff;

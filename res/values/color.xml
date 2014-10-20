@@ -4,6 +4,8 @@
     <color name="main_quick_help_blue">#ff57b6ee</color>
     <color name="menu_left_amber">#ffffbf00</color>
     <color name="menu_left_gray">#ffb2b2b2</color>
+    <color name="menu_body_mode_tab_amber">#ffffb400</color>
+    <color name="menu_body_mode_tab_gray">#ff969696</color>
     <color name="black">#ff000000</color>
     <color name="white">#ffffffff</color>
     <color name="gray">#ff888888</color>

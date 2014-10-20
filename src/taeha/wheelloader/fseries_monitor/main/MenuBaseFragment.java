@@ -8,6 +8,7 @@ import taeha.wheelloader.fseries_monitor.animation.LeftRightShiftAnimation;
 import taeha.wheelloader.fseries_monitor.main.R.string;
 import taeha.wheelloader.fseries_monitor.menu.MenuListLeftFragment;
 import taeha.wheelloader.fseries_monitor.menu.MenuListTitleFragment;
+import taeha.wheelloader.fseries_monitor.menu.mode.MenuModeFragment;
 import android.os.Bundle;
 import android.text.Layout;
 import android.util.Log;
@@ -42,8 +43,9 @@ public class MenuBaseFragment extends ParentFragment{
 	//////////////////////////////////////////////////
 	
 	//Fragment////////////////////////////////////////
-	MenuListLeftFragment _MenuListLeftFragment;
-	MenuListTitleFragment _MenuListTitleFragment;
+	public MenuListLeftFragment _MenuListLeftFragment;
+	public MenuListTitleFragment _MenuListTitleFragment;
+	public MenuModeFragment	_MenuModeFragment;
 	//////////////////////////////////////////////////
 	
 	//ANIMATION///////////////////////////////////////
@@ -70,7 +72,7 @@ public class MenuBaseFragment extends ParentFragment{
 		
 		showListLeft();
 		showListTitle();
-		
+		showBodyMode();
 		ParentActivity.ScreenIndex = ParentActivity.SCREEN_STATE_MENU_TOP;
 		return mRoot;
 	}
@@ -103,6 +105,7 @@ public class MenuBaseFragment extends ParentFragment{
 	protected void InitFragment(){
 		_MenuListLeftFragment = new MenuListLeftFragment();
 		_MenuListTitleFragment = new MenuListTitleFragment();
+		_MenuModeFragment = new MenuModeFragment();
 	}
 	
 	protected void InitValuables() {
@@ -123,6 +126,7 @@ public class MenuBaseFragment extends ParentFragment{
 		
 		transaction.detach(_MenuListLeftFragment);
 		transaction.detach(_MenuListTitleFragment);
+		transaction.detach(_MenuModeFragment);
 		transaction.commit();	
 		
 	}
@@ -148,6 +152,11 @@ public class MenuBaseFragment extends ParentFragment{
 	public void showListTitle(){
 		android.app.FragmentTransaction transaction = getFragmentManager().beginTransaction();
 		transaction.replace(R.id.FrameLayout_menu_list_title, _MenuListTitleFragment);
+		transaction.commit();
+	}
+	public void showBodyMode(){
+		android.app.FragmentTransaction transaction = getFragmentManager().beginTransaction();
+		transaction.replace(R.id.FrameLayout_menu_list_body, _MenuModeFragment);
 		transaction.commit();
 	}
 	/////////////////////////////////////////////////////////////////////

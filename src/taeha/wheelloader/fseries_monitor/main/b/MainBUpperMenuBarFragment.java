@@ -253,10 +253,8 @@ public class MainBUpperMenuBarFragment extends ParentFragment{
 		
 	}
 	public void ClickWiper(){
-		ParentActivity.StartTestTimer();
 	}
 	public void ClickCamera(){
-		ParentActivity.CancelTestTimer();
 	}
 	public void ClickMenu(){
 		if(ParentActivity.AnimationRunningFlag == true)

@@ -2194,7 +2194,9 @@ typedef struct
 	unsigned char	EcoGaugeStatus_1305:4;							// HCESPN : 1305
 	unsigned char 	Reserved0:4;
 
-	unsigned char	DM0[4];
+	unsigned short	AverageFuelRate;
+
+	unsigned short	CurrentFuelRate;
 
 }__attribute__((packed))  FUEL_INFORMATION_ECO_GAUGE_65390;
 typedef struct

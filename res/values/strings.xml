@@ -108,4 +108,27 @@
     <string name="Preference">Preference</string>
     <string name="Multimedia">Multimedia</string>
     <!-- Menu End -->
+    
+    <!-- Menu Mode Start -->
+    <string name="Eng">ENG.</string>
+    <string name="TM">TM.</string>
+    <string name="HYD">HYD.</string>
+    <string name="ETC">ETC.</string>
+    
+    <string name="CCO_Mode">C.C.O. Mode</string>
+    <string name="Shift_Mode">Shift Mode</string>
+    <string name="Kick_Down">Kick Down</string>
+    <string name="Engine_Speed">Engine Speed</string>
+    <string name="TC_Lock_Up">T.C. Lock Up</string>
+    
+
+    <string name="Bucket_Priority">Bucket Priority</string>
+    <string name="Boom_Bucket_Detent_Mode">Boom Bucket Detent Mode</string>
+    <string name="Auxilliary_Attachment_Max_Flow_Level">Auxilliary Attachment Max Flow Level</string>
+    
+    <string name="Engine_Auto_Shutdown">Engine Auto Shutdown</string>
+    <string name="Engine_Delay_Shutdown">Engine Delay Shutdown</string>
+    <string name="Camera_Setting">Camera Setting</string>
+    <string name="Cooling_Fan_Reverse_Mode">Cooling Fan Reverse Mode</string>
+    <!-- Menu Mode End -->
 </resources>
