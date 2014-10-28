@@ -203,12 +203,14 @@ public class CommService extends Service{
 	public native int Get_MessageType_PGN61184_105();
 	public native int Get_SettingSelection_PGN61184_105();
 	public native int Get_SpeedometerFrequency_534_PGN61184_105();
-	public native int Get_AutoRideControlOperationSpeed_574_PGN61184_105();
+	public native int Get_AutoRideControlOperationSpeedForward_PGN61184_105();
+	public native int Get_AutoRideControlOperationSpeedBackward_PGN61184_105();
 	public native int Get_VehicleSpeedLimit_572_PGN61184_105();
 	//////RX_TRAVEL_CONTROL_VALUE_61184_106///////
 	public native int Get_MessageType_PGN61184_106();
 	public native int Get_SpeedometerFrequency_534_PGN61184_106();
-	public native int Get_AutoRideControlOperationSpeed_574_PGN61184_106();
+	public native int Get_AutoRideControlOperationSpeedForward_PGN61184_106();
+	public native int Get_AutoRideControlOperationSpeedBackward_PGN61184_106();
 	public native int Get_VehicleSpeedLimit_572_PGN61184_106();
 	//////RX_MACHINE_ACCESSORY_SETTING_REQUEST_61184_109///////
 	public native int Get_MessageType_PGN61184_109();
@@ -645,12 +647,14 @@ public class CommService extends Service{
 	public native void Set_MessageType_PGN61184_105(int Data);
 	public native void Set_SettingSelection_PGN61184_105(int Data);
 	public native void Set_SpeedometerFrequency_534_PGN61184_105(int Data);
-	public native void Set_AutoRideControlOperationSpeed_574_PGN61184_105(int Data);
+	public native void Set_AutoRideControlOperationSpeedForward_PGN61184_105(int Data);
+	public native void Set_AutoRideControlOperationSpeedBackward_PGN61184_105(int Data);
 	public native void Set_VehicleSpeedLimit_572_PGN61184_105(int Data);
 	//////TX_TRAVEL_CONTROL_VALUE_61184_106///////
 	public native void Set_MessageType_PGN61184_106(int Data);
 	public native void Set_SpeedometerFrequency_534_PGN61184_106(int Data);
-	public native void Set_AutoRideControlOperationSpeed_574_PGN61184_106(int Data);
+	public native void Set_AutoRideControlOperationSpeedForward_PGN61184_106(int Data);
+	public native void Set_AutoRideControlOperationSpeedBackward_PGN61184_106(int Data);
 	public native void Set_VehicleSpeedLimit_572_PGN61184_106(int Data);
 	//////TX_MACHINE_ACCESSORY_SETTING_REQUEST_61184_109///////
 	public native void Set_MessageType_PGN61184_109(int Data);
@@ -1035,12 +1039,24 @@ public class CommService extends Service{
 	
 	public static void CIDCallBack(){
 		Log.d(TAG,"CIDCallBack");
-		CAN1Comm.Callback_CID();
+		try {
+			CAN1Comm.Callback_CID();
+		} catch (NullPointerException e) {
+			// TODO: handle exception
+			Log.e(TAG,"CIDCallBack NullPointerException");
+		}
+		
 	}
 	
 	public static void ASCallback(){
 		Log.d(TAG,"ASCallback");
-		CAN1Comm.Callback_AS();
+		
+		try {
+			CAN1Comm.Callback_AS();
+		} catch (NullPointerException e) {
+			// TODO: handle exception
+			Log.e(TAG,"ASCallback NullPointerException");
+		}
 	}
 		
 	public static void StopCommServiceCallBack(){
@@ -1048,62 +1064,69 @@ public class CommService extends Service{
 	}
 	
 	public static void KeyButtonCallBack(int Data){
-		switch (Data) {
-		case CAN1CommManager.OFF:
-			CAN1Comm.Callback_KeyButton(Data);
-			break;
-		case CAN1CommManager.MENU:
-			MenuKeyEvent();
-			SoundPoolKeyButton.play(SoundID, fVolume, fVolume, 0, 0, 1);
-			break;
-			
-		case CAN1CommManager.ESC:
-			if(GetScreenTopFlag() == true)
-			{
+		try {
+			switch (Data) {
+			case CAN1CommManager.OFF:
 				CAN1Comm.Callback_KeyButton(Data);
-			}
-			else
-			{
+				break;
+			case CAN1CommManager.MENU:
+				MenuKeyEvent();
+				SoundPoolKeyButton.play(SoundID, fVolume, fVolume, 0, 0, 1);
+				break;
+				
+			case CAN1CommManager.ESC:
+//				if(GetScreenTopFlag() == true)
+//				{
+//					CAN1Comm.Callback_KeyButton(Data);
+//				}
+//				else
+//				{
+//					BackKeyEvent();
+//				}
 				BackKeyEvent();
-			}
-			SoundPoolKeyButton.play(SoundID, fVolume, fVolume, 0, 0, 1);
-			break;
+				SoundPoolKeyButton.play(SoundID, fVolume, fVolume, 0, 0, 1);
+				break;
 
-		case CAN1CommManager.RIGHT:
-			if(GetScreenTopFlag() == true)
-			{
-				CAN1Comm.TxCMDToMCU(CAN1Comm.CMD_BUZ, 0);
-				CAN1Comm.Set_RequestBuzzerStop_PGN65327(1);
-				CAN1Comm.TxCANToMCU(47);
-				CAN1Comm.Callback_KeyButton(Data);
-				StartBuzzerStopTimer();
-			}
-			
-			SoundPoolKeyButton.play(SoundID, fVolume, fVolume, 0, 0, 1);
-			break;
-			
+			case CAN1CommManager.RIGHT:
+				if(GetScreenTopFlag() == true)
+				{
+					CAN1Comm.TxCMDToMCU(CAN1Comm.CMD_BUZ, 0);
+					CAN1Comm.Set_RequestBuzzerStop_PGN65327(1);
+					CAN1Comm.TxCANToMCU(47);
+					CAN1Comm.Callback_KeyButton(Data);
+					StartBuzzerStopTimer();
+				}
+				
+				SoundPoolKeyButton.play(SoundID, fVolume, fVolume, 0, 0, 1);
+				break;
+				
 
-		case CAN1CommManager.POWER_OFF:
-			if(GetScreenTopFlag() == true)
-			{
-				CAN1Comm.Callback_KeyButton(Data);
-			}
-			
-			SoundPoolKeyButtonEnding.play(SoundIDEnding, fVolumeEnding, fVolumeEnding, 0, 0, 1);
-			break;
+			case CAN1CommManager.POWER_OFF:
+				if(GetScreenTopFlag() == true)
+				{
+					CAN1Comm.Callback_KeyButton(Data);
+				}
+				
+				SoundPoolKeyButtonEnding.play(SoundIDEnding, fVolumeEnding, fVolumeEnding, 0, 0, 1);
+				break;
 
-		default:
-			if(GetScreenTopFlag() == true)
-			{
-				CAN1Comm.Callback_KeyButton(Data);
+			default:
+				if(GetScreenTopFlag() == true)
+				{
+					CAN1Comm.Callback_KeyButton(Data);
+				}
+				
+				SoundPoolKeyButton.play(SoundID, fVolume, fVolume, 0, 0, 1);
+				
+				break;
 			}
-			
-			SoundPoolKeyButton.play(SoundID, fVolume, fVolume, 0, 0, 1);
-			
-			break;
+			Log.d(TAG,"GetScreenTopFlag : " + Boolean.toString(GetScreenTopFlag()));
+			Log.d(TAG,"Data : " + Integer.toString(Data));
+		} catch (NullPointerException e) {
+			// TODO: handle exception
+			Log.e(TAG,"KeyButtonCallBack NullPointerException");
 		}
-		Log.d(TAG,"GetScreenTopFlag : " + Boolean.toString(GetScreenTopFlag()));
-		Log.d(TAG,"Data : " + Integer.toString(Data));
+		
 	}
 	
 	public static void BackKeyEvent(){

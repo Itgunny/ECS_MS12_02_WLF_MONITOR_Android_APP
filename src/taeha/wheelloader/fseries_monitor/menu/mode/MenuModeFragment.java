@@ -5,6 +5,7 @@ import taeha.wheelloader.fseries_monitor.animation.ChangeFragmentAnimation;
 import taeha.wheelloader.fseries_monitor.animation.DisappearAnimation;
 import taeha.wheelloader.fseries_monitor.animation.MainBodyShiftAnimation;
 import taeha.wheelloader.fseries_monitor.animation.LeftRightShiftAnimation;
+import taeha.wheelloader.fseries_monitor.main.Home;
 import taeha.wheelloader.fseries_monitor.main.ParentFragment;
 import taeha.wheelloader.fseries_monitor.main.R;
 import android.os.Bundle;
@@ -30,11 +31,11 @@ public class MenuModeFragment extends ParentFragment{
 	//////////////////////////////////////////////////
 	
 	//VALUABLE////////////////////////////////////////
-
+	int FirstScreenIndex;
 	//////////////////////////////////////////////////
 	
 	//Fragment////////////////////////////////////////
-	MenuModeTabFragment	_MenuModeTabFragment;
+	public MenuModeTabFragment	_MenuModeTabFragment;
 	MenuModeEngTMFragment _MenuModeEngTMFragment;
 	MenuModeHYDFragment _MenuModeHYDFragment;
 	MenuModeETCFragment _MenuModeETCFragment;
@@ -61,11 +62,13 @@ public class MenuModeFragment extends ParentFragment{
 		InitButtonListener();
 
 		showTab();
-
+		ParentActivity._MenuBaseFragment._MenuListTitleFragment.setBackButtonEnable(false);
 		ParentActivity.ScreenIndex = ParentActivity.SCREEN_STATE_MENU_MODE_TOP;
+		ParentActivity._MenuBaseFragment._MenuListTitleFragment.SetTitleText(ParentActivity.getResources().getString(R.string.Mode));
+		_MenuModeTabFragment.setFirstScreen(FirstScreenIndex);
 		return mRoot;
 	}
-	
+
 	////////////////////////////////////////////////
 	
 	
@@ -127,10 +130,65 @@ public class MenuModeFragment extends ParentFragment{
 		transaction.replace(R.id.FrameLayout_menu_body_mode_list, _MenuModeETCFragment);
 		transaction.commit();
 	}
-	
-	/////////////////////////////////////////////////////////////////////
+	public void showBlank(){
+		android.app.FragmentTransaction transaction = getFragmentManager().beginTransaction();
+		transaction.remove(_MenuModeEngTMFragment);
+		transaction.remove(_MenuModeHYDFragment);
+		transaction.remove(_MenuModeETCFragment);
+		transaction.commit();		
+	}
+	//Navi KeyButton//////////////////////////////////////////////////////////
+	public void ClickLeft(){
+		if((ParentActivity.ScreenIndex >= Home.SCREEN_STATE_MENU_MODE_ENGINE_TOP) && (ParentActivity.ScreenIndex <= Home.SCREEN_STATE_MENU_MODE_ENGINE_END)){
+			_MenuModeEngTMFragment.ClickLeft();
+		}else if((ParentActivity.ScreenIndex >= Home.SCREEN_STATE_MENU_MODE_HYD_TOP) && (ParentActivity.ScreenIndex <= Home.SCREEN_STATE_MENU_MODE_HYD_END)){
+			_MenuModeHYDFragment.ClickLeft();
+		}else if((ParentActivity.ScreenIndex >= Home.SCREEN_STATE_MENU_MODE_ETC_TOP) && (ParentActivity.ScreenIndex <= Home.SCREEN_STATE_MENU_MODE_ETC_END)){
+			_MenuModeETCFragment.ClickLeft();
+		}else{
+			
+		}
+		
+	}
+	public void ClickRight(){
+		if((ParentActivity.ScreenIndex >= Home.SCREEN_STATE_MENU_MODE_ENGINE_TOP) && (ParentActivity.ScreenIndex <= Home.SCREEN_STATE_MENU_MODE_ENGINE_END)){
+			_MenuModeEngTMFragment.ClickRight();
+		}else if((ParentActivity.ScreenIndex >= Home.SCREEN_STATE_MENU_MODE_HYD_TOP) && (ParentActivity.ScreenIndex <= Home.SCREEN_STATE_MENU_MODE_HYD_END)){
+			_MenuModeHYDFragment.ClickRight();
+		}else if((ParentActivity.ScreenIndex >= Home.SCREEN_STATE_MENU_MODE_ETC_TOP) && (ParentActivity.ScreenIndex <= Home.SCREEN_STATE_MENU_MODE_ETC_END)){
+			_MenuModeETCFragment.ClickRight();
+		}else{
+		
+		}
+	}
+	public void ClickESC(){
+		Log.d(TAG,"ClickKeyButtonESC");
+		if((ParentActivity.ScreenIndex >= Home.SCREEN_STATE_MENU_MODE_ENGINE_TOP) && (ParentActivity.ScreenIndex <= Home.SCREEN_STATE_MENU_MODE_ENGINE_END)){
+			_MenuModeEngTMFragment.ClickESC();
+		}else if((ParentActivity.ScreenIndex >= Home.SCREEN_STATE_MENU_MODE_HYD_TOP) && (ParentActivity.ScreenIndex <= Home.SCREEN_STATE_MENU_MODE_HYD_END)){
+			_MenuModeHYDFragment.ClickESC();
+		}else if((ParentActivity.ScreenIndex >= Home.SCREEN_STATE_MENU_MODE_ETC_TOP) && (ParentActivity.ScreenIndex <= Home.SCREEN_STATE_MENU_MODE_ETC_END)){
+			_MenuModeETCFragment.ClickESC();
+		}else{
+			
+		}
+	}
+	public void ClickEnter(){
+		Log.d(TAG,"ClickEnter");
+		if((ParentActivity.ScreenIndex >= Home.SCREEN_STATE_MENU_MODE_ENGINE_TOP) && (ParentActivity.ScreenIndex <= Home.SCREEN_STATE_MENU_MODE_ENGINE_END)){
+			_MenuModeEngTMFragment.ClickEnter();
+		}else if((ParentActivity.ScreenIndex >= Home.SCREEN_STATE_MENU_MODE_HYD_TOP) && (ParentActivity.ScreenIndex <= Home.SCREEN_STATE_MENU_MODE_HYD_END)){
+			_MenuModeHYDFragment.ClickEnter();
+		}else if((ParentActivity.ScreenIndex >= Home.SCREEN_STATE_MENU_MODE_ETC_TOP) && (ParentActivity.ScreenIndex <= Home.SCREEN_STATE_MENU_MODE_ETC_END)){
+			_MenuModeETCFragment.ClickEnter();
+		}else{
+			
+		}
+	}
 	/////////////////////////////////////////////////////////////////////	
-	
+	public void setFirstScreen(int Index){
+		FirstScreenIndex = Index;
+	}
 	/////////////////////////////////////////////////////////////////////
 	
 	/////////////////////////////////////////////////////////////////////

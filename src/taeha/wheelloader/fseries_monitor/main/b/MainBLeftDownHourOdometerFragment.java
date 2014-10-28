@@ -27,10 +27,12 @@ public class MainBLeftDownHourOdometerFragment extends ParentFragment{
 	
 	//VALUABLE////////////////////////////////////////
 	boolean ClickFlag;
-	int TotalHourmeter;
-	int LatestHourmeter;
+	int AverageFuelRate;
+	int CurrentFuelRate;
 	int TotalOdometer;
 	int LatestOdometer;
+	
+	int LatestHourmeter;
 	//////////////////////////////////////////////////
 	
 	//ANIMATION///////////////////////////////////////
@@ -98,27 +100,28 @@ public class MainBLeftDownHourOdometerFragment extends ParentFragment{
 	@Override
 	protected void GetDataFromNative() {
 		// TODO Auto-generated method stub
-		TotalHourmeter = CAN1Comm.Get_Hourmeter_1601_PGN65433();
-		LatestHourmeter = CAN1Comm.Get_TripTime_849_PGN65344();
+		AverageFuelRate = CAN1Comm.Get_AverageFuelRate_PGN65390();
+		CurrentFuelRate = CAN1Comm.Get_CurrentFuelRate_PGN65390();
 		TotalOdometer = CAN1Comm.Get_TotalVehicleDistance_601_PGN65389();
 		LatestOdometer = CAN1Comm.Get_TripDistance_600_PGN65389();
 		
+		LatestHourmeter = CAN1Comm.Get_TripTime_849_PGN65344();
 	}
 
 	@Override
 	protected void UpdateUI() {
 		// TODO Auto-generated method stub
 		HourOdometerTitleDisplay(ParentActivity.HourOdometerIndex);
-		HourOdometerDataDisplay(ParentActivity.HourOdometerIndex,TotalHourmeter,LatestHourmeter,TotalOdometer,LatestOdometer);
+		HourOdometerDataDisplay(ParentActivity.HourOdometerIndex,LatestHourmeter,CurrentFuelRate,TotalOdometer,LatestOdometer);
 	}
 	/////////////////////////////////////////////////////////////////////	
 	public void HourOdometerTitleDisplay(int _Index){
 		switch (_Index) {
-		case CAN1CommManager.DATA_STATE_HOURMETER_TOTAL:
-			HourOdometerTitleAnimation.FlipAnimation(textViewHourOdoTitle,getResources().getString(string.TOTAL_HOURMETER));
-			break;
 		case CAN1CommManager.DATA_STATE_HOURMETER_LATEST:
 			HourOdometerTitleAnimation.FlipAnimation(textViewHourOdoTitle,getResources().getString(string.LATEST_HOURMETER));
+			break;
+		case CAN1CommManager.DATA_STATE_FUELRATE_CURRENT:
+			HourOdometerTitleAnimation.FlipAnimation(textViewHourOdoTitle,getResources().getString(string.CURRENT_FUEL_RATE));
 			break;
 		case CAN1CommManager.DATA_STATE_ODOMETER_TOTAL:
 			HourOdometerTitleAnimation.FlipAnimation(textViewHourOdoTitle,getResources().getString(string.TOTAL_ODOMETER));
@@ -131,30 +134,30 @@ public class MainBLeftDownHourOdometerFragment extends ParentFragment{
 			break;
 		}
 	}
-	public void HourOdometerDataDisplay(int _Index, int TotalHour, int LatestHour, int TotalOdo, int LatestOdo){
+	public void HourOdometerDataDisplay(int _Index, int LatestHour, int CurrentFuel, int TotalOdo, int LatestOdo){
 		switch (_Index) {
-		case CAN1CommManager.DATA_STATE_HOURMETER_TOTAL:
-			textViewHourOdoData.setText(ParentActivity.GetHourmeterString(TotalHour));
-			textViewHourOdoUnit.setText(ParentActivity.getResources().getString(string.Hr));
-			break;
 		case CAN1CommManager.DATA_STATE_HOURMETER_LATEST:
 			textViewHourOdoData.setText(ParentActivity.GetHourmeterString(LatestHour));
 			textViewHourOdoUnit.setText(ParentActivity.getResources().getString(string.Hr));
 			break;
+		case CAN1CommManager.DATA_STATE_FUELRATE_CURRENT:
+			textViewHourOdoData.setText(ParentActivity.GetFuelRateString(CurrentFuel));
+			textViewHourOdoUnit.setText(ParentActivity.getResources().getString(string.l_h));
+			break;
 		case CAN1CommManager.DATA_STATE_ODOMETER_TOTAL:
 			textViewHourOdoData.setText(ParentActivity.GetOdometerStrng(TotalOdo,ParentActivity.UnitOdo));
 			if(ParentActivity.UnitOdo == ParentActivity.UNIT_ODO_MILE){
-				textViewHourOdoUnit.setText(ParentActivity.getResources().getString(string.mph));
+				textViewHourOdoUnit.setText(ParentActivity.getResources().getString(string.mile));
 			}else{
-				textViewHourOdoUnit.setText(ParentActivity.getResources().getString(string.km_h));
+				textViewHourOdoUnit.setText(ParentActivity.getResources().getString(string.km));
 			}
 			break;
 		case CAN1CommManager.DATA_STATE_ODOMETER_LATEST:
 			textViewHourOdoData.setText(ParentActivity.GetOdometerStrng(LatestOdo,ParentActivity.UnitOdo));
 			if(ParentActivity.UnitOdo == ParentActivity.UNIT_ODO_MILE){
-				textViewHourOdoUnit.setText(ParentActivity.getResources().getString(string.mph));
+				textViewHourOdoUnit.setText(ParentActivity.getResources().getString(string.mile));
 			}else{
-				textViewHourOdoUnit.setText(ParentActivity.getResources().getString(string.km_h));
+				textViewHourOdoUnit.setText(ParentActivity.getResources().getString(string.km));
 			}
 			break;
 

@@ -31,7 +31,8 @@ public class MenuListTitleFragment extends ParentFragment{
 	//////////////////////////////////////////////////
 	
 	//VALUABLE////////////////////////////////////////
-
+	String strTitle;
+	boolean bBackVisibleFlag;
 	//////////////////////////////////////////////////
 	
 	//Fragment////////////////////////////////////////
@@ -39,7 +40,8 @@ public class MenuListTitleFragment extends ParentFragment{
 	//////////////////////////////////////////////////
 	
 	//ANIMATION///////////////////////////////////////
-	
+	LeftRightShiftAnimation TitleTextShiftAnimation;
+	AppearAnimation TitleTextAppearAnimation;
 	///////////////////////////////////////////////////
 	
 	//TEST////////////////////////////////////////////
@@ -58,8 +60,8 @@ public class MenuListTitleFragment extends ParentFragment{
 		InitValuables();
 		InitButtonListener();
 		
-		
-		setBackButtonEnable(false);
+		SetTitleText(strTitle);
+		setBackButtonEnable(bBackVisibleFlag);
 		return mRoot;
 	}
 	
@@ -82,7 +84,8 @@ public class MenuListTitleFragment extends ParentFragment{
 		// TODO Auto-generated method stub
 		super.InitValuables();
 		
-	
+		TitleTextShiftAnimation = new LeftRightShiftAnimation(ParentActivity, textViewTitle, 100, 0);
+		TitleTextAppearAnimation = new AppearAnimation(ParentActivity, textViewTitle, 500);
 		
 	}
 	@Override
@@ -121,13 +124,25 @@ public class MenuListTitleFragment extends ParentFragment{
 	
 	/////////////////////////////////////////////////////////////////////
 	public void SetTitleText(String str){
-		textViewTitle.setText(str);
+		try {
+			strTitle = str;
+			textViewTitle.setText(str);
+			TitleTextShiftAnimation.StartShiftAnimation();
+			TitleTextAppearAnimation.StartAnimation();
+		} catch (NullPointerException e) {
+			// TODO: handle exception
+			Log.e(TAG,"NullPointerException SetTitleText");
+		}
 	}
 	public void setBackButtonEnable(boolean flag){
-		if(flag == true)
+		bBackVisibleFlag = flag;
+		if(flag == true){
 			imgbtnBack.setVisibility(View.VISIBLE);
-		else
+		}
+		else{
 			imgbtnBack.setVisibility(View.GONE);
+		}
+			
 	}
 	public void ClickBack(){
 		

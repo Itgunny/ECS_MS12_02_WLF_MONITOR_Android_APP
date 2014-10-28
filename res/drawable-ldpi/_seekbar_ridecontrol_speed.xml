@@ -1,13 +1,13 @@
-<!-- 
+
 <layer-list xmlns:android="http://schemas.android.com/apk/res/android">
   <item android:id="@android:id/background">
 	<shape>
 	   <corners android:radius="50dip" />
 	   <gradient
-		android:startColor="#009d9e9d"
-		android:centerColor="#005a5d5a"
+		android:startColor="#ff282828"
+		android:centerColor="#ff1e1e1e"
 		android:centerY="0.75"
-		android:endColor="#00747674"
+		android:endColor="#ff141414"
 		android:angle="270" />
 	</shape>
   </item>
@@ -29,16 +29,17 @@
 	   <shape>
 		<corners android:radius="50dip" />
 		<gradient
-		     android:startColor="#ffffd300"
-		     android:centerColor="#ffffb600"
+		     android:startColor="#ffffeba0"
+		     android:centerColor="#ffffd900"
 		     android:centerY="0.75"
-		     android:endColor="#ffffcb00"
+		     android:endColor="#ffffc800"
 		     android:angle="270" />
 	   </shape>
 	</clip>
   </item>
 </layer-list>
- -->
+ 
+ <!-- 
  <layer-list xmlns:android="http://schemas.android.com/apk/res/android">
   <item android:id="@android:id/background"
       	android:drawable="@drawable/main_key_ridecontrol_slide_bar_gray">
@@ -50,3 +51,4 @@
       	    	android:scaleWidth="100%"/>
   </item>
 </layer-list>
+ -->

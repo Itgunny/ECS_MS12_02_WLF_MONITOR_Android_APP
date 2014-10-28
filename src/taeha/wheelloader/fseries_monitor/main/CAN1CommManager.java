@@ -115,8 +115,8 @@ public class CAN1CommManager extends ICAN1CommManager.Stub{		// ttySAC1(Linux), 
   	public static final int DATA_STATE_TM_LOCKUPCLUTCH_OFF		 = 0;
 	public static final int DATA_STATE_TM_LOCKUPCLUTCH_ON		 = 1;
 	
-	public static final int DATA_STATE_HOURMETER_TOTAL 			= 0;
-	public static final int DATA_STATE_HOURMETER_LATEST 		= 1;
+	public static final int DATA_STATE_HOURMETER_LATEST 		= 0;
+	public static final int DATA_STATE_FUELRATE_CURRENT 		= 1;
 	public static final int DATA_STATE_ODOMETER_TOTAL 			= 2;
 	public static final int DATA_STATE_ODOMETER_LATEST 			= 3;
 	
@@ -543,12 +543,14 @@ public class CAN1CommManager extends ICAN1CommManager.Stub{		// ttySAC1(Linux), 
 //	public int Get_MessageType_PGN61184_105(){ return service.Get_MessageType_PGN61184_105();}
 //	public int Get_SettingSelection_PGN61184_105(){ return service.Get_SettingSelection_PGN61184_105();}
 //	public int Get_SpeedometerFrequency_534_PGN61184_105(){ return service.Get_SpeedometerFrequency_534_PGN61184_105();}
-//	public int Get_AutoRideControlOperationSpeed_574_PGN61184_105(){ return service.Get_AutoRideControlOperationSpeed_574_PGN61184_105();}
+//	public int Get_AutoRideControlOperationSpeedForward_PGN61184_105(){ return service.Get_AutoRideControlOperationSpeedForward_PGN61184_105();}
+//	public int Get_AutoRideControlOperationSpeedBackward_PGN61184_105(){ return service.Get_AutoRideControlOperationSpeedBackward_PGN61184_105();}
 //	public int Get_VehicleSpeedLimit_572_PGN61184_105(){ return service.Get_VehicleSpeedLimit_572_PGN61184_105();}
 	//////RX_TRAVEL_CONTROL_VALUE_61184_106///////
 	public int Get_MessageType_PGN61184_106(){ return service.Get_MessageType_PGN61184_106();}
 	public int Get_SpeedometerFrequency_534_PGN61184_106(){ return service.Get_SpeedometerFrequency_534_PGN61184_106();}
-	public int Get_AutoRideControlOperationSpeed_574_PGN61184_106(){ return service.Get_AutoRideControlOperationSpeed_574_PGN61184_106();}
+	public int Get_AutoRideControlOperationSpeedForward_PGN61184_106(){ return service.Get_AutoRideControlOperationSpeedForward_PGN61184_106();}
+	public int Get_AutoRideControlOperationSpeedBackward_PGN61184_106(){ return service.Get_AutoRideControlOperationSpeedBackward_PGN61184_106();}
 	public int Get_VehicleSpeedLimit_572_PGN61184_106(){ return service.Get_VehicleSpeedLimit_572_PGN61184_106();}
 	//////RX_MACHINE_ACCESSORY_SETTING_REQUEST_61184_109///////
 //	public int Get_MessageType_PGN61184_109(){ return service.Get_MessageType_PGN61184_109();}
@@ -985,12 +987,14 @@ public class CAN1CommManager extends ICAN1CommManager.Stub{		// ttySAC1(Linux), 
 	public void Set_MessageType_PGN61184_105(int Data){ service.Set_MessageType_PGN61184_105(Data);}
 	public void Set_SettingSelection_PGN61184_105(int Data){ service.Set_SettingSelection_PGN61184_105(Data);}
 	public void Set_SpeedometerFrequency_534_PGN61184_105(int Data){ service.Set_SpeedometerFrequency_534_PGN61184_105(Data);}
-	public void Set_AutoRideControlOperationSpeed_574_PGN61184_105(int Data){ service.Set_AutoRideControlOperationSpeed_574_PGN61184_105(Data);}
+	public void Set_AutoRideControlOperationSpeedForward_PGN61184_105(int Data){ service.Set_AutoRideControlOperationSpeedForward_PGN61184_105(Data);}
+	public void Set_AutoRideControlOperationSpeedBackward_PGN61184_105(int Data){ service.Set_AutoRideControlOperationSpeedBackward_PGN61184_105(Data);}
 	public void Set_VehicleSpeedLimit_572_PGN61184_105(int Data){ service.Set_VehicleSpeedLimit_572_PGN61184_105(Data);}
 	//////TX_TRAVEL_CONTROL_VALUE_61184_106///////
 //	public void Set_MessageType_PGN61184_106(int Data){ service.Set_MessageType_PGN61184_106(Data);}
 //	public void Set_SpeedometerFrequency_534_PGN61184_106(int Data){ service.Set_SpeedometerFrequency_534_PGN61184_106(Data);}
-//	public void Set_AutoRideControlOperationSpeed_574_PGN61184_106(int Data){ service.Set_AutoRideControlOperationSpeed_574_PGN61184_106(Data);}
+//	public void Set_AutoRideControlOperationSpeedForward_PGN61184_106(int Data){ service.Set_AutoRideControlOperationSpeedForward_PGN61184_106(Data);}
+//	public void Set_AutoRideControlOperationSpeedBackward_PGN61184_106(int Data){ service.Set_AutoRideControlOperationSpeedBackward_PGN61184_106(Data);}
 //	public void Set_VehicleSpeedLimit_572_PGN61184_106(int Data){ service.Set_VehicleSpeedLimit_572_PGN61184_106(Data);}
 	//////TX_MACHINE_ACCESSORY_SETTING_REQUEST_61184_109///////
 	public void Set_MessageType_PGN61184_109(int Data){ service.Set_MessageType_PGN61184_109(Data);}

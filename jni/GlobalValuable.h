@@ -105,8 +105,8 @@ jclass jObject;
 #define		ERR_BUF_SIZE				400
 #define		MULTI_BUF_SIZE				400
 
-#define 	TIMER1_INTERVAL				5
-#define 	KEYBUTTON_CNT_MAX			50
+#define 	TIMER1_INTERVAL				50
+#define 	KEYBUTTON_CNT_MAX			5
 //////////////////Variable//////////////////////////
 unsigned char		UART1_TxBuff[RINGBUFF_SIZE][UART1_TXPACKET_SIZE];
 unsigned int		TxRingBuffHead;
@@ -130,7 +130,7 @@ unsigned char		MultiPacket_ACK_MCU[8];
 unsigned char		MultiPacket_ACK_RMCU[8];
 int					UART1ReadFlag = 0;
 unsigned char 		bReadRunningFlag_UART1;
-unsigned char		bParsingRunningFlag_UART1 = 0;
+//unsigned char		bWriteRunningFlag_UART1 = 0;
 unsigned char		bWriteRunningFlag_UART1 = 0;
 int					dwUART1ReadCnt = 0;
 int					UART1_RxInx = 0;

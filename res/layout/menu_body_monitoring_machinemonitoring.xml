@@ -1,0 +1,234 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
+
+    <RelativeLayout
+        android:id="@+id/RelativeLayout_menu_body_monitoring_machinemonitoring_hyd"
+        android:layout_width="742dp"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:background="@drawable/menu_information_monitoring_block" >
+
+        <TextView
+            android:id="@+id/textView_menu_body_monitoring_machinemonitoring_hyd_title"
+            android:layout_width="wrap_content"
+            android:layout_height="76dp"
+            android:layout_marginLeft="40dp"
+            android:gravity="center_vertical"
+            android:text="@string/HYD_Temp"
+            android:textAppearance="?android:attr/textAppearanceLarge" />
+        
+        <TextView
+            android:id="@+id/textView_menu_body_monitoring_machinemonitoring_hyd_data"
+            android:layout_width="wrap_content"
+            android:layout_height="76dp"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="100dp"
+            android:gravity="right|center_vertical"
+            android:text="0"
+            android:textAppearance="?android:attr/textAppearanceLarge" />
+        
+        <TextView
+            android:id="@+id/textView_menu_body_monitoring_machinemonitoring_hyd_unit"
+            android:layout_width="wrap_content"
+            android:layout_height="76dp"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="50dp"
+            android:gravity="center_vertical"
+            android:text="@string/C"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:textColor="@color/menu_body_mode_tab_gray" />
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/RelativeLayout_menu_body_monitoring_machinemonitoring_battery"
+        android:layout_width="742dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/RelativeLayout_menu_body_monitoring_machinemonitoring_hyd"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="7dp"
+        android:background="@drawable/menu_information_monitoring_block" >
+
+        <TextView
+            android:id="@+id/textView_menu_body_monitoring_machinemonitoring_battery_title"
+            android:layout_width="wrap_content"
+            android:layout_height="76dp"
+            android:layout_marginLeft="40dp"
+            android:gravity="center_vertical"
+            android:text="@string/Battery_Volt"
+            android:textAppearance="?android:attr/textAppearanceLarge" />
+        
+        <TextView
+            android:id="@+id/textView_menu_body_monitoring_machinemonitoring_battery_data"
+            android:layout_width="wrap_content"
+            android:layout_height="76dp"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="100dp"
+            android:gravity="right|center_vertical"
+            android:text="0"
+            android:textAppearance="?android:attr/textAppearanceLarge" />
+        
+        <TextView
+            android:id="@+id/textView_menu_body_monitoring_machinemonitoring_battery_unit"
+            android:layout_width="wrap_content"
+            android:layout_height="76dp"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="50dp"
+            android:gravity="center_vertical"
+            android:text="@string/V"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:textColor="@color/menu_body_mode_tab_gray" />
+
+    </RelativeLayout>
+    
+    <RelativeLayout
+        android:id="@+id/RelativeLayout_menu_body_monitoring_machinemonitoring_coolant"
+        android:layout_width="742dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/RelativeLayout_menu_body_monitoring_machinemonitoring_battery"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="7dp"
+        android:background="@drawable/menu_information_monitoring_block" >
+
+        <TextView
+            android:id="@+id/textView_menu_body_monitoring_machinemonitoring_coolant_title"
+            android:layout_width="wrap_content"
+            android:layout_height="76dp"
+            android:layout_marginLeft="40dp"
+            android:gravity="center_vertical"
+            android:text="@string/Coolant_Temp"
+            android:textAppearance="?android:attr/textAppearanceLarge" />
+        
+        <TextView
+            android:id="@+id/textView_menu_body_monitoring_machinemonitoring_coolant_data"
+            android:layout_width="wrap_content"
+            android:layout_height="76dp"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="100dp"
+            android:gravity="right|center_vertical"
+            android:text="0"
+            android:textAppearance="?android:attr/textAppearanceLarge" />
+        
+        <TextView
+            android:id="@+id/textView_menu_body_monitoring_machinemonitoring_coolant_unit"
+            android:layout_width="wrap_content"
+            android:layout_height="76dp"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="50dp"
+            android:gravity="center_vertical"
+            android:text="@string/C"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:textColor="@color/menu_body_mode_tab_gray" />
+
+    </RelativeLayout>
+    
+    <RelativeLayout
+        android:id="@+id/RelativeLayout_menu_body_monitoring_machinemonitoring_tmoil"
+        android:layout_width="742dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/RelativeLayout_menu_body_monitoring_machinemonitoring_coolant"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="7dp"
+        android:background="@drawable/menu_information_monitoring_block" >
+
+        <TextView
+            android:id="@+id/textView_menu_body_monitoring_machinemonitoring_tmoil_title"
+            android:layout_width="wrap_content"
+            android:layout_height="76dp"
+            android:layout_marginLeft="40dp"
+            android:gravity="center_vertical"
+            android:text="@string/TM_Oil_Temp"
+            android:textAppearance="?android:attr/textAppearanceLarge" />
+        
+        <TextView
+            android:id="@+id/textView_menu_body_monitoring_machinemonitoring_tmoil_data"
+            android:layout_width="wrap_content"
+            android:layout_height="76dp"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="100dp"
+            android:gravity="right|center_vertical"
+            android:text="0"
+            android:textAppearance="?android:attr/textAppearanceLarge" />
+        
+        <TextView
+            android:id="@+id/textView_menu_body_monitoring_machinemonitoring_tmoil_unit"
+            android:layout_width="wrap_content"
+            android:layout_height="76dp"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="50dp"
+            android:gravity="center_vertical"
+            android:text="@string/C"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:textColor="@color/menu_body_mode_tab_gray" />
+
+    </RelativeLayout>
+    
+    <RelativeLayout
+        android:id="@+id/Relativelayout_menu_body_monitoring_machinemonitoring_low"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true" >
+       
+        <ImageView
+            android:id="@+id/imageView_menu_body_monitoring_machinemonitoring_low_bg"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/menu_low_bg" />
+	    
+	    <ImageView
+	        android:id="@+id/imageView_menu_body_monitoring_machinemonitoring_low_line"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:layout_alignBottom="@+id/ImageButton_menu_body_monitoring_machinemonitoring_low_ok"
+	        android:layout_alignLeft="@+id/ImageButton_menu_body_monitoring_machinemonitoring_low_ok"
+	        android:src="@drawable/main_key_low_line" />
+	   
+	    <ImageButton
+	        android:id="@+id/ImageButton_menu_body_monitoring_machinemonitoring_low_ok"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:layout_alignBottom="@+id/imageView_menu_body_monitoring_machinemonitoring_low_bg"
+	        android:layout_alignRight="@+id/imageView_menu_body_monitoring_machinemonitoring_low_bg"
+	        android:background="@drawable/_selector_menu_low_right_btn" />
+	
+	    <RelativeLayout
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:layout_alignBottom="@+id/ImageButton_menu_body_monitoring_machinemonitoring_low_ok"
+	        android:layout_alignLeft="@+id/ImageButton_menu_body_monitoring_machinemonitoring_low_ok"
+	        android:layout_alignRight="@+id/ImageButton_menu_body_monitoring_machinemonitoring_low_ok"
+	        android:layout_alignTop="@+id/ImageButton_menu_body_monitoring_machinemonitoring_low_ok" >
+	
+	        <LinearLayout
+	            android:layout_width="wrap_content"
+	            android:layout_height="wrap_content"
+	            android:layout_centerHorizontal="true"
+	            android:layout_centerVertical="true" >
+	
+	            <ImageView
+	                android:id="@+id/imageView_menu_body_monitoring_machinemonitoring_low_ok_icon"
+	                android:layout_width="wrap_content"
+	                android:layout_height="wrap_content"
+	                android:layout_alignBottom="@+id/ImageButton_menu_body_monitoring_machinemonitoring_low_ok"
+	                android:layout_alignLeft="@+id/ImageButton_menu_body_monitoring_machinemonitoring_low_ok"
+	                android:layout_alignTop="@+id/ImageButton_menu_body_monitoring_machinemonitoring_low_ok"
+	                android:src="@drawable/menu_low_icon_ok" />
+	
+	            <TextView
+	                android:id="@+id/textView_menu_body_monitoring_machinemonitoring_low_ok"
+	                android:layout_width="wrap_content"
+	                android:layout_height="match_parent"
+	                android:layout_marginLeft="10dp"
+	                android:gravity="center"
+	                android:text="@string/OK"
+	                android:textAppearance="?android:attr/textAppearanceLarge"
+	                android:textSize="25sp"
+	                android:textStyle="bold" />
+
+	        </LinearLayout>
+	    </RelativeLayout>
+
+    </RelativeLayout>
+</RelativeLayout>

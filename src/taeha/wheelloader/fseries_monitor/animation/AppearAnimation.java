@@ -36,6 +36,19 @@ public class AppearAnimation extends View{
 		AnimationListener();
 	}
 	
+	public AppearAnimation(Context _context, View view, int Speed){
+		super(_context);
+		ParentActivity = (Home)_context;
+		viewItem = view;
+		AnimiationRunning = false;
+		AnimationSpeed = Speed;
+		
+		Animation = (ObjectAnimator)AnimatorInflater.loadAnimator(_context, R.anim.appear);
+		Animation.setTarget(viewItem);
+		Animation.setDuration(AnimationSpeed);
+	
+		AnimationListener();
+	}
 	public void AnimationListener(){
 		Animation.addListener(new AnimatorListener() {
 			

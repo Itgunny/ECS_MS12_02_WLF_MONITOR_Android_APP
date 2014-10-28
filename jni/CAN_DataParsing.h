@@ -52,7 +52,7 @@ void UART1_SeperateData_CID_Multi(int Priority, int PF, int PS, unsigned char* D
 void SaveErrorCode_NEW_CAN2(void);
 jint UART1_Tx(JNIEnv *env, jobject this, jint PF, jint PS, jint Flag);
 void InitUART1Valuable();
-void ThreadParsing_UART1(void *data);
+void Thread_Write_UART1(void *data);
 void ThreadParsing_UART3(void *data);
 void UART1_DataParsing(unsigned char* Data);
 void UART3_DataParsing(unsigned char (*pBuff)[UART3_RXPACKET_SIZE]);

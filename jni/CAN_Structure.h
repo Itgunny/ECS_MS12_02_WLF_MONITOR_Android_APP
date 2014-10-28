@@ -1787,7 +1787,8 @@ typedef struct
 
 	unsigned short	SpeedometerFrequency_534;
 
-	unsigned char	AutoRideControlOperationSpeed_574;
+	unsigned char	AutoRideControlOperationSpeedForward:4;
+	unsigned char	AutoRideControlOperationSpeedBackward:4;
 
 	unsigned char	VehicleSpeedLimit_572;
 
@@ -1800,7 +1801,8 @@ typedef struct
 
 	unsigned short	SpeedometerFrequency_534;
 
-	unsigned char	AutoRideControlOperationSpeed_574;
+	unsigned char	AutoRideControlOperationSpeedForward:4;
+	unsigned char	AutoRideControlOperationSpeedBackward:4;
 
 	unsigned char	VehicleSpeedLimit_572;
 

@@ -5,6 +5,7 @@ import taeha.wheelloader.fseries_monitor.animation.ChangeFragmentAnimation;
 import taeha.wheelloader.fseries_monitor.animation.DisappearAnimation;
 import taeha.wheelloader.fseries_monitor.animation.MainBodyShiftAnimation;
 import taeha.wheelloader.fseries_monitor.animation.LeftRightShiftAnimation;
+import taeha.wheelloader.fseries_monitor.main.Home;
 import taeha.wheelloader.fseries_monitor.main.ParentFragment;
 import taeha.wheelloader.fseries_monitor.main.R;
 import android.os.Bundle;
@@ -45,7 +46,7 @@ public class MenuListLeftFragment extends ParentFragment{
 	//////////////////////////////////////////////////
 	
 	//VALUABLE////////////////////////////////////////
-
+	int FirstScreenIndex;
 	//////////////////////////////////////////////////
 	
 	//Fragment////////////////////////////////////////
@@ -74,7 +75,7 @@ public class MenuListLeftFragment extends ParentFragment{
 		
 		InitButtonListener();
 		
-		setClickMode();
+		ModeBodyDisplay(FirstScreenIndex);
 		return mRoot;
 	}
 	
@@ -176,24 +177,54 @@ public class MenuListLeftFragment extends ParentFragment{
 	}
 	/////////////////////////////////////////////////////////////////////	
 	public void ClickMode(){
-		
-		if((ParentActivity.ScreenIndex < ParentActivity.SCREEN_STATE_MENU_MODE_TOP) || (ParentActivity.ScreenIndex > ParentActivity.SCREEN_STATE_MENU_MODE_END)){
-			setClickMode();
-			ParentActivity._MenuBaseFragment.showBodyMode();
+		if((ParentActivity.ScreenIndex < Home.SCREEN_STATE_MENU_MODE_TOP) 
+		|| (ParentActivity.ScreenIndex > Home.SCREEN_STATE_MENU_MODE_END)){
+			
+				setClickMode();
+				ParentActivity._MenuBaseFragment.showBodyMode();
+			
+			
 		}
-		
 	}
 	public void ClickMonitoring(){
-		setClickMonitoring();
+		if((ParentActivity.ScreenIndex < Home.SCREEN_STATE_MENU_MONITORING_TOP) 
+		|| (ParentActivity.ScreenIndex > Home.SCREEN_STATE_MENU_MONITORING_END)){
+			
+				setClickMonitoring();
+				ParentActivity._MenuBaseFragment.showBodyMonitoring();
+			
+			
+		}
 	}
 	public void ClickManagement(){
-		setClickManagement();
+		if((ParentActivity.ScreenIndex < Home.SCREEN_STATE_MENU_MANAGEMENT_TOP) 
+		|| (ParentActivity.ScreenIndex > Home.SCREEN_STATE_MENU_MANAGEMENT_END)){
+		
+				setClickManagement();
+				ParentActivity._MenuBaseFragment.showBodyManagement();
+			
+			
+		}
 	}
 	public void ClickPreference(){
-		setClickPreference();
+		if((ParentActivity.ScreenIndex < Home.SCREEN_STATE_MENU_PREFERENCE_TOP) 
+		|| (ParentActivity.ScreenIndex > Home.SCREEN_STATE_MENU_PREFERENCE_END)){
+			
+				setClickPreference();
+				ParentActivity._MenuBaseFragment.showBodyPreference();
+			
+			
+		}
 	}
 	public void ClickMultimedia(){
-		setClickMultimedia();
+		if((ParentActivity.ScreenIndex < Home.SCREEN_STATE_MENU_MULTIMEDIA_TOP) 
+		|| (ParentActivity.ScreenIndex > Home.SCREEN_STATE_MENU_MULTIMEDIA_END)){
+			
+				setClickMultimedia();
+				ParentActivity._MenuBaseFragment.showBodyMultimedia();
+			
+		
+		}
 	}
 
 	/////////////////////////////////////////////////////////////////////
@@ -264,5 +295,29 @@ public class MenuListLeftFragment extends ParentFragment{
 		textViewMultimedia.setTextColor(ParentActivity.getResources().getColor(R.color.menu_left_amber));
 	}
 	/////////////////////////////////////////////////////////////////////
-	
+	public void setFirstScreen(int Index){
+		FirstScreenIndex = Index;
+	}
+	public void ModeBodyDisplay(int Index){
+		switch (Index) {
+		case Home.SCREEN_STATE_MENU_MODE_TOP:
+		default:
+			setClickMode();
+			break;
+		case Home.SCREEN_STATE_MENU_MONITORING_TOP:
+			setClickMonitoring();
+			break;
+		case Home.SCREEN_STATE_MENU_MANAGEMENT_TOP:
+			setClickManagement();
+			break;
+		case Home.SCREEN_STATE_MENU_PREFERENCE_TOP:
+			setClickPreference();
+			break;
+		case Home.SCREEN_STATE_MENU_MULTIMEDIA_TOP:
+			setClickMultimedia();
+			break;
+
+		}
+	}
+	/////////////////////////////////////////////////////////////////////
 }

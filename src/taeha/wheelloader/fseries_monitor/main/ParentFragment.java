@@ -35,6 +35,7 @@ public abstract class ParentFragment extends Fragment{
 	// Thread Sleep Time
 	private  int ThreadSleepTime;
 
+
 	/////////////////////////////////////////////////////////////////////	
 	
 	///////////////////ANIMATION/////////////////////////////////////////
@@ -49,6 +50,7 @@ public abstract class ParentFragment extends Fragment{
 	protected void InitValuables(){
 		Log.d(TAG,"InitValuables");
 		ThreadSleepTime = 50;
+	
 		CAN1Comm = CAN1CommManager.getInstance();	
 		
 		threadRead = new Thread(new ReadThread(this));
@@ -60,6 +62,7 @@ public abstract class ParentFragment extends Fragment{
 	protected int GetThreadSleepTime(){
 		return ThreadSleepTime;
 	}
+
 	private void DisplayUI(){
 		ParentActivity.runOnUiThread(new Runnable() {
 			

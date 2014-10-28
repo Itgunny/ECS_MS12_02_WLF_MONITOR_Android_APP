@@ -5,6 +5,7 @@ import taeha.wheelloader.fseries_monitor.animation.ChangeFragmentAnimation;
 import taeha.wheelloader.fseries_monitor.animation.DisappearAnimation;
 import taeha.wheelloader.fseries_monitor.animation.MainBodyShiftAnimation;
 import taeha.wheelloader.fseries_monitor.animation.LeftRightShiftAnimation;
+import taeha.wheelloader.fseries_monitor.main.Home;
 import taeha.wheelloader.fseries_monitor.main.ParentFragment;
 import taeha.wheelloader.fseries_monitor.main.R;
 import taeha.wheelloader.fseries_monitor.main.R.string;
@@ -56,7 +57,8 @@ public class MenuModeHYDFragment extends MenuBodyList_ParentFragment{
 		Log.d(TAG, "onCreateView");
 
 		InitList();
-		ParentActivity.ScreenIndex = ParentActivity.SCREEN_STATE_MENU_MODE_HYD_TOP;
+		ParentActivity.ScreenIndex = Home.SCREEN_STATE_MENU_MODE_HYD_TOP;
+		ParentActivity._MenuBaseFragment._MenuModeFragment.setFirstScreen(Home.SCREEN_STATE_MENU_MODE_HYD_TOP);
 		return mRoot;
 	}
 	
@@ -95,25 +97,39 @@ public class MenuModeHYDFragment extends MenuBodyList_ParentFragment{
 	@Override
 	public void ClickList1() {
 		// TODO Auto-generated method stub
+		if(ParentActivity.AnimationRunningFlag == true)
+			return;
+		else
+			ParentActivity.StartAnimationRunningTimer();
+		ParentActivity._MenuBaseFragment.showBodyWorkLoadAnimation();
 		
 	}
 
 	@Override
 	public void ClickList2() {
 		// TODO Auto-generated method stub
+		ParentActivity.showBucketPriority();
 		
 	}
 
 	@Override
 	public void ClickList3() {
 		// TODO Auto-generated method stub
-		
+		if(ParentActivity.AnimationRunningFlag == true)
+			return;
+		else
+			ParentActivity.StartAnimationRunningTimer();
+		ParentActivity._MenuBaseFragment.showBodyDetentAnimation();
 	}
 
 	@Override
 	public void ClickList4() {
 		// TODO Auto-generated method stub
-		
+		if(ParentActivity.AnimationRunningFlag == true)
+			return;
+		else
+			ParentActivity.StartAnimationRunningTimer();
+		ParentActivity._MenuBaseFragment.showBodyMaxFlowAnimation();
 	}
 
 	@Override
@@ -131,6 +147,44 @@ public class MenuModeHYDFragment extends MenuBodyList_ParentFragment{
 
 
 	/////////////////////////////////////////////////////////////////////
+	public void ClickLeft(){
+		
+		
+	}
+	public void ClickRight(){
+		
+		
+	}
+	public void ClickESC(){
+		
+	}
+	public void ClickEnter(){
+		
+		
+	}
+
+	/////////////////////////////////////////////////////////////////////
+	public void CursurDisplay(int Index){
+		switch (Index) {
+		case Home.SCREEN_STATE_MENU_MODE_HYD_WORKLOAD_TOP:
+			setListFocus(1);
+			break;
+		case Home.SCREEN_STATE_MENU_MODE_HYD_BUCKETPRIORITY:
+			setListFocus(2);
+			break;
+		case Home.SCREEN_STATE_MENU_MODE_HYD_DETENT:
+			setListFocus(3);
+			break;
+		case Home.SCREEN_STATE_MENU_MODE_HYD_MAXFLOW:
+			setListFocus(4);
+			break;
+		default:
+			setListFocus(0);
+			break;
+		}
+	}
+	/////////////////////////////////////////////////////////////////////	
+	
 	/////////////////////////////////////////////////////////////////////	
 	
 	/////////////////////////////////////////////////////////////////////

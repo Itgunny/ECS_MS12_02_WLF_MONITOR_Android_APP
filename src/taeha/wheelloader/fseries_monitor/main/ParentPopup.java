@@ -30,6 +30,8 @@ public abstract class ParentPopup extends Dialog{
 	
 	protected View mRoot;
 	
+	protected int CursurIndex;
+	
 	abstract protected void InitResource();
 	abstract protected void InitButtonListener();
 	abstract protected void GetDataFromNative();
@@ -39,6 +41,7 @@ public abstract class ParentPopup extends Dialog{
 		super(_context,R.style.Dialog);
 		// TODO Auto-generated constructor stub
 		ParentActivity = (Home)_context;
+		CursurIndex = 0;
 		inflater = (LayoutInflater)_context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 	}
 	
@@ -47,14 +50,14 @@ public abstract class ParentPopup extends Dialog{
 		// TODO Auto-generated method stub
 		super.dismiss();
 		Log.d(TAG,"dismiss");
-//		threadRead.interrupt();
+		threadRead.interrupt();
 	}
 	
 	public void InitValuable(){
 		CAN1Comm = CAN1CommManager.getInstance();	
-
-//		threadRead = new Thread(new ReadThread(this));
-//		threadRead.start();
+		ThreadSleepTime = 200;
+		threadRead = new Thread(new ReadThread(this));
+		threadRead.start();
 	}
 	
 

@@ -18,8 +18,8 @@ public class MainBLeftDownHourOdometerSelectFragment extends ParentFragment{
 	
 	//////////////////////////////////////////////////
 	//RESOURCE////////////////////////////////////////
-	RadioButton radioTotalHour;
 	RadioButton radioLatestHour;
+	RadioButton radioCurrentFuel;
 	RadioButton radioTotalOdo;
 	RadioButton radioLatestOdo;
 	//////////////////////////////////////////////////
@@ -73,8 +73,8 @@ public class MainBLeftDownHourOdometerSelectFragment extends ParentFragment{
 	@Override
 	protected void InitResource() {
 		// TODO Auto-generated method stub
-		radioTotalHour = (RadioButton)mRoot.findViewById(R.id.radioButton_leftdown_main_b_hourodometer_select_totalhourmeter);
 		radioLatestHour = (RadioButton)mRoot.findViewById(R.id.radioButton_leftdown_main_b_hourodometer_select_latesthourmeter);
+		radioCurrentFuel = (RadioButton)mRoot.findViewById(R.id.radioButton_leftdown_main_b_hourodometer_select_currentfuelrate);
 		radioTotalOdo = (RadioButton)mRoot.findViewById(R.id.radioButton_leftdown_main_b_hourodometer_select_totalodometer);
 		radioLatestOdo = (RadioButton)mRoot.findViewById(R.id.radioButton_leftdown_main_b_hourodometer_select_latestodometer);
 	}
@@ -87,20 +87,20 @@ public class MainBLeftDownHourOdometerSelectFragment extends ParentFragment{
 	@Override
 	protected void InitButtonListener() {
 		// TODO Auto-generated method stub
-		radioTotalHour.setOnClickListener(new View.OnClickListener() {
-			
-			@Override
-			public void onClick(View v) {
-				// TODO Auto-generated method stub
-				ClickTotalHourmeter();
-			}
-		});
 		radioLatestHour.setOnClickListener(new View.OnClickListener() {
 			
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
 				ClickLatestHourmeter();
+			}
+		});
+		radioCurrentFuel.setOnClickListener(new View.OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				ClickCurrentFuelRate();
 			}
 		});
 		radioTotalOdo.setOnClickListener(new View.OnClickListener() {
@@ -135,30 +135,30 @@ public class MainBLeftDownHourOdometerSelectFragment extends ParentFragment{
 	/////////////////////////////////////////////////////////////////////	
 	public void HourOdometerDisplay(int Data){
 		switch (Data) {
-		case CAN1CommManager.DATA_STATE_HOURMETER_TOTAL:
-			radioTotalHour.setChecked(true);
-			radioLatestHour.setChecked(false);
+		case CAN1CommManager.DATA_STATE_HOURMETER_LATEST:
+			radioLatestHour.setChecked(true);
+			radioCurrentFuel.setChecked(false);
 			radioTotalOdo.setChecked(false);
 			radioLatestOdo.setChecked(false);
 
 			break;
-		case CAN1CommManager.DATA_STATE_HOURMETER_LATEST:
-			radioTotalHour.setChecked(false);
-			radioLatestHour.setChecked(true);
+		case CAN1CommManager.DATA_STATE_FUELRATE_CURRENT:
+			radioLatestHour.setChecked(false);
+			radioCurrentFuel.setChecked(true);
 			radioTotalOdo.setChecked(false);
 			radioLatestOdo.setChecked(false);
 
 			break;
 		case CAN1CommManager.DATA_STATE_ODOMETER_TOTAL:
-			radioTotalHour.setChecked(false);
 			radioLatestHour.setChecked(false);
+			radioCurrentFuel.setChecked(false);
 			radioTotalOdo.setChecked(true);
 			radioLatestOdo.setChecked(false);
 
 			break;
 		case CAN1CommManager.DATA_STATE_ODOMETER_LATEST:
-			radioTotalHour.setChecked(false);
 			radioLatestHour.setChecked(false);
+			radioCurrentFuel.setChecked(false);
 			radioTotalOdo.setChecked(false);
 			radioLatestOdo.setChecked(true);
 
@@ -168,20 +168,20 @@ public class MainBLeftDownHourOdometerSelectFragment extends ParentFragment{
 		}
 		
 	}
-	public void ClickTotalHourmeter(){
-		if(ParentActivity.AnimationRunningFlag == true)
-			return;
-		else
-			ParentActivity.StartAnimationRunningTimer();
-		ParentActivity.HourOdometerIndex = CAN1CommManager.DATA_STATE_HOURMETER_TOTAL;
-		ParentActivity._MainBBaseFragment.showLeftDowntoDefaultScreenAnimation();
-	}
 	public void ClickLatestHourmeter(){
 		if(ParentActivity.AnimationRunningFlag == true)
 			return;
 		else
 			ParentActivity.StartAnimationRunningTimer();
 		ParentActivity.HourOdometerIndex = CAN1CommManager.DATA_STATE_HOURMETER_LATEST;
+		ParentActivity._MainBBaseFragment.showLeftDowntoDefaultScreenAnimation();
+	}
+	public void ClickCurrentFuelRate(){
+		if(ParentActivity.AnimationRunningFlag == true)
+			return;
+		else
+			ParentActivity.StartAnimationRunningTimer();
+		ParentActivity.HourOdometerIndex = CAN1CommManager.DATA_STATE_FUELRATE_CURRENT;
 		ParentActivity._MainBBaseFragment.showLeftDowntoDefaultScreenAnimation();
 	}
 	public void ClickTotalOdometer(){

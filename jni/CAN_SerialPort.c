@@ -312,9 +312,11 @@ jint Get_SettingSelection_PGN61184_105(JNIEnv * env, jobject this) {
 jint Get_SpeedometerFrequency_534_PGN61184_105(JNIEnv * env, jobject this) {
 	return RX_TRAVEL_CONTROL_VALUE_SETTING_61184_105.SpeedometerFrequency_534;
 }
-jint Get_AutoRideControlOperationSpeed_574_PGN61184_105(JNIEnv * env,
-		jobject this) {
-	return RX_TRAVEL_CONTROL_VALUE_SETTING_61184_105.AutoRideControlOperationSpeed_574;
+jint Get_AutoRideControlOperationSpeedForward_PGN61184_105(JNIEnv * env, jobject this) {
+	return RX_TRAVEL_CONTROL_VALUE_SETTING_61184_105.AutoRideControlOperationSpeedForward;
+}
+jint Get_AutoRideControlOperationSpeedBackward_PGN61184_105(JNIEnv * env, jobject this) {
+	return RX_TRAVEL_CONTROL_VALUE_SETTING_61184_105.AutoRideControlOperationSpeedBackward;
 }
 jint Get_VehicleSpeedLimit_572_PGN61184_105(JNIEnv * env, jobject this) {
 	return RX_TRAVEL_CONTROL_VALUE_SETTING_61184_105.VehicleSpeedLimit_572;
@@ -326,9 +328,11 @@ jint Get_MessageType_PGN61184_106(JNIEnv * env, jobject this) {
 jint Get_SpeedometerFrequency_534_PGN61184_106(JNIEnv * env, jobject this) {
 	return RX_TRAVEL_CONTROL_VALUE_61184_106.SpeedometerFrequency_534;
 }
-jint Get_AutoRideControlOperationSpeed_574_PGN61184_106(JNIEnv * env,
-		jobject this) {
-	return RX_TRAVEL_CONTROL_VALUE_61184_106.AutoRideControlOperationSpeed_574;
+jint Get_AutoRideControlOperationSpeedForward_PGN61184_106(JNIEnv * env, jobject this) {
+	return RX_TRAVEL_CONTROL_VALUE_61184_106.AutoRideControlOperationSpeedForward;
+}
+jint Get_AutoRideControlOperationSpeedBackward_PGN61184_106(JNIEnv * env, jobject this) {
+	return RX_TRAVEL_CONTROL_VALUE_61184_106.AutoRideControlOperationSpeedBackward;
 }
 jint Get_VehicleSpeedLimit_572_PGN61184_106(JNIEnv * env, jobject this) {
 	return RX_TRAVEL_CONTROL_VALUE_61184_106.VehicleSpeedLimit_572;
@@ -1719,10 +1723,11 @@ void Set_SpeedometerFrequency_534_PGN61184_105(JNIEnv * env, jobject this,
 		int Data) {
 	TX_TRAVEL_CONTROL_VALUE_SETTING_61184_105.SpeedometerFrequency_534 = Data;
 }
-void Set_AutoRideControlOperationSpeed_574_PGN61184_105(JNIEnv * env,
-		jobject this, int Data) {
-	TX_TRAVEL_CONTROL_VALUE_SETTING_61184_105.AutoRideControlOperationSpeed_574 =
-			Data;
+void Set_AutoRideControlOperationSpeedForward_PGN61184_105(JNIEnv * env, jobject this, int Data) {
+	TX_TRAVEL_CONTROL_VALUE_SETTING_61184_105.AutoRideControlOperationSpeedForward =Data;
+}
+void Set_AutoRideControlOperationSpeedBackward_PGN61184_105(JNIEnv * env, jobject this, int Data) {
+	TX_TRAVEL_CONTROL_VALUE_SETTING_61184_105.AutoRideControlOperationSpeedBackward = Data;
 }
 void Set_VehicleSpeedLimit_572_PGN61184_105(JNIEnv * env, jobject this,
 		int Data) {
@@ -1736,9 +1741,11 @@ void Set_SpeedometerFrequency_534_PGN61184_106(JNIEnv * env, jobject this,
 		int Data) {
 	TX_TRAVEL_CONTROL_VALUE_61184_106.SpeedometerFrequency_534 = Data;
 }
-void Set_AutoRideControlOperationSpeed_574_PGN61184_106(JNIEnv * env,
-		jobject this, int Data) {
-	TX_TRAVEL_CONTROL_VALUE_61184_106.AutoRideControlOperationSpeed_574 = Data;
+void Set_AutoRideControlOperationSpeedForward_PGN61184_106(JNIEnv * env, jobject this, int Data) {
+	TX_TRAVEL_CONTROL_VALUE_61184_106.AutoRideControlOperationSpeedForward = Data;
+}
+void Set_AutoRideControlOperationSpeedBackward_PGN61184_106(JNIEnv * env, jobject this, int Data) {
+	TX_TRAVEL_CONTROL_VALUE_61184_106.AutoRideControlOperationSpeedBackward = Data;
 }
 void Set_VehicleSpeedLimit_572_PGN61184_106(JNIEnv * env, jobject this,
 		int Data) {
@@ -3378,8 +3385,8 @@ static JNINativeMethod methods[] =
 						(void*) Get_SettingSelection_PGN61184_105 }, {
 						"Get_SpeedometerFrequency_534_PGN61184_105", "()I",
 						(void*) Get_SpeedometerFrequency_534_PGN61184_105 },
-				{ "Get_AutoRideControlOperationSpeed_574_PGN61184_105", "()I",
-						(void*) Get_AutoRideControlOperationSpeed_574_PGN61184_105 },
+				{ "Get_AutoRideControlOperationSpeedForward_PGN61184_105", "()I",(void*) Get_AutoRideControlOperationSpeedForward_PGN61184_105 },
+				{ "Get_AutoRideControlOperationSpeedBackward_PGN61184_105", "()I",(void*) Get_AutoRideControlOperationSpeedBackward_PGN61184_105 },
 				{ "Get_VehicleSpeedLimit_572_PGN61184_105", "()I",
 						(void*) Get_VehicleSpeedLimit_572_PGN61184_105 },
 				//////RX_TRAVEL_CONTROL_VALUE_61184_106///////
@@ -3387,8 +3394,8 @@ static JNINativeMethod methods[] =
 						(void*) Get_MessageType_PGN61184_106 }, {
 						"Get_SpeedometerFrequency_534_PGN61184_106", "()I",
 						(void*) Get_SpeedometerFrequency_534_PGN61184_106 },
-				{ "Get_AutoRideControlOperationSpeed_574_PGN61184_106", "()I",
-						(void*) Get_AutoRideControlOperationSpeed_574_PGN61184_106 },
+				{ "Get_AutoRideControlOperationSpeedForward_PGN61184_106", "()I",(void*) Get_AutoRideControlOperationSpeedForward_PGN61184_106 },
+				{ "Get_AutoRideControlOperationSpeedBackward_PGN61184_106", "()I",(void*) Get_AutoRideControlOperationSpeedBackward_PGN61184_106 },
 				{ "Get_VehicleSpeedLimit_572_PGN61184_106", "()I",
 						(void*) Get_VehicleSpeedLimit_572_PGN61184_106 },
 				//////RX_MACHINE_ACCESSORY_SETTING_REQUEST_61184_109///////
@@ -4169,8 +4176,8 @@ static JNINativeMethod methods[] =
 						(void*) Set_SettingSelection_PGN61184_105 }, {
 						"Set_SpeedometerFrequency_534_PGN61184_105", "(I)V",
 						(void*) Set_SpeedometerFrequency_534_PGN61184_105 },
-				{ "Set_AutoRideControlOperationSpeed_574_PGN61184_105", "(I)V",
-						(void*) Set_AutoRideControlOperationSpeed_574_PGN61184_105 },
+				{ "Set_AutoRideControlOperationSpeedForward_PGN61184_105", "(I)V",(void*) Set_AutoRideControlOperationSpeedForward_PGN61184_105 },
+				{ "Set_AutoRideControlOperationSpeedBackward_PGN61184_105", "(I)V",(void*) Set_AutoRideControlOperationSpeedBackward_PGN61184_105 },
 				{ "Set_VehicleSpeedLimit_572_PGN61184_105", "(I)V",
 						(void*) Set_VehicleSpeedLimit_572_PGN61184_105 },
 				//////TX_TRAVEL_CONTROL_VALUE_61184_106///////
@@ -4178,8 +4185,8 @@ static JNINativeMethod methods[] =
 						(void*) Set_MessageType_PGN61184_106 }, {
 						"Set_SpeedometerFrequency_534_PGN61184_106", "(I)V",
 						(void*) Set_SpeedometerFrequency_534_PGN61184_106 },
-				{ "Set_AutoRideControlOperationSpeed_574_PGN61184_106", "(I)V",
-						(void*) Set_AutoRideControlOperationSpeed_574_PGN61184_106 },
+				{ "Set_AutoRideControlOperationSpeedForward_PGN61184_106", "(I)V",(void*) Set_AutoRideControlOperationSpeedForward_PGN61184_106 },
+				{ "Set_AutoRideControlOperationSpeedBackward_PGN61184_106", "(I)V",(void*) Set_AutoRideControlOperationSpeedBackward_PGN61184_106 },
 				{ "Set_VehicleSpeedLimit_572_PGN61184_106", "(I)V",
 						(void*) Set_VehicleSpeedLimit_572_PGN61184_106 },
 				//////TX_MACHINE_ACCESSORY_SETTING_REQUEST_61184_109///////

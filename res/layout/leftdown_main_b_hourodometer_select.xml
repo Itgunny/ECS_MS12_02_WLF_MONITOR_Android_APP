@@ -6,13 +6,13 @@
     android:background="@drawable/main_bg_left_down_ani" >
     
     <RadioButton
-        android:id="@+id/radioButton_leftdown_main_b_hourodometer_select_totalhourmeter"
+        android:id="@+id/radioButton_leftdown_main_b_hourodometer_select_latesthourmeter"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="165dp"
         android:layout_marginTop="78dp"
         android:button="@drawable/_selector_radio_btn"
-        android:text="@string/Total_Hourmeter"
+        android:text="@string/Latest_Hourmeter"
         android:textColor="@drawable/_selector_radio_txt_white_amber"
         android:textSize="25sp" />
 	
@@ -28,13 +28,13 @@
 	    android:textSize="25sp" />
 	
 	<RadioButton
-	    android:id="@+id/radioButton_leftdown_main_b_hourodometer_select_latesthourmeter"
+	    android:id="@+id/radioButton_leftdown_main_b_hourodometer_select_currentfuelrate"
 	    android:layout_width="wrap_content"
 	    android:layout_height="wrap_content"
 	    android:layout_marginLeft="165dp"
 	    android:layout_marginTop="149dp"
 	    android:button="@drawable/_selector_radio_btn"
-	    android:text="@string/Latest_Hourmeter"
+	    android:text="@string/Current_Fuel_Rate"
 	    android:textColor="@drawable/_selector_radio_txt_white_amber"
 	    android:textSize="25sp" />
 	

@@ -72,7 +72,8 @@ public class ChangeFragmentAnimation extends View{
 			public void onAnimationEnd(Animator animation) {
 				// TODO Auto-generated method stub
 				AnimiationRunning = false;
-				viewItem.setVisibility(View.GONE);
+				
+				viewItem.setVisibility(View.INVISIBLE);
 				if(ChangeFlag == true){
 					showNextFragment(NextFragment);
 					StartAppearAnimation();
@@ -174,6 +175,7 @@ public class ChangeFragmentAnimation extends View{
 		try {
 			if(_fragment != CurrentFragment){
 				android.app.FragmentTransaction transaction = ParentActivity.getFragmentManager().beginTransaction();
+				transaction.remove(_fragment);
 				transaction.replace(nFrameLayoutID, _fragment);
 				transaction.commit();
 				CurrentFragment = _fragment;

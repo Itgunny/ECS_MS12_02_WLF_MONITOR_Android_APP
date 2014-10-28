@@ -1274,94 +1274,90 @@ public class MainBBaseFragment extends ParentFragment{
 	/////////////////////////////////////////////////////////////////////
 	public void KeyButtonClick(final int key){
 		Log.d(TAG,"KeyButtonClick : 0x" + Integer.toHexString(key));
-		ParentActivity.runOnUiThread(new Runnable() {
+		
+		// TODO Auto-generated method stub
+		switch (key) {
+		case CAN1CommManager.MAINLIGHT:
+			if(ParentActivity.AnimationRunningFlag == true)
+				return;
+			if(ParentActivity.ScreenIndex != ParentActivity.SCREEN_STATE_MAIN_B_KEY_MAINLIGHT)
+				showMainLightAnimation();
+			else
+				_MainBKeyMainLightFragment.ClickHardKey();
+			break;
+		case CAN1CommManager.WORKLIGHT:
+			if(ParentActivity.AnimationRunningFlag == true)
+				return;
+			if(ParentActivity.ScreenIndex != ParentActivity.SCREEN_STATE_MAIN_B_KEY_WORKLIGHT)
+				showWorkLightAnimation();
+			else
+				_MainBKeyWorkLightFragment.ClickHardKey();
+			break;
+		case CAN1CommManager.AUTO_GREASE:
+			if(ParentActivity.AnimationRunningFlag == true)
+				return;
+			if(ParentActivity.ScreenIndex != ParentActivity.SCREEN_STATE_MAIN_B_KEY_AUTOGREASE)
+				showAutoGreaseAnimation();
+			else
+				_MainBKeyAutoGreaseFragment.ClickHardKey();
+			break;
+		case CAN1CommManager.QUICK_COUPLER:
+			if(ParentActivity.AnimationRunningFlag == true)
+				return;
 			
-			@Override
-			public void run() {
-				// TODO Auto-generated method stub
-				switch (key) {
-				case CAN1CommManager.MAINLIGHT:
-					if(ParentActivity.AnimationRunningFlag == true)
-						return;
-					if(ParentActivity.ScreenIndex != ParentActivity.SCREEN_STATE_MAIN_B_KEY_MAINLIGHT)
-						showMainLightAnimation();
-					else
-						_MainBKeyMainLightFragment.ClickHardKey();
-					break;
-				case CAN1CommManager.WORKLIGHT:
-					if(ParentActivity.AnimationRunningFlag == true)
-						return;
-					if(ParentActivity.ScreenIndex != ParentActivity.SCREEN_STATE_MAIN_B_KEY_WORKLIGHT)
-						showWorkLightAnimation();
-					else
-						_MainBKeyWorkLightFragment.ClickHardKey();
-					break;
-				case CAN1CommManager.AUTO_GREASE:
-					if(ParentActivity.AnimationRunningFlag == true)
-						return;
-					if(ParentActivity.ScreenIndex != ParentActivity.SCREEN_STATE_MAIN_B_KEY_AUTOGREASE)
-						showAutoGreaseAnimation();
-					else
-						_MainBKeyAutoGreaseFragment.ClickHardKey();
-					break;
-				case CAN1CommManager.QUICK_COUPLER:
-					if(ParentActivity.AnimationRunningFlag == true)
-						return;
-					
-					showQuickCouplerAnimation();
-					break;
-				case CAN1CommManager.RIDE_CONTROL:
-					if(ParentActivity.AnimationRunningFlag == true)
-						return;
-					showRideControlAnimation();
-					break;
-				case CAN1CommManager.WORK_LOAD:
-					if(ParentActivity.AnimationRunningFlag == true)
-						return;
-					showWorkLoadAnimation();
-					break;
-				case CAN1CommManager.BEACON_LAMP:
-					if(ParentActivity.AnimationRunningFlag == true)
-						return;
-					if(ParentActivity.ScreenIndex != ParentActivity.SCREEN_STATE_MAIN_B_KEY_BEACONLAMP)
-						showBeaconLampAnimation();
-					else
-						_MainBKeyBeaconLampFragment.ClickHardKey();
-					break;
-				case CAN1CommManager.REAR_WIPER:
-					if(ParentActivity.AnimationRunningFlag == true)
-						return;
-					if(ParentActivity.ScreenIndex != ParentActivity.SCREEN_STATE_MAIN_B_KEY_REARWIPER)
-						showRearWiperAnimation();
-					else
-						_MainBKeyRearWiperFragment.ClickHardKey();
-					break;
-				case CAN1CommManager.MIRROR_HEAT:
-					if(ParentActivity.AnimationRunningFlag == true)
-						return;
-					if(ParentActivity.ScreenIndex != ParentActivity.SCREEN_STATE_MAIN_B_KEY_MIRRORHEAT)
-						showMirrorHeatAnimation();
-					else
-						_MainBKeyMirrorHeatFragment.ClickHardKey();
-					break;
-				case CAN1CommManager.AUTOPOSITION:
-					if(ParentActivity.AnimationRunningFlag == true)
-						return;
-					showDetentAnimation();
-					break;
-				case CAN1CommManager.FINEMODULATION:
-					if(ParentActivity.AnimationRunningFlag == true)
-						return;
-					if(ParentActivity.ScreenIndex != ParentActivity.SCREEN_STATE_MAIN_B_KEY_FINEMODULATION)
-						showFineModulationAnimation();
-					else
-						_MainBKeyFineModulationFragment.ClickHardKey();
-					break;
-				default:
-					break;
-				}
+			showQuickCouplerAnimation();
+			break;
+		case CAN1CommManager.RIDE_CONTROL:
+			if(ParentActivity.AnimationRunningFlag == true)
+				return;
+			showRideControlAnimation();
+			break;
+		case CAN1CommManager.WORK_LOAD:
+			if(ParentActivity.AnimationRunningFlag == true)
+				return;
+			showWorkLoadAnimation();
+			break;
+		case CAN1CommManager.BEACON_LAMP:
+			if(ParentActivity.AnimationRunningFlag == true)
+				return;
+			if(ParentActivity.ScreenIndex != ParentActivity.SCREEN_STATE_MAIN_B_KEY_BEACONLAMP)
+				showBeaconLampAnimation();
+			else
+				_MainBKeyBeaconLampFragment.ClickHardKey();
+			break;
+		case CAN1CommManager.REAR_WIPER:
+			if(ParentActivity.AnimationRunningFlag == true)
+				return;
+			if(ParentActivity.ScreenIndex != ParentActivity.SCREEN_STATE_MAIN_B_KEY_REARWIPER)
+				showRearWiperAnimation();
+			else
+				_MainBKeyRearWiperFragment.ClickHardKey();
+			break;
+		case CAN1CommManager.MIRROR_HEAT:
+			if(ParentActivity.AnimationRunningFlag == true)
+				return;
+			if(ParentActivity.ScreenIndex != ParentActivity.SCREEN_STATE_MAIN_B_KEY_MIRRORHEAT)
+				showMirrorHeatAnimation();
+			else
+				_MainBKeyMirrorHeatFragment.ClickHardKey();
+			break;
+		case CAN1CommManager.AUTOPOSITION:
+			if(ParentActivity.AnimationRunningFlag == true)
+				return;
+			showDetentAnimation();
+			break;
+		case CAN1CommManager.FINEMODULATION:
+			if(ParentActivity.AnimationRunningFlag == true)
+				return;
+			if(ParentActivity.ScreenIndex != ParentActivity.SCREEN_STATE_MAIN_B_KEY_FINEMODULATION)
+				showFineModulationAnimation();
+			else
+				_MainBKeyFineModulationFragment.ClickHardKey();
+			break;
+		default:
+			break;
+		}
 				
-			}
-		});
+
 	}
 }

@@ -18,7 +18,9 @@
     <string name="Maintenance">Maintenance</string>
     <string name="On">On</string>
     <string name="Off">Off</string>
+    <string name="Disable">Disable</string>
     <string name="On_Always">On, Alwyas</string>
+    <string name="On_Once">On, Once</string>
     <string name="Default">Default</string>
     <string name="Manual">Manual</string>
     <string name="Automatic">Automatic</string>
@@ -27,6 +29,12 @@
     <string name="Initialization">Initialization</string>
     <string name="km_h">km/h</string>
     <string name="mph">mph</string>
+    <string name="l_h">l/h</string>
+    <string name="rpm">rpm</string>
+    <string name="Setting">Setting</string>
+    <string name="Clear">Clear</string>
+    <string name="km">km</string>
+    <string name="mile">mile</string>
     <!-- Common End-->
     <!-- Main Start-->
     <string name="ENGINE_MODE">ENGINE MODE</string>
@@ -36,6 +44,8 @@
     <string name="TC_LOCK_UP">T.C. LOCK UP</string>
     <string name="TOTAL_HOURMETER">TOTAL HOURMETER</string>
     <string name="LATEST_HOURMETER">LATEST HOURMETER</string>
+    <string name="AVERAGE_FUEL_RATE">AVERAGE FUEL RATE</string>
+    <string name="CURRENT_FUEL_RATE">CURRENT FUEL RATE</string>
     <string name="TOTAL_ODOMETER">TOTAL ODOMETER</string>
     <string name="LATEST_ODOMETER">LATEST ODOMETER</string>
     <string name="ECONO">ECONO</string>
@@ -52,6 +62,8 @@
     <string name="AH">AH</string>
     <string name="Total_Hourmeter">Total Hourmeter</string>
     <string name="Latest_Hourmeter">Latest Hourmeter</string>
+    <string name="Average_Fuel_Rate">Average Fuel Rate</string>
+    <string name="Current_Fuel_Rate">Current Fuel Rate</string>
     <string name="Total_Odometer">Total Odometer</string>
     <string name="Latest_Odometer">Latest Odometer</string>
     <string name="HYD_Temp">HYD Temp.</string>
@@ -108,27 +120,87 @@
     <string name="Preference">Preference</string>
     <string name="Multimedia">Multimedia</string>
     <!-- Menu End -->
-    
     <!-- Menu Mode Start -->
     <string name="Eng">ENG.</string>
     <string name="TM">TM.</string>
     <string name="HYD">HYD.</string>
     <string name="ETC">ETC.</string>
-    
     <string name="CCO_Mode">C.C.O. Mode</string>
     <string name="Shift_Mode">Shift Mode</string>
     <string name="Kick_Down">Kick Down</string>
     <string name="Engine_Speed">Engine Speed</string>
     <string name="TC_Lock_Up">T.C. Lock Up</string>
-    
-
     <string name="Bucket_Priority">Bucket Priority</string>
     <string name="Boom_Bucket_Detent_Mode">Boom Bucket Detent Mode</string>
     <string name="Auxilliary_Attachment_Max_Flow_Level">Auxilliary Attachment Max Flow Level</string>
-    
     <string name="Engine_Auto_Shutdown">Engine Auto Shutdown</string>
     <string name="Engine_Delay_Shutdown">Engine Delay Shutdown</string>
     <string name="Camera_Setting">Camera Setting</string>
     <string name="Cooling_Fan_Reverse_Mode">Cooling Fan Reverse Mode</string>
+    <string name="MODE1">MODE 1 : DOWN / UP</string>
+    <string name="MODE2">MODE 2 : DOWN ONLY</string>
+    <string name="Active_Camera">Active Camera</string>
+    <string name="Display_Order">Display Order</string>
+    <string name="CAM_1">CAM 1</string>
+    <string name="CAM_2">CAM 2</string>
+    <string name="CAM_3">CAM 3</string>
+    <string name="CAM_4">CAM 4</string>
+    <string name="_1st">1st</string>
+    <string name="_2nd">2nd</string>
+    <string name="_3rd">3rd</string>
+    <string name="_4th">4th</string>
+    <string name="Reverse_Mode">Reverse Mode</string>
+    <string name="Interval">Interval</string>
+    <string name="Time">Time</string>
     <!-- Menu Mode End -->
+    <!-- Menu Monitoring Start -->
+    <string name="Machine_Monitoring">Machine Monitoring</string>
+    <string name="Operation_History">Operation History</string>
+    <string name="Weighing_Information">Weighing Information</string>
+    <string name="Fault_History">Fault History</string>
+    <string name="EHCU_IO_Information">EHCU I/O Information</string>
+    <string name="Version_Information">Version Information</string>
+    <string name="Current">Current</string>
+    <string name="Logged_Fault">Logged Fault</string>
+    <string name="Model">Model</string>
+    <string name="TCU">TCU</string>
+    <string name="ECM">ECM</string>
+    <string name="Monitor">Monitor</string>
+    <string name="MCU">MCU</string>
+    <string name="Cluster">Cluster</string>
+    <string name="RMCU">RMCU</string>
+    <string name="EHCU">EHCU</string>
+    <string name="Software_Update">Software Update</string>
+    <!-- Menu Monitoring End -->
+    <!-- Menu Management Start -->
+    <string name="Machine_Security">Machine Security</string>
+    <string name="Calibration">Calibration</string>
+    <string name="Speedometer_Freq_Setting">Speedometer Freq. Setting</string>
+    <string name="Change_AS_Phone_Number">Change A/S Phone Number</string>
+    <string name="Service_Contact">Service Contact</string>
+    <string name="ESL_System_Setting">ESL System Setting</string>
+    <string name="Change_Password">Change Password</string>
+    <string name="Smart_Key">Smart Key</string>
+    <string name="On_After_Specific_Time">On, After Specific Time</string>
+    <string name="_5Min">5 Min.</string>
+    <string name="_10Min">10 Min.</string>
+    <string name="_20Min">20 Min.</string>
+    <string name="_30Min">30 Min.</string>
+    <string name="_1Hour">1 Hour</string>
+    <string name="_2Hour">2 Hour</string>
+    <string name="_4Hour">4 Hour</string>
+    <string name="_1Day">1 Day</string>
+    <string name="_2Day">2 Day</string>
+    <!-- Menu Management End -->
+    <!-- Menu Preference Start -->
+    <string name="Brightness_Setting">Brightness Setting</string>
+    <string name="Clock_Setting">Clock Setting</string>
+    <string name="Unit_Setting">Unit Setting</string>
+    <string name="Sound_Output_Setting">Sound Output Setting</string>
+    <string name="Wireless_Communication_Setting">Wireless Communication Setting</string>
+    <string name="Display_Style">Display Style</string>
+    <!-- Menu Preference End -->
+    <!-- Menu Multimedia Start -->
+    <string name="Media_Palyer">Media Palyer</string>
+    <!-- Menu Multimedia End -->
 </resources>

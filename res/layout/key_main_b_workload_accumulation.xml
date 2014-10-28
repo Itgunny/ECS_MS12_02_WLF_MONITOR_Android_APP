@@ -21,7 +21,7 @@
         android:layout_alignLeft="@+id/imageView_key_main_b_workload_accumulation_line"
         android:layout_marginBottom="10dp"
         android:layout_marginLeft="10dp"
-        android:text="@string/Weighing_System_Mode"
+        android:text="@string/Weighing_System"
         android:textAppearance="?android:attr/textAppearanceLarge" />
     
     <RadioGroup

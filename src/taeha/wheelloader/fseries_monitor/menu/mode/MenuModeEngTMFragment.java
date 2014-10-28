@@ -5,6 +5,7 @@ import taeha.wheelloader.fseries_monitor.animation.ChangeFragmentAnimation;
 import taeha.wheelloader.fseries_monitor.animation.DisappearAnimation;
 import taeha.wheelloader.fseries_monitor.animation.MainBodyShiftAnimation;
 import taeha.wheelloader.fseries_monitor.animation.LeftRightShiftAnimation;
+import taeha.wheelloader.fseries_monitor.main.Home;
 import taeha.wheelloader.fseries_monitor.main.ParentFragment;
 import taeha.wheelloader.fseries_monitor.main.R;
 import taeha.wheelloader.fseries_monitor.main.R.string;
@@ -31,7 +32,7 @@ public class MenuModeEngTMFragment extends MenuBodyList_ParentFragment{
 	//////////////////////////////////////////////////
 	
 	//VALUABLE////////////////////////////////////////
-
+	
 	//////////////////////////////////////////////////
 	
 	//Fragment////////////////////////////////////////
@@ -56,7 +57,8 @@ public class MenuModeEngTMFragment extends MenuBodyList_ParentFragment{
 		Log.d(TAG, "onCreateView");
 
 		InitList();
-		ParentActivity.ScreenIndex = ParentActivity.SCREEN_STATE_MENU_MODE_ENGINE_TOP;
+		ParentActivity.ScreenIndex = Home.SCREEN_STATE_MENU_MODE_ENGINE_TOP;
+		ParentActivity._MenuBaseFragment._MenuModeFragment.setFirstScreen(Home.SCREEN_STATE_MENU_MODE_ENGINE_TOP);
 		return mRoot;
 	}
 	
@@ -98,29 +100,43 @@ public class MenuModeEngTMFragment extends MenuBodyList_ParentFragment{
 	public void ClickList1() {
 		// TODO Auto-generated method stub
 		
+		ParentActivity.showCCoMode();
+	
 	}
 
 	@Override
 	public void ClickList2() {
 		// TODO Auto-generated method stub
+	
+		ParentActivity.showShiftMode();
 		
 	}
 
 	@Override
 	public void ClickList3() {
 		// TODO Auto-generated method stub
-		
+	
+		ParentActivity.showKickDown();
+	
 	}
 
 	@Override
 	public void ClickList4() {
 		// TODO Auto-generated method stub
+		if(ParentActivity.AnimationRunningFlag == true)
+			return;
+		else
+			ParentActivity.StartAnimationRunningTimer();
 		
+		ParentActivity._MenuBaseFragment.showBodyEngineSpeedAnimation();
+	
 	}
 
 	@Override
 	public void ClickList5() {
 		// TODO Auto-generated method stub
+		
+		ParentActivity.showTCLockUp();
 		
 	}
 
@@ -130,9 +146,45 @@ public class MenuModeEngTMFragment extends MenuBodyList_ParentFragment{
 		
 	}
 
-
+	public void ClickLeft(){
+		
+		
+	}
+	public void ClickRight(){
+		
+		
+	}
+	public void ClickESC(){
+		
+	}
+	public void ClickEnter(){
+	
+		
+	}
 
 	/////////////////////////////////////////////////////////////////////
+	public void CursurDisplay(int Index){
+		switch (Index) {
+		case Home.SCREEN_STATE_MENU_MODE_CCOMODE:
+			setListFocus(1);
+			break;
+		case Home.SCREEN_STATE_MENU_MODE_SHIFTMODE:
+			setListFocus(2);
+			break;
+		case Home.SCREEN_STATE_MENU_MODE_KICKDOWN:
+			setListFocus(3);
+			break;
+		case Home.SCREEN_STATE_MENU_MODE_ENGINESPEED:
+			setListFocus(4);
+			break;
+		case Home.SCREEN_STATE_MENU_MODE_TCLOCKUP:
+			setListFocus(5);
+			break;
+		default:
+			setListFocus(0);
+			break;
+		}
+	}
 	/////////////////////////////////////////////////////////////////////	
 	
 	/////////////////////////////////////////////////////////////////////

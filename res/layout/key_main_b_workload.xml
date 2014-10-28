@@ -59,7 +59,7 @@
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
             android:layout_marginLeft="20dp"
-            android:text="@string/Weighing_System_Mode"
+            android:text="@string/Weighing_System"
             android:textAppearance="?android:attr/textAppearanceLarge" />
         
         <TextView

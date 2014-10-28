@@ -6,6 +6,7 @@ import taeha.wheelloader.fseries_monitor.animation.DisappearAnimation;
 import taeha.wheelloader.fseries_monitor.animation.MainBodyShiftAnimation;
 import taeha.wheelloader.fseries_monitor.animation.LeftRightShiftAnimation;
 import taeha.wheelloader.fseries_monitor.main.CAN1CommManager;
+import taeha.wheelloader.fseries_monitor.main.Home;
 import taeha.wheelloader.fseries_monitor.main.ParentFragment;
 import taeha.wheelloader.fseries_monitor.main.R;
 import taeha.wheelloader.fseries_monitor.main.R.string;
@@ -33,7 +34,7 @@ public class MenuModeTabFragment extends ParentFragment{
 	//////////////////////////////////////////////////
 	
 	//VALUABLE////////////////////////////////////////
-
+	static int FirstScreenIndex;
 	//////////////////////////////////////////////////
 	
 	//Fragment////////////////////////////////////////
@@ -60,7 +61,7 @@ public class MenuModeTabFragment extends ParentFragment{
 		InitValuables();
 		InitButtonListener();
 
-		ClickEngineTM();
+		ModeBodyDisplay(FirstScreenIndex);
 		setEngineText(ParentActivity.getResources().getString(string.Eng) + " / " + ParentActivity.getResources().getString(string.TM));
 		return mRoot;
 	}
@@ -68,6 +69,8 @@ public class MenuModeTabFragment extends ParentFragment{
 	////////////////////////////////////////////////
 	
 	
+
+
 
 	//Common Function//////////////////////////////
 	@Override
@@ -128,20 +131,23 @@ public class MenuModeTabFragment extends ParentFragment{
 	/////////////////////////////////////////////////////////////////////	
 	public void ClickEngineTM(){
 		setClickImageEngineTM();
-		if((ParentActivity.ScreenIndex < ParentActivity.SCREEN_STATE_MENU_MODE_ENGINE_TOP) || (ParentActivity.ScreenIndex > ParentActivity.SCREEN_STATE_MENU_MODE_ENGINE_END)){
-			ParentActivity._MenuBaseFragment._MenuModeFragment.showEngTM();
+		if((ParentActivity.ScreenIndex < Home.SCREEN_STATE_MENU_MODE_ENGINE_TOP) 
+		|| (ParentActivity.ScreenIndex > Home.SCREEN_STATE_MENU_MODE_ENGINE_END)){
+				ParentActivity._MenuBaseFragment._MenuModeFragment.showEngTM();
 		}
 	}
 	public void ClickHYD(){
 		setClickImageHYD();
-		if((ParentActivity.ScreenIndex < ParentActivity.SCREEN_STATE_MENU_MODE_HYD_TOP) || (ParentActivity.ScreenIndex > ParentActivity.SCREEN_STATE_MENU_MODE_HYD_END)){
-			ParentActivity._MenuBaseFragment._MenuModeFragment.showHYD();
+		if((ParentActivity.ScreenIndex < Home.SCREEN_STATE_MENU_MODE_HYD_TOP) 
+		|| (ParentActivity.ScreenIndex > Home.SCREEN_STATE_MENU_MODE_HYD_END)){
+				ParentActivity._MenuBaseFragment._MenuModeFragment.showHYD();
 		}	
 	}
 	public void ClickETC(){
 		setClickImageETC();
-		if((ParentActivity.ScreenIndex < ParentActivity.SCREEN_STATE_MENU_MODE_ETC_TOP) || (ParentActivity.ScreenIndex > ParentActivity.SCREEN_STATE_MENU_MODE_ETC_END)){
-			ParentActivity._MenuBaseFragment._MenuModeFragment.showETC();
+		if((ParentActivity.ScreenIndex < Home.SCREEN_STATE_MENU_MODE_ETC_TOP) 
+		|| (ParentActivity.ScreenIndex > Home.SCREEN_STATE_MENU_MODE_ETC_END)){
+				ParentActivity._MenuBaseFragment._MenuModeFragment.showETC();
 		}	
 	}
 	/////////////////////////////////////////////////////////////////////
@@ -193,6 +199,24 @@ public class MenuModeTabFragment extends ParentFragment{
 		
 		textViewRight.setBackgroundResource(R.drawable._selector_menu_body_mode_tab_right_btn);
 		textViewRight.setTextColor(ParentActivity.getResources().getColor(R.drawable._selector_menu_body_mode_tab_txt));
+	}
+	/////////////////////////////////////////////////////////////////////
+	public void setFirstScreen(int Index){
+		FirstScreenIndex = Index;
+	}
+	public void ModeBodyDisplay(int Index){
+		switch (Index) {
+		case Home.SCREEN_STATE_MENU_MODE_ENGINE_TOP:
+		default:
+			ClickEngineTM();
+			break;
+		case Home.SCREEN_STATE_MENU_MODE_HYD_TOP:
+			ClickHYD();
+			break;
+		case Home.SCREEN_STATE_MENU_MODE_ETC_TOP:
+			ClickETC();
+			break;
+		}
 	}
 	/////////////////////////////////////////////////////////////////////
 	

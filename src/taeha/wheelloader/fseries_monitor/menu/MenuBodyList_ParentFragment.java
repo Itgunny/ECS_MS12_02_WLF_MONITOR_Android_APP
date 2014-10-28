@@ -303,6 +303,75 @@ public abstract class MenuBodyList_ParentFragment extends ParentFragment{
 	public void setListData6(String str){
 		textViewData6.setText(str);
 	}
+	
+	public void setListFocus(int Index){
+		switch (Index) {
+		case 0:
+			imgbtnList1.setBackgroundResource(R.drawable._selector_menu_body_list_btn);
+			imgbtnList2.setBackgroundResource(R.drawable._selector_menu_body_list_btn);
+			imgbtnList3.setBackgroundResource(R.drawable._selector_menu_body_list_btn);
+			imgbtnList4.setBackgroundResource(R.drawable._selector_menu_body_list_btn);
+			imgbtnList5.setBackgroundResource(R.drawable._selector_menu_body_list_btn);
+			imgbtnList6.setBackgroundResource(R.drawable._selector_menu_body_list_btn);
+			break;
+		case 1:
+			imgbtnList1.setBackgroundResource(R.drawable.menu_list_selected);
+			imgbtnList2.setBackgroundResource(R.drawable._selector_menu_body_list_btn);
+			imgbtnList3.setBackgroundResource(R.drawable._selector_menu_body_list_btn);
+			imgbtnList4.setBackgroundResource(R.drawable._selector_menu_body_list_btn);
+			imgbtnList5.setBackgroundResource(R.drawable._selector_menu_body_list_btn);
+			imgbtnList6.setBackgroundResource(R.drawable._selector_menu_body_list_btn);
+			break;
+		case 2:
+			imgbtnList1.setBackgroundResource(R.drawable._selector_menu_body_list_btn);
+			imgbtnList2.setBackgroundResource(R.drawable.menu_list_selected);
+			imgbtnList3.setBackgroundResource(R.drawable._selector_menu_body_list_btn);
+			imgbtnList4.setBackgroundResource(R.drawable._selector_menu_body_list_btn);
+			imgbtnList5.setBackgroundResource(R.drawable._selector_menu_body_list_btn);
+			imgbtnList6.setBackgroundResource(R.drawable._selector_menu_body_list_btn);
+			break;
+		case 3:
+			imgbtnList1.setBackgroundResource(R.drawable._selector_menu_body_list_btn);
+			imgbtnList2.setBackgroundResource(R.drawable._selector_menu_body_list_btn);
+			imgbtnList3.setBackgroundResource(R.drawable.menu_list_selected);
+			imgbtnList4.setBackgroundResource(R.drawable._selector_menu_body_list_btn);
+			imgbtnList5.setBackgroundResource(R.drawable._selector_menu_body_list_btn);
+			imgbtnList6.setBackgroundResource(R.drawable._selector_menu_body_list_btn);
+			break;
+		case 4:
+			imgbtnList1.setBackgroundResource(R.drawable._selector_menu_body_list_btn);
+			imgbtnList2.setBackgroundResource(R.drawable._selector_menu_body_list_btn);
+			imgbtnList3.setBackgroundResource(R.drawable._selector_menu_body_list_btn);
+			imgbtnList4.setBackgroundResource(R.drawable.menu_list_selected);
+			imgbtnList5.setBackgroundResource(R.drawable._selector_menu_body_list_btn);
+			imgbtnList6.setBackgroundResource(R.drawable._selector_menu_body_list_btn);
+			break;
+		case 5:
+			imgbtnList1.setBackgroundResource(R.drawable._selector_menu_body_list_btn);
+			imgbtnList2.setBackgroundResource(R.drawable._selector_menu_body_list_btn);
+			imgbtnList3.setBackgroundResource(R.drawable._selector_menu_body_list_btn);
+			imgbtnList4.setBackgroundResource(R.drawable._selector_menu_body_list_btn);
+			imgbtnList5.setBackgroundResource(R.drawable.menu_list_selected);
+			imgbtnList6.setBackgroundResource(R.drawable._selector_menu_body_list_btn);
+			break;
+		case 6:
+			imgbtnList1.setBackgroundResource(R.drawable._selector_menu_body_list_btn);
+			imgbtnList2.setBackgroundResource(R.drawable._selector_menu_body_list_btn);
+			imgbtnList3.setBackgroundResource(R.drawable._selector_menu_body_list_btn);
+			imgbtnList4.setBackgroundResource(R.drawable._selector_menu_body_list_btn);
+			imgbtnList5.setBackgroundResource(R.drawable._selector_menu_body_list_btn);
+			imgbtnList6.setBackgroundResource(R.drawable.menu_list_selected);
+			break;
+		default:
+			imgbtnList1.setBackgroundResource(R.drawable._selector_menu_body_list_btn);
+			imgbtnList2.setBackgroundResource(R.drawable._selector_menu_body_list_btn);
+			imgbtnList3.setBackgroundResource(R.drawable._selector_menu_body_list_btn);
+			imgbtnList4.setBackgroundResource(R.drawable._selector_menu_body_list_btn);
+			imgbtnList5.setBackgroundResource(R.drawable._selector_menu_body_list_btn);
+			imgbtnList6.setBackgroundResource(R.drawable._selector_menu_body_list_btn);
+			break;
+		}
+	}
 	/////////////////////////////////////////////////////////////////////
 	
 }
