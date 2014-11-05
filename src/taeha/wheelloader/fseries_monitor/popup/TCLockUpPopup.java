@@ -53,14 +53,14 @@ public class TCLockUpPopup extends ParentPopup{
 		InitButtonListener();
 		InitValuable();
 		
-		ParentActivity.ScreenIndex = ParentActivity.SCREEN_STATE_MENU_MODE_TCLOCKUP;
+		ParentActivity.ScreenIndex = ParentActivity.SCREEN_STATE_MENU_MODE_ENGINETM_TCLOCKUP;
 	}
 
 	@Override
 	public void dismiss() {
 		// TODO Auto-generated method stub
 		super.dismiss();
-		ParentActivity.ScreenIndex = ParentActivity.SCREEN_STATE_MENU_MODE_ENGINE_TOP;
+		ParentActivity.ScreenIndex = ParentActivity.SCREEN_STATE_MENU_MODE_ENGINETM_TOP;
 	}
 
 	@Override

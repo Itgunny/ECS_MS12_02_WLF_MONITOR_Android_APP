@@ -57,8 +57,8 @@ public class MenuModeEngTMFragment extends MenuBodyList_ParentFragment{
 		Log.d(TAG, "onCreateView");
 
 		InitList();
-		ParentActivity.ScreenIndex = Home.SCREEN_STATE_MENU_MODE_ENGINE_TOP;
-		ParentActivity._MenuBaseFragment._MenuModeFragment.setFirstScreen(Home.SCREEN_STATE_MENU_MODE_ENGINE_TOP);
+		ParentActivity.ScreenIndex = Home.SCREEN_STATE_MENU_MODE_ENGINETM_TOP;
+		ParentActivity._MenuBaseFragment._MenuModeFragment.setFirstScreen(Home.SCREEN_STATE_MENU_MODE_ENGINETM_TOP);
 		return mRoot;
 	}
 	
@@ -76,11 +76,11 @@ public class MenuModeEngTMFragment extends MenuBodyList_ParentFragment{
 		setClickableList4(true);
 		setClickableList5(true);
 		
-		setListTitle1(ParentActivity.getResources().getString(string.CCO_Mode));
-		setListTitle2(ParentActivity.getResources().getString(string.Shift_Mode));
-		setListTitle3(ParentActivity.getResources().getString(string.Kick_Down));
-		setListTitle4(ParentActivity.getResources().getString(string.Engine_Speed));
-		setListTitle5(ParentActivity.getResources().getString(string.TC_Lock_Up));
+		setListTitle1(ParentActivity.getResources().getString(string.Engine_Speed));
+		setListTitle2(ParentActivity.getResources().getString(string.TC_Lock_Up));
+		setListTitle3(ParentActivity.getResources().getString(string.CCO_Mode));
+		setListTitle4(ParentActivity.getResources().getString(string.Shift_Mode));
+		setListTitle5(ParentActivity.getResources().getString(string.Kick_Down));
 	}
 	
 	@Override
@@ -99,45 +99,36 @@ public class MenuModeEngTMFragment extends MenuBodyList_ParentFragment{
 	@Override
 	public void ClickList1() {
 		// TODO Auto-generated method stub
-		
-		ParentActivity.showCCoMode();
-	
-	}
-
-	@Override
-	public void ClickList2() {
-		// TODO Auto-generated method stub
-	
-		ParentActivity.showShiftMode();
-		
-	}
-
-	@Override
-	public void ClickList3() {
-		// TODO Auto-generated method stub
-	
-		ParentActivity.showKickDown();
-	
-	}
-
-	@Override
-	public void ClickList4() {
-		// TODO Auto-generated method stub
 		if(ParentActivity.AnimationRunningFlag == true)
 			return;
 		else
 			ParentActivity.StartAnimationRunningTimer();
 		
 		ParentActivity._MenuBaseFragment.showBodyEngineSpeedAnimation();
-	
+	}
+
+	@Override
+	public void ClickList2() {
+		// TODO Auto-generated method stub
+		ParentActivity.showTCLockUp();
+	}
+
+	@Override
+	public void ClickList3() {
+		// TODO Auto-generated method stub
+		ParentActivity.showCCoMode();	
+	}
+
+	@Override
+	public void ClickList4() {
+		// TODO Auto-generated method stub
+		ParentActivity.showShiftMode();
 	}
 
 	@Override
 	public void ClickList5() {
 		// TODO Auto-generated method stub
-		
-		ParentActivity.showTCLockUp();
-		
+		ParentActivity.showKickDown();
 	}
 
 	@Override
@@ -165,19 +156,19 @@ public class MenuModeEngTMFragment extends MenuBodyList_ParentFragment{
 	/////////////////////////////////////////////////////////////////////
 	public void CursurDisplay(int Index){
 		switch (Index) {
-		case Home.SCREEN_STATE_MENU_MODE_CCOMODE:
+		case Home.SCREEN_STATE_MENU_MODE_ENGINETM_ENGINESPEED:
 			setListFocus(1);
 			break;
-		case Home.SCREEN_STATE_MENU_MODE_SHIFTMODE:
+		case Home.SCREEN_STATE_MENU_MODE_ENGINETM_TCLOCKUP:
 			setListFocus(2);
 			break;
-		case Home.SCREEN_STATE_MENU_MODE_KICKDOWN:
+		case Home.SCREEN_STATE_MENU_MODE_ENGINETM_CCOMODE:
 			setListFocus(3);
 			break;
-		case Home.SCREEN_STATE_MENU_MODE_ENGINESPEED:
+		case Home.SCREEN_STATE_MENU_MODE_ENGINETM_SHIFTMODE:
 			setListFocus(4);
 			break;
-		case Home.SCREEN_STATE_MENU_MODE_TCLOCKUP:
+		case Home.SCREEN_STATE_MENU_MODE_ENGINETM_KICKDOWN:
 			setListFocus(5);
 			break;
 		default:

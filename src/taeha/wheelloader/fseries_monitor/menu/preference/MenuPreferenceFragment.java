@@ -100,13 +100,23 @@ public class MenuPreferenceFragment extends MenuBodyList_ParentFragment{
 	@Override
 	public void ClickList1() {
 		// TODO Auto-generated method stub
+		if(ParentActivity.AnimationRunningFlag == true)
+			return;
+		else
+			ParentActivity.StartAnimationRunningTimer();
 		
+		ParentActivity._MenuBaseFragment.showBodyBrightnessAnimation();
 	}
 
 	@Override
 	public void ClickList2() {
 		// TODO Auto-generated method stub
+		if(ParentActivity.AnimationRunningFlag == true)
+			return;
+		else
+			ParentActivity.StartAnimationRunningTimer();
 		
+		ParentActivity._MenuBaseFragment.showBodyClockAnimation();
 	}
 
 	@Override

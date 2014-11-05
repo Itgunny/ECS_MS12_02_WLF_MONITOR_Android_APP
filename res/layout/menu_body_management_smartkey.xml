@@ -20,16 +20,33 @@
         android:layout_alignParentTop="true"
         android:layout_alignRight="@+id/imageView_menu_body_management_smartkey_line" >
 
+        <ImageView
+            android:id="@+id/imageView_menu_body_management_smartkey_use_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:src="@drawable/menu_bluedot" />
+
+        <TextView
+            android:id="@+id/textView_menu_body_management_smartkey_use_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="20dp"
+            android:layout_toRightOf="@+id/imageView_menu_body_management_smartkey_use_title"
+            android:text="@string/Manage_Usage"
+            android:textAppearance="?android:attr/textAppearanceLarge" />
+        
         <RadioGroup
             android:id="@+id/radioGroup_menu_body_management_smartkey_use"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
-            android:layout_marginLeft="20dp"
+            android:layout_marginLeft="300dp"
             android:orientation="horizontal" >
 	
 	       <RadioButton
-	           android:id="@+id/radioButton_menu_body_management_smartkey_use_on_disalbe"
+	           android:id="@+id/radioButton_menu_body_management_smartkey_use_diable"
 	           android:layout_width="200dp"
 	           android:layout_height="wrap_content"
 	           android:button="@drawable/_selector_radio_btn"
@@ -38,27 +55,115 @@
 	           android:textSize="20sp" />
 	
 	       <RadioButton
-	           android:id="@+id/radioButton_menu_body_management_smartkey_use_on_always"
+	           android:id="@+id/radioButton_menu_body_management_smartkey_use_enable"
 	           android:layout_width="200dp"
 	           android:layout_height="wrap_content"
-	           android:layout_marginLeft="40dp"
+	           android:layout_marginLeft="20dp"
 	           android:button="@drawable/_selector_radio_btn"
-	           android:text="@string/On_Always"
+	           android:text="@string/Enable"
 	           android:textColor="@drawable/_selector_radio_txt_white_amber"
 	           android:textSize="20sp" />
 	       
-	       <RadioButton
-	           android:id="@+id/radioButton_menu_body_management_smartkey_use_on_time"
-	           android:layout_width="wrap_content"
-	           android:layout_height="wrap_content"
-	           android:layout_marginLeft="40dp"
-	           android:button="@drawable/_selector_radio_btn"
-	           android:text="@string/On_After_Specific_Time"
-	           android:textColor="@drawable/_selector_radio_txt_white_amber"
-	           android:textSize="20sp" />
-
    		</RadioGroup>
    
+    </RelativeLayout>
+    
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/RelativeLayout_menu_body_management_smartkey_low"
+        android:layout_alignLeft="@+id/imageView_menu_body_management_smartkey_line"
+        android:layout_alignRight="@+id/imageView_menu_body_management_smartkey_line"
+        android:layout_below="@+id/imageView_menu_body_management_smartkey_line" >
+        
+        <ImageView
+            android:id="@+id/imageView_menu_body_management_smartkey_tag_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+            android:src="@drawable/menu_bluedot" />
+
+        <TextView
+            android:id="@+id/textView_menu_body_management_smartkey_tag_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="20dp"
+            android:layout_toRightOf="@+id/imageView_menu_body_management_smartkey_tag_title"
+            android:text="@string/Manage_Tag"
+            android:textAppearance="?android:attr/textAppearanceLarge" />
+        
+        <TextView
+            android:id="@+id/textView_menu_body_management_smartkey_tag_register_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/textView_menu_body_management_smartkey_tag_title"
+            android:layout_marginLeft="60dp"
+            android:layout_marginTop="20dp"
+            android:text="@string/Registered_Tag"
+            android:textAppearance="?android:attr/textAppearanceLarge" />
+
+        <TextView
+            android:id="@+id/textView_menu_body_management_smartkey_tag_register_colon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@+id/textView_menu_body_management_smartkey_tag_register_title"
+            android:layout_alignTop="@+id/textView_menu_body_management_smartkey_tag_register_title"
+            android:layout_marginLeft="20dp"
+            android:layout_toRightOf="@+id/textView_menu_body_management_smartkey_tag_register_title"
+            android:text=":"
+            android:textAppearance="?android:attr/textAppearanceLarge" />
+
+        <TextView
+            android:id="@+id/textView_menu_body_management_smartkey_tag_register_num"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@+id/textView_menu_body_management_smartkey_tag_register_colon"
+            android:layout_alignTop="@+id/textView_menu_body_management_smartkey_tag_register_colon"
+            android:layout_marginLeft="20dp"
+            android:layout_toRightOf="@+id/textView_menu_body_management_smartkey_tag_register_colon"
+            android:textAppearance="?android:attr/textAppearanceLarge" />
+
+        <TextView
+            android:id="@+id/textView_menu_body_management_smartkey_tag_detail"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/LinearLayout_menu_body_management_smartkey_tag_btn"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentRight="true"
+            android:layout_below="@+id/textView_menu_body_management_smartkey_tag_register_title"
+            android:gravity="center"
+            android:textAppearance="?android:attr/textAppearanceLarge" />
+
+        <LinearLayout
+            android:id="@+id/LinearLayout_menu_body_management_smartkey_tag_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="10dp" >
+
+	       <TextView
+	            android:id="@+id/textView_menu_body_management_smartkey_tag_registration"
+	            android:layout_width="wrap_content"
+	            android:layout_height="wrap_content"
+	            android:layout_marginLeft="20dp"
+	            android:background="@drawable/_selector_menu_body_management_smartkey_btn1"
+	            android:gravity="center"
+	            android:text="@string/Registration"
+	            android:textAppearance="?android:attr/textAppearanceLarge" />
+	        
+	        <TextView
+	            android:id="@+id/textView_menu_body_management_smartkey_tag_delete"
+	            android:layout_width="wrap_content"
+	            android:layout_height="wrap_content"
+	            android:layout_marginLeft="20dp"
+	            android:background="@drawable/_selector_menu_body_management_smartkey_btn1"
+	            android:gravity="center"
+	            android:text="@string/Delete"
+	            android:textAppearance="?android:attr/textAppearanceLarge" />
+        </LinearLayout>
+
     </RelativeLayout>
     
 
@@ -181,4 +286,5 @@
 	    </RelativeLayout>
 
     </RelativeLayout>
+
 </RelativeLayout>

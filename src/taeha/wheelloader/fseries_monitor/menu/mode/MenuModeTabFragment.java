@@ -131,8 +131,8 @@ public class MenuModeTabFragment extends ParentFragment{
 	/////////////////////////////////////////////////////////////////////	
 	public void ClickEngineTM(){
 		setClickImageEngineTM();
-		if((ParentActivity.ScreenIndex < Home.SCREEN_STATE_MENU_MODE_ENGINE_TOP) 
-		|| (ParentActivity.ScreenIndex > Home.SCREEN_STATE_MENU_MODE_ENGINE_END)){
+		if((ParentActivity.ScreenIndex < Home.SCREEN_STATE_MENU_MODE_ENGINETM_TOP) 
+		|| (ParentActivity.ScreenIndex > Home.SCREEN_STATE_MENU_MODE_ENGINETM_END)){
 				ParentActivity._MenuBaseFragment._MenuModeFragment.showEngTM();
 		}
 	}
@@ -206,7 +206,7 @@ public class MenuModeTabFragment extends ParentFragment{
 	}
 	public void ModeBodyDisplay(int Index){
 		switch (Index) {
-		case Home.SCREEN_STATE_MENU_MODE_ENGINE_TOP:
+		case Home.SCREEN_STATE_MENU_MODE_ENGINETM_TOP:
 		default:
 			ClickEngineTM();
 			break;

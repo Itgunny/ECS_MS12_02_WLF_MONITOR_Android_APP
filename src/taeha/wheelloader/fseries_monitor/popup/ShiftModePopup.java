@@ -57,7 +57,7 @@ public class ShiftModePopup extends ParentPopup{
 		InitButtonListener();
 		InitValuable();
 		
-		ParentActivity.ScreenIndex = Home.SCREEN_STATE_MENU_MODE_SHIFTMODE;
+		ParentActivity.ScreenIndex = Home.SCREEN_STATE_MENU_MODE_ENGINETM_SHIFTMODE;
 
 	}
 
@@ -66,7 +66,7 @@ public class ShiftModePopup extends ParentPopup{
 		// TODO Auto-generated method stub
 		super.dismiss();
 		Log.d(TAG,"dismiss");
-		ParentActivity.ScreenIndex = Home.SCREEN_STATE_MENU_MODE_ENGINE_TOP;
+		ParentActivity.ScreenIndex = Home.SCREEN_STATE_MENU_MODE_ENGINETM_TOP;
 	}
 
 	@Override

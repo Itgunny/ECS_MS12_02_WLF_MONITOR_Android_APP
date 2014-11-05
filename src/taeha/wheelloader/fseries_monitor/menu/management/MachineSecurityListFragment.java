@@ -94,19 +94,31 @@ public class MachineSecurityListFragment extends MenuBodyList_ParentFragment{
 	@Override
 	public void ClickList1() {
 		// TODO Auto-generated method stub
+		if(ParentActivity.AnimationRunningFlag == true)
+			return;
+		else
+			ParentActivity.StartAnimationRunningTimer();
 		ParentActivity._MenuBaseFragment.showBodyESLAnimation();
 	}
 
 	@Override
 	public void ClickList2() {
 		// TODO Auto-generated method stub
+		if(ParentActivity.AnimationRunningFlag == true)
+			return;
+		else
+			ParentActivity.StartAnimationRunningTimer();
 		ParentActivity._MenuBaseFragment.showBodyMachineSecurityPWChange();
 	}
 
 	@Override
 	public void ClickList3() {
 		// TODO Auto-generated method stub
-
+		if(ParentActivity.AnimationRunningFlag == true)
+			return;
+		else
+			ParentActivity.StartAnimationRunningTimer();
+		ParentActivity._MenuBaseFragment.showBodySmartKeyAnimation();
 	}
 
 	@Override

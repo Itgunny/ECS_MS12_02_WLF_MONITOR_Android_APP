@@ -57,14 +57,14 @@ public class CCOModePopup extends ParentPopup{
 		InitButtonListener();
 		InitValuable();
 		
-		ParentActivity.ScreenIndex = Home.SCREEN_STATE_MENU_MODE_CCOMODE;
+		ParentActivity.ScreenIndex = Home.SCREEN_STATE_MENU_MODE_ENGINETM_CCOMODE;
 	}
 
 	@Override
 	public void dismiss() {
 		// TODO Auto-generated method stub
 		super.dismiss();
-		ParentActivity.ScreenIndex = Home.SCREEN_STATE_MENU_MODE_ENGINE_TOP;
+		ParentActivity.ScreenIndex = Home.SCREEN_STATE_MENU_MODE_ENGINETM_TOP;
 	}
 
 	@Override

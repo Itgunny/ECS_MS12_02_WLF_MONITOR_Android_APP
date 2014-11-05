@@ -61,7 +61,7 @@ public class EngineSpeedFragment extends ParentFragment{
 		InitValuables();
 		InitButtonListener();
 		
-		ParentActivity.ScreenIndex = ParentActivity.SCREEN_STATE_MENU_MODE_ENGINESPEED;
+		ParentActivity.ScreenIndex = ParentActivity.SCREEN_STATE_MENU_MODE_ENGINETM_ENGINESPEED;
 		ParentActivity._MenuBaseFragment._MenuInterTitleFragment.SetTitleText(ParentActivity.getResources().getString(R.string.Engine_Speed));
 		return mRoot;
 	}
@@ -137,7 +137,7 @@ public class EngineSpeedFragment extends ParentFragment{
 		else
 			ParentActivity.StartAnimationRunningTimer();
 		ParentActivity._MenuBaseFragment.showBodyModeAnimation();
-		ParentActivity._MenuBaseFragment._MenuModeFragment.setFirstScreen(Home.SCREEN_STATE_MENU_MODE_ENGINE_TOP);
+		ParentActivity._MenuBaseFragment._MenuModeFragment.setFirstScreen(Home.SCREEN_STATE_MENU_MODE_ENGINETM_TOP);
 	}
 	public void ClickPlus(){
 		

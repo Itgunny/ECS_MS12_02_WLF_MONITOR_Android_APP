@@ -118,10 +118,14 @@ public class CoolingFanFragment extends ParentFragment{
 	}
 	/////////////////////////////////////////////////////////////////////	
 	public void ClickManual(){
+
+		
 		if(ParentActivity.ScreenIndex != Home.SCREEN_STATE_MENU_MODE_ETC_COOLINGFAN_MANUAL)
 			showBodyCoolingFanManual();
 	}
 	public void ClickAuto(){
+
+		
 		if(ParentActivity.ScreenIndex != Home.SCREEN_STATE_MENU_MODE_ETC_COOLINGFAN_AUTO)
 		showBodyCoolingFanAuto();
 	}

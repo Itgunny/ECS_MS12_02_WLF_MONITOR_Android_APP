@@ -74,11 +74,13 @@ public class MenuModeHYDFragment extends MenuBodyList_ParentFragment{
 		setClickableList2(true);
 		setClickableList3(true);
 		setClickableList4(true);
+		setClickableList5(true);
 		
 		setListTitle1(ParentActivity.getResources().getString(string.Work_Load));
-		setListTitle2(ParentActivity.getResources().getString(string.Bucket_Priority));
-		setListTitle3(ParentActivity.getResources().getString(string.Boom_Bucket_Detent_Mode));
+		setListTitle2(ParentActivity.getResources().getString(string.Boom_Bucket_Detent_Mode));
+		setListTitle3(ParentActivity.getResources().getString(string.Bucket_Priority));
 		setListTitle4(ParentActivity.getResources().getString(string.Auxilliary_Attachment_Max_Flow_Level));
+		setListTitle5(ParentActivity.getResources().getString(string.Soft_Stop));
 	}
 	
 	@Override
@@ -108,18 +110,19 @@ public class MenuModeHYDFragment extends MenuBodyList_ParentFragment{
 	@Override
 	public void ClickList2() {
 		// TODO Auto-generated method stub
-		ParentActivity.showBucketPriority();
+		if(ParentActivity.AnimationRunningFlag == true)
+			return;
+		else
+			ParentActivity.StartAnimationRunningTimer();
+		ParentActivity._MenuBaseFragment.showBodyDetentAnimation();
 		
 	}
 
 	@Override
 	public void ClickList3() {
 		// TODO Auto-generated method stub
-		if(ParentActivity.AnimationRunningFlag == true)
-			return;
-		else
-			ParentActivity.StartAnimationRunningTimer();
-		ParentActivity._MenuBaseFragment.showBodyDetentAnimation();
+		
+		ParentActivity.showBucketPriority();
 	}
 
 	@Override
@@ -135,7 +138,11 @@ public class MenuModeHYDFragment extends MenuBodyList_ParentFragment{
 	@Override
 	public void ClickList5() {
 		// TODO Auto-generated method stub
-		
+		if(ParentActivity.AnimationRunningFlag == true)
+			return;
+		else
+			ParentActivity.StartAnimationRunningTimer();
+		ParentActivity._MenuBaseFragment.showBodySoftStopAnimation();
 	}
 
 	@Override
@@ -169,10 +176,10 @@ public class MenuModeHYDFragment extends MenuBodyList_ParentFragment{
 		case Home.SCREEN_STATE_MENU_MODE_HYD_WORKLOAD_TOP:
 			setListFocus(1);
 			break;
-		case Home.SCREEN_STATE_MENU_MODE_HYD_BUCKETPRIORITY:
+		case Home.SCREEN_STATE_MENU_MODE_HYD_DETENT:
 			setListFocus(2);
 			break;
-		case Home.SCREEN_STATE_MENU_MODE_HYD_DETENT:
+		case Home.SCREEN_STATE_MENU_MODE_HYD_BUCKETPRIORITY:
 			setListFocus(3);
 			break;
 		case Home.SCREEN_STATE_MENU_MODE_HYD_MAXFLOW:

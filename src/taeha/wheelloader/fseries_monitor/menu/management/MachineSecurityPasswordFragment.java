@@ -31,12 +31,20 @@ public class MachineSecurityPasswordFragment extends PasswordFragment{
 	@Override
 	public void showServicePasswordNextScreen() {
 		// TODO Auto-generated method stub
+		if(ParentActivity.AnimationRunningFlag == true)
+			return;
+		else
+			ParentActivity.StartAnimationRunningTimer();
 		ParentActivity._MenuBaseFragment.showBodyMachineSecurityList();
 	}
 
 	@Override
 	public void showUserPasswordNextScreen() {
 		// TODO Auto-generated method stub
+		if(ParentActivity.AnimationRunningFlag == true)
+			return;
+		else
+			ParentActivity.StartAnimationRunningTimer();
 		ParentActivity._MenuBaseFragment.showBodyMachineSecurityList();
 	}
 

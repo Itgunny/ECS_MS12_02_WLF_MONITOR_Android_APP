@@ -139,7 +139,7 @@ public class MenuModeFragment extends ParentFragment{
 	}
 	//Navi KeyButton//////////////////////////////////////////////////////////
 	public void ClickLeft(){
-		if((ParentActivity.ScreenIndex >= Home.SCREEN_STATE_MENU_MODE_ENGINE_TOP) && (ParentActivity.ScreenIndex <= Home.SCREEN_STATE_MENU_MODE_ENGINE_END)){
+		if((ParentActivity.ScreenIndex >= Home.SCREEN_STATE_MENU_MODE_ENGINETM_TOP) && (ParentActivity.ScreenIndex <= Home.SCREEN_STATE_MENU_MODE_ENGINETM_END)){
 			_MenuModeEngTMFragment.ClickLeft();
 		}else if((ParentActivity.ScreenIndex >= Home.SCREEN_STATE_MENU_MODE_HYD_TOP) && (ParentActivity.ScreenIndex <= Home.SCREEN_STATE_MENU_MODE_HYD_END)){
 			_MenuModeHYDFragment.ClickLeft();
@@ -151,7 +151,7 @@ public class MenuModeFragment extends ParentFragment{
 		
 	}
 	public void ClickRight(){
-		if((ParentActivity.ScreenIndex >= Home.SCREEN_STATE_MENU_MODE_ENGINE_TOP) && (ParentActivity.ScreenIndex <= Home.SCREEN_STATE_MENU_MODE_ENGINE_END)){
+		if((ParentActivity.ScreenIndex >= Home.SCREEN_STATE_MENU_MODE_ENGINETM_TOP) && (ParentActivity.ScreenIndex <= Home.SCREEN_STATE_MENU_MODE_ENGINETM_END)){
 			_MenuModeEngTMFragment.ClickRight();
 		}else if((ParentActivity.ScreenIndex >= Home.SCREEN_STATE_MENU_MODE_HYD_TOP) && (ParentActivity.ScreenIndex <= Home.SCREEN_STATE_MENU_MODE_HYD_END)){
 			_MenuModeHYDFragment.ClickRight();
@@ -163,7 +163,7 @@ public class MenuModeFragment extends ParentFragment{
 	}
 	public void ClickESC(){
 		Log.d(TAG,"ClickKeyButtonESC");
-		if((ParentActivity.ScreenIndex >= Home.SCREEN_STATE_MENU_MODE_ENGINE_TOP) && (ParentActivity.ScreenIndex <= Home.SCREEN_STATE_MENU_MODE_ENGINE_END)){
+		if((ParentActivity.ScreenIndex >= Home.SCREEN_STATE_MENU_MODE_ENGINETM_TOP) && (ParentActivity.ScreenIndex <= Home.SCREEN_STATE_MENU_MODE_ENGINETM_END)){
 			_MenuModeEngTMFragment.ClickESC();
 		}else if((ParentActivity.ScreenIndex >= Home.SCREEN_STATE_MENU_MODE_HYD_TOP) && (ParentActivity.ScreenIndex <= Home.SCREEN_STATE_MENU_MODE_HYD_END)){
 			_MenuModeHYDFragment.ClickESC();
@@ -175,7 +175,7 @@ public class MenuModeFragment extends ParentFragment{
 	}
 	public void ClickEnter(){
 		Log.d(TAG,"ClickEnter");
-		if((ParentActivity.ScreenIndex >= Home.SCREEN_STATE_MENU_MODE_ENGINE_TOP) && (ParentActivity.ScreenIndex <= Home.SCREEN_STATE_MENU_MODE_ENGINE_END)){
+		if((ParentActivity.ScreenIndex >= Home.SCREEN_STATE_MENU_MODE_ENGINETM_TOP) && (ParentActivity.ScreenIndex <= Home.SCREEN_STATE_MENU_MODE_ENGINETM_END)){
 			_MenuModeEngTMFragment.ClickEnter();
 		}else if((ParentActivity.ScreenIndex >= Home.SCREEN_STATE_MENU_MODE_HYD_TOP) && (ParentActivity.ScreenIndex <= Home.SCREEN_STATE_MENU_MODE_HYD_END)){
 			_MenuModeHYDFragment.ClickEnter();

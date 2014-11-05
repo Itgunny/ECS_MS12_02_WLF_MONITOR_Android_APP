@@ -117,7 +117,12 @@ public class MenuManagementFragment extends MenuBodyList_ParentFragment{
 	@Override
 	public void ClickList3() {
 		// TODO Auto-generated method stub
+		if(ParentActivity.AnimationRunningFlag == true)
+			return;
+		else
+			ParentActivity.StartAnimationRunningTimer();
 		
+		ParentActivity._MenuBaseFragment.showBodyCalibration();
 	}
 
 	@Override
@@ -129,13 +134,23 @@ public class MenuManagementFragment extends MenuBodyList_ParentFragment{
 	@Override
 	public void ClickList5() {
 		// TODO Auto-generated method stub
+		if(ParentActivity.AnimationRunningFlag == true)
+			return;
+		else
+			ParentActivity.StartAnimationRunningTimer();
 		
+		ParentActivity._MenuBaseFragment.showBodyChangeASPhoneNumberAnimation();		
 	}
 
 	@Override
 	public void ClickList6() {
 		// TODO Auto-generated method stub
+		if(ParentActivity.AnimationRunningFlag == true)
+			return;
+		else
+			ParentActivity.StartAnimationRunningTimer();
 		
+		ParentActivity._MenuBaseFragment.showBodyServiceMenuPassword();
 	}
 	
 	/////////////////////////////////////////////////////////////////////	

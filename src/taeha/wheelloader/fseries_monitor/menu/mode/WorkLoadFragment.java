@@ -162,7 +162,12 @@ public class WorkLoadFragment extends ParentFragment{
 		ParentActivity._MenuBaseFragment._MenuModeFragment.setFirstScreen(Home.SCREEN_STATE_MENU_MODE_HYD_TOP);
 	}
 	public void ClickCancel(){
-		
+		if(ParentActivity.AnimationRunningFlag == true)
+			return;
+		else
+			ParentActivity.StartAnimationRunningTimer();
+		ParentActivity._MenuBaseFragment.showBodyModeAnimation();
+		ParentActivity._MenuBaseFragment._MenuModeFragment.setFirstScreen(Home.SCREEN_STATE_MENU_MODE_HYD_TOP);
 	}
 	public void ClickDefault(){
 		

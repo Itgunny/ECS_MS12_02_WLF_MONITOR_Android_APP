@@ -122,7 +122,7 @@ public class MachineSecurityESLFragment extends ParentFragment{
 			return;
 		else
 			ParentActivity.StartAnimationRunningTimer();
-		ParentActivity._MenuBaseFragment.showESLAnimation();
+		ParentActivity._MenuBaseFragment.showMachineSecurityListAnimation();
 
 	}
 	public void ClickCancel(){
@@ -130,7 +130,7 @@ public class MachineSecurityESLFragment extends ParentFragment{
 			return;
 		else
 			ParentActivity.StartAnimationRunningTimer();
-		ParentActivity._MenuBaseFragment.showESLAnimation();
+		ParentActivity._MenuBaseFragment.showMachineSecurityListAnimation();
 	}
 	/////////////////////////////////////////////////////////////////////
 	

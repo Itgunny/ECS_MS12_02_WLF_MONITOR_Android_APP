@@ -140,7 +140,11 @@ public class MenuMonitoringFragment extends MenuBodyList_ParentFragment{
 	@Override
 	public void ClickList5() {
 		// TODO Auto-generated method stub
-
+		if(ParentActivity.AnimationRunningFlag == true)
+			return;
+		else
+			ParentActivity.StartAnimationRunningTimer();
+		ParentActivity._MenuBaseFragment.showBodyEHCUIOInfoAnimation();		
 	}
 
 	@Override
