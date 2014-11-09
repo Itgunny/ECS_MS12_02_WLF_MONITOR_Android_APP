@@ -11,6 +11,7 @@ import android.view.ViewGroup.LayoutParams;
 import android.widget.ImageButton;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import taeha.wheelloader.fseries_monitor.main.CAN1CommManager;
 import taeha.wheelloader.fseries_monitor.main.Home;
 import taeha.wheelloader.fseries_monitor.main.ParentPopup;
 import taeha.wheelloader.fseries_monitor.main.R;
@@ -128,19 +129,23 @@ public class ShiftModePopup extends ParentPopup{
 	}
 	///////////////////////////////////////////////////////////////////////////////
 	public void ClickManual(){
-
+		CAN1Comm.Set_TransmisstionShiftMode_543_PGN61184_104(CAN1CommManager.DATA_STATE_TM_SHIFTMODE_MANUAL);
+		CAN1Comm.TxCANToMCU(104);
 		this.dismiss();
 	}	
 	public void ClickAL(){
-
+		CAN1Comm.Set_TransmisstionShiftMode_543_PGN61184_104(CAN1CommManager.DATA_STATE_TM_SHIFTMODE_AL);
+		CAN1Comm.TxCANToMCU(104);
 		this.dismiss();
 	}	
 	public void ClickAN(){
-
+		CAN1Comm.Set_TransmisstionShiftMode_543_PGN61184_104(CAN1CommManager.DATA_STATE_TM_SHIFTMODE_AN);
+		CAN1Comm.TxCANToMCU(104);
 		this.dismiss();
 	}	
 	public void ClickAH(){
-
+		CAN1Comm.Set_TransmisstionShiftMode_543_PGN61184_104(CAN1CommManager.DATA_STATE_TM_SHIFTMODE_AH);
+		CAN1Comm.TxCANToMCU(104);
 		this.dismiss();
 	}	
 

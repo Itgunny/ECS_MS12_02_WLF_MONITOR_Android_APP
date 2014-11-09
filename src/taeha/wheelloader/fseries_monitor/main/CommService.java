@@ -229,6 +229,8 @@ public class CommService extends Service{
 	public native int Get_SettingTimeofrDelayedEngineShutdown_366_PGN61184_121();
 	//////RX_ENGINE_SHUTDOWN_MODE_STATUS_61184_122///////
 	public native int Get_MessageType_PGN61184_122();
+	public native int Get_AutomaticEngineShutdown_363_PGN61184_122();
+	public native int Get_AutomaticEngineShutdownType_PGN61184_122();
 	public native int Get_SettingTimeforAutomaticEngineShutdown_364_PGN61184_122();
 	public native int Get_RemainingTimeforAutomaticEngineShutdown_PGN61184_122();
 	public native int Get_SettingTimeforDelayedEngineShutdown_366_PGN61184_122();
@@ -527,6 +529,11 @@ public class CommService extends Service{
 	public native int Get_BucketOutEPPRValveCurrent_2307_PGN65517();
 	public native int Get_AUX1EPPRValveCurrent_2308_PGN65517();
 	public native int Get_AUX2EPPRValveCurrent_2309_PGN65517();
+	//////RX_WHEEL_LOADER_EHCU_STATUS2_65524///////
+	public native int Get_SoftStopBoomUp_2337_PGN65524();
+	public native int Get_SoftStopBoomDown_2338_PGN65524();
+	public native int Get_SoftStopBucketIn_2339_PGN65524();
+	public native int Get_SoftStopBucketOut_2340_PGN65524();
 	//////RX_ELECTRICAL_SWITCH_RELAY_OPERATION_STATUS_65527///////
 	public native int Get_TravelAlarmOperationStatus_3431_PGN65527();
 	public native int Get_WasherOperationStatus_3432_PGN65527();
@@ -667,6 +674,7 @@ public class CommService extends Service{
 	//////TX_ENGINE_SHUTDOWN_MODE_SETTING_61184_121///////
 	public native void Set_MessageType_PGN61184_121(int Data);
 	public native void Set_AutomaticEngineShutdown_363_PGN61184_121(int Data);
+	public native void Set_AutomaticEngineShutdownTypeControlByte_PGN61184_121(int Data);
 	public native void Set_SettingTimeforAutomaticEngineShutdown_364_PGN61184_121(int Data);
 	public native void Set_EngineShutdownCotrolByte_PGN61184_121(int Data);
 	public native void Set_DelayedEngineShutdown_365_PGN61184_121(int Data);
@@ -714,6 +722,10 @@ public class CommService extends Service{
 	public native void Set_FlowFineModulationOperation_2302_PGN61184_203(int Data);
 	public native void Set_AuxiliaryAttachmentMaxFlowLevel_PGN61184_203(int Data);
 	public native void Set_BoomLeverFloatingPosition_PGN61184_203(int Data);
+	public native void Set_SoftStopBoomUp_2337_PGN61184_203(int Data);
+	public native void Set_SoftStopBoomDown_2338_PGN61184_203(int Data);
+	public native void Set_SoftStopBucketIn_2339_PGN61184_203(int Data);
+	public native void Set_SoftStopBucketOut_2340_PGN61184_203(int Data);
 	//////TX_MONIOTR_STATUS_65327///////
 	public native void Set_MonitorOperationMode_834_PGN65327(int Data);
 	public native void Set_RequestBuzzerStop_PGN65327(int Data);

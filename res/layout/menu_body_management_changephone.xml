@@ -153,7 +153,7 @@
             android:background="@drawable/_selector_menu_body_num_normal_back_btn1" />
 
         <TextView
-            android:id="@+id/imageButton_menu_body_management_changephone_num_enter"
+            android:id="@+id/textView_menu_body_management_changephone_num_next"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignLeft="@+id/textView_menu_body_management_changephone_num_3"
@@ -162,7 +162,7 @@
             android:background="@drawable/_selector_menu_body_num_normal_blue_btn1"
             android:gravity="center"
             android:text="@string/Next"
-            android:textColor="@color/white"
+            android:textColor="@drawable/_selector_radio_txt_white_black"
             android:textSize="30sp" />
 
     </RelativeLayout>

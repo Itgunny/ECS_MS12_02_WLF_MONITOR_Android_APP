@@ -1,4 +1,4 @@
-package taeha.wheelloader.fseries_monitor.menu;
+package taeha.wheelloader.fseries_monitor.menu.preference;
 
 import taeha.wheelloader.fseries_monitor.animation.AppearAnimation;
 import taeha.wheelloader.fseries_monitor.animation.ChangeFragmentAnimation;
@@ -19,21 +19,20 @@ import android.widget.AbsoluteLayout;
 import android.widget.FrameLayout;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.RadioButton;
 import android.widget.TextView;
 
-public class MenuListTitleFragment extends ParentFragment{
+public class UnitFragment extends ParentFragment{
 	//CONSTANT////////////////////////////////////////
 	
 	//////////////////////////////////////////////////
 	//RESOURCE////////////////////////////////////////
-	TextView textViewTitle;
-	ImageButton imgbtnBack;
-	ImageButton imgbtnHome;
+	ImageButton imgbtnOK;
+	ImageButton imgbtnCancel;
 	//////////////////////////////////////////////////
 	
 	//VALUABLE////////////////////////////////////////
-	String strTitle;
-	boolean bBackVisibleFlag;
+
 	//////////////////////////////////////////////////
 	
 	//Fragment////////////////////////////////////////
@@ -41,8 +40,7 @@ public class MenuListTitleFragment extends ParentFragment{
 	//////////////////////////////////////////////////
 	
 	//ANIMATION///////////////////////////////////////
-	LeftRightShiftAnimation TitleTextShiftAnimation;
-	AppearAnimation TitleTextAppearAnimation;
+	
 	///////////////////////////////////////////////////
 	
 	//TEST////////////////////////////////////////////
@@ -54,15 +52,15 @@ public class MenuListTitleFragment extends ParentFragment{
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
-		 TAG = "MenuListTitleFragment";
+		 TAG = "UnitFragment";
 		Log.d(TAG, "onCreateView");
-		mRoot = inflater.inflate(R.layout.menu_list_title, null);
+		mRoot = inflater.inflate(R.layout.menu_body_preference_unit, null);
 		InitResource();
 		InitValuables();
 		InitButtonListener();
 		
-		SetTitleText(strTitle);
-		setBackButtonEnable(bBackVisibleFlag);
+		ParentActivity.ScreenIndex = ParentActivity.SCREEN_STATE_MENU_PREFERENCE_UNIT_TOP;
+		ParentActivity._MenuBaseFragment._MenuInterTitleFragment.SetTitleText(ParentActivity.getResources().getString(R.string.Unit_Setting));
 		return mRoot;
 	}
 	
@@ -74,40 +72,38 @@ public class MenuListTitleFragment extends ParentFragment{
 	@Override
 	protected void InitResource() {
 		// TODO Auto-generated method stub
-
-		textViewTitle = (TextView)mRoot.findViewById(R.id.textView_menu_list_title_text);
+		imgbtnOK = (ImageButton)mRoot.findViewById(R.id.ImageButton_menu_body_preference_unit_low_ok);
+		imgbtnCancel = (ImageButton)mRoot.findViewById(R.id.ImageButton_menu_body_preference_unit_low_cancel);
 		
-		imgbtnBack = (ImageButton)mRoot.findViewById(R.id.imageButton_menu_list_title_back);
-		imgbtnHome = (ImageButton)mRoot.findViewById(R.id.imageButton_menu_list_title_home);
 	}
 
 	protected void InitValuables() {
 		// TODO Auto-generated method stub
 		super.InitValuables();
 		
-		TitleTextShiftAnimation = new LeftRightShiftAnimation(ParentActivity, textViewTitle, 100, 0);
-		TitleTextAppearAnimation = new AppearAnimation(ParentActivity, textViewTitle, 500);
+		
 		
 	}
 	@Override
 	protected void InitButtonListener() {
 		// TODO Auto-generated method stub
-		imgbtnBack.setOnClickListener(new View.OnClickListener() {
+		imgbtnOK.setOnClickListener(new View.OnClickListener() {
 			
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
-				ClickBack();
+				ClickOK();
 			}
 		});
-		imgbtnHome.setOnClickListener(new View.OnClickListener() {
+		imgbtnCancel.setOnClickListener(new View.OnClickListener() {
 			
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
-				ClickHome();
+				ClickCancel();
 			}
 		});
+		
 	}
 
 	@Override
@@ -122,51 +118,26 @@ public class MenuListTitleFragment extends ParentFragment{
 		
 	}
 	/////////////////////////////////////////////////////////////////////	
-	
-	/////////////////////////////////////////////////////////////////////
-	public void SetTitleText(String str){
-		try {
-			strTitle = str;
-			textViewTitle.setText(str);
-			TitleTextShiftAnimation.StartShiftAnimation();
-			TitleTextAppearAnimation.StartAnimation();
-		} catch (NullPointerException e) {
-			// TODO: handle exception
-			Log.e(TAG,"NullPointerException SetTitleText");
-		}
-	}
-	public void setBackButtonEnable(boolean flag){
-		bBackVisibleFlag = flag;
-		if(flag == true){
-			imgbtnBack.setVisibility(View.VISIBLE);
-		}
-		else{
-			imgbtnBack.setVisibility(View.GONE);
-		}
-			
-	}
-	public void ClickBack(){
-		switch (ParentActivity.ScreenIndex) {
-		case Home.SCREEN_STATE_MENU_MODE_ENGINETM_ENGINESETTING_TOP:
-			ParentActivity._MenuBaseFragment._MenuModeFragment.showEngTM();
-			SetTitleText(ParentActivity.getResources().getString(R.string.Mode));
-			setBackButtonEnable(false);
-			ParentActivity._MenuBaseFragment._MenuModeFragment._MenuModeTabFragment.setFirstScreen(Home.SCREEN_STATE_MENU_MODE_ENGINETM_TOP);
-			ParentActivity._MenuBaseFragment._MenuModeFragment.showTab();
-			break;
-
-		default:
-			break;
-		}
-	}
-	public void ClickHome(){
+	public void ClickOK(){
 		if(ParentActivity.AnimationRunningFlag == true)
 			return;
 		else
 			ParentActivity.StartAnimationRunningTimer();
-		ParentActivity._MainChangeAnimation.StartChangeAnimation(ParentActivity._MainBBaseFragment);
-	//	ParentActivity.showMainBFragment();
+		ParentActivity._MenuBaseFragment.showBodyPreferenceAnimation();
+		ParentActivity._MenuBaseFragment._MenuModeFragment.setFirstScreen(Home.SCREEN_STATE_MENU_PREFERENCE_TOP);
+
+		
 	}
+	public void ClickCancel(){
+		if(ParentActivity.AnimationRunningFlag == true)
+			return;
+		else
+			ParentActivity.StartAnimationRunningTimer();
+		ParentActivity._MenuBaseFragment.showBodyPreferenceAnimation();
+		ParentActivity._MenuBaseFragment._MenuModeFragment.setFirstScreen(Home.SCREEN_STATE_MENU_PREFERENCE_TOP);
+	}
+	/////////////////////////////////////////////////////////////////////
+	
 	/////////////////////////////////////////////////////////////////////
 	
 }

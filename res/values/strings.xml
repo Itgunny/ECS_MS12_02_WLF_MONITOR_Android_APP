@@ -36,6 +36,17 @@
     <string name="Clear">Clear</string>
     <string name="km">km</string>
     <string name="mile">mile</string>
+    <string name="Temp">Temp</string>
+    <string name="Speed">Speed</string>
+    <string name="Weight">Weight</string>
+    <string name="Pressure">Pressure</string>
+    <string name="bar">bar</string>
+    <string name="Mpa">Mpa</string>
+    <string name="kgf_cm">kgf/cm²</string>
+    <string name="Psi">Psi</string>
+    <string name="Hour">Hour</string>
+    <string name="Min">Min</string>
+    <string name="Day">Day</string>
     <!-- Common End-->
     <!-- Main Start-->
     <string name="ENGINE_MODE">ENGINE MODE</string>
@@ -130,6 +141,8 @@
     <string name="Shift_Mode">Shift Mode</string>
     <string name="Kick_Down">Kick Down</string>
     <string name="Engine_Speed">Engine Speed</string>
+    <string name="Engine_Setting">Engine Setting</string>
+    <string name="Warming_Up">Warming Up</string>
     <string name="TC_Lock_Up">T.C. Lock Up</string>
     <string name="Bucket_Priority">Bucket Priority</string>
     <string name="Boom_Bucket_Detent_Mode">Boom Bucket Detent Mode</string>
@@ -139,8 +152,11 @@
     <string name="Engine_Delay_Shutdown">Engine Delay Shutdown</string>
     <string name="Camera_Setting">Camera Setting</string>
     <string name="Cooling_Fan_Reverse_Mode">Cooling Fan Reverse Mode</string>
-    <string name="MODE1">MODE 1 : DOWN / UP</string>
-    <string name="MODE2">MODE 2 : DOWN ONLY</string>
+    <string name="Wiper_Level_Setting">Wiper Level Setting</string>
+    <string name="MODE1">MODE 1</string>
+    <string name="MODE2">MODE 2</string>
+    <string name="MODE1_DOWN_UP">MODE 1 : DOWN / UP</string>
+    <string name="MODE2_DOWN_ONLY">MODE 2 : DOWN ONLY</string>
     <string name="Active_Camera">Active Camera</string>
     <string name="Display_Order">Display Order</string>
     <string name="CAM_1">CAM 1</string>
@@ -158,6 +174,11 @@
     <string name="Boom_Down">Boom Down</string>
     <string name="Bucket_In">Bucket In</string>
     <string name="Bucket_Dump">Bucket Dump</string>
+    <string name="Engine_Mode">Engine Mode</string>
+    <string name="Econo">Econo</string>
+    <string name="Standard">Standard</string>
+    <string name="Power">Power</string>
+    <string name="Hz">Hz</string>
     <!-- Menu Mode End -->
     <!-- Menu Monitoring Start -->
     <string name="Machine_Monitoring">Machine Monitoring</string>

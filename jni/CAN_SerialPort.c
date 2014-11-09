@@ -386,6 +386,14 @@ jint Get_SettingTimeofrDelayedEngineShutdown_366_PGN61184_121(JNIEnv * env,
 jint Get_MessageType_PGN61184_122(JNIEnv * env, jobject this) {
 	return RX_ENGINE_SHUTDOWN_MODE_STATUS_61184_122.MessageType;
 }
+jint Get_AutomaticEngineShutdown_363_PGN61184_122(JNIEnv * env,
+		jobject this) {
+	return RX_ENGINE_SHUTDOWN_MODE_STATUS_61184_122.AutomaticEngineShutdown_363;
+}
+jint Get_AutomaticEngineShutdownType_PGN61184_122(JNIEnv * env,
+		jobject this) {
+	return RX_ENGINE_SHUTDOWN_MODE_STATUS_61184_122.AutomaticEngineShutdownType;
+}
 jint Get_SettingTimeforAutomaticEngineShutdown_364_PGN61184_122(JNIEnv * env,
 		jobject this) {
 	return RX_ENGINE_SHUTDOWN_MODE_STATUS_61184_122.SettingTimeforAutomaticEngineShutdown_364;
@@ -1294,6 +1302,20 @@ jint Get_AUX1EPPRValveCurrent_2308_PGN65517(JNIEnv * env, jobject this) {
 jint Get_AUX2EPPRValveCurrent_2309_PGN65517(JNIEnv * env, jobject this) {
 	return RX_WHEEL_LOADER_EHCU_STATUS_65517.AUX2EPPRValveCurrent_2309;
 }
+//////RX_WHEEL_LOADER_EHCU_STATUS2_65524///////
+jint Get_SoftStopBoomUp_2337_PGN65524(JNIEnv * env, jobject this) {
+	return RX_WHEEL_LOADER_EHCU_STATUS2_65524.SoftStopBoomUp_2337;
+}
+jint Get_SoftStopBoomDown_2338_PGN65524(JNIEnv * env, jobject this) {
+	return RX_WHEEL_LOADER_EHCU_STATUS2_65524.SoftStopBoomDown_2338;
+}
+jint Get_SoftStopBucketIn_2339_PGN65524(JNIEnv * env, jobject this) {
+	return RX_WHEEL_LOADER_EHCU_STATUS2_65524.SoftStopBucketIn_2339;
+}
+jint Get_SoftStopBucketOut_2340_PGN65524(JNIEnv * env, jobject this) {
+	return RX_WHEEL_LOADER_EHCU_STATUS2_65524.SoftStopBucketOut_2340;
+}
+
 //////RX_ELECTRICAL_SWITCH_RELAY_OPERATION_STATUS_65527///////
 jint Get_TravelAlarmOperationStatus_3431_PGN65527(JNIEnv * env, jobject this) {
 	return RX_ELECTRICAL_SWITCH_RELAY_OPERATION_STATUS_65527.TravelAlarmOperationStatus_3431;
@@ -1788,6 +1810,11 @@ void Set_AutomaticEngineShutdown_363_PGN61184_121(JNIEnv * env, jobject this,
 	TX_ENGINE_SHUTDOWN_MODE_SETTING_61184_121.AutomaticEngineShutdown_363 =
 			Data;
 }
+void Set_AutomaticEngineShutdownTypeControlByte_PGN61184_121(JNIEnv * env, jobject this,
+		int Data) {
+	TX_ENGINE_SHUTDOWN_MODE_SETTING_61184_121.AutomaticEngineShutdownTypeControlByte =
+			Data;
+}
 void Set_SettingTimeforAutomaticEngineShutdown_364_PGN61184_121(JNIEnv * env,
 		jobject this, int Data) {
 	TX_ENGINE_SHUTDOWN_MODE_SETTING_61184_121.SettingTimeforAutomaticEngineShutdown_364 =
@@ -1967,6 +1994,23 @@ void Set_BoomLeverFloatingPosition_PGN61184_203(JNIEnv * env,
 		jobject this, int Data) {
 	TX_WHEEL_LOADER_EHCU_SETTING_61184_203.BoomLeverFloatingPosition =
 			Data;
+}
+
+void Set_SoftStopBoomUp_2337_PGN61184_203(JNIEnv * env,
+		jobject this, int Data) {
+	TX_WHEEL_LOADER_EHCU_SETTING_61184_203.SoftStopBoomUp_2337 = Data;
+}
+void Set_SoftStopBoomDown_2338_PGN61184_203(JNIEnv * env,
+		jobject this, int Data) {
+	TX_WHEEL_LOADER_EHCU_SETTING_61184_203.SoftStopBoomDown_2338 = Data;
+}
+void Set_SoftStopBucketIn_2339_PGN61184_203(JNIEnv * env,
+		jobject this, int Data) {
+	TX_WHEEL_LOADER_EHCU_SETTING_61184_203.SoftStopBucketIn_2339 = Data;
+}
+void Set_SoftStopBucketOut_2340_PGN61184_203(JNIEnv * env,
+		jobject this, int Data) {
+	TX_WHEEL_LOADER_EHCU_SETTING_61184_203.SoftStopBucketOut_2340 = Data;
 }
 //////TX_MONIOTR_STATUS_65327///////
 void Set_MonitorOperationMode_834_PGN65327(JNIEnv * env, jobject this, int Data) {
@@ -3430,20 +3474,13 @@ static JNINativeMethod methods[] =
 						"()I",
 						(void*) Get_SettingTimeofrDelayedEngineShutdown_366_PGN61184_121 },
 				//////RX_ENGINE_SHUTDOWN_MODE_STATUS_61184_122///////
-				{ "Get_MessageType_PGN61184_122", "()I",
-						(void*) Get_MessageType_PGN61184_122 },
-				{ "Get_SettingTimeforAutomaticEngineShutdown_364_PGN61184_122",
-						"()I",
-						(void*) Get_SettingTimeforAutomaticEngineShutdown_364_PGN61184_122 },
-				{ "Get_RemainingTimeforAutomaticEngineShutdown_PGN61184_122",
-						"()I",
-						(void*) Get_RemainingTimeforAutomaticEngineShutdown_PGN61184_122 },
-				{ "Get_SettingTimeforDelayedEngineShutdown_366_PGN61184_122",
-						"()I",
-						(void*) Get_SettingTimeforDelayedEngineShutdown_366_PGN61184_122 },
-				{ "Get_RemainingTimeforDelayedEngineShutdown_PGN61184_122",
-						"()I",
-						(void*) Get_RemainingTimeforDelayedEngineShutdown_PGN61184_122 },
+				{ "Get_MessageType_PGN61184_122", "()I",(void*) Get_MessageType_PGN61184_122 },
+				{ "Get_AutomaticEngineShutdown_363_PGN61184_122","()I",(void*) Get_AutomaticEngineShutdown_363_PGN61184_122 },
+				{ "Get_AutomaticEngineShutdownType_PGN61184_122","()I",(void*) Get_AutomaticEngineShutdownType_PGN61184_122 },
+				{ "Get_SettingTimeforAutomaticEngineShutdown_364_PGN61184_122","()I",(void*) Get_SettingTimeforAutomaticEngineShutdown_364_PGN61184_122 },
+				{ "Get_RemainingTimeforAutomaticEngineShutdown_PGN61184_122","()I",(void*) Get_RemainingTimeforAutomaticEngineShutdown_PGN61184_122 },
+				{ "Get_SettingTimeforDelayedEngineShutdown_366_PGN61184_122","()I",(void*) Get_SettingTimeforDelayedEngineShutdown_366_PGN61184_122 },
+				{ "Get_RemainingTimeforDelayedEngineShutdown_PGN61184_122","()I",(void*) Get_RemainingTimeforDelayedEngineShutdown_PGN61184_122 },
 				//////RX_DETENT_MODE_SETTING_61184_123///////
 				{ "Get_MessageType_PGN61184_123", "()I",
 						(void*) Get_MessageType_PGN61184_123 }, {
@@ -3968,6 +4005,12 @@ static JNINativeMethod methods[] =
 						(void*) Get_AUX1EPPRValveCurrent_2308_PGN65517 }, {
 						"Get_AUX2EPPRValveCurrent_2309_PGN65517", "()I",
 						(void*) Get_AUX2EPPRValveCurrent_2309_PGN65517 },
+
+				//////RX_WHEEL_LOADER_EHCU_STATUS2_65524///////
+				{"Get_SoftStopBoomUp_2337_PGN65524", "()I",(void*) Get_SoftStopBoomUp_2337_PGN65524 },
+				{"Get_SoftStopBoomDown_2338_PGN65524", "()I",(void*) Get_SoftStopBoomDown_2338_PGN65524 },
+				{"Get_SoftStopBucketIn_2339_PGN65524", "()I",(void*) Get_SoftStopBucketIn_2339_PGN65524 },
+				{"Get_SoftStopBucketOut_2340_PGN65524", "()I",(void*) Get_SoftStopBucketOut_2340_PGN65524 },
 				//////RX_ELECTRICAL_SWITCH_RELAY_OPERATION_STATUS_65527///////
 				{ "Get_TravelAlarmOperationStatus_3431_PGN65527", "()I",
 						(void*) Get_TravelAlarmOperationStatus_3431_PGN65527 },
@@ -4205,21 +4248,13 @@ static JNINativeMethod methods[] =
 				{ "Set_RequestCruiseControlResumeSwitch_PGN61184_109", "(I)V",
 						(void*) Set_RequestCruiseControlResumeSwitch_PGN61184_109 },
 				//////TX_ENGINE_SHUTDOWN_MODE_SETTING_61184_121///////
-				{ "Set_MessageType_PGN61184_121", "(I)V",
-						(void*) Set_MessageType_PGN61184_121 }, {
-						"Set_AutomaticEngineShutdown_363_PGN61184_121", "(I)V",
-						(void*) Set_AutomaticEngineShutdown_363_PGN61184_121 },
-				{ "Set_SettingTimeforAutomaticEngineShutdown_364_PGN61184_121",
-						"(I)V",
-						(void*) Set_SettingTimeforAutomaticEngineShutdown_364_PGN61184_121 },
-				{ "Set_EngineShutdownCotrolByte_PGN61184_121",
-										"(I)V",
-										(void*) Set_EngineShutdownCotrolByte_PGN61184_121 },
-				{ "Set_DelayedEngineShutdown_365_PGN61184_121", "(I)V",
-						(void*) Set_DelayedEngineShutdown_365_PGN61184_121 },
-				{ "Set_SettingTimeofrDelayedEngineShutdown_366_PGN61184_121",
-						"(I)V",
-						(void*) Set_SettingTimeofrDelayedEngineShutdown_366_PGN61184_121 },
+				{"Set_MessageType_PGN61184_121", "(I)V",(void*) Set_MessageType_PGN61184_121 },
+				{"Set_AutomaticEngineShutdown_363_PGN61184_121", "(I)V",(void*) Set_AutomaticEngineShutdown_363_PGN61184_121 },
+				{"Set_AutomaticEngineShutdownTypeControlByte_PGN61184_121", "(I)V",(void*) Set_AutomaticEngineShutdownTypeControlByte_PGN61184_121 },
+				{ "Set_SettingTimeforAutomaticEngineShutdown_364_PGN61184_121","(I)V",(void*) Set_SettingTimeforAutomaticEngineShutdown_364_PGN61184_121 },
+				{ "Set_EngineShutdownCotrolByte_PGN61184_121","(I)V",(void*) Set_EngineShutdownCotrolByte_PGN61184_121 },
+				{ "Set_DelayedEngineShutdown_365_PGN61184_121", "(I)V",(void*) Set_DelayedEngineShutdown_365_PGN61184_121 },
+				{ "Set_SettingTimeofrDelayedEngineShutdown_366_PGN61184_121","(I)V",(void*) Set_SettingTimeofrDelayedEngineShutdown_366_PGN61184_121 },
 				//////TX_ENGINE_SHUTDOWN_MODE_STATUS_61184_122///////
 				{ "Set_MessageType_PGN61184_122", "(I)V",
 						(void*) Set_MessageType_PGN61184_122 },
@@ -4307,6 +4342,10 @@ static JNINativeMethod methods[] =
 						(void*) Set_FlowFineModulationOperation_2302_PGN61184_203 },
 				{ "Set_AuxiliaryAttachmentMaxFlowLevel_PGN61184_203", "(I)V",(void*) Set_AuxiliaryAttachmentMaxFlowLevel_PGN61184_203 },
 				{ "Set_BoomLeverFloatingPosition_PGN61184_203", "(I)V",(void*) Set_BoomLeverFloatingPosition_PGN61184_203 },
+				{ "Set_SoftStopBoomUp_2337_PGN61184_203", "(I)V",(void*) Set_SoftStopBoomUp_2337_PGN61184_203 },
+				{ "Set_SoftStopBoomDown_2338_PGN61184_203", "(I)V",(void*) Set_SoftStopBoomDown_2338_PGN61184_203 },
+				{ "Set_SoftStopBucketIn_2339_PGN61184_203", "(I)V",(void*) Set_SoftStopBucketIn_2339_PGN61184_203 },
+				{ "Set_SoftStopBucketOut_2340_PGN61184_203", "(I)V",(void*) Set_SoftStopBucketOut_2340_PGN61184_203 },
 				//////TX_MONIOTR_STATUS_65327///////
 				{ "Set_MonitorOperationMode_834_PGN65327", "(I)V",
 						(void*) Set_MonitorOperationMode_834_PGN65327 },

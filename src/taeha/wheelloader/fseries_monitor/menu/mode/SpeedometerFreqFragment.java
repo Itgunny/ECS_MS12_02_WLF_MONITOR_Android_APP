@@ -1,4 +1,4 @@
-package taeha.wheelloader.fseries_monitor.menu.management;
+package taeha.wheelloader.fseries_monitor.menu.mode;
 
 import taeha.wheelloader.fseries_monitor.animation.AppearAnimation;
 import taeha.wheelloader.fseries_monitor.animation.ChangeFragmentAnimation;
@@ -21,13 +21,14 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-public class ServiceMenuWeighingCompensationFragment extends ParentFragment{
+public class SpeedometerFreqFragment extends ParentFragment{
 	//CONSTANT////////////////////////////////////////
 	
 	//////////////////////////////////////////////////
 	//RESOURCE////////////////////////////////////////
 	ImageButton imgbtnOK;
 	ImageButton imgbtnCancel;
+	ImageButton imgbtnDefault;
 
 	TextView textViewNum1;
 	TextView textViewNum2;
@@ -41,8 +42,7 @@ public class ServiceMenuWeighingCompensationFragment extends ParentFragment{
 	TextView textViewNum0;
 	
 	ImageButton imgbtnBack;
-	TextView textViewDot;
-	ImageButton imgbtnPlusMinu;
+	TextView textViewNext;
 	//////////////////////////////////////////////////
 	
 	//VALUABLE////////////////////////////////////////
@@ -66,15 +66,15 @@ public class ServiceMenuWeighingCompensationFragment extends ParentFragment{
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
-		 TAG = "ServiceMenuWeighingCompensationFragment";
+		 TAG = "SpeedometerFreqFragment";
 		Log.d(TAG, "onCreateView");
-		mRoot = inflater.inflate(R.layout.menu_body_management_service_weighingcompensation, null);
+		mRoot = inflater.inflate(R.layout.menu_body_mode_speedometerfreq, null);
 		InitResource();
 		InitValuables();
 		InitButtonListener();
 		
-		ParentActivity.ScreenIndex = ParentActivity.SCREEN_STATE_MENU_MANAGEMENT_SERVICE_WEIGHINGCOMPENSATION_TOP;
-		ParentActivity._MenuBaseFragment._MenuInterTitleFragment.SetTitleText(ParentActivity.getResources().getString(R.string.Weighing_System_Compensation));
+		ParentActivity.ScreenIndex = ParentActivity.SCREEN_STATE_MENU_MODE_ETC_FREQ_TOP;
+		ParentActivity._MenuBaseFragment._MenuInterTitleFragment.SetTitleText(ParentActivity.getResources().getString(R.string.Speedometer_Freq_Setting));
 		return mRoot;
 	}
 	
@@ -86,25 +86,23 @@ public class ServiceMenuWeighingCompensationFragment extends ParentFragment{
 	@Override
 	protected void InitResource() {
 		// TODO Auto-generated method stub
-		imgbtnOK = (ImageButton)mRoot.findViewById(R.id.ImageButton_menu_body_management_service_weighingcompensation_low_ok);
-		imgbtnCancel = (ImageButton)mRoot.findViewById(R.id.ImageButton_menu_body_management_service_weighingcompensation_low_cancel);
-	
-		textViewNum1 = (TextView)mRoot.findViewById(R.id.textView_menu_body_management_service_weighingcompensation_num_1);
-		textViewNum2 = (TextView)mRoot.findViewById(R.id.textView_menu_body_management_service_weighingcompensation_num_2);
-		textViewNum3 = (TextView)mRoot.findViewById(R.id.textView_menu_body_management_service_weighingcompensation_num_3);
-		textViewNum4 = (TextView)mRoot.findViewById(R.id.textView_menu_body_management_service_weighingcompensation_num_4);
-		textViewNum5 = (TextView)mRoot.findViewById(R.id.textView_menu_body_management_service_weighingcompensation_num_5);
-		textViewNum6 = (TextView)mRoot.findViewById(R.id.textView_menu_body_management_service_weighingcompensation_num_6);
-		textViewNum7 = (TextView)mRoot.findViewById(R.id.textView_menu_body_management_service_weighingcompensation_num_7);
-		textViewNum8 = (TextView)mRoot.findViewById(R.id.textView_menu_body_management_service_weighingcompensation_num_8);
-		textViewNum9 = (TextView)mRoot.findViewById(R.id.textView_menu_body_management_service_weighingcompensation_num_9);
-		textViewNum0 = (TextView)mRoot.findViewById(R.id.textView_menu_body_management_service_weighingcompensation_num_0);
-
-		imgbtnBack = (ImageButton)mRoot.findViewById(R.id.imageButton_menu_body_management_service_weighingcompensation_num_back);
+		imgbtnOK = (ImageButton)mRoot.findViewById(R.id.ImageButton_menu_body_mode_speedometerfreq_low_ok);
+		imgbtnCancel = (ImageButton)mRoot.findViewById(R.id.ImageButton_menu_body_mode_speedometerfreq_low_cancel);
+		imgbtnDefault = (ImageButton)mRoot.findViewById(R.id.ImageButton_menu_body_mode_speedometerfreq_low_default);
 		
-		textViewDot = (TextView)mRoot.findViewById(R.id.textView_menu_body_management_service_weighingcompensation_num_dot);
+		textViewNum1 = (TextView)mRoot.findViewById(R.id.textView_menu_body_mode_speedometerfreq_num_1);
+		textViewNum2 = (TextView)mRoot.findViewById(R.id.textView_menu_body_mode_speedometerfreq_num_2);
+		textViewNum3 = (TextView)mRoot.findViewById(R.id.textView_menu_body_mode_speedometerfreq_num_3);
+		textViewNum4 = (TextView)mRoot.findViewById(R.id.textView_menu_body_mode_speedometerfreq_num_4);
+		textViewNum5 = (TextView)mRoot.findViewById(R.id.textView_menu_body_mode_speedometerfreq_num_5);
+		textViewNum6 = (TextView)mRoot.findViewById(R.id.textView_menu_body_mode_speedometerfreq_num_6);
+		textViewNum7 = (TextView)mRoot.findViewById(R.id.textView_menu_body_mode_speedometerfreq_num_7);
+		textViewNum8 = (TextView)mRoot.findViewById(R.id.textView_menu_body_mode_speedometerfreq_num_8);
+		textViewNum9 = (TextView)mRoot.findViewById(R.id.textView_menu_body_mode_speedometerfreq_num_9);
+		textViewNum0 = (TextView)mRoot.findViewById(R.id.textView_menu_body_mode_speedometerfreq_num_0);
 		
-		imgbtnPlusMinu = (ImageButton)mRoot.findViewById(R.id.imageButton_menu_body_management_service_weighingcompensation_num_plusminus);
+		imgbtnBack = (ImageButton)mRoot.findViewById(R.id.imageButton_menu_body_mode_speedometerfreq_num_back);
+		textViewNext = (TextView)mRoot.findViewById(R.id.textView_menu_body_mode_speedometerfreq_num_next);
 		
 	}
 
@@ -133,14 +131,22 @@ public class ServiceMenuWeighingCompensationFragment extends ParentFragment{
 				// TODO Auto-generated method stub
 				ClickCancel();
 			}
-		});
-	    textViewNum1.setOnClickListener(new View.OnClickListener() {
+		});	
+		imgbtnDefault.setOnClickListener(new View.OnClickListener() {
 			
-				@Override
-				public void onClick(View v) {
-					// TODO Auto-generated method stub
-					ClickNum1();
-				}
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				ClickDefault();
+			}
+		});	
+		textViewNum1.setOnClickListener(new View.OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				ClickNum1();
+			}
 		});	
 		textViewNum2.setOnClickListener(new View.OnClickListener() {
 			
@@ -222,22 +228,18 @@ public class ServiceMenuWeighingCompensationFragment extends ParentFragment{
 				ClickNumBack();
 			}
 		});	
-		textViewDot.setOnClickListener(new View.OnClickListener() {
+		textViewNext.setOnClickListener(new View.OnClickListener() {
 			
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
-				ClickNumDot();
+				ClickNumNext();
 			}
 		});	
-		imgbtnPlusMinu.setOnClickListener(new View.OnClickListener() {
-			
-			@Override
-			public void onClick(View v) {
-				// TODO Auto-generated method stub
-				ClickNumPlusMinus();
-			}
-		});	
+
+		
+		
+
 	}
 
 	@Override
@@ -257,7 +259,8 @@ public class ServiceMenuWeighingCompensationFragment extends ParentFragment{
 			return;
 		else
 			ParentActivity.StartAnimationRunningTimer();
-		ParentActivity._MenuBaseFragment.showServiceMenuListAnimation();
+		ParentActivity._MenuBaseFragment.showBodyModeAnimation();
+		ParentActivity._MenuBaseFragment._MenuModeFragment.setFirstScreen(Home.SCREEN_STATE_MENU_MODE_ETC_TOP);
 
 	}
 	public void ClickCancel(){
@@ -265,7 +268,8 @@ public class ServiceMenuWeighingCompensationFragment extends ParentFragment{
 			return;
 		else
 			ParentActivity.StartAnimationRunningTimer();
-		ParentActivity._MenuBaseFragment.showServiceMenuListAnimation();
+		ParentActivity._MenuBaseFragment.showBodyModeAnimation();
+		ParentActivity._MenuBaseFragment._MenuModeFragment.setFirstScreen(Home.SCREEN_STATE_MENU_MODE_ETC_TOP);
 	}
 	public void ClickDefault(){
 		
@@ -303,12 +307,10 @@ public class ServiceMenuWeighingCompensationFragment extends ParentFragment{
 	public void ClickNumBack(){
 		
 	}
-	public void ClickNumDot(){
+	public void ClickNumNext(){
 		
 	}
-	public void ClickNumPlusMinus(){
-		
-	}
+	
 	/////////////////////////////////////////////////////////////////////
 	
 	/////////////////////////////////////////////////////////////////////

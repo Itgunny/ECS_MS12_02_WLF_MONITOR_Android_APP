@@ -15,15 +15,13 @@ import taeha.wheelloader.fseries_monitor.main.Home;
 import taeha.wheelloader.fseries_monitor.main.ParentPopup;
 import taeha.wheelloader.fseries_monitor.main.R;
 
-public class CCOModePopup extends ParentPopup{
+public class EngineWarmingUpPopup extends ParentPopup{
 	//CONSTANT////////////////////////////////////////
 
 	//////////////////////////////////////////////////
 	//RESOURCE////////////////////////////////////////
+	TextView textViewOn;
 	TextView textViewOff;
-	TextView textViewL;
-	TextView textViewM;
-	TextView textViewH;
 	//////////////////////////////////////////////////
 	
 	//VALUABLE////////////////////////////////////////
@@ -37,17 +35,15 @@ public class CCOModePopup extends ParentPopup{
 	//TEST////////////////////////////////////////////
 	
 	//////////////////////////////////////////////////
-	public CCOModePopup(Context _context) {
+	public EngineWarmingUpPopup(Context _context) {
 		super(_context);
 		// TODO Auto-generated constructor stub
-		TAG = "CCOModePopup";
+		TAG = "EngineWarmingUpPopup";
 		ParentActivity = (Home)_context;
 		inflater = (LayoutInflater)_context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-		mRoot = inflater.inflate(R.layout.popup_ccomode, null);
+		mRoot = inflater.inflate(R.layout.popup_warmingup, null);
 		this.addContentView(mRoot,  new LayoutParams(448,288));
 		this.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-		
-		
 	}
 	
 	@Override
@@ -58,58 +54,40 @@ public class CCOModePopup extends ParentPopup{
 		InitButtonListener();
 		InitValuable();
 		
-		ParentActivity.ScreenIndex = Home.SCREEN_STATE_MENU_MODE_ENGINETM_CCOMODE;
+		ParentActivity.ScreenIndex = ParentActivity.SCREEN_STATE_MENU_MODE_ENGINETM_ENGINESETTING_WARMINGUP;
 	}
 
 	@Override
 	public void dismiss() {
 		// TODO Auto-generated method stub
 		super.dismiss();
-		ParentActivity.ScreenIndex = Home.SCREEN_STATE_MENU_MODE_ENGINETM_TOP;
+		ParentActivity.ScreenIndex = ParentActivity.SCREEN_STATE_MENU_MODE_ENGINETM_ENGINESETTING_TOP;
 	}
 
 	@Override
 	protected void InitResource() {
 		// TODO Auto-generated method stub
-		textViewOff = (TextView)mRoot.findViewById(R.id.textView_popup_ccomode_off);
-		textViewL = (TextView)mRoot.findViewById(R.id.textView_popup_ccomode_L);
-		textViewM = (TextView)mRoot.findViewById(R.id.textView_popup_ccomode_M);
-		textViewH = (TextView)mRoot.findViewById(R.id.textView_popup_ccomode_H);
+		textViewOn = (TextView)mRoot.findViewById(R.id.textView_popup_warmingup_on);
+		textViewOff = (TextView)mRoot.findViewById(R.id.textView_popup_warmingup_off);
 	}
 
 	@Override
 	protected void InitButtonListener() {
 		// TODO Auto-generated method stub
+		textViewOn.setOnClickListener(new View.OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				ClickOn();
+			}
+		});
 		textViewOff.setOnClickListener(new View.OnClickListener() {
 			
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
 				ClickOff();
-			}
-		});
-		textViewL.setOnClickListener(new View.OnClickListener() {
-			
-			@Override
-			public void onClick(View v) {
-				// TODO Auto-generated method stub
-				ClickL();
-			}
-		});
-		textViewM.setOnClickListener(new View.OnClickListener() {
-			
-			@Override
-			public void onClick(View v) {
-				// TODO Auto-generated method stub
-				ClickM();
-			}
-		});
-		textViewH.setOnClickListener(new View.OnClickListener() {
-			
-			@Override
-			public void onClick(View v) {
-				// TODO Auto-generated method stub
-				ClickH();
 			}
 		});
 	}
@@ -126,25 +104,14 @@ public class CCOModePopup extends ParentPopup{
 		
 	}
 	///////////////////////////////////////////////////////////////////////////////
+	public void ClickOn(){
+		CAN1Comm.Set_EngineAlternateLowIdleSwitch_348_PGN61184_101(CAN1CommManager.DATA_STATE_ENGINE_WARMINGUP_ON);
+		CAN1Comm.TxCANToMCU(101);
+		this.dismiss();
+	}	
 	public void ClickOff(){
-		CAN1Comm.Set_ClutchCutoffMode_544_PGN61184_104(CAN1CommManager.DATA_STATE_TM_CLUTCHCUTOFF_OFF);
-		CAN1Comm.TxCANToMCU(104);
+		CAN1Comm.Set_EngineAlternateLowIdleSwitch_348_PGN61184_101(CAN1CommManager.DATA_STATE_ENGINE_WARMINGUP_OFF);
+		CAN1Comm.TxCANToMCU(101);
 		this.dismiss();
 	}	
-	public void ClickL(){
-		CAN1Comm.Set_ClutchCutoffMode_544_PGN61184_104(CAN1CommManager.DATA_STATE_TM_CLUTCHCUTOFF_L);
-		CAN1Comm.TxCANToMCU(104);
-		this.dismiss();
-	}	
-	public void ClickM(){
-		CAN1Comm.Set_ClutchCutoffMode_544_PGN61184_104(CAN1CommManager.DATA_STATE_TM_CLUTCHCUTOFF_M);
-		CAN1Comm.TxCANToMCU(104);
-		this.dismiss();
-	}	
-	public void ClickH(){
-		CAN1Comm.Set_ClutchCutoffMode_544_PGN61184_104(CAN1CommManager.DATA_STATE_TM_CLUTCHCUTOFF_H);
-		CAN1Comm.TxCANToMCU(104);
-		this.dismiss();
-	}	
-
 }

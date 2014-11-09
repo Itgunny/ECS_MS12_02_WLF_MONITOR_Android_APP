@@ -1,5 +1,8 @@
 package taeha.wheelloader.fseries_monitor.main.b.key;
 
+import java.util.Timer;
+import java.util.TimerTask;
+
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -34,6 +37,7 @@ public class MainBKeyDetentFragment extends ParentFragment{
 	int BucketDetentMode;
 	
 	int SendCount;
+
 	//////////////////////////////////////////////////
 	
 	//ANIMATION///////////////////////////////////////
@@ -59,9 +63,15 @@ public class MainBKeyDetentFragment extends ParentFragment{
 		ParentActivity.ScreenIndex = ParentActivity.SCREEN_STATE_MAIN_B_KEY_DETENT;
 		DetentBoomDisplay(BoomDetentMode);
 		DetentBucketDisplay(BucketDetentMode);
+
 		return mRoot;
 	}
+	@Override
+	public void onDestroyView() {
+		// TODO Auto-generated method stub
+		super.onDestroyView();
 
+	}
 	////////////////////////////////////////////////
 	
 	//Common Function//////////////////////////////
@@ -164,8 +174,6 @@ public class MainBKeyDetentFragment extends ParentFragment{
 	@Override
 	protected void UpdateUI() {
 		// TODO Auto-generated method stub
-		DetentBoomDisplay(BoomDetentMode);
-		DetentBucketDisplay(BucketDetentMode);
 	}
 	/////////////////////////////////////////////////////////////////////	
 	public void DetentBoomDisplay(int Data){
@@ -246,5 +254,6 @@ public class MainBKeyDetentFragment extends ParentFragment{
 	public void ClickOK(){
 		ParentActivity._MainBBaseFragment.showKeytoDefaultScreenAnimation();
 	}
+	
 	
 }

@@ -90,7 +90,7 @@
     </RelativeLayout>
     
     <RelativeLayout
-        android:id="@+id/RelativeLayout_menu_body_mode_workload_accumulation"
+        android:id="@+id/RelativeLayout_menu_body_mode_workload_display"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignBottom="@+id/imageView_menu_body_mode_workload_line_2"

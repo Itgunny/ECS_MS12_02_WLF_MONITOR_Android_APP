@@ -9,6 +9,8 @@ import java.util.TimerTask;
 import taeha.wheelloader.fseries_monitor.animation.ChangeFragmentAnimation;
 import taeha.wheelloader.fseries_monitor.popup.BucketPriorityPopup;
 import taeha.wheelloader.fseries_monitor.popup.CCOModePopup;
+import taeha.wheelloader.fseries_monitor.popup.EngineModePopup;
+import taeha.wheelloader.fseries_monitor.popup.EngineWarmingUpPopup;
 import taeha.wheelloader.fseries_monitor.popup.KickDownPopup;
 import taeha.wheelloader.fseries_monitor.popup.QuickCouplerPopupLocking1;
 import taeha.wheelloader.fseries_monitor.popup.QuickCouplerPopupLocking2;
@@ -95,13 +97,15 @@ public class Home extends Activity {
 	
 	public  static final int SCREEN_STATE_MENU_MODE_TOP										= 0x21000000;
 	public  static final int SCREEN_STATE_MENU_MODE_ENGINETM_TOP							= 0x21100000;
-	
-	public  static final int SCREEN_STATE_MENU_MODE_ENGINETM_ENGINESPEED					= 0x21110000;
+	public  static final int SCREEN_STATE_MENU_MODE_ENGINETM_ENGINESETTING_TOP				= 0x21110000;
+	public  static final int SCREEN_STATE_MENU_MODE_ENGINETM_ENGINESETTING_MODE				= 0x21111000;
+	public  static final int SCREEN_STATE_MENU_MODE_ENGINETM_ENGINESETTING_WARMINGUP		= 0x21112000;
+	public  static final int SCREEN_STATE_MENU_MODE_ENGINETM_ENGINESETTING_SPEED			= 0x21113000;
+	public  static final int SCREEN_STATE_MENU_MODE_ENGINETM_ENGINESETTING_END				= 0x21111FFF;
 	public  static final int SCREEN_STATE_MENU_MODE_ENGINETM_TCLOCKUP						= 0x21120000;
 	public  static final int SCREEN_STATE_MENU_MODE_ENGINETM_CCOMODE						= 0x21130000;
 	public  static final int SCREEN_STATE_MENU_MODE_ENGINETM_SHIFTMODE						= 0x21140000;
 	public  static final int SCREEN_STATE_MENU_MODE_ENGINETM_KICKDOWN						= 0x21150000;
-	
 	public  static final int SCREEN_STATE_MENU_MODE_ENGINETM_END							= 0x211FFFFF;
 	
 	public  static final int SCREEN_STATE_MENU_MODE_HYD_TOP									= 0x21200000;
@@ -114,16 +118,21 @@ public class Home extends Activity {
 	public  static final int SCREEN_STATE_MENU_MODE_HYD_END									= 0x212FFFFF;
 	
 	public  static final int SCREEN_STATE_MENU_MODE_ETC_TOP									= 0x21300000;
-	public  static final int SCREEN_STATE_MENU_MODE_ETC_AUTOSHUTDOWN_TOP					= 0x21310000;
-	public  static final int SCREEN_STATE_MENU_MODE_ETC_AUTOSHUTDOWN_END					= 0x2131FFFF;
-	public  static final int SCREEN_STATE_MENU_MODE_ETC_DELAYSHUTDOWN_TOP					= 0x21320000;
-	public  static final int SCREEN_STATE_MENU_MODE_ETC_DELAYSHUTDOWN_END					= 0x2132FFFF;
-	public  static final int SCREEN_STATE_MENU_MODE_ETC_CAMERASETTING_TOP					= 0x21330000;
-	public  static final int SCREEN_STATE_MENU_MODE_ETC_CAMERASETTING_END					= 0x2133FFFF;
-	public  static final int SCREEN_STATE_MENU_MODE_ETC_COOLINGFAN_TOP						= 0x21340000;
-	public  static final int SCREEN_STATE_MENU_MODE_ETC_COOLINGFAN_MANUAL					= 0x21341000;
-	public  static final int SCREEN_STATE_MENU_MODE_ETC_COOLINGFAN_AUTO						= 0x21342000;
-	public  static final int SCREEN_STATE_MENU_MODE_ETC_COOLINGFAN_END						= 0x2134FFFF;
+	public  static final int SCREEN_STATE_MENU_MODE_ETC_FREQ_TOP							= 0x21310000;
+	public  static final int SCREEN_STATE_MENU_MODE_ETC_FREQ_END							= 0x2131FFFF;
+	public  static final int SCREEN_STATE_MENU_MODE_ETC_COOLINGFAN_TOP						= 0x21320000;
+	public  static final int SCREEN_STATE_MENU_MODE_ETC_COOLINGFAN_OFF						= 0x21321000;
+	public  static final int SCREEN_STATE_MENU_MODE_ETC_COOLINGFAN_AUTO						= 0x21322000;
+	public  static final int SCREEN_STATE_MENU_MODE_ETC_COOLINGFAN_MANUAL					= 0x21323000;
+	public  static final int SCREEN_STATE_MENU_MODE_ETC_COOLINGFAN_END						= 0x2132FFFF;
+	public  static final int SCREEN_STATE_MENU_MODE_ETC_AUTOSHUTDOWN_TOP					= 0x21330000;
+	public  static final int SCREEN_STATE_MENU_MODE_ETC_AUTOSHUTDOWN_END					= 0x2133FFFF;
+	public  static final int SCREEN_STATE_MENU_MODE_ETC_WIPER_TOP							= 0x21340000;
+	public  static final int SCREEN_STATE_MENU_MODE_ETC_WIPER_END							= 0x2134FFFF;
+	public  static final int SCREEN_STATE_MENU_MODE_ETC_CAMERASETTING_TOP					= 0x21350000;
+	public  static final int SCREEN_STATE_MENU_MODE_ETC_CAMERASETTING_END					= 0x2135FFFF;
+	public  static final int SCREEN_STATE_MENU_MODE_ETC_DELAYSHUTDOWN_TOP					= 0x21360000;
+	public  static final int SCREEN_STATE_MENU_MODE_ETC_DELAYSHUTDOWN_END					= 0x2136FFFF;
 	public  static final int SCREEN_STATE_MENU_MODE_ETC_END									= 0x213FFFFF;
 	
 	
@@ -164,19 +173,17 @@ public class Home extends Activity {
 	public  static final int SCREEN_STATE_MENU_MANAGEMENT_CALIBRATION_AEB_TOP				= 0x23340000;
 	public  static final int SCREEN_STATE_MENU_MANAGEMENT_CALIBRATION_AEB_END				= 0x2334FFFF;
 	public  static final int SCREEN_STATE_MENU_MANAGEMENT_CALIBRATION_END					= 0x233FFFFF;
-	public  static final int SCREEN_STATE_MENU_MANAGEMENT_SPEEDOMETERFREQ_TOP				= 0x23400000;
-	public  static final int SCREEN_STATE_MENU_MANAGEMENT_SPEEDOMETERFREQ_END				= 0x234FFFFF;
-	public  static final int SCREEN_STATE_MENU_MANAGEMENT_ASPHONE_TOP						= 0x23500000;
-	public  static final int SCREEN_STATE_MENU_MANAGEMENT_ASPHONE_END						= 0x235FFFFF;
-	public  static final int SCREEN_STATE_MENU_MANAGEMENT_SERVICE_TOP						= 0x23600000;
-	public  static final int SCREEN_STATE_MENU_MANAGEMENT_SERVICE_PW						= 0x23610000;
-	public  static final int SCREEN_STATE_MENU_MANAGEMENT_SERVICE_SENSORMONITORING_TOP		= 0x23620000;
-	public  static final int SCREEN_STATE_MENU_MANAGEMENT_SERVICE_SENSORMONITORING_END		= 0x2362FFFF;
-	public  static final int SCREEN_STATE_MENU_MANAGEMENT_SERVICE_SPEEDLIMIT_TOP			= 0x23630000;
-	public  static final int SCREEN_STATE_MENU_MANAGEMENT_SERVICE_SPEEDLIMIT_END			= 0x2363FFFF;
-	public  static final int SCREEN_STATE_MENU_MANAGEMENT_SERVICE_WEIGHINGCOMPENSATION_TOP	= 0x23640000;
-	public  static final int SCREEN_STATE_MENU_MANAGEMENT_SERVICE_WEIGHINGCOMPENSATION_END	= 0x2364FFFF;
-	public  static final int SCREEN_STATE_MENU_MANAGEMENT_SERVICE_END						= 0x236FFFFF;
+	public  static final int SCREEN_STATE_MENU_MANAGEMENT_SERVICE_TOP						= 0x23500000;
+	public  static final int SCREEN_STATE_MENU_MANAGEMENT_SERVICE_PW						= 0x23510000;
+	public  static final int SCREEN_STATE_MENU_MANAGEMENT_SERVICE_SENSORMONITORING_TOP		= 0x23520000;
+	public  static final int SCREEN_STATE_MENU_MANAGEMENT_SERVICE_SENSORMONITORING_END		= 0x2352FFFF;
+	public  static final int SCREEN_STATE_MENU_MANAGEMENT_SERVICE_SPEEDLIMIT_TOP			= 0x23530000;
+	public  static final int SCREEN_STATE_MENU_MANAGEMENT_SERVICE_SPEEDLIMIT_END			= 0x2353FFFF;
+	public  static final int SCREEN_STATE_MENU_MANAGEMENT_SERVICE_WEIGHINGCOMPENSATION_TOP	= 0x23540000;
+	public  static final int SCREEN_STATE_MENU_MANAGEMENT_SERVICE_WEIGHINGCOMPENSATION_END	= 0x2354FFFF;
+	public  static final int SCREEN_STATE_MENU_MANAGEMENT_SERVICE_END						= 0x235FFFFF;
+	public  static final int SCREEN_STATE_MENU_MANAGEMENT_ASPHONE_TOP						= 0x23600000;
+	public  static final int SCREEN_STATE_MENU_MANAGEMENT_ASPHONE_END						= 0x236FFFFF;
 	public  static final int SCREEN_STATE_MENU_MANAGEMENT_END								= 0x23FFFFFF;
 	
 	public  static final int SCREEN_STATE_MENU_PREFERENCE_TOP								= 0x24000000;
@@ -266,6 +273,8 @@ public class Home extends Activity {
 	KickDownPopup _KickDownPopup;
 	TCLockUpPopup _TCLockUpPopup;
 	BucketPriorityPopup _BucketPriorityPopup;
+	EngineModePopup _EngineModePopup;
+	EngineWarmingUpPopup	_EngineWarmingUpPopup;
 	
 	// Timer
 	private Timer mSeatBeltTimer = null;
@@ -391,6 +400,8 @@ public class Home extends Activity {
 		_KickDownPopup = new KickDownPopup(this);
 		_TCLockUpPopup = new TCLockUpPopup(this);
 		_BucketPriorityPopup = new BucketPriorityPopup(this);
+		_EngineModePopup = new EngineModePopup(this);
+		_EngineWarmingUpPopup = new EngineWarmingUpPopup(this);
 		
 	}
 	public void InitAnimation(){
@@ -778,7 +789,32 @@ public class Home extends Activity {
 		HomeDialog = _BucketPriorityPopup;
 		HomeDialog.show();
 	}
-	
+	public void showEngineMode(){
+		if(AnimationRunningFlag == true)
+			return;
+		else
+			StartAnimationRunningTimer();
+		if(HomeDialog != null){
+			HomeDialog.dismiss();
+			HomeDialog = null;
+		}
+		
+		HomeDialog = _EngineModePopup;
+		HomeDialog.show();
+	}
+	public void showEngineWarmingUp(){
+		if(AnimationRunningFlag == true)
+			return;
+		else
+			StartAnimationRunningTimer();
+		if(HomeDialog != null){
+			HomeDialog.dismiss();
+			HomeDialog = null;
+		}
+		
+		HomeDialog = _EngineWarmingUpPopup;
+		HomeDialog.show();
+	}
 	
 	/////////////////////////////////////////////////////
 	//Timer//////////////////////////////////////////////
@@ -1206,6 +1242,22 @@ public class Home extends Activity {
 				
 		strSpeed = GetNumberString(nSpeed);
 		return strSpeed;
+	}
+	
+	public String GetSectoMinString(int _Sec){
+		String strMin;
+		long long_Sec;
+		int Min;
+		int Sec;
+		
+		long_Sec = _Sec & 0xFFFFFFFFL;
+		if(long_Sec == 0xFFFFFFFFL){
+			long_Sec = 0;
+		}
+		Min = (int) (long_Sec / 60);
+		Sec = (int) ((long_Sec % 60) / 6);
+		strMin = GetNumberString(Min) + "." + Integer.toString(Sec);
+		return strMin;
 	}
 	/////////////////////////////////////////////////////
 }

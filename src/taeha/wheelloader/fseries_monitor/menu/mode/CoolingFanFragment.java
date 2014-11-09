@@ -29,6 +29,7 @@ public class CoolingFanFragment extends ParentFragment{
 	//RESOURCE////////////////////////////////////////
 	RadioButton radioManual;
 	RadioButton radioAuto;
+	RadioButton radioOff;
 	
 	//////////////////////////////////////////////////
 	
@@ -38,7 +39,8 @@ public class CoolingFanFragment extends ParentFragment{
 	
 	//Fragment////////////////////////////////////////
 	public CoolingFanManualFragment	_CoolingFanManualFragment;
-	public CoolingFanAutoFragment _CoolingFanAutoFragment;
+	public CoolingFanAutoFragment 	_CoolingFanAutoFragment;
+	public CoolingFanOffFragment	_CoolingFanOffFragment;
 	//////////////////////////////////////////////////
 	
 	//ANIMATION///////////////////////////////////////
@@ -76,6 +78,7 @@ public class CoolingFanFragment extends ParentFragment{
 		// TODO Auto-generated method stub
 		radioManual = (RadioButton)mRoot.findViewById(R.id.radioButton_menu_body_mode_coolingfan_manual);
 		radioAuto = (RadioButton)mRoot.findViewById(R.id.radioButton_menu_body_mode_coolingfan_auto);
+		radioOff = (RadioButton)mRoot.findViewById(R.id.radioButton_menu_body_mode_coolingfan_off);
 	}
 
 	protected void InitValuables() {
@@ -83,6 +86,7 @@ public class CoolingFanFragment extends ParentFragment{
 		super.InitValuables();
 		_CoolingFanManualFragment = new CoolingFanManualFragment();
 		_CoolingFanAutoFragment = new CoolingFanAutoFragment();		
+		_CoolingFanOffFragment = new CoolingFanOffFragment();
 	}
 	@Override
 	protected void InitButtonListener() {
@@ -103,6 +107,14 @@ public class CoolingFanFragment extends ParentFragment{
 				ClickAuto();
 			}
 		});
+		radioOff.setOnClickListener(new View.OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				ClickOff();
+			}
+		});
 	}
 
 	@Override
@@ -118,18 +130,18 @@ public class CoolingFanFragment extends ParentFragment{
 	}
 	/////////////////////////////////////////////////////////////////////	
 	public void ClickManual(){
-
-		
 		if(ParentActivity.ScreenIndex != Home.SCREEN_STATE_MENU_MODE_ETC_COOLINGFAN_MANUAL)
 			showBodyCoolingFanManual();
 	}
 	public void ClickAuto(){
-
-		
 		if(ParentActivity.ScreenIndex != Home.SCREEN_STATE_MENU_MODE_ETC_COOLINGFAN_AUTO)
-		showBodyCoolingFanAuto();
+			showBodyCoolingFanAuto();
 	}
-
+	public void ClickOff(){
+		if(ParentActivity.ScreenIndex != Home.SCREEN_STATE_MENU_MODE_ETC_COOLINGFAN_OFF)
+			showBodyCoolingFanOff();
+		Log.d(TAG,"ClickOff");
+	}
 	/////////////////////////////////////////////////////////////////////
 	public void showBodyCoolingFanManual(){
 		android.app.FragmentTransaction transaction = getFragmentManager().beginTransaction();
@@ -143,6 +155,12 @@ public class CoolingFanFragment extends ParentFragment{
 		transaction.commit();
 		
 	}
+	public void showBodyCoolingFanOff(){
+		android.app.FragmentTransaction transaction = getFragmentManager().beginTransaction();
+		transaction.replace(R.id.FrameLayout_menu_body_mode_coolingfan, _CoolingFanOffFragment);
+		transaction.commit();
+		
+	}	
 	/////////////////////////////////////////////////////////////////////
 	
 }

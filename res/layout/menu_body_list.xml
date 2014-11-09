@@ -36,7 +36,7 @@
             android:layout_alignParentRight="true"
             android:layout_alignParentTop="true"
             android:layout_marginRight="20dp"
-            android:gravity="center_vertical"
+            android:gravity="right|center_vertical"
             android:textAppearance="?android:attr/textAppearanceLarge"
             android:textColor="@color/menu_body_mode_tab_amber" />
 
@@ -81,7 +81,7 @@
             android:layout_alignParentRight="true"
             android:layout_alignParentTop="true"
             android:layout_marginRight="20dp"
-            android:gravity="center_vertical"
+            android:gravity="right|center_vertical"
             android:textAppearance="?android:attr/textAppearanceLarge"
             android:textColor="@color/menu_body_mode_tab_amber" />
 
@@ -126,7 +126,7 @@
             android:layout_alignParentRight="true"
             android:layout_alignParentTop="true"
             android:layout_marginRight="20dp"
-            android:gravity="center_vertical"
+            android:gravity="right|center_vertical"
             android:textAppearance="?android:attr/textAppearanceLarge"
             android:textColor="@color/menu_body_mode_tab_amber" />
 
@@ -171,7 +171,7 @@
             android:layout_alignParentRight="true"
             android:layout_alignParentTop="true"
             android:layout_marginRight="20dp"
-            android:gravity="center_vertical"
+            android:gravity="right|center_vertical"
             android:textAppearance="?android:attr/textAppearanceLarge"
             android:textColor="@color/menu_body_mode_tab_amber" />
 
@@ -216,7 +216,7 @@
             android:layout_alignParentRight="true"
             android:layout_alignParentTop="true"
             android:layout_marginRight="20dp"
-            android:gravity="center_vertical"
+            android:gravity="right|center_vertical"
             android:textAppearance="?android:attr/textAppearanceLarge"
             android:textColor="@color/menu_body_mode_tab_amber" />
 
@@ -261,7 +261,7 @@
             android:layout_alignParentRight="true"
             android:layout_alignParentTop="true"
             android:layout_marginRight="20dp"
-            android:gravity="center_vertical"
+            android:gravity="right|center_vertical"
             android:textAppearance="?android:attr/textAppearanceLarge"
             android:textColor="@color/menu_body_mode_tab_amber" />
 

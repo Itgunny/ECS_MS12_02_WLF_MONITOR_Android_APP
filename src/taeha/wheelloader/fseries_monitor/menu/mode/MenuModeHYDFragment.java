@@ -5,6 +5,7 @@ import taeha.wheelloader.fseries_monitor.animation.ChangeFragmentAnimation;
 import taeha.wheelloader.fseries_monitor.animation.DisappearAnimation;
 import taeha.wheelloader.fseries_monitor.animation.MainBodyShiftAnimation;
 import taeha.wheelloader.fseries_monitor.animation.LeftRightShiftAnimation;
+import taeha.wheelloader.fseries_monitor.main.CAN1CommManager;
 import taeha.wheelloader.fseries_monitor.main.Home;
 import taeha.wheelloader.fseries_monitor.main.ParentFragment;
 import taeha.wheelloader.fseries_monitor.main.R;
@@ -32,7 +33,8 @@ public class MenuModeHYDFragment extends MenuBodyList_ParentFragment{
 	//////////////////////////////////////////////////
 	
 	//VALUABLE////////////////////////////////////////
-
+	int BucketPriority;
+	int MaxFlowLevel;
 	//////////////////////////////////////////////////
 	
 	//Fragment////////////////////////////////////////
@@ -86,13 +88,15 @@ public class MenuModeHYDFragment extends MenuBodyList_ParentFragment{
 	@Override
 	protected void GetDataFromNative() {
 		// TODO Auto-generated method stub
-		
+		BucketPriority = CAN1Comm.Get_BucketPriorityOperation_2301_PGN65517();
+		MaxFlowLevel = CAN1Comm.Get_AuxiliaryAttachmentMaxFlowLevel_2303_PGN65517();
 	}
 
 	@Override
 	protected void UpdateUI() {
 		// TODO Auto-generated method stub
-		
+		BucketPriorityDisplay(BucketPriority);
+		MaxFlowLevelDisplay(MaxFlowLevel);
 	}
 	//////////////////////////////////////////////////////////////////////////
 
@@ -185,13 +189,30 @@ public class MenuModeHYDFragment extends MenuBodyList_ParentFragment{
 		case Home.SCREEN_STATE_MENU_MODE_HYD_MAXFLOW:
 			setListFocus(4);
 			break;
+		case Home.SCREEN_STATE_MENU_MODE_HYD_SOFTSTOP:
+			setListFocus(5);
+			break;
 		default:
 			setListFocus(0);
 			break;
 		}
 	}
 	/////////////////////////////////////////////////////////////////////	
-	
+	public void BucketPriorityDisplay(int data){
+		switch (data) {
+		case CAN1CommManager.DATA_STATE_BUCKETPRIORITY_OFF:
+			setListData3(ParentActivity.getResources().getString(string.Off));
+			break;
+		case CAN1CommManager.DATA_STATE_BUCKETPRIORITY_ON:
+			setListData3(ParentActivity.getResources().getString(string.On));
+			break;
+		default:
+			break;
+		}
+	}
+	public void MaxFlowLevelDisplay(int data){
+		setListData4(Integer.toString(data));
+	}
 	/////////////////////////////////////////////////////////////////////	
 	
 	/////////////////////////////////////////////////////////////////////

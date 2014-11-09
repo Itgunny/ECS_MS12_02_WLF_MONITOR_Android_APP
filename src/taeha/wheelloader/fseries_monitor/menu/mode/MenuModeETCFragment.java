@@ -5,6 +5,7 @@ import taeha.wheelloader.fseries_monitor.animation.ChangeFragmentAnimation;
 import taeha.wheelloader.fseries_monitor.animation.DisappearAnimation;
 import taeha.wheelloader.fseries_monitor.animation.MainBodyShiftAnimation;
 import taeha.wheelloader.fseries_monitor.animation.LeftRightShiftAnimation;
+import taeha.wheelloader.fseries_monitor.main.CAN1CommManager;
 import taeha.wheelloader.fseries_monitor.main.Home;
 import taeha.wheelloader.fseries_monitor.main.ParentFragment;
 import taeha.wheelloader.fseries_monitor.main.R;
@@ -32,7 +33,10 @@ public class MenuModeETCFragment extends MenuBodyList_ParentFragment{
 	//////////////////////////////////////////////////
 	
 	//VALUABLE////////////////////////////////////////
-
+	int CoolingFanReverse;
+	int EngineAutoShutdownStatus;
+	int EngineAutoShutdownTime;
+	
 	//////////////////////////////////////////////////
 	
 	//Fragment////////////////////////////////////////
@@ -74,23 +78,28 @@ public class MenuModeETCFragment extends MenuBodyList_ParentFragment{
 		setClickableList2(true);
 		setClickableList3(true);
 		setClickableList4(true);
+		setClickableList5(true);
 		
-		setListTitle1(ParentActivity.getResources().getString(string.Engine_Auto_Shutdown));
-		setListTitle2(ParentActivity.getResources().getString(string.Engine_Delay_Shutdown));
-		setListTitle3(ParentActivity.getResources().getString(string.Camera_Setting));
-		setListTitle4(ParentActivity.getResources().getString(string.Cooling_Fan_Reverse_Mode));
+		setListTitle1(ParentActivity.getResources().getString(string.Speedometer_Freq_Setting));
+		setListTitle2(ParentActivity.getResources().getString(string.Cooling_Fan_Reverse_Mode));
+		setListTitle3(ParentActivity.getResources().getString(string.Wiper_Level_Setting));
+		setListTitle4(ParentActivity.getResources().getString(string.Engine_Auto_Shutdown));
+		setListTitle5(ParentActivity.getResources().getString(string.Camera_Setting));
 	}
 	
 	@Override
 	protected void GetDataFromNative() {
 		// TODO Auto-generated method stub
-		
+		CoolingFanReverse = CAN1Comm.Get_CoolingFanReverseMode_182_PGN65369();
+		EngineAutoShutdownTime = CAN1Comm.Get_SettingTimeforAutomaticEngineShutdown_364_PGN61184_122();
+		EngineAutoShutdownStatus = CAN1Comm.Get_AutomaticEngineShutdown_363_PGN61184_122();		
 	}
 
 	@Override
 	protected void UpdateUI() {
 		// TODO Auto-generated method stub
-		
+		CoolingFanReverseDisplay(CoolingFanReverse);
+		EngineAutoShutdownDisplay(EngineAutoShutdownStatus, EngineAutoShutdownTime);
 	}
 	//////////////////////////////////////////////////////////////////////////
 
@@ -101,7 +110,8 @@ public class MenuModeETCFragment extends MenuBodyList_ParentFragment{
 			return;
 		else
 			ParentActivity.StartAnimationRunningTimer();
-		ParentActivity._MenuBaseFragment.showBodyEngineAutoShutdownAnimation();
+		
+		ParentActivity._MenuBaseFragment.showBodySpeedometerFreqAnimation();
 		
 	}
 
@@ -112,7 +122,8 @@ public class MenuModeETCFragment extends MenuBodyList_ParentFragment{
 			return;
 		else
 			ParentActivity.StartAnimationRunningTimer();
-		ParentActivity._MenuBaseFragment.showBodyEngineDelayShutdownAnimation();
+		ParentActivity._MenuBaseFragment.showBodyCoolingFanAnimation();
+		
 	}
 
 	@Override
@@ -122,7 +133,7 @@ public class MenuModeETCFragment extends MenuBodyList_ParentFragment{
 			return;
 		else
 			ParentActivity.StartAnimationRunningTimer();
-		ParentActivity._MenuBaseFragment.showBodyCameraSettingAnimation();
+		
 	}
 
 	@Override
@@ -132,19 +143,29 @@ public class MenuModeETCFragment extends MenuBodyList_ParentFragment{
 			return;
 		else
 			ParentActivity.StartAnimationRunningTimer();
-		ParentActivity._MenuBaseFragment.showBodyCoolingFanAnimation();
+		ParentActivity._MenuBaseFragment.showBodyEngineAutoShutdownAnimation();
 	}
 
 	@Override
 	public void ClickList5() {
 		// TODO Auto-generated method stub
-		
+		if(ParentActivity.AnimationRunningFlag == true)
+			return;
+		else
+			ParentActivity.StartAnimationRunningTimer();
+
+		ParentActivity._MenuBaseFragment.showBodyCameraSettingAnimation();
 	}
 
 	@Override
 	public void ClickList6() {
 		// TODO Auto-generated method stub
-		
+		if(ParentActivity.AnimationRunningFlag == true)
+			return;
+		else
+			ParentActivity.StartAnimationRunningTimer();
+
+		ParentActivity._MenuBaseFragment.showBodyEngineDelayShutdownAnimation();
 	}
 
 
@@ -169,17 +190,20 @@ public class MenuModeETCFragment extends MenuBodyList_ParentFragment{
 	/////////////////////////////////////////////////////////////////////
 	public void CursurDisplay(int Index){
 		switch (Index) {
-		case Home.SCREEN_STATE_MENU_MODE_ETC_AUTOSHUTDOWN_TOP:
+		case Home.SCREEN_STATE_MENU_MODE_ETC_FREQ_TOP:
 			setListFocus(1);
 			break;
-		case Home.SCREEN_STATE_MENU_MODE_ETC_DELAYSHUTDOWN_TOP:
+		case Home.SCREEN_STATE_MENU_MODE_ETC_COOLINGFAN_TOP:
 			setListFocus(2);
 			break;
-		case Home.SCREEN_STATE_MENU_MODE_ETC_CAMERASETTING_TOP:
+		case Home.SCREEN_STATE_MENU_MODE_ETC_AUTOSHUTDOWN_TOP:
 			setListFocus(3);
 			break;
-		case Home.SCREEN_STATE_MENU_MODE_ETC_COOLINGFAN_TOP:
+		case Home.SCREEN_STATE_MENU_MODE_ETC_WIPER_TOP:
 			setListFocus(4);
+			break;
+		case Home.SCREEN_STATE_MENU_MODE_ETC_CAMERASETTING_TOP:
+			setListFocus(5);
 			break;
 		default:
 			setListFocus(0);
@@ -187,7 +211,35 @@ public class MenuModeETCFragment extends MenuBodyList_ParentFragment{
 		}
 	}
 	/////////////////////////////////////////////////////////////////////	
-	
+	public void CoolingFanReverseDisplay(int data){
+		switch (data) {
+		case CAN1CommManager.DATA_STATE_REVERSEFAN_OFF:
+			setListData2(ParentActivity.getResources().getString(string.Off));
+			break;
+		case CAN1CommManager.DATA_STATE_REVERSEFAN_MANUAL:
+			setListData2(ParentActivity.getResources().getString(string.Manual));
+			break;
+		case CAN1CommManager.DATA_STATE_REVERSEFAN_AUTO:
+			setListData2(ParentActivity.getResources().getString(string.Automatic));
+			break;
+
+		default:
+			break;
+		}
+	}
+	public void EngineAutoShutdownDisplay(int status, int time){
+		switch (status) {
+		case CAN1CommManager.DATA_STATE_LAMP_OFF:
+			setListData4(ParentActivity.getResources().getString(string.Off));
+			break;
+		case CAN1CommManager.DATA_STATE_LAMP_ON:
+			setListData4(ParentActivity.GetSectoMinString(time) + ParentActivity.getResources().getString(string.Min));
+			break;
+
+		default:
+			break;
+		}
+	}
 	/////////////////////////////////////////////////////////////////////
 	
 	/////////////////////////////////////////////////////////////////////

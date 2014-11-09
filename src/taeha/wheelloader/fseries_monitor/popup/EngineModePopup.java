@@ -3,6 +3,7 @@ package taeha.wheelloader.fseries_monitor.popup;
 import android.content.Context;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
+import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,15 +16,14 @@ import taeha.wheelloader.fseries_monitor.main.Home;
 import taeha.wheelloader.fseries_monitor.main.ParentPopup;
 import taeha.wheelloader.fseries_monitor.main.R;
 
-public class CCOModePopup extends ParentPopup{
+public class EngineModePopup extends ParentPopup{
 	//CONSTANT////////////////////////////////////////
 
 	//////////////////////////////////////////////////
 	//RESOURCE////////////////////////////////////////
-	TextView textViewOff;
-	TextView textViewL;
-	TextView textViewM;
-	TextView textViewH;
+	TextView textViewEcono;
+	TextView textViewSTD;
+	TextView textViewPWR;
 	//////////////////////////////////////////////////
 	
 	//VALUABLE////////////////////////////////////////
@@ -37,87 +37,82 @@ public class CCOModePopup extends ParentPopup{
 	//TEST////////////////////////////////////////////
 	
 	//////////////////////////////////////////////////
-	public CCOModePopup(Context _context) {
+	public EngineModePopup(Context _context) {
 		super(_context);
 		// TODO Auto-generated constructor stub
-		TAG = "CCOModePopup";
+		TAG = "EngineModePopup";
 		ParentActivity = (Home)_context;
 		inflater = (LayoutInflater)_context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-		mRoot = inflater.inflate(R.layout.popup_ccomode, null);
+		mRoot = inflater.inflate(R.layout.popup_enginemode, null);
 		this.addContentView(mRoot,  new LayoutParams(448,288));
 		this.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-		
-		
 	}
 	
 	@Override
 	public void show() {
 		// TODO Auto-generated method stub
 		super.show();
+		Log.d(TAG,"show");
 		InitResource();
 		InitButtonListener();
 		InitValuable();
 		
-		ParentActivity.ScreenIndex = Home.SCREEN_STATE_MENU_MODE_ENGINETM_CCOMODE;
+		ParentActivity.ScreenIndex = Home.SCREEN_STATE_MENU_MODE_ENGINETM_ENGINESETTING_MODE;
+
 	}
 
 	@Override
 	public void dismiss() {
 		// TODO Auto-generated method stub
 		super.dismiss();
-		ParentActivity.ScreenIndex = Home.SCREEN_STATE_MENU_MODE_ENGINETM_TOP;
+		Log.d(TAG,"dismiss");
+		ParentActivity.ScreenIndex = Home.SCREEN_STATE_MENU_MODE_ENGINETM_ENGINESETTING_TOP;
 	}
 
 	@Override
 	protected void InitResource() {
 		// TODO Auto-generated method stub
-		textViewOff = (TextView)mRoot.findViewById(R.id.textView_popup_ccomode_off);
-		textViewL = (TextView)mRoot.findViewById(R.id.textView_popup_ccomode_L);
-		textViewM = (TextView)mRoot.findViewById(R.id.textView_popup_ccomode_M);
-		textViewH = (TextView)mRoot.findViewById(R.id.textView_popup_ccomode_H);
+		textViewEcono = (TextView)mRoot.findViewById(R.id.textView_popup_enginemode_econo);
+		textViewSTD = (TextView)mRoot.findViewById(R.id.textView_popup_enginemode_std);
+		textViewPWR = (TextView)mRoot.findViewById(R.id.textView_popup_enginemode_pwr);
+		
+
 	}
 
 	@Override
 	protected void InitButtonListener() {
 		// TODO Auto-generated method stub
-		textViewOff.setOnClickListener(new View.OnClickListener() {
+		textViewEcono.setOnClickListener(new View.OnClickListener() {
 			
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
-				ClickOff();
+				ClickEcono();
 			}
 		});
-		textViewL.setOnClickListener(new View.OnClickListener() {
+		textViewSTD.setOnClickListener(new View.OnClickListener() {
 			
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
-				ClickL();
+				ClickSTD();
 			}
 		});
-		textViewM.setOnClickListener(new View.OnClickListener() {
+		textViewPWR.setOnClickListener(new View.OnClickListener() {
 			
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
-				ClickM();
+				ClickPWR();
 			}
 		});
-		textViewH.setOnClickListener(new View.OnClickListener() {
-			
-			@Override
-			public void onClick(View v) {
-				// TODO Auto-generated method stub
-				ClickH();
-			}
-		});
+		
 	}
 
 	@Override
 	protected void GetDataFromNative() {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
@@ -126,24 +121,19 @@ public class CCOModePopup extends ParentPopup{
 		
 	}
 	///////////////////////////////////////////////////////////////////////////////
-	public void ClickOff(){
-		CAN1Comm.Set_ClutchCutoffMode_544_PGN61184_104(CAN1CommManager.DATA_STATE_TM_CLUTCHCUTOFF_OFF);
-		CAN1Comm.TxCANToMCU(104);
+	public void ClickEcono(){
+		CAN1Comm.Set_EnginePowerMode_347_PGN61184_101(CAN1CommManager.DATA_STATE_ENGINE_MODE_ECONO);
+		CAN1Comm.TxCANToMCU(101);
 		this.dismiss();
 	}	
-	public void ClickL(){
-		CAN1Comm.Set_ClutchCutoffMode_544_PGN61184_104(CAN1CommManager.DATA_STATE_TM_CLUTCHCUTOFF_L);
-		CAN1Comm.TxCANToMCU(104);
+	public void ClickSTD(){
+		CAN1Comm.Set_EnginePowerMode_347_PGN61184_101(CAN1CommManager.DATA_STATE_ENGINE_MODE_STD);
+		CAN1Comm.TxCANToMCU(101);
 		this.dismiss();
 	}	
-	public void ClickM(){
-		CAN1Comm.Set_ClutchCutoffMode_544_PGN61184_104(CAN1CommManager.DATA_STATE_TM_CLUTCHCUTOFF_M);
-		CAN1Comm.TxCANToMCU(104);
-		this.dismiss();
-	}	
-	public void ClickH(){
-		CAN1Comm.Set_ClutchCutoffMode_544_PGN61184_104(CAN1CommManager.DATA_STATE_TM_CLUTCHCUTOFF_H);
-		CAN1Comm.TxCANToMCU(104);
+	public void ClickPWR(){
+		CAN1Comm.Set_EnginePowerMode_347_PGN61184_101(CAN1CommManager.DATA_STATE_ENGINE_MODE_PWR);
+		CAN1Comm.TxCANToMCU(101);
 		this.dismiss();
 	}	
 

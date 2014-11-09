@@ -1832,7 +1832,8 @@ typedef struct
 	unsigned char	MessageType;
 
 	unsigned char	AutomaticEngineShutdown_363:2;
-	unsigned char	Reserved0:6;
+	unsigned char	AutomaticEngineShutdownTypeControlByte:2;
+	unsigned char	Reserved0:4;
 
 	unsigned char	SettingTimeforAutomaticEngineShutdown_364;
 
@@ -1850,7 +1851,9 @@ typedef struct
 {
 	unsigned char	MessageType;
 
-	unsigned char	Reserved0;
+	unsigned char	AutomaticEngineShutdown_363:2;
+	unsigned char	AutomaticEngineShutdownType:2;
+	unsigned char	Reserved0:4;
 
 	unsigned char	SettingTimeforAutomaticEngineShutdown_364;
 
@@ -1954,7 +1957,12 @@ typedef struct
 	unsigned char	AuxiliaryAttachmentMaxFlowLevel:2;
 	unsigned char	BoomLeverFloatingPosition:2;
 
-	unsigned char	DM0[6];
+	unsigned char	SoftStopBoomUp_2337:2;
+	unsigned char	SoftStopBoomDown_2338:2;
+	unsigned char	SoftStopBucketIn_2339:2;
+	unsigned char	SoftStopBucketOut_2340:2;
+
+	unsigned char	DM0[5];
 
 }__attribute__((packed))  WHEEL_LOADER_EHCU_SETTING_61184_203;
 typedef struct
@@ -2453,6 +2461,15 @@ typedef struct
 
 	unsigned char	AUX2EPPRValveCurrent_2309;
 }__attribute__((packed))  WHEEL_LOADER_EHCU_STATUS_65517;
+typedef struct
+{
+	unsigned char	SoftStopBoomUp_2337:2;
+	unsigned char	SoftStopBoomDown_2338:2;
+	unsigned char	SoftStopBucketIn_2339:2;
+	unsigned char	SoftStopBucketOut_2340:2;
+
+	unsigned char	DM[7];
+}__attribute__((packed))  WHEEL_LOADER_EHCU_STATUS2_65524;
 typedef struct
 {
 	unsigned char	TravelAlarmOperationStatus_3431:2;

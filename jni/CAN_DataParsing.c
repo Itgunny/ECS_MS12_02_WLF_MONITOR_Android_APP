@@ -423,6 +423,8 @@ void InitNewProtoclValuable() {
 		sizeof(RX_JOYSTICK_POSITION_STATUS_65515));
 	memset((unsigned char*) &RX_WHEEL_LOADER_EHCU_STATUS_65517, 0xFF,
 		sizeof(RX_WHEEL_LOADER_EHCU_STATUS_65517));
+	memset((unsigned char*) &RX_WHEEL_LOADER_EHCU_STATUS2_65524, 0xFF,
+			sizeof(RX_WHEEL_LOADER_EHCU_STATUS2_65524));
 	memset((unsigned char*) &RX_ELECTRICAL_SWITCH_RELAY_OPERATION_STATUS_65527,
 		0xFF, sizeof(RX_ELECTRICAL_SWITCH_RELAY_OPERATION_STATUS_65527));
 
@@ -563,6 +565,7 @@ void InitNewProtoclValuable() {
 		0xFF, sizeof(TX_ELECTRICAL_SWITCH_RELAY_OPERATION_STATUS_65527));
 	memset((unsigned char*) &TX_COMPONENT_IDENTIFICATION_MONITOR_65330,
 		0xFF, sizeof(TX_COMPONENT_IDENTIFICATION_MONITOR_65330));
+
 
 	memset((unsigned char*) &RX_RES_RTC, 0xFF, sizeof(RX_RES_RTC));
 	memset((unsigned char*) &RX_RES_Version, 0xFF, sizeof(RX_RES_Version));
@@ -759,7 +762,10 @@ void UART1_SeperateData_Default(int Priority, int PF, int PS, unsigned char* Dat
 		case 151 :memcpy((unsigned char*)&RX_GAUGE_65431,&Data[7],8); break;
 		case 153 :memcpy((unsigned char*)&RX_HOURMETER_CLOCK_WIPER_65433,&Data[7],8); break;
 		case 154 :memcpy((unsigned char*)&RX_MACHINE_TRAVEL_STATUS_65434,&Data[7],8); break;
-		case 158 :memcpy((unsigned char*)&RX_DTC_INFORMATION_TYPE1_65438,&Data[7],8); SaveErrorCode_NEW_CAN2();break;
+		case 158 :
+			memcpy((unsigned char*)&RX_DTC_INFORMATION_TYPE1_65438,&Data[7],8);
+			SaveErrorCode_NEW_CAN2();
+			break;
 		case 170 :
 			memcpy((unsigned char*)&RX_WEIGHING_SYSTEM_STATUS_65450,&Data[7],8);
 			SetKeypadLamp();
@@ -1066,14 +1072,17 @@ void UART1_SeperateData_EHCU(int Priority, int PF, int PS, unsigned char* Data)
 		case 255:	// 0xFF00
 		default:
 			switch (PS) {
-		case 50 :memcpy((unsigned char*)&RX_COMPONENT_IDENTIFICATION_EHCU_65330,&Data[7],8); break;
-		case 235:memcpy((unsigned char*)&RX_JOYSTICK_POSITION_STATUS_65515,&Data[7],8);break;
-		case 237:
-			memcpy((unsigned char*)&RX_WHEEL_LOADER_EHCU_STATUS_65517,&Data[7],8);
-			SetKeypadLamp();
-			break;
-		default:
-			break;
+				case 50 :memcpy((unsigned char*)&RX_COMPONENT_IDENTIFICATION_EHCU_65330,&Data[7],8); break;
+				case 235:memcpy((unsigned char*)&RX_JOYSTICK_POSITION_STATUS_65515,&Data[7],8);break;
+				case 237:
+					memcpy((unsigned char*)&RX_WHEEL_LOADER_EHCU_STATUS_65517,&Data[7],8);
+					SetKeypadLamp();
+					break;
+				case 244:
+					memcpy((unsigned char*)&RX_WHEEL_LOADER_EHCU_STATUS2_65524,&Data[7],8);
+					break;
+				default:
+					break;
 			}
 			break;
 		case 254:	// 0xFE00
@@ -2750,6 +2759,7 @@ jint _UART1_TxComm(JNIEnv *env, jobject this, jint PS) {
 		case 23	:
 			//	memcpy(&tx_buf[4], (unsigned char*) &TX_HCE_ANTI_THEFT_REQUEST_61184_23, sizeof(TX_HCE_ANTI_THEFT_REQUEST_61184_23));
 			nRTSDataLength = sizeof(TX_HCE_ANTI_THEFT_REQUEST_61184_23);
+			memset((unsigned char*) RTSData,0xFF, sizeof(RTSData));
 			memcpy(&RTSData[0], (unsigned char*) &TX_HCE_ANTI_THEFT_REQUEST_61184_23, sizeof(TX_HCE_ANTI_THEFT_REQUEST_61184_23));
 			Send_RTS(0x1C,0xEF,0x00,SA_MCU,SA_MONITOR,nRTSDataLength);
 			break;

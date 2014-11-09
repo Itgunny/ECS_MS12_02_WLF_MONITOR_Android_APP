@@ -5,6 +5,7 @@ import taeha.wheelloader.fseries_monitor.animation.ChangeFragmentAnimation;
 import taeha.wheelloader.fseries_monitor.animation.DisappearAnimation;
 import taeha.wheelloader.fseries_monitor.animation.MainBodyShiftAnimation;
 import taeha.wheelloader.fseries_monitor.animation.LeftRightShiftAnimation;
+import taeha.wheelloader.fseries_monitor.main.CAN1CommManager;
 import taeha.wheelloader.fseries_monitor.main.Home;
 import taeha.wheelloader.fseries_monitor.main.ParentFragment;
 import taeha.wheelloader.fseries_monitor.main.R;
@@ -32,7 +33,10 @@ public class MenuModeEngTMFragment extends MenuBodyList_ParentFragment{
 	//////////////////////////////////////////////////
 	
 	//VALUABLE////////////////////////////////////////
-	
+	int TCLockUp;
+	int CCOMode;
+	int ShiftMode;
+	int KickDown;
 	//////////////////////////////////////////////////
 	
 	//Fragment////////////////////////////////////////
@@ -76,7 +80,7 @@ public class MenuModeEngTMFragment extends MenuBodyList_ParentFragment{
 		setClickableList4(true);
 		setClickableList5(true);
 		
-		setListTitle1(ParentActivity.getResources().getString(string.Engine_Speed));
+		setListTitle1(ParentActivity.getResources().getString(string.Engine_Setting));
 		setListTitle2(ParentActivity.getResources().getString(string.TC_Lock_Up));
 		setListTitle3(ParentActivity.getResources().getString(string.CCO_Mode));
 		setListTitle4(ParentActivity.getResources().getString(string.Shift_Mode));
@@ -86,13 +90,19 @@ public class MenuModeEngTMFragment extends MenuBodyList_ParentFragment{
 	@Override
 	protected void GetDataFromNative() {
 		// TODO Auto-generated method stub
-		
+		TCLockUp = CAN1Comm.Get_TransmissionTCLockupEngaged_568_PGN65434(); 
+		CCOMode = CAN1Comm.Get_ClutchCutoffMode_544_PGN65434();
+		ShiftMode = CAN1Comm.Get_TransmissionShiftMode_543_PGN65434();
+		KickDown = CAN1Comm.Get_KickDownShiftMode_547_PGN65434();
 	}
 
 	@Override
 	protected void UpdateUI() {
 		// TODO Auto-generated method stub
-		
+		TCLockUpDisplay(TCLockUp);
+		CCOModeDisplay(CCOMode);
+		ShiftModeDisplay(ShiftMode);
+		KickDownDisplay(KickDown);
 	}
 	//////////////////////////////////////////////////////////////////////////
 
@@ -104,7 +114,9 @@ public class MenuModeEngTMFragment extends MenuBodyList_ParentFragment{
 		else
 			ParentActivity.StartAnimationRunningTimer();
 		
-		ParentActivity._MenuBaseFragment.showBodyEngineSpeedAnimation();
+		ParentActivity._MenuBaseFragment._MenuModeFragment.HideTab();
+		ParentActivity._MenuBaseFragment._MenuModeFragment.HideEngTM();
+		ParentActivity._MenuBaseFragment._MenuModeFragment.showEngineSetting();
 	}
 
 	@Override
@@ -156,7 +168,7 @@ public class MenuModeEngTMFragment extends MenuBodyList_ParentFragment{
 	/////////////////////////////////////////////////////////////////////
 	public void CursurDisplay(int Index){
 		switch (Index) {
-		case Home.SCREEN_STATE_MENU_MODE_ENGINETM_ENGINESPEED:
+		case Home.SCREEN_STATE_MENU_MODE_ENGINETM_ENGINESETTING_TOP:
 			setListFocus(1);
 			break;
 		case Home.SCREEN_STATE_MENU_MODE_ENGINETM_TCLOCKUP:
@@ -177,7 +189,68 @@ public class MenuModeEngTMFragment extends MenuBodyList_ParentFragment{
 		}
 	}
 	/////////////////////////////////////////////////////////////////////	
-	
+	public void TCLockUpDisplay(int data){
+		switch (data) {
+		case CAN1CommManager.DATA_STATE_TM_LOCKUPCLUTCH_OFF:
+			setListData2(ParentActivity.getResources().getString(string.Off));
+			break;
+		case CAN1CommManager.DATA_STATE_TM_LOCKUPCLUTCH_ON:
+			setListData2(ParentActivity.getResources().getString(string.On));
+			break;
+		default:
+			break;
+		}
+		
+	}
+	public void CCOModeDisplay(int data){
+		switch (data) {
+		case CAN1CommManager.DATA_STATE_TM_CLUTCHCUTOFF_OFF:
+			setListData3(ParentActivity.getResources().getString(string.Off));
+			break;
+		case CAN1CommManager.DATA_STATE_TM_CLUTCHCUTOFF_L:
+			setListData3(ParentActivity.getResources().getString(string.L));
+			break;
+		case CAN1CommManager.DATA_STATE_TM_CLUTCHCUTOFF_M:
+			setListData3(ParentActivity.getResources().getString(string.M));
+			break;
+		case CAN1CommManager.DATA_STATE_TM_CLUTCHCUTOFF_H:
+			setListData3(ParentActivity.getResources().getString(string.H));
+			break;
+		default:
+			break;
+		}
+	}
+	public void ShiftModeDisplay(int data){
+		switch (data) {
+		case CAN1CommManager.DATA_STATE_TM_SHIFTMODE_MANUAL:
+			setListData4(ParentActivity.getResources().getString(string.Manual));
+			break;
+		case CAN1CommManager.DATA_STATE_TM_SHIFTMODE_AL:
+			setListData4(ParentActivity.getResources().getString(string.AL));
+			break;
+		case CAN1CommManager.DATA_STATE_TM_SHIFTMODE_AN:
+			setListData4(ParentActivity.getResources().getString(string.AN));
+			break;
+		case CAN1CommManager.DATA_STATE_TM_SHIFTMODE_AH:
+			setListData4(ParentActivity.getResources().getString(string.AH));
+			break;
+		default:
+			break;
+		}
+	}
+	public void KickDownDisplay(int data){
+		switch (data) {
+		case CAN1CommManager.DATA_STATE_KICKDOWN_UPDOWN:
+			setListData5(ParentActivity.getResources().getString(string.MODE1));
+			break;
+		case CAN1CommManager.DATA_STATE_KICKDOWN_DOWNONLY:
+			setListData5(ParentActivity.getResources().getString(string.MODE2));
+			break;
+
+		default:
+			break;
+		}
+	}
 	/////////////////////////////////////////////////////////////////////
 	
 	/////////////////////////////////////////////////////////////////////

@@ -86,14 +86,12 @@ public class MenuManagementFragment extends MenuBodyList_ParentFragment{
 		setClickableList3(true);
 		setClickableList4(true);
 		setClickableList5(true);
-		setClickableList6(true);
 		
 		setListTitle1(ParentActivity.getResources().getString(string.Machine_Security));
 		setListTitle2(ParentActivity.getResources().getString(string.Maintenance));
 		setListTitle3(ParentActivity.getResources().getString(string.Calibration));
-		setListTitle4(ParentActivity.getResources().getString(string.Speedometer_Freq_Setting));
+		setListTitle4(ParentActivity.getResources().getString(string.Service_Contact));
 		setListTitle5(ParentActivity.getResources().getString(string.Change_AS_Phone_Number));
-		setListTitle6(ParentActivity.getResources().getString(string.Service_Contact));
 	}
 
 	//////////////////////////////////////////////////////////////////////
@@ -128,6 +126,11 @@ public class MenuManagementFragment extends MenuBodyList_ParentFragment{
 	@Override
 	public void ClickList4() {
 		// TODO Auto-generated method stub
+		if(ParentActivity.AnimationRunningFlag == true)
+			return;
+		else
+			ParentActivity.StartAnimationRunningTimer();
+		ParentActivity._MenuBaseFragment.showBodyServiceMenuPassword();
 		
 	}
 
@@ -138,19 +141,15 @@ public class MenuManagementFragment extends MenuBodyList_ParentFragment{
 			return;
 		else
 			ParentActivity.StartAnimationRunningTimer();
-		
-		ParentActivity._MenuBaseFragment.showBodyChangeASPhoneNumberAnimation();		
+		ParentActivity._MenuBaseFragment.showBodyChangeASPhoneNumberAnimation();	
 	}
 
 	@Override
 	public void ClickList6() {
 		// TODO Auto-generated method stub
-		if(ParentActivity.AnimationRunningFlag == true)
-			return;
-		else
-			ParentActivity.StartAnimationRunningTimer();
 		
-		ParentActivity._MenuBaseFragment.showBodyServiceMenuPassword();
+		
+		
 	}
 	
 	/////////////////////////////////////////////////////////////////////	

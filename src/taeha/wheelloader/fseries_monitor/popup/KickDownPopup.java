@@ -10,6 +10,7 @@ import android.view.ViewGroup.LayoutParams;
 import android.widget.ImageButton;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import taeha.wheelloader.fseries_monitor.main.CAN1CommManager;
 import taeha.wheelloader.fseries_monitor.main.Home;
 import taeha.wheelloader.fseries_monitor.main.ParentPopup;
 import taeha.wheelloader.fseries_monitor.main.R;
@@ -104,11 +105,13 @@ public class KickDownPopup extends ParentPopup{
 	}
 	///////////////////////////////////////////////////////////////////////////////
 	public void ClickMode1(){
-
+		CAN1Comm.Set_KickDownShiftMode_547_PGN61184_104(CAN1CommManager.DATA_STATE_KICKDOWN_UPDOWN);
+		CAN1Comm.TxCANToMCU(104);
 		this.dismiss();
 	}	
 	public void ClickMode2(){
-
+		CAN1Comm.Set_KickDownShiftMode_547_PGN61184_104(CAN1CommManager.DATA_STATE_KICKDOWN_DOWNONLY);
+		CAN1Comm.TxCANToMCU(104);
 		this.dismiss();
 	}	
 }

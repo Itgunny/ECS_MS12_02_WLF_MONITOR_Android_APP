@@ -242,15 +242,15 @@ public class MainBIndicatorFragment extends ParentFragment{
 	}
 	public void ReverseFanDisplay(int Data){
 		switch (Data) {
-		case CAN1CommManager.DATA_STATE_REVERSEFAN_OFF:
+		case CAN1CommManager.DATA_STATE_COOLINGFAN_OFF:
 			ReverseFanAnimation.FlipAnimation(imgViewReverseFan, R.drawable.main_indicator_fanreverse);
 			imgViewReverseFan.setAlpha(DARK);
 			break;
-		case CAN1CommManager.DATA_STATE_REVERSEFAN_FORWARD:
+		case CAN1CommManager.DATA_STATE_COOLINGFAN_FORWARD:
 			ReverseFanAnimation.FlipAnimation(imgViewReverseFan, R.drawable.main_indicator_fanreverse);
 			imgViewReverseFan.setAlpha(DARK);
 			break;
-		case CAN1CommManager.DATA_STATE_REVERSEFAN_REVERSE:
+		case CAN1CommManager.DATA_STATE_COOLINGFAN_REVERSE:
 			ReverseFanAnimation.FlipAnimation(imgViewReverseFan, R.drawable.main_indicator_fanreverse_on);
 			imgViewReverseFan.setAlpha(LIGHT);
 			break;

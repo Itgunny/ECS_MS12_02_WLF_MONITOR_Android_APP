@@ -193,6 +193,8 @@ public class MainBKeyWorkLoadDisplayFragment extends ParentFragment{
 	public void ClickDaily(){
 		ParentActivity.WeighingDisplayIndex = CAN1CommManager.DATA_STATE_WEIGHINGDISPLAY_DAILY;
 		CAN1Comm.Set_WeighingDisplayMode1_1910_PGN61184_62(ParentActivity.WeighingDisplayIndex);
+		CAN1Comm.Set_SuddenChangeError_PGN61184_62(CAN1Comm.Get_SuddenChangeError_PGN65450());
+		CAN1Comm.Set_BucketFullInError_PGN61184_62(CAN1Comm.Get_BucketFullInError_PGN65450());
 		CAN1Comm.TxCANToMCU(62);
 		CAN1Comm.Set_WeighingDisplayMode1_1910_PGN61184_62(15);
 		textViewInitialization.setText(ParentActivity.getResources().getString(R.string.Daily) 
@@ -202,6 +204,8 @@ public class MainBKeyWorkLoadDisplayFragment extends ParentFragment{
 	public void ClickTotalA(){
 		ParentActivity.WeighingDisplayIndex = CAN1CommManager.DATA_STATE_WEIGHINGDISPLAY_TOTAL_A;
 		CAN1Comm.Set_WeighingDisplayMode1_1910_PGN61184_62(ParentActivity.WeighingDisplayIndex);
+		CAN1Comm.Set_SuddenChangeError_PGN61184_62(CAN1Comm.Get_SuddenChangeError_PGN65450());
+		CAN1Comm.Set_BucketFullInError_PGN61184_62(CAN1Comm.Get_BucketFullInError_PGN65450());
 		CAN1Comm.TxCANToMCU(62);
 		CAN1Comm.Set_WeighingDisplayMode1_1910_PGN61184_62(15);
 		textViewInitialization.setText(ParentActivity.getResources().getString(R.string.Total_A) 
@@ -211,6 +215,8 @@ public class MainBKeyWorkLoadDisplayFragment extends ParentFragment{
 	public void ClickTotalB(){
 		ParentActivity.WeighingDisplayIndex = CAN1CommManager.DATA_STATE_WEIGHINGDISPLAY_TOTAL_B;
 		CAN1Comm.Set_WeighingDisplayMode1_1910_PGN61184_62(ParentActivity.WeighingDisplayIndex);
+		CAN1Comm.Set_SuddenChangeError_PGN61184_62(CAN1Comm.Get_SuddenChangeError_PGN65450());
+		CAN1Comm.Set_BucketFullInError_PGN61184_62(CAN1Comm.Get_BucketFullInError_PGN65450());
 		CAN1Comm.TxCANToMCU(62);
 		CAN1Comm.Set_WeighingDisplayMode1_1910_PGN61184_62(15);
 		textViewInitialization.setText(ParentActivity.getResources().getString(R.string.Total_B) 
@@ -220,6 +226,8 @@ public class MainBKeyWorkLoadDisplayFragment extends ParentFragment{
 	public void ClickTotalC(){
 		ParentActivity.WeighingDisplayIndex = CAN1CommManager.DATA_STATE_WEIGHINGDISPLAY_TOTAL_C;
 		CAN1Comm.Set_WeighingDisplayMode1_1910_PGN61184_62(ParentActivity.WeighingDisplayIndex);
+		CAN1Comm.Set_SuddenChangeError_PGN61184_62(CAN1Comm.Get_SuddenChangeError_PGN65450());
+		CAN1Comm.Set_BucketFullInError_PGN61184_62(CAN1Comm.Get_BucketFullInError_PGN65450());
 		CAN1Comm.TxCANToMCU(62);
 		CAN1Comm.Set_WeighingDisplayMode1_1910_PGN61184_62(15);
 		textViewInitialization.setText(ParentActivity.getResources().getString(R.string.Total_C) 
@@ -228,6 +236,8 @@ public class MainBKeyWorkLoadDisplayFragment extends ParentFragment{
 	}
 	public void ClickInit(){
 		CAN1Comm.Set_RequestTotalWorkWeightReset_PGN61184_62(ParentActivity.WeighingDisplayIndex);
+		CAN1Comm.Set_SuddenChangeError_PGN61184_62(CAN1Comm.Get_SuddenChangeError_PGN65450());
+		CAN1Comm.Set_BucketFullInError_PGN61184_62(CAN1Comm.Get_BucketFullInError_PGN65450());
 		CAN1Comm.Set_RequestReweighing_PGN61184_62(3);
 		CAN1Comm.TxCANToMCU(62);
 		CAN1Comm.Set_RequestTotalWorkWeightReset_PGN61184_62(15);

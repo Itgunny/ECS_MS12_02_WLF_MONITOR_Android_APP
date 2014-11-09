@@ -32,6 +32,7 @@ import taeha.wheelloader.fseries_monitor.menu.mode.EngineSpeedFragment;
 import taeha.wheelloader.fseries_monitor.menu.mode.MaxFlowFragment;
 import taeha.wheelloader.fseries_monitor.menu.mode.MenuModeFragment;
 import taeha.wheelloader.fseries_monitor.menu.mode.SoftStopFragment;
+import taeha.wheelloader.fseries_monitor.menu.mode.SpeedometerFreqFragment;
 import taeha.wheelloader.fseries_monitor.menu.mode.WorkLoadFragment;
 import taeha.wheelloader.fseries_monitor.menu.monitoring.EHCUIOInfoFragment;
 import taeha.wheelloader.fseries_monitor.menu.monitoring.FaultHistoryFragment;
@@ -44,6 +45,7 @@ import taeha.wheelloader.fseries_monitor.menu.multimedia.MenuMultimediaFragment;
 import taeha.wheelloader.fseries_monitor.menu.preference.BrightnessFragment;
 import taeha.wheelloader.fseries_monitor.menu.preference.ClockFragment;
 import taeha.wheelloader.fseries_monitor.menu.preference.MenuPreferenceFragment;
+import taeha.wheelloader.fseries_monitor.menu.preference.UnitFragment;
 import android.R.integer;
 import android.os.Bundle;
 import android.text.Layout;
@@ -98,6 +100,7 @@ public class MenuBaseFragment extends ParentFragment{
 	public EngineDelayShutdownFragment	_EngineDelayShutdownFragment;
 	public CameraSettingFragment 		_CameraSettingFragment;
 	public CoolingFanFragment			_CoolingFanFragment;
+	public SpeedometerFreqFragment		_SpeedometerFreqFragment;
 	
 	//Monitoring
 	public MachineMonitoringFragment	_MachineMonitoringFragment;
@@ -125,6 +128,7 @@ public class MenuBaseFragment extends ParentFragment{
 	//Preference
 	public BrightnessFragment						_BrightnessFragment;
 	public ClockFragment							_ClockFragment;
+	public UnitFragment								_UnitFragment;
 	//////////////////////////////////////////////////
 	
 	//ANIMATION///////////////////////////////////////
@@ -203,6 +207,7 @@ public class MenuBaseFragment extends ParentFragment{
 		_EngineDelayShutdownFragment = new EngineDelayShutdownFragment();
 		_CameraSettingFragment = new CameraSettingFragment();
 		_CoolingFanFragment = new CoolingFanFragment();
+		_SpeedometerFreqFragment = new SpeedometerFreqFragment();
 		
 		_MachineMonitoringFragment = new MachineMonitoringFragment();
 		_OperationHistoryFragment = new OperationHistoryFragment();
@@ -225,6 +230,7 @@ public class MenuBaseFragment extends ParentFragment{
 		_ServiceMenuWeighingCompensationFragment = new ServiceMenuWeighingCompensationFragment();
 		_BrightnessFragment = new BrightnessFragment();
 		_ClockFragment = new ClockFragment();
+		_UnitFragment = new UnitFragment();
 	}
 	
 	protected void InitValuables() {
@@ -262,6 +268,7 @@ public class MenuBaseFragment extends ParentFragment{
 		transaction.detach(_EngineDelayShutdownFragment);
 		transaction.detach(_CameraSettingFragment);
 		transaction.detach(_CoolingFanFragment);
+		transaction.detach(_SpeedometerFreqFragment);		
 		transaction.detach(_MachineMonitoringFragment);
 		transaction.detach(_OperationHistoryFragment);
 		transaction.detach(_WeighingInfoFragment);
@@ -283,6 +290,8 @@ public class MenuBaseFragment extends ParentFragment{
 		transaction.detach(_ServiceMenuWeighingCompensationFragment);
 		transaction.detach(_BrightnessFragment);
 		transaction.detach(_ClockFragment);
+		transaction.detach(_UnitFragment);
+		
 		
 		transaction.commit();	
 		
@@ -353,44 +362,44 @@ public class MenuBaseFragment extends ParentFragment{
 	}
 	public void showBodyFaultHistory(){
 		android.app.FragmentTransaction transaction = getFragmentManager().beginTransaction();
-		transaction.remove(_MenuMultimediaFragment);
+		transaction.remove(_FaultHistoryFragment);
 		transaction.replace(R.id.FrameLayout_menu_list_body, _FaultHistoryFragment);
 		transaction.commit();
 	}
 	
 	public void showBodyMachineSecurityPassword(){
 		android.app.FragmentTransaction transaction = getFragmentManager().beginTransaction();
-		transaction.remove(_MenuMultimediaFragment);
+		transaction.remove(_MachineSecurityPasswordFragment);
 		transaction.replace(R.id.FrameLayout_menu_list_body, _MachineSecurityPasswordFragment);
 		transaction.commit();
 	}
 	public void showBodyMachineSecurityList(){
 		android.app.FragmentTransaction transaction = getFragmentManager().beginTransaction();
-		transaction.remove(_MenuMultimediaFragment);
+		transaction.remove(_MachineSecurityListFragment);
 		transaction.replace(R.id.FrameLayout_menu_list_body, _MachineSecurityListFragment);
 		transaction.commit();
 	}
 	public void showBodyMachineSecurityPWChange(){
 		android.app.FragmentTransaction transaction = getFragmentManager().beginTransaction();
-		transaction.remove(_MenuMultimediaFragment);
+		transaction.remove(_MachineSecurityPasswordChangeFragment);
 		transaction.replace(R.id.FrameLayout_menu_list_body, _MachineSecurityPasswordChangeFragment);
 		transaction.commit();
 	}
 	public void showBodyCalibration(){
 		android.app.FragmentTransaction transaction = getFragmentManager().beginTransaction();
-		transaction.remove(_MenuMultimediaFragment);
+		transaction.remove(_CalibrationFragment);
 		transaction.replace(R.id.FrameLayout_menu_list_body, _CalibrationFragment);
 		transaction.commit();
 	}
 	public void showBodyServiceMenuPassword(){
 		android.app.FragmentTransaction transaction = getFragmentManager().beginTransaction();
-		transaction.remove(_MenuMultimediaFragment);
+		transaction.remove(_ServiceMenuPasswordFragment);
 		transaction.replace(R.id.FrameLayout_menu_list_body, _ServiceMenuPasswordFragment);
 		transaction.commit();
 	}
 	public void showBodyServiceMenuList(){
 		android.app.FragmentTransaction transaction = getFragmentManager().beginTransaction();
-		transaction.remove(_MenuMultimediaFragment);
+		transaction.remove(_ServiceMenuListFragment);
 		transaction.replace(R.id.FrameLayout_menu_list_body, _ServiceMenuListFragment);
 		transaction.commit();
 	}
@@ -460,6 +469,13 @@ public class MenuBaseFragment extends ParentFragment{
 		transaction.commit();
 		
 	}
+	public void showBodySpeedometerFreq(){
+		android.app.FragmentTransaction transaction = getFragmentManager().beginTransaction();
+		transaction.remove(_SpeedometerFreqFragment);
+		transaction.replace(R.id.FrameLayout_menu_inter_body, _SpeedometerFreqFragment);
+		transaction.commit();
+		
+	}
 	public void showBodyMachineMonitoring(){
 		android.app.FragmentTransaction transaction = getFragmentManager().beginTransaction();
 		transaction.remove(_MachineMonitoringFragment);
@@ -469,96 +485,102 @@ public class MenuBaseFragment extends ParentFragment{
 	}
 	public void showBodyOperationHistory(){
 		android.app.FragmentTransaction transaction = getFragmentManager().beginTransaction();
-		transaction.remove(_MachineMonitoringFragment);
+		transaction.remove(_OperationHistoryFragment);
 		transaction.replace(R.id.FrameLayout_menu_inter_body, _OperationHistoryFragment);
 		transaction.commit();
 		
 	}
 	public void showBodyWeighingInfo(){
 		android.app.FragmentTransaction transaction = getFragmentManager().beginTransaction();
-		transaction.remove(_MachineMonitoringFragment);
+		transaction.remove(_WeighingInfoFragment);
 		transaction.replace(R.id.FrameLayout_menu_inter_body, _WeighingInfoFragment);
 		transaction.commit();
 		
 	}
 	public void showBodyEHCUIOInfo(){
 		android.app.FragmentTransaction transaction = getFragmentManager().beginTransaction();
-		transaction.remove(_MachineMonitoringFragment);
+		transaction.remove(_EHCUIOInfoFragment);
 		transaction.replace(R.id.FrameLayout_menu_inter_body, _EHCUIOInfoFragment);
 		transaction.commit();
 		
 	}	
 	public void showBodyVersionInfo(){
 		android.app.FragmentTransaction transaction = getFragmentManager().beginTransaction();
-		transaction.remove(_MachineMonitoringFragment);
+		transaction.remove(_VersionInfoFragment);
 		transaction.replace(R.id.FrameLayout_menu_inter_body, _VersionInfoFragment);
 		transaction.commit();
 		
 	}	
 	public void showBodyESL(){
 		android.app.FragmentTransaction transaction = getFragmentManager().beginTransaction();
-		transaction.remove(_MachineMonitoringFragment);
+		transaction.remove(_MachineSecurityESLFragment);
 		transaction.replace(R.id.FrameLayout_menu_inter_body, _MachineSecurityESLFragment);
 		transaction.commit();
 		
 	}
 	public void showBodySmartKey(){
 		android.app.FragmentTransaction transaction = getFragmentManager().beginTransaction();
-		transaction.remove(_MachineMonitoringFragment);
+		transaction.remove(_MachineSecuritySmartKeyFragment);
 		transaction.replace(R.id.FrameLayout_menu_inter_body, _MachineSecuritySmartKeyFragment);
 		transaction.commit();
 		
 	}
 	public void showBodyAngleCalibration(){
 		android.app.FragmentTransaction transaction = getFragmentManager().beginTransaction();
-		transaction.remove(_MachineMonitoringFragment);
+		transaction.remove(_AngleCalibration);
 		transaction.replace(R.id.FrameLayout_menu_inter_body, _AngleCalibration);
 		transaction.commit();
 		
 	}
 	public void showBodyPressureCalibration(){
 		android.app.FragmentTransaction transaction = getFragmentManager().beginTransaction();
-		transaction.remove(_MachineMonitoringFragment);
+		transaction.remove(_PressureCalibration);
 		transaction.replace(R.id.FrameLayout_menu_inter_body, _PressureCalibration);
 		transaction.commit();
 		
 	}
 	public void showBodyChangeASPhoneNumber(){
 		android.app.FragmentTransaction transaction = getFragmentManager().beginTransaction();
-		transaction.remove(_MachineMonitoringFragment);
+		transaction.remove(_ChangeASPhoneNumberFragment);
 		transaction.replace(R.id.FrameLayout_menu_inter_body, _ChangeASPhoneNumberFragment);
 		transaction.commit();
 		
 	}
 	public void showBodySpeedLimit(){
 		android.app.FragmentTransaction transaction = getFragmentManager().beginTransaction();
-		transaction.remove(_MachineMonitoringFragment);
+		transaction.remove(_ServiceMenuSpeedLimitFragment);
 		transaction.replace(R.id.FrameLayout_menu_inter_body, _ServiceMenuSpeedLimitFragment);
 		transaction.commit();
 		
 	}
 	public void showBodyWeighingCompensation(){
 		android.app.FragmentTransaction transaction = getFragmentManager().beginTransaction();
-		transaction.remove(_MachineMonitoringFragment);
+		transaction.remove(_ServiceMenuWeighingCompensationFragment);
 		transaction.replace(R.id.FrameLayout_menu_inter_body, _ServiceMenuWeighingCompensationFragment);
 		transaction.commit();
 		
 	}
 	public void showBodyBrightness(){
 		android.app.FragmentTransaction transaction = getFragmentManager().beginTransaction();
-		transaction.remove(_MachineMonitoringFragment);
+		transaction.remove(_BrightnessFragment);
 		transaction.replace(R.id.FrameLayout_menu_inter_body, _BrightnessFragment);
 		transaction.commit();
 		
 	}
 	public void showBodyClock(){
 		android.app.FragmentTransaction transaction = getFragmentManager().beginTransaction();
-		transaction.remove(_MachineMonitoringFragment);
+		transaction.remove(_ClockFragment);
 		transaction.replace(R.id.FrameLayout_menu_inter_body, _ClockFragment);
 		transaction.commit();
 		
 	}
-	
+	public void showBodyUnit(){
+		android.app.FragmentTransaction transaction = getFragmentManager().beginTransaction();
+		transaction.remove(_UnitFragment);
+		transaction.replace(R.id.FrameLayout_menu_inter_body, _UnitFragment);
+		transaction.commit();
+		
+	}
 	
 	/////////////////////////////////////////////////////////////////////
 	//Show Fragment Animation////////////////////////////////////////////
@@ -666,6 +688,10 @@ public class MenuBaseFragment extends ParentFragment{
 		showInterAnimation();
 		InterBodyAnimation.StartChangeAnimation(_CoolingFanFragment);
 	}
+	public void showBodySpeedometerFreqAnimation(){
+		showInterAnimation();
+		InterBodyAnimation.StartChangeAnimation(_SpeedometerFreqFragment);
+	}
 	public void showBodyMachineMonitoringAnimation(){
 		showInterAnimation();
 		InterBodyAnimation.StartChangeAnimation(_MachineMonitoringFragment);
@@ -722,6 +748,11 @@ public class MenuBaseFragment extends ParentFragment{
 		showInterAnimation();
 		InterBodyAnimation.StartChangeAnimation(_ClockFragment);
 	}
+	public void showBodyUnitAnimation(){
+		showInterAnimation();
+		InterBodyAnimation.StartChangeAnimation(_UnitFragment);
+	}
+	
 	
 	/////////////////////////////////////////////////////////////////////
 	

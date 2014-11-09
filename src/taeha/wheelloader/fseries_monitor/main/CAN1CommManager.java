@@ -143,9 +143,9 @@ public class CAN1CommManager extends ICAN1CommManager.Stub{		// ttySAC1(Linux), 
 	public static final int DATA_STATE_RIDECONTROL_ON			= 1;
 	public static final int DATA_STATE_RIDECONTROL_AUTO			= 2;
 	
-	public static final int DATA_STATE_REVERSEFAN_OFF			= 0;
-	public static final int DATA_STATE_REVERSEFAN_FORWARD		= 1;
-	public static final int DATA_STATE_REVERSEFAN_REVERSE		= 2;
+	public static final int DATA_STATE_COOLINGFAN_OFF			= 0;
+	public static final int DATA_STATE_COOLINGFAN_FORWARD		= 1;
+	public static final int DATA_STATE_COOLINGFAN_REVERSE		= 2;
 	
 	public static final int DATA_STATE_KEY_MAINLIGHT_OFF		= 0;
 	public static final int DATA_STATE_KEY_MAINLIGHT_LV1		= 1;
@@ -182,6 +182,47 @@ public class CAN1CommManager extends ICAN1CommManager.Stub{		// ttySAC1(Linux), 
 	
 	public static final int DATA_STATE_KEY_DETENT_BOOM_POS			= 0;
 	public static final int DATA_STATE_KEY_DETENT_BUCKET_POS		= 2;
+	
+	public static final int DATA_STATE_ENGINERPM_DOWN				= 0;
+	public static final int DATA_STATE_ENGINERPM_UP					= 1;
+	
+	public static final int DATA_STATE_KICKDOWN_UPDOWN				= 0;
+	public static final int DATA_STATE_KICKDOWN_DOWNONLY			= 1;
+	
+	public static final int DATA_STATE_BUCKETPRIORITY_OFF			= 0;
+	public static final int DATA_STATE_BUCKETPRIORITY_ON			= 1;
+		
+	public static final int DATA_STATE_SOFTSTOP_BOOMUP_OFF			= 0;
+	public static final int DATA_STATE_SOFTSTOP_BOOMUP_ON			= 1;
+	
+	public static final int DATA_STATE_SOFTSTOP_BOOMDOWN_OFF		= 0;
+	public static final int DATA_STATE_SOFTSTOP_BOOMDOWN_ON			= 1;
+	
+	public static final int DATA_STATE_SOFTSTOP_BUCKETIN_OFF		= 0;
+	public static final int DATA_STATE_SOFTSTOP_BUCKETIN_ON			= 1;
+	
+	public static final int DATA_STATE_SOFTSTOP_BUCKETOUT_OFF		= 0;
+	public static final int DATA_STATE_SOFTSTOP_BUCKETOUT_ON		= 1;
+	
+	public static final int DATA_STATE_REVERSEFAN_OFF				= 0;
+	public static final int DATA_STATE_REVERSEFAN_MANUAL			= 1;
+	public static final int DATA_STATE_REVERSEFAN_AUTO				= 2;
+	
+	public static final int DATA_STATE_ESL_MODE_DISABLE				= 0;
+	public static final int DATA_STATE_ESL_MODE_ENABLE_CONTINUOUS	= 1;
+	public static final int DATA_STATE_ESL_MODE_ENABLE_INTERVAL		= 2;
+	
+	public static final int DATA_STATE_ESL_INTERVAL_5MIN			= 5;
+	public static final int DATA_STATE_ESL_INTERVAL_10MIN			= 10;
+	public static final int DATA_STATE_ESL_INTERVAL_20MIN			= 20;
+	public static final int DATA_STATE_ESL_INTERVAL_30MIN			= 30;
+	
+	public static final int DATA_STATE_ESL_INTERVAL_1HR				= 101;
+	public static final int DATA_STATE_ESL_INTERVAL_2HR				= 102;
+	public static final int DATA_STATE_ESL_INTERVAL_4HR				= 104;
+	
+	public static final int DATA_STATE_ESL_INTERVAL_1DAY			= 201;
+	public static final int DATA_STATE_ESL_INTERVAL_2DAY			= 202;
 	///////////////////////////////////////////////////////////////
 	
 	////////////////////Shutdown State/////////////////////////////
@@ -569,6 +610,8 @@ public class CAN1CommManager extends ICAN1CommManager.Stub{		// ttySAC1(Linux), 
 //	public int Get_SettingTimeofrDelayedEngineShutdown_366_PGN61184_121(){ return service.Get_SettingTimeofrDelayedEngineShutdown_366_PGN61184_121();}
 	//////RX_ENGINE_SHUTDOWN_MODE_STATUS_61184_122///////
 	public int Get_MessageType_PGN61184_122(){ return service.Get_MessageType_PGN61184_122();}
+	public int Get_AutomaticEngineShutdown_363_PGN61184_122(){ return service.Get_AutomaticEngineShutdown_363_PGN61184_122();}
+	public int Get_AutomaticEngineShutdownType_PGN61184_122(){ return service.Get_AutomaticEngineShutdownType_PGN61184_122();}
 	public int Get_SettingTimeforAutomaticEngineShutdown_364_PGN61184_122(){ return service.Get_SettingTimeforAutomaticEngineShutdown_364_PGN61184_122();}
 	public int Get_RemainingTimeforAutomaticEngineShutdown_PGN61184_122(){ return service.Get_RemainingTimeforAutomaticEngineShutdown_PGN61184_122();}
 	public int Get_SettingTimeforDelayedEngineShutdown_366_PGN61184_122(){ return service.Get_SettingTimeforDelayedEngineShutdown_366_PGN61184_122();}
@@ -868,6 +911,11 @@ public class CAN1CommManager extends ICAN1CommManager.Stub{		// ttySAC1(Linux), 
 	public int Get_BucketOutEPPRValveCurrent_2307_PGN65517(){ return service.Get_BucketOutEPPRValveCurrent_2307_PGN65517();}
 	public int Get_AUX1EPPRValveCurrent_2308_PGN65517(){ return service.Get_AUX1EPPRValveCurrent_2308_PGN65517();}
 	public int Get_AUX2EPPRValveCurrent_2309_PGN65517(){ return service.Get_AUX2EPPRValveCurrent_2309_PGN65517();}
+	//////RX_WHEEL_LOADER_EHCU_STATUS2_65524///////
+	public int Get_SoftStopBoomUp_2337_PGN65524(){ return service.Get_SoftStopBoomUp_2337_PGN65524();}
+	public int Get_SoftStopBoomDown_2338_PGN65524(){ return service.Get_SoftStopBoomDown_2338_PGN65524();}
+	public int Get_SoftStopBucketIn_2339_PGN65524(){ return service.Get_SoftStopBucketIn_2339_PGN65524();}
+	public int Get_SoftStopBucketOut_2340_PGN65524(){ return service.Get_SoftStopBucketOut_2340_PGN65524();}
 	//////RX_ELECTRICAL_SWITCH_RELAY_OPERATION_STATUS_65527///////
 	public int Get_TravelAlarmOperationStatus_3431_PGN65527(){ return service.Get_TravelAlarmOperationStatus_3431_PGN65527();}
 	public int Get_WasherOperationStatus_3432_PGN65527(){ return service.Get_WasherOperationStatus_3432_PGN65527();}
@@ -1007,6 +1055,7 @@ public class CAN1CommManager extends ICAN1CommManager.Stub{		// ttySAC1(Linux), 
 	//////TX_ENGINE_SHUTDOWN_MODE_SETTING_61184_121///////
 	public void Set_MessageType_PGN61184_121(int Data){ service.Set_MessageType_PGN61184_121(Data);}
 	public void Set_AutomaticEngineShutdown_363_PGN61184_121(int Data){ service.Set_AutomaticEngineShutdown_363_PGN61184_121(Data);}
+	public void Set_AutomaticEngineShutdownTypeControlByte_PGN61184_121(int Data){ service.Set_AutomaticEngineShutdownTypeControlByte_PGN61184_121(Data);}
 	public void Set_SettingTimeforAutomaticEngineShutdown_364_PGN61184_121(int Data){ service.Set_SettingTimeforAutomaticEngineShutdown_364_PGN61184_121(Data);}
 	public void Set_EngineShutdownCotrolByte_PGN61184_121(int Data){ service.Set_EngineShutdownCotrolByte_PGN61184_121(Data);}
 	public void Set_DelayedEngineShutdown_365_PGN61184_121(int Data){ service.Set_DelayedEngineShutdown_365_PGN61184_121(Data);}
@@ -1054,6 +1103,10 @@ public class CAN1CommManager extends ICAN1CommManager.Stub{		// ttySAC1(Linux), 
 	public void Set_FlowFineModulationOperation_2302_PGN61184_203(int Data){ service.Set_FlowFineModulationOperation_2302_PGN61184_203(Data);}
 	public void Set_AuxiliaryAttachmentMaxFlowLevel_PGN61184_203(int Data){ service.Set_AuxiliaryAttachmentMaxFlowLevel_PGN61184_203(Data);}
 	public void Set_BoomLeverFloatingPosition_PGN61184_203(int Data){ service.Set_BoomLeverFloatingPosition_PGN61184_203(Data);}
+	public void Set_SoftStopBoomUp_2337_PGN61184_203(int Data){ service.Set_SoftStopBoomUp_2337_PGN61184_203(Data);}
+	public void Set_SoftStopBoomDown_2338_PGN61184_203(int Data){ service.Set_SoftStopBoomDown_2338_PGN61184_203(Data);}
+	public void Set_SoftStopBucketIn_2339_PGN61184_203(int Data){ service.Set_SoftStopBucketIn_2339_PGN61184_203(Data);}
+	public void Set_SoftStopBucketOut_2340_PGN61184_203(int Data){ service.Set_SoftStopBucketOut_2340_PGN61184_203(Data);}
 	//////TX_MONIOTR_STATUS_65327///////
 	public void Set_MonitorOperationMode_834_PGN65327(int Data){ service.Set_MonitorOperationMode_834_PGN65327(Data);}
 	public void Set_RequestBuzzerStop_PGN65327(int Data){ service.Set_RequestBuzzerStop_PGN65327(Data);}

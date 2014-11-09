@@ -29,11 +29,14 @@ public class MaxFlowFragment extends ParentFragment{
 	ImageButton imgbtnOK;
 	ImageButton	imgbtnCancel;
 	
+	ImageButton imgbtnPlus;
+	ImageButton imgbtnMunus;
+	
 	TextView	textViewMaxFlow;
 	//////////////////////////////////////////////////
 	
 	//VALUABLE////////////////////////////////////////
-
+	int MaxFlowLevel;
 	//////////////////////////////////////////////////
 	
 	//Fragment////////////////////////////////////////
@@ -76,9 +79,13 @@ public class MaxFlowFragment extends ParentFragment{
 		imgbtnOK = (ImageButton)mRoot.findViewById(R.id.ImageButton_menu_body_mode_maxflow_low_ok);
 		imgbtnCancel = (ImageButton)mRoot.findViewById(R.id.ImageButton_menu_body_mode_maxflow_low_cancel);
 
+		
+		imgbtnPlus = (ImageButton)mRoot.findViewById(R.id.imageButton_menu_body_mode_maxflow_plus);
+		imgbtnMunus = (ImageButton)mRoot.findViewById(R.id.imageButton_menu_body_mode_maxflow_minus);
+	
+		
 		textViewMaxFlow = (TextView)mRoot.findViewById(R.id.textView_menu_body_mode_maxflow_data);
 
-	
 	}
 
 	protected void InitValuables() {
@@ -107,18 +114,34 @@ public class MaxFlowFragment extends ParentFragment{
 				ClickCancel();
 			}
 		});
+		imgbtnPlus.setOnClickListener(new View.OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				ClickPlus();
+			}
+		});
+		imgbtnMunus.setOnClickListener(new View.OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				ClickMinus();
+			}
+		});
 	}
 
 	@Override
 	protected void GetDataFromNative() {
 		// TODO Auto-generated method stub
-		
+		MaxFlowLevel = CAN1Comm.Get_AuxiliaryAttachmentMaxFlowLevel_2303_PGN65517();
 	}
 
 	@Override
 	protected void UpdateUI() {
 		// TODO Auto-generated method stub
-		
+		MaxFlowLevelDisplay(MaxFlowLevel);
 	}
 	/////////////////////////////////////////////////////////////////////	
 	public void ClickOK(){
@@ -137,9 +160,22 @@ public class MaxFlowFragment extends ParentFragment{
 		ParentActivity._MenuBaseFragment.showBodyModeAnimation();
 		ParentActivity._MenuBaseFragment._MenuModeFragment.setFirstScreen(Home.SCREEN_STATE_MENU_MODE_HYD_TOP);
 	}
-
+	public void ClickPlus(){
+		CAN1Comm.Set_AuxiliaryAttachmentMaxFlowLevel_PGN61184_203(1);
+		CAN1Comm.TxCANToMCU(203);
+		CAN1Comm.Set_AuxiliaryAttachmentMaxFlowLevel_PGN61184_203(3);
+	}
+	public void ClickMinus(){
+		CAN1Comm.Set_AuxiliaryAttachmentMaxFlowLevel_PGN61184_203(0);
+		CAN1Comm.TxCANToMCU(203);
+		CAN1Comm.Set_AuxiliaryAttachmentMaxFlowLevel_PGN61184_203(3);
+	}
 	/////////////////////////////////////////////////////////////////////
-	
+	public void MaxFlowLevelDisplay(int data){
+		if(data > 15)
+			data = 0;
+		textViewMaxFlow.setText(Integer.toString(data));
+	}
 	/////////////////////////////////////////////////////////////////////
 	
 }

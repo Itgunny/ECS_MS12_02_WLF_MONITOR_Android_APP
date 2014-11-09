@@ -122,7 +122,12 @@ public class MenuPreferenceFragment extends MenuBodyList_ParentFragment{
 	@Override
 	public void ClickList3() {
 		// TODO Auto-generated method stub
-		
+		if(ParentActivity.AnimationRunningFlag == true)
+			return;
+		else
+			ParentActivity.StartAnimationRunningTimer();
+
+		ParentActivity._MenuBaseFragment.showBodyUnitAnimation();
 	}
 
 	@Override

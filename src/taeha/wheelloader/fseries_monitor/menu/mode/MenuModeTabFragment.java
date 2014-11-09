@@ -54,7 +54,7 @@ public class MenuModeTabFragment extends ParentFragment{
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
-		 TAG = "MenuModeTabFragment";
+		TAG = "MenuModeTabFragment";
 		Log.d(TAG, "onCreateView");
 		mRoot = inflater.inflate(R.layout.menu_body_mode_tab, null);
 		InitResource();
@@ -215,6 +215,11 @@ public class MenuModeTabFragment extends ParentFragment{
 			break;
 		case Home.SCREEN_STATE_MENU_MODE_ETC_TOP:
 			ClickETC();
+			break;
+		case Home.SCREEN_STATE_MENU_MODE_ENGINETM_ENGINESETTING_TOP:
+			ParentActivity._MenuBaseFragment._MenuModeFragment.HideTab();
+			ParentActivity._MenuBaseFragment._MenuModeFragment.HideEngTM();
+			ParentActivity._MenuBaseFragment._MenuModeFragment.showEngineSetting();
 			break;
 		}
 	}

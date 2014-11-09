@@ -10,6 +10,7 @@ import android.view.ViewGroup.LayoutParams;
 import android.widget.ImageButton;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import taeha.wheelloader.fseries_monitor.main.CAN1CommManager;
 import taeha.wheelloader.fseries_monitor.main.Home;
 import taeha.wheelloader.fseries_monitor.main.ParentPopup;
 import taeha.wheelloader.fseries_monitor.main.R;
@@ -104,11 +105,15 @@ public class BucketPriorityPopup extends ParentPopup{
 	}
 	///////////////////////////////////////////////////////////////////////////////
 	public void ClickOn(){
-
+		CAN1Comm.Set_BucketPriorityOperation_2301_PGN61184_203(CAN1CommManager.DATA_STATE_BUCKETPRIORITY_ON);
+		CAN1Comm.TxCANToMCU(203);
+		CAN1Comm.Set_BucketPriorityOperation_2301_PGN61184_203(3);
 		this.dismiss();
 	}	
 	public void ClickOff(){
-
+		CAN1Comm.Set_BucketPriorityOperation_2301_PGN61184_203(CAN1CommManager.DATA_STATE_BUCKETPRIORITY_OFF);
+		CAN1Comm.TxCANToMCU(203);
+		CAN1Comm.Set_BucketPriorityOperation_2301_PGN61184_203(3);
 		this.dismiss();
 	}	
 }

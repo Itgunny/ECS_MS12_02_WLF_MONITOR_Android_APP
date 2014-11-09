@@ -30,21 +30,31 @@
             android:orientation="horizontal" >
 
             <RadioButton
-                android:id="@+id/radioButton_menu_body_mode_coolingfan_manual"
-                android:layout_width="300dp"
+                android:id="@+id/radioButton_menu_body_mode_coolingfan_off"
+                android:layout_width="200dp"
                 android:layout_height="wrap_content"
                 android:button="@drawable/_selector_radio_btn"
-                android:text="@string/Manual"
+                android:text="@string/Off"
                 android:textColor="@drawable/_selector_radio_txt_white_amber"
                 android:textSize="25sp" />
 
             <RadioButton
                 android:id="@+id/radioButton_menu_body_mode_coolingfan_auto"
-                android:layout_width="300dp"
+                android:layout_width="200dp"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="40dp"
                 android:button="@drawable/_selector_radio_btn"
                 android:text="@string/Automatic"
+                android:textColor="@drawable/_selector_radio_txt_white_amber"
+                android:textSize="25sp" />
+            
+            <RadioButton
+                android:id="@+id/radioButton_menu_body_mode_coolingfan_manual"
+                android:layout_width="200dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="40dp"
+                android:button="@drawable/_selector_radio_btn"
+                android:text="@string/Manual"
                 android:textColor="@drawable/_selector_radio_txt_white_amber"
                 android:textSize="25sp" />
         </RadioGroup>

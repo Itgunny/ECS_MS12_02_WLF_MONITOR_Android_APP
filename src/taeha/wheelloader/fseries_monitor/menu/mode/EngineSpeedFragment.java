@@ -5,6 +5,7 @@ import taeha.wheelloader.fseries_monitor.animation.ChangeFragmentAnimation;
 import taeha.wheelloader.fseries_monitor.animation.DisappearAnimation;
 import taeha.wheelloader.fseries_monitor.animation.MainBodyShiftAnimation;
 import taeha.wheelloader.fseries_monitor.animation.LeftRightShiftAnimation;
+import taeha.wheelloader.fseries_monitor.main.CAN1CommManager;
 import taeha.wheelloader.fseries_monitor.main.Home;
 import taeha.wheelloader.fseries_monitor.main.ParentFragment;
 import taeha.wheelloader.fseries_monitor.main.R;
@@ -34,7 +35,7 @@ public class EngineSpeedFragment extends ParentFragment{
 	//////////////////////////////////////////////////
 	
 	//VALUABLE////////////////////////////////////////
-
+	int EngineRPM;
 	//////////////////////////////////////////////////
 	
 	//Fragment////////////////////////////////////////
@@ -61,13 +62,15 @@ public class EngineSpeedFragment extends ParentFragment{
 		InitValuables();
 		InitButtonListener();
 		
-		ParentActivity.ScreenIndex = ParentActivity.SCREEN_STATE_MENU_MODE_ENGINETM_ENGINESPEED;
+		ParentActivity.ScreenIndex = ParentActivity.SCREEN_STATE_MENU_MODE_ENGINETM_ENGINESETTING_SPEED;
 		ParentActivity._MenuBaseFragment._MenuInterTitleFragment.SetTitleText(ParentActivity.getResources().getString(R.string.Engine_Speed));
 		return mRoot;
 	}
-	
+
 	////////////////////////////////////////////////
 	
+	
+
 	
 
 	//Common Function//////////////////////////////
@@ -122,13 +125,13 @@ public class EngineSpeedFragment extends ParentFragment{
 	@Override
 	protected void GetDataFromNative() {
 		// TODO Auto-generated method stub
-		
+		EngineRPM = CAN1Comm.Get_EngineSpeed_310_PGN65431();
 	}
 
 	@Override
 	protected void UpdateUI() {
 		// TODO Auto-generated method stub
-		
+		EngineRPMDisplay(EngineRPM);
 	}
 	/////////////////////////////////////////////////////////////////////	
 	public void ClickOK(){
@@ -137,16 +140,24 @@ public class EngineSpeedFragment extends ParentFragment{
 		else
 			ParentActivity.StartAnimationRunningTimer();
 		ParentActivity._MenuBaseFragment.showBodyModeAnimation();
-		ParentActivity._MenuBaseFragment._MenuModeFragment.setFirstScreen(Home.SCREEN_STATE_MENU_MODE_ENGINETM_TOP);
+		ParentActivity._MenuBaseFragment._MenuModeFragment.setFirstScreen(Home.SCREEN_STATE_MENU_MODE_ENGINETM_ENGINESETTING_TOP);
 	}
 	public void ClickPlus(){
-		
+		CAN1Comm.Set_RequestEngineLowIdleSpeed_PGN61184_109(CAN1CommManager.DATA_STATE_ENGINERPM_UP);
+		CAN1Comm.TxCANToMCU(109);
+		CAN1Comm.Set_RequestEngineLowIdleSpeed_PGN61184_109(3); 
 	}
 	public void ClickMinus(){
-		
+		CAN1Comm.Set_RequestEngineLowIdleSpeed_PGN61184_109(CAN1CommManager.DATA_STATE_ENGINERPM_DOWN);
+		CAN1Comm.TxCANToMCU(109);
+		CAN1Comm.Set_RequestEngineLowIdleSpeed_PGN61184_109(3); 
 	}
 	/////////////////////////////////////////////////////////////////////
-	
+	public void EngineRPMDisplay(int Data){
+		if(Data > 8031)	// Operational Range : 0 to 8,031
+			Data = 0;
+		textViewRPM.setText(Integer.toString(Data));
+	}
 	/////////////////////////////////////////////////////////////////////
 	
 }

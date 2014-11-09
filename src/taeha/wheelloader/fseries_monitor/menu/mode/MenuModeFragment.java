@@ -35,10 +35,11 @@ public class MenuModeFragment extends ParentFragment{
 	//////////////////////////////////////////////////
 	
 	//Fragment////////////////////////////////////////
-	public MenuModeTabFragment	_MenuModeTabFragment;
-	MenuModeEngTMFragment _MenuModeEngTMFragment;
-	MenuModeHYDFragment _MenuModeHYDFragment;
-	MenuModeETCFragment _MenuModeETCFragment;
+	public MenuModeTabFragment		_MenuModeTabFragment;
+	MenuModeEngTMFragment 			_MenuModeEngTMFragment;
+	MenuModeHYDFragment 			_MenuModeHYDFragment;
+	MenuModeETCFragment 			_MenuModeETCFragment;
+	EngineSettingFragment 			_EngineSettingFragment;
 	//////////////////////////////////////////////////
 	
 	//ANIMATION///////////////////////////////////////
@@ -90,7 +91,7 @@ public class MenuModeFragment extends ParentFragment{
 		_MenuModeEngTMFragment = new MenuModeEngTMFragment();
 		_MenuModeHYDFragment = new MenuModeHYDFragment();
 		_MenuModeETCFragment = new MenuModeETCFragment();
-		
+		_EngineSettingFragment = new EngineSettingFragment();
 	}
 	@Override
 	protected void InitButtonListener() {
@@ -130,12 +131,28 @@ public class MenuModeFragment extends ParentFragment{
 		transaction.replace(R.id.FrameLayout_menu_body_mode_list, _MenuModeETCFragment);
 		transaction.commit();
 	}
+	public void showEngineSetting(){
+		android.app.FragmentTransaction transaction = getFragmentManager().beginTransaction();
+		transaction.replace(R.id.FrameLayout_menu_body_mode_list, _EngineSettingFragment);
+		transaction.commit();
+	}
+	
 	public void showBlank(){
 		android.app.FragmentTransaction transaction = getFragmentManager().beginTransaction();
 		transaction.remove(_MenuModeEngTMFragment);
 		transaction.remove(_MenuModeHYDFragment);
 		transaction.remove(_MenuModeETCFragment);
 		transaction.commit();		
+	}
+	public void HideTab(){
+		android.app.FragmentTransaction transaction = getFragmentManager().beginTransaction();
+		transaction.remove(_MenuModeTabFragment);
+		transaction.commit();	
+	}
+	public void HideEngTM(){
+		android.app.FragmentTransaction transaction = getFragmentManager().beginTransaction();
+		transaction.remove(_MenuModeEngTMFragment);
+		transaction.commit();	
 	}
 	//Navi KeyButton//////////////////////////////////////////////////////////
 	public void ClickLeft(){
