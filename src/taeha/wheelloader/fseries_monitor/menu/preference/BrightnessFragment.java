@@ -33,7 +33,7 @@ public class BrightnessFragment extends ParentFragment{
 	//////////////////////////////////////////////////
 	
 	//VALUABLE////////////////////////////////////////
-
+	int BrightnessManualAuto;
 	//////////////////////////////////////////////////
 	
 	//Fragment////////////////////////////////////////
@@ -63,6 +63,8 @@ public class BrightnessFragment extends ParentFragment{
 		
 		ParentActivity.ScreenIndex = ParentActivity.SCREEN_STATE_MENU_PREFERENCE_BRIGHTNESS_TOP;
 		ParentActivity._MenuBaseFragment._MenuInterTitleFragment.SetTitleText(ParentActivity.getResources().getString(R.string.Brightness_Setting));
+		
+		BrightnessDisplay(BrightnessManualAuto);
 		return mRoot;
 	}
 	
@@ -83,6 +85,8 @@ public class BrightnessFragment extends ParentFragment{
 		super.InitValuables();
 		_BrightnessManualFragment = new BrightnessManualFragment();
 		_BrightnessAutoFragment = new BrightnessAutoFragment();		
+		
+		BrightnessManualAuto = ParentActivity.BrightnessManualAuto;
 	}
 	@Override
 	protected void InitButtonListener() {
@@ -142,6 +146,23 @@ public class BrightnessFragment extends ParentFragment{
 		transaction.replace(R.id.FrameLayout_menu_body_preference_brightness, _BrightnessAutoFragment);
 		transaction.commit();
 		
+	}
+	/////////////////////////////////////////////////////////////////////
+	public void BrightnessDisplay(int _data){
+		switch (_data) {
+		case Home.BRIGHTNESS_MANUAL:
+			showBodyBrightnessManual();
+			radioManual.setChecked(true);
+			radioAuto.setChecked(false);
+			break;
+		case Home.BRIGHTNESS_AUTO:
+			showBodyBrightnessAuto();
+			radioManual.setChecked(false);
+			radioAuto.setChecked(true);
+			break;
+		default:
+			break;
+		}
 	}
 	/////////////////////////////////////////////////////////////////////
 	

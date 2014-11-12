@@ -10,6 +10,7 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 import taeha.wheelloader.fseries_monitor.main.CAN1CommManager;
+import taeha.wheelloader.fseries_monitor.main.Home;
 import taeha.wheelloader.fseries_monitor.main.ParentFragment;
 import taeha.wheelloader.fseries_monitor.main.R;
 
@@ -29,6 +30,8 @@ public class MainBKeyWorkLoadFragment extends ParentFragment{
 	TextView textviewWeighingSystemModeData;
 	TextView textViewWeighingDisplayData;
 	TextView textViewErrorDetectData;
+	
+	TextView textViewPressureCalibration;
 	//////////////////////////////////////////////////
 	
 	//VALUABLE////////////////////////////////////////
@@ -79,6 +82,8 @@ public class MainBKeyWorkLoadFragment extends ParentFragment{
 		textviewWeighingSystemModeData = (TextView)mRoot.findViewById(R.id.textView_key_main_b_workload_accumulation_data);
 		textViewWeighingDisplayData = (TextView)mRoot.findViewById(R.id.textView_key_main_b_workload_display_data);
 		textViewErrorDetectData = (TextView)mRoot.findViewById(R.id.textView_key_main_b_workload_errordetect_data);
+		
+		textViewPressureCalibration = (TextView)mRoot.findViewById(R.id.textView_key_main_b_workload_calibration);
 		
 	}
 	
@@ -137,6 +142,14 @@ public class MainBKeyWorkLoadFragment extends ParentFragment{
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
 				ClickDefault();
+			}
+		});
+		textViewPressureCalibration.setOnClickListener(new View.OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				ClickCalibration();
 			}
 		});
 		
@@ -228,7 +241,16 @@ public class MainBKeyWorkLoadFragment extends ParentFragment{
 		ParentActivity.WeighingErrorDetect = CAN1CommManager.DATA_STATE_WEIGHING_ERRORDETECT_ON;
 		SavePref();
 	}
-	
+	public void ClickCalibration(){
+		if(ParentActivity.AnimationRunningFlag == true)
+			return;
+		else
+			ParentActivity.StartAnimationRunningTimer();
+		
+		ParentActivity._MainChangeAnimation.StartChangeAnimation(ParentActivity._MenuBaseFragment);
+		ParentActivity.OldScreenIndex = Home.SCREEN_STATE_MAIN_B_TOP;
+		ParentActivity._MenuBaseFragment.setFirstScreenIndex(Home.SCREEN_STATE_MENU_MANAGEMENT_CALIBRATION_PRESSURE_TOP);
+	}
 	public void SavePref(){
 		SharedPreferences SharePref = ParentActivity.getSharedPreferences("Home", 0);
 		SharedPreferences.Editor edit = SharePref.edit();

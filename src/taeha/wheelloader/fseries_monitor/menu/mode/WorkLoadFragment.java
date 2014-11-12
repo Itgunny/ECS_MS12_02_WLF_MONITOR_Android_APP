@@ -295,7 +295,11 @@ public class WorkLoadFragment extends ParentFragment{
 		ClickErrorDetectionOn();
 	}
 	public void ClickCalibration(){
-		
+		if(ParentActivity.AnimationRunningFlag == true)
+			return;
+		else
+			ParentActivity.StartAnimationRunningTimer();
+		ParentActivity._MenuBaseFragment.showBodyPressureCalibration();	
 	}
 	public void ClickInitialization(){
 		CAN1Comm.Set_RequestTotalWorkWeightReset_PGN61184_62(ParentActivity.WeighingDisplayIndex);

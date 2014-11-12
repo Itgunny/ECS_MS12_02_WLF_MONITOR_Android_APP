@@ -1354,6 +1354,13 @@ public class MainBBaseFragment extends ParentFragment{
 			else
 				_MainBKeyFineModulationFragment.ClickHardKey();
 			break;
+		case CAN1CommManager.CAMERA:
+			if(CAN1Comm.CameraOnFlag ==  CAN1CommManager.STATE_CAMERA_OFF){
+				ParentActivity.ExcuteCamActivitybyKey();
+			}else{
+				ParentActivity.ExitCam();
+			}
+			break;
 		default:
 			break;
 		}

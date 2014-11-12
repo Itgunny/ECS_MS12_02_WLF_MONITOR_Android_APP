@@ -5,6 +5,7 @@ import taeha.wheelloader.fseries_monitor.animation.ChangeFragmentAnimation;
 import taeha.wheelloader.fseries_monitor.animation.DisappearAnimation;
 import taeha.wheelloader.fseries_monitor.animation.MainBodyShiftAnimation;
 import taeha.wheelloader.fseries_monitor.animation.LeftRightShiftAnimation;
+import taeha.wheelloader.fseries_monitor.main.CAN1CommManager;
 import taeha.wheelloader.fseries_monitor.main.Home;
 import taeha.wheelloader.fseries_monitor.main.ParentFragment;
 import taeha.wheelloader.fseries_monitor.main.R;
@@ -19,6 +20,8 @@ import android.widget.AbsoluteLayout;
 import android.widget.FrameLayout;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.RadioButton;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 public class ServiceMenuWeighingCompensationFragment extends ParentFragment{
@@ -43,10 +46,40 @@ public class ServiceMenuWeighingCompensationFragment extends ParentFragment{
 	ImageButton imgbtnBack;
 	TextView textViewDot;
 	ImageButton imgbtnPlusMinu;
+	
+	RadioButton radioNoOffset;
+	RadioButton radioWorkTool1;
+	RadioButton radioWorkTool2;
+	RadioButton radioWorkTool3;
+	
+	RelativeLayout layoutWorkTool1;
+	RelativeLayout layoutWorkTool2;
+	RelativeLayout layoutWorkTool3;
+	
+	TextView textViewWorkTool1Data;
+	TextView textViewWorkTool2Data;
+	TextView textViewWorkTool3Data;
+	
+	TextView textViewWorkTool1Unit;
+	TextView textViewWorkTool2Unit;
+	TextView textViewWorkTool3Unit;
 	//////////////////////////////////////////////////
 	
 	//VALUABLE////////////////////////////////////////
-
+	int WeightOffsetSelectionStatus;
+	int WorkTool1;
+	int WorkTool2;
+	int WorkTool3;
+	
+	int Num100;
+	int Num10;
+	int Num1;
+	int NumUnder;
+	int NumIndex;
+	
+	int NumSetting;
+	
+	Boolean NumSign;
 	//////////////////////////////////////////////////
 	
 	//Fragment////////////////////////////////////////
@@ -72,6 +105,12 @@ public class ServiceMenuWeighingCompensationFragment extends ParentFragment{
 		InitResource();
 		InitValuables();
 		InitButtonListener();
+		
+		CAN1Comm.Set_WeightOffsetSetting_PGN61184_62(CAN1CommManager.DATA_STATE_WEIGHT_OFFSET_SETTING_CALL);
+		CAN1Comm.Set_SuddenChangeError_PGN61184_62(CAN1Comm.Get_SuddenChangeError_PGN65450());
+		CAN1Comm.Set_BucketFullInError_PGN61184_62(CAN1Comm.Get_BucketFullInError_PGN65450());
+		CAN1Comm.TxCANToMCU(62);
+		CAN1Comm.Set_WeightOffsetSetting_PGN61184_62(15);
 		
 		ParentActivity.ScreenIndex = ParentActivity.SCREEN_STATE_MENU_MANAGEMENT_SERVICE_WEIGHINGCOMPENSATION_TOP;
 		ParentActivity._MenuBaseFragment._MenuInterTitleFragment.SetTitleText(ParentActivity.getResources().getString(R.string.Weighing_System_Compensation));
@@ -106,14 +145,42 @@ public class ServiceMenuWeighingCompensationFragment extends ParentFragment{
 		
 		imgbtnPlusMinu = (ImageButton)mRoot.findViewById(R.id.imageButton_menu_body_management_service_weighingcompensation_num_plusminus);
 		
+		radioNoOffset = (RadioButton)mRoot.findViewById(R.id.radioButton_menu_body_management_service_weighingcompensation_nooffset);
+		radioWorkTool1 = (RadioButton)mRoot.findViewById(R.id.radioButton_menu_body_management_service_weighingcompensation_worktool1);
+		radioWorkTool2 = (RadioButton)mRoot.findViewById(R.id.radioButton_menu_body_management_service_weighingcompensation_worktool2);
+		radioWorkTool3 = (RadioButton)mRoot.findViewById(R.id.radioButton_menu_body_management_service_weighingcompensation_worktool3);
+		
+		layoutWorkTool1 = (RelativeLayout)mRoot.findViewById(R.id.RelativeLayout_menu_body_management_service_weighingcompensation_worktool1);
+		layoutWorkTool2 = (RelativeLayout)mRoot.findViewById(R.id.RelativeLayout_menu_body_management_service_weighingcompensation_worktool2);
+		layoutWorkTool3 = (RelativeLayout)mRoot.findViewById(R.id.RelativeLayout_menu_body_management_service_weighingcompensation_worktool3);
+		
+		textViewWorkTool1Data = (TextView)mRoot.findViewById(R.id.textView_menu_body_management_service_weighingcompensation_worktool1_data);
+		textViewWorkTool2Data = (TextView)mRoot.findViewById(R.id.textView_menu_body_management_service_weighingcompensation_worktool2_data);
+		textViewWorkTool3Data = (TextView)mRoot.findViewById(R.id.textView_menu_body_management_service_weighingcompensation_worktool3_data);
+		
+		textViewWorkTool1Unit = (TextView)mRoot.findViewById(R.id.textView_menu_body_management_service_weighingcompensation_worktool1_unit);
+		textViewWorkTool2Unit = (TextView)mRoot.findViewById(R.id.textView_menu_body_management_service_weighingcompensation_worktool2_unit);
+		textViewWorkTool3Unit = (TextView)mRoot.findViewById(R.id.textView_menu_body_management_service_weighingcompensation_worktool3_unit);
 	}
 
 	protected void InitValuables() {
 		// TODO Auto-generated method stub
 		super.InitValuables();
 		
+		NumSign = true;
+		NumIndex = 0;
+		NumSetting = 0;
+		Num100 = 0;
+		Num10 = 0;
+		Num1 = 0;
+		NumUnder = 0;
 		
+		WeightOffsetSelectionStatus = CAN1Comm.Get_WeightOffsetSelectionStatus_PGN61184_63();
+		WorkTool1 = CAN1Comm.Get_WeightOffsetWorkTool1_1922_PGN61184_63();
+		WorkTool2 = CAN1Comm.Get_WeightOffsetWorkTool2_1922_PGN61184_63();
+		WorkTool3 = CAN1Comm.Get_WeightOffsetWorkTool3_1922_PGN61184_63();
 		
+		WeighingSystemCompensationDisplay(WeightOffsetSelectionStatus,WorkTool1,WorkTool2,WorkTool3);
 	}
 	@Override
 	protected void InitButtonListener() {
@@ -238,6 +305,40 @@ public class ServiceMenuWeighingCompensationFragment extends ParentFragment{
 				ClickNumPlusMinus();
 			}
 		});	
+		radioNoOffset.setOnClickListener(new View.OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				ClickNoOffset();
+			}
+		});	
+		radioWorkTool1.setOnClickListener(new View.OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				ClickWorkTool1();
+			}
+		});	
+		radioWorkTool2.setOnClickListener(new View.OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				ClickWorkTool2();
+			}
+		});	
+		radioWorkTool3.setOnClickListener(new View.OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				ClickWorkTool3();
+			}
+		});	
+		
+		
 	}
 
 	@Override
@@ -258,6 +359,43 @@ public class ServiceMenuWeighingCompensationFragment extends ParentFragment{
 		else
 			ParentActivity.StartAnimationRunningTimer();
 		ParentActivity._MenuBaseFragment.showServiceMenuListAnimation();
+		if(WeightOffsetSelectionStatus == CAN1CommManager.DATA_STATE_WEIGHT_OFFSET_SETTING_NOOFFSET){
+			CAN1Comm.Set_WeightOffsetSelection_PGN61184_62(WeightOffsetSelectionStatus);
+			CAN1Comm.Set_SuddenChangeError_PGN61184_62(CAN1Comm.Get_SuddenChangeError_PGN65450());
+			CAN1Comm.Set_BucketFullInError_PGN61184_62(CAN1Comm.Get_BucketFullInError_PGN65450());
+			CAN1Comm.TxCANToMCU(62);
+			CAN1Comm.Set_WeightOffsetSelection_PGN61184_62(15);
+		}else if(WeightOffsetSelectionStatus == CAN1CommManager.DATA_STATE_WEIGHT_OFFSET_SETTING_WORKTOOL_1){
+			CAN1Comm.Set_WeightOffsetSelection_PGN61184_62(WeightOffsetSelectionStatus);
+			CAN1Comm.Set_WeightOffsetSetting_PGN61184_62(CAN1CommManager.DATA_STATE_WEIGHT_OFFSET_SETTING_WORKTOOL_1);
+			CAN1Comm.Set_WeightOffset_1922_PGN61184_62(NumSetting);
+			CAN1Comm.Set_SuddenChangeError_PGN61184_62(CAN1Comm.Get_SuddenChangeError_PGN65450());
+			CAN1Comm.Set_BucketFullInError_PGN61184_62(CAN1Comm.Get_BucketFullInError_PGN65450());
+			CAN1Comm.TxCANToMCU(62);
+			CAN1Comm.Set_WeightOffsetSelection_PGN61184_62(15);
+			CAN1Comm.Set_WeightOffsetSetting_PGN61184_62(0xF);
+			CAN1Comm.Set_WeightOffset_1922_PGN61184_62(0xFFFF);
+		}else if(WeightOffsetSelectionStatus == CAN1CommManager.DATA_STATE_WEIGHT_OFFSET_SETTING_WORKTOOL_2){
+			CAN1Comm.Set_WeightOffsetSelection_PGN61184_62(WeightOffsetSelectionStatus);
+			CAN1Comm.Set_WeightOffsetSetting_PGN61184_62(CAN1CommManager.DATA_STATE_WEIGHT_OFFSET_SETTING_WORKTOOL_2);
+			CAN1Comm.Set_WeightOffset_1922_PGN61184_62(NumSetting);
+			CAN1Comm.Set_SuddenChangeError_PGN61184_62(CAN1Comm.Get_SuddenChangeError_PGN65450());
+			CAN1Comm.Set_BucketFullInError_PGN61184_62(CAN1Comm.Get_BucketFullInError_PGN65450());
+			CAN1Comm.TxCANToMCU(62);
+			CAN1Comm.Set_WeightOffsetSelection_PGN61184_62(15);
+			CAN1Comm.Set_WeightOffsetSetting_PGN61184_62(0xF);
+			CAN1Comm.Set_WeightOffset_1922_PGN61184_62(0xFFFF);
+		}else if(WeightOffsetSelectionStatus == CAN1CommManager.DATA_STATE_WEIGHT_OFFSET_SETTING_WORKTOOL_3){
+			CAN1Comm.Set_WeightOffsetSelection_PGN61184_62(WeightOffsetSelectionStatus);
+			CAN1Comm.Set_WeightOffsetSetting_PGN61184_62(CAN1CommManager.DATA_STATE_WEIGHT_OFFSET_SETTING_WORKTOOL_3);
+			CAN1Comm.Set_WeightOffset_1922_PGN61184_62(NumSetting);
+			CAN1Comm.Set_SuddenChangeError_PGN61184_62(CAN1Comm.Get_SuddenChangeError_PGN65450());
+			CAN1Comm.Set_BucketFullInError_PGN61184_62(CAN1Comm.Get_BucketFullInError_PGN65450());
+			CAN1Comm.TxCANToMCU(62);
+			CAN1Comm.Set_WeightOffsetSelection_PGN61184_62(15);
+			CAN1Comm.Set_WeightOffsetSetting_PGN61184_62(0xF);
+			CAN1Comm.Set_WeightOffset_1922_PGN61184_62(0xFFFF);
+		}
 
 	}
 	public void ClickCancel(){
@@ -271,46 +409,301 @@ public class ServiceMenuWeighingCompensationFragment extends ParentFragment{
 		
 	}
 	public void ClickNum1(){
+		NumSetting = SetNumber(NumIndex,1,NumSign);
+		if(NumIndex >= 2)
+			NumIndex = 0;
+		else 
+			NumIndex++;
 		
+		WeighingSystemCompensationDisplay(WeightOffsetSelectionStatus,NumSetting,NumSetting,NumSetting);
 	}
 	public void ClickNum2(){
-		
+		NumSetting = SetNumber(NumIndex,2,NumSign);
+		if(NumIndex >= 2)
+			NumIndex = 0;
+		else 
+			NumIndex++;
+		WeighingSystemCompensationDisplay(WeightOffsetSelectionStatus,NumSetting,NumSetting,NumSetting);
 	}
 	public void ClickNum3(){
-		
+		NumSetting = SetNumber(NumIndex,3,NumSign);
+		if(NumIndex >= 2)
+			NumIndex = 0;
+		else 
+			NumIndex++;
+		WeighingSystemCompensationDisplay(WeightOffsetSelectionStatus,NumSetting,NumSetting,NumSetting);
 	}
 	public void ClickNum4(){
-		
+		NumSetting = SetNumber(NumIndex,4,NumSign);
+		if(NumIndex >= 2)
+			NumIndex = 0;
+		else 
+			NumIndex++;
+		WeighingSystemCompensationDisplay(WeightOffsetSelectionStatus,NumSetting,NumSetting,NumSetting);
 	}
 	public void ClickNum5(){
-		
+		NumSetting = SetNumber(NumIndex,5,NumSign);
+		if(NumIndex >= 2)
+			NumIndex = 0;
+		else 
+			NumIndex++;
+		WeighingSystemCompensationDisplay(WeightOffsetSelectionStatus,NumSetting,NumSetting,NumSetting);
 	}
 	public void ClickNum6(){
+		NumSetting = SetNumber(NumIndex,6,NumSign);
+		if(NumIndex >= 2)
+			NumIndex = 0;
+		else 
+			NumIndex++;
+		WeighingSystemCompensationDisplay(WeightOffsetSelectionStatus,NumSetting,NumSetting,NumSetting);
 		
 	}
 	public void ClickNum7(){
-		
+		NumSetting = SetNumber(NumIndex,7,NumSign);
+		if(NumIndex >= 2)
+			NumIndex = 0;
+		else 
+			NumIndex++;
+		WeighingSystemCompensationDisplay(WeightOffsetSelectionStatus,NumSetting,NumSetting,NumSetting);
 	}
 	public void ClickNum8(){
-		
+		NumSetting = SetNumber(NumIndex,8,NumSign);
+		if(NumIndex >= 2)
+			NumIndex = 0;
+		else 
+			NumIndex++;
+		WeighingSystemCompensationDisplay(WeightOffsetSelectionStatus,NumSetting,NumSetting,NumSetting);
 	}
 	public void ClickNum9(){
-		
+		NumSetting = SetNumber(NumIndex,9,NumSign);
+		if(NumIndex >= 2)
+			NumIndex = 0;
+		else 
+			NumIndex++;
+		WeighingSystemCompensationDisplay(WeightOffsetSelectionStatus,NumSetting,NumSetting,NumSetting);
 	}
 	public void ClickNum0(){
-		
+		NumSetting = SetNumber(NumIndex,0,NumSign);
+		if(NumIndex >= 2)
+			NumIndex = 0;
+		else 
+			NumIndex++;
+		WeighingSystemCompensationDisplay(WeightOffsetSelectionStatus,NumSetting,NumSetting,NumSetting);
 	}
 	public void ClickNumBack(){
-		
+		NumIndex = 0;
+		NumSetting = 0;
+		Num100 = 0;
+		Num10 = 0;
+		Num1 = 0;
+		NumUnder = 0;
+		NumSign = true;
+		NumSetting = SetNumber(true);
+		WeighingSystemCompensationDisplay(WeightOffsetSelectionStatus,NumSetting,NumSetting,NumSetting);
 	}
 	public void ClickNumDot(){
-		
+		NumIndex = 3;
 	}
 	public void ClickNumPlusMinus(){
+		if(NumSign == true)
+			NumSign = false;
+		else
+			NumSign = true;
 		
+		NumSetting = SetNumber(NumSign);
+		
+		WeighingSystemCompensationDisplay(WeightOffsetSelectionStatus,NumSetting,NumSetting,NumSetting);
+	}
+	public void ClickNoOffset(){
+		WeightOffsetSelectionStatus = CAN1CommManager.DATA_STATE_WEIGHT_OFFSET_SETTING_NOOFFSET;
+		WeighingSystemCompensationDisplay(WeightOffsetSelectionStatus,WorkTool1,WorkTool2,WorkTool3);
+		NumIndex = 0;
+		NumSetting = 0;
+		Num100 = 0;
+		Num10 = 0;
+		Num1 = 0;
+		NumUnder = 0;
+		NumSign = true;
+	}
+	public void ClickWorkTool1(){
+		WeightOffsetSelectionStatus = CAN1CommManager.DATA_STATE_WEIGHT_OFFSET_SETTING_WORKTOOL_1;
+		WeighingSystemCompensationDisplay(WeightOffsetSelectionStatus,WorkTool1,WorkTool2,WorkTool3);
+		NumIndex = 0;
+		NumSetting = 0;
+		Num100 = 0;
+		Num10 = 0;
+		Num1 = 0;
+		NumUnder = 0;
+		NumSign = true;
+	}
+	public void ClickWorkTool2(){
+		WeightOffsetSelectionStatus = CAN1CommManager.DATA_STATE_WEIGHT_OFFSET_SETTING_WORKTOOL_2;
+		WeighingSystemCompensationDisplay(WeightOffsetSelectionStatus,WorkTool1,WorkTool2,WorkTool3);
+		NumIndex = 0;
+		NumSetting = 0;
+		Num100 = 0;
+		Num10 = 0;
+		Num1 = 0;
+		NumUnder = 0;
+		NumSign = true;
+	}
+	public void ClickWorkTool3(){
+		WeightOffsetSelectionStatus = CAN1CommManager.DATA_STATE_WEIGHT_OFFSET_SETTING_WORKTOOL_3;
+		WeighingSystemCompensationDisplay(WeightOffsetSelectionStatus,WorkTool1,WorkTool2,WorkTool3);
+		NumIndex = 0;
+		NumSetting = 0;
+		Num100 = 0;
+		Num10 = 0;
+		Num1 = 0;
+		NumUnder = 0;
+		NumSign = true;
 	}
 	/////////////////////////////////////////////////////////////////////
+	public void WeighingSystemCompensationDisplay(int _status, int _worktool1, int _worktool2, int _worktool3){
+		switch (_status) {
+		case CAN1CommManager.DATA_STATE_WEIGHT_OFFSET_SETTING_NOOFFSET:
+			radioNoOffset.setChecked(true);
+			radioWorkTool1.setChecked(false);
+			radioWorkTool2.setChecked(false);
+			radioWorkTool3.setChecked(false);
+			layoutWorkTool1.setVisibility(View.GONE);
+			layoutWorkTool2.setVisibility(View.GONE);
+			layoutWorkTool3.setVisibility(View.GONE);
+			
+			break;
+		case CAN1CommManager.DATA_STATE_WEIGHT_OFFSET_SETTING_WORKTOOL_1:
+			radioNoOffset.setChecked(false);
+			radioWorkTool1.setChecked(true);
+			radioWorkTool2.setChecked(false);
+			radioWorkTool3.setChecked(false);
+			layoutWorkTool1.setVisibility(View.VISIBLE);
+			layoutWorkTool2.setVisibility(View.GONE);
+			layoutWorkTool3.setVisibility(View.GONE);
+			CompensationValueDisplay(_worktool1,textViewWorkTool1Data);
+			break;
+		case CAN1CommManager.DATA_STATE_WEIGHT_OFFSET_SETTING_WORKTOOL_2:
+			radioNoOffset.setChecked(false);
+			radioWorkTool1.setChecked(false);
+			radioWorkTool2.setChecked(true);
+			radioWorkTool3.setChecked(false);
+			layoutWorkTool1.setVisibility(View.GONE);
+			layoutWorkTool2.setVisibility(View.VISIBLE);
+			layoutWorkTool3.setVisibility(View.GONE);
+			CompensationValueDisplay(_worktool2,textViewWorkTool2Data);
+			break;
+		case CAN1CommManager.DATA_STATE_WEIGHT_OFFSET_SETTING_WORKTOOL_3:
+			radioNoOffset.setChecked(false);
+			radioWorkTool1.setChecked(false);
+			radioWorkTool2.setChecked(false);
+			radioWorkTool3.setChecked(true);
+			layoutWorkTool1.setVisibility(View.GONE);
+			layoutWorkTool2.setVisibility(View.GONE);
+			layoutWorkTool3.setVisibility(View.VISIBLE);
+			CompensationValueDisplay(_worktool3,textViewWorkTool3Data);
+			break;
+		default:
+			break;
+		}
+	}
+
+	public void CompensationValueDisplay(int value, TextView textview){
+		int Temp;
+		int n100;
+		int n10;
+		int n1;
+		int Under1;
+		boolean sign = true;
+		String str;
+		
 	
+		Temp = value - 1000;
+		
+		if(Temp >= 0){
+			sign = true;
+		}else{
+			sign = false;
+			Temp *= -1;
+		}
+		
+		n100 = (Temp  / 1000) % 10;
+		n10 = (Temp  / 100) % 10;
+		n1 = (Temp  / 10) % 10;
+		Under1 = (Temp  / 1) % 10;
+
+		if(sign == true){
+			if(n100 != 0){
+				str = Integer.toString(n100) + Integer.toString(n10) + Integer.toString(n1) + "." + Integer.toString(Under1);
+			}else if(n10 != 0){
+				str = Integer.toString(n10) + Integer.toString(n1) + "." + Integer.toString(Under1);
+			}else {
+				str = Integer.toString(n1) + "." + Integer.toString(Under1);
+			}
+		}else{
+			if(n100 != 0){
+				str = "-" + Integer.toString(n100) + Integer.toString(n10) + Integer.toString(n1) + "." + Integer.toString(Under1);
+			}else if(n10 != 0){
+				str = "-" + Integer.toString(n10) + Integer.toString(n1) + "." + Integer.toString(Under1);
+			}else {
+				str = "-" + Integer.toString(n1) + "." + Integer.toString(Under1);
+			}
+		}
+		
+		textview.setText(str);
+			
+	}
 	/////////////////////////////////////////////////////////////////////
+	public int SetNumber(int _index, int _num, boolean sign){
+
+		int result;
+		
+		switch (_index) {
+		case 0:
+			Num1 = _num;
+			break;
+		case 1:
+			Num10 = Num1;
+			Num1 = _num;
+			break;
+		case 2:
+			Num100 = Num10;
+			Num10 = Num1;
+			Num1 = _num;
+			break;
+		case 3:
+			NumUnder = _num;
+			break;
+		default:
+			break;
+		}
+		result = Num100 * 1000 + Num10 * 100 + Num1 * 10 + NumUnder;
+		if(sign == false)
+			result *= -1;
+		
+		result += 1000;
+		
+		if(result > 2000)
+			result = 2000;
+		else if(result < 0)
+			result = 0;
+		
+		return result;
+	}
+	public int SetNumber(boolean sign){
+
+		int result;
 	
+		result = Num100 * 1000 + Num10 * 100 + Num1 * 10 + NumUnder;
+		if(sign == false)
+			result *= -1;
+		
+		result += 1000;
+		
+		if(result > 2000)
+			result = 2000;
+		else if(result < 0)
+			result = 0;
+		
+		return result;
+	}
+	/////////////////////////////////////////////////////////////////////
 }

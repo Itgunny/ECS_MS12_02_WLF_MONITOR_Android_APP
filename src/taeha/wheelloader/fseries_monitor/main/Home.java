@@ -7,16 +7,21 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 import taeha.wheelloader.fseries_monitor.animation.ChangeFragmentAnimation;
+import taeha.wheelloader.fseries_monitor.popup.AngleCalibrationResultPopup;
 import taeha.wheelloader.fseries_monitor.popup.BucketPriorityPopup;
 import taeha.wheelloader.fseries_monitor.popup.CCOModePopup;
 import taeha.wheelloader.fseries_monitor.popup.EngineModePopup;
 import taeha.wheelloader.fseries_monitor.popup.EngineWarmingUpPopup;
 import taeha.wheelloader.fseries_monitor.popup.KickDownPopup;
+import taeha.wheelloader.fseries_monitor.popup.OperationHistoryInitPopup;
+import taeha.wheelloader.fseries_monitor.popup.PressureCalibrationResultPopup;
 import taeha.wheelloader.fseries_monitor.popup.QuickCouplerPopupLocking1;
 import taeha.wheelloader.fseries_monitor.popup.QuickCouplerPopupLocking2;
 import taeha.wheelloader.fseries_monitor.popup.QuickCouplerPopupUnlocking1;
 import taeha.wheelloader.fseries_monitor.popup.QuickCouplerPopupUnlocking2;
 import taeha.wheelloader.fseries_monitor.popup.ShiftModePopup;
+import taeha.wheelloader.fseries_monitor.popup.SoundOutputPopup;
+import taeha.wheelloader.fseries_monitor.popup.SpeedometerInitPopup;
 import taeha.wheelloader.fseries_monitor.popup.TCLockUpPopup;
 
 import android.os.Bundle;
@@ -35,16 +40,27 @@ import android.util.Log;
 import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MotionEvent;
+import android.view.View;
 import android.widget.FrameLayout;
+import android.widget.ImageView;
 
 public class Home extends Activity {
 	//CONSTANT//////////////////////////////////////////
+	//Version/////////////////////////////////////////////////////////////////////////////
+	//
+	public static final int VERSION_HIGH 		= 1;
+	public static final int VERSION_LOW 		= 0;
+	public static final int VERSION_SUB_HIGH 	= 0;
+	public static final int VERSION_SUB_LOW 	= 0;
+	//
+	//////////////////////////////////////////////////////////////////////////////////////
+	
 	// TAG
 	private  final String TAG = "Home";
 	
 
 
-	public  static final int SCREEN_STATE_MAIN_B_TOP 											= 0x10000000;
+	public  static final int SCREEN_STATE_MAIN_B_TOP 										= 0x10000000;
 	
 	public  static final int SCREEN_STATE_MAIN_B_RIGHTUP_TOP								= 0x11000000;
 	public  static final int SCREEN_STATE_MAIN_B_RIGHTUP_ENGINE_MODE						= 0x11100000;
@@ -119,6 +135,7 @@ public class Home extends Activity {
 	
 	public  static final int SCREEN_STATE_MENU_MODE_ETC_TOP									= 0x21300000;
 	public  static final int SCREEN_STATE_MENU_MODE_ETC_FREQ_TOP							= 0x21310000;
+	public  static final int SCREEN_STATE_MENU_MODE_ETC_FREQ_INIT							= 0x21311000;
 	public  static final int SCREEN_STATE_MENU_MODE_ETC_FREQ_END							= 0x2131FFFF;
 	public  static final int SCREEN_STATE_MENU_MODE_ETC_COOLINGFAN_TOP						= 0x21320000;
 	public  static final int SCREEN_STATE_MENU_MODE_ETC_COOLINGFAN_OFF						= 0x21321000;
@@ -137,19 +154,15 @@ public class Home extends Activity {
 	
 	
 	public  static final int SCREEN_STATE_MENU_MODE_END										= 0x21FFFFFF;
-	
 	public  static final int SCREEN_STATE_MENU_MONITORING_TOP								= 0x22000000;
-	
-
-	public  static final int SCREEN_STATE_MENU_MONITORING_MACHINEMONITORING					= 0x22000000;
-	public  static final int SCREEN_STATE_MENU_MONITORING_OPERATIONHISTORY_TOP				= 0x22100000;
-	public  static final int SCREEN_STATE_MENU_MONITORING_OPERATIONHISTORY_END				= 0x221FFFFF;
-	public  static final int SCREEN_STATE_MENU_MONITORING_WEIGHINGINFO_TOP					= 0x22200000;
-	public  static final int SCREEN_STATE_MENU_MONITORING_WEIGHINGINFO_END					= 0x222FFFFF;
-	public  static final int SCREEN_STATE_MENU_MONITORING_FAULTHISTORY_TOP					= 0x22300000;
-	public  static final int SCREEN_STATE_MENU_MONITORING_FAULTHISTORY_END					= 0x223FFFFF;
-	public  static final int SCREEN_STATE_MENU_MONITORING_EHCUINFO_TOP						= 0x22400000;
-	public  static final int SCREEN_STATE_MENU_MONITORING_EHCUINFO_END						= 0x224FFFFF;
+	public  static final int SCREEN_STATE_MENU_MONITORING_MACHINEMONITORING					= 0x22100000;
+	public  static final int SCREEN_STATE_MENU_MONITORING_EHCUINFO_TOP						= 0x22200000;
+	public  static final int SCREEN_STATE_MENU_MONITORING_EHCUINFO_END						= 0x222FFFFF;
+	public  static final int SCREEN_STATE_MENU_MONITORING_OPERATIONHISTORY_TOP				= 0x22300000;
+	public  static final int SCREEN_STATE_MENU_MONITORING_OPERATIONHISTORY_INIT				= 0x22310000;
+	public  static final int SCREEN_STATE_MENU_MONITORING_OPERATIONHISTORY_END				= 0x223FFFFF;
+	public  static final int SCREEN_STATE_MENU_MONITORING_FAULTHISTORY_TOP					= 0x22400000;
+	public  static final int SCREEN_STATE_MENU_MONITORING_FAULTHISTORY_END					= 0x224FFFFF;
 	public  static final int SCREEN_STATE_MENU_MONITORING_VERSIONINFO_TOP					= 0x22500000;
 	public  static final int SCREEN_STATE_MENU_MONITORING_VERSIONINFO_END					= 0x225FFFFF;
 	public  static final int SCREEN_STATE_MENU_MONITORING_END								= 0x22FFFFFF;
@@ -165,8 +178,10 @@ public class Home extends Activity {
 	public  static final int SCREEN_STATE_MENU_MANAGEMENT_MAINTENANCE_END					= 0x232FFFFF;
 	public  static final int SCREEN_STATE_MENU_MANAGEMENT_CALIBRATION_TOP					= 0x23300000;
 	public  static final int SCREEN_STATE_MENU_MANAGEMENT_CALIBRATION_ANGLE_TOP				= 0x23310000;
+	public  static final int SCREEN_STATE_MENU_MANAGEMENT_CALIBRATION_ANGLE_RESULT			= 0x23311000;
 	public  static final int SCREEN_STATE_MENU_MANAGEMENT_CALIBRATION_ANGLE_END				= 0x2331FFFF;
 	public  static final int SCREEN_STATE_MENU_MANAGEMENT_CALIBRATION_PRESSURE_TOP			= 0x23320000;
+	public  static final int SCREEN_STATE_MENU_MANAGEMENT_CALIBRATION_PRESSURE_RESULT		= 0x23321000;
 	public  static final int SCREEN_STATE_MENU_MANAGEMENT_CALIBRATION_PRESSURE_END			= 0x2332FFFF;
 	public  static final int SCREEN_STATE_MENU_MANAGEMENT_CALIBRATION_BRAKEPEDAL_TOP		= 0x23330000;
 	public  static final int SCREEN_STATE_MENU_MANAGEMENT_CALIBRATION_BRAKEPEDAL_END		= 0x2333FFFF;
@@ -181,6 +196,8 @@ public class Home extends Activity {
 	public  static final int SCREEN_STATE_MENU_MANAGEMENT_SERVICE_SPEEDLIMIT_END			= 0x2353FFFF;
 	public  static final int SCREEN_STATE_MENU_MANAGEMENT_SERVICE_WEIGHINGCOMPENSATION_TOP	= 0x23540000;
 	public  static final int SCREEN_STATE_MENU_MANAGEMENT_SERVICE_WEIGHINGCOMPENSATION_END	= 0x2354FFFF;
+	public  static final int SCREEN_STATE_MENU_MANAGEMENT_SERVICE_SOFTWAREUPATE_TOP			= 0x23550000;
+	public  static final int SCREEN_STATE_MENU_MANAGEMENT_SERVICE_SOFTWAREUPATE_END			= 0x2355FFFF;
 	public  static final int SCREEN_STATE_MENU_MANAGEMENT_SERVICE_END						= 0x235FFFFF;
 	public  static final int SCREEN_STATE_MENU_MANAGEMENT_ASPHONE_TOP						= 0x23600000;
 	public  static final int SCREEN_STATE_MENU_MANAGEMENT_ASPHONE_END						= 0x236FFFFF;
@@ -210,34 +227,46 @@ public class Home extends Activity {
 	
 	public  static final int SCREEN_STATE_MENU_END 											= 0x2FFFFFFF;
 	
-	public  final int UNIT_ODO_KM 			= 0;
-	public  final int UNIT_ODO_MILE 			= 1;
+	public  static final int UNIT_ODO_KM 			= 0;
+	public  static final int UNIT_ODO_MILE 			= 1;
 	
-	public  final int UNIT_TEMP_F 			= 1;
-	public  final int UNIT_TEMP_C 			= 0;
+	public  static final int UNIT_TEMP_F 			= 1;
+	public  static final int UNIT_TEMP_C 			= 0;
 	
-	public  final int UNIT_WEIGHT_TON 		= 0;
-	public  final int UNIT_WEIGHT_LB 			= 1;
+	public  static final int UNIT_WEIGHT_TON 		= 0;
+	public  static final int UNIT_WEIGHT_LB 			= 1;
 	
-	public  final int UNIT_PRESSURE_BAR 		= 0;
-	public  final int UNIT_PRESSURE_MPA 		= 1;
-	public  final int UNIT_PRESSURE_KGF 		= 2;
-	public  final int UNIT_PRESSURE_PSI 		= 3;
+	public  static final int UNIT_PRESSURE_BAR 		= 0;
+	public  static final int UNIT_PRESSURE_MPA 		= 1;
+	public  static final int UNIT_PRESSURE_KGF 		= 2;
+	public  static final int UNIT_PRESSURE_PSI 		= 3;
 	
-	public  final int CLOCK_AM		 		= 0;
-	public  final int CLOCK_PM		 		= 1;
+	public  static final int CLOCK_AM		 		= 0;
+	public  static final int CLOCK_PM		 		= 1;
+	
+	public 	static final int BRIGHTNESS_MANUAL		= 0;
+	public 	static final int BRIGHTNESS_AUTO		= 1;
+	
+	public 	static final int BRIGHTNESS_MIN			= 0;
+	public 	static final int BRIGHTNESS_MAX			= 7;
+	
+	public static final int STATE_INTERNAL_SPK			= 0;
+	public static final int STATE_EXTERNAL_AUX	 		= 1;
 	////////////////////////////////////////////////////
 	
 	//Resource//////////////////////////////////////////
 	FrameLayout framelayoutMain;
+	ImageView imgViewCameraScreen;
 	////////////////////////////////////////////////////
 	//Valuable//////////////////////////////////////////
 	public int ScreenIndex;
+	public int OldScreenIndex;
 	
 	// Unit
 	public int UnitOdo;
 	public int UnitTemp;
 	public int UnitWeight;
+	public int UnitPressure;
 	
 	// HourOdometer Index
 	public int HourOdometerIndex;
@@ -248,6 +277,34 @@ public class Home extends Activity {
 	
 	// Weighing Display Index
 	
+	// Camera
+	public int ActiveCameraNum;
+	public int CameraOrder1;
+	public int CameraOrder2;
+	public int CameraOrder3;
+	public int CameraOrder4;
+	public int CameraReverseMode;
+	int SelectGear;
+	int SelectGearRange;
+	int SelectGearDirection;
+	int GearIndex;
+	int CameraReverseOnCount;
+	int CameraReverseOffCount;
+	
+	// Brightness
+	public int BrightnessManualAuto;
+	public int BrightnessManualLevel;
+	public int BrightnessAutoDayLevel;
+	public int BrightnessAutoNightLevel;
+	public int BrightnessAutoStartTime;
+	public int BrightnessAutoEndTime;
+	public int BrihgtnessCurrent;
+	
+	// Smart Key
+	public int SmartKeyUse;
+	
+	// Sound Output
+	public int SoundState;
 	
 	// SeatBelt
 	public int SeatBelt;
@@ -255,6 +312,10 @@ public class Home extends Activity {
 	// Weighing
 	public int WeighingDisplayIndex;
 	public int WeighingErrorDetect;
+	
+	// Buzzer
+	int Buzzer;
+	public boolean BuzzerOnFlag;
 	
 	// CAN1CommManager
 	private CAN1CommManager CAN1Comm = null;	
@@ -275,6 +336,11 @@ public class Home extends Activity {
 	BucketPriorityPopup _BucketPriorityPopup;
 	EngineModePopup _EngineModePopup;
 	EngineWarmingUpPopup	_EngineWarmingUpPopup;
+	SpeedometerInitPopup	_SpeedometerInitPopup;
+	OperationHistoryInitPopup	_OperationHistoryInitPopup;
+	public AngleCalibrationResultPopup		_AngleCalibrationResultPopup;
+	public PressureCalibrationResultPopup	_PressureCalibrationResultPopup;
+	SoundOutputPopup						_SoundOutputPopup;
 	
 	// Timer
 	private Timer mSeatBeltTimer = null;
@@ -282,7 +348,8 @@ public class Home extends Activity {
 	private Timer mAnimationRunningTimer = null;
 	private Timer mMirrorHeatPreHeatTimer = null;
 	private Timer mMirrorHeatTimer = null;
-	
+	private Timer mSendCommandTimer = null;
+	private Timer mCommErrStopTimer = null;
 	
 	// Flag
 	public boolean AnimationRunningFlag;
@@ -298,6 +365,8 @@ public class Home extends Activity {
 	
 	// Handler
 	Handler HandleKeyButton;
+	
+	int nSendCommandTimerIndex;
 	////////////////////////////////////////////////////
 	
 	//Fragment//////////////////////////////////////////
@@ -320,7 +389,10 @@ public class Home extends Activity {
 		InitPopup();
 		InitValuable();
 		InitAnimation();
+		InitButtonListener();
 		LoadPref();
+		
+		
 		
 		HandleKeyButton = new Handler() {
 			@Override
@@ -349,13 +421,13 @@ public class Home extends Activity {
 	protected void onResume() {
 		// TODO Auto-generated method stub
 		super.onResume();
-		StartCommService();
-		threadRead = new Thread(new ReadThread(this));
 		try {
+			StartCommService();
+			threadRead = new Thread(new ReadThread(this));
 			CAN1Comm.SetScreenTopFlag(true);
 		} catch (RuntimeException e) {
 			Log.e(TAG,"CAN1Comm Instance Error");
-		}
+		} 
 	}
 
 	@Override
@@ -375,6 +447,8 @@ public class Home extends Activity {
 	//Initialization/////////////////////////////////////
 	public void InitResource(){
 		framelayoutMain = (FrameLayout) findViewById(R.id.FrameLayout_main);
+		imgViewCameraScreen = (ImageView)findViewById(R.id.imageView_main_camerascreen);
+		imgViewCameraScreen.setClickable(false);
 	}
 	public void InitValuable(){
 		ScreenIndex = SCREEN_STATE_MAIN_B_TOP;
@@ -382,7 +456,8 @@ public class Home extends Activity {
 		AnimationRunningFlag = false;
 		MirrorHeatPreHeatFlag = false;
 		MirrorHeatCount = 0;
-		
+		nSendCommandTimerIndex = 0;
+		BuzzerOnFlag = false;
 		_MainChangeAnimation = new ChangeFragmentAnimation(this, framelayoutMain, R.id.FrameLayout_main, null);
 	}
 	public void InitFragment(){
@@ -402,10 +477,70 @@ public class Home extends Activity {
 		_BucketPriorityPopup = new BucketPriorityPopup(this);
 		_EngineModePopup = new EngineModePopup(this);
 		_EngineWarmingUpPopup = new EngineWarmingUpPopup(this);
-		
+		_SpeedometerInitPopup = new SpeedometerInitPopup(this);
+		_OperationHistoryInitPopup = new OperationHistoryInitPopup(this);
+		_AngleCalibrationResultPopup = new AngleCalibrationResultPopup(this);
+		_PressureCalibrationResultPopup = new PressureCalibrationResultPopup(this);
+		_SoundOutputPopup = new SoundOutputPopup(this);
+				
 	}
 	public void InitAnimation(){
 		
+	}
+	public void InitButtonListener(){	
+		
+		imgViewCameraScreen.setOnClickListener(new View.OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				ExitCam();
+			}
+		});
+		
+	}
+	public void ExcuteCamActivitybyKey(){
+
+		CAN1Comm.CameraOnFlag = CAN1CommManager.STATE_CAMERA_MANUAL;
+		CAN1Comm.TxCMDToMCU(CAN1Comm.CMD_CAM, CameraOrder1);
+	}
+	public void ExcuteCamActivitybyReverseGear(){
+	
+		CAN1Comm.CameraOnFlag = CAN1CommManager.STATE_CAMERA_REVERSEGEAR;
+	}
+	public boolean ExitCam(){
+		try {
+			if(CAN1Comm.CameraOnFlag == CAN1CommManager.STATE_CAMERA_MANUAL){
+				CAN1Comm.CameraOnFlag = CAN1CommManager.STATE_CAMERA_OFF;
+				CAN1Comm.TxCMDToMCU(CAN1Comm.CMD_CAM, 0xFF);
+				imgViewCameraScreen.setClickable(false);
+				
+				return true;
+			}else if(CAN1Comm.CameraOnFlag == CAN1CommManager.STATE_CAMERA_REVERSEGEAR)
+				return false;
+			else 
+				return true;
+		} catch (NullPointerException e) {
+			// TODO: handle exception
+			Log.e(TAG,"NullPointerException");
+		}
+		return true;
+	}
+	public void SaveCID(int _componentcode, int _manufacturecode, byte[] _componentbasicinformation){
+		String strBasicInfo;
+		
+		strBasicInfo = new String(_componentbasicinformation,0,_componentbasicinformation.length);
+		
+		SharedPreferences SharePref = getSharedPreferences("CID", 0);
+		SharedPreferences.Editor edit = SharePref.edit();
+
+		edit.putInt("ComponentCode_Monitor", _componentcode);
+		edit.putInt("ManufacturerCode_Monitor", _manufacturecode);
+		edit.putString("ComponentBasicInformation_Monitor", strBasicInfo);
+		
+		edit.commit();
+		Log.d(TAG,"SaveCID");
+		Log.d(TAG,"length : " + Integer.toString(_componentbasicinformation.length));
 	}
 	public void SavePref(){
 		SharedPreferences SharePref = getSharedPreferences("Home", 0);
@@ -413,6 +548,7 @@ public class Home extends Activity {
 		edit.putInt("UnitOdo", UnitOdo);
 		edit.putInt("UnitTemp", UnitTemp);
 		edit.putInt("UnitWeight", UnitWeight);
+		edit.putInt("UnitPressure", UnitPressure);
 		edit.putInt("HourOdometerIndex", HourOdometerIndex);
 		edit.putInt("MachineStatusUpperIndex", MachineStatusUpperIndex);
 		edit.putInt("MachineStatusLowerIndex", MachineStatusLowerIndex);
@@ -425,14 +561,32 @@ public class Home extends Activity {
 	public void LoadPref(){
 		SharedPreferences SharePref = getSharedPreferences("Home", 0);
 		UnitOdo = SharePref.getInt("UnitOdo", UNIT_ODO_KM);
-		UnitOdo = SharePref.getInt("UnitTemp", UNIT_TEMP_C);
-		UnitOdo = SharePref.getInt("UnitWeight", UNIT_WEIGHT_TON);
+		UnitTemp = SharePref.getInt("UnitTemp", UNIT_TEMP_C);
+		UnitWeight = SharePref.getInt("UnitWeight", UNIT_WEIGHT_TON);
+		UnitPressure = SharePref.getInt("UnitPressure", UNIT_PRESSURE_BAR);
 		HourOdometerIndex = SharePref.getInt("HourOdometerIndex", CAN1CommManager.DATA_STATE_HOURMETER_LATEST);
 		MachineStatusUpperIndex = SharePref.getInt("MachineStatusUpperIndex", CAN1CommManager.DATA_STATE_MACHINESTATUS_NOSELECT);
 		MachineStatusLowerIndex = SharePref.getInt("MachineStatusLowerIndex", CAN1CommManager.DATA_STATE_MACHINESTATUS_NOSELECT);
 		WeighingDisplayIndex = SharePref.getInt("WeighingDisplayIndex", CAN1CommManager.DATA_STATE_WEIGHINGDISPLAY_TOTAL_A);
 		WeighingErrorDetect = SharePref.getInt("WeighingErrorDetect", CAN1CommManager.DATA_STATE_WEIGHING_ERRORDETECT_OFF);
 		
+		ActiveCameraNum = SharePref.getInt("ActiveCameraNum", 4);
+		CameraOrder1 = SharePref.getInt("CameraOrder1", 0);
+		CameraOrder2 = SharePref.getInt("CameraOrder2", 1);
+		CameraOrder3 = SharePref.getInt("CameraOrder3", 2);
+		CameraOrder4 = SharePref.getInt("CameraOrder4", 3);
+		CameraReverseMode = SharePref.getInt("CameraReverseMode", CAN1CommManager.DATA_STATE_CAMERA_REVERSE_OFF);
+		
+		BrightnessManualAuto = SharePref.getInt("BrightnessManualAuto", BRIGHTNESS_MANUAL);
+		BrightnessManualLevel = SharePref.getInt("BrightnessManualLevel", BRIGHTNESS_MAX);
+		BrightnessAutoDayLevel = SharePref.getInt("BrightnessAutoDayLevel", BRIGHTNESS_MAX);
+		BrightnessAutoNightLevel = SharePref.getInt("BrightnessAutoNightLevel", BRIGHTNESS_MAX);
+		BrightnessAutoStartTime = SharePref.getInt("BrightnessAutoStartTime", 8);
+		BrightnessAutoEndTime = SharePref.getInt("BrightnessAutoEndTime", 18);
+		SoundState = SharePref.getInt("SoundState", STATE_INTERNAL_SPK);
+		
+		SmartKeyUse = SharePref.getInt("SmartKeyUse", CAN1CommManager.DATA_STATE_SMARTKEY_USE_OFF);
+	
 		Log.d(TAG,"LoadPref");
 	}
 	/////////////////////////////////////////////////////
@@ -518,7 +672,8 @@ public class Home extends Activity {
 			
 			//showMainBFragment();
 			_MainChangeAnimation.StartChangeAnimation(_MainBBaseFragment);
-			
+			StartSendCommandTimer();
+			StartCommErrStopTimer();
 		}
 	};
 	
@@ -561,7 +716,7 @@ public class Home extends Activity {
 			ManufacturerCode = CAN1Comm.Get_ManufacturerCode_1700_PGN65330_MONITOR();
 			ComponentBasicInformation = CAN1Comm.Get_ComponentBasicInformation_1698_PGN65330_MONITOR();
 			
-		//	SaveCID(ComponentCode,ManufacturerCode,ComponentBasicInformation);
+			SaveCID(ComponentCode,ManufacturerCode,ComponentBasicInformation);
 		}
 
 		@Override
@@ -610,8 +765,14 @@ public class Home extends Activity {
 	
 	public void GetDataFromNative(){
 		PreHeat = CAN1Comm.Get_MirrorHeaterStatus_724_PGN65428();
-		RPM = CAN1Comm.Get_EngineSpeed_310_PGN65431();;
+		RPM = CAN1Comm.Get_EngineSpeed_310_PGN65431();
+		Buzzer = CAN1Comm.Get_Buzzer_723_PGN65364();
+		SelectGear = CAN1Comm.Get_SelectGear_541_PGN65434();
+		SelectGearRange = SelectGear & 0x0F;
+		SelectGearDirection = ((SelectGear & 0x30) >> 4);
+		
 		CheckMirrorHeatPreHeat(PreHeat,RPM);
+		SetBackLight();
 	}
 	public void UpdateUI() {
 		// TODO Auto-generated method stub
@@ -620,12 +781,112 @@ public class Home extends Activity {
 			@Override
 			public void run() {
 				// TODO Auto-generated method stub
-			
+				CameraDisplay();
+				CheckBuzzer();
 			}
 		});
 	
 	}
+	public void CheckBuzzer(){
+		if(CAN1Comm.Get_CommErrCnt() < 1000){
+			if(Buzzer == CAN1Comm.BUZZER_ON){
+				BuzzerOnFlag = true;
+				if(CAN1Comm.BuzzerStatus == CAN1Comm.BUZZER_OFF || CAN1Comm.BuzzerStatus == CAN1Comm.BUZZER_STOP){
+					CAN1Comm.TxCMDToMCU(CAN1Comm.CMD_BUZ, CAN1Comm.BUZZER_ON);	// Buzzer On
+				}
+			}else if(Buzzer == CAN1Comm.BUZZER_OFF){
+				if(CAN1Comm.BuzzerStatus == CAN1Comm.BUZZER_ON){
+					CAN1Comm.TxCMDToMCU(CAN1Comm.CMD_BUZ, CAN1Comm.BUZZER_OFF);	// Buzzer Off
+					CAN1Comm.BuzzerStatus = CAN1Comm.BUZZER_STOP;
+				}
+			}			
+		}
+	}
+	public void CameraDisplay(){
+		if(GearIndex == CAN1CommManager.DATA_STATE_CAMERA_REVERSE_ON){
+			if(SelectGearDirection == CAN1CommManager.DATA_INDEX_SELECTGEAR_DIR_R){	
+				CameraReverseOffCount = 0; 
+				if(CAN1Comm.CameraOnFlag == CAN1CommManager.STATE_CAMERA_OFF
+				|| CAN1Comm.CameraOnFlag == CAN1CommManager.STATE_CAMERA_MANUAL){
+					CameraReverseOnCount++;
+					
+				}
+				else{
+					CameraReverseOnCount = 0;
+				}
+				if(CameraReverseOnCount >= 5){
+					CAN1Comm.CameraOnFlag = CAN1CommManager.STATE_CAMERA_REVERSEGEAR;
+					CAN1Comm.TxCMDToMCU(CAN1Comm.CMD_CAM, CameraOrder1);
+					imgViewCameraScreen.setClickable(false);
+					CameraReverseOnCount = 0;
+				}
+					
+			}else{
+				CameraReverseOnCount = 0;
+				if(CAN1Comm.CameraOnFlag == CAN1CommManager.STATE_CAMERA_REVERSEGEAR){
+					CameraReverseOffCount++;
+					
+				}else{
+					CameraReverseOffCount = 0;
+				}
+				
+				if(CameraReverseOffCount >= 5){
+					CAN1Comm.CameraOnFlag = CAN1CommManager.STATE_CAMERA_OFF;
+					CAN1Comm.TxCMDToMCU(CAN1Comm.CMD_CAM, 0xFF);
+					imgViewCameraScreen.setClickable(false);
+				}
+			}
+		}
+		if(CAN1Comm.CameraOnFlag == CAN1CommManager.STATE_CAMERA_REVERSEGEAR
+		|| CAN1Comm.CameraOnFlag == CAN1CommManager.STATE_CAMERA_MANUAL){
+			imgViewCameraScreen.setClickable(true);
+		}else{
+			imgViewCameraScreen.setClickable(false);
+		}
+	}
+	/////////////////////////////////////////////////////
+	//Backlight//////////////////////////////////////////
+	public void SetBackLight(){
+		if(ScreenIndex >= SCREEN_STATE_MENU_PREFERENCE_BRIGHTNESS_TOP && ScreenIndex <= SCREEN_STATE_MENU_PREFERENCE_BRIGHTNESS_END)
+			return;
+		
+		int BackLight;
+		if(BrightnessManualAuto == BRIGHTNESS_AUTO)
+		{
+			BackLight = CheckAutoBacklight();
+		}
+		else
+		{
+			BackLight = BrightnessManualLevel + 1;
+		}
+		if(BackLight != BrihgtnessCurrent){
+			Log.d(TAG,"BackLight : " + Integer.toString(BackLight));
+			CAN1Comm.Set_BacklightIlluminationLevel_719_PGN61184_109(BackLight);
+			CAN1Comm.TxCANToMCU(109);
+			
+			CAN1Comm.TxCMDToMCU(CAN1Comm.CMD_LCD, BackLight);
+			BrihgtnessCurrent = BackLight;
+		}
+	}
 	
+	public int CheckAutoBacklight(){
+
+		int CurrHour;
+		int BackLight;
+
+		CurrHour = CAN1Comm.Get_RTColock_Hour();
+				
+		if((BrightnessAutoStartTime <= CurrHour) && (CurrHour <= BrightnessAutoEndTime))
+		{
+			BackLight = BrightnessAutoDayLevel + 1;
+		}
+		else
+		{
+			BackLight = BrightnessAutoNightLevel + 1;
+		}
+		
+		return BackLight;
+	}
 	/////////////////////////////////////////////////////
 	
 	//Key Button/////////////////////////////////////////
@@ -813,6 +1074,76 @@ public class Home extends Activity {
 		}
 		
 		HomeDialog = _EngineWarmingUpPopup;
+		HomeDialog.show();
+	}
+	public void showSpeedometerInit(){
+		if(AnimationRunningFlag == true)
+			return;
+		else
+			StartAnimationRunningTimer();
+		_SpeedometerInitPopup = new SpeedometerInitPopup(this);
+		if(HomeDialog != null){
+			HomeDialog.dismiss();
+			HomeDialog = null;
+		}
+		
+		HomeDialog = _SpeedometerInitPopup;
+		HomeDialog.show();
+	}
+	public void showOperationHistoryInit(){
+		if(AnimationRunningFlag == true)
+			return;
+		else
+			StartAnimationRunningTimer();
+		_OperationHistoryInitPopup = new OperationHistoryInitPopup(this);
+		if(HomeDialog != null){
+			HomeDialog.dismiss();
+			HomeDialog = null;
+		}
+		
+		HomeDialog = _OperationHistoryInitPopup;
+		HomeDialog.show();
+	}
+	public void showAngleCalibrationResult(){
+		if(AnimationRunningFlag == true)
+			return;
+		else
+			StartAnimationRunningTimer();
+		
+		if(HomeDialog != null){
+			HomeDialog.dismiss();
+			HomeDialog = null;
+		}
+		
+		HomeDialog = _AngleCalibrationResultPopup;
+		HomeDialog.show();
+	}
+	public void showPressureCalibrationResult(){
+		if(AnimationRunningFlag == true)
+			return;
+		else
+			StartAnimationRunningTimer();
+		
+		if(HomeDialog != null){
+			HomeDialog.dismiss();
+			HomeDialog = null;
+		}
+		
+		HomeDialog = _PressureCalibrationResultPopup;
+		HomeDialog.show();
+	}
+	public void showSoundOutput(){
+		if(AnimationRunningFlag == true)
+			return;
+		else
+			StartAnimationRunningTimer();
+		
+		if(HomeDialog != null){
+			HomeDialog.dismiss();
+			HomeDialog = null;
+		}
+		
+		HomeDialog = _SoundOutputPopup;
 		HomeDialog.show();
 	}
 	
@@ -1034,12 +1365,269 @@ public class Home extends Activity {
 	}
 	
 	
+	public void StartSendCommandTimer(){
+		CancelSendCommandTimer();
+		mSendCommandTimer = new Timer();
+		mSendCommandTimer.schedule(new SendCommandTimerClass(),500,500);
+	}
+	
+	public void CancelSendCommandTimer(){
+		if(mSendCommandTimer != null){
+			mSendCommandTimer.cancel();
+			mSendCommandTimer.purge();
+			mSendCommandTimer = null;
+		}
+		
+	}
+	
+	public class SendCommandTimerClass extends TimerTask{
+
+		@Override
+		public void run() {
+			// TODO Auto-generated method stub
+			// TODO Auto-generated method stub
+			Log.d(TAG,"mSendCommandTimer");	
+			
+			try {
+				if(nSendCommandTimerIndex == 0){
+					
+					CAN1Comm.Set_MaintenanceCommant_1097_PGN61184_12(0);
+					CAN1Comm.TxCANToMCU(12);
+					
+				}
+				else if(nSendCommandTimerIndex == 1){
+					CAN1Comm.Set_BoomDetentMode_223_PGN61184_123(7);
+					CAN1Comm.Set_BucketDetentMode_224_PGN61184_123(7);
+					CAN1Comm.TxCANToMCU(123);							
+				}
+				else if(nSendCommandTimerIndex == 2){
+					CAN1Comm.Set_SettingSelection_PGN61184_105(0xF);
+					CAN1Comm.Set_SpeedometerFrequency_534_PGN61184_105(0xFFFF);
+					CAN1Comm.Set_AutoRideControlOperationSpeedForward_PGN61184_105(0xF);
+					CAN1Comm.Set_AutoRideControlOperationSpeedBackward_PGN61184_105(0xF);
+					CAN1Comm.Set_VehicleSpeedLimit_572_PGN61184_105(0xFF);
+					CAN1Comm.TxCANToMCU(105);
+					CAN1Comm.Set_SettingSelection_PGN61184_105(15);
+				}
+				
+				else if (nSendCommandTimerIndex == 3){
+					CAN1Comm.Set_WeightOffsetSetting_PGN61184_62(0); //STATE_WEIGHT_OFFSET_SETTING_CALL
+					CAN1Comm.Set_WeighingDisplayMode1_1910_PGN61184_62(WeighingDisplayIndex);
+					CAN1Comm.Set_SuddenChangeError_PGN61184_62(CAN1Comm.Get_SuddenChangeError_PGN65450());
+    				CAN1Comm.Set_BucketFullInError_PGN61184_62(CAN1Comm.Get_BucketFullInError_PGN65450());
+					CAN1Comm.TxCANToMCU(62);
+					CAN1Comm.Set_WeightOffsetSetting_PGN61184_62(3);
+					CAN1Comm.Set_WeighingDisplayMode1_1910_PGN61184_62(15);
+				}	
+				else if (nSendCommandTimerIndex == 4){
+					CAN1Comm.TxCMDToMCU(CAN1Comm.CMD_VERSION,1);
+				}	
+				else if(nSendCommandTimerIndex == 5){
+					CAN1Comm.Set_AutomaticEngineShutdown_363_PGN61184_121(3);
+					CAN1Comm.Set_AutomaticEngineShutdownTypeControlByte_PGN61184_121(3);
+					CAN1Comm.Set_EngineShutdownCotrolByte_PGN61184_121(0xF);
+					CAN1Comm.Set_SettingTimeforAutomaticEngineShutdown_364_PGN61184_121(0xFF);
+					CAN1Comm.TxCANToMCU(121);
+				}
+				else {
+					CancelSendCommandTimer();
+				}
+				nSendCommandTimerIndex++;
+			} catch (RuntimeException e) {
+				// TODO: handle exception
+				Log.e(TAG,"RuntimeExeption1, nSendCommandTimerIndex : " + Integer.toString(nSendCommandTimerIndex));
+				nSendCommandTimerIndex = 0;
+			}
+			
+		}
+		
+	}
 	
 	
+	public class CommErrStopTimerClass extends TimerTask{
+
+		@Override
+		public void run() {
+			// TODO Auto-generated method stub
+			int CommErrCount;
+			CommErrCount = CAN1Comm.Get_CommErrCnt();
+			CommErrCount++;
+			if(CommErrCount == 1000){
+				CAN1Comm.TxCMDToMCU(CAN1Comm.CMD_BUZ, CAN1Comm.BUZZER_ON);	// Buzzer On
+				//IndicatorFragment.WarningDisplay(1);	
+			}
+			if(CommErrCount >= 1000){
+				CommErrCount = 1001;	
+			}
+			
+			CAN1Comm.Set_CommErrCnt(CommErrCount);
+		}
+		
+	}
+	
+	public void StartCommErrStopTimer(){
+		CancelCommErrStopTimer();
+		mCommErrStopTimer = new Timer();
+		mCommErrStopTimer.schedule(new CommErrStopTimerClass(),1,10);	
+	}
+	
+	public void CancelCommErrStopTimer(){
+		if(mCommErrStopTimer != null){
+			mCommErrStopTimer.cancel();
+			mCommErrStopTimer.purge();
+			mCommErrStopTimer = null;
+		}
+	}
 	
 	
-	
-	
+	/////////////////////////////////////////////////////
+	//Version////////////////////////////////////////////
+	public byte[] GetMonitorComponentBasicInfo()throws NullPointerException{
+		String str;
+		byte[] componetbasicinfo;
+		componetbasicinfo = new byte[CAN1CommManager.LENGTH_COMPONENTBASICINFORMATION];
+		for(int i = 0; i < CAN1CommManager.LENGTH_COMPONENTBASICINFORMATION; i++){
+			componetbasicinfo[i] = (byte) 0xFF;
+		}
+		SharedPreferences SharePref = getSharedPreferences("CID", 0);
+
+		str = SharePref.getString("ComponentBasicInformation_Monitor", "");
+
+		byte[] Temp;
+		Temp = new byte[str.length()];
+		
+		Temp = str.getBytes();
+		
+		for(int i = 0; i < str.length(); i++){
+			componetbasicinfo[i] = Temp[i];
+		}
+		return componetbasicinfo; 
+	}
+	public int FindProgramSubInfo(byte[] BasicInfo)throws NullPointerException{
+		int SubVersion = 0xFF;
+		
+		int Index = 4;
+		int Index2 = 0;
+		////////////// Find Serial Number/////////////
+		for(int i = 4; i < 20; i++){
+			if(BasicInfo[i] != 0x2A)
+			{
+				Index++;
+			}
+			else{
+				break;
+			}
+		}
+		/////////////////////////////////////////////
+		
+		//////////// Find Model Name/////////////////
+		for(int i = Index + 1; i < CAN1CommManager.LENGTH_COMPONENTBASICINFORMATION; i++){
+			if(BasicInfo[i] != 0x2A)
+			{
+				Index2++;
+			}
+			else{
+				
+				SubVersion = BasicInfo[Index+Index2+2];
+				break;
+			}
+		}
+		/////////////////////////////////////////////
+		
+		
+		return SubVersion;
+	}
+	public String GetModelNameString(byte[] BasicInfo)throws NullPointerException{
+		String strModel;
+		int Index = 4;
+		int Index2 = 0;
+		boolean bAsterisk = false;
+		////////////// Find Serial Number/////////////
+		for(int i = 4; i < 20; i++){
+			if(BasicInfo[i] != 0x2A)
+			{
+				Index++;
+				bAsterisk = false;
+			}
+			else{
+				bAsterisk = true;
+				break;
+			}
+		}
+		
+		
+		/////////////////////////////////////////////
+		
+		//////////// Find Model Name/////////////////
+		for(int i = Index + 1; i < CAN1CommManager.LENGTH_COMPONENTBASICINFORMATION; i++){
+			if(BasicInfo[i] != 0x2A)
+			{
+				Index2++;
+				bAsterisk = false;
+			}
+			else{
+				bAsterisk = true;
+				break;
+			}
+		}
+		/////////////////////////////////////////////
+		char[] Model;
+		Model = new char [Index2];
+		int[] Temp;
+		Temp = new int[Index2];
+		
+		if(bAsterisk == false){
+			strModel = "";
+		}else{
+			for(int i = 0; i < Index2; i++){
+				Model[i] = (char)BasicInfo[i+Index+1];
+			}
+			strModel = new String(Model,0,Model.length);
+			
+		}
+		return strModel;
+	}
+	public String GetProgramVersion(byte[] BasicInfo)throws NullPointerException{
+		int nVersion;
+		int VersionHigh, VersionLow;
+		float fVersion;
+		String strVer;
+		nVersion = (BasicInfo[3] & 0xFF);
+		VersionHigh = ((nVersion & 0xF0) >> 4);
+		VersionLow = (nVersion & 0x0F);
+
+		if(VersionLow > 10 && VersionHigh >= 15){
+			strVer = "";
+		}else{
+			strVer = Integer.toString(VersionHigh) + "." + Integer.toString(VersionLow);
+		}
+
+		return strVer;
+	}
+	public String GetVersionString(byte[] BasicInfo, int SubInfo)throws NullPointerException{
+		String strVersion = GetProgramVersion(BasicInfo);
+		int SubVersionHigh;
+		int SubVersionLow;
+		
+		SubVersionHigh = ((SubInfo & 0xF0) >> 4);
+		SubVersionLow = (SubInfo & 0x0F);
+		
+		if(0 <= SubVersionHigh && SubVersionHigh <= 14){
+			strVersion = strVersion + "." + Integer.toHexString(SubVersionHigh);
+		}
+		
+		if(0 <= SubVersionLow && SubVersionLow <= 14){
+			strVersion = strVersion + "." + Integer.toHexString(SubVersionLow);
+		}
+		
+		return strVersion;
+	}
+	public String GetVersionString(int VersionHigh, int VersionLow, int VersionSubHigh, int VersionSubLow)throws NullPointerException{
+		String strVersion;
+		strVersion = Integer.toString(VersionHigh) + "." + Integer.toString(VersionLow) 
+				+ "." +Integer.toString(VersionSubHigh)  + "." + Integer.toString(VersionSubLow);
+		return strVersion;
+	}
 	/////////////////////////////////////////////////////
 	//Calculate//////////////////////////////////////////
 	public String GetNumberString(long _Number){
@@ -1258,6 +1846,79 @@ public class Home extends Activity {
 		Sec = (int) ((long_Sec % 60) / 6);
 		strMin = GetNumberString(Min) + "." + Integer.toString(Sec);
 		return strMin;
+	}
+
+	public String GetSectoMinString(int _Sec, String Unit1, String Unit2){
+		String strMin;
+		long long_Sec;
+		int Min;
+		int Sec;
+		
+		long_Sec = _Sec & 0xFFFFFFFFL;
+		if(long_Sec == 0xFFFFFFFFL){
+			long_Sec = 0;
+		}
+		Min = (int) (long_Sec / 60);
+		Sec = (int) ((long_Sec % 60));
+		if(Min == 0 && Sec != 0){
+			strMin = Integer.toString(Sec) + Unit2;
+		}else if(Min != 0 && Sec == 0){
+			strMin = GetNumberString(Min) + Unit1;
+		}
+		else{
+			strMin = GetNumberString(Min) + Unit1 + Integer.toString(Sec) + Unit2;
+		}
+		
+		return strMin;
+	}
+	
+	public String GetEPPRCurrent(int current){
+		String strCurrent;
+		long long_Current;
+
+		
+		long_Current = current & 0xFFFFFFFFL;
+		if(long_Current == 0xFFFFFFFFL){
+			long_Current = 0;
+		}
+		
+		long_Current *= 5;
+		
+		if(long_Current > CAN1CommManager.DATA_STATE_EPPRCURRENT_MAX)
+			long_Current = 0;
+		
+		strCurrent = Long.toString(long_Current);
+		
+		return strCurrent;
+	}
+	
+	public String GetJoystickPositionString(int position){
+		String strPosition;
+		long long_Position;
+		int n100;
+		int n10;
+		int n1;
+		int Under1;
+		
+		long_Position = position & 0xFFFFFFFFL;
+		if(long_Position == 0xFFFFFFFFL){
+			long_Position = 0;
+		}
+		
+		n100 = (int) ((long_Position  / 1000) % 10);
+		n10 = (int) ((long_Position  / 100) % 10);
+		n1 = (int) ((long_Position  / 10) % 10);
+		Under1 = (int) ((long_Position  / 1) % 10);
+		
+		if(n100 != 0){
+			strPosition = Integer.toString(n100) + Integer.toString(n10) + Integer.toString(n1) + "." + Integer.toString(Under1);
+		}else if(n10 != 0){
+			strPosition = Integer.toString(n10) + Integer.toString(n1) + "." + Integer.toString(Under1);
+		}else {
+			strPosition = Integer.toString(n1) + "." + Integer.toString(Under1);
+		}
+		
+		return strPosition;
 	}
 	/////////////////////////////////////////////////////
 }

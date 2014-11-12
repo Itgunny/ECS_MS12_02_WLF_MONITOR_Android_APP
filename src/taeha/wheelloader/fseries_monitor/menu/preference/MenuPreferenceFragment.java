@@ -5,6 +5,7 @@ import taeha.wheelloader.fseries_monitor.animation.ChangeFragmentAnimation;
 import taeha.wheelloader.fseries_monitor.animation.DisappearAnimation;
 import taeha.wheelloader.fseries_monitor.animation.MainBodyShiftAnimation;
 import taeha.wheelloader.fseries_monitor.animation.LeftRightShiftAnimation;
+import taeha.wheelloader.fseries_monitor.main.Home;
 import taeha.wheelloader.fseries_monitor.main.ParentFragment;
 import taeha.wheelloader.fseries_monitor.main.R;
 import taeha.wheelloader.fseries_monitor.main.R.string;
@@ -76,7 +77,8 @@ public class MenuPreferenceFragment extends MenuBodyList_ParentFragment{
 	@Override
 	protected void UpdateUI() {
 		// TODO Auto-generated method stub
-		
+		BrightnessDisplay(ParentActivity.BrightnessManualAuto);
+		SoundOutputDisplay(ParentActivity.SoundState);
 	}
 	@Override
 	protected void InitList() {
@@ -133,7 +135,7 @@ public class MenuPreferenceFragment extends MenuBodyList_ParentFragment{
 	@Override
 	public void ClickList4() {
 		// TODO Auto-generated method stub
-		
+		ParentActivity.showSoundOutput();
 	}
 
 	@Override
@@ -149,7 +151,31 @@ public class MenuPreferenceFragment extends MenuBodyList_ParentFragment{
 	}
 	
 	/////////////////////////////////////////////////////////////////////	
-	
+	public void BrightnessDisplay(int _data){
+		switch (_data) {
+		case Home.BRIGHTNESS_MANUAL:
+			setListData1(ParentActivity.getResources().getString(string.Manual));
+			break;
+		case Home.BRIGHTNESS_AUTO:
+			setListData1(ParentActivity.getResources().getString(string.Automatic));
+			break;
+		default:
+			break;
+		}
+		
+	}
+	public void SoundOutputDisplay(int _data){
+		switch (_data) {
+		case Home.STATE_INTERNAL_SPK:
+			setListData4(ParentActivity.getResources().getString(string.Internal_Speaker));
+			break;
+		case Home.STATE_EXTERNAL_AUX:
+			setListData4(ParentActivity.getResources().getString(string.External_Aux));
+			break;
+		default:
+			break;
+		}
+	}
 	/////////////////////////////////////////////////////////////////////
 	
 	/////////////////////////////////////////////////////////////////////

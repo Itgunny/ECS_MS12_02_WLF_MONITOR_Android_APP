@@ -20,7 +20,7 @@
     <string name="Off">Off</string>
     <string name="Disable">Disable</string>
     <string name="Enable">Enable</string>
-    <string name="On_Always">On, Alwyas</string>
+    <string name="On_Always">On, Always</string>
     <string name="On_Once">On, Once</string>
     <string name="Default">Default</string>
     <string name="Manual">Manual</string>
@@ -47,6 +47,23 @@
     <string name="Hour">Hour</string>
     <string name="Min">Min</string>
     <string name="Day">Day</string>
+    <string name="Sec">Sec</string>
+    <string name="Initialize_">Initialize?</string>
+    <string name="Waiting_for_initialization">Waiting for initialization.</string>
+    <string name="User_Password">User Password</string>
+    <string name="Service_Password">Service Password</string>
+    <string name="Incorrect_Password">Incorrect Password</string>
+    <string name="_5_10_digits">5~10 digits</string>
+    <string name="Searching">Searching</string>
+    <string name="Password_Changed">Password Changed</string>
+    <string name="Re_entering_Password">Re-entering Password</string>
+    <string name="Current_Password">Current Password</string>
+    <string name="New_Password">New Password</string>
+    <string name="Re_entering_New_Password">Re-entering Password</string>
+    <string name="Access_Denied">Access Denied</string>
+    <string name="Input_new_phone_number">Input new phone number</string>
+    <string name="_5_12_digits">5~12 digits</string>
+    <string name="No_Changes_executed">No Changes executed</string>
     <!-- Common End-->
     <!-- Main Start-->
     <string name="ENGINE_MODE">ENGINE MODE</string>
@@ -179,6 +196,10 @@
     <string name="Standard">Standard</string>
     <string name="Power">Power</string>
     <string name="Hz">Hz</string>
+    <string name="Slow">Slow</string>
+    <string name="Normal">Normal</string>
+    <string name="Fast">Fast</string>
+    <string name="Very_Fast">Very Fast</string>
     <!-- Menu Mode End -->
     <!-- Menu Monitoring Start -->
     <string name="Machine_Monitoring">Machine Monitoring</string>
@@ -248,10 +269,25 @@
     <string name="Sensor_Monitoring">Sensor Monitoring</string>
     <string name="Speed_Limit_Setting">Speed Limit Setting</string>
     <string name="Weighing_System_Compensation">Weighing System Compensation</string>
+    <string name="First_boom_pressure_calibration_completed">1st boom pressure calibration completed</string>
     <string name="No_Offset">No Offset</string>
     <string name="Work_Tool_1">Work Tool 1</string>
     <string name="Work_Tool_2">Work Tool 2</string>
     <string name="Work_Tool_3">Work Tool 3</string>
+    <string name="Registering">Registrating</string>
+    <string name="Deleting">Deleting</string>
+    <string name="_1st_user_tag_registered">1st user tag registered</string>
+    <string name="_2nd_user_tag_registered">2nd user tag registered</string>
+    <string name="Tag_already_registered">Tag already registered.</string>
+    <string name="Registration_failed">Registration failed.</string>
+    <string name="All_user_tags_deleted">All user tags deleted.</string>
+    <string name="Delete_failed">Delete failed.</string>
+    <string name="Calibration_failed_Machine_Restart">Calibration failed  Machine Restart</string>
+    <string name="Calibration_completed">Calibration completed</string>
+    <string name="Calibration_failed">Calibration failed</string>
+    <string name="Sensor_Error">Sensor Error</string>
+    <string name="Time_Out">Time Out</string>
+    <string name="Boom_Up_Speed_Error">Boom Up Speed Error</string>
     <!-- Menu Management End -->
     <!-- Menu Preference Start -->
     <string name="Brightness_Setting">Brightness Setting</string>
@@ -263,6 +299,8 @@
     <string name="Time_settings_for_daytime">Time settings for daytime</string>
     <string name="Daytime">Daytime</string>
     <string name="Nighttime">Nighttime</string>
+    <string name="Internal_Speaker">Internal Speaker</string>
+    <string name="External_Aux">External AUX</string>
     <!-- Menu Preference End -->
     <!-- Menu Multimedia Start -->
     <string name="Media_Palyer">Media Palyer</string>

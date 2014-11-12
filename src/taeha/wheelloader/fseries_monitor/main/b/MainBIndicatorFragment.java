@@ -29,7 +29,6 @@ public class MainBIndicatorFragment extends ParentFragment{
 	ImageView imgViewLockUpClutch;
 	ImageView imgViewSeatBelt;
 	ImageView imgViewEngineAutoShutdown;
-	ImageView imgViewEngineDelayShutdown;
 	//////////////////////////////////////////////////
 	
 	//VALUABLE////////////////////////////////////////
@@ -43,7 +42,6 @@ public class MainBIndicatorFragment extends ParentFragment{
 	int LockUpClutch;
 	int SeatBelt;
 	int EngineAutoShutdown;
-	int EngineDelayShutdown;
 	//////////////////////////////////////////////////
 	
 	//ANIMATION///////////////////////////////////////
@@ -95,7 +93,6 @@ public class MainBIndicatorFragment extends ParentFragment{
 		imgViewLockUpClutch = (ImageView)mRoot.findViewById(R.id.imageView_indicator_main_b_LockUpClutch);
 		imgViewSeatBelt = (ImageView)mRoot.findViewById(R.id.imageView_indicator_main_b_SeatBelt);
 		imgViewEngineAutoShutdown = (ImageView)mRoot.findViewById(R.id.imageView_indicator_main_b_EngineAutoShutdown);
-		imgViewEngineDelayShutdown = (ImageView)mRoot.findViewById(R.id.imageView_indicator_main_b_EngineDelayShutdown);
 		
 		imgViewWarmingUp.setAlpha(DARK);
 		imgViewFuelWarmer.setAlpha(DARK);
@@ -107,7 +104,6 @@ public class MainBIndicatorFragment extends ParentFragment{
 		imgViewLockUpClutch.setAlpha(DARK);
 		imgViewSeatBelt.setAlpha(DARK);
 		imgViewEngineAutoShutdown.setAlpha(DARK);
-		imgViewEngineDelayShutdown.setAlpha(DARK);
 		
 	}
 	
@@ -146,7 +142,7 @@ public class MainBIndicatorFragment extends ParentFragment{
 		LockUpClutch = CAN1Comm.Get_TransmissionTCLockupEngaged_556_PGN65428();
 		//SeatBelt;
 		EngineAutoShutdown = CAN1Comm.Get_AutomaticEngineShutdown_363_PGN65428();
-		EngineDelayShutdown = CAN1Comm.Get_DelayedEngineShutdown_365_PGN65428();
+
 	}
 
 	@Override
@@ -162,7 +158,6 @@ public class MainBIndicatorFragment extends ParentFragment{
 		LockUpClutchDisplay(LockUpClutch);
 		SeatBeltDisplay(ParentActivity.SeatBelt);
 		EngineAutoShutdownDisplay(EngineAutoShutdown);
-		EngineDelayShutdownDisplay(EngineDelayShutdown);
 		
 	}
 	/////////////////////////////////////////////////////////////////////	
@@ -314,20 +309,7 @@ public class MainBIndicatorFragment extends ParentFragment{
 			break;
 		}
 	}
-	public void EngineDelayShutdownDisplay(int Data){
-		switch (Data) {
-		case CAN1CommManager.DATA_STATE_LAMP_OFF:
-			EngineDelayShutdownAnimation.FlipAnimation(imgViewEngineDelayShutdown, R.drawable.main_indicator_enginedelayshutdown);
-			imgViewEngineDelayShutdown.setAlpha(DARK);
-			break;
-		case CAN1CommManager.DATA_STATE_LAMP_ON:
-			EngineDelayShutdownAnimation.FlipAnimation(imgViewEngineDelayShutdown, R.drawable.main_indicator_enginedelayshutdown_on);
-			imgViewEngineDelayShutdown.setAlpha(LIGHT);
-			break;
-		default:
-			break;
-		}
-	}
+
 	public void DisableVirtualKey(){
 		imgViewLockUpClutch.setY((float)57);
 		imgViewSeatBelt.setY((float)57); 

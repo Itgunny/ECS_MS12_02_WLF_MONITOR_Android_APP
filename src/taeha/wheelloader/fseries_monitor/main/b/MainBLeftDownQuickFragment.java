@@ -1,5 +1,6 @@
 package taeha.wheelloader.fseries_monitor.main.b;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -97,10 +98,10 @@ public class MainBLeftDownQuickFragment extends ParentFragment{
 	/////////////////////////////////////////////////////////////////////	
 	
 	public void ClickHelp(){
-		if(ParentActivity.AnimationRunningFlag == true)
-			return;
-		else
-			ParentActivity.StartAnimationRunningTimer();
+		Intent intent;
+		intent = ParentActivity.getPackageManager().getLaunchIntentForPackage("org.ebookdroid");
+		if(intent != null)
+			startActivity(intent);
 	}
 	
 	

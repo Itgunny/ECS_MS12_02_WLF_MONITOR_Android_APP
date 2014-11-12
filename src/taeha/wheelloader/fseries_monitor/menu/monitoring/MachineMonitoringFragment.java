@@ -5,9 +5,13 @@ import taeha.wheelloader.fseries_monitor.animation.ChangeFragmentAnimation;
 import taeha.wheelloader.fseries_monitor.animation.DisappearAnimation;
 import taeha.wheelloader.fseries_monitor.animation.MainBodyShiftAnimation;
 import taeha.wheelloader.fseries_monitor.animation.LeftRightShiftAnimation;
+import taeha.wheelloader.fseries_monitor.main.CAN1CommManager;
 import taeha.wheelloader.fseries_monitor.main.Home;
 import taeha.wheelloader.fseries_monitor.main.ParentFragment;
 import taeha.wheelloader.fseries_monitor.main.R;
+import taeha.wheelloader.fseries_monitor.main.R.string;
+import android.R.color;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.text.Layout;
 import android.util.Log;
@@ -27,12 +31,33 @@ public class MachineMonitoringFragment extends ParentFragment{
 	//////////////////////////////////////////////////
 	//RESOURCE////////////////////////////////////////
 	ImageButton imgbtnOK;
+	
+	TextView 	textViewHYDTitle;
+	TextView 	textViewBattTitle;
+	TextView 	textViewCoolantTitle;
+	TextView 	textViewTMOilTitle;
 
-
+	TextView 	textViewHYD;
+	TextView 	textViewBatt;
+	TextView 	textViewCoolant;
+	TextView 	textViewTMOil;
+	
+	TextView 	textViewHYDUnit;
+	TextView 	textViewBattUnit;
+	TextView 	textViewCoolantUnit;
+	TextView 	textViewTMOilUnit;
 	//////////////////////////////////////////////////
 	
 	//VALUABLE////////////////////////////////////////
-
+	int HYD;
+	int Battery;
+	int TMOil;
+	int Coolant;
+	
+	int HYDHighWarning;
+	int BatteryLowWarning;
+	int TMOilHighWarning;
+	int CoolantHighWarning;
 	//////////////////////////////////////////////////
 	
 	//Fragment////////////////////////////////////////
@@ -73,16 +98,27 @@ public class MachineMonitoringFragment extends ParentFragment{
 	protected void InitResource() {
 		// TODO Auto-generated method stub
 		imgbtnOK = (ImageButton)mRoot.findViewById(R.id.ImageButton_menu_body_monitoring_machinemonitoring_low_ok);
-
-	
+		
+		textViewHYDTitle = (TextView)mRoot.findViewById(R.id.textView_menu_body_monitoring_machinemonitoring_hyd_title);
+		textViewBattTitle = (TextView)mRoot.findViewById(R.id.textView_menu_body_monitoring_machinemonitoring_battery_title);
+		textViewCoolantTitle = (TextView)mRoot.findViewById(R.id.textView_menu_body_monitoring_machinemonitoring_coolant_title);
+		textViewTMOilTitle = (TextView)mRoot.findViewById(R.id.textView_menu_body_monitoring_machinemonitoring_tmoil_title);
+		
+		textViewHYD = (TextView)mRoot.findViewById(R.id.textView_menu_body_monitoring_machinemonitoring_hyd_data);
+		textViewBatt = (TextView)mRoot.findViewById(R.id.textView_menu_body_monitoring_machinemonitoring_battery_data);
+		textViewCoolant = (TextView)mRoot.findViewById(R.id.textView_menu_body_monitoring_machinemonitoring_coolant_data);
+		textViewTMOil = (TextView)mRoot.findViewById(R.id.textView_menu_body_monitoring_machinemonitoring_tmoil_data);
+		
+		textViewHYDUnit = (TextView)mRoot.findViewById(R.id.textView_menu_body_monitoring_machinemonitoring_hyd_unit);
+		textViewBattUnit = (TextView)mRoot.findViewById(R.id.textView_menu_body_monitoring_machinemonitoring_battery_unit);
+		textViewCoolantUnit = (TextView)mRoot.findViewById(R.id.textView_menu_body_monitoring_machinemonitoring_coolant_unit);
+		textViewTMOilUnit = (TextView)mRoot.findViewById(R.id.textView_menu_body_monitoring_machinemonitoring_tmoil_unit);	
 	}
 
 	protected void InitValuables() {
 		// TODO Auto-generated method stub
 		super.InitValuables();
-		
-		
-		
+				
 	}
 	@Override
 	protected void InitButtonListener() {
@@ -101,13 +137,23 @@ public class MachineMonitoringFragment extends ParentFragment{
 	@Override
 	protected void GetDataFromNative() {
 		// TODO Auto-generated method stub
-		
+		HYD = CAN1Comm.Get_HydraulicOilTemperature_101_PGN65431();
+		Battery = CAN1Comm.Get_BatteryVoltage_705_PGN65431();
+		Coolant = CAN1Comm.Get_EngineCoolantTemperature_304_PGN65431();
+		TMOil = CAN1Comm.Get_TransmissionOilTemperature_536_PGN65431();
+		HYDHighWarning = CAN1Comm.Get_HydraulicOilTemperatureHigh_102_PGN65427();
+		BatteryLowWarning = CAN1Comm.Get_BatteryVoltageLow_706_PGN65427();
+		CoolantHighWarning = CAN1Comm.Get_EngineCoolantTemperatureHigh_305_PGN65427();
+		TMOilHighWarning = CAN1Comm.Get_TransmissionOilTemperatureHigh_537_PGN65427();
 	}
 
 	@Override
 	protected void UpdateUI() {
 		// TODO Auto-generated method stub
-		
+		HYDDisplay(HYD,HYDHighWarning,ParentActivity.UnitTemp);
+		BatteryDisplay(Battery, BatteryLowWarning);
+		CoolantDisplay(Coolant, CoolantHighWarning, ParentActivity.UnitTemp);
+		TMOilDisplay(TMOil, TMOilHighWarning, ParentActivity.UnitTemp);
 	}
 	/////////////////////////////////////////////////////////////////////	
 	public void ClickOK(){
@@ -120,7 +166,66 @@ public class MachineMonitoringFragment extends ParentFragment{
 	}
 
 	/////////////////////////////////////////////////////////////////////
-	
+	public void HYDDisplay(int _data, int _status, int _unit){
+		textViewHYD.setText(ParentActivity.GetTemp(_data,_unit));
+		if(_unit == ParentActivity.UNIT_TEMP_F){
+			textViewHYDUnit.setText(ParentActivity.getResources().getString(string.F));
+		}else{
+			textViewHYDUnit.setText(ParentActivity.getResources().getString(string.C));
+		}
+		
+		if(_status == CAN1CommManager.DATA_STATE_LAMP_ON){
+			textViewHYD.setTextColor(ParentActivity.getResources().getColor(R.color.red));
+			textViewHYDTitle.setTextColor(ParentActivity.getResources().getColor(R.color.red));
+		}else{
+			textViewHYD.setTextColor(ParentActivity.getResources().getColor(R.color.white));
+			textViewHYDTitle.setTextColor(ParentActivity.getResources().getColor(R.color.white));
+		}
+	}
+	public void BatteryDisplay(int _data, int _status){
+		textViewBatt.setText(ParentActivity.GetBattery(_data));
+		textViewBattUnit.setText(ParentActivity.getResources().getString(string.V));
+		
+		if(_status == CAN1CommManager.DATA_STATE_LAMP_ON){
+			textViewBatt.setTextColor(ParentActivity.getResources().getColor(R.color.red));
+			textViewBattTitle.setTextColor(ParentActivity.getResources().getColor(R.color.red));
+		}else{
+			textViewBatt.setTextColor(ParentActivity.getResources().getColor(R.color.white));
+			textViewBattTitle.setTextColor(ParentActivity.getResources().getColor(R.color.white));
+		}
+	}
+	public void CoolantDisplay(int _data, int _status, int _unit){
+		textViewCoolant.setText(ParentActivity.GetTemp(_data,_unit));
+		if(_unit == ParentActivity.UNIT_TEMP_F){
+			textViewCoolantUnit.setText(ParentActivity.getResources().getString(string.F));
+		}else{
+			textViewCoolantUnit.setText(ParentActivity.getResources().getString(string.C));
+		}
+		
+		if(_status == CAN1CommManager.DATA_STATE_LAMP_ON){
+			textViewCoolant.setTextColor(ParentActivity.getResources().getColor(R.color.red));
+			textViewCoolantTitle.setTextColor(ParentActivity.getResources().getColor(R.color.red));
+		}else{
+			textViewCoolant.setTextColor(ParentActivity.getResources().getColor(R.color.white));
+			textViewCoolantTitle.setTextColor(ParentActivity.getResources().getColor(R.color.white));
+		}
+	}
+	public void TMOilDisplay(int _data, int _status, int _unit){
+		textViewTMOil.setText(ParentActivity.GetTemp(_data,_unit));
+		if(_unit == ParentActivity.UNIT_TEMP_F){
+			textViewTMOilUnit.setText(ParentActivity.getResources().getString(string.F));
+		}else{
+			textViewTMOilUnit.setText(ParentActivity.getResources().getString(string.C));
+		}
+		
+		if(_status == CAN1CommManager.DATA_STATE_LAMP_ON){
+			textViewTMOil.setTextColor(ParentActivity.getResources().getColor(R.color.red));
+			textViewTMOilTitle.setTextColor(ParentActivity.getResources().getColor(R.color.red));
+		}else{
+			textViewTMOil.setTextColor(ParentActivity.getResources().getColor(R.color.white));
+			textViewTMOilTitle.setTextColor(ParentActivity.getResources().getColor(R.color.white));
+		}
+	}
 	/////////////////////////////////////////////////////////////////////
 	
 }

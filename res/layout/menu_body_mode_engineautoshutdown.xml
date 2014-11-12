@@ -69,6 +69,7 @@
     </RelativeLayout>
     
     <RelativeLayout
+        android:id="@+id/RelativeLayout_menu_body_mode_engineautoshutdown_time"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignBottom="@+id/imageView_menu_body_mode_engineautoshutdown_line2"
@@ -81,7 +82,7 @@
 	            android:layout_width="wrap_content"
 	            android:layout_height="wrap_content"
 	            android:layout_centerHorizontal="true"
-	            android:layout_marginTop="30dp"
+	            android:layout_marginTop="20dp"
 	            android:text="Large Text"
 	            android:textAppearance="?android:attr/textAppearanceLarge"
 	            android:textColor="@color/menu_left_amber" />
@@ -114,7 +115,7 @@
 	            android:layout_height="wrap_content"
 	            android:layout_centerHorizontal="true"
 	            android:layout_marginLeft="140dp"
-	            android:layout_marginTop="60dp" >
+	            android:layout_marginTop="50dp" >
 	            
 	            <ImageView
 	                android:id="@+id/imageView_menu_body_mode_engineautoshutdown_seekbar_bg"
@@ -142,6 +143,7 @@
         </RelativeLayout>
         
     <RelativeLayout
+        android:id="@+id/RelativeLayout_menu_body_mode_engineautoshutdown_esl"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_above="@+id/RelativeLayout_menu_body_mode_engineautoshutdown_low"

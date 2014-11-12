@@ -8,6 +8,7 @@
         android:layout_width="742dp"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
+        android:layout_marginTop="10dp"
         android:background="@drawable/menu_information_monitoring_block" >
 
         <TextView

@@ -5,9 +5,11 @@ import taeha.wheelloader.fseries_monitor.animation.ChangeFragmentAnimation;
 import taeha.wheelloader.fseries_monitor.animation.DisappearAnimation;
 import taeha.wheelloader.fseries_monitor.animation.MainBodyShiftAnimation;
 import taeha.wheelloader.fseries_monitor.animation.LeftRightShiftAnimation;
+import taeha.wheelloader.fseries_monitor.main.CAN1CommManager;
 import taeha.wheelloader.fseries_monitor.main.Home;
 import taeha.wheelloader.fseries_monitor.main.ParentFragment;
 import taeha.wheelloader.fseries_monitor.main.R;
+import taeha.wheelloader.fseries_monitor.main.R.string;
 import android.os.Bundle;
 import android.text.Layout;
 import android.util.Log;
@@ -34,7 +36,7 @@ public class CoolingFanFragment extends ParentFragment{
 	//////////////////////////////////////////////////
 	
 	//VALUABLE////////////////////////////////////////
-
+	int CoolingFanReverse;
 	//////////////////////////////////////////////////
 	
 	//Fragment////////////////////////////////////////
@@ -63,6 +65,7 @@ public class CoolingFanFragment extends ParentFragment{
 		InitValuables();
 		InitButtonListener();
 		
+		setCoolingFanReverseRadio(CoolingFanReverse);
 		ParentActivity.ScreenIndex = ParentActivity.SCREEN_STATE_MENU_MODE_ETC_COOLINGFAN_TOP;
 		ParentActivity._MenuBaseFragment._MenuInterTitleFragment.SetTitleText(ParentActivity.getResources().getString(R.string.Cooling_Fan_Reverse_Mode));
 		return mRoot;
@@ -87,6 +90,9 @@ public class CoolingFanFragment extends ParentFragment{
 		_CoolingFanManualFragment = new CoolingFanManualFragment();
 		_CoolingFanAutoFragment = new CoolingFanAutoFragment();		
 		_CoolingFanOffFragment = new CoolingFanOffFragment();
+		
+		CoolingFanReverse = CAN1Comm.Get_CoolingFanReverseMode_182_PGN65369();
+		
 	}
 	@Override
 	protected void InitButtonListener() {
@@ -161,6 +167,35 @@ public class CoolingFanFragment extends ParentFragment{
 		transaction.commit();
 		
 	}	
+	/////////////////////////////////////////////////////////////////////
+	public void setCoolingFanReverseRadio(int data){
+		switch (data) {
+		case CAN1CommManager.DATA_STATE_REVERSEFAN_OFF:
+			radioOff.setChecked(true);
+			radioManual.setChecked(false);
+			radioAuto.setChecked(false);
+		
+			ClickOff();
+			break;
+		case CAN1CommManager.DATA_STATE_REVERSEFAN_MANUAL:
+			radioOff.setChecked(false);
+			radioManual.setChecked(true);
+			radioAuto.setChecked(false);
+			ClickManual();
+			
+			break;
+		case CAN1CommManager.DATA_STATE_REVERSEFAN_AUTO:
+			radioOff.setChecked(false);
+			radioManual.setChecked(false);
+			radioAuto.setChecked(true);
+			ClickAuto();
+			
+			break;
+
+		default:
+			break;
+		}
+	}
 	/////////////////////////////////////////////////////////////////////
 	
 }

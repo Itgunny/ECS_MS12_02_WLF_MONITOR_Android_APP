@@ -21,13 +21,10 @@ public class ServiceMenuPasswordFragment extends PasswordFragment{
 		ParentActivity._MenuBaseFragment._MenuListTitleFragment.setBackButtonEnable(true);
 		ParentActivity.ScreenIndex = ParentActivity.SCREEN_STATE_MENU_MANAGEMENT_SERVICE_PW;
 		ParentActivity._MenuBaseFragment._MenuListTitleFragment.SetTitleText(ParentActivity.getResources().getString(R.string.Service_Contact));
+		SetTextIndicatorTitle(2);
 		return mRoot;
 	}
-	@Override
-	public void ClickEnter(){
-		showServicePasswordNextScreen();
-	}
-	
+
 	@Override
 	public void showServicePasswordNextScreen() {
 		// TODO Auto-generated method stub
@@ -41,11 +38,19 @@ public class ServiceMenuPasswordFragment extends PasswordFragment{
 	@Override
 	public void showUserPasswordNextScreen() {
 		// TODO Auto-generated method stub
-		if(ParentActivity.AnimationRunningFlag == true)
-			return;
-		else
-			ParentActivity.StartAnimationRunningTimer();
-		ParentActivity._MenuBaseFragment.showBodyServiceMenuList();
+		DataBufIndex = 0;
+		PasswordIndicatorDisplay();
+		
+		SetTextIndicatorTitle(3);
+		try {
+			Thread.sleep(1000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		CancelPasswordCheckTimer();
+		SetTextIndicatorTitle(2);
 	}
 
 }

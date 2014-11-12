@@ -37,6 +37,47 @@
                 android:text="@string/Lower_the_boom_at_min_height"
                 android:textAppearance="?android:attr/textAppearanceLarge" />
             
+            <ImageView
+                android:id="@+id/imageView_menu_body_management_calibration_angle_main_icon"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/imageView_menu_body_management_calibration_angle_main_line"
+                android:src="@drawable/menu_management_boom_angle_img_01" />
+            
+            <TextView
+                android:id="@+id/textView_menu_body_management_calibration_angle_main_boom_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/imageView_menu_body_management_calibration_angle_main_line"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="20dp"
+                android:gravity="center"
+                android:text="@string/Boom"
+                android:textAppearance="?android:attr/textAppearanceLarge" />
+
+            <TextView
+                android:id="@+id/textView_menu_body_management_calibration_angle_main_boom_colon"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignBottom="@+id/textView_menu_body_management_calibration_angle_main_boom_title"
+                android:layout_alignTop="@+id/textView_menu_body_management_calibration_angle_main_boom_title"
+                android:layout_marginLeft="10dp"
+                android:layout_toRightOf="@+id/textView_menu_body_management_calibration_angle_main_boom_title"
+                android:gravity="center"
+                android:text=":"
+                android:textAppearance="?android:attr/textAppearanceLarge" />
+
+            <TextView
+                android:id="@+id/textView_menu_body_management_calibration_angle_main_boom_data"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignBottom="@+id/textView_menu_body_management_calibration_angle_main_boom_colon"
+                android:layout_alignTop="@+id/textView_menu_body_management_calibration_angle_main_boom_colon"
+                android:layout_marginLeft="10dp"
+                android:layout_toRightOf="@+id/textView_menu_body_management_calibration_angle_main_boom_colon"
+                android:gravity="center"
+                android:textAppearance="?android:attr/textAppearanceLarge" />
+            
         </RelativeLayout>
 
         <RelativeLayout

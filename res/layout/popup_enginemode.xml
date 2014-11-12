@@ -2,7 +2,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/menu_popup01_bg" >
+    android:background="@drawable/menu_popup02_bg" >
 
     <ImageView
         android:id="@+id/imageView_popup_enginemode_line"
@@ -27,8 +27,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="44dp"
-        android:layout_marginTop="97dp"
-        android:background="@drawable/_selector_popup01_short_btn1"
+        android:layout_marginTop="90dp"
+        android:background="@drawable/_selector_popup01_long_btn1"
         android:gravity="center"
         android:text="@string/Econo"
         android:textAppearance="?android:attr/textAppearanceLarge"
@@ -38,9 +38,10 @@
         android:id="@+id/textView_popup_enginemode_std"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="231dp"
-        android:layout_marginTop="97dp"
-        android:background="@drawable/_selector_popup01_short_btn1"
+        android:layout_alignLeft="@+id/textView_popup_enginemode_econo"
+        android:layout_below="@+id/textView_popup_enginemode_econo"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/_selector_popup01_long_btn1"
         android:gravity="center"
         android:text="@string/Standard"
         android:textAppearance="?android:attr/textAppearanceLarge"
@@ -50,14 +51,13 @@
         android:id="@+id/textView_popup_enginemode_pwr"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="44dp"
-        android:layout_marginTop="181dp"
-        android:background="@drawable/_selector_popup01_short_btn1"
+        android:layout_alignLeft="@+id/textView_popup_enginemode_econo"
+        android:layout_below="@+id/textView_popup_enginemode_std"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/_selector_popup01_long_btn1"
         android:gravity="center"
         android:text="@string/Power"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:textColor="@color/black" />
-    
- 
 
 </RelativeLayout>

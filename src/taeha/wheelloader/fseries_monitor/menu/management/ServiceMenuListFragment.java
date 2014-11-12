@@ -5,10 +5,13 @@ import taeha.wheelloader.fseries_monitor.animation.ChangeFragmentAnimation;
 import taeha.wheelloader.fseries_monitor.animation.DisappearAnimation;
 import taeha.wheelloader.fseries_monitor.animation.MainBodyShiftAnimation;
 import taeha.wheelloader.fseries_monitor.animation.LeftRightShiftAnimation;
+import taeha.wheelloader.fseries_monitor.main.CAN1CommManager;
+import taeha.wheelloader.fseries_monitor.main.Home;
 import taeha.wheelloader.fseries_monitor.main.ParentFragment;
 import taeha.wheelloader.fseries_monitor.main.R;
 import taeha.wheelloader.fseries_monitor.main.R.string;
 import taeha.wheelloader.fseries_monitor.menu.MenuBodyList_ParentFragment;
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.Layout;
 import android.util.Log;
@@ -30,7 +33,8 @@ public class ServiceMenuListFragment extends MenuBodyList_ParentFragment{
 	//////////////////////////////////////////////////
 	
 	//VALUABLE////////////////////////////////////////
-
+	int nSpeedLimit;
+	int SpeedLimitStatus;
 	//////////////////////////////////////////////////
 	
 	//Fragment////////////////////////////////////////
@@ -70,13 +74,14 @@ public class ServiceMenuListFragment extends MenuBodyList_ParentFragment{
 	@Override
 	protected void GetDataFromNative() {
 		// TODO Auto-generated method stub
-		
+		nSpeedLimit = CAN1Comm.Get_VehicleSpeedLimit_572_PGN61184_106();
+		SpeedLimitStatus = CAN1Comm.Get_VehicleSpeedLimitMode_575_PGN65434();
 	}
 
 	@Override
 	protected void UpdateUI() {
 		// TODO Auto-generated method stub
-		
+		SppedLimitDisplay(SpeedLimitStatus,nSpeedLimit,ParentActivity.UnitOdo);
 	}
 	@Override
 	protected void InitList() {
@@ -84,10 +89,12 @@ public class ServiceMenuListFragment extends MenuBodyList_ParentFragment{
 		setClickableList1(true);
 		setClickableList2(true);
 		setClickableList3(true);
+		setClickableList4(true);
 		
 		setListTitle1(ParentActivity.getResources().getString(string.Sensor_Monitoring));
 		setListTitle2(ParentActivity.getResources().getString(string.Speed_Limit_Setting));
 		setListTitle3(ParentActivity.getResources().getString(string.Weighing_System_Compensation));
+		setListTitle4(ParentActivity.getResources().getString(string.Software_Update));
 	}
 
 	//////////////////////////////////////////////////////////////////////
@@ -98,7 +105,7 @@ public class ServiceMenuListFragment extends MenuBodyList_ParentFragment{
 			return;
 		else
 			ParentActivity.StartAnimationRunningTimer();
-		
+		ParentActivity._MenuBaseFragment.showBodySensorMonitoringAnimation();
 	}
 
 	@Override
@@ -124,7 +131,15 @@ public class ServiceMenuListFragment extends MenuBodyList_ParentFragment{
 	@Override
 	public void ClickList4() {
 		// TODO Auto-generated method stub
+		Intent intent;
+		intent = ParentActivity.getPackageManager().getLaunchIntentForPackage(
+				"taeha.wheelloader.update");
 		
+		if(intent != null){
+			CAN1Comm.Callback_StopCommService();
+			CAN1Comm.CloseComport();
+			startActivity(intent);		
+		}
 	}
 
 	@Override
@@ -140,7 +155,32 @@ public class ServiceMenuListFragment extends MenuBodyList_ParentFragment{
 	}
 	
 	/////////////////////////////////////////////////////////////////////	
-	
+	public void SppedLimitDisplay(int _status, int _speed, int _unit){
+		switch (_status) {
+		case CAN1CommManager.DATA_STATE_LAMP_OFF:
+			setListData2(ParentActivity.getResources().getString(string.Off));
+		
+			break;
+		case CAN1CommManager.DATA_STATE_LAMP_ON:
+			if(_speed != 0xFF){
+				String strSpeed;
+				strSpeed = ParentActivity.GetRideControlSpeed(_speed, _unit);
+				
+				if(_unit == Home.UNIT_ODO_MILE){
+					setListData2(strSpeed + ParentActivity.getResources().getString(R.string.mph));
+				}else{
+					
+					setListData2(strSpeed + ParentActivity.getResources().getString(R.string.km_h));
+				}
+			}
+			break;
+		default:
+			break;
+		}
+	}
+	public void SpeedDisplay(int _data, int _unit){
+
+	}
 	/////////////////////////////////////////////////////////////////////
 	
 	/////////////////////////////////////////////////////////////////////

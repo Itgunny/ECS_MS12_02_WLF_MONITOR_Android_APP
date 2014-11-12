@@ -80,6 +80,7 @@ public class MachineSecurityListFragment extends MenuBodyList_ParentFragment{
 	protected void UpdateUI() {
 		// TODO Auto-generated method stub
 		ESLSystemDisplay(ESLMode,ESLInterval);
+		SmartKeyDisplay(ParentActivity.SmartKeyUse);
 	}
 	@Override
 	protected void InitList() {
@@ -193,6 +194,18 @@ public class MachineSecurityListFragment extends MenuBodyList_ParentFragment{
 		}
 		
 		setListData1(str);
+	}
+	public void SmartKeyDisplay(int _data){
+		switch (_data) {
+		case CAN1CommManager.DATA_STATE_SMARTKEY_USE_OFF:
+			setListData3(ParentActivity.getResources().getString(string.Disable));
+			break;
+		case CAN1CommManager.DATA_STATE_SMARTKEY_USE_ON:
+			setListData3(ParentActivity.getResources().getString(string.Enable));
+			break;
+		default:
+			break;
+		}
 	}
 	/////////////////////////////////////////////////////////////////////
 	

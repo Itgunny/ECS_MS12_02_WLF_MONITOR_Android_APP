@@ -113,10 +113,21 @@ public abstract class ParentFragment extends Fragment{
 	}
 	
 	public void StopReadThread(){
-		threadRead.interrupt();
+		try {
+			threadRead.interrupt();
+		} catch (RuntimeException e) {
+			// TODO: handle exception
+			Log.e(TAG,"RuntimeException StopReadThread");
+		}
 	}
 	public void StartReadThread(){
-		threadRead.start();
+		try {
+			threadRead.start();
+		} catch (RuntimeException e) {
+			// TODO: handle exception
+			Log.e(TAG,"RuntimeException StartReadThread");
+		}
+		
 	}
 	////////////////////////////////////////////////////////////////////
 	

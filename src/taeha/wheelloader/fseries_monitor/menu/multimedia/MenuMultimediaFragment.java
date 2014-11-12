@@ -7,6 +7,7 @@ import taeha.wheelloader.fseries_monitor.animation.MainBodyShiftAnimation;
 import taeha.wheelloader.fseries_monitor.animation.LeftRightShiftAnimation;
 import taeha.wheelloader.fseries_monitor.main.ParentFragment;
 import taeha.wheelloader.fseries_monitor.main.R;
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.Layout;
 import android.util.Log;
@@ -109,7 +110,11 @@ public class MenuMultimediaFragment extends ParentFragment{
 	/////////////////////////////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////////	
 	public void ClickMediaPlayer(){
-		
+		Intent intent;
+		intent = ParentActivity.getPackageManager().getLaunchIntentForPackage("com.mxtech.videoplayer.ad");
+		if(intent != null){
+			ParentActivity.startActivity(intent);
+		}
 	}
 	/////////////////////////////////////////////////////////////////////
 	

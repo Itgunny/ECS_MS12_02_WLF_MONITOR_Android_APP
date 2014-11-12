@@ -5,6 +5,7 @@ import taeha.wheelloader.fseries_monitor.animation.ChangeFragmentAnimation;
 import taeha.wheelloader.fseries_monitor.animation.DisappearAnimation;
 import taeha.wheelloader.fseries_monitor.animation.MainBodyShiftAnimation;
 import taeha.wheelloader.fseries_monitor.animation.LeftRightShiftAnimation;
+import taeha.wheelloader.fseries_monitor.main.CAN1CommManager;
 import taeha.wheelloader.fseries_monitor.main.Home;
 import taeha.wheelloader.fseries_monitor.main.ParentFragment;
 import taeha.wheelloader.fseries_monitor.main.R;
@@ -29,10 +30,11 @@ public class CoolingFanManualFragment extends ParentFragment{
 	//RESOURCE////////////////////////////////////////
 	ImageButton imgbtnOK;
 	
+	ImageButton imgbtnCoolingFanManual;
 	//////////////////////////////////////////////////
 	
 	//VALUABLE////////////////////////////////////////
-
+	boolean ManualPress;
 	//////////////////////////////////////////////////
 	
 	//Fragment////////////////////////////////////////
@@ -73,14 +75,14 @@ public class CoolingFanManualFragment extends ParentFragment{
 		// TODO Auto-generated method stub
 		imgbtnOK = (ImageButton)mRoot.findViewById(R.id.ImageButton_menu_body_mode_coolingfan_manual_low_ok);
 		
-		
+		imgbtnCoolingFanManual = (ImageButton)mRoot.findViewById(R.id.imageButton_menu_body_mode_coolingfan_manual);
 	}
 
 	protected void InitValuables() {
 		// TODO Auto-generated method stub
 		super.InitValuables();
 		
-		
+		ManualPress = false;
 		
 	}
 	@Override
@@ -94,13 +96,20 @@ public class CoolingFanManualFragment extends ParentFragment{
 				ClickOK();
 			}
 		});
-		
+		imgbtnCoolingFanManual.setOnClickListener(new View.OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				ClickCoolingFanManual();
+			}
+		});
 	}
 
 	@Override
 	protected void GetDataFromNative() {
 		// TODO Auto-generated method stub
-		
+		CheckCoolingFanManualButton();
 	}
 
 	@Override
@@ -117,8 +126,23 @@ public class CoolingFanManualFragment extends ParentFragment{
 		ParentActivity._MenuBaseFragment.showBodyModeAnimation();
 		ParentActivity._MenuBaseFragment._MenuModeFragment.setFirstScreen(Home.SCREEN_STATE_MENU_MODE_ETC_TOP);
 	}
+	public void ClickCoolingFanManual(){
+		
+	}
 	/////////////////////////////////////////////////////////////////////
-	
+	public void CheckCoolingFanManualButton(){
+		if(imgbtnCoolingFanManual.isPressed() == true){
+			CAN1Comm.Set_CoolingFanReverseMode_182_PGN61184_61(CAN1CommManager.DATA_STATE_REVERSEFAN_MANUAL);
+			CAN1Comm.TxCANToMCU(61);
+			ManualPress = true;
+		}
+		
+		if(ManualPress == true && imgbtnCoolingFanManual.isPressed() == false){
+			CAN1Comm.Set_CoolingFanReverseMode_182_PGN61184_61(CAN1CommManager.DATA_STATE_REVERSEFAN_OFF);
+			CAN1Comm.TxCANToMCU(61);
+			ManualPress = false;
+		}
+	}
 	/////////////////////////////////////////////////////////////////////
 	
 }

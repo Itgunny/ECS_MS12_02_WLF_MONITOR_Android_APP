@@ -18,56 +18,69 @@
             android:layout_centerHorizontal="true"
             android:layout_centerVertical="true" >
 
-            <TextView
-                android:id="@+id/textView_menu_body_mode_speedometerfreq_data_10"
+            <RadioGroup
+                android:id="@+id/radioGroup_menu_body_mode_speedometerfreq_data"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
-                android:gravity="center"
-                android:text="0"
-                android:textAppearance="?android:attr/textAppearanceLarge"
-                android:textSize="70sp" />
+                android:orientation="horizontal" >
 
-            <TextView
-                android:id="@+id/textView_menu_body_mode_speedometerfreq_data_1"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
-                android:gravity="center"
-                android:text="0"
-                android:textAppearance="?android:attr/textAppearanceLarge"
-                android:textSize="70sp" />
+                <RadioButton
+                    android:id="@+id/radio_menu_body_mode_speedometerfreq_data_10"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/_selector_menu_body_mode_speedometer_num_bg"
+                    android:button="@drawable/blank_1x1"
+                    android:checked="true"
+                    android:gravity="center"
+                    android:text="0"
+                    android:textSize="50sp"
+                    android:textStyle="bold" />
 
-            <TextView
-                android:id="@+id/textView_menu_body_mode_speedometerfreq_data_dot"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
-                android:gravity="center"
-                android:text="."
-                android:textAppearance="?android:attr/textAppearanceLarge"
-                android:textSize="70sp" />
+                <RadioButton
+                    android:id="@+id/radio_menu_body_mode_speedometerfreq_data_1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/_selector_menu_body_mode_speedometer_num_bg"
+                    android:button="@drawable/blank_1x1"
+                    android:gravity="center"
+                    android:text="0"
+                    android:textSize="50sp"
+                    android:textStyle="bold" />
+                
+                <TextView
+	                android:id="@+id/textView_menu_body_mode_speedometerfreq_data_dot"
+	                android:layout_width="wrap_content"
+	                android:layout_height="wrap_content"
+	                android:layout_marginLeft="10dp"
+	                android:gravity="center"
+	                android:text="."
+	                android:textAppearance="?android:attr/textAppearanceLarge"
+	                android:textSize="70sp" />
 
-            <TextView
-                android:id="@+id/textView_menu_body_mode_speedometerfreq_data_under_1"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
-                android:gravity="center"
-                android:text="0"
-                android:textAppearance="?android:attr/textAppearanceLarge"
-                android:textSize="70sp" />
+                <RadioButton
+                    android:id="@+id/radio_menu_body_mode_speedometerfreq_data_under_1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/_selector_menu_body_mode_speedometer_num_bg"
+                    android:button="@drawable/blank_1x1"
+                    android:gravity="center"
+                    android:text="0"
+                    android:textSize="50sp"
+                    android:textStyle="bold" />
+                
+                <RadioButton
+                    android:id="@+id/radio_menu_body_mode_speedometerfreq_data_under_01"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/_selector_menu_body_mode_speedometer_num_bg"
+                    android:button="@drawable/blank_1x1"
+                    android:gravity="center"
+                    android:text="0"
+                    android:textSize="50sp"
+                    android:textStyle="bold" />
 
-            <TextView
-                android:id="@+id/textView_menu_body_mode_speedometerfreq_data_under_01"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
-                android:gravity="center"
-                android:text="0"
-                android:textAppearance="?android:attr/textAppearanceLarge"
-                android:textSize="70sp" />
-
+            </RadioGroup>
+            
             <TextView
                 android:id="@+id/textView_menu_body_mode_speedometerfreq_data_unit"
                 android:layout_width="wrap_content"
@@ -80,9 +93,8 @@
                 android:textSize="70sp" />
 
         </LinearLayout>
-        
     </RelativeLayout>
-    
+
     <RelativeLayout
         android:id="@+id/RelativeLayout_menu_body_mode_speedometerfreq_num"
         android:layout_width="wrap_content"
@@ -90,7 +102,8 @@
         android:layout_above="@+id/RelativeLayout_menu_body_mode_speedometerfreq_low"
         android:layout_alignParentRight="true"
         android:layout_alignParentTop="true"
-        android:layout_marginRight="30dp" >
+        android:layout_marginRight="30dp"
+        android:layout_marginTop="10dp" >
 
         <TextView
             android:id="@+id/textView_menu_body_mode_speedometerfreq_num_1"
@@ -102,7 +115,7 @@
             android:textAppearance="?android:attr/textAppearanceLarge"
             android:textColor="@drawable/_selector_menu_body_multimedia_txt"
             android:textSize="40sp" />
-        
+
         <TextView
             android:id="@+id/textView_menu_body_mode_speedometerfreq_num_2"
             android:layout_width="wrap_content"
@@ -115,7 +128,7 @@
             android:textAppearance="?android:attr/textAppearanceLarge"
             android:textColor="@drawable/_selector_menu_body_multimedia_txt"
             android:textSize="40sp" />
-        
+
         <TextView
             android:id="@+id/textView_menu_body_mode_speedometerfreq_num_3"
             android:layout_width="wrap_content"
@@ -128,7 +141,7 @@
             android:textAppearance="?android:attr/textAppearanceLarge"
             android:textColor="@drawable/_selector_menu_body_multimedia_txt"
             android:textSize="40sp" />
-        
+
         <TextView
             android:id="@+id/textView_menu_body_mode_speedometerfreq_num_4"
             android:layout_width="wrap_content"
@@ -142,7 +155,7 @@
             android:textAppearance="?android:attr/textAppearanceLarge"
             android:textColor="@drawable/_selector_menu_body_multimedia_txt"
             android:textSize="40sp" />
-        
+
         <TextView
             android:id="@+id/textView_menu_body_mode_speedometerfreq_num_5"
             android:layout_width="wrap_content"
@@ -155,7 +168,7 @@
             android:textAppearance="?android:attr/textAppearanceLarge"
             android:textColor="@drawable/_selector_menu_body_multimedia_txt"
             android:textSize="40sp" />
-        
+
         <TextView
             android:id="@+id/textView_menu_body_mode_speedometerfreq_num_6"
             android:layout_width="wrap_content"
@@ -168,7 +181,7 @@
             android:textAppearance="?android:attr/textAppearanceLarge"
             android:textColor="@drawable/_selector_menu_body_multimedia_txt"
             android:textSize="40sp" />
-        
+
         <TextView
             android:id="@+id/textView_menu_body_mode_speedometerfreq_num_7"
             android:layout_width="wrap_content"
@@ -182,7 +195,7 @@
             android:textAppearance="?android:attr/textAppearanceLarge"
             android:textColor="@drawable/_selector_menu_body_multimedia_txt"
             android:textSize="40sp" />
-        
+
         <TextView
             android:id="@+id/textView_menu_body_mode_speedometerfreq_num_8"
             android:layout_width="wrap_content"
@@ -195,7 +208,7 @@
             android:textAppearance="?android:attr/textAppearanceLarge"
             android:textColor="@drawable/_selector_menu_body_multimedia_txt"
             android:textSize="40sp" />
-        
+
         <TextView
             android:id="@+id/textView_menu_body_mode_speedometerfreq_num_9"
             android:layout_width="wrap_content"
@@ -208,7 +221,7 @@
             android:textAppearance="?android:attr/textAppearanceLarge"
             android:textColor="@drawable/_selector_menu_body_multimedia_txt"
             android:textSize="40sp" />
-        
+
         <TextView
             android:id="@+id/textView_menu_body_mode_speedometerfreq_num_0"
             android:layout_width="wrap_content"
@@ -244,172 +257,167 @@
             android:text="@string/Next"
             android:textColor="@drawable/_selector_radio_txt_white_black"
             android:textSize="30sp" />
-
     </RelativeLayout>
-    
+
     <RelativeLayout
         android:id="@+id/RelativeLayout_menu_body_mode_speedometerfreq_low"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true" >
-        
+
         <ImageView
             android:id="@+id/imageView_menu_body_mode_speedometerfreq_low_bg"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@drawable/menu_low_bg" />
-	    
-	    <ImageView
-	        android:id="@+id/imageView_menu_body_mode_speedometerfreq_low_line_1"
-	        android:layout_width="wrap_content"
-	        android:layout_height="wrap_content"
-	        android:layout_alignBottom="@+id/imageView_menu_body_mode_speedometerfreq_low_bg"
-	        android:layout_alignLeft="@+id/ImageButton_menu_body_mode_speedometerfreq_low_ok"
-	        android:src="@drawable/main_key_low_line" />
-	
-	   <ImageView
-	       android:id="@+id/imageView_menu_body_mode_speedometerfreq_low_line_2"
-	       android:layout_width="wrap_content"
-	       android:layout_height="wrap_content"
-	       android:layout_alignBottom="@+id/imageView_menu_body_mode_speedometerfreq_low_bg"
-	       android:layout_alignLeft="@+id/ImageButton_menu_body_mode_speedometerfreq_low_cancel"
-	       android:src="@drawable/main_key_low_line" />
-	   
-	    <ImageButton
-	        android:id="@+id/ImageButton_menu_body_mode_speedometerfreq_low_ok"
-	        android:layout_width="wrap_content"
-	        android:layout_height="wrap_content"
-	        android:layout_alignBottom="@+id/imageView_menu_body_mode_speedometerfreq_low_bg"
-	        android:layout_alignRight="@+id/imageView_menu_body_mode_speedometerfreq_low_bg"
-	        android:background="@drawable/_selector_menu_low_right_btn" />
-	    
-	    <ImageButton
-	        android:id="@+id/ImageButton_menu_body_mode_speedometerfreq_low_cancel"
-	        android:layout_width="wrap_content"
-	        android:layout_height="wrap_content"
-	        android:layout_alignBottom="@+id/imageView_menu_body_mode_speedometerfreq_low_bg"
-	        android:layout_toLeftOf="@+id/imageView_menu_body_mode_speedometerfreq_low_line_1"
-	        android:background="@drawable/_selector_menu_low_center_btn" />
-	    
-	    <ImageButton
-	        android:id="@+id/ImageButton_menu_body_mode_speedometerfreq_low_default"
-	        android:layout_width="wrap_content"
-	        android:layout_height="wrap_content"
-	        android:layout_alignBottom="@+id/imageView_menu_body_mode_speedometerfreq_low_bg"
-	        android:layout_toLeftOf="@+id/imageView_menu_body_mode_speedometerfreq_low_line_2"
-	        android:background="@drawable/_selector_menu_low_left_btn" />
-	
-	    <RelativeLayout
-	        android:layout_width="wrap_content"
-	        android:layout_height="wrap_content"
-	        android:layout_alignBottom="@+id/ImageButton_menu_body_mode_speedometerfreq_low_ok"
-	        android:layout_alignLeft="@+id/ImageButton_menu_body_mode_speedometerfreq_low_ok"
-	        android:layout_alignRight="@+id/ImageButton_menu_body_mode_speedometerfreq_low_ok"
-	        android:layout_alignTop="@+id/ImageButton_menu_body_mode_speedometerfreq_low_ok" >
-	
-	        <LinearLayout
-	            android:layout_width="wrap_content"
-	            android:layout_height="wrap_content"
-	            android:layout_centerHorizontal="true"
-	            android:layout_centerVertical="true" >
-	
-	            <ImageView
-	                android:id="@+id/imageView_menu_body_mode_speedometerfreq_low_ok_icon"
-	                android:layout_width="wrap_content"
-	                android:layout_height="wrap_content"
-	                android:layout_alignBottom="@+id/ImageButton_menu_body_mode_speedometerfreq_low_ok"
-	                android:layout_alignLeft="@+id/ImageButton_menu_body_mode_speedometerfreq_low_ok"
-	                android:layout_alignTop="@+id/ImageButton_menu_body_mode_speedometerfreq_low_ok"
-	                android:src="@drawable/menu_low_icon_ok" />
-	
-	            <TextView
-	                android:id="@+id/textView_menu_body_mode_speedometerfreq_low_ok"
-	                android:layout_width="wrap_content"
-	                android:layout_height="match_parent"
-	                android:layout_marginLeft="10dp"
-	                android:gravity="center"
-	                android:text="@string/OK"
-	                android:textAppearance="?android:attr/textAppearanceLarge"
-	                android:textSize="25sp"
-	                android:textStyle="bold" />
-	
-	        </LinearLayout>
-	    </RelativeLayout>
-	    
-	    <RelativeLayout
-	        android:layout_width="wrap_content"
-	        android:layout_height="wrap_content"
-	        android:layout_alignBottom="@+id/ImageButton_menu_body_mode_speedometerfreq_low_cancel"
-	        android:layout_alignLeft="@+id/ImageButton_menu_body_mode_speedometerfreq_low_cancel"
-	        android:layout_alignRight="@+id/ImageButton_menu_body_mode_speedometerfreq_low_cancel"
-	        android:layout_alignTop="@+id/ImageButton_menu_body_mode_speedometerfreq_low_cancel" >
-	
-	        <LinearLayout
-	            android:layout_width="wrap_content"
-	            android:layout_height="wrap_content"
-	            android:layout_centerHorizontal="true"
-	            android:layout_centerVertical="true" >
-	
-	            <ImageView
-	                android:id="@+id/imageView_menu_body_mode_speedometerfreq_low_cancel_icon"
-	                android:layout_width="wrap_content"
-	                android:layout_height="wrap_content"
-	                android:layout_alignBottom="@+id/ImageButton_menu_body_mode_speedometerfreq_low_cancel"
-	                android:layout_alignLeft="@+id/ImageButton_menu_body_mode_speedometerfreq_low_cancel"
-	                android:layout_alignTop="@+id/ImageButton_menu_body_mode_speedometerfreq_low_cancel"
-	                android:src="@drawable/menu_low_icon_cancel" />
-	
-	            <TextView
-	                android:id="@+id/textView_menu_body_mode_speedometerfreq_low_cancel"
-	                android:layout_width="wrap_content"
-	                android:layout_height="match_parent"
-	                android:layout_marginLeft="10dp"
-	                android:gravity="center"
-	                android:text="@string/Cancel"
-	                android:textAppearance="?android:attr/textAppearanceLarge"
-	                android:textSize="25sp"
-	                android:textStyle="bold" />
-	
-	        </LinearLayout>
-	    </RelativeLayout>
-	    
-	    <RelativeLayout
-	        android:layout_width="wrap_content"
-	        android:layout_height="wrap_content"
-	        android:layout_alignBottom="@+id/ImageButton_menu_body_mode_speedometerfreq_low_default"
-	        android:layout_alignLeft="@+id/ImageButton_menu_body_mode_speedometerfreq_low_default"
-	        android:layout_alignRight="@+id/ImageButton_menu_body_mode_speedometerfreq_low_default"
-	        android:layout_alignTop="@+id/ImageButton_menu_body_mode_speedometerfreq_low_default" >
-	
-	        <LinearLayout
-	            android:layout_width="wrap_content"
-	            android:layout_height="wrap_content"
-	            android:layout_centerHorizontal="true"
-	            android:layout_centerVertical="true" >
-	
-	            <ImageView
-	                android:id="@+id/imageView_menu_body_mode_speedometerfreq_low_default_icon"
-	                android:layout_width="wrap_content"
-	                android:layout_height="wrap_content"
-	                android:layout_alignBottom="@+id/ImageButton_menu_body_mode_speedometerfreq_low_default"
-	                android:layout_alignLeft="@+id/ImageButton_menu_body_mode_speedometerfreq_low_default"
-	                android:layout_alignTop="@+id/ImageButton_menu_body_mode_speedometerfreq_low_default"
-	                android:src="@drawable/menu_low_icon_default" />
-	
-	            <TextView
-	                android:id="@+id/textView_menu_body_mode_speedometerfreq_low_default"
-	                android:layout_width="wrap_content"
-	                android:layout_height="match_parent"
-	                android:layout_marginLeft="10dp"
-	                android:gravity="center"
-	                android:text="@string/Default"
-	                android:textAppearance="?android:attr/textAppearanceLarge"
-	                android:textSize="25sp"
-	                android:textStyle="bold" />
-	
-	        </LinearLayout>
-	    </RelativeLayout>
 
+        <ImageView
+            android:id="@+id/imageView_menu_body_mode_speedometerfreq_low_line_1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@+id/imageView_menu_body_mode_speedometerfreq_low_bg"
+            android:layout_alignLeft="@+id/ImageButton_menu_body_mode_speedometerfreq_low_ok"
+            android:src="@drawable/main_key_low_line" />
+
+        <ImageView
+            android:id="@+id/imageView_menu_body_mode_speedometerfreq_low_line_2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@+id/imageView_menu_body_mode_speedometerfreq_low_bg"
+            android:layout_alignLeft="@+id/ImageButton_menu_body_mode_speedometerfreq_low_cancel"
+            android:src="@drawable/main_key_low_line" />
+
+        <ImageButton
+            android:id="@+id/ImageButton_menu_body_mode_speedometerfreq_low_ok"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@+id/imageView_menu_body_mode_speedometerfreq_low_bg"
+            android:layout_alignRight="@+id/imageView_menu_body_mode_speedometerfreq_low_bg"
+            android:background="@drawable/_selector_menu_low_right_btn" />
+
+        <ImageButton
+            android:id="@+id/ImageButton_menu_body_mode_speedometerfreq_low_cancel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@+id/imageView_menu_body_mode_speedometerfreq_low_bg"
+            android:layout_toLeftOf="@+id/imageView_menu_body_mode_speedometerfreq_low_line_1"
+            android:background="@drawable/_selector_menu_low_center_btn" />
+
+        <ImageButton
+            android:id="@+id/ImageButton_menu_body_mode_speedometerfreq_low_default"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@+id/imageView_menu_body_mode_speedometerfreq_low_bg"
+            android:layout_toLeftOf="@+id/imageView_menu_body_mode_speedometerfreq_low_line_2"
+            android:background="@drawable/_selector_menu_low_left_btn" />
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@+id/ImageButton_menu_body_mode_speedometerfreq_low_ok"
+            android:layout_alignLeft="@+id/ImageButton_menu_body_mode_speedometerfreq_low_ok"
+            android:layout_alignRight="@+id/ImageButton_menu_body_mode_speedometerfreq_low_ok"
+            android:layout_alignTop="@+id/ImageButton_menu_body_mode_speedometerfreq_low_ok" >
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_centerVertical="true" >
+
+                <ImageView
+                    android:id="@+id/imageView_menu_body_mode_speedometerfreq_low_ok_icon"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignBottom="@+id/ImageButton_menu_body_mode_speedometerfreq_low_ok"
+                    android:layout_alignLeft="@+id/ImageButton_menu_body_mode_speedometerfreq_low_ok"
+                    android:layout_alignTop="@+id/ImageButton_menu_body_mode_speedometerfreq_low_ok"
+                    android:src="@drawable/menu_low_icon_ok" />
+
+                <TextView
+                    android:id="@+id/textView_menu_body_mode_speedometerfreq_low_ok"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="10dp"
+                    android:gravity="center"
+                    android:text="@string/OK"
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:textSize="25sp"
+                    android:textStyle="bold" />
+            </LinearLayout>
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@+id/ImageButton_menu_body_mode_speedometerfreq_low_cancel"
+            android:layout_alignLeft="@+id/ImageButton_menu_body_mode_speedometerfreq_low_cancel"
+            android:layout_alignRight="@+id/ImageButton_menu_body_mode_speedometerfreq_low_cancel"
+            android:layout_alignTop="@+id/ImageButton_menu_body_mode_speedometerfreq_low_cancel" >
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_centerVertical="true" >
+
+                <ImageView
+                    android:id="@+id/imageView_menu_body_mode_speedometerfreq_low_cancel_icon"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignBottom="@+id/ImageButton_menu_body_mode_speedometerfreq_low_cancel"
+                    android:layout_alignLeft="@+id/ImageButton_menu_body_mode_speedometerfreq_low_cancel"
+                    android:layout_alignTop="@+id/ImageButton_menu_body_mode_speedometerfreq_low_cancel"
+                    android:src="@drawable/menu_low_icon_cancel" />
+
+                <TextView
+                    android:id="@+id/textView_menu_body_mode_speedometerfreq_low_cancel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="10dp"
+                    android:gravity="center"
+                    android:text="@string/Cancel"
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:textSize="25sp"
+                    android:textStyle="bold" />
+            </LinearLayout>
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@+id/ImageButton_menu_body_mode_speedometerfreq_low_default"
+            android:layout_alignLeft="@+id/ImageButton_menu_body_mode_speedometerfreq_low_default"
+            android:layout_alignRight="@+id/ImageButton_menu_body_mode_speedometerfreq_low_default"
+            android:layout_alignTop="@+id/ImageButton_menu_body_mode_speedometerfreq_low_default" >
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_centerVertical="true" >
+
+                <ImageView
+                    android:id="@+id/imageView_menu_body_mode_speedometerfreq_low_default_icon"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignBottom="@+id/ImageButton_menu_body_mode_speedometerfreq_low_default"
+                    android:layout_alignLeft="@+id/ImageButton_menu_body_mode_speedometerfreq_low_default"
+                    android:layout_alignTop="@+id/ImageButton_menu_body_mode_speedometerfreq_low_default"
+                    android:src="@drawable/menu_low_icon_default" />
+
+                <TextView
+                    android:id="@+id/textView_menu_body_mode_speedometerfreq_low_default"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="10dp"
+                    android:gravity="center"
+                    android:text="@string/Default"
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:textSize="25sp"
+                    android:textStyle="bold" />
+            </LinearLayout>
+        </RelativeLayout>
     </RelativeLayout>
 
 </RelativeLayout>

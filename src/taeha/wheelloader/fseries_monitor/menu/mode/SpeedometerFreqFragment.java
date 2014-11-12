@@ -19,6 +19,8 @@ import android.widget.AbsoluteLayout;
 import android.widget.FrameLayout;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.TextView;
 
 public class SpeedometerFreqFragment extends ParentFragment{
@@ -43,10 +45,20 @@ public class SpeedometerFreqFragment extends ParentFragment{
 	
 	ImageButton imgbtnBack;
 	TextView textViewNext;
+	
+	RadioButton radioNum10;
+	RadioButton radioNum1;
+	RadioButton radioNumUnder1;
+	RadioButton radioNumUnder01;
+	RadioGroup radioGroupNum;
 	//////////////////////////////////////////////////
 	
 	//VALUABLE////////////////////////////////////////
-
+	int SpeedometerFreq;
+	int SpeedometerFreq_Num10;
+	int SpeedometerFreq_Num1;
+	int SpeedometerFreq_Num_Under1;
+	int SpeedometerFreq_Num_Under01;
 	//////////////////////////////////////////////////
 	
 	//Fragment////////////////////////////////////////
@@ -73,13 +85,21 @@ public class SpeedometerFreqFragment extends ParentFragment{
 		InitValuables();
 		InitButtonListener();
 		
+		DisableHalfNumButton();
 		ParentActivity.ScreenIndex = ParentActivity.SCREEN_STATE_MENU_MODE_ETC_FREQ_TOP;
 		ParentActivity._MenuBaseFragment._MenuInterTitleFragment.SetTitleText(ParentActivity.getResources().getString(R.string.Speedometer_Freq_Setting));
 		return mRoot;
 	}
-	
+	@Override
+	public void onResume() {
+		// TODO Auto-generated method stub
+		super.onResume();
+		Log.d(TAG, "onResume");
+	}
 	////////////////////////////////////////////////
 	
+	
+
 	
 
 	//Common Function//////////////////////////////
@@ -104,13 +124,26 @@ public class SpeedometerFreqFragment extends ParentFragment{
 		imgbtnBack = (ImageButton)mRoot.findViewById(R.id.imageButton_menu_body_mode_speedometerfreq_num_back);
 		textViewNext = (TextView)mRoot.findViewById(R.id.textView_menu_body_mode_speedometerfreq_num_next);
 		
+		radioNum10 = (RadioButton)mRoot.findViewById(R.id.radio_menu_body_mode_speedometerfreq_data_10);
+		radioNum1 = (RadioButton)mRoot.findViewById(R.id.radio_menu_body_mode_speedometerfreq_data_1);
+		radioNumUnder1 = (RadioButton)mRoot.findViewById(R.id.radio_menu_body_mode_speedometerfreq_data_under_1);
+		radioNumUnder01 = (RadioButton)mRoot.findViewById(R.id.radio_menu_body_mode_speedometerfreq_data_under_01);
+		
+		radioGroupNum = (RadioGroup)mRoot.findViewById(R.id.radioGroup_menu_body_mode_speedometerfreq_data);
 	}
 
 	protected void InitValuables() {
 		// TODO Auto-generated method stub
 		super.InitValuables();
+		CAN1Comm.Set_SettingSelection_PGN61184_105(0xF);
+		CAN1Comm.Set_SpeedometerFrequency_534_PGN61184_105(0xFFFF);
+		CAN1Comm.Set_AutoRideControlOperationSpeedForward_PGN61184_105(0xF);
+		CAN1Comm.Set_AutoRideControlOperationSpeedBackward_PGN61184_105(0xF);
+		CAN1Comm.Set_VehicleSpeedLimit_572_PGN61184_105(0xFF);
+		CAN1Comm.TxCANToMCU(105);
+		CAN1Comm.Set_SettingSelection_PGN61184_105(15);
 		
-		
+		InitText();
 		
 	}
 	@Override
@@ -237,7 +270,38 @@ public class SpeedometerFreqFragment extends ParentFragment{
 			}
 		});	
 
-		
+		radioNum10.setOnClickListener(new View.OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				ClickRadioNum10();
+			}
+		});	
+		radioNum1.setOnClickListener(new View.OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				ClickRadioNum1();
+			}
+		});	
+		radioNumUnder1.setOnClickListener(new View.OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				ClickRadioUnderNum1();
+			}
+		});	
+		radioNumUnder01.setOnClickListener(new View.OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				ClickRadioUnderNum01();
+			}
+		});	
 		
 
 	}
@@ -262,6 +326,16 @@ public class SpeedometerFreqFragment extends ParentFragment{
 		ParentActivity._MenuBaseFragment.showBodyModeAnimation();
 		ParentActivity._MenuBaseFragment._MenuModeFragment.setFirstScreen(Home.SCREEN_STATE_MENU_MODE_ETC_TOP);
 
+		
+		CAN1Comm.Set_SettingSelection_PGN61184_105(1);
+		CAN1Comm.Set_SpeedometerFrequency_534_PGN61184_105(SpeedometerFreq);
+		CAN1Comm.Set_AutoRideControlOperationSpeedForward_PGN61184_105(0xF);
+		CAN1Comm.Set_AutoRideControlOperationSpeedBackward_PGN61184_105(0xF);
+		CAN1Comm.Set_VehicleSpeedLimit_572_PGN61184_105(0xFF);
+		CAN1Comm.TxCANToMCU(105);
+		CAN1Comm.Set_SpeedometerFrequency_534_PGN61184_105(0xFFFF);
+		CAN1Comm.Set_SettingSelection_PGN61184_105(15);
+		Log.d(TAG,"SetSpeedMeterFreq : " + Integer.toString(SpeedometerFreq));
 	}
 	public void ClickCancel(){
 		if(ParentActivity.AnimationRunningFlag == true)
@@ -272,47 +346,171 @@ public class SpeedometerFreqFragment extends ParentFragment{
 		ParentActivity._MenuBaseFragment._MenuModeFragment.setFirstScreen(Home.SCREEN_STATE_MENU_MODE_ETC_TOP);
 	}
 	public void ClickDefault(){
-		
+		ParentActivity.showSpeedometerInit();
 	}
 	public void ClickNum1(){
-		
+		setNumber(1);
 	}
 	public void ClickNum2(){
-		
+		setNumber(2);
 	}
 	public void ClickNum3(){
-		
+		setNumber(3);
 	}
 	public void ClickNum4(){
-		
+		setNumber(4);
 	}
 	public void ClickNum5(){
-		
+		setNumber(5);
 	}
 	public void ClickNum6(){
-		
+		setNumber(6);
 	}
 	public void ClickNum7(){
-		
+		setNumber(7);
 	}
 	public void ClickNum8(){
-		
+		setNumber(8);
 	}
 	public void ClickNum9(){
-		
+		setNumber(9);
 	}
 	public void ClickNum0(){
-		
+		setNumber(0);
 	}
 	public void ClickNumBack(){
-		
+		setNumber(0);
 	}
 	public void ClickNumNext(){
+		setNext();
+	}
+	public void ClickRadioNum10(){
+		DisableHalfNumButton();
+	}
+	public void ClickRadioNum1(){
+		EnableAllNumButton();
+	}
+	public void ClickRadioUnderNum1(){
+		EnableAllNumButton();
+	}
+	public void ClickRadioUnderNum01(){
+		EnableAllNumButton();
+	}
+	/////////////////////////////////////////////////////////////////////
+	public void EnableAllNumButton(){
+		textViewNum1.setClickable(true);
+		textViewNum2.setClickable(true);
+		textViewNum3.setClickable(true);
+		textViewNum4.setClickable(true);
+		textViewNum0.setClickable(true);
 		
+		textViewNum1.setAlpha((float)1.0);
+		textViewNum2.setAlpha((float)1.0);
+		textViewNum3.setAlpha((float)1.0);
+		textViewNum4.setAlpha((float)1.0);
+		textViewNum0.setAlpha((float)1.0);
+	}
+	public void DisableHalfNumButton(){
+		textViewNum1.setClickable(false);
+		textViewNum2.setClickable(false);
+		textViewNum3.setClickable(false);
+		textViewNum4.setClickable(false);
+		textViewNum0.setClickable(false);
+		
+		textViewNum1.setAlpha((float)0.5);
+		textViewNum2.setAlpha((float)0.5);
+		textViewNum3.setAlpha((float)0.5);
+		textViewNum4.setAlpha((float)0.5);
+		textViewNum0.setAlpha((float)0.5);
+	}
+	public void setNumber(int num){
+		int Focus = radioGroupNum.getCheckedRadioButtonId();
+		switch (Focus) {
+		case R.id.radio_menu_body_mode_speedometerfreq_data_10:
+			SpeedometerFreq_Num10 = num;
+			radioNum10.setText(Integer.toString(SpeedometerFreq_Num10));
+			radioNum1.setChecked(true);
+			EnableAllNumButton();
+			break;
+		case R.id.radio_menu_body_mode_speedometerfreq_data_1:
+			SpeedometerFreq_Num1 = num;
+			radioNum1.setText(Integer.toString(SpeedometerFreq_Num1));
+			radioNumUnder1.setChecked(true);
+			EnableAllNumButton();
+			break;
+		case R.id.radio_menu_body_mode_speedometerfreq_data_under_1:
+			SpeedometerFreq_Num_Under1 = num;
+			radioNumUnder1.setText(Integer.toString(SpeedometerFreq_Num_Under1));
+			radioNumUnder01.setChecked(true);
+			EnableAllNumButton();
+			break;
+		case R.id.radio_menu_body_mode_speedometerfreq_data_under_01:
+			SpeedometerFreq_Num_Under01 = num;
+			radioNumUnder01.setText(Integer.toString(SpeedometerFreq_Num_Under01));
+			radioNum10.setChecked(true);
+			DisableHalfNumButton();
+			break;
+		default:
+			
+			break;
+		}
+		SpeedometerFreq = SpeedometerFreq_Num10 * 1000
+				+ SpeedometerFreq_Num1 * 100
+				+ SpeedometerFreq_Num_Under1 * 10
+				+ SpeedometerFreq_Num_Under01;
+	}
+	public void setNext(){
+		int Focus = radioGroupNum.getCheckedRadioButtonId();
+		switch (Focus) {
+		case R.id.radio_menu_body_mode_speedometerfreq_data_10:
+			radioNum1.setChecked(true);
+			EnableAllNumButton();
+			break;
+		case R.id.radio_menu_body_mode_speedometerfreq_data_1:
+			radioNumUnder1.setChecked(true);
+			EnableAllNumButton();
+			break;
+		case R.id.radio_menu_body_mode_speedometerfreq_data_under_1:
+			radioNumUnder01.setChecked(true);
+			EnableAllNumButton();
+			break;
+		case R.id.radio_menu_body_mode_speedometerfreq_data_under_01:
+			radioNum10.setChecked(true);
+			DisableHalfNumButton();
+			break;
+
+		default:
+			
+			break;
+		}
+		SpeedometerFreq = SpeedometerFreq_Num10 * 1000
+				+ SpeedometerFreq_Num1 * 100
+				+ SpeedometerFreq_Num_Under1 * 10
+				+ SpeedometerFreq_Num_Under01;
 	}
 	
-	/////////////////////////////////////////////////////////////////////
-	
+	public void InitText(){
+		
+		SpeedometerFreq = CAN1Comm.Get_SpeedometerFrequency_534_PGN61184_106();
+		
+		SpeedometerFreq_Num10 = SpeedometerFreq / 1000;
+		SpeedometerFreq_Num1 = (SpeedometerFreq % 1000) / 100;
+		SpeedometerFreq_Num_Under1 = (SpeedometerFreq % 100) / 10;
+		SpeedometerFreq_Num_Under01 = SpeedometerFreq % 10;
+		
+		ParentActivity.runOnUiThread(new Runnable() {
+			
+			@Override
+			public void run() {
+				// TODO Auto-generated method stub
+				radioNum10.setText(Integer.toString(SpeedometerFreq_Num10));
+				radioNum1.setText(Integer.toString(SpeedometerFreq_Num1));
+				radioNumUnder1.setText(Integer.toString(SpeedometerFreq_Num_Under1));
+				radioNumUnder01.setText(Integer.toString(SpeedometerFreq_Num_Under01));
+			}
+		});
+		
+	}
 	/////////////////////////////////////////////////////////////////////
 	
 }

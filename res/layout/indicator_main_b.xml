@@ -84,12 +84,4 @@
         android:layout_y="35dp"
         android:src="@drawable/main_indicator_engineautoshutdown" />
 
-    <ImageView
-        android:id="@+id/imageView_indicator_main_b_EngineDelayShutdown"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_x="509dp"
-        android:layout_y="57dp"
-        android:src="@drawable/main_indicator_enginedelayshutdown" />
-
 </AbsoluteLayout>

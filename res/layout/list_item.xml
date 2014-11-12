@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:weightSum="1" >
+
+    <RelativeLayout
+        android:id="@+id/relativeLayoutListBackground"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" >
+
+        <ImageView
+            android:id="@+id/imageView_list_background"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/menu_management_machine_monitoring_bg_light" />
+
+        <TextView
+            android:id="@+id/textViewFirst"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@+id/imageView_list_background"
+            android:layout_alignLeft="@+id/imageView_list_background"
+            android:layout_alignTop="@+id/imageView_list_background"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="30dp"
+            android:layout_marginRight="20dp"
+            android:layout_toLeftOf="@+id/imageViewInfoIcon"
+            android:gravity="right|center_vertical"
+            android:text="Text View"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:textColor="@color/white"
+            android:textSize="25sp" />
+
+        <TextView
+            android:id="@+id/textViewThrid"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="550dp"
+            android:text="TE"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:textColor="#ffbbbbbb" />
+
+        <ImageView
+            android:id="@+id/imageViewInfoIcon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignRight="@+id/imageView_list_background"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="200dp"
+            android:src="@drawable/menu_management_machine_monitoring_bg_line" />
+
+        <TextView
+            android:id="@+id/textViewSecond"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@+id/imageViewInfoIcon"
+            android:layout_alignLeft="@+id/imageViewInfoIcon"
+            android:layout_alignRight="@+id/imageViewInfoIcon"
+            android:layout_alignTop="@+id/imageViewInfoIcon"
+            android:gravity="right|center_vertical"
+            android:paddingRight="10dp"
+            android:text="TextView"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:textColor="#FFB400"
+            android:textSize="20sp" />
+
+    </RelativeLayout>
+    
+</LinearLayout>
+
+    
+

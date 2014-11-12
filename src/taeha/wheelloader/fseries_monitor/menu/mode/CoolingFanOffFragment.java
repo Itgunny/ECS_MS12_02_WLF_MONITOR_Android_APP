@@ -5,6 +5,7 @@ import taeha.wheelloader.fseries_monitor.animation.ChangeFragmentAnimation;
 import taeha.wheelloader.fseries_monitor.animation.DisappearAnimation;
 import taeha.wheelloader.fseries_monitor.animation.MainBodyShiftAnimation;
 import taeha.wheelloader.fseries_monitor.animation.LeftRightShiftAnimation;
+import taeha.wheelloader.fseries_monitor.main.CAN1CommManager;
 import taeha.wheelloader.fseries_monitor.main.Home;
 import taeha.wheelloader.fseries_monitor.main.ParentFragment;
 import taeha.wheelloader.fseries_monitor.main.R;
@@ -127,6 +128,14 @@ public class CoolingFanOffFragment extends ParentFragment{
 			ParentActivity.StartAnimationRunningTimer();
 		ParentActivity._MenuBaseFragment.showBodyModeAnimation();
 		ParentActivity._MenuBaseFragment._MenuModeFragment.setFirstScreen(Home.SCREEN_STATE_MENU_MODE_ETC_TOP);
+		
+		CAN1Comm.Set_CoolingFanReverseOperatingTime_212_PGN61184_61(0xFF);
+		CAN1Comm.Set_CoolingFanReverseIntervalTime_211_PGN61184_61(0xFF);
+		CAN1Comm.Set_CoolingFanReverseMode_182_PGN61184_61(CAN1CommManager.DATA_STATE_REVERSEFAN_OFF);
+		CAN1Comm.TxCANToMCU(61);
+		CAN1Comm.Set_CoolingFanReverseOperatingTime_212_PGN61184_61(0xFF);
+		CAN1Comm.Set_CoolingFanReverseIntervalTime_211_PGN61184_61(0xFF);
+		CAN1Comm.Set_CoolingFanReverseMode_182_PGN61184_61(3);
 	}
 	public void ClickCancel(){
 		if(ParentActivity.AnimationRunningFlag == true)

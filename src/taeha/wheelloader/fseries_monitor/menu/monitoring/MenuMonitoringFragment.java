@@ -86,14 +86,12 @@ public class MenuMonitoringFragment extends MenuBodyList_ParentFragment{
 		setClickableList3(true);
 		setClickableList4(true);
 		setClickableList5(true);
-		setClickableList6(true);
 		
 		setListTitle1(ParentActivity.getResources().getString(string.Machine_Monitoring));
-		setListTitle2(ParentActivity.getResources().getString(string.Operation_History));
-		setListTitle3(ParentActivity.getResources().getString(string.Weighing_Information));
+		setListTitle2(ParentActivity.getResources().getString(string.EHCU_IO_Information));
+		setListTitle3(ParentActivity.getResources().getString(string.Operation_History));
 		setListTitle4(ParentActivity.getResources().getString(string.Fault_History));
-		setListTitle5(ParentActivity.getResources().getString(string.EHCU_IO_Information));
-		setListTitle6(ParentActivity.getResources().getString(string.Version_Information));
+		setListTitle5(ParentActivity.getResources().getString(string.Version_Information));
 	}
 
 	//////////////////////////////////////////////////////////////////////
@@ -114,7 +112,8 @@ public class MenuMonitoringFragment extends MenuBodyList_ParentFragment{
 			return;
 		else
 			ParentActivity.StartAnimationRunningTimer();
-		ParentActivity._MenuBaseFragment.showBodyOperationHistoryAnimation();
+		ParentActivity._MenuBaseFragment.showBodyEHCUIOInfoAnimation();		
+		
 	}
 
 	@Override
@@ -124,7 +123,8 @@ public class MenuMonitoringFragment extends MenuBodyList_ParentFragment{
 			return;
 		else
 			ParentActivity.StartAnimationRunningTimer();
-		ParentActivity._MenuBaseFragment.showBodyWeighingInfoAnimation();
+		ParentActivity._MenuBaseFragment.showBodyOperationHistoryAnimation();
+	
 	}
 
 	@Override
@@ -135,6 +135,7 @@ public class MenuMonitoringFragment extends MenuBodyList_ParentFragment{
 		else
 			ParentActivity.StartAnimationRunningTimer();
 		ParentActivity._MenuBaseFragment.showBodyFaultHistory();
+		
 	}
 
 	@Override
@@ -144,17 +145,13 @@ public class MenuMonitoringFragment extends MenuBodyList_ParentFragment{
 			return;
 		else
 			ParentActivity.StartAnimationRunningTimer();
-		ParentActivity._MenuBaseFragment.showBodyEHCUIOInfoAnimation();		
+		ParentActivity._MenuBaseFragment.showBodyVersionInfoAnimation();
 	}
 
 	@Override
 	public void ClickList6() {
 		// TODO Auto-generated method stub
-		if(ParentActivity.AnimationRunningFlag == true)
-			return;
-		else
-			ParentActivity.StartAnimationRunningTimer();
-		ParentActivity._MenuBaseFragment.showBodyVersionInfoAnimation();
+		
 	}
 	
 	/////////////////////////////////////////////////////////////////////	

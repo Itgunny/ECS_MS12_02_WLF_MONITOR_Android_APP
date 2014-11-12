@@ -11,6 +11,8 @@ import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
+import taeha.wheelloader.fseries_monitor.main.CAN1CommManager;
+import taeha.wheelloader.fseries_monitor.main.Home;
 import taeha.wheelloader.fseries_monitor.main.MainBBaseFragment;
 import taeha.wheelloader.fseries_monitor.main.ParentFragment;
 import taeha.wheelloader.fseries_monitor.main.R;
@@ -51,11 +53,15 @@ public class MainBUpperMenuBarFragment extends ParentFragment{
 	//VALUABLE////////////////////////////////////////
 	// Timer
 	private Timer mClockColonTimer = null;
+	private Timer mBuzzerStopTimer = null;
 	
 	boolean ColonFlag;
 	
 	int ClockHour;
 	int ClockMin;
+	
+	int Warning;
+	int CommErrCount;
 	//////////////////////////////////////////////////
 	
 	//ANIMATION///////////////////////////////////////
@@ -186,12 +192,16 @@ public class MainBUpperMenuBarFragment extends ParentFragment{
 		// TODO Auto-generated method stub
 		ClockHour = CAN1Comm.Get_RTColock_Hour();
 		ClockMin = CAN1Comm.Get_RTColock_Min();
+		Warning = CAN1Comm.BuzzerStatus;
+		CommErrCount = CAN1Comm.Get_CommErrCnt();
+		
 	}
 
 	@Override
 	protected void UpdateUI() {
 		// TODO Auto-generated method stub
 		ClockDisplay(ClockHour, ClockMin);
+		WarningDisplay(Warning,CommErrCount);
 	}
 	/////////////////////////////////////////////////////////////////////
 	//Timer//////////////////////////////////////////////////////////////
@@ -246,15 +256,67 @@ public class MainBUpperMenuBarFragment extends ParentFragment{
 		textViewTimeHour.setText(ParentActivity.GetHour(Hour));
 		textViewTimeMin.setText(ParentActivity.GetMin(Min));
 	}
-	public void ClickTime(){
+	public void WarningDisplay(int Data, int CommErr){
+		if(CommErr >= 1000){
+			imgViewBuzzer070Left.setVisibility(View.VISIBLE);
+			imgViewBuzzer070Right.setVisibility(View.VISIBLE);
+			imgViewBuzzerNormal.setVisibility(View.INVISIBLE);
+			imgViewBuzzer070Right.setImageResource(R.drawable.fault070);
+			switch (Data) {
+			case CAN1CommManager.BUZZER_OFF:
+			default:
+				imgViewBuzzer070Left.setImageResource(R.drawable.main_menubar_icon_buzzer);
+				break;
+			case CAN1CommManager.BUZZER_ON:
+				imgViewBuzzer070Left.setImageResource(R.drawable.main_menubar_icon_buzzer_on);
+				break;
+			case CAN1CommManager.BUZZER_STOP:
+				imgViewBuzzer070Left.setImageResource(R.drawable.main_menubar_icon_buzzer_off);
+				break;
+			}
+		}else{
+			imgViewBuzzer070Left.setVisibility(View.INVISIBLE);
+			imgViewBuzzer070Right.setVisibility(View.INVISIBLE);
+			imgViewBuzzerNormal.setVisibility(View.VISIBLE);
+			switch (Data) {
+			case CAN1CommManager.BUZZER_OFF:
+			default:
+				imgViewBuzzerNormal.setImageResource(R.drawable.main_menubar_icon_buzzer);
+				break;
+			case CAN1CommManager.BUZZER_ON:
+				imgViewBuzzerNormal.setImageResource(R.drawable.main_menubar_icon_buzzer_on);
+				break;
+			case CAN1CommManager.BUZZER_STOP:
+				imgViewBuzzerNormal.setImageResource(R.drawable.main_menubar_icon_buzzer_off);
+				break;
+
+			}
+		}
 		
+	}	
+	public void ClickTime(){
+		if(ParentActivity.AnimationRunningFlag == true)
+			return;
+		else
+			ParentActivity.StartAnimationRunningTimer();
+		
+		ParentActivity._MainChangeAnimation.StartChangeAnimation(ParentActivity._MenuBaseFragment);
+		ParentActivity.OldScreenIndex = Home.SCREEN_STATE_MAIN_B_TOP;
+		ParentActivity._MenuBaseFragment.setFirstScreenIndex(Home.SCREEN_STATE_MENU_PREFERENCE_CLOCK_TOP);
 	}
 	public void ClickBuzzer(){
-		
+		if(CAN1Comm.BuzzerStatus == CAN1Comm.BUZZER_ON){
+			CAN1Comm.Set_RequestBuzzerStop_PGN65327(1);
+			CAN1Comm.TxCANToMCU(47);
+			CAN1Comm.TxCMDToMCU(CAN1Comm.CMD_BUZ, CAN1Comm.BUZZER_OFF);	// Buzzer Off
+			CAN1Comm.BuzzerStatus = CAN1Comm.BUZZER_STOP;
+			StartBuzzerStopTimer();
+		}
 	}
 	public void ClickWiper(){
 	}
 	public void ClickCamera(){
+		ParentActivity.ExcuteCamActivitybyKey();
 	}
 	public void ClickMenu(){
 		if(ParentActivity.AnimationRunningFlag == true)
@@ -264,4 +326,30 @@ public class MainBUpperMenuBarFragment extends ParentFragment{
 		ParentActivity._MainChangeAnimation.StartChangeAnimation(ParentActivity._MenuBaseFragment);
 		//ParentActivity.showMenuFragment();
 	}
+	///////////////////////////////////////////////////////////
+	public class BuzzerStopTimerClass extends TimerTask{
+
+		@Override
+		public void run() {
+			// TODO Auto-generated method stub
+			CAN1Comm.Set_RequestBuzzerStop_PGN65327(0);
+			CAN1Comm.TxCANToMCU(47);
+		}
+		
+	}
+	
+	public void StartBuzzerStopTimer(){
+		CancelBuzzerStopTimer();
+		mBuzzerStopTimer = new Timer();
+		mBuzzerStopTimer.schedule(new BuzzerStopTimerClass(),1000);	
+	}
+	
+	public void CancelBuzzerStopTimer(){
+		if(mBuzzerStopTimer != null){
+			mBuzzerStopTimer.cancel();
+			mBuzzerStopTimer.purge();
+			mBuzzerStopTimer = null;
+		}
+	}
+	///////////////////////////////////////////////////////////
 }	

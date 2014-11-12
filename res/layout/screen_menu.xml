@@ -19,7 +19,7 @@
         <FrameLayout
             android:id="@+id/FrameLayout_menu_inter_title"
             android:layout_width="800dp"
-            android:layout_height="83dp"
+            android:layout_height="66dp"
             android:layout_x="0dp"
             android:layout_y="0dp" >
 
@@ -28,9 +28,9 @@
         <FrameLayout
             android:id="@+id/FrameLayout_menu_inter_body"
             android:layout_width="800dp"
-            android:layout_height="397dp"
+            android:layout_height="414dp"
             android:layout_x="0dp"
-            android:layout_y="83dp" >
+            android:layout_y="66dp" >
 
         </FrameLayout>
 
@@ -44,7 +44,7 @@
         <FrameLayout
             android:id="@+id/FrameLayout_menu_list_title"
             android:layout_width="630dp"
-            android:layout_height="83dp"
+            android:layout_height="66dp"
             android:layout_x="170dp"
             android:layout_y="0dp" >
 

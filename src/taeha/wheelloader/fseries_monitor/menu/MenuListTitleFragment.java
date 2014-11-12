@@ -147,13 +147,29 @@ public class MenuListTitleFragment extends ParentFragment{
 	}
 	public void ClickBack(){
 		switch (ParentActivity.ScreenIndex) {
-		case Home.SCREEN_STATE_MENU_MODE_ENGINETM_ENGINESETTING_TOP:
-			ParentActivity._MenuBaseFragment._MenuModeFragment.showEngTM();
-			SetTitleText(ParentActivity.getResources().getString(R.string.Mode));
-			setBackButtonEnable(false);
-			ParentActivity._MenuBaseFragment._MenuModeFragment._MenuModeTabFragment.setFirstScreen(Home.SCREEN_STATE_MENU_MODE_ENGINETM_TOP);
-			ParentActivity._MenuBaseFragment._MenuModeFragment.showTab();
-			break;
+			case Home.SCREEN_STATE_MENU_MODE_ENGINETM_ENGINESETTING_TOP:
+				ParentActivity._MenuBaseFragment._MenuModeFragment.showEngTM();
+				SetTitleText(ParentActivity.getResources().getString(R.string.Mode));
+				setBackButtonEnable(false);
+				ParentActivity._MenuBaseFragment._MenuModeFragment._MenuModeTabFragment.setFirstScreen(Home.SCREEN_STATE_MENU_MODE_ENGINETM_TOP);
+				ParentActivity._MenuBaseFragment._MenuModeFragment.showTab();
+				break;
+			case Home.SCREEN_STATE_MENU_MONITORING_FAULTHISTORY_TOP:
+				ParentActivity._MenuBaseFragment.showBodyMonitoring();
+				setBackButtonEnable(false);
+				break;
+			case Home.SCREEN_STATE_MENU_MANAGEMENT_MACHINESECURITY_TOP:
+			case Home.SCREEN_STATE_MENU_MANAGEMENT_MACHINESECURITY_PW:
+			case Home.SCREEN_STATE_MENU_MANAGEMENT_CALIBRATION_TOP:
+			case Home.SCREEN_STATE_MENU_MANAGEMENT_SERVICE_TOP:
+			case Home.SCREEN_STATE_MENU_MANAGEMENT_SERVICE_PW:
+				ParentActivity._MenuBaseFragment.showBodyManagement();
+				setBackButtonEnable(false);
+				break;
+			case Home.SCREEN_STATE_MENU_MANAGEMENT_MACHINESECURITY_PWCHANGE:
+				ParentActivity._MenuBaseFragment.showBodyMachineSecurityList();
+				setBackButtonEnable(true);
+				break;
 
 		default:
 			break;

@@ -5,9 +5,11 @@ import taeha.wheelloader.fseries_monitor.animation.ChangeFragmentAnimation;
 import taeha.wheelloader.fseries_monitor.animation.DisappearAnimation;
 import taeha.wheelloader.fseries_monitor.animation.MainBodyShiftAnimation;
 import taeha.wheelloader.fseries_monitor.animation.LeftRightShiftAnimation;
+import taeha.wheelloader.fseries_monitor.main.CAN1CommManager;
 import taeha.wheelloader.fseries_monitor.main.Home;
 import taeha.wheelloader.fseries_monitor.main.ParentFragment;
 import taeha.wheelloader.fseries_monitor.main.R;
+import taeha.wheelloader.fseries_monitor.main.R.string;
 import android.os.Bundle;
 import android.text.Layout;
 import android.util.Log;
@@ -20,20 +22,36 @@ import android.widget.FrameLayout;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.RadioButton;
+import android.widget.SeekBar;
 import android.widget.TextView;
 
 public class CoolingFanAutoFragment extends ParentFragment{
 	//CONSTANT////////////////////////////////////////
+	private  final int MAX_LEVEL	 	= 30;
+	private  final int MIN_LEVEL 		= 3;
 	
+	private  final int TOTAL_STEP		= 90;
+	private  final int STEP				= 10;
 	//////////////////////////////////////////////////
 	//RESOURCE////////////////////////////////////////
 	ImageButton imgbtnOK;
 	ImageButton imgbtnCancel;
 	ImageButton imgbtnDefault;
+	
+	TextView textViewIntervalData;
+	TextView textViewIntervalMax;
+	TextView textViewIntervalMin;
+	TextView textViewOperationTimeData;
+	TextView textViewOperationTimeMax;
+	TextView textViewOperationTimeMin;
+	
+	SeekBar	seekbarInterval;
+	SeekBar seekbarOperationTime;
 	//////////////////////////////////////////////////
 	
 	//VALUABLE////////////////////////////////////////
-
+	int Interval;
+	int OperationTime;
 	//////////////////////////////////////////////////
 	
 	//Fragment////////////////////////////////////////
@@ -76,14 +94,50 @@ public class CoolingFanAutoFragment extends ParentFragment{
 		imgbtnCancel = (ImageButton)mRoot.findViewById(R.id.ImageButton_menu_body_mode_coolingfan_auto_low_cancel);
 		imgbtnDefault = (ImageButton)mRoot.findViewById(R.id.ImageButton_menu_body_mode_coolingfan_auto_low_default);
 		
+		textViewIntervalData = (TextView)mRoot.findViewById(R.id.textView_menu_body_mode_coolingfan_auto_interval_time);
+		textViewIntervalMax = (TextView)mRoot.findViewById(R.id.textView_menu_body_mode_coolingfan_auto_interval_max);
+		textViewIntervalMin = (TextView)mRoot.findViewById(R.id.textView_menu_body_mode_coolingfan_auto_interval_min);
+		
+		textViewOperationTimeData = (TextView)mRoot.findViewById(R.id.textView_menu_body_mode_coolingfan_auto_time_time);
+		textViewOperationTimeMax = (TextView)mRoot.findViewById(R.id.textView_menu_body_mode_coolingfan_auto_time_max);
+		textViewOperationTimeMin = (TextView)mRoot.findViewById(R.id.textView_menu_body_mode_coolingfan_auto_time_min);
+		
+		seekbarInterval = (SeekBar)mRoot.findViewById(R.id.seekBar_menu_body_mode_coolingfan_auto_interval);
+		seekbarOperationTime = (SeekBar)mRoot.findViewById(R.id.seekBar_menu_body_mode_coolingfan_auto_time);
+		
+		seekbarInterval.setMax(TOTAL_STEP);
+		seekbarInterval.incrementProgressBy(1);
+		
+		seekbarOperationTime.setMax(TOTAL_STEP);
+		seekbarOperationTime.incrementProgressBy(1);
 	}
 
 	protected void InitValuables() {
 		// TODO Auto-generated method stub
 		super.InitValuables();
 		
+		textViewIntervalMax.setText(ParentActivity.GetSectoMinString(300,ParentActivity.getResources().getString(string.Hour),ParentActivity.getResources().getString(string.Min)));
+		textViewIntervalMin.setText(ParentActivity.GetSectoMinString(30,ParentActivity.getResources().getString(string.Hour),ParentActivity.getResources().getString(string.Min)));
+		textViewOperationTimeMax.setText(ParentActivity.GetSectoMinString(300,ParentActivity.getResources().getString(string.Min),ParentActivity.getResources().getString(string.Sec)));
+		textViewOperationTimeMin.setText(ParentActivity.GetSectoMinString(30,ParentActivity.getResources().getString(string.Min),ParentActivity.getResources().getString(string.Sec)));
 		
+		Interval = CAN1Comm.Get_CoolingFanReverseIntervalTime_211_PGN65369();
+		OperationTime = CAN1Comm.Get_CoolingFanReverseOperatingTime_212_PGN65369();
 		
+		if(Interval > MAX_LEVEL)
+			Interval = MAX_LEVEL;
+		else if(Interval < MIN_LEVEL)
+			Interval = MIN_LEVEL;
+		
+		if(OperationTime > MAX_LEVEL)
+			OperationTime = MAX_LEVEL;
+		else if(OperationTime < MIN_LEVEL)
+			OperationTime = MIN_LEVEL;
+		
+		IntervalTextDisplay(Interval);
+		OperationTimeTextDisplay(OperationTime);
+		SetSeekBarPositionbyData(seekbarInterval,Interval);
+		SetSeekBarPositionbyData(seekbarOperationTime,OperationTime);
 	}
 	@Override
 	protected void InitButtonListener() {
@@ -112,7 +166,56 @@ public class CoolingFanAutoFragment extends ParentFragment{
 				ClickDefault();
 			}
 		});
-		
+		seekbarInterval.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+			
+			@Override
+			public void onStopTrackingTouch(SeekBar seekBar) {
+				// TODO Auto-generated method stub
+				int progress;
+				progress = seekBar.getProgress();
+				Interval = SetSeekBarPositionbyProgress(seekBar, progress);
+				IntervalTextDisplay(Interval);
+			}
+			
+			@Override
+			public void onStartTrackingTouch(SeekBar seekBar) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void onProgressChanged(SeekBar seekBar, int progress,
+					boolean fromUser) {
+				// TODO Auto-generated method stub
+				Interval = SetSeekBarPositionbyProgress(seekBar, progress);
+				IntervalTextDisplay(Interval);
+			}
+		});
+		seekbarOperationTime.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+			
+			@Override
+			public void onStopTrackingTouch(SeekBar seekBar) {
+				// TODO Auto-generated method stub
+				int progress;
+				progress = seekBar.getProgress();
+				OperationTime = SetSeekBarPositionbyProgress(seekBar, progress);
+				OperationTimeTextDisplay(OperationTime);
+			}
+			
+			@Override
+			public void onStartTrackingTouch(SeekBar seekBar) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void onProgressChanged(SeekBar seekBar, int progress,
+					boolean fromUser) {
+				// TODO Auto-generated method stub
+				OperationTime = SetSeekBarPositionbyProgress(seekBar, progress);
+				OperationTimeTextDisplay(OperationTime);
+			}
+		});
 	}
 
 	@Override
@@ -134,6 +237,14 @@ public class CoolingFanAutoFragment extends ParentFragment{
 			ParentActivity.StartAnimationRunningTimer();
 		ParentActivity._MenuBaseFragment.showBodyModeAnimation();
 		ParentActivity._MenuBaseFragment._MenuModeFragment.setFirstScreen(Home.SCREEN_STATE_MENU_MODE_ETC_TOP);
+		
+		CAN1Comm.Set_CoolingFanReverseOperatingTime_212_PGN61184_61(OperationTime);
+		CAN1Comm.Set_CoolingFanReverseIntervalTime_211_PGN61184_61(Interval);
+		CAN1Comm.Set_CoolingFanReverseMode_182_PGN61184_61(CAN1CommManager.DATA_STATE_REVERSEFAN_AUTO);
+		CAN1Comm.TxCANToMCU(61);
+		CAN1Comm.Set_CoolingFanReverseOperatingTime_212_PGN61184_61(0xFF);
+		CAN1Comm.Set_CoolingFanReverseIntervalTime_211_PGN61184_61(0xFF);
+		CAN1Comm.Set_CoolingFanReverseMode_182_PGN61184_61(3);
 	}
 	public void ClickCancel(){
 		if(ParentActivity.AnimationRunningFlag == true)
@@ -147,6 +258,80 @@ public class CoolingFanAutoFragment extends ParentFragment{
 		
 	}
 	/////////////////////////////////////////////////////////////////////
+	public void IntervalTextDisplay(int _data){
+		int CalData;
+		CalData = _data * 10;
+		textViewIntervalData.setText(ParentActivity.GetSectoMinString(CalData, ParentActivity.getResources().getString(string.Hour),ParentActivity.getResources().getString(string.Min)));
+	}
+	public void OperationTimeTextDisplay(int _data){
+		int CalData;
+		CalData = _data * 10;
+		textViewOperationTimeData.setText(ParentActivity.GetSectoMinString(CalData, ParentActivity.getResources().getString(string.Min),ParentActivity.getResources().getString(string.Sec)));
+	}
+	public void SetSeekBarPositionbyData(SeekBar _seekbar, int _data){
+		int Progress;
+		if(_data < 5){
+			Progress = 0;
+		}else if(_data < 8){
+			Progress = 10;
+		}else if(_data < 11){
+			Progress = 20;
+		}else if(_data < 14){
+			Progress = 30;
+		}else if(_data < 17){
+			Progress = 40;
+		}else if(_data < 20){
+			Progress = 50;
+		}else if(_data < 23){
+			Progress = 60;
+		}else if(_data < 26){
+			Progress = 70;
+		}else if(_data < 29){
+			Progress = 80;
+		}else{
+			Progress = 90;
+		}
+		_seekbar.setProgress(Progress);
+	}
+	/////////////////////////////////////////////////////////////////////
+	public int SetSeekBarPositionbyProgress(SeekBar _seekbar, int _progress){
+		int Progress;
+		int returnData;
+		if(_progress < 5){
+			Progress = 0;
+			returnData = 3;
+		}else if(_progress < 15){
+			Progress = 10;
+			returnData = 6;
+		}else if(_progress < 25){
+			Progress = 20;
+			returnData = 9;
+		}else if(_progress < 35){
+			Progress = 30;
+			returnData = 12;
+		}else if(_progress < 45){
+			Progress = 40;
+			returnData = 15;
+		}else if(_progress < 55){
+			Progress = 50;
+			returnData = 18;
+		}else if(_progress < 65){
+			Progress = 60;
+			returnData = 21;
+		}else if(_progress < 75){
+			Progress = 70;
+			returnData = 24;
+		}else if(_progress < 85){
+			Progress = 80;
+			returnData = 27;
+		}else{
+			Progress = 90;
+			returnData = 30;
+		}
+
+		_seekbar.setProgress(Progress);
+		return returnData;
+	}
 	
 	/////////////////////////////////////////////////////////////////////
 	

@@ -21,6 +21,7 @@ import taeha.wheelloader.fseries_monitor.menu.management.MenuManagementFragment;
 import taeha.wheelloader.fseries_monitor.menu.management.PressureCalibration;
 import taeha.wheelloader.fseries_monitor.menu.management.ServiceMenuListFragment;
 import taeha.wheelloader.fseries_monitor.menu.management.ServiceMenuPasswordFragment;
+import taeha.wheelloader.fseries_monitor.menu.management.ServiceMenuSensorMonitoringFragment;
 import taeha.wheelloader.fseries_monitor.menu.management.ServiceMenuSpeedLimitFragment;
 import taeha.wheelloader.fseries_monitor.menu.management.ServiceMenuWeighingCompensationFragment;
 import taeha.wheelloader.fseries_monitor.menu.mode.CameraSettingFragment;
@@ -33,6 +34,7 @@ import taeha.wheelloader.fseries_monitor.menu.mode.MaxFlowFragment;
 import taeha.wheelloader.fseries_monitor.menu.mode.MenuModeFragment;
 import taeha.wheelloader.fseries_monitor.menu.mode.SoftStopFragment;
 import taeha.wheelloader.fseries_monitor.menu.mode.SpeedometerFreqFragment;
+import taeha.wheelloader.fseries_monitor.menu.mode.WiperFragment;
 import taeha.wheelloader.fseries_monitor.menu.mode.WorkLoadFragment;
 import taeha.wheelloader.fseries_monitor.menu.monitoring.EHCUIOInfoFragment;
 import taeha.wheelloader.fseries_monitor.menu.monitoring.FaultHistoryFragment;
@@ -40,7 +42,6 @@ import taeha.wheelloader.fseries_monitor.menu.monitoring.MachineMonitoringFragme
 import taeha.wheelloader.fseries_monitor.menu.monitoring.MenuMonitoringFragment;
 import taeha.wheelloader.fseries_monitor.menu.monitoring.OperationHistoryFragment;
 import taeha.wheelloader.fseries_monitor.menu.monitoring.VersionInfoFragment;
-import taeha.wheelloader.fseries_monitor.menu.monitoring.WeighingInfoFragment;
 import taeha.wheelloader.fseries_monitor.menu.multimedia.MenuMultimediaFragment;
 import taeha.wheelloader.fseries_monitor.menu.preference.BrightnessFragment;
 import taeha.wheelloader.fseries_monitor.menu.preference.ClockFragment;
@@ -76,7 +77,7 @@ public class MenuBaseFragment extends ParentFragment{
 	//////////////////////////////////////////////////
 	
 	//VALUABLE////////////////////////////////////////
-	
+	public int FirstScreenIndex;
 	//////////////////////////////////////////////////
 	
 	//Fragment////////////////////////////////////////
@@ -101,11 +102,11 @@ public class MenuBaseFragment extends ParentFragment{
 	public CameraSettingFragment 		_CameraSettingFragment;
 	public CoolingFanFragment			_CoolingFanFragment;
 	public SpeedometerFreqFragment		_SpeedometerFreqFragment;
+	public WiperFragment				_WiperFragment;
 	
 	//Monitoring
 	public MachineMonitoringFragment	_MachineMonitoringFragment;
 	public OperationHistoryFragment		_OperationHistoryFragment;
-	public WeighingInfoFragment			_WeighingInfoFragment;
 	public FaultHistoryFragment			_FaultHistoryFragment;
 	public EHCUIOInfoFragment			_EHCUIOInfoFragment;
 	public VersionInfoFragment			_VersionInfoFragment;
@@ -124,6 +125,7 @@ public class MenuBaseFragment extends ParentFragment{
 	public ServiceMenuListFragment					_ServiceMenuListFragment;
 	public ServiceMenuSpeedLimitFragment			_ServiceMenuSpeedLimitFragment;
 	public ServiceMenuWeighingCompensationFragment	_ServiceMenuWeighingCompensationFragment;
+	public ServiceMenuSensorMonitoringFragment		_ServiceMenuSensorMonitoringFragment;
 	
 	//Preference
 	public BrightnessFragment						_BrightnessFragment;
@@ -158,10 +160,26 @@ public class MenuBaseFragment extends ParentFragment{
 
 		ParentActivity.ScreenIndex = ParentActivity.SCREEN_STATE_MENU_TOP;
 		
-		ListLeftAnimation.StartAppearAnimation(_MenuListLeftFragment);
-		ListTitleAnimation.StartAppearAnimation(_MenuListTitleFragment);
-		ListBodyAnimation.StartAppearAnimation(_MenuModeFragment);
-		_MenuModeFragment.setFirstScreen(Home.SCREEN_STATE_MENU_MODE_ENGINETM_TOP);
+		if(FirstScreenIndex == Home.SCREEN_STATE_MENU_PREFERENCE_CLOCK_TOP){
+			framelayoutListTitle.setVisibility(View.INVISIBLE);
+			framelayoutListBody.setVisibility(View.INVISIBLE);
+			framelayoutListLeft.setVisibility(View.INVISIBLE);
+			showBodyClockAnimation();
+			FirstScreenIndex = 0;
+		}else if(FirstScreenIndex == Home.SCREEN_STATE_MENU_MANAGEMENT_CALIBRATION_PRESSURE_TOP){
+			framelayoutListTitle.setVisibility(View.INVISIBLE);
+			framelayoutListBody.setVisibility(View.INVISIBLE);
+			framelayoutListLeft.setVisibility(View.INVISIBLE);
+			showBodyPressureCalibrationAnimation();
+			FirstScreenIndex = 0;
+		}
+		else{
+			ListLeftAnimation.StartAppearAnimation(_MenuListLeftFragment);
+			ListTitleAnimation.StartAppearAnimation(_MenuListTitleFragment);
+			ListBodyAnimation.StartAppearAnimation(_MenuModeFragment);
+			_MenuModeFragment.setFirstScreen(Home.SCREEN_STATE_MENU_MODE_ENGINETM_TOP);
+		}
+	
 		return mRoot;
 	}
 	@Override
@@ -208,10 +226,10 @@ public class MenuBaseFragment extends ParentFragment{
 		_CameraSettingFragment = new CameraSettingFragment();
 		_CoolingFanFragment = new CoolingFanFragment();
 		_SpeedometerFreqFragment = new SpeedometerFreqFragment();
+		_WiperFragment = new WiperFragment();
 		
 		_MachineMonitoringFragment = new MachineMonitoringFragment();
 		_OperationHistoryFragment = new OperationHistoryFragment();
-		_WeighingInfoFragment = new WeighingInfoFragment();
 		_FaultHistoryFragment = new FaultHistoryFragment();
 		_EHCUIOInfoFragment = new EHCUIOInfoFragment();
 		_VersionInfoFragment = new VersionInfoFragment();
@@ -228,6 +246,7 @@ public class MenuBaseFragment extends ParentFragment{
 		_ServiceMenuListFragment = new ServiceMenuListFragment();
 		_ServiceMenuSpeedLimitFragment = new ServiceMenuSpeedLimitFragment();
 		_ServiceMenuWeighingCompensationFragment = new ServiceMenuWeighingCompensationFragment();
+		_ServiceMenuSensorMonitoringFragment = new ServiceMenuSensorMonitoringFragment();
 		_BrightnessFragment = new BrightnessFragment();
 		_ClockFragment = new ClockFragment();
 		_UnitFragment = new UnitFragment();
@@ -268,10 +287,10 @@ public class MenuBaseFragment extends ParentFragment{
 		transaction.detach(_EngineDelayShutdownFragment);
 		transaction.detach(_CameraSettingFragment);
 		transaction.detach(_CoolingFanFragment);
-		transaction.detach(_SpeedometerFreqFragment);		
+		transaction.detach(_SpeedometerFreqFragment);
+		transaction.detach(_WiperFragment);
 		transaction.detach(_MachineMonitoringFragment);
 		transaction.detach(_OperationHistoryFragment);
-		transaction.detach(_WeighingInfoFragment);
 		transaction.detach(_FaultHistoryFragment);
 		transaction.detach(_EHCUIOInfoFragment);		
 		transaction.detach(_VersionInfoFragment);
@@ -288,6 +307,7 @@ public class MenuBaseFragment extends ParentFragment{
 		transaction.detach(_ServiceMenuListFragment);
 		transaction.detach(_ServiceMenuSpeedLimitFragment);
 		transaction.detach(_ServiceMenuWeighingCompensationFragment);
+		transaction.detach(_ServiceMenuSensorMonitoringFragment);
 		transaction.detach(_BrightnessFragment);
 		transaction.detach(_ClockFragment);
 		transaction.detach(_UnitFragment);
@@ -307,8 +327,11 @@ public class MenuBaseFragment extends ParentFragment{
 		// TODO Auto-generated method stub
 		
 	}
-	/////////////////////////////////////////////////////////////////////	
-	
+	/////////////////////////////////////////////////////////////////////
+	public void setFirstScreenIndex(int Index){
+		FirstScreenIndex = Index;
+	}
+	/////////////////////////////////////////////////////////////////////
 	//Show Fragment//////////////////////////////////////////////////////
 	public void showListLeft(){
 		android.app.FragmentTransaction transaction = getFragmentManager().beginTransaction();
@@ -476,6 +499,13 @@ public class MenuBaseFragment extends ParentFragment{
 		transaction.commit();
 		
 	}
+	public void showBodyWiper(){
+		android.app.FragmentTransaction transaction = getFragmentManager().beginTransaction();
+		transaction.remove(_SpeedometerFreqFragment);
+		transaction.replace(R.id.FrameLayout_menu_inter_body, _WiperFragment);
+		transaction.commit();
+		
+	}
 	public void showBodyMachineMonitoring(){
 		android.app.FragmentTransaction transaction = getFragmentManager().beginTransaction();
 		transaction.remove(_MachineMonitoringFragment);
@@ -490,13 +520,7 @@ public class MenuBaseFragment extends ParentFragment{
 		transaction.commit();
 		
 	}
-	public void showBodyWeighingInfo(){
-		android.app.FragmentTransaction transaction = getFragmentManager().beginTransaction();
-		transaction.remove(_WeighingInfoFragment);
-		transaction.replace(R.id.FrameLayout_menu_inter_body, _WeighingInfoFragment);
-		transaction.commit();
-		
-	}
+
 	public void showBodyEHCUIOInfo(){
 		android.app.FragmentTransaction transaction = getFragmentManager().beginTransaction();
 		transaction.remove(_EHCUIOInfoFragment);
@@ -557,6 +581,13 @@ public class MenuBaseFragment extends ParentFragment{
 		android.app.FragmentTransaction transaction = getFragmentManager().beginTransaction();
 		transaction.remove(_ServiceMenuWeighingCompensationFragment);
 		transaction.replace(R.id.FrameLayout_menu_inter_body, _ServiceMenuWeighingCompensationFragment);
+		transaction.commit();
+		
+	}
+	public void showBodySensorMonitoring(){
+		android.app.FragmentTransaction transaction = getFragmentManager().beginTransaction();
+		transaction.remove(_ServiceMenuWeighingCompensationFragment);
+		transaction.replace(R.id.FrameLayout_menu_inter_body, _ServiceMenuSensorMonitoringFragment);
 		transaction.commit();
 		
 	}
@@ -692,6 +723,10 @@ public class MenuBaseFragment extends ParentFragment{
 		showInterAnimation();
 		InterBodyAnimation.StartChangeAnimation(_SpeedometerFreqFragment);
 	}
+	public void showBodyWiperAnimation(){
+		showInterAnimation();
+		InterBodyAnimation.StartChangeAnimation(_WiperFragment);
+	}
 	public void showBodyMachineMonitoringAnimation(){
 		showInterAnimation();
 		InterBodyAnimation.StartChangeAnimation(_MachineMonitoringFragment);
@@ -699,10 +734,6 @@ public class MenuBaseFragment extends ParentFragment{
 	public void showBodyOperationHistoryAnimation(){
 		showInterAnimation();
 		InterBodyAnimation.StartChangeAnimation(_OperationHistoryFragment);
-	}
-	public void showBodyWeighingInfoAnimation(){
-		showInterAnimation();
-		InterBodyAnimation.StartChangeAnimation(_WeighingInfoFragment);
 	}
 	public void showBodyEHCUIOInfoAnimation(){
 		showInterAnimation();
@@ -739,6 +770,10 @@ public class MenuBaseFragment extends ParentFragment{
 	public void showBodyWeighingCompensationAnimation(){
 		showInterAnimation();
 		InterBodyAnimation.StartChangeAnimation(_ServiceMenuWeighingCompensationFragment);
+	}
+	public void showBodySensorMonitoringAnimation(){
+		showInterAnimation();
+		InterBodyAnimation.StartChangeAnimation(_ServiceMenuSensorMonitoringFragment);
 	}
 	public void showBodyBrightnessAnimation(){
 		showInterAnimation();

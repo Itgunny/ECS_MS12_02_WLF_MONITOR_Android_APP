@@ -36,7 +36,9 @@ public class MenuModeETCFragment extends MenuBodyList_ParentFragment{
 	int CoolingFanReverse;
 	int EngineAutoShutdownStatus;
 	int EngineAutoShutdownTime;
-	
+	int EngineAutoShutdownType;
+	int WiperLevel;	
+	int WiperStatus;
 	//////////////////////////////////////////////////
 	
 	//Fragment////////////////////////////////////////
@@ -92,7 +94,10 @@ public class MenuModeETCFragment extends MenuBodyList_ParentFragment{
 		// TODO Auto-generated method stub
 		CoolingFanReverse = CAN1Comm.Get_CoolingFanReverseMode_182_PGN65369();
 		EngineAutoShutdownTime = CAN1Comm.Get_SettingTimeforAutomaticEngineShutdown_364_PGN61184_122();
-		EngineAutoShutdownStatus = CAN1Comm.Get_AutomaticEngineShutdown_363_PGN61184_122();		
+		EngineAutoShutdownStatus = CAN1Comm.Get_AutomaticEngineShutdown_363_PGN61184_122();
+		WiperLevel = CAN1Comm.Get_WiperSpeedLevel_718_PGN65433();
+		WiperStatus = CAN1Comm.Get_WiperOperationStatus_717_PGN65433();
+		EngineAutoShutdownType = CAN1Comm.Get_AutomaticEngineShutdownType_PGN61184_122();
 	}
 
 	@Override
@@ -100,6 +105,7 @@ public class MenuModeETCFragment extends MenuBodyList_ParentFragment{
 		// TODO Auto-generated method stub
 		CoolingFanReverseDisplay(CoolingFanReverse);
 		EngineAutoShutdownDisplay(EngineAutoShutdownStatus, EngineAutoShutdownTime);
+		WiperDisplay(WiperStatus,WiperLevel);
 	}
 	//////////////////////////////////////////////////////////////////////////
 
@@ -133,7 +139,7 @@ public class MenuModeETCFragment extends MenuBodyList_ParentFragment{
 			return;
 		else
 			ParentActivity.StartAnimationRunningTimer();
-		
+		ParentActivity._MenuBaseFragment.showBodyWiperAnimation();
 	}
 
 	@Override
@@ -229,15 +235,37 @@ public class MenuModeETCFragment extends MenuBodyList_ParentFragment{
 	}
 	public void EngineAutoShutdownDisplay(int status, int time){
 		switch (status) {
-		case CAN1CommManager.DATA_STATE_LAMP_OFF:
+		case CAN1CommManager.DATA_STATE_AUTOSHUTDOWN_OFF:
 			setListData4(ParentActivity.getResources().getString(string.Off));
 			break;
-		case CAN1CommManager.DATA_STATE_LAMP_ON:
+		case CAN1CommManager.DATA_STATE_AUTOSHUTDOWN_ON:
 			setListData4(ParentActivity.GetSectoMinString(time) + ParentActivity.getResources().getString(string.Min));
 			break;
 
 		default:
 			break;
+		}
+	}
+	public void WiperDisplay(int status, int level){
+		if(status == CAN1CommManager.DATA_STATE_WIPER_OFF){
+			setListData3(ParentActivity.getResources().getString(string.Off));
+		}else if(status == CAN1CommManager.DATA_STATE_WIPER_ON){
+			switch (level) {
+			case CAN1CommManager.DATA_STATE_WIPER_LEVEL1:
+				setListData3(ParentActivity.getResources().getString(string.Slow));
+				break;
+			case CAN1CommManager.DATA_STATE_WIPER_LEVEL2:
+				setListData3(ParentActivity.getResources().getString(string.Normal));
+				break;
+			case CAN1CommManager.DATA_STATE_WIPER_LEVEL3:
+				setListData3(ParentActivity.getResources().getString(string.Fast));
+				break;
+			case CAN1CommManager.DATA_STATE_WIPER_LEVEL4:
+				setListData3(ParentActivity.getResources().getString(string.Very_Fast));
+				break;
+			default:
+				break;
+			}
 		}
 	}
 	/////////////////////////////////////////////////////////////////////

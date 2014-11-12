@@ -99,11 +99,9 @@ public class MainBKeyRideControlSpeedFragment extends ParentFragment{
 		
 		
 		seekBarForward.setMax(TOTAL_STEP);
-		seekBarForward.setOnSeekBarChangeListener(SpeedForwardSeekBarListener);
 		seekBarForward.incrementProgressBy(1);
 		
 		seekBarBackward.setMax(TOTAL_STEP);
-		seekBarBackward.setOnSeekBarChangeListener(SpeedBackwardSeekBarListener);
 		seekBarBackward.incrementProgressBy(1);
 	}
 	
@@ -141,6 +139,96 @@ public class MainBKeyRideControlSpeedFragment extends ParentFragment{
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
 				ClickCancel();
+			}
+		});
+		seekBarForward.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+			
+			@Override
+			public void onStopTrackingTouch(SeekBar seekBar) {
+				// TODO Auto-generated method stub
+				int progress = seekBar.getProgress();
+			
+				if(progress < 16){
+					SpeedForward = 5;
+				}else if(progress < 49){
+					SpeedForward = 10;
+				}
+				else if(progress < 82){
+					SpeedForward = 15;
+				}else{
+					SpeedForward = 20;
+				}
+				SetSeekBarPosition(seekBar, SpeedForward);
+				SpeedDisplay(textViewForwardData,SpeedForward,ParentActivity.UnitOdo);
+			}
+			
+			@Override
+			public void onStartTrackingTouch(SeekBar seekBar) {
+				// TODO Auto-generated method stub
+			}
+			
+			@Override
+			public void onProgressChanged(SeekBar seekBar, int progress,
+					boolean fromUser) {
+				// TODO Auto-generated method stub
+
+				if(progress < 16){
+					SpeedForward = 5;
+				}else if(progress < 49){
+					SpeedForward = 10;
+				}
+				else if(progress < 82){
+					SpeedForward = 15;
+				}else{
+					SpeedForward = 20;
+				}
+				SpeedDisplay(textViewForwardData,SpeedForward,ParentActivity.UnitOdo);
+				
+			}
+		});
+		seekBarBackward.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+			
+			@Override
+			public void onStopTrackingTouch(SeekBar seekBar) {
+				// TODO Auto-generated method stub
+				int progress = seekBar.getProgress();
+
+				if(progress < 16){
+					SpeedBackward = 5;
+				}else if(progress < 49){
+					SpeedBackward = 10;
+				}
+				else if(progress < 82){
+					SpeedBackward = 15;
+				}else{
+					SpeedBackward = 20;
+				}
+				SetSeekBarPosition(seekBar, SpeedBackward);
+				SpeedDisplay(textViewBackwardData,SpeedBackward,ParentActivity.UnitOdo);
+			}
+			
+			@Override
+			public void onStartTrackingTouch(SeekBar seekBar) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void onProgressChanged(SeekBar seekBar, int progress,
+					boolean fromUser) {
+				// TODO Auto-generated method stub
+			
+				if(progress < 16){
+					SpeedBackward = 5;
+				}else if(progress < 49){
+					SpeedBackward = 10;
+				}
+				else if(progress < 82){
+					SpeedBackward = 15;
+				}else{
+					SpeedBackward = 20;
+				}
+				SpeedDisplay(textViewBackwardData,SpeedBackward,ParentActivity.UnitOdo);
 			}
 		});
 	}
@@ -205,96 +293,7 @@ public class MainBKeyRideControlSpeedFragment extends ParentFragment{
 		showRideControlAnimation();
 	}
 	//Progress////////////////////////////////////////////////////////////
-	private SeekBar.OnSeekBarChangeListener SpeedForwardSeekBarListener = new SeekBar.OnSeekBarChangeListener() {
-		
-		@Override
-		public void onStopTrackingTouch(SeekBar seekBar) {
-			// TODO Auto-generated method stub
-			int progress = seekBar.getProgress();
-		
-			if(progress < 16){
-				SpeedForward = 5;
-			}else if(progress < 49){
-				SpeedForward = 10;
-			}
-			else if(progress < 82){
-				SpeedForward = 15;
-			}else{
-				SpeedForward = 20;
-			}
-			SetSeekBarPosition(seekBar, SpeedForward);
-			SpeedDisplay(textViewForwardData,SpeedForward,ParentActivity.UnitOdo);
-		}
-		
-		@Override
-		public void onStartTrackingTouch(SeekBar seekBar) {
-			// TODO Auto-generated method stub
-		}
-		
-		@Override
-		public void onProgressChanged(SeekBar seekBar, int progress,
-				boolean fromUser) {
-			// TODO Auto-generated method stub
-
-			if(progress < 16){
-				SpeedForward = 5;
-			}else if(progress < 49){
-				SpeedForward = 10;
-			}
-			else if(progress < 82){
-				SpeedForward = 15;
-			}else{
-				SpeedForward = 20;
-			}
-			SpeedDisplay(textViewForwardData,SpeedForward,ParentActivity.UnitOdo);
-			
-		}
-	};
-	private SeekBar.OnSeekBarChangeListener SpeedBackwardSeekBarListener = new SeekBar.OnSeekBarChangeListener() {
-		
-		@Override
-		public void onStopTrackingTouch(SeekBar seekBar) {
-			// TODO Auto-generated method stub
-			int progress = seekBar.getProgress();
-
-			if(progress < 16){
-				SpeedBackward = 5;
-			}else if(progress < 49){
-				SpeedBackward = 10;
-			}
-			else if(progress < 82){
-				SpeedBackward = 15;
-			}else{
-				SpeedBackward = 20;
-			}
-			SetSeekBarPosition(seekBar, SpeedBackward);
-			SpeedDisplay(textViewBackwardData,SpeedBackward,ParentActivity.UnitOdo);
-		}
-		
-		@Override
-		public void onStartTrackingTouch(SeekBar seekBar) {
-			// TODO Auto-generated method stub
-			
-		}
-		
-		@Override
-		public void onProgressChanged(SeekBar seekBar, int progress,
-				boolean fromUser) {
-			// TODO Auto-generated method stub
-		
-			if(progress < 16){
-				SpeedBackward = 5;
-			}else if(progress < 49){
-				SpeedBackward = 10;
-			}
-			else if(progress < 82){
-				SpeedBackward = 15;
-			}else{
-				SpeedBackward = 20;
-			}
-			SpeedDisplay(textViewBackwardData,SpeedBackward,ParentActivity.UnitOdo);
-		}
-	};
+	
 	//////////////////////////////////////////////////////////////////////
 	//Back////////////////////////////////////////////////////////////////
 	public void showRideControlAnimation(){

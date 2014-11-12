@@ -46,7 +46,8 @@
             android:layout_marginTop="10dp"
             android:background="@drawable/menu_mode_camera_camera_number_bg"
             android:gravity="center"
-            android:textAppearance="?android:attr/textAppearanceLarge" />
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:textSize="40sp" />
         
         <ImageButton
             android:id="@+id/imageButton_menu_body_mode_camerasetting_cameranumber_plus"
@@ -207,7 +208,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
+            android:paddingLeft="50dp"
             android:text="@string/Reverse_Mode"
+            android:textColor="@drawable/_selector_radio_txt_white_amber"
             android:textSize="25sp" />
 
     </RelativeLayout>

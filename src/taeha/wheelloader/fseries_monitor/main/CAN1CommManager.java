@@ -208,6 +208,48 @@ public class CAN1CommManager extends ICAN1CommManager.Stub{		// ttySAC1(Linux), 
 	public static final int DATA_STATE_REVERSEFAN_MANUAL			= 1;
 	public static final int DATA_STATE_REVERSEFAN_AUTO				= 2;
 	
+	public static final int DATA_STATE_WIPER_OFF					= 0;
+	public static final int DATA_STATE_WIPER_ON						= 1;
+	
+	public static final int DATA_STATE_WIPER_LEVEL1					= 1;
+	public static final int DATA_STATE_WIPER_LEVEL2					= 2;
+	public static final int DATA_STATE_WIPER_LEVEL3					= 3;
+	public static final int DATA_STATE_WIPER_LEVEL4					= 4;
+	
+	public static final int DATA_STATE_AUTOSHUTDOWN_OFF				= 0;
+	public static final int DATA_STATE_AUTOSHUTDOWN_ON				= 1;
+	
+	public static final int DATA_STATE_AUTOSHUTDOWN_ON_ONCE			= 0;
+	public static final int DATA_STATE_AUTOSHUTDOWN_ON_ALWAYS		= 1;
+	
+	public static final int DATA_STATE_CAMERA_REVERSE_OFF			= 0;
+	public static final int DATA_STATE_CAMERA_REVERSE_ON			= 1;
+	
+	public static final int DATA_STATE_JOYSTICKPOSITION_NEUTRAL		= 0;
+	public static final int DATA_STATE_JOYSTICKPOSITION_UP			= 1;
+	public static final int DATA_STATE_JOYSTICKPOSITION_DOWN		= 2;
+			
+	public static final int DATA_STATE_JOYSTICKPOSITION_MAX			= 1000;
+	public static final int DATA_STATE_EPPRCURRENT_MAX				= 950;
+	
+	public static final int DATA_STATE_TRIPDATA_RESET_TIME			= 0;
+	public static final int DATA_STATE_TRIPDATA_RESET_DISTANCE		= 1;
+	
+	public static final int DATA_STATE_PASSWORD_IDENTIFICATION_REQUEST	=	0x0;
+	public static final int DATA_STATE_ESL_MODE_SETTING					=	0x1;
+	public static final int DATA_STATE_ESL_INTERVAL_SETTING				=	0x2;
+	public static final int DATA_STATE_ESL_MODE_INTERVAL_SETTING		=	0x3;
+	public static final int DATA_STATE_TEMPORARY_PASSWORD_IDENTIFICATION_REQUEST	=	0x8;
+	public static final int DATA_STATE_PASSWORD_CHANGE_COMMAND			=	0xA;
+	public static final int DATA_STATE_LOGIN							=	0xD;
+	
+	public static final int DATA_STATE_PW_CHANGE_NOT_CHANGE 			= 0;
+	public static final int DATA_STATE_PW_CHANGE_CHANGE_OK 				= 1;
+	
+	public static final int DATA_STATE_PW_CHANGE_OLD 					= 0;
+	public static final int DATA_STATE_PW_CHANGE_NEW 					= 1;
+	public static final int DATA_STATE_PW_CHANGE_CONFIRM 				= 2;
+	
 	public static final int DATA_STATE_ESL_MODE_DISABLE				= 0;
 	public static final int DATA_STATE_ESL_MODE_ENABLE_CONTINUOUS	= 1;
 	public static final int DATA_STATE_ESL_MODE_ENABLE_INTERVAL		= 2;
@@ -223,8 +265,42 @@ public class CAN1CommManager extends ICAN1CommManager.Stub{		// ttySAC1(Linux), 
 	
 	public static final int DATA_STATE_ESL_INTERVAL_1DAY			= 201;
 	public static final int DATA_STATE_ESL_INTERVAL_2DAY			= 202;
-	///////////////////////////////////////////////////////////////
 	
+	public static final int DATA_STATE_SMARTKEY_USE_OFF 			= 0;
+	public static final int DATA_STATE_SMARTKEY_USE_ON 				= 1;
+	
+	public static final int DATA_STATE_1ST_TAG_REG_SUCCESS			= 0x01;
+	public static final int DATA_STATE_2ND_TAG_REG_SUCCESS 			= 0x02;
+	public static final int DATA_STATE_TAG_NO_REALIZE			 	= 0x03;
+	public static final int DATA_STATE_FAIL						 	= 0x04;
+	public static final int DATA_STATE_TAG_ALREADY_REG			 	= 0x05;
+	public static final int DATA_STATE_TAG_ELIMINATION_SUCESS	 	= 0x06;
+	
+	public static final int DATA_INDEX_TAG_REQ_SUCCESS	 			= 0x00;
+	public static final int DATA_INDEX_TAG_REGISTRATION			 	= 0x01;
+	public static final int DATA_INDEX_TAG_ELIMINATION	 			= 0x02;
+	
+	public static final int DATA_INDEX_SELECTGEAR_DIR_N 	= 0x00000;
+	public static final int DATA_INDEX_SELECTGEAR_DIR_F 	= 0x00001;
+	public static final int DATA_INDEX_SELECTGEAR_DIR_R 	= 0x00002;
+	public static final int DATA_INDEX_SELECTGEAR_DIR_REQ_N	= 0x00003;
+	
+	public static final int	DATA_STATE_WEIGHT_OFFSET_SETTING_CALL		= 0;
+	public static final int	DATA_STATE_WEIGHT_OFFSET_SETTING_NOOFFSET	= 0;
+	public static final int	DATA_STATE_WEIGHT_OFFSET_SETTING_WORKTOOL_1	= 1;
+	public static final int	DATA_STATE_WEIGHT_OFFSET_SETTING_WORKTOOL_2	= 2;
+	public static final int	DATA_STATE_WEIGHT_OFFSET_SETTING_WORKTOOL_3	= 3;
+	
+	public static final int LENGTH_COMPONENTBASICINFORMATION	= 37;
+	public static final int LENGTH_SOFTWAREIDENTIFICATION_ECM	= 48;
+	public static final int LENGTH_SOFTWAREIDENTIFICATION_TCU	= 67;
+	///////////////////////////////////////////////////////////////
+	////////////////Camera Status//////////////////////////////////
+	public static final int STATE_CAMERA_OFF 			= 0;
+	public static final int STATE_CAMERA_MANUAL 		= 1;
+	public static final int STATE_CAMERA_REVERSEGEAR 	= 2;
+	public int CameraOnFlag = STATE_CAMERA_OFF;
+	///////////////////////////////////////////////////////////////
 	////////////////////Shutdown State/////////////////////////////
 	public static final int SHUTDOWN_MODE_OFF				= 0x00;
 	public static final int SHUTDOWN_MODE_DELAY				= 0x01;

@@ -130,7 +130,7 @@
             android:textColor="@color/gray" />
 
         <TextView
-            android:id="@+id/textView1"
+            android:id="@+id/textView_menu_body_management_calibration_pressure_main_start"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
@@ -141,6 +141,16 @@
             android:text="@string/Start"
             android:textAppearance="?android:attr/textAppearanceLarge"
             android:textSize="30sp" />
+
+        <ProgressBar
+            android:id="@+id/progressBar_menu_body_management_calibration_pressure"
+            style="@style/PressureCalibrationProgressBar"
+            android:layout_width="670dp"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@+id/textView_menu_body_management_calibration_pressure_main_start"
+            android:layout_alignTop="@+id/textView_menu_body_management_calibration_pressure_main_start"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="10dp" />
 
     </RelativeLayout>
     

@@ -10,7 +10,8 @@
         android:layout_above="@+id/RelativeLayout_menu_body_management_changephone_low"
         android:layout_alignParentRight="true"
         android:layout_alignParentTop="true"
-        android:layout_marginRight="30dp" >
+        android:layout_marginRight="30dp"
+        android:layout_marginTop="10dp" >
 
         <TextView
             android:id="@+id/textView_menu_body_management_changephone_num_1"

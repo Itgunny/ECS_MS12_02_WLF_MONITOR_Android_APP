@@ -70,7 +70,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="43dp"
-        android:layout_marginTop="125dp" >
+        android:layout_marginTop="150dp" >
 
         <TextView
 	        android:id="@+id/textView_menu_body_monitoring_version_monitor_title"
@@ -101,7 +101,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="294dp"
-        android:layout_marginTop="125dp" >
+        android:layout_marginTop="150dp" >
 
         <TextView
 	        android:id="@+id/textView_menu_body_monitoring_version_mcu_title"
@@ -132,7 +132,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="545dp"
-        android:layout_marginTop="125dp" >
+        android:layout_marginTop="150dp" >
 
         <TextView
 	        android:id="@+id/textView_menu_body_monitoring_version_cluster_title"
@@ -163,7 +163,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="43dp"
-        android:layout_marginTop="192dp" >
+        android:layout_marginTop="240dp" >
 
         <TextView
 	        android:id="@+id/textView_menu_body_monitoring_version_rmcu_title"
@@ -194,7 +194,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="294dp"
-        android:layout_marginTop="192dp" >
+        android:layout_marginTop="240dp" >
 
         <TextView
 	        android:id="@+id/textView_menu_body_monitoring_version_ehcu_title"
@@ -219,18 +219,6 @@
             android:textColor="@color/menu_body_monitoring_version_data_gray" />
 
     </RelativeLayout>
-    
-    <TextView
-        android:id="@+id/textView_menu_body_monitoring_version_softwareupdate"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="164dp"
-        android:layout_marginTop="256dp"
-        android:background="@drawable/_selector_menu_body_monitoring_version_software_btn1"
-        android:gravity="center"
-        android:text="@string/Software_Update"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:textColor="@drawable/_selector_menu_body_multimedia_txt" />
     
     <RelativeLayout
         android:id="@+id/Relativelayout_menu_body_monitoring_version_low"

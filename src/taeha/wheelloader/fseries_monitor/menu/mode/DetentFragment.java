@@ -113,7 +113,10 @@ public class DetentFragment extends ParentFragment{
 		// TODO Auto-generated method stub
 		super.InitValuables();
 		
-		
+		BoomDetentMode = CAN1Comm.Get_BoomDetentMode_223_PGN61184_124();
+		BucketDetentMode = CAN1Comm.Get_BucketDetentMode_224_PGN61184_124();
+		DetentBoomDisplay(BoomDetentMode);
+		DetentBucketDisplay(BucketDetentMode);
 		
 	}
 	@Override
@@ -231,10 +234,7 @@ public class DetentFragment extends ParentFragment{
 	/////////////////////////////////////////////////////////////////////
 	public void DetentBoomDisplay(int Data){
 		switch (Data) {
-		case CAN1CommManager.DATA_STATE_KEY_DETENT_BOOM_OFF:                                                                                                                                                      
-			radioBucketOn.setChecked(false);
-			break;
-		case CAN1CommManager.DATA_STATE_KEY_DETENT_BUCKET_IN:
+		case CAN1CommManager.DATA_STATE_KEY_DETENT_BOOM_OFF:
 			radioBoomOff.setChecked(true);
 			radioBoomOn.setChecked(false);
 			break;
@@ -250,6 +250,9 @@ public class DetentFragment extends ParentFragment{
 		switch (Data) {
 		case CAN1CommManager.DATA_STATE_KEY_DETENT_BUCKET_OFF:
 			radioBucketOff.setChecked(true);
+			radioBucketOn.setChecked(false);
+			break;
+		case CAN1CommManager.DATA_STATE_KEY_DETENT_BUCKET_IN:
 			radioBucketOff.setChecked(false);
 			radioBucketOn.setChecked(true);
 			break;

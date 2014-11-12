@@ -2,194 +2,333 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent" >
-    
-    <RelativeLayout
-        android:id="@+id/RelativeLayout_menu_body_monitoring_operationhistory_currentfuelrate"
-        android:layout_width="742dp"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:background="@drawable/menu_information_monitoring_block" >
-
-        <TextView
-            android:id="@+id/textView_menu_body_monitoring_operationhistory_currentfuelrate_title"
-            android:layout_width="wrap_content"
-            android:layout_height="76dp"
-            android:layout_marginLeft="40dp"
-            android:gravity="center_vertical"
-            android:text="@string/Current_Fuel_Rate"
-            android:textAppearance="?android:attr/textAppearanceLarge" />
-        
-        <TextView
-            android:id="@+id/textView_menu_body_monitoring_operationhistory_currentfuelrate_data"
-            android:layout_width="wrap_content"
-            android:layout_height="76dp"
-            android:layout_alignParentRight="true"
-            android:layout_marginRight="270dp"
-            android:gravity="right|center_vertical"
-            android:text="0"
-            android:textAppearance="?android:attr/textAppearanceLarge" />
-        
-        <TextView
-            android:id="@+id/textView_menu_body_monitoring_operationhistory_currentfuelrate_unit"
-            android:layout_width="wrap_content"
-            android:layout_height="76dp"
-            android:layout_alignParentRight="true"
-            android:layout_marginRight="230dp"
-            android:gravity="center_vertical"
-            android:text="@string/l_h"
-            android:textAppearance="?android:attr/textAppearanceLarge"
-            android:textColor="@color/menu_body_mode_tab_gray" />
-
-    </RelativeLayout>
 
     <RelativeLayout
-        android:id="@+id/RelativeLayout_menu_body_monitoring_operationhistory_latesthour"
-        android:layout_width="742dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/RelativeLayout_menu_body_monitoring_operationhistory_currentfuelrate"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="7dp"
-        android:background="@drawable/menu_information_monitoring_block" >
+        android:layout_above="@+id/Relativelayout_menu_body_monitoring_operationhistory_low"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true" >
 
-        <TextView
-            android:id="@+id/textView_menu_body_monitoring_operationhistory_latesthour_title"
-            android:layout_width="wrap_content"
-            android:layout_height="76dp"
-            android:layout_marginLeft="40dp"
-            android:gravity="center_vertical"
-            android:text="@string/Latest_Hourmeter"
-            android:textAppearance="?android:attr/textAppearanceLarge" />
-        
-        <TextView
-            android:id="@+id/textView_menu_body_monitoring_operationhistory_latesthour_data"
-            android:layout_width="wrap_content"
-            android:layout_height="76dp"
-            android:layout_alignParentRight="true"
-            android:layout_marginRight="270dp"
-            android:gravity="right|center_vertical"
-            android:text="0"
-            android:textAppearance="?android:attr/textAppearanceLarge" />
-        
-        <TextView
-            android:id="@+id/textView_menu_body_monitoring_operationhistory_latesthour_unit"
-            android:layout_width="wrap_content"
-            android:layout_height="76dp"
-            android:layout_alignParentRight="true"
-            android:layout_marginRight="230dp"
-            android:gravity="center_vertical"
-            android:text="@string/Hr"
-            android:textAppearance="?android:attr/textAppearanceLarge"
-            android:textColor="@color/menu_body_mode_tab_gray" />
-        
-        <TextView
-            android:id="@+id/TextView_menu_body_monitoring_operationhistory_latesthour_init"
+        <RelativeLayout
+            android:id="@+id/RelativeLayout_menu_body_monitoring_operationhistory_work_daily"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:layout_centerVertical="true"
-            android:layout_marginRight="10dp"
-            android:background="@drawable/_selector_menu_body_monitoring_machinemonitoring_btn1"
-            android:gravity="center"
-            android:text="@string/Initialization"
-            android:textColor="@drawable/_selector_menu_body_multimedia_txt"
-            android:textSize="20sp" />
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/menu_information_operation_bg" >
+            
+            <TextView
+		        android:id="@+id/textView_menu_body_monitoring_operationhistory_work_daily"
+		        android:layout_width="wrap_content"
+		        android:layout_height="wrap_content"
+		        android:layout_marginLeft="62dp"
+		        android:layout_marginTop="10dp"
+		        android:text="@string/Daily"
+		        android:textAppearance="?android:attr/textAppearanceLarge"
+		        android:textSize="15sp" />
 
-    </RelativeLayout>
-    
-    <RelativeLayout
-        android:id="@+id/RelativeLayout_menu_body_monitoring_operationhistory_totalodo"
-        android:layout_width="742dp"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/RelativeLayout_menu_body_monitoring_operationhistory_latesthour"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="7dp"
-        android:background="@drawable/menu_information_monitoring_block" >
+            <TextView
+                android:id="@+id/textView_menu_body_monitoring_operationhistory_work_daily_data"
+                android:layout_width="240dp"
+                android:layout_height="30dp"
+                android:layout_marginLeft="50dp"
+                android:layout_marginTop="40dp"
+                android:gravity="right|center_vertical"
+                android:text="0"
+                android:textAppearance="?android:attr/textAppearanceLarge" />
 
-        <TextView
-            android:id="@+id/textView_menu_body_monitoring_operationhistory_totalodo_title"
-            android:layout_width="wrap_content"
-            android:layout_height="76dp"
-            android:layout_marginLeft="40dp"
-            android:gravity="center_vertical"
-            android:text="@string/Total_Odometer"
-            android:textAppearance="?android:attr/textAppearanceLarge" />
-        
-        <TextView
-            android:id="@+id/textView_menu_body_monitoring_operationhistory_totalodo_data"
-            android:layout_width="wrap_content"
-            android:layout_height="76dp"
-            android:layout_alignParentRight="true"
-            android:layout_marginRight="270dp"
-            android:gravity="right|center_vertical"
-            android:text="0"
-            android:textAppearance="?android:attr/textAppearanceLarge" />
-        
-        <TextView
-            android:id="@+id/textView_menu_body_monitoring_operationhistory_totalodo_unit"
-            android:layout_width="wrap_content"
-            android:layout_height="76dp"
-            android:layout_alignParentRight="true"
-            android:layout_marginRight="230dp"
-            android:gravity="center_vertical"
-            android:text="@string/km"
-            android:textAppearance="?android:attr/textAppearanceLarge"
-            android:textColor="@color/menu_body_mode_tab_gray" />
+            <TextView
+                android:id="@+id/textView_menu_body_monitoring_operationhistory_work_daily_unit"
+                android:layout_width="50dp"
+                android:layout_height="wrap_content"
+                android:layout_alignBottom="@+id/textView_menu_body_monitoring_operationhistory_work_daily_data"
+                android:layout_alignTop="@+id/textView_menu_body_monitoring_operationhistory_work_daily_data"
+                android:layout_marginLeft="10dp"
+                android:layout_toRightOf="@+id/textView_menu_body_monitoring_operationhistory_work_daily_data"
+                android:gravity="center"
+                android:text="@string/ton"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:textColor="@color/gray" />
 
-    </RelativeLayout>
-    
-    <RelativeLayout
-        android:id="@+id/RelativeLayout_menu_body_monitoring_operationhistory_latestodo"
-        android:layout_width="742dp"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/RelativeLayout_menu_body_monitoring_operationhistory_totalodo"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="7dp"
-        android:background="@drawable/menu_information_monitoring_block" >
-
-        <TextView
-            android:id="@+id/textView_menu_body_monitoring_operationhistory_latestodo_title"
-            android:layout_width="wrap_content"
-            android:layout_height="76dp"
-            android:layout_marginLeft="40dp"
-            android:gravity="center_vertical"
-            android:text="@string/Latest_Odometer"
-            android:textAppearance="?android:attr/textAppearanceLarge" />
+        </RelativeLayout>
         
-        <TextView
-            android:id="@+id/textView_menu_body_monitoring_operationhistory_latestodo_data"
-            android:layout_width="wrap_content"
-            android:layout_height="76dp"
-            android:layout_alignParentRight="true"
-            android:layout_marginRight="270dp"
-            android:gravity="right|center_vertical"
-            android:text="0"
-            android:textAppearance="?android:attr/textAppearanceLarge" />
-        
-        <TextView
-            android:id="@+id/textView_menu_body_monitoring_operationhistory_latestodo_unit"
-            android:layout_width="wrap_content"
-            android:layout_height="76dp"
-            android:layout_alignParentRight="true"
-            android:layout_marginRight="230dp"
-            android:gravity="center_vertical"
-            android:text="@string/km"
-            android:textAppearance="?android:attr/textAppearanceLarge"
-            android:textColor="@color/menu_body_mode_tab_gray" />
-        
-        <TextView
-            android:id="@+id/TextView_menu_body_monitoring_operationhistory_latestodo_init"
+        <RelativeLayout
+            android:id="@+id/RelativeLayout_menu_body_monitoring_operationhistory_work_totala"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:layout_centerVertical="true"
-            android:layout_marginRight="10dp"
-            android:background="@drawable/_selector_menu_body_monitoring_machinemonitoring_btn1"
-            android:gravity="center"
-            android:text="@string/Initialization"
-            android:textColor="@drawable/_selector_menu_body_multimedia_txt"
-            android:textSize="20sp" />
+            android:layout_alignLeft="@+id/RelativeLayout_menu_body_monitoring_operationhistory_work_daily"
+            android:layout_below="@+id/RelativeLayout_menu_body_monitoring_operationhistory_work_daily"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/menu_information_operation_bg" >
+
+            <CheckBox
+                android:id="@+id/checkBox_menu_body_monitoring_operationhistory_work_totala"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:paddingLeft="50dp"
+                android:text="@string/Total_A"
+                android:textColor="@drawable/_selector_radio_txt_white_amber" />
+
+            <TextView
+                android:id="@+id/textView_menu_body_monitoring_operationhistory_work_totala_data"
+                android:layout_width="240dp"
+                android:layout_height="30dp"
+                android:layout_marginLeft="50dp"
+                android:layout_marginTop="40dp"
+                android:gravity="right|center_vertical"
+                android:text="0"
+                android:textAppearance="?android:attr/textAppearanceLarge" />
+
+            <TextView
+                android:id="@+id/textView_menu_body_monitoring_operationhistory_work_totala_unit"
+                android:layout_width="50dp"
+                android:layout_height="wrap_content"
+                android:layout_alignBottom="@+id/textView_menu_body_monitoring_operationhistory_work_totala_data"
+                android:layout_alignTop="@+id/textView_menu_body_monitoring_operationhistory_work_totala_data"
+                android:layout_marginLeft="10dp"
+                android:layout_toRightOf="@+id/textView_menu_body_monitoring_operationhistory_work_totala_data"
+                android:gravity="center"
+                android:text="@string/ton"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:textColor="@color/gray" />
+
+        </RelativeLayout>
+        
+		<RelativeLayout
+		    android:id="@+id/RelativeLayout_menu_body_monitoring_operationhistory_work_totalb"
+		    android:layout_width="wrap_content"
+		    android:layout_height="wrap_content"
+		    android:layout_alignLeft="@+id/RelativeLayout_menu_body_monitoring_operationhistory_work_daily"
+		    android:layout_below="@+id/RelativeLayout_menu_body_monitoring_operationhistory_work_totala"
+		    android:layout_marginTop="10dp"
+		    android:background="@drawable/menu_information_operation_bg" >
+
+            <CheckBox
+                android:id="@+id/checkBox_menu_body_monitoring_operationhistory_work_totalb"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:paddingLeft="50dp"
+                android:text="@string/Total_B"
+                android:textColor="@drawable/_selector_radio_txt_white_amber" />
+
+            <TextView
+                android:id="@+id/textView_menu_body_monitoring_operationhistory_work_totalb_data"
+                android:layout_width="240dp"
+                android:layout_height="30dp"
+                android:layout_marginLeft="50dp"
+                android:layout_marginTop="40dp"
+                android:gravity="right|center_vertical"
+                android:text="0"
+                android:textAppearance="?android:attr/textAppearanceLarge" />
+
+            <TextView
+                android:id="@+id/textView_menu_body_monitoring_operationhistory_work_totalb_unit"
+                android:layout_width="50dp"
+                android:layout_height="wrap_content"
+                android:layout_alignBottom="@+id/textView_menu_body_monitoring_operationhistory_work_totalb_data"
+                android:layout_alignTop="@+id/textView_menu_body_monitoring_operationhistory_work_totalb_data"
+                android:layout_marginLeft="10dp"
+                android:layout_toRightOf="@+id/textView_menu_body_monitoring_operationhistory_work_totalb_data"
+                android:gravity="center"
+                android:text="@string/ton"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:textColor="@color/gray" />
+
+        </RelativeLayout>
+        
+		<RelativeLayout
+		    android:id="@+id/RelativeLayout_menu_body_monitoring_operationhistory_work_totalc"
+		    android:layout_width="wrap_content"
+		    android:layout_height="wrap_content"
+		    android:layout_alignLeft="@+id/RelativeLayout_menu_body_monitoring_operationhistory_work_daily"
+		    android:layout_below="@+id/RelativeLayout_menu_body_monitoring_operationhistory_work_totalb"
+		    android:layout_marginTop="10dp"
+		    android:background="@drawable/menu_information_operation_bg" >
+
+            <CheckBox
+                android:id="@+id/checkBox_menu_body_monitoring_operationhistory_work_totalc"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:paddingLeft="50dp"
+                android:text="@string/Total_C"
+                android:textColor="@drawable/_selector_radio_txt_white_amber" />
+
+            <TextView
+                android:id="@+id/textView_menu_body_monitoring_operationhistory_work_totalc_data"
+                android:layout_width="240dp"
+                android:layout_height="30dp"
+                android:layout_marginLeft="50dp"
+                android:layout_marginTop="40dp"
+                android:gravity="right|center_vertical"
+                android:text="0"
+                android:textAppearance="?android:attr/textAppearanceLarge" />
+
+            <TextView
+                android:id="@+id/textView_menu_body_monitoring_operationhistory_work_totalc_unit"
+                android:layout_width="50dp"
+                android:layout_height="wrap_content"
+                android:layout_alignBottom="@+id/textView_menu_body_monitoring_operationhistory_work_totalc_data"
+                android:layout_alignTop="@+id/textView_menu_body_monitoring_operationhistory_work_totalc_data"
+                android:layout_marginLeft="10dp"
+                android:layout_toRightOf="@+id/textView_menu_body_monitoring_operationhistory_work_totalc_data"
+                android:gravity="center"
+                android:text="@string/ton"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:textColor="@color/gray" />
+
+        </RelativeLayout>
+        
+		<RelativeLayout
+		    android:id="@+id/RelativeLayout_menu_body_monitoring_operationhistory_odo_total"
+		    android:layout_width="wrap_content"
+		    android:layout_height="wrap_content"
+		    android:layout_marginLeft="30dp"
+		    android:layout_marginTop="10dp"
+		    android:layout_toRightOf="@+id/RelativeLayout_menu_body_monitoring_operationhistory_work_daily"
+		    android:background="@drawable/menu_information_operation_bg" >
+
+		    <TextView
+		        android:id="@+id/textView_menu_body_monitoring_operationhistory_odo_total"
+		        android:layout_width="wrap_content"
+		        android:layout_height="wrap_content"
+		        android:layout_marginLeft="62dp"
+		        android:layout_marginTop="10dp"
+		        android:text="@string/Total_Odometer"
+		        android:textAppearance="?android:attr/textAppearanceLarge"
+		        android:textSize="15sp" />
+
+            <TextView
+                android:id="@+id/textView_menu_body_monitoring_operationhistory_odo_total_data"
+                android:layout_width="240dp"
+                android:layout_height="30dp"
+                android:layout_marginLeft="50dp"
+                android:layout_marginTop="40dp"
+                android:gravity="right|center_vertical"
+                android:text="0"
+                android:textAppearance="?android:attr/textAppearanceLarge" />
+
+            <TextView
+                android:id="@+id/textView_menu_body_monitoring_operationhistory_odo_total_unit"
+                android:layout_width="50dp"
+                android:layout_height="wrap_content"
+                android:layout_alignBottom="@+id/textView_menu_body_monitoring_operationhistory_odo_total_data"
+                android:layout_alignTop="@+id/textView_menu_body_monitoring_operationhistory_odo_total_data"
+                android:layout_marginLeft="10dp"
+                android:layout_toRightOf="@+id/textView_menu_body_monitoring_operationhistory_odo_total_data"
+                android:gravity="center"
+                android:text="@string/Hr"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:textColor="@color/gray" />
+
+        </RelativeLayout>
+        
+		<RelativeLayout
+		    android:id="@+id/RelativeLayout_menu_body_monitoring_operationhistory_odo_latest"
+		    android:layout_width="wrap_content"
+		    android:layout_height="wrap_content"
+		    android:layout_alignLeft="@+id/RelativeLayout_menu_body_monitoring_operationhistory_odo_total"
+		    android:layout_below="@+id/RelativeLayout_menu_body_monitoring_operationhistory_odo_total"
+		    android:layout_marginTop="10dp"
+		    android:background="@drawable/menu_information_operation_bg" >
+
+            <CheckBox
+                android:id="@+id/checkBox_menu_body_monitoring_operationhistory_odo_latest"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:paddingLeft="50dp"
+                android:text="@string/Latest_Odometer"
+                android:textColor="@drawable/_selector_radio_txt_white_amber" />
+
+            <TextView
+                android:id="@+id/textView_menu_body_monitoring_operationhistory_odo_latest_data"
+                android:layout_width="240dp"
+                android:layout_height="30dp"
+                android:layout_marginLeft="50dp"
+                android:layout_marginTop="40dp"
+                android:gravity="right|center_vertical"
+                android:text="0"
+                android:textAppearance="?android:attr/textAppearanceLarge" />
+
+            <TextView
+                android:id="@+id/textView_menu_body_monitoring_operationhistory_odo_latest_unit"
+                android:layout_width="50dp"
+                android:layout_height="wrap_content"
+                android:layout_alignBottom="@+id/textView_menu_body_monitoring_operationhistory_odo_latest_data"
+                android:layout_alignTop="@+id/textView_menu_body_monitoring_operationhistory_odo_latest_data"
+                android:layout_marginLeft="10dp"
+                android:layout_toRightOf="@+id/textView_menu_body_monitoring_operationhistory_odo_latest_data"
+                android:gravity="center"
+                android:text="@string/km"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:textColor="@color/gray" />
+
+        </RelativeLayout>
+        
+		<RelativeLayout
+		    android:id="@+id/RelativeLayout_menu_body_monitoring_operationhistory_hour_latest"
+		    android:layout_width="wrap_content"
+		    android:layout_height="wrap_content"
+		    android:layout_alignLeft="@+id/RelativeLayout_menu_body_monitoring_operationhistory_odo_total"
+		    android:layout_below="@+id/RelativeLayout_menu_body_monitoring_operationhistory_odo_latest"
+		    android:layout_marginTop="10dp"
+		    android:background="@drawable/menu_information_operation_bg" >
+
+            <CheckBox
+                android:id="@+id/checkBox_menu_body_monitoring_operationhistory_hour_latest"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:paddingLeft="50dp"
+                android:text="@string/Latest_Hourmeter"
+                android:textColor="@drawable/_selector_radio_txt_white_amber" />
+
+            <TextView
+                android:id="@+id/textView_menu_body_monitoring_operationhistory_hour_latest_data"
+                android:layout_width="240dp"
+                android:layout_height="30dp"
+                android:layout_marginLeft="50dp"
+                android:layout_marginTop="40dp"
+                android:gravity="right|center_vertical"
+                android:text="0"
+                android:textAppearance="?android:attr/textAppearanceLarge" />
+
+            <TextView
+                android:id="@+id/textView_menu_body_monitoring_operationhistory_hour_latest_unit"
+                android:layout_width="50dp"
+                android:layout_height="wrap_content"
+                android:layout_alignBottom="@+id/textView_menu_body_monitoring_operationhistory_hour_latest_data"
+                android:layout_alignTop="@+id/textView_menu_body_monitoring_operationhistory_hour_latest_data"
+                android:layout_marginLeft="10dp"
+                android:layout_toRightOf="@+id/textView_menu_body_monitoring_operationhistory_hour_latest_data"
+                android:gravity="center"
+                android:text="@string/km"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:textColor="@color/gray" />
+
+        </RelativeLayout>
+        
+		<TextView
+		    android:id="@+id/textView_menu_body_monitoring_operationhistory_init"
+		    android:layout_width="wrap_content"
+		    android:layout_height="wrap_content"
+		    android:layout_alignLeft="@+id/RelativeLayout_menu_body_monitoring_operationhistory_hour_latest"
+		    android:layout_below="@+id/RelativeLayout_menu_body_monitoring_operationhistory_hour_latest"
+		    android:layout_marginTop="20dp"
+		    android:background="@drawable/_selector_key_quickcoupler_btn1"
+		    android:gravity="center"
+		    android:text="@string/Initialization"
+		    android:textAppearance="?android:attr/textAppearanceLarge" />
 
     </RelativeLayout>
+    
+    
+
     
     <RelativeLayout
         android:id="@+id/Relativelayout_menu_body_monitoring_operationhistory_low"
