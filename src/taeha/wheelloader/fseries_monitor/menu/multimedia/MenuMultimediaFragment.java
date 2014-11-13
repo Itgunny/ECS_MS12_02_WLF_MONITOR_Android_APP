@@ -116,6 +116,13 @@ public class MenuMultimediaFragment extends ParentFragment{
 			ParentActivity.startActivity(intent);
 		}
 	}
+	public void ExcuteFileManaget(){
+		Intent intent;
+		intent = ParentActivity.getPackageManager().getLaunchIntentForPackage(
+				"com.rhmsoft.fm.hd");
+		if(intent != null)
+			startActivity(intent);
+	}
 	/////////////////////////////////////////////////////////////////////
 	
 	/////////////////////////////////////////////////////////////////////

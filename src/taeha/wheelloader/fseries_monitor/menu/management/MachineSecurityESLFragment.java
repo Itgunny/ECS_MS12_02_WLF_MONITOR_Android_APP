@@ -118,6 +118,8 @@ public class MachineSecurityESLFragment extends ParentFragment{
 		ESLMode = CAN1Comm.Get_ESLMode_820_PGN65348();
 		ESLInterval = CAN1Comm.Get_ESLInterval_825_PGN65348();
 		
+		Log.d(TAG,"ESLMode : " + Integer.toString(ESLMode));
+		
 		ESLTimeDisplayOnOff(ESLMode);
 		ESLModeDisplay(ESLMode);
 		ESLTimeDisplay(ESLInterval);
@@ -260,28 +262,36 @@ public class MachineSecurityESLFragment extends ParentFragment{
 			return;
 		else
 			ParentActivity.StartAnimationRunningTimer();
-		ParentActivity._MenuBaseFragment.showMachineSecurityListAnimation();
-
-		if(ESLMode == CAN1CommManager.DATA_STATE_ESL_MODE_ENABLE_INTERVAL){
-			CAN1Comm.Set_HCEAntiTheftCommand_1633_PGN61184_23(CAN1CommManager.DATA_STATE_ESL_INTERVAL_SETTING);
-			CAN1Comm.Set_ESLMode_820_PGN61184_23(ESLMode);
-			CAN1Comm.Set_ESLInterval_825_PGN61184_23(ESLInterval);
-			CAN1Comm.TxCANToMCU(23);
-			CAN1Comm.Set_HCEAntiTheftCommand_1633_PGN61184_23(15);
-			CAN1Comm.Set_ESLMode_820_PGN61184_23(3);
-			CAN1Comm.Set_ESLInterval_825_PGN61184_23(0xFF);
-		}
-		else{
-			CAN1Comm.Set_HCEAntiTheftCommand_1633_PGN61184_23(CAN1CommManager.DATA_STATE_ESL_MODE_SETTING);
-			CAN1Comm.Set_ESLMode_820_PGN61184_23(ESLMode);
-			CAN1Comm.Set_ESLInterval_825_PGN61184_23(0xFF);
-			CAN1Comm.TxCANToMCU(23);
-			CAN1Comm.Set_HCEAntiTheftCommand_1633_PGN61184_23(15);
-			CAN1Comm.Set_ESLMode_820_PGN61184_23(3);
-			CAN1Comm.Set_ESLInterval_825_PGN61184_23(0xFF);
-		}
 			
-		
+		if(ParentActivity.OldScreenIndex == Home.SCREEN_STATE_MENU_MODE_ETC_AUTOSHUTDOWN_PW){
+			ParentActivity.OldScreenIndex = 0;
+			ParentActivity._MenuBaseFragment.showBodyEngineAutoShutdown();
+			ParentActivity.EngineAutoShutdownESLSetFlag = true;
+			ParentActivity.ESLInterval = ESLInterval;
+			ParentActivity.ESLMode = ESLMode;
+		}else{
+			ParentActivity._MenuBaseFragment.showMachineSecurityListAnimation();
+			ParentActivity.EngineAutoShutdownESLSetFlag = false;
+			if(ESLMode == CAN1CommManager.DATA_STATE_ESL_MODE_ENABLE_INTERVAL){
+				CAN1Comm.Set_HCEAntiTheftCommand_1633_PGN61184_23(CAN1CommManager.DATA_STATE_ESL_MODE_INTERVAL_SETTING);
+				CAN1Comm.Set_ESLMode_820_PGN61184_23(ESLMode);
+				CAN1Comm.Set_ESLInterval_825_PGN61184_23(ESLInterval);
+				CAN1Comm.TxCANToMCU(23);
+				CAN1Comm.Set_HCEAntiTheftCommand_1633_PGN61184_23(15);
+				CAN1Comm.Set_ESLMode_820_PGN61184_23(3);
+				CAN1Comm.Set_ESLInterval_825_PGN61184_23(0xFF);
+				Log.d(TAG,"DATA_STATE_ESL_INTERVAL_SETTING");
+			}
+			else{
+				CAN1Comm.Set_HCEAntiTheftCommand_1633_PGN61184_23(CAN1CommManager.DATA_STATE_ESL_MODE_SETTING);
+				CAN1Comm.Set_ESLMode_820_PGN61184_23(ESLMode);
+				CAN1Comm.Set_ESLInterval_825_PGN61184_23(0xFF);
+				CAN1Comm.TxCANToMCU(23);
+				CAN1Comm.Set_HCEAntiTheftCommand_1633_PGN61184_23(15);
+				CAN1Comm.Set_ESLMode_820_PGN61184_23(3);
+				CAN1Comm.Set_ESLInterval_825_PGN61184_23(0xFF);
+			}
+		}
 		
 	}
 	public void ClickCancel(){
@@ -289,7 +299,14 @@ public class MachineSecurityESLFragment extends ParentFragment{
 			return;
 		else
 			ParentActivity.StartAnimationRunningTimer();
-		ParentActivity._MenuBaseFragment.showMachineSecurityListAnimation();
+		
+		if(ParentActivity.OldScreenIndex == Home.SCREEN_STATE_MENU_MODE_ETC_AUTOSHUTDOWN_PW){
+			ParentActivity.OldScreenIndex = 0;
+			ParentActivity._MenuBaseFragment.showBodyEngineAutoShutdown();
+		}else{
+			ParentActivity._MenuBaseFragment.showMachineSecurityListAnimation();
+		}
+		ParentActivity.EngineAutoShutdownESLSetFlag =false;
 	}
 	public void ClickDisable(){
 		ESLMode = CAN1CommManager.DATA_STATE_ESL_MODE_DISABLE;
@@ -304,38 +321,47 @@ public class MachineSecurityESLFragment extends ParentFragment{
 		ESLTimeDisplayOnOff(ESLMode);
 	}
 	public void Click5Min(){
+		ESLMode = CAN1CommManager.DATA_STATE_ESL_MODE_ENABLE_INTERVAL;
 		ESLInterval = CAN1CommManager.DATA_STATE_ESL_INTERVAL_5MIN;
 		ESLTimeDisplay(ESLInterval);
 	}
 	public void Click10Min(){
+		ESLMode = CAN1CommManager.DATA_STATE_ESL_MODE_ENABLE_INTERVAL;
 		ESLInterval = CAN1CommManager.DATA_STATE_ESL_INTERVAL_10MIN;
 		ESLTimeDisplay(ESLInterval);
 	}
 	public void Click20Min(){
+		ESLMode = CAN1CommManager.DATA_STATE_ESL_MODE_ENABLE_INTERVAL;
 		ESLInterval = CAN1CommManager.DATA_STATE_ESL_INTERVAL_20MIN;
 		ESLTimeDisplay(ESLInterval);
 	}
 	public void Click30Min(){
+		ESLMode = CAN1CommManager.DATA_STATE_ESL_MODE_ENABLE_INTERVAL;
 		ESLInterval = CAN1CommManager.DATA_STATE_ESL_INTERVAL_30MIN;
 		ESLTimeDisplay(ESLInterval);
 	}
 	public void Click1Hour(){
+		ESLMode = CAN1CommManager.DATA_STATE_ESL_MODE_ENABLE_INTERVAL;
 		ESLInterval = CAN1CommManager.DATA_STATE_ESL_INTERVAL_1HR;
 		ESLTimeDisplay(ESLInterval);
 	}
 	public void Click2Hour(){
+		ESLMode = CAN1CommManager.DATA_STATE_ESL_MODE_ENABLE_INTERVAL;
 		ESLInterval = CAN1CommManager.DATA_STATE_ESL_INTERVAL_2HR;
 		ESLTimeDisplay(ESLInterval);
 	}
 	public void Click4Hour(){
+		ESLMode = CAN1CommManager.DATA_STATE_ESL_MODE_ENABLE_INTERVAL;
 		ESLInterval = CAN1CommManager.DATA_STATE_ESL_INTERVAL_4HR;
 		ESLTimeDisplay(ESLInterval);
 	}
 	public void Click1Day(){
+		ESLMode = CAN1CommManager.DATA_STATE_ESL_MODE_ENABLE_INTERVAL;
 		ESLInterval = CAN1CommManager.DATA_STATE_ESL_INTERVAL_1DAY;
 		ESLTimeDisplay(ESLInterval);
 	}
 	public void Click2Day(){
+		ESLMode = CAN1CommManager.DATA_STATE_ESL_MODE_ENABLE_INTERVAL;
 		ESLInterval = CAN1CommManager.DATA_STATE_ESL_INTERVAL_2DAY;
 		ESLTimeDisplay(ESLInterval);
 	}

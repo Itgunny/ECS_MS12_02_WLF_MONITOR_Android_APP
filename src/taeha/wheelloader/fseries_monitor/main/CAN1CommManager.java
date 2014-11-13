@@ -88,7 +88,7 @@ public class CAN1CommManager extends ICAN1CommManager.Stub{		// ttySAC1(Linux), 
 	public static final int POWER_OFF 			= 0x000000F5;
 	///////////////////////////////////////////////////////////////
 	
-	////////////////////CAN Data SPN///////////////////////////////
+	////////////////////CAN Data SPN///////////////////////////////	
 	public static final int DATA_STATE_LAMP_OFF		 		= 0;
 	public static final int DATA_STATE_LAMP_ON		 		= 1;
 	

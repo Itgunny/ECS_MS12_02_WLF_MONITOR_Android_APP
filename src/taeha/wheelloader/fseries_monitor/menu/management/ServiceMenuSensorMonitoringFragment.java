@@ -40,6 +40,7 @@ public class ServiceMenuSensorMonitoringFragment extends ParentFragment{
 	
 	//VALUABLE////////////////////////////////////////
 	int[] StatusValue;
+	boolean BackgroundFlag;
 	//////////////////////////////////////////////////
 	
 	//Fragment////////////////////////////////////////
@@ -93,6 +94,8 @@ public class ServiceMenuSensorMonitoringFragment extends ParentFragment{
 		
 		StatusValue = new int[NumofItem];
 		listView.setAdapter(adapter);
+		
+		BackgroundFlag = true;
 	}
 	@Override
 	protected void InitButtonListener() {
@@ -234,7 +237,7 @@ public class ServiceMenuSensorMonitoringFragment extends ParentFragment{
 		// 1. Fan RPM : rpm
 		FanRPM = ValueReturn_1(StatusValue[0]);
 		
-		adapter.addItem(new IconTextItem(ParentActivity.getResources().getDrawable(R.drawable.menu_management_machine_monitoring_bg_light),ParentActivity.getResources().getDrawable(R.drawable.menu_management_machine_monitoring_bg_line),"Fan rpm", Integer.toString(FanRPM), "rpm"));
+		adapter.addItem(new IconTextItem(ParentActivity.getResources().getDrawable(R.drawable.menu_management_machine_monitoring_bg_dark),ParentActivity.getResources().getDrawable(R.drawable.menu_management_machine_monitoring_bg_line),"Fan rpm", Integer.toString(FanRPM), "rpm"));
 		// 2. Engine RPM : rpm
 		//EngineRPM = ValueReturn_2(StatusValue[1]);
 		EngineRPM = StatusValue[1];
@@ -245,8 +248,16 @@ public class ServiceMenuSensorMonitoringFragment extends ParentFragment{
 			AlternatorVolt = StatusValue[2];
 			IntegerValue = AlternatorVolt / 10;
 			Point = AlternatorVolt % 10;
-			adapter.addItem(new IconTextItem(ParentActivity.getResources().getDrawable(R.drawable.menu_management_machine_monitoring_bg_light),ParentActivity.getResources().getDrawable(R.drawable.menu_management_machine_monitoring_bg_line),"Alternator Volt.", Integer.toString(IntegerValue) + "." 
-					+ Integer.toString(Point), "V"));
+			if(BackgroundFlag == true){
+				BackgroundFlag = false;
+				adapter.addItem(new IconTextItem(ParentActivity.getResources().getDrawable(R.drawable.menu_management_machine_monitoring_bg_dark),ParentActivity.getResources().getDrawable(R.drawable.menu_management_machine_monitoring_bg_line),"Alternator Volt.", Integer.toString(IntegerValue) + "." 
+						+ Integer.toString(Point), "V"));
+			}else{
+				BackgroundFlag = true;
+				adapter.addItem(new IconTextItem(ParentActivity.getResources().getDrawable(R.drawable.menu_management_machine_monitoring_bg_light),ParentActivity.getResources().getDrawable(R.drawable.menu_management_machine_monitoring_bg_line),"Alternator Volt.", Integer.toString(IntegerValue) + "." 
+						+ Integer.toString(Point), "V"));
+			}
+			
 		}
 		
 		// 4. Boom Pos. Sensor Volt. : V
@@ -254,8 +265,16 @@ public class ServiceMenuSensorMonitoringFragment extends ParentFragment{
 			BoomPosSensorVolt = StatusValue[3];
 			IntegerValue = BoomPosSensorVolt / 10;
 			Point = BoomPosSensorVolt % 10;
-			adapter.addItem(new IconTextItem(ParentActivity.getResources().getDrawable(R.drawable.menu_management_machine_monitoring_bg_light),ParentActivity.getResources().getDrawable(R.drawable.menu_management_machine_monitoring_bg_line),"Boom Pos. Sensor Volt.", Integer.toString(IntegerValue) + "." 
-					+ Integer.toString(Point), "V"));
+			if(BackgroundFlag == true){
+				BackgroundFlag = false;
+				adapter.addItem(new IconTextItem(ParentActivity.getResources().getDrawable(R.drawable.menu_management_machine_monitoring_bg_dark),ParentActivity.getResources().getDrawable(R.drawable.menu_management_machine_monitoring_bg_line),"Boom Pos. Sensor Volt.", Integer.toString(IntegerValue) + "." 
+						+ Integer.toString(Point), "V"));
+			}else{
+				BackgroundFlag = true;
+				adapter.addItem(new IconTextItem(ParentActivity.getResources().getDrawable(R.drawable.menu_management_machine_monitoring_bg_light),ParentActivity.getResources().getDrawable(R.drawable.menu_management_machine_monitoring_bg_line),"Boom Pos. Sensor Volt.", Integer.toString(IntegerValue) + "." 
+						+ Integer.toString(Point), "V"));
+			}
+			
 		}
 		
 		// 5. Bucket Pos. Sensor Volt. : V
@@ -263,8 +282,16 @@ public class ServiceMenuSensorMonitoringFragment extends ParentFragment{
 			BucketPosSensorVolt = StatusValue[4];
 			IntegerValue = BucketPosSensorVolt / 10;
 			Point = BucketPosSensorVolt % 10;
-			adapter.addItem(new IconTextItem( ParentActivity.getResources().getDrawable(R.drawable.menu_management_machine_monitoring_bg_light),ParentActivity.getResources().getDrawable(R.drawable.menu_management_machine_monitoring_bg_line),"Bucket Pos. Sensor Volt.", Integer.toString(IntegerValue) + "." 
-					+ Integer.toString(Point), "V"));
+			if(BackgroundFlag == true){
+				BackgroundFlag = false;
+				adapter.addItem(new IconTextItem( ParentActivity.getResources().getDrawable(R.drawable.menu_management_machine_monitoring_bg_dark),ParentActivity.getResources().getDrawable(R.drawable.menu_management_machine_monitoring_bg_line),"Bucket Pos. Sensor Volt.", Integer.toString(IntegerValue) + "." 
+						+ Integer.toString(Point), "V"));
+			}else{
+				BackgroundFlag = true;
+				adapter.addItem(new IconTextItem( ParentActivity.getResources().getDrawable(R.drawable.menu_management_machine_monitoring_bg_light),ParentActivity.getResources().getDrawable(R.drawable.menu_management_machine_monitoring_bg_line),"Bucket Pos. Sensor Volt.", Integer.toString(IntegerValue) + "." 
+						+ Integer.toString(Point), "V"));
+			}
+		
 		}
 		
 //		// 6. Engine Mode Sel. Sensor Volt. : V
@@ -299,8 +326,16 @@ public class ServiceMenuSensorMonitoringFragment extends ParentFragment{
 			float fBrakePedalPosVolt;
 			BrakePedalPosVolt = StatusValue[8];
 			fBrakePedalPosVolt = (float)( BrakePedalPosVolt * 0.025);
-			adapter.addItem(new IconTextItem(ParentActivity.getResources().getDrawable(R.drawable.menu_management_machine_monitoring_bg_light),ParentActivity.getResources().getDrawable(R.drawable.menu_management_machine_monitoring_bg_line),"Brake Pedal Pos. Voltage", 
-					Float.toString(fBrakePedalPosVolt), "V"));
+			if(BackgroundFlag == true){
+				BackgroundFlag = false;
+				adapter.addItem(new IconTextItem(ParentActivity.getResources().getDrawable(R.drawable.menu_management_machine_monitoring_bg_dark),ParentActivity.getResources().getDrawable(R.drawable.menu_management_machine_monitoring_bg_line),"Brake Pedal Pos. Voltage", 
+						Float.toString(fBrakePedalPosVolt), "V"));
+			}else{
+				BackgroundFlag = true;
+				adapter.addItem(new IconTextItem(ParentActivity.getResources().getDrawable(R.drawable.menu_management_machine_monitoring_bg_light),ParentActivity.getResources().getDrawable(R.drawable.menu_management_machine_monitoring_bg_line),"Brake Pedal Pos. Voltage", 
+						Float.toString(fBrakePedalPosVolt), "V"));
+			}
+			
 		}
 		
 		// 10.Brake Failure Warning PS : bar
@@ -308,8 +343,16 @@ public class ServiceMenuSensorMonitoringFragment extends ParentFragment{
 			BrakeFailureWarningPS = PressureConvert(StatusValue[9],ParentActivity.UnitPressure);
 			IntegerValue = BrakeFailureWarningPS / 10;
 			Point = BrakeFailureWarningPS % 10;
-			adapter.addItem(new IconTextItem(ParentActivity.getResources().getDrawable(R.drawable.menu_management_machine_monitoring_bg_light),ParentActivity.getResources().getDrawable(R.drawable.menu_management_machine_monitoring_bg_line),"Brake failure warning PS", 
-					Integer.toString(IntegerValue) + "." + Integer.toString(Point), GetUnit(ParentActivity.UnitPressure)));
+			if(BackgroundFlag == true){
+				BackgroundFlag = false;
+				adapter.addItem(new IconTextItem(ParentActivity.getResources().getDrawable(R.drawable.menu_management_machine_monitoring_bg_dark),ParentActivity.getResources().getDrawable(R.drawable.menu_management_machine_monitoring_bg_line),"Brake failure warning PS", 
+						Integer.toString(IntegerValue) + "." + Integer.toString(Point), GetUnit(ParentActivity.UnitPressure)));
+			}else{
+				BackgroundFlag = true;
+				adapter.addItem(new IconTextItem(ParentActivity.getResources().getDrawable(R.drawable.menu_management_machine_monitoring_bg_light),ParentActivity.getResources().getDrawable(R.drawable.menu_management_machine_monitoring_bg_line),"Brake failure warning PS", 
+						Integer.toString(IntegerValue) + "." + Integer.toString(Point), GetUnit(ParentActivity.UnitPressure)));
+			}
+		
 		}
 		
 		// 11. Parking PS : bar
@@ -317,8 +360,16 @@ public class ServiceMenuSensorMonitoringFragment extends ParentFragment{
 			ParkingPS = PressureConvert(StatusValue[10],ParentActivity.UnitPressure);
 			IntegerValue = ParkingPS / 10;
 			Point = ParkingPS % 10;
-			adapter.addItem(new IconTextItem(ParentActivity.getResources().getDrawable(R.drawable.menu_management_machine_monitoring_bg_light),ParentActivity.getResources().getDrawable(R.drawable.menu_management_machine_monitoring_bg_line),"Parking PS", 
-					Integer.toString(IntegerValue) + "." + Integer.toString(Point) , GetUnit(ParentActivity.UnitPressure)));
+			if(BackgroundFlag == true){
+				BackgroundFlag = false;
+				adapter.addItem(new IconTextItem(ParentActivity.getResources().getDrawable(R.drawable.menu_management_machine_monitoring_bg_dark),ParentActivity.getResources().getDrawable(R.drawable.menu_management_machine_monitoring_bg_line),"Parking PS", 
+						Integer.toString(IntegerValue) + "." + Integer.toString(Point) , GetUnit(ParentActivity.UnitPressure)));
+			}else{
+				BackgroundFlag = true;
+				adapter.addItem(new IconTextItem(ParentActivity.getResources().getDrawable(R.drawable.menu_management_machine_monitoring_bg_light),ParentActivity.getResources().getDrawable(R.drawable.menu_management_machine_monitoring_bg_line),"Parking PS", 
+						Integer.toString(IntegerValue) + "." + Integer.toString(Point) , GetUnit(ParentActivity.UnitPressure)));
+			}
+			
 		}
 		
 		// 12. Boom Head Cylinder PS : bar
@@ -326,8 +377,16 @@ public class ServiceMenuSensorMonitoringFragment extends ParentFragment{
 			BoomHeadCylinderPS = PressureConvert(StatusValue[11],ParentActivity.UnitPressure);
 			IntegerValue = BoomHeadCylinderPS / 10;
 			Point = BoomHeadCylinderPS % 10;
-			adapter.addItem(new IconTextItem(ParentActivity.getResources().getDrawable(R.drawable.menu_management_machine_monitoring_bg_light),ParentActivity.getResources().getDrawable(R.drawable.menu_management_machine_monitoring_bg_line),"Boom Head Cylinder PS", 
-					Integer.toString(IntegerValue) + "." + Integer.toString(Point), GetUnit(ParentActivity.UnitPressure)));
+			if(BackgroundFlag == true){
+				BackgroundFlag = false;
+				adapter.addItem(new IconTextItem(ParentActivity.getResources().getDrawable(R.drawable.menu_management_machine_monitoring_bg_dark),ParentActivity.getResources().getDrawable(R.drawable.menu_management_machine_monitoring_bg_line),"Boom Head Cylinder PS", 
+						Integer.toString(IntegerValue) + "." + Integer.toString(Point), GetUnit(ParentActivity.UnitPressure)));
+			}else{
+				BackgroundFlag = true;
+				adapter.addItem(new IconTextItem(ParentActivity.getResources().getDrawable(R.drawable.menu_management_machine_monitoring_bg_light),ParentActivity.getResources().getDrawable(R.drawable.menu_management_machine_monitoring_bg_line),"Boom Head Cylinder PS", 
+						Integer.toString(IntegerValue) + "." + Integer.toString(Point), GetUnit(ParentActivity.UnitPressure)));
+			}
+			
 		}
 		
 		// 13. Boom Rod Cylinder PS : bar
@@ -335,8 +394,16 @@ public class ServiceMenuSensorMonitoringFragment extends ParentFragment{
 			BommRodCylinderPS = PressureConvert(StatusValue[12],ParentActivity.UnitPressure);
 			IntegerValue = BommRodCylinderPS / 10;
 			Point = BommRodCylinderPS % 10;
-			adapter.addItem(new IconTextItem(ParentActivity.getResources().getDrawable(R.drawable.menu_management_machine_monitoring_bg_light),ParentActivity.getResources().getDrawable(R.drawable.menu_management_machine_monitoring_bg_line), "Boom Rod Cylinder PS", 
-					Integer.toString(IntegerValue) + "." + Integer.toString(Point), GetUnit(ParentActivity.UnitPressure)));
+			if(BackgroundFlag == true){
+				BackgroundFlag = false;
+				adapter.addItem(new IconTextItem(ParentActivity.getResources().getDrawable(R.drawable.menu_management_machine_monitoring_bg_dark),ParentActivity.getResources().getDrawable(R.drawable.menu_management_machine_monitoring_bg_line), "Boom Rod Cylinder PS", 
+						Integer.toString(IntegerValue) + "." + Integer.toString(Point), GetUnit(ParentActivity.UnitPressure)));
+			}else{
+				BackgroundFlag = true;
+				adapter.addItem(new IconTextItem(ParentActivity.getResources().getDrawable(R.drawable.menu_management_machine_monitoring_bg_light),ParentActivity.getResources().getDrawable(R.drawable.menu_management_machine_monitoring_bg_line), "Boom Rod Cylinder PS", 
+						Integer.toString(IntegerValue) + "." + Integer.toString(Point), GetUnit(ParentActivity.UnitPressure)));
+			}
+			
 		}
 		
 		// 14. Steering Pump PS : bar
@@ -344,8 +411,16 @@ public class ServiceMenuSensorMonitoringFragment extends ParentFragment{
 			SteeringPumpPS = PressureConvert(StatusValue[13],ParentActivity.UnitPressure);
 			IntegerValue = SteeringPumpPS / 10;
 			Point = SteeringPumpPS % 10;
-			adapter.addItem(new IconTextItem(ParentActivity.getResources().getDrawable(R.drawable.menu_management_machine_monitoring_bg_light),ParentActivity.getResources().getDrawable(R.drawable.menu_management_machine_monitoring_bg_line), "Steering Pump PS", 
-					Integer.toString(IntegerValue) + "." + Integer.toString(Point), GetUnit(ParentActivity.UnitPressure)));
+			if(BackgroundFlag == true){
+				BackgroundFlag = false;
+				adapter.addItem(new IconTextItem(ParentActivity.getResources().getDrawable(R.drawable.menu_management_machine_monitoring_bg_dark),ParentActivity.getResources().getDrawable(R.drawable.menu_management_machine_monitoring_bg_line), "Steering Pump PS", 
+						Integer.toString(IntegerValue) + "." + Integer.toString(Point), GetUnit(ParentActivity.UnitPressure)));
+			}else{
+				BackgroundFlag = true;
+				adapter.addItem(new IconTextItem(ParentActivity.getResources().getDrawable(R.drawable.menu_management_machine_monitoring_bg_light),ParentActivity.getResources().getDrawable(R.drawable.menu_management_machine_monitoring_bg_line), "Steering Pump PS", 
+						Integer.toString(IntegerValue) + "." + Integer.toString(Point), GetUnit(ParentActivity.UnitPressure)));
+			}
+			
 		}
 		
 		// 15. Emergency Motor Pump PS : bar
@@ -353,8 +428,16 @@ public class ServiceMenuSensorMonitoringFragment extends ParentFragment{
 			EmergencyMotorPumpPS = PressureConvert(StatusValue[14],ParentActivity.UnitPressure);
 			IntegerValue = EmergencyMotorPumpPS / 10;
 			Point = EmergencyMotorPumpPS % 10;
-			adapter.addItem(new IconTextItem(ParentActivity.getResources().getDrawable(R.drawable.menu_management_machine_monitoring_bg_light),ParentActivity.getResources().getDrawable(R.drawable.menu_management_machine_monitoring_bg_line),"Emergency Motor Pump PS", 
-					Integer.toString(IntegerValue) + "." + Integer.toString(Point), GetUnit(ParentActivity.UnitPressure)));
+			if(BackgroundFlag == true){
+				BackgroundFlag = false;
+				adapter.addItem(new IconTextItem(ParentActivity.getResources().getDrawable(R.drawable.menu_management_machine_monitoring_bg_dark),ParentActivity.getResources().getDrawable(R.drawable.menu_management_machine_monitoring_bg_line),"Emergency Motor Pump PS", 
+						Integer.toString(IntegerValue) + "." + Integer.toString(Point), GetUnit(ParentActivity.UnitPressure)));
+			}else{
+				BackgroundFlag = true;
+				adapter.addItem(new IconTextItem(ParentActivity.getResources().getDrawable(R.drawable.menu_management_machine_monitoring_bg_light),ParentActivity.getResources().getDrawable(R.drawable.menu_management_machine_monitoring_bg_line),"Emergency Motor Pump PS", 
+						Integer.toString(IntegerValue) + "." + Integer.toString(Point), GetUnit(ParentActivity.UnitPressure)));
+			}
+	
 		}
 		
 		// 16. Differential Lock PS : bar
@@ -362,8 +445,16 @@ public class ServiceMenuSensorMonitoringFragment extends ParentFragment{
 			DifferentialLockPS = PressureConvert(StatusValue[15],ParentActivity.UnitPressure);
 			IntegerValue = DifferentialLockPS / 10;
 			Point = DifferentialLockPS % 10;
-			adapter.addItem(new IconTextItem(ParentActivity.getResources().getDrawable(R.drawable.menu_management_machine_monitoring_bg_light),ParentActivity.getResources().getDrawable(R.drawable.menu_management_machine_monitoring_bg_line),"Differential Lock PS", 
-					Integer.toString(IntegerValue) + "." + Integer.toString(Point),GetUnit(ParentActivity.UnitPressure)));
+			if(BackgroundFlag == true){
+				BackgroundFlag = false;
+				adapter.addItem(new IconTextItem(ParentActivity.getResources().getDrawable(R.drawable.menu_management_machine_monitoring_bg_dark),ParentActivity.getResources().getDrawable(R.drawable.menu_management_machine_monitoring_bg_line),"Differential Lock PS", 
+						Integer.toString(IntegerValue) + "." + Integer.toString(Point),GetUnit(ParentActivity.UnitPressure)));
+			}else{
+				BackgroundFlag = true;
+				adapter.addItem(new IconTextItem(ParentActivity.getResources().getDrawable(R.drawable.menu_management_machine_monitoring_bg_light),ParentActivity.getResources().getDrawable(R.drawable.menu_management_machine_monitoring_bg_line),"Differential Lock PS", 
+						Integer.toString(IntegerValue) + "." + Integer.toString(Point),GetUnit(ParentActivity.UnitPressure)));
+			}
+	
 		}
 		
 		// 17. Brake Priority PS : bar 
@@ -371,8 +462,16 @@ public class ServiceMenuSensorMonitoringFragment extends ParentFragment{
 			BrakePriorityPS = PressureConvert(StatusValue[16],ParentActivity.UnitPressure);
 			IntegerValue = BrakePriorityPS / 10;
 			Point = BrakePriorityPS % 10;
-			adapter.addItem(new IconTextItem(ParentActivity.getResources().getDrawable(R.drawable.menu_management_machine_monitoring_bg_light),ParentActivity.getResources().getDrawable(R.drawable.menu_management_machine_monitoring_bg_line),"Brake Priority PS", 
-					Integer.toString(IntegerValue) + "." + Integer.toString(Point), GetUnit(ParentActivity.UnitPressure)));
+			if(BackgroundFlag == true){
+				BackgroundFlag = false;
+				adapter.addItem(new IconTextItem(ParentActivity.getResources().getDrawable(R.drawable.menu_management_machine_monitoring_bg_dark),ParentActivity.getResources().getDrawable(R.drawable.menu_management_machine_monitoring_bg_line),"Brake Priority PS", 
+						Integer.toString(IntegerValue) + "." + Integer.toString(Point), GetUnit(ParentActivity.UnitPressure)));
+			}else{
+				BackgroundFlag = true;
+				adapter.addItem(new IconTextItem(ParentActivity.getResources().getDrawable(R.drawable.menu_management_machine_monitoring_bg_light),ParentActivity.getResources().getDrawable(R.drawable.menu_management_machine_monitoring_bg_line),"Brake Priority PS", 
+						Integer.toString(IntegerValue) + "." + Integer.toString(Point), GetUnit(ParentActivity.UnitPressure)));
+			}
+
 		}		
 		
 		// 18. Accelerator Pedal Position Voltage1 : V
@@ -380,8 +479,16 @@ public class ServiceMenuSensorMonitoringFragment extends ParentFragment{
 			AccPedalPositionVolt = StatusValue[17];
 			IntegerValue = AccPedalPositionVolt / 10;
 			Point = AccPedalPositionVolt % 10;
-			adapter.addItem(new IconTextItem(ParentActivity.getResources().getDrawable(R.drawable.menu_management_machine_monitoring_bg_light),ParentActivity.getResources().getDrawable(R.drawable.menu_management_machine_monitoring_bg_line), "Acc. Pedal Pos. Volt. Ch1", Integer.toString(IntegerValue) + "." 
-					+ Integer.toString(Point), "V"));
+			if(BackgroundFlag == true){
+				BackgroundFlag = false;
+				adapter.addItem(new IconTextItem(ParentActivity.getResources().getDrawable(R.drawable.menu_management_machine_monitoring_bg_dark),ParentActivity.getResources().getDrawable(R.drawable.menu_management_machine_monitoring_bg_line), "Acc. Pedal Pos. Volt. Ch1", Integer.toString(IntegerValue) + "." 
+						+ Integer.toString(Point), "V"));
+			}else{
+				BackgroundFlag = true;
+				adapter.addItem(new IconTextItem(ParentActivity.getResources().getDrawable(R.drawable.menu_management_machine_monitoring_bg_light),ParentActivity.getResources().getDrawable(R.drawable.menu_management_machine_monitoring_bg_line), "Acc. Pedal Pos. Volt. Ch1", Integer.toString(IntegerValue) + "." 
+						+ Integer.toString(Point), "V"));
+			}
+	
 			
 		}
 		
@@ -390,8 +497,16 @@ public class ServiceMenuSensorMonitoringFragment extends ParentFragment{
 			AccPedalPositionVolt = StatusValue[18];
 			IntegerValue = AccPedalPositionVolt / 10;
 			Point = AccPedalPositionVolt % 10;
-			adapter.addItem(new IconTextItem(ParentActivity.getResources().getDrawable(R.drawable.menu_management_machine_monitoring_bg_light),ParentActivity.getResources().getDrawable(R.drawable.menu_management_machine_monitoring_bg_line),"Acc. Pedal Pos. Volt. Ch2", Integer.toString(IntegerValue) + "." 
-					+ Integer.toString(Point), "V"));
+			if(BackgroundFlag == true){
+				BackgroundFlag = false;
+				adapter.addItem(new IconTextItem(ParentActivity.getResources().getDrawable(R.drawable.menu_management_machine_monitoring_bg_dark),ParentActivity.getResources().getDrawable(R.drawable.menu_management_machine_monitoring_bg_line),"Acc. Pedal Pos. Volt. Ch2", Integer.toString(IntegerValue) + "." 
+						+ Integer.toString(Point), "V"));
+			}else{
+				BackgroundFlag = true;
+				adapter.addItem(new IconTextItem(ParentActivity.getResources().getDrawable(R.drawable.menu_management_machine_monitoring_bg_light),ParentActivity.getResources().getDrawable(R.drawable.menu_management_machine_monitoring_bg_line),"Acc. Pedal Pos. Volt. Ch2", Integer.toString(IntegerValue) + "." 
+						+ Integer.toString(Point), "V"));
+			}
+		
 			
 		}
 		
@@ -400,8 +515,16 @@ public class ServiceMenuSensorMonitoringFragment extends ParentFragment{
 			AccPedalPositionPercent = StatusValue[19] * 4;
 			IntegerValue = AccPedalPositionPercent / 10;
 			Point = AccPedalPositionPercent % 10;
-			adapter.addItem(new IconTextItem( ParentActivity.getResources().getDrawable(R.drawable.menu_management_machine_monitoring_bg_light),ParentActivity.getResources().getDrawable(R.drawable.menu_management_machine_monitoring_bg_line),"Acc. Pedal Pos. Percent", Integer.toString(IntegerValue) + "." 
-					+ Integer.toString(Point), "%"));
+			if(BackgroundFlag == true){
+				BackgroundFlag = false;
+				adapter.addItem(new IconTextItem( ParentActivity.getResources().getDrawable(R.drawable.menu_management_machine_monitoring_bg_dark),ParentActivity.getResources().getDrawable(R.drawable.menu_management_machine_monitoring_bg_line),"Acc. Pedal Pos. Percent", Integer.toString(IntegerValue) + "." 
+						+ Integer.toString(Point), "%"));
+			}else{
+				BackgroundFlag = true;
+				adapter.addItem(new IconTextItem( ParentActivity.getResources().getDrawable(R.drawable.menu_management_machine_monitoring_bg_light),ParentActivity.getResources().getDrawable(R.drawable.menu_management_machine_monitoring_bg_line),"Acc. Pedal Pos. Percent", Integer.toString(IntegerValue) + "." 
+						+ Integer.toString(Point), "%"));
+			}
+			
 		}
 		
 		adapter.notifyDataSetChanged();

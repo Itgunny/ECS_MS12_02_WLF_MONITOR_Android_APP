@@ -64,6 +64,7 @@
     <string name="Input_new_phone_number">Input new phone number</string>
     <string name="_5_12_digits">5~12 digits</string>
     <string name="No_Changes_executed">No Changes executed</string>
+    <string name="Skip">Skip</string>
     <!-- Common End-->
     <!-- Main Start-->
     <string name="ENGINE_MODE">ENGINE MODE</string>
@@ -224,6 +225,40 @@
     <string name="RMCU">RMCU</string>
     <string name="EHCU">EHCU</string>
     <string name="Software_Update">Software Update</string>
+    <string name="RMCU_Machine_Information">RMCU Information</string>
+    <string name="Network_Type">Network Type</string>
+    <string name="Manufacture_Date">Manufacture Date</string>
+    <string name="Program_Version">Program Version</string>
+    <string name="Serial_Number">S/N</string>
+    <string name="Manufacturer">Manufacturer</string>
+    <string name="Number_of_Messages_to_Transmit">Number of Message to Transmit</string>
+    <string name="Back_up_Battery_Voltage">Back up battery Voltage</string>
+    <string name="Network_Communication_Status">Network Communication Status</string>
+    <string name="Network_Service">Network Service Status</string>
+    <string name="Communication_Antenna">Network Antenna Status</string>
+    <string name="GPS_Antenna">GPS Antenna Connection Status</string>
+    <string name="Position_Update">Position Update Status</string>
+    <string name="Outside_of_Boundary">Machine Position Status</string>
+    <string name="Lock_Level">Lock Level</string>
+    <string name="Firmware_Version">Firmwaer Version</string>
+    <string name="EST37A_Part_Number">EST37A Part Number</string>
+    <string name="Hardware_Part_Number">Hardware Part Number</string>
+    <string name="Hardware_Serial_Number">Hardware Serial Number</string>
+    <string name="Customer_Serial_Number">Customer Serial Number</string>
+    <string name="Software_Version">Software Version</string>
+    <string name="ECM_Part_Number">ECM Part Number</string>
+    <string name="ECM_Serial_Number">ECM Serial Number</string>
+    <string name="Software_Data_Date_Stamp">Software Data Date Stamp</string>
+    <string name="Calibration_Version_Number">Calibration Version Number</string>
+    <string name="ECM_Identifier">ECM Identifier</string>
+    <string name="Product_ID">Product ID</string>
+    <string name="ECU_Part_Number">ECU Part Number</string>
+    <string name="ECU_Serial_Number">ECU Serial Number</string>
+    <string name="ECU_Location">ECU Location</string>
+    <string name="ECU_Type">ECU Type</string>
+    <string name="ECU_Manufacturer_Name">ECU Manufacturer Name</string>
+    <string name="Calibration_ID">Calibration ID</string>
+    <string name="Boom_Lever_Floating_Position_Adjust">Boom Lever Floating Position Adjust</string>
     <!-- Menu Monitoring End -->
     <!-- Menu Management Start -->
     <string name="Machine_Security">Machine Security</string>
@@ -288,6 +323,8 @@
     <string name="Sensor_Error">Sensor Error</string>
     <string name="Time_Out">Time Out</string>
     <string name="Boom_Up_Speed_Error">Boom Up Speed Error</string>
+    <string name="Fan_EPPR_Current_Adjust">Fan EPPR Current Adjust</string>
+    <string name="Turn_the_engine_off_for_sensor_calibration">Turn the engine off for sensor calibration.</string>
     <!-- Menu Management End -->
     <!-- Menu Preference Start -->
     <string name="Brightness_Setting">Brightness Setting</string>

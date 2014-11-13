@@ -46,32 +46,32 @@ public class IconTextView extends LinearLayout {
 
 		// Layout Inflation
 		LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);		
-		View mRoot = inflater.inflate(R.layout.list_item, this, true);
+		View mRoot = inflater.inflate(R.layout.list_item_sensormonitoring, this, true);
 		//GlobalFont.setGlobalFont(context, mRoot);
 		
 		// Set Backgound
-		mBackground = (ImageView)findViewById(R.id.imageView_list_background);
+		mBackground = (ImageView)findViewById(R.id.imageView_list_background_sensormonitoring);
 		mBackground.setImageDrawable(aItem.getBackground());
 		//mBackground.setImageResource(R.drawable._selector_menu_list_item);
 		
 		
 		// Set Icon
-		mIcon = (ImageView) findViewById(R.id.imageViewInfoIcon);
+		mIcon = (ImageView) findViewById(R.id.imageViewInfoIcon_sensormonitoring);
 		mIcon.setImageDrawable(aItem.getIcon());
 		
 		
 		// Set Text 01
-		mTextFirst = (TextView) findViewById(R.id.textViewFirst);
+		mTextFirst = (TextView) findViewById(R.id.textViewFirst_sensormonitoring);
 		mTextFirst.setText(aItem.getData(0));
 		mTextFirst.setTextColor(aItem.getFirstTextColor());
 	
 		// Set Text 02
-		mTextSecond = (TextView) findViewById(R.id.textViewSecond);
+		mTextSecond = (TextView) findViewById(R.id.textViewSecond_sensormonitoring);
 		mTextSecond.setText(aItem.getData(1));
 		
 		
 		// Set Text 03
-		mTextThird = (TextView) findViewById(R.id.textViewThrid);
+		mTextThird = (TextView) findViewById(R.id.textViewThrid_sensormonitoring);
 		mTextThird.setText(aItem.getData(2));
 		
 		this.aItem = aItem;

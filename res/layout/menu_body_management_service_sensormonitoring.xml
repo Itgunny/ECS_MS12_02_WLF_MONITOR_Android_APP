@@ -5,7 +5,7 @@
     
     <ListView
         android:id="@+id/listView_menu_body_management_service_sensormonitoring"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_above="@+id/Relativelayout_menu_body_management_service_sensormonitoring_low"
         android:layout_alignParentLeft="true"
@@ -14,8 +14,9 @@
         android:layout_marginLeft="15dp"
         android:layout_marginRight="10dp"
         android:layout_marginTop="10dp"
-        android:divider="@drawable/blank_1x1"
-        android:listSelector="@drawable/blank_1x1" >
+        android:divider="@drawable/blank_5x5"
+        android:listSelector="@drawable/blank_1x1"
+        android:scrollbarAlwaysDrawVerticalTrack="true" >
 
     </ListView>
     

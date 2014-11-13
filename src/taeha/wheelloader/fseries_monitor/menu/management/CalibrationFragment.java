@@ -118,13 +118,15 @@ public class CalibrationFragment extends MenuBodyList_ParentFragment{
 	@Override
 	public void ClickList3() {
 		// TODO Auto-generated method stub
-
+		ParentActivity.showBrkaePedalCalibration();
 	}
 
 	@Override
 	public void ClickList4() {
 		// TODO Auto-generated method stub
-		
+		CAN1Comm.Set_RequestAEB_PGN61184_201(1);
+		CAN1Comm.TxCANToMCU(201);
+		ParentActivity._MainChangeAnimation.StartChangeAnimation(ParentActivity._MainBBaseFragment);
 	}
 
 	@Override

@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
+    
+    <ListView
+        android:id="@+id/listView_menu_body_management_service_sensormonitoring_hidden"
+        android:layout_width="wrap_content"
+        android:layout_height="200dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="10dp"
+        android:divider="@drawable/blank_5x5"
+        android:listSelector="@drawable/blank_1x1"
+        android:scrollbarAlwaysDrawVerticalTrack="true" >
+
+    </ListView>
+    
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/Relativelayout_menu_body_management_service_sensormonitoring_hidden_low"
+        android:layout_below="@+id/listView_menu_body_management_service_sensormonitoring_hidden" >
+		    
+	        <ImageButton
+	            android:id="@+id/imageButton_menu_body_management_service_sensormonitoring_hidden_minus"
+	            android:layout_width="wrap_content"
+	            android:layout_height="wrap_content"
+	            android:layout_centerVertical="true"
+	            android:layout_marginLeft="80dp"
+	            android:background="@drawable/_selector_menu_mode_enginerpm_minus_btn1" />
+		    
+		    <ImageButton
+		        android:id="@+id/imageButton_menu_body_management_service_sensormonitoring_hidden_plus"
+		        android:layout_width="wrap_content"
+		        android:layout_height="wrap_content"
+		        android:layout_centerVertical="true"
+		        android:layout_marginLeft="592dp"
+		        android:background="@drawable/_selector_menu_mode_enginerpm_plus_btn1" />
+		    
+		    <TextView
+		        android:id="@+id/textView_menu_body_management_service_sensormonitoring_hidden_data"
+		        android:layout_width="385dp"
+		        android:layout_height="wrap_content"
+		        android:layout_alignBottom="@+id/imageButton_menu_body_management_service_sensormonitoring_hidden_minus"
+		        android:layout_alignTop="@+id/imageButton_menu_body_management_service_sensormonitoring_hidden_minus"
+		        android:layout_toRightOf="@+id/imageButton_menu_body_management_service_sensormonitoring_hidden_minus"
+		        android:gravity="center"
+		        android:text="0"
+		        android:textAppearance="?android:attr/textAppearanceLarge"
+		        android:textSize="70sp" />
+	    
+	</RelativeLayout>
+    
+	<RelativeLayout
+        android:id="@+id/Relativelayout_menu_body_management_service_sensormonitoring_hidden_low"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true" >
+       
+        <ImageView
+            android:id="@+id/imageView_menu_body_management_service_sensormonitoring_hidden_low_bg"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/menu_low_bg" />
+	    
+	    <ImageView
+	        android:id="@+id/imageView_menu_body_management_service_sensormonitoring_hidden_low_line"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:layout_alignBottom="@+id/ImageButton_menu_body_management_service_sensormonitoring_hidden_low_ok"
+	        android:layout_alignLeft="@+id/ImageButton_menu_body_management_service_sensormonitoring_hidden_low_ok"
+	        android:src="@drawable/main_key_low_line" />
+	   
+	    <ImageButton
+	        android:id="@+id/ImageButton_menu_body_management_service_sensormonitoring_hidden_low_ok"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:layout_alignBottom="@+id/imageView_menu_body_management_service_sensormonitoring_hidden_low_bg"
+	        android:layout_alignRight="@+id/imageView_menu_body_management_service_sensormonitoring_hidden_low_bg"
+	        android:background="@drawable/_selector_menu_low_right_btn" />
+	
+	    <RelativeLayout
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:layout_alignBottom="@+id/ImageButton_menu_body_management_service_sensormonitoring_hidden_low_ok"
+	        android:layout_alignLeft="@+id/ImageButton_menu_body_management_service_sensormonitoring_hidden_low_ok"
+	        android:layout_alignRight="@+id/ImageButton_menu_body_management_service_sensormonitoring_hidden_low_ok"
+	        android:layout_alignTop="@+id/ImageButton_menu_body_management_service_sensormonitoring_hidden_low_ok" >
+	
+	        <LinearLayout
+	            android:layout_width="wrap_content"
+	            android:layout_height="wrap_content"
+	            android:layout_centerHorizontal="true"
+	            android:layout_centerVertical="true" >
+	
+	            <ImageView
+	                android:id="@+id/imageView_menu_body_management_service_sensormonitoring_hidden_low_ok_icon"
+	                android:layout_width="wrap_content"
+	                android:layout_height="wrap_content"
+	                android:layout_alignBottom="@+id/ImageButton_menu_body_management_service_sensormonitoring_hidden_low_ok"
+	                android:layout_alignLeft="@+id/ImageButton_menu_body_management_service_sensormonitoring_hidden_low_ok"
+	                android:layout_alignTop="@+id/ImageButton_menu_body_management_service_sensormonitoring_hidden_low_ok"
+	                android:src="@drawable/menu_low_icon_ok" />
+	
+	            <TextView
+	                android:id="@+id/textView_menu_body_management_service_sensormonitoring_hidden_low_ok"
+	                android:layout_width="wrap_content"
+	                android:layout_height="match_parent"
+	                android:layout_marginLeft="10dp"
+	                android:gravity="center"
+	                android:text="@string/OK"
+	                android:textAppearance="?android:attr/textAppearanceLarge"
+	                android:textSize="25sp"
+	                android:textStyle="bold" />
+
+	        </LinearLayout>
+	    </RelativeLayout>
+
+    </RelativeLayout>
+    
+</RelativeLayout>

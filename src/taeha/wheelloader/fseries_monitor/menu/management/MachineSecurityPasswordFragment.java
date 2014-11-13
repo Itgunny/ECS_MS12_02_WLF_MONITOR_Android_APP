@@ -15,7 +15,7 @@ public class MachineSecurityPasswordFragment extends PasswordFragment{
 			Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
 		super.onCreateView(inflater, container, savedInstanceState);
-		 TAG = "PasswordFragment";
+		 TAG = "MachineSecurityPasswordFragment";
 		Log.d(TAG, "onCreateView");		
 		
 		ParentActivity._MenuBaseFragment._MenuListTitleFragment.setBackButtonEnable(true);

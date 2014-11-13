@@ -179,7 +179,7 @@ public class SpeedometerInitPopup extends ParentPopup{
 	public void StartPopupOffTimer(){
 		CancelPopupOffTimer();
 		mPopupOffTimer = new Timer();
-		mPopupOffTimer.schedule(new PopupOffTimerClass(),2000);	
+		mPopupOffTimer.schedule(new PopupOffTimerClass(),1000);	
 	}
 	
 	public void CancelPopupOffTimer(){

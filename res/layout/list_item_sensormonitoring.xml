@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/RelativeLayout1"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:weightSum="1" >
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp" >
+
+	    <ImageView
+	        android:id="@+id/imageView_list_background_sensormonitoring"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:layout_centerHorizontal="true"
+	        android:background="@drawable/menu_management_machine_monitoring_bg_light" />
+	
+	    <TextView
+	        android:id="@+id/textViewFirst_sensormonitoring"
+	        android:layout_width="350dp"
+	        android:layout_height="wrap_content"
+	        android:layout_alignBottom="@+id/imageView_list_background_sensormonitoring"
+	        android:layout_alignLeft="@+id/imageView_list_background_sensormonitoring"
+	        android:layout_alignTop="@+id/imageView_list_background_sensormonitoring"
+	        android:layout_centerVertical="true"
+	        android:layout_marginLeft="30dp"
+	        android:gravity="right|center_vertical"
+	        android:text="Text View"
+	        android:textAppearance="?android:attr/textAppearanceMedium"
+	        android:textColor="@color/white"
+	        android:textSize="20sp" />
+	
+	    <TextView
+	        android:id="@+id/textViewThrid_sensormonitoring"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:layout_alignParentTop="true"
+	        android:layout_centerVertical="true"
+	        android:layout_marginLeft="29dp"
+	        android:layout_marginTop="10dp"
+	        android:layout_toRightOf="@+id/imageViewInfoIcon_sensormonitoring"
+	        android:text="TE"
+	        android:textAppearance="?android:attr/textAppearanceMedium"
+	        android:textColor="#ffbbbbbb" />
+	
+	    <ImageView
+	        android:id="@+id/imageViewInfoIcon_sensormonitoring"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:layout_centerVertical="true"
+	        android:layout_marginLeft="400dp"
+	        android:src="@drawable/menu_management_machine_monitoring_bg_line" />
+	
+	    <TextView
+	        android:id="@+id/textViewSecond_sensormonitoring"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:layout_alignBottom="@+id/imageViewInfoIcon_sensormonitoring"
+	        android:layout_alignLeft="@+id/imageViewInfoIcon_sensormonitoring"
+	        android:layout_alignRight="@+id/imageViewInfoIcon_sensormonitoring"
+	        android:layout_alignTop="@+id/imageViewInfoIcon_sensormonitoring"
+	        android:gravity="right|center_vertical"
+	        android:paddingRight="10dp"
+	        android:text="TextView"
+	        android:textAppearance="?android:attr/textAppearanceMedium"
+	        android:textColor="#FFB400"
+	        android:textSize="20sp" />
+    </RelativeLayout>
+
+    
+
+</RelativeLayout>

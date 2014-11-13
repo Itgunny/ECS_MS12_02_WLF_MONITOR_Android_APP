@@ -8,8 +8,10 @@ import java.util.TimerTask;
 
 import taeha.wheelloader.fseries_monitor.animation.ChangeFragmentAnimation;
 import taeha.wheelloader.fseries_monitor.popup.AngleCalibrationResultPopup;
+import taeha.wheelloader.fseries_monitor.popup.BrakePedalCalibrationPopup;
 import taeha.wheelloader.fseries_monitor.popup.BucketPriorityPopup;
 import taeha.wheelloader.fseries_monitor.popup.CCOModePopup;
+import taeha.wheelloader.fseries_monitor.popup.EngineAutoShutdownCountPopup;
 import taeha.wheelloader.fseries_monitor.popup.EngineModePopup;
 import taeha.wheelloader.fseries_monitor.popup.EngineWarmingUpPopup;
 import taeha.wheelloader.fseries_monitor.popup.KickDownPopup;
@@ -106,7 +108,10 @@ public class Home extends Activity {
 	public  static final int SCREEN_STATE_MAIN_B_KEY_FINEMODULATION							= 0x16B00000;
 	public  static final int SCREEN_STATE_MAIN_B_KEY_FN										= 0x16C00000;
 	public  static final int SCREEN_STATE_MAIN_B_KEY_END									= 0x16FFFFFF;
-	
+	public  static final int SCREEN_STATE_MAIN_B_BRKAEPEDALCALIBRATION_TOP					= 0x17000000;
+	public  static final int SCREEN_STATE_MAIN_B_BRKAEPEDALCALIBRATION_END					= 0x17FFFFFF;
+	public  static final int SCREEN_STATE_MAIN_B_AEB_TOP									= 0x18000000;
+	public  static final int SCREEN_STATE_MAIN_B_AEB_END									= 0x18FFFFFF;
 	public  static final int SCREEN_STATE_MAIN_B_END 										= 0x1FFFFFFF;
 	
 	public  static final int SCREEN_STATE_MENU_TOP 											= 0x20000000;
@@ -143,6 +148,7 @@ public class Home extends Activity {
 	public  static final int SCREEN_STATE_MENU_MODE_ETC_COOLINGFAN_MANUAL					= 0x21323000;
 	public  static final int SCREEN_STATE_MENU_MODE_ETC_COOLINGFAN_END						= 0x2132FFFF;
 	public  static final int SCREEN_STATE_MENU_MODE_ETC_AUTOSHUTDOWN_TOP					= 0x21330000;
+	public  static final int SCREEN_STATE_MENU_MODE_ETC_AUTOSHUTDOWN_PW						= 0x21331000;
 	public  static final int SCREEN_STATE_MENU_MODE_ETC_AUTOSHUTDOWN_END					= 0x2133FFFF;
 	public  static final int SCREEN_STATE_MENU_MODE_ETC_WIPER_TOP							= 0x21340000;
 	public  static final int SCREEN_STATE_MENU_MODE_ETC_WIPER_END							= 0x2134FFFF;
@@ -157,6 +163,7 @@ public class Home extends Activity {
 	public  static final int SCREEN_STATE_MENU_MONITORING_TOP								= 0x22000000;
 	public  static final int SCREEN_STATE_MENU_MONITORING_MACHINEMONITORING					= 0x22100000;
 	public  static final int SCREEN_STATE_MENU_MONITORING_EHCUINFO_TOP						= 0x22200000;
+	public  static final int SCREEN_STATE_MENU_MONITORING_EHCUINFO_BOOMLEVERFLOAT			= 0x22210000;
 	public  static final int SCREEN_STATE_MENU_MONITORING_EHCUINFO_END						= 0x222FFFFF;
 	public  static final int SCREEN_STATE_MENU_MONITORING_OPERATIONHISTORY_TOP				= 0x22300000;
 	public  static final int SCREEN_STATE_MENU_MONITORING_OPERATIONHISTORY_INIT				= 0x22310000;
@@ -164,6 +171,13 @@ public class Home extends Activity {
 	public  static final int SCREEN_STATE_MENU_MONITORING_FAULTHISTORY_TOP					= 0x22400000;
 	public  static final int SCREEN_STATE_MENU_MONITORING_FAULTHISTORY_END					= 0x224FFFFF;
 	public  static final int SCREEN_STATE_MENU_MONITORING_VERSIONINFO_TOP					= 0x22500000;
+	public  static final int SCREEN_STATE_MENU_MONITORING_VERSIONINFO_TCU					= 0x22510000;
+	public  static final int SCREEN_STATE_MENU_MONITORING_VERSIONINFO_ECM					= 0x22520000;
+	public  static final int SCREEN_STATE_MENU_MONITORING_VERSIONINFO_MONITOR				= 0x22530000;
+	public  static final int SCREEN_STATE_MENU_MONITORING_VERSIONINFO_MCU					= 0x22540000;
+	public  static final int SCREEN_STATE_MENU_MONITORING_VERSIONINFO_CLUSTER				= 0x22550000;
+	public  static final int SCREEN_STATE_MENU_MONITORING_VERSIONINFO_RMCU					= 0x22560000;
+	public  static final int SCREEN_STATE_MENU_MONITORING_VERSIONINFO_EHCU					= 0x22570000;
 	public  static final int SCREEN_STATE_MENU_MONITORING_VERSIONINFO_END					= 0x225FFFFF;
 	public  static final int SCREEN_STATE_MENU_MONITORING_END								= 0x22FFFFFF;
 	
@@ -191,6 +205,7 @@ public class Home extends Activity {
 	public  static final int SCREEN_STATE_MENU_MANAGEMENT_SERVICE_TOP						= 0x23500000;
 	public  static final int SCREEN_STATE_MENU_MANAGEMENT_SERVICE_PW						= 0x23510000;
 	public  static final int SCREEN_STATE_MENU_MANAGEMENT_SERVICE_SENSORMONITORING_TOP		= 0x23520000;
+	public  static final int SCREEN_STATE_MENU_MANAGEMENT_SERVICE_SENSORMONITORING_HIDDEN	= 0x23521000;
 	public  static final int SCREEN_STATE_MENU_MANAGEMENT_SERVICE_SENSORMONITORING_END		= 0x2352FFFF;
 	public  static final int SCREEN_STATE_MENU_MANAGEMENT_SERVICE_SPEEDLIMIT_TOP			= 0x23530000;
 	public  static final int SCREEN_STATE_MENU_MANAGEMENT_SERVICE_SPEEDLIMIT_END			= 0x2353FFFF;
@@ -226,6 +241,8 @@ public class Home extends Activity {
 	public  static final int SCREEN_STATE_MENU_MULTIMEDIA_END								= 0x25FFFFFF;
 	
 	public  static final int SCREEN_STATE_MENU_END 											= 0x2FFFFFFF;
+	
+	public  static final int SCREEN_STATE_ENGINEAUTOSHUTDOWNCOUNT_TOP						= 0x30000000;
 	
 	public  static final int UNIT_ODO_KM 			= 0;
 	public  static final int UNIT_ODO_MILE 			= 1;
@@ -341,6 +358,8 @@ public class Home extends Activity {
 	public AngleCalibrationResultPopup		_AngleCalibrationResultPopup;
 	public PressureCalibrationResultPopup	_PressureCalibrationResultPopup;
 	SoundOutputPopup						_SoundOutputPopup;
+	BrakePedalCalibrationPopup				_BrakePedalCalibrationPopup;
+	EngineAutoShutdownCountPopup			_EngineAutoShutdownCountPopup;
 	
 	// Timer
 	private Timer mSeatBeltTimer = null;
@@ -367,6 +386,19 @@ public class Home extends Activity {
 	Handler HandleKeyButton;
 	
 	int nSendCommandTimerIndex;
+	
+	// EngineAutoShutdown Data
+	public int EngineAutoShutdownTime;
+	public int EngineAutoShutdownStatus;
+	public int EngineAutoShutdownType;
+	public boolean EngineAutoShutdownESLFlag;
+	public int ESLInterval;
+	public int ESLMode;
+	public boolean EngineAutoShutdownESLSetFlag;
+	
+	// Engine Auto Shutdown
+	int EngineAutoShutdownRemainingTime;
+	int EngineAutoShutdownMode;
 	////////////////////////////////////////////////////
 	
 	//Fragment//////////////////////////////////////////
@@ -458,6 +490,8 @@ public class Home extends Activity {
 		MirrorHeatCount = 0;
 		nSendCommandTimerIndex = 0;
 		BuzzerOnFlag = false;
+		EngineAutoShutdownESLFlag = false;
+		EngineAutoShutdownESLSetFlag = false;
 		_MainChangeAnimation = new ChangeFragmentAnimation(this, framelayoutMain, R.id.FrameLayout_main, null);
 	}
 	public void InitFragment(){
@@ -482,6 +516,8 @@ public class Home extends Activity {
 		_AngleCalibrationResultPopup = new AngleCalibrationResultPopup(this);
 		_PressureCalibrationResultPopup = new PressureCalibrationResultPopup(this);
 		_SoundOutputPopup = new SoundOutputPopup(this);
+		_BrakePedalCalibrationPopup = new BrakePedalCalibrationPopup(this);
+		_EngineAutoShutdownCountPopup = new EngineAutoShutdownCountPopup(this);
 				
 	}
 	public void InitAnimation(){
@@ -771,6 +807,10 @@ public class Home extends Activity {
 		SelectGearRange = SelectGear & 0x0F;
 		SelectGearDirection = ((SelectGear & 0x30) >> 4);
 		
+		EngineAutoShutdownRemainingTime = CAN1Comm.Get_RemainingTimeforAutomaticEngineShutdown_PGN61184_122();
+		EngineAutoShutdownMode = CAN1Comm.Get_AutomaticEngineShutdown_363_PGN65428();
+
+		
 		CheckMirrorHeatPreHeat(PreHeat,RPM);
 		SetBackLight();
 	}
@@ -783,6 +823,7 @@ public class Home extends Activity {
 				// TODO Auto-generated method stub
 				CameraDisplay();
 				CheckBuzzer();
+				CheckEngineAutoShutdown();
 			}
 		});
 	
@@ -886,6 +927,26 @@ public class Home extends Activity {
 		}
 		
 		return BackLight;
+	}
+	
+	public void CheckEngineAutoShutdown(){
+		if(ScreenIndex != SCREEN_STATE_ENGINEAUTOSHUTDOWNCOUNT_TOP
+			&& EngineAutoShutdownMode == 1
+			&& EngineAutoShutdownRemainingTime <= 60){
+			
+			showEngineAutoShutdownCount();
+			OldScreenIndex = ScreenIndex;
+			
+		}else if(ScreenIndex == SCREEN_STATE_ENGINEAUTOSHUTDOWNCOUNT_TOP){
+			if( EngineAutoShutdownMode == 0
+					|| EngineAutoShutdownRemainingTime > 60){
+				
+				if(HomeDialog != null){
+					HomeDialog.dismiss();
+					HomeDialog = null;
+				}
+			}
+		}
 	}
 	/////////////////////////////////////////////////////
 	
@@ -1144,6 +1205,34 @@ public class Home extends Activity {
 		}
 		
 		HomeDialog = _SoundOutputPopup;
+		HomeDialog.show();
+	}
+	public void showBrkaePedalCalibration(){
+		if(AnimationRunningFlag == true)
+			return;
+		else
+			StartAnimationRunningTimer();
+		
+		if(HomeDialog != null){
+			HomeDialog.dismiss();
+			HomeDialog = null;
+		}
+		
+		HomeDialog = _BrakePedalCalibrationPopup;
+		HomeDialog.show();
+	}
+	public void showEngineAutoShutdownCount(){
+		if(AnimationRunningFlag == true)
+			return;
+		else
+			StartAnimationRunningTimer();
+		
+		if(HomeDialog != null){
+			HomeDialog.dismiss();
+			HomeDialog = null;
+		}
+		
+		HomeDialog = _EngineAutoShutdownCountPopup;
 		HomeDialog.show();
 	}
 	

@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/RelativeLayout_popup_engineautoshutdown_count"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/menu_popup01_bg" >
+
+    <RelativeLayout
+        android:id="@+id/RelativeLayout_popup_engineautoshutdown_count_title"
+        android:layout_width="448dp"
+        android:layout_height="200dp"
+        android:layout_centerHorizontal="true" >
+        
+        <TextView
+            android:id="@+id/textView_popup_engineautoshutdown_count_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="50dp"
+            android:gravity="center"
+            android:text="@string/Engine_Auto_Shutdown"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:textColor="@color/black"
+            android:textSize="30sp" />
+
+        <TextView
+            android:id="@+id/textView_popup_engineautoshutdown_count_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:gravity="center"
+            android:text="@string/Initialize_"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:textColor="@color/black"
+            android:textSize="30sp" />
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/RelativeLayout_popup_engineautoshutdown_count_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/RelativeLayout_popup_engineautoshutdown_count_title"
+        android:layout_centerHorizontal="true" >
+        
+        <ImageButton
+	        android:id="@+id/imageButton_popup_engineautoshutdown_count_skip"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:background="@drawable/_selector_popup01_short_btn1" />
+	
+	    <ImageButton
+	        android:id="@+id/imageButton_popup_engineautoshutdown_count_cancel"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:layout_alignTop="@+id/imageButton_popup_engineautoshutdown_count_skip"
+	        android:layout_marginLeft="20dp"
+	        android:layout_toRightOf="@+id/imageButton_popup_engineautoshutdown_count_skip"
+	        android:background="@drawable/_selector_popup01_short_btn1" />
+	
+	    <TextView
+	        android:id="@+id/textView_popup_engineautoshutdown_count_skip"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:layout_alignBottom="@+id/imageButton_popup_engineautoshutdown_count_skip"
+	        android:layout_alignLeft="@+id/imageButton_popup_engineautoshutdown_count_skip"
+	        android:layout_alignRight="@+id/imageButton_popup_engineautoshutdown_count_skip"
+	        android:layout_alignTop="@+id/imageButton_popup_engineautoshutdown_count_skip"
+	        android:gravity="center"
+	        android:text="@string/Skip"
+	        android:textAppearance="?android:attr/textAppearanceLarge"
+	        android:textColor="@color/black"
+	        android:textSize="30sp"
+	        android:textStyle="bold" />
+	
+	    <TextView
+	        android:id="@+id/textView_popup_engineautoshutdown_count_cancel"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:layout_alignBottom="@+id/imageButton_popup_engineautoshutdown_count_cancel"
+	        android:layout_alignLeft="@+id/imageButton_popup_engineautoshutdown_count_cancel"
+	        android:layout_alignRight="@+id/imageButton_popup_engineautoshutdown_count_cancel"
+	        android:layout_alignTop="@+id/imageButton_popup_engineautoshutdown_count_cancel"
+	        android:gravity="center"
+	        android:text="@string/Cancel"
+	        android:textAppearance="?android:attr/textAppearanceLarge"
+	        android:textColor="@color/black"
+	        android:textSize="30sp"
+	        android:textStyle="bold" />
+
+    </RelativeLayout>
+
+</RelativeLayout>

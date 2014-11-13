@@ -164,20 +164,31 @@ public class WiperFragment extends ParentFragment{
 			return;
 		else
 			ParentActivity.StartAnimationRunningTimer();
-		ParentActivity._MenuBaseFragment.showBodyModeAnimation();
-		ParentActivity._MenuBaseFragment._MenuModeFragment.setFirstScreen(Home.SCREEN_STATE_MENU_MODE_ETC_TOP);
+		if(ParentActivity.OldScreenIndex == Home.SCREEN_STATE_MAIN_B_TOP){
+			ParentActivity._MainChangeAnimation.StartChangeAnimation(ParentActivity._MainBBaseFragment);
+			ParentActivity.OldScreenIndex = 0;
+		}else{
+			ParentActivity._MenuBaseFragment.showBodyModeAnimation();
+			ParentActivity._MenuBaseFragment._MenuModeFragment.setFirstScreen(Home.SCREEN_STATE_MENU_MODE_ETC_TOP);
+		}
 		
 		CAN1Comm.Set_WiperSpeedLevel_718_PGN61184_109(WiperLevel);
 		CAN1Comm.TxCANToMCU(109);
 		CAN1Comm.Set_WiperSpeedLevel_718_PGN61184_109(0xFF);
+		
 	}
 	public void ClickCancel(){
 		if(ParentActivity.AnimationRunningFlag == true)
 			return;
 		else
 			ParentActivity.StartAnimationRunningTimer();
-		ParentActivity._MenuBaseFragment.showBodyModeAnimation();
-		ParentActivity._MenuBaseFragment._MenuModeFragment.setFirstScreen(Home.SCREEN_STATE_MENU_MODE_ETC_TOP);
+		if(ParentActivity.OldScreenIndex == Home.SCREEN_STATE_MAIN_B_TOP){
+			ParentActivity._MainChangeAnimation.StartChangeAnimation(ParentActivity._MainBBaseFragment);
+			ParentActivity.OldScreenIndex = 0;
+		}else{
+			ParentActivity._MenuBaseFragment.showBodyModeAnimation();
+			ParentActivity._MenuBaseFragment._MenuModeFragment.setFirstScreen(Home.SCREEN_STATE_MENU_MODE_ETC_TOP);
+		}
 	}
 	public void ClickLevel1(){
 		radioLevel1.setChecked(true);

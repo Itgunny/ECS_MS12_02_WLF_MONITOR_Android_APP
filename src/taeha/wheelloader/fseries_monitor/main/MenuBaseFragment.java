@@ -22,12 +22,14 @@ import taeha.wheelloader.fseries_monitor.menu.management.PressureCalibration;
 import taeha.wheelloader.fseries_monitor.menu.management.ServiceMenuListFragment;
 import taeha.wheelloader.fseries_monitor.menu.management.ServiceMenuPasswordFragment;
 import taeha.wheelloader.fseries_monitor.menu.management.ServiceMenuSensorMonitoringFragment;
+import taeha.wheelloader.fseries_monitor.menu.management.ServiceMenuSensorMonitoringHiddenFragment;
 import taeha.wheelloader.fseries_monitor.menu.management.ServiceMenuSpeedLimitFragment;
 import taeha.wheelloader.fseries_monitor.menu.management.ServiceMenuWeighingCompensationFragment;
 import taeha.wheelloader.fseries_monitor.menu.mode.CameraSettingFragment;
 import taeha.wheelloader.fseries_monitor.menu.mode.CoolingFanFragment;
 import taeha.wheelloader.fseries_monitor.menu.mode.DetentFragment;
 import taeha.wheelloader.fseries_monitor.menu.mode.EngineAutoShutdownFragment;
+import taeha.wheelloader.fseries_monitor.menu.mode.EngineAutoShutdownPWFrameFragment;
 import taeha.wheelloader.fseries_monitor.menu.mode.EngineDelayShutdownFragment;
 import taeha.wheelloader.fseries_monitor.menu.mode.EngineSpeedFragment;
 import taeha.wheelloader.fseries_monitor.menu.mode.MaxFlowFragment;
@@ -36,12 +38,20 @@ import taeha.wheelloader.fseries_monitor.menu.mode.SoftStopFragment;
 import taeha.wheelloader.fseries_monitor.menu.mode.SpeedometerFreqFragment;
 import taeha.wheelloader.fseries_monitor.menu.mode.WiperFragment;
 import taeha.wheelloader.fseries_monitor.menu.mode.WorkLoadFragment;
+import taeha.wheelloader.fseries_monitor.menu.monitoring.EHCUIOInfoBoomLeverFloatFragment;
 import taeha.wheelloader.fseries_monitor.menu.monitoring.EHCUIOInfoFragment;
 import taeha.wheelloader.fseries_monitor.menu.monitoring.FaultHistoryFragment;
 import taeha.wheelloader.fseries_monitor.menu.monitoring.MachineMonitoringFragment;
 import taeha.wheelloader.fseries_monitor.menu.monitoring.MenuMonitoringFragment;
 import taeha.wheelloader.fseries_monitor.menu.monitoring.OperationHistoryFragment;
+import taeha.wheelloader.fseries_monitor.menu.monitoring.VersionInfoClusterFragment;
+import taeha.wheelloader.fseries_monitor.menu.monitoring.VersionInfoECMFragment;
+import taeha.wheelloader.fseries_monitor.menu.monitoring.VersionInfoEHCUFragment;
 import taeha.wheelloader.fseries_monitor.menu.monitoring.VersionInfoFragment;
+import taeha.wheelloader.fseries_monitor.menu.monitoring.VersionInfoMCUFragment;
+import taeha.wheelloader.fseries_monitor.menu.monitoring.VersionInfoMonitorFragment;
+import taeha.wheelloader.fseries_monitor.menu.monitoring.VersionInfoRMCUFragment;
+import taeha.wheelloader.fseries_monitor.menu.monitoring.VersionInfoTCUFragment;
 import taeha.wheelloader.fseries_monitor.menu.multimedia.MenuMultimediaFragment;
 import taeha.wheelloader.fseries_monitor.menu.preference.BrightnessFragment;
 import taeha.wheelloader.fseries_monitor.menu.preference.ClockFragment;
@@ -103,29 +113,39 @@ public class MenuBaseFragment extends ParentFragment{
 	public CoolingFanFragment			_CoolingFanFragment;
 	public SpeedometerFreqFragment		_SpeedometerFreqFragment;
 	public WiperFragment				_WiperFragment;
+	public EngineAutoShutdownPWFrameFragment	_EngineAutoShutdownPWFrameFragment;
 	
 	//Monitoring
-	public MachineMonitoringFragment	_MachineMonitoringFragment;
-	public OperationHistoryFragment		_OperationHistoryFragment;
-	public FaultHistoryFragment			_FaultHistoryFragment;
-	public EHCUIOInfoFragment			_EHCUIOInfoFragment;
-	public VersionInfoFragment			_VersionInfoFragment;
+	public MachineMonitoringFragment			_MachineMonitoringFragment;
+	public OperationHistoryFragment				_OperationHistoryFragment;
+	public FaultHistoryFragment					_FaultHistoryFragment;
+	public EHCUIOInfoFragment					_EHCUIOInfoFragment;
+	public EHCUIOInfoBoomLeverFloatFragment		_EHCUIOInfoBoomLeverFloatFragment;
+	public VersionInfoFragment					_VersionInfoFragment;
+	public VersionInfoMonitorFragment			_VersionInfoMonitorFragment;
+	public VersionInfoMCUFragment				_VersionInfoMCUFragment;
+	public VersionInfoClusterFragment			_VersionInfoClusterFragment;
+	public VersionInfoEHCUFragment				_VersionInfoEHCUFragment;
+	public VersionInfoRMCUFragment				_VersionInfoRMCUFragment;
+	public VersionInfoTCUFragment				_VersionInfoTCUFragment;
+	public VersionInfoECMFragment				_VersionInfoECMFragment;
 	
 	//Management
-	public MachineSecurityPasswordFragment			_MachineSecurityPasswordFragment;
-	public MachineSecurityListFragment				_MachineSecurityListFragment;
-	public MachineSecurityESLFragment				_MachineSecurityESLFragment;
-	public MachineSecurityPasswordChangeFragment	_MachineSecurityPasswordChangeFragment;
-	public MachineSecuritySmartKeyFragment			_MachineSecuritySmartKeyFragment;
-	public CalibrationFragment						_CalibrationFragment;
-	public AngleCalibration							_AngleCalibration;
-	public PressureCalibration						_PressureCalibration;
-	public ChangeASPhoneNumberFragment				_ChangeASPhoneNumberFragment;
-	public ServiceMenuPasswordFragment				_ServiceMenuPasswordFragment;
-	public ServiceMenuListFragment					_ServiceMenuListFragment;
-	public ServiceMenuSpeedLimitFragment			_ServiceMenuSpeedLimitFragment;
-	public ServiceMenuWeighingCompensationFragment	_ServiceMenuWeighingCompensationFragment;
-	public ServiceMenuSensorMonitoringFragment		_ServiceMenuSensorMonitoringFragment;
+	public MachineSecurityPasswordFragment				_MachineSecurityPasswordFragment;
+	public MachineSecurityListFragment					_MachineSecurityListFragment;
+	public MachineSecurityESLFragment					_MachineSecurityESLFragment;
+	public MachineSecurityPasswordChangeFragment		_MachineSecurityPasswordChangeFragment;
+	public MachineSecuritySmartKeyFragment				_MachineSecuritySmartKeyFragment;
+	public CalibrationFragment							_CalibrationFragment;
+	public AngleCalibration								_AngleCalibration;
+	public PressureCalibration							_PressureCalibration;
+	public ChangeASPhoneNumberFragment					_ChangeASPhoneNumberFragment;
+	public ServiceMenuPasswordFragment					_ServiceMenuPasswordFragment;
+	public ServiceMenuListFragment						_ServiceMenuListFragment;
+	public ServiceMenuSpeedLimitFragment				_ServiceMenuSpeedLimitFragment;
+	public ServiceMenuWeighingCompensationFragment		_ServiceMenuWeighingCompensationFragment;
+	public ServiceMenuSensorMonitoringFragment			_ServiceMenuSensorMonitoringFragment;
+	public ServiceMenuSensorMonitoringHiddenFragment	_ServiceMenuSensorMonitoringHiddenFragment;
 	
 	//Preference
 	public BrightnessFragment						_BrightnessFragment;
@@ -171,6 +191,12 @@ public class MenuBaseFragment extends ParentFragment{
 			framelayoutListBody.setVisibility(View.INVISIBLE);
 			framelayoutListLeft.setVisibility(View.INVISIBLE);
 			showBodyPressureCalibrationAnimation();
+			FirstScreenIndex = 0;
+		}else if(FirstScreenIndex == Home.SCREEN_STATE_MENU_MODE_ETC_WIPER_TOP){
+			framelayoutListTitle.setVisibility(View.INVISIBLE);
+			framelayoutListBody.setVisibility(View.INVISIBLE);
+			framelayoutListLeft.setVisibility(View.INVISIBLE);
+			showBodyWiperAnimation();
 			FirstScreenIndex = 0;
 		}
 		else{
@@ -227,12 +253,21 @@ public class MenuBaseFragment extends ParentFragment{
 		_CoolingFanFragment = new CoolingFanFragment();
 		_SpeedometerFreqFragment = new SpeedometerFreqFragment();
 		_WiperFragment = new WiperFragment();
+		_EngineAutoShutdownPWFrameFragment = new EngineAutoShutdownPWFrameFragment();
 		
 		_MachineMonitoringFragment = new MachineMonitoringFragment();
 		_OperationHistoryFragment = new OperationHistoryFragment();
 		_FaultHistoryFragment = new FaultHistoryFragment();
 		_EHCUIOInfoFragment = new EHCUIOInfoFragment();
+		_EHCUIOInfoBoomLeverFloatFragment = new EHCUIOInfoBoomLeverFloatFragment();
 		_VersionInfoFragment = new VersionInfoFragment();
+		_VersionInfoMonitorFragment = new VersionInfoMonitorFragment();
+		_VersionInfoMCUFragment = new VersionInfoMCUFragment();
+		_VersionInfoClusterFragment = new VersionInfoClusterFragment();
+		_VersionInfoEHCUFragment = new VersionInfoEHCUFragment();
+		_VersionInfoRMCUFragment = new VersionInfoRMCUFragment();
+		_VersionInfoTCUFragment = new VersionInfoTCUFragment();
+		_VersionInfoECMFragment = new VersionInfoECMFragment();
 		_MachineSecurityPasswordFragment = new MachineSecurityPasswordFragment();
 		_MachineSecurityListFragment = new MachineSecurityListFragment();
 		_MachineSecurityESLFragment = new MachineSecurityESLFragment();
@@ -247,6 +282,7 @@ public class MenuBaseFragment extends ParentFragment{
 		_ServiceMenuSpeedLimitFragment = new ServiceMenuSpeedLimitFragment();
 		_ServiceMenuWeighingCompensationFragment = new ServiceMenuWeighingCompensationFragment();
 		_ServiceMenuSensorMonitoringFragment = new ServiceMenuSensorMonitoringFragment();
+		_ServiceMenuSensorMonitoringHiddenFragment = new ServiceMenuSensorMonitoringHiddenFragment();
 		_BrightnessFragment = new BrightnessFragment();
 		_ClockFragment = new ClockFragment();
 		_UnitFragment = new UnitFragment();
@@ -289,11 +325,20 @@ public class MenuBaseFragment extends ParentFragment{
 		transaction.detach(_CoolingFanFragment);
 		transaction.detach(_SpeedometerFreqFragment);
 		transaction.detach(_WiperFragment);
+		transaction.detach(_EngineAutoShutdownPWFrameFragment);
 		transaction.detach(_MachineMonitoringFragment);
 		transaction.detach(_OperationHistoryFragment);
 		transaction.detach(_FaultHistoryFragment);
-		transaction.detach(_EHCUIOInfoFragment);		
+		transaction.detach(_EHCUIOInfoFragment);	
+		transaction.detach(_EHCUIOInfoBoomLeverFloatFragment);	
 		transaction.detach(_VersionInfoFragment);
+		transaction.detach(_VersionInfoMonitorFragment);
+		transaction.detach(_VersionInfoMCUFragment);
+		transaction.detach(_VersionInfoClusterFragment);
+		transaction.detach(_VersionInfoEHCUFragment);
+		transaction.detach(_VersionInfoRMCUFragment);
+		transaction.detach(_VersionInfoTCUFragment);
+		transaction.detach(_VersionInfoECMFragment);
 		transaction.detach(_MachineSecurityPasswordFragment);
 		transaction.detach(_MachineSecurityListFragment);
 		transaction.detach(_MachineSecurityESLFragment);
@@ -308,6 +353,7 @@ public class MenuBaseFragment extends ParentFragment{
 		transaction.detach(_ServiceMenuSpeedLimitFragment);
 		transaction.detach(_ServiceMenuWeighingCompensationFragment);
 		transaction.detach(_ServiceMenuSensorMonitoringFragment);
+		transaction.detach(_ServiceMenuSensorMonitoringHiddenFragment);
 		transaction.detach(_BrightnessFragment);
 		transaction.detach(_ClockFragment);
 		transaction.detach(_UnitFragment);
@@ -506,6 +552,14 @@ public class MenuBaseFragment extends ParentFragment{
 		transaction.commit();
 		
 	}
+	public void showBodyEngineAutoShutdownPWFrame(){
+		android.app.FragmentTransaction transaction = getFragmentManager().beginTransaction();
+		transaction.remove(_EngineAutoShutdownPWFrameFragment);
+		transaction.replace(R.id.FrameLayout_menu_inter_body, _EngineAutoShutdownPWFrameFragment);
+		transaction.commit();
+		
+	}
+	
 	public void showBodyMachineMonitoring(){
 		android.app.FragmentTransaction transaction = getFragmentManager().beginTransaction();
 		transaction.remove(_MachineMonitoringFragment);
@@ -528,6 +582,13 @@ public class MenuBaseFragment extends ParentFragment{
 		transaction.commit();
 		
 	}	
+	public void showBodyBoomLeverFloatInfo(){
+		android.app.FragmentTransaction transaction = getFragmentManager().beginTransaction();
+		transaction.remove(_EHCUIOInfoBoomLeverFloatFragment);
+		transaction.replace(R.id.FrameLayout_menu_inter_body, _EHCUIOInfoBoomLeverFloatFragment);
+		transaction.commit();
+		
+	}	
 	public void showBodyVersionInfo(){
 		android.app.FragmentTransaction transaction = getFragmentManager().beginTransaction();
 		transaction.remove(_VersionInfoFragment);
@@ -535,6 +596,55 @@ public class MenuBaseFragment extends ParentFragment{
 		transaction.commit();
 		
 	}	
+	public void showBodyVersionInfoMonitor(){
+		android.app.FragmentTransaction transaction = getFragmentManager().beginTransaction();
+		transaction.remove(_VersionInfoMonitorFragment);
+		transaction.replace(R.id.FrameLayout_menu_inter_body, _VersionInfoMonitorFragment);
+		transaction.commit();
+		
+	}	
+	public void showBodyVersionInfoMCU(){
+		android.app.FragmentTransaction transaction = getFragmentManager().beginTransaction();
+		transaction.remove(_VersionInfoMCUFragment);
+		transaction.replace(R.id.FrameLayout_menu_inter_body, _VersionInfoMCUFragment);
+		transaction.commit();
+		
+	}
+	public void showBodyVersionInfoCluster(){
+		android.app.FragmentTransaction transaction = getFragmentManager().beginTransaction();
+		transaction.remove(_VersionInfoClusterFragment);
+		transaction.replace(R.id.FrameLayout_menu_inter_body, _VersionInfoClusterFragment);
+		transaction.commit();
+		
+	}
+	public void showBodyVersionInfoEHCU(){
+		android.app.FragmentTransaction transaction = getFragmentManager().beginTransaction();
+		transaction.remove(_VersionInfoEHCUFragment);
+		transaction.replace(R.id.FrameLayout_menu_inter_body, _VersionInfoEHCUFragment);
+		transaction.commit();
+		
+	}
+	public void showBodyVersionInfoRMCU(){
+		android.app.FragmentTransaction transaction = getFragmentManager().beginTransaction();
+		transaction.remove(_VersionInfoRMCUFragment);
+		transaction.replace(R.id.FrameLayout_menu_inter_body, _VersionInfoRMCUFragment);
+		transaction.commit();
+		
+	}
+	public void showBodyVersionInfoTCU(){
+		android.app.FragmentTransaction transaction = getFragmentManager().beginTransaction();
+		transaction.remove(_VersionInfoTCUFragment);
+		transaction.replace(R.id.FrameLayout_menu_inter_body, _VersionInfoTCUFragment);
+		transaction.commit();
+		
+	}
+	public void showBodyVersionInfoECM(){
+		android.app.FragmentTransaction transaction = getFragmentManager().beginTransaction();
+		transaction.remove(_VersionInfoECMFragment);
+		transaction.replace(R.id.FrameLayout_menu_inter_body, _VersionInfoECMFragment);
+		transaction.commit();
+		
+	}
 	public void showBodyESL(){
 		android.app.FragmentTransaction transaction = getFragmentManager().beginTransaction();
 		transaction.remove(_MachineSecurityESLFragment);
@@ -588,6 +698,13 @@ public class MenuBaseFragment extends ParentFragment{
 		android.app.FragmentTransaction transaction = getFragmentManager().beginTransaction();
 		transaction.remove(_ServiceMenuWeighingCompensationFragment);
 		transaction.replace(R.id.FrameLayout_menu_inter_body, _ServiceMenuSensorMonitoringFragment);
+		transaction.commit();
+		
+	}
+	public void showBodySensorMonitoringHidden(){
+		android.app.FragmentTransaction transaction = getFragmentManager().beginTransaction();
+		transaction.remove(_ServiceMenuWeighingCompensationFragment);
+		transaction.replace(R.id.FrameLayout_menu_inter_body, _ServiceMenuSensorMonitoringHiddenFragment);
 		transaction.commit();
 		
 	}
@@ -727,6 +844,10 @@ public class MenuBaseFragment extends ParentFragment{
 		showInterAnimation();
 		InterBodyAnimation.StartChangeAnimation(_WiperFragment);
 	}
+	public void showBodyEngineAutoShutdownPWFrameAnimation(){
+		showInterAnimation();
+		InterBodyAnimation.StartChangeAnimation(_EngineAutoShutdownPWFrameFragment);
+	}
 	public void showBodyMachineMonitoringAnimation(){
 		showInterAnimation();
 		InterBodyAnimation.StartChangeAnimation(_MachineMonitoringFragment);
@@ -739,9 +860,41 @@ public class MenuBaseFragment extends ParentFragment{
 		showInterAnimation();
 		InterBodyAnimation.StartChangeAnimation(_EHCUIOInfoFragment);
 	}
+	public void showBodyBoomLeverFloatAnimation(){
+		showInterAnimation();
+		InterBodyAnimation.StartChangeAnimation(_EHCUIOInfoBoomLeverFloatFragment);
+	}
 	public void showBodyVersionInfoAnimation(){
 		showInterAnimation();
 		InterBodyAnimation.StartChangeAnimation(_VersionInfoFragment);
+	}
+	public void showBodyVersionInfoMonitorAnimation(){
+		showInterAnimation();
+		InterBodyAnimation.StartChangeAnimation(_VersionInfoMonitorFragment);
+	}
+	public void showBodyVersionInfoMCUAnimation(){
+		showInterAnimation();
+		InterBodyAnimation.StartChangeAnimation(_VersionInfoMCUFragment);
+	}
+	public void showBodyVersionInfoClusterAnimation(){
+		showInterAnimation();
+		InterBodyAnimation.StartChangeAnimation(_VersionInfoClusterFragment);
+	}
+	public void showBodyVersionInfoEHCUAnimation(){
+		showInterAnimation();
+		InterBodyAnimation.StartChangeAnimation(_VersionInfoEHCUFragment);
+	}
+	public void showBodyVersionInfoRMCUAnimation(){
+		showInterAnimation();
+		InterBodyAnimation.StartChangeAnimation(_VersionInfoRMCUFragment);
+	}
+	public void _VersionInfoTCUFragment(){
+		showInterAnimation();
+		InterBodyAnimation.StartChangeAnimation(_VersionInfoTCUFragment);
+	}
+	public void _VersionInfoECMFragment(){
+		showInterAnimation();
+		InterBodyAnimation.StartChangeAnimation(_VersionInfoECMFragment);
 	}
 	public void showBodyESLAnimation(){
 		showInterAnimation();
@@ -775,6 +928,11 @@ public class MenuBaseFragment extends ParentFragment{
 		showInterAnimation();
 		InterBodyAnimation.StartChangeAnimation(_ServiceMenuSensorMonitoringFragment);
 	}
+	public void showBodySensorMonitoringHiddenAnimation(){
+		showInterAnimation();
+		InterBodyAnimation.StartChangeAnimation(_ServiceMenuSensorMonitoringHiddenFragment);
+	}
+	
 	public void showBodyBrightnessAnimation(){
 		showInterAnimation();
 		InterBodyAnimation.StartChangeAnimation(_BrightnessFragment);
@@ -844,6 +1002,9 @@ public class MenuBaseFragment extends ParentFragment{
 		case CAN1CommManager.ENTER:
 			ClickKeyButtonEnter();
 			break;
+		case CAN1CommManager.LONG_LEFT_RIGHT:
+			ClickKeyButtonLongLeftRight();
+			break;
 		default:
 			break;
 		}
@@ -907,6 +1068,45 @@ public class MenuBaseFragment extends ParentFragment{
 			
 		}else{
 			
+		}
+	}
+	public void ClickKeyButtonLongLeftRight(){
+		switch (ParentActivity.ScreenIndex) {
+		case Home.SCREEN_STATE_MENU_MONITORING_VERSIONINFO_ECM:
+			_VersionInfoECMFragment.ShowManufactureDay(true);
+			break;
+		case Home.SCREEN_STATE_MENU_MONITORING_VERSIONINFO_TCU:
+			_VersionInfoTCUFragment.ShowManufactureDay(true);
+			break;
+		case Home.SCREEN_STATE_MENU_MONITORING_VERSIONINFO_MONITOR:
+			_VersionInfoMonitorFragment.ShowManufactureDay(true);
+			break;
+		case Home.SCREEN_STATE_MENU_MONITORING_VERSIONINFO_MCU:
+			_VersionInfoMCUFragment.ShowManufactureDay(true);
+			break;
+		case Home.SCREEN_STATE_MENU_MONITORING_VERSIONINFO_CLUSTER:
+			_VersionInfoClusterFragment.ShowManufactureDay(true);
+			break;
+		case Home.SCREEN_STATE_MENU_MONITORING_VERSIONINFO_RMCU:
+			_VersionInfoRMCUFragment.ShowManufactureDay(true);
+			break;
+		case Home.SCREEN_STATE_MENU_MONITORING_VERSIONINFO_EHCU:
+			_VersionInfoEHCUFragment.ShowManufactureDay(true);
+			break;
+		case Home.SCREEN_STATE_MENU_MANAGEMENT_SERVICE_PW:
+			_ServiceMenuPasswordFragment.showServicePasswordNextScreen();
+			break;
+		case Home.SCREEN_STATE_MENU_MULTIMEDIA_TOP:
+			_MenuMultimediaFragment.ExcuteFileManaget();
+			break;
+		case Home.SCREEN_STATE_MENU_MONITORING_EHCUINFO_TOP:
+			showBodyBoomLeverFloatInfo();
+			break;
+		case Home.SCREEN_STATE_MENU_MANAGEMENT_SERVICE_SENSORMONITORING_TOP:
+			showBodySensorMonitoringHidden();
+			break;
+		default:
+			break;
 		}
 	}
 	/////////////////////////////////////////////////////////////////////////////////////

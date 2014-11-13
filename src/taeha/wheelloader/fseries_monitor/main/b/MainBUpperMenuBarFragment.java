@@ -62,6 +62,9 @@ public class MainBUpperMenuBarFragment extends ParentFragment{
 	
 	int Warning;
 	int CommErrCount;
+	
+	int WiperStatus;
+	int WiperLevel;
 	//////////////////////////////////////////////////
 	
 	//ANIMATION///////////////////////////////////////
@@ -195,6 +198,9 @@ public class MainBUpperMenuBarFragment extends ParentFragment{
 		Warning = CAN1Comm.BuzzerStatus;
 		CommErrCount = CAN1Comm.Get_CommErrCnt();
 		
+		WiperStatus = CAN1Comm.Get_WiperOperationStatus_717_PGN65433();
+		WiperLevel = CAN1Comm.Get_WiperSpeedLevel_718_PGN65433();
+		
 	}
 
 	@Override
@@ -202,6 +208,7 @@ public class MainBUpperMenuBarFragment extends ParentFragment{
 		// TODO Auto-generated method stub
 		ClockDisplay(ClockHour, ClockMin);
 		WarningDisplay(Warning,CommErrCount);
+		WiperDisplay(WiperStatus,WiperLevel);
 	}
 	/////////////////////////////////////////////////////////////////////
 	//Timer//////////////////////////////////////////////////////////////
@@ -294,6 +301,49 @@ public class MainBUpperMenuBarFragment extends ParentFragment{
 		}
 		
 	}	
+	
+	public void WiperDisplay(int Status, int Level){
+		if(Status == CAN1CommManager.DATA_STATE_WIPER_OFF){
+			imgViewWiperIcon.setImageResource(R.drawable.main_menubar_icon_wiper_off);
+			imgViewWiperLevel1.setImageResource(R.drawable.main_menubar_icon_wiper_step_off);
+			imgViewWiperLevel2.setImageResource(R.drawable.main_menubar_icon_wiper_step_off);
+			imgViewWiperLevel3.setImageResource(R.drawable.main_menubar_icon_wiper_step_off);
+			imgViewWiperLevel4.setImageResource(R.drawable.main_menubar_icon_wiper_step_off);
+			
+			setWiperButtonEnable(false);
+		}else{
+			if(Level == 1){
+				imgViewWiperIcon.setImageResource(R.drawable.main_menubar_icon_wiper_on);
+				imgViewWiperLevel1.setImageResource(R.drawable.main_menubar_icon_wiper_step_on);
+				imgViewWiperLevel2.setImageResource(R.drawable.main_menubar_icon_wiper_step_off);
+				imgViewWiperLevel3.setImageResource(R.drawable.main_menubar_icon_wiper_step_off);
+				imgViewWiperLevel4.setImageResource(R.drawable.main_menubar_icon_wiper_step_off);
+			}
+			else if(Level == 2){
+				imgViewWiperIcon.setImageResource(R.drawable.main_menubar_icon_wiper_on);
+				imgViewWiperLevel1.setImageResource(R.drawable.main_menubar_icon_wiper_step_on);
+				imgViewWiperLevel2.setImageResource(R.drawable.main_menubar_icon_wiper_step_on);
+				imgViewWiperLevel3.setImageResource(R.drawable.main_menubar_icon_wiper_step_off);
+				imgViewWiperLevel4.setImageResource(R.drawable.main_menubar_icon_wiper_step_off);
+			}
+			else if(Level == 3){
+				imgViewWiperIcon.setImageResource(R.drawable.main_menubar_icon_wiper_on);
+				imgViewWiperLevel1.setImageResource(R.drawable.main_menubar_icon_wiper_step_on);
+				imgViewWiperLevel2.setImageResource(R.drawable.main_menubar_icon_wiper_step_on);
+				imgViewWiperLevel3.setImageResource(R.drawable.main_menubar_icon_wiper_step_on);
+				imgViewWiperLevel4.setImageResource(R.drawable.main_menubar_icon_wiper_step_off);
+			}
+			else if(Level == 4){
+				imgViewWiperIcon.setImageResource(R.drawable.main_menubar_icon_wiper_on);
+				imgViewWiperLevel1.setImageResource(R.drawable.main_menubar_icon_wiper_step_on);
+				imgViewWiperLevel2.setImageResource(R.drawable.main_menubar_icon_wiper_step_on);
+				imgViewWiperLevel3.setImageResource(R.drawable.main_menubar_icon_wiper_step_on);
+				imgViewWiperLevel4.setImageResource(R.drawable.main_menubar_icon_wiper_step_on);
+			}
+			setWiperButtonEnable(true);
+		}
+	}
+	
 	public void ClickTime(){
 		if(ParentActivity.AnimationRunningFlag == true)
 			return;
@@ -314,6 +364,14 @@ public class MainBUpperMenuBarFragment extends ParentFragment{
 		}
 	}
 	public void ClickWiper(){
+		if(ParentActivity.AnimationRunningFlag == true)
+			return;
+		else
+			ParentActivity.StartAnimationRunningTimer();
+		
+		ParentActivity._MainChangeAnimation.StartChangeAnimation(ParentActivity._MenuBaseFragment);
+		ParentActivity.OldScreenIndex = Home.SCREEN_STATE_MAIN_B_TOP;
+		ParentActivity._MenuBaseFragment.setFirstScreenIndex(Home.SCREEN_STATE_MENU_MODE_ETC_WIPER_TOP);
 	}
 	public void ClickCamera(){
 		ParentActivity.ExcuteCamActivitybyKey();
@@ -350,6 +408,10 @@ public class MainBUpperMenuBarFragment extends ParentFragment{
 			mBuzzerStopTimer.purge();
 			mBuzzerStopTimer = null;
 		}
+	}
+	///////////////////////////////////////////////////////////
+	public void setWiperButtonEnable(boolean flag){
+		imgbtnWiper.setClickable(flag);
 	}
 	///////////////////////////////////////////////////////////
 }	

@@ -6,6 +6,8 @@ import taeha.wheelloader.fseries_monitor.animation.DisappearAnimation;
 import taeha.wheelloader.fseries_monitor.animation.MainBodyShiftAnimation;
 import taeha.wheelloader.fseries_monitor.animation.LeftRightShiftAnimation;
 import taeha.wheelloader.fseries_monitor.main.R.string;
+import taeha.wheelloader.fseries_monitor.main.b.MainBCenterAEBFragment;
+import taeha.wheelloader.fseries_monitor.main.b.MainBCenterBrakePedalCalibrationFragment;
 import taeha.wheelloader.fseries_monitor.main.b.MainBCenterEngineFragment;
 import taeha.wheelloader.fseries_monitor.main.b.MainBCenterFragment;
 import taeha.wheelloader.fseries_monitor.main.b.MainBCenterHourOdometerFragment;
@@ -87,7 +89,8 @@ public class MainBBaseFragment extends ParentFragment{
 	//////////////////////////////////////////////////
 	
 	//VALUABLE////////////////////////////////////////
-
+	int BrakepedalReq;
+	int AEBReq;
 	//////////////////////////////////////////////////
 	
 	//Fragment////////////////////////////////////////
@@ -97,6 +100,8 @@ public class MainBBaseFragment extends ParentFragment{
 	public MainBCenterHourOdometerFragment _MainBCenterHourOdometerFragment;
 	public MainBCenterMachineStatusFragment _MainBCenterMachineStatusFragment;
 	public MainBCenterQuickFragment _MainBCenterQuickFragment;
+	public MainBCenterBrakePedalCalibrationFragment	_MainBCenterBrakePedalCalibrationFragment;
+	public MainBCenterAEBFragment					_MainBCenterAEBFragment;
 	
 	public MainBIndicatorFragment _MainBIndicatorFragment;
 	
@@ -223,7 +228,10 @@ public class MainBBaseFragment extends ParentFragment{
 		
 		InitButtonListener();
 	
+		
 		showCenter();
+		
+		
 		showIndicator();
 		showRightUpEngine();
 		showRightDownTM();
@@ -241,6 +249,12 @@ public class MainBBaseFragment extends ParentFragment{
 //		_RightDownBGShiftAnimation.StartShiftAnimation();
 //		_LeftUpBGShiftAnimation.StartShiftAnimation();
 //		_LeftDownBGShiftAnimation.StartShiftAnimation();
+		
+		if(BrakepedalReq == 1){
+			CenterAnimation.StartChangeAnimation(_MainBCenterBrakePedalCalibrationFragment);
+		}else if (AEBReq == 1){
+			CenterAnimation.StartChangeAnimation(_MainBCenterAEBFragment);
+		}
 		
 		ParentActivity.ScreenIndex = ParentActivity.SCREEN_STATE_MAIN_B_TOP;
 		return mRoot;
@@ -299,6 +313,8 @@ public class MainBBaseFragment extends ParentFragment{
 		_MainBCenterHourOdometerFragment = new MainBCenterHourOdometerFragment();
 		_MainBCenterMachineStatusFragment = new MainBCenterMachineStatusFragment();
 		_MainBCenterQuickFragment = new MainBCenterQuickFragment();
+		_MainBCenterBrakePedalCalibrationFragment = new MainBCenterBrakePedalCalibrationFragment();
+		_MainBCenterAEBFragment = new MainBCenterAEBFragment();
 		
 		_MainBIndicatorFragment = new MainBIndicatorFragment();
 		
@@ -347,6 +363,8 @@ public class MainBBaseFragment extends ParentFragment{
 	protected void InitValuables() {
 		// TODO Auto-generated method stub
 		super.InitValuables();
+		BrakepedalReq = CAN1Comm.Get_RequestBrakePedalPositionSensorCalibration_PGN61184_201();
+		AEBReq = CAN1Comm.Get_RequestAEB_PGN61184_201();	
 		
 		_MainBodyShiftAnimation = new MainBodyShiftAnimation(ParentActivity, LayoutBody);
 		CenterAnimation = new ChangeFragmentAnimation(ParentActivity, framelayoutCenter, R.id.FrameLayout_screen_main_b_center,_MainBCenterFragment);
@@ -460,6 +478,8 @@ public class MainBBaseFragment extends ParentFragment{
 		transaction.detach(_MainBCenterHourOdometerFragment);
 		transaction.detach(_MainBCenterMachineStatusFragment);
 		transaction.detach(_MainBCenterQuickFragment);
+		transaction.detach(_MainBCenterBrakePedalCalibrationFragment);
+		transaction.detach(_MainBCenterAEBFragment);
 		transaction.detach(_MainBIndicatorFragment);
 		transaction.detach(_MainBRightUpEngineFragment);
 		transaction.detach(_MainBRightUpEngineModeFragment);
@@ -489,6 +509,8 @@ public class MainBBaseFragment extends ParentFragment{
 		_MainBCenterHourOdometerFragment 	 = null;
 		_MainBCenterMachineStatusFragment 	 = null;
 		_MainBCenterQuickFragment 	 = null;
+		_MainBCenterBrakePedalCalibrationFragment = null;
+		_MainBCenterAEBFragment = null;
 			
 		_MainBIndicatorFragment 	 = null;
 			
@@ -603,6 +625,8 @@ public class MainBBaseFragment extends ParentFragment{
 	}
 	/////////////////////////////////////////////////////////////////////	
 	
+	/////////////////////////////////////////////////////////////////////
+	
 	//Show Fragment//////////////////////////////////////////////////////
 	// Center
 	public void showCenter(){
@@ -641,7 +665,18 @@ public class MainBBaseFragment extends ParentFragment{
 		//transaction.addToBackStack("Main_Left");
 		transaction.commit();
 	}
-	
+	public void showCenterBrakePedalCalibration(){
+		android.app.FragmentTransaction transaction = getFragmentManager().beginTransaction();
+		transaction.replace(R.id.FrameLayout_screen_main_b_center, _MainBCenterBrakePedalCalibrationFragment);
+		//transaction.addToBackStack("Main_Left");
+		transaction.commit();
+	}
+	public void showCenterAEB(){
+		android.app.FragmentTransaction transaction = getFragmentManager().beginTransaction();
+		transaction.replace(R.id.FrameLayout_screen_main_b_center, _MainBCenterAEBFragment);
+		//transaction.addToBackStack("Main_Left");
+		transaction.commit();
+	}
 	
 	// Indicator
 	public void showIndicator(){
@@ -1029,7 +1064,10 @@ public class MainBBaseFragment extends ParentFragment{
 		
 		
 	}
-	
+	public void showCalibrationtoDefaultScreenAnimation(){
+		ParentActivity.ScreenIndex = ParentActivity.SCREEN_STATE_MAIN_B_TOP;
+		CenterAnimation.StartChangeAnimation(_MainBCenterFragment);
+	}
 	public void showKeytoDefaultScreenAnimation(){
 		ParentActivity.ScreenIndex = ParentActivity.SCREEN_STATE_MAIN_B_TOP;
 		_MainBodyShiftAnimation.StartShiftZeroAnimation();
