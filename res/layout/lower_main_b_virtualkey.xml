@@ -4,45 +4,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/main_virtual_key_bg_up" >
-
-    <ImageButton
-        android:id="@+id/imageButton_lower_main_b_virtualkey_mirroring"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginLeft="16dp"
-        android:layout_marginTop="39dp"
-        android:background="@drawable/_selector_virtualkey_mirroring" />
-
-    <ImageButton
-        android:id="@+id/imageButton_lower_main_b_virtualkey_media"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginLeft="210dp"
-        android:layout_marginTop="39dp"
-        android:background="@drawable/_selector_virtualkey_media" />
-
-    <ImageButton
-        android:id="@+id/imageButton_lower_main_b_virtualkey_bluetooth"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginLeft="403dp"
-        android:layout_marginTop="39dp"
-        android:background="@drawable/_selector_virtualkey_bluetooth" />
-    <ImageButton
-        android:id="@+id/imageButton_lower_main_b_virtualkey_wifi"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginLeft="597dp"
-        android:layout_marginTop="39dp"
-        android:background="@drawable/_selector_virtualkey_wifi" />
     
     <ImageButton
         android:id="@+id/imageButton_lower_main_b_virtualkey_mainlight"
@@ -51,8 +12,9 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
         android:layout_marginLeft="16dp"
-        android:layout_marginTop="149dp"
+        android:layout_marginTop="100dp"
         android:background="@drawable/_selector_virtualkey_1" />
+
     <ImageButton
         android:id="@+id/imageButton_lower_main_b_virtualkey_worklight"
         android:layout_width="wrap_content"
@@ -60,8 +22,9 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
         android:layout_marginLeft="145dp"
-        android:layout_marginTop="149dp"
+        android:layout_marginTop="100dp"
         android:background="@drawable/_selector_virtualkey_2" />
+
     <ImageButton
         android:id="@+id/imageButton_lower_main_b_virtualkey_autogrease"
         android:layout_width="wrap_content"
@@ -69,8 +32,9 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
         android:layout_marginLeft="274dp"
-        android:layout_marginTop="149dp"
+        android:layout_marginTop="100dp"
         android:background="@drawable/_selector_virtualkey_3" />
+
     <ImageButton
         android:id="@+id/imageButton_lower_main_b_virtualkey_quickcoupler"
         android:layout_width="wrap_content"
@@ -78,8 +42,9 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
         android:layout_marginLeft="403dp"
-        android:layout_marginTop="149dp"
+        android:layout_marginTop="100dp"
         android:background="@drawable/_selector_virtualkey_4" />
+
     <ImageButton
         android:id="@+id/imageButton_lower_main_b_virtualkey_ridecontrol"
         android:layout_width="wrap_content"
@@ -87,16 +52,16 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
         android:layout_marginLeft="532dp"
-        android:layout_marginTop="149dp"
+        android:layout_marginTop="100dp"
         android:background="@drawable/_selector_virtualkey_5" />
-    <ImageButton
+    <ImageButton
         android:id="@+id/imageButton_lower_main_b_virtualkey_workload"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
         android:layout_marginLeft="661dp"
-        android:layout_marginTop="149dp"
+        android:layout_marginTop="100dp"
         android:background="@drawable/_selector_virtualkey_6" />
     
     <ImageButton
@@ -106,8 +71,9 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
         android:layout_marginLeft="16dp"
-        android:layout_marginTop="275dp"
+        android:layout_marginTop="250dp"
         android:background="@drawable/_selector_virtualkey_7" />
+
     <ImageButton
         android:id="@+id/imageButton_lower_main_b_virtualkey_rearwiper"
         android:layout_width="wrap_content"
@@ -115,8 +81,9 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
         android:layout_marginLeft="145dp"
-        android:layout_marginTop="275dp"
+        android:layout_marginTop="250dp"
         android:background="@drawable/_selector_virtualkey_8" />
+
     <ImageButton
         android:id="@+id/imageButton_lower_main_b_virtualkey_mirrorheat"
         android:layout_width="wrap_content"
@@ -124,8 +91,9 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
         android:layout_marginLeft="274dp"
-        android:layout_marginTop="275dp"
+        android:layout_marginTop="250dp"
         android:background="@drawable/_selector_virtualkey_9" />
+
     <ImageButton
         android:id="@+id/imageButton_lower_main_b_virtualkey_detent"
         android:layout_width="wrap_content"
@@ -133,8 +101,9 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
         android:layout_marginLeft="403dp"
-        android:layout_marginTop="275dp"
+        android:layout_marginTop="250dp"
         android:background="@drawable/_selector_virtualkey_10" />
+
     <ImageButton
         android:id="@+id/imageButton_lower_main_b_virtualkey_finemodulation"
         android:layout_width="wrap_content"
@@ -142,16 +111,24 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
         android:layout_marginLeft="532dp"
-        android:layout_marginTop="275dp"
+        android:layout_marginTop="250dp"
         android:background="@drawable/_selector_virtualkey_11" />
-    <ImageButton
+    <ImageButton
         android:id="@+id/imageButton_lower_main_b_virtualkey_fn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
         android:layout_marginLeft="661dp"
-        android:layout_marginTop="275dp"
+        android:layout_marginTop="250dp"
         android:background="@drawable/_selector_virtualkey_12" />
+
+    <ImageButton
+        android:id="@+id/imageButton_lower_main_b_virtualkey_keypad"
+        android:layout_width="200dp"
+        android:layout_height="100dp"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:background="@drawable/blank_5x5" />
 
 </RelativeLayout>

@@ -9,6 +9,8 @@ import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
+import taeha.wheelloader.fseries_monitor.animation.BarAnimation;
+import taeha.wheelloader.fseries_monitor.main.CAN1CommManager;
 import taeha.wheelloader.fseries_monitor.main.ParentFragment;
 import taeha.wheelloader.fseries_monitor.main.R;
 
@@ -31,10 +33,14 @@ public class MainBCenterFragment extends ParentFragment{
 	//VALUABLE////////////////////////////////////////
 	boolean ClickFlag;
 	protected int RPM;
+	
+	// Eco Gauge
+	private int EcoGaugeLevel;
+	private int EcoGaugeStatus;
 	//////////////////////////////////////////////////
 	
 	//ANIMATION///////////////////////////////////////
-
+	public BarAnimation				_EcoGaugeAnimation;
 	///////////////////////////////////////////////////
 	
 	//TEST////////////////////////////////////////////
@@ -71,11 +77,7 @@ public class MainBCenterFragment extends ParentFragment{
 		Log.d(TAG, "onPause");
 	}
 	////////////////////////////////////////////////
-	
-	
 
-	
-	
 	//Common Function//////////////////////////////
 	@Override
 	protected void InitResource() {
@@ -94,8 +96,19 @@ public class MainBCenterFragment extends ParentFragment{
 	protected void InitValuables() {
 		// TODO Auto-generated method stub
 		super.InitValuables();
+		EcoGaugeLevel = CAN1Comm.Get_EcoGaugeLevel_1304_PGN65390();
+		EcoGaugeStatus = CAN1Comm.Get_EcoGaugeStatus_1305_PGN65390();
+		
+		if (EcoGaugeLevel > 100) {
+			EcoGaugeLevel = 100;
+		} else if (EcoGaugeLevel < 0) {
+			EcoGaugeLevel = 0;
+		}
+		
+		_EcoGaugeAnimation = new BarAnimation(ParentActivity, imgViewEcoBar,EcoGaugeLevel);
 		
 	}
+	boolean Temp = false;
 	@Override
 	protected void InitButtonListener() {
 		// TODO Auto-generated method stub
@@ -105,7 +118,7 @@ public class MainBCenterFragment extends ParentFragment{
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
 				if(ClickFlag == true)
-					ClickBG();
+					ClickBG();	
 			}
 		});
 	}
@@ -114,12 +127,15 @@ public class MainBCenterFragment extends ParentFragment{
 	protected void GetDataFromNative() {
 		// TODO Auto-generated method stub
 		RPM = CAN1Comm.Get_EngineSpeed_310_PGN65431();
+		EcoGaugeLevel = CAN1Comm.Get_EcoGaugeLevel_1304_PGN65390();
+		EcoGaugeStatus = CAN1Comm.Get_EcoGaugeStatus_1305_PGN65390();
 	}
 
 	@Override
 	protected void UpdateUI() {
 		// TODO Auto-generated method stub
 		RPMDisplay(RPM);
+		EcoGaugeDisplay(EcoGaugeLevel,EcoGaugeStatus);
 	}
 	/////////////////////////////////////////////////////////////////////
 	public void RPMDisplay(int Data){
@@ -148,4 +164,32 @@ public class MainBCenterFragment extends ParentFragment{
 		ClickFlag = flag;
 		imgbtnOption.setClickable(ClickFlag);
 	}
+	//////////////////////////////////////////////////////////////////////
+	public void EcoGaugeDisplay(int _level, int _status) {
+		switch (_status) {
+			case CAN1CommManager.DATA_STATE_ECO_GREEN:
+			default:
+				imgViewEcoBar.setImageResource(R.drawable.main_center_eco_green_all);
+
+				break;
+			case CAN1CommManager.DATA_STATE_ECO_YELLOW:
+
+				break;
+			case CAN1CommManager.DATA_STATE_ECO_RED:
+
+				break;
+			case CAN1CommManager.DATA_STATE_ECO_WHITE:
+
+				break;
+		}
+
+		if (_level > 100) {
+			_level = 100;
+		} else if (_level < 0) {
+			_level = 0;
+		}
+
+		_EcoGaugeAnimation.SetScale(_level);
+	}
+	//////////////////////////////////////////////////////////////////////
 }

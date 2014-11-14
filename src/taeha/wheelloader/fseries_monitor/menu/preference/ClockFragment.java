@@ -470,6 +470,9 @@ public class ClockFragment extends ParentFragment{
 		Hour = Hour10 * 10 + Hour1;
 		Min = Min10 * 10 + Min1;
 		
+		if(Hour == 12)
+			Hour = 0;
+		
 		if(AMFlag == false)
 			Hour += 12;
 		

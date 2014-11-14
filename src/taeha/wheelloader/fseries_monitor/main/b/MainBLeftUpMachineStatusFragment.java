@@ -455,7 +455,7 @@ public class MainBLeftUpMachineStatusFragment extends ParentFragment{
 		ParentActivity._MainBBaseFragment._KeyTitleDisappearAnimation.StartAnimation();
 		ParentActivity._MainBBaseFragment._KeyBodyDisappearAnimation.StartAnimation();
 		
-		ParentActivity._MainBBaseFragment._MainBIndicatorFragment.DisableVirtualKey();
+	
 	}
 	
 	public void setClickEnable(boolean flag){

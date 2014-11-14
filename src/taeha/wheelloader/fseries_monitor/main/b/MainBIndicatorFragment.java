@@ -309,15 +309,4 @@ public class MainBIndicatorFragment extends ParentFragment{
 			break;
 		}
 	}
-
-	public void DisableVirtualKey(){
-		imgViewLockUpClutch.setY((float)57);
-		imgViewSeatBelt.setY((float)57); 
-		imgViewEngineAutoShutdown.setY((float)57); 
-	}
-	public void EnableVirtualKey(){
-		imgViewLockUpClutch.setY((float)35);
-		imgViewSeatBelt.setY((float)35); 
-		imgViewEngineAutoShutdown.setY((float)35); 
-	}
 }

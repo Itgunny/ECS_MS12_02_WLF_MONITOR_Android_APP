@@ -95,6 +95,11 @@ public class CAN1CommManager extends ICAN1CommManager.Stub{		// ttySAC1(Linux), 
 	public static final int DATA_STATE_OFF		 			= 0;
 	public static final int DATA_STATE_ON		 			= 1;
 	
+	public static final int DATA_STATE_ECO_GREEN = 0;
+	public static final int DATA_STATE_ECO_YELLOW = 1;
+	public static final int DATA_STATE_ECO_RED = 2;
+	public static final int DATA_STATE_ECO_WHITE = 3;
+	
 	public static final int DATA_STATE_ENGINE_MODE_PWR 		= 0;
 	public static final int DATA_STATE_ENGINE_MODE_STD 		= 1;
 	public static final int DATA_STATE_ENGINE_MODE_ECONO 	= 2;

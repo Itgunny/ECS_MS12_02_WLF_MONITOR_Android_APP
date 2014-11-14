@@ -22,6 +22,9 @@ public class MainBRightDownQuickFragment extends ParentFragment{
 	ImageView imgViewIcon;
 	
 	TextView textViewTitle;
+	
+	ImageButton imgbtnBluetooth;
+	ImageButton imgbtnWifi;
 	//////////////////////////////////////////////////
 	
 	//VALUABLE////////////////////////////////////////
@@ -63,6 +66,9 @@ public class MainBRightDownQuickFragment extends ParentFragment{
 
 		textViewTitle = (TextView)mRoot.findViewById(R.id.textView_rightdown_main_b_quick_title);
 		
+		imgbtnBluetooth = (ImageButton)mRoot.findViewById(R.id.imageButton_rightdown_main_b_quick_bluetooth);
+		imgbtnWifi = (ImageButton)mRoot.findViewById(R.id.imageButton_rightdown_main_b_quick_wifi);
+		
 	}
 	
 	protected void InitValuables() {
@@ -79,6 +85,22 @@ public class MainBRightDownQuickFragment extends ParentFragment{
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
 				ClickMaintenance();
+			}
+		});
+		imgbtnBluetooth.setOnClickListener(new View.OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				ClickBluetooth();
+			}
+		});
+		imgbtnWifi.setOnClickListener(new View.OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				ClickWifi();
 			}
 		});
 	}
@@ -101,6 +123,12 @@ public class MainBRightDownQuickFragment extends ParentFragment{
 			return;
 		else
 			ParentActivity.StartAnimationRunningTimer();
+	}
+	public void ClickBluetooth(){
+		
+	}
+	public void ClickWifi(){
+		
 	}
 	
 }

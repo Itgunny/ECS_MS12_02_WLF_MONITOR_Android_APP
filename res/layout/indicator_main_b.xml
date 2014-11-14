@@ -65,7 +65,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_x="293dp"
-        android:layout_y="35dp"
+        android:layout_y="57dp"
         android:src="@drawable/main_indicator_lockupclutch" />
 
     <ImageView
@@ -73,7 +73,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_x="365dp"
-        android:layout_y="35dp"
+        android:layout_y="57dp"
         android:src="@drawable/main_indicator_seatbelt" />
 
     <ImageView
@@ -81,7 +81,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_x="437dp"
-        android:layout_y="35dp"
+        android:layout_y="57dp"
         android:src="@drawable/main_indicator_engineautoshutdown" />
 
 </AbsoluteLayout>

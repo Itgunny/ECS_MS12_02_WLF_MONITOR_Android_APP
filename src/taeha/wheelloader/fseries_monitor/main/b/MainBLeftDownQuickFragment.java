@@ -23,6 +23,9 @@ public class MainBLeftDownQuickFragment extends ParentFragment{
 	ImageView imgViewIcon;
 	
 	TextView textViewTitle;
+	
+	ImageButton imgbtnMirror;
+	ImageButton imgbtnMedia;
 	//////////////////////////////////////////////////
 	
 	//VALUABLE////////////////////////////////////////
@@ -64,6 +67,9 @@ public class MainBLeftDownQuickFragment extends ParentFragment{
 
 		textViewTitle = (TextView)mRoot.findViewById(R.id.textView_leftdown_main_b_quick_title);
 		
+		imgbtnMirror = (ImageButton)mRoot.findViewById(R.id.imageButton_leftdown_main_b_quick_mirror);
+		imgbtnMedia = (ImageButton)mRoot.findViewById(R.id.imageButton_leftdown_main_b_quick_multimedia);
+
 	}
 	
 	protected void InitValuables() {
@@ -80,6 +86,22 @@ public class MainBLeftDownQuickFragment extends ParentFragment{
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
 				ClickHelp();
+			}
+		});
+		imgbtnMirror.setOnClickListener(new View.OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				ClickMirror();
+			}
+		});
+		imgbtnMedia.setOnClickListener(new View.OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				ClickMedia();
 			}
 		});
 	}
@@ -103,6 +125,15 @@ public class MainBLeftDownQuickFragment extends ParentFragment{
 		if(intent != null)
 			startActivity(intent);
 	}
-	
+	public void ClickMirror(){
+		
+	}
+	public void ClickMedia(){
+		Intent intent;
+		intent = ParentActivity.getPackageManager().getLaunchIntentForPackage("com.mxtech.videoplayer.ad");
+		if(intent != null){
+			ParentActivity.startActivity(intent);
+		}
+	}
 	
 }

@@ -23,10 +23,25 @@ public class MainBVirtualKeyFragment extends ParentFragment{
 	//////////////////////////////////////////////////
 	//RESOURCE////////////////////////////////////////
 	RelativeLayout layoutBG;
+	
+	ImageButton imgbtnKeyPad;
+	
+	ImageButton imgbtnMainLight;
+	ImageButton imgbtnWorkLight;
+	ImageButton imgbtnAutoGrease;
+	ImageButton imgbtnQuickCoupler;
+	ImageButton imgbtnRideControl;
+	ImageButton imgbtnWorkLoad;
+	ImageButton imgbtnBeaconLamp;
+	ImageButton imgbtnRearWiper;
+	ImageButton imgbtnMirrorHeat;
+	ImageButton imgbtnDetent;
+	ImageButton imgbtnFineModulation;
+	ImageButton imgbtnFN;
 	//////////////////////////////////////////////////
 	
 	//VALUABLE////////////////////////////////////////
-	private Timer mClickTimer = null;
+	boolean bScreenOnFlag;
 	//////////////////////////////////////////////////
 	
 	//ANIMATION///////////////////////////////////////
@@ -57,7 +72,7 @@ public class MainBVirtualKeyFragment extends ParentFragment{
 		// TODO Auto-generated method stub
 		super.onPause();
 		Log.d(TAG,"onPause");
-		CancelClickTimer();
+	
 	}
 
 
@@ -65,7 +80,7 @@ public class MainBVirtualKeyFragment extends ParentFragment{
 	public void onResume() {
 		// TODO Auto-generated method stub
 		super.onResume();
-		StartClickTimer();
+
 	}
 	
 	////////////////////////////////////////////////
@@ -81,12 +96,27 @@ public class MainBVirtualKeyFragment extends ParentFragment{
 	protected void InitResource() {
 		// TODO Auto-generated method stub
 		layoutBG = (RelativeLayout)mRoot.findViewById(R.id.RelativeLayout_lower_main_b_virtualkey);
+		imgbtnKeyPad = (ImageButton)mRoot.findViewById(R.id.imageButton_lower_main_b_virtualkey_keypad);
+		
+		imgbtnMainLight = (ImageButton)mRoot.findViewById(R.id.imageButton_lower_main_b_virtualkey_mainlight);
+		imgbtnWorkLight = (ImageButton)mRoot.findViewById(R.id.imageButton_lower_main_b_virtualkey_worklight);
+		imgbtnAutoGrease = (ImageButton)mRoot.findViewById(R.id.imageButton_lower_main_b_virtualkey_autogrease);
+		imgbtnQuickCoupler = (ImageButton)mRoot.findViewById(R.id.imageButton_lower_main_b_virtualkey_quickcoupler);
+		imgbtnRideControl = (ImageButton)mRoot.findViewById(R.id.imageButton_lower_main_b_virtualkey_ridecontrol);
+		imgbtnWorkLoad = (ImageButton)mRoot.findViewById(R.id.imageButton_lower_main_b_virtualkey_workload);
+		imgbtnBeaconLamp = (ImageButton)mRoot.findViewById(R.id.imageButton_lower_main_b_virtualkey_beaconlamp);
+		imgbtnRearWiper = (ImageButton)mRoot.findViewById(R.id.imageButton_lower_main_b_virtualkey_rearwiper);
+		imgbtnMirrorHeat = (ImageButton)mRoot.findViewById(R.id.imageButton_lower_main_b_virtualkey_mirrorheat);
+		imgbtnDetent = (ImageButton)mRoot.findViewById(R.id.imageButton_lower_main_b_virtualkey_detent);
+		imgbtnFineModulation = (ImageButton)mRoot.findViewById(R.id.imageButton_lower_main_b_virtualkey_finemodulation);
+		imgbtnFN = (ImageButton)mRoot.findViewById(R.id.imageButton_lower_main_b_virtualkey_fn);
+		
 	}
 	
 	protected void InitValuables() {
 		// TODO Auto-generated method stub
 		super.InitValuables();
-		
+		bScreenOnFlag = false;
 	}
 	@Override
 	protected void InitButtonListener() {
@@ -99,6 +129,111 @@ public class MainBVirtualKeyFragment extends ParentFragment{
 //				
 //			}
 //		});
+		imgbtnKeyPad.setOnClickListener(new View.OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				ClickKeyPad();
+			}
+		});
+		imgbtnMainLight.setOnClickListener(new View.OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				ClickMainLight();
+			}
+		});
+		imgbtnWorkLight.setOnClickListener(new View.OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				ClickWorkLight();
+			}
+		});
+		imgbtnAutoGrease.setOnClickListener(new View.OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				ClickAutoGrease();
+			}
+		});
+		imgbtnQuickCoupler.setOnClickListener(new View.OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				ClickQuickCoupler();
+			}
+		});
+		imgbtnRideControl.setOnClickListener(new View.OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				ClickRideControl();
+			}
+		});
+		imgbtnWorkLoad.setOnClickListener(new View.OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				ClickWorkLoad();
+			}
+		});
+		imgbtnBeaconLamp.setOnClickListener(new View.OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				ClickBeaconLamp();
+			}
+		});
+		imgbtnRearWiper.setOnClickListener(new View.OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				ClickRearWiper();
+			}
+		});
+		imgbtnMirrorHeat.setOnClickListener(new View.OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				ClickMirrorHeat();
+			}
+		});
+		imgbtnDetent.setOnClickListener(new View.OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				ClickDetent();
+			}
+		});
+		imgbtnFineModulation.setOnClickListener(new View.OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				ClickFineModulation();
+			}
+		});
+		imgbtnFN.setOnClickListener(new View.OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				ClickFN();
+			}
+		});
+
 	}
 
 	@Override
@@ -113,39 +248,72 @@ public class MainBVirtualKeyFragment extends ParentFragment{
 		
 	}
 	/////////////////////////////////////////////////////////////////////	
+	public void ClickKeyPad(){
+		if(ParentActivity.AnimationRunningFlag == true)
+			return;
+		else
+			ParentActivity.StartAnimationRunningTimer();
+		
+		if(bScreenOnFlag == true){
+			ParentActivity._MainBBaseFragment.showVirtualKeytoQuickScreenAnimation();
+			layoutBG.setBackgroundResource(R.drawable.main_virtual_key_bg_up);
+			bScreenOnFlag = false;
+		}else{
+			ParentActivity._MainBBaseFragment.showVritualKeyScreenAnimation();
+			layoutBG.setBackgroundResource(R.drawable.main_virtual_key_bg_down);
+			bScreenOnFlag = true;
+		}
+	}
+	public void ClickMainLight(){
+		ParentActivity._MainBBaseFragment.showMainLightAnimation();
+		ParentActivity._MainBBaseFragment.IndicatorChangeAnimation.StartAppearAnimation(ParentActivity._MainBBaseFragment._MainBIndicatorFragment);
+	}
+	public void ClickWorkLight(){
+		ParentActivity._MainBBaseFragment.showWorkLightAnimation();
+		ParentActivity._MainBBaseFragment.IndicatorChangeAnimation.StartAppearAnimation(ParentActivity._MainBBaseFragment._MainBIndicatorFragment);
+	}
+	public void ClickAutoGrease(){
+		ParentActivity._MainBBaseFragment.showAutoGreaseAnimation();
+		ParentActivity._MainBBaseFragment.IndicatorChangeAnimation.StartAppearAnimation(ParentActivity._MainBBaseFragment._MainBIndicatorFragment);
+	}
+	public void ClickQuickCoupler(){
+		ParentActivity._MainBBaseFragment.showQuickCouplerAnimation();
+		ParentActivity._MainBBaseFragment.IndicatorChangeAnimation.StartAppearAnimation(ParentActivity._MainBBaseFragment._MainBIndicatorFragment);
+	}
+	public void ClickRideControl(){
+		ParentActivity._MainBBaseFragment.showRideControlAnimation();
+		ParentActivity._MainBBaseFragment.IndicatorChangeAnimation.StartAppearAnimation(ParentActivity._MainBBaseFragment._MainBIndicatorFragment);
+	}
+	public void ClickWorkLoad(){
+		ParentActivity._MainBBaseFragment.showWorkLoadAnimation();
+		ParentActivity._MainBBaseFragment.IndicatorChangeAnimation.StartAppearAnimation(ParentActivity._MainBBaseFragment._MainBIndicatorFragment);
+	}
+	public void ClickBeaconLamp(){
+		ParentActivity._MainBBaseFragment.showBeaconLampAnimation();
+		ParentActivity._MainBBaseFragment.IndicatorChangeAnimation.StartAppearAnimation(ParentActivity._MainBBaseFragment._MainBIndicatorFragment);
+	}
+	public void ClickRearWiper(){
+		ParentActivity._MainBBaseFragment.showRearWiperAnimation();
+		ParentActivity._MainBBaseFragment.IndicatorChangeAnimation.StartAppearAnimation(ParentActivity._MainBBaseFragment._MainBIndicatorFragment);
+	}
+	public void ClickMirrorHeat(){
+		ParentActivity._MainBBaseFragment.showMirrorHeatAnimation();
+		ParentActivity._MainBBaseFragment.IndicatorChangeAnimation.StartAppearAnimation(ParentActivity._MainBBaseFragment._MainBIndicatorFragment);
+	}
+	public void ClickDetent(){
+		ParentActivity._MainBBaseFragment.showDetentAnimation();
+		ParentActivity._MainBBaseFragment.IndicatorChangeAnimation.StartAppearAnimation(ParentActivity._MainBBaseFragment._MainBIndicatorFragment);
+	}
+	public void ClickFineModulation(){
+		ParentActivity._MainBBaseFragment.showFineModulationAnimation();
+		ParentActivity._MainBBaseFragment.IndicatorChangeAnimation.StartAppearAnimation(ParentActivity._MainBBaseFragment._MainBIndicatorFragment);
+	}
+	public void ClickFN(){
+		
+	}
+	
 	///////////////////////Timer/////////////////////////////////////////
-	public class ClickTimerClass extends TimerTask{
-
-		@Override
-		public void run() {
-			// TODO Auto-generated method stub
-			ParentActivity.runOnUiThread(new Runnable() {
-				
-				@Override
-				public void run() {
-					// TODO Auto-generated method stub
-					
-				}
-			});
-			
-		}
-		
-	}
 	
-	public void StartClickTimer(){
-		CancelClickTimer();
-		mClickTimer = new Timer();
-		mClickTimer.schedule(new ClickTimerClass(),1,100);	
-	}
-	
-	public void CancelClickTimer(){
-		if(mClickTimer != null){
-			mClickTimer.cancel();
-			mClickTimer.purge();
-			mClickTimer = null;
-		}
-		
-	}
 	/////////////////////////////////////////////////////////////////////
 	
 }

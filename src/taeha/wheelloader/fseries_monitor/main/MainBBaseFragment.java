@@ -1,6 +1,7 @@
 package taeha.wheelloader.fseries_monitor.main;
 
 import taeha.wheelloader.fseries_monitor.animation.AppearAnimation;
+import taeha.wheelloader.fseries_monitor.animation.BarAnimation;
 import taeha.wheelloader.fseries_monitor.animation.ChangeFragmentAnimation;
 import taeha.wheelloader.fseries_monitor.animation.DisappearAnimation;
 import taeha.wheelloader.fseries_monitor.animation.MainBodyShiftAnimation;
@@ -149,6 +150,9 @@ public class MainBBaseFragment extends ParentFragment{
 	
 	//ANIMATION///////////////////////////////////////
 	public MainBodyShiftAnimation _MainBodyShiftAnimation;
+	public MainBodyShiftAnimation _MainBVirtualKeyShiftAnimation;
+	
+	
 	
 	public ChangeFragmentAnimation CenterAnimation;
 	public ChangeFragmentAnimation RightUpChangeAnimation;
@@ -238,7 +242,7 @@ public class MainBBaseFragment extends ParentFragment{
 		showLeftDownHourOdo();
 		showLeftUpMachineStatus();
 		showUpperMenuBar();
-		showVirtualKey();
+//		showVirtualKey();
 
 //		_BodyAppearAnimation.StartAnimation();
 //		_RightUpShiftAnimation.StartShiftAnimation();
@@ -250,6 +254,8 @@ public class MainBBaseFragment extends ParentFragment{
 //		_LeftUpBGShiftAnimation.StartShiftAnimation();
 //		_LeftDownBGShiftAnimation.StartShiftAnimation();
 		
+		
+		VirtualKeyChangeAnimation.StartDisappearAnimation();
 		if(BrakepedalReq == 1){
 			CenterAnimation.StartChangeAnimation(_MainBCenterBrakePedalCalibrationFragment);
 		}else if (AEBReq == 1){
@@ -367,6 +373,7 @@ public class MainBBaseFragment extends ParentFragment{
 		AEBReq = CAN1Comm.Get_RequestAEB_PGN61184_201();	
 		
 		_MainBodyShiftAnimation = new MainBodyShiftAnimation(ParentActivity, LayoutBody);
+		_MainBVirtualKeyShiftAnimation = new MainBodyShiftAnimation(ParentActivity, framelayoutVirtualKey);
 		CenterAnimation = new ChangeFragmentAnimation(ParentActivity, framelayoutCenter, R.id.FrameLayout_screen_main_b_center,_MainBCenterFragment);
 		RightUpChangeAnimation = new ChangeFragmentAnimation(ParentActivity, framelayoutRightUp, R.id.FrameLayout_screen_main_b_rightup,_MainBRightUpEngineFragment);
 		RightDownChangeAnimation = new ChangeFragmentAnimation(ParentActivity, framelayoutRightDown, R.id.FrameLayout_screen_main_b_rightdown,_MainBRightDownTMFragment);
@@ -558,7 +565,9 @@ public class MainBBaseFragment extends ParentFragment{
 	}
 	public void DestroyAnimation(){
 		_MainBodyShiftAnimation.CancelShiftLayoutTimer();
+		_MainBVirtualKeyShiftAnimation.CancelShiftLayoutTimer();
 		_MainBodyShiftAnimation 	 = null;
+		_MainBVirtualKeyShiftAnimation = null;
 		CenterAnimation 	 = null;
 		RightUpChangeAnimation 	 = null;
 		RightDownChangeAnimation 	 = null;
@@ -906,13 +915,14 @@ public class MainBBaseFragment extends ParentFragment{
 		ParentActivity.ScreenIndex = ParentActivity.SCREEN_STATE_MAIN_B_TOP;
 		
 		_MainBodyShiftAnimation.StartShiftZeroAnimation();
+		_MainBVirtualKeyShiftAnimation.StartShiftZeroAnimation();
 		
 		CenterAnimation.StartChangeAnimation(_MainBCenterFragment);
 		RightUpChangeAnimation.StartChangeAnimation(_MainBRightUpEngineFragment);
 		RightDownChangeAnimation.StartChangeAnimation(_MainBRightDownTMFragment);
 		LeftUpChangeAnimation.StartChangeAnimation(_MainBLeftUpMachineStatusFragment);
 		LeftDownChangeAnimation.StartChangeAnimation(_MainBLeftDownHourOdoFragment);
-		VirtualKeyChangeAnimation.StartChangeAnimation(_MainBVirtualKeyFragment);
+		
 		
 		_RightUpShiftAnimation.StartShiftAnimation();
 		_RightDownShiftAnimation.StartShiftAnimation();
@@ -925,9 +935,10 @@ public class MainBBaseFragment extends ParentFragment{
 		
 		KeyTitleChangeAnimation.StartDisappearAnimation();
 		KeyBodyChangeAnimation.StartDisappearAnimation();
-
+		VirtualKeyChangeAnimation.StartDisappearAnimation();
 		
-		_MainBIndicatorFragment.EnableVirtualKey();
+		IndicatorChangeAnimation.StartChangeAnimation(_MainBIndicatorFragment);
+	
 		
 		
 	}
@@ -936,6 +947,7 @@ public class MainBBaseFragment extends ParentFragment{
 		ParentActivity.ScreenIndex = ParentActivity.SCREEN_STATE_MAIN_B_TOP;
 		
 		_MainBodyShiftAnimation.StartShiftZeroAnimation();
+		_MainBVirtualKeyShiftAnimation.StartShiftZeroAnimation();
 		
 		CenterAnimation.StartChangeAnimation(_MainBCenterFragment);
 		RightUpChangeAnimation.StartChangeAnimation(_MainBRightUpEngineFragment);
@@ -949,9 +961,7 @@ public class MainBBaseFragment extends ParentFragment{
 		_RightDownBGAppearAnimation.StartAnimation();
 		_LeftUpBGAppearAnimation.StartAnimation();
 		_LeftDownBGAppearAnimation.StartAnimation();
-		
-		_VirtualKeyAppearAnimation.StartAnimation();
-		
+	
 		
 		_RightDownShiftAnimation.StartShiftAnimation();
 		_LeftUpShiftAnimation.StartShiftAnimation();
@@ -960,15 +970,12 @@ public class MainBBaseFragment extends ParentFragment{
 		_LeftUpBGShiftAnimation.StartShiftAnimation();
 		_LeftDownBGShiftAnimation.StartShiftAnimation();
 				
-			
-		_MainBIndicatorFragment.EnableVirtualKey();
-		
-		
 	}
 	public void showRightDowntoDefaultScreenAnimation(){
 		ParentActivity.ScreenIndex = ParentActivity.SCREEN_STATE_MAIN_B_TOP;
 		
 		_MainBodyShiftAnimation.StartShiftZeroAnimation();
+		_MainBVirtualKeyShiftAnimation.StartShiftZeroAnimation();
 		
 		CenterAnimation.StartChangeAnimation(_MainBCenterFragment);
 		RightDownChangeAnimation.StartChangeAnimation(_MainBRightDownTMFragment);
@@ -982,7 +989,7 @@ public class MainBBaseFragment extends ParentFragment{
 		_RightUpBGAppearAnimation.StartAnimation();
 		_LeftUpBGAppearAnimation.StartAnimation();
 		_LeftDownBGAppearAnimation.StartAnimation();
-		_VirtualKeyAppearAnimation.StartAnimation();
+		
 		
 		_RightUpShiftAnimation.StartShiftAnimation();
 		_LeftUpShiftAnimation.StartShiftAnimation();
@@ -993,7 +1000,7 @@ public class MainBBaseFragment extends ParentFragment{
 		_LeftDownBGShiftAnimation.StartShiftAnimation();
 				
 			
-		_MainBIndicatorFragment.EnableVirtualKey();
+	
 		
 		
 	}
@@ -1002,6 +1009,7 @@ public class MainBBaseFragment extends ParentFragment{
 		ParentActivity.ScreenIndex = ParentActivity.SCREEN_STATE_MAIN_B_TOP;
 		
 		_MainBodyShiftAnimation.StartShiftZeroAnimation();
+		_MainBVirtualKeyShiftAnimation.StartShiftZeroAnimation();
 		
 		CenterAnimation.StartChangeAnimation(_MainBCenterFragment);
 		LeftDownChangeAnimation.StartChangeAnimation(_MainBLeftDownHourOdoFragment);
@@ -1016,7 +1024,7 @@ public class MainBBaseFragment extends ParentFragment{
 		_LeftUpBGAppearAnimation.StartAnimation();
 		_RightDownBGAppearAnimation.StartAnimation();
 		
-		_VirtualKeyAppearAnimation.StartAnimation();
+	
 		
 		_RightUpShiftAnimation.StartShiftAnimation();
 		_LeftUpShiftAnimation.StartShiftAnimation();
@@ -1027,7 +1035,7 @@ public class MainBBaseFragment extends ParentFragment{
 		_RightDownBGShiftAnimation.StartShiftAnimation();
 				
 			
-		_MainBIndicatorFragment.EnableVirtualKey();
+	
 		
 		
 	}
@@ -1035,6 +1043,7 @@ public class MainBBaseFragment extends ParentFragment{
 		ParentActivity.ScreenIndex = ParentActivity.SCREEN_STATE_MAIN_B_TOP;
 		
 		_MainBodyShiftAnimation.StartShiftZeroAnimation();
+		_MainBVirtualKeyShiftAnimation.StartShiftZeroAnimation();
 		
 		CenterAnimation.StartChangeAnimation(_MainBCenterFragment);
 		LeftUpChangeAnimation.StartChangeAnimation(_MainBLeftUpMachineStatusFragment);
@@ -1049,7 +1058,7 @@ public class MainBBaseFragment extends ParentFragment{
 		_LeftDownBGAppearAnimation.StartAnimation();
 		_RightDownBGAppearAnimation.StartAnimation();
 		
-		_VirtualKeyAppearAnimation.StartAnimation();
+	
 		
 		_RightUpShiftAnimation.StartShiftAnimation();
 		_LeftDownShiftAnimation.StartShiftAnimation();
@@ -1060,7 +1069,7 @@ public class MainBBaseFragment extends ParentFragment{
 		_RightDownBGShiftAnimation.StartShiftAnimation();
 				
 			
-		_MainBIndicatorFragment.EnableVirtualKey();
+		
 		
 		
 	}
@@ -1071,6 +1080,7 @@ public class MainBBaseFragment extends ParentFragment{
 	public void showKeytoDefaultScreenAnimation(){
 		ParentActivity.ScreenIndex = ParentActivity.SCREEN_STATE_MAIN_B_TOP;
 		_MainBodyShiftAnimation.StartShiftZeroAnimation();
+		_MainBVirtualKeyShiftAnimation.StartShiftZeroAnimation();
 		
 		_BodyAppearAnimation.StartAnimation();
 		_KeyDisappearAnimation.StartAnimation();
@@ -1080,7 +1090,7 @@ public class MainBBaseFragment extends ParentFragment{
 		RightDownChangeAnimation.StartChangeAnimation(_MainBRightDownTMFragment);
 		LeftUpChangeAnimation.StartChangeAnimation(_MainBLeftUpMachineStatusFragment);
 		LeftDownChangeAnimation.StartChangeAnimation(_MainBLeftDownHourOdoFragment);
-		VirtualKeyChangeAnimation.StartChangeAnimation(_MainBVirtualKeyFragment);
+		
 		
 		_RightUpShiftAnimation.StartShiftAnimation();
 		_RightDownShiftAnimation.StartShiftAnimation();
@@ -1094,12 +1104,13 @@ public class MainBBaseFragment extends ParentFragment{
 		KeyTitleChangeAnimation.StartDisappearAnimation();
 		KeyBodyChangeAnimation.StartDisappearAnimation();
 
+	
 		
-		_MainBIndicatorFragment.EnableVirtualKey();
 	}
 	public void showQuickScreenAnimation(){
 		
 		_MainBodyShiftAnimation.StartShiftZeroAnimation();
+		_MainBVirtualKeyShiftAnimation.StartShiftZeroAnimation();
 	
 		CenterAnimation.StartChangeAnimation(_MainBCenterQuickFragment);
 		RightUpChangeAnimation.StartChangeAnimation(_MainBRightUpQuickFragment);
@@ -1119,8 +1130,21 @@ public class MainBBaseFragment extends ParentFragment{
 		
 		KeyTitleChangeAnimation.StartDisappearAnimation();
 		KeyBodyChangeAnimation.StartDisappearAnimation();
+		VirtualKeyChangeAnimation.StartChangeAnimation(_MainBVirtualKeyFragment);
 		
-		_MainBIndicatorFragment.EnableVirtualKey();
+		IndicatorChangeAnimation.StartDisappearAnimation();
+	
+	}
+	
+	public void showVirtualKeytoQuickScreenAnimation(){
+//		_BodyAppearAnimation.StartAnimation();
+		_MainBVirtualKeyShiftAnimation.StartShiftZeroAnimation();
+	}
+	
+	public void showVritualKeyScreenAnimation(){
+//		_BodyDisappearAnimation.StartAnimation();
+//		_KeyDisappearAnimation.StartAnimation();
+		_MainBVirtualKeyShiftAnimation.StartShiftVirtualKeyAnimation();
 	}
 	
 	public void showKeyScreenAnimation(){
@@ -1135,8 +1159,8 @@ public class MainBBaseFragment extends ParentFragment{
 			_KeyTitleBGShiftAnimation.StartShiftAnimation();
 			_KeyBodyBGShiftAnimation.StartShiftAnimation();
 			VirtualKeyChangeAnimation.StartDisappearAnimation();
+		
 			
-			_MainBIndicatorFragment.DisableVirtualKey();
 		}else{
 
 		}
