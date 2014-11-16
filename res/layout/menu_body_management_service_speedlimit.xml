@@ -100,7 +100,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
-                android:src="@drawable/menu_mode_engine_auto_stop_slide_bg" />
+                android:src="@drawable/menu_management_speed_limit_slide_bg" />
 
             <SeekBar
                 android:id="@+id/seekBar_menu_body_management_service_speedlimit"

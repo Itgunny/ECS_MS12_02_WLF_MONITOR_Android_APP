@@ -15,6 +15,7 @@ import taeha.wheelloader.fseries_monitor.popup.EngineAutoShutdownCountPopup;
 import taeha.wheelloader.fseries_monitor.popup.EngineModePopup;
 import taeha.wheelloader.fseries_monitor.popup.EngineWarmingUpPopup;
 import taeha.wheelloader.fseries_monitor.popup.KickDownPopup;
+import taeha.wheelloader.fseries_monitor.popup.MaintReplacePopup;
 import taeha.wheelloader.fseries_monitor.popup.OperationHistoryInitPopup;
 import taeha.wheelloader.fseries_monitor.popup.PressureCalibrationResultPopup;
 import taeha.wheelloader.fseries_monitor.popup.QuickCouplerPopupLocking1;
@@ -189,6 +190,10 @@ public class Home extends Activity {
 	public  static final int SCREEN_STATE_MENU_MANAGEMENT_MACHINESECURITY_SMARTKEY			= 0x23140000;
 	public  static final int SCREEN_STATE_MENU_MANAGEMENT_MACHINESECURITY_END				= 0x231FFFFF;
 	public  static final int SCREEN_STATE_MENU_MANAGEMENT_MAINTENANCE_TOP					= 0x23200000;
+	public  static final int SCREEN_STATE_MENU_MANAGEMENT_MAINTENANCE_DETAIL_TOP			= 0x23210000;
+	public  static final int SCREEN_STATE_MENU_MANAGEMENT_MAINTENANCE_DETAIL_REPLACE		= 0x23211000;
+	public  static final int SCREEN_STATE_MENU_MANAGEMENT_MAINTENANCE_DETAIL_CHANGECYCLE	= 0x23212000;
+	public  static final int SCREEN_STATE_MENU_MANAGEMENT_MAINTENANCE_DETAIL_END			= 0x2321FFFF;
 	public  static final int SCREEN_STATE_MENU_MANAGEMENT_MAINTENANCE_END					= 0x232FFFFF;
 	public  static final int SCREEN_STATE_MENU_MANAGEMENT_CALIBRATION_TOP					= 0x23300000;
 	public  static final int SCREEN_STATE_MENU_MANAGEMENT_CALIBRATION_ANGLE_TOP				= 0x23310000;
@@ -269,6 +274,8 @@ public class Home extends Activity {
 	
 	public static final int STATE_INTERNAL_SPK			= 0;
 	public static final int STATE_EXTERNAL_AUX	 		= 1;
+	
+	public static final int MAX_AS_LENGTH = 21;
 	////////////////////////////////////////////////////
 	
 	//Resource//////////////////////////////////////////
@@ -360,6 +367,7 @@ public class Home extends Activity {
 	SoundOutputPopup						_SoundOutputPopup;
 	BrakePedalCalibrationPopup				_BrakePedalCalibrationPopup;
 	EngineAutoShutdownCountPopup			_EngineAutoShutdownCountPopup;
+	MaintReplacePopup						_MaintReplacePopup;
 	
 	// Timer
 	private Timer mSeatBeltTimer = null;
@@ -399,6 +407,10 @@ public class Home extends Activity {
 	// Engine Auto Shutdown
 	int EngineAutoShutdownRemainingTime;
 	int EngineAutoShutdownMode;
+	
+	// AS
+	public String strASNumDash;
+	public String strASNum;
 	////////////////////////////////////////////////////
 	
 	//Fragment//////////////////////////////////////////
@@ -518,6 +530,7 @@ public class Home extends Activity {
 		_SoundOutputPopup = new SoundOutputPopup(this);
 		_BrakePedalCalibrationPopup = new BrakePedalCalibrationPopup(this);
 		_EngineAutoShutdownCountPopup = new EngineAutoShutdownCountPopup(this);
+		_MaintReplacePopup = new MaintReplacePopup(this);
 				
 	}
 	public void InitAnimation(){
@@ -562,6 +575,49 @@ public class Home extends Activity {
 		}
 		return true;
 	}
+	public void SaveASPhoneNumber(){
+		byte[] ASNum;
+		int Index = 0;
+		String strASNum = "";
+		ASNum = new byte[MAX_AS_LENGTH];
+		for(int i = 0; i < MAX_AS_LENGTH; i++){
+			ASNum[i] = (byte)0xFF;
+		}
+		
+		ASNum = CAN1Comm.Get_ASPhoneNumber_PGN61184_151();
+		CAN1Comm.Set_ASPhoneNumber_1095_PGN65425(ASNum);
+		CAN1Comm.TxCANToMCU(145);
+		
+		for(int i = 0; i < MAX_AS_LENGTH; i++){
+			if(ASNum[i] == 0x2A)
+				break;
+			else
+				Index++;
+		}
+
+		
+		if(Index > 0)
+		{
+			for(int i = 0; i < Index; i++){
+				if(ASNum[i] == 0x23){
+					strASNum += "#";
+				}
+				else{
+					strASNum += Integer.toString(ASNum[i]-0x30);
+				}
+				
+			}
+		}
+		
+		SharedPreferences SharePref = getSharedPreferences("Home", 0);
+		SharedPreferences.Editor edit = SharePref.edit();
+
+		edit.putString("strASNum", strASNum);
+		
+		edit.commit();
+		Log.d(TAG,"SaveASPhoneNumber : " + strASNum);
+	}
+	
 	public void SaveCID(int _componentcode, int _manufacturecode, byte[] _componentbasicinformation){
 		String strBasicInfo;
 		
@@ -622,7 +678,9 @@ public class Home extends Activity {
 		SoundState = SharePref.getInt("SoundState", STATE_INTERNAL_SPK);
 		
 		SmartKeyUse = SharePref.getInt("SmartKeyUse", CAN1CommManager.DATA_STATE_SMARTKEY_USE_OFF);
-	
+		
+		strASNumDash = SharePref.getString("strASNumDash", "");
+		strASNum = SharePref.getString("strASNum", "");
 		Log.d(TAG,"LoadPref");
 	}
 	/////////////////////////////////////////////////////
@@ -1235,6 +1293,20 @@ public class Home extends Activity {
 		HomeDialog = _EngineAutoShutdownCountPopup;
 		HomeDialog.show();
 	}
+	public void showMaintReplace(){
+		if(AnimationRunningFlag == true)
+			return;
+		else
+			StartAnimationRunningTimer();
+		
+		if(HomeDialog != null){
+			HomeDialog.dismiss();
+			HomeDialog = null;
+		}
+		
+		HomeDialog = _MaintReplacePopup;
+		HomeDialog.show();
+	}
 	
 	/////////////////////////////////////////////////////
 	//Timer//////////////////////////////////////////////
@@ -1476,20 +1548,24 @@ public class Home extends Activity {
 			// TODO Auto-generated method stub
 			// TODO Auto-generated method stub
 			Log.d(TAG,"mSendCommandTimer");	
-			
+						
 			try {
 				if(nSendCommandTimerIndex == 0){
 					
-					CAN1Comm.Set_MaintenanceCommant_1097_PGN61184_12(0);
+					CAN1Comm.Set_MaintenanceCommant_1097_PGN61184_12(CAN1CommManager.COMMAND_MAINTENANCE_ITEM_LIST_REQUEST);
 					CAN1Comm.TxCANToMCU(12);
 					
 				}
 				else if(nSendCommandTimerIndex == 1){
+					CAN1Comm.Set_MaintenanceCommant_1097_PGN61184_12(CAN1CommManager.MAINTENANCE_ALARM_LAMP_ON_ITEM_LIST_REQUEST);
+					CAN1Comm.TxCANToMCU(12);						
+				}
+				else if(nSendCommandTimerIndex == 2){
 					CAN1Comm.Set_BoomDetentMode_223_PGN61184_123(7);
 					CAN1Comm.Set_BucketDetentMode_224_PGN61184_123(7);
 					CAN1Comm.TxCANToMCU(123);							
 				}
-				else if(nSendCommandTimerIndex == 2){
+				else if(nSendCommandTimerIndex == 3){
 					CAN1Comm.Set_SettingSelection_PGN61184_105(0xF);
 					CAN1Comm.Set_SpeedometerFrequency_534_PGN61184_105(0xFFFF);
 					CAN1Comm.Set_AutoRideControlOperationSpeedForward_PGN61184_105(0xF);
@@ -1499,7 +1575,7 @@ public class Home extends Activity {
 					CAN1Comm.Set_SettingSelection_PGN61184_105(15);
 				}
 				
-				else if (nSendCommandTimerIndex == 3){
+				else if (nSendCommandTimerIndex == 4){
 					CAN1Comm.Set_WeightOffsetSetting_PGN61184_62(0); //STATE_WEIGHT_OFFSET_SETTING_CALL
 					CAN1Comm.Set_WeighingDisplayMode1_1910_PGN61184_62(WeighingDisplayIndex);
 					CAN1Comm.Set_SuddenChangeError_PGN61184_62(CAN1Comm.Get_SuddenChangeError_PGN65450());
@@ -1508,10 +1584,10 @@ public class Home extends Activity {
 					CAN1Comm.Set_WeightOffsetSetting_PGN61184_62(3);
 					CAN1Comm.Set_WeighingDisplayMode1_1910_PGN61184_62(15);
 				}	
-				else if (nSendCommandTimerIndex == 4){
+				else if (nSendCommandTimerIndex == 5){
 					CAN1Comm.TxCMDToMCU(CAN1Comm.CMD_VERSION,1);
 				}	
-				else if(nSendCommandTimerIndex == 5){
+				else if(nSendCommandTimerIndex == 6){
 					CAN1Comm.Set_AutomaticEngineShutdown_363_PGN61184_121(3);
 					CAN1Comm.Set_AutomaticEngineShutdownTypeControlByte_PGN61184_121(3);
 					CAN1Comm.Set_EngineShutdownCotrolByte_PGN61184_121(0xF);
@@ -1955,7 +2031,7 @@ public class Home extends Activity {
 			strMin = GetNumberString(Min) + Unit1;
 		}
 		else{
-			strMin = GetNumberString(Min) + Unit1 + Integer.toString(Sec) + Unit2;
+			strMin = GetNumberString(Min) + Unit1 +  " " + Integer.toString(Sec) + Unit2;
 		}
 		
 		return strMin;
@@ -2008,6 +2084,80 @@ public class Home extends Activity {
 		}
 		
 		return strPosition;
+	}
+	
+	public String GetASPhoneNum(byte[] as){
+		String strAS = "";
+		if(as.length == 0){
+	
+		}
+		else if(as.length <= 4){
+			for(int i = 0; i < as.length; i++){
+				strAS += Integer.toString(as[i]);
+			}
+			
+		}
+		else if(as.length <= 8){
+			for(int i = 0; i < 4; i++){
+				strAS += Integer.toString(as[i]);
+			}
+			strAS += "-";
+			for(int i = 4; i < as.length; i++){
+				strAS += Integer.toString(as[i]);
+			}
+		}
+		else if(as.length <= 12){
+			for(int i = 0; i < 4; i++){
+				strAS += Integer.toString(as[i]);
+			}
+			strAS += "-";
+			for(int i = 4; i < 8; i++){
+				strAS += Integer.toString(as[i]);
+			}
+			strAS += "-";
+			for(int i = 8; i < as.length; i++){
+				strAS += Integer.toString(as[i]);
+			}
+		}
+		else if(as.length <= 16){
+			for(int i = 0; i < 4; i++){
+				strAS += Integer.toString(as[i]);
+			}
+			strAS += "-";
+			for(int i = 4; i < 8; i++){
+				strAS += Integer.toString(as[i]);
+			}
+			strAS += "-";
+			for(int i = 8; i < 12; i++){
+				strAS += Integer.toString(as[i]);
+			}
+			strAS += "-";
+			for(int i = 12; i < as.length; i++){
+				strAS += Integer.toString(as[i]);
+			}
+		}
+		else if(as.length <= 20){
+			for(int i = 0; i < 4; i++){
+				strAS += Integer.toString(as[i]);
+			}
+			strAS += "-";
+			for(int i = 4; i < 8; i++){
+				strAS += Integer.toString(as[i]);
+			}
+			strAS += "-";
+			for(int i = 8; i < 12; i++){
+				strAS += Integer.toString(as[i]);
+			}
+			strAS += "-";
+			for(int i = 12; i < 16; i++){
+				strAS += Integer.toString(as[i]);
+			}
+			strAS += "-";
+			for(int i = 16; i < as.length; i++){
+				strAS += Integer.toString(as[i]);
+			}
+		}
+		return strAS;
 	}
 	/////////////////////////////////////////////////////
 }

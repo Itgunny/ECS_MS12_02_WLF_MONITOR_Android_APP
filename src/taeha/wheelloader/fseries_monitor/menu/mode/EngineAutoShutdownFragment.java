@@ -329,7 +329,7 @@ public class EngineAutoShutdownFragment extends ParentFragment{
 		ParentActivity.EngineAutoShutdownTime = EngineAutoShutdownTime;
 		ParentActivity.EngineAutoShutdownStatus = EngineAutoShutdownStatus;
 		ParentActivity.EngineAutoShutdownType = EngineAutoShutdownType;
-		ParentActivity._MenuBaseFragment.showBodyEngineAutoShutdownPWFrame();
+		ParentActivity._MenuBaseFragment.showBodyEngineAutoShutdownPW();
 	}
 	/////////////////////////////////////////////////////////////////////
 	public void LayoutOnOff(boolean flag){

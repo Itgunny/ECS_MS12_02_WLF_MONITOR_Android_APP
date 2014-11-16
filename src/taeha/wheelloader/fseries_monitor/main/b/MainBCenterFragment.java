@@ -105,7 +105,7 @@ public class MainBCenterFragment extends ParentFragment{
 			EcoGaugeLevel = 0;
 		}
 		
-		_EcoGaugeAnimation = new BarAnimation(ParentActivity, imgViewEcoBar,EcoGaugeLevel);
+	//	_EcoGaugeAnimation = new BarAnimation(ParentActivity, imgViewEcoBar,EcoGaugeLevel);
 		
 	}
 	boolean Temp = false;
@@ -166,6 +166,7 @@ public class MainBCenterFragment extends ParentFragment{
 	}
 	//////////////////////////////////////////////////////////////////////
 	public void EcoGaugeDisplay(int _level, int _status) {
+		float Scale = 0;
 		switch (_status) {
 			case CAN1CommManager.DATA_STATE_ECO_GREEN:
 			default:
@@ -173,13 +174,13 @@ public class MainBCenterFragment extends ParentFragment{
 
 				break;
 			case CAN1CommManager.DATA_STATE_ECO_YELLOW:
-
+				imgViewEcoBar.setImageResource(R.drawable.main_center_eco_yellow_all);
 				break;
 			case CAN1CommManager.DATA_STATE_ECO_RED:
-
+				imgViewEcoBar.setImageResource(R.drawable.main_center_eco_red_all);
 				break;
 			case CAN1CommManager.DATA_STATE_ECO_WHITE:
-
+				imgViewEcoBar.setImageResource(R.drawable.main_center_eco_white_all);
 				break;
 		}
 
@@ -188,8 +189,9 @@ public class MainBCenterFragment extends ParentFragment{
 		} else if (_level < 0) {
 			_level = 0;
 		}
-
-		_EcoGaugeAnimation.SetScale(_level);
+		Scale = (float) ((float) _level / 100.0);
+		imgViewEcoBar.setScaleX(Scale);
+		//_EcoGaugeAnimation.SetScale(_level);
 	}
 	//////////////////////////////////////////////////////////////////////
 }

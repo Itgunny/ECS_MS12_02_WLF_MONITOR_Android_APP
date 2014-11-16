@@ -167,7 +167,7 @@ public class MainBRightDownTMFragment extends ParentFragment{
 			}
 		} catch (IllegalStateException e) {
 			// TODO: handle exception
-			Log.e(TAG,"IllegalStateException");
+			Log.e(TAG,"IllegalStateException TMCCOModeDisplay");
 		}
 	}
 	public void TMShiftModeDisplay(int Data){
@@ -190,7 +190,7 @@ public class MainBRightDownTMFragment extends ParentFragment{
 			}
 		} catch (IllegalStateException e) {
 			// TODO: handle exception
-			Log.e(TAG,"IllegalStateException");
+			Log.e(TAG,"IllegalStateException TMShiftModeDisplay");
 		}
 	}
 	public void TMTCLockUpDisplay(int Data){
@@ -207,7 +207,7 @@ public class MainBRightDownTMFragment extends ParentFragment{
 			}
 		} catch (IllegalStateException e) {
 			// TODO: handle exception
-			Log.e(TAG,"IllegalStateException");
+			Log.e(TAG,"IllegalStateException TMTCLockUpDisplay");
 		}
 	}
 	public void ClickCCOMode(){

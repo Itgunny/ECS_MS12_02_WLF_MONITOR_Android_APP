@@ -296,6 +296,44 @@ public class CAN1CommManager extends ICAN1CommManager.Stub{		// ttySAC1(Linux), 
 	public static final int	DATA_STATE_WEIGHT_OFFSET_SETTING_WORKTOOL_2	= 2;
 	public static final int	DATA_STATE_WEIGHT_OFFSET_SETTING_WORKTOOL_3	= 3;
 	
+	public static final int COMMAND_MAINTENANCE_ITEM_LIST_REQUEST						= 0;
+	public static final int MAINTETNANCE_INFORMATION_REQUEST							= 1;
+	public static final int REPLACEMENT_CONFIRMAION										= 2;
+	public static final int MAINTENANCE_INTERVAL_CHANGE									= 3;
+	public static final int MAINTENANCE_HISTORY_REQUEST									= 4;
+	public static final int MAINTENANCE_ITEM_LIST_INFORMATION_REQUEST					= 5;
+	public static final int MAINTENANCE_ALARM_LAMP_ON_ITEM_LIST_REQUEST					= 6;
+	public static final int MAINTENANCE_ALARM_LAMP_ON_ITEM_LIST_INFORMATION_REQUEST		= 7;
+	
+	public static final int RESERVED 										= 0;
+	public static final int ENGINE_OIL 										= 1;
+	public static final int TRAVEL_REDUCTION_GEAR_CASE						= 2;
+	public static final int SWING_REDUCTION_GEAR_CASE						= 3;
+	public static final int HYDRAULIC_OIL									= 4;
+	public static final int PILOT_LINE_FILTER_ELEMENT						= 5;
+	public static final int HYDRAULIC_TANK_DRAIN_FILTER_CARTRIDGE			= 6;
+	public static final int HYDRAULIC_OIL_RETURN_FILTER						= 7;
+	public static final int ENGINE_OIL_FILTER								= 8;
+	public static final int FUEL_FILTER_ELEMENT								= 9;
+	public static final int PRE_FILTER										= 10;
+	public static final int HYDRAULIC_TANK_AIR_BREATHER_ELEMENT				= 11;
+	public static final int AIR_CLEANER_ELEMENT								= 12;
+	public static final int RADIATOR_COOLANT								= 13;
+	public static final int SWING_BEARING_GEAR_PINION_GREASE				= 14;
+	public static final int TRANSMISSION_OIL								= 15;
+	public static final int TRANSMISSION_OIL_FILTER							= 16;
+	public static final int FRONT_AXLE_DIFFERENTIAL_GEAR_OIL				= 17;
+	public static final int REAR_AXLE_DIFFERENTIAL_GEAR_OIL					= 18;
+	public static final int AXLE_PLANETARY_GEAR_OIL							= 19;
+	public static final int BRAKE_COOLING_OIL								= 20;
+	public static final int HYDRAULIC_OIL_STRAINER							= 21;
+	public static final int CRANKCASE_VENTILATION_FILTER					= 22;
+	public static final int AIR_CON_HEATER_OUTER_FILTER						= 23;
+	
+	public static final int SEND_COMMAND_FLAG_INFO							= 0;
+	public static final int SEND_COMMAND_FLAG_ALRAM							= 1;
+	public static final int SEND_COMMAND_FLAG_HISTORY						= 1;
+	
 	public static final int LENGTH_COMPONENTBASICINFORMATION	= 37;
 	public static final int LENGTH_SOFTWAREIDENTIFICATION_ECM	= 48;
 	public static final int LENGTH_SOFTWAREIDENTIFICATION_TCU	= 67;

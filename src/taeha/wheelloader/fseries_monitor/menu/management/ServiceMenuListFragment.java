@@ -61,7 +61,7 @@ public class ServiceMenuListFragment extends MenuBodyList_ParentFragment{
 		InitList();
 		ParentActivity._MenuBaseFragment._MenuListTitleFragment.setBackButtonEnable(true);
 		ParentActivity.ScreenIndex = ParentActivity.SCREEN_STATE_MENU_MANAGEMENT_SERVICE_TOP;
-		ParentActivity._MenuBaseFragment._MenuListTitleFragment.SetTitleText(ParentActivity.getResources().getString(R.string.Service_Contact));
+		ParentActivity._MenuBaseFragment._MenuListTitleFragment.SetTitleText(ParentActivity.getResources().getString(R.string.Service_Menu));
 		return mRoot;
 	}
 	

@@ -20,7 +20,7 @@ public class ServiceMenuPasswordFragment extends PasswordFragment{
 		
 		ParentActivity._MenuBaseFragment._MenuListTitleFragment.setBackButtonEnable(true);
 		ParentActivity.ScreenIndex = ParentActivity.SCREEN_STATE_MENU_MANAGEMENT_SERVICE_PW;
-		ParentActivity._MenuBaseFragment._MenuListTitleFragment.SetTitleText(ParentActivity.getResources().getString(R.string.Service_Contact));
+		ParentActivity._MenuBaseFragment._MenuListTitleFragment.SetTitleText(ParentActivity.getResources().getString(R.string.Service_Menu));
 		SetTextIndicatorTitle(2);
 		return mRoot;
 	}

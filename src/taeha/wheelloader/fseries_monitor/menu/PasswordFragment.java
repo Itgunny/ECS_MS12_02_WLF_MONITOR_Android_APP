@@ -36,22 +36,22 @@ public abstract class PasswordFragment extends ParentFragment{
 
 	//////////////////////////////////////////////////
 	//RESOURCE////////////////////////////////////////
-	TextView textViewNum1;
-	TextView textViewNum2;
-	TextView textViewNum3;
-	TextView textViewNum4;
-	TextView textViewNum5;
-	TextView textViewNum6;
-	TextView textViewNum7;
-	TextView textViewNum8;
-	TextView textViewNum9;
-	TextView textViewNum0;
+	protected TextView textViewNum1;
+	protected TextView textViewNum2;
+	protected TextView textViewNum3;
+	protected TextView textViewNum4;
+	protected TextView textViewNum5;
+	protected TextView textViewNum6;
+	protected TextView textViewNum7;
+	protected TextView textViewNum8;
+	protected TextView textViewNum9;
+	protected TextView textViewNum0;
 	
-	TextView textViewPassword;
-	TextView textViewTitle;
+	protected TextView textViewPassword;
+	protected TextView textViewTitle;
 	
-	ImageButton imgbtnBack;
-	ImageButton imgbtnEnter;
+	protected ImageButton imgbtnBack;
+	protected ImageButton imgbtnEnter;
 	//////////////////////////////////////////////////
 	
 	//VALUABLE////////////////////////////////////////

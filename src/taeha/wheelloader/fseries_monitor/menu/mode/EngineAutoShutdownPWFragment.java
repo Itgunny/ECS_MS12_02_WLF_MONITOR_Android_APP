@@ -5,24 +5,66 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
+import android.widget.TextView;
 import taeha.wheelloader.fseries_monitor.main.Home;
 import taeha.wheelloader.fseries_monitor.main.R;
 import taeha.wheelloader.fseries_monitor.menu.PasswordFragment;
 
 public class EngineAutoShutdownPWFragment extends PasswordFragment{
 
+	ImageButton imgbtnCancel;
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
-		super.onCreateView(inflater, container, savedInstanceState);
+		//super.onCreateView(inflater, container, savedInstanceState);
 		 TAG = "EngineAutoShutdownPWFragment";
 		Log.d(TAG, "onCreateView");		
-		
+		mRoot = inflater.inflate(R.layout.menu_body_mode_engineautoshutdown_pw, null);
+		InitResource();
+		InitValuables();
+		InitButtonListener();
 		SetTextIndicatorTitle(1);
+		
+		ParentActivity.ScreenIndex = ParentActivity.SCREEN_STATE_MENU_MODE_ETC_AUTOSHUTDOWN_PW;
+		ParentActivity._MenuBaseFragment._MenuInterTitleFragment.SetTitleText(ParentActivity.getResources().getString(R.string.Engine_Auto_Shutdown));
 		return mRoot;
 	}
-
+	
+	@Override
+	protected void InitResource() {
+		// TODO Auto-generated method stub
+		textViewNum1 = (TextView)mRoot.findViewById(R.id.textView_menu_body_mode_engineautoshutdown_pw_num_1);
+		textViewNum2 = (TextView)mRoot.findViewById(R.id.textView_menu_body_mode_engineautoshutdown_pw_num_2);
+		textViewNum3 = (TextView)mRoot.findViewById(R.id.textView_menu_body_mode_engineautoshutdown_pw_num_3);
+		textViewNum4 = (TextView)mRoot.findViewById(R.id.textView_menu_body_mode_engineautoshutdown_pw_num_4);
+		textViewNum5 = (TextView)mRoot.findViewById(R.id.textView_menu_body_mode_engineautoshutdown_pw_num_5);
+		textViewNum6 = (TextView)mRoot.findViewById(R.id.textView_menu_body_mode_engineautoshutdown_pw_num_6);
+		textViewNum7 = (TextView)mRoot.findViewById(R.id.textView_menu_body_mode_engineautoshutdown_pw_num_7);
+		textViewNum8 = (TextView)mRoot.findViewById(R.id.textView_menu_body_mode_engineautoshutdown_pw_num_8);
+		textViewNum9 = (TextView)mRoot.findViewById(R.id.textView_menu_body_mode_engineautoshutdown_pw_num_9);
+		textViewNum0 = (TextView)mRoot.findViewById(R.id.textView_menu_body_mode_engineautoshutdown_pw_num_0);
+		
+		textViewTitle = (TextView)mRoot.findViewById(R.id.textView_menu_body_mode_engineautoshutdown_pw_text_title);
+		textViewPassword = (TextView)mRoot.findViewById(R.id.textView_menu_body_mode_engineautoshutdown_pw_text_data);
+		
+		imgbtnBack = (ImageButton)mRoot.findViewById(R.id.imageButton_menu_body_mode_engineautoshutdown_pw_num_back);
+		imgbtnEnter = (ImageButton)mRoot.findViewById(R.id.imageButton_menu_body_mode_engineautoshutdown_pw_num_enter);
+		imgbtnCancel = (ImageButton)mRoot.findViewById(R.id.ImageButton_menu_body_mode_engineautoshutdown_pw_low_cancel);
+	}
+	@Override
+	protected void InitButtonListener() {
+		super.InitButtonListener();
+		imgbtnCancel.setOnClickListener(new View.OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				ClickCancel();
+			}
+		});
+	}
 	@Override
 	public void showServicePasswordNextScreen() {
 		// TODO Auto-generated method stub
@@ -106,5 +148,12 @@ public class EngineAutoShutdownPWFragment extends PasswordFragment{
 		default:
 			break;
 		}
+	}
+	public void ClickCancel(){
+		if(ParentActivity.AnimationRunningFlag == true)
+			return;
+		else
+			ParentActivity.StartAnimationRunningTimer();
+		ParentActivity._MenuBaseFragment.showBodyEngineAutoShutdown();
 	}
 }

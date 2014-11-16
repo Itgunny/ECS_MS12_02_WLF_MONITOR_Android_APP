@@ -443,9 +443,13 @@ public class ClockFragment extends ParentFragment{
 	}
 	public void ClickHour(){
 		ClockIndex = 0;
+		CheckButton();
+		ClockDisplay(Hour,Min);
 	}
 	public void ClickMin(){
 		ClockIndex = 2;
+		CheckButton();
+		ClockDisplay(Hour,Min);
 	}
 	
 	/////////////////////////////////////////////////////////////////////

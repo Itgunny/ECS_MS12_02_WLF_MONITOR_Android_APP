@@ -2,6 +2,27 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent" >
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/RelativeLayout_menu_body_management_changephone_low"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_toLeftOf="@+id/RelativeLayout_menu_body_management_changephone_num" >
+
+        <TextView
+            android:id="@+id/textView_menu_body_management_changephone_phonenum"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:textSize="35sp" />
+
+    </RelativeLayout>
     
     <RelativeLayout
         android:id="@+id/RelativeLayout_menu_body_management_changephone_num"
@@ -160,9 +181,10 @@
             android:layout_alignLeft="@+id/textView_menu_body_management_changephone_num_3"
             android:layout_below="@+id/textView_menu_body_management_changephone_num_9"
             android:layout_marginTop="6dp"
+            android:alpha="0.5"
             android:background="@drawable/_selector_menu_body_num_normal_blue_btn1"
+            android:clickable="false"
             android:gravity="center"
-            android:text="@string/Next"
             android:textColor="@drawable/_selector_radio_txt_white_black"
             android:textSize="30sp" />
 

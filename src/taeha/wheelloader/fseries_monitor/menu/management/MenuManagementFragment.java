@@ -90,7 +90,7 @@ public class MenuManagementFragment extends MenuBodyList_ParentFragment{
 		setListTitle1(ParentActivity.getResources().getString(string.Machine_Security));
 		setListTitle2(ParentActivity.getResources().getString(string.Maintenance));
 		setListTitle3(ParentActivity.getResources().getString(string.Calibration));
-		setListTitle4(ParentActivity.getResources().getString(string.Service_Contact));
+		setListTitle4(ParentActivity.getResources().getString(string.Service_Menu));
 		setListTitle5(ParentActivity.getResources().getString(string.Change_AS_Phone_Number));
 	}
 
@@ -109,7 +109,12 @@ public class MenuManagementFragment extends MenuBodyList_ParentFragment{
 	@Override
 	public void ClickList2() {
 		// TODO Auto-generated method stub
+		if(ParentActivity.AnimationRunningFlag == true)
+			return;
+		else
+			ParentActivity.StartAnimationRunningTimer();
 		
+		ParentActivity._MenuBaseFragment.showBodyMaintenanceAnimation();
 	}
 
 	@Override

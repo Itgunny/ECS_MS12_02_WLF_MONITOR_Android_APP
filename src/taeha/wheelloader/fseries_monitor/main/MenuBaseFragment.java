@@ -17,6 +17,9 @@ import taeha.wheelloader.fseries_monitor.menu.management.MachineSecurityListFrag
 import taeha.wheelloader.fseries_monitor.menu.management.MachineSecurityPasswordChangeFragment;
 import taeha.wheelloader.fseries_monitor.menu.management.MachineSecurityPasswordFragment;
 import taeha.wheelloader.fseries_monitor.menu.management.MachineSecuritySmartKeyFragment;
+import taeha.wheelloader.fseries_monitor.menu.management.MaintenanceChangeCycleFragment;
+import taeha.wheelloader.fseries_monitor.menu.management.MaintenanceDetailFragment;
+import taeha.wheelloader.fseries_monitor.menu.management.MaintenanceFragment;
 import taeha.wheelloader.fseries_monitor.menu.management.MenuManagementFragment;
 import taeha.wheelloader.fseries_monitor.menu.management.PressureCalibration;
 import taeha.wheelloader.fseries_monitor.menu.management.ServiceMenuListFragment;
@@ -29,7 +32,7 @@ import taeha.wheelloader.fseries_monitor.menu.mode.CameraSettingFragment;
 import taeha.wheelloader.fseries_monitor.menu.mode.CoolingFanFragment;
 import taeha.wheelloader.fseries_monitor.menu.mode.DetentFragment;
 import taeha.wheelloader.fseries_monitor.menu.mode.EngineAutoShutdownFragment;
-import taeha.wheelloader.fseries_monitor.menu.mode.EngineAutoShutdownPWFrameFragment;
+import taeha.wheelloader.fseries_monitor.menu.mode.EngineAutoShutdownPWFragment;
 import taeha.wheelloader.fseries_monitor.menu.mode.EngineDelayShutdownFragment;
 import taeha.wheelloader.fseries_monitor.menu.mode.EngineSpeedFragment;
 import taeha.wheelloader.fseries_monitor.menu.mode.MaxFlowFragment;
@@ -113,8 +116,7 @@ public class MenuBaseFragment extends ParentFragment{
 	public CoolingFanFragment			_CoolingFanFragment;
 	public SpeedometerFreqFragment		_SpeedometerFreqFragment;
 	public WiperFragment				_WiperFragment;
-	public EngineAutoShutdownPWFrameFragment	_EngineAutoShutdownPWFrameFragment;
-	
+	public EngineAutoShutdownPWFragment	_EngineAutoShutdownPWFragment;
 	//Monitoring
 	public MachineMonitoringFragment			_MachineMonitoringFragment;
 	public OperationHistoryFragment				_OperationHistoryFragment;
@@ -146,6 +148,9 @@ public class MenuBaseFragment extends ParentFragment{
 	public ServiceMenuWeighingCompensationFragment		_ServiceMenuWeighingCompensationFragment;
 	public ServiceMenuSensorMonitoringFragment			_ServiceMenuSensorMonitoringFragment;
 	public ServiceMenuSensorMonitoringHiddenFragment	_ServiceMenuSensorMonitoringHiddenFragment;
+	public MaintenanceFragment							_MaintenanceFragment;
+	public MaintenanceDetailFragment					_MaintenanceDetailFragment;
+	public MaintenanceChangeCycleFragment				_MaintenanceChangeCycleFragment;
 	
 	//Preference
 	public BrightnessFragment						_BrightnessFragment;
@@ -253,7 +258,7 @@ public class MenuBaseFragment extends ParentFragment{
 		_CoolingFanFragment = new CoolingFanFragment();
 		_SpeedometerFreqFragment = new SpeedometerFreqFragment();
 		_WiperFragment = new WiperFragment();
-		_EngineAutoShutdownPWFrameFragment = new EngineAutoShutdownPWFrameFragment();
+		_EngineAutoShutdownPWFragment = new EngineAutoShutdownPWFragment();
 		
 		_MachineMonitoringFragment = new MachineMonitoringFragment();
 		_OperationHistoryFragment = new OperationHistoryFragment();
@@ -283,6 +288,9 @@ public class MenuBaseFragment extends ParentFragment{
 		_ServiceMenuWeighingCompensationFragment = new ServiceMenuWeighingCompensationFragment();
 		_ServiceMenuSensorMonitoringFragment = new ServiceMenuSensorMonitoringFragment();
 		_ServiceMenuSensorMonitoringHiddenFragment = new ServiceMenuSensorMonitoringHiddenFragment();
+		_MaintenanceFragment = new MaintenanceFragment();
+		_MaintenanceDetailFragment = new MaintenanceDetailFragment();
+		_MaintenanceChangeCycleFragment = new MaintenanceChangeCycleFragment();
 		_BrightnessFragment = new BrightnessFragment();
 		_ClockFragment = new ClockFragment();
 		_UnitFragment = new UnitFragment();
@@ -325,7 +333,7 @@ public class MenuBaseFragment extends ParentFragment{
 		transaction.detach(_CoolingFanFragment);
 		transaction.detach(_SpeedometerFreqFragment);
 		transaction.detach(_WiperFragment);
-		transaction.detach(_EngineAutoShutdownPWFrameFragment);
+		transaction.detach(_EngineAutoShutdownPWFragment);
 		transaction.detach(_MachineMonitoringFragment);
 		transaction.detach(_OperationHistoryFragment);
 		transaction.detach(_FaultHistoryFragment);
@@ -354,6 +362,9 @@ public class MenuBaseFragment extends ParentFragment{
 		transaction.detach(_ServiceMenuWeighingCompensationFragment);
 		transaction.detach(_ServiceMenuSensorMonitoringFragment);
 		transaction.detach(_ServiceMenuSensorMonitoringHiddenFragment);
+		transaction.detach(_MaintenanceFragment);
+		transaction.detach(_MaintenanceDetailFragment);
+		transaction.detach(_MaintenanceChangeCycleFragment);
 		transaction.detach(_BrightnessFragment);
 		transaction.detach(_ClockFragment);
 		transaction.detach(_UnitFragment);
@@ -552,10 +563,10 @@ public class MenuBaseFragment extends ParentFragment{
 		transaction.commit();
 		
 	}
-	public void showBodyEngineAutoShutdownPWFrame(){
+	public void showBodyEngineAutoShutdownPW(){
 		android.app.FragmentTransaction transaction = getFragmentManager().beginTransaction();
-		transaction.remove(_EngineAutoShutdownPWFrameFragment);
-		transaction.replace(R.id.FrameLayout_menu_inter_body, _EngineAutoShutdownPWFrameFragment);
+		transaction.remove(_EngineAutoShutdownPWFragment);
+		transaction.replace(R.id.FrameLayout_menu_inter_body, _EngineAutoShutdownPWFragment);
 		transaction.commit();
 		
 	}
@@ -708,6 +719,27 @@ public class MenuBaseFragment extends ParentFragment{
 		transaction.commit();
 		
 	}
+	public void showBodyMaintenance(){
+		android.app.FragmentTransaction transaction = getFragmentManager().beginTransaction();
+		transaction.remove(_MaintenanceFragment);
+		transaction.replace(R.id.FrameLayout_menu_inter_body, _MaintenanceFragment);
+		transaction.commit();
+		
+	}
+	public void showBodyMaintenanceDetail(){
+		android.app.FragmentTransaction transaction = getFragmentManager().beginTransaction();
+		transaction.remove(_MaintenanceDetailFragment);
+		transaction.replace(R.id.FrameLayout_menu_inter_body, _MaintenanceDetailFragment);
+		transaction.commit();
+		
+	}
+	public void showBodyMaintenanceChangeCycle(){
+		android.app.FragmentTransaction transaction = getFragmentManager().beginTransaction();
+		transaction.remove(_MaintenanceChangeCycleFragment);
+		transaction.replace(R.id.FrameLayout_menu_inter_body, _MaintenanceChangeCycleFragment);
+		transaction.commit();
+		
+	}
 	public void showBodyBrightness(){
 		android.app.FragmentTransaction transaction = getFragmentManager().beginTransaction();
 		transaction.remove(_BrightnessFragment);
@@ -844,9 +876,9 @@ public class MenuBaseFragment extends ParentFragment{
 		showInterAnimation();
 		InterBodyAnimation.StartChangeAnimation(_WiperFragment);
 	}
-	public void showBodyEngineAutoShutdownPWFrameAnimation(){
+	public void showBodyEngineAutoShutdownPWAnimation(){
 		showInterAnimation();
-		InterBodyAnimation.StartChangeAnimation(_EngineAutoShutdownPWFrameFragment);
+		InterBodyAnimation.StartChangeAnimation(_EngineAutoShutdownPWFragment);
 	}
 	public void showBodyMachineMonitoringAnimation(){
 		showInterAnimation();
@@ -932,7 +964,18 @@ public class MenuBaseFragment extends ParentFragment{
 		showInterAnimation();
 		InterBodyAnimation.StartChangeAnimation(_ServiceMenuSensorMonitoringHiddenFragment);
 	}
-	
+	public void showBodyMaintenanceAnimation(){
+		showInterAnimation();
+		InterBodyAnimation.StartChangeAnimation(_MaintenanceFragment);
+	}
+	public void showBodyMaintenanceDetailAnimation(){
+		showInterAnimation();
+		InterBodyAnimation.StartChangeAnimation(_MaintenanceDetailFragment);
+	}
+	public void showBodyMaintenanceChangeCycleAnimation(){
+		showInterAnimation();
+		InterBodyAnimation.StartChangeAnimation(_MaintenanceChangeCycleFragment);
+	}
 	public void showBodyBrightnessAnimation(){
 		showInterAnimation();
 		InterBodyAnimation.StartChangeAnimation(_BrightnessFragment);

@@ -73,10 +73,10 @@ public abstract class ParentFragment extends Fragment{
 					UpdateUI();
 				} catch (IllegalStateException e) {
 					// TODO: handle exception
-					Log.e(TAG,"IllegalStateException");
+					Log.e(TAG,"IllegalStateException DisplayUI");
 				}catch (NullPointerException e) {
 					// TODO: handle exception
-					Log.e(TAG,"NullPointerException");
+					Log.e(TAG,"NullPointerException DisplayUI");
 				}
 				
 			}
@@ -103,10 +103,10 @@ public abstract class ParentFragment extends Fragment{
 				}
 			}
 			catch(InterruptedException ie){
-				Log.e(TAG,"InterruptedException");
+				Log.e(TAG,"InterruptedException ReadThread");
 			}		
 			catch(RuntimeException ee){
-				Log.e(TAG,"RuntimeException");
+				Log.e(TAG,"RuntimeException ReadThread");
 			}
 		}
 	
