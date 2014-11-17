@@ -1520,6 +1520,21 @@ public class CAN1CommManager extends ICAN1CommManager.Stub{		// ttySAC1(Linux), 
 	public int Get_RX_RES_KEY_FineModulation(){ return service.Get_RX_RES_KEY_FineModulation();}
 	public int Get_RX_RES_KEY_FN(){ return service.Get_RX_RES_KEY_FN();}
 
+	public int Get_gErr_Mcu_TotalPacket(){ return service.Get_gErr_Mcu_TotalPacket();}
+	public int Get_gErr_Ecu_TotalPacket(){ return service.Get_gErr_Ecu_TotalPacket();}
+	public int Get_gErr_Tcu_TotalPacket(){ return service.Get_gErr_Tcu_TotalPacket();}
+	public int Get_gErr_Mcu_TotalPacket_Logged(){ return service.Get_gErr_Mcu_TotalPacket_Logged();}
+	public int Get_gErr_Ecu_TotalPacket_Logged(){ return service.Get_gErr_Ecu_TotalPacket_Logged();}
+	public int Get_gErr_Tcu_TotalPacket_Logged(){ return service.Get_gErr_Tcu_TotalPacket_Logged();}
+	public int Get_gErr_EHCU_TotalPacket_Logged(){ return service.Get_gErr_EHCU_TotalPacket_Logged();}
+	public int Get_gErr_Mcu_Total(){ return service.Get_gErr_Mcu_Total();}
+	public int Get_gErr_Ecu_Total(){ return service.Get_gErr_Ecu_Total();}
+	public int Get_gErr_Tcu_Total(){ return service.Get_gErr_Tcu_Total();}
+	public int Get_gErr_Mcu_Total_Logged(){ return service.Get_gErr_Mcu_Total_Logged();}
+	public int Get_gErr_Ecu_Total_Logged(){ return service.Get_gErr_Ecu_Total_Logged();}
+	public int Get_gErr_Tcu_Total_Logged(){ return service.Get_gErr_Tcu_Total_Logged();}
+	public int Get_gErr_EHCU_Total_Logged(){ return service.Get_gErr_EHCU_Total_Logged();}
+	
 	///////////////////////////////////////////////////////////////////////////////////////////////////////
 	
 	

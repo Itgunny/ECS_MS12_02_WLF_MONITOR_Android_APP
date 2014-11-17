@@ -15,6 +15,7 @@ import taeha.wheelloader.fseries_monitor.popup.EngineAutoShutdownCountPopup;
 import taeha.wheelloader.fseries_monitor.popup.EngineModePopup;
 import taeha.wheelloader.fseries_monitor.popup.EngineWarmingUpPopup;
 import taeha.wheelloader.fseries_monitor.popup.KickDownPopup;
+import taeha.wheelloader.fseries_monitor.popup.LoggedFaultDeletePopup;
 import taeha.wheelloader.fseries_monitor.popup.MaintReplacePopup;
 import taeha.wheelloader.fseries_monitor.popup.OperationHistoryInitPopup;
 import taeha.wheelloader.fseries_monitor.popup.PressureCalibrationResultPopup;
@@ -170,6 +171,12 @@ public class Home extends Activity {
 	public  static final int SCREEN_STATE_MENU_MONITORING_OPERATIONHISTORY_INIT				= 0x22310000;
 	public  static final int SCREEN_STATE_MENU_MONITORING_OPERATIONHISTORY_END				= 0x223FFFFF;
 	public  static final int SCREEN_STATE_MENU_MONITORING_FAULTHISTORY_TOP					= 0x22400000;
+	public  static final int SCREEN_STATE_MENU_MONITORING_FAULTHISTORY_ACTIVE_TOP			= 0x22410000;
+	public  static final int SCREEN_STATE_MENU_MONITORING_FAULTHISTORY_ACTIVE_END			= 0x2241FFFF;
+	public  static final int SCREEN_STATE_MENU_MONITORING_FAULTHISTORY_LOGGED_TOP			= 0x22420000;
+	public  static final int SCREEN_STATE_MENU_MONITORING_FAULTHISTORY_LOGGED_PW			= 0x22421000;
+	public  static final int SCREEN_STATE_MENU_MONITORING_FAULTHISTORY_LOGGED_DELETE		= 0x22422000;
+	public  static final int SCREEN_STATE_MENU_MONITORING_FAULTHISTORY_LOGGED_END			= 0x2242FFFF;
 	public  static final int SCREEN_STATE_MENU_MONITORING_FAULTHISTORY_END					= 0x224FFFFF;
 	public  static final int SCREEN_STATE_MENU_MONITORING_VERSIONINFO_TOP					= 0x22500000;
 	public  static final int SCREEN_STATE_MENU_MONITORING_VERSIONINFO_TCU					= 0x22510000;
@@ -368,6 +375,7 @@ public class Home extends Activity {
 	BrakePedalCalibrationPopup				_BrakePedalCalibrationPopup;
 	EngineAutoShutdownCountPopup			_EngineAutoShutdownCountPopup;
 	MaintReplacePopup						_MaintReplacePopup;
+	public LoggedFaultDeletePopup					_LoggedFaultDeletePopup;
 	
 	// Timer
 	private Timer mSeatBeltTimer = null;
@@ -531,6 +539,7 @@ public class Home extends Activity {
 		_BrakePedalCalibrationPopup = new BrakePedalCalibrationPopup(this);
 		_EngineAutoShutdownCountPopup = new EngineAutoShutdownCountPopup(this);
 		_MaintReplacePopup = new MaintReplacePopup(this);
+		_LoggedFaultDeletePopup= new LoggedFaultDeletePopup(this);
 				
 	}
 	public void InitAnimation(){
@@ -1305,6 +1314,20 @@ public class Home extends Activity {
 		}
 		
 		HomeDialog = _MaintReplacePopup;
+		HomeDialog.show();
+	}
+	public void showLoggedFaultDelete(){
+		if(AnimationRunningFlag == true)
+			return;
+		else
+			StartAnimationRunningTimer();
+		
+		if(HomeDialog != null){
+			HomeDialog.dismiss();
+			HomeDialog = null;
+		}
+		
+		HomeDialog = _LoggedFaultDeletePopup;
 		HomeDialog.show();
 	}
 	

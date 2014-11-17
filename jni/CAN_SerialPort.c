@@ -3212,6 +3212,64 @@ jint Get_RX_RES_KEY_FN(JNIEnv *env, jobject this) {
 
 	return RX_RES_KEY.FN;
 }
+jint Get_gErr_Mcu_TotalPacket(JNIEnv *env, jobject this) {
+
+	return gErr_Mcu_TotalPacket;
+}
+jint Get_gErr_Ecu_TotalPacket(JNIEnv *env, jobject this) {
+
+	return gErr_Ecu_TotalPacket;
+}
+jint Get_gErr_Tcu_TotalPacket(JNIEnv *env, jobject this) {
+
+	return gErr_Tcu_TotalPacket;
+}
+jint Get_gErr_Mcu_TotalPacket_Logged(JNIEnv *env, jobject this) {
+
+	return gErr_Mcu_TotalPacket_Logged;
+}
+jint Get_gErr_Ecu_TotalPacket_Logged(JNIEnv *env, jobject this) {
+
+	return gErr_Ecu_TotalPacket_Logged;
+}
+jint Get_gErr_Tcu_TotalPacket_Logged(JNIEnv *env, jobject this) {
+
+	return gErr_Tcu_TotalPacket_Logged;
+}
+jint Get_gErr_EHCU_TotalPacket_Logged(JNIEnv *env, jobject this) {
+
+	return gErr_EHCU_TotalPacket_Logged;
+}
+jint Get_gErr_Mcu_Total(JNIEnv *env, jobject this) {
+
+	return gErr_Mcu_Total;
+}
+jint Get_gErr_Ecu_Total(JNIEnv *env, jobject this) {
+
+	return gErr_Ecu_Total;
+}
+jint Get_gErr_Tcu_Total(JNIEnv *env, jobject this) {
+
+	return gErr_Tcu_Total;
+}
+jint Get_gErr_Mcu_Total_Logged(JNIEnv *env, jobject this) {
+
+	return gErr_Mcu_Total_Logged;
+}
+jint Get_gErr_Ecu_Total_Logged(JNIEnv *env, jobject this) {
+
+	return gErr_Ecu_Total_Logged;
+}
+
+jint Get_gErr_Tcu_Total_Logged(JNIEnv *env, jobject this) {
+
+	return gErr_Tcu_Total_Logged;
+}
+jint Get_gErr_EHCU_Total_Logged(JNIEnv *env, jobject this) {
+
+	return gErr_EHCU_Total_Logged;
+}
+
 
 static JNINativeMethod methods[] =
 		{
@@ -4855,6 +4913,23 @@ static JNINativeMethod methods[] =
 				{"Get_RX_RES_KEY_DetentSetting", "()I",(void*) Get_RX_RES_KEY_DetentSetting},
 				{"Get_RX_RES_KEY_FineModulation", "()I",(void*) Get_RX_RES_KEY_FineModulation},
 				{"Get_RX_RES_KEY_FN", "()I",(void*) Get_RX_RES_KEY_FN},
+				{"Get_gErr_Mcu_TotalPacket", "()I",(void*) Get_RX_RES_KEY_FN},
+				{"Get_gErr_Ecu_TotalPacket", "()I",(void*) Get_gErr_Ecu_TotalPacket},
+				{"Get_gErr_Tcu_TotalPacket", "()I",(void*) Get_gErr_Tcu_TotalPacket},
+				{"Get_gErr_Mcu_TotalPacket_Logged", "()I",(void*) Get_gErr_Mcu_TotalPacket_Logged},
+				{"Get_gErr_Ecu_TotalPacket_Logged", "()I",(void*) Get_gErr_Ecu_TotalPacket_Logged},
+				{"Get_gErr_Tcu_TotalPacket_Logged", "()I",(void*) Get_gErr_Tcu_TotalPacket_Logged},
+				{"Get_gErr_EHCU_TotalPacket_Logged", "()I",(void*) Get_gErr_EHCU_TotalPacket_Logged},
+				{"Get_gErr_Mcu_Total", "()I",(void*) Get_gErr_Mcu_Total},
+				{"Get_gErr_Ecu_Total", "()I",(void*) Get_gErr_Ecu_Total},
+				{"Get_gErr_Tcu_Total", "()I",(void*) Get_gErr_Tcu_Total},
+				{"Get_gErr_Mcu_Total_Logged", "()I",(void*) Get_gErr_Mcu_Total_Logged},
+				{"Get_gErr_Ecu_Total_Logged", "()I",(void*) Get_gErr_Ecu_Total_Logged},
+				{"Get_gErr_Tcu_Total_Logged", "()I",(void*) Get_gErr_Tcu_Total_Logged},
+				{"Get_gErr_EHCU_Total_Logged", "()I",(void*) Get_gErr_EHCU_Total_Logged},
+
+
+
 
 				///////////////////////////////////////////////////////////////////////////////////////////////////////
 

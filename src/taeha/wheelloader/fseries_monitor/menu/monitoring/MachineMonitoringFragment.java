@@ -23,6 +23,7 @@ import android.widget.AbsoluteLayout;
 import android.widget.FrameLayout;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 public class MachineMonitoringFragment extends ParentFragment{
@@ -46,6 +47,11 @@ public class MachineMonitoringFragment extends ParentFragment{
 	TextView 	textViewBattUnit;
 	TextView 	textViewCoolantUnit;
 	TextView 	textViewTMOilUnit;
+	
+	RelativeLayout	layoutHYD;
+	RelativeLayout	layoutBatt;
+	RelativeLayout	layoutCoolant;
+	RelativeLayout	layoutTMOil;
 	//////////////////////////////////////////////////
 	
 	//VALUABLE////////////////////////////////////////
@@ -112,7 +118,13 @@ public class MachineMonitoringFragment extends ParentFragment{
 		textViewHYDUnit = (TextView)mRoot.findViewById(R.id.textView_menu_body_monitoring_machinemonitoring_hyd_unit);
 		textViewBattUnit = (TextView)mRoot.findViewById(R.id.textView_menu_body_monitoring_machinemonitoring_battery_unit);
 		textViewCoolantUnit = (TextView)mRoot.findViewById(R.id.textView_menu_body_monitoring_machinemonitoring_coolant_unit);
-		textViewTMOilUnit = (TextView)mRoot.findViewById(R.id.textView_menu_body_monitoring_machinemonitoring_tmoil_unit);	
+		textViewTMOilUnit = (TextView)mRoot.findViewById(R.id.textView_menu_body_monitoring_machinemonitoring_tmoil_unit);
+		
+		layoutHYD = (RelativeLayout)mRoot.findViewById(R.id.RelativeLayout_menu_body_monitoring_machinemonitoring_hyd);
+		layoutBatt = (RelativeLayout)mRoot.findViewById(R.id.RelativeLayout_menu_body_monitoring_machinemonitoring_battery);
+		layoutCoolant = (RelativeLayout)mRoot.findViewById(R.id.RelativeLayout_menu_body_monitoring_machinemonitoring_coolant);
+		layoutTMOil = (RelativeLayout)mRoot.findViewById(R.id.RelativeLayout_menu_body_monitoring_machinemonitoring_tmoil);
+		
 	}
 
 	protected void InitValuables() {
@@ -177,9 +189,11 @@ public class MachineMonitoringFragment extends ParentFragment{
 		if(_status == CAN1CommManager.DATA_STATE_LAMP_ON){
 			textViewHYD.setTextColor(ParentActivity.getResources().getColor(R.color.red));
 			textViewHYDTitle.setTextColor(ParentActivity.getResources().getColor(R.color.red));
+			layoutHYD.setBackgroundResource(R.drawable.menu_information_monitoring_block_warning);
 		}else{
 			textViewHYD.setTextColor(ParentActivity.getResources().getColor(R.color.white));
 			textViewHYDTitle.setTextColor(ParentActivity.getResources().getColor(R.color.white));
+			layoutHYD.setBackgroundResource(R.drawable.menu_information_monitoring_block);
 		}
 	}
 	public void BatteryDisplay(int _data, int _status){
@@ -189,9 +203,11 @@ public class MachineMonitoringFragment extends ParentFragment{
 		if(_status == CAN1CommManager.DATA_STATE_LAMP_ON){
 			textViewBatt.setTextColor(ParentActivity.getResources().getColor(R.color.red));
 			textViewBattTitle.setTextColor(ParentActivity.getResources().getColor(R.color.red));
+			layoutBatt.setBackgroundResource(R.drawable.menu_information_monitoring_block_warning);
 		}else{
 			textViewBatt.setTextColor(ParentActivity.getResources().getColor(R.color.white));
 			textViewBattTitle.setTextColor(ParentActivity.getResources().getColor(R.color.white));
+			layoutBatt.setBackgroundResource(R.drawable.menu_information_monitoring_block);
 		}
 	}
 	public void CoolantDisplay(int _data, int _status, int _unit){
@@ -205,9 +221,11 @@ public class MachineMonitoringFragment extends ParentFragment{
 		if(_status == CAN1CommManager.DATA_STATE_LAMP_ON){
 			textViewCoolant.setTextColor(ParentActivity.getResources().getColor(R.color.red));
 			textViewCoolantTitle.setTextColor(ParentActivity.getResources().getColor(R.color.red));
+			layoutCoolant.setBackgroundResource(R.drawable.menu_information_monitoring_block_warning);
 		}else{
 			textViewCoolant.setTextColor(ParentActivity.getResources().getColor(R.color.white));
 			textViewCoolantTitle.setTextColor(ParentActivity.getResources().getColor(R.color.white));
+			layoutCoolant.setBackgroundResource(R.drawable.menu_information_monitoring_block);
 		}
 	}
 	public void TMOilDisplay(int _data, int _status, int _unit){
@@ -221,9 +239,11 @@ public class MachineMonitoringFragment extends ParentFragment{
 		if(_status == CAN1CommManager.DATA_STATE_LAMP_ON){
 			textViewTMOil.setTextColor(ParentActivity.getResources().getColor(R.color.red));
 			textViewTMOilTitle.setTextColor(ParentActivity.getResources().getColor(R.color.red));
+			layoutTMOil.setBackgroundResource(R.drawable.menu_information_monitoring_block_warning);
 		}else{
 			textViewTMOil.setTextColor(ParentActivity.getResources().getColor(R.color.white));
 			textViewTMOilTitle.setTextColor(ParentActivity.getResources().getColor(R.color.white));
+			layoutTMOil.setBackgroundResource(R.drawable.menu_information_monitoring_block);
 		}
 	}
 	/////////////////////////////////////////////////////////////////////

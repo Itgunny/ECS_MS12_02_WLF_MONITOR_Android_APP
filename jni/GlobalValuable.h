@@ -200,6 +200,24 @@ unsigned int 		gErr_Ecu_Logged[ERR_BUF_SIZE];
 unsigned int 		gErr_Mcu_Logged[ERR_BUF_SIZE];
 unsigned int 		gErr_EHCU_Logged[ERR_BUF_SIZE];
 
+unsigned int		gErr_Mcu_TotalPacket;
+unsigned int		gErr_Ecu_TotalPacket;
+unsigned int		gErr_Tcu_TotalPacket;
+unsigned int		gErr_EHCU_TotalPacket;
+unsigned int		gErr_Mcu_TotalPacket_Logged;
+unsigned int		gErr_Ecu_TotalPacket_Logged;
+unsigned int		gErr_Tcu_TotalPacket_Logged;
+unsigned int		gErr_EHCU_TotalPacket_Logged;
+
+unsigned int		gErr_Mcu_Total;
+unsigned int		gErr_Ecu_Total;
+unsigned int		gErr_Tcu_Total;
+unsigned int		gErr_EHCU_Total;
+unsigned int		gErr_Mcu_Total_Logged;
+unsigned int		gErr_Ecu_Total_Logged;
+unsigned int		gErr_Tcu_Total_Logged;
+unsigned int		gErr_EHCU_Total_Logged;
+
 unsigned char		gRecvSingle_250[8];
 unsigned char		gRecvMulti_250[21];
 unsigned char		gRecvPassWord;

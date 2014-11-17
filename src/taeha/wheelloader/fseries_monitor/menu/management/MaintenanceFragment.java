@@ -299,7 +299,16 @@ public class MaintenanceFragment extends ParentFragment{
 			return;
 		else
 			ParentActivity.StartAnimationRunningTimer();
-		ParentActivity._MenuBaseFragment.showBodyManagementAnimation();
+		
+		if(ParentActivity.OldScreenIndex == Home.SCREEN_STATE_MAIN_B_TOP){
+			ParentActivity._MainChangeAnimation.StartChangeAnimation(ParentActivity._MainBBaseFragment);
+			ParentActivity.OldScreenIndex = 0;
+		}
+		else{
+			ParentActivity._MenuBaseFragment.showBodyManagementAnimation();
+		}
+		
+		
 	}
 	public void ClickMaintDetail(int _data){
 		if(ParentActivity.AnimationRunningFlag == true)

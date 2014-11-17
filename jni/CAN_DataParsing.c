@@ -647,6 +647,24 @@ void InitNewProtoclValuable() {
 	RxRingBuffTail = 0;
 
 	KeyButtonCount = 0;
+
+	gErr_Mcu_TotalPacket = 0;
+	gErr_Ecu_TotalPacket = 0;
+	gErr_Tcu_TotalPacket = 0;
+	gErr_EHCU_TotalPacket = 0;
+	gErr_Mcu_TotalPacket_Logged = 0;
+	gErr_Ecu_TotalPacket_Logged = 0;
+	gErr_Tcu_TotalPacket_Logged = 0;
+	gErr_EHCU_TotalPacket_Logged = 0;
+
+	gErr_Mcu_Total = 0;
+	gErr_Ecu_Total = 0;
+	gErr_Tcu_Total = 0;
+	gErr_EHCU_Total = 0;
+	gErr_Mcu_Total_Logged = 0;
+	gErr_Ecu_Total_Logged = 0;
+	gErr_Tcu_Total_Logged = 0;
+	gErr_EHCU_Total_Logged = 0;
 }
 
 
@@ -1423,6 +1441,8 @@ void SaveErrorCode_NEW_CAN2(void) {
 
 	if (RX_DTC_INFORMATION_TYPE1_65438.DTCType_1510 == 0) // MCU
 	{
+		gErr_Mcu_TotalPacket = RX_DTC_INFORMATION_TYPE1_65438.TotalNumberofDTCInformationPacket_1512;
+		gErr_Mcu_Total = RX_DTC_INFORMATION_TYPE1_65438.TotalNumberofDTC;
 		gErr_Mcu[PacketNo * 5] = ((RX_DTC_INFORMATION_TYPE1_65438.DTC_1[2] << 16)
 			| (RX_DTC_INFORMATION_TYPE1_65438.DTC_1[1] << 8) | RX_DTC_INFORMATION_TYPE1_65438.DTC_1[0]);
 		gErr_Mcu[PacketNo * 5 + 1] = ((RX_DTC_INFORMATION_TYPE1_65438.DTC_2[2] << 16)
@@ -1437,6 +1457,8 @@ void SaveErrorCode_NEW_CAN2(void) {
 
 	} else if (RX_DTC_INFORMATION_TYPE1_65438.DTCType_1510 == 1)	// Logged MCU
 	{
+		gErr_Mcu_TotalPacket_Logged = RX_DTC_INFORMATION_TYPE1_65438.TotalNumberofDTCInformationPacket_1512;
+		gErr_Mcu_Total_Logged = RX_DTC_INFORMATION_TYPE1_65438.TotalNumberofDTC;
 		gErr_Mcu_Logged[PacketNo * 5] = ((RX_DTC_INFORMATION_TYPE1_65438.DTC_1[2] << 16)
 			| (RX_DTC_INFORMATION_TYPE1_65438.DTC_1[1] << 8) | RX_DTC_INFORMATION_TYPE1_65438.DTC_1[0]);
 		gErr_Mcu_Logged[PacketNo * 5 + 1] = ((RX_DTC_INFORMATION_TYPE1_65438.DTC_2[2] << 16)
@@ -1450,6 +1472,8 @@ void SaveErrorCode_NEW_CAN2(void) {
 
 	} else if (RX_DTC_INFORMATION_TYPE1_65438.DTCType_1510 == 2)	// ECU
 	{
+		gErr_Ecu_TotalPacket = RX_DTC_INFORMATION_TYPE1_65438.TotalNumberofDTCInformationPacket_1512;
+		gErr_Ecu_Total = RX_DTC_INFORMATION_TYPE1_65438.TotalNumberofDTC;
 		gErr_Ecu[PacketNo * 5] = ((RX_DTC_INFORMATION_TYPE1_65438.DTC_1[2] << 16)
 			| (RX_DTC_INFORMATION_TYPE1_65438.DTC_1[1] << 8) | RX_DTC_INFORMATION_TYPE1_65438.DTC_1[0]);
 		gErr_Ecu[PacketNo * 5 + 1] = ((RX_DTC_INFORMATION_TYPE1_65438.DTC_2[2] << 16)
@@ -1465,6 +1489,8 @@ void SaveErrorCode_NEW_CAN2(void) {
 
 	} else if (RX_DTC_INFORMATION_TYPE1_65438.DTCType_1510 == 3)	// Logged ECU
 	{
+		gErr_Ecu_TotalPacket_Logged = RX_DTC_INFORMATION_TYPE1_65438.TotalNumberofDTCInformationPacket_1512;
+		gErr_Ecu_Total_Logged = RX_DTC_INFORMATION_TYPE1_65438.TotalNumberofDTC;
 		gErr_Ecu_Logged[PacketNo * 5] = ((RX_DTC_INFORMATION_TYPE1_65438.DTC_1[2] << 16)
 			| (RX_DTC_INFORMATION_TYPE1_65438.DTC_1[1] << 8) | RX_DTC_INFORMATION_TYPE1_65438.DTC_1[0]);
 		gErr_Ecu_Logged[PacketNo * 5 + 1] = ((RX_DTC_INFORMATION_TYPE1_65438.DTC_2[2] << 16)
@@ -1476,8 +1502,33 @@ void SaveErrorCode_NEW_CAN2(void) {
 		gErr_Ecu_Logged[PacketNo * 5 + 4] = ((RX_DTC_INFORMATION_TYPE1_65438.DTC_5[2] << 16)
 			| (RX_DTC_INFORMATION_TYPE1_65438.DTC_5[1] << 8) | RX_DTC_INFORMATION_TYPE1_65438.DTC_5[0]);
 
-	}else if (RX_DTC_INFORMATION_TYPE1_65438.DTCType_1510 == 7)	// Logged EHCU
+	}
+	else if (RX_DTC_INFORMATION_TYPE1_65438.DTCType_1510 == 4)	// TCU
 	{
+		gErr_Tcu_TotalPacket = RX_DTC_INFORMATION_TYPE1_65438.TotalNumberofDTCInformationPacket_1512;
+		gErr_Tcu_Total = RX_DTC_INFORMATION_TYPE1_65438.TotalNumberofDTC;
+		gErr_Tcu[PacketNo * 5] = RX_DTC_INFORMATION_TYPE1_65438.DTC_1[0];
+		gErr_Tcu[PacketNo * 5 + 1] = RX_DTC_INFORMATION_TYPE1_65438.DTC_1[1];
+		gErr_Tcu[PacketNo * 5 + 2] = RX_DTC_INFORMATION_TYPE1_65438.DTC_1[2];
+		gErr_Tcu[PacketNo * 5 + 3] = RX_DTC_INFORMATION_TYPE1_65438.DTC_2[0];
+		gErr_Tcu[PacketNo * 5 + 4] = RX_DTC_INFORMATION_TYPE1_65438.DTC_2[1];
+
+	}
+	else if (RX_DTC_INFORMATION_TYPE1_65438.DTCType_1510 == 5)	// Logged TCU
+	{
+		gErr_Tcu_TotalPacket_Logged = RX_DTC_INFORMATION_TYPE1_65438.TotalNumberofDTCInformationPacket_1512;
+		gErr_Tcu_Total_Logged = RX_DTC_INFORMATION_TYPE1_65438.TotalNumberofDTC;
+		gErr_Tcu_Logged[PacketNo * 5] = RX_DTC_INFORMATION_TYPE1_65438.DTC_1[0];
+		gErr_Tcu_Logged[PacketNo * 5 + 1] = RX_DTC_INFORMATION_TYPE1_65438.DTC_1[1];
+		gErr_Tcu_Logged[PacketNo * 5 + 2] = RX_DTC_INFORMATION_TYPE1_65438.DTC_1[2];
+		gErr_Tcu_Logged[PacketNo * 5 + 3] = RX_DTC_INFORMATION_TYPE1_65438.DTC_2[0];
+		gErr_Tcu_Logged[PacketNo * 5 + 4] = RX_DTC_INFORMATION_TYPE1_65438.DTC_2[1];
+
+	}
+	else if (RX_DTC_INFORMATION_TYPE1_65438.DTCType_1510 == 7)	// Logged EHCU
+	{
+		gErr_EHCU_TotalPacket_Logged = RX_DTC_INFORMATION_TYPE1_65438.TotalNumberofDTCInformationPacket_1512;
+		gErr_EHCU_Total_Logged = RX_DTC_INFORMATION_TYPE1_65438.TotalNumberofDTC;
 		gErr_EHCU_Logged[PacketNo * 5] = ((RX_DTC_INFORMATION_TYPE1_65438.DTC_1[2] << 16)
 			| (RX_DTC_INFORMATION_TYPE1_65438.DTC_1[1] << 8) | RX_DTC_INFORMATION_TYPE1_65438.DTC_1[0]);
 		gErr_EHCU_Logged[PacketNo * 5 + 1] = ((RX_DTC_INFORMATION_TYPE1_65438.DTC_2[2] << 16)
@@ -1488,24 +1539,6 @@ void SaveErrorCode_NEW_CAN2(void) {
 			| (RX_DTC_INFORMATION_TYPE1_65438.DTC_4[1] << 8) | RX_DTC_INFORMATION_TYPE1_65438.DTC_4[0]);
 		gErr_EHCU_Logged[PacketNo * 5 + 4] = ((RX_DTC_INFORMATION_TYPE1_65438.DTC_5[2] << 16)
 			| (RX_DTC_INFORMATION_TYPE1_65438.DTC_5[1] << 8) | RX_DTC_INFORMATION_TYPE1_65438.DTC_5[0]);
-
-	}
-
-	else if (RX_DTC_INFORMATION_TYPE1_65438.DTCType_1510 == 4)	// TCU
-	{
-		gErr_Tcu[PacketNo * 5] = RX_DTC_INFORMATION_TYPE1_65438.DTC_1[0];
-		gErr_Tcu[PacketNo * 5 + 1] = RX_DTC_INFORMATION_TYPE1_65438.DTC_1[1];
-		gErr_Tcu[PacketNo * 5 + 2] = RX_DTC_INFORMATION_TYPE1_65438.DTC_1[2];
-		gErr_Tcu[PacketNo * 5 + 3] = RX_DTC_INFORMATION_TYPE1_65438.DTC_2[0];
-		gErr_Tcu[PacketNo * 5 + 4] = RX_DTC_INFORMATION_TYPE1_65438.DTC_2[1];
-
-	} else if (RX_DTC_INFORMATION_TYPE1_65438.DTCType_1510 == 5)	// Logged TCU
-	{
-		gErr_Tcu_Logged[PacketNo * 5] = RX_DTC_INFORMATION_TYPE1_65438.DTC_1[0];
-		gErr_Tcu_Logged[PacketNo * 5 + 1] = RX_DTC_INFORMATION_TYPE1_65438.DTC_1[1];
-		gErr_Tcu_Logged[PacketNo * 5 + 2] = RX_DTC_INFORMATION_TYPE1_65438.DTC_1[2];
-		gErr_Tcu_Logged[PacketNo * 5 + 3] = RX_DTC_INFORMATION_TYPE1_65438.DTC_2[0];
-		gErr_Tcu_Logged[PacketNo * 5 + 4] = RX_DTC_INFORMATION_TYPE1_65438.DTC_2[1];
 
 	}
 

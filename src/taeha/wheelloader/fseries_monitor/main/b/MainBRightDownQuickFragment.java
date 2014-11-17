@@ -9,6 +9,7 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import taeha.wheelloader.fseries_monitor.main.Home;
 import taeha.wheelloader.fseries_monitor.main.ParentFragment;
 import taeha.wheelloader.fseries_monitor.main.R;
 
@@ -123,6 +124,9 @@ public class MainBRightDownQuickFragment extends ParentFragment{
 			return;
 		else
 			ParentActivity.StartAnimationRunningTimer();
+		ParentActivity._MainChangeAnimation.StartChangeAnimation(ParentActivity._MenuBaseFragment);
+		ParentActivity.OldScreenIndex = Home.SCREEN_STATE_MAIN_B_TOP;
+		ParentActivity._MenuBaseFragment.setFirstScreenIndex(Home.SCREEN_STATE_MENU_MANAGEMENT_MAINTENANCE_TOP);
 	}
 	public void ClickBluetooth(){
 		

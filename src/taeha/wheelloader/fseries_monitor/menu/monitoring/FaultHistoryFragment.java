@@ -93,13 +93,23 @@ public class FaultHistoryFragment extends MenuBodyList_ParentFragment{
 	@Override
 	public void ClickList1() {
 		// TODO Auto-generated method stub
-
+		if(ParentActivity.AnimationRunningFlag == true)
+			return;
+		else
+			ParentActivity.StartAnimationRunningTimer();
+		ParentActivity._MenuBaseFragment.showBodyActiveFaultAnimation();
+		
 	}
 
 	@Override
 	public void ClickList2() {
 		// TODO Auto-generated method stub
-
+		if(ParentActivity.AnimationRunningFlag == true)
+			return;
+		else
+			ParentActivity.StartAnimationRunningTimer();
+		ParentActivity._MenuBaseFragment.showLoggedFaultPasswordAnimation();
+	//	ParentActivity._MenuBaseFragment.showBodyLoggedFaultAnimation();
 	}
 
 	@Override

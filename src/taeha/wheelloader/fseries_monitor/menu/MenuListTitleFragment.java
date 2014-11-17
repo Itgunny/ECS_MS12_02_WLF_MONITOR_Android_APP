@@ -158,6 +158,10 @@ public class MenuListTitleFragment extends ParentFragment{
 				ParentActivity._MenuBaseFragment.showBodyMonitoring();
 				setBackButtonEnable(false);
 				break;
+			case Home.SCREEN_STATE_MENU_MONITORING_FAULTHISTORY_LOGGED_PW:
+				ParentActivity._MenuBaseFragment.showBodyFaultHistory();
+				setBackButtonEnable(true);
+				break;
 			case Home.SCREEN_STATE_MENU_MANAGEMENT_MACHINESECURITY_TOP:
 			case Home.SCREEN_STATE_MENU_MANAGEMENT_MACHINESECURITY_PW:
 			case Home.SCREEN_STATE_MENU_MANAGEMENT_CALIBRATION_TOP:

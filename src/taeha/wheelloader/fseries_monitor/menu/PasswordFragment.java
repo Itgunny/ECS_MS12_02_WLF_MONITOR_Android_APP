@@ -111,6 +111,7 @@ public abstract class PasswordFragment extends ParentFragment{
 		CancelPasswordCheckTimer();
 		CancelSeedCheckTimer();
 		CancelTimeOutTimer();
+
 	}
 	////////////////////////////////////////////////
 	

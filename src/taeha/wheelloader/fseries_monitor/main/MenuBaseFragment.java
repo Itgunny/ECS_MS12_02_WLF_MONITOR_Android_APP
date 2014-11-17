@@ -43,7 +43,10 @@ import taeha.wheelloader.fseries_monitor.menu.mode.WiperFragment;
 import taeha.wheelloader.fseries_monitor.menu.mode.WorkLoadFragment;
 import taeha.wheelloader.fseries_monitor.menu.monitoring.EHCUIOInfoBoomLeverFloatFragment;
 import taeha.wheelloader.fseries_monitor.menu.monitoring.EHCUIOInfoFragment;
+import taeha.wheelloader.fseries_monitor.menu.monitoring.FaultHistoryActiveFragment;
 import taeha.wheelloader.fseries_monitor.menu.monitoring.FaultHistoryFragment;
+import taeha.wheelloader.fseries_monitor.menu.monitoring.FaultHistoryLoggedFragment;
+import taeha.wheelloader.fseries_monitor.menu.monitoring.FaultHistoryLoggedPasswordFragment;
 import taeha.wheelloader.fseries_monitor.menu.monitoring.MachineMonitoringFragment;
 import taeha.wheelloader.fseries_monitor.menu.monitoring.MenuMonitoringFragment;
 import taeha.wheelloader.fseries_monitor.menu.monitoring.OperationHistoryFragment;
@@ -131,6 +134,9 @@ public class MenuBaseFragment extends ParentFragment{
 	public VersionInfoRMCUFragment				_VersionInfoRMCUFragment;
 	public VersionInfoTCUFragment				_VersionInfoTCUFragment;
 	public VersionInfoECMFragment				_VersionInfoECMFragment;
+	public FaultHistoryActiveFragment			_FaultHistoryActiveFragment;
+	public FaultHistoryLoggedFragment			_FaultHistoryLoggedFragment;
+	public FaultHistoryLoggedPasswordFragment	_FaultHistoryLoggedPasswordFragment;
 	
 	//Management
 	public MachineSecurityPasswordFragment				_MachineSecurityPasswordFragment;
@@ -185,31 +191,7 @@ public class MenuBaseFragment extends ParentFragment{
 
 		ParentActivity.ScreenIndex = ParentActivity.SCREEN_STATE_MENU_TOP;
 		
-		if(FirstScreenIndex == Home.SCREEN_STATE_MENU_PREFERENCE_CLOCK_TOP){
-			framelayoutListTitle.setVisibility(View.INVISIBLE);
-			framelayoutListBody.setVisibility(View.INVISIBLE);
-			framelayoutListLeft.setVisibility(View.INVISIBLE);
-			showBodyClockAnimation();
-			FirstScreenIndex = 0;
-		}else if(FirstScreenIndex == Home.SCREEN_STATE_MENU_MANAGEMENT_CALIBRATION_PRESSURE_TOP){
-			framelayoutListTitle.setVisibility(View.INVISIBLE);
-			framelayoutListBody.setVisibility(View.INVISIBLE);
-			framelayoutListLeft.setVisibility(View.INVISIBLE);
-			showBodyPressureCalibrationAnimation();
-			FirstScreenIndex = 0;
-		}else if(FirstScreenIndex == Home.SCREEN_STATE_MENU_MODE_ETC_WIPER_TOP){
-			framelayoutListTitle.setVisibility(View.INVISIBLE);
-			framelayoutListBody.setVisibility(View.INVISIBLE);
-			framelayoutListLeft.setVisibility(View.INVISIBLE);
-			showBodyWiperAnimation();
-			FirstScreenIndex = 0;
-		}
-		else{
-			ListLeftAnimation.StartAppearAnimation(_MenuListLeftFragment);
-			ListTitleAnimation.StartAppearAnimation(_MenuListTitleFragment);
-			ListBodyAnimation.StartAppearAnimation(_MenuModeFragment);
-			_MenuModeFragment.setFirstScreen(Home.SCREEN_STATE_MENU_MODE_ENGINETM_TOP);
-		}
+		CheckFirstScreen(FirstScreenIndex);
 	
 		return mRoot;
 	}
@@ -273,6 +255,9 @@ public class MenuBaseFragment extends ParentFragment{
 		_VersionInfoRMCUFragment = new VersionInfoRMCUFragment();
 		_VersionInfoTCUFragment = new VersionInfoTCUFragment();
 		_VersionInfoECMFragment = new VersionInfoECMFragment();
+		_FaultHistoryActiveFragment = new FaultHistoryActiveFragment();
+		_FaultHistoryLoggedFragment = new FaultHistoryLoggedFragment();
+		_FaultHistoryLoggedPasswordFragment = new FaultHistoryLoggedPasswordFragment();
 		_MachineSecurityPasswordFragment = new MachineSecurityPasswordFragment();
 		_MachineSecurityListFragment = new MachineSecurityListFragment();
 		_MachineSecurityESLFragment = new MachineSecurityESLFragment();
@@ -347,6 +332,9 @@ public class MenuBaseFragment extends ParentFragment{
 		transaction.detach(_VersionInfoRMCUFragment);
 		transaction.detach(_VersionInfoTCUFragment);
 		transaction.detach(_VersionInfoECMFragment);
+		transaction.detach(_FaultHistoryActiveFragment);
+		transaction.detach(_FaultHistoryLoggedFragment);
+		transaction.detach(_FaultHistoryLoggedPasswordFragment);
 		transaction.detach(_MachineSecurityPasswordFragment);
 		transaction.detach(_MachineSecurityListFragment);
 		transaction.detach(_MachineSecurityESLFragment);
@@ -387,6 +375,47 @@ public class MenuBaseFragment extends ParentFragment{
 	/////////////////////////////////////////////////////////////////////
 	public void setFirstScreenIndex(int Index){
 		FirstScreenIndex = Index;
+	}
+	public void CheckFirstScreen(int Index){
+		if(Index == Home.SCREEN_STATE_MENU_PREFERENCE_CLOCK_TOP){
+			framelayoutListTitle.setVisibility(View.INVISIBLE);
+			framelayoutListBody.setVisibility(View.INVISIBLE);
+			framelayoutListLeft.setVisibility(View.INVISIBLE);
+			showBodyClockAnimation();
+			setFirstScreenIndex(0);
+		}else if(Index == Home.SCREEN_STATE_MENU_MANAGEMENT_CALIBRATION_PRESSURE_TOP){
+			framelayoutListTitle.setVisibility(View.INVISIBLE);
+			framelayoutListBody.setVisibility(View.INVISIBLE);
+			framelayoutListLeft.setVisibility(View.INVISIBLE);
+			showBodyPressureCalibrationAnimation();
+			setFirstScreenIndex(0);
+		}else if(Index == Home.SCREEN_STATE_MENU_MODE_ETC_WIPER_TOP){
+			framelayoutListTitle.setVisibility(View.INVISIBLE);
+			framelayoutListBody.setVisibility(View.INVISIBLE);
+			framelayoutListLeft.setVisibility(View.INVISIBLE);
+			showBodyWiperAnimation();
+			setFirstScreenIndex(0);
+		}
+		else if(Index == Home.SCREEN_STATE_MENU_MONITORING_FAULTHISTORY_ACTIVE_TOP){
+			framelayoutListTitle.setVisibility(View.INVISIBLE);
+			framelayoutListBody.setVisibility(View.INVISIBLE);
+			framelayoutListLeft.setVisibility(View.INVISIBLE);
+			showBodyActiveFaultAnimation();
+			setFirstScreenIndex(0);
+		}
+		else if(Index == Home.SCREEN_STATE_MENU_MANAGEMENT_MAINTENANCE_TOP){
+			framelayoutListTitle.setVisibility(View.INVISIBLE);
+			framelayoutListBody.setVisibility(View.INVISIBLE);
+			framelayoutListLeft.setVisibility(View.INVISIBLE);
+			showBodyMaintenanceAnimation();
+			setFirstScreenIndex(0);
+		}
+		else{
+			ListLeftAnimation.StartAppearAnimation(_MenuListLeftFragment);
+			ListTitleAnimation.StartAppearAnimation(_MenuListTitleFragment);
+			ListBodyAnimation.StartAppearAnimation(_MenuModeFragment);
+			_MenuModeFragment.setFirstScreen(Home.SCREEN_STATE_MENU_MODE_ENGINETM_TOP);
+		}
 	}
 	/////////////////////////////////////////////////////////////////////
 	//Show Fragment//////////////////////////////////////////////////////
@@ -483,7 +512,7 @@ public class MenuBaseFragment extends ParentFragment{
 		transaction.replace(R.id.FrameLayout_menu_list_body, _ServiceMenuListFragment);
 		transaction.commit();
 	}
-	
+
 	
 	// Inter
 	public void showBodyEngineSpeed(){
@@ -656,6 +685,26 @@ public class MenuBaseFragment extends ParentFragment{
 		transaction.commit();
 		
 	}
+	public void showBodyActiveFault(){
+		android.app.FragmentTransaction transaction = getFragmentManager().beginTransaction();
+		transaction.remove(_FaultHistoryActiveFragment);
+		transaction.replace(R.id.FrameLayout_menu_inter_body, _FaultHistoryActiveFragment);
+		transaction.commit();
+		
+	}
+	public void showBodyLoggedFault(){
+		android.app.FragmentTransaction transaction = getFragmentManager().beginTransaction();
+		transaction.remove(_FaultHistoryLoggedFragment);
+		transaction.replace(R.id.FrameLayout_menu_inter_body, _FaultHistoryLoggedFragment);
+		transaction.commit();
+		
+	}	
+	public void showBodyLoggedFaultPassword(){
+		android.app.FragmentTransaction transaction = getFragmentManager().beginTransaction();
+		transaction.remove(_FaultHistoryLoggedPasswordFragment);
+		transaction.replace(R.id.FrameLayout_menu_inter_body, _FaultHistoryLoggedPasswordFragment);
+		transaction.commit();
+	}
 	public void showBodyESL(){
 		android.app.FragmentTransaction transaction = getFragmentManager().beginTransaction();
 		transaction.remove(_MachineSecurityESLFragment);
@@ -810,6 +859,13 @@ public class MenuBaseFragment extends ParentFragment{
 	public void showBodyMultimediaAnimation(){
 	
 	}
+	public void showFaultHistoryAnimation(){
+		DestroyFragment();
+		InitFragment();
+		showListAnimation();
+		ListBodyAnimation.StartChangeAnimation(_FaultHistoryFragment);
+		_MenuListLeftFragment.setFirstScreen(Home.SCREEN_STATE_MENU_MONITORING_TOP);
+	}
 	public void showMachineSecurityListAnimation(){
 		DestroyFragment();
 		InitFragment();
@@ -831,6 +887,8 @@ public class MenuBaseFragment extends ParentFragment{
 		ListBodyAnimation.StartChangeAnimation(_ServiceMenuListFragment);
 		_MenuListLeftFragment.setFirstScreen(Home.SCREEN_STATE_MENU_MANAGEMENT_TOP);
 	}
+
+	
 	// Inter
 	public void showBodyEngineSpeedAnimation(){
 		showInterAnimation();
@@ -920,13 +978,25 @@ public class MenuBaseFragment extends ParentFragment{
 		showInterAnimation();
 		InterBodyAnimation.StartChangeAnimation(_VersionInfoRMCUFragment);
 	}
-	public void _VersionInfoTCUFragment(){
+	public void showBodyVersionInfoTCUAniamtion(){
 		showInterAnimation();
 		InterBodyAnimation.StartChangeAnimation(_VersionInfoTCUFragment);
 	}
-	public void _VersionInfoECMFragment(){
+	public void showBodyVersionInfoECMAniamtion(){
 		showInterAnimation();
 		InterBodyAnimation.StartChangeAnimation(_VersionInfoECMFragment);
+	}
+	public void showBodyActiveFaultAnimation(){
+		showInterAnimation();
+		InterBodyAnimation.StartChangeAnimation(_FaultHistoryActiveFragment);
+	}
+	public void showBodyLoggedFaultAnimation(){
+		showInterAnimation();
+		InterBodyAnimation.StartChangeAnimation(_FaultHistoryLoggedFragment);
+	}
+	public void showLoggedFaultPasswordAnimation(){
+		showInterAnimation();
+		InterBodyAnimation.StartChangeAnimation(_FaultHistoryLoggedPasswordFragment);
 	}
 	public void showBodyESLAnimation(){
 		showInterAnimation();

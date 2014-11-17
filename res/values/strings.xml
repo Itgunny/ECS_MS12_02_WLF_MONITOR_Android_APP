@@ -260,6 +260,11 @@
     <string name="ECU_Manufacturer_Name">ECU Manufacturer Name</string>
     <string name="Calibration_ID">Calibration ID</string>
     <string name="Boom_Lever_Floating_Position_Adjust">Boom Lever Floating Position Adjust</string>
+    <string name="Machine">Machine</string>
+    <string name="Engine">Engine</string>
+    <string name="Transmission">Transmission</string>
+    <string name="Please_refer_to_machine_manual_for_more_detailed_description">Please refer to machine manual for more detailed description.</string>
+    <string name="Delete_Logged_Fault">Delete Logged Fault</string>
     <!-- Menu Monitoring End -->
     <!-- Menu Management Start -->
     <string name="Machine_Security">Machine Security</string>

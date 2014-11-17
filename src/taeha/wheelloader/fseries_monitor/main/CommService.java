@@ -1018,7 +1018,20 @@ public class CommService extends Service{
 	public native int Get_RX_RES_KEY_DetentSetting();
 	public native int Get_RX_RES_KEY_FineModulation();
 	public native int Get_RX_RES_KEY_FN();
-
+	public native int Get_gErr_Mcu_TotalPacket();
+	public native int Get_gErr_Ecu_TotalPacket();
+	public native int Get_gErr_Tcu_TotalPacket();
+	public native int Get_gErr_Mcu_TotalPacket_Logged();
+	public native int Get_gErr_Ecu_TotalPacket_Logged();
+	public native int Get_gErr_Tcu_TotalPacket_Logged();
+	public native int Get_gErr_EHCU_TotalPacket_Logged();
+	public native int Get_gErr_Mcu_Total();
+	public native int Get_gErr_Ecu_Total();
+	public native int Get_gErr_Tcu_Total();
+	public native int Get_gErr_Mcu_Total_Logged();
+	public native int Get_gErr_Ecu_Total_Logged();
+	public native int Get_gErr_Tcu_Total_Logged();
+	public native int Get_gErr_EHCU_Total_Logged();
 	
 	///////////////////////////////////////////////////////////////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////////////
