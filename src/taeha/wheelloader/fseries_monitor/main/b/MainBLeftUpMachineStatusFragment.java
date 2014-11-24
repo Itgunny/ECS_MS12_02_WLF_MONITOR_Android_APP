@@ -13,6 +13,7 @@ import taeha.wheelloader.fseries_monitor.animation.ImageViewYAxisFlipAnimation;
 import taeha.wheelloader.fseries_monitor.main.CAN1CommManager;
 import taeha.wheelloader.fseries_monitor.main.ParentFragment;
 import taeha.wheelloader.fseries_monitor.main.R;
+import taeha.wheelloader.fseries_monitor.main.R.color;
 import taeha.wheelloader.fseries_monitor.main.R.string;
 
 public class MainBLeftUpMachineStatusFragment extends ParentFragment{
@@ -366,13 +367,17 @@ public class MainBLeftUpMachineStatusFragment extends ParentFragment{
 		if(SuddenChangeErr == CAN1CommManager.DATA_STATE_LAMP_ON && BucketFullInErr == CAN1CommManager.DATA_STATE_LAMP_ON){
 			WeighingUpperStatusIconAnimation.FlipAnimation(imgViewWeighingUpperIcon,R.drawable.main_default_monitoring_icon_sudden_fullin);
 			textViewWeighingUpperData.setText(ParentActivity.GetWeighit(WeightInfoDataCurrent, ParentActivity.UnitWeight));
+			textViewWeighingUpperData.setTextColor(ParentActivity.getResources().getColor(color.red));
 		}else if(SuddenChangeErr == CAN1CommManager.DATA_STATE_LAMP_ON){
 			WeighingUpperStatusIconAnimation.FlipAnimation(imgViewWeighingUpperIcon,R.drawable.main_default_monitoring_icon_sudden);
 			textViewWeighingUpperData.setText(ParentActivity.GetWeighit(WeightInfoDataCurrent, ParentActivity.UnitWeight));
+			textViewWeighingUpperData.setTextColor(ParentActivity.getResources().getColor(color.red));
 		}else if(BucketFullInErr == CAN1CommManager.DATA_STATE_LAMP_ON){
 			WeighingUpperStatusIconAnimation.FlipAnimation(imgViewWeighingUpperIcon,R.drawable.main_default_monitoring_icon_fullin);
 			textViewWeighingUpperData.setText(ParentActivity.GetWeighit(WeightInfoDataCurrent, ParentActivity.UnitWeight));
+			textViewWeighingUpperData.setTextColor(ParentActivity.getResources().getColor(color.red));
 		}else{
+			textViewWeighingUpperData.setTextColor(ParentActivity.getResources().getColor(color.white));
 			switch (DisplayIndex) {
 			case CAN1CommManager.DATA_STATE_WEIGHINGDISPLAY_DAILY:
 				WeighingUpperStatusIconAnimation.FlipAnimation(imgViewWeighingUpperIcon,R.drawable.main_default_monitoring_icon_d1);

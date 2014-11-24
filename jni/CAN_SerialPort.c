@@ -1315,7 +1315,12 @@ jint Get_SoftStopBucketIn_2339_PGN65524(JNIEnv * env, jobject this) {
 jint Get_SoftStopBucketOut_2340_PGN65524(JNIEnv * env, jobject this) {
 	return RX_WHEEL_LOADER_EHCU_STATUS2_65524.SoftStopBucketOut_2340;
 }
-
+jint Get_BoomDownEPPRValveMaxCurrent_2341_PGN65524(JNIEnv * env, jobject this) {
+	return RX_WHEEL_LOADER_EHCU_STATUS2_65524.BoomDownEPPRValveMaxCurrent_2341;
+}
+jint Get_BucketOutEPPRValveMaxCurrent_2342_PGN65524(JNIEnv * env, jobject this) {
+	return RX_WHEEL_LOADER_EHCU_STATUS2_65524.BucketOutEPPRValveMaxCurrent_2342;
+}
 //////RX_ELECTRICAL_SWITCH_RELAY_OPERATION_STATUS_65527///////
 jint Get_TravelAlarmOperationStatus_3431_PGN65527(JNIEnv * env, jobject this) {
 	return RX_ELECTRICAL_SWITCH_RELAY_OPERATION_STATUS_65527.TravelAlarmOperationStatus_3431;
@@ -2011,6 +2016,14 @@ void Set_SoftStopBucketIn_2339_PGN61184_203(JNIEnv * env,
 void Set_SoftStopBucketOut_2340_PGN61184_203(JNIEnv * env,
 		jobject this, int Data) {
 	TX_WHEEL_LOADER_EHCU_SETTING_61184_203.SoftStopBucketOut_2340 = Data;
+}
+void Set_BoomDownSpeedAdjust_PGN61184_203(JNIEnv * env,
+		jobject this, int Data) {
+	TX_WHEEL_LOADER_EHCU_SETTING_61184_203.BoomDownSpeedAdjust = Data;
+}
+void Set_BucketOutSpeedAdjust_PGN61184_203(JNIEnv * env,
+		jobject this, int Data) {
+	TX_WHEEL_LOADER_EHCU_SETTING_61184_203.BucketOutSpeedAdjust = Data;
 }
 //////TX_MONIOTR_STATUS_65327///////
 void Set_MonitorOperationMode_834_PGN65327(JNIEnv * env, jobject this, int Data) {
@@ -4069,6 +4082,8 @@ static JNINativeMethod methods[] =
 				{"Get_SoftStopBoomDown_2338_PGN65524", "()I",(void*) Get_SoftStopBoomDown_2338_PGN65524 },
 				{"Get_SoftStopBucketIn_2339_PGN65524", "()I",(void*) Get_SoftStopBucketIn_2339_PGN65524 },
 				{"Get_SoftStopBucketOut_2340_PGN65524", "()I",(void*) Get_SoftStopBucketOut_2340_PGN65524 },
+				{"Get_BoomDownEPPRValveMaxCurrent_2341_PGN65524", "()I",(void*) Get_BoomDownEPPRValveMaxCurrent_2341_PGN65524 },
+				{"Get_BucketOutEPPRValveMaxCurrent_2342_PGN65524", "()I",(void*) Get_BucketOutEPPRValveMaxCurrent_2342_PGN65524 },
 				//////RX_ELECTRICAL_SWITCH_RELAY_OPERATION_STATUS_65527///////
 				{ "Get_TravelAlarmOperationStatus_3431_PGN65527", "()I",
 						(void*) Get_TravelAlarmOperationStatus_3431_PGN65527 },
@@ -4404,6 +4419,9 @@ static JNINativeMethod methods[] =
 				{ "Set_SoftStopBoomDown_2338_PGN61184_203", "(I)V",(void*) Set_SoftStopBoomDown_2338_PGN61184_203 },
 				{ "Set_SoftStopBucketIn_2339_PGN61184_203", "(I)V",(void*) Set_SoftStopBucketIn_2339_PGN61184_203 },
 				{ "Set_SoftStopBucketOut_2340_PGN61184_203", "(I)V",(void*) Set_SoftStopBucketOut_2340_PGN61184_203 },
+				{ "Set_BoomDownSpeedAdjust_PGN61184_203", "(I)V",(void*) Set_BoomDownSpeedAdjust_PGN61184_203 },
+				{ "Set_BucketOutSpeedAdjust_PGN61184_203", "(I)V",(void*) Set_BucketOutSpeedAdjust_PGN61184_203 },
+
 				//////TX_MONIOTR_STATUS_65327///////
 				{ "Set_MonitorOperationMode_834_PGN65327", "(I)V",
 						(void*) Set_MonitorOperationMode_834_PGN65327 },

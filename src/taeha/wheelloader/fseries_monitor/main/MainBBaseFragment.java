@@ -26,6 +26,7 @@ import taeha.wheelloader.fseries_monitor.main.b.MainBLeftUpQuickFragment;
 import taeha.wheelloader.fseries_monitor.main.b.MainBRightDownQuickFragment;
 import taeha.wheelloader.fseries_monitor.main.b.MainBRightDownTMCCOModeFragment;
 import taeha.wheelloader.fseries_monitor.main.b.MainBRightDownTMFragment;
+import taeha.wheelloader.fseries_monitor.main.b.MainBRightDownTMICCOModeFragment;
 import taeha.wheelloader.fseries_monitor.main.b.MainBRightDownTMShiftModeFragment;
 import taeha.wheelloader.fseries_monitor.main.b.MainBRightDownTMTCLockUpFragment;
 import taeha.wheelloader.fseries_monitor.main.b.MainBRightUpEngineFragment;
@@ -113,6 +114,7 @@ public class MainBBaseFragment extends ParentFragment{
 	
 	public MainBRightDownTMFragment _MainBRightDownTMFragment;
 	public MainBRightDownTMCCOModeFragment _MainBRightDownTMCCOModeFragment;
+	public MainBRightDownTMICCOModeFragment _MainBRightDownTMICCOModeFragment;
 	public MainBRightDownTMShiftModeFragment _MainBRightDownTMShiftModeFragment;
 	public MainBRightDownTMTCLockUpFragment _MainBRightDownTMTCLockUpFragment;
 	public MainBRightDownQuickFragment _MainBRightDownQuickFragment;
@@ -263,6 +265,8 @@ public class MainBBaseFragment extends ParentFragment{
 		}
 		
 		ParentActivity.ScreenIndex = ParentActivity.SCREEN_STATE_MAIN_B_TOP;
+		
+		ParentActivity.StartSeatBeltTimer();
 		return mRoot;
 	}
 	@Override
@@ -331,6 +335,7 @@ public class MainBBaseFragment extends ParentFragment{
 		
 		_MainBRightDownTMFragment = new MainBRightDownTMFragment();
 		_MainBRightDownTMCCOModeFragment = new MainBRightDownTMCCOModeFragment();
+		_MainBRightDownTMICCOModeFragment = new MainBRightDownTMICCOModeFragment();
 		_MainBRightDownTMShiftModeFragment = new MainBRightDownTMShiftModeFragment();
 		_MainBRightDownTMTCLockUpFragment = new MainBRightDownTMTCLockUpFragment();
 		_MainBRightDownQuickFragment = new MainBRightDownQuickFragment();
@@ -494,6 +499,7 @@ public class MainBBaseFragment extends ParentFragment{
 		transaction.detach(_MainBRightUpQuickFragment);
 		transaction.detach(_MainBRightDownTMFragment);
 		transaction.detach(_MainBRightDownTMCCOModeFragment);
+		transaction.detach(_MainBRightDownTMICCOModeFragment);
 		transaction.detach(_MainBRightDownTMShiftModeFragment);
 		transaction.detach(_MainBRightDownTMTCLockUpFragment);
 		transaction.detach(_MainBRightDownQuickFragment);
@@ -528,6 +534,7 @@ public class MainBBaseFragment extends ParentFragment{
 			
 		_MainBRightDownTMFragment 	 = null;
 		_MainBRightDownTMCCOModeFragment 	 = null;
+		_MainBRightDownTMICCOModeFragment 	 = null;
 		_MainBRightDownTMShiftModeFragment 	 = null;
 		_MainBRightDownTMTCLockUpFragment 	 = null;
 		_MainBRightDownQuickFragment 	 = null;
@@ -731,6 +738,12 @@ public class MainBBaseFragment extends ParentFragment{
 	public void showRightDownTMCCOMode(){
 		android.app.FragmentTransaction transaction = getFragmentManager().beginTransaction();
 		transaction.replace(R.id.FrameLayout_screen_main_b_rightdown, _MainBRightDownTMCCOModeFragment);
+		//transaction.addToBackStack("Main_Left");
+		transaction.commit();
+	}
+	public void showRightDownTMICCOMode(){
+		android.app.FragmentTransaction transaction = getFragmentManager().beginTransaction();
+		transaction.replace(R.id.FrameLayout_screen_main_b_rightdown, _MainBRightDownTMICCOModeFragment);
 		//transaction.addToBackStack("Main_Left");
 		transaction.commit();
 	}

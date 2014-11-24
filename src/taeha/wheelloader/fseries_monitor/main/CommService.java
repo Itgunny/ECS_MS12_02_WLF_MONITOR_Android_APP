@@ -534,6 +534,9 @@ public class CommService extends Service{
 	public native int Get_SoftStopBoomDown_2338_PGN65524();
 	public native int Get_SoftStopBucketIn_2339_PGN65524();
 	public native int Get_SoftStopBucketOut_2340_PGN65524();
+	public native int Get_BoomDownEPPRValveMaxCurrent_2341_PGN65524();
+	public native int Get_BucketOutEPPRValveMaxCurrent_2342_PGN65524();
+	
 	//////RX_ELECTRICAL_SWITCH_RELAY_OPERATION_STATUS_65527///////
 	public native int Get_TravelAlarmOperationStatus_3431_PGN65527();
 	public native int Get_WasherOperationStatus_3432_PGN65527();
@@ -726,6 +729,8 @@ public class CommService extends Service{
 	public native void Set_SoftStopBoomDown_2338_PGN61184_203(int Data);
 	public native void Set_SoftStopBucketIn_2339_PGN61184_203(int Data);
 	public native void Set_SoftStopBucketOut_2340_PGN61184_203(int Data);
+	public native void Set_BoomDownSpeedAdjust_PGN61184_203(int Data);
+	public native void Set_BucketOutSpeedAdjust_PGN61184_203(int Data);
 	//////TX_MONIOTR_STATUS_65327///////
 	public native void Set_MonitorOperationMode_834_PGN65327(int Data);
 	public native void Set_RequestBuzzerStop_PGN65327(int Data);

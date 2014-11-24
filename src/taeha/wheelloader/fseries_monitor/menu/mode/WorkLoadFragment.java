@@ -78,7 +78,7 @@ public class WorkLoadFragment extends ParentFragment{
 		InitResource();
 		InitValuables();
 		InitButtonListener();
-		
+	
 		ParentActivity.ScreenIndex = ParentActivity.SCREEN_STATE_MENU_MODE_HYD_WORKLOAD_TOP;
 		ParentActivity._MenuBaseFragment._MenuInterTitleFragment.SetTitleText(ParentActivity.getResources().getString(R.string.Work_Load));
 		return mRoot;
@@ -453,6 +453,7 @@ public class WorkLoadFragment extends ParentFragment{
 		edit.putInt("WeighingErrorDetect", ParentActivity.WeighingErrorDetect);
 		edit.commit();
 		Log.d(TAG,"SavePref");
+	
 	}
 	/////////////////////////////////////////////////////////////////////
 	

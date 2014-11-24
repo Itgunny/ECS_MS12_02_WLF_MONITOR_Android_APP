@@ -76,7 +76,8 @@ public class EngineAutoShutdownCountPopup extends ParentPopup{
 	public boolean onTouchEvent(MotionEvent event) {
 		// TODO Auto-generated method stub
 	
-		return super.onTouchEvent(event);
+		//return super.onTouchEvent(event);
+		return false;
 	
 	}
 	@Override
@@ -147,7 +148,7 @@ public class EngineAutoShutdownCountPopup extends ParentPopup{
 	}
 	////////////////////////////////////////////////////////////////////////////////
 	public void CountDisplay(int _data){
-		textViewTime.setText(Integer.toString(_data));
+		textViewTime.setText(Integer.toString(_data) + ParentActivity.getResources().getString(string.Sec));
 	}
 	////////////////////////////////////////////////////////////////////////////////
 }

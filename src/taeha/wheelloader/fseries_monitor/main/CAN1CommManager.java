@@ -284,6 +284,8 @@ public class CAN1CommManager extends ICAN1CommManager.Stub{		// ttySAC1(Linux), 
 	public static final int DATA_INDEX_TAG_REQ_SUCCESS	 			= 0x00;
 	public static final int DATA_INDEX_TAG_REGISTRATION			 	= 0x01;
 	public static final int DATA_INDEX_TAG_ELIMINATION	 			= 0x02;
+	public static final int DATA_INDEX_TAG_USE_SAVE		 			= 0x03;
+	public static final int DATA_INDEX_TAG_USE_LOAD		 			= 0x04;
 	
 	public static final int DATA_INDEX_SELECTGEAR_DIR_N 	= 0x00000;
 	public static final int DATA_INDEX_SELECTGEAR_DIR_F 	= 0x00001;
@@ -1035,6 +1037,8 @@ public class CAN1CommManager extends ICAN1CommManager.Stub{		// ttySAC1(Linux), 
 	public int Get_SoftStopBoomDown_2338_PGN65524(){ return service.Get_SoftStopBoomDown_2338_PGN65524();}
 	public int Get_SoftStopBucketIn_2339_PGN65524(){ return service.Get_SoftStopBucketIn_2339_PGN65524();}
 	public int Get_SoftStopBucketOut_2340_PGN65524(){ return service.Get_SoftStopBucketOut_2340_PGN65524();}
+	public int Get_BoomDownEPPRValveMaxCurrent_2341_PGN65524(){ return service.Get_BoomDownEPPRValveMaxCurrent_2341_PGN65524();}
+	public int Get_BucketOutEPPRValveMaxCurrent_2342_PGN65524(){ return service.Get_BucketOutEPPRValveMaxCurrent_2342_PGN65524();}
 	//////RX_ELECTRICAL_SWITCH_RELAY_OPERATION_STATUS_65527///////
 	public int Get_TravelAlarmOperationStatus_3431_PGN65527(){ return service.Get_TravelAlarmOperationStatus_3431_PGN65527();}
 	public int Get_WasherOperationStatus_3432_PGN65527(){ return service.Get_WasherOperationStatus_3432_PGN65527();}
@@ -1226,6 +1230,8 @@ public class CAN1CommManager extends ICAN1CommManager.Stub{		// ttySAC1(Linux), 
 	public void Set_SoftStopBoomDown_2338_PGN61184_203(int Data){ service.Set_SoftStopBoomDown_2338_PGN61184_203(Data);}
 	public void Set_SoftStopBucketIn_2339_PGN61184_203(int Data){ service.Set_SoftStopBucketIn_2339_PGN61184_203(Data);}
 	public void Set_SoftStopBucketOut_2340_PGN61184_203(int Data){ service.Set_SoftStopBucketOut_2340_PGN61184_203(Data);}
+	public void Set_BoomDownSpeedAdjust_PGN61184_203(int Data){ service.Set_BoomDownSpeedAdjust_PGN61184_203(Data);}
+	public void Set_BucketOutSpeedAdjust_PGN61184_203(int Data){ service.Set_BucketOutSpeedAdjust_PGN61184_203(Data);}
 	//////TX_MONIOTR_STATUS_65327///////
 	public void Set_MonitorOperationMode_834_PGN65327(int Data){ service.Set_MonitorOperationMode_834_PGN65327(Data);}
 	public void Set_RequestBuzzerStop_PGN65327(int Data){ service.Set_RequestBuzzerStop_PGN65327(Data);}

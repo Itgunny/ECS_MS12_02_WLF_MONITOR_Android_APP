@@ -26,6 +26,7 @@ import android.widget.FrameLayout;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.RadioButton;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 public class MachineSecuritySmartKeyFragment extends ParentFragment{
@@ -44,6 +45,8 @@ public class MachineSecuritySmartKeyFragment extends ParentFragment{
 	
 	TextView textViewTagNum;
 	TextView textViewDetail;
+	
+	RelativeLayout layoutContents;
 	//////////////////////////////////////////////////
 	
 	//VALUABLE////////////////////////////////////////
@@ -104,6 +107,8 @@ public class MachineSecuritySmartKeyFragment extends ParentFragment{
 		
 		textViewTagNum = (TextView)mRoot.findViewById(R.id.textView_menu_body_management_smartkey_tag_register_num);
 		textViewDetail = (TextView)mRoot.findViewById(R.id.textView_menu_body_management_smartkey_tag_detail);
+		
+		layoutContents = (RelativeLayout)mRoot.findViewById(R.id.RelativeLayout_menu_body_management_smartkey_tag_contents);
 	}
 
 	protected void InitValuables() {
@@ -194,6 +199,7 @@ public class MachineSecuritySmartKeyFragment extends ParentFragment{
 		SavePref();
 		
 		if(SmartKeyUse == CAN1CommManager.DATA_STATE_SMARTKEY_USE_ON){
+			CAN1Comm.TxCMDToMCU(CAN1CommManager.CMD_SMK, CAN1CommManager.DATA_INDEX_TAG_USE_SAVE,1);
 			CAN1Comm.Set_HCEAntiTheftCommand_1633_PGN61184_23(CAN1CommManager.DATA_STATE_ESL_MODE_SETTING);
 			CAN1Comm.Set_ESLMode_820_PGN61184_23(CAN1CommManager.DATA_STATE_ESL_MODE_ENABLE_CONTINUOUS);
 			CAN1Comm.Set_ESLInterval_825_PGN61184_23(0xFF);
@@ -201,12 +207,13 @@ public class MachineSecuritySmartKeyFragment extends ParentFragment{
 			CAN1Comm.Set_HCEAntiTheftCommand_1633_PGN61184_23(15);
 			CAN1Comm.Set_ESLMode_820_PGN61184_23(3);
 		}else if(SmartKeyUse == CAN1CommManager.DATA_STATE_SMARTKEY_USE_OFF){
-			CAN1Comm.Set_HCEAntiTheftCommand_1633_PGN61184_23(CAN1CommManager.DATA_STATE_ESL_MODE_SETTING);
-			CAN1Comm.Set_ESLMode_820_PGN61184_23(CAN1CommManager.DATA_STATE_ESL_MODE_DISABLE);
-			CAN1Comm.Set_ESLInterval_825_PGN61184_23(0xFF);
-			CAN1Comm.TxCANToMCU(23);
-			CAN1Comm.Set_HCEAntiTheftCommand_1633_PGN61184_23(15);
-			CAN1Comm.Set_ESLMode_820_PGN61184_23(3);
+//			CAN1Comm.TxCMDToMCU(CAN1CommManager.CMD_SMK, CAN1CommManager.DATA_INDEX_TAG_USE_SAVE,0);
+//			CAN1Comm.Set_HCEAntiTheftCommand_1633_PGN61184_23(CAN1CommManager.DATA_STATE_ESL_MODE_SETTING);
+//			CAN1Comm.Set_ESLMode_820_PGN61184_23(CAN1CommManager.DATA_STATE_ESL_MODE_DISABLE);
+//			CAN1Comm.Set_ESLInterval_825_PGN61184_23(0xFF);
+//			CAN1Comm.TxCANToMCU(23);
+//			CAN1Comm.Set_HCEAntiTheftCommand_1633_PGN61184_23(15);
+//			CAN1Comm.Set_ESLMode_820_PGN61184_23(3);
 		}
 		
 	}
@@ -243,10 +250,12 @@ public class MachineSecuritySmartKeyFragment extends ParentFragment{
 		case CAN1CommManager.DATA_STATE_SMARTKEY_USE_OFF:
 			radioDisable.setChecked(true);
 			radioEnable.setChecked(false);
+			layoutContents.setVisibility(View.INVISIBLE);
 			break;
 		case CAN1CommManager.DATA_STATE_SMARTKEY_USE_ON:
 			radioDisable.setChecked(false);
 			radioEnable.setChecked(true);
+			layoutContents.setVisibility(View.VISIBLE);
 			break;
 		default:
 			break;

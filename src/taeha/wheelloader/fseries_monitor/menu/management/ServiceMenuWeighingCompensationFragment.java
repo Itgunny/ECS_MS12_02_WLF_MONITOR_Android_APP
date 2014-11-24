@@ -180,6 +180,22 @@ public class ServiceMenuWeighingCompensationFragment extends ParentFragment{
 		WorkTool2 = CAN1Comm.Get_WeightOffsetWorkTool2_1922_PGN61184_63();
 		WorkTool3 = CAN1Comm.Get_WeightOffsetWorkTool3_1922_PGN61184_63();
 		
+		switch (WeightOffsetSelectionStatus) {
+		case CAN1CommManager.DATA_STATE_WEIGHT_OFFSET_SETTING_NOOFFSET:
+			break;
+		case CAN1CommManager.DATA_STATE_WEIGHT_OFFSET_SETTING_WORKTOOL_1:
+			NumSetting = WorkTool1;
+			break;
+		case CAN1CommManager.DATA_STATE_WEIGHT_OFFSET_SETTING_WORKTOOL_2:
+			NumSetting = WorkTool2;
+			break;
+		case CAN1CommManager.DATA_STATE_WEIGHT_OFFSET_SETTING_WORKTOOL_3:
+			NumSetting = WorkTool3;
+			break;
+		default:
+			break;
+		}
+		
 		WeighingSystemCompensationDisplay(WeightOffsetSelectionStatus,WorkTool1,WorkTool2,WorkTool3);
 	}
 	@Override
@@ -529,7 +545,7 @@ public class ServiceMenuWeighingCompensationFragment extends ParentFragment{
 		WeightOffsetSelectionStatus = CAN1CommManager.DATA_STATE_WEIGHT_OFFSET_SETTING_WORKTOOL_1;
 		WeighingSystemCompensationDisplay(WeightOffsetSelectionStatus,WorkTool1,WorkTool2,WorkTool3);
 		NumIndex = 0;
-		NumSetting = 0;
+		NumSetting = WorkTool1;
 		Num100 = 0;
 		Num10 = 0;
 		Num1 = 0;
@@ -540,7 +556,7 @@ public class ServiceMenuWeighingCompensationFragment extends ParentFragment{
 		WeightOffsetSelectionStatus = CAN1CommManager.DATA_STATE_WEIGHT_OFFSET_SETTING_WORKTOOL_2;
 		WeighingSystemCompensationDisplay(WeightOffsetSelectionStatus,WorkTool1,WorkTool2,WorkTool3);
 		NumIndex = 0;
-		NumSetting = 0;
+		NumSetting = WorkTool2;
 		Num100 = 0;
 		Num10 = 0;
 		Num1 = 0;
@@ -551,7 +567,7 @@ public class ServiceMenuWeighingCompensationFragment extends ParentFragment{
 		WeightOffsetSelectionStatus = CAN1CommManager.DATA_STATE_WEIGHT_OFFSET_SETTING_WORKTOOL_3;
 		WeighingSystemCompensationDisplay(WeightOffsetSelectionStatus,WorkTool1,WorkTool2,WorkTool3);
 		NumIndex = 0;
-		NumSetting = 0;
+		NumSetting = WorkTool3;
 		Num100 = 0;
 		Num10 = 0;
 		Num1 = 0;

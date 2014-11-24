@@ -12,7 +12,7 @@
         <TextView
             android:id="@+id/textView_menu_body_monitoring_ehcuioinfo_operation_title"
             android:layout_width="350dp"
-            android:layout_height="wrap_content"
+            android:layout_height="50dp"
             android:layout_alignLeft="@+id/RelativeLayout_menu_body_monitoring_ehcuioinfo_boomup"
             android:gravity="center"
             android:text="@string/Operation"
@@ -22,7 +22,7 @@
         <TextView
             android:id="@+id/textView_menu_body_monitoring_ehcuioinfo_joystickstroke_title"
             android:layout_width="200dp"
-            android:layout_height="wrap_content"
+            android:layout_height="50dp"
             android:layout_toRightOf="@+id/textView_menu_body_monitoring_ehcuioinfo_operation_title"
             android:gravity="center"
             android:text="@string/Joystick_Stroke"
@@ -32,7 +32,7 @@
         <TextView
             android:id="@+id/textView_menu_body_monitoring_ehcuioinfo_epprcurrent_title"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="50dp"
             android:layout_alignRight="@+id/RelativeLayout_menu_body_monitoring_ehcuioinfo_boomup"
             android:layout_toRightOf="@+id/textView_menu_body_monitoring_ehcuioinfo_joystickstroke_title"
             android:gravity="center"

@@ -102,7 +102,10 @@ public class MachineSecurityListFragment extends MenuBodyList_ParentFragment{
 			return;
 		else
 			ParentActivity.StartAnimationRunningTimer();
-		ParentActivity._MenuBaseFragment.showBodyESLAnimation();
+		if(ParentActivity.SmartKeyUse != CAN1CommManager.DATA_STATE_SMARTKEY_USE_ON){
+			ParentActivity._MenuBaseFragment.showBodyESLAnimation();
+		}
+	
 	}
 
 	@Override

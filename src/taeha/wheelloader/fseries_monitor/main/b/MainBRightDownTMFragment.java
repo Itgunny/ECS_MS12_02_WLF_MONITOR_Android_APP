@@ -9,6 +9,7 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 import taeha.wheelloader.fseries_monitor.animation.TextViewXAxisFlipAnimation;
 import taeha.wheelloader.fseries_monitor.main.CAN1CommManager;
+import taeha.wheelloader.fseries_monitor.main.CheckModel;
 import taeha.wheelloader.fseries_monitor.main.ParentFragment;
 import taeha.wheelloader.fseries_monitor.main.R;
 import taeha.wheelloader.fseries_monitor.main.R.string;
@@ -39,6 +40,7 @@ public class MainBRightDownTMFragment extends ParentFragment{
 	//////////////////////////////////////////////////
 	
 	//ANIMATION///////////////////////////////////////
+	TextViewXAxisFlipAnimation TMCCOModeTitleDataAnimation;
 	TextViewXAxisFlipAnimation TMCCOModeDataAnimation;
 	TextViewXAxisFlipAnimation TMShiftModeDataAnimation;
 	TextViewXAxisFlipAnimation TMTCLockUpDataAnimation;
@@ -94,6 +96,7 @@ public class MainBRightDownTMFragment extends ParentFragment{
 	protected void InitValuables() {
 		// TODO Auto-generated method stub
 		super.InitValuables();
+		TMCCOModeTitleDataAnimation = new TextViewXAxisFlipAnimation(ParentActivity);
 		TMCCOModeDataAnimation = new TextViewXAxisFlipAnimation(ParentActivity);
 		TMShiftModeDataAnimation = new TextViewXAxisFlipAnimation(ParentActivity);
 		TMTCLockUpDataAnimation = new TextViewXAxisFlipAnimation(ParentActivity);
@@ -141,12 +144,19 @@ public class MainBRightDownTMFragment extends ParentFragment{
 	@Override
 	protected void UpdateUI() {
 		// TODO Auto-generated method stub
+		TCCCOModeTitleDisplay(ParentActivity._CheckModel.GetMCUVersion(CAN1Comm.Get_ComponentBasicInformation_1698_PGN65330()));
 		TMCCOModeDisplay(CCOMode);
 		TMShiftModeDisplay(ShiftMode);
 		TMTCLockUpDisplay(TCLockUp);
 	}
 	/////////////////////////////////////////////////////////////////////	
-	
+	public void TCCCOModeTitleDisplay(int Model){
+		if(Model == CheckModel.MODEL_980){
+			TMCCOModeTitleDataAnimation.FlipAnimation(textViewCCOModeTitle,getResources().getString(string.ICCO_MODE));
+		}else{
+			TMCCOModeTitleDataAnimation.FlipAnimation(textViewCCOModeTitle,getResources().getString(string.CCO_MODE));
+		}
+	}
 	public void TMCCOModeDisplay(int Data){
 		try {
 			switch (Data) {

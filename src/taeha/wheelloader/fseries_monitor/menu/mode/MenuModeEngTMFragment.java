@@ -81,10 +81,10 @@ public class MenuModeEngTMFragment extends MenuBodyList_ParentFragment{
 		setClickableList5(true);
 		
 		setListTitle1(ParentActivity.getResources().getString(string.Engine_Setting));
-		setListTitle2(ParentActivity.getResources().getString(string.TC_Lock_Up));
+		setListTitle2(ParentActivity.getResources().getString(string.Kick_Down));
 		setListTitle3(ParentActivity.getResources().getString(string.CCO_Mode));
 		setListTitle4(ParentActivity.getResources().getString(string.Shift_Mode));
-		setListTitle5(ParentActivity.getResources().getString(string.Kick_Down));
+		setListTitle5(ParentActivity.getResources().getString(string.TC_Lock_Up));
 	}
 	
 	@Override
@@ -122,7 +122,7 @@ public class MenuModeEngTMFragment extends MenuBodyList_ParentFragment{
 	@Override
 	public void ClickList2() {
 		// TODO Auto-generated method stub
-		ParentActivity.showTCLockUp();
+		ParentActivity.showKickDown();
 	}
 
 	@Override
@@ -140,7 +140,7 @@ public class MenuModeEngTMFragment extends MenuBodyList_ParentFragment{
 	@Override
 	public void ClickList5() {
 		// TODO Auto-generated method stub
-		ParentActivity.showKickDown();
+		ParentActivity.showTCLockUp();
 	}
 
 	@Override
@@ -164,14 +164,14 @@ public class MenuModeEngTMFragment extends MenuBodyList_ParentFragment{
 	
 		
 	}
-
+	
 	/////////////////////////////////////////////////////////////////////
 	public void CursurDisplay(int Index){
 		switch (Index) {
 		case Home.SCREEN_STATE_MENU_MODE_ENGINETM_ENGINESETTING_TOP:
 			setListFocus(1);
 			break;
-		case Home.SCREEN_STATE_MENU_MODE_ENGINETM_TCLOCKUP:
+		case Home.SCREEN_STATE_MENU_MODE_ENGINETM_KICKDOWN:
 			setListFocus(2);
 			break;
 		case Home.SCREEN_STATE_MENU_MODE_ENGINETM_CCOMODE:
@@ -180,7 +180,7 @@ public class MenuModeEngTMFragment extends MenuBodyList_ParentFragment{
 		case Home.SCREEN_STATE_MENU_MODE_ENGINETM_SHIFTMODE:
 			setListFocus(4);
 			break;
-		case Home.SCREEN_STATE_MENU_MODE_ENGINETM_KICKDOWN:
+		case Home.SCREEN_STATE_MENU_MODE_ENGINETM_TCLOCKUP:
 			setListFocus(5);
 			break;
 		default:

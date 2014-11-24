@@ -125,10 +125,10 @@ public class Home extends Activity {
 	public  static final int SCREEN_STATE_MENU_MODE_ENGINETM_ENGINESETTING_WARMINGUP		= 0x21112000;
 	public  static final int SCREEN_STATE_MENU_MODE_ENGINETM_ENGINESETTING_SPEED			= 0x21113000;
 	public  static final int SCREEN_STATE_MENU_MODE_ENGINETM_ENGINESETTING_END				= 0x21111FFF;
-	public  static final int SCREEN_STATE_MENU_MODE_ENGINETM_TCLOCKUP						= 0x21120000;
+	public  static final int SCREEN_STATE_MENU_MODE_ENGINETM_KICKDOWN						= 0x21120000;
 	public  static final int SCREEN_STATE_MENU_MODE_ENGINETM_CCOMODE						= 0x21130000;
 	public  static final int SCREEN_STATE_MENU_MODE_ENGINETM_SHIFTMODE						= 0x21140000;
-	public  static final int SCREEN_STATE_MENU_MODE_ENGINETM_KICKDOWN						= 0x21150000;
+	public  static final int SCREEN_STATE_MENU_MODE_ENGINETM_TCLOCKUP						= 0x21150000;
 	public  static final int SCREEN_STATE_MENU_MODE_ENGINETM_END							= 0x211FFFFF;
 	
 	public  static final int SCREEN_STATE_MENU_MODE_HYD_TOP									= 0x21200000;
@@ -164,29 +164,29 @@ public class Home extends Activity {
 	public  static final int SCREEN_STATE_MENU_MODE_END										= 0x21FFFFFF;
 	public  static final int SCREEN_STATE_MENU_MONITORING_TOP								= 0x22000000;
 	public  static final int SCREEN_STATE_MENU_MONITORING_MACHINEMONITORING					= 0x22100000;
-	public  static final int SCREEN_STATE_MENU_MONITORING_EHCUINFO_TOP						= 0x22200000;
-	public  static final int SCREEN_STATE_MENU_MONITORING_EHCUINFO_BOOMLEVERFLOAT			= 0x22210000;
-	public  static final int SCREEN_STATE_MENU_MONITORING_EHCUINFO_END						= 0x222FFFFF;
-	public  static final int SCREEN_STATE_MENU_MONITORING_OPERATIONHISTORY_TOP				= 0x22300000;
-	public  static final int SCREEN_STATE_MENU_MONITORING_OPERATIONHISTORY_INIT				= 0x22310000;
-	public  static final int SCREEN_STATE_MENU_MONITORING_OPERATIONHISTORY_END				= 0x223FFFFF;
-	public  static final int SCREEN_STATE_MENU_MONITORING_FAULTHISTORY_TOP					= 0x22400000;
-	public  static final int SCREEN_STATE_MENU_MONITORING_FAULTHISTORY_ACTIVE_TOP			= 0x22410000;
-	public  static final int SCREEN_STATE_MENU_MONITORING_FAULTHISTORY_ACTIVE_END			= 0x2241FFFF;
-	public  static final int SCREEN_STATE_MENU_MONITORING_FAULTHISTORY_LOGGED_TOP			= 0x22420000;
-	public  static final int SCREEN_STATE_MENU_MONITORING_FAULTHISTORY_LOGGED_PW			= 0x22421000;
-	public  static final int SCREEN_STATE_MENU_MONITORING_FAULTHISTORY_LOGGED_DELETE		= 0x22422000;
-	public  static final int SCREEN_STATE_MENU_MONITORING_FAULTHISTORY_LOGGED_END			= 0x2242FFFF;
-	public  static final int SCREEN_STATE_MENU_MONITORING_FAULTHISTORY_END					= 0x224FFFFF;
-	public  static final int SCREEN_STATE_MENU_MONITORING_VERSIONINFO_TOP					= 0x22500000;
-	public  static final int SCREEN_STATE_MENU_MONITORING_VERSIONINFO_TCU					= 0x22510000;
-	public  static final int SCREEN_STATE_MENU_MONITORING_VERSIONINFO_ECM					= 0x22520000;
-	public  static final int SCREEN_STATE_MENU_MONITORING_VERSIONINFO_MONITOR				= 0x22530000;
-	public  static final int SCREEN_STATE_MENU_MONITORING_VERSIONINFO_MCU					= 0x22540000;
-	public  static final int SCREEN_STATE_MENU_MONITORING_VERSIONINFO_CLUSTER				= 0x22550000;
-	public  static final int SCREEN_STATE_MENU_MONITORING_VERSIONINFO_RMCU					= 0x22560000;
-	public  static final int SCREEN_STATE_MENU_MONITORING_VERSIONINFO_EHCU					= 0x22570000;
-	public  static final int SCREEN_STATE_MENU_MONITORING_VERSIONINFO_END					= 0x225FFFFF;
+	public  static final int SCREEN_STATE_MENU_MONITORING_OPERATIONHISTORY_TOP				= 0x22200000;
+	public  static final int SCREEN_STATE_MENU_MONITORING_OPERATIONHISTORY_INIT				= 0x22210000;
+	public  static final int SCREEN_STATE_MENU_MONITORING_OPERATIONHISTORY_END				= 0x222FFFFF;
+	public  static final int SCREEN_STATE_MENU_MONITORING_FAULTHISTORY_TOP					= 0x22300000;
+	public  static final int SCREEN_STATE_MENU_MONITORING_FAULTHISTORY_ACTIVE_TOP			= 0x22310000;
+	public  static final int SCREEN_STATE_MENU_MONITORING_FAULTHISTORY_ACTIVE_END			= 0x2231FFFF;
+	public  static final int SCREEN_STATE_MENU_MONITORING_FAULTHISTORY_LOGGED_TOP			= 0x22320000;
+	public  static final int SCREEN_STATE_MENU_MONITORING_FAULTHISTORY_LOGGED_PW			= 0x22321000;
+	public  static final int SCREEN_STATE_MENU_MONITORING_FAULTHISTORY_LOGGED_DELETE		= 0x22322000;
+	public  static final int SCREEN_STATE_MENU_MONITORING_FAULTHISTORY_LOGGED_END			= 0x2232FFFF;
+	public  static final int SCREEN_STATE_MENU_MONITORING_FAULTHISTORY_END					= 0x223FFFFF;
+	public  static final int SCREEN_STATE_MENU_MONITORING_VERSIONINFO_TOP					= 0x22400000;
+	public  static final int SCREEN_STATE_MENU_MONITORING_VERSIONINFO_TCU					= 0x22410000;
+	public  static final int SCREEN_STATE_MENU_MONITORING_VERSIONINFO_ECM					= 0x22420000;
+	public  static final int SCREEN_STATE_MENU_MONITORING_VERSIONINFO_MONITOR				= 0x22430000;
+	public  static final int SCREEN_STATE_MENU_MONITORING_VERSIONINFO_MCU					= 0x22440000;
+	public  static final int SCREEN_STATE_MENU_MONITORING_VERSIONINFO_CLUSTER				= 0x22450000;
+	public  static final int SCREEN_STATE_MENU_MONITORING_VERSIONINFO_RMCU					= 0x22460000;
+	public  static final int SCREEN_STATE_MENU_MONITORING_VERSIONINFO_EHCU					= 0x22470000;
+	public  static final int SCREEN_STATE_MENU_MONITORING_VERSIONINFO_END					= 0x224FFFFF;
+	public  static final int SCREEN_STATE_MENU_MONITORING_EHCUINFO_TOP						= 0x22500000;
+	public  static final int SCREEN_STATE_MENU_MONITORING_EHCUINFO_BOOMLEVERFLOAT			= 0x22510000;
+	public  static final int SCREEN_STATE_MENU_MONITORING_EHCUINFO_END						= 0x225FFFFF;
 	public  static final int SCREEN_STATE_MENU_MONITORING_END								= 0x22FFFFFF;
 	
 	public  static final int SCREEN_STATE_MENU_MANAGEMENT_TOP								= 0x23000000;
@@ -255,6 +255,10 @@ public class Home extends Activity {
 	public  static final int SCREEN_STATE_MENU_END 											= 0x2FFFFFFF;
 	
 	public  static final int SCREEN_STATE_ENGINEAUTOSHUTDOWNCOUNT_TOP						= 0x30000000;
+	
+	public  static final int SCREEN_STATE_MAIN_ESL_CHECK_TOP								= 0x40000000;
+	public  static final int SCREEN_STATE_MAIN_ESL_PASSWORD									= 0x41000000;
+	public  static final int SCREEN_STATE_MAIN_ESL_CHECK_END								= 0x4FFFFFFF;
 	
 	public  static final int UNIT_ODO_KM 			= 0;
 	public  static final int UNIT_ODO_MILE 			= 1;
@@ -419,11 +423,16 @@ public class Home extends Activity {
 	// AS
 	public String strASNumDash;
 	public String strASNum;
+	
+	// Model
+	public CheckModel _CheckModel;
 	////////////////////////////////////////////////////
 	
 	//Fragment//////////////////////////////////////////
-	public  MainBBaseFragment _MainBBaseFragment;
-	public  MenuBaseFragment _MenuBaseFragment;
+	public  MainBBaseFragment 	_MainBBaseFragment;
+	public  MenuBaseFragment 	_MenuBaseFragment;
+	public 	ESLCheckFragment	_ESLCheckFragment;
+	public 	ESLPasswordFragment	_ESLPasswordFragment;
 	////////////////////////////////////////////////////
 	
 	//Animation/////////////////////////////////////////
@@ -435,7 +444,7 @@ public class Home extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
-		
+		Log.d(TAG, "onCreateView");
 		InitResource();
 		InitFragment();
 		InitPopup();
@@ -473,6 +482,7 @@ public class Home extends Activity {
 	protected void onResume() {
 		// TODO Auto-generated method stub
 		super.onResume();
+		Log.d(TAG, "onResume");
 		try {
 			StartCommService();
 			threadRead = new Thread(new ReadThread(this));
@@ -503,7 +513,7 @@ public class Home extends Activity {
 		imgViewCameraScreen.setClickable(false);
 	}
 	public void InitValuable(){
-		ScreenIndex = SCREEN_STATE_MAIN_B_TOP;
+		ScreenIndex = 0;
 		SeatBelt = CAN1CommManager.DATA_STATE_LAMP_ON;
 		AnimationRunningFlag = false;
 		MirrorHeatPreHeatFlag = false;
@@ -513,10 +523,13 @@ public class Home extends Activity {
 		EngineAutoShutdownESLFlag = false;
 		EngineAutoShutdownESLSetFlag = false;
 		_MainChangeAnimation = new ChangeFragmentAnimation(this, framelayoutMain, R.id.FrameLayout_main, null);
+		_CheckModel = new CheckModel();
 	}
 	public void InitFragment(){
 		_MainBBaseFragment = new MainBBaseFragment();
 		_MenuBaseFragment = new MenuBaseFragment();
+		_ESLCheckFragment = new ESLCheckFragment();
+		_ESLPasswordFragment = new ESLPasswordFragment();
 	}
 	public void InitPopup(){
 		HomeDialog = null;
@@ -692,6 +705,17 @@ public class Home extends Activity {
 		strASNum = SharePref.getString("strASNum", "");
 		Log.d(TAG,"LoadPref");
 	}
+	public void setSoundOutput(int _soundstate) {
+		try {
+			CAN1Comm.LineOutfromJNI(_soundstate);
+		} catch (NullPointerException e) {
+			// TODO: handle exception
+			Log.e(TAG, "NullPointerException");
+		} catch (Throwable t) {
+			// TODO: handle exception
+			Log.e(TAG, "Load Library Error");
+		}
+	}
 	/////////////////////////////////////////////////////
 	
 	//Main Screen Fragment///////////////////////////////
@@ -707,6 +731,20 @@ public class Home extends Activity {
 		_MenuBaseFragment = new MenuBaseFragment();
 		android.app.FragmentTransaction transaction = getFragmentManager().beginTransaction();
 		transaction.replace(R.id.FrameLayout_main, _MenuBaseFragment);
+		transaction.commit();
+	}
+	//ESL Check Screen Fragment
+	public void showESLCheckFragment(){
+		_ESLCheckFragment = new ESLCheckFragment();
+		android.app.FragmentTransaction transaction = getFragmentManager().beginTransaction();
+		transaction.replace(R.id.FrameLayout_main, _ESLCheckFragment);
+		transaction.commit();
+	}
+	//ESL Check Screen Fragment
+	public void showESLPasswordFragment(){
+		_ESLPasswordFragment = new ESLPasswordFragment();
+		android.app.FragmentTransaction transaction = getFragmentManager().beginTransaction();
+		transaction.replace(R.id.FrameLayout_main, _ESLPasswordFragment);
 		transaction.commit();
 	}
 	
@@ -774,7 +812,10 @@ public class Home extends Activity {
 			CAN1Comm.TxCMDToMCU(CAN1CommManager.CMD_STARTCAN);
 			
 			//showMainBFragment();
-			_MainChangeAnimation.StartChangeAnimation(_MainBBaseFragment);
+		//	_MainChangeAnimation.StartChangeAnimation(_MainBBaseFragment);
+		//	_MainChangeAnimation.StartChangeAnimation(_MenuBaseFragment);
+		//	_MainChangeAnimation.StartChangeAnimation(_ESLCheckFragment);
+			showESLCheckFragment();
 			StartSendCommandTimer();
 			StartCommErrStopTimer();
 		}
@@ -852,8 +893,13 @@ public class Home extends Activity {
 			try{
 				while(!activityRef.get().threadRead.currentThread().isInterrupted())
 				{
-					activityRef.get().GetDataFromNative();
-					activityRef.get().UpdateUI();
+					if(activityRef.get().ScreenIndex == Home.SCREEN_STATE_MAIN_ESL_CHECK_TOP
+					||	activityRef.get().ScreenIndex == Home.SCREEN_STATE_MAIN_ESL_PASSWORD){
+						
+					}else{
+						activityRef.get().GetDataFromNative();
+						activityRef.get().UpdateUI();
+					}
 					Thread.sleep(200);
 				}
 			}
@@ -875,7 +921,7 @@ public class Home extends Activity {
 		SelectGearDirection = ((SelectGear & 0x30) >> 4);
 		
 		EngineAutoShutdownRemainingTime = CAN1Comm.Get_RemainingTimeforAutomaticEngineShutdown_PGN61184_122();
-		EngineAutoShutdownMode = CAN1Comm.Get_AutomaticEngineShutdown_363_PGN65428();
+		EngineAutoShutdownMode = CAN1Comm.Get_AutomaticEngineShutdown_363_PGN61184_122();
 
 		
 		CheckMirrorHeatPreHeat(PreHeat,RPM);
@@ -1574,7 +1620,7 @@ public class Home extends Activity {
 						
 			try {
 				if(nSendCommandTimerIndex == 0){
-					
+					setSoundOutput(SoundState);
 					CAN1Comm.Set_MaintenanceCommant_1097_PGN61184_12(CAN1CommManager.COMMAND_MAINTENANCE_ITEM_LIST_REQUEST);
 					CAN1Comm.TxCANToMCU(12);
 					

@@ -463,9 +463,9 @@ public class MaintenanceDetailFragment extends ParentFragment{
 			break;
 		case	CAN1CommManager.REAR_AXLE_DIFFERENTIAL_GEAR_OIL	:	
 			if(Alarm == CAN1CommManager.DATA_STATE_LAMP_ON){
-				imgViewIcon.setImageResource(R.drawable.menu_management_maintenance_icon_05_2_small);
+				imgViewIcon.setImageResource(R.drawable.menu_management_maintenance_icon_12_2_small);
 			}else{
-				imgViewIcon.setImageResource(R.drawable.menu_management_maintenance_icon_05_small);
+				imgViewIcon.setImageResource(R.drawable.menu_management_maintenance_icon_12_small);
 			}
 			textViewTitle.setText(ParentActivity.getResources().getString(string.Rear_axle_oil));
 			break;

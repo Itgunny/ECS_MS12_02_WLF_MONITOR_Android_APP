@@ -66,11 +66,14 @@
     <string name="No_Changes_executed">No Changes executed</string>
     <string name="Skip">Skip</string>
     <string name="AS">A/S</string>
+    <string name="Percent">%</string>
+    <string name="mA">mA</string>
     <!-- Common End-->
     <!-- Main Start-->
     <string name="ENGINE_MODE">ENGINE MODE</string>
     <string name="WARMING_UP">WARMING UP</string>
     <string name="CCO_MODE">C.C.O. MODE</string>
+    <string name="ICCO_MODE">I.C.C.O. MODE</string>
     <string name="SHIFT_MODE">SHIFT MODE</string>
     <string name="TC_LOCK_UP">T.C. LOCK UP</string>
     <string name="TOTAL_HOURMETER">TOTAL HOURMETER</string>
@@ -265,6 +268,9 @@
     <string name="Transmission">Transmission</string>
     <string name="Please_refer_to_machine_manual_for_more_detailed_description">Please refer to machine manual for more detailed description.</string>
     <string name="Delete_Logged_Fault">Delete Logged Fault</string>
+	<string name="Fingertip_Calibration">Fingertip Calibration</string>
+    <string name="Boom_Down_Response_Adjust">Boom Down Response Adjust</string>
+    <string name="Bucket_Dump_Response_Adjust">Bucket Dump Response Adjust</string>
     <!-- Menu Monitoring End -->
     <!-- Menu Management Start -->
     <string name="Machine_Security">Machine Security</string>

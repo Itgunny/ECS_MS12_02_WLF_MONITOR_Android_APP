@@ -1962,7 +1962,11 @@ typedef struct
 	unsigned char	SoftStopBucketIn_2339:2;
 	unsigned char	SoftStopBucketOut_2340:2;
 
-	unsigned char	DM0[5];
+	unsigned char	BoomDownSpeedAdjust:2;
+	unsigned char	BucketOutSpeedAdjust:2;
+	unsigned char	Reserved0:4;
+
+	unsigned char	DM0[4];
 
 }__attribute__((packed))  WHEEL_LOADER_EHCU_SETTING_61184_203;
 typedef struct
@@ -2468,7 +2472,11 @@ typedef struct
 	unsigned char	SoftStopBucketIn_2339:2;
 	unsigned char	SoftStopBucketOut_2340:2;
 
-	unsigned char	DM[7];
+	unsigned char	BoomDownEPPRValveMaxCurrent_2341;
+
+	unsigned char	BucketOutEPPRValveMaxCurrent_2342;
+
+	unsigned char	DM[5];
 }__attribute__((packed))  WHEEL_LOADER_EHCU_STATUS2_65524;
 typedef struct
 {

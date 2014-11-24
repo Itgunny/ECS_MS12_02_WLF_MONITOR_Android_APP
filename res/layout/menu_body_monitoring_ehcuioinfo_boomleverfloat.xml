@@ -2,12 +2,68 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent" >
+    
+    <ImageView
+        android:id="@+id/imageView_menu_body_monitoring_ehcuioinfo_boomleverfloat_line"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="29dp"
+        android:layout_marginTop="69dp"
+        android:src="@drawable/line_menu_step1" />
+    
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/imageView_menu_body_monitoring_ehcuioinfo_boomleverfloat_line"
+        android:layout_alignLeft="@+id/imageView_menu_body_monitoring_ehcuioinfo_boomleverfloat_line"
+        android:layout_alignParentTop="true"
+        android:layout_alignRight="@+id/imageView_menu_body_monitoring_ehcuioinfo_boomleverfloat_line" >
+
+        <RadioGroup
+            android:id="@+id/radioGroup_menu_body_monitoring_ehcuioinfo_boomleverfloat"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="20dp"
+            android:orientation="horizontal" >
+
+            <RadioButton
+                android:id="@+id/radioButton_menu_body_monitoring_ehcuioinfo_boomleverfloat_boomlever"
+                android:layout_width="200dp"
+                android:layout_height="wrap_content"
+                android:button="@drawable/_selector_radio_btn"
+                android:text="@string/Boom_Lever_Floating_Position_Adjust"
+                android:textColor="@drawable/_selector_radio_txt_white_amber"
+                android:textSize="18sp" />
+
+            <RadioButton
+                android:id="@+id/radioButton_menu_body_monitoring_ehcuioinfo_boomleverfloat_boomdown"
+                android:layout_width="200dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="40dp"
+                android:button="@drawable/_selector_radio_btn"
+                android:text="@string/Boom_Down_Response_Adjust"
+                android:textColor="@drawable/_selector_radio_txt_white_amber"
+                android:textSize="18sp" />
+            
+            <RadioButton
+                android:id="@+id/radioButton_menu_body_monitoring_ehcuioinfo_boomleverfloat_bucketdump"
+                android:layout_width="200dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="40dp"
+                android:button="@drawable/_selector_radio_btn"
+                android:text="@string/Bucket_Dump_Response_Adjust"
+                android:textColor="@drawable/_selector_radio_txt_white_amber"
+                android:textSize="18sp" />
+        </RadioGroup>
+    </RelativeLayout>
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_above="@+id/Relativelayout_menu_body_monitoring_ehcuioinfo_boomleverfloat_low"
-        android:layout_alignParentTop="true" >
+        android:layout_alignParentTop="false"
+        android:layout_below="@+id/imageView_menu_body_monitoring_ehcuioinfo_boomleverfloat_line" >
 
         <TextView
             android:id="@+id/textView_menu_body_monitoring_ehcuioinfo_boomleverfloat_operation_title"
@@ -215,22 +271,23 @@
 	        android:layout_width="match_parent"
 	        android:layout_height="wrap_content"
 	        android:layout_above="@+id/Relativelayout_menu_body_monitoring_ehcuinfo_boomleverfloat_low"
+	        android:layout_alignParentBottom="true"
 	        android:layout_below="@+id/RelativeLayout_menu_body_monitoring_ehcuioinfo_boomleverfloat_boomdown" >
 		    
 	        <ImageButton
 	            android:id="@+id/imageButton_menu_body_monitoring_ehcuinfo_boomleverfloat_minus"
 	            android:layout_width="wrap_content"
 	            android:layout_height="wrap_content"
+	            android:layout_centerVertical="true"
 	            android:layout_marginLeft="80dp"
-	            android:layout_marginTop="60dp"
 	            android:background="@drawable/_selector_menu_mode_enginerpm_minus_btn1" />
 		    
 		    <ImageButton
 		        android:id="@+id/imageButton_menu_body_monitoring_ehcuinfo_boomleverfloat_plus"
 		        android:layout_width="wrap_content"
 		        android:layout_height="wrap_content"
+		        android:layout_centerVertical="true"
 		        android:layout_marginLeft="592dp"
-		        android:layout_marginTop="60dp"
 		        android:background="@drawable/_selector_menu_mode_enginerpm_plus_btn1" />
 		    
 		    <TextView
@@ -239,6 +296,7 @@
 		        android:layout_height="wrap_content"
 		        android:layout_alignBottom="@+id/imageButton_menu_body_monitoring_ehcuinfo_boomleverfloat_minus"
 		        android:layout_alignTop="@+id/imageButton_menu_body_monitoring_ehcuinfo_boomleverfloat_minus"
+		        android:layout_centerVertical="true"
 		        android:layout_toRightOf="@+id/imageButton_menu_body_monitoring_ehcuinfo_boomleverfloat_minus"
 		        android:gravity="bottom|right"
 		        android:text="0"
@@ -251,9 +309,10 @@
 		        android:layout_height="wrap_content"
 		        android:layout_alignBottom="@+id/imageButton_menu_body_monitoring_ehcuinfo_boomleverfloat_minus"
 		        android:layout_alignTop="@+id/imageButton_menu_body_monitoring_ehcuinfo_boomleverfloat_minus"
+		        android:layout_centerVertical="true"
 		        android:layout_marginLeft="500dp"
 		        android:gravity="center"
-		        android:text="%"
+		        android:text="@string/Percent"
 		        android:textAppearance="?android:attr/textAppearanceLarge"
 		        android:textColor="@color/gray"
 		        android:textSize="40sp" />

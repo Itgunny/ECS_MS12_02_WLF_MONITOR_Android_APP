@@ -44,7 +44,7 @@ public class EngineModePopup extends ParentPopup{
 		ParentActivity = (Home)_context;
 		inflater = (LayoutInflater)_context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 		mRoot = inflater.inflate(R.layout.popup_enginemode, null);
-		this.addContentView(mRoot,  new LayoutParams(448,288));
+		this.addContentView(mRoot,  new LayoutParams(448,348));
 		this.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
 	}
 	

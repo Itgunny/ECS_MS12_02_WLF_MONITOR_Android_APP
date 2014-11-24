@@ -35,11 +35,11 @@ public class MenuModeFragment extends ParentFragment{
 	//////////////////////////////////////////////////
 	
 	//Fragment////////////////////////////////////////
-	public MenuModeTabFragment		_MenuModeTabFragment;
-	MenuModeEngTMFragment 			_MenuModeEngTMFragment;
-	MenuModeHYDFragment 			_MenuModeHYDFragment;
-	MenuModeETCFragment 			_MenuModeETCFragment;
-	EngineSettingFragment 			_EngineSettingFragment;
+	public MenuModeTabFragment				_MenuModeTabFragment;
+	public MenuModeEngTMFragment 			_MenuModeEngTMFragment;
+	public MenuModeHYDFragment 				_MenuModeHYDFragment;
+	public MenuModeETCFragment 				_MenuModeETCFragment;
+	public EngineSettingFragment 			_EngineSettingFragment;
 	//////////////////////////////////////////////////
 	
 	//ANIMATION///////////////////////////////////////

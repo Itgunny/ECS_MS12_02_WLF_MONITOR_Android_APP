@@ -169,6 +169,7 @@ public class MenuModeTabFragment extends ParentFragment{
 		
 		textViewRight.setBackgroundResource(R.drawable._selector_menu_body_mode_tab_right_btn);
 		textViewRight.setTextColor(ParentActivity.getResources().getColor(R.drawable._selector_menu_body_mode_tab_txt));
+		CursurIndex = 1;
 	}
 	public void setClickImageHYD(){
 		textViewLeft.setBackgroundResource(R.drawable._selector_menu_body_mode_tab_left_btn);
@@ -179,6 +180,7 @@ public class MenuModeTabFragment extends ParentFragment{
 		
 		textViewRight.setBackgroundResource(R.drawable._selector_menu_body_mode_tab_right_btn);
 		textViewRight.setTextColor(ParentActivity.getResources().getColor(R.drawable._selector_menu_body_mode_tab_txt));
+		CursurIndex = 2;
 	}
 	public void setClickImageETC(){
 		textViewLeft.setBackgroundResource(R.drawable._selector_menu_body_mode_tab_left_btn);
@@ -189,6 +191,7 @@ public class MenuModeTabFragment extends ParentFragment{
 		
 		textViewRight.setBackgroundResource(R.drawable.menu_list_tab_right_selected);
 		textViewRight.setTextColor(ParentActivity.getResources().getColor(R.color.menu_body_mode_tab_amber));
+		CursurIndex = 3;
 	}
 	public void setClickNull(){
 		textViewLeft.setBackgroundResource(R.drawable._selector_menu_body_mode_tab_left_btn);
@@ -199,6 +202,7 @@ public class MenuModeTabFragment extends ParentFragment{
 		
 		textViewRight.setBackgroundResource(R.drawable._selector_menu_body_mode_tab_right_btn);
 		textViewRight.setTextColor(ParentActivity.getResources().getColor(R.drawable._selector_menu_body_mode_tab_txt));
+		CursurIndex = 0;
 	}
 	/////////////////////////////////////////////////////////////////////
 	public void setFirstScreen(int Index){

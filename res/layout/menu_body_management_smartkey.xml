@@ -69,6 +69,7 @@
     </RelativeLayout>
     
     <RelativeLayout
+        android:id="@+id/RelativeLayout_menu_body_management_smartkey_tag_contents"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_above="@+id/RelativeLayout_menu_body_management_smartkey_low"
