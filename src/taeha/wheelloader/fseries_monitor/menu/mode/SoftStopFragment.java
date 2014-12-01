@@ -10,6 +10,8 @@ import taeha.wheelloader.fseries_monitor.main.Home;
 import taeha.wheelloader.fseries_monitor.main.ParentFragment;
 import taeha.wheelloader.fseries_monitor.main.R;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.text.Layout;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -47,6 +49,9 @@ public class SoftStopFragment extends ParentFragment{
 	int BoomDown;
 	int BucketIn;
 	int BucketOut;
+	
+	Handler HandleCursurDisplay;
+	int CursurIndex;
 	//////////////////////////////////////////////////
 	
 	//Fragment////////////////////////////////////////
@@ -74,7 +79,14 @@ public class SoftStopFragment extends ParentFragment{
 		InitButtonListener();
 		
 		ParentActivity.ScreenIndex = ParentActivity.SCREEN_STATE_MENU_MODE_HYD_SOFTSTOP;
-		ParentActivity._MenuBaseFragment._MenuInterTitleFragment.SetTitleText(ParentActivity.getResources().getString(R.string.Soft_Stop));
+		ParentActivity._MenuBaseFragment._MenuInterTitleFragment.SetTitleText(ParentActivity.getResources().getString(R.string.Soft_End_Stop));
+		HandleCursurDisplay = new Handler() {
+			@Override
+			public void handleMessage(Message msg) {
+			
+				CursurDisplay(msg.what);
+			}
+		};
 		return mRoot;
 	}
 	
@@ -123,6 +135,8 @@ public class SoftStopFragment extends ParentFragment{
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
 				ClickOK();
+				CursurIndex = 11;
+				HandleCursurDisplay.sendMessage(HandleCursurDisplay.obtainMessage(CursurIndex));
 			}
 		});
 		imgbtnCancel.setOnClickListener(new View.OnClickListener() {
@@ -131,6 +145,8 @@ public class SoftStopFragment extends ParentFragment{
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
 				ClickCancel();
+				CursurIndex = 10;
+				HandleCursurDisplay.sendMessage(HandleCursurDisplay.obtainMessage(CursurIndex));
 			}
 		});
 		imgbtnDefault.setOnClickListener(new View.OnClickListener() {
@@ -139,6 +155,8 @@ public class SoftStopFragment extends ParentFragment{
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
 				ClickDefault();
+				CursurIndex = 9;
+				HandleCursurDisplay.sendMessage(HandleCursurDisplay.obtainMessage(CursurIndex));
 			}
 		});
 		radioBoomUpOn.setOnClickListener(new View.OnClickListener() {
@@ -147,7 +165,8 @@ public class SoftStopFragment extends ParentFragment{
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
 				ClickBoomUpOn();
-
+				CursurIndex = 1;
+				HandleCursurDisplay.sendMessage(HandleCursurDisplay.obtainMessage(CursurIndex));
 			}
 		});
 		radioBoomUpOff.setOnClickListener(new View.OnClickListener() {
@@ -156,7 +175,8 @@ public class SoftStopFragment extends ParentFragment{
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
 				ClickBoomUpOff();
-	
+				CursurIndex = 2;
+				HandleCursurDisplay.sendMessage(HandleCursurDisplay.obtainMessage(CursurIndex));
 			}
 		});
 		radioBoomDownOn.setOnClickListener(new View.OnClickListener() {
@@ -165,7 +185,8 @@ public class SoftStopFragment extends ParentFragment{
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
 				ClickBoomDownOn();
-
+				CursurIndex = 3;
+				HandleCursurDisplay.sendMessage(HandleCursurDisplay.obtainMessage(CursurIndex));
 			}
 		});
 		radioBoomDownOff.setOnClickListener(new View.OnClickListener() {
@@ -174,7 +195,8 @@ public class SoftStopFragment extends ParentFragment{
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
 				ClickBoomDownOff();
-	
+				CursurIndex = 4;
+				HandleCursurDisplay.sendMessage(HandleCursurDisplay.obtainMessage(CursurIndex));
 			}
 		});
 		radioBucketInOn.setOnClickListener(new View.OnClickListener() {
@@ -183,7 +205,8 @@ public class SoftStopFragment extends ParentFragment{
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
 				ClickBucketInOn();
-	
+				CursurIndex = 5;
+				HandleCursurDisplay.sendMessage(HandleCursurDisplay.obtainMessage(CursurIndex));
 			}
 		});
 		radioBucketInOff.setOnClickListener(new View.OnClickListener() {
@@ -192,7 +215,8 @@ public class SoftStopFragment extends ParentFragment{
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
 				ClickBucketInOff();
-
+				CursurIndex = 6;
+				HandleCursurDisplay.sendMessage(HandleCursurDisplay.obtainMessage(CursurIndex));
 			}
 		});
 		radioBucketOutOn.setOnClickListener(new View.OnClickListener() {
@@ -201,7 +225,8 @@ public class SoftStopFragment extends ParentFragment{
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
 				ClickBucketOutOn();
-
+				CursurIndex = 7;
+				HandleCursurDisplay.sendMessage(HandleCursurDisplay.obtainMessage(CursurIndex));
 			}
 		});
 		radioBucketOutOff.setOnClickListener(new View.OnClickListener() {
@@ -210,7 +235,8 @@ public class SoftStopFragment extends ParentFragment{
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
 				ClickBucketOutOff();
-
+				CursurIndex = 8;
+				HandleCursurDisplay.sendMessage(HandleCursurDisplay.obtainMessage(CursurIndex));
 			}
 		});
 	}
@@ -368,6 +394,165 @@ public class SoftStopFragment extends ParentFragment{
 		case CAN1CommManager.DATA_STATE_SOFTSTOP_BUCKETOUT_ON:
 			radioBucketOutOn.setChecked(true);
 			radioBucketOutOff.setChecked(false);
+			break;
+		default:
+			break;
+		}
+	}
+	/////////////////////////////////////////////////////////////////////
+	public void ClickLeft(){
+		switch (CursurIndex) {
+		case 1:
+			CursurIndex = 11;
+			CursurDisplay(CursurIndex);
+			break;
+		case 2:
+		case 3:
+		case 4:
+		case 5:
+		case 6:
+		case 7:
+		case 8:
+		case 9:
+		case 10:
+		case 11:
+			CursurIndex--;
+			CursurDisplay(CursurIndex);
+			break;
+		default:
+			CursurIndex = 1;
+			CursurDisplay(CursurIndex);
+			break;
+		}
+		
+	}
+	public void ClickRight(){
+		switch (CursurIndex) {
+		case 1:
+		case 2:
+		case 3:
+		case 4:
+		case 5:
+		case 6:
+		case 7:
+		case 8:
+		case 9:
+		case 10:
+			CursurIndex++;
+			CursurDisplay(CursurIndex);
+			break;
+		case 11:
+			CursurIndex = 1;
+			CursurDisplay(CursurIndex);
+			break;
+		default:
+			CursurIndex = 1;
+			CursurDisplay(CursurIndex);
+			break;
+		}
+	}
+	public void ClickESC(){
+		ClickCancel();
+	}
+	public void ClickEnter(){
+		switch (CursurIndex) {
+		case 1:
+			ClickBoomUpOn();
+			break;
+		case 2:
+			ClickBoomUpOff();
+			break;
+		case 3:
+			ClickBoomDownOn();
+			break;
+		case 4:
+			ClickBoomDownOff();
+			break;
+		case 5:
+			ClickBucketInOn();
+			break;
+		case 6:
+			ClickBucketInOff();
+			break;
+		case 7:
+			ClickBucketOutOn();
+			break;
+		case 8:
+			ClickBucketOutOff();
+			break;
+		case 9:
+			ClickDefault();
+			break;
+		case 10:
+			ClickCancel();
+			break;
+		case 11:
+			ClickOK();
+			break;
+	
+		default:
+			break;
+		}
+	}
+	public void CursurFirstDisplay(int data){
+		switch (data) {
+		case CAN1CommManager.DATA_STATE_SOFTSTOP_BOOMUP_ON:
+		default:
+			CursurIndex = 1;
+			CursurDisplay(1);
+			break;
+		case CAN1CommManager.DATA_STATE_SOFTSTOP_BOOMUP_OFF:
+			CursurIndex = 2;
+			CursurDisplay(2);
+			break;
+	
+		}
+	}
+	public void CursurDisplay(int Index){
+		imgbtnOK.setPressed(false);
+		imgbtnCancel.setPressed(false);
+		imgbtnDefault.setPressed(false);
+		radioBoomUpOn.setPressed(false);
+		radioBoomUpOff.setPressed(false);
+		radioBoomDownOn.setPressed(false);
+		radioBoomDownOff.setPressed(false);
+		radioBucketInOn.setPressed(false);
+		radioBucketInOff.setPressed(false);
+		radioBucketOutOn.setPressed(false);
+		radioBucketOutOff.setPressed(false);
+		switch (Index) {
+		case 1:
+			radioBoomUpOn.setPressed(true);
+			break;
+		case 2:
+			radioBoomUpOff.setPressed(true);
+			break;
+		case 3:
+			radioBoomDownOn.setPressed(true);
+			break;
+		case 4:
+			radioBoomDownOff.setPressed(true);
+			break;
+		case 5:
+			radioBucketInOn.setPressed(true);
+			break;
+		case 6:
+			radioBucketInOff.setPressed(true);
+			break;
+		case 7:
+			radioBucketOutOn.setPressed(true);
+			break;
+		case 8:
+			radioBucketOutOff.setPressed(true);
+			break;
+		case 9:
+			imgbtnDefault.setPressed(true);
+			break;
+		case 10:
+			imgbtnCancel.setPressed(true);
+			break;
+		case 11:
+			imgbtnOK.setPressed(true);
 			break;
 		default:
 			break;

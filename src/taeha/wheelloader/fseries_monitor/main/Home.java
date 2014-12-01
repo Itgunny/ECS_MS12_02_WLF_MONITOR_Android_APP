@@ -27,6 +27,7 @@ import taeha.wheelloader.fseries_monitor.popup.ShiftModePopup;
 import taeha.wheelloader.fseries_monitor.popup.SoundOutputPopup;
 import taeha.wheelloader.fseries_monitor.popup.SpeedometerInitPopup;
 import taeha.wheelloader.fseries_monitor.popup.TCLockUpPopup;
+import taeha.wheelloader.fseries_monitor.popup.WorkLoadInitPopup;
 
 import android.os.Bundle;
 import android.os.Handler;
@@ -133,6 +134,7 @@ public class Home extends Activity {
 	
 	public  static final int SCREEN_STATE_MENU_MODE_HYD_TOP									= 0x21200000;
 	public  static final int SCREEN_STATE_MENU_MODE_HYD_WORKLOAD_TOP						= 0x21210000;
+	public  static final int SCREEN_STATE_MENU_MODE_HYD_WORKLOAD_INIT						= 0x21211000;
 	public  static final int SCREEN_STATE_MENU_MODE_HYD_WORKLOAD_END						= 0x2121FFFF;
 	public  static final int SCREEN_STATE_MENU_MODE_HYD_DETENT								= 0x21220000;
 	public  static final int SCREEN_STATE_MENU_MODE_HYD_BUCKETPRIORITY						= 0x21230000;
@@ -241,12 +243,14 @@ public class Home extends Activity {
 	public  static final int SCREEN_STATE_MENU_PREFERENCE_CLOCK_END							= 0x242FFFFF;
 	public  static final int SCREEN_STATE_MENU_PREFERENCE_UNIT_TOP							= 0x24300000;
 	public  static final int SCREEN_STATE_MENU_PREFERENCE_UNIT_END							= 0x243FFFFF;
-	public  static final int SCREEN_STATE_MENU_PREFERENCE_SOUNDOUTPUT_TOP					= 0x24400000;
-	public  static final int SCREEN_STATE_MENU_PREFERENCE_SOUNDOUTPUT_END					= 0x244FFFFF;
-	public  static final int SCREEN_STATE_MENU_PREFERENCE_WIRELESS_TOP						= 0x24500000;
-	public  static final int SCREEN_STATE_MENU_PREFERENCE_WIRELESS_END						= 0x245FFFFF;
-	public  static final int SCREEN_STATE_MENU_PREFERENCE_DISPLAYTYPE_TOP					= 0x24600000;
-	public  static final int SCREEN_STATE_MENU_PREFERENCE_DISPLAYTYPE_END					= 0x246FFFFF;
+	public  static final int SCREEN_STATE_MENU_PREFERENCE_DISPLAYTYPELANG_TOP				= 0x24400000;	
+	public  static final int SCREEN_STATE_MENU_PREFERENCE_DISPLAYTYPELANG_TYPE				= 0x24410000;
+	public  static final int SCREEN_STATE_MENU_PREFERENCE_DISPLAYTYPELANG_LANG				= 0x24420000;
+	public  static final int SCREEN_STATE_MENU_PREFERENCE_DISPLAYTYPELANG_END				= 0x244FFFFF;
+	public  static final int SCREEN_STATE_MENU_PREFERENCE_SOUNDOUTPUT_TOP					= 0x24500000;
+	public  static final int SCREEN_STATE_MENU_PREFERENCE_SOUNDOUTPUT_END					= 0x245FFFFF;
+	public  static final int SCREEN_STATE_MENU_PREFERENCE_WIRELESS_TOP						= 0x24600000;
+	public  static final int SCREEN_STATE_MENU_PREFERENCE_WIRELESS_END						= 0x246FFFFF;
 	public  static final int SCREEN_STATE_MENU_PREFERENCE_END								= 0x24FFFFFF;
 	
 	public  static final int SCREEN_STATE_MENU_MULTIMEDIA_TOP								= 0x25000000;
@@ -360,26 +364,27 @@ public class Home extends Activity {
 	
 	// Dialog
 	Dialog HomeDialog;
-	QuickCouplerPopupLocking1 _QuickCouplerPopupLocking1;
-	QuickCouplerPopupUnlocking1 _QuickCouplerPopupUnlocking1;
-	QuickCouplerPopupLocking2 _QuickCouplerPopupLocking2;
-	QuickCouplerPopupUnlocking2 _QuickCouplerPopupUnlocking2;
-	CCOModePopup	_CCoModePopup;
-	ShiftModePopup _ShiftModePopup;
-	KickDownPopup _KickDownPopup;
-	TCLockUpPopup _TCLockUpPopup;
-	BucketPriorityPopup _BucketPriorityPopup;
-	EngineModePopup _EngineModePopup;
-	EngineWarmingUpPopup	_EngineWarmingUpPopup;
-	SpeedometerInitPopup	_SpeedometerInitPopup;
-	OperationHistoryInitPopup	_OperationHistoryInitPopup;
+	public QuickCouplerPopupLocking1 		_QuickCouplerPopupLocking1;
+	public QuickCouplerPopupUnlocking1 		_QuickCouplerPopupUnlocking1;
+	public QuickCouplerPopupLocking2 		_QuickCouplerPopupLocking2;
+	public QuickCouplerPopupUnlocking2 		_QuickCouplerPopupUnlocking2;
+	public CCOModePopup						_CCoModePopup;
+	public ShiftModePopup 					_ShiftModePopup;
+	public KickDownPopup 					_KickDownPopup;
+	public TCLockUpPopup 					_TCLockUpPopup;
+	public BucketPriorityPopup 				_BucketPriorityPopup;
+	public EngineModePopup 					_EngineModePopup;
+	public EngineWarmingUpPopup				_EngineWarmingUpPopup;
+	public SpeedometerInitPopup				_SpeedometerInitPopup;
+	public OperationHistoryInitPopup		_OperationHistoryInitPopup;
 	public AngleCalibrationResultPopup		_AngleCalibrationResultPopup;
 	public PressureCalibrationResultPopup	_PressureCalibrationResultPopup;
-	SoundOutputPopup						_SoundOutputPopup;
-	BrakePedalCalibrationPopup				_BrakePedalCalibrationPopup;
-	EngineAutoShutdownCountPopup			_EngineAutoShutdownCountPopup;
-	MaintReplacePopup						_MaintReplacePopup;
-	public LoggedFaultDeletePopup					_LoggedFaultDeletePopup;
+	public SoundOutputPopup					_SoundOutputPopup;
+	public BrakePedalCalibrationPopup		_BrakePedalCalibrationPopup;
+	public EngineAutoShutdownCountPopup		_EngineAutoShutdownCountPopup;
+	public MaintReplacePopup				_MaintReplacePopup;
+	public LoggedFaultDeletePopup			_LoggedFaultDeletePopup;
+	public WorkLoadInitPopup				_WorkLoadInitPopup;
 	
 	// Timer
 	private Timer mSeatBeltTimer = null;
@@ -553,7 +558,7 @@ public class Home extends Activity {
 		_EngineAutoShutdownCountPopup = new EngineAutoShutdownCountPopup(this);
 		_MaintReplacePopup = new MaintReplacePopup(this);
 		_LoggedFaultDeletePopup= new LoggedFaultDeletePopup(this);
-				
+		_WorkLoadInitPopup = new WorkLoadInitPopup(this);
 	}
 	public void InitAnimation(){
 		
@@ -1085,6 +1090,7 @@ public class Home extends Activity {
 			if(event.getKeyCode() == KeyEvent.KEYCODE_MENU)
 			{			
 				Log.d(TAG,"KEYCODE_MENU");
+				HandleKeyButton.sendMessage(HandleKeyButton.obtainMessage(CAN1CommManager.MENU));
 			}
 		}
 		//return super.dispatchKeyEvent(event);
@@ -1255,7 +1261,7 @@ public class Home extends Activity {
 			return;
 		else
 			StartAnimationRunningTimer();
-		_SpeedometerInitPopup = new SpeedometerInitPopup(this);
+		//_SpeedometerInitPopup = new SpeedometerInitPopup(this);
 		if(HomeDialog != null){
 			HomeDialog.dismiss();
 			HomeDialog = null;
@@ -1269,7 +1275,7 @@ public class Home extends Activity {
 			return;
 		else
 			StartAnimationRunningTimer();
-		_OperationHistoryInitPopup = new OperationHistoryInitPopup(this);
+		//_OperationHistoryInitPopup = new OperationHistoryInitPopup(this);
 		if(HomeDialog != null){
 			HomeDialog.dismiss();
 			HomeDialog = null;
@@ -1374,6 +1380,20 @@ public class Home extends Activity {
 		}
 		
 		HomeDialog = _LoggedFaultDeletePopup;
+		HomeDialog.show();
+	}
+	public void showWorkLoadInit(){
+		if(AnimationRunningFlag == true)
+			return;
+		else
+			StartAnimationRunningTimer();
+		
+		if(HomeDialog != null){
+			HomeDialog.dismiss();
+			HomeDialog = null;
+		}
+		
+		HomeDialog = _WorkLoadInitPopup;
 		HomeDialog.show();
 	}
 	
@@ -1491,7 +1511,7 @@ public class Home extends Activity {
 	
 	
 	
-			// Mirror Heat
+	// Mirror Heat
 	public class MirrorHeatTimerClass extends TimerTask{
 
 		@Override
@@ -1623,7 +1643,6 @@ public class Home extends Activity {
 					setSoundOutput(SoundState);
 					CAN1Comm.Set_MaintenanceCommant_1097_PGN61184_12(CAN1CommManager.COMMAND_MAINTENANCE_ITEM_LIST_REQUEST);
 					CAN1Comm.TxCANToMCU(12);
-					
 				}
 				else if(nSendCommandTimerIndex == 1){
 					CAN1Comm.Set_MaintenanceCommant_1097_PGN61184_12(CAN1CommManager.MAINTENANCE_ALARM_LAMP_ON_ITEM_LIST_REQUEST);

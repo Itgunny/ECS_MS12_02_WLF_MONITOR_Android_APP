@@ -4,20 +4,20 @@
 
     <item 
     	android:state_window_focused="false"
-        android:drawable="@drawable/main_center_option_icon_off" /> 
+        android:drawable="@drawable/main_center_quick_icon_off" /> 
     <item 
     	android:state_pressed="true"
-        android:drawable="@drawable/main_center_option_icon_on"/>
+        android:drawable="@drawable/main_center_quick_icon_on"/>
     <item 
     	android:state_pressed="false"
-        android:drawable="@drawable/main_center_option_icon_off"/>
+        android:drawable="@drawable/main_center_quick_icon_off"/>
     <item 
     	android:state_focused="true"
-        android:drawable="@drawable/main_center_option_icon_on"/>
+        android:drawable="@drawable/main_center_quick_icon_on"/>
       <item 
     	android:state_focused="false"
-        android:drawable="@drawable/main_center_option_icon_off"/>
+        android:drawable="@drawable/main_center_quick_icon_off"/>
     <item
-    android:drawable="@drawable/main_center_option_icon_off"/>
+    android:drawable="@drawable/main_center_quick_icon_off"/>
         
 </selector>

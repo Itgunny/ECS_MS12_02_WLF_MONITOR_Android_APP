@@ -14,6 +14,8 @@ import taeha.wheelloader.fseries_monitor.main.ParentFragment;
 import taeha.wheelloader.fseries_monitor.main.R;
 import taeha.wheelloader.fseries_monitor.main.R.string;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.text.Layout;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -48,6 +50,10 @@ public class MaintenanceFragment extends ParentFragment{
 	byte[] MaintennanceAlramOn;
 	int SendCommandFlag;
 	private Timer mSendCommandTimer = null;
+
+	int CursurIndex;
+	
+	Handler HandleCursurDisplay;
 	//////////////////////////////////////////////////
 	
 	//Fragment////////////////////////////////////////
@@ -74,8 +80,16 @@ public class MaintenanceFragment extends ParentFragment{
 		InitValuables();
 		InitButtonListener();
 		StartSendCommandTimer();
+		
+		CursurDisplay(CursurIndex);
 		ParentActivity.ScreenIndex = ParentActivity.SCREEN_STATE_MENU_MANAGEMENT_MAINTENANCE_TOP;
 		ParentActivity._MenuBaseFragment._MenuInterTitleFragment.SetTitleText(ParentActivity.getResources().getString(R.string.Maintenance));
+		HandleCursurDisplay = new Handler() {
+			@Override
+			public void handleMessage(Message msg) {
+				CursurDisplay(msg.what);
+			}
+		};
 		return mRoot;
 	}
 
@@ -141,7 +155,7 @@ public class MaintenanceFragment extends ParentFragment{
 			imgbtnMaintItem[i].setVisibility(View.VISIBLE);
 		}
 		SendCommandFlag = CAN1CommManager.SEND_COMMAND_FLAG_INFO;
-		SetThreadSleepTime(1000);
+		SetThreadSleepTime(1000);		
 	}
 	@Override
 	protected void InitButtonListener() {
@@ -586,6 +600,187 @@ public class MaintenanceFragment extends ParentFragment{
 			mSendCommandTimer = null;
 		}
 		
+	}
+	/////////////////////////////////////////////////////////////////////
+	public void setCursurIndex(int Index){
+		CursurIndex = Index;
+	}
+	public void ClickLeft(){
+		switch (CursurIndex) {
+		case 1:
+			CursurIndex = 16;
+			CursurDisplay(CursurIndex);
+			break;
+		case 2:	
+		case 3:		
+		case 4:	
+		case 5:
+		case 6:
+		case 7:
+		case 8:
+		case 9:
+		case 10:
+		case 11:
+		case 12:
+		case 13:
+		case 14:
+		case 15:
+		case 16:
+			CursurIndex--;
+			CursurDisplay(CursurIndex);
+			break;
+		default:
+			CursurIndex = 1;
+			CursurDisplay(CursurIndex);
+			break;
+		}
+		
+	}
+	public void ClickRight(){
+		switch (CursurIndex) {
+		case 1:
+		case 2:	
+		case 3:		
+		case 4:	
+		case 5:
+		case 6:
+		case 7:
+		case 8:
+		case 9:
+		case 10:
+		case 11:
+		case 12:
+		case 13:
+		case 14:
+		case 15:
+			CursurIndex++;
+			CursurDisplay(CursurIndex);
+			break;
+		case 16:
+			CursurIndex = 1;
+			CursurDisplay(CursurIndex);
+			break;
+		default:
+			CursurIndex = 1;
+			CursurDisplay(CursurIndex);
+			break;
+		}
+	}
+	public void ClickESC(){
+		ClickOK();
+	}
+	public void ClickEnter(){
+		switch (CursurIndex) {
+		case 1:
+			ClickMaintDetail(0);
+			break;
+		case 2:
+			ClickMaintDetail(1);
+			break;
+		case 3:
+			ClickMaintDetail(2);
+			break;
+		case 4:
+			ClickMaintDetail(3);
+			break;
+		case 5:
+			ClickMaintDetail(4);
+			break;
+		case 6:
+			ClickMaintDetail(5);
+			break;
+		case 7:
+			ClickMaintDetail(6);
+			break;
+		case 8:
+			ClickMaintDetail(7);
+			break;
+		case 9:
+			ClickMaintDetail(8);
+			break;
+		case 10:
+			ClickMaintDetail(9);
+			break;
+		case 11:
+			ClickMaintDetail(10);
+			break;
+		case 12:
+			ClickMaintDetail(11);
+			break;
+		case 13:
+			ClickMaintDetail(12);
+			break;
+		case 14:
+			ClickMaintDetail(13);
+			break;
+		case 15:
+			ClickMaintDetail(14);
+			break;
+		case 16:
+			ClickOK();
+			break;
+		default:
+			break;
+		}
+	}
+	public void CursurDisplay(int Index){
+		imgbtnOK.setPressed(false);
+		for(int i = 0; i < 15; i++){
+			imgbtnMaintItem[i].setPressed(false);
+		}
+
+		switch (CursurIndex) {
+			case 1:
+				imgbtnMaintItem[0].setPressed(true);
+				break;
+			case 2:
+				imgbtnMaintItem[1].setPressed(true);
+				break;
+			case 3:
+				imgbtnMaintItem[2].setPressed(true);
+				break;
+			case 4:
+				imgbtnMaintItem[3].setPressed(true);
+				break;
+			case 5:
+				imgbtnMaintItem[4].setPressed(true);
+				break;
+			case 6:
+				imgbtnMaintItem[5].setPressed(true);
+				break;
+			case 7:
+				imgbtnMaintItem[6].setPressed(true);
+				break;
+			case 8:
+				imgbtnMaintItem[7].setPressed(true);
+				break;
+			case 9:
+				imgbtnMaintItem[8].setPressed(true);
+				break;
+			case 10:
+				imgbtnMaintItem[9].setPressed(true);
+				break;
+			case 11:
+				imgbtnMaintItem[10].setPressed(true);
+				break;
+			case 12:
+				imgbtnMaintItem[11].setPressed(true);
+				break;
+			case 13:
+				imgbtnMaintItem[12].setPressed(true);
+				break;
+			case 14:
+				imgbtnMaintItem[13].setPressed(true);
+				break;
+			case 15:
+				imgbtnMaintItem[14].setPressed(true);
+				break;
+			case 16:
+				imgbtnOK.setPressed(true);
+				break;
+			default:
+				break;
+		}
 	}
 	/////////////////////////////////////////////////////////////////////
 }

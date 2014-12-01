@@ -4,6 +4,8 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,15 +16,12 @@ import taeha.wheelloader.fseries_monitor.menu.PasswordFragment;
 
 public class MachineSecurityPasswordChangeFragment extends PasswordFragment{
 
-
-
 	private int PasswordChangeStatus;
-
-
 
 	private byte[] tmpNumDataBuf;
 	private int tmpDataBufIndex;
 	
+	Handler HandleNextScreen;
 	
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -37,6 +36,19 @@ public class MachineSecurityPasswordChangeFragment extends PasswordFragment{
 		ParentActivity._MenuBaseFragment._MenuListTitleFragment.SetTitleText(ParentActivity.getResources().getString(R.string.Change_Password));
 		SetTitleIndex(1);
 		SetTextIndicatorTitle(1);
+		HandleCursurDisplay = new Handler() {
+			@Override
+			public void handleMessage(Message msg) {
+			
+				CursurDisplay(msg.what);
+			}
+		};
+		HandleNextScreen = new Handler() {
+			@Override
+			public void handleMessage(Message msg) {
+				ParentActivity._MenuBaseFragment.showBodyMachineSecurityList();
+			}
+		};
 		return mRoot;
 	}
 	@Override
@@ -61,7 +73,7 @@ public class MachineSecurityPasswordChangeFragment extends PasswordFragment{
 	@Override
 	public void showUserPasswordNextScreen() {
 		// TODO Auto-generated method stub
-		ParentActivity._MenuBaseFragment.showBodyMachineSecurityList();
+		HandleNextScreen.sendMessage(HandleNextScreen.obtainMessage(0));
 	}
 	
 	@Override

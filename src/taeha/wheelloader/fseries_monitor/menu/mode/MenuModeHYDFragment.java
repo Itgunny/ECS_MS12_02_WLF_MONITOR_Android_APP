@@ -61,6 +61,7 @@ public class MenuModeHYDFragment extends MenuBodyList_ParentFragment{
 		InitList();
 		ParentActivity.ScreenIndex = Home.SCREEN_STATE_MENU_MODE_HYD_TOP;
 		ParentActivity._MenuBaseFragment._MenuModeFragment.setFirstScreen(Home.SCREEN_STATE_MENU_MODE_HYD_TOP);
+		CursurDisplay(CursurIndex);
 		return mRoot;
 	}
 	
@@ -82,7 +83,7 @@ public class MenuModeHYDFragment extends MenuBodyList_ParentFragment{
 		setListTitle2(ParentActivity.getResources().getString(string.Boom_Bucket_Detent_Mode));
 		setListTitle3(ParentActivity.getResources().getString(string.Bucket_Priority));
 		setListTitle4(ParentActivity.getResources().getString(string.Auxilliary_Attachment_Max_Flow_Level));
-		setListTitle5(ParentActivity.getResources().getString(string.Soft_Stop));
+		setListTitle5(ParentActivity.getResources().getString(string.Soft_End_Stop));
 	}
 	
 	@Override
@@ -108,6 +109,9 @@ public class MenuModeHYDFragment extends MenuBodyList_ParentFragment{
 		else
 			ParentActivity.StartAnimationRunningTimer();
 		ParentActivity._MenuBaseFragment.showBodyWorkLoadAnimation();
+		CursurIndex = 1;
+		CursurDisplay(CursurIndex);
+		ParentActivity._MenuBaseFragment._MenuModeFragment.SetModeFocusIndex(MenuModeFragment.STATE_CURSUR_LIST);
 		
 	}
 
@@ -119,7 +123,10 @@ public class MenuModeHYDFragment extends MenuBodyList_ParentFragment{
 		else
 			ParentActivity.StartAnimationRunningTimer();
 		ParentActivity._MenuBaseFragment.showBodyDetentAnimation();
-		
+		CursurIndex = 2;
+		CursurDisplay(CursurIndex);
+		ParentActivity._MenuBaseFragment._MenuModeFragment.SetModeFocusIndex(MenuModeFragment.STATE_CURSUR_LIST);
+		ParentActivity._MenuBaseFragment._MenuModeFragment._MenuModeTabFragment.setClickImageHYD();
 	}
 
 	@Override
@@ -127,6 +134,10 @@ public class MenuModeHYDFragment extends MenuBodyList_ParentFragment{
 		// TODO Auto-generated method stub
 		
 		ParentActivity.showBucketPriority();
+		CursurIndex = 3;
+		CursurDisplay(CursurIndex);
+		ParentActivity._MenuBaseFragment._MenuModeFragment.SetModeFocusIndex(MenuModeFragment.STATE_CURSUR_LIST);
+		ParentActivity._MenuBaseFragment._MenuModeFragment._MenuModeTabFragment.setClickImageHYD();
 	}
 
 	@Override
@@ -137,6 +148,10 @@ public class MenuModeHYDFragment extends MenuBodyList_ParentFragment{
 		else
 			ParentActivity.StartAnimationRunningTimer();
 		ParentActivity._MenuBaseFragment.showBodyMaxFlowAnimation();
+		CursurIndex = 4;
+		CursurDisplay(CursurIndex);
+		ParentActivity._MenuBaseFragment._MenuModeFragment.SetModeFocusIndex(MenuModeFragment.STATE_CURSUR_LIST);
+		ParentActivity._MenuBaseFragment._MenuModeFragment._MenuModeTabFragment.setClickImageHYD();
 	}
 
 	@Override
@@ -147,6 +162,10 @@ public class MenuModeHYDFragment extends MenuBodyList_ParentFragment{
 		else
 			ParentActivity.StartAnimationRunningTimer();
 		ParentActivity._MenuBaseFragment.showBodySoftStopAnimation();
+		CursurIndex = 5;
+		CursurDisplay(CursurIndex);
+		ParentActivity._MenuBaseFragment._MenuModeFragment.SetModeFocusIndex(MenuModeFragment.STATE_CURSUR_LIST);
+		ParentActivity._MenuBaseFragment._MenuModeFragment._MenuModeTabFragment.setClickImageHYD();
 	}
 
 	@Override
@@ -158,43 +177,172 @@ public class MenuModeHYDFragment extends MenuBodyList_ParentFragment{
 
 
 	/////////////////////////////////////////////////////////////////////
+
 	public void ClickLeft(){
-		
-		
+		Log.d(TAG,"ClickLeft");
+		switch (ParentActivity._MenuBaseFragment._MenuModeFragment.GetModeFocusIndex()) {
+		case MenuModeFragment.STATE_CURSUR_LIST:
+			switch (CursurIndex) {
+			case 1:
+				CursurIndex = 5;
+				CursurDisplay(CursurIndex);
+				break;
+			case 2:
+				CursurIndex--;
+				CursurDisplay(CursurIndex);
+				break;
+			case 3:
+				CursurIndex--;
+				CursurDisplay(CursurIndex);
+				break;
+			case 4:
+				CursurIndex--;
+				CursurDisplay(CursurIndex);
+				break;
+			case 5:
+				CursurIndex--;
+				CursurDisplay(CursurIndex);
+				break;
+			default:
+				break;
+			}
+			break;
+		case MenuModeFragment.STATE_CURSUR_TAB:
+			ParentActivity._MenuBaseFragment._MenuModeFragment._MenuModeHYDFragment.CursurIndex = 0;
+			ParentActivity._MenuBaseFragment._MenuModeFragment.showEngTM();
+			ParentActivity._MenuBaseFragment._MenuModeFragment._MenuModeTabFragment.setClickImageEngineTM();
+			break;
+		case MenuModeFragment.STATE_CURSUR_LEFT:
+			ParentActivity._MenuBaseFragment._MenuListLeftFragment.ClickMultimedia();
+			break;
+		default:
+			break;
+		}
 	}
 	public void ClickRight(){
-		
-		
+		Log.d(TAG,"ClickRight");
+		switch (ParentActivity._MenuBaseFragment._MenuModeFragment.GetModeFocusIndex()) {
+		case MenuModeFragment.STATE_CURSUR_LIST:
+			switch (CursurIndex) {
+			case 1:
+				CursurIndex++;
+				CursurDisplay(CursurIndex);
+				break;
+			case 2:
+				CursurIndex++;
+				CursurDisplay(CursurIndex);
+				break;
+			case 3:
+				CursurIndex++;
+				CursurDisplay(CursurIndex);
+				break;
+			case 4:
+				CursurIndex++;
+				CursurDisplay(CursurIndex);
+				break;
+			case 5:
+				CursurIndex = 1;
+				CursurDisplay(CursurIndex);
+				break;
+			default:
+				break;
+			}
+			break;
+		case MenuModeFragment.STATE_CURSUR_TAB:
+			ParentActivity._MenuBaseFragment._MenuModeFragment._MenuModeHYDFragment.CursurIndex = 0;
+			ParentActivity._MenuBaseFragment._MenuModeFragment.showETC();
+			ParentActivity._MenuBaseFragment._MenuModeFragment._MenuModeTabFragment.setClickImageETC();
+			break;
+		case MenuModeFragment.STATE_CURSUR_LEFT:
+			ParentActivity._MenuBaseFragment._MenuListLeftFragment.ClickMonitoring();
+			break;
+		default:
+			break;
+		}
 	}
 	public void ClickESC(){
-		
+		switch (ParentActivity._MenuBaseFragment._MenuModeFragment.GetModeFocusIndex()) {
+		case MenuModeFragment.STATE_CURSUR_LIST:
+			CursurIndex = 0;
+			CursurDisplay(CursurIndex);
+			ParentActivity._MenuBaseFragment._MenuModeFragment.SetModeFocusIndex(MenuModeFragment.STATE_CURSUR_TAB);
+			break;
+		case MenuModeFragment.STATE_CURSUR_TAB:
+			CursurIndex = 0;
+			CursurDisplay(CursurIndex);
+			ParentActivity._MenuBaseFragment._MenuModeFragment.SetModeFocusIndex(MenuModeFragment.STATE_CURSUR_LEFT);
+			ParentActivity._MenuBaseFragment._MenuModeFragment._MenuModeTabFragment.setClickNull();
+			break;
+		case MenuModeFragment.STATE_CURSUR_LEFT:
+			ParentActivity._MenuBaseFragment._MenuListTitleFragment.ClickHome();
+			break;
+		default:
+			break;
+		}
 	}
 	public void ClickEnter(){
-		
-		
+		switch (ParentActivity._MenuBaseFragment._MenuModeFragment.GetModeFocusIndex()) {
+		case MenuModeFragment.STATE_CURSUR_LIST:
+			switch (CursurIndex) {
+			case 1:
+				imgbtnList[0].callOnClick();
+				break;
+			case 2:
+				imgbtnList[1].callOnClick();
+				break;
+			case 3:
+				imgbtnList[2].callOnClick();
+				break;
+			case 4:
+				imgbtnList[3].callOnClick();
+				break;
+			case 5:
+				imgbtnList[4].callOnClick();
+				break;
+			default:
+				break;
+			}
+			break;
+		case MenuModeFragment.STATE_CURSUR_TAB:
+			CursurIndex = 1;
+			CursurDisplay(CursurIndex);
+			ParentActivity._MenuBaseFragment._MenuModeFragment.SetModeFocusIndex(MenuModeFragment.STATE_CURSUR_LIST);
+			break;
+		case MenuModeFragment.STATE_CURSUR_LEFT:
+			ParentActivity._MenuBaseFragment._MenuModeFragment.SetModeFocusIndex(MenuModeFragment.STATE_CURSUR_TAB);
+			ParentActivity._MenuBaseFragment._MenuModeFragment._MenuModeTabFragment.setClickImageHYD();
+			break;
+		default:
+			break;
+		}
 	}
 
 	/////////////////////////////////////////////////////////////////////
 	public void CursurDisplay(int Index){
-		switch (Index) {
-		case Home.SCREEN_STATE_MENU_MODE_HYD_WORKLOAD_TOP:
-			setListFocus(1);
-			break;
-		case Home.SCREEN_STATE_MENU_MODE_HYD_DETENT:
-			setListFocus(2);
-			break;
-		case Home.SCREEN_STATE_MENU_MODE_HYD_BUCKETPRIORITY:
-			setListFocus(3);
-			break;
-		case Home.SCREEN_STATE_MENU_MODE_HYD_MAXFLOW:
-			setListFocus(4);
-			break;
-		case Home.SCREEN_STATE_MENU_MODE_HYD_SOFTSTOP:
-			setListFocus(5);
-			break;
-		default:
-			setListFocus(0);
-			break;
+		try {
+			switch (Index) {
+			case 1:
+				setListFocus(1);
+				break;
+			case 2:
+				setListFocus(2);
+				break;
+			case 3:
+				setListFocus(3);
+				break;
+			case 4:
+				setListFocus(4);
+				break;
+			case 5:
+				setListFocus(5);
+				break;
+			default:
+				setListFocus(0);
+				break;
+			}
+		} catch (NullPointerException e) {
+			// TODO: handle exception
+			Log.e(TAG,"NullPointerException CursurDisplay");
 		}
 	}
 	/////////////////////////////////////////////////////////////////////	

@@ -12,6 +12,8 @@ import taeha.wheelloader.fseries_monitor.main.R;
 import taeha.wheelloader.fseries_monitor.main.R.string;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.text.Layout;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -58,6 +60,9 @@ public class CameraSettingFragment extends ParentFragment{
 	int CameraOrder3;
 	int CameraOrder4;
 	int CameraReverseMode;
+	
+	Handler HandleCursurDisplay;
+	int CursurIndex;
 	//////////////////////////////////////////////////
 	
 	//Fragment////////////////////////////////////////
@@ -86,6 +91,13 @@ public class CameraSettingFragment extends ParentFragment{
 		
 		ParentActivity.ScreenIndex = ParentActivity.SCREEN_STATE_MENU_MODE_ETC_CAMERASETTING_TOP;
 		ParentActivity._MenuBaseFragment._MenuInterTitleFragment.SetTitleText(ParentActivity.getResources().getString(R.string.Camera_Setting));
+		HandleCursurDisplay = new Handler() {
+			@Override
+			public void handleMessage(Message msg) {
+			
+				CursurDisplay(msg.what);
+			}
+		};
 		return mRoot;
 	}
 	
@@ -135,6 +147,8 @@ public class CameraSettingFragment extends ParentFragment{
 		CAMDisplay(textViewCAM3,CameraOrder3);
 		CAMDisplay(textViewCAM4,CameraOrder4);
 		ReverseModeDisplay(CameraReverseMode);
+		CursurIndex = 1;
+		CursurDisplay(CursurIndex);
 	}
 	@Override
 	protected void InitButtonListener() {
@@ -144,6 +158,8 @@ public class CameraSettingFragment extends ParentFragment{
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
+				CursurIndex = 9;
+				HandleCursurDisplay.sendMessage(HandleCursurDisplay.obtainMessage(CursurIndex));
 				ClickOK();
 			}
 		});
@@ -152,6 +168,8 @@ public class CameraSettingFragment extends ParentFragment{
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
+				CursurIndex = 8;
+				HandleCursurDisplay.sendMessage(HandleCursurDisplay.obtainMessage(CursurIndex));
 				ClickCancel();
 			}
 		});
@@ -160,6 +178,8 @@ public class CameraSettingFragment extends ParentFragment{
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
+				CursurIndex = 1;
+				HandleCursurDisplay.sendMessage(HandleCursurDisplay.obtainMessage(CursurIndex));
 				ClickMinus();
 			}
 		});
@@ -168,6 +188,8 @@ public class CameraSettingFragment extends ParentFragment{
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
+				CursurIndex = 2;
+				HandleCursurDisplay.sendMessage(HandleCursurDisplay.obtainMessage(CursurIndex));
 				ClickPlus();
 			}
 		});
@@ -176,6 +198,8 @@ public class CameraSettingFragment extends ParentFragment{
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
+				CursurIndex = 3;
+				HandleCursurDisplay.sendMessage(HandleCursurDisplay.obtainMessage(CursurIndex));
 				ClickCAM1();
 			}
 		});
@@ -184,6 +208,8 @@ public class CameraSettingFragment extends ParentFragment{
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
+				CursurIndex = 4;
+				HandleCursurDisplay.sendMessage(HandleCursurDisplay.obtainMessage(CursurIndex));
 				ClickCAM2();
 			}
 		});
@@ -192,6 +218,8 @@ public class CameraSettingFragment extends ParentFragment{
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
+				CursurIndex = 5;
+				HandleCursurDisplay.sendMessage(HandleCursurDisplay.obtainMessage(CursurIndex));
 				ClickCAM3();
 			}
 		});
@@ -200,6 +228,8 @@ public class CameraSettingFragment extends ParentFragment{
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
+				CursurIndex = 6;
+				HandleCursurDisplay.sendMessage(HandleCursurDisplay.obtainMessage(CursurIndex));
 				ClickCAM4();
 			}
 		});
@@ -208,6 +238,8 @@ public class CameraSettingFragment extends ParentFragment{
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
+				CursurIndex = 7;
+				HandleCursurDisplay.sendMessage(HandleCursurDisplay.obtainMessage(CursurIndex));
 				ClickReverseMode();
 			}
 		});
@@ -468,6 +500,206 @@ public class CameraSettingFragment extends ParentFragment{
 		edit.commit();
 		Log.d(TAG,"SavePref");
 		
+	}
+	/////////////////////////////////////////////////////////////////////
+	public void ClickLeft(){
+		switch (CursurIndex) {
+		case 1:
+			CursurIndex = 9;
+			CursurDisplay(CursurIndex);
+			break;
+		case 2:
+			CursurIndex--;
+			CursurDisplay(CursurIndex);
+			break;
+		case 3:
+			CursurIndex--;
+			CursurDisplay(CursurIndex);
+			break;
+		case 4:
+			CursurIndex--;
+			CursurDisplay(CursurIndex);
+			
+			break;
+		case 5:
+			if(ActiveCameraNum == 1){
+				CursurIndex = 3;
+				CursurDisplay(CursurIndex);
+			}else{
+				CursurIndex--;
+				CursurDisplay(CursurIndex);
+			}
+			break;
+		case 6:
+			if(ActiveCameraNum == 1){
+				CursurIndex = 3;
+				CursurDisplay(CursurIndex);
+			}else if(ActiveCameraNum == 2){
+				CursurIndex = 4;
+				CursurDisplay(CursurIndex);
+			}else{
+				CursurIndex--;
+				CursurDisplay(CursurIndex);
+			}
+			break;
+		case 7:
+			if(ActiveCameraNum == 1){
+				CursurIndex = 3;
+				CursurDisplay(CursurIndex);
+			}else if(ActiveCameraNum == 2){
+				CursurIndex = 4;
+				CursurDisplay(CursurIndex);
+			}else if(ActiveCameraNum == 3){
+				CursurIndex = 5;
+				CursurDisplay(CursurIndex);
+			}else{
+				CursurIndex--;
+				CursurDisplay(CursurIndex);
+			}
+			break;
+		case 8:
+		case 9:
+			CursurIndex--;
+			CursurDisplay(CursurIndex);
+			break;
+		default:
+			break;
+		}
+		
+	}
+	public void ClickRight(){
+		switch (CursurIndex) {
+		case 1:
+			CursurIndex++;
+			CursurDisplay(CursurIndex);
+			break;
+		case 2:
+			CursurIndex++;
+			CursurDisplay(CursurIndex);
+			break;
+		case 3:
+			if(ActiveCameraNum == 1){
+				CursurIndex = 7;
+				CursurDisplay(CursurIndex);
+			}else{
+				CursurIndex++;
+				CursurDisplay(CursurIndex);
+			}
+			break;
+		case 4:
+			if(ActiveCameraNum == 1 || ActiveCameraNum == 2){
+				CursurIndex = 7;
+				CursurDisplay(CursurIndex);
+			}else{
+				CursurIndex++;
+				CursurDisplay(CursurIndex);
+			}
+			break;
+		case 5:
+			if(ActiveCameraNum == 1 || ActiveCameraNum == 2 || ActiveCameraNum == 3){
+				CursurIndex = 7;
+				CursurDisplay(CursurIndex);
+			}else{
+				CursurIndex++;
+				CursurDisplay(CursurIndex);
+			}
+			break;
+		case 6:
+		case 7:
+		case 8:
+			CursurIndex++;
+			CursurDisplay(CursurIndex);
+			break;
+		case 9:
+			CursurIndex = 1;
+			CursurDisplay(CursurIndex);
+			break;
+		default:
+			break;
+		}
+	}
+	public void ClickESC(){
+		ClickCancel();
+	}
+	public void ClickEnter(){
+		switch (CursurIndex) {
+		case 1:
+			ClickMinus();
+			break;
+		case 2:
+			ClickPlus();
+			break;
+		case 3:
+			ClickCAM1();
+			break;
+		case 4:
+			ClickCAM2();
+			break;
+		case 5:
+			ClickCAM3();
+			break;
+		case 6:
+			ClickCAM4();
+			break;
+		case 7:
+			if(CameraReverseMode == CAN1CommManager.DATA_STATE_CAMERA_REVERSE_ON)
+				CameraReverseMode = CAN1CommManager.DATA_STATE_CAMERA_REVERSE_OFF;
+			else
+				CameraReverseMode = CAN1CommManager.DATA_STATE_CAMERA_REVERSE_ON;
+			ReverseModeDisplay(CameraReverseMode);
+			break;
+		case 8:
+			ClickCancel();
+			break;
+		case 9:
+			ClickOK();
+			break;
+		default:
+			break;
+		}
+	}
+	
+	public void CursurDisplay(int Index){
+		imgbtnOK.setPressed(false);
+		imgbtnCancel.setPressed(false);
+		imgbtnActiveCameraMinus.setPressed(false);
+		imgbtnActiveCameraPlus.setPressed(false);
+		textViewCAM1.setPressed(false);
+		textViewCAM2.setPressed(false);
+		textViewCAM3.setPressed(false);
+		textViewCAM4.setPressed(false);
+		checkReverseMode.setPressed(false);
+		switch (Index) {
+		case 1:
+			imgbtnActiveCameraMinus.setPressed(true);
+			break;
+		case 2:
+			imgbtnActiveCameraPlus.setPressed(true);
+			break;
+		case 3:
+			textViewCAM1.setPressed(true);
+			break;
+		case 4:
+			textViewCAM2.setPressed(true);
+			break;
+		case 5:
+			textViewCAM3.setPressed(true);
+			break;
+		case 6:
+			textViewCAM4.setPressed(true);
+			break;
+		case 7:
+			checkReverseMode.setPressed(true);
+			break;
+		case 8:
+			imgbtnCancel.setPressed(true);
+			break;
+		case 9:
+			imgbtnOK.setPressed(true);
+			break;
+		default:
+			break;
+		}
 	}
 	/////////////////////////////////////////////////////////////////////
 }

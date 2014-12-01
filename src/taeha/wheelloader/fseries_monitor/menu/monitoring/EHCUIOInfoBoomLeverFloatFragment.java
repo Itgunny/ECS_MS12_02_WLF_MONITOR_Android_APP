@@ -11,6 +11,8 @@ import taeha.wheelloader.fseries_monitor.main.ParentFragment;
 import taeha.wheelloader.fseries_monitor.main.R;
 import taeha.wheelloader.fseries_monitor.main.R.string;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.text.Layout;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -72,6 +74,10 @@ public class EHCUIOInfoBoomLeverFloatFragment extends ParentFragment{
 	int BucketOutEPPRValveMaxCurrent;
 	
 	int SelectIndex;
+	
+	int CursurIndex;
+	
+	Handler HandleCursurDisplay;
 	//////////////////////////////////////////////////
 	
 	//Fragment////////////////////////////////////////
@@ -101,6 +107,13 @@ public class EHCUIOInfoBoomLeverFloatFragment extends ParentFragment{
 		ClickBoomLever();
 		ParentActivity.ScreenIndex = ParentActivity.SCREEN_STATE_MENU_MONITORING_EHCUINFO_BOOMLEVERFLOAT;
 		ParentActivity._MenuBaseFragment._MenuInterTitleFragment.SetTitleText(ParentActivity.getResources().getString(R.string.Fingertip_Calibration));
+		HandleCursurDisplay = new Handler() {
+			@Override
+			public void handleMessage(Message msg) {
+			
+				CursurDisplay(msg.what);
+			}
+		};
 		return mRoot;
 	}
 	////////////////////////////////////////////////
@@ -138,6 +151,8 @@ public class EHCUIOInfoBoomLeverFloatFragment extends ParentFragment{
 	protected void InitValuables() {
 		// TODO Auto-generated method stub
 		super.InitValuables();
+		CursurIndex = 1;
+		CursurDisplay(CursurIndex);
 	}
 	@Override
 	protected void InitButtonListener() {
@@ -147,6 +162,8 @@ public class EHCUIOInfoBoomLeverFloatFragment extends ParentFragment{
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
+				CursurIndex = 6;
+				HandleCursurDisplay.sendMessage(HandleCursurDisplay.obtainMessage(CursurIndex));
 				ClickOK();
 			}
 		});
@@ -155,6 +172,8 @@ public class EHCUIOInfoBoomLeverFloatFragment extends ParentFragment{
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
+				CursurIndex = 5;
+				HandleCursurDisplay.sendMessage(HandleCursurDisplay.obtainMessage(CursurIndex));
 				ClickPlus();
 			}
 		});
@@ -163,6 +182,8 @@ public class EHCUIOInfoBoomLeverFloatFragment extends ParentFragment{
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
+				CursurIndex = 4;
+				HandleCursurDisplay.sendMessage(HandleCursurDisplay.obtainMessage(CursurIndex));
 				ClickMinus();
 			}
 		});
@@ -171,6 +192,8 @@ public class EHCUIOInfoBoomLeverFloatFragment extends ParentFragment{
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
+				CursurIndex = 1;
+				HandleCursurDisplay.sendMessage(HandleCursurDisplay.obtainMessage(CursurIndex));
 				ClickBoomLever();
 			}
 		});
@@ -179,6 +202,8 @@ public class EHCUIOInfoBoomLeverFloatFragment extends ParentFragment{
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
+				CursurIndex = 2;
+				HandleCursurDisplay.sendMessage(HandleCursurDisplay.obtainMessage(CursurIndex));
 				ClickBoomDown();
 			}
 		});
@@ -187,6 +212,8 @@ public class EHCUIOInfoBoomLeverFloatFragment extends ParentFragment{
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
+				CursurIndex = 3;
+				HandleCursurDisplay.sendMessage(HandleCursurDisplay.obtainMessage(CursurIndex));
 				ClickBucketDump();
 			}
 		});
@@ -388,6 +415,167 @@ public class EHCUIOInfoBoomLeverFloatFragment extends ParentFragment{
 			break;
 		default:
 			break;
+		}
+	}
+	/////////////////////////////////////////////////////////////////////
+	public void ClickLeft(){
+		switch (CursurIndex) {
+		case 1:
+			CursurIndex = 3;
+			CursurDisplay(CursurIndex);
+			break;
+		case 2:
+			CursurIndex--;
+			CursurDisplay(CursurIndex);
+			break;
+		case 3:
+			CursurIndex--;
+			CursurDisplay(CursurIndex);
+			break;
+		case 4:
+			CursurIndex = 6;
+			CursurDisplay(CursurIndex);
+			break;
+		case 5:
+			CursurIndex--;
+			CursurDisplay(CursurIndex);
+			break;
+		case 6:
+			CursurIndex--;
+			CursurDisplay(CursurIndex);
+			break;
+
+		default:
+			CursurIndex = 1;
+			CursurDisplay(CursurIndex);
+			break;
+		}
+		
+	}
+	public void ClickRight(){
+		switch (CursurIndex) {
+		case 1:
+			CursurIndex++;
+			CursurDisplay(CursurIndex);
+			break;
+		case 2:
+			CursurIndex++;
+			CursurDisplay(CursurIndex);
+			break;
+		case 3:
+			CursurIndex = 1;
+			CursurDisplay(CursurIndex);
+			
+			break;
+		case 4:
+			CursurIndex++;
+			CursurDisplay(CursurIndex);
+			break;
+		case 5:
+			CursurIndex++;
+			CursurDisplay(CursurIndex);
+			break;
+		case 6:
+			CursurIndex = 4;
+			CursurDisplay(CursurIndex);
+			break;
+		
+		default:
+			CursurIndex = 1;
+			CursurDisplay(CursurIndex);
+			break;
+		}
+	}
+	public void ClickESC(){
+		
+		switch (CursurIndex) {
+		case 1:
+		case 2:
+		case 3:
+			ClickOK();
+			break;
+		case 4:
+		case 5:
+		case 6:
+			if(SelectIndex == STATE_BOOMLEVER){
+				CursurIndex = 1;
+				CursurDisplay(CursurIndex);
+			}else if(SelectIndex == STATE_BOOMDOWN){
+				CursurIndex = 2;
+				CursurDisplay(CursurIndex);
+			}else if(SelectIndex == STATE_BUCKETDUMP){
+				CursurIndex = 3;
+				CursurDisplay(CursurIndex);
+			}
+		
+			break;
+		default:
+			
+			break;
+		}
+		
+	}
+	public void ClickEnter(){
+		switch (CursurIndex) {
+		case 1:
+			ClickBoomLever();
+			CursurIndex = 4;
+			CursurDisplay(CursurIndex);
+			break;
+		case 2:
+			ClickBoomDown();
+			CursurIndex = 4;
+			CursurDisplay(CursurIndex);
+			break;
+		case 3:
+			ClickBucketDump();
+			CursurIndex = 4;
+			CursurDisplay(CursurIndex);
+			break;
+		case 4:
+			ClickMinus();
+			break;
+		case 5:
+			ClickPlus();
+			break;
+		case 6:
+			ClickOK();
+			break;
+		default:
+			break;
+		}
+	}
+	
+	public void CursurDisplay(int Index){
+		imgbtnOK.setPressed(false);
+		imgbtnBoomLeverFloatingPositionUp.setPressed(false);
+		imgbtnBoomLeverFloatingPositionDown.setPressed(false);
+		radioBoomLever.setPressed(false);
+		radioBoomDown.setPressed(false);
+		radioBucketDump.setPressed(false);
+
+
+		switch (CursurIndex) {
+			case 1:
+				radioBoomLever.setPressed(true);
+				break;
+			case 2:
+				radioBoomDown.setPressed(true);
+				break;
+			case 3:
+				radioBucketDump.setPressed(true);
+				break;
+			case 4:
+				imgbtnBoomLeverFloatingPositionDown.setPressed(true);
+				break;
+			case 5:
+				imgbtnBoomLeverFloatingPositionUp.setPressed(true);
+				break;
+			case 6:
+				imgbtnOK.setPressed(true);
+				break;
+			default:
+				break;
 		}
 	}
 	/////////////////////////////////////////////////////////////////////

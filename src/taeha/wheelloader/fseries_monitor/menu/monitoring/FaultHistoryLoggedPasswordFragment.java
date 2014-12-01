@@ -1,6 +1,8 @@
 package taeha.wheelloader.fseries_monitor.menu.monitoring;
 
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -29,6 +31,13 @@ public class FaultHistoryLoggedPasswordFragment extends PasswordFragment{
 		
 		ParentActivity.ScreenIndex = ParentActivity.SCREEN_STATE_MENU_MONITORING_FAULTHISTORY_LOGGED_PW;
 		ParentActivity._MenuBaseFragment._MenuInterTitleFragment.SetTitleText(ParentActivity.getResources().getString(R.string.Logged_Fault));
+		HandleCursurDisplay = new Handler() {
+			@Override
+			public void handleMessage(Message msg) {
+			
+				CursurDisplay(msg.what);
+			}
+		};
 		return mRoot;
 	}
 	

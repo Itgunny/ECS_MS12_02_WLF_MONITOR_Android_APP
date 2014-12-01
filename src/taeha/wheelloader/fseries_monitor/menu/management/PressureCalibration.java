@@ -13,6 +13,8 @@ import taeha.wheelloader.fseries_monitor.main.ParentFragment;
 import taeha.wheelloader.fseries_monitor.main.R;
 import taeha.wheelloader.fseries_monitor.main.R.string;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.text.Layout;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -57,7 +59,9 @@ public class PressureCalibration extends ParentFragment{
 	
 	private int StatusCNT;
 	
-	int Order;
+	int Order;	
+	int CursurIndex;
+	Handler HandleCursurDisplay;
 	//////////////////////////////////////////////////
 	
 	//Fragment////////////////////////////////////////
@@ -83,9 +87,16 @@ public class PressureCalibration extends ParentFragment{
 		InitResource();
 		InitValuables();
 		InitButtonListener();
-		
+		CursurDisplay(CursurIndex);
 		ParentActivity.ScreenIndex = ParentActivity.SCREEN_STATE_MENU_MANAGEMENT_CALIBRATION_PRESSURE_TOP;
 		ParentActivity._MenuBaseFragment._MenuInterTitleFragment.SetTitleText(ParentActivity.getResources().getString(R.string.Boom_Pressure_Calibration));
+		HandleCursurDisplay = new Handler() {
+			@Override
+			public void handleMessage(Message msg) {
+			
+				CursurDisplay(msg.what);
+			}
+		};
 		return mRoot;
 	}
 
@@ -137,7 +148,7 @@ public class PressureCalibration extends ParentFragment{
 		
 		StatusCNT = 0;
 		Order = 0;
-		
+		CursurIndex = 1;
 	}
 	@Override
 	protected void InitButtonListener() {
@@ -216,9 +227,13 @@ public class PressureCalibration extends ParentFragment{
 		if(flag == true){
 			textViewStart.setClickable(true);
 			textViewStart.setAlpha((float)1.0);
+			CursurIndex = 1;
+			CursurDisplay(CursurIndex);
 		}else{
 			textViewStart.setClickable(false);
 			textViewStart.setAlpha((float)0.5);
+			CursurIndex = 2;
+			CursurDisplay(CursurIndex);
 		}
 		
 	}
@@ -321,6 +336,70 @@ public class PressureCalibration extends ParentFragment{
 			mCheckTimer = null;
 		}
 		
+	}	
+	/////////////////////////////////////////////////////////////////////
+	public void ClickLeft(){
+		switch (CursurIndex) {
+		case 1:
+			CursurIndex = 2;
+			CursurDisplay(CursurIndex);
+			break;
+		case 2:
+			if(textViewStart.isClickable() == true){
+				CursurIndex--;
+				CursurDisplay(CursurIndex);
+			}
+			break;
+		default:
+			break;
+		}
+		
 	}
+	public void ClickRight(){
+		switch (CursurIndex) {
+		case 1:
+			CursurIndex++;
+			CursurDisplay(CursurIndex);
+			break;
+		case 2:
+			if(textViewStart.isClickable() == true){
+				CursurIndex = 1;
+				CursurDisplay(CursurIndex);
+			}
+			break;
+		default:
+			break;
+		}
+	}
+	public void ClickESC(){
+		ClickCancel();
+	}
+	public void ClickEnter(){
+		switch (CursurIndex) {
+		case 1:
+			ClickStart();
+			break;
+		case 2:
+			ClickCancel();
+			break;
+		default:
+			break;
+		}
+	}
+	public void CursurDisplay(int Index){
+		switch (Index) {
+		case 1:
+			textViewStart.setPressed(true);
+			imgbtnCancel.setPressed(false);
+			break;
+		case 2:
+			textViewStart.setPressed(false);
+			imgbtnCancel.setPressed(true);
+			break;
+		default:
+			break;
+		}
+	}
+	/////////////////////////////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////////
 }

@@ -169,7 +169,7 @@
     <string name="Bucket_Priority">Bucket Priority</string>
     <string name="Boom_Bucket_Detent_Mode">Boom Bucket Detent Mode</string>
     <string name="Auxilliary_Attachment_Max_Flow_Level">Auxilliary Attachment Max Flow Level</string>
-    <string name="Soft_Stop">Soft Stop</string>
+    <string name="Soft_End_Stop">Soft End Stop</string>
     <string name="Engine_Auto_Shutdown">Engine Auto Shutdown</string>
     <string name="Engine_Delay_Shutdown">Engine Delay Shutdown</string>
     <string name="Camera_Setting">Camera Setting</string>
@@ -189,7 +189,7 @@
     <string name="_2nd">2nd</string>
     <string name="_3rd">3rd</string>
     <string name="_4th">4th</string>
-    <string name="Reverse_Mode">Reverse Mode</string>
+    <string name="Gear_Linkage_Mode">Gear Linkage Mode</string>
     <string name="Interval">Interval</string>
     <string name="Time">Time</string>
     <string name="Boom_Up">Boom Up</string>
@@ -268,7 +268,7 @@
     <string name="Transmission">Transmission</string>
     <string name="Please_refer_to_machine_manual_for_more_detailed_description">Please refer to machine manual for more detailed description.</string>
     <string name="Delete_Logged_Fault">Delete Logged Fault</string>
-	<string name="Fingertip_Calibration">Fingertip Calibration</string>
+    <string name="Fingertip_Calibration">Fingertip Calibration</string>
     <string name="Boom_Down_Response_Adjust">Boom Down Response Adjust</string>
     <string name="Bucket_Dump_Response_Adjust">Bucket Dump Response Adjust</string>
     <!-- Menu Monitoring End -->
@@ -374,6 +374,7 @@
     <string name="Nighttime">Nighttime</string>
     <string name="Internal_Speaker">Internal Speaker</string>
     <string name="External_Aux">External AUX</string>
+    <string name="Language">Language</string>
     <!-- Menu Preference End -->
     <!-- Menu Multimedia Start -->
     <string name="Media_Palyer">Media Palyer</string>

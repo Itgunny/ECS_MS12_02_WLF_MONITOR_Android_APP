@@ -155,6 +155,7 @@ public class VersionInfoDetailFragment extends ParentFragment{
 		
 		adapter = new IconTextListAdapterVersion(ParentActivity);
 		adapter.clearItem();
+
 	}
 
 	protected void InitValuables() {
@@ -226,11 +227,17 @@ public class VersionInfoDetailFragment extends ParentFragment{
 				if(flag == true){
 					layoutModel.setVisibility(View.VISIBLE);
 					layoutDate.setVisibility(View.VISIBLE);
+					RelativeLayout.LayoutParams params = (RelativeLayout.LayoutParams)listView.getLayoutParams();
+					params.addRule(RelativeLayout.ALIGN_PARENT_TOP,0);
+					listView.setLayoutParams(params); //causes layout update
 				}
 					
 				else{
 					layoutModel.setVisibility(View.INVISIBLE);
 					layoutDate.setVisibility(View.INVISIBLE);
+					RelativeLayout.LayoutParams params = (RelativeLayout.LayoutParams)listView.getLayoutParams();
+					params.addRule(RelativeLayout.ALIGN_PARENT_TOP,1);
+					listView.setLayoutParams(params); //causes layout update
 				}
 			}
 		});
@@ -390,5 +397,16 @@ public class VersionInfoDetailFragment extends ParentFragment{
 		adapter.UpdateSecond(STATE_VERSION, ParentActivity.GetVersionString(_data, _subinfo));
 	}
 	/////////////////////////////////////////////////////////////////////
-	
+	public void ClickLeft(){
+
+	}
+	public void ClickRight(){
+
+	}
+	public void ClickESC(){
+		ClickOK();
+	}
+	public void ClickEnter(){
+		ClickOK();
+	}
 }

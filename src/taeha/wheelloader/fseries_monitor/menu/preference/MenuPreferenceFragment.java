@@ -59,6 +59,7 @@ public class MenuPreferenceFragment extends MenuBodyList_ParentFragment{
 		ParentActivity._MenuBaseFragment._MenuListTitleFragment.setBackButtonEnable(false);
 		ParentActivity.ScreenIndex = ParentActivity.SCREEN_STATE_MENU_PREFERENCE_TOP;
 		ParentActivity._MenuBaseFragment._MenuListTitleFragment.SetTitleText(ParentActivity.getResources().getString(R.string.Preference));
+		CursurDisplay(CursurIndex);
 		return mRoot;
 	}
 	
@@ -93,9 +94,11 @@ public class MenuPreferenceFragment extends MenuBodyList_ParentFragment{
 		setListTitle1(ParentActivity.getResources().getString(string.Brightness_Setting));
 		setListTitle2(ParentActivity.getResources().getString(string.Clock_Setting));
 		setListTitle3(ParentActivity.getResources().getString(string.Unit_Setting));
-		setListTitle4(ParentActivity.getResources().getString(string.Sound_Output_Setting));
-		setListTitle5(ParentActivity.getResources().getString(string.Wireless_Communication_Setting));
-		setListTitle6(ParentActivity.getResources().getString(string.Display_Style));
+		setListTitle4(ParentActivity.getResources().getString(string.Display_Style) 
+				+ " / " + ParentActivity.getResources().getString(string.Language));
+		setListTitle5(ParentActivity.getResources().getString(string.Sound_Output_Setting));
+		setListTitle6(ParentActivity.getResources().getString(string.Wireless_Communication_Setting));
+		
 	}
 
 	//////////////////////////////////////////////////////////////////////
@@ -108,6 +111,8 @@ public class MenuPreferenceFragment extends MenuBodyList_ParentFragment{
 			ParentActivity.StartAnimationRunningTimer();
 		
 		ParentActivity._MenuBaseFragment.showBodyBrightnessAnimation();
+		CursurIndex = 1;
+		CursurDisplay(CursurIndex);
 	}
 
 	@Override
@@ -119,6 +124,8 @@ public class MenuPreferenceFragment extends MenuBodyList_ParentFragment{
 			ParentActivity.StartAnimationRunningTimer();
 		
 		ParentActivity._MenuBaseFragment.showBodyClockAnimation();
+		CursurIndex = 2;
+		CursurDisplay(CursurIndex);
 	}
 
 	@Override
@@ -130,23 +137,31 @@ public class MenuPreferenceFragment extends MenuBodyList_ParentFragment{
 			ParentActivity.StartAnimationRunningTimer();
 
 		ParentActivity._MenuBaseFragment.showBodyUnitAnimation();
+		CursurIndex = 3;
+		CursurDisplay(CursurIndex);
 	}
 
 	@Override
 	public void ClickList4() {
 		// TODO Auto-generated method stub
-		ParentActivity.showSoundOutput();
+		ParentActivity._MenuBaseFragment.showBodyDisplayTypeLangList();
+		CursurIndex = 4;
+		CursurDisplay(CursurIndex);
 	}
 
 	@Override
 	public void ClickList5() {
 		// TODO Auto-generated method stub
-		
+		ParentActivity.showSoundOutput();
+		CursurIndex = 5;
+		CursurDisplay(CursurIndex);
 	}
 
 	@Override
 	public void ClickList6() {
 		// TODO Auto-generated method stub
+		CursurIndex = 6;
+		CursurDisplay(CursurIndex);
 		
 	}
 	
@@ -167,14 +182,173 @@ public class MenuPreferenceFragment extends MenuBodyList_ParentFragment{
 	public void SoundOutputDisplay(int _data){
 		switch (_data) {
 		case Home.STATE_INTERNAL_SPK:
-			setListData4(ParentActivity.getResources().getString(string.Internal_Speaker));
+			setListData5(ParentActivity.getResources().getString(string.Internal_Speaker));
 			break;
 		case Home.STATE_EXTERNAL_AUX:
-			setListData4(ParentActivity.getResources().getString(string.External_Aux));
+			setListData5(ParentActivity.getResources().getString(string.External_Aux));
 			break;
 		default:
 			break;
 		}
+	}
+	//////////////////////////////////////////////////////////////////////
+	public void ClickLeft(){
+		Log.d(TAG,"ClickLeft");
+		switch (CursurIndex) {
+		case 0:
+			ParentActivity._MenuBaseFragment._MenuListLeftFragment.ClickManagement();
+			break;
+		case 1:
+			CursurIndex = 5;
+			CursurDisplay(CursurIndex);
+			break;
+		case 2:
+			CursurIndex--;
+			CursurDisplay(CursurIndex);
+			break;
+		case 3:
+			CursurIndex--;
+			CursurDisplay(CursurIndex);
+			break;
+		case 4:
+			CursurIndex--;
+			CursurDisplay(CursurIndex);
+			break;
+		case 5:
+			CursurIndex--;
+			CursurDisplay(CursurIndex);
+			break;
+		case 6:
+			
+			break;
+		default:
+			break;
+		}
+	}
+	public void ClickRight(){
+		Log.d(TAG,"ClickRight");
+		switch (CursurIndex) {
+		case 0:
+			ParentActivity._MenuBaseFragment._MenuListLeftFragment.ClickMultimedia();
+			break;
+		case 1:
+			CursurIndex++;
+			CursurDisplay(CursurIndex);
+			break;
+		case 2:
+			CursurIndex++;
+			CursurDisplay(CursurIndex);
+			break;
+		case 3:
+			CursurIndex++;
+			CursurDisplay(CursurIndex);
+			break;
+		case 4:
+			CursurIndex++;
+			CursurDisplay(CursurIndex);
+			break;
+		case 5:
+			CursurIndex = 1;
+			CursurDisplay(CursurIndex);
+			break;
+		case 6:
+			
+			break;
+		default:
+			break;
+		}
+	}
+	public void ClickESC(){
+		switch (CursurIndex) {
+		case 0:
+			ParentActivity._MenuBaseFragment._MenuListTitleFragment.ClickHome();
+			break;
+		case 1:
+			CursurIndex = 0;
+			CursurDisplay(CursurIndex);
+			break;
+		case 2:
+			CursurIndex = 0;
+			CursurDisplay(CursurIndex);
+			break;
+		case 3:
+			CursurIndex = 0;
+			CursurDisplay(CursurIndex);
+			break;
+		case 4:
+			
+			break;
+		case 5:
+			CursurIndex = 0;
+			CursurDisplay(CursurIndex);
+			break;
+		case 6:
+			CursurIndex = 0;
+			CursurDisplay(CursurIndex);
+			break;
+		default:
+			break;
+		}
+	}
+	public void ClickEnter(){
+		switch (CursurIndex) {
+		case 0:
+			CursurIndex = 1;
+			CursurDisplay(CursurIndex);
+			break;
+		case 1:
+			imgbtnList[0].callOnClick();
+			break;
+		case 2:
+			imgbtnList[1].callOnClick();
+			break;
+		case 3:
+			imgbtnList[2].callOnClick();
+			break;
+		case 4:
+			imgbtnList[3].callOnClick();
+			break;
+		case 5:
+			imgbtnList[4].callOnClick();
+			break;
+		case 6:
+			imgbtnList[5].callOnClick();
+			break;
+		default:
+			break;
+		}
+	}
+	/////////////////////////////////////////////////////////////////////	
+	public void CursurDisplay(int Index){
+		try {
+			switch (Index) {
+			case 1:
+				setListFocus(1);
+				break;
+			case 2:
+				setListFocus(2);
+				break;
+			case 3:
+				setListFocus(3);
+				break;
+			case 4:
+				setListFocus(4);
+				break;
+			case 5:
+				setListFocus(5);
+				break;
+			case 6:
+				setListFocus(6);
+				break;
+			default:
+				setListFocus(0);
+				break;
+			}
+		} catch (NullPointerException e) {
+			// TODO: handle exception
+			Log.e(TAG,"NullPointerException CursurDisplay");
+		}
+		
 	}
 	/////////////////////////////////////////////////////////////////////
 	

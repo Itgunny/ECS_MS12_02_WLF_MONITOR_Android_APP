@@ -14,10 +14,11 @@
     <item 
     	android:state_focused="true"
         android:drawable="@drawable/menu_numpad_selected"/>
-      <item 
+    <item 
     	android:state_focused="false"
         android:drawable="@drawable/menu_numpad_gray_normal"/>
     <item
-    android:drawable="@drawable/menu_numpad_gray_normal"/>
+   		android:drawable="@drawable/menu_numpad_gray_normal"/>
         
 </selector>
+

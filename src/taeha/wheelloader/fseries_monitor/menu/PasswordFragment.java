@@ -14,6 +14,8 @@ import taeha.wheelloader.fseries_monitor.main.ParentFragment;
 import taeha.wheelloader.fseries_monitor.main.R;
 import taeha.wheelloader.fseries_monitor.main.R.string;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.text.Layout;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -73,6 +75,9 @@ public abstract class PasswordFragment extends ParentFragment{
 	protected Timer mTimeOutTimer = null;
 	protected Timer mIndicatorTitleTimer = null;
 	protected Timer mSeedCheckTimer = null;
+	
+	protected Handler HandleCursurDisplay;
+	protected int CursurIndex;
 	//////////////////////////////////////////////////
 	
 	//Fragment////////////////////////////////////////
@@ -98,8 +103,14 @@ public abstract class PasswordFragment extends ParentFragment{
 		InitResource();
 		InitValuables();
 		InitButtonListener();
-		
-		
+		CursurDisplay(CursurIndex);
+		HandleCursurDisplay = new Handler() {
+			@Override
+			public void handleMessage(Message msg) {
+			
+				CursurDisplay(msg.what);
+			}
+		};
 		return mRoot;
 	}
 	@Override
@@ -168,6 +179,7 @@ public abstract class PasswordFragment extends ParentFragment{
 		}
 		
 		HCEAntiTheftCommand = CAN1CommManager.DATA_STATE_PASSWORD_IDENTIFICATION_REQUEST;
+		CursurIndex = 1;
 		
 	}
 	@Override
@@ -178,6 +190,9 @@ public abstract class PasswordFragment extends ParentFragment{
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
+				
+				CursurIndex = 1;
+				HandleCursurDisplay.sendMessage(HandleCursurDisplay.obtainMessage(CursurIndex));
 				ClickNum1();
 			}
 		});
@@ -186,6 +201,9 @@ public abstract class PasswordFragment extends ParentFragment{
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
+				
+				CursurIndex = 2;
+				HandleCursurDisplay.sendMessage(HandleCursurDisplay.obtainMessage(CursurIndex));
 				ClickNum2();
 			}
 		});
@@ -194,6 +212,9 @@ public abstract class PasswordFragment extends ParentFragment{
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
+				
+				CursurIndex = 3;
+				HandleCursurDisplay.sendMessage(HandleCursurDisplay.obtainMessage(CursurIndex));
 				ClickNum3();
 			}
 		});
@@ -202,6 +223,9 @@ public abstract class PasswordFragment extends ParentFragment{
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
+			
+				CursurIndex = 4;
+				HandleCursurDisplay.sendMessage(HandleCursurDisplay.obtainMessage(CursurIndex));
 				ClickNum4();
 			}
 		});
@@ -210,7 +234,10 @@ public abstract class PasswordFragment extends ParentFragment{
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
-				ClickNum5();
+				
+				CursurIndex = 5;
+				HandleCursurDisplay.sendMessage(HandleCursurDisplay.obtainMessage(CursurIndex));
+				ClickNum5();	
 			}
 		});
 		textViewNum6.setOnClickListener(new View.OnClickListener() {
@@ -218,6 +245,9 @@ public abstract class PasswordFragment extends ParentFragment{
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
+				
+				CursurIndex = 6;
+				HandleCursurDisplay.sendMessage(HandleCursurDisplay.obtainMessage(CursurIndex));
 				ClickNum6();
 			}
 		});
@@ -226,6 +256,9 @@ public abstract class PasswordFragment extends ParentFragment{
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
+				
+				CursurIndex = 7;
+				HandleCursurDisplay.sendMessage(HandleCursurDisplay.obtainMessage(CursurIndex));
 				ClickNum7();
 			}
 		});
@@ -234,6 +267,9 @@ public abstract class PasswordFragment extends ParentFragment{
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
+				
+				CursurIndex = 8;
+				HandleCursurDisplay.sendMessage(HandleCursurDisplay.obtainMessage(CursurIndex));
 				ClickNum8();
 			}
 		});
@@ -242,6 +278,9 @@ public abstract class PasswordFragment extends ParentFragment{
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
+				
+				CursurIndex = 9;
+				HandleCursurDisplay.sendMessage(HandleCursurDisplay.obtainMessage(CursurIndex));
 				ClickNum9();
 			}
 		});
@@ -250,6 +289,9 @@ public abstract class PasswordFragment extends ParentFragment{
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
+			
+				CursurIndex = 11;
+				HandleCursurDisplay.sendMessage(HandleCursurDisplay.obtainMessage(CursurIndex));
 				ClickNum0();
 			}
 		});
@@ -258,7 +300,10 @@ public abstract class PasswordFragment extends ParentFragment{
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
-				ClickEnter();
+				
+				CursurIndex = 12;
+				HandleCursurDisplay.sendMessage(HandleCursurDisplay.obtainMessage(CursurIndex));
+				ClickEnterButton();
 			}
 		});
 		imgbtnBack.setOnClickListener(new View.OnClickListener() {
@@ -266,6 +311,9 @@ public abstract class PasswordFragment extends ParentFragment{
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
+				
+				CursurIndex = 10;
+				HandleCursurDisplay.sendMessage(HandleCursurDisplay.obtainMessage(CursurIndex));
 				ClickBack();
 			}
 		});
@@ -298,6 +346,7 @@ public abstract class PasswordFragment extends ParentFragment{
 			DataBufIndex++;
 		}
 		PasswordIndicatorDisplay();
+		
 	}
 	public void ClickNum2(){
 		if(DataBufIndex < MAX_INPUT_LENGTH){
@@ -305,6 +354,7 @@ public abstract class PasswordFragment extends ParentFragment{
 			DataBufIndex++;
 		}
 		PasswordIndicatorDisplay();
+	
 	}
 
 	public void ClickNum3(){
@@ -313,6 +363,7 @@ public abstract class PasswordFragment extends ParentFragment{
 			DataBufIndex++;
 		}
 		PasswordIndicatorDisplay();
+	
 	}
 
 	public void ClickNum4(){
@@ -321,6 +372,7 @@ public abstract class PasswordFragment extends ParentFragment{
 			DataBufIndex++;
 		}
 		PasswordIndicatorDisplay();
+	
 	}
 
 	public void ClickNum5(){
@@ -329,6 +381,7 @@ public abstract class PasswordFragment extends ParentFragment{
 			DataBufIndex++;
 		}
 		PasswordIndicatorDisplay();
+		
 	}
 
 	public void ClickNum6(){
@@ -337,6 +390,7 @@ public abstract class PasswordFragment extends ParentFragment{
 			DataBufIndex++;
 		}
 		PasswordIndicatorDisplay();
+		
 	}
 
 	public void ClickNum7(){
@@ -345,6 +399,7 @@ public abstract class PasswordFragment extends ParentFragment{
 			DataBufIndex++;
 		}
 		PasswordIndicatorDisplay();
+		
 	}
 
 	public void ClickNum8(){
@@ -353,6 +408,7 @@ public abstract class PasswordFragment extends ParentFragment{
 			DataBufIndex++;
 		}
 		PasswordIndicatorDisplay();
+	
 	}
 
 	public void ClickNum9(){
@@ -361,6 +417,7 @@ public abstract class PasswordFragment extends ParentFragment{
 			DataBufIndex++;
 		}
 		PasswordIndicatorDisplay();
+		
 	}
 
 	public void ClickNum0(){
@@ -369,6 +426,7 @@ public abstract class PasswordFragment extends ParentFragment{
 			DataBufIndex++;
 		}
 		PasswordIndicatorDisplay();
+	
 	}
 
 	public void ClickBack(){
@@ -376,14 +434,16 @@ public abstract class PasswordFragment extends ParentFragment{
 			DataBufIndex--;
 		}
 		PasswordIndicatorDisplay();
+	
 	}
 	public void LongClickBack(){
 		DataBufIndex = 0;
 		PasswordIndicatorDisplay();
 	}
 
-	public void ClickEnter(){
+	public void ClickEnterButton(){
 		EnterClick();
+	
 	}
 
 
@@ -735,6 +795,158 @@ public abstract class PasswordFragment extends ParentFragment{
 	/////////////////////////////////////////////////////////////////////
 	abstract public void showServicePasswordNextScreen();
 	abstract public void showUserPasswordNextScreen();
+	/////////////////////////////////////////////////////////////////////
+	public void ClickLeft(){
+		switch (CursurIndex) {
+		case 1:
+			CursurIndex = 12;
+			CursurDisplay(CursurIndex);
+			break;
+		case 2:
+		case 3:
+		case 4:
+		case 5:
+		case 6:
+		case 7:
+		case 8:
+		case 9:
+		case 10:
+		case 11:
+		case 12:
+			CursurIndex--;
+			CursurDisplay(CursurIndex);
+			break;
+
+		default:
+			break;
+		}
+		
+	}
+	public void ClickRight(){	
+		switch (CursurIndex) {
+		case 1:
+		case 2:
+		case 3:
+		case 4:
+		case 5:
+		case 6:
+		case 7:
+		case 8:
+		case 9:
+		case 10:
+		case 11:
+			CursurIndex++;
+			CursurDisplay(CursurIndex);
+			break;
+		case 12:
+			CursurIndex = 1;
+			CursurDisplay(CursurIndex);
+			break;
+		default:
+			break;
+		}
+	}
+	public void ClickESC(){
+		ParentActivity._MenuBaseFragment._MenuListTitleFragment.ClickBack();
+	}
+	public void ClickEnter(){
+		switch (CursurIndex) {
+		case 1:
+			ClickNum1();
+			break;
+		case 2:
+			ClickNum2();
+			break;
+		case 3:
+			ClickNum3();
+			break;
+		case 4:
+			ClickNum4();
+			break;
+		case 5:
+			ClickNum5();
+			break;
+		case 6:
+			ClickNum6();
+			break;
+		case 7:
+			ClickNum7();
+			break;
+		case 8:
+			ClickNum8();
+			break;
+		case 9:
+			ClickNum9();
+			break;
+		case 10:
+			ClickBack();
+			break;
+		case 11:
+			ClickNum0();
+			break;
+		case 12:
+			ClickEnterButton();
+			break;
+		default:
+			break;
+		}
+	}
+	public void CursurDisplay(int Index){
+		textViewNum1.setPressed(false);
+		textViewNum2.setPressed(false);
+		textViewNum3.setPressed(false);
+		textViewNum4.setPressed(false);
+		textViewNum5.setPressed(false);
+		textViewNum6.setPressed(false);
+		textViewNum7.setPressed(false);
+		textViewNum8.setPressed(false);
+		textViewNum9.setPressed(false);
+		textViewNum0.setPressed(false);
+		imgbtnBack.setPressed(false);
+		imgbtnEnter.setPressed(false);
+
+		switch (Index) {
+		case 1:
+			textViewNum1.setPressed(true);
+			break;
+		case 2:
+			textViewNum2.setPressed(true);
+			break;
+		case 3:
+			textViewNum3.setPressed(true);
+			break;
+		case 4:
+			textViewNum4.setPressed(true);
+			break;
+		case 5:
+			textViewNum5.setPressed(true);
+			break;
+		case 6:
+			textViewNum6.setPressed(true);
+			break;
+		case 7:
+			textViewNum7.setPressed(true);
+			break;
+		case 8:
+			textViewNum8.setPressed(true);
+			break;
+		case 9:
+			textViewNum9.setPressed(true);
+			break;
+		case 10:
+			imgbtnBack.setPressed(true);
+			break;
+		case 11:
+			textViewNum0.setPressed(true);
+			break;
+		case 12:
+			imgbtnEnter.setPressed(true);
+			break;
+
+		default:
+			break;
+		}
+	}
 	/////////////////////////////////////////////////////////////////////
 	
 }

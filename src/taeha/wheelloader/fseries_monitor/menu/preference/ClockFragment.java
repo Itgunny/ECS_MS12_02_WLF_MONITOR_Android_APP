@@ -10,6 +10,8 @@ import taeha.wheelloader.fseries_monitor.main.ParentFragment;
 import taeha.wheelloader.fseries_monitor.main.R;
 import taeha.wheelloader.fseries_monitor.main.R.string;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.text.Layout;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -62,6 +64,9 @@ public class ClockFragment extends ParentFragment{
 	int Min1;
 	
 	boolean AMFlag;
+	
+	Handler HandleCursurDisplay;
+	int CursurIndex;
 	//////////////////////////////////////////////////
 	
 	//Fragment////////////////////////////////////////
@@ -87,9 +92,17 @@ public class ClockFragment extends ParentFragment{
 		InitResource();
 		InitValuables();
 		InitButtonListener();
+		DisableHour10Button();
 		
+		CursurDisplay(CursurIndex);
 		ParentActivity.ScreenIndex = ParentActivity.SCREEN_STATE_MENU_PREFERENCE_CLOCK_TOP;
 		ParentActivity._MenuBaseFragment._MenuInterTitleFragment.SetTitleText(ParentActivity.getResources().getString(R.string.Clock_Setting));
+		HandleCursurDisplay = new Handler() {
+			@Override
+			public void handleMessage(Message msg) {
+				CursurDisplay(msg.what);
+			}
+		};
 		return mRoot;
 	}
 	
@@ -134,6 +147,7 @@ public class ClockFragment extends ParentFragment{
 
 		ClockDisplay(Hour,Min);
 		CheckButton();
+		CursurIndex = 1;
 	}
 	@Override
 	protected void InitButtonListener() {
@@ -143,6 +157,8 @@ public class ClockFragment extends ParentFragment{
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
+				CursurIndex = 15;
+				HandleCursurDisplay.sendMessage(HandleCursurDisplay.obtainMessage(CursurIndex));
 				ClickOK();
 			}
 		});
@@ -151,6 +167,8 @@ public class ClockFragment extends ParentFragment{
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
+				CursurIndex = 14;
+				HandleCursurDisplay.sendMessage(HandleCursurDisplay.obtainMessage(CursurIndex));
 				ClickCancel();
 			}
 		});
@@ -159,6 +177,8 @@ public class ClockFragment extends ParentFragment{
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
+				CursurIndex = 2;
+				HandleCursurDisplay.sendMessage(HandleCursurDisplay.obtainMessage(CursurIndex));
 				ClickNum1();
 			}
 		});	
@@ -167,6 +187,8 @@ public class ClockFragment extends ParentFragment{
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
+				CursurIndex = 3;
+				HandleCursurDisplay.sendMessage(HandleCursurDisplay.obtainMessage(CursurIndex));
 				ClickNum2();
 			}
 		});	
@@ -175,6 +197,8 @@ public class ClockFragment extends ParentFragment{
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
+				CursurIndex = 4;
+				HandleCursurDisplay.sendMessage(HandleCursurDisplay.obtainMessage(CursurIndex));
 				ClickNum3();
 			}
 		});	
@@ -183,6 +207,8 @@ public class ClockFragment extends ParentFragment{
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
+				CursurIndex = 5;
+				HandleCursurDisplay.sendMessage(HandleCursurDisplay.obtainMessage(CursurIndex));
 				ClickNum4();
 			}
 		});	
@@ -191,6 +217,8 @@ public class ClockFragment extends ParentFragment{
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
+				CursurIndex = 6;
+				HandleCursurDisplay.sendMessage(HandleCursurDisplay.obtainMessage(CursurIndex));
 				ClickNum5();
 			}
 		});	
@@ -199,6 +227,8 @@ public class ClockFragment extends ParentFragment{
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
+				CursurIndex = 7;
+				HandleCursurDisplay.sendMessage(HandleCursurDisplay.obtainMessage(CursurIndex));
 				ClickNum6();
 			}
 		});	
@@ -207,6 +237,8 @@ public class ClockFragment extends ParentFragment{
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
+				CursurIndex = 8;
+				HandleCursurDisplay.sendMessage(HandleCursurDisplay.obtainMessage(CursurIndex));
 				ClickNum7();
 			}
 		});	
@@ -215,6 +247,8 @@ public class ClockFragment extends ParentFragment{
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
+				CursurIndex = 9;
+				HandleCursurDisplay.sendMessage(HandleCursurDisplay.obtainMessage(CursurIndex));
 				ClickNum8();
 			}
 		});	
@@ -223,6 +257,8 @@ public class ClockFragment extends ParentFragment{
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
+				CursurIndex = 10;
+				HandleCursurDisplay.sendMessage(HandleCursurDisplay.obtainMessage(CursurIndex));
 				ClickNum9();
 			}
 		});	
@@ -231,6 +267,8 @@ public class ClockFragment extends ParentFragment{
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
+				CursurIndex = 12;
+				HandleCursurDisplay.sendMessage(HandleCursurDisplay.obtainMessage(CursurIndex));
 				ClickNum0();
 			}
 		});	
@@ -239,6 +277,8 @@ public class ClockFragment extends ParentFragment{
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
+				CursurIndex = 11;
+				HandleCursurDisplay.sendMessage(HandleCursurDisplay.obtainMessage(CursurIndex));
 				ClickNumBack();
 			}
 		});	
@@ -247,6 +287,8 @@ public class ClockFragment extends ParentFragment{
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
+				CursurIndex = 13;
+				HandleCursurDisplay.sendMessage(HandleCursurDisplay.obtainMessage(CursurIndex));
 				ClickNumNext();
 			}
 		});	
@@ -255,6 +297,8 @@ public class ClockFragment extends ParentFragment{
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
+				CursurIndex = 1;
+				HandleCursurDisplay.sendMessage(HandleCursurDisplay.obtainMessage(CursurIndex));
 				ClickAMPM();
 			}
 		});	
@@ -647,5 +691,446 @@ public class ClockFragment extends ParentFragment{
 			radioMin.setChecked(true);
 		}
 	}
+	/////////////////////////////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////////
+	public void ClickLeft(){
+		switch (CursurIndex) {
+		case 1:
+			CursurIndex = 15;
+			CursurDisplay(CursurIndex);
+			break;
+		case 2:
+			CursurIndex--;
+			CursurDisplay(CursurIndex);
+			break;
+		case 3:
+			CursurIndex--;
+			CursurDisplay(CursurIndex);
+			break;
+		case 4:
+			if(ClockIndex == 0){
+				CursurIndex = 2;
+				CursurDisplay(CursurIndex);
+			}else{
+				CursurIndex--;
+				CursurDisplay(CursurIndex);
+			}
+			break;
+		case 5:
+			if(ClockIndex == 0){
+				CursurIndex = 2;
+				CursurDisplay(CursurIndex);
+			}else if(ClockIndex == 1 && Hour10 == 1){
+				CursurIndex = 3;
+				CursurDisplay(CursurIndex);
+			}else{
+				CursurIndex--;
+				CursurDisplay(CursurIndex);
+			}
+			break;
+		case 6:
+			if(ClockIndex == 0){
+				CursurIndex = 2;
+				CursurDisplay(CursurIndex);
+			}else if(ClockIndex == 1 && Hour10 == 1){
+				CursurIndex = 3;
+				CursurDisplay(CursurIndex);
+			}else{
+				CursurIndex--;
+				CursurDisplay(CursurIndex);
+			}
+			break;
+		case 7:
+			if(ClockIndex == 0){
+				CursurIndex = 2;
+				CursurDisplay(CursurIndex);
+			}else if(ClockIndex == 1 && Hour10 == 1){
+				CursurIndex = 3;
+				CursurDisplay(CursurIndex);
+			}else{
+				CursurIndex--;
+				CursurDisplay(CursurIndex);
+			}
+			break;
+		case 8:
+			if(ClockIndex == 0){
+				CursurIndex = 2;
+				CursurDisplay(CursurIndex);
+			}else if(ClockIndex == 1 && Hour10 == 1){
+				CursurIndex = 3;
+				CursurDisplay(CursurIndex);
+			}else if(ClockIndex == 2){
+				CursurIndex = 6;
+				CursurDisplay(CursurIndex);
+			}
+			else{
+				CursurIndex--;
+				CursurDisplay(CursurIndex);
+			}
+			break;
+		case 9:
+			if(ClockIndex == 0){
+				CursurIndex = 2;
+				CursurDisplay(CursurIndex);
+			}else if(ClockIndex == 1 && Hour10 == 1){
+				CursurIndex = 3;
+				CursurDisplay(CursurIndex);
+			}else if(ClockIndex == 2){
+				CursurIndex = 6;
+				CursurDisplay(CursurIndex);
+			}
+			else{
+				CursurIndex--;
+				CursurDisplay(CursurIndex);
+			}
+			break;
+		case 10:
+			if(ClockIndex == 0){
+				CursurIndex = 2;
+				CursurDisplay(CursurIndex);
+			}else if(ClockIndex == 1 && Hour10 == 1){
+				CursurIndex = 3;
+				CursurDisplay(CursurIndex);
+			}else if(ClockIndex == 2){
+				CursurIndex = 6;
+				CursurDisplay(CursurIndex);
+			}
+			else{
+				CursurIndex--;
+				CursurDisplay(CursurIndex);
+			}
+			break;
+		case 11:
+			if(ClockIndex == 0){
+				CursurIndex = 2;
+				CursurDisplay(CursurIndex);
+			}else if(ClockIndex == 1 && Hour10 == 1){
+				CursurIndex = 3;
+				CursurDisplay(CursurIndex);
+			}else if(ClockIndex == 2){
+				CursurIndex = 6;
+				CursurDisplay(CursurIndex);
+			}
+			else{
+				CursurIndex--;
+				CursurDisplay(CursurIndex);
+			}
+			break;
+		case 12:
+			CursurIndex--;
+			CursurDisplay(CursurIndex);
+			break;
+		case 13:
+			if(ClockIndex == 1 && Hour10 == 0){
+				CursurIndex = 11;
+				CursurDisplay(CursurIndex);
+			}else{
+				CursurIndex--;
+				CursurDisplay(CursurIndex);
+			}
+			break;
+		case 14:
+			CursurIndex--;
+			CursurDisplay(CursurIndex);
+			break;
+		case 15:
+			CursurIndex--;
+			CursurDisplay(CursurIndex);
+			break;
+		default:
+			CursurIndex = 1;
+			CursurDisplay(CursurIndex);
+			break;
+		}
+		
+	}
+	public void ClickRight(){
+		switch (CursurIndex) {
+		case 1:
+			CursurIndex++;
+			CursurDisplay(CursurIndex);
+			break;
+		case 2:
+			if(ClockIndex == 0){
+				CursurIndex = 11;
+				CursurDisplay(CursurIndex);
+			}else{
+				CursurIndex++;
+				CursurDisplay(CursurIndex);
+			}
+			break;
+		case 3:
+			if(ClockIndex == 0){
+				CursurIndex = 11;
+				CursurDisplay(CursurIndex);
+			}else if(ClockIndex == 1 && Hour10 == 1){
+				CursurIndex = 11;
+				CursurDisplay(CursurIndex);
+			}else{
+				CursurIndex++;
+				CursurDisplay(CursurIndex);
+			}
+			break;
+		case 4:
+			if(ClockIndex == 0){
+				CursurIndex = 11;
+				CursurDisplay(CursurIndex);
+			}else if(ClockIndex == 1 && Hour10 == 1){
+				CursurIndex = 11;
+				CursurDisplay(CursurIndex);
+			}else{
+				CursurIndex++;
+				CursurDisplay(CursurIndex);
+			}
+			break;
+		case 5:
+			if(ClockIndex == 0){
+				CursurIndex = 11;
+				CursurDisplay(CursurIndex);
+			}else if(ClockIndex == 1 && Hour10 == 1){
+				CursurIndex = 11;
+				CursurDisplay(CursurIndex);
+			}else{
+				CursurIndex++;
+				CursurDisplay(CursurIndex);
+			}
+			break;
+		case 6:
+			if(ClockIndex == 0){
+				CursurIndex = 11;
+				CursurDisplay(CursurIndex);
+			}else if(ClockIndex == 1 && Hour10 == 1){
+				CursurIndex = 11;
+				CursurDisplay(CursurIndex);
+			}else if(ClockIndex == 2){
+				CursurIndex = 11;
+				CursurDisplay(CursurIndex);
+			}
+			else{
+				CursurIndex++;
+				CursurDisplay(CursurIndex);
+			}
+			break;
+		case 7:
+			if(ClockIndex == 0){
+				CursurIndex = 11;
+				CursurDisplay(CursurIndex);
+			}else if(ClockIndex == 1 && Hour10 == 1){
+				CursurIndex = 11;
+				CursurDisplay(CursurIndex);
+			}else if(ClockIndex == 2){
+				CursurIndex = 11;
+				CursurDisplay(CursurIndex);
+			}
+			else{
+				CursurIndex++;
+				CursurDisplay(CursurIndex);
+			}
+			break;
+		case 8:
+			if(ClockIndex == 0){
+				CursurIndex = 11;
+				CursurDisplay(CursurIndex);
+			}else if(ClockIndex == 1 && Hour10 == 1){
+				CursurIndex = 11;
+				CursurDisplay(CursurIndex);
+			}else if(ClockIndex == 2){
+				CursurIndex = 11;
+				CursurDisplay(CursurIndex);
+			}
+			else{
+				CursurIndex++;
+				CursurDisplay(CursurIndex);
+			}
+			break;
+		case 9:
+			if(ClockIndex == 0){
+				CursurIndex = 11;
+				CursurDisplay(CursurIndex);
+			}else if(ClockIndex == 1 && Hour10 == 1){
+				CursurIndex = 11;
+				CursurDisplay(CursurIndex);
+			}else if(ClockIndex == 2){
+				CursurIndex = 11;
+				CursurDisplay(CursurIndex);
+			}
+			else{
+				CursurIndex++;
+				CursurDisplay(CursurIndex);
+			}
+			break;
+		case 10:
+			CursurIndex++;
+			CursurDisplay(CursurIndex);
+			break;
+		case 11:
+			if(ClockIndex == 1 && Hour10 == 0){
+				CursurIndex = 13;
+				CursurDisplay(CursurIndex);
+			}else{
+				CursurIndex++;
+				CursurDisplay(CursurIndex);
+			}
+			break;
+		case 12:
+			CursurIndex++;
+			CursurDisplay(CursurIndex);
+			break;
+		case 13:
+			CursurIndex++;
+			CursurDisplay(CursurIndex);
+			break;
+		case 14:
+			CursurIndex++;
+			CursurDisplay(CursurIndex);
+			break;
+		case 15:
+			CursurIndex = 1;
+			CursurDisplay(CursurIndex);
+			break;
+		default:
+			CursurIndex = 1;
+			CursurDisplay(CursurIndex);
+			break;
+		}
+	}
+	public void ClickESC(){
+		ClickCancel();
+	}
+	public void ClickEnter(){
+		switch (CursurIndex) {
+		case 1:
+			ClickAMPM();
+			break;
+		case 2:
+			ClickNum1();
+			break;
+
+		case 3:
+			ClickNum2();
+			break;
+
+		case 4:
+			ClickNum3();
+			break;
+
+		case 5:
+			ClickNum4();
+			break;
+
+		case 6:
+			ClickNum5();
+			break;
+
+		case 7:
+			ClickNum6();
+			break;
+
+		case 8:
+			ClickNum7();
+			break;
+
+		case 9:
+			ClickNum8();
+			break;
+
+		case 10:
+			ClickNum9();
+			break;
+
+		case 11:
+			ClickNumBack();
+			break;
+
+		case 12:
+			ClickNum0();
+			break;
+
+		case 13:
+			ClickNumNext();
+			break;
+
+		case 14:
+			ClickCancel();
+			break;
+
+		case 15:
+			ClickOK();
+			break;
+			
+		default:
+			break;
+		}
+	}
+	public void CursurDisplay(int Index){
+		imgbtnOK.setPressed(false);
+		imgbtnCancel.setPressed(false);
+		textViewAMPM.setPressed(false);
+
+		textViewNum1.setPressed(false);
+		textViewNum2.setPressed(false);
+		textViewNum3.setPressed(false);
+		textViewNum4.setPressed(false);
+		textViewNum5.setPressed(false);
+		textViewNum6.setPressed(false);
+		textViewNum7.setPressed(false);
+		textViewNum8.setPressed(false);
+		textViewNum9.setPressed(false);
+		textViewNum0.setPressed(false);
+		imgbtnBack.setPressed(false);
+		textViewNext.setPressed(false);
+
+		switch (Index) {
+		case 1:
+			textViewAMPM.setPressed(true);
+			break;
+		case 2:
+			textViewNum1.setPressed(true);
+			break;
+		case 3:
+			textViewNum2.setPressed(true);
+			break;
+		case 4:
+			textViewNum3.setPressed(true);
+			break;
+		case 5:
+			textViewNum4.setPressed(true);
+			break;
+		case 6:
+			textViewNum5.setPressed(true);
+			break;
+		case 7:
+			textViewNum6.setPressed(true);
+			break;
+		case 8:
+			textViewNum7.setPressed(true);
+			break;
+		case 9:
+			textViewNum8.setPressed(true);
+			break;
+		case 10:
+			textViewNum9.setPressed(true);
+			break;
+		case 11:
+			imgbtnBack.setPressed(true);
+			break;
+		case 12:
+			textViewNum0.setPressed(true);
+			break;
+		case 13:
+			textViewNext.setPressed(true);
+			break;
+		case 14:
+			imgbtnCancel.setPressed(true);
+			break;
+		case 15:
+			imgbtnOK.setPressed(true);
+			break;
+		default:
+			break;
+		}
+	}
+	
+	
 	/////////////////////////////////////////////////////////////////////
 }

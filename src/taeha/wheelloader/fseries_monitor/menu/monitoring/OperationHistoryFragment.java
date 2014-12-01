@@ -11,6 +11,8 @@ import taeha.wheelloader.fseries_monitor.main.ParentFragment;
 import taeha.wheelloader.fseries_monitor.main.R;
 import taeha.wheelloader.fseries_monitor.main.R.string;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.text.Layout;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -68,6 +70,10 @@ public class OperationHistoryFragment extends ParentFragment{
 	int TotalOdometer;
 	int LatestOdometer;
 	int LatestHourmeter;
+	
+	int CursurIndex;
+	
+	Handler HandleCursurDisplay;
 	//////////////////////////////////////////////////
 	
 	//Fragment////////////////////////////////////////
@@ -96,6 +102,14 @@ public class OperationHistoryFragment extends ParentFragment{
 		
 		ParentActivity.ScreenIndex = ParentActivity.SCREEN_STATE_MENU_MONITORING_OPERATIONHISTORY_TOP;
 		ParentActivity._MenuBaseFragment._MenuInterTitleFragment.SetTitleText(ParentActivity.getResources().getString(R.string.Operation_History));
+		
+		HandleCursurDisplay = new Handler() {
+			@Override
+			public void handleMessage(Message msg) {
+			
+				CursurDisplay(msg.what);
+			}
+		};
 		return mRoot;
 	}
 	
@@ -139,7 +153,8 @@ public class OperationHistoryFragment extends ParentFragment{
 		// TODO Auto-generated method stub
 		super.InitValuables();
 		
-		
+		CursurIndex = 1;
+		CursurDisplay(CursurIndex);
 		
 	}
 	@Override
@@ -150,6 +165,8 @@ public class OperationHistoryFragment extends ParentFragment{
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
+				CursurIndex = 7;
+				HandleCursurDisplay.sendMessage(HandleCursurDisplay.obtainMessage(CursurIndex));
 				ClickOK();
 			}
 		});
@@ -158,10 +175,57 @@ public class OperationHistoryFragment extends ParentFragment{
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
+				CursurIndex = 6;
+				HandleCursurDisplay.sendMessage(HandleCursurDisplay.obtainMessage(CursurIndex));
 				ClickInit();
 			}
 		});
-		
+		checkWorkTotalA.setOnClickListener(new View.OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				CursurIndex = 1;
+				HandleCursurDisplay.sendMessage(HandleCursurDisplay.obtainMessage(CursurIndex));
+			}
+		});
+		checkWorkTotalB.setOnClickListener(new View.OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				CursurIndex = 3;
+				HandleCursurDisplay.sendMessage(HandleCursurDisplay.obtainMessage(CursurIndex));
+			}
+		});
+		checkWorkTotalC.setOnClickListener(new View.OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				CursurIndex = 5;
+				HandleCursurDisplay.sendMessage(HandleCursurDisplay.obtainMessage(CursurIndex));
+			}
+		});
+		checkOdoLatest.setOnClickListener(new View.OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				CursurIndex = 2;
+				HandleCursurDisplay.sendMessage(HandleCursurDisplay.obtainMessage(CursurIndex));
+			}
+		});
+		checkHourLatest.setOnClickListener(new View.OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				CursurIndex = 4;
+				HandleCursurDisplay.sendMessage(HandleCursurDisplay.obtainMessage(CursurIndex));
+			}
+		});
+	
 	}
 
 	@Override
@@ -228,5 +292,131 @@ public class OperationHistoryFragment extends ParentFragment{
 		textViewHourLatestUnit.setText(ParentActivity.getResources().getString(string.Hr));
 	}
 	/////////////////////////////////////////////////////////////////////
+	public void ClickLeft(){
+		switch (CursurIndex) {
+		case 1:
+			CursurIndex = 7;
+			CursurDisplay(CursurIndex);
+			break;
+		case 2:
+		case 3:
+		case 4:
+		case 5:
+		case 6:
+		case 7:
+			CursurIndex--;
+			CursurDisplay(CursurIndex);
+			break;
+		default:
+			break;
+		}
+		
+	}
+	public void ClickRight(){
+		switch (CursurIndex) {
+		case 1:
+		case 2:
+		case 3:	
+		case 4:
+		case 5:
+		case 6:
+			
+			CursurIndex++;
+			CursurDisplay(CursurIndex);
+			break;
+		case 7:
+			CursurIndex = 1;
+			CursurDisplay(CursurIndex);
+			break;
+		default:
+			break;
+		}
+	}
+	public void ClickESC(){
+		ClickOK();
+	}
+	public void ClickEnter(){
+		switch (CursurIndex) {
+		case 1:
+			if(checkWorkTotalA.isChecked() == true){
+				checkWorkTotalA.setChecked(false);
+			}else{
+				checkWorkTotalA.setChecked(true);
+			}
+			break;
+		case 2:
+			if(checkOdoLatest.isChecked() == true){
+				checkOdoLatest.setChecked(false);
+			}else{
+				checkOdoLatest.setChecked(true);
+			}
+			break;
+		case 3:
+			if(checkWorkTotalB.isChecked() == true){
+				checkWorkTotalB.setChecked(false);
+			}else{
+				checkWorkTotalB.setChecked(true);
+			}
+			break;
+		case 4:
+			if(checkHourLatest.isChecked() == true){
+				checkHourLatest.setChecked(false);
+			}else{
+				checkHourLatest.setChecked(true);
+			}
+			break;
+		case 5:
+			if(checkWorkTotalC.isChecked() == true){
+				checkWorkTotalC.setChecked(false);
+			}else{
+				checkWorkTotalC.setChecked(true);
+			}
+			break;
+		case 6:
+			ClickInit();
+			break;
+		case 7:
+			ClickOK();
+			break;
+		default:
+			break;
+		}
+	}
 	
+	public void CursurDisplay(int Index){
+		textViewInit.setPressed(false);
+		imgbtnOK.setPressed(false);
+		checkWorkTotalA.setPressed(false);
+		checkWorkTotalB.setPressed(false);
+		checkWorkTotalC.setPressed(false);
+		checkOdoLatest.setPressed(false);
+		checkHourLatest.setPressed(false);
+		
+		switch (CursurIndex) {
+		case 1:
+			checkWorkTotalA.setPressed(true);
+			break;
+		case 2:
+			checkOdoLatest.setPressed(true);
+			break;
+		case 3:
+			checkWorkTotalB.setPressed(true);
+			break;
+		case 4:
+			checkHourLatest.setPressed(true);
+			break;
+		case 5:
+			checkWorkTotalC.setPressed(true);
+			break;
+		case 6:
+			textViewInit.setPressed(true);
+			break;
+		case 7:
+			imgbtnOK.setPressed(true);
+			break;
+		default:
+			break;
+		}
+	}
+	/////////////////////////////////////////////////////////////////////
 }

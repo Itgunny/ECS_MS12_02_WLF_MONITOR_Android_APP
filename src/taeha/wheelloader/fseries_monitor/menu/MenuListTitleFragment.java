@@ -19,6 +19,7 @@ import android.widget.AbsoluteLayout;
 import android.widget.FrameLayout;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 public class MenuListTitleFragment extends ParentFragment{
@@ -139,9 +140,15 @@ public class MenuListTitleFragment extends ParentFragment{
 		bBackVisibleFlag = flag;
 		if(flag == true){
 			imgbtnBack.setVisibility(View.VISIBLE);
+			RelativeLayout.LayoutParams params = (RelativeLayout.LayoutParams)textViewTitle.getLayoutParams();
+			params.addRule(RelativeLayout.ALIGN_PARENT_LEFT,0);
+			textViewTitle.setLayoutParams(params); //causes layout update
 		}
 		else{
 			imgbtnBack.setVisibility(View.GONE);
+			RelativeLayout.LayoutParams params = (RelativeLayout.LayoutParams)textViewTitle.getLayoutParams();
+			params.addRule(RelativeLayout.ALIGN_PARENT_LEFT,1);
+			textViewTitle.setLayoutParams(params); //causes layout update
 		}
 			
 	}
@@ -173,6 +180,10 @@ public class MenuListTitleFragment extends ParentFragment{
 			case Home.SCREEN_STATE_MENU_MANAGEMENT_MACHINESECURITY_PWCHANGE:
 				ParentActivity._MenuBaseFragment.showBodyMachineSecurityList();
 				setBackButtonEnable(true);
+				break;
+			case Home.SCREEN_STATE_MENU_PREFERENCE_DISPLAYTYPELANG_TOP:
+				ParentActivity._MenuBaseFragment.showBodyPreference();
+				setBackButtonEnable(false);
 				break;
 
 		default:

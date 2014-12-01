@@ -31,6 +31,7 @@
                 android:id="@+id/radioButton_menu_body_monitoring_ehcuioinfo_boomleverfloat_boomlever"
                 android:layout_width="200dp"
                 android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
                 android:button="@drawable/_selector_radio_btn"
                 android:text="@string/Boom_Lever_Floating_Position_Adjust"
                 android:textColor="@drawable/_selector_radio_txt_white_amber"
@@ -40,6 +41,7 @@
                 android:id="@+id/radioButton_menu_body_monitoring_ehcuioinfo_boomleverfloat_boomdown"
                 android:layout_width="200dp"
                 android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
                 android:layout_marginLeft="40dp"
                 android:button="@drawable/_selector_radio_btn"
                 android:text="@string/Boom_Down_Response_Adjust"
@@ -50,11 +52,13 @@
                 android:id="@+id/radioButton_menu_body_monitoring_ehcuioinfo_boomleverfloat_bucketdump"
                 android:layout_width="200dp"
                 android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
                 android:layout_marginLeft="40dp"
                 android:button="@drawable/_selector_radio_btn"
                 android:text="@string/Bucket_Dump_Response_Adjust"
                 android:textColor="@drawable/_selector_radio_txt_white_amber"
                 android:textSize="18sp" />
+
         </RadioGroup>
     </RelativeLayout>
 
@@ -68,7 +72,7 @@
         <TextView
             android:id="@+id/textView_menu_body_monitoring_ehcuioinfo_boomleverfloat_operation_title"
             android:layout_width="350dp"
-            android:layout_height="wrap_content"
+            android:layout_height="50dp"
             android:layout_alignLeft="@+id/RelativeLayout_menu_body_monitoring_ehcuioinfo_boomleverfloat_boomup"
             android:gravity="center"
             android:text="@string/Operation"
@@ -78,7 +82,7 @@
         <TextView
             android:id="@+id/textView_menu_body_monitoring_ehcuioinfo_boomleverfloat_joystickstroke_title"
             android:layout_width="200dp"
-            android:layout_height="wrap_content"
+            android:layout_height="50dp"
             android:layout_toRightOf="@+id/textView_menu_body_monitoring_ehcuioinfo_boomleverfloat_operation_title"
             android:gravity="center"
             android:text="@string/Joystick_Stroke"
@@ -88,7 +92,7 @@
         <TextView
             android:id="@+id/textView_menu_body_monitoring_ehcuioinfo_boomleverfloat_epprcurrent_title"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="50dp"
             android:layout_alignRight="@+id/RelativeLayout_menu_body_monitoring_ehcuioinfo_boomleverfloat_boomup"
             android:layout_toRightOf="@+id/textView_menu_body_monitoring_ehcuioinfo_boomleverfloat_joystickstroke_title"
             android:gravity="center"

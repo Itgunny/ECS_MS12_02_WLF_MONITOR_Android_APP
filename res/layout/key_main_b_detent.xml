@@ -84,7 +84,7 @@
         android:layout_alignLeft="@+id/imageView_key_main_b_detent_line"
         android:layout_alignRight="@+id/imageView_key_main_b_detent_line"
         android:layout_below="@+id/imageView_key_main_b_detent_line"
-        android:layout_marginTop="10dp" >
+        android:layout_marginTop="30dp" >
 
         <ImageView
             android:id="@+id/imageView_key_main_b_detent_bucket_icon"

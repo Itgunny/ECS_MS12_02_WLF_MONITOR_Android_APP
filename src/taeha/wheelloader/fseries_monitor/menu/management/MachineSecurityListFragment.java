@@ -36,7 +36,7 @@ public class MachineSecurityListFragment extends MenuBodyList_ParentFragment{
 	//////////////////////////////////////////////////
 	
 	//Fragment////////////////////////////////////////
-
+	static int CursurIndex = 1;
 	//////////////////////////////////////////////////
 	
 	//ANIMATION///////////////////////////////////////
@@ -60,6 +60,7 @@ public class MachineSecurityListFragment extends MenuBodyList_ParentFragment{
 		ParentActivity._MenuBaseFragment._MenuListTitleFragment.setBackButtonEnable(true);
 		ParentActivity.ScreenIndex = ParentActivity.SCREEN_STATE_MENU_MANAGEMENT_MACHINESECURITY_TOP;
 		ParentActivity._MenuBaseFragment._MenuListTitleFragment.SetTitleText(ParentActivity.getResources().getString(R.string.Machine_Security));
+		CursurDisplay(CursurIndex);
 		return mRoot;
 	}
 	
@@ -104,6 +105,8 @@ public class MachineSecurityListFragment extends MenuBodyList_ParentFragment{
 			ParentActivity.StartAnimationRunningTimer();
 		if(ParentActivity.SmartKeyUse != CAN1CommManager.DATA_STATE_SMARTKEY_USE_ON){
 			ParentActivity._MenuBaseFragment.showBodyESLAnimation();
+			CursurIndex = 1;
+			CursurDisplay(CursurIndex);
 		}
 	
 	}
@@ -116,6 +119,8 @@ public class MachineSecurityListFragment extends MenuBodyList_ParentFragment{
 		else
 			ParentActivity.StartAnimationRunningTimer();
 		ParentActivity._MenuBaseFragment.showBodyMachineSecurityPWChange();
+		CursurIndex = 2;
+		CursurDisplay(CursurIndex);
 	}
 
 	@Override
@@ -126,6 +131,8 @@ public class MachineSecurityListFragment extends MenuBodyList_ParentFragment{
 		else
 			ParentActivity.StartAnimationRunningTimer();
 		ParentActivity._MenuBaseFragment.showBodySmartKeyAnimation();
+		CursurIndex = 3;
+		CursurDisplay(CursurIndex);
 	}
 
 	@Override
@@ -211,5 +218,97 @@ public class MachineSecurityListFragment extends MenuBodyList_ParentFragment{
 		}
 	}
 	/////////////////////////////////////////////////////////////////////
-	
+	/////////////////////////////////////////////////////////////////////
+	public void ClickLeft(){
+		switch (CursurIndex) {
+		case 0:
+			
+			break;
+		case 1:
+			CursurIndex = 3;
+			CursurDisplay(CursurIndex);
+			break;
+		case 2:
+			CursurIndex--;
+			CursurDisplay(CursurIndex);
+			break;
+		case 3:
+			CursurIndex--;
+			CursurDisplay(CursurIndex);
+			break;
+		default:
+			break;
+		}
+	}
+	public void ClickRight(){
+		switch (CursurIndex) {
+		case 0:
+			
+			break;
+		case 1:
+			CursurIndex++;
+			CursurDisplay(CursurIndex);
+			break;
+		case 2:
+			CursurIndex++;
+			CursurDisplay(CursurIndex);
+			break;
+		case 3:
+			CursurIndex = 1;
+			CursurDisplay(CursurIndex);
+			break;
+		default:
+			break;
+		}
+	}
+	public void ClickESC(){
+		ParentActivity._MenuBaseFragment._MenuListTitleFragment.ClickBack();
+	}
+	public void ClickEnter(){
+		switch (CursurIndex) {
+		case 1:
+			imgbtnList[0].callOnClick();
+			break;
+		case 2:
+			imgbtnList[1].callOnClick();
+			break;
+		case 3:
+			imgbtnList[2].callOnClick();
+			break;
+
+		default:
+			break;
+		}
+	}
+	/////////////////////////////////////////////////////////////////////
+	public void CursurDisplay(int Index){
+		try {
+			switch (Index) {
+			case 1:
+				setListFocus(1);
+				break;
+			case 2:
+				setListFocus(2);
+				break;
+			case 3:
+				setListFocus(3);
+				break;
+			case 4:
+				setListFocus(4);
+				break;
+			case 5:
+				setListFocus(5);
+				break;
+			case 6:
+				setListFocus(5);
+				break;
+			default:
+				setListFocus(0);
+				break;
+			}
+		} catch (NullPointerException e) {
+			// TODO: handle exception
+			Log.e(TAG,"NullPointerException CursurDisplay");
+		}
+	}
 }

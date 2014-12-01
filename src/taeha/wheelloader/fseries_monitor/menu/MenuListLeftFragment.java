@@ -8,6 +8,7 @@ import taeha.wheelloader.fseries_monitor.animation.LeftRightShiftAnimation;
 import taeha.wheelloader.fseries_monitor.main.Home;
 import taeha.wheelloader.fseries_monitor.main.ParentFragment;
 import taeha.wheelloader.fseries_monitor.main.R;
+import taeha.wheelloader.fseries_monitor.menu.mode.MenuModeFragment;
 import android.os.Bundle;
 import android.text.Layout;
 import android.util.Log;
@@ -128,6 +129,7 @@ public class MenuListLeftFragment extends ParentFragment{
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
 				ClickMode();	
+				ParentActivity._MenuBaseFragment._MenuModeFragment._MenuModeEngTMFragment.CursurIndex = 1;
 			}
 		});
 		imgbtnMonitoring.setOnClickListener(new View.OnClickListener() {
@@ -136,6 +138,7 @@ public class MenuListLeftFragment extends ParentFragment{
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
 				ClickMonitoring();
+				ParentActivity._MenuBaseFragment._MenuMonitoringFragment.CursurIndex = 1;
 			}
 		});
 		imgbtnManagement.setOnClickListener(new View.OnClickListener() {
@@ -144,6 +147,7 @@ public class MenuListLeftFragment extends ParentFragment{
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
 				ClickManagement();
+				ParentActivity._MenuBaseFragment._MenuManagementFragment.CursurIndex = 1;
 			}
 		});
 		imgbtnPreference.setOnClickListener(new View.OnClickListener() {
@@ -152,6 +156,7 @@ public class MenuListLeftFragment extends ParentFragment{
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
 				ClickPreference();
+				ParentActivity._MenuBaseFragment._MenuPreferenceFragment.CursurIndex = 1;
 			}
 		});
 		imgbtnMultimedia.setOnClickListener(new View.OnClickListener() {
@@ -160,6 +165,7 @@ public class MenuListLeftFragment extends ParentFragment{
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
 				ClickMultimedia();
+				ParentActivity._MenuBaseFragment._MenuMultimediaFragment.CursurIndex = 1;
 			}
 		});
 	}
@@ -318,6 +324,22 @@ public class MenuListLeftFragment extends ParentFragment{
 			break;
 
 		}
+	}
+	/////////////////////////////////////////////////////////////////////
+	public void ClickLeft(){
+		
+		
+	}
+	public void ClickRight(){
+		
+		
+	}
+	public void ClickESC(){
+		
+	}
+	public void ClickEnter(){
+	
+		
 	}
 	/////////////////////////////////////////////////////////////////////
 }

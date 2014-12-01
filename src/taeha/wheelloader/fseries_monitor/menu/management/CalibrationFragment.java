@@ -30,7 +30,7 @@ public class CalibrationFragment extends MenuBodyList_ParentFragment{
 	//////////////////////////////////////////////////
 	
 	//VALUABLE////////////////////////////////////////
-
+	static int CursurIndex = 1;
 	//////////////////////////////////////////////////
 	
 	//Fragment////////////////////////////////////////
@@ -55,6 +55,7 @@ public class CalibrationFragment extends MenuBodyList_ParentFragment{
 		Log.d(TAG, "onCreateView");
 		
 		InitList();
+		CursurDisplay(CursurIndex);
 		ParentActivity._MenuBaseFragment._MenuListTitleFragment.setBackButtonEnable(true);
 		ParentActivity.ScreenIndex = ParentActivity.SCREEN_STATE_MENU_MANAGEMENT_CALIBRATION_TOP;
 		ParentActivity._MenuBaseFragment._MenuListTitleFragment.SetTitleText(ParentActivity.getResources().getString(R.string.Calibration));
@@ -102,7 +103,8 @@ public class CalibrationFragment extends MenuBodyList_ParentFragment{
 		else
 			ParentActivity.StartAnimationRunningTimer();
 		ParentActivity._MenuBaseFragment.showBodyAngleCalibrationAnimation();
-	
+		CursurIndex = 1;
+		CursurDisplay(CursurIndex);
 	}
 
 	@Override
@@ -112,13 +114,17 @@ public class CalibrationFragment extends MenuBodyList_ParentFragment{
 			return;
 		else
 			ParentActivity.StartAnimationRunningTimer();
-		ParentActivity._MenuBaseFragment.showBodyPressureCalibrationAnimation();		
+		ParentActivity._MenuBaseFragment.showBodyPressureCalibrationAnimation();
+		CursurIndex = 2;
+		CursurDisplay(CursurIndex);
 	}
 
 	@Override
 	public void ClickList3() {
 		// TODO Auto-generated method stub
 		ParentActivity.showBrkaePedalCalibration();
+		CursurIndex = 3;
+		CursurDisplay(CursurIndex);
 	}
 
 	@Override
@@ -127,6 +133,8 @@ public class CalibrationFragment extends MenuBodyList_ParentFragment{
 		CAN1Comm.Set_RequestAEB_PGN61184_201(1);
 		CAN1Comm.TxCANToMCU(201);
 		ParentActivity._MainChangeAnimation.StartChangeAnimation(ParentActivity._MainBBaseFragment);
+		CursurIndex = 4;
+		CursurDisplay(CursurIndex);
 	}
 
 	@Override
@@ -142,7 +150,98 @@ public class CalibrationFragment extends MenuBodyList_ParentFragment{
 	}
 	
 	/////////////////////////////////////////////////////////////////////	
-	
+	/////////////////////////////////////////////////////////////////////	
+	public void ClickLeft(){
+		switch (CursurIndex) {
+		case 0:
+			
+			break;
+		case 1:
+			CursurIndex = 2;
+			CursurDisplay(CursurIndex);
+			break;
+		case 2:
+		case 3:
+		case 4:
+			CursurIndex--;
+			CursurDisplay(CursurIndex);
+			break;
+		default:
+			break;
+		}
+	}
+	public void ClickRight(){
+		switch (CursurIndex) {
+		case 0:
+			
+			break;
+		case 1:
+		case 2:
+		case 3:
+			CursurIndex++;
+			CursurDisplay(CursurIndex);
+			break;
+		case 4:
+			CursurIndex = 1;
+			CursurDisplay(CursurIndex);
+			break;
+		default:
+			break;
+		}
+	}
+	public void ClickESC(){
+		ParentActivity._MenuBaseFragment._MenuListTitleFragment.ClickBack();
+	}
+	public void ClickEnter(){
+		switch (CursurIndex) {
+		case 1:
+			imgbtnList[0].callOnClick();
+			break;
+		case 2:
+			imgbtnList[1].callOnClick();
+			break;
+		case 3:
+			imgbtnList[2].callOnClick();
+			break;
+		case 4:
+			imgbtnList[3].callOnClick();
+			break;
+		default:
+			break;
+		}
+	}
+	/////////////////////////////////////////////////////////////////////
+	public void CursurDisplay(int Index){
+		try {
+			switch (Index) {
+			case 1:
+				setListFocus(1);
+				break;
+			case 2:
+				setListFocus(2);
+				break;
+			case 3:
+				setListFocus(3);
+				break;
+			case 4:
+				setListFocus(4);
+				break;
+			case 5:
+				setListFocus(5);
+				break;
+			case 6:
+				setListFocus(5);
+				break;
+			default:
+				setListFocus(0);
+				break;
+			}
+		} catch (NullPointerException e) {
+			// TODO: handle exception
+			Log.e(TAG,"NullPointerException CursurDisplay");
+		}
+	}
+	/////////////////////////////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////////
 	
 	/////////////////////////////////////////////////////////////////////

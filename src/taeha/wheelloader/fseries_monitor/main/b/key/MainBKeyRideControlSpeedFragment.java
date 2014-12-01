@@ -18,11 +18,11 @@ public class MainBKeyRideControlSpeedFragment extends ParentFragment{
 	//CONSTANT////////////////////////////////////////
 
 	
-	private  final int MAX_LEVEL	 	= 20;
-	private  final int MIN_LEVEL 		= 5;
+	private  final int MAX_LEVEL	 	= 15;
+	private  final int MIN_LEVEL 		= 1;
 	
-	private  final int TOTAL_STEP		= 100;
-	private  final int STEP			= 4;
+	private  final int TOTAL_STEP		= 15;
+	private  final int STEP			= 1;
 	//////////////////////////////////////////////////
 	//RESOURCE////////////////////////////////////////
 	TextView textViewForwardData;
@@ -73,8 +73,8 @@ public class MainBKeyRideControlSpeedFragment extends ParentFragment{
 		SpeedDisplay(textViewBackwardMin,MIN_LEVEL,ParentActivity.UnitOdo);
 		SpeedDisplay(textViewForwardData,SpeedForward,ParentActivity.UnitOdo);
 		SpeedDisplay(textViewBackwardData,SpeedBackward,ParentActivity.UnitOdo);
-		SetSeekBarPosition(seekBarForward,SpeedForward);
-		SetSeekBarPosition(seekBarBackward,SpeedBackward);
+		SetSeekBarPosition(seekBarForward,SpeedForward-1);
+		SetSeekBarPosition(seekBarBackward,SpeedBackward-1);
 		return mRoot;
 	}
 	
@@ -98,10 +98,10 @@ public class MainBKeyRideControlSpeedFragment extends ParentFragment{
 		seekBarBackward = (SeekBar)mRoot.findViewById(R.id.seekBar_key_main_b_ridecontrol_speed_backward);
 		
 		
-		seekBarForward.setMax(TOTAL_STEP);
+		seekBarForward.setMax(TOTAL_STEP-1);
 		seekBarForward.incrementProgressBy(1);
 		
-		seekBarBackward.setMax(TOTAL_STEP);
+		seekBarBackward.setMax(TOTAL_STEP-1);
 		seekBarBackward.incrementProgressBy(1);
 	}
 	
@@ -148,17 +148,7 @@ public class MainBKeyRideControlSpeedFragment extends ParentFragment{
 				// TODO Auto-generated method stub
 				int progress = seekBar.getProgress();
 			
-				if(progress < 16){
-					SpeedForward = 5;
-				}else if(progress < 49){
-					SpeedForward = 10;
-				}
-				else if(progress < 82){
-					SpeedForward = 15;
-				}else{
-					SpeedForward = 20;
-				}
-				SetSeekBarPosition(seekBar, SpeedForward);
+				SpeedForward = progress+1;
 				SpeedDisplay(textViewForwardData,SpeedForward,ParentActivity.UnitOdo);
 			}
 			
@@ -172,16 +162,7 @@ public class MainBKeyRideControlSpeedFragment extends ParentFragment{
 					boolean fromUser) {
 				// TODO Auto-generated method stub
 
-				if(progress < 16){
-					SpeedForward = 5;
-				}else if(progress < 49){
-					SpeedForward = 10;
-				}
-				else if(progress < 82){
-					SpeedForward = 15;
-				}else{
-					SpeedForward = 20;
-				}
+				SpeedForward = progress+1;
 				SpeedDisplay(textViewForwardData,SpeedForward,ParentActivity.UnitOdo);
 				
 			}
@@ -193,17 +174,7 @@ public class MainBKeyRideControlSpeedFragment extends ParentFragment{
 				// TODO Auto-generated method stub
 				int progress = seekBar.getProgress();
 
-				if(progress < 16){
-					SpeedBackward = 5;
-				}else if(progress < 49){
-					SpeedBackward = 10;
-				}
-				else if(progress < 82){
-					SpeedBackward = 15;
-				}else{
-					SpeedBackward = 20;
-				}
-				SetSeekBarPosition(seekBar, SpeedBackward);
+				SpeedBackward = progress+1;
 				SpeedDisplay(textViewBackwardData,SpeedBackward,ParentActivity.UnitOdo);
 			}
 			
@@ -218,16 +189,7 @@ public class MainBKeyRideControlSpeedFragment extends ParentFragment{
 					boolean fromUser) {
 				// TODO Auto-generated method stub
 			
-				if(progress < 16){
-					SpeedBackward = 5;
-				}else if(progress < 49){
-					SpeedBackward = 10;
-				}
-				else if(progress < 82){
-					SpeedBackward = 15;
-				}else{
-					SpeedBackward = 20;
-				}
+				SpeedBackward = progress+1;
 				SpeedDisplay(textViewBackwardData,SpeedBackward,ParentActivity.UnitOdo);
 			}
 		});
@@ -255,17 +217,17 @@ public class MainBKeyRideControlSpeedFragment extends ParentFragment{
 		}
 	}
 	public void SetSeekBarPosition(SeekBar _seekbar, int _Speed){
-		int Progress;
+		int Progress = _Speed;
 		
-		if(_Speed < 7){
-			Progress = 0;
-		}else if(_Speed < 12){
-			Progress = 33;
-		}else if(_Speed < 17){
-			Progress = 66;
-		}else{
-			Progress = 100;
-		}
+//		if(_Speed < 7){
+//			Progress = 0;
+//		}else if(_Speed < 12){
+//			Progress = 33;
+//		}else if(_Speed < 17){
+//			Progress = 66;
+//		}else{
+//			Progress = 100;
+//		}
 		
 		_seekbar.setProgress(Progress);
 	}

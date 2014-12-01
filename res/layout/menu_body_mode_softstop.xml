@@ -68,7 +68,8 @@
 		    android:button="@drawable/_selector_radio_btn"
 		    android:gravity="left|center_vertical"
 		    android:text="@string/On"
-		    android:textSize="22sp" />
+		    android:textSize="22sp"
+		    android:textColor="@drawable/_selector_radio_txt_white_amber" />
 
 		<RadioButton
 		    android:id="@+id/radioButton_menu_body_mode_softstop_boomup_off"
@@ -78,7 +79,8 @@
 		    android:layout_marginLeft="503dp"
 		    android:button="@drawable/_selector_radio_btn"
 		    android:text="@string/Off"
-		    android:textSize="22sp" />
+		    android:textSize="22sp"
+		    android:textColor="@drawable/_selector_radio_txt_white_amber" />
 
 	</RelativeLayout>
 	
@@ -110,7 +112,8 @@
 		    android:button="@drawable/_selector_radio_btn"
 		    android:gravity="left|center_vertical"
 		    android:text="@string/On"
-		    android:textSize="22sp" />
+		    android:textSize="22sp"
+		    android:textColor="@drawable/_selector_radio_txt_white_amber" />
 
 		<RadioButton
 		    android:id="@+id/radioButton_menu_body_mode_softstop_boomdown_off"
@@ -120,7 +123,8 @@
 		    android:layout_marginLeft="503dp"
 		    android:button="@drawable/_selector_radio_btn"
 		    android:text="@string/Off"
-		    android:textSize="22sp" />
+		    android:textSize="22sp"
+		    android:textColor="@drawable/_selector_radio_txt_white_amber" />
 
 	</RelativeLayout>
 	
@@ -152,7 +156,8 @@
 		    android:button="@drawable/_selector_radio_btn"
 		    android:gravity="left|center_vertical"
 		    android:text="@string/On"
-		    android:textSize="22sp" />
+		    android:textSize="22sp"
+		    android:textColor="@drawable/_selector_radio_txt_white_amber" />
 
 		<RadioButton
 		    android:id="@+id/radioButton_menu_body_mode_softstop_bucketin_off"
@@ -162,7 +167,8 @@
 		    android:layout_marginLeft="503dp"
 		    android:button="@drawable/_selector_radio_btn"
 		    android:text="@string/Off"
-		    android:textSize="22sp" />
+		    android:textSize="22sp"
+		    android:textColor="@drawable/_selector_radio_txt_white_amber" />
 
 	</RelativeLayout>
 	
@@ -194,7 +200,8 @@
 		    android:button="@drawable/_selector_radio_btn"
 		    android:gravity="left|center_vertical"
 		    android:text="@string/On"
-		    android:textSize="22sp" />
+		    android:textSize="22sp"
+		    android:textColor="@drawable/_selector_radio_txt_white_amber" />
 
 		<RadioButton
 		    android:id="@+id/radioButton_menu_body_mode_softstop_bucketout_off"
@@ -204,7 +211,8 @@
 		    android:layout_marginLeft="503dp"
 		    android:button="@drawable/_selector_radio_btn"
 		    android:text="@string/Off"
-		    android:textSize="22sp" />
+		    android:textSize="22sp"
+		    android:textColor="@drawable/_selector_radio_txt_white_amber" />
 
 	</RelativeLayout>
 

@@ -13,22 +13,23 @@
         android:layout_marginRight="10dp"
         android:layout_marginTop="10dp" >
 
-        <ImageView
-            android:id="@+id/imageView_menu_body_management_maint_detail_title_left"
-            android:layout_width="wrap_content"
+        
+        <ImageButton
+		    android:id="@+id/imageButton_menu_body_management_maint_detail_title_left"
+		    android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
             android:layout_marginLeft="30dp"
-            android:src="@drawable/menu_management_maintenance_left_arrow" />
-
-		<ImageView
-		    android:id="@+id/imageView_menu_body_management_maint_detail_title_right"
+		    android:background="@drawable/_selector_menu_body_management_maint_left_btn1" />
+        <ImageButton
+		    android:id="@+id/imageButton_menu_body_management_maint_detail_title_right"
 		    android:layout_width="wrap_content"
 		    android:layout_height="wrap_content"
 		    android:layout_alignParentRight="true"
 		    android:layout_centerVertical="true"
 		    android:layout_marginRight="30dp"
-		    android:src="@drawable/menu_management_maintenance_right_arrow" />
+		    android:background="@drawable/_selector_menu_body_management_maint_right_btn1" />
+
 
 		<LinearLayout
 		    android:layout_width="wrap_content"

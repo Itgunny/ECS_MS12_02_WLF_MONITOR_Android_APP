@@ -42,7 +42,7 @@
             android:id="@+id/textView_menu_body_mode_camerasetting_cameranumber_data"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="478dp"
+            android:layout_marginLeft="428dp"
             android:layout_marginTop="10dp"
             android:background="@drawable/menu_mode_camera_camera_number_bg"
             android:gravity="center"
@@ -53,7 +53,7 @@
             android:id="@+id/imageButton_menu_body_mode_camerasetting_cameranumber_plus"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="647dp"
+            android:layout_marginLeft="597dp"
             android:layout_marginTop="10dp"
             android:background="@drawable/_selector_menu_mode_camerasetting_plus_btn1" />
 
@@ -61,7 +61,7 @@
             android:id="@+id/imageButton_menu_body_mode_camerasetting_cameranumber_minus"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="366dp"
+            android:layout_marginLeft="316dp"
             android:layout_marginTop="10dp"
             android:background="@drawable/_selector_menu_mode_camerasetting_minus_btn1" />
       
@@ -209,7 +209,7 @@
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
             android:paddingLeft="50dp"
-            android:text="@string/Reverse_Mode"
+            android:text="@string/Gear_Linkage_Mode"
             android:textColor="@drawable/_selector_radio_txt_white_amber"
             android:textSize="25sp" />
 

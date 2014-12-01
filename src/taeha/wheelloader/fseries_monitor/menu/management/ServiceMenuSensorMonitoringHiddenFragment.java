@@ -12,6 +12,8 @@ import taeha.wheelloader.fseries_monitor.main.ParentFragment;
 import taeha.wheelloader.fseries_monitor.main.R;
 import taeha.wheelloader.fseries_monitor.main.R.string;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.text.Layout;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -48,6 +50,9 @@ public class ServiceMenuSensorMonitoringHiddenFragment extends ParentFragment{
 	int nFanRpm;
 	int nEpprCurrent;
 	boolean EpprActive = false;
+	
+	int CursurIndex;
+	Handler HandleCursurDisplay;
 	//////////////////////////////////////////////////
 	
 	//Fragment////////////////////////////////////////
@@ -76,9 +81,16 @@ public class ServiceMenuSensorMonitoringHiddenFragment extends ParentFragment{
 		
 		CAN1Comm.Set_TestMode_PGN61184_61(0);
 		CAN1Comm.TxCANToMCU(61);
-		
+		CursurDisplay(CursurIndex);
 		ParentActivity.ScreenIndex = ParentActivity.SCREEN_STATE_MENU_MANAGEMENT_SERVICE_SENSORMONITORING_HIDDEN;
 		ParentActivity._MenuBaseFragment._MenuInterTitleFragment.SetTitleText(ParentActivity.getResources().getString(R.string.Fan_EPPR_Current_Adjust));
+		HandleCursurDisplay = new Handler() {
+			@Override
+			public void handleMessage(Message msg) {
+			
+				CursurDisplay(msg.what);
+			}
+		};
 		return mRoot;
 	}
 	@Override
@@ -117,7 +129,7 @@ public class ServiceMenuSensorMonitoringHiddenFragment extends ParentFragment{
 		listView.setAdapter(adapter);
 		
 		
-	
+		CursurIndex = 1;
 		
 	}
 	@Override
@@ -223,5 +235,75 @@ public class ServiceMenuSensorMonitoringHiddenFragment extends ParentFragment{
 						
 	}
 	/////////////////////////////////////////////////////////////////////
+	public void ClickLeft(){
+		switch (CursurIndex) {
+		case 1:
+			CursurIndex = 3;
+			CursurDisplay(CursurIndex);
+			break;
+		case 2:
+		case 3:
+			CursurIndex--;
+			CursurDisplay(CursurIndex);
+			break;
+		default:
+			break;
+		}
+		
+	}
+	public void ClickRight(){
+		switch (CursurIndex) {
+		case 1:
+		case 2:
+			CursurIndex++;
+			CursurDisplay(CursurIndex);
+			break;
+		case 3:
+			CursurIndex = 1;
+			CursurDisplay(CursurIndex);
+			break;
+		default:
+			break;
+		}
+	}
+	public void ClickESC(){
+		ClickOK();
+	}
+	public void ClickEnter(){
+		switch (CursurIndex) {
+		case 1:
+			ClickMinus();
+			break;
+		case 2:
+			ClickPlus();
+			break;
+		case 3:
+			ClickOK();
+			break;
+		default:
+			break;
+		}
+	}
+	public void CursurDisplay(int Index){
+		switch (Index) {
+		case 1:
+			imgbtnDown.setPressed(true);
+			imgbtnUp.setPressed(false);
+			imgbtnOK.setPressed(false);
+			break;
+		case 2:
+			imgbtnDown.setPressed(false);
+			imgbtnUp.setPressed(true);
+			imgbtnOK.setPressed(false);
+			break;
+		case 3:
+			imgbtnDown.setPressed(false);
+			imgbtnUp.setPressed(false);
+			imgbtnOK.setPressed(true);
+			break;
+		default:
+			break;
+		}
+	}
 	
 }

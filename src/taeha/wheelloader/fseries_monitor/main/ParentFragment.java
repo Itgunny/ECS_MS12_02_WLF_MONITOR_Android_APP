@@ -35,7 +35,7 @@ public abstract class ParentFragment extends Fragment{
 	// Thread Sleep Time
 	private  int ThreadSleepTime;
 
-	static protected int CursurIndex;
+	static public int CursurIndex = 1;
 	/////////////////////////////////////////////////////////////////////	
 	
 	///////////////////ANIMATION/////////////////////////////////////////

@@ -11,6 +11,8 @@ import taeha.wheelloader.fseries_monitor.main.ParentFragment;
 import taeha.wheelloader.fseries_monitor.main.R;
 import taeha.wheelloader.fseries_monitor.main.R.string;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.text.Layout;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -52,6 +54,10 @@ public class ServiceMenuSpeedLimitFragment extends ParentFragment{
 	//VALUABLE////////////////////////////////////////
 	int nSpeedLimit;
 	int SpeedLimitStatus;
+	
+	int CursurIndex;
+	
+	Handler HandleCursurDisplay;
 	//////////////////////////////////////////////////
 	
 	//Fragment////////////////////////////////////////
@@ -80,11 +86,24 @@ public class ServiceMenuSpeedLimitFragment extends ParentFragment{
 		
 		ParentActivity.ScreenIndex = ParentActivity.SCREEN_STATE_MENU_MANAGEMENT_SERVICE_SPEEDLIMIT_TOP;
 		ParentActivity._MenuBaseFragment._MenuInterTitleFragment.SetTitleText(ParentActivity.getResources().getString(R.string.Speed_Limit_Setting));
+		HandleCursurDisplay = new Handler() {
+			@Override
+			public void handleMessage(Message msg) {
+				CursurDisplay(msg.what);
+			}
+		};
 		return mRoot;
 	}
-	
+	@Override
+	public void onResume() {
+		// TODO Auto-generated method stub
+		super.onResume();
+		SpeedLimitStatusDisplay(SpeedLimitStatus);
+	}
 	////////////////////////////////////////////////
 	
+	
+
 	
 
 	//Common Function//////////////////////////////
@@ -129,9 +148,10 @@ public class ServiceMenuSpeedLimitFragment extends ParentFragment{
 			textViewSpeedMin.setText(ParentActivity.GetRideControlSpeed(20,ParentActivity.UnitOdo) + ParentActivity.getResources().getString(string.km_h));
 		}
 		
-		SpeedLimitStatusDisplay(SpeedLimitStatus);
+		
 		SpeedDisplay(nSpeedLimit,ParentActivity.UnitOdo);
 		SetSeekBarPosition(seekbarSpeed,nSpeedLimit);
+		CursurFirstDisplay(SpeedLimitStatus);
 		
 	}
 	@Override
@@ -142,6 +162,8 @@ public class ServiceMenuSpeedLimitFragment extends ParentFragment{
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
+				CursurIndex = 5;
+				HandleCursurDisplay.sendMessage(HandleCursurDisplay.obtainMessage(CursurIndex));
 				ClickOK();
 			}
 		});
@@ -150,6 +172,8 @@ public class ServiceMenuSpeedLimitFragment extends ParentFragment{
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
+				CursurIndex = 4;
+				HandleCursurDisplay.sendMessage(HandleCursurDisplay.obtainMessage(CursurIndex));
 				ClickCancel();
 			}
 		});
@@ -158,6 +182,8 @@ public class ServiceMenuSpeedLimitFragment extends ParentFragment{
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
+				CursurIndex = 1;
+				HandleCursurDisplay.sendMessage(HandleCursurDisplay.obtainMessage(CursurIndex));
 				ClickSetting();
 			}
 		});
@@ -166,6 +192,8 @@ public class ServiceMenuSpeedLimitFragment extends ParentFragment{
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
+				CursurIndex = 2;
+				HandleCursurDisplay.sendMessage(HandleCursurDisplay.obtainMessage(CursurIndex));
 				ClickClear();
 			}
 		});
@@ -174,6 +202,8 @@ public class ServiceMenuSpeedLimitFragment extends ParentFragment{
 			@Override
 			public void onStopTrackingTouch(SeekBar seekBar) {
 				// TODO Auto-generated method stub
+				CursurIndex = 3;
+				HandleCursurDisplay.sendMessage(HandleCursurDisplay.obtainMessage(CursurIndex));
 				int progress = seekBar.getProgress();
 
 				if(progress < 12){
@@ -279,12 +309,16 @@ public class ServiceMenuSpeedLimitFragment extends ParentFragment{
 		case CAN1CommManager.DATA_STATE_LAMP_OFF:
 			radioClear.setChecked(true);
 			radioSetting.setChecked(false);
-			layoutSpeed.setVisibility(View.INVISIBLE);
+		//	layoutSpeed.setVisibility(View.INVISIBLE);
+			layoutSpeed.setAlpha((float)0.2);
+			seekbarSpeed.setEnabled(false);
 			break;
 		case CAN1CommManager.DATA_STATE_LAMP_ON:
 			radioClear.setChecked(false);
 			radioSetting.setChecked(true);
-			layoutSpeed.setVisibility(View.VISIBLE);
+		//	layoutSpeed.setVisibility(View.VISIBLE);
+			layoutSpeed.setAlpha((float)1);
+			seekbarSpeed.setEnabled(true);
 			break;
 		default:
 			break;
@@ -317,6 +351,163 @@ public class ServiceMenuSpeedLimitFragment extends ParentFragment{
 		}
 		
 		_seekbar.setProgress(Progress);
+	}
+	/////////////////////////////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////////
+	public void ClickLeft(){
+		switch (CursurIndex) {
+		case 1:
+			CursurIndex = 2;
+			CursurDisplay(CursurIndex);
+			break;
+		case 2:
+			CursurIndex--;
+			CursurDisplay(CursurIndex);
+			break;
+		case 3:
+			nSpeedLimit -= 5;
+			if(nSpeedLimit < MIN_LEVEL){
+				nSpeedLimit = MIN_LEVEL;
+			}
+			SetSeekBarPosition(seekbarSpeed,nSpeedLimit);
+			SpeedDisplay(nSpeedLimit,ParentActivity.UnitOdo);
+			break;
+		case 4:
+			if(SpeedLimitStatus == CAN1CommManager.DATA_STATE_LAMP_ON){
+				CursurIndex--;
+				CursurDisplay(CursurIndex);
+			}else if(SpeedLimitStatus == CAN1CommManager.DATA_STATE_LAMP_OFF){
+				CursurIndex = 5;
+				CursurDisplay(CursurIndex);
+			}
+			break;
+		case 5:
+			CursurIndex--;
+			CursurDisplay(CursurIndex);
+			break;
+		default:
+			CursurIndex = 1;
+			CursurDisplay(CursurIndex);
+			break;
+		}
+		
+	}
+	public void ClickRight(){
+		switch (CursurIndex) {
+		case 1:
+			CursurIndex++;
+			CursurDisplay(CursurIndex);
+			break;
+		case 2:
+			CursurIndex = 1;
+			CursurDisplay(CursurIndex);
+			break;
+		case 3:
+			nSpeedLimit += 5;
+			if(nSpeedLimit > MAX_LEVEL){
+				nSpeedLimit = MAX_LEVEL;
+			}
+			SetSeekBarPosition(seekbarSpeed,nSpeedLimit);
+			SpeedDisplay(nSpeedLimit,ParentActivity.UnitOdo);
+			break;
+		case 4:
+			CursurIndex++;
+			CursurDisplay(CursurIndex);
+			
+			break;
+		case 5:
+			if(SpeedLimitStatus == CAN1CommManager.DATA_STATE_LAMP_ON){
+				CursurIndex = 3;
+				CursurDisplay(CursurIndex);
+			}else if(SpeedLimitStatus == CAN1CommManager.DATA_STATE_LAMP_OFF){
+				CursurIndex = 4;
+				CursurDisplay(CursurIndex);
+			}
+			break;
+		default:
+			CursurIndex = 1;
+			CursurDisplay(CursurIndex);
+			break;
+		}
+	}
+	public void ClickESC(){
+		switch (CursurIndex) {
+		case 1:
+		case 2:		
+			ClickCancel();
+			break;
+			
+		case 3:
+		case 4:
+		case 5:
+			CursurFirstDisplay(SpeedLimitStatus);
+			break;
+		default:
+			break;
+		}
+	}
+	public void ClickEnter(){
+		switch (CursurIndex) {
+		case 1:
+			ClickSetting();
+			CursurIndex = 3;
+			CursurDisplay(CursurIndex);
+			break;
+		case 2:
+			ClickClear();
+			CursurIndex = 4;
+			CursurDisplay(CursurIndex);
+			break;
+		case 3:
+			CursurIndex = 4;
+			CursurDisplay(CursurIndex);
+			break;
+		case 4:
+			ClickCancel();
+			break;
+		case 5:
+			ClickOK();
+			break;
+		default:
+			break;
+		}
+	}
+	public void CursurFirstDisplay(int data){
+		if(data == CAN1CommManager.DATA_STATE_LAMP_ON){
+			CursurIndex = 1;
+			CursurDisplay(CursurIndex);
+		}else if(data == CAN1CommManager.DATA_STATE_LAMP_OFF){
+			CursurIndex = 2;
+			CursurDisplay(CursurIndex);
+		}
+	}
+	public void CursurDisplay(int Index){
+		imgbtnOK.setPressed(false);
+		imgbtnCancel.setPressed(false);
+		seekbarSpeed.setPressed(false);
+		radioSetting.setPressed(false);
+		radioClear.setPressed(false);
+
+
+		switch (CursurIndex) {
+			case 1:
+				radioSetting.setPressed(true);
+				break;
+			case 2:
+				radioClear.setPressed(true);
+				break;
+			case 3:
+				seekbarSpeed.setPressed(true);
+				break;
+			case 4:
+				imgbtnCancel.setPressed(true);
+				break;
+			case 5:
+				imgbtnOK.setPressed(true);
+				break;
+			default:
+				break;
+		}
 	}
 	/////////////////////////////////////////////////////////////////////
 }

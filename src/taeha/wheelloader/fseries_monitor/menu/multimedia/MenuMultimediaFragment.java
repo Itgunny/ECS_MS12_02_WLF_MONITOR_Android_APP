@@ -5,6 +5,7 @@ import taeha.wheelloader.fseries_monitor.animation.ChangeFragmentAnimation;
 import taeha.wheelloader.fseries_monitor.animation.DisappearAnimation;
 import taeha.wheelloader.fseries_monitor.animation.MainBodyShiftAnimation;
 import taeha.wheelloader.fseries_monitor.animation.LeftRightShiftAnimation;
+import taeha.wheelloader.fseries_monitor.main.Home;
 import taeha.wheelloader.fseries_monitor.main.ParentFragment;
 import taeha.wheelloader.fseries_monitor.main.R;
 import android.content.Intent;
@@ -60,6 +61,7 @@ public class MenuMultimediaFragment extends ParentFragment{
 		ParentActivity._MenuBaseFragment._MenuListTitleFragment.setBackButtonEnable(false);
 		ParentActivity.ScreenIndex = ParentActivity.SCREEN_STATE_MENU_MULTIMEDIA_TOP;
 		ParentActivity._MenuBaseFragment._MenuListTitleFragment.SetTitleText(ParentActivity.getResources().getString(R.string.Multimedia));
+		CursurDisplay(CursurIndex);
 		return mRoot;
 	}
 	
@@ -108,6 +110,69 @@ public class MenuMultimediaFragment extends ParentFragment{
 	}
 	
 	/////////////////////////////////////////////////////////////////////
+	public void ClickLeft(){
+		switch (CursurIndex) {
+		case 0:
+			ParentActivity._MenuBaseFragment._MenuListLeftFragment.ClickPreference();
+			break;
+		case 1:
+
+			break;
+		default:
+			break;
+		}
+	}
+	public void ClickRight(){
+		switch (CursurIndex) {
+		case 0:
+			ParentActivity._MenuBaseFragment._MenuModeFragment.setFirstScreen(Home.SCREEN_STATE_MENU_MODE_TOP);
+			ParentActivity._MenuBaseFragment._MenuListLeftFragment.ClickMode();
+			break;
+		case 1:
+
+			break;
+		default:
+			break;
+		}
+	}
+	public void ClickESC(){
+		switch (CursurIndex) {
+		case 0:
+			ParentActivity._MenuBaseFragment._MenuListTitleFragment.ClickHome();
+			break;
+		case 1:
+			CursurIndex = 0;
+			CursurDisplay(CursurIndex);
+			break;
+		default:
+			break;
+		}
+	}
+	public void ClickEnter(){
+		switch (CursurIndex) {
+		case 0:
+			CursurIndex = 1;
+			CursurDisplay(CursurIndex);
+			break;
+		case 1:
+			ClickMediaPlayer();
+			break;
+		default:
+			break;
+		}
+	}
+	public void CursurDisplay(int Index){
+		switch (Index) {
+		case 0:
+			textViewMediaPlayer.setPressed(false);
+			break;
+		case 1:
+			textViewMediaPlayer.setPressed(true);
+			break;
+		default:
+			break;
+		}
+	}
 	/////////////////////////////////////////////////////////////////////	
 	public void ClickMediaPlayer(){
 		Intent intent;
@@ -115,6 +180,8 @@ public class MenuMultimediaFragment extends ParentFragment{
 		if(intent != null){
 			ParentActivity.startActivity(intent);
 		}
+		CursurIndex = 1;
+		CursurDisplay(CursurIndex);
 	}
 	public void ExcuteFileManaget(){
 		Intent intent;

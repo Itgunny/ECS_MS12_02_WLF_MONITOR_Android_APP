@@ -6,6 +6,8 @@ import java.util.TimerTask;
 import android.content.Context;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
+import android.os.Handler;
+import android.os.Message;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
@@ -40,6 +42,8 @@ public class OperationHistoryInitPopup extends ParentPopup{
 	private Timer mPopupOffTimer = null;
 	boolean bClickOKFlag;
 	int TimerIndex;
+	
+	Handler HandleCancel;
 	//////////////////////////////////////////////////
 	
 	//ANIMATION///////////////////////////////////////
@@ -71,6 +75,13 @@ public class OperationHistoryInitPopup extends ParentPopup{
 		InitValuable();
 		
 		ParentActivity.ScreenIndex = ParentActivity.SCREEN_STATE_MENU_MONITORING_OPERATIONHISTORY_INIT;
+		HandleCancel = new Handler() {
+			@Override
+			public void handleMessage(Message msg) {
+
+				ClickCancel();
+			}
+		};
 	}
 	@Override
 	public boolean onTouchEvent(MotionEvent event) {
@@ -85,12 +96,25 @@ public class OperationHistoryInitPopup extends ParentPopup{
 		super.InitValuable();
 		bClickOKFlag = false;
 		TimerIndex = 0;
+		CursurIndex = 1;
+		CursurDisplay(CursurIndex);
+		imgbtnOK.setVisibility(View.VISIBLE);
+		imgbtnCancel.setVisibility(View.VISIBLE);
+		textViewOK.setVisibility(View.VISIBLE);
+		textViewCancel.setVisibility(View.VISIBLE);
+		textViewTitle.setText(ParentActivity.getResources().getString(string.Initialize_));
 	}
 	@Override
 	public void dismiss() {
 		// TODO Auto-generated method stub
 		super.dismiss();
 		ParentActivity.ScreenIndex = ParentActivity.SCREEN_STATE_MENU_MONITORING_OPERATIONHISTORY_TOP;
+		try {
+			ParentActivity._MenuBaseFragment._OperationHistoryFragment.CursurDisplay(6);
+		} catch (NullPointerException e) {
+			// TODO: handle exception
+			Log.e(TAG,"NullPointerException dismiss");
+		}
 	}
 
 	@Override
@@ -147,7 +171,7 @@ public class OperationHistoryInitPopup extends ParentPopup{
 		textViewCancel.setVisibility(View.INVISIBLE);
 		textViewTitle.setText(ParentActivity.getResources().getString(string.Waiting_for_initialization));
 		bClickOKFlag = true;
-		this.dismiss();
+		//this.dismiss();
 	}	
 	public void ClickCancel(){
 		this.dismiss();
@@ -206,7 +230,8 @@ public class OperationHistoryInitPopup extends ParentPopup{
 				TimerIndex++;
 			}else{
 				CancelPopupOffTimer();
-				ClickCancel();
+			//	ClickCancel();
+				HandleCancel.sendMessage(HandleCancel.obtainMessage(CursurIndex));
 			}
 			
 		}
@@ -226,6 +251,70 @@ public class OperationHistoryInitPopup extends ParentPopup{
 			mPopupOffTimer = null;
 		}
 		
+	}
+	//////////////////////////////////////////////////////////////////////
+	public void ClickLeft(){
+		switch (CursurIndex) {
+		case 1:
+			CursurIndex = 2;
+			CursurDisplay(CursurIndex);
+			break;
+		case 2:
+			CursurIndex--;
+			CursurDisplay(CursurIndex);
+			break;
+		default:
+			CursurIndex = 1;
+			CursurDisplay(CursurIndex);
+			break;
+		}
+	}
+	public void ClickRight(){
+		switch (CursurIndex) {
+		case 1:
+			CursurIndex++;
+			CursurDisplay(CursurIndex);
+			break;
+		case 2:
+			CursurIndex = 1;
+			CursurDisplay(CursurIndex);
+			break;
+		default:
+			CursurIndex = 1;
+			CursurDisplay(CursurIndex);
+			break;
+		}
+	}
+	public void ClickESC(){
+		ClickCancel();
+	}
+	public void ClickEnter(){
+		switch (CursurIndex) {
+		case 1:
+			ClickOK();
+			break;
+		case 2:
+			ClickCancel();
+			break;
+		default:
+			
+			break;
+		}
+	}
+	////////////////////////////////////////////////////////////////////////////////
+	public void CursurDisplay(int Index){
+		switch (Index) {
+		case 1:
+			imgbtnOK.setPressed(true);
+			imgbtnCancel.setPressed(false);
+			break;
+		case 2:
+			imgbtnOK.setPressed(false);
+			imgbtnCancel.setPressed(true);
+			break;
+		default:
+			break;
+		}
 	}
 	////////////////////////////////////////////////////////////////////////////////
 }

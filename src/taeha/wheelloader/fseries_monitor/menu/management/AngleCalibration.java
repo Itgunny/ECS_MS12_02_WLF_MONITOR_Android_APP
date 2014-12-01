@@ -10,6 +10,8 @@ import taeha.wheelloader.fseries_monitor.main.ParentFragment;
 import taeha.wheelloader.fseries_monitor.main.R;
 import taeha.wheelloader.fseries_monitor.main.R.string;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.text.Layout;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -49,6 +51,9 @@ public class AngleCalibration extends ParentFragment{
 	int m_BoomAngleCaliStep;
 	int BoomPos_volt;
 	boolean PopupFlag;
+	
+	int CursurIndex;
+	Handler HandleCursurDisplay;
 	//////////////////////////////////////////////////
 	
 	//Fragment////////////////////////////////////////
@@ -74,9 +79,16 @@ public class AngleCalibration extends ParentFragment{
 		InitResource();
 		InitValuables();
 		InitButtonListener();
-		
+		CursurDisplay(CursurIndex);
 		ParentActivity.ScreenIndex = ParentActivity.SCREEN_STATE_MENU_MANAGEMENT_CALIBRATION_ANGLE_TOP;
 		ParentActivity._MenuBaseFragment._MenuInterTitleFragment.SetTitleText(ParentActivity.getResources().getString(R.string.Boom_Bucket_Angle_Calibration));
+		HandleCursurDisplay = new Handler() {
+			@Override
+			public void handleMessage(Message msg) {
+			
+				CursurDisplay(msg.what);
+			}
+		};
 		return mRoot;
 	}
 	@Override
@@ -123,6 +135,7 @@ public class AngleCalibration extends ParentFragment{
 		m_BoomAngleCaliStep = 1;
 		BoomPos_volt = 0;
 		PopupFlag = false;
+		CursurIndex = 1;
 	}
 	@Override
 	protected void InitButtonListener() {
@@ -423,5 +436,63 @@ public class AngleCalibration extends ParentFragment{
 		
 	}
 	/////////////////////////////////////////////////////////////////////
-	
+	public void ClickLeft(){
+		switch (CursurIndex) {
+		case 1:
+			CursurIndex = 2;
+			CursurDisplay(CursurIndex);
+			break;
+		case 2:
+			CursurIndex--;
+			CursurDisplay(CursurIndex);
+			break;
+		default:
+			break;
+		}
+		
+	}
+	public void ClickRight(){
+		switch (CursurIndex) {
+		case 1:
+			CursurIndex++;
+			CursurDisplay(CursurIndex);
+			break;
+		case 2:
+			CursurIndex = 1;
+			CursurDisplay(CursurIndex);
+			break;
+		default:
+			break;
+		}
+	}
+	public void ClickESC(){
+		ClickCancel();
+	}
+	public void ClickEnter(){
+		switch (CursurIndex) {
+		case 1:
+			ClickNext();
+			break;
+		case 2:
+			ClickCancel();
+			break;
+		default:
+			break;
+		}
+	}
+	public void CursurDisplay(int Index){
+		switch (Index) {
+		case 1:
+			textViewNext.setPressed(true);
+			imgbtnCancel.setPressed(false);
+			break;
+		case 2:
+			textViewNext.setPressed(false);
+			imgbtnCancel.setPressed(true);
+			break;
+		default:
+			break;
+		}
+	}
+	/////////////////////////////////////////////////////////////////////
 }

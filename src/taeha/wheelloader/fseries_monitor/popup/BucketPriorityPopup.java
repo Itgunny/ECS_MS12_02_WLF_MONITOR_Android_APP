@@ -14,6 +14,7 @@ import taeha.wheelloader.fseries_monitor.main.CAN1CommManager;
 import taeha.wheelloader.fseries_monitor.main.Home;
 import taeha.wheelloader.fseries_monitor.main.ParentPopup;
 import taeha.wheelloader.fseries_monitor.main.R;
+import taeha.wheelloader.fseries_monitor.main.R.string;
 
 public class BucketPriorityPopup extends ParentPopup{
 	//CONSTANT////////////////////////////////////////
@@ -25,7 +26,7 @@ public class BucketPriorityPopup extends ParentPopup{
 	//////////////////////////////////////////////////
 	
 	//VALUABLE////////////////////////////////////////
-
+	int BucketPriority;
 	//////////////////////////////////////////////////
 	
 	//ANIMATION///////////////////////////////////////
@@ -63,7 +64,12 @@ public class BucketPriorityPopup extends ParentPopup{
 		super.dismiss();
 		ParentActivity.ScreenIndex = ParentActivity.SCREEN_STATE_MENU_MODE_HYD_TOP;
 	}
-
+	@Override
+	public void InitValuable(){
+		super.InitValuable();
+		BucketPriority = CAN1Comm.Get_BucketPriorityOperation_2301_PGN65517();
+		BucketPriorityDisplay(BucketPriority);
+	}
 	@Override
 	protected void InitResource() {
 		// TODO Auto-generated method stub
@@ -116,4 +122,82 @@ public class BucketPriorityPopup extends ParentPopup{
 		CAN1Comm.Set_BucketPriorityOperation_2301_PGN61184_203(3);
 		this.dismiss();
 	}	
+	public void ClickLeft(){
+		switch (CursurIndex) {
+		case 1:
+			CursurIndex = 2;
+			CursurDisplay(CursurIndex);
+			break;
+		case 2:
+			CursurIndex--;
+			CursurDisplay(CursurIndex);
+			break;
+		default:
+			CursurIndex = 1;
+			CursurDisplay(CursurIndex);
+			break;
+		}
+	}
+	public void ClickRight(){
+		switch (CursurIndex) {
+		case 1:
+			CursurIndex++;
+			CursurDisplay(CursurIndex);
+			break;
+		case 2:
+			CursurIndex = 1;
+			CursurDisplay(CursurIndex);
+			break;
+		default:
+			CursurIndex = 1;
+			CursurDisplay(CursurIndex);
+			break;
+		}
+	}
+	public void ClickESC(){
+		
+	}
+	public void ClickEnter(){
+		switch (CursurIndex) {
+		case 1:
+			ClickOff();
+			break;
+		case 2:
+			ClickOn();
+			break;
+		default:
+			
+			break;
+		}
+	}
+	////////////////////////////////////////////////////////////////////////////////
+	public void CursurDisplay(int Index){
+		switch (Index) {
+		case 1:
+			textViewOn.setPressed(false);
+			textViewOff.setPressed(true);
+			break;
+		case 2:
+			textViewOn.setPressed(true);
+			textViewOff.setPressed(false);
+			break;
+		default:
+			break;
+		}
+	}
+	
+	public void BucketPriorityDisplay(int data){
+		switch (data) {
+		case CAN1CommManager.DATA_STATE_BUCKETPRIORITY_OFF:
+			CursurIndex = 1;
+			CursurDisplay(CursurIndex);
+			break;
+		case CAN1CommManager.DATA_STATE_BUCKETPRIORITY_ON:
+			CursurIndex = 2;
+			CursurDisplay(CursurIndex);
+			break;
+		default:
+			break;
+		}
+	}
 }

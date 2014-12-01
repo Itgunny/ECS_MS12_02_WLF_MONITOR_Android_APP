@@ -63,6 +63,7 @@ public class MenuModeEngTMFragment extends MenuBodyList_ParentFragment{
 		InitList();
 		ParentActivity.ScreenIndex = Home.SCREEN_STATE_MENU_MODE_ENGINETM_TOP;
 		ParentActivity._MenuBaseFragment._MenuModeFragment.setFirstScreen(Home.SCREEN_STATE_MENU_MODE_ENGINETM_TOP);
+		CursurDisplay(CursurIndex);
 		return mRoot;
 	}
 	
@@ -117,30 +118,50 @@ public class MenuModeEngTMFragment extends MenuBodyList_ParentFragment{
 		ParentActivity._MenuBaseFragment._MenuModeFragment.HideTab();
 		ParentActivity._MenuBaseFragment._MenuModeFragment.HideEngTM();
 		ParentActivity._MenuBaseFragment._MenuModeFragment.showEngineSetting();
+		CursurIndex = 1;
+		CursurDisplay(CursurIndex);
+		ParentActivity._MenuBaseFragment._MenuModeFragment.SetModeFocusIndex(MenuModeFragment.STATE_CURSUR_LIST);
+		ParentActivity._MenuBaseFragment._MenuModeFragment._MenuModeTabFragment.setClickImageEngineTM();
 	}
 
 	@Override
 	public void ClickList2() {
 		// TODO Auto-generated method stub
 		ParentActivity.showKickDown();
+		CursurIndex = 2;
+		CursurDisplay(CursurIndex);
+		ParentActivity._MenuBaseFragment._MenuModeFragment.SetModeFocusIndex(MenuModeFragment.STATE_CURSUR_LIST);
+		ParentActivity._MenuBaseFragment._MenuModeFragment._MenuModeTabFragment.setClickImageEngineTM();
 	}
 
 	@Override
 	public void ClickList3() {
 		// TODO Auto-generated method stub
 		ParentActivity.showCCoMode();	
+		CursurIndex = 3;
+		CursurDisplay(CursurIndex);
+		ParentActivity._MenuBaseFragment._MenuModeFragment.SetModeFocusIndex(MenuModeFragment.STATE_CURSUR_LIST);
+		ParentActivity._MenuBaseFragment._MenuModeFragment._MenuModeTabFragment.setClickImageEngineTM();
 	}
 
 	@Override
 	public void ClickList4() {
 		// TODO Auto-generated method stub
 		ParentActivity.showShiftMode();
+		CursurIndex = 4;
+		CursurDisplay(CursurIndex);
+		ParentActivity._MenuBaseFragment._MenuModeFragment.SetModeFocusIndex(MenuModeFragment.STATE_CURSUR_LIST);
+		ParentActivity._MenuBaseFragment._MenuModeFragment._MenuModeTabFragment.setClickImageEngineTM();
 	}
 
 	@Override
 	public void ClickList5() {
 		// TODO Auto-generated method stub
 		ParentActivity.showTCLockUp();
+		CursurIndex = 5;
+		CursurDisplay(CursurIndex);
+		ParentActivity._MenuBaseFragment._MenuModeFragment.SetModeFocusIndex(MenuModeFragment.STATE_CURSUR_LIST);
+		ParentActivity._MenuBaseFragment._MenuModeFragment._MenuModeTabFragment.setClickImageEngineTM();
 	}
 
 	@Override
@@ -150,52 +171,182 @@ public class MenuModeEngTMFragment extends MenuBodyList_ParentFragment{
 	}
 
 	public void ClickLeft(){
-		
-		
+		Log.d(TAG,"ClickLeft");
+		switch (ParentActivity._MenuBaseFragment._MenuModeFragment.GetModeFocusIndex()) {
+		case MenuModeFragment.STATE_CURSUR_LIST:
+			switch (CursurIndex) {
+			case 1:
+				CursurIndex = 5;
+				CursurDisplay(CursurIndex);
+				break;
+			case 2:
+				CursurIndex--;
+				CursurDisplay(CursurIndex);
+				break;
+			case 3:
+				CursurIndex--;
+				CursurDisplay(CursurIndex);
+				break;
+			case 4:
+				CursurIndex--;
+				CursurDisplay(CursurIndex);
+				break;
+			case 5:
+				CursurIndex--;
+				CursurDisplay(CursurIndex);
+				break;
+			default:
+				break;
+			}
+			break;
+		case MenuModeFragment.STATE_CURSUR_TAB:
+			ParentActivity._MenuBaseFragment._MenuModeFragment._MenuModeHYDFragment.CursurIndex = 0;
+			ParentActivity._MenuBaseFragment._MenuModeFragment.showETC();
+			ParentActivity._MenuBaseFragment._MenuModeFragment._MenuModeTabFragment.setClickImageETC();
+			break;
+		case MenuModeFragment.STATE_CURSUR_LEFT:
+			ParentActivity._MenuBaseFragment._MenuListLeftFragment.ClickMultimedia();
+			break;
+		default:
+			break;
+		}
 	}
 	public void ClickRight(){
-		
-		
+		Log.d(TAG,"ClickRight");
+		switch (ParentActivity._MenuBaseFragment._MenuModeFragment.GetModeFocusIndex()) {
+		case MenuModeFragment.STATE_CURSUR_LIST:
+			switch (CursurIndex) {
+			case 1:
+				CursurIndex++;
+				CursurDisplay(CursurIndex);
+				break;
+			case 2:
+				CursurIndex++;
+				CursurDisplay(CursurIndex);
+				break;
+			case 3:
+				CursurIndex++;
+				CursurDisplay(CursurIndex);
+				break;
+			case 4:
+				CursurIndex++;
+				CursurDisplay(CursurIndex);
+				break;
+			case 5:
+				CursurIndex = 1;
+				CursurDisplay(CursurIndex);
+				break;
+			default:
+				break;
+			}
+			break;
+		case MenuModeFragment.STATE_CURSUR_TAB:
+			ParentActivity._MenuBaseFragment._MenuModeFragment._MenuModeHYDFragment.CursurIndex = 0;
+			ParentActivity._MenuBaseFragment._MenuModeFragment.showHYD();
+			ParentActivity._MenuBaseFragment._MenuModeFragment._MenuModeTabFragment.setClickImageHYD();
+			break;
+		case MenuModeFragment.STATE_CURSUR_LEFT:
+			
+			ParentActivity._MenuBaseFragment._MenuListLeftFragment.ClickMonitoring();
+			break;
+		default:
+			break;
+		}
 	}
 	public void ClickESC(){
-		
+		switch (ParentActivity._MenuBaseFragment._MenuModeFragment.GetModeFocusIndex()) {
+		case MenuModeFragment.STATE_CURSUR_LIST:
+			CursurIndex = 0;
+			CursurDisplay(CursurIndex);
+			ParentActivity._MenuBaseFragment._MenuModeFragment.SetModeFocusIndex(MenuModeFragment.STATE_CURSUR_TAB);
+			break;
+		case MenuModeFragment.STATE_CURSUR_TAB:
+			CursurIndex = 0;
+			CursurDisplay(CursurIndex);
+			ParentActivity._MenuBaseFragment._MenuModeFragment.SetModeFocusIndex(MenuModeFragment.STATE_CURSUR_LEFT);
+			ParentActivity._MenuBaseFragment._MenuModeFragment._MenuModeTabFragment.setClickNull();
+			break;
+		case MenuModeFragment.STATE_CURSUR_LEFT:
+			ParentActivity._MenuBaseFragment._MenuListTitleFragment.ClickHome();
+			break;
+		default:
+			break;
+		}
 	}
 	public void ClickEnter(){
-	
-		
+		switch (ParentActivity._MenuBaseFragment._MenuModeFragment.GetModeFocusIndex()) {
+		case MenuModeFragment.STATE_CURSUR_LIST:
+			switch (CursurIndex) {
+			case 1:
+				imgbtnList[0].callOnClick();
+				break;
+			case 2:
+				imgbtnList[1].callOnClick();
+				break;
+			case 3:
+				imgbtnList[2].callOnClick();
+				break;
+			case 4:
+				imgbtnList[3].callOnClick();
+				break;
+			case 5:
+				imgbtnList[4].callOnClick();
+				break;
+			default:
+				break;
+			}
+			break;
+		case MenuModeFragment.STATE_CURSUR_TAB:
+			CursurIndex = 1;
+			CursurDisplay(CursurIndex);
+			ParentActivity._MenuBaseFragment._MenuModeFragment.SetModeFocusIndex(MenuModeFragment.STATE_CURSUR_LIST);
+			break;
+		case MenuModeFragment.STATE_CURSUR_LEFT:
+			ParentActivity._MenuBaseFragment._MenuModeFragment.SetModeFocusIndex(MenuModeFragment.STATE_CURSUR_TAB);
+			ParentActivity._MenuBaseFragment._MenuModeFragment._MenuModeTabFragment.setClickImageEngineTM();
+			break;
+		default:
+			break;
+		}
 	}
 	
 	/////////////////////////////////////////////////////////////////////
 	public void CursurDisplay(int Index){
-		switch (Index) {
-		case Home.SCREEN_STATE_MENU_MODE_ENGINETM_ENGINESETTING_TOP:
-			setListFocus(1);
-			break;
-		case Home.SCREEN_STATE_MENU_MODE_ENGINETM_KICKDOWN:
-			setListFocus(2);
-			break;
-		case Home.SCREEN_STATE_MENU_MODE_ENGINETM_CCOMODE:
-			setListFocus(3);
-			break;
-		case Home.SCREEN_STATE_MENU_MODE_ENGINETM_SHIFTMODE:
-			setListFocus(4);
-			break;
-		case Home.SCREEN_STATE_MENU_MODE_ENGINETM_TCLOCKUP:
-			setListFocus(5);
-			break;
-		default:
-			setListFocus(0);
-			break;
+		try {
+			switch (Index) {
+			case 1:
+				setListFocus(1);
+				break;
+			case 2:
+				setListFocus(2);
+				break;
+			case 3:
+				setListFocus(3);
+				break;
+			case 4:
+				setListFocus(4);
+				break;
+			case 5:
+				setListFocus(5);
+				break;
+			default:
+				setListFocus(0);
+				break;
+			}
+		} catch (NullPointerException e) {
+			// TODO: handle exception
+			Log.e(TAG,"NullPointerException CursurDisplay");
 		}
+		
 	}
 	/////////////////////////////////////////////////////////////////////	
 	public void TCLockUpDisplay(int data){
 		switch (data) {
 		case CAN1CommManager.DATA_STATE_TM_LOCKUPCLUTCH_OFF:
-			setListData2(ParentActivity.getResources().getString(string.Off));
+			setListData5(ParentActivity.getResources().getString(string.Off));
 			break;
 		case CAN1CommManager.DATA_STATE_TM_LOCKUPCLUTCH_ON:
-			setListData2(ParentActivity.getResources().getString(string.On));
+			setListData5(ParentActivity.getResources().getString(string.On));
 			break;
 		default:
 			break;
@@ -241,10 +392,10 @@ public class MenuModeEngTMFragment extends MenuBodyList_ParentFragment{
 	public void KickDownDisplay(int data){
 		switch (data) {
 		case CAN1CommManager.DATA_STATE_KICKDOWN_UPDOWN:
-			setListData5(ParentActivity.getResources().getString(string.MODE1));
+			setListData2(ParentActivity.getResources().getString(string.MODE1));
 			break;
 		case CAN1CommManager.DATA_STATE_KICKDOWN_DOWNONLY:
-			setListData5(ParentActivity.getResources().getString(string.MODE2));
+			setListData2(ParentActivity.getResources().getString(string.MODE2));
 			break;
 
 		default:

@@ -61,6 +61,7 @@ import taeha.wheelloader.fseries_monitor.menu.monitoring.VersionInfoTCUFragment;
 import taeha.wheelloader.fseries_monitor.menu.multimedia.MenuMultimediaFragment;
 import taeha.wheelloader.fseries_monitor.menu.preference.BrightnessFragment;
 import taeha.wheelloader.fseries_monitor.menu.preference.ClockFragment;
+import taeha.wheelloader.fseries_monitor.menu.preference.DisplayTypeListFragment;
 import taeha.wheelloader.fseries_monitor.menu.preference.MenuPreferenceFragment;
 import taeha.wheelloader.fseries_monitor.menu.preference.UnitFragment;
 import android.R.integer;
@@ -162,6 +163,7 @@ public class MenuBaseFragment extends ParentFragment{
 	public BrightnessFragment						_BrightnessFragment;
 	public ClockFragment							_ClockFragment;
 	public UnitFragment								_UnitFragment;
+	public DisplayTypeListFragment					_DisplayTypeListFragment;
 	//////////////////////////////////////////////////
 	
 	//ANIMATION///////////////////////////////////////
@@ -189,6 +191,7 @@ public class MenuBaseFragment extends ParentFragment{
 		InitValuables();
 		InitButtonListener();
 
+		ClearCursurIndex();
 		ParentActivity.ScreenIndex = ParentActivity.SCREEN_STATE_MENU_TOP;
 		
 		CheckFirstScreen(FirstScreenIndex);
@@ -279,6 +282,7 @@ public class MenuBaseFragment extends ParentFragment{
 		_BrightnessFragment = new BrightnessFragment();
 		_ClockFragment = new ClockFragment();
 		_UnitFragment = new UnitFragment();
+		_DisplayTypeListFragment = new DisplayTypeListFragment();
 	}
 	
 	protected void InitValuables() {
@@ -356,7 +360,7 @@ public class MenuBaseFragment extends ParentFragment{
 		transaction.detach(_BrightnessFragment);
 		transaction.detach(_ClockFragment);
 		transaction.detach(_UnitFragment);
-		
+		transaction.detach(_DisplayTypeListFragment);
 		
 		transaction.commit();	
 		
@@ -512,7 +516,12 @@ public class MenuBaseFragment extends ParentFragment{
 		transaction.replace(R.id.FrameLayout_menu_list_body, _ServiceMenuListFragment);
 		transaction.commit();
 	}
-
+	public void showBodyDisplayTypeLangList(){
+		android.app.FragmentTransaction transaction = getFragmentManager().beginTransaction();
+		transaction.remove(_DisplayTypeListFragment);
+		transaction.replace(R.id.FrameLayout_menu_list_body, _DisplayTypeListFragment);
+		transaction.commit();
+	}
 	
 	// Inter
 	public void showBodyEngineSpeed(){
@@ -887,7 +896,14 @@ public class MenuBaseFragment extends ParentFragment{
 		ListBodyAnimation.StartChangeAnimation(_ServiceMenuListFragment);
 		_MenuListLeftFragment.setFirstScreen(Home.SCREEN_STATE_MENU_MANAGEMENT_TOP);
 	}
-
+	public void showDisplayTypeLangAnimation(){
+		DestroyFragment();
+		InitFragment();
+		showListAnimation();
+		ListBodyAnimation.StartChangeAnimation(_DisplayTypeListFragment);
+		_MenuListLeftFragment.setFirstScreen(Home.SCREEN_STATE_MENU_PREFERENCE_TOP);
+	}
+	
 	
 	// Inter
 	public void showBodyEngineSpeedAnimation(){
@@ -1063,7 +1079,13 @@ public class MenuBaseFragment extends ParentFragment{
 	/////////////////////////////////////////////////////////////////////
 	
 	/////////////////////////////////////////////////////////////////////
-	
+	public void ClearCursurIndex(){
+		_MenuModeFragment.CursurIndex = 1;
+		_MenuModeFragment._MenuModeTabFragment.CursurIndex = 1;
+		_MenuModeFragment._MenuModeEngTMFragment.CursurIndex = 1;
+		_MenuModeFragment._MenuModeHYDFragment.CursurIndex = 1;
+		_MenuModeFragment._MenuModeETCFragment.CursurIndex = 1;
+	}
 	/////////////////////////////////////////////////////////////////////
 	public void KeyButtonClick(final int key){
 		Log.d(TAG,"KeyButtonClick : 0x" + Integer.toHexString(key));
@@ -1118,69 +1140,901 @@ public class MenuBaseFragment extends ParentFragment{
 		case CAN1CommManager.LONG_LEFT_RIGHT:
 			ClickKeyButtonLongLeftRight();
 			break;
+		case CAN1CommManager.MENU:
+			_MenuListTitleFragment.ClickHome();
+			break;
 		default:
 			break;
 		}
 	}
 	public void ClickKeyButtonLeft(){
-		if((ParentActivity.ScreenIndex >= Home.SCREEN_STATE_MENU_MODE_TOP) && (ParentActivity.ScreenIndex <= Home.SCREEN_STATE_MENU_MODE_END)){
-			_MenuModeFragment.ClickLeft();
-		}else if((ParentActivity.ScreenIndex >= Home.SCREEN_STATE_MENU_MONITORING_TOP) && (ParentActivity.ScreenIndex <= Home.SCREEN_STATE_MENU_MONITORING_END)){
-			
-		}else if((ParentActivity.ScreenIndex >= Home.SCREEN_STATE_MENU_MANAGEMENT_TOP) && (ParentActivity.ScreenIndex <= Home.SCREEN_STATE_MENU_MANAGEMENT_END)){
-			
-		}else if((ParentActivity.ScreenIndex >= Home.SCREEN_STATE_MENU_PREFERENCE_TOP) && (ParentActivity.ScreenIndex <= Home.SCREEN_STATE_MENU_PREFERENCE_END)){
-			
-		}else if((ParentActivity.ScreenIndex >= Home.SCREEN_STATE_MENU_MULTIMEDIA_TOP) && (ParentActivity.ScreenIndex <= Home.SCREEN_STATE_MENU_MULTIMEDIA_END)){
-			
-		}else{
-			
+		Log.d(TAG,"Click Left");
+		switch (ParentActivity.ScreenIndex) {
+		case Home.SCREEN_STATE_MENU_MODE_ENGINETM_TOP:
+			_MenuModeFragment._MenuModeEngTMFragment.ClickLeft();
+			break;
+		case Home.SCREEN_STATE_MENU_MODE_ENGINETM_ENGINESETTING_TOP:
+			_MenuModeFragment._EngineSettingFragment.ClickLeft();
+			break;
+		case Home.SCREEN_STATE_MENU_MODE_ENGINETM_ENGINESETTING_MODE:
+			ParentActivity._EngineModePopup.ClickLeft();
+			break;
+		case Home.SCREEN_STATE_MENU_MODE_ENGINETM_ENGINESETTING_WARMINGUP:
+			ParentActivity._EngineWarmingUpPopup.ClickLeft();
+			break;
+		case Home.SCREEN_STATE_MENU_MODE_ENGINETM_ENGINESETTING_SPEED:
+			_EngineSpeedFragment.ClickLeft();
+			break;
+		case Home.SCREEN_STATE_MENU_MODE_ENGINETM_KICKDOWN:
+			ParentActivity._KickDownPopup.ClickLeft();
+			break;
+		case Home.SCREEN_STATE_MENU_MODE_ENGINETM_CCOMODE:
+			ParentActivity._CCoModePopup.ClickLeft();
+			break;
+		case Home.SCREEN_STATE_MENU_MODE_ENGINETM_SHIFTMODE:
+			ParentActivity._ShiftModePopup.ClickLeft();
+			break;
+		case Home.SCREEN_STATE_MENU_MODE_ENGINETM_TCLOCKUP:
+			ParentActivity._TCLockUpPopup.ClickLeft();
+			break;
+		case Home.SCREEN_STATE_MENU_MODE_HYD_TOP:
+			_MenuModeFragment._MenuModeHYDFragment.ClickLeft();
+			break;
+		case Home.SCREEN_STATE_MENU_MODE_HYD_WORKLOAD_TOP:
+			_WorkLoadFragment.ClickLeft();
+			break;
+		case Home.SCREEN_STATE_MENU_MODE_HYD_WORKLOAD_INIT:
+			ParentActivity._WorkLoadInitPopup.ClickLeft();
+			break;
+		case Home.SCREEN_STATE_MENU_MODE_HYD_DETENT:
+			_DetentFragment.ClickLeft();
+			break;
+		case Home.SCREEN_STATE_MENU_MODE_HYD_BUCKETPRIORITY:
+			ParentActivity._BucketPriorityPopup.ClickLeft();
+			break;
+		case Home.SCREEN_STATE_MENU_MODE_HYD_MAXFLOW:
+			_MaxFlowFragment.ClickLeft();
+			break;
+		case Home.SCREEN_STATE_MENU_MODE_HYD_SOFTSTOP:
+			_SoftStopFragment.ClickLeft();
+			break;
+		case Home.SCREEN_STATE_MENU_MODE_ETC_TOP:
+			_MenuModeFragment._MenuModeETCFragment.ClickLeft();
+			break;
+		case Home.SCREEN_STATE_MENU_MODE_ETC_FREQ_TOP:
+			_SpeedometerFreqFragment.ClickLeft();
+			break;
+		case Home.SCREEN_STATE_MENU_MODE_ETC_FREQ_INIT:
+			ParentActivity._SpeedometerInitPopup.ClickLeft();
+			break;
+		case Home.SCREEN_STATE_MENU_MODE_ETC_COOLINGFAN_OFF:
+			_CoolingFanFragment._CoolingFanOffFragment.ClickLeft();
+			break;
+		case Home.SCREEN_STATE_MENU_MODE_ETC_COOLINGFAN_AUTO:
+			_CoolingFanFragment._CoolingFanAutoFragment.ClickLeft();
+			break;
+		case Home.SCREEN_STATE_MENU_MODE_ETC_COOLINGFAN_MANUAL:
+			_CoolingFanFragment._CoolingFanManualFragment.ClickLeft();
+			break;
+		case Home.SCREEN_STATE_MENU_MODE_ETC_WIPER_TOP:
+			_WiperFragment.ClickLeft();
+			break;
+		case Home.SCREEN_STATE_MENU_MODE_ETC_AUTOSHUTDOWN_TOP:
+			_EngineAutoShutdownFragment.ClickLeft();
+			break;
+		case Home.SCREEN_STATE_MENU_MODE_ETC_AUTOSHUTDOWN_PW:
+			_EngineAutoShutdownPWFragment.ClickLeft();
+			break;
+		case Home.SCREEN_STATE_MENU_MODE_ETC_CAMERASETTING_TOP:
+			_CameraSettingFragment.ClickLeft();
+			break;
+		case Home.SCREEN_STATE_MENU_MONITORING_TOP:
+			_MenuMonitoringFragment.ClickLeft();
+			break;
+		case Home.SCREEN_STATE_MENU_MONITORING_MACHINEMONITORING:
+			_MachineMonitoringFragment.ClickLeft();
+			break;
+		case Home.SCREEN_STATE_MENU_MONITORING_OPERATIONHISTORY_TOP:
+			_OperationHistoryFragment.ClickLeft();
+			break;
+		case Home.SCREEN_STATE_MENU_MONITORING_OPERATIONHISTORY_INIT:
+			ParentActivity._OperationHistoryInitPopup.ClickLeft();
+			break;
+		case Home.SCREEN_STATE_MENU_MONITORING_FAULTHISTORY_TOP:
+			_FaultHistoryFragment.ClickLeft();
+			break;
+		case Home.SCREEN_STATE_MENU_MONITORING_VERSIONINFO_TOP:
+			_VersionInfoFragment.ClickLeft();
+			break;
+		case Home.SCREEN_STATE_MENU_MONITORING_VERSIONINFO_TCU:
+			_VersionInfoTCUFragment.ClickLeft();
+			break;
+		case Home.SCREEN_STATE_MENU_MONITORING_VERSIONINFO_ECM:
+			_VersionInfoECMFragment.ClickLeft();
+			break;
+		case Home.SCREEN_STATE_MENU_MONITORING_VERSIONINFO_MONITOR:
+			_VersionInfoMonitorFragment.ClickLeft();
+			break;
+		case Home.SCREEN_STATE_MENU_MONITORING_VERSIONINFO_MCU:
+			_VersionInfoMCUFragment.ClickLeft();
+			break;
+		case Home.SCREEN_STATE_MENU_MONITORING_VERSIONINFO_CLUSTER:
+			_VersionInfoClusterFragment.ClickLeft();
+			break;
+		case Home.SCREEN_STATE_MENU_MONITORING_VERSIONINFO_RMCU:
+			_VersionInfoRMCUFragment.ClickLeft();
+			break;
+		case Home.SCREEN_STATE_MENU_MONITORING_VERSIONINFO_EHCU:
+			_VersionInfoEHCUFragment.ClickLeft();
+			break;
+		case Home.SCREEN_STATE_MENU_MONITORING_EHCUINFO_TOP:
+			_EHCUIOInfoFragment.ClickLeft();
+			break;
+		case Home.SCREEN_STATE_MENU_MONITORING_EHCUINFO_BOOMLEVERFLOAT:
+			_EHCUIOInfoBoomLeverFloatFragment.ClickLeft();
+			break;
+		case Home.SCREEN_STATE_MENU_MANAGEMENT_TOP:
+			_MenuManagementFragment.ClickLeft();
+			break;
+		case Home.SCREEN_STATE_MENU_MANAGEMENT_MACHINESECURITY_TOP:
+			_MachineSecurityListFragment.ClickLeft();
+			break;
+		case Home.SCREEN_STATE_MENU_MANAGEMENT_MACHINESECURITY_PW:
+			_MachineSecurityPasswordFragment.ClickLeft();
+			break;
+		case Home.SCREEN_STATE_MENU_MANAGEMENT_MACHINESECURITY_ESL:
+			_MachineSecurityESLFragment.ClickLeft();
+			break;
+		case Home.SCREEN_STATE_MENU_MANAGEMENT_MACHINESECURITY_PWCHANGE:
+			_MachineSecurityPasswordChangeFragment.ClickLeft();
+			break;
+		case Home.SCREEN_STATE_MENU_MANAGEMENT_MACHINESECURITY_SMARTKEY:
+			_MachineSecuritySmartKeyFragment.ClickLeft();
+			break;
+		case Home.SCREEN_STATE_MENU_MANAGEMENT_MAINTENANCE_TOP:
+			_MaintenanceFragment.ClickLeft();
+			break;
+		case Home.SCREEN_STATE_MENU_MANAGEMENT_MAINTENANCE_DETAIL_TOP:
+			_MaintenanceDetailFragment.ClickLeft();
+			break;
+		case Home.SCREEN_STATE_MENU_MANAGEMENT_MAINTENANCE_DETAIL_REPLACE:
+			ParentActivity._MaintReplacePopup.ClickLeft();
+			break;
+		case Home.SCREEN_STATE_MENU_MANAGEMENT_MAINTENANCE_DETAIL_CHANGECYCLE:
+			_MaintenanceChangeCycleFragment.ClickLeft();
+			break;
+		case Home.SCREEN_STATE_MENU_MANAGEMENT_CALIBRATION_TOP:
+			_CalibrationFragment.ClickLeft();
+			break;
+		case Home.SCREEN_STATE_MENU_MANAGEMENT_CALIBRATION_ANGLE_TOP:
+			_AngleCalibration.ClickLeft();
+			break;
+		case Home.SCREEN_STATE_MENU_MANAGEMENT_CALIBRATION_ANGLE_RESULT:
+			ParentActivity._AngleCalibrationResultPopup.ClickLeft();
+			break;
+		case Home.SCREEN_STATE_MENU_MANAGEMENT_CALIBRATION_PRESSURE_TOP:
+			_PressureCalibration.ClickLeft();
+			break;
+		case Home.SCREEN_STATE_MENU_MANAGEMENT_CALIBRATION_PRESSURE_RESULT:
+			ParentActivity._PressureCalibrationResultPopup.ClickLeft();
+			break;
+		case Home.SCREEN_STATE_MENU_MANAGEMENT_CALIBRATION_BRAKEPEDAL_TOP:
+			ParentActivity._BrakePedalCalibrationPopup.ClickLeft();
+			break;
+		case Home.SCREEN_STATE_MENU_MANAGEMENT_SERVICE_TOP:
+			_ServiceMenuListFragment.ClickLeft();
+			break;
+		case Home.SCREEN_STATE_MENU_MANAGEMENT_SERVICE_PW:
+			_ServiceMenuPasswordFragment.ClickLeft();
+			break;
+		case Home.SCREEN_STATE_MENU_MANAGEMENT_SERVICE_SENSORMONITORING_TOP:
+			_ServiceMenuSensorMonitoringFragment.ClickLeft();
+			break;
+		case Home.SCREEN_STATE_MENU_MANAGEMENT_SERVICE_SENSORMONITORING_HIDDEN:
+			_ServiceMenuSensorMonitoringHiddenFragment.ClickLeft();
+			break;
+		case Home.SCREEN_STATE_MENU_MANAGEMENT_SERVICE_SPEEDLIMIT_TOP:
+			_ServiceMenuSpeedLimitFragment.ClickLeft();
+			break;
+		case Home.SCREEN_STATE_MENU_MANAGEMENT_SERVICE_WEIGHINGCOMPENSATION_TOP:
+			_ServiceMenuWeighingCompensationFragment.ClickLeft();
+			break;
+		case Home.SCREEN_STATE_MENU_MANAGEMENT_ASPHONE_TOP:
+			_ChangeASPhoneNumberFragment.ClickLeft();
+			break;
+		case Home.SCREEN_STATE_MENU_PREFERENCE_TOP:
+			_MenuPreferenceFragment.ClickLeft();
+			break;
+		case Home.SCREEN_STATE_MENU_PREFERENCE_BRIGHTNESS_MANUAL_TOP:
+			_BrightnessFragment._BrightnessManualFragment.ClickLeft();
+			break;
+		case Home.SCREEN_STATE_MENU_PREFERENCE_BRIGHTNESS_AUTO_TOP:
+			_BrightnessFragment._BrightnessAutoFragment.ClickLeft();
+			break;
+		case Home.SCREEN_STATE_MENU_PREFERENCE_CLOCK_TOP:
+			_ClockFragment.ClickLeft();
+			break;
+		case Home.SCREEN_STATE_MENU_PREFERENCE_UNIT_TOP:
+			_UnitFragment.ClickLeft();
+			break;
+		case Home.SCREEN_STATE_MENU_PREFERENCE_DISPLAYTYPELANG_TOP:
+			_DisplayTypeListFragment.ClickLeft();
+			break;
+		case Home.SCREEN_STATE_MENU_PREFERENCE_SOUNDOUTPUT_TOP:
+			ParentActivity._SoundOutputPopup.ClickLeft();
+			break;
+		case Home.SCREEN_STATE_MENU_MULTIMEDIA_TOP:
+			_MenuMultimediaFragment.ClickLeft();
+			break;
+		default:
+			break;
 		}
 	}
 	public void ClickKeyButtonRight(){
-		if((ParentActivity.ScreenIndex >= Home.SCREEN_STATE_MENU_MODE_TOP) && (ParentActivity.ScreenIndex <= Home.SCREEN_STATE_MENU_MODE_END)){
-			_MenuModeFragment.ClickRight();
-		}else if((ParentActivity.ScreenIndex >= Home.SCREEN_STATE_MENU_MONITORING_TOP) && (ParentActivity.ScreenIndex <= Home.SCREEN_STATE_MENU_MONITORING_END)){
-			
-		}else if((ParentActivity.ScreenIndex >= Home.SCREEN_STATE_MENU_MANAGEMENT_TOP) && (ParentActivity.ScreenIndex <= Home.SCREEN_STATE_MENU_MANAGEMENT_END)){
-			
-		}else if((ParentActivity.ScreenIndex >= Home.SCREEN_STATE_MENU_PREFERENCE_TOP) && (ParentActivity.ScreenIndex <= Home.SCREEN_STATE_MENU_PREFERENCE_END)){
-			
-		}else if((ParentActivity.ScreenIndex >= Home.SCREEN_STATE_MENU_MULTIMEDIA_TOP) && (ParentActivity.ScreenIndex <= Home.SCREEN_STATE_MENU_MULTIMEDIA_END)){
-			
-		}else{
-		
+		Log.d(TAG,"Click Right");
+		switch (ParentActivity.ScreenIndex) {
+		case Home.SCREEN_STATE_MENU_MODE_ENGINETM_TOP:
+			_MenuModeFragment._MenuModeEngTMFragment.ClickRight();
+			break;
+		case Home.SCREEN_STATE_MENU_MODE_ENGINETM_ENGINESETTING_TOP:
+			_MenuModeFragment._EngineSettingFragment.ClickRight();
+			break;
+		case Home.SCREEN_STATE_MENU_MODE_ENGINETM_ENGINESETTING_MODE:
+			ParentActivity._EngineModePopup.ClickRight();
+			break;
+		case Home.SCREEN_STATE_MENU_MODE_ENGINETM_ENGINESETTING_WARMINGUP:
+			ParentActivity._EngineWarmingUpPopup.ClickRight();
+			break;
+		case Home.SCREEN_STATE_MENU_MODE_ENGINETM_ENGINESETTING_SPEED:
+			_EngineSpeedFragment.ClickRight();
+			break;
+		case Home.SCREEN_STATE_MENU_MODE_ENGINETM_KICKDOWN:
+			ParentActivity._KickDownPopup.ClickRight();
+			break;
+		case Home.SCREEN_STATE_MENU_MODE_ENGINETM_CCOMODE:
+			ParentActivity._CCoModePopup.ClickRight();
+			break;
+		case Home.SCREEN_STATE_MENU_MODE_ENGINETM_SHIFTMODE:
+			ParentActivity._ShiftModePopup.ClickRight();
+			break;
+		case Home.SCREEN_STATE_MENU_MODE_ENGINETM_TCLOCKUP:
+			ParentActivity._TCLockUpPopup.ClickRight();
+			break;
+		case Home.SCREEN_STATE_MENU_MODE_HYD_TOP:
+			_MenuModeFragment._MenuModeHYDFragment.ClickRight();
+			break;
+		case Home.SCREEN_STATE_MENU_MODE_HYD_WORKLOAD_TOP:
+			_WorkLoadFragment.ClickRight();
+			break;
+		case Home.SCREEN_STATE_MENU_MODE_HYD_WORKLOAD_INIT:
+			ParentActivity._WorkLoadInitPopup.ClickRight();
+			break;
+		case Home.SCREEN_STATE_MENU_MODE_HYD_DETENT:
+			_DetentFragment.ClickRight();
+			break;
+		case Home.SCREEN_STATE_MENU_MODE_HYD_BUCKETPRIORITY:
+			ParentActivity._BucketPriorityPopup.ClickRight();
+			break;
+		case Home.SCREEN_STATE_MENU_MODE_HYD_MAXFLOW:
+			_MaxFlowFragment.ClickRight();
+			break;
+		case Home.SCREEN_STATE_MENU_MODE_HYD_SOFTSTOP:
+			_SoftStopFragment.ClickRight();
+			break;
+		case Home.SCREEN_STATE_MENU_MODE_ETC_TOP:
+			_MenuModeFragment._MenuModeETCFragment.ClickRight();
+			break;
+		case Home.SCREEN_STATE_MENU_MODE_ETC_FREQ_TOP:
+			_SpeedometerFreqFragment.ClickRight();
+			break;
+		case Home.SCREEN_STATE_MENU_MODE_ETC_FREQ_INIT:
+			ParentActivity._SpeedometerInitPopup.ClickRight();
+			break;
+		case Home.SCREEN_STATE_MENU_MODE_ETC_COOLINGFAN_OFF:
+			_CoolingFanFragment._CoolingFanOffFragment.ClickRight();
+			break;
+		case Home.SCREEN_STATE_MENU_MODE_ETC_COOLINGFAN_AUTO:
+			_CoolingFanFragment._CoolingFanAutoFragment.ClickRight();
+			break;
+		case Home.SCREEN_STATE_MENU_MODE_ETC_COOLINGFAN_MANUAL:
+			_CoolingFanFragment._CoolingFanManualFragment.ClickRight();
+			break;
+		case Home.SCREEN_STATE_MENU_MODE_ETC_WIPER_TOP:
+			_WiperFragment.ClickRight();
+			break;
+		case Home.SCREEN_STATE_MENU_MODE_ETC_AUTOSHUTDOWN_TOP:
+			_EngineAutoShutdownFragment.ClickRight();
+			break;
+		case Home.SCREEN_STATE_MENU_MODE_ETC_AUTOSHUTDOWN_PW:
+			_EngineAutoShutdownPWFragment.ClickRight();
+			break;
+		case Home.SCREEN_STATE_MENU_MODE_ETC_CAMERASETTING_TOP:
+			_CameraSettingFragment.ClickRight();
+			break;
+		case Home.SCREEN_STATE_MENU_MONITORING_TOP:
+			_MenuMonitoringFragment.ClickRight();
+			break;
+		case Home.SCREEN_STATE_MENU_MONITORING_MACHINEMONITORING:
+			_MachineMonitoringFragment.ClickRight();
+			break;
+		case Home.SCREEN_STATE_MENU_MONITORING_OPERATIONHISTORY_TOP:
+			_OperationHistoryFragment.ClickRight();
+			break;
+		case Home.SCREEN_STATE_MENU_MONITORING_OPERATIONHISTORY_INIT:
+			ParentActivity._OperationHistoryInitPopup.ClickRight();
+			break;
+		case Home.SCREEN_STATE_MENU_MONITORING_FAULTHISTORY_TOP:
+			_FaultHistoryFragment.ClickRight();
+			break;
+		case Home.SCREEN_STATE_MENU_MONITORING_VERSIONINFO_TOP:
+			_VersionInfoFragment.ClickRight();
+			break;
+		case Home.SCREEN_STATE_MENU_MONITORING_VERSIONINFO_TCU:
+			_VersionInfoTCUFragment.ClickRight();
+			break;
+		case Home.SCREEN_STATE_MENU_MONITORING_VERSIONINFO_ECM:
+			_VersionInfoECMFragment.ClickRight();
+			break;
+		case Home.SCREEN_STATE_MENU_MONITORING_VERSIONINFO_MONITOR:
+			_VersionInfoMonitorFragment.ClickRight();
+			break;
+		case Home.SCREEN_STATE_MENU_MONITORING_VERSIONINFO_MCU:
+			_VersionInfoMCUFragment.ClickRight();
+			break;
+		case Home.SCREEN_STATE_MENU_MONITORING_VERSIONINFO_CLUSTER:
+			_VersionInfoClusterFragment.ClickRight();
+			break;
+		case Home.SCREEN_STATE_MENU_MONITORING_VERSIONINFO_RMCU:
+			_VersionInfoRMCUFragment.ClickRight();
+			break;
+		case Home.SCREEN_STATE_MENU_MONITORING_VERSIONINFO_EHCU:
+			_VersionInfoEHCUFragment.ClickRight();
+			break;
+		case Home.SCREEN_STATE_MENU_MONITORING_EHCUINFO_TOP:
+			_EHCUIOInfoFragment.ClickRight();
+			break;
+		case Home.SCREEN_STATE_MENU_MONITORING_EHCUINFO_BOOMLEVERFLOAT:
+			_EHCUIOInfoBoomLeverFloatFragment.ClickRight();
+			break;
+		case Home.SCREEN_STATE_MENU_MANAGEMENT_TOP:
+			_MenuManagementFragment.ClickRight();
+			break;
+		case Home.SCREEN_STATE_MENU_MANAGEMENT_MACHINESECURITY_TOP:
+			_MachineSecurityListFragment.ClickRight();
+			break;
+		case Home.SCREEN_STATE_MENU_MANAGEMENT_MACHINESECURITY_PW:
+			_MachineSecurityPasswordFragment.ClickRight();
+			break;
+		case Home.SCREEN_STATE_MENU_MANAGEMENT_MACHINESECURITY_ESL:
+			_MachineSecurityESLFragment.ClickRight();
+			break;
+		case Home.SCREEN_STATE_MENU_MANAGEMENT_MACHINESECURITY_PWCHANGE:
+			_MachineSecurityPasswordChangeFragment.ClickRight();
+			break;
+		case Home.SCREEN_STATE_MENU_MANAGEMENT_MACHINESECURITY_SMARTKEY:
+			_MachineSecuritySmartKeyFragment.ClickRight();
+			break;
+		case Home.SCREEN_STATE_MENU_MANAGEMENT_MAINTENANCE_TOP:
+			_MaintenanceFragment.ClickRight();
+			break;
+		case Home.SCREEN_STATE_MENU_MANAGEMENT_MAINTENANCE_DETAIL_TOP:
+			_MaintenanceDetailFragment.ClickRight();
+			break;
+		case Home.SCREEN_STATE_MENU_MANAGEMENT_MAINTENANCE_DETAIL_REPLACE:
+			ParentActivity._MaintReplacePopup.ClickRight();
+			break;
+		case Home.SCREEN_STATE_MENU_MANAGEMENT_MAINTENANCE_DETAIL_CHANGECYCLE:
+			_MaintenanceChangeCycleFragment.ClickRight();
+			break;
+		case Home.SCREEN_STATE_MENU_MANAGEMENT_CALIBRATION_TOP:
+			_CalibrationFragment.ClickRight();
+			break;
+		case Home.SCREEN_STATE_MENU_MANAGEMENT_CALIBRATION_ANGLE_TOP:
+			_AngleCalibration.ClickRight();
+			break;
+		case Home.SCREEN_STATE_MENU_MANAGEMENT_CALIBRATION_ANGLE_RESULT:
+			ParentActivity._AngleCalibrationResultPopup.ClickRight();
+			break;
+		case Home.SCREEN_STATE_MENU_MANAGEMENT_CALIBRATION_PRESSURE_TOP:
+			_PressureCalibration.ClickRight();
+			break;
+		case Home.SCREEN_STATE_MENU_MANAGEMENT_CALIBRATION_PRESSURE_RESULT:
+			ParentActivity._PressureCalibrationResultPopup.ClickRight();
+			break;
+		case Home.SCREEN_STATE_MENU_MANAGEMENT_CALIBRATION_BRAKEPEDAL_TOP:
+			ParentActivity._BrakePedalCalibrationPopup.ClickRight();
+			break;
+		case Home.SCREEN_STATE_MENU_MANAGEMENT_SERVICE_TOP:
+			_ServiceMenuListFragment.ClickRight();
+			break;
+		case Home.SCREEN_STATE_MENU_MANAGEMENT_SERVICE_PW:
+			_ServiceMenuPasswordFragment.ClickRight();
+			break;
+		case Home.SCREEN_STATE_MENU_MANAGEMENT_SERVICE_SENSORMONITORING_TOP:
+			_ServiceMenuSensorMonitoringFragment.ClickRight();
+			break;
+		case Home.SCREEN_STATE_MENU_MANAGEMENT_SERVICE_SENSORMONITORING_HIDDEN:
+			_ServiceMenuSensorMonitoringHiddenFragment.ClickRight();
+			break;
+		case Home.SCREEN_STATE_MENU_MANAGEMENT_SERVICE_SPEEDLIMIT_TOP:
+			_ServiceMenuSpeedLimitFragment.ClickRight();
+			break;
+		case Home.SCREEN_STATE_MENU_MANAGEMENT_SERVICE_WEIGHINGCOMPENSATION_TOP:
+			_ServiceMenuWeighingCompensationFragment.ClickRight();
+			break;
+		case Home.SCREEN_STATE_MENU_MANAGEMENT_ASPHONE_TOP:
+			_ChangeASPhoneNumberFragment.ClickRight();
+			break;
+		case Home.SCREEN_STATE_MENU_PREFERENCE_TOP:
+			_MenuPreferenceFragment.ClickRight();
+			break;
+		case Home.SCREEN_STATE_MENU_PREFERENCE_BRIGHTNESS_MANUAL_TOP:
+			_BrightnessFragment._BrightnessManualFragment.ClickRight();
+			break;
+		case Home.SCREEN_STATE_MENU_PREFERENCE_BRIGHTNESS_AUTO_TOP:
+			_BrightnessFragment._BrightnessAutoFragment.ClickRight();
+			break;
+		case Home.SCREEN_STATE_MENU_PREFERENCE_CLOCK_TOP:
+			_ClockFragment.ClickRight();
+			break;
+		case Home.SCREEN_STATE_MENU_PREFERENCE_UNIT_TOP:
+			_UnitFragment.ClickRight();
+			break;
+		case Home.SCREEN_STATE_MENU_PREFERENCE_DISPLAYTYPELANG_TOP:
+			_DisplayTypeListFragment.ClickRight();
+			break;
+		case Home.SCREEN_STATE_MENU_PREFERENCE_SOUNDOUTPUT_TOP:
+			ParentActivity._SoundOutputPopup.ClickRight();
+			break;
+		case Home.SCREEN_STATE_MENU_MULTIMEDIA_TOP:
+			_MenuMultimediaFragment.ClickRight();
+			break;
+		default:
+			break;
 		}
 	}
 	public void ClickKeyButtonESC(){
-		Log.d(TAG,"ClickKeyButtonESC");
-		if((ParentActivity.ScreenIndex >= Home.SCREEN_STATE_MENU_MODE_TOP) && (ParentActivity.ScreenIndex <= Home.SCREEN_STATE_MENU_MODE_END)){
-			_MenuModeFragment.ClickESC();
-		}else if((ParentActivity.ScreenIndex >= Home.SCREEN_STATE_MENU_MONITORING_TOP) && (ParentActivity.ScreenIndex <= Home.SCREEN_STATE_MENU_MONITORING_END)){
-			
-		}else if((ParentActivity.ScreenIndex >= Home.SCREEN_STATE_MENU_MANAGEMENT_TOP) && (ParentActivity.ScreenIndex <= Home.SCREEN_STATE_MENU_MANAGEMENT_END)){
-			
-		}else if((ParentActivity.ScreenIndex >= Home.SCREEN_STATE_MENU_PREFERENCE_TOP) && (ParentActivity.ScreenIndex <= Home.SCREEN_STATE_MENU_PREFERENCE_END)){
-			
-		}else if((ParentActivity.ScreenIndex >= Home.SCREEN_STATE_MENU_MULTIMEDIA_TOP) && (ParentActivity.ScreenIndex <= Home.SCREEN_STATE_MENU_MULTIMEDIA_END)){
-			
-		}else{
-			
+		switch (ParentActivity.ScreenIndex) {
+		case Home.SCREEN_STATE_MENU_MODE_ENGINETM_TOP:
+			_MenuModeFragment._MenuModeEngTMFragment.ClickESC();
+			break;
+		case Home.SCREEN_STATE_MENU_MODE_ENGINETM_ENGINESETTING_TOP:
+			_MenuModeFragment._EngineSettingFragment.ClickESC();
+			break;
+		case Home.SCREEN_STATE_MENU_MODE_ENGINETM_ENGINESETTING_MODE:
+			ParentActivity._EngineModePopup.ClickESC();
+			break;
+		case Home.SCREEN_STATE_MENU_MODE_ENGINETM_ENGINESETTING_WARMINGUP:
+			ParentActivity._EngineWarmingUpPopup.ClickESC();
+			break;
+		case Home.SCREEN_STATE_MENU_MODE_ENGINETM_ENGINESETTING_SPEED:
+			_EngineSpeedFragment.ClickESC();
+			break;
+		case Home.SCREEN_STATE_MENU_MODE_ENGINETM_KICKDOWN:
+			ParentActivity._KickDownPopup.ClickESC();
+			break;
+		case Home.SCREEN_STATE_MENU_MODE_ENGINETM_CCOMODE:
+			ParentActivity._CCoModePopup.ClickESC();
+			break;
+		case Home.SCREEN_STATE_MENU_MODE_ENGINETM_SHIFTMODE:
+			ParentActivity._ShiftModePopup.ClickESC();
+			break;
+		case Home.SCREEN_STATE_MENU_MODE_ENGINETM_TCLOCKUP:
+			ParentActivity._TCLockUpPopup.ClickESC();
+			break;
+		case Home.SCREEN_STATE_MENU_MODE_HYD_TOP:
+			_MenuModeFragment._MenuModeHYDFragment.ClickESC();
+			break;
+		case Home.SCREEN_STATE_MENU_MODE_HYD_WORKLOAD_TOP:
+			_WorkLoadFragment.ClickESC();
+			break;
+		case Home.SCREEN_STATE_MENU_MODE_HYD_WORKLOAD_INIT:
+			ParentActivity._WorkLoadInitPopup.ClickESC();
+			break;
+		case Home.SCREEN_STATE_MENU_MODE_HYD_DETENT:
+			_DetentFragment.ClickESC();
+			break;
+		case Home.SCREEN_STATE_MENU_MODE_HYD_BUCKETPRIORITY:
+			ParentActivity._BucketPriorityPopup.ClickESC();
+			break;
+		case Home.SCREEN_STATE_MENU_MODE_HYD_MAXFLOW:
+			_MaxFlowFragment.ClickESC();
+			break;
+		case Home.SCREEN_STATE_MENU_MODE_HYD_SOFTSTOP:
+			_SoftStopFragment.ClickESC();
+			break;
+		case Home.SCREEN_STATE_MENU_MODE_ETC_TOP:
+			_MenuModeFragment._MenuModeETCFragment.ClickESC();
+			break;
+		case Home.SCREEN_STATE_MENU_MODE_ETC_FREQ_TOP:
+			_SpeedometerFreqFragment.ClickESC();
+			break;
+		case Home.SCREEN_STATE_MENU_MODE_ETC_FREQ_INIT:
+			ParentActivity._SpeedometerInitPopup.ClickESC();
+			break;
+		case Home.SCREEN_STATE_MENU_MODE_ETC_COOLINGFAN_OFF:
+			_CoolingFanFragment._CoolingFanOffFragment.ClickESC();
+			break;
+		case Home.SCREEN_STATE_MENU_MODE_ETC_COOLINGFAN_AUTO:
+			_CoolingFanFragment._CoolingFanAutoFragment.ClickESC();
+			break;
+		case Home.SCREEN_STATE_MENU_MODE_ETC_COOLINGFAN_MANUAL:
+			_CoolingFanFragment._CoolingFanManualFragment.ClickESC();
+			break;
+		case Home.SCREEN_STATE_MENU_MODE_ETC_WIPER_TOP:
+			_WiperFragment.ClickESC();
+			break;
+		case Home.SCREEN_STATE_MENU_MODE_ETC_AUTOSHUTDOWN_TOP:
+			_EngineAutoShutdownFragment.ClickESC();
+			break;
+		case Home.SCREEN_STATE_MENU_MODE_ETC_AUTOSHUTDOWN_PW:
+			_EngineAutoShutdownPWFragment.ClickESC();
+			break;
+		case Home.SCREEN_STATE_MENU_MODE_ETC_CAMERASETTING_TOP:
+			_CameraSettingFragment.ClickESC();
+			break;
+		case Home.SCREEN_STATE_MENU_MONITORING_TOP:
+			_MenuMonitoringFragment.ClickESC();
+			break;
+		case Home.SCREEN_STATE_MENU_MONITORING_MACHINEMONITORING:
+			_MachineMonitoringFragment.ClickESC();
+			break;
+		case Home.SCREEN_STATE_MENU_MONITORING_OPERATIONHISTORY_TOP:
+			_OperationHistoryFragment.ClickESC();
+			break;
+		case Home.SCREEN_STATE_MENU_MONITORING_OPERATIONHISTORY_INIT:
+			ParentActivity._OperationHistoryInitPopup.ClickESC();
+			break;
+		case Home.SCREEN_STATE_MENU_MONITORING_FAULTHISTORY_TOP:
+			_FaultHistoryFragment.ClickESC();
+			break;
+		case Home.SCREEN_STATE_MENU_MONITORING_VERSIONINFO_TOP:
+			_VersionInfoFragment.ClickESC();
+			break;
+		case Home.SCREEN_STATE_MENU_MONITORING_VERSIONINFO_TCU:
+			_VersionInfoTCUFragment.ClickESC();
+			break;
+		case Home.SCREEN_STATE_MENU_MONITORING_VERSIONINFO_ECM:
+			_VersionInfoECMFragment.ClickESC();
+			break;
+		case Home.SCREEN_STATE_MENU_MONITORING_VERSIONINFO_MONITOR:
+			_VersionInfoMonitorFragment.ClickESC();
+			break;
+		case Home.SCREEN_STATE_MENU_MONITORING_VERSIONINFO_MCU:
+			_VersionInfoMCUFragment.ClickESC();
+			break;
+		case Home.SCREEN_STATE_MENU_MONITORING_VERSIONINFO_CLUSTER:
+			_VersionInfoClusterFragment.ClickESC();
+			break;
+		case Home.SCREEN_STATE_MENU_MONITORING_VERSIONINFO_RMCU:
+			_VersionInfoRMCUFragment.ClickESC();
+			break;
+		case Home.SCREEN_STATE_MENU_MONITORING_VERSIONINFO_EHCU:
+			_VersionInfoEHCUFragment.ClickESC();
+			break;
+		case Home.SCREEN_STATE_MENU_MONITORING_EHCUINFO_TOP:
+			_EHCUIOInfoFragment.ClickESC();
+			break;
+		case Home.SCREEN_STATE_MENU_MONITORING_EHCUINFO_BOOMLEVERFLOAT:
+			_EHCUIOInfoBoomLeverFloatFragment.ClickESC();
+			break;
+		case Home.SCREEN_STATE_MENU_MANAGEMENT_TOP:
+			_MenuManagementFragment.ClickESC();
+			break;
+		case Home.SCREEN_STATE_MENU_MANAGEMENT_MACHINESECURITY_TOP:
+			_MachineSecurityListFragment.ClickESC();
+			break;
+		case Home.SCREEN_STATE_MENU_MANAGEMENT_MACHINESECURITY_PW:
+			_MachineSecurityPasswordFragment.ClickESC();
+			break;
+		case Home.SCREEN_STATE_MENU_MANAGEMENT_MACHINESECURITY_ESL:
+			_MachineSecurityESLFragment.ClickESC();
+			break;
+		case Home.SCREEN_STATE_MENU_MANAGEMENT_MACHINESECURITY_PWCHANGE:
+			_MachineSecurityPasswordChangeFragment.ClickESC();
+			break;
+		case Home.SCREEN_STATE_MENU_MANAGEMENT_MACHINESECURITY_SMARTKEY:
+			_MachineSecuritySmartKeyFragment.ClickESC();
+			break;
+		case Home.SCREEN_STATE_MENU_MANAGEMENT_MAINTENANCE_TOP:
+			_MaintenanceFragment.ClickESC();
+			break;
+		case Home.SCREEN_STATE_MENU_MANAGEMENT_MAINTENANCE_DETAIL_TOP:
+			_MaintenanceDetailFragment.ClickESC();
+			break;
+		case Home.SCREEN_STATE_MENU_MANAGEMENT_MAINTENANCE_DETAIL_REPLACE:
+			ParentActivity._MaintReplacePopup.ClickESC();
+			break;
+		case Home.SCREEN_STATE_MENU_MANAGEMENT_MAINTENANCE_DETAIL_CHANGECYCLE:
+			_MaintenanceChangeCycleFragment.ClickESC();
+			break;
+		case Home.SCREEN_STATE_MENU_MANAGEMENT_CALIBRATION_TOP:
+			_CalibrationFragment.ClickESC();
+			break;
+		case Home.SCREEN_STATE_MENU_MANAGEMENT_CALIBRATION_ANGLE_TOP:
+			_AngleCalibration.ClickESC();
+			break;
+		case Home.SCREEN_STATE_MENU_MANAGEMENT_CALIBRATION_ANGLE_RESULT:
+			ParentActivity._AngleCalibrationResultPopup.ClickESC();
+			break;
+		case Home.SCREEN_STATE_MENU_MANAGEMENT_CALIBRATION_PRESSURE_TOP:
+			_PressureCalibration.ClickESC();
+			break;
+		case Home.SCREEN_STATE_MENU_MANAGEMENT_CALIBRATION_PRESSURE_RESULT:
+			ParentActivity._PressureCalibrationResultPopup.ClickESC();
+			break;
+		case Home.SCREEN_STATE_MENU_MANAGEMENT_CALIBRATION_BRAKEPEDAL_TOP:
+			ParentActivity._BrakePedalCalibrationPopup.ClickESC();
+			break;
+		case Home.SCREEN_STATE_MENU_MANAGEMENT_SERVICE_TOP:
+			_ServiceMenuListFragment.ClickESC();
+			break;
+		case Home.SCREEN_STATE_MENU_MANAGEMENT_SERVICE_PW:
+			_ServiceMenuPasswordFragment.ClickESC();
+			break;
+		case Home.SCREEN_STATE_MENU_MANAGEMENT_SERVICE_SENSORMONITORING_TOP:
+			_ServiceMenuSensorMonitoringFragment.ClickESC();
+			break;
+		case Home.SCREEN_STATE_MENU_MANAGEMENT_SERVICE_SENSORMONITORING_HIDDEN:
+			_ServiceMenuSensorMonitoringHiddenFragment.ClickESC();
+			break;
+		case Home.SCREEN_STATE_MENU_MANAGEMENT_SERVICE_SPEEDLIMIT_TOP:
+			_ServiceMenuSpeedLimitFragment.ClickESC();
+			break;
+		case Home.SCREEN_STATE_MENU_MANAGEMENT_SERVICE_WEIGHINGCOMPENSATION_TOP:
+			_ServiceMenuWeighingCompensationFragment.ClickESC();
+			break;
+		case Home.SCREEN_STATE_MENU_MANAGEMENT_ASPHONE_TOP:
+			_ChangeASPhoneNumberFragment.ClickESC();
+			break;
+		case Home.SCREEN_STATE_MENU_PREFERENCE_TOP:
+			_MenuPreferenceFragment.ClickESC();
+			break;
+		case Home.SCREEN_STATE_MENU_PREFERENCE_BRIGHTNESS_MANUAL_TOP:
+			_BrightnessFragment._BrightnessManualFragment.ClickESC();
+			break;
+		case Home.SCREEN_STATE_MENU_PREFERENCE_BRIGHTNESS_AUTO_TOP:
+			_BrightnessFragment._BrightnessAutoFragment.ClickESC();
+			break;
+		case Home.SCREEN_STATE_MENU_PREFERENCE_CLOCK_TOP:
+			_ClockFragment.ClickESC();
+			break;
+		case Home.SCREEN_STATE_MENU_PREFERENCE_UNIT_TOP:
+			_UnitFragment.ClickESC();
+			break;
+		case Home.SCREEN_STATE_MENU_PREFERENCE_DISPLAYTYPELANG_TOP:
+			_DisplayTypeListFragment.ClickESC();
+			break;
+		case Home.SCREEN_STATE_MENU_PREFERENCE_SOUNDOUTPUT_TOP:
+			ParentActivity._SoundOutputPopup.ClickESC();
+			break;
+		case Home.SCREEN_STATE_MENU_MULTIMEDIA_TOP:
+			_MenuMultimediaFragment.ClickESC();
+			break;
+		default:
+			break;
 		}
 	}
 	public void ClickKeyButtonEnter(){
-		if((ParentActivity.ScreenIndex >= Home.SCREEN_STATE_MENU_MODE_TOP) && (ParentActivity.ScreenIndex <= Home.SCREEN_STATE_MENU_MODE_END)){
-			_MenuModeFragment.ClickEnter();
-		}else if((ParentActivity.ScreenIndex >= Home.SCREEN_STATE_MENU_MONITORING_TOP) && (ParentActivity.ScreenIndex <= Home.SCREEN_STATE_MENU_MONITORING_END)){
-			
-		}else if((ParentActivity.ScreenIndex >= Home.SCREEN_STATE_MENU_MANAGEMENT_TOP) && (ParentActivity.ScreenIndex <= Home.SCREEN_STATE_MENU_MANAGEMENT_END)){
-			
-		}else if((ParentActivity.ScreenIndex >= Home.SCREEN_STATE_MENU_PREFERENCE_TOP) && (ParentActivity.ScreenIndex <= Home.SCREEN_STATE_MENU_PREFERENCE_END)){
-			
-		}else if((ParentActivity.ScreenIndex >= Home.SCREEN_STATE_MENU_MULTIMEDIA_TOP) && (ParentActivity.ScreenIndex <= Home.SCREEN_STATE_MENU_MULTIMEDIA_END)){
-			
-		}else{
-			
+		switch (ParentActivity.ScreenIndex) {
+		case Home.SCREEN_STATE_MENU_MODE_ENGINETM_TOP:
+			_MenuModeFragment._MenuModeEngTMFragment.ClickEnter();
+			break;
+		case Home.SCREEN_STATE_MENU_MODE_ENGINETM_ENGINESETTING_TOP:
+			_MenuModeFragment._EngineSettingFragment.ClickEnter();
+			break;
+		case Home.SCREEN_STATE_MENU_MODE_ENGINETM_ENGINESETTING_MODE:
+			ParentActivity._EngineModePopup.ClickEnter();
+			break;
+		case Home.SCREEN_STATE_MENU_MODE_ENGINETM_ENGINESETTING_WARMINGUP:
+			ParentActivity._EngineWarmingUpPopup.ClickEnter();
+			break;
+		case Home.SCREEN_STATE_MENU_MODE_ENGINETM_ENGINESETTING_SPEED:
+			_EngineSpeedFragment.ClickEnter();
+			break;
+		case Home.SCREEN_STATE_MENU_MODE_ENGINETM_KICKDOWN:
+			ParentActivity._KickDownPopup.ClickEnter();
+			break;
+		case Home.SCREEN_STATE_MENU_MODE_ENGINETM_CCOMODE:
+			ParentActivity._CCoModePopup.ClickEnter();
+			break;
+		case Home.SCREEN_STATE_MENU_MODE_ENGINETM_SHIFTMODE:
+			ParentActivity._ShiftModePopup.ClickEnter();
+			break;
+		case Home.SCREEN_STATE_MENU_MODE_ENGINETM_TCLOCKUP:
+			ParentActivity._TCLockUpPopup.ClickEnter();
+			break;
+		case Home.SCREEN_STATE_MENU_MODE_HYD_TOP:
+			_MenuModeFragment._MenuModeHYDFragment.ClickEnter();
+			break;
+		case Home.SCREEN_STATE_MENU_MODE_HYD_WORKLOAD_TOP:
+			_WorkLoadFragment.ClickEnter();
+			break;
+		case Home.SCREEN_STATE_MENU_MODE_HYD_WORKLOAD_INIT:
+			ParentActivity._WorkLoadInitPopup.ClickEnter();
+			break;
+		case Home.SCREEN_STATE_MENU_MODE_HYD_DETENT:
+			_DetentFragment.ClickEnter();
+			break;
+		case Home.SCREEN_STATE_MENU_MODE_HYD_BUCKETPRIORITY:
+			ParentActivity._BucketPriorityPopup.ClickEnter();
+			break;
+		case Home.SCREEN_STATE_MENU_MODE_HYD_MAXFLOW:
+			_MaxFlowFragment.ClickEnter();
+			break;
+		case Home.SCREEN_STATE_MENU_MODE_HYD_SOFTSTOP:
+			_SoftStopFragment.ClickEnter();
+			break;
+		case Home.SCREEN_STATE_MENU_MODE_ETC_TOP:
+			_MenuModeFragment._MenuModeETCFragment.ClickEnter();
+			break;
+		case Home.SCREEN_STATE_MENU_MODE_ETC_FREQ_TOP:
+			_SpeedometerFreqFragment.ClickEnter();
+			break;
+		case Home.SCREEN_STATE_MENU_MODE_ETC_FREQ_INIT:
+			ParentActivity._SpeedometerInitPopup.ClickEnter();
+			break;
+		case Home.SCREEN_STATE_MENU_MODE_ETC_COOLINGFAN_OFF:
+			_CoolingFanFragment._CoolingFanOffFragment.ClickEnter();
+			break;
+		case Home.SCREEN_STATE_MENU_MODE_ETC_COOLINGFAN_AUTO:
+			_CoolingFanFragment._CoolingFanAutoFragment.ClickEnter();
+			break;
+		case Home.SCREEN_STATE_MENU_MODE_ETC_COOLINGFAN_MANUAL:
+			_CoolingFanFragment._CoolingFanManualFragment.ClickEnter();
+			break;
+		case Home.SCREEN_STATE_MENU_MODE_ETC_WIPER_TOP:
+			_WiperFragment.ClickEnter();
+			break;
+		case Home.SCREEN_STATE_MENU_MODE_ETC_AUTOSHUTDOWN_TOP:
+			_EngineAutoShutdownFragment.ClickEnter();
+			break;
+		case Home.SCREEN_STATE_MENU_MODE_ETC_AUTOSHUTDOWN_PW:
+			_EngineAutoShutdownPWFragment.ClickEnter();
+			break;
+		case Home.SCREEN_STATE_MENU_MODE_ETC_CAMERASETTING_TOP:
+			_CameraSettingFragment.ClickEnter();
+			break;
+		case Home.SCREEN_STATE_MENU_MONITORING_TOP:
+			_MenuMonitoringFragment.ClickEnter();
+			break;
+		case Home.SCREEN_STATE_MENU_MONITORING_MACHINEMONITORING:
+			_MachineMonitoringFragment.ClickEnter();
+			break;
+		case Home.SCREEN_STATE_MENU_MONITORING_OPERATIONHISTORY_TOP:
+			_OperationHistoryFragment.ClickEnter();
+			break;
+		case Home.SCREEN_STATE_MENU_MONITORING_OPERATIONHISTORY_INIT:
+			ParentActivity._OperationHistoryInitPopup.ClickEnter();
+			break;
+		case Home.SCREEN_STATE_MENU_MONITORING_FAULTHISTORY_TOP:
+			_FaultHistoryFragment.ClickEnter();
+			break;
+		case Home.SCREEN_STATE_MENU_MONITORING_VERSIONINFO_TOP:
+			_VersionInfoFragment.ClickEnter();
+			break;
+		case Home.SCREEN_STATE_MENU_MONITORING_VERSIONINFO_TCU:
+			_VersionInfoTCUFragment.ClickEnter();
+			break;
+		case Home.SCREEN_STATE_MENU_MONITORING_VERSIONINFO_ECM:
+			_VersionInfoECMFragment.ClickEnter();
+			break;
+		case Home.SCREEN_STATE_MENU_MONITORING_VERSIONINFO_MONITOR:
+			_VersionInfoMonitorFragment.ClickEnter();
+			break;
+		case Home.SCREEN_STATE_MENU_MONITORING_VERSIONINFO_MCU:
+			_VersionInfoMCUFragment.ClickEnter();
+			break;
+		case Home.SCREEN_STATE_MENU_MONITORING_VERSIONINFO_CLUSTER:
+			_VersionInfoClusterFragment.ClickEnter();
+			break;
+		case Home.SCREEN_STATE_MENU_MONITORING_VERSIONINFO_RMCU:
+			_VersionInfoRMCUFragment.ClickEnter();
+			break;
+		case Home.SCREEN_STATE_MENU_MONITORING_VERSIONINFO_EHCU:
+			_VersionInfoEHCUFragment.ClickEnter();
+			break;
+		case Home.SCREEN_STATE_MENU_MONITORING_EHCUINFO_TOP:
+			_EHCUIOInfoFragment.ClickEnter();
+			break;
+		case Home.SCREEN_STATE_MENU_MONITORING_EHCUINFO_BOOMLEVERFLOAT:
+			_EHCUIOInfoBoomLeverFloatFragment.ClickEnter();
+			break;
+		case Home.SCREEN_STATE_MENU_MANAGEMENT_TOP:
+			_MenuManagementFragment.ClickEnter();
+			break;
+		case Home.SCREEN_STATE_MENU_MANAGEMENT_MACHINESECURITY_TOP:
+			_MachineSecurityListFragment.ClickEnter();
+			break;
+		case Home.SCREEN_STATE_MENU_MANAGEMENT_MACHINESECURITY_PW:
+			_MachineSecurityPasswordFragment.ClickEnter();
+			break;
+		case Home.SCREEN_STATE_MENU_MANAGEMENT_MACHINESECURITY_ESL:
+			_MachineSecurityESLFragment.ClickEnter();
+			break;
+		case Home.SCREEN_STATE_MENU_MANAGEMENT_MACHINESECURITY_PWCHANGE:
+			_MachineSecurityPasswordChangeFragment.ClickEnter();
+			break;
+		case Home.SCREEN_STATE_MENU_MANAGEMENT_MACHINESECURITY_SMARTKEY:
+			_MachineSecuritySmartKeyFragment.ClickEnter();
+			break;
+		case Home.SCREEN_STATE_MENU_MANAGEMENT_MAINTENANCE_TOP:
+			_MaintenanceFragment.ClickEnter();
+			break;
+		case Home.SCREEN_STATE_MENU_MANAGEMENT_MAINTENANCE_DETAIL_TOP:
+			_MaintenanceDetailFragment.ClickEnter();
+			break;
+		case Home.SCREEN_STATE_MENU_MANAGEMENT_MAINTENANCE_DETAIL_REPLACE:
+			ParentActivity._MaintReplacePopup.ClickEnter();
+			break;
+		case Home.SCREEN_STATE_MENU_MANAGEMENT_MAINTENANCE_DETAIL_CHANGECYCLE:
+			_MaintenanceChangeCycleFragment.ClickEnter();
+			break;
+		case Home.SCREEN_STATE_MENU_MANAGEMENT_CALIBRATION_TOP:
+			_CalibrationFragment.ClickEnter();
+			break;
+		case Home.SCREEN_STATE_MENU_MANAGEMENT_CALIBRATION_ANGLE_TOP:
+			_AngleCalibration.ClickEnter();
+			break;
+		case Home.SCREEN_STATE_MENU_MANAGEMENT_CALIBRATION_ANGLE_RESULT:
+			ParentActivity._AngleCalibrationResultPopup.ClickEnter();
+			break;
+		case Home.SCREEN_STATE_MENU_MANAGEMENT_CALIBRATION_PRESSURE_TOP:
+			_PressureCalibration.ClickEnter();
+			break;
+		case Home.SCREEN_STATE_MENU_MANAGEMENT_CALIBRATION_PRESSURE_RESULT:
+			ParentActivity._PressureCalibrationResultPopup.ClickEnter();
+			break;
+		case Home.SCREEN_STATE_MENU_MANAGEMENT_CALIBRATION_BRAKEPEDAL_TOP:
+			ParentActivity._BrakePedalCalibrationPopup.ClickEnter();
+			break;
+		case Home.SCREEN_STATE_MENU_MANAGEMENT_SERVICE_TOP:
+			_ServiceMenuListFragment.ClickEnter();
+			break;
+		case Home.SCREEN_STATE_MENU_MANAGEMENT_SERVICE_PW:
+			_ServiceMenuPasswordFragment.ClickEnter();
+			break;
+		case Home.SCREEN_STATE_MENU_MANAGEMENT_SERVICE_SENSORMONITORING_TOP:
+			_ServiceMenuSensorMonitoringFragment.ClickEnter();
+			break;
+		case Home.SCREEN_STATE_MENU_MANAGEMENT_SERVICE_SENSORMONITORING_HIDDEN:
+			_ServiceMenuSensorMonitoringHiddenFragment.ClickEnter();
+			break;
+		case Home.SCREEN_STATE_MENU_MANAGEMENT_SERVICE_SPEEDLIMIT_TOP:
+			_ServiceMenuSpeedLimitFragment.ClickEnter();
+			break;
+		case Home.SCREEN_STATE_MENU_MANAGEMENT_SERVICE_WEIGHINGCOMPENSATION_TOP:
+			_ServiceMenuWeighingCompensationFragment.ClickEnter();
+			break;
+		case Home.SCREEN_STATE_MENU_MANAGEMENT_ASPHONE_TOP:
+			_ChangeASPhoneNumberFragment.ClickEnter();
+			break;
+		case Home.SCREEN_STATE_MENU_PREFERENCE_TOP:
+			_MenuPreferenceFragment.ClickEnter();
+			break;
+		case Home.SCREEN_STATE_MENU_PREFERENCE_BRIGHTNESS_MANUAL_TOP:
+			_BrightnessFragment._BrightnessManualFragment.ClickEnter();
+			break;
+		case Home.SCREEN_STATE_MENU_PREFERENCE_BRIGHTNESS_AUTO_TOP:
+			_BrightnessFragment._BrightnessAutoFragment.ClickEnter();
+			break;
+		case Home.SCREEN_STATE_MENU_PREFERENCE_CLOCK_TOP:
+			_ClockFragment.ClickEnter();
+			break;
+		case Home.SCREEN_STATE_MENU_PREFERENCE_UNIT_TOP:
+			_UnitFragment.ClickEnter();
+			break;
+		case Home.SCREEN_STATE_MENU_PREFERENCE_DISPLAYTYPELANG_TOP:
+			_DisplayTypeListFragment.ClickEnter();
+			break;
+		case Home.SCREEN_STATE_MENU_PREFERENCE_SOUNDOUTPUT_TOP:
+			ParentActivity._SoundOutputPopup.ClickEnter();
+			break;
+		case Home.SCREEN_STATE_MENU_MULTIMEDIA_TOP:
+			_MenuMultimediaFragment.ClickEnter();
+			break;
+		default:
+			break;
 		}
 	}
 	public void ClickKeyButtonLongLeftRight(){

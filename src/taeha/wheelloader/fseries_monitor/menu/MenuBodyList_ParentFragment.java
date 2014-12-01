@@ -33,12 +33,12 @@ public abstract class MenuBodyList_ParentFragment extends ParentFragment{
 	RelativeLayout LayoutList5;
 	RelativeLayout LayoutList6;
 	
-	ImageButton imgbtnList1;
-	ImageButton imgbtnList2;
-	ImageButton imgbtnList3;
-	ImageButton imgbtnList4;
-	ImageButton imgbtnList5;
-	ImageButton imgbtnList6;
+	protected ImageButton[] imgbtnList;
+//	ImageButton imgbtnList2;
+//	ImageButton imgbtnList3;
+//	ImageButton imgbtnList4;
+//	ImageButton imgbtnList5;
+//	ImageButton imgbtnList6;
 	
 	ImageView imgViewLine1;
 	ImageView imgViewLine2;
@@ -108,6 +108,7 @@ public abstract class MenuBodyList_ParentFragment extends ParentFragment{
 	@Override
 	protected void InitResource() {
 		// TODO Auto-generated method stub
+		imgbtnList = new ImageButton[6];
 		
 		LayoutList1 = (RelativeLayout)mRoot.findViewById(R.id.RelativeLayout_menu_body_list_1);
 		LayoutList2 = (RelativeLayout)mRoot.findViewById(R.id.RelativeLayout_menu_body_list_2);
@@ -116,12 +117,12 @@ public abstract class MenuBodyList_ParentFragment extends ParentFragment{
 		LayoutList5 = (RelativeLayout)mRoot.findViewById(R.id.RelativeLayout_menu_body_list_5);
 		LayoutList6 = (RelativeLayout)mRoot.findViewById(R.id.RelativeLayout_menu_body_list_6);
 
-		imgbtnList1 = (ImageButton)mRoot.findViewById(R.id.imageButton_menu_body_list_1);
-		imgbtnList2 = (ImageButton)mRoot.findViewById(R.id.imageButton_menu_body_list_2);
-		imgbtnList3 = (ImageButton)mRoot.findViewById(R.id.imageButton_menu_body_list_3);
-		imgbtnList4 = (ImageButton)mRoot.findViewById(R.id.imageButton_menu_body_list_4);
-		imgbtnList5 = (ImageButton)mRoot.findViewById(R.id.imageButton_menu_body_list_5);
-		imgbtnList6 = (ImageButton)mRoot.findViewById(R.id.imageButton_menu_body_list_6);
+		imgbtnList[0] = (ImageButton)mRoot.findViewById(R.id.imageButton_menu_body_list_1);
+		imgbtnList[1] = (ImageButton)mRoot.findViewById(R.id.imageButton_menu_body_list_2);
+		imgbtnList[2] = (ImageButton)mRoot.findViewById(R.id.imageButton_menu_body_list_3);
+		imgbtnList[3] = (ImageButton)mRoot.findViewById(R.id.imageButton_menu_body_list_4);
+		imgbtnList[4] = (ImageButton)mRoot.findViewById(R.id.imageButton_menu_body_list_5);
+		imgbtnList[5] = (ImageButton)mRoot.findViewById(R.id.imageButton_menu_body_list_6);
 		
 
 		imgViewLine1 = (ImageView)mRoot.findViewById(R.id.imageView_menu_body_list_line_1);
@@ -155,7 +156,7 @@ public abstract class MenuBodyList_ParentFragment extends ParentFragment{
 	@Override
 	protected void InitButtonListener() {
 		// TODO Auto-generated method stub
-		imgbtnList1.setOnClickListener(new View.OnClickListener() {
+		imgbtnList[0].setOnClickListener(new View.OnClickListener() {
 			
 			@Override
 			public void onClick(View v) {
@@ -163,7 +164,7 @@ public abstract class MenuBodyList_ParentFragment extends ParentFragment{
 				ClickList1();
 			}
 		});
-		imgbtnList2.setOnClickListener(new View.OnClickListener() {
+		imgbtnList[1].setOnClickListener(new View.OnClickListener() {
 			
 			@Override
 			public void onClick(View v) {
@@ -171,7 +172,7 @@ public abstract class MenuBodyList_ParentFragment extends ParentFragment{
 				ClickList2();
 			}
 		});
-		imgbtnList3.setOnClickListener(new View.OnClickListener() {
+		imgbtnList[2].setOnClickListener(new View.OnClickListener() {
 			
 			@Override
 			public void onClick(View v) {
@@ -179,7 +180,7 @@ public abstract class MenuBodyList_ParentFragment extends ParentFragment{
 				ClickList3();
 			}
 		});
-		imgbtnList4.setOnClickListener(new View.OnClickListener() {
+		imgbtnList[3].setOnClickListener(new View.OnClickListener() {
 			
 			@Override
 			public void onClick(View v) {
@@ -187,7 +188,7 @@ public abstract class MenuBodyList_ParentFragment extends ParentFragment{
 				ClickList4();
 			}
 		});
-		imgbtnList5.setOnClickListener(new View.OnClickListener() {
+		imgbtnList[4].setOnClickListener(new View.OnClickListener() {
 			
 			@Override
 			public void onClick(View v) {
@@ -195,7 +196,7 @@ public abstract class MenuBodyList_ParentFragment extends ParentFragment{
 				ClickList5();
 			}
 		});
-		imgbtnList6.setOnClickListener(new View.OnClickListener() {
+		imgbtnList[5].setOnClickListener(new View.OnClickListener() {
 			
 			@Override
 			public void onClick(View v) {
@@ -307,68 +308,68 @@ public abstract class MenuBodyList_ParentFragment extends ParentFragment{
 	public void setListFocus(int Index){
 		switch (Index) {
 		case 0:
-			imgbtnList1.setBackgroundResource(R.drawable._selector_menu_body_list_btn);
-			imgbtnList2.setBackgroundResource(R.drawable._selector_menu_body_list_btn);
-			imgbtnList3.setBackgroundResource(R.drawable._selector_menu_body_list_btn);
-			imgbtnList4.setBackgroundResource(R.drawable._selector_menu_body_list_btn);
-			imgbtnList5.setBackgroundResource(R.drawable._selector_menu_body_list_btn);
-			imgbtnList6.setBackgroundResource(R.drawable._selector_menu_body_list_btn);
+			imgbtnList[0].setBackgroundResource(R.drawable._selector_menu_body_list_btn);
+			imgbtnList[1].setBackgroundResource(R.drawable._selector_menu_body_list_btn);
+			imgbtnList[2].setBackgroundResource(R.drawable._selector_menu_body_list_btn);
+			imgbtnList[3].setBackgroundResource(R.drawable._selector_menu_body_list_btn);
+			imgbtnList[4].setBackgroundResource(R.drawable._selector_menu_body_list_btn);
+			imgbtnList[5].setBackgroundResource(R.drawable._selector_menu_body_list_btn);
 			break;
 		case 1:
-			imgbtnList1.setBackgroundResource(R.drawable.menu_list_selected);
-			imgbtnList2.setBackgroundResource(R.drawable._selector_menu_body_list_btn);
-			imgbtnList3.setBackgroundResource(R.drawable._selector_menu_body_list_btn);
-			imgbtnList4.setBackgroundResource(R.drawable._selector_menu_body_list_btn);
-			imgbtnList5.setBackgroundResource(R.drawable._selector_menu_body_list_btn);
-			imgbtnList6.setBackgroundResource(R.drawable._selector_menu_body_list_btn);
+			imgbtnList[0].setBackgroundResource(R.drawable.menu_list_selected);
+			imgbtnList[1].setBackgroundResource(R.drawable._selector_menu_body_list_btn);
+			imgbtnList[2].setBackgroundResource(R.drawable._selector_menu_body_list_btn);
+			imgbtnList[3].setBackgroundResource(R.drawable._selector_menu_body_list_btn);
+			imgbtnList[4].setBackgroundResource(R.drawable._selector_menu_body_list_btn);
+			imgbtnList[5].setBackgroundResource(R.drawable._selector_menu_body_list_btn);
 			break;
 		case 2:
-			imgbtnList1.setBackgroundResource(R.drawable._selector_menu_body_list_btn);
-			imgbtnList2.setBackgroundResource(R.drawable.menu_list_selected);
-			imgbtnList3.setBackgroundResource(R.drawable._selector_menu_body_list_btn);
-			imgbtnList4.setBackgroundResource(R.drawable._selector_menu_body_list_btn);
-			imgbtnList5.setBackgroundResource(R.drawable._selector_menu_body_list_btn);
-			imgbtnList6.setBackgroundResource(R.drawable._selector_menu_body_list_btn);
+			imgbtnList[0].setBackgroundResource(R.drawable._selector_menu_body_list_btn);
+			imgbtnList[1].setBackgroundResource(R.drawable.menu_list_selected);
+			imgbtnList[2].setBackgroundResource(R.drawable._selector_menu_body_list_btn);
+			imgbtnList[3].setBackgroundResource(R.drawable._selector_menu_body_list_btn);
+			imgbtnList[4].setBackgroundResource(R.drawable._selector_menu_body_list_btn);
+			imgbtnList[5].setBackgroundResource(R.drawable._selector_menu_body_list_btn);
 			break;
 		case 3:
-			imgbtnList1.setBackgroundResource(R.drawable._selector_menu_body_list_btn);
-			imgbtnList2.setBackgroundResource(R.drawable._selector_menu_body_list_btn);
-			imgbtnList3.setBackgroundResource(R.drawable.menu_list_selected);
-			imgbtnList4.setBackgroundResource(R.drawable._selector_menu_body_list_btn);
-			imgbtnList5.setBackgroundResource(R.drawable._selector_menu_body_list_btn);
-			imgbtnList6.setBackgroundResource(R.drawable._selector_menu_body_list_btn);
+			imgbtnList[0].setBackgroundResource(R.drawable._selector_menu_body_list_btn);
+			imgbtnList[1].setBackgroundResource(R.drawable._selector_menu_body_list_btn);
+			imgbtnList[2].setBackgroundResource(R.drawable.menu_list_selected);
+			imgbtnList[3].setBackgroundResource(R.drawable._selector_menu_body_list_btn);
+			imgbtnList[4].setBackgroundResource(R.drawable._selector_menu_body_list_btn);
+			imgbtnList[5].setBackgroundResource(R.drawable._selector_menu_body_list_btn);
 			break;
 		case 4:
-			imgbtnList1.setBackgroundResource(R.drawable._selector_menu_body_list_btn);
-			imgbtnList2.setBackgroundResource(R.drawable._selector_menu_body_list_btn);
-			imgbtnList3.setBackgroundResource(R.drawable._selector_menu_body_list_btn);
-			imgbtnList4.setBackgroundResource(R.drawable.menu_list_selected);
-			imgbtnList5.setBackgroundResource(R.drawable._selector_menu_body_list_btn);
-			imgbtnList6.setBackgroundResource(R.drawable._selector_menu_body_list_btn);
+			imgbtnList[0].setBackgroundResource(R.drawable._selector_menu_body_list_btn);
+			imgbtnList[1].setBackgroundResource(R.drawable._selector_menu_body_list_btn);
+			imgbtnList[2].setBackgroundResource(R.drawable._selector_menu_body_list_btn);
+			imgbtnList[3].setBackgroundResource(R.drawable.menu_list_selected);
+			imgbtnList[4].setBackgroundResource(R.drawable._selector_menu_body_list_btn);
+			imgbtnList[5].setBackgroundResource(R.drawable._selector_menu_body_list_btn);
 			break;
 		case 5:
-			imgbtnList1.setBackgroundResource(R.drawable._selector_menu_body_list_btn);
-			imgbtnList2.setBackgroundResource(R.drawable._selector_menu_body_list_btn);
-			imgbtnList3.setBackgroundResource(R.drawable._selector_menu_body_list_btn);
-			imgbtnList4.setBackgroundResource(R.drawable._selector_menu_body_list_btn);
-			imgbtnList5.setBackgroundResource(R.drawable.menu_list_selected);
-			imgbtnList6.setBackgroundResource(R.drawable._selector_menu_body_list_btn);
+			imgbtnList[0].setBackgroundResource(R.drawable._selector_menu_body_list_btn);
+			imgbtnList[1].setBackgroundResource(R.drawable._selector_menu_body_list_btn);
+			imgbtnList[2].setBackgroundResource(R.drawable._selector_menu_body_list_btn);
+			imgbtnList[3].setBackgroundResource(R.drawable._selector_menu_body_list_btn);
+			imgbtnList[4].setBackgroundResource(R.drawable.menu_list_selected);
+			imgbtnList[5].setBackgroundResource(R.drawable._selector_menu_body_list_btn);
 			break;
 		case 6:
-			imgbtnList1.setBackgroundResource(R.drawable._selector_menu_body_list_btn);
-			imgbtnList2.setBackgroundResource(R.drawable._selector_menu_body_list_btn);
-			imgbtnList3.setBackgroundResource(R.drawable._selector_menu_body_list_btn);
-			imgbtnList4.setBackgroundResource(R.drawable._selector_menu_body_list_btn);
-			imgbtnList5.setBackgroundResource(R.drawable._selector_menu_body_list_btn);
-			imgbtnList6.setBackgroundResource(R.drawable.menu_list_selected);
+			imgbtnList[0].setBackgroundResource(R.drawable._selector_menu_body_list_btn);
+			imgbtnList[1].setBackgroundResource(R.drawable._selector_menu_body_list_btn);
+			imgbtnList[2].setBackgroundResource(R.drawable._selector_menu_body_list_btn);
+			imgbtnList[3].setBackgroundResource(R.drawable._selector_menu_body_list_btn);
+			imgbtnList[4].setBackgroundResource(R.drawable._selector_menu_body_list_btn);
+			imgbtnList[5].setBackgroundResource(R.drawable.menu_list_selected);
 			break;
 		default:
-			imgbtnList1.setBackgroundResource(R.drawable._selector_menu_body_list_btn);
-			imgbtnList2.setBackgroundResource(R.drawable._selector_menu_body_list_btn);
-			imgbtnList3.setBackgroundResource(R.drawable._selector_menu_body_list_btn);
-			imgbtnList4.setBackgroundResource(R.drawable._selector_menu_body_list_btn);
-			imgbtnList5.setBackgroundResource(R.drawable._selector_menu_body_list_btn);
-			imgbtnList6.setBackgroundResource(R.drawable._selector_menu_body_list_btn);
+			imgbtnList[0].setBackgroundResource(R.drawable._selector_menu_body_list_btn);
+			imgbtnList[1].setBackgroundResource(R.drawable._selector_menu_body_list_btn);
+			imgbtnList[2].setBackgroundResource(R.drawable._selector_menu_body_list_btn);
+			imgbtnList[3].setBackgroundResource(R.drawable._selector_menu_body_list_btn);
+			imgbtnList[4].setBackgroundResource(R.drawable._selector_menu_body_list_btn);
+			imgbtnList[5].setBackgroundResource(R.drawable._selector_menu_body_list_btn);
 			break;
 		}
 	}

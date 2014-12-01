@@ -11,6 +11,8 @@ import taeha.wheelloader.fseries_monitor.main.ParentFragment;
 import taeha.wheelloader.fseries_monitor.main.R;
 import taeha.wheelloader.fseries_monitor.main.R.string;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.text.Layout;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -66,6 +68,9 @@ public class EngineAutoShutdownFragment extends ParentFragment{
 	int ESLInterval;
 	int ESLMode;
 	
+	int CursurIndex;
+	
+	Handler HandleCursurDisplay;
 	//////////////////////////////////////////////////
 	
 	//Fragment////////////////////////////////////////
@@ -94,11 +99,24 @@ public class EngineAutoShutdownFragment extends ParentFragment{
 		
 		ParentActivity.ScreenIndex = ParentActivity.SCREEN_STATE_MENU_MODE_ETC_AUTOSHUTDOWN_TOP;
 		ParentActivity._MenuBaseFragment._MenuInterTitleFragment.SetTitleText(ParentActivity.getResources().getString(R.string.Engine_Auto_Shutdown));
+		HandleCursurDisplay = new Handler() {
+			@Override
+			public void handleMessage(Message msg) {
+				CursurDisplay(msg.what);
+			}
+		};
 		return mRoot;
 	}
-	
+	@Override
+	public void onResume() {
+		// TODO Auto-generated method stub
+		super.onResume();
+		CursurFirstDisplay(EngineAutoShutdownStatus,EngineAutoShutdownType);
+	}
 	////////////////////////////////////////////////
 	
+	
+
 	
 
 	//Common Function//////////////////////////////
@@ -157,9 +175,7 @@ public class EngineAutoShutdownFragment extends ParentFragment{
 			ESLMode = CAN1Comm.Get_ESLMode_820_PGN65348();
 			ESLInterval = CAN1Comm.Get_ESLInterval_825_PGN65348();
 		}
-	
-		
-		
+
 		AutoShutdownStatusDisplay(EngineAutoShutdownStatus,EngineAutoShutdownType);
 		TimeTextDisplay(EngineAutoShutdownTime);
 		SetSeekBarPositionbyData(seekbarTime,EngineAutoShutdownTime);
@@ -167,6 +183,7 @@ public class EngineAutoShutdownFragment extends ParentFragment{
 		
 		textViewMax.setText(ParentActivity.GetSectoMinString(2400,ParentActivity.getResources().getString(string.Min),ParentActivity.getResources().getString(string.Sec)));
 		textViewMin.setText(ParentActivity.GetSectoMinString(120,ParentActivity.getResources().getString(string.Min),ParentActivity.getResources().getString(string.Sec)));
+		
 		
 	}
 	@Override
@@ -177,6 +194,9 @@ public class EngineAutoShutdownFragment extends ParentFragment{
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
+				
+				CursurIndex = 7;
+				HandleCursurDisplay.sendMessage(HandleCursurDisplay.obtainMessage(CursurIndex));
 				ClickOK();
 			}
 		});
@@ -185,6 +205,9 @@ public class EngineAutoShutdownFragment extends ParentFragment{
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
+				
+				CursurIndex = 6;
+				HandleCursurDisplay.sendMessage(HandleCursurDisplay.obtainMessage(CursurIndex));
 				ClickCancel();
 			}
 		});
@@ -193,7 +216,10 @@ public class EngineAutoShutdownFragment extends ParentFragment{
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
+				CursurIndex = 1;
+				HandleCursurDisplay.sendMessage(HandleCursurDisplay.obtainMessage(CursurIndex));
 				ClickOnOnce();
+				
 			}
 		});
 		radioOnAlways.setOnClickListener(new View.OnClickListener() {
@@ -201,6 +227,9 @@ public class EngineAutoShutdownFragment extends ParentFragment{
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
+				
+				CursurIndex = 2;
+				HandleCursurDisplay.sendMessage(HandleCursurDisplay.obtainMessage(CursurIndex));
 				ClickOnAlways();
 			}
 		});
@@ -209,6 +238,9 @@ public class EngineAutoShutdownFragment extends ParentFragment{
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
+				
+				CursurIndex = 3;
+				HandleCursurDisplay.sendMessage(HandleCursurDisplay.obtainMessage(CursurIndex));
 				ClickOff();
 			}
 		});
@@ -217,7 +249,10 @@ public class EngineAutoShutdownFragment extends ParentFragment{
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
+				CursurIndex = 5;
+				HandleCursurDisplay.sendMessage(HandleCursurDisplay.obtainMessage(CursurIndex));
 				ClickESL();
+				
 			}
 		});
 		seekbarTime.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
@@ -226,14 +261,18 @@ public class EngineAutoShutdownFragment extends ParentFragment{
 			public void onStopTrackingTouch(SeekBar seekBar) {
 				// TODO Auto-generated method stub
 				int progress;
+				CursurIndex = 4;
+				HandleCursurDisplay.sendMessage(HandleCursurDisplay.obtainMessage(CursurIndex));
 				progress = seekBar.getProgress();
 				EngineAutoShutdownTime = SetSeekBarPositionbyProgress(seekBar, progress);
 				TimeTextDisplay(EngineAutoShutdownTime);
+				
 			}
 			
 			@Override
 			public void onStartTrackingTouch(SeekBar seekBar) {
 				// TODO Auto-generated method stub
+				Log.d(TAG,"onStartTrackingTouch");
 				
 			}
 			
@@ -313,16 +352,19 @@ public class EngineAutoShutdownFragment extends ParentFragment{
 		LayoutOnOff(true);
 		EngineAutoShutdownStatus = CAN1CommManager.DATA_STATE_AUTOSHUTDOWN_ON;
 		EngineAutoShutdownType = CAN1CommManager.DATA_STATE_AUTOSHUTDOWN_ON_ONCE;
+		AutoShutdownStatusDisplay(EngineAutoShutdownStatus,EngineAutoShutdownType);
 	}
 	public void ClickOnAlways(){
 		LayoutOnOff(true);
 		EngineAutoShutdownStatus = CAN1CommManager.DATA_STATE_AUTOSHUTDOWN_ON;
 		EngineAutoShutdownType = CAN1CommManager.DATA_STATE_AUTOSHUTDOWN_ON_ALWAYS;
+		AutoShutdownStatusDisplay(EngineAutoShutdownStatus,EngineAutoShutdownType);
 	}
 	public void ClickOff(){
 		LayoutOnOff(false);
 		EngineAutoShutdownStatus = CAN1CommManager.DATA_STATE_AUTOSHUTDOWN_OFF;
 		EngineAutoShutdownType = 3;
+		AutoShutdownStatusDisplay(EngineAutoShutdownStatus,EngineAutoShutdownType);
 	}
 	public void ClickESL(){
 		ParentActivity.EngineAutoShutdownESLFlag = true;
@@ -334,14 +376,24 @@ public class EngineAutoShutdownFragment extends ParentFragment{
 	/////////////////////////////////////////////////////////////////////
 	public void LayoutOnOff(boolean flag){
 		if(flag == true){
-			layoutTime.setVisibility(View.VISIBLE);
-			layoutESL.setVisibility(View.VISIBLE);
-			imgViewLine.setVisibility(View.VISIBLE);
+//			layoutTime.setVisibility(View.VISIBLE);
+//			layoutESL.setVisibility(View.VISIBLE);
+//			imgViewLine.setVisibility(View.VISIBLE);
+			layoutTime.setAlpha((float)1);
+			layoutESL.setAlpha((float)1);
+			imgViewLine.setAlpha((float)1);
+			seekbarTime.setEnabled(true);
+			textViewESL.setClickable(true);
 			Log.d(TAG,"LayoutOn");
 		}else{
-			layoutTime.setVisibility(View.INVISIBLE);
-			layoutESL.setVisibility(View.INVISIBLE);
-			imgViewLine.setVisibility(View.INVISIBLE);
+//			layoutTime.setVisibility(View.INVISIBLE);
+//			layoutESL.setVisibility(View.INVISIBLE);
+//			imgViewLine.setVisibility(View.INVISIBLE);
+			layoutTime.setAlpha((float)0.2);
+			layoutESL.setAlpha((float)0.2);
+			imgViewLine.setAlpha((float)0.2);
+			seekbarTime.setEnabled(false);
+			textViewESL.setClickable(false);
 			Log.d(TAG,"LayoutOff");
 		}
 	}
@@ -403,14 +455,11 @@ public class EngineAutoShutdownFragment extends ParentFragment{
 		switch (mode) {
 		case CAN1CommManager.DATA_STATE_ESL_MODE_DISABLE:
 			str = ParentActivity.getResources().getString(string.Disable);
-			imgViewESL.setImageResource(R.drawable.btn_check_off);
 			break;
 		case CAN1CommManager.DATA_STATE_ESL_MODE_ENABLE_CONTINUOUS:
 			str = ParentActivity.getResources().getString(string.On_Always);
-			imgViewESL.setImageResource(R.drawable.btn_check_on);
 			break;
 		case CAN1CommManager.DATA_STATE_ESL_MODE_ENABLE_INTERVAL:
-			imgViewESL.setImageResource(R.drawable.btn_check_on);
 			switch (interval) {
 			case CAN1CommManager.DATA_STATE_ESL_INTERVAL_5MIN:
 				str = "5" + ParentActivity.getResources().getString(string.Min);
@@ -451,5 +500,201 @@ public class EngineAutoShutdownFragment extends ParentFragment{
 		textViewESL.setText(str);
 	}
 	/////////////////////////////////////////////////////////////////////
-	
+	public void ClickLeft(){
+		switch (CursurIndex) {
+		case 1:
+			CursurIndex = 3;
+			CursurDisplay(CursurIndex);
+			break;
+		case 2:
+			CursurIndex--;
+			CursurDisplay(CursurIndex);
+			break;
+		case 3:
+			CursurIndex--;
+			CursurDisplay(CursurIndex);
+			break;
+		case 4:
+			EngineAutoShutdownTime -= 6;
+			if(EngineAutoShutdownTime < MIN_LEVEL*6){
+				EngineAutoShutdownTime = MIN_LEVEL;
+			}
+			TimeTextDisplay(EngineAutoShutdownTime);
+			SetSeekBarPositionbyData(seekbarTime,EngineAutoShutdownTime);
+			break;
+		case 5:
+			CursurIndex--;
+			CursurDisplay(CursurIndex);
+			break;
+		case 6:
+			if(EngineAutoShutdownStatus == CAN1CommManager.DATA_STATE_AUTOSHUTDOWN_OFF){
+				CursurIndex = 7;
+				CursurDisplay(CursurIndex);
+			}else{
+				CursurIndex--;
+				CursurDisplay(CursurIndex);
+			}
+			break;
+		case 7:
+			CursurIndex--;
+			CursurDisplay(CursurIndex);
+			break;
+		default:
+			CursurIndex = 1;
+			CursurDisplay(CursurIndex);
+			break;
+		}
+		
+	}
+	public void ClickRight(){
+		switch (CursurIndex) {
+		case 1:
+			CursurIndex++;
+			CursurDisplay(CursurIndex);
+			break;
+		case 2:
+			CursurIndex++;
+			CursurDisplay(CursurIndex);
+			break;
+		case 3:
+			CursurIndex = 1;
+			CursurDisplay(CursurIndex);
+			
+			break;
+		case 4:
+			EngineAutoShutdownTime += 6;
+			if(EngineAutoShutdownTime > MAX_LEVEL*6){
+				EngineAutoShutdownTime = MAX_LEVEL;
+			}
+			TimeTextDisplay(EngineAutoShutdownTime);
+			SetSeekBarPositionbyData(seekbarTime,EngineAutoShutdownTime);
+			break;
+		case 5:
+			CursurIndex++;
+			CursurDisplay(CursurIndex);
+			break;
+		case 6:
+			CursurIndex++;
+			CursurDisplay(CursurIndex);
+			break;
+		case 7:
+			if(EngineAutoShutdownStatus == CAN1CommManager.DATA_STATE_AUTOSHUTDOWN_OFF){
+				CursurIndex--;
+				CursurDisplay(CursurIndex);
+			}else{
+				CursurIndex = 4;
+				CursurDisplay(CursurIndex);
+			}
+			break;
+		default:
+			CursurIndex = 1;
+			CursurDisplay(CursurIndex);
+			break;
+		}
+	}
+	public void ClickESC(){
+		switch (CursurIndex) {
+		case 1:
+		case 2:
+		case 3:
+		
+			ClickCancel();
+			break;
+			
+		case 4:
+		case 5:
+		case 6:
+		case 7:
+			CursurFirstDisplay(EngineAutoShutdownStatus,EngineAutoShutdownType);
+			break;
+		default:
+			break;
+		}
+	}
+	public void ClickEnter(){
+		switch (CursurIndex) {
+		case 1:
+			ClickOnOnce();
+			CursurIndex = 4;
+			CursurDisplay(CursurIndex);
+			break;
+		case 2:
+			ClickOnAlways();
+			CursurIndex = 4;
+			CursurDisplay(CursurIndex);
+			break;
+		case 3:
+			ClickOff();
+			CursurIndex = 7;
+			CursurDisplay(CursurIndex);
+			break;
+		case 4:
+			CursurIndex = 5;
+			CursurDisplay(CursurIndex);
+			break;
+		case 5:
+			ClickESL();
+			break;
+		case 6:
+			ClickCancel();
+			break;
+		case 7:
+			ClickOK();
+			break;
+		default:
+			break;
+		}
+	}
+	public void CursurFirstDisplay(int status, int type){
+		if(status == CAN1CommManager.DATA_STATE_AUTOSHUTDOWN_OFF){
+			LayoutOnOff(false);
+			CursurIndex = 3;
+			CursurDisplay(CursurIndex);
+		}else if(status == CAN1CommManager.DATA_STATE_AUTOSHUTDOWN_ON){
+			LayoutOnOff(true);
+			if(type == CAN1CommManager.DATA_STATE_AUTOSHUTDOWN_ON_ONCE){
+				CursurIndex = 1;
+				CursurDisplay(CursurIndex);
+			}else if(type == CAN1CommManager.DATA_STATE_AUTOSHUTDOWN_ON_ALWAYS){
+				CursurIndex = 2;
+				CursurDisplay(CursurIndex);
+			}
+		}
+	}
+	public void CursurDisplay(int Index){
+		imgbtnOK.setPressed(false);
+		imgbtnCancel.setPressed(false);
+		radioOnOnce.setPressed(false);
+		radioOnAlways.setPressed(false);
+		radioOff.setPressed(false);
+		seekbarTime.setPressed(false);
+		textViewESL.setPressed(false);
+
+		switch (CursurIndex) {
+			case 1:
+				radioOnOnce.setPressed(true);
+				break;
+			case 2:
+				radioOnAlways.setPressed(true);
+				break;
+			case 3:
+				radioOff.setPressed(true);
+				break;
+			case 4:
+				seekbarTime.setPressed(true);
+				break;
+			case 5:
+				textViewESL.setPressed(true);
+				break;
+			case 6:
+				imgbtnCancel.setPressed(true);
+				break;
+			case 7:
+				imgbtnOK.setPressed(true);
+				break;
+			default:
+				break;
+		}
+	}
+	/////////////////////////////////////////////////////////////////////
 }

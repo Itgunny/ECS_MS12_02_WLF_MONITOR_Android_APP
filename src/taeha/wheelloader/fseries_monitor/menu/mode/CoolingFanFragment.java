@@ -11,6 +11,8 @@ import taeha.wheelloader.fseries_monitor.main.ParentFragment;
 import taeha.wheelloader.fseries_monitor.main.R;
 import taeha.wheelloader.fseries_monitor.main.R.string;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.text.Layout;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -37,6 +39,10 @@ public class CoolingFanFragment extends ParentFragment{
 	
 	//VALUABLE////////////////////////////////////////
 	int CoolingFanReverse;
+	
+	int CursurIndex;
+	
+	Handler HandleCursurDisplay;
 	//////////////////////////////////////////////////
 	
 	//Fragment////////////////////////////////////////
@@ -66,8 +72,15 @@ public class CoolingFanFragment extends ParentFragment{
 		InitButtonListener();
 		
 		setCoolingFanReverseRadio(CoolingFanReverse);
+		CursurFirstDisplay(CoolingFanReverse);
 		ParentActivity.ScreenIndex = ParentActivity.SCREEN_STATE_MENU_MODE_ETC_COOLINGFAN_TOP;
 		ParentActivity._MenuBaseFragment._MenuInterTitleFragment.SetTitleText(ParentActivity.getResources().getString(R.string.Cooling_Fan_Reverse_Mode));
+		HandleCursurDisplay = new Handler() {
+			@Override
+			public void handleMessage(Message msg) {
+				CursurDisplay(msg.what);
+			}
+		};
 		return mRoot;
 	}
 	
@@ -102,6 +115,8 @@ public class CoolingFanFragment extends ParentFragment{
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
+				CursurIndex = 3;
+				HandleCursurDisplay.sendMessage(HandleCursurDisplay.obtainMessage(CursurIndex));
 				ClickManual();
 			}
 		});
@@ -110,6 +125,8 @@ public class CoolingFanFragment extends ParentFragment{
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
+				CursurIndex = 2;
+				HandleCursurDisplay.sendMessage(HandleCursurDisplay.obtainMessage(CursurIndex));
 				ClickAuto();
 			}
 		});
@@ -118,6 +135,8 @@ public class CoolingFanFragment extends ParentFragment{
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
+				CursurIndex = 1;
+				HandleCursurDisplay.sendMessage(HandleCursurDisplay.obtainMessage(CursurIndex));
 				ClickOff();
 			}
 		});
@@ -174,7 +193,6 @@ public class CoolingFanFragment extends ParentFragment{
 			radioOff.setChecked(true);
 			radioManual.setChecked(false);
 			radioAuto.setChecked(false);
-		
 			ClickOff();
 			break;
 		case CAN1CommManager.DATA_STATE_REVERSEFAN_MANUAL:
@@ -182,18 +200,133 @@ public class CoolingFanFragment extends ParentFragment{
 			radioManual.setChecked(true);
 			radioAuto.setChecked(false);
 			ClickManual();
-			
 			break;
 		case CAN1CommManager.DATA_STATE_REVERSEFAN_AUTO:
 			radioOff.setChecked(false);
 			radioManual.setChecked(false);
 			radioAuto.setChecked(true);
 			ClickAuto();
-			
 			break;
 
 		default:
 			break;
+		}
+	}
+	/////////////////////////////////////////////////////////////////////
+	public void setCursurIndex(int Index){
+		CursurIndex = Index;
+	}
+	public void ClickLeft(){
+		switch (CursurIndex) {
+		case 1:
+			CursurIndex = 3;
+			CursurDisplay(CursurIndex);
+			break;
+		case 2:
+			CursurIndex--;
+			CursurDisplay(CursurIndex);
+			break;
+		case 3:
+			CursurIndex--;
+			CursurDisplay(CursurIndex);
+			break;
+		default:
+			CursurIndex = 1;
+			CursurDisplay(CursurIndex);
+			break;
+		}
+	}
+	public void ClickRight(){
+		switch (CursurIndex) {
+		case 1:
+			CursurIndex++;
+			CursurDisplay(CursurIndex);
+		
+			break;
+		case 2:
+			CursurIndex++;
+			CursurDisplay(CursurIndex);
+			
+			break;
+		case 3:
+			CursurIndex = 1;
+			CursurDisplay(CursurIndex);
+			
+			break;
+		default:
+			CursurIndex = 1;
+			CursurDisplay(CursurIndex);
+			break;
+		}
+	}
+	public void ClickESC(){
+		
+	}
+	public void ClickEnter(){
+		Log.d(TAG,"ClickEnter");
+		switch (CursurIndex) {
+		case 1:
+			CursurIndex = 4;
+			CursurDisplay(CursurIndex);
+			_CoolingFanOffFragment.setCursurIndex(5);
+			setCoolingFanReverseRadio(CAN1CommManager.DATA_STATE_REVERSEFAN_OFF);
+			_CoolingFanOffFragment.CursurDisplay(5);
+			break;
+		case 2:
+			CursurIndex = 4;
+			CursurDisplay(CursurIndex);
+			_CoolingFanAutoFragment.setCursurIndex(4);
+			setCoolingFanReverseRadio(CAN1CommManager.DATA_STATE_REVERSEFAN_AUTO);
+			_CoolingFanAutoFragment.CursurDisplay(4);
+			break;
+		case 3:
+			CursurIndex = 4;
+			CursurDisplay(CursurIndex);
+			_CoolingFanManualFragment.setCursurIndex(4);
+			setCoolingFanReverseRadio(CAN1CommManager.DATA_STATE_REVERSEFAN_MANUAL);
+			_CoolingFanManualFragment.CursurDisplay(4);
+			break;
+		default:
+
+			break;
+		}
+	}
+	public void CursurFirstDisplay(int data){
+		switch (data) {
+		case CAN1CommManager.DATA_STATE_REVERSEFAN_OFF:
+			CursurIndex = 1;
+			CursurDisplay(CursurIndex);
+			break;
+		case CAN1CommManager.DATA_STATE_REVERSEFAN_AUTO:
+			CursurIndex = 2;
+			CursurDisplay(CursurIndex);
+			break;
+		case CAN1CommManager.DATA_STATE_REVERSEFAN_MANUAL:
+			CursurIndex = 3;
+			CursurDisplay(CursurIndex);
+			break;
+		default:
+			break;
+		}
+	}
+	public void CursurDisplay(int Index){
+
+		radioOff.setPressed(false);
+		radioAuto.setPressed(false);
+		radioManual.setPressed(false);
+
+		switch (CursurIndex) {
+			case 1:
+				radioOff.setPressed(true);
+				break;
+			case 2:
+				radioAuto.setPressed(true);
+				break;
+			case 3:
+				radioManual.setPressed(true);
+				break;
+			default:
+				break;
 		}
 	}
 	/////////////////////////////////////////////////////////////////////

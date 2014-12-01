@@ -81,6 +81,14 @@ public class SpeedometerInitPopup extends ParentPopup{
 	public void InitValuable(){
 		super.InitValuable();
 		bClickOKFlag = false;
+		CursurIndex = 1;
+		CursurDisplay(CursurIndex);
+		
+		imgbtnOK.setVisibility(View.VISIBLE);
+		imgbtnCancel.setVisibility(View.VISIBLE);
+		textViewOK.setVisibility(View.VISIBLE);
+		textViewCancel.setVisibility(View.VISIBLE);
+		textViewTitle.setText(ParentActivity.getResources().getString(string.Initialize_));
 	}
 	@Override
 	public void dismiss() {
@@ -89,11 +97,12 @@ public class SpeedometerInitPopup extends ParentPopup{
 		ParentActivity.ScreenIndex = ParentActivity.SCREEN_STATE_MENU_MODE_ETC_FREQ_TOP;
 		try {
 			ParentActivity._MenuBaseFragment._SpeedometerFreqFragment.InitText();
+			ParentActivity._MenuBaseFragment._SpeedometerFreqFragment.CursurDisplay(13);
 		} catch (NullPointerException e) {
 			// TODO: handle exception
 			Log.e(TAG,"NullPointerException dismiss");
 		}
-		
+	
 	}
 
 	@Override
@@ -189,5 +198,69 @@ public class SpeedometerInitPopup extends ParentPopup{
 			mPopupOffTimer = null;
 		}
 		
+	}
+	//////////////////////////////////////////////////////////////////////
+	public void ClickLeft(){
+		switch (CursurIndex) {
+		case 1:
+			CursurIndex = 2;
+			CursurDisplay(CursurIndex);
+			break;
+		case 2:
+			CursurIndex--;
+			CursurDisplay(CursurIndex);
+			break;
+		default:
+			CursurIndex = 1;
+			CursurDisplay(CursurIndex);
+			break;
+		}
+	}
+	public void ClickRight(){
+		switch (CursurIndex) {
+		case 1:
+			CursurIndex++;
+			CursurDisplay(CursurIndex);
+			break;
+		case 2:
+			CursurIndex = 1;
+			CursurDisplay(CursurIndex);
+			break;
+		default:
+			CursurIndex = 1;
+			CursurDisplay(CursurIndex);
+			break;
+		}
+	}
+	public void ClickESC(){
+		ClickCancel();
+	}
+	public void ClickEnter(){
+		switch (CursurIndex) {
+		case 1:
+			ClickOK();
+			break;
+		case 2:
+			ClickCancel();
+			break;
+		default:
+			
+			break;
+		}
+	}
+	////////////////////////////////////////////////////////////////////////////////
+	public void CursurDisplay(int Index){
+		switch (Index) {
+		case 1:
+			imgbtnOK.setPressed(true);
+			imgbtnCancel.setPressed(false);
+			break;
+		case 2:
+			imgbtnOK.setPressed(false);
+			imgbtnCancel.setPressed(true);
+			break;
+		default:
+			break;
+		}
 	}
 }

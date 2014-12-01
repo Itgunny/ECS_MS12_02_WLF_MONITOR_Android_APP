@@ -12,6 +12,8 @@ import taeha.wheelloader.fseries_monitor.main.ParentFragment;
 import taeha.wheelloader.fseries_monitor.main.R;
 import taeha.wheelloader.fseries_monitor.main.R.string;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.text.Layout;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -41,6 +43,9 @@ public class ServiceMenuSensorMonitoringFragment extends ParentFragment{
 	//VALUABLE////////////////////////////////////////
 	int[] StatusValue;
 	boolean BackgroundFlag;
+	
+	int CursurIndex;
+	Handler HandleCursurDisplay;
 	//////////////////////////////////////////////////
 	
 	//Fragment////////////////////////////////////////
@@ -69,6 +74,13 @@ public class ServiceMenuSensorMonitoringFragment extends ParentFragment{
 		
 		ParentActivity.ScreenIndex = ParentActivity.SCREEN_STATE_MENU_MANAGEMENT_SERVICE_SENSORMONITORING_TOP;
 		ParentActivity._MenuBaseFragment._MenuInterTitleFragment.SetTitleText(ParentActivity.getResources().getString(R.string.Sensor_Monitoring));
+		HandleCursurDisplay = new Handler() {
+			@Override
+			public void handleMessage(Message msg) {
+			
+				CursurDisplay(msg.what);
+			}
+		};
 		return mRoot;
 	}
 	
@@ -96,6 +108,9 @@ public class ServiceMenuSensorMonitoringFragment extends ParentFragment{
 		listView.setAdapter(adapter);
 		
 		BackgroundFlag = true;
+		
+		CursurIndex = 1;
+		CursurDisplay(CursurIndex);
 	}
 	@Override
 	protected void InitButtonListener() {
@@ -528,6 +543,30 @@ public class ServiceMenuSensorMonitoringFragment extends ParentFragment{
 		}
 		
 		adapter.notifyDataSetChanged();
+	}
+	/////////////////////////////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////////
+	public void ClickLeft(){
+
+	}
+	public void ClickRight(){	
+
+	}
+	public void ClickESC(){
+		ClickOK();
+	}
+	public void ClickEnter(){
+		ClickOK();
+	}
+	public void CursurDisplay(int Index){
+		switch (Index) {
+		case 1:
+			imgbtnOK.setPressed(true);
+			break;
+		
+		default:
+			break;
+		}
 	}
 	/////////////////////////////////////////////////////////////////////
 	

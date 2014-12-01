@@ -39,6 +39,13 @@ public class ESLPasswordFragment extends PasswordFragment{
 			
 			}
 		};
+		HandleCursurDisplay = new Handler() {
+			@Override
+			public void handleMessage(Message msg) {
+			
+				CursurDisplay(msg.what);
+			}
+		};
 		
 		ParentActivity.ScreenIndex = ParentActivity.SCREEN_STATE_MAIN_ESL_PASSWORD;
 		return mRoot;
@@ -81,4 +88,6 @@ public class ESLPasswordFragment extends PasswordFragment{
 		Log.d(TAG,"showUserPasswordNextScreen");
 		HandleESLPassword.sendMessage(HandleESLPassword.obtainMessage(0));
 	}
+	////////////////////////////////////////////////////////////////////////////////////////
+
 }

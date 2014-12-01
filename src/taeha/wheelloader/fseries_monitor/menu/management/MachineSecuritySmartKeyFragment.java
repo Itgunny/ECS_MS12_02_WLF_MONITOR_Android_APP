@@ -9,12 +9,15 @@ import taeha.wheelloader.fseries_monitor.animation.DisappearAnimation;
 import taeha.wheelloader.fseries_monitor.animation.MainBodyShiftAnimation;
 import taeha.wheelloader.fseries_monitor.animation.LeftRightShiftAnimation;
 import taeha.wheelloader.fseries_monitor.main.CAN1CommManager;
+import taeha.wheelloader.fseries_monitor.main.ESLCheckFragment.SMKCheckTimerClass;
 import taeha.wheelloader.fseries_monitor.main.Home;
 import taeha.wheelloader.fseries_monitor.main.ParentFragment;
 import taeha.wheelloader.fseries_monitor.main.R;
 import taeha.wheelloader.fseries_monitor.main.R.string;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.text.Layout;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -57,6 +60,10 @@ public class MachineSecuritySmartKeyFragment extends ParentFragment{
 	int ButtonIndex;
 	
 	private Timer mManagementDisplayTimer = null;
+	
+	int CursurIndex;
+	
+	Handler HandleCursurDisplay;
 	//////////////////////////////////////////////////
 	
 	//Fragment////////////////////////////////////////
@@ -83,13 +90,27 @@ public class MachineSecuritySmartKeyFragment extends ParentFragment{
 		InitValuables();
 		InitButtonListener();
 		
+		CursurFirstDisplay(SmartKeyUse);
 		ParentActivity.ScreenIndex = ParentActivity.SCREEN_STATE_MENU_MANAGEMENT_MACHINESECURITY_SMARTKEY;
 		ParentActivity._MenuBaseFragment._MenuInterTitleFragment.SetTitleText(ParentActivity.getResources().getString(R.string.Smart_Key));
+		HandleCursurDisplay = new Handler() {
+			@Override
+			public void handleMessage(Message msg) {
+				CursurDisplay(msg.what);
+			}
+		};
 		return mRoot;
 	}
-	
+	@Override
+	public void onResume() {
+		// TODO Auto-generated method stub
+		super.onResume();
+		SmartKeyUseDisplay(SmartKeyUse);
+	}
 	////////////////////////////////////////////////
 	
+	
+
 	
 
 	//Common Function//////////////////////////////
@@ -116,7 +137,7 @@ public class MachineSecuritySmartKeyFragment extends ParentFragment{
 		super.InitValuables();
 		
 		SmartKeyUse = ParentActivity.SmartKeyUse;
-		SmartKeyUseDisplay(SmartKeyUse);
+		
 		
 		TagCount = 0;
 		Result = 0;
@@ -130,6 +151,8 @@ public class MachineSecuritySmartKeyFragment extends ParentFragment{
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
+				CursurIndex = 6;
+				HandleCursurDisplay.sendMessage(HandleCursurDisplay.obtainMessage(CursurIndex));
 				ClickOK();
 			}
 		});
@@ -138,6 +161,8 @@ public class MachineSecuritySmartKeyFragment extends ParentFragment{
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
+				CursurIndex = 5;
+				HandleCursurDisplay.sendMessage(HandleCursurDisplay.obtainMessage(CursurIndex));
 				ClickCancel();
 			}
 		});
@@ -146,6 +171,8 @@ public class MachineSecuritySmartKeyFragment extends ParentFragment{
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
+				CursurIndex = 3;
+				HandleCursurDisplay.sendMessage(HandleCursurDisplay.obtainMessage(CursurIndex));
 				ClickRegistration();
 			}
 		});
@@ -154,6 +181,8 @@ public class MachineSecuritySmartKeyFragment extends ParentFragment{
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
+				CursurIndex = 4;
+				HandleCursurDisplay.sendMessage(HandleCursurDisplay.obtainMessage(CursurIndex));
 				ClickDelete();
 			}
 		});
@@ -162,6 +191,8 @@ public class MachineSecuritySmartKeyFragment extends ParentFragment{
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
+				CursurIndex = 1;
+				HandleCursurDisplay.sendMessage(HandleCursurDisplay.obtainMessage(CursurIndex));
 				ClickDisable();
 			}
 		});
@@ -170,6 +201,8 @@ public class MachineSecuritySmartKeyFragment extends ParentFragment{
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
+				CursurIndex = 2;
+				HandleCursurDisplay.sendMessage(HandleCursurDisplay.obtainMessage(CursurIndex));
 				ClickEnable();
 			}
 		});
@@ -250,12 +283,18 @@ public class MachineSecuritySmartKeyFragment extends ParentFragment{
 		case CAN1CommManager.DATA_STATE_SMARTKEY_USE_OFF:
 			radioDisable.setChecked(true);
 			radioEnable.setChecked(false);
-			layoutContents.setVisibility(View.INVISIBLE);
+			//layoutContents.setVisibility(View.INVISIBLE);
+			layoutContents.setAlpha((float)0.2);
+			textViewRegistration.setClickable(false);
+			textViewDelete.setClickable(false);
 			break;
 		case CAN1CommManager.DATA_STATE_SMARTKEY_USE_ON:
 			radioDisable.setChecked(false);
 			radioEnable.setChecked(true);
 			layoutContents.setVisibility(View.VISIBLE);
+			layoutContents.setAlpha((float)1);
+			textViewRegistration.setClickable(true);
+			textViewDelete.setClickable(true);
 			break;
 		default:
 			break;
@@ -342,6 +381,150 @@ public class MachineSecuritySmartKeyFragment extends ParentFragment{
 		
 	}
 	/////////////////////////////////////////////////////////////////////
-	
+	public void ClickLeft(){
+		switch (CursurIndex) {
+		case 1:
+			CursurIndex = 2;
+			CursurDisplay(CursurIndex);
+			break;
+		case 2:
+			CursurIndex = 1;
+			CursurDisplay(CursurIndex);
+			break;
+		case 3:
+			CursurIndex = 6;
+			CursurDisplay(CursurIndex);
+			break;
+		case 4:
+		case 5:
+		case 6:
+			CursurIndex--;
+			CursurDisplay(CursurIndex);
+			break;
+		default:
+			CursurIndex = 1;
+			CursurDisplay(CursurIndex);
+			break;
+		}
+		
+	}
+	public void ClickRight(){
+		switch (CursurIndex) {
+		case 1:
+			CursurIndex = 2;
+			CursurDisplay(CursurIndex);
+			break;
+		case 2:
+			CursurIndex = 1;
+			CursurDisplay(CursurIndex);
+			break;
+		case 3:
+		case 4:
+		case 5:
+			CursurIndex++;
+			CursurDisplay(CursurIndex);
+			break;
+		case 6:
+			CursurIndex = 3;
+			CursurDisplay(CursurIndex);
+			break;
+		default:
+			CursurIndex = 1;
+			CursurDisplay(CursurIndex);
+			break;
+		}
+	}
+	public void ClickESC(){
+		switch (CursurIndex) {
+		case 1:
+		case 2:
+			ClickCancel();
+			break;
+		case 3:
+		case 4:
+		case 5:
+		case 6:
+			CursurFirstDisplay(SmartKeyUse);
+			break;
+
+		default:
+			break;
+		}
+	}
+	public void ClickEnter(){
+		switch (CursurIndex) {
+		case 1:
+			ClickDisable();
+			CursurIndex = 6;
+			CursurDisplay(CursurIndex);
+			break;
+		case 2:
+			ClickEnable();
+			CursurIndex = 6;
+			CursurDisplay(CursurIndex);
+			break;
+		case 3:
+			ClickRegistration();
+			break;
+		case 4:
+			ClickDelete();
+			break;
+		case 5:
+			ClickCancel();
+			break;
+		case 6:
+			ClickOK();
+			break;
+		
+		default:
+			break;
+		}
+	}
+	public void CursurFirstDisplay(int data){
+		switch (data) {
+		case CAN1CommManager.DATA_STATE_SMARTKEY_USE_OFF:
+			CursurIndex = 1;
+			CursurDisplay(CursurIndex);
+			break;
+		case CAN1CommManager.DATA_STATE_SMARTKEY_USE_ON:
+			CursurIndex = 2;
+			CursurDisplay(CursurIndex);
+			break;
+		default:
+			break;
+		}
+	}
+	public void CursurDisplay(int Index){
+		imgbtnOK.setPressed(false);
+		imgbtnCancel.setPressed(false);
+		radioDisable.setPressed(false);
+		radioEnable.setPressed(false);
+		textViewRegistration.setPressed(false);
+		textViewDelete.setPressed(false);
+
+		switch (CursurIndex) {
+			case 1:
+				radioDisable.setPressed(true);
+				break;
+			case 2:
+				radioEnable.setPressed(true);
+				break;
+			case 3:
+				textViewRegistration.setPressed(true);
+				break;
+			case 4:
+				textViewDelete.setPressed(true);
+				break;
+			case 5:
+				imgbtnCancel.setPressed(true);
+				break;
+			case 6:
+				imgbtnOK.setPressed(true);
+				break;
+			default:
+				break;
+		}
+	}
+	/////////////////////////////////////////////////////////////////////
 	
 }

@@ -1,6 +1,8 @@
 package taeha.wheelloader.fseries_monitor.menu.mode;
 
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,6 +16,7 @@ import taeha.wheelloader.fseries_monitor.menu.PasswordFragment;
 public class EngineAutoShutdownPWFragment extends PasswordFragment{
 
 	ImageButton imgbtnCancel;
+	
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
@@ -29,6 +32,13 @@ public class EngineAutoShutdownPWFragment extends PasswordFragment{
 		
 		ParentActivity.ScreenIndex = ParentActivity.SCREEN_STATE_MENU_MODE_ETC_AUTOSHUTDOWN_PW;
 		ParentActivity._MenuBaseFragment._MenuInterTitleFragment.SetTitleText(ParentActivity.getResources().getString(R.string.Engine_Auto_Shutdown));
+		HandleCursurDisplay = new Handler() {
+			@Override
+			public void handleMessage(Message msg) {
+			
+				CursurDisplay(msg.what);
+			}
+		};
 		return mRoot;
 	}
 	
@@ -156,4 +166,21 @@ public class EngineAutoShutdownPWFragment extends PasswordFragment{
 			ParentActivity.StartAnimationRunningTimer();
 		ParentActivity._MenuBaseFragment.showBodyEngineAutoShutdown();
 	}
+	/////////////////////////////////////////////////////////////////////////////////////
+	public void ClickLeft(){
+		super.ClickLeft();
+	}
+	public void ClickRight(){	
+		super.ClickRight();
+	}
+	public void ClickESC(){
+		ClickCancel();
+	}
+	public void ClickEnter(){
+		super.ClickEnter();
+	}
+	public void CursurDisplay(int Index){
+		super.CursurDisplay(Index);
+	}
+	/////////////////////////////////////////////////////////////////////////////////////
 }

@@ -15,6 +15,8 @@ import taeha.wheelloader.fseries_monitor.main.R;
 import taeha.wheelloader.fseries_monitor.main.R.string;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.text.Layout;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -60,6 +62,9 @@ public class MaintenanceChangeCycleFragment extends ParentFragment{
 	int IntervalSetting;
 	
 	boolean bFirstClickFlag;
+	
+	Handler HandleCursurDisplay;
+	int CursurIndex;
 	//////////////////////////////////////////////////
 	
 	//Fragment////////////////////////////////////////
@@ -85,8 +90,14 @@ public class MaintenanceChangeCycleFragment extends ParentFragment{
 		InitResource();
 		InitValuables();
 		InitButtonListener();
-		
+		CursurDisplay(CursurIndex);
 		ParentActivity.ScreenIndex = ParentActivity.SCREEN_STATE_MENU_MANAGEMENT_MAINTENANCE_DETAIL_CHANGECYCLE;
+		HandleCursurDisplay = new Handler() {
+			@Override
+			public void handleMessage(Message msg) {
+				CursurDisplay(msg.what);
+			}
+		};
 		TitleDisplay(MaintenanceItem);
 		return mRoot;
 	}
@@ -133,6 +144,7 @@ public class MaintenanceChangeCycleFragment extends ParentFragment{
 		}
 		
 		bFirstClickFlag = true;
+		CursurIndex = 1;
 	}
 	@Override
 	protected void InitButtonListener() {
@@ -142,6 +154,8 @@ public class MaintenanceChangeCycleFragment extends ParentFragment{
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
+				CursurIndex = 14;
+				HandleCursurDisplay.sendMessage(HandleCursurDisplay.obtainMessage(CursurIndex));
 				ClickOK();
 			}
 		});
@@ -150,6 +164,8 @@ public class MaintenanceChangeCycleFragment extends ParentFragment{
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
+				CursurIndex = 13;
+				HandleCursurDisplay.sendMessage(HandleCursurDisplay.obtainMessage(CursurIndex));
 				ClickCancel();
 			}
 		});
@@ -158,6 +174,8 @@ public class MaintenanceChangeCycleFragment extends ParentFragment{
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
+				CursurIndex = 1;
+				HandleCursurDisplay.sendMessage(HandleCursurDisplay.obtainMessage(CursurIndex));
 				ClickNum1();
 			}
 		});
@@ -166,6 +184,8 @@ public class MaintenanceChangeCycleFragment extends ParentFragment{
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
+				CursurIndex = 2;
+				HandleCursurDisplay.sendMessage(HandleCursurDisplay.obtainMessage(CursurIndex));
 				ClickNum2();
 			}
 		});
@@ -174,6 +194,8 @@ public class MaintenanceChangeCycleFragment extends ParentFragment{
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
+				CursurIndex = 3;
+				HandleCursurDisplay.sendMessage(HandleCursurDisplay.obtainMessage(CursurIndex));
 				ClickNum3();
 			}
 		});
@@ -182,6 +204,8 @@ public class MaintenanceChangeCycleFragment extends ParentFragment{
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
+				CursurIndex = 4;
+				HandleCursurDisplay.sendMessage(HandleCursurDisplay.obtainMessage(CursurIndex));
 				ClickNum4();
 			}
 		});
@@ -190,6 +214,8 @@ public class MaintenanceChangeCycleFragment extends ParentFragment{
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
+				CursurIndex = 5;
+				HandleCursurDisplay.sendMessage(HandleCursurDisplay.obtainMessage(CursurIndex));
 				ClickNum5();
 			}
 		});
@@ -198,6 +224,8 @@ public class MaintenanceChangeCycleFragment extends ParentFragment{
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
+				CursurIndex = 6;
+				HandleCursurDisplay.sendMessage(HandleCursurDisplay.obtainMessage(CursurIndex));
 				ClickNum6();
 			}
 		});
@@ -206,6 +234,8 @@ public class MaintenanceChangeCycleFragment extends ParentFragment{
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
+				CursurIndex = 7;
+				HandleCursurDisplay.sendMessage(HandleCursurDisplay.obtainMessage(CursurIndex));
 				ClickNum7();
 			}
 		});
@@ -214,6 +244,8 @@ public class MaintenanceChangeCycleFragment extends ParentFragment{
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
+				CursurIndex = 8;
+				HandleCursurDisplay.sendMessage(HandleCursurDisplay.obtainMessage(CursurIndex));
 				ClickNum8();
 			}
 		});
@@ -222,6 +254,8 @@ public class MaintenanceChangeCycleFragment extends ParentFragment{
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
+				CursurIndex = 9;
+				HandleCursurDisplay.sendMessage(HandleCursurDisplay.obtainMessage(CursurIndex));
 				ClickNum9();
 			}
 		});
@@ -230,6 +264,8 @@ public class MaintenanceChangeCycleFragment extends ParentFragment{
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
+				CursurIndex = 11;
+				HandleCursurDisplay.sendMessage(HandleCursurDisplay.obtainMessage(CursurIndex));
 				ClickNum0();
 			}
 		});
@@ -238,7 +274,9 @@ public class MaintenanceChangeCycleFragment extends ParentFragment{
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
-				ClickEnter();
+				CursurIndex = 10;
+				HandleCursurDisplay.sendMessage(HandleCursurDisplay.obtainMessage(CursurIndex));
+				ClickEnterButton();
 			}
 		});
 		imgbtnBack.setOnClickListener(new View.OnClickListener() {
@@ -246,6 +284,8 @@ public class MaintenanceChangeCycleFragment extends ParentFragment{
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
+				CursurIndex = 12;
+				HandleCursurDisplay.sendMessage(HandleCursurDisplay.obtainMessage(CursurIndex));
 				ClickBack();
 			}
 		});
@@ -337,7 +377,7 @@ public class MaintenanceChangeCycleFragment extends ParentFragment{
 		IntervalSetting = 0;
 		IntervalDisplay(IntervalSetting);
 	}
-	public void ClickEnter(){
+	public void ClickEnterButton(){
 		if(ParentActivity.AnimationRunningFlag == true)
 			return;
 		else
@@ -466,7 +506,180 @@ public class MaintenanceChangeCycleFragment extends ParentFragment{
 		return _result;
 	}
 	/////////////////////////////////////////////////////////////////////
-	
+	/////////////////////////////////////////////////////////////////////
+	public void ClickLeft(){
+		switch (CursurIndex) {
+		case 1:
+			CursurIndex = 14;
+			CursurDisplay(CursurIndex);
+			break;
+		case 2:
+		case 3:
+		case 4:
+		case 5:
+		case 6:
+		case 7:
+		case 8:
+		case 9:
+		case 10:
+		case 11:
+		case 12:
+		case 13:
+		case 14:
+			CursurIndex--;
+			CursurDisplay(CursurIndex);
+			break;
+		default:
+			CursurIndex = 1;
+			CursurDisplay(CursurIndex);
+			break;
+		}
+		
+	}
+	public void ClickRight(){
+		switch (CursurIndex) {
+		case 1:
+
+		case 2:
+		case 3:
+		case 4:
+		case 5:
+		case 6:
+		case 7:
+		case 8:
+		case 9:
+		case 10:
+		case 11:
+		case 12:
+		case 13:
+			CursurIndex++;
+			CursurDisplay(CursurIndex);
+			break;
+		case 14:
+			CursurIndex = 1;
+			CursurDisplay(CursurIndex);
+			break;
+		default:
+			CursurIndex = 1;
+			CursurDisplay(CursurIndex);
+			break;
+		}
+	}
+	public void ClickESC(){
+		ClickCancel();
+	}
+	public void ClickEnter(){
+		switch (CursurIndex) {
+		case 1:
+			ClickNum1();
+			break;
+		case 2:
+			ClickNum2();
+			break;
+		case 3:
+			ClickNum3();
+			break;
+		case 4:
+			ClickNum4();
+			break;
+		case 5:
+			ClickNum5();
+			break;
+		case 6:
+			ClickNum6();
+			break;
+		case 7:
+			ClickNum7();
+			break;
+		case 8:
+			ClickNum8();
+			break;
+		case 9:
+			ClickNum9();
+			break;
+		case 10:
+			ClickBack();
+			break;
+		case 11:
+			ClickNum0();
+			break;
+		case 12:
+			ClickEnterButton();
+			break;
+		case 13:
+			ClickCancel();
+			break;
+		case 14:
+			ClickOK();
+			break;
+		default:
+			break;
+		}
+	}
+	public void CursurDisplay(int Index){
+		imgbtnOK.setPressed(false);
+		imgbtnCancel.setPressed(false);
+
+		textViewNum1.setPressed(false);
+		textViewNum2.setPressed(false);
+		textViewNum3.setPressed(false);
+		textViewNum4.setPressed(false);
+		textViewNum5.setPressed(false);
+		textViewNum6.setPressed(false);
+		textViewNum7.setPressed(false);
+		textViewNum8.setPressed(false);
+		textViewNum9.setPressed(false);
+		textViewNum0.setPressed(false);
+		imgbtnBack.setPressed(false);
+		imgbtnEnter.setPressed(false);
+
+		switch (Index) {
+		case 1:
+			textViewNum1.setPressed(true);
+			break;
+		case 2:
+			textViewNum2.setPressed(true);
+			break;
+		case 3:
+			textViewNum3.setPressed(true);
+			break;
+		case 4:
+			textViewNum4.setPressed(true);
+			break;
+		case 5:
+			textViewNum5.setPressed(true);
+			break;
+		case 6:
+			textViewNum6.setPressed(true);
+			break;
+		case 7:
+			textViewNum7.setPressed(true);
+			break;
+		case 8:
+			textViewNum8.setPressed(true);
+			break;
+		case 9:
+			textViewNum9.setPressed(true);
+			break;
+		case 10:
+			imgbtnBack.setPressed(true);
+			break;
+		case 11:
+			textViewNum0.setPressed(true);
+			break;
+		case 12:
+			imgbtnEnter.setPressed(true);
+			break;
+		case 13:
+			imgbtnCancel.setPressed(true);
+			break;
+		case 14:
+			imgbtnOK.setPressed(true);
+			break;
+		default:
+			break;
+		}
+	}
 	/////////////////////////////////////////////////////////////////////
 	
 	

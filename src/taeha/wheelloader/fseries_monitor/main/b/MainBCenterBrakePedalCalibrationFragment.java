@@ -88,7 +88,6 @@ public class MainBCenterBrakePedalCalibrationFragment extends ParentFragment{
 		imgViewGearLevelDown = (ImageView)mRoot.findViewById(R.id.imageView_center_main_b_brakepedal_gear_level_down);
 		
 		layoutBG = (RelativeLayout)mRoot.findViewById(R.id.RelativeLayout_center_main_b_brakepedal);
-		
 	}
 	
 	protected void InitValuables() {

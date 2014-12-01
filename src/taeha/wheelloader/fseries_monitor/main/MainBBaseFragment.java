@@ -1436,10 +1436,82 @@ public class MainBBaseFragment extends ParentFragment{
 				ParentActivity.ExitCam();
 			}
 			break;
+		case CAN1CommManager.LEFT:
+			
+			break;
+		case CAN1CommManager.RIGHT:
+			
+			break;
+		case CAN1CommManager.ESC:
+			ClickKeyButtonESC();
+			break;
+		case CAN1CommManager.ENTER:
+			
+			break;
+		case CAN1CommManager.MENU:
+			Log.d(TAG,"Click MENU");
+			_MainBUpperMenuBarFragment.ClickMenu();
+			break;
 		default:
 			break;
 		}
 				
 
+	}
+	
+	public void ClickKeyButtonESC(){
+		switch (ParentActivity.ScreenIndex) {
+		case Home.SCREEN_STATE_MAIN_B_RIGHTUP_ENGINE_MODE:
+		case Home.SCREEN_STATE_MAIN_B_RIGHTUP_ENGINE_WARMINGUP:
+			showRightUptoDefaultScreenAnimation();
+			break;
+		case Home.SCREEN_STATE_MAIN_B_RIGHTDOWN_CCOMODE:
+		case Home.SCREEN_STATE_MAIN_B_RIGHTDOWN_SHIFTMODE:
+		case Home.SCREEN_STATE_MAIN_B_RIGHTDOWN_TCLOCKUP:
+			showRightDowntoDefaultScreenAnimation();
+			break;
+		case Home.SCREEN_STATE_MAIN_B_LEFTUP_MACHINESTATUS:
+			showLeftUptoDefaultScreenAnimation();
+			break;
+		case Home.SCREEN_STATE_MAIN_B_LEFTDOWN_HOURODOMETER:
+			showLeftDowntoDefaultScreenAnimation();
+			break;
+		case Home.SCREEN_STATE_MAIN_B_QUICK_TOP:
+			showDefaultScreenAnimation();
+			break;
+		case Home.SCREEN_STATE_MAIN_B_KEY_MAINLIGHT:
+		case Home.SCREEN_STATE_MAIN_B_KEY_WORKLIGHT:
+		case Home.SCREEN_STATE_MAIN_B_KEY_AUTOGREASE:
+		case Home.SCREEN_STATE_MAIN_B_KEY_QUICKCOUPLER:
+		case Home.SCREEN_STATE_MAIN_B_KEY_RIDECONTROL:
+		case Home.SCREEN_STATE_MAIN_B_KEY_WORKLOAD:
+		case Home.SCREEN_STATE_MAIN_B_KEY_BEACONLAMP:
+		case Home.SCREEN_STATE_MAIN_B_KEY_REARWIPER:
+		case Home.SCREEN_STATE_MAIN_B_KEY_MIRRORHEAT:
+		case Home.SCREEN_STATE_MAIN_B_KEY_DETENT:
+		case Home.SCREEN_STATE_MAIN_B_KEY_FINEMODULATION:
+			showKeytoDefaultScreenAnimation();
+			break;	
+			
+		case Home.SCREEN_STATE_MAIN_B_BRKAEPEDALCALIBRATION_END:
+		case Home.SCREEN_STATE_MAIN_B_AEB_TOP:
+			showCalibrationtoDefaultScreenAnimation();
+			break;	
+			
+		case Home.SCREEN_STATE_MAIN_B_KEY_RIDECONTROL_SPEED:
+			_MainBKeyRideControlSpeedFragment.ClickCancel();
+			break;
+		case Home.SCREEN_STATE_MAIN_B_KEY_WORKLOAD_ACCUMULATION:
+			_MainBKeyWorkLoadAccumulationFragment.showWorkLoadAnimation();
+			break;
+		case Home.SCREEN_STATE_MAIN_B_KEY_WORKLOAD_DISPLAY:
+			_MainBKeyWorkLoadDisplayFragment.showWorkLoadAnimation();
+			break;
+		case Home.SCREEN_STATE_MAIN_B_KEY_WORKLOAD_ERRORDETECT:
+			_MainBKeyWorkLoadErrorDetectionFragment.showWorkLoadAnimation();
+			break;
+		default:
+			break;
+		}
 	}
 }

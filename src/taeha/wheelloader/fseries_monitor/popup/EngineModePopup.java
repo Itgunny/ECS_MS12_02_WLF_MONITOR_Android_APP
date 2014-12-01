@@ -15,6 +15,7 @@ import taeha.wheelloader.fseries_monitor.main.CAN1CommManager;
 import taeha.wheelloader.fseries_monitor.main.Home;
 import taeha.wheelloader.fseries_monitor.main.ParentPopup;
 import taeha.wheelloader.fseries_monitor.main.R;
+import taeha.wheelloader.fseries_monitor.main.R.string;
 
 public class EngineModePopup extends ParentPopup{
 	//CONSTANT////////////////////////////////////////
@@ -27,7 +28,7 @@ public class EngineModePopup extends ParentPopup{
 	//////////////////////////////////////////////////
 	
 	//VALUABLE////////////////////////////////////////
-
+	int EngineMode;
 	//////////////////////////////////////////////////
 	
 	//ANIMATION///////////////////////////////////////
@@ -68,7 +69,12 @@ public class EngineModePopup extends ParentPopup{
 		Log.d(TAG,"dismiss");
 		ParentActivity.ScreenIndex = Home.SCREEN_STATE_MENU_MODE_ENGINETM_ENGINESETTING_TOP;
 	}
-
+	@Override
+	public void InitValuable(){
+		super.InitValuable();
+		EngineMode = CAN1Comm.Get_EnginePowerMode_347_PGN65350();
+		EngineModeDisplay(EngineMode);
+	}
 	@Override
 	protected void InitResource() {
 		// TODO Auto-generated method stub
@@ -136,5 +142,105 @@ public class EngineModePopup extends ParentPopup{
 		CAN1Comm.TxCANToMCU(101);
 		this.dismiss();
 	}	
-
+	public void ClickLeft(){
+		switch (CursurIndex) {
+		case 1:
+			CursurIndex = 3;
+			CursurDisplay(CursurIndex);
+			break;
+		case 2:
+			CursurIndex--;
+			CursurDisplay(CursurIndex);
+			break;
+		case 3:
+			CursurIndex--;
+			CursurDisplay(CursurIndex);
+			break;
+		default:
+			CursurIndex = 1;
+			CursurDisplay(CursurIndex);
+			break;
+		}
+	}
+	public void ClickRight(){
+		switch (CursurIndex) {
+		case 1:
+			CursurIndex++;
+			CursurDisplay(CursurIndex);
+			break;
+		case 2:
+			CursurIndex++;
+			CursurDisplay(CursurIndex);
+			break;
+		case 3:
+			CursurIndex = 1;
+			CursurDisplay(CursurIndex);
+			break;
+		default:
+			CursurIndex = 1;
+			CursurDisplay(CursurIndex);
+			break;
+		}
+	}
+	public void ClickESC(){
+		
+	}
+	public void ClickEnter(){
+		switch (CursurIndex) {
+		case 3:
+			ClickPWR();
+			break;
+		case 2:
+			ClickSTD();
+			break;
+		case 1:
+			ClickEcono();
+			break;
+		default:
+			break;
+		}
+	}	
+	////////////////////////////////////////////////////////////////////////////////
+	public void CursurDisplay(int Index){
+		switch (Index) {
+		case 1:
+			textViewEcono.setPressed(true);
+			textViewSTD.setPressed(false);
+			textViewPWR.setPressed(false);
+			break;
+		case 2:
+			textViewEcono.setPressed(false);
+			textViewSTD.setPressed(true);
+			textViewPWR.setPressed(false);
+			break;
+		case 3:
+			textViewEcono.setPressed(false);
+			textViewSTD.setPressed(false);
+			textViewPWR.setPressed(true);
+			break;
+		default:
+			break;
+		}
+	}
+	public void EngineModeDisplay(int data){
+		switch (data) {
+		case CAN1CommManager.DATA_STATE_ENGINE_MODE_PWR:
+			CursurIndex = 3;
+			CursurDisplay(CursurIndex);
+			break;
+		case CAN1CommManager.DATA_STATE_ENGINE_MODE_STD:
+			CursurIndex = 2;
+			CursurDisplay(CursurIndex);
+			break;
+		case CAN1CommManager.DATA_STATE_ENGINE_MODE_ECONO:
+			CursurIndex = 1;
+			CursurDisplay(CursurIndex);
+			break;
+		default:
+			break;
+		}
+	}
+	
+	
+	
 }

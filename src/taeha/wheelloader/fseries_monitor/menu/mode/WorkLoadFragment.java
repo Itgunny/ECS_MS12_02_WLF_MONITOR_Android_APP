@@ -12,6 +12,8 @@ import taeha.wheelloader.fseries_monitor.main.R;
 import taeha.wheelloader.fseries_monitor.main.R.string;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.text.Layout;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -53,6 +55,9 @@ public class WorkLoadFragment extends ParentFragment{
 	int WeighingSystemModeIndex;
 	int WeighingDisplayIndex;
 	int WeighingErrorDetect;
+	
+	Handler HandleCursurDisplay;
+	int CursurIndex;
 	//////////////////////////////////////////////////
 	
 	//Fragment////////////////////////////////////////
@@ -81,6 +86,14 @@ public class WorkLoadFragment extends ParentFragment{
 	
 		ParentActivity.ScreenIndex = ParentActivity.SCREEN_STATE_MENU_MODE_HYD_WORKLOAD_TOP;
 		ParentActivity._MenuBaseFragment._MenuInterTitleFragment.SetTitleText(ParentActivity.getResources().getString(R.string.Work_Load));
+		
+		HandleCursurDisplay = new Handler() {
+			@Override
+			public void handleMessage(Message msg) {
+			
+				CursurDisplay(msg.what);
+			}
+		};
 		return mRoot;
 	}
 	@Override
@@ -128,6 +141,7 @@ public class WorkLoadFragment extends ParentFragment{
 		WeighingSystemDisplayDisplay(WeighingDisplayIndex);
 		ErrorDetectionDisplay(WeighingErrorDetect);
 		InitButtonDisplay(WeighingDisplayIndex);
+		CursurFirstDisplay(WeighingSystemModeIndex);
 	}
 	@Override
 	protected void InitButtonListener() {
@@ -138,6 +152,8 @@ public class WorkLoadFragment extends ParentFragment{
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
 				ClickOK();
+				CursurIndex = 13;
+				HandleCursurDisplay.sendMessage(HandleCursurDisplay.obtainMessage(CursurIndex));
 			}
 		});
 		imgbtnCancel.setOnClickListener(new View.OnClickListener() {
@@ -146,6 +162,8 @@ public class WorkLoadFragment extends ParentFragment{
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
 				ClickCancel();
+				CursurIndex = 12;
+				HandleCursurDisplay.sendMessage(HandleCursurDisplay.obtainMessage(CursurIndex));
 			}
 		});
 		imgbtnDefault.setOnClickListener(new View.OnClickListener() {
@@ -154,6 +172,8 @@ public class WorkLoadFragment extends ParentFragment{
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
 				ClickDefault();
+				CursurIndex = 11;
+				HandleCursurDisplay.sendMessage(HandleCursurDisplay.obtainMessage(CursurIndex));
 			}
 		});
 		textViewCalibration.setOnClickListener(new View.OnClickListener() {
@@ -162,6 +182,8 @@ public class WorkLoadFragment extends ParentFragment{
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
 				ClickCalibration();
+				CursurIndex = 9;
+				HandleCursurDisplay.sendMessage(HandleCursurDisplay.obtainMessage(CursurIndex));
 			}
 		});
 		textViewInitialization.setOnClickListener(new View.OnClickListener() {
@@ -170,6 +192,8 @@ public class WorkLoadFragment extends ParentFragment{
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
 				ClickInitialization();
+				CursurIndex = 10;
+				HandleCursurDisplay.sendMessage(HandleCursurDisplay.obtainMessage(CursurIndex));
 			}
 		});
 		radioWeighingModeManual.setOnClickListener(new View.OnClickListener() {
@@ -178,6 +202,8 @@ public class WorkLoadFragment extends ParentFragment{
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
 				ClickWeighingSystemModeManual();
+				CursurIndex = 1;
+				HandleCursurDisplay.sendMessage(HandleCursurDisplay.obtainMessage(CursurIndex));
 			}
 		});
 		radioWeighingModeAuto.setOnClickListener(new View.OnClickListener() {
@@ -186,6 +212,8 @@ public class WorkLoadFragment extends ParentFragment{
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
 				ClickWeighingSystemModeAuto();
+				CursurIndex = 2;
+				HandleCursurDisplay.sendMessage(HandleCursurDisplay.obtainMessage(CursurIndex));
 			}
 		});
 		radioWeighingDaily.setOnClickListener(new View.OnClickListener() {
@@ -194,6 +222,8 @@ public class WorkLoadFragment extends ParentFragment{
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
 				ClickWeighingSystemDisplayDaily();
+				CursurIndex = 3;
+				HandleCursurDisplay.sendMessage(HandleCursurDisplay.obtainMessage(CursurIndex));
 			}
 		});
 		radioWeighingTotalA.setOnClickListener(new View.OnClickListener() {
@@ -202,6 +232,8 @@ public class WorkLoadFragment extends ParentFragment{
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
 				ClickWeighingSystemDisplayTotalA();
+				CursurIndex = 4;
+				HandleCursurDisplay.sendMessage(HandleCursurDisplay.obtainMessage(CursurIndex));
 			}
 		});
 		radioWeighingTotalB.setOnClickListener(new View.OnClickListener() {
@@ -210,6 +242,8 @@ public class WorkLoadFragment extends ParentFragment{
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
 				ClickWeighingSystemDisplayTotalB();
+				CursurIndex = 5;
+				HandleCursurDisplay.sendMessage(HandleCursurDisplay.obtainMessage(CursurIndex));
 			}
 		});
 		radioWeighingTotalC.setOnClickListener(new View.OnClickListener() {
@@ -218,6 +252,8 @@ public class WorkLoadFragment extends ParentFragment{
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
 				ClickWeighingSystemDisplayTotalC();
+				CursurIndex = 6;
+				HandleCursurDisplay.sendMessage(HandleCursurDisplay.obtainMessage(CursurIndex));
 			}
 		});
 		radioErrorDetectionOn.setOnClickListener(new View.OnClickListener() {
@@ -226,6 +262,8 @@ public class WorkLoadFragment extends ParentFragment{
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
 				ClickErrorDetectionOn();
+				CursurIndex = 7;
+				HandleCursurDisplay.sendMessage(HandleCursurDisplay.obtainMessage(CursurIndex));
 			}
 		});
 		radioErrorDetectionOff.setOnClickListener(new View.OnClickListener() {
@@ -234,6 +272,8 @@ public class WorkLoadFragment extends ParentFragment{
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
 				ClickErrorDetectionOff();
+				CursurIndex = 8;
+				HandleCursurDisplay.sendMessage(HandleCursurDisplay.obtainMessage(CursurIndex));
 			}
 		});
 	}
@@ -279,6 +319,11 @@ public class WorkLoadFragment extends ParentFragment{
 		ParentActivity._MenuBaseFragment._MenuModeFragment.setFirstScreen(Home.SCREEN_STATE_MENU_MODE_HYD_TOP);
 	}
 	public void ClickDefault(){
+		ParentActivity.showWorkLoadInit();
+		
+
+	}
+	public void SetDefault(){
 		CAN1Comm.Set_WeightAccumulationMode_PGN61184_62(CAN1CommManager.DATA_STATE_WEIGHING_ACCUMULATION_AUTO);
 		CAN1Comm.TxCANToMCU(62);
 	
@@ -308,6 +353,7 @@ public class WorkLoadFragment extends ParentFragment{
 		CAN1Comm.Set_BucketFullInError_PGN61184_62(CAN1Comm.Get_BucketFullInError_PGN65450());
 		CAN1Comm.TxCANToMCU(62);
 		CAN1Comm.Set_RequestTotalWorkWeightReset_PGN61184_62(15);
+		
 	}
 	
 	public void ClickWeighingSystemModeManual(){
@@ -440,6 +486,178 @@ public class WorkLoadFragment extends ParentFragment{
 		case CAN1CommManager.DATA_STATE_WEIGHINGDISPLAY_TOTAL_C:
 			textViewInitialization.setText(ParentActivity.getResources().getString(string.Total_C) + " "
 					 + ParentActivity.getResources().getString(string.Initialization));
+			break;
+		default:
+			break;
+		}
+	}
+	/////////////////////////////////////////////////////////////////////
+	public void ClickLeft(){
+		switch (CursurIndex) {
+		case 1:
+			CursurIndex = 13;
+			CursurDisplay(CursurIndex);
+			break;
+		case 2:
+		case 3:
+		case 4:
+		case 5:
+		case 6:
+		case 7:
+		case 8:
+		case 9:
+		case 10:
+		case 11:
+		case 12:
+		case 13:
+			CursurIndex--;
+			CursurDisplay(CursurIndex);
+			break;
+		default:
+			break;
+		}
+		
+	}
+	public void ClickRight(){
+		switch (CursurIndex) {
+		case 1:
+		case 2:
+		case 3:
+		case 4:
+		case 5:
+		case 6:
+		case 7:
+		case 8:
+		case 9:
+		case 10:
+		case 11:
+		case 12:
+			CursurIndex++;
+			CursurDisplay(CursurIndex);
+			break;
+		case 13:
+			CursurIndex = 1;
+			CursurDisplay(CursurIndex);
+			break;
+		default:
+			break;
+		}
+	}
+	public void ClickESC(){
+		ClickCancel();
+	}
+	public void ClickEnter(){
+		switch (CursurIndex) {
+		case 1:
+			ClickWeighingSystemModeManual();
+			break;
+		case 2:
+			ClickWeighingSystemModeAuto();
+			break;
+		case 3:
+			ClickWeighingSystemDisplayDaily();
+			break;
+		case 4:
+			ClickWeighingSystemDisplayTotalA();
+			break;
+		case 5:
+			ClickWeighingSystemDisplayTotalB();
+			break;
+		case 6:
+			ClickWeighingSystemDisplayTotalC();
+			break;
+		case 7:
+			ClickErrorDetectionOn();
+			break;
+		case 8:
+			ClickErrorDetectionOff();
+			break;
+		case 9:
+			ClickCalibration();
+			break;
+		case 10:
+			ClickInitialization();
+			break;
+		case 11:
+			ClickDefault();
+			break;
+		case 12:
+			ClickCancel();
+			break;
+		case 13:
+			ClickOK();
+			break;
+		default:
+			break;
+		}
+	}
+	public void CursurFirstDisplay(int data){
+		switch (data) {
+		case CAN1CommManager.DATA_STATE_WEIGHING_ACCUMULATION_MANUAL:
+		default:
+			CursurIndex = 1;
+			CursurDisplay(1);
+			break;
+		case CAN1CommManager.DATA_STATE_WEIGHING_ACCUMULATION_AUTO:
+			CursurIndex = 2;
+			CursurDisplay(2);
+			break;
+	
+		}
+	}
+	public void CursurDisplay(int Index){
+		imgbtnOK.setPressed(false);
+		imgbtnCancel.setPressed(false);
+		imgbtnDefault.setPressed(false);
+		textViewCalibration.setPressed(false);
+		textViewInitialization.setPressed(false);
+		radioWeighingModeManual.setPressed(false);
+		radioWeighingModeAuto.setPressed(false);
+		radioWeighingDaily.setPressed(false);
+		radioWeighingTotalA.setPressed(false);
+		radioWeighingTotalB.setPressed(false);
+		radioWeighingTotalC.setPressed(false);
+		radioErrorDetectionOn.setPressed(false);
+		radioErrorDetectionOff.setPressed(false);
+		switch (Index) {
+		case 1:
+			radioWeighingModeManual.setPressed(true);
+			break;
+		case 2:
+			radioWeighingModeAuto.setPressed(true);
+			break;
+		case 3:
+			radioWeighingDaily.setPressed(true);
+			break;
+		case 4:
+			radioWeighingTotalA.setPressed(true);
+			break;
+		case 5:
+			radioWeighingTotalB.setPressed(true);
+			break;
+		case 6:
+			radioWeighingTotalC.setPressed(true);
+			break;
+		case 7:
+			radioErrorDetectionOn.setPressed(true);
+			break;
+		case 8:
+			radioErrorDetectionOff.setPressed(true);
+			break;
+		case 9:
+			textViewCalibration.setPressed(true);
+			break;
+		case 10:
+			textViewInitialization.setPressed(true);
+			break;
+		case 11:
+			imgbtnDefault.setPressed(true);
+			break;
+		case 12:
+			imgbtnCancel.setPressed(true);
+			break;
+		case 13:
+			imgbtnOK.setPressed(true);
 			break;
 		default:
 			break;

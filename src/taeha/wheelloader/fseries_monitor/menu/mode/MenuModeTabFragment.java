@@ -25,7 +25,7 @@ import android.widget.TextView;
 
 public class MenuModeTabFragment extends ParentFragment{
 	//CONSTANT////////////////////////////////////////
-	
+
 	//////////////////////////////////////////////////
 	//RESOURCE////////////////////////////////////////
 	TextView textViewLeft;
@@ -35,6 +35,7 @@ public class MenuModeTabFragment extends ParentFragment{
 	
 	//VALUABLE////////////////////////////////////////
 	static int FirstScreenIndex;
+
 	//////////////////////////////////////////////////
 	
 	//Fragment////////////////////////////////////////
@@ -84,8 +85,7 @@ public class MenuModeTabFragment extends ParentFragment{
 	protected void InitValuables() {
 		// TODO Auto-generated method stub
 		super.InitValuables();
-		
-	
+
 		
 	}
 	@Override
@@ -97,6 +97,9 @@ public class MenuModeTabFragment extends ParentFragment{
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
 				ClickEngineTM();
+				ParentActivity._MenuBaseFragment._MenuModeFragment._MenuModeEngTMFragment.CursurIndex = 1;
+				ParentActivity._MenuBaseFragment._MenuModeFragment._MenuModeEngTMFragment.CursurDisplay(CursurIndex);
+				ParentActivity._MenuBaseFragment._MenuModeFragment.SetModeFocusIndex(MenuModeFragment.STATE_CURSUR_LIST);
 			}
 		});
 		textViewCenter.setOnClickListener(new View.OnClickListener() {
@@ -105,6 +108,9 @@ public class MenuModeTabFragment extends ParentFragment{
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
 				ClickHYD();
+				ParentActivity._MenuBaseFragment._MenuModeFragment._MenuModeHYDFragment.CursurIndex = 1;
+				ParentActivity._MenuBaseFragment._MenuModeFragment._MenuModeEngTMFragment.CursurDisplay(CursurIndex);
+				ParentActivity._MenuBaseFragment._MenuModeFragment.SetModeFocusIndex(MenuModeFragment.STATE_CURSUR_LIST);
 			}
 		});
 		textViewRight.setOnClickListener(new View.OnClickListener() {
@@ -113,6 +119,9 @@ public class MenuModeTabFragment extends ParentFragment{
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
 				ClickETC();
+				ParentActivity._MenuBaseFragment._MenuModeFragment._MenuModeETCFragment.CursurIndex = 1;
+				ParentActivity._MenuBaseFragment._MenuModeFragment._MenuModeEngTMFragment.CursurDisplay(CursurIndex);
+				ParentActivity._MenuBaseFragment._MenuModeFragment.SetModeFocusIndex(MenuModeFragment.STATE_CURSUR_LIST);
 			}
 		});
 	}
@@ -169,7 +178,6 @@ public class MenuModeTabFragment extends ParentFragment{
 		
 		textViewRight.setBackgroundResource(R.drawable._selector_menu_body_mode_tab_right_btn);
 		textViewRight.setTextColor(ParentActivity.getResources().getColor(R.drawable._selector_menu_body_mode_tab_txt));
-		CursurIndex = 1;
 	}
 	public void setClickImageHYD(){
 		textViewLeft.setBackgroundResource(R.drawable._selector_menu_body_mode_tab_left_btn);
@@ -180,7 +188,6 @@ public class MenuModeTabFragment extends ParentFragment{
 		
 		textViewRight.setBackgroundResource(R.drawable._selector_menu_body_mode_tab_right_btn);
 		textViewRight.setTextColor(ParentActivity.getResources().getColor(R.drawable._selector_menu_body_mode_tab_txt));
-		CursurIndex = 2;
 	}
 	public void setClickImageETC(){
 		textViewLeft.setBackgroundResource(R.drawable._selector_menu_body_mode_tab_left_btn);
@@ -191,7 +198,6 @@ public class MenuModeTabFragment extends ParentFragment{
 		
 		textViewRight.setBackgroundResource(R.drawable.menu_list_tab_right_selected);
 		textViewRight.setTextColor(ParentActivity.getResources().getColor(R.color.menu_body_mode_tab_amber));
-		CursurIndex = 3;
 	}
 	public void setClickNull(){
 		textViewLeft.setBackgroundResource(R.drawable._selector_menu_body_mode_tab_left_btn);
@@ -202,12 +208,35 @@ public class MenuModeTabFragment extends ParentFragment{
 		
 		textViewRight.setBackgroundResource(R.drawable._selector_menu_body_mode_tab_right_btn);
 		textViewRight.setTextColor(ParentActivity.getResources().getColor(R.drawable._selector_menu_body_mode_tab_txt));
-		CursurIndex = 0;
+
+	}
+	public void setPushEngineTM(){
+		textViewLeft.setBackgroundResource(R.drawable.menu_list_tab_left_selected);
+		
+		textViewCenter.setBackgroundResource(R.drawable._selector_menu_body_mode_tab_center_btn);
+
+		textViewRight.setBackgroundResource(R.drawable._selector_menu_body_mode_tab_right_btn);
+	}
+	public void setPushHYD(){
+		textViewLeft.setBackgroundResource(R.drawable._selector_menu_body_mode_tab_left_btn);
+	
+		textViewCenter.setBackgroundResource(R.drawable.menu_list_tab_center_selected);
+	
+		textViewRight.setBackgroundResource(R.drawable._selector_menu_body_mode_tab_right_btn);
+	
+	}
+	public void setPushETC(){
+		textViewLeft.setBackgroundResource(R.drawable._selector_menu_body_mode_tab_left_btn);
+
+		textViewCenter.setBackgroundResource(R.drawable._selector_menu_body_mode_tab_center_btn);
+		
+		textViewRight.setBackgroundResource(R.drawable.menu_list_tab_right_selected);
 	}
 	/////////////////////////////////////////////////////////////////////
 	public void setFirstScreen(int Index){
 		FirstScreenIndex = Index;
 	}
+
 	public void ModeBodyDisplay(int Index){
 		switch (Index) {
 		case Home.SCREEN_STATE_MENU_MODE_ENGINETM_TOP:
@@ -225,7 +254,25 @@ public class MenuModeTabFragment extends ParentFragment{
 			ParentActivity._MenuBaseFragment._MenuModeFragment.HideEngTM();
 			ParentActivity._MenuBaseFragment._MenuModeFragment.showEngineSetting();
 			break;
+		case Home.SCREEN_STATE_MENU_MODE_TOP:
+			ParentActivity._MenuBaseFragment._MenuModeFragment.showEngTM();
+			setClickNull();
+			ParentActivity._MenuBaseFragment._MenuModeFragment.SetModeFocusIndex(MenuModeFragment.STATE_CURSUR_LEFT);
+			break;
 		}
+	}
+	/////////////////////////////////////////////////////////////////////
+	public void ClickLeft(){
+		
+	}
+	public void ClickRight(){
+		
+	}
+	public void ClickESC(){
+		
+	}
+	public void ClickEnter(){
+		
 	}
 	/////////////////////////////////////////////////////////////////////
 	

@@ -10,6 +10,8 @@ import taeha.wheelloader.fseries_monitor.main.Home;
 import taeha.wheelloader.fseries_monitor.main.ParentFragment;
 import taeha.wheelloader.fseries_monitor.main.R;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.text.Layout;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -35,6 +37,10 @@ public class CoolingFanManualFragment extends ParentFragment{
 	
 	//VALUABLE////////////////////////////////////////
 	boolean ManualPress;
+	
+	int CursurIndex = 1;
+	
+	Handler HandleCursurDisplay;
 	//////////////////////////////////////////////////
 	
 	//Fragment////////////////////////////////////////
@@ -62,9 +68,23 @@ public class CoolingFanManualFragment extends ParentFragment{
 		InitButtonListener();
 		
 		ParentActivity.ScreenIndex = ParentActivity.SCREEN_STATE_MENU_MODE_ETC_COOLINGFAN_MANUAL;
+		HandleCursurDisplay = new Handler() {
+			@Override
+			public void handleMessage(Message msg) {
+				CursurDisplay(msg.what);
+			}
+		};
+		
 		return mRoot;
 	}
-	
+
+	@Override
+	public void onResume() {
+		// TODO Auto-generated method stub
+		super.onResume();
+		CursurDisplay(CursurIndex);
+		Log.d(TAG,"CursurIndex : " + Integer.toString(CursurIndex));
+	}
 	////////////////////////////////////////////////
 	
 	
@@ -144,5 +164,83 @@ public class CoolingFanManualFragment extends ParentFragment{
 		}
 	}
 	/////////////////////////////////////////////////////////////////////
-	
+	public void setCursurIndex(int Index){
+		CursurIndex = Index;
+	}
+	public void ClickLeft(){
+		switch (CursurIndex) {
+		case 1:
+		case 2:
+		case 3:
+			ParentActivity._MenuBaseFragment._CoolingFanFragment.ClickLeft();
+			break;
+		default:
+			CursurIndex = 4;
+			CursurDisplay(CursurIndex);
+			break;
+		}
+	}
+	public void ClickRight(){
+		switch (CursurIndex) {
+		case 1:
+		case 2:
+		case 3:
+			ParentActivity._MenuBaseFragment._CoolingFanFragment.ClickRight();
+			break;		
+		default:
+			CursurIndex = 4;
+			CursurDisplay(CursurIndex);
+			break;
+		}
+	}
+	public void ClickESC(){
+		switch (CursurIndex) {
+		case 1:
+		case 2:
+		case 3:
+			ClickOK();
+			break;
+		case 4:
+			CursurIndex = 1;
+			CursurDisplay(CursurIndex);
+			ParentActivity._MenuBaseFragment._CoolingFanFragment.setCursurIndex(3);
+			ParentActivity._MenuBaseFragment._CoolingFanFragment.CursurDisplay(3);
+			break;
+		default:
+			break;
+		}
+		
+	}
+	public void ClickEnter(){
+		switch (CursurIndex) {
+		case 1:
+		case 2:
+		case 3:
+			ParentActivity._MenuBaseFragment._CoolingFanFragment.ClickEnter();
+			break;
+		case 4:
+			ClickOK();
+			break;
+		default:
+
+			break;
+		}
+	}
+	public void CursurDisplay(int Index){
+		try {
+			imgbtnOK.setPressed(false);
+			switch (CursurIndex) {
+				case 4:
+					imgbtnOK.setPressed(true);
+					break;
+				default:
+					break;
+			}
+		} catch (NullPointerException e) {
+			// TODO: handle exception
+			Log.e(TAG,"NullPointerException CursurDisplay");
+		}
+		
+	}
+	/////////////////////////////////////////////////////////////////////
 }

@@ -15,6 +15,7 @@ import taeha.wheelloader.fseries_monitor.main.CAN1CommManager;
 import taeha.wheelloader.fseries_monitor.main.Home;
 import taeha.wheelloader.fseries_monitor.main.ParentPopup;
 import taeha.wheelloader.fseries_monitor.main.R;
+import taeha.wheelloader.fseries_monitor.main.R.string;
 
 public class ShiftModePopup extends ParentPopup{
 	//CONSTANT////////////////////////////////////////
@@ -28,7 +29,7 @@ public class ShiftModePopup extends ParentPopup{
 	//////////////////////////////////////////////////
 	
 	//VALUABLE////////////////////////////////////////
-
+	int ShiftMode;
 	//////////////////////////////////////////////////
 	
 	//ANIMATION///////////////////////////////////////
@@ -69,7 +70,12 @@ public class ShiftModePopup extends ParentPopup{
 		Log.d(TAG,"dismiss");
 		ParentActivity.ScreenIndex = Home.SCREEN_STATE_MENU_MODE_ENGINETM_TOP;
 	}
-
+	@Override
+	public void InitValuable(){
+		super.InitValuable();
+		ShiftMode = CAN1Comm.Get_TransmissionShiftMode_543_PGN65434();
+		ShiftModeDisplay(ShiftMode);
+	}
 	@Override
 	protected void InitResource() {
 		// TODO Auto-generated method stub
@@ -148,5 +154,126 @@ public class ShiftModePopup extends ParentPopup{
 		CAN1Comm.TxCANToMCU(104);
 		this.dismiss();
 	}	
-
+	public void ClickLeft(){
+		switch (CursurIndex) {
+		case 1:
+			CursurIndex = 4;
+			CursurDisplay(CursurIndex);
+			break;
+		case 2:
+			CursurIndex--;
+			CursurDisplay(CursurIndex);
+			break;
+		case 3:
+			CursurIndex--;
+			CursurDisplay(CursurIndex);
+			break;
+		case 4:
+			CursurIndex--;
+			CursurDisplay(CursurIndex);
+			break;
+		default:
+			CursurIndex = 1;
+			CursurDisplay(CursurIndex);
+			break;
+		}
+	}
+	public void ClickRight(){
+		switch (CursurIndex) {
+		case 1:
+			CursurIndex++;
+			CursurDisplay(CursurIndex);
+			break;
+		case 2:
+			CursurIndex++;
+			CursurDisplay(CursurIndex);
+			break;
+		case 3:
+			CursurIndex++;
+			CursurDisplay(CursurIndex);
+			break;
+		case 4:
+			CursurIndex = 1;
+			CursurDisplay(CursurIndex);
+			break;
+		default:
+			CursurIndex = 1;
+			CursurDisplay(CursurIndex);
+			break;
+		}
+	}
+	public void ClickESC(){
+		
+	}
+	public void ClickEnter(){
+		switch (CursurIndex) {
+		case 1:
+			ClickManual();
+			break;
+		case 2:
+			ClickAL();
+			break;
+		case 3:
+			ClickAN();
+			break;
+		case 4:
+			ClickAH();
+			break;
+		default:
+			break;
+		}
+	}
+	////////////////////////////////////////////////////////////////////////////////
+	public void CursurDisplay(int Index){
+		switch (Index) {
+		case 1:
+			textViewManual.setPressed(true);
+			textViewAL.setPressed(false);
+			textViewAN.setPressed(false);
+			textViewAH.setPressed(false);
+			break;
+		case 2:
+			textViewManual.setPressed(false);
+			textViewAL.setPressed(true);
+			textViewAN.setPressed(false);
+			textViewAH.setPressed(false);
+			break;
+		case 3:
+			textViewManual.setPressed(false);
+			textViewAL.setPressed(false);
+			textViewAN.setPressed(true);
+			textViewAH.setPressed(false);
+			break;
+		case 4:
+			textViewManual.setPressed(false);
+			textViewAL.setPressed(false);
+			textViewAN.setPressed(false);
+			textViewAH.setPressed(true);
+			break;
+		default:
+			break;
+		}
+	}
+	public void ShiftModeDisplay(int data){
+		switch (data) {
+		case CAN1CommManager.DATA_STATE_TM_SHIFTMODE_MANUAL:
+			CursurIndex = 1;
+			CursurDisplay(CursurIndex);
+			break;
+		case CAN1CommManager.DATA_STATE_TM_SHIFTMODE_AL:
+			CursurIndex = 2;
+			CursurDisplay(CursurIndex);
+			break;
+		case CAN1CommManager.DATA_STATE_TM_SHIFTMODE_AN:
+			CursurIndex = 3;
+			CursurDisplay(CursurIndex);
+			break;
+		case CAN1CommManager.DATA_STATE_TM_SHIFTMODE_AH:
+			CursurIndex = 4;
+			CursurDisplay(CursurIndex);
+			break;
+		default:
+			break;
+		}
+	}
 }

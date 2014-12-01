@@ -5,10 +5,13 @@ import taeha.wheelloader.fseries_monitor.animation.ChangeFragmentAnimation;
 import taeha.wheelloader.fseries_monitor.animation.DisappearAnimation;
 import taeha.wheelloader.fseries_monitor.animation.MainBodyShiftAnimation;
 import taeha.wheelloader.fseries_monitor.animation.LeftRightShiftAnimation;
+import taeha.wheelloader.fseries_monitor.main.CAN1CommManager;
 import taeha.wheelloader.fseries_monitor.main.Home;
 import taeha.wheelloader.fseries_monitor.main.ParentFragment;
 import taeha.wheelloader.fseries_monitor.main.R;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.text.Layout;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -34,6 +37,10 @@ public class BrightnessFragment extends ParentFragment{
 	
 	//VALUABLE////////////////////////////////////////
 	int BrightnessManualAuto;
+	
+	int CursurIndex;
+	
+	Handler HandleCursurDisplay;
 	//////////////////////////////////////////////////
 	
 	//Fragment////////////////////////////////////////
@@ -63,8 +70,15 @@ public class BrightnessFragment extends ParentFragment{
 		
 		ParentActivity.ScreenIndex = ParentActivity.SCREEN_STATE_MENU_PREFERENCE_BRIGHTNESS_TOP;
 		ParentActivity._MenuBaseFragment._MenuInterTitleFragment.SetTitleText(ParentActivity.getResources().getString(R.string.Brightness_Setting));
-		
+		CursurFirstDisplay(BrightnessManualAuto);
 		BrightnessDisplay(BrightnessManualAuto);
+		
+		HandleCursurDisplay = new Handler() {
+			@Override
+			public void handleMessage(Message msg) {
+				CursurDisplay(msg.what);
+			}
+		};
 		return mRoot;
 	}
 	
@@ -96,6 +110,8 @@ public class BrightnessFragment extends ParentFragment{
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
+				CursurIndex = 1;
+				HandleCursurDisplay.sendMessage(HandleCursurDisplay.obtainMessage(CursurIndex));
 				ClickManual();
 			}
 		});
@@ -104,6 +120,8 @@ public class BrightnessFragment extends ParentFragment{
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
+				CursurIndex = 2;
+				HandleCursurDisplay.sendMessage(HandleCursurDisplay.obtainMessage(CursurIndex));
 				ClickAuto();
 			}
 		});
@@ -122,14 +140,10 @@ public class BrightnessFragment extends ParentFragment{
 	}
 	/////////////////////////////////////////////////////////////////////	
 	public void ClickManual(){
-
-		
 		if(ParentActivity.ScreenIndex != Home.SCREEN_STATE_MENU_PREFERENCE_BRIGHTNESS_MANUAL_TOP)
 			showBodyBrightnessManual();
 	}
 	public void ClickAuto(){
-
-		
 		if(ParentActivity.ScreenIndex != Home.SCREEN_STATE_MENU_PREFERENCE_BRIGHTNESS_AUTO_TOP)
 			showBodyBrightnessAuto();
 	}
@@ -151,17 +165,110 @@ public class BrightnessFragment extends ParentFragment{
 	public void BrightnessDisplay(int _data){
 		switch (_data) {
 		case Home.BRIGHTNESS_MANUAL:
-			showBodyBrightnessManual();
+			ClickManual();
 			radioManual.setChecked(true);
 			radioAuto.setChecked(false);
 			break;
 		case Home.BRIGHTNESS_AUTO:
-			showBodyBrightnessAuto();
+			ClickAuto();
 			radioManual.setChecked(false);
 			radioAuto.setChecked(true);
 			break;
 		default:
 			break;
+		}
+	}
+	/////////////////////////////////////////////////////////////////////
+	public void setCursurIndex(int Index){
+		CursurIndex = Index;
+	}
+	public void ClickLeft(){
+		switch (CursurIndex) {
+		case 1:
+			CursurIndex = 2;
+			CursurDisplay(CursurIndex);
+			break;
+		case 2:
+			CursurIndex--;
+			CursurDisplay(CursurIndex);
+			break;
+		default:
+			CursurIndex = 1;
+			CursurDisplay(CursurIndex);
+			break;
+		}
+	}
+	public void ClickRight(){
+		switch (CursurIndex) {
+		case 1:
+			CursurIndex++;
+			CursurDisplay(CursurIndex);
+		
+			break;
+		case 2:
+			CursurIndex = 1;
+			CursurDisplay(CursurIndex);
+			
+			break;
+		default:
+			CursurIndex = 1;
+			CursurDisplay(CursurIndex);
+			break;
+		}
+	}
+	public void ClickESC(){
+		
+	}
+	public void ClickEnter(){
+		Log.d(TAG,"ClickEnter");
+		switch (CursurIndex) {
+		case 1:
+			CursurIndex = 3;
+			CursurDisplay(CursurIndex);
+			_BrightnessManualFragment.setCursurIndex(3);
+			BrightnessDisplay(Home.BRIGHTNESS_MANUAL);
+			_BrightnessManualFragment.CursurDisplay(3);
+			break;
+		case 2:
+			CursurIndex = 3;
+			CursurDisplay(CursurIndex);
+			_BrightnessAutoFragment.setCursurIndex(3);
+			BrightnessDisplay(Home.BRIGHTNESS_AUTO);
+			_BrightnessAutoFragment.CursurDisplay(3);
+			break;
+		default:
+
+			break;
+		}
+	}
+	public void CursurFirstDisplay(int data){
+		switch (data) {
+		case Home.BRIGHTNESS_MANUAL:
+			CursurIndex = 1;
+			CursurDisplay(CursurIndex);
+			break;
+		case Home.BRIGHTNESS_AUTO:
+			CursurIndex = 2;
+			CursurDisplay(CursurIndex);
+			break;
+		default:
+			break;
+		}
+	}
+	public void CursurDisplay(int Index){
+
+		radioAuto.setPressed(false);
+		radioManual.setPressed(false);
+
+		switch (CursurIndex) {
+			case 1:
+				radioManual.setPressed(true);
+				break;
+			case 2:
+				radioAuto.setPressed(true);
+				break;
+			default:
+				break;
 		}
 	}
 	/////////////////////////////////////////////////////////////////////

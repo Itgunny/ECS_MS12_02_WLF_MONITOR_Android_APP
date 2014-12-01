@@ -14,6 +14,8 @@ import taeha.wheelloader.fseries_monitor.main.ParentFragment;
 import taeha.wheelloader.fseries_monitor.main.R;
 import taeha.wheelloader.fseries_monitor.main.R.string;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.text.Layout;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -36,8 +38,8 @@ public class MaintenanceDetailFragment extends ParentFragment{
 	ImageButton imgbtnOK;
 	TextView	textViewAS;
 	
-	ImageView	imgViewLeft;
-	ImageView	imgViewRight;
+	ImageButton	imgbtnLeft;
+	ImageButton	imgbtnRight;
 	ImageView	imgViewIcon;
 	
 	TextView	textViewTitle;
@@ -72,6 +74,10 @@ public class MaintenanceDetailFragment extends ParentFragment{
 	int SendCommandFlag;
 	
 	int ElapsedTime;
+	
+	int CursurIndex;
+	
+	Handler HandleCursurDisplay;
 	//////////////////////////////////////////////////
 	
 	//Fragment////////////////////////////////////////
@@ -98,8 +104,15 @@ public class MaintenanceDetailFragment extends ParentFragment{
 		InitValuables();
 		InitButtonListener();
 		StartSendCommandTimer();
+		CursurDisplay(CursurIndex);
 		ParentActivity.ScreenIndex = ParentActivity.SCREEN_STATE_MENU_MANAGEMENT_MAINTENANCE_DETAIL_TOP;
 		ParentActivity._MenuBaseFragment._MenuInterTitleFragment.SetTitleText(ParentActivity.getResources().getString(R.string.Maintenance));
+		HandleCursurDisplay = new Handler() {
+			@Override
+			public void handleMessage(Message msg) {
+				CursurDisplay(msg.what);
+			}
+		};
 		return mRoot;
 	}
 
@@ -123,8 +136,8 @@ public class MaintenanceDetailFragment extends ParentFragment{
 
 		textViewAS = (TextView)mRoot.findViewById(R.id.textView_menu_body_management_maint_detail_low_as);
 		
-		imgViewLeft = (ImageView)mRoot.findViewById(R.id.imageView_menu_body_management_maint_detail_title_left);
-		imgViewRight = (ImageView)mRoot.findViewById(R.id.imageView_menu_body_management_maint_detail_title_right);
+		imgbtnLeft = (ImageButton)mRoot.findViewById(R.id.imageButton_menu_body_management_maint_detail_title_left);
+		imgbtnRight = (ImageButton)mRoot.findViewById(R.id.imageButton_menu_body_management_maint_detail_title_right);
 		imgViewIcon = (ImageView)mRoot.findViewById(R.id.imageView_menu_body_management_maint_detail_title_icon);
 		
 		textViewTitle = (TextView)mRoot.findViewById(R.id.textView_menu_body_management_maint_detail_title);
@@ -170,6 +183,7 @@ public class MaintenanceDetailFragment extends ParentFragment{
 		MaintenanceItemList = new byte[TotalNumberofMaintenanceItems];
 		SendCommandFlag = CAN1CommManager.SEND_COMMAND_FLAG_INFO;
 		
+		CursurIndex = 1;
 		Log.d(TAG,"TotalNumberofMaintenanceItems : " +Integer.toString(TotalNumberofMaintenanceItems));
 	}
 	@Override
@@ -181,22 +195,28 @@ public class MaintenanceDetailFragment extends ParentFragment{
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
+				CursurIndex = 5;
+				HandleCursurDisplay.sendMessage(HandleCursurDisplay.obtainMessage(CursurIndex));
 				ClickOK();
 			}
 		});
-		imgViewLeft.setOnClickListener(new View.OnClickListener() {
+		imgbtnLeft.setOnClickListener(new View.OnClickListener() {
 			
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
+				CursurIndex = 1;
+				HandleCursurDisplay.sendMessage(HandleCursurDisplay.obtainMessage(CursurIndex));
 				ClickTitleLeft();
 			}
 		});
-		imgViewRight.setOnClickListener(new View.OnClickListener() {
+		imgbtnRight.setOnClickListener(new View.OnClickListener() {
 			
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
+				CursurIndex = 2;
+				HandleCursurDisplay.sendMessage(HandleCursurDisplay.obtainMessage(CursurIndex));
 				ClickTitleRight();
 			}
 		});
@@ -205,6 +225,8 @@ public class MaintenanceDetailFragment extends ParentFragment{
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
+				CursurIndex = 3;
+				HandleCursurDisplay.sendMessage(HandleCursurDisplay.obtainMessage(CursurIndex));
 				ClickReplace();
 			}
 		});
@@ -213,6 +235,8 @@ public class MaintenanceDetailFragment extends ParentFragment{
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
+				CursurIndex = 4;
+				HandleCursurDisplay.sendMessage(HandleCursurDisplay.obtainMessage(CursurIndex));
 				ClickChangeCycle();
 			}
 		});
@@ -249,7 +273,16 @@ public class MaintenanceDetailFragment extends ParentFragment{
 			return;
 		else
 			ParentActivity.StartAnimationRunningTimer();
+		int CurrentIndex = 0;
+		for(int i = 0; i < TotalNumberofMaintenanceItems; i++){
+			if(MaintenanceItem == MaintenanceItemList[i]){
+				CurrentIndex = i;
+				break;
+			}
+		}
+		ParentActivity._MenuBaseFragment._MaintenanceFragment.setCursurIndex(CurrentIndex+1);
 		ParentActivity._MenuBaseFragment.showBodyMaintenance();
+		
 	}
 	public void ClickTitleLeft(){
 		int CurrentIndex = 0;
@@ -598,6 +631,100 @@ public class MaintenanceDetailFragment extends ParentFragment{
 			mSendCommandTimer = null;
 		}
 		
+	}
+	/////////////////////////////////////////////////////////////////////
+	public void ClickLeft(){
+		switch (CursurIndex) {
+		case 1:
+			CursurIndex = 5;
+			CursurDisplay(CursurIndex);
+			break;
+		case 2:	
+		case 3:		
+		case 4:	
+		case 5:
+			CursurIndex--;
+			CursurDisplay(CursurIndex);
+			break;
+		default:
+			CursurIndex = 1;
+			CursurDisplay(CursurIndex);
+			break;
+		}
+		
+	}
+	public void ClickRight(){
+		switch (CursurIndex) {
+		case 1:
+		case 2:	
+		case 3:		
+		case 4:	
+			CursurIndex++;
+			CursurDisplay(CursurIndex);
+			break;
+		case 5:
+			CursurIndex = 1;
+			CursurDisplay(CursurIndex);
+			break;
+		default:
+			CursurIndex = 1;
+			CursurDisplay(CursurIndex);
+			break;
+		}
+	}
+	public void ClickESC(){
+		ClickOK();
+	}
+	public void ClickEnter(){
+		switch (CursurIndex) {
+		case 1:
+			ClickTitleLeft();
+			break;
+		case 2:
+			ClickTitleRight();
+			break;
+		case 3:
+			ClickReplace();
+			break;
+		case 4:
+			ClickChangeCycle();
+			break;
+		case 5:
+			ClickOK();
+			break;
+		
+		default:
+			break;
+		}
+	}
+	public void CursurDisplay(int Index){
+		imgbtnOK.setPressed(false);
+		imgbtnLeft.setPressed(false);
+		imgbtnRight.setPressed(false);
+		textViewReplace.setPressed(false);
+		textViewChangeCycle.setPressed(false);
+		
+
+		switch (CursurIndex) {
+			case 1:
+				imgbtnLeft.setPressed(true);
+				break;
+			case 2:
+				imgbtnRight.setPressed(true);
+				break;
+			case 3:
+				textViewReplace.setPressed(true);
+				break;
+			case 4:
+				textViewChangeCycle.setPressed(true);
+				break;
+			case 5:
+				imgbtnOK.setPressed(true);
+				break;
+			
+			default:
+				break;
+		}
 	}
 	/////////////////////////////////////////////////////////////////////
 }

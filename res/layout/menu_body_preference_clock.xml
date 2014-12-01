@@ -239,7 +239,7 @@
             android:background="@drawable/_selector_menu_body_num_normal_blue_btn1"
             android:gravity="center"
             android:text="@string/Next"
-            android:textColor="@color/white"
+            android:textColor="@drawable/_selector_menu_body_multimedia_txt"
             android:textSize="30sp" />
 
     </RelativeLayout>

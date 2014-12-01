@@ -10,6 +10,8 @@ import taeha.wheelloader.fseries_monitor.main.ParentFragment;
 import taeha.wheelloader.fseries_monitor.main.R;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.text.Layout;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -50,6 +52,10 @@ public class BrightnessAutoFragment extends ParentFragment{
 	public int BrightnessAutoNightLevel;
 	public int BrightnessAutoStartTime;
 	public int BrightnessAutoEndTime;
+	
+	int CursurIndex = 1;
+	
+	Handler HandleCursurDisplay;
 	//////////////////////////////////////////////////
 	
 	//Fragment////////////////////////////////////////
@@ -77,6 +83,13 @@ public class BrightnessAutoFragment extends ParentFragment{
 		InitButtonListener();
 		
 		ParentActivity.ScreenIndex = ParentActivity.SCREEN_STATE_MENU_PREFERENCE_BRIGHTNESS_AUTO_TOP;
+		HandleCursurDisplay = new Handler() {
+			@Override
+			public void handleMessage(Message msg) {
+				CursurDisplay(msg.what);
+			}
+		};
+		CursurDisplay(CursurIndex);
 		return mRoot;
 	}
 	
@@ -133,6 +146,8 @@ public class BrightnessAutoFragment extends ParentFragment{
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
+				CursurIndex = 10;
+				HandleCursurDisplay.sendMessage(HandleCursurDisplay.obtainMessage(CursurIndex));
 				ClickOK();
 			}
 		});
@@ -141,6 +156,8 @@ public class BrightnessAutoFragment extends ParentFragment{
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
+				CursurIndex = 9;
+				HandleCursurDisplay.sendMessage(HandleCursurDisplay.obtainMessage(CursurIndex));
 				ClickCancel();
 			}
 		});
@@ -149,6 +166,8 @@ public class BrightnessAutoFragment extends ParentFragment{
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
+				CursurIndex = 3;
+				HandleCursurDisplay.sendMessage(HandleCursurDisplay.obtainMessage(CursurIndex));
 				ClickTimeStartLeft();
 			}
 		});
@@ -157,6 +176,8 @@ public class BrightnessAutoFragment extends ParentFragment{
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
+				CursurIndex = 4;
+				HandleCursurDisplay.sendMessage(HandleCursurDisplay.obtainMessage(CursurIndex));
 				ClickTimeStartRight();
 			}
 		});
@@ -165,6 +186,8 @@ public class BrightnessAutoFragment extends ParentFragment{
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
+				CursurIndex = 5;
+				HandleCursurDisplay.sendMessage(HandleCursurDisplay.obtainMessage(CursurIndex));
 				ClickTimeEndLeft();
 			}
 		});
@@ -173,6 +196,8 @@ public class BrightnessAutoFragment extends ParentFragment{
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
+				CursurIndex = 6;
+				HandleCursurDisplay.sendMessage(HandleCursurDisplay.obtainMessage(CursurIndex));
 				ClickTimeEndRight();
 			}
 		});
@@ -182,7 +207,8 @@ public class BrightnessAutoFragment extends ParentFragment{
 			@Override
 			public void onStopTrackingTouch(SeekBar seekBar) {
 				// TODO Auto-generated method stub
-				
+				CursurIndex = 7;
+				HandleCursurDisplay.sendMessage(HandleCursurDisplay.obtainMessage(CursurIndex));
 			}
 			
 			@Override
@@ -209,7 +235,8 @@ public class BrightnessAutoFragment extends ParentFragment{
 			@Override
 			public void onStopTrackingTouch(SeekBar seekBar) {
 				// TODO Auto-generated method stub
-				
+				CursurIndex = 8;
+				HandleCursurDisplay.sendMessage(HandleCursurDisplay.obtainMessage(CursurIndex));
 			}
 			
 			@Override
@@ -325,5 +352,202 @@ public class BrightnessAutoFragment extends ParentFragment{
 		Log.d(TAG,"SavePref");
 	}
 	/////////////////////////////////////////////////////////////////////
+	public void setCursurIndex(int Index){
+		CursurIndex = Index;
+	}
+	public void ClickLeft(){
+		switch (CursurIndex) {
+		case 1:
+		case 2:
+			ParentActivity._MenuBaseFragment._BrightnessFragment.ClickLeft();
+			break;
+		case 3:
+			CursurIndex = 10;
+			CursurDisplay(CursurIndex);
+			break;
+		case 4:
+		case 5:
+		case 6:
+			CursurIndex--;
+			CursurDisplay(CursurIndex);
+			break;
+		case 7:
+			BrightnessAutoDayLevel -= 1;
+			if(BrightnessAutoDayLevel < Home.BRIGHTNESS_MIN){
+				BrightnessAutoDayLevel = Home.BRIGHTNESS_MIN;
+			}
+			seekbarDayLevel.setProgress(BrightnessAutoDayLevel);
+			break;
+		case 8:
+			BrightnessAutoNightLevel -= 1;
+			if(BrightnessAutoNightLevel < Home.BRIGHTNESS_MIN){
+				BrightnessAutoNightLevel = Home.BRIGHTNESS_MIN;
+			}
+			seekbarNightLevel.setProgress(BrightnessAutoNightLevel);
+			break;
+		case 9:
+			CursurIndex--;
+			CursurDisplay(CursurIndex);
+			break;
+		case 10:
+			CursurIndex--;
+			CursurDisplay(CursurIndex);
+			break;
+		default:
+			CursurIndex = 4;
+			CursurDisplay(CursurIndex);
+			break;
+		}
+	}
+	public void ClickRight(){
+		switch (CursurIndex) {
+		case 1:
+		case 2:
+			ParentActivity._MenuBaseFragment._BrightnessFragment.ClickRight();
+			break;
+		case 3:
+		case 4:
+		case 5:
+		case 6:
+			CursurIndex++;
+			CursurDisplay(CursurIndex);
+			break;
+		case 7:
+			BrightnessAutoDayLevel += 1;
+			if(BrightnessAutoDayLevel > Home.BRIGHTNESS_MAX){
+				BrightnessAutoDayLevel = Home.BRIGHTNESS_MAX;
+			}
+			seekbarDayLevel.setProgress(BrightnessAutoDayLevel);
+			break;
+		case 8:
+			BrightnessAutoNightLevel += 1;
+			if(BrightnessAutoNightLevel > Home.BRIGHTNESS_MAX){
+				BrightnessAutoNightLevel = Home.BRIGHTNESS_MAX;
+			}
+			seekbarNightLevel.setProgress(BrightnessAutoNightLevel);
+			break;
+		case 9:
+			CursurIndex++;
+			CursurDisplay(CursurIndex);
+			
+			break;
+		case 10:
+			CursurIndex = 3;
+			CursurDisplay(CursurIndex);
+			
+			break;
+		default:
+			CursurIndex = 4;
+			CursurDisplay(CursurIndex);
+			break;
+		}
+	}
+	public void ClickESC(){
+		switch (CursurIndex) {
+		case 1:
+		case 2:
+			ClickCancel();
+			break;
+		case 3:
+		case 4:
+		case 5:
+		case 6:
+		case 7:
+		case 8:
+		case 9:
+		case 10:
+			CursurIndex = 1;
+			CursurDisplay(CursurIndex);
+			ParentActivity._MenuBaseFragment._BrightnessFragment.setCursurIndex(2);
+			ParentActivity._MenuBaseFragment._BrightnessFragment.CursurDisplay(2);
+			break;
+		default:
+			break;
+		}
+		
+	}
+	public void ClickEnter(){
+		switch (CursurIndex) {
+		case 1:
+		case 2:
+			ParentActivity._MenuBaseFragment._BrightnessFragment.ClickEnter();
+			break;
+		case 3:
+			ClickTimeStartLeft();
+			break;
+		case 4:
+			ClickTimeStartRight();
+			break;
+		case 5:
+			ClickTimeEndLeft();
+			break;
+		case 6:
+			ClickTimeEndRight();
+			break;
+		case 7:
+			CursurIndex++;
+			CursurDisplay(CursurIndex);
+			break;
+		case 8:
+			CursurIndex++;
+			CursurDisplay(CursurIndex);
+			break;
+		case 9:
+			ClickCancel();
+			break;
+		case 10:
+			ClickOK();
+			break;
+		default:
+
+			break;
+		}
+	}
+	public void CursurDisplay(int Index){
+		try {
+			imgbtnCancel.setPressed(false);
+			imgbtnOK.setPressed(false);
+			imgbtnTimeStartLeft.setPressed(false);
+			imgbtnTimeStartRight.setPressed(false);
+			imgbtnTimeEndLeft.setPressed(false);
+			imgbtnTimeEndRight.setPressed(false);
+			seekbarDayLevel.setPressed(false);
+			seekbarNightLevel.setPressed(false);
+			switch (CursurIndex) {
+				case 3:
+					imgbtnTimeStartLeft.setPressed(true);
+					break;
+				case 4:
+					imgbtnTimeStartRight.setPressed(true);
+					break;
+				case 5:
+					imgbtnTimeEndLeft.setPressed(true);
+					break;
+				case 6:
+					imgbtnTimeEndRight.setPressed(true);
+					break;
+				case 7:
+					seekbarDayLevel.setPressed(true);
+					break;
+				case 8:
+					seekbarNightLevel.setPressed(true);
+					break;
+				case 9:
+					imgbtnCancel.setPressed(true);
+					break;
+				case 10:
+					imgbtnOK.setPressed(true);
+					break;
+				default:
+					break;
+			}
+		} catch (NullPointerException e) {
+			// TODO: handle exception
+			Log.e(TAG,"NullPointerException CursurDisplay");
+		}
+	
+	}
+	/////////////////////////////////////////////////////////////////////
+	
 	
 }

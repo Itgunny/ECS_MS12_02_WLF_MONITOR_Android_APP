@@ -255,7 +255,8 @@
 	        android:layout_height="wrap_content"
 	        android:layout_alignBottom="@+id/imageView_menu_body_mode_coolingfan_auto_low_bg"
 	        android:layout_toLeftOf="@+id/imageView_menu_body_mode_coolingfan_auto_low_line_2"
-	        android:background="@drawable/_selector_menu_low_left_btn" />
+	        android:background="@drawable/_selector_menu_low_left_btn"
+	        android:visibility="invisible" />
 	
 	    <RelativeLayout
 	        android:layout_width="wrap_content"
@@ -337,7 +338,8 @@
 	        android:layout_alignBottom="@+id/ImageButton_menu_body_mode_coolingfan_auto_low_default"
 	        android:layout_alignLeft="@+id/ImageButton_menu_body_mode_coolingfan_auto_low_default"
 	        android:layout_alignRight="@+id/ImageButton_menu_body_mode_coolingfan_auto_low_default"
-	        android:layout_alignTop="@+id/ImageButton_menu_body_mode_coolingfan_auto_low_default" >
+	        android:layout_alignTop="@+id/ImageButton_menu_body_mode_coolingfan_auto_low_default"
+	        android:visibility="invisible" >
 	
 	        <LinearLayout
 	            android:layout_width="wrap_content"

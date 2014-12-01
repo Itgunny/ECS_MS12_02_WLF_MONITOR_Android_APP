@@ -30,7 +30,7 @@ public class FaultHistoryFragment extends MenuBodyList_ParentFragment{
 	//////////////////////////////////////////////////
 	
 	//VALUABLE////////////////////////////////////////
-
+	static int CursurIndex = 1;
 	//////////////////////////////////////////////////
 	
 	//Fragment////////////////////////////////////////
@@ -58,6 +58,7 @@ public class FaultHistoryFragment extends MenuBodyList_ParentFragment{
 		ParentActivity._MenuBaseFragment._MenuListTitleFragment.setBackButtonEnable(true);
 		ParentActivity.ScreenIndex = ParentActivity.SCREEN_STATE_MENU_MONITORING_FAULTHISTORY_TOP;
 		ParentActivity._MenuBaseFragment._MenuListTitleFragment.SetTitleText(ParentActivity.getResources().getString(R.string.Fault_History));
+		CursurDisplay(CursurIndex);
 		return mRoot;
 	}
 	
@@ -98,7 +99,8 @@ public class FaultHistoryFragment extends MenuBodyList_ParentFragment{
 		else
 			ParentActivity.StartAnimationRunningTimer();
 		ParentActivity._MenuBaseFragment.showBodyActiveFaultAnimation();
-		
+		CursurIndex = 1;
+		CursurDisplay(CursurIndex);
 	}
 
 	@Override
@@ -110,6 +112,8 @@ public class FaultHistoryFragment extends MenuBodyList_ParentFragment{
 			ParentActivity.StartAnimationRunningTimer();
 		ParentActivity._MenuBaseFragment.showLoggedFaultPasswordAnimation();
 	//	ParentActivity._MenuBaseFragment.showBodyLoggedFaultAnimation();
+		CursurIndex = 2;
+		CursurDisplay(CursurIndex);
 	}
 
 	@Override
@@ -137,7 +141,86 @@ public class FaultHistoryFragment extends MenuBodyList_ParentFragment{
 	}
 	
 	/////////////////////////////////////////////////////////////////////	
-	
+	public void ClickLeft(){
+		switch (CursurIndex) {
+		case 0:
+			
+			break;
+		case 1:
+			CursurIndex = 2;
+			CursurDisplay(CursurIndex);
+			break;
+		case 2:
+			CursurIndex--;
+			CursurDisplay(CursurIndex);
+			break;
+		default:
+			break;
+		}
+	}
+	public void ClickRight(){
+		switch (CursurIndex) {
+		case 0:
+			
+			break;
+		case 1:
+			CursurIndex++;
+			CursurDisplay(CursurIndex);
+			break;
+		case 2:
+			CursurIndex = 1;
+			CursurDisplay(CursurIndex);
+			break;
+		default:
+			break;
+		}
+	}
+	public void ClickESC(){
+		ParentActivity._MenuBaseFragment._MenuListTitleFragment.ClickBack();
+	}
+	public void ClickEnter(){
+		switch (CursurIndex) {
+		case 1:
+			imgbtnList[0].callOnClick();
+			break;
+		case 2:
+			imgbtnList[1].callOnClick();
+			break;
+		default:
+			break;
+		}
+	}
+	/////////////////////////////////////////////////////////////////////
+	public void CursurDisplay(int Index){
+		try {
+			switch (Index) {
+			case 1:
+				setListFocus(1);
+				break;
+			case 2:
+				setListFocus(2);
+				break;
+			case 3:
+				setListFocus(3);
+				break;
+			case 4:
+				setListFocus(4);
+				break;
+			case 5:
+				setListFocus(5);
+				break;
+			case 6:
+				setListFocus(5);
+				break;
+			default:
+				setListFocus(0);
+				break;
+			}
+		} catch (NullPointerException e) {
+			// TODO: handle exception
+			Log.e(TAG,"NullPointerException CursurDisplay");
+		}
+	}
 	/////////////////////////////////////////////////////////////////////
 	
 	/////////////////////////////////////////////////////////////////////

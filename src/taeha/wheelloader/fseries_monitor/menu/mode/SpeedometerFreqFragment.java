@@ -5,10 +5,13 @@ import taeha.wheelloader.fseries_monitor.animation.ChangeFragmentAnimation;
 import taeha.wheelloader.fseries_monitor.animation.DisappearAnimation;
 import taeha.wheelloader.fseries_monitor.animation.MainBodyShiftAnimation;
 import taeha.wheelloader.fseries_monitor.animation.LeftRightShiftAnimation;
+import taeha.wheelloader.fseries_monitor.main.CAN1CommManager;
 import taeha.wheelloader.fseries_monitor.main.Home;
 import taeha.wheelloader.fseries_monitor.main.ParentFragment;
 import taeha.wheelloader.fseries_monitor.main.R;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.text.Layout;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -59,6 +62,9 @@ public class SpeedometerFreqFragment extends ParentFragment{
 	int SpeedometerFreq_Num1;
 	int SpeedometerFreq_Num_Under1;
 	int SpeedometerFreq_Num_Under01;
+	
+	Handler HandleCursurDisplay;
+	int CursurIndex;
 	//////////////////////////////////////////////////
 	
 	//Fragment////////////////////////////////////////
@@ -86,8 +92,15 @@ public class SpeedometerFreqFragment extends ParentFragment{
 		InitButtonListener();
 		
 		DisableHalfNumButton();
+		CursurDisplay(CursurIndex);
 		ParentActivity.ScreenIndex = ParentActivity.SCREEN_STATE_MENU_MODE_ETC_FREQ_TOP;
 		ParentActivity._MenuBaseFragment._MenuInterTitleFragment.SetTitleText(ParentActivity.getResources().getString(R.string.Speedometer_Freq_Setting));
+		HandleCursurDisplay = new Handler() {
+			@Override
+			public void handleMessage(Message msg) {
+				CursurDisplay(msg.what);
+			}
+		};
 		return mRoot;
 	}
 	@Override
@@ -95,12 +108,9 @@ public class SpeedometerFreqFragment extends ParentFragment{
 		// TODO Auto-generated method stub
 		super.onResume();
 		Log.d(TAG, "onResume");
+		
 	}
 	////////////////////////////////////////////////
-	
-	
-
-	
 
 	//Common Function//////////////////////////////
 	@Override
@@ -130,6 +140,7 @@ public class SpeedometerFreqFragment extends ParentFragment{
 		radioNumUnder01 = (RadioButton)mRoot.findViewById(R.id.radio_menu_body_mode_speedometerfreq_data_under_01);
 		
 		radioGroupNum = (RadioGroup)mRoot.findViewById(R.id.radioGroup_menu_body_mode_speedometerfreq_data);
+		
 	}
 
 	protected void InitValuables() {
@@ -145,6 +156,7 @@ public class SpeedometerFreqFragment extends ParentFragment{
 		
 		InitText();
 		
+		CursurIndex = 5;
 	}
 	@Override
 	protected void InitButtonListener() {
@@ -154,6 +166,9 @@ public class SpeedometerFreqFragment extends ParentFragment{
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
+			
+				CursurIndex = 15;
+				HandleCursurDisplay.sendMessage(HandleCursurDisplay.obtainMessage(CursurIndex));
 				ClickOK();
 			}
 		});
@@ -162,6 +177,8 @@ public class SpeedometerFreqFragment extends ParentFragment{
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
+				CursurIndex = 14;
+				HandleCursurDisplay.sendMessage(HandleCursurDisplay.obtainMessage(CursurIndex));
 				ClickCancel();
 			}
 		});	
@@ -170,6 +187,8 @@ public class SpeedometerFreqFragment extends ParentFragment{
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
+				CursurIndex = 13;
+				HandleCursurDisplay.sendMessage(HandleCursurDisplay.obtainMessage(CursurIndex));
 				ClickDefault();
 			}
 		});	
@@ -178,6 +197,9 @@ public class SpeedometerFreqFragment extends ParentFragment{
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
+				
+				CursurIndex = 1;
+				HandleCursurDisplay.sendMessage(HandleCursurDisplay.obtainMessage(CursurIndex));
 				ClickNum1();
 			}
 		});	
@@ -186,6 +208,9 @@ public class SpeedometerFreqFragment extends ParentFragment{
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
+			
+				CursurIndex = 2;
+				HandleCursurDisplay.sendMessage(HandleCursurDisplay.obtainMessage(CursurIndex));
 				ClickNum2();
 			}
 		});	
@@ -194,6 +219,9 @@ public class SpeedometerFreqFragment extends ParentFragment{
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
+			
+				CursurIndex = 3;
+				HandleCursurDisplay.sendMessage(HandleCursurDisplay.obtainMessage(CursurIndex));
 				ClickNum3();
 			}
 		});	
@@ -202,6 +230,9 @@ public class SpeedometerFreqFragment extends ParentFragment{
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
+			
+				CursurIndex = 4;
+				HandleCursurDisplay.sendMessage(HandleCursurDisplay.obtainMessage(CursurIndex));
 				ClickNum4();
 			}
 		});	
@@ -210,6 +241,8 @@ public class SpeedometerFreqFragment extends ParentFragment{
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
+				CursurIndex = 5;
+				HandleCursurDisplay.sendMessage(HandleCursurDisplay.obtainMessage(CursurIndex));
 				ClickNum5();
 			}
 		});	
@@ -218,6 +251,9 @@ public class SpeedometerFreqFragment extends ParentFragment{
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
+			
+				CursurIndex = 6;
+				HandleCursurDisplay.sendMessage(HandleCursurDisplay.obtainMessage(CursurIndex));
 				ClickNum6();
 			}
 		});	
@@ -226,6 +262,9 @@ public class SpeedometerFreqFragment extends ParentFragment{
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
+	
+				CursurIndex = 7;
+				HandleCursurDisplay.sendMessage(HandleCursurDisplay.obtainMessage(CursurIndex));
 				ClickNum7();
 			}
 		});	
@@ -234,6 +273,9 @@ public class SpeedometerFreqFragment extends ParentFragment{
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
+			
+				CursurIndex = 8;
+				HandleCursurDisplay.sendMessage(HandleCursurDisplay.obtainMessage(CursurIndex));
 				ClickNum8();
 			}
 		});	
@@ -242,6 +284,9 @@ public class SpeedometerFreqFragment extends ParentFragment{
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
+		
+				CursurIndex = 9;
+				HandleCursurDisplay.sendMessage(HandleCursurDisplay.obtainMessage(CursurIndex));
 				ClickNum9();
 			}
 		});	
@@ -250,6 +295,9 @@ public class SpeedometerFreqFragment extends ParentFragment{
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
+		
+				CursurIndex = 11;
+				HandleCursurDisplay.sendMessage(HandleCursurDisplay.obtainMessage(CursurIndex));
 				ClickNum0();
 			}
 		});	
@@ -258,6 +306,9 @@ public class SpeedometerFreqFragment extends ParentFragment{
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
+			
+				CursurIndex = 10;
+				HandleCursurDisplay.sendMessage(HandleCursurDisplay.obtainMessage(CursurIndex));
 				ClickNumBack();
 			}
 		});	
@@ -266,6 +317,9 @@ public class SpeedometerFreqFragment extends ParentFragment{
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
+		
+				CursurIndex = 12;
+				HandleCursurDisplay.sendMessage(HandleCursurDisplay.obtainMessage(CursurIndex));
 				ClickNumNext();
 			}
 		});	
@@ -398,12 +452,14 @@ public class SpeedometerFreqFragment extends ParentFragment{
 	}
 	/////////////////////////////////////////////////////////////////////
 	public void EnableAllNumButton(){
+		imgbtnBack.setClickable(true);
 		textViewNum1.setClickable(true);
 		textViewNum2.setClickable(true);
 		textViewNum3.setClickable(true);
 		textViewNum4.setClickable(true);
 		textViewNum0.setClickable(true);
 		
+		imgbtnBack.setAlpha((float)1.0);
 		textViewNum1.setAlpha((float)1.0);
 		textViewNum2.setAlpha((float)1.0);
 		textViewNum3.setAlpha((float)1.0);
@@ -411,12 +467,14 @@ public class SpeedometerFreqFragment extends ParentFragment{
 		textViewNum0.setAlpha((float)1.0);
 	}
 	public void DisableHalfNumButton(){
+		imgbtnBack.setClickable(false);
 		textViewNum1.setClickable(false);
 		textViewNum2.setClickable(false);
 		textViewNum3.setClickable(false);
 		textViewNum4.setClickable(false);
 		textViewNum0.setClickable(false);
 		
+		imgbtnBack.setAlpha((float)0.5);
 		textViewNum1.setAlpha((float)0.5);
 		textViewNum2.setAlpha((float)0.5);
 		textViewNum3.setAlpha((float)0.5);
@@ -512,5 +570,354 @@ public class SpeedometerFreqFragment extends ParentFragment{
 		
 	}
 	/////////////////////////////////////////////////////////////////////
+	public void ClickLeft(){
+		int Focus = radioGroupNum.getCheckedRadioButtonId();
+		switch (CursurIndex) {
+		case 1:
+			CursurIndex = 15;
+			CursurDisplay(CursurIndex);
+			break;
+		case 2:
+			if(Focus == R.id.radio_menu_body_mode_speedometerfreq_data_10){
+				CursurIndex = 15;
+				CursurDisplay(CursurIndex);
+			}else{
+				CursurIndex--;
+				CursurDisplay(CursurIndex);
+			}
+			break;
+		case 3:
+			if(Focus == R.id.radio_menu_body_mode_speedometerfreq_data_10){
+				CursurIndex = 15;
+				CursurDisplay(CursurIndex);
+			}else{
+				CursurIndex--;
+				CursurDisplay(CursurIndex);
+			}
+			break;
+		case 4:
+			if(Focus == R.id.radio_menu_body_mode_speedometerfreq_data_10){
+				CursurIndex = 15;
+				CursurDisplay(CursurIndex);
+			}else{
+				CursurIndex--;
+				CursurDisplay(CursurIndex);
+			}
+			break;
+		case 5:
+			if(Focus == R.id.radio_menu_body_mode_speedometerfreq_data_10){
+				CursurIndex = 15;
+				CursurDisplay(CursurIndex);
+			}else{
+				CursurIndex--;
+				CursurDisplay(CursurIndex);
+			}
+			break;
+		case 6:
+			CursurIndex--;
+			CursurDisplay(CursurIndex);
+			break;
+		case 7:
+			CursurIndex--;
+			CursurDisplay(CursurIndex);
+			break;
+		case 8:
+			CursurIndex--;
+			CursurDisplay(CursurIndex);
+			break;
+		case 9:
+			CursurIndex--;
+			CursurDisplay(CursurIndex);
+			break;
+		case 10:
+			CursurIndex--;
+			CursurDisplay(CursurIndex);
+			break;
+		case 11:
+			if(Focus == R.id.radio_menu_body_mode_speedometerfreq_data_10){
+				CursurIndex = 9;
+				CursurDisplay(CursurIndex);
+			}else{
+				CursurIndex--;
+				CursurDisplay(CursurIndex);
+			}
+			break;
+		case 12:
+			if(Focus == R.id.radio_menu_body_mode_speedometerfreq_data_10){
+				CursurIndex = 9;
+				CursurDisplay(CursurIndex);
+			}else{
+				CursurIndex--;
+				CursurDisplay(CursurIndex);
+			}
+			break;
+		case 13:
+			CursurIndex--;
+			CursurDisplay(CursurIndex);
+			break;
+		case 14:
+			CursurIndex--;
+			CursurDisplay(CursurIndex);
+			break;
+		case 15:
+			CursurIndex--;
+			CursurDisplay(CursurIndex);
+			break;
+		default:
+			CursurIndex = 1;
+			CursurDisplay(CursurIndex);
+			break;
+		}
+		
+	}
+	public void ClickRight(){
+		int Focus = radioGroupNum.getCheckedRadioButtonId();
+		switch (CursurIndex) {
+		case 1:
+			if(Focus == R.id.radio_menu_body_mode_speedometerfreq_data_10){
+				CursurIndex = 5;
+				CursurDisplay(CursurIndex);
+			}else{
+				CursurIndex++;
+				CursurDisplay(CursurIndex);
+			}
+			break;
+		case 2:
+			if(Focus == R.id.radio_menu_body_mode_speedometerfreq_data_10){
+				CursurIndex = 5;
+				CursurDisplay(CursurIndex);
+			}else{
+				CursurIndex++;
+				CursurDisplay(CursurIndex);
+			}
+			break;
+		case 3:
+			if(Focus == R.id.radio_menu_body_mode_speedometerfreq_data_10){
+				CursurIndex = 5;
+				CursurDisplay(CursurIndex);
+			}else{
+				CursurIndex++;
+				CursurDisplay(CursurIndex);
+			}
+			break;
+		case 4:
+			CursurIndex++;
+			CursurDisplay(CursurIndex);
+			break;
+		case 5:
+			CursurIndex++;
+			CursurDisplay(CursurIndex);
+			break;
+		case 6:
+			CursurIndex++;
+			CursurDisplay(CursurIndex);
+			break;
+		case 7:
+			CursurIndex++;
+			CursurDisplay(CursurIndex);
+			break;
+		case 8:
+			CursurIndex++;
+			CursurDisplay(CursurIndex);
+			break;
+		case 9:
+			if(Focus == R.id.radio_menu_body_mode_speedometerfreq_data_10){
+				CursurIndex = 12;
+				CursurDisplay(CursurIndex);
+			}else{
+				CursurIndex++;
+				CursurDisplay(CursurIndex);
+			}
+			break;
+		case 10:
+			CursurIndex++;
+			CursurDisplay(CursurIndex);
+			break;
+		case 11:
+			CursurIndex++;
+			CursurDisplay(CursurIndex);
+			break;
+		case 12:
+			CursurIndex++;
+			CursurDisplay(CursurIndex);
+			break;
+		case 13:
+			CursurIndex++;
+			CursurDisplay(CursurIndex);
+			break;
+		case 14:
+			CursurIndex++;
+			CursurDisplay(CursurIndex);
+			break;
+		case 15:
+			if(Focus == R.id.radio_menu_body_mode_speedometerfreq_data_10){
+				CursurIndex = 5;
+				CursurDisplay(CursurIndex);
+			}else{
+				CursurIndex = 1;
+				CursurDisplay(CursurIndex);
+			}
+			break;
+		default:
+			CursurIndex = 1;
+			CursurDisplay(CursurIndex);
+			break;
+		}
+	}
+	public void ClickESC(){
+		ClickCancel();
+	}
+	public void ClickEnter(){
+		int Focus = radioGroupNum.getCheckedRadioButtonId();
+		switch (CursurIndex) {
+		case 1:
+			if(Focus == R.id.radio_menu_body_mode_speedometerfreq_data_10){
+				CursurIndex = 5;
+				CursurDisplay(CursurIndex);
+			}else{
+				ClickNum1();
+			}
+			break;
+		case 2:
+			if(Focus == R.id.radio_menu_body_mode_speedometerfreq_data_10){
+				CursurIndex = 5;
+				CursurDisplay(CursurIndex);
+			}else{
+				ClickNum2();
+			}
+			break;
+		case 3:
+			if(Focus == R.id.radio_menu_body_mode_speedometerfreq_data_10){
+				CursurIndex = 5;
+				CursurDisplay(CursurIndex);
+			}else{
+				ClickNum3();
+			}
+			break;
+		case 4:
+			if(Focus == R.id.radio_menu_body_mode_speedometerfreq_data_10){
+				CursurIndex = 5;
+				CursurDisplay(CursurIndex);
+			}else{
+				ClickNum4();
+			}
+			break;
+		case 5:
+			ClickNum5();
+			break;
+		case 6:
+			ClickNum6();
+			break;
+		case 7:
+			ClickNum7();
+			break;
+		case 8:
+			ClickNum8();
+			break;
+		case 9:
+			ClickNum9();
+			break;
+		case 10:
+			if(Focus == R.id.radio_menu_body_mode_speedometerfreq_data_10){
+				CursurIndex = 5;
+				CursurDisplay(CursurIndex);
+			}else{
+				ClickNumNext();
+			}
+			break;
+		case 11:
+			if(Focus == R.id.radio_menu_body_mode_speedometerfreq_data_10){
+				CursurIndex = 5;
+				CursurDisplay(CursurIndex);
+			}else{
+				ClickNum0();
+			}
+			break;
+		case 12:
+			ClickNumNext();
+			break;
+		case 13:
+			ClickDefault();
+			break;
+		case 14:
+			ClickCancel();
+			break;
+		case 15:
+			ClickOK();
+			break;
+		default:
+			break;
+		}
+	}
+	public void CursurDisplay(int Index){
+		imgbtnOK.setPressed(false);
+		imgbtnCancel.setPressed(false);
+		imgbtnDefault.setPressed(false);
+
+		textViewNum1.setPressed(false);
+		textViewNum2.setPressed(false);
+		textViewNum3.setPressed(false);
+		textViewNum4.setPressed(false);
+		textViewNum5.setPressed(false);
+		textViewNum6.setPressed(false);
+		textViewNum7.setPressed(false);
+		textViewNum8.setPressed(false);
+		textViewNum9.setPressed(false);
+		textViewNum0.setPressed(false);
+		imgbtnBack.setPressed(false);
+		textViewNext.setPressed(false);
+
+		switch (Index) {
+		case 1:
+			textViewNum1.setPressed(true);
+			break;
+		case 2:
+			textViewNum2.setPressed(true);
+			break;
+		case 3:
+			textViewNum3.setPressed(true);
+			break;
+		case 4:
+			textViewNum4.setPressed(true);
+			break;
+		case 5:
+			textViewNum5.setPressed(true);
+			break;
+		case 6:
+			textViewNum6.setPressed(true);
+			break;
+		case 7:
+			textViewNum7.setPressed(true);
+			break;
+		case 8:
+			textViewNum8.setPressed(true);
+			break;
+		case 9:
+			textViewNum9.setPressed(true);
+			break;
+		case 10:
+			imgbtnBack.setPressed(true);
+			break;
+		case 11:
+			textViewNum0.setPressed(true);
+			break;
+		case 12:
+			textViewNext.setPressed(true);
+			break;
+		case 13:
+			imgbtnDefault.setPressed(true);
+			break;
+		case 14:
+			imgbtnCancel.setPressed(true);
+			break;
+		case 15:
+			imgbtnOK.setPressed(true);
+			break;
+		default:
+			break;
+		}
+	}
 	
+	
+	/////////////////////////////////////////////////////////////////////
 }

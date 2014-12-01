@@ -5,11 +5,14 @@ import taeha.wheelloader.fseries_monitor.animation.ChangeFragmentAnimation;
 import taeha.wheelloader.fseries_monitor.animation.DisappearAnimation;
 import taeha.wheelloader.fseries_monitor.animation.MainBodyShiftAnimation;
 import taeha.wheelloader.fseries_monitor.animation.LeftRightShiftAnimation;
+import taeha.wheelloader.fseries_monitor.main.CAN1CommManager;
 import taeha.wheelloader.fseries_monitor.main.Home;
 import taeha.wheelloader.fseries_monitor.main.ParentFragment;
 import taeha.wheelloader.fseries_monitor.main.R;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.text.Layout;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -51,6 +54,9 @@ public class UnitFragment extends ParentFragment{
 	int UnitTemp;
 	int UnitWeight;
 	int UnitPressure;
+	
+	Handler HandleCursurDisplay;
+	int CursurIndex;
 	//////////////////////////////////////////////////
 	
 	//Fragment////////////////////////////////////////
@@ -79,6 +85,13 @@ public class UnitFragment extends ParentFragment{
 		
 		ParentActivity.ScreenIndex = ParentActivity.SCREEN_STATE_MENU_PREFERENCE_UNIT_TOP;
 		ParentActivity._MenuBaseFragment._MenuInterTitleFragment.SetTitleText(ParentActivity.getResources().getString(R.string.Unit_Setting));
+		HandleCursurDisplay = new Handler() {
+			@Override
+			public void handleMessage(Message msg) {
+			
+				CursurDisplay(msg.what);
+			}
+		};
 		return mRoot;
 	}
 	
@@ -122,6 +135,8 @@ public class UnitFragment extends ParentFragment{
 		SpeedDisplay(UnitOdo);
 		WeightDisplay(UnitWeight);
 		PressureDisplay(UnitPressure);
+		
+		CursurFirstDisplay(UnitTemp);
 	}
 	@Override
 	protected void InitButtonListener() {
@@ -131,6 +146,8 @@ public class UnitFragment extends ParentFragment{
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
+				CursurIndex = 12;
+				HandleCursurDisplay.sendMessage(HandleCursurDisplay.obtainMessage(CursurIndex));
 				ClickOK();
 			}
 		});
@@ -139,6 +156,8 @@ public class UnitFragment extends ParentFragment{
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
+				CursurIndex = 11;
+				HandleCursurDisplay.sendMessage(HandleCursurDisplay.obtainMessage(CursurIndex));
 				ClickCancel();
 			}
 		});
@@ -147,6 +166,8 @@ public class UnitFragment extends ParentFragment{
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
+				CursurIndex = 2;
+				HandleCursurDisplay.sendMessage(HandleCursurDisplay.obtainMessage(CursurIndex));
 				ClickTempC();
 			}
 		});
@@ -155,6 +176,8 @@ public class UnitFragment extends ParentFragment{
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
+				CursurIndex = 1;
+				HandleCursurDisplay.sendMessage(HandleCursurDisplay.obtainMessage(CursurIndex));
 				ClickTempF();
 			}
 		});
@@ -163,6 +186,8 @@ public class UnitFragment extends ParentFragment{
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
+				CursurIndex = 3;
+				HandleCursurDisplay.sendMessage(HandleCursurDisplay.obtainMessage(CursurIndex));
 				ClickSpeedKM();
 			}
 		});
@@ -171,6 +196,8 @@ public class UnitFragment extends ParentFragment{
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
+				CursurIndex = 4;
+				HandleCursurDisplay.sendMessage(HandleCursurDisplay.obtainMessage(CursurIndex));
 				ClickSpeedMile();
 			}
 		});
@@ -179,6 +206,8 @@ public class UnitFragment extends ParentFragment{
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
+				CursurIndex = 5;
+				HandleCursurDisplay.sendMessage(HandleCursurDisplay.obtainMessage(CursurIndex));
 				ClickWeightTon();
 			}
 		});
@@ -187,6 +216,8 @@ public class UnitFragment extends ParentFragment{
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
+				CursurIndex = 6;
+				HandleCursurDisplay.sendMessage(HandleCursurDisplay.obtainMessage(CursurIndex));
 				ClickWeightLB();
 			}
 		});
@@ -195,6 +226,8 @@ public class UnitFragment extends ParentFragment{
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
+				CursurIndex = 7;
+				HandleCursurDisplay.sendMessage(HandleCursurDisplay.obtainMessage(CursurIndex));
 				ClickPressureBar();
 			}
 		});
@@ -203,6 +236,8 @@ public class UnitFragment extends ParentFragment{
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
+				CursurIndex = 8;
+				HandleCursurDisplay.sendMessage(HandleCursurDisplay.obtainMessage(CursurIndex));
 				ClickPressureMpa();
 			}
 		});
@@ -211,6 +246,8 @@ public class UnitFragment extends ParentFragment{
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
+				CursurIndex = 9;
+				HandleCursurDisplay.sendMessage(HandleCursurDisplay.obtainMessage(CursurIndex));
 				ClickPressureKgf();
 			}
 		});
@@ -219,6 +256,8 @@ public class UnitFragment extends ParentFragment{
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
+				CursurIndex = 10;
+				HandleCursurDisplay.sendMessage(HandleCursurDisplay.obtainMessage(CursurIndex));
 				ClickPressurePsi();
 			}
 		});
@@ -387,4 +426,168 @@ public class UnitFragment extends ParentFragment{
 		Log.d(TAG,"SavePref");
 	}
 	/////////////////////////////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////////
+	public void ClickLeft(){
+		switch (CursurIndex) {
+		case 1:
+			CursurIndex = 12;
+			CursurDisplay(CursurIndex);
+			break;
+		case 2:
+		case 3:
+		case 4:
+		case 5:
+		case 6:
+		case 7:
+		case 8:
+		case 9:
+		case 10:
+		case 11:
+		case 12:
+			CursurIndex--;
+			CursurDisplay(CursurIndex);
+			break;
+		default:
+			break;
+		}
+		
+	}
+	public void ClickRight(){
+		switch (CursurIndex) {
+		case 1:
+		case 2:
+		case 3:
+		case 4:
+		case 5:
+		case 6:
+		case 7:
+		case 8:
+		case 9:
+		case 10:
+		case 11:
+			CursurIndex++;
+			CursurDisplay(CursurIndex);
+			break;
+		case 12:
+			CursurIndex = 1;
+			CursurDisplay(CursurIndex);
+			break;
+		default:
+			break;
+		}
+	}
+	public void ClickESC(){
+		ClickCancel();
+	}
+	public void ClickEnter(){
+		switch (CursurIndex) {
+		case 1:
+			ClickTempF();
+			break;
+		case 2:
+			ClickTempC();
+			break;
+		case 3:
+			ClickSpeedKM();
+			break;
+		case 4:
+			ClickSpeedMile();
+			break;
+		case 5:
+			ClickWeightTon();
+			break;
+		case 6:
+			ClickWeightLB();
+			break;
+		case 7:
+			ClickPressureBar();
+			break;
+		case 8:
+			ClickPressureMpa();
+			break;
+		case 9:
+			ClickPressureKgf();
+			break;
+		case 10:
+			ClickPressurePsi();
+			break;
+		case 11:
+			ClickCancel();
+			break;
+		case 12:
+			ClickOK();
+			break;
+
+		default:
+			break;
+		}
+	}
+	public void CursurFirstDisplay(int data){
+		switch (data) {
+		case Home.UNIT_TEMP_C:
+		default:
+			CursurIndex = 2;
+			CursurDisplay(CursurIndex);
+			break;
+		case Home.UNIT_TEMP_F:
+			CursurIndex = 1;
+			CursurDisplay(CursurIndex);
+			break;
+	
+		}
+	}
+	public void CursurDisplay(int Index){
+		imgbtnOK.setPressed(false);
+		imgbtnCancel.setPressed(false);
+		radioTempC.setPressed(false);
+		radioTempF.setPressed(false);
+		radioSpeedKM.setPressed(false);
+		radioSpeedMile.setPressed(false);
+		radioWeightTon.setPressed(false);
+		radioWeightLB.setPressed(false);
+		radioPressureBar.setPressed(false);
+		radioPressureMpa.setPressed(false);
+		radioPressureKgf.setPressed(false);
+		radioPressurePsi.setPressed(false);
+		switch (Index) {
+		case 1:
+			radioTempF.setPressed(true);
+			break;
+		case 2:
+			radioTempC.setPressed(true);
+			break;
+		case 3:
+			radioSpeedKM.setPressed(true);
+			break;
+		case 4:
+			radioSpeedMile.setPressed(true);
+			break;
+		case 5:
+			radioWeightTon.setPressed(true);
+			break;
+		case 6:
+			radioWeightLB.setPressed(true);
+			break;
+		case 7:
+			radioPressureBar.setPressed(true);
+			break;
+		case 8:
+			radioPressureMpa.setPressed(true);
+			break;
+		case 9:
+			radioPressureKgf.setPressed(true);
+			break;
+		case 10:
+			radioPressurePsi.setPressed(true);
+			break;
+		case 11:
+			imgbtnCancel.setPressed(true);
+			break;
+		case 12:
+			imgbtnOK.setPressed(true);
+			break;
+		default:
+			break;
+		}
+	}
 }

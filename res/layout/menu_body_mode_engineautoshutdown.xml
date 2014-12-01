@@ -122,7 +122,7 @@
 	                android:layout_width="wrap_content"
 	                android:layout_height="wrap_content"
 	                android:layout_centerVertical="true"
-	                android:src="@drawable/menu_mode_engine_auto_stop_slide_bg" />
+	                android:src="@drawable/menu_mode_engine_auto_stop_slide_bg02" />
 	        
 		        <SeekBar
 		            android:id="@+id/seekBar_menu_body_mode_engineautoshutdown"
@@ -156,7 +156,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
-            android:src="@drawable/btn_check_off" />
+            android:src="@drawable/menu_bluedot" />
 
         <TextView
             android:id="@+id/textView_menu_body_mode_engineautoshutdown_esl_title"

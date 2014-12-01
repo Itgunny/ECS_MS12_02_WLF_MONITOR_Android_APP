@@ -9,7 +9,10 @@ import taeha.wheelloader.fseries_monitor.main.CAN1CommManager;
 import taeha.wheelloader.fseries_monitor.main.Home;
 import taeha.wheelloader.fseries_monitor.main.ParentFragment;
 import taeha.wheelloader.fseries_monitor.main.R;
+import taeha.wheelloader.fseries_monitor.menu.PasswordFragment;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.text.Layout;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -36,6 +39,8 @@ public class EngineSpeedFragment extends ParentFragment{
 	
 	//VALUABLE////////////////////////////////////////
 	int EngineRPM;
+	int CursurIndex;
+	Handler HandleCursurDisplay;
 	//////////////////////////////////////////////////
 	
 	//Fragment////////////////////////////////////////
@@ -62,8 +67,18 @@ public class EngineSpeedFragment extends ParentFragment{
 		InitValuables();
 		InitButtonListener();
 		
+		CursurDisplay(CursurIndex);
 		ParentActivity.ScreenIndex = ParentActivity.SCREEN_STATE_MENU_MODE_ENGINETM_ENGINESETTING_SPEED;
 		ParentActivity._MenuBaseFragment._MenuInterTitleFragment.SetTitleText(ParentActivity.getResources().getString(R.string.Engine_Speed));
+		
+		HandleCursurDisplay = new Handler() {
+			@Override
+			public void handleMessage(Message msg) {
+			
+				CursurDisplay(msg.what);
+			}
+		};
+		
 		return mRoot;
 	}
 
@@ -89,9 +104,7 @@ public class EngineSpeedFragment extends ParentFragment{
 	protected void InitValuables() {
 		// TODO Auto-generated method stub
 		super.InitValuables();
-		
-		
-		
+		CursurIndex = 1;
 	}
 	@Override
 	protected void InitButtonListener() {
@@ -102,6 +115,9 @@ public class EngineSpeedFragment extends ParentFragment{
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
 				ClickOK();
+				CursurIndex = 3;
+				HandleCursurDisplay.sendMessage(HandleCursurDisplay.obtainMessage(CursurIndex));
+				
 			}
 		});
 		imgbtnPlus.setOnClickListener(new View.OnClickListener() {
@@ -110,6 +126,8 @@ public class EngineSpeedFragment extends ParentFragment{
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
 				ClickPlus();
+				CursurIndex = 2;
+				HandleCursurDisplay.sendMessage(HandleCursurDisplay.obtainMessage(CursurIndex));
 			}
 		});
 		imgbtnMinus.setOnClickListener(new View.OnClickListener() {
@@ -118,6 +136,8 @@ public class EngineSpeedFragment extends ParentFragment{
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
 				ClickMinus();
+				CursurIndex = 1;
+				HandleCursurDisplay.sendMessage(HandleCursurDisplay.obtainMessage(CursurIndex));
 			}
 		});
 	}
@@ -151,6 +171,76 @@ public class EngineSpeedFragment extends ParentFragment{
 		CAN1Comm.Set_RequestEngineLowIdleSpeed_PGN61184_109(CAN1CommManager.DATA_STATE_ENGINERPM_DOWN);
 		CAN1Comm.TxCANToMCU(109);
 		CAN1Comm.Set_RequestEngineLowIdleSpeed_PGN61184_109(3); 
+	}
+	public void ClickLeft(){
+		switch (CursurIndex) {
+		case 1:
+			CursurIndex = 3;
+			CursurDisplay(CursurIndex);
+			break;
+		case 2:
+		case 3:
+			CursurIndex--;
+			CursurDisplay(CursurIndex);
+			break;
+		default:
+			break;
+		}
+		
+	}
+	public void ClickRight(){
+		switch (CursurIndex) {
+		case 1:
+		case 2:
+			CursurIndex++;
+			CursurDisplay(CursurIndex);
+			break;
+		case 3:
+			CursurIndex = 1;
+			CursurDisplay(CursurIndex);
+			break;
+		default:
+			break;
+		}
+	}
+	public void ClickESC(){
+		ClickOK();
+	}
+	public void ClickEnter(){
+		switch (CursurIndex) {
+		case 1:
+			ClickMinus();
+			break;
+		case 2:
+			ClickPlus();
+			break;
+		case 3:
+			ClickOK();
+			break;
+		default:
+			break;
+		}
+	}
+	public void CursurDisplay(int Index){
+		switch (Index) {
+		case 1:
+			imgbtnMinus.setPressed(true);
+			imgbtnPlus.setPressed(false);
+			imgbtnOK.setPressed(false);
+			break;
+		case 2:
+			imgbtnMinus.setPressed(false);
+			imgbtnPlus.setPressed(true);
+			imgbtnOK.setPressed(false);
+			break;
+		case 3:
+			imgbtnMinus.setPressed(false);
+			imgbtnPlus.setPressed(false);
+			imgbtnOK.setPressed(true);
+			break;
+		default:
+			break;
+		}
 	}
 	/////////////////////////////////////////////////////////////////////
 	public void EngineRPMDisplay(int Data){

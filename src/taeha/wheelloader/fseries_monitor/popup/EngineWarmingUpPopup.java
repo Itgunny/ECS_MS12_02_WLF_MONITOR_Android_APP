@@ -14,6 +14,7 @@ import taeha.wheelloader.fseries_monitor.main.CAN1CommManager;
 import taeha.wheelloader.fseries_monitor.main.Home;
 import taeha.wheelloader.fseries_monitor.main.ParentPopup;
 import taeha.wheelloader.fseries_monitor.main.R;
+import taeha.wheelloader.fseries_monitor.main.R.string;
 
 public class EngineWarmingUpPopup extends ParentPopup{
 	//CONSTANT////////////////////////////////////////
@@ -25,7 +26,7 @@ public class EngineWarmingUpPopup extends ParentPopup{
 	//////////////////////////////////////////////////
 	
 	//VALUABLE////////////////////////////////////////
-
+	int EngineWarmingUp;
 	//////////////////////////////////////////////////
 	
 	//ANIMATION///////////////////////////////////////
@@ -63,7 +64,12 @@ public class EngineWarmingUpPopup extends ParentPopup{
 		super.dismiss();
 		ParentActivity.ScreenIndex = ParentActivity.SCREEN_STATE_MENU_MODE_ENGINETM_ENGINESETTING_TOP;
 	}
-
+	@Override
+	public void InitValuable(){
+		super.InitValuable();
+		EngineWarmingUp = CAN1Comm.Get_EngineAlternateLowIdelSwitch_348_PGN65350();
+		WarmingUpDisplay(EngineWarmingUp);
+	}
 	@Override
 	protected void InitResource() {
 		// TODO Auto-generated method stub
@@ -113,5 +119,84 @@ public class EngineWarmingUpPopup extends ParentPopup{
 		CAN1Comm.Set_EngineAlternateLowIdleSwitch_348_PGN61184_101(CAN1CommManager.DATA_STATE_ENGINE_WARMINGUP_OFF);
 		CAN1Comm.TxCANToMCU(101);
 		this.dismiss();
-	}	
+	}
+	public void ClickLeft(){
+		switch (CursurIndex) {
+		case 1:
+			CursurIndex = 2;
+			CursurDisplay(CursurIndex);
+			break;
+		case 2:
+			CursurIndex--;
+			CursurDisplay(CursurIndex);
+			break;
+		default:
+			CursurIndex = 1;
+			CursurDisplay(CursurIndex);
+			break;
+		}
+	}
+	public void ClickRight(){
+		switch (CursurIndex) {
+		case 1:
+			CursurIndex++;
+			CursurDisplay(CursurIndex);
+			break;
+		case 2:
+			CursurIndex = 1;
+			CursurDisplay(CursurIndex);
+			break;
+		default:
+			CursurIndex = 1;
+			CursurDisplay(CursurIndex);
+			break;
+		}
+	}
+	public void ClickESC(){
+		
+	}
+	public void ClickEnter(){
+		switch (CursurIndex) {
+		case 1:
+			ClickOff();
+			break;
+		case 2:
+			ClickOn();
+			break;
+		default:
+			
+			break;
+		}
+	}
+	////////////////////////////////////////////////////////////////////////////////
+	public void CursurDisplay(int Index){
+		switch (Index) {
+		case 1:
+			textViewOn.setPressed(false);
+			textViewOff.setPressed(true);
+			break;
+		case 2:
+			textViewOn.setPressed(true);
+			textViewOff.setPressed(false);
+			break;
+		default:
+			break;
+		}
+	}
+	public void WarmingUpDisplay(int data){
+	
+		switch (data) {
+		case CAN1CommManager.DATA_STATE_ENGINE_WARMINGUP_OFF:
+			CursurIndex = 1;
+			CursurDisplay(CursurIndex);
+			break;
+		case CAN1CommManager.DATA_STATE_ENGINE_WARMINGUP_ON:
+			CursurIndex = 2;
+			CursurDisplay(CursurIndex);
+			break;
+		default:
+			break;
+
+		}
+	}
 }

@@ -57,7 +57,12 @@ public class SoundOutputPopup extends ParentPopup{
 		
 		ParentActivity.ScreenIndex = ParentActivity.SCREEN_STATE_MENU_PREFERENCE_SOUNDOUTPUT_TOP;
 	}
-
+	@Override
+	public void InitValuable(){
+		super.InitValuable();
+		SoundState = ParentActivity.SoundState; 
+		SoundOuputDisplay(SoundState);
+	}
 	@Override
 	public void dismiss() {
 		// TODO Auto-generated method stub
@@ -145,5 +150,83 @@ public class SoundOutputPopup extends ParentPopup{
 		edit.putInt("SoundState", SoundState);
 		edit.commit();
 		Log.d(TAG,"SavePref");
+	}
+	////////////////////////////////////////////////////////////////////////////////
+	public void ClickLeft(){
+		switch (CursurIndex) {
+		case 1:
+			CursurIndex = 2;
+			CursurDisplay(CursurIndex);
+			break;
+		case 2:
+			CursurIndex--;
+			CursurDisplay(CursurIndex);
+			break;
+		default:
+			CursurIndex = 1;
+			CursurDisplay(CursurIndex);
+			break;
+		}
+	}
+	public void ClickRight(){
+		switch (CursurIndex) {
+		case 1:
+			CursurIndex++;
+			CursurDisplay(CursurIndex);
+			break;
+		case 2:
+			CursurIndex = 1;
+			CursurDisplay(CursurIndex);
+			break;
+		default:
+			CursurIndex = 1;
+			CursurDisplay(CursurIndex);
+			break;
+		}
+	}
+	public void ClickESC(){
+		
+	}
+	public void ClickEnter(){
+		switch (CursurIndex) {
+		case 1:
+			ClickInternal();
+			break;
+		case 2:
+			ClickExternal();
+			break;
+		default:
+			
+			break;
+		}
+	}
+	////////////////////////////////////////////////////////////////////////////////
+	public void CursurDisplay(int Index){
+		switch (Index) {
+		case 1:
+			textViewInternal.setPressed(true);
+			textViewExternal.setPressed(false);
+			break;
+		case 2:
+			textViewInternal.setPressed(false);
+			textViewExternal.setPressed(true);
+			break;
+		default:
+			break;
+		}
+	}
+	public void SoundOuputDisplay(int data){
+		switch (data) {
+		case Home.STATE_INTERNAL_SPK:
+			CursurIndex = 1;
+			CursurDisplay(CursurIndex);
+			break;
+		case Home.STATE_EXTERNAL_AUX:
+			CursurIndex = 2;
+			CursurDisplay(CursurIndex);
+			break;
+		default:
+			break;
+		}
 	}
 }

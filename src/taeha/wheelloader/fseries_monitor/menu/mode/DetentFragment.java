@@ -13,6 +13,8 @@ import taeha.wheelloader.fseries_monitor.main.Home;
 import taeha.wheelloader.fseries_monitor.main.ParentFragment;
 import taeha.wheelloader.fseries_monitor.main.R;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.text.Layout;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -49,6 +51,10 @@ public class DetentFragment extends ParentFragment{
 	int SendCount;
 	
 	private Timer mPosTimer = null;
+	
+	int CursurIndex;
+	
+	Handler HandleCursurDisplay;
 	//////////////////////////////////////////////////
 	
 	//Fragment////////////////////////////////////////
@@ -80,6 +86,14 @@ public class DetentFragment extends ParentFragment{
 		DetentBoomDisplay(BoomDetentMode);
 		DetentBucketDisplay(BucketDetentMode);
 
+		HandleCursurDisplay = new Handler() {
+			@Override
+			public void handleMessage(Message msg) {
+			
+				CursurDisplay(msg.what);
+			}
+		};
+		
 		return mRoot;
 	}
 	@Override
@@ -117,7 +131,7 @@ public class DetentFragment extends ParentFragment{
 		BucketDetentMode = CAN1Comm.Get_BucketDetentMode_224_PGN61184_124();
 		DetentBoomDisplay(BoomDetentMode);
 		DetentBucketDisplay(BucketDetentMode);
-		
+		CursurFirstDisplay(BoomDetentMode);
 	}
 	@Override
 	protected void InitButtonListener() {
@@ -128,6 +142,8 @@ public class DetentFragment extends ParentFragment{
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
 				ClickOK();
+				CursurIndex = 7;
+				HandleCursurDisplay.sendMessage(HandleCursurDisplay.obtainMessage(CursurIndex));
 			}
 		});
 		textViewBoomSavePosition.setOnClickListener(new View.OnClickListener() {
@@ -136,6 +152,8 @@ public class DetentFragment extends ParentFragment{
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
 				ClickBoomSavePosition();
+			//	CursurIndex = 3;
+			//	HandleCursurDisplay.sendMessage(HandleCursurDisplay.obtainMessage(CursurIndex));
 			}
 		});
 		textViewBucketSavePosition.setOnClickListener(new View.OnClickListener() {
@@ -144,6 +162,8 @@ public class DetentFragment extends ParentFragment{
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
 				ClickBucketSavePosition();
+			//	CursurIndex = 6;
+			//	HandleCursurDisplay.sendMessage(HandleCursurDisplay.obtainMessage(CursurIndex));
 			}
 		});
 		radioBoomOff.setOnClickListener(new View.OnClickListener() {
@@ -152,6 +172,8 @@ public class DetentFragment extends ParentFragment{
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
 				ClickBoomOff();
+				CursurIndex = 2;
+				HandleCursurDisplay.sendMessage(HandleCursurDisplay.obtainMessage(CursurIndex));
 			}
 		});
 		radioBoomOn.setOnClickListener(new View.OnClickListener() {
@@ -160,6 +182,8 @@ public class DetentFragment extends ParentFragment{
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
 				ClickBoomOn();
+				CursurIndex = 1;
+				HandleCursurDisplay.sendMessage(HandleCursurDisplay.obtainMessage(CursurIndex));
 			}
 		});
 		radioBucketOff.setOnClickListener(new View.OnClickListener() {
@@ -168,6 +192,8 @@ public class DetentFragment extends ParentFragment{
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
 				ClickBucketOff();
+				CursurIndex = 4;
+				HandleCursurDisplay.sendMessage(HandleCursurDisplay.obtainMessage(CursurIndex));
 			}
 		});
 		radioBucketOn.setOnClickListener(new View.OnClickListener() {
@@ -176,6 +202,8 @@ public class DetentFragment extends ParentFragment{
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
 				ClickBucketOn();
+				CursurIndex = 5;
+				HandleCursurDisplay.sendMessage(HandleCursurDisplay.obtainMessage(CursurIndex));
 			}
 		});
 		
@@ -207,21 +235,25 @@ public class DetentFragment extends ParentFragment{
 		CAN1Comm.Set_BoomDetentMode_223_PGN61184_123(CAN1CommManager.DATA_STATE_KEY_DETENT_BOOM_OFF);
 		CAN1Comm.TxCANToMCU(123);
 		CAN1Comm.Set_BoomDetentMode_223_PGN61184_123(7);
+		DetentBoomDisplay(CAN1CommManager.DATA_STATE_KEY_DETENT_BOOM_OFF);
 	}
 	public void ClickBoomOn(){
 		CAN1Comm.Set_BoomDetentMode_223_PGN61184_123(CAN1CommManager.DATA_STATE_KEY_DETENT_BOOM_UPDOWN);
 		CAN1Comm.TxCANToMCU(123);
 		CAN1Comm.Set_BoomDetentMode_223_PGN61184_123(7);
+		DetentBoomDisplay(CAN1CommManager.DATA_STATE_KEY_DETENT_BOOM_UPDOWN);
 	}
 	public void ClickBucketOff(){
 		CAN1Comm.Set_BucketDetentMode_224_PGN61184_123(CAN1CommManager.DATA_STATE_KEY_DETENT_BUCKET_OFF);
 		CAN1Comm.TxCANToMCU(123);
 		CAN1Comm.Set_BucketDetentMode_224_PGN61184_123(7);
+		DetentBucketDisplay(CAN1CommManager.DATA_STATE_KEY_DETENT_BUCKET_OFF);
 	}
 	public void ClickBucketOn(){
 		CAN1Comm.Set_BucketDetentMode_224_PGN61184_123(CAN1CommManager.DATA_STATE_KEY_DETENT_BUCKET_IN);
 		CAN1Comm.TxCANToMCU(123);
 		CAN1Comm.Set_BucketDetentMode_224_PGN61184_123(7);
+		DetentBucketDisplay(CAN1CommManager.DATA_STATE_KEY_DETENT_BUCKET_IN);
 	}
 	public void ClickBoomSavePosition(){
 		CAN1Comm.Set_RequestDetentReleasePositionSetting_PGN61184_123(15);
@@ -280,7 +312,160 @@ public class DetentFragment extends ParentFragment{
 	
 	}
 	/////////////////////////////////////////////////////////////////////
-	
+	public void ClickLeft(){
+		switch (CursurIndex) {
+		case 1:
+			CursurIndex = 7;
+			CursurDisplay(CursurIndex);
+			break;
+		case 2:
+			CursurIndex--;
+			CursurDisplay(CursurIndex);
+			break;
+		case 3:
+			CursurIndex--;
+			CursurDisplay(CursurIndex);
+			break;
+		case 4:
+			CursurIndex = 2;
+			CursurDisplay(CursurIndex);
+			break;
+		case 5:
+			CursurIndex--;
+			CursurDisplay(CursurIndex);
+			break;
+		case 6:
+			CursurIndex--;
+			CursurDisplay(CursurIndex);
+			break;
+		case 7:
+			CursurIndex = 5;
+			CursurDisplay(CursurIndex);
+			break;
+		default:
+			CursurIndex = 1;
+			CursurDisplay(CursurIndex);
+			break;
+		}
+		
+	}
+	public void ClickRight(){
+		switch (CursurIndex) {
+		case 1:
+			CursurIndex++;
+			CursurDisplay(CursurIndex);
+			break;
+		case 2:
+			CursurIndex = 4;
+			CursurDisplay(CursurIndex);
+			break;
+		case 3:
+			CursurIndex++;
+			CursurDisplay(CursurIndex);
+			break;
+		case 4:
+			CursurIndex++;
+			CursurDisplay(CursurIndex);
+			break;
+		case 5:
+			CursurIndex = 7;
+			CursurDisplay(CursurIndex);
+			break;
+		case 6:
+			CursurIndex++;
+			CursurDisplay(CursurIndex);
+			break;
+		case 7:
+			CursurIndex = 1;
+			CursurDisplay(CursurIndex);
+			break;
+		default:
+			CursurIndex = 1;
+			CursurDisplay(CursurIndex);
+			break;
+		}
+	}
+	public void ClickESC(){
+		ClickOK();
+	}
+	public void ClickEnter(){
+		switch (CursurIndex) {
+		case 1:
+			ClickBoomOff();
+			break;
+		case 2:
+			ClickBoomOn();
+			break;
+		case 3:
+
+			break;
+		case 4:
+			ClickBucketOff();
+			break;
+		case 5:
+			ClickBucketOn();
+			break;
+		case 6:
+
+			break;
+		case 7:
+			ClickOK();
+			break;
+			
+		default:
+			break;
+		}
+	}
+	public void CursurFirstDisplay(int data){
+		switch (data) {
+		case CAN1CommManager.DATA_STATE_KEY_DETENT_BOOM_OFF:
+			CursurIndex = 1;
+			CursurDisplay(CursurIndex);
+			break;
+		case CAN1CommManager.DATA_STATE_KEY_DETENT_BOOM_UPDOWN:
+			CursurIndex = 2;
+			CursurDisplay(CursurIndex);
+			break;
+		default:
+			break;
+		}
+	}
+	public void CursurDisplay(int Index){
+		imgbtnOK.setPressed(false);
+		textViewBoomSavePosition.setPressed(false);
+		textViewBucketSavePosition.setPressed(false);
+		radioBoomOff.setPressed(false);
+		radioBoomOn.setPressed(false);
+		radioBucketOff.setPressed(false);
+		radioBucketOn.setPressed(false);
+		
+		switch (CursurIndex) {
+		case 1:
+			radioBoomOff.setPressed(true);
+			break;
+		case 2:
+			radioBoomOn.setPressed(true);
+			break;
+		case 3:
+			textViewBoomSavePosition.setPressed(true);
+			break;
+		case 4:
+			radioBucketOff.setPressed(true);
+			break;
+		case 5:
+			radioBucketOn.setPressed(true);
+			break;
+		case 6:
+			textViewBucketSavePosition.setPressed(true);
+			break;
+		case 7:
+			imgbtnOK.setPressed(true);
+			break;
+			
+		default:
+			break;
+		}
+	}
 	/////////////////////////////////////////////////////////////////////
 	
 }

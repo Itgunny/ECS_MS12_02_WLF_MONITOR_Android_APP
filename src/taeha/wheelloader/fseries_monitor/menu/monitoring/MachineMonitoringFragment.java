@@ -13,6 +13,8 @@ import taeha.wheelloader.fseries_monitor.main.R.string;
 import android.R.color;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.text.Layout;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -64,6 +66,9 @@ public class MachineMonitoringFragment extends ParentFragment{
 	int BatteryLowWarning;
 	int TMOilHighWarning;
 	int CoolantHighWarning;
+	
+	int CursurIndex;
+	Handler HandleCursurDisplay;
 	//////////////////////////////////////////////////
 	
 	//Fragment////////////////////////////////////////
@@ -92,6 +97,13 @@ public class MachineMonitoringFragment extends ParentFragment{
 		
 		ParentActivity.ScreenIndex = ParentActivity.SCREEN_STATE_MENU_MONITORING_MACHINEMONITORING;
 		ParentActivity._MenuBaseFragment._MenuInterTitleFragment.SetTitleText(ParentActivity.getResources().getString(R.string.Machine_Monitoring));
+		HandleCursurDisplay = new Handler() {
+			@Override
+			public void handleMessage(Message msg) {
+			
+				CursurDisplay(msg.what);
+			}
+		};
 		return mRoot;
 	}
 	
@@ -130,7 +142,8 @@ public class MachineMonitoringFragment extends ParentFragment{
 	protected void InitValuables() {
 		// TODO Auto-generated method stub
 		super.InitValuables();
-				
+		CursurIndex = 1;
+		CursurDisplay(CursurIndex);
 	}
 	@Override
 	protected void InitButtonListener() {
@@ -247,5 +260,27 @@ public class MachineMonitoringFragment extends ParentFragment{
 		}
 	}
 	/////////////////////////////////////////////////////////////////////
-	
+	public void ClickLeft(){
+
+	}
+	public void ClickRight(){	
+
+	}
+	public void ClickESC(){
+		ClickOK();
+	}
+	public void ClickEnter(){
+		ClickOK();
+	}
+	public void CursurDisplay(int Index){
+		switch (Index) {
+		case 1:
+			imgbtnOK.setPressed(true);
+			break;
+		
+		default:
+			break;
+		}
+	}
+	/////////////////////////////////////////////////////////////////////
 }

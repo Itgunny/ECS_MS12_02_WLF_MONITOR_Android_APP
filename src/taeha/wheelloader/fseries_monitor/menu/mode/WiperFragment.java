@@ -10,6 +10,8 @@ import taeha.wheelloader.fseries_monitor.main.Home;
 import taeha.wheelloader.fseries_monitor.main.ParentFragment;
 import taeha.wheelloader.fseries_monitor.main.R;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.text.Layout;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -39,6 +41,10 @@ public class WiperFragment extends ParentFragment{
 	
 	//VALUABLE////////////////////////////////////////
 	int WiperLevel;
+	
+	int CursurIndex;
+	
+	Handler HandleCursurDisplay;
 	//////////////////////////////////////////////////
 	
 	//Fragment////////////////////////////////////////
@@ -67,6 +73,13 @@ public class WiperFragment extends ParentFragment{
 		
 		ParentActivity.ScreenIndex = ParentActivity.SCREEN_STATE_MENU_MODE_ETC_WIPER_TOP;
 		ParentActivity._MenuBaseFragment._MenuInterTitleFragment.SetTitleText(ParentActivity.getResources().getString(R.string.Wiper_Level_Setting));
+		HandleCursurDisplay = new Handler() {
+			@Override
+			public void handleMessage(Message msg) {
+			
+				CursurDisplay(msg.what);
+			}
+		};
 		return mRoot;
 	}
 	
@@ -93,6 +106,7 @@ public class WiperFragment extends ParentFragment{
 		
 		WiperLevel = CAN1Comm.Get_WiperSpeedLevel_718_PGN65433();
 		WiperLevelDisplay(WiperLevel);
+		CursurFirstDisplay(WiperLevel);
 	}
 	@Override
 	protected void InitButtonListener() {
@@ -103,6 +117,8 @@ public class WiperFragment extends ParentFragment{
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
 				ClickOK();
+				CursurIndex = 6;
+				HandleCursurDisplay.sendMessage(HandleCursurDisplay.obtainMessage(CursurIndex));
 			}
 		});
 		imgbtnCancel.setOnClickListener(new View.OnClickListener() {
@@ -111,6 +127,8 @@ public class WiperFragment extends ParentFragment{
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
 				ClickCancel();
+				CursurIndex = 5;
+				HandleCursurDisplay.sendMessage(HandleCursurDisplay.obtainMessage(CursurIndex));
 			}
 		});
 		radioLevel1.setOnClickListener(new View.OnClickListener() {
@@ -119,6 +137,8 @@ public class WiperFragment extends ParentFragment{
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
 				ClickLevel1();
+				CursurIndex = 1;
+				HandleCursurDisplay.sendMessage(HandleCursurDisplay.obtainMessage(CursurIndex));
 			}
 		});
 		radioLevel2.setOnClickListener(new View.OnClickListener() {
@@ -127,6 +147,8 @@ public class WiperFragment extends ParentFragment{
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
 				ClickLevel2();
+				CursurIndex = 2;
+				HandleCursurDisplay.sendMessage(HandleCursurDisplay.obtainMessage(CursurIndex));
 			}
 		});
 		radioLevel3.setOnClickListener(new View.OnClickListener() {
@@ -135,6 +157,8 @@ public class WiperFragment extends ParentFragment{
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
 				ClickLevel3();
+				CursurIndex = 3;
+				HandleCursurDisplay.sendMessage(HandleCursurDisplay.obtainMessage(CursurIndex));
 			}
 		});
 		radioLevel4.setOnClickListener(new View.OnClickListener() {
@@ -143,6 +167,8 @@ public class WiperFragment extends ParentFragment{
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
 				ClickLevel4();
+				CursurIndex = 4;
+				HandleCursurDisplay.sendMessage(HandleCursurDisplay.obtainMessage(CursurIndex));
 			}
 		});
 	}
@@ -250,5 +276,152 @@ public class WiperFragment extends ParentFragment{
 		}
 	}
 	/////////////////////////////////////////////////////////////////////
-	
+	public void ClickLeft(){
+		switch (CursurIndex) {
+		case 1:
+			CursurIndex = 6;
+			CursurDisplay(CursurIndex);
+			break;
+		case 2:
+			CursurIndex--;
+			CursurDisplay(CursurIndex);
+			break;
+		case 3:
+			CursurIndex--;
+			CursurDisplay(CursurIndex);
+			break;
+		case 4:
+			CursurIndex--;
+			CursurDisplay(CursurIndex);
+			break;
+		case 5:
+			CursurIndex--;
+			CursurDisplay(CursurIndex);
+			break;
+		case 6:
+			CursurIndex--;
+			CursurDisplay(CursurIndex);
+			break;
+		default:
+			CursurIndex = 1;
+			CursurDisplay(CursurIndex);
+			break;
+		}
+		
+	}
+	public void ClickRight(){
+		switch (CursurIndex) {
+		case 1:
+			CursurIndex++;
+			CursurDisplay(CursurIndex);
+			break;
+		case 2:
+			CursurIndex++;
+			CursurDisplay(CursurIndex);
+			break;
+		case 3:
+			CursurIndex++;
+			CursurDisplay(CursurIndex);
+			break;
+		case 4:
+			CursurIndex++;
+			CursurDisplay(CursurIndex);
+			break;
+		case 5:
+			CursurIndex++;
+			CursurDisplay(CursurIndex);
+			break;
+		case 6:
+			CursurIndex = 1;
+			CursurDisplay(CursurIndex);
+			break;
+		default:
+			CursurIndex = 1;
+			CursurDisplay(CursurIndex);
+			break;
+		}
+	}
+	public void ClickESC(){
+		ClickCancel();
+	}
+	public void ClickEnter(){
+		switch (CursurIndex) {
+		case 1:
+			ClickLevel1();
+			break;
+		case 2:
+			ClickLevel2();
+			break;
+		case 3:
+			ClickLevel3();
+			break;
+		case 4:
+			ClickLevel4();
+			break;
+		case 5:
+			ClickCancel();
+			break;
+		case 6:
+			ClickOK();
+			break;
+			
+		default:
+			break;
+		}
+	}
+	public void CursurFirstDisplay(int data){
+		switch (data) {
+		case CAN1CommManager.DATA_STATE_WIPER_LEVEL1:
+			CursurIndex = 1;
+			CursurDisplay(CursurIndex);
+			break;
+		case CAN1CommManager.DATA_STATE_WIPER_LEVEL2:
+			CursurIndex = 2;
+			CursurDisplay(CursurIndex);
+			break;
+		case CAN1CommManager.DATA_STATE_WIPER_LEVEL3:
+			CursurIndex = 3;
+			CursurDisplay(CursurIndex);
+			break;
+		case CAN1CommManager.DATA_STATE_WIPER_LEVEL4:
+			CursurIndex = 4;
+			CursurDisplay(CursurIndex);
+			break;
+		default:
+			break;
+		}
+	}
+	public void CursurDisplay(int Index){
+		imgbtnOK.setPressed(false);
+		imgbtnCancel.setPressed(false);
+		radioLevel1.setPressed(false);
+		radioLevel2.setPressed(false);
+		radioLevel3.setPressed(false);
+		radioLevel4.setPressed(false);
+		
+		
+		switch (CursurIndex) {
+		case 1:
+			radioLevel1.setPressed(true);
+			break;
+		case 2:
+			radioLevel2.setPressed(true);
+			break;
+		case 3:
+			radioLevel3.setPressed(true);
+			break;
+		case 4:
+			radioLevel4.setPressed(true);
+			break;
+		case 5:
+			imgbtnCancel.setPressed(true);
+			break;
+		case 6:
+			imgbtnOK.setPressed(true);
+			break;
+		default:
+			break;
+		}
+	}
+	/////////////////////////////////////////////////////////////////////
 }

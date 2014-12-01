@@ -10,6 +10,8 @@ import taeha.wheelloader.fseries_monitor.main.Home;
 import taeha.wheelloader.fseries_monitor.main.ParentFragment;
 import taeha.wheelloader.fseries_monitor.main.R;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.text.Layout;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -52,6 +54,10 @@ public class MachineSecurityESLFragment extends ParentFragment{
 	//VALUABLE////////////////////////////////////////
 	int ESLInterval;
 	int ESLMode;
+	
+	int CursurIndex;
+	
+	Handler HandleCursurDisplay;
 	//////////////////////////////////////////////////
 	
 	//Fragment////////////////////////////////////////
@@ -80,12 +86,21 @@ public class MachineSecurityESLFragment extends ParentFragment{
 		
 		ParentActivity.ScreenIndex = ParentActivity.SCREEN_STATE_MENU_MANAGEMENT_MACHINESECURITY_ESL;
 		ParentActivity._MenuBaseFragment._MenuInterTitleFragment.SetTitleText(ParentActivity.getResources().getString(R.string.ESL_System_Setting));
+		HandleCursurDisplay = new Handler() {
+			@Override
+			public void handleMessage(Message msg) {
+				CursurDisplay(msg.what);
+			}
+		};
 		return mRoot;
 	}
-	
+	@Override
+	public void onResume() {
+		// TODO Auto-generated method stub
+		super.onResume();
+		ESLTimeDisplayOnOff(ESLMode);
+	}
 	////////////////////////////////////////////////
-	
-	
 
 	//Common Function//////////////////////////////
 	@Override
@@ -120,9 +135,9 @@ public class MachineSecurityESLFragment extends ParentFragment{
 		
 		Log.d(TAG,"ESLMode : " + Integer.toString(ESLMode));
 		
-		ESLTimeDisplayOnOff(ESLMode);
 		ESLModeDisplay(ESLMode);
 		ESLTimeDisplay(ESLInterval);
+		CursurFirstDisplay(ESLMode);
 	}
 	@Override
 	protected void InitButtonListener() {
@@ -132,6 +147,8 @@ public class MachineSecurityESLFragment extends ParentFragment{
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
+				CursurIndex = 14;
+				HandleCursurDisplay.sendMessage(HandleCursurDisplay.obtainMessage(CursurIndex));
 				ClickOK();
 			}
 		});
@@ -140,6 +157,8 @@ public class MachineSecurityESLFragment extends ParentFragment{
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
+				CursurIndex = 13;
+				HandleCursurDisplay.sendMessage(HandleCursurDisplay.obtainMessage(CursurIndex));
 				ClickCancel();
 			}
 		});
@@ -148,6 +167,8 @@ public class MachineSecurityESLFragment extends ParentFragment{
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
+				CursurIndex = 1;
+				HandleCursurDisplay.sendMessage(HandleCursurDisplay.obtainMessage(CursurIndex));
 				ClickDisable();
 			}
 		});
@@ -156,6 +177,8 @@ public class MachineSecurityESLFragment extends ParentFragment{
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
+				CursurIndex = 2;
+				HandleCursurDisplay.sendMessage(HandleCursurDisplay.obtainMessage(CursurIndex));
 				ClickOnAlways();
 			}
 		});
@@ -164,6 +187,8 @@ public class MachineSecurityESLFragment extends ParentFragment{
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
+				CursurIndex = 3;
+				HandleCursurDisplay.sendMessage(HandleCursurDisplay.obtainMessage(CursurIndex));
 				ClickOnAfterTime();
 			}
 		});
@@ -175,6 +200,8 @@ public class MachineSecurityESLFragment extends ParentFragment{
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
+				CursurIndex = 4;
+				HandleCursurDisplay.sendMessage(HandleCursurDisplay.obtainMessage(CursurIndex));
 				Click5Min();
 			}
 		});
@@ -183,6 +210,8 @@ public class MachineSecurityESLFragment extends ParentFragment{
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
+				CursurIndex = 5;
+				HandleCursurDisplay.sendMessage(HandleCursurDisplay.obtainMessage(CursurIndex));
 				Click10Min();
 			}
 		});
@@ -191,6 +220,8 @@ public class MachineSecurityESLFragment extends ParentFragment{
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
+				CursurIndex = 6;
+				HandleCursurDisplay.sendMessage(HandleCursurDisplay.obtainMessage(CursurIndex));
 				Click20Min();
 			}
 		});
@@ -199,6 +230,8 @@ public class MachineSecurityESLFragment extends ParentFragment{
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
+				CursurIndex = 7;
+				HandleCursurDisplay.sendMessage(HandleCursurDisplay.obtainMessage(CursurIndex));
 				Click30Min();
 			}
 		});
@@ -207,6 +240,8 @@ public class MachineSecurityESLFragment extends ParentFragment{
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
+				CursurIndex = 8;
+				HandleCursurDisplay.sendMessage(HandleCursurDisplay.obtainMessage(CursurIndex));
 				Click1Hour();
 			}
 		});
@@ -215,6 +250,8 @@ public class MachineSecurityESLFragment extends ParentFragment{
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
+				CursurIndex = 9;
+				HandleCursurDisplay.sendMessage(HandleCursurDisplay.obtainMessage(CursurIndex));
 				Click2Hour();
 			}
 		});
@@ -223,6 +260,8 @@ public class MachineSecurityESLFragment extends ParentFragment{
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
+				CursurIndex = 10;
+				HandleCursurDisplay.sendMessage(HandleCursurDisplay.obtainMessage(CursurIndex));
 				Click4Hour();
 			}
 		});
@@ -231,6 +270,8 @@ public class MachineSecurityESLFragment extends ParentFragment{
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
+				CursurIndex = 11;
+				HandleCursurDisplay.sendMessage(HandleCursurDisplay.obtainMessage(CursurIndex));
 				Click1Day();
 			}
 		});
@@ -239,6 +280,8 @@ public class MachineSecurityESLFragment extends ParentFragment{
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
+				CursurIndex = 12;
+				HandleCursurDisplay.sendMessage(HandleCursurDisplay.obtainMessage(CursurIndex));
 				Click2Day();
 			}
 		});
@@ -311,14 +354,17 @@ public class MachineSecurityESLFragment extends ParentFragment{
 	public void ClickDisable(){
 		ESLMode = CAN1CommManager.DATA_STATE_ESL_MODE_DISABLE;
 		ESLTimeDisplayOnOff(ESLMode);
+		ESLModeDisplay(ESLMode);
 	}
 	public void ClickOnAlways(){
 		ESLMode = CAN1CommManager.DATA_STATE_ESL_MODE_ENABLE_CONTINUOUS;
 		ESLTimeDisplayOnOff(ESLMode);
+		ESLModeDisplay(ESLMode);
 	}
 	public void ClickOnAfterTime(){
 		ESLMode = CAN1CommManager.DATA_STATE_ESL_MODE_ENABLE_INTERVAL;
 		ESLTimeDisplayOnOff(ESLMode);
+		ESLModeDisplay(ESLMode);
 	}
 	public void Click5Min(){
 		ESLMode = CAN1CommManager.DATA_STATE_ESL_MODE_ENABLE_INTERVAL;
@@ -369,13 +415,40 @@ public class MachineSecurityESLFragment extends ParentFragment{
 	public void ESLTimeDisplayOnOff(int _eslmode){
 		switch (_eslmode) {
 		case CAN1CommManager.DATA_STATE_ESL_MODE_DISABLE:
-			layoutTime.setVisibility(View.INVISIBLE);
+			layoutTime.setAlpha((float)0.2);
+			radio5Min.setClickable(false);
+			radio10Min.setClickable(false);
+			radio20Min.setClickable(false);
+			radio30Min.setClickable(false);
+			radio1Hour.setClickable(false);
+			radio2Hour.setClickable(false);
+			radio4Hour.setClickable(false);
+			radio1Day.setClickable(false);
+			radio2Day.setClickable(false);
 			break;
 		case CAN1CommManager.DATA_STATE_ESL_MODE_ENABLE_CONTINUOUS:
-			layoutTime.setVisibility(View.INVISIBLE);
+			layoutTime.setAlpha((float)0.2);
+			radio5Min.setClickable(false);
+			radio10Min.setClickable(false);
+			radio20Min.setClickable(false);
+			radio30Min.setClickable(false);
+			radio1Hour.setClickable(false);
+			radio2Hour.setClickable(false);
+			radio4Hour.setClickable(false);
+			radio1Day.setClickable(false);
+			radio2Day.setClickable(false);
 			break;
 		case CAN1CommManager.DATA_STATE_ESL_MODE_ENABLE_INTERVAL:
-			layoutTime.setVisibility(View.VISIBLE);
+			layoutTime.setAlpha((float)1);
+			radio5Min.setClickable(true);
+			radio10Min.setClickable(true);
+			radio20Min.setClickable(true);
+			radio30Min.setClickable(true);
+			radio1Hour.setClickable(true);
+			radio2Hour.setClickable(true);
+			radio4Hour.setClickable(true);
+			radio1Day.setClickable(true);
+			radio2Day.setClickable(true);
 			break;
 		default:
 			break;
@@ -505,6 +578,325 @@ public class MachineSecurityESLFragment extends ParentFragment{
 			break;
 		default:
 			break;
+		}
+	}
+	/////////////////////////////////////////////////////////////////////
+	public void ClickLeft(){
+		switch (CursurIndex) {
+		case 1:
+			CursurIndex = 3;
+			CursurDisplay(CursurIndex);
+			break;
+		case 2:
+			CursurIndex--;
+			CursurDisplay(CursurIndex);
+			break;
+		case 3:
+			CursurIndex--;
+			CursurDisplay(CursurIndex);
+			break;
+		case 4:
+			CursurIndex = 14;
+			CursurDisplay(CursurIndex);
+			break;
+		case 5:
+		case 6:
+		case 7:
+		case 8:
+		case 9:
+		case 10:
+		case 11:
+		case 12:
+		case 13:
+			if(ESLMode == CAN1CommManager.DATA_STATE_ESL_MODE_DISABLE
+			|| ESLMode == CAN1CommManager.DATA_STATE_ESL_MODE_ENABLE_CONTINUOUS){
+				CursurIndex = 14;
+				CursurDisplay(CursurIndex);
+			}else if(ESLMode == CAN1CommManager.DATA_STATE_ESL_MODE_ENABLE_INTERVAL){
+				CursurIndex--;
+				CursurDisplay(CursurIndex);
+			}
+			break;
+		case 14:
+			CursurIndex--;
+			CursurDisplay(CursurIndex);
+			break;
+		default:
+			CursurIndex = 1;
+			CursurDisplay(CursurIndex);
+			break;
+		}
+		
+	}
+	public void ClickRight(){
+		switch (CursurIndex) {
+		case 1:
+			CursurIndex++;
+			CursurDisplay(CursurIndex);
+			break;
+		case 2:
+			CursurIndex++;
+			CursurDisplay(CursurIndex);
+			break;
+		case 3:
+			CursurIndex = 1;
+			CursurDisplay(CursurIndex);
+			
+			break;
+		case 4:
+		case 5:
+		case 6:
+		case 7:
+		case 8:
+		case 9:
+		case 10:
+		case 11:
+		case 12:
+			if(ESLMode == CAN1CommManager.DATA_STATE_ESL_MODE_DISABLE
+			|| ESLMode == CAN1CommManager.DATA_STATE_ESL_MODE_ENABLE_CONTINUOUS){
+				CursurIndex = 14;
+				CursurDisplay(CursurIndex);
+			}else if(ESLMode == CAN1CommManager.DATA_STATE_ESL_MODE_ENABLE_INTERVAL){
+				CursurIndex++;
+				CursurDisplay(CursurIndex);
+			}
+			break;
+		case 13:
+			CursurIndex++;
+			CursurDisplay(CursurIndex);
+			break;
+		case 14:
+			if(ESLMode == CAN1CommManager.DATA_STATE_ESL_MODE_DISABLE
+			|| ESLMode == CAN1CommManager.DATA_STATE_ESL_MODE_ENABLE_CONTINUOUS){
+				CursurIndex = 13;
+				CursurDisplay(CursurIndex);
+			}else if(ESLMode == CAN1CommManager.DATA_STATE_ESL_MODE_ENABLE_INTERVAL){
+				CursurIndex = 4;
+				CursurDisplay(CursurIndex);
+			}
+			break;
+		default:
+			CursurIndex = 1;
+			CursurDisplay(CursurIndex);
+			break;
+		}
+	}
+	public void ClickESC(){
+		switch (CursurIndex) {
+		case 1:
+		case 2:
+		case 3:
+		
+			ClickCancel();
+			break;
+			
+		case 4:
+		case 5:
+		case 6:
+		case 7:
+		case 8:
+		case 9:
+		case 10:
+		case 11:
+		case 12:
+		case 13:
+		case 14:
+			CursurFirstDisplay(ESLMode);
+			break;
+		default:
+			break;
+		}
+	}
+	public void ClickEnter(){
+		switch (CursurIndex) {
+		case 1:
+			ClickDisable();
+			CursurIndex = 14;
+			CursurDisplay(CursurIndex);
+			break;
+		case 2:
+			ClickOnAlways();
+			CursurIndex = 14;
+			CursurDisplay(CursurIndex);
+			break;
+		case 3:
+			ClickOnAfterTime();
+			switch (ESLInterval) {
+			case CAN1CommManager.DATA_STATE_ESL_INTERVAL_5MIN:
+				CursurIndex = 4;
+				CursurDisplay(CursurIndex);
+				break;
+			case CAN1CommManager.DATA_STATE_ESL_INTERVAL_10MIN:
+				CursurIndex = 5;
+				CursurDisplay(CursurIndex);
+				break;
+			case CAN1CommManager.DATA_STATE_ESL_INTERVAL_20MIN:
+				CursurIndex = 6;
+				CursurDisplay(CursurIndex);
+				break;
+			case CAN1CommManager.DATA_STATE_ESL_INTERVAL_30MIN:
+				CursurIndex = 7;
+				CursurDisplay(CursurIndex);
+				break;
+			case CAN1CommManager.DATA_STATE_ESL_INTERVAL_1HR:
+				CursurIndex = 8;
+				CursurDisplay(CursurIndex);
+				break;
+			case CAN1CommManager.DATA_STATE_ESL_INTERVAL_2HR:
+				CursurIndex = 9;
+				CursurDisplay(CursurIndex);
+				break;
+			case CAN1CommManager.DATA_STATE_ESL_INTERVAL_4HR:
+				CursurIndex = 10;
+				CursurDisplay(CursurIndex);
+				break;
+			case CAN1CommManager.DATA_STATE_ESL_INTERVAL_1DAY:
+				CursurIndex = 11;
+				CursurDisplay(CursurIndex);
+				break;
+			case CAN1CommManager.DATA_STATE_ESL_INTERVAL_2DAY:
+				CursurIndex = 12;
+				CursurDisplay(CursurIndex);
+				break;
+			default:
+				break;
+			}
+			
+			break;
+		case 4:
+			Click5Min();
+			CursurIndex = 14;
+			CursurDisplay(CursurIndex);
+			break;
+		case 5:
+			Click10Min();
+			CursurIndex = 5;
+			CursurDisplay(CursurIndex);
+			break;
+		case 6:
+			Click20Min();
+			CursurIndex = 6;
+			CursurDisplay(CursurIndex);
+			break;
+		case 7:
+			Click30Min();
+			CursurIndex = 7;
+			CursurDisplay(CursurIndex);
+			break;
+		case 8:
+			Click1Hour();
+			CursurIndex = 8;
+			CursurDisplay(CursurIndex);
+			break;
+		case 9:
+			Click2Hour();
+			CursurIndex = 9;
+			CursurDisplay(CursurIndex);
+			break;
+		case 10:
+			Click4Hour();
+			CursurIndex = 10;
+			CursurDisplay(CursurIndex);
+			break;
+		case 11:
+			Click1Day();
+			CursurIndex = 11;
+			CursurDisplay(CursurIndex);
+			break;
+		case 12:
+			Click2Day();
+			CursurIndex = 12;
+			CursurDisplay(CursurIndex);
+			break;
+		case 13:
+			ClickCancel();
+			break;
+		case 14:
+			ClickOK();
+			break;
+		default:
+			break;
+		}
+	}
+	public void CursurFirstDisplay(int data){
+		switch (data) {
+		case CAN1CommManager.DATA_STATE_ESL_MODE_DISABLE:
+			CursurIndex = 1;
+			CursurDisplay(CursurIndex);
+			break;
+		case CAN1CommManager.DATA_STATE_ESL_MODE_ENABLE_CONTINUOUS:
+			CursurIndex = 2;
+			CursurDisplay(CursurIndex);
+			break;
+		case CAN1CommManager.DATA_STATE_ESL_MODE_ENABLE_INTERVAL:
+			CursurIndex = 3;
+			CursurDisplay(CursurIndex);
+			break;
+		default:
+			break;
+		}
+	}
+	public void CursurDisplay(int Index){
+		imgbtnOK.setPressed(false);
+		imgbtnCancel.setPressed(false);
+		radioDisable.setPressed(false);
+		radioOnAlways.setPressed(false);
+		radioOnAfterTime.setPressed(false);
+		radio5Min.setPressed(false);
+		radio10Min.setPressed(false);
+		radio20Min.setPressed(false);
+		radio30Min.setPressed(false);
+		radio1Hour.setPressed(false);
+		radio2Hour.setPressed(false);
+		radio4Hour.setPressed(false);
+		radio1Day.setPressed(false);
+		radio2Day.setPressed(false);
+
+		switch (CursurIndex) {
+			case 1:
+				radioDisable.setPressed(true);
+				break;
+			case 2:
+				radioOnAlways.setPressed(true);
+				break;
+			case 3:
+				radioOnAfterTime.setPressed(true);
+				break;
+			case 4:
+				radio5Min.setPressed(true);
+				break;
+			case 5:
+				radio10Min.setPressed(true);
+				break;
+			case 6:
+				radio20Min.setPressed(true);
+				break;
+			case 7:
+				radio30Min.setPressed(true);
+				break;
+			case 8:
+				radio1Hour.setPressed(true);
+				break;
+			case 9:
+				radio2Hour.setPressed(true);
+				break;
+			case 10:
+				radio4Hour.setPressed(true);
+				break;
+			case 11:
+				radio1Day.setPressed(true);
+				break;
+			case 12:
+				radio2Day.setPressed(true);
+				break;
+			case 13:
+				imgbtnCancel.setPressed(true);
+				break;
+			case 14:
+				imgbtnOK.setPressed(true);
+				break;
+			default:
+				break;
 		}
 	}
 	/////////////////////////////////////////////////////////////////////

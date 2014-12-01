@@ -14,6 +14,7 @@ import taeha.wheelloader.fseries_monitor.main.CAN1CommManager;
 import taeha.wheelloader.fseries_monitor.main.Home;
 import taeha.wheelloader.fseries_monitor.main.ParentPopup;
 import taeha.wheelloader.fseries_monitor.main.R;
+import taeha.wheelloader.fseries_monitor.main.R.string;
 
 public class KickDownPopup extends ParentPopup{
 	//CONSTANT////////////////////////////////////////
@@ -25,7 +26,7 @@ public class KickDownPopup extends ParentPopup{
 	//////////////////////////////////////////////////
 	
 	//VALUABLE////////////////////////////////////////
-
+	int KickDown;
 	//////////////////////////////////////////////////
 	
 	//ANIMATION///////////////////////////////////////
@@ -63,7 +64,12 @@ public class KickDownPopup extends ParentPopup{
 		super.dismiss();
 		ParentActivity.ScreenIndex = ParentActivity.SCREEN_STATE_MENU_MODE_ENGINETM_TOP;
 	}
-
+	@Override
+	public void InitValuable(){
+		super.InitValuable();
+		KickDown = CAN1Comm.Get_KickDownShiftMode_547_PGN65434();
+		KickDownDisplay(KickDown);
+	}
 	@Override
 	protected void InitResource() {
 		// TODO Auto-generated method stub
@@ -114,4 +120,82 @@ public class KickDownPopup extends ParentPopup{
 		CAN1Comm.TxCANToMCU(104);
 		this.dismiss();
 	}	
+	public void ClickLeft(){
+		switch (CursurIndex) {
+		case 1:
+			CursurIndex = 2;
+			CursurDisplay(CursurIndex);
+			break;
+		case 2:
+			CursurIndex--;
+			CursurDisplay(CursurIndex);
+			break;
+		default:
+			CursurIndex = 1;
+			CursurDisplay(CursurIndex);
+			break;
+		}
+	}
+	public void ClickRight(){
+		switch (CursurIndex) {
+		case 1:
+			CursurIndex++;
+			CursurDisplay(CursurIndex);
+			break;
+		case 2:
+			CursurIndex = 1;
+			CursurDisplay(CursurIndex);
+			break;
+		default:
+			CursurIndex = 1;
+			CursurDisplay(CursurIndex);
+			break;
+		}
+	}
+	public void ClickESC(){
+		
+	}
+	public void ClickEnter(){
+		switch (CursurIndex) {
+		case 1:
+			ClickMode1();
+			break;
+		case 2:
+			ClickMode2();
+			break;
+		default:
+			
+			break;
+		}
+	}
+	////////////////////////////////////////////////////////////////////////////////
+	public void CursurDisplay(int Index){
+		switch (Index) {
+		case 1:
+			textViewMode1.setPressed(true);
+			textViewMode2.setPressed(false);
+			break;
+		case 2:
+			textViewMode1.setPressed(false);
+			textViewMode2.setPressed(true);
+			break;
+		default:
+			break;
+		}
+	}
+	public void KickDownDisplay(int data){
+		switch (data) {
+		case CAN1CommManager.DATA_STATE_KICKDOWN_UPDOWN:
+			CursurIndex = 1;
+			CursurDisplay(CursurIndex);
+			break;
+		case CAN1CommManager.DATA_STATE_KICKDOWN_DOWNONLY:
+			CursurIndex = 2;
+			CursurDisplay(CursurIndex);
+			break;
+
+		default:
+			break;
+		}
+	}
 }

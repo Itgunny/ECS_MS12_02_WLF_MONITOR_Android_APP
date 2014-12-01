@@ -10,6 +10,8 @@ import taeha.wheelloader.fseries_monitor.main.Home;
 import taeha.wheelloader.fseries_monitor.main.ParentFragment;
 import taeha.wheelloader.fseries_monitor.main.R;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.text.Layout;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -80,6 +82,9 @@ public class ServiceMenuWeighingCompensationFragment extends ParentFragment{
 	int NumSetting;
 	
 	Boolean NumSign;
+	
+	Handler HandleCursurDisplay;
+	int CursurIndex;
 	//////////////////////////////////////////////////
 	
 	//Fragment////////////////////////////////////////
@@ -111,9 +116,15 @@ public class ServiceMenuWeighingCompensationFragment extends ParentFragment{
 		CAN1Comm.Set_BucketFullInError_PGN61184_62(CAN1Comm.Get_BucketFullInError_PGN65450());
 		CAN1Comm.TxCANToMCU(62);
 		CAN1Comm.Set_WeightOffsetSetting_PGN61184_62(15);
-		
+
 		ParentActivity.ScreenIndex = ParentActivity.SCREEN_STATE_MENU_MANAGEMENT_SERVICE_WEIGHINGCOMPENSATION_TOP;
 		ParentActivity._MenuBaseFragment._MenuInterTitleFragment.SetTitleText(ParentActivity.getResources().getString(R.string.Weighing_System_Compensation));
+		HandleCursurDisplay = new Handler() {
+			@Override
+			public void handleMessage(Message msg) {
+				CursurDisplay(msg.what);
+			}
+		};
 		return mRoot;
 	}
 	
@@ -197,6 +208,7 @@ public class ServiceMenuWeighingCompensationFragment extends ParentFragment{
 		}
 		
 		WeighingSystemCompensationDisplay(WeightOffsetSelectionStatus,WorkTool1,WorkTool2,WorkTool3);
+		CursurFirstDisplay(WeightOffsetSelectionStatus);
 	}
 	@Override
 	protected void InitButtonListener() {
@@ -206,6 +218,8 @@ public class ServiceMenuWeighingCompensationFragment extends ParentFragment{
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
+				CursurIndex = 19;
+				HandleCursurDisplay.sendMessage(HandleCursurDisplay.obtainMessage(CursurIndex));
 				ClickOK();
 			}
 		});
@@ -214,6 +228,8 @@ public class ServiceMenuWeighingCompensationFragment extends ParentFragment{
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
+				CursurIndex = 18;
+				HandleCursurDisplay.sendMessage(HandleCursurDisplay.obtainMessage(CursurIndex));
 				ClickCancel();
 			}
 		});
@@ -222,6 +238,8 @@ public class ServiceMenuWeighingCompensationFragment extends ParentFragment{
 				@Override
 				public void onClick(View v) {
 					// TODO Auto-generated method stub
+					CursurIndex = 5;
+					HandleCursurDisplay.sendMessage(HandleCursurDisplay.obtainMessage(CursurIndex));
 					ClickNum1();
 				}
 		});	
@@ -230,6 +248,8 @@ public class ServiceMenuWeighingCompensationFragment extends ParentFragment{
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
+				CursurIndex = 6;
+				HandleCursurDisplay.sendMessage(HandleCursurDisplay.obtainMessage(CursurIndex));
 				ClickNum2();
 			}
 		});	
@@ -238,6 +258,8 @@ public class ServiceMenuWeighingCompensationFragment extends ParentFragment{
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
+				CursurIndex = 7;
+				HandleCursurDisplay.sendMessage(HandleCursurDisplay.obtainMessage(CursurIndex));
 				ClickNum3();
 			}
 		});	
@@ -246,6 +268,8 @@ public class ServiceMenuWeighingCompensationFragment extends ParentFragment{
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
+				CursurIndex = 8;
+				HandleCursurDisplay.sendMessage(HandleCursurDisplay.obtainMessage(CursurIndex));
 				ClickNum4();
 			}
 		});	
@@ -254,6 +278,8 @@ public class ServiceMenuWeighingCompensationFragment extends ParentFragment{
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
+				CursurIndex = 9;
+				HandleCursurDisplay.sendMessage(HandleCursurDisplay.obtainMessage(CursurIndex));
 				ClickNum5();
 			}
 		});	
@@ -262,6 +288,8 @@ public class ServiceMenuWeighingCompensationFragment extends ParentFragment{
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
+				CursurIndex = 10;
+				HandleCursurDisplay.sendMessage(HandleCursurDisplay.obtainMessage(CursurIndex));
 				ClickNum6();
 			}
 		});	
@@ -270,6 +298,8 @@ public class ServiceMenuWeighingCompensationFragment extends ParentFragment{
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
+				CursurIndex = 11;
+				HandleCursurDisplay.sendMessage(HandleCursurDisplay.obtainMessage(CursurIndex));
 				ClickNum7();
 			}
 		});	
@@ -278,6 +308,8 @@ public class ServiceMenuWeighingCompensationFragment extends ParentFragment{
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
+				CursurIndex = 12;
+				HandleCursurDisplay.sendMessage(HandleCursurDisplay.obtainMessage(CursurIndex));
 				ClickNum8();
 			}
 		});	
@@ -286,6 +318,8 @@ public class ServiceMenuWeighingCompensationFragment extends ParentFragment{
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
+				CursurIndex = 13;
+				HandleCursurDisplay.sendMessage(HandleCursurDisplay.obtainMessage(CursurIndex));
 				ClickNum9();
 			}
 		});	
@@ -294,6 +328,8 @@ public class ServiceMenuWeighingCompensationFragment extends ParentFragment{
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
+				CursurIndex = 15;
+				HandleCursurDisplay.sendMessage(HandleCursurDisplay.obtainMessage(CursurIndex));
 				ClickNum0();
 			}
 		});	
@@ -302,6 +338,8 @@ public class ServiceMenuWeighingCompensationFragment extends ParentFragment{
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
+				CursurIndex = 14;
+				HandleCursurDisplay.sendMessage(HandleCursurDisplay.obtainMessage(CursurIndex));
 				ClickNumBack();
 			}
 		});	
@@ -310,6 +348,8 @@ public class ServiceMenuWeighingCompensationFragment extends ParentFragment{
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
+				CursurIndex = 16;
+				HandleCursurDisplay.sendMessage(HandleCursurDisplay.obtainMessage(CursurIndex));
 				ClickNumDot();
 			}
 		});	
@@ -318,6 +358,8 @@ public class ServiceMenuWeighingCompensationFragment extends ParentFragment{
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
+				CursurIndex = 17;
+				HandleCursurDisplay.sendMessage(HandleCursurDisplay.obtainMessage(CursurIndex));
 				ClickNumPlusMinus();
 			}
 		});	
@@ -326,6 +368,8 @@ public class ServiceMenuWeighingCompensationFragment extends ParentFragment{
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
+				CursurIndex = 1;
+				HandleCursurDisplay.sendMessage(HandleCursurDisplay.obtainMessage(CursurIndex));
 				ClickNoOffset();
 			}
 		});	
@@ -334,6 +378,8 @@ public class ServiceMenuWeighingCompensationFragment extends ParentFragment{
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
+				CursurIndex = 2;
+				HandleCursurDisplay.sendMessage(HandleCursurDisplay.obtainMessage(CursurIndex));
 				ClickWorkTool1();
 			}
 		});	
@@ -342,6 +388,8 @@ public class ServiceMenuWeighingCompensationFragment extends ParentFragment{
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
+				CursurIndex = 3;
+				HandleCursurDisplay.sendMessage(HandleCursurDisplay.obtainMessage(CursurIndex));
 				ClickWorkTool2();
 			}
 		});	
@@ -350,6 +398,8 @@ public class ServiceMenuWeighingCompensationFragment extends ParentFragment{
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
+				CursurIndex = 4;
+				HandleCursurDisplay.sendMessage(HandleCursurDisplay.obtainMessage(CursurIndex));
 				ClickWorkTool3();
 			}
 		});	
@@ -721,5 +771,312 @@ public class ServiceMenuWeighingCompensationFragment extends ParentFragment{
 		
 		return result;
 	}
+	/////////////////////////////////////////////////////////////////////
+	public void ClickLeft(){
+		switch (CursurIndex) {
+		case 1:
+			CursurIndex = 4;
+			CursurDisplay(CursurIndex);
+			break;
+		case 2:
+		case 3:
+		case 4:
+			CursurIndex--;
+			CursurDisplay(CursurIndex);
+			break;
+		case 5:
+			CursurIndex = 19;
+			CursurDisplay(CursurIndex);
+			break;
+		case 6:
+		case 7:
+		case 8:
+		case 9:
+		case 10:
+		case 11:
+		case 12:
+		case 13:
+		case 14:
+		case 15:
+		case 16:
+		case 17:
+		case 18:
+		case 19:
+			CursurIndex--;
+			CursurDisplay(CursurIndex);
+			break;
+		default:
+			CursurIndex = 1;
+			CursurDisplay(CursurIndex);
+			break;
+		}
+		
+	}
+	public void ClickRight(){
+		switch (CursurIndex) {
+		case 1:
+		case 2:
+		case 3:
+			CursurIndex++;
+			CursurDisplay(CursurIndex);
+			break;
+		case 4:
+			CursurIndex = 1;
+			CursurDisplay(CursurIndex);
+			break;
+		case 5:
+		case 6:
+		case 7:
+		case 8:
+		case 9:
+		case 10:
+		case 11:
+		case 12:
+		case 13:
+		case 14:
+		case 15:
+		case 16:
+		case 17:
+		case 18:
+			CursurIndex++;
+			CursurDisplay(CursurIndex);
+			break;
+		case 19:
+			CursurIndex = 5;
+			CursurDisplay(CursurIndex);
+			break;
+		default:
+			CursurIndex = 1;
+			CursurDisplay(CursurIndex);
+			break;
+		}
+	}
+	public void ClickESC(){
+		switch (CursurIndex) {
+		case 1:
+		case 2:
+		case 3:
+		case 4:
+			ClickCancel();
+			break;
+		case 5:
+		case 6:
+		case 7:
+		case 8:
+		case 9:
+		case 10:
+		case 11:
+		case 12:
+		case 13:
+		case 14:
+		case 15:
+		case 16:
+		case 17:
+		case 18:
+		case 19:
+			if(WeightOffsetSelectionStatus == CAN1CommManager.DATA_STATE_WEIGHT_OFFSET_SETTING_NOOFFSET){
+				CursurIndex = 1;
+				CursurDisplay(CursurIndex);
+			}else if(WeightOffsetSelectionStatus == CAN1CommManager.DATA_STATE_WEIGHT_OFFSET_SETTING_WORKTOOL_1){
+				CursurIndex = 2;
+				CursurDisplay(CursurIndex);
+			}else if(WeightOffsetSelectionStatus == CAN1CommManager.DATA_STATE_WEIGHT_OFFSET_SETTING_WORKTOOL_2){
+				CursurIndex = 3;
+				CursurDisplay(CursurIndex);
+			}else if(WeightOffsetSelectionStatus == CAN1CommManager.DATA_STATE_WEIGHT_OFFSET_SETTING_WORKTOOL_3){
+				CursurIndex = 4;
+				CursurDisplay(CursurIndex);
+			}else{
+				CursurIndex = 1;
+				CursurDisplay(CursurIndex);
+			}
+			break;
+		default:
+
+			break;
+		}
+	}
+	public void ClickEnter(){
+		switch (CursurIndex) {
+		case 1:
+			CursurIndex = 19;
+			CursurDisplay(CursurIndex);
+			ClickNoOffset();
+			break;
+		case 2:
+			CursurIndex = 5;
+			CursurDisplay(CursurIndex);
+			ClickWorkTool1();
+			break;
+		case 3:
+			CursurIndex = 5;
+			CursurDisplay(CursurIndex);
+			ClickWorkTool2();
+			break;
+		case 4:
+			CursurIndex = 5;
+			CursurDisplay(CursurIndex);
+			ClickWorkTool3();
+			break;
+		case 5:
+			ClickNum1();
+			break;
+		case 6:
+			ClickNum2();
+			break;
+		case 7:
+			ClickNum3();
+			break;
+		case 8:
+			ClickNum4();
+			break;
+		case 9:
+			ClickNum5();
+			break;
+		case 10:
+			ClickNum6();
+			break;
+		case 11:
+			ClickNum7();
+			break;
+		case 12:
+			ClickNum8();
+			break;
+		case 13:
+			ClickNum9();
+			break;
+		case 14:
+			ClickNumBack();
+			break;
+		case 15:
+			ClickNum0();
+			break;
+		case 16:
+			ClickNumDot();
+			break;
+		case 17:
+			ClickNumPlusMinus();
+			break;
+		case 18:
+			ClickCancel();
+			break;
+		case 19:
+			ClickOK();
+			break;
+		default:
+			break;
+		}
+	}
+	public void CursurFirstDisplay(int data){
+		
+		switch (data) {
+		case CAN1CommManager.DATA_STATE_WEIGHT_OFFSET_SETTING_NOOFFSET:
+			CursurIndex = 1;
+			CursurDisplay(CursurIndex);
+			break;
+		case CAN1CommManager.DATA_STATE_WEIGHT_OFFSET_SETTING_WORKTOOL_1:
+			CursurIndex = 2;
+			CursurDisplay(CursurIndex);
+			break;
+		case CAN1CommManager.DATA_STATE_WEIGHT_OFFSET_SETTING_WORKTOOL_2:
+			CursurIndex = 3;
+			CursurDisplay(CursurIndex);
+			break;
+		case CAN1CommManager.DATA_STATE_WEIGHT_OFFSET_SETTING_WORKTOOL_3:
+			CursurIndex = 4;
+			CursurDisplay(CursurIndex);
+			break;
+		default:
+			break;
+		}
+		
+	}
+	public void CursurDisplay(int Index){
+		imgbtnOK.setPressed(false);
+		imgbtnCancel.setPressed(false);
+
+		textViewNum1.setPressed(false);
+		textViewNum2.setPressed(false);
+		textViewNum3.setPressed(false);
+		textViewNum4.setPressed(false);
+		textViewNum5.setPressed(false);
+		textViewNum6.setPressed(false);
+		textViewNum7.setPressed(false);
+		textViewNum8.setPressed(false);
+		textViewNum9.setPressed(false);
+		textViewNum0.setPressed(false);
+		imgbtnBack.setPressed(false);
+		textViewDot.setPressed(false);
+		imgbtnPlusMinu.setPressed(false);
+		radioNoOffset.setPressed(false);
+		radioWorkTool1.setPressed(false);
+		radioWorkTool2.setPressed(false);
+		radioWorkTool3.setPressed(false);
+		
+		switch (Index) {
+		case 1:
+			radioNoOffset.setPressed(true);
+			break;
+		case 2:
+			radioWorkTool1.setPressed(true);
+			break;
+		case 3:
+			radioWorkTool2.setPressed(true);
+			break;
+		case 4:
+			radioWorkTool3.setPressed(true);
+			break;
+		case 5:
+			textViewNum1.setPressed(true);
+			break;
+		case 6:
+			textViewNum2.setPressed(true);
+			break;
+		case 7:
+			textViewNum3.setPressed(true);
+			break;
+		case 8:
+			textViewNum4.setPressed(true);
+			break;
+		case 9:
+			textViewNum5.setPressed(true);
+			break;
+		case 10:
+			textViewNum6.setPressed(true);
+			break;
+		case 11:
+			textViewNum7.setPressed(true);
+			break;
+		case 12:
+			textViewNum8.setPressed(true);
+			break;
+		case 13:
+			textViewNum9.setPressed(true);
+			break;
+		case 14:
+			imgbtnBack.setPressed(true);
+			break;
+		case 15:
+			textViewNum0.setPressed(true);
+			break;
+		case 16:
+			textViewDot.setPressed(true);
+			break;
+		case 17:
+			imgbtnPlusMinu.setPressed(true);
+			break;
+		case 18:
+			imgbtnCancel.setPressed(true);
+			break;
+		case 19:
+			imgbtnOK.setPressed(true);
+			break;
+		default:
+			break;
+		}
+	}
+	
+	
+	/////////////////////////////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////////
 }

@@ -10,6 +10,8 @@ import taeha.wheelloader.fseries_monitor.main.Home;
 import taeha.wheelloader.fseries_monitor.main.ParentFragment;
 import taeha.wheelloader.fseries_monitor.main.R;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.text.Layout;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -34,7 +36,9 @@ public class CoolingFanOffFragment extends ParentFragment{
 	//////////////////////////////////////////////////
 	
 	//VALUABLE////////////////////////////////////////
-
+	int CursurIndex = 1;
+	
+	Handler HandleCursurDisplay;
 	//////////////////////////////////////////////////
 	
 	//Fragment////////////////////////////////////////
@@ -62,12 +66,28 @@ public class CoolingFanOffFragment extends ParentFragment{
 		InitButtonListener();
 		
 		ParentActivity.ScreenIndex = ParentActivity.SCREEN_STATE_MENU_MODE_ETC_COOLINGFAN_OFF;
+		HandleCursurDisplay = new Handler() {
+			@Override
+			public void handleMessage(Message msg) {
+				CursurDisplay(msg.what);
+			}
+		};
+		
+		
 		return mRoot;
 	}
 	
 	////////////////////////////////////////////////
 	
 	
+
+	@Override
+	public void onResume() {
+		// TODO Auto-generated method stub
+		super.onResume();
+		CursurDisplay(CursurIndex);
+		Log.d(TAG,"CursurIndex : " + Integer.toString(CursurIndex));
+	}
 
 	//Common Function//////////////////////////////
 	@Override
@@ -83,7 +103,7 @@ public class CoolingFanOffFragment extends ParentFragment{
 		// TODO Auto-generated method stub
 		super.InitValuables();
 		
-		
+	
 		
 	}
 	@Override
@@ -149,7 +169,113 @@ public class CoolingFanOffFragment extends ParentFragment{
 		
 	}
 	/////////////////////////////////////////////////////////////////////
-	
+	/////////////////////////////////////////////////////////////////////
+	public void setCursurIndex(int Index){
+		CursurIndex = Index;
+	}
+	public void ClickLeft(){
+		switch (CursurIndex) {
+		case 1:
+		case 2:
+		case 3:
+			ParentActivity._MenuBaseFragment._CoolingFanFragment.ClickLeft();
+			break;
+		case 4:
+			CursurIndex = 5;
+			CursurDisplay(CursurIndex);
+			break;
+		case 5:
+			CursurIndex--;
+			CursurDisplay(CursurIndex);
+			break;
+		default:
+			CursurIndex = 4;
+			CursurDisplay(CursurIndex);
+			break;
+		}
+	}
+	public void ClickRight(){
+		switch (CursurIndex) {
+		case 1:
+		case 2:
+		case 3:
+			ParentActivity._MenuBaseFragment._CoolingFanFragment.ClickRight();
+			break;
+		case 4:
+			CursurIndex++;
+			CursurDisplay(CursurIndex);
+		
+			break;
+		case 5:
+			CursurIndex = 4;
+			CursurDisplay(CursurIndex);
+			
+			break;
+		
+		default:
+			CursurIndex = 4;
+			CursurDisplay(CursurIndex);
+			break;
+		}
+	}
+	public void ClickESC(){
+		switch (CursurIndex) {
+		case 1:
+		case 2:
+		case 3:
+			ClickCancel();
+			break;
+		case 4:
+		case 5:
+			CursurIndex = 1;
+			CursurDisplay(CursurIndex);
+			ParentActivity._MenuBaseFragment._CoolingFanFragment.setCursurIndex(1);
+			ParentActivity._MenuBaseFragment._CoolingFanFragment.CursurDisplay(1);
+			break;
+		default:
+			break;
+		}
+		
+	}
+	public void ClickEnter(){
+		switch (CursurIndex) {
+		case 1:
+		case 2:
+		case 3:
+			ParentActivity._MenuBaseFragment._CoolingFanFragment.ClickEnter();
+			break;
+		case 4:
+			ClickCancel();
+			break;
+		case 5:
+			ClickOK();
+			break;
+		default:
+
+			break;
+		}
+	}
+	public void CursurDisplay(int Index){
+		try {
+			imgbtnCancel.setPressed(false);
+			imgbtnOK.setPressed(false);
+			switch (CursurIndex) {
+				case 4:
+					imgbtnCancel.setPressed(true);
+					break;
+				case 5:
+					imgbtnOK.setPressed(true);
+					break;
+				default:
+					break;
+			}
+		} catch (NullPointerException e) {
+			// TODO: handle exception
+			Log.e(TAG,"NullPointerException CursurDisplay");
+		}
+		
+	}
+	/////////////////////////////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////////
 	
 }

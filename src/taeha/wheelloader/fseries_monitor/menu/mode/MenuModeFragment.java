@@ -23,7 +23,9 @@ import android.widget.TextView;
 
 public class MenuModeFragment extends ParentFragment{
 	//CONSTANT////////////////////////////////////////
-	
+	public final static int STATE_CURSUR_LIST	= 0;
+	public final static int STATE_CURSUR_TAB	= 1;
+	public final static int STATE_CURSUR_LEFT	= 2;
 	//////////////////////////////////////////////////
 	//RESOURCE////////////////////////////////////////
 	FrameLayout LayoutTab;
@@ -32,6 +34,7 @@ public class MenuModeFragment extends ParentFragment{
 	
 	//VALUABLE////////////////////////////////////////
 	int FirstScreenIndex;
+	int ModeFocusIndex;
 	//////////////////////////////////////////////////
 	
 	//Fragment////////////////////////////////////////
@@ -92,6 +95,9 @@ public class MenuModeFragment extends ParentFragment{
 		_MenuModeHYDFragment = new MenuModeHYDFragment();
 		_MenuModeETCFragment = new MenuModeETCFragment();
 		_EngineSettingFragment = new EngineSettingFragment();
+		
+		ModeFocusIndex = STATE_CURSUR_LIST;
+		
 	}
 	@Override
 	protected void InitButtonListener() {
@@ -156,55 +162,27 @@ public class MenuModeFragment extends ParentFragment{
 	}
 	//Navi KeyButton//////////////////////////////////////////////////////////
 	public void ClickLeft(){
-		if((ParentActivity.ScreenIndex >= Home.SCREEN_STATE_MENU_MODE_ENGINETM_TOP) && (ParentActivity.ScreenIndex <= Home.SCREEN_STATE_MENU_MODE_ENGINETM_END)){
-			_MenuModeEngTMFragment.ClickLeft();
-		}else if((ParentActivity.ScreenIndex >= Home.SCREEN_STATE_MENU_MODE_HYD_TOP) && (ParentActivity.ScreenIndex <= Home.SCREEN_STATE_MENU_MODE_HYD_END)){
-			_MenuModeHYDFragment.ClickLeft();
-		}else if((ParentActivity.ScreenIndex >= Home.SCREEN_STATE_MENU_MODE_ETC_TOP) && (ParentActivity.ScreenIndex <= Home.SCREEN_STATE_MENU_MODE_ETC_END)){
-			_MenuModeETCFragment.ClickLeft();
-		}else{
-			
-		}
+
 		
 	}
 	public void ClickRight(){
-		if((ParentActivity.ScreenIndex >= Home.SCREEN_STATE_MENU_MODE_ENGINETM_TOP) && (ParentActivity.ScreenIndex <= Home.SCREEN_STATE_MENU_MODE_ENGINETM_END)){
-			_MenuModeEngTMFragment.ClickRight();
-		}else if((ParentActivity.ScreenIndex >= Home.SCREEN_STATE_MENU_MODE_HYD_TOP) && (ParentActivity.ScreenIndex <= Home.SCREEN_STATE_MENU_MODE_HYD_END)){
-			_MenuModeHYDFragment.ClickRight();
-		}else if((ParentActivity.ScreenIndex >= Home.SCREEN_STATE_MENU_MODE_ETC_TOP) && (ParentActivity.ScreenIndex <= Home.SCREEN_STATE_MENU_MODE_ETC_END)){
-			_MenuModeETCFragment.ClickRight();
-		}else{
-		
-		}
+
 	}
 	public void ClickESC(){
-		Log.d(TAG,"ClickKeyButtonESC");
-		if((ParentActivity.ScreenIndex >= Home.SCREEN_STATE_MENU_MODE_ENGINETM_TOP) && (ParentActivity.ScreenIndex <= Home.SCREEN_STATE_MENU_MODE_ENGINETM_END)){
-			_MenuModeEngTMFragment.ClickESC();
-		}else if((ParentActivity.ScreenIndex >= Home.SCREEN_STATE_MENU_MODE_HYD_TOP) && (ParentActivity.ScreenIndex <= Home.SCREEN_STATE_MENU_MODE_HYD_END)){
-			_MenuModeHYDFragment.ClickESC();
-		}else if((ParentActivity.ScreenIndex >= Home.SCREEN_STATE_MENU_MODE_ETC_TOP) && (ParentActivity.ScreenIndex <= Home.SCREEN_STATE_MENU_MODE_ETC_END)){
-			_MenuModeETCFragment.ClickESC();
-		}else{
-			
-		}
+
 	}
 	public void ClickEnter(){
-		Log.d(TAG,"ClickEnter");
-		if((ParentActivity.ScreenIndex >= Home.SCREEN_STATE_MENU_MODE_ENGINETM_TOP) && (ParentActivity.ScreenIndex <= Home.SCREEN_STATE_MENU_MODE_ENGINETM_END)){
-			_MenuModeEngTMFragment.ClickEnter();
-		}else if((ParentActivity.ScreenIndex >= Home.SCREEN_STATE_MENU_MODE_HYD_TOP) && (ParentActivity.ScreenIndex <= Home.SCREEN_STATE_MENU_MODE_HYD_END)){
-			_MenuModeHYDFragment.ClickEnter();
-		}else if((ParentActivity.ScreenIndex >= Home.SCREEN_STATE_MENU_MODE_ETC_TOP) && (ParentActivity.ScreenIndex <= Home.SCREEN_STATE_MENU_MODE_ETC_END)){
-			_MenuModeETCFragment.ClickEnter();
-		}else{
-			
-		}
+
 	}
 	/////////////////////////////////////////////////////////////////////	
 	public void setFirstScreen(int Index){
 		FirstScreenIndex = Index;
+	}
+	public int GetModeFocusIndex(){
+		return ModeFocusIndex;
+	}
+	public void SetModeFocusIndex(int Index){
+		ModeFocusIndex = Index;
 	}
 	/////////////////////////////////////////////////////////////////////
 	

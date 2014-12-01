@@ -74,7 +74,13 @@ public class MaintReplacePopup extends ParentPopup{
 	public void dismiss() {
 		// TODO Auto-generated method stub
 		super.dismiss();
-		ParentActivity.ScreenIndex = ParentActivity.SCREEN_STATE_MENU_MONITORING_OPERATIONHISTORY_TOP;
+		ParentActivity.ScreenIndex = ParentActivity.SCREEN_STATE_MENU_MANAGEMENT_MAINTENANCE_DETAIL_TOP;
+		try {
+			ParentActivity._MenuBaseFragment._MaintenanceDetailFragment.CursurDisplay(3);
+		} catch (NullPointerException e) {
+			// TODO: handle exception
+			Log.e(TAG,"NullPointerException dismiss");
+		}
 	}
 
 	@Override
@@ -91,6 +97,8 @@ public class MaintReplacePopup extends ParentPopup{
 		// TODO Auto-generated method stub
 		super.InitValuable();
 		MaintIndex = CAN1Comm.Get_MaintenanceItem_1098_PGN61184_12();
+		CursurIndex = 1;
+		CursurDisplay(CursurIndex);
 	}
 	@Override
 	protected void InitButtonListener() {
@@ -137,6 +145,69 @@ public class MaintReplacePopup extends ParentPopup{
 		this.dismiss();
 	}
 	////////////////////////////////////////////////////////////////////////////////
-	
+	//////////////////////////////////////////////////////////////////////
+	public void ClickLeft(){
+		switch (CursurIndex) {
+		case 1:
+			CursurIndex = 2;
+			CursurDisplay(CursurIndex);
+			break;
+		case 2:
+			CursurIndex--;
+			CursurDisplay(CursurIndex);
+			break;
+		default:
+			CursurIndex = 1;
+			CursurDisplay(CursurIndex);
+			break;
+		}
+	}
+	public void ClickRight(){
+		switch (CursurIndex) {
+		case 1:
+			CursurIndex++;
+			CursurDisplay(CursurIndex);
+			break;
+		case 2:
+			CursurIndex = 1;
+			CursurDisplay(CursurIndex);
+			break;
+		default:
+			CursurIndex = 1;
+			CursurDisplay(CursurIndex);
+			break;
+		}
+	}
+	public void ClickESC(){
+		ClickCancel();
+	}
+	public void ClickEnter(){
+		switch (CursurIndex) {
+		case 1:
+			ClickOK();
+			break;
+		case 2:
+			ClickCancel();
+			break;
+		default:
+			
+			break;
+		}
+	}
+	////////////////////////////////////////////////////////////////////////////////
+	public void CursurDisplay(int Index){
+		switch (Index) {
+		case 1:
+			imgbtnOK.setPressed(true);
+			imgbtnCancel.setPressed(false);
+			break;
+		case 2:
+			imgbtnOK.setPressed(false);
+			imgbtnCancel.setPressed(true);
+			break;
+		default:
+			break;
+		}
+	}
 	////////////////////////////////////////////////////////////////////////////////
 }

@@ -14,6 +14,7 @@ import taeha.wheelloader.fseries_monitor.main.CAN1CommManager;
 import taeha.wheelloader.fseries_monitor.main.Home;
 import taeha.wheelloader.fseries_monitor.main.ParentPopup;
 import taeha.wheelloader.fseries_monitor.main.R;
+import taeha.wheelloader.fseries_monitor.main.R.string;
 
 public class TCLockUpPopup extends ParentPopup{
 	//CONSTANT////////////////////////////////////////
@@ -25,7 +26,7 @@ public class TCLockUpPopup extends ParentPopup{
 	//////////////////////////////////////////////////
 	
 	//VALUABLE////////////////////////////////////////
-
+	int TCLockUp;
 	//////////////////////////////////////////////////
 	
 	//ANIMATION///////////////////////////////////////
@@ -63,7 +64,12 @@ public class TCLockUpPopup extends ParentPopup{
 		super.dismiss();
 		ParentActivity.ScreenIndex = ParentActivity.SCREEN_STATE_MENU_MODE_ENGINETM_TOP;
 	}
-
+	@Override
+	public void InitValuable(){
+		super.InitValuable();
+		TCLockUp = CAN1Comm.Get_TransmissionTCLockupEngaged_568_PGN65434(); 
+		TCLockUpDisplay(TCLockUp);
+	}
 	@Override
 	protected void InitResource() {
 		// TODO Auto-generated method stub
@@ -114,4 +120,81 @@ public class TCLockUpPopup extends ParentPopup{
 		CAN1Comm.TxCANToMCU(104);
 		this.dismiss();
 	}	
+	public void ClickLeft(){
+		switch (CursurIndex) {
+		case 1:
+			CursurIndex = 2;
+			CursurDisplay(CursurIndex);
+			break;
+		case 2:
+			CursurIndex--;
+			CursurDisplay(CursurIndex);
+			break;
+		default:
+			CursurIndex = 1;
+			CursurDisplay(CursurIndex);
+			break;
+		}
+	}
+	public void ClickRight(){
+		switch (CursurIndex) {
+		case 1:
+			CursurIndex++;
+			CursurDisplay(CursurIndex);
+			break;
+		case 2:
+			CursurIndex = 1;
+			CursurDisplay(CursurIndex);
+			break;
+		default:
+			CursurIndex = 1;
+			CursurDisplay(CursurIndex);
+			break;
+		}
+	}
+	public void ClickESC(){
+		
+	}
+	public void ClickEnter(){
+		switch (CursurIndex) {
+		case 1:
+			ClickOff();
+			break;
+		case 2:
+			ClickOn();
+			break;
+		default:
+			
+			break;
+		}
+	}
+	////////////////////////////////////////////////////////////////////////////////
+	public void CursurDisplay(int Index){
+		switch (Index) {
+		case 1:
+			textViewOn.setPressed(false);
+			textViewOff.setPressed(true);
+			break;
+		case 2:
+			textViewOn.setPressed(true);
+			textViewOff.setPressed(false);
+			break;
+		default:
+			break;
+		}
+	}
+	public void TCLockUpDisplay(int data){
+		switch (data) {
+		case CAN1CommManager.DATA_STATE_TM_LOCKUPCLUTCH_OFF:
+			CursurIndex = 1;
+			CursurDisplay(CursurIndex);
+			break;
+		case CAN1CommManager.DATA_STATE_TM_LOCKUPCLUTCH_ON:
+			CursurIndex = 2;
+			CursurDisplay(CursurIndex);
+			break;
+		default:
+			break;
+		}
+	}
 }

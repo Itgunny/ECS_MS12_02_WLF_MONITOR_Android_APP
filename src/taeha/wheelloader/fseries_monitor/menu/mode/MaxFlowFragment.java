@@ -9,6 +9,8 @@ import taeha.wheelloader.fseries_monitor.main.Home;
 import taeha.wheelloader.fseries_monitor.main.ParentFragment;
 import taeha.wheelloader.fseries_monitor.main.R;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.text.Layout;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -27,16 +29,19 @@ public class MaxFlowFragment extends ParentFragment{
 	//////////////////////////////////////////////////
 	//RESOURCE////////////////////////////////////////
 	ImageButton imgbtnOK;
-	ImageButton	imgbtnCancel;
 	
 	ImageButton imgbtnPlus;
-	ImageButton imgbtnMunus;
+	ImageButton imgbtnMinus;
 	
 	TextView	textViewMaxFlow;
+	
+	
 	//////////////////////////////////////////////////
 	
 	//VALUABLE////////////////////////////////////////
 	int MaxFlowLevel;
+	int CursurIndex;
+	Handler HandleCursurDisplay;
 	//////////////////////////////////////////////////
 	
 	//Fragment////////////////////////////////////////
@@ -63,8 +68,17 @@ public class MaxFlowFragment extends ParentFragment{
 		InitValuables();
 		InitButtonListener();
 		
+		CursurDisplay(CursurIndex);
 		ParentActivity.ScreenIndex = ParentActivity.SCREEN_STATE_MENU_MODE_HYD_MAXFLOW;
 		ParentActivity._MenuBaseFragment._MenuInterTitleFragment.SetTitleText(ParentActivity.getResources().getString(R.string.Auxilliary_Attachment_Max_Flow_Level));
+		
+		HandleCursurDisplay = new Handler() {
+			@Override
+			public void handleMessage(Message msg) {
+			
+				CursurDisplay(msg.what);
+			}
+		};
 		return mRoot;
 	}
 	
@@ -77,11 +91,10 @@ public class MaxFlowFragment extends ParentFragment{
 	protected void InitResource() {
 		// TODO Auto-generated method stub
 		imgbtnOK = (ImageButton)mRoot.findViewById(R.id.ImageButton_menu_body_mode_maxflow_low_ok);
-		imgbtnCancel = (ImageButton)mRoot.findViewById(R.id.ImageButton_menu_body_mode_maxflow_low_cancel);
 
 		
 		imgbtnPlus = (ImageButton)mRoot.findViewById(R.id.imageButton_menu_body_mode_maxflow_plus);
-		imgbtnMunus = (ImageButton)mRoot.findViewById(R.id.imageButton_menu_body_mode_maxflow_minus);
+		imgbtnMinus = (ImageButton)mRoot.findViewById(R.id.imageButton_menu_body_mode_maxflow_minus);
 	
 		
 		textViewMaxFlow = (TextView)mRoot.findViewById(R.id.textView_menu_body_mode_maxflow_data);
@@ -92,7 +105,7 @@ public class MaxFlowFragment extends ParentFragment{
 		// TODO Auto-generated method stub
 		super.InitValuables();
 		
-		
+		CursurIndex = 1;
 		
 	}
 	@Override
@@ -104,14 +117,8 @@ public class MaxFlowFragment extends ParentFragment{
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
 				ClickOK();
-			}
-		});
-		imgbtnCancel.setOnClickListener(new View.OnClickListener() {
-			
-			@Override
-			public void onClick(View v) {
-				// TODO Auto-generated method stub
-				ClickCancel();
+				CursurIndex = 3;
+				HandleCursurDisplay.sendMessage(HandleCursurDisplay.obtainMessage(CursurIndex));
 			}
 		});
 		imgbtnPlus.setOnClickListener(new View.OnClickListener() {
@@ -120,14 +127,18 @@ public class MaxFlowFragment extends ParentFragment{
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
 				ClickPlus();
+				CursurIndex = 2;
+				HandleCursurDisplay.sendMessage(HandleCursurDisplay.obtainMessage(CursurIndex));
 			}
 		});
-		imgbtnMunus.setOnClickListener(new View.OnClickListener() {
+		imgbtnMinus.setOnClickListener(new View.OnClickListener() {
 			
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
 				ClickMinus();
+				CursurIndex = 1;
+				HandleCursurDisplay.sendMessage(HandleCursurDisplay.obtainMessage(CursurIndex));
 			}
 		});
 	}
@@ -152,14 +163,6 @@ public class MaxFlowFragment extends ParentFragment{
 		ParentActivity._MenuBaseFragment.showBodyModeAnimation();
 		ParentActivity._MenuBaseFragment._MenuModeFragment.setFirstScreen(Home.SCREEN_STATE_MENU_MODE_HYD_TOP);
 	}
-	public void ClickCancel(){
-		if(ParentActivity.AnimationRunningFlag == true)
-			return;
-		else
-			ParentActivity.StartAnimationRunningTimer();
-		ParentActivity._MenuBaseFragment.showBodyModeAnimation();
-		ParentActivity._MenuBaseFragment._MenuModeFragment.setFirstScreen(Home.SCREEN_STATE_MENU_MODE_HYD_TOP);
-	}
 	public void ClickPlus(){
 		CAN1Comm.Set_AuxiliaryAttachmentMaxFlowLevel_PGN61184_203(1);
 		CAN1Comm.TxCANToMCU(203);
@@ -175,6 +178,77 @@ public class MaxFlowFragment extends ParentFragment{
 		if(data > 15)
 			data = 0;
 		textViewMaxFlow.setText(Integer.toString(data));
+	}
+	/////////////////////////////////////////////////////////////////////
+	public void ClickLeft(){
+		switch (CursurIndex) {
+		case 1:
+			CursurIndex = 3;
+			CursurDisplay(CursurIndex);
+			break;
+		case 2:
+		case 3:
+			CursurIndex--;
+			CursurDisplay(CursurIndex);
+			break;
+		default:
+			break;
+		}
+		
+	}
+	public void ClickRight(){
+		switch (CursurIndex) {
+		case 1:
+		case 2:
+			CursurIndex++;
+			CursurDisplay(CursurIndex);
+			break;
+		case 3:
+			CursurIndex = 1;
+			CursurDisplay(CursurIndex);
+			break;
+		default:
+			break;
+		}
+	}
+	public void ClickESC(){
+		ClickOK();
+	}
+	public void ClickEnter(){
+		switch (CursurIndex) {
+		case 1:
+			ClickMinus();
+			break;
+		case 2:
+			ClickPlus();
+			break;
+		case 3:
+			ClickOK();
+			break;
+		default:
+			break;
+		}
+	}
+	public void CursurDisplay(int Index){
+		switch (Index) {
+		case 1:
+			imgbtnMinus.setPressed(true);
+			imgbtnPlus.setPressed(false);
+			imgbtnOK.setPressed(false);
+			break;
+		case 2:
+			imgbtnMinus.setPressed(false);
+			imgbtnPlus.setPressed(true);
+			imgbtnOK.setPressed(false);
+			break;
+		case 3:
+			imgbtnMinus.setPressed(false);
+			imgbtnPlus.setPressed(false);
+			imgbtnOK.setPressed(true);
+			break;
+		default:
+			break;
+		}
 	}
 	/////////////////////////////////////////////////////////////////////
 	

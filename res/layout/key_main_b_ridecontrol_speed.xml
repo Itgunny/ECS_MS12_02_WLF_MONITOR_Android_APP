@@ -70,7 +70,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
-                android:src="@drawable/main_key_ridecontrol_slide_bg" />
+                android:src="@drawable/main_key_ridecontrol_slide_bg02_3" />
         
 	        <SeekBar
 	            android:id="@+id/seekBar_key_main_b_ridecontrol_speed_forward"
@@ -155,7 +155,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
-                android:src="@drawable/main_key_ridecontrol_slide_bg" />
+                android:src="@drawable/main_key_ridecontrol_slide_bg02_3" />
         
 	        <SeekBar
 	            android:id="@+id/seekBar_key_main_b_ridecontrol_speed_backward"
