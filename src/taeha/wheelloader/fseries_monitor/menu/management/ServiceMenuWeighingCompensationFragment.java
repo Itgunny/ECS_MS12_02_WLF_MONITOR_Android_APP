@@ -112,8 +112,6 @@ public class ServiceMenuWeighingCompensationFragment extends ParentFragment{
 		InitButtonListener();
 		
 		CAN1Comm.Set_WeightOffsetSetting_PGN61184_62(CAN1CommManager.DATA_STATE_WEIGHT_OFFSET_SETTING_CALL);
-		CAN1Comm.Set_SuddenChangeError_PGN61184_62(CAN1Comm.Get_SuddenChangeError_PGN65450());
-		CAN1Comm.Set_BucketFullInError_PGN61184_62(CAN1Comm.Get_BucketFullInError_PGN65450());
 		CAN1Comm.TxCANToMCU(62);
 		CAN1Comm.Set_WeightOffsetSetting_PGN61184_62(15);
 
@@ -427,16 +425,12 @@ public class ServiceMenuWeighingCompensationFragment extends ParentFragment{
 		ParentActivity._MenuBaseFragment.showServiceMenuListAnimation();
 		if(WeightOffsetSelectionStatus == CAN1CommManager.DATA_STATE_WEIGHT_OFFSET_SETTING_NOOFFSET){
 			CAN1Comm.Set_WeightOffsetSelection_PGN61184_62(WeightOffsetSelectionStatus);
-			CAN1Comm.Set_SuddenChangeError_PGN61184_62(CAN1Comm.Get_SuddenChangeError_PGN65450());
-			CAN1Comm.Set_BucketFullInError_PGN61184_62(CAN1Comm.Get_BucketFullInError_PGN65450());
 			CAN1Comm.TxCANToMCU(62);
 			CAN1Comm.Set_WeightOffsetSelection_PGN61184_62(15);
 		}else if(WeightOffsetSelectionStatus == CAN1CommManager.DATA_STATE_WEIGHT_OFFSET_SETTING_WORKTOOL_1){
 			CAN1Comm.Set_WeightOffsetSelection_PGN61184_62(WeightOffsetSelectionStatus);
 			CAN1Comm.Set_WeightOffsetSetting_PGN61184_62(CAN1CommManager.DATA_STATE_WEIGHT_OFFSET_SETTING_WORKTOOL_1);
 			CAN1Comm.Set_WeightOffset_1922_PGN61184_62(NumSetting);
-			CAN1Comm.Set_SuddenChangeError_PGN61184_62(CAN1Comm.Get_SuddenChangeError_PGN65450());
-			CAN1Comm.Set_BucketFullInError_PGN61184_62(CAN1Comm.Get_BucketFullInError_PGN65450());
 			CAN1Comm.TxCANToMCU(62);
 			CAN1Comm.Set_WeightOffsetSelection_PGN61184_62(15);
 			CAN1Comm.Set_WeightOffsetSetting_PGN61184_62(0xF);
@@ -445,8 +439,6 @@ public class ServiceMenuWeighingCompensationFragment extends ParentFragment{
 			CAN1Comm.Set_WeightOffsetSelection_PGN61184_62(WeightOffsetSelectionStatus);
 			CAN1Comm.Set_WeightOffsetSetting_PGN61184_62(CAN1CommManager.DATA_STATE_WEIGHT_OFFSET_SETTING_WORKTOOL_2);
 			CAN1Comm.Set_WeightOffset_1922_PGN61184_62(NumSetting);
-			CAN1Comm.Set_SuddenChangeError_PGN61184_62(CAN1Comm.Get_SuddenChangeError_PGN65450());
-			CAN1Comm.Set_BucketFullInError_PGN61184_62(CAN1Comm.Get_BucketFullInError_PGN65450());
 			CAN1Comm.TxCANToMCU(62);
 			CAN1Comm.Set_WeightOffsetSelection_PGN61184_62(15);
 			CAN1Comm.Set_WeightOffsetSetting_PGN61184_62(0xF);
@@ -455,8 +447,6 @@ public class ServiceMenuWeighingCompensationFragment extends ParentFragment{
 			CAN1Comm.Set_WeightOffsetSelection_PGN61184_62(WeightOffsetSelectionStatus);
 			CAN1Comm.Set_WeightOffsetSetting_PGN61184_62(CAN1CommManager.DATA_STATE_WEIGHT_OFFSET_SETTING_WORKTOOL_3);
 			CAN1Comm.Set_WeightOffset_1922_PGN61184_62(NumSetting);
-			CAN1Comm.Set_SuddenChangeError_PGN61184_62(CAN1Comm.Get_SuddenChangeError_PGN65450());
-			CAN1Comm.Set_BucketFullInError_PGN61184_62(CAN1Comm.Get_BucketFullInError_PGN65450());
 			CAN1Comm.TxCANToMCU(62);
 			CAN1Comm.Set_WeightOffsetSelection_PGN61184_62(15);
 			CAN1Comm.Set_WeightOffsetSetting_PGN61184_62(0xF);

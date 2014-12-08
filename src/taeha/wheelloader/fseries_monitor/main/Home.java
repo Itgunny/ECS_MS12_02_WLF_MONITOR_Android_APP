@@ -1656,8 +1656,8 @@ public class Home extends Activity {
 				else if(nSendCommandTimerIndex == 3){
 					CAN1Comm.Set_SettingSelection_PGN61184_105(0xF);
 					CAN1Comm.Set_SpeedometerFrequency_534_PGN61184_105(0xFFFF);
-					CAN1Comm.Set_AutoRideControlOperationSpeedForward_PGN61184_105(0xF);
-					CAN1Comm.Set_AutoRideControlOperationSpeedBackward_PGN61184_105(0xF);
+					CAN1Comm.Set_AutoRideControlOperationSpeedForward_574_PGN61184_105(0xF);
+					CAN1Comm.Set_AutoRideControlOperationSpeedBackward_576_PGN61184_105(0xF);
 					CAN1Comm.Set_VehicleSpeedLimit_572_PGN61184_105(0xFF);
 					CAN1Comm.TxCANToMCU(105);
 					CAN1Comm.Set_SettingSelection_PGN61184_105(15);
@@ -1666,8 +1666,6 @@ public class Home extends Activity {
 				else if (nSendCommandTimerIndex == 4){
 					CAN1Comm.Set_WeightOffsetSetting_PGN61184_62(0); //STATE_WEIGHT_OFFSET_SETTING_CALL
 					CAN1Comm.Set_WeighingDisplayMode1_1910_PGN61184_62(WeighingDisplayIndex);
-					CAN1Comm.Set_SuddenChangeError_PGN61184_62(CAN1Comm.Get_SuddenChangeError_PGN65450());
-    				CAN1Comm.Set_BucketFullInError_PGN61184_62(CAN1Comm.Get_BucketFullInError_PGN65450());
 					CAN1Comm.TxCANToMCU(62);
 					CAN1Comm.Set_WeightOffsetSetting_PGN61184_62(3);
 					CAN1Comm.Set_WeighingDisplayMode1_1910_PGN61184_62(15);

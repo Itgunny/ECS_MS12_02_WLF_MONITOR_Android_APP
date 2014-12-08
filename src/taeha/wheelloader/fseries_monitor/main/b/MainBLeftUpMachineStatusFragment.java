@@ -62,9 +62,9 @@ public class MainBLeftUpMachineStatusFragment extends ParentFragment{
 	int WeightInfoDataTotalA;
 	int WeightInfoDataTotalB;
 	int WeightInfoDataTotalC;
-	int WeightInfoSuddenChangeErr;
-	int WeightInfoBucketFullInErr;
 	
+	int WeightInfoCurrentWeighingResult;
+		
 	int WeighingDisplayIndex;
 	//////////////////////////////////////////////////
 	
@@ -171,9 +171,8 @@ public class MainBLeftUpMachineStatusFragment extends ParentFragment{
 		WeightInfoDataTotalB = CAN1Comm.Get_TotalWorkBWeight_1913_PGN65451();
 		WeightInfoDataTotalC = CAN1Comm.Get_TotalWorkCWeight_1914_PGN65452();
 		WeightInfoDataCurrent = CAN1Comm.Get_CurrentWeight_1911_PGN65450();
-		WeightInfoSuddenChangeErr = CAN1Comm.Get_ErrorSuddenChange_PGN61184_63();
-		WeightInfoBucketFullInErr = CAN1Comm.Get_ErrorBucketFullIn_PGN61184_63();
 
+		WeightInfoCurrentWeighingResult = CAN1Comm.Get_CurrentWeighingResult_1919_PGN65450();
 	}
 
 	@Override
@@ -222,7 +221,7 @@ public class MainBLeftUpMachineStatusFragment extends ParentFragment{
 		case CAN1CommManager.DATA_STATE_MACHINESTATUS_WEIGHING:
 			LayoutNormalUpper.setVisibility(View.GONE);
 			LayoutWeighingUpper.setVisibility(View.VISIBLE);
-			WeighingUpperDisplay(WeightInfoSuddenChangeErr,WeightInfoBucketFullInErr,ParentActivity.WeighingDisplayIndex,WeightInfoDataCurrent,
+			WeighingUpperDisplay(WeightInfoCurrentWeighingResult,ParentActivity.WeighingDisplayIndex,WeightInfoDataCurrent,
 					WeightInfoDataDay1,WeightInfoDataToday,WeightInfoDataTotalA,WeightInfoDataTotalB,WeightInfoDataTotalC,ParentActivity.UnitWeight);
 			break;
 
@@ -355,7 +354,7 @@ public class MainBLeftUpMachineStatusFragment extends ParentFragment{
 		textData.setText(ParentActivity.GetBattery(Data));
 		textUnit.setText(ParentActivity.getResources().getString(string.V));
 	}
-	public void WeighingUpperDisplay(int SuddenChangeErr, int BucketFullInErr, int DisplayIndex, int Current, int Day1, int Today, int TotalA, int TotalB, int TotalC, int Unit){
+	public void WeighingUpperDisplay(int CurrentWeighingResult, int DisplayIndex, int Current, int Day1, int Today, int TotalA, int TotalB, int TotalC, int Unit){
 		if(ParentActivity.UnitWeight == ParentActivity.UNIT_WEIGHT_LB){
 			textViewWeighingUpperUnit.setText(ParentActivity.getResources().getString(string.lb));
 			textViewWeighingLowerUnit.setText(ParentActivity.getResources().getString(string.lb));
@@ -364,15 +363,15 @@ public class MainBLeftUpMachineStatusFragment extends ParentFragment{
 			textViewWeighingLowerUnit.setText(ParentActivity.getResources().getString(string.ton));
 		}
 				
-		if(SuddenChangeErr == CAN1CommManager.DATA_STATE_LAMP_ON && BucketFullInErr == CAN1CommManager.DATA_STATE_LAMP_ON){
+		if(CurrentWeighingResult == CAN1CommManager.DATA_STATE_CURRENT_WEIHGING_RESULT_BOOMLIFTING_BUCKETFULLIN){
 			WeighingUpperStatusIconAnimation.FlipAnimation(imgViewWeighingUpperIcon,R.drawable.main_default_monitoring_icon_sudden_fullin);
 			textViewWeighingUpperData.setText(ParentActivity.GetWeighit(WeightInfoDataCurrent, ParentActivity.UnitWeight));
 			textViewWeighingUpperData.setTextColor(ParentActivity.getResources().getColor(color.red));
-		}else if(SuddenChangeErr == CAN1CommManager.DATA_STATE_LAMP_ON){
+		}else if(CurrentWeighingResult == CAN1CommManager.DATA_STATE_CURRENT_WEIHGING_RESULT_BOOMLIFTING){
 			WeighingUpperStatusIconAnimation.FlipAnimation(imgViewWeighingUpperIcon,R.drawable.main_default_monitoring_icon_sudden);
 			textViewWeighingUpperData.setText(ParentActivity.GetWeighit(WeightInfoDataCurrent, ParentActivity.UnitWeight));
 			textViewWeighingUpperData.setTextColor(ParentActivity.getResources().getColor(color.red));
-		}else if(BucketFullInErr == CAN1CommManager.DATA_STATE_LAMP_ON){
+		}else if(CurrentWeighingResult == CAN1CommManager.DATA_STATE_CURRENT_WEIHGING_RESULT_BUCKETFULLIN){
 			WeighingUpperStatusIconAnimation.FlipAnimation(imgViewWeighingUpperIcon,R.drawable.main_default_monitoring_icon_fullin);
 			textViewWeighingUpperData.setText(ParentActivity.GetWeighit(WeightInfoDataCurrent, ParentActivity.UnitWeight));
 			textViewWeighingUpperData.setTextColor(ParentActivity.getResources().getColor(color.red));
@@ -442,23 +441,39 @@ public class MainBLeftUpMachineStatusFragment extends ParentFragment{
 			return;
 		else
 			ParentActivity.StartAnimationRunningTimer();
-		ParentActivity._MainBBaseFragment._MainBCenterMachineStatusFragment = new MainBCenterMachineStatusFragment();
-		ParentActivity._MainBBaseFragment._MainBLeftUpMachineStatusSelectFragment = new MainBLeftUpMachineStatusSelectFragment();
-		ParentActivity._MainBBaseFragment._MainBodyShiftAnimation.StartShiftLeftUpAnimation();
-		ParentActivity._MainBBaseFragment.CenterAnimation.StartChangeAnimation(ParentActivity._MainBBaseFragment._MainBCenterMachineStatusFragment);
-		ParentActivity._MainBBaseFragment.LeftUpChangeAnimation.StartChangeAnimation(ParentActivity._MainBBaseFragment._MainBLeftUpMachineStatusSelectFragment);
 		
-		ParentActivity._MainBBaseFragment._CenterBGDisappearAnimation.StartAnimation();
-		ParentActivity._MainBBaseFragment._RightDownDisappearAnimation.StartAnimation();
-		ParentActivity._MainBBaseFragment._RightUpDisappearAnimation.StartAnimation();
-		ParentActivity._MainBBaseFragment._LeftDownDisappearAnimation.StartAnimation();
-		ParentActivity._MainBBaseFragment._RightDownBGDisappearAnimation.StartAnimation();
-		ParentActivity._MainBBaseFragment._RightUpBGDisappearAnimation.StartAnimation();
-		ParentActivity._MainBBaseFragment._LeftDownBGDisappearAnimation.StartAnimation();
-		ParentActivity._MainBBaseFragment._VirtualKeyDisappearAnimation.StartAnimation();
-		
-		ParentActivity._MainBBaseFragment._KeyTitleDisappearAnimation.StartAnimation();
-		ParentActivity._MainBBaseFragment._KeyBodyDisappearAnimation.StartAnimation();
+		if(WeightInfoCurrentWeighingResult == CAN1CommManager.DATA_STATE_CURRENT_WEIHGING_RESULT_BOOMLIFTING_BUCKETFULLIN){
+			CAN1Comm.Set_RequestReweighing_PGN61184_62(1);
+			CAN1Comm.TxCANToMCU(62);
+			CAN1Comm.Set_RequestReweighing_PGN61184_62(3);
+		}else if(WeightInfoCurrentWeighingResult == CAN1CommManager.DATA_STATE_CURRENT_WEIHGING_RESULT_BOOMLIFTING){
+			CAN1Comm.Set_RequestReweighing_PGN61184_62(1);
+			CAN1Comm.TxCANToMCU(62);
+			CAN1Comm.Set_RequestReweighing_PGN61184_62(3);
+		}else if(WeightInfoCurrentWeighingResult == CAN1CommManager.DATA_STATE_CURRENT_WEIHGING_RESULT_BUCKETFULLIN){
+			CAN1Comm.Set_RequestReweighing_PGN61184_62(1);
+			CAN1Comm.TxCANToMCU(62);
+			CAN1Comm.Set_RequestReweighing_PGN61184_62(3);
+		}else{
+			ParentActivity._MainBBaseFragment._MainBCenterMachineStatusFragment = new MainBCenterMachineStatusFragment();
+			ParentActivity._MainBBaseFragment._MainBLeftUpMachineStatusSelectFragment = new MainBLeftUpMachineStatusSelectFragment();
+			ParentActivity._MainBBaseFragment._MainBodyShiftAnimation.StartShiftLeftUpAnimation();
+			ParentActivity._MainBBaseFragment.CenterAnimation.StartChangeAnimation(ParentActivity._MainBBaseFragment._MainBCenterMachineStatusFragment);
+			ParentActivity._MainBBaseFragment.LeftUpChangeAnimation.StartChangeAnimation(ParentActivity._MainBBaseFragment._MainBLeftUpMachineStatusSelectFragment);
+			
+			ParentActivity._MainBBaseFragment._CenterBGDisappearAnimation.StartAnimation();
+			ParentActivity._MainBBaseFragment._RightDownDisappearAnimation.StartAnimation();
+			ParentActivity._MainBBaseFragment._RightUpDisappearAnimation.StartAnimation();
+			ParentActivity._MainBBaseFragment._LeftDownDisappearAnimation.StartAnimation();
+			ParentActivity._MainBBaseFragment._RightDownBGDisappearAnimation.StartAnimation();
+			ParentActivity._MainBBaseFragment._RightUpBGDisappearAnimation.StartAnimation();
+			ParentActivity._MainBBaseFragment._LeftDownBGDisappearAnimation.StartAnimation();
+			ParentActivity._MainBBaseFragment._VirtualKeyDisappearAnimation.StartAnimation();
+			
+			ParentActivity._MainBBaseFragment._KeyTitleDisappearAnimation.StartAnimation();
+			ParentActivity._MainBBaseFragment._KeyBodyDisappearAnimation.StartAnimation();
+		}
+	
 		
 	
 	}

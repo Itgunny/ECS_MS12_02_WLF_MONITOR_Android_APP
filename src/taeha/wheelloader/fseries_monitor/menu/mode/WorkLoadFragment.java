@@ -133,7 +133,7 @@ public class WorkLoadFragment extends ParentFragment{
 		// TODO Auto-generated method stub
 		super.InitValuables();
 		
-		WeighingSystemModeIndex = CAN1Comm.Get_WeightAccumulationMode_PGN65450();
+		WeighingSystemModeIndex = CAN1Comm.Get_WeighingSystemAccumulationMode_1941_PGN65450();
 		WeighingDisplayIndex = ParentActivity.WeighingDisplayIndex;
 		WeighingErrorDetect = ParentActivity.WeighingErrorDetect;
 		
@@ -299,10 +299,8 @@ public class WorkLoadFragment extends ParentFragment{
 
 		ParentActivity.WeighingDisplayIndex = WeighingDisplayIndex;
 		ParentActivity.WeighingErrorDetect = WeighingErrorDetect;
-		CAN1Comm.Set_WeightAccumulationMode_PGN61184_62(WeighingSystemModeIndex);
+		CAN1Comm.Set_WeighingSystemAccumulationMode_1941_PGN61184_62(WeighingSystemModeIndex);
 		CAN1Comm.Set_WeighingDisplayMode1_1910_PGN61184_62(WeighingDisplayIndex);
-		CAN1Comm.Set_SuddenChangeError_PGN61184_62(CAN1Comm.Get_SuddenChangeError_PGN65450());
-		CAN1Comm.Set_BucketFullInError_PGN61184_62(CAN1Comm.Get_BucketFullInError_PGN65450());
 		CAN1Comm.TxCANToMCU(62);
 		CAN1Comm.Set_WeighingDisplayMode1_1910_PGN61184_62(15);
 		
@@ -324,7 +322,7 @@ public class WorkLoadFragment extends ParentFragment{
 
 	}
 	public void SetDefault(){
-		CAN1Comm.Set_WeightAccumulationMode_PGN61184_62(CAN1CommManager.DATA_STATE_WEIGHING_ACCUMULATION_AUTO);
+		CAN1Comm.Set_WeighingSystemAccumulationMode_1941_PGN61184_62(CAN1CommManager.DATA_STATE_WEIGHING_ACCUMULATION_AUTO);
 		CAN1Comm.TxCANToMCU(62);
 	
 		ParentActivity.WeighingDisplayIndex = CAN1CommManager.DATA_STATE_WEIGHINGDISPLAY_TOTAL_A;
@@ -349,8 +347,6 @@ public class WorkLoadFragment extends ParentFragment{
 	public void ClickInitialization(){
 		CAN1Comm.Set_RequestTotalWorkWeightReset_PGN61184_62(ParentActivity.WeighingDisplayIndex);
 		CAN1Comm.Set_RequestReweighing_PGN61184_62(3);
-		CAN1Comm.Set_SuddenChangeError_PGN61184_62(CAN1Comm.Get_SuddenChangeError_PGN65450());
-		CAN1Comm.Set_BucketFullInError_PGN61184_62(CAN1Comm.Get_BucketFullInError_PGN65450());
 		CAN1Comm.TxCANToMCU(62);
 		CAN1Comm.Set_RequestTotalWorkWeightReset_PGN61184_62(15);
 		

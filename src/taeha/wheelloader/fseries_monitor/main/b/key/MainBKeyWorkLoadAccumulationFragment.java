@@ -65,7 +65,7 @@ public class MainBKeyWorkLoadAccumulationFragment extends ParentFragment{
 	protected void InitValuables() {
 		// TODO Auto-generated method stub
 		super.InitValuables();
-		WeighingSystemMode = CAN1Comm.Get_WeightAccumulationMode_PGN65450();
+		WeighingSystemMode = CAN1Comm.Get_WeighingSystemAccumulationMode_1941_PGN65450();
 	}
 	@Override
 	protected void InitButtonListener() {
@@ -118,12 +118,12 @@ public class MainBKeyWorkLoadAccumulationFragment extends ParentFragment{
 		
 	}
 	public void ClickManual(){
-		CAN1Comm.Set_WeightAccumulationMode_PGN61184_62(CAN1CommManager.DATA_STATE_WEIGHING_ACCUMULATION_MANUAL);
+		CAN1Comm.Set_WeighingSystemAccumulationMode_1941_PGN61184_62(CAN1CommManager.DATA_STATE_WEIGHING_ACCUMULATION_MANUAL);
 		CAN1Comm.TxCANToMCU(62);
 		showWorkLoadAnimation();
 	}
 	public void ClickAuto(){
-		CAN1Comm.Set_WeightAccumulationMode_PGN61184_62(CAN1CommManager.DATA_STATE_WEIGHING_ACCUMULATION_AUTO);
+		CAN1Comm.Set_WeighingSystemAccumulationMode_1941_PGN61184_62(CAN1CommManager.DATA_STATE_WEIGHING_ACCUMULATION_AUTO);
 		CAN1Comm.TxCANToMCU(62);
 		showWorkLoadAnimation();
 	}

@@ -52,6 +52,27 @@
             android:layout_height="wrap_content"
             android:src="@drawable/menu_low_bg" />
 	    
+	    
+	   
+	    <ImageButton
+	        android:id="@+id/ImageButton_menu_body_mode_maxflow_low_ok"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:layout_alignBottom="@+id/imageView_menu_body_mode_maxflow_low_bg"
+	        android:layout_alignRight="@+id/imageView_menu_body_mode_maxflow_low_bg"
+	        android:background="@drawable/_selector_menu_low_right_btn" />
+	    
+	    
+	    
+	    <ImageButton
+	        android:id="@+id/ImageButton_menu_body_mode_maxflow_low_cancel"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:layout_alignBottom="@+id/imageView_menu_body_mode_maxflow_low_bg"
+	        android:layout_toLeftOf="@+id/imageView_menu_body_mode_maxflow_low_line_1"
+	        android:background="@drawable/_selector_menu_low_center_btn"
+	        android:visibility="invisible" />
+	    
 	    <ImageView
 	        android:id="@+id/imageView_menu_body_mode_maxflow_low_line_1"
 	        android:layout_width="wrap_content"
@@ -68,23 +89,6 @@
 	       android:layout_alignLeft="@+id/ImageButton_menu_body_mode_maxflow_low_cancel"
 	       android:src="@drawable/main_key_low_line"
 	       android:visibility="invisible" />
-	   
-	    <ImageButton
-	        android:id="@+id/ImageButton_menu_body_mode_maxflow_low_ok"
-	        android:layout_width="wrap_content"
-	        android:layout_height="wrap_content"
-	        android:layout_alignBottom="@+id/imageView_menu_body_mode_maxflow_low_bg"
-	        android:layout_alignRight="@+id/imageView_menu_body_mode_maxflow_low_bg"
-	        android:background="@drawable/_selector_menu_low_right_btn" />
-	    
-	    <ImageButton
-	        android:id="@+id/ImageButton_menu_body_mode_maxflow_low_cancel"
-	        android:layout_width="wrap_content"
-	        android:layout_height="wrap_content"
-	        android:layout_alignBottom="@+id/imageView_menu_body_mode_maxflow_low_bg"
-	        android:layout_toLeftOf="@+id/imageView_menu_body_mode_maxflow_low_line_1"
-	        android:background="@drawable/_selector_menu_low_center_btn"
-	        android:visibility="invisible" />
 	
 	    <RelativeLayout
 	        android:layout_width="wrap_content"

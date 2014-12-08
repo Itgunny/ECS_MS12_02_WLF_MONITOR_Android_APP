@@ -274,8 +274,8 @@ public class ServiceMenuSpeedLimitFragment extends ParentFragment{
 		}else if(SpeedLimitStatus == CAN1CommManager.DATA_STATE_LAMP_ON){
 			CAN1Comm.Set_SettingSelection_PGN61184_105(3);
 			CAN1Comm.Set_SpeedometerFrequency_534_PGN61184_105(0xFFFF);
-			CAN1Comm.Set_AutoRideControlOperationSpeedForward_PGN61184_105(0xF);
-			CAN1Comm.Set_AutoRideControlOperationSpeedBackward_PGN61184_105(0xF);
+			CAN1Comm.Set_AutoRideControlOperationSpeedForward_574_PGN61184_105(0xF);
+			CAN1Comm.Set_AutoRideControlOperationSpeedBackward_576_PGN61184_105(0xF);
 			CAN1Comm.Set_VehicleSpeedLimit_572_PGN61184_105(nSpeedLimit);
 			CAN1Comm.TxCANToMCU(105);
 			CAN1Comm.Set_SettingSelection_PGN61184_105(15);

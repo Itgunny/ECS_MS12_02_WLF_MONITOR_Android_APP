@@ -274,11 +274,23 @@ public class MaintenanceDetailFragment extends ParentFragment{
 		else
 			ParentActivity.StartAnimationRunningTimer();
 		int CurrentIndex = 0;
-		for(int i = 0; i < TotalNumberofMaintenanceItems; i++){
-			if(MaintenanceItem == MaintenanceItemList[i]){
-				CurrentIndex = i;
-				break;
+		try {
+			for(int i = 0; i < TotalNumberofMaintenanceItems; i++){
+				if(MaintenanceItem == MaintenanceItemList[i]){
+					CurrentIndex = i;
+					break;
+				}
 			}
+		} catch (ArrayIndexOutOfBoundsException e) {
+			// TODO: handle exception
+			Log.e(TAG,"ArrayIndexOutOfBoundsException ClickOK");
+		}
+		
+		if(CurrentIndex > 14){
+			Log.e(TAG,"Over Length");
+			ParentActivity._MenuBaseFragment._MaintenanceFragment.setCursurIndex(1);
+			ParentActivity._MenuBaseFragment.showBodyMaintenance();
+			return;
 		}
 		ParentActivity._MenuBaseFragment._MaintenanceFragment.setCursurIndex(CurrentIndex+1);
 		ParentActivity._MenuBaseFragment.showBodyMaintenance();
@@ -287,16 +299,26 @@ public class MaintenanceDetailFragment extends ParentFragment{
 	public void ClickTitleLeft(){
 		int CurrentIndex = 0;
 		int NextIndex = 0;
-		for(int i = 0; i < TotalNumberofMaintenanceItems; i++){
-			if(MaintenanceItem == MaintenanceItemList[i]){
-				CurrentIndex = i;
-				break;
+		try {
+			for(int i = 0; i < TotalNumberofMaintenanceItems; i++){
+				if(MaintenanceItem == MaintenanceItemList[i]){
+					CurrentIndex = i;
+					break;
+				}
 			}
+		} catch (ArrayIndexOutOfBoundsException e) {
+			// TODO: handle exception
+			Log.e(TAG,"ArrayIndexOutOfBoundsException ClickTitleLeft");
 		}
+		
 		if(CurrentIndex <= 0){
 			NextIndex = TotalNumberofMaintenanceItems - 1;
 		}else{
 			NextIndex = CurrentIndex - 1;
+		}
+		if(NextIndex > 14){
+			Log.e(TAG,"Over Length");
+			return;
 		}
 		Log.d(TAG,"CurrentIndex : " + Integer.toString(CurrentIndex));
 		Log.d(TAG,"NextIndex : " + Integer.toString(NextIndex));
@@ -320,16 +342,26 @@ public class MaintenanceDetailFragment extends ParentFragment{
 	public void ClickTitleRight(){
 		int CurrentIndex = 0;
 		int NextIndex = 0;
-		for(int i = 0; i < TotalNumberofMaintenanceItems; i++){
-			if(MaintenanceItem == MaintenanceItemList[i]){
-				CurrentIndex = i;
-				break;
+		try {
+			for(int i = 0; i < TotalNumberofMaintenanceItems; i++){
+				if(MaintenanceItem == MaintenanceItemList[i]){
+					CurrentIndex = i;
+					break;
+				}
 			}
+		} catch (ArrayIndexOutOfBoundsException e) {
+			// TODO: handle exception
+			Log.e(TAG,"ArrayIndexOutOfBoundsException ClickTitleRight");
 		}
-		if(CurrentIndex >= TotalNumberofMaintenanceItems){
+		
+		if(CurrentIndex + 1 >= TotalNumberofMaintenanceItems){
 			NextIndex = 0;
 		}else{
 			NextIndex = CurrentIndex + 1;
+		}
+		if(NextIndex > 14){
+			Log.e(TAG,"Over Length");
+			return;
 		}
 		Log.d(TAG,"CurrentIndex : " + Integer.toString(CurrentIndex));
 		Log.d(TAG,"NextIndex : " + Integer.toString(NextIndex));

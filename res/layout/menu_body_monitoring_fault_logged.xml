@@ -184,7 +184,6 @@
                 android:layout_below="@+id/imageView_menu_body_monitoring_fault_logged_list_title_line"
                 android:layout_marginLeft="10dp"
                 android:layout_marginRight="10dp"
-                android:layout_marginTop="10dp"
                 android:divider="@drawable/menu_information_fault_line_horizontal2" >
 
             </ListView>
@@ -204,14 +203,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@drawable/menu_low_bg" />
-	    
-	    <ImageView
-	        android:id="@+id/imageView_menu_body_monitoring_fault_logged_low_line"
-	        android:layout_width="wrap_content"
-	        android:layout_height="wrap_content"
-	        android:layout_alignBottom="@+id/ImageButton_menu_body_monitoring_fault_logged_low_ok"
-	        android:layout_alignLeft="@+id/ImageButton_menu_body_monitoring_fault_logged_low_ok"
-	        android:src="@drawable/main_key_low_line" />
 	   
 	    <ImageButton
 	        android:id="@+id/ImageButton_menu_body_monitoring_fault_logged_low_ok"
@@ -221,6 +212,14 @@
 	        android:layout_alignRight="@+id/imageView_menu_body_monitoring_fault_logged_low_bg"
 	        android:background="@drawable/_selector_menu_low_right_btn" />
 	
+	    <ImageView
+	        android:id="@+id/imageView_menu_body_monitoring_fault_logged_low_line"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:layout_alignBottom="@+id/ImageButton_menu_body_monitoring_fault_logged_low_ok"
+	        android:layout_alignLeft="@+id/ImageButton_menu_body_monitoring_fault_logged_low_ok"
+	        android:src="@drawable/main_key_low_line" />
+	    
 	    <RelativeLayout
 	        android:layout_width="wrap_content"
 	        android:layout_height="wrap_content"
@@ -262,10 +261,8 @@
 	        android:id="@+id/textView_menu_body_monitoring_fault_logged_low_as"
 	        android:layout_width="wrap_content"
 	        android:layout_height="wrap_content"
-	        android:layout_alignBottom="@+id/imageView_menu_body_monitoring_fault_logged_low_line"
+	        android:layout_alignBottom="@+id/ImageButton_menu_body_monitoring_fault_logged_low_ok"
 	        android:layout_alignParentLeft="true"
-	        android:layout_alignTop="@+id/imageView_menu_body_monitoring_fault_logged_low_line"
-	        android:layout_toLeftOf="@+id/imageView_menu_body_monitoring_fault_logged_low_line"
 	        android:gravity="center"
 	        android:text="@string/AS"
 	        android:textAppearance="?android:attr/textAppearanceLarge" />

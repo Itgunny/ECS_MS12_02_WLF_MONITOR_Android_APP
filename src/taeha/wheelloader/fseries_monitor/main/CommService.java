@@ -163,16 +163,13 @@ public class CommService extends Service{
 	public native int Get_CoolingFanReverseOperatingTime_212_PGN61184_61();
 	//////RX_WEIGHING_SYSTEM_SETTING_REQUEST_61184_62///////
 	public native int Get_MessageType_PGN61184_62();
-	public native int Get_WeighingSystemOperationMode1Status_1901_PGN61184_62();
+	public native int Get_WeighingSystemAccumulationMode_1941_PGN61184_62();
 	public native int Get_RequestReweighing_PGN61184_62();
 	public native int Get_RequestTotalWorkWeightReset_PGN61184_62();
 	public native int Get_WeightOffsetSelection_PGN61184_62();
 	public native int Get_WeightOffsetSetting_PGN61184_62();
 	public native int Get_WeightOffset_1922_PGN61184_62();
 	public native int Get_WeighingDisplayMode1_1910_PGN61184_62();
-	public native int Get_WeightAccumulationMode_PGN61184_62();
-	public native int Get_SuddenChangeError_PGN61184_62();
-	public native int Get_BucketFullInError_PGN61184_62();
 	
 	//////RX_WEIGHT_OFFSET_61184_63///////
 	public native int Get_MessageType_PGN61184_63();
@@ -197,20 +194,19 @@ public class CommService extends Service{
 	public native int Get_ClutchCutoffMode_544_PGN61184_104();
 	public native int Get_KickDownShiftMode_547_PGN61184_104();
 	public native int Get_TransmissionTCLockupEngaged_568_PGN61184_104();
-	public native int Get_DifferentialLockMode_570_PGN61184_104();
 	public native int Get_VehicleSpeedLimitMode_575_PGN61184_104();
 	//////RX_TRAVEL_CONTROL_VALUE_SETTING_61184_105///////
 	public native int Get_MessageType_PGN61184_105();
 	public native int Get_SettingSelection_PGN61184_105();
 	public native int Get_SpeedometerFrequency_534_PGN61184_105();
-	public native int Get_AutoRideControlOperationSpeedForward_PGN61184_105();
-	public native int Get_AutoRideControlOperationSpeedBackward_PGN61184_105();
+	public native int Get_AutoRideControlOperationSpeedForward_574_PGN61184_105();
+	public native int Get_AutoRideControlOperationSpeedBackward_576_PGN61184_105();
 	public native int Get_VehicleSpeedLimit_572_PGN61184_105();
 	//////RX_TRAVEL_CONTROL_VALUE_61184_106///////
 	public native int Get_MessageType_PGN61184_106();
 	public native int Get_SpeedometerFrequency_534_PGN61184_106();
-	public native int Get_AutoRideControlOperationSpeedForward_PGN61184_106();
-	public native int Get_AutoRideControlOperationSpeedBackward_PGN61184_106();
+	public native int Get_AutoRideControlOperationSpeedForward_574_PGN61184_106();
+	public native int Get_AutoRideControlOperationSpeedBackward_576_PGN61184_106();
 	public native int Get_VehicleSpeedLimit_572_PGN61184_106();
 	//////RX_MACHINE_ACCESSORY_SETTING_REQUEST_61184_109///////
 	public native int Get_MessageType_PGN61184_109();
@@ -219,7 +215,6 @@ public class CommService extends Service{
 	public native int Get_Clock_819_PGN61184_109();
 	public native int Get_RequestEngineLowIdleSpeed_PGN61184_109();
 	public native int Get_RequestTripDataReset_PGN61184_109();
-	public native int Get_RequestCruiseControlResumeSwitch_PGN61184_109();
 	//////RX_ENGINE_SHUTDOWN_MODE_SETTING_61184_121///////
 	public native int Get_MessageType_PGN61184_121();
 	public native int Get_AutomaticEngineShutdown_363_PGN61184_121();
@@ -273,11 +268,8 @@ public class CommService extends Service{
 	public native int Get_AuxiliaryAttachmentMaxFlowLevel_PGN61184_203();
 	public native int Get_BoomLeverFloatingPosition_PGN61184_203();
 	//////RX_MONIOTR_STATUS_65327///////
-	public native int Get_MonitorOperationMode_834_PGN65327();
 	public native int Get_RequestBuzzerStop_PGN65327();
 	public native int Get_SpeedmeterUnitChange_PGN65327();
-	public native int Get_AutoGreaseLEDGreenStatus_PGN65327();
-	public native int Get_AutoGreaseLEDRedStatus_PGN65327();
 	//////RX_RMCU_STATUS_65329///////
 	public native int Get_RMCUNetworkType_1621_PGN65329();
 	public native int Get_RMCUBackupBatteryVoltage_1590_PGN65329();
@@ -331,7 +323,6 @@ public class CommService extends Service{
 	public native int Get_ESLInterval_825_PGN65348();
 	//////RX_MACHINE_MODE_STATUS_65350///////
 	public native int Get_EngineAlternateLowIdelSwitch_348_PGN65350();
-	public native int Get_ParallelLiftMode_1923_PGN65350();
 	public native int Get_EnginePowerMode_347_PGN65350();
 	//////RX_HYDRAULIC_PRESSURE4_65354///////
 	public native int Get_BrakeOilPressure_503_PGN65354();
@@ -377,8 +368,17 @@ public class CommService extends Service{
 	public native int Get_CoolingFanSpeed_318_PGN65369();
 	public native int Get_CoolingFanReverseIntervalTime_211_PGN65369();
 	public native int Get_CoolingFanReverseOperatingTime_212_PGN65369();
+	//////RX_ENGINE_STATUS2_65370///////
+	public native int Get_EngineFuelRate_331_PGN65370();
+	public native int Get_EnginePercentLoadatCurrentSpeed_334_PGN65370();
+	public native int Get_EngineActualPercentTorque_335_PGN65370();
 	//////RX_ENGINE_STATUS1_65371///////
 	public native int Get_EngineOperatingCondition_336_PGN65371();
+	public native int Get_EngineIntakeManifold1Temperatue_329_PGN65371();
+	public native int Get_EngineFuelTemperature_330_PGN65371();
+	public native int Get_EngineOilPressure_311_PGN65371();
+	public native int Get_BarometricPressure_328_PGN65371();
+	public native int Get_EngineAirIntakePressure_337_PGN65371();
 	public native int Get_DEFTankLevel_362_PGN65371();
 	//////RX_VEHICLE_DISTANCE_65389///////
 	public native int Get_TripDistance_600_PGN65389();
@@ -494,12 +494,10 @@ public class CommService extends Service{
 	public native byte[] Get_DTC_4_PGN65438();
 	public native byte[] Get_DTC_5_PGN65438();
 	//////RX_WEIGHING_SYSTEM_STATUS_65450///////
-	public native int Get_WeighingSystemOperationMode1StatusJ_1901_PGN65450();
+	public native int Get_WeighingSystemAccumulationMode_1941_PGN65450();
 	public native int Get_WeighingSystemBuzzer_1907_PGN65450();
-	public native int Get_WeightAccumulationMode_PGN65450();
 	public native int Get_CurrentWeighingResult_1919_PGN65450();
-	public native int Get_SuddenChangeError_PGN65450();
-	public native int Get_BucketFullInError_PGN65450();
+	public native int Get_WeighingDisplayMode1_1910_PGN65450();
 	public native int Get_CurrentWeight_1911_PGN65450();
 	public native int Get_TodayWeight_1915_PGN65450();
 	//////RX_WEIGHING_SYSTEM_DATA1_65451///////
@@ -559,13 +557,7 @@ public class CommService extends Service{
 	public native int Get_AutoGreaseOperationStatus_3449_PGN65527();
 	public native int Get_MirrorHeatOperationStatus_3450_PGN65527();
 	public native int Get_RearWiperOperationStatus_3451_PGN65527();
-	public native int Get_RearWiperWasherOperationStatus_3452_PGN65527();
-	public native int Get_KeyPositionStatus_3807_PGN65527();
-	public native int Get_EngineShutdownDelayOperatinStatus_3808_PGN65527();
-	public native int Get_RideControlOperatingSpeedForward_PGN65527();
-	public native int Get_RideControlOperatingSpeedBackward_PGN65527();
-	
-		
+	public native int Get_RearWiperWasherOperationStatus_3452_PGN65527();		
 	//////TX_DTC_INFORMATION_REQUEST_61184_11///////
 	public native void Set_MessageType_PGN61184_11(int Data);
 	public native void Set_DTCInformationRequest_1515_PGN61184_11(int Data);
@@ -624,16 +616,13 @@ public class CommService extends Service{
 	public native void Set_CoolingFanReverseOperatingTime_212_PGN61184_61(int Data);
 	//////TX_WEIGHING_SYSTEM_SETTING_REQUEST_61184_62///////
 	public native void Set_MessageType_PGN61184_62(int Data);
-	public native void Set_WeighingSystemOperationMode1Status_1901_PGN61184_62(int Data);
+	public native void Set_WeighingSystemAccumulationMode_1941_PGN61184_62(int Data);
 	public native void Set_RequestReweighing_PGN61184_62(int Data);
 	public native void Set_RequestTotalWorkWeightReset_PGN61184_62(int Data);
 	public native void Set_WeightOffsetSelection_PGN61184_62(int Data);
 	public native void Set_WeightOffsetSetting_PGN61184_62(int Data);
 	public native void Set_WeightOffset_1922_PGN61184_62(int Data);
 	public native void Set_WeighingDisplayMode1_1910_PGN61184_62(int Data);
-	public native void Set_WeightAccumulationMode_PGN61184_62(int Data);
-	public native void Set_SuddenChangeError_PGN61184_62(int Data);
-	public native void Set_BucketFullInError_PGN61184_62(int Data);
 	//////TX_WEIGHT_OFFSET_61184_63///////
 	public native void Set_MessageType_PGN61184_63(int Data);
 	public native void Set_WeightOffsetSelectionStatus_PGN61184_63(int Data);
@@ -642,7 +631,6 @@ public class CommService extends Service{
 	public native void Set_WeightOffsetWorkTool3_1922_PGN61184_63(int Data);
 	//////TX_MACHINE_MODE_SETTING_61184_101///////
 	public native void Set_MessageType_PGN61184_101(int Data);
-	public native void Set_ParallelLiftMode_1923_PGN61184_101(int Data);
 	public native void Set_EngineAlternateLowIdleSwitch_348_PGN61184_101(int Data);
 	public native void Set_EnginePowerMode_347_PGN61184_101(int Data);
 	//////TX_TRAVEL_MODE_SETTING_61184_104///////
@@ -651,20 +639,19 @@ public class CommService extends Service{
 	public native void Set_ClutchCutoffMode_544_PGN61184_104(int Data);
 	public native void Set_KickDownShiftMode_547_PGN61184_104(int Data);
 	public native void Set_TransmissionTCLockupEngaged_568_PGN61184_104(int Data);
-	public native void Set_DifferentialLockMode_570_PGN61184_104(int Data);
 	public native void Set_VehicleSpeedLimitMode_575_PGN61184_104(int Data);
 	//////TX_TRAVEL_CONTROL_VALUE_SETTING_61184_105///////
 	public native void Set_MessageType_PGN61184_105(int Data);
 	public native void Set_SettingSelection_PGN61184_105(int Data);
 	public native void Set_SpeedometerFrequency_534_PGN61184_105(int Data);
-	public native void Set_AutoRideControlOperationSpeedForward_PGN61184_105(int Data);
-	public native void Set_AutoRideControlOperationSpeedBackward_PGN61184_105(int Data);
+	public native void Set_AutoRideControlOperationSpeedForward_574_PGN61184_105(int Data);
+	public native void Set_AutoRideControlOperationSpeedBackward_576_PGN61184_105(int Data);
 	public native void Set_VehicleSpeedLimit_572_PGN61184_105(int Data);
 	//////TX_TRAVEL_CONTROL_VALUE_61184_106///////
 	public native void Set_MessageType_PGN61184_106(int Data);
 	public native void Set_SpeedometerFrequency_534_PGN61184_106(int Data);
-	public native void Set_AutoRideControlOperationSpeedForward_PGN61184_106(int Data);
-	public native void Set_AutoRideControlOperationSpeedBackward_PGN61184_106(int Data);
+	public native void Set_AutoRideControlOperationSpeedForward_574_PGN61184_106(int Data);
+	public native void Set_AutoRideControlOperationSpeedBackward_576_PGN61184_106(int Data);
 	public native void Set_VehicleSpeedLimit_572_PGN61184_106(int Data);
 	//////TX_MACHINE_ACCESSORY_SETTING_REQUEST_61184_109///////
 	public native void Set_MessageType_PGN61184_109(int Data);
@@ -673,7 +660,6 @@ public class CommService extends Service{
 	public native void Set_Clock_819_PGN61184_109(int Data);
 	public native void Set_RequestEngineLowIdleSpeed_PGN61184_109(int Data);
 	public native void Set_RequestTripDataReset_PGN61184_109(int Data);
-	public native void Set_RequestCruiseControlResumeSwitch_PGN61184_109(int Data);
 	//////TX_ENGINE_SHUTDOWN_MODE_SETTING_61184_121///////
 	public native void Set_MessageType_PGN61184_121(int Data);
 	public native void Set_AutomaticEngineShutdown_363_PGN61184_121(int Data);
@@ -732,11 +718,9 @@ public class CommService extends Service{
 	public native void Set_BoomDownSpeedAdjust_PGN61184_203(int Data);
 	public native void Set_BucketOutSpeedAdjust_PGN61184_203(int Data);
 	//////TX_MONIOTR_STATUS_65327///////
-	public native void Set_MonitorOperationMode_834_PGN65327(int Data);
 	public native void Set_RequestBuzzerStop_PGN65327(int Data);
 	public native void Set_SpeedmeterUnitChange_PGN65327(int Data);
-	public native void Set_AutoGreaseLEDGreenStatus_PGN65327(int Data);
-	public native void Set_AutoGreaseLEDRedStatus_PGN65327(int Data);
+	public native void Set_MonitorScreenNumber_836_PGN65327(int Data);
 	//////TX_RMCU_STATUS_65329///////
 	public native void Set_RMCUNetworkType_1621_PGN65329(int Data);
 	public native void Set_RMCUBackupBatteryVoltage_1590_PGN65329(int Data);
@@ -930,12 +914,10 @@ public class CommService extends Service{
 	public native void Set_DTC_4_PGN65438(byte[] Data);
 	public native void Set_DTC_5_PGN65438(byte[] Data);
 	//////TX_WEIGHING_SYSTEM_STATUS_65450///////
-	public native void Set_WeighingSystemOperationMode1StatusJ_1901_PGN65450(int Data);
+	public native void Set_WeighingSystemAccumulationMode_1941_PGN65450(int Data);
 	public native void Set_WeighingSystemBuzzer_1907_PGN65450(int Data);
-	public native void Set_WeightAccumulationMode_PGN65450(int Data);
 	public native void Set_CurrentWeighingResult_1919_PGN65450(int Data);
-	public native void Set_SuddenChangeError_PGN65450(int Data);
-	public native void Set_BucketFullInError_PGN65450(int Data);
+	public native void Set_WeighingDisplayMode1_1910_PGN65450(int Data);
 	public native void Set_CurrentWeight_1911_PGN65450(int Data);
 	public native void Set_TodayWeight_1915_PGN65450(int Data);
 	//////TX_WEIGHING_SYSTEM_DATA1_65451///////
@@ -988,10 +970,6 @@ public class CommService extends Service{
 	public native void Set_MirrorHeatOperationStatus_3450_PGN65527(int Data);
 	public native void Set_RearWiperOperationStatus_3451_PGN65527(int Data);
 	public native void Set_RearWiperWasherOperationStatus_3452_PGN65527(int Data);
-	public native void Set_KeyPositionStatus_3807_PGN65527(int Data);
-	public native void Set_EngineShutdownDelayOperatinStatus_3808_PGN65527(int Data);
-	public native void Set_RideControlOperatingSpeedForward_PGN65527(int Data);
-	public native void Set_RideControlOperatingSpeedBackward_PGN65527(int Data);
 	///////////////////////////////////////////////////////////////////////////////////////////////////////
 	public native int Get_FirmwareVersionHigh();
 	public native int Get_FirmwareVersionLow();

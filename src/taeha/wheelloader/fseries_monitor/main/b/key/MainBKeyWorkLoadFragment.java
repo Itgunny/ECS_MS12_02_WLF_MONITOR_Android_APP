@@ -158,7 +158,7 @@ public class MainBKeyWorkLoadFragment extends ParentFragment{
 	@Override
 	protected void GetDataFromNative() {
 		// TODO Auto-generated method stub
-		WeighingSystemMode = CAN1Comm.Get_WeightAccumulationMode_PGN65450();
+		WeighingSystemMode = CAN1Comm.Get_WeighingSystemAccumulationMode_1941_PGN65450();
 	}
 
 	@Override
@@ -230,7 +230,7 @@ public class MainBKeyWorkLoadFragment extends ParentFragment{
 		ParentActivity._MainBBaseFragment.showKeytoDefaultScreenAnimation();
 	}
 	public void ClickDefault(){
-		CAN1Comm.Set_WeightAccumulationMode_PGN61184_62(CAN1CommManager.DATA_STATE_WEIGHING_ACCUMULATION_AUTO);
+		CAN1Comm.Set_WeighingSystemAccumulationMode_1941_PGN61184_62(CAN1CommManager.DATA_STATE_WEIGHING_ACCUMULATION_AUTO);
 		CAN1Comm.TxCANToMCU(62);
 	
 		ParentActivity.WeighingDisplayIndex = CAN1CommManager.DATA_STATE_WEIGHINGDISPLAY_TOTAL_A;

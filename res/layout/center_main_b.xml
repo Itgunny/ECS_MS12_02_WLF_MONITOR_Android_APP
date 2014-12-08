@@ -60,7 +60,7 @@
 	        android:id="@+id/textView_center_main_b_rpm"
 	        android:layout_width="200dp"
 	        android:layout_height="wrap_content"
-	        android:layout_alignBottom="@+id/imageView_center_main_b_rpm_unit"
+	        android:layout_centerVertical="true"
 	        android:layout_marginLeft="30dp"
 	        android:layout_x="55dp"
 	        android:layout_y="110dp"

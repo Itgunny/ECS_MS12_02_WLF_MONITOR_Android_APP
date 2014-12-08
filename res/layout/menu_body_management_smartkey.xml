@@ -52,7 +52,7 @@
 	           android:button="@drawable/_selector_radio_btn"
 	           android:text="@string/Disable"
 	           android:textColor="@drawable/_selector_radio_txt_white_amber"
-	           android:textSize="20sp" />
+	           android:textSize="25sp" />
 	
 	       <RadioButton
 	           android:id="@+id/radioButton_menu_body_management_smartkey_use_enable"
@@ -62,7 +62,7 @@
 	           android:button="@drawable/_selector_radio_btn"
 	           android:text="@string/Enable"
 	           android:textColor="@drawable/_selector_radio_txt_white_amber"
-	           android:textSize="20sp" />
+	           android:textSize="25sp" />
 	       
    		</RadioGroup>
    
@@ -180,21 +180,7 @@
             android:layout_height="wrap_content"
             android:src="@drawable/menu_low_bg" />
 	    
-	    <ImageView
-	        android:id="@+id/imageView_menu_body_management_smartkey_low_line_1"
-	        android:layout_width="wrap_content"
-	        android:layout_height="wrap_content"
-	        android:layout_alignBottom="@+id/imageView_menu_body_management_smartkey_low_bg"
-	        android:layout_alignLeft="@+id/ImageButton_menu_body_management_smartkey_low_ok"
-	        android:src="@drawable/main_key_low_line" />
-	
-	   <ImageView
-	       android:id="@+id/imageView_menu_body_management_smartkey_low_line_2"
-	       android:layout_width="wrap_content"
-	       android:layout_height="wrap_content"
-	       android:layout_alignBottom="@+id/imageView_menu_body_management_smartkey_low_bg"
-	       android:layout_alignLeft="@+id/ImageButton_menu_body_management_smartkey_low_cancel"
-	       android:src="@drawable/main_key_low_line" />
+	    
 	   
 	    <ImageButton
 	        android:id="@+id/ImageButton_menu_body_management_smartkey_low_ok"
@@ -211,6 +197,22 @@
 	        android:layout_alignBottom="@+id/imageView_menu_body_management_smartkey_low_bg"
 	        android:layout_toLeftOf="@+id/imageView_menu_body_management_smartkey_low_line_1"
 	        android:background="@drawable/_selector_menu_low_center_btn" />
+	    
+	    <ImageView
+	        android:id="@+id/imageView_menu_body_management_smartkey_low_line_1"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:layout_alignBottom="@+id/imageView_menu_body_management_smartkey_low_bg"
+	        android:layout_alignLeft="@+id/ImageButton_menu_body_management_smartkey_low_ok"
+	        android:src="@drawable/main_key_low_line" />
+	
+	   <ImageView
+	       android:id="@+id/imageView_menu_body_management_smartkey_low_line_2"
+	       android:layout_width="wrap_content"
+	       android:layout_height="wrap_content"
+	       android:layout_alignBottom="@+id/imageView_menu_body_management_smartkey_low_bg"
+	       android:layout_alignLeft="@+id/ImageButton_menu_body_management_smartkey_low_cancel"
+	       android:src="@drawable/main_key_low_line" />
 	
 	    <RelativeLayout
 	        android:layout_width="wrap_content"

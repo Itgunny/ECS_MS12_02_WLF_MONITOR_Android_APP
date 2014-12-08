@@ -390,6 +390,8 @@ void InitNewProtoclValuable() {
 		sizeof(RX_ACCELERATOR_BRAKE_PEDAL_STATUS_65368));
 	memset((unsigned char*) &RX_COOLING_FAN_STATUS_65369, 0xFF,
 		sizeof(RX_COOLING_FAN_STATUS_65369));
+	memset((unsigned char*) &RX_ENGINE_STATUS2_65370, 0xFF,
+			sizeof(RX_ENGINE_STATUS2_65370));
 	memset((unsigned char*) &RX_ENGINE_STATUS1_65371, 0xFF,
 		sizeof(RX_ENGINE_STATUS1_65371));
 	memset((unsigned char*) &RX_VEHICLE_DISTANCE_65389, 0xFF,
@@ -766,6 +768,7 @@ void UART1_SeperateData_Default(int Priority, int PF, int PS, unsigned char* Dat
 		case 85 :memcpy((unsigned char*)&RX_SOLENOID_STATUS_65365,&Data[7],8); break;
 		case 88 :memcpy((unsigned char*)&RX_ACCELERATOR_BRAKE_PEDAL_STATUS_65368,&Data[7],8); break;
 		case 89 :memcpy((unsigned char*)&RX_COOLING_FAN_STATUS_65369,&Data[7],8); break;
+		case 90 :memcpy((unsigned char*)&RX_ENGINE_STATUS2_65370,&Data[7],8); break;
 		case 91 :memcpy((unsigned char*)&RX_ENGINE_STATUS1_65371,&Data[7],8); break;
 		case 109 :memcpy((unsigned char*)&RX_VEHICLE_DISTANCE_65389,&Data[7],8); break;
 		case 110	:	memcpy((unsigned char*) &RX_FUEL_INFORMATION_ECO_GAUGE_65390, &Data[7],8);	break;
@@ -2938,17 +2941,17 @@ void SetKeypadLamp()
 		TX_CMD_Lamp.RideControl2 = 1;
 	}
 
-	if(RX_WEIGHING_SYSTEM_STATUS_65450.WeightAccumulationMode == 0){
+	if(RX_WEIGHING_SYSTEM_STATUS_65450.WeighingSystemAccumulationMode_1941 == 0){
 		TX_CMD_Lamp.WorkLoad1 = 0;
 		TX_CMD_Lamp.WorkLoad2 = 1;
 	}
 
-	else if(RX_WEIGHING_SYSTEM_STATUS_65450.WeightAccumulationMode == 1){
+	else if(RX_WEIGHING_SYSTEM_STATUS_65450.WeighingSystemAccumulationMode_1941 == 1){
 		TX_CMD_Lamp.WorkLoad1 = 1;
 		TX_CMD_Lamp.WorkLoad2 = 0;
 	}
 
-	else if(RX_WEIGHING_SYSTEM_STATUS_65450.WeightAccumulationMode == 3){
+	else if(RX_WEIGHING_SYSTEM_STATUS_65450.WeighingSystemAccumulationMode_1941 == 3){
 		TX_CMD_Lamp.WorkLoad1 = 0;
 		TX_CMD_Lamp.WorkLoad2 = 1;
 	}
@@ -2985,10 +2988,6 @@ void SetKeypadLamp()
 	else if(RX_WHEEL_LOADER_EHCU_STATUS_65517.FlowFineModulationOperation_2302 == 1)
 		TX_CMD_Lamp.FineModulation = 1;
 
-	if(RX_MACHINE_MODE_STATUS_65350.ParallelLiftMode_1923 == 0)
-		TX_CMD_Lamp.FN = 0;
-	else if(RX_MACHINE_MODE_STATUS_65350.ParallelLiftMode_1923 == 1)
-		TX_CMD_Lamp.FN = 1;
 
 
 	if(RX_ELECTRICAL_SWITCH_RELAY_OPERATION_STATUS_65527.IlluminationOperationStatus_3438 == 0)

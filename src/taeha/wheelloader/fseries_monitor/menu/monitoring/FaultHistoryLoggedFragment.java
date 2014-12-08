@@ -157,6 +157,8 @@ public class FaultHistoryLoggedFragment extends ParentFragment{
 		// TODO Auto-generated method stub
 		super.InitValuables();
 		
+		SetThreadSleepTime(1000);
+		
 		SendDTCIndex = REQ_ERR_MACHINE_LOGGED;
 		SendSeqIndex = 1;
 		

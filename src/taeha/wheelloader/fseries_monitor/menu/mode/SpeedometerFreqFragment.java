@@ -140,7 +140,7 @@ public class SpeedometerFreqFragment extends ParentFragment{
 		radioNumUnder01 = (RadioButton)mRoot.findViewById(R.id.radio_menu_body_mode_speedometerfreq_data_under_01);
 		
 		radioGroupNum = (RadioGroup)mRoot.findViewById(R.id.radioGroup_menu_body_mode_speedometerfreq_data);
-		
+
 	}
 
 	protected void InitValuables() {
@@ -148,8 +148,8 @@ public class SpeedometerFreqFragment extends ParentFragment{
 		super.InitValuables();
 		CAN1Comm.Set_SettingSelection_PGN61184_105(0xF);
 		CAN1Comm.Set_SpeedometerFrequency_534_PGN61184_105(0xFFFF);
-		CAN1Comm.Set_AutoRideControlOperationSpeedForward_PGN61184_105(0xF);
-		CAN1Comm.Set_AutoRideControlOperationSpeedBackward_PGN61184_105(0xF);
+		CAN1Comm.Set_AutoRideControlOperationSpeedForward_574_PGN61184_105(0xF);
+		CAN1Comm.Set_AutoRideControlOperationSpeedBackward_576_PGN61184_105(0xF);
 		CAN1Comm.Set_VehicleSpeedLimit_572_PGN61184_105(0xFF);
 		CAN1Comm.TxCANToMCU(105);
 		CAN1Comm.Set_SettingSelection_PGN61184_105(15);
@@ -383,8 +383,8 @@ public class SpeedometerFreqFragment extends ParentFragment{
 		
 		CAN1Comm.Set_SettingSelection_PGN61184_105(1);
 		CAN1Comm.Set_SpeedometerFrequency_534_PGN61184_105(SpeedometerFreq);
-		CAN1Comm.Set_AutoRideControlOperationSpeedForward_PGN61184_105(0xF);
-		CAN1Comm.Set_AutoRideControlOperationSpeedBackward_PGN61184_105(0xF);
+		CAN1Comm.Set_AutoRideControlOperationSpeedForward_574_PGN61184_105(0xF);
+		CAN1Comm.Set_AutoRideControlOperationSpeedBackward_576_PGN61184_105(0xF);
 		CAN1Comm.Set_VehicleSpeedLimit_572_PGN61184_105(0xFF);
 		CAN1Comm.TxCANToMCU(105);
 		CAN1Comm.Set_SpeedometerFrequency_534_PGN61184_105(0xFFFF);

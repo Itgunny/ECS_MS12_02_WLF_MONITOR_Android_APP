@@ -46,8 +46,8 @@
 	        android:id="@+id/textView_leftup_machinestatus_normal_upper_unit"
 	        android:layout_width="wrap_content"
 	        android:layout_height="wrap_content"
+	        android:layout_alignBottom="@+id/textView_leftup_machinestatus_normal_upper_data"
 	        android:layout_alignParentRight="true"
-	        android:layout_centerVertical="true"
 	        android:alpha="0.5"
 	        android:text="@string/C"
 	        android:textAppearance="?android:attr/textAppearanceLarge" />
@@ -88,8 +88,8 @@
 	        android:id="@+id/textView_leftup_machinestatus_normal_lower_unit"
 	        android:layout_width="wrap_content"
 	        android:layout_height="wrap_content"
+	        android:layout_alignBottom="@+id/textView_leftup_machinestatus_normal_lower_data"
 	        android:layout_alignParentRight="true"
-	        android:layout_centerVertical="true"
 	        android:alpha="0.5"
 	        android:text="@string/C"
 	        android:textAppearance="?android:attr/textAppearanceLarge" />

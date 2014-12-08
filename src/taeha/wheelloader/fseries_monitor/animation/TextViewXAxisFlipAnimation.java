@@ -34,10 +34,12 @@ public class TextViewXAxisFlipAnimation extends View{
 		CurrentString = "";
 		NextString = "";
 	}
-	public TextViewXAxisFlipAnimation(Context _context, String str) {
+	public TextViewXAxisFlipAnimation(Context _context, String str, TextView view) {
 		super(_context);
 		context = _context;
 		CurrentString = str;
+		TargetView = view;
+		TargetView.setText(CurrentString);
 	}
 	
 	public void FlipAnimation(TextView view, String str){

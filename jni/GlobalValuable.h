@@ -234,6 +234,7 @@ pthread_mutex_t mutex_UART3 = PTHREAD_MUTEX_INITIALIZER;
 ////////////////////////////////////////////////////
 
 /////////////////////// CAN Rx Data/////////////////
+
 RTC								rx_rtc_data;
 TCU_ERR							rx_tcu_err;
 WARNING_INDICATOR_LAMP			rx_warning_lamp;
@@ -310,6 +311,7 @@ CMD_DATA						rx_CMD_Data;
 
 ////////////////////////////////////////////////////
 /////////////////////// CAN TX Data/////////////////
+
 HCEPGN_REQUEST						tx_request_hcepgn;
 HCESPN_DATA_REQUEST					tx_request_hcespn_data;
 
@@ -331,6 +333,7 @@ COOLING_FAN_SETTING					tx_Cooling_Fan_Setting;
 ENGINE_SHUTDOWN_MODE_SETTING		tx_Engine_Shutdown_Mode_Setting;
 WEIGHING_SYSTEM_MODE				tx_Weihing_System_Mode;
 DETENT_MODE_SETTING					tx_Detent_Mode_Setting;
+
 ////////////////////////////////////////////////////
 #define NEW_CAN2
 #ifdef NEW_CAN2
@@ -427,6 +430,7 @@ RELAY_BUZZER_STATUS_65364											RX_RELAY_BUZZER_STATUS_65364;
 SOLENOID_STATUS_65365												RX_SOLENOID_STATUS_65365;
 ACCELERATOR_BRAKE_PEDAL_STATUS_65368								RX_ACCELERATOR_BRAKE_PEDAL_STATUS_65368;
 COOLING_FAN_STATUS_65369											RX_COOLING_FAN_STATUS_65369;
+ENGINE_STATUS2_65370												RX_ENGINE_STATUS2_65370;
 ENGINE_STATUS1_65371												RX_ENGINE_STATUS1_65371;
 VEHICLE_DISTANCE_65389												RX_VEHICLE_DISTANCE_65389;
 FUEL_INFORMATION_ECO_GAUGE_65390									RX_FUEL_INFORMATION_ECO_GAUGE_65390;

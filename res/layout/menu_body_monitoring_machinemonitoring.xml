@@ -28,7 +28,8 @@
             android:layout_marginRight="100dp"
             android:gravity="right|center_vertical"
             android:text="0"
-            android:textAppearance="?android:attr/textAppearanceLarge" />
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:textSize="40sp" />
         
         <TextView
             android:id="@+id/textView_menu_body_monitoring_machinemonitoring_hyd_unit"
@@ -69,7 +70,8 @@
             android:layout_marginRight="100dp"
             android:gravity="right|center_vertical"
             android:text="0"
-            android:textAppearance="?android:attr/textAppearanceLarge" />
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:textSize="40sp" />
         
         <TextView
             android:id="@+id/textView_menu_body_monitoring_machinemonitoring_battery_unit"
@@ -110,7 +112,8 @@
             android:layout_marginRight="100dp"
             android:gravity="right|center_vertical"
             android:text="0"
-            android:textAppearance="?android:attr/textAppearanceLarge" />
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:textSize="40sp" />
         
         <TextView
             android:id="@+id/textView_menu_body_monitoring_machinemonitoring_coolant_unit"
@@ -151,7 +154,8 @@
             android:layout_marginRight="100dp"
             android:gravity="right|center_vertical"
             android:text="0"
-            android:textAppearance="?android:attr/textAppearanceLarge" />
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:textSize="40sp" />
         
         <TextView
             android:id="@+id/textView_menu_body_monitoring_machinemonitoring_tmoil_unit"
@@ -177,14 +181,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@drawable/menu_low_bg" />
-	    
-	    <ImageView
-	        android:id="@+id/imageView_menu_body_monitoring_machinemonitoring_low_line"
-	        android:layout_width="wrap_content"
-	        android:layout_height="wrap_content"
-	        android:layout_alignBottom="@+id/ImageButton_menu_body_monitoring_machinemonitoring_low_ok"
-	        android:layout_alignLeft="@+id/ImageButton_menu_body_monitoring_machinemonitoring_low_ok"
-	        android:src="@drawable/main_key_low_line" />
 	   
 	    <ImageButton
 	        android:id="@+id/ImageButton_menu_body_monitoring_machinemonitoring_low_ok"
@@ -194,6 +190,14 @@
 	        android:layout_alignRight="@+id/imageView_menu_body_monitoring_machinemonitoring_low_bg"
 	        android:background="@drawable/_selector_menu_low_right_btn" />
 	
+	    <ImageView
+	        android:id="@+id/imageView_menu_body_monitoring_machinemonitoring_low_line"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:layout_alignBottom="@+id/ImageButton_menu_body_monitoring_machinemonitoring_low_ok"
+	        android:layout_alignLeft="@+id/ImageButton_menu_body_monitoring_machinemonitoring_low_ok"
+	        android:src="@drawable/main_key_low_line" />
+	    
 	    <RelativeLayout
 	        android:layout_width="wrap_content"
 	        android:layout_height="wrap_content"

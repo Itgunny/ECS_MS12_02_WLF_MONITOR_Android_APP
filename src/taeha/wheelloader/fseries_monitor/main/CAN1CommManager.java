@@ -298,6 +298,13 @@ public class CAN1CommManager extends ICAN1CommManager.Stub{		// ttySAC1(Linux), 
 	public static final int	DATA_STATE_WEIGHT_OFFSET_SETTING_WORKTOOL_2	= 2;
 	public static final int	DATA_STATE_WEIGHT_OFFSET_SETTING_WORKTOOL_3	= 3;
 	
+	public static final int	DATA_STATE_CURRENT_WEIHGING_RESULT_NOTWORK					= 0;
+	public static final int	DATA_STATE_CURRENT_WEIHGING_RESULT_OK						= 1;
+	public static final int	DATA_STATE_CURRENT_WEIHGING_RESULT_CANCELOK					= 2;
+	public static final int	DATA_STATE_CURRENT_WEIHGING_RESULT_BOOMLIFTING				= 3;
+	public static final int	DATA_STATE_CURRENT_WEIHGING_RESULT_BUCKETFULLIN				= 4;
+	public static final int	DATA_STATE_CURRENT_WEIHGING_RESULT_BOOMLIFTING_BUCKETFULLIN	= 5;
+	
 	public static final int COMMAND_MAINTENANCE_ITEM_LIST_REQUEST						= 0;
 	public static final int MAINTETNANCE_INFORMATION_REQUEST							= 1;
 	public static final int REPLACEMENT_CONFIRMAION										= 2;
@@ -666,21 +673,15 @@ public class CAN1CommManager extends ICAN1CommManager.Stub{		// ttySAC1(Linux), 
 //	public int Get_CoolingFanReverseOperatingTime_212_PGN61184_61(){ return service.Get_CoolingFanReverseOperatingTime_212_PGN61184_61();}
 	//////RX_WEIGHING_SYSTEM_SETTING_REQUEST_61184_62///////
 //	public int Get_MessageType_PGN61184_62(){ return service.Get_MessageType_PGN61184_62();}
-//	public int Get_WeighingSystemOperationMode1Status_1901_PGN61184_62(){ return service.Get_WeighingSystemOperationMode1Status_1901_PGN61184_62();}
 //	public int Get_RequestReweighing_PGN61184_62(){ return service.Get_RequestReweighing_PGN61184_62();}
 //	public int Get_RequestTotalWorkWeightReset_PGN61184_62(){ return service.Get_RequestTotalWorkWeightReset_PGN61184_62();}
 //	public int Get_WeightOffsetSelection_PGN61184_62(){ return service.Get_WeightOffsetSelection_PGN61184_62();}
 //	public int Get_WeightOffsetSetting_PGN61184_62(){ return service.Get_WeightOffsetSetting_PGN61184_62();}
 //	public int Get_WeightOffset_1922_PGN61184_62(){ return service.Get_WeightOffset_1922_PGN61184_62();}
 //	public int Get_WeighingDisplayMode1_1910_PGN61184_62(){ return service.Get_WeighingDisplayMode1_1910_PGN61184_62();}
-//	public int Get_WeightAccumulationMode_PGN61184_62(){ return service.Get_WeightAccumulationMode_PGN61184_62();}
-//	public int Get_SuddenChangeError_PGN61184_62(){ return service.Get_SuddenChangeError_PGN61184_62();}
-//	public int Get_BucketFullInError_PGN61184_62(){ return service.Get_BucketFullInError_PGN61184_62();}
 	//////RX_WEIGHT_OFFSET_61184_63///////
 	public int Get_MessageType_PGN61184_63(){ return service.Get_MessageType_PGN61184_63();}
 	public int Get_WeightOffsetSelectionStatus_PGN61184_63(){ return service.Get_WeightOffsetSelectionStatus_PGN61184_63();}
-	public int Get_ErrorSuddenChange_PGN61184_63(){ return service.Get_ErrorSuddenChange_PGN61184_63();}
-	public int Get_ErrorBucketFullIn_PGN61184_63(){ return service.Get_ErrorBucketFullIn_PGN61184_63();}
 	public int Get_WeightOffsetWorkTool1_1922_PGN61184_63(){ return service.Get_WeightOffsetWorkTool1_1922_PGN61184_63();}
 	public int Get_WeightOffsetWorkTool2_1922_PGN61184_63(){ return service.Get_WeightOffsetWorkTool2_1922_PGN61184_63();}
 	public int Get_WeightOffsetWorkTool3_1922_PGN61184_63(){ return service.Get_WeightOffsetWorkTool3_1922_PGN61184_63();}
@@ -699,20 +700,19 @@ public class CAN1CommManager extends ICAN1CommManager.Stub{		// ttySAC1(Linux), 
 //	public int Get_ClutchCutoffMode_544_PGN61184_104(){ return service.Get_ClutchCutoffMode_544_PGN61184_104();}
 //	public int Get_KickDownShiftMode_547_PGN61184_104(){ return service.Get_KickDownShiftMode_547_PGN61184_104();}
 //	public int Get_TransmissionTCLockupEngaged_568_PGN61184_104(){ return service.Get_TransmissionTCLockupEngaged_568_PGN61184_104();}
-//	public int Get_DifferentialLockMode_570_PGN61184_104(){ return service.Get_DifferentialLockMode_570_PGN61184_104();}
 //	public int Get_VehicleSpeedLimitMode_575_PGN61184_104(){ return service.Get_VehicleSpeedLimitMode_575_PGN61184_104();}
 	//////RX_TRAVEL_CONTROL_VALUE_SETTING_61184_105///////
 //	public int Get_MessageType_PGN61184_105(){ return service.Get_MessageType_PGN61184_105();}
 //	public int Get_SettingSelection_PGN61184_105(){ return service.Get_SettingSelection_PGN61184_105();}
 //	public int Get_SpeedometerFrequency_534_PGN61184_105(){ return service.Get_SpeedometerFrequency_534_PGN61184_105();}
-//	public int Get_AutoRideControlOperationSpeedForward_PGN61184_105(){ return service.Get_AutoRideControlOperationSpeedForward_PGN61184_105();}
-//	public int Get_AutoRideControlOperationSpeedBackward_PGN61184_105(){ return service.Get_AutoRideControlOperationSpeedBackward_PGN61184_105();}
+//	public int Get_AutoRideControlOperationSpeedForward_574_PGN61184_105(){ return service.Get_AutoRideControlOperationSpeedForward_PGN61184_105();}
+//	public int Get_AutoRideControlOperationSpeedBackward_576_PGN61184_105(){ return service.Get_AutoRideControlOperationSpeedBackward_576_PGN61184_105();}
 //	public int Get_VehicleSpeedLimit_572_PGN61184_105(){ return service.Get_VehicleSpeedLimit_572_PGN61184_105();}
 	//////RX_TRAVEL_CONTROL_VALUE_61184_106///////
 	public int Get_MessageType_PGN61184_106(){ return service.Get_MessageType_PGN61184_106();}
 	public int Get_SpeedometerFrequency_534_PGN61184_106(){ return service.Get_SpeedometerFrequency_534_PGN61184_106();}
-	public int Get_AutoRideControlOperationSpeedForward_PGN61184_106(){ return service.Get_AutoRideControlOperationSpeedForward_PGN61184_106();}
-	public int Get_AutoRideControlOperationSpeedBackward_PGN61184_106(){ return service.Get_AutoRideControlOperationSpeedBackward_PGN61184_106();}
+	public int Get_AutoRideControlOperationSpeedForward_574_PGN61184_106(){ return service.Get_AutoRideControlOperationSpeedForward_574_PGN61184_106();}
+	public int Get_AutoRideControlOperationSpeedBackward_576_PGN61184_106(){ return service.Get_AutoRideControlOperationSpeedBackward_576_PGN61184_106();}
 	public int Get_VehicleSpeedLimit_572_PGN61184_106(){ return service.Get_VehicleSpeedLimit_572_PGN61184_106();}
 	//////RX_MACHINE_ACCESSORY_SETTING_REQUEST_61184_109///////
 //	public int Get_MessageType_PGN61184_109(){ return service.Get_MessageType_PGN61184_109();}
@@ -721,7 +721,6 @@ public class CAN1CommManager extends ICAN1CommManager.Stub{		// ttySAC1(Linux), 
 //	public int Get_Clock_819_PGN61184_109(){ return service.Get_Clock_819_PGN61184_109();}
 //	public int Get_RequestEngineLowIdleSpeed_PGN61184_109(){ return service.Get_RequestEngineLowIdleSpeed_PGN61184_109();}
 //	public int Get_RequestTripDataReset_PGN61184_109(){ return service.Get_RequestTripDataReset_PGN61184_109();}
-//	public int Get_RequestCruiseControlResumeSwitch_PGN61184_109(){ return service.Get_RequestCruiseControlResumeSwitch_PGN61184_109();}
 	//////RX_ENGINE_SHUTDOWN_MODE_SETTING_61184_121///////
 //	public int Get_MessageType_PGN61184_121(){ return service.Get_MessageType_PGN61184_121();}
 //	public int Get_AutomaticEngineShutdown_363_PGN61184_121(){ return service.Get_AutomaticEngineShutdown_363_PGN61184_121();}
@@ -775,11 +774,8 @@ public class CAN1CommManager extends ICAN1CommManager.Stub{		// ttySAC1(Linux), 
 //	public int Get_AuxiliaryAttachmentMaxFlowLevel_PGN61184_203(){ return service.Get_AuxiliaryAttachmentMaxFlowLevel_PGN61184_203();}
 //	public int Get_BoomLeverFloatingPosition_PGN61184_203(){ return service.Get_BoomLeverFloatingPosition_PGN61184_203();}
 	//////RX_MONIOTR_STATUS_65327///////
-	public int Get_MonitorOperationMode_834_PGN65327(){ return service.Get_MonitorOperationMode_834_PGN65327();}
 	public int Get_RequestBuzzerStop_PGN65327(){ return service.Get_RequestBuzzerStop_PGN65327();}
 	public int Get_SpeedmeterUnitChange_PGN65327(){ return service.Get_SpeedmeterUnitChange_PGN65327();}
-	public int Get_AutoGreaseLEDGreenStatus_PGN65327(){ return service.Get_AutoGreaseLEDGreenStatus_PGN65327();}
-	public int Get_AutoGreaseLEDRedStatus_PGN65327(){ return service.Get_AutoGreaseLEDRedStatus_PGN65327();}
 	//////RX_RMCU_STATUS_65329///////
 	public int Get_RMCUNetworkType_1621_PGN65329(){ return service.Get_RMCUNetworkType_1621_PGN65329();}
 	public int Get_RMCUBackupBatteryVoltage_1590_PGN65329(){ return service.Get_RMCUBackupBatteryVoltage_1590_PGN65329();}
@@ -833,7 +829,6 @@ public class CAN1CommManager extends ICAN1CommManager.Stub{		// ttySAC1(Linux), 
 	public int Get_ESLInterval_825_PGN65348(){ return service.Get_ESLInterval_825_PGN65348();}
 	//////RX_MACHINE_MODE_STATUS_65350///////
 	public int Get_EngineAlternateLowIdelSwitch_348_PGN65350(){ return service.Get_EngineAlternateLowIdelSwitch_348_PGN65350();}
-	public int Get_ParallelLiftMode_1923_PGN65350(){ return service.Get_ParallelLiftMode_1923_PGN65350();}
 	public int Get_EnginePowerMode_347_PGN65350(){ return service.Get_EnginePowerMode_347_PGN65350();}
 	//////RX_HYDRAULIC_PRESSURE4_65354///////
 	public int Get_BrakeOilPressure_503_PGN65354(){ return service.Get_BrakeOilPressure_503_PGN65354();}
@@ -879,8 +874,17 @@ public class CAN1CommManager extends ICAN1CommManager.Stub{		// ttySAC1(Linux), 
 	public int Get_CoolingFanSpeed_318_PGN65369(){ return service.Get_CoolingFanSpeed_318_PGN65369();}
 	public int Get_CoolingFanReverseIntervalTime_211_PGN65369(){ return service.Get_CoolingFanReverseIntervalTime_211_PGN65369();}
 	public int Get_CoolingFanReverseOperatingTime_212_PGN65369(){ return service.Get_CoolingFanReverseOperatingTime_212_PGN65369();}
+	//////RX_ENGINE_STATUS2_65370///////
+	public int Get_EngineFuelRate_331_PGN65370(){ return service.Get_EngineFuelRate_331_PGN65370();}
+	public int Get_EnginePercentLoadatCurrentSpeed_334_PGN65370(){ return service.Get_EnginePercentLoadatCurrentSpeed_334_PGN65370();}
+	public int Get_EngineActualPercentTorque_335_PGN65370(){ return service.Get_EngineActualPercentTorque_335_PGN65370();}
 	//////RX_ENGINE_STATUS1_65371///////
 	public int Get_EngineOperatingCondition_336_PGN65371(){ return service.Get_EngineOperatingCondition_336_PGN65371();}
+	public int Get_EngineIntakeManifold1Temperatue_329_PGN65371(){ return service.Get_EngineIntakeManifold1Temperatue_329_PGN65371();}
+	public int Get_EngineFuelTemperature_330_PGN65371(){ return service.Get_EngineFuelTemperature_330_PGN65371();}
+	public int Get_EngineOilPressure_311_PGN65371(){ return service.Get_EngineOilPressure_311_PGN65371();}
+	public int Get_BarometricPressure_328_PGN65371(){ return service.Get_BarometricPressure_328_PGN65371();}
+	public int Get_EngineAirIntakePressure_337_PGN65371(){ return service.Get_EngineAirIntakePressure_337_PGN65371();}
 	public int Get_DEFTankLevel_362_PGN65371(){ return service.Get_DEFTankLevel_362_PGN65371();}
 	//////RX_VEHICLE_DISTANCE_65389///////
 	public int Get_TripDistance_600_PGN65389(){ return service.Get_TripDistance_600_PGN65389();}
@@ -997,12 +1001,10 @@ public class CAN1CommManager extends ICAN1CommManager.Stub{		// ttySAC1(Linux), 
 	public byte[] Get_DTC_4_PGN65438(){ return service.Get_DTC_4_PGN65438();}
 	public byte[] Get_DTC_5_PGN65438(){ return service.Get_DTC_5_PGN65438();}
 	//////RX_WEIGHING_SYSTEM_STATUS_65450///////
-	public int Get_WeighingSystemOperationMode1StatusJ_1901_PGN65450(){ return service.Get_WeighingSystemOperationMode1StatusJ_1901_PGN65450();}
+	public int Get_WeighingSystemAccumulationMode_1941_PGN65450(){ return service.Get_WeighingSystemAccumulationMode_1941_PGN65450();}
 	public int Get_WeighingSystemBuzzer_1907_PGN65450(){ return service.Get_WeighingSystemBuzzer_1907_PGN65450();}
-	public int Get_WeightAccumulationMode_PGN65450(){ return service.Get_WeightAccumulationMode_PGN65450();}
 	public int Get_CurrentWeighingResult_1919_PGN65450(){ return service.Get_CurrentWeighingResult_1919_PGN65450();}
-	public int Get_SuddenChangeError_PGN65450(){ return service.Get_SuddenChangeError_PGN65450();}
-	public int Get_BucketFullInError_PGN65450(){ return service.Get_BucketFullInError_PGN65450();}
+	public int Get_WeighingDisplayMode1_1910_PGN65450(){ return service.Get_WeighingDisplayMode1_1910_PGN65450();}
 	public int Get_CurrentWeight_1911_PGN65450(){ return service.Get_CurrentWeight_1911_PGN65450();}
 	public int Get_TodayWeight_1915_PGN65450(){ return service.Get_TodayWeight_1915_PGN65450();}
 	//////RX_WEIGHING_SYSTEM_DATA1_65451///////
@@ -1062,10 +1064,6 @@ public class CAN1CommManager extends ICAN1CommManager.Stub{		// ttySAC1(Linux), 
 	public int Get_MirrorHeatOperationStatus_3450_PGN65527(){ return service.Get_MirrorHeatOperationStatus_3450_PGN65527();}
 	public int Get_RearWiperOperationStatus_3451_PGN65527(){ return service.Get_RearWiperOperationStatus_3451_PGN65527();}
 	public int Get_RearWiperWasherOperationStatus_3452_PGN65527(){ return service.Get_RearWiperWasherOperationStatus_3452_PGN65527();}
-	public int Get_KeyPositionStatus_3807_PGN65527(){ return service.Get_KeyPositionStatus_3807_PGN65527();}
-	public int Get_EngineShutdownDelayOperatinStatus_3808_PGN65527(){ return service.Get_EngineShutdownDelayOperatinStatus_3808_PGN65527();}
-	public int Get_RideControlOperatingSpeedForward_PGN65527(){ return service.Get_RideControlOperatingSpeedForward_PGN65527();}
-	public int Get_RideControlOperatingSpeedBackward_PGN65527(){ return service.Get_RideControlOperatingSpeedBackward_PGN65527();}
 		
 //////TX_DTC_INFORMATION_REQUEST_61184_11///////
 	public void Set_MessageType_PGN61184_11(int Data){ service.Set_MessageType_PGN61184_11(Data);}
@@ -1125,16 +1123,13 @@ public class CAN1CommManager extends ICAN1CommManager.Stub{		// ttySAC1(Linux), 
 	public void Set_CoolingFanReverseOperatingTime_212_PGN61184_61(int Data){ service.Set_CoolingFanReverseOperatingTime_212_PGN61184_61(Data);}
 	//////TX_WEIGHING_SYSTEM_SETTING_REQUEST_61184_62///////
 	public void Set_MessageType_PGN61184_62(int Data){ service.Set_MessageType_PGN61184_62(Data);}
-	public void Set_WeighingSystemOperationMode1Status_1901_PGN61184_62(int Data){ service.Set_WeighingSystemOperationMode1Status_1901_PGN61184_62(Data);}
+	public void Set_WeighingSystemAccumulationMode_1941_PGN61184_62(int Data){ service.Set_WeighingSystemAccumulationMode_1941_PGN61184_62(Data);}
 	public void Set_RequestReweighing_PGN61184_62(int Data){ service.Set_RequestReweighing_PGN61184_62(Data);}
 	public void Set_RequestTotalWorkWeightReset_PGN61184_62(int Data){ service.Set_RequestTotalWorkWeightReset_PGN61184_62(Data);}
 	public void Set_WeightOffsetSelection_PGN61184_62(int Data){ service.Set_WeightOffsetSelection_PGN61184_62(Data);}
 	public void Set_WeightOffsetSetting_PGN61184_62(int Data){ service.Set_WeightOffsetSetting_PGN61184_62(Data);}
 	public void Set_WeightOffset_1922_PGN61184_62(int Data){ service.Set_WeightOffset_1922_PGN61184_62(Data);}
 	public void Set_WeighingDisplayMode1_1910_PGN61184_62(int Data){ service.Set_WeighingDisplayMode1_1910_PGN61184_62(Data);}
-	public void Set_WeightAccumulationMode_PGN61184_62(int Data){ service.Set_WeightAccumulationMode_PGN61184_62(Data);}
-	public void Set_SuddenChangeError_PGN61184_62(int Data){ service.Set_SuddenChangeError_PGN61184_62(Data);}
-	public void Set_BucketFullInError_PGN61184_62(int Data){ service.Set_BucketFullInError_PGN61184_62(Data);}
 	//////TX_WEIGHT_OFFSET_61184_63///////
 //	public void Set_MessageType_PGN61184_63(int Data){ service.Set_MessageType_PGN61184_63(Data);}
 //	public void Set_WeightOffsetSelectionStatus_PGN61184_63(int Data){ service.Set_WeightOffsetSelectionStatus_PGN61184_63(Data);}
@@ -1143,7 +1138,6 @@ public class CAN1CommManager extends ICAN1CommManager.Stub{		// ttySAC1(Linux), 
 //	public void Set_WeightOffsetWorkTool3_1922_PGN61184_63(int Data){ service.Set_WeightOffsetWorkTool3_1922_PGN61184_63(Data);}
 	//////TX_MACHINE_MODE_SETTING_61184_101///////
 	public void Set_MessageType_PGN61184_101(int Data){ service.Set_MessageType_PGN61184_101(Data);}
-	public void Set_ParallelLiftMode_1923_PGN61184_101(int Data){ service.Set_ParallelLiftMode_1923_PGN61184_101(Data);}
 	public void Set_EngineAlternateLowIdleSwitch_348_PGN61184_101(int Data){ service.Set_EngineAlternateLowIdleSwitch_348_PGN61184_101(Data);}
 	public void Set_EnginePowerMode_347_PGN61184_101(int Data){ service.Set_EnginePowerMode_347_PGN61184_101(Data);}
 	//////TX_TRAVEL_MODE_SETTING_61184_104///////
@@ -1152,20 +1146,19 @@ public class CAN1CommManager extends ICAN1CommManager.Stub{		// ttySAC1(Linux), 
 	public void Set_ClutchCutoffMode_544_PGN61184_104(int Data){ service.Set_ClutchCutoffMode_544_PGN61184_104(Data);}
 	public void Set_KickDownShiftMode_547_PGN61184_104(int Data){ service.Set_KickDownShiftMode_547_PGN61184_104(Data);}
 	public void Set_TransmissionTCLockupEngaged_568_PGN61184_104(int Data){ service.Set_TransmissionTCLockupEngaged_568_PGN61184_104(Data);}
-	public void Set_DifferentialLockMode_570_PGN61184_104(int Data){ service.Set_DifferentialLockMode_570_PGN61184_104(Data);}
 	public void Set_VehicleSpeedLimitMode_575_PGN61184_104(int Data){ service.Set_VehicleSpeedLimitMode_575_PGN61184_104(Data);}
 	//////TX_TRAVEL_CONTROL_VALUE_SETTING_61184_105///////
 	public void Set_MessageType_PGN61184_105(int Data){ service.Set_MessageType_PGN61184_105(Data);}
 	public void Set_SettingSelection_PGN61184_105(int Data){ service.Set_SettingSelection_PGN61184_105(Data);}
 	public void Set_SpeedometerFrequency_534_PGN61184_105(int Data){ service.Set_SpeedometerFrequency_534_PGN61184_105(Data);}
-	public void Set_AutoRideControlOperationSpeedForward_PGN61184_105(int Data){ service.Set_AutoRideControlOperationSpeedForward_PGN61184_105(Data);}
-	public void Set_AutoRideControlOperationSpeedBackward_PGN61184_105(int Data){ service.Set_AutoRideControlOperationSpeedBackward_PGN61184_105(Data);}
+	public void Set_AutoRideControlOperationSpeedForward_574_PGN61184_105(int Data){ service.Set_AutoRideControlOperationSpeedForward_574_PGN61184_105(Data);}
+	public void Set_AutoRideControlOperationSpeedBackward_576_PGN61184_105(int Data){ service.Set_AutoRideControlOperationSpeedBackward_576_PGN61184_105(Data);}
 	public void Set_VehicleSpeedLimit_572_PGN61184_105(int Data){ service.Set_VehicleSpeedLimit_572_PGN61184_105(Data);}
 	//////TX_TRAVEL_CONTROL_VALUE_61184_106///////
 //	public void Set_MessageType_PGN61184_106(int Data){ service.Set_MessageType_PGN61184_106(Data);}
 //	public void Set_SpeedometerFrequency_534_PGN61184_106(int Data){ service.Set_SpeedometerFrequency_534_PGN61184_106(Data);}
-//	public void Set_AutoRideControlOperationSpeedForward_PGN61184_106(int Data){ service.Set_AutoRideControlOperationSpeedForward_PGN61184_106(Data);}
-//	public void Set_AutoRideControlOperationSpeedBackward_PGN61184_106(int Data){ service.Set_AutoRideControlOperationSpeedBackward_PGN61184_106(Data);}
+//	public void Set_AutoRideControlOperationSpeedForward_PGN61184_574_106(int Data){ service.Set_AutoRideControlOperationSpeedForward_PGN61184_106(Data);}
+//	public void Set_AutoRideControlOperationSpeedBackward_576_PGN61184_106(int Data){ service.Set_AutoRideControlOperationSpeedBackward_576_PGN61184_106(Data);}
 //	public void Set_VehicleSpeedLimit_572_PGN61184_106(int Data){ service.Set_VehicleSpeedLimit_572_PGN61184_106(Data);}
 	//////TX_MACHINE_ACCESSORY_SETTING_REQUEST_61184_109///////
 	public void Set_MessageType_PGN61184_109(int Data){ service.Set_MessageType_PGN61184_109(Data);}
@@ -1174,7 +1167,6 @@ public class CAN1CommManager extends ICAN1CommManager.Stub{		// ttySAC1(Linux), 
 	public void Set_Clock_819_PGN61184_109(int Data){ service.Set_Clock_819_PGN61184_109(Data);}
 	public void Set_RequestEngineLowIdleSpeed_PGN61184_109(int Data){ service.Set_RequestEngineLowIdleSpeed_PGN61184_109(Data);}
 	public void Set_RequestTripDataReset_PGN61184_109(int Data){ service.Set_RequestTripDataReset_PGN61184_109(Data);}
-	public void Set_RequestCruiseControlResumeSwitch_PGN61184_109(int Data){ service.Set_RequestCruiseControlResumeSwitch_PGN61184_109(Data);}
 	//////TX_ENGINE_SHUTDOWN_MODE_SETTING_61184_121///////
 	public void Set_MessageType_PGN61184_121(int Data){ service.Set_MessageType_PGN61184_121(Data);}
 	public void Set_AutomaticEngineShutdown_363_PGN61184_121(int Data){ service.Set_AutomaticEngineShutdown_363_PGN61184_121(Data);}
@@ -1233,11 +1225,9 @@ public class CAN1CommManager extends ICAN1CommManager.Stub{		// ttySAC1(Linux), 
 	public void Set_BoomDownSpeedAdjust_PGN61184_203(int Data){ service.Set_BoomDownSpeedAdjust_PGN61184_203(Data);}
 	public void Set_BucketOutSpeedAdjust_PGN61184_203(int Data){ service.Set_BucketOutSpeedAdjust_PGN61184_203(Data);}
 	//////TX_MONIOTR_STATUS_65327///////
-	public void Set_MonitorOperationMode_834_PGN65327(int Data){ service.Set_MonitorOperationMode_834_PGN65327(Data);}
 	public void Set_RequestBuzzerStop_PGN65327(int Data){ service.Set_RequestBuzzerStop_PGN65327(Data);}
 	public void Set_SpeedmeterUnitChange_PGN65327(int Data){ service.Set_SpeedmeterUnitChange_PGN65327(Data);}
-	public void Set_AutoGreaseLEDGreenStatus_PGN65327(int Data){ service.Set_AutoGreaseLEDGreenStatus_PGN65327(Data);}
-	public void Set_AutoGreaseLEDRedStatus_PGN65327(int Data){ service.Set_AutoGreaseLEDRedStatus_PGN65327(Data);}
+	public void Set_MonitorScreenNumber_836_PGN65327(int Data){ service.Set_MonitorScreenNumber_836_PGN65327(Data);}
 	//////TX_RMCU_STATUS_65329///////
 //	public void Set_RMCUNetworkType_1621_PGN65329(int Data){ service.Set_RMCUNetworkType_1621_PGN65329(Data);}
 //	public void Set_RMCUBackupBatteryVoltage_1590_PGN65329(int Data){ service.Set_RMCUBackupBatteryVoltage_1590_PGN65329(Data);}
@@ -1431,12 +1421,10 @@ public class CAN1CommManager extends ICAN1CommManager.Stub{		// ttySAC1(Linux), 
 //	public void Set_DTC_4_PGN65438(byte[] Data){ service.Set_DTC_4_PGN65438(Data);}
 //	public void Set_DTC_5_PGN65438(byte[] Data){ service.Set_DTC_5_PGN65438(Data);}
 //	//////TX_WEIGHING_SYSTEM_STATUS_65450///////
-//	public void Set_WeighingSystemOperationMode1StatusJ_1901_PGN65450(int Data){ service.Set_WeighingSystemOperationMode1StatusJ_1901_PGN65450(Data);}
+//	public void Set_WeighingSystemAccumulationMode_1941_PGN65450(int Data){ service.Set_WeighingSystemAccumulationMode_1941_PGN65450(Data);}
 //	public void Set_WeighingSystemBuzzer_1907_PGN65450(int Data){ service.Set_WeighingSystemBuzzer_1907_PGN65450(Data);}
-//	public void Set_WeightAccumulationMode_PGN65450(int Data){ service.Set_WeightAccumulationMode_PGN65450(Data);}
 //	public void Set_CurrentWeighingResult_1919_PGN65450(int Data){ service.Set_CurrentWeighingResult_1919_PGN65450(Data);}
-//	public void Set_SuddenChangeError_PGN65450(int Data){ service.Set_SuddenChangeError_PGN65450(Data);}
-//	public void Set_BucketFullInError_PGN65450(int Data){ service.Set_BucketFullInError_PGN65450(Data);}
+//	public void Set_WeighingDisplayMode1_1910_PGN65450_PGN65450(int Data){ service.Set_WeighingDisplayMode1_1910_PGN65450_PGN65450(Data);}	
 //	public void Set_CurrentWeight_1911_PGN65450(int Data){ service.Set_CurrentWeight_1911_PGN65450(Data);}
 //	public void Set_TodayWeight_1915_PGN65450(int Data){ service.Set_TodayWeight_1915_PGN65450(Data);}
 //	//////TX_WEIGHING_SYSTEM_DATA1_65451///////
@@ -1489,10 +1477,6 @@ public class CAN1CommManager extends ICAN1CommManager.Stub{		// ttySAC1(Linux), 
 	public void Set_MirrorHeatOperationStatus_3450_PGN65527(int Data){ service.Set_MirrorHeatOperationStatus_3450_PGN65527(Data);}
 	public void Set_RearWiperOperationStatus_3451_PGN65527(int Data){ service.Set_RearWiperOperationStatus_3451_PGN65527(Data);}
 	public void Set_RearWiperWasherOperationStatus_3452_PGN65527(int Data){ service.Set_RearWiperWasherOperationStatus_3452_PGN65527(Data);}
-	public void Set_KeyPositionStatus_3807_PGN65527(int Data){ service.Set_KeyPositionStatus_3807_PGN65527(Data);}
-	public void Set_EngineShutdownDelayOperatinStatus_3808_PGN65527(int Data){ service.Set_EngineShutdownDelayOperatinStatus_3808_PGN65527(Data);}
-	public void Set_RideControlOperatingSpeedForward_PGN65527(int Data){ service.Set_RideControlOperatingSpeedForward_PGN65527(Data);}
-	public void Set_RideControlOperatingSpeedBackward_PGN65527(int Data){ service.Set_RideControlOperatingSpeedBackward_PGN65527(Data);}
 
 	///////////////////////////////////////////////////////////////////////////////////////////////////////
 	public int Get_FirmwareVersionHigh(){ return service.Get_FirmwareVersionHigh();}

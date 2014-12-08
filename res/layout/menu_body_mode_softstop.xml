@@ -49,12 +49,21 @@
 	    android:layout_alignParentTop="true"
 	    android:layout_alignRight="@+id/imageView_menu_body_mode_softstop_line1" >
 	    
+	    <ImageView
+            android:id="@+id/imageView_menu_body_mdoe_softstop_boomup"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:src="@drawable/menu_bluedot" />
+	    
 	    <TextView
 	        android:id="@+id/textView_menu_body_mode_softstop_boomup"
 	        android:layout_width="wrap_content"
 	        android:layout_height="wrap_content"
 	        android:layout_alignParentBottom="true"
 	        android:layout_alignParentTop="true"
+	        android:layout_marginLeft="10dp"
+	        android:layout_toRightOf="@+id/imageView_menu_body_mdoe_softstop_boomup"
 	        android:gravity="center_vertical"
 	        android:text="@string/Boom_Up"
 	        android:textAppearance="?android:attr/textAppearanceLarge" />
@@ -92,6 +101,13 @@
 	    android:layout_alignLeft="@+id/imageView_menu_body_mode_softstop_line1"
 	    android:layout_alignRight="@+id/imageView_menu_body_mode_softstop_line1"
 	    android:layout_alignTop="@+id/imageView_menu_body_mode_softstop_line1" >
+		
+	    <ImageView
+            android:id="@+id/imageView_menu_body_mdoe_softstop_boomdown"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:src="@drawable/menu_bluedot" />
 	    
 	    <TextView
 	        android:id="@+id/textView_menu_body_mode_softstop_boomdown"
@@ -99,6 +115,8 @@
 	        android:layout_height="wrap_content"
 	        android:layout_alignParentBottom="true"
 	        android:layout_alignParentTop="true"
+	        android:layout_marginLeft="10dp"
+	        android:layout_toRightOf="@+id/imageView_menu_body_mdoe_softstop_boomdown"
 	        android:gravity="center_vertical"
 	        android:text="@string/Boom_Down"
 	        android:textAppearance="?android:attr/textAppearanceLarge" />
@@ -137,12 +155,21 @@
 	    android:layout_alignRight="@+id/imageView_menu_body_mode_softstop_line1"
 	    android:layout_alignTop="@+id/imageView_menu_body_mode_softstop_line2" >
 	    
+	    <ImageView
+            android:id="@+id/imageView_menu_body_mdoe_softstop_bucketin"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:src="@drawable/menu_bluedot" />
+	    
 	    <TextView
 	        android:id="@+id/textView_menu_body_mode_softstop_bucketin"
 	        android:layout_width="wrap_content"
 	        android:layout_height="wrap_content"
 	        android:layout_alignParentBottom="true"
 	        android:layout_alignParentTop="true"
+	        android:layout_marginLeft="10dp"
+	        android:layout_toRightOf="@+id/imageView_menu_body_mdoe_softstop_bucketin"
 	        android:gravity="center_vertical"
 	        android:text="@string/Bucket_In"
 	        android:textAppearance="?android:attr/textAppearanceLarge" />
@@ -180,6 +207,13 @@
 	    android:layout_alignLeft="@+id/imageView_menu_body_mode_softstop_line1"
 	    android:layout_alignRight="@+id/imageView_menu_body_mode_softstop_line1"
 	    android:layout_alignTop="@+id/imageView_menu_body_mode_softstop_line3" >
+		
+	    <ImageView
+            android:id="@+id/imageView_menu_body_mdoe_softstop_bucketout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:src="@drawable/menu_bluedot" />
 	    
 	    <TextView
 	        android:id="@+id/textView_menu_body_mode_softstop_bucketout"
@@ -187,6 +221,8 @@
 	        android:layout_height="wrap_content"
 	        android:layout_alignParentBottom="true"
 	        android:layout_alignParentTop="true"
+	        android:layout_marginLeft="10dp"
+	        android:layout_toRightOf="@+id/imageView_menu_body_mdoe_softstop_bucketout"
 	        android:gravity="center_vertical"
 	        android:text="@string/Bucket_Dump"
 	        android:textAppearance="?android:attr/textAppearanceLarge" />
@@ -228,21 +264,7 @@
             android:layout_height="wrap_content"
             android:src="@drawable/menu_low_bg" />
 	    
-	    <ImageView
-	        android:id="@+id/imageView_menu_body_mode_softstop_low_line_1"
-	        android:layout_width="wrap_content"
-	        android:layout_height="wrap_content"
-	        android:layout_alignBottom="@+id/imageView_menu_body_mode_softstop_low_bg"
-	        android:layout_alignLeft="@+id/ImageButton_menu_body_mode_softstop_low_ok"
-	        android:src="@drawable/main_key_low_line" />
-	
-	   <ImageView
-	       android:id="@+id/imageView_menu_body_mode_softstop_low_line_2"
-	       android:layout_width="wrap_content"
-	       android:layout_height="wrap_content"
-	       android:layout_alignBottom="@+id/imageView_menu_body_mode_softstop_low_bg"
-	       android:layout_alignLeft="@+id/ImageButton_menu_body_mode_softstop_low_cancel"
-	       android:src="@drawable/main_key_low_line" />
+	    
 	   
 	    <ImageButton
 	        android:id="@+id/ImageButton_menu_body_mode_softstop_low_ok"
@@ -267,6 +289,22 @@
 	        android:layout_alignBottom="@+id/imageView_menu_body_mode_softstop_low_bg"
 	        android:layout_toLeftOf="@+id/imageView_menu_body_mode_softstop_low_line_2"
 	        android:background="@drawable/_selector_menu_low_left_btn" />
+	    
+	    <ImageView
+	        android:id="@+id/imageView_menu_body_mode_softstop_low_line_1"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:layout_alignBottom="@+id/imageView_menu_body_mode_softstop_low_bg"
+	        android:layout_alignLeft="@+id/ImageButton_menu_body_mode_softstop_low_ok"
+	        android:src="@drawable/main_key_low_line" />
+	
+	   <ImageView
+	       android:id="@+id/imageView_menu_body_mode_softstop_low_line_2"
+	       android:layout_width="wrap_content"
+	       android:layout_height="wrap_content"
+	       android:layout_alignBottom="@+id/imageView_menu_body_mode_softstop_low_bg"
+	       android:layout_alignLeft="@+id/ImageButton_menu_body_mode_softstop_low_cancel"
+	       android:src="@drawable/main_key_low_line" />
 	
 	    <RelativeLayout
 	        android:layout_width="wrap_content"

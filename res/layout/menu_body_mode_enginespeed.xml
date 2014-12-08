@@ -51,6 +51,7 @@
         android:layout_alignTop="@+id/imageButton_menu_body_mode_enginespeed_minus"
         android:layout_marginLeft="500dp"
         android:gravity="bottom"
+        android:paddingBottom="10dp"
         android:text="@string/rpm"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:textColor="@color/gray"
@@ -69,14 +70,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@drawable/menu_low_bg" />
-	    
-	    <ImageView
-	        android:id="@+id/imageView_menu_body_mode_enginespeed_low_line"
-	        android:layout_width="wrap_content"
-	        android:layout_height="wrap_content"
-	        android:layout_alignBottom="@+id/ImageButton_menu_body_mode_enginespeed_low_ok"
-	        android:layout_alignLeft="@+id/ImageButton_menu_body_mode_enginespeed_low_ok"
-	        android:src="@drawable/main_key_low_line" />
 	   
 	    <ImageButton
 	        android:id="@+id/ImageButton_menu_body_mode_enginespeed_low_ok"
@@ -85,6 +78,14 @@
 	        android:layout_alignBottom="@+id/imageView_menu_body_mode_enginespeed_low_bg"
 	        android:layout_alignRight="@+id/imageView_menu_body_mode_enginespeed_low_bg"
 	        android:background="@drawable/_selector_menu_low_right_btn" />
+	    
+	    <ImageView
+	        android:id="@+id/imageView_menu_body_mode_enginespeed_low_line"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:layout_alignBottom="@+id/ImageButton_menu_body_mode_enginespeed_low_ok"
+	        android:layout_alignLeft="@+id/ImageButton_menu_body_mode_enginespeed_low_ok"
+	        android:src="@drawable/main_key_low_line" />
 	
 	    <RelativeLayout
 	        android:layout_width="wrap_content"

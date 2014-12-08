@@ -202,9 +202,9 @@ jint Get_CoolingFanReverseOperatingTime_212_PGN61184_61(JNIEnv * env,
 jint Get_MessageType_PGN61184_62(JNIEnv * env, jobject this) {
 	return RX_WEIGHING_SYSTEM_SETTING_REQUEST_61184_62.MessageType;
 }
-jint Get_WeighingSystemOperationMode1Status_1901_PGN61184_62(JNIEnv * env,
+jint Get_WeighingSystemAccumulationMode_1941_PGN61184_62(JNIEnv * env,
 		jobject this) {
-	return RX_WEIGHING_SYSTEM_SETTING_REQUEST_61184_62.WeighingSystemOperationMode1Status_1901;
+	return RX_WEIGHING_SYSTEM_SETTING_REQUEST_61184_62.WeighingSystemAccumulationMode_1941;
 }
 jint Get_RequestReweighing_PGN61184_62(JNIEnv * env, jobject this) {
 	return RX_WEIGHING_SYSTEM_SETTING_REQUEST_61184_62.RequestReweighing;
@@ -224,27 +224,12 @@ jint Get_WeightOffset_1922_PGN61184_62(JNIEnv * env, jobject this) {
 jint Get_WeighingDisplayMode1_1910_PGN61184_62(JNIEnv * env, jobject this) {
 	return RX_WEIGHING_SYSTEM_SETTING_REQUEST_61184_62.WeighingDisplayMode1_1910;
 }
-jint Get_WeightAccumulationMode_PGN61184_62(JNIEnv * env, jobject this) {
-	return RX_WEIGHING_SYSTEM_SETTING_REQUEST_61184_62.WeightAccumulationMode;
-}
-jint Get_SuddenChangeError_PGN61184_62(JNIEnv * env, jobject this) {
-	return RX_WEIGHING_SYSTEM_SETTING_REQUEST_61184_62.SuddenChangeError;
-}
-jint Get_BucketFullInError_PGN61184_62(JNIEnv * env, jobject this) {
-	return RX_WEIGHING_SYSTEM_SETTING_REQUEST_61184_62.BucketFullInError;
-}
 //////RX_WEIGHT_OFFSET_61184_63///////
 jint Get_MessageType_PGN61184_63(JNIEnv * env, jobject this) {
 	return RX_WEIGHT_OFFSET_61184_63.MessageType;
 }
 jint Get_WeightOffsetSelectionStatus_PGN61184_63(JNIEnv * env, jobject this) {
 	return RX_WEIGHT_OFFSET_61184_63.WeightOffsetSelectionStatus;
-}
-jint Get_ErrorSuddenChange_PGN61184_63(JNIEnv * env, jobject this) {
-	return RX_WEIGHT_OFFSET_61184_63.ErrorSuddenChange;
-}
-jint Get_ErrorBucketFullIn_PGN61184_63(JNIEnv * env, jobject this) {
-	return RX_WEIGHT_OFFSET_61184_63.ErrorBucketFullIn;
 }
 jint Get_WeightOffsetWorkTool1_1922_PGN61184_63(JNIEnv * env, jobject this) {
 	return RX_WEIGHT_OFFSET_61184_63.WeightOffsetWorkTool1_1922;
@@ -296,9 +281,6 @@ jint Get_TransmissionTCLockupEngaged_568_PGN61184_104(JNIEnv * env,
 		jobject this) {
 	return RX_TRAVEL_MODE_SETTING_61184_104.TransmissionTCLockupEngaged_568;
 }
-jint Get_DifferentialLockMode_570_PGN61184_104(JNIEnv * env, jobject this) {
-	return RX_TRAVEL_MODE_SETTING_61184_104.DifferentialLockMode_570;
-}
 jint Get_VehicleSpeedLimitMode_575_PGN61184_104(JNIEnv * env, jobject this) {
 	return RX_TRAVEL_MODE_SETTING_61184_104.VehicleSpeedLimitMode_575;
 }
@@ -312,11 +294,11 @@ jint Get_SettingSelection_PGN61184_105(JNIEnv * env, jobject this) {
 jint Get_SpeedometerFrequency_534_PGN61184_105(JNIEnv * env, jobject this) {
 	return RX_TRAVEL_CONTROL_VALUE_SETTING_61184_105.SpeedometerFrequency_534;
 }
-jint Get_AutoRideControlOperationSpeedForward_PGN61184_105(JNIEnv * env, jobject this) {
-	return RX_TRAVEL_CONTROL_VALUE_SETTING_61184_105.AutoRideControlOperationSpeedForward;
+jint Get_AutoRideControlOperationSpeedForward_574_PGN61184_105(JNIEnv * env, jobject this) {
+	return RX_TRAVEL_CONTROL_VALUE_SETTING_61184_105.AutoRideControlOperationSpeedForward_574;
 }
-jint Get_AutoRideControlOperationSpeedBackward_PGN61184_105(JNIEnv * env, jobject this) {
-	return RX_TRAVEL_CONTROL_VALUE_SETTING_61184_105.AutoRideControlOperationSpeedBackward;
+jint Get_AutoRideControlOperationSpeedBackward_576_PGN61184_105(JNIEnv * env, jobject this) {
+	return RX_TRAVEL_CONTROL_VALUE_SETTING_61184_105.AutoRideControlOperationSpeedBackward_576;
 }
 jint Get_VehicleSpeedLimit_572_PGN61184_105(JNIEnv * env, jobject this) {
 	return RX_TRAVEL_CONTROL_VALUE_SETTING_61184_105.VehicleSpeedLimit_572;
@@ -328,11 +310,11 @@ jint Get_MessageType_PGN61184_106(JNIEnv * env, jobject this) {
 jint Get_SpeedometerFrequency_534_PGN61184_106(JNIEnv * env, jobject this) {
 	return RX_TRAVEL_CONTROL_VALUE_61184_106.SpeedometerFrequency_534;
 }
-jint Get_AutoRideControlOperationSpeedForward_PGN61184_106(JNIEnv * env, jobject this) {
-	return RX_TRAVEL_CONTROL_VALUE_61184_106.AutoRideControlOperationSpeedForward;
+jint Get_AutoRideControlOperationSpeedForward_574_PGN61184_106(JNIEnv * env, jobject this) {
+	return RX_TRAVEL_CONTROL_VALUE_61184_106.AutoRideControlOperationSpeedForward_574;
 }
-jint Get_AutoRideControlOperationSpeedBackward_PGN61184_106(JNIEnv * env, jobject this) {
-	return RX_TRAVEL_CONTROL_VALUE_61184_106.AutoRideControlOperationSpeedBackward;
+jint Get_AutoRideControlOperationSpeedBackward_576_PGN61184_106(JNIEnv * env, jobject this) {
+	return RX_TRAVEL_CONTROL_VALUE_61184_106.AutoRideControlOperationSpeedBackward_576;
 }
 jint Get_VehicleSpeedLimit_572_PGN61184_106(JNIEnv * env, jobject this) {
 	return RX_TRAVEL_CONTROL_VALUE_61184_106.VehicleSpeedLimit_572;
@@ -355,10 +337,6 @@ jint Get_RequestEngineLowIdleSpeed_PGN61184_109(JNIEnv * env, jobject this) {
 }
 jint Get_RequestTripDataReset_PGN61184_109(JNIEnv * env, jobject this) {
 	return RX_MACHINE_ACCESSORY_SETTING_REQUEST_61184_109.RequestTripDataReset;
-}
-jint Get_RequestCruiseControlResumeSwitch_PGN61184_109(JNIEnv * env,
-		jobject this) {
-	return RX_MACHINE_ACCESSORY_SETTING_REQUEST_61184_109.RequestCruiseControlResumeSwitch;
 }
 //////RX_ENGINE_SHUTDOWN_MODE_SETTING_61184_121///////
 jint Get_MessageType_PGN61184_121(JNIEnv * env, jobject this) {
@@ -528,20 +506,11 @@ jint Get_BoomLeverFloatingPosition_PGN61184_203(JNIEnv * env,
 }
 
 //////RX_MONIOTR_STATUS_65327///////
-jint Get_MonitorOperationMode_834_PGN65327(JNIEnv * env, jobject this) {
-	return RX_MONIOTR_STATUS_65327.MonitorOperationMode_834;
-}
 jint Get_RequestBuzzerStop_PGN65327(JNIEnv * env, jobject this) {
 	return RX_MONIOTR_STATUS_65327.RequestBuzzerStop;
 }
 jint Get_SpeedmeterUnitChange_PGN65327(JNIEnv * env, jobject this) {
 	return RX_MONIOTR_STATUS_65327.SpeedmeterUnitChange;
-}
-jint Get_AutoGreaseLEDGreenStatus_PGN65327(JNIEnv * env, jobject this) {
-	return RX_MONIOTR_STATUS_65327.AutoGreaseLEDGreenStatus;
-}
-jint Get_AutoGreaseLEDRedStatus_PGN65327(JNIEnv * env, jobject this) {
-	return RX_MONIOTR_STATUS_65327.AutoGreaseLEDRedStatus;
 }
 //////RX_RMCU_STATUS_65329///////
 jint Get_RMCUNetworkType_1621_PGN65329(JNIEnv * env, jobject this) {
@@ -720,9 +689,6 @@ jint Get_ESLInterval_825_PGN65348(JNIEnv * env, jobject this) {
 jint Get_EngineAlternateLowIdelSwitch_348_PGN65350(JNIEnv * env, jobject this) {
 	return RX_MACHINE_MODE_STATUS_65350.EngineAlternateLowIdelSwitch_348;
 }
-jint Get_ParallelLiftMode_1923_PGN65350(JNIEnv * env, jobject this) {
-	return RX_MACHINE_MODE_STATUS_65350.ParallelLiftMode_1923;
-}
 jint Get_EnginePowerMode_347_PGN65350(JNIEnv * env, jobject this) {
 	return RX_MACHINE_MODE_STATUS_65350.EnginePowerMode_347;
 }
@@ -845,9 +811,34 @@ jint Get_CoolingFanReverseIntervalTime_211_PGN65369(JNIEnv * env, jobject this) 
 jint Get_CoolingFanReverseOperatingTime_212_PGN65369(JNIEnv * env, jobject this) {
 	return RX_COOLING_FAN_STATUS_65369.CoolingFanReverseOperatingTime_212;
 }
+//////RX_ENGINE_STATUS2_65370///////
+jint Get_EngineFuelRate_331_PGN65370(JNIEnv * env, jobject this) {
+	return RX_ENGINE_STATUS2_65370.EngineFuelRate_331;
+}
+jint Get_EnginePercentLoadatCurrentSpeed_334_PGN65370(JNIEnv * env, jobject this) {
+	return RX_ENGINE_STATUS2_65370.EnginePercentLoadatCurrentSpeed_334;
+}
+jint Get_EngineActualPercentTorque_335_PGN65370(JNIEnv * env, jobject this) {
+	return RX_ENGINE_STATUS2_65370.EngineActualPercentTorque_335;
+}
 //////RX_ENGINE_STATUS1_65371///////
 jint Get_EngineOperatingCondition_336_PGN65371(JNIEnv * env, jobject this) {
 	return RX_ENGINE_STATUS1_65371.EngineOperatingCondition_336;
+}
+jint Get_EngineIntakeManifold1Temperatue_329_PGN65371(JNIEnv * env, jobject this) {
+	return RX_ENGINE_STATUS1_65371.EngineIntakeManifold1Temperatue_329;
+}
+jint Get_EngineFuelTemperature_330_PGN65371(JNIEnv * env, jobject this) {
+	return RX_ENGINE_STATUS1_65371.EngineFuelTemperature_330;
+}
+jint Get_EngineOilPressure_311_PGN65371(JNIEnv * env, jobject this) {
+	return RX_ENGINE_STATUS1_65371.EngineOilPressure_311;
+}
+jint Get_BarometricPressure_328_PGN65371(JNIEnv * env, jobject this) {
+	return RX_ENGINE_STATUS1_65371.BarometricPressure_328;
+}
+jint Get_EngineAirIntakePressure_337_PGN65371(JNIEnv * env, jobject this) {
+	return RX_ENGINE_STATUS1_65371.EngineAirIntakePressure_337;
 }
 jint Get_DEFTankLevel_362_PGN65371(JNIEnv * env, jobject this) {
 	return RX_ENGINE_STATUS1_65371.DEFTankLevel_362;
@@ -1202,24 +1193,18 @@ jbyteArray Get_DTC_5_PGN65438(JNIEnv * env, jobject this) {
 	return Data;
 }
 //////RX_WEIGHING_SYSTEM_STATUS_65450///////
-jint Get_WeighingSystemOperationMode1StatusJ_1901_PGN65450(JNIEnv * env,
+jint Get_WeighingSystemAccumulationMode_1941_PGN65450(JNIEnv * env,
 		jobject this) {
-	return RX_WEIGHING_SYSTEM_STATUS_65450.WeighingSystemOperationMode1StatusJ_1901;
+	return RX_WEIGHING_SYSTEM_STATUS_65450.WeighingSystemAccumulationMode_1941;
 }
 jint Get_WeighingSystemBuzzer_1907_PGN65450(JNIEnv * env, jobject this) {
 	return RX_WEIGHING_SYSTEM_STATUS_65450.WeighingSystemBuzzer_1907;
 }
-jint Get_WeightAccumulationMode_PGN65450(JNIEnv * env, jobject this) {
-	return RX_WEIGHING_SYSTEM_STATUS_65450.WeightAccumulationMode;
-}
 jint Get_CurrentWeighingResult_1919_PGN65450(JNIEnv * env, jobject this) {
 	return RX_WEIGHING_SYSTEM_STATUS_65450.CurrentWeighingResult_1919;
 }
-jint Get_SuddenChangeError_PGN65450(JNIEnv * env, jobject this) {
-	return RX_WEIGHING_SYSTEM_STATUS_65450.SuddenChangeError;
-}
-jint Get_BucketFullInError_PGN65450(JNIEnv * env, jobject this) {
-	return RX_WEIGHING_SYSTEM_STATUS_65450.BucketFullInError;
+jint Get_WeighingDisplayMode1_1910_PGN65450(JNIEnv * env, jobject this) {
+	return RX_WEIGHING_SYSTEM_STATUS_65450.WeighingDisplayMode1_1910;
 }
 jint Get_CurrentWeight_1911_PGN65450(JNIEnv * env, jobject this) {
 	return RX_WEIGHING_SYSTEM_STATUS_65450.CurrentWeight_1911;
@@ -1393,19 +1378,6 @@ jint Get_RearWiperOperationStatus_3451_PGN65527(JNIEnv * env, jobject this) {
 jint Get_RearWiperWasherOperationStatus_3452_PGN65527(JNIEnv * env,
 		jobject this) {
 	return RX_ELECTRICAL_SWITCH_RELAY_OPERATION_STATUS_65527.RearWiperWasherOperationStatus_3452;
-}
-jint Get_KeyPositionStatus_3807_PGN65527(JNIEnv * env, jobject this) {
-	return RX_ELECTRICAL_SWITCH_RELAY_OPERATION_STATUS_65527.KeyPositionStatus_3807;
-}
-jint Get_EngineShutdownDelayOperatinStatus_3808_PGN65527(JNIEnv * env,
-		jobject this) {
-	return RX_ELECTRICAL_SWITCH_RELAY_OPERATION_STATUS_65527.EngineShutdownDelayOperatinStatus_3808;
-}
-jint Get_RideControlOperatingSpeedForward_PGN65527(JNIEnv * env, jobject this) {
-	return RX_ELECTRICAL_SWITCH_RELAY_OPERATION_STATUS_65527.RideControlOperatingSpeedForward;
-}
-jint Get_RideControlOperatingSpeedBackward_PGN65527(JNIEnv * env, jobject this) {
-	return RX_ELECTRICAL_SWITCH_RELAY_OPERATION_STATUS_65527.RideControlOperatingSpeedBackward;
 }
 //////TX_DTC_INFORMATION_REQUEST_61184_11///////
 void Set_MessageType_PGN61184_11(JNIEnv * env, jobject this, int Data) {
@@ -1647,9 +1619,9 @@ void Set_CoolingFanReverseOperatingTime_212_PGN61184_61(JNIEnv * env,
 void Set_MessageType_PGN61184_62(JNIEnv * env, jobject this, int Data) {
 	TX_WEIGHING_SYSTEM_SETTING_REQUEST_61184_62.MessageType = Data;
 }
-void Set_WeighingSystemOperationMode1Status_1901_PGN61184_62(JNIEnv * env,
+void Set_WeighingSystemAccumulationMode_1941_PGN61184_62(JNIEnv * env,
 		jobject this, int Data) {
-	TX_WEIGHING_SYSTEM_SETTING_REQUEST_61184_62.WeighingSystemOperationMode1Status_1901 =
+	TX_WEIGHING_SYSTEM_SETTING_REQUEST_61184_62.WeighingSystemAccumulationMode_1941 =
 			Data;
 }
 void Set_RequestReweighing_PGN61184_62(JNIEnv * env, jobject this, int Data) {
@@ -1672,16 +1644,6 @@ void Set_WeightOffset_1922_PGN61184_62(JNIEnv * env, jobject this, int Data) {
 void Set_WeighingDisplayMode1_1910_PGN61184_62(JNIEnv * env, jobject this, int Data) {
 	TX_WEIGHING_SYSTEM_SETTING_REQUEST_61184_62.WeighingDisplayMode1_1910 = Data;
 }
-void Set_WeightAccumulationMode_PGN61184_62(JNIEnv * env, jobject this, int Data) {
-	TX_WEIGHING_SYSTEM_SETTING_REQUEST_61184_62.WeightAccumulationMode = Data;
-}
-void Set_SuddenChangeError_PGN61184_62(JNIEnv * env, jobject this, int Data) {
-	TX_WEIGHING_SYSTEM_SETTING_REQUEST_61184_62.SuddenChangeError = Data;
-}
-void Set_BucketFullInError_PGN61184_62(JNIEnv * env, jobject this, int Data) {
-	TX_WEIGHING_SYSTEM_SETTING_REQUEST_61184_62.BucketFullInError = Data;
-}
-
 //////TX_WEIGHT_OFFSET_61184_63///////
 void Set_MessageType_PGN61184_63(JNIEnv * env, jobject this, int Data) {
 	TX_WEIGHT_OFFSET_61184_63.MessageType = Data;
@@ -1701,9 +1663,6 @@ void Set_WeightOffsetWorkTool3_1922_PGN61184_63(JNIEnv * env, jobject this, int 
 //////TX_MACHINE_MODE_SETTING_61184_101///////
 void Set_MessageType_PGN61184_101(JNIEnv * env, jobject this, int Data) {
 	TX_MACHINE_MODE_SETTING_61184_101.MessageType = Data;
-}
-void Set_ParallelLiftMode_1923_PGN61184_101(JNIEnv * env, jobject this, int Data) {
-	TX_MACHINE_MODE_SETTING_61184_101.ParallelLiftMode_1923 = Data;
 }
 void Set_EngineAlternateLowIdleSwitch_348_PGN61184_101(JNIEnv * env,
 		jobject this, int Data) {
@@ -1731,10 +1690,6 @@ void Set_TransmissionTCLockupEngaged_568_PGN61184_104(JNIEnv * env,
 		jobject this, int Data) {
 	TX_TRAVEL_MODE_SETTING_61184_104.TransmissionTCLockupEngaged_568 = Data;
 }
-void Set_DifferentialLockMode_570_PGN61184_104(JNIEnv * env, jobject this,
-		int Data) {
-	TX_TRAVEL_MODE_SETTING_61184_104.DifferentialLockMode_570 = Data;
-}
 void Set_VehicleSpeedLimitMode_575_PGN61184_104(JNIEnv * env, jobject this,
 		int Data) {
 	TX_TRAVEL_MODE_SETTING_61184_104.VehicleSpeedLimitMode_575 = Data;
@@ -1750,11 +1705,11 @@ void Set_SpeedometerFrequency_534_PGN61184_105(JNIEnv * env, jobject this,
 		int Data) {
 	TX_TRAVEL_CONTROL_VALUE_SETTING_61184_105.SpeedometerFrequency_534 = Data;
 }
-void Set_AutoRideControlOperationSpeedForward_PGN61184_105(JNIEnv * env, jobject this, int Data) {
-	TX_TRAVEL_CONTROL_VALUE_SETTING_61184_105.AutoRideControlOperationSpeedForward =Data;
+void Set_AutoRideControlOperationSpeedForward_574_PGN61184_105(JNIEnv * env, jobject this, int Data) {
+	TX_TRAVEL_CONTROL_VALUE_SETTING_61184_105.AutoRideControlOperationSpeedForward_574 =Data;
 }
-void Set_AutoRideControlOperationSpeedBackward_PGN61184_105(JNIEnv * env, jobject this, int Data) {
-	TX_TRAVEL_CONTROL_VALUE_SETTING_61184_105.AutoRideControlOperationSpeedBackward = Data;
+void Set_AutoRideControlOperationSpeedBackward_576_PGN61184_105(JNIEnv * env, jobject this, int Data) {
+	TX_TRAVEL_CONTROL_VALUE_SETTING_61184_105.AutoRideControlOperationSpeedBackward_576 = Data;
 }
 void Set_VehicleSpeedLimit_572_PGN61184_105(JNIEnv * env, jobject this,
 		int Data) {
@@ -1768,11 +1723,11 @@ void Set_SpeedometerFrequency_534_PGN61184_106(JNIEnv * env, jobject this,
 		int Data) {
 	TX_TRAVEL_CONTROL_VALUE_61184_106.SpeedometerFrequency_534 = Data;
 }
-void Set_AutoRideControlOperationSpeedForward_PGN61184_106(JNIEnv * env, jobject this, int Data) {
-	TX_TRAVEL_CONTROL_VALUE_61184_106.AutoRideControlOperationSpeedForward = Data;
+void Set_AutoRideControlOperationSpeedForward_574_PGN61184_106(JNIEnv * env, jobject this, int Data) {
+	TX_TRAVEL_CONTROL_VALUE_61184_106.AutoRideControlOperationSpeedForward_574 = Data;
 }
-void Set_AutoRideControlOperationSpeedBackward_PGN61184_106(JNIEnv * env, jobject this, int Data) {
-	TX_TRAVEL_CONTROL_VALUE_61184_106.AutoRideControlOperationSpeedBackward = Data;
+void Set_AutoRideControlOperationSpeedBackward_576_PGN61184_106(JNIEnv * env, jobject this, int Data) {
+	TX_TRAVEL_CONTROL_VALUE_61184_106.AutoRideControlOperationSpeedBackward_576 = Data;
 }
 void Set_VehicleSpeedLimit_572_PGN61184_106(JNIEnv * env, jobject this,
 		int Data) {
@@ -1800,11 +1755,6 @@ void Set_RequestEngineLowIdleSpeed_PGN61184_109(JNIEnv * env, jobject this,
 }
 void Set_RequestTripDataReset_PGN61184_109(JNIEnv * env, jobject this, int Data) {
 	TX_MACHINE_ACCESSORY_SETTING_REQUEST_61184_109.RequestTripDataReset = Data;
-}
-void Set_RequestCruiseControlResumeSwitch_PGN61184_109(JNIEnv * env,
-		jobject this, int Data) {
-	TX_MACHINE_ACCESSORY_SETTING_REQUEST_61184_109.RequestCruiseControlResumeSwitch =
-			Data;
 }
 //////TX_ENGINE_SHUTDOWN_MODE_SETTING_61184_121///////
 void Set_MessageType_PGN61184_121(JNIEnv * env, jobject this, int Data) {
@@ -2026,20 +1976,14 @@ void Set_BucketOutSpeedAdjust_PGN61184_203(JNIEnv * env,
 	TX_WHEEL_LOADER_EHCU_SETTING_61184_203.BucketOutSpeedAdjust = Data;
 }
 //////TX_MONIOTR_STATUS_65327///////
-void Set_MonitorOperationMode_834_PGN65327(JNIEnv * env, jobject this, int Data) {
-	TX_MONIOTR_STATUS_65327.MonitorOperationMode_834 = Data;
-}
 void Set_RequestBuzzerStop_PGN65327(JNIEnv * env, jobject this, int Data) {
 	TX_MONIOTR_STATUS_65327.RequestBuzzerStop = Data;
 }
 void Set_SpeedmeterUnitChange_PGN65327(JNIEnv * env, jobject this, int Data) {
 	TX_MONIOTR_STATUS_65327.SpeedmeterUnitChange = Data;
 }
-void Set_AutoGreaseLEDGreenStatus_PGN65327(JNIEnv * env, jobject this, int Data) {
-	TX_MONIOTR_STATUS_65327.AutoGreaseLEDGreenStatus = Data;
-}
-void Set_AutoGreaseLEDRedStatus_PGN65327(JNIEnv * env, jobject this, int Data) {
-	TX_MONIOTR_STATUS_65327.AutoGreaseLEDRedStatus = Data;
+void Set_MonitorScreenNumber_836_PGN65327(JNIEnv * env, jobject this, int Data) {
+	TX_MONIOTR_STATUS_65327.MonitorScreenNumber_836 = Data;
 }
 //////TX_RMCU_STATUS_65329///////
 void Set_RMCUNetworkType_1621_PGN65329(JNIEnv * env, jobject this, int Data) {
@@ -2749,30 +2693,22 @@ void Set_DTC_5_PGN65438(JNIEnv * env, jobject this, jbyteArray Data) {
 	(*env)->ReleaseByteArrayElements(env, Data, pArr, 0);
 }
 //////TX_WEIGHING_SYSTEM_STATUS_65450///////
-void Set_WeighingSystemOperationMode1StatusJ_1901_PGN65450(JNIEnv * env,
+void Set_WeighingSystemAccumulationMode_1941_PGN65450(JNIEnv * env,
 		jobject this, int Data) {
-	TX_WEIGHING_SYSTEM_STATUS_65450.WeighingSystemOperationMode1StatusJ_1901 =
+	TX_WEIGHING_SYSTEM_STATUS_65450.WeighingSystemAccumulationMode_1941 =
 			Data;
 }
 void Set_WeighingSystemBuzzer_1907_PGN65450(JNIEnv * env, jobject this,
 		int Data) {
 	TX_WEIGHING_SYSTEM_STATUS_65450.WeighingSystemBuzzer_1907 = Data;
 }
-void Set_WeightAccumulationMode_PGN65450(JNIEnv * env, jobject this,
-		int Data) {
-	TX_WEIGHING_SYSTEM_STATUS_65450.WeightAccumulationMode = Data;
-}
 void Set_CurrentWeighingResult_1919_PGN65450(JNIEnv * env, jobject this,
 		int Data) {
 	TX_WEIGHING_SYSTEM_STATUS_65450.CurrentWeighingResult_1919 = Data;
 }
-void Set_SuddenChangeError_PGN65450(JNIEnv * env, jobject this,
+void Set_WeighingDisplayMode1_1910_PGN65450(JNIEnv * env, jobject this,
 		int Data) {
-	TX_WEIGHING_SYSTEM_STATUS_65450.SuddenChangeError = Data;
-}
-void Set_BucketFullInError_PGN65450(JNIEnv * env, jobject this,
-		int Data) {
-	TX_WEIGHING_SYSTEM_STATUS_65450.BucketFullInError = Data;
+	TX_WEIGHING_SYSTEM_STATUS_65450.WeighingDisplayMode1_1910 = Data;
 }
 void Set_CurrentWeight_1911_PGN65450(JNIEnv * env, jobject this, int Data) {
 	TX_WEIGHING_SYSTEM_STATUS_65450.CurrentWeight_1911 = Data;
@@ -2980,25 +2916,6 @@ void Set_RearWiperOperationStatus_3451_PGN65527(JNIEnv * env, jobject this,
 void Set_RearWiperWasherOperationStatus_3452_PGN65527(JNIEnv * env,
 		jobject this, int Data) {
 	TX_ELECTRICAL_SWITCH_RELAY_OPERATION_STATUS_65527.RearWiperWasherOperationStatus_3452 =
-			Data;
-}
-void Set_KeyPositionStatus_3807_PGN65527(JNIEnv * env, jobject this, int Data) {
-	TX_ELECTRICAL_SWITCH_RELAY_OPERATION_STATUS_65527.KeyPositionStatus_3807 =
-			Data;
-}
-void Set_EngineShutdownDelayOperatinStatus_3808_PGN65527(JNIEnv * env,
-		jobject this, int Data) {
-	TX_ELECTRICAL_SWITCH_RELAY_OPERATION_STATUS_65527.EngineShutdownDelayOperatinStatus_3808 =
-			Data;
-}
-void Set_RideControlOperatingSpeedForward_PGN65527(JNIEnv * env, jobject this,
-		int Data) {
-	TX_ELECTRICAL_SWITCH_RELAY_OPERATION_STATUS_65527.RideControlOperatingSpeedForward =
-			Data;
-}
-void Set_RideControlOperatingSpeedBackward_PGN65527(JNIEnv * env, jobject this,
-		int Data) {
-	TX_ELECTRICAL_SWITCH_RELAY_OPERATION_STATUS_65527.RideControlOperatingSpeedBackward =
 			Data;
 }
 ///////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -3443,9 +3360,9 @@ static JNINativeMethod methods[] =
 				//////RX_WEIGHING_SYSTEM_SETTING_REQUEST_61184_62///////
 				{ "Get_MessageType_PGN61184_62", "()I",
 						(void*) Get_MessageType_PGN61184_62 },
-				{ "Get_WeighingSystemOperationMode1Status_1901_PGN61184_62",
+				{ "Get_WeighingSystemAccumulationMode_1941_PGN61184_62",
 						"()I",
-						(void*) Get_WeighingSystemOperationMode1Status_1901_PGN61184_62 },
+						(void*) Get_WeighingSystemAccumulationMode_1941_PGN61184_62 },
 				{ "Get_RequestReweighing_PGN61184_62", "()I",
 						(void*) Get_RequestReweighing_PGN61184_62 }, {
 						"Get_RequestTotalWorkWeightReset_PGN61184_62", "()I",
@@ -3454,15 +3371,10 @@ static JNINativeMethod methods[] =
 						{"Get_WeightOffsetSetting_PGN61184_62", "()I",(void*)Get_WeightOffsetSetting_PGN61184_62  },
 						{"Get_WeightOffset_1922_PGN61184_62", "()I",(void*) Get_WeightOffset_1922_PGN61184_62 },
 						{"Get_WeighingDisplayMode1_1910_PGN61184_62", "()I",(void*)Get_WeighingDisplayMode1_1910_PGN61184_62  },
-						{"Get_WeightAccumulationMode_PGN61184_62", "()I",(void*) Get_WeightAccumulationMode_PGN61184_62 },
-						{"Get_SuddenChangeError_PGN61184_62", "()I",(void*) Get_SuddenChangeError_PGN61184_62 },
-						{"Get_BucketFullInError_PGN61184_62", "()I",(void*) Get_BucketFullInError_PGN61184_62 },
 
 				//////RX_WEIGHT_OFFSET_61184_63///////
 				{ "Get_MessageType_PGN61184_63", "()I",(void*) Get_MessageType_PGN61184_63 },
 				{"Get_WeightOffsetSelectionStatus_PGN61184_63", "()I",(void*) Get_WeightOffsetSelectionStatus_PGN61184_63 },
-				{"Get_ErrorSuddenChange_PGN61184_63", "()I",(void*) Get_ErrorSuddenChange_PGN61184_63 },
-				{"Get_ErrorBucketFullIn_PGN61184_63", "()I",(void*) Get_ErrorBucketFullIn_PGN61184_63 },
 				{"Get_WeightOffsetWorkTool1_1922_PGN61184_63", "()I",(void*) Get_WeightOffsetWorkTool1_1922_PGN61184_63 },
 				{"Get_WeightOffsetWorkTool2_1922_PGN61184_63", "()I",(void*) Get_WeightOffsetWorkTool2_1922_PGN61184_63 },
 				{"Get_WeightOffsetWorkTool3_1922_PGN61184_63", "()I",(void*) Get_WeightOffsetWorkTool3_1922_PGN61184_63 },
@@ -3489,10 +3401,7 @@ static JNINativeMethod methods[] =
 						(void*) Get_KickDownShiftMode_547_PGN61184_104 },
 				{ "Get_TransmissionTCLockupEngaged_568_PGN61184_104", "()I",
 						(void*) Get_TransmissionTCLockupEngaged_568_PGN61184_104 },
-				{ "Get_DifferentialLockMode_570_PGN61184_104", "()I",
-						(void*) Get_DifferentialLockMode_570_PGN61184_104 }, {
-						"Get_VehicleSpeedLimitMode_575_PGN61184_104", "()I",
-						(void*) Get_VehicleSpeedLimitMode_575_PGN61184_104 },
+				{"Get_VehicleSpeedLimitMode_575_PGN61184_104", "()I",(void*) Get_VehicleSpeedLimitMode_575_PGN61184_104 },
 				//////RX_TRAVEL_CONTROL_VALUE_SETTING_61184_105///////
 				{ "Get_MessageType_PGN61184_105", "()I",
 						(void*) Get_MessageType_PGN61184_105 }, {
@@ -3500,8 +3409,8 @@ static JNINativeMethod methods[] =
 						(void*) Get_SettingSelection_PGN61184_105 }, {
 						"Get_SpeedometerFrequency_534_PGN61184_105", "()I",
 						(void*) Get_SpeedometerFrequency_534_PGN61184_105 },
-				{ "Get_AutoRideControlOperationSpeedForward_PGN61184_105", "()I",(void*) Get_AutoRideControlOperationSpeedForward_PGN61184_105 },
-				{ "Get_AutoRideControlOperationSpeedBackward_PGN61184_105", "()I",(void*) Get_AutoRideControlOperationSpeedBackward_PGN61184_105 },
+				{ "Get_AutoRideControlOperationSpeedForward_574_PGN61184_105", "()I",(void*) Get_AutoRideControlOperationSpeedForward_574_PGN61184_105 },
+				{ "Get_AutoRideControlOperationSpeedBackward_576_PGN61184_105", "()I",(void*) Get_AutoRideControlOperationSpeedBackward_576_PGN61184_105 },
 				{ "Get_VehicleSpeedLimit_572_PGN61184_105", "()I",
 						(void*) Get_VehicleSpeedLimit_572_PGN61184_105 },
 				//////RX_TRAVEL_CONTROL_VALUE_61184_106///////
@@ -3509,8 +3418,8 @@ static JNINativeMethod methods[] =
 						(void*) Get_MessageType_PGN61184_106 }, {
 						"Get_SpeedometerFrequency_534_PGN61184_106", "()I",
 						(void*) Get_SpeedometerFrequency_534_PGN61184_106 },
-				{ "Get_AutoRideControlOperationSpeedForward_PGN61184_106", "()I",(void*) Get_AutoRideControlOperationSpeedForward_PGN61184_106 },
-				{ "Get_AutoRideControlOperationSpeedBackward_PGN61184_106", "()I",(void*) Get_AutoRideControlOperationSpeedBackward_PGN61184_106 },
+				{ "Get_AutoRideControlOperationSpeedForward_574_PGN61184_106", "()I",(void*) Get_AutoRideControlOperationSpeedForward_574_PGN61184_106 },
+				{ "Get_AutoRideControlOperationSpeedBackward_576_PGN61184_106", "()I",(void*) Get_AutoRideControlOperationSpeedBackward_576_PGN61184_106 },
 				{ "Get_VehicleSpeedLimit_572_PGN61184_106", "()I",
 						(void*) Get_VehicleSpeedLimit_572_PGN61184_106 },
 				//////RX_MACHINE_ACCESSORY_SETTING_REQUEST_61184_109///////
@@ -3526,8 +3435,6 @@ static JNINativeMethod methods[] =
 						(void*) Get_RequestEngineLowIdleSpeed_PGN61184_109 }, {
 						"Get_RequestTripDataReset_PGN61184_109", "()I",
 						(void*) Get_RequestTripDataReset_PGN61184_109 },
-				{ "Get_RequestCruiseControlResumeSwitch_PGN61184_109", "()I",
-						(void*) Get_RequestCruiseControlResumeSwitch_PGN61184_109 },
 				//////RX_ENGINE_SHUTDOWN_MODE_SETTING_61184_121///////
 				{ "Get_MessageType_PGN61184_121", "()I",
 						(void*) Get_MessageType_PGN61184_121 }, {
@@ -3621,12 +3528,8 @@ static JNINativeMethod methods[] =
 				{ "Get_AuxiliaryAttachmentMaxFlowLevel_PGN61184_203", "()I",(void*) Get_AuxiliaryAttachmentMaxFlowLevel_PGN61184_203 },
 				{ "Get_BoomLeverFloatingPosition_PGN61184_203", "()I",(void*) Get_BoomLeverFloatingPosition_PGN61184_203 },
 				//////RX_MONIOTR_STATUS_65327///////
-				{ "Get_MonitorOperationMode_834_PGN65327", "()I",
-						(void*) Get_MonitorOperationMode_834_PGN65327 },
 						{"Get_RequestBuzzerStop_PGN65327", "()I",(void*) Get_RequestBuzzerStop_PGN65327 },
 						{"Get_SpeedmeterUnitChange_PGN65327", "()I",(void*) Get_SpeedmeterUnitChange_PGN65327 },
-						{"Get_AutoGreaseLEDGreenStatus_PGN65327", "()I",(void*) Get_AutoGreaseLEDGreenStatus_PGN65327 },
-						{"Get_AutoGreaseLEDRedStatus_PGN65327", "()I",(void*) Get_AutoGreaseLEDRedStatus_PGN65327 },
 				//////RX_RMCU_STATUS_65329///////
 				{ "Get_RMCUNetworkType_1621_PGN65329", "()I",
 						(void*) Get_RMCUNetworkType_1621_PGN65329 }, {
@@ -3721,7 +3624,6 @@ static JNINativeMethod methods[] =
 						(void*) Get_ESLInterval_825_PGN65348 },
 				//////RX_MACHINE_MODE_STATUS_65350///////
 				{ "Get_EngineAlternateLowIdelSwitch_348_PGN65350", "()I",(void*) Get_EngineAlternateLowIdelSwitch_348_PGN65350 },
-				{ "Get_ParallelLiftMode_1923_PGN65350", "()I",(void*) Get_ParallelLiftMode_1923_PGN65350 },
 				{ "Get_EnginePowerMode_347_PGN65350", "()I",(void*) Get_EnginePowerMode_347_PGN65350 },
 				//////RX_HYDRAULIC_PRESSURE4_65354///////
 				{ "Get_BrakeOilPressure_503_PGN65354", "()I",
@@ -3803,11 +3705,18 @@ static JNINativeMethod methods[] =
 						(void*) Get_CoolingFanReverseIntervalTime_211_PGN65369 },
 				{ "Get_CoolingFanReverseOperatingTime_212_PGN65369", "()I",
 						(void*) Get_CoolingFanReverseOperatingTime_212_PGN65369 },
+				//////RX_ENGINE_STATUS2_65370///////
+				{"Get_EngineFuelRate_331_PGN65370", "()I", (void*) Get_EngineFuelRate_331_PGN65370 },
+				{"Get_EnginePercentLoadatCurrentSpeed_334_PGN65370", "()I", (void*) Get_EnginePercentLoadatCurrentSpeed_334_PGN65370 },
+				{"Get_EngineActualPercentTorque_335_PGN65370", "()I", (void*) Get_EngineActualPercentTorque_335_PGN65370 },
 				//////RX_ENGINE_STATUS1_65371///////
-				{ "Get_EngineOperatingCondition_336_PGN65371", "()I",
-						(void*) Get_EngineOperatingCondition_336_PGN65371 }, {
-						"Get_DEFTankLevel_362_PGN65371", "()I",
-						(void*) Get_DEFTankLevel_362_PGN65371 },
+				{ "Get_EngineOperatingCondition_336_PGN65371", "()I",(void*) Get_EngineOperatingCondition_336_PGN65371 },
+				{"Get_DEFTankLevel_362_PGN65371", "()I",(void*) Get_DEFTankLevel_362_PGN65371 },
+				{"Get_EngineIntakeManifold1Temperatue_329_PGN65371", "()I",(void*) Get_EngineIntakeManifold1Temperatue_329_PGN65371 },
+				{"Get_EngineFuelTemperature_330_PGN65371", "()I",(void*) Get_EngineFuelTemperature_330_PGN65371 },
+				{"Get_EngineOilPressure_311_PGN65371", "()I",(void*) Get_EngineOilPressure_311_PGN65371 },
+				{"Get_BarometricPressure_328_PGN65371", "()I",(void*) Get_BarometricPressure_328_PGN65371 },
+				{"Get_EngineAirIntakePressure_337_PGN65371", "()I",(void*) Get_EngineAirIntakePressure_337_PGN65371 },
 				//////RX_VEHICLE_DISTANCE_65389///////
 				{ "Get_TripDistance_600_PGN65389", "()I",
 						(void*) Get_TripDistance_600_PGN65389 }, {
@@ -4016,15 +3925,13 @@ static JNINativeMethod methods[] =
 						"Get_DTC_4_PGN65438", "()[B", Get_DTC_4_PGN65438 }, {
 						"Get_DTC_5_PGN65438", "()[B", Get_DTC_5_PGN65438 },
 				//////RX_WEIGHING_SYSTEM_STATUS_65450///////
-				{ "Get_WeighingSystemOperationMode1StatusJ_1901_PGN65450",
+				{ "Get_WeighingSystemAccumulationMode_1941_PGN65450",
 						"()I",
-						(void*) Get_WeighingSystemOperationMode1StatusJ_1901_PGN65450 },
+						(void*) Get_WeighingSystemAccumulationMode_1941_PGN65450 },
 				{ "Get_WeighingSystemBuzzer_1907_PGN65450", "()I",
 						(void*) Get_WeighingSystemBuzzer_1907_PGN65450 },
-				{ "Get_WeightAccumulationMode_PGN65450", "()I",(void*) Get_WeightAccumulationMode_PGN65450 },
 				{"Get_CurrentWeighingResult_1919_PGN65450", "()I",(void*) Get_CurrentWeighingResult_1919_PGN65450 },
-				{ "Get_SuddenChangeError_PGN65450", "()I",(void*) Get_SuddenChangeError_PGN65450 },
-				{ "Get_BucketFullInError_PGN65450", "()I",(void*) Get_BucketFullInError_PGN65450 },
+				{"Get_WeighingDisplayMode1_1910_PGN65450", "()I",(void*) Get_WeighingDisplayMode1_1910_PGN65450 },
 				{"Get_CurrentWeight_1911_PGN65450", "()I",(void*) Get_CurrentWeight_1911_PGN65450 },
 				{"Get_TodayWeight_1915_PGN65450", "()I",(void*) Get_TodayWeight_1915_PGN65450 },
 				//////RX_WEIGHING_SYSTEM_DATA1_65451///////
@@ -4129,13 +4036,6 @@ static JNINativeMethod methods[] =
 						(void*) Get_RearWiperOperationStatus_3451_PGN65527 },
 				{ "Get_RearWiperWasherOperationStatus_3452_PGN65527", "()I",
 						(void*) Get_RearWiperWasherOperationStatus_3452_PGN65527 },
-				{ "Get_KeyPositionStatus_3807_PGN65527", "()I",
-						(void*) Get_KeyPositionStatus_3807_PGN65527 },
-				{ "Get_EngineShutdownDelayOperatinStatus_3808_PGN65527", "()I",
-						(void*) Get_EngineShutdownDelayOperatinStatus_3808_PGN65527 },
-				{"Get_RideControlOperatingSpeedForward_PGN65527", "()I",(void*) Get_RideControlOperatingSpeedForward_PGN65527 },
-				{"Get_RideControlOperatingSpeedBackward_PGN65527", "()I",(void*) Get_RideControlOperatingSpeedBackward_PGN65527 },
-
 				//////TX_DTC_INFORMATION_REQUEST_61184_11///////
 				{ "Set_MessageType_PGN61184_11", "(I)V",
 						(void*) Set_MessageType_PGN61184_11 }, {
@@ -4244,9 +4144,9 @@ static JNINativeMethod methods[] =
 				//////TX_WEIGHING_SYSTEM_SETTING_REQUEST_61184_62///////
 				{ "Set_MessageType_PGN61184_62", "(I)V",
 						(void*) Set_MessageType_PGN61184_62 },
-				{ "Set_WeighingSystemOperationMode1Status_1901_PGN61184_62",
+				{ "Set_WeighingSystemAccumulationMode_1941_PGN61184_62",
 						"(I)V",
-						(void*) Set_WeighingSystemOperationMode1Status_1901_PGN61184_62 },
+						(void*) Set_WeighingSystemAccumulationMode_1941_PGN61184_62 },
 				{ "Set_RequestReweighing_PGN61184_62", "(I)V",
 						(void*) Set_RequestReweighing_PGN61184_62 }, {
 						"Set_RequestTotalWorkWeightReset_PGN61184_62", "(I)V",
@@ -4255,9 +4155,6 @@ static JNINativeMethod methods[] =
 						{"Set_WeightOffsetSetting_PGN61184_62", "(I)V",(void*) Set_WeightOffsetSetting_PGN61184_62 },
 						{"Set_WeightOffset_1922_PGN61184_62", "(I)V",(void*) Set_WeightOffset_1922_PGN61184_62 },
 						{"Set_WeighingDisplayMode1_1910_PGN61184_62", "(I)V",(void*) Set_WeighingDisplayMode1_1910_PGN61184_62 },
-						{"Set_WeightAccumulationMode_PGN61184_62", "(I)V",(void*) Set_WeightAccumulationMode_PGN61184_62 },
-						{"Set_SuddenChangeError_PGN61184_62", "(I)V",(void*) Set_SuddenChangeError_PGN61184_62 },
-						{"Set_BucketFullInError_PGN61184_62", "(I)V",(void*) Set_BucketFullInError_PGN61184_62 },
 
 				//////TX_WEIGHT_OFFSET_61184_63///////
 				{ "Set_MessageType_PGN61184_63", "(I)V",(void*) Set_MessageType_PGN61184_63 },
@@ -4267,7 +4164,6 @@ static JNINativeMethod methods[] =
 				{"Set_WeightOffsetWorkTool3_1922_PGN61184_63", "(I)V",(void*) Set_WeightOffsetWorkTool3_1922_PGN61184_63 },
 				//////TX_MACHINE_MODE_SETTING_61184_101///////
 				{ "Set_MessageType_PGN61184_101", "(I)V",(void*) Set_MessageType_PGN61184_101 },
-				{ "Set_ParallelLiftMode_1923_PGN61184_101", "(I)V",(void*) Set_ParallelLiftMode_1923_PGN61184_101 },
 				{ "Set_EngineAlternateLowIdleSwitch_348_PGN61184_101", "(I)V",(void*) Set_EngineAlternateLowIdleSwitch_348_PGN61184_101 },
 				{ "Set_EnginePowerMode_347_PGN61184_101", "(I)V",(void*) Set_EnginePowerMode_347_PGN61184_101 },
 				//////TX_TRAVEL_MODE_SETTING_61184_104///////
@@ -4281,10 +4177,7 @@ static JNINativeMethod methods[] =
 						(void*) Set_KickDownShiftMode_547_PGN61184_104 },
 				{ "Set_TransmissionTCLockupEngaged_568_PGN61184_104", "(I)V",
 						(void*) Set_TransmissionTCLockupEngaged_568_PGN61184_104 },
-				{ "Set_DifferentialLockMode_570_PGN61184_104", "(I)V",
-						(void*) Set_DifferentialLockMode_570_PGN61184_104 }, {
-						"Set_VehicleSpeedLimitMode_575_PGN61184_104", "(I)V",
-						(void*) Set_VehicleSpeedLimitMode_575_PGN61184_104 },
+				{"Set_VehicleSpeedLimitMode_575_PGN61184_104", "(I)V",(void*) Set_VehicleSpeedLimitMode_575_PGN61184_104 },
 				//////TX_TRAVEL_CONTROL_VALUE_SETTING_61184_105///////
 				{ "Set_MessageType_PGN61184_105", "(I)V",
 						(void*) Set_MessageType_PGN61184_105 }, {
@@ -4292,8 +4185,8 @@ static JNINativeMethod methods[] =
 						(void*) Set_SettingSelection_PGN61184_105 }, {
 						"Set_SpeedometerFrequency_534_PGN61184_105", "(I)V",
 						(void*) Set_SpeedometerFrequency_534_PGN61184_105 },
-				{ "Set_AutoRideControlOperationSpeedForward_PGN61184_105", "(I)V",(void*) Set_AutoRideControlOperationSpeedForward_PGN61184_105 },
-				{ "Set_AutoRideControlOperationSpeedBackward_PGN61184_105", "(I)V",(void*) Set_AutoRideControlOperationSpeedBackward_PGN61184_105 },
+				{ "Set_AutoRideControlOperationSpeedForward_574_PGN61184_105", "(I)V",(void*) Set_AutoRideControlOperationSpeedForward_574_PGN61184_105 },
+				{ "Set_AutoRideControlOperationSpeedBackward_576_PGN61184_105", "(I)V",(void*) Set_AutoRideControlOperationSpeedBackward_576_PGN61184_105 },
 				{ "Set_VehicleSpeedLimit_572_PGN61184_105", "(I)V",
 						(void*) Set_VehicleSpeedLimit_572_PGN61184_105 },
 				//////TX_TRAVEL_CONTROL_VALUE_61184_106///////
@@ -4301,8 +4194,8 @@ static JNINativeMethod methods[] =
 						(void*) Set_MessageType_PGN61184_106 }, {
 						"Set_SpeedometerFrequency_534_PGN61184_106", "(I)V",
 						(void*) Set_SpeedometerFrequency_534_PGN61184_106 },
-				{ "Set_AutoRideControlOperationSpeedForward_PGN61184_106", "(I)V",(void*) Set_AutoRideControlOperationSpeedForward_PGN61184_106 },
-				{ "Set_AutoRideControlOperationSpeedBackward_PGN61184_106", "(I)V",(void*) Set_AutoRideControlOperationSpeedBackward_PGN61184_106 },
+				{ "Set_AutoRideControlOperationSpeedForward_574_PGN61184_106", "(I)V",(void*) Set_AutoRideControlOperationSpeedForward_574_PGN61184_106 },
+				{ "Set_AutoRideControlOperationSpeedBackward_576_PGN61184_106", "(I)V",(void*) Set_AutoRideControlOperationSpeedBackward_576_PGN61184_106 },
 				{ "Set_VehicleSpeedLimit_572_PGN61184_106", "(I)V",
 						(void*) Set_VehicleSpeedLimit_572_PGN61184_106 },
 				//////TX_MACHINE_ACCESSORY_SETTING_REQUEST_61184_109///////
@@ -4318,8 +4211,6 @@ static JNINativeMethod methods[] =
 						(void*) Set_RequestEngineLowIdleSpeed_PGN61184_109 }, {
 						"Set_RequestTripDataReset_PGN61184_109", "(I)V",
 						(void*) Set_RequestTripDataReset_PGN61184_109 },
-				{ "Set_RequestCruiseControlResumeSwitch_PGN61184_109", "(I)V",
-						(void*) Set_RequestCruiseControlResumeSwitch_PGN61184_109 },
 				//////TX_ENGINE_SHUTDOWN_MODE_SETTING_61184_121///////
 				{"Set_MessageType_PGN61184_121", "(I)V",(void*) Set_MessageType_PGN61184_121 },
 				{"Set_AutomaticEngineShutdown_363_PGN61184_121", "(I)V",(void*) Set_AutomaticEngineShutdown_363_PGN61184_121 },
@@ -4423,12 +4314,9 @@ static JNINativeMethod methods[] =
 				{ "Set_BucketOutSpeedAdjust_PGN61184_203", "(I)V",(void*) Set_BucketOutSpeedAdjust_PGN61184_203 },
 
 				//////TX_MONIOTR_STATUS_65327///////
-				{ "Set_MonitorOperationMode_834_PGN65327", "(I)V",
-						(void*) Set_MonitorOperationMode_834_PGN65327 },
 						{"Set_RequestBuzzerStop_PGN65327", "(I)V",(void*) Set_RequestBuzzerStop_PGN65327 },
 						{"Set_SpeedmeterUnitChange_PGN65327", "(I)V",(void*) Set_SpeedmeterUnitChange_PGN65327 },
-						{"Set_AutoGreaseLEDGreenStatus_PGN65327", "(I)V",(void*) Set_AutoGreaseLEDGreenStatus_PGN65327 },
-						{"Set_AutoGreaseLEDRedStatus_PGN65327", "(I)V",(void*) Set_AutoGreaseLEDRedStatus_PGN65327 },
+						{"Set_MonitorScreenNumber_836_PGN65327", "(I)V",(void*) Set_MonitorScreenNumber_836_PGN65327 },
 				//////TX_RMCU_STATUS_65329///////
 				{ "Set_RMCUNetworkType_1621_PGN65329", "(I)V",
 						(void*) Set_RMCUNetworkType_1621_PGN65329 }, {
@@ -4789,14 +4677,12 @@ static JNINativeMethod methods[] =
 						"Set_DTC_4_PGN65438", "([B)V", Set_DTC_4_PGN65438 }, {
 						"Set_DTC_5_PGN65438", "([B)V", Set_DTC_5_PGN65438 },
 				//////TX_WEIGHING_SYSTEM_STATUS_65450///////
-				{ "Set_WeighingSystemOperationMode1StatusJ_1901_PGN65450",
+				{ "Set_WeighingSystemAccumulationMode_1941_PGN65450",
 						"(I)V",
-						(void*) Set_WeighingSystemOperationMode1StatusJ_1901_PGN65450 },
+						(void*) Set_WeighingSystemAccumulationMode_1941_PGN65450 },
 				{ "Set_WeighingSystemBuzzer_1907_PGN65450", "(I)V",(void*) Set_WeighingSystemBuzzer_1907_PGN65450 },
-				{ "Set_WeightAccumulationMode_PGN65450", "(I)V",(void*) Set_WeightAccumulationMode_PGN65450 },
 				{"Set_CurrentWeighingResult_1919_PGN65450", "(I)V",(void*) Set_CurrentWeighingResult_1919_PGN65450 },
-				{ "Set_SuddenChangeError_PGN65450", "(I)V",(void*) Set_SuddenChangeError_PGN65450 },
-				{ "Set_BucketFullInError_PGN65450", "(I)V",(void*) Set_BucketFullInError_PGN65450 },
+				{"Set_WeighingDisplayMode1_1910_PGN65450", "(I)V",(void*) Set_WeighingDisplayMode1_1910_PGN65450 },
 				{"Set_CurrentWeight_1911_PGN65450", "(I)V",(void*) Set_CurrentWeight_1911_PGN65450 },
 				{"Set_TodayWeight_1915_PGN65450", "(I)V",(void*) Set_TodayWeight_1915_PGN65450 },
 				//////TX_WEIGHING_SYSTEM_DATA1_65451///////
@@ -4892,12 +4778,6 @@ static JNINativeMethod methods[] =
 						(void*) Set_RearWiperOperationStatus_3451_PGN65527 },
 				{ "Set_RearWiperWasherOperationStatus_3452_PGN65527", "(I)V",
 						(void*) Set_RearWiperWasherOperationStatus_3452_PGN65527 },
-				{ "Set_KeyPositionStatus_3807_PGN65527", "(I)V",
-						(void*) Set_KeyPositionStatus_3807_PGN65527 },
-				{ "Set_EngineShutdownDelayOperatinStatus_3808_PGN65527", "(I)V",
-						(void*) Set_EngineShutdownDelayOperatinStatus_3808_PGN65527 },
-				{"Set_RideControlOperatingSpeedForward_PGN65527", "(I)V",(void*) Set_RideControlOperatingSpeedForward_PGN65527 },
-				{"Set_RideControlOperatingSpeedBackward_PGN65527", "(I)V",(void*) Set_RideControlOperatingSpeedBackward_PGN65527 },
 				///////////////////////////////////////////////////////////////////////////////////////////////////////
 				{ "Get_FirmwareVersionHigh", "()I",(void*) Get_FirmwareVersionHigh },
 				{ "Get_FirmwareVersionLow", "()I",(void*) Get_FirmwareVersionLow },

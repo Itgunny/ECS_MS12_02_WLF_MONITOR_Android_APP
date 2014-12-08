@@ -153,6 +153,8 @@ public class FaultHistoryActiveFragment extends ParentFragment{
 		// TODO Auto-generated method stub
 		super.InitValuables();
 		
+		SetThreadSleepTime(1000);
+		
 		SendDTCIndex = REQ_ERR_MACHINE_ACTIVE;
 		SendSeqIndex = 1;
 		

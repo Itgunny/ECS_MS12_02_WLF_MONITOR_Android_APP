@@ -186,8 +186,6 @@ public class OperationHistoryInitPopup extends ParentPopup{
 				if(ParentActivity._MenuBaseFragment._OperationHistoryFragment.checkWorkTotalA.isChecked() == true){
 					CAN1Comm.Set_RequestTotalWorkWeightReset_PGN61184_62(CAN1CommManager.DATA_STATE_WEIGHINGDISPLAY_TOTAL_A);
 					CAN1Comm.Set_RequestReweighing_PGN61184_62(3);
-					CAN1Comm.Set_SuddenChangeError_PGN61184_62(CAN1Comm.Get_SuddenChangeError_PGN65450());
-					CAN1Comm.Set_BucketFullInError_PGN61184_62(CAN1Comm.Get_BucketFullInError_PGN65450());
 					CAN1Comm.TxCANToMCU(62);
 					CAN1Comm.Set_RequestTotalWorkWeightReset_PGN61184_62(15);
 				}
@@ -197,8 +195,6 @@ public class OperationHistoryInitPopup extends ParentPopup{
 				if(ParentActivity._MenuBaseFragment._OperationHistoryFragment.checkWorkTotalB.isChecked() == true){
 					CAN1Comm.Set_RequestTotalWorkWeightReset_PGN61184_62(CAN1CommManager.DATA_STATE_WEIGHINGDISPLAY_TOTAL_B);
 					CAN1Comm.Set_RequestReweighing_PGN61184_62(3);
-					CAN1Comm.Set_SuddenChangeError_PGN61184_62(CAN1Comm.Get_SuddenChangeError_PGN65450());
-					CAN1Comm.Set_BucketFullInError_PGN61184_62(CAN1Comm.Get_BucketFullInError_PGN65450());
 					CAN1Comm.TxCANToMCU(62);
 					CAN1Comm.Set_RequestTotalWorkWeightReset_PGN61184_62(15);
 				}
@@ -207,8 +203,6 @@ public class OperationHistoryInitPopup extends ParentPopup{
 				if(ParentActivity._MenuBaseFragment._OperationHistoryFragment.checkWorkTotalC.isChecked() == true){
 					CAN1Comm.Set_RequestTotalWorkWeightReset_PGN61184_62(CAN1CommManager.DATA_STATE_WEIGHINGDISPLAY_TOTAL_C);
 					CAN1Comm.Set_RequestReweighing_PGN61184_62(3);
-					CAN1Comm.Set_SuddenChangeError_PGN61184_62(CAN1Comm.Get_SuddenChangeError_PGN65450());
-					CAN1Comm.Set_BucketFullInError_PGN61184_62(CAN1Comm.Get_BucketFullInError_PGN65450());
 					CAN1Comm.TxCANToMCU(62);
 					CAN1Comm.Set_RequestTotalWorkWeightReset_PGN61184_62(15);
 				}

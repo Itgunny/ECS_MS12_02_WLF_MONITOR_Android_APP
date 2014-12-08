@@ -275,21 +275,7 @@
             android:layout_height="wrap_content"
             android:src="@drawable/menu_low_bg" />
 
-        <ImageView
-            android:id="@+id/imageView_menu_body_preference_brightness_auto_low_line_1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignBottom="@+id/imageView_menu_body_preference_brightness_auto_low_bg"
-            android:layout_alignLeft="@+id/ImageButton_menu_body_preference_brightness_auto_low_ok"
-            android:src="@drawable/main_key_low_line" />
-
-        <ImageView
-            android:id="@+id/imageView_menu_body_preference_brightness_auto_low_line_2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignBottom="@+id/imageView_menu_body_preference_brightness_auto_low_bg"
-            android:layout_alignLeft="@+id/ImageButton_menu_body_preference_brightness_auto_low_cancel"
-            android:src="@drawable/main_key_low_line" />
+        
 
         <ImageButton
             android:id="@+id/ImageButton_menu_body_preference_brightness_auto_low_ok"
@@ -306,6 +292,22 @@
             android:layout_alignBottom="@+id/imageView_menu_body_preference_brightness_auto_low_bg"
             android:layout_toLeftOf="@+id/imageView_menu_body_preference_brightness_auto_low_line_1"
             android:background="@drawable/_selector_menu_low_center_btn" />
+        
+        <ImageView
+            android:id="@+id/imageView_menu_body_preference_brightness_auto_low_line_1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@+id/imageView_menu_body_preference_brightness_auto_low_bg"
+            android:layout_alignLeft="@+id/ImageButton_menu_body_preference_brightness_auto_low_ok"
+            android:src="@drawable/main_key_low_line" />
+
+        <ImageView
+            android:id="@+id/imageView_menu_body_preference_brightness_auto_low_line_2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@+id/imageView_menu_body_preference_brightness_auto_low_bg"
+            android:layout_alignLeft="@+id/ImageButton_menu_body_preference_brightness_auto_low_cancel"
+            android:src="@drawable/main_key_low_line" />
 
         <RelativeLayout
             android:layout_width="wrap_content"

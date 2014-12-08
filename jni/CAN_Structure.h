@@ -1693,7 +1693,7 @@ typedef struct
 {
 	unsigned char	MessageType;
 
-	unsigned char	WeighingSystemOperationMode1Status_1901:2;
+	unsigned char	WeighingSystemAccumulationMode_1941:2;
 	unsigned char	RequestReweighing:2;
 	unsigned char	RequestTotalWorkWeightReset:4;
 
@@ -1703,12 +1703,9 @@ typedef struct
 	unsigned short	WeightOffset_1922;
 
 	unsigned char	WeighingDisplayMode1_1910:4;
-	unsigned char	WeightAccumulationMode:2;
-	unsigned char 	Reserved0:2;
+	unsigned char 	Reserved0:4;
 
-	unsigned char	SuddenChangeError:2;
-	unsigned char	BucketFullInError:2;
-	unsigned char	Reserved1:4;
+	unsigned char	DM0;
 
 }__attribute__((packed))  WEIGHING_SYSTEM_SETTING_REQUEST_61184_62;
 typedef struct
@@ -1716,8 +1713,7 @@ typedef struct
 	unsigned char	MessageType;
 
 	unsigned char	WeightOffsetSelectionStatus:4;
-	unsigned char	ErrorSuddenChange:2;
-	unsigned char	ErrorBucketFullIn:2;
+	unsigned char	Reserved0:4;
 
 	unsigned short	WeightOffsetWorkTool1_1922;
 
@@ -1747,8 +1743,7 @@ typedef struct
 
 	unsigned char	Reserved0;
 
-	unsigned char	Reserved1:4;
-	unsigned char	ParallelLiftMode_1923:2;
+	unsigned char	Reserved1:6;
 	unsigned char	EngineAlternateLowIdleSwitch_348:2;
 
 	unsigned char	Reserved2;
@@ -1772,7 +1767,7 @@ typedef struct
 
 	unsigned char	KickDownShiftMode_547:2;
 	unsigned char	TransmissionTCLockupEngaged_568:2;
-	unsigned char	DifferentialLockMode_570:2;
+	unsigned char	Reserved0:2;
 	unsigned char	VehicleSpeedLimitMode_575:2;
 
 	unsigned char	DM0[4];
@@ -1787,8 +1782,8 @@ typedef struct
 
 	unsigned short	SpeedometerFrequency_534;
 
-	unsigned char	AutoRideControlOperationSpeedForward:4;
-	unsigned char	AutoRideControlOperationSpeedBackward:4;
+	unsigned char	AutoRideControlOperationSpeedForward_574:4;
+	unsigned char	AutoRideControlOperationSpeedBackward_576:4;
 
 	unsigned char	VehicleSpeedLimit_572;
 
@@ -1801,8 +1796,8 @@ typedef struct
 
 	unsigned short	SpeedometerFrequency_534;
 
-	unsigned char	AutoRideControlOperationSpeedForward:4;
-	unsigned char	AutoRideControlOperationSpeedBackward:4;
+	unsigned char	AutoRideControlOperationSpeedForward_574:4;
+	unsigned char	AutoRideControlOperationSpeedBackward_576:4;
 
 	unsigned char	VehicleSpeedLimit_572;
 
@@ -1820,8 +1815,7 @@ typedef struct
 
 	unsigned char	RequestEngineLowIdleSpeed:2;
 	unsigned char	RequestTripDataReset:2;
-	unsigned char	RequestCruiseControlResumeSwitch:2;
-	unsigned char	Reserved0:2;
+	unsigned char	Reserved0:4;
 
 	unsigned char	DM[3];
 
@@ -1971,13 +1965,11 @@ typedef struct
 }__attribute__((packed))  WHEEL_LOADER_EHCU_SETTING_61184_203;
 typedef struct
 {
-	unsigned char	MonitorOperationMode_834:4;
+	unsigned char	Reserved0:4;
 	unsigned char	RequestBuzzerStop:2;
 	unsigned char	SpeedmeterUnitChange:2;
 
-	unsigned char	AutoGreaseLEDGreenStatus:2;
-	unsigned char	AutoGreaseLEDRedStatus:2;
-	unsigned char	Reserved1:4;
+	unsigned char	MonitorScreenNumber_836;
 
 	unsigned char	DM0[6];
 
@@ -2063,8 +2055,7 @@ typedef struct
 
 	unsigned char	Reserved3;
 
-	unsigned char	Reserved4:2;
-	unsigned char	ParallelLiftMode_1923:2;
+	unsigned char	Reserved4:4;
 	unsigned char	EnginePowerMode_347:4;
 
 	unsigned char	Reserved5;
@@ -2182,10 +2173,29 @@ typedef struct
 }__attribute__((packed))  COOLING_FAN_STATUS_65369;
 typedef struct
 {
+	unsigned short	EngineFuelRate_331;
+
+	unsigned char 	EnginePercentLoadatCurrentSpeed_334;
+
+	unsigned char	EngineActualPercentTorque_335;
+
+	unsigned char	DM0[4];
+
+}__attribute__((packed))  ENGINE_STATUS2_65370;
+typedef struct
+{
 	unsigned char	EngineOperatingCondition_336:4;
 	unsigned char	Reserved0:4;
 
-	unsigned char	Reserved1[5];
+	unsigned char	EngineIntakeManifold1Temperatue_329;
+
+	unsigned char	EngineFuelTemperature_330;
+
+	unsigned char	EngineOilPressure_311;
+
+	unsigned char	BarometricPressure_328;
+
+	unsigned char	EngineAirIntakePressure_337;
 
 	unsigned char	DEFTankLevel_362;
 
@@ -2395,14 +2405,12 @@ typedef struct
 }__attribute__((packed))  DTC_INFORMATION_TYPE1_65438;
 typedef struct
 {
-	unsigned char	WeighingSystemOperationMode1StatusJ_1901:2;
+	unsigned char	WeighingSystemAccumulationMode_1941:2;
 	unsigned char	WeighingSystemBuzzer_1907:2;
-	unsigned char	WeightAccumulationMode:2;
-	unsigned char	Reserved0:2;
-
 	unsigned char	CurrentWeighingResult_1919:4;
-	unsigned char	SuddenChangeError:2;
-	unsigned char	BucketFullInError:2;
+
+	unsigned char	WeighingDisplayMode1_1910:4;
+	unsigned char	Reserved0:4;
 
 	unsigned short	CurrentWeight_1911;
 
@@ -2507,13 +2515,9 @@ typedef struct
 
 	unsigned char	RearWiperOperationStatus_3451:2;
 	unsigned char	RearWiperWasherOperationStatus_3452:2;
-	unsigned char	KeyPositionStatus_3807:2;
-	unsigned char	EngineShutdownDelayOperatinStatus_3808:2;
+	unsigned char	Reserved0:4;
 
-	unsigned char	RideControlOperatingSpeedForward:4;
-	unsigned char	RideControlOperatingSpeedBackward:4;
-
-	unsigned char	DM0;
+	unsigned char	DM0[2];
 
 
 }__attribute__((packed))  ELECTRICAL_SWITCH_RELAY_OPERATION_STATUS_65527;

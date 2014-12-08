@@ -99,7 +99,7 @@ public class MainBRightDownTMFragment extends ParentFragment{
 		TMCCOModeTitleDataAnimation = new TextViewXAxisFlipAnimation(ParentActivity);
 		TMCCOModeDataAnimation = new TextViewXAxisFlipAnimation(ParentActivity);
 		TMShiftModeDataAnimation = new TextViewXAxisFlipAnimation(ParentActivity);
-		TMTCLockUpDataAnimation = new TextViewXAxisFlipAnimation(ParentActivity);
+		TMTCLockUpDataAnimation = new TextViewXAxisFlipAnimation(ParentActivity);		
 	}
 	@Override
 	protected void InitButtonListener() {
@@ -144,13 +144,13 @@ public class MainBRightDownTMFragment extends ParentFragment{
 	@Override
 	protected void UpdateUI() {
 		// TODO Auto-generated method stub
-		TCCCOModeTitleDisplay(ParentActivity._CheckModel.GetMCUVersion(CAN1Comm.Get_ComponentBasicInformation_1698_PGN65330()));
+		TMCCOModeTitleDisplay(ParentActivity._CheckModel.GetMCUVersion(CAN1Comm.Get_ComponentBasicInformation_1698_PGN65330()));
 		TMCCOModeDisplay(CCOMode);
 		TMShiftModeDisplay(ShiftMode);
 		TMTCLockUpDisplay(TCLockUp);
 	}
 	/////////////////////////////////////////////////////////////////////	
-	public void TCCCOModeTitleDisplay(int Model){
+	public void TMCCOModeTitleDisplay(int Model){
 		if(Model == CheckModel.MODEL_980){
 			TMCCOModeTitleDataAnimation.FlipAnimation(textViewCCOModeTitle,getResources().getString(string.ICCO_MODE));
 		}else{
