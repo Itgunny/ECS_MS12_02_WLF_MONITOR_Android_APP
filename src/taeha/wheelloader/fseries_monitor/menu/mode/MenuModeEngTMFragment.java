@@ -6,6 +6,7 @@ import taeha.wheelloader.fseries_monitor.animation.DisappearAnimation;
 import taeha.wheelloader.fseries_monitor.animation.MainBodyShiftAnimation;
 import taeha.wheelloader.fseries_monitor.animation.LeftRightShiftAnimation;
 import taeha.wheelloader.fseries_monitor.main.CAN1CommManager;
+import taeha.wheelloader.fseries_monitor.main.CheckModel;
 import taeha.wheelloader.fseries_monitor.main.Home;
 import taeha.wheelloader.fseries_monitor.main.ParentFragment;
 import taeha.wheelloader.fseries_monitor.main.R;
@@ -79,13 +80,28 @@ public class MenuModeEngTMFragment extends MenuBodyList_ParentFragment{
 		setClickableList2(true);
 		setClickableList3(true);
 		setClickableList4(true);
-		setClickableList5(true);
 		
 		setListTitle1(ParentActivity.getResources().getString(string.Engine_Setting));
 		setListTitle2(ParentActivity.getResources().getString(string.Kick_Down));
-		setListTitle3(ParentActivity.getResources().getString(string.CCO_Mode));
+		
+		if(ParentActivity._CheckModel.GetMCUVersion(CAN1Comm.Get_ComponentBasicInformation_1698_PGN65330()) == CheckModel.MODEL_980)
+			setListTitle3(ParentActivity.getResources().getString(string.ICCO_Mode));
+		else
+			setListTitle3(ParentActivity.getResources().getString(string.CCO_Mode));
+		
 		setListTitle4(ParentActivity.getResources().getString(string.Shift_Mode));
-		setListTitle5(ParentActivity.getResources().getString(string.TC_Lock_Up));
+		
+		if(ParentActivity._CheckModel.GetMCUVersion(CAN1Comm.Get_ComponentBasicInformation_1698_PGN65330()) == CheckModel.MODEL_935
+		|| ParentActivity._CheckModel.GetMCUVersion(CAN1Comm.Get_ComponentBasicInformation_1698_PGN65330()) == CheckModel.MODEL_940){
+			setClickableList5(false);
+		}else if(ParentActivity._CheckModel.GetTCUModel(CAN1Comm.Get_ComponentBasicInformation_1698_PGN65330_TCU()) == CheckModel.TCU_4SPEED){
+			setClickableList5(false);
+		}else{
+			setClickableList5(true);
+			setListTitle5(ParentActivity.getResources().getString(string.TC_Lock_Up));
+		}
+		
+		
 	}
 	
 	@Override
@@ -137,7 +153,11 @@ public class MenuModeEngTMFragment extends MenuBodyList_ParentFragment{
 	@Override
 	public void ClickList3() {
 		// TODO Auto-generated method stub
-		ParentActivity.showCCoMode();	
+		if(ParentActivity._CheckModel.GetMCUVersion(CAN1Comm.Get_ComponentBasicInformation_1698_PGN65330()) == CheckModel.MODEL_980)
+			ParentActivity.showICCoMode();	
+		else
+			ParentActivity.showCCoMode();	
+		
 		CursurIndex = 3;
 		CursurDisplay(CursurIndex);
 		ParentActivity._MenuBaseFragment._MenuModeFragment.SetModeFocusIndex(MenuModeFragment.STATE_CURSUR_LIST);
@@ -176,7 +196,15 @@ public class MenuModeEngTMFragment extends MenuBodyList_ParentFragment{
 		case MenuModeFragment.STATE_CURSUR_LIST:
 			switch (CursurIndex) {
 			case 1:
-				CursurIndex = 5;
+				if(ParentActivity._CheckModel.GetMCUVersion(CAN1Comm.Get_ComponentBasicInformation_1698_PGN65330()) == CheckModel.MODEL_935
+				|| ParentActivity._CheckModel.GetMCUVersion(CAN1Comm.Get_ComponentBasicInformation_1698_PGN65330()) == CheckModel.MODEL_940){
+					CursurIndex = 4;
+				}else if(ParentActivity._CheckModel.GetTCUModel(CAN1Comm.Get_ComponentBasicInformation_1698_PGN65330_TCU()) == CheckModel.TCU_4SPEED){
+					CursurIndex = 4;
+				}else{
+					CursurIndex = 5;
+				}
+				
 				CursurDisplay(CursurIndex);
 				break;
 			case 2:
@@ -229,7 +257,14 @@ public class MenuModeEngTMFragment extends MenuBodyList_ParentFragment{
 				CursurDisplay(CursurIndex);
 				break;
 			case 4:
-				CursurIndex++;
+				if(ParentActivity._CheckModel.GetMCUVersion(CAN1Comm.Get_ComponentBasicInformation_1698_PGN65330()) == CheckModel.MODEL_935
+				|| ParentActivity._CheckModel.GetMCUVersion(CAN1Comm.Get_ComponentBasicInformation_1698_PGN65330()) == CheckModel.MODEL_940){
+					CursurIndex = 1;
+				}else if(ParentActivity._CheckModel.GetTCUModel(CAN1Comm.Get_ComponentBasicInformation_1698_PGN65330_TCU()) == CheckModel.TCU_4SPEED){
+					CursurIndex = 1;
+				}else{
+					CursurIndex++;
+				}
 				CursurDisplay(CursurIndex);
 				break;
 			case 5:

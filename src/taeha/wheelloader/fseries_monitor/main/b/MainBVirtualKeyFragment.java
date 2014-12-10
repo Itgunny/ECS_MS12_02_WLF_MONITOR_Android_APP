@@ -14,6 +14,7 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import taeha.wheelloader.fseries_monitor.main.CheckModel;
 import taeha.wheelloader.fseries_monitor.main.ParentFragment;
 import taeha.wheelloader.fseries_monitor.main.R;
 
@@ -245,9 +246,18 @@ public class MainBVirtualKeyFragment extends ParentFragment{
 	@Override
 	protected void UpdateUI() {
 		// TODO Auto-generated method stub
-		
+		FineModulsationDisplay();
 	}
 	/////////////////////////////////////////////////////////////////////	
+	public void FineModulsationDisplay(){
+		if(ParentActivity._CheckModel.GetMCUVersion(CAN1Comm.Get_ComponentBasicInformation_1698_PGN65330()) == CheckModel.MODEL_940
+		|| ParentActivity._CheckModel.GetMCUVersion(CAN1Comm.Get_ComponentBasicInformation_1698_PGN65330()) == CheckModel.MODEL_935){
+			imgbtnFineModulation.setAlpha((float)0.2);
+		}else{
+			imgbtnFineModulation.setAlpha((float)1);
+		}
+	}
+	/////////////////////////////////////////////////////////////////////
 	public void ClickKeyPad(){
 		if(ParentActivity.AnimationRunningFlag == true)
 			return;
@@ -305,8 +315,14 @@ public class MainBVirtualKeyFragment extends ParentFragment{
 		ParentActivity._MainBBaseFragment.IndicatorChangeAnimation.StartAppearAnimation(ParentActivity._MainBBaseFragment._MainBIndicatorFragment);
 	}
 	public void ClickFineModulation(){
-		ParentActivity._MainBBaseFragment.showFineModulationAnimation();
-		ParentActivity._MainBBaseFragment.IndicatorChangeAnimation.StartAppearAnimation(ParentActivity._MainBBaseFragment._MainBIndicatorFragment);
+		if(ParentActivity._CheckModel.GetMCUVersion(CAN1Comm.Get_ComponentBasicInformation_1698_PGN65330()) == CheckModel.MODEL_940
+		|| ParentActivity._CheckModel.GetMCUVersion(CAN1Comm.Get_ComponentBasicInformation_1698_PGN65330()) == CheckModel.MODEL_935){
+			
+		}else{
+			ParentActivity._MainBBaseFragment.showFineModulationAnimation();
+			ParentActivity._MainBBaseFragment.IndicatorChangeAnimation.StartAppearAnimation(ParentActivity._MainBBaseFragment._MainBIndicatorFragment);
+		}
+		
 	}
 	public void ClickFN(){
 		

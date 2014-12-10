@@ -225,7 +225,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="545dp"
-        android:layout_marginTop="240dp" >
+        android:layout_marginTop="240dp"
+        android:visibility="gone" >
 
         <TextView
 	        android:id="@+id/textView_menu_body_monitoring_version_acu_title"

@@ -6,6 +6,7 @@ import taeha.wheelloader.fseries_monitor.animation.DisappearAnimation;
 import taeha.wheelloader.fseries_monitor.animation.MainBodyShiftAnimation;
 import taeha.wheelloader.fseries_monitor.animation.LeftRightShiftAnimation;
 import taeha.wheelloader.fseries_monitor.main.CAN1CommManager;
+import taeha.wheelloader.fseries_monitor.main.CheckModel;
 import taeha.wheelloader.fseries_monitor.main.Home;
 import taeha.wheelloader.fseries_monitor.main.ParentFragment;
 import taeha.wheelloader.fseries_monitor.main.R;
@@ -75,15 +76,23 @@ public class MenuModeHYDFragment extends MenuBodyList_ParentFragment{
 		// TODO Auto-generated method stub
 		setClickableList1(true);
 		setClickableList2(true);
-		setClickableList3(true);
-		setClickableList4(true);
-		setClickableList5(true);
 		
 		setListTitle1(ParentActivity.getResources().getString(string.Work_Load));
 		setListTitle2(ParentActivity.getResources().getString(string.Boom_Bucket_Detent_Mode));
-		setListTitle3(ParentActivity.getResources().getString(string.Bucket_Priority));
-		setListTitle4(ParentActivity.getResources().getString(string.Auxilliary_Attachment_Max_Flow_Level));
-		setListTitle5(ParentActivity.getResources().getString(string.Soft_End_Stop));
+		if(ParentActivity._CheckModel.GetMCUVersion(CAN1Comm.Get_ComponentBasicInformation_1698_PGN65330()) == CheckModel.MODEL_940
+		|| ParentActivity._CheckModel.GetMCUVersion(CAN1Comm.Get_ComponentBasicInformation_1698_PGN65330()) == CheckModel.MODEL_935){
+			setClickableList3(false);
+			setClickableList4(false);
+			setClickableList5(false);
+		}else{
+			setClickableList3(true);
+			setClickableList4(true);
+			setClickableList5(true);
+			setListTitle3(ParentActivity.getResources().getString(string.Bucket_Priority));
+			setListTitle4(ParentActivity.getResources().getString(string.Auxilliary_Attachment_Max_Flow_Level));
+			setListTitle5(ParentActivity.getResources().getString(string.Soft_End_Stop));
+		}
+		
 	}
 	
 	@Override
@@ -184,7 +193,12 @@ public class MenuModeHYDFragment extends MenuBodyList_ParentFragment{
 		case MenuModeFragment.STATE_CURSUR_LIST:
 			switch (CursurIndex) {
 			case 1:
-				CursurIndex = 5;
+				if(ParentActivity._CheckModel.GetMCUVersion(CAN1Comm.Get_ComponentBasicInformation_1698_PGN65330()) == CheckModel.MODEL_940
+				|| ParentActivity._CheckModel.GetMCUVersion(CAN1Comm.Get_ComponentBasicInformation_1698_PGN65330()) == CheckModel.MODEL_935){
+					CursurIndex = 2;
+				}else{
+					CursurIndex = 5;
+				}
 				CursurDisplay(CursurIndex);
 				break;
 			case 2:
@@ -192,15 +206,30 @@ public class MenuModeHYDFragment extends MenuBodyList_ParentFragment{
 				CursurDisplay(CursurIndex);
 				break;
 			case 3:
-				CursurIndex--;
+				if(ParentActivity._CheckModel.GetMCUVersion(CAN1Comm.Get_ComponentBasicInformation_1698_PGN65330()) == CheckModel.MODEL_940
+				|| ParentActivity._CheckModel.GetMCUVersion(CAN1Comm.Get_ComponentBasicInformation_1698_PGN65330()) == CheckModel.MODEL_935){
+					CursurIndex = 2;
+				}else{
+					CursurIndex--;
+				}
 				CursurDisplay(CursurIndex);
 				break;
 			case 4:
-				CursurIndex--;
+				if(ParentActivity._CheckModel.GetMCUVersion(CAN1Comm.Get_ComponentBasicInformation_1698_PGN65330()) == CheckModel.MODEL_940
+				|| ParentActivity._CheckModel.GetMCUVersion(CAN1Comm.Get_ComponentBasicInformation_1698_PGN65330()) == CheckModel.MODEL_935){
+					CursurIndex = 2;
+				}else{
+					CursurIndex--;
+				}
 				CursurDisplay(CursurIndex);
 				break;
 			case 5:
-				CursurIndex--;
+				if(ParentActivity._CheckModel.GetMCUVersion(CAN1Comm.Get_ComponentBasicInformation_1698_PGN65330()) == CheckModel.MODEL_940
+				|| ParentActivity._CheckModel.GetMCUVersion(CAN1Comm.Get_ComponentBasicInformation_1698_PGN65330()) == CheckModel.MODEL_935){
+					CursurIndex = 2;
+				}else{
+					CursurIndex--;
+				}
 				CursurDisplay(CursurIndex);
 				break;
 			default:
@@ -229,15 +258,30 @@ public class MenuModeHYDFragment extends MenuBodyList_ParentFragment{
 				CursurDisplay(CursurIndex);
 				break;
 			case 2:
-				CursurIndex++;
+				if(ParentActivity._CheckModel.GetMCUVersion(CAN1Comm.Get_ComponentBasicInformation_1698_PGN65330()) == CheckModel.MODEL_940
+				|| ParentActivity._CheckModel.GetMCUVersion(CAN1Comm.Get_ComponentBasicInformation_1698_PGN65330()) == CheckModel.MODEL_935){
+					CursurIndex = 1;
+				}else{
+					CursurIndex++;
+				}
 				CursurDisplay(CursurIndex);
 				break;
 			case 3:
-				CursurIndex++;
+				if(ParentActivity._CheckModel.GetMCUVersion(CAN1Comm.Get_ComponentBasicInformation_1698_PGN65330()) == CheckModel.MODEL_940
+				|| ParentActivity._CheckModel.GetMCUVersion(CAN1Comm.Get_ComponentBasicInformation_1698_PGN65330()) == CheckModel.MODEL_935){
+					CursurIndex = 1;
+				}else{
+					CursurIndex++;
+				}
 				CursurDisplay(CursurIndex);
 				break;
 			case 4:
-				CursurIndex++;
+				if(ParentActivity._CheckModel.GetMCUVersion(CAN1Comm.Get_ComponentBasicInformation_1698_PGN65330()) == CheckModel.MODEL_940
+				|| ParentActivity._CheckModel.GetMCUVersion(CAN1Comm.Get_ComponentBasicInformation_1698_PGN65330()) == CheckModel.MODEL_935){
+					CursurIndex = 1;
+				}else{
+					CursurIndex++;
+				}
 				CursurDisplay(CursurIndex);
 				break;
 			case 5:

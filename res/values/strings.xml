@@ -160,6 +160,7 @@
     <string name="HYD">HYD.</string>
     <string name="ETC">ETC.</string>
     <string name="CCO_Mode">C.C.O. Mode</string>
+    <string name="ICCO_Mode">I.C.C.O. Mode</string>
     <string name="Shift_Mode">Shift Mode</string>
     <string name="Kick_Down">Kick Down</string>
     <string name="Engine_Speed">Engine Speed</string>

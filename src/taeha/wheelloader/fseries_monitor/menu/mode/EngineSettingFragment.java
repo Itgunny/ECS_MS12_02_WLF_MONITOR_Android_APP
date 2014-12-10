@@ -6,6 +6,7 @@ import taeha.wheelloader.fseries_monitor.animation.DisappearAnimation;
 import taeha.wheelloader.fseries_monitor.animation.MainBodyShiftAnimation;
 import taeha.wheelloader.fseries_monitor.animation.LeftRightShiftAnimation;
 import taeha.wheelloader.fseries_monitor.main.CAN1CommManager;
+import taeha.wheelloader.fseries_monitor.main.CheckModel;
 import taeha.wheelloader.fseries_monitor.main.Home;
 import taeha.wheelloader.fseries_monitor.main.ParentFragment;
 import taeha.wheelloader.fseries_monitor.main.R;
@@ -98,11 +99,17 @@ public class EngineSettingFragment extends MenuBodyList_ParentFragment{
 		// TODO Auto-generated method stub
 		setClickableList1(true);
 		setClickableList2(true);
-		setClickableList3(true);
+		
 
 		setListTitle1(ParentActivity.getResources().getString(string.Engine_Mode));
 		setListTitle2(ParentActivity.getResources().getString(string.Warming_Up));
-		setListTitle3(ParentActivity.getResources().getString(string.Engine_Speed));
+		if(CAN1Comm.Get_ManufacturerCode_1700_PGN65330_ECM() == CheckModel.STATE_MANUFACTURERCODE_SCANIA){
+			setClickableList3(false);
+		}else{
+			setClickableList3(true);
+			setListTitle3(ParentActivity.getResources().getString(string.Engine_Speed));
+		}
+	
 	}
 
 	//////////////////////////////////////////////////////////////////////
@@ -197,7 +204,11 @@ public class EngineSettingFragment extends MenuBodyList_ParentFragment{
 			
 			break;
 		case 1:
-			CursurIndex = 3;
+			if(CAN1Comm.Get_ManufacturerCode_1700_PGN65330_ECM() == CheckModel.STATE_MANUFACTURERCODE_SCANIA){
+				CursurIndex = 2;
+			}else{
+				CursurIndex = 3;
+			}
 			CursurDisplay(CursurIndex);
 			break;
 		case 2:
@@ -222,8 +233,11 @@ public class EngineSettingFragment extends MenuBodyList_ParentFragment{
 			CursurDisplay(CursurIndex);
 			break;
 		case 2:
-			CursurIndex++;
-			CursurDisplay(CursurIndex);
+			if(CAN1Comm.Get_ManufacturerCode_1700_PGN65330_ECM() == CheckModel.STATE_MANUFACTURERCODE_SCANIA){
+				CursurIndex = 1;
+			}else{
+				CursurIndex++;
+			}
 			break;
 		case 3:
 			CursurIndex = 1;

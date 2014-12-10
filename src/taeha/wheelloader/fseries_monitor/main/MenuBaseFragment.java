@@ -1174,6 +1174,9 @@ public class MenuBaseFragment extends ParentFragment{
 		case Home.SCREEN_STATE_MENU_MODE_ENGINETM_CCOMODE:
 			ParentActivity._CCoModePopup.ClickLeft();
 			break;
+		case Home.SCREEN_STATE_MENU_MODE_ENGINETM_ICCOMODE:
+			ParentActivity._ICCOModePopup.ClickLeft();
+			break;
 		case Home.SCREEN_STATE_MENU_MODE_ENGINETM_SHIFTMODE:
 			ParentActivity._ShiftModePopup.ClickLeft();
 			break;
@@ -1409,6 +1412,9 @@ public class MenuBaseFragment extends ParentFragment{
 		case Home.SCREEN_STATE_MENU_MODE_ENGINETM_CCOMODE:
 			ParentActivity._CCoModePopup.ClickRight();
 			break;
+		case Home.SCREEN_STATE_MENU_MODE_ENGINETM_ICCOMODE:
+			ParentActivity._ICCOModePopup.ClickRight();
+			break;
 		case Home.SCREEN_STATE_MENU_MODE_ENGINETM_SHIFTMODE:
 			ParentActivity._ShiftModePopup.ClickRight();
 			break;
@@ -1643,6 +1649,9 @@ public class MenuBaseFragment extends ParentFragment{
 		case Home.SCREEN_STATE_MENU_MODE_ENGINETM_CCOMODE:
 			ParentActivity._CCoModePopup.ClickESC();
 			break;
+		case Home.SCREEN_STATE_MENU_MODE_ENGINETM_ICCOMODE:
+			ParentActivity._ICCOModePopup.ClickESC();
+			break;
 		case Home.SCREEN_STATE_MENU_MODE_ENGINETM_SHIFTMODE:
 			ParentActivity._ShiftModePopup.ClickESC();
 			break;
@@ -1876,6 +1885,9 @@ public class MenuBaseFragment extends ParentFragment{
 			break;
 		case Home.SCREEN_STATE_MENU_MODE_ENGINETM_CCOMODE:
 			ParentActivity._CCoModePopup.ClickEnter();
+			break;
+		case Home.SCREEN_STATE_MENU_MODE_ENGINETM_ICCOMODE:
+			ParentActivity._ICCOModePopup.ClickEnter();
 			break;
 		case Home.SCREEN_STATE_MENU_MODE_ENGINETM_SHIFTMODE:
 			ParentActivity._ShiftModePopup.ClickEnter();

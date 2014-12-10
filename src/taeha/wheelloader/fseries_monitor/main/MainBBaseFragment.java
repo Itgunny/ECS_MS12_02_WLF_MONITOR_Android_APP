@@ -1422,12 +1422,18 @@ public class MainBBaseFragment extends ParentFragment{
 			showDetentAnimation();
 			break;
 		case CAN1CommManager.FINEMODULATION:
-			if(ParentActivity.AnimationRunningFlag == true)
-				return;
-			if(ParentActivity.ScreenIndex != ParentActivity.SCREEN_STATE_MAIN_B_KEY_FINEMODULATION)
-				showFineModulationAnimation();
-			else
-				_MainBKeyFineModulationFragment.ClickHardKey();
+			if(ParentActivity._CheckModel.GetMCUVersion(CAN1Comm.Get_ComponentBasicInformation_1698_PGN65330()) == CheckModel.MODEL_940
+			|| ParentActivity._CheckModel.GetMCUVersion(CAN1Comm.Get_ComponentBasicInformation_1698_PGN65330()) == CheckModel.MODEL_935){
+				
+			}else{
+				if(ParentActivity.AnimationRunningFlag == true)
+					return;
+				if(ParentActivity.ScreenIndex != ParentActivity.SCREEN_STATE_MAIN_B_KEY_FINEMODULATION)
+					showFineModulationAnimation();
+				else
+					_MainBKeyFineModulationFragment.ClickHardKey();
+			}
+
 			break;
 		case CAN1CommManager.CAMERA:
 			if(ParentActivity.AnimationRunningFlag == true)

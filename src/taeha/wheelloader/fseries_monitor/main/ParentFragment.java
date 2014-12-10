@@ -36,6 +36,8 @@ public abstract class ParentFragment extends Fragment{
 	private  int ThreadSleepTime;
 
 	static public int CursurIndex = 1;
+	
+	boolean ThreadRunFlag;
 	/////////////////////////////////////////////////////////////////////	
 	
 	///////////////////ANIMATION/////////////////////////////////////////
@@ -49,7 +51,7 @@ public abstract class ParentFragment extends Fragment{
 	abstract protected void UpdateUI();
 	protected void InitValuables(){
 		Log.d(TAG,"InitValuables");
-		ThreadSleepTime = 50;
+		ThreadSleepTime = 200;
 	
 		CAN1Comm = CAN1CommManager.getInstance();	
 		
@@ -95,11 +97,11 @@ public abstract class ParentFragment extends Fragment{
 		@Override
 		public void run() {
 			try{
-				while(!fragmentRef.get().threadRead.currentThread().isInterrupted())
+				while(!fragmentRef.get().threadRead.currentThread().isInterrupted() && ThreadRunFlag == true)
 				{
 					fragmentRef.get().GetDataFromNative();
 					fragmentRef.get().DisplayUI();
-					Thread.sleep(fragmentRef.get().GetThreadSleepTime());		
+					Thread.sleep(fragmentRef.get().GetThreadSleepTime());
 				}
 			}
 			catch(InterruptedException ie){
@@ -114,6 +116,7 @@ public abstract class ParentFragment extends Fragment{
 	
 	public void StopReadThread(){
 		try {
+			ThreadRunFlag = false;
 			threadRead.interrupt();
 		} catch (RuntimeException e) {
 			// TODO: handle exception
@@ -122,6 +125,7 @@ public abstract class ParentFragment extends Fragment{
 	}
 	public void StartReadThread(){
 		try {
+			ThreadRunFlag = true;
 			threadRead.start();
 		} catch (RuntimeException e) {
 			// TODO: handle exception

@@ -10,6 +10,7 @@ import taeha.wheelloader.fseries_monitor.animation.DisappearAnimation;
 import taeha.wheelloader.fseries_monitor.animation.MainBodyShiftAnimation;
 import taeha.wheelloader.fseries_monitor.animation.LeftRightShiftAnimation;
 import taeha.wheelloader.fseries_monitor.main.CAN1CommManager;
+import taeha.wheelloader.fseries_monitor.main.CheckModel;
 import taeha.wheelloader.fseries_monitor.main.Home;
 import taeha.wheelloader.fseries_monitor.main.ParentFragment;
 import taeha.wheelloader.fseries_monitor.main.R;
@@ -264,6 +265,7 @@ public class FaultHistoryLoggedFragment extends ParentFragment{
 		// TODO Auto-generated method stub
 		ErrListDisplay();
 		ErrorNumberDisplay();
+		EHCUShow();
 	}
 	/////////////////////////////////////////////////////////////////////	
 	public void ClickOK(){
@@ -317,6 +319,14 @@ public class FaultHistoryLoggedFragment extends ParentFragment{
 		ParentActivity.showLoggedFaultDelete();
 	}
 	/////////////////////////////////////////////////////////////////////
+	public void EHCUShow(){
+		if(ParentActivity._CheckModel.GetMCUVersion(CAN1Comm.Get_ComponentBasicInformation_1698_PGN65330()) == CheckModel.MODEL_940
+		|| ParentActivity._CheckModel.GetMCUVersion(CAN1Comm.Get_ComponentBasicInformation_1698_PGN65330()) == CheckModel.MODEL_935){
+			radioEHCU.setVisibility(View.GONE);
+		}else{
+			radioEHCU.setVisibility(View.VISIBLE);
+		}
+	}
 	public void ASDisplay(String str){
 		textViewAS.setText(ParentActivity.getResources().getString(string.AS) + " " + str);
 	}

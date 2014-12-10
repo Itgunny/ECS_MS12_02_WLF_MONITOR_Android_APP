@@ -1,5 +1,7 @@
 package taeha.wheelloader.fseries_monitor.main;
 
+import android.util.Log;
+
 
 public class CheckModel {
 	/////////////////////CONSTANT/////////////////////////////////
@@ -15,8 +17,11 @@ public class CheckModel {
 	public static final int MODEL_970	= 0x00010000;
 	public static final int MODEL_980	= 0x00100000;
 	
-	public static final int	TCU_4SPEED	= 0X00000000;
-	public static final int	TCU_5SPEED	= 0X00000001;
+	public static final int	TCU_4SPEED	= 0x00000000;
+	public static final int	TCU_5SPEED	= 0x00000001;
+	
+	public static final int STATE_MANUFACTURERCODE_CUMMINS					= 112;
+	public static final int STATE_MANUFACTURERCODE_SCANIA					= 116;
 	/////////////////////////////////////////////////////////////////
 	
 	/////////////////////VARIABLE//////////////////////////////////
@@ -31,6 +36,7 @@ public class CheckModel {
 		boolean bAsterisk = false;
 		int n100,n10,n1;
 		int MCUModelNum;
+		Log.d(TAG,"GetMCUVersion 0");
 		////////////// Find Serial Number/////////////
 		for(int i = 4; i < 20; i++){
 			if(BasicInfo[i] != 0x2A)
@@ -43,7 +49,7 @@ public class CheckModel {
 				break;
 			}
 		}
-		
+		Log.d(TAG,"GetMCUVersion 1");
 		
 		/////////////////////////////////////////////
 		
@@ -59,6 +65,7 @@ public class CheckModel {
 				break;
 			}
 		}
+		Log.d(TAG,"GetMCUVersion 2");
 		/////////////////////////////////////////////
 		int[] Model;
 		Model = new int [Index2];
@@ -95,12 +102,62 @@ public class CheckModel {
 				return NO_MODEL;
 						
 		}
-		
 	}
 	
-	public int GetTCUModel(byte[] BasicInfo){
-		
-		return TCU_5SPEED;
+	public String GetTCUEST37APartNumber(byte[] softwareID){
+		int Index = 0;
+		boolean bAsterisk = false;
+		try {
+			for(int i = 1; i < 13; i++){
+				if(softwareID[i] == 0x2A){
+					bAsterisk = true;
+					break;
+				}else{
+					Index++;
+				}
+			}
+			if(Index > 1 && bAsterisk == true){
+				char[] cString;
+				String strString;
+				cString = new char[Index];
+				for(int i = 0; i < Index; i++){
+					cString[i] = (char) softwareID[1 + i];
+				}
+				strString = new String(cString,0,cString.length);
+				return strString;
+			}else{
+				return "";
+			
+			}
+		} catch (java.lang.ArrayIndexOutOfBoundsException e) {
+			// TODO: handle exception
+			Log.e(TAG,"ArrayIndexOutOfBoundsException");
+		}
+		return "";
 	}
+	
+	public int GetTCUModel(byte[] softwareID){
+		String strModel;
+		strModel = GetTCUEST37APartNumber(softwareID);
+		if(strModel.equals("6057018671") == true){
+			return TCU_4SPEED;
+		}else if(strModel.equals("6057018608") == true){
+			return TCU_4SPEED;
+		}else if(strModel.equals("6057018554") == true){
+			return TCU_4SPEED;
+		}else if(strModel.equals("6057018641") == true){
+			return TCU_4SPEED;
+		}else if(strModel.equals("6057018610") == true){
+			return TCU_4SPEED;
+		}else if(strModel.equals("6057018633") == true){
+			return TCU_4SPEED;
+		}else if(strModel.equals("6057018646") == true){
+			return TCU_4SPEED;
+		}else{
+			return TCU_5SPEED;
+		}
+	
+	}
+	
 	
 }

@@ -5,6 +5,7 @@ import taeha.wheelloader.fseries_monitor.animation.ChangeFragmentAnimation;
 import taeha.wheelloader.fseries_monitor.animation.DisappearAnimation;
 import taeha.wheelloader.fseries_monitor.animation.MainBodyShiftAnimation;
 import taeha.wheelloader.fseries_monitor.animation.LeftRightShiftAnimation;
+import taeha.wheelloader.fseries_monitor.main.CheckModel;
 import taeha.wheelloader.fseries_monitor.main.Home;
 import taeha.wheelloader.fseries_monitor.main.ParentFragment;
 import taeha.wheelloader.fseries_monitor.main.R;
@@ -88,13 +89,20 @@ public class MenuMonitoringFragment extends MenuBodyList_ParentFragment{
 		setClickableList2(true);
 		setClickableList3(true);
 		setClickableList4(true);
-		setClickableList5(true);
+		
 		
 		setListTitle1(ParentActivity.getResources().getString(string.Machine_Monitoring));
 		setListTitle2(ParentActivity.getResources().getString(string.Operation_History));
 		setListTitle3(ParentActivity.getResources().getString(string.Fault_History));
 		setListTitle4(ParentActivity.getResources().getString(string.Version_Information));
-		setListTitle5(ParentActivity.getResources().getString(string.EHCU_IO_Information));
+		if(ParentActivity._CheckModel.GetMCUVersion(CAN1Comm.Get_ComponentBasicInformation_1698_PGN65330()) == CheckModel.MODEL_940
+		|| ParentActivity._CheckModel.GetMCUVersion(CAN1Comm.Get_ComponentBasicInformation_1698_PGN65330()) == CheckModel.MODEL_935){
+			setClickableList5(false);
+		}else{
+			setClickableList5(true);
+			setListTitle5(ParentActivity.getResources().getString(string.EHCU_IO_Information));
+		}
+		
 	}
 
 	//////////////////////////////////////////////////////////////////////
@@ -173,7 +181,12 @@ public class MenuMonitoringFragment extends MenuBodyList_ParentFragment{
 			ParentActivity._MenuBaseFragment._MenuListLeftFragment.ClickMode();
 			break;
 		case 1:
-			CursurIndex = 5;
+			if(ParentActivity._CheckModel.GetMCUVersion(CAN1Comm.Get_ComponentBasicInformation_1698_PGN65330()) == CheckModel.MODEL_940
+			|| ParentActivity._CheckModel.GetMCUVersion(CAN1Comm.Get_ComponentBasicInformation_1698_PGN65330()) == CheckModel.MODEL_935){
+				CursurIndex = 4;
+			}else{
+				CursurIndex = 5;
+			}
 			CursurDisplay(CursurIndex);
 			break;
 		case 2:
@@ -218,7 +231,13 @@ public class MenuMonitoringFragment extends MenuBodyList_ParentFragment{
 			CursurDisplay(CursurIndex);
 			break;
 		case 4:
-			CursurIndex++;
+			if(ParentActivity._CheckModel.GetMCUVersion(CAN1Comm.Get_ComponentBasicInformation_1698_PGN65330()) == CheckModel.MODEL_940
+			|| ParentActivity._CheckModel.GetMCUVersion(CAN1Comm.Get_ComponentBasicInformation_1698_PGN65330()) == CheckModel.MODEL_935){
+				CursurIndex = 1;
+			}else{
+				CursurIndex++;
+			}
+			
 			CursurDisplay(CursurIndex);
 			break;
 		case 5:

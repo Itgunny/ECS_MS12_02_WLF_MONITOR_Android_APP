@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import taeha.wheelloader.fseries_monitor.animation.TextViewXAxisFlipAnimation;
 import taeha.wheelloader.fseries_monitor.main.CAN1CommManager;
@@ -29,6 +30,8 @@ public class MainBRightDownTMFragment extends ParentFragment{
 	ImageButton imgbtnCCOMode;
 	ImageButton imgbtnShiftMode;
 	ImageButton imgbtnTCLockUp;
+	
+	RelativeLayout layoutTCLockUp;
 	//////////////////////////////////////////////////
 	
 	//VALUABLE////////////////////////////////////////
@@ -91,6 +94,7 @@ public class MainBRightDownTMFragment extends ParentFragment{
 		imgbtnShiftMode = (ImageButton)mRoot.findViewById(R.id.imageButton_rightdown_main_b_tm_shiftmode);
 		imgbtnTCLockUp = (ImageButton)mRoot.findViewById(R.id.imageButton_rightdown_main_b_tm_tclockup);
 		
+		layoutTCLockUp = (RelativeLayout)mRoot.findViewById(R.id.RelativeLayout_rightdown_main_b_tm_tclockup);
 	}
 	
 	protected void InitValuables() {
@@ -148,8 +152,22 @@ public class MainBRightDownTMFragment extends ParentFragment{
 		TMCCOModeDisplay(CCOMode);
 		TMShiftModeDisplay(ShiftMode);
 		TMTCLockUpDisplay(TCLockUp);
+		TCLockUpShow();
 	}
 	/////////////////////////////////////////////////////////////////////	
+	public void TCLockUpShow(){
+		if(ParentActivity._CheckModel.GetMCUVersion(CAN1Comm.Get_ComponentBasicInformation_1698_PGN65330()) == CheckModel.MODEL_935
+		|| ParentActivity._CheckModel.GetMCUVersion(CAN1Comm.Get_ComponentBasicInformation_1698_PGN65330()) == CheckModel.MODEL_940){
+			layoutTCLockUp.setVisibility(View.GONE);
+			imgbtnTCLockUp.setClickable(false);
+		}else if(ParentActivity._CheckModel.GetTCUModel(CAN1Comm.Get_ComponentBasicInformation_1698_PGN65330_TCU()) == CheckModel.TCU_4SPEED){
+			layoutTCLockUp.setVisibility(View.GONE);
+			imgbtnTCLockUp.setClickable(false);
+		}else{
+			layoutTCLockUp.setVisibility(View.VISIBLE);
+			imgbtnTCLockUp.setClickable(true);
+		}
+	}
 	public void TMCCOModeTitleDisplay(int Model){
 		if(Model == CheckModel.MODEL_980){
 			TMCCOModeTitleDataAnimation.FlipAnimation(textViewCCOModeTitle,getResources().getString(string.ICCO_MODE));
@@ -225,11 +243,16 @@ public class MainBRightDownTMFragment extends ParentFragment{
 			return;
 		else
 			ParentActivity.StartAnimationRunningTimer();
+		
 		ParentActivity._MainBBaseFragment._MainBCenterTMFragment = new MainBCenterTMFragment();
 		ParentActivity._MainBBaseFragment._MainBRightDownTMCCOModeFragment = new MainBRightDownTMCCOModeFragment();
 		ParentActivity._MainBBaseFragment._MainBodyShiftAnimation.StartShiftRightDownAnimation();
 		ParentActivity._MainBBaseFragment.CenterAnimation.StartChangeAnimation(ParentActivity._MainBBaseFragment._MainBCenterTMFragment);
-		ParentActivity._MainBBaseFragment.RightDownChangeAnimation.StartChangeAnimation(ParentActivity._MainBBaseFragment._MainBRightDownTMCCOModeFragment);
+		
+		if(ParentActivity._CheckModel.GetMCUVersion(CAN1Comm.Get_ComponentBasicInformation_1698_PGN65330()) == CheckModel.MODEL_980)
+			ParentActivity._MainBBaseFragment.RightDownChangeAnimation.StartChangeAnimation(ParentActivity._MainBBaseFragment._MainBRightDownTMICCOModeFragment);
+		else
+			ParentActivity._MainBBaseFragment.RightDownChangeAnimation.StartChangeAnimation(ParentActivity._MainBBaseFragment._MainBRightDownTMCCOModeFragment);
 
 		ParentActivity._MainBBaseFragment._RightUpDisappearAnimation.StartAnimation();
 		ParentActivity._MainBBaseFragment._LeftUpDisappearAnimation.StartAnimation();

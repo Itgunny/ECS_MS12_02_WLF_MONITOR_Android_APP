@@ -14,6 +14,7 @@ import taeha.wheelloader.fseries_monitor.popup.CCOModePopup;
 import taeha.wheelloader.fseries_monitor.popup.EngineAutoShutdownCountPopup;
 import taeha.wheelloader.fseries_monitor.popup.EngineModePopup;
 import taeha.wheelloader.fseries_monitor.popup.EngineWarmingUpPopup;
+import taeha.wheelloader.fseries_monitor.popup.ICCOModePopup;
 import taeha.wheelloader.fseries_monitor.popup.KickDownPopup;
 import taeha.wheelloader.fseries_monitor.popup.LoggedFaultDeletePopup;
 import taeha.wheelloader.fseries_monitor.popup.MaintReplacePopup;
@@ -57,9 +58,10 @@ public class Home extends Activity {
 	//
 	public static final int VERSION_HIGH 		= 1;
 	public static final int VERSION_LOW 		= 0;
-	public static final int VERSION_SUB_HIGH 	= 0;
-	public static final int VERSION_SUB_LOW 	= 0;
-	//
+	public static final int VERSION_SUB_HIGH 	= 2;
+	public static final int VERSION_SUB_LOW 	= 3;
+	////1.0.2.3
+	// UI B 안 최초 적용 2014.12.10
 	//////////////////////////////////////////////////////////////////////////////////////
 	
 	// TAG
@@ -130,6 +132,7 @@ public class Home extends Activity {
 	public  static final int SCREEN_STATE_MENU_MODE_ENGINETM_ENGINESETTING_END				= 0x21111FFF;
 	public  static final int SCREEN_STATE_MENU_MODE_ENGINETM_KICKDOWN						= 0x21120000;
 	public  static final int SCREEN_STATE_MENU_MODE_ENGINETM_CCOMODE						= 0x21130000;
+	public  static final int SCREEN_STATE_MENU_MODE_ENGINETM_ICCOMODE						= 0x21131000;
 	public  static final int SCREEN_STATE_MENU_MODE_ENGINETM_SHIFTMODE						= 0x21140000;
 	public  static final int SCREEN_STATE_MENU_MODE_ENGINETM_TCLOCKUP						= 0x21150000;
 	public  static final int SCREEN_STATE_MENU_MODE_ENGINETM_END							= 0x211FFFFF;
@@ -276,7 +279,7 @@ public class Home extends Activity {
 	public  static final int UNIT_TEMP_C 			= 0;
 	
 	public  static final int UNIT_WEIGHT_TON 		= 0;
-	public  static final int UNIT_WEIGHT_LB 			= 1;
+	public  static final int UNIT_WEIGHT_LB 		= 1;
 	
 	public  static final int UNIT_PRESSURE_BAR 		= 0;
 	public  static final int UNIT_PRESSURE_MPA 		= 1;
@@ -292,10 +295,10 @@ public class Home extends Activity {
 	public 	static final int BRIGHTNESS_MIN			= 0;
 	public 	static final int BRIGHTNESS_MAX			= 7;
 	
-	public static final int STATE_INTERNAL_SPK			= 0;
-	public static final int STATE_EXTERNAL_AUX	 		= 1;
+	public static final int STATE_INTERNAL_SPK		= 0;
+	public static final int STATE_EXTERNAL_AUX	 	= 1;
 	
-	public static final int MAX_AS_LENGTH = 21;
+	public static final int MAX_AS_LENGTH 			= 21;
 	////////////////////////////////////////////////////
 	
 	//Resource//////////////////////////////////////////
@@ -373,6 +376,7 @@ public class Home extends Activity {
 	public QuickCouplerPopupLocking2 		_QuickCouplerPopupLocking2;
 	public QuickCouplerPopupUnlocking2 		_QuickCouplerPopupUnlocking2;
 	public CCOModePopup						_CCoModePopup;
+	public ICCOModePopup					_ICCOModePopup;
 	public ShiftModePopup 					_ShiftModePopup;
 	public KickDownPopup 					_KickDownPopup;
 	public TCLockUpPopup 					_TCLockUpPopup;
@@ -548,6 +552,7 @@ public class Home extends Activity {
 		_QuickCouplerPopupLocking2 = new QuickCouplerPopupLocking2(this);
 		_QuickCouplerPopupUnlocking2 = new QuickCouplerPopupUnlocking2(this);
 		_CCoModePopup = new CCOModePopup(this);
+		_ICCOModePopup = new ICCOModePopup(this);
 		_ShiftModePopup = new ShiftModePopup(this);
 		_KickDownPopup = new KickDownPopup(this);
 		_TCLockUpPopup = new TCLockUpPopup(this);
@@ -1204,6 +1209,19 @@ public class Home extends Activity {
 		}
 		
 		HomeDialog = _CCoModePopup;
+		HomeDialog.show();
+	}
+	public void showICCoMode(){
+		if(AnimationRunningFlag == true)
+			return;
+		else
+			StartAnimationRunningTimer();
+		if(HomeDialog != null){
+			HomeDialog.dismiss();
+			HomeDialog = null;
+		}
+		
+		HomeDialog = _ICCOModePopup;
 		HomeDialog.show();
 	}
 	public void showShiftMode(){

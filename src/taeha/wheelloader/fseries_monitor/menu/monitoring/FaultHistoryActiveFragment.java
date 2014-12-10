@@ -10,6 +10,7 @@ import taeha.wheelloader.fseries_monitor.animation.DisappearAnimation;
 import taeha.wheelloader.fseries_monitor.animation.MainBodyShiftAnimation;
 import taeha.wheelloader.fseries_monitor.animation.LeftRightShiftAnimation;
 import taeha.wheelloader.fseries_monitor.main.CAN1CommManager;
+import taeha.wheelloader.fseries_monitor.main.CheckModel;
 import taeha.wheelloader.fseries_monitor.main.Home;
 import taeha.wheelloader.fseries_monitor.main.ParentFragment;
 import taeha.wheelloader.fseries_monitor.main.R;
@@ -173,6 +174,8 @@ public class FaultHistoryActiveFragment extends ParentFragment{
 		listView = (ListView)mRoot.findViewById(R.id.listView_menu_body_monitoring_fault_active_list);
 		adapter = new IconTextListAdapterFault(ParentActivity);
 		adapter.clearItem();
+
+
 	}
 
 	protected void InitValuables() {
@@ -304,8 +307,10 @@ public class FaultHistoryActiveFragment extends ParentFragment{
 		DTCTotalEngine = CAN1Comm.Get_gErr_Ecu_Total();
 		DTCTotalTM = CAN1Comm.Get_gErr_Tcu_Total();
 		
+		//TEMP
 		FATCSettingTemperatureCelsius = CAN1Comm.Get_FATCSettingTemperatureCelsius_3408_PGN65373();
 		FATCSettingTemperatureFahrenheit = CAN1Comm.Get_FATCSettingTemperatureFahrenheit_3409_PGN65373();
+		//DTC
 		Ambienttemperaturesensoropen = CAN1Comm.Get_Ambienttemperaturesensoropen_PGN65373();
 		Ambienttemperaturesensorshort = CAN1Comm.Get_Ambienttemperaturesensorshort_PGN65373();
 		Incabtemperaturesensoropen = CAN1Comm.Get_Incabtemperaturesensoropen_PGN65373();
@@ -323,24 +328,23 @@ public class FaultHistoryActiveFragment extends ParentFragment{
 		WaterValveSensorError = CAN1Comm.Get_WaterValveSensorError_PGN65373();
 		GPSCircuitError = CAN1Comm.Get_GPSCircuitError_PGN65373();
 		
-		Err_ACU[0] = CAN1Comm.Get_FATCSettingTemperatureCelsius_3408_PGN65373();
-		Err_ACU[1] = CAN1Comm.Get_FATCSettingTemperatureFahrenheit_3409_PGN65373();
-		Err_ACU[2] = CAN1Comm.Get_Ambienttemperaturesensoropen_PGN65373();
-		Err_ACU[3] = CAN1Comm.Get_Ambienttemperaturesensorshort_PGN65373();
-		Err_ACU[4] = CAN1Comm.Get_Incabtemperaturesensoropen_PGN65373();
-		Err_ACU[5] = CAN1Comm.Get_Incabtemperaturesensorshort_PGN65373();
-		Err_ACU[6] = CAN1Comm.Get_Evaptemperaturesensoropen_PGN65373();
-		Err_ACU[7] = CAN1Comm.Get_Evaptemperaturesensorshort_PGN65373();
-		Err_ACU[8] = CAN1Comm.Get_Mode1actuatoropenshort_PGN65373();
-		Err_ACU[9] = CAN1Comm.Get_Mode1actuatordrivecircuitmalfunction_PGN65373();
-		Err_ACU[10] = CAN1Comm.Get_Intakeactuatoropenshort_PGN65373();
-		Err_ACU[11] = CAN1Comm.Get_Intakeactuatordrivecircuitmalfunction_PGN65373();
-		Err_ACU[12] = CAN1Comm.Get_Temperatureactuatoropenshort_PGN65373();
-		Err_ACU[13] = CAN1Comm.Get_Temperatureactuatordrivecircuitmalfunction_PGN65373();
-		Err_ACU[14] = CAN1Comm.Get_Ducttemperaturesensoropen_PGN65373();
-		Err_ACU[15] = CAN1Comm.Get_Ducttemperaturesensorshort_PGN65373();
-		Err_ACU[16] = CAN1Comm.Get_WaterValveSensorError_PGN65373();
-		Err_ACU[17] = CAN1Comm.Get_GPSCircuitError_PGN65373();
+
+		Err_ACU[0] = CAN1Comm.Get_Ambienttemperaturesensoropen_PGN65373();
+		Err_ACU[1] = CAN1Comm.Get_Ambienttemperaturesensorshort_PGN65373();
+		Err_ACU[2] = CAN1Comm.Get_Incabtemperaturesensoropen_PGN65373();
+		Err_ACU[3] = CAN1Comm.Get_Incabtemperaturesensorshort_PGN65373();
+		Err_ACU[4] = CAN1Comm.Get_Evaptemperaturesensoropen_PGN65373();
+		Err_ACU[5] = CAN1Comm.Get_Evaptemperaturesensorshort_PGN65373();
+		Err_ACU[6] = CAN1Comm.Get_Mode1actuatoropenshort_PGN65373();
+		Err_ACU[7] = CAN1Comm.Get_Mode1actuatordrivecircuitmalfunction_PGN65373();
+		Err_ACU[8] = CAN1Comm.Get_Intakeactuatoropenshort_PGN65373();
+		Err_ACU[9] = CAN1Comm.Get_Intakeactuatordrivecircuitmalfunction_PGN65373();
+		Err_ACU[10] = CAN1Comm.Get_Temperatureactuatoropenshort_PGN65373();
+		Err_ACU[11] = CAN1Comm.Get_Temperatureactuatordrivecircuitmalfunction_PGN65373();
+		Err_ACU[12] = CAN1Comm.Get_Ducttemperaturesensoropen_PGN65373();
+		Err_ACU[13] = CAN1Comm.Get_Ducttemperaturesensorshort_PGN65373();
+		Err_ACU[14] = CAN1Comm.Get_WaterValveSensorError_PGN65373();
+		Err_ACU[15] = CAN1Comm.Get_GPSCircuitError_PGN65373();
 		
 		DTCTotalACU = CheckACUDTCNumber();
 	}
@@ -350,6 +354,8 @@ public class FaultHistoryActiveFragment extends ParentFragment{
 		// TODO Auto-generated method stub
 		ErrListDisplay();
 		ErrorNumberDisplay();
+		EHCUShow();
+		
 	}
 	/////////////////////////////////////////////////////////////////////	
 	public void ClickOK(){
@@ -422,6 +428,14 @@ public class FaultHistoryActiveFragment extends ParentFragment{
 		DetailEnable(false);
 	}
 	/////////////////////////////////////////////////////////////////////
+	public void EHCUShow(){
+		if(ParentActivity._CheckModel.GetMCUVersion(CAN1Comm.Get_ComponentBasicInformation_1698_PGN65330()) == CheckModel.MODEL_940
+		|| ParentActivity._CheckModel.GetMCUVersion(CAN1Comm.Get_ComponentBasicInformation_1698_PGN65330()) == CheckModel.MODEL_935){
+			radioEHCU.setVisibility(View.GONE);
+		}else{
+			radioEHCU.setVisibility(View.VISIBLE);
+		}
+	}
 	public void ASDisplay(String str){
 		textViewAS.setText(ParentActivity.getResources().getString(string.AS) + " " + str);
 	}
@@ -458,12 +472,13 @@ public class FaultHistoryActiveFragment extends ParentFragment{
 	}
 	public void SetACUErrList(){
 		adapter.clearItem();
-		for(int i = 0; i < 18; i++){
+		for(int i = 0; i < 16; i++){
 			if(Err_ACU[i] == 1){
 				adapter.addItem(new IconTextItemFault(null,ParentActivity.getResources().getDrawable(R.drawable.menu_information_fault_down_btn), 
 						"No : " + Integer.toString(i), "", ""));
 			}
 		}
+		adapter.notifyDataSetChanged();
 	}
 	public void SetErrList(int NumofErr, int Mode){
 		int SPN = 0;
