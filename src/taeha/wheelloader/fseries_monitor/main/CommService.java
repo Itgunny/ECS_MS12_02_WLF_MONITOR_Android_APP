@@ -311,6 +311,10 @@ public class CommService extends Service{
 	public native int Get_ComponentCode_1699_PGN65330_TCU();
 	public native int Get_ManufacturerCode_1700_PGN65330_TCU();
 	public native byte[] Get_ComponentBasicInformation_1698_PGN65330_TCU();
+	//////RX_COMPONENT_IDENTIFICATION_ACU_65330///////
+	public native int Get_ComponentCode_1699_PGN65330_ACU();
+	public native int Get_ManufacturerCode_1700_PGN65330_ACU();
+	public native byte[] Get_ComponentBasicInformation_1698_PGN65330_ACU();
 	//////RX_TRIP_TIME_INFORMATION_65344///////
 	public native int Get_TripTime_849_PGN65344();
 	//////RX_MACHINE_SECURITY_STATUS_65348///////
@@ -380,6 +384,25 @@ public class CommService extends Service{
 	public native int Get_BarometricPressure_328_PGN65371();
 	public native int Get_EngineAirIntakePressure_337_PGN65371();
 	public native int Get_DEFTankLevel_362_PGN65371();
+	//////RX_AIR_CONDITIONER_STATUS_65373///////
+	public native int Get_FATCSettingTemperatureCelsius_3408_PGN65373();
+	public native int Get_FATCSettingTemperatureFahrenheit_3409_PGN65373();
+	public native int Get_Ambienttemperaturesensoropen_PGN65373();
+	public native int Get_Ambienttemperaturesensorshort_PGN65373();
+	public native int Get_Incabtemperaturesensoropen_PGN65373();
+	public native int Get_Incabtemperaturesensorshort_PGN65373();
+	public native int Get_Evaptemperaturesensoropen_PGN65373();
+	public native int Get_Evaptemperaturesensorshort_PGN65373();
+	public native int Get_Mode1actuatoropenshort_PGN65373();
+	public native int Get_Mode1actuatordrivecircuitmalfunction_PGN65373();
+	public native int Get_Intakeactuatoropenshort_PGN65373();
+	public native int Get_Intakeactuatordrivecircuitmalfunction_PGN65373();
+	public native int Get_Temperatureactuatoropenshort_PGN65373();
+	public native int Get_Temperatureactuatordrivecircuitmalfunction_PGN65373();
+	public native int Get_Ducttemperaturesensoropen_PGN65373();
+	public native int Get_Ducttemperaturesensorshort_PGN65373();
+	public native int Get_WaterValveSensorError_PGN65373();
+	public native int Get_GPSCircuitError_PGN65373();
 	//////RX_VEHICLE_DISTANCE_65389///////
 	public native int Get_TripDistance_600_PGN65389();
 	public native int Get_TotalVehicleDistance_601_PGN65389();
@@ -1117,7 +1140,10 @@ public class CommService extends Service{
 				
 				SoundPoolKeyButtonEnding.play(SoundIDEnding, fVolumeEnding, fVolumeEnding, 0, 0, 1);
 				break;
-
+			case CAN1CommManager.FN:
+				CAN1Comm.Callback_KeyButton(Data);
+				SoundPoolKeyButton.play(SoundID, fVolume, fVolume, 0, 0, 1);
+				break;
 			default:
 				if(GetScreenTopFlag() == true)
 				{

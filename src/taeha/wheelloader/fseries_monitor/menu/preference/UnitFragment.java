@@ -289,6 +289,10 @@ public class UnitFragment extends ParentFragment{
 		ParentActivity.UnitWeight = UnitWeight;
 		ParentActivity.UnitPressure = UnitPressure;
 		
+		CAN1Comm.Set_SpeedmeterUnitChange_PGN65327(UnitOdo);
+		CAN1Comm.TxCANToMCU(47);
+		CAN1Comm.Set_SpeedmeterUnitChange_PGN65327(3);
+		
 		SavePref();
 	}
 	public void ClickCancel(){

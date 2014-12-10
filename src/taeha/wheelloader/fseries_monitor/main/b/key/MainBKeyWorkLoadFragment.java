@@ -36,6 +36,7 @@ public class MainBKeyWorkLoadFragment extends ParentFragment{
 	
 	//VALUABLE////////////////////////////////////////
 	int WeighingSystemMode;
+	int WeighingDisplayMode;
 	//////////////////////////////////////////////////
 	
 	//ANIMATION///////////////////////////////////////
@@ -159,13 +160,14 @@ public class MainBKeyWorkLoadFragment extends ParentFragment{
 	protected void GetDataFromNative() {
 		// TODO Auto-generated method stub
 		WeighingSystemMode = CAN1Comm.Get_WeighingSystemAccumulationMode_1941_PGN65450();
+		WeighingDisplayMode = CAN1Comm.Get_WeighingDisplayMode1_1910_PGN65450();
 	}
 
 	@Override
 	protected void UpdateUI() {
 		// TODO Auto-generated method stub
 		WeighingSystemModeDisplay(WeighingSystemMode);
-		WeighingDisplayDisplay(ParentActivity.WeighingDisplayIndex);
+		WeighingDisplayDisplay(WeighingDisplayMode);
 		ErrorDetectionDisplay(ParentActivity.WeighingErrorDetect);
 	}
 	/////////////////////////////////////////////////////////////////////	
@@ -233,8 +235,8 @@ public class MainBKeyWorkLoadFragment extends ParentFragment{
 		CAN1Comm.Set_WeighingSystemAccumulationMode_1941_PGN61184_62(CAN1CommManager.DATA_STATE_WEIGHING_ACCUMULATION_AUTO);
 		CAN1Comm.TxCANToMCU(62);
 	
-		ParentActivity.WeighingDisplayIndex = CAN1CommManager.DATA_STATE_WEIGHINGDISPLAY_TOTAL_A;
-		CAN1Comm.Set_WeighingDisplayMode1_1910_PGN61184_62(ParentActivity.WeighingDisplayIndex);
+		WeighingDisplayMode = CAN1CommManager.DATA_STATE_WEIGHINGDISPLAY_TOTAL_A;
+		CAN1Comm.Set_WeighingDisplayMode1_1910_PGN61184_62(WeighingDisplayMode);
 		CAN1Comm.TxCANToMCU(62);
 		CAN1Comm.Set_WeighingDisplayMode1_1910_PGN61184_62(15);
 	
@@ -255,7 +257,6 @@ public class MainBKeyWorkLoadFragment extends ParentFragment{
 		SharedPreferences SharePref = ParentActivity.getSharedPreferences("Home", 0);
 		SharedPreferences.Editor edit = SharePref.edit();
 		edit.putInt("WeighingErrorDetect", ParentActivity.WeighingErrorDetect);
-		edit.putInt("WeighingDisplayIndex", ParentActivity.WeighingDisplayIndex);
 		edit.commit();
 		Log.d(TAG,"SavePref");
 	}

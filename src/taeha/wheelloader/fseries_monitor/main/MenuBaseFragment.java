@@ -1143,6 +1143,9 @@ public class MenuBaseFragment extends ParentFragment{
 		case CAN1CommManager.MENU:
 			_MenuListTitleFragment.ClickHome();
 			break;
+		case CAN1CommManager.FN:
+			Log.d(TAG,"Click FN");
+			break;
 		default:
 			break;
 		}
@@ -1242,6 +1245,18 @@ public class MenuBaseFragment extends ParentFragment{
 			break;
 		case Home.SCREEN_STATE_MENU_MONITORING_FAULTHISTORY_TOP:
 			_FaultHistoryFragment.ClickLeft();
+			break;
+		case Home.SCREEN_STATE_MENU_MONITORING_FAULTHISTORY_ACTIVE_TOP:
+			_FaultHistoryActiveFragment.ClickLeft();
+			break;
+		case Home.SCREEN_STATE_MENU_MONITORING_FAULTHISTORY_LOGGED_TOP:
+			_FaultHistoryLoggedFragment.ClickLeft();
+			break;
+		case Home.SCREEN_STATE_MENU_MONITORING_FAULTHISTORY_LOGGED_PW:
+			_FaultHistoryLoggedPasswordFragment.ClickLeft();
+			break;
+		case Home.SCREEN_STATE_MENU_MONITORING_FAULTHISTORY_LOGGED_DELETE:
+			ParentActivity._LoggedFaultDeletePopup.ClickLeft();
 			break;
 		case Home.SCREEN_STATE_MENU_MONITORING_VERSIONINFO_TOP:
 			_VersionInfoFragment.ClickLeft();
@@ -1466,6 +1481,18 @@ public class MenuBaseFragment extends ParentFragment{
 		case Home.SCREEN_STATE_MENU_MONITORING_FAULTHISTORY_TOP:
 			_FaultHistoryFragment.ClickRight();
 			break;
+		case Home.SCREEN_STATE_MENU_MONITORING_FAULTHISTORY_ACTIVE_TOP:
+			_FaultHistoryActiveFragment.ClickRight();
+			break;
+		case Home.SCREEN_STATE_MENU_MONITORING_FAULTHISTORY_LOGGED_TOP:
+			_FaultHistoryLoggedFragment.ClickRight();
+			break;
+		case Home.SCREEN_STATE_MENU_MONITORING_FAULTHISTORY_LOGGED_PW:
+			_FaultHistoryLoggedPasswordFragment.ClickRight();
+			break;
+		case Home.SCREEN_STATE_MENU_MONITORING_FAULTHISTORY_LOGGED_DELETE:
+			ParentActivity._LoggedFaultDeletePopup.ClickRight();
+			break;
 		case Home.SCREEN_STATE_MENU_MONITORING_VERSIONINFO_TOP:
 			_VersionInfoFragment.ClickRight();
 			break;
@@ -1688,6 +1715,18 @@ public class MenuBaseFragment extends ParentFragment{
 		case Home.SCREEN_STATE_MENU_MONITORING_FAULTHISTORY_TOP:
 			_FaultHistoryFragment.ClickESC();
 			break;
+		case Home.SCREEN_STATE_MENU_MONITORING_FAULTHISTORY_ACTIVE_TOP:
+			_FaultHistoryActiveFragment.ClickESC();
+			break;
+		case Home.SCREEN_STATE_MENU_MONITORING_FAULTHISTORY_LOGGED_TOP:
+			_FaultHistoryLoggedFragment.ClickESC();
+			break;
+		case Home.SCREEN_STATE_MENU_MONITORING_FAULTHISTORY_LOGGED_PW:
+			_FaultHistoryLoggedPasswordFragment.ClickESC();
+			break;
+		case Home.SCREEN_STATE_MENU_MONITORING_FAULTHISTORY_LOGGED_DELETE:
+			ParentActivity._LoggedFaultDeletePopup.ClickESC();
+			break;
 		case Home.SCREEN_STATE_MENU_MONITORING_VERSIONINFO_TOP:
 			_VersionInfoFragment.ClickESC();
 			break;
@@ -1909,6 +1948,18 @@ public class MenuBaseFragment extends ParentFragment{
 			break;
 		case Home.SCREEN_STATE_MENU_MONITORING_FAULTHISTORY_TOP:
 			_FaultHistoryFragment.ClickEnter();
+			break;
+		case Home.SCREEN_STATE_MENU_MONITORING_FAULTHISTORY_ACTIVE_TOP:
+			_FaultHistoryActiveFragment.ClickEnter();
+			break;
+		case Home.SCREEN_STATE_MENU_MONITORING_FAULTHISTORY_LOGGED_TOP:
+			_FaultHistoryLoggedFragment.ClickEnter();
+			break;
+		case Home.SCREEN_STATE_MENU_MONITORING_FAULTHISTORY_LOGGED_PW:
+			_FaultHistoryLoggedPasswordFragment.ClickEnter();
+			break;
+		case Home.SCREEN_STATE_MENU_MONITORING_FAULTHISTORY_LOGGED_DELETE:
+			ParentActivity._LoggedFaultDeletePopup.ClickEnter();
 			break;
 		case Home.SCREEN_STATE_MENU_MONITORING_VERSIONINFO_TOP:
 			_VersionInfoFragment.ClickEnter();

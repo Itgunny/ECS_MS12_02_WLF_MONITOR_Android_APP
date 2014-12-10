@@ -301,9 +301,9 @@ public class CAN1CommManager extends ICAN1CommManager.Stub{		// ttySAC1(Linux), 
 	public static final int	DATA_STATE_CURRENT_WEIHGING_RESULT_NOTWORK					= 0;
 	public static final int	DATA_STATE_CURRENT_WEIHGING_RESULT_OK						= 1;
 	public static final int	DATA_STATE_CURRENT_WEIHGING_RESULT_CANCELOK					= 2;
-	public static final int	DATA_STATE_CURRENT_WEIHGING_RESULT_BOOMLIFTING				= 3;
-	public static final int	DATA_STATE_CURRENT_WEIHGING_RESULT_BUCKETFULLIN				= 4;
-	public static final int	DATA_STATE_CURRENT_WEIHGING_RESULT_BOOMLIFTING_BUCKETFULLIN	= 5;
+	public static final int	DATA_STATE_CURRENT_WEIHGING_RESULT_BOOMLIFTING				= 11;
+	public static final int	DATA_STATE_CURRENT_WEIHGING_RESULT_BUCKETFULLIN				= 12;
+	public static final int	DATA_STATE_CURRENT_WEIHGING_RESULT_BOOMLIFTING_BUCKETFULLIN	= 13;
 	
 	public static final int COMMAND_MAINTENANCE_ITEM_LIST_REQUEST						= 0;
 	public static final int MAINTETNANCE_INFORMATION_REQUEST							= 1;
@@ -346,6 +346,7 @@ public class CAN1CommManager extends ICAN1CommManager.Stub{		// ttySAC1(Linux), 
 	public static final int LENGTH_COMPONENTBASICINFORMATION	= 37;
 	public static final int LENGTH_SOFTWAREIDENTIFICATION_ECM	= 48;
 	public static final int LENGTH_SOFTWAREIDENTIFICATION_TCU	= 67;
+	public static final int LENGTH_SOFTWAREIDENTIFICATION_ACU	= 6;
 	///////////////////////////////////////////////////////////////
 	////////////////Camera Status//////////////////////////////////
 	public static final int STATE_CAMERA_OFF 			= 0;
@@ -817,6 +818,10 @@ public class CAN1CommManager extends ICAN1CommManager.Stub{		// ttySAC1(Linux), 
 	public int Get_ComponentCode_1699_PGN65330_TCU(){ return service.Get_ComponentCode_1699_PGN65330_TCU();}
 	public int Get_ManufacturerCode_1700_PGN65330_TCU(){ return service.Get_ManufacturerCode_1700_PGN65330_TCU();}
 	public byte[] Get_ComponentBasicInformation_1698_PGN65330_TCU(){ return service.Get_ComponentBasicInformation_1698_PGN65330_TCU();}
+	//////RX_COMPONENT_IDENTIFICATION_ACU_65330///////
+	public int Get_ComponentCode_1699_PGN65330_ACU(){ return service.Get_ComponentCode_1699_PGN65330_ACU();}
+	public int Get_ManufacturerCode_1700_PGN65330_ACU(){ return service.Get_ManufacturerCode_1700_PGN65330_ACU();}
+	public byte[] Get_ComponentBasicInformation_1698_PGN65330_ACU(){ return service.Get_ComponentBasicInformation_1698_PGN65330_ACU();}
 	//////RX_TRIP_TIME_INFORMATION_65344///////
 	public int Get_TripTime_849_PGN65344(){ return service.Get_TripTime_849_PGN65344();}
 	//////RX_MACHINE_SECURITY_STATUS_65348///////
@@ -886,6 +891,25 @@ public class CAN1CommManager extends ICAN1CommManager.Stub{		// ttySAC1(Linux), 
 	public int Get_BarometricPressure_328_PGN65371(){ return service.Get_BarometricPressure_328_PGN65371();}
 	public int Get_EngineAirIntakePressure_337_PGN65371(){ return service.Get_EngineAirIntakePressure_337_PGN65371();}
 	public int Get_DEFTankLevel_362_PGN65371(){ return service.Get_DEFTankLevel_362_PGN65371();}
+	//////RX_AIR_CONDITIONER_STATUS_65373///////	
+	public int Get_FATCSettingTemperatureCelsius_3408_PGN65373(){ return service.Get_FATCSettingTemperatureCelsius_3408_PGN65373();}
+	public int Get_FATCSettingTemperatureFahrenheit_3409_PGN65373(){ return service.Get_FATCSettingTemperatureFahrenheit_3409_PGN65373();}
+	public int Get_Ambienttemperaturesensoropen_PGN65373(){ return service.Get_Ambienttemperaturesensoropen_PGN65373();}
+	public int Get_Ambienttemperaturesensorshort_PGN65373(){ return service.Get_Ambienttemperaturesensorshort_PGN65373();}
+	public int Get_Incabtemperaturesensoropen_PGN65373(){ return service.Get_Incabtemperaturesensoropen_PGN65373();}
+	public int Get_Incabtemperaturesensorshort_PGN65373(){ return service.Get_Incabtemperaturesensorshort_PGN65373();}
+	public int Get_Evaptemperaturesensoropen_PGN65373(){ return service.Get_Evaptemperaturesensoropen_PGN65373();}
+	public int Get_Evaptemperaturesensorshort_PGN65373(){ return service.Get_Evaptemperaturesensorshort_PGN65373();}
+	public int Get_Mode1actuatoropenshort_PGN65373(){ return service.Get_Mode1actuatoropenshort_PGN65373();}
+	public int Get_Mode1actuatordrivecircuitmalfunction_PGN65373(){ return service.Get_Mode1actuatordrivecircuitmalfunction_PGN65373();}
+	public int Get_Intakeactuatoropenshort_PGN65373(){ return service.Get_Intakeactuatoropenshort_PGN65373();}
+	public int Get_Intakeactuatordrivecircuitmalfunction_PGN65373(){ return service.Get_Intakeactuatordrivecircuitmalfunction_PGN65373();}
+	public int Get_Temperatureactuatoropenshort_PGN65373(){ return service.Get_Temperatureactuatoropenshort_PGN65373();}
+	public int Get_Temperatureactuatordrivecircuitmalfunction_PGN65373(){ return service.Get_Temperatureactuatordrivecircuitmalfunction_PGN65373();}
+	public int Get_Ducttemperaturesensoropen_PGN65373(){ return service.Get_Ducttemperaturesensoropen_PGN65373();}
+	public int Get_Ducttemperaturesensorshort_PGN65373(){ return service.Get_Ducttemperaturesensorshort_PGN65373();}
+	public int Get_WaterValveSensorError_PGN65373(){ return service.Get_WaterValveSensorError_PGN65373();}
+	public int Get_GPSCircuitError_PGN65373(){ return service.Get_GPSCircuitError_PGN65373();}
 	//////RX_VEHICLE_DISTANCE_65389///////
 	public int Get_TripDistance_600_PGN65389(){ return service.Get_TripDistance_600_PGN65389();}
 	public int Get_TotalVehicleDistance_601_PGN65389(){ return service.Get_TotalVehicleDistance_601_PGN65389();}

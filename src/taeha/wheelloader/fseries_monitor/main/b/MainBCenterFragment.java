@@ -37,6 +37,9 @@ public class MainBCenterFragment extends ParentFragment{
 	// Eco Gauge
 	private int EcoGaugeLevel;
 	private int EcoGaugeStatus;
+	
+	int Maint;
+	int FaultCode;
 	//////////////////////////////////////////////////
 	
 	//ANIMATION///////////////////////////////////////
@@ -129,6 +132,8 @@ public class MainBCenterFragment extends ParentFragment{
 		RPM = CAN1Comm.Get_EngineSpeed_310_PGN65431();
 		EcoGaugeLevel = CAN1Comm.Get_EcoGaugeLevel_1304_PGN65390();
 		EcoGaugeStatus = CAN1Comm.Get_EcoGaugeStatus_1305_PGN65390();
+		Maint = CAN1Comm.Get_MaintenanceAlarmLamp_1099_PGN65428();
+		FaultCode = CAN1Comm.Get_DTCAlarmLamp_1509_PGN65427();
 	}
 
 	@Override
@@ -136,6 +141,7 @@ public class MainBCenterFragment extends ParentFragment{
 		// TODO Auto-generated method stub
 		RPMDisplay(RPM);
 		EcoGaugeDisplay(EcoGaugeLevel,EcoGaugeStatus);
+		IconDisplay(FaultCode,Maint);
 	}
 	/////////////////////////////////////////////////////////////////////
 	public void RPMDisplay(int Data){
@@ -192,6 +198,17 @@ public class MainBCenterFragment extends ParentFragment{
 		Scale = (float) ((float) _level / 100.0);
 		imgViewEcoBar.setScaleX(Scale);
 		//_EcoGaugeAnimation.SetScale(_level);
+	}
+	public void IconDisplay(int _fault, int _maint){
+		if(_fault == CAN1CommManager.DATA_STATE_LAMP_ON && _maint == CAN1CommManager.DATA_STATE_LAMP_ON){
+			imgbtnOption.setBackgroundResource(R.drawable._selector_center_main_b_faultmaint_btn);
+		}else if(_fault == CAN1CommManager.DATA_STATE_LAMP_ON){
+			imgbtnOption.setBackgroundResource(R.drawable._selector_center_main_b_fault_btn);
+		}else if(_maint == CAN1CommManager.DATA_STATE_LAMP_ON){
+			imgbtnOption.setBackgroundResource(R.drawable._selector_center_main_b_maint_btn);
+		}else{
+			imgbtnOption.setBackgroundResource(R.drawable._selector_center_main_b_btn);
+		}
 	}
 	//////////////////////////////////////////////////////////////////////
 }

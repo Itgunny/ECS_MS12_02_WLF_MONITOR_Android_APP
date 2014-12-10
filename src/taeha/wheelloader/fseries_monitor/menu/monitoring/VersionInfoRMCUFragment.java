@@ -167,6 +167,8 @@ public class VersionInfoRMCUFragment extends VersionInfoDetailFragment{
 		LockLevel = CAN1Comm.Get_LockLevel_823_PGN65348();
 		
 		ProgramSubVersion = ParentActivity.FindProgramSubInfo(ComponentBasicInformation);
+		
+		Log.d(TAG,"RMCUNetworkType : " + Integer.toString(RMCUNetworkType));
 	}
 
 	@Override

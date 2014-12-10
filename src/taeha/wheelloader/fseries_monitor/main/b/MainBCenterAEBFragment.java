@@ -110,7 +110,7 @@ public class MainBCenterAEBFragment extends ParentFragment{
 	@Override
 	protected void UpdateUI() {
 		// TODO Auto-generated method stub
-	
+		AEBGearDisplay(AEBMainStatus,AEBSubStatus);
 	}
 	/////////////////////////////////////////////////////////////////////
 	public void ClickBG(){

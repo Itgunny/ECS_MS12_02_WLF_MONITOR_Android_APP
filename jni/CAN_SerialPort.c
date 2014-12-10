@@ -658,6 +658,22 @@ jbyteArray Get_ComponentBasicInformation_1698_PGN65330_TCU(JNIEnv * env,
 
 	return Data;
 }
+//////RX_COMPONENT_IDENTIFICATION_ACU_65330///////
+jint Get_ComponentCode_1699_PGN65330_ACU(JNIEnv * env, jobject this) {
+	return RX_COMPONENT_IDENTIFICATION_ACU_65330.ComponentCode_1699;
+}
+jint Get_ManufacturerCode_1700_PGN65330_ACU(JNIEnv * env, jobject this) {
+	return RX_COMPONENT_IDENTIFICATION_ACU_65330.ManufacturerCode_1700;
+}
+jbyteArray Get_ComponentBasicInformation_1698_PGN65330_ACU(JNIEnv * env,
+		jobject this) {
+
+	jbyteArray Data = (*env)->NewByteArray(env, sizeof(RX_COMPONENT_IDENTIFICATION_ACU_65330.ComponentBasicInformation_1698));
+
+	(*env)->SetByteArrayRegion(env, Data, 0, sizeof(RX_COMPONENT_IDENTIFICATION_ACU_65330.ComponentBasicInformation_1698),RX_COMPONENT_IDENTIFICATION_ACU_65330.ComponentBasicInformation_1698);
+
+	return Data;
+}
 //////RX_TRIP_TIME_INFORMATION_65344///////
 jint Get_TripTime_849_PGN65344(JNIEnv * env, jobject this) {
 	return RX_TRIP_TIME_INFORMATION_65344.TripTime_849;
@@ -842,6 +858,61 @@ jint Get_EngineAirIntakePressure_337_PGN65371(JNIEnv * env, jobject this) {
 }
 jint Get_DEFTankLevel_362_PGN65371(JNIEnv * env, jobject this) {
 	return RX_ENGINE_STATUS1_65371.DEFTankLevel_362;
+}
+//////RX_AIR_CONDITIONER_STATUS_65373////////
+jint Get_FATCSettingTemperatureCelsius_3408_PGN65373(JNIEnv * env, jobject this) {
+	return RX_AIR_CONDITIONER_STATUS_65373.FATCSettingTemperatureCelsius_3408;
+}
+jint Get_FATCSettingTemperatureFahrenheit_3409_PGN65373(JNIEnv * env, jobject this) {
+	return RX_AIR_CONDITIONER_STATUS_65373.FATCSettingTemperatureFahrenheit_3409;
+}
+jint Get_Ambienttemperaturesensoropen_PGN65373(JNIEnv * env, jobject this) {
+	return RX_AIR_CONDITIONER_STATUS_65373.Ambienttemperaturesensoropen;
+}
+jint Get_Ambienttemperaturesensorshort_PGN65373(JNIEnv * env, jobject this) {
+	return RX_AIR_CONDITIONER_STATUS_65373.Ambienttemperaturesensorshort;
+}
+jint Get_Incabtemperaturesensoropen_PGN65373(JNIEnv * env, jobject this) {
+	return RX_AIR_CONDITIONER_STATUS_65373.Incabtemperaturesensoropen;
+}
+jint Get_Incabtemperaturesensorshort_PGN65373(JNIEnv * env, jobject this) {
+	return RX_AIR_CONDITIONER_STATUS_65373.Incabtemperaturesensorshort;
+}
+jint Get_Evaptemperaturesensoropen_PGN65373(JNIEnv * env, jobject this) {
+	return RX_AIR_CONDITIONER_STATUS_65373.Evaptemperaturesensoropen;
+}
+jint Get_Evaptemperaturesensorshort_PGN65373(JNIEnv * env, jobject this) {
+	return RX_AIR_CONDITIONER_STATUS_65373.Evaptemperaturesensorshort;
+}
+jint Get_Mode1actuatoropenshort_PGN65373(JNIEnv * env, jobject this) {
+	return RX_AIR_CONDITIONER_STATUS_65373.Mode1actuatoropenshort;
+}
+jint Get_Mode1actuatordrivecircuitmalfunction_PGN65373(JNIEnv * env, jobject this) {
+	return RX_AIR_CONDITIONER_STATUS_65373.Mode1actuatordrivecircuitmalfunction;
+}
+jint Get_Intakeactuatoropenshort_PGN65373(JNIEnv * env, jobject this) {
+	return RX_AIR_CONDITIONER_STATUS_65373.Intakeactuatoropenshort;
+}
+jint Get_Intakeactuatordrivecircuitmalfunction_PGN65373(JNIEnv * env, jobject this) {
+	return RX_AIR_CONDITIONER_STATUS_65373.Intakeactuatordrivecircuitmalfunction;
+}
+jint Get_Temperatureactuatoropenshort_PGN65373(JNIEnv * env, jobject this) {
+	return RX_AIR_CONDITIONER_STATUS_65373.Temperatureactuatoropenshort;
+}
+jint Get_Temperatureactuatordrivecircuitmalfunction_PGN65373(JNIEnv * env, jobject this) {
+	return RX_AIR_CONDITIONER_STATUS_65373.Temperatureactuatordrivecircuitmalfunction;
+}
+jint Get_Ducttemperaturesensoropen_PGN65373(JNIEnv * env, jobject this) {
+	return RX_AIR_CONDITIONER_STATUS_65373.Ducttemperaturesensoropen;
+}
+jint Get_Ducttemperaturesensorshort_PGN65373(JNIEnv * env, jobject this) {
+	return RX_AIR_CONDITIONER_STATUS_65373.Ducttemperaturesensorshort;
+}
+jint Get_WaterValveSensorError_PGN65373(JNIEnv * env, jobject this) {
+	return RX_AIR_CONDITIONER_STATUS_65373.WaterValveSensorError;
+}
+jint Get_GPSCircuitError_PGN65373(JNIEnv * env, jobject this) {
+	return RX_AIR_CONDITIONER_STATUS_65373.GPSCircuitError;
 }
 //////RX_VEHICLE_DISTANCE_65389///////
 jint Get_TripDistance_600_PGN65389(JNIEnv * env, jobject this) {
@@ -3598,12 +3669,13 @@ static JNINativeMethod methods[] =
 				{ "Get_ComponentBasicInformation_1698_PGN65330_ECM", "()[B",
 						Get_ComponentBasicInformation_1698_PGN65330_ECM },
 				//////RX_COMPONENT_IDENTIFICATION_TCU_65330///////
-				{ "Get_ComponentCode_1699_PGN65330_TCU", "()I",
-						(void*) Get_ComponentCode_1699_PGN65330_TCU }, {
-						"Get_ManufacturerCode_1700_PGN65330_TCU", "()I",
-						(void*) Get_ManufacturerCode_1700_PGN65330_TCU },
-				{ "Get_ComponentBasicInformation_1698_PGN65330_TCU", "()[B",
-						Get_ComponentBasicInformation_1698_PGN65330_TCU },
+				{"Get_ComponentCode_1699_PGN65330_TCU", "()I",(void*) Get_ComponentCode_1699_PGN65330_TCU },
+				{"Get_ManufacturerCode_1700_PGN65330_TCU", "()I",(void*) Get_ManufacturerCode_1700_PGN65330_TCU },
+				{"Get_ComponentBasicInformation_1698_PGN65330_TCU", "()[B",Get_ComponentBasicInformation_1698_PGN65330_TCU },
+				//////RX_COMPONENT_IDENTIFICATION_ACU_65330///////
+				{"Get_ComponentCode_1699_PGN65330_ACU", "()I",(void*) Get_ComponentCode_1699_PGN65330_ACU },
+				{"Get_ManufacturerCode_1700_PGN65330_ACU", "()I",(void*) Get_ManufacturerCode_1700_PGN65330_ACU },
+				{"Get_ComponentBasicInformation_1698_PGN65330_ACU", "()[B",Get_ComponentBasicInformation_1698_PGN65330_ACU },
 				//////RX_TRIP_TIME_INFORMATION_65344///////
 				{ "Get_TripTime_849_PGN65344", "()I",
 						(void*) Get_TripTime_849_PGN65344 },
@@ -3710,13 +3782,32 @@ static JNINativeMethod methods[] =
 				{"Get_EnginePercentLoadatCurrentSpeed_334_PGN65370", "()I", (void*) Get_EnginePercentLoadatCurrentSpeed_334_PGN65370 },
 				{"Get_EngineActualPercentTorque_335_PGN65370", "()I", (void*) Get_EngineActualPercentTorque_335_PGN65370 },
 				//////RX_ENGINE_STATUS1_65371///////
-				{ "Get_EngineOperatingCondition_336_PGN65371", "()I",(void*) Get_EngineOperatingCondition_336_PGN65371 },
+				{"Get_EngineOperatingCondition_336_PGN65371", "()I",(void*) Get_EngineOperatingCondition_336_PGN65371 },
 				{"Get_DEFTankLevel_362_PGN65371", "()I",(void*) Get_DEFTankLevel_362_PGN65371 },
 				{"Get_EngineIntakeManifold1Temperatue_329_PGN65371", "()I",(void*) Get_EngineIntakeManifold1Temperatue_329_PGN65371 },
 				{"Get_EngineFuelTemperature_330_PGN65371", "()I",(void*) Get_EngineFuelTemperature_330_PGN65371 },
 				{"Get_EngineOilPressure_311_PGN65371", "()I",(void*) Get_EngineOilPressure_311_PGN65371 },
 				{"Get_BarometricPressure_328_PGN65371", "()I",(void*) Get_BarometricPressure_328_PGN65371 },
 				{"Get_EngineAirIntakePressure_337_PGN65371", "()I",(void*) Get_EngineAirIntakePressure_337_PGN65371 },
+				//////RX_AIR_CONDITIONER_STATUS_65373///////
+				{"Get_FATCSettingTemperatureCelsius_3408_PGN65373", "()I",(void*) Get_FATCSettingTemperatureCelsius_3408_PGN65373 },
+				{"Get_FATCSettingTemperatureFahrenheit_3409_PGN65373", "()I",(void*) Get_FATCSettingTemperatureFahrenheit_3409_PGN65373 },
+				{"Get_Ambienttemperaturesensoropen_PGN65373", "()I",(void*) Get_Ambienttemperaturesensoropen_PGN65373 },
+				{"Get_Ambienttemperaturesensorshort_PGN65373", "()I",(void*) Get_Ambienttemperaturesensorshort_PGN65373 },
+				{"Get_Incabtemperaturesensoropen_PGN65373", "()I",(void*) Get_Incabtemperaturesensoropen_PGN65373 },
+				{"Get_Incabtemperaturesensorshort_PGN65373", "()I",(void*) Get_Incabtemperaturesensorshort_PGN65373 },
+				{"Get_Evaptemperaturesensoropen_PGN65373", "()I",(void*) Get_Evaptemperaturesensoropen_PGN65373 },
+				{"Get_Evaptemperaturesensorshort_PGN65373", "()I",(void*) Get_Evaptemperaturesensorshort_PGN65373 },
+				{"Get_Mode1actuatoropenshort_PGN65373", "()I",(void*) Get_Mode1actuatoropenshort_PGN65373 },
+				{"Get_Mode1actuatordrivecircuitmalfunction_PGN65373", "()I",(void*) Get_Mode1actuatordrivecircuitmalfunction_PGN65373 },
+				{"Get_Intakeactuatoropenshort_PGN65373", "()I",(void*) Get_Intakeactuatoropenshort_PGN65373 },
+				{"Get_Intakeactuatordrivecircuitmalfunction_PGN65373", "()I",(void*) Get_Intakeactuatordrivecircuitmalfunction_PGN65373 },
+				{"Get_Temperatureactuatoropenshort_PGN65373", "()I",(void*) Get_Temperatureactuatoropenshort_PGN65373 },
+				{"Get_Temperatureactuatordrivecircuitmalfunction_PGN65373", "()I",(void*) Get_Temperatureactuatordrivecircuitmalfunction_PGN65373 },
+				{"Get_Ducttemperaturesensoropen_PGN65373", "()I",(void*) Get_Ducttemperaturesensoropen_PGN65373 },
+				{"Get_Ducttemperaturesensorshort_PGN65373", "()I",(void*) Get_Ducttemperaturesensorshort_PGN65373 },
+				{"Get_WaterValveSensorError_PGN65373", "()I",(void*) Get_WaterValveSensorError_PGN65373 },
+				{"Get_GPSCircuitError_PGN65373", "()I",(void*) Get_GPSCircuitError_PGN65373 },
 				//////RX_VEHICLE_DISTANCE_65389///////
 				{ "Get_TripDistance_600_PGN65389", "()I",
 						(void*) Get_TripDistance_600_PGN65389 }, {

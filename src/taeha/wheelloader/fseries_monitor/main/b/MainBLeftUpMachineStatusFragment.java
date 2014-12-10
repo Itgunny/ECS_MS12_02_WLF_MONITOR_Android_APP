@@ -65,7 +65,7 @@ public class MainBLeftUpMachineStatusFragment extends ParentFragment{
 	
 	int WeightInfoCurrentWeighingResult;
 		
-	int WeighingDisplayIndex;
+	int WeighingDisplayMode;
 	//////////////////////////////////////////////////
 	
 	//ANIMATION///////////////////////////////////////
@@ -172,6 +172,7 @@ public class MainBLeftUpMachineStatusFragment extends ParentFragment{
 		WeightInfoDataTotalC = CAN1Comm.Get_TotalWorkCWeight_1914_PGN65452();
 		WeightInfoDataCurrent = CAN1Comm.Get_CurrentWeight_1911_PGN65450();
 
+		WeighingDisplayMode = CAN1Comm.Get_WeighingDisplayMode1_1910_PGN65450();
 		WeightInfoCurrentWeighingResult = CAN1Comm.Get_CurrentWeighingResult_1919_PGN65450();
 	}
 
@@ -221,7 +222,7 @@ public class MainBLeftUpMachineStatusFragment extends ParentFragment{
 		case CAN1CommManager.DATA_STATE_MACHINESTATUS_WEIGHING:
 			LayoutNormalUpper.setVisibility(View.GONE);
 			LayoutWeighingUpper.setVisibility(View.VISIBLE);
-			WeighingUpperDisplay(WeightInfoCurrentWeighingResult,ParentActivity.WeighingDisplayIndex,WeightInfoDataCurrent,
+			WeighingUpperDisplay(WeightInfoCurrentWeighingResult,WeighingDisplayMode,WeightInfoDataCurrent,
 					WeightInfoDataDay1,WeightInfoDataToday,WeightInfoDataTotalA,WeightInfoDataTotalB,WeightInfoDataTotalC,ParentActivity.UnitWeight);
 			break;
 
@@ -252,7 +253,7 @@ public class MainBLeftUpMachineStatusFragment extends ParentFragment{
 		case CAN1CommManager.DATA_STATE_MACHINESTATUS_WEIGHING:
 			LayoutNormalLower.setVisibility(View.GONE);
 			LayoutWeighingLower.setVisibility(View.VISIBLE);
-			WeighingLowerDisplay(ParentActivity.WeighingDisplayIndex,WeightInfoDataCurrent,
+			WeighingLowerDisplay(WeighingDisplayMode,WeightInfoDataCurrent,
 					WeightInfoDataDay1,WeightInfoDataToday,WeightInfoDataTotalA,WeightInfoDataTotalB,WeightInfoDataTotalC,ParentActivity.UnitWeight);
 			break;
 
@@ -363,15 +364,18 @@ public class MainBLeftUpMachineStatusFragment extends ParentFragment{
 			textViewWeighingLowerUnit.setText(ParentActivity.getResources().getString(string.ton));
 		}
 				
-		if(CurrentWeighingResult == CAN1CommManager.DATA_STATE_CURRENT_WEIHGING_RESULT_BOOMLIFTING_BUCKETFULLIN){
+		if(CurrentWeighingResult == CAN1CommManager.DATA_STATE_CURRENT_WEIHGING_RESULT_BOOMLIFTING_BUCKETFULLIN 
+				&& ParentActivity.WeighingErrorDetect == CAN1CommManager.DATA_STATE_WEIGHING_ERRORDETECT_ON){
 			WeighingUpperStatusIconAnimation.FlipAnimation(imgViewWeighingUpperIcon,R.drawable.main_default_monitoring_icon_sudden_fullin);
 			textViewWeighingUpperData.setText(ParentActivity.GetWeighit(WeightInfoDataCurrent, ParentActivity.UnitWeight));
 			textViewWeighingUpperData.setTextColor(ParentActivity.getResources().getColor(color.red));
-		}else if(CurrentWeighingResult == CAN1CommManager.DATA_STATE_CURRENT_WEIHGING_RESULT_BOOMLIFTING){
+		}else if(CurrentWeighingResult == CAN1CommManager.DATA_STATE_CURRENT_WEIHGING_RESULT_BOOMLIFTING
+				&& ParentActivity.WeighingErrorDetect == CAN1CommManager.DATA_STATE_WEIGHING_ERRORDETECT_ON){
 			WeighingUpperStatusIconAnimation.FlipAnimation(imgViewWeighingUpperIcon,R.drawable.main_default_monitoring_icon_sudden);
 			textViewWeighingUpperData.setText(ParentActivity.GetWeighit(WeightInfoDataCurrent, ParentActivity.UnitWeight));
 			textViewWeighingUpperData.setTextColor(ParentActivity.getResources().getColor(color.red));
-		}else if(CurrentWeighingResult == CAN1CommManager.DATA_STATE_CURRENT_WEIHGING_RESULT_BUCKETFULLIN){
+		}else if(CurrentWeighingResult == CAN1CommManager.DATA_STATE_CURRENT_WEIHGING_RESULT_BUCKETFULLIN
+				&& ParentActivity.WeighingErrorDetect == CAN1CommManager.DATA_STATE_WEIGHING_ERRORDETECT_ON){
 			WeighingUpperStatusIconAnimation.FlipAnimation(imgViewWeighingUpperIcon,R.drawable.main_default_monitoring_icon_fullin);
 			textViewWeighingUpperData.setText(ParentActivity.GetWeighit(WeightInfoDataCurrent, ParentActivity.UnitWeight));
 			textViewWeighingUpperData.setTextColor(ParentActivity.getResources().getColor(color.red));
@@ -442,15 +446,18 @@ public class MainBLeftUpMachineStatusFragment extends ParentFragment{
 		else
 			ParentActivity.StartAnimationRunningTimer();
 		
-		if(WeightInfoCurrentWeighingResult == CAN1CommManager.DATA_STATE_CURRENT_WEIHGING_RESULT_BOOMLIFTING_BUCKETFULLIN){
+		if(WeightInfoCurrentWeighingResult == CAN1CommManager.DATA_STATE_CURRENT_WEIHGING_RESULT_BOOMLIFTING_BUCKETFULLIN
+				&& ParentActivity.WeighingErrorDetect == CAN1CommManager.DATA_STATE_WEIGHING_ERRORDETECT_ON){
 			CAN1Comm.Set_RequestReweighing_PGN61184_62(1);
 			CAN1Comm.TxCANToMCU(62);
 			CAN1Comm.Set_RequestReweighing_PGN61184_62(3);
-		}else if(WeightInfoCurrentWeighingResult == CAN1CommManager.DATA_STATE_CURRENT_WEIHGING_RESULT_BOOMLIFTING){
+		}else if(WeightInfoCurrentWeighingResult == CAN1CommManager.DATA_STATE_CURRENT_WEIHGING_RESULT_BOOMLIFTING
+				&& ParentActivity.WeighingErrorDetect == CAN1CommManager.DATA_STATE_WEIGHING_ERRORDETECT_ON){
 			CAN1Comm.Set_RequestReweighing_PGN61184_62(1);
 			CAN1Comm.TxCANToMCU(62);
 			CAN1Comm.Set_RequestReweighing_PGN61184_62(3);
-		}else if(WeightInfoCurrentWeighingResult == CAN1CommManager.DATA_STATE_CURRENT_WEIHGING_RESULT_BUCKETFULLIN){
+		}else if(WeightInfoCurrentWeighingResult == CAN1CommManager.DATA_STATE_CURRENT_WEIHGING_RESULT_BUCKETFULLIN
+				&& ParentActivity.WeighingErrorDetect == CAN1CommManager.DATA_STATE_WEIGHING_ERRORDETECT_ON){
 			CAN1Comm.Set_RequestReweighing_PGN61184_62(1);
 			CAN1Comm.TxCANToMCU(62);
 			CAN1Comm.Set_RequestReweighing_PGN61184_62(3);

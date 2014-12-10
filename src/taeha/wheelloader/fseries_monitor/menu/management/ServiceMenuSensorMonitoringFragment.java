@@ -257,7 +257,7 @@ public class ServiceMenuSensorMonitoringFragment extends ParentFragment{
 		//EngineRPM = ValueReturn_2(StatusValue[1]);
 		EngineRPM = StatusValue[1];
 		adapter.addItem(new IconTextItem(ParentActivity.getResources().getDrawable(R.drawable.menu_management_machine_monitoring_bg_light),ParentActivity.getResources().getDrawable(R.drawable.menu_management_machine_monitoring_bg_line), "Engine rpm", Integer.toString(EngineRPM), "rpm"));
-		
+		BackgroundFlag = true;
 		// 3. Alternator Volt. : V
 		if(StatusValue[2] != 0xffff){
 			AlternatorVolt = StatusValue[2];

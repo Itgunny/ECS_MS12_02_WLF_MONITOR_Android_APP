@@ -71,7 +71,7 @@
 
         <TextView
             android:id="@+id/textView_menu_body_monitoring_ehcuioinfo_boomleverfloat_operation_title"
-            android:layout_width="350dp"
+            android:layout_width="320dp"
             android:layout_height="50dp"
             android:layout_alignLeft="@+id/RelativeLayout_menu_body_monitoring_ehcuioinfo_boomleverfloat_boomup"
             android:gravity="center"
@@ -122,20 +122,20 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
-                android:layout_marginLeft="347dp"
-                android:src="@drawable/menu_management_machine_monitoring_bg_line" />
+                android:layout_marginLeft="320dp"
+                android:src="@drawable/menu_information_ehcu_bg01" />
 
             <ImageView
                 android:id="@+id/imageView_menu_body_monitoring_ehcuioinfo_boomleverfloat_boomup_epprcurrent"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
-                android:layout_marginLeft="549dp"
-                android:src="@drawable/menu_management_machine_monitoring_bg_line" />
+                android:layout_marginLeft="520dp"
+                android:src="@drawable/menu_information_ehcu_bg01" />
 
             <TextView
                 android:id="@+id/textView_menu_body_monitoring_ehcuioinfo_boomleverfloat_boomup_joystickstroke_data"
-                android:layout_width="90dp"
+                android:layout_width="150dp"
                 android:layout_height="wrap_content"
                 android:layout_alignBottom="@+id/imageView_menu_body_monitoring_ehcuioinfo_boomleverfloat_boomup_joystickstroke"
                 android:layout_alignLeft="@+id/imageView_menu_body_monitoring_ehcuioinfo_boomleverfloat_boomup_joystickstroke"
@@ -160,7 +160,7 @@
 
             <TextView
                 android:id="@+id/textView_menu_body_monitoring_ehcuioinfo_boomleverfloat_boomup_epprcurrent_data"
-                android:layout_width="90dp"
+                android:layout_width="150dp"
                 android:layout_height="wrap_content"
                 android:layout_alignBottom="@+id/imageView_menu_body_monitoring_ehcuioinfo_boomleverfloat_boomup_epprcurrent"
                 android:layout_alignLeft="@+id/imageView_menu_body_monitoring_ehcuioinfo_boomleverfloat_boomup_epprcurrent"
@@ -208,20 +208,20 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
-                android:layout_marginLeft="347dp"
-                android:src="@drawable/menu_management_machine_monitoring_bg_line" />
+                android:layout_marginLeft="320dp"
+                android:src="@drawable/menu_information_ehcu_bg01" />
 
             <ImageView
                 android:id="@+id/imageView_menu_body_monitoring_ehcuioinfo_boomleverfloat_boomdown_epprcurrent"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
-                android:layout_marginLeft="549dp"
-                android:src="@drawable/menu_management_machine_monitoring_bg_line" />
+                android:layout_marginLeft="520dp"
+                android:src="@drawable/menu_information_ehcu_bg01" />
 
             <TextView
                 android:id="@+id/textView_menu_body_monitoring_ehcuioinfo_boomleverfloat_boomdown_joystickstroke_data"
-                android:layout_width="90dp"
+                android:layout_width="150dp"
                 android:layout_height="wrap_content"
                 android:layout_alignBottom="@+id/imageView_menu_body_monitoring_ehcuioinfo_boomleverfloat_boomdown_joystickstroke"
                 android:layout_alignLeft="@+id/imageView_menu_body_monitoring_ehcuioinfo_boomleverfloat_boomdown_joystickstroke"
@@ -246,7 +246,7 @@
 
             <TextView
                 android:id="@+id/textView_menu_body_monitoring_ehcuioinfo_boomleverfloat_boomdown_epprcurrent_data"
-                android:layout_width="90dp"
+                android:layout_width="150dp"
                 android:layout_height="wrap_content"
                 android:layout_alignBottom="@+id/imageView_menu_body_monitoring_ehcuioinfo_boomleverfloat_boomdown_epprcurrent"
                 android:layout_alignLeft="@+id/imageView_menu_body_monitoring_ehcuioinfo_boomleverfloat_boomdown_epprcurrent"

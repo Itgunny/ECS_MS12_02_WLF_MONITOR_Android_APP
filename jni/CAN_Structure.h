@@ -1782,12 +1782,13 @@ typedef struct
 
 	unsigned short	SpeedometerFrequency_534;
 
-	unsigned char	AutoRideControlOperationSpeedForward_574:4;
-	unsigned char	AutoRideControlOperationSpeedBackward_576:4;
+	unsigned char	AutoRideControlOperationSpeedForward_574;
+
+	unsigned char	AutoRideControlOperationSpeedBackward_576;
 
 	unsigned char	VehicleSpeedLimit_572;
 
-	unsigned char	DM0[2];
+	unsigned char	DM0;
 
 }__attribute__((packed))  TRAVEL_CONTROL_VALUE_SETTING_61184_105;
 typedef struct
@@ -1796,12 +1797,14 @@ typedef struct
 
 	unsigned short	SpeedometerFrequency_534;
 
-	unsigned char	AutoRideControlOperationSpeedForward_574:4;
-	unsigned char	AutoRideControlOperationSpeedBackward_576:4;
+
+	unsigned char	AutoRideControlOperationSpeedForward_574;
+
+	unsigned char	AutoRideControlOperationSpeedBackward_576;
 
 	unsigned char	VehicleSpeedLimit_572;
 
-	unsigned char	DM0[3];
+	unsigned char	DM0[2];
 
 }__attribute__((packed))  TRAVEL_CONTROL_VALUE_61184_106;
 typedef struct
@@ -2021,7 +2024,13 @@ typedef struct
 	unsigned char	ComponentBasicInformation_1698[67];
 
 }__attribute__((packed))  COMPONENT_IDENTIFICATION_TCU_65330;
+typedef struct
+{
+	unsigned char	ComponentCode_1699;
+	unsigned char	ManufacturerCode_1700;
+	unsigned char	ComponentBasicInformation_1698[6];
 
+}__attribute__((packed))  COMPONENT_IDENTIFICATION_ACU_65330;
 typedef struct
 {
 	unsigned int	TripTime_849;
@@ -2202,6 +2211,42 @@ typedef struct
 	unsigned char	DM0;
 
 }__attribute__((packed))  ENGINE_STATUS1_65371;
+
+typedef struct
+{
+	unsigned char Reserved0;
+
+	unsigned char Reserved1;
+
+	unsigned char Reserved2;
+
+	unsigned char FATCSettingTemperatureCelsius_3408;
+
+	unsigned char FATCSettingTemperatureFahrenheit_3409;
+
+	unsigned char Ambienttemperaturesensoropen:1;
+	unsigned char Ambienttemperaturesensorshort:1;
+	unsigned char Incabtemperaturesensoropen:1;
+	unsigned char Incabtemperaturesensorshort:1;
+	unsigned char Evaptemperaturesensoropen:1;
+	unsigned char Evaptemperaturesensorshort:1;
+	unsigned char Reserved3:2;
+
+	unsigned char Mode1actuatoropenshort:1;
+	unsigned char Mode1actuatordrivecircuitmalfunction:1;
+	unsigned char Intakeactuatoropenshort:1;
+	unsigned char Intakeactuatordrivecircuitmalfunction:1;
+	unsigned char Temperatureactuatoropenshort:1;
+	unsigned char Temperatureactuatordrivecircuitmalfunction:1;
+	unsigned char Reserved4:2;
+
+	unsigned char Ducttemperaturesensoropen:1;
+	unsigned char Ducttemperaturesensorshort:1;
+	unsigned char WaterValveSensorError:1;
+	unsigned char GPSCircuitError:1;
+	unsigned char Reserved:4;
+}__attribute__((packed))  AIR_CONDITIONER_STATUS_65373;
+
 typedef struct
 {
 	unsigned int	TripDistance_600;

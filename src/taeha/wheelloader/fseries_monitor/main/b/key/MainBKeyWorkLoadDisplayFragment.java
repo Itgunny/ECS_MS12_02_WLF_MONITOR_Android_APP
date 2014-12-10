@@ -30,7 +30,7 @@ public class MainBKeyWorkLoadDisplayFragment extends ParentFragment{
 	//////////////////////////////////////////////////
 	
 	//VALUABLE////////////////////////////////////////
-
+	int WeighingDisplayMode;
 	//////////////////////////////////////////////////
 	
 	//ANIMATION///////////////////////////////////////
@@ -54,7 +54,7 @@ public class MainBKeyWorkLoadDisplayFragment extends ParentFragment{
 		InitButtonListener();
 
 		ParentActivity.ScreenIndex = ParentActivity.SCREEN_STATE_MAIN_B_KEY_WORKLOAD_DISPLAY;
-		WeighingDisplayDisplay(ParentActivity.WeighingDisplayIndex);
+		WeighingDisplayDisplay(WeighingDisplayMode);
 		return mRoot;
 	}
 
@@ -85,6 +85,7 @@ public class MainBKeyWorkLoadDisplayFragment extends ParentFragment{
 		// TODO Auto-generated method stub
 		super.InitValuables();
 		
+		WeighingDisplayMode = CAN1Comm.Get_WeighingDisplayMode1_1910_PGN65450();
 	}
 	@Override
 	protected void InitButtonListener() {
@@ -160,28 +161,32 @@ public class MainBKeyWorkLoadDisplayFragment extends ParentFragment{
 			radioTotalA.setChecked(false);
 			radioTotalB.setChecked(false);
 			radioTotalC.setChecked(false);
-			
+//			textViewInitialization.setText(ParentActivity.getResources().getString(R.string.Daily) 
+//					+ " " + ParentActivity.getResources().getString(R.string.Initialization));
 			break;
 		case CAN1CommManager.DATA_STATE_WEIGHINGDISPLAY_TOTAL_A:
 			radioDaily.setChecked(false);
 			radioTotalA.setChecked(true);
 			radioTotalB.setChecked(false);
 			radioTotalC.setChecked(false);
-			
+//			textViewInitialization.setText(ParentActivity.getResources().getString(R.string.Total_A) 
+//					+ " " + ParentActivity.getResources().getString(R.string.Initialization));
 			break;
 		case CAN1CommManager.DATA_STATE_WEIGHINGDISPLAY_TOTAL_B:
 			radioDaily.setChecked(false);
 			radioTotalA.setChecked(false);
 			radioTotalB.setChecked(true);
 			radioTotalC.setChecked(false);
-			
+//			textViewInitialization.setText(ParentActivity.getResources().getString(R.string.Total_B) 
+//					+ " " + ParentActivity.getResources().getString(R.string.Initialization));
 			break;
 		case CAN1CommManager.DATA_STATE_WEIGHINGDISPLAY_TOTAL_C:
 			radioDaily.setChecked(false);
 			radioTotalA.setChecked(false);
 			radioTotalB.setChecked(false);
 			radioTotalC.setChecked(true);
-			
+//			textViewInitialization.setText(ParentActivity.getResources().getString(R.string.Total_C) 
+//					+ " " + ParentActivity.getResources().getString(R.string.Initialization));
 			break;
 		
 		default:
@@ -191,48 +196,33 @@ public class MainBKeyWorkLoadDisplayFragment extends ParentFragment{
 	}
 	
 	public void ClickDaily(){
-		ParentActivity.WeighingDisplayIndex = CAN1CommManager.DATA_STATE_WEIGHINGDISPLAY_DAILY;
-		CAN1Comm.Set_WeighingDisplayMode1_1910_PGN61184_62(ParentActivity.WeighingDisplayIndex);
-		CAN1Comm.TxCANToMCU(62);
-		CAN1Comm.Set_WeighingDisplayMode1_1910_PGN61184_62(15);
-		textViewInitialization.setText(ParentActivity.getResources().getString(R.string.Daily) 
-				+ " " + ParentActivity.getResources().getString(R.string.Initialization));
-		WeighingDisplayDisplay(ParentActivity.WeighingDisplayIndex);
+		WeighingDisplayMode = CAN1CommManager.DATA_STATE_WEIGHINGDISPLAY_DAILY;
+		WeighingDisplayDisplay(WeighingDisplayMode);
 	}
 	public void ClickTotalA(){
-		ParentActivity.WeighingDisplayIndex = CAN1CommManager.DATA_STATE_WEIGHINGDISPLAY_TOTAL_A;
-		CAN1Comm.Set_WeighingDisplayMode1_1910_PGN61184_62(ParentActivity.WeighingDisplayIndex);
-		CAN1Comm.TxCANToMCU(62);
-		CAN1Comm.Set_WeighingDisplayMode1_1910_PGN61184_62(15);
-		textViewInitialization.setText(ParentActivity.getResources().getString(R.string.Total_A) 
-				+ " " + ParentActivity.getResources().getString(R.string.Initialization));
-		WeighingDisplayDisplay(ParentActivity.WeighingDisplayIndex);
+		WeighingDisplayMode = CAN1CommManager.DATA_STATE_WEIGHINGDISPLAY_TOTAL_A;
+		WeighingDisplayDisplay(WeighingDisplayMode);
 	}
 	public void ClickTotalB(){
-		ParentActivity.WeighingDisplayIndex = CAN1CommManager.DATA_STATE_WEIGHINGDISPLAY_TOTAL_B;
-		CAN1Comm.Set_WeighingDisplayMode1_1910_PGN61184_62(ParentActivity.WeighingDisplayIndex);
-		CAN1Comm.TxCANToMCU(62);
-		CAN1Comm.Set_WeighingDisplayMode1_1910_PGN61184_62(15);
-		textViewInitialization.setText(ParentActivity.getResources().getString(R.string.Total_B) 
-				+ " " + ParentActivity.getResources().getString(R.string.Initialization));
-		WeighingDisplayDisplay(ParentActivity.WeighingDisplayIndex);
+		WeighingDisplayMode = CAN1CommManager.DATA_STATE_WEIGHINGDISPLAY_TOTAL_B;
+		WeighingDisplayDisplay(WeighingDisplayMode);
 	}
 	public void ClickTotalC(){
-		ParentActivity.WeighingDisplayIndex = CAN1CommManager.DATA_STATE_WEIGHINGDISPLAY_TOTAL_C;
-		CAN1Comm.Set_WeighingDisplayMode1_1910_PGN61184_62(ParentActivity.WeighingDisplayIndex);
-		CAN1Comm.TxCANToMCU(62);
-		CAN1Comm.Set_WeighingDisplayMode1_1910_PGN61184_62(15);
-		textViewInitialization.setText(ParentActivity.getResources().getString(R.string.Total_C) 
-				+ " " + ParentActivity.getResources().getString(R.string.Initialization));
-		WeighingDisplayDisplay(ParentActivity.WeighingDisplayIndex);
+		WeighingDisplayMode = CAN1CommManager.DATA_STATE_WEIGHINGDISPLAY_TOTAL_C;
+		WeighingDisplayDisplay(WeighingDisplayMode);
 	}
 	public void ClickInit(){
-		CAN1Comm.Set_RequestTotalWorkWeightReset_PGN61184_62(ParentActivity.WeighingDisplayIndex);
-		CAN1Comm.Set_RequestReweighing_PGN61184_62(3);
-		CAN1Comm.TxCANToMCU(62);
-		CAN1Comm.Set_RequestTotalWorkWeightReset_PGN61184_62(15);
+//		CAN1Comm.Set_RequestTotalWorkWeightReset_PGN61184_62(WeighingDisplayMode);
+//		CAN1Comm.Set_RequestReweighing_PGN61184_62(3);
+//		CAN1Comm.TxCANToMCU(62);
+//		CAN1Comm.Set_RequestTotalWorkWeightReset_PGN61184_62(15);
+		ParentActivity.OldScreenIndex = ParentActivity.ScreenIndex;
+		ParentActivity.showWorkLoadWeighingInit1();
 	}
 	public void ClickOK(){
+		CAN1Comm.Set_WeighingDisplayMode1_1910_PGN61184_62(WeighingDisplayMode);
+		CAN1Comm.TxCANToMCU(62);
+		CAN1Comm.Set_WeighingDisplayMode1_1910_PGN61184_62(15);
 		showWorkLoadAnimation();
 	}
 	public void showWorkLoadAnimation(){
@@ -249,7 +239,6 @@ public class MainBKeyWorkLoadDisplayFragment extends ParentFragment{
 	public void SavePref(){
 		SharedPreferences SharePref = ParentActivity.getSharedPreferences("Home", 0);
 		SharedPreferences.Editor edit = SharePref.edit();
-		edit.putInt("WeighingDisplayIndex", ParentActivity.WeighingDisplayIndex);
 		edit.commit();
 		Log.d(TAG,"SavePref");
 	}

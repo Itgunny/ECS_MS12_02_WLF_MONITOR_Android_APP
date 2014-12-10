@@ -38,6 +38,7 @@ public class FaultHistoryLoggedPasswordFragment extends PasswordFragment{
 				CursurDisplay(msg.what);
 			}
 		};
+		CursurDisplay(CursurIndex);
 		return mRoot;
 	}
 	
@@ -168,4 +169,21 @@ public class FaultHistoryLoggedPasswordFragment extends PasswordFragment{
 			ParentActivity.StartAnimationRunningTimer();
 		ParentActivity._MenuBaseFragment.showFaultHistoryAnimation();
 	}
+	/////////////////////////////////////////////////////////////////////////////////////
+	public void ClickLeft(){
+		super.ClickLeft();
+	}
+	public void ClickRight(){	
+		super.ClickRight();
+	}
+	public void ClickESC(){
+		ClickCancel();
+	}
+	public void ClickEnter(){
+		super.ClickEnter();
+	}
+	public void CursurDisplay(int Index){
+		super.CursurDisplay(Index);
+	}
+	/////////////////////////////////////////////////////////////////////////////////////
 }

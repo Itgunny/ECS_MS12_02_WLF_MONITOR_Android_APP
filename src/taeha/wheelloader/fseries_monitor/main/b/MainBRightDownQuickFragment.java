@@ -9,6 +9,7 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import taeha.wheelloader.fseries_monitor.main.CAN1CommManager;
 import taeha.wheelloader.fseries_monitor.main.Home;
 import taeha.wheelloader.fseries_monitor.main.ParentFragment;
 import taeha.wheelloader.fseries_monitor.main.R;
@@ -29,7 +30,7 @@ public class MainBRightDownQuickFragment extends ParentFragment{
 	//////////////////////////////////////////////////
 	
 	//VALUABLE////////////////////////////////////////
-
+	int Maint;
 	//////////////////////////////////////////////////
 	
 	//ANIMATION///////////////////////////////////////
@@ -109,13 +110,13 @@ public class MainBRightDownQuickFragment extends ParentFragment{
 	@Override
 	protected void GetDataFromNative() {
 		// TODO Auto-generated method stub
-		
+		Maint = CAN1Comm.Get_MaintenanceAlarmLamp_1099_PGN65428();
 	}
 
 	@Override
 	protected void UpdateUI() {
 		// TODO Auto-generated method stub
-		
+		IconDisplay(Maint);
 	}
 	/////////////////////////////////////////////////////////////////////	
 	
@@ -134,6 +135,13 @@ public class MainBRightDownQuickFragment extends ParentFragment{
 	}
 	public void ClickWifi(){
 		
+	}
+	public void IconDisplay(int _data){
+		if(_data == CAN1CommManager.DATA_STATE_LAMP_ON){
+			imgViewIcon.setImageResource(R.drawable.main_quick_icon_maint_red);
+		}else{
+			imgViewIcon.setImageResource(R.drawable.main_quick_icon_maint);
+		}
 	}
 	
 }

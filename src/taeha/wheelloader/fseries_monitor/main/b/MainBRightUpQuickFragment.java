@@ -9,6 +9,7 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import taeha.wheelloader.fseries_monitor.main.CAN1CommManager;
 import taeha.wheelloader.fseries_monitor.main.Home;
 import taeha.wheelloader.fseries_monitor.main.ParentFragment;
 import taeha.wheelloader.fseries_monitor.main.R;
@@ -26,7 +27,7 @@ public class MainBRightUpQuickFragment extends ParentFragment{
 	//////////////////////////////////////////////////
 	
 	//VALUABLE////////////////////////////////////////
-
+	int FaultCode;
 	//////////////////////////////////////////////////
 	
 	//ANIMATION///////////////////////////////////////
@@ -87,13 +88,13 @@ public class MainBRightUpQuickFragment extends ParentFragment{
 	@Override
 	protected void GetDataFromNative() {
 		// TODO Auto-generated method stub
-		
+		FaultCode = CAN1Comm.Get_DTCAlarmLamp_1509_PGN65427();
 	}
 
 	@Override
 	protected void UpdateUI() {
 		// TODO Auto-generated method stub
-		
+		IconDisplay(FaultCode);
 	}
 	/////////////////////////////////////////////////////////////////////	
 	
@@ -105,6 +106,13 @@ public class MainBRightUpQuickFragment extends ParentFragment{
 		ParentActivity._MainChangeAnimation.StartChangeAnimation(ParentActivity._MenuBaseFragment);
 		ParentActivity.OldScreenIndex = Home.SCREEN_STATE_MAIN_B_TOP;
 		ParentActivity._MenuBaseFragment.setFirstScreenIndex(Home.SCREEN_STATE_MENU_MONITORING_FAULTHISTORY_ACTIVE_TOP);
+	}
+	public void IconDisplay(int _data){
+		if(_data == CAN1CommManager.DATA_STATE_LAMP_ON){
+			imgViewIcon.setImageResource(R.drawable.main_quick_icon_fault_red);
+		}else{
+			imgViewIcon.setImageResource(R.drawable.main_quick_icon_fault);
+		}
 	}
 	
 }

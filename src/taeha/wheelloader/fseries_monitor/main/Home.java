@@ -28,6 +28,8 @@ import taeha.wheelloader.fseries_monitor.popup.SoundOutputPopup;
 import taeha.wheelloader.fseries_monitor.popup.SpeedometerInitPopup;
 import taeha.wheelloader.fseries_monitor.popup.TCLockUpPopup;
 import taeha.wheelloader.fseries_monitor.popup.WorkLoadInitPopup;
+import taeha.wheelloader.fseries_monitor.popup.WorkLoadWeighingInitPopup1;
+import taeha.wheelloader.fseries_monitor.popup.WorkLoadWeighingInitPopup2;
 
 import android.os.Bundle;
 import android.os.Handler;
@@ -135,6 +137,8 @@ public class Home extends Activity {
 	public  static final int SCREEN_STATE_MENU_MODE_HYD_TOP									= 0x21200000;
 	public  static final int SCREEN_STATE_MENU_MODE_HYD_WORKLOAD_TOP						= 0x21210000;
 	public  static final int SCREEN_STATE_MENU_MODE_HYD_WORKLOAD_INIT						= 0x21211000;
+	public  static final int SCREEN_STATE_MENU_MODE_HYD_WORKLOAD_WEIGHING_INIT1				= 0x21212000;
+	public  static final int SCREEN_STATE_MENU_MODE_HYD_WORKLOAD_WEIGHING_INIT2				= 0x21213000;
 	public  static final int SCREEN_STATE_MENU_MODE_HYD_WORKLOAD_END						= 0x2121FFFF;
 	public  static final int SCREEN_STATE_MENU_MODE_HYD_DETENT								= 0x21220000;
 	public  static final int SCREEN_STATE_MENU_MODE_HYD_BUCKETPRIORITY						= 0x21230000;
@@ -185,6 +189,7 @@ public class Home extends Activity {
 	public  static final int SCREEN_STATE_MENU_MONITORING_VERSIONINFO_CLUSTER				= 0x22450000;
 	public  static final int SCREEN_STATE_MENU_MONITORING_VERSIONINFO_RMCU					= 0x22460000;
 	public  static final int SCREEN_STATE_MENU_MONITORING_VERSIONINFO_EHCU					= 0x22470000;
+	public  static final int SCREEN_STATE_MENU_MONITORING_VERSIONINFO_ACU					= 0x22480000;
 	public  static final int SCREEN_STATE_MENU_MONITORING_VERSIONINFO_END					= 0x224FFFFF;
 	public  static final int SCREEN_STATE_MENU_MONITORING_EHCUINFO_TOP						= 0x22500000;
 	public  static final int SCREEN_STATE_MENU_MONITORING_EHCUINFO_BOOMLEVERFLOAT			= 0x22510000;
@@ -349,7 +354,6 @@ public class Home extends Activity {
 	public int SeatBelt;
 	
 	// Weighing
-	public int WeighingDisplayIndex;
 	public int WeighingErrorDetect;
 	
 	// Buzzer
@@ -385,7 +389,8 @@ public class Home extends Activity {
 	public MaintReplacePopup				_MaintReplacePopup;
 	public LoggedFaultDeletePopup			_LoggedFaultDeletePopup;
 	public WorkLoadInitPopup				_WorkLoadInitPopup;
-	
+	public WorkLoadWeighingInitPopup1		_WorkLoadWeighingInitPopup1;
+	public WorkLoadWeighingInitPopup2		_WorkLoadWeighingInitPopup2;
 	// Timer
 	private Timer mSeatBeltTimer = null;
 	private Timer mAutoGreaseStopTimer = null;
@@ -559,6 +564,8 @@ public class Home extends Activity {
 		_MaintReplacePopup = new MaintReplacePopup(this);
 		_LoggedFaultDeletePopup= new LoggedFaultDeletePopup(this);
 		_WorkLoadInitPopup = new WorkLoadInitPopup(this);
+		_WorkLoadWeighingInitPopup1 = new WorkLoadWeighingInitPopup1(this);
+		_WorkLoadWeighingInitPopup2 = new WorkLoadWeighingInitPopup2(this);
 	}
 	public void InitAnimation(){
 		
@@ -601,6 +608,16 @@ public class Home extends Activity {
 			Log.e(TAG,"NullPointerException");
 		}
 		return true;
+	}
+	public void ExcuteUIActivity(){
+		Intent intent;
+		intent = getPackageManager().getLaunchIntentForPackage(
+				"taeha.wheelloader.fseries_monitor.main");
+		if(intent != null){
+			startActivity(intent);
+			Log.d(TAG,"ExcuteUIActivity");
+		}
+			
 	}
 	public void SaveASPhoneNumber(){
 		byte[] ASNum;
@@ -671,7 +688,6 @@ public class Home extends Activity {
 		edit.putInt("HourOdometerIndex", HourOdometerIndex);
 		edit.putInt("MachineStatusUpperIndex", MachineStatusUpperIndex);
 		edit.putInt("MachineStatusLowerIndex", MachineStatusLowerIndex);
-		edit.putInt("WeighingDisplayIndex", WeighingDisplayIndex);
 		edit.putInt("WeighingErrorDetect", WeighingErrorDetect);
 		
 		edit.commit();
@@ -686,7 +702,6 @@ public class Home extends Activity {
 		HourOdometerIndex = SharePref.getInt("HourOdometerIndex", CAN1CommManager.DATA_STATE_HOURMETER_LATEST);
 		MachineStatusUpperIndex = SharePref.getInt("MachineStatusUpperIndex", CAN1CommManager.DATA_STATE_MACHINESTATUS_NOSELECT);
 		MachineStatusLowerIndex = SharePref.getInt("MachineStatusLowerIndex", CAN1CommManager.DATA_STATE_MACHINESTATUS_NOSELECT);
-		WeighingDisplayIndex = SharePref.getInt("WeighingDisplayIndex", CAN1CommManager.DATA_STATE_WEIGHINGDISPLAY_TOTAL_A);
 		WeighingErrorDetect = SharePref.getInt("WeighingErrorDetect", CAN1CommManager.DATA_STATE_WEIGHING_ERRORDETECT_OFF);
 		
 		ActiveCameraNum = SharePref.getInt("ActiveCameraNum", 4);
@@ -834,7 +849,15 @@ public class Home extends Activity {
 		public void KeyButtonCallBack(int Data) throws RemoteException {
 			// TODO Auto-generated method stub
 			Log.i(TAG,"KeyButton Callback : 0x" + Integer.toHexString(Data));
-			if(CAN1Comm.GetScreenTopFlag() == true){
+			if(Data == CAN1CommManager.FN){
+				try {
+					HandleKeyButton.sendMessage(HandleKeyButton.obtainMessage(Data));
+				} catch (NullPointerException e) {
+					// TODO: handle exception
+					Log.e(TAG,"NullPointerException");
+				}
+			}
+			else if(CAN1Comm.GetScreenTopFlag() == true){
 				try {
 					HandleKeyButton.sendMessage(HandleKeyButton.obtainMessage(Data));
 				} catch (NullPointerException e) {
@@ -1101,14 +1124,19 @@ public class Home extends Activity {
 		Log.d(TAG,"KeyButtonClick");
 		// TODO Auto-generated method stub
 
-		if((ScreenIndex & SCREEN_STATE_MAIN_B_TOP) == SCREEN_STATE_MAIN_B_TOP){
+		if(ScreenIndex == SCREEN_STATE_MENU_MODE_HYD_WORKLOAD_WEIGHING_INIT1){
+			Log.d(TAG,"Click WeighingInit1 Key");
+			_WorkLoadWeighingInitPopup1.KeyButtonClick(Data);
+		}else if(ScreenIndex == SCREEN_STATE_MENU_MODE_HYD_WORKLOAD_WEIGHING_INIT2){
+			Log.d(TAG,"Click WeighingInit2 Key");
+			_WorkLoadWeighingInitPopup2.KeyButtonClick(Data);
+		}else if((ScreenIndex & SCREEN_STATE_MAIN_B_TOP) == SCREEN_STATE_MAIN_B_TOP){
 			Log.d(TAG,"Click Main Key");
 			_MainBBaseFragment.KeyButtonClick(Data);
 		}else if((ScreenIndex & SCREEN_STATE_MENU_TOP) == SCREEN_STATE_MENU_TOP){
 			Log.d(TAG,"Click Menu Key");
 			_MenuBaseFragment.KeyButtonClick(Data);
-		}
-
+		} 
 	}
 	/////////////////////////////////////////////////////
 	//Popup//////////////////////////////////////////////
@@ -1396,6 +1424,34 @@ public class Home extends Activity {
 		HomeDialog = _WorkLoadInitPopup;
 		HomeDialog.show();
 	}
+	public void showWorkLoadWeighingInit1(){
+		if(AnimationRunningFlag == true)
+			return;
+		else
+			StartAnimationRunningTimer();
+		
+		if(HomeDialog != null){
+			HomeDialog.dismiss();
+			HomeDialog = null;
+		}
+		
+		HomeDialog = _WorkLoadWeighingInitPopup1;
+		HomeDialog.show();
+	}
+	public void showWorkLoadWeighingInit2(){
+		if(AnimationRunningFlag == true)
+			return;
+		else
+			StartAnimationRunningTimer();
+		
+		if(HomeDialog != null){
+			HomeDialog.dismiss();
+			HomeDialog = null;
+		}
+		
+		HomeDialog = _WorkLoadWeighingInitPopup2;
+		HomeDialog.show();
+	}
 	
 	/////////////////////////////////////////////////////
 	//Timer//////////////////////////////////////////////
@@ -1665,7 +1721,6 @@ public class Home extends Activity {
 				
 				else if (nSendCommandTimerIndex == 4){
 					CAN1Comm.Set_WeightOffsetSetting_PGN61184_62(0); //STATE_WEIGHT_OFFSET_SETTING_CALL
-					CAN1Comm.Set_WeighingDisplayMode1_1910_PGN61184_62(WeighingDisplayIndex);
 					CAN1Comm.TxCANToMCU(62);
 					CAN1Comm.Set_WeightOffsetSetting_PGN61184_62(3);
 					CAN1Comm.Set_WeighingDisplayMode1_1910_PGN61184_62(15);
@@ -1679,6 +1734,10 @@ public class Home extends Activity {
 					CAN1Comm.Set_EngineShutdownCotrolByte_PGN61184_121(0xF);
 					CAN1Comm.Set_SettingTimeforAutomaticEngineShutdown_364_PGN61184_121(0xFF);
 					CAN1Comm.TxCANToMCU(121);
+				}else if(nSendCommandTimerIndex == 7){
+					CAN1Comm.Set_SpeedmeterUnitChange_PGN65327(UnitOdo);
+					CAN1Comm.TxCANToMCU(47);
+					CAN1Comm.Set_SpeedmeterUnitChange_PGN65327(3);
 				}
 				else {
 					CancelSendCommandTimer();

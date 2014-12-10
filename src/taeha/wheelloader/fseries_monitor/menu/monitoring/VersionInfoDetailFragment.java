@@ -66,7 +66,7 @@ public class VersionInfoDetailFragment extends ParentFragment{
 	protected static final int STATE_MANUFACTURERCODE_TAEHA						= 1;
 	protected static final int STATE_MANUFACTURERCODE_FREEMS					= 10;
 	protected static final int STATE_MANUFACTURERCODE_KYUNGWOO					= 20;
-	protected static final int STATE_MANUFACTURERCODE_KBAUTOTECH				= 21;
+	protected static final int STATE_MANUFACTURERCODE_DONHWAN					= 21;
 	protected static final int STATE_MANUFACTURERCODE_CONTINENTAL				= 22;
 	protected static final int STATE_MANUFACTURERCODE_ZF						= 41;
 	protected static final int STATE_MANUFACTURERCODE_SAUNERDANFOSS				= 51;
@@ -346,8 +346,8 @@ public class VersionInfoDetailFragment extends ParentFragment{
 		case STATE_MANUFACTURERCODE_KYUNGWOO:
 			adapter.UpdateSecond(STATE_MAKER, "KYUNGWOO");
 			break;
-		case STATE_MANUFACTURERCODE_KBAUTOTECH:
-			adapter.UpdateSecond(STATE_MAKER, "KB AutoTech");
+		case STATE_MANUFACTURERCODE_DONHWAN:
+			adapter.UpdateSecond(STATE_MAKER, "DongHwan");
 			break;
 		case STATE_MANUFACTURERCODE_CONTINENTAL:
 			adapter.UpdateSecond(STATE_MAKER, "Continental");

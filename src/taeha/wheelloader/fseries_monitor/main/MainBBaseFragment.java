@@ -1454,6 +1454,10 @@ public class MainBBaseFragment extends ParentFragment{
 			Log.d(TAG,"Click MENU");
 			_MainBUpperMenuBarFragment.ClickMenu();
 			break;
+		case CAN1CommManager.FN:
+			Log.d(TAG,"Click FN");
+			ParentActivity.ExcuteUIActivity();
+			break;
 		default:
 			break;
 		}

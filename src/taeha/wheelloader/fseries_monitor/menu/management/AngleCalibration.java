@@ -205,6 +205,7 @@ public class AngleCalibration extends ParentFragment{
 		imgViewStep3.setImageResource(R.drawable.menu_management_boom_pressure_step_off);
 		imgViewStep4.setImageResource(R.drawable.menu_management_boom_pressure_step_off);
 		imgViewStep5.setImageResource(R.drawable.menu_management_boom_pressure_step_off);
+		textViewTitle.setText(ParentActivity.getResources().getString(R.string.Lower_the_boom_at_min_height));
 	}
 	public void SetStep2Display(){
 		imgViewIcon.setImageResource(R.drawable.menu_management_boom_angle_img_02);
@@ -213,6 +214,7 @@ public class AngleCalibration extends ParentFragment{
 		imgViewStep3.setImageResource(R.drawable.menu_management_boom_pressure_step_off);
 		imgViewStep4.setImageResource(R.drawable.menu_management_boom_pressure_step_off);
 		imgViewStep5.setImageResource(R.drawable.menu_management_boom_pressure_step_off);
+		textViewTitle.setText(ParentActivity.getResources().getString(R.string.Lift_up_the_boom_at_max_height));
 	}
 	public void SetStep3Display(){
 		imgViewIcon.setImageResource(R.drawable.menu_management_boom_angle_img_03);
@@ -221,6 +223,7 @@ public class AngleCalibration extends ParentFragment{
 		imgViewStep3.setImageResource(R.drawable.menu_management_boom_pressure_step_on);
 		imgViewStep4.setImageResource(R.drawable.menu_management_boom_pressure_step_off);
 		imgViewStep5.setImageResource(R.drawable.menu_management_boom_pressure_step_off);
+		textViewTitle.setText(ParentActivity.getResources().getString(R.string.Lift_the_boom_to__5_0));
 	}
 	public void SetStep4Display(){
 		imgViewIcon.setImageResource(R.drawable.menu_management_boom_angle_img_04);
@@ -229,6 +232,7 @@ public class AngleCalibration extends ParentFragment{
 		imgViewStep3.setImageResource(R.drawable.menu_management_boom_pressure_step_off);
 		imgViewStep4.setImageResource(R.drawable.menu_management_boom_pressure_step_on);
 		imgViewStep5.setImageResource(R.drawable.menu_management_boom_pressure_step_off);
+		textViewTitle.setText(ParentActivity.getResources().getString(R.string.Max_retraction_of_bucket_cylinder));
 	}
 	public void SetStep5Display(){
 		imgViewIcon.setImageResource(R.drawable.menu_management_boom_angle_img_05);
@@ -237,6 +241,7 @@ public class AngleCalibration extends ParentFragment{
 		imgViewStep3.setImageResource(R.drawable.menu_management_boom_pressure_step_off);
 		imgViewStep4.setImageResource(R.drawable.menu_management_boom_pressure_step_off);
 		imgViewStep5.setImageResource(R.drawable.menu_management_boom_pressure_step_on);
+		textViewTitle.setText(ParentActivity.getResources().getString(R.string.Max_extension_of_bucket_cylinder));
 	}
 	public void AngleDisplay(int Angle, int AngleDot){
 		textViewAngle.setText(Integer.toString(Angle) + "." + Integer.toString(AngleDot) + "им");

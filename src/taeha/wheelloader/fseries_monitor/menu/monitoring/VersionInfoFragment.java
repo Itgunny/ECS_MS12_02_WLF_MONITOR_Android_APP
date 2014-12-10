@@ -38,12 +38,14 @@ public class VersionInfoFragment extends ParentFragment{
 	TextView textViewCluster;
 	TextView textViewRMCU;
 	TextView textViewEHCU;
+	TextView textViewACU;
 	
 	TextView textViewMonitorVersion;
 	TextView textViewMCUVersion;
 	TextView textViewClusterVersion;
 	TextView textViewRMCUVersion;
 	TextView textViewEHCUVersion;
+	TextView textViewACUVersion;
 	
 	TextView textViewModel;
 	//////////////////////////////////////////////////
@@ -53,6 +55,7 @@ public class VersionInfoFragment extends ParentFragment{
 	byte[] ComponentBasicInformation_MCU;
 	byte[] ComponentBasicInformation_Cluster;
 	byte[] ComponentBasicInformation_Monitor;
+	byte[] ComponentBasicInformation_ACU;
 	
 	byte[] ComponentBasicInformation_EHCU;
 	byte[] SoftwareIdentification_ECM;
@@ -128,12 +131,14 @@ public class VersionInfoFragment extends ParentFragment{
 		textViewCluster = (TextView)mRoot.findViewById(R.id.textView_menu_body_monitoring_version_cluster_title);
 		textViewRMCU = (TextView)mRoot.findViewById(R.id.textView_menu_body_monitoring_version_rmcu_title);
 		textViewEHCU = (TextView)mRoot.findViewById(R.id.textView_menu_body_monitoring_version_ehcu_title);
+		textViewACU = (TextView)mRoot.findViewById(R.id.textView_menu_body_monitoring_version_acu_title);
 		
 		textViewMonitorVersion = (TextView)mRoot.findViewById(R.id.textView_menu_body_monitoring_version_monitor_data);
 		textViewMCUVersion = (TextView)mRoot.findViewById(R.id.textView_menu_body_monitoring_version_mcu_data);
 		textViewClusterVersion = (TextView)mRoot.findViewById(R.id.textView_menu_body_monitoring_version_cluster_data);
 		textViewRMCUVersion = (TextView)mRoot.findViewById(R.id.textView_menu_body_monitoring_version_rmcu_data);
 		textViewEHCUVersion = (TextView)mRoot.findViewById(R.id.textView_menu_body_monitoring_version_ehcu_data);
+		textViewACUVersion = (TextView)mRoot.findViewById(R.id.textView_menu_body_monitoring_version_acu_data);
 		
 		textViewModel = (TextView)mRoot.findViewById(R.id.textView_menu_body_monitoring_version_model_data);
 	}
@@ -146,6 +151,7 @@ public class VersionInfoFragment extends ParentFragment{
 		ComponentBasicInformation_MCU = new byte[CAN1CommManager.LENGTH_COMPONENTBASICINFORMATION];
 		ComponentBasicInformation_Cluster = new byte[CAN1CommManager.LENGTH_COMPONENTBASICINFORMATION];
 		ComponentBasicInformation_Monitor = new byte[CAN1CommManager.LENGTH_COMPONENTBASICINFORMATION];
+		ComponentBasicInformation_ACU = new byte[CAN1CommManager.LENGTH_SOFTWAREIDENTIFICATION_ACU];
 		ComponentBasicInformation_EHCU = new byte[CAN1CommManager.LENGTH_COMPONENTBASICINFORMATION];
 		SoftwareIdentification_ECM = new byte[CAN1CommManager.LENGTH_SOFTWAREIDENTIFICATION_ECM];
 		SoftwareIdentification_TCU = new byte[CAN1CommManager.LENGTH_SOFTWAREIDENTIFICATION_TCU];
@@ -164,7 +170,9 @@ public class VersionInfoFragment extends ParentFragment{
 		for(int i = 0; i < CAN1CommManager.LENGTH_SOFTWAREIDENTIFICATION_TCU; i++){
 			SoftwareIdentification_TCU[i] = (byte) 0;
 		}
-		
+		for(int i = 0; i < CAN1CommManager.LENGTH_SOFTWAREIDENTIFICATION_ACU; i++){
+			ComponentBasicInformation_ACU[i] = (byte) 0;
+		}
 		ProgramSubVersionRMCU = 0xFF;
 		ProgramSubVersionMCU = 0xFF;
 		ProgramSubVersionCluster = 0xFF;
@@ -272,6 +280,7 @@ public class VersionInfoFragment extends ParentFragment{
 		ComponentBasicInformation_EHCU = CAN1Comm.Get_ComponentBasicInformation_1698_PGN65330_EHCU();
 		SoftwareIdentification_ECM = CAN1Comm.Get_ComponentBasicInformation_1698_PGN65330_ECM();
 		SoftwareIdentification_TCU = CAN1Comm.Get_ComponentBasicInformation_1698_PGN65330_TCU();
+		ComponentBasicInformation_ACU = CAN1Comm.Get_ComponentBasicInformation_1698_PGN65330_ACU();
 		
 		ProgramSubVersionRMCU = ParentActivity.FindProgramSubInfo(ComponentBasicInformation_RMCU);
 		ProgramSubVersionMCU = ParentActivity.FindProgramSubInfo(ComponentBasicInformation_MCU);
@@ -289,6 +298,7 @@ public class VersionInfoFragment extends ParentFragment{
 		VersionDisplay(ComponentBasicInformation_RMCU,ProgramSubVersionRMCU,textViewRMCUVersion);
 		VersionDisplay(ComponentBasicInformation_Cluster,ProgramSubVersionCluster,textViewClusterVersion);
 		VersionDisplay(ComponentBasicInformation_EHCU,ProgramSubVersionEHCU,textViewEHCUVersion);
+		ACUVersionDisplay(ComponentBasicInformation_ACU,textViewACUVersion);
 	}
 	/////////////////////////////////////////////////////////////////////	
 	public void ClickOK(){
@@ -364,6 +374,13 @@ public class VersionInfoFragment extends ParentFragment{
 	}
 	public void VersionDisplay(byte[] _data, int _subinfo, TextView textview){
 		textview.setText(ParentActivity.GetVersionString(_data, _subinfo));
+	}
+	public void ACUVersionDisplay(byte[] _data,TextView textview){
+		int UpperVersion;
+		int LowerVersion;
+		UpperVersion = (_data[3] & 0xF0) >> 4;
+		LowerVersion = _data[3] & 0x0F;
+		textview.setText(Integer.toString(UpperVersion) + "." + Integer.toString(LowerVersion));
 	}
 	/////////////////////////////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////////

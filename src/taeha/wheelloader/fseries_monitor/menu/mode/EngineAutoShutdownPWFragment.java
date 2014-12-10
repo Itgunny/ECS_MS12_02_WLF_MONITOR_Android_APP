@@ -39,6 +39,7 @@ public class EngineAutoShutdownPWFragment extends PasswordFragment{
 				CursurDisplay(msg.what);
 			}
 		};
+		CursurDisplay(CursurIndex);
 		return mRoot;
 	}
 	

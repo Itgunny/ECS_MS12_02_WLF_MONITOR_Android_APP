@@ -22,19 +22,9 @@ import taeha.wheelloader.fseries_monitor.main.Home.SeatBeltTimerClass;
 import taeha.wheelloader.fseries_monitor.main.R.string;
 import taeha.wheelloader.fseries_monitor.popup.SpeedometerInitPopup.PopupOffTimerClass;
 
-public class LoggedFaultDeletePopup extends ParentPopup{
+public class WorkLoadWeighingInitPopup2 extends ParentPopup{
 	//CONSTANT////////////////////////////////////////
-//	private static final int REQ_ERR_MACHINE_ACTIVE		= 0;
-	private static final int REQ_ERR_MACHINE_LOGGED		= 1;
-	
-//	private static final int REQ_ERR_ENGINE_ACTIVE		= 2;
-	private static final int REQ_ERR_ENGINE_LOGGED		= 3;
-	
-//	private static final int REQ_ERR_TM_ACTIVE			= 4;
-	private static final int REQ_ERR_TM_LOGGED			= 5;
-	
-//	private static final int REQ_ERR_EHCU_ACTIVE		= 6;
-	private static final int REQ_ERR_EHCU_LOGGED		= 7;
+
 	//////////////////////////////////////////////////
 	//RESOURCE////////////////////////////////////////
 
@@ -57,10 +47,10 @@ public class LoggedFaultDeletePopup extends ParentPopup{
 	//TEST////////////////////////////////////////////
 	
 	//////////////////////////////////////////////////
-	public LoggedFaultDeletePopup(Context _context) {
+	public WorkLoadWeighingInitPopup2(Context _context) {
 		super(_context);
 		// TODO Auto-generated constructor stub
-		TAG = "LoggedFaultDeletePopup";
+		TAG = "WorkLoadWeighingInitPopup2";
 		ParentActivity = (Home)_context;
 		inflater = (LayoutInflater)_context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 		mRoot = inflater.inflate(R.layout.popup_loggedfault_delete, null);
@@ -74,12 +64,13 @@ public class LoggedFaultDeletePopup extends ParentPopup{
 	public void show() {
 		// TODO Auto-generated method stub
 		super.show();
+		Log.d(TAG,"show");
 		InitResource();
 		InitButtonListener();
 		InitValuable();
 		
 		setTitle(SelectMode);
-		ParentActivity.ScreenIndex = ParentActivity.SCREEN_STATE_MENU_MONITORING_FAULTHISTORY_LOGGED_DELETE;
+		ParentActivity.ScreenIndex = ParentActivity.SCREEN_STATE_MENU_MODE_HYD_WORKLOAD_WEIGHING_INIT2;
 	}
 	
 	@Override
@@ -92,7 +83,8 @@ public class LoggedFaultDeletePopup extends ParentPopup{
 	public void dismiss() {
 		// TODO Auto-generated method stub
 		super.dismiss();
-		ParentActivity.ScreenIndex = ParentActivity.SCREEN_STATE_MENU_MONITORING_FAULTHISTORY_LOGGED_TOP;
+		Log.d(TAG,"dismiss");
+		ParentActivity.ScreenIndex = ParentActivity.OldScreenIndex;
 	}
 
 	@Override
@@ -141,11 +133,30 @@ public class LoggedFaultDeletePopup extends ParentPopup{
 	}
 	///////////////////////////////////////////////////////////////////////////////
 	public void ClickOK(){
-		CAN1Comm.Set_DTCInformationRequest_1515_PGN61184_11(10);
-		CAN1Comm.Set_DTCType_1510_PGN61184_11(SelectMode);
-		CAN1Comm.TxCANToMCU(11);
-		CAN1Comm.Set_DTCInformationRequest_1515_PGN61184_11(0xF);
-		CAN1Comm.Set_DTCType_1510_PGN61184_11(0xF);
+		switch (SelectMode) {
+		case 0:
+			CAN1Comm.Set_RequestTotalWorkWeightReset_PGN61184_62(SelectMode);
+			CAN1Comm.TxCANToMCU(62);
+			CAN1Comm.Set_RequestTotalWorkWeightReset_PGN61184_62(15);
+			break;
+		case 1:
+			CAN1Comm.Set_RequestTotalWorkWeightReset_PGN61184_62(SelectMode);
+			CAN1Comm.TxCANToMCU(62);
+			CAN1Comm.Set_RequestTotalWorkWeightReset_PGN61184_62(15);
+			break;
+		case 2:
+			CAN1Comm.Set_RequestTotalWorkWeightReset_PGN61184_62(SelectMode);
+			CAN1Comm.TxCANToMCU(62);
+			CAN1Comm.Set_RequestTotalWorkWeightReset_PGN61184_62(15);
+			break;
+		case 3:
+			CAN1Comm.Set_RequestReweighing_PGN61184_62(1);
+			CAN1Comm.TxCANToMCU(62);
+			CAN1Comm.Set_RequestReweighing_PGN61184_62(3);
+			break;
+		default:
+			break;
+		}
 		this.dismiss();
 	}	
 	public void ClickCancel(){
@@ -159,21 +170,21 @@ public class LoggedFaultDeletePopup extends ParentPopup{
 	}
 	public void setTitle(int Index){
 		switch (Index) {
-		case REQ_ERR_MACHINE_LOGGED:
-			textViewTitle.setText(ParentActivity.getResources().getString(string.Delete_Logged_Fault) 
-					+ "(" +ParentActivity.getResources().getString(string.Machine) +")");
+		case CAN1CommManager.DATA_STATE_WEIGHINGDISPLAY_TOTAL_A:
+			textViewTitle.setText(ParentActivity.getResources().getString(string.Initialize_) 
+					+ "(" +ParentActivity.getResources().getString(string.Total_A) +")");
 			break;
-		case REQ_ERR_ENGINE_LOGGED:
-			textViewTitle.setText(ParentActivity.getResources().getString(string.Delete_Logged_Fault) 
-					+ "(" +ParentActivity.getResources().getString(string.Engine) +")");
+		case CAN1CommManager.DATA_STATE_WEIGHINGDISPLAY_TOTAL_B:
+			textViewTitle.setText(ParentActivity.getResources().getString(string.Initialize_) 
+					+ "(" +ParentActivity.getResources().getString(string.Total_B) +")");
 			break;
-		case REQ_ERR_TM_LOGGED:
-			textViewTitle.setText(ParentActivity.getResources().getString(string.Delete_Logged_Fault) 
-					+ "(" +ParentActivity.getResources().getString(string.Transmission) +")");
+		case CAN1CommManager.DATA_STATE_WEIGHINGDISPLAY_TOTAL_C:
+			textViewTitle.setText(ParentActivity.getResources().getString(string.Initialize_) 
+					+ "(" +ParentActivity.getResources().getString(string.Total_C) +")");
 			break;
-		case REQ_ERR_EHCU_LOGGED:
-			textViewTitle.setText(ParentActivity.getResources().getString(string.Delete_Logged_Fault) 
-					+ "(" +ParentActivity.getResources().getString(string.EHCU) +")");
+		case 3:
+			textViewTitle.setText(ParentActivity.getResources().getString(string.Initialize_) 
+					+ "(" +ParentActivity.getResources().getString(string.Current) +")");
 			break;
 		default:
 			break;
@@ -181,6 +192,25 @@ public class LoggedFaultDeletePopup extends ParentPopup{
 	}
 	////////////////////////////////////////////////////////////////////////////////
 	//////////////////////////////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////////////////////
+	public void KeyButtonClick(int key){
+		switch (key) {
+		case CAN1CommManager.LEFT:
+			ClickLeft();
+			break;
+		case CAN1CommManager.RIGHT:
+			ClickRight();
+			break;
+		case CAN1CommManager.ESC:
+			ClickESC();
+			break;
+		case CAN1CommManager.ENTER:
+			ClickEnter();
+			break;
+		default:
+			break;
+		}
+	}
 	public void ClickLeft(){
 		switch (CursurIndex) {
 		case 1:

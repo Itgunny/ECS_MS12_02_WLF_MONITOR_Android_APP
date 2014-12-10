@@ -157,8 +157,6 @@ public class FaultHistoryLoggedFragment extends ParentFragment{
 		// TODO Auto-generated method stub
 		super.InitValuables();
 		
-		SetThreadSleepTime(1000);
-		
 		SendDTCIndex = REQ_ERR_MACHINE_LOGGED;
 		SendSeqIndex = 1;
 		
@@ -526,11 +524,24 @@ public class FaultHistoryLoggedFragment extends ParentFragment{
 				RequestErrorCode(SendDTCIndex,1,SendSeqIndex);
 				SendSeqIndex++;
 			}
-				
+			SetThreadSleepTime(1000);
 			break;
 		default:
 			break;
 		}
+	}
+	/////////////////////////////////////////////////////////////////////
+	public void ClickLeft(){
+		
+	}
+	public void ClickRight(){
+		
+	}
+	public void ClickESC(){
+		ClickOK();
+	}
+	public void ClickEnter(){
+		
 	}
 	/////////////////////////////////////////////////////////////////////
 	static final int EHCU_SPNFMI[][] = {{842,9},{844,9},{978,9},{2316,9},{2317,9},{2319,2},{2320,2},{2321,2},{2322,2},{2323,2},{2324,2},

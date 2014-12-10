@@ -368,6 +368,8 @@ void InitNewProtoclValuable() {
 		sizeof(RX_COMPONENT_IDENTIFICATION_ECM_65330));
 	memset((unsigned char*) &RX_COMPONENT_IDENTIFICATION_TCU_65330, 0xFF,
 		sizeof(RX_COMPONENT_IDENTIFICATION_TCU_65330));
+	memset((unsigned char*) &RX_COMPONENT_IDENTIFICATION_ACU_65330, 0xFF,
+			sizeof(RX_COMPONENT_IDENTIFICATION_ACU_65330));
 	memset((unsigned char*) &RX_TRIP_TIME_INFORMATION_65344, 0xFF,
 		sizeof(RX_TRIP_TIME_INFORMATION_65344));
 	memset((unsigned char*) &RX_MACHINE_SECURITY_STATUS_65348, 0xFF,
@@ -394,6 +396,8 @@ void InitNewProtoclValuable() {
 			sizeof(RX_ENGINE_STATUS2_65370));
 	memset((unsigned char*) &RX_ENGINE_STATUS1_65371, 0xFF,
 		sizeof(RX_ENGINE_STATUS1_65371));
+	memset((unsigned char*) &RX_AIR_CONDITIONER_STATUS_65373, 0xFF,
+			sizeof(RX_AIR_CONDITIONER_STATUS_65373));
 	memset((unsigned char*) &RX_VEHICLE_DISTANCE_65389, 0xFF,
 		sizeof(RX_VEHICLE_DISTANCE_65389));
 	memset((unsigned char*) &RX_FUEL_INFORMATION_ECO_GAUGE_65390, 0xFF,
@@ -667,6 +671,27 @@ void InitNewProtoclValuable() {
 	gErr_Ecu_Total_Logged = 0;
 	gErr_Tcu_Total_Logged = 0;
 	gErr_EHCU_Total_Logged = 0;
+
+	RX_AIR_CONDITIONER_STATUS_65373.Ambienttemperaturesensoropen = 0;
+	RX_AIR_CONDITIONER_STATUS_65373.Ambienttemperaturesensorshort = 0;
+	RX_AIR_CONDITIONER_STATUS_65373.Incabtemperaturesensoropen = 0;
+	RX_AIR_CONDITIONER_STATUS_65373.Incabtemperaturesensorshort = 0;
+	RX_AIR_CONDITIONER_STATUS_65373.Evaptemperaturesensoropen = 0;
+	RX_AIR_CONDITIONER_STATUS_65373.Evaptemperaturesensorshort = 0;
+
+
+	RX_AIR_CONDITIONER_STATUS_65373.Mode1actuatoropenshort = 0;
+	RX_AIR_CONDITIONER_STATUS_65373.Mode1actuatordrivecircuitmalfunction = 0;
+	RX_AIR_CONDITIONER_STATUS_65373.Intakeactuatoropenshort = 0;
+	RX_AIR_CONDITIONER_STATUS_65373.Intakeactuatordrivecircuitmalfunction = 0;
+	RX_AIR_CONDITIONER_STATUS_65373.Temperatureactuatoropenshort = 0;
+	RX_AIR_CONDITIONER_STATUS_65373.Temperatureactuatordrivecircuitmalfunction = 0;
+
+
+	RX_AIR_CONDITIONER_STATUS_65373.Ducttemperaturesensoropen = 0;
+	RX_AIR_CONDITIONER_STATUS_65373.Ducttemperaturesensorshort = 0;
+	RX_AIR_CONDITIONER_STATUS_65373.WaterValveSensorError = 0;
+	RX_AIR_CONDITIONER_STATUS_65373.GPSCircuitError = 0;
 }
 
 
@@ -695,6 +720,10 @@ void UART1_SeperateData_NEWCAN2(int Priority, int PF, int PS, int SourceAddress,
 		case SA_CID:
 			UART1_SeperateData_CID(Priority,PF,PS,Data);
 			break;
+		case SA_ACU:
+			UART1_SeperateData_ACU(Priority,PF,PS,Data);
+			break;
+
 	}
 	CommErrCnt = 0;
 }
@@ -1434,6 +1463,22 @@ void UART1_SeperateData_CID_Multi(int Priority, int PF, int PS, unsigned char* D
 			break;
 	}
 }
+void UART1_SeperateData_ACU(int Priority, int PF, int PS, unsigned char* Data)
+{
+	switch (PF) {
+		case 255:	// 0xFF00
+		default:
+			switch (PS) {
+				case 50 :memcpy((unsigned char*)&RX_COMPONENT_IDENTIFICATION_ACU_65330,&Data[7],8); break;
+				case 93 :memcpy((unsigned char*)&RX_AIR_CONDITIONER_STATUS_65373,&Data[7],8); break;
+
+				default:
+					break;
+			}
+		break;
+	}
+}
+
 void SaveErrorCode_NEW_CAN2(void) {
 	unsigned char PacketNo;
 

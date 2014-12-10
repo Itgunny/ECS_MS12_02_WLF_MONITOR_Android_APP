@@ -47,7 +47,7 @@
 		           android:id="@+id/radioButton_menu_body_monitoring_fault_engine"
 		           android:layout_width="wrap_content"
 		           android:layout_height="wrap_content"
-		           android:layout_marginTop="40dp"
+		           android:layout_marginTop="20dp"
 		           android:button="@drawable/_selector_radio_btn"
 		           android:text="@string/Engine"
 		           android:textColor="@drawable/_selector_radio_txt_white_amber"
@@ -57,7 +57,7 @@
 		           android:id="@+id/radioButton_menu_body_monitoring_fault_transmission"
 		           android:layout_width="wrap_content"
 		           android:layout_height="wrap_content"
-		           android:layout_marginTop="40dp"
+		           android:layout_marginTop="20dp"
 		           android:button="@drawable/_selector_radio_btn"
 		           android:text="@string/Transmission"
 		           android:textColor="@drawable/_selector_radio_txt_white_amber"
@@ -67,12 +67,21 @@
 		           android:id="@+id/radioButton_menu_body_monitoring_fault_ehcu"
 		           android:layout_width="wrap_content"
 		           android:layout_height="wrap_content"
-		           android:layout_marginTop="40dp"
+		           android:layout_marginTop="20dp"
 		           android:button="@drawable/_selector_radio_btn"
 		           android:text="@string/EHCU"
 		           android:textColor="@drawable/_selector_radio_txt_white_amber"
 		           android:textSize="25sp" />
 		       
+		       <RadioButton
+		           android:id="@+id/radioButton_menu_body_monitoring_fault_acu"
+		           android:layout_width="wrap_content"
+		           android:layout_height="wrap_content"
+		           android:layout_marginTop="20dp"
+		           android:button="@drawable/_selector_radio_btn"
+		           android:text="@string/ACU"
+		           android:textColor="@drawable/_selector_radio_txt_white_amber"
+		           android:textSize="25sp" />
 		       
 		
 		 	</RadioGroup>

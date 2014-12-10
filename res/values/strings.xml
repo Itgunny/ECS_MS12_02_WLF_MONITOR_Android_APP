@@ -228,6 +228,7 @@
     <string name="Cluster">Cluster</string>
     <string name="RMCU">RMCU</string>
     <string name="EHCU">EHCU</string>
+    <string name="ACU">ACU</string>
     <string name="Software_Update">Software Update</string>
     <string name="RMCU_Machine_Information">RMCU Information</string>
     <string name="Network_Type">Network Type</string>

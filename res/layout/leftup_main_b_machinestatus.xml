@@ -125,7 +125,6 @@
 	        android:layout_marginRight="10dp"
 	        android:layout_toLeftOf="@+id/textView_leftup_machinestatus_weighing_upper_unit"
 	        android:gravity="right"
-	        android:text="123,456,789.0"
 	        android:textAppearance="?android:attr/textAppearanceLarge"
 	        android:textSize="30sp"
 	        android:textStyle="bold|italic" />
@@ -170,7 +169,6 @@
 	        android:layout_marginRight="10dp"
 	        android:layout_toLeftOf="@+id/textView_leftup_machinestatus_weighing_lower_unit"
 	        android:gravity="right"
-	        android:text="123,456,789.0"
 	        android:textAppearance="?android:attr/textAppearanceLarge"
 	        android:textSize="30sp"
 	        android:textStyle="bold|italic" />
