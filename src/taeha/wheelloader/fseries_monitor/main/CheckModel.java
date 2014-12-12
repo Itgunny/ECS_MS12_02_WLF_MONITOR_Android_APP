@@ -36,7 +36,6 @@ public class CheckModel {
 		boolean bAsterisk = false;
 		int n100,n10,n1;
 		int MCUModelNum;
-		Log.d(TAG,"GetMCUVersion 0");
 		////////////// Find Serial Number/////////////
 		for(int i = 4; i < 20; i++){
 			if(BasicInfo[i] != 0x2A)
@@ -48,9 +47,7 @@ public class CheckModel {
 				bAsterisk = true;
 				break;
 			}
-		}
-		Log.d(TAG,"GetMCUVersion 1");
-		
+		}		
 		/////////////////////////////////////////////
 		
 		//////////// Find Model Name/////////////////
@@ -65,7 +62,6 @@ public class CheckModel {
 				break;
 			}
 		}
-		Log.d(TAG,"GetMCUVersion 2");
 		/////////////////////////////////////////////
 		int[] Model;
 		Model = new int [Index2];

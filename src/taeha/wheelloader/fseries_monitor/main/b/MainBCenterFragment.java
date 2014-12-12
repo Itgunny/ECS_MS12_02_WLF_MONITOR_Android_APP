@@ -177,7 +177,6 @@ public class MainBCenterFragment extends ParentFragment{
 			case CAN1CommManager.DATA_STATE_ECO_GREEN:
 			default:
 				imgViewEcoBar.setImageResource(R.drawable.main_center_eco_green_all);
-
 				break;
 			case CAN1CommManager.DATA_STATE_ECO_YELLOW:
 				imgViewEcoBar.setImageResource(R.drawable.main_center_eco_yellow_all);
@@ -189,13 +188,17 @@ public class MainBCenterFragment extends ParentFragment{
 				imgViewEcoBar.setImageResource(R.drawable.main_center_eco_white_all);
 				break;
 		}
-
-		if (_level > 100) {
+		
+		if(_level == 0xFF){
+			_level = 0;
+		}
+		else if (_level > 100) {
 			_level = 100;
 		} else if (_level < 0) {
 			_level = 0;
 		}
 		Scale = (float) ((float) _level / 100.0);
+		imgViewEcoBar.setPivotX(0);	
 		imgViewEcoBar.setScaleX(Scale);
 		//_EcoGaugeAnimation.SetScale(_level);
 	}

@@ -263,6 +263,8 @@
 	        android:layout_height="wrap_content"
 	        android:layout_alignBottom="@+id/ImageButton_menu_body_monitoring_fault_logged_low_ok"
 	        android:layout_alignParentLeft="true"
+	        android:layout_alignParentTop="true"
+	        android:layout_toLeftOf="@+id/imageView_menu_body_monitoring_fault_logged_low_line"
 	        android:gravity="center"
 	        android:text="@string/AS"
 	        android:textAppearance="?android:attr/textAppearanceLarge" />

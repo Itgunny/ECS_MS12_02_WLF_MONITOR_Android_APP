@@ -1705,7 +1705,7 @@ typedef struct
 	unsigned char	WeighingDisplayMode1_1910:4;
 	unsigned char 	Reserved0:4;
 
-	unsigned char	DM0;
+	unsigned char	DM0[2];
 
 }__attribute__((packed))  WEIGHING_SYSTEM_SETTING_REQUEST_61184_62;
 typedef struct
@@ -2263,10 +2263,9 @@ typedef struct
 	unsigned char	EcoGaugeStatus_1305:4;							// HCESPN : 1305
 	unsigned char 	Reserved0:4;
 
-	unsigned short	AverageFuelRate;
-
 	unsigned short	CurrentFuelRate;
 
+	unsigned short	AverageFuelRate;
 }__attribute__((packed))  FUEL_INFORMATION_ECO_GAUGE_65390;
 typedef struct
 {

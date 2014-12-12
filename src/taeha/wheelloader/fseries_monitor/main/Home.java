@@ -59,9 +59,13 @@ public class Home extends Activity {
 	public static final int VERSION_HIGH 		= 1;
 	public static final int VERSION_LOW 		= 0;
 	public static final int VERSION_SUB_HIGH 	= 2;
-	public static final int VERSION_SUB_LOW 	= 3;
+	public static final int VERSION_SUB_LOW 	= 4;
 	////1.0.2.3
 	// UI B 안 최초 적용 2014.12.10
+	////1.0.2.4
+	// Eco Gauge Pivot 함수 추가(Progress Bar가 가운데서 움직이는 현상 수정) 2014.12.11
+	// Current Fuel Rate 위치 수정(NDK 구조체 위치 수정) 2014.12.11
+	// 61184/62의 8번째 바이트 0으로 나오는 문제 수정(구조체 길이문제) 2014.12.12
 	//////////////////////////////////////////////////////////////////////////////////////
 	
 	// TAG
