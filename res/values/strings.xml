@@ -3,6 +3,9 @@
     <string name="app_name">Wheel_Loader_F_Series_UI</string>
     <string name="action_settings">Settings</string>
     <string name="hello_world">Hello world!</string>
+    <string name="Crash_Toast_Text">Crash</string>
+    <string name="Error_Report">Error Report</string>
+    <string name="Crash_Data">Crash Data</string>
     <!-- Common Start-->
     <string name="Hr">Hr</string>
     <string name="C">ºC</string>
