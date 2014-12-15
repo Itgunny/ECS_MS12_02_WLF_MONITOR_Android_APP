@@ -108,7 +108,8 @@ public class ErrorReportSender implements ReportSender {
 						nLastIndex = Index;
 					}
 				}
-
+				if(nLastIndex > 1000)
+					nLastIndex = 1000;
 				return nLastIndex;
 			}
 			

@@ -59,7 +59,7 @@ public class Home extends Activity {
 	public static final int VERSION_HIGH 		= 1;
 	public static final int VERSION_LOW 		= 0;
 	public static final int VERSION_SUB_HIGH 	= 2;
-	public static final int VERSION_SUB_LOW 	= 5;
+	public static final int VERSION_SUB_LOW 	= 6;
 	////1.0.2.3
 	// UI B 안 최초 적용 2014.12.10
 	////1.0.2.4
@@ -68,6 +68,8 @@ public class Home extends Activity {
 	// 61184/62의 8번째 바이트 0으로 나오는 문제 수정(구조체 길이문제) 2014.12.12
 	// 1.0.2.5
 	// Error Report 추가 (경로 : mnt/sdcard/alarams/WheelLoader_Logxxx.txt) 2014.12.12
+	// 1.0.2.6
+	// Hardware Version 표시 추가 2014.12.12
 	//////////////////////////////////////////////////////////////////////////////////////
 	
 	// TAG
@@ -277,6 +279,8 @@ public class Home extends Activity {
 	public  static final int SCREEN_STATE_MAIN_ESL_CHECK_TOP								= 0x40000000;
 	public  static final int SCREEN_STATE_MAIN_ESL_PASSWORD									= 0x41000000;
 	public  static final int SCREEN_STATE_MAIN_ESL_CHECK_END								= 0x4FFFFFFF;
+	
+	public  static final int SCREEN_STATE_MAIN_CAMERA										= 0x50000000;
 	
 	public  static final int UNIT_ODO_KM 			= 0;
 	public  static final int UNIT_ODO_MILE 			= 1;
@@ -594,15 +598,16 @@ public class Home extends Activity {
 		
 	}
 	public void ExcuteCamActivitybyKey(){
-
+		OldScreenIndex = ScreenIndex;
+		ScreenIndex = SCREEN_STATE_MAIN_CAMERA;
 		CAN1Comm.CameraOnFlag = CAN1CommManager.STATE_CAMERA_MANUAL;
 		CAN1Comm.TxCMDToMCU(CAN1Comm.CMD_CAM, CameraOrder1);
 	}
 	public void ExcuteCamActivitybyReverseGear(){
-	
 		CAN1Comm.CameraOnFlag = CAN1CommManager.STATE_CAMERA_REVERSEGEAR;
 	}
 	public boolean ExitCam(){
+		ScreenIndex = OldScreenIndex;
 		try {
 			if(CAN1Comm.CameraOnFlag == CAN1CommManager.STATE_CAMERA_MANUAL){
 				CAN1Comm.CameraOnFlag = CAN1CommManager.STATE_CAMERA_OFF;
@@ -1008,6 +1013,8 @@ public class Home extends Activity {
 					CameraReverseOnCount = 0;
 				}
 				if(CameraReverseOnCount >= 5){
+					OldScreenIndex = ScreenIndex;
+					ScreenIndex = SCREEN_STATE_MAIN_CAMERA;
 					CAN1Comm.CameraOnFlag = CAN1CommManager.STATE_CAMERA_REVERSEGEAR;
 					CAN1Comm.TxCMDToMCU(CAN1Comm.CMD_CAM, CameraOrder1);
 					imgViewCameraScreen.setClickable(false);

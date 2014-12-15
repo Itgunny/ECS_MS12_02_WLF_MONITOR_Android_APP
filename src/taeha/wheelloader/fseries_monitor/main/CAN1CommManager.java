@@ -1507,6 +1507,7 @@ public class CAN1CommManager extends ICAN1CommManager.Stub{		// ttySAC1(Linux), 
 	public int Get_FirmwareVersionLow(){ return service.Get_FirmwareVersionLow();}
 	public int Get_FirmwareVersionSubHigh(){ return service.Get_FirmwareVersionSubHigh();}
 	public int Get_FirmwareVersionSubLow(){ return service.Get_FirmwareVersionSubLow();}
+	public int Get_HWVersion(){ return service.Get_HWVersion();}
 	public int Get_CommErrCnt(){ return service.Get_CommErrCnt();}
 	
 	public void Set_CommErrCnt(int Data){ service.Set_CommErrCnt(Data);}

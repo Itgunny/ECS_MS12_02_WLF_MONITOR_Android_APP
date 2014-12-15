@@ -998,6 +998,7 @@ public class CommService extends Service{
 	public native int Get_FirmwareVersionLow();
 	public native int Get_FirmwareVersionSubHigh();
 	public native int Get_FirmwareVersionSubLow();
+	public native int Get_HWVersion();
 	public native int Get_CommErrCnt();
 	
 	public native void Set_CommErrCnt(int Data);

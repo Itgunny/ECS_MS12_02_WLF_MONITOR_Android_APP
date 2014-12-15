@@ -30,13 +30,10 @@ typedef struct
 	unsigned char	SWVersionSubLow:4;
 	unsigned char	SWVersionSubHigh:4;
 
-	unsigned char	HWVersionHigh;
+	unsigned short	HWVersion;
 
-	unsigned char	HWVersionMid;
 
-	unsigned char	HWVersionLow;
-
-	unsigned char	DM[3];
+	unsigned char	DM[4];
 
 }__attribute__((packed))  RES_VERSION;
 

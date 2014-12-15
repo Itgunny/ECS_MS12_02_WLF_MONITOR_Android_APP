@@ -276,6 +276,7 @@
     <string name="Fingertip_Calibration">Fingertip Calibration</string>
     <string name="Boom_Down_Response_Adjust">Boom Down Response Adjust</string>
     <string name="Bucket_Dump_Response_Adjust">Bucket Dump Response Adjust</string>
+    <string name="Hardware">Hardware</string>
     <!-- Menu Monitoring End -->
     <!-- Menu Management Start -->
     <string name="Machine_Security">Machine Security</string>
