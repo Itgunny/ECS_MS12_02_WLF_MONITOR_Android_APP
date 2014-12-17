@@ -87,6 +87,10 @@ public class CommService extends Service{
 	public native int Get_SmkAuthResult_FromNative();
 	public native int Get_SmkMsgResult_FromNative();
 	public native int Get_SmkRegTagCount_FromNative();
+	public native int Get_RTColock_Year();
+	public native int Get_RTColock_Month();
+	public native int Get_RTColock_Date();
+	public native int Get_RTColock_Sec();
 	public native int Get_RTColock_Hour_FromNative();
 	public native int Get_RTColock_Min_FromNative();
 	public native int GET_Buzzer_FromNative();

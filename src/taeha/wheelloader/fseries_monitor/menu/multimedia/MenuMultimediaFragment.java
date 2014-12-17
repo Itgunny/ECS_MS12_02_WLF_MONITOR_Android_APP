@@ -92,7 +92,10 @@ public class MenuMultimediaFragment extends ParentFragment{
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
-				ClickMediaPlayer();
+			//	ClickMediaPlayer();
+				byte[] Temp;
+				Temp = new byte[10];
+				Temp[10] = 1;
 			}
 		});
 	}

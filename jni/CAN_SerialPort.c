@@ -3117,6 +3117,18 @@ jint _Get_SmkMsgResult(JNIEnv *env, jobject this) {
 jint _Get_SmkRegTagCount(JNIEnv *env, jobject this) {
 	return rx_smk_result.SMK_Tag_Reg_Count;
 }
+jint Get_RTColock_Year(JNIEnv *env, jobject this) {
+	return RX_RES_RTC.Year;
+}
+jint Get_RTColock_Month(JNIEnv *env, jobject this) {
+	return RX_RES_RTC.Month;
+}
+jint Get_RTColock_Date(JNIEnv *env, jobject this) {
+	return RX_RES_RTC.Date;
+}
+jint Get_RTColock_Sec(JNIEnv *env, jobject this) {
+	return RX_RES_RTC.Sec;
+}
 jint _Get_RTColock_Hour(JNIEnv *env, jobject this) {
 	return RX_RES_RTC.Hour;
 }
@@ -3306,6 +3318,10 @@ static JNINativeMethod methods[] =
 				{"Get_SmkAuthResult_FromNative", "()I",(void*) _Get_SmkAuthResult },
 				{"Get_SmkMsgResult_FromNative", "()I",(void*) _Get_SmkMsgResult },
 				{"Get_SmkRegTagCount_FromNative", "()I",(void*) _Get_SmkRegTagCount },
+				{"Get_RTColock_Year", "()I",(void*) Get_RTColock_Year },
+				{"Get_RTColock_Month", "()I",(void*) Get_RTColock_Month },
+				{"Get_RTColock_Date", "()I",(void*) Get_RTColock_Date },
+				{"Get_RTColock_Sec", "()I",(void*) Get_RTColock_Sec },
 				{"Get_RTColock_Hour_FromNative", "()I",(void*) _Get_RTColock_Hour },
 				{"Get_RTColock_Min_FromNative", "()I",(void*) _Get_RTColock_Min },
 				{"GET_Buzzer_FromNative","()I", (void*) _GET_Buzzer },

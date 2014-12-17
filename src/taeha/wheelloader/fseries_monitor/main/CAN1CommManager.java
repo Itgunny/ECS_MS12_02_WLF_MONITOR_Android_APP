@@ -507,7 +507,18 @@ public class CAN1CommManager extends ICAN1CommManager.Stub{		// ttySAC1(Linux), 
 	public int Get_SmkRegTagCount() {
 		return service.Get_SmkRegTagCount_FromNative();
 	}
-	
+	public int Get_RTColock_Year(){
+		return service.Get_RTColock_Year();
+	}
+	public int Get_RTColock_Month(){
+		return service.Get_RTColock_Month();
+	}
+	public int Get_RTColock_Date(){
+		return service.Get_RTColock_Date();
+	}
+	public int Get_RTColock_Sec(){
+		return service.Get_RTColock_Sec();
+	}
 	public int Get_RTColock_Hour(){
 		return service.Get_RTColock_Hour_FromNative();
 	}

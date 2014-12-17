@@ -59,7 +59,7 @@ public class Home extends Activity {
 	public static final int VERSION_HIGH 		= 1;
 	public static final int VERSION_LOW 		= 0;
 	public static final int VERSION_SUB_HIGH 	= 2;
-	public static final int VERSION_SUB_LOW 	= 6;
+	public static final int VERSION_SUB_LOW 	= 7;
 	////1.0.2.3
 	// UI B 안 최초 적용 2014.12.10
 	////1.0.2.4
@@ -68,8 +68,11 @@ public class Home extends Activity {
 	// 61184/62의 8번째 바이트 0으로 나오는 문제 수정(구조체 길이문제) 2014.12.12
 	// 1.0.2.5
 	// Error Report 추가 (경로 : mnt/sdcard/alarams/WheelLoader_Logxxx.txt) 2014.12.12
-	// 1.0.2.6
+	// 1.0.2.6		UI A 안에서 수정 2014.12.16
+	// 1.0.2.7 2014.12.17
 	// Hardware Version 표시 추가 2014.12.12
+	// Error Report 파일 이름 변경 (Year + Month + Date + Hour + Min + Sec) 214.12.16
+	// Hardware Revision 표시 추가(RevD.03.01 6.8K) 2014.12.17
 	//////////////////////////////////////////////////////////////////////////////////////
 	
 	// TAG
@@ -450,6 +453,14 @@ public class Home extends Activity {
 	
 	// Model
 	public CheckModel _CheckModel;
+	
+	// Time
+	public int Year;
+	public int Month;
+	public int Date;
+	public int Hour;
+	public int Min;
+	public int Sec;
 	////////////////////////////////////////////////////
 	
 	//Fragment//////////////////////////////////////////
@@ -463,6 +474,11 @@ public class Home extends Activity {
 	public ChangeFragmentAnimation _MainChangeAnimation;
 	////////////////////////////////////////////////////
 
+	////////////////////////////////////////////////////
+	CrashApplication _CrashApplication;
+	////////////////////////////////////////////////////
+	
+	
 	//Lift Cycle Function///////////////////////////////
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -548,6 +564,8 @@ public class Home extends Activity {
 		EngineAutoShutdownESLSetFlag = false;
 		_MainChangeAnimation = new ChangeFragmentAnimation(this, framelayoutMain, R.id.FrameLayout_main, null);
 		_CheckModel = new CheckModel();
+		
+		_CrashApplication = (CrashApplication)getApplicationContext();		
 	}
 	public void InitFragment(){
 		_MainBBaseFragment = new MainBBaseFragment();
@@ -905,6 +923,8 @@ public class Home extends Activity {
 			ComponentBasicInformation = CAN1Comm.Get_ComponentBasicInformation_1698_PGN65330_MONITOR();
 			
 			SaveCID(ComponentCode,ManufacturerCode,ComponentBasicInformation);
+			
+			CAN1Comm.TxCMDToMCU(CAN1Comm.CMD_RTC,ComponentBasicInformation[0],ComponentBasicInformation[1],ComponentBasicInformation[2],0x01,Hour,Min,Sec,0x00);
 		}
 
 		@Override
@@ -966,7 +986,21 @@ public class Home extends Activity {
 		
 		EngineAutoShutdownRemainingTime = CAN1Comm.Get_RemainingTimeforAutomaticEngineShutdown_PGN61184_122();
 		EngineAutoShutdownMode = CAN1Comm.Get_AutomaticEngineShutdown_363_PGN61184_122();
+		
+		
+		Year = CAN1Comm.Get_RTColock_Year();
+		Month = CAN1Comm.Get_RTColock_Month();
+		Date = CAN1Comm.Get_RTColock_Date();
+		Hour = CAN1Comm.Get_RTColock_Hour();
+		Min = CAN1Comm.Get_RTColock_Min();
+		Sec = CAN1Comm.Get_RTColock_Sec();
 
+		_CrashApplication.SetYear(Year);
+		_CrashApplication.SetMonth(Month);
+		_CrashApplication.SetDate(Date);
+		_CrashApplication.SetHour(Hour);
+		_CrashApplication.SetMin(Min);
+		_CrashApplication.SetSec(Sec);
 		
 		CheckMirrorHeatPreHeat(PreHeat,RPM);
 		SetBackLight();

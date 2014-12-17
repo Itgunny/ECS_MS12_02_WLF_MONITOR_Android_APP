@@ -129,14 +129,14 @@ public class MainBKeyAutoGreaseFragment extends ParentFragment{
 			CAN1Comm.Set_AutoGreaseOperationStatus_3449_PGN65527(CAN1CommManager.DATA_STATE_ON);
 			CAN1Comm.TxCANToMCU(247);
 			CAN1Comm.Set_AutoGreaseOperationStatus_3449_PGN65527(3);
-			ParentActivity.StartAutoGreaseStopTimer();
+			//ParentActivity.StartAutoGreaseStopTimer();
 			break;
 		case CAN1CommManager.DATA_STATE_ON:
 			SelectAutoGrease = CAN1CommManager.DATA_STATE_OFF;
 			CAN1Comm.Set_AutoGreaseOperationStatus_3449_PGN65527(CAN1CommManager.DATA_STATE_OFF);
 			CAN1Comm.TxCANToMCU(247);
 			CAN1Comm.Set_AutoGreaseOperationStatus_3449_PGN65527(3);
-			ParentActivity.CancelAutoGreaseStopTimer();
+			//ParentActivity.CancelAutoGreaseStopTimer();
 			break;
 		}
 	}

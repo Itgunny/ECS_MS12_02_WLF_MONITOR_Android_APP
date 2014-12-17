@@ -125,14 +125,14 @@ public class MainBKeyMirrorHeatFragment extends ParentFragment{
 			CAN1Comm.Set_MirrorHeatOperationStatus_3450_PGN65527(CAN1CommManager.DATA_STATE_ON);
 			CAN1Comm.TxCANToMCU(247);
 			CAN1Comm.Set_MirrorHeatOperationStatus_3450_PGN65527(3);
-			ParentActivity.StartMirrorHeatTimer();
+			//ParentActivity.StartMirrorHeatTimer();
 			break;
 		case CAN1CommManager.DATA_STATE_ON:
 			SelectMirrorHeat = CAN1CommManager.DATA_STATE_OFF;
 			CAN1Comm.Set_MirrorHeatOperationStatus_3450_PGN65527(CAN1CommManager.DATA_STATE_OFF);
 			CAN1Comm.TxCANToMCU(247);
 			CAN1Comm.Set_MirrorHeatOperationStatus_3450_PGN65527(3);
-			ParentActivity.CancelMirrorHeatTimer();
+			//ParentActivity.CancelMirrorHeatTimer();
 			break;
 		}
 
@@ -142,14 +142,14 @@ public class MainBKeyMirrorHeatFragment extends ParentFragment{
 		CAN1Comm.Set_MirrorHeatOperationStatus_3450_PGN65527(CAN1CommManager.DATA_STATE_OFF);
 		CAN1Comm.TxCANToMCU(247);
 		CAN1Comm.Set_MirrorHeatOperationStatus_3450_PGN65527(3);
-		ParentActivity.CancelMirrorHeatTimer();
+		//ParentActivity.CancelMirrorHeatTimer();
 		ParentActivity._MainBBaseFragment.showKeytoDefaultScreenAnimation();
 	}
 	public void ClickOn(){
 		CAN1Comm.Set_MirrorHeatOperationStatus_3450_PGN65527(CAN1CommManager.DATA_STATE_ON);
 		CAN1Comm.TxCANToMCU(247);
 		CAN1Comm.Set_MirrorHeatOperationStatus_3450_PGN65527(3);
-		ParentActivity.StartMirrorHeatTimer();
+		//ParentActivity.StartMirrorHeatTimer();
 		ParentActivity._MainBBaseFragment.showKeytoDefaultScreenAnimation();
 	}
 	
