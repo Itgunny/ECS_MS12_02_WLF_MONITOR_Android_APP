@@ -185,6 +185,71 @@ public class VersionInfoECMFragment extends VersionInfoDetailFragment{
 		strCaliID = new String(cString,0,cString.length);
 		adapter.UpdateSecond(STATE_ECU_CALIBRATION_ID,strCaliID);
 	}
+	
+	public void ManufacturerDisplay(int Code){
+		int Index = 0;
+		if(Code == STATE_MANUFACTURERCODE_CUMMINS){
+			Index = STATE_MAKER_CUMMINS;
+		}else if(Code == STATE_MANUFACTURERCODE_SCANIA){
+			Index = STATE_MAKER_SCANIA;
+		}
+		else{
+			Index = STATE_MAKER_CUMMINS;
+		}
+		switch (Code) {
+		case STATE_MANUFACTURERCODE_TAEHA:
+			adapter.UpdateSecond(Index, "Taeha");
+			break;
+		case STATE_MANUFACTURERCODE_FREEMS:
+			adapter.UpdateSecond(Index, "FreeMs Corp.");
+			break;
+		case STATE_MANUFACTURERCODE_KYUNGWOO:
+			adapter.UpdateSecond(Index, "KYUNGWOO");
+			break;
+		case STATE_MANUFACTURERCODE_DONHWAN:
+			adapter.UpdateSecond(Index, "DongHwan");
+			break;
+		case STATE_MANUFACTURERCODE_CONTINENTAL:
+			adapter.UpdateSecond(Index, "Continental");
+			break;
+		case STATE_MANUFACTURERCODE_ZF:
+			adapter.UpdateSecond(Index, "ZF");
+			break;
+		case STATE_MANUFACTURERCODE_SAUNERDANFOSS:
+			adapter.UpdateSecond(Index, "Danfoss Power Solution");
+			break;
+		case STATE_MANUFACTURERCODE_FIND:
+			adapter.UpdateSecond(Index, "FIND");
+			break;
+		case STATE_MANUFACTURERCODE_GIMIS:
+			adapter.UpdateSecond(Index, "GIMIS");
+			break;
+		case STATE_MANUFACTURERCODE_HMC:
+			adapter.UpdateSecond(Index, "HMC");
+			break;
+		case STATE_MANUFACTURERCODE_CUMMINS:
+			adapter.UpdateSecond(Index, "Cummins");
+			break;
+		case STATE_MANUFACTURERCODE_MITSUBISHI:
+			adapter.UpdateSecond(Index, "Mitsubishi");
+			break;
+		case STATE_MANUFACTURERCODE_YANMAR:
+			adapter.UpdateSecond(Index, "Yanmar");
+			break;
+		case STATE_MANUFACTURERCODE_PERKINS:
+			adapter.UpdateSecond(Index, "Perkins");
+			break;
+		case STATE_MANUFACTURERCODE_SCANIA:
+			adapter.UpdateSecond(Index, "Scania");
+			break;
+		case 0xFF:
+			adapter.UpdateSecond(Index, "-");
+			break;
+		default:
+			adapter.UpdateSecond(Index, "-");
+			break;
+		}
+	}
 	////////////////////////////////////////////////
 	
 	////////////////////////////////////////////////

@@ -30,8 +30,11 @@ public class ErrorReportSender implements ReportSender {
 	public void send(CrashReportData Err) throws ReportSenderException {
 		// TODO Auto-generated method stub
 		Log.e(TAG, "Error");
+		
 		String strIndex;
 		strIndex = Integer.toString(Year) + Integer.toString(Month) + Integer.toString(Date) + Integer.toString(Hour) + Integer.toString(Min) + Integer.toString(Sec);
+		
+		DeleteOldestFile();
 		WiteErrorLog(strIndex,Err);
 	}
 	
@@ -71,7 +74,103 @@ public class ErrorReportSender implements ReportSender {
 			Log.e(TAG,"IOException WiteErrorLog");
 		}
 	}
-
+	public int DeleteOldestFile(){
+		int Num = 0;
+		
+		File rootDir = new File(ROOT_PATH);
+		File[] files = rootDir.listFiles();
+		if(files.length > 100){
+			if(files != null){
+				for (int i = 0; i < files.length; i++) {
+					String str = files[i].getPath();
+					if (str.contains(FILE_NAME) == true) {
+						if(str.endsWith(FILE_EXT)){
+							Num++;
+						}
+					}
+					else{
+						Log.d(TAG, "Not Match Path : " + str);
+						return 0;
+					}
+						
+				}
+				
+				if(Num > 0){
+					String[] strFileName = new String[Num];
+					File[] Program = new File[Num];
+					String strLast;
+					int n;
+					
+					int nLastIndex;
+		
+					Num = 0;
+					for (int i = 0; i < files.length; i++) {
+						String str = files[i].getPath();
+						if (str.contains(FILE_NAME) == true) {
+							if(str.endsWith(FILE_EXT)){
+								strFileName[Num] = str;
+								Program[Num] = files[i];
+								Num++;
+							}
+						}
+						else
+							Log.d(TAG, "Not Match Path : " + str);
+					}
+					
+					nLastIndex = GetIndex(ROOT_PATH,FILE_NAME,FILE_EXT,strFileName[0]);
+					strLast = strFileName[0];
+					n = 0;
+					int Index;
+					for(int i = 0; i < Num; i++){
+						Index = GetIndex(ROOT_PATH,FILE_NAME,FILE_EXT,strFileName[i]);
+						if(Index < nLastIndex){
+							nLastIndex = Index;
+							strLast = strFileName[i];
+							n = i;
+						}
+					}
+					files[n].delete();
+					return nLastIndex;
+				}
+				
+			}
+		}
+		
+	
+		return 0;
+	}
+	
+	public int GetIndex(String strRootPath, String strAppName, String strExtension, String strFileName){
+		int[] nVersion;
+		char[] cVersion;
+		char[] cNumber;
+	
+		int IndexStartPosition;
+		int result = 0;
+		int cNumberLength;
+		
+		
+		String str;
+		nVersion = new int[4];
+		cVersion = new char[4];
+		
+		IndexStartPosition = strRootPath.length() + strAppName.length();
+	
+		if(strFileName.length() <  IndexStartPosition + strExtension.length()){
+			return 0;
+		}else{
+			cNumberLength =  strFileName.length() - (IndexStartPosition + strExtension.length());
+			cNumber = new char[cNumberLength];
+			int pow = cNumber.length;
+			for(int i = 0; i < cNumber.length; i++){
+				cNumber[i] = strFileName.charAt(IndexStartPosition + i);
+				result *= 10;
+				result += (cNumber[i] - 0x30);
+			}			
+			return result;
+			
+		}
+	}
 	public void SetYear(int Data){
 		Year = Data;
 	}

@@ -468,7 +468,7 @@ public class MainBLeftUpMachineStatusFragment extends ParentFragment{
 			ParentActivity._MainBBaseFragment.CenterAnimation.StartChangeAnimation(ParentActivity._MainBBaseFragment._MainBCenterMachineStatusFragment);
 			ParentActivity._MainBBaseFragment.LeftUpChangeAnimation.StartChangeAnimation(ParentActivity._MainBBaseFragment._MainBLeftUpMachineStatusSelectFragment);
 			
-			ParentActivity._MainBBaseFragment._CenterBGDisappearAnimation.StartAnimation();
+			//ParentActivity._MainBBaseFragment._CenterBGDisappearAnimation.StartAnimation();
 			ParentActivity._MainBBaseFragment._RightDownDisappearAnimation.StartAnimation();
 			ParentActivity._MainBBaseFragment._RightUpDisappearAnimation.StartAnimation();
 			ParentActivity._MainBBaseFragment._LeftDownDisappearAnimation.StartAnimation();

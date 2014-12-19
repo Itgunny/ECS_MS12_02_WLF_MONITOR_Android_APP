@@ -182,7 +182,7 @@ public class MainBRightUpEngineFragment extends ParentFragment{
 		ParentActivity._MainBBaseFragment.CenterAnimation.StartChangeAnimation(ParentActivity._MainBBaseFragment._MainBCenterEngineFragment);
 		ParentActivity._MainBBaseFragment.RightUpChangeAnimation.StartChangeAnimation(ParentActivity._MainBBaseFragment._MainBRightUpEngineModeFragment);
 		
-		ParentActivity._MainBBaseFragment._CenterBGDisappearAnimation.StartAnimation();
+		//ParentActivity._MainBBaseFragment._CenterBGDisappearAnimation.StartAnimation();
 		ParentActivity._MainBBaseFragment._RightDownDisappearAnimation.StartAnimation();
 		ParentActivity._MainBBaseFragment._LeftUpDisappearAnimation.StartAnimation();
 		ParentActivity._MainBBaseFragment._LeftDownDisappearAnimation.StartAnimation();
@@ -209,7 +209,7 @@ public class MainBRightUpEngineFragment extends ParentFragment{
 		ParentActivity._MainBBaseFragment.CenterAnimation.StartChangeAnimation(ParentActivity._MainBBaseFragment._MainBCenterEngineFragment);
 		ParentActivity._MainBBaseFragment.RightUpChangeAnimation.StartChangeAnimation(ParentActivity._MainBBaseFragment._MainBRightUpEngineWarmingUpFragment);
 		
-		ParentActivity._MainBBaseFragment._CenterBGDisappearAnimation.StartAnimation();
+		//ParentActivity._MainBBaseFragment._CenterBGDisappearAnimation.StartAnimation();
 		ParentActivity._MainBBaseFragment._RightDownDisappearAnimation.StartAnimation();
 		ParentActivity._MainBBaseFragment._LeftUpDisappearAnimation.StartAnimation();
 		ParentActivity._MainBBaseFragment._LeftDownDisappearAnimation.StartAnimation();

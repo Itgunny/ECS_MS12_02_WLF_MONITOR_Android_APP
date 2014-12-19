@@ -126,7 +126,10 @@ public class MainBLeftDownQuickFragment extends ParentFragment{
 			startActivity(intent);
 	}
 	public void ClickMirror(){
-		
+		Intent intent;
+		intent = ParentActivity.getPackageManager().getLaunchIntentForPackage("com.example.wfdsink");
+		if(intent != null)
+			startActivity(intent);
 	}
 	public void ClickMedia(){
 		Intent intent;

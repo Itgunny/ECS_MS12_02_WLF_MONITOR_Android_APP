@@ -56,12 +56,8 @@ public class VersionInfoTCUFragment extends VersionInfoDetailFragment{
 			SoftwareIdentification[i] = 0;
 		}
 
-		adapter.addItem(new IconTextItemVersion(ParentActivity.getResources().getDrawable(R.drawable.menu_management_machine_monitoring_bg_dark),null,
-				ParentActivity.getResources().getString(string.Serial_Number),"" , ""));
-		adapter.addItem(new IconTextItemVersion(ParentActivity.getResources().getDrawable(R.drawable.menu_management_machine_monitoring_bg_light),null,
-				ParentActivity.getResources().getString(string.Manufacturer),"" , ""));
-		adapter.addItem(new IconTextItemVersion(ParentActivity.getResources().getDrawable(R.drawable.menu_management_machine_monitoring_bg_dark),null,
-				ParentActivity.getResources().getString(string.Program_Version),"" , ""));
+
+		
 		adapter.addItem(new IconTextItemVersion(ParentActivity.getResources().getDrawable(R.drawable.menu_management_machine_monitoring_bg_light),null,
 				ParentActivity.getResources().getString(string.EST37A_Part_Number),"" , ""));
 		adapter.addItem(new IconTextItemVersion(ParentActivity.getResources().getDrawable(R.drawable.menu_management_machine_monitoring_bg_dark),null,
@@ -72,9 +68,8 @@ public class VersionInfoTCUFragment extends VersionInfoDetailFragment{
 				ParentActivity.getResources().getString(string.Hardware_Serial_Number),"" , ""));
 		adapter.addItem(new IconTextItemVersion(ParentActivity.getResources().getDrawable(R.drawable.menu_management_machine_monitoring_bg_light),null,
 				ParentActivity.getResources().getString(string.Customer_Serial_Number),"" , ""));
-		adapter.addItem(new IconTextItemVersion(ParentActivity.getResources().getDrawable(R.drawable.menu_management_machine_monitoring_bg_dark),null,
+		adapter.addItem(new IconTextItemVersion(ParentActivity.getResources().getDrawable(R.drawable.menu_management_machine_monitoring_bg_light),null,
 				ParentActivity.getResources().getString(string.Manufacturer),"" , ""));
-
 		listView.setAdapter(adapter);
 
 	}
@@ -101,7 +96,61 @@ public class VersionInfoTCUFragment extends VersionInfoDetailFragment{
 		adapter.notifyDataSetChanged();
 	}
 	////////////////////////////////////////////////
-
+	public void ManufacturerDisplay(int Code){
+		switch (Code) {
+		case STATE_MANUFACTURERCODE_TAEHA:
+			adapter.UpdateSecond(STATE_MAKER, "Taeha");
+			break;
+		case STATE_MANUFACTURERCODE_FREEMS:
+			adapter.UpdateSecond(STATE_MAKER, "FreeMs Corp.");
+			break;
+		case STATE_MANUFACTURERCODE_KYUNGWOO:
+			adapter.UpdateSecond(STATE_MAKER, "KYUNGWOO");
+			break;
+		case STATE_MANUFACTURERCODE_DONHWAN:
+			adapter.UpdateSecond(STATE_MAKER, "DongHwan");
+			break;
+		case STATE_MANUFACTURERCODE_CONTINENTAL:
+			adapter.UpdateSecond(STATE_MAKER, "Continental");
+			break;
+		case STATE_MANUFACTURERCODE_ZF:
+			adapter.UpdateSecond(STATE_MAKER, "ZF");
+			break;
+		case STATE_MANUFACTURERCODE_SAUNERDANFOSS:
+			adapter.UpdateSecond(STATE_MAKER, "Danfoss Power Solution");
+			break;
+		case STATE_MANUFACTURERCODE_FIND:
+			adapter.UpdateSecond(STATE_MAKER, "FIND");
+			break;
+		case STATE_MANUFACTURERCODE_GIMIS:
+			adapter.UpdateSecond(STATE_MAKER, "GIMIS");
+			break;
+		case STATE_MANUFACTURERCODE_HMC:
+			adapter.UpdateSecond(STATE_MAKER, "HMC");
+			break;
+		case STATE_MANUFACTURERCODE_CUMMINS:
+			adapter.UpdateSecond(STATE_MAKER, "Cummins");
+			break;
+		case STATE_MANUFACTURERCODE_MITSUBISHI:
+			adapter.UpdateSecond(STATE_MAKER, "Mitsubishi");
+			break;
+		case STATE_MANUFACTURERCODE_YANMAR:
+			adapter.UpdateSecond(STATE_MAKER, "Yanmar");
+			break;
+		case STATE_MANUFACTURERCODE_PERKINS:
+			adapter.UpdateSecond(STATE_MAKER, "Perkins");
+			break;
+		case STATE_MANUFACTURERCODE_SCANIA:
+			adapter.UpdateSecond(STATE_MAKER, "Scania");
+			break;
+		case 0xFF:
+			adapter.UpdateSecond(STATE_MAKER, "-");
+			break;
+		default:
+			adapter.UpdateSecond(STATE_MAKER, "-");
+			break;
+		}
+	}
 	////////////////////////////////////////////////
 	
 	////////////////////////////////////////////////

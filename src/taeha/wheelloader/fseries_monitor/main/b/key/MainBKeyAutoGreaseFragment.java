@@ -76,22 +76,22 @@ public class MainBKeyAutoGreaseFragment extends ParentFragment{
 	@Override
 	protected void InitButtonListener() {
 		// TODO Auto-generated method stub
-//		radioOff.setOnClickListener(new View.OnClickListener() {
-//			
-//			@Override
-//			public void onClick(View v) {
-//				// TODO Auto-generated method stub
-//				
-//			}
-//		});
-//		radioOn.setOnClickListener(new View.OnClickListener() {
-//			
-//			@Override
-//			public void onClick(View v) {
-//				// TODO Auto-generated method stub
-//				
-//			}
-//		});
+		radioOff.setOnClickListener(new View.OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				ClickOff();
+			}
+		});
+		radioOn.setOnClickListener(new View.OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				ClickOn();
+			}
+		});
 	}
 
 	@Override
@@ -129,22 +129,27 @@ public class MainBKeyAutoGreaseFragment extends ParentFragment{
 			CAN1Comm.Set_AutoGreaseOperationStatus_3449_PGN65527(CAN1CommManager.DATA_STATE_ON);
 			CAN1Comm.TxCANToMCU(247);
 			CAN1Comm.Set_AutoGreaseOperationStatus_3449_PGN65527(3);
-			//ParentActivity.StartAutoGreaseStopTimer();
 			break;
 		case CAN1CommManager.DATA_STATE_ON:
 			SelectAutoGrease = CAN1CommManager.DATA_STATE_OFF;
 			CAN1Comm.Set_AutoGreaseOperationStatus_3449_PGN65527(CAN1CommManager.DATA_STATE_OFF);
 			CAN1Comm.TxCANToMCU(247);
 			CAN1Comm.Set_AutoGreaseOperationStatus_3449_PGN65527(3);
-			//ParentActivity.CancelAutoGreaseStopTimer();
 			break;
 		}
 	}
+	
 	public void ClickOff(){
-		
+		CAN1Comm.Set_AutoGreaseOperationStatus_3449_PGN65527(CAN1CommManager.DATA_STATE_OFF);
+		CAN1Comm.TxCANToMCU(247);
+		CAN1Comm.Set_AutoGreaseOperationStatus_3449_PGN65527(3);
+		ParentActivity._MainBBaseFragment.showKeytoDefaultScreenAnimation();
 	}
 	public void ClickOn(){
-		
+		CAN1Comm.Set_AutoGreaseOperationStatus_3449_PGN65527(CAN1CommManager.DATA_STATE_ON);
+		CAN1Comm.TxCANToMCU(247);
+		CAN1Comm.Set_AutoGreaseOperationStatus_3449_PGN65527(3);
+		ParentActivity._MainBBaseFragment.showKeytoDefaultScreenAnimation();
 	}
 	
 }

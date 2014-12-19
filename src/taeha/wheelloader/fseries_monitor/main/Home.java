@@ -2,6 +2,7 @@ package taeha.wheelloader.fseries_monitor.main;
 
 import java.lang.ref.WeakReference;
 import java.text.NumberFormat;
+import java.util.List;
 import java.util.Locale;
 import java.util.Timer;
 import java.util.TimerTask;
@@ -38,7 +39,9 @@ import android.os.IBinder;
 import android.os.Message;
 import android.os.RemoteException;
 import android.app.Activity;
+import android.app.ActivityManager;
 import android.app.Dialog;
+import android.app.ActivityManager.RunningTaskInfo;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
@@ -59,27 +62,32 @@ public class Home extends Activity {
 	public static final int VERSION_HIGH 		= 1;
 	public static final int VERSION_LOW 		= 0;
 	public static final int VERSION_SUB_HIGH 	= 2;
-	public static final int VERSION_SUB_LOW 	= 7;
+	public static final int VERSION_SUB_LOW 	= 9;
 	////1.0.2.3
 	// UI B 안 최초 적용 2014.12.10
 	////1.0.2.4
 	// Eco Gauge Pivot 함수 추가(Progress Bar가 가운데서 움직이는 현상 수정) 2014.12.11
 	// Current Fuel Rate 위치 수정(NDK 구조체 위치 수정) 2014.12.11
 	// 61184/62의 8번째 바이트 0으로 나오는 문제 수정(구조체 길이문제) 2014.12.12
-	// 1.0.2.5
+	//// 1.0.2.5
 	// Error Report 추가 (경로 : mnt/sdcard/alarams/WheelLoader_Logxxx.txt) 2014.12.12
 	// 1.0.2.6		UI A 안에서 수정 2014.12.16
-	// 1.0.2.7 2014.12.17
+	//// 1.0.2.7 2014.12.17
 	// Hardware Version 표시 추가 2014.12.12
 	// Error Report 파일 이름 변경 (Year + Month + Date + Hour + Min + Sec) 214.12.16
 	// Hardware Revision 표시 추가(RevD.03.01 6.8K) 2014.12.17
+	//// 1.0.2.8 2014.12.18
+	// AutoGrease, MirrorHeat, PreHeat 타이머 삭제 2014.12.17
+	// AutoGrease 화면에서 터치 가능하게 수정 2014.12.17
+	// Ending Animation 추가 2014.12.17
+	//// 1.0.2.9
+	// Version Info Detail TCU,ECM Index 맞지 않는 것 수정 2014.12.19
+	// Error Report 최대 갯수 100개로 수정(100개 초과 시 가장 오래된 날짜의 로그 삭제) 2014.12.19
 	//////////////////////////////////////////////////////////////////////////////////////
 	
 	// TAG
 	private  final String TAG = "Home";
 	
-
-
 	public  static final int SCREEN_STATE_MAIN_B_TOP 										= 0x10000000;
 	
 	public  static final int SCREEN_STATE_MAIN_B_RIGHTUP_TOP								= 0x11000000;
@@ -285,6 +293,8 @@ public class Home extends Activity {
 	
 	public  static final int SCREEN_STATE_MAIN_CAMERA										= 0x50000000;
 	
+	public  static final int SCREEN_STATE_MAIN_ENDING										= 0x60000000;
+	
 	public  static final int UNIT_ODO_KM 			= 0;
 	public  static final int UNIT_ODO_MILE 			= 1;
 	
@@ -410,10 +420,7 @@ public class Home extends Activity {
 	public WorkLoadWeighingInitPopup2		_WorkLoadWeighingInitPopup2;
 	// Timer
 	private Timer mSeatBeltTimer = null;
-	private Timer mAutoGreaseStopTimer = null;
 	private Timer mAnimationRunningTimer = null;
-	private Timer mMirrorHeatPreHeatTimer = null;
-	private Timer mMirrorHeatTimer = null;
 	private Timer mSendCommandTimer = null;
 	private Timer mCommErrStopTimer = null;
 	
@@ -468,6 +475,7 @@ public class Home extends Activity {
 	public  MenuBaseFragment 	_MenuBaseFragment;
 	public 	ESLCheckFragment	_ESLCheckFragment;
 	public 	ESLPasswordFragment	_ESLPasswordFragment;
+	public 	EndingFragment		_EndingFragment;
 	////////////////////////////////////////////////////
 	
 	//Animation/////////////////////////////////////////
@@ -572,6 +580,7 @@ public class Home extends Activity {
 		_MenuBaseFragment = new MenuBaseFragment();
 		_ESLCheckFragment = new ESLCheckFragment();
 		_ESLPasswordFragment = new ESLPasswordFragment();
+		_EndingFragment = new EndingFragment();
 	}
 	public void InitPopup(){
 		HomeDialog = null;
@@ -801,6 +810,14 @@ public class Home extends Activity {
 		transaction.replace(R.id.FrameLayout_main, _ESLPasswordFragment);
 		transaction.commit();
 	}
+	//Ending Screen Fragment
+	public void showEndingFragment(){
+		_EndingFragment = new EndingFragment();
+		android.app.FragmentTransaction transaction = getFragmentManager().beginTransaction();
+		transaction.replace(R.id.FrameLayout_main, _EndingFragment);
+		transaction.commit();
+	}
+	
 	
 	/////////////////////////////////////////////////////
 	//Communication//////////////////////////////////////
@@ -882,6 +899,7 @@ public class Home extends Activity {
 		@Override
 		public void KeyButtonCallBack(int Data) throws RemoteException {
 			// TODO Auto-generated method stub
+			
 			Log.i(TAG,"KeyButton Callback : 0x" + Integer.toHexString(Data));
 			if(Data == CAN1CommManager.FN){
 				try {
@@ -890,6 +908,10 @@ public class Home extends Activity {
 					// TODO: handle exception
 					Log.e(TAG,"NullPointerException");
 				}
+				Log.d(TAG,"Click FN!!!");
+			}
+			else if(Data == CAN1CommManager.POWER_OFF){
+				showEndingFragment();
 			}
 			else if(CAN1Comm.GetScreenTopFlag() == true){
 				try {
@@ -1002,7 +1024,6 @@ public class Home extends Activity {
 		_CrashApplication.SetMin(Min);
 		_CrashApplication.SetSec(Sec);
 		
-		CheckMirrorHeatPreHeat(PreHeat,RPM);
 		SetBackLight();
 	}
 	public void UpdateUI() {
@@ -1553,41 +1574,6 @@ public class Home extends Activity {
 		
 	}
 	
-	public class AutoGreaseStopTimerClass extends TimerTask{
-
-		@Override
-		public void run() {
-			// TODO Auto-generated method stub
-			runOnUiThread(new Runnable() {
-				
-				@Override
-				public void run() {
-					// TODO Auto-generated method stub
-					CAN1Comm.Set_AutoGreaseOperationStatus_3449_PGN65527(CAN1CommManager.DATA_STATE_OFF);
-					CAN1Comm.TxCANToMCU(247);
-					CAN1Comm.Set_AutoGreaseOperationStatus_3449_PGN65527(3);
-				}
-			});
-			
-		}
-		
-	}
-	
-	public void StartAutoGreaseStopTimer(){
-		CancelAutoGreaseStopTimer();
-		mAutoGreaseStopTimer = new Timer();
-		mAutoGreaseStopTimer.schedule(new AutoGreaseStopTimerClass(),60000);	
-	}
-	
-	public void CancelAutoGreaseStopTimer(){
-		if(mAutoGreaseStopTimer != null){
-			mAutoGreaseStopTimer.cancel();
-			mAutoGreaseStopTimer.purge();
-			mAutoGreaseStopTimer = null;
-		}
-		
-	}
-	
 	public class AnimationRunningTimerClass extends TimerTask{
 
 		@Override
@@ -1628,111 +1614,6 @@ public class Home extends Activity {
 			mAnimationRunningTimer = null;
 		}
 		
-	}
-	
-	
-	
-	// Mirror Heat
-	public class MirrorHeatTimerClass extends TimerTask{
-
-		@Override
-		public void run() {
-			// TODO Auto-generated method stub
-			runOnUiThread(new Runnable() {
-				
-				@Override
-				public void run() {
-					// TODO Auto-generated method stub
-					if(MirrorHeatCount < 60*15){
-						CAN1Comm.Set_MirrorHeatOperationStatus_3450_PGN65527(CAN1CommManager.DATA_STATE_ON);
-						CAN1Comm.TxCANToMCU(247);
-						CAN1Comm.Set_MirrorHeatOperationStatus_3450_PGN65527(3);
-						Log.d(TAG,"MirrorHeat On");
-					}else if(MirrorHeatCount <60 * 15 + 5){
-						CAN1Comm.Set_MirrorHeatOperationStatus_3450_PGN65527(CAN1CommManager.DATA_STATE_OFF);
-						CAN1Comm.TxCANToMCU(247);
-						CAN1Comm.Set_MirrorHeatOperationStatus_3450_PGN65527(3);
-						Log.d(TAG,"MirrorHeat Off");
-					}else{
-						MirrorHeatCount = 0;
-						CancelMirrorHeatTimer();
-						Log.d(TAG,"MirrorHeat Timer timer");
-					}
-					if(MirrorHeatTimerFlag == false){
-						CAN1Comm.Set_MirrorHeatOperationStatus_3450_PGN65527(CAN1CommManager.DATA_STATE_OFF);
-						CAN1Comm.TxCANToMCU(247);
-						CAN1Comm.Set_MirrorHeatOperationStatus_3450_PGN65527(3);
-					}
-					MirrorHeatCount++;
-					Log.d(TAG,"MirrorHeat timer");
-				}
-			});
-			
-		}
-		
-	}
-	
-	public void StartMirrorHeatTimer(){
-		Log.d(TAG,"MirrorHeat Timer Start");
-		MirrorHeatCount = 0;
-		MirrorHeatTimerFlag = true;
-		CancelMirrorHeatTimer();
-		mMirrorHeatTimer = new Timer();
-		mMirrorHeatTimer.schedule(new MirrorHeatTimerClass(),1,1000);	
-	}
-	
-	public void CancelMirrorHeatTimer(){
-	
-		if(mMirrorHeatTimer != null){
-			MirrorHeatTimerFlag = false;
-			mMirrorHeatTimer.cancel();
-			mMirrorHeatTimer.purge();
-			mMirrorHeatTimer = null;
-		}
-		
-	}
-	
-	public class MirrorHeatPreHeatTimerClass extends TimerTask{
-
-		@Override
-		public void run() {
-			// TODO Auto-generated method stub
-			runOnUiThread(new Runnable() {
-				
-				@Override
-				public void run() {
-					// TODO Auto-generated method stub
-					StartMirrorHeatTimer();
-					Log.d(TAG,"MirrorHeatPreHeat timer");
-				}
-			});
-			
-		}
-		
-	}
-	
-	public void StartMirrorHeatPreHeatTimer(){
-		Log.d(TAG,"MirrorHeatPreHeat Timer Start");
-		CancelMirrorHeatPreHeatTimer();
-		mMirrorHeatPreHeatTimer = new Timer();
-		mMirrorHeatPreHeatTimer.schedule(new MirrorHeatPreHeatTimerClass(),60000);	
-	}
-	
-	public void CancelMirrorHeatPreHeatTimer(){
-		if(mMirrorHeatPreHeatTimer != null){
-			mMirrorHeatPreHeatTimer.cancel();
-			mMirrorHeatPreHeatTimer.purge();
-			mMirrorHeatPreHeatTimer = null;
-		}
-		
-	}
-	public void CheckMirrorHeatPreHeat(int _PreHeat, int _RPM){
-		if(MirrorHeatPreHeatFlag == false){
-			if(_RPM > 500 && _PreHeat == CAN1CommManager.DATA_STATE_ON){
-				MirrorHeatPreHeatFlag = true;
-				StartMirrorHeatPreHeatTimer();
-			}
-		}
 	}
 	
 	

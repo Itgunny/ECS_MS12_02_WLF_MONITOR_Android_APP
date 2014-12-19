@@ -5,6 +5,7 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 
+import android.app.Activity;
 import android.app.Instrumentation;
 import android.app.PendingIntent;
 import android.app.Service;
@@ -12,7 +13,9 @@ import android.content.Context;
 import android.content.Intent;
 import android.media.AudioManager;
 import android.media.SoundPool;
+import android.os.Handler;
 import android.os.IBinder;
+import android.os.Message;
 import android.util.Log;
 import android.view.KeyEvent;
 
@@ -48,7 +51,8 @@ public class CommService extends Service{
 	// Timer
 	protected static Timer mBuzzerStopTimer = null;
 
-
+	// Handler
+	static Handler HandleKeyButton;
 	/////////////////////////////////////////////////////////////////////
 	
 	//////////////////LOAD NATIVELIBRARY/////////////////////////////////
@@ -1054,6 +1058,7 @@ public class CommService extends Service{
 		Log.v(TAG,"InitComport");		
 		mFdUART1 = Open_UART1(UART1ComPort,UART1Baudrate,0);
 		mFdUART3 = Open_UART3(UART3ComPort,UART3Baudrate,0);
+		
 	}
 	// close Comport
 	public void CloseComport(){
@@ -1146,7 +1151,8 @@ public class CommService extends Service{
 				SoundPoolKeyButtonEnding.play(SoundIDEnding, fVolumeEnding, fVolumeEnding, 0, 0, 1);
 				break;
 			case CAN1CommManager.FN:
-				CAN1Comm.Callback_KeyButton(Data);
+				//CAN1Comm.Callback_KeyButton(Data);
+				HandleKeyButton.sendMessage(HandleKeyButton.obtainMessage(Data));
 				SoundPoolKeyButton.play(SoundID, fVolume, fVolume, 0, 0, 1);
 				break;
 			default:
@@ -1225,7 +1231,7 @@ public class CommService extends Service{
 		BindFlag = false;
 		return super.onUnbind(intent);
 	}
-	
+
 	@Override
 	public void onCreate() {
 		// TODO Auto-generated method stub
@@ -1235,6 +1241,13 @@ public class CommService extends Service{
 
 		InitSound();
 		super.onCreate();
+		
+		HandleKeyButton = new Handler() {
+			@Override
+			public void handleMessage(Message msg) {
+				CallHome();
+			}
+		};
 	}
 	
 	@Override
@@ -1274,6 +1287,14 @@ public class CommService extends Service{
 		}
 	}
 	////////////////////////////////////////////////////////////////////////
-
-
+	public void CallHome(){
+		Intent intent = new Intent();
+	    intent.setAction("android.intent.action.MAIN");
+	    intent.addCategory("android.intent.category.HOME");
+	    intent.addFlags(Intent.FLAG_ACTIVITY_EXCLUDE_FROM_RECENTS
+	    | Intent.FLAG_ACTIVITY_FORWARD_RESULT
+	    | Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_PREVIOUS_IS_TOP
+	    | Intent.FLAG_ACTIVITY_RESET_TASK_IF_NEEDED);
+	    startActivity(intent);
+	}
 }

@@ -1,5 +1,7 @@
 package taeha.wheelloader.fseries_monitor.menu.multimedia;
 
+import java.util.List;
+
 import taeha.wheelloader.fseries_monitor.animation.AppearAnimation;
 import taeha.wheelloader.fseries_monitor.animation.ChangeFragmentAnimation;
 import taeha.wheelloader.fseries_monitor.animation.DisappearAnimation;
@@ -8,6 +10,8 @@ import taeha.wheelloader.fseries_monitor.animation.LeftRightShiftAnimation;
 import taeha.wheelloader.fseries_monitor.main.Home;
 import taeha.wheelloader.fseries_monitor.main.ParentFragment;
 import taeha.wheelloader.fseries_monitor.main.R;
+import android.app.ActivityManager;
+import android.app.ActivityManager.RunningTaskInfo;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.Layout;
@@ -92,10 +96,7 @@ public class MenuMultimediaFragment extends ParentFragment{
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
-			//	ClickMediaPlayer();
-				byte[] Temp;
-				Temp = new byte[10];
-				Temp[10] = 1;
+				ClickMediaPlayer();
 			}
 		});
 	}
@@ -192,6 +193,31 @@ public class MenuMultimediaFragment extends ParentFragment{
 				"com.rhmsoft.fm.hd");
 		if(intent != null)
 			startActivity(intent);
+	}
+	
+	public void Test(){
+		boolean Flag = false;
+		ActivityManager activityManager = (ActivityManager) ParentActivity.getSystemService(ParentActivity.ACTIVITY_SERVICE);
+		List<RunningTaskInfo> taskList = activityManager.getRunningTasks(100);
+		
+		if(!taskList.isEmpty()) {
+			int tasksSize = taskList.size();
+			for(int i = 0; i >= tasksSize;  i++) {
+				RunningTaskInfo taskinfo = taskList.get(i);
+				if(taskinfo.topActivity.getPackageName().equals("com.mxtech.videoplayer.ad")) {
+					activityManager.moveTaskToFront(taskinfo.id, 0);
+					 Flag = true;
+				}
+			}
+		}
+		
+		if(Flag == false){
+			Intent intent;
+			intent = ParentActivity.getPackageManager().getLaunchIntentForPackage("com.mxtech.videoplayer.ad");
+			if(intent != null){
+				ParentActivity.startActivity(intent);
+			}
+		}
 	}
 	/////////////////////////////////////////////////////////////////////
 	
