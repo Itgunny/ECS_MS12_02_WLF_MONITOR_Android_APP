@@ -99,11 +99,11 @@ public class MainBLeftUpMachineStatusSelectFragment extends ParentFragment{
 		
 		imgbtnOK = (ImageButton)mRoot.findViewById(R.id.ImageButton_leftup_main_b_machinestatus_select_ok);
 		
-		radioHYDTemp.setText(TAB + ParentActivity.getResources().getString(string.HYD_Temp));
-		radioTMOilTemp.setText(TAB + ParentActivity.getResources().getString(string.TM_Oil_Temp));
-		radioBatteryVoltage.setText(TAB + ParentActivity.getResources().getString(string.Battery_Volt));
-		radioWeighingSystem.setText(TAB + ParentActivity.getResources().getString(string.Weighing_System));
-		radioCoolantTemp.setText(TAB + ParentActivity.getResources().getString(string.Coolant_Temp));
+//		radioHYDTemp.setText(TAB + ParentActivity.getResources().getString(string.HYD_Temp));
+//		radioTMOilTemp.setText(TAB + ParentActivity.getResources().getString(string.TM_Oil_Temp));
+//		radioBatteryVoltage.setText(TAB + ParentActivity.getResources().getString(string.Battery_Volt));
+//		radioWeighingSystem.setText(TAB + ParentActivity.getResources().getString(string.Weighing_System));
+//		radioCoolantTemp.setText(TAB + ParentActivity.getResources().getString(string.Coolant_Temp));
 		
 		 
 	}

@@ -50,6 +50,7 @@ void UART1_SeperateData_TCU_Multi(int Priority, int PF, int PS, unsigned char* D
 void UART1_SeperateData_CID(int Priority, int PF, int PS, unsigned char* Data);
 void UART1_SeperateData_CID_Multi(int Priority, int PF, int PS, unsigned char* Data);
 void UART1_SeperateData_ACU(int Priority, int PF, int PS, unsigned char* Data);
+void UART1_SeperateData_BKCU(int Priority, int PF, int PS, unsigned char* Data);
 void SaveErrorCode_NEW_CAN2(void);
 jint UART1_Tx(JNIEnv *env, jobject this, jint PF, jint PS, jint Flag);
 void InitUART1Valuable();

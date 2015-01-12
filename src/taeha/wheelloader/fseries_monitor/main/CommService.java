@@ -1,14 +1,19 @@
 package taeha.wheelloader.fseries_monitor.main;
 
 import java.io.FileDescriptor;
+import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
 
 
 import android.app.Activity;
+import android.app.ActivityManager;
 import android.app.Instrumentation;
 import android.app.PendingIntent;
 import android.app.Service;
+import android.app.ActivityManager.RunningAppProcessInfo;
+import android.app.ActivityManager.RunningTaskInfo;
+import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.media.AudioManager;
@@ -537,6 +542,8 @@ public class CommService extends Service{
 	//////RX_WEIGHING_SYSTEM_DATA2_65452///////
 	public native int Get_TotalWorkCWeight_1914_PGN65452();
 	public native int Get_ADayBeforeWeight_1916_PGN65452();
+	//////RX_BKCU_STATUS_65514///////
+	public native int Get_ButtonKeyPosition_3471_PGN65514();
 	//////RX_JOYSTICK_POSITION_STATUS_65515///////
 	public native int Get_BoomJoystickPositionStatus_2310_PGN65515();
 	public native int Get_BoomJoystickPosition_2311_PGN65515();
@@ -565,7 +572,7 @@ public class CommService extends Service{
 	public native int Get_SoftStopBucketOut_2340_PGN65524();
 	public native int Get_BoomDownEPPRValveMaxCurrent_2341_PGN65524();
 	public native int Get_BucketOutEPPRValveMaxCurrent_2342_PGN65524();
-	
+	public native int Get_JoystickSteeringEnableFailCondition_2343_PGN65524();
 	//////RX_ELECTRICAL_SWITCH_RELAY_OPERATION_STATUS_65527///////
 	public native int Get_TravelAlarmOperationStatus_3431_PGN65527();
 	public native int Get_WasherOperationStatus_3432_PGN65527();
@@ -642,6 +649,7 @@ public class CommService extends Service{
 	public native void Set_MessageType_PGN61184_61(int Data);
 	public native void Set_TestMode_PGN61184_61(int Data);
 	public native void Set_CoolingFanReverseMode_182_PGN61184_61(int Data);
+	public native void Set_CoolingFanReverseManual_PGN61184_61(int Data);
 	public native void Set_CoolingFanValveCurrent_146_PGN61184_61(int Data);
 	public native void Set_CoolingFanReverseIntervalTime_211_PGN61184_61(int Data);
 	public native void Set_CoolingFanReverseOperatingTime_212_PGN61184_61(int Data);
@@ -1008,6 +1016,8 @@ public class CommService extends Service{
 	public native int Get_FirmwareVersionSubLow();
 	public native int Get_HWVersion();
 	public native int Get_CommErrCnt();
+	public native int Get_CheckBKCUComm();
+	
 	
 	public native void Set_CommErrCnt(int Data);
 	
@@ -1245,7 +1255,7 @@ public class CommService extends Service{
 		HandleKeyButton = new Handler() {
 			@Override
 			public void handleMessage(Message msg) {
-				CallHome();
+				ClickFN();
 			}
 		};
 	}
@@ -1288,13 +1298,93 @@ public class CommService extends Service{
 	}
 	////////////////////////////////////////////////////////////////////////
 	public void CallHome(){
-		Intent intent = new Intent();
-	    intent.setAction("android.intent.action.MAIN");
-	    intent.addCategory("android.intent.category.HOME");
-	    intent.addFlags(Intent.FLAG_ACTIVITY_EXCLUDE_FROM_RECENTS
-	    | Intent.FLAG_ACTIVITY_FORWARD_RESULT
-	    | Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_PREVIOUS_IS_TOP
-	    | Intent.FLAG_ACTIVITY_RESET_TASK_IF_NEEDED);
-	    startActivity(intent);
+//		Intent intent = new Intent();
+//	    intent.setAction("android.intent.action.MAIN");
+//	    intent.addCategory("android.intent.category.HOME");
+//	    intent.addFlags(
+//	    Intent.FLAG_ACTIVITY_EXCLUDE_FROM_RECENTS
+//	    | Intent.FLAG_ACTIVITY_FORWARD_RESULT
+//	    | Intent.FLAG_ACTIVITY_NEW_TASK 
+//	    | Intent.FLAG_ACTIVITY_PREVIOUS_IS_TOP
+//	    | Intent.FLAG_ACTIVITY_RESET_TASK_IF_NEEDED
+//	    );
+//	    startActivity(intent);
+		
+		Intent intent;
+		intent = getPackageManager().getLaunchIntentForPackage("taeha.wheelloader.fseries_monitor.main");
+		if(intent != null)
+			startActivity(intent);
+	}
+	
+//	public boolean CheckTopApps(String strProcess){
+//		Log.d(TAG,"CheckTopApps");
+//		ActivityManager activityManager = (ActivityManager) getSystemService(ACTIVITY_SERVICE);
+//		List<RunningTaskInfo> taskList = activityManager.getRunningTasks(100);
+//		
+//		if(!taskList.isEmpty()) {
+//			int tasksSize = taskList.size();
+//			Log.d(TAG,"tasksSize : " + Integer.toString(tasksSize));
+//			for(int i = 0; i < tasksSize;  i++) {
+//				RunningTaskInfo taskinfo = taskList.get(i);
+//				if(taskinfo.topActivity.getPackageName().equals(strProcess)) {
+//					 Log.d(TAG,"Top is " + taskinfo.topActivity.getPackageName());
+//					 return true;
+//				}
+//			}
+//		}else{
+//			Log.d(TAG,"taskList is Empty");
+//		}
+//		
+//		return false;
+//	}
+	public boolean CheckTopApps(String strProcess){
+		ActivityManager am = (ActivityManager)getSystemService(Context.ACTIVITY_SERVICE);
+		List<ActivityManager.RunningTaskInfo> Info = am.getRunningTasks(1);
+		ComponentName topActivity = Info.get(0).topActivity;
+		String topactivityname = topActivity.getPackageName();
+		Log.d(TAG,"Top Activity : " + topactivityname);
+		if(strProcess.equalsIgnoreCase(topactivityname)){
+			return true;
+		}else{
+			return false;
+		}
+	}
+	public boolean CheckRunningApp(String strPrcessName){
+		 ActivityManager activity_manager = (ActivityManager)getSystemService(Context.ACTIVITY_SERVICE);
+		 List<RunningAppProcessInfo> app_list = activity_manager.getRunningAppProcesses();
+
+		 for(int i=0; i<app_list.size(); i++)	 {
+	
+			 if(strPrcessName.equals(app_list.get(i).processName) == true)	 {
+				 Log.d(TAG,"Process is running : " + app_list.get(i).processName);
+				 return true;
+			 }
+		 }
+		 System.gc();
+		 return false;
+	}
+	public void RunMultimedia(){
+		Intent intent;
+		intent = getPackageManager().getLaunchIntentForPackage("com.mxtech.videoplayer.ad");
+		if(intent != null){
+			startActivity(intent);
+		}
+	}
+	public void RunMirror(){
+		Intent intent;
+		intent = getPackageManager().getLaunchIntentForPackage("com.example.wfdsink");
+		if(intent != null)
+			startActivity(intent);
+	}
+	public void ClickFN(){
+		if(CheckTopApps("com.mxtech.videoplayer.ad") == true){
+			CallHome();
+		}else if(CheckTopApps("com.example.wfdsink") == true){
+			CallHome();
+		}else if(CheckRunningApp("com.mxtech.videoplayer.ad") == true){
+			RunMultimedia();
+		}else if(CheckRunningApp("com.example.wfdsink") == true){
+			RunMirror();
+		}
 	}
 }

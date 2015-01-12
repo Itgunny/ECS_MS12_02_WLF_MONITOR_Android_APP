@@ -432,11 +432,15 @@ public abstract class PasswordFragment extends ParentFragment{
 	public void ClickBack(){
 		if(DataBufIndex > 0){
 			DataBufIndex--;
+			NumDataBuf[DataBufIndex] = (byte) 0xFF;
 		}
 		PasswordIndicatorDisplay();
 	
 	}
 	public void LongClickBack(){
+		for(int i = 0; i <MAX_DATA_LENGTH; i++){
+			NumDataBuf[i] = (byte)0xFF;
+		}
 		DataBufIndex = 0;
 		PasswordIndicatorDisplay();
 	}

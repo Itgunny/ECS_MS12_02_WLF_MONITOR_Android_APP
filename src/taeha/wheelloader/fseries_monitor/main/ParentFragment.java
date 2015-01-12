@@ -125,6 +125,7 @@ public abstract class ParentFragment extends Fragment{
 	}
 	public void StartReadThread(){
 		try {
+			threadRead = new Thread(new ReadThread(this));
 			ThreadRunFlag = true;
 			threadRead.start();
 		} catch (RuntimeException e) {

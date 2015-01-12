@@ -35,6 +35,8 @@ public class AngleCalibration extends ParentFragment{
 	
 	TextView textViewTitle;
 	TextView textViewAngle;
+	TextView textViewAngleTitle;
+	TextView textViewAngleColon;
 	TextView textViewNext;
 	
 	ImageView imgViewStep1;
@@ -89,6 +91,7 @@ public class AngleCalibration extends ParentFragment{
 				CursurDisplay(msg.what);
 			}
 		};
+	
 		return mRoot;
 	}
 	@Override
@@ -116,6 +119,8 @@ public class AngleCalibration extends ParentFragment{
 		
 		textViewTitle = (TextView)mRoot.findViewById(R.id.textView_menu_body_management_calibration_angle_main_title);
 		textViewAngle = (TextView)mRoot.findViewById(R.id.textView_menu_body_management_calibration_angle_main_boom_data);
+		textViewAngleTitle = (TextView)mRoot.findViewById(R.id.textView_menu_body_management_calibration_angle_main_boom_title);
+		textViewAngleColon = (TextView)mRoot.findViewById(R.id.textView_menu_body_management_calibration_angle_main_boom_colon);
 		textViewNext = (TextView)mRoot.findViewById(R.id.textView_menu_body_management_calibration_angle_next);
 	
 		imgViewStep1 = (ImageView)mRoot.findViewById(R.id.imageView_menu_body_management_calibration_angle_step_1);
@@ -206,6 +211,10 @@ public class AngleCalibration extends ParentFragment{
 		imgViewStep4.setImageResource(R.drawable.menu_management_boom_pressure_step_off);
 		imgViewStep5.setImageResource(R.drawable.menu_management_boom_pressure_step_off);
 		textViewTitle.setText(ParentActivity.getResources().getString(R.string.Lower_the_boom_at_min_height));
+		
+		textViewAngle.setVisibility(View.VISIBLE);
+		textViewAngleTitle.setVisibility(View.VISIBLE);
+		textViewAngleColon.setVisibility(View.VISIBLE);
 	}
 	public void SetStep2Display(){
 		imgViewIcon.setImageResource(R.drawable.menu_management_boom_angle_img_02);
@@ -215,6 +224,10 @@ public class AngleCalibration extends ParentFragment{
 		imgViewStep4.setImageResource(R.drawable.menu_management_boom_pressure_step_off);
 		imgViewStep5.setImageResource(R.drawable.menu_management_boom_pressure_step_off);
 		textViewTitle.setText(ParentActivity.getResources().getString(R.string.Lift_up_the_boom_at_max_height));
+		
+		textViewAngle.setVisibility(View.VISIBLE);
+		textViewAngleTitle.setVisibility(View.VISIBLE);
+		textViewAngleColon.setVisibility(View.VISIBLE);
 	}
 	public void SetStep3Display(){
 		imgViewIcon.setImageResource(R.drawable.menu_management_boom_angle_img_03);
@@ -224,6 +237,10 @@ public class AngleCalibration extends ParentFragment{
 		imgViewStep4.setImageResource(R.drawable.menu_management_boom_pressure_step_off);
 		imgViewStep5.setImageResource(R.drawable.menu_management_boom_pressure_step_off);
 		textViewTitle.setText(ParentActivity.getResources().getString(R.string.Lift_the_boom_to__5_0));
+		
+		textViewAngle.setVisibility(View.VISIBLE);
+		textViewAngleTitle.setVisibility(View.VISIBLE);
+		textViewAngleColon.setVisibility(View.VISIBLE);
 	}
 	public void SetStep4Display(){
 		imgViewIcon.setImageResource(R.drawable.menu_management_boom_angle_img_04);
@@ -233,6 +250,10 @@ public class AngleCalibration extends ParentFragment{
 		imgViewStep4.setImageResource(R.drawable.menu_management_boom_pressure_step_on);
 		imgViewStep5.setImageResource(R.drawable.menu_management_boom_pressure_step_off);
 		textViewTitle.setText(ParentActivity.getResources().getString(R.string.Max_retraction_of_bucket_cylinder));
+		
+		textViewAngle.setVisibility(View.INVISIBLE);
+		textViewAngleTitle.setVisibility(View.INVISIBLE);
+		textViewAngleColon.setVisibility(View.INVISIBLE);
 	}
 	public void SetStep5Display(){
 		imgViewIcon.setImageResource(R.drawable.menu_management_boom_angle_img_05);
@@ -242,6 +263,10 @@ public class AngleCalibration extends ParentFragment{
 		imgViewStep4.setImageResource(R.drawable.menu_management_boom_pressure_step_off);
 		imgViewStep5.setImageResource(R.drawable.menu_management_boom_pressure_step_on);
 		textViewTitle.setText(ParentActivity.getResources().getString(R.string.Max_extension_of_bucket_cylinder));
+		
+		textViewAngle.setVisibility(View.INVISIBLE);
+		textViewAngleTitle.setVisibility(View.INVISIBLE);
+		textViewAngleColon.setVisibility(View.INVISIBLE);
 	}
 	public void AngleDisplay(int Angle, int AngleDot){
 		textViewAngle.setText(Integer.toString(Angle) + "." + Integer.toString(AngleDot) + "им");

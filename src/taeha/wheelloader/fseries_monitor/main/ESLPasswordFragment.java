@@ -74,7 +74,6 @@ public class ESLPasswordFragment extends PasswordFragment{
 	@Override
 	protected void InitButtonListener() {
 		super.InitButtonListener();
-
 	}
 	@Override
 	public void showServicePasswordNextScreen() {

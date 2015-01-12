@@ -1297,6 +1297,10 @@ jint Get_TotalWorkCWeight_1914_PGN65452(JNIEnv * env, jobject this) {
 jint Get_ADayBeforeWeight_1916_PGN65452(JNIEnv * env, jobject this) {
 	return RX_WEIGHING_SYSTEM_DATA2_65452.ADayBeforeWeight_1916;
 }
+//////RX_BKCU_STATUS_65514///////
+jint Get_ButtonKeyPosition_3471_PGN65514(JNIEnv * env, jobject this) {
+	return RX_BKCU_STATUS_65514.ButtonKeyPosition;
+}
 //////RX_JOYSTICK_POSITION_STATUS_65515///////
 jint Get_BoomJoystickPositionStatus_2310_PGN65515(JNIEnv * env, jobject this) {
 	return RX_JOYSTICK_POSITION_STATUS_65515.BoomJoystickPositionStatus_2310;
@@ -1376,6 +1380,9 @@ jint Get_BoomDownEPPRValveMaxCurrent_2341_PGN65524(JNIEnv * env, jobject this) {
 }
 jint Get_BucketOutEPPRValveMaxCurrent_2342_PGN65524(JNIEnv * env, jobject this) {
 	return RX_WHEEL_LOADER_EHCU_STATUS2_65524.BucketOutEPPRValveMaxCurrent_2342;
+}
+jint Get_JoystickSteeringEnableFailCondition_2343_PGN65524(JNIEnv * env, jobject this) {
+	return RX_WHEEL_LOADER_EHCU_STATUS2_65524.JoystickSteeringEnableFailCondition_2343;
 }
 //////RX_ELECTRICAL_SWITCH_RELAY_OPERATION_STATUS_65527///////
 jint Get_TravelAlarmOperationStatus_3431_PGN65527(JNIEnv * env, jobject this) {
@@ -1673,6 +1680,10 @@ void Set_TestMode_PGN61184_61(JNIEnv * env, jobject this, int Data) {
 void Set_CoolingFanReverseMode_182_PGN61184_61(JNIEnv * env, jobject this,
 		int Data) {
 	TX_COOLING_FAN_SETTING_61184_61.CoolingFanReverseMode_182 = Data;
+}
+void Set_CoolingFanReverseManual_PGN61184_61(JNIEnv * env, jobject this,
+		int Data) {
+	TX_COOLING_FAN_SETTING_61184_61.CoolingFanReverseManual = Data;
 }
 void Set_CoolingFanValveCurrent_146_PGN61184_61(JNIEnv * env, jobject this,
 		int Data) {
@@ -3008,7 +3019,9 @@ jint Get_HWVersion(JNIEnv * env, jobject this) {
 jint Get_CommErrCnt(JNIEnv * env, jobject this) {
 	return CommErrCnt;
 }
-
+jint Get_CheckBKCUComm(JNIEnv * env, jobject this) {
+	return CheckBKCUComm;
+}
 
 void Set_CommErrCnt(JNIEnv * env, jobject this, int Data) {
 	CommErrCnt = Data;
@@ -3436,18 +3449,12 @@ static JNINativeMethod methods[] =
 				{ "Get_RecvPasswordChangeResultFlag_PGN61184_25", "()I",
 										(void*) Get_RecvPasswordChangeResultFlag_PGN61184_25 },
 				//////RX_COOLING_FAN_SETTING_61184_61///////
-				{ "Get_MessageType_PGN61184_61", "()I",
-						(void*) Get_MessageType_PGN61184_61 }, {
-						"Get_TestMode_PGN61184_61", "()I",
-						(void*) Get_TestMode_PGN61184_61 }, {
-						"Get_CoolingFanReverseMode_182_PGN61184_61", "()I",
-						(void*) Get_CoolingFanReverseMode_182_PGN61184_61 }, {
-						"Get_CoolingFanValveCurrent_146_PGN61184_61", "()I",
-						(void*) Get_CoolingFanValveCurrent_146_PGN61184_61 },
-				{ "Get_CoolingFanReverseIntervalTime_211_PGN61184_61", "()I",
-						(void*) Get_CoolingFanReverseIntervalTime_211_PGN61184_61 },
-				{ "Get_CoolingFanReverseOperatingTime_212_PGN61184_61", "()I",
-						(void*) Get_CoolingFanReverseOperatingTime_212_PGN61184_61 },
+				{ "Get_MessageType_PGN61184_61", "()I",(void*) Get_MessageType_PGN61184_61 },
+				{"Get_TestMode_PGN61184_61", "()I",(void*) Get_TestMode_PGN61184_61 },
+				{"Get_CoolingFanReverseMode_182_PGN61184_61", "()I",(void*) Get_CoolingFanReverseMode_182_PGN61184_61 },
+				{"Get_CoolingFanValveCurrent_146_PGN61184_61", "()I",(void*) Get_CoolingFanValveCurrent_146_PGN61184_61 },
+				{ "Get_CoolingFanReverseIntervalTime_211_PGN61184_61", "()I",(void*) Get_CoolingFanReverseIntervalTime_211_PGN61184_61 },
+				{ "Get_CoolingFanReverseOperatingTime_212_PGN61184_61", "()I",(void*) Get_CoolingFanReverseOperatingTime_212_PGN61184_61 },
 				//////RX_WEIGHING_SYSTEM_SETTING_REQUEST_61184_62///////
 				{ "Get_MessageType_PGN61184_62", "()I",
 						(void*) Get_MessageType_PGN61184_62 },
@@ -4055,6 +4062,8 @@ static JNINativeMethod methods[] =
 						(void*) Get_TotalWorkCWeight_1914_PGN65452 }, {
 						"Get_ADayBeforeWeight_1916_PGN65452", "()I",
 						(void*) Get_ADayBeforeWeight_1916_PGN65452 },
+				//////RX_BKCU_STATUS_65514///////
+				{ "Get_ButtonKeyPosition_3471_PGN65514", "()I",(void*) Get_ButtonKeyPosition_3471_PGN65514 },
 				//////RX_JOYSTICK_POSITION_STATUS_65515///////
 				{ "Get_BoomJoystickPositionStatus_2310_PGN65515", "()I",
 						(void*) Get_BoomJoystickPositionStatus_2310_PGN65515 },
@@ -4102,6 +4111,7 @@ static JNINativeMethod methods[] =
 				{"Get_SoftStopBucketOut_2340_PGN65524", "()I",(void*) Get_SoftStopBucketOut_2340_PGN65524 },
 				{"Get_BoomDownEPPRValveMaxCurrent_2341_PGN65524", "()I",(void*) Get_BoomDownEPPRValveMaxCurrent_2341_PGN65524 },
 				{"Get_BucketOutEPPRValveMaxCurrent_2342_PGN65524", "()I",(void*) Get_BucketOutEPPRValveMaxCurrent_2342_PGN65524 },
+				{"Get_JoystickSteeringEnableFailCondition_2343_PGN65524", "()I",(void*) Get_JoystickSteeringEnableFailCondition_2343_PGN65524 },
 				//////RX_ELECTRICAL_SWITCH_RELAY_OPERATION_STATUS_65527///////
 				{ "Get_TravelAlarmOperationStatus_3431_PGN65527", "()I",
 						(void*) Get_TravelAlarmOperationStatus_3431_PGN65527 },
@@ -4240,18 +4250,13 @@ static JNINativeMethod methods[] =
 						"([B)V",
 						Set_HCEAntiTheftPasswordRepresentation_1634_PGN61184_25 },
 				//////TX_COOLING_FAN_SETTING_61184_61///////
-				{ "Set_MessageType_PGN61184_61", "(I)V",
-						(void*) Set_MessageType_PGN61184_61 }, {
-						"Set_TestMode_PGN61184_61", "(I)V",
-						(void*) Set_TestMode_PGN61184_61 }, {
-						"Set_CoolingFanReverseMode_182_PGN61184_61", "(I)V",
-						(void*) Set_CoolingFanReverseMode_182_PGN61184_61 }, {
-						"Set_CoolingFanValveCurrent_146_PGN61184_61", "(I)V",
-						(void*) Set_CoolingFanValveCurrent_146_PGN61184_61 },
-				{ "Set_CoolingFanReverseIntervalTime_211_PGN61184_61", "(I)V",
-						(void*) Set_CoolingFanReverseIntervalTime_211_PGN61184_61 },
-				{ "Set_CoolingFanReverseOperatingTime_212_PGN61184_61", "(I)V",
-						(void*) Set_CoolingFanReverseOperatingTime_212_PGN61184_61 },
+				{ "Set_MessageType_PGN61184_61", "(I)V",(void*) Set_MessageType_PGN61184_61 },
+				{"Set_TestMode_PGN61184_61", "(I)V",(void*) Set_TestMode_PGN61184_61 },
+				{"Set_CoolingFanReverseMode_182_PGN61184_61", "(I)V",(void*) Set_CoolingFanReverseMode_182_PGN61184_61 },
+				{"Set_CoolingFanReverseManual_PGN61184_61", "(I)V",(void*) Set_CoolingFanReverseManual_PGN61184_61 },
+				{"Set_CoolingFanValveCurrent_146_PGN61184_61", "(I)V",(void*) Set_CoolingFanValveCurrent_146_PGN61184_61 },
+				{ "Set_CoolingFanReverseIntervalTime_211_PGN61184_61", "(I)V",(void*) Set_CoolingFanReverseIntervalTime_211_PGN61184_61 },
+				{ "Set_CoolingFanReverseOperatingTime_212_PGN61184_61", "(I)V",(void*) Set_CoolingFanReverseOperatingTime_212_PGN61184_61 },
 				//////TX_WEIGHING_SYSTEM_SETTING_REQUEST_61184_62///////
 				{ "Set_MessageType_PGN61184_62", "(I)V",
 						(void*) Set_MessageType_PGN61184_62 },
@@ -4896,7 +4901,7 @@ static JNINativeMethod methods[] =
 				{ "Get_FirmwareVersionSubLow", "()I",(void*) Get_FirmwareVersionSubLow },
 				{ "Get_HWVersion", "()I",(void*) Get_HWVersion },
 				{ "Get_CommErrCnt", "()I",(void*) Get_CommErrCnt },
-
+				{ "Get_CheckBKCUComm", "()I",(void*) Get_CheckBKCUComm },
 
 
 				{"Set_CommErrCnt", "(I)V",(void*) Set_CommErrCnt },

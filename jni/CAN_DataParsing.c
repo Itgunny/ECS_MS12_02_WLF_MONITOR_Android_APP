@@ -425,6 +425,8 @@ void InitNewProtoclValuable() {
 		sizeof(RX_WEIGHING_SYSTEM_DATA1_65451));
 	memset((unsigned char*) &RX_WEIGHING_SYSTEM_DATA2_65452, 0xFF,
 		sizeof(RX_WEIGHING_SYSTEM_DATA2_65452));
+	memset((unsigned char*) &RX_BKCU_STATUS_65514, 0xFF,
+		sizeof(RX_BKCU_STATUS_65514));
 	memset((unsigned char*) &RX_JOYSTICK_POSITION_STATUS_65515, 0xFF,
 		sizeof(RX_JOYSTICK_POSITION_STATUS_65515));
 	memset((unsigned char*) &RX_WHEEL_LOADER_EHCU_STATUS_65517, 0xFF,
@@ -646,6 +648,7 @@ void InitNewProtoclValuable() {
 	nRecvResDownFlag = 0;
 
 	CommErrCnt = 0;
+	CheckBKCUComm = 0;
 
 	TxRingBuffHead = 0;
 	TxRingBuffTail = 0;
@@ -722,6 +725,9 @@ void UART1_SeperateData_NEWCAN2(int Priority, int PF, int PS, int SourceAddress,
 			break;
 		case SA_ACU:
 			UART1_SeperateData_ACU(Priority,PF,PS,Data);
+			break;
+		case SA_BKCU:
+			UART1_SeperateData_BKCU(Priority,PF,PS,Data);
 			break;
 
 	}
@@ -1478,7 +1484,20 @@ void UART1_SeperateData_ACU(int Priority, int PF, int PS, unsigned char* Data)
 		break;
 	}
 }
-
+void UART1_SeperateData_BKCU(int Priority, int PF, int PS, unsigned char* Data)
+{
+	CheckBKCUComm = 1;
+	switch (PF) {
+		case 255:	// 0xFF00
+		default:
+			switch (PS) {
+				case 234 :memcpy((unsigned char*)&RX_BKCU_STATUS_65514,&Data[7],8); break;
+				default:
+					break;
+			}
+		break;
+	}
+}
 void SaveErrorCode_NEW_CAN2(void) {
 	unsigned char PacketNo;
 

@@ -27,7 +27,7 @@
     
 	<RadioButton
 	    android:id="@+id/radioButton_rightdown_main_b_tmiccomode_off"
-	    android:layout_width="wrap_content"
+	    android:layout_width="350dp"
 	    android:layout_height="wrap_content"
 	    android:layout_marginLeft="328dp"
 	    android:layout_marginTop="84dp"
@@ -38,7 +38,7 @@
 	
 	<RadioButton
 	    android:id="@+id/radioButton_rightdown_main_b_tmiccomode_h"
-	    android:layout_width="wrap_content"
+	    android:layout_width="350dp"
 	    android:layout_height="wrap_content"
 	    android:layout_marginLeft="328dp"
 	    android:layout_marginTop="163dp"

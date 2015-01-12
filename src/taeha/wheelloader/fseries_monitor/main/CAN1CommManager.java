@@ -280,6 +280,10 @@ public class CAN1CommManager extends ICAN1CommManager.Stub{		// ttySAC1(Linux), 
 	public static final int DATA_STATE_FAIL						 	= 0x04;
 	public static final int DATA_STATE_TAG_ALREADY_REG			 	= 0x05;
 	public static final int DATA_STATE_TAG_ELIMINATION_SUCESS	 	= 0x06;
+	public static final int DATA_STATE_3RD_TAG_REG_SUCCESS 			= 0x07;
+	public static final int DATA_STATE_4TH_TAG_REG_SUCCESS 			= 0x08;
+	public static final int DATA_STATE_5TH_TAG_REG_SUCCESS 			= 0x09;
+	
 	
 	public static final int DATA_INDEX_TAG_REQ_SUCCESS	 			= 0x00;
 	public static final int DATA_INDEX_TAG_REGISTRATION			 	= 0x01;
@@ -304,6 +308,18 @@ public class CAN1CommManager extends ICAN1CommManager.Stub{		// ttySAC1(Linux), 
 	public static final int	DATA_STATE_CURRENT_WEIHGING_RESULT_BOOMLIFTING				= 11;
 	public static final int	DATA_STATE_CURRENT_WEIHGING_RESULT_BUCKETFULLIN				= 12;
 	public static final int	DATA_STATE_CURRENT_WEIHGING_RESULT_BOOMLIFTING_BUCKETFULLIN	= 13;
+	
+	public static final int	DATA_STATE_EHCUERR_STEERINGPROPRTIONALVALVE					= 0x01;
+	public static final int	DATA_STATE_EHCUERR_STEERINGJOYSTICK							= 0x02;
+	public static final int	DATA_STATE_EHCUERR_SAFETYCPU								= 0x04;
+	public static final int	DATA_STATE_EHCUERR_JOYSTICKSTEERINGSETTING					= 0x08;
+	
+	public static final int	DATA_STATE_EHCUERR_STEERINGJOYSTICKINNOTCENTERED			= 0x01;	
+	public static final int	DATA_STATE_EHCUERR_SEATSWITCHOFF							= 0x02;
+	public static final int	DATA_STATE_EHCUERR_ARMRESTSWITCHOFF							= 0x04;
+	public static final int	DATA_STATE_EHCUERR_ENGINEISNOTSTARTED						= 0x08;
+	public static final int	DATA_STATE_EHCUERR_MACHINEISNOTSTATIONARY					= 0x10;
+	public static final int	DATA_STATE_EHCUERR_TCUPENDING								= 0x20;
 	
 	public static final int COMMAND_MAINTENANCE_ITEM_LIST_REQUEST						= 0;
 	public static final int MAINTETNANCE_INFORMATION_REQUEST							= 1;
@@ -1048,6 +1064,8 @@ public class CAN1CommManager extends ICAN1CommManager.Stub{		// ttySAC1(Linux), 
 	//////RX_WEIGHING_SYSTEM_DATA2_65452///////
 	public int Get_TotalWorkCWeight_1914_PGN65452(){ return service.Get_TotalWorkCWeight_1914_PGN65452();}
 	public int Get_ADayBeforeWeight_1916_PGN65452(){ return service.Get_ADayBeforeWeight_1916_PGN65452();}
+	//////RX_BKCU_STATUS_65514///////
+	public int Get_ButtonKeyPosition_3471_PGN65514(){ return service.Get_ButtonKeyPosition_3471_PGN65514();}
 	//////RX_JOYSTICK_POSITION_STATUS_65515///////
 	public int Get_BoomJoystickPositionStatus_2310_PGN65515(){ return service.Get_BoomJoystickPositionStatus_2310_PGN65515();}
 	public int Get_BoomJoystickPosition_2311_PGN65515(){ return service.Get_BoomJoystickPosition_2311_PGN65515();}
@@ -1076,6 +1094,7 @@ public class CAN1CommManager extends ICAN1CommManager.Stub{		// ttySAC1(Linux), 
 	public int Get_SoftStopBucketOut_2340_PGN65524(){ return service.Get_SoftStopBucketOut_2340_PGN65524();}
 	public int Get_BoomDownEPPRValveMaxCurrent_2341_PGN65524(){ return service.Get_BoomDownEPPRValveMaxCurrent_2341_PGN65524();}
 	public int Get_BucketOutEPPRValveMaxCurrent_2342_PGN65524(){ return service.Get_BucketOutEPPRValveMaxCurrent_2342_PGN65524();}
+	public int Get_JoystickSteeringEnableFailCondition_2343_PGN65524(){ return service.Get_JoystickSteeringEnableFailCondition_2343_PGN65524();}
 	//////RX_ELECTRICAL_SWITCH_RELAY_OPERATION_STATUS_65527///////
 	public int Get_TravelAlarmOperationStatus_3431_PGN65527(){ return service.Get_TravelAlarmOperationStatus_3431_PGN65527();}
 	public int Get_WasherOperationStatus_3432_PGN65527(){ return service.Get_WasherOperationStatus_3432_PGN65527();}
@@ -1153,6 +1172,7 @@ public class CAN1CommManager extends ICAN1CommManager.Stub{		// ttySAC1(Linux), 
 	public void Set_MessageType_PGN61184_61(int Data){ service.Set_MessageType_PGN61184_61(Data);}
 	public void Set_TestMode_PGN61184_61(int Data){ service.Set_TestMode_PGN61184_61(Data);}
 	public void Set_CoolingFanReverseMode_182_PGN61184_61(int Data){ service.Set_CoolingFanReverseMode_182_PGN61184_61(Data);}
+	public void Set_CoolingFanReverseManual_PGN61184_61(int Data){ service.Set_CoolingFanReverseManual_PGN61184_61(Data);}
 	public void Set_CoolingFanValveCurrent_146_PGN61184_61(int Data){ service.Set_CoolingFanValveCurrent_146_PGN61184_61(Data);}
 	public void Set_CoolingFanReverseIntervalTime_211_PGN61184_61(int Data){ service.Set_CoolingFanReverseIntervalTime_211_PGN61184_61(Data);}
 	public void Set_CoolingFanReverseOperatingTime_212_PGN61184_61(int Data){ service.Set_CoolingFanReverseOperatingTime_212_PGN61184_61(Data);}
@@ -1520,6 +1540,7 @@ public class CAN1CommManager extends ICAN1CommManager.Stub{		// ttySAC1(Linux), 
 	public int Get_FirmwareVersionSubLow(){ return service.Get_FirmwareVersionSubLow();}
 	public int Get_HWVersion(){ return service.Get_HWVersion();}
 	public int Get_CommErrCnt(){ return service.Get_CommErrCnt();}
+	public int Get_CheckBKCUComm(){ return service.Get_CheckBKCUComm();}
 	
 	public void Set_CommErrCnt(int Data){ service.Set_CommErrCnt(Data);}
 	

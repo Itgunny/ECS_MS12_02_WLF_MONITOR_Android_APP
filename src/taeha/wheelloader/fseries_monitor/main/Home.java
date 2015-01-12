@@ -12,6 +12,7 @@ import taeha.wheelloader.fseries_monitor.popup.AngleCalibrationResultPopup;
 import taeha.wheelloader.fseries_monitor.popup.BrakePedalCalibrationPopup;
 import taeha.wheelloader.fseries_monitor.popup.BucketPriorityPopup;
 import taeha.wheelloader.fseries_monitor.popup.CCOModePopup;
+import taeha.wheelloader.fseries_monitor.popup.EHCUErrorPopup;
 import taeha.wheelloader.fseries_monitor.popup.EngineAutoShutdownCountPopup;
 import taeha.wheelloader.fseries_monitor.popup.EngineModePopup;
 import taeha.wheelloader.fseries_monitor.popup.EngineWarmingUpPopup;
@@ -29,6 +30,7 @@ import taeha.wheelloader.fseries_monitor.popup.ShiftModePopup;
 import taeha.wheelloader.fseries_monitor.popup.SoundOutputPopup;
 import taeha.wheelloader.fseries_monitor.popup.SpeedometerInitPopup;
 import taeha.wheelloader.fseries_monitor.popup.TCLockUpPopup;
+import taeha.wheelloader.fseries_monitor.popup.WeighingErrorToast;
 import taeha.wheelloader.fseries_monitor.popup.WorkLoadInitPopup;
 import taeha.wheelloader.fseries_monitor.popup.WorkLoadWeighingInitPopup1;
 import taeha.wheelloader.fseries_monitor.popup.WorkLoadWeighingInitPopup2;
@@ -40,6 +42,7 @@ import android.os.Message;
 import android.os.RemoteException;
 import android.app.Activity;
 import android.app.ActivityManager;
+import android.app.ActivityManager.RunningAppProcessInfo;
 import android.app.Dialog;
 import android.app.ActivityManager.RunningTaskInfo;
 import android.content.ComponentName;
@@ -62,7 +65,7 @@ public class Home extends Activity {
 	public static final int VERSION_HIGH 		= 1;
 	public static final int VERSION_LOW 		= 0;
 	public static final int VERSION_SUB_HIGH 	= 2;
-	public static final int VERSION_SUB_LOW 	= 9;
+	public static final int VERSION_SUB_LOW 	= 8;
 	////1.0.2.3
 	// UI B 안 최초 적용 2014.12.10
 	////1.0.2.4
@@ -80,9 +83,28 @@ public class Home extends Activity {
 	// AutoGrease, MirrorHeat, PreHeat 타이머 삭제 2014.12.17
 	// AutoGrease 화면에서 터치 가능하게 수정 2014.12.17
 	// Ending Animation 추가 2014.12.17
-	//// 1.0.2.9
+	//// 1.0.2.8
 	// Version Info Detail TCU,ECM Index 맞지 않는 것 수정 2014.12.19
 	// Error Report 최대 갯수 100개로 수정(100개 초과 시 가장 오래된 날짜의 로그 삭제) 2014.12.19
+	// Service Menu에 focus 시 esc키 먹지 않는 문제 수정 2014.12.19
+	// Start Can Command 삭제 2014.12.22
+	// 비밀번호 입력 시 back키 직후 enter 누르면 진입되지 않는 문제 수정 2014.12.22
+	// Engine Auto Shutdown 설정 값 받는 부분 65428 -> 61184_122로 수정 2014.12.26
+	// 후진 기어 연동 누락 수정 2014.12.29
+	// Firmware Version 문구 오류 수정 2014.12.30
+	// Boom Bucket Detent Mode 화면의 Boom Off/On 선택시 반대로 눌리는 현상 수정 2014.12.30
+	// Boom Pressure Calibration 완료 팝업 후 List 화면으로 나가도록 수정 2014.12.30
+	// FAN EPPR V/V Current 단위 오류 수정 2014.12.30
+	// 소모품 관리 Hyd. Tank Air Breatehr Filter Cartridge 에서 Cartridge 단어 삭제 2014.12.30
+	// 라디오 버튼 선택 영역 고정 2014.12.30
+	// 메인화면의 장비정보, Hourmeter 아이콘 애니메이션 시 배경에 기존 아이콘이 나오는 것 삭제 2014.12.30
+	// 메인화면의 퀵메뉴에서 Wifi, Bluetooth 삭제 및 멀티미디어 버튼 이동 214.12.30
+	// 카메라 진입 후 다른 키 버튼 입력되지 않도록 수정 2014.12.31
+	// Engine Auto Shutdown Countdown 중 Cancel 버튼 클릭 시 61184_121(SPN363) Off로 설정해서 Tx하게 수정 2014.12.31
+	// Eco Gauge 색상 변경, Yellow, Red 삭제 2015.01.05
+	// Cooling Fan Manual 버튼 누른 후 Off로 돌아가기 -> Manual 진입 후 나갈 때, Auto로 돌아가는 것으로 수정 2015.01.05
+	// Cooling Fan Manual 프로토콜 추가 2015.01.07
+	// Auto Shutdown 기능 BKCU와 통신 시에만 활성화 2015.01.07
 	//////////////////////////////////////////////////////////////////////////////////////
 	
 	// TAG
@@ -295,6 +317,13 @@ public class Home extends Activity {
 	
 	public  static final int SCREEN_STATE_MAIN_ENDING										= 0x60000000;
 	
+	public  static final int SCREEN_STATE_MAIN_A_TOP 										= 0x70000000;
+	
+	public  static final int SCREEN_STATE_MAIN_A_END 										= 0x7FFFFFFF;
+	
+	public  static final int SCREEN_STATE_EHCUERR_POPUP										= 0x80000000;
+	
+	
 	public  static final int UNIT_ODO_KM 			= 0;
 	public  static final int UNIT_ODO_MILE 			= 1;
 	
@@ -322,6 +351,9 @@ public class Home extends Activity {
 	public static final int STATE_EXTERNAL_AUX	 	= 1;
 	
 	public static final int MAX_AS_LENGTH 			= 21;
+	
+	public static final int	DISPLAY_TYPE_A			= 0;
+	public static final int	DISPLAY_TYPE_B			= 1;
 	////////////////////////////////////////////////////
 	
 	//Resource//////////////////////////////////////////
@@ -331,6 +363,9 @@ public class Home extends Activity {
 	//Valuable//////////////////////////////////////////
 	public int ScreenIndex;
 	public int OldScreenIndex;
+	
+	// Display Type
+	public int DisplayType;
 	
 	// Unit
 	public int UnitOdo;
@@ -418,12 +453,24 @@ public class Home extends Activity {
 	public WorkLoadInitPopup				_WorkLoadInitPopup;
 	public WorkLoadWeighingInitPopup1		_WorkLoadWeighingInitPopup1;
 	public WorkLoadWeighingInitPopup2		_WorkLoadWeighingInitPopup2;
+	public EHCUErrorPopup					_EHCUErrorPopup;
+	
+	//Toast
+	public WeighingErrorToast				_WeighingErrorToast;
+	
+	
 	// Timer
 	private Timer mSeatBeltTimer = null;
 	private Timer mAnimationRunningTimer = null;
 	private Timer mSendCommandTimer = null;
 	private Timer mCommErrStopTimer = null;
+	private Timer mMirrorHeatTimer = null;
+	private Timer mAutoGreaseTimer = null;
 	
+	// Count
+	int MirrorHeatTimerCount;
+	int AutoGreaseTimerCount;
+
 	// Flag
 	public boolean AnimationRunningFlag;
 	
@@ -468,6 +515,11 @@ public class Home extends Activity {
 	public int Hour;
 	public int Min;
 	public int Sec;
+	
+	// EHCU Err
+	public int JoystickSteeringEnableFailCondition;
+	public int OldJoystickSteeringEnableFailCondition;
+	public boolean bEHCUErrPopup;
 	////////////////////////////////////////////////////
 	
 	//Fragment//////////////////////////////////////////
@@ -476,6 +528,7 @@ public class Home extends Activity {
 	public 	ESLCheckFragment	_ESLCheckFragment;
 	public 	ESLPasswordFragment	_ESLPasswordFragment;
 	public 	EndingFragment		_EndingFragment;
+	public 	MainABaseFragment	_MainABaseFragment;
 	////////////////////////////////////////////////////
 	
 	//Animation/////////////////////////////////////////
@@ -500,7 +553,7 @@ public class Home extends Activity {
 		InitAnimation();
 		InitButtonListener();
 		LoadPref();
-		
+		imgViewCameraScreen.setClickable(false);
 		
 		
 		HandleKeyButton = new Handler() {
@@ -570,6 +623,7 @@ public class Home extends Activity {
 		BuzzerOnFlag = false;
 		EngineAutoShutdownESLFlag = false;
 		EngineAutoShutdownESLSetFlag = false;
+		bEHCUErrPopup = false;
 		_MainChangeAnimation = new ChangeFragmentAnimation(this, framelayoutMain, R.id.FrameLayout_main, null);
 		_CheckModel = new CheckModel();
 		
@@ -581,6 +635,7 @@ public class Home extends Activity {
 		_ESLCheckFragment = new ESLCheckFragment();
 		_ESLPasswordFragment = new ESLPasswordFragment();
 		_EndingFragment = new EndingFragment();
+		_MainABaseFragment = new MainABaseFragment();
 	}
 	public void InitPopup(){
 		HomeDialog = null;
@@ -608,6 +663,9 @@ public class Home extends Activity {
 		_WorkLoadInitPopup = new WorkLoadInitPopup(this);
 		_WorkLoadWeighingInitPopup1 = new WorkLoadWeighingInitPopup1(this);
 		_WorkLoadWeighingInitPopup2 = new WorkLoadWeighingInitPopup2(this);
+		_EHCUErrorPopup = new EHCUErrorPopup(this);
+		
+		_WeighingErrorToast = new WeighingErrorToast(this);
 	}
 	public void InitAnimation(){
 		
@@ -652,16 +710,7 @@ public class Home extends Activity {
 		}
 		return true;
 	}
-	public void ExcuteUIActivity(){
-		Intent intent;
-		intent = getPackageManager().getLaunchIntentForPackage(
-				"taeha.wheelloader.fseries_monitor.main");
-		if(intent != null){
-			startActivity(intent);
-			Log.d(TAG,"ExcuteUIActivity");
-		}
-			
-	}
+
 	public void SaveASPhoneNumber(){
 		byte[] ASNum;
 		int Index = 0;
@@ -732,6 +781,9 @@ public class Home extends Activity {
 		edit.putInt("MachineStatusUpperIndex", MachineStatusUpperIndex);
 		edit.putInt("MachineStatusLowerIndex", MachineStatusLowerIndex);
 		edit.putInt("WeighingErrorDetect", WeighingErrorDetect);
+		edit.putInt("WeighingErrorDetect", WeighingErrorDetect);
+		edit.putInt("DisplayType", DisplayType);
+		
 		
 		edit.commit();
 		Log.d(TAG,"SavePref");
@@ -766,6 +818,8 @@ public class Home extends Activity {
 		
 		strASNumDash = SharePref.getString("strASNumDash", "");
 		strASNum = SharePref.getString("strASNum", "");
+		
+		DisplayType = SharePref.getInt("DisplayType", DISPLAY_TYPE_A);
 		Log.d(TAG,"LoadPref");
 	}
 	public void setSoundOutput(int _soundstate) {
@@ -786,6 +840,13 @@ public class Home extends Activity {
 		_MainBBaseFragment = new MainBBaseFragment();
 		android.app.FragmentTransaction transaction = getFragmentManager().beginTransaction();
 		transaction.replace(R.id.FrameLayout_main, _MainBBaseFragment);
+		transaction.commit();
+		
+	}
+	public void showMainAFragment(){
+		_MainABaseFragment = new MainABaseFragment();
+		android.app.FragmentTransaction transaction = getFragmentManager().beginTransaction();
+		transaction.replace(R.id.FrameLayout_main, _MainABaseFragment);
 		transaction.commit();
 		
 	}
@@ -880,7 +941,8 @@ public class Home extends Activity {
 			threadRead.start();
 			CAN1Comm.SetScreenTopFlag(true);
 			
-			CAN1Comm.TxCMDToMCU(CAN1CommManager.CMD_STARTCAN);
+			
+			//CAN1Comm.TxCMDToMCU(CAN1CommManager.CMD_STARTCAN);
 			
 			//showMainBFragment();
 		//	_MainChangeAnimation.StartChangeAnimation(_MainBBaseFragment);
@@ -912,6 +974,7 @@ public class Home extends Activity {
 			}
 			else if(Data == CAN1CommManager.POWER_OFF){
 				showEndingFragment();
+				allKillRunningApps("taeha.wheelloader.fseries_monitor.main");
 			}
 			else if(CAN1Comm.GetScreenTopFlag() == true){
 				try {
@@ -1009,7 +1072,8 @@ public class Home extends Activity {
 		EngineAutoShutdownRemainingTime = CAN1Comm.Get_RemainingTimeforAutomaticEngineShutdown_PGN61184_122();
 		EngineAutoShutdownMode = CAN1Comm.Get_AutomaticEngineShutdown_363_PGN61184_122();
 		
-		
+		JoystickSteeringEnableFailCondition = CAN1Comm.Get_JoystickSteeringEnableFailCondition_2343_PGN65524();
+
 		Year = CAN1Comm.Get_RTColock_Year();
 		Month = CAN1Comm.Get_RTColock_Month();
 		Date = CAN1Comm.Get_RTColock_Date();
@@ -1036,6 +1100,7 @@ public class Home extends Activity {
 				CameraDisplay();
 				CheckBuzzer();
 				CheckEngineAutoShutdown();
+				CheckEHCUErr();
 			}
 		});
 	
@@ -1056,48 +1121,52 @@ public class Home extends Activity {
 		}
 	}
 	public void CameraDisplay(){
-		if(GearIndex == CAN1CommManager.DATA_STATE_CAMERA_REVERSE_ON){
-			if(SelectGearDirection == CAN1CommManager.DATA_INDEX_SELECTGEAR_DIR_R){	
-				CameraReverseOffCount = 0; 
-				if(CAN1Comm.CameraOnFlag == CAN1CommManager.STATE_CAMERA_OFF
-				|| CAN1Comm.CameraOnFlag == CAN1CommManager.STATE_CAMERA_MANUAL){
-					CameraReverseOnCount++;
-					
-				}
-				else{
-					CameraReverseOnCount = 0;
-				}
-				if(CameraReverseOnCount >= 5){
-					OldScreenIndex = ScreenIndex;
-					ScreenIndex = SCREEN_STATE_MAIN_CAMERA;
-					CAN1Comm.CameraOnFlag = CAN1CommManager.STATE_CAMERA_REVERSEGEAR;
-					CAN1Comm.TxCMDToMCU(CAN1Comm.CMD_CAM, CameraOrder1);
-					imgViewCameraScreen.setClickable(false);
-					CameraReverseOnCount = 0;
-				}
-					
-			}else{
-				CameraReverseOnCount = 0;
-				if(CAN1Comm.CameraOnFlag == CAN1CommManager.STATE_CAMERA_REVERSEGEAR){
-					CameraReverseOffCount++;
-					
+		if((ScreenIndex >= SCREEN_STATE_MAIN_B_TOP && ScreenIndex <= SCREEN_STATE_MAIN_B_END)
+		|| ScreenIndex == SCREEN_STATE_MAIN_CAMERA){
+			if(CameraReverseMode == CAN1CommManager.DATA_STATE_CAMERA_REVERSE_ON){
+				if(SelectGearDirection == CAN1CommManager.DATA_INDEX_SELECTGEAR_DIR_R){	
+					CameraReverseOffCount = 0; 
+					if(CAN1Comm.CameraOnFlag == CAN1CommManager.STATE_CAMERA_OFF
+					|| CAN1Comm.CameraOnFlag == CAN1CommManager.STATE_CAMERA_MANUAL){
+						CameraReverseOnCount++;
+						
+					}
+					else{
+						CameraReverseOnCount = 0;
+					}
+					if(CameraReverseOnCount >= 5){
+						OldScreenIndex = ScreenIndex;
+						ScreenIndex = SCREEN_STATE_MAIN_CAMERA;
+						CAN1Comm.CameraOnFlag = CAN1CommManager.STATE_CAMERA_REVERSEGEAR;
+						CAN1Comm.TxCMDToMCU(CAN1Comm.CMD_CAM, CameraOrder1);
+						imgViewCameraScreen.setClickable(false);
+						CameraReverseOnCount = 0;
+					}
+						
 				}else{
-					CameraReverseOffCount = 0;
-				}
-				
-				if(CameraReverseOffCount >= 5){
-					CAN1Comm.CameraOnFlag = CAN1CommManager.STATE_CAMERA_OFF;
-					CAN1Comm.TxCMDToMCU(CAN1Comm.CMD_CAM, 0xFF);
-					imgViewCameraScreen.setClickable(false);
+					CameraReverseOnCount = 0;
+					if(CAN1Comm.CameraOnFlag == CAN1CommManager.STATE_CAMERA_REVERSEGEAR){
+						CameraReverseOffCount++;
+						
+					}else{
+						CameraReverseOffCount = 0;
+					}
+					
+					if(CameraReverseOffCount >= 5){
+						CAN1Comm.CameraOnFlag = CAN1CommManager.STATE_CAMERA_OFF;
+						CAN1Comm.TxCMDToMCU(CAN1Comm.CMD_CAM, 0xFF);
+						imgViewCameraScreen.setClickable(false);
+					}
 				}
 			}
+			if(CAN1Comm.CameraOnFlag == CAN1CommManager.STATE_CAMERA_REVERSEGEAR
+			|| CAN1Comm.CameraOnFlag == CAN1CommManager.STATE_CAMERA_MANUAL){
+				imgViewCameraScreen.setClickable(true);
+			}else{
+				imgViewCameraScreen.setClickable(false);
+			}
 		}
-		if(CAN1Comm.CameraOnFlag == CAN1CommManager.STATE_CAMERA_REVERSEGEAR
-		|| CAN1Comm.CameraOnFlag == CAN1CommManager.STATE_CAMERA_MANUAL){
-			imgViewCameraScreen.setClickable(true);
-		}else{
-			imgViewCameraScreen.setClickable(false);
-		}
+		
 	}
 	/////////////////////////////////////////////////////
 	//Backlight//////////////////////////////////////////
@@ -1162,6 +1231,22 @@ public class Home extends Activity {
 			}
 		}
 	}
+	public void CheckEHCUErr(){
+		if(JoystickSteeringEnableFailCondition != 0xFFFF
+		&& JoystickSteeringEnableFailCondition != 0x0000){
+			if(bEHCUErrPopup == false){
+				if(JoystickSteeringEnableFailCondition != 0){
+					if(JoystickSteeringEnableFailCondition != OldJoystickSteeringEnableFailCondition){
+						OldJoystickSteeringEnableFailCondition = JoystickSteeringEnableFailCondition;
+						OldScreenIndex = ScreenIndex;
+						showEHCUErr();
+					}
+				}
+				
+			}
+		}
+		
+	}
 	/////////////////////////////////////////////////////
 	
 	//Key Button/////////////////////////////////////////
@@ -1196,8 +1281,12 @@ public class Home extends Activity {
 	public void KeyButtonClick(final int Data){
 		Log.d(TAG,"KeyButtonClick");
 		// TODO Auto-generated method stub
-
-		if(ScreenIndex == SCREEN_STATE_MENU_MODE_HYD_WORKLOAD_WEIGHING_INIT1){
+		if(ScreenIndex == SCREEN_STATE_MAIN_CAMERA){
+			if(Data == CAN1CommManager.CAMERA){
+				ExitCam();
+			}
+		}
+		else if(ScreenIndex == SCREEN_STATE_MENU_MODE_HYD_WORKLOAD_WEIGHING_INIT1){
 			Log.d(TAG,"Click WeighingInit1 Key");
 			_WorkLoadWeighingInitPopup1.KeyButtonClick(Data);
 		}else if(ScreenIndex == SCREEN_STATE_MENU_MODE_HYD_WORKLOAD_WEIGHING_INIT2){
@@ -1538,6 +1627,20 @@ public class Home extends Activity {
 		HomeDialog = _WorkLoadWeighingInitPopup2;
 		HomeDialog.show();
 	}
+	public void showEHCUErr(){
+		if(AnimationRunningFlag == true)
+			return;
+		else
+			StartAnimationRunningTimer();
+		
+		if(HomeDialog != null){
+			HomeDialog.dismiss();
+			HomeDialog = null;
+		}
+		
+		HomeDialog = _EHCUErrorPopup;
+		HomeDialog.show();
+	}
 	
 	/////////////////////////////////////////////////////
 	//Timer//////////////////////////////////////////////
@@ -1736,6 +1839,85 @@ public class Home extends Activity {
 	}
 	
 	
+	public class MirrorHeatTimerClass extends TimerTask{
+
+		@Override
+		public void run() {
+			// TODO Auto-generated method stub
+			runOnUiThread(new Runnable() {
+				
+				@Override
+				public void run() {
+					// TODO Auto-generated method stub
+					MirrorHeatTimerCount++;
+					if(MirrorHeatTimerCount > 10){
+						CancelMirrorHeatTimer();
+						CAN1Comm.Set_MirrorHeatOperationStatus_3450_PGN65527(3);
+					}else{
+						CAN1Comm.TxCANToMCU(247);
+					}
+				}
+			});
+			
+		}
+		
+	}
+	
+	public void StartMirrorHeatTimer(){
+		MirrorHeatTimerCount = 0;
+		CancelMirrorHeatTimer();
+		mMirrorHeatTimer = new Timer();
+		mMirrorHeatTimer.schedule(new MirrorHeatTimerClass(),1,100);	
+	}
+	
+	public void CancelMirrorHeatTimer(){
+		if(mMirrorHeatTimer != null){
+			mMirrorHeatTimer.cancel();
+			mMirrorHeatTimer.purge();
+			mMirrorHeatTimer = null;
+		}
+		
+	}
+	
+	public class AutoGreaseTimerClass extends TimerTask{
+
+		@Override
+		public void run() {
+			// TODO Auto-generated method stub
+			runOnUiThread(new Runnable() {
+				
+				@Override
+				public void run() {
+					// TODO Auto-generated method stub
+					AutoGreaseTimerCount++;
+					if(AutoGreaseTimerCount > 10){
+						CancelAutoGreaseTimer();
+						CAN1Comm.Set_AutoGreaseOperationStatus_3449_PGN65527(3);
+					}else{
+						CAN1Comm.TxCANToMCU(247);
+					}
+				}
+			});
+			
+		}
+		
+	}
+	
+	public void StartAutoGreaseTimer(){
+		AutoGreaseTimerCount = 0;
+		CancelAutoGreaseTimer();
+		mAutoGreaseTimer = new Timer();
+		mAutoGreaseTimer.schedule(new AutoGreaseTimerClass(),1,100);	
+	}
+	
+	public void CancelAutoGreaseTimer(){
+		if(mAutoGreaseTimer != null){
+			mAutoGreaseTimer.cancel();
+			mAutoGreaseTimer.purge();
+			mAutoGreaseTimer = null;
+		}
+		
+	}
 	/////////////////////////////////////////////////////
 	//Version////////////////////////////////////////////
 	public byte[] GetMonitorComponentBasicInfo()throws NullPointerException{
@@ -2250,5 +2432,41 @@ public class Home extends Activity {
 		}
 		return strAS;
 	}
+	/////////////////////////////////////////////////////
+	public void allKillRunningApps(String strPrcessName)	 {
+		 ActivityManager activity_manager = (ActivityManager)getSystemService(Context.ACTIVITY_SERVICE);
+		 List<RunningAppProcessInfo> app_list = activity_manager.getRunningAppProcesses();
+		 Log.d(TAG, "Try kill process..");
+
+		 for(int i=0; i<app_list.size(); i++)	 {
+			 Log.d(TAG,"Process : " + app_list.get(i).processName);
+
+			 if(strPrcessName.equals(app_list.get(i).processName) == false
+		     && "taeha.wheel_loader_f_series_ui_home".equals(app_list.get(i).processName) == false
+		     && "system".equals(app_list.get(i).processName) == false)	 {
+				 android.os.Process.sendSignal(app_list.get(i).pid, android.os.Process.SIGNAL_KILL);
+				 activity_manager.killBackgroundProcesses(app_list.get(i).processName);
+				 Log.d(TAG,"Kill Process : " + app_list.get(i).processName);
+			 }
+		 }
+		 System.gc();
+	}
+	public void KillApps(String strPrcessName){
+		 ActivityManager activity_manager = (ActivityManager)getSystemService(Context.ACTIVITY_SERVICE);
+		 List<RunningAppProcessInfo> app_list = activity_manager.getRunningAppProcesses();
+		 Log.d(TAG, "Try kill process..");
+
+		 for(int i=0; i<app_list.size(); i++)	 {
+			 Log.d(TAG,"Process : " + app_list.get(i).processName);
+
+			 if(strPrcessName.equals(app_list.get(i).processName) == true)	 {
+				 android.os.Process.sendSignal(app_list.get(i).pid, android.os.Process.SIGNAL_KILL);
+				 activity_manager.killBackgroundProcesses(app_list.get(i).processName);
+				 Log.d(TAG,"Kill Process : " + app_list.get(i).processName);
+			 }
+		 }
+		 System.gc();
+	}
+
 	/////////////////////////////////////////////////////
 }

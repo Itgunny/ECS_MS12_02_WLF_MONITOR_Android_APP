@@ -19,7 +19,7 @@
 
        <RadioButton
            android:id="@+id/radioButton_menu_body_management_service_weighingcompensation_nooffset"
-           android:layout_width="wrap_content"
+           android:layout_width="400dp"
            android:layout_height="wrap_content"
            android:button="@drawable/_selector_radio_btn"
            android:text="@string/No_Offset"
@@ -28,7 +28,7 @@
 
        <RadioButton
            android:id="@+id/radioButton_menu_body_management_service_weighingcompensation_worktool1"
-           android:layout_width="wrap_content"
+           android:layout_width="400dp"
            android:layout_height="wrap_content"
            android:layout_marginTop="20dp"
            android:button="@drawable/_selector_radio_btn"
@@ -70,7 +70,7 @@
        
        <RadioButton
            android:id="@+id/radioButton_menu_body_management_service_weighingcompensation_worktool2"
-           android:layout_width="wrap_content"
+           android:layout_width="400dp"
            android:layout_height="wrap_content"
            android:layout_marginTop="20dp"
            android:button="@drawable/_selector_radio_btn"
@@ -112,7 +112,7 @@
        
        <RadioButton
            android:id="@+id/radioButton_menu_body_management_service_weighingcompensation_worktool3"
-           android:layout_width="wrap_content"
+           android:layout_width="400dp"
            android:layout_height="wrap_content"
            android:layout_marginTop="20dp"
            android:button="@drawable/_selector_radio_btn"

@@ -172,7 +172,7 @@ public class DetentFragment extends ParentFragment{
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
 				ClickBoomOff();
-				CursurIndex = 2;
+				CursurIndex = 1;
 				HandleCursurDisplay.sendMessage(HandleCursurDisplay.obtainMessage(CursurIndex));
 			}
 		});
@@ -182,7 +182,7 @@ public class DetentFragment extends ParentFragment{
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
 				ClickBoomOn();
-				CursurIndex = 1;
+				CursurIndex = 2;
 				HandleCursurDisplay.sendMessage(HandleCursurDisplay.obtainMessage(CursurIndex));
 			}
 		});

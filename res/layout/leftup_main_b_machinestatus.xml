@@ -15,7 +15,7 @@
     <RelativeLayout
         android:id="@+id/RelativeLayout_leftup_main_b_machinestatus_normal_upper"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="61dp"
         android:layout_alignBottom="@+id/imageView_leftup_main_b_machinestatus_line"
         android:layout_alignLeft="@+id/imageView_leftup_main_b_machinestatus_line"
         android:layout_alignRight="@+id/imageView_leftup_main_b_machinestatus_line"
@@ -23,11 +23,10 @@
         android:visibility="invisible" >
 
 	    <ImageView
-	            android:id="@+id/imageView_leftup_machinestatus_normal_upper_icon"
-	            android:layout_width="wrap_content"
-	            android:layout_height="wrap_content"
-	            android:layout_centerVertical="true"
-	            android:src="@drawable/main_default_monitoring_icon_tm" />
+	        android:id="@+id/imageView_leftup_machinestatus_normal_upper_icon"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:layout_centerVertical="true" />
 	        
 	    <TextView
 	        android:id="@+id/textView_leftup_machinestatus_normal_upper_data"
@@ -57,7 +56,7 @@
     <RelativeLayout
         android:id="@+id/RelativeLayout_leftup_main_b_machinestatus_normal_lower"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="61dp"
         android:layout_alignLeft="@+id/imageView_leftup_main_b_machinestatus_line"
         android:layout_alignRight="@+id/imageView_leftup_main_b_machinestatus_line"
         android:layout_below="@+id/imageView_leftup_main_b_machinestatus_line"
@@ -68,8 +67,7 @@
     	    android:id="@+id/imageView_leftup_machinestatus_normal_lower_icon"
     	    android:layout_width="wrap_content"
     	    android:layout_height="wrap_content"
-    	    android:layout_centerVertical="true"
-    	    android:src="@drawable/main_default_monitoring_icon_hyd" />
+    	    android:layout_centerVertical="true" />
 	        
 	    <TextView
 	        android:id="@+id/textView_leftup_machinestatus_normal_lower_data"
@@ -111,8 +109,7 @@
 	        android:id="@+id/imageView_leftup_machinestatus_weighing_upper_icon"
 	        android:layout_width="wrap_content"
 	        android:layout_height="wrap_content"
-	        android:layout_alignParentTop="true"
-	        android:src="@drawable/main_default_monitoring_icon_work" />
+	        android:layout_alignParentTop="true" />
 	        
 	    <TextView
 	        android:id="@+id/textView_leftup_machinestatus_weighing_upper_data"
@@ -145,6 +142,7 @@
         android:id="@+id/RelativeLayout_leftup_main_b_machinestatus_weighing_lower"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/RelativeLayout_leftup_main_b_machinestatus_normal_lower"
         android:layout_alignLeft="@+id/imageView_leftup_main_b_machinestatus_line"
         android:layout_alignRight="@+id/imageView_leftup_main_b_machinestatus_line"
         android:layout_below="@+id/imageView_leftup_main_b_machinestatus_line"
@@ -152,11 +150,10 @@
         android:visibility="invisible" >
 	    
         <ImageView
-	        android:id="@+id/imageView_leftup_machinestatus_weighing_lower_icon"
-	        android:layout_width="wrap_content"
-	        android:layout_height="wrap_content"
-	        android:layout_alignParentTop="true"
-	        android:src="@drawable/main_default_monitoring_icon_total_a" />
+            android:id="@+id/imageView_leftup_machinestatus_weighing_lower_icon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true" />
 	        
 	    <TextView
 	        android:id="@+id/textView_leftup_machinestatus_weighing_lower_data"
@@ -164,9 +161,9 @@
 	        android:layout_height="wrap_content"
 	        android:layout_alignLeft="@+id/imageView_leftup_machinestatus_weighing_lower_icon"
 	        android:layout_alignRight="@+id/textView_leftup_machinestatus_weighing_lower_unit"
-	        android:layout_below="@+id/imageView_leftup_machinestatus_weighing_lower_icon"
 	        android:layout_marginLeft="10dp"
 	        android:layout_marginRight="10dp"
+	        android:layout_marginTop="32dp"
 	        android:layout_toLeftOf="@+id/textView_leftup_machinestatus_weighing_lower_unit"
 	        android:gravity="right"
 	        android:textAppearance="?android:attr/textAppearanceLarge"

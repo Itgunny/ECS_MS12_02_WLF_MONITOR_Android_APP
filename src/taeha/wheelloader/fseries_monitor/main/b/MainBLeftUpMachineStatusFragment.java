@@ -148,7 +148,7 @@ public class MainBLeftUpMachineStatusFragment extends ParentFragment{
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
 			  	if(ClickFlag == true)
-			  		ClickMachineStatus();
+			  		ClickMachineStatus();	
 			}
 		});
 	}
@@ -480,9 +480,6 @@ public class MainBLeftUpMachineStatusFragment extends ParentFragment{
 			ParentActivity._MainBBaseFragment._KeyTitleDisappearAnimation.StartAnimation();
 			ParentActivity._MainBBaseFragment._KeyBodyDisappearAnimation.StartAnimation();
 		}
-	
-		
-	
 	}
 	
 	public void setClickEnable(boolean flag){

@@ -253,7 +253,8 @@ public class MenuManagementFragment extends MenuBodyList_ParentFragment{
 			CursurDisplay(CursurIndex);
 			break;
 		case 4:
-			
+			CursurIndex = 0;
+			CursurDisplay(CursurIndex);
 			break;
 		case 5:
 			CursurIndex = 0;

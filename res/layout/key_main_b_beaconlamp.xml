@@ -14,7 +14,7 @@
 
        <RadioButton
            android:id="@+id/radioButton_key_main_b_beaconlamp_off"
-           android:layout_width="wrap_content"
+           android:layout_width="500dp"
            android:layout_height="wrap_content"
            android:button="@drawable/_selector_radio_btn"
            android:text="@string/Off"
@@ -23,7 +23,7 @@
 
        <RadioButton
            android:id="@+id/radioButton_key_main_b_beaconlamp_on"
-           android:layout_width="wrap_content"
+           android:layout_width="500dp"
            android:layout_height="wrap_content"
            android:layout_marginTop="60dp"
            android:button="@drawable/_selector_radio_btn"

@@ -65,7 +65,7 @@
 
             <CheckBox
                 android:id="@+id/checkBox_menu_body_monitoring_operationhistory_work_totala"
-                android:layout_width="wrap_content"
+                android:layout_width="300dp"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10dp"
                 android:button="@drawable/_selector_check_btn"
@@ -109,7 +109,7 @@
 
             <CheckBox
                 android:id="@+id/checkBox_menu_body_monitoring_operationhistory_work_totalb"
-                android:layout_width="wrap_content"
+                android:layout_width="300dp"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10dp"
                 android:button="@drawable/_selector_check_btn"
@@ -153,7 +153,7 @@
 
             <CheckBox
                 android:id="@+id/checkBox_menu_body_monitoring_operationhistory_work_totalc"
-                android:layout_width="wrap_content"
+                android:layout_width="300dp"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10dp"
                 android:button="@drawable/_selector_check_btn"
@@ -241,7 +241,7 @@
 
             <CheckBox
                 android:id="@+id/checkBox_menu_body_monitoring_operationhistory_odo_latest"
-                android:layout_width="wrap_content"
+                android:layout_width="300dp"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10dp"
                 android:button="@drawable/_selector_check_btn"
@@ -285,7 +285,7 @@
 
             <CheckBox
                 android:id="@+id/checkBox_menu_body_monitoring_operationhistory_hour_latest"
-                android:layout_width="wrap_content"
+                android:layout_width="300dp"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10dp"
                 android:button="@drawable/_selector_check_btn"

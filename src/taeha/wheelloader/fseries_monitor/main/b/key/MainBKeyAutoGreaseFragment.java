@@ -18,8 +18,8 @@ public class MainBKeyAutoGreaseFragment extends ParentFragment{
 	
 	//////////////////////////////////////////////////
 	//RESOURCE////////////////////////////////////////
-	RadioButton radioOff;
-	RadioButton radioOn;
+	TextView textViewOK;
+	TextView textViewCancel;
 	//////////////////////////////////////////////////
 	
 	//VALUABLE////////////////////////////////////////
@@ -48,9 +48,7 @@ public class MainBKeyAutoGreaseFragment extends ParentFragment{
 		InitButtonListener();
 
 		ParentActivity.ScreenIndex = ParentActivity.SCREEN_STATE_MAIN_B_KEY_AUTOGREASE;
-		
-		AutoGreaseDisplay(AutoGrease);
-		ClickHardKey();
+
 		return mRoot;
 	}
 
@@ -60,11 +58,8 @@ public class MainBKeyAutoGreaseFragment extends ParentFragment{
 	@Override
 	protected void InitResource() {
 		// TODO Auto-generated method stub
-		radioOff = (RadioButton)mRoot.findViewById(R.id.radioButton_key_main_b_autogrease_off);
-		radioOn = (RadioButton)mRoot.findViewById(R.id.radioButton_key_main_b_autogrease_on);
-		
-		radioOff.setClickable(false);
-		radioOn.setClickable(false);
+		textViewOK = (TextView)mRoot.findViewById(R.id.textView_key_main_b_autogrease_ok);
+		textViewCancel = (TextView)mRoot.findViewById(R.id.textView_key_main_b_autogrease_cancel);
 	}
 	
 	protected void InitValuables() {
@@ -76,20 +71,20 @@ public class MainBKeyAutoGreaseFragment extends ParentFragment{
 	@Override
 	protected void InitButtonListener() {
 		// TODO Auto-generated method stub
-		radioOff.setOnClickListener(new View.OnClickListener() {
+		textViewOK.setOnClickListener(new View.OnClickListener() {
 			
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
-				ClickOff();
+				ClickOK();
 			}
 		});
-		radioOn.setOnClickListener(new View.OnClickListener() {
+		textViewCancel.setOnClickListener(new View.OnClickListener() {
 			
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
-				ClickOn();
+				ClickCancel();
 			}
 		});
 	}
@@ -103,52 +98,26 @@ public class MainBKeyAutoGreaseFragment extends ParentFragment{
 	@Override
 	protected void UpdateUI() {
 		// TODO Auto-generated method stub
-		AutoGreaseDisplay(AutoGrease);
+	
 	}
 	/////////////////////////////////////////////////////////////////////	
-	public void AutoGreaseDisplay(int Data){
-		switch (Data) {
-		case CAN1CommManager.DATA_STATE_OFF:
-			radioOff.setChecked(true);
-			radioOn.setChecked(false);
-			break;
-		case CAN1CommManager.DATA_STATE_ON:
-			radioOff.setChecked(false);
-			radioOn.setChecked(true);
-			break;
-		default:
-			break;
-		}
-	}
+	
 	public void ClickHardKey(){
 		
-		switch (SelectAutoGrease) {
-		case CAN1CommManager.DATA_STATE_OFF:
-		default:
-			SelectAutoGrease = CAN1CommManager.DATA_STATE_ON;
-			CAN1Comm.Set_AutoGreaseOperationStatus_3449_PGN65527(CAN1CommManager.DATA_STATE_ON);
-			CAN1Comm.TxCANToMCU(247);
-			CAN1Comm.Set_AutoGreaseOperationStatus_3449_PGN65527(3);
-			break;
-		case CAN1CommManager.DATA_STATE_ON:
-			SelectAutoGrease = CAN1CommManager.DATA_STATE_OFF;
-			CAN1Comm.Set_AutoGreaseOperationStatus_3449_PGN65527(CAN1CommManager.DATA_STATE_OFF);
-			CAN1Comm.TxCANToMCU(247);
-			CAN1Comm.Set_AutoGreaseOperationStatus_3449_PGN65527(3);
-			break;
-		}
 	}
 	
-	public void ClickOff(){
+	public void ClickCancel(){
 		CAN1Comm.Set_AutoGreaseOperationStatus_3449_PGN65527(CAN1CommManager.DATA_STATE_OFF);
-		CAN1Comm.TxCANToMCU(247);
-		CAN1Comm.Set_AutoGreaseOperationStatus_3449_PGN65527(3);
+		//CAN1Comm.TxCANToMCU(247);
+		//CAN1Comm.Set_AutoGreaseOperationStatus_3449_PGN65527(3);
+		ParentActivity.StartAutoGreaseTimer();
 		ParentActivity._MainBBaseFragment.showKeytoDefaultScreenAnimation();
 	}
-	public void ClickOn(){
+	public void ClickOK(){
 		CAN1Comm.Set_AutoGreaseOperationStatus_3449_PGN65527(CAN1CommManager.DATA_STATE_ON);
-		CAN1Comm.TxCANToMCU(247);
-		CAN1Comm.Set_AutoGreaseOperationStatus_3449_PGN65527(3);
+		//CAN1Comm.TxCANToMCU(247);
+		//CAN1Comm.Set_AutoGreaseOperationStatus_3449_PGN65527(3);
+		ParentActivity.StartAutoGreaseTimer();
 		ParentActivity._MainBBaseFragment.showKeytoDefaultScreenAnimation();
 	}
 	

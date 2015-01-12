@@ -1675,7 +1675,8 @@ typedef struct
 
 	unsigned char	TestMode:2;
 	unsigned char	CoolingFanReverseMode_182:2;
-	unsigned char	Reserved0:4;
+	unsigned char	CoolingFanReverseManual:2;
+	unsigned char	Reserved0:2;
 
 	unsigned char	CoolingFanValveCurrent_146;
 
@@ -2472,6 +2473,15 @@ typedef struct
 	unsigned int	ADayBeforeWeight_1916;
 
 }__attribute__((packed))  WEIGHING_SYSTEM_DATA2_65452;
+
+typedef struct
+{
+	unsigned char	ButtonKeyPosition:2;
+	unsigned char	Reserved0:6;
+
+	unsigned char	DM[7];
+}__attribute__((packed))  BKCU_STATUS_65514;
+
 typedef struct
 {
 	unsigned char	BoomJoystickPositionStatus_2310:2;
@@ -2525,7 +2535,9 @@ typedef struct
 
 	unsigned char	BucketOutEPPRValveMaxCurrent_2342;
 
-	unsigned char	DM[5];
+	unsigned short	JoystickSteeringEnableFailCondition_2343;
+
+	unsigned char	DM[3];
 }__attribute__((packed))  WHEEL_LOADER_EHCU_STATUS2_65524;
 typedef struct
 {

@@ -331,6 +331,15 @@ public class MachineSecuritySmartKeyFragment extends ParentFragment{
 		case CAN1CommManager.DATA_STATE_TAG_ELIMINATION_SUCESS:
 			textViewDetail.setText(ParentActivity.getResources().getString(string.All_user_tags_deleted));
 			break;
+		case CAN1CommManager.DATA_STATE_3RD_TAG_REG_SUCCESS:
+			textViewDetail.setText(ParentActivity.getResources().getString(string._3rd_user_tag_registered));
+			break;
+		case CAN1CommManager.DATA_STATE_4TH_TAG_REG_SUCCESS:
+			textViewDetail.setText(ParentActivity.getResources().getString(string._4th_user_tag_registered));
+			break;
+		case CAN1CommManager.DATA_STATE_5TH_TAG_REG_SUCCESS:
+			textViewDetail.setText(ParentActivity.getResources().getString(string._5th_user_tag_registered));
+			break;
 		default:
 			textViewDetail.setText("");
 			break;

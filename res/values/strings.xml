@@ -71,6 +71,14 @@
     <string name="AS">A/S</string>
     <string name="Percent">%</string>
     <string name="mA">mA</string>
+    <string name="Check_joystick_steering_enable_fail_condition">Check joystick enable fail condition.</string>
+    <string name="Check_EHCU_Fault_Code">Check EHCU Fault Code</string>
+    <string name="Check_Steering_Joystick_Position">Check Steering Joystick Position</string>
+    <string name="Check_Seat_Switch_On">Check Seat Switch On</string>
+    <string name="Check_Armrest_Swtich_On">Check Armrest Switch On</string>
+    <string name="Check_Engine_Run">Check Engine Run</string>
+    <string name="Check_Machine_Stop">Check Machine Stop</string>
+    <string name="Check_TM_Control_Selection">Check TM Control Selection</string>
     <!-- Common End-->
     <!-- Main Start-->
     <string name="ENGINE_MODE">ENGINE MODE</string>
@@ -110,6 +118,9 @@
     <string name="Coolant_Temp">Coolant Temp.</string>
     <string name="User_Switching">User Switching</string>
     <string name="Help">Help</string>
+    <string name="Bucket_Full_In_Error">Bucket Full In Error</string>
+    <string name="Sudden_Change_Error">Sudden Change Error</string>
+    <string name="Plase_press_Enter_key">Plase press Enter key</string>
     <!-- Main End -->
     <!-- Key Start-->
     <string name="Main_Light">Main Light</string>
@@ -149,6 +160,8 @@
     <string name="Excuting_Locking_Attachment">Excuting Locking Attachment.</string>
     <string name="Excute_Unlocking_Attachment">Excute Unlocking Attachment.</string>
     <string name="Excuting_Unlocking_Attachment">Excuting Unlocking Attachment.</string>
+    <string name="Do_you_want_to_turn_on_Mirror_Heat">Do you want to turn on Mirror Heat?"</string>
+    <string name="Do_you_want_to_turn_on_Auto_Grease">Do you want to turn on Auto Grease?</string>
     <!-- Key End -->
     <!-- Menu Start -->
     <string name="Mode">Mode</string>
@@ -209,6 +222,7 @@
     <string name="Normal">Normal</string>
     <string name="Fast">Fast</string>
     <string name="Very_Fast">Very Fast</string>
+    <string name="Excute">Excute</string>
     <!-- Menu Mode End -->
     <!-- Menu Monitoring Start -->
     <string name="Machine_Monitoring">Machine Monitoring</string>
@@ -249,7 +263,7 @@
     <string name="Position_Update">Position Update Status</string>
     <string name="Outside_of_Boundary">Machine Position Status</string>
     <string name="Lock_Level">Lock Level</string>
-    <string name="Firmware_Version">Firmwaer Version</string>
+    <string name="Firmware_Version">Firmware Version</string>
     <string name="EST37A_Part_Number">EST37A Part Number</string>
     <string name="Hardware_Part_Number">Hardware Part Number</string>
     <string name="Hardware_Serial_Number">Hardware Serial Number</string>
@@ -332,6 +346,9 @@
     <string name="Deleting">Deleting</string>
     <string name="_1st_user_tag_registered">1st user tag registered</string>
     <string name="_2nd_user_tag_registered">2nd user tag registered</string>
+    <string name="_3rd_user_tag_registered">3rd user tag registered</string>
+    <string name="_4th_user_tag_registered">4th user tag registered</string>
+    <string name="_5th_user_tag_registered">5th user tag registered</string>
     <string name="Tag_already_registered">Tag already registered.</string>
     <string name="Registration_failed">Registration failed.</string>
     <string name="All_user_tags_deleted">All user tags deleted.</string>
@@ -359,7 +376,7 @@
     <string name="Rear_axle_oil">Rear axle oil</string>
     <string name="Crankcase_Ventilation_Filter">Crankcase Ventilation Filter</string>
     <string name="Aircon_Heater_Outer_Filter">Air-con., Heater Outer Filter</string>
-    <string name="Hydraulic_Tank_Drain_Filter_Cartridge">Hydraulic Tank Drain Filter Cartridge</string>
+    <string name="Hydraulic_Tank_Drain_Filter">Hydraulic Tank Drain Filter</string>
     <string name="Count">Count</string>
     <string name="Elapsed_Time">Elapsed Time</string>
     <string name="Cycle">Cycle</string>
@@ -367,6 +384,7 @@
     <string name="Replacement">Replacement</string>
     <string name="Maintenance_History">Maintenance History</string>
     <string name="Confirm_Reset_elapsed_time">Confirm: Reset elapsed time</string>
+    <string name="Recommend_deleting_unused_tag_for_security_when_you_register_new_tag">Recommend deleting unused tag for security when you register new tag.</string>
     <!-- Menu Management End -->
     <!-- Menu Preference Start -->
     <string name="Brightness_Setting">Brightness Setting</string>

@@ -89,7 +89,7 @@ public class MenuPreferenceFragment extends MenuBodyList_ParentFragment{
 		setClickableList3(true);
 		setClickableList4(true);
 		setClickableList5(true);
-		setClickableList6(true);
+
 		
 		setListTitle1(ParentActivity.getResources().getString(string.Brightness_Setting));
 		setListTitle2(ParentActivity.getResources().getString(string.Clock_Setting));
@@ -97,7 +97,7 @@ public class MenuPreferenceFragment extends MenuBodyList_ParentFragment{
 		setListTitle4(ParentActivity.getResources().getString(string.Display_Style) 
 				+ " / " + ParentActivity.getResources().getString(string.Language));
 		setListTitle5(ParentActivity.getResources().getString(string.Sound_Output_Setting));
-		setListTitle6(ParentActivity.getResources().getString(string.Wireless_Communication_Setting));
+		
 		
 	}
 
@@ -276,7 +276,8 @@ public class MenuPreferenceFragment extends MenuBodyList_ParentFragment{
 			CursurDisplay(CursurIndex);
 			break;
 		case 4:
-			
+			CursurIndex = 0;
+			CursurDisplay(CursurIndex);
 			break;
 		case 5:
 			CursurIndex = 0;

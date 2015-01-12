@@ -14,7 +14,7 @@
 
        <RadioButton
            android:id="@+id/radioButton_key_main_b_mainlight_off"
-           android:layout_width="wrap_content"
+           android:layout_width="500dp"
            android:layout_height="wrap_content"
            android:button="@drawable/_selector_radio_btn"
            android:text="@string/Off"
@@ -23,7 +23,7 @@
 
        <RadioButton
            android:id="@+id/radioButton_key_main_b_mainlight_positionlamp"
-           android:layout_width="wrap_content"
+           android:layout_width="500dp"
            android:layout_height="wrap_content"
            android:layout_marginTop="40dp"
            android:button="@drawable/_selector_radio_btn"
@@ -33,7 +33,7 @@
        
        <RadioButton
            android:id="@+id/radioButton_key_main_b_mainlight_headlamp"
-           android:layout_width="wrap_content"
+           android:layout_width="500dp"
            android:layout_height="wrap_content"
            android:layout_marginTop="40dp"
            android:button="@drawable/_selector_radio_btn"

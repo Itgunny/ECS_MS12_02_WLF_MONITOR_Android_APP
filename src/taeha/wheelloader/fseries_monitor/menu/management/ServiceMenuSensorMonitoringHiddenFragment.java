@@ -229,7 +229,7 @@ public class ServiceMenuSensorMonitoringHiddenFragment extends ParentFragment{
 		adapter.addItem(new IconTextItem(ParentActivity.getResources().getDrawable(R.drawable.menu_management_machine_monitoring_bg_dark),ParentActivity.getResources().getDrawable(R.drawable.menu_management_machine_monitoring_bg_line)
 				,"Fan rpm", Integer.toString(FanRpm), "rpm"));
 		adapter.addItem(new IconTextItem(ParentActivity.getResources().getDrawable(R.drawable.menu_management_machine_monitoring_bg_light),ParentActivity.getResources().getDrawable(R.drawable.menu_management_machine_monitoring_bg_line)
-				, "Engine Cooling Fan Valve Current", Integer.toString(EpprCurrent), "rpm"));
+				, "Engine Cooling Fan Valve Current", Integer.toString(EpprCurrent), "mA"));
 		adapter.notifyDataSetChanged();
 		textViewEpprValue.setText(Integer.toString(EpprCurrent));
 						

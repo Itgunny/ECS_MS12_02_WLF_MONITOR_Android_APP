@@ -6,8 +6,11 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.ViewGroup.LayoutParams;
+import android.widget.FrameLayout;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import taeha.wheelloader.fseries_monitor.animation.BarAnimation;
 import taeha.wheelloader.fseries_monitor.main.CAN1CommManager;
@@ -25,9 +28,10 @@ public class MainBCenterFragment extends ParentFragment{
 	ImageView imgViewEcoBG;
 	ImageView imgViewEcoBar;
 	
-	ImageView imgViewRPMUnit;
 	
 	ImageButton imgbtnOption;
+	
+	RelativeLayout layoutEcoBar;
 	//////////////////////////////////////////////////
 	
 	//VALUABLE////////////////////////////////////////
@@ -91,9 +95,14 @@ public class MainBCenterFragment extends ParentFragment{
 		imgViewEcoBG = (ImageView)mRoot.findViewById(R.id.imageView_center_main_b_eco_bg);
 		imgViewEcoBar = (ImageView)mRoot.findViewById(R.id.imageView_center_main_b_eco_bar);
 		
-		imgViewRPMUnit = (ImageView)mRoot.findViewById(R.id.imageView_center_main_b_rpm_unit);
+
 		
 		imgbtnOption = (ImageButton)mRoot.findViewById(R.id.imageButton_center_main_b_option);
+		
+		layoutEcoBar = (RelativeLayout)mRoot.findViewById(R.id.RelativeLayout_center_main_b_icon_eco_bar);
+		
+		
+
 	}
 	
 	protected void InitValuables() {
@@ -176,14 +185,14 @@ public class MainBCenterFragment extends ParentFragment{
 		switch (_status) {
 			case CAN1CommManager.DATA_STATE_ECO_GREEN:
 			default:
-				imgViewEcoBar.setImageResource(R.drawable.main_center_eco_green_all);
+				imgViewEcoBar.setImageResource(R.drawable.main_center_eco_all);
 				break;
-			case CAN1CommManager.DATA_STATE_ECO_YELLOW:
-				imgViewEcoBar.setImageResource(R.drawable.main_center_eco_yellow_all);
-				break;
-			case CAN1CommManager.DATA_STATE_ECO_RED:
-				imgViewEcoBar.setImageResource(R.drawable.main_center_eco_red_all);
-				break;
+			//case CAN1CommManager.DATA_STATE_ECO_YELLOW:
+			//	imgViewEcoBar.setImageResource(R.drawable.main_center_eco_yellow_all);
+			//	break;
+			//case CAN1CommManager.DATA_STATE_ECO_RED:
+			//	imgViewEcoBar.setImageResource(R.drawable.main_center_eco_red_all);
+			//	break;
 			case CAN1CommManager.DATA_STATE_ECO_WHITE:
 				imgViewEcoBar.setImageResource(R.drawable.main_center_eco_white_all);
 				break;
@@ -198,9 +207,9 @@ public class MainBCenterFragment extends ParentFragment{
 			_level = 0;
 		}
 		Scale = (float) ((float) _level / 100.0);
-		imgViewEcoBar.setPivotX(0);	
-		imgViewEcoBar.setScaleX(Scale);
-		//_EcoGaugeAnimation.SetScale(_level);
+
+		imgViewEcoBar.setLayoutParams(new RelativeLayout.LayoutParams((int)(ParentActivity.getResources().getDrawable(R.drawable.main_center_eco_all).getIntrinsicWidth() * Scale), 
+				ParentActivity.getResources().getDrawable(R.drawable.main_center_eco_all).getIntrinsicHeight()));
 	}
 	public void IconDisplay(int _fault, int _maint){
 		if(_fault == CAN1CommManager.DATA_STATE_LAMP_ON && _maint == CAN1CommManager.DATA_STATE_LAMP_ON){

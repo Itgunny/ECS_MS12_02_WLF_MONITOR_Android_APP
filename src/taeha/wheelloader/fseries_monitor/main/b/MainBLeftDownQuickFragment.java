@@ -25,7 +25,6 @@ public class MainBLeftDownQuickFragment extends ParentFragment{
 	TextView textViewTitle;
 	
 	ImageButton imgbtnMirror;
-	ImageButton imgbtnMedia;
 	//////////////////////////////////////////////////
 	
 	//VALUABLE////////////////////////////////////////
@@ -68,8 +67,6 @@ public class MainBLeftDownQuickFragment extends ParentFragment{
 		textViewTitle = (TextView)mRoot.findViewById(R.id.textView_leftdown_main_b_quick_title);
 		
 		imgbtnMirror = (ImageButton)mRoot.findViewById(R.id.imageButton_leftdown_main_b_quick_mirror);
-		imgbtnMedia = (ImageButton)mRoot.findViewById(R.id.imageButton_leftdown_main_b_quick_multimedia);
-
 	}
 	
 	protected void InitValuables() {
@@ -96,14 +93,6 @@ public class MainBLeftDownQuickFragment extends ParentFragment{
 				ClickMirror();
 			}
 		});
-		imgbtnMedia.setOnClickListener(new View.OnClickListener() {
-			
-			@Override
-			public void onClick(View v) {
-				// TODO Auto-generated method stub
-				ClickMedia();
-			}
-		});
 	}
 
 	@Override
@@ -126,17 +115,10 @@ public class MainBLeftDownQuickFragment extends ParentFragment{
 			startActivity(intent);
 	}
 	public void ClickMirror(){
+		ParentActivity.KillApps("com.mxtech.videoplayer.ad");
 		Intent intent;
 		intent = ParentActivity.getPackageManager().getLaunchIntentForPackage("com.example.wfdsink");
 		if(intent != null)
 			startActivity(intent);
 	}
-	public void ClickMedia(){
-		Intent intent;
-		intent = ParentActivity.getPackageManager().getLaunchIntentForPackage("com.mxtech.videoplayer.ad");
-		if(intent != null){
-			ParentActivity.startActivity(intent);
-		}
-	}
-	
 }

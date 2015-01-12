@@ -1462,7 +1462,6 @@ public class MainBBaseFragment extends ParentFragment{
 			break;
 		case CAN1CommManager.FN:
 			Log.d(TAG,"Click FN");
-			ParentActivity.ExcuteUIActivity();
 			break;
 		default:
 			break;

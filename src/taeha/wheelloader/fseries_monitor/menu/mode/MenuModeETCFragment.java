@@ -81,13 +81,19 @@ public class MenuModeETCFragment extends MenuBodyList_ParentFragment{
 		setClickableList2(true);
 		setClickableList3(true);
 		setClickableList4(true);
-		setClickableList5(true);
+		
 		
 		setListTitle1(ParentActivity.getResources().getString(string.Speedometer_Freq_Setting));
 		setListTitle2(ParentActivity.getResources().getString(string.Cooling_Fan_Reverse_Mode));
 		setListTitle3(ParentActivity.getResources().getString(string.Wiper_Level_Setting));
-		setListTitle4(ParentActivity.getResources().getString(string.Engine_Auto_Shutdown));
-		setListTitle5(ParentActivity.getResources().getString(string.Camera_Setting));
+		setListTitle4(ParentActivity.getResources().getString(string.Camera_Setting));
+		if(CAN1Comm.Get_CheckBKCUComm() == 1){
+			setListTitle5(ParentActivity.getResources().getString(string.Engine_Auto_Shutdown));
+			setClickableList5(true);
+		}else{
+			setClickableList5(false);
+		}
+		
 	}
 	
 	@Override
@@ -160,7 +166,7 @@ public class MenuModeETCFragment extends MenuBodyList_ParentFragment{
 			return;
 		else
 			ParentActivity.StartAnimationRunningTimer();
-		ParentActivity._MenuBaseFragment.showBodyEngineAutoShutdownAnimation();
+		ParentActivity._MenuBaseFragment.showBodyCameraSettingAnimation();
 		CursurIndex = 4;
 		CursurDisplay(CursurIndex);
 		ParentActivity._MenuBaseFragment._MenuModeFragment.SetModeFocusIndex(MenuModeFragment.STATE_CURSUR_LIST);
@@ -174,8 +180,7 @@ public class MenuModeETCFragment extends MenuBodyList_ParentFragment{
 			return;
 		else
 			ParentActivity.StartAnimationRunningTimer();
-
-		ParentActivity._MenuBaseFragment.showBodyCameraSettingAnimation();
+		ParentActivity._MenuBaseFragment.showBodyEngineAutoShutdownAnimation();
 		CursurIndex = 5;
 		CursurDisplay(CursurIndex);
 		ParentActivity._MenuBaseFragment._MenuModeFragment.SetModeFocusIndex(MenuModeFragment.STATE_CURSUR_LIST);
@@ -206,8 +211,14 @@ public class MenuModeETCFragment extends MenuBodyList_ParentFragment{
 		case MenuModeFragment.STATE_CURSUR_LIST:
 			switch (CursurIndex) {
 			case 1:
-				CursurIndex = 5;
-				CursurDisplay(CursurIndex);
+				if(CAN1Comm.Get_CheckBKCUComm() == 1){
+					CursurIndex = 5;
+					CursurDisplay(CursurIndex);
+				}else{
+					CursurIndex = 4;
+					CursurDisplay(CursurIndex);
+				}
+			
 				break;
 			case 2:
 				CursurIndex--;
@@ -259,8 +270,13 @@ public class MenuModeETCFragment extends MenuBodyList_ParentFragment{
 				CursurDisplay(CursurIndex);
 				break;
 			case 4:
-				CursurIndex++;
-				CursurDisplay(CursurIndex);
+				if(CAN1Comm.Get_CheckBKCUComm() == 1){
+					CursurIndex++;
+					CursurDisplay(CursurIndex);
+				}else{
+					CursurIndex = 1;
+					CursurDisplay(CursurIndex);
+				}
 				break;
 			case 5:
 				CursurIndex = 1;

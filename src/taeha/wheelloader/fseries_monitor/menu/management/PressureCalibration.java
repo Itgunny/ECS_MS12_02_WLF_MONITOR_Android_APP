@@ -246,7 +246,7 @@ public class PressureCalibration extends ParentFragment{
 		//if((StatusCnt >= 25) && (StatusCnt <= 90)) // 5 Sec ~ 15 Sec
 		if((StatusCnt >= 25)) // 5 Sec ~ 
 		{
-			if( (Result == 2) ||  (Result == 4) || (Result == 11) || (Result == 12) )
+			if( (Result == 2) ||  (Result == 4) || (Result == 11) || (Result == 12) || (Result == 13))
 			{
 				CAN1Comm.Set_RequestBoomPressureCalibration_PGN61184_201(0);
 				CAN1Comm.Set_RequestBoomBucketAngleSensorCalibration_PGN61184_201(0);

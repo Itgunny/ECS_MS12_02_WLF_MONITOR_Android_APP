@@ -57,7 +57,7 @@ public class AngleCalibrationResultPopup extends ParentPopup{
 		this.addContentView(mRoot,  new LayoutParams(448,288));
 		this.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
 		
-		
+		bExitPage = false;
 	}
 
 	@Override
@@ -99,7 +99,7 @@ public class AngleCalibrationResultPopup extends ParentPopup{
 		textViewTitle = (TextView)mRoot.findViewById(R.id.textView_popup_anglecalibration_result_title);
 
 		textViewTitle.setText(strTitle);
-		bExitPage = false;
+	
 	}
 
 	@Override

@@ -34,7 +34,7 @@
 
        <RadioButton
            android:id="@+id/radioButton_rightup_main_b_enginemode_econo"
-           android:layout_width="wrap_content"
+           android:layout_width="350dp"
            android:layout_height="wrap_content"
            android:button="@drawable/_selector_radio_btn"
            android:text="@string/ECONO"
@@ -43,7 +43,7 @@
 
        <RadioButton
            android:id="@+id/radioButton_rightup_main_b_enginemode_standard"
-           android:layout_width="wrap_content"
+           android:layout_width="350dp"
            android:layout_height="wrap_content"
            android:layout_marginTop="40dp"
            android:button="@drawable/_selector_radio_btn"
@@ -53,7 +53,7 @@
        
        <RadioButton
            android:id="@+id/radioButton_rightup_main_b_enginemode_power"
-           android:layout_width="wrap_content"
+           android:layout_width="350dp"
            android:layout_height="wrap_content"
            android:layout_marginTop="40dp"
            android:button="@drawable/_selector_radio_btn"

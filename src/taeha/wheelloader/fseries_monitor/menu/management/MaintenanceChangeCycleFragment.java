@@ -437,7 +437,7 @@ public class MaintenanceChangeCycleFragment extends ParentFragment{
 			break;
 		case	CAN1CommManager.HYDRAULIC_TANK_AIR_BREATHER_ELEMENT	:	
 			
-			ParentActivity._MenuBaseFragment._MenuInterTitleFragment.SetTitleText(ParentActivity.getResources().getString(string.Hydraulic_Tank_Drain_Filter_Cartridge));
+			ParentActivity._MenuBaseFragment._MenuInterTitleFragment.SetTitleText(ParentActivity.getResources().getString(string.Hydraulic_Tank_Drain_Filter));
 			break;
 		case	CAN1CommManager.AIR_CLEANER_ELEMENT	:	
 		

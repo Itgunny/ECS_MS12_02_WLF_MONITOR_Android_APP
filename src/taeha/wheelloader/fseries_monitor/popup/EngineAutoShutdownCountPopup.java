@@ -141,6 +141,7 @@ public class EngineAutoShutdownCountPopup extends ParentPopup{
 		this.dismiss();
 	}	
 	public void ClickCancel(){
+		CAN1Comm.Set_AutomaticEngineShutdown_363_PGN61184_121(CAN1CommManager.DATA_STATE_AUTOSHUTDOWN_OFF);
 		CAN1Comm.Set_EngineShutdownCotrolByte_PGN61184_121(STATE_COTROL_AUTO_CANCEL);
 		CAN1Comm.TxCANToMCU(121);
 		CAN1Comm.Set_EngineShutdownCotrolByte_PGN61184_121(15);

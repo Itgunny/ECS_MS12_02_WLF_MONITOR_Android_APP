@@ -50,7 +50,7 @@
 	    android:layout_alignRight="@+id/imageView_menu_body_mode_softstop_line1" >
 	    
 	    <ImageView
-            android:id="@+id/imageView_menu_body_mdoe_softstop_boomup"
+            android:id="@+id/imageView_menu_body_mode_softstop_boomup"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
@@ -63,33 +63,33 @@
 	        android:layout_alignParentBottom="true"
 	        android:layout_alignParentTop="true"
 	        android:layout_marginLeft="10dp"
-	        android:layout_toRightOf="@+id/imageView_menu_body_mdoe_softstop_boomup"
+	        android:layout_toRightOf="@+id/imageView_menu_body_mode_softstop_boomup"
 	        android:gravity="center_vertical"
 	        android:text="@string/Boom_Up"
 	        android:textAppearance="?android:attr/textAppearanceLarge" />
 
 		<RadioButton
 		    android:id="@+id/radioButton_menu_body_mode_softstop_boomup_on"
-		    android:layout_width="wrap_content"
+		    android:layout_width="200dp"
 		    android:layout_height="wrap_content"
 		    android:layout_centerVertical="true"
 		    android:layout_marginLeft="296dp"
 		    android:button="@drawable/_selector_radio_btn"
 		    android:gravity="left|center_vertical"
 		    android:text="@string/On"
-		    android:textSize="22sp"
-		    android:textColor="@drawable/_selector_radio_txt_white_amber" />
+		    android:textColor="@drawable/_selector_radio_txt_white_amber"
+		    android:textSize="22sp" />
 
 		<RadioButton
 		    android:id="@+id/radioButton_menu_body_mode_softstop_boomup_off"
-		    android:layout_width="wrap_content"
+		    android:layout_width="200dp"
 		    android:layout_height="wrap_content"
 		    android:layout_centerVertical="true"
 		    android:layout_marginLeft="503dp"
 		    android:button="@drawable/_selector_radio_btn"
 		    android:text="@string/Off"
-		    android:textSize="22sp"
-		    android:textColor="@drawable/_selector_radio_txt_white_amber" />
+		    android:textColor="@drawable/_selector_radio_txt_white_amber"
+		    android:textSize="22sp" />
 
 	</RelativeLayout>
 	
@@ -103,7 +103,7 @@
 	    android:layout_alignTop="@+id/imageView_menu_body_mode_softstop_line1" >
 		
 	    <ImageView
-            android:id="@+id/imageView_menu_body_mdoe_softstop_boomdown"
+            android:id="@+id/imageView_menu_body_mode_softstop_boomdown"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
@@ -116,33 +116,33 @@
 	        android:layout_alignParentBottom="true"
 	        android:layout_alignParentTop="true"
 	        android:layout_marginLeft="10dp"
-	        android:layout_toRightOf="@+id/imageView_menu_body_mdoe_softstop_boomdown"
+	        android:layout_toRightOf="@+id/imageView_menu_body_mode_softstop_boomdown"
 	        android:gravity="center_vertical"
 	        android:text="@string/Boom_Down"
 	        android:textAppearance="?android:attr/textAppearanceLarge" />
 
 		<RadioButton
 		    android:id="@+id/radioButton_menu_body_mode_softstop_boomdown_on"
-		    android:layout_width="wrap_content"
+		    android:layout_width="200dp"
 		    android:layout_height="wrap_content"
 		    android:layout_centerVertical="true"
 		    android:layout_marginLeft="296dp"
 		    android:button="@drawable/_selector_radio_btn"
 		    android:gravity="left|center_vertical"
 		    android:text="@string/On"
-		    android:textSize="22sp"
-		    android:textColor="@drawable/_selector_radio_txt_white_amber" />
+		    android:textColor="@drawable/_selector_radio_txt_white_amber"
+		    android:textSize="22sp" />
 
 		<RadioButton
 		    android:id="@+id/radioButton_menu_body_mode_softstop_boomdown_off"
-		    android:layout_width="wrap_content"
+		    android:layout_width="200dp"
 		    android:layout_height="wrap_content"
 		    android:layout_centerVertical="true"
 		    android:layout_marginLeft="503dp"
 		    android:button="@drawable/_selector_radio_btn"
 		    android:text="@string/Off"
-		    android:textSize="22sp"
-		    android:textColor="@drawable/_selector_radio_txt_white_amber" />
+		    android:textColor="@drawable/_selector_radio_txt_white_amber"
+		    android:textSize="22sp" />
 
 	</RelativeLayout>
 	
@@ -156,7 +156,7 @@
 	    android:layout_alignTop="@+id/imageView_menu_body_mode_softstop_line2" >
 	    
 	    <ImageView
-            android:id="@+id/imageView_menu_body_mdoe_softstop_bucketin"
+            android:id="@+id/imageView_menu_body_mode_softstop_bucketin"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
@@ -169,33 +169,33 @@
 	        android:layout_alignParentBottom="true"
 	        android:layout_alignParentTop="true"
 	        android:layout_marginLeft="10dp"
-	        android:layout_toRightOf="@+id/imageView_menu_body_mdoe_softstop_bucketin"
+	        android:layout_toRightOf="@+id/imageView_menu_body_mode_softstop_bucketin"
 	        android:gravity="center_vertical"
 	        android:text="@string/Bucket_In"
 	        android:textAppearance="?android:attr/textAppearanceLarge" />
 
 		<RadioButton
 		    android:id="@+id/radioButton_menu_body_mode_softstop_bucketin_on"
-		    android:layout_width="wrap_content"
+		    android:layout_width="200dp"
 		    android:layout_height="wrap_content"
 		    android:layout_centerVertical="true"
 		    android:layout_marginLeft="296dp"
 		    android:button="@drawable/_selector_radio_btn"
 		    android:gravity="left|center_vertical"
 		    android:text="@string/On"
-		    android:textSize="22sp"
-		    android:textColor="@drawable/_selector_radio_txt_white_amber" />
+		    android:textColor="@drawable/_selector_radio_txt_white_amber"
+		    android:textSize="22sp" />
 
 		<RadioButton
 		    android:id="@+id/radioButton_menu_body_mode_softstop_bucketin_off"
-		    android:layout_width="wrap_content"
+		    android:layout_width="200dp"
 		    android:layout_height="wrap_content"
 		    android:layout_centerVertical="true"
 		    android:layout_marginLeft="503dp"
 		    android:button="@drawable/_selector_radio_btn"
 		    android:text="@string/Off"
-		    android:textSize="22sp"
-		    android:textColor="@drawable/_selector_radio_txt_white_amber" />
+		    android:textColor="@drawable/_selector_radio_txt_white_amber"
+		    android:textSize="22sp" />
 
 	</RelativeLayout>
 	
@@ -209,7 +209,7 @@
 	    android:layout_alignTop="@+id/imageView_menu_body_mode_softstop_line3" >
 		
 	    <ImageView
-            android:id="@+id/imageView_menu_body_mdoe_softstop_bucketout"
+            android:id="@+id/imageView_menu_body_mode_softstop_bucketout"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
@@ -222,33 +222,33 @@
 	        android:layout_alignParentBottom="true"
 	        android:layout_alignParentTop="true"
 	        android:layout_marginLeft="10dp"
-	        android:layout_toRightOf="@+id/imageView_menu_body_mdoe_softstop_bucketout"
+	        android:layout_toRightOf="@+id/imageView_menu_body_mode_softstop_bucketout"
 	        android:gravity="center_vertical"
 	        android:text="@string/Bucket_Dump"
 	        android:textAppearance="?android:attr/textAppearanceLarge" />
 
 		<RadioButton
 		    android:id="@+id/radioButton_menu_body_mode_softstop_bucketout_on"
-		    android:layout_width="wrap_content"
+		    android:layout_width="200dp"
 		    android:layout_height="wrap_content"
 		    android:layout_centerVertical="true"
 		    android:layout_marginLeft="296dp"
 		    android:button="@drawable/_selector_radio_btn"
 		    android:gravity="left|center_vertical"
 		    android:text="@string/On"
-		    android:textSize="22sp"
-		    android:textColor="@drawable/_selector_radio_txt_white_amber" />
+		    android:textColor="@drawable/_selector_radio_txt_white_amber"
+		    android:textSize="22sp" />
 
 		<RadioButton
 		    android:id="@+id/radioButton_menu_body_mode_softstop_bucketout_off"
-		    android:layout_width="wrap_content"
+		    android:layout_width="200dp"
 		    android:layout_height="wrap_content"
 		    android:layout_centerVertical="true"
 		    android:layout_marginLeft="503dp"
 		    android:button="@drawable/_selector_radio_btn"
 		    android:text="@string/Off"
-		    android:textSize="22sp"
-		    android:textColor="@drawable/_selector_radio_txt_white_amber" />
+		    android:textColor="@drawable/_selector_radio_txt_white_amber"
+		    android:textSize="22sp" />
 
 	</RelativeLayout>
 

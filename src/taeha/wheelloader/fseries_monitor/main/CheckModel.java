@@ -9,13 +9,20 @@ public class CheckModel {
 	
 	private static final int LENGTH_COMPONENTBASICINFORMATION	= 37;
 	
-	public static final int NO_MODEL 	= 0x00000000;
-	public static final int MODEL_935 	= 0x00000001;
-	public static final int MODEL_940 	= 0x00000010;
-	public static final int MODEL_955 	= 0x00000100;
-	public static final int MODEL_960 	= 0x00001000;
-	public static final int MODEL_970	= 0x00010000;
-	public static final int MODEL_980	= 0x00100000;
+	public static final int NO_MODEL 	= 0x0;
+	public static final int MODEL_935 	= 0x1;
+	public static final int MODEL_940 	= 0x2;
+	public static final int MODEL_955 	= 0x3;
+	public static final int MODEL_960 	= 0x4;
+	public static final int MODEL_970	= 0x5;
+	public static final int MODEL_980	= 0x6;
+	
+	public static final int MODEL_935TM 	= 0x11;
+	public static final int MODEL_940TM 	= 0x12;
+	public static final int MODEL_955TM 	= 0x13;
+	public static final int MODEL_960TM 	= 0x14;
+	public static final int MODEL_970TM		= 0x15;
+	public static final int MODEL_980TM		= 0x16;
 	
 	public static final int	TCU_4SPEED	= 0x00000000;
 	public static final int	TCU_5SPEED	= 0x00000001;
@@ -36,6 +43,7 @@ public class CheckModel {
 		boolean bAsterisk = false;
 		int n100,n10,n1;
 		int MCUModelNum;
+		char cSub1 = 0, cSub2 = 0;
 		////////////// Find Serial Number/////////////
 		for(int i = 4; i < 20; i++){
 			if(BasicInfo[i] != 0x2A)
@@ -72,7 +80,6 @@ public class CheckModel {
 		}else{
 			for(int i = 0; i < Index2; i++){
 				Model[i] = (int)BasicInfo[i+Index+1];
-				
 			}
 			
 			n100 = Model[2] - 48;
@@ -82,20 +89,57 @@ public class CheckModel {
 			
 			MCUModelNum = n100 * 100 + n10 * 10 + n1;
 			
-			if(MCUModelNum == 935)
-				return MODEL_935;
-			else if(MCUModelNum == 940)
-				return MODEL_940;
-			else if(MCUModelNum == 955)
-				return MODEL_955;
-			else if(MCUModelNum == 960)
-				return MODEL_960;
-			else if(MCUModelNum == 970)
-				return MODEL_970;
-			else if(MCUModelNum == 980)
-				return MODEL_980;
-			else
+			if(Index2 >= 7){
+				cSub1 = (char) Model[5];
+				cSub2 = (char) Model[6];
+			}
+			
+			if(MCUModelNum == 935){
+				if(cSub1 == 'T' && cSub2 == 'M'){
+					return MODEL_935TM;
+				}else{
+					return MODEL_935;
+				}
+			}
+			else if(MCUModelNum == 940){
+				if(cSub1 == 'T' && cSub2 == 'M'){
+					return MODEL_940TM;
+				}else{
+					return MODEL_940;
+				}
+			}
+			else if(MCUModelNum == 955){
+				if(cSub1 == 'T' && cSub2 == 'M'){
+					return MODEL_955TM;
+				}else{
+					return MODEL_955;
+				}
+			}
+			else if(MCUModelNum == 960){
+				if(cSub1 == 'T' && cSub2 == 'M'){
+					return MODEL_960TM;
+				}else{
+					return MODEL_960;
+				}
+			}
+			else if(MCUModelNum == 970){
+				if(cSub1 == 'T' && cSub2 == 'M'){
+					return MODEL_970TM;
+				}else{
+					return MODEL_970;
+				}
+			}
+			else if(MCUModelNum == 980){
+				if(cSub1 == 'T' && cSub2 == 'M'){
+					return MODEL_980TM;
+				}else{
+					return MODEL_980;
+				}
+			}
+			else{
 				return NO_MODEL;
+			}
+				
 						
 		}
 	}

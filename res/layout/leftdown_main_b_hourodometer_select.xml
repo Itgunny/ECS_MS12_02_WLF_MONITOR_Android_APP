@@ -7,7 +7,7 @@
     
     <RadioButton
         android:id="@+id/radioButton_leftdown_main_b_hourodometer_select_latesthourmeter"
-        android:layout_width="wrap_content"
+        android:layout_width="250dp"
         android:layout_height="wrap_content"
         android:layout_marginLeft="165dp"
         android:layout_marginTop="78dp"
@@ -18,7 +18,7 @@
 	
 	<RadioButton
 	    android:id="@+id/radioButton_leftdown_main_b_hourodometer_select_totalodometer"
-	    android:layout_width="wrap_content"
+	    android:layout_width="250dp"
 	    android:layout_height="wrap_content"
 	    android:layout_marginLeft="440dp"
 	    android:layout_marginTop="78dp"
@@ -29,7 +29,7 @@
 	
 	<RadioButton
 	    android:id="@+id/radioButton_leftdown_main_b_hourodometer_select_currentfuelrate"
-	    android:layout_width="wrap_content"
+	    android:layout_width="250dp"
 	    android:layout_height="wrap_content"
 	    android:layout_marginLeft="165dp"
 	    android:layout_marginTop="149dp"
@@ -40,7 +40,7 @@
 	
 	<RadioButton
 	    android:id="@+id/radioButton_leftdown_main_b_hourodometer_select_latestodometer"
-	    android:layout_width="wrap_content"
+	    android:layout_width="250dp"
 	    android:layout_height="wrap_content"
 	    android:layout_marginLeft="440dp"
 	    android:layout_marginTop="149dp"

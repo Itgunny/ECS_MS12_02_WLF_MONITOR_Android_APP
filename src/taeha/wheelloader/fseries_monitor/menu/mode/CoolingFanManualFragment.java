@@ -32,11 +32,15 @@ public class CoolingFanManualFragment extends ParentFragment{
 	//RESOURCE////////////////////////////////////////
 	ImageButton imgbtnOK;
 	
-	ImageButton imgbtnCoolingFanManual;
+	TextView textViewCoolingFanManual;
+	
+	ImageView imgViewCoolingFanIcon;
 	//////////////////////////////////////////////////
 	
 	//VALUABLE////////////////////////////////////////
 	boolean ManualPress;
+	
+	int ReverseFan;
 	
 	int CursurIndex = 1;
 	
@@ -95,7 +99,9 @@ public class CoolingFanManualFragment extends ParentFragment{
 		// TODO Auto-generated method stub
 		imgbtnOK = (ImageButton)mRoot.findViewById(R.id.ImageButton_menu_body_mode_coolingfan_manual_low_ok);
 		
-		imgbtnCoolingFanManual = (ImageButton)mRoot.findViewById(R.id.imageButton_menu_body_mode_coolingfan_manual);
+		textViewCoolingFanManual = (TextView)mRoot.findViewById(R.id.textView_menu_body_mode_coolingfan_manual);
+		
+		imgViewCoolingFanIcon = (ImageView)mRoot.findViewById(R.id.imageView_menu_body_mode_coolingfan_manual);
 	}
 
 	protected void InitValuables() {
@@ -116,7 +122,7 @@ public class CoolingFanManualFragment extends ParentFragment{
 				ClickOK();
 			}
 		});
-		imgbtnCoolingFanManual.setOnClickListener(new View.OnClickListener() {
+		textViewCoolingFanManual.setOnClickListener(new View.OnClickListener() {
 			
 			@Override
 			public void onClick(View v) {
@@ -130,12 +136,13 @@ public class CoolingFanManualFragment extends ParentFragment{
 	protected void GetDataFromNative() {
 		// TODO Auto-generated method stub
 		CheckCoolingFanManualButton();
+		ReverseFan = CAN1Comm.Get_CoolingFandrivingStatus_180_PGN65428();
 	}
 
 	@Override
 	protected void UpdateUI() {
 		// TODO Auto-generated method stub
-		
+		ReverseFanDisplay(ReverseFan);
 	}
 	/////////////////////////////////////////////////////////////////////	
 	public void ClickOK(){
@@ -145,20 +152,25 @@ public class CoolingFanManualFragment extends ParentFragment{
 			ParentActivity.StartAnimationRunningTimer();
 		ParentActivity._MenuBaseFragment.showBodyModeAnimation();
 		ParentActivity._MenuBaseFragment._MenuModeFragment.setFirstScreen(Home.SCREEN_STATE_MENU_MODE_ETC_TOP);
+		
+		CAN1Comm.Set_CoolingFanReverseMode_182_PGN61184_61(CAN1CommManager.DATA_STATE_REVERSEFAN_AUTO);
+		CAN1Comm.TxCANToMCU(61);
 	}
 	public void ClickCoolingFanManual(){
 		
 	}
 	/////////////////////////////////////////////////////////////////////
 	public void CheckCoolingFanManualButton(){
-		if(imgbtnCoolingFanManual.isPressed() == true){
-			CAN1Comm.Set_CoolingFanReverseMode_182_PGN61184_61(CAN1CommManager.DATA_STATE_REVERSEFAN_MANUAL);
+		if(textViewCoolingFanManual.isPressed() == true){
+			CAN1Comm.Set_CoolingFanReverseMode_182_PGN61184_61(CAN1CommManager.DATA_STATE_REVERSEFAN_AUTO);
+			CAN1Comm.Set_CoolingFanReverseManual_PGN61184_61(1);
 			CAN1Comm.TxCANToMCU(61);
 			ManualPress = true;
 		}
 		
-		if(ManualPress == true && imgbtnCoolingFanManual.isPressed() == false){
-			CAN1Comm.Set_CoolingFanReverseMode_182_PGN61184_61(CAN1CommManager.DATA_STATE_REVERSEFAN_OFF);
+		if(ManualPress == true && textViewCoolingFanManual.isPressed() == false){
+			CAN1Comm.Set_CoolingFanReverseMode_182_PGN61184_61(CAN1CommManager.DATA_STATE_REVERSEFAN_AUTO);
+			CAN1Comm.Set_CoolingFanReverseManual_PGN61184_61(0);
 			CAN1Comm.TxCANToMCU(61);
 			ManualPress = false;
 		}
@@ -166,6 +178,24 @@ public class CoolingFanManualFragment extends ParentFragment{
 	/////////////////////////////////////////////////////////////////////
 	public void setCursurIndex(int Index){
 		CursurIndex = Index;
+	}
+	public void ReverseFanDisplay(int Data){
+		switch (Data) {
+		case CAN1CommManager.DATA_STATE_COOLINGFAN_OFF:
+			imgViewCoolingFanIcon.setImageResource(R.drawable.menu_mode_fan_manual_icon_off);
+
+			break;
+		case CAN1CommManager.DATA_STATE_COOLINGFAN_FORWARD:
+			imgViewCoolingFanIcon.setImageResource(R.drawable.menu_mode_fan_manual_icon_off);
+
+			break;
+		case CAN1CommManager.DATA_STATE_COOLINGFAN_REVERSE:
+			imgViewCoolingFanIcon.setImageResource(R.drawable.menu_mode_fan_manual_icon_on);
+
+			break;
+		default:
+			break;
+		}
 	}
 	public void ClickLeft(){
 		switch (CursurIndex) {

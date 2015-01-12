@@ -170,7 +170,7 @@ public class EngineAutoShutdownFragment extends ParentFragment{
 			
 		}else{
 			EngineAutoShutdownTime = CAN1Comm.Get_SettingTimeforAutomaticEngineShutdown_364_PGN61184_122();
-			EngineAutoShutdownStatus = CAN1Comm.Get_AutomaticEngineShutdown_363_PGN65428();
+			EngineAutoShutdownStatus = CAN1Comm.Get_AutomaticEngineShutdown_363_PGN61184_122();
 			EngineAutoShutdownType = CAN1Comm.Get_AutomaticEngineShutdownType_PGN61184_122();
 			ESLMode = CAN1Comm.Get_ESLMode_820_PGN65348();
 			ESLInterval = CAN1Comm.Get_ESLInterval_825_PGN65348();

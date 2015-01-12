@@ -32,6 +32,7 @@ public class EndingFragment extends ParentFragment{
 	
 	//VALUABLE////////////////////////////////////////
 	private Timer mEndingFinishTimer = null;
+	private Timer mEndingAnimationTimer = null;
 	//////////////////////////////////////////////////
 	
 	//ANIMATION///////////////////////////////////////
@@ -135,4 +136,39 @@ public class EndingFragment extends ParentFragment{
 		}
 		
 	}
+	
+	
+	public class EndingAnimationTimerClass extends TimerTask{
+
+		@Override
+		public void run() {
+			// TODO Auto-generated method stub
+			ParentActivity.runOnUiThread(new Runnable() {
+				
+				@Override
+				public void run() {
+					// TODO Auto-generated method stub
+					
+				}
+			});
+			
+		}
+		
+	}
+	
+	public void StartEndingAnimationTimer(){
+		CancelEndingAnimationTimer();
+		mEndingAnimationTimer = new Timer();
+		mEndingAnimationTimer.schedule(new EndingAnimationTimerClass(),1,27);	
+	}
+	
+	public void CancelEndingAnimationTimer(){
+		if(mEndingAnimationTimer != null){
+			mEndingAnimationTimer.cancel();
+			mEndingAnimationTimer.purge();
+			mEndingAnimationTimer = null;
+		}
+		
+	}
+	
 }

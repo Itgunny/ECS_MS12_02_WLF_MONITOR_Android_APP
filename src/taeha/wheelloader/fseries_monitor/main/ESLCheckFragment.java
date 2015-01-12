@@ -210,7 +210,11 @@ public class ESLCheckFragment extends ParentFragment{
 		ParentActivity._MainChangeAnimation.StartChangeAnimation(ParentActivity._ESLPasswordFragment);
 	}
 	public void showMainScreen(){
-		ParentActivity._MainChangeAnimation.StartChangeAnimation(ParentActivity._MainBBaseFragment);
+	//	if(ParentActivity.DisplayType == Home.DISPLAY_TYPE_A){
+	//		ParentActivity._MainChangeAnimation.StartChangeAnimation(ParentActivity._MainABaseFragment);
+	//	}else{
+			ParentActivity._MainChangeAnimation.StartChangeAnimation(ParentActivity._MainBBaseFragment);
+	//	}
 	}
 	/////////////////////////////////////////////////////////////////////
 	public void StartESLCheckTimer(){

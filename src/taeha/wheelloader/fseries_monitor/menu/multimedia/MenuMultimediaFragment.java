@@ -179,6 +179,7 @@ public class MenuMultimediaFragment extends ParentFragment{
 	}
 	/////////////////////////////////////////////////////////////////////	
 	public void ClickMediaPlayer(){
+		ParentActivity.KillApps("com.example.wfdsink");
 		Intent intent;
 		intent = ParentActivity.getPackageManager().getLaunchIntentForPackage("com.mxtech.videoplayer.ad");
 		if(intent != null){
@@ -195,30 +196,6 @@ public class MenuMultimediaFragment extends ParentFragment{
 			startActivity(intent);
 	}
 	
-	public void Test(){
-		boolean Flag = false;
-		ActivityManager activityManager = (ActivityManager) ParentActivity.getSystemService(ParentActivity.ACTIVITY_SERVICE);
-		List<RunningTaskInfo> taskList = activityManager.getRunningTasks(100);
-		
-		if(!taskList.isEmpty()) {
-			int tasksSize = taskList.size();
-			for(int i = 0; i >= tasksSize;  i++) {
-				RunningTaskInfo taskinfo = taskList.get(i);
-				if(taskinfo.topActivity.getPackageName().equals("com.mxtech.videoplayer.ad")) {
-					activityManager.moveTaskToFront(taskinfo.id, 0);
-					 Flag = true;
-				}
-			}
-		}
-		
-		if(Flag == false){
-			Intent intent;
-			intent = ParentActivity.getPackageManager().getLaunchIntentForPackage("com.mxtech.videoplayer.ad");
-			if(intent != null){
-				ParentActivity.startActivity(intent);
-			}
-		}
-	}
 	/////////////////////////////////////////////////////////////////////
 	
 	/////////////////////////////////////////////////////////////////////

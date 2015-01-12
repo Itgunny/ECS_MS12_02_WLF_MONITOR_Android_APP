@@ -129,11 +129,23 @@
             android:id="@+id/textView_menu_body_management_smartkey_tag_detail"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_above="@+id/LinearLayout_menu_body_management_smartkey_tag_btn"
+            android:layout_above="@+id/textView_menu_body_management_smartkey_tag_warning"
             android:layout_alignParentLeft="true"
             android:layout_alignParentRight="true"
             android:layout_below="@+id/textView_menu_body_management_smartkey_tag_register_title"
             android:gravity="center"
+            android:textAppearance="?android:attr/textAppearanceLarge" />
+        
+        <TextView
+            android:id="@+id/textView_menu_body_management_smartkey_tag_warning"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/LinearLayout_menu_body_management_smartkey_tag_btn"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentRight="true"
+            android:layout_marginBottom="10dp"
+            android:gravity="center"
+            android:text="@string/Recommend_deleting_unused_tag_for_security_when_you_register_new_tag"
             android:textAppearance="?android:attr/textAppearanceLarge" />
 
         <LinearLayout

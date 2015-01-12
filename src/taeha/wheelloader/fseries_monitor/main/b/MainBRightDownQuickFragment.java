@@ -1,5 +1,6 @@
 package taeha.wheelloader.fseries_monitor.main.b;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -25,8 +26,7 @@ public class MainBRightDownQuickFragment extends ParentFragment{
 	
 	TextView textViewTitle;
 	
-	ImageButton imgbtnBluetooth;
-	ImageButton imgbtnWifi;
+	ImageButton imgbtnMultimedia;
 	//////////////////////////////////////////////////
 	
 	//VALUABLE////////////////////////////////////////
@@ -68,8 +68,7 @@ public class MainBRightDownQuickFragment extends ParentFragment{
 
 		textViewTitle = (TextView)mRoot.findViewById(R.id.textView_rightdown_main_b_quick_title);
 		
-		imgbtnBluetooth = (ImageButton)mRoot.findViewById(R.id.imageButton_rightdown_main_b_quick_bluetooth);
-		imgbtnWifi = (ImageButton)mRoot.findViewById(R.id.imageButton_rightdown_main_b_quick_wifi);
+		imgbtnMultimedia = (ImageButton)mRoot.findViewById(R.id.imageButton_rightdown_main_b_quick_multimedia);
 		
 	}
 	
@@ -89,20 +88,12 @@ public class MainBRightDownQuickFragment extends ParentFragment{
 				ClickMaintenance();
 			}
 		});
-		imgbtnBluetooth.setOnClickListener(new View.OnClickListener() {
+		imgbtnMultimedia.setOnClickListener(new View.OnClickListener() {
 			
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
-				ClickBluetooth();
-			}
-		});
-		imgbtnWifi.setOnClickListener(new View.OnClickListener() {
-			
-			@Override
-			public void onClick(View v) {
-				// TODO Auto-generated method stub
-				ClickWifi();
+				ClickMultimedia();
 			}
 		});
 	}
@@ -130,11 +121,13 @@ public class MainBRightDownQuickFragment extends ParentFragment{
 		ParentActivity._MenuBaseFragment.setFirstScreenIndex(Home.SCREEN_STATE_MENU_MANAGEMENT_MAINTENANCE_TOP);
 		
 	}
-	public void ClickBluetooth(){
-		
-	}
-	public void ClickWifi(){
-		
+	public void ClickMultimedia(){
+		ParentActivity.KillApps("com.example.wfdsink");
+		Intent intent;
+		intent = ParentActivity.getPackageManager().getLaunchIntentForPackage("com.mxtech.videoplayer.ad");
+		if(intent != null){
+			ParentActivity.startActivity(intent);
+		}
 	}
 	public void IconDisplay(int _data){
 		if(_data == CAN1CommManager.DATA_STATE_LAMP_ON){

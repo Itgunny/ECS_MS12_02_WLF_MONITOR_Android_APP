@@ -6,6 +6,7 @@ import taeha.wheelloader.fseries_monitor.animation.DisappearAnimation;
 import taeha.wheelloader.fseries_monitor.animation.MainBodyShiftAnimation;
 import taeha.wheelloader.fseries_monitor.animation.LeftRightShiftAnimation;
 import taeha.wheelloader.fseries_monitor.main.CAN1CommManager;
+import taeha.wheelloader.fseries_monitor.main.CheckModel;
 import taeha.wheelloader.fseries_monitor.main.Home;
 import taeha.wheelloader.fseries_monitor.main.ParentFragment;
 import taeha.wheelloader.fseries_monitor.main.R;
@@ -42,6 +43,19 @@ public class SoftStopFragment extends ParentFragment{
 	RadioButton radioBucketInOff;
 	RadioButton radioBucketOutOn;
 	RadioButton radioBucketOutOff;
+	
+	TextView textBoomUpTitle;
+	TextView textBoomDownTitle;
+	TextView textBucketInTitle;
+	TextView textBucketDumpTitle;
+	
+	ImageView imgViewLine1;
+	ImageView imgViewLine2;
+	ImageView imgViewLine3;
+	ImageView imgViewDot1;
+	ImageView imgViewDot2;
+	ImageView imgViewDot3;
+	ImageView imgViewDot4;
 	//////////////////////////////////////////////////
 	
 	//VALUABLE////////////////////////////////////////
@@ -52,6 +66,8 @@ public class SoftStopFragment extends ParentFragment{
 	
 	Handler HandleCursurDisplay;
 	int CursurIndex;
+	
+	boolean CheckTM;
 	//////////////////////////////////////////////////
 	
 	//Fragment////////////////////////////////////////
@@ -110,6 +126,20 @@ public class SoftStopFragment extends ParentFragment{
 		radioBucketInOff = (RadioButton)mRoot.findViewById(R.id.radioButton_menu_body_mode_softstop_bucketin_off);
 		radioBucketOutOn = (RadioButton)mRoot.findViewById(R.id.radioButton_menu_body_mode_softstop_bucketout_on);
 		radioBucketOutOff = (RadioButton)mRoot.findViewById(R.id.radioButton_menu_body_mode_softstop_bucketout_off);
+		
+		textBoomUpTitle = (TextView)mRoot.findViewById(R.id.textView_menu_body_mode_softstop_boomup);
+		textBoomDownTitle = (TextView)mRoot.findViewById(R.id.textView_menu_body_mode_softstop_boomdown);
+		textBucketInTitle = (TextView)mRoot.findViewById(R.id.textView_menu_body_mode_softstop_bucketin);
+		textBucketDumpTitle = (TextView)mRoot.findViewById(R.id.textView_menu_body_mode_softstop_bucketout);
+		
+		imgViewLine1 = (ImageView)mRoot.findViewById(R.id.imageView_menu_body_mode_softstop_line1);
+		imgViewLine2 = (ImageView)mRoot.findViewById(R.id.imageView_menu_body_mode_softstop_line2);
+		imgViewLine3 = (ImageView)mRoot.findViewById(R.id.imageView_menu_body_mode_softstop_line3);
+		
+		imgViewDot1 = (ImageView)mRoot.findViewById(R.id.imageView_menu_body_mode_softstop_boomup);
+		imgViewDot2 = (ImageView)mRoot.findViewById(R.id.imageView_menu_body_mode_softstop_boomdown);
+		imgViewDot3 = (ImageView)mRoot.findViewById(R.id.imageView_menu_body_mode_softstop_bucketin);
+		imgViewDot4 = (ImageView)mRoot.findViewById(R.id.imageView_menu_body_mode_softstop_bucketout);
 
 	}
 
@@ -125,6 +155,55 @@ public class SoftStopFragment extends ParentFragment{
 		BoomDownDisplay(BoomDown);
 		BucketInDisplay(BucketIn);
 		BucketOutDisplay(BucketOut);
+		
+		if(ParentActivity._CheckModel.GetMCUVersion(CAN1Comm.Get_ComponentBasicInformation_1698_PGN65330()) == CheckModel.MODEL_935TM
+		|| ParentActivity._CheckModel.GetMCUVersion(CAN1Comm.Get_ComponentBasicInformation_1698_PGN65330()) == CheckModel.MODEL_940TM
+		|| ParentActivity._CheckModel.GetMCUVersion(CAN1Comm.Get_ComponentBasicInformation_1698_PGN65330()) == CheckModel.MODEL_955TM
+		|| ParentActivity._CheckModel.GetMCUVersion(CAN1Comm.Get_ComponentBasicInformation_1698_PGN65330()) == CheckModel.MODEL_960TM
+		|| ParentActivity._CheckModel.GetMCUVersion(CAN1Comm.Get_ComponentBasicInformation_1698_PGN65330()) == CheckModel.MODEL_970TM
+		|| ParentActivity._CheckModel.GetMCUVersion(CAN1Comm.Get_ComponentBasicInformation_1698_PGN65330()) == CheckModel.MODEL_980TM){
+			
+			CheckTM = true;
+			
+			textBoomDownTitle.setVisibility(View.INVISIBLE);
+			textBucketInTitle.setVisibility(View.INVISIBLE);
+			textBucketDumpTitle.setVisibility(View.INVISIBLE);
+			imgViewLine2.setVisibility(View.INVISIBLE);
+			imgViewLine3.setVisibility(View.INVISIBLE);
+			
+			imgViewDot2.setVisibility(View.INVISIBLE);
+			imgViewDot3.setVisibility(View.INVISIBLE);
+			imgViewDot4.setVisibility(View.INVISIBLE);
+			
+			radioBoomDownOn.setVisibility(View.INVISIBLE);
+			radioBoomDownOff.setVisibility(View.INVISIBLE);
+			radioBucketInOn.setVisibility(View.INVISIBLE);
+			radioBucketInOff.setVisibility(View.INVISIBLE);
+			radioBucketOutOn.setVisibility(View.INVISIBLE);
+			radioBucketOutOff.setVisibility(View.INVISIBLE);		
+			
+			
+			
+		}else{
+			CheckTM = false;
+			
+			textBoomDownTitle.setVisibility(View.VISIBLE);
+			textBucketInTitle.setVisibility(View.VISIBLE);
+			textBucketDumpTitle.setVisibility(View.VISIBLE);
+			imgViewLine2.setVisibility(View.VISIBLE);
+			imgViewLine3.setVisibility(View.VISIBLE);
+			
+			imgViewDot2.setVisibility(View.VISIBLE);
+			imgViewDot3.setVisibility(View.VISIBLE);
+			imgViewDot4.setVisibility(View.VISIBLE);
+			
+			radioBoomDownOn.setVisibility(View.VISIBLE);
+			radioBoomDownOff.setVisibility(View.VISIBLE);
+			radioBucketInOn.setVisibility(View.VISIBLE);
+			radioBucketInOff.setVisibility(View.VISIBLE);
+			radioBucketOutOn.setVisibility(View.VISIBLE);
+			radioBucketOutOff.setVisibility(View.VISIBLE);		
+		}
 	}
 	@Override
 	protected void InitButtonListener() {
@@ -259,15 +338,34 @@ public class SoftStopFragment extends ParentFragment{
 		else
 			ParentActivity.StartAnimationRunningTimer();
 		
-		CAN1Comm.Set_SoftStopBoomUp_2337_PGN61184_203(BoomUp);
-		CAN1Comm.Set_SoftStopBoomDown_2338_PGN61184_203(BoomDown);
-		CAN1Comm.Set_SoftStopBucketIn_2339_PGN61184_203(BucketIn);
-		CAN1Comm.Set_SoftStopBucketOut_2340_PGN61184_203(BucketOut);
-		CAN1Comm.TxCANToMCU(203);
-		CAN1Comm.Set_SoftStopBoomUp_2337_PGN61184_203(3);
-		CAN1Comm.Set_SoftStopBoomDown_2338_PGN61184_203(3);
-		CAN1Comm.Set_SoftStopBucketIn_2339_PGN61184_203(3);
-		CAN1Comm.Set_SoftStopBucketOut_2340_PGN61184_203(3);
+		if(ParentActivity._CheckModel.GetMCUVersion(CAN1Comm.Get_ComponentBasicInformation_1698_PGN65330()) == CheckModel.MODEL_935TM
+				|| ParentActivity._CheckModel.GetMCUVersion(CAN1Comm.Get_ComponentBasicInformation_1698_PGN65330()) == CheckModel.MODEL_940TM
+				|| ParentActivity._CheckModel.GetMCUVersion(CAN1Comm.Get_ComponentBasicInformation_1698_PGN65330()) == CheckModel.MODEL_955TM
+				|| ParentActivity._CheckModel.GetMCUVersion(CAN1Comm.Get_ComponentBasicInformation_1698_PGN65330()) == CheckModel.MODEL_960TM
+				|| ParentActivity._CheckModel.GetMCUVersion(CAN1Comm.Get_ComponentBasicInformation_1698_PGN65330()) == CheckModel.MODEL_970TM
+				|| ParentActivity._CheckModel.GetMCUVersion(CAN1Comm.Get_ComponentBasicInformation_1698_PGN65330()) == CheckModel.MODEL_980TM){
+			CAN1Comm.Set_SoftStopBoomUp_2337_PGN61184_203(BoomUp);
+			CAN1Comm.Set_SoftStopBoomDown_2338_PGN61184_203(3);
+			CAN1Comm.Set_SoftStopBucketIn_2339_PGN61184_203(3);
+			CAN1Comm.Set_SoftStopBucketOut_2340_PGN61184_203(3);
+			CAN1Comm.TxCANToMCU(203);
+			CAN1Comm.Set_SoftStopBoomUp_2337_PGN61184_203(3);
+			CAN1Comm.Set_SoftStopBoomDown_2338_PGN61184_203(3);
+			CAN1Comm.Set_SoftStopBucketIn_2339_PGN61184_203(3);
+			CAN1Comm.Set_SoftStopBucketOut_2340_PGN61184_203(3);
+		}else{
+			CAN1Comm.Set_SoftStopBoomUp_2337_PGN61184_203(BoomUp);
+			CAN1Comm.Set_SoftStopBoomDown_2338_PGN61184_203(BoomDown);
+			CAN1Comm.Set_SoftStopBucketIn_2339_PGN61184_203(BucketIn);
+			CAN1Comm.Set_SoftStopBucketOut_2340_PGN61184_203(BucketOut);
+			CAN1Comm.TxCANToMCU(203);
+			CAN1Comm.Set_SoftStopBoomUp_2337_PGN61184_203(3);
+			CAN1Comm.Set_SoftStopBoomDown_2338_PGN61184_203(3);
+			CAN1Comm.Set_SoftStopBucketIn_2339_PGN61184_203(3);
+			CAN1Comm.Set_SoftStopBucketOut_2340_PGN61184_203(3);
+		}
+		
+
 		
 		ParentActivity._MenuBaseFragment.showBodyModeAnimation();
 		ParentActivity._MenuBaseFragment._MenuModeFragment.setFirstScreen(Home.SCREEN_STATE_MENU_MODE_HYD_TOP);
@@ -407,14 +505,71 @@ public class SoftStopFragment extends ParentFragment{
 			CursurDisplay(CursurIndex);
 			break;
 		case 2:
+			CursurIndex--;
+			CursurDisplay(CursurIndex);
+			break;
 		case 3:
+			CursurIndex--;
+			CursurDisplay(CursurIndex);
+			break;
 		case 4:
+			if(CheckTM == true){
+				CursurIndex = 2;
+				CursurDisplay(CursurIndex);
+			}else{
+				CursurIndex--;
+				CursurDisplay(CursurIndex);
+			}
+			break;
 		case 5:
+			if(CheckTM == true){
+				CursurIndex = 2;
+				CursurDisplay(CursurIndex);
+			}else{
+				CursurIndex--;
+				CursurDisplay(CursurIndex);
+			}
+			break;
 		case 6:
+			if(CheckTM == true){
+				CursurIndex = 2;
+				CursurDisplay(CursurIndex);
+			}else{
+				CursurIndex--;
+				CursurDisplay(CursurIndex);
+			}
+			break;
 		case 7:
+			if(CheckTM == true){
+				CursurIndex = 2;
+				CursurDisplay(CursurIndex);
+			}else{
+				CursurIndex--;
+				CursurDisplay(CursurIndex);
+			}
+			break;
 		case 8:
+			if(CheckTM == true){
+				CursurIndex = 2;
+				CursurDisplay(CursurIndex);
+			}else{
+				CursurIndex--;
+				CursurDisplay(CursurIndex);
+			}
+			break;
 		case 9:
+			if(CheckTM == true){
+				CursurIndex = 2;
+				CursurDisplay(CursurIndex);
+			}else{
+				CursurIndex--;
+				CursurDisplay(CursurIndex);
+			}
+			break;
 		case 10:
+			CursurIndex--;
+			CursurDisplay(CursurIndex);
+			break;
 		case 11:
 			CursurIndex--;
 			CursurDisplay(CursurIndex);
@@ -429,14 +584,71 @@ public class SoftStopFragment extends ParentFragment{
 	public void ClickRight(){
 		switch (CursurIndex) {
 		case 1:
-		case 2:
-		case 3:
-		case 4:
-		case 5:
-		case 6:
-		case 7:
-		case 8:
-		case 9:
+			CursurIndex++;
+			CursurDisplay(CursurIndex);
+			break;
+		case 2:			
+			if(CheckTM){
+				CursurIndex = 9;
+				CursurDisplay(CursurIndex);
+			}else{
+				CursurIndex++;
+				CursurDisplay(CursurIndex);
+			}
+			break;
+		case 3:		
+			if(CheckTM){
+				CursurIndex = 9;
+				CursurDisplay(CursurIndex);
+			}else{
+				CursurIndex++;
+				CursurDisplay(CursurIndex);
+			}
+			break;
+		case 4:		
+			if(CheckTM){
+				CursurIndex = 9;
+				CursurDisplay(CursurIndex);
+			}else{
+				CursurIndex++;
+				CursurDisplay(CursurIndex);
+			}
+			break;
+		case 5:			
+			if(CheckTM){
+				CursurIndex = 9;
+				CursurDisplay(CursurIndex);
+			}else{
+				CursurIndex++;
+				CursurDisplay(CursurIndex);
+			}
+			break;
+		case 6:		
+			if(CheckTM){
+				CursurIndex = 9;
+				CursurDisplay(CursurIndex);
+			}else{
+				CursurIndex++;
+				CursurDisplay(CursurIndex);
+			}
+			break;
+		case 7:		
+			if(CheckTM){
+				CursurIndex = 9;
+				CursurDisplay(CursurIndex);
+			}else{
+				CursurIndex++;
+				CursurDisplay(CursurIndex);
+			}
+			break;
+		case 8:		
+			CursurIndex++;
+			CursurDisplay(CursurIndex);
+			break;
+		case 9:		
+			CursurIndex++;
+			CursurDisplay(CursurIndex);
+			break;
 		case 10:
 			CursurIndex++;
 			CursurDisplay(CursurIndex);
