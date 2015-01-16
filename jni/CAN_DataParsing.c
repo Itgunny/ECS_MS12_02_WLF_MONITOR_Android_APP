@@ -1803,7 +1803,7 @@ void Thread_Write_UART1(void *data) {
 			Send_RTSData(&RTSData[0],nRTSDataLength,SA_MCU);
 			nCTSFlag_MCU = 0;
 		}
-		sleep(0); // ´Ù¸¥ Thread µéÀÇ Á¡À¯¸¦ À§ÇØ »ç¿ë
+		sleep(0); // ï¿½Ù¸ï¿½ Thread ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½
 	}
 }
 
@@ -1842,7 +1842,7 @@ void ThreadParsing_UART3(void *data) {
 	//			UART3_DataParsing(UART3_DataCurr);
 	//			bParsingFlag_UART3 = 0;
 	//		}
-	//		sleep(0); // ´Ù¸¥ Thread µéÀÇ Á¡À¯¸¦ À§ÇØ »ç¿ë
+	//		sleep(0); // ï¿½Ù¸ï¿½ Thread ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½
 	//
 	//	}
 
@@ -2007,7 +2007,7 @@ void *Thread_Read_UART1(void *data)
 	while (bReadRunningFlag_UART1)
 	{
 		dwRead = 0;
-		//	Åë½Å ½ÃÀÛ ÈÄ 1byte¾¿ ÀÐ°í, Á¤»ó µ¥ÀÌÅÍ¸¦ ¼ö½ÅÇÑ ´ÙÀ½ºÎÅÍ´Â ¿ø·¡ ½ÎÀÌÁî·Î ¹Þ´Â´Ù.
+		//	ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ 1byteï¿½ï¿½ ï¿½Ð°ï¿½, ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Í¸ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Í´ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Þ´Â´ï¿½.
 		if (UART1ReadFlag == 0 || UART1ReadFlag == 1)
 		{
 			dwRead = read(fd_UART1, UART1_ReadBuff, 1);
@@ -2029,7 +2029,7 @@ void *Thread_Read_UART1(void *data)
 
 		}
 
-		//	CAN PACKET ±¸Á¶°¡ ¾Æ´Ï¸é µé¾î¿Â °ÍÀ» ¸ðµÎ ¹ö¸°´Ù.
+		//	CAN PACKET ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Æ´Ï¸ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½.
 		if (UART1ReadFlag == 2)
 		{
 			if (UART1_ReadBuff[0] != SERIAL_RX_STX || UART1_ReadBuff[UART1_RXPACKET_SIZE - 1] != SERIAL_RX_ETX)
@@ -2079,7 +2079,7 @@ void *Thread_Read_UART1(void *data)
 				}
 			}
 		}
-		sleep(0); // ´Ù¸¥ Thread µéÀÇ Á¡À¯¸¦ À§ÇØ »ç¿ë
+		sleep(0); // ï¿½Ù¸ï¿½ Thread ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½
 	}
 	__android_log_print(ANDROID_LOG_INFO, "NATIVE", "Thread_Read1 Finish\n");
 	(*glpVM)->DetachCurrentThread(glpVM);
@@ -2106,7 +2106,7 @@ void *Thread_Read_UART3(void *data) {
 
 	while (bReadRunningFlag_UART3) {
 		dwRead = 0;
-		//	Åë½Å ½ÃÀÛ ÈÄ 1byte¾¿ ÀÐ°í, Á¤»ó µ¥ÀÌÅÍ¸¦ ¼ö½ÅÇÑ ´ÙÀ½ºÎÅÍ´Â ¿ø·¡ ½ÎÀÌÁî·Î ¹Þ´Â´Ù.
+		//	ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ 1byteï¿½ï¿½ ï¿½Ð°ï¿½, ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Í¸ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Í´ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Þ´Â´ï¿½.
 		if (UART3ReadFlag == 0 || UART3ReadFlag == 1) {
 			dwRead = read(fd_UART3, UART3_ReadBuff, 1);
 			__android_log_print(ANDROID_LOG_INFO, "UART3_ReadBuff","UART3_ReadBuff UART3_ReadBuff[0x%x]\n",UART3_ReadBuff[0]);
@@ -2119,7 +2119,7 @@ void *Thread_Read_UART3(void *data) {
 			//												  ,UART3_ReadBuff[8],UART3_ReadBuff[9],UART3_ReadBuff[10]);
 		}
 
-		//	CAN PACKET ±¸Á¶°¡ ¾Æ´Ï¸é µé¾î¿Â °ÍÀ» ¸ðµÎ ¹ö¸°´Ù.
+		//	CAN PACKET ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Æ´Ï¸ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½.
 		if (UART3ReadFlag == 2) {
 			if (UART3_ReadBuff[UART3_RXPACKET_SIZE - 1] != SERIAL_RX_ETX) {
 				//if (dwRead == UART3_RXPACKET_SIZE) {
@@ -2170,7 +2170,7 @@ void *Thread_Read_UART3(void *data) {
 				}
 			}
 		}
-		sleep(0); // ´Ù¸¥ Thread µéÀÇ Á¡À¯¸¦ À§ÇØ »ç¿ë
+		sleep(0); // ï¿½Ù¸ï¿½ Thread ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½
 	}
 	__android_log_print(ANDROID_LOG_INFO, "NATIVE", "Thread_Read3 Finish\n");
 	(*glpVM)->DetachCurrentThread(glpVM);
@@ -2203,7 +2203,7 @@ void *Thread_Read_UART1(void *data)
 	while (bReadRunningFlag_UART1)
 	{
 		dwRead = 0;
-		//	Åë½Å ½ÃÀÛ ÈÄ 1byte¾¿ ÀÐ°í, Á¤»ó µ¥ÀÌÅÍ¸¦ ¼ö½ÅÇÑ ´ÙÀ½ºÎÅÍ´Â ¿ø·¡ ½ÎÀÌÁî·Î ¹Þ´Â´Ù.
+		//	ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ 1byteï¿½ï¿½ ï¿½Ð°ï¿½, ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Í¸ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Í´ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Þ´Â´ï¿½.
 		if (UART1ReadFlag == 0)
 		{
 			dwRead = read(fd_UART1, &UART1_SingleBuff, 1);
@@ -2222,7 +2222,7 @@ void *Thread_Read_UART1(void *data)
 			//					,UART1_ReadBuff[10],UART1_ReadBuff[11],UART1_ReadBuff[12],UART1_ReadBuff[13],UART1_ReadBuff[14]);
 		}
 
-		//	CAN PACKET ±¸Á¶°¡ ¾Æ´Ï¸é µé¾î¿Â °ÍÀ» ¸ðµÎ ¹ö¸°´Ù.
+		//	CAN PACKET ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Æ´Ï¸ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½.
 		if (UART1ReadFlag == 1)
 		{
 			if (UART1_ReadBuff[0] != SERIAL_RX_STX || UART1_ReadBuff[1] != SERIAL_RX_ID || UART1_ReadBuff[UART1_RXPACKET_SIZE - 1] != SERIAL_RX_ETX)
@@ -2293,7 +2293,7 @@ void *Thread_Read_UART1(void *data)
 
 		}
 
-		sleep(0); // ´Ù¸¥ Thread µéÀÇ Á¡À¯¸¦ À§ÇØ »ç¿ë
+		sleep(0); // ï¿½Ù¸ï¿½ Thread ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½
 	}
 	__android_log_print(ANDROID_LOG_INFO, "NATIVE", "Thread_Read1 Finish\n");
 	(*glpVM)->DetachCurrentThread(glpVM);
@@ -2327,7 +2327,7 @@ void *Thread_Read_UART3(void *data) {
 	while (bReadRunningFlag_UART3)
 	{
 		dwRead = 0;
-		//	Åë½Å ½ÃÀÛ ÈÄ 1byte¾¿ ÀÐ°í, Á¤»ó µ¥ÀÌÅÍ¸¦ ¼ö½ÅÇÑ ´ÙÀ½ºÎÅÍ´Â ¿ø·¡ ½ÎÀÌÁî·Î ¹Þ´Â´Ù.
+		//	ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ 1byteï¿½ï¿½ ï¿½Ð°ï¿½, ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Í¸ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Í´ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Þ´Â´ï¿½.
 		if (UART3ReadFlag == 0)
 		{
 			dwRead = read(fd_UART3, &UART3_SingleBuff, 1);
@@ -2338,7 +2338,7 @@ void *Thread_Read_UART3(void *data) {
 			dwRead = read(fd_UART3, UART3_ReadBuff, UART3_RXPACKET_SIZE);
 		}
 
-		//	CMD PACKET ±¸Á¶°¡ ¾Æ´Ï¸é µé¾î¿Â °ÍÀ» ¸ðµÎ ¹ö¸°´Ù.
+		//	CMD PACKET ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Æ´Ï¸ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½.
 		if (UART3ReadFlag == 1)
 		{
 			if (UART3_ReadBuff[0] != SERIAL_RX_STX || UART3_ReadBuff[UART3_RXPACKET_SIZE - 1] != SERIAL_RX_ETX)
@@ -2398,7 +2398,7 @@ void *Thread_Read_UART3(void *data) {
 
 		}
 
-		sleep(0); // ´Ù¸¥ Thread µéÀÇ Á¡À¯¸¦ À§ÇØ »ç¿ë
+		sleep(0); // ï¿½Ù¸ï¿½ Thread ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½
 	}
 	__android_log_print(ANDROID_LOG_INFO, "NATIVE", "Thread_Read1 Finish\n");
 	(*glpVM)->DetachCurrentThread(glpVM);
@@ -3027,7 +3027,8 @@ void SetKeypadLamp()
 
 	if(RX_ELECTRICAL_SWITCH_RELAY_OPERATION_STATUS_65527.RearWiperOperationStatus_3451 == 0)
 		TX_CMD_Lamp.RearWiper = 0;
-	else if(RX_ELECTRICAL_SWITCH_RELAY_OPERATION_STATUS_65527.RearWiperOperationStatus_3451 == 1)
+	else if(RX_ELECTRICAL_SWITCH_RELAY_OPERATION_STATUS_65527.RearWiperOperationStatus_3451 == 1
+		||	RX_ELECTRICAL_SWITCH_RELAY_OPERATION_STATUS_65527.RearWiperOperationStatus_3451 == 2)
 		TX_CMD_Lamp.RearWiper = 1;
 
 	if(RX_INDICATOR_LAMP_65428.MirrorHeaterStatus_724 == 0)

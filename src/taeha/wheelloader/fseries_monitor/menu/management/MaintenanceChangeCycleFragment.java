@@ -389,7 +389,7 @@ public class MaintenanceChangeCycleFragment extends ParentFragment{
 		CAN1Comm.Set_MaintenanceInterval_1091_PGN61184_12(IntervalSetting/50);
 		CAN1Comm.TxCANToMCU(12);
 		CAN1Comm.Set_MaintenanceCommant_1097_PGN61184_12(15);
-		CAN1Comm.Set_MaintenanceItem_1098_PGN61184_12(0xFF);
+		//CAN1Comm.Set_MaintenanceItem_1098_PGN61184_12(0xFF);
 		CAN1Comm.Set_MaintenanceInterval_1091_PGN61184_12(0xFF);
 		
 		Log.d(TAG,"IntervalSetting : " + Integer.toString(IntervalSetting));

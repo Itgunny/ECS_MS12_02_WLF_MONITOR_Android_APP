@@ -311,6 +311,7 @@ public class MainBLeftUpMachineStatusSelectFragment extends ParentFragment{
 		ParentActivity.SavePref();
 	}
 	public void ClickOK(){
+		ParentActivity.SavePref();
 		ParentActivity._MainBBaseFragment.showLeftUptoDefaultScreenAnimation();
 	}
 	

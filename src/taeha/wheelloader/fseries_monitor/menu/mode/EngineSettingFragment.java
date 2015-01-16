@@ -238,6 +238,7 @@ public class EngineSettingFragment extends MenuBodyList_ParentFragment{
 			}else{
 				CursurIndex++;
 			}
+			CursurDisplay(CursurIndex);
 			break;
 		case 3:
 			CursurIndex = 1;

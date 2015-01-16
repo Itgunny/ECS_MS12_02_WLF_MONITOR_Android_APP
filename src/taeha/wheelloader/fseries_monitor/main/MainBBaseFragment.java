@@ -1504,7 +1504,7 @@ public class MainBBaseFragment extends ParentFragment{
 			showKeytoDefaultScreenAnimation();
 			break;	
 			
-		case Home.SCREEN_STATE_MAIN_B_BRKAEPEDALCALIBRATION_END:
+		case Home.SCREEN_STATE_MAIN_B_BRKAEPEDALCALIBRATION_TOP:
 		case Home.SCREEN_STATE_MAIN_B_AEB_TOP:
 			showCalibrationtoDefaultScreenAnimation();
 			break;	

@@ -486,7 +486,7 @@ public class MaintenanceDetailFragment extends ParentFragment{
 			}else{
 				imgViewIcon.setImageResource(R.drawable.menu_management_maintenance_icon_08_small);
 			}
-			textViewTitle.setText(ParentActivity.getResources().getString(string.Hydraulic_Tank_Drain_Filter));
+			textViewTitle.setText(ParentActivity.getResources().getString(string.Hydraulic_Tank_Air_Breather));
 			break;
 		case	CAN1CommManager.AIR_CLEANER_ELEMENT	:	
 		

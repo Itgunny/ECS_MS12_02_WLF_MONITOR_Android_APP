@@ -65,7 +65,7 @@ public class Home extends Activity {
 	public static final int VERSION_HIGH 		= 1;
 	public static final int VERSION_LOW 		= 0;
 	public static final int VERSION_SUB_HIGH 	= 2;
-	public static final int VERSION_SUB_LOW 	= 8;
+	public static final int VERSION_SUB_LOW 	= 9;
 	////1.0.2.3
 	// UI B 안 최초 적용 2014.12.10
 	////1.0.2.4
@@ -83,7 +83,7 @@ public class Home extends Activity {
 	// AutoGrease, MirrorHeat, PreHeat 타이머 삭제 2014.12.17
 	// AutoGrease 화면에서 터치 가능하게 수정 2014.12.17
 	// Ending Animation 추가 2014.12.17
-	//// 1.0.2.8
+	//// 1.0.2.8 2015.01.12
 	// Version Info Detail TCU,ECM Index 맞지 않는 것 수정 2014.12.19
 	// Error Report 최대 갯수 100개로 수정(100개 초과 시 가장 오래된 날짜의 로그 삭제) 2014.12.19
 	// Service Menu에 focus 시 esc키 먹지 않는 문제 수정 2014.12.19
@@ -105,6 +105,15 @@ public class Home extends Activity {
 	// Cooling Fan Manual 버튼 누른 후 Off로 돌아가기 -> Manual 진입 후 나갈 때, Auto로 돌아가는 것으로 수정 2015.01.05
 	// Cooling Fan Manual 프로토콜 추가 2015.01.07
 	// Auto Shutdown 기능 BKCU와 통신 시에만 활성화 2015.01.07
+	////1.0.2.9 2015.01.15
+	// SmartKey 경고 문구 주황색으로 변경 2015.01.14
+	// 냉각팬 역회전 Manual 실행 후 이전 상태로 돌아가도록 수정(Auto Setting 삭제) 2015.01.14
+	// Hydraulic Tank Air Breather 문구 수정 2015.01.14
+	// Fine Modulation 키버튼 클릭 시 최초 1회 데이터 변경 안되는 문제 수정 2015.01.14
+	// 카메라 후진 기어 연동 후 키 버튼 입력 안되는 문제 수정 2015.01.14
+	// 카메라 후진 기어 연동 시 후진 기어 Check 시간 변경 (1000ms -> 400ms) 2015.01.14
+	// ECM Version 정보 표시 화면 Crash 버그 수정 2015.01.14
+	// Latest Odometer Reset 안되는 문제 수정 2015.01.14
 	//////////////////////////////////////////////////////////////////////////////////////
 	
 	// TAG
@@ -1134,7 +1143,7 @@ public class Home extends Activity {
 					else{
 						CameraReverseOnCount = 0;
 					}
-					if(CameraReverseOnCount >= 5){
+					if(CameraReverseOnCount >= 2){
 						OldScreenIndex = ScreenIndex;
 						ScreenIndex = SCREEN_STATE_MAIN_CAMERA;
 						CAN1Comm.CameraOnFlag = CAN1CommManager.STATE_CAMERA_REVERSEGEAR;
@@ -1152,8 +1161,9 @@ public class Home extends Activity {
 						CameraReverseOffCount = 0;
 					}
 					
-					if(CameraReverseOffCount >= 5){
+					if(CameraReverseOffCount >= 2){
 						CAN1Comm.CameraOnFlag = CAN1CommManager.STATE_CAMERA_OFF;
+						ScreenIndex = OldScreenIndex;
 						CAN1Comm.TxCMDToMCU(CAN1Comm.CMD_CAM, 0xFF);
 						imgViewCameraScreen.setClickable(false);
 					}
@@ -1214,6 +1224,7 @@ public class Home extends Activity {
 	
 	public void CheckEngineAutoShutdown(){
 		if(ScreenIndex != SCREEN_STATE_ENGINEAUTOSHUTDOWNCOUNT_TOP
+			&& ScreenIndex != SCREEN_STATE_MAIN_ENDING
 			&& EngineAutoShutdownMode == 1
 			&& EngineAutoShutdownRemainingTime <= 60){
 			
@@ -1228,6 +1239,11 @@ public class Home extends Activity {
 					HomeDialog.dismiss();
 					HomeDialog = null;
 				}
+			}
+		}else if(ScreenIndex == SCREEN_STATE_MAIN_ENDING){
+			if(HomeDialog != null){
+				HomeDialog.dismiss();
+				HomeDialog = null;
 			}
 		}
 	}

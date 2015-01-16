@@ -68,7 +68,7 @@ public class VersionInfoTCUFragment extends VersionInfoDetailFragment{
 				ParentActivity.getResources().getString(string.Hardware_Serial_Number),"" , ""));
 		adapter.addItem(new IconTextItemVersion(ParentActivity.getResources().getDrawable(R.drawable.menu_management_machine_monitoring_bg_light),null,
 				ParentActivity.getResources().getString(string.Customer_Serial_Number),"" , ""));
-		adapter.addItem(new IconTextItemVersion(ParentActivity.getResources().getDrawable(R.drawable.menu_management_machine_monitoring_bg_light),null,
+		adapter.addItem(new IconTextItemVersion(ParentActivity.getResources().getDrawable(R.drawable.menu_management_machine_monitoring_bg_dark),null,
 				ParentActivity.getResources().getString(string.Manufacturer),"" , ""));
 		listView.setAdapter(adapter);
 

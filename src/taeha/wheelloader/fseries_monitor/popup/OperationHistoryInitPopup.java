@@ -216,7 +216,7 @@ public class OperationHistoryInitPopup extends ParentPopup{
 				
 				TimerIndex++;
 			}else if (TimerIndex == 4){
-				if(ParentActivity._MenuBaseFragment._OperationHistoryFragment.checkHourLatest.isChecked() == true){
+				if(ParentActivity._MenuBaseFragment._OperationHistoryFragment.checkOdoLatest.isChecked() == true){
 					CAN1Comm.Set_RequestTripDataReset_PGN61184_109(CAN1CommManager.DATA_STATE_TRIPDATA_RESET_DISTANCE);
 					CAN1Comm.TxCANToMCU(109);
 					CAN1Comm.Set_RequestTripDataReset_PGN61184_109(3);

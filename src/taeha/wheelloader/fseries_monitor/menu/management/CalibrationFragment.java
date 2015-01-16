@@ -157,7 +157,7 @@ public class CalibrationFragment extends MenuBodyList_ParentFragment{
 			
 			break;
 		case 1:
-			CursurIndex = 2;
+			CursurIndex = 4;
 			CursurDisplay(CursurIndex);
 			break;
 		case 2:

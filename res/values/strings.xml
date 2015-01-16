@@ -369,6 +369,7 @@
     <string name="Fuel_filter_element">Fuel filter element </string>
     <string name="Fuel_Pre_filter">Fuel Pre-filter</string>
     <string name="Breather_Hydraulic_tank">Breather Hydraulic tank</string>
+    <string name="Hydraulic_Tank_Air_Breather">Hydraulic Tank Air Breather</string>
     <string name="Radiator_engine_coolant">Radiator engine coolant</string>
     <string name="Transmission_oil">Transmission oil</string>
     <string name="Transmission_oil_filter">Transmission oil filter</string>

@@ -153,8 +153,8 @@ public class CoolingFanManualFragment extends ParentFragment{
 		ParentActivity._MenuBaseFragment.showBodyModeAnimation();
 		ParentActivity._MenuBaseFragment._MenuModeFragment.setFirstScreen(Home.SCREEN_STATE_MENU_MODE_ETC_TOP);
 		
-		CAN1Comm.Set_CoolingFanReverseMode_182_PGN61184_61(CAN1CommManager.DATA_STATE_REVERSEFAN_AUTO);
-		CAN1Comm.TxCANToMCU(61);
+	//	CAN1Comm.Set_CoolingFanReverseMode_182_PGN61184_61(CAN1CommManager.DATA_STATE_REVERSEFAN_AUTO);
+	//	CAN1Comm.TxCANToMCU(61);
 	}
 	public void ClickCoolingFanManual(){
 		
@@ -162,16 +162,18 @@ public class CoolingFanManualFragment extends ParentFragment{
 	/////////////////////////////////////////////////////////////////////
 	public void CheckCoolingFanManualButton(){
 		if(textViewCoolingFanManual.isPressed() == true){
-			CAN1Comm.Set_CoolingFanReverseMode_182_PGN61184_61(CAN1CommManager.DATA_STATE_REVERSEFAN_AUTO);
+//			CAN1Comm.Set_CoolingFanReverseMode_182_PGN61184_61(CAN1CommManager.DATA_STATE_REVERSEFAN_AUTO);
 			CAN1Comm.Set_CoolingFanReverseManual_PGN61184_61(1);
 			CAN1Comm.TxCANToMCU(61);
+			CAN1Comm.Set_CoolingFanReverseManual_PGN61184_61(3);
 			ManualPress = true;
 		}
 		
 		if(ManualPress == true && textViewCoolingFanManual.isPressed() == false){
-			CAN1Comm.Set_CoolingFanReverseMode_182_PGN61184_61(CAN1CommManager.DATA_STATE_REVERSEFAN_AUTO);
+//			CAN1Comm.Set_CoolingFanReverseMode_182_PGN61184_61(CAN1CommManager.DATA_STATE_REVERSEFAN_AUTO);
 			CAN1Comm.Set_CoolingFanReverseManual_PGN61184_61(0);
 			CAN1Comm.TxCANToMCU(61);
+			CAN1Comm.Set_CoolingFanReverseManual_PGN61184_61(3);
 			ManualPress = false;
 		}
 	}

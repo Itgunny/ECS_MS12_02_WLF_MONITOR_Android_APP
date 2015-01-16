@@ -67,6 +67,7 @@ public class MainBKeyFineModulationFragment extends ParentFragment{
 		// TODO Auto-generated method stub
 		super.InitValuables();
 		FineModulation = CAN1Comm.Get_FlowFineModulationOperation_2302_PGN65517();
+		SelectFineModulation = FineModulation;
 	}
 	@Override
 	protected void InitButtonListener() {
@@ -122,18 +123,17 @@ public class MainBKeyFineModulationFragment extends ParentFragment{
 		case CAN1CommManager.DATA_STATE_OFF:
 		default:
 			SelectFineModulation = CAN1CommManager.DATA_STATE_ON;
-			CAN1Comm.Set_FlowFineModulationOperation_2302_PGN61184_203(CAN1CommManager.DATA_STATE_OFF);
+			CAN1Comm.Set_FlowFineModulationOperation_2302_PGN61184_203(CAN1CommManager.DATA_STATE_ON);
 			CAN1Comm.TxCANToMCU(203);
 			CAN1Comm.Set_FlowFineModulationOperation_2302_PGN61184_203(3);
 			break;
 		case CAN1CommManager.DATA_STATE_ON:
 			SelectFineModulation = CAN1CommManager.DATA_STATE_OFF;
-			CAN1Comm.Set_FlowFineModulationOperation_2302_PGN61184_203(CAN1CommManager.DATA_STATE_ON);
+			CAN1Comm.Set_FlowFineModulationOperation_2302_PGN61184_203(CAN1CommManager.DATA_STATE_OFF);
 			CAN1Comm.TxCANToMCU(203);
 			CAN1Comm.Set_FlowFineModulationOperation_2302_PGN61184_203(3);
 			break;
 		}
-
 		
 	}
 	public void ClickOff(){

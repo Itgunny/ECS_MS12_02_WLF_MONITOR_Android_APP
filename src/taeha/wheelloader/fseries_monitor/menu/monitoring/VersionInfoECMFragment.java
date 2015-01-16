@@ -117,8 +117,10 @@ public class VersionInfoECMFragment extends VersionInfoDetailFragment{
 			adapter.addItem(new IconTextItemVersion(ParentActivity.getResources().getDrawable(R.drawable.menu_management_machine_monitoring_bg_light),null,
 					ParentActivity.getResources().getString(string.Calibration_Version_Number),"" , ""));
 			adapter.addItem(new IconTextItemVersion(ParentActivity.getResources().getDrawable(R.drawable.menu_management_machine_monitoring_bg_dark),null,
-					ParentActivity.getResources().getString(string.Product_ID),"" , ""));
+					ParentActivity.getResources().getString(string.ECM_Identifier),"" , ""));
 			adapter.addItem(new IconTextItemVersion(ParentActivity.getResources().getDrawable(R.drawable.menu_management_machine_monitoring_bg_light),null,
+					ParentActivity.getResources().getString(string.Product_ID),"" , ""));
+			adapter.addItem(new IconTextItemVersion(ParentActivity.getResources().getDrawable(R.drawable.menu_management_machine_monitoring_bg_dark),null,
 					ParentActivity.getResources().getString(string.Manufacturer),"" , ""));
 	
 			ECMSerialNumberIndex = SoftwareIDDisplay(SoftwareIdentification,1,8,STATE_ECM_PART_NUMBER_CUMMINS);
@@ -157,8 +159,10 @@ public class VersionInfoECMFragment extends VersionInfoDetailFragment{
 			adapter.addItem(new IconTextItemVersion(ParentActivity.getResources().getDrawable(R.drawable.menu_management_machine_monitoring_bg_light),null,
 					ParentActivity.getResources().getString(string.Calibration_Version_Number),"" , ""));
 			adapter.addItem(new IconTextItemVersion(ParentActivity.getResources().getDrawable(R.drawable.menu_management_machine_monitoring_bg_dark),null,
-					ParentActivity.getResources().getString(string.Product_ID),"" , ""));
+					ParentActivity.getResources().getString(string.ECM_Identifier),"" , ""));
 			adapter.addItem(new IconTextItemVersion(ParentActivity.getResources().getDrawable(R.drawable.menu_management_machine_monitoring_bg_light),null,
+					ParentActivity.getResources().getString(string.Product_ID),"" , ""));
+			adapter.addItem(new IconTextItemVersion(ParentActivity.getResources().getDrawable(R.drawable.menu_management_machine_monitoring_bg_dark),null,
 					ParentActivity.getResources().getString(string.Manufacturer),"" , ""));
 			adapter.notifyDataSetChanged();		
 			

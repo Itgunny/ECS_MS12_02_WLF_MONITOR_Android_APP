@@ -402,10 +402,10 @@ public class MenuModeETCFragment extends MenuBodyList_ParentFragment{
 	public void EngineAutoShutdownDisplay(int status, int time){
 		switch (status) {
 		case CAN1CommManager.DATA_STATE_AUTOSHUTDOWN_OFF:
-			setListData4(ParentActivity.getResources().getString(string.Off));
+			setListData5(ParentActivity.getResources().getString(string.Off));
 			break;
 		case CAN1CommManager.DATA_STATE_AUTOSHUTDOWN_ON:
-			setListData4(ParentActivity.GetSectoMinString(time*10) + ParentActivity.getResources().getString(string.Min));
+			setListData5(ParentActivity.GetSectoMinString(time*10) + ParentActivity.getResources().getString(string.Min));
 			break;
 
 		default:

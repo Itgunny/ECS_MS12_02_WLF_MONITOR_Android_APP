@@ -384,8 +384,8 @@ public class CoolingFanAutoFragment extends ParentFragment{
 			break;
 		case 5:
 			OperationTime -= 3;
-			if(OperationTime > MAX_LEVEL)
-				OperationTime = MAX_LEVEL;
+			if(OperationTime < MIN_LEVEL)
+				OperationTime = MIN_LEVEL;
 			OperationTimeTextDisplay(OperationTime);
 			SetSeekBarPositionbyData(seekbarOperationTime,OperationTime);
 			break;
@@ -420,8 +420,8 @@ public class CoolingFanAutoFragment extends ParentFragment{
 			break;
 		case 5:
 			OperationTime += 3;
-			if(OperationTime < MIN_LEVEL)
-				OperationTime = MIN_LEVEL;
+			if(OperationTime > MAX_LEVEL)
+				OperationTime = MAX_LEVEL;
 			OperationTimeTextDisplay(OperationTime);
 			SetSeekBarPositionbyData(seekbarOperationTime,OperationTime);
 			
