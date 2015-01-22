@@ -328,6 +328,10 @@ public class CommService extends Service{
 	public native int Get_ComponentCode_1699_PGN65330_ACU();
 	public native int Get_ManufacturerCode_1700_PGN65330_ACU();
 	public native byte[] Get_ComponentBasicInformation_1698_PGN65330_ACU();
+	//////RX_COMPONENT_IDENTIFICATION_BKCU_65330///////
+	public native int Get_ComponentCode_1699_PGN65330_BKCU();
+	public native int Get_ManufacturerCode_1700_PGN65330_BKCU();
+	public native byte[] Get_ComponentBasicInformation_1698_PGN65330_BKCU();
 	//////RX_TRIP_TIME_INFORMATION_65344///////
 	public native int Get_TripTime_849_PGN65344();
 	//////RX_MACHINE_SECURITY_STATUS_65348///////
@@ -1157,7 +1161,7 @@ public class CommService extends Service{
 				{
 					CAN1Comm.Callback_KeyButton(Data);
 				}
-				
+				HandleKeyButton.sendMessage(HandleKeyButton.obtainMessage(Data));
 				SoundPoolKeyButtonEnding.play(SoundIDEnding, fVolumeEnding, fVolumeEnding, 0, 0, 1);
 				break;
 			case CAN1CommManager.FN:
@@ -1182,6 +1186,16 @@ public class CommService extends Service{
 			Log.e(TAG,"KeyButtonCallBack NullPointerException");
 		}
 		
+	}
+	
+	public static void EEPRomTestCallback(int Data){
+		Log.d(TAG,"EEPRomTestCallback");
+		CAN1Comm.Callback_EEPRomTest(Data);
+	}
+	
+	public static void FlashTestCallback(int Data){
+		Log.e(TAG,"FlashTestCallback");
+		CAN1Comm.Callback_FlashTest(Data);
 	}
 	
 	public static void BackKeyEvent(){
@@ -1255,7 +1269,12 @@ public class CommService extends Service{
 		HandleKeyButton = new Handler() {
 			@Override
 			public void handleMessage(Message msg) {
-				ClickFN();
+				if(msg.what == CAN1CommManager.POWER_OFF){
+					allKillRunningApps("taeha.wheelloader.fseries_monitor.main");
+				}else if(msg.what == CAN1CommManager.FN){
+					ClickFN();
+				}
+			
 			}
 		};
 	}
@@ -1362,6 +1381,24 @@ public class CommService extends Service{
 		 }
 		 System.gc();
 		 return false;
+	}
+	public void allKillRunningApps(String strPrcessName)	 {
+		 ActivityManager activity_manager = (ActivityManager)getSystemService(Context.ACTIVITY_SERVICE);
+		 List<RunningAppProcessInfo> app_list = activity_manager.getRunningAppProcesses();
+		 Log.d(TAG, "Try kill process..");
+
+		 for(int i=0; i<app_list.size(); i++)	 {
+			 Log.d(TAG,"Process : " + app_list.get(i).processName);
+
+			 if(strPrcessName.equals(app_list.get(i).processName) == false
+		     && "taeha.wheel_loader_f_series_ui_home".equals(app_list.get(i).processName) == false
+		     && "system".equals(app_list.get(i).processName) == false)	 {
+				 android.os.Process.sendSignal(app_list.get(i).pid, android.os.Process.SIGNAL_KILL);
+				 activity_manager.killBackgroundProcesses(app_list.get(i).processName);
+				 Log.d(TAG,"Kill Process : " + app_list.get(i).processName);
+			 }
+		 }
+		 System.gc();
 	}
 	public void RunMultimedia(){
 		Intent intent;

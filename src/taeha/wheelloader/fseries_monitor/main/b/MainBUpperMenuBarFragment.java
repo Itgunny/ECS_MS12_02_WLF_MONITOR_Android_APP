@@ -390,6 +390,7 @@ public class MainBUpperMenuBarFragment extends ParentFragment{
 			CAN1Comm.TxCANToMCU(47);
 			CAN1Comm.TxCMDToMCU(CAN1Comm.CMD_BUZ, CAN1Comm.BUZZER_OFF);	// Buzzer Off
 			CAN1Comm.BuzzerStatus = CAN1Comm.BUZZER_STOP;
+			ParentActivity.BuzzerStopCount = 0;
 			StartBuzzerStopTimer();
 		}
 	}
@@ -422,6 +423,7 @@ public class MainBUpperMenuBarFragment extends ParentFragment{
 			// TODO Auto-generated method stub
 			CAN1Comm.Set_RequestBuzzerStop_PGN65327(0);
 			CAN1Comm.TxCANToMCU(47);
+			
 		}
 		
 	}

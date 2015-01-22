@@ -318,6 +318,9 @@ public class FaultHistoryLoggedFragment extends ParentFragment{
 		ParentActivity._LoggedFaultDeletePopup.setMode(SelectedMode);
 		ParentActivity.showLoggedFaultDelete();
 	}
+	public void setMode(int Index){
+		SelectedMode = Index;
+	}
 	/////////////////////////////////////////////////////////////////////
 	public void EHCUShow(){
 		if(ParentActivity._CheckModel.GetMCUVersion(CAN1Comm.Get_ComponentBasicInformation_1698_PGN65330()) == CheckModel.MODEL_940

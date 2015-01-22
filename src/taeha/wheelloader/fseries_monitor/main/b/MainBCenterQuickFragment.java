@@ -48,7 +48,7 @@ public class MainBCenterQuickFragment extends MainBCenterFragment{
 
 	////////////////////////////////////////////////
 	
-	@Override
+	//@Override
 	public void onResume() {
 		// TODO Auto-generated method stub
 		super.onResume();

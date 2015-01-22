@@ -293,7 +293,7 @@ public class UnitFragment extends ParentFragment{
 		CAN1Comm.TxCANToMCU(47);
 		CAN1Comm.Set_SpeedmeterUnitChange_PGN65327(3);
 		
-		SavePref();
+		ParentActivity.SavePref();
 	}
 	public void ClickCancel(){
 		if(ParentActivity.AnimationRunningFlag == true)

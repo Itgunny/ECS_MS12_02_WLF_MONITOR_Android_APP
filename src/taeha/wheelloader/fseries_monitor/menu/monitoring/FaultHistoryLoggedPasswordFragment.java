@@ -27,7 +27,7 @@ public class FaultHistoryLoggedPasswordFragment extends PasswordFragment{
 		InitResource();
 		InitValuables();
 		InitButtonListener();
-		SetTextIndicatorTitle(1);
+		SetTextIndicatorTitle(2);
 		
 		ParentActivity.ScreenIndex = ParentActivity.SCREEN_STATE_MENU_MONITORING_FAULTHISTORY_LOGGED_PW;
 		ParentActivity._MenuBaseFragment._MenuInterTitleFragment.SetTitleText(ParentActivity.getResources().getString(R.string.Logged_Fault));

@@ -195,7 +195,13 @@ public class MenuMultimediaFragment extends ParentFragment{
 		if(intent != null)
 			startActivity(intent);
 	}
-	
+	public void ExcuteSettings(){
+		Intent intent;
+		intent = ParentActivity.getPackageManager().getLaunchIntentForPackage(
+				"com.android.settings");
+		if(intent != null)
+			startActivity(intent);
+	}
 	/////////////////////////////////////////////////////////////////////
 	
 	/////////////////////////////////////////////////////////////////////

@@ -26,6 +26,7 @@ import taeha.wheelloader.fseries_monitor.popup.QuickCouplerPopupLocking1;
 import taeha.wheelloader.fseries_monitor.popup.QuickCouplerPopupLocking2;
 import taeha.wheelloader.fseries_monitor.popup.QuickCouplerPopupUnlocking1;
 import taeha.wheelloader.fseries_monitor.popup.QuickCouplerPopupUnlocking2;
+import taeha.wheelloader.fseries_monitor.popup.QuickCouplerPopupUnlocking3;
 import taeha.wheelloader.fseries_monitor.popup.ShiftModePopup;
 import taeha.wheelloader.fseries_monitor.popup.SoundOutputPopup;
 import taeha.wheelloader.fseries_monitor.popup.SpeedometerInitPopup;
@@ -152,6 +153,7 @@ public class Home extends Activity {
 	public  static final int SCREEN_STATE_MAIN_B_KEY_QUICKCOUPLER_POPUP_LOCKING2			= 0x16420000;
 	public  static final int SCREEN_STATE_MAIN_B_KEY_QUICKCOUPLER_POPUP_UNLOCKING1			= 0x16430000;
 	public  static final int SCREEN_STATE_MAIN_B_KEY_QUICKCOUPLER_POPUP_UNLOCKING2			= 0x16440000;
+	public  static final int SCREEN_STATE_MAIN_B_KEY_QUICKCOUPLER_POPUP_UNLOCKING3			= 0x16450000;
 	public  static final int SCREEN_STATE_MAIN_B_KEY_RIDECONTROL							= 0x16500000;
 	public  static final int SCREEN_STATE_MAIN_B_KEY_RIDECONTROL_SPEED						= 0x16510000;
 	public  static final int SCREEN_STATE_MAIN_B_KEY_WORKLOAD								= 0x16600000;
@@ -165,6 +167,7 @@ public class Home extends Activity {
 	public  static final int SCREEN_STATE_MAIN_B_KEY_FINEMODULATION							= 0x16B00000;
 	public  static final int SCREEN_STATE_MAIN_B_KEY_FN										= 0x16C00000;
 	public  static final int SCREEN_STATE_MAIN_B_KEY_END									= 0x16FFFFFF;
+	
 	public  static final int SCREEN_STATE_MAIN_B_BRKAEPEDALCALIBRATION_TOP					= 0x17000000;
 	public  static final int SCREEN_STATE_MAIN_B_BRKAEPEDALCALIBRATION_END					= 0x17FFFFFF;
 	public  static final int SCREEN_STATE_MAIN_B_AEB_TOP									= 0x18000000;
@@ -242,7 +245,7 @@ public class Home extends Activity {
 	public  static final int SCREEN_STATE_MENU_MONITORING_VERSIONINFO_CLUSTER				= 0x22450000;
 	public  static final int SCREEN_STATE_MENU_MONITORING_VERSIONINFO_RMCU					= 0x22460000;
 	public  static final int SCREEN_STATE_MENU_MONITORING_VERSIONINFO_EHCU					= 0x22470000;
-	public  static final int SCREEN_STATE_MENU_MONITORING_VERSIONINFO_ACU					= 0x22480000;
+	public  static final int SCREEN_STATE_MENU_MONITORING_VERSIONINFO_BKCU					= 0x22480000;
 	public  static final int SCREEN_STATE_MENU_MONITORING_VERSIONINFO_END					= 0x224FFFFF;
 	public  static final int SCREEN_STATE_MENU_MONITORING_EHCUINFO_TOP						= 0x22500000;
 	public  static final int SCREEN_STATE_MENU_MONITORING_EHCUINFO_BOOMLEVERFLOAT			= 0x22510000;
@@ -313,6 +316,9 @@ public class Home extends Activity {
 	
 	public  static final int SCREEN_STATE_MENU_MULTIMEDIA_TOP								= 0x25000000;
 	public  static final int SCREEN_STATE_MENU_MULTIMEDIA_END								= 0x25FFFFFF;
+	
+	public  static final int SCREEN_STATE_MENU_USERSWITCHING_TOP							= 0x26000000;
+	public  static final int SCREEN_STATE_MENU_USERSWITCHING_END							= 0x26FFFFFF;
 	
 	public  static final int SCREEN_STATE_MENU_END 											= 0x2FFFFFFF;
 	
@@ -430,6 +436,16 @@ public class Home extends Activity {
 	int Buzzer;
 	public boolean BuzzerOnFlag;
 	
+	// QuickCoupler Status
+	public int AttachmentStatus;
+	
+	// User Data
+	public UserData UserDataDefault;
+	public UserData UserDataUser1;
+	public UserData UserDataUser2;
+	public UserData UserDataUser3;
+	public UserData UserDataUser4;
+	
 	// CAN1CommManager
 	private CAN1CommManager CAN1Comm = null;	
 	
@@ -442,6 +458,7 @@ public class Home extends Activity {
 	public QuickCouplerPopupUnlocking1 		_QuickCouplerPopupUnlocking1;
 	public QuickCouplerPopupLocking2 		_QuickCouplerPopupLocking2;
 	public QuickCouplerPopupUnlocking2 		_QuickCouplerPopupUnlocking2;
+	public QuickCouplerPopupUnlocking3		_QuickCouplerPopupUnlocking3;
 	public CCOModePopup						_CCoModePopup;
 	public ICCOModePopup					_ICCOModePopup;
 	public ShiftModePopup 					_ShiftModePopup;
@@ -464,6 +481,7 @@ public class Home extends Activity {
 	public WorkLoadWeighingInitPopup2		_WorkLoadWeighingInitPopup2;
 	public EHCUErrorPopup					_EHCUErrorPopup;
 	
+	
 	//Toast
 	public WeighingErrorToast				_WeighingErrorToast;
 	
@@ -479,6 +497,7 @@ public class Home extends Activity {
 	// Count
 	int MirrorHeatTimerCount;
 	int AutoGreaseTimerCount;
+	public int BuzzerStopCount;
 
 	// Flag
 	public boolean AnimationRunningFlag;
@@ -628,6 +647,7 @@ public class Home extends Activity {
 		AnimationRunningFlag = false;
 		MirrorHeatPreHeatFlag = false;
 		MirrorHeatCount = 0;
+		BuzzerStopCount = 0;
 		nSendCommandTimerIndex = 0;
 		BuzzerOnFlag = false;
 		EngineAutoShutdownESLFlag = false;
@@ -635,6 +655,18 @@ public class Home extends Activity {
 		bEHCUErrPopup = false;
 		_MainChangeAnimation = new ChangeFragmentAnimation(this, framelayoutMain, R.id.FrameLayout_main, null);
 		_CheckModel = new CheckModel();
+		
+		UserDataDefault = new UserData();
+		UserDataUser1 = new UserData();
+		UserDataUser2 = new UserData();
+		UserDataUser3 = new UserData();
+		UserDataUser4 = new UserData();
+		
+		UserDataUser1 = LoadUserData(1);
+		UserDataUser2 = LoadUserData(2);
+		UserDataUser3 = LoadUserData(3);
+		UserDataUser4 = LoadUserData(4);
+		
 		
 		_CrashApplication = (CrashApplication)getApplicationContext();		
 	}
@@ -652,6 +684,7 @@ public class Home extends Activity {
 		_QuickCouplerPopupUnlocking1 = new QuickCouplerPopupUnlocking1(this);
 		_QuickCouplerPopupLocking2 = new QuickCouplerPopupLocking2(this);
 		_QuickCouplerPopupUnlocking2 = new QuickCouplerPopupUnlocking2(this);
+		_QuickCouplerPopupUnlocking3 = new QuickCouplerPopupUnlocking3(this);
 		_CCoModePopup = new CCOModePopup(this);
 		_ICCOModePopup = new ICCOModePopup(this);
 		_ShiftModePopup = new ShiftModePopup(this);
@@ -790,10 +823,11 @@ public class Home extends Activity {
 		edit.putInt("MachineStatusUpperIndex", MachineStatusUpperIndex);
 		edit.putInt("MachineStatusLowerIndex", MachineStatusLowerIndex);
 		edit.putInt("WeighingErrorDetect", WeighingErrorDetect);
-		edit.putInt("WeighingErrorDetect", WeighingErrorDetect);
 		edit.putInt("DisplayType", DisplayType);
-		
-		
+		edit.putInt("AttachmentStatus", AttachmentStatus);		
+		edit.putInt("BrightnessManualLevel", BrightnessManualLevel);
+		edit.putInt("BrightnessManualAuto", BrightnessManualAuto);
+		edit.putInt("SoundState", SoundState);
 		edit.commit();
 		Log.d(TAG,"SavePref");
 	}
@@ -828,8 +862,137 @@ public class Home extends Activity {
 		strASNumDash = SharePref.getString("strASNumDash", "");
 		strASNum = SharePref.getString("strASNum", "");
 		
-		DisplayType = SharePref.getInt("DisplayType", DISPLAY_TYPE_A);
+		DisplayType = SharePref.getInt("DisplayType", DISPLAY_TYPE_B);
+		
+		AttachmentStatus = SharePref.getInt("AttachmentStatus", CAN1CommManager.DATA_STATE_KEY_QUICKCOUPLER_OFF);
 		Log.d(TAG,"LoadPref");
+	}
+	
+	public void SaveUserData(int Index, UserData _userdata){
+		String strEngineMode = "EngineMode" + Integer.toString(Index);
+		String strWarmingUp = "WarmingUp" + Integer.toString(Index);
+		String strCCOMode = "CCOMode" + Integer.toString(Index);
+		String strShiftMode = "ShiftMode" + Integer.toString(Index);
+		String strTCLockUp = "TCLockUp" + Integer.toString(Index);
+		String strRideControl = "RideControl" + Integer.toString(Index);
+		String strWeighingSystem = "WeighingSystem" + Integer.toString(Index);
+		String strWeighingDisplay = "WeighingDisplay" + Integer.toString(Index);
+		String strErrorDetection = "ErrorDetection" + Integer.toString(Index);
+		String strKickDown = "KickDown" + Integer.toString(Index);
+		String strBucketPriority = "BucketPriority" + Integer.toString(Index);
+		String strSoftEndStopBoomUp = "SoftEndStopBoomUp" + Integer.toString(Index);
+		String strSoftEndStopBoomDown = "SoftEndStopBoomDown" + Integer.toString(Index);
+		String strSoftEndStopBucketIn = "SoftEndStopBucketIn" + Integer.toString(Index);
+		String strSoftEndStopBucketDump = "SoftEndStopBucketDump" + Integer.toString(Index);
+		String strDisplayType = "DisplayType" + Integer.toString(Index);
+		String strBrightness = "Brightness" + Integer.toString(Index);
+		String strUnitTemp = "UnitTemp" + Integer.toString(Index);
+		String strUnitOdo = "UnitOdo" + Integer.toString(Index);
+		String strUnitWeight = "UnitWeight" + Integer.toString(Index);
+		String strUnitPressure = "UnitPressure" + Integer.toString(Index);
+		String strMachineStatusUpper = "MachineStatusUpper" + Integer.toString(Index);
+		String strMachineStatusLower = "MachineStatusLower" + Integer.toString(Index);
+		String strLanguage = "Language" + Integer.toString(Index);
+		String strSoundOutput = "SoundOutput" + Integer.toString(Index);
+		String strHourmeterDisplay = "HourmeterDisplay" + Integer.toString(Index);
+
+
+		SharedPreferences SharePref = getSharedPreferences("Home", 0);
+		SharedPreferences.Editor edit = SharePref.edit();
+		edit.putInt(strEngineMode, _userdata.EngineMode);
+		edit.putInt(strWarmingUp, _userdata.WarmingUp);
+		edit.putInt(strCCOMode, _userdata.CCOMode);
+		edit.putInt(strShiftMode, _userdata.ShiftMode);
+		edit.putInt(strTCLockUp, _userdata.TCLockUp);
+		edit.putInt(strRideControl, _userdata.RideControl);
+		edit.putInt(strWeighingSystem, _userdata.WeighingSystem);
+		edit.putInt(strWeighingDisplay, _userdata.WeighingDisplay);
+		edit.putInt(strErrorDetection, _userdata.ErrorDetection);
+		edit.putInt(strKickDown, _userdata.KickDown);
+		edit.putInt(strBucketPriority, _userdata.BucketPriority);
+		edit.putInt(strSoftEndStopBoomUp, _userdata.SoftEndStopBoomUp);
+		edit.putInt(strSoftEndStopBoomDown, _userdata.SoftEndStopBoomDown);
+		edit.putInt(strSoftEndStopBucketIn, _userdata.SoftEndStopBucketIn);
+		edit.putInt(strSoftEndStopBucketDump, _userdata.SoftEndStopBucketDump);
+		edit.putInt(strBrightness, _userdata.Brightness);
+		edit.putInt(strDisplayType, _userdata.DisplayType);
+		edit.putInt(strUnitTemp, _userdata.UnitTemp);
+		edit.putInt(strUnitOdo, _userdata.UnitOdo);
+		edit.putInt(strUnitWeight, _userdata.UnitWeight);
+		edit.putInt(strUnitPressure, _userdata.UnitPressure);
+		edit.putInt(strMachineStatusUpper, _userdata.MachineStatusUpper);
+		edit.putInt(strMachineStatusLower, _userdata.MachineStatusLower);
+		edit.putInt(strLanguage, _userdata.Language);
+		edit.putInt(strSoundOutput, _userdata.SoundOutput);
+		edit.putInt(strHourmeterDisplay, _userdata.HourmeterDisplay);
+
+		edit.commit();
+		Log.d(TAG,"SaveUserData" + Integer.toString(Index));
+		
+	}
+	public UserData LoadUserData(int Index){
+		String strEngineMode = "EngineMode" + Integer.toString(Index);
+		String strWarmingUp = "WarmingUp" + Integer.toString(Index);
+		String strCCOMode = "CCOMode" + Integer.toString(Index);
+		String strShiftMode = "ShiftMode" + Integer.toString(Index);
+		String strTCLockUp = "TCLockUp" + Integer.toString(Index);
+		String strRideControl = "RideControl" + Integer.toString(Index);
+		String strWeighingSystem = "WeighingSystem" + Integer.toString(Index);
+		String strWeighingDisplay = "WeighingDisplay" + Integer.toString(Index);
+		String strErrorDetection = "ErrorDetection" + Integer.toString(Index);
+		String strKickDown = "KickDown" + Integer.toString(Index);
+		String strBucketPriority = "BucketPriority" + Integer.toString(Index);
+		String strSoftEndStopBoomUp = "SoftEndStopBoomUp" + Integer.toString(Index);
+		String strSoftEndStopBoomDown = "SoftEndStopBoomDown" + Integer.toString(Index);
+		String strSoftEndStopBucketIn = "SoftEndStopBucketIn" + Integer.toString(Index);
+		String strSoftEndStopBucketDump = "SoftEndStopBucketDump" + Integer.toString(Index);
+		String strBrightness = "Brightness" + Integer.toString(Index);
+		String strDisplayType = "DisplayType" + Integer.toString(Index);
+		String strUnitTemp = "UnitTemp" + Integer.toString(Index);
+		String strUnitOdo = "UnitOdo" + Integer.toString(Index);
+		String strUnitWeight = "UnitWeight" + Integer.toString(Index);
+		String strUnitPressure = "UnitPressure" + Integer.toString(Index);
+		String strMachineStatusUpper = "MachineStatusUpper" + Integer.toString(Index);
+		String strMachineStatusLower = "MachineStatusLower" + Integer.toString(Index);
+		String strLanguage = "Language" + Integer.toString(Index);
+		String strSoundOutput = "SoundOutput" + Integer.toString(Index);
+		String strHourmeterDisplay = "HourmeterDisplay" + Integer.toString(Index);
+		
+		UserData _userdata;
+		_userdata = new UserData();
+		
+		SharedPreferences SharePref = getSharedPreferences("Home", 0);
+		
+		_userdata.EngineMode = SharePref.getInt(strEngineMode, CAN1CommManager.DATA_STATE_ENGINE_MODE_PWR);
+		_userdata.WarmingUp = SharePref.getInt(strWarmingUp, CAN1CommManager.DATA_STATE_ENGINE_WARMINGUP_OFF);
+		_userdata.CCOMode = SharePref.getInt(strCCOMode, CAN1CommManager.DATA_STATE_TM_CLUTCHCUTOFF_OFF);
+		_userdata.ShiftMode = SharePref.getInt(strShiftMode, CAN1CommManager.DATA_STATE_TM_SHIFTMODE_MANUAL);
+		_userdata.TCLockUp = SharePref.getInt(strTCLockUp, CAN1CommManager.DATA_STATE_TM_LOCKUPCLUTCH_OFF);
+		_userdata.RideControl = SharePref.getInt(strRideControl, CAN1CommManager.DATA_STATE_RIDECONTROL_OFF);
+		_userdata.WeighingSystem = SharePref.getInt(strWeighingSystem, CAN1CommManager.DATA_STATE_WEIGHING_ACCUMULATION_MANUAL);
+		_userdata.WeighingDisplay = SharePref.getInt(strWeighingDisplay, CAN1CommManager.DATA_STATE_WEIGHINGDISPLAY_TOTAL_A);
+		_userdata.ErrorDetection = SharePref.getInt(strErrorDetection, CAN1CommManager.DATA_STATE_WEIGHING_ERRORDETECT_OFF);
+		_userdata.KickDown = SharePref.getInt(strKickDown, CAN1CommManager.DATA_STATE_KICKDOWN_UPDOWN);
+		_userdata.BucketPriority = SharePref.getInt(strBucketPriority, CAN1CommManager.DATA_STATE_BUCKETPRIORITY_OFF);
+		_userdata.SoftEndStopBoomUp = SharePref.getInt(strSoftEndStopBoomUp, CAN1CommManager.DATA_STATE_SOFTSTOP_BOOMUP_OFF);
+		_userdata.SoftEndStopBoomDown = SharePref.getInt(strSoftEndStopBoomDown, CAN1CommManager.DATA_STATE_SOFTSTOP_BOOMDOWN_OFF);
+		_userdata.SoftEndStopBucketIn = SharePref.getInt(strSoftEndStopBucketIn, CAN1CommManager.DATA_STATE_SOFTSTOP_BUCKETIN_OFF);
+		_userdata.SoftEndStopBucketDump = SharePref.getInt(strSoftEndStopBucketDump, CAN1CommManager.DATA_STATE_SOFTSTOP_BUCKETOUT_OFF);
+		_userdata.Brightness = SharePref.getInt(strBrightness,8);
+		_userdata.DisplayType = SharePref.getInt(strDisplayType,Home.DISPLAY_TYPE_B);
+		_userdata.UnitTemp = SharePref.getInt(strUnitTemp, Home.UNIT_TEMP_C);
+		_userdata.UnitOdo = SharePref.getInt(strUnitOdo, Home.UNIT_ODO_KM);
+		_userdata.UnitWeight = SharePref.getInt(strUnitWeight, Home.UNIT_WEIGHT_TON);
+		_userdata.UnitPressure = SharePref.getInt(strUnitPressure, Home.UNIT_PRESSURE_BAR);
+		_userdata.MachineStatusUpper = SharePref.getInt(strMachineStatusUpper, CAN1CommManager.DATA_STATE_MACHINESTATUS_NOSELECT);
+		_userdata.MachineStatusLower = SharePref.getInt(strMachineStatusLower, CAN1CommManager.DATA_STATE_MACHINESTATUS_NOSELECT);
+		_userdata.Language = SharePref.getInt(strLanguage,0);
+		_userdata.SoundOutput = SharePref.getInt(strSoundOutput, Home.STATE_INTERNAL_SPK);
+		_userdata.HourmeterDisplay = SharePref.getInt(strHourmeterDisplay, CAN1CommManager.DATA_STATE_HOURMETER_LATEST);
+
+
+		Log.d(TAG,"LoadUserData" + Integer.toString(Index));
+		return _userdata;
 	}
 	public void setSoundOutput(int _soundstate) {
 		try {
@@ -1035,6 +1198,18 @@ public class Home extends Activity {
 			stopCommService();
 		}
 
+		@Override
+		public void EEPRomCallBack(int Data) throws RemoteException {
+			// TODO Auto-generated method stub
+			Log.i(TAG, "EEPRomCallBack : " + Integer.toString(Data));
+		}
+
+		@Override
+		public void FlashCallBack(int Data) throws RemoteException {
+			// TODO Auto-generated method stub
+			Log.i(TAG, "FlashCallBack : " + Integer.toString(Data));
+		}
+
 	};
 	// Thread Class
 	public  class ReadThread implements Runnable {
@@ -1115,19 +1290,31 @@ public class Home extends Activity {
 	
 	}
 	public void CheckBuzzer(){
-		if(CAN1Comm.Get_CommErrCnt() < 1000){
-			if(Buzzer == CAN1Comm.BUZZER_ON){
-				BuzzerOnFlag = true;
-				if(CAN1Comm.BuzzerStatus == CAN1Comm.BUZZER_OFF || CAN1Comm.BuzzerStatus == CAN1Comm.BUZZER_STOP){
-					CAN1Comm.TxCMDToMCU(CAN1Comm.CMD_BUZ, CAN1Comm.BUZZER_ON);	// Buzzer On
+		if(ScreenIndex == SCREEN_STATE_MAIN_B_KEY_QUICKCOUPLER_POPUP_LOCKING2
+		|| ScreenIndex == SCREEN_STATE_MAIN_B_KEY_QUICKCOUPLER_POPUP_UNLOCKING2
+		|| ScreenIndex == SCREEN_STATE_MAIN_B_KEY_QUICKCOUPLER_POPUP_UNLOCKING3){
+			
+		}else{
+			if(BuzzerStopCount > 5){
+				if(CAN1Comm.Get_CommErrCnt() < 1000){
+					if(Buzzer == CAN1Comm.BUZZER_ON){
+						BuzzerOnFlag = true;
+						if(CAN1Comm.BuzzerStatus == CAN1Comm.BUZZER_OFF || CAN1Comm.BuzzerStatus == CAN1Comm.BUZZER_STOP){
+							CAN1Comm.TxCMDToMCU(CAN1Comm.CMD_BUZ, CAN1Comm.BUZZER_ON);	// Buzzer On
+						}
+					}else if(Buzzer == CAN1Comm.BUZZER_OFF){
+						if(CAN1Comm.BuzzerStatus == CAN1Comm.BUZZER_ON){
+							CAN1Comm.TxCMDToMCU(CAN1Comm.CMD_BUZ, CAN1Comm.BUZZER_OFF);	// Buzzer Off
+							CAN1Comm.BuzzerStatus = CAN1Comm.BUZZER_STOP;
+						}
+					}			
 				}
-			}else if(Buzzer == CAN1Comm.BUZZER_OFF){
-				if(CAN1Comm.BuzzerStatus == CAN1Comm.BUZZER_ON){
-					CAN1Comm.TxCMDToMCU(CAN1Comm.CMD_BUZ, CAN1Comm.BUZZER_OFF);	// Buzzer Off
-					CAN1Comm.BuzzerStatus = CAN1Comm.BUZZER_STOP;
-				}
-			}			
+			}else{
+				BuzzerStopCount++;
+			}
 		}
+		
+		
 	}
 	public void CameraDisplay(){
 		if((ScreenIndex >= SCREEN_STATE_MAIN_B_TOP && ScreenIndex <= SCREEN_STATE_MAIN_B_END)
@@ -1247,6 +1434,22 @@ public class Home extends Activity {
 			}
 		}
 	}
+	public void CheckAttachmentUnlock(){
+		if(ScreenIndex == SCREEN_STATE_MAIN_B_TOP){
+			if(AttachmentStatus == CAN1CommManager.DATA_STATE_KEY_QUICKCOUPLER_UNLOCK){
+				OldScreenIndex = ScreenIndex;
+				showQuickCouplerPopupUnlocking3();
+			}
+		}else if(ScreenIndex == SCREEN_STATE_MAIN_ENDING){
+			if(HomeDialog != null){
+				HomeDialog.dismiss();
+				HomeDialog = null;
+			}
+		}
+		
+		
+		
+	}
 	public void CheckEHCUErr(){
 		if(JoystickSteeringEnableFailCondition != 0xFFFF
 		&& JoystickSteeringEnableFailCondition != 0x0000){
@@ -1298,11 +1501,14 @@ public class Home extends Activity {
 		Log.d(TAG,"KeyButtonClick");
 		// TODO Auto-generated method stub
 		if(ScreenIndex == SCREEN_STATE_MAIN_CAMERA){
-			if(Data == CAN1CommManager.CAMERA){
+			if(Data == CAN1CommManager.CAMERA
+			|| Data == CAN1CommManager.ESC){
 				ExitCam();
 			}
-		}
-		else if(ScreenIndex == SCREEN_STATE_MENU_MODE_HYD_WORKLOAD_WEIGHING_INIT1){
+		}else if(ScreenIndex == SCREEN_STATE_MAIN_B_KEY_QUICKCOUPLER_POPUP_LOCKING2
+			||	 ScreenIndex == SCREEN_STATE_MAIN_B_KEY_QUICKCOUPLER_POPUP_UNLOCKING2){
+			Log.d(TAG,"Click QuickCoupler Key");				
+		}else if(ScreenIndex == SCREEN_STATE_MENU_MODE_HYD_WORKLOAD_WEIGHING_INIT1){
 			Log.d(TAG,"Click WeighingInit1 Key");
 			_WorkLoadWeighingInitPopup1.KeyButtonClick(Data);
 		}else if(ScreenIndex == SCREEN_STATE_MENU_MODE_HYD_WORKLOAD_WEIGHING_INIT2){
@@ -1371,6 +1577,21 @@ public class Home extends Activity {
 		HomeDialog = _QuickCouplerPopupUnlocking2;
 		HomeDialog.show();
 	}
+	public void showQuickCouplerPopupUnlocking3(){
+//		if(AnimationRunningFlag == true)
+//			return;
+//		else
+//			StartAnimationRunningTimer();
+//		
+		if(HomeDialog != null){
+			HomeDialog.dismiss();
+			HomeDialog = null;
+		}
+		
+		HomeDialog = _QuickCouplerPopupUnlocking3;
+		HomeDialog.show();
+	}
+	
 	public void showCCoMode(){
 		if(AnimationRunningFlag == true)
 			return;
@@ -2174,6 +2395,10 @@ public class Home extends Activity {
 		long long_Battery;
 		int nBattery;
 		int nBattery_Under;
+		
+		if(_Battery == 0xFFFF){
+			return "-";
+		}
 		
 		long_Battery = (_Battery  & 0xFFFFFFFFL);
 		if(long_Battery > 500){

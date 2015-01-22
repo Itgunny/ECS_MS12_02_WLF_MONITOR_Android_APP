@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/RelativeLayout_popup_key_quickcoupler_unlocking_3"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/menu_popup01_bg" >
+
+    <RelativeLayout
+        android:id="@+id/RelativeLayout_popup_key_quickcoupler_unlocking_3_title"
+        android:layout_width="448dp"
+        android:layout_height="100dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp" >
+        
+        <TextView
+            android:id="@+id/textView_popup_key_quickcoupler_unlocking_3_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_toRightOf="@+id/imageView_popup_key_quickcoupler_unlocking_3"
+            android:gravity="center"
+            android:text="@string/Attachment_Unlocked_Check_Locking_Status"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:textColor="@color/red"
+            android:textSize="25sp" />
+
+        <ImageView
+            android:id="@+id/imageView_popup_key_quickcoupler_unlocking_3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="20dp"
+            android:src="@drawable/main_key_quick_warning_icon_01" />
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/RelativeLayout_popup_key_quickcoupler_unlocking_3_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/RelativeLayout_popup_key_quickcoupler_unlocking_3_title" >
+        
+        <ImageButton
+            android:id="@+id/imageButton_popup_key_quickcoupler_unlocking_3_lock"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="150dp"
+            android:background="@drawable/_selector_popup01_long_btn1" />
+        
+        <ImageButton
+            android:id="@+id/imageButton_popup_key_quickcoupler_unlocking_3_ok"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignRight="@+id/imageButton_popup_key_quickcoupler_unlocking_3_lock"
+            android:layout_below="@+id/imageButton_popup_key_quickcoupler_unlocking_3_lock"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/_selector_popup01_short_btn1" />
+        
+        <TextView
+	        android:id="@+id/textView_popup_key_quickcoupler_unlocking_3_lock"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:layout_alignBottom="@+id/imageButton_popup_key_quickcoupler_unlocking_3_lock"
+	        android:layout_alignLeft="@+id/imageButton_popup_key_quickcoupler_unlocking_3_lock"
+	        android:layout_alignRight="@+id/imageButton_popup_key_quickcoupler_unlocking_3_lock"
+	        android:layout_alignTop="@+id/imageButton_popup_key_quickcoupler_unlocking_3_lock"
+	        android:gravity="center"
+	        android:text="@string/Locking_Attachment"
+	        android:textAppearance="?android:attr/textAppearanceLarge"
+	        android:textColor="@color/black"
+	        android:textSize="30sp"
+	        android:textStyle="bold" />
+        
+        
+	    <TextView
+	        android:id="@+id/textView_popup_key_quickcoupler_unlocking_3_ok"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:layout_alignBottom="@+id/imageButton_popup_key_quickcoupler_unlocking_3_ok"
+	        android:layout_alignLeft="@+id/imageButton_popup_key_quickcoupler_unlocking_3_ok"
+	        android:layout_alignRight="@+id/imageButton_popup_key_quickcoupler_unlocking_3_ok"
+	        android:layout_alignTop="@+id/imageButton_popup_key_quickcoupler_unlocking_3_ok"
+	        android:gravity="center"
+	        android:text="@string/OK"
+	        android:textAppearance="?android:attr/textAppearanceLarge"
+	        android:textColor="@color/black"
+	        android:textSize="30sp"
+	        android:textStyle="bold" />
+	    
+	    <CheckBox
+	        android:id="@+id/checkBox_popup_key_quickcoupler_unlocking_3"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:layout_below="@+id/imageButton_popup_key_quickcoupler_unlocking_3_lock"
+	        android:layout_marginLeft="40dp"
+	        android:layout_marginTop="25dp"
+	        android:button="@drawable/_selector_check_btn"
+	        android:paddingLeft="50dp"
+	        android:text="@string/Do_not_show_again"
+	        android:textColor="@color/black"
+	        android:textSize="25sp" />
+
+    </RelativeLayout>
+
+</RelativeLayout>

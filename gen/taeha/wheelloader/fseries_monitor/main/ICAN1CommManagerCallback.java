@@ -58,6 +58,22 @@ _arg0 = data.readInt();
 this.KeyButtonCallBack(_arg0);
 return true;
 }
+case TRANSACTION_EEPRomCallBack:
+{
+data.enforceInterface(DESCRIPTOR);
+int _arg0;
+_arg0 = data.readInt();
+this.EEPRomCallBack(_arg0);
+return true;
+}
+case TRANSACTION_FlashCallBack:
+{
+data.enforceInterface(DESCRIPTOR);
+int _arg0;
+_arg0 = data.readInt();
+this.FlashCallBack(_arg0);
+return true;
+}
 case TRANSACTION_CIDCallBack:
 {
 data.enforceInterface(DESCRIPTOR);
@@ -118,6 +134,30 @@ finally {
 _data.recycle();
 }
 }
+@Override public void EEPRomCallBack(int Data) throws android.os.RemoteException
+{
+android.os.Parcel _data = android.os.Parcel.obtain();
+try {
+_data.writeInterfaceToken(DESCRIPTOR);
+_data.writeInt(Data);
+mRemote.transact(Stub.TRANSACTION_EEPRomCallBack, _data, null, android.os.IBinder.FLAG_ONEWAY);
+}
+finally {
+_data.recycle();
+}
+}
+@Override public void FlashCallBack(int Data) throws android.os.RemoteException
+{
+android.os.Parcel _data = android.os.Parcel.obtain();
+try {
+_data.writeInterfaceToken(DESCRIPTOR);
+_data.writeInt(Data);
+mRemote.transact(Stub.TRANSACTION_FlashCallBack, _data, null, android.os.IBinder.FLAG_ONEWAY);
+}
+finally {
+_data.recycle();
+}
+}
 @Override public void CIDCallBack() throws android.os.RemoteException
 {
 android.os.Parcel _data = android.os.Parcel.obtain();
@@ -154,12 +194,16 @@ _data.recycle();
 }
 static final int TRANSACTION_CallbackFunc = (android.os.IBinder.FIRST_CALL_TRANSACTION + 0);
 static final int TRANSACTION_KeyButtonCallBack = (android.os.IBinder.FIRST_CALL_TRANSACTION + 1);
-static final int TRANSACTION_CIDCallBack = (android.os.IBinder.FIRST_CALL_TRANSACTION + 2);
-static final int TRANSACTION_ASCallBack = (android.os.IBinder.FIRST_CALL_TRANSACTION + 3);
-static final int TRANSACTION_StopCommServiceCallBack = (android.os.IBinder.FIRST_CALL_TRANSACTION + 4);
+static final int TRANSACTION_EEPRomCallBack = (android.os.IBinder.FIRST_CALL_TRANSACTION + 2);
+static final int TRANSACTION_FlashCallBack = (android.os.IBinder.FIRST_CALL_TRANSACTION + 3);
+static final int TRANSACTION_CIDCallBack = (android.os.IBinder.FIRST_CALL_TRANSACTION + 4);
+static final int TRANSACTION_ASCallBack = (android.os.IBinder.FIRST_CALL_TRANSACTION + 5);
+static final int TRANSACTION_StopCommServiceCallBack = (android.os.IBinder.FIRST_CALL_TRANSACTION + 6);
 }
 public void CallbackFunc(int Data) throws android.os.RemoteException;
 public void KeyButtonCallBack(int Data) throws android.os.RemoteException;
+public void EEPRomCallBack(int Data) throws android.os.RemoteException;
+public void FlashCallBack(int Data) throws android.os.RemoteException;
 public void CIDCallBack() throws android.os.RemoteException;
 public void ASCallBack() throws android.os.RemoteException;
 public void StopCommServiceCallBack() throws android.os.RemoteException;

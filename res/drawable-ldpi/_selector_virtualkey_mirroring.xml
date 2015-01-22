@@ -4,20 +4,20 @@
 
     <item 
     	android:state_window_focused="false"
-        android:drawable="@drawable/main_virtual_key_btn_screen_mirroring_off" /> 
+        android:drawable="@drawable/main_quick_btn_screen_mirroring_off" /> 
     <item 
     	android:state_pressed="true"
-        android:drawable="@drawable/main_virtual_key_btn_screen_mirroring_on"/>
+        android:drawable="@drawable/main_quick_btn_screen_mirroring_s"/>
     <item 
     	android:state_pressed="false"
-        android:drawable="@drawable/main_virtual_key_btn_screen_mirroring_off"/>
+        android:drawable="@drawable/main_quick_btn_screen_mirroring_off"/>
     <item 
     	android:state_focused="true"
-        android:drawable="@drawable/main_virtual_key_btn_screen_mirroring_on"/>
+        android:drawable="@drawable/main_quick_btn_screen_mirroring_s"/>
       <item 
     	android:state_focused="false"
-        android:drawable="@drawable/main_virtual_key_btn_screen_mirroring_off"/>
+        android:drawable="@drawable/main_quick_btn_screen_mirroring_off"/>
     <item
-    android:drawable="@drawable/main_virtual_key_btn_screen_mirroring_off"/>
+    android:drawable="@drawable/main_quick_btn_screen_mirroring_off"/>
         
 </selector>

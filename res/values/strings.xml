@@ -79,6 +79,7 @@
     <string name="Check_Engine_Run">Check Engine Run</string>
     <string name="Check_Machine_Stop">Check Machine Stop</string>
     <string name="Check_TM_Control_Selection">Check TM Control Selection</string>
+    <string name="Finish">Finish</string>
     <!-- Common End-->
     <!-- Main Start-->
     <string name="ENGINE_MODE">ENGINE MODE</string>
@@ -121,6 +122,15 @@
     <string name="Bucket_Full_In_Error">Bucket Full In Error</string>
     <string name="Sudden_Change_Error">Sudden Change Error</string>
     <string name="Plase_press_Enter_key">Plase press Enter key</string>
+    <string name="User1">User1</string>
+    <string name="User2">User2</string>
+    <string name="User3">User3</string>
+    <string name="User4">User4</string>
+    <string name="Save">Save</string>
+    <string name="Apply">Apply</string>
+    <string name="Item">Item</string>
+    <string name="Current_Data">Current Data</string>
+    <string name="Loading_Data">Loading Data</string>
     <!-- Main End -->
     <!-- Key Start-->
     <string name="Main_Light">Main Light</string>
@@ -160,8 +170,10 @@
     <string name="Excuting_Locking_Attachment">Excuting Locking Attachment.</string>
     <string name="Excute_Unlocking_Attachment">Excute Unlocking Attachment.</string>
     <string name="Excuting_Unlocking_Attachment">Excuting Unlocking Attachment.</string>
-    <string name="Do_you_want_to_turn_on_Mirror_Heat">Do you want to turn on Mirror Heat?"</string>
+    <string name="Attachment_Unlocked_Check_Locking_Status">Attachment Unlocked. Check Locking Status.</string>
+    <string name="Do_you_want_to_turn_on_Mirror_Heat">Do you want to turn on Mirror Heat?</string>
     <string name="Do_you_want_to_turn_on_Auto_Grease">Do you want to turn on Auto Grease?</string>
+    <string name="Do_not_show_again">Do not show again</string>
     <!-- Key End -->
     <!-- Menu Start -->
     <string name="Mode">Mode</string>
@@ -247,6 +259,7 @@
     <string name="RMCU">RMCU</string>
     <string name="EHCU">EHCU</string>
     <string name="ACU">ACU</string>
+    <string name="BKCU">BKCU</string>
     <string name="Software_Update">Software Update</string>
     <string name="RMCU_Machine_Information">RMCU Information</string>
     <string name="Network_Type">Network Type</string>
@@ -369,7 +382,7 @@
     <string name="Fuel_filter_element">Fuel filter element </string>
     <string name="Fuel_Pre_filter">Fuel Pre-filter</string>
     <string name="Breather_Hydraulic_tank">Breather Hydraulic tank</string>
-    <string name="Hydraulic_Tank_Air_Breather">Hydraulic Tank Air Breather</string>
+    <string name="Hydraulic_Tank_Air_Breather_Filter">Hydraulic Tank Air Breather Filter</string>
     <string name="Radiator_engine_coolant">Radiator engine coolant</string>
     <string name="Transmission_oil">Transmission oil</string>
     <string name="Transmission_oil_filter">Transmission oil filter</string>
@@ -400,6 +413,8 @@
     <string name="Internal_Speaker">Internal Speaker</string>
     <string name="External_Aux">External AUX</string>
     <string name="Language">Language</string>
+    <string name="Type_A">Type A</string>
+    <string name="Type_B">Type B</string>
     <!-- Menu Preference End -->
     <!-- Menu Multimedia Start -->
     <string name="Media_Palyer">Media Palyer</string>

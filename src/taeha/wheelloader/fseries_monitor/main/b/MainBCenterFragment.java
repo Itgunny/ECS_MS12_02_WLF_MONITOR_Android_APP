@@ -67,14 +67,19 @@ public class MainBCenterFragment extends ParentFragment{
 		InitButtonListener();
 
 		ParentActivity.ScreenIndex = ParentActivity.SCREEN_STATE_MAIN_B_TOP;
+		
 		return mRoot;
 	}
 	@Override
 	public void onResume() {
 		// TODO Auto-generated method stub
 		super.onResume();
+		Log.d(TAG,"onResume");
 		ClickFlag = true;
 		setClickEnable(ClickFlag);
+		ParentActivity.ScreenIndex = ParentActivity.SCREEN_STATE_MAIN_B_TOP;
+		ParentActivity.CheckAttachmentUnlock();
+		
 	}
 
 	@Override
@@ -151,6 +156,7 @@ public class MainBCenterFragment extends ParentFragment{
 		RPMDisplay(RPM);
 		EcoGaugeDisplay(EcoGaugeLevel,EcoGaugeStatus);
 		IconDisplay(FaultCode,Maint);
+	
 	}
 	/////////////////////////////////////////////////////////////////////
 	public void RPMDisplay(int Data){

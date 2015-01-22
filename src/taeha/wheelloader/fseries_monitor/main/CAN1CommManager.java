@@ -30,6 +30,9 @@ public class CAN1CommManager extends ICAN1CommManager.Stub{		// ttySAC1(Linux), 
 	public static int CMD_SMK		= 0x07;
 	public static int CMD_LAMP		= 0x08;
 	public static int CMD_STARTCAN	= 0x09;
+	public static int CMD_EEPROMTEST	= 0x0C;
+	public static int CMD_FLASHTEST		= 0x0D;
+	
 	
 	public static int RES_KEY		= 0x80;
 	public static int RES_LCD		= 0x81;
@@ -41,6 +44,8 @@ public class CAN1CommManager extends ICAN1CommManager.Stub{		// ttySAC1(Linux), 
 	public static int RES_SMK		= 0x87;
 	public static int RES_LAMP		= 0x88;
 	public static int RES_STARTCAN	= 0x89;
+	public static int RES_EEPROMTEST	= 0x8C;
+	public static int RES_FLASHTEST		= 0x8D;
 	
 	///////////////////////Key/////////////////////////////////
 	public static final int OFF 				= 0x00000000;
@@ -849,6 +854,10 @@ public class CAN1CommManager extends ICAN1CommManager.Stub{		// ttySAC1(Linux), 
 	public int Get_ComponentCode_1699_PGN65330_ACU(){ return service.Get_ComponentCode_1699_PGN65330_ACU();}
 	public int Get_ManufacturerCode_1700_PGN65330_ACU(){ return service.Get_ManufacturerCode_1700_PGN65330_ACU();}
 	public byte[] Get_ComponentBasicInformation_1698_PGN65330_ACU(){ return service.Get_ComponentBasicInformation_1698_PGN65330_ACU();}
+	  //////RX_COMPONENT_IDENTIFICATION_BKCU_65330///////
+	public int Get_ComponentCode_1699_PGN65330_BKCU(){ return service.Get_ComponentCode_1699_PGN65330_BKCU();}
+	public int Get_ManufacturerCode_1700_PGN65330_BKCU(){ return service.Get_ManufacturerCode_1700_PGN65330_BKCU();}
+	public byte[] Get_ComponentBasicInformation_1698_PGN65330_BKCU(){ return service.Get_ComponentBasicInformation_1698_PGN65330_BKCU();}
 	//////RX_TRIP_TIME_INFORMATION_65344///////
 	public int Get_TripTime_849_PGN65344(){ return service.Get_TripTime_849_PGN65344();}
 	//////RX_MACHINE_SECURITY_STATUS_65348///////
@@ -1606,6 +1615,39 @@ public class CAN1CommManager extends ICAN1CommManager.Stub{		// ttySAC1(Linux), 
 		callbacks.finishBroadcast();
 	}
 	
+	@Override
+	public void Callback_EEPRomTest(int Data) {
+		// TODO Auto-generated method stub
+		int N = callbacks.beginBroadcast();
+		Log.d(TAG,"Callback " + Integer.toString(N));
+		for(int i = 0; i < N; i++){
+			try {
+				callbacks.getBroadcastItem(i).EEPRomCallBack(Data);
+			} catch (RemoteException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		
+		callbacks.finishBroadcast();
+	}
+	
+	@Override
+	public void Callback_FlashTest(int Data) {
+		// TODO Auto-generated method stub
+		int N = callbacks.beginBroadcast();
+		Log.d(TAG,"Callback " + Integer.toString(N));
+		for(int i = 0; i < N; i++){
+			try {
+				callbacks.getBroadcastItem(i).FlashCallBack(Data);
+			} catch (RemoteException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		
+		callbacks.finishBroadcast();
+	}
 	
 	public static void CallbackFunc(){
 		int N = callbacks.beginBroadcast();

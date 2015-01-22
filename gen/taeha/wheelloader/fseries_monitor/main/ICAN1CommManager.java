@@ -75,6 +75,24 @@ this.Callback_KeyButton(_arg0);
 reply.writeNoException();
 return true;
 }
+case TRANSACTION_Callback_EEPRomTest:
+{
+data.enforceInterface(DESCRIPTOR);
+int _arg0;
+_arg0 = data.readInt();
+this.Callback_EEPRomTest(_arg0);
+reply.writeNoException();
+return true;
+}
+case TRANSACTION_Callback_FlashTest:
+{
+data.enforceInterface(DESCRIPTOR);
+int _arg0;
+_arg0 = data.readInt();
+this.Callback_FlashTest(_arg0);
+reply.writeNoException();
+return true;
+}
 case TRANSACTION_Callback_CID:
 {
 data.enforceInterface(DESCRIPTOR);
@@ -179,6 +197,36 @@ _reply.recycle();
 _data.recycle();
 }
 }
+@Override public void Callback_EEPRomTest(int Data) throws android.os.RemoteException
+{
+android.os.Parcel _data = android.os.Parcel.obtain();
+android.os.Parcel _reply = android.os.Parcel.obtain();
+try {
+_data.writeInterfaceToken(DESCRIPTOR);
+_data.writeInt(Data);
+mRemote.transact(Stub.TRANSACTION_Callback_EEPRomTest, _data, _reply, 0);
+_reply.readException();
+}
+finally {
+_reply.recycle();
+_data.recycle();
+}
+}
+@Override public void Callback_FlashTest(int Data) throws android.os.RemoteException
+{
+android.os.Parcel _data = android.os.Parcel.obtain();
+android.os.Parcel _reply = android.os.Parcel.obtain();
+try {
+_data.writeInterfaceToken(DESCRIPTOR);
+_data.writeInt(Data);
+mRemote.transact(Stub.TRANSACTION_Callback_FlashTest, _data, _reply, 0);
+_reply.readException();
+}
+finally {
+_reply.recycle();
+_data.recycle();
+}
+}
 @Override public void Callback_CID() throws android.os.RemoteException
 {
 android.os.Parcel _data = android.os.Parcel.obtain();
@@ -226,9 +274,11 @@ static final int TRANSACTION_OpenComport = (android.os.IBinder.FIRST_CALL_TRANSA
 static final int TRANSACTION_CloseComport = (android.os.IBinder.FIRST_CALL_TRANSACTION + 1);
 static final int TRANSACTION_LineOutfromJNI = (android.os.IBinder.FIRST_CALL_TRANSACTION + 2);
 static final int TRANSACTION_Callback_KeyButton = (android.os.IBinder.FIRST_CALL_TRANSACTION + 3);
-static final int TRANSACTION_Callback_CID = (android.os.IBinder.FIRST_CALL_TRANSACTION + 4);
-static final int TRANSACTION_Callback_AS = (android.os.IBinder.FIRST_CALL_TRANSACTION + 5);
-static final int TRANSACTION_Callback_StopCommService = (android.os.IBinder.FIRST_CALL_TRANSACTION + 6);
+static final int TRANSACTION_Callback_EEPRomTest = (android.os.IBinder.FIRST_CALL_TRANSACTION + 4);
+static final int TRANSACTION_Callback_FlashTest = (android.os.IBinder.FIRST_CALL_TRANSACTION + 5);
+static final int TRANSACTION_Callback_CID = (android.os.IBinder.FIRST_CALL_TRANSACTION + 6);
+static final int TRANSACTION_Callback_AS = (android.os.IBinder.FIRST_CALL_TRANSACTION + 7);
+static final int TRANSACTION_Callback_StopCommService = (android.os.IBinder.FIRST_CALL_TRANSACTION + 8);
 }
 public void OpenComport() throws android.os.RemoteException;
 public void CloseComport() throws android.os.RemoteException;
@@ -238,6 +288,8 @@ public int LineOutfromJNI(int spk) throws android.os.RemoteException;
 ///////////////////////////////////////////////////////////////////
 
 public void Callback_KeyButton(int Data) throws android.os.RemoteException;
+public void Callback_EEPRomTest(int Data) throws android.os.RemoteException;
+public void Callback_FlashTest(int Data) throws android.os.RemoteException;
 public void Callback_CID() throws android.os.RemoteException;
 public void Callback_AS() throws android.os.RemoteException;
 public void Callback_StopCommService() throws android.os.RemoteException;

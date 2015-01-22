@@ -445,7 +445,8 @@ void InitNewProtoclValuable() {
 		0xFF, sizeof(RX_COMPONENT_IDENTIFICATION_RMCU_65330));
 	memset((unsigned char*) &RX_COMPONENT_IDENTIFICATION_EHCU_65330,
 		0xFF, sizeof(RX_COMPONENT_IDENTIFICATION_EHCU_65330));
-
+	memset((unsigned char*) &RX_COMPONENT_IDENTIFICATION_BKCU_65330,
+		0xFF, sizeof(RX_COMPONENT_IDENTIFICATION_BKCU_65330));
 
 
 	memset((unsigned char*) &TX_DTC_INFORMATION_REQUEST_61184_11, 0xFF,
@@ -641,6 +642,10 @@ void InitNewProtoclValuable() {
 	nCIDPF	=0;
 	nCIDPS	=0;
 	nCIDTotalPacketNum	=0;
+	nBKCUPF	=0;
+	nBKCUPS	=0;
+	nBKCUTotalPacketNum	=0;
+
 
 	nRecvSeedFlag = 0;
 	nRecvPasswordResultFlag = 0;
@@ -1484,6 +1489,7 @@ void UART1_SeperateData_ACU(int Priority, int PF, int PS, unsigned char* Data)
 		break;
 	}
 }
+
 void UART1_SeperateData_BKCU(int Priority, int PF, int PS, unsigned char* Data)
 {
 	CheckBKCUComm = 1;
@@ -1491,11 +1497,43 @@ void UART1_SeperateData_BKCU(int Priority, int PF, int PS, unsigned char* Data)
 		case 255:	// 0xFF00
 		default:
 			switch (PS) {
+				case 50 :memcpy((unsigned char*)&RX_COMPONENT_IDENTIFICATION_BKCU_65330,&Data[7],8); break;
 				case 234 :memcpy((unsigned char*)&RX_BKCU_STATUS_65514,&Data[7],8); break;
 				default:
 					break;
 			}
+
 		break;
+		case 236:	// 0xEC Multi Packet TP.CM_BAM
+			nBKCUPF = Data[13];
+			nBKCUPS = Data[12];
+			nBKCUTotalPacketNum = Data[10];
+			break;
+		case 235:	// 0xEB	Multi Packet TP.DT
+			if(nBKCUPF != 0 || nBKCUPS != 0)
+			{
+				UART1_SeperateData_BKCU_Multi(Priority,nBKCUPF,nBKCUPS,Data);
+			}
+			break;
+}
+}
+void UART1_SeperateData_BKCU_Multi(int Priority, int PF, int PS, unsigned char* Data)
+{
+	switch (PF) {
+		case 255:
+		default:
+			switch (PS) {
+				case 50:
+					memcpy((unsigned char*) &gRecvMulti_BKCU[(Data[7] - 1) * 7],&Data[8], 7);
+					if (Data[7] == nBKCUTotalPacketNum) {
+						memcpy((unsigned char*) &RX_COMPONENT_IDENTIFICATION_BKCU_65330, &gRecvMulti_BKCU,sizeof(RX_COMPONENT_IDENTIFICATION_BKCU_65330));
+						nBKCUPF = nBKCUPS = nBKCUTotalPacketNum = 0;
+					}
+
+				default:
+					break;
+			}
+			break;
 	}
 }
 void SaveErrorCode_NEW_CAN2(void) {
@@ -1803,7 +1841,7 @@ void Thread_Write_UART1(void *data) {
 			Send_RTSData(&RTSData[0],nRTSDataLength,SA_MCU);
 			nCTSFlag_MCU = 0;
 		}
-		sleep(0); // �ٸ� Thread ���� ������ ���� ���
+		sleep(0);
 	}
 }
 
@@ -1842,7 +1880,7 @@ void ThreadParsing_UART3(void *data) {
 	//			UART3_DataParsing(UART3_DataCurr);
 	//			bParsingFlag_UART3 = 0;
 	//		}
-	//		sleep(0); // �ٸ� Thread ���� ������ ���� ���
+	//		sleep(0); // 占쌕몌옙 Thread 占쏙옙占쏙옙 占쏙옙占쏙옙占쏙옙 占쏙옙占쏙옙 占쏙옙占�
 	//
 	//	}
 
@@ -1933,6 +1971,14 @@ void UART3_SeparateData(unsigned char RES_Kind) {
 	case StartCANRES:
 
 		break;
+	case EEPROMTESTRES:
+		EEPRomTestCallback(cUART3_RxData[3]);
+		__android_log_print(ANDROID_LOG_INFO, "NATIVE", "EEPROMTESTRES[0x%x]",cUART3_RxData[3]);
+		break;
+	case FLASHTESTRES:
+		FlashTestCallback(cUART3_RxData[3]);
+		__android_log_print(ANDROID_LOG_INFO, "NATIVE", "FLASHTESTRES[0x%x]",cUART3_RxData[3]);
+		break;
 	}
 
 
@@ -2007,7 +2053,7 @@ void *Thread_Read_UART1(void *data)
 	while (bReadRunningFlag_UART1)
 	{
 		dwRead = 0;
-		//	��� ���� �� 1byte�� �а�, ���� �����͸� ������ �������ʹ� �� ������� �޴´�.
+		//	占쏙옙占�占쏙옙占쏙옙 占쏙옙 1byte占쏙옙 占싻곤옙, 占쏙옙占쏙옙 占쏙옙占쏙옙占싶몌옙 占쏙옙占쏙옙占쏙옙 占쏙옙占쏙옙占쏙옙占싶댐옙 占쏙옙 占쏙옙占쏙옙占쏙옙占�占쌨는댐옙.
 		if (UART1ReadFlag == 0 || UART1ReadFlag == 1)
 		{
 			dwRead = read(fd_UART1, UART1_ReadBuff, 1);
@@ -2029,7 +2075,7 @@ void *Thread_Read_UART1(void *data)
 
 		}
 
-		//	CAN PACKET ������ �ƴϸ� ���� ���� ��� ������.
+		//	CAN PACKET 占쏙옙占쏙옙占쏙옙 占싣니몌옙 占쏙옙占쏙옙 占쏙옙占쏙옙 占쏙옙占�占쏙옙占쏙옙占쏙옙.
 		if (UART1ReadFlag == 2)
 		{
 			if (UART1_ReadBuff[0] != SERIAL_RX_STX || UART1_ReadBuff[UART1_RXPACKET_SIZE - 1] != SERIAL_RX_ETX)
@@ -2079,7 +2125,7 @@ void *Thread_Read_UART1(void *data)
 				}
 			}
 		}
-		sleep(0); // �ٸ� Thread ���� ������ ���� ���
+		sleep(0); // 占쌕몌옙 Thread 占쏙옙占쏙옙 占쏙옙占쏙옙占쏙옙 占쏙옙占쏙옙 占쏙옙占�
 	}
 	__android_log_print(ANDROID_LOG_INFO, "NATIVE", "Thread_Read1 Finish\n");
 	(*glpVM)->DetachCurrentThread(glpVM);
@@ -2106,7 +2152,7 @@ void *Thread_Read_UART3(void *data) {
 
 	while (bReadRunningFlag_UART3) {
 		dwRead = 0;
-		//	��� ���� �� 1byte�� �а�, ���� �����͸� ������ �������ʹ� �� ������� �޴´�.
+		//	占쏙옙占�占쏙옙占쏙옙 占쏙옙 1byte占쏙옙 占싻곤옙, 占쏙옙占쏙옙 占쏙옙占쏙옙占싶몌옙 占쏙옙占쏙옙占쏙옙 占쏙옙占쏙옙占쏙옙占싶댐옙 占쏙옙 占쏙옙占쏙옙占쏙옙占�占쌨는댐옙.
 		if (UART3ReadFlag == 0 || UART3ReadFlag == 1) {
 			dwRead = read(fd_UART3, UART3_ReadBuff, 1);
 			__android_log_print(ANDROID_LOG_INFO, "UART3_ReadBuff","UART3_ReadBuff UART3_ReadBuff[0x%x]\n",UART3_ReadBuff[0]);
@@ -2119,7 +2165,7 @@ void *Thread_Read_UART3(void *data) {
 			//												  ,UART3_ReadBuff[8],UART3_ReadBuff[9],UART3_ReadBuff[10]);
 		}
 
-		//	CAN PACKET ������ �ƴϸ� ���� ���� ��� ������.
+		//	CAN PACKET 占쏙옙占쏙옙占쏙옙 占싣니몌옙 占쏙옙占쏙옙 占쏙옙占쏙옙 占쏙옙占�占쏙옙占쏙옙占쏙옙.
 		if (UART3ReadFlag == 2) {
 			if (UART3_ReadBuff[UART3_RXPACKET_SIZE - 1] != SERIAL_RX_ETX) {
 				//if (dwRead == UART3_RXPACKET_SIZE) {
@@ -2170,7 +2216,7 @@ void *Thread_Read_UART3(void *data) {
 				}
 			}
 		}
-		sleep(0); // �ٸ� Thread ���� ������ ���� ���
+		sleep(0); // 占쌕몌옙 Thread 占쏙옙占쏙옙 占쏙옙占쏙옙占쏙옙 占쏙옙占쏙옙 占쏙옙占�
 	}
 	__android_log_print(ANDROID_LOG_INFO, "NATIVE", "Thread_Read3 Finish\n");
 	(*glpVM)->DetachCurrentThread(glpVM);
@@ -2203,7 +2249,7 @@ void *Thread_Read_UART1(void *data)
 	while (bReadRunningFlag_UART1)
 	{
 		dwRead = 0;
-		//	��� ���� �� 1byte�� �а�, ���� �����͸� ������ �������ʹ� �� ������� �޴´�.
+		//	占쏙옙占�占쏙옙占쏙옙 占쏙옙 1byte占쏙옙 占싻곤옙, 占쏙옙占쏙옙 占쏙옙占쏙옙占싶몌옙 占쏙옙占쏙옙占쏙옙 占쏙옙占쏙옙占쏙옙占싶댐옙 占쏙옙 占쏙옙占쏙옙占쏙옙占�占쌨는댐옙.
 		if (UART1ReadFlag == 0)
 		{
 			dwRead = read(fd_UART1, &UART1_SingleBuff, 1);
@@ -2222,7 +2268,7 @@ void *Thread_Read_UART1(void *data)
 			//					,UART1_ReadBuff[10],UART1_ReadBuff[11],UART1_ReadBuff[12],UART1_ReadBuff[13],UART1_ReadBuff[14]);
 		}
 
-		//	CAN PACKET ������ �ƴϸ� ���� ���� ��� ������.
+		//	CAN PACKET 占쏙옙占쏙옙占쏙옙 占싣니몌옙 占쏙옙占쏙옙 占쏙옙占쏙옙 占쏙옙占�占쏙옙占쏙옙占쏙옙.
 		if (UART1ReadFlag == 1)
 		{
 			if (UART1_ReadBuff[0] != SERIAL_RX_STX || UART1_ReadBuff[1] != SERIAL_RX_ID || UART1_ReadBuff[UART1_RXPACKET_SIZE - 1] != SERIAL_RX_ETX)
@@ -2293,7 +2339,7 @@ void *Thread_Read_UART1(void *data)
 
 		}
 
-		sleep(0); // �ٸ� Thread ���� ������ ���� ���
+		sleep(0); // 占쌕몌옙 Thread 占쏙옙占쏙옙 占쏙옙占쏙옙占쏙옙 占쏙옙占쏙옙 占쏙옙占�
 	}
 	__android_log_print(ANDROID_LOG_INFO, "NATIVE", "Thread_Read1 Finish\n");
 	(*glpVM)->DetachCurrentThread(glpVM);
@@ -2327,7 +2373,7 @@ void *Thread_Read_UART3(void *data) {
 	while (bReadRunningFlag_UART3)
 	{
 		dwRead = 0;
-		//	��� ���� �� 1byte�� �а�, ���� �����͸� ������ �������ʹ� �� ������� �޴´�.
+		//	占쏙옙占�占쏙옙占쏙옙 占쏙옙 1byte占쏙옙 占싻곤옙, 占쏙옙占쏙옙 占쏙옙占쏙옙占싶몌옙 占쏙옙占쏙옙占쏙옙 占쏙옙占쏙옙占쏙옙占싶댐옙 占쏙옙 占쏙옙占쏙옙占쏙옙占�占쌨는댐옙.
 		if (UART3ReadFlag == 0)
 		{
 			dwRead = read(fd_UART3, &UART3_SingleBuff, 1);
@@ -2338,7 +2384,7 @@ void *Thread_Read_UART3(void *data) {
 			dwRead = read(fd_UART3, UART3_ReadBuff, UART3_RXPACKET_SIZE);
 		}
 
-		//	CMD PACKET ������ �ƴϸ� ���� ���� ��� ������.
+		//	CMD PACKET 占쏙옙占쏙옙占쏙옙 占싣니몌옙 占쏙옙占쏙옙 占쏙옙占쏙옙 占쏙옙占�占쏙옙占쏙옙占쏙옙.
 		if (UART3ReadFlag == 1)
 		{
 			if (UART3_ReadBuff[0] != SERIAL_RX_STX || UART3_ReadBuff[UART3_RXPACKET_SIZE - 1] != SERIAL_RX_ETX)
@@ -2398,7 +2444,7 @@ void *Thread_Read_UART3(void *data) {
 
 		}
 
-		sleep(0); // �ٸ� Thread ���� ������ ���� ���
+		sleep(0); // 占쌕몌옙 Thread 占쏙옙占쏙옙 占쏙옙占쏙옙占쏙옙 占쏙옙占쏙옙 占쏙옙占�
 	}
 	__android_log_print(ANDROID_LOG_INFO, "NATIVE", "Thread_Read1 Finish\n");
 	(*glpVM)->DetachCurrentThread(glpVM);
@@ -3117,6 +3163,72 @@ void KeyButtonCallback(unsigned int KeyData) {
 
 	else {
 		(*env)->CallStaticVoidMethod(env, jObject, funcKeyCallBack, KeyData);
+	}
+
+	(*glpVM)->DetachCurrentThread(glpVM);
+}
+
+void EEPRomTestCallback(unsigned int Data) {
+	jmethodID funcEEPRomTestCallBack;
+
+	if (!glpVM) {
+		__android_log_print(ANDROID_LOG_INFO, "NATIVE", "error (!glpVM)");
+		return;
+	}
+
+	JNIEnv *env = NULL;
+	(*glpVM)->AttachCurrentThread(glpVM, &env, NULL);
+	if (env == NULL || jObject == NULL) {
+		(*glpVM)->DetachCurrentThread(glpVM);
+		__android_log_print(ANDROID_LOG_INFO, "NATIVE",
+			"error (env == NULL || AVM_JM.jObject == NULL)");
+		return;
+	}
+
+	funcEEPRomTestCallBack = (*env)->GetStaticMethodID(env, jObject,
+		"EEPRomTestCallback", "(I)V");
+
+	if (funcEEPRomTestCallBack == 0) {
+		__android_log_print(ANDROID_LOG_INFO, "NATIVE",
+			"Can't fine the function.");
+		(*env)->DeleteGlobalRef(env, jObject);
+	}
+
+	else {
+		(*env)->CallStaticVoidMethod(env, jObject, funcEEPRomTestCallBack, Data);
+	}
+
+	(*glpVM)->DetachCurrentThread(glpVM);
+}
+
+void FlashTestCallback(unsigned int Data) {
+	jmethodID funcFlashTestCallBack;
+
+	if (!glpVM) {
+		__android_log_print(ANDROID_LOG_INFO, "NATIVE", "error (!glpVM)");
+		return;
+	}
+
+	JNIEnv *env = NULL;
+	(*glpVM)->AttachCurrentThread(glpVM, &env, NULL);
+	if (env == NULL || jObject == NULL) {
+		(*glpVM)->DetachCurrentThread(glpVM);
+		__android_log_print(ANDROID_LOG_INFO, "NATIVE",
+			"error (env == NULL || AVM_JM.jObject == NULL)");
+		return;
+	}
+
+	funcFlashTestCallBack = (*env)->GetStaticMethodID(env, jObject,
+		"FlashTestCallback", "(I)V");
+
+	if (funcFlashTestCallBack == 0) {
+		__android_log_print(ANDROID_LOG_INFO, "NATIVE",
+			"Can't fine the function.");
+		(*env)->DeleteGlobalRef(env, jObject);
+	}
+
+	else {
+		(*env)->CallStaticVoidMethod(env, jObject, funcFlashTestCallBack, Data);
 	}
 
 	(*glpVM)->DetachCurrentThread(glpVM);

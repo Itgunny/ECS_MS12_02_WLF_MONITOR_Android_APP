@@ -110,10 +110,11 @@ public class MainBKeyQuickCouplerFragment extends ParentFragment{
 	}
 	/////////////////////////////////////////////////////////////////////	
 	public void ClickLock(){
-		ParentActivity.showQuickCouplerPopupLocking1();
+		ParentActivity.OldScreenIndex = ParentActivity.ScreenIndex;
+		ParentActivity.showQuickCouplerPopupLocking2();
 	}
 	public void ClickUnlock(){
-		ParentActivity.showQuickCouplerPopupUnlocking1();
+		ParentActivity.showQuickCouplerPopupUnlocking2();
 	}
 	public void ClickOK(){
 		ParentActivity._MainBBaseFragment.showKeytoDefaultScreenAnimation();

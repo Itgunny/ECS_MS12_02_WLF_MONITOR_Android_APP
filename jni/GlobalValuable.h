@@ -76,6 +76,8 @@ jclass jObject;
 #define		SMKCMD			0x07
 #define		LampCMD			0x08
 #define		StartCANCMD		0x09
+#define		EEPROMTESTCMD 	0x0C
+#define		FLASHTESTCMD	0x0D
 
 
 #define		KeyRES			0x80
@@ -88,6 +90,8 @@ jclass jObject;
 #define		SMKRES			0x87
 #define		LampRES			0x88
 #define		StartCANRES		0x89
+#define		EEPROMTESTRES 	0x8C
+#define		FLASHTESTRES	0x8D
 
 #define 	BUZZERDAT_ON          		0x11    	//	Buzz On  Data
 #define 	BUZZERDAT_OFF          		0x10    	//	Buzz Off Data
@@ -190,6 +194,7 @@ unsigned char		gRecvMulti_Cluster[MULTI_BUF_SIZE];
 unsigned char		gRecvMulti_ECM[MULTI_BUF_SIZE];
 unsigned char		gRecvMulti_TCU[MULTI_BUF_SIZE];
 unsigned char		gRecvMulti_CID[MULTI_BUF_SIZE];
+unsigned char		gRecvMulti_BKCU[MULTI_BUF_SIZE];
 unsigned char		gErr_EHCU[ERR_BUF_SIZE];
 
 unsigned int	 	gErr_Tcu[ERR_BUF_SIZE];
@@ -374,6 +379,10 @@ unsigned char		nCIDPF;
 unsigned char		nCIDPS;
 unsigned char		nCIDTotalPacketNum;
 
+unsigned char		nBKCUPF;
+unsigned char		nBKCUPS;
+unsigned char		nBKCUTotalPacketNum;
+
 unsigned int		nRecvSeedFlag;
 unsigned int		nRecvPasswordResultFlag;
 unsigned int		nRecvPasswordChangeResultFlag;
@@ -462,6 +471,7 @@ COMPONENT_IDENTIFICATION_65330										RX_COMPONENT_IDENTIFICATION_CLUSTER_6533
 COMPONENT_IDENTIFICATION_65330										RX_COMPONENT_IDENTIFICATION_MONITOR_65330;
 COMPONENT_IDENTIFICATION_65330										RX_COMPONENT_IDENTIFICATION_RMCU_65330;
 COMPONENT_IDENTIFICATION_65330										RX_COMPONENT_IDENTIFICATION_EHCU_65330;
+COMPONENT_IDENTIFICATION_65330										RX_COMPONENT_IDENTIFICATION_BKCU_65330;
 
 ////////////////////////////////////////////////////
 ///////////////CAN TX DATA//////////////////////////

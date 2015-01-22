@@ -221,31 +221,30 @@
     </RelativeLayout>
     
     <RelativeLayout
-        android:id="@+id/RelativeLayout_menu_body_monitoring_version_acu"
+        android:id="@+id/RelativeLayout_menu_body_monitoring_version_bkcu"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="545dp"
-        android:layout_marginTop="240dp"
-        android:visibility="gone" >
+        android:layout_marginTop="240dp">
 
         <TextView
-	        android:id="@+id/textView_menu_body_monitoring_version_acu_title"
+	        android:id="@+id/textView_menu_body_monitoring_version_bkcu_title"
 	        android:layout_width="wrap_content"
 	        android:layout_height="wrap_content"
 	        android:background="@drawable/_selector_menu_body_monitoring_version_monitor_btn1"
 	        android:gravity="center"
 	        android:paddingRight="120dp"
-	        android:text="@string/ACU"
+	        android:text="@string/BKCU"
 	        android:textAppearance="?android:attr/textAppearanceLarge"
 	        android:textColor="@drawable/_selector_menu_body_multimedia_txt" />
 
         <TextView
-            android:id="@+id/textView_menu_body_monitoring_version_acu_data"
+            android:id="@+id/textView_menu_body_monitoring_version_bkcu_data"
             android:layout_width="120dp"
             android:layout_height="wrap_content"
-            android:layout_alignBottom="@+id/textView_menu_body_monitoring_version_acu_title"
-            android:layout_alignRight="@+id/textView_menu_body_monitoring_version_acu_title"
-            android:layout_alignTop="@+id/textView_menu_body_monitoring_version_acu_title"
+            android:layout_alignBottom="@+id/textView_menu_body_monitoring_version_bkcu_title"
+            android:layout_alignRight="@+id/textView_menu_body_monitoring_version_bkcu_title"
+            android:layout_alignTop="@+id/textView_menu_body_monitoring_version_bkcu_title"
             android:gravity="center"
             android:textAppearance="?android:attr/textAppearanceLarge"
             android:textColor="@color/menu_body_monitoring_version_data_gray" />

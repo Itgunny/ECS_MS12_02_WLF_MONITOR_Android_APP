@@ -7,6 +7,7 @@ import android.content.Context;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
@@ -79,6 +80,12 @@ public class EngineAutoShutdownCountPopup extends ParentPopup{
 		//return super.onTouchEvent(event);
 		return false;
 	
+	}
+	@Override
+	public boolean dispatchKeyEvent(KeyEvent event) {
+		// TODO Auto-generated method stub
+		//return super.dispatchKeyEvent(event);
+		return false;
 	}
 	@Override
 	public void InitValuable(){

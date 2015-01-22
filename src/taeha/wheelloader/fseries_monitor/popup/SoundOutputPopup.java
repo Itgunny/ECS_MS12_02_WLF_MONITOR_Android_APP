@@ -114,7 +114,7 @@ public class SoundOutputPopup extends ParentPopup{
 	public void ClickInternal(){
 		SoundState = Home.STATE_INTERNAL_SPK;
 		ParentActivity.SoundState = SoundState;
-		SavePref();
+		ParentActivity.SavePref();
 		try {
 			CAN1Comm.LineOutfromJNI(SoundState);
 		} catch (NullPointerException e) {
@@ -130,7 +130,7 @@ public class SoundOutputPopup extends ParentPopup{
 	public void ClickExternal(){
 		SoundState = Home.STATE_EXTERNAL_AUX;
 		ParentActivity.SoundState = SoundState;
-		SavePref();
+		ParentActivity.SavePref();
 		try {
 			CAN1Comm.LineOutfromJNI(SoundState);
 		} catch (NullPointerException e) {

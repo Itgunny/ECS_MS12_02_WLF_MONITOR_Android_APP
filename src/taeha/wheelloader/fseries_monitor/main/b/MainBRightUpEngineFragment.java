@@ -175,6 +175,7 @@ public class MainBRightUpEngineFragment extends ParentFragment{
 			return;
 		else
 			ParentActivity.StartAnimationRunningTimer();
+		
 		ParentActivity._MainBBaseFragment._MainBCenterEngineFragment = new MainBCenterEngineFragment();
 		ParentActivity._MainBBaseFragment._MainBRightUpEngineModeFragment = new MainBRightUpEngineModeFragment();
 		ParentActivity._MainBBaseFragment._MainBCenterFragment.setClickEnable(false);

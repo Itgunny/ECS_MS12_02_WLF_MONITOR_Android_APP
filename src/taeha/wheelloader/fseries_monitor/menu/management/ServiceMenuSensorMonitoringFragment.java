@@ -42,6 +42,7 @@ public class ServiceMenuSensorMonitoringFragment extends ParentFragment{
 	
 	//VALUABLE////////////////////////////////////////
 	int[] StatusValue;
+	int TotalHourmeter;
 	boolean BackgroundFlag;
 	
 	int CursurIndex;
@@ -151,6 +152,8 @@ public class ServiceMenuSensorMonitoringFragment extends ParentFragment{
 		StatusValue[17] = CAN1Comm.Get_AcceleratorPedalPositionVoltage1_710_PGN65368();
 		StatusValue[18] = CAN1Comm.Get_AcceleratorPedalPositionVoltage2_710_PGN65368();
 		StatusValue[19] = CAN1Comm.Get_AcceleratorPedalPosition1_339_PGN65368();
+		
+		TotalHourmeter = CAN1Comm.Get_Hourmeter_1601_PGN65433();
 	}
 
 	@Override
@@ -249,15 +252,18 @@ public class ServiceMenuSensorMonitoringFragment extends ParentFragment{
 //			Log.d(TAG,"StatusValue " + Integer.toString(i) + " : "+ Integer.toString(StatusValue[i]));
 //		}
 		
+		adapter.addItem(new IconTextItem( ParentActivity.getResources().getDrawable(R.drawable.menu_management_machine_monitoring_bg_dark),ParentActivity.getResources().getDrawable(R.drawable.menu_management_machine_monitoring_bg_line),ParentActivity.getResources().getString(string.Total_Hourmeter)
+				, ParentActivity.GetHourmeterString(TotalHourmeter), ParentActivity.getResources().getString(string.Hr)));
+		
 		// 1. Fan RPM : rpm
 		FanRPM = ValueReturn_1(StatusValue[0]);
 		
-		adapter.addItem(new IconTextItem(ParentActivity.getResources().getDrawable(R.drawable.menu_management_machine_monitoring_bg_dark),ParentActivity.getResources().getDrawable(R.drawable.menu_management_machine_monitoring_bg_line),"Fan rpm", Integer.toString(FanRPM), "rpm"));
+		adapter.addItem(new IconTextItem(ParentActivity.getResources().getDrawable(R.drawable.menu_management_machine_monitoring_bg_light),ParentActivity.getResources().getDrawable(R.drawable.menu_management_machine_monitoring_bg_line),"Fan rpm", Integer.toString(FanRPM), "rpm"));
 		// 2. Engine RPM : rpm
 		//EngineRPM = ValueReturn_2(StatusValue[1]);
 		EngineRPM = StatusValue[1];
-		adapter.addItem(new IconTextItem(ParentActivity.getResources().getDrawable(R.drawable.menu_management_machine_monitoring_bg_light),ParentActivity.getResources().getDrawable(R.drawable.menu_management_machine_monitoring_bg_line), "Engine rpm", Integer.toString(EngineRPM), "rpm"));
-		BackgroundFlag = true;
+		adapter.addItem(new IconTextItem(ParentActivity.getResources().getDrawable(R.drawable.menu_management_machine_monitoring_bg_dark),ParentActivity.getResources().getDrawable(R.drawable.menu_management_machine_monitoring_bg_line), "Engine rpm", Integer.toString(EngineRPM), "rpm"));
+		BackgroundFlag = false;
 		// 3. Alternator Volt. : V
 		if(StatusValue[2] != 0xffff){
 			AlternatorVolt = StatusValue[2];
@@ -339,16 +345,28 @@ public class ServiceMenuSensorMonitoringFragment extends ParentFragment{
 		// 9. Brake Pedal Position Voltage ( ClutchCutOffVolts)
 		if(StatusValue[8] != 0xFF){
 			float fBrakePedalPosVolt;
+			int nBrakePedalVolt;
+			int nBrakePedalVolt_Under;
+			
 			BrakePedalPosVolt = StatusValue[8];
+			
 			fBrakePedalPosVolt = (float)( BrakePedalPosVolt * 0.025);
+			
+			BrakePedalPosVolt *= 250;
+			nBrakePedalVolt = BrakePedalPosVolt / 10000;
+			nBrakePedalVolt_Under = (BrakePedalPosVolt % 10000) / 1000;
 			if(BackgroundFlag == true){
 				BackgroundFlag = false;
+//				adapter.addItem(new IconTextItem(ParentActivity.getResources().getDrawable(R.drawable.menu_management_machine_monitoring_bg_dark),ParentActivity.getResources().getDrawable(R.drawable.menu_management_machine_monitoring_bg_line),"Brake Pedal Pos. Voltage", 
+//						Float.toString(fBrakePedalPosVolt), "V"));
 				adapter.addItem(new IconTextItem(ParentActivity.getResources().getDrawable(R.drawable.menu_management_machine_monitoring_bg_dark),ParentActivity.getResources().getDrawable(R.drawable.menu_management_machine_monitoring_bg_line),"Brake Pedal Pos. Voltage", 
-						Float.toString(fBrakePedalPosVolt), "V"));
+						Integer.toString(nBrakePedalVolt) + "." + Integer.toString(nBrakePedalVolt_Under), "V"));
 			}else{
 				BackgroundFlag = true;
-				adapter.addItem(new IconTextItem(ParentActivity.getResources().getDrawable(R.drawable.menu_management_machine_monitoring_bg_light),ParentActivity.getResources().getDrawable(R.drawable.menu_management_machine_monitoring_bg_line),"Brake Pedal Pos. Voltage", 
-						Float.toString(fBrakePedalPosVolt), "V"));
+//				adapter.addItem(new IconTextItem(ParentActivity.getResources().getDrawable(R.drawable.menu_management_machine_monitoring_bg_light),ParentActivity.getResources().getDrawable(R.drawable.menu_management_machine_monitoring_bg_line),"Brake Pedal Pos. Voltage", 
+//						Float.toString(fBrakePedalPosVolt), "V"));
+				adapter.addItem(new IconTextItem(ParentActivity.getResources().getDrawable(R.drawable.menu_management_machine_monitoring_bg_dark),ParentActivity.getResources().getDrawable(R.drawable.menu_management_machine_monitoring_bg_line),"Brake Pedal Pos. Voltage", 
+						Integer.toString(nBrakePedalVolt) + "." + Integer.toString(nBrakePedalVolt_Under), "V"));
 			}
 			
 		}
@@ -541,6 +559,9 @@ public class ServiceMenuSensorMonitoringFragment extends ParentFragment{
 			}
 			
 		}
+		
+		
+		
 		
 		adapter.notifyDataSetChanged();
 	}

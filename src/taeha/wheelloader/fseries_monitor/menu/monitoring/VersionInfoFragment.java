@@ -38,14 +38,14 @@ public class VersionInfoFragment extends ParentFragment{
 	TextView textViewCluster;
 	TextView textViewRMCU;
 	TextView textViewEHCU;
-	TextView textViewACU;
+	TextView textViewBKCU;
 	
 	TextView textViewMonitorVersion;
 	TextView textViewMCUVersion;
 	TextView textViewClusterVersion;
 	TextView textViewRMCUVersion;
 	TextView textViewEHCUVersion;
-	TextView textViewACUVersion;
+	TextView textViewBKCUVersion;
 	
 	TextView textViewModel;
 	//////////////////////////////////////////////////
@@ -55,7 +55,7 @@ public class VersionInfoFragment extends ParentFragment{
 	byte[] ComponentBasicInformation_MCU;
 	byte[] ComponentBasicInformation_Cluster;
 	byte[] ComponentBasicInformation_Monitor;
-	byte[] ComponentBasicInformation_ACU;
+	byte[] ComponentBasicInformation_BKCU;
 	
 	byte[] ComponentBasicInformation_EHCU;
 	byte[] SoftwareIdentification_ECM;
@@ -68,6 +68,7 @@ public class VersionInfoFragment extends ParentFragment{
 	int ProgramSubVersionEHCU;
 	int ProgramSubVersionECM;
 	int ProgramSubVersionTCU;
+	int ProgramSubVersionBKCU;
 	
 	Handler HandleCursurDisplay;
 	int CursurIndex;
@@ -131,14 +132,14 @@ public class VersionInfoFragment extends ParentFragment{
 		textViewCluster = (TextView)mRoot.findViewById(R.id.textView_menu_body_monitoring_version_cluster_title);
 		textViewRMCU = (TextView)mRoot.findViewById(R.id.textView_menu_body_monitoring_version_rmcu_title);
 		textViewEHCU = (TextView)mRoot.findViewById(R.id.textView_menu_body_monitoring_version_ehcu_title);
-		textViewACU = (TextView)mRoot.findViewById(R.id.textView_menu_body_monitoring_version_acu_title);
+		textViewBKCU = (TextView)mRoot.findViewById(R.id.textView_menu_body_monitoring_version_bkcu_title);
 		
 		textViewMonitorVersion = (TextView)mRoot.findViewById(R.id.textView_menu_body_monitoring_version_monitor_data);
 		textViewMCUVersion = (TextView)mRoot.findViewById(R.id.textView_menu_body_monitoring_version_mcu_data);
 		textViewClusterVersion = (TextView)mRoot.findViewById(R.id.textView_menu_body_monitoring_version_cluster_data);
 		textViewRMCUVersion = (TextView)mRoot.findViewById(R.id.textView_menu_body_monitoring_version_rmcu_data);
 		textViewEHCUVersion = (TextView)mRoot.findViewById(R.id.textView_menu_body_monitoring_version_ehcu_data);
-		textViewACUVersion = (TextView)mRoot.findViewById(R.id.textView_menu_body_monitoring_version_acu_data);
+		textViewBKCUVersion = (TextView)mRoot.findViewById(R.id.textView_menu_body_monitoring_version_bkcu_data);
 		
 		textViewModel = (TextView)mRoot.findViewById(R.id.textView_menu_body_monitoring_version_model_data);
 	}
@@ -151,7 +152,7 @@ public class VersionInfoFragment extends ParentFragment{
 		ComponentBasicInformation_MCU = new byte[CAN1CommManager.LENGTH_COMPONENTBASICINFORMATION];
 		ComponentBasicInformation_Cluster = new byte[CAN1CommManager.LENGTH_COMPONENTBASICINFORMATION];
 		ComponentBasicInformation_Monitor = new byte[CAN1CommManager.LENGTH_COMPONENTBASICINFORMATION];
-		ComponentBasicInformation_ACU = new byte[CAN1CommManager.LENGTH_SOFTWAREIDENTIFICATION_ACU];
+		ComponentBasicInformation_BKCU = new byte[CAN1CommManager.LENGTH_COMPONENTBASICINFORMATION];
 		ComponentBasicInformation_EHCU = new byte[CAN1CommManager.LENGTH_COMPONENTBASICINFORMATION];
 		SoftwareIdentification_ECM = new byte[CAN1CommManager.LENGTH_SOFTWAREIDENTIFICATION_ECM];
 		SoftwareIdentification_TCU = new byte[CAN1CommManager.LENGTH_SOFTWAREIDENTIFICATION_TCU];
@@ -161,6 +162,7 @@ public class VersionInfoFragment extends ParentFragment{
 			ComponentBasicInformation_Cluster[i] = (byte) 0;
 			ComponentBasicInformation_Monitor[i] = (byte) 0;
 			ComponentBasicInformation_EHCU[i] = (byte) 0;
+			ComponentBasicInformation_BKCU[i] = (byte) 0;
 		}
 		
 		for(int i = 0; i < CAN1CommManager.LENGTH_SOFTWAREIDENTIFICATION_ECM; i++){
@@ -170,9 +172,6 @@ public class VersionInfoFragment extends ParentFragment{
 		for(int i = 0; i < CAN1CommManager.LENGTH_SOFTWAREIDENTIFICATION_TCU; i++){
 			SoftwareIdentification_TCU[i] = (byte) 0;
 		}
-		for(int i = 0; i < CAN1CommManager.LENGTH_SOFTWAREIDENTIFICATION_ACU; i++){
-			ComponentBasicInformation_ACU[i] = (byte) 0;
-		}
 		ProgramSubVersionRMCU = 0xFF;
 		ProgramSubVersionMCU = 0xFF;
 		ProgramSubVersionCluster = 0xFF;
@@ -180,6 +179,7 @@ public class VersionInfoFragment extends ParentFragment{
 		ProgramSubVersionEHCU = 0xFF;
 		ProgramSubVersionECM = 0xFF;
 		ProgramSubVersionTCU = 0xFF;
+		ProgramSubVersionBKCU = 0xFF;
 		
 		//CursurIndex = 1;
 		CursurDisplay(CursurIndex);
@@ -268,6 +268,16 @@ public class VersionInfoFragment extends ParentFragment{
 				ClickEHCU();
 			}
 		});		
+		textViewBKCU.setOnClickListener(new View.OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				CursurIndex = 8;
+				HandleCursurDisplay.sendMessage(HandleCursurDisplay.obtainMessage(CursurIndex));
+				ClickBKCU();
+			}
+		});	
 	}
 
 	@Override
@@ -278,15 +288,17 @@ public class VersionInfoFragment extends ParentFragment{
 		ComponentBasicInformation_Cluster = CAN1Comm.Get_ComponentBasicInformation_1698_PGN65330_CLUSTER();
 		ComponentBasicInformation_Monitor = ParentActivity.GetMonitorComponentBasicInfo();
 		ComponentBasicInformation_EHCU = CAN1Comm.Get_ComponentBasicInformation_1698_PGN65330_EHCU();
+		ComponentBasicInformation_BKCU = CAN1Comm.Get_ComponentBasicInformation_1698_PGN65330_BKCU();
 		SoftwareIdentification_ECM = CAN1Comm.Get_ComponentBasicInformation_1698_PGN65330_ECM();
 		SoftwareIdentification_TCU = CAN1Comm.Get_ComponentBasicInformation_1698_PGN65330_TCU();
-		ComponentBasicInformation_ACU = CAN1Comm.Get_ComponentBasicInformation_1698_PGN65330_ACU();
+	
 		
 		ProgramSubVersionRMCU = ParentActivity.FindProgramSubInfo(ComponentBasicInformation_RMCU);
 		ProgramSubVersionMCU = ParentActivity.FindProgramSubInfo(ComponentBasicInformation_MCU);
 		ProgramSubVersionCluster = ParentActivity.FindProgramSubInfo(ComponentBasicInformation_Cluster);
 		ProgramSubVersionMonitor = ParentActivity.FindProgramSubInfo(ComponentBasicInformation_Monitor);
 		ProgramSubVersionEHCU = ParentActivity.FindProgramSubInfo(ComponentBasicInformation_EHCU);
+		ProgramSubVersionBKCU = ParentActivity.FindProgramSubInfo(ComponentBasicInformation_BKCU);
 	}
 
 	@Override
@@ -298,7 +310,7 @@ public class VersionInfoFragment extends ParentFragment{
 		VersionDisplay(ComponentBasicInformation_RMCU,ProgramSubVersionRMCU,textViewRMCUVersion);
 		VersionDisplay(ComponentBasicInformation_Cluster,ProgramSubVersionCluster,textViewClusterVersion);
 		VersionDisplay(ComponentBasicInformation_EHCU,ProgramSubVersionEHCU,textViewEHCUVersion);
-		ACUVersionDisplay(ComponentBasicInformation_ACU,textViewACUVersion);
+		VersionDisplay(ComponentBasicInformation_BKCU,ProgramSubVersionBKCU,textViewBKCUVersion);
 	}
 	/////////////////////////////////////////////////////////////////////	
 	public void ClickOK(){
@@ -365,6 +377,15 @@ public class VersionInfoFragment extends ParentFragment{
 		ParentActivity._MenuBaseFragment.showBodyVersionInfoEHCU();
 		ParentActivity._MenuBaseFragment._VersionInfoFragment.setFirstCursurIndex(7);
 	}
+	public void ClickBKCU(){
+		if(ParentActivity.AnimationRunningFlag == true)
+			return;
+		else
+			ParentActivity.StartAnimationRunningTimer();
+		ParentActivity._MenuBaseFragment.showBodyVersionInfoBKCU();
+		ParentActivity._MenuBaseFragment._VersionInfoFragment.setFirstCursurIndex(8);
+	}
+	
 	/////////////////////////////////////////////////////////////////////
 	public void ModelDisplay(byte[] _data){
 		textViewModel.setText(ParentActivity.GetModelNameString(_data));
@@ -375,7 +396,7 @@ public class VersionInfoFragment extends ParentFragment{
 	public void VersionDisplay(byte[] _data, int _subinfo, TextView textview){
 		textview.setText(ParentActivity.GetVersionString(_data, _subinfo));
 	}
-	public void ACUVersionDisplay(byte[] _data,TextView textview){
+	public void BKCUVersionDisplay(byte[] _data,TextView textview){
 		int UpperVersion;
 		int LowerVersion;
 		UpperVersion = (_data[3] & 0xF0) >> 4;
@@ -390,7 +411,7 @@ public class VersionInfoFragment extends ParentFragment{
 	public void ClickLeft(){
 		switch (CursurIndex) {
 		case 1:
-			CursurIndex = 8;
+			CursurIndex = 9;
 			CursurDisplay(CursurIndex);
 			break;
 		case 2:
@@ -400,6 +421,7 @@ public class VersionInfoFragment extends ParentFragment{
 		case 6:
 		case 7:
 		case 8:
+		case 9:
 			CursurIndex--;
 			CursurDisplay(CursurIndex);
 			break;
@@ -417,10 +439,11 @@ public class VersionInfoFragment extends ParentFragment{
 		case 5:
 		case 6:
 		case 7:
+		case 8:
 			CursurIndex++;
 			CursurDisplay(CursurIndex);
 			break;
-		case 8:
+		case 9:
 			CursurIndex = 1;
 			CursurDisplay(CursurIndex);
 			break;
@@ -455,6 +478,9 @@ public class VersionInfoFragment extends ParentFragment{
 			ClickEHCU();
 			break;
 		case 8:
+			ClickBKCU();
+			break;
+		case 9:
 			ClickOK();
 			break;
 		default:
@@ -471,12 +497,14 @@ public class VersionInfoFragment extends ParentFragment{
 		textViewCluster.setPressed(false);
 		textViewRMCU.setPressed(false);
 		textViewEHCU.setPressed(false);
+		textViewBKCU.setPressed(false);
 		
 		textViewMonitorVersion.setTextColor(ParentActivity.getResources().getColor(R.color.white));
 		textViewMCUVersion.setTextColor(ParentActivity.getResources().getColor(R.color.white));
 		textViewClusterVersion.setTextColor(ParentActivity.getResources().getColor(R.color.white));
 		textViewRMCUVersion.setTextColor(ParentActivity.getResources().getColor(R.color.white));
-		textViewEHCUVersion.setTextColor(ParentActivity.getResources().getColor(R.color.white));		
+		textViewEHCUVersion.setTextColor(ParentActivity.getResources().getColor(R.color.white));	
+		textViewBKCUVersion.setTextColor(ParentActivity.getResources().getColor(R.color.white));
 		switch (Index) {
 		case 1:
 			textViewTCU.setPressed(true);
@@ -505,6 +533,10 @@ public class VersionInfoFragment extends ParentFragment{
 			textViewEHCUVersion.setTextColor(ParentActivity.getResources().getColor(R.color.black));	
 			break;
 		case 8:
+			textViewBKCU.setPressed(true);
+			textViewBKCUVersion.setTextColor(ParentActivity.getResources().getColor(R.color.black));	
+			break;
+		case 9:
 			imgbtnOK.setPressed(true);
 			break;
 		default:

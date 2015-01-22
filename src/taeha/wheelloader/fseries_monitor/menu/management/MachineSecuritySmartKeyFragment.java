@@ -405,7 +405,18 @@ public class MachineSecuritySmartKeyFragment extends ParentFragment{
 			CursurDisplay(CursurIndex);
 			break;
 		case 4:
+			CursurIndex--;
+			CursurDisplay(CursurIndex);
+			break;
 		case 5:
+			if(SmartKeyUse == CAN1CommManager.DATA_STATE_SMARTKEY_USE_OFF){
+				CursurIndex = 6;
+				CursurDisplay(CursurIndex);
+			}else{
+				CursurIndex--;
+				CursurDisplay(CursurIndex);
+			}
+			break;
 		case 6:
 			CursurIndex--;
 			CursurDisplay(CursurIndex);
@@ -428,14 +439,26 @@ public class MachineSecuritySmartKeyFragment extends ParentFragment{
 			CursurDisplay(CursurIndex);
 			break;
 		case 3:
+			CursurIndex++;
+			CursurDisplay(CursurIndex);
+			break;
 		case 4:
+			CursurIndex++;
+			CursurDisplay(CursurIndex);
+			break;
 		case 5:
 			CursurIndex++;
 			CursurDisplay(CursurIndex);
 			break;
 		case 6:
-			CursurIndex = 3;
-			CursurDisplay(CursurIndex);
+			if(SmartKeyUse == CAN1CommManager.DATA_STATE_SMARTKEY_USE_OFF){
+				CursurIndex = 5;
+				CursurDisplay(CursurIndex);
+			}else{
+				CursurIndex = 3;
+				CursurDisplay(CursurIndex);
+			}
+			
 			break;
 		default:
 			CursurIndex = 1;

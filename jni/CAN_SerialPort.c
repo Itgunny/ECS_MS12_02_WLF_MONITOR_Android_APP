@@ -10,14 +10,14 @@ jint Get_DTCInformationRequest_1515_PGN61184_11(JNIEnv * env, jobject this) {
 jint Get_DTCType_1510_PGN61184_11(JNIEnv * env, jobject this) {
 	return RX_DTC_INFORMATION_REQUEST_61184_11.DTCType_1510;
 }
+jint Get_MessageType_PGN61184_12(JNIEnv * env, jobject this) {
+	return RX_MAINTENANCE_REQUSET_61184_12.MessageType;
+}
 jint Get_SeqenceNumberofDTCInformationPacket_1513_PGN61184_11(JNIEnv * env,
 		jobject this) {
 	return RX_DTC_INFORMATION_REQUEST_61184_11.SeqenceNumberofDTCInformationPacket_1513;
 }
 //////RX_MAINTENANCE_REQUSET_61184_12///////
-jint Get_MessageType_PGN61184_12(JNIEnv * env, jobject this) {
-	return RX_MAINTENANCE_REQUSET_61184_12.MessageType;
-}
 jint Get_MaintenanceCommant_1097_PGN61184_12(JNIEnv * env, jobject this) {
 	return RX_MAINTENANCE_REQUSET_61184_12.MaintenanceCommant_1097;
 }
@@ -671,6 +671,22 @@ jbyteArray Get_ComponentBasicInformation_1698_PGN65330_ACU(JNIEnv * env,
 	jbyteArray Data = (*env)->NewByteArray(env, sizeof(RX_COMPONENT_IDENTIFICATION_ACU_65330.ComponentBasicInformation_1698));
 
 	(*env)->SetByteArrayRegion(env, Data, 0, sizeof(RX_COMPONENT_IDENTIFICATION_ACU_65330.ComponentBasicInformation_1698),RX_COMPONENT_IDENTIFICATION_ACU_65330.ComponentBasicInformation_1698);
+
+	return Data;
+}
+//////RX_COMPONENT_IDENTIFICATION_BKCU_65330///////
+jint Get_ComponentCode_1699_PGN65330_BKCU(JNIEnv * env, jobject this) {
+	return RX_COMPONENT_IDENTIFICATION_BKCU_65330.ComponentCode_1699;
+}
+jint Get_ManufacturerCode_1700_PGN65330_BKCU(JNIEnv * env, jobject this) {
+	return RX_COMPONENT_IDENTIFICATION_BKCU_65330.ManufacturerCode_1700;
+}
+jbyteArray Get_ComponentBasicInformation_1698_PGN65330_BKCU(JNIEnv * env,
+		jobject this) {
+
+	jbyteArray Data = (*env)->NewByteArray(env, sizeof(RX_COMPONENT_IDENTIFICATION_BKCU_65330.ComponentBasicInformation_1698));
+
+	(*env)->SetByteArrayRegion(env, Data, 0, sizeof(RX_COMPONENT_IDENTIFICATION_BKCU_65330.ComponentBasicInformation_1698),RX_COMPONENT_IDENTIFICATION_BKCU_65330.ComponentBasicInformation_1698);
 
 	return Data;
 }
@@ -3661,12 +3677,9 @@ static JNINativeMethod methods[] =
 						"Get_ComponentBasicInformation_1698_PGN65330", "()[B",
 						Get_ComponentBasicInformation_1698_PGN65330 },
 				//////RX_COMPONENT_IDENTIFICATION_CLUSTER_65330///////
-				{ "Get_ComponentCode_1699_PGN65330_CLUSTER", "()I",
-						(void*) Get_ComponentCode_1699_PGN65330_CLUSTER }, {
-						"Get_ManufacturerCode_1700_PGN65330_CLUSTER", "()I",
-						(void*) Get_ManufacturerCode_1700_PGN65330_CLUSTER },
-				{ "Get_ComponentBasicInformation_1698_PGN65330_CLUSTER", "()[B",
-						Get_ComponentBasicInformation_1698_PGN65330_CLUSTER },
+				{ "Get_ComponentCode_1699_PGN65330_CLUSTER", "()I",(void*) Get_ComponentCode_1699_PGN65330_CLUSTER },
+				{ "Get_ManufacturerCode_1700_PGN65330_CLUSTER", "()I",(void*) Get_ManufacturerCode_1700_PGN65330_CLUSTER },
+				{ "Get_ComponentBasicInformation_1698_PGN65330_CLUSTER", "()[B",Get_ComponentBasicInformation_1698_PGN65330_CLUSTER },
 				//////RX_COMPONENT_IDENTIFICATION_MONITOR_65330///////
 				{ "Get_ComponentCode_1699_PGN65330_MONITOR", "()I",
 						(void*) Get_ComponentCode_1699_PGN65330_MONITOR }, {
@@ -3703,6 +3716,10 @@ static JNINativeMethod methods[] =
 				{"Get_ComponentCode_1699_PGN65330_ACU", "()I",(void*) Get_ComponentCode_1699_PGN65330_ACU },
 				{"Get_ManufacturerCode_1700_PGN65330_ACU", "()I",(void*) Get_ManufacturerCode_1700_PGN65330_ACU },
 				{"Get_ComponentBasicInformation_1698_PGN65330_ACU", "()[B",Get_ComponentBasicInformation_1698_PGN65330_ACU },
+		        //////RX_COMPONENT_IDENTIFICATION_BKCU_65330///////
+				{ "Get_ComponentCode_1699_PGN65330_BKCU", "()I",(void*) Get_ComponentCode_1699_PGN65330_BKCU },
+				{ "Get_ManufacturerCode_1700_PGN65330_BKCU", "()I",(void*) Get_ManufacturerCode_1700_PGN65330_BKCU },
+				{ "Get_ComponentBasicInformation_1698_PGN65330_BKCU", "()[B",Get_ComponentBasicInformation_1698_PGN65330_BKCU },
 				//////RX_TRIP_TIME_INFORMATION_65344///////
 				{ "Get_TripTime_849_PGN65344", "()I",
 						(void*) Get_TripTime_849_PGN65344 },

@@ -267,6 +267,8 @@ public class MainBBaseFragment extends ParentFragment{
 		ParentActivity.ScreenIndex = ParentActivity.SCREEN_STATE_MAIN_B_TOP;
 		
 		ParentActivity.StartSeatBeltTimer();
+		
+
 		return mRoot;
 	}
 	@Override
@@ -1163,6 +1165,7 @@ public class MainBBaseFragment extends ParentFragment{
 	public void showKeyScreenAnimation(){
 		
 		if((ParentActivity.ScreenIndex < ParentActivity.SCREEN_STATE_MAIN_B_KEY_TOP) || (ParentActivity.ScreenIndex > ParentActivity.SCREEN_STATE_MAIN_B_KEY_END)){
+			CenterAnimation.StartChangeAnimation(_MainBCenterQuickFragment);
 			_BodyDisappearAnimation.StartAnimation();
 			_KeyAppearAnimation.StartAnimation();
 			_KeyTitleShiftAnimation.StartShiftAnimation();

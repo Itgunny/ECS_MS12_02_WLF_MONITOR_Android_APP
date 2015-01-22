@@ -58,7 +58,7 @@ public class MainBKeyWorkLoadErrorDetectionFragment extends ParentFragment{
 	public void onDestroyView() {
 		// TODO Auto-generated method stub
 		super.onDestroyView();
-		SavePref();
+		ParentActivity.SavePref();
 	}
 	////////////////////////////////////////////////
 	

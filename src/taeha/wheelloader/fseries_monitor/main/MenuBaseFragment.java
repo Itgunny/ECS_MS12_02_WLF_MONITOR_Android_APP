@@ -9,6 +9,7 @@ import taeha.wheelloader.fseries_monitor.main.R.string;
 import taeha.wheelloader.fseries_monitor.menu.MenuInterTitleFragment;
 import taeha.wheelloader.fseries_monitor.menu.MenuListLeftFragment;
 import taeha.wheelloader.fseries_monitor.menu.MenuListTitleFragment;
+import taeha.wheelloader.fseries_monitor.menu.UserSwitching;
 import taeha.wheelloader.fseries_monitor.menu.management.AngleCalibration;
 import taeha.wheelloader.fseries_monitor.menu.management.CalibrationFragment;
 import taeha.wheelloader.fseries_monitor.menu.management.ChangeASPhoneNumberFragment;
@@ -50,6 +51,7 @@ import taeha.wheelloader.fseries_monitor.menu.monitoring.FaultHistoryLoggedPassw
 import taeha.wheelloader.fseries_monitor.menu.monitoring.MachineMonitoringFragment;
 import taeha.wheelloader.fseries_monitor.menu.monitoring.MenuMonitoringFragment;
 import taeha.wheelloader.fseries_monitor.menu.monitoring.OperationHistoryFragment;
+import taeha.wheelloader.fseries_monitor.menu.monitoring.VersionInfoBKCUFragment;
 import taeha.wheelloader.fseries_monitor.menu.monitoring.VersionInfoClusterFragment;
 import taeha.wheelloader.fseries_monitor.menu.monitoring.VersionInfoECMFragment;
 import taeha.wheelloader.fseries_monitor.menu.monitoring.VersionInfoEHCUFragment;
@@ -132,6 +134,7 @@ public class MenuBaseFragment extends ParentFragment{
 	public VersionInfoMCUFragment				_VersionInfoMCUFragment;
 	public VersionInfoClusterFragment			_VersionInfoClusterFragment;
 	public VersionInfoEHCUFragment				_VersionInfoEHCUFragment;
+	public VersionInfoBKCUFragment				_VersionInfoBKCUFragment;
 	public VersionInfoRMCUFragment				_VersionInfoRMCUFragment;
 	public VersionInfoTCUFragment				_VersionInfoTCUFragment;
 	public VersionInfoECMFragment				_VersionInfoECMFragment;
@@ -164,6 +167,9 @@ public class MenuBaseFragment extends ParentFragment{
 	public ClockFragment							_ClockFragment;
 	public UnitFragment								_UnitFragment;
 	public DisplayTypeListFragment					_DisplayTypeListFragment;
+	
+	//UserSwitching
+	public UserSwitching							_UserSwitching;
 	//////////////////////////////////////////////////
 	
 	//ANIMATION///////////////////////////////////////
@@ -255,6 +261,7 @@ public class MenuBaseFragment extends ParentFragment{
 		_VersionInfoMCUFragment = new VersionInfoMCUFragment();
 		_VersionInfoClusterFragment = new VersionInfoClusterFragment();
 		_VersionInfoEHCUFragment = new VersionInfoEHCUFragment();
+		_VersionInfoBKCUFragment = new VersionInfoBKCUFragment();
 		_VersionInfoRMCUFragment = new VersionInfoRMCUFragment();
 		_VersionInfoTCUFragment = new VersionInfoTCUFragment();
 		_VersionInfoECMFragment = new VersionInfoECMFragment();
@@ -283,6 +290,7 @@ public class MenuBaseFragment extends ParentFragment{
 		_ClockFragment = new ClockFragment();
 		_UnitFragment = new UnitFragment();
 		_DisplayTypeListFragment = new DisplayTypeListFragment();
+		_UserSwitching = new UserSwitching();
 	}
 	
 	protected void InitValuables() {
@@ -333,6 +341,7 @@ public class MenuBaseFragment extends ParentFragment{
 		transaction.detach(_VersionInfoMCUFragment);
 		transaction.detach(_VersionInfoClusterFragment);
 		transaction.detach(_VersionInfoEHCUFragment);
+		transaction.detach(_VersionInfoBKCUFragment);
 		transaction.detach(_VersionInfoRMCUFragment);
 		transaction.detach(_VersionInfoTCUFragment);
 		transaction.detach(_VersionInfoECMFragment);
@@ -361,6 +370,8 @@ public class MenuBaseFragment extends ParentFragment{
 		transaction.detach(_ClockFragment);
 		transaction.detach(_UnitFragment);
 		transaction.detach(_DisplayTypeListFragment);
+		transaction.detach(_UserSwitching);
+		
 		
 		transaction.commit();	
 		
@@ -386,6 +397,12 @@ public class MenuBaseFragment extends ParentFragment{
 			framelayoutListBody.setVisibility(View.INVISIBLE);
 			framelayoutListLeft.setVisibility(View.INVISIBLE);
 			showBodyClockAnimation();
+			setFirstScreenIndex(0);
+		}else if(Index == Home.SCREEN_STATE_MENU_USERSWITCHING_TOP){
+			framelayoutListTitle.setVisibility(View.INVISIBLE);
+			framelayoutListBody.setVisibility(View.INVISIBLE);
+			framelayoutListLeft.setVisibility(View.INVISIBLE);
+			showBodyUserSwitchingAnimation();
 			setFirstScreenIndex(0);
 		}else if(Index == Home.SCREEN_STATE_MENU_MANAGEMENT_CALIBRATION_PRESSURE_TOP){
 			framelayoutListTitle.setVisibility(View.INVISIBLE);
@@ -522,6 +539,8 @@ public class MenuBaseFragment extends ParentFragment{
 		transaction.replace(R.id.FrameLayout_menu_list_body, _DisplayTypeListFragment);
 		transaction.commit();
 	}
+	
+	
 	
 	// Inter
 	public void showBodyEngineSpeed(){
@@ -673,6 +692,13 @@ public class MenuBaseFragment extends ParentFragment{
 		transaction.commit();
 		
 	}
+	public void showBodyVersionInfoBKCU(){
+		android.app.FragmentTransaction transaction = getFragmentManager().beginTransaction();
+		transaction.remove(_VersionInfoBKCUFragment);
+		transaction.replace(R.id.FrameLayout_menu_inter_body, _VersionInfoBKCUFragment);
+		transaction.commit();
+		
+	}
 	public void showBodyVersionInfoRMCU(){
 		android.app.FragmentTransaction transaction = getFragmentManager().beginTransaction();
 		transaction.remove(_VersionInfoRMCUFragment);
@@ -816,6 +842,13 @@ public class MenuBaseFragment extends ParentFragment{
 		android.app.FragmentTransaction transaction = getFragmentManager().beginTransaction();
 		transaction.remove(_UnitFragment);
 		transaction.replace(R.id.FrameLayout_menu_inter_body, _UnitFragment);
+		transaction.commit();
+		
+	}
+	public void showUserSwitching(){
+		android.app.FragmentTransaction transaction = getFragmentManager().beginTransaction();
+		transaction.remove(_UserSwitching);
+		transaction.replace(R.id.FrameLayout_menu_inter_body, _UserSwitching);
 		transaction.commit();
 		
 	}
@@ -990,6 +1023,10 @@ public class MenuBaseFragment extends ParentFragment{
 		showInterAnimation();
 		InterBodyAnimation.StartChangeAnimation(_VersionInfoEHCUFragment);
 	}
+	public void showBodyVersionInfoBKCUAnimation(){
+		showInterAnimation();
+		InterBodyAnimation.StartChangeAnimation(_VersionInfoBKCUFragment);
+	}
 	public void showBodyVersionInfoRMCUAnimation(){
 		showInterAnimation();
 		InterBodyAnimation.StartChangeAnimation(_VersionInfoRMCUFragment);
@@ -1074,7 +1111,10 @@ public class MenuBaseFragment extends ParentFragment{
 		showInterAnimation();
 		InterBodyAnimation.StartChangeAnimation(_UnitFragment);
 	}
-	
+	public void showBodyUserSwitchingAnimation(){
+		showInterAnimation();
+		InterBodyAnimation.StartChangeAnimation(_UserSwitching);
+	}
 	
 	/////////////////////////////////////////////////////////////////////
 	
@@ -1139,6 +1179,9 @@ public class MenuBaseFragment extends ParentFragment{
 			break;
 		case CAN1CommManager.LONG_LEFT_RIGHT:
 			ClickKeyButtonLongLeftRight();
+			break;
+		case CAN1CommManager.LONG_LEFT_RIGHT_ENTER:
+			ClickKeyButtonLongLeftRightEnter();
 			break;
 		case CAN1CommManager.MENU:
 			_MenuListTitleFragment.ClickHome();
@@ -1285,6 +1328,9 @@ public class MenuBaseFragment extends ParentFragment{
 		case Home.SCREEN_STATE_MENU_MONITORING_VERSIONINFO_EHCU:
 			_VersionInfoEHCUFragment.ClickLeft();
 			break;
+		case Home.SCREEN_STATE_MENU_MONITORING_VERSIONINFO_BKCU:
+			_VersionInfoBKCUFragment.ClickLeft();
+			break;
 		case Home.SCREEN_STATE_MENU_MONITORING_EHCUINFO_TOP:
 			_EHCUIOInfoFragment.ClickLeft();
 			break;
@@ -1384,6 +1430,10 @@ public class MenuBaseFragment extends ParentFragment{
 		case Home.SCREEN_STATE_MENU_MULTIMEDIA_TOP:
 			_MenuMultimediaFragment.ClickLeft();
 			break;
+		case Home.SCREEN_STATE_MENU_USERSWITCHING_TOP:
+			_UserSwitching.ClickLeft();
+			break;
+			
 		default:
 			break;
 		}
@@ -1523,6 +1573,9 @@ public class MenuBaseFragment extends ParentFragment{
 		case Home.SCREEN_STATE_MENU_MONITORING_VERSIONINFO_EHCU:
 			_VersionInfoEHCUFragment.ClickRight();
 			break;
+		case Home.SCREEN_STATE_MENU_MONITORING_VERSIONINFO_BKCU:
+			_VersionInfoBKCUFragment.ClickRight();
+			break;
 		case Home.SCREEN_STATE_MENU_MONITORING_EHCUINFO_TOP:
 			_EHCUIOInfoFragment.ClickRight();
 			break;
@@ -1621,6 +1674,9 @@ public class MenuBaseFragment extends ParentFragment{
 			break;
 		case Home.SCREEN_STATE_MENU_MULTIMEDIA_TOP:
 			_MenuMultimediaFragment.ClickRight();
+			break;
+		case Home.SCREEN_STATE_MENU_USERSWITCHING_TOP:
+			_UserSwitching.ClickRight();
 			break;
 		default:
 			break;
@@ -1760,6 +1816,9 @@ public class MenuBaseFragment extends ParentFragment{
 		case Home.SCREEN_STATE_MENU_MONITORING_VERSIONINFO_EHCU:
 			_VersionInfoEHCUFragment.ClickESC();
 			break;
+		case Home.SCREEN_STATE_MENU_MONITORING_VERSIONINFO_BKCU:
+			_VersionInfoBKCUFragment.ClickESC();
+			break;
 		case Home.SCREEN_STATE_MENU_MONITORING_EHCUINFO_TOP:
 			_EHCUIOInfoFragment.ClickESC();
 			break;
@@ -1858,6 +1917,9 @@ public class MenuBaseFragment extends ParentFragment{
 			break;
 		case Home.SCREEN_STATE_MENU_MULTIMEDIA_TOP:
 			_MenuMultimediaFragment.ClickESC();
+			break;
+		case Home.SCREEN_STATE_MENU_USERSWITCHING_TOP:
+			_UserSwitching.ClickESC();
 			break;
 		default:
 			break;
@@ -1997,6 +2059,9 @@ public class MenuBaseFragment extends ParentFragment{
 		case Home.SCREEN_STATE_MENU_MONITORING_VERSIONINFO_EHCU:
 			_VersionInfoEHCUFragment.ClickEnter();
 			break;
+		case Home.SCREEN_STATE_MENU_MONITORING_VERSIONINFO_BKCU:
+			_VersionInfoBKCUFragment.ClickEnter();
+			break;
 		case Home.SCREEN_STATE_MENU_MONITORING_EHCUINFO_TOP:
 			_EHCUIOInfoFragment.ClickEnter();
 			break;
@@ -2096,6 +2161,9 @@ public class MenuBaseFragment extends ParentFragment{
 		case Home.SCREEN_STATE_MENU_MULTIMEDIA_TOP:
 			_MenuMultimediaFragment.ClickEnter();
 			break;
+		case Home.SCREEN_STATE_MENU_USERSWITCHING_TOP:
+			_UserSwitching.ClickEnter();
+			break;
 		default:
 			break;
 		}
@@ -2123,6 +2191,9 @@ public class MenuBaseFragment extends ParentFragment{
 		case Home.SCREEN_STATE_MENU_MONITORING_VERSIONINFO_EHCU:
 			_VersionInfoEHCUFragment.ShowManufactureDay(true);
 			break;
+		case Home.SCREEN_STATE_MENU_MONITORING_VERSIONINFO_BKCU:
+			_VersionInfoBKCUFragment.ShowManufactureDay(true);
+			break;
 		case Home.SCREEN_STATE_MENU_MANAGEMENT_SERVICE_PW:
 			_ServiceMenuPasswordFragment.showServicePasswordNextScreen();
 			break;
@@ -2138,6 +2209,17 @@ public class MenuBaseFragment extends ParentFragment{
 		default:
 			break;
 		}
+	}
+	
+	public void ClickKeyButtonLongLeftRightEnter(){
+		switch (ParentActivity.ScreenIndex) {
+		case Home.SCREEN_STATE_MENU_MULTIMEDIA_TOP:
+			_MenuMultimediaFragment.ExcuteSettings();
+			break;
+		default:
+			break;
+		}
+	
 	}
 	/////////////////////////////////////////////////////////////////////////////////////
 }

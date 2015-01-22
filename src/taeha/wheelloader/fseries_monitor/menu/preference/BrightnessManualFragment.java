@@ -185,7 +185,7 @@ public class BrightnessManualFragment extends ParentFragment{
 		
 		ParentActivity.BrightnessManualLevel = BrightnessManualLevel;
 		ParentActivity.BrightnessManualAuto = BrightnessManualAuto;
-		SavePref();
+		ParentActivity.SavePref();
 		CAN1Comm.Set_BacklightIlluminationLevel_719_PGN61184_109(BrightnessManualLevel + 1);
 		CAN1Comm.TxCANToMCU(109);
 		CAN1Comm.TxCMDToMCU(CAN1Comm.CMD_LCD, ParentActivity.BrightnessManualLevel + 1);

@@ -12,24 +12,27 @@ import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup.LayoutParams;
+import android.widget.CheckBox;
 import android.widget.ImageButton;
 import android.widget.RelativeLayout;
 import taeha.wheelloader.fseries_monitor.main.CAN1CommManager;
 import taeha.wheelloader.fseries_monitor.main.Home;
 import taeha.wheelloader.fseries_monitor.main.ParentPopup;
 import taeha.wheelloader.fseries_monitor.main.R;
+import taeha.wheelloader.fseries_monitor.popup.QuickCouplerPopupLocking2.QuickCouplerSendTimerClass;
 
-public class QuickCouplerPopupLocking2 extends ParentPopup{
+public class QuickCouplerPopupUnlocking3 extends ParentPopup{
 	//CONSTANT////////////////////////////////////////
 	
 	//////////////////////////////////////////////////
 	//RESOURCE////////////////////////////////////////
-	RelativeLayout LayoutBG;
-	ImageButton imgbtnCancel;
+	ImageButton imgbtnLocking;
+	ImageButton imgbtnOK;
+	
+	CheckBox checkShow;
 	//////////////////////////////////////////////////
 	
 	//VALUABLE////////////////////////////////////////
-	private Timer mQuickCouplerSendTimer = null;
 	//////////////////////////////////////////////////
 	
 	//ANIMATION///////////////////////////////////////
@@ -39,32 +42,26 @@ public class QuickCouplerPopupLocking2 extends ParentPopup{
 	//TEST////////////////////////////////////////////
 	
 	//////////////////////////////////////////////////
-	public QuickCouplerPopupLocking2(Context _context) {
+	public QuickCouplerPopupUnlocking3(Context _context) {
 		super(_context);
 		// TODO Auto-generated constructor stub
-		 TAG = "QuickCouplerPopupLocking2";
+		TAG = "QuickCouplerPopupUnlocking3";
 		ParentActivity = (Home)_context;
 		inflater = (LayoutInflater)_context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-		mRoot = inflater.inflate(R.layout.popup_key_quickcoupler_locking_2, null);
+		mRoot = inflater.inflate(R.layout.popup_key_quickcoupler_unlocking_3, null);
 		this.addContentView(mRoot,  new LayoutParams(548,288));
 		this.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-		
 	}
 	
 	@Override
 	public void show() {
 		// TODO Auto-generated method stub
 		super.show();
-		Log.d(TAG,"show");
 		InitResource();
 		InitButtonListener();
 		InitValuable();
 		
-		StartQuickCouplerSendTimer();
-		CAN1Comm.TxCMDToMCU(CAN1Comm.CMD_BUZ, CAN1Comm.BUZZER_ON);	// Buzzer On
-		ParentActivity.ScreenIndex = ParentActivity.SCREEN_STATE_MAIN_B_KEY_QUICKCOUPLER_POPUP_LOCKING2;
-		ParentActivity.AttachmentStatus = CAN1CommManager.DATA_STATE_KEY_QUICKCOUPLER_LOCK;
-		ParentActivity.SavePref();
+		ParentActivity.ScreenIndex = ParentActivity.SCREEN_STATE_MAIN_B_KEY_QUICKCOUPLER_POPUP_UNLOCKING3;
 	}
 	@Override
 	public boolean onTouchEvent(MotionEvent event) {
@@ -74,43 +71,47 @@ public class QuickCouplerPopupLocking2 extends ParentPopup{
 		return false;
 	
 	}
-	
 	@Override
 	public boolean dispatchKeyEvent(KeyEvent event) {
 		// TODO Auto-generated method stub
 		//return super.dispatchKeyEvent(event);
 		return false;
 	}
-
 	@Override
 	public void dismiss() {
 		// TODO Auto-generated method stub
 		super.dismiss();
 		Log.d(TAG,"dismiss");
-		ParentActivity.ScreenIndex = ParentActivity.OldScreenIndex;
-		CancelQuickCouplerSendTimer();
-		CAN1Comm.Set_QuickCouplerOperationStatus_3448_PGN65527(CAN1CommManager.DATA_STATE_KEY_QUICKCOUPLER_OFF);
-		CAN1Comm.TxCANToMCU(247);
-		
+		ParentActivity.ScreenIndex = ParentActivity.OldScreenIndex;		
 	}
 
 	@Override
 	protected void InitResource() {
 		// TODO Auto-generated method stub
 
-		LayoutBG = (RelativeLayout)mRoot.findViewById(R.id.RelativeLayout_popup_key_quickcoupler_locking_2);
-		imgbtnCancel = (ImageButton)mRoot.findViewById(R.id.imageButton_popup_key_quickcoupler_locking_2_cancel);
+		imgbtnLocking = (ImageButton)mRoot.findViewById(R.id.imageButton_popup_key_quickcoupler_unlocking_3_lock);
+		imgbtnOK = (ImageButton)mRoot.findViewById(R.id.imageButton_popup_key_quickcoupler_unlocking_3_ok);
+		
+		checkShow = (CheckBox)mRoot.findViewById(R.id.checkBox_popup_key_quickcoupler_unlocking_3);
 	}
 
 	@Override
 	protected void InitButtonListener() {
 		// TODO Auto-generated method stub
-		imgbtnCancel.setOnClickListener(new View.OnClickListener() {
+		imgbtnLocking.setOnClickListener(new View.OnClickListener() {
 			
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
-				ClickCancel();
+				ClickLocking();
+			}
+		});
+		imgbtnOK.setOnClickListener(new View.OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				ClickOK();
 			}
 		});
 	}
@@ -127,53 +128,22 @@ public class QuickCouplerPopupLocking2 extends ParentPopup{
 		
 	}
 	///////////////////////////////////////////////////////////////////////////////
-	//Timer////////////////////////////////////////////////////////////////////////
-	public class QuickCouplerSendTimerClass extends TimerTask{
-
-		@Override
-		public void run() {
-			// TODO Auto-generated method stub
-			ParentActivity.runOnUiThread(new Runnable() {
-				
-				@Override
-				public void run() {
-					// TODO Auto-generated method stub
-					try {
-						CAN1Comm.Set_QuickCouplerOperationStatus_3448_PGN65527(CAN1CommManager.DATA_STATE_KEY_QUICKCOUPLER_LOCK);
-						CAN1Comm.TxCANToMCU(247);
-						CAN1Comm.TxCMDToMCU(CAN1Comm.CMD_BUZ, CAN1Comm.BUZZER_ON);	// Buzzer On
-						Log.d(TAG,"QuickCouplerSendTimerClass");
-					} catch (NullPointerException e) {
-						// TODO: handle exception
-						Log.e(TAG,"NullPointerException");
-					}
-				}
-			});
-			
-		}
-		
-	}
 	
-	public void StartQuickCouplerSendTimer(){
-		CancelQuickCouplerSendTimer();
-		mQuickCouplerSendTimer = new Timer();
-		mQuickCouplerSendTimer.schedule(new QuickCouplerSendTimerClass(),1,100);	
-	}
-	
-	public void CancelQuickCouplerSendTimer(){
-		if(mQuickCouplerSendTimer != null){
-			mQuickCouplerSendTimer.cancel();
-			mQuickCouplerSendTimer.purge();
-			mQuickCouplerSendTimer = null;
-		}
-		
-	}
 	///////////////////////////////////////////////////////////////////////////////
 
-	public void ClickCancel(){
-		Log.d(TAG,"ClickCancel");
-		CAN1Comm.TxCMDToMCU(CAN1Comm.CMD_BUZ, CAN1Comm.BUZZER_OFF);	// Buzzer Off
+	public void ClickOK(){
+		if(checkShow.isChecked() == true){
+			ParentActivity.AttachmentStatus = CAN1CommManager.DATA_STATE_KEY_QUICKCOUPLER_LOCK;
+		}else{
+			ParentActivity.AttachmentStatus = CAN1CommManager.DATA_STATE_KEY_QUICKCOUPLER_UNLOCK;
+		}
+		ParentActivity.SavePref();
 		this.dismiss();
 	}
 
+	public void ClickLocking(){
+		ParentActivity.OldScreenIndex = ParentActivity.ScreenIndex;
+		ParentActivity.showQuickCouplerPopupLocking2();
+		this.dismiss();
+	}
 }
