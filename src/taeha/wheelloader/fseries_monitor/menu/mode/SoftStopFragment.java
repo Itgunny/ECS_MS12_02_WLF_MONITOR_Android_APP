@@ -94,7 +94,7 @@ public class SoftStopFragment extends ParentFragment{
 		InitValuables();
 		InitButtonListener();
 		
-		ParentActivity.ScreenIndex = ParentActivity.SCREEN_STATE_MENU_MODE_HYD_SOFTSTOP;
+		ParentActivity.ScreenIndex = ParentActivity.SCREEN_STATE_MENU_MODE_HYD_SOFTSTOP_TOP;
 		ParentActivity._MenuBaseFragment._MenuInterTitleFragment.SetTitleText(ParentActivity.getResources().getString(R.string.Soft_End_Stop));
 		HandleCursurDisplay = new Handler() {
 			@Override
@@ -332,6 +332,27 @@ public class SoftStopFragment extends ParentFragment{
 		
 	}
 	/////////////////////////////////////////////////////////////////////	
+	public void SetDefault(){
+		BoomUp = CAN1CommManager.DATA_STATE_SOFTSTOP_BOOMUP_ON;
+		BoomDown = CAN1CommManager.DATA_STATE_SOFTSTOP_BOOMDOWN_ON;
+		BucketIn = CAN1CommManager.DATA_STATE_SOFTSTOP_BUCKETIN_ON;
+		BucketOut = CAN1CommManager.DATA_STATE_SOFTSTOP_BUCKETOUT_ON;
+		
+		CAN1Comm.Set_SoftStopBoomUp_2337_PGN61184_203(BoomUp);
+		CAN1Comm.Set_SoftStopBoomDown_2338_PGN61184_203(BoomDown);
+		CAN1Comm.Set_SoftStopBucketIn_2339_PGN61184_203(BucketIn);
+		CAN1Comm.Set_SoftStopBucketOut_2340_PGN61184_203(BucketOut);
+		CAN1Comm.TxCANToMCU(203);
+		CAN1Comm.Set_SoftStopBoomUp_2337_PGN61184_203(3);
+		CAN1Comm.Set_SoftStopBoomDown_2338_PGN61184_203(3);
+		CAN1Comm.Set_SoftStopBucketIn_2339_PGN61184_203(3);
+		CAN1Comm.Set_SoftStopBucketOut_2340_PGN61184_203(3);
+		
+		BoomUpDisplay(BoomUp);
+		BoomDownDisplay(BoomDown);
+		BucketInDisplay(BucketIn);
+		BucketOutDisplay(BucketOut);
+	}
 	public void ClickOK(){
 		if(ParentActivity.AnimationRunningFlag == true)
 			return;
@@ -379,25 +400,8 @@ public class SoftStopFragment extends ParentFragment{
 		ParentActivity._MenuBaseFragment._MenuModeFragment.setFirstScreen(Home.SCREEN_STATE_MENU_MODE_HYD_TOP);
 	}
 	public void ClickDefault(){
-		BoomUp = CAN1CommManager.DATA_STATE_SOFTSTOP_BOOMUP_ON;
-		BoomDown = CAN1CommManager.DATA_STATE_SOFTSTOP_BOOMDOWN_ON;
-		BucketIn = CAN1CommManager.DATA_STATE_SOFTSTOP_BUCKETIN_ON;
-		BucketOut = CAN1CommManager.DATA_STATE_SOFTSTOP_BUCKETOUT_ON;
+		ParentActivity.showSoftStopInit();
 		
-		CAN1Comm.Set_SoftStopBoomUp_2337_PGN61184_203(BoomUp);
-		CAN1Comm.Set_SoftStopBoomDown_2338_PGN61184_203(BoomDown);
-		CAN1Comm.Set_SoftStopBucketIn_2339_PGN61184_203(BucketIn);
-		CAN1Comm.Set_SoftStopBucketOut_2340_PGN61184_203(BucketOut);
-		CAN1Comm.TxCANToMCU(203);
-		CAN1Comm.Set_SoftStopBoomUp_2337_PGN61184_203(3);
-		CAN1Comm.Set_SoftStopBoomDown_2338_PGN61184_203(3);
-		CAN1Comm.Set_SoftStopBucketIn_2339_PGN61184_203(3);
-		CAN1Comm.Set_SoftStopBucketOut_2340_PGN61184_203(3);
-		
-		BoomUpDisplay(BoomUp);
-		BoomDownDisplay(BoomDown);
-		BucketInDisplay(BucketIn);
-		BucketOutDisplay(BucketOut);
 	}
 	public void ClickBoomUpOn(){
 		radioBoomUpOn.setChecked(true);

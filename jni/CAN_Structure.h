@@ -1983,7 +1983,7 @@ typedef struct
 
 	unsigned char	RMCUPowerSource_1594:2;
 	unsigned char	RMCUBoxOpeningStatus:2;
-	unsigned char	NetworkCommunicationStatus1_1622;
+	unsigned char	NetworkCommunicationStatus1_1622:2;
 	unsigned char	Reserved0:2;
 
 	unsigned char	PositionUpdateStatus_852:2;

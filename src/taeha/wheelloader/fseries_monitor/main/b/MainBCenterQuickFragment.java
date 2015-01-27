@@ -97,4 +97,8 @@ public class MainBCenterQuickFragment extends MainBCenterFragment{
 		ClickFlag = flag;
 		imgbtnOption.setClickable(ClickFlag);
 	}
+	
+	public void Clickable(boolean flag){
+		imgbtnOption.setClickable(flag);
+	}
 }

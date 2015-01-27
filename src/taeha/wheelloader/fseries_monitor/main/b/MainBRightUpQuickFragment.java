@@ -114,5 +114,7 @@ public class MainBRightUpQuickFragment extends ParentFragment{
 			imgViewIcon.setImageResource(R.drawable.main_quick_icon_fault);
 		}
 	}
-	
+	public void Clickable(boolean flag){
+		LayoutBG.setClickable(flag);
+	}
 }

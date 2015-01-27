@@ -433,7 +433,7 @@ public class SpeedometerFreqFragment extends ParentFragment{
 		setNumber(0);
 	}
 	public void ClickNumBack(){
-		setNumber(0);
+		setBack();
 	}
 	public void ClickNumNext(){
 		setNext();
@@ -546,7 +546,35 @@ public class SpeedometerFreqFragment extends ParentFragment{
 				+ SpeedometerFreq_Num_Under1 * 10
 				+ SpeedometerFreq_Num_Under01;
 	}
-	
+	public void setBack(){
+		int Focus = radioGroupNum.getCheckedRadioButtonId();
+		switch (Focus) {
+		case R.id.radio_menu_body_mode_speedometerfreq_data_10:
+			radioNumUnder01.setChecked(true);
+			EnableAllNumButton();
+			break;
+		case R.id.radio_menu_body_mode_speedometerfreq_data_1:
+			radioNum10.setChecked(true);
+			DisableHalfNumButton();
+			break;
+		case R.id.radio_menu_body_mode_speedometerfreq_data_under_1:
+			radioNum1.setChecked(true);
+			EnableAllNumButton();
+			break;
+		case R.id.radio_menu_body_mode_speedometerfreq_data_under_01:
+			radioNumUnder1.setChecked(true);
+			EnableAllNumButton();
+			break;
+
+		default:
+			
+			break;
+		}
+		SpeedometerFreq = SpeedometerFreq_Num10 * 1000
+				+ SpeedometerFreq_Num1 * 100
+				+ SpeedometerFreq_Num_Under1 * 10
+				+ SpeedometerFreq_Num_Under01;
+	}
 	public void InitText(){
 		
 		SpeedometerFreq = CAN1Comm.Get_SpeedometerFrequency_534_PGN61184_106();

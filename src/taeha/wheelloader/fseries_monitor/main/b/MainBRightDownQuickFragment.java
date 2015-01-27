@@ -136,5 +136,9 @@ public class MainBRightDownQuickFragment extends ParentFragment{
 			imgViewIcon.setImageResource(R.drawable.main_quick_icon_maint);
 		}
 	}
+	public void Clickable(boolean flag){
+		LayoutBG.setClickable(flag);
+		imgbtnMultimedia.setClickable(flag);
+	}
 	
 }

@@ -13,9 +13,9 @@ import android.view.ViewGroup;
 
 public class VersionInfoRMCUFragment extends VersionInfoDetailFragment{
 	/////////////////CONSTANT////////////////////////////////////////////
-	protected static final int STATE_VERSION					 			= 0;
-	protected static final int STATE_SERIALNUMBER					 		= 1;
-	protected static final int STATE_MAKER					 				= 2;
+	protected static final int STATE_SERIALNUMBER					 		= 0;
+	protected static final int STATE_MAKER					 				= 1;
+	protected static final int STATE_VERSION					 			= 2;
 	private static final int STATE_NETWORKTYPE					 			= 3;
 	private static final int STATE_NUMOFDATA					 			= 4;
 	private static final int STATE_BACKUPBATTERYVOLT					 	= 5;
@@ -167,8 +167,6 @@ public class VersionInfoRMCUFragment extends VersionInfoDetailFragment{
 		LockLevel = CAN1Comm.Get_LockLevel_823_PGN65348();
 		
 		ProgramSubVersion = ParentActivity.FindProgramSubInfo(ComponentBasicInformation);
-		
-		Log.d(TAG,"RMCUNetworkType : " + Integer.toString(RMCUNetworkType));
 	}
 
 	@Override

@@ -121,4 +121,9 @@ public class MainBLeftDownQuickFragment extends ParentFragment{
 		if(intent != null)
 			startActivity(intent);
 	}
+	
+	public void Clickable(boolean flag){
+		LayoutBG.setClickable(flag);
+		imgbtnMirror.setClickable(flag);
+	}
 }

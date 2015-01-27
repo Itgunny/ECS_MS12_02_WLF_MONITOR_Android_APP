@@ -28,6 +28,7 @@ import taeha.wheelloader.fseries_monitor.popup.QuickCouplerPopupUnlocking1;
 import taeha.wheelloader.fseries_monitor.popup.QuickCouplerPopupUnlocking2;
 import taeha.wheelloader.fseries_monitor.popup.QuickCouplerPopupUnlocking3;
 import taeha.wheelloader.fseries_monitor.popup.ShiftModePopup;
+import taeha.wheelloader.fseries_monitor.popup.SoftStopInitPopup;
 import taeha.wheelloader.fseries_monitor.popup.SoundOutputPopup;
 import taeha.wheelloader.fseries_monitor.popup.SpeedometerInitPopup;
 import taeha.wheelloader.fseries_monitor.popup.TCLockUpPopup;
@@ -65,8 +66,8 @@ public class Home extends Activity {
 	//
 	public static final int VERSION_HIGH 		= 1;
 	public static final int VERSION_LOW 		= 0;
-	public static final int VERSION_SUB_HIGH 	= 2;
-	public static final int VERSION_SUB_LOW 	= 9;
+	public static final int VERSION_SUB_HIGH 	= 3;
+	public static final int VERSION_SUB_LOW 	= 0;
 	////1.0.2.3
 	// UI B 안 최초 적용 2014.12.10
 	////1.0.2.4
@@ -115,6 +116,24 @@ public class Home extends Activity {
 	// 카메라 후진 기어 연동 시 후진 기어 Check 시간 변경 (1000ms -> 400ms) 2015.01.14
 	// ECM Version 정보 표시 화면 Crash 버그 수정 2015.01.14
 	// Latest Odometer Reset 안되는 문제 수정 2015.01.14
+	////1.0.3.0 2015.01.27
+	// 라디오 버튼 디자인 변경
+	// 카메라 화면에서 Off 버튼 적용
+	// 스피커 아이콘 2가지로 변경 (Off / On)
+	// 스마트키 Timeout 에러 추가
+	// 카메라화면 진입 후 와이퍼 진입 시 메인화면으로 나오는 문제 수정
+	// WorkLoad Cancel 버튼 삭제
+	// QuickCoupler 팝업 UI 추가
+	// User Switching 기능 추가
+	// BKCU 버전정보 추가
+	// Battery Voltage 범위 밖일 경우 - 로 표시
+	// Soft End Stop Default Popup 추가
+	// 메인의 장비정보 선택 화면에서 라디오 버튼 빠르게 선택 시 선택이 잘 안되는 문제 수정
+	// 가상 키패드 뒷 영역 터치되는 문제 수정
+	// Main Buzzer Stop 후 잠깐동안 Buzzer 켜지는 문제 수정
+	// 시간 설정 커서 이미지 변경 
+	// AS Phone Number RMCU와 연동
+	// 
 	//////////////////////////////////////////////////////////////////////////////////////
 	
 	// TAG
@@ -199,7 +218,9 @@ public class Home extends Activity {
 	public  static final int SCREEN_STATE_MENU_MODE_HYD_DETENT								= 0x21220000;
 	public  static final int SCREEN_STATE_MENU_MODE_HYD_BUCKETPRIORITY						= 0x21230000;
 	public  static final int SCREEN_STATE_MENU_MODE_HYD_MAXFLOW								= 0x21240000;
-	public  static final int SCREEN_STATE_MENU_MODE_HYD_SOFTSTOP							= 0x21250000;
+	public  static final int SCREEN_STATE_MENU_MODE_HYD_SOFTSTOP_TOP						= 0x21250000;
+	public  static final int SCREEN_STATE_MENU_MODE_HYD_SOFTSTOP_INIT						= 0x21251000;
+	public  static final int SCREEN_STATE_MENU_MODE_HYD_SOFTSTOP_END						= 0x2125FFFF;
 	public  static final int SCREEN_STATE_MENU_MODE_HYD_END									= 0x212FFFFF;
 	
 	public  static final int SCREEN_STATE_MENU_MODE_ETC_TOP									= 0x21300000;
@@ -328,7 +349,11 @@ public class Home extends Activity {
 	public  static final int SCREEN_STATE_MAIN_ESL_PASSWORD									= 0x41000000;
 	public  static final int SCREEN_STATE_MAIN_ESL_CHECK_END								= 0x4FFFFFFF;
 	
-	public  static final int SCREEN_STATE_MAIN_CAMERA										= 0x50000000;
+	public  static final int SCREEN_STATE_MAIN_CAMERA_TOP									= 0x50000000;
+	public  static final int SCREEN_STATE_MAIN_CAMERA_KEY									= 0x51000000;
+	public  static final int SCREEN_STATE_MAIN_CAMERA_GEAR									= 0x52000000;
+	public  static final int SCREEN_STATE_MAIN_CAMERA_END									= 0x5FFFFFFF;
+
 	
 	public  static final int SCREEN_STATE_MAIN_ENDING										= 0x60000000;
 	
@@ -480,7 +505,7 @@ public class Home extends Activity {
 	public WorkLoadWeighingInitPopup1		_WorkLoadWeighingInitPopup1;
 	public WorkLoadWeighingInitPopup2		_WorkLoadWeighingInitPopup2;
 	public EHCUErrorPopup					_EHCUErrorPopup;
-	
+	public SoftStopInitPopup				_SoftStopInitPopup;
 	
 	//Toast
 	public WeighingErrorToast				_WeighingErrorToast;
@@ -706,6 +731,7 @@ public class Home extends Activity {
 		_WorkLoadWeighingInitPopup1 = new WorkLoadWeighingInitPopup1(this);
 		_WorkLoadWeighingInitPopup2 = new WorkLoadWeighingInitPopup2(this);
 		_EHCUErrorPopup = new EHCUErrorPopup(this);
+		_SoftStopInitPopup = new SoftStopInitPopup(this);
 		
 		_WeighingErrorToast = new WeighingErrorToast(this);
 	}
@@ -726,7 +752,7 @@ public class Home extends Activity {
 	}
 	public void ExcuteCamActivitybyKey(){
 		OldScreenIndex = ScreenIndex;
-		ScreenIndex = SCREEN_STATE_MAIN_CAMERA;
+		ScreenIndex = SCREEN_STATE_MAIN_CAMERA_KEY;
 		CAN1Comm.CameraOnFlag = CAN1CommManager.STATE_CAMERA_MANUAL;
 		CAN1Comm.TxCMDToMCU(CAN1Comm.CMD_CAM, CameraOrder1);
 	}
@@ -1188,7 +1214,7 @@ public class Home extends Activity {
 		public void ASCallBack() throws RemoteException {
 			// TODO Auto-generated method stub
 			Log.i(TAG, "ASCallBack");
-		//	SaveASPhoneNumber();
+			SaveASPhoneNumber();
 		}
 
 		@Override
@@ -1318,7 +1344,7 @@ public class Home extends Activity {
 	}
 	public void CameraDisplay(){
 		if((ScreenIndex >= SCREEN_STATE_MAIN_B_TOP && ScreenIndex <= SCREEN_STATE_MAIN_B_END)
-		|| ScreenIndex == SCREEN_STATE_MAIN_CAMERA){
+		|| ScreenIndex == SCREEN_STATE_MAIN_CAMERA_GEAR){
 			if(CameraReverseMode == CAN1CommManager.DATA_STATE_CAMERA_REVERSE_ON){
 				if(SelectGearDirection == CAN1CommManager.DATA_INDEX_SELECTGEAR_DIR_R){	
 					CameraReverseOffCount = 0; 
@@ -1332,7 +1358,7 @@ public class Home extends Activity {
 					}
 					if(CameraReverseOnCount >= 2){
 						OldScreenIndex = ScreenIndex;
-						ScreenIndex = SCREEN_STATE_MAIN_CAMERA;
+						ScreenIndex = SCREEN_STATE_MAIN_CAMERA_GEAR;
 						CAN1Comm.CameraOnFlag = CAN1CommManager.STATE_CAMERA_REVERSEGEAR;
 						CAN1Comm.TxCMDToMCU(CAN1Comm.CMD_CAM, CameraOrder1);
 						imgViewCameraScreen.setClickable(false);
@@ -1500,7 +1526,7 @@ public class Home extends Activity {
 	public void KeyButtonClick(final int Data){
 		Log.d(TAG,"KeyButtonClick");
 		// TODO Auto-generated method stub
-		if(ScreenIndex == SCREEN_STATE_MAIN_CAMERA){
+		if(ScreenIndex == SCREEN_STATE_MAIN_CAMERA_KEY){
 			if(Data == CAN1CommManager.CAMERA
 			|| Data == CAN1CommManager.ESC){
 				ExitCam();
@@ -1876,6 +1902,20 @@ public class Home extends Activity {
 		}
 		
 		HomeDialog = _EHCUErrorPopup;
+		HomeDialog.show();
+	}
+	public void showSoftStopInit(){
+		if(AnimationRunningFlag == true)
+			return;
+		else
+			StartAnimationRunningTimer();
+		
+		if(HomeDialog != null){
+			HomeDialog.dismiss();
+			HomeDialog = null;
+		}
+		
+		HomeDialog = _SoftStopInitPopup;
 		HomeDialog.show();
 	}
 	
@@ -2402,7 +2442,8 @@ public class Home extends Activity {
 		
 		long_Battery = (_Battery  & 0xFFFFFFFFL);
 		if(long_Battery > 500){
-			long_Battery = 0;
+		//	long_Battery = 0;
+			return "-";
 		}
 		
 		nBattery = (int) (long_Battery / 10);
@@ -2469,6 +2510,42 @@ public class Home extends Activity {
 		
 		if(AbsMin < 10)
 			strMin = "0" + Integer.toString(AbsMin);
+		else
+			strMin = Integer.toString(AbsMin);
+	
+		
+		return strMin;
+	}
+	public String GetHour2(int _Hour){
+		String strHour = "";
+		int AbsHour;
+		AbsHour = Math.abs(_Hour);
+		
+		if(AbsHour > 12){
+			AbsHour = AbsHour - 12;
+		}
+		
+		if(AbsHour == 0){
+			AbsHour = 12;
+		}
+		if(AbsHour < 10)
+			strHour =  Integer.toString(AbsHour);
+		else
+			strHour = Integer.toString(AbsHour);
+		
+		return strHour;
+	}
+	public String GetMin2(int _Min){
+		String strMin = "";
+		int AbsMin;
+		
+		AbsMin = Math.abs(_Min);
+		if(AbsMin >= 60){
+			AbsMin = 0;
+		}
+		
+		if(AbsMin < 10)
+			strMin = Integer.toString(AbsMin);
 		else
 			strMin = Integer.toString(AbsMin);
 	

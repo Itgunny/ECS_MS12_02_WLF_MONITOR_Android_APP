@@ -1244,8 +1244,11 @@ public class MenuBaseFragment extends ParentFragment{
 		case Home.SCREEN_STATE_MENU_MODE_HYD_MAXFLOW:
 			_MaxFlowFragment.ClickLeft();
 			break;
-		case Home.SCREEN_STATE_MENU_MODE_HYD_SOFTSTOP:
+		case Home.SCREEN_STATE_MENU_MODE_HYD_SOFTSTOP_TOP:
 			_SoftStopFragment.ClickLeft();
+			break;
+		case Home.SCREEN_STATE_MENU_MODE_HYD_SOFTSTOP_INIT:
+			ParentActivity._SoftStopInitPopup.ClickLeft();
 			break;
 		case Home.SCREEN_STATE_MENU_MODE_ETC_TOP:
 			_MenuModeFragment._MenuModeETCFragment.ClickLeft();
@@ -1489,8 +1492,11 @@ public class MenuBaseFragment extends ParentFragment{
 		case Home.SCREEN_STATE_MENU_MODE_HYD_MAXFLOW:
 			_MaxFlowFragment.ClickRight();
 			break;
-		case Home.SCREEN_STATE_MENU_MODE_HYD_SOFTSTOP:
+		case Home.SCREEN_STATE_MENU_MODE_HYD_SOFTSTOP_TOP:
 			_SoftStopFragment.ClickRight();
+			break;
+		case Home.SCREEN_STATE_MENU_MODE_HYD_SOFTSTOP_INIT:
+			ParentActivity._SoftStopInitPopup.ClickRight();
 			break;
 		case Home.SCREEN_STATE_MENU_MODE_ETC_TOP:
 			_MenuModeFragment._MenuModeETCFragment.ClickRight();
@@ -1732,8 +1738,11 @@ public class MenuBaseFragment extends ParentFragment{
 		case Home.SCREEN_STATE_MENU_MODE_HYD_MAXFLOW:
 			_MaxFlowFragment.ClickESC();
 			break;
-		case Home.SCREEN_STATE_MENU_MODE_HYD_SOFTSTOP:
+		case Home.SCREEN_STATE_MENU_MODE_HYD_SOFTSTOP_TOP:
 			_SoftStopFragment.ClickESC();
+			break;
+		case Home.SCREEN_STATE_MENU_MODE_HYD_SOFTSTOP_INIT:
+			ParentActivity._SoftStopInitPopup.ClickESC();
 			break;
 		case Home.SCREEN_STATE_MENU_MODE_ETC_TOP:
 			_MenuModeFragment._MenuModeETCFragment.ClickESC();
@@ -1975,8 +1984,11 @@ public class MenuBaseFragment extends ParentFragment{
 		case Home.SCREEN_STATE_MENU_MODE_HYD_MAXFLOW:
 			_MaxFlowFragment.ClickEnter();
 			break;
-		case Home.SCREEN_STATE_MENU_MODE_HYD_SOFTSTOP:
+		case Home.SCREEN_STATE_MENU_MODE_HYD_SOFTSTOP_TOP:
 			_SoftStopFragment.ClickEnter();
+			break;
+		case Home.SCREEN_STATE_MENU_MODE_HYD_SOFTSTOP_INIT:
+			ParentActivity._SoftStopInitPopup.ClickEnter();
 			break;
 		case Home.SCREEN_STATE_MENU_MODE_ETC_TOP:
 			_MenuModeFragment._MenuModeETCFragment.ClickEnter();

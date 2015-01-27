@@ -219,6 +219,7 @@ public class MachineSecuritySmartKeyFragment extends ParentFragment{
 	protected void UpdateUI() {
 		// TODO Auto-generated method stub
 		TagCountDisplay(TagCount);
+		ManagementDisplay(Result);
 	}
 	/////////////////////////////////////////////////////////////////////	
 	public void ClickOK(){
@@ -306,45 +307,51 @@ public class MachineSecuritySmartKeyFragment extends ParentFragment{
 		textViewTagNum.setText(str);
 	}
 	public void ManagementDisplay(int Data){
-		switch (Data) {
-		case CAN1CommManager.DATA_STATE_1ST_TAG_REG_SUCCESS:
-			textViewDetail.setText(ParentActivity.getResources().getString(string._1st_user_tag_registered));
-			break;
-		case CAN1CommManager.DATA_STATE_2ND_TAG_REG_SUCCESS:
-			textViewDetail.setText(ParentActivity.getResources().getString(string._2nd_user_tag_registered));
-			break;
+		if(CAN1Comm.Get_RecvSMK_Flag() == 1){
+			switch (Data) {
+			case CAN1CommManager.DATA_STATE_1ST_TAG_REG_SUCCESS:
+				textViewDetail.setText(ParentActivity.getResources().getString(string._1st_user_tag_registered));
+				break;
+			case CAN1CommManager.DATA_STATE_2ND_TAG_REG_SUCCESS:
+				textViewDetail.setText(ParentActivity.getResources().getString(string._2nd_user_tag_registered));
+				break;
 
-		case CAN1CommManager.DATA_STATE_TAG_NO_REALIZE:
-			
-			break;
-		case CAN1CommManager.DATA_STATE_FAIL:
-			if(ButtonIndex == CAN1CommManager.DATA_INDEX_TAG_REGISTRATION){
-				textViewDetail.setText(ParentActivity.getResources().getString(string.Registration_failed));
-			}else if(ButtonIndex == CAN1CommManager.DATA_INDEX_TAG_ELIMINATION){
-				textViewDetail.setText(ParentActivity.getResources().getString(string.Delete_failed));
+			case CAN1CommManager.DATA_STATE_TAG_NO_REALIZE:
+				
+				break;
+			case CAN1CommManager.DATA_STATE_FAIL:
+				if(ButtonIndex == CAN1CommManager.DATA_INDEX_TAG_REGISTRATION){
+					textViewDetail.setText(ParentActivity.getResources().getString(string.Registration_failed));
+				}else if(ButtonIndex == CAN1CommManager.DATA_INDEX_TAG_ELIMINATION){
+					textViewDetail.setText(ParentActivity.getResources().getString(string.Delete_failed));
+				}
+				break;
+				
+			case CAN1CommManager.DATA_STATE_TAG_ALREADY_REG:
+				textViewDetail.setText(ParentActivity.getResources().getString(string.Tag_already_registered));
+				break;
+			case CAN1CommManager.DATA_STATE_TAG_ELIMINATION_SUCESS:
+				textViewDetail.setText(ParentActivity.getResources().getString(string.All_user_tags_deleted));
+				break;
+			case CAN1CommManager.DATA_STATE_3RD_TAG_REG_SUCCESS:
+				textViewDetail.setText(ParentActivity.getResources().getString(string._3rd_user_tag_registered));
+				break;
+			case CAN1CommManager.DATA_STATE_4TH_TAG_REG_SUCCESS:
+				textViewDetail.setText(ParentActivity.getResources().getString(string._4th_user_tag_registered));
+				break;
+			case CAN1CommManager.DATA_STATE_5TH_TAG_REG_SUCCESS:
+				textViewDetail.setText(ParentActivity.getResources().getString(string._5th_user_tag_registered));
+				break;
+			default:
+				textViewDetail.setText("");
+				break;
 			}
-			break;
-			
-		case CAN1CommManager.DATA_STATE_TAG_ALREADY_REG:
-			textViewDetail.setText(ParentActivity.getResources().getString(string.Tag_already_registered));
-			break;
-		case CAN1CommManager.DATA_STATE_TAG_ELIMINATION_SUCESS:
-			textViewDetail.setText(ParentActivity.getResources().getString(string.All_user_tags_deleted));
-			break;
-		case CAN1CommManager.DATA_STATE_3RD_TAG_REG_SUCCESS:
-			textViewDetail.setText(ParentActivity.getResources().getString(string._3rd_user_tag_registered));
-			break;
-		case CAN1CommManager.DATA_STATE_4TH_TAG_REG_SUCCESS:
-			textViewDetail.setText(ParentActivity.getResources().getString(string._4th_user_tag_registered));
-			break;
-		case CAN1CommManager.DATA_STATE_5TH_TAG_REG_SUCCESS:
-			textViewDetail.setText(ParentActivity.getResources().getString(string._5th_user_tag_registered));
-			break;
-		default:
-			textViewDetail.setText("");
-			break;
+			Log.d(TAG,"Data : " + Integer.toString(Data));
 		}
-		Log.d(TAG,"Data : " + Integer.toString(Data));
+		
+	}
+	public void TimeoutDisplay(){
+		textViewDetail.setText(ParentActivity.getResources().getString(string.Time_Out));
 	}
 	/////////////////////////////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////////
@@ -366,7 +373,7 @@ public class MachineSecuritySmartKeyFragment extends ParentFragment{
 				@Override
 				public void run() {
 					// TODO Auto-generated method stub
-					ManagementDisplay(Result);
+					TimeoutDisplay();
 				}
 				
 			});

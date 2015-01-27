@@ -176,7 +176,6 @@ public class WiperFragment extends ParentFragment{
 	@Override
 	protected void GetDataFromNative() {
 		// TODO Auto-generated method stub
-		
 	}
 
 	@Override
@@ -190,6 +189,8 @@ public class WiperFragment extends ParentFragment{
 			return;
 		else
 			ParentActivity.StartAnimationRunningTimer();
+		
+		
 		if(ParentActivity.OldScreenIndex == Home.SCREEN_STATE_MAIN_B_TOP){
 			ParentActivity._MainChangeAnimation.StartChangeAnimation(ParentActivity._MainBBaseFragment);
 			ParentActivity.OldScreenIndex = 0;

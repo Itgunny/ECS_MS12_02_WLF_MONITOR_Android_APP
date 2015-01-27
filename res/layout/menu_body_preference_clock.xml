@@ -18,47 +18,67 @@
             android:layout_centerHorizontal="true"
             android:layout_centerVertical="true"
             android:orientation="vertical" >
-
             <RadioGroup
                 android:id="@+id/radioGroup_menu_body_preference_clock_data"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
                 android:orientation="horizontal" >
 
                 <RadioButton
-                    android:id="@+id/radio_menu_body_preference_clock_hour"
+                    android:id="@+id/radio_menu_body_preference_clock_hour_10"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:background="@drawable/_selector_menu_body_preference_clock_num_bg"
+                    android:background="@drawable/_selector_menu_body_mode_speedometer_num_bg"
                     android:button="@drawable/blank_1x1"
                     android:checked="true"
                     android:gravity="center"
-                    android:text="00"
+                    android:text="0"
+                    android:textSize="50sp"
+                    android:textStyle="bold" />
+
+                <RadioButton
+                    android:id="@+id/radio_menu_body_preference_clock_hour_1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/_selector_menu_body_mode_speedometer_num_bg"
+                    android:button="@drawable/blank_1x1"
+                    android:gravity="center"
+                    android:text="0"
                     android:textSize="50sp"
                     android:textStyle="bold" />
                 
                 <TextView
-                    android:id="@+id/textView_menu_body_preference_clock_data_colon"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="10dp"
-                    android:gravity="center"
-                    android:text=":"
-                    android:textAppearance="?android:attr/textAppearanceLarge"
-                    android:textColor="@color/gray"
-                    android:textSize="70sp" />
+	                android:id="@+id/textView_menu_body_preference_clock_data_colon"
+	                android:layout_width="wrap_content"
+	                android:layout_height="wrap_content"
+	                android:layout_marginLeft="10dp"
+	                android:gravity="center"
+	                android:text=":"
+	                android:textAppearance="?android:attr/textAppearanceLarge"
+	                android:textSize="70sp" />
 
                 <RadioButton
-                    android:id="@+id/radio_menu_body_preference_clock_min"
+                    android:id="@+id/radio_menu_body_preference_clock_min_10"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:background="@drawable/_selector_menu_body_preference_clock_num_bg"
+                    android:background="@drawable/_selector_menu_body_mode_speedometer_num_bg"
                     android:button="@drawable/blank_1x1"
                     android:gravity="center"
-                    android:text="00"
+                    android:text="0"
                     android:textSize="50sp"
                     android:textStyle="bold" />
- 
+                
+                <RadioButton
+                    android:id="@+id/radio_menu_body_preference_clock_min_1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/_selector_menu_body_mode_speedometer_num_bg"
+                    android:button="@drawable/blank_1x1"
+                    android:gravity="center"
+                    android:text="0"
+                    android:textSize="50sp"
+                    android:textStyle="bold" />
 
             </RadioGroup>
             

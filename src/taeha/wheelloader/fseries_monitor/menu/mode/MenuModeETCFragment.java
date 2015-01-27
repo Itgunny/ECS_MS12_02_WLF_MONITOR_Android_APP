@@ -157,6 +157,7 @@ public class MenuModeETCFragment extends MenuBodyList_ParentFragment{
 		CursurDisplay(CursurIndex);
 		ParentActivity._MenuBaseFragment._MenuModeFragment.SetModeFocusIndex(MenuModeFragment.STATE_CURSUR_LIST);
 		ParentActivity._MenuBaseFragment._MenuModeFragment._MenuModeTabFragment.setClickImageETC();
+		ParentActivity.OldScreenIndex = Home.SCREEN_STATE_MENU_MODE_ETC_TOP;
 	}
 
 	@Override
@@ -166,11 +167,12 @@ public class MenuModeETCFragment extends MenuBodyList_ParentFragment{
 			return;
 		else
 			ParentActivity.StartAnimationRunningTimer();
+		
 		ParentActivity._MenuBaseFragment.showBodyCameraSettingAnimation();
 		CursurIndex = 4;
 		CursurDisplay(CursurIndex);
 		ParentActivity._MenuBaseFragment._MenuModeFragment.SetModeFocusIndex(MenuModeFragment.STATE_CURSUR_LIST);
-		ParentActivity._MenuBaseFragment._MenuModeFragment._MenuModeTabFragment.setClickImageETC();
+		ParentActivity._MenuBaseFragment._MenuModeFragment._MenuModeTabFragment.setClickImageETC();		
 	}
 
 	@Override

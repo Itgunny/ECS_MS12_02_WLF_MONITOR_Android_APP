@@ -278,7 +278,8 @@ public class MainBUpperMenuBarFragment extends ParentFragment{
 				imgViewBuzzer070Left.setImageResource(R.drawable.main_menubar_icon_buzzer_on);
 				break;
 			case CAN1CommManager.BUZZER_STOP:
-				imgViewBuzzer070Left.setImageResource(R.drawable.main_menubar_icon_buzzer_off);
+//				imgViewBuzzer070Left.setImageResource(R.drawable.main_menubar_icon_buzzer_off);
+				imgViewBuzzer070Left.setImageResource(R.drawable.main_menubar_icon_buzzer);
 				break;
 			}
 		}else{
@@ -294,7 +295,8 @@ public class MainBUpperMenuBarFragment extends ParentFragment{
 				imgViewBuzzerNormal.setImageResource(R.drawable.main_menubar_icon_buzzer_on);
 				break;
 			case CAN1CommManager.BUZZER_STOP:
-				imgViewBuzzerNormal.setImageResource(R.drawable.main_menubar_icon_buzzer_off);
+//				imgViewBuzzerNormal.setImageResource(R.drawable.main_menubar_icon_buzzer_off);
+				imgViewBuzzerNormal.setImageResource(R.drawable.main_menubar_icon_buzzer);
 				break;
 
 			}

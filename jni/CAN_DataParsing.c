@@ -1204,34 +1204,34 @@ void UART1_SeperateData_EHCU_Multi(int Priority, int PF, int PS, unsigned char* 
 		case 0x06:		// 0x18XXXX
 		default:
 			switch (PF) {
-		case 254:	// 0xFE
-			switch (PS) {
-		case 202:		// 0xCA
-			memcpy((unsigned char*) &gRecvMulti_EHCU_06[(Data[7] - 1) * 7],&Data[8], 7);
-			if (Data[7] == nEHCU06TotalPacketNum) {
-				ehcu_s_or_m = 2;
-				nEHCUTotalError = nTempEHCUTotalError;
-				memcpy((unsigned char*) &rx_error_ehcu_m, &gRecvMulti_EHCU_06,sizeof(rx_error_ehcu_m));
-				nEHCU06PF = nEHCU06PS = nEHCU06TotalPacketNum = nTempEHCUTotalError= 0;
+			case 254:	// 0xFE
+				switch (PS) {
+			case 202:		// 0xCA
+				memcpy((unsigned char*) &gRecvMulti_EHCU_06[(Data[7] - 1) * 7],&Data[8], 7);
+				if (Data[7] == nEHCU06TotalPacketNum) {
+					ehcu_s_or_m = 2;
+					nEHCUTotalError = nTempEHCUTotalError;
+					memcpy((unsigned char*) &rx_error_ehcu_m, &gRecvMulti_EHCU_06,sizeof(rx_error_ehcu_m));
+					nEHCU06PF = nEHCU06PS = nEHCU06TotalPacketNum = nTempEHCUTotalError= 0;
 
-			}
-			break;
-		default:
-			break;
-			}
-			break;
-		case 255:
-			switch (PS) {
-		case 50:
-			memcpy((unsigned char*) &gRecvMulti_EHCU_06[(Data[7]- 1) * 7], &Data[8], 7);
-			if (Data[7] == nEHCU06TotalPacketNum) {
-				memcpy((unsigned char*) &RX_COMPONENT_IDENTIFICATION_EHCU_65330,&gRecvMulti_EHCU_06,sizeof(RX_COMPONENT_IDENTIFICATION_EHCU_65330));
-				nEHCU06PF = nEHCU06PS = nEHCU06TotalPacketNum = 0;
+				}
+				break;
+			default:
+				break;
+				}
+				break;
+			case 255:
+				switch (PS) {
+			case 50:
+				memcpy((unsigned char*) &gRecvMulti_EHCU_06[(Data[7]- 1) * 7], &Data[8], 7);
+				if (Data[7] == nEHCU06TotalPacketNum) {
+					memcpy((unsigned char*) &RX_COMPONENT_IDENTIFICATION_EHCU_65330,&gRecvMulti_EHCU_06,sizeof(RX_COMPONENT_IDENTIFICATION_EHCU_65330));
+					nEHCU06PF = nEHCU06PS = nEHCU06TotalPacketNum = 0;
 
-			}
-			break;
-		default:
-			break;
+				}
+				break;
+			default:
+				break;
 			}
 		default:
 			break;
@@ -1261,10 +1261,10 @@ void UART1_SeperateData_RMCU(int Priority, int PF, int PS, unsigned char* Data)
 		case 255:	// 0xFF00
 		default:
 			switch (PS) {
-		case 49 : memcpy((unsigned char*)&RX_RMCU_STATUS_65329,&Data[7],8); break;
-		case 50 :memcpy((unsigned char*)&RX_COMPONENT_IDENTIFICATION_RMCU_65330,&Data[7],8); break;
-		default:
-			break;
+				case 49 : memcpy((unsigned char*)&RX_RMCU_STATUS_65329,&Data[7],8); break;
+				case 50 :memcpy((unsigned char*)&RX_COMPONENT_IDENTIFICATION_RMCU_65330,&Data[7],8); break;
+				default:
+					break;
 			}
 			break;
 		case 236:	// 0xEC Multi Packet TP.CM_BAM

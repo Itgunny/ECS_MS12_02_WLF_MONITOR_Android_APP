@@ -42,7 +42,7 @@ public class MainBVirtualKeyFragment extends ParentFragment{
 	//////////////////////////////////////////////////
 	
 	//VALUABLE////////////////////////////////////////
-	boolean bScreenOnFlag;
+	public boolean bScreenOnFlag;
 	//////////////////////////////////////////////////
 	
 	//ANIMATION///////////////////////////////////////
@@ -268,11 +268,25 @@ public class MainBVirtualKeyFragment extends ParentFragment{
 			ParentActivity._MainBBaseFragment.showVirtualKeytoQuickScreenAnimation();
 			layoutBG.setBackgroundResource(R.drawable.main_virtual_key_bg_up);
 			bScreenOnFlag = false;
+			ParentActivity._MainBBaseFragment._MainBLeftUpQuickFragment.Clickable(true);
+			ParentActivity._MainBBaseFragment._MainBLeftDownQuickFragment.Clickable(true);
+			ParentActivity._MainBBaseFragment._MainBRightUpQuickFragment.Clickable(true);
+			ParentActivity._MainBBaseFragment._MainBRightDownQuickFragment.Clickable(true);
+			ParentActivity._MainBBaseFragment._MainBCenterQuickFragment.Clickable(true);
 		}else{
 			ParentActivity._MainBBaseFragment.showVritualKeyScreenAnimation();
 			layoutBG.setBackgroundResource(R.drawable.main_virtual_key_bg_down);
 			bScreenOnFlag = true;
+			
+			ParentActivity._MainBBaseFragment._MainBLeftUpQuickFragment.Clickable(false);
+			ParentActivity._MainBBaseFragment._MainBLeftDownQuickFragment.Clickable(false);
+			ParentActivity._MainBBaseFragment._MainBRightUpQuickFragment.Clickable(false);
+			ParentActivity._MainBBaseFragment._MainBRightDownQuickFragment.Clickable(false);
+			ParentActivity._MainBBaseFragment._MainBCenterQuickFragment.Clickable(false);
 		}
+		
+
+
 	}
 	public void ClickMainLight(){
 		ParentActivity._MainBBaseFragment.showMainLightAnimation();

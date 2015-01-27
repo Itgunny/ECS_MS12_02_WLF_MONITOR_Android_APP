@@ -47,8 +47,10 @@ public class ClockFragment extends ParentFragment{
 	ImageButton imgbtnBack;
 	TextView textViewNext;
 	
-	RadioButton radioHour;
-	RadioButton radioMin;
+	RadioButton radioHour10;
+	RadioButton radioHour1;
+	RadioButton radioMin10;
+	RadioButton radioMin1;
 	TextView textViewAMPM;
 	//////////////////////////////////////////////////
 	
@@ -134,8 +136,10 @@ public class ClockFragment extends ParentFragment{
 		
 		textViewAMPM = (TextView)mRoot.findViewById(R.id.textView_menu_body_preference_clock_ampm);
 		
-		radioHour = (RadioButton)mRoot.findViewById(R.id.radio_menu_body_preference_clock_hour);
-		radioMin = (RadioButton)mRoot.findViewById(R.id.radio_menu_body_preference_clock_min);
+		radioHour10 = (RadioButton)mRoot.findViewById(R.id.radio_menu_body_preference_clock_hour_10);
+		radioHour1 = (RadioButton)mRoot.findViewById(R.id.radio_menu_body_preference_clock_hour_1);
+		radioMin10 = (RadioButton)mRoot.findViewById(R.id.radio_menu_body_preference_clock_min_10);
+		radioMin1 = (RadioButton)mRoot.findViewById(R.id.radio_menu_body_preference_clock_min_1);
 	}
 
 	protected void InitValuables() {
@@ -302,20 +306,36 @@ public class ClockFragment extends ParentFragment{
 				ClickAMPM();
 			}
 		});	
-		radioHour.setOnClickListener(new View.OnClickListener() {
+		radioHour10.setOnClickListener(new View.OnClickListener() {
 			
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
-				ClickHour();
+				ClickHour10();
 			}
 		});	
-		radioMin.setOnClickListener(new View.OnClickListener() {
+		radioHour1.setOnClickListener(new View.OnClickListener() {
 			
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
-				ClickMin();
+				ClickHour1();
+			}
+		});	
+		radioMin10.setOnClickListener(new View.OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				ClickMin10();
+			}
+		});
+		radioMin1.setOnClickListener(new View.OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				ClickMin1();
 			}
 		});	
 		
@@ -348,7 +368,7 @@ public class ClockFragment extends ParentFragment{
 		}
 	
 
-		CAN1Comm.TxCMDToMCU(CAN1Comm.CMD_RTC,0x01,0x01,0x01,0x01,Hour,Min,0x00,0x00);
+		CAN1Comm.TxCMDToMCU(CAN1Comm.CMD_RTC,ParentActivity.Year,ParentActivity.Month,ParentActivity.Date,0x01,Hour,Min,0x00,0x00);
 		
 	
 	}
@@ -466,7 +486,12 @@ public class ClockFragment extends ParentFragment{
 		ClockDisplay(Hour,Min);
 	}
 	public void ClickNumBack(){
-
+		if(ClockIndex <= 0)
+			ClockIndex = 3;
+		else 
+			ClockIndex--;
+		CheckButton();
+		ClockDisplay(Hour,Min);
 	}
 	public void ClickNumNext(){
 		if(ClockIndex >= 3)
@@ -485,13 +510,23 @@ public class ClockFragment extends ParentFragment{
 			ClockDisplay(Hour,Min);
 		}
 	}
-	public void ClickHour(){
+	public void ClickHour10(){
 		ClockIndex = 0;
 		CheckButton();
 		ClockDisplay(Hour,Min);
 	}
-	public void ClickMin(){
+	public void ClickHour1(){
+		ClockIndex = 1;
+		CheckButton();
+		ClockDisplay(Hour,Min);
+	}
+	public void ClickMin10(){
 		ClockIndex = 2;
+		CheckButton();
+		ClockDisplay(Hour,Min);
+	}
+	public void ClickMin1(){
+		ClockIndex = 3;
 		CheckButton();
 		ClockDisplay(Hour,Min);
 	}
@@ -667,28 +702,72 @@ public class ClockFragment extends ParentFragment{
 		int TempHour;
 		if(ParentActivity.GetAMPM(Hour) == ParentActivity.CLOCK_AM){
 			textViewAMPM.setText(ParentActivity.getResources().getString(string.AM));
+			if(Hour == 0){
+				Hour10 = 1;
+				Hour1 = 2;
+				Min10 = Min / 10;
+				Min1 = Min % 10;
+			}else{
+				Hour10 = Hour / 10;
+				Hour1 = Hour % 10;
+				Min10 = Min / 10;
+				Min1 = Min % 10;
+			}
 			AMFlag = true;
-			Hour10 = Hour / 10;
-			Hour1 = Hour % 10;
-			Min10 = Min / 10;
-			Min1 = Min % 10;
+			
 		}else{
 			textViewAMPM.setText(ParentActivity.getResources().getString(string.PM));
 			AMFlag = false;
-			TempHour = Hour - 12;
-			Hour10 = TempHour / 10;
-			Hour1 = TempHour % 10;
-			Min10 = Min / 10;
-			Min1 = Min % 10;
+			if(Hour == 12){
+				TempHour = Hour;
+				Hour10 = TempHour / 10;
+				Hour1 = TempHour % 10;
+				Min10 = Min / 10;
+				Min1 = Min % 10;
+			}else{
+				TempHour = Hour - 12;
+				Hour10 = TempHour / 10;
+				Hour1 = TempHour % 10;
+				Min10 = Min / 10;
+				Min1 = Min % 10;
+			}
+			
 		}
-		radioHour.setText(ParentActivity.GetHour(Hour));
-		radioMin.setText(ParentActivity.GetMin(Min));
-		if(ClockIndex == 0 || ClockIndex == 1){
-			radioHour.setChecked(true);
-			radioMin.setChecked(false);
-		}else if(ClockIndex == 2 || ClockIndex == 3){
-			radioHour.setChecked(false);
-			radioMin.setChecked(true);
+//		radioHour10.setText(ParentActivity.GetHour2(Hour10));
+//		radioHour1.setText(ParentActivity.GetHour2(Hour1));
+//		radioMin10.setText(ParentActivity.GetMin2(Min10));
+//		radioMin1.setText(ParentActivity.GetMin2(Min1));
+		radioHour10.setText(Integer.toString(Hour10));
+		radioHour1.setText(Integer.toString(Hour1));
+		radioMin10.setText(Integer.toString(Min10));
+		radioMin1.setText(Integer.toString(Min1));
+		switch (ClockIndex) {
+		case 0:
+			radioHour10.setChecked(true);
+			radioHour1.setChecked(false);
+			radioMin10.setChecked(false);
+			radioMin1.setChecked(false);
+			break;
+		case 1:
+			radioHour10.setChecked(false);
+			radioHour1.setChecked(true);
+			radioMin10.setChecked(false);
+			radioMin1.setChecked(false);
+			break;
+		case 2:
+			radioHour10.setChecked(false);
+			radioHour1.setChecked(false);
+			radioMin10.setChecked(true);
+			radioMin1.setChecked(false);
+			break;
+		case 3:
+			radioHour10.setChecked(false);
+			radioHour1.setChecked(false);
+			radioMin10.setChecked(false);
+			radioMin1.setChecked(true);
+			break;
+		default:
+			break;
 		}
 	}
 	/////////////////////////////////////////////////////////////////////

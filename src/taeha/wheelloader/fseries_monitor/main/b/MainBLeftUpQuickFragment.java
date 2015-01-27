@@ -107,5 +107,7 @@ public class MainBLeftUpQuickFragment extends ParentFragment{
 		ParentActivity.OldScreenIndex = Home.SCREEN_STATE_MAIN_B_TOP;
 		ParentActivity._MenuBaseFragment.setFirstScreenIndex(Home.SCREEN_STATE_MENU_USERSWITCHING_TOP);
 	}
-	
+	public void Clickable(boolean flag){
+		LayoutBG.setClickable(flag);
+	}
 }

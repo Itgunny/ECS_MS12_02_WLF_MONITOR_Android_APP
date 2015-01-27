@@ -4945,7 +4945,7 @@ static JNINativeMethod methods[] =
 				{"Get_RX_RES_KEY_DetentSetting", "()I",(void*) Get_RX_RES_KEY_DetentSetting},
 				{"Get_RX_RES_KEY_FineModulation", "()I",(void*) Get_RX_RES_KEY_FineModulation},
 				{"Get_RX_RES_KEY_FN", "()I",(void*) Get_RX_RES_KEY_FN},
-				{"Get_gErr_Mcu_TotalPacket", "()I",(void*) Get_RX_RES_KEY_FN},
+				{"Get_gErr_Mcu_TotalPacket", "()I",(void*) Get_gErr_Mcu_TotalPacket},
 				{"Get_gErr_Ecu_TotalPacket", "()I",(void*) Get_gErr_Ecu_TotalPacket},
 				{"Get_gErr_Tcu_TotalPacket", "()I",(void*) Get_gErr_Tcu_TotalPacket},
 				{"Get_gErr_Mcu_TotalPacket_Logged", "()I",(void*) Get_gErr_Mcu_TotalPacket_Logged},
