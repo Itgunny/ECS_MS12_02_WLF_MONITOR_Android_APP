@@ -62,6 +62,8 @@ public class QuickCouplerPopupUnlocking3 extends ParentPopup{
 		InitValuable();
 		
 		ParentActivity.ScreenIndex = ParentActivity.SCREEN_STATE_MAIN_B_KEY_QUICKCOUPLER_POPUP_UNLOCKING3;
+		
+		CAN1Comm.SetFNFlag(false);
 	}
 	@Override
 	public boolean onTouchEvent(MotionEvent event) {
@@ -77,12 +79,14 @@ public class QuickCouplerPopupUnlocking3 extends ParentPopup{
 		//return super.dispatchKeyEvent(event);
 		return false;
 	}
+	
 	@Override
 	public void dismiss() {
 		// TODO Auto-generated method stub
 		super.dismiss();
 		Log.d(TAG,"dismiss");
-		ParentActivity.ScreenIndex = ParentActivity.OldScreenIndex;		
+		//ParentActivity.ScreenIndex = ParentActivity.OldScreenIndex;
+		ParentActivity.ScreenIndex = Home.SCREEN_STATE_MAIN_B_TOP;
 	}
 
 	@Override
@@ -138,12 +142,14 @@ public class QuickCouplerPopupUnlocking3 extends ParentPopup{
 			ParentActivity.AttachmentStatus = CAN1CommManager.DATA_STATE_KEY_QUICKCOUPLER_UNLOCK;
 		}
 		ParentActivity.SavePref();
+		CAN1Comm.SetFNFlag(true);
 		this.dismiss();
 	}
 
 	public void ClickLocking(){
 		ParentActivity.OldScreenIndex = ParentActivity.ScreenIndex;
 		ParentActivity.showQuickCouplerPopupLocking2();
+		CAN1Comm.SetFNFlag(true);
 		this.dismiss();
 	}
 }

@@ -64,6 +64,8 @@ public class QuickCouplerPopupUnlocking2 extends ParentPopup{
 		ParentActivity.ScreenIndex = ParentActivity.SCREEN_STATE_MAIN_B_KEY_QUICKCOUPLER_POPUP_UNLOCKING2;
 		ParentActivity.AttachmentStatus = CAN1CommManager.DATA_STATE_KEY_QUICKCOUPLER_UNLOCK;
 		ParentActivity.SavePref();
+		
+		CAN1Comm.SetFNFlag(false);
 	}
 	@Override
 	public boolean onTouchEvent(MotionEvent event) {
@@ -172,6 +174,7 @@ public class QuickCouplerPopupUnlocking2 extends ParentPopup{
 	public void ClickCancel(){
 		Log.d(TAG,"ClickCancel");
 		CAN1Comm.TxCMDToMCU(CAN1Comm.CMD_BUZ, CAN1Comm.BUZZER_OFF);	// Buzzer Off
+		CAN1Comm.SetFNFlag(true);
 		this.dismiss();
 	}
 

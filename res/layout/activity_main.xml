@@ -22,5 +22,12 @@
         android:layout_height="match_parent"
         android:clickable="false"
         android:src="@drawable/blank_800x480" />
+    
+    <ImageView
+        android:id="@+id/imageView_main_ending"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:src="@drawable/blank_800x480"
+        android:visibility="invisible" />
 
 </RelativeLayout>

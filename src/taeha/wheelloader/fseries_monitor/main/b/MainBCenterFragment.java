@@ -79,7 +79,6 @@ public class MainBCenterFragment extends ParentFragment{
 		setClickEnable(ClickFlag);
 		ParentActivity.ScreenIndex = ParentActivity.SCREEN_STATE_MAIN_B_TOP;
 		ParentActivity.CheckAttachmentUnlock();
-		
 	}
 
 	@Override
@@ -135,7 +134,9 @@ public class MainBCenterFragment extends ParentFragment{
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
 				if(ClickFlag == true)
-					ClickBG();	
+					ClickBG();
+				
+			
 			}
 		});
 	}

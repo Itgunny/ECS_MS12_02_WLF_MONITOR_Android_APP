@@ -57,6 +57,7 @@ public class QuickCouplerPopupLocking1 extends ParentPopup{
 		
 		
 		ParentActivity.ScreenIndex = ParentActivity.SCREEN_STATE_MAIN_B_KEY_QUICKCOUPLER_POPUP_LOCKING1;
+		
 	}
 
 	@Override
@@ -64,6 +65,7 @@ public class QuickCouplerPopupLocking1 extends ParentPopup{
 		// TODO Auto-generated method stub
 		super.dismiss();
 		ParentActivity.ScreenIndex = ParentActivity.SCREEN_STATE_MAIN_B_KEY_QUICKCOUPLER;
+		
 	}
 
 	@Override

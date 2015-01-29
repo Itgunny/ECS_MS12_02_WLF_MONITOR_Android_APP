@@ -52,6 +52,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.ServiceConnection;
 import android.content.SharedPreferences;
+import android.graphics.drawable.AnimationDrawable;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.Menu;
@@ -67,7 +68,7 @@ public class Home extends Activity {
 	public static final int VERSION_HIGH 		= 1;
 	public static final int VERSION_LOW 		= 0;
 	public static final int VERSION_SUB_HIGH 	= 3;
-	public static final int VERSION_SUB_LOW 	= 1;
+	public static final int VERSION_SUB_LOW 	= 2;
 	////1.0.2.3
 	// UI B 안 최초 적용 2014.12.10
 	////1.0.2.4
@@ -133,9 +134,16 @@ public class Home extends Activity {
 	// Main Buzzer Stop 후 잠깐동안 Buzzer 켜지는 문제 수정
 	// 시간 설정 커서 이미지 변경 
 	// AS Phone Number RMCU와 연동 
-	////1.0.3.0
+	////1.0.3.1 2015.01.29
 	// 숫자 키패드 적용
-	
+	// 버튼으로 카메라 진입 시 화면 터치로 나가는 기능 누락된 부분 추가
+	// 시간 설정 10시일 경우 시간위치에 0 입력 시 12시로 바뀌는 문제 수정
+	// 카메라 후진기어 연동 시 키버튼 인식하는 문제 수정
+	// Sensor Monitoring, Version Info 스크롤에 좌우키로 스크롤 조절하는 기능 추가
+	// Quick Coupler 팝업 중 Camera 진입되는 문제 수정
+	////1.0.3.2
+	// Quick Coupler 팝업 중 Camera 진입되게 수정
+	// 시간 설정 10시일 경우 시간위치에 0 입력 시 12시로 바뀌게 다시 수정 
 	//////////////////////////////////////////////////////////////////////////////////////
 	
 	// TAG
@@ -416,6 +424,7 @@ public class Home extends Activity {
 	//Resource//////////////////////////////////////////
 	FrameLayout framelayoutMain;
 	ImageView imgViewCameraScreen;
+	ImageView imgViewEnding;
 	////////////////////////////////////////////////////
 	//Valuable//////////////////////////////////////////
 	public int ScreenIndex;
@@ -493,6 +502,7 @@ public class Home extends Activity {
 	
 	// Thread
 	private Thread threadRead = null;
+	private Thread threadLoading = null;
 	
 	// Dialog
 	Dialog HomeDialog;
@@ -603,6 +613,7 @@ public class Home extends Activity {
 	
 	//Animation/////////////////////////////////////////
 	public ChangeFragmentAnimation _MainChangeAnimation;
+	AnimationDrawable EndingAnimation;
 	////////////////////////////////////////////////////
 
 	////////////////////////////////////////////////////
@@ -657,6 +668,8 @@ public class Home extends Activity {
 		try {
 			StartCommService();
 			threadRead = new Thread(new ReadThread(this));
+			threadLoading = new Thread(new LoadingThread(this));
+		//	threadLoading.start();
 			CAN1Comm.SetScreenTopFlag(true);
 		} catch (RuntimeException e) {
 			Log.e(TAG,"CAN1Comm Instance Error");
@@ -681,6 +694,7 @@ public class Home extends Activity {
 	public void InitResource(){
 		framelayoutMain = (FrameLayout) findViewById(R.id.FrameLayout_main);
 		imgViewCameraScreen = (ImageView)findViewById(R.id.imageView_main_camerascreen);
+		imgViewEnding = (ImageView)findViewById(R.id.imageView_main_ending);
 		imgViewCameraScreen.setClickable(false);
 	}
 	public void InitValuable(){
@@ -772,6 +786,7 @@ public class Home extends Activity {
 		ScreenIndex = SCREEN_STATE_MAIN_CAMERA_KEY;
 		CAN1Comm.CameraOnFlag = CAN1CommManager.STATE_CAMERA_MANUAL;
 		CAN1Comm.TxCMDToMCU(CAN1Comm.CMD_CAM, CameraOrder1);
+		imgViewCameraScreen.setClickable(true);
 	}
 	public void ExcuteCamActivitybyReverseGear(){
 		CAN1Comm.CameraOnFlag = CAN1CommManager.STATE_CAMERA_REVERSEGEAR;
@@ -1288,6 +1303,40 @@ public class Home extends Activity {
 		}
 	}
 	
+	public  class LoadingThread implements Runnable {
+		private WeakReference<Home> activityRef = null;
+		public Message msg = null;
+		public LoadingThread(Home activity){
+			this.activityRef = new WeakReference<Home>(activity);
+			msg = new Message();
+		}
+
+		
+		@Override
+		public void run() {
+			try{
+				Log.d(TAG,"LoadingThread Start");
+				LoadingEndingAnimation();
+				Log.d(TAG,"LoadingThread End");
+			}	
+			catch(RuntimeException ee){
+				Log.e(TAG,"RuntimeException");
+			}
+		}
+	}
+	
+	public void LoadingEndingAnimation(){
+		imgViewEnding.setBackgroundResource(R.drawable.endinganimation);         
+		EndingAnimation = (AnimationDrawable) imgViewEnding.getBackground();
+	}
+	public void StartEndingAnimation(){
+		android.app.FragmentTransaction transaction = getFragmentManager().beginTransaction();
+		transaction.replace(R.id.FrameLayout_main, null);
+		transaction.commit();
+		
+		imgViewEnding.setVisibility(View.VISIBLE);
+		EndingAnimation.start();
+	}
 	public void GetDataFromNative(){
 		PreHeat = CAN1Comm.Get_MirrorHeaterStatus_724_PGN65428();
 		RPM = CAN1Comm.Get_EngineSpeed_310_PGN65431();
@@ -1548,8 +1597,14 @@ public class Home extends Activity {
 			|| Data == CAN1CommManager.ESC){
 				ExitCam();
 			}
+		}else if(ScreenIndex == SCREEN_STATE_MAIN_CAMERA_GEAR){
+			
 		}else if(ScreenIndex == SCREEN_STATE_MAIN_B_KEY_QUICKCOUPLER_POPUP_LOCKING2
-			||	 ScreenIndex == SCREEN_STATE_MAIN_B_KEY_QUICKCOUPLER_POPUP_UNLOCKING2){
+			||	 ScreenIndex == SCREEN_STATE_MAIN_B_KEY_QUICKCOUPLER_POPUP_UNLOCKING2
+			||	 ScreenIndex	== SCREEN_STATE_MAIN_B_KEY_QUICKCOUPLER_POPUP_UNLOCKING3){
+			if(Data == CAN1CommManager.CAMERA){
+				ExcuteCamActivitybyKey();
+			}
 			Log.d(TAG,"Click QuickCoupler Key");				
 		}else if(ScreenIndex == SCREEN_STATE_MENU_MODE_HYD_WORKLOAD_WEIGHING_INIT1){
 			Log.d(TAG,"Click WeighingInit1 Key");

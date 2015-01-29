@@ -105,6 +105,8 @@ public class VersionInfoDetailFragment extends ParentFragment{
 	protected int ProgramSubVersion;
 	
 	protected boolean ManufactureDayDisplayFlag;
+	
+	protected int ListCursurIndex;
 	//////////////////////////////////////////////////
 	
 	//Fragment////////////////////////////////////////
@@ -169,6 +171,7 @@ public class VersionInfoDetailFragment extends ParentFragment{
 			ComponentCode = 0;
 			ManufacturerCode = 0;
 			ManufactureDayDisplayFlag = false;
+			ListCursurIndex = 0;
 			for(int i = 0; i < LENGTH_COMPONENTBASICINFORMATION; i++){
 				ComponentBasicInformation[i] = 0;
 			}
@@ -398,10 +401,30 @@ public class VersionInfoDetailFragment extends ParentFragment{
 	}
 	/////////////////////////////////////////////////////////////////////
 	public void ClickLeft(){
-
+		int TotalItem;
+		
+		TotalItem = listView.getCount();
+		
+		ListCursurIndex -= 5;
+		
+		if(ListCursurIndex <= 0){
+			ListCursurIndex = 0;
+		}
+		listView.setSelectionFromTop(ListCursurIndex,0);
+		Log.d(TAG,"ListCursurIndex : " + Integer.toString(ListCursurIndex));
 	}
-	public void ClickRight(){
-
+	public void ClickRight(){	
+		int TotalItem;
+		
+		TotalItem = listView.getCount();
+		
+		ListCursurIndex += 5;
+		
+		if(ListCursurIndex >= TotalItem){
+			ListCursurIndex = TotalItem - 5;
+		}
+		listView.setSelectionFromTop(ListCursurIndex,0);
+		Log.d(TAG,"ListCursurIndex : " + Integer.toString(ListCursurIndex));
 	}
 	public void ClickESC(){
 		ClickOK();

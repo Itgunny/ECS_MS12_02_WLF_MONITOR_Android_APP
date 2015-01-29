@@ -53,6 +53,9 @@ public class CommService extends Service{
 	// My App Top Flag
 	private static boolean ScreenTopFlag = true;
 	
+	// FN Flag
+	private static boolean FNFlag	= true;
+	
 	// Timer
 	protected static Timer mBuzzerStopTimer = null;
 
@@ -1166,7 +1169,9 @@ public class CommService extends Service{
 				break;
 			case CAN1CommManager.FN:
 				//CAN1Comm.Callback_KeyButton(Data);
-				HandleKeyButton.sendMessage(HandleKeyButton.obtainMessage(Data));
+				if(FNFlag == true)
+					HandleKeyButton.sendMessage(HandleKeyButton.obtainMessage(Data));
+				
 				SoundPoolKeyButton.play(SoundID, fVolume, fVolume, 0, 0, 1);
 				break;
 			default:
@@ -1236,7 +1241,12 @@ public class CommService extends Service{
 	public static boolean GetScreenTopFlag(){
 		return ScreenTopFlag;
 	}
-	
+	public static void SetFNFlag(boolean flag){
+		FNFlag = flag;
+	}
+	public static boolean GetFNFlag(){
+		return FNFlag;
+	}
 	////////////////////////////////////////////////////////////////////////
 		
 	/////////////////OVERRIDE METHOD///////////////////////////////////////

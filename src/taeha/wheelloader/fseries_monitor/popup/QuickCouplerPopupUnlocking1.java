@@ -52,6 +52,8 @@ public class QuickCouplerPopupUnlocking1 extends ParentPopup{
 		InitValuable();
 		
 		ParentActivity.ScreenIndex = ParentActivity.SCREEN_STATE_MAIN_B_KEY_QUICKCOUPLER_POPUP_UNLOCKING1;
+		
+
 	}
 
 	@Override
@@ -59,6 +61,8 @@ public class QuickCouplerPopupUnlocking1 extends ParentPopup{
 		// TODO Auto-generated method stub
 		super.dismiss();
 		ParentActivity.ScreenIndex = ParentActivity.SCREEN_STATE_MAIN_B_KEY_QUICKCOUPLER;
+		
+		
 	}
 
 	@Override
@@ -103,6 +107,7 @@ public class QuickCouplerPopupUnlocking1 extends ParentPopup{
 	///////////////////////////////////////////////////////////////////////////////
 	public void ClickOK(){
 		ParentActivity.showQuickCouplerPopupUnlocking2();
+		
 		this.dismiss();
 	}	
 	public void ClickCancel(){

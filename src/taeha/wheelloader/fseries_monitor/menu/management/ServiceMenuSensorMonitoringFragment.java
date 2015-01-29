@@ -46,6 +46,8 @@ public class ServiceMenuSensorMonitoringFragment extends ParentFragment{
 	boolean BackgroundFlag;
 	
 	int CursurIndex;
+	
+	int ListCursurIndex;
 	Handler HandleCursurDisplay;
 	//////////////////////////////////////////////////
 	
@@ -112,6 +114,8 @@ public class ServiceMenuSensorMonitoringFragment extends ParentFragment{
 		
 		CursurIndex = 1;
 		CursurDisplay(CursurIndex);
+		
+		ListCursurIndex = 0;
 	}
 	@Override
 	protected void InitButtonListener() {
@@ -568,10 +572,30 @@ public class ServiceMenuSensorMonitoringFragment extends ParentFragment{
 	/////////////////////////////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////////
 	public void ClickLeft(){
-
+		int TotalItem;
+		
+		TotalItem = listView.getCount();
+		
+		ListCursurIndex -= 7;
+		
+		if(ListCursurIndex <= 0){
+			ListCursurIndex = 0;
+		}
+		listView.setSelectionFromTop(ListCursurIndex,0);
+		Log.d(TAG,"ListCursurIndex : " + Integer.toString(ListCursurIndex));
 	}
 	public void ClickRight(){	
-
+		int TotalItem;
+		
+		TotalItem = listView.getCount();
+		
+		ListCursurIndex += 7;
+		
+		if(ListCursurIndex >= TotalItem){
+			ListCursurIndex = TotalItem - 7;
+		}
+		listView.setSelectionFromTop(ListCursurIndex,0);
+		Log.d(TAG,"ListCursurIndex : " + Integer.toString(ListCursurIndex));
 	}
 	public void ClickESC(){
 		ClickOK();

@@ -446,6 +446,12 @@ public class CAN1CommManager extends ICAN1CommManager.Stub{		// ttySAC1(Linux), 
 	public boolean GetScreenTopFlag(){
 		return service.GetScreenTopFlag();
 	}
+	public void SetFNFlag(boolean flag){
+		service.SetFNFlag(flag);
+	}
+	public boolean GetFNFlag(){
+		return service.GetFNFlag();
+	}
 	///////////////////////////////////////////////////////////
 	
 	//////////////////////////////////////////////////////////
