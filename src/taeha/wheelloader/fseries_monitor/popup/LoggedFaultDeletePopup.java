@@ -48,6 +48,8 @@ public class LoggedFaultDeletePopup extends ParentPopup{
 	
 	//VALUABLE////////////////////////////////////////
 	int SelectMode;
+	
+	private Timer mPopupOffTimer = null;
 	//////////////////////////////////////////////////
 	
 	//ANIMATION///////////////////////////////////////
@@ -105,6 +107,11 @@ public class LoggedFaultDeletePopup extends ParentPopup{
 
 		textViewOK = (TextView)mRoot.findViewById(R.id.textView_popup_loggedfault_delete_ok);
 		textViewCancel = (TextView)mRoot.findViewById(R.id.textView_popup_loggedfault_delete_cancel);
+		
+		imgbtnOK.setVisibility(View.VISIBLE);
+		imgbtnCancel.setVisibility(View.VISIBLE);
+		textViewOK.setVisibility(View.VISIBLE);
+		textViewCancel.setVisibility(View.VISIBLE);
 	}
 
 	@Override
@@ -146,7 +153,13 @@ public class LoggedFaultDeletePopup extends ParentPopup{
 		CAN1Comm.TxCANToMCU(11);
 		CAN1Comm.Set_DTCInformationRequest_1515_PGN61184_11(0xF);
 		CAN1Comm.Set_DTCType_1510_PGN61184_11(0xF);
-		this.dismiss();
+		
+		StartPopupOffTimer();
+		imgbtnOK.setVisibility(View.INVISIBLE);
+		imgbtnCancel.setVisibility(View.INVISIBLE);
+		textViewOK.setVisibility(View.INVISIBLE);
+		textViewCancel.setVisibility(View.INVISIBLE);
+		textViewTitle.setText(ParentActivity.getResources().getString(string.Waiting_for_initialization));
 	}	
 	public void ClickCancel(){
 		this.dismiss();
@@ -245,4 +258,31 @@ public class LoggedFaultDeletePopup extends ParentPopup{
 		}
 	}
 	////////////////////////////////////////////////////////////////////////////////
+	////////////////////////////////////////////////////////////////////////////////
+	public class PopupOffTimerClass extends TimerTask{
+
+		@Override
+		public void run() {
+			// TODO Auto-generated method stub
+			ParentActivity._MenuBaseFragment._FaultHistoryLoggedFragment.RequestErrorCode(SelectMode,1,1);
+			ParentActivity._MenuBaseFragment._FaultHistoryLoggedFragment.SelectedMode = SelectMode;
+			ClickCancel();
+		}
+				
+	}
+	
+	public void StartPopupOffTimer(){
+		CancelPopupOffTimer();
+		mPopupOffTimer = new Timer();
+		mPopupOffTimer.schedule(new PopupOffTimerClass(),1000);	
+	}
+	
+	public void CancelPopupOffTimer(){
+		if(mPopupOffTimer != null){
+			mPopupOffTimer.cancel();
+			mPopupOffTimer.purge();
+			mPopupOffTimer = null;
+		}
+		
+	}
 }

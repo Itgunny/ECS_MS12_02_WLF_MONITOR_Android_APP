@@ -624,10 +624,12 @@ public class FaultHistoryActiveFragment extends ParentFragment{
 			if(SendSeqIndex == 1){
 				RequestErrorCode(SendDTCIndex,1,SendSeqIndex);
 				SendSeqIndex++;
+				SetThreadSleepTime(200);
 			}
 			else if(SendSeqIndex > DTCTotalPacketMachine){
 				SendSeqIndex = 1;
 				SendDTCIndex = REQ_ERR_ENGINE_ACTIVE;
+				SetThreadSleepTime(1000);
 			}
 			else{
 				RequestErrorCode(SendDTCIndex,1,SendSeqIndex);
@@ -639,10 +641,12 @@ public class FaultHistoryActiveFragment extends ParentFragment{
 			if(SendSeqIndex == 1){
 				RequestErrorCode(SendDTCIndex,1,SendSeqIndex);
 				SendSeqIndex++;
+				SetThreadSleepTime(200);
 			}
 			else if(SendSeqIndex > DTCTotalPacketEngine){
 				SendSeqIndex = 1;
 				SendDTCIndex = REQ_ERR_TM_ACTIVE;
+				SetThreadSleepTime(1000);
 			}
 			else{
 				RequestErrorCode(SendDTCIndex,1,SendSeqIndex);
@@ -654,16 +658,18 @@ public class FaultHistoryActiveFragment extends ParentFragment{
 			if(SendSeqIndex == 1){
 				RequestErrorCode(SendDTCIndex,1,SendSeqIndex);
 				SendSeqIndex++;
+				SetThreadSleepTime(200);
 			}
 			else if(SendSeqIndex > DTCTotalPacketTM){
 				SendSeqIndex = 1;
 				SendDTCIndex = REQ_ERR_MACHINE_ACTIVE;
+				SetThreadSleepTime(1000);
 			}
 			else{
 				RequestErrorCode(SendDTCIndex,1,SendSeqIndex);
 				SendSeqIndex++;
 			}
-			SetThreadSleepTime(1000);
+		
 			break;
 
 		default:

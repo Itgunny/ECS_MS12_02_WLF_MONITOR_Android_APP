@@ -190,9 +190,6 @@ public abstract class PasswordFragment extends ParentFragment{
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
-				
-				CursurIndex = 1;
-				HandleCursurDisplay.sendMessage(HandleCursurDisplay.obtainMessage(CursurIndex));
 				ClickNum1();
 			}
 		});
@@ -201,9 +198,7 @@ public abstract class PasswordFragment extends ParentFragment{
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
-				
-				CursurIndex = 2;
-				HandleCursurDisplay.sendMessage(HandleCursurDisplay.obtainMessage(CursurIndex));
+
 				ClickNum2();
 			}
 		});
@@ -212,9 +207,7 @@ public abstract class PasswordFragment extends ParentFragment{
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
-				
-				CursurIndex = 3;
-				HandleCursurDisplay.sendMessage(HandleCursurDisplay.obtainMessage(CursurIndex));
+
 				ClickNum3();
 			}
 		});
@@ -223,9 +216,7 @@ public abstract class PasswordFragment extends ParentFragment{
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
-			
-				CursurIndex = 4;
-				HandleCursurDisplay.sendMessage(HandleCursurDisplay.obtainMessage(CursurIndex));
+
 				ClickNum4();
 			}
 		});
@@ -234,9 +225,7 @@ public abstract class PasswordFragment extends ParentFragment{
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
-				
-				CursurIndex = 5;
-				HandleCursurDisplay.sendMessage(HandleCursurDisplay.obtainMessage(CursurIndex));
+
 				ClickNum5();	
 			}
 		});
@@ -245,9 +234,7 @@ public abstract class PasswordFragment extends ParentFragment{
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
-				
-				CursurIndex = 6;
-				HandleCursurDisplay.sendMessage(HandleCursurDisplay.obtainMessage(CursurIndex));
+
 				ClickNum6();
 			}
 		});
@@ -256,9 +243,7 @@ public abstract class PasswordFragment extends ParentFragment{
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
-				
-				CursurIndex = 7;
-				HandleCursurDisplay.sendMessage(HandleCursurDisplay.obtainMessage(CursurIndex));
+
 				ClickNum7();
 			}
 		});
@@ -267,9 +252,7 @@ public abstract class PasswordFragment extends ParentFragment{
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
-				
-				CursurIndex = 8;
-				HandleCursurDisplay.sendMessage(HandleCursurDisplay.obtainMessage(CursurIndex));
+
 				ClickNum8();
 			}
 		});
@@ -278,9 +261,7 @@ public abstract class PasswordFragment extends ParentFragment{
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
-				
-				CursurIndex = 9;
-				HandleCursurDisplay.sendMessage(HandleCursurDisplay.obtainMessage(CursurIndex));
+
 				ClickNum9();
 			}
 		});
@@ -289,9 +270,7 @@ public abstract class PasswordFragment extends ParentFragment{
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
-			
-				CursurIndex = 11;
-				HandleCursurDisplay.sendMessage(HandleCursurDisplay.obtainMessage(CursurIndex));
+
 				ClickNum0();
 			}
 		});
@@ -300,9 +279,7 @@ public abstract class PasswordFragment extends ParentFragment{
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
-				
-				CursurIndex = 12;
-				HandleCursurDisplay.sendMessage(HandleCursurDisplay.obtainMessage(CursurIndex));
+
 				ClickEnterButton();
 			}
 		});
@@ -311,9 +288,7 @@ public abstract class PasswordFragment extends ParentFragment{
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
-				
-				CursurIndex = 10;
-				HandleCursurDisplay.sendMessage(HandleCursurDisplay.obtainMessage(CursurIndex));
+
 				ClickBack();
 			}
 		});
@@ -341,6 +316,9 @@ public abstract class PasswordFragment extends ParentFragment{
 	}
 	/////////////////////////////////////////////////////////////////////	
 	public void ClickNum1(){
+		CursurIndex = 1;
+		HandleCursurDisplay.sendMessage(HandleCursurDisplay.obtainMessage(CursurIndex));
+		
 		if(DataBufIndex < MAX_INPUT_LENGTH){
 			NumDataBuf[DataBufIndex] = 0x31;
 			DataBufIndex++;
@@ -349,6 +327,9 @@ public abstract class PasswordFragment extends ParentFragment{
 		
 	}
 	public void ClickNum2(){
+		
+		CursurIndex = 2;
+		HandleCursurDisplay.sendMessage(HandleCursurDisplay.obtainMessage(CursurIndex));
 		if(DataBufIndex < MAX_INPUT_LENGTH){
 			NumDataBuf[DataBufIndex] = 0x32;
 			DataBufIndex++;
@@ -358,6 +339,9 @@ public abstract class PasswordFragment extends ParentFragment{
 	}
 
 	public void ClickNum3(){
+		
+		CursurIndex = 3;
+		HandleCursurDisplay.sendMessage(HandleCursurDisplay.obtainMessage(CursurIndex));
 		if(DataBufIndex < MAX_INPUT_LENGTH){
 			NumDataBuf[DataBufIndex] = 0x33;
 			DataBufIndex++;
@@ -367,6 +351,9 @@ public abstract class PasswordFragment extends ParentFragment{
 	}
 
 	public void ClickNum4(){
+		
+		CursurIndex = 4;
+		HandleCursurDisplay.sendMessage(HandleCursurDisplay.obtainMessage(CursurIndex));
 		if(DataBufIndex < MAX_INPUT_LENGTH){
 			NumDataBuf[DataBufIndex] = 0x34;
 			DataBufIndex++;
@@ -376,6 +363,9 @@ public abstract class PasswordFragment extends ParentFragment{
 	}
 
 	public void ClickNum5(){
+		
+		CursurIndex = 5;
+		HandleCursurDisplay.sendMessage(HandleCursurDisplay.obtainMessage(CursurIndex));
 		if(DataBufIndex < MAX_INPUT_LENGTH){
 			NumDataBuf[DataBufIndex] = 0x35;
 			DataBufIndex++;
@@ -385,6 +375,9 @@ public abstract class PasswordFragment extends ParentFragment{
 	}
 
 	public void ClickNum6(){
+		
+		CursurIndex = 6;
+		HandleCursurDisplay.sendMessage(HandleCursurDisplay.obtainMessage(CursurIndex));
 		if(DataBufIndex < MAX_INPUT_LENGTH){
 			NumDataBuf[DataBufIndex] = 0x36;
 			DataBufIndex++;
@@ -394,6 +387,9 @@ public abstract class PasswordFragment extends ParentFragment{
 	}
 
 	public void ClickNum7(){
+		
+		CursurIndex = 7;
+		HandleCursurDisplay.sendMessage(HandleCursurDisplay.obtainMessage(CursurIndex));
 		if(DataBufIndex < MAX_INPUT_LENGTH){
 			NumDataBuf[DataBufIndex] = 0x37;
 			DataBufIndex++;
@@ -403,6 +399,9 @@ public abstract class PasswordFragment extends ParentFragment{
 	}
 
 	public void ClickNum8(){
+		
+		CursurIndex = 8;
+		HandleCursurDisplay.sendMessage(HandleCursurDisplay.obtainMessage(CursurIndex));
 		if(DataBufIndex < MAX_INPUT_LENGTH){
 			NumDataBuf[DataBufIndex] = 0x38;
 			DataBufIndex++;
@@ -412,6 +411,9 @@ public abstract class PasswordFragment extends ParentFragment{
 	}
 
 	public void ClickNum9(){
+		
+		CursurIndex = 9;
+		HandleCursurDisplay.sendMessage(HandleCursurDisplay.obtainMessage(CursurIndex));
 		if(DataBufIndex < MAX_INPUT_LENGTH){
 			NumDataBuf[DataBufIndex] = 0x39;
 			DataBufIndex++;
@@ -421,6 +423,9 @@ public abstract class PasswordFragment extends ParentFragment{
 	}
 
 	public void ClickNum0(){
+		
+		CursurIndex = 11;
+		HandleCursurDisplay.sendMessage(HandleCursurDisplay.obtainMessage(CursurIndex));
 		if(DataBufIndex < MAX_INPUT_LENGTH){
 			NumDataBuf[DataBufIndex] = 0x30;
 			DataBufIndex++;
@@ -430,6 +435,9 @@ public abstract class PasswordFragment extends ParentFragment{
 	}
 
 	public void ClickBack(){
+		
+		CursurIndex = 10;
+		HandleCursurDisplay.sendMessage(HandleCursurDisplay.obtainMessage(CursurIndex));
 		if(DataBufIndex > 0){
 			DataBufIndex--;
 			NumDataBuf[DataBufIndex] = (byte) 0xFF;
@@ -446,6 +454,9 @@ public abstract class PasswordFragment extends ParentFragment{
 	}
 
 	public void ClickEnterButton(){
+		
+		CursurIndex = 12;
+		HandleCursurDisplay.sendMessage(HandleCursurDisplay.obtainMessage(CursurIndex));
 		EnterClick();
 	
 	}

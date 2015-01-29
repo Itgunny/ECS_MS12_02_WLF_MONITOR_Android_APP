@@ -3,6 +3,8 @@ package taeha.wheelloader.fseries_monitor.main.b;
 import java.util.Timer;
 import java.util.TimerTask;
 
+import actionpopup.ActionItem;
+import actionpopup.QuickAction;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -65,6 +67,8 @@ public class MainBUpperMenuBarFragment extends ParentFragment{
 	
 	int WiperStatus;
 	int WiperLevel;
+	
+
 	//////////////////////////////////////////////////
 	
 	//ANIMATION///////////////////////////////////////
@@ -144,6 +148,8 @@ public class MainBUpperMenuBarFragment extends ParentFragment{
 		// TODO Auto-generated method stub
 		super.InitValuables();
 		ColonFlag = true;
+		
+	
 	}
 	@Override
 	protected void InitButtonListener() {
@@ -447,5 +453,7 @@ public class MainBUpperMenuBarFragment extends ParentFragment{
 	public void setWiperButtonEnable(boolean flag){
 		imgbtnWiper.setClickable(flag);
 	}
+	///////////////////////////////////////////////////////////
+
 	///////////////////////////////////////////////////////////
 }	

@@ -1132,38 +1132,38 @@ public class MenuBaseFragment extends ParentFragment{
 		
 		// TODO Auto-generated method stub
 		switch (key) {
-		case CAN1CommManager.MAINLIGHT:
-			
+		case CAN1CommManager.MAINLIGHT:			// Num1
+			ClickNum1();
 			break;
-		case CAN1CommManager.WORKLIGHT:
-			
+		case CAN1CommManager.WORKLIGHT:			// Num2
+			ClickNum2();
 			break;
-		case CAN1CommManager.AUTO_GREASE:
-		
+		case CAN1CommManager.AUTO_GREASE:		// Num3
+			ClickNum3();
 			break;
-		case CAN1CommManager.QUICK_COUPLER:
-		
+		case CAN1CommManager.QUICK_COUPLER:		// Num4
+			ClickNum4();
 			break;
-		case CAN1CommManager.RIDE_CONTROL:
-			
+		case CAN1CommManager.RIDE_CONTROL:		// Num5
+			ClickNum5();
 			break;
 		case CAN1CommManager.WORK_LOAD:
 		
 			break;
-		case CAN1CommManager.BEACON_LAMP:
-			
+		case CAN1CommManager.BEACON_LAMP:		// Num6
+			ClickNum6();
 			break;
-		case CAN1CommManager.REAR_WIPER:
-			
+		case CAN1CommManager.REAR_WIPER:		// Num7
+			ClickNum7();
 			break;
-		case CAN1CommManager.MIRROR_HEAT:
-			
+		case CAN1CommManager.MIRROR_HEAT:		// Num8
+			ClickNum8();
 			break;
-		case CAN1CommManager.AUTOPOSITION:
-		
+		case CAN1CommManager.AUTOPOSITION:		// Num9
+			ClickNum9();
 			break;
-		case CAN1CommManager.FINEMODULATION:
-			
+		case CAN1CommManager.FINEMODULATION:	// Num0
+			ClickNum0();
 			break;
 		case CAN1CommManager.LEFT:
 			ClickKeyButtonLeft();
@@ -2232,6 +2232,346 @@ public class MenuBaseFragment extends ParentFragment{
 			break;
 		}
 	
+	}
+	
+	public void ClickNum1(){
+		switch (ParentActivity.ScreenIndex) {
+
+		case Home.SCREEN_STATE_MENU_MODE_ETC_FREQ_TOP:
+			_SpeedometerFreqFragment.ClickNum1();
+			break;
+		case Home.SCREEN_STATE_MENU_MODE_ETC_AUTOSHUTDOWN_PW:
+			_EngineAutoShutdownPWFragment.ClickNum1();
+			break;
+		case Home.SCREEN_STATE_MENU_MONITORING_FAULTHISTORY_LOGGED_PW:
+			_FaultHistoryLoggedPasswordFragment.ClickNum1();
+			break;
+		case Home.SCREEN_STATE_MENU_MANAGEMENT_MACHINESECURITY_PW:
+			_MachineSecurityPasswordFragment.ClickNum1();
+			break;
+		case Home.SCREEN_STATE_MENU_MANAGEMENT_MACHINESECURITY_PWCHANGE:
+			_MachineSecurityPasswordChangeFragment.ClickNum1();
+			break;
+		case Home.SCREEN_STATE_MENU_MANAGEMENT_MAINTENANCE_DETAIL_CHANGECYCLE:
+			_MaintenanceChangeCycleFragment.ClickNum1();
+			break;
+		case Home.SCREEN_STATE_MENU_MANAGEMENT_SERVICE_PW:
+			_ServiceMenuPasswordFragment.ClickNum1();
+			break;
+		case Home.SCREEN_STATE_MENU_MANAGEMENT_SERVICE_WEIGHINGCOMPENSATION_TOP:
+			_ServiceMenuWeighingCompensationFragment.ClickNum1();
+			break;
+		case Home.SCREEN_STATE_MENU_MANAGEMENT_ASPHONE_TOP:
+			_ChangeASPhoneNumberFragment.ClickNum1();
+			break;
+			
+		}
+	}
+	
+	public void ClickNum2(){
+		switch (ParentActivity.ScreenIndex) {
+
+		case Home.SCREEN_STATE_MENU_MODE_ETC_FREQ_TOP:
+			_SpeedometerFreqFragment.ClickNum2();
+			break;
+		case Home.SCREEN_STATE_MENU_MODE_ETC_AUTOSHUTDOWN_PW:
+			_EngineAutoShutdownPWFragment.ClickNum2();
+			break;
+		case Home.SCREEN_STATE_MENU_MONITORING_FAULTHISTORY_LOGGED_PW:
+			_FaultHistoryLoggedPasswordFragment.ClickNum2();
+			break;
+		case Home.SCREEN_STATE_MENU_MANAGEMENT_MACHINESECURITY_PW:
+			_MachineSecurityPasswordFragment.ClickNum2();
+			break;
+		case Home.SCREEN_STATE_MENU_MANAGEMENT_MACHINESECURITY_PWCHANGE:
+			_MachineSecurityPasswordChangeFragment.ClickNum2();
+			break;
+		case Home.SCREEN_STATE_MENU_MANAGEMENT_MAINTENANCE_DETAIL_CHANGECYCLE:
+			_MaintenanceChangeCycleFragment.ClickNum2();
+			break;
+		case Home.SCREEN_STATE_MENU_MANAGEMENT_SERVICE_PW:
+			_ServiceMenuPasswordFragment.ClickNum2();
+			break;
+		case Home.SCREEN_STATE_MENU_MANAGEMENT_SERVICE_WEIGHINGCOMPENSATION_TOP:
+			_ServiceMenuWeighingCompensationFragment.ClickNum2();
+			break;
+		case Home.SCREEN_STATE_MENU_MANAGEMENT_ASPHONE_TOP:
+			_ChangeASPhoneNumberFragment.ClickNum2();
+			break;
+			
+		}
+	}
+	
+	public void ClickNum3(){
+		switch (ParentActivity.ScreenIndex) {
+
+		case Home.SCREEN_STATE_MENU_MODE_ETC_FREQ_TOP:
+			_SpeedometerFreqFragment.ClickNum3();
+			break;
+		case Home.SCREEN_STATE_MENU_MODE_ETC_AUTOSHUTDOWN_PW:
+			_EngineAutoShutdownPWFragment.ClickNum3();
+			break;
+		case Home.SCREEN_STATE_MENU_MONITORING_FAULTHISTORY_LOGGED_PW:
+			_FaultHistoryLoggedPasswordFragment.ClickNum3();
+			break;
+		case Home.SCREEN_STATE_MENU_MANAGEMENT_MACHINESECURITY_PW:
+			_MachineSecurityPasswordFragment.ClickNum3();
+			break;
+		case Home.SCREEN_STATE_MENU_MANAGEMENT_MACHINESECURITY_PWCHANGE:
+			_MachineSecurityPasswordChangeFragment.ClickNum3();
+			break;
+		case Home.SCREEN_STATE_MENU_MANAGEMENT_MAINTENANCE_DETAIL_CHANGECYCLE:
+			_MaintenanceChangeCycleFragment.ClickNum3();
+			break;
+		case Home.SCREEN_STATE_MENU_MANAGEMENT_SERVICE_PW:
+			_ServiceMenuPasswordFragment.ClickNum3();
+			break;
+		case Home.SCREEN_STATE_MENU_MANAGEMENT_SERVICE_WEIGHINGCOMPENSATION_TOP:
+			_ServiceMenuWeighingCompensationFragment.ClickNum3();
+			break;
+		case Home.SCREEN_STATE_MENU_MANAGEMENT_ASPHONE_TOP:
+			_ChangeASPhoneNumberFragment.ClickNum3();
+			break;
+			
+		}
+	}
+	
+	public void ClickNum4(){
+		switch (ParentActivity.ScreenIndex) {
+
+		case Home.SCREEN_STATE_MENU_MODE_ETC_FREQ_TOP:
+			_SpeedometerFreqFragment.ClickNum4();
+			break;
+		case Home.SCREEN_STATE_MENU_MODE_ETC_AUTOSHUTDOWN_PW:
+			_EngineAutoShutdownPWFragment.ClickNum4();
+			break;
+		case Home.SCREEN_STATE_MENU_MONITORING_FAULTHISTORY_LOGGED_PW:
+			_FaultHistoryLoggedPasswordFragment.ClickNum4();
+			break;
+		case Home.SCREEN_STATE_MENU_MANAGEMENT_MACHINESECURITY_PW:
+			_MachineSecurityPasswordFragment.ClickNum4();
+			break;
+		case Home.SCREEN_STATE_MENU_MANAGEMENT_MACHINESECURITY_PWCHANGE:
+			_MachineSecurityPasswordChangeFragment.ClickNum4();
+			break;
+		case Home.SCREEN_STATE_MENU_MANAGEMENT_MAINTENANCE_DETAIL_CHANGECYCLE:
+			_MaintenanceChangeCycleFragment.ClickNum4();
+			break;
+		case Home.SCREEN_STATE_MENU_MANAGEMENT_SERVICE_PW:
+			_ServiceMenuPasswordFragment.ClickNum4();
+			break;
+		case Home.SCREEN_STATE_MENU_MANAGEMENT_SERVICE_WEIGHINGCOMPENSATION_TOP:
+			_ServiceMenuWeighingCompensationFragment.ClickNum4();
+			break;
+		case Home.SCREEN_STATE_MENU_MANAGEMENT_ASPHONE_TOP:
+			_ChangeASPhoneNumberFragment.ClickNum4();
+			break;
+			
+		}
+	}
+	
+	public void ClickNum5(){
+		switch (ParentActivity.ScreenIndex) {
+
+		case Home.SCREEN_STATE_MENU_MODE_ETC_FREQ_TOP:
+			_SpeedometerFreqFragment.ClickNum5();
+			break;
+		case Home.SCREEN_STATE_MENU_MODE_ETC_AUTOSHUTDOWN_PW:
+			_EngineAutoShutdownPWFragment.ClickNum5();
+			break;
+		case Home.SCREEN_STATE_MENU_MONITORING_FAULTHISTORY_LOGGED_PW:
+			_FaultHistoryLoggedPasswordFragment.ClickNum5();
+			break;
+		case Home.SCREEN_STATE_MENU_MANAGEMENT_MACHINESECURITY_PW:
+			_MachineSecurityPasswordFragment.ClickNum5();
+			break;
+		case Home.SCREEN_STATE_MENU_MANAGEMENT_MACHINESECURITY_PWCHANGE:
+			_MachineSecurityPasswordChangeFragment.ClickNum5();
+			break;
+		case Home.SCREEN_STATE_MENU_MANAGEMENT_MAINTENANCE_DETAIL_CHANGECYCLE:
+			_MaintenanceChangeCycleFragment.ClickNum5();
+			break;
+		case Home.SCREEN_STATE_MENU_MANAGEMENT_SERVICE_PW:
+			_ServiceMenuPasswordFragment.ClickNum5();
+			break;
+		case Home.SCREEN_STATE_MENU_MANAGEMENT_SERVICE_WEIGHINGCOMPENSATION_TOP:
+			_ServiceMenuWeighingCompensationFragment.ClickNum5();
+			break;
+		case Home.SCREEN_STATE_MENU_MANAGEMENT_ASPHONE_TOP:
+			_ChangeASPhoneNumberFragment.ClickNum5();
+			break;
+			
+		}
+	}
+	
+	public void ClickNum6(){
+		switch (ParentActivity.ScreenIndex) {
+
+		case Home.SCREEN_STATE_MENU_MODE_ETC_FREQ_TOP:
+			_SpeedometerFreqFragment.ClickNum6();
+			break;
+		case Home.SCREEN_STATE_MENU_MODE_ETC_AUTOSHUTDOWN_PW:
+			_EngineAutoShutdownPWFragment.ClickNum6();
+			break;
+		case Home.SCREEN_STATE_MENU_MONITORING_FAULTHISTORY_LOGGED_PW:
+			_FaultHistoryLoggedPasswordFragment.ClickNum6();
+			break;
+		case Home.SCREEN_STATE_MENU_MANAGEMENT_MACHINESECURITY_PW:
+			_MachineSecurityPasswordFragment.ClickNum6();
+			break;
+		case Home.SCREEN_STATE_MENU_MANAGEMENT_MACHINESECURITY_PWCHANGE:
+			_MachineSecurityPasswordChangeFragment.ClickNum6();
+			break;
+		case Home.SCREEN_STATE_MENU_MANAGEMENT_MAINTENANCE_DETAIL_CHANGECYCLE:
+			_MaintenanceChangeCycleFragment.ClickNum6();
+			break;
+		case Home.SCREEN_STATE_MENU_MANAGEMENT_SERVICE_PW:
+			_ServiceMenuPasswordFragment.ClickNum6();
+			break;
+		case Home.SCREEN_STATE_MENU_MANAGEMENT_SERVICE_WEIGHINGCOMPENSATION_TOP:
+			_ServiceMenuWeighingCompensationFragment.ClickNum6();
+			break;
+		case Home.SCREEN_STATE_MENU_MANAGEMENT_ASPHONE_TOP:
+			_ChangeASPhoneNumberFragment.ClickNum6();
+			break;
+			
+		}
+	}
+	
+	public void ClickNum7(){
+		switch (ParentActivity.ScreenIndex) {
+
+		case Home.SCREEN_STATE_MENU_MODE_ETC_FREQ_TOP:
+			_SpeedometerFreqFragment.ClickNum7();
+			break;
+		case Home.SCREEN_STATE_MENU_MODE_ETC_AUTOSHUTDOWN_PW:
+			_EngineAutoShutdownPWFragment.ClickNum7();
+			break;
+		case Home.SCREEN_STATE_MENU_MONITORING_FAULTHISTORY_LOGGED_PW:
+			_FaultHistoryLoggedPasswordFragment.ClickNum7();
+			break;
+		case Home.SCREEN_STATE_MENU_MANAGEMENT_MACHINESECURITY_PW:
+			_MachineSecurityPasswordFragment.ClickNum7();
+			break;
+		case Home.SCREEN_STATE_MENU_MANAGEMENT_MACHINESECURITY_PWCHANGE:
+			_MachineSecurityPasswordChangeFragment.ClickNum7();
+			break;
+		case Home.SCREEN_STATE_MENU_MANAGEMENT_MAINTENANCE_DETAIL_CHANGECYCLE:
+			_MaintenanceChangeCycleFragment.ClickNum7();
+			break;
+		case Home.SCREEN_STATE_MENU_MANAGEMENT_SERVICE_PW:
+			_ServiceMenuPasswordFragment.ClickNum7();
+			break;
+		case Home.SCREEN_STATE_MENU_MANAGEMENT_SERVICE_WEIGHINGCOMPENSATION_TOP:
+			_ServiceMenuWeighingCompensationFragment.ClickNum7();
+			break;
+		case Home.SCREEN_STATE_MENU_MANAGEMENT_ASPHONE_TOP:
+			_ChangeASPhoneNumberFragment.ClickNum7();
+			break;
+			
+		}
+	}
+	
+	public void ClickNum8(){
+		switch (ParentActivity.ScreenIndex) {
+
+		case Home.SCREEN_STATE_MENU_MODE_ETC_FREQ_TOP:
+			_SpeedometerFreqFragment.ClickNum8();
+			break;
+		case Home.SCREEN_STATE_MENU_MODE_ETC_AUTOSHUTDOWN_PW:
+			_EngineAutoShutdownPWFragment.ClickNum8();
+			break;
+		case Home.SCREEN_STATE_MENU_MONITORING_FAULTHISTORY_LOGGED_PW:
+			_FaultHistoryLoggedPasswordFragment.ClickNum8();
+			break;
+		case Home.SCREEN_STATE_MENU_MANAGEMENT_MACHINESECURITY_PW:
+			_MachineSecurityPasswordFragment.ClickNum8();
+			break;
+		case Home.SCREEN_STATE_MENU_MANAGEMENT_MACHINESECURITY_PWCHANGE:
+			_MachineSecurityPasswordChangeFragment.ClickNum8();
+			break;
+		case Home.SCREEN_STATE_MENU_MANAGEMENT_MAINTENANCE_DETAIL_CHANGECYCLE:
+			_MaintenanceChangeCycleFragment.ClickNum8();
+			break;
+		case Home.SCREEN_STATE_MENU_MANAGEMENT_SERVICE_PW:
+			_ServiceMenuPasswordFragment.ClickNum8();
+			break;
+		case Home.SCREEN_STATE_MENU_MANAGEMENT_SERVICE_WEIGHINGCOMPENSATION_TOP:
+			_ServiceMenuWeighingCompensationFragment.ClickNum8();
+			break;
+		case Home.SCREEN_STATE_MENU_MANAGEMENT_ASPHONE_TOP:
+			_ChangeASPhoneNumberFragment.ClickNum8();
+			break;
+			
+		}
+	}
+	
+	public void ClickNum9(){
+		switch (ParentActivity.ScreenIndex) {
+
+		case Home.SCREEN_STATE_MENU_MODE_ETC_FREQ_TOP:
+			_SpeedometerFreqFragment.ClickNum9();
+			break;
+		case Home.SCREEN_STATE_MENU_MODE_ETC_AUTOSHUTDOWN_PW:
+			_EngineAutoShutdownPWFragment.ClickNum9();
+			break;
+		case Home.SCREEN_STATE_MENU_MONITORING_FAULTHISTORY_LOGGED_PW:
+			_FaultHistoryLoggedPasswordFragment.ClickNum9();
+			break;
+		case Home.SCREEN_STATE_MENU_MANAGEMENT_MACHINESECURITY_PW:
+			_MachineSecurityPasswordFragment.ClickNum9();
+			break;
+		case Home.SCREEN_STATE_MENU_MANAGEMENT_MACHINESECURITY_PWCHANGE:
+			_MachineSecurityPasswordChangeFragment.ClickNum9();
+			break;
+		case Home.SCREEN_STATE_MENU_MANAGEMENT_MAINTENANCE_DETAIL_CHANGECYCLE:
+			_MaintenanceChangeCycleFragment.ClickNum9();
+			break;
+		case Home.SCREEN_STATE_MENU_MANAGEMENT_SERVICE_PW:
+			_ServiceMenuPasswordFragment.ClickNum9();
+			break;
+		case Home.SCREEN_STATE_MENU_MANAGEMENT_SERVICE_WEIGHINGCOMPENSATION_TOP:
+			_ServiceMenuWeighingCompensationFragment.ClickNum9();
+			break;
+		case Home.SCREEN_STATE_MENU_MANAGEMENT_ASPHONE_TOP:
+			_ChangeASPhoneNumberFragment.ClickNum9();
+			break;
+			
+		}
+	}
+	
+	public void ClickNum0(){
+		switch (ParentActivity.ScreenIndex) {
+
+		case Home.SCREEN_STATE_MENU_MODE_ETC_FREQ_TOP:
+			_SpeedometerFreqFragment.ClickNum0();
+			break;
+		case Home.SCREEN_STATE_MENU_MODE_ETC_AUTOSHUTDOWN_PW:
+			_EngineAutoShutdownPWFragment.ClickNum0();
+			break;
+		case Home.SCREEN_STATE_MENU_MONITORING_FAULTHISTORY_LOGGED_PW:
+			_FaultHistoryLoggedPasswordFragment.ClickNum0();
+			break;
+		case Home.SCREEN_STATE_MENU_MANAGEMENT_MACHINESECURITY_PW:
+			_MachineSecurityPasswordFragment.ClickNum0();
+			break;
+		case Home.SCREEN_STATE_MENU_MANAGEMENT_MACHINESECURITY_PWCHANGE:
+			_MachineSecurityPasswordChangeFragment.ClickNum0();
+			break;
+		case Home.SCREEN_STATE_MENU_MANAGEMENT_MAINTENANCE_DETAIL_CHANGECYCLE:
+			_MaintenanceChangeCycleFragment.ClickNum0();
+			break;
+		case Home.SCREEN_STATE_MENU_MANAGEMENT_SERVICE_PW:
+			_ServiceMenuPasswordFragment.ClickNum0();
+			break;
+		case Home.SCREEN_STATE_MENU_MANAGEMENT_SERVICE_WEIGHINGCOMPENSATION_TOP:
+			_ServiceMenuWeighingCompensationFragment.ClickNum0();
+			break;
+		case Home.SCREEN_STATE_MENU_MANAGEMENT_ASPHONE_TOP:
+			_ChangeASPhoneNumberFragment.ClickNum0();
+			break;
+			
+		}
 	}
 	/////////////////////////////////////////////////////////////////////////////////////
 }

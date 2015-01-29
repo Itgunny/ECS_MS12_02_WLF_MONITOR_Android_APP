@@ -131,6 +131,16 @@
     <string name="Item">Item</string>
     <string name="Current_Data">Current Data</string>
     <string name="Loading_Data">Loading Data</string>
+    <string name="Lamp_SeatBelt">Seat Belt</string>
+    <string name="Lamp_FanReverse">Fan Reverse</string>
+    <string name="Lamp_EngineAutoShutdown">Engine Auto Shutdown</string>
+    <string name="Lamp_LockUpClutch">Lock Up Clutch</string>
+    <string name="Lamp_RideControl">Ride Control</string>
+    <string name="Lamp_ClutchCutOff">Clutch Cut Off</string>
+    <string name="Lamp_Warmingup">Warming Up</string>
+    <string name="Lamp_FuelWarmer">Fuel Warmer</string>
+    <string name="Lamp_Preheat">Preheat</string>
+    <string name="Lamp_FloatMode">Float Mode</string>
     <!-- Main End -->
     <!-- Key Start-->
     <string name="Main_Light">Main Light</string>

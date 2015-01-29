@@ -47,7 +47,7 @@ public class SpeedometerFreqFragment extends ParentFragment{
 	TextView textViewNum0;
 	
 	ImageButton imgbtnBack;
-	TextView textViewNext;
+	ImageButton imgbtnNext;
 	
 	RadioButton radioNum10;
 	RadioButton radioNum1;
@@ -132,7 +132,7 @@ public class SpeedometerFreqFragment extends ParentFragment{
 		textViewNum0 = (TextView)mRoot.findViewById(R.id.textView_menu_body_mode_speedometerfreq_num_0);
 		
 		imgbtnBack = (ImageButton)mRoot.findViewById(R.id.imageButton_menu_body_mode_speedometerfreq_num_back);
-		textViewNext = (TextView)mRoot.findViewById(R.id.textView_menu_body_mode_speedometerfreq_num_next);
+		imgbtnNext = (ImageButton)mRoot.findViewById(R.id.imageButton_menu_body_mode_speedometerfreq_num_next);
 		
 		radioNum10 = (RadioButton)mRoot.findViewById(R.id.radio_menu_body_mode_speedometerfreq_data_10);
 		radioNum1 = (RadioButton)mRoot.findViewById(R.id.radio_menu_body_mode_speedometerfreq_data_1);
@@ -167,8 +167,7 @@ public class SpeedometerFreqFragment extends ParentFragment{
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
 			
-				CursurIndex = 15;
-				HandleCursurDisplay.sendMessage(HandleCursurDisplay.obtainMessage(CursurIndex));
+				
 				ClickOK();
 			}
 		});
@@ -177,8 +176,7 @@ public class SpeedometerFreqFragment extends ParentFragment{
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
-				CursurIndex = 14;
-				HandleCursurDisplay.sendMessage(HandleCursurDisplay.obtainMessage(CursurIndex));
+				
 				ClickCancel();
 			}
 		});	
@@ -187,8 +185,7 @@ public class SpeedometerFreqFragment extends ParentFragment{
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
-				CursurIndex = 13;
-				HandleCursurDisplay.sendMessage(HandleCursurDisplay.obtainMessage(CursurIndex));
+				
 				ClickDefault();
 			}
 		});	
@@ -198,8 +195,7 @@ public class SpeedometerFreqFragment extends ParentFragment{
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
 				
-				CursurIndex = 1;
-				HandleCursurDisplay.sendMessage(HandleCursurDisplay.obtainMessage(CursurIndex));
+				
 				ClickNum1();
 			}
 		});	
@@ -209,8 +205,7 @@ public class SpeedometerFreqFragment extends ParentFragment{
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
 			
-				CursurIndex = 2;
-				HandleCursurDisplay.sendMessage(HandleCursurDisplay.obtainMessage(CursurIndex));
+				
 				ClickNum2();
 			}
 		});	
@@ -220,8 +215,7 @@ public class SpeedometerFreqFragment extends ParentFragment{
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
 			
-				CursurIndex = 3;
-				HandleCursurDisplay.sendMessage(HandleCursurDisplay.obtainMessage(CursurIndex));
+			
 				ClickNum3();
 			}
 		});	
@@ -231,8 +225,7 @@ public class SpeedometerFreqFragment extends ParentFragment{
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
 			
-				CursurIndex = 4;
-				HandleCursurDisplay.sendMessage(HandleCursurDisplay.obtainMessage(CursurIndex));
+				
 				ClickNum4();
 			}
 		});	
@@ -241,8 +234,7 @@ public class SpeedometerFreqFragment extends ParentFragment{
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
-				CursurIndex = 5;
-				HandleCursurDisplay.sendMessage(HandleCursurDisplay.obtainMessage(CursurIndex));
+				
 				ClickNum5();
 			}
 		});	
@@ -252,8 +244,7 @@ public class SpeedometerFreqFragment extends ParentFragment{
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
 			
-				CursurIndex = 6;
-				HandleCursurDisplay.sendMessage(HandleCursurDisplay.obtainMessage(CursurIndex));
+				
 				ClickNum6();
 			}
 		});	
@@ -263,8 +254,7 @@ public class SpeedometerFreqFragment extends ParentFragment{
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
 	
-				CursurIndex = 7;
-				HandleCursurDisplay.sendMessage(HandleCursurDisplay.obtainMessage(CursurIndex));
+				
 				ClickNum7();
 			}
 		});	
@@ -274,8 +264,7 @@ public class SpeedometerFreqFragment extends ParentFragment{
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
 			
-				CursurIndex = 8;
-				HandleCursurDisplay.sendMessage(HandleCursurDisplay.obtainMessage(CursurIndex));
+				
 				ClickNum8();
 			}
 		});	
@@ -285,8 +274,7 @@ public class SpeedometerFreqFragment extends ParentFragment{
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
 		
-				CursurIndex = 9;
-				HandleCursurDisplay.sendMessage(HandleCursurDisplay.obtainMessage(CursurIndex));
+				
 				ClickNum9();
 			}
 		});	
@@ -296,8 +284,7 @@ public class SpeedometerFreqFragment extends ParentFragment{
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
 		
-				CursurIndex = 11;
-				HandleCursurDisplay.sendMessage(HandleCursurDisplay.obtainMessage(CursurIndex));
+				
 				ClickNum0();
 			}
 		});	
@@ -307,19 +294,17 @@ public class SpeedometerFreqFragment extends ParentFragment{
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
 			
-				CursurIndex = 10;
-				HandleCursurDisplay.sendMessage(HandleCursurDisplay.obtainMessage(CursurIndex));
+				
 				ClickNumBack();
 			}
 		});	
-		textViewNext.setOnClickListener(new View.OnClickListener() {
+		imgbtnNext.setOnClickListener(new View.OnClickListener() {
 			
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
 		
-				CursurIndex = 12;
-				HandleCursurDisplay.sendMessage(HandleCursurDisplay.obtainMessage(CursurIndex));
+				
 				ClickNumNext();
 			}
 		});	
@@ -373,6 +358,8 @@ public class SpeedometerFreqFragment extends ParentFragment{
 	}
 	/////////////////////////////////////////////////////////////////////	
 	public void ClickOK(){
+		CursurIndex = 15;
+		HandleCursurDisplay.sendMessage(HandleCursurDisplay.obtainMessage(CursurIndex));
 		if(ParentActivity.AnimationRunningFlag == true)
 			return;
 		else
@@ -392,6 +379,8 @@ public class SpeedometerFreqFragment extends ParentFragment{
 		Log.d(TAG,"SetSpeedMeterFreq : " + Integer.toString(SpeedometerFreq));
 	}
 	public void ClickCancel(){
+		CursurIndex = 14;
+		HandleCursurDisplay.sendMessage(HandleCursurDisplay.obtainMessage(CursurIndex));
 		if(ParentActivity.AnimationRunningFlag == true)
 			return;
 		else
@@ -400,42 +389,87 @@ public class SpeedometerFreqFragment extends ParentFragment{
 		ParentActivity._MenuBaseFragment._MenuModeFragment.setFirstScreen(Home.SCREEN_STATE_MENU_MODE_ETC_TOP);
 	}
 	public void ClickDefault(){
+		CursurIndex = 13;
+		HandleCursurDisplay.sendMessage(HandleCursurDisplay.obtainMessage(CursurIndex));
 		ParentActivity.showSpeedometerInit();
 	}
 	public void ClickNum1(){
+		int Focus = radioGroupNum.getCheckedRadioButtonId();
+		if(Focus == R.id.radio_menu_body_mode_speedometerfreq_data_10)
+			return;
+		
+		CursurIndex = 1;
+		HandleCursurDisplay.sendMessage(HandleCursurDisplay.obtainMessage(CursurIndex));
 		setNumber(1);
 	}
 	public void ClickNum2(){
+		int Focus = radioGroupNum.getCheckedRadioButtonId();
+		if(Focus == R.id.radio_menu_body_mode_speedometerfreq_data_10)
+			return;
+		CursurIndex = 2;
+		HandleCursurDisplay.sendMessage(HandleCursurDisplay.obtainMessage(CursurIndex));
 		setNumber(2);
 	}
 	public void ClickNum3(){
+		int Focus = radioGroupNum.getCheckedRadioButtonId();
+		if(Focus == R.id.radio_menu_body_mode_speedometerfreq_data_10)
+			return;
+		CursurIndex = 3;
+		HandleCursurDisplay.sendMessage(HandleCursurDisplay.obtainMessage(CursurIndex));
 		setNumber(3);
 	}
 	public void ClickNum4(){
+		int Focus = radioGroupNum.getCheckedRadioButtonId();
+		if(Focus == R.id.radio_menu_body_mode_speedometerfreq_data_10)
+			return;
+		CursurIndex = 4;
+		HandleCursurDisplay.sendMessage(HandleCursurDisplay.obtainMessage(CursurIndex));
 		setNumber(4);
 	}
 	public void ClickNum5(){
+		CursurIndex = 5;
+		HandleCursurDisplay.sendMessage(HandleCursurDisplay.obtainMessage(CursurIndex));
 		setNumber(5);
 	}
 	public void ClickNum6(){
+		CursurIndex = 6;
+		HandleCursurDisplay.sendMessage(HandleCursurDisplay.obtainMessage(CursurIndex));
 		setNumber(6);
 	}
 	public void ClickNum7(){
+		CursurIndex = 7;
+		HandleCursurDisplay.sendMessage(HandleCursurDisplay.obtainMessage(CursurIndex));
 		setNumber(7);
 	}
 	public void ClickNum8(){
+		CursurIndex = 8;
+		HandleCursurDisplay.sendMessage(HandleCursurDisplay.obtainMessage(CursurIndex));
 		setNumber(8);
 	}
 	public void ClickNum9(){
+		CursurIndex = 9;
+		HandleCursurDisplay.sendMessage(HandleCursurDisplay.obtainMessage(CursurIndex));
 		setNumber(9);
 	}
 	public void ClickNum0(){
+		int Focus = radioGroupNum.getCheckedRadioButtonId();
+		if(Focus == R.id.radio_menu_body_mode_speedometerfreq_data_10)
+			return;
+		CursurIndex = 11;
+		HandleCursurDisplay.sendMessage(HandleCursurDisplay.obtainMessage(CursurIndex));
 		setNumber(0);
 	}
 	public void ClickNumBack(){
+		int Focus = radioGroupNum.getCheckedRadioButtonId();
+		if(Focus == R.id.radio_menu_body_mode_speedometerfreq_data_10)
+			return;
+		CursurIndex = 10;
+		HandleCursurDisplay.sendMessage(HandleCursurDisplay.obtainMessage(CursurIndex));
 		setBack();
 	}
 	public void ClickNumNext(){
+		CursurIndex = 12;
+		HandleCursurDisplay.sendMessage(HandleCursurDisplay.obtainMessage(CursurIndex));
 		setNext();
 	}
 	public void ClickRadioNum10(){
@@ -893,7 +927,7 @@ public class SpeedometerFreqFragment extends ParentFragment{
 		textViewNum9.setPressed(false);
 		textViewNum0.setPressed(false);
 		imgbtnBack.setPressed(false);
-		textViewNext.setPressed(false);
+		imgbtnNext.setPressed(false);
 
 		switch (Index) {
 		case 1:
@@ -930,7 +964,7 @@ public class SpeedometerFreqFragment extends ParentFragment{
 			textViewNum0.setPressed(true);
 			break;
 		case 12:
-			textViewNext.setPressed(true);
+			imgbtnNext.setPressed(true);
 			break;
 		case 13:
 			imgbtnDefault.setPressed(true);

@@ -75,7 +75,7 @@ public class FaultHistoryLoggedFragment extends ParentFragment{
 	//////////////////////////////////////////////////
 	
 	//VALUABLE////////////////////////////////////////
-	int SelectedMode;
+	public int SelectedMode;
 	
 	int DTCTotalPacketMachine;
 	int DTCTotalPacketEngine;
@@ -483,10 +483,12 @@ public class FaultHistoryLoggedFragment extends ParentFragment{
 			if(SendSeqIndex == 1){
 				RequestErrorCode(SendDTCIndex,1,SendSeqIndex);
 				SendSeqIndex++;
+				SetThreadSleepTime(200);
 			}
 			else if(SendSeqIndex > DTCTotalPacketMachine){
 				SendSeqIndex = 1;
 				SendDTCIndex = REQ_ERR_ENGINE_LOGGED;
+				SetThreadSleepTime(1000);
 			}
 			else{
 				RequestErrorCode(SendDTCIndex,1,SendSeqIndex);
@@ -498,10 +500,12 @@ public class FaultHistoryLoggedFragment extends ParentFragment{
 			if(SendSeqIndex == 1){
 				RequestErrorCode(SendDTCIndex,1,SendSeqIndex);
 				SendSeqIndex++;
+				SetThreadSleepTime(200);
 			}
 			else if(SendSeqIndex > DTCTotalPacketEngine){
 				SendSeqIndex = 1;
 				SendDTCIndex = REQ_ERR_TM_LOGGED;
+				SetThreadSleepTime(1000);
 			}
 			else{
 				RequestErrorCode(SendDTCIndex,1,SendSeqIndex);
@@ -513,10 +517,12 @@ public class FaultHistoryLoggedFragment extends ParentFragment{
 			if(SendSeqIndex == 1){
 				RequestErrorCode(SendDTCIndex,1,SendSeqIndex);
 				SendSeqIndex++;
+				SetThreadSleepTime(200);
 			}
 			else if(SendSeqIndex > DTCTotalPacketTM){
 				SendSeqIndex = 1;
 				SendDTCIndex = REQ_ERR_EHCU_LOGGED;
+				SetThreadSleepTime(1000);
 			}
 			else{
 				RequestErrorCode(SendDTCIndex,1,SendSeqIndex);
@@ -528,16 +534,18 @@ public class FaultHistoryLoggedFragment extends ParentFragment{
 			if(SendSeqIndex == 1){
 				RequestErrorCode(SendDTCIndex,1,SendSeqIndex);
 				SendSeqIndex++;
+				SetThreadSleepTime(200);
 			}
 			else if(SendSeqIndex > DTCTotalPacketTM){
 				SendSeqIndex = 1;
 				SendDTCIndex = REQ_ERR_MACHINE_LOGGED;
+				SetThreadSleepTime(1000);
 			}
 			else{
 				RequestErrorCode(SendDTCIndex,1,SendSeqIndex);
 				SendSeqIndex++;
 			}
-			SetThreadSleepTime(1000);
+			
 			break;
 		default:
 			break;

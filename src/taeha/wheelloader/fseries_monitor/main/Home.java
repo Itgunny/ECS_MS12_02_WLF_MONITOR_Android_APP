@@ -67,7 +67,7 @@ public class Home extends Activity {
 	public static final int VERSION_HIGH 		= 1;
 	public static final int VERSION_LOW 		= 0;
 	public static final int VERSION_SUB_HIGH 	= 3;
-	public static final int VERSION_SUB_LOW 	= 0;
+	public static final int VERSION_SUB_LOW 	= 1;
 	////1.0.2.3
 	// UI B 안 최초 적용 2014.12.10
 	////1.0.2.4
@@ -132,8 +132,10 @@ public class Home extends Activity {
 	// 가상 키패드 뒷 영역 터치되는 문제 수정
 	// Main Buzzer Stop 후 잠깐동안 Buzzer 켜지는 문제 수정
 	// 시간 설정 커서 이미지 변경 
-	// AS Phone Number RMCU와 연동
-	// 
+	// AS Phone Number RMCU와 연동 
+	////1.0.3.0
+	// 숫자 키패드 적용
+	
 	//////////////////////////////////////////////////////////////////////////////////////
 	
 	// TAG
@@ -394,6 +396,21 @@ public class Home extends Activity {
 	
 	public static final int	DISPLAY_TYPE_A			= 0;
 	public static final int	DISPLAY_TYPE_B			= 1;
+	
+	
+	
+	public static final int WARMINGUP 				= 0;
+	public static final int FUELWARMER				= 1;
+	public static final int PREHEAT 				= 2;
+	public static final int RIDECONTROL 			= 3;
+	public static final int FLOATMODE 				= 4;
+	public static final int FANREVERSE				= 5;
+	public static final int CLUTCHCUTOFF 			= 6;
+	public static final int LOCKUPCLUTCH 			= 7;
+	public static final int SEATBELT 				= 8;
+	public static final int ENGINEAUTOSHUTDOWN 		= 9;
+
+
 	////////////////////////////////////////////////////
 	
 	//Resource//////////////////////////////////////////
@@ -1543,6 +1560,9 @@ public class Home extends Activity {
 		}else if((ScreenIndex & SCREEN_STATE_MAIN_B_TOP) == SCREEN_STATE_MAIN_B_TOP){
 			Log.d(TAG,"Click Main Key");
 			_MainBBaseFragment.KeyButtonClick(Data);
+		}else if((ScreenIndex & SCREEN_STATE_MAIN_ENDING) == SCREEN_STATE_MAIN_ENDING){
+			Log.d(TAG,"Click Ending Key");
+			
 		}else if((ScreenIndex & SCREEN_STATE_MENU_TOP) == SCREEN_STATE_MENU_TOP){
 			Log.d(TAG,"Click Menu Key");
 			_MenuBaseFragment.KeyButtonClick(Data);

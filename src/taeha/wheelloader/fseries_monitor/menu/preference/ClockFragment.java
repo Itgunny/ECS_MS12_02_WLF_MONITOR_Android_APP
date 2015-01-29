@@ -45,7 +45,7 @@ public class ClockFragment extends ParentFragment{
 	TextView textViewNum0;
 	
 	ImageButton imgbtnBack;
-	TextView textViewNext;
+	ImageButton imgbtnNext;
 	
 	RadioButton radioHour10;
 	RadioButton radioHour1;
@@ -132,7 +132,7 @@ public class ClockFragment extends ParentFragment{
 		textViewNum0 = (TextView)mRoot.findViewById(R.id.textView_menu_body_preference_clock_num_0);
 		
 		imgbtnBack = (ImageButton)mRoot.findViewById(R.id.imageButton_menu_body_preference_clock_num_back);
-		textViewNext = (TextView)mRoot.findViewById(R.id.textView_menu_body_preference_clock_num_next);
+		imgbtnNext = (ImageButton)mRoot.findViewById(R.id.imageButton_menu_body_preference_clock_num_next);
 		
 		textViewAMPM = (TextView)mRoot.findViewById(R.id.textView_menu_body_preference_clock_ampm);
 		
@@ -286,7 +286,7 @@ public class ClockFragment extends ParentFragment{
 				ClickNumBack();
 			}
 		});	
-		textViewNext.setOnClickListener(new View.OnClickListener() {
+		imgbtnNext.setOnClickListener(new View.OnClickListener() {
 			
 			@Override
 			public void onClick(View v) {
@@ -1157,7 +1157,7 @@ public class ClockFragment extends ParentFragment{
 		textViewNum9.setPressed(false);
 		textViewNum0.setPressed(false);
 		imgbtnBack.setPressed(false);
-		textViewNext.setPressed(false);
+		imgbtnNext.setPressed(false);
 
 		switch (Index) {
 		case 1:
@@ -1197,7 +1197,7 @@ public class ClockFragment extends ParentFragment{
 			textViewNum0.setPressed(true);
 			break;
 		case 13:
-			textViewNext.setPressed(true);
+			imgbtnNext.setPressed(true);
 			break;
 		case 14:
 			imgbtnCancel.setPressed(true);

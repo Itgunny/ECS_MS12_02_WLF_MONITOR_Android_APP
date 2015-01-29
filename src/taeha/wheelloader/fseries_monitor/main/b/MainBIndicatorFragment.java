@@ -1,5 +1,7 @@
 package taeha.wheelloader.fseries_monitor.main.b;
 
+import actionpopup.ActionItem;
+import actionpopup.QuickAction;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -8,6 +10,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import taeha.wheelloader.fseries_monitor.animation.ImageViewYAxisFlipAnimation;
 import taeha.wheelloader.fseries_monitor.main.CAN1CommManager;
+import taeha.wheelloader.fseries_monitor.main.Home;
 import taeha.wheelloader.fseries_monitor.main.ParentFragment;
 import taeha.wheelloader.fseries_monitor.main.R;
 
@@ -42,6 +45,9 @@ public class MainBIndicatorFragment extends ParentFragment{
 	int LockUpClutch;
 	int SeatBelt;
 	int EngineAutoShutdown;
+	
+	private QuickAction popupIndicator;
+	private ActionItem actionitemIndicator;
 	//////////////////////////////////////////////////
 	
 	//ANIMATION///////////////////////////////////////
@@ -120,12 +126,107 @@ public class MainBIndicatorFragment extends ParentFragment{
 		LockUpClutchAnimation = new ImageViewYAxisFlipAnimation(ParentActivity);
 		SeatBeltAnimation = new ImageViewYAxisFlipAnimation(ParentActivity);
 		EngineAutoShutdownAnimation = new ImageViewYAxisFlipAnimation(ParentActivity);
-		EngineDelayShutdownAnimation = new ImageViewYAxisFlipAnimation(ParentActivity);		
+		EngineDelayShutdownAnimation = new ImageViewYAxisFlipAnimation(ParentActivity);	
+		
+
+		popupIndicator = new QuickAction(ParentActivity, QuickAction.VERTICAL);
+		actionitemIndicator = new ActionItem(0, ParentActivity.getResources().getString(R.string.Lamp_SeatBelt), getResources().getDrawable(R.drawable.main_indicator_seatbelt_on));
+		popupIndicator.addActionItem(actionitemIndicator);
 	}
 	@Override
 	protected void InitButtonListener() {
 		// TODO Auto-generated method stub
 		
+		imgViewWarmingUp.setOnClickListener(new View.OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				showLampPopup(Home.WARMINGUP);
+				popupIndicator.show(v);
+			}
+		});
+		imgViewFuelWarmer.setOnClickListener(new View.OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				showLampPopup(Home.FUELWARMER);
+				popupIndicator.show(v);
+			}
+		});
+		imgViewPreHeat.setOnClickListener(new View.OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				showLampPopup(Home.PREHEAT);
+				popupIndicator.show(v);
+			}
+		});
+		imgViewRideControl.setOnClickListener(new View.OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				showLampPopup(Home.RIDECONTROL);
+				popupIndicator.show(v);
+			}
+		});
+		imgViewFloatingMode.setOnClickListener(new View.OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				showLampPopup(Home.FLOATMODE);
+				popupIndicator.show(v);
+			}
+		});
+		imgViewReverseFan.setOnClickListener(new View.OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				showLampPopup(Home.FANREVERSE);
+				popupIndicator.show(v);
+			}
+		});
+		imgViewClutchCutOff.setOnClickListener(new View.OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				showLampPopup(Home.CLUTCHCUTOFF);
+				popupIndicator.show(v);
+			}
+		});
+		imgViewLockUpClutch.setOnClickListener(new View.OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				showLampPopup(Home.LOCKUPCLUTCH);
+				popupIndicator.show(v);
+			}
+		});
+		imgViewSeatBelt.setOnClickListener(new View.OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				showLampPopup(Home.SEATBELT);
+				popupIndicator.show(v);
+			}
+		});
+		imgViewEngineAutoShutdown.setOnClickListener(new View.OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				showLampPopup(Home.ENGINEAUTOSHUTDOWN);
+				popupIndicator.show(v);
+			}
+		});
 	}
 
 	@Override
@@ -304,6 +405,66 @@ public class MainBIndicatorFragment extends ParentFragment{
 		case CAN1CommManager.DATA_STATE_LAMP_ON:
 			EngineAutoShutdownAnimation.FlipAnimation(imgViewEngineAutoShutdown, R.drawable.main_indicator_engineautoshutdown_on);
 			imgViewEngineAutoShutdown.setAlpha(LIGHT);
+			break;
+		default:
+			break;
+		}
+		
+		
+	}
+	
+	public void showLampPopup(int Index){
+		popupIndicator.removeAllActionItem();
+		switch (Index) {
+		case Home.RIDECONTROL:
+			actionitemIndicator = new ActionItem(0, ParentActivity.getResources().getString(R.string.Lamp_RideControl), 
+					getResources().getDrawable(R.drawable.main_indicator_rideon_on));
+			popupIndicator.addActionItem(actionitemIndicator);
+			break;
+		case Home.FANREVERSE:
+			actionitemIndicator = new ActionItem(0, ParentActivity.getResources().getString(R.string.Lamp_FanReverse),
+					getResources().getDrawable(R.drawable.main_indicator_fanreverse_on));
+			popupIndicator.addActionItem(actionitemIndicator);
+			break;
+		case Home.CLUTCHCUTOFF:
+			actionitemIndicator = new ActionItem(0, ParentActivity.getResources().getString(R.string.Lamp_ClutchCutOff),
+					getResources().getDrawable(R.drawable.main_indicator_clutchcutoff_on));
+			popupIndicator.addActionItem(actionitemIndicator);
+			break;
+		case Home.LOCKUPCLUTCH:
+			actionitemIndicator = new ActionItem(0, ParentActivity.getResources().getString(R.string.Lamp_LockUpClutch),
+					getResources().getDrawable(R.drawable.main_indicator_lockupclutch_on));
+			popupIndicator.addActionItem(actionitemIndicator);
+			break;
+		case Home.ENGINEAUTOSHUTDOWN:
+			actionitemIndicator = new ActionItem(0, ParentActivity.getResources().getString(R.string.Lamp_EngineAutoShutdown),
+					getResources().getDrawable(R.drawable.main_indicator_engineautoshutdown_on));
+			popupIndicator.addActionItem(actionitemIndicator);
+			break;
+		case Home.SEATBELT:
+			actionitemIndicator = new ActionItem(0, ParentActivity.getResources().getString(R.string.Lamp_SeatBelt),
+					getResources().getDrawable(R.drawable.main_indicator_seatbelt_on));
+			popupIndicator.addActionItem(actionitemIndicator);
+			break;
+		case Home.WARMINGUP:
+			actionitemIndicator = new ActionItem(0, ParentActivity.getResources().getString(R.string.Lamp_Warmingup),
+					getResources().getDrawable(R.drawable.main_indicator_warmimgup_on));
+			popupIndicator.addActionItem(actionitemIndicator);
+			break;
+		case Home.FUELWARMER:
+			actionitemIndicator = new ActionItem(0, ParentActivity.getResources().getString(R.string.Lamp_FuelWarmer),
+					getResources().getDrawable(R.drawable.main_indicator_fuelwamer_on));
+			popupIndicator.addActionItem(actionitemIndicator);
+			break;
+		case Home.PREHEAT:
+			actionitemIndicator = new ActionItem(0, ParentActivity.getResources().getString(R.string.Lamp_Preheat),
+					getResources().getDrawable(R.drawable.main_indicator_preheat_on));
+			popupIndicator.addActionItem(actionitemIndicator);
+			break;
+		case Home.FLOATMODE:
+			actionitemIndicator = new ActionItem(0, ParentActivity.getResources().getString(R.string.Lamp_FloatMode),
+					getResources().getDrawable(R.drawable.main_indicator_floatmode_on));
+			popupIndicator.addActionItem(actionitemIndicator);
 			break;
 		default:
 			break;

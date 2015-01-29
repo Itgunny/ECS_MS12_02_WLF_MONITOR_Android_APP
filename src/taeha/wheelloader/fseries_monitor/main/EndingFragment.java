@@ -5,6 +5,7 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 import android.content.Intent;
+import android.graphics.drawable.AnimationDrawable;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -48,18 +49,16 @@ public class EndingFragment extends ParentFragment{
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
-		TAG = "ESLCheckFragment";
+		TAG = "EndingFragment";
 		Log.d(TAG, "onCreateView");
 		mRoot = inflater.inflate(R.layout.screen_ending, null);
 		InitResource();
 		InitValuables();
 		InitButtonListener();
-		
-		
-		
+
 		ParentActivity.ScreenIndex = Home.SCREEN_STATE_MAIN_ENDING;
 		
-		Animation.Ending();	
+		Animation.Ending();
 		return mRoot;
 	}
 	@Override
@@ -76,14 +75,16 @@ public class EndingFragment extends ParentFragment{
 	@Override
 	protected void InitResource() {
 		// TODO Auto-generated method stub
-
+		Log.d(TAG,"InitResource");
 		imgViewEnding = (ImageView)mRoot.findViewById(R.id.imageView_screen_ending);
+		Log.d(TAG,"InitResource2");
 	}
-	
+
 	protected void InitValuables() {
 		// TODO Auto-generated method stub
 		super.InitValuables();
 		Animation = new EndingAnimation(ParentActivity, imgViewEnding);
+	
 
 	}
 	@Override
@@ -115,6 +116,7 @@ public class EndingFragment extends ParentFragment{
 				public void run() {
 					// TODO Auto-generated method stub
 					ParentActivity.finish();
+				
 				}
 			});
 			
@@ -159,7 +161,7 @@ public class EndingFragment extends ParentFragment{
 	public void StartEndingAnimationTimer(){
 		CancelEndingAnimationTimer();
 		mEndingAnimationTimer = new Timer();
-		mEndingAnimationTimer.schedule(new EndingAnimationTimerClass(),1,27);	
+		mEndingAnimationTimer.schedule(new EndingAnimationTimerClass(),1,100);	
 	}
 	
 	public void CancelEndingAnimationTimer(){
