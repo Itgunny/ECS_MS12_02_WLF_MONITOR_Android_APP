@@ -669,7 +669,7 @@ public class Home extends Activity {
 			StartCommService();
 			threadRead = new Thread(new ReadThread(this));
 			threadLoading = new Thread(new LoadingThread(this));
-		//	threadLoading.start();
+//			threadLoading.start();
 			CAN1Comm.SetScreenTopFlag(true);
 		} catch (RuntimeException e) {
 			Log.e(TAG,"CAN1Comm Instance Error");
