@@ -143,6 +143,14 @@ public class WorkLoadFragment extends ParentFragment{
 		ErrorDetectionDisplay(WeighingErrorDetect);
 		//InitButtonDisplay(WeighingDisplayMode);
 		CursurFirstDisplay(WeighingSystemModeIndex);
+		
+		// ++, 150210 bwk
+		if(ParentActivity.OldScreenIndex == ParentActivity.SCREEN_STATE_MENU_MANAGEMENT_CALIBRATION_PRESSURE_TOP)
+		{
+			CursurIndex = 9;
+			CursurDisplay(CursurIndex);
+		}
+		// --, 150210 bwk
 	}
 	@Override
 	protected void InitButtonListener() {
@@ -317,9 +325,8 @@ public class WorkLoadFragment extends ParentFragment{
 		ParentActivity._MenuBaseFragment._MenuModeFragment.setFirstScreen(Home.SCREEN_STATE_MENU_MODE_HYD_TOP);
 	}
 	public void ClickDefault(){
+		ParentActivity.OldScreenIndex = ParentActivity.SCREEN_STATE_MENU_MODE_HYD_WORKLOAD_TOP;	// ++, --, 150210 bwk
 		ParentActivity.showWorkLoadInit();
-		
-
 	}
 	public void SetDefault(){
 		CAN1Comm.Set_WeighingSystemAccumulationMode_1941_PGN61184_62(CAN1CommManager.DATA_STATE_WEIGHING_ACCUMULATION_AUTO);
@@ -338,6 +345,7 @@ public class WorkLoadFragment extends ParentFragment{
 		ClickErrorDetectionOn();
 	}
 	public void ClickCalibration(){
+		ParentActivity.OldScreenIndex = ParentActivity.SCREEN_STATE_MENU_MODE_HYD_WORKLOAD_TOP;	// ++, --, 150210 bwk
 		if(ParentActivity.AnimationRunningFlag == true)
 			return;
 		else

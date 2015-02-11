@@ -64,6 +64,7 @@ import taeha.wheelloader.fseries_monitor.menu.multimedia.MenuMultimediaFragment;
 import taeha.wheelloader.fseries_monitor.menu.preference.BrightnessFragment;
 import taeha.wheelloader.fseries_monitor.menu.preference.ClockFragment;
 import taeha.wheelloader.fseries_monitor.menu.preference.DisplayTypeListFragment;
+import taeha.wheelloader.fseries_monitor.menu.preference.LanguageListFragment;
 import taeha.wheelloader.fseries_monitor.menu.preference.MenuPreferenceFragment;
 import taeha.wheelloader.fseries_monitor.menu.preference.UnitFragment;
 import android.R.integer;
@@ -167,6 +168,7 @@ public class MenuBaseFragment extends ParentFragment{
 	public ClockFragment							_ClockFragment;
 	public UnitFragment								_UnitFragment;
 	public DisplayTypeListFragment					_DisplayTypeListFragment;
+	public LanguageListFragment						_LanguageListFragment;	// ++, --, 150206 bwk
 	
 	//UserSwitching
 	public UserSwitching							_UserSwitching;
@@ -291,6 +293,7 @@ public class MenuBaseFragment extends ParentFragment{
 		_UnitFragment = new UnitFragment();
 		_DisplayTypeListFragment = new DisplayTypeListFragment();
 		_UserSwitching = new UserSwitching();
+		_LanguageListFragment = new LanguageListFragment();	// ++, --, 150206 bwk
 	}
 	
 	protected void InitValuables() {
@@ -371,6 +374,7 @@ public class MenuBaseFragment extends ParentFragment{
 		transaction.detach(_UnitFragment);
 		transaction.detach(_DisplayTypeListFragment);
 		transaction.detach(_UserSwitching);
+		transaction.detach(_LanguageListFragment);	// ++, --, 150206 bwk
 		
 		
 		transaction.commit();	
@@ -431,6 +435,15 @@ public class MenuBaseFragment extends ParentFragment{
 			showBodyMaintenanceAnimation();
 			setFirstScreenIndex(0);
 		}
+		// ++, 150210 bwk
+		else if(Index == Home.SCREEN_STATE_MENU_PREFERENCE_DISPLAYTYPELANG_LANG_CHANGE){
+			framelayoutListTitle.setVisibility(View.INVISIBLE);
+			framelayoutListBody.setVisibility(View.INVISIBLE);
+			framelayoutListLeft.setVisibility(View.INVISIBLE);
+			showBodyLanguageAnimation();
+			setFirstScreenIndex(0);
+		}
+		// --, 150210 bwk
 		else{
 			ListLeftAnimation.StartAppearAnimation(_MenuListLeftFragment);
 			ListTitleAnimation.StartAppearAnimation(_MenuListTitleFragment);
@@ -539,8 +552,6 @@ public class MenuBaseFragment extends ParentFragment{
 		transaction.replace(R.id.FrameLayout_menu_list_body, _DisplayTypeListFragment);
 		transaction.commit();
 	}
-	
-	
 	
 	// Inter
 	public void showBodyEngineSpeed(){
@@ -937,7 +948,6 @@ public class MenuBaseFragment extends ParentFragment{
 		_MenuListLeftFragment.setFirstScreen(Home.SCREEN_STATE_MENU_PREFERENCE_TOP);
 	}
 	
-	
 	// Inter
 	public void showBodyEngineSpeedAnimation(){
 		showInterAnimation();
@@ -1115,7 +1125,12 @@ public class MenuBaseFragment extends ParentFragment{
 		showInterAnimation();
 		InterBodyAnimation.StartChangeAnimation(_UserSwitching);
 	}
-	
+	// ++, 150206 bwk
+	public void showBodyLanguageAnimation(){
+		showInterAnimation();
+		InterBodyAnimation.StartChangeAnimation(_LanguageListFragment);
+	}
+	// --, 150206 bwk
 	/////////////////////////////////////////////////////////////////////
 	
 	/////////////////////////////////////////////////////////////////////
@@ -1184,7 +1199,10 @@ public class MenuBaseFragment extends ParentFragment{
 			ClickKeyButtonLongLeftRightEnter();
 			break;
 		case CAN1CommManager.MENU:
-			_MenuListTitleFragment.ClickHome();
+			// ++, 150209 bwk
+			//_MenuListTitleFragment.ClickHome();
+			ClickKeyButtonHome();
+			// --, 150209 bwk
 			break;
 		case CAN1CommManager.FN:
 			Log.d(TAG,"Click FN");
@@ -1427,6 +1445,11 @@ public class MenuBaseFragment extends ParentFragment{
 		case Home.SCREEN_STATE_MENU_PREFERENCE_DISPLAYTYPELANG_TOP:
 			_DisplayTypeListFragment.ClickLeft();
 			break;
+		// ++, 150206 bwk
+		case Home.SCREEN_STATE_MENU_PREFERENCE_DISPLAYTYPELANG_LANG_CHANGE:
+			_LanguageListFragment.ClickLeft();
+			break;
+		// --, 150206 bwk;
 		case Home.SCREEN_STATE_MENU_PREFERENCE_SOUNDOUTPUT_TOP:
 			ParentActivity._SoundOutputPopup.ClickLeft();
 			break;
@@ -1675,6 +1698,11 @@ public class MenuBaseFragment extends ParentFragment{
 		case Home.SCREEN_STATE_MENU_PREFERENCE_DISPLAYTYPELANG_TOP:
 			_DisplayTypeListFragment.ClickRight();
 			break;
+		// ++, 150206 bwk
+		case Home.SCREEN_STATE_MENU_PREFERENCE_DISPLAYTYPELANG_LANG_CHANGE:
+			_LanguageListFragment.ClickRight();
+			break;
+		// --, 150206 bwk;			
 		case Home.SCREEN_STATE_MENU_PREFERENCE_SOUNDOUTPUT_TOP:
 			ParentActivity._SoundOutputPopup.ClickRight();
 			break;
@@ -1921,6 +1949,11 @@ public class MenuBaseFragment extends ParentFragment{
 		case Home.SCREEN_STATE_MENU_PREFERENCE_DISPLAYTYPELANG_TOP:
 			_DisplayTypeListFragment.ClickESC();
 			break;
+		// ++, 150206 bwk
+		case Home.SCREEN_STATE_MENU_PREFERENCE_DISPLAYTYPELANG_LANG_CHANGE:
+			_LanguageListFragment.ClickESC();
+			break;
+		// --, 150206 bwk;				
 		case Home.SCREEN_STATE_MENU_PREFERENCE_SOUNDOUTPUT_TOP:
 			ParentActivity._SoundOutputPopup.ClickESC();
 			break;
@@ -2167,6 +2200,11 @@ public class MenuBaseFragment extends ParentFragment{
 		case Home.SCREEN_STATE_MENU_PREFERENCE_DISPLAYTYPELANG_TOP:
 			_DisplayTypeListFragment.ClickEnter();
 			break;
+		// ++, 150206 bwk
+		case Home.SCREEN_STATE_MENU_PREFERENCE_DISPLAYTYPELANG_LANG_CHANGE:
+			_LanguageListFragment.ClickEnter();
+			break;
+		// --, 150206 bwk;		
 		case Home.SCREEN_STATE_MENU_PREFERENCE_SOUNDOUTPUT_TOP:
 			ParentActivity._SoundOutputPopup.ClickEnter();
 			break;
@@ -2233,6 +2271,27 @@ public class MenuBaseFragment extends ParentFragment{
 		}
 	
 	}
+	
+	// ++, 150209 bwk
+	public void ClickKeyButtonHome(){
+		switch (ParentActivity.ScreenIndex) {
+		case Home.SCREEN_STATE_MENU_MONITORING_FAULTHISTORY_ACTIVE_TOP:
+			_FaultHistoryActiveFragment.ClickHome();
+			break;
+		default:
+			// ++, 150210 bwk
+			if(ParentActivity.OldScreenIndex == Home.SCREEN_STATE_MAIN_B_TOP)
+			{
+				ParentActivity._MainChangeAnimation.StartChangeAnimation(ParentActivity._MainBBaseFragment);
+				ParentActivity.OldScreenIndex = 0;
+			}
+			else
+			// --, 150210 bwk
+				_MenuListTitleFragment.ClickHome();
+			break;
+		}
+	}
+	// --, 150209 bwk
 	
 	public void ClickNum1(){
 		switch (ParentActivity.ScreenIndex) {

@@ -32,7 +32,7 @@
 
             <RadioButton
                 android:id="@+id/radioButton_menu_body_userswitching_default"
-                android:layout_width="100dp"
+                android:layout_width="120dp"
                 android:layout_height="wrap_content"
                 android:button="@drawable/_selector_radio_btn"
                 android:text="@string/Default"
@@ -41,9 +41,9 @@
 
             <RadioButton
                 android:id="@+id/radioButton_menu_body_userswitching_user1"
-                android:layout_width="100dp"
+                android:layout_width="120dp"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="40dp"
+                android:layout_marginLeft="30dp"
                 android:button="@drawable/_selector_radio_btn"
                 android:text="@string/User1"
                 android:textColor="@drawable/_selector_radio_txt_white_amber"
@@ -51,9 +51,9 @@
             
             <RadioButton
                 android:id="@+id/radioButton_menu_body_userswitching_user2"
-                android:layout_width="100dp"
+                android:layout_width="120dp"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="40dp"
+                android:layout_marginLeft="30dp"
                 android:button="@drawable/_selector_radio_btn"
                 android:text="@string/User2"
                 android:textColor="@drawable/_selector_radio_txt_white_amber"
@@ -61,9 +61,9 @@
             
             <RadioButton
                 android:id="@+id/radioButton_menu_body_userswitching_user3"
-                android:layout_width="100dp"
+                android:layout_width="120dp"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="40dp"
+                android:layout_marginLeft="30dp"
                 android:button="@drawable/_selector_radio_btn"
                 android:text="@string/User3"
                 android:textColor="@drawable/_selector_radio_txt_white_amber"
@@ -71,9 +71,9 @@
             
             <RadioButton
                 android:id="@+id/radioButton_menu_body_userswitching_user4"
-                android:layout_width="100dp"
+                android:layout_width="120dp"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="40dp"
+                android:layout_marginLeft="30dp"
                 android:button="@drawable/_selector_radio_btn"
                 android:text="@string/User4"
                 android:textColor="@drawable/_selector_radio_txt_white_amber"

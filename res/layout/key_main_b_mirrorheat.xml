@@ -35,7 +35,7 @@
         android:layout_marginTop="200dp"
         android:background="@drawable/_selector_key_rearwiper_washer_btn1"
         android:gravity="center"
-        android:text="@string/Cancel"
+        android:text="@string/Off"
         android:textAppearance="?android:attr/textAppearanceLarge" />
 
     

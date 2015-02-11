@@ -65,11 +65,14 @@
 
             <CheckBox
                 android:id="@+id/checkBox_menu_body_monitoring_operationhistory_work_totala"
-                android:layout_width="300dp"
-                android:layout_height="wrap_content"
+                android:layout_width="342dp"
+                android:layout_height="66dp"
                 android:layout_marginLeft="10dp"
+                android:layout_marginTop="5dp"
                 android:button="@drawable/_selector_check_btn"
+                android:gravity="top"
                 android:paddingLeft="50dp"
+                android:paddingTop="5dp"
                 android:text="@string/Total_A"
                 android:textColor="@drawable/_selector_radio_txt_white_amber" />
 
@@ -109,11 +112,14 @@
 
             <CheckBox
                 android:id="@+id/checkBox_menu_body_monitoring_operationhistory_work_totalb"
-                android:layout_width="300dp"
-                android:layout_height="wrap_content"
+                android:layout_width="342dp"
+                android:layout_height="66dp"
                 android:layout_marginLeft="10dp"
+                android:layout_marginTop="5dp"
                 android:button="@drawable/_selector_check_btn"
+                android:gravity="top"
                 android:paddingLeft="50dp"
+                android:paddingTop="5dp"
                 android:text="@string/Total_B"
                 android:textColor="@drawable/_selector_radio_txt_white_amber" />
 
@@ -153,11 +159,14 @@
 
             <CheckBox
                 android:id="@+id/checkBox_menu_body_monitoring_operationhistory_work_totalc"
-                android:layout_width="300dp"
-                android:layout_height="wrap_content"
+                android:layout_width="342dp"
+                android:layout_height="66dp"
                 android:layout_marginLeft="10dp"
+                android:layout_marginTop="5dp"
                 android:button="@drawable/_selector_check_btn"
+                android:gravity="top"
                 android:paddingLeft="50dp"
+                android:paddingTop="5dp"
                 android:text="@string/Total_C"
                 android:textColor="@drawable/_selector_radio_txt_white_amber" />
 
@@ -241,11 +250,14 @@
 
             <CheckBox
                 android:id="@+id/checkBox_menu_body_monitoring_operationhistory_odo_latest"
-                android:layout_width="300dp"
-                android:layout_height="wrap_content"
+                android:layout_width="342dp"
+                android:layout_height="66dp"
                 android:layout_marginLeft="10dp"
+                android:layout_marginTop="5dp"
                 android:button="@drawable/_selector_check_btn"
+                android:gravity="top"
                 android:paddingLeft="50dp"
+                android:paddingTop="5dp"
                 android:text="@string/Latest_Odometer"
                 android:textColor="@drawable/_selector_radio_txt_white_amber" />
 
@@ -285,11 +297,14 @@
 
             <CheckBox
                 android:id="@+id/checkBox_menu_body_monitoring_operationhistory_hour_latest"
-                android:layout_width="300dp"
-                android:layout_height="wrap_content"
+                android:layout_width="342dp"
+                android:layout_height="66dp"
                 android:layout_marginLeft="10dp"
+                android:layout_marginTop="5dp"
                 android:button="@drawable/_selector_check_btn"
+                android:gravity="top"
                 android:paddingLeft="50dp"
+                android:paddingTop="5dp"
                 android:text="@string/Latest_Hourmeter"
                 android:textColor="@drawable/_selector_radio_txt_white_amber" />
 

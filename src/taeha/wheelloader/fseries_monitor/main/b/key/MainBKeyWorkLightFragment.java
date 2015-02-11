@@ -12,6 +12,7 @@ import android.widget.TextView;
 import taeha.wheelloader.fseries_monitor.main.CAN1CommManager;
 import taeha.wheelloader.fseries_monitor.main.ParentFragment;
 import taeha.wheelloader.fseries_monitor.main.R;
+import taeha.wheelloader.fseries_monitor.main.R.string;
 
 public class MainBKeyWorkLightFragment extends ParentFragment{
 	//CONSTANT////////////////////////////////////////
@@ -66,6 +67,12 @@ public class MainBKeyWorkLightFragment extends ParentFragment{
 		radioOff = (RadioButton)mRoot.findViewById(R.id.radioButton_key_main_b_worklight_off);
 		radioFront = (RadioButton)mRoot.findViewById(R.id.radioButton_key_main_b_worklight_front);
 		radioRear = (RadioButton)mRoot.findViewById(R.id.radioButton_key_main_b_worklight_rear);
+		
+		// ++, 150210 bwk
+		radioRear.setText(ParentActivity.getResources().getString(string.Front)
+				+ " + " +ParentActivity.getResources().getString(string.Rear));
+		// --, 150210 bwk
+		
 	}
 	
 	protected void InitValuables() {

@@ -232,6 +232,8 @@ public class MainBKeyWorkLoadFragment extends ParentFragment{
 		ParentActivity._MainBBaseFragment.showKeytoDefaultScreenAnimation();
 	}
 	public void ClickDefault(){
+		// ++, 150210 bwk
+		/*
 		CAN1Comm.Set_WeighingSystemAccumulationMode_1941_PGN61184_62(CAN1CommManager.DATA_STATE_WEIGHING_ACCUMULATION_AUTO);
 		CAN1Comm.TxCANToMCU(62);
 	
@@ -242,6 +244,10 @@ public class MainBKeyWorkLoadFragment extends ParentFragment{
 	
 		ParentActivity.WeighingErrorDetect = CAN1CommManager.DATA_STATE_WEIGHING_ERRORDETECT_ON;
 		SavePref();
+		*/
+		ParentActivity.OldScreenIndex = ParentActivity.SCREEN_STATE_MAIN_B_KEY_WORKLOAD;
+		ParentActivity.showWorkLoadInit();
+		// --, 150210 bwk
 	}
 	public void ClickCalibration(){
 		if(ParentActivity.AnimationRunningFlag == true)
@@ -253,6 +259,22 @@ public class MainBKeyWorkLoadFragment extends ParentFragment{
 		ParentActivity.OldScreenIndex = Home.SCREEN_STATE_MAIN_B_TOP;
 		ParentActivity._MenuBaseFragment.setFirstScreenIndex(Home.SCREEN_STATE_MENU_MANAGEMENT_CALIBRATION_PRESSURE_TOP);
 	}
+	
+	// ++, 150210 bwk
+	public void SetDefault(){
+		CAN1Comm.Set_WeighingSystemAccumulationMode_1941_PGN61184_62(CAN1CommManager.DATA_STATE_WEIGHING_ACCUMULATION_AUTO);
+		CAN1Comm.TxCANToMCU(62);
+	
+		WeighingDisplayMode = CAN1CommManager.DATA_STATE_WEIGHINGDISPLAY_TOTAL_A;
+		CAN1Comm.Set_WeighingDisplayMode1_1910_PGN61184_62(WeighingDisplayMode);
+		CAN1Comm.TxCANToMCU(62);
+		CAN1Comm.Set_WeighingDisplayMode1_1910_PGN61184_62(15);
+	
+		ParentActivity.WeighingErrorDetect = CAN1CommManager.DATA_STATE_WEIGHING_ERRORDETECT_ON;
+		SavePref();
+	}
+	// --, 150210 bwk
+	
 	public void SavePref(){
 		SharedPreferences SharePref = ParentActivity.getSharedPreferences("Home", 0);
 		SharedPreferences.Editor edit = SharePref.edit();

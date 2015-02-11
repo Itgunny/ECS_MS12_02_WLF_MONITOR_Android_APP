@@ -6,9 +6,11 @@ import taeha.wheelloader.fseries_monitor.animation.DisappearAnimation;
 import taeha.wheelloader.fseries_monitor.animation.MainBodyShiftAnimation;
 import taeha.wheelloader.fseries_monitor.animation.LeftRightShiftAnimation;
 import taeha.wheelloader.fseries_monitor.main.CAN1CommManager;
+import taeha.wheelloader.fseries_monitor.main.CheckModel;
 import taeha.wheelloader.fseries_monitor.main.Home;
 import taeha.wheelloader.fseries_monitor.main.ParentFragment;
 import taeha.wheelloader.fseries_monitor.main.R;
+import taeha.wheelloader.fseries_monitor.main.R.string;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -22,6 +24,7 @@ import android.widget.AbsoluteLayout;
 import android.widget.FrameLayout;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 public class VersionInfoFragment extends ParentFragment{
@@ -48,6 +51,8 @@ public class VersionInfoFragment extends ParentFragment{
 	TextView textViewBKCUVersion;
 	
 	TextView textViewModel;
+	
+	RelativeLayout	layoutEHCU;		// ++, --, 150211 bwk;
 	//////////////////////////////////////////////////
 	
 	//VALUABLE////////////////////////////////////////
@@ -100,6 +105,8 @@ public class VersionInfoFragment extends ParentFragment{
 		
 		CAN1Comm.TxCMDToMCU(CAN1Comm.CMD_VERSION);
 		
+		CheckEHCU();	// ++, --, 150211 bwk
+		
 		ParentActivity.ScreenIndex = ParentActivity.SCREEN_STATE_MENU_MONITORING_VERSIONINFO_TOP;
 		ParentActivity._MenuBaseFragment._MenuInterTitleFragment.SetTitleText(ParentActivity.getResources().getString(R.string.Version_Information));
 		
@@ -142,6 +149,8 @@ public class VersionInfoFragment extends ParentFragment{
 		textViewBKCUVersion = (TextView)mRoot.findViewById(R.id.textView_menu_body_monitoring_version_bkcu_data);
 		
 		textViewModel = (TextView)mRoot.findViewById(R.id.textView_menu_body_monitoring_version_model_data);
+		
+		layoutEHCU = (RelativeLayout)mRoot.findViewById(R.id.RelativeLayout_menu_body_monitoring_version_ehcu);	// ++, --, 150211 bwk
 	}
 
 	protected void InitValuables() {
@@ -312,6 +321,25 @@ public class VersionInfoFragment extends ParentFragment{
 		VersionDisplay(ComponentBasicInformation_EHCU,ProgramSubVersionEHCU,textViewEHCUVersion);
 		VersionDisplay(ComponentBasicInformation_BKCU,ProgramSubVersionBKCU,textViewBKCUVersion);
 	}
+	/////////////////////////////////////////////////////////////////////	
+	// ++, 150211 bwk
+	public void CheckEHCU(){
+		if(ParentActivity._CheckModel.GetMCUVersion(CAN1Comm.Get_ComponentBasicInformation_1698_PGN65330()) == CheckModel.MODEL_940
+				|| ParentActivity._CheckModel.GetMCUVersion(CAN1Comm.Get_ComponentBasicInformation_1698_PGN65330()) == CheckModel.MODEL_935){
+					setClickableEHCU(false);
+				}else{
+					setClickableEHCU(true);
+				}
+	}
+	
+	public void setClickableEHCU(boolean flag){
+		if(flag == true){
+			layoutEHCU.setVisibility(View.VISIBLE);
+		}else{
+			layoutEHCU.setVisibility(View.INVISIBLE);
+		}
+	}
+	// --, 150211 bwk
 	/////////////////////////////////////////////////////////////////////	
 	public void ClickOK(){
 		if(ParentActivity.AnimationRunningFlag == true)

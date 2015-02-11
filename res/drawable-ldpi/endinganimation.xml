@@ -61,21 +61,7 @@
 	<item android:drawable="@drawable/outro_58" android:duration="27" />
 	<item android:drawable="@drawable/outro_59" android:duration="27" />
 	<item android:drawable="@drawable/outro_60" android:duration="27" />
-	<item android:drawable="@drawable/outro_61" android:duration="27" />
-	<item android:drawable="@drawable/outro_62" android:duration="27" />
-	<item android:drawable="@drawable/outro_63" android:duration="27" />
-	<item android:drawable="@drawable/outro_64" android:duration="27" />
-	<item android:drawable="@drawable/outro_65" android:duration="27" />
-	<item android:drawable="@drawable/outro_66" android:duration="27" />
-	<item android:drawable="@drawable/outro_67" android:duration="27" />
-	<item android:drawable="@drawable/outro_68" android:duration="27" />
-	<item android:drawable="@drawable/outro_69" android:duration="27" />
-	<item android:drawable="@drawable/outro_70" android:duration="27" />
-	<item android:drawable="@drawable/outro_71" android:duration="27" />
-	<item android:drawable="@drawable/outro_72" android:duration="27" />
-	<item android:drawable="@drawable/outro_73" android:duration="27" />
-	<item android:drawable="@drawable/outro_74" android:duration="27" />
-	<item android:drawable="@drawable/outro_75" android:duration="27" />
+
 
 
 	

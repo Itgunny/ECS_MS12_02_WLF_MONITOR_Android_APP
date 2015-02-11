@@ -1,6 +1,6 @@
 /*
  * This file is auto-generated.  DO NOT MODIFY.
- * Original file: D:\\Project\\WL9F\\SVN\\[SVN] ECS-RD12-16 - WL9F Monitor - Android_APP - UI_B\\src\\taeha\\wheelloader\\fseries_monitor\\main\\ICAN1CommManager.aidl
+ * Original file: G:\\Project\\WLF_Monitor\\src\\taeha\\wheelloader\\fseries_monitor\\main\\ICAN1CommManager.aidl
  */
 package taeha.wheelloader.fseries_monitor.main;
 public interface ICAN1CommManager extends android.os.IInterface

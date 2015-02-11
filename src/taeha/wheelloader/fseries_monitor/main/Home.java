@@ -68,7 +68,7 @@ public class Home extends Activity {
 	public static final int VERSION_HIGH 		= 1;
 	public static final int VERSION_LOW 		= 0;
 	public static final int VERSION_SUB_HIGH 	= 3;
-	public static final int VERSION_SUB_LOW 	= 2;
+	public static final int VERSION_SUB_LOW 	= 3;
 	////1.0.2.3
 	// UI B 안 최초 적용 2014.12.10
 	////1.0.2.4
@@ -141,9 +141,32 @@ public class Home extends Activity {
 	// 카메라 후진기어 연동 시 키버튼 인식하는 문제 수정
 	// Sensor Monitoring, Version Info 스크롤에 좌우키로 스크롤 조절하는 기능 추가
 	// Quick Coupler 팝업 중 Camera 진입되는 문제 수정
-	////1.0.3.2
+	////1.0.3.2 2015.01.29
 	// Quick Coupler 팝업 중 Camera 진입되게 수정
 	// 시간 설정 10시일 경우 시간위치에 0 입력 시 12시로 바뀌게 다시 수정 
+	////-----bwk
+	////1.0.3.3 2015.02.05
+	// weighting system compensation 입력 방식 수정 및 기타 버그 개선
+	// ECM/TCU/EHCU fault code description 추가 
+	// Boom pressure Calibration : HCESPN1908 = 14 추가 및 UI 변경(작동유 온도 표시 및 경고문구 추가)
+	// F시리즈 통신개통 자동화(장비고장 페이지에서 Screen Number 전송, 그외 0xff) + 키값전송(ST 1.0.1.8), 현재고장 페이지에서 Home키 막음
+	// 메인 화면의 작업량 계측값 표시부 : 통신사양변경, Icon추가, 가이던스 추가, Enter로 reweigh하도록 로직 변경
+	// 키패드 히든 기능 관련 : < + > + Enter -> 다국어
+	// EHCU POP UP 관련 반영 : Safety CPU Error 팝업일 경우 Keyoff전에 꺼지지 않음. 0000일 경우 팝업 종료
+	// 다국어 적용 : 한국어만 적용, 다국어 페이지 추가
+	// speedometer freq. setting : <- 키 오류 수정
+	// Work Load : 키패드 버튼 UI일 때 Default 팝업창 추가, 붐압력 보정항목 선택후 이전 화면으로 이동(Main은 해당페이지가 아닌 main으로 이동)
+	// Main->시계설정, 와이퍼설정,다국어설정 페이지 이동 후 Home키 누를 경우 Crash뜨는 버그 수정
+	// Operation History : 터치 영역 리스트 전체가 되도록 수정
+	// 키패드 버튼 UI : Main Light : 3단계 Position + Head Lamp
+	// 키패드 버튼 UI : Work Light : 3단계 Front + Rear Lamp
+	// 키패드 버튼 UI : Mirror Heat : cancel을 off로
+	// 키패드 버튼 UI : rear wiper : keypad longkey 입력 시 washer 동작 intermittant, 이 후 이전값으로 이동되도록 수정
+	// Intro/Outro 적용 (Intro : OS 1.0.6)
+	// 냉각팬 설정 : Manual의 Execute 버튼에 대한 설명 문구 적용 (‘push and hold to reverse rotation’)
+	// Version 정보 : EHCU 유무 판단하여 표시
+	// 멀티미디어 실행 시 rpm 1500 이상일 경우(3초유지) Home으로, 1500 이하일 경우 다시 멀티미디어로
+	// 고장이력 : 현재고장, 과거고장 키패드 연동(datail list 제외)
 	//////////////////////////////////////////////////////////////////////////////////////
 	
 	// TAG
@@ -337,7 +360,9 @@ public class Home extends Activity {
 	public  static final int SCREEN_STATE_MENU_PREFERENCE_UNIT_END							= 0x243FFFFF;
 	public  static final int SCREEN_STATE_MENU_PREFERENCE_DISPLAYTYPELANG_TOP				= 0x24400000;	
 	public  static final int SCREEN_STATE_MENU_PREFERENCE_DISPLAYTYPELANG_TYPE				= 0x24410000;
-	public  static final int SCREEN_STATE_MENU_PREFERENCE_DISPLAYTYPELANG_LANG				= 0x24420000;
+	public  static final int SCREEN_STATE_MENU_PREFERENCE_DISPLAYTYPELANG_LANG_TOP			= 0x24420000;
+	public  static final int SCREEN_STATE_MENU_PREFERENCE_DISPLAYTYPELANG_LANG_CHANGE		= 0x24421000;
+	public  static final int SCREEN_STATE_MENU_PREFERENCE_DISPLAYTYPELANG_LANG_END			= 0x2442FFFF;
 	public  static final int SCREEN_STATE_MENU_PREFERENCE_DISPLAYTYPELANG_END				= 0x244FFFFF;
 	public  static final int SCREEN_STATE_MENU_PREFERENCE_SOUNDOUTPUT_TOP					= 0x24500000;
 	public  static final int SCREEN_STATE_MENU_PREFERENCE_SOUNDOUTPUT_END					= 0x245FFFFF;
@@ -405,8 +430,29 @@ public class Home extends Activity {
 	public static final int	DISPLAY_TYPE_A			= 0;
 	public static final int	DISPLAY_TYPE_B			= 1;
 	
-	
-	
+	// ++, 150206 bwk
+	public static final int STATE_DISPLAY_LANGUAGE_KOREAN 			= 0;
+	public static final int STATE_DISPLAY_LANGUAGE_ENGLISH   		= 1;
+	public static final int STATE_DISPLAY_LANGUAGE_GERMAN   		= 2;
+	public static final int STATE_DISPLAY_LANGUAGE_FRENCH   		= 3;
+	public static final int STATE_DISPLAY_LANGUAGE_SPANISH   		= 4;
+	public static final int STATE_DISPLAY_LANGUAGE_PORTUGUE   		= 5;
+	public static final int STATE_DISPLAY_LANGUAGE_CHINESE   		= 6;
+	public static final int STATE_DISPLAY_LANGUAGE_RUSIAN   		= 7;
+	public static final int STATE_DISPLAY_LANGUAGE_ITALIAN   		= 8;
+	public static final int STATE_DISPLAY_LANGUAGE_NEDERLAND   		= 9;
+	public static final int STATE_DISPLAY_LANGUAGE_SWEDISH   		= 10;
+	public static final int STATE_DISPLAY_LANGUAGE_TURKISH   		= 11;
+	public static final int STATE_DISPLAY_LANGUAGE_SLOVAKIAN   		= 12;
+	public static final int STATE_DISPLAY_LANGUAGE_ESTONIAN   		= 13;
+	public static final int STATE_DISPLAY_LANGUAGE_THAILAND   		= 14;
+	public static final int STATE_DISPLAY_LANGUAGE_HINDI	   		= 15;
+	public static final int STATE_DISPLAY_LANGUAGE_MONGOL   		= 16;
+	public static final int STATE_DISPLAY_LANGUAGE_ARABIC   		= 17;
+	public static final int STATE_DISPLAY_LANGUAGE_FARSI	   		= 18;
+	public static final int STATE_DISPLAY_LANGUAGE_INDONESIAN  		= 19;
+	// --, 150206 bwk
+		
 	public static final int WARMINGUP 				= 0;
 	public static final int FUELWARMER				= 1;
 	public static final int PREHEAT 				= 2;
@@ -432,6 +478,8 @@ public class Home extends Activity {
 	
 	// Display Type
 	public int DisplayType;
+	public int LanguageIndex;	// ++, --, 150206 bwk
+	LanguageClass LangClass;	// ++, --, 150209 bwk
 	
 	// Unit
 	public int UnitOdo;
@@ -600,6 +648,13 @@ public class Home extends Activity {
 	public int JoystickSteeringEnableFailCondition;
 	public int OldJoystickSteeringEnableFailCondition;
 	public boolean bEHCUErrPopup;
+	
+	// ++, 150211 bwk
+	// MediaPlayer <-> rpm
+	int HighrpmCount;
+	int LowrpmCount;
+	int PressFnKey;
+	// --, 150211 bwk
 	////////////////////////////////////////////////////
 	
 	//Fragment//////////////////////////////////////////
@@ -628,9 +683,9 @@ public class Home extends Activity {
 		setContentView(R.layout.activity_main);
 		Log.d(TAG, "onCreateView");
 		InitResource();
+		InitValuable();		// ++, --, 150212 bwk InitPopup 아래에서 위로 이동
 		InitFragment();
 		InitPopup();
-		InitValuable();
 		InitAnimation();
 		InitButtonListener();
 		LoadPref();
@@ -698,6 +753,11 @@ public class Home extends Activity {
 		imgViewCameraScreen.setClickable(false);
 	}
 	public void InitValuable(){
+		// ++, 150209 bwk
+		LangClass = new LanguageClass(this);
+		LangClass.setLanugage(LangClass.GetLanguage());
+		JoystickSteeringEnableFailCondition = 0;
+		// --, 150209 bwk
 		ScreenIndex = 0;
 		SeatBelt = CAN1CommManager.DATA_STATE_LAMP_ON;
 		AnimationRunningFlag = false;
@@ -723,6 +783,11 @@ public class Home extends Activity {
 		UserDataUser3 = LoadUserData(3);
 		UserDataUser4 = LoadUserData(4);
 		
+		// ++, 150211 bwk
+		HighrpmCount = 0;
+		LowrpmCount = 0;
+		PressFnKey = 0;
+		// --, 150211 bwk
 		
 		_CrashApplication = (CrashApplication)getApplicationContext();		
 	}
@@ -886,6 +951,7 @@ public class Home extends Activity {
 		edit.putInt("BrightnessManualLevel", BrightnessManualLevel);
 		edit.putInt("BrightnessManualAuto", BrightnessManualAuto);
 		edit.putInt("SoundState", SoundState);
+		edit.putInt("LanguageIndex", LanguageIndex);		// ++, --, 150206 bwk
 		edit.commit();
 		Log.d(TAG,"SavePref");
 	}
@@ -921,6 +987,8 @@ public class Home extends Activity {
 		strASNum = SharePref.getString("strASNum", "");
 		
 		DisplayType = SharePref.getInt("DisplayType", DISPLAY_TYPE_B);
+		
+		LanguageIndex = SharePref.getInt("LanguageIndex", STATE_DISPLAY_LANGUAGE_ENGLISH);		// ++, --, 150206 bwk
 		
 		AttachmentStatus = SharePref.getInt("AttachmentStatus", CAN1CommManager.DATA_STATE_KEY_QUICKCOUPLER_OFF);
 		Log.d(TAG,"LoadPref");
@@ -1377,6 +1445,7 @@ public class Home extends Activity {
 				CheckBuzzer();
 				CheckEngineAutoShutdown();
 				CheckEHCUErr();
+				Checkrpm();		// ++, --, 150211 bwk
 			}
 		});
 	
@@ -1543,21 +1612,93 @@ public class Home extends Activity {
 		
 	}
 	public void CheckEHCUErr(){
+		// ++, 150209 bwk
+		/*
 		if(JoystickSteeringEnableFailCondition != 0xFFFF
-		&& JoystickSteeringEnableFailCondition != 0x0000){
-			if(bEHCUErrPopup == false){
-				if(JoystickSteeringEnableFailCondition != 0){
-					if(JoystickSteeringEnableFailCondition != OldJoystickSteeringEnableFailCondition){
-						OldJoystickSteeringEnableFailCondition = JoystickSteeringEnableFailCondition;
-						OldScreenIndex = ScreenIndex;
-						showEHCUErr();
+				&& JoystickSteeringEnableFailCondition != 0x0000){
+					if(bEHCUErrPopup == false){
+						if(JoystickSteeringEnableFailCondition != 0){
+							if(JoystickSteeringEnableFailCondition != OldJoystickSteeringEnableFailCondition){
+								OldJoystickSteeringEnableFailCondition = JoystickSteeringEnableFailCondition;
+								OldScreenIndex = ScreenIndex;
+								showEHCUErr();
+							}
+						}
+						
 					}
 				}
-				
+		*/
+		if(bEHCUErrPopup == false)
+		{
+			if(JoystickSteeringEnableFailCondition == 0xFFFF || JoystickSteeringEnableFailCondition == 0x0000)
+			{
+				OldJoystickSteeringEnableFailCondition = JoystickSteeringEnableFailCondition;
+				bEHCUErrPopup = false;
 			}
+			else if(JoystickSteeringEnableFailCondition != 0xFFFF && JoystickSteeringEnableFailCondition != 0x0000){
+				if(bEHCUErrPopup == false){
+					if(JoystickSteeringEnableFailCondition != 0){
+						if(JoystickSteeringEnableFailCondition != OldJoystickSteeringEnableFailCondition){
+							OldJoystickSteeringEnableFailCondition = JoystickSteeringEnableFailCondition;
+							OldScreenIndex = ScreenIndex;
+							showEHCUErr();
+						}
+					}
+					
+				}
+			}
+		}
+		// --, 150209 bwk
+		
+	}
+	
+	// ++, 150211 bwk
+	public void Checkrpm(){
+		if(CAN1Comm.GetPlayerFlag() == true && PressFnKey == 0)
+		{
+			Log.d(TAG, "Player On");
+			PressFnKey = 1;
+		}
+		else if(CAN1Comm.GetPlayerFlag() == false && PressFnKey == 1)
+		{
+			Log.d(TAG, "Player OFF");
+			PressFnKey = 0;
+		}
+		
+		if(PressFnKey == 1)
+		{
+			if(CAN1Comm.Get_EngineSpeed_310_PGN65431() >= 1500)
+			{
+				if(HighrpmCount < 20)
+					HighrpmCount++;
+				LowrpmCount = 0;
+			}
+			else
+			{
+				if(LowrpmCount < 20)
+					LowrpmCount++;
+				HighrpmCount = 0;
+			}
+			
+			if(HighrpmCount >= 20 && HighrpmCount != 30)
+			{
+				CAN1Comm.ChangeMediatoHome();
+				HighrpmCount = 30;
+			}
+			else if(LowrpmCount >= 20 && LowrpmCount != 30)
+			{
+				CAN1Comm.ChangeHometoMedia();
+				LowrpmCount = 30;
+			}
+		}
+		else
+		{
+			HighrpmCount = 0;
+			LowrpmCount = 0;
 		}
 		
 	}
+	// --, 150210 bwk
 	/////////////////////////////////////////////////////
 	
 	//Key Button/////////////////////////////////////////

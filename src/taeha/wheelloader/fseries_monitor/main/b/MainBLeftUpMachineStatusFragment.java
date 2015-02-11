@@ -1,5 +1,7 @@
 package taeha.wheelloader.fseries_monitor.main.b;
 
+import actionpopup.ActionItem;
+import actionpopup.QuickAction;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -11,6 +13,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import taeha.wheelloader.fseries_monitor.animation.ImageViewYAxisFlipAnimation;
 import taeha.wheelloader.fseries_monitor.main.CAN1CommManager;
+import taeha.wheelloader.fseries_monitor.main.Home;
 import taeha.wheelloader.fseries_monitor.main.ParentFragment;
 import taeha.wheelloader.fseries_monitor.main.R;
 import taeha.wheelloader.fseries_monitor.main.R.color;
@@ -18,8 +21,12 @@ import taeha.wheelloader.fseries_monitor.main.R.string;
 
 public class MainBLeftUpMachineStatusFragment extends ParentFragment{
 	//CONSTANT////////////////////////////////////////
-	
-	
+	// ++, 150207 bwk
+	public static final int	DATA_STATE_CURRENT_WEIHGING_RESULT_HYDRAULICOILTEMP			= 1;
+	public static final int	DATA_STATE_CURRENT_WEIHGING_RESULT_BOOMLIFTING_BUCKETFULLIN	= 2;
+	public static final int	DATA_STATE_CURRENT_WEIHGING_RESULT_BOOMLIFTING				= 3;
+	public static final int	DATA_STATE_CURRENT_WEIHGING_RESULT_BUCKETFULLIN				= 4;
+	// --, 150207 bwk
 	//////////////////////////////////////////////////
 	//RESOURCE////////////////////////////////////////
 	RelativeLayout LayoutNormalUpper;
@@ -42,6 +49,11 @@ public class MainBLeftUpMachineStatusFragment extends ParentFragment{
 	ImageView imgViewWeighingLowerIcon;
 	
 	ImageButton imgbtnMachineStatus;
+
+	// ++, 150205 bwk
+	private QuickAction popupIndicator;
+	private ActionItem actionitemIndicator;
+	// --, 150205 bwk
 	//////////////////////////////////////////////////
 	
 	//VALUABLE////////////////////////////////////////
@@ -66,6 +78,12 @@ public class MainBLeftUpMachineStatusFragment extends ParentFragment{
 	int WeightInfoCurrentWeighingResult;
 		
 	int WeighingDisplayMode;
+	
+	// ++, 150207 bwk
+	int WeighingSystemError_BoomLiftSpeed;
+	int WeighingSystemError_BucketFullIn;
+	int WeighingSystemError_HydraulicOilTemperature;
+	// --, 150207 bwk
 	//////////////////////////////////////////////////
 	
 	//ANIMATION///////////////////////////////////////
@@ -138,17 +156,34 @@ public class MainBLeftUpMachineStatusFragment extends ParentFragment{
 		LowerStatusIconAnimation = new ImageViewYAxisFlipAnimation(ParentActivity);
 		WeighingUpperStatusIconAnimation = new ImageViewYAxisFlipAnimation(ParentActivity);
 		WeighingLowerStatusIconAnimation = new ImageViewYAxisFlipAnimation(ParentActivity);
+		
+		// ++, 150205 bwk
+		popupIndicator = new QuickAction(ParentActivity, QuickAction.VERTICAL);
+		actionitemIndicator = new ActionItem(0, ParentActivity.getResources().getString(R.string.Bucket_Full_In_Error_Warning), getResources().getDrawable(R.drawable.main_default_monitoring_icon_fullin));
+		popupIndicator.addActionItem(actionitemIndicator);		
+		// --, 150205 bwk
 	}
 	@Override
 	protected void InitButtonListener() {
 		// TODO Auto-generated method stub
+		// ++, 150207 bwk
+		imgViewWeighingUpperIcon.setOnClickListener(new View.OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+			  	if(ClickFlag == true)
+			  		ClickWeighingError(v);
+			}
+		});
+		// --, 150207 bwk
 		imgbtnMachineStatus.setOnClickListener(new View.OnClickListener() {
 			
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
 			  	if(ClickFlag == true)
-			  		ClickMachineStatus();	
+			  		ClickMachineStatus();
 			}
 		});
 	}
@@ -174,6 +209,12 @@ public class MainBLeftUpMachineStatusFragment extends ParentFragment{
 
 		WeighingDisplayMode = CAN1Comm.Get_WeighingDisplayMode1_1910_PGN65450();
 		WeightInfoCurrentWeighingResult = CAN1Comm.Get_CurrentWeighingResult_1919_PGN65450();
+		
+		// ++, 150207 bwk
+		WeighingSystemError_BoomLiftSpeed = CAN1Comm.Get_WeighingSystemError_BoomLiftSpeed_1942_PGN65450();
+		WeighingSystemError_BucketFullIn = CAN1Comm.Get_WeighingSystemError_BucketFullIn_1943_PGN65450();
+		WeighingSystemError_HydraulicOilTemperature = CAN1Comm.Get_WeighingSystemError_HydraulicOilTemperature_1944_PGN65450();
+		// --, 150207 bwk		
 	}
 
 	@Override
@@ -222,8 +263,15 @@ public class MainBLeftUpMachineStatusFragment extends ParentFragment{
 		case CAN1CommManager.DATA_STATE_MACHINESTATUS_WEIGHING:
 			LayoutNormalUpper.setVisibility(View.GONE);
 			LayoutWeighingUpper.setVisibility(View.VISIBLE);
+			// ++, 150207 bwk
+			/*
 			WeighingUpperDisplay(WeightInfoCurrentWeighingResult,WeighingDisplayMode,WeightInfoDataCurrent,
 					WeightInfoDataDay1,WeightInfoDataToday,WeightInfoDataTotalA,WeightInfoDataTotalB,WeightInfoDataTotalC,ParentActivity.UnitWeight);
+			*/
+			WeighingUpperDisplay(WeighingSystemError_BoomLiftSpeed,WeighingSystemError_BucketFullIn,WeighingSystemError_HydraulicOilTemperature,
+					WeighingDisplayMode,WeightInfoDataCurrent,WeightInfoDataDay1,WeightInfoDataToday,WeightInfoDataTotalA,WeightInfoDataTotalB,WeightInfoDataTotalC,
+					ParentActivity.UnitWeight);
+			// --, 150207 bwk
 			break;
 
 		default:
@@ -355,7 +403,11 @@ public class MainBLeftUpMachineStatusFragment extends ParentFragment{
 		textData.setText(ParentActivity.GetBattery(Data));
 		textUnit.setText(ParentActivity.getResources().getString(string.V));
 	}
-	public void WeighingUpperDisplay(int CurrentWeighingResult, int DisplayIndex, int Current, int Day1, int Today, int TotalA, int TotalB, int TotalC, int Unit){
+
+	// ++, 150207 bwk
+	//public void WeighingUpperDisplay(int CurrentWeighingResult, int DisplayIndex, int Current, int Day1, int Today, int TotalA, int TotalB, int TotalC, int Unit){
+	public void WeighingUpperDisplay(int BoomLiftSpeedError, int BucketFullInError, int HydOilTempError, int DisplayIndex, int Current, int Day1, int Today, int TotalA, int TotalB, int TotalC, int Unit){
+	// --, 150207 bwk
 		if(ParentActivity.UnitWeight == ParentActivity.UNIT_WEIGHT_LB){
 			textViewWeighingUpperUnit.setText(ParentActivity.getResources().getString(string.lb));
 			textViewWeighingLowerUnit.setText(ParentActivity.getResources().getString(string.lb));
@@ -363,18 +415,34 @@ public class MainBLeftUpMachineStatusFragment extends ParentFragment{
 			textViewWeighingUpperUnit.setText(ParentActivity.getResources().getString(string.ton));
 			textViewWeighingLowerUnit.setText(ParentActivity.getResources().getString(string.ton));
 		}
-				
-		if(CurrentWeighingResult == CAN1CommManager.DATA_STATE_CURRENT_WEIHGING_RESULT_BOOMLIFTING_BUCKETFULLIN 
+		
+		// ++, 150207 bwk
+		if(HydOilTempError == CAN1CommManager.DATA_STATE_WEIGHTING_SYSGEM_ERROR
+				&& ParentActivity.WeighingErrorDetect == CAN1CommManager.DATA_STATE_WEIGHING_ERRORDETECT_ON){
+			WeighingUpperStatusIconAnimation.FlipAnimation(imgViewWeighingUpperIcon,R.drawable.main_default_monitoring_icon_hyd_blue);
+			textViewWeighingUpperData.setText(ParentActivity.GetWeighit(WeightInfoDataCurrent, ParentActivity.UnitWeight));
+			textViewWeighingUpperData.setTextColor(ParentActivity.getResources().getColor(color.white));
+		}
+		//if(CurrentWeighingResult == CAN1CommManager.DATA_STATE_CURRENT_WEIHGING_RESULT_BOOMLIFTING_BUCKETFULLIN 
+		else if(BoomLiftSpeedError == CAN1CommManager.DATA_STATE_WEIGHTING_SYSGEM_ERROR
+				&& BucketFullInError == CAN1CommManager.DATA_STATE_WEIGHTING_SYSGEM_ERROR
+		// --, 150207 bwk
 				&& ParentActivity.WeighingErrorDetect == CAN1CommManager.DATA_STATE_WEIGHING_ERRORDETECT_ON){
 			WeighingUpperStatusIconAnimation.FlipAnimation(imgViewWeighingUpperIcon,R.drawable.main_default_monitoring_icon_sudden_fullin);
 			textViewWeighingUpperData.setText(ParentActivity.GetWeighit(WeightInfoDataCurrent, ParentActivity.UnitWeight));
 			textViewWeighingUpperData.setTextColor(ParentActivity.getResources().getColor(color.red));
-		}else if(CurrentWeighingResult == CAN1CommManager.DATA_STATE_CURRENT_WEIHGING_RESULT_BOOMLIFTING
+		// ++, 150207 bwk
+		//}else if(CurrentWeighingResult == CAN1CommManager.DATA_STATE_CURRENT_WEIHGING_RESULT_BOOMLIFTING
+		}else if(BoomLiftSpeedError == CAN1CommManager.DATA_STATE_WEIGHTING_SYSGEM_ERROR
+		// --, 150207 bwk
 				&& ParentActivity.WeighingErrorDetect == CAN1CommManager.DATA_STATE_WEIGHING_ERRORDETECT_ON){
 			WeighingUpperStatusIconAnimation.FlipAnimation(imgViewWeighingUpperIcon,R.drawable.main_default_monitoring_icon_sudden);
 			textViewWeighingUpperData.setText(ParentActivity.GetWeighit(WeightInfoDataCurrent, ParentActivity.UnitWeight));
 			textViewWeighingUpperData.setTextColor(ParentActivity.getResources().getColor(color.red));
-		}else if(CurrentWeighingResult == CAN1CommManager.DATA_STATE_CURRENT_WEIHGING_RESULT_BUCKETFULLIN
+		// ++, 150207 bwk
+		// }else if(CurrentWeighingResult == CAN1CommManager.DATA_STATE_CURRENT_WEIHGING_RESULT_BUCKETFULLIN
+		}else if(BucketFullInError == CAN1CommManager.DATA_STATE_WEIGHTING_SYSGEM_ERROR
+		// --, 150207 bwk
 				&& ParentActivity.WeighingErrorDetect == CAN1CommManager.DATA_STATE_WEIGHING_ERRORDETECT_ON){
 			WeighingUpperStatusIconAnimation.FlipAnimation(imgViewWeighingUpperIcon,R.drawable.main_default_monitoring_icon_fullin);
 			textViewWeighingUpperData.setText(ParentActivity.GetWeighit(WeightInfoDataCurrent, ParentActivity.UnitWeight));
@@ -446,6 +514,8 @@ public class MainBLeftUpMachineStatusFragment extends ParentFragment{
 		else
 			ParentActivity.StartAnimationRunningTimer();
 		
+		// ++, 150207 bwk
+		/*
 		if(WeightInfoCurrentWeighingResult == CAN1CommManager.DATA_STATE_CURRENT_WEIHGING_RESULT_BOOMLIFTING_BUCKETFULLIN
 				&& ParentActivity.WeighingErrorDetect == CAN1CommManager.DATA_STATE_WEIGHING_ERRORDETECT_ON){
 			CAN1Comm.Set_RequestReweighing_PGN61184_62(1);
@@ -461,7 +531,11 @@ public class MainBLeftUpMachineStatusFragment extends ParentFragment{
 			CAN1Comm.Set_RequestReweighing_PGN61184_62(1);
 			CAN1Comm.TxCANToMCU(62);
 			CAN1Comm.Set_RequestReweighing_PGN61184_62(3);
-		}else{
+		}else
+		 */
+		
+		// --, 150207 bwk
+		{
 			ParentActivity._MainBBaseFragment._MainBCenterMachineStatusFragment = new MainBCenterMachineStatusFragment();
 			ParentActivity._MainBBaseFragment._MainBLeftUpMachineStatusSelectFragment = new MainBLeftUpMachineStatusSelectFragment();
 			ParentActivity._MainBBaseFragment._MainBodyShiftAnimation.StartShiftLeftUpAnimation();
@@ -482,8 +556,123 @@ public class MainBLeftUpMachineStatusFragment extends ParentFragment{
 		}
 	}
 	
+	// ++, 150207 bwk
+	public void ClickWeighingError(View v){
+		if(ParentActivity.AnimationRunningFlag == true)
+			return;
+		else
+			ParentActivity.StartAnimationRunningTimer();
+		
+		if(ParentActivity.MachineStatusUpperIndex == CAN1CommManager.DATA_STATE_MACHINESTATUS_WEIGHING
+			|| ParentActivity.MachineStatusLowerIndex == CAN1CommManager.DATA_STATE_MACHINESTATUS_WEIGHING)
+		{
+			if(WeighingSystemError_HydraulicOilTemperature == CAN1CommManager.DATA_STATE_WEIGHTING_SYSGEM_ERROR
+					&& ParentActivity.WeighingErrorDetect == CAN1CommManager.DATA_STATE_WEIGHING_ERRORDETECT_ON){
+				showLampPopup(DATA_STATE_CURRENT_WEIHGING_RESULT_HYDRAULICOILTEMP);
+				popupIndicator.show(v);
+			}
+			else if(WeighingSystemError_BoomLiftSpeed == CAN1CommManager.DATA_STATE_WEIGHTING_SYSGEM_ERROR
+					&& WeighingSystemError_BucketFullIn == CAN1CommManager.DATA_STATE_WEIGHTING_SYSGEM_ERROR
+					&& ParentActivity.WeighingErrorDetect == CAN1CommManager.DATA_STATE_WEIGHING_ERRORDETECT_ON){
+				showLampPopup(DATA_STATE_CURRENT_WEIHGING_RESULT_BOOMLIFTING_BUCKETFULLIN);
+				popupIndicator.show(v);
+			}else if(WeighingSystemError_BoomLiftSpeed == CAN1CommManager.DATA_STATE_WEIGHTING_SYSGEM_ERROR
+					&& ParentActivity.WeighingErrorDetect == CAN1CommManager.DATA_STATE_WEIGHING_ERRORDETECT_ON){
+				showLampPopup(DATA_STATE_CURRENT_WEIHGING_RESULT_BOOMLIFTING);
+				popupIndicator.show(v);
+			}else if(WeighingSystemError_BucketFullIn == CAN1CommManager.DATA_STATE_WEIGHTING_SYSGEM_ERROR
+					&& ParentActivity.WeighingErrorDetect == CAN1CommManager.DATA_STATE_WEIGHING_ERRORDETECT_ON){
+				showLampPopup(DATA_STATE_CURRENT_WEIHGING_RESULT_BUCKETFULLIN);
+				popupIndicator.show(v);
+			}else{
+				ParentActivity._MainBBaseFragment._MainBCenterMachineStatusFragment = new MainBCenterMachineStatusFragment();
+				ParentActivity._MainBBaseFragment._MainBLeftUpMachineStatusSelectFragment = new MainBLeftUpMachineStatusSelectFragment();
+				ParentActivity._MainBBaseFragment._MainBodyShiftAnimation.StartShiftLeftUpAnimation();
+				ParentActivity._MainBBaseFragment.CenterAnimation.StartChangeAnimation(ParentActivity._MainBBaseFragment._MainBCenterMachineStatusFragment);
+				ParentActivity._MainBBaseFragment.LeftUpChangeAnimation.StartChangeAnimation(ParentActivity._MainBBaseFragment._MainBLeftUpMachineStatusSelectFragment);
+				
+				//ParentActivity._MainBBaseFragment._CenterBGDisappearAnimation.StartAnimation();
+				ParentActivity._MainBBaseFragment._RightDownDisappearAnimation.StartAnimation();
+				ParentActivity._MainBBaseFragment._RightUpDisappearAnimation.StartAnimation();
+				ParentActivity._MainBBaseFragment._LeftDownDisappearAnimation.StartAnimation();
+				ParentActivity._MainBBaseFragment._RightDownBGDisappearAnimation.StartAnimation();
+				ParentActivity._MainBBaseFragment._RightUpBGDisappearAnimation.StartAnimation();
+				ParentActivity._MainBBaseFragment._LeftDownBGDisappearAnimation.StartAnimation();
+				ParentActivity._MainBBaseFragment._VirtualKeyDisappearAnimation.StartAnimation();
+				
+				ParentActivity._MainBBaseFragment._KeyTitleDisappearAnimation.StartAnimation();
+				ParentActivity._MainBBaseFragment._KeyBodyDisappearAnimation.StartAnimation();
+			}
+		}else{
+			ParentActivity._MainBBaseFragment._MainBCenterMachineStatusFragment = new MainBCenterMachineStatusFragment();
+			ParentActivity._MainBBaseFragment._MainBLeftUpMachineStatusSelectFragment = new MainBLeftUpMachineStatusSelectFragment();
+			ParentActivity._MainBBaseFragment._MainBodyShiftAnimation.StartShiftLeftUpAnimation();
+			ParentActivity._MainBBaseFragment.CenterAnimation.StartChangeAnimation(ParentActivity._MainBBaseFragment._MainBCenterMachineStatusFragment);
+			ParentActivity._MainBBaseFragment.LeftUpChangeAnimation.StartChangeAnimation(ParentActivity._MainBBaseFragment._MainBLeftUpMachineStatusSelectFragment);
+			
+			//ParentActivity._MainBBaseFragment._CenterBGDisappearAnimation.StartAnimation();
+			ParentActivity._MainBBaseFragment._RightDownDisappearAnimation.StartAnimation();
+			ParentActivity._MainBBaseFragment._RightUpDisappearAnimation.StartAnimation();
+			ParentActivity._MainBBaseFragment._LeftDownDisappearAnimation.StartAnimation();
+			ParentActivity._MainBBaseFragment._RightDownBGDisappearAnimation.StartAnimation();
+			ParentActivity._MainBBaseFragment._RightUpBGDisappearAnimation.StartAnimation();
+			ParentActivity._MainBBaseFragment._LeftDownBGDisappearAnimation.StartAnimation();
+			ParentActivity._MainBBaseFragment._VirtualKeyDisappearAnimation.StartAnimation();
+			
+			ParentActivity._MainBBaseFragment._KeyTitleDisappearAnimation.StartAnimation();
+			ParentActivity._MainBBaseFragment._KeyBodyDisappearAnimation.StartAnimation();
+		}
+	}
+	// --, 150207 bwk
+	
 	public void setClickEnable(boolean flag){
 		ClickFlag = flag;
 		imgbtnMachineStatus.setClickable(ClickFlag);
 	}
+
+	// ++, 150207 bwk
+	public void showLampPopup(int Index){
+		popupIndicator.removeAllActionItem();
+		switch (Index) {
+		case DATA_STATE_CURRENT_WEIHGING_RESULT_HYDRAULICOILTEMP:
+			actionitemIndicator = new ActionItem(0, ParentActivity.getResources().getString(R.string.Hydraulic_Oil_Temp_Low_Warning));
+			popupIndicator.addActionItem(actionitemIndicator);
+			break;
+		case DATA_STATE_CURRENT_WEIHGING_RESULT_BOOMLIFTING_BUCKETFULLIN:
+			actionitemIndicator = new ActionItem(0, ParentActivity.getResources().getString(R.string.SuddenChange_BucketFullIn_Error_Warning));
+			popupIndicator.addActionItem(actionitemIndicator);
+			break;
+		case DATA_STATE_CURRENT_WEIHGING_RESULT_BOOMLIFTING:
+			actionitemIndicator = new ActionItem(0, ParentActivity.getResources().getString(R.string.Sudden_Change_Error_Warning));
+			popupIndicator.addActionItem(actionitemIndicator);
+			break;
+		case DATA_STATE_CURRENT_WEIHGING_RESULT_BUCKETFULLIN:
+			actionitemIndicator = new ActionItem(0, ParentActivity.getResources().getString(R.string.Bucket_Full_In_Error_Warning));
+			popupIndicator.addActionItem(actionitemIndicator);
+			break;
+		default:
+			break;
+		}
+	}
+	
+	public void ClickEnter(){
+		if(ParentActivity.MachineStatusUpperIndex == CAN1CommManager.DATA_STATE_MACHINESTATUS_WEIGHING
+				|| ParentActivity.MachineStatusLowerIndex == CAN1CommManager.DATA_STATE_MACHINESTATUS_WEIGHING)
+		{
+			if((WeighingSystemError_HydraulicOilTemperature == CAN1CommManager.DATA_STATE_WEIGHTING_SYSGEM_ERROR
+					&& ParentActivity.WeighingErrorDetect == CAN1CommManager.DATA_STATE_WEIGHING_ERRORDETECT_ON)
+				||(WeighingSystemError_BoomLiftSpeed == CAN1CommManager.DATA_STATE_WEIGHTING_SYSGEM_ERROR
+					&& WeighingSystemError_BucketFullIn == CAN1CommManager.DATA_STATE_WEIGHTING_SYSGEM_ERROR
+					&& ParentActivity.WeighingErrorDetect == CAN1CommManager.DATA_STATE_WEIGHING_ERRORDETECT_ON)
+				||(WeighingSystemError_BoomLiftSpeed == CAN1CommManager.DATA_STATE_WEIGHTING_SYSGEM_ERROR
+					&& ParentActivity.WeighingErrorDetect == CAN1CommManager.DATA_STATE_WEIGHING_ERRORDETECT_ON)
+				||(WeighingSystemError_BucketFullIn == CAN1CommManager.DATA_STATE_WEIGHTING_SYSGEM_ERROR
+						&& ParentActivity.WeighingErrorDetect == CAN1CommManager.DATA_STATE_WEIGHING_ERRORDETECT_ON)){
+				CAN1Comm.Set_RequestReweighing_PGN61184_62(1);
+				CAN1Comm.TxCANToMCU(62);
+				CAN1Comm.Set_RequestReweighing_PGN61184_62(3);
+			}
+		}
+	}
+	// --, 150207 bwk
 }

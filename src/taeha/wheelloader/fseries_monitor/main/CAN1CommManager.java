@@ -310,9 +310,15 @@ public class CAN1CommManager extends ICAN1CommManager.Stub{		// ttySAC1(Linux), 
 	public static final int	DATA_STATE_CURRENT_WEIHGING_RESULT_NOTWORK					= 0;
 	public static final int	DATA_STATE_CURRENT_WEIHGING_RESULT_OK						= 1;
 	public static final int	DATA_STATE_CURRENT_WEIHGING_RESULT_CANCELOK					= 2;
+	// ++, 150207 bwk
+	/*
 	public static final int	DATA_STATE_CURRENT_WEIHGING_RESULT_BOOMLIFTING				= 11;
 	public static final int	DATA_STATE_CURRENT_WEIHGING_RESULT_BUCKETFULLIN				= 12;
 	public static final int	DATA_STATE_CURRENT_WEIHGING_RESULT_BOOMLIFTING_BUCKETFULLIN	= 13;
+	*/
+	public static final int DATA_STATE_WEIGHTING_SYSGEM_NORMAL = 0;
+	public static final int DATA_STATE_WEIGHTING_SYSGEM_ERROR = 1;
+	// --, 150207 bwk
 	
 	public static final int	DATA_STATE_EHCUERR_STEERINGPROPRTIONALVALVE					= 0x01;
 	public static final int	DATA_STATE_EHCUERR_STEERINGJOYSTICK							= 0x02;
@@ -452,6 +458,30 @@ public class CAN1CommManager extends ICAN1CommManager.Stub{		// ttySAC1(Linux), 
 	public boolean GetFNFlag(){
 		return service.GetFNFlag();
 	}
+
+	// ++, 150211 bwk
+	public void SetPlayerFlag(boolean flag){
+		service.SetPlayerFlag(flag);
+	}
+	public boolean GetPlayerFlag(){
+		return service.GetPlayerFlag();
+	}
+	public boolean GetrpmFlag(){
+		return service.GetrpmFlag();
+	}
+	
+	public void ChangeMediatoHome(){
+		service.ChangeMediatoHome();
+	}
+	public void ChangeHometoMedia(){
+		service.ChangeHometoMedia();
+	}
+	
+	public void StartEnding(){
+		service.BackKeyEvent();
+		//Callback_KeyButton(POWER_OFF);
+	}
+	// --, 150211 bwk
 	///////////////////////////////////////////////////////////
 	
 	//////////////////////////////////////////////////////////
@@ -1071,6 +1101,11 @@ public class CAN1CommManager extends ICAN1CommManager.Stub{		// ttySAC1(Linux), 
 	public int Get_WeighingSystemBuzzer_1907_PGN65450(){ return service.Get_WeighingSystemBuzzer_1907_PGN65450();}
 	public int Get_CurrentWeighingResult_1919_PGN65450(){ return service.Get_CurrentWeighingResult_1919_PGN65450();}
 	public int Get_WeighingDisplayMode1_1910_PGN65450(){ return service.Get_WeighingDisplayMode1_1910_PGN65450();}
+	// ++, 150207 bwk
+	public int Get_WeighingSystemError_BoomLiftSpeed_1942_PGN65450(){ return service.Get_WeighingSystemError_BoomLiftSpeed_1942_PGN65450();}
+	public int Get_WeighingSystemError_BucketFullIn_1943_PGN65450(){ return service.Get_WeighingSystemError_BucketFullIn_1943_PGN65450();}
+	public int Get_WeighingSystemError_HydraulicOilTemperature_1944_PGN65450(){ return service.Get_WeighingSystemError_HydraulicOilTemperature_1944_PGN65450();}
+	// --, 150207 bwk
 	public int Get_CurrentWeight_1911_PGN65450(){ return service.Get_CurrentWeight_1911_PGN65450();}
 	public int Get_TodayWeight_1915_PGN65450(){ return service.Get_TodayWeight_1915_PGN65450();}
 	//////RX_WEIGHING_SYSTEM_DATA1_65451///////

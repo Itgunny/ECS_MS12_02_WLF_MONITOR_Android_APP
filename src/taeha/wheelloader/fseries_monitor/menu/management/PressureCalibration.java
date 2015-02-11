@@ -8,6 +8,7 @@ import taeha.wheelloader.fseries_monitor.animation.ChangeFragmentAnimation;
 import taeha.wheelloader.fseries_monitor.animation.DisappearAnimation;
 import taeha.wheelloader.fseries_monitor.animation.MainBodyShiftAnimation;
 import taeha.wheelloader.fseries_monitor.animation.LeftRightShiftAnimation;
+import taeha.wheelloader.fseries_monitor.main.CAN1CommManager;
 import taeha.wheelloader.fseries_monitor.main.Home;
 import taeha.wheelloader.fseries_monitor.main.ParentFragment;
 import taeha.wheelloader.fseries_monitor.main.R;
@@ -36,6 +37,7 @@ public class PressureCalibration extends ParentFragment{
 	private static final int TIMER_OVERFLOW_ERROR	= 11;
 	private static final int NOSENSOR_ERROR	 		= 12;
 	private static final int BOOMUP_SPEED_ERROR		= 13;
+	private static final int LOW_HYDRAULIC_OIL_ERROR = 14;	// ++, --, 150204 bwk
 	//////////////////////////////////////////////////
 	//RESOURCE////////////////////////////////////////
 
@@ -46,6 +48,7 @@ public class PressureCalibration extends ParentFragment{
 	TextView textViewText1;
 	TextView textViewText2;
 	TextView textViewText3;
+	TextView textViewText4;		// ++, --, 150204 bwk
 	
 	ImageView imgViewStep1;
 	ImageView imgViewStep2;
@@ -54,6 +57,8 @@ public class PressureCalibration extends ParentFragment{
 	//////////////////////////////////////////////////
 	
 	//VALUABLE////////////////////////////////////////
+	int HYD;		// ++, --, 150204 bwk
+	
 	// Timer	
 	private Timer mCheckTimer = null;
 	
@@ -133,6 +138,7 @@ public class PressureCalibration extends ParentFragment{
 		textViewText1 = (TextView)mRoot.findViewById(R.id.textView_menu_body_management_calibration_pressure_main_step_1);
 		textViewText2 = (TextView)mRoot.findViewById(R.id.textView_menu_body_management_calibration_pressure_main_step_2);
 		textViewText3 = (TextView)mRoot.findViewById(R.id.textView_menu_body_management_calibration_pressure_main_step_3);
+		textViewText4 = (TextView)mRoot.findViewById(R.id.textView_menu_body_management_calibration_pressure_main_HYD_Temp_value);	// ++, --, 150204 bwk
 	
 		imgViewStep1 = (ImageView)mRoot.findViewById(R.id.imageView_menu_body_management_calibration_pressure_step_1);
 		imgViewStep2 = (ImageView)mRoot.findViewById(R.id.imageView_menu_body_management_calibration_pressure_step_2);
@@ -176,12 +182,13 @@ public class PressureCalibration extends ParentFragment{
 	@Override
 	protected void GetDataFromNative() {
 		// TODO Auto-generated method stub
-		
+		HYD = CAN1Comm.Get_HydraulicOilTemperature_101_PGN65431();	// ++, --, 150204 bwk
 	}
 
 	@Override
 	protected void UpdateUI() {
 		// TODO Auto-generated method stub
+		HYDDisplay(textViewText4,HYD,ParentActivity.UnitTemp);		// ++, --, 150204 bwk
 		BoomPressureProgressDisplay(StatusCNT);
 	}
 	/////////////////////////////////////////////////////////////////////	
@@ -191,7 +198,24 @@ public class PressureCalibration extends ParentFragment{
 			return;
 		else
 			ParentActivity.StartAnimationRunningTimer();
+		// ++, 150210 bwk
+		/*
 		ParentActivity._MenuBaseFragment.showCalibrationAnimation();
+		*/
+		if(ParentActivity.OldScreenIndex == Home.SCREEN_STATE_MAIN_B_TOP)
+		{
+			ParentActivity._MainChangeAnimation.StartChangeAnimation(ParentActivity._MainBBaseFragment);
+			ParentActivity.OldScreenIndex = 0;
+			//ParentActivity._MainBBaseFragment.showWorkLoadAnimation();
+		}
+		
+		else if(ParentActivity.OldScreenIndex == ParentActivity.SCREEN_STATE_MENU_MODE_HYD_WORKLOAD_TOP)
+		{
+			ParentActivity.OldScreenIndex = ParentActivity.SCREEN_STATE_MENU_MANAGEMENT_CALIBRATION_PRESSURE_TOP;
+			ParentActivity._MenuBaseFragment.showBodyWorkLoad();
+		}	
+		else
+			ParentActivity._MenuBaseFragment.showCalibrationAnimation();
 	}
 	public void ClickStart(){
 		if(Order == 0){
@@ -238,7 +262,16 @@ public class PressureCalibration extends ParentFragment{
 		
 	}
 	/////////////////////////////////////////////////////////////////////
-
+	// ++, 150204 bwk
+	public void HYDDisplay(TextView textData, int Data, int Unit){
+		if(Unit == ParentActivity.UNIT_TEMP_F){
+			textData.setText(": " + ParentActivity.GetTemp(Data,Unit) + " " + ParentActivity.getResources().getString(string.F));
+		}else{
+			textData.setText(": " + ParentActivity.GetTemp(Data,Unit) + " " + ParentActivity.getResources().getString(string.C));
+		}
+	}
+	// --, 150204 bwk
+	
 	public void CheckBoomPressureProgressStatus(int StatusCnt){
 		int Result;
 		Result = CAN1Comm.Get_BoomPressureCalibrationStatus_1908_PGN61184_202();
@@ -246,7 +279,7 @@ public class PressureCalibration extends ParentFragment{
 		//if((StatusCnt >= 25) && (StatusCnt <= 90)) // 5 Sec ~ 15 Sec
 		if((StatusCnt >= 25)) // 5 Sec ~ 
 		{
-			if( (Result == 2) ||  (Result == 4) || (Result == 11) || (Result == 12) || (Result == 13))
+			if( (Result == 2) ||  (Result == 4) || (Result == 11) || (Result == 12) || (Result == 13) || (Result == 14))	// ++, --, 150204 bwk : Result = 14 Ãß°¡
 			{
 				CAN1Comm.Set_RequestBoomPressureCalibration_PGN61184_201(0);
 				CAN1Comm.Set_RequestBoomBucketAngleSensorCalibration_PGN61184_201(0);
@@ -297,6 +330,14 @@ public class PressureCalibration extends ParentFragment{
 					ParentActivity.showPressureCalibrationResult();
 					Log.d(TAG,"Boom_Up_Speed_Error");
 					break;
+				// ++, 150204 bwk
+				case LOW_HYDRAULIC_OIL_ERROR:
+					ParentActivity._PressureCalibrationResultPopup.setTextTitle(ParentActivity.getResources().getString(string.Hydraulic_Oil_Temp_Error));
+					ParentActivity._PressureCalibrationResultPopup.setExitFlag(false);
+					ParentActivity.showPressureCalibrationResult();
+					Log.d(TAG,"Low_Hydraulic_Oil_Error");
+					break;
+				// --, 150204 bwk
 				}
 				StartButtonOnOff(true);
 				CancelCheckTimer();

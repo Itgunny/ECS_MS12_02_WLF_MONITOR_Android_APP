@@ -1348,7 +1348,7 @@ public class MainBBaseFragment extends ParentFragment{
 	//	KeyTitleChangeAnimation.StartChangeAnimation(_MainBKeyTitleFragment);
 		KeyBodyChangeAnimation.StartChangeAnimation(_MainBKeyRideControlSpeedFragment);
 	}
-	
+
 	/////////////////////////////////////////////////////////////////////
 	public void KeyButtonClick(final int key){
 		Log.d(TAG,"KeyButtonClick : 0x" + Integer.toHexString(key));
@@ -1457,7 +1457,7 @@ public class MainBBaseFragment extends ParentFragment{
 			ClickKeyButtonESC();
 			break;
 		case CAN1CommManager.ENTER:
-			
+			ClickKeyButtonEnter();	// ++, 150207 bwk
 			break;
 		case CAN1CommManager.MENU:
 			Log.d(TAG,"Click MENU");
@@ -1466,12 +1466,30 @@ public class MainBBaseFragment extends ParentFragment{
 		case CAN1CommManager.FN:
 			Log.d(TAG,"Click FN");
 			break;
+		// ++, 150210 bwk
+		case CAN1CommManager.LONG_LEFT_RIGHT_ENTER:
+			ClickKeyButtonLongLeftRightEnter();
+			break;
+		// --, 150210 bwk
 		default:
 			break;
 		}
 				
 
 	}
+	
+	// ++, 150210 bwk
+	public void ClickKeyButtonLongLeftRightEnter(){
+		if(ParentActivity.AnimationRunningFlag == true)
+			return;
+		else
+			ParentActivity.StartAnimationRunningTimer();
+		
+		ParentActivity._MainChangeAnimation.StartChangeAnimation(ParentActivity._MenuBaseFragment);
+		ParentActivity.OldScreenIndex = Home.SCREEN_STATE_MAIN_B_TOP;
+		ParentActivity._MenuBaseFragment.setFirstScreenIndex(Home.SCREEN_STATE_MENU_PREFERENCE_DISPLAYTYPELANG_LANG_CHANGE);
+	}
+	// --, 150210 bwk
 	
 	public void ClickKeyButtonESC(){
 		switch (ParentActivity.ScreenIndex) {
@@ -1528,4 +1546,10 @@ public class MainBBaseFragment extends ParentFragment{
 			break;
 		}
 	}
+	
+	// ++, 150207 bwk
+	public void ClickKeyButtonEnter(){
+		_MainBLeftUpMachineStatusFragment.ClickEnter();
+	}
+	// --, 150207 bwk
 }

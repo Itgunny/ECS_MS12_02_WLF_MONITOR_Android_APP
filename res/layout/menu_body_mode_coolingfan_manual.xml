@@ -9,14 +9,15 @@
         android:layout_above="@+id/Relativelayout_menu_body_mode_coolingfan_manual_low"
         android:layout_alignParentTop="true" >
 
+		        
 	        <ImageView
 	            android:id="@+id/imageView_menu_body_mode_coolingfan_manual"
 	            android:layout_width="wrap_content"
 	            android:layout_height="wrap_content"
 	            android:layout_centerVertical="true"
 	            android:layout_marginLeft="100dp"
-	            android:src="@drawable/menu_mode_fan_manual_icon_off" />
-	
+	            android:src="@drawable/menu_mode_fan_manual_icon_off" />		        
+		    
 		    <TextView
 		        android:id="@+id/textView_menu_body_mode_coolingfan_manual"
 		        android:layout_width="wrap_content"
@@ -31,6 +32,18 @@
 		        android:textColor="@drawable/_selector_radio_txt_white_black"
 		        android:textSize="40sp" />
 
+		    <TextView
+		        android:id="@+id/textView_menu_body_mode_coolingfan_manual_description"
+		        android:layout_width="wrap_content"
+		        android:layout_height="wrap_content"
+		        android:layout_below="@+id/imageView_menu_body_mode_coolingfan_manual"
+		        android:text="@string/Push_and_hold_to_reverse_rotation"
+		        android:layout_marginLeft="40dp"
+		        android:layout_marginTop="10dp"
+		        android:textAppearance="?android:attr/textAppearanceLarge"
+		        android:textColor="@color/menu_body_monitoring_version_data_gray"
+		        android:textSize="20sp" />
+		    
     </RelativeLayout>
 
     

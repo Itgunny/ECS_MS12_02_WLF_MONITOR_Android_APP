@@ -33,6 +33,8 @@ public class MainBKeyRearWiperFragment extends ParentFragment{
 	int SelectWiperSpeedState;
 	
 	int SendCount;
+	
+	int initState;	// ++, 150211 bwk
 	//////////////////////////////////////////////////
 	
 	//ANIMATION///////////////////////////////////////
@@ -89,6 +91,7 @@ public class MainBKeyRearWiperFragment extends ParentFragment{
 		WiperWasherState = CAN1Comm.Get_RearWiperWasherOperationStatus_3452_PGN65527();
 		
 		SendCount = 0;
+		initState = 0;		// ++, 150210 bwk
 	}
 	@Override
 	protected void InitButtonListener() {
@@ -188,6 +191,11 @@ public class MainBKeyRearWiperFragment extends ParentFragment{
 			|| (CAN1Comm.Get_RX_RES_KEY_LongFlag() == 1 && CAN1Comm.Get_RX_RES_KEY_RearWiper() == 1 )){	// RearWiper Long Key	
 				CAN1Comm.Set_RearWiperWasherOperationStatus_3452_PGN65527(CAN1CommManager.DATA_STATE_KEY_REARWIPER_WASHER_ON);
 				CAN1Comm.TxCANToMCU(247);
+				// ++, 150211 bwk
+				// Long키가 눌러진 경우는 그 전값을 바꾸지 않다는 뜻이므로 한단계 이전으로 변경.
+				if(initState>=2)
+					ReturnStatusWiperSpeedState();
+				// --, 150211 bwk
 				Log.d(TAG,"Washer On");
 			}else{
 				CAN1Comm.Set_RearWiperWasherOperationStatus_3452_PGN65527(CAN1CommManager.DATA_STATE_KEY_REARWIPER_WASHER_OFF);
@@ -198,6 +206,31 @@ public class MainBKeyRearWiperFragment extends ParentFragment{
 		}
 		SendCount++;
 	}
+	// ++, 150211 bwk
+	public void ReturnStatusWiperSpeedState(){
+		switch (SelectWiperSpeedState) {
+		case CAN1CommManager.DATA_STATE_KEY_REARWIPER_SPEED_OFF:
+		default:
+			SelectWiperSpeedState = CAN1CommManager.DATA_STATE_KEY_REARWIPER_SPEED_LOW;
+			CAN1Comm.Set_RearWiperOperationStatus_3451_PGN65527(CAN1CommManager.DATA_STATE_KEY_REARWIPER_SPEED_LOW);
+			CAN1Comm.TxCANToMCU(247);
+			CAN1Comm.Set_RearWiperOperationStatus_3451_PGN65527(3);
+			break;
+		case CAN1CommManager.DATA_STATE_KEY_REARWIPER_SPEED_INT:
+			SelectWiperSpeedState = CAN1CommManager.DATA_STATE_KEY_REARWIPER_SPEED_OFF;
+			CAN1Comm.Set_RearWiperOperationStatus_3451_PGN65527(CAN1CommManager.DATA_STATE_KEY_REARWIPER_SPEED_OFF);
+			CAN1Comm.TxCANToMCU(247);
+			CAN1Comm.Set_RearWiperOperationStatus_3451_PGN65527(3);
+			break;
+		case CAN1CommManager.DATA_STATE_KEY_REARWIPER_SPEED_LOW:
+			SelectWiperSpeedState = CAN1CommManager.DATA_STATE_KEY_REARWIPER_SPEED_INT;
+			CAN1Comm.Set_RearWiperOperationStatus_3451_PGN65527(CAN1CommManager.DATA_STATE_KEY_REARWIPER_SPEED_INT);
+			CAN1Comm.TxCANToMCU(247);
+			CAN1Comm.Set_RearWiperOperationStatus_3451_PGN65527(3);
+			break;
+		}		
+	}
+	// --, 150211 bwk
 	public void ClickHardKey(){
 		
 		switch (SelectWiperSpeedState) {
@@ -221,6 +254,7 @@ public class MainBKeyRearWiperFragment extends ParentFragment{
 			CAN1Comm.Set_RearWiperOperationStatus_3451_PGN65527(3);
 			break;
 		}
+		initState++;	// ++, 150211 bwk
 	}
 	
 	public void ClickOff(){

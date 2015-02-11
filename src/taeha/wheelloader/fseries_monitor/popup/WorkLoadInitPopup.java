@@ -90,6 +90,9 @@ public class WorkLoadInitPopup extends ParentPopup{
 	public void dismiss() {
 		// TODO Auto-generated method stub
 		super.dismiss();
+		
+		// ++, 150210 bwk
+		/*
 		ParentActivity.ScreenIndex = ParentActivity.SCREEN_STATE_MENU_MODE_HYD_WORKLOAD_TOP;
 		try {
 			ParentActivity._MenuBaseFragment._WorkLoadFragment.CursurDisplay(11);
@@ -97,6 +100,16 @@ public class WorkLoadInitPopup extends ParentPopup{
 			// TODO: handle exception
 			Log.e(TAG,"NullPointerException dismiss");
 		}
+		*/
+		ParentActivity.ScreenIndex = ParentActivity.OldScreenIndex;
+		try {
+			if(ParentActivity.OldScreenIndex == ParentActivity.SCREEN_STATE_MAIN_B_KEY_WORKLOAD)
+				ParentActivity._MenuBaseFragment._WorkLoadFragment.CursurDisplay(11);
+		} catch (NullPointerException e) {
+			// TODO: handle exception
+			Log.e(TAG,"NullPointerException dismiss");
+		}
+		// --, 150210 bwk		
 	}
 
 	@Override
@@ -145,7 +158,13 @@ public class WorkLoadInitPopup extends ParentPopup{
 	}
 	///////////////////////////////////////////////////////////////////////////////
 	public void ClickOK(){
-		ParentActivity._MenuBaseFragment._WorkLoadFragment.SetDefault();
+		// ++, 150210 bwk
+		//ParentActivity._MenuBaseFragment._WorkLoadFragment.SetDefault();
+		if(ParentActivity.OldScreenIndex == ParentActivity.SCREEN_STATE_MENU_MODE_HYD_WORKLOAD_TOP)
+			ParentActivity._MenuBaseFragment._WorkLoadFragment.SetDefault();
+		else if(ParentActivity.OldScreenIndex == ParentActivity.SCREEN_STATE_MAIN_B_KEY_WORKLOAD)
+			ParentActivity._MainBBaseFragment._MainBKeyWorkLoadFragment.SetDefault();
+		// --, 150210 bwk
 		this.dismiss();
 	}	
 	public void ClickCancel(){

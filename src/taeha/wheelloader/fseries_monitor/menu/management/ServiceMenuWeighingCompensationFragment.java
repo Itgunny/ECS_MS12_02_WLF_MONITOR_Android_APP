@@ -177,7 +177,7 @@ public class ServiceMenuWeighingCompensationFragment extends ParentFragment{
 		super.InitValuables();
 		
 		NumSign = true;
-		NumIndex = 0;
+		NumIndex = 5;		// ++, --, 150203 bwk : 0 -> 5
 		NumSetting = 0;
 		Num100 = 0;
 		Num10 = 0;
@@ -449,112 +449,104 @@ public class ServiceMenuWeighingCompensationFragment extends ParentFragment{
 	public void ClickDefault(){
 		
 	}
+	
+	// ++, --, 150203 bwk
+	/*
+	 * 숫자 함수 수정
+	  	public void ClickNumx(){
+			CursurIndex = x;
+			HandleCursurDisplay.sendMessage(HandleCursurDisplay.obtainMessage(CursurIndex));
+			NumSetting = SetNumber(NumIndex,1,NumSign);
+			if(NumIndex>=2)
+				NumIndex = 0;
+			else
+				NumIndex++;
+			WeighingSystemCompensationDisplay(WeightOffsetSelectionStatus,NumSetting,NumSetting,NumSetting);
+		}
+		->
+		public void ClickNumx(){
+			CursurIndex = x;
+			HandleCursurDisplay.sendMessage(HandleCursurDisplay.obtainMessage(CursurIndex));
+			NumSetting = SetNumber(NumIndex,1,NumSign);
+			WeighingSystemCompensationDisplay(WeightOffsetSelectionStatus,NumSetting,NumSetting,NumSetting);
+			NumIndex++;
+		}
+
+	 */
 	public void ClickNum1(){
 		CursurIndex = 5;
 		HandleCursurDisplay.sendMessage(HandleCursurDisplay.obtainMessage(CursurIndex));
 		NumSetting = SetNumber(NumIndex,1,NumSign);
-		if(NumIndex >= 2)
-			NumIndex = 0;
-		else 
-			NumIndex++;
-		
 		WeighingSystemCompensationDisplay(WeightOffsetSelectionStatus,NumSetting,NumSetting,NumSetting);
+		NumIndex++;
 	}
 	public void ClickNum2(){
 		CursurIndex = 6;
 		HandleCursurDisplay.sendMessage(HandleCursurDisplay.obtainMessage(CursurIndex));
 		NumSetting = SetNumber(NumIndex,2,NumSign);
-		if(NumIndex >= 2)
-			NumIndex = 0;
-		else 
-			NumIndex++;
 		WeighingSystemCompensationDisplay(WeightOffsetSelectionStatus,NumSetting,NumSetting,NumSetting);
+		NumIndex++;
 	}
 	public void ClickNum3(){
 		CursurIndex = 7;
 		HandleCursurDisplay.sendMessage(HandleCursurDisplay.obtainMessage(CursurIndex));
 		NumSetting = SetNumber(NumIndex,3,NumSign);
-		if(NumIndex >= 2)
-			NumIndex = 0;
-		else 
-			NumIndex++;
 		WeighingSystemCompensationDisplay(WeightOffsetSelectionStatus,NumSetting,NumSetting,NumSetting);
+		NumIndex++;
 	}
 	public void ClickNum4(){
 		CursurIndex = 8;
 		HandleCursurDisplay.sendMessage(HandleCursurDisplay.obtainMessage(CursurIndex));
 		NumSetting = SetNumber(NumIndex,4,NumSign);
-		if(NumIndex >= 2)
-			NumIndex = 0;
-		else 
-			NumIndex++;
 		WeighingSystemCompensationDisplay(WeightOffsetSelectionStatus,NumSetting,NumSetting,NumSetting);
+		NumIndex++;
 	}
 	public void ClickNum5(){
 		CursurIndex = 9;
 		HandleCursurDisplay.sendMessage(HandleCursurDisplay.obtainMessage(CursurIndex));
 		NumSetting = SetNumber(NumIndex,5,NumSign);
-		if(NumIndex >= 2)
-			NumIndex = 0;
-		else 
-			NumIndex++;
 		WeighingSystemCompensationDisplay(WeightOffsetSelectionStatus,NumSetting,NumSetting,NumSetting);
+		NumIndex++;
 	}
 	public void ClickNum6(){
 		CursurIndex = 10;
 		HandleCursurDisplay.sendMessage(HandleCursurDisplay.obtainMessage(CursurIndex));
 		NumSetting = SetNumber(NumIndex,6,NumSign);
-		if(NumIndex >= 2)
-			NumIndex = 0;
-		else 
-			NumIndex++;
 		WeighingSystemCompensationDisplay(WeightOffsetSelectionStatus,NumSetting,NumSetting,NumSetting);
-		
+		NumIndex++;
 	}
 	public void ClickNum7(){
 		CursurIndex = 11;
 		HandleCursurDisplay.sendMessage(HandleCursurDisplay.obtainMessage(CursurIndex));
 		NumSetting = SetNumber(NumIndex,7,NumSign);
-		if(NumIndex >= 2)
-			NumIndex = 0;
-		else 
-			NumIndex++;
 		WeighingSystemCompensationDisplay(WeightOffsetSelectionStatus,NumSetting,NumSetting,NumSetting);
+		NumIndex++;
 	}
 	public void ClickNum8(){
 		CursurIndex = 12;
 		HandleCursurDisplay.sendMessage(HandleCursurDisplay.obtainMessage(CursurIndex));
 		NumSetting = SetNumber(NumIndex,8,NumSign);
-		if(NumIndex >= 2)
-			NumIndex = 0;
-		else 
-			NumIndex++;
 		WeighingSystemCompensationDisplay(WeightOffsetSelectionStatus,NumSetting,NumSetting,NumSetting);
+		NumIndex++;
 	}
 	public void ClickNum9(){
 		CursurIndex = 13;
 		HandleCursurDisplay.sendMessage(HandleCursurDisplay.obtainMessage(CursurIndex));
 		NumSetting = SetNumber(NumIndex,9,NumSign);
-		if(NumIndex >= 2)
-			NumIndex = 0;
-		else 
-			NumIndex++;
 		WeighingSystemCompensationDisplay(WeightOffsetSelectionStatus,NumSetting,NumSetting,NumSetting);
+		NumIndex++;
 	}
 	public void ClickNum0(){
 		CursurIndex = 15;
 		HandleCursurDisplay.sendMessage(HandleCursurDisplay.obtainMessage(CursurIndex));
 		NumSetting = SetNumber(NumIndex,0,NumSign);
-		if(NumIndex >= 2)
-			NumIndex = 0;
-		else 
-			NumIndex++;
 		WeighingSystemCompensationDisplay(WeightOffsetSelectionStatus,NumSetting,NumSetting,NumSetting);
+		NumIndex++;
 	}
 	public void ClickNumBack(){
 		CursurIndex = 14;
 		HandleCursurDisplay.sendMessage(HandleCursurDisplay.obtainMessage(CursurIndex));
-		NumIndex = 0;
+		NumIndex = -1;	// ++, --, 150203 bwk 0 -> -1
 		NumSetting = 0;
 		Num100 = 0;
 		Num10 = 0;
@@ -568,6 +560,10 @@ public class ServiceMenuWeighingCompensationFragment extends ParentFragment{
 		CursurIndex = 16;
 		HandleCursurDisplay.sendMessage(HandleCursurDisplay.obtainMessage(CursurIndex));
 		NumIndex = 3;
+		// ++, 150203 bwk
+		WeighingSystemCompensationDisplay(WeightOffsetSelectionStatus,NumSetting,NumSetting,NumSetting);	
+		NumIndex++;	
+		// --, 150203 bwk
 	}
 	public void ClickNumPlusMinus(){
 		CursurIndex = 17;
@@ -598,8 +594,9 @@ public class ServiceMenuWeighingCompensationFragment extends ParentFragment{
 		CursurIndex = 2;
 		HandleCursurDisplay.sendMessage(HandleCursurDisplay.obtainMessage(CursurIndex));
 		WeightOffsetSelectionStatus = CAN1CommManager.DATA_STATE_WEIGHT_OFFSET_SETTING_WORKTOOL_1;
+		NumIndex = 5;	// ++, --, 150203 bwk
 		WeighingSystemCompensationDisplay(WeightOffsetSelectionStatus,WorkTool1,WorkTool2,WorkTool3);
-		NumIndex = 0;
+		NumIndex = 0; 
 		NumSetting = WorkTool1;
 		Num100 = 0;
 		Num10 = 0;
@@ -611,8 +608,9 @@ public class ServiceMenuWeighingCompensationFragment extends ParentFragment{
 		CursurIndex = 3;
 		HandleCursurDisplay.sendMessage(HandleCursurDisplay.obtainMessage(CursurIndex));
 		WeightOffsetSelectionStatus = CAN1CommManager.DATA_STATE_WEIGHT_OFFSET_SETTING_WORKTOOL_2;
+		NumIndex = 5;	// ++, --, 150203 bwk
 		WeighingSystemCompensationDisplay(WeightOffsetSelectionStatus,WorkTool1,WorkTool2,WorkTool3);
-		NumIndex = 0;
+		NumIndex = 0; 
 		NumSetting = WorkTool2;
 		Num100 = 0;
 		Num10 = 0;
@@ -624,8 +622,9 @@ public class ServiceMenuWeighingCompensationFragment extends ParentFragment{
 		CursurIndex = 4;
 		HandleCursurDisplay.sendMessage(HandleCursurDisplay.obtainMessage(CursurIndex));
 		WeightOffsetSelectionStatus = CAN1CommManager.DATA_STATE_WEIGHT_OFFSET_SETTING_WORKTOOL_3;
+		NumIndex = 5;	// ++, --, 150203 bwk
 		WeighingSystemCompensationDisplay(WeightOffsetSelectionStatus,WorkTool1,WorkTool2,WorkTool3);
-		NumIndex = 0;
+		NumIndex = 0; 
 		NumSetting = WorkTool3;
 		Num100 = 0;
 		Num10 = 0;
@@ -644,7 +643,6 @@ public class ServiceMenuWeighingCompensationFragment extends ParentFragment{
 			layoutWorkTool1.setVisibility(View.GONE);
 			layoutWorkTool2.setVisibility(View.GONE);
 			layoutWorkTool3.setVisibility(View.GONE);
-			
 			break;
 		case CAN1CommManager.DATA_STATE_WEIGHT_OFFSET_SETTING_WORKTOOL_1:
 			radioNoOffset.setChecked(false);
@@ -680,7 +678,7 @@ public class ServiceMenuWeighingCompensationFragment extends ParentFragment{
 			break;
 		}
 	}
-
+	
 	public void CompensationValueDisplay(int value, TextView textview){
 		int Temp;
 		int n100;
@@ -704,7 +702,9 @@ public class ServiceMenuWeighingCompensationFragment extends ParentFragment{
 		n10 = (Temp  / 100) % 10;
 		n1 = (Temp  / 10) % 10;
 		Under1 = (Temp  / 1) % 10;
-
+		
+		// ++, 150203 bwk
+		/*
 		if(sign == true){
 			if(n100 != 0){
 				str = Integer.toString(n100) + Integer.toString(n10) + Integer.toString(n1) + "." + Integer.toString(Under1);
@@ -722,14 +722,97 @@ public class ServiceMenuWeighingCompensationFragment extends ParentFragment{
 				str = "-" + Integer.toString(n1) + "." + Integer.toString(Under1);
 			}
 		}
+		*/
+		
+		if(sign == false)
+			str = "-";
+		else 
+			str = "";
+		
+		if(NumIndex == -1)
+		{
+			str = "";
+			NumIndex++;
+		}
+		else if(NumIndex == 0)
+		{
+			str += Integer.toString(n1);
+		}
+		else if(NumIndex == 1)
+		{
+			if(n10 != 0)
+				str += Integer.toString(n10);
+			str += Integer.toString(n1);
+		}
+		else
+		{
+			if(n100 != 0){
+				str += Integer.toString(n100) + Integer.toString(n10) + Integer.toString(n1);
+			}else if(n10 != 0){
+				str += Integer.toString(n10) + Integer.toString(n1);
+			}else {
+				str += Integer.toString(n1);
+			}
+			
+			if(NumIndex == 3)
+			{
+				if(CursurIndex == 16)
+					str += ".";
+			}
+			else if(NumIndex > 3)
+			{
+				str += "." + Integer.toString(Under1);
+				
+				if(NumIndex == 5)
+				{
+					Num100 = 0;
+					Num10 = 0;
+					Num1 = 0;
+					NumUnder = 0;
+					NumSign = true;
+					NumIndex = 0;
+				}
+				else if(NumIndex == 4)
+				{
+					if(Num100 == 1 && Num10 == 0 && Num1 == 0 && NumUnder == 0)
+					{
+						Num100 = 0;
+						Num10 = 0;
+						Num1 = 0;
+						NumUnder = 0;
+					}
+					NumIndex = 6;
+				}
+			}
+		}
+		// --, 150203 bwk
+		
 		
 		textview.setText(str);
-			
+	
 	}
 	/////////////////////////////////////////////////////////////////////
 	public int SetNumber(int _index, int _num, boolean sign){
 
 		int result;
+		
+		// ++, 150203 bwk
+		if(_index >= 6 || _index == 3)
+		{
+			Num100 = 0;
+			Num10 = 0;
+			Num1 = 0;
+			NumUnder = 0;
+			NumSign = true;
+			NumIndex = 0;
+			_index = 0;
+		}
+		else if(_index==1 && Num1 == 0)
+		{
+			_index = 0;
+			NumIndex = 0;
+		}
+		// --, 150203 bwk
 		
 		switch (_index) {
 		case 0:
@@ -744,7 +827,7 @@ public class ServiceMenuWeighingCompensationFragment extends ParentFragment{
 			Num10 = Num1;
 			Num1 = _num;
 			break;
-		case 3:
+		case 4:		// ++, --, 150203 bwk 3 -> 4
 			NumUnder = _num;
 			break;
 		default:
@@ -757,9 +840,25 @@ public class ServiceMenuWeighingCompensationFragment extends ParentFragment{
 		result += 1000;
 		
 		if(result > 2000)
+		{
 			result = 2000;
+			// ++, 150203 bwk 
+			Num100 = 1;
+			Num10 = 0;
+			Num1 = 0;
+			NumUnder = 0;
+			// --, 150203 bwk
+		}
 		else if(result < 0)
+		{
 			result = 0;
+			// ++, 150203 bwk
+			Num100 = 0;
+			Num10 = 0;
+			Num1 = 0;
+			NumUnder = 0;
+			// --, 150203 bwk
+		}
 		
 		return result;
 	}
@@ -907,25 +1006,54 @@ public class ServiceMenuWeighingCompensationFragment extends ParentFragment{
 	}
 	public void ClickEnter(){
 		switch (CursurIndex) {
+		// ++, --, 150204 bwk : Enter 눌렀을 경우 포커스 이동안되는 문제 수정 = 함수부르고 CursurDisplay 부름(기존 커서이동 후 함수 호출하여 제자리에 있었음)
 		case 1:
+			// ++, 150204 bwk
+			/*
 			CursurIndex = 19;
 			CursurDisplay(CursurIndex);
 			ClickNoOffset();
+			*/
+			ClickNoOffset();
+			CursurIndex = 19;
+			HandleCursurDisplay.sendMessage(HandleCursurDisplay.obtainMessage(CursurIndex));
+			// --, 150204 bwk
 			break;
 		case 2:
+			// ++, 150204 bwk
+			/*
 			CursurIndex = 5;
 			CursurDisplay(CursurIndex);
 			ClickWorkTool1();
+			*/
+			ClickWorkTool1();
+			CursurIndex = 5;
+			HandleCursurDisplay.sendMessage(HandleCursurDisplay.obtainMessage(CursurIndex));
+			// --, 150204 bwk
 			break;
 		case 3:
+			// ++, 150204 bwk
+			/*
 			CursurIndex = 5;
 			CursurDisplay(CursurIndex);
 			ClickWorkTool2();
+			*/
+			ClickWorkTool2();
+			CursurIndex = 5;
+			HandleCursurDisplay.sendMessage(HandleCursurDisplay.obtainMessage(CursurIndex));
+			// --, 150204 bwk
 			break;
 		case 4:
+			// ++, 150204 bwk
+			/*
 			CursurIndex = 5;
 			CursurDisplay(CursurIndex);
 			ClickWorkTool3();
+			*/
+			ClickWorkTool3();
+			CursurIndex = 5;
+			HandleCursurDisplay.sendMessage(HandleCursurDisplay.obtainMessage(CursurIndex));
+			// --, 150204 bwk
 			break;
 		case 5:
 			ClickNum1();

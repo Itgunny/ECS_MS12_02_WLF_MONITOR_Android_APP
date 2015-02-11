@@ -122,11 +122,16 @@ public class MainBRightDownQuickFragment extends ParentFragment{
 		
 	}
 	public void ClickMultimedia(){
-		ParentActivity.KillApps("com.example.wfdsink");
-		Intent intent;
-		intent = ParentActivity.getPackageManager().getLaunchIntentForPackage("com.mxtech.videoplayer.ad");
-		if(intent != null){
-			ParentActivity.startActivity(intent);
+		if(CAN1Comm.GetrpmFlag() == false)	// ++, --, 150211 bwk
+		{
+			CAN1Comm.SetPlayerFlag(true);	// ++, --, 150211 bwk
+			
+			ParentActivity.KillApps("com.example.wfdsink");
+			Intent intent;
+			intent = ParentActivity.getPackageManager().getLaunchIntentForPackage("com.mxtech.videoplayer.ad");
+			if(intent != null){
+				ParentActivity.startActivity(intent);
+			}
 		}
 	}
 	public void IconDisplay(int _data){

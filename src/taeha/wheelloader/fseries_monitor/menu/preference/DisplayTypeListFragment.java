@@ -101,7 +101,7 @@ public class DisplayTypeListFragment extends MenuBodyList_ParentFragment{
 			return;
 		else
 			ParentActivity.StartAnimationRunningTimer();
-
+		
 		CursurIndex = 1;
 		CursurDisplay(CursurIndex);
 	}
@@ -113,7 +113,10 @@ public class DisplayTypeListFragment extends MenuBodyList_ParentFragment{
 			return;
 		else
 			ParentActivity.StartAnimationRunningTimer();
-		
+		// ++, 150206 bwk
+		ParentActivity.OldScreenIndex = ParentActivity.SCREEN_STATE_MENU_PREFERENCE_DISPLAYTYPELANG_TOP;
+		ParentActivity._MenuBaseFragment.showBodyLanguageAnimation();
+		// --, 150206 bwk
 		CursurIndex = 2;
 		CursurDisplay(CursurIndex);
 	}

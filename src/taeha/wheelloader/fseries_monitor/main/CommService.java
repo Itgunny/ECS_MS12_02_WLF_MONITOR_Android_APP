@@ -61,6 +61,12 @@ public class CommService extends Service{
 
 	// Handler
 	static Handler HandleKeyButton;
+	
+	// MediaPlayer
+	// ++, 150211 bwk
+	private static boolean PlayerFlag = false;		
+	private static boolean rpmFlag = false;
+	// --, 150211 bwk
 	/////////////////////////////////////////////////////////////////////
 	
 	//////////////////LOAD NATIVELIBRARY/////////////////////////////////
@@ -541,6 +547,11 @@ public class CommService extends Service{
 	public native int Get_WeighingSystemBuzzer_1907_PGN65450();
 	public native int Get_CurrentWeighingResult_1919_PGN65450();
 	public native int Get_WeighingDisplayMode1_1910_PGN65450();
+	// ++, 150207 bwk
+	public native int Get_WeighingSystemError_BoomLiftSpeed_1942_PGN65450();
+	public native int Get_WeighingSystemError_BucketFullIn_1943_PGN65450();
+	public native int Get_WeighingSystemError_HydraulicOilTemperature_1944_PGN65450();
+	// --, 150207 bwk
 	public native int Get_CurrentWeight_1911_PGN65450();
 	public native int Get_TodayWeight_1915_PGN65450();
 	//////RX_WEIGHING_SYSTEM_DATA1_65451///////
@@ -964,6 +975,11 @@ public class CommService extends Service{
 	public native void Set_WeighingSystemBuzzer_1907_PGN65450(int Data);
 	public native void Set_CurrentWeighingResult_1919_PGN65450(int Data);
 	public native void Set_WeighingDisplayMode1_1910_PGN65450(int Data);
+	// ++, 150207 bwk
+	public native void Set_WeighingSystemError_BoomLiftSpeed_1942_PGN65450(int Data);
+	public native void Set_WeighingSystemError_BucketFullIn_1943_PGN65450(int Data);
+	public native void Set_WeighingSystemError_HydraulicOilTemperature_1944_PGN65450(int Data);
+	// --, 150207 bwk
 	public native void Set_CurrentWeight_1911_PGN65450(int Data);
 	public native void Set_TodayWeight_1915_PGN65450(int Data);
 	//////TX_WEIGHING_SYSTEM_DATA1_65451///////
@@ -1133,6 +1149,11 @@ public class CommService extends Service{
 				break;
 				
 			case CAN1CommManager.ESC:
+				// ++, 150211 bwk
+				if(PlayerFlag == true && rpmFlag == false)
+					PlayerFlag = false;
+				// --, 150211 bwk
+				
 //				if(GetScreenTopFlag() == true)
 //				{
 //					CAN1Comm.Callback_KeyButton(Data);
@@ -1247,6 +1268,17 @@ public class CommService extends Service{
 	public static boolean GetFNFlag(){
 		return FNFlag;
 	}
+	// ++, 150211 bwk
+	public static void SetPlayerFlag(boolean flag){
+		PlayerFlag = flag;
+	}
+	public static boolean GetPlayerFlag(){
+		return PlayerFlag;
+	}
+	public static boolean GetrpmFlag(){
+		return rpmFlag;
+	}
+	// --, 150211 bwk
 	////////////////////////////////////////////////////////////////////////
 		
 	/////////////////OVERRIDE METHOD///////////////////////////////////////
@@ -1424,14 +1456,37 @@ public class CommService extends Service{
 			startActivity(intent);
 	}
 	public void ClickFN(){
-		if(CheckTopApps("com.mxtech.videoplayer.ad") == true){
-			CallHome();
-		}else if(CheckTopApps("com.example.wfdsink") == true){
-			CallHome();
-		}else if(CheckRunningApp("com.mxtech.videoplayer.ad") == true){
-			RunMultimedia();
-		}else if(CheckRunningApp("com.example.wfdsink") == true){
-			RunMirror();
+		if(rpmFlag == false)
+		{
+			rpmFlag = false;
+			if(CheckTopApps("com.mxtech.videoplayer.ad") == true){
+				PlayerFlag = false;	// ++, --, 150211 bwk
+				CallHome();
+			}else if(CheckTopApps("com.example.wfdsink") == true){
+				PlayerFlag = false;	// ++, --, 150211 bwk
+				CallHome();
+			}else if(CheckRunningApp("com.mxtech.videoplayer.ad") == true){
+				PlayerFlag = true;	// ++, --, 150211 bwk
+				RunMultimedia();
+			}else if(CheckRunningApp("com.example.wfdsink") == true){
+				PlayerFlag = true;	// ++, --, 150211 bwk
+				RunMirror();
+			}
 		}
 	}
+	// ++, 150211 bwk
+	public void ChangeMediatoHome(){
+		if(CheckTopApps("com.mxtech.videoplayer.ad") == true){
+			rpmFlag = true;
+			CallHome();
+		}
+	}
+
+	public void ChangeHometoMedia(){
+		if(CheckRunningApp("com.mxtech.videoplayer.ad") == true){
+			rpmFlag = false;
+			RunMultimedia();
+		}
+	}
+	// --, 150211 bwk
 }

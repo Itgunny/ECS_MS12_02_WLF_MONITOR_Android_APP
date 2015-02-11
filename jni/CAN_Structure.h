@@ -2449,10 +2449,20 @@ typedef struct
 {
 	unsigned char	WeighingSystemAccumulationMode_1941:2;
 	unsigned char	WeighingSystemBuzzer_1907:2;
+	// ++, 150207 bwk
+#if 0
 	unsigned char	CurrentWeighingResult_1919:4;
 
 	unsigned char	WeighingDisplayMode1_1910:4;
 	unsigned char	Reserved0:4;
+#else
+	unsigned char	WeighingDisplayMode1_1910:4;
+	unsigned char	CurrentWeighingResult_1919:2;
+	unsigned char	WeighingSystemError_BoomLiftSpeed_1942:2;
+	unsigned char	WeighingSystemError_BucketFullIn_1943:2;
+	unsigned char	WeighingSystemError_HydraulicOilTemperature_1944:2;
+#endif
+	// --, 150207 bwk
 
 	unsigned short	CurrentWeight_1911;
 

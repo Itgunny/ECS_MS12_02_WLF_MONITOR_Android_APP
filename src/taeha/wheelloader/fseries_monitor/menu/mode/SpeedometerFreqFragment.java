@@ -883,8 +883,18 @@ public class SpeedometerFreqFragment extends ParentFragment{
 			if(Focus == R.id.radio_menu_body_mode_speedometerfreq_data_10){
 				CursurIndex = 5;
 				CursurDisplay(CursurIndex);
+			}
+			// ++, 150210 bwk
+			else if(Focus == R.id.radio_menu_body_mode_speedometerfreq_data_1){
+				CursurIndex = 5;
+				CursurDisplay(CursurIndex);
+				setBack();
+			// --, 150210 bwk
 			}else{
-				ClickNumNext();
+				// ++, 150210 bwk
+				//ClickNumNext();
+				ClickNumBack();
+				// --, 150210 bwk
 			}
 			break;
 		case 11:

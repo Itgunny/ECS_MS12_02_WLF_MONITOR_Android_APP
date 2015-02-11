@@ -69,7 +69,7 @@
 	           android:layout_width="200dp"
 	           android:layout_height="wrap_content"
 	           android:button="@drawable/_selector_radio_btn"
-	           android:text="@string/F"
+	           android:text="@string/Unit_F"
 	           android:textColor="@drawable/_selector_radio_txt_white_amber"
 	           android:textSize="25sp" />
 	
@@ -79,7 +79,7 @@
 	           android:layout_height="wrap_content"
 	           android:layout_marginLeft="40dp"
 	           android:button="@drawable/_selector_radio_btn"
-	           android:text="@string/C"
+	           android:text="@string/Unit_C"
 	           android:textColor="@drawable/_selector_radio_txt_white_amber"
 	           android:textSize="25sp" />
 
