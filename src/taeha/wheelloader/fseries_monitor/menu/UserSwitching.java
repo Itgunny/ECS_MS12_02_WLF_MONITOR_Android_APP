@@ -137,6 +137,27 @@ public class UserSwitching extends ParentFragment{
 		InitValuables();
 		InitButtonListener();
 		
+		// ++, 150212 bwk
+		switch(SelectIndex)
+		{
+			case 1:
+			default:
+				ClickDefault();
+				break;
+			case 2:
+				ClickUser1();
+				break;
+			case 3:
+				ClickUser2();
+				break;
+			case 4:
+				ClickUser3();
+				break;
+			case 5:
+				ClickUser4();
+				break;
+		}
+		// --, 150212 bwk
 		ParentActivity.ScreenIndex = ParentActivity.SCREEN_STATE_MENU_USERSWITCHING_TOP;
 		ParentActivity._MenuBaseFragment._MenuInterTitleFragment.SetTitleText(ParentActivity.getResources().getString(R.string.User_Switching));
 		HandleCursurDisplay = new Handler() {
@@ -185,11 +206,20 @@ public class UserSwitching extends ParentFragment{
 	
 		listView.setAdapter(adapter);
 
+		// ++, 150212 bwk
+		/*
 		CursurIndex = 1;
 		CursurDisplay(CursurIndex);
 		
 		SelectIndex = 1;
+		 */
+		SelectIndex = ParentActivity.UserIndex;
+		// --, 150212 bwk
 		UserSwitchingRadioDisplay(SelectIndex);
+		
+		CursurIndex = SelectIndex;
+		CursurDisplay(CursurIndex);
+		
 		adapter.addItem(new IconTextItemUserSwitching( ParentActivity.getResources().getDrawable(R.drawable.menu_management_machine_monitoring_bg_dark),
 				null,
 				ParentActivity.getResources().getString(string.Engine_Mode)
@@ -433,7 +463,7 @@ public class UserSwitching extends ParentFragment{
 		UnitPressure = ParentActivity.UnitPressure;
 		MachineStatusUpper = ParentActivity.MachineStatusUpperIndex;
 		MachineStatusLower = ParentActivity.MachineStatusLowerIndex;
-		//Language = ParentActivity.;
+		Language = ParentActivity.LanguageIndex;		// ++, --, 150212 bwk
 		SoundOutput = ParentActivity.SoundState;
 		HourmeterDisplay = ParentActivity.HourOdometerIndex;
 
@@ -1304,8 +1334,26 @@ public class UserSwitching extends ParentFragment{
 	}	
 	
 	public void LanguageDisplay(int SettingData, int LoadingData){
-		
+		// ++, 150212 bwk
+		switch (SettingData) {
+			case Home.STATE_DISPLAY_LANGUAGE_KOREAN:
+				adapter.UpdateSecond(STATE_LANGUAGE, ParentActivity.getResources().getString(string.Korean));
+				break;
+			case Home.STATE_DISPLAY_LANGUAGE_ENGLISH:
+				adapter.UpdateSecond(STATE_LANGUAGE, ParentActivity.getResources().getString(string.English));
+				break;
+		}
+		switch (LoadingData) {
+		case Home.STATE_DISPLAY_LANGUAGE_KOREAN:
+			adapter.UpdateThird(STATE_LANGUAGE, ParentActivity.getResources().getString(string.Korean));
+			break;
+		case Home.STATE_DISPLAY_LANGUAGE_ENGLISH:
+			adapter.UpdateThird(STATE_LANGUAGE, ParentActivity.getResources().getString(string.English));
+			break;
+		}
+		// --, 150212 bwk
 	}
+	
 	public void SoundOutputDisplay(int SettingData, int LoadingData){
 		switch (SettingData) {
 		case Home.STATE_INTERNAL_SPK:
@@ -1379,6 +1427,7 @@ public class UserSwitching extends ParentFragment{
 	/////////////////////////////////////////////////////////////////////	
 
 	public void ClickOK(){
+		ParentActivity.UserIndex = SelectIndex;		// ++, --, 150212 bwk
 		if(ParentActivity.AnimationRunningFlag == true)
 			return;
 		else

@@ -50,13 +50,10 @@ public class MainBLeftUpMachineStatusFragment extends ParentFragment{
 	
 	ImageButton imgbtnMachineStatus;
 
-	// ++, --, 150212 bwk MCU 미적용으로 원복
-	/*
-	// ++, 150205 bwk
+	// ++, 150212 bwk
 	private QuickAction popupIndicator;
 	private ActionItem actionitemIndicator;
-	// --, 150205 bwk
-	*/
+	// --, 150212 bwk
 	//////////////////////////////////////////////////
 	
 	//VALUABLE////////////////////////////////////////
@@ -82,14 +79,11 @@ public class MainBLeftUpMachineStatusFragment extends ParentFragment{
 		
 	int WeighingDisplayMode;
 
-	// ++, --, 150212 bwk MCU 미적용으로 원복
-	/*
-	// ++, 150207 bwk
+	// ++, 150212 bwk
 	int WeighingSystemError_BoomLiftSpeed;
 	int WeighingSystemError_BucketFullIn;
 	int WeighingSystemError_HydraulicOilTemperature;
-	// --, 150207 bwk
-	*/
+	// --, 150212 bwk
 	//////////////////////////////////////////////////
 	
 	//ANIMATION///////////////////////////////////////
@@ -163,21 +157,16 @@ public class MainBLeftUpMachineStatusFragment extends ParentFragment{
 		WeighingUpperStatusIconAnimation = new ImageViewYAxisFlipAnimation(ParentActivity);
 		WeighingLowerStatusIconAnimation = new ImageViewYAxisFlipAnimation(ParentActivity);
 
-		// ++, --, 150212 bwk MCU 미적용으로 원복
-		/*
-		// ++, 150205 bwk
+		// ++, 150212 bwk
 		popupIndicator = new QuickAction(ParentActivity, QuickAction.VERTICAL);
 		actionitemIndicator = new ActionItem(0, ParentActivity.getResources().getString(R.string.Bucket_Full_In_Error_Warning), getResources().getDrawable(R.drawable.main_default_monitoring_icon_fullin));
 		popupIndicator.addActionItem(actionitemIndicator);		
-		// --, 150205 bwk
-		*/
+		// --, 150212 bwk
 	}
 	@Override
 	protected void InitButtonListener() {
 		// TODO Auto-generated method stub
-		// ++, --, 150212 bwk MCU 미적용으로 원복
-		/*
-		// ++, 150207 bwk
+		// ++, 150212 bwk
 		imgViewWeighingUpperIcon.setOnClickListener(new View.OnClickListener() {
 			
 			@Override
@@ -187,8 +176,7 @@ public class MainBLeftUpMachineStatusFragment extends ParentFragment{
 			  		ClickWeighingError(v);
 			}
 		});
-		// --, 150207 bwk
-		*/
+		// --, 150212 bwk
 		imgbtnMachineStatus.setOnClickListener(new View.OnClickListener() {
 			
 			@Override
@@ -222,14 +210,11 @@ public class MainBLeftUpMachineStatusFragment extends ParentFragment{
 		WeighingDisplayMode = CAN1Comm.Get_WeighingDisplayMode1_1910_PGN65450();
 		WeightInfoCurrentWeighingResult = CAN1Comm.Get_CurrentWeighingResult_1919_PGN65450();
 
-		// ++, --, 150212 bwk MCU 미적용으로 원복
-		/*
-		// ++, 150207 bwk
+		// ++, 150212 bwk
 		WeighingSystemError_BoomLiftSpeed = CAN1Comm.Get_WeighingSystemError_BoomLiftSpeed_1942_PGN65450();
 		WeighingSystemError_BucketFullIn = CAN1Comm.Get_WeighingSystemError_BucketFullIn_1943_PGN65450();
 		WeighingSystemError_HydraulicOilTemperature = CAN1Comm.Get_WeighingSystemError_HydraulicOilTemperature_1944_PGN65450();
-		// --, 150207 bwk		
-		*/
+		// --, 150212 bwk		
 	}
 
 	@Override
@@ -278,16 +263,15 @@ public class MainBLeftUpMachineStatusFragment extends ParentFragment{
 		case CAN1CommManager.DATA_STATE_MACHINESTATUS_WEIGHING:
 			LayoutNormalUpper.setVisibility(View.GONE);
 			LayoutWeighingUpper.setVisibility(View.VISIBLE);
-			// ++, --, 150212 bwk MCU 미적용으로 원복
-			// ++, 150207 bwk
+			// ++, 150212 bwk
+			/*
 			WeighingUpperDisplay(WeightInfoCurrentWeighingResult,WeighingDisplayMode,WeightInfoDataCurrent,
 					WeightInfoDataDay1,WeightInfoDataToday,WeightInfoDataTotalA,WeightInfoDataTotalB,WeightInfoDataTotalC,ParentActivity.UnitWeight);
-			/*
+			*/
 			WeighingUpperDisplay(WeighingSystemError_BoomLiftSpeed,WeighingSystemError_BucketFullIn,WeighingSystemError_HydraulicOilTemperature,
 					WeighingDisplayMode,WeightInfoDataCurrent,WeightInfoDataDay1,WeightInfoDataToday,WeightInfoDataTotalA,WeightInfoDataTotalB,WeightInfoDataTotalC,
 					ParentActivity.UnitWeight);
-			*/
-			// --, 150207 bwk
+			// --, 150212 bwk
 			break;
 
 		default:
@@ -420,11 +404,10 @@ public class MainBLeftUpMachineStatusFragment extends ParentFragment{
 		textUnit.setText(ParentActivity.getResources().getString(string.V));
 	}
 
-	// ++, --, 150212 bwk MCU 미적용으로 원복
-	// ++, 150207 bwk
-	public void WeighingUpperDisplay(int CurrentWeighingResult, int DisplayIndex, int Current, int Day1, int Today, int TotalA, int TotalB, int TotalC, int Unit){
-	//public void WeighingUpperDisplay(int BoomLiftSpeedError, int BucketFullInError, int HydOilTempError, int DisplayIndex, int Current, int Day1, int Today, int TotalA, int TotalB, int TotalC, int Unit){
-	// --, 150207 bwk
+	// ++, 150212 bwk
+	//public void WeighingUpperDisplay(int CurrentWeighingResult, int DisplayIndex, int Current, int Day1, int Today, int TotalA, int TotalB, int TotalC, int Unit){
+	public void WeighingUpperDisplay(int BoomLiftSpeedError, int BucketFullInError, int HydOilTempError, int DisplayIndex, int Current, int Day1, int Today, int TotalA, int TotalB, int TotalC, int Unit){
+	// --, 150212 bwk
 		if(ParentActivity.UnitWeight == ParentActivity.UNIT_WEIGHT_LB){
 			textViewWeighingUpperUnit.setText(ParentActivity.getResources().getString(string.lb));
 			textViewWeighingLowerUnit.setText(ParentActivity.getResources().getString(string.lb));
@@ -433,41 +416,35 @@ public class MainBLeftUpMachineStatusFragment extends ParentFragment{
 			textViewWeighingLowerUnit.setText(ParentActivity.getResources().getString(string.ton));
 		}
 
-		// ++, --, 150212 bwk MCU 미적용으로 원복
-		// ++, 150207 bwk
-		if(CurrentWeighingResult == CAN1CommManager.DATA_STATE_CURRENT_WEIHGING_RESULT_BOOMLIFTING_HYDTEMPLOW
-		//if(HydOilTempError == CAN1CommManager.DATA_STATE_WEIGHTING_SYSGEM_ERROR
+		// ++, 150212 bwk
+		//if(CurrentWeighingResult == CAN1CommManager.DATA_STATE_CURRENT_WEIHGING_RESULT_BOOMLIFTING_HYDTEMPLOW
+		if(HydOilTempError == CAN1CommManager.DATA_STATE_WEIGHTING_SYSGEM_ERROR
 				&& ParentActivity.WeighingErrorDetect == CAN1CommManager.DATA_STATE_WEIGHING_ERRORDETECT_ON){
 		
 			WeighingUpperStatusIconAnimation.FlipAnimation(imgViewWeighingUpperIcon,R.drawable.main_default_monitoring_icon_hyd_blue);
 			textViewWeighingUpperData.setText(ParentActivity.GetWeighit(WeightInfoDataCurrent, ParentActivity.UnitWeight));
 			textViewWeighingUpperData.setTextColor(ParentActivity.getResources().getColor(color.white));
 		}
-		// ++, --, 150212 bwk MCU 미적용으로 원복
-		else if(CurrentWeighingResult == CAN1CommManager.DATA_STATE_CURRENT_WEIHGING_RESULT_BOOMLIFTING_BUCKETFULLIN 
-		/*
+		//else if(CurrentWeighingResult == CAN1CommManager.DATA_STATE_CURRENT_WEIHGING_RESULT_BOOMLIFTING_BUCKETFULLIN 
 		else if(BoomLiftSpeedError == CAN1CommManager.DATA_STATE_WEIGHTING_SYSGEM_ERROR
 				&& BucketFullInError == CAN1CommManager.DATA_STATE_WEIGHTING_SYSGEM_ERROR
-		*/
-		// --, 150207 bwk
+		// --, 150212 bwk
 				&& ParentActivity.WeighingErrorDetect == CAN1CommManager.DATA_STATE_WEIGHING_ERRORDETECT_ON){
 			WeighingUpperStatusIconAnimation.FlipAnimation(imgViewWeighingUpperIcon,R.drawable.main_default_monitoring_icon_sudden_fullin);
 			textViewWeighingUpperData.setText(ParentActivity.GetWeighit(WeightInfoDataCurrent, ParentActivity.UnitWeight));
 			textViewWeighingUpperData.setTextColor(ParentActivity.getResources().getColor(color.red));
-		// ++, --, 150212 bwk MCU 미적용으로 원복
-		// ++, 150207 bwk
-		}else if(CurrentWeighingResult == CAN1CommManager.DATA_STATE_CURRENT_WEIHGING_RESULT_BOOMLIFTING
-		//}else if(BoomLiftSpeedError == CAN1CommManager.DATA_STATE_WEIGHTING_SYSGEM_ERROR
-		// --, 150207 bwk
+		// ++, 150212 bwk
+		//}else if(CurrentWeighingResult == CAN1CommManager.DATA_STATE_CURRENT_WEIHGING_RESULT_BOOMLIFTING
+		}else if(BoomLiftSpeedError == CAN1CommManager.DATA_STATE_WEIGHTING_SYSGEM_ERROR
+		// --, 150212 bwk
 				&& ParentActivity.WeighingErrorDetect == CAN1CommManager.DATA_STATE_WEIGHING_ERRORDETECT_ON){
 			WeighingUpperStatusIconAnimation.FlipAnimation(imgViewWeighingUpperIcon,R.drawable.main_default_monitoring_icon_sudden);
 			textViewWeighingUpperData.setText(ParentActivity.GetWeighit(WeightInfoDataCurrent, ParentActivity.UnitWeight));
 			textViewWeighingUpperData.setTextColor(ParentActivity.getResources().getColor(color.red));
-		// ++, --, 150212 bwk MCU 미적용으로 원복
-		// ++, 150207 bwk
-		 }else if(CurrentWeighingResult == CAN1CommManager.DATA_STATE_CURRENT_WEIHGING_RESULT_BUCKETFULLIN
-		//}else if(BucketFullInError == CAN1CommManager.DATA_STATE_WEIGHTING_SYSGEM_ERROR
-		// --, 150207 bwk
+		// ++, 150212 bwk
+		//}else if(CurrentWeighingResult == CAN1CommManager.DATA_STATE_CURRENT_WEIHGING_RESULT_BUCKETFULLIN
+		}else if(BucketFullInError == CAN1CommManager.DATA_STATE_WEIGHTING_SYSGEM_ERROR
+		// --, 150212 bwk
 				&& ParentActivity.WeighingErrorDetect == CAN1CommManager.DATA_STATE_WEIGHING_ERRORDETECT_ON){
 			WeighingUpperStatusIconAnimation.FlipAnimation(imgViewWeighingUpperIcon,R.drawable.main_default_monitoring_icon_fullin);
 			textViewWeighingUpperData.setText(ParentActivity.GetWeighit(WeightInfoDataCurrent, ParentActivity.UnitWeight));
@@ -539,9 +516,8 @@ public class MainBLeftUpMachineStatusFragment extends ParentFragment{
 		else
 			ParentActivity.StartAnimationRunningTimer();
 
-		// ++, --, 150212 bwk MCU 미적용으로 원복
 		// ++, 150207 bwk
-		///*
+		/*
 		if(WeightInfoCurrentWeighingResult == CAN1CommManager.DATA_STATE_CURRENT_WEIHGING_RESULT_BOOMLIFTING_BUCKETFULLIN
 				&& ParentActivity.WeighingErrorDetect == CAN1CommManager.DATA_STATE_WEIGHING_ERRORDETECT_ON){
 			CAN1Comm.Set_RequestReweighing_PGN61184_62(1);
@@ -558,8 +534,7 @@ public class MainBLeftUpMachineStatusFragment extends ParentFragment{
 			CAN1Comm.TxCANToMCU(62);
 			CAN1Comm.Set_RequestReweighing_PGN61184_62(3);
 		}else
-		 //*/
-		
+		*/
 		// --, 150207 bwk
 		{
 			ParentActivity._MainBBaseFragment._MainBCenterMachineStatusFragment = new MainBCenterMachineStatusFragment();
@@ -582,9 +557,7 @@ public class MainBLeftUpMachineStatusFragment extends ParentFragment{
 		}
 	}
 
-	// ++, --, 150212 bwk MCU 미적용으로 원복
-	/*
-	// ++, 150207 bwk
+	// ++, 150212 bwk
 	public void ClickWeighingError(View v){
 		if(ParentActivity.AnimationRunningFlag == true)
 			return;
@@ -651,17 +624,14 @@ public class MainBLeftUpMachineStatusFragment extends ParentFragment{
 			ParentActivity._MainBBaseFragment._KeyBodyDisappearAnimation.StartAnimation();
 		}
 	}
-	// --, 150207 bwk
-	*/
+	// --, 150212 bwk
 	
 	public void setClickEnable(boolean flag){
 		ClickFlag = flag;
 		imgbtnMachineStatus.setClickable(ClickFlag);
 	}
 
-	// ++, --, 150212 bwk MCU 미적용으로 원복
-	/*
-	// ++, 150207 bwk
+	// ++, 150212 bwk
 	public void showLampPopup(int Index){
 		popupIndicator.removeAllActionItem();
 		switch (Index) {
@@ -705,6 +675,5 @@ public class MainBLeftUpMachineStatusFragment extends ParentFragment{
 			}
 		}
 	}
-	// --, 150207 bwk
-	*/
+	// --, 150212 bwk
 }

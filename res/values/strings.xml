@@ -440,4 +440,8 @@
     <!-- Menu Multimedia Start -->
     <string name="Media_Palyer">Media Palyer</string>
     <!-- Menu Multimedia End -->
+    <!-- Language Start -->
+    <string name="Korean">Korean</string>
+    <string name="English">English</string>
+    <!-- Language End -->    
 </resources>

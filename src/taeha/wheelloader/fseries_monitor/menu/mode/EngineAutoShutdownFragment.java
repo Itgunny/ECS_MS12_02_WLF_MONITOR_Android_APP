@@ -175,7 +175,15 @@ public class EngineAutoShutdownFragment extends ParentFragment{
 			ESLMode = CAN1Comm.Get_ESLMode_820_PGN65348();
 			ESLInterval = CAN1Comm.Get_ESLInterval_825_PGN65348();
 		}
-
+		
+		// ++, 150212 bwk
+		// 받은 값이 2분 이하 이거나 40분 이상일 경우 강제로 맞춤
+		if(EngineAutoShutdownTime < 12)
+			EngineAutoShutdownTime = 12;
+		else if(EngineAutoShutdownTime > 240)
+			EngineAutoShutdownTime = 240;
+		// --, 150212 bwk
+		
 		AutoShutdownStatusDisplay(EngineAutoShutdownStatus,EngineAutoShutdownType);
 		TimeTextDisplay(EngineAutoShutdownTime);
 		SetSeekBarPositionbyData(seekbarTime,EngineAutoShutdownTime);
@@ -517,7 +525,10 @@ public class EngineAutoShutdownFragment extends ParentFragment{
 		case 4:
 			EngineAutoShutdownTime -= 6;
 			if(EngineAutoShutdownTime < MIN_LEVEL*6){
-				EngineAutoShutdownTime = MIN_LEVEL;
+				// ++, 150212 bwk
+				//EngineAutoShutdownTime = MIN_LEVEL;
+				EngineAutoShutdownTime = MIN_LEVEL*6;
+				// --, 150212 bwk
 			}
 			TimeTextDisplay(EngineAutoShutdownTime);
 			SetSeekBarPositionbyData(seekbarTime,EngineAutoShutdownTime);
@@ -564,7 +575,10 @@ public class EngineAutoShutdownFragment extends ParentFragment{
 		case 4:
 			EngineAutoShutdownTime += 6;
 			if(EngineAutoShutdownTime > MAX_LEVEL*6){
-				EngineAutoShutdownTime = MAX_LEVEL;
+				// ++, 150212 bwk
+				//EngineAutoShutdownTime = MAX_LEVEL;
+				EngineAutoShutdownTime = MAX_LEVEL*6;
+				// --, 150212 bwk
 			}
 			TimeTextDisplay(EngineAutoShutdownTime);
 			SetSeekBarPositionbyData(seekbarTime,EngineAutoShutdownTime);

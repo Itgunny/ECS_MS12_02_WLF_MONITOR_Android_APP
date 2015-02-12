@@ -24,6 +24,8 @@ public class MainBCenterAEBFragment extends ParentFragment{
 	
 	
 	RelativeLayout layoutBG;
+	
+	TextView textViewRPMData;	// ++, --, 150212 bwk
 	//////////////////////////////////////////////////
 	
 	//VALUABLE////////////////////////////////////////
@@ -31,6 +33,8 @@ public class MainBCenterAEBFragment extends ParentFragment{
 	int AEBSubStatus;
 	
 	// ++, 150212 bwk
+	protected int RPM;
+	
 	int MachineStatusUpperIndex;
 	int MachineStatusLowerIndex;
 	// --, 150212 bwk
@@ -86,9 +90,10 @@ public class MainBCenterAEBFragment extends ParentFragment{
 	protected void InitResource() {
 		// TODO Auto-generated method stub
 		imgViewGear = (ImageView)mRoot.findViewById(R.id.imageView_center_main_b_aeb_gear);
-	
 		
 		layoutBG = (RelativeLayout)mRoot.findViewById(R.id.RelativeLayout_center_main_b_aeb);
+		
+		textViewRPMData = (TextView)mRoot.findViewById(R.id.textView_center_main_b_aeb_rpm);	// ++, --, 150212 bwk
 	}
 	
 	protected void InitValuables() {
@@ -117,6 +122,7 @@ public class MainBCenterAEBFragment extends ParentFragment{
 	@Override
 	protected void GetDataFromNative() {
 		// TODO Auto-generated method stub
+		RPM = CAN1Comm.Get_EngineSpeed_310_PGN65431();	// ++, --, 150212 bwk
 		AEBMainStatus = CAN1Comm.Get_AEBStatusInformation_MainCode_562_PGN61184_202();
 		AEBSubStatus = CAN1Comm.Get_AEBStatusInformation_SubCode_563_PGN61184_202();
 	}
@@ -124,9 +130,25 @@ public class MainBCenterAEBFragment extends ParentFragment{
 	@Override
 	protected void UpdateUI() {
 		// TODO Auto-generated method stub
+		RPMDisplay(RPM);		// ++, --, 150212 bwk
 		AEBGearDisplay(AEBMainStatus,AEBSubStatus);
 	}
 	/////////////////////////////////////////////////////////////////////
+	//++, 150212 bwk
+	public void RPMDisplay(int Data){
+		if(Data == 0xFFFF)
+			Data = 0;
+		else if(Data > 9999)
+			Data = 9999;
+		try {
+			textViewRPMData.setText(Integer.toString(Data));
+		} catch (IllegalStateException e) {
+			// TODO: handle exception
+			Log.e(TAG,"IllegalStateException");
+		}
+	}
+	// --, 150212 bwk
+	
 	public void ClickBG(){
 		ParentActivity._MainBBaseFragment.showCalibrationtoDefaultScreenAnimation();
 	}

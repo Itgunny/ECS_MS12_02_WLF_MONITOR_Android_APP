@@ -547,15 +547,12 @@ public class CommService extends Service{
 	public native int Get_WeighingSystemBuzzer_1907_PGN65450();
 	public native int Get_CurrentWeighingResult_1919_PGN65450();
 	public native int Get_WeighingDisplayMode1_1910_PGN65450();
-	// ++, --, 150212 bwk MCU 미적용으로 원복
-	/*
-	// ++, 150207 bwk
+ 	// ++, 150212 bwk
 	public native int Get_WeighingSystemError_BoomLiftSpeed_1942_PGN65450();
 	public native int Get_WeighingSystemError_BucketFullIn_1943_PGN65450();
 	public native int Get_WeighingSystemError_HydraulicOilTemperature_1944_PGN65450();
-	// --, 150207 bwk
-	*/
-	public native int Get_CurrentWeight_1911_PGN65450();
+	// --, 150212 bwk
+ 	public native int Get_CurrentWeight_1911_PGN65450();
 	public native int Get_TodayWeight_1915_PGN65450();
 	//////RX_WEIGHING_SYSTEM_DATA1_65451///////
 	public native int Get_TotalWorkAWeight_1912_PGN65451();
@@ -978,15 +975,12 @@ public class CommService extends Service{
 	public native void Set_WeighingSystemBuzzer_1907_PGN65450(int Data);
 	public native void Set_CurrentWeighingResult_1919_PGN65450(int Data);
 	public native void Set_WeighingDisplayMode1_1910_PGN65450(int Data);
-	// ++, --, 150212 bwk MCU 미적용으로 원복
-	/*
-	// ++, 150207 bwk
+ 	// ++, 150212 bwk
 	public native void Set_WeighingSystemError_BoomLiftSpeed_1942_PGN65450(int Data);
 	public native void Set_WeighingSystemError_BucketFullIn_1943_PGN65450(int Data);
 	public native void Set_WeighingSystemError_HydraulicOilTemperature_1944_PGN65450(int Data);
-	// --, 150207 bwk
-	*/
-	public native void Set_CurrentWeight_1911_PGN65450(int Data);
+	// --, 150212 bwk
+ 	public native void Set_CurrentWeight_1911_PGN65450(int Data);
 	public native void Set_TodayWeight_1915_PGN65450(int Data);
 	//////TX_WEIGHING_SYSTEM_DATA1_65451///////
 	public native void Set_TotalWorkAWeight_1912_PGN65451(int Data);

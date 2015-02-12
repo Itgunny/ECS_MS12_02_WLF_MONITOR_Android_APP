@@ -407,7 +407,15 @@ public class MenuModeETCFragment extends MenuBodyList_ParentFragment{
 			setListData5(ParentActivity.getResources().getString(string.Off));
 			break;
 		case CAN1CommManager.DATA_STATE_AUTOSHUTDOWN_ON:
-			setListData5(ParentActivity.GetSectoMinString(time*10) + ParentActivity.getResources().getString(string.Min));
+			// ++, 150212 bwk
+			// 받은 값이 2분 이하 이거나 40분 이상일 경우 강제로 맞춤
+			if(time < 12)
+				time = 12;
+			else if(time > 240)
+				time = 240;
+			//setListData5(ParentActivity.GetSectoMinString(time*10) + ParentActivity.getResources().getString(string.Min));
+			setListData5(ParentActivity.GetSectoMinString(time*10, ParentActivity.getResources().getString(string.Min),ParentActivity.getResources().getString(string.Sec)));
+			// --, 150212 bwk			
 			break;
 
 		default:

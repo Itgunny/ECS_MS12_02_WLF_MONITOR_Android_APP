@@ -68,7 +68,7 @@ public class Home extends Activity {
 	public static final int VERSION_HIGH 		= 1;
 	public static final int VERSION_LOW 		= 0;
 	public static final int VERSION_SUB_HIGH 	= 3;
-	public static final int VERSION_SUB_LOW 	= 3;
+	public static final int VERSION_SUB_LOW 	= 4;
 	////1.0.2.3
 	// UI B 안 최초 적용 2014.12.10
 	////1.0.2.4
@@ -170,6 +170,15 @@ public class Home extends Activity {
 	// 과거고장 - 트랜스미션 - Detail Error 클릭 시 Crash 수정(150212)
 	// AEB 전환 시 TM 추가 및 기존으로 돌아갈 경우 기존 표시하던 장비상태로 복구(150212)
 	// Auto Grease : 문구 맨 뒤에 for once 추가(150212)
+	// Weighing 프로토콜(PGN 65450) MCU 미적용으로 원복(150212)
+	////1.0.3.4 2015.02.13
+	// Engine Auto Shutdown 버그 수정
+	//  - Left, Right 키 최소/최대 버그 수정
+	//  - 메뉴 옆에 시간 표시부분 소숫점 삭제
+	//  - MCU로부터 받은 값이 2분 이하면 2분, 40분 이상이면 40분으로 표시
+	// User Switching : 마지막에 선택한 Index로 보여줌, 다국어 표시
+	// AEB : center에 rpm 표시 추가
+	// Weighing 프로토콜 변경된 것으로 적용(PGN 65450)
 	//////////////////////////////////////////////////////////////////////////////////////
 	
 	// TAG
@@ -547,6 +556,7 @@ public class Home extends Activity {
 	public UserData UserDataUser2;
 	public UserData UserDataUser3;
 	public UserData UserDataUser4;
+	public int UserIndex;	// ++, 150212 bwk;
 	
 	// CAN1CommManager
 	private CAN1CommManager CAN1Comm = null;	
@@ -785,6 +795,8 @@ public class Home extends Activity {
 		UserDataUser2 = LoadUserData(2);
 		UserDataUser3 = LoadUserData(3);
 		UserDataUser4 = LoadUserData(4);
+		
+		UserIndex = 1;		// ++, 150212 bwk
 		
 		// ++, 150211 bwk
 		HighrpmCount = 0;
