@@ -1457,7 +1457,8 @@ public class MainBBaseFragment extends ParentFragment{
 			ClickKeyButtonESC();
 			break;
 		case CAN1CommManager.ENTER:
-			ClickKeyButtonEnter();	// ++, 150207 bwk
+			// ++, --, 150212 bwk MCU 미적용으로 원복
+			//ClickKeyButtonEnter();	// ++, 150207 bwk
 			break;
 		case CAN1CommManager.MENU:
 			Log.d(TAG,"Click MENU");
@@ -1546,10 +1547,12 @@ public class MainBBaseFragment extends ParentFragment{
 			break;
 		}
 	}
-	
+	// ++, --, 150212 bwk MCU 미적용으로 원복
+	/*
 	// ++, 150207 bwk
 	public void ClickKeyButtonEnter(){
 		_MainBLeftUpMachineStatusFragment.ClickEnter();
 	}
 	// --, 150207 bwk
+	 */
 }

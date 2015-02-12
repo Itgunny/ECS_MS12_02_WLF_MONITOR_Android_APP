@@ -1293,6 +1293,8 @@ jint Get_CurrentWeighingResult_1919_PGN65450(JNIEnv * env, jobject this) {
 jint Get_WeighingDisplayMode1_1910_PGN65450(JNIEnv * env, jobject this) {
 	return RX_WEIGHING_SYSTEM_STATUS_65450.WeighingDisplayMode1_1910;
 }
+// ++, --, 150212 bwk MCU 미적용으로 원복
+/*
 // ++, 150207 bwk
 jint Get_WeighingSystemError_BoomLiftSpeed_1942_PGN65450(JNIEnv * env, jobject this) {
 	return RX_WEIGHING_SYSTEM_STATUS_65450.WeighingSystemError_BoomLiftSpeed_1942;
@@ -1304,6 +1306,7 @@ jint Get_WeighingSystemError_HydraulicOilTemperature_1944_PGN65450(JNIEnv * env,
 	return RX_WEIGHING_SYSTEM_STATUS_65450.WeighingSystemError_HydraulicOilTemperature_1944;
 }
 // --, 150207 bwk
+*/
 jint Get_CurrentWeight_1911_PGN65450(JNIEnv * env, jobject this) {
 	return RX_WEIGHING_SYSTEM_STATUS_65450.CurrentWeight_1911;
 }
@@ -2819,6 +2822,8 @@ void Set_WeighingDisplayMode1_1910_PGN65450(JNIEnv * env, jobject this,
 		int Data) {
 	TX_WEIGHING_SYSTEM_STATUS_65450.WeighingDisplayMode1_1910 = Data;
 }
+// ++, --, 150212 bwk MCU 미적용으로 원복
+/*
 // ++, 150207 bwk
 void Set_WeighingSystemError_BoomLiftSpeed_1942_PGN65450(JNIEnv * env, jobject this,
 		int Data) {
@@ -2833,6 +2838,7 @@ void Set_WeighingSystemError_HydraulicOilTemperature_1944_PGN65450(JNIEnv * env,
 	TX_WEIGHING_SYSTEM_STATUS_65450.WeighingSystemError_HydraulicOilTemperature_1944 = Data;
 }
 // --, 150207 bwk
+*/
 void Set_CurrentWeight_1911_PGN65450(JNIEnv * env, jobject this, int Data) {
 	TX_WEIGHING_SYSTEM_STATUS_65450.CurrentWeight_1911 = Data;
 }
@@ -4092,11 +4098,14 @@ static JNINativeMethod methods[] =
 						(void*) Get_WeighingSystemBuzzer_1907_PGN65450 },
 				{"Get_CurrentWeighingResult_1919_PGN65450", "()I",(void*) Get_CurrentWeighingResult_1919_PGN65450 },
 				{"Get_WeighingDisplayMode1_1910_PGN65450", "()I",(void*) Get_WeighingDisplayMode1_1910_PGN65450 },
+				// ++, --, 150212 bwk MCU 미적용으로 원복
+				/*
 				// ++, 150207 bwk
 				{"Get_WeighingSystemError_BoomLiftSpeed_1942_PGN65450", "()I",(void*) Get_WeighingSystemError_BoomLiftSpeed_1942_PGN65450 },
 				{"Get_WeighingSystemError_BucketFullIn_1943_PGN65450", "()I",(void*) Get_WeighingSystemError_BucketFullIn_1943_PGN65450 },
 				{"Get_WeighingSystemError_HydraulicOilTemperature_1944_PGN65450", "()I",(void*) Get_WeighingSystemError_HydraulicOilTemperature_1944_PGN65450 },
 				// --, 150207 bwk
+				*/
 				{"Get_CurrentWeight_1911_PGN65450", "()I",(void*) Get_CurrentWeight_1911_PGN65450 },
 				{"Get_TodayWeight_1915_PGN65450", "()I",(void*) Get_TodayWeight_1915_PGN65450 },
 				//////RX_WEIGHING_SYSTEM_DATA1_65451///////
@@ -4846,11 +4855,14 @@ static JNINativeMethod methods[] =
 				{ "Set_WeighingSystemBuzzer_1907_PGN65450", "(I)V",(void*) Set_WeighingSystemBuzzer_1907_PGN65450 },
 				{"Set_CurrentWeighingResult_1919_PGN65450", "(I)V",(void*) Set_CurrentWeighingResult_1919_PGN65450 },
 				{"Set_WeighingDisplayMode1_1910_PGN65450", "(I)V",(void*) Set_WeighingDisplayMode1_1910_PGN65450 },
+				// ++, --, 150212 bwk MCU 미적용으로 원복
+				/*
 				// ++, 150207 bwk
 				{"Set_WeighingSystemError_BoomLiftSpeed_1942_PGN65450", "(I)V",(void*) Set_WeighingSystemError_BoomLiftSpeed_1942_PGN65450 },
 				{"Set_WeighingSystemError_BucketFullIn_1943_PGN65450", "(I)V",(void*) Set_WeighingSystemError_BucketFullIn_1943_PGN65450 },
 				{"Set_WeighingSystemError_HydraulicOilTemperature_1944_PGN65450", "(I)V",(void*) Set_WeighingSystemError_HydraulicOilTemperature_1944_PGN65450 },
 				// --, 150207 bwk
+				*/
 				{"Set_CurrentWeight_1911_PGN65450", "(I)V",(void*) Set_CurrentWeight_1911_PGN65450 },
 				{"Set_TodayWeight_1915_PGN65450", "(I)V",(void*) Set_TodayWeight_1915_PGN65450 },
 				//////TX_WEIGHING_SYSTEM_DATA1_65451///////

@@ -29,6 +29,11 @@ public class MainBCenterAEBFragment extends ParentFragment{
 	//VALUABLE////////////////////////////////////////
 	int AEBMainStatus;
 	int AEBSubStatus;
+	
+	// ++, 150212 bwk
+	int MachineStatusUpperIndex;
+	int MachineStatusLowerIndex;
+	// --, 150212 bwk
 	//////////////////////////////////////////////////
 	
 	//ANIMATION///////////////////////////////////////
@@ -59,6 +64,11 @@ public class MainBCenterAEBFragment extends ParentFragment{
 	public void onDestroyView() {
 		// TODO Auto-generated method stub
 		super.onDestroyView();
+		// ++, 150212 bwk
+		ParentActivity.MachineStatusUpperIndex = MachineStatusUpperIndex;
+		ParentActivity.MachineStatusLowerIndex = MachineStatusLowerIndex;
+		// --, 150212 bwk
+		
 		CAN1Comm.Set_RequestBoomPressureCalibration_PGN61184_201(0);
 		CAN1Comm.Set_RequestBoomBucketAngleSensorCalibration_PGN61184_201(0);
 		CAN1Comm.Set_RequestAEB_PGN61184_201(0);
@@ -84,8 +94,12 @@ public class MainBCenterAEBFragment extends ParentFragment{
 	protected void InitValuables() {
 		// TODO Auto-generated method stub
 		super.InitValuables();
+		// ++, 150212 bwk
+		MachineStatusUpperIndex = ParentActivity.MachineStatusUpperIndex;
+		MachineStatusLowerIndex = ParentActivity.MachineStatusLowerIndex;
+		// --, 150212 bwk
 		ParentActivity.MachineStatusUpperIndex = CAN1CommManager.DATA_STATE_MACHINESTATUS_HYD;
-		ParentActivity.MachineStatusLowerIndex = CAN1CommManager.DATA_STATE_MACHINESTATUS_NOSELECT;
+		ParentActivity.MachineStatusLowerIndex = CAN1CommManager.DATA_STATE_MACHINESTATUS_TMOIL;	// ++, --, 150212 bwk NOSELECT -> TMOIL
 	}
 	@Override
 	protected void InitButtonListener() {

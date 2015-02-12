@@ -2449,8 +2449,9 @@ typedef struct
 {
 	unsigned char	WeighingSystemAccumulationMode_1941:2;
 	unsigned char	WeighingSystemBuzzer_1907:2;
+	// ++, --, 150212 MCU 미적용으로 원복 
 	// ++, 150207 bwk
-#if 0
+#if 1
 	unsigned char	CurrentWeighingResult_1919:4;
 
 	unsigned char	WeighingDisplayMode1_1910:4;

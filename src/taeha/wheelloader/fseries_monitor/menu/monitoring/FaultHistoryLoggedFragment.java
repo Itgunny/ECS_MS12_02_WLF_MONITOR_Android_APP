@@ -521,11 +521,11 @@ public class FaultHistoryLoggedFragment extends ParentFragment{
 				if(Err_Tcu[Index] == TCU_SPN[i])
 				{
 					//Log.d(TAG,"ErrDetailDisplay i : " + Integer.toHexString(i));
-					textViewDetail.setText(textEHCUErrCode[i]);
+					textViewDetail.setText(textTCUErrCode[i]);		// ++, --, 150212 bwk EHCU -> TCU 버그수정
 					break;
 				}
 				else{
-					textViewDetail.setText(textEHCUErrCode[TCU_LENTGH]);
+					textViewDetail.setText(textTCUErrCode[TCU_LENTGH]);		// ++, --, 150212 bwk EHCU -> TCU 버그수정
 				}
 			}
 		}

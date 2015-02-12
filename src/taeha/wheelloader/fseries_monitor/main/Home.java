@@ -145,11 +145,11 @@ public class Home extends Activity {
 	// Quick Coupler 팝업 중 Camera 진입되게 수정
 	// 시간 설정 10시일 경우 시간위치에 0 입력 시 12시로 바뀌게 다시 수정 
 	////-----bwk
-	////1.0.3.3 2015.02.05
+	////1.0.3.3 2015.02.12
 	// weighting system compensation 입력 방식 수정 및 기타 버그 개선
 	// ECM/TCU/EHCU fault code description 추가 
 	// Boom pressure Calibration : HCESPN1908 = 14 추가 및 UI 변경(작동유 온도 표시 및 경고문구 추가)
-	// F시리즈 통신개통 자동화(장비고장 페이지에서 Screen Number 전송, 그외 0xff) + 키값전송(ST 1.0.1.8), 현재고장 페이지에서 Home키 막음
+	// F시리즈 통신개통 자동화(장비고장 페이지에서 Screen Number 전송, 그외 0xff) + 키값전송(ST 1.0.1.9), 현재고장 페이지에서 Home키 막음
 	// 메인 화면의 작업량 계측값 표시부 : 통신사양변경, Icon추가, 가이던스 추가, Enter로 reweigh하도록 로직 변경
 	// 키패드 히든 기능 관련 : < + > + Enter -> 다국어
 	// EHCU POP UP 관련 반영 : Safety CPU Error 팝업일 경우 Keyoff전에 꺼지지 않음. 0000일 경우 팝업 종료
@@ -167,6 +167,9 @@ public class Home extends Activity {
 	// Version 정보 : EHCU 유무 판단하여 표시
 	// 멀티미디어 실행 시 rpm 1500 이상일 경우(3초유지) Home으로, 1500 이하일 경우 다시 멀티미디어로
 	// 고장이력 : 현재고장, 과거고장 키패드 연동(datail list 제외)
+	// 과거고장 - 트랜스미션 - Detail Error 클릭 시 Crash 수정(150212)
+	// AEB 전환 시 TM 추가 및 기존으로 돌아갈 경우 기존 표시하던 장비상태로 복구(150212)
+	// Auto Grease : 문구 맨 뒤에 for once 추가(150212)
 	//////////////////////////////////////////////////////////////////////////////////////
 	
 	// TAG

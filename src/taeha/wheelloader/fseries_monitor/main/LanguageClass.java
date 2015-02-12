@@ -139,7 +139,7 @@ public class LanguageClass {
 	
 	public void LoadPref(){
 		SharedPreferences SharePref = context.getSharedPreferences("Home", 0);
-		LanguageIndex = SharePref.getInt("LanguageIndex", Home.STATE_DISPLAY_LANGUAGE_KOREAN);
+		LanguageIndex = SharePref.getInt("LanguageIndex", Home.STATE_DISPLAY_LANGUAGE_ENGLISH);
 		Log.d(TAG,"LanguageIndex : " + Integer.toString(LanguageIndex));
 		Log.d(TAG,"LoadPref");
 	}
