@@ -160,7 +160,7 @@
                     android:layout_alignBottom="@+id/imageView_menu_body_monitoring_fault_logged_detail_title_line"
                     android:layout_alignRight="@+id/imageView_menu_body_monitoring_fault_logged_detail_title_line"
                     android:layout_marginBottom="10dp"
-                    android:src="@drawable/menu_information_fault_up_btn"/>
+                    android:src="@drawable/menu_information_fault_up_btn_selected"/>
                 
                 <TextView
                     android:id="@+id/textView_menu_body_monitoring_fault_logged_detail_data"

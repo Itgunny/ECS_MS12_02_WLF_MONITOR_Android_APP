@@ -112,6 +112,7 @@ public class FaultHistoryLoggedFragment extends ParentFragment{
 	
 	// ++, 150211 bwk
 	int CursurIndex;		
+	int CursurDetailIndex;
 	Handler HandleCursurDisplay;
 	// --, 150211 bwk	
 	//////////////////////////////////////////////////
@@ -275,6 +276,10 @@ public class FaultHistoryLoggedFragment extends ParentFragment{
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
+				// ++, 150216 bwk
+				CursurIndex = 7;
+				CursurDisplay(CursurIndex);
+				// --, 150216 bwk
 				ClickDetailTitle();
 			}
 		});
@@ -295,6 +300,11 @@ public class FaultHistoryLoggedFragment extends ParentFragment{
 			@Override
 			public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,long arg3) {
 				// TODO Auto-generated method stub
+				// ++, 150216 bwk
+				CursurIndex = 8;
+				CursurDisplay(CursurIndex);
+				CursurDetailIndex = arg2;
+				// --, 150216 bwk				
 				ErrDetailDisplay(arg2);
 				
 			}
@@ -440,9 +450,17 @@ public class FaultHistoryLoggedFragment extends ParentFragment{
 					
 					SPN = Err_Mcu[i] & 0xffff;
 					SPN |= ((Err_Mcu[i] & 0xe00000) >> 5);
-					FMI = ((Err_Mcu[i] & 0x1f0000) >> 16); 
-					adapter.addItem(new IconTextItemFault(null,ParentActivity.getResources().getDrawable(R.drawable.menu_information_fault_down_btn), "HCESPN : " + Integer.toString(SPN)
-							+ "     " + "FMI : " + Integer.toString(FMI), "", ""));
+					FMI = ((Err_Mcu[i] & 0x1f0000) >> 16);
+					// ++, 150216 bwk
+					if(CursurIndex == 7 && CursurDetailIndex == i)
+					{
+						adapter.addItem(new IconTextItemFault(null,ParentActivity.getResources().getDrawable(R.drawable.menu_information_fault_down_btn_selected), "HCESPN : " + Integer.toString(SPN)
+								+ "     " + "FMI : " + Integer.toString(FMI), "", ""));
+					}
+					else
+					// --, 150216 bwk
+						adapter.addItem(new IconTextItemFault(null,ParentActivity.getResources().getDrawable(R.drawable.menu_information_fault_down_btn), "HCESPN : " + Integer.toString(SPN)
+								+ "     " + "FMI : " + Integer.toString(FMI), "", ""));
 				
 				//	Log.d(TAG,"SPN : " + Integer.toString(SPN) + "     FMI : " + Integer.toString(FMI));
 				}
@@ -454,13 +472,28 @@ public class FaultHistoryLoggedFragment extends ParentFragment{
 					SPN = Err_Ecu[i] & 0xffff;
 					SPN |= ((Err_Ecu[i] & 0xe00000) >> 5);
 					FMI = ((Err_Ecu[i] & 0x1f0000) >> 16); 
-					adapter.addItem(new IconTextItemFault(null,ParentActivity.getResources().getDrawable(R.drawable.menu_information_fault_down_btn), "SPN : " + Integer.toString(SPN)
-							+ "     " + "FMI : " + Integer.toString(FMI), "", ""));
+					// ++, 150216 bwk
+					if(CursurIndex == 7 && CursurDetailIndex == i)
+					{
+						adapter.addItem(new IconTextItemFault(null,ParentActivity.getResources().getDrawable(R.drawable.menu_information_fault_down_btn_selected), "SPN : " + Integer.toString(SPN)
+								+ "     " + "FMI : " + Integer.toString(FMI), "", ""));
+					}
+					else
+					// --, 150216 bwk
+						adapter.addItem(new IconTextItemFault(null,ParentActivity.getResources().getDrawable(R.drawable.menu_information_fault_down_btn), "SPN : " + Integer.toString(SPN)
+								+ "     " + "FMI : " + Integer.toString(FMI), "", ""));
 				}
 				else if(Mode == REQ_ERR_TM_LOGGED)		// TCU
 				{
 					Err_Tcu = CAN1Comm.Get_TcuErr_Logged();
-					adapter.addItem(new IconTextItemFault(null,ParentActivity.getResources().getDrawable(R.drawable.menu_information_fault_down_btn), "No : " + Integer.toHexString(Err_Tcu[i]), "", ""));
+					// ++, 150216 bwk
+					if(CursurIndex == 7 && CursurDetailIndex == i)
+					{
+						adapter.addItem(new IconTextItemFault(null,ParentActivity.getResources().getDrawable(R.drawable.menu_information_fault_down_btn_selected), "No : " + Integer.toHexString(Err_Tcu[i]), "", ""));
+					}
+					else
+					// --, 150216 bwk
+						adapter.addItem(new IconTextItemFault(null,ParentActivity.getResources().getDrawable(R.drawable.menu_information_fault_down_btn), "No : " + Integer.toHexString(Err_Tcu[i]), "", ""));
 				}
 				else if(Mode == REQ_ERR_EHCU_LOGGED)		// EHCU
 				{
@@ -469,8 +502,16 @@ public class FaultHistoryLoggedFragment extends ParentFragment{
 					SPN = Err_EHCU[i] & 0x0000FFFF;
 					FMI = ((Err_EHCU[i] & 0x00FF0000) >> 16);
 
-					adapter.addItem(new IconTextItemFault(null,ParentActivity.getResources().getDrawable(R.drawable.menu_information_fault_down_btn), "SPN : " + Integer.toString(SPN)
-							+ "     " + "FMI : " + Integer.toString(FMI), "", ""));
+					// ++, 150216 bwk
+					if(CursurIndex == 7 && CursurDetailIndex == i)
+					{
+						adapter.addItem(new IconTextItemFault(null,ParentActivity.getResources().getDrawable(R.drawable.menu_information_fault_down_btn_selected), "SPN : " + Integer.toString(SPN)
+								+ "     " + "FMI : " + Integer.toString(FMI), "", ""));
+					}
+					else
+					// --, 150216 bwk
+						adapter.addItem(new IconTextItemFault(null,ParentActivity.getResources().getDrawable(R.drawable.menu_information_fault_down_btn), "SPN : " + Integer.toString(SPN)
+								+ "     " + "FMI : " + Integer.toString(FMI), "", ""));
 				}
 			}
 		}
@@ -651,6 +692,23 @@ public class FaultHistoryLoggedFragment extends ParentFragment{
 			break;
 		}
 	}
+	
+	// ++, 150216 bwk
+	public int CountErrorList(){
+		switch (SelectedMode) {
+			case REQ_ERR_MACHINE_LOGGED:
+				return DTCTotalMachine;
+			case REQ_ERR_ENGINE_LOGGED:
+				return DTCTotalEngine;
+			case REQ_ERR_TM_LOGGED:
+				return DTCTotalTM;
+			case REQ_ERR_EHCU_LOGGED:
+				return DTCTotalEHCU;
+			default:
+				return 0;		
+		}
+	}
+	// --, 150216 bwk
 	/////////////////////////////////////////////////////////////////////
 	public void ClickLeft(){
 		// ++, 150211 bwk
@@ -664,10 +722,45 @@ public class FaultHistoryLoggedFragment extends ParentFragment{
 		case 4:
 		case 5:
 		case 6:
-			CursurIndex = 4;
+			CursurIndex--;
 			CursurDisplay(CursurIndex);
 			break;
+		// ++, 150216 bwk
+		case 7:
+			if(CursurDetailIndex > 0)
+				CursurDetailIndex--;
+			else
+			{
+				CursurDetailIndex = adapter.getCount()-1;
+			}
+			CursurDisplay(CursurIndex);
+			
+			int TotalItem, ListCursurIndex = 0;
 		
+			if(CursurDetailIndex == adapter.getCount()-1 && adapter.getCount() > 6)
+			{
+				TotalItem = listView.getCount();
+				ListCursurIndex = TotalItem - 6;
+				
+				listView.setSelectionFromTop(ListCursurIndex,0);
+				//Log.d(TAG,"ClickLeft ListCursurIndex : " + Integer.toString(ListCursurIndex));
+			}
+			else if(listView.getFirstVisiblePosition() > CursurDetailIndex)
+			{
+				ListCursurIndex = listView.getFirstVisiblePosition()-6;
+				TotalItem = listView.getCount();
+				
+				if(ListCursurIndex <= 0){
+					ListCursurIndex = 0;
+				}
+				
+				listView.setSelectionFromTop(ListCursurIndex,0);
+				//Log.d(TAG,"ClickLeft ListCursurIndex : " + Integer.toString(ListCursurIndex));
+			}
+						
+
+			break;
+		// --, 150216 bwk		
 		default:
 			break;
 		}
@@ -688,13 +781,68 @@ public class FaultHistoryLoggedFragment extends ParentFragment{
 			CursurIndex = 1;
 			CursurDisplay(CursurIndex);
 			break;
+		// ++, 150216 bwk
+		case 7:
+			if(CursurDetailIndex < adapter.getCount()-1)
+				CursurDetailIndex++;
+			else
+				CursurDetailIndex = 0;
+			CursurDisplay(CursurIndex);
+
+			int TotalItem, ListCursurIndex = 0;
+			
+			if(listView.getFirstVisiblePosition() + 6 <= CursurDetailIndex || CursurDetailIndex == 0)
+			{
+				ListCursurIndex = CursurDetailIndex;
+				TotalItem = listView.getCount();
+				
+				if(ListCursurIndex >= TotalItem){
+					ListCursurIndex = TotalItem - 6;
+				}
+				
+				listView.setSelectionFromTop(ListCursurIndex,0);
+				//Log.d(TAG,"ListCursurIndex : " + Integer.toString(ListCursurIndex));			
+			}
+			
+			break;
+		// --, 150216 bwk				
 		default:
 			break;
 		}
 		// --, 150211 bwk
 	}
 	public void ClickESC(){
-		ClickOK();
+		// ++, 150216 bwk
+		if(CursurIndex == 7)
+		{
+			switch(SelectedMode)
+			{
+				case REQ_ERR_MACHINE_LOGGED:
+					CursurIndex = 1;
+					break;
+				case REQ_ERR_ENGINE_LOGGED:
+					CursurIndex = 2;
+					break;
+				case REQ_ERR_TM_LOGGED:
+					CursurIndex = 3;
+					break;
+				case REQ_ERR_EHCU_LOGGED:
+					CursurIndex = 4;
+					break;
+				default:
+					break;
+			}
+			CursurDisplay(CursurIndex);
+		}
+		else if(CursurIndex == 8)
+		{
+			CursurIndex =7;
+			CursurDisplay(CursurIndex);
+			ClickDetailTitle();
+		}
+		else
+		// --, 150216 bwk
+			ClickOK();
 	}
 	public void ClickEnter(){
 		// ++, 150211 bwk
@@ -717,10 +865,33 @@ public class FaultHistoryLoggedFragment extends ParentFragment{
 		case 6:
 			ClickOK();
 			break;
+		// ++, 150216 bwk
+		case 7:
+			CursurIndex = 8;
+			if(adapter.getCount() > 0 && CountErrorList() > 0)
+				ErrDetailDisplay(CursurDetailIndex);
+			break;
+		case 8:
+			CursurIndex = 7;
+			CursurDisplay(CursurIndex);
+			ClickDetailTitle();
+			break;
+		// --, 150216 bwk			
 		default:
 			break;
 		}
 		// --, 150211 bwk
+		// ++. 150216 bwk
+		if(CursurIndex < 6)
+		{
+			if(adapter.getCount() > 0 && CountErrorList() > 0)
+			{
+				CursurIndex = 7;
+				CursurDetailIndex = 0;
+				CursurDisplay(CursurIndex);
+			}
+		}
+		// --, 150216 bwk
 	}
 	
 	// ++, 150211 bwk
@@ -731,6 +902,14 @@ public class FaultHistoryLoggedFragment extends ParentFragment{
 		radioEHCU.setPressed(false);
 		textViewDelete.setPressed(false);
 		imgbtnOK.setPressed(false);
+		// ++, 150216 bwk
+		if(adapter.getCount() > 0)
+		{
+			for(int i=0;i<adapter.getCount();i++)
+				adapter.UpdateIcon(i, ParentActivity.getResources().getDrawable(R.drawable.menu_information_fault_down_btn));
+			adapter.notifyDataSetChanged();
+		}
+		// --, 150216 bwk		
 		switch(Index){
 			case 1:
 				radioMachine.setPressed(true);
@@ -750,7 +929,18 @@ public class FaultHistoryLoggedFragment extends ParentFragment{
 			case 6:
 				imgbtnOK.setPressed(true);
 				break;
+			// ++, 150216 bwk
+			case 7:
+				if(CursurDetailIndex < adapter.getCount())
+					adapter.UpdateIcon(CursurDetailIndex, ParentActivity.getResources().getDrawable(R.drawable.menu_information_fault_down_btn_selected));
+				else if(adapter.getCount() > 0)
+					adapter.UpdateIcon(0, ParentActivity.getResources().getDrawable(R.drawable.menu_information_fault_down_btn_selected));
+				
+				adapter.notifyDataSetChanged();
+				break;
+			// --, 150216 bwk
 		}
+
 		
 	}
 	// --, 150211 bwk

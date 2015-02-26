@@ -482,316 +482,318 @@ public final class R {
         public static final int menu_information_fault_delete_btn_normal=0x7f0201a6;
         public static final int menu_information_fault_delete_btn_selected=0x7f0201a7;
         public static final int menu_information_fault_down_btn=0x7f0201a8;
-        public static final int menu_information_fault_line_horizontal1=0x7f0201a9;
-        public static final int menu_information_fault_line_horizontal2=0x7f0201aa;
-        public static final int menu_information_fault_line_vertical=0x7f0201ab;
-        public static final int menu_information_fault_up_btn=0x7f0201ac;
-        public static final int menu_information_monitoring_block=0x7f0201ad;
-        public static final int menu_information_monitoring_block_warning=0x7f0201ae;
-        public static final int menu_information_monitoring_initialize_btn_normal=0x7f0201af;
-        public static final int menu_information_monitoring_initialize_btn_selected=0x7f0201b0;
-        public static final int menu_information_operation_bg=0x7f0201b1;
-        public static final int menu_information_version_monitor_btn_normal=0x7f0201b2;
-        public static final int menu_information_version_monitor_btn_selected=0x7f0201b3;
-        public static final int menu_information_version_software_btn_normal=0x7f0201b4;
-        public static final int menu_information_version_software_btn_selected=0x7f0201b5;
-        public static final int menu_information_version_tcu_btn_normal=0x7f0201b6;
-        public static final int menu_information_version_tcu_btn_selected=0x7f0201b7;
-        public static final int menu_information_work_block=0x7f0201b8;
-        public static final int menu_information_work_initialize_btn_normal=0x7f0201b9;
-        public static final int menu_information_work_initialize_btn_selected=0x7f0201ba;
-        public static final int menu_list_line=0x7f0201bb;
-        public static final int menu_list_normal=0x7f0201bc;
-        public static final int menu_list_selected=0x7f0201bd;
-        public static final int menu_list_tab_center_normal=0x7f0201be;
-        public static final int menu_list_tab_center_selected=0x7f0201bf;
-        public static final int menu_list_tab_left_normal=0x7f0201c0;
-        public static final int menu_list_tab_left_selected=0x7f0201c1;
-        public static final int menu_list_tab_right_normal=0x7f0201c2;
-        public static final int menu_list_tab_right_selected=0x7f0201c3;
-        public static final int menu_low_bg=0x7f0201c4;
-        public static final int menu_low_center=0x7f0201c5;
-        public static final int menu_low_icon_cancel=0x7f0201c6;
-        public static final int menu_low_icon_default=0x7f0201c7;
-        public static final int menu_low_icon_ok=0x7f0201c8;
-        public static final int menu_low_left=0x7f0201c9;
-        public static final int menu_low_right=0x7f0201ca;
-        public static final int menu_low_selected_center=0x7f0201cb;
-        public static final int menu_low_selected_left=0x7f0201cc;
-        public static final int menu_low_selected_right=0x7f0201cd;
-        public static final int menu_management_boom_angle_btn_normal=0x7f0201ce;
-        public static final int menu_management_boom_angle_btn_selected=0x7f0201cf;
-        public static final int menu_management_boom_angle_img_01=0x7f0201d0;
-        public static final int menu_management_boom_angle_img_02=0x7f0201d1;
-        public static final int menu_management_boom_angle_img_03=0x7f0201d2;
-        public static final int menu_management_boom_angle_img_04=0x7f0201d3;
-        public static final int menu_management_boom_angle_img_05=0x7f0201d4;
-        public static final int menu_management_boom_angle_img_bg=0x7f0201d5;
-        public static final int menu_management_boom_angle_img_line=0x7f0201d6;
-        public static final int menu_management_boom_angle_next_arrow=0x7f0201d7;
-        public static final int menu_management_boom_pressure_btn_normal=0x7f0201d8;
-        public static final int menu_management_boom_pressure_btn_selected=0x7f0201d9;
-        public static final int menu_management_boom_pressure_step_off=0x7f0201da;
-        public static final int menu_management_boom_pressure_step_on=0x7f0201db;
-        public static final int menu_management_machine_monitoring_bg_dark=0x7f0201dc;
-        public static final int menu_management_machine_monitoring_bg_light=0x7f0201dd;
-        public static final int menu_management_machine_monitoring_bg_line=0x7f0201de;
-        public static final int menu_management_maintenance_block01=0x7f0201df;
-        public static final int menu_management_maintenance_block02=0x7f0201e0;
-        public static final int menu_management_maintenance_btn_normal=0x7f0201e1;
-        public static final int menu_management_maintenance_btn_selected=0x7f0201e2;
-        public static final int menu_management_maintenance_changecycle_line=0x7f0201e3;
-        public static final int menu_management_maintenance_icon_01_1=0x7f0201e4;
-        public static final int menu_management_maintenance_icon_01_2=0x7f0201e5;
-        public static final int menu_management_maintenance_icon_01_2_small=0x7f0201e6;
-        public static final int menu_management_maintenance_icon_01_small=0x7f0201e7;
-        public static final int menu_management_maintenance_icon_02_1=0x7f0201e8;
-        public static final int menu_management_maintenance_icon_02_2=0x7f0201e9;
-        public static final int menu_management_maintenance_icon_02_2_small=0x7f0201ea;
-        public static final int menu_management_maintenance_icon_02_small=0x7f0201eb;
-        public static final int menu_management_maintenance_icon_03_1=0x7f0201ec;
-        public static final int menu_management_maintenance_icon_03_2=0x7f0201ed;
-        public static final int menu_management_maintenance_icon_03_2_small=0x7f0201ee;
-        public static final int menu_management_maintenance_icon_03_small=0x7f0201ef;
-        public static final int menu_management_maintenance_icon_04_1=0x7f0201f0;
-        public static final int menu_management_maintenance_icon_04_2=0x7f0201f1;
-        public static final int menu_management_maintenance_icon_04_2_small=0x7f0201f2;
-        public static final int menu_management_maintenance_icon_04_small=0x7f0201f3;
-        public static final int menu_management_maintenance_icon_05_1=0x7f0201f4;
-        public static final int menu_management_maintenance_icon_05_2=0x7f0201f5;
-        public static final int menu_management_maintenance_icon_05_2_small=0x7f0201f6;
-        public static final int menu_management_maintenance_icon_05_small=0x7f0201f7;
-        public static final int menu_management_maintenance_icon_06_1=0x7f0201f8;
-        public static final int menu_management_maintenance_icon_06_2=0x7f0201f9;
-        public static final int menu_management_maintenance_icon_06_2_small=0x7f0201fa;
-        public static final int menu_management_maintenance_icon_06_small=0x7f0201fb;
-        public static final int menu_management_maintenance_icon_07_1=0x7f0201fc;
-        public static final int menu_management_maintenance_icon_07_2=0x7f0201fd;
-        public static final int menu_management_maintenance_icon_07_2_small=0x7f0201fe;
-        public static final int menu_management_maintenance_icon_07_small=0x7f0201ff;
-        public static final int menu_management_maintenance_icon_08_1=0x7f020200;
-        public static final int menu_management_maintenance_icon_08_2=0x7f020201;
-        public static final int menu_management_maintenance_icon_08_2_small=0x7f020202;
-        public static final int menu_management_maintenance_icon_08_small=0x7f020203;
-        public static final int menu_management_maintenance_icon_09_1=0x7f020204;
-        public static final int menu_management_maintenance_icon_09_2=0x7f020205;
-        public static final int menu_management_maintenance_icon_09_2_small=0x7f020206;
-        public static final int menu_management_maintenance_icon_09_small=0x7f020207;
-        public static final int menu_management_maintenance_icon_10_1=0x7f020208;
-        public static final int menu_management_maintenance_icon_10_2=0x7f020209;
-        public static final int menu_management_maintenance_icon_10_2_small=0x7f02020a;
-        public static final int menu_management_maintenance_icon_10_small=0x7f02020b;
-        public static final int menu_management_maintenance_icon_11_1=0x7f02020c;
-        public static final int menu_management_maintenance_icon_11_2=0x7f02020d;
-        public static final int menu_management_maintenance_icon_11_2_small=0x7f02020e;
-        public static final int menu_management_maintenance_icon_11_small=0x7f02020f;
-        public static final int menu_management_maintenance_icon_12_1=0x7f020210;
-        public static final int menu_management_maintenance_icon_12_2=0x7f020211;
-        public static final int menu_management_maintenance_icon_12_2_small=0x7f020212;
-        public static final int menu_management_maintenance_icon_12_small=0x7f020213;
-        public static final int menu_management_maintenance_icon_13_1=0x7f020214;
-        public static final int menu_management_maintenance_icon_13_2=0x7f020215;
-        public static final int menu_management_maintenance_icon_13_2_small=0x7f020216;
-        public static final int menu_management_maintenance_icon_13_small=0x7f020217;
-        public static final int menu_management_maintenance_icon_14_1=0x7f020218;
-        public static final int menu_management_maintenance_icon_14_2=0x7f020219;
-        public static final int menu_management_maintenance_icon_14_2_small=0x7f02021a;
-        public static final int menu_management_maintenance_icon_14_small=0x7f02021b;
-        public static final int menu_management_maintenance_icon_15_1=0x7f02021c;
-        public static final int menu_management_maintenance_icon_15_2=0x7f02021d;
-        public static final int menu_management_maintenance_icon_15_2_small=0x7f02021e;
-        public static final int menu_management_maintenance_icon_15_small=0x7f02021f;
-        public static final int menu_management_maintenance_icon_btn_normal=0x7f020220;
-        public static final int menu_management_maintenance_icon_btn_selected=0x7f020221;
-        public static final int menu_management_maintenance_left_arrow=0x7f020222;
-        public static final int menu_management_maintenance_left_arrow_selected=0x7f020223;
-        public static final int menu_management_maintenance_right_arrow=0x7f020224;
-        public static final int menu_management_maintenance_right_arrow_selected=0x7f020225;
-        public static final int menu_management_smart_key_btn_normal=0x7f020226;
-        public static final int menu_management_smart_key_btn_selected=0x7f020227;
-        public static final int menu_management_speed_inputbox=0x7f020228;
-        public static final int menu_management_speed_inputbox_normal=0x7f020229;
-        public static final int menu_management_speed_limit_slide_bg=0x7f02022a;
-        public static final int menu_management_weighing_inputbox=0x7f02022b;
-        public static final int menu_mode_camera_btn_display_order_normal=0x7f02022c;
-        public static final int menu_mode_camera_btn_display_order_selected=0x7f02022d;
-        public static final int menu_mode_camera_btn_minus_normal=0x7f02022e;
-        public static final int menu_mode_camera_btn_minus_selected=0x7f02022f;
-        public static final int menu_mode_camera_btn_plus_normal=0x7f020230;
-        public static final int menu_mode_camera_btn_plus_selected=0x7f020231;
-        public static final int menu_mode_camera_camera_number_bg=0x7f020232;
-        public static final int menu_mode_engine_auto_stop_btn_normal=0x7f020233;
-        public static final int menu_mode_engine_auto_stop_btn_selected=0x7f020234;
-        public static final int menu_mode_engine_auto_stop_slide_bg=0x7f020235;
-        public static final int menu_mode_engine_auto_stop_slide_bg02=0x7f020236;
-        public static final int menu_mode_engine_rpm_btn_minus_normal=0x7f020237;
-        public static final int menu_mode_engine_rpm_btn_minus_selected=0x7f020238;
-        public static final int menu_mode_engine_rpm_btn_plus_normal=0x7f020239;
-        public static final int menu_mode_engine_rpm_btn_plus_selected=0x7f02023a;
-        public static final int menu_mode_fan_manual_btn_normal=0x7f02023b;
-        public static final int menu_mode_fan_manual_btn_selected=0x7f02023c;
-        public static final int menu_mode_fan_manual_icon_off=0x7f02023d;
-        public static final int menu_mode_fan_manual_icon_on=0x7f02023e;
-        public static final int menu_mode_fan_manual_image=0x7f02023f;
-        public static final int menu_mode_fan_slide_bg=0x7f020240;
-        public static final int menu_mode_wiper_icon=0x7f020241;
-        public static final int menu_mode_work_btn_normal=0x7f020242;
-        public static final int menu_mode_work_btn_selected=0x7f020243;
-        public static final int menu_multimedia_btn_normal=0x7f020244;
-        public static final int menu_multimedia_btn_selected=0x7f020245;
-        public static final int menu_numpad_blue_normal=0x7f020246;
-        public static final int menu_numpad_gray_normal=0x7f020247;
-        public static final int menu_numpad_inputbox_gray=0x7f020248;
-        public static final int menu_numpad_passward_gray=0x7f020249;
-        public static final int menu_numpad_passward_selected=0x7f02024a;
-        public static final int menu_numpad_passward_text_delete_selected_blue=0x7f02024b;
-        public static final int menu_numpad_passward_text_delete_selected_yellow=0x7f02024c;
-        public static final int menu_numpad_passward_text_enter_selected_blue=0x7f02024d;
-        public static final int menu_numpad_passward_text_enter_selected_yellow=0x7f02024e;
-        public static final int menu_numpad_selected=0x7f02024f;
-        public static final int menu_numpad_small_blue=0x7f020250;
-        public static final int menu_numpad_small_gray=0x7f020251;
-        public static final int menu_numpad_small_selected=0x7f020252;
-        public static final int menu_numpad_small_text_delete_selected_blue=0x7f020253;
-        public static final int menu_numpad_small_text_delete_selected_yellow=0x7f020254;
-        public static final int menu_numpad_small_text_minusplus_selected_blue=0x7f020255;
-        public static final int menu_numpad_small_text_minusplus_selected_yellow=0x7f020256;
-        public static final int menu_numpad_text_delete_selected_blue=0x7f020257;
-        public static final int menu_numpad_text_delete_selected_yellow=0x7f020258;
-        public static final int menu_numpad_text_enter_selected_blue=0x7f020259;
-        public static final int menu_numpad_text_enter_selected_yellow=0x7f02025a;
-        public static final int menu_numpad_text_next_selected_blue=0x7f02025b;
-        public static final int menu_numpad_text_next_selected_yellow=0x7f02025c;
-        public static final int menu_popup01_bg=0x7f02025d;
-        public static final int menu_popup01_btn_long_normal=0x7f02025e;
-        public static final int menu_popup01_btn_long_selected=0x7f02025f;
-        public static final int menu_popup01_btn_short_normal=0x7f020260;
-        public static final int menu_popup01_btn_short_selected=0x7f020261;
-        public static final int menu_popup01_line=0x7f020262;
-        public static final int menu_popup02_bg=0x7f020263;
-        public static final int menu_preperence_brightness_auto_btn_minus_normal=0x7f020264;
-        public static final int menu_preperence_brightness_auto_btn_minus_selected=0x7f020265;
-        public static final int menu_preperence_brightness_auto_btn_plus_normal=0x7f020266;
-        public static final int menu_preperence_brightness_auto_btn_plus_selected=0x7f020267;
-        public static final int menu_preperence_brightness_auto_nember_bg=0x7f020268;
-        public static final int menu_preperence_brightness_auto_slide_bg=0x7f020269;
-        public static final int menu_preperence_brightness_manual_slide_bg=0x7f02026a;
-        public static final int menu_preperence_time_cursor=0x7f02026b;
-        public static final int menu_preperence_time_cursor_normal=0x7f02026c;
-        public static final int menu_title_bg=0x7f02026d;
-        public static final int menu_title_icon_back=0x7f02026e;
-        public static final int menu_title_icon_back_selected=0x7f02026f;
-        public static final int menu_title_icon_home=0x7f020270;
-        public static final int menu_title_icon_home_selected=0x7f020271;
-        public static final int menu_userswitching_line=0x7f020272;
-        public static final int outro_01=0x7f020273;
-        public static final int outro_02=0x7f020274;
-        public static final int outro_03=0x7f020275;
-        public static final int outro_04=0x7f020276;
-        public static final int outro_05=0x7f020277;
-        public static final int outro_06=0x7f020278;
-        public static final int outro_07=0x7f020279;
-        public static final int outro_08=0x7f02027a;
-        public static final int outro_09=0x7f02027b;
-        public static final int outro_10=0x7f02027c;
-        public static final int outro_11=0x7f02027d;
-        public static final int outro_12=0x7f02027e;
-        public static final int outro_13=0x7f02027f;
-        public static final int outro_14=0x7f020280;
-        public static final int outro_15=0x7f020281;
-        public static final int outro_16=0x7f020282;
-        public static final int outro_17=0x7f020283;
-        public static final int outro_18=0x7f020284;
-        public static final int outro_19=0x7f020285;
-        public static final int outro_20=0x7f020286;
-        public static final int outro_21=0x7f020287;
-        public static final int outro_22=0x7f020288;
-        public static final int outro_23=0x7f020289;
-        public static final int outro_24=0x7f02028a;
-        public static final int outro_25=0x7f02028b;
-        public static final int outro_26=0x7f02028c;
-        public static final int outro_27=0x7f02028d;
-        public static final int outro_28=0x7f02028e;
-        public static final int outro_29=0x7f02028f;
-        public static final int outro_30=0x7f020290;
-        public static final int outro_31=0x7f020291;
-        public static final int outro_32=0x7f020292;
-        public static final int outro_33=0x7f020293;
-        public static final int outro_34=0x7f020294;
-        public static final int outro_35=0x7f020295;
-        public static final int outro_36=0x7f020296;
-        public static final int outro_37=0x7f020297;
-        public static final int outro_38=0x7f020298;
-        public static final int outro_39=0x7f020299;
-        public static final int outro_40=0x7f02029a;
-        public static final int outro_41=0x7f02029b;
-        public static final int outro_42=0x7f02029c;
-        public static final int outro_43=0x7f02029d;
-        public static final int outro_44=0x7f02029e;
-        public static final int outro_45=0x7f02029f;
-        public static final int outro_46=0x7f0202a0;
-        public static final int outro_47=0x7f0202a1;
-        public static final int outro_48=0x7f0202a2;
-        public static final int outro_49=0x7f0202a3;
-        public static final int outro_50=0x7f0202a4;
-        public static final int outro_51=0x7f0202a5;
-        public static final int outro_52=0x7f0202a6;
-        public static final int outro_53=0x7f0202a7;
-        public static final int outro_54=0x7f0202a8;
-        public static final int outro_55=0x7f0202a9;
-        public static final int outro_56=0x7f0202aa;
-        public static final int outro_57=0x7f0202ab;
-        public static final int outro_58=0x7f0202ac;
-        public static final int outro_59=0x7f0202ad;
-        public static final int outro_60=0x7f0202ae;
-        public static final int popup=0x7f0202af;
-        public static final int radio_off=0x7f0202b0;
-        public static final int radio_off_selected=0x7f0202b1;
-        public static final int radio_on=0x7f0202b2;
-        public static final int radio_on_selected=0x7f0202b3;
-        public static final int select_gear_down_off=0x7f0202b4;
-        public static final int select_gear_down_on=0x7f0202b5;
-        public static final int select_gear_off=0x7f0202b6;
-        public static final int select_gear_on=0x7f0202b7;
-        public static final int select_gear_up_off=0x7f0202b8;
-        public static final int select_gear_up_on=0x7f0202b9;
+        public static final int menu_information_fault_down_btn_selected=0x7f0201a9;
+        public static final int menu_information_fault_line_horizontal1=0x7f0201aa;
+        public static final int menu_information_fault_line_horizontal2=0x7f0201ab;
+        public static final int menu_information_fault_line_vertical=0x7f0201ac;
+        public static final int menu_information_fault_up_btn=0x7f0201ad;
+        public static final int menu_information_fault_up_btn_selected=0x7f0201ae;
+        public static final int menu_information_monitoring_block=0x7f0201af;
+        public static final int menu_information_monitoring_block_warning=0x7f0201b0;
+        public static final int menu_information_monitoring_initialize_btn_normal=0x7f0201b1;
+        public static final int menu_information_monitoring_initialize_btn_selected=0x7f0201b2;
+        public static final int menu_information_operation_bg=0x7f0201b3;
+        public static final int menu_information_version_monitor_btn_normal=0x7f0201b4;
+        public static final int menu_information_version_monitor_btn_selected=0x7f0201b5;
+        public static final int menu_information_version_software_btn_normal=0x7f0201b6;
+        public static final int menu_information_version_software_btn_selected=0x7f0201b7;
+        public static final int menu_information_version_tcu_btn_normal=0x7f0201b8;
+        public static final int menu_information_version_tcu_btn_selected=0x7f0201b9;
+        public static final int menu_information_work_block=0x7f0201ba;
+        public static final int menu_information_work_initialize_btn_normal=0x7f0201bb;
+        public static final int menu_information_work_initialize_btn_selected=0x7f0201bc;
+        public static final int menu_list_line=0x7f0201bd;
+        public static final int menu_list_normal=0x7f0201be;
+        public static final int menu_list_selected=0x7f0201bf;
+        public static final int menu_list_tab_center_normal=0x7f0201c0;
+        public static final int menu_list_tab_center_selected=0x7f0201c1;
+        public static final int menu_list_tab_left_normal=0x7f0201c2;
+        public static final int menu_list_tab_left_selected=0x7f0201c3;
+        public static final int menu_list_tab_right_normal=0x7f0201c4;
+        public static final int menu_list_tab_right_selected=0x7f0201c5;
+        public static final int menu_low_bg=0x7f0201c6;
+        public static final int menu_low_center=0x7f0201c7;
+        public static final int menu_low_icon_cancel=0x7f0201c8;
+        public static final int menu_low_icon_default=0x7f0201c9;
+        public static final int menu_low_icon_ok=0x7f0201ca;
+        public static final int menu_low_left=0x7f0201cb;
+        public static final int menu_low_right=0x7f0201cc;
+        public static final int menu_low_selected_center=0x7f0201cd;
+        public static final int menu_low_selected_left=0x7f0201ce;
+        public static final int menu_low_selected_right=0x7f0201cf;
+        public static final int menu_management_boom_angle_btn_normal=0x7f0201d0;
+        public static final int menu_management_boom_angle_btn_selected=0x7f0201d1;
+        public static final int menu_management_boom_angle_img_01=0x7f0201d2;
+        public static final int menu_management_boom_angle_img_02=0x7f0201d3;
+        public static final int menu_management_boom_angle_img_03=0x7f0201d4;
+        public static final int menu_management_boom_angle_img_04=0x7f0201d5;
+        public static final int menu_management_boom_angle_img_05=0x7f0201d6;
+        public static final int menu_management_boom_angle_img_bg=0x7f0201d7;
+        public static final int menu_management_boom_angle_img_line=0x7f0201d8;
+        public static final int menu_management_boom_angle_next_arrow=0x7f0201d9;
+        public static final int menu_management_boom_pressure_btn_normal=0x7f0201da;
+        public static final int menu_management_boom_pressure_btn_selected=0x7f0201db;
+        public static final int menu_management_boom_pressure_step_off=0x7f0201dc;
+        public static final int menu_management_boom_pressure_step_on=0x7f0201dd;
+        public static final int menu_management_machine_monitoring_bg_dark=0x7f0201de;
+        public static final int menu_management_machine_monitoring_bg_light=0x7f0201df;
+        public static final int menu_management_machine_monitoring_bg_line=0x7f0201e0;
+        public static final int menu_management_maintenance_block01=0x7f0201e1;
+        public static final int menu_management_maintenance_block02=0x7f0201e2;
+        public static final int menu_management_maintenance_btn_normal=0x7f0201e3;
+        public static final int menu_management_maintenance_btn_selected=0x7f0201e4;
+        public static final int menu_management_maintenance_changecycle_line=0x7f0201e5;
+        public static final int menu_management_maintenance_icon_01_1=0x7f0201e6;
+        public static final int menu_management_maintenance_icon_01_2=0x7f0201e7;
+        public static final int menu_management_maintenance_icon_01_2_small=0x7f0201e8;
+        public static final int menu_management_maintenance_icon_01_small=0x7f0201e9;
+        public static final int menu_management_maintenance_icon_02_1=0x7f0201ea;
+        public static final int menu_management_maintenance_icon_02_2=0x7f0201eb;
+        public static final int menu_management_maintenance_icon_02_2_small=0x7f0201ec;
+        public static final int menu_management_maintenance_icon_02_small=0x7f0201ed;
+        public static final int menu_management_maintenance_icon_03_1=0x7f0201ee;
+        public static final int menu_management_maintenance_icon_03_2=0x7f0201ef;
+        public static final int menu_management_maintenance_icon_03_2_small=0x7f0201f0;
+        public static final int menu_management_maintenance_icon_03_small=0x7f0201f1;
+        public static final int menu_management_maintenance_icon_04_1=0x7f0201f2;
+        public static final int menu_management_maintenance_icon_04_2=0x7f0201f3;
+        public static final int menu_management_maintenance_icon_04_2_small=0x7f0201f4;
+        public static final int menu_management_maintenance_icon_04_small=0x7f0201f5;
+        public static final int menu_management_maintenance_icon_05_1=0x7f0201f6;
+        public static final int menu_management_maintenance_icon_05_2=0x7f0201f7;
+        public static final int menu_management_maintenance_icon_05_2_small=0x7f0201f8;
+        public static final int menu_management_maintenance_icon_05_small=0x7f0201f9;
+        public static final int menu_management_maintenance_icon_06_1=0x7f0201fa;
+        public static final int menu_management_maintenance_icon_06_2=0x7f0201fb;
+        public static final int menu_management_maintenance_icon_06_2_small=0x7f0201fc;
+        public static final int menu_management_maintenance_icon_06_small=0x7f0201fd;
+        public static final int menu_management_maintenance_icon_07_1=0x7f0201fe;
+        public static final int menu_management_maintenance_icon_07_2=0x7f0201ff;
+        public static final int menu_management_maintenance_icon_07_2_small=0x7f020200;
+        public static final int menu_management_maintenance_icon_07_small=0x7f020201;
+        public static final int menu_management_maintenance_icon_08_1=0x7f020202;
+        public static final int menu_management_maintenance_icon_08_2=0x7f020203;
+        public static final int menu_management_maintenance_icon_08_2_small=0x7f020204;
+        public static final int menu_management_maintenance_icon_08_small=0x7f020205;
+        public static final int menu_management_maintenance_icon_09_1=0x7f020206;
+        public static final int menu_management_maintenance_icon_09_2=0x7f020207;
+        public static final int menu_management_maintenance_icon_09_2_small=0x7f020208;
+        public static final int menu_management_maintenance_icon_09_small=0x7f020209;
+        public static final int menu_management_maintenance_icon_10_1=0x7f02020a;
+        public static final int menu_management_maintenance_icon_10_2=0x7f02020b;
+        public static final int menu_management_maintenance_icon_10_2_small=0x7f02020c;
+        public static final int menu_management_maintenance_icon_10_small=0x7f02020d;
+        public static final int menu_management_maintenance_icon_11_1=0x7f02020e;
+        public static final int menu_management_maintenance_icon_11_2=0x7f02020f;
+        public static final int menu_management_maintenance_icon_11_2_small=0x7f020210;
+        public static final int menu_management_maintenance_icon_11_small=0x7f020211;
+        public static final int menu_management_maintenance_icon_12_1=0x7f020212;
+        public static final int menu_management_maintenance_icon_12_2=0x7f020213;
+        public static final int menu_management_maintenance_icon_12_2_small=0x7f020214;
+        public static final int menu_management_maintenance_icon_12_small=0x7f020215;
+        public static final int menu_management_maintenance_icon_13_1=0x7f020216;
+        public static final int menu_management_maintenance_icon_13_2=0x7f020217;
+        public static final int menu_management_maintenance_icon_13_2_small=0x7f020218;
+        public static final int menu_management_maintenance_icon_13_small=0x7f020219;
+        public static final int menu_management_maintenance_icon_14_1=0x7f02021a;
+        public static final int menu_management_maintenance_icon_14_2=0x7f02021b;
+        public static final int menu_management_maintenance_icon_14_2_small=0x7f02021c;
+        public static final int menu_management_maintenance_icon_14_small=0x7f02021d;
+        public static final int menu_management_maintenance_icon_15_1=0x7f02021e;
+        public static final int menu_management_maintenance_icon_15_2=0x7f02021f;
+        public static final int menu_management_maintenance_icon_15_2_small=0x7f020220;
+        public static final int menu_management_maintenance_icon_15_small=0x7f020221;
+        public static final int menu_management_maintenance_icon_btn_normal=0x7f020222;
+        public static final int menu_management_maintenance_icon_btn_selected=0x7f020223;
+        public static final int menu_management_maintenance_left_arrow=0x7f020224;
+        public static final int menu_management_maintenance_left_arrow_selected=0x7f020225;
+        public static final int menu_management_maintenance_right_arrow=0x7f020226;
+        public static final int menu_management_maintenance_right_arrow_selected=0x7f020227;
+        public static final int menu_management_smart_key_btn_normal=0x7f020228;
+        public static final int menu_management_smart_key_btn_selected=0x7f020229;
+        public static final int menu_management_speed_inputbox=0x7f02022a;
+        public static final int menu_management_speed_inputbox_normal=0x7f02022b;
+        public static final int menu_management_speed_limit_slide_bg=0x7f02022c;
+        public static final int menu_management_weighing_inputbox=0x7f02022d;
+        public static final int menu_mode_camera_btn_display_order_normal=0x7f02022e;
+        public static final int menu_mode_camera_btn_display_order_selected=0x7f02022f;
+        public static final int menu_mode_camera_btn_minus_normal=0x7f020230;
+        public static final int menu_mode_camera_btn_minus_selected=0x7f020231;
+        public static final int menu_mode_camera_btn_plus_normal=0x7f020232;
+        public static final int menu_mode_camera_btn_plus_selected=0x7f020233;
+        public static final int menu_mode_camera_camera_number_bg=0x7f020234;
+        public static final int menu_mode_engine_auto_stop_btn_normal=0x7f020235;
+        public static final int menu_mode_engine_auto_stop_btn_selected=0x7f020236;
+        public static final int menu_mode_engine_auto_stop_slide_bg=0x7f020237;
+        public static final int menu_mode_engine_auto_stop_slide_bg02=0x7f020238;
+        public static final int menu_mode_engine_rpm_btn_minus_normal=0x7f020239;
+        public static final int menu_mode_engine_rpm_btn_minus_selected=0x7f02023a;
+        public static final int menu_mode_engine_rpm_btn_plus_normal=0x7f02023b;
+        public static final int menu_mode_engine_rpm_btn_plus_selected=0x7f02023c;
+        public static final int menu_mode_fan_manual_btn_normal=0x7f02023d;
+        public static final int menu_mode_fan_manual_btn_selected=0x7f02023e;
+        public static final int menu_mode_fan_manual_icon_off=0x7f02023f;
+        public static final int menu_mode_fan_manual_icon_on=0x7f020240;
+        public static final int menu_mode_fan_manual_image=0x7f020241;
+        public static final int menu_mode_fan_slide_bg=0x7f020242;
+        public static final int menu_mode_wiper_icon=0x7f020243;
+        public static final int menu_mode_work_btn_normal=0x7f020244;
+        public static final int menu_mode_work_btn_selected=0x7f020245;
+        public static final int menu_multimedia_btn_normal=0x7f020246;
+        public static final int menu_multimedia_btn_selected=0x7f020247;
+        public static final int menu_numpad_blue_normal=0x7f020248;
+        public static final int menu_numpad_gray_normal=0x7f020249;
+        public static final int menu_numpad_inputbox_gray=0x7f02024a;
+        public static final int menu_numpad_passward_gray=0x7f02024b;
+        public static final int menu_numpad_passward_selected=0x7f02024c;
+        public static final int menu_numpad_passward_text_delete_selected_blue=0x7f02024d;
+        public static final int menu_numpad_passward_text_delete_selected_yellow=0x7f02024e;
+        public static final int menu_numpad_passward_text_enter_selected_blue=0x7f02024f;
+        public static final int menu_numpad_passward_text_enter_selected_yellow=0x7f020250;
+        public static final int menu_numpad_selected=0x7f020251;
+        public static final int menu_numpad_small_blue=0x7f020252;
+        public static final int menu_numpad_small_gray=0x7f020253;
+        public static final int menu_numpad_small_selected=0x7f020254;
+        public static final int menu_numpad_small_text_delete_selected_blue=0x7f020255;
+        public static final int menu_numpad_small_text_delete_selected_yellow=0x7f020256;
+        public static final int menu_numpad_small_text_minusplus_selected_blue=0x7f020257;
+        public static final int menu_numpad_small_text_minusplus_selected_yellow=0x7f020258;
+        public static final int menu_numpad_text_delete_selected_blue=0x7f020259;
+        public static final int menu_numpad_text_delete_selected_yellow=0x7f02025a;
+        public static final int menu_numpad_text_enter_selected_blue=0x7f02025b;
+        public static final int menu_numpad_text_enter_selected_yellow=0x7f02025c;
+        public static final int menu_numpad_text_next_selected_blue=0x7f02025d;
+        public static final int menu_numpad_text_next_selected_yellow=0x7f02025e;
+        public static final int menu_popup01_bg=0x7f02025f;
+        public static final int menu_popup01_btn_long_normal=0x7f020260;
+        public static final int menu_popup01_btn_long_selected=0x7f020261;
+        public static final int menu_popup01_btn_short_normal=0x7f020262;
+        public static final int menu_popup01_btn_short_selected=0x7f020263;
+        public static final int menu_popup01_line=0x7f020264;
+        public static final int menu_popup02_bg=0x7f020265;
+        public static final int menu_preperence_brightness_auto_btn_minus_normal=0x7f020266;
+        public static final int menu_preperence_brightness_auto_btn_minus_selected=0x7f020267;
+        public static final int menu_preperence_brightness_auto_btn_plus_normal=0x7f020268;
+        public static final int menu_preperence_brightness_auto_btn_plus_selected=0x7f020269;
+        public static final int menu_preperence_brightness_auto_nember_bg=0x7f02026a;
+        public static final int menu_preperence_brightness_auto_slide_bg=0x7f02026b;
+        public static final int menu_preperence_brightness_manual_slide_bg=0x7f02026c;
+        public static final int menu_preperence_time_cursor=0x7f02026d;
+        public static final int menu_preperence_time_cursor_normal=0x7f02026e;
+        public static final int menu_title_bg=0x7f02026f;
+        public static final int menu_title_icon_back=0x7f020270;
+        public static final int menu_title_icon_back_selected=0x7f020271;
+        public static final int menu_title_icon_home=0x7f020272;
+        public static final int menu_title_icon_home_selected=0x7f020273;
+        public static final int menu_userswitching_line=0x7f020274;
+        public static final int outro_01=0x7f020275;
+        public static final int outro_02=0x7f020276;
+        public static final int outro_03=0x7f020277;
+        public static final int outro_04=0x7f020278;
+        public static final int outro_05=0x7f020279;
+        public static final int outro_06=0x7f02027a;
+        public static final int outro_07=0x7f02027b;
+        public static final int outro_08=0x7f02027c;
+        public static final int outro_09=0x7f02027d;
+        public static final int outro_10=0x7f02027e;
+        public static final int outro_11=0x7f02027f;
+        public static final int outro_12=0x7f020280;
+        public static final int outro_13=0x7f020281;
+        public static final int outro_14=0x7f020282;
+        public static final int outro_15=0x7f020283;
+        public static final int outro_16=0x7f020284;
+        public static final int outro_17=0x7f020285;
+        public static final int outro_18=0x7f020286;
+        public static final int outro_19=0x7f020287;
+        public static final int outro_20=0x7f020288;
+        public static final int outro_21=0x7f020289;
+        public static final int outro_22=0x7f02028a;
+        public static final int outro_23=0x7f02028b;
+        public static final int outro_24=0x7f02028c;
+        public static final int outro_25=0x7f02028d;
+        public static final int outro_26=0x7f02028e;
+        public static final int outro_27=0x7f02028f;
+        public static final int outro_28=0x7f020290;
+        public static final int outro_29=0x7f020291;
+        public static final int outro_30=0x7f020292;
+        public static final int outro_31=0x7f020293;
+        public static final int outro_32=0x7f020294;
+        public static final int outro_33=0x7f020295;
+        public static final int outro_34=0x7f020296;
+        public static final int outro_35=0x7f020297;
+        public static final int outro_36=0x7f020298;
+        public static final int outro_37=0x7f020299;
+        public static final int outro_38=0x7f02029a;
+        public static final int outro_39=0x7f02029b;
+        public static final int outro_40=0x7f02029c;
+        public static final int outro_41=0x7f02029d;
+        public static final int outro_42=0x7f02029e;
+        public static final int outro_43=0x7f02029f;
+        public static final int outro_44=0x7f0202a0;
+        public static final int outro_45=0x7f0202a1;
+        public static final int outro_46=0x7f0202a2;
+        public static final int outro_47=0x7f0202a3;
+        public static final int outro_48=0x7f0202a4;
+        public static final int outro_49=0x7f0202a5;
+        public static final int outro_50=0x7f0202a6;
+        public static final int outro_51=0x7f0202a7;
+        public static final int outro_52=0x7f0202a8;
+        public static final int outro_53=0x7f0202a9;
+        public static final int outro_54=0x7f0202aa;
+        public static final int outro_55=0x7f0202ab;
+        public static final int outro_56=0x7f0202ac;
+        public static final int outro_57=0x7f0202ad;
+        public static final int outro_58=0x7f0202ae;
+        public static final int outro_59=0x7f0202af;
+        public static final int outro_60=0x7f0202b0;
+        public static final int popup=0x7f0202b1;
+        public static final int radio_off=0x7f0202b2;
+        public static final int radio_off_selected=0x7f0202b3;
+        public static final int radio_on=0x7f0202b4;
+        public static final int radio_on_selected=0x7f0202b5;
+        public static final int select_gear_down_off=0x7f0202b6;
+        public static final int select_gear_down_on=0x7f0202b7;
+        public static final int select_gear_off=0x7f0202b8;
+        public static final int select_gear_on=0x7f0202b9;
+        public static final int select_gear_up_off=0x7f0202ba;
+        public static final int select_gear_up_on=0x7f0202bb;
     }
     public static final class id {
         public static final int AbsoluteLayout1=0x7f0b0025;
-        public static final int AbsoluteLayout_main_a=0x7f0b0678;
-        public static final int AbsoluteLayout_menu=0x7f0b0692;
-        public static final int AbsoluteLayout_menu_inter=0x7f0b0694;
-        public static final int AbsoluteLayout_menu_list=0x7f0b0697;
-        public static final int AbsoluteLayout_screen_main_b=0x7f0b067e;
-        public static final int AbsoluteLayout_screen_main_b_body=0x7f0b0684;
-        public static final int AbsoluteLayout_screen_main_b_key=0x7f0b067f;
+        public static final int AbsoluteLayout_main_a=0x7f0b068a;
+        public static final int AbsoluteLayout_menu=0x7f0b06a4;
+        public static final int AbsoluteLayout_menu_inter=0x7f0b06a6;
+        public static final int AbsoluteLayout_menu_list=0x7f0b06a9;
+        public static final int AbsoluteLayout_screen_main_b=0x7f0b0690;
+        public static final int AbsoluteLayout_screen_main_b_body=0x7f0b0696;
+        public static final int AbsoluteLayout_screen_main_b_key=0x7f0b0691;
         public static final int FrameLayout_main=0x7f0b0006;
-        public static final int FrameLayout_main_a_center=0x7f0b067d;
-        public static final int FrameLayout_main_a_left=0x7f0b0679;
-        public static final int FrameLayout_main_a_lower=0x7f0b067c;
-        public static final int FrameLayout_main_a_right=0x7f0b067a;
-        public static final int FrameLayout_main_a_upper=0x7f0b067b;
+        public static final int FrameLayout_main_a_center=0x7f0b068f;
+        public static final int FrameLayout_main_a_left=0x7f0b068b;
+        public static final int FrameLayout_main_a_lower=0x7f0b068e;
+        public static final int FrameLayout_main_a_right=0x7f0b068c;
+        public static final int FrameLayout_main_a_upper=0x7f0b068d;
         public static final int FrameLayout_menu_body_management_maint_changecycle=0x7f0b01df;
         public static final int FrameLayout_menu_body_mode_coolingfan=0x7f0b02b1;
         public static final int FrameLayout_menu_body_mode_engineautoshutdown_pw=0x7f0b0315;
         public static final int FrameLayout_menu_body_mode_list=0x7f0b028d;
         public static final int FrameLayout_menu_body_mode_tab=0x7f0b028c;
         public static final int FrameLayout_menu_body_preference_brightness=0x7f0b04e7;
-        public static final int FrameLayout_menu_inter_body=0x7f0b0696;
-        public static final int FrameLayout_menu_inter_title=0x7f0b0695;
-        public static final int FrameLayout_menu_list_body=0x7f0b069a;
-        public static final int FrameLayout_menu_list_left=0x7f0b0699;
-        public static final int FrameLayout_menu_list_title=0x7f0b0698;
-        public static final int FrameLayout_screen_main_b_center=0x7f0b068a;
-        public static final int FrameLayout_screen_main_b_indicator=0x7f0b068f;
-        public static final int FrameLayout_screen_main_b_key_body=0x7f0b0683;
-        public static final int FrameLayout_screen_main_b_key_title=0x7f0b0682;
-        public static final int FrameLayout_screen_main_b_leftdown=0x7f0b068c;
-        public static final int FrameLayout_screen_main_b_leftup=0x7f0b068b;
-        public static final int FrameLayout_screen_main_b_menubar=0x7f0b0690;
-        public static final int FrameLayout_screen_main_b_rightdown=0x7f0b068e;
-        public static final int FrameLayout_screen_main_b_rightup=0x7f0b068d;
-        public static final int FrameLayout_screen_main_b_virtualkey=0x7f0b0691;
+        public static final int FrameLayout_menu_inter_body=0x7f0b06a8;
+        public static final int FrameLayout_menu_inter_title=0x7f0b06a7;
+        public static final int FrameLayout_menu_list_body=0x7f0b06ac;
+        public static final int FrameLayout_menu_list_left=0x7f0b06ab;
+        public static final int FrameLayout_menu_list_title=0x7f0b06aa;
+        public static final int FrameLayout_screen_main_b_center=0x7f0b069c;
+        public static final int FrameLayout_screen_main_b_indicator=0x7f0b06a1;
+        public static final int FrameLayout_screen_main_b_key_body=0x7f0b0695;
+        public static final int FrameLayout_screen_main_b_key_title=0x7f0b0694;
+        public static final int FrameLayout_screen_main_b_leftdown=0x7f0b069e;
+        public static final int FrameLayout_screen_main_b_leftup=0x7f0b069d;
+        public static final int FrameLayout_screen_main_b_menubar=0x7f0b06a2;
+        public static final int FrameLayout_screen_main_b_rightdown=0x7f0b06a0;
+        public static final int FrameLayout_screen_main_b_rightup=0x7f0b069f;
+        public static final int FrameLayout_screen_main_b_virtualkey=0x7f0b06a3;
         public static final int ImageButton_key_main_b_detent_low_ok=0x7f0b004b;
         public static final int ImageButton_key_main_b_quickcoupler_low_ok=0x7f0b0061;
         public static final int ImageButton_key_main_b_ridecontrol_low_ok=0x7f0b0075;
@@ -866,11 +868,11 @@ public final class R {
         public static final int ImageButton_menu_body_preference_brightness_manual_low_ok=0x7f0b0514;
         public static final int ImageButton_menu_body_preference_clock_low_cancel=0x7f0b0534;
         public static final int ImageButton_menu_body_preference_clock_low_ok=0x7f0b0533;
-        public static final int ImageButton_menu_body_preference_unit_low_cancel=0x7f0b055d;
-        public static final int ImageButton_menu_body_preference_unit_low_ok=0x7f0b055c;
-        public static final int ImageButton_menu_body_userswitching_low_apply=0x7f0b057a;
-        public static final int ImageButton_menu_body_userswitching_low_ok=0x7f0b0577;
-        public static final int ImageButton_menu_body_userswitching_low_save=0x7f0b0578;
+        public static final int ImageButton_menu_body_preference_unit_low_cancel=0x7f0b056f;
+        public static final int ImageButton_menu_body_preference_unit_low_ok=0x7f0b056e;
+        public static final int ImageButton_menu_body_userswitching_low_apply=0x7f0b058c;
+        public static final int ImageButton_menu_body_userswitching_low_ok=0x7f0b0589;
+        public static final int ImageButton_menu_body_userswitching_low_save=0x7f0b058a;
         public static final int LinearLayout1=0x7f0b0145;
         public static final int LinearLayout_menu_body_management_smartkey_tag_btn=0x7f0b0280;
         public static final int LinearLayout_menu_body_preference_brightness_auto_time_end=0x7f0b04fa;
@@ -1035,67 +1037,67 @@ public final class R {
         public static final int RelativeLayout_menu_body_preference_clock_display=0x7f0b051c;
         public static final int RelativeLayout_menu_body_preference_clock_low=0x7f0b051d;
         public static final int RelativeLayout_menu_body_preference_clock_num=0x7f0b051e;
-        public static final int RelativeLayout_menu_body_preference_unit_low=0x7f0b0554;
-        public static final int RelativeLayout_menu_body_preference_unit_pressure=0x7f0b0553;
-        public static final int RelativeLayout_menu_body_preference_unit_speed=0x7f0b0547;
-        public static final int RelativeLayout_menu_body_preference_unit_temp=0x7f0b0541;
-        public static final int RelativeLayout_menu_body_preference_unit_weight=0x7f0b054d;
-        public static final int RelativeLayout_menu_body_userswitching_low=0x7f0b0575;
-        public static final int RelativeLayout_menu_body_userswitching_title=0x7f0b0565;
-        public static final int RelativeLayout_popup_anglecalibration_result=0x7f0b0595;
-        public static final int RelativeLayout_popup_anglecalibration_result_btn=0x7f0b0598;
-        public static final int RelativeLayout_popup_anglecalibration_result_title=0x7f0b0596;
-        public static final int RelativeLayout_popup_brakepedalcalibration=0x7f0b059b;
-        public static final int RelativeLayout_popup_brakepedalcalibration_btn=0x7f0b059e;
-        public static final int RelativeLayout_popup_brakepedalcalibration_title=0x7f0b059c;
-        public static final int RelativeLayout_popup_engineautoshutdown_count=0x7f0b05b0;
-        public static final int RelativeLayout_popup_engineautoshutdown_count_btn=0x7f0b05b4;
-        public static final int RelativeLayout_popup_engineautoshutdown_count_title=0x7f0b05b1;
-        public static final int RelativeLayout_popup_key_quickcoupler_locking_1=0x7f0b05c2;
-        public static final int RelativeLayout_popup_key_quickcoupler_locking_1_btn=0x7f0b05c5;
-        public static final int RelativeLayout_popup_key_quickcoupler_locking_1_title=0x7f0b05c3;
-        public static final int RelativeLayout_popup_key_quickcoupler_locking_2=0x7f0b05ca;
-        public static final int RelativeLayout_popup_key_quickcoupler_locking_2_btn=0x7f0b05ce;
-        public static final int RelativeLayout_popup_key_quickcoupler_locking_2_title=0x7f0b05cb;
-        public static final int RelativeLayout_popup_key_quickcoupler_unlocking_1=0x7f0b05d1;
-        public static final int RelativeLayout_popup_key_quickcoupler_unlocking_1_btn=0x7f0b05d4;
-        public static final int RelativeLayout_popup_key_quickcoupler_unlocking_1_title=0x7f0b05d2;
-        public static final int RelativeLayout_popup_key_quickcoupler_unlocking_2=0x7f0b05d9;
-        public static final int RelativeLayout_popup_key_quickcoupler_unlocking_2_btn=0x7f0b05dd;
-        public static final int RelativeLayout_popup_key_quickcoupler_unlocking_2_title=0x7f0b05da;
-        public static final int RelativeLayout_popup_key_quickcoupler_unlocking_3=0x7f0b05e0;
-        public static final int RelativeLayout_popup_key_quickcoupler_unlocking_3_btn=0x7f0b05e4;
-        public static final int RelativeLayout_popup_key_quickcoupler_unlocking_3_title=0x7f0b05e1;
-        public static final int RelativeLayout_popup_loggedfault_delete=0x7f0b05ee;
-        public static final int RelativeLayout_popup_loggedfault_delete_btn=0x7f0b05f1;
-        public static final int RelativeLayout_popup_loggedfault_delete_title=0x7f0b05ef;
-        public static final int RelativeLayout_popup_maint_replace=0x7f0b05f6;
-        public static final int RelativeLayout_popup_maint_replace_btn=0x7f0b05f9;
-        public static final int RelativeLayout_popup_maint_replace_title=0x7f0b05f7;
-        public static final int RelativeLayout_popup_operationhistory_init=0x7f0b05fe;
-        public static final int RelativeLayout_popup_operationhistory_init_btn=0x7f0b0601;
-        public static final int RelativeLayout_popup_operationhistory_init_title=0x7f0b05ff;
-        public static final int RelativeLayout_popup_softend_init=0x7f0b060c;
-        public static final int RelativeLayout_popup_softend_init_btn=0x7f0b060f;
-        public static final int RelativeLayout_popup_softend_init_title=0x7f0b060d;
-        public static final int RelativeLayout_popup_speedometer_freq_init=0x7f0b0618;
-        public static final int RelativeLayout_popup_speedometer_freq_init_btn=0x7f0b061b;
-        public static final int RelativeLayout_popup_speedometer_freq_init_title=0x7f0b0619;
-        public static final int RelativeLayout_rightdown_main_b_engine_warmingup_top=0x7f0b0657;
-        public static final int RelativeLayout_rightdown_main_b_quick=0x7f0b0631;
-        public static final int RelativeLayout_rightdown_main_b_tm=0x7f0b0635;
-        public static final int RelativeLayout_rightdown_main_b_tm_ccomode=0x7f0b0639;
-        public static final int RelativeLayout_rightdown_main_b_tm_shiftmode=0x7f0b063d;
-        public static final int RelativeLayout_rightdown_main_b_tm_tclockup=0x7f0b0640;
-        public static final int RelativeLayout_rightdown_main_b_tmccomode=0x7f0b0644;
-        public static final int RelativeLayout_rightdown_main_b_tmiccomode=0x7f0b064b;
-        public static final int RelativeLayout_rightdown_main_b_tmshiftmode=0x7f0b0650;
-        public static final int RelativeLayout_rightup_main_b_engine_mode=0x7f0b0660;
-        public static final int RelativeLayout_rightup_main_b_engine_mode_top=0x7f0b0667;
-        public static final int RelativeLayout_rightup_main_b_engine_top=0x7f0b065d;
-        public static final int RelativeLayout_rightup_main_b_engine_warmingup=0x7f0b0664;
-        public static final int RelativeLayout_rightup_main_b_engine_warmingup_top=0x7f0b066e;
-        public static final int RelativeLayout_rightup_main_b_quick=0x7f0b0674;
+        public static final int RelativeLayout_menu_body_preference_unit_low=0x7f0b0566;
+        public static final int RelativeLayout_menu_body_preference_unit_pressure=0x7f0b0565;
+        public static final int RelativeLayout_menu_body_preference_unit_speed=0x7f0b0559;
+        public static final int RelativeLayout_menu_body_preference_unit_temp=0x7f0b0553;
+        public static final int RelativeLayout_menu_body_preference_unit_weight=0x7f0b055f;
+        public static final int RelativeLayout_menu_body_userswitching_low=0x7f0b0587;
+        public static final int RelativeLayout_menu_body_userswitching_title=0x7f0b0577;
+        public static final int RelativeLayout_popup_anglecalibration_result=0x7f0b05a7;
+        public static final int RelativeLayout_popup_anglecalibration_result_btn=0x7f0b05aa;
+        public static final int RelativeLayout_popup_anglecalibration_result_title=0x7f0b05a8;
+        public static final int RelativeLayout_popup_brakepedalcalibration=0x7f0b05ad;
+        public static final int RelativeLayout_popup_brakepedalcalibration_btn=0x7f0b05b0;
+        public static final int RelativeLayout_popup_brakepedalcalibration_title=0x7f0b05ae;
+        public static final int RelativeLayout_popup_engineautoshutdown_count=0x7f0b05c2;
+        public static final int RelativeLayout_popup_engineautoshutdown_count_btn=0x7f0b05c6;
+        public static final int RelativeLayout_popup_engineautoshutdown_count_title=0x7f0b05c3;
+        public static final int RelativeLayout_popup_key_quickcoupler_locking_1=0x7f0b05d4;
+        public static final int RelativeLayout_popup_key_quickcoupler_locking_1_btn=0x7f0b05d7;
+        public static final int RelativeLayout_popup_key_quickcoupler_locking_1_title=0x7f0b05d5;
+        public static final int RelativeLayout_popup_key_quickcoupler_locking_2=0x7f0b05dc;
+        public static final int RelativeLayout_popup_key_quickcoupler_locking_2_btn=0x7f0b05e0;
+        public static final int RelativeLayout_popup_key_quickcoupler_locking_2_title=0x7f0b05dd;
+        public static final int RelativeLayout_popup_key_quickcoupler_unlocking_1=0x7f0b05e3;
+        public static final int RelativeLayout_popup_key_quickcoupler_unlocking_1_btn=0x7f0b05e6;
+        public static final int RelativeLayout_popup_key_quickcoupler_unlocking_1_title=0x7f0b05e4;
+        public static final int RelativeLayout_popup_key_quickcoupler_unlocking_2=0x7f0b05eb;
+        public static final int RelativeLayout_popup_key_quickcoupler_unlocking_2_btn=0x7f0b05ef;
+        public static final int RelativeLayout_popup_key_quickcoupler_unlocking_2_title=0x7f0b05ec;
+        public static final int RelativeLayout_popup_key_quickcoupler_unlocking_3=0x7f0b05f2;
+        public static final int RelativeLayout_popup_key_quickcoupler_unlocking_3_btn=0x7f0b05f6;
+        public static final int RelativeLayout_popup_key_quickcoupler_unlocking_3_title=0x7f0b05f3;
+        public static final int RelativeLayout_popup_loggedfault_delete=0x7f0b0600;
+        public static final int RelativeLayout_popup_loggedfault_delete_btn=0x7f0b0603;
+        public static final int RelativeLayout_popup_loggedfault_delete_title=0x7f0b0601;
+        public static final int RelativeLayout_popup_maint_replace=0x7f0b0608;
+        public static final int RelativeLayout_popup_maint_replace_btn=0x7f0b060b;
+        public static final int RelativeLayout_popup_maint_replace_title=0x7f0b0609;
+        public static final int RelativeLayout_popup_operationhistory_init=0x7f0b0610;
+        public static final int RelativeLayout_popup_operationhistory_init_btn=0x7f0b0613;
+        public static final int RelativeLayout_popup_operationhistory_init_title=0x7f0b0611;
+        public static final int RelativeLayout_popup_softend_init=0x7f0b061e;
+        public static final int RelativeLayout_popup_softend_init_btn=0x7f0b0621;
+        public static final int RelativeLayout_popup_softend_init_title=0x7f0b061f;
+        public static final int RelativeLayout_popup_speedometer_freq_init=0x7f0b062a;
+        public static final int RelativeLayout_popup_speedometer_freq_init_btn=0x7f0b062d;
+        public static final int RelativeLayout_popup_speedometer_freq_init_title=0x7f0b062b;
+        public static final int RelativeLayout_rightdown_main_b_engine_warmingup_top=0x7f0b0669;
+        public static final int RelativeLayout_rightdown_main_b_quick=0x7f0b0643;
+        public static final int RelativeLayout_rightdown_main_b_tm=0x7f0b0647;
+        public static final int RelativeLayout_rightdown_main_b_tm_ccomode=0x7f0b064b;
+        public static final int RelativeLayout_rightdown_main_b_tm_shiftmode=0x7f0b064f;
+        public static final int RelativeLayout_rightdown_main_b_tm_tclockup=0x7f0b0652;
+        public static final int RelativeLayout_rightdown_main_b_tmccomode=0x7f0b0656;
+        public static final int RelativeLayout_rightdown_main_b_tmiccomode=0x7f0b065d;
+        public static final int RelativeLayout_rightdown_main_b_tmshiftmode=0x7f0b0662;
+        public static final int RelativeLayout_rightup_main_b_engine_mode=0x7f0b0672;
+        public static final int RelativeLayout_rightup_main_b_engine_mode_top=0x7f0b0679;
+        public static final int RelativeLayout_rightup_main_b_engine_top=0x7f0b066f;
+        public static final int RelativeLayout_rightup_main_b_engine_warmingup=0x7f0b0676;
+        public static final int RelativeLayout_rightup_main_b_engine_warmingup_top=0x7f0b0680;
+        public static final int RelativeLayout_rightup_main_b_quick=0x7f0b0686;
         public static final int Relativelayout_key_main_b_ridecontrol_low=0x7f0b0072;
         public static final int Relativelayout_key_main_b_workload_display_low=0x7f0b00ce;
         public static final int Relativelayout_menu_body_management_maint_detail_button=0x7f0b021b;
@@ -1127,7 +1129,7 @@ public final class R {
         public static final int TextView_menu_body_mode_tab_engine=0x7f0b03a2;
         public static final int TextView_menu_body_mode_tab_etc=0x7f0b03a4;
         public static final int TextView_menu_body_mode_tab_hyd=0x7f0b03a3;
-        public static final int action_settings=0x7f0b06af;
+        public static final int action_settings=0x7f0b06c1;
         public static final int arrow_down=0x7f0b0005;
         public static final int arrow_up=0x7f0b0004;
         public static final int checkBox_menu_body_mode_camerasetting_gearmode=0x7f0b02a2;
@@ -1136,7 +1138,7 @@ public final class R {
         public static final int checkBox_menu_body_monitoring_operationhistory_work_totala=0x7f0b047a;
         public static final int checkBox_menu_body_monitoring_operationhistory_work_totalb=0x7f0b047e;
         public static final int checkBox_menu_body_monitoring_operationhistory_work_totalc=0x7f0b0482;
-        public static final int checkBox_popup_key_quickcoupler_unlocking_3=0x7f0b05e9;
+        public static final int checkBox_popup_key_quickcoupler_unlocking_3=0x7f0b05fb;
         public static final int imageButton_center_main_b_option=0x7f0b000b;
         public static final int imageButton_key_main_b_workload_accumulation=0x7f0b00a1;
         public static final int imageButton_key_main_b_workload_display=0x7f0b00a7;
@@ -1209,46 +1211,46 @@ public final class R {
         public static final int imageButton_menu_body_preference_brightness_auto_time_start_plus=0x7f0b04f8;
         public static final int imageButton_menu_body_preference_clock_num_back=0x7f0b0530;
         public static final int imageButton_menu_body_preference_clock_num_next=0x7f0b0531;
-        public static final int imageButton_menu_list_left_management=0x7f0b0585;
-        public static final int imageButton_menu_list_left_mode=0x7f0b0583;
-        public static final int imageButton_menu_list_left_monitoring=0x7f0b0584;
-        public static final int imageButton_menu_list_left_multimedia=0x7f0b0587;
-        public static final int imageButton_menu_list_left_preference=0x7f0b0586;
-        public static final int imageButton_menu_list_title_back=0x7f0b0592;
-        public static final int imageButton_menu_list_title_home=0x7f0b0593;
-        public static final int imageButton_popup_anglecalibration_result_ok=0x7f0b0599;
-        public static final int imageButton_popup_brakepedalcalibration_ok=0x7f0b059f;
-        public static final int imageButton_popup_engineautoshutdown_count_cancel=0x7f0b05b6;
-        public static final int imageButton_popup_engineautoshutdown_count_skip=0x7f0b05b5;
-        public static final int imageButton_popup_key_quickcoupler_locking_1_cancel=0x7f0b05c7;
-        public static final int imageButton_popup_key_quickcoupler_locking_1_ok=0x7f0b05c6;
-        public static final int imageButton_popup_key_quickcoupler_locking_2_cancel=0x7f0b05cf;
-        public static final int imageButton_popup_key_quickcoupler_unlocking_1_cancel=0x7f0b05d6;
-        public static final int imageButton_popup_key_quickcoupler_unlocking_1_ok=0x7f0b05d5;
-        public static final int imageButton_popup_key_quickcoupler_unlocking_2_cancel=0x7f0b05de;
-        public static final int imageButton_popup_key_quickcoupler_unlocking_3_lock=0x7f0b05e5;
-        public static final int imageButton_popup_key_quickcoupler_unlocking_3_ok=0x7f0b05e6;
-        public static final int imageButton_popup_loggedfault_delete_cancel=0x7f0b05f3;
-        public static final int imageButton_popup_loggedfault_delete_ok=0x7f0b05f2;
-        public static final int imageButton_popup_maint_replace_cancel=0x7f0b05fb;
-        public static final int imageButton_popup_maint_replace_ok=0x7f0b05fa;
-        public static final int imageButton_popup_operationhistory_init_cancel=0x7f0b0603;
-        public static final int imageButton_popup_operationhistory_init_ok=0x7f0b0602;
-        public static final int imageButton_popup_softend_init_cancel=0x7f0b0611;
-        public static final int imageButton_popup_softend_init_ok=0x7f0b0610;
-        public static final int imageButton_popup_speedometer_freq_init_cancel=0x7f0b061d;
-        public static final int imageButton_popup_speedometer_freq_init_ok=0x7f0b061c;
-        public static final int imageButton_rightdown_main_b_quick_multimedia=0x7f0b0634;
-        public static final int imageButton_rightdown_main_b_tm_ccomode=0x7f0b0636;
-        public static final int imageButton_rightdown_main_b_tm_shiftmode=0x7f0b0637;
-        public static final int imageButton_rightdown_main_b_tm_tclockup=0x7f0b0638;
-        public static final int imageButton_rightup_main_b_engine_mode=0x7f0b065e;
-        public static final int imageButton_rightup_main_b_engine_warmingup=0x7f0b065f;
-        public static final int imageButton_upper_main_b_menubar_buzzer=0x7f0b069c;
-        public static final int imageButton_upper_main_b_menubar_camera=0x7f0b069e;
-        public static final int imageButton_upper_main_b_menubar_menu=0x7f0b069f;
-        public static final int imageButton_upper_main_b_menubar_time=0x7f0b069b;
-        public static final int imageButton_upper_main_b_menubar_wiper=0x7f0b069d;
+        public static final int imageButton_menu_list_left_management=0x7f0b0597;
+        public static final int imageButton_menu_list_left_mode=0x7f0b0595;
+        public static final int imageButton_menu_list_left_monitoring=0x7f0b0596;
+        public static final int imageButton_menu_list_left_multimedia=0x7f0b0599;
+        public static final int imageButton_menu_list_left_preference=0x7f0b0598;
+        public static final int imageButton_menu_list_title_back=0x7f0b05a4;
+        public static final int imageButton_menu_list_title_home=0x7f0b05a5;
+        public static final int imageButton_popup_anglecalibration_result_ok=0x7f0b05ab;
+        public static final int imageButton_popup_brakepedalcalibration_ok=0x7f0b05b1;
+        public static final int imageButton_popup_engineautoshutdown_count_cancel=0x7f0b05c8;
+        public static final int imageButton_popup_engineautoshutdown_count_skip=0x7f0b05c7;
+        public static final int imageButton_popup_key_quickcoupler_locking_1_cancel=0x7f0b05d9;
+        public static final int imageButton_popup_key_quickcoupler_locking_1_ok=0x7f0b05d8;
+        public static final int imageButton_popup_key_quickcoupler_locking_2_cancel=0x7f0b05e1;
+        public static final int imageButton_popup_key_quickcoupler_unlocking_1_cancel=0x7f0b05e8;
+        public static final int imageButton_popup_key_quickcoupler_unlocking_1_ok=0x7f0b05e7;
+        public static final int imageButton_popup_key_quickcoupler_unlocking_2_cancel=0x7f0b05f0;
+        public static final int imageButton_popup_key_quickcoupler_unlocking_3_lock=0x7f0b05f7;
+        public static final int imageButton_popup_key_quickcoupler_unlocking_3_ok=0x7f0b05f8;
+        public static final int imageButton_popup_loggedfault_delete_cancel=0x7f0b0605;
+        public static final int imageButton_popup_loggedfault_delete_ok=0x7f0b0604;
+        public static final int imageButton_popup_maint_replace_cancel=0x7f0b060d;
+        public static final int imageButton_popup_maint_replace_ok=0x7f0b060c;
+        public static final int imageButton_popup_operationhistory_init_cancel=0x7f0b0615;
+        public static final int imageButton_popup_operationhistory_init_ok=0x7f0b0614;
+        public static final int imageButton_popup_softend_init_cancel=0x7f0b0623;
+        public static final int imageButton_popup_softend_init_ok=0x7f0b0622;
+        public static final int imageButton_popup_speedometer_freq_init_cancel=0x7f0b062f;
+        public static final int imageButton_popup_speedometer_freq_init_ok=0x7f0b062e;
+        public static final int imageButton_rightdown_main_b_quick_multimedia=0x7f0b0646;
+        public static final int imageButton_rightdown_main_b_tm_ccomode=0x7f0b0648;
+        public static final int imageButton_rightdown_main_b_tm_shiftmode=0x7f0b0649;
+        public static final int imageButton_rightdown_main_b_tm_tclockup=0x7f0b064a;
+        public static final int imageButton_rightup_main_b_engine_mode=0x7f0b0670;
+        public static final int imageButton_rightup_main_b_engine_warmingup=0x7f0b0671;
+        public static final int imageButton_upper_main_b_menubar_buzzer=0x7f0b06ae;
+        public static final int imageButton_upper_main_b_menubar_camera=0x7f0b06b0;
+        public static final int imageButton_upper_main_b_menubar_menu=0x7f0b06b1;
+        public static final int imageButton_upper_main_b_menubar_time=0x7f0b06ad;
+        public static final int imageButton_upper_main_b_menubar_wiper=0x7f0b06af;
         public static final int imageViewBlank_fault=0x7f0b0111;
         public static final int imageViewInfoIcon_fault=0x7f0b010e;
         public static final int imageViewInfoIcon_sensormonitoring=0x7f0b0115;
@@ -1598,80 +1600,80 @@ public final class R {
         public static final int imageView_menu_body_preference_clock_low_line_1=0x7f0b0535;
         public static final int imageView_menu_body_preference_clock_low_line_2=0x7f0b0536;
         public static final int imageView_menu_body_preference_clock_low_ok_icon=0x7f0b0537;
-        public static final int imageView_menu_body_preference_unit_line_1=0x7f0b053e;
-        public static final int imageView_menu_body_preference_unit_line_2=0x7f0b053f;
-        public static final int imageView_menu_body_preference_unit_line_3=0x7f0b0540;
-        public static final int imageView_menu_body_preference_unit_low_bg=0x7f0b055b;
-        public static final int imageView_menu_body_preference_unit_low_cancel_icon=0x7f0b0562;
-        public static final int imageView_menu_body_preference_unit_low_line_1=0x7f0b055e;
-        public static final int imageView_menu_body_preference_unit_low_line_2=0x7f0b055f;
-        public static final int imageView_menu_body_preference_unit_low_ok_icon=0x7f0b0560;
-        public static final int imageView_menu_body_preference_unit_pressure_point=0x7f0b0555;
-        public static final int imageView_menu_body_preference_unit_speed_point=0x7f0b0548;
-        public static final int imageView_menu_body_preference_unit_temp_point=0x7f0b0542;
-        public static final int imageView_menu_body_preference_unit_weight_point=0x7f0b054e;
-        public static final int imageView_menu_body_userswitching_background=0x7f0b056c;
-        public static final int imageView_menu_body_userswitching_icon=0x7f0b0573;
-        public static final int imageView_menu_body_userswitching_line=0x7f0b0564;
-        public static final int imageView_menu_body_userswitching_line1=0x7f0b056e;
-        public static final int imageView_menu_body_userswitching_line2=0x7f0b0570;
-        public static final int imageView_menu_body_userswitching_line3=0x7f0b0572;
-        public static final int imageView_menu_body_userswitching_low_apply_icon=0x7f0b0580;
-        public static final int imageView_menu_body_userswitching_low_bg=0x7f0b0576;
-        public static final int imageView_menu_body_userswitching_low_line_1=0x7f0b0579;
-        public static final int imageView_menu_body_userswitching_low_line_2=0x7f0b057b;
-        public static final int imageView_menu_body_userswitching_low_ok_icon=0x7f0b057c;
-        public static final int imageView_menu_body_userswitching_low_save_icon=0x7f0b057e;
-        public static final int imageView_menu_list_left_management=0x7f0b058a;
-        public static final int imageView_menu_list_left_mode=0x7f0b0588;
-        public static final int imageView_menu_list_left_monitoring=0x7f0b0589;
-        public static final int imageView_menu_list_left_multimedia=0x7f0b058c;
-        public static final int imageView_menu_list_left_preference=0x7f0b058b;
-        public static final int imageView_menu_title_bg=0x7f0b0693;
-        public static final int imageView_popup_bucketpriority_line=0x7f0b05a1;
-        public static final int imageView_popup_ccomode_line=0x7f0b05a5;
-        public static final int imageView_popup_ehcu_err_line=0x7f0b05ab;
-        public static final int imageView_popup_enginemode_line=0x7f0b05b9;
-        public static final int imageView_popup_iccomode_line=0x7f0b05be;
-        public static final int imageView_popup_key_quickcoupler_locking_2=0x7f0b05cd;
-        public static final int imageView_popup_key_quickcoupler_unlocking_2=0x7f0b05dc;
-        public static final int imageView_popup_key_quickcoupler_unlocking_3=0x7f0b05e3;
-        public static final int imageView_popup_kickdown_line=0x7f0b05ea;
-        public static final int imageView_popup_shiftmode_line=0x7f0b0606;
-        public static final int imageView_popup_soundoutput_line=0x7f0b0614;
-        public static final int imageView_popup_tclockup_line=0x7f0b0620;
-        public static final int imageView_popup_warmingup_line=0x7f0b0624;
-        public static final int imageView_popup_weighing_error_line=0x7f0b0628;
-        public static final int imageView_popup_workload_init_line=0x7f0b062b;
-        public static final int imageView_rightdown_main_b_quick_icon=0x7f0b0632;
-        public static final int imageView_rightdown_main_b_tm_line1=0x7f0b063a;
-        public static final int imageView_rightdown_main_b_tm_line2=0x7f0b0641;
-        public static final int imageView_rightdown_main_b_tmccomode_line=0x7f0b0646;
-        public static final int imageView_rightdown_main_b_tmiccomode_line=0x7f0b064d;
-        public static final int imageView_rightdown_main_b_tmshiftmode_line=0x7f0b0652;
-        public static final int imageView_rightdown_main_b_tmtclockup_line=0x7f0b0659;
-        public static final int imageView_rightup_main_b_engine_line=0x7f0b0661;
-        public static final int imageView_rightup_main_b_enginemode_line=0x7f0b0669;
-        public static final int imageView_rightup_main_b_enginewarmingup_line=0x7f0b0670;
-        public static final int imageView_rightup_main_b_quick_icon=0x7f0b0675;
-        public static final int imageView_screen_ending=0x7f0b0677;
-        public static final int imageView_screen_main_b_center_bg=0x7f0b0685;
-        public static final int imageView_screen_main_b_key_body_bg=0x7f0b0681;
-        public static final int imageView_screen_main_b_key_title_bg=0x7f0b0680;
-        public static final int imageView_screen_main_b_leftdown_bg=0x7f0b0687;
-        public static final int imageView_screen_main_b_leftup_bg=0x7f0b0686;
-        public static final int imageView_screen_main_b_rightdown_bg=0x7f0b0689;
-        public static final int imageView_screen_main_b_rightup_bg=0x7f0b0688;
-        public static final int imageView_upper_main_b_menubar_buzzer_070_left=0x7f0b06a6;
-        public static final int imageView_upper_main_b_menubar_buzzer_070_right=0x7f0b06a7;
-        public static final int imageView_upper_main_b_menubar_buzzer_normal=0x7f0b06a5;
-        public static final int imageView_upper_main_b_menubar_camera=0x7f0b06ad;
-        public static final int imageView_upper_main_b_menubar_menu=0x7f0b06ae;
-        public static final int imageView_upper_main_b_menubar_wiper_icon=0x7f0b06a8;
-        public static final int imageView_upper_main_b_menubar_wiper_level_1=0x7f0b06a9;
-        public static final int imageView_upper_main_b_menubar_wiper_level_2=0x7f0b06aa;
-        public static final int imageView_upper_main_b_menubar_wiper_level_3=0x7f0b06ab;
-        public static final int imageView_upper_main_b_menubar_wiper_level_4=0x7f0b06ac;
+        public static final int imageView_menu_body_preference_unit_line_1=0x7f0b0550;
+        public static final int imageView_menu_body_preference_unit_line_2=0x7f0b0551;
+        public static final int imageView_menu_body_preference_unit_line_3=0x7f0b0552;
+        public static final int imageView_menu_body_preference_unit_low_bg=0x7f0b056d;
+        public static final int imageView_menu_body_preference_unit_low_cancel_icon=0x7f0b0574;
+        public static final int imageView_menu_body_preference_unit_low_line_1=0x7f0b0570;
+        public static final int imageView_menu_body_preference_unit_low_line_2=0x7f0b0571;
+        public static final int imageView_menu_body_preference_unit_low_ok_icon=0x7f0b0572;
+        public static final int imageView_menu_body_preference_unit_pressure_point=0x7f0b0567;
+        public static final int imageView_menu_body_preference_unit_speed_point=0x7f0b055a;
+        public static final int imageView_menu_body_preference_unit_temp_point=0x7f0b0554;
+        public static final int imageView_menu_body_preference_unit_weight_point=0x7f0b0560;
+        public static final int imageView_menu_body_userswitching_background=0x7f0b057e;
+        public static final int imageView_menu_body_userswitching_icon=0x7f0b0585;
+        public static final int imageView_menu_body_userswitching_line=0x7f0b0576;
+        public static final int imageView_menu_body_userswitching_line1=0x7f0b0580;
+        public static final int imageView_menu_body_userswitching_line2=0x7f0b0582;
+        public static final int imageView_menu_body_userswitching_line3=0x7f0b0584;
+        public static final int imageView_menu_body_userswitching_low_apply_icon=0x7f0b0592;
+        public static final int imageView_menu_body_userswitching_low_bg=0x7f0b0588;
+        public static final int imageView_menu_body_userswitching_low_line_1=0x7f0b058b;
+        public static final int imageView_menu_body_userswitching_low_line_2=0x7f0b058d;
+        public static final int imageView_menu_body_userswitching_low_ok_icon=0x7f0b058e;
+        public static final int imageView_menu_body_userswitching_low_save_icon=0x7f0b0590;
+        public static final int imageView_menu_list_left_management=0x7f0b059c;
+        public static final int imageView_menu_list_left_mode=0x7f0b059a;
+        public static final int imageView_menu_list_left_monitoring=0x7f0b059b;
+        public static final int imageView_menu_list_left_multimedia=0x7f0b059e;
+        public static final int imageView_menu_list_left_preference=0x7f0b059d;
+        public static final int imageView_menu_title_bg=0x7f0b06a5;
+        public static final int imageView_popup_bucketpriority_line=0x7f0b05b3;
+        public static final int imageView_popup_ccomode_line=0x7f0b05b7;
+        public static final int imageView_popup_ehcu_err_line=0x7f0b05bd;
+        public static final int imageView_popup_enginemode_line=0x7f0b05cb;
+        public static final int imageView_popup_iccomode_line=0x7f0b05d0;
+        public static final int imageView_popup_key_quickcoupler_locking_2=0x7f0b05df;
+        public static final int imageView_popup_key_quickcoupler_unlocking_2=0x7f0b05ee;
+        public static final int imageView_popup_key_quickcoupler_unlocking_3=0x7f0b05f5;
+        public static final int imageView_popup_kickdown_line=0x7f0b05fc;
+        public static final int imageView_popup_shiftmode_line=0x7f0b0618;
+        public static final int imageView_popup_soundoutput_line=0x7f0b0626;
+        public static final int imageView_popup_tclockup_line=0x7f0b0632;
+        public static final int imageView_popup_warmingup_line=0x7f0b0636;
+        public static final int imageView_popup_weighing_error_line=0x7f0b063a;
+        public static final int imageView_popup_workload_init_line=0x7f0b063d;
+        public static final int imageView_rightdown_main_b_quick_icon=0x7f0b0644;
+        public static final int imageView_rightdown_main_b_tm_line1=0x7f0b064c;
+        public static final int imageView_rightdown_main_b_tm_line2=0x7f0b0653;
+        public static final int imageView_rightdown_main_b_tmccomode_line=0x7f0b0658;
+        public static final int imageView_rightdown_main_b_tmiccomode_line=0x7f0b065f;
+        public static final int imageView_rightdown_main_b_tmshiftmode_line=0x7f0b0664;
+        public static final int imageView_rightdown_main_b_tmtclockup_line=0x7f0b066b;
+        public static final int imageView_rightup_main_b_engine_line=0x7f0b0673;
+        public static final int imageView_rightup_main_b_enginemode_line=0x7f0b067b;
+        public static final int imageView_rightup_main_b_enginewarmingup_line=0x7f0b0682;
+        public static final int imageView_rightup_main_b_quick_icon=0x7f0b0687;
+        public static final int imageView_screen_ending=0x7f0b0689;
+        public static final int imageView_screen_main_b_center_bg=0x7f0b0697;
+        public static final int imageView_screen_main_b_key_body_bg=0x7f0b0693;
+        public static final int imageView_screen_main_b_key_title_bg=0x7f0b0692;
+        public static final int imageView_screen_main_b_leftdown_bg=0x7f0b0699;
+        public static final int imageView_screen_main_b_leftup_bg=0x7f0b0698;
+        public static final int imageView_screen_main_b_rightdown_bg=0x7f0b069b;
+        public static final int imageView_screen_main_b_rightup_bg=0x7f0b069a;
+        public static final int imageView_upper_main_b_menubar_buzzer_070_left=0x7f0b06b8;
+        public static final int imageView_upper_main_b_menubar_buzzer_070_right=0x7f0b06b9;
+        public static final int imageView_upper_main_b_menubar_buzzer_normal=0x7f0b06b7;
+        public static final int imageView_upper_main_b_menubar_camera=0x7f0b06bf;
+        public static final int imageView_upper_main_b_menubar_menu=0x7f0b06c0;
+        public static final int imageView_upper_main_b_menubar_wiper_icon=0x7f0b06ba;
+        public static final int imageView_upper_main_b_menubar_wiper_level_1=0x7f0b06bb;
+        public static final int imageView_upper_main_b_menubar_wiper_level_2=0x7f0b06bc;
+        public static final int imageView_upper_main_b_menubar_wiper_level_3=0x7f0b06bd;
+        public static final int imageView_upper_main_b_menubar_wiper_level_4=0x7f0b06be;
         public static final int imageView_userswitching_line1=0x7f0b0119;
         public static final int imageView_userswitching_line2=0x7f0b011b;
         public static final int imageView_userswitching_line3=0x7f0b011d;
@@ -1682,7 +1684,7 @@ public final class R {
         public static final int listView_menu_body_monitoring_fault_logged_list=0x7f0b0457;
         public static final int listView_menu_body_monitoring_version_detail=0x7f0b04bb;
         public static final int listView_menu_body_monitoring_version_monitor=0x7f0b04cb;
-        public static final int listView_menu_body_userswitching=0x7f0b0574;
+        public static final int listView_menu_body_userswitching=0x7f0b0586;
         public static final int progressBar_menu_body_management_calibration_pressure=0x7f0b018e;
         public static final int progressBar_menu_body_management_maint_detail_time=0x7f0b020a;
         public static final int radioButton_key_main_b_beaconlamp_off=0x7f0b0036;
@@ -1782,42 +1784,61 @@ public final class R {
         public static final int radioButton_menu_body_monitoring_fault_engine=0x7f0b043b;
         public static final int radioButton_menu_body_monitoring_fault_machine=0x7f0b043a;
         public static final int radioButton_menu_body_monitoring_fault_transmission=0x7f0b043c;
-        public static final int radioButton_menu_body_preference_Lang1=0x7f0b053c;
-        public static final int radioButton_menu_body_preference_Lang2=0x7f0b053d;
+        public static final int radioButton_menu_body_preference_Lang1=0x7f0b053b;
+        public static final int radioButton_menu_body_preference_Lang10=0x7f0b0544;
+        public static final int radioButton_menu_body_preference_Lang11=0x7f0b0545;
+        public static final int radioButton_menu_body_preference_Lang12=0x7f0b0546;
+        public static final int radioButton_menu_body_preference_Lang13=0x7f0b0547;
+        public static final int radioButton_menu_body_preference_Lang14=0x7f0b0548;
+        public static final int radioButton_menu_body_preference_Lang15=0x7f0b0549;
+        public static final int radioButton_menu_body_preference_Lang16=0x7f0b054a;
+        public static final int radioButton_menu_body_preference_Lang17=0x7f0b054b;
+        public static final int radioButton_menu_body_preference_Lang18=0x7f0b054c;
+        public static final int radioButton_menu_body_preference_Lang19=0x7f0b054d;
+        public static final int radioButton_menu_body_preference_Lang2=0x7f0b053c;
+        public static final int radioButton_menu_body_preference_Lang20=0x7f0b054e;
+        public static final int radioButton_menu_body_preference_Lang21=0x7f0b054f;
+        public static final int radioButton_menu_body_preference_Lang3=0x7f0b053d;
+        public static final int radioButton_menu_body_preference_Lang4=0x7f0b053e;
+        public static final int radioButton_menu_body_preference_Lang5=0x7f0b053f;
+        public static final int radioButton_menu_body_preference_Lang6=0x7f0b0540;
+        public static final int radioButton_menu_body_preference_Lang7=0x7f0b0541;
+        public static final int radioButton_menu_body_preference_Lang8=0x7f0b0542;
+        public static final int radioButton_menu_body_preference_Lang9=0x7f0b0543;
         public static final int radioButton_menu_body_preference_brightness_auto=0x7f0b04e6;
         public static final int radioButton_menu_body_preference_brightness_manual=0x7f0b04e5;
-        public static final int radioButton_menu_body_preference_unit_pressure_bar=0x7f0b0557;
-        public static final int radioButton_menu_body_preference_unit_pressure_kgfcm=0x7f0b0559;
-        public static final int radioButton_menu_body_preference_unit_pressure_mpa=0x7f0b0558;
-        public static final int radioButton_menu_body_preference_unit_pressure_psi=0x7f0b055a;
-        public static final int radioButton_menu_body_preference_unit_speed_km=0x7f0b054b;
-        public static final int radioButton_menu_body_preference_unit_speed_mph=0x7f0b054c;
-        public static final int radioButton_menu_body_preference_unit_temp_c=0x7f0b0546;
-        public static final int radioButton_menu_body_preference_unit_temp_f=0x7f0b0545;
-        public static final int radioButton_menu_body_preference_unit_weight_lb=0x7f0b0552;
-        public static final int radioButton_menu_body_preference_unit_weight_ton=0x7f0b0551;
-        public static final int radioButton_menu_body_userswitching_default=0x7f0b0567;
-        public static final int radioButton_menu_body_userswitching_user1=0x7f0b0568;
-        public static final int radioButton_menu_body_userswitching_user2=0x7f0b0569;
-        public static final int radioButton_menu_body_userswitching_user3=0x7f0b056a;
-        public static final int radioButton_menu_body_userswitching_user4=0x7f0b056b;
-        public static final int radioButton_rightdown_main_b_tmccomode_h=0x7f0b064a;
-        public static final int radioButton_rightdown_main_b_tmccomode_l=0x7f0b0648;
-        public static final int radioButton_rightdown_main_b_tmccomode_m=0x7f0b0649;
-        public static final int radioButton_rightdown_main_b_tmccomode_off=0x7f0b0647;
-        public static final int radioButton_rightdown_main_b_tmiccomode_h=0x7f0b064f;
-        public static final int radioButton_rightdown_main_b_tmiccomode_off=0x7f0b064e;
-        public static final int radioButton_rightdown_main_b_tmshiftmode_ah=0x7f0b0656;
-        public static final int radioButton_rightdown_main_b_tmshiftmode_al=0x7f0b0654;
-        public static final int radioButton_rightdown_main_b_tmshiftmode_an=0x7f0b0655;
-        public static final int radioButton_rightdown_main_b_tmshiftmode_manual=0x7f0b0653;
-        public static final int radioButton_rightdown_main_b_tmtclockup_off=0x7f0b065c;
-        public static final int radioButton_rightdown_main_b_tmtclockup_on=0x7f0b065b;
-        public static final int radioButton_rightup_main_b_enginemode_econo=0x7f0b066b;
-        public static final int radioButton_rightup_main_b_enginemode_power=0x7f0b066d;
-        public static final int radioButton_rightup_main_b_enginemode_standard=0x7f0b066c;
-        public static final int radioButton_rightup_main_b_enginewarmingup_off=0x7f0b0673;
-        public static final int radioButton_rightup_main_b_enginewarmingup_on=0x7f0b0672;
+        public static final int radioButton_menu_body_preference_unit_pressure_bar=0x7f0b0569;
+        public static final int radioButton_menu_body_preference_unit_pressure_kgfcm=0x7f0b056b;
+        public static final int radioButton_menu_body_preference_unit_pressure_mpa=0x7f0b056a;
+        public static final int radioButton_menu_body_preference_unit_pressure_psi=0x7f0b056c;
+        public static final int radioButton_menu_body_preference_unit_speed_km=0x7f0b055d;
+        public static final int radioButton_menu_body_preference_unit_speed_mph=0x7f0b055e;
+        public static final int radioButton_menu_body_preference_unit_temp_c=0x7f0b0558;
+        public static final int radioButton_menu_body_preference_unit_temp_f=0x7f0b0557;
+        public static final int radioButton_menu_body_preference_unit_weight_lb=0x7f0b0564;
+        public static final int radioButton_menu_body_preference_unit_weight_ton=0x7f0b0563;
+        public static final int radioButton_menu_body_userswitching_default=0x7f0b0579;
+        public static final int radioButton_menu_body_userswitching_user1=0x7f0b057a;
+        public static final int radioButton_menu_body_userswitching_user2=0x7f0b057b;
+        public static final int radioButton_menu_body_userswitching_user3=0x7f0b057c;
+        public static final int radioButton_menu_body_userswitching_user4=0x7f0b057d;
+        public static final int radioButton_rightdown_main_b_tmccomode_h=0x7f0b065c;
+        public static final int radioButton_rightdown_main_b_tmccomode_l=0x7f0b065a;
+        public static final int radioButton_rightdown_main_b_tmccomode_m=0x7f0b065b;
+        public static final int radioButton_rightdown_main_b_tmccomode_off=0x7f0b0659;
+        public static final int radioButton_rightdown_main_b_tmiccomode_h=0x7f0b0661;
+        public static final int radioButton_rightdown_main_b_tmiccomode_off=0x7f0b0660;
+        public static final int radioButton_rightdown_main_b_tmshiftmode_ah=0x7f0b0668;
+        public static final int radioButton_rightdown_main_b_tmshiftmode_al=0x7f0b0666;
+        public static final int radioButton_rightdown_main_b_tmshiftmode_an=0x7f0b0667;
+        public static final int radioButton_rightdown_main_b_tmshiftmode_manual=0x7f0b0665;
+        public static final int radioButton_rightdown_main_b_tmtclockup_off=0x7f0b066e;
+        public static final int radioButton_rightdown_main_b_tmtclockup_on=0x7f0b066d;
+        public static final int radioButton_rightup_main_b_enginemode_econo=0x7f0b067d;
+        public static final int radioButton_rightup_main_b_enginemode_power=0x7f0b067f;
+        public static final int radioButton_rightup_main_b_enginemode_standard=0x7f0b067e;
+        public static final int radioButton_rightup_main_b_enginewarmingup_off=0x7f0b0685;
+        public static final int radioButton_rightup_main_b_enginewarmingup_on=0x7f0b0684;
         public static final int radioGroup_key_main_b_beaconlamp=0x7f0b0035;
         public static final int radioGroup_key_main_b_detent_boom=0x7f0b003d;
         public static final int radioGroup_key_main_b_detent_bucket=0x7f0b0044;
@@ -1843,16 +1864,15 @@ public final class R {
         public static final int radioGroup_menu_body_mode_workload_errordetect=0x7f0b03c8;
         public static final int radioGroup_menu_body_monitoring_ehcuioinfo_boomleverfloat=0x7f0b0415;
         public static final int radioGroup_menu_body_monitoring_fault=0x7f0b0439;
-        public static final int radioGroup_menu_body_preference_Language=0x7f0b053b;
         public static final int radioGroup_menu_body_preference_brightness=0x7f0b04e4;
         public static final int radioGroup_menu_body_preference_clock_data=0x7f0b051f;
-        public static final int radioGroup_menu_body_preference_unit_speed=0x7f0b054a;
-        public static final int radioGroup_menu_body_preference_unit_temp=0x7f0b0544;
-        public static final int radioGroup_menu_body_preference_unit_weight=0x7f0b0550;
-        public static final int radioGroup_menu_body_userswitching=0x7f0b0566;
-        public static final int radioGroup_rightdown_main_b_tmtclockup=0x7f0b065a;
-        public static final int radioGroup_rightup_main_b_enginemode=0x7f0b066a;
-        public static final int radioGroup_rightup_main_b_enginewarmingup=0x7f0b0671;
+        public static final int radioGroup_menu_body_preference_unit_speed=0x7f0b055c;
+        public static final int radioGroup_menu_body_preference_unit_temp=0x7f0b0556;
+        public static final int radioGroup_menu_body_preference_unit_weight=0x7f0b0562;
+        public static final int radioGroup_menu_body_userswitching=0x7f0b0578;
+        public static final int radioGroup_rightdown_main_b_tmtclockup=0x7f0b066c;
+        public static final int radioGroup_rightup_main_b_enginemode=0x7f0b067c;
+        public static final int radioGroup_rightup_main_b_enginewarmingup=0x7f0b0683;
         public static final int radio_menu_body_mode_speedometerfreq_data_1=0x7f0b0385;
         public static final int radio_menu_body_mode_speedometerfreq_data_10=0x7f0b0384;
         public static final int radio_menu_body_mode_speedometerfreq_data_under_01=0x7f0b0388;
@@ -1861,7 +1881,7 @@ public final class R {
         public static final int radio_menu_body_preference_clock_hour_10=0x7f0b0520;
         public static final int radio_menu_body_preference_clock_min_1=0x7f0b0524;
         public static final int radio_menu_body_preference_clock_min_10=0x7f0b0523;
-        public static final int scrollView1=0x7f0b05ae;
+        public static final int scrollView1=0x7f0b05c0;
         public static final int scroller=0x7f0b0002;
         public static final int seekBar_key_main_b_ridecontrol_speed_backward=0x7f0b0089;
         public static final int seekBar_key_main_b_ridecontrol_speed_forward=0x7f0b0081;
@@ -2347,126 +2367,126 @@ public final class R {
         public static final int textView_menu_body_preference_clock_num_7=0x7f0b052c;
         public static final int textView_menu_body_preference_clock_num_8=0x7f0b052d;
         public static final int textView_menu_body_preference_clock_num_9=0x7f0b052e;
-        public static final int textView_menu_body_preference_unit_low_cancel=0x7f0b0563;
-        public static final int textView_menu_body_preference_unit_low_ok=0x7f0b0561;
-        public static final int textView_menu_body_preference_unit_pressure_title=0x7f0b0556;
-        public static final int textView_menu_body_preference_unit_speed_title=0x7f0b0549;
-        public static final int textView_menu_body_preference_unit_temp_title=0x7f0b0543;
-        public static final int textView_menu_body_preference_unit_weight_title=0x7f0b054f;
-        public static final int textView_menu_body_userswitching_first=0x7f0b056d;
-        public static final int textView_menu_body_userswitching_low_apply=0x7f0b0581;
-        public static final int textView_menu_body_userswitching_low_ok=0x7f0b057d;
-        public static final int textView_menu_body_userswitching_low_save=0x7f0b057f;
-        public static final int textView_menu_body_userswitching_second=0x7f0b056f;
-        public static final int textView_menu_body_userswitching_third=0x7f0b0571;
-        public static final int textView_menu_inter_title_text=0x7f0b0582;
-        public static final int textView_menu_list_left_management=0x7f0b058f;
-        public static final int textView_menu_list_left_mode=0x7f0b058d;
-        public static final int textView_menu_list_left_monitoring=0x7f0b058e;
-        public static final int textView_menu_list_left_multimedia=0x7f0b0591;
-        public static final int textView_menu_list_left_preference=0x7f0b0590;
-        public static final int textView_menu_list_title_text=0x7f0b0594;
-        public static final int textView_popup_anglecalibration_result_ok=0x7f0b059a;
-        public static final int textView_popup_anglecalibration_result_title=0x7f0b0597;
-        public static final int textView_popup_brakepedalcalibration_ok=0x7f0b05a0;
-        public static final int textView_popup_brakepedalcalibration_title=0x7f0b059d;
-        public static final int textView_popup_bucketpriority_off=0x7f0b05a4;
-        public static final int textView_popup_bucketpriority_on=0x7f0b05a3;
-        public static final int textView_popup_bucketpriority_title=0x7f0b05a2;
-        public static final int textView_popup_ccomode_H=0x7f0b05aa;
-        public static final int textView_popup_ccomode_L=0x7f0b05a8;
-        public static final int textView_popup_ccomode_M=0x7f0b05a9;
-        public static final int textView_popup_ccomode_off=0x7f0b05a7;
-        public static final int textView_popup_ccomode_title=0x7f0b05a6;
-        public static final int textView_popup_ehcu_err_data=0x7f0b05af;
-        public static final int textView_popup_ehcu_err_ok=0x7f0b05ad;
-        public static final int textView_popup_ehcu_err_title=0x7f0b05ac;
-        public static final int textView_popup_engineautoshutdown_count_cancel=0x7f0b05b8;
-        public static final int textView_popup_engineautoshutdown_count_skip=0x7f0b05b7;
-        public static final int textView_popup_engineautoshutdown_count_time=0x7f0b05b3;
-        public static final int textView_popup_engineautoshutdown_count_title=0x7f0b05b2;
-        public static final int textView_popup_enginemode_econo=0x7f0b05bb;
-        public static final int textView_popup_enginemode_pwr=0x7f0b05bd;
-        public static final int textView_popup_enginemode_std=0x7f0b05bc;
-        public static final int textView_popup_enginemode_title=0x7f0b05ba;
-        public static final int textView_popup_iccomode_h=0x7f0b05c1;
-        public static final int textView_popup_iccomode_off=0x7f0b05c0;
-        public static final int textView_popup_iccomode_title=0x7f0b05bf;
-        public static final int textView_popup_key_quickcoupler_locking_1_cancel=0x7f0b05c9;
-        public static final int textView_popup_key_quickcoupler_locking_1_ok=0x7f0b05c8;
-        public static final int textView_popup_key_quickcoupler_locking_1_title=0x7f0b05c4;
-        public static final int textView_popup_key_quickcoupler_locking_2_cancel=0x7f0b05d0;
-        public static final int textView_popup_key_quickcoupler_locking_2_title=0x7f0b05cc;
-        public static final int textView_popup_key_quickcoupler_unlocking_1_cancel=0x7f0b05d8;
-        public static final int textView_popup_key_quickcoupler_unlocking_1_ok=0x7f0b05d7;
-        public static final int textView_popup_key_quickcoupler_unlocking_1_title=0x7f0b05d3;
-        public static final int textView_popup_key_quickcoupler_unlocking_2_cancel=0x7f0b05df;
-        public static final int textView_popup_key_quickcoupler_unlocking_2_title=0x7f0b05db;
-        public static final int textView_popup_key_quickcoupler_unlocking_3_lock=0x7f0b05e7;
-        public static final int textView_popup_key_quickcoupler_unlocking_3_ok=0x7f0b05e8;
-        public static final int textView_popup_key_quickcoupler_unlocking_3_title=0x7f0b05e2;
-        public static final int textView_popup_kickdown_mode1=0x7f0b05ec;
-        public static final int textView_popup_kickdown_mode2=0x7f0b05ed;
-        public static final int textView_popup_kickdown_title=0x7f0b05eb;
-        public static final int textView_popup_loggedfault_delete_cancel=0x7f0b05f5;
-        public static final int textView_popup_loggedfault_delete_ok=0x7f0b05f4;
-        public static final int textView_popup_loggedfault_delete_title=0x7f0b05f0;
-        public static final int textView_popup_maint_replace_cancel=0x7f0b05fd;
-        public static final int textView_popup_maint_replace_ok=0x7f0b05fc;
-        public static final int textView_popup_maint_replace_title=0x7f0b05f8;
-        public static final int textView_popup_operationhistory_init_cancel=0x7f0b0605;
-        public static final int textView_popup_operationhistory_init_ok=0x7f0b0604;
-        public static final int textView_popup_operationhistory_init_title=0x7f0b0600;
-        public static final int textView_popup_shiftmode_AH=0x7f0b060b;
-        public static final int textView_popup_shiftmode_AL=0x7f0b0609;
-        public static final int textView_popup_shiftmode_AN=0x7f0b060a;
-        public static final int textView_popup_shiftmode_Manual=0x7f0b0608;
-        public static final int textView_popup_shiftmode_title=0x7f0b0607;
-        public static final int textView_popup_softend_init_cancel=0x7f0b0613;
-        public static final int textView_popup_softend_init_ok=0x7f0b0612;
-        public static final int textView_popup_softend_init_title=0x7f0b060e;
-        public static final int textView_popup_soundoutput_aux=0x7f0b0617;
-        public static final int textView_popup_soundoutput_internal=0x7f0b0616;
-        public static final int textView_popup_soundoutput_title=0x7f0b0615;
-        public static final int textView_popup_speedometer_freq_init_cancel=0x7f0b061f;
-        public static final int textView_popup_speedometer_freq_init_ok=0x7f0b061e;
-        public static final int textView_popup_speedometer_freq_init_title=0x7f0b061a;
-        public static final int textView_popup_tclockup_off=0x7f0b0623;
-        public static final int textView_popup_tclockup_on=0x7f0b0622;
-        public static final int textView_popup_tclockup_title=0x7f0b0621;
-        public static final int textView_popup_warmingup_off=0x7f0b0627;
-        public static final int textView_popup_warmingup_on=0x7f0b0626;
-        public static final int textView_popup_warmingup_title=0x7f0b0625;
-        public static final int textView_popup_weighing_error_text=0x7f0b062a;
-        public static final int textView_popup_weighing_error_title=0x7f0b0629;
-        public static final int textView_popup_workload_init_current=0x7f0b062d;
-        public static final int textView_popup_workload_init_title=0x7f0b062c;
-        public static final int textView_popup_workload_init_totala=0x7f0b062e;
-        public static final int textView_popup_workload_init_totalb=0x7f0b062f;
-        public static final int textView_popup_workload_init_totalc=0x7f0b0630;
-        public static final int textView_rightdown_main_b_quick_title=0x7f0b0633;
-        public static final int textView_rightdown_main_b_tm_ccomode_data=0x7f0b063c;
-        public static final int textView_rightdown_main_b_tm_ccomode_title=0x7f0b063b;
-        public static final int textView_rightdown_main_b_tm_shiftmode_data=0x7f0b063f;
-        public static final int textView_rightdown_main_b_tm_shiftmode_title=0x7f0b063e;
-        public static final int textView_rightdown_main_b_tm_tclockup_data=0x7f0b0643;
-        public static final int textView_rightdown_main_b_tm_tclockup_title=0x7f0b0642;
-        public static final int textView_rightdown_main_b_tmccomode_title=0x7f0b0645;
-        public static final int textView_rightdown_main_b_tmiccomode_title=0x7f0b064c;
-        public static final int textView_rightdown_main_b_tmshiftmode_title=0x7f0b0651;
-        public static final int textView_rightdown_main_b_tmtclockup_title=0x7f0b0658;
-        public static final int textView_rightup_main_b_engine_mode_data=0x7f0b0663;
-        public static final int textView_rightup_main_b_engine_mode_title=0x7f0b0662;
-        public static final int textView_rightup_main_b_engine_warmingup_data=0x7f0b0666;
-        public static final int textView_rightup_main_b_engine_warmingup_title=0x7f0b0665;
-        public static final int textView_rightup_main_b_enginemode_title=0x7f0b0668;
-        public static final int textView_rightup_main_b_enginewarmingup_title=0x7f0b066f;
-        public static final int textView_rightup_main_b_quick_title=0x7f0b0676;
-        public static final int textView_upper_main_b_menubar_time_am=0x7f0b06a1;
-        public static final int textView_upper_main_b_menubar_time_colon=0x7f0b06a3;
-        public static final int textView_upper_main_b_menubar_time_hour=0x7f0b06a2;
-        public static final int textView_upper_main_b_menubar_time_min=0x7f0b06a4;
-        public static final int textView_upper_main_b_menubar_time_pm=0x7f0b06a0;
+        public static final int textView_menu_body_preference_unit_low_cancel=0x7f0b0575;
+        public static final int textView_menu_body_preference_unit_low_ok=0x7f0b0573;
+        public static final int textView_menu_body_preference_unit_pressure_title=0x7f0b0568;
+        public static final int textView_menu_body_preference_unit_speed_title=0x7f0b055b;
+        public static final int textView_menu_body_preference_unit_temp_title=0x7f0b0555;
+        public static final int textView_menu_body_preference_unit_weight_title=0x7f0b0561;
+        public static final int textView_menu_body_userswitching_first=0x7f0b057f;
+        public static final int textView_menu_body_userswitching_low_apply=0x7f0b0593;
+        public static final int textView_menu_body_userswitching_low_ok=0x7f0b058f;
+        public static final int textView_menu_body_userswitching_low_save=0x7f0b0591;
+        public static final int textView_menu_body_userswitching_second=0x7f0b0581;
+        public static final int textView_menu_body_userswitching_third=0x7f0b0583;
+        public static final int textView_menu_inter_title_text=0x7f0b0594;
+        public static final int textView_menu_list_left_management=0x7f0b05a1;
+        public static final int textView_menu_list_left_mode=0x7f0b059f;
+        public static final int textView_menu_list_left_monitoring=0x7f0b05a0;
+        public static final int textView_menu_list_left_multimedia=0x7f0b05a3;
+        public static final int textView_menu_list_left_preference=0x7f0b05a2;
+        public static final int textView_menu_list_title_text=0x7f0b05a6;
+        public static final int textView_popup_anglecalibration_result_ok=0x7f0b05ac;
+        public static final int textView_popup_anglecalibration_result_title=0x7f0b05a9;
+        public static final int textView_popup_brakepedalcalibration_ok=0x7f0b05b2;
+        public static final int textView_popup_brakepedalcalibration_title=0x7f0b05af;
+        public static final int textView_popup_bucketpriority_off=0x7f0b05b6;
+        public static final int textView_popup_bucketpriority_on=0x7f0b05b5;
+        public static final int textView_popup_bucketpriority_title=0x7f0b05b4;
+        public static final int textView_popup_ccomode_H=0x7f0b05bc;
+        public static final int textView_popup_ccomode_L=0x7f0b05ba;
+        public static final int textView_popup_ccomode_M=0x7f0b05bb;
+        public static final int textView_popup_ccomode_off=0x7f0b05b9;
+        public static final int textView_popup_ccomode_title=0x7f0b05b8;
+        public static final int textView_popup_ehcu_err_data=0x7f0b05c1;
+        public static final int textView_popup_ehcu_err_ok=0x7f0b05bf;
+        public static final int textView_popup_ehcu_err_title=0x7f0b05be;
+        public static final int textView_popup_engineautoshutdown_count_cancel=0x7f0b05ca;
+        public static final int textView_popup_engineautoshutdown_count_skip=0x7f0b05c9;
+        public static final int textView_popup_engineautoshutdown_count_time=0x7f0b05c5;
+        public static final int textView_popup_engineautoshutdown_count_title=0x7f0b05c4;
+        public static final int textView_popup_enginemode_econo=0x7f0b05cd;
+        public static final int textView_popup_enginemode_pwr=0x7f0b05cf;
+        public static final int textView_popup_enginemode_std=0x7f0b05ce;
+        public static final int textView_popup_enginemode_title=0x7f0b05cc;
+        public static final int textView_popup_iccomode_h=0x7f0b05d3;
+        public static final int textView_popup_iccomode_off=0x7f0b05d2;
+        public static final int textView_popup_iccomode_title=0x7f0b05d1;
+        public static final int textView_popup_key_quickcoupler_locking_1_cancel=0x7f0b05db;
+        public static final int textView_popup_key_quickcoupler_locking_1_ok=0x7f0b05da;
+        public static final int textView_popup_key_quickcoupler_locking_1_title=0x7f0b05d6;
+        public static final int textView_popup_key_quickcoupler_locking_2_cancel=0x7f0b05e2;
+        public static final int textView_popup_key_quickcoupler_locking_2_title=0x7f0b05de;
+        public static final int textView_popup_key_quickcoupler_unlocking_1_cancel=0x7f0b05ea;
+        public static final int textView_popup_key_quickcoupler_unlocking_1_ok=0x7f0b05e9;
+        public static final int textView_popup_key_quickcoupler_unlocking_1_title=0x7f0b05e5;
+        public static final int textView_popup_key_quickcoupler_unlocking_2_cancel=0x7f0b05f1;
+        public static final int textView_popup_key_quickcoupler_unlocking_2_title=0x7f0b05ed;
+        public static final int textView_popup_key_quickcoupler_unlocking_3_lock=0x7f0b05f9;
+        public static final int textView_popup_key_quickcoupler_unlocking_3_ok=0x7f0b05fa;
+        public static final int textView_popup_key_quickcoupler_unlocking_3_title=0x7f0b05f4;
+        public static final int textView_popup_kickdown_mode1=0x7f0b05fe;
+        public static final int textView_popup_kickdown_mode2=0x7f0b05ff;
+        public static final int textView_popup_kickdown_title=0x7f0b05fd;
+        public static final int textView_popup_loggedfault_delete_cancel=0x7f0b0607;
+        public static final int textView_popup_loggedfault_delete_ok=0x7f0b0606;
+        public static final int textView_popup_loggedfault_delete_title=0x7f0b0602;
+        public static final int textView_popup_maint_replace_cancel=0x7f0b060f;
+        public static final int textView_popup_maint_replace_ok=0x7f0b060e;
+        public static final int textView_popup_maint_replace_title=0x7f0b060a;
+        public static final int textView_popup_operationhistory_init_cancel=0x7f0b0617;
+        public static final int textView_popup_operationhistory_init_ok=0x7f0b0616;
+        public static final int textView_popup_operationhistory_init_title=0x7f0b0612;
+        public static final int textView_popup_shiftmode_AH=0x7f0b061d;
+        public static final int textView_popup_shiftmode_AL=0x7f0b061b;
+        public static final int textView_popup_shiftmode_AN=0x7f0b061c;
+        public static final int textView_popup_shiftmode_Manual=0x7f0b061a;
+        public static final int textView_popup_shiftmode_title=0x7f0b0619;
+        public static final int textView_popup_softend_init_cancel=0x7f0b0625;
+        public static final int textView_popup_softend_init_ok=0x7f0b0624;
+        public static final int textView_popup_softend_init_title=0x7f0b0620;
+        public static final int textView_popup_soundoutput_aux=0x7f0b0629;
+        public static final int textView_popup_soundoutput_internal=0x7f0b0628;
+        public static final int textView_popup_soundoutput_title=0x7f0b0627;
+        public static final int textView_popup_speedometer_freq_init_cancel=0x7f0b0631;
+        public static final int textView_popup_speedometer_freq_init_ok=0x7f0b0630;
+        public static final int textView_popup_speedometer_freq_init_title=0x7f0b062c;
+        public static final int textView_popup_tclockup_off=0x7f0b0635;
+        public static final int textView_popup_tclockup_on=0x7f0b0634;
+        public static final int textView_popup_tclockup_title=0x7f0b0633;
+        public static final int textView_popup_warmingup_off=0x7f0b0639;
+        public static final int textView_popup_warmingup_on=0x7f0b0638;
+        public static final int textView_popup_warmingup_title=0x7f0b0637;
+        public static final int textView_popup_weighing_error_text=0x7f0b063c;
+        public static final int textView_popup_weighing_error_title=0x7f0b063b;
+        public static final int textView_popup_workload_init_current=0x7f0b063f;
+        public static final int textView_popup_workload_init_title=0x7f0b063e;
+        public static final int textView_popup_workload_init_totala=0x7f0b0640;
+        public static final int textView_popup_workload_init_totalb=0x7f0b0641;
+        public static final int textView_popup_workload_init_totalc=0x7f0b0642;
+        public static final int textView_rightdown_main_b_quick_title=0x7f0b0645;
+        public static final int textView_rightdown_main_b_tm_ccomode_data=0x7f0b064e;
+        public static final int textView_rightdown_main_b_tm_ccomode_title=0x7f0b064d;
+        public static final int textView_rightdown_main_b_tm_shiftmode_data=0x7f0b0651;
+        public static final int textView_rightdown_main_b_tm_shiftmode_title=0x7f0b0650;
+        public static final int textView_rightdown_main_b_tm_tclockup_data=0x7f0b0655;
+        public static final int textView_rightdown_main_b_tm_tclockup_title=0x7f0b0654;
+        public static final int textView_rightdown_main_b_tmccomode_title=0x7f0b0657;
+        public static final int textView_rightdown_main_b_tmiccomode_title=0x7f0b065e;
+        public static final int textView_rightdown_main_b_tmshiftmode_title=0x7f0b0663;
+        public static final int textView_rightdown_main_b_tmtclockup_title=0x7f0b066a;
+        public static final int textView_rightup_main_b_engine_mode_data=0x7f0b0675;
+        public static final int textView_rightup_main_b_engine_mode_title=0x7f0b0674;
+        public static final int textView_rightup_main_b_engine_warmingup_data=0x7f0b0678;
+        public static final int textView_rightup_main_b_engine_warmingup_title=0x7f0b0677;
+        public static final int textView_rightup_main_b_enginemode_title=0x7f0b067a;
+        public static final int textView_rightup_main_b_enginewarmingup_title=0x7f0b0681;
+        public static final int textView_rightup_main_b_quick_title=0x7f0b0688;
+        public static final int textView_upper_main_b_menubar_time_am=0x7f0b06b3;
+        public static final int textView_upper_main_b_menubar_time_colon=0x7f0b06b5;
+        public static final int textView_upper_main_b_menubar_time_hour=0x7f0b06b4;
+        public static final int textView_upper_main_b_menubar_time_min=0x7f0b06b6;
+        public static final int textView_upper_main_b_menubar_time_pm=0x7f0b06b2;
         public static final int tracks=0x7f0b0003;
         public static final int tv_title=0x7f0b0001;
     }
@@ -2616,8 +2636,8 @@ public final class R {
         public static final int touch=0x7f050001;
     }
     public static final class string {
-        public static final int ACU=0x7f080108;
-        public static final int AEB=0x7f080150;
+        public static final int ACU=0x7f080109;
+        public static final int AEB=0x7f080151;
         public static final int AH=0x7f080068;
         public static final int AL=0x7f080066;
         public static final int AM=0x7f08000c;
@@ -2627,44 +2647,83 @@ public final class R {
         public static final int Access_Denied=0x7f08003e;
         public static final int Active_Camera=0x7f0800d7;
         public static final int Active_Fault=0x7f080010;
-        public static final int Aircon_Heater_Outer_Filter=0x7f08018b;
-        public static final int All_user_tags_deleted=0x7f080170;
+        public static final int Aircon_Heater_Outer_Filter=0x7f08018c;
+        public static final int All_user_tags_deleted=0x7f080171;
         public static final int Apply=0x7f08007e;
+        public static final int Arabic=0x7f0801b8;
         public static final int Attachment_Unlocked_Check_Locking_Status=0x7f0800b5;
         public static final int Auto_Grease=0x7f080092;
         public static final int Automatic=0x7f08001a;
-        public static final int Aux_Down=0x7f0800fd;
-        public static final int Aux_Up=0x7f0800fc;
+        public static final int Aux_Down=0x7f0800fe;
+        public static final int Aux_Up=0x7f0800fd;
         public static final int Auxilliary_Attachment_Max_Flow_Level=0x7f0800cc;
         public static final int Average_Fuel_Rate=0x7f08006b;
-        public static final int BKCU=0x7f080109;
-        public static final int Back_up_Battery_Voltage=0x7f080112;
+        public static final int BKCU=0x7f08010a;
+        public static final int Back_up_Battery_Voltage=0x7f080113;
         public static final int Backward=0x7f0800b0;
         public static final int Battery_Volt=0x7f080071;
         public static final int Beacon_Lamp=0x7f080096;
         public static final int Boom=0x7f08001b;
-        public static final int Boom_Bucket_Angle_Calibration=0x7f08014e;
+        public static final int Boom_Bucket_Angle_Calibration=0x7f08014f;
         public static final int Boom_Bucket_Detent_Mode=0x7f0800cb;
         public static final int Boom_Down=0x7f0800e5;
-        public static final int Boom_Down_Response_Adjust=0x7f080133;
-        public static final int Boom_Lever_Floating_Position_Adjust=0x7f08012c;
+        public static final int Boom_Down_Response_Adjust=0x7f080134;
+        public static final int Boom_Lever_Floating_Position_Adjust=0x7f08012d;
         public static final int Boom_Pressure_Calibration=0x7f0800a6;
         public static final int Boom_Up=0x7f0800e4;
-        public static final int Boom_Up_Speed_Error=0x7f080177;
-        public static final int Boom_lifting_will_be_stopped_automatically_at_a_certain_position_and_calibration_is_completed=0x7f08015d;
-        public static final int Brake_Pedal_Sensor_Calibration=0x7f08014f;
-        public static final int Breather_Hydraulic_tank=0x7f080183;
+        public static final int Boom_Up_Speed_Error=0x7f080178;
+        public static final int Boom_lifting_will_be_stopped_automatically_at_a_certain_position_and_calibration_is_completed=0x7f08015e;
+        public static final int Brake_Pedal_Sensor_Calibration=0x7f080150;
+        public static final int Breather_Hydraulic_tank=0x7f080184;
         /**  Menu Management End 
  Menu Preference Start 
  Menu Management End 
  Menu Preference Start 
  Menu Management End 
  Menu Preference Start 
+ Menu Management End 
+ Menu Preference Start 
+ Menu Management End 
+ Menu Preference Start 
+ Menu Management End 
+ Menu Preference Start 
+ Menu Management End 
+ Menu Preference Start 
+ Menu Management End 
+ Menu Preference Start 
+ Menu Management End 
+ Menu Preference Start 
+ Menu Management End 
+ Menu Preference Start 
+ Menu Management End 
+ Menu Preference Start 
+ Menu Management End 
+ Menu Preference Start 
+ Menu Management End 
+ Menu Preference Start 
+ Menu Management End 
+ Menu Preference Start 
+ Menu Management End 
+ Menu Preference Start 
+ Menu Management End 
+ Menu Preference Start 
+ Menu Management End 
+ Menu Preference Start 
+ Menu Management End 
+ Menu Preference Start 
+ Menu Management End 
+ Menu Preference Start 
+ Menu Management End 
+ Menu Preference Start 
+ Menu Management End 
+ Menu Preference Start 
+ Menu Management End 
+ Menu Preference Start 
          */
-        public static final int Brightness_Setting=0x7f080195;
+        public static final int Brightness_Setting=0x7f080196;
         public static final int Bucket=0x7f08001c;
         public static final int Bucket_Dump=0x7f0800e7;
-        public static final int Bucket_Dump_Response_Adjust=0x7f080134;
+        public static final int Bucket_Dump_Response_Adjust=0x7f080135;
         public static final int Bucket_Full_In_Error=0x7f080076;
         public static final int Bucket_Full_In_Error_Warning=0x7f08008d;
         public static final int Bucket_In=0x7f0800e6;
@@ -2677,17 +2736,17 @@ public final class R {
         public static final int CCO_MODE=0x7f080053;
         public static final int CCO_Mode=0x7f0800c2;
         public static final int CURRENT_FUEL_RATE=0x7f08005a;
-        public static final int Calibration=0x7f080137;
-        public static final int Calibration_ID=0x7f08012b;
-        public static final int Calibration_Version_Number=0x7f080123;
-        public static final int Calibration_completed=0x7f080173;
-        public static final int Calibration_failed=0x7f080174;
-        public static final int Calibration_failed_Machine_Restart=0x7f080172;
+        public static final int Calibration=0x7f080138;
+        public static final int Calibration_ID=0x7f08012c;
+        public static final int Calibration_Version_Number=0x7f080124;
+        public static final int Calibration_completed=0x7f080174;
+        public static final int Calibration_failed=0x7f080175;
+        public static final int Calibration_failed_Machine_Restart=0x7f080173;
         public static final int Camera_Setting=0x7f0800d0;
         public static final int Cancel=0x7f08000f;
-        public static final int Change_AS_Phone_Number=0x7f080139;
-        public static final int Change_Cycle=0x7f080190;
-        public static final int Change_Password=0x7f08013d;
+        public static final int Change_AS_Phone_Number=0x7f08013a;
+        public static final int Change_Cycle=0x7f080191;
+        public static final int Change_Password=0x7f08013e;
         public static final int Check_Armrest_Swtich_On=0x7f08004a;
         public static final int Check_EHCU_Fault_Code=0x7f080047;
         public static final int Check_Engine_Run=0x7f08004b;
@@ -2696,52 +2755,92 @@ public final class R {
         public static final int Check_Steering_Joystick_Position=0x7f080048;
         public static final int Check_TM_Control_Selection=0x7f08004d;
         public static final int Check_joystick_steering_enable_fail_condition=0x7f080046;
+        public static final int Chinese=0x7f0801ad;
         public static final int Clear=0x7f080023;
-        public static final int Clock_Setting=0x7f080196;
-        public static final int Cluster=0x7f080105;
-        public static final int Communication_Antenna=0x7f080115;
-        public static final int Complete=0x7f080157;
-        public static final int Confirm_Reset_elapsed_time=0x7f080193;
+        public static final int Clock_Setting=0x7f080197;
+        public static final int Cluster=0x7f080106;
+        public static final int Communication_Antenna=0x7f080116;
+        public static final int Complete=0x7f080158;
+        public static final int Confirm_Reset_elapsed_time=0x7f080194;
         public static final int Coolant_Temp=0x7f080073;
         public static final int Cooling_Fan_Reverse_Mode=0x7f0800d1;
-        public static final int Count=0x7f08018d;
-        public static final int Crankcase_Ventilation_Filter=0x7f08018a;
+        public static final int Count=0x7f08018e;
+        public static final int Crankcase_Ventilation_Filter=0x7f08018b;
         public static final int Crash_Data=0x7f080005;
         public static final int Crash_Toast_Text=0x7f080003;
-        public static final int Current=0x7f0800fe;
+        public static final int Current=0x7f0800ff;
         public static final int Current_Data=0x7f080080;
         public static final int Current_Fuel_Rate=0x7f08006c;
         public static final int Current_Password=0x7f08003b;
-        public static final int Customer_Serial_Number=0x7f08011e;
-        public static final int Cycle=0x7f08018f;
+        public static final int Customer_Serial_Number=0x7f08011f;
+        public static final int Cycle=0x7f080190;
         public static final int Daily=0x7f0800a7;
         public static final int Day=0x7f080030;
-        public static final int Daytime=0x7f08019c;
+        public static final int Daytime=0x7f08019d;
         public static final int Default=0x7f080018;
-        public static final int Delete=0x7f08014d;
-        public static final int Delete_Logged_Fault=0x7f080131;
-        public static final int Delete_failed=0x7f080171;
-        public static final int Deleting=0x7f080168;
+        public static final int Delete=0x7f08014e;
+        public static final int Delete_Logged_Fault=0x7f080132;
+        public static final int Delete_failed=0x7f080172;
+        public static final int Deleting=0x7f080169;
         public static final int Detent_Setting=0x7f080099;
         public static final int Disable=0x7f080014;
         public static final int Display_Order=0x7f0800d8;
-        public static final int Display_Style=0x7f08019a;
+        public static final int Display_Style=0x7f08019b;
         public static final int Do_not_show_again=0x7f0800b8;
         public static final int Do_you_want_to_turn_on_Auto_Grease=0x7f0800b7;
         public static final int Do_you_want_to_turn_on_Mirror_Heat=0x7f0800b6;
-        public static final int ECM=0x7f080102;
-        public static final int ECM_Identifier=0x7f080124;
-        public static final int ECM_Part_Number=0x7f080120;
-        public static final int ECM_Serial_Number=0x7f080121;
+        public static final int Dutch=0x7f0801b0;
+        public static final int ECM=0x7f080103;
+        public static final int ECM_Identifier=0x7f080125;
+        public static final int ECM_Part_Number=0x7f080121;
+        public static final int ECM_Serial_Number=0x7f080122;
         public static final int ECONO=0x7f08005d;
-        public static final int ECU_Location=0x7f080128;
-        public static final int ECU_Manufacturer_Name=0x7f08012a;
-        public static final int ECU_Part_Number=0x7f080126;
-        public static final int ECU_Serial_Number=0x7f080127;
-        public static final int ECU_Type=0x7f080129;
-        public static final int EHCU=0x7f080107;
-        public static final int EHCU_IO_Information=0x7f0800f7;
+        public static final int ECU_Location=0x7f080129;
+        public static final int ECU_Manufacturer_Name=0x7f08012b;
+        public static final int ECU_Part_Number=0x7f080127;
+        public static final int ECU_Serial_Number=0x7f080128;
+        public static final int ECU_Type=0x7f08012a;
+        public static final int EHCU=0x7f080108;
+        public static final int EHCU_IO_Information=0x7f0800f8;
         /**  Common End
+ Main Start
+ Common End
+ Main Start
+ Common End
+ Main Start
+ Common End
+ Main Start
+ Common End
+ Main Start
+ Common End 
+ Main Start 
+ Common End
+ Main Start
+ Common End
+ Main Start
+ Common End
+ Main Start
+ Common End
+ Main Start
+ Common End
+ Main Start
+ Common End
+ Main Start
+ Common End
+ Main Start
+ Common End
+ Main Start
+ Common End
+ Main Start
+ Common End
+ Main Start
+ Common End
+ Main Start
+ Common End
+ Main Start
+ Common End
+ Main Start
+ Common End
  Main Start
  Common End
  Main Start
@@ -2749,12 +2848,12 @@ public final class R {
  Main Start
          */
         public static final int ENGINE_MODE=0x7f080051;
-        public static final int EPPR_Current=0x7f0800fb;
-        public static final int ESL_System_Setting=0x7f08013c;
-        public static final int EST37A_Part_Number=0x7f08011b;
+        public static final int EPPR_Current=0x7f0800fc;
+        public static final int ESL_System_Setting=0x7f08013d;
+        public static final int EST37A_Part_Number=0x7f08011c;
         public static final int ETC=0x7f0800c1;
         public static final int Econo=0x7f0800e9;
-        public static final int Elapsed_Time=0x7f08018e;
+        public static final int Elapsed_Time=0x7f08018f;
         public static final int Enable=0x7f080015;
         /**  Menu End 
  Menu Mode Start 
@@ -2762,76 +2861,140 @@ public final class R {
  Menu Mode Start 
  Menu End 
  Menu Mode Start 
+ Menu End 
+ Menu Mode Start 
+ Menu End 
+ Menu Mode Start 
+ Menu End 
+ Menu Mode Start 
+ Menu End 
+ Menu Mode Start 
+ Menu End 
+ Menu Mode Start 
+ Menu End 
+ Menu Mode Start 
+ Menu End 
+ Menu Mode Start 
+ Menu End 
+ Menu Mode Start 
+ Menu End 
+ Menu Mode Start 
+ Menu End 
+ Menu Mode Start 
+ Menu End 
+ Menu Mode Start 
+ Menu End 
+ Menu Mode Start 
+ Menu End 
+ Menu Mode Start 
+ Menu End 
+ Menu Mode Start 
+ Menu End 
+ Menu Mode Start 
+ Menu End 
+ Menu Mode Start 
+ Menu End 
+ Menu Mode Start 
+ Menu End 
+ Menu Mode Start 
+ Menu End 
+ Menu Mode Start 
          */
         public static final int Eng=0x7f0800be;
-        public static final int Engine=0x7f08012e;
+        public static final int Engine=0x7f08012f;
         public static final int Engine_Auto_Shutdown=0x7f0800ce;
         public static final int Engine_Delay_Shutdown=0x7f0800cf;
         public static final int Engine_Mode=0x7f0800e8;
         public static final int Engine_Setting=0x7f0800c7;
         public static final int Engine_Speed=0x7f0800c6;
-        public static final int Engine_oil=0x7f08017c;
-        public static final int Engine_oil_filter=0x7f080180;
-        public static final int English=0x7f0801a7;
+        public static final int Engine_oil=0x7f08017d;
+        public static final int Engine_oil_filter=0x7f080181;
+        public static final int English=0x7f0801a8;
         public static final int Error_Detection=0x7f0800a5;
         public static final int Error_Report=0x7f080004;
+        public static final int Estonian=0x7f0801b4;
         public static final int Excute=0x7f0800f1;
         public static final int Excute_Locking_Attachment=0x7f0800b1;
         public static final int Excute_Unlocking_Attachment=0x7f0800b3;
         public static final int Excuting_Locking_Attachment=0x7f0800b2;
         public static final int Excuting_Unlocking_Attachment=0x7f0800b4;
-        public static final int External_Aux=0x7f08019f;
+        public static final int External_Aux=0x7f0801a0;
         public static final int F=0x7f080008;
         public static final int FN=0x7f08009b;
-        public static final int Fan_EPPR_Current_Adjust=0x7f08017a;
+        public static final int Fan_EPPR_Current_Adjust=0x7f08017b;
         public static final int Fast=0x7f0800ef;
-        public static final int Fault_History=0x7f0800f6;
+        public static final int Fault_History=0x7f0800f7;
         public static final int Fine_Modulation=0x7f08009a;
-        public static final int Fingertip_Calibration=0x7f080132;
+        public static final int Fingertip_Calibration=0x7f080133;
         public static final int Finish=0x7f08004e;
-        public static final int Firmware_Version=0x7f08011a;
-        public static final int First_Calibration=0x7f080159;
-        public static final int First_boom_pressure_calibration_completed=0x7f080162;
+        public static final int Finnish=0x7f0801bb;
+        public static final int Firmware_Version=0x7f08011b;
+        public static final int First_Calibration=0x7f08015a;
+        public static final int First_boom_pressure_calibration_completed=0x7f080163;
         public static final int Forward=0x7f0800af;
+        public static final int French=0x7f0801aa;
         public static final int Front=0x7f08009e;
-        public static final int Front_axle_oil=0x7f080188;
-        public static final int Fuel_Pre_filter=0x7f080182;
-        public static final int Fuel_filter_element=0x7f080181;
-        public static final int GPS_Antenna=0x7f080116;
+        public static final int Front_axle_oil=0x7f080189;
+        public static final int Fuel_Pre_filter=0x7f080183;
+        public static final int Fuel_filter_element=0x7f080182;
+        public static final int GPS_Antenna=0x7f080117;
         public static final int Gear_Linkage_Mode=0x7f0800e1;
+        public static final int German=0x7f0801a9;
         public static final int H=0x7f080064;
         public static final int HYD=0x7f0800c0;
         public static final int HYD_Temp=0x7f08006f;
-        public static final int Hardware=0x7f080135;
-        public static final int Hardware_Part_Number=0x7f08011c;
-        public static final int Hardware_Serial_Number=0x7f08011d;
+        public static final int Hardware=0x7f080136;
+        public static final int Hardware_Part_Number=0x7f08011d;
+        public static final int Hardware_Serial_Number=0x7f08011e;
         public static final int Head_Lamp=0x7f08009d;
         public static final int Help=0x7f080075;
+        public static final int Hindi=0x7f0801b6;
         public static final int Hour=0x7f08002e;
         /**  Common Start
  Common Start
  Common Start
+ Common Start
+ Common Start
+ Common Start 
+ Common Start
+ Common Start
+ Common Start
+ Common Start
+ Common Start
+ Common Start
+ Common Start
+ Common Start
+ Common Start
+ Common Start
+ Common Start
+ Common Start
+ Common Start
+ Common Start
+ Common Start
+ Common Start
          */
         public static final int Hr=0x7f080006;
-        public static final int Hydraulic_Oil_Temp_Error=0x7f080179;
+        public static final int Hydraulic_Oil_Temp_Error=0x7f08017a;
         public static final int Hydraulic_Oil_Temp_Low_Warning=0x7f08008f;
-        public static final int Hydraulic_Tank_Air_Breather_Filter=0x7f080184;
-        public static final int Hydraulic_Tank_Drain_Filter=0x7f08018c;
-        public static final int Hydraulic_oil=0x7f08017d;
-        public static final int Hydraulic_oil_return_filter=0x7f08017f;
+        public static final int Hydraulic_Tank_Air_Breather_Filter=0x7f080185;
+        public static final int Hydraulic_Tank_Drain_Filter=0x7f08018d;
+        public static final int Hydraulic_oil=0x7f08017e;
+        public static final int Hydraulic_oil_return_filter=0x7f080180;
         public static final int Hz=0x7f0800ec;
         public static final int ICCO_MODE=0x7f080054;
         public static final int ICCO_Mode=0x7f0800c3;
         public static final int Incorrect_Password=0x7f080036;
+        public static final int Indonesian=0x7f0801ba;
         public static final int Initial_Para_Error_Found=0x7f08004f;
         public static final int Initialization=0x7f08001d;
         public static final int Initialize_=0x7f080032;
         public static final int Input_new_phone_number=0x7f08003f;
         public static final int Intermittent=0x7f0800ab;
-        public static final int Internal_Speaker=0x7f08019e;
+        public static final int Internal_Speaker=0x7f08019f;
         public static final int Interval=0x7f0800e2;
+        public static final int Italian=0x7f0801af;
         public static final int Item=0x7f08007f;
-        public static final int Joystick_Stroke=0x7f0800fa;
+        public static final int Joystick_Stroke=0x7f0800fb;
         public static final int Kick_Down=0x7f0800c5;
         /**  Menu Multimedia End 
  Language Start 
@@ -2839,8 +3002,46 @@ public final class R {
  Language Start 
  Menu Multimedia End 
  Language Start 
+ Menu Multimedia End 
+ Language Start 
+ Menu Multimedia End 
+ Language Start 
+ Menu Multimedia End 
+ Language Start 
+ Menu Multimedia End 
+ Language Start 
+ Menu Multimedia End 
+ Language Start 
+ Menu Multimedia End 
+ Language Start 
+ Menu Multimedia End 
+ Language Start 
+ Menu Multimedia End 
+ Language Start 
+ Menu Multimedia End 
+ Language Start 
+ Menu Multimedia End 
+ Language Start 
+ Menu Multimedia End 
+ Language Start 
+ Menu Multimedia End 
+ Language Start 
+ Menu Multimedia End 
+ Language Start 
+ Menu Multimedia End 
+ Language Start 
+ Menu Multimedia End 
+ Language Start 
+ Menu Multimedia End 
+ Language Start 
+ Menu Multimedia End 
+ Language Start 
+ Menu Multimedia End 
+ Language Start 
+ Menu Multimedia End 
+ Language Start 
          */
-        public static final int Korean=0x7f0801a6;
+        public static final int Korean=0x7f0801a7;
         public static final int L=0x7f080062;
         public static final int LATEST_HOURMETER=0x7f080058;
         public static final int LATEST_ODOMETER=0x7f08005c;
@@ -2854,42 +3055,156 @@ public final class R {
         public static final int Lamp_RideControl=0x7f080086;
         public static final int Lamp_SeatBelt=0x7f080082;
         public static final int Lamp_Warmingup=0x7f080088;
-        public static final int Language=0x7f0801a0;
+        public static final int Language=0x7f0801a1;
         public static final int Latest_Hourmeter=0x7f08006a;
         public static final int Latest_Odometer=0x7f08006e;
-        public static final int Lift_the_boom_to__5_0=0x7f080153;
-        public static final int Lift_up_the_boom_at_max_height=0x7f080152;
+        public static final int Lift_the_boom_to__5_0=0x7f080154;
+        public static final int Lift_up_the_boom_at_max_height=0x7f080153;
         public static final int Loading_Data=0x7f080081;
-        public static final int Lock_Level=0x7f080119;
+        public static final int Lock_Level=0x7f08011a;
         public static final int Locking_Attachment=0x7f0800a0;
-        public static final int Logged_Fault=0x7f0800ff;
+        public static final int Logged_Fault=0x7f080100;
         public static final int Low=0x7f0800ac;
-        public static final int Lower_the_boom_at_min_height=0x7f080151;
+        public static final int Lower_the_boom_at_min_height=0x7f080152;
         public static final int M=0x7f080063;
         public static final int MANUAL=0x7f080065;
-        public static final int MCU=0x7f080104;
+        public static final int MCU=0x7f080105;
         public static final int MODE1=0x7f0800d3;
         public static final int MODE1_DOWN_UP=0x7f0800d5;
         public static final int MODE2=0x7f0800d4;
         public static final int MODE2_DOWN_ONLY=0x7f0800d6;
-        public static final int Machine=0x7f08012d;
+        public static final int Machine=0x7f08012e;
         /**  Menu Mode End 
  Menu Monitoring Start 
  Menu Mode End 
  Menu Monitoring Start 
  Menu Mode End 
  Menu Monitoring Start 
+ Menu Mode End 
+ Menu Monitoring Start 
+ Menu Mode End 
+ Menu Monitoring Start 
+ Menu Mode End 
+ Menu Monitoring Start 
+ Menu Mode End 
+ Menu Monitoring Start 
+ Menu Mode End 
+ Menu Monitoring Start 
+ Menu Mode End 
+ Menu Monitoring Start 
+ Menu Mode End 
+ Menu Monitoring Start 
+ Menu Mode End 
+ Menu Monitoring Start 
+ Menu Mode End 
+ Menu Monitoring Start 
+ Menu Mode End 
+ Menu Monitoring Start 
+ Menu Mode End 
+ Menu Monitoring Start 
+ Menu Mode End 
+ Menu Monitoring Start 
+ Menu Mode End 
+ Menu Monitoring Start 
+ Menu Mode End 
+ Menu Monitoring Start 
+ Menu Mode End 
+ Menu Monitoring Start 
+ Menu Mode End 
+ Menu Monitoring Start 
+ Menu Mode End 
+ Menu Monitoring Start 
+ Menu Mode End 
+ Menu Monitoring Start 
+ Menu Mode End 
+ Menu Monitoring Start 
          */
-        public static final int Machine_Monitoring=0x7f0800f3;
+        public static final int Machine_Monitoring=0x7f0800f4;
         /**  Menu Monitoring End 
  Menu Management Start 
  Menu Monitoring End 
  Menu Management Start 
  Menu Monitoring End 
  Menu Management Start 
+ Menu Monitoring End 
+ Menu Management Start 
+ Menu Monitoring End 
+ Menu Management Start 
+ Menu Monitoring End 
+ Menu Management Start 
+ Menu Monitoring End 
+ Menu Management Start 
+ Menu Monitoring End 
+ Menu Management Start 
+ Menu Monitoring End 
+ Menu Management Start 
+ Menu Monitoring End 
+ Menu Management Start 
+ Menu Monitoring End 
+ Menu Management Start 
+ Menu Monitoring End 
+ Menu Management Start 
+ Menu Monitoring End 
+ Menu Management Start 
+ Menu Monitoring End 
+ Menu Management Start 
+ Menu Monitoring End 
+ Menu Management Start 
+ Menu Monitoring End 
+ Menu Management Start 
+ Menu Monitoring End 
+ Menu Management Start 
+ Menu Monitoring End 
+ Menu Management Start 
+ Menu Monitoring End 
+ Menu Management Start 
+ Menu Monitoring End 
+ Menu Management Start 
+ Menu Monitoring End 
+ Menu Management Start 
+ Menu Monitoring End 
+ Menu Management Start 
          */
-        public static final int Machine_Security=0x7f080136;
+        public static final int Machine_Security=0x7f080137;
         /**  Main End 
+ Key Start
+ Main End 
+ Key Start
+ Main End 
+ Key Start
+ Main End 
+ Key Start
+ Main End 
+ Key Start
+ Main End 
+ Key Start 
+ Main End 
+ Key Start
+ Main End 
+ Key Start
+ Main End 
+ Key Start
+ Main End 
+ Key Start
+ Main End 
+ Key Start
+ Main End 
+ Key Start
+ Main End 
+ Key Start
+ Main End 
+ Key Start
+ Main End 
+ Key Start
+ Main End 
+ Key Start
+ Main End 
+ Key Start
+ Main End 
+ Key Start
+ Main End 
+ Key Start
+ Main End 
  Key Start
  Main End 
  Key Start
@@ -2898,23 +3213,61 @@ public final class R {
          */
         public static final int Main_Light=0x7f080090;
         public static final int Maintenance=0x7f080011;
-        public static final int Maintenance_History=0x7f080192;
-        public static final int Manage_Tag=0x7f08014a;
-        public static final int Manage_Usage=0x7f080149;
+        public static final int Maintenance_History=0x7f080193;
+        public static final int Manage_Tag=0x7f08014b;
+        public static final int Manage_Usage=0x7f08014a;
         public static final int Management=0x7f0800bb;
         public static final int Manual=0x7f080019;
-        public static final int Manufacture_Date=0x7f08010d;
-        public static final int Manufacturer=0x7f080110;
-        public static final int Max_extension_of_bucket_cylinder=0x7f080155;
-        public static final int Max_retraction_of_bucket_cylinder=0x7f080154;
+        public static final int Manufacture_Date=0x7f08010e;
+        public static final int Manufacturer=0x7f080111;
+        public static final int Max_extension_of_bucket_cylinder=0x7f080156;
+        public static final int Max_retraction_of_bucket_cylinder=0x7f080155;
         /**  Menu Preference End 
  Menu Multimedia Start 
  Menu Preference End 
  Menu Multimedia Start 
  Menu Preference End 
  Menu Multimedia Start 
+ Menu Preference End 
+ Menu Multimedia Start 
+ Menu Preference End 
+ Menu Multimedia Start 
+ Menu Preference End 
+ Menu Multimedia Start 
+ Menu Preference End 
+ Menu Multimedia Start 
+ Menu Preference End 
+ Menu Multimedia Start 
+ Menu Preference End 
+ Menu Multimedia Start 
+ Menu Preference End 
+ Menu Multimedia Start 
+ Menu Preference End 
+ Menu Multimedia Start 
+ Menu Preference End 
+ Menu Multimedia Start 
+ Menu Preference End 
+ Menu Multimedia Start 
+ Menu Preference End 
+ Menu Multimedia Start 
+ Menu Preference End 
+ Menu Multimedia Start 
+ Menu Preference End 
+ Menu Multimedia Start 
+ Menu Preference End 
+ Menu Multimedia Start 
+ Menu Preference End 
+ Menu Multimedia Start 
+ Menu Preference End 
+ Menu Multimedia Start 
+ Menu Preference End 
+ Menu Multimedia Start 
+ Menu Preference End 
+ Menu Multimedia Start 
+ Menu Preference End 
+ Menu Multimedia Start 
          */
-        public static final int Media_Palyer=0x7f0801a5;
+        public static final int Media_Palyer=0x7f0801a6;
         public static final int Min=0x7f08002f;
         public static final int Mirror_Heat=0x7f080098;
         /**  Key End 
@@ -2923,129 +3276,177 @@ public final class R {
  Menu Start 
  Key End 
  Menu Start 
+ Key End 
+ Menu Start 
+ Key End 
+ Menu Start 
+ Key End 
+ Menu Start 
+ Key End 
+ Menu Start 
+ Key End 
+ Menu Start 
+ Key End 
+ Menu Start 
+ Key End 
+ Menu Start 
+ Key End 
+ Menu Start 
+ Key End 
+ Menu Start 
+ Key End 
+ Menu Start 
+ Key End 
+ Menu Start 
+ Key End 
+ Menu Start 
+ Key End 
+ Menu Start 
+ Key End 
+ Menu Start 
+ Key End 
+ Menu Start 
+ Key End 
+ Menu Start 
+ Key End 
+ Menu Start 
+ Key End 
+ Menu Start 
+ Key End 
+ Menu Start 
          */
         public static final int Mode=0x7f0800b9;
-        public static final int Model=0x7f080100;
-        public static final int Monitor=0x7f080103;
+        public static final int Model=0x7f080101;
+        public static final int Mongolian=0x7f0801b7;
+        public static final int Monitor=0x7f080104;
         public static final int Monitoring=0x7f0800ba;
         public static final int Mpa=0x7f08002b;
         public static final int Multimedia=0x7f0800bd;
-        public static final int Network_Communication_Status=0x7f080113;
-        public static final int Network_Service=0x7f080114;
-        public static final int Network_Type=0x7f08010c;
+        public static final int Network_Communication_Status=0x7f080114;
+        public static final int Network_Service=0x7f080115;
+        public static final int Network_Type=0x7f08010d;
         public static final int New_Password=0x7f08003c;
-        public static final int Next=0x7f080156;
-        public static final int Nighttime=0x7f08019d;
+        public static final int Next=0x7f080157;
+        public static final int Nighttime=0x7f08019e;
         public static final int No_Changes_executed=0x7f080041;
-        public static final int No_Offset=0x7f080163;
+        public static final int No_Offset=0x7f080164;
         public static final int Normal=0x7f0800ee;
-        public static final int Number_of_Messages_to_Transmit=0x7f080111;
+        public static final int Number_of_Messages_to_Transmit=0x7f080112;
         public static final int OFF=0x7f080061;
         public static final int OK=0x7f08000e;
         public static final int ON=0x7f080060;
         public static final int Off=0x7f080013;
         public static final int On=0x7f080012;
-        public static final int On_After_Specific_Time=0x7f08013f;
+        public static final int On_After_Specific_Time=0x7f080140;
         public static final int On_Always=0x7f080016;
         public static final int On_Conditional_Speed=0x7f0800a2;
         public static final int On_Once=0x7f080017;
-        public static final int Operation=0x7f0800f9;
-        public static final int Operation_History=0x7f0800f4;
-        public static final int Outside_of_Boundary=0x7f080118;
+        public static final int Operation=0x7f0800fa;
+        public static final int Operation_History=0x7f0800f5;
+        public static final int Outside_of_Boundary=0x7f080119;
         public static final int PM=0x7f08000d;
         public static final int POWER=0x7f08005f;
         public static final int Password_Changed=0x7f080039;
         public static final int Percent=0x7f080044;
-        public static final int Pilot_line_filter_element=0x7f08017e;
-        public static final int Plase_press_Enter_key=0x7f080078;
+        public static final int Persian=0x7f0801b9;
+        public static final int Pilot_line_filter_element=0x7f08017f;
+        public static final int Plase_press_Enter_key=0x7f0801bc;
         public static final int Please_Reset_Power=0x7f080050;
-        public static final int Please_refer_to_machine_manual_for_more_detailed_description=0x7f080130;
+        public static final int Please_press_Enter_key=0x7f080078;
+        public static final int Please_refer_to_machine_manual_for_more_detailed_description=0x7f080131;
+        public static final int Portuguese=0x7f0801ac;
         public static final int Position_Lamp=0x7f08009c;
-        public static final int Position_Update=0x7f080117;
+        public static final int Position_Update=0x7f080118;
         public static final int Power=0x7f0800eb;
         public static final int Preference=0x7f0800bc;
-        public static final int Press_Start_button_lift_the_boom_with_the_hydraulic_control_in_detent_position=0x7f08015c;
+        public static final int Press_Start_button_lift_the_boom_with_the_hydraulic_control_in_detent_position=0x7f08015d;
         public static final int Pressure=0x7f080029;
-        public static final int Pressure_Calibration_Warning=0x7f080178;
-        public static final int Product_ID=0x7f080125;
-        public static final int Program_Version=0x7f08010e;
+        public static final int Pressure_Calibration_Warning=0x7f080179;
+        public static final int Product_ID=0x7f080126;
+        public static final int Program_Version=0x7f08010f;
         public static final int Psi=0x7f08002d;
         public static final int Push_and_hold_to_reverse_rotation=0x7f0800f2;
         public static final int Quick_Coupler=0x7f080093;
-        public static final int RMCU=0x7f080106;
-        public static final int RMCU_Machine_Information=0x7f08010b;
-        public static final int Radiator_engine_coolant=0x7f080185;
+        public static final int RMCU=0x7f080107;
+        public static final int RMCU_Machine_Information=0x7f08010c;
+        public static final int Radiator_engine_coolant=0x7f080186;
         public static final int Re_entering_New_Password=0x7f08003d;
         public static final int Re_entering_Password=0x7f08003a;
         public static final int Rear=0x7f08009f;
         public static final int Rear_Wiper=0x7f080097;
-        public static final int Rear_axle_oil=0x7f080189;
-        public static final int Recommend_deleting_unused_tag_for_security_when_you_register_new_tag=0x7f080194;
-        public static final int Registered_Tag=0x7f08014b;
-        public static final int Registering=0x7f080167;
-        public static final int Registration=0x7f08014c;
-        public static final int Registration_failed=0x7f08016f;
-        public static final int Replacement=0x7f080191;
+        public static final int Rear_axle_oil=0x7f08018a;
+        public static final int Recommend_deleting_unused_tag_for_security_when_you_register_new_tag=0x7f080195;
+        public static final int Registered_Tag=0x7f08014c;
+        public static final int Registering=0x7f080168;
+        public static final int Registration=0x7f08014d;
+        public static final int Registration_failed=0x7f080170;
+        public static final int Replacement=0x7f080192;
         public static final int Ride_Control=0x7f080094;
-        public static final int Roll_in_the_bucket_at_max_range_lower_the_boom_at_min_height=0x7f08015b;
+        public static final int Roll_in_the_bucket_at_max_range_lower_the_boom_at_min_height=0x7f08015c;
+        public static final int Russian=0x7f0801ae;
         public static final int SHIFT_MODE=0x7f080055;
         public static final int STANDARD=0x7f08005e;
         public static final int Save=0x7f08007d;
         public static final int Save_Position=0x7f0800ae;
         public static final int Searching=0x7f080038;
         public static final int Sec=0x7f080031;
-        public static final int Second_Calibration=0x7f08015a;
-        public static final int Sensor_Error=0x7f080175;
-        public static final int Sensor_Monitoring=0x7f08015f;
-        public static final int Serial_Number=0x7f08010f;
-        public static final int Service_Contact=0x7f08013a;
-        public static final int Service_Menu=0x7f08013b;
+        public static final int Second_Calibration=0x7f08015b;
+        public static final int Sensor_Error=0x7f080176;
+        public static final int Sensor_Monitoring=0x7f080160;
+        public static final int Serial_Number=0x7f080110;
+        public static final int Service_Contact=0x7f08013b;
+        public static final int Service_Menu=0x7f08013c;
         public static final int Service_Password=0x7f080035;
-        public static final int Set_P_mode_step_on_pedal_max_range_press_Start_button_lift_the_boom_with_the_hydraulic_control_in_detent_position=0x7f08015e;
+        public static final int Set_P_mode_step_on_pedal_max_range_press_Start_button_lift_the_boom_with_the_hydraulic_control_in_detent_position=0x7f08015f;
         public static final int Setting=0x7f080022;
         public static final int Shift_Mode=0x7f0800c4;
         public static final int Skip=0x7f080042;
+        public static final int Slovakian=0x7f0801b3;
         public static final int Slow=0x7f0800ed;
-        public static final int Smart_Key=0x7f08013e;
+        public static final int Smart_Key=0x7f08013f;
         public static final int Soft_End_Stop=0x7f0800cd;
-        public static final int Software_Data_Date_Stamp=0x7f080122;
-        public static final int Software_Update=0x7f08010a;
-        public static final int Software_Version=0x7f08011f;
-        public static final int Sound_Output_Setting=0x7f080198;
+        public static final int Software_Data_Date_Stamp=0x7f080123;
+        public static final int Software_Update=0x7f08010b;
+        public static final int Software_Version=0x7f080120;
+        public static final int Sound_Output_Setting=0x7f080199;
+        public static final int Spanish=0x7f0801ab;
         public static final int Speed=0x7f080027;
-        public static final int Speed_Limit_Setting=0x7f080160;
-        public static final int Speedometer_Freq_Setting=0x7f080138;
+        public static final int Speed_Limit_Setting=0x7f080161;
+        public static final int Speedometer_Setting=0x7f080139;
         public static final int Standard=0x7f0800ea;
-        public static final int Start=0x7f080158;
+        public static final int Start=0x7f080159;
         public static final int SuddenChange_BucketFullIn_Error_Warning=0x7f08008c;
         public static final int Sudden_Change_Error=0x7f080077;
         public static final int Sudden_Change_Error_Warning=0x7f08008e;
-        public static final int TCU=0x7f080101;
+        public static final int Swedish=0x7f0801b1;
+        public static final int TCU=0x7f080102;
         public static final int TC_LOCK_UP=0x7f080056;
         public static final int TC_Lock_Up=0x7f0800c9;
         public static final int TM=0x7f0800bf;
         public static final int TM_Oil_Temp=0x7f080070;
         public static final int TOTAL_HOURMETER=0x7f080057;
         public static final int TOTAL_ODOMETER=0x7f08005b;
-        public static final int Tag_already_registered=0x7f08016e;
+        public static final int Tag_already_registered=0x7f08016f;
         public static final int Temp=0x7f080026;
+        public static final int Thai=0x7f0801b5;
         public static final int Time=0x7f0800e3;
-        public static final int Time_Out=0x7f080176;
-        public static final int Time_settings_for_daytime=0x7f08019b;
+        public static final int Time_Out=0x7f080177;
+        public static final int Time_settings_for_daytime=0x7f08019c;
         public static final int Total_A=0x7f0800a8;
         public static final int Total_B=0x7f0800a9;
         public static final int Total_C=0x7f0800aa;
         public static final int Total_Hourmeter=0x7f080069;
         public static final int Total_Odometer=0x7f08006d;
-        public static final int Transmission=0x7f08012f;
-        public static final int Transmission_oil=0x7f080186;
-        public static final int Transmission_oil_filter=0x7f080187;
-        public static final int Turn_the_engine_off_for_sensor_calibration=0x7f08017b;
-        public static final int Type_A=0x7f0801a1;
-        public static final int Type_B=0x7f0801a2;
-        public static final int Unit_C=0x7f0801a3;
-        public static final int Unit_F=0x7f0801a4;
-        public static final int Unit_Setting=0x7f080197;
+        public static final int Transmission=0x7f080130;
+        public static final int Transmission_oil=0x7f080187;
+        public static final int Transmission_oil_filter=0x7f080188;
+        public static final int Turkish=0x7f0801b2;
+        public static final int Turn_the_engine_off_for_sensor_calibration=0x7f08017c;
+        public static final int Type_A=0x7f0801a2;
+        public static final int Type_B=0x7f0801a3;
+        public static final int Unit_C=0x7f0801a4;
+        public static final int Unit_F=0x7f0801a5;
+        public static final int Unit_Setting=0x7f080198;
         public static final int Unlocking_Attachment=0x7f0800a1;
         public static final int User1=0x7f080079;
         public static final int User2=0x7f08007a;
@@ -3054,45 +3455,45 @@ public final class R {
         public static final int User_Password=0x7f080034;
         public static final int User_Switching=0x7f080074;
         public static final int V=0x7f080009;
-        public static final int Version_Information=0x7f0800f8;
+        public static final int Version_Information=0x7f0800f9;
         public static final int Very_Fast=0x7f0800f0;
         public static final int WARMING_UP=0x7f080052;
         public static final int Waiting_for_initialization=0x7f080033;
         public static final int Warming_Up=0x7f0800c8;
         public static final int Washer=0x7f0800ad;
         public static final int Weighing_Display=0x7f0800a4;
-        public static final int Weighing_Information=0x7f0800f5;
+        public static final int Weighing_Information=0x7f0800f6;
         public static final int Weighing_System=0x7f080072;
-        public static final int Weighing_System_Compensation=0x7f080161;
+        public static final int Weighing_System_Compensation=0x7f080162;
         public static final int Weighing_System_Mode=0x7f0800a3;
         public static final int Weight=0x7f080028;
         public static final int Wiper_Level_Setting=0x7f0800d2;
-        public static final int Wireless_Communication_Setting=0x7f080199;
+        public static final int Wireless_Communication_Setting=0x7f08019a;
         public static final int Work_Light=0x7f080091;
         public static final int Work_Load=0x7f080095;
-        public static final int Work_Tool_1=0x7f080164;
-        public static final int Work_Tool_2=0x7f080165;
-        public static final int Work_Tool_3=0x7f080166;
-        public static final int _10Min=0x7f080141;
-        public static final int _1Day=0x7f080147;
-        public static final int _1Hour=0x7f080144;
+        public static final int Work_Tool_1=0x7f080165;
+        public static final int Work_Tool_2=0x7f080166;
+        public static final int Work_Tool_3=0x7f080167;
+        public static final int _10Min=0x7f080142;
+        public static final int _1Day=0x7f080148;
+        public static final int _1Hour=0x7f080145;
         public static final int _1st=0x7f0800dd;
-        public static final int _1st_user_tag_registered=0x7f080169;
-        public static final int _20Min=0x7f080142;
-        public static final int _2Day=0x7f080148;
-        public static final int _2Hour=0x7f080145;
+        public static final int _1st_user_tag_registered=0x7f08016a;
+        public static final int _20Min=0x7f080143;
+        public static final int _2Day=0x7f080149;
+        public static final int _2Hour=0x7f080146;
         public static final int _2nd=0x7f0800de;
-        public static final int _2nd_user_tag_registered=0x7f08016a;
-        public static final int _30Min=0x7f080143;
+        public static final int _2nd_user_tag_registered=0x7f08016b;
+        public static final int _30Min=0x7f080144;
         public static final int _3rd=0x7f0800df;
-        public static final int _3rd_user_tag_registered=0x7f08016b;
-        public static final int _4Hour=0x7f080146;
+        public static final int _3rd_user_tag_registered=0x7f08016c;
+        public static final int _4Hour=0x7f080147;
         public static final int _4th=0x7f0800e0;
-        public static final int _4th_user_tag_registered=0x7f08016c;
-        public static final int _5Min=0x7f080140;
+        public static final int _4th_user_tag_registered=0x7f08016d;
+        public static final int _5Min=0x7f080141;
         public static final int _5_10_digits=0x7f080037;
         public static final int _5_12_digits=0x7f080040;
-        public static final int _5th_user_tag_registered=0x7f08016d;
+        public static final int _5th_user_tag_registered=0x7f08016e;
         public static final int action_settings=0x7f080001;
         public static final int app_name=0x7f080000;
         public static final int bar=0x7f08002a;
@@ -3106,6 +3507,7 @@ public final class R {
         public static final int mile=0x7f080025;
         public static final int mph=0x7f08001f;
         public static final int rpm=0x7f080021;
+        public static final int rpm_km_h=0x7f0800f3;
         public static final int ton=0x7f08000a;
     }
     public static final class style {

@@ -94,7 +94,7 @@ public class SpeedometerFreqFragment extends ParentFragment{
 		DisableHalfNumButton();
 		CursurDisplay(CursurIndex);
 		ParentActivity.ScreenIndex = ParentActivity.SCREEN_STATE_MENU_MODE_ETC_FREQ_TOP;
-		ParentActivity._MenuBaseFragment._MenuInterTitleFragment.SetTitleText(ParentActivity.getResources().getString(R.string.Speedometer_Freq_Setting));
+		ParentActivity._MenuBaseFragment._MenuInterTitleFragment.SetTitleText(ParentActivity.getResources().getString(R.string.Speedometer_Setting));
 		HandleCursurDisplay = new Handler() {
 			@Override
 			public void handleMessage(Message msg) {

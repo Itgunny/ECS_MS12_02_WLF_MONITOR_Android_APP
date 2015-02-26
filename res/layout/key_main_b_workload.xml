@@ -59,6 +59,7 @@
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
             android:layout_marginLeft="20dp"
+            android:gravity="left"
             android:text="@string/Weighing_System_Mode"
             android:textAppearance="?android:attr/textAppearanceLarge" />
         
@@ -115,6 +116,7 @@
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
             android:layout_marginLeft="20dp"
+            android:gravity="left"
             android:text="@string/Weighing_Display"
             android:textAppearance="?android:attr/textAppearanceLarge" />
         
@@ -172,6 +174,7 @@
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
             android:layout_marginLeft="20dp"
+            android:gravity="left"
             android:text="@string/Error_Detection"
             android:textAppearance="?android:attr/textAppearanceLarge" />
         

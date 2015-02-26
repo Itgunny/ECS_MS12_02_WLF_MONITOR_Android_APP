@@ -21,14 +21,14 @@
 
         <TextView
             android:id="@+id/textView_menu_body_list_1_title"
-            android:layout_width="420dp"
+            android:layout_width="600dp"
             android:layout_height="wrap_content"
             android:layout_alignLeft="@+id/imageView_menu_body_list_line_1"
             android:layout_alignParentBottom="true"
             android:layout_alignParentTop="true"
-            android:gravity="center_vertical"
-            android:textAppearance="?android:attr/textAppearanceLarge"
-            android:textSize="25sp" />
+            android:gravity="left|center_vertical"
+            android:textSize="25sp"
+            android:textAppearance="?android:attr/textAppearanceLarge" />
 
         <TextView
             android:id="@+id/textView_menu_body_list_1_data"
@@ -68,14 +68,14 @@
 
         <TextView
             android:id="@+id/textView_menu_body_list_2_title"
-            android:layout_width="420dp"
+            android:layout_width="600dp"
             android:layout_height="wrap_content"
             android:layout_alignLeft="@+id/imageView_menu_body_list_line_2"
             android:layout_alignParentBottom="true"
             android:layout_alignParentTop="true"
-            android:gravity="center_vertical"
-            android:textAppearance="?android:attr/textAppearanceLarge"
-            android:textSize="25sp" />
+            android:gravity="left|center_vertical"
+            android:textSize="25sp"
+            android:textAppearance="?android:attr/textAppearanceLarge" />
 
         <TextView
             android:id="@+id/textView_menu_body_list_2_data"
@@ -115,14 +115,14 @@
 
         <TextView
             android:id="@+id/textView_menu_body_list_3_title"
-            android:layout_width="420dp"
+            android:layout_width="600dp"
             android:layout_height="wrap_content"
             android:layout_alignLeft="@+id/imageView_menu_body_list_line_3"
             android:layout_alignParentBottom="true"
             android:layout_alignParentTop="true"
-            android:gravity="center_vertical"
-            android:textAppearance="?android:attr/textAppearanceLarge"
-            android:textSize="25sp" />
+            android:gravity="left|center_vertical"
+            android:textSize="25sp"
+            android:textAppearance="?android:attr/textAppearanceLarge" />
 
         <TextView
             android:id="@+id/textView_menu_body_list_3_data"
@@ -162,14 +162,14 @@
 
         <TextView
             android:id="@+id/textView_menu_body_list_4_title"
-            android:layout_width="420dp"
+            android:layout_width="600dp"
             android:layout_height="wrap_content"
             android:layout_alignLeft="@+id/imageView_menu_body_list_line_4"
             android:layout_alignParentBottom="true"
             android:layout_alignParentTop="true"
-            android:gravity="center_vertical"
-            android:textAppearance="?android:attr/textAppearanceLarge"
-            android:textSize="25sp" />
+            android:gravity="left|center_vertical"
+            android:textSize="25sp"
+            android:textAppearance="?android:attr/textAppearanceLarge" />
 
         <TextView
             android:id="@+id/textView_menu_body_list_4_data"
@@ -209,14 +209,14 @@
 
         <TextView
             android:id="@+id/textView_menu_body_list_5_title"
-            android:layout_width="420dp"
+            android:layout_width="600dp"
             android:layout_height="wrap_content"
             android:layout_alignLeft="@+id/imageView_menu_body_list_line_5"
             android:layout_alignParentBottom="true"
             android:layout_alignParentTop="true"
-            android:gravity="center_vertical"
-            android:textAppearance="?android:attr/textAppearanceLarge"
-            android:textSize="25sp" />
+            android:gravity="left|center_vertical"
+            android:textSize="25sp"
+            android:textAppearance="?android:attr/textAppearanceLarge" />
 
         <TextView
             android:id="@+id/textView_menu_body_list_5_data"
@@ -256,12 +256,12 @@
         
         <TextView
             android:id="@+id/textView_menu_body_list_6_title"
-            android:layout_width="420dp"
+            android:layout_width="600dp"
             android:layout_height="wrap_content"
             android:layout_alignLeft="@+id/imageView_menu_body_list_line_6"
             android:layout_alignParentBottom="true"
             android:layout_alignParentTop="true"
-            android:gravity="center_vertical"
+            android:gravity="left|center_vertical"
             android:textAppearance="?android:attr/textAppearanceLarge"
             android:textSize="25sp" />
 

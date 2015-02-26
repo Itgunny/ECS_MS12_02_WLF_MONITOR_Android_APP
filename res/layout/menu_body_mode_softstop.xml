@@ -64,7 +64,7 @@
 	        android:layout_alignParentTop="true"
 	        android:layout_marginLeft="10dp"
 	        android:layout_toRightOf="@+id/imageView_menu_body_mode_softstop_boomup"
-	        android:gravity="center_vertical"
+	        android:gravity="left|center_vertical"
 	        android:text="@string/Boom_Up"
 	        android:textAppearance="?android:attr/textAppearanceLarge" />
 
@@ -117,7 +117,7 @@
 	        android:layout_alignParentTop="true"
 	        android:layout_marginLeft="10dp"
 	        android:layout_toRightOf="@+id/imageView_menu_body_mode_softstop_boomdown"
-	        android:gravity="center_vertical"
+	        android:gravity="left|center_vertical"
 	        android:text="@string/Boom_Down"
 	        android:textAppearance="?android:attr/textAppearanceLarge" />
 
@@ -170,7 +170,7 @@
 	        android:layout_alignParentTop="true"
 	        android:layout_marginLeft="10dp"
 	        android:layout_toRightOf="@+id/imageView_menu_body_mode_softstop_bucketin"
-	        android:gravity="center_vertical"
+	        android:gravity="left|center_vertical"
 	        android:text="@string/Bucket_In"
 	        android:textAppearance="?android:attr/textAppearanceLarge" />
 
@@ -223,7 +223,7 @@
 	        android:layout_alignParentTop="true"
 	        android:layout_marginLeft="10dp"
 	        android:layout_toRightOf="@+id/imageView_menu_body_mode_softstop_bucketout"
-	        android:gravity="center_vertical"
+	        android:gravity="left|center_vertical"
 	        android:text="@string/Bucket_Dump"
 	        android:textAppearance="?android:attr/textAppearanceLarge" />
 

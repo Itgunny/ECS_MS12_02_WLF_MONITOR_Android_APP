@@ -112,9 +112,12 @@ public class LanguageClass {
 			conf.locale = new Locale("fa");
 			break;
 		case Home.STATE_DISPLAY_LANGUAGE_INDONESIAN:
-			conf.locale = new Locale("id");
+			conf.locale = new Locale("in");
 			break;
-
+		case Home.STATE_DISPLAY_LANGUAGE_FINNISH:
+			conf.locale = new Locale("fi");
+			
+			break;
 		default:
 			conf.locale = new Locale("en");
 			break;

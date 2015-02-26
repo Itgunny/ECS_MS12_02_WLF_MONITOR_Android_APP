@@ -83,7 +83,7 @@ public class MenuModeETCFragment extends MenuBodyList_ParentFragment{
 		setClickableList4(true);
 		
 		
-		setListTitle1(ParentActivity.getResources().getString(string.Speedometer_Freq_Setting));
+		setListTitle1(ParentActivity.getResources().getString(string.Speedometer_Setting));
 		setListTitle2(ParentActivity.getResources().getString(string.Cooling_Fan_Reverse_Mode));
 		setListTitle3(ParentActivity.getResources().getString(string.Wiper_Level_Setting));
 		setListTitle4(ParentActivity.getResources().getString(string.Camera_Setting));
@@ -93,7 +93,6 @@ public class MenuModeETCFragment extends MenuBodyList_ParentFragment{
 		}else{
 			setClickableList5(false);
 		}
-		
 	}
 	
 	@Override

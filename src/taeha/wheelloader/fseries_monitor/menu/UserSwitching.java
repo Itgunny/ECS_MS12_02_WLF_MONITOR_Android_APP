@@ -11,6 +11,7 @@ import taeha.wheelloader.fseries_monitor.animation.MainBodyShiftAnimation;
 import taeha.wheelloader.fseries_monitor.animation.LeftRightShiftAnimation;
 import taeha.wheelloader.fseries_monitor.main.CAN1CommManager;
 import taeha.wheelloader.fseries_monitor.main.Home;
+import taeha.wheelloader.fseries_monitor.main.LanguageClass;
 import taeha.wheelloader.fseries_monitor.main.ParentFragment;
 import taeha.wheelloader.fseries_monitor.main.R;
 import taeha.wheelloader.fseries_monitor.main.R.string;
@@ -571,6 +572,7 @@ public class UserSwitching extends ParentFragment{
 		DisplayTypeDisplay(DisplayType,_userdata.DisplayType);
 		MachineStatusUpperDisplay(MachineStatusUpper,_userdata.MachineStatusUpper);
 		MachineStatusLowerDisplay(MachineStatusLower,_userdata.MachineStatusLower);
+		LanguageDisplay(Language, _userdata.Language);	// ++, --, 150213 bwk
 		SoundOutputDisplay(SoundOutput,_userdata.SoundOutput);
 		HourmeterDisplay(HourmeterDisplay,_userdata.HourmeterDisplay);
 	}
@@ -1342,6 +1344,65 @@ public class UserSwitching extends ParentFragment{
 			case Home.STATE_DISPLAY_LANGUAGE_ENGLISH:
 				adapter.UpdateSecond(STATE_LANGUAGE, ParentActivity.getResources().getString(string.English));
 				break;
+			// ++, 150225 bwk
+			case Home.STATE_DISPLAY_LANGUAGE_GERMAN:
+				adapter.UpdateSecond(STATE_LANGUAGE, ParentActivity.getResources().getString(string.German));
+				break;
+			case Home.STATE_DISPLAY_LANGUAGE_FRENCH:
+				adapter.UpdateSecond(STATE_LANGUAGE, ParentActivity.getResources().getString(string.French));
+				break;
+			case Home.STATE_DISPLAY_LANGUAGE_SPANISH:
+				adapter.UpdateSecond(STATE_LANGUAGE, ParentActivity.getResources().getString(string.Spanish));
+				break;
+			case Home.STATE_DISPLAY_LANGUAGE_PORTUGUE:
+				adapter.UpdateSecond(STATE_LANGUAGE, ParentActivity.getResources().getString(string.Portuguese));
+				break;
+			case Home.STATE_DISPLAY_LANGUAGE_CHINESE:
+				adapter.UpdateSecond(STATE_LANGUAGE, ParentActivity.getResources().getString(string.Chinese));
+				break;
+			case Home.STATE_DISPLAY_LANGUAGE_RUSIAN:
+				adapter.UpdateSecond(STATE_LANGUAGE, ParentActivity.getResources().getString(string.Russian));
+				break;
+			case Home.STATE_DISPLAY_LANGUAGE_ITALIAN:
+				adapter.UpdateSecond(STATE_LANGUAGE, ParentActivity.getResources().getString(string.Italian));
+				break;
+			case Home.STATE_DISPLAY_LANGUAGE_NEDERLAND:
+				adapter.UpdateSecond(STATE_LANGUAGE, ParentActivity.getResources().getString(string.Dutch));
+				break;
+			case Home.STATE_DISPLAY_LANGUAGE_SWEDISH:
+				adapter.UpdateSecond(STATE_LANGUAGE, ParentActivity.getResources().getString(string.Swedish));
+				break;
+			case Home.STATE_DISPLAY_LANGUAGE_TURKISH:
+				adapter.UpdateSecond(STATE_LANGUAGE, ParentActivity.getResources().getString(string.Turkish));
+				break;
+			case Home.STATE_DISPLAY_LANGUAGE_SLOVAKIAN:
+				adapter.UpdateSecond(STATE_LANGUAGE, ParentActivity.getResources().getString(string.Slovakian));
+				break;
+			case Home.STATE_DISPLAY_LANGUAGE_ESTONIAN:
+				adapter.UpdateSecond(STATE_LANGUAGE, ParentActivity.getResources().getString(string.Estonian));
+				break;
+			case Home.STATE_DISPLAY_LANGUAGE_THAILAND:
+				adapter.UpdateSecond(STATE_LANGUAGE, ParentActivity.getResources().getString(string.Thai));
+				break;
+			case Home.STATE_DISPLAY_LANGUAGE_HINDI:
+				adapter.UpdateSecond(STATE_LANGUAGE, ParentActivity.getResources().getString(string.Hindi));
+				break;
+			case Home.STATE_DISPLAY_LANGUAGE_MONGOL:
+				adapter.UpdateSecond(STATE_LANGUAGE, ParentActivity.getResources().getString(string.Mongolian));
+				break;
+			case Home.STATE_DISPLAY_LANGUAGE_ARABIC:
+				adapter.UpdateSecond(STATE_LANGUAGE, ParentActivity.getResources().getString(string.Arabic));
+				break;
+			case Home.STATE_DISPLAY_LANGUAGE_FARSI:
+				adapter.UpdateSecond(STATE_LANGUAGE, ParentActivity.getResources().getString(string.Persian));
+				break;
+			case Home.STATE_DISPLAY_LANGUAGE_INDONESIAN:
+				adapter.UpdateSecond(STATE_LANGUAGE, ParentActivity.getResources().getString(string.Indonesian));
+				break;
+			case Home.STATE_DISPLAY_LANGUAGE_FINNISH:
+				adapter.UpdateSecond(STATE_LANGUAGE, ParentActivity.getResources().getString(string.Finnish));
+				break;
+			// --, 150225 bwk
 		}
 		switch (LoadingData) {
 		case Home.STATE_DISPLAY_LANGUAGE_KOREAN:
@@ -1352,6 +1413,15 @@ public class UserSwitching extends ParentFragment{
 			break;
 		}
 		// --, 150212 bwk
+		
+		// ++, 150213 bwk
+		if(SettingData != LoadingData){
+			adapter.UpdateIcon(STATE_LANGUAGE, ParentActivity.getResources().getDrawable(R.drawable.main_quick_user_x));
+		}else{
+			adapter.UpdateIcon(STATE_LANGUAGE, null);
+		}
+		adapter.notifyDataSetChanged();
+		// --, 150213 bwk
 	}
 	
 	public void SoundOutputDisplay(int SettingData, int LoadingData){
@@ -1581,6 +1651,11 @@ public class UserSwitching extends ParentFragment{
 		ParentActivity.SoundState = _userdata.SoundOutput;
 
 		ParentActivity.HourOdometerIndex = _userdata.HourmeterDisplay;
+		
+		// ++, 150213 bwk
+		ParentActivity.LanguageIndex = _userdata.Language;
+		ParentActivity.setLanguage();	
+		// --, 150213 bwk
 		ParentActivity.SavePref();
 	}
 	public void ClickDefault(){

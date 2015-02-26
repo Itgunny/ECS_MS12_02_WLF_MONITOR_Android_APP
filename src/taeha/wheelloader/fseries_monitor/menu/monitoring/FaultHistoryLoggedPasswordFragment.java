@@ -114,6 +114,7 @@ public class FaultHistoryLoggedPasswordFragment extends PasswordFragment{
 		
 		switch (Result) {
 		case 0:			// Not OK
+		case 1:			// UserPassword	OK		// ++, --, 150216 bwk 에러 카운트안되는 문제로 case 2 위에에서 여기로 이동
 		case 13:		// TimeOut
 			ErrCount++;
 			DataBufIndex = 0;
@@ -135,10 +136,9 @@ public class FaultHistoryLoggedPasswordFragment extends PasswordFragment{
 			}
 			CancelPasswordCheckTimer();
 			CancelTimeOutTimer();
-			SetTextIndicatorTitle(1);
+			SetTextIndicatorTitle(2);
 
 			break;
-		case 1:	// UserPassword	OK
 		case 2:	// Service Password OK
 		
 			CancelPasswordCheckTimer();

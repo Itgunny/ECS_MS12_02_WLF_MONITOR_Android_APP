@@ -53,6 +53,7 @@
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
             android:layout_marginLeft="20dp"
+            android:gravity="left"
             android:text="@string/Temp"
             android:textAppearance="?android:attr/textAppearanceLarge" />
         
@@ -111,6 +112,7 @@
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
             android:layout_marginLeft="20dp"
+            android:gravity="left"
             android:text="@string/Speed"
             android:textAppearance="?android:attr/textAppearanceLarge" />
         
@@ -169,6 +171,7 @@
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
             android:layout_marginLeft="20dp"
+            android:gravity="left"
             android:text="@string/Weight"
             android:textAppearance="?android:attr/textAppearanceLarge" />
         
@@ -225,6 +228,7 @@
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
             android:layout_marginLeft="20dp"
+            android:gravity="left"
             android:text="@string/Pressure"
             android:textAppearance="?android:attr/textAppearanceLarge" />
         

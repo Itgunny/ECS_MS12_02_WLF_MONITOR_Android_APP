@@ -135,6 +135,7 @@ public class FaultHistoryActiveFragment extends ParentFragment{
 	
 	// ++, 150211 bwk
 	int CursurIndex;		
+	int CursurDetailIndex;
 	Handler HandleCursurDisplay;
 	// --, 150211 bwk
 	//////////////////////////////////////////////////
@@ -325,6 +326,10 @@ public class FaultHistoryActiveFragment extends ParentFragment{
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
+				// ++, 150213 bwk
+				CursurIndex = 7;
+				CursurDisplay(CursurIndex);
+				// --, 150213 bwk
 				ClickDetailTitle();
 			}
 		});
@@ -333,6 +338,11 @@ public class FaultHistoryActiveFragment extends ParentFragment{
 			@Override
 			public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,long arg3) {
 				// TODO Auto-generated method stub
+				// ++, 150213 bwk
+				CursurIndex = 8;
+				CursurDisplay(CursurIndex);
+				CursurDetailIndex = arg2;
+				// --, 150213 bwk
 				ErrDetailDisplay(arg2);
 				
 			}
@@ -576,6 +586,7 @@ public class FaultHistoryActiveFragment extends ParentFragment{
 		}
 		adapter.notifyDataSetChanged();
 	}
+
 	public void SetErrList(int NumofErr, int Mode){
 		int SPN = 0;
 		int FMI = 0;
@@ -596,8 +607,16 @@ public class FaultHistoryActiveFragment extends ParentFragment{
 					SPN = Err_Mcu[i] & 0xffff;
 					SPN |= ((Err_Mcu[i] & 0xe00000) >> 5);
 					FMI = ((Err_Mcu[i] & 0x1f0000) >> 16); 
-					adapter.addItem(new IconTextItemFault(null,ParentActivity.getResources().getDrawable(R.drawable.menu_information_fault_down_btn), "HCESPN : " + Integer.toString(SPN)
-							+ "     " + "FMI : " + Integer.toString(FMI), "", ""));
+					// ++, 150213 bwk
+					if(CursurIndex == 7 && CursurDetailIndex == i)
+					{
+						adapter.addItem(new IconTextItemFault(null,ParentActivity.getResources().getDrawable(R.drawable.menu_information_fault_down_btn_selected), "HCESPN : " + Integer.toString(SPN)
+								+ "     " + "FMI : " + Integer.toString(FMI), "", ""));
+					}
+					else
+					// --, 150213 bwk
+						adapter.addItem(new IconTextItemFault(null,ParentActivity.getResources().getDrawable(R.drawable.menu_information_fault_down_btn), "HCESPN : " + Integer.toString(SPN)
+								+ "     " + "FMI : " + Integer.toString(FMI), "", ""));
 				
 				//	Log.d(TAG,"SPN : " + Integer.toString(SPN) + "     FMI : " + Integer.toString(FMI));
 				}
@@ -609,13 +628,28 @@ public class FaultHistoryActiveFragment extends ParentFragment{
 					SPN = Err_Ecu[i] & 0xffff;
 					SPN |= ((Err_Ecu[i] & 0xe00000) >> 5);
 					FMI = ((Err_Ecu[i] & 0x1f0000) >> 16); 
-					adapter.addItem(new IconTextItemFault(null,ParentActivity.getResources().getDrawable(R.drawable.menu_information_fault_down_btn), "SPN : " + Integer.toString(SPN)
-							+ "     " + "FMI : " + Integer.toString(FMI), "", ""));
+					// ++, 150213 bwk
+					if(CursurIndex == 7 && CursurDetailIndex == i)
+					{
+						adapter.addItem(new IconTextItemFault(null,ParentActivity.getResources().getDrawable(R.drawable.menu_information_fault_down_btn_selected), "SPN : " + Integer.toString(SPN)
+								+ "     " + "FMI : " + Integer.toString(FMI), "", ""));
+					}
+					else
+					// --, 150213 bwk
+						adapter.addItem(new IconTextItemFault(null,ParentActivity.getResources().getDrawable(R.drawable.menu_information_fault_down_btn), "SPN : " + Integer.toString(SPN)
+								+ "     " + "FMI : " + Integer.toString(FMI), "", ""));
 				}
 				else if(Mode == REQ_ERR_TM_ACTIVE)		// TCU
 				{
 					Err_Tcu = CAN1Comm.Get_TcuErr();
-					adapter.addItem(new IconTextItemFault(null,ParentActivity.getResources().getDrawable(R.drawable.menu_information_fault_down_btn), "No : " + Integer.toHexString(Err_Tcu[i]), "", ""));
+					// ++, 150213 bwk
+					if(CursurIndex == 7 && CursurDetailIndex == i)
+					{
+						adapter.addItem(new IconTextItemFault(null,ParentActivity.getResources().getDrawable(R.drawable.menu_information_fault_down_btn_selected), "No : " + Integer.toHexString(Err_Tcu[i]), "", ""));
+					}
+					else
+					// --, 150213 bwk
+						adapter.addItem(new IconTextItemFault(null,ParentActivity.getResources().getDrawable(R.drawable.menu_information_fault_down_btn), "No : " + Integer.toHexString(Err_Tcu[i]), "", ""));
 				}
 				else if(Mode == REQ_ERR_EHCU_ACTIVE)		// EHCU
 				{
@@ -637,8 +671,16 @@ public class FaultHistoryActiveFragment extends ParentFragment{
 					SPN = Err_EHCU[i] & 0x0000FFFF;
 					FMI = ((Err_EHCU[i] & 0x00FF0000) >> 16);
 					
-					adapter.addItem(new IconTextItemFault(null,ParentActivity.getResources().getDrawable(R.drawable.menu_information_fault_down_btn), "SPN : " + Integer.toString(SPN)
-							+ "     " + "FMI : " + Integer.toString(FMI), "", ""));
+					// ++, 150213 bwk
+					if(CursurIndex == 7 && CursurDetailIndex == i)
+					{
+						adapter.addItem(new IconTextItemFault(null,ParentActivity.getResources().getDrawable(R.drawable.menu_information_fault_down_btn_selected), "SPN : " + Integer.toString(SPN)
+								+ "     " + "FMI : " + Integer.toString(FMI), "", ""));
+					}
+					else
+					// --, 150213 bwk
+						adapter.addItem(new IconTextItemFault(null,ParentActivity.getResources().getDrawable(R.drawable.menu_information_fault_down_btn), "SPN : " + Integer.toString(SPN)
+								+ "     " + "FMI : " + Integer.toString(FMI), "", ""));
 				}
 			}
 		}
@@ -898,6 +940,24 @@ public class FaultHistoryActiveFragment extends ParentFragment{
 		return _DTCTotal;
 	
 	}
+	
+	// ++, 150213 bwk
+	public int CountErrorList(){
+		switch (SelectedMode) {
+			case REQ_ERR_MACHINE_ACTIVE:
+				return DTCTotalMachine;
+			case REQ_ERR_ENGINE_ACTIVE:
+				return DTCTotalEngine;
+			case REQ_ERR_TM_ACTIVE:
+				return DTCTotalTM;
+			case REQ_ERR_EHCU_ACTIVE:
+				return DTCTotalEHCU;
+			case REQ_ERR_ACU_ACTIVE:
+			default:
+				return 0;		
+		}
+	}
+	// --, 150213 bwk
 	/////////////////////////////////////////////////////////////////////
 	public void ClickLeft(){
 		// ++, 150211 bwk
@@ -916,6 +976,38 @@ public class FaultHistoryActiveFragment extends ParentFragment{
 			CursurIndex = 4;
 			CursurDisplay(CursurIndex);
 			break;
+		// ++, 150216 bwk
+		case 7:
+			if(CursurDetailIndex > 0)
+				CursurDetailIndex--;
+			else
+				CursurDetailIndex = adapter.getCount()-1;
+			CursurDisplay(CursurIndex);
+			
+			int TotalItem, ListCursurIndex = 0;
+			
+			if(CursurDetailIndex == adapter.getCount()-1 && adapter.getCount() > 6)
+			{
+				TotalItem = listView.getCount();
+				ListCursurIndex = TotalItem - 6;
+				
+				listView.setSelectionFromTop(ListCursurIndex,0);
+				//Log.d(TAG,"ClickLeft ListCursurIndex : " + Integer.toString(ListCursurIndex));
+			}
+			else if(listView.getFirstVisiblePosition() > CursurDetailIndex)
+			{
+				ListCursurIndex = listView.getFirstVisiblePosition()-6;
+				TotalItem = listView.getCount();
+				
+				if(ListCursurIndex <= 0){
+					ListCursurIndex = 0;
+				}
+				
+				listView.setSelectionFromTop(ListCursurIndex,0);
+				//Log.d(TAG,"ClickLeft ListCursurIndex : " + Integer.toString(ListCursurIndex));
+			}			
+			break;
+		// --, 150216 bwk
 		case 5:
 		default:
 			break;
@@ -939,6 +1031,30 @@ public class FaultHistoryActiveFragment extends ParentFragment{
 			CursurIndex = 1;
 			CursurDisplay(CursurIndex);
 			break;
+		// ++, 150213 bwk
+		case 7:
+			if(CursurDetailIndex < adapter.getCount()-1)
+				CursurDetailIndex++;
+			else
+				CursurDetailIndex = 0;
+			CursurDisplay(CursurIndex);
+			
+			int TotalItem, ListCursurIndex = 0;
+			
+			if(listView.getFirstVisiblePosition() + 6 <= CursurDetailIndex || CursurDetailIndex == 0)
+			{
+				ListCursurIndex = CursurDetailIndex;
+				TotalItem = listView.getCount();
+				
+				if(ListCursurIndex >= TotalItem){
+					ListCursurIndex = TotalItem - 6;
+				}
+				
+				listView.setSelectionFromTop(ListCursurIndex,0);
+				//Log.d(TAG,"ListCursurIndex : " + Integer.toString(ListCursurIndex));			
+			}
+			break;
+		// --, 150213 bwk			
 		case 5:
 		default:
 			break;
@@ -946,7 +1062,40 @@ public class FaultHistoryActiveFragment extends ParentFragment{
 		// --, 150211 bwk
 	}
 	public void ClickESC(){
-		ClickOK();
+		// ++, 150213 bwk
+		if(CursurIndex == 7)
+		{
+			switch(SelectedMode)
+			{
+				case REQ_ERR_MACHINE_ACTIVE:
+					CursurIndex = 1;
+					break;
+				case REQ_ERR_ENGINE_ACTIVE:
+					CursurIndex = 2;
+					break;
+				case REQ_ERR_TM_ACTIVE:
+					CursurIndex = 3;
+					break;
+				case REQ_ERR_EHCU_ACTIVE:
+					CursurIndex = 4;
+					break;
+				case REQ_ERR_ACU_ACTIVE:
+					CursurIndex = 5;
+					break;
+				default:
+					break;
+			}
+			CursurDisplay(CursurIndex);
+		}
+		else if(CursurIndex == 8)
+		{
+			CursurIndex =7;
+			CursurDisplay(CursurIndex);
+			ClickDetailTitle();
+		}
+		else
+		// --, 150213 bwk
+			ClickOK();
 	}
 	public void ClickEnter(){
 		// ++, 150211 bwk
@@ -969,10 +1118,34 @@ public class FaultHistoryActiveFragment extends ParentFragment{
 		case 6:
 			ClickOK();
 			break;
+		// ++, 150213 bwk
+		case 7:
+			CursurIndex = 8;
+			if(adapter.getCount() > 0 && CountErrorList() > 0)
+				ErrDetailDisplay(CursurDetailIndex);
+			break;
+		case 8:
+			CursurIndex = 7;
+			CursurDisplay(CursurIndex);
+			ClickDetailTitle();
+			break;
+		// --, 150213 bwk
 		default:
 			break;
 		}
 		// --, 150211 bwk
+		
+		// ++. 150213 bwk
+		if(CursurIndex < 6)
+		{
+			if(adapter.getCount() > 0 && CountErrorList() > 0)
+			{
+				CursurIndex = 7;
+				CursurDetailIndex = 0;
+				CursurDisplay(CursurIndex);
+			}
+		}
+		// --, 150213 bwk
 	}
 	
 	// ++, 150209 bwk
@@ -996,6 +1169,15 @@ public class FaultHistoryActiveFragment extends ParentFragment{
 		radioEHCU.setPressed(false);
 		//radioACU.setPressed(false);
 		imgbtnOK.setPressed(false);
+		// ++, 150213 bwk
+		if(adapter.getCount() > 0)
+		{
+			for(int i=0;i<adapter.getCount();i++)
+				adapter.UpdateIcon(i, ParentActivity.getResources().getDrawable(R.drawable.menu_information_fault_down_btn));
+			adapter.notifyDataSetChanged();
+		}
+		// --, 150213 bwk
+		
 		switch(Index){
 			case 1:
 				radioMachine.setPressed(true);
@@ -1015,6 +1197,16 @@ public class FaultHistoryActiveFragment extends ParentFragment{
 			case 6:
 				imgbtnOK.setPressed(true);
 				break;
+			// ++, 150213 bwk
+			case 7:
+				if(CursurDetailIndex < adapter.getCount())
+					adapter.UpdateIcon(CursurDetailIndex, ParentActivity.getResources().getDrawable(R.drawable.menu_information_fault_down_btn_selected));
+				else if(adapter.getCount() > 0)
+					adapter.UpdateIcon(0, ParentActivity.getResources().getDrawable(R.drawable.menu_information_fault_down_btn_selected));
+				
+				adapter.notifyDataSetChanged();
+				break;
+			// --, 150213 bwk
 		}
 		
 	}
