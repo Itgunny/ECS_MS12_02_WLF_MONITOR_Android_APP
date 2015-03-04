@@ -53,6 +53,7 @@
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
             android:layout_marginLeft="20dp"
+            android:gravity="left"
             android:text="@string/Weighing_System"
             android:textAppearance="?android:attr/textAppearanceLarge" />
         
@@ -66,7 +67,7 @@
 	
 	       <RadioButton
 	           android:id="@+id/radioButton_menu_body_mode_workload_accumulation_manual"
-	           android:layout_width="200dp"
+	           android:layout_width="210dp"
 	           android:layout_height="wrap_content"
 	           android:button="@drawable/_selector_radio_btn"
 	           android:text="@string/Manual"
@@ -75,9 +76,9 @@
 	
 	       <RadioButton
 	           android:id="@+id/radioButton_menu_body_mode_workload_accumulation_auto"
-	           android:layout_width="200dp"
+	           android:layout_width="210dp"
 	           android:layout_height="wrap_content"
-	           android:layout_marginLeft="40dp"
+	           android:layout_marginLeft="20dp"
 	           android:button="@drawable/_selector_radio_btn"
 	           android:text="@string/Automatic"
 	           android:textColor="@drawable/_selector_radio_txt_white_amber"
@@ -111,12 +112,13 @@
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
             android:layout_marginLeft="20dp"
+            android:gravity="left"
             android:text="@string/Weighing_Display"
             android:textAppearance="?android:attr/textAppearanceLarge" />
         
         <RadioButton
             android:id="@+id/radioButton_menu_body_mode_workload_display_daily"
-            android:layout_width="200dp"
+            android:layout_width="210dp"
             android:layout_height="wrap_content"
             android:layout_marginLeft="300dp"
             android:layout_marginTop="10dp"
@@ -127,10 +129,10 @@
 		
 		<RadioButton
 		    android:id="@+id/radioButton_menu_body_mode_workload_display_totala"
-		    android:layout_width="200dp"
+		    android:layout_width="210dp"
 		    android:layout_height="wrap_content"
 		    android:layout_alignBottom="@+id/radioButton_menu_body_mode_workload_display_daily"
-		    android:layout_marginLeft="40dp"
+		    android:layout_marginLeft="20dp"
 		    android:layout_toRightOf="@+id/radioButton_menu_body_mode_workload_display_daily"
 		    android:button="@drawable/_selector_radio_btn"
 		    android:text="@string/Total_A"
@@ -139,7 +141,7 @@
 		
 		<RadioButton
 		    android:id="@+id/radioButton_menu_body_mode_workload_display_totalb"
-		    android:layout_width="200dp"
+		    android:layout_width="210dp"
 		    android:layout_height="wrap_content"
 		    android:layout_alignLeft="@+id/radioButton_menu_body_mode_workload_display_daily"
 		    android:layout_below="@+id/radioButton_menu_body_mode_workload_display_daily"
@@ -151,7 +153,7 @@
 		
 		<RadioButton
 		    android:id="@+id/radioButton_menu_body_mode_workload_display_totalc"
-		    android:layout_width="200dp"
+		    android:layout_width="210dp"
 		    android:layout_height="wrap_content"
 		    android:layout_alignBottom="@+id/radioButton_menu_body_mode_workload_display_totalb"
 		    android:layout_alignLeft="@+id/radioButton_menu_body_mode_workload_display_totala"
@@ -183,6 +185,7 @@
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
             android:layout_marginLeft="20dp"
+            android:gravity="left"
             android:text="@string/Error_Detection"
             android:textAppearance="?android:attr/textAppearanceLarge" />
         
@@ -196,7 +199,7 @@
 	
 	       <RadioButton
 	           android:id="@+id/radioButton_menu_body_mode_workload_errordetect_on"
-	           android:layout_width="200dp"
+	           android:layout_width="210dp"
 	           android:layout_height="wrap_content"
 	           android:button="@drawable/_selector_radio_btn"
 	           android:text="@string/On"
@@ -205,9 +208,9 @@
 	
 	       <RadioButton
 	           android:id="@+id/radioButton_menu_body_mode_workload_errordetect_off"
-	           android:layout_width="200dp"
+	           android:layout_width="210dp"
 	           android:layout_height="wrap_content"
-	           android:layout_marginLeft="40dp"
+	           android:layout_marginLeft="20dp"
 	           android:button="@drawable/_selector_radio_btn"
 	           android:text="@string/Off"
 	           android:textColor="@drawable/_selector_radio_txt_white_amber"

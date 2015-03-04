@@ -252,7 +252,7 @@
     <string name="Very_Fast">Very Fast</string>
     <string name="Excute">Excute</string>
     <string name="Push_and_hold_to_reverse_rotation">Push and hold to reverse rotation.</string>
-    <string name="rpm_km_h">rpm_km_h</string>
+    <string name="rpm_km_h">rpm/km/h</string>
     <!-- Menu Mode End -->
     <!-- Menu Monitoring Start -->
     <string name="Machine_Monitoring">MONITOROVANIE STROJA</string>
@@ -313,7 +313,7 @@
     <string name="ECU_Manufacturer_Name">ECU Manufacturer Name</string>
     <string name="Calibration_ID">Calibration ID</string>
     <string name="Boom_Lever_Floating_Position_Adjust">Boom Lever Floating Position Adjust</string>
-    <string name="Machine">STROJ</string>
+   	<string name="Machine">Machine</string>
     <string name="Engine">Engine</string>
     <string name="Transmission">Transmission</string>
     <string name="Please_refer_to_machine_manual_for_more_detailed_description">Prečítajte si manuál pre podrobnejší popis</string>
@@ -326,7 +326,7 @@
     <!-- Menu Management Start -->
     <string name="Machine_Security">ZABEZPEČENIE STROJA</string>
     <string name="Calibration">Calibration</string>
-    <string name="Speedometer_Setting">Speedometer Freq. Setting</string>
+    <string name="Speedometer_Setting">Speedometer Setting</string>
     <string name="Change_AS_Phone_Number">Change A/S Phone Number</string>
     <string name="Service_Contact">Kontakt na servis</string>
     <string name="Service_Menu">Servisné menu</string>

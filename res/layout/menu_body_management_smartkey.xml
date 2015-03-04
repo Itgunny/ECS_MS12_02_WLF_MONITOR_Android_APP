@@ -42,12 +42,12 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
-            android:layout_marginLeft="300dp"
+            android:layout_marginLeft="260dp"
             android:orientation="horizontal" >
 	
 	       <RadioButton
 	           android:id="@+id/radioButton_menu_body_management_smartkey_use_diable"
-	           android:layout_width="200dp"
+	           android:layout_width="220dp"
 	           android:layout_height="wrap_content"
 	           android:button="@drawable/_selector_radio_btn"
 	           android:text="@string/Disable"
@@ -56,7 +56,7 @@
 	
 	       <RadioButton
 	           android:id="@+id/radioButton_menu_body_management_smartkey_use_enable"
-	           android:layout_width="200dp"
+	           android:layout_width="220dp"
 	           android:layout_height="wrap_content"
 	           android:layout_marginLeft="20dp"
 	           android:button="@drawable/_selector_radio_btn"

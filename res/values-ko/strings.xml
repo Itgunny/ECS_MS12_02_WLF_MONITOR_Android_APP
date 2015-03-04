@@ -252,7 +252,7 @@
     <string name="Very_Fast">Very Fast</string>
     <string name="Excute">Excute</string>
     <string name="Push_and_hold_to_reverse_rotation">Push and hold to reverse rotation.</string>
-    <string name="rpm_km_h">rpm_km_h</string>
+    <string name="rpm_km_h">rpm/km/h</string>
     <!-- Menu Mode End -->
     <!-- Menu Monitoring Start -->
     <string name="Machine_Monitoring">장비상태</string>

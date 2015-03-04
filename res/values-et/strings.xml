@@ -1,15 +1,12 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
 <resources>
-
     <string name="app_name">Wheel_Loader_F_Series_UI</string>
     <string name="action_settings">Settings</string>
     <string name="hello_world">Hello world!</string>
     <string name="Crash_Toast_Text">Crash</string>
     <string name="Error_Report">Error Report</string>
     <string name="Crash_Data">Crash Data</string>
-
     <!-- Common Start -->
-
     <string name="Hr">Hr</string>
     <string name="C">℃</string>
     <string name="F">℉</string>
@@ -85,12 +82,8 @@
     <string name="Finish">Finish</string>
     <string name="Initial_Para_Error_Found">Initial Parameter Error Found</string>
     <string name="Please_Reset_Power">Please Reset Power</string>
-
     <!-- Common End -->
-
-
     <!-- Main Start -->
-
     <string name="ENGINE_MODE">ENGINE MODE</string>
     <string name="WARMING_UP">WARMING UP</string>
     <string name="CCO_MODE">C.C.O. MODE</string>
@@ -154,12 +147,8 @@
     <string name="Bucket_Full_In_Error_Warning">Bucket is not full in, though weigh may be inaccurate. Press the Enter Key to reweigh.</string>
     <string name="Sudden_Change_Error_Warning">Angular speed is a sudden change, though weigh may be inaccurate. Press the Enter Key to reweigh.</string>
     <string name="Hydraulic_Oil_Temp_Low_Warning">Hydraulic oil temperature low.</string>
-
     <!-- Main End -->
-
-
     <!-- Key Start -->
-
     <string name="Main_Light">Main Light</string>
     <string name="Work_Light">Work Light</string>
     <string name="Auto_Grease">Auto Grease</string>
@@ -201,23 +190,15 @@
     <string name="Do_you_want_to_turn_on_Mirror_Heat">Do you want to turn on Mirror Heat?</string>
     <string name="Do_you_want_to_turn_on_Auto_Grease">Do you want to turn on Auto Grease?</string>
     <string name="Do_not_show_again">Do not show again</string>
-
     <!-- Key End -->
-
-
     <!-- Menu Start -->
-
     <string name="Mode">Töörežiim</string>
     <string name="Monitoring">Ülevaade</string>
     <string name="Management">Haldus</string>
     <string name="Preference">Preference</string>
     <string name="Multimedia">Multimeedia</string>
-
     <!-- Menu End -->
-
-
     <!-- Menu Mode Start -->
-
     <string name="Eng">ENG.</string>
     <string name="TM">TM.</string>
     <string name="HYD">HYD.</string>
@@ -271,13 +252,9 @@
     <string name="Very_Fast">Very Fast</string>
     <string name="Excute">Excute</string>
     <string name="Push_and_hold_to_reverse_rotation">Push and hold to reverse rotation.</string>
-    <string name="rpm_km_h">rpm_km_h</string>
-
+    <string name="rpm_km_h">rpm/km/h</string>
     <!-- Menu Mode End -->
-
-
     <!-- Menu Monitoring Start -->
-
     <string name="Machine_Monitoring">Masina ülevaade</string>
     <string name="Operation_History">Operation History</string>
     <string name="Weighing_Information">Weighing Information</string>
@@ -336,7 +313,7 @@
     <string name="ECU_Manufacturer_Name">ECU Manufacturer Name</string>
     <string name="Calibration_ID">Calibration ID</string>
     <string name="Boom_Lever_Floating_Position_Adjust">Boom Lever Floating Position Adjust</string>
-    <string name="Machine">Masin</string>
+    <string name="Machine">Machine</string>
     <string name="Engine">Engine</string>
     <string name="Transmission">Transmission</string>
     <string name="Please_refer_to_machine_manual_for_more_detailed_description">Vt. Täpsemaid juhiseid manuaalist</string>
@@ -345,15 +322,11 @@
     <string name="Boom_Down_Response_Adjust">Boom Down Response Adjust</string>
     <string name="Bucket_Dump_Response_Adjust">Bucket Dump Response Adjust</string>
     <string name="Hardware">Hardware</string>
-
     <!-- Menu Monitoring End -->
-
-
     <!-- Menu Management Start -->
-
     <string name="Machine_Security">Masna turvalisus</string>
     <string name="Calibration">Calibration</string>
-    <string name="Speedometer_Setting">Speedometer Freq. Setting</string>
+    <string name="Speedometer_Setting">Speedometer Setting</string>
     <string name="Change_AS_Phone_Number">Change A/S Phone Number</string>
     <string name="Service_Contact">Hoolduse kontakt</string>
     <string name="Service_Menu">Hoolduse menüü</string>
@@ -446,12 +419,8 @@
     <string name="Maintenance_History">Maintenance History</string>
     <string name="Confirm_Reset_elapsed_time">Kinnita: nulli ajaloendur</string>
     <string name="Recommend_deleting_unused_tag_for_security_when_you_register_new_tag">Recommend deleting unused tag for security when you register new tag.</string>
-
     <!-- Menu Management End -->
-
-
     <!-- Menu Preference Start -->
-
     <string name="Brightness_Setting">Heleduse seaded</string>
     <string name="Clock_Setting">Clock Setting</string>
     <string name="Unit_Setting">Unit Setting</string>
@@ -468,19 +437,11 @@
     <string name="Type_B">Type B</string>
     <string name="Unit_C">ºC</string>
     <string name="Unit_F">ºF</string>
-
     <!-- Menu Preference End -->
-
-
     <!-- Menu Multimedia Start -->
-
     <string name="Media_Palyer">Media Player</string>
-
     <!-- Menu Multimedia End -->
-
-
     <!-- Language Start -->
-
     <string name="Korean">Korean</string>
     <string name="English">English</string>
     <string name="German">German</string>
@@ -502,7 +463,5 @@
     <string name="Persian">Persian</string>
     <string name="Indonesian">Indonesian</string>
     <string name="Finnish">Finnish</string>
-
     <!-- Language End -->
-
 </resources>

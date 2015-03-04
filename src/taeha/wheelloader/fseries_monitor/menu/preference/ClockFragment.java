@@ -553,6 +553,13 @@ public class ClockFragment extends ParentFragment{
 		Hour = Hour10 * 10 + Hour1;
 		Min = Min10 * 10 + Min1;
 		
+		// ++, 150227 bwk
+		if(AMFlag == true && Hour == 0)
+		{
+			Hour = -1;
+		}
+		// --, 150227 bwk
+
 		if(Hour == 12)
 			Hour = 0;
 		
@@ -707,6 +714,14 @@ public class ClockFragment extends ParentFragment{
 				Hour1 = 2;
 				Min10 = Min / 10;
 				Min1 = Min % 10;
+			// ++, 150227 bwk
+			// 10시에서 10의자리에서 0을 눌렀을 경우
+			}else if(Hour == -1){
+				Hour10 = 0;
+				Hour1 = 0;
+				Min10 = Min / 10;
+				Min1 = Min % 10;
+			// --, 150227 bwk
 			}else{
 				Hour10 = Hour / 10;
 				Hour1 = Hour % 10;

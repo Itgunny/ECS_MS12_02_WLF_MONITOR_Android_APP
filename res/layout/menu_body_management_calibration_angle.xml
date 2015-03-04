@@ -50,7 +50,7 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/imageView_menu_body_management_calibration_angle_main_line"
                 android:layout_marginLeft="20dp"
-                android:layout_marginTop="100dp"
+                android:layout_marginTop="50dp"
                 android:gravity="center"
                 android:text="@string/Boom"
                 android:textAppearance="?android:attr/textAppearanceLarge" />
