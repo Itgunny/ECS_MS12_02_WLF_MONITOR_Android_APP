@@ -43,7 +43,7 @@ public class MainBRightDownTMFragment extends ParentFragment{
 	//////////////////////////////////////////////////
 	
 	//ANIMATION///////////////////////////////////////
-	TextViewXAxisFlipAnimation TMCCOModeTitleDataAnimation;
+	//TextViewXAxisFlipAnimation TMCCOModeTitleDataAnimation;	// ++, --, 150305 HHI 변경 요청
 	TextViewXAxisFlipAnimation TMCCOModeDataAnimation;
 	TextViewXAxisFlipAnimation TMShiftModeDataAnimation;
 	TextViewXAxisFlipAnimation TMTCLockUpDataAnimation;
@@ -100,7 +100,7 @@ public class MainBRightDownTMFragment extends ParentFragment{
 	protected void InitValuables() {
 		// TODO Auto-generated method stub
 		super.InitValuables();
-		TMCCOModeTitleDataAnimation = new TextViewXAxisFlipAnimation(ParentActivity);
+		//TMCCOModeTitleDataAnimation = new TextViewXAxisFlipAnimation(ParentActivity);	// ++, --, 150305 HHI 변경 요청
 		TMCCOModeDataAnimation = new TextViewXAxisFlipAnimation(ParentActivity);
 		TMShiftModeDataAnimation = new TextViewXAxisFlipAnimation(ParentActivity);
 		TMTCLockUpDataAnimation = new TextViewXAxisFlipAnimation(ParentActivity);		
@@ -169,11 +169,19 @@ public class MainBRightDownTMFragment extends ParentFragment{
 		}
 	}
 	public void TMCCOModeTitleDisplay(int Model){
+		// ++, 150305 bwk
+		//if(Model == CheckModel.MODEL_980){
+		//	TMCCOModeTitleDataAnimation.FlipAnimation(textViewCCOModeTitle,getResources().getString(string.ICCO_MODE));
+		//}else{
+		//	TMCCOModeTitleDataAnimation.FlipAnimation(textViewCCOModeTitle,getResources().getString(string.CCO_MODE));
+		//}
 		if(Model == CheckModel.MODEL_980){
-			TMCCOModeTitleDataAnimation.FlipAnimation(textViewCCOModeTitle,getResources().getString(string.ICCO_MODE));
+			textViewCCOModeTitle.setText(getResources().getString(string.ICCO_MODE));
 		}else{
-			TMCCOModeTitleDataAnimation.FlipAnimation(textViewCCOModeTitle,getResources().getString(string.CCO_MODE));
+			textViewCCOModeTitle.setText(getResources().getString(string.CCO_MODE));
 		}
+		// --, 150305 bwk
+		
 	}
 	public void TMCCOModeDisplay(int Data){
 		try {

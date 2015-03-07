@@ -729,6 +729,7 @@ public class LanguageListFragment extends ParentFragment{
 	{
 		ParentActivity.LanguageIndex = Index;
 		LangClass.setLanugage(Index);
+		ParentActivity.ResetPopup(); 		// ++, --, 150305 bwk
 		
 		CheckButtonDisplay(Index+1);		// ++, --, 150225 bwk
 		

@@ -241,7 +241,7 @@ public class MachineSecuritySmartKeyFragment extends ParentFragment{
 			CAN1Comm.Set_HCEAntiTheftCommand_1633_PGN61184_23(15);
 			CAN1Comm.Set_ESLMode_820_PGN61184_23(3);
 		}else if(SmartKeyUse == CAN1CommManager.DATA_STATE_SMARTKEY_USE_OFF){
-//			CAN1Comm.TxCMDToMCU(CAN1CommManager.CMD_SMK, CAN1CommManager.DATA_INDEX_TAG_USE_SAVE,0);
+			CAN1Comm.TxCMDToMCU(CAN1CommManager.CMD_SMK, CAN1CommManager.DATA_INDEX_TAG_USE_SAVE,0);			// ++, 150305 bwk 주석 풀음
 //			CAN1Comm.Set_HCEAntiTheftCommand_1633_PGN61184_23(CAN1CommManager.DATA_STATE_ESL_MODE_SETTING);
 //			CAN1Comm.Set_ESLMode_820_PGN61184_23(CAN1CommManager.DATA_STATE_ESL_MODE_DISABLE);
 //			CAN1Comm.Set_ESLInterval_825_PGN61184_23(0xFF);

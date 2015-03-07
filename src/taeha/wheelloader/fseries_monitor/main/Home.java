@@ -68,7 +68,7 @@ public class Home extends Activity {
 	public static final int VERSION_HIGH 		= 1;
 	public static final int VERSION_LOW 		= 0;
 	public static final int VERSION_SUB_HIGH 	= 3;
-	public static final int VERSION_SUB_LOW 	= 5;
+	public static final int VERSION_SUB_LOW 	= 6;
 	////1.0.2.3
 	// UI B 안 최초 적용 2014.12.10
 	////1.0.2.4
@@ -200,7 +200,15 @@ public class Home extends Activity {
 	// - 현재 두줄로 표시되는 부분이 있으나, 현대에서 다국어 번역본이 모두 온 후 맞출 예정(ex : 자동)
 	//6. Media Player 오타 수정(Palyer로 되어있었음)
 	//7. AM 10:20 -> 0을 누르면 12시로 변경되는 버그 수정
-
+	////1.0.3.6
+	//1. MIAN-WARMING UP 아래 '(MANUAL)' 문구 추가
+	//2. 스마트키 사용함 + 스마트키 성공일 경우 간헐적으로 Service가 죽어서 스마트키 화면이 계속 나옴
+	//   -> 스마트키 성공 이미지 보여주는 부분 삭제, 타이머 2번죽이는 것 1번만 죽이도록 함
+	//3. 보정 후 결과 팝업 글자 뜨지 않는 버그 수정(다국어 적용 시 팝업 리셋)
+	//  - 기존 다국어 적용할 때 팝업마다 new 하였던 부분 원상복구
+	//4. 보정 후 결과 팝업 : 문자 짤리는 경우 발생 -> 수정(margin 줌)
+	//5. 메인화면에서 CCO, ICCO 타이틀바 애니메이션 제거(HHI 임혁준 요청)
+	//6. 스마트키 사용안함 + 시동제한 일 경우 부팅 시 시동제한 비밀번호 안뜨는 버그 수정(사용안함일 경우 ST로 보내는 부분이 주석되어있었음)
 	//////////////////////////////////////////////////////////////////////////////////////
 	
 	// TAG
@@ -869,6 +877,45 @@ public class Home extends Activity {
 		
 		_WeighingErrorToast = new WeighingErrorToast(this);
 	}
+
+	// ++, 150306 bwk
+	public void ResetPopup(){
+		if(HomeDialog != null){
+			HomeDialog.dismiss();
+			HomeDialog = null;
+		}
+		_QuickCouplerPopupLocking1 = new QuickCouplerPopupLocking1(this);
+		_QuickCouplerPopupUnlocking1 = new QuickCouplerPopupUnlocking1(this);
+		_QuickCouplerPopupLocking2 = new QuickCouplerPopupLocking2(this);
+		_QuickCouplerPopupUnlocking2 = new QuickCouplerPopupUnlocking2(this);
+		_QuickCouplerPopupUnlocking3 = new QuickCouplerPopupUnlocking3(this);
+		_CCoModePopup = new CCOModePopup(this);
+		_ICCOModePopup = new ICCOModePopup(this);
+		_ShiftModePopup = new ShiftModePopup(this);
+		_KickDownPopup = new KickDownPopup(this);
+		_TCLockUpPopup = new TCLockUpPopup(this);
+		_BucketPriorityPopup = new BucketPriorityPopup(this);
+		_EngineModePopup = new EngineModePopup(this);
+		_EngineWarmingUpPopup = new EngineWarmingUpPopup(this);
+		_SpeedometerInitPopup = new SpeedometerInitPopup(this);
+		_OperationHistoryInitPopup = new OperationHistoryInitPopup(this);
+		_AngleCalibrationResultPopup = new AngleCalibrationResultPopup(this);
+		_PressureCalibrationResultPopup = new PressureCalibrationResultPopup(this);
+		_SoundOutputPopup = new SoundOutputPopup(this);
+		_BrakePedalCalibrationPopup = new BrakePedalCalibrationPopup(this);
+		_EngineAutoShutdownCountPopup = new EngineAutoShutdownCountPopup(this);
+		_MaintReplacePopup = new MaintReplacePopup(this);
+		_LoggedFaultDeletePopup= new LoggedFaultDeletePopup(this);
+		_WorkLoadInitPopup = new WorkLoadInitPopup(this);
+		_WorkLoadWeighingInitPopup1 = new WorkLoadWeighingInitPopup1(this);
+		_WorkLoadWeighingInitPopup2 = new WorkLoadWeighingInitPopup2(this);
+		_EHCUErrorPopup = new EHCUErrorPopup(this);
+		_SoftStopInitPopup = new SoftStopInitPopup(this);
+		
+		_WeighingErrorToast = new WeighingErrorToast(this);
+	}
+	// --, 150306 bwk
+	
 	public void InitAnimation(){
 		
 	}
@@ -1833,7 +1880,6 @@ public class Home extends Activity {
 			HomeDialog = null;
 		}
 		
-		_QuickCouplerPopupLocking1 = new QuickCouplerPopupLocking1(this);	// ++, --, 150226 bwk
 		HomeDialog = _QuickCouplerPopupLocking1;
 		HomeDialog.show();
 	}
@@ -1846,8 +1892,7 @@ public class Home extends Activity {
 			HomeDialog.dismiss();
 			HomeDialog = null;
 		}
-		
-		_QuickCouplerPopupUnlocking1 = new QuickCouplerPopupUnlocking1(this);	// ++, --, 150226 bwk
+
 		HomeDialog = _QuickCouplerPopupUnlocking1;
 		HomeDialog.show();
 	}
@@ -1860,7 +1905,7 @@ public class Home extends Activity {
 			HomeDialog.dismiss();
 			HomeDialog = null;
 		}
-		_QuickCouplerPopupLocking2 = new QuickCouplerPopupLocking2(this);	// ++, --, 150226 bwk
+
 		HomeDialog = _QuickCouplerPopupLocking2;
 		HomeDialog.show();
 	}
@@ -1874,7 +1919,6 @@ public class Home extends Activity {
 			HomeDialog = null;
 		}
 		
-		_QuickCouplerPopupUnlocking2 = new QuickCouplerPopupUnlocking2(this);	// ++, --, 150226 bwk
 		HomeDialog = _QuickCouplerPopupUnlocking2;
 		HomeDialog.show();
 	}
@@ -1888,7 +1932,7 @@ public class Home extends Activity {
 			HomeDialog.dismiss();
 			HomeDialog = null;
 		}
-		_QuickCouplerPopupUnlocking3 = new QuickCouplerPopupUnlocking3(this);	// ++, --, 150226 bwk
+
 		HomeDialog = _QuickCouplerPopupUnlocking3;
 		HomeDialog.show();
 	}
@@ -1903,7 +1947,6 @@ public class Home extends Activity {
 			HomeDialog = null;
 		}
 
-		_CCoModePopup = new CCOModePopup(this);	// ++, --, 150226 bwk
 		HomeDialog = _CCoModePopup;
 		HomeDialog.show();
 	}
@@ -1917,7 +1960,6 @@ public class Home extends Activity {
 			HomeDialog = null;
 		}
 
-		_ICCOModePopup = new ICCOModePopup(this);	// ++, --, 150226 bwk
 		HomeDialog = _ICCOModePopup;
 		HomeDialog.show();
 	}
@@ -1931,7 +1973,6 @@ public class Home extends Activity {
 			HomeDialog = null;
 		}
 
-		_ShiftModePopup = new ShiftModePopup(this);	// ++, --, 150226 bwk
 		HomeDialog = _ShiftModePopup;
 		HomeDialog.show();
 	}
@@ -1946,7 +1987,6 @@ public class Home extends Activity {
 		}
 
 
-		_KickDownPopup = new KickDownPopup(this);	// ++, --, 150226 bwk
 		HomeDialog = _KickDownPopup;
 		HomeDialog.show();
 	}
@@ -1960,7 +2000,6 @@ public class Home extends Activity {
 			HomeDialog = null;
 		}
 
-		_TCLockUpPopup = new TCLockUpPopup(this);	// ++, --, 150226 bwk
 		HomeDialog = _TCLockUpPopup;
 		HomeDialog.show();
 	}
@@ -1974,7 +2013,6 @@ public class Home extends Activity {
 			HomeDialog = null;
 		}
 
-		_BucketPriorityPopup = new BucketPriorityPopup(this);	// ++, --, 150226 bwk
 		HomeDialog = _BucketPriorityPopup;
 		HomeDialog.show();
 	}
@@ -1988,7 +2026,6 @@ public class Home extends Activity {
 			HomeDialog = null;
 		}
 
-		_EngineModePopup = new EngineModePopup(this);	// ++, --, 150226 bwk
 		HomeDialog = _EngineModePopup;
 		HomeDialog.show();
 	}
@@ -2002,7 +2039,6 @@ public class Home extends Activity {
 			HomeDialog = null;
 		}
 
-		_EngineWarmingUpPopup = new EngineWarmingUpPopup(this);	// ++, --, 150226 bwk
 		HomeDialog = _EngineWarmingUpPopup;
 		HomeDialog.show();
 	}
@@ -2017,7 +2053,6 @@ public class Home extends Activity {
 			HomeDialog = null;
 		}
 
-		_SpeedometerInitPopup = new SpeedometerInitPopup(this);	// ++, --, 150226 bwk
 		HomeDialog = _SpeedometerInitPopup;
 		HomeDialog.show();
 	}
@@ -2031,7 +2066,7 @@ public class Home extends Activity {
 			HomeDialog.dismiss();
 			HomeDialog = null;
 		}
-		_OperationHistoryInitPopup = new OperationHistoryInitPopup(this);	// ++, --, 150226 bwk
+
 		HomeDialog = _OperationHistoryInitPopup;
 		HomeDialog.show();
 	}
@@ -2046,7 +2081,6 @@ public class Home extends Activity {
 			HomeDialog = null;
 		}
 
-		_AngleCalibrationResultPopup = new AngleCalibrationResultPopup(this);	// ++, --, 150226 bwk
 		HomeDialog = _AngleCalibrationResultPopup;
 		HomeDialog.show();
 	}
@@ -2061,7 +2095,6 @@ public class Home extends Activity {
 			HomeDialog = null;
 		}
 
-		_PressureCalibrationResultPopup = new PressureCalibrationResultPopup(this);	// ++, --, 150226 bwk
 		HomeDialog = _PressureCalibrationResultPopup;
 		HomeDialog.show();
 	}
@@ -2076,7 +2109,6 @@ public class Home extends Activity {
 			HomeDialog = null;
 		}
 
-		_SoundOutputPopup = new SoundOutputPopup(this);	// ++, --, 150226 bwk
 		HomeDialog = _SoundOutputPopup;
 		HomeDialog.show();
 	}
@@ -2091,7 +2123,6 @@ public class Home extends Activity {
 			HomeDialog = null;
 		}
 
-		_BrakePedalCalibrationPopup = new BrakePedalCalibrationPopup(this);	// ++, --, 150226 bwk
 		HomeDialog = _BrakePedalCalibrationPopup;
 		HomeDialog.show();
 	}
@@ -2106,7 +2137,6 @@ public class Home extends Activity {
 			HomeDialog = null;
 		}
 
-		_EngineAutoShutdownCountPopup = new EngineAutoShutdownCountPopup(this);	// ++, --, 150226 bwk
 		HomeDialog = _EngineAutoShutdownCountPopup;
 		HomeDialog.show();
 	}
@@ -2121,7 +2151,6 @@ public class Home extends Activity {
 			HomeDialog = null;
 		}
 
-		_MaintReplacePopup = new MaintReplacePopup(this);	// ++, --, 150226 bwk
 		HomeDialog = _MaintReplacePopup;
 		HomeDialog.show();
 	}
@@ -2136,7 +2165,6 @@ public class Home extends Activity {
 			HomeDialog = null;
 		}
 
-		_LoggedFaultDeletePopup= new LoggedFaultDeletePopup(this);	// ++, --, 150226 bwk
 		HomeDialog = _LoggedFaultDeletePopup;
 		HomeDialog.show();
 	}
@@ -2151,7 +2179,6 @@ public class Home extends Activity {
 			HomeDialog = null;
 		}
 
-		_WorkLoadInitPopup = new WorkLoadInitPopup(this);	// ++, --, 150226 bwk
 		HomeDialog = _WorkLoadInitPopup;
 		HomeDialog.show();
 	}
@@ -2166,7 +2193,6 @@ public class Home extends Activity {
 			HomeDialog = null;
 		}
 
-		_WorkLoadWeighingInitPopup1 = new WorkLoadWeighingInitPopup1(this);	// ++, --, 150226 bwk
 		HomeDialog = _WorkLoadWeighingInitPopup1;
 		HomeDialog.show();
 	}
@@ -2181,7 +2207,6 @@ public class Home extends Activity {
 			HomeDialog = null;
 		}
 
-		_WorkLoadWeighingInitPopup2 = new WorkLoadWeighingInitPopup2(this);	// ++, --, 150226 bwk
 		HomeDialog = _WorkLoadWeighingInitPopup2;
 		HomeDialog.show();
 	}
@@ -2196,7 +2221,6 @@ public class Home extends Activity {
 			HomeDialog = null;
 		}
 
-		_EHCUErrorPopup = new EHCUErrorPopup(this);	// ++, --, 150226 bwk
 		HomeDialog = _EHCUErrorPopup;
 		HomeDialog.show();
 	}
@@ -2211,7 +2235,6 @@ public class Home extends Activity {
 			HomeDialog = null;
 		}
 
-		_SoftStopInitPopup = new SoftStopInitPopup(this);	// ++, --, 150226 bwk
 		HomeDialog = _SoftStopInitPopup;
 		HomeDialog.show();
 	}

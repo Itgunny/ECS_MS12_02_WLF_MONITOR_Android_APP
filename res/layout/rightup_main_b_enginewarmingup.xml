@@ -16,7 +16,20 @@
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:textColor="@color/main_title_amber"
         android:textSize="25sp"/>
-
+    
+   
+    <TextView
+        android:id="@+id/textView_rightup_main_b_enginewarmingup_subtitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignRight="@+id/imageView_rightup_main_b_enginewarmingup_line"
+        android:layout_below="@+id/textView_rightup_main_b_enginewarmingup_title"
+        android:layout_marginRight="40dp"
+        android:text="(MANUAL)"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textColor="@color/main_title_amber"
+        android:textSize="25sp"/>
+    
     <ImageView
         android:id="@+id/imageView_rightup_main_b_enginewarmingup_line"
         android:layout_width="wrap_content"

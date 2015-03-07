@@ -281,10 +281,10 @@ public class ESLCheckFragment extends ParentFragment{
 				if (RecSMKFlag != 0) {
 					SmartKeyAuth = CAN1Comm.Get_SmkAuthResult();
 					if (SmartKeyAuth == 0xA5) { // Success
-						HandleSMKImgChange.sendMessage(HandleSMKImgChange.obtainMessage(0));
+						//HandleSMKImgChange.sendMessage(HandleSMKImgChange.obtainMessage(0));	// ++, --, 150306 bwk
 						CancelSMKCheckTimer();
 						StartESLCheckTimer();
-						CancelSMKCheckTimer();
+						//CancelSMKCheckTimer();	// ++, --, 150306 bwk
 					} else if (SmartKeyAuth == 0xFE) { // Fail
 						CancelSMKCheckTimer();
 						StartESLCheckTimer();
