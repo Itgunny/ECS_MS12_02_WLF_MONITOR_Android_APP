@@ -140,7 +140,10 @@ public class VersionInfoMonitorFragment extends VersionInfoDetailFragment{
 			textViewHardwareData.setText("RevD.02.01");
 		}else if(_data > 499 && _data < 551){	// 6.8k
 			textViewHardwareData.setText("RevD.03.01");
-		}		else{
+		}else if(_data > 596 && _data < 626){	// 5.7k
+			textViewHardwareData.setText("RevD.04.01");
+		}		
+		else{
 			textViewHardwareData.setText("-");
 		}
 	}
