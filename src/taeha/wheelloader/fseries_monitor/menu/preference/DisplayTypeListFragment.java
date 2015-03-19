@@ -102,6 +102,8 @@ public class DisplayTypeListFragment extends MenuBodyList_ParentFragment{
 		else
 			ParentActivity.StartAnimationRunningTimer();
 		
+		ParentActivity._MenuBaseFragment.showBodyDisplayTypeAnimation();	// ++, 150309 bwk
+		
 		CursurIndex = 1;
 		CursurDisplay(CursurIndex);
 	}

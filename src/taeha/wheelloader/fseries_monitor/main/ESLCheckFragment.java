@@ -213,7 +213,11 @@ public class ESLCheckFragment extends ParentFragment{
 	//	if(ParentActivity.DisplayType == Home.DISPLAY_TYPE_A){
 	//		ParentActivity._MainChangeAnimation.StartChangeAnimation(ParentActivity._MainABaseFragment);
 	//	}else{
-			ParentActivity._MainChangeAnimation.StartChangeAnimation(ParentActivity._MainBBaseFragment);
+		// ++, 150309 bwk
+			//ParentActivity._MainChangeAnimation.StartChangeAnimation(ParentActivity._MainBBaseFragment);
+			ParentActivity.showMainScreen();
+			ParentActivity.setScreenIndex();
+		// --, 150309 bwk
 	//	}
 	}
 	/////////////////////////////////////////////////////////////////////

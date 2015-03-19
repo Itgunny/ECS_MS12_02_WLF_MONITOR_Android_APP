@@ -61,7 +61,15 @@ public class QuickCouplerPopupUnlocking3 extends ParentPopup{
 		InitButtonListener();
 		InitValuable();
 		
-		ParentActivity.ScreenIndex = ParentActivity.SCREEN_STATE_MAIN_B_KEY_QUICKCOUPLER_POPUP_UNLOCKING3;
+		// ++, 150314 bwk
+		//ParentActivity.ScreenIndex = ParentActivity.SCREEN_STATE_MAIN_B_KEY_QUICKCOUPLER_POPUP_UNLOCKING3;
+		if(ParentActivity.DisplayType == ParentActivity.DISPLAY_TYPE_A){
+			ParentActivity.ScreenIndex = ParentActivity.SCREEN_STATE_MAIN_B_KEY_QUICKCOUPLER_POPUP_UNLOCKING3;
+		}else{
+			ParentActivity.ScreenIndex = ParentActivity.SCREEN_STATE_MAIN_A_KEY_QUICKCOUPLER_POPUP_UNLOCKING3;
+		}
+		// --, 150314 bwk			
+
 		
 		CAN1Comm.SetFNFlag(false);
 	}
@@ -86,7 +94,10 @@ public class QuickCouplerPopupUnlocking3 extends ParentPopup{
 		super.dismiss();
 		Log.d(TAG,"dismiss");
 		//ParentActivity.ScreenIndex = ParentActivity.OldScreenIndex;
-		ParentActivity.ScreenIndex = Home.SCREEN_STATE_MAIN_B_TOP;
+		// ++, 150310 bwk
+		//ParentActivity.ScreenIndex = Home.SCREEN_STATE_MAIN_B_TOP;
+		ParentActivity.setScreenIndex();
+		// --, 150310 bwk
 	}
 
 	@Override

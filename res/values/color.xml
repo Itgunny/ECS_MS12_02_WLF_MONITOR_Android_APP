@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <color name="main_title_amber">#ffffbf00</color>
+    <color name="main_title_amber_b">#ffffb400</color>
+    <color name="main_title_gray">#ff8d8d8d</color>
     <color name="main_quick_help_blue">#ff57b6ee</color>
     <color name="menu_left_amber">#ffffbf00</color>
     <color name="menu_left_gray">#ffb2b2b2</color>

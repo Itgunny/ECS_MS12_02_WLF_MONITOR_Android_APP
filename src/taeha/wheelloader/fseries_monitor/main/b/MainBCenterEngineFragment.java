@@ -18,6 +18,8 @@ public class MainBCenterEngineFragment extends ParentFragment{
 	//////////////////////////////////////////////////
 	//RESOURCE////////////////////////////////////////
 	RelativeLayout LayoutTop;
+	
+	ImageView EngineIcon;	// ++, --, 150317 bwk
 	//////////////////////////////////////////////////
 	
 	//VALUABLE////////////////////////////////////////
@@ -54,12 +56,13 @@ public class MainBCenterEngineFragment extends ParentFragment{
 	protected void InitResource() {
 		// TODO Auto-generated method stub
 		LayoutTop = (RelativeLayout)mRoot.findViewById(R.id.RelativeLayout_center_main_b_engine);
+		
+		EngineIcon = (ImageView)mRoot.findViewById(R.id.imageView_center_main_b_engine_icon);	// ++, --, 150317 bwk
 	}
 	
 	protected void InitValuables() {
 		// TODO Auto-generated method stub
 		super.InitValuables();
-		
 	}
 	@Override
 	protected void InitButtonListener() {
@@ -87,6 +90,14 @@ public class MainBCenterEngineFragment extends ParentFragment{
 		
 	}
 	/////////////////////////////////////////////////////////////////////	
+	// ++, 150317 bwk
+	public void ShowEngineIcon(){
+		if(ParentActivity.ScreenIndex == ParentActivity.SCREEN_STATE_MAIN_B_RIGHTUP_HOURODMETER)
+			EngineIcon.setVisibility(View.INVISIBLE);
+		else
+			EngineIcon.setVisibility(View.VISIBLE);
+	}
+	// --, 150317 bwk
 	
 	public void ClickBG(){
 		if(ParentActivity.AnimationRunningFlag == true)

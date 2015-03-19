@@ -130,6 +130,12 @@ public class CAN1CommManager extends ICAN1CommManager.Stub{		// ttySAC1(Linux), 
 	public static final int DATA_STATE_ODOMETER_TOTAL 			= 2;
 	public static final int DATA_STATE_ODOMETER_LATEST 			= 3;
 	
+	// ++, 150317 bwk
+	public static final int DATA_STATE_CURRENT_FUEL_RATE		= 0;
+	public static final int DATA_STATE_AVERAGE_FUEL_RATE		= 1;
+	public static final int DATA_STATE_LASTEST_FUEL_CONSUMED	= 2;
+	// --, 150317 bwk
+	
 	public static final int DATA_STATE_MACHINESTATUS_NOSELECT	= 0;
 	public static final int DATA_STATE_MACHINESTATUS_HYD		= 1;
 	public static final int DATA_STATE_MACHINESTATUS_BATTERY	= 2;

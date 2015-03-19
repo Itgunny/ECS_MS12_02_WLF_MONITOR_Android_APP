@@ -440,8 +440,12 @@ public class FaultHistoryActiveFragment extends ParentFragment{
 		else
 			ParentActivity.StartAnimationRunningTimer();
 		
-		if(ParentActivity.OldScreenIndex == Home.SCREEN_STATE_MAIN_B_TOP){
-			ParentActivity._MainChangeAnimation.StartChangeAnimation(ParentActivity._MainBBaseFragment);
+		// ++, 150309 bwk
+		//if(ParentActivity.OldScreenIndex == Home.SCREEN_STATE_MAIN_B_TOP){
+			//ParentActivity._MainChangeAnimation.StartChangeAnimation(ParentActivity._MainBBaseFragment);
+		if(ParentActivity.OldScreenIndex == Home.SCREEN_STATE_MAIN_A_TOP || ParentActivity.OldScreenIndex == Home.SCREEN_STATE_MAIN_B_TOP){
+			ParentActivity.showMainScreen();
+		// --, 150309 bwk			
 			ParentActivity.OldScreenIndex = 0;
 		}
 		else{
@@ -1156,7 +1160,10 @@ public class FaultHistoryActiveFragment extends ParentFragment{
 				return;
 			else
 				ParentActivity.StartAnimationRunningTimer();
-			ParentActivity._MainChangeAnimation.StartChangeAnimation(ParentActivity._MainBBaseFragment);
+			// ++, 150309 bwk
+			//ParentActivity._MainChangeAnimation.StartChangeAnimation(ParentActivity._MainBBaseFragment);
+			ParentActivity.showMainScreen();
+			// --, 150309 bwk
 		}
 	}
 	// --, 150209 bwk

@@ -63,6 +63,7 @@ import taeha.wheelloader.fseries_monitor.menu.monitoring.VersionInfoTCUFragment;
 import taeha.wheelloader.fseries_monitor.menu.multimedia.MenuMultimediaFragment;
 import taeha.wheelloader.fseries_monitor.menu.preference.BrightnessFragment;
 import taeha.wheelloader.fseries_monitor.menu.preference.ClockFragment;
+import taeha.wheelloader.fseries_monitor.menu.preference.DisplayTypeFragment;
 import taeha.wheelloader.fseries_monitor.menu.preference.DisplayTypeListFragment;
 import taeha.wheelloader.fseries_monitor.menu.preference.LanguageListFragment;
 import taeha.wheelloader.fseries_monitor.menu.preference.MenuPreferenceFragment;
@@ -169,6 +170,7 @@ public class MenuBaseFragment extends ParentFragment{
 	public UnitFragment								_UnitFragment;
 	public DisplayTypeListFragment					_DisplayTypeListFragment;
 	public LanguageListFragment						_LanguageListFragment;	// ++, --, 150206 bwk
+	public DisplayTypeFragment						_DisplayTypeFragment;	// ++, --, 150309 bwk
 	
 	//UserSwitching
 	public UserSwitching							_UserSwitching;
@@ -294,6 +296,7 @@ public class MenuBaseFragment extends ParentFragment{
 		_DisplayTypeListFragment = new DisplayTypeListFragment();
 		_UserSwitching = new UserSwitching();
 		_LanguageListFragment = new LanguageListFragment();	// ++, --, 150206 bwk
+		_DisplayTypeFragment = new DisplayTypeFragment();	// ++, --, 150309 bwk
 	}
 	
 	protected void InitValuables() {
@@ -375,7 +378,7 @@ public class MenuBaseFragment extends ParentFragment{
 		transaction.detach(_DisplayTypeListFragment);
 		transaction.detach(_UserSwitching);
 		transaction.detach(_LanguageListFragment);	// ++, --, 150206 bwk
-		
+		transaction.detach(_DisplayTypeFragment);	// ++, --, 150309 bwk
 		
 		transaction.commit();	
 		
@@ -1131,6 +1134,12 @@ public class MenuBaseFragment extends ParentFragment{
 		InterBodyAnimation.StartChangeAnimation(_LanguageListFragment);
 	}
 	// --, 150206 bwk
+	// ++, 150309 bwk
+	public void showBodyDisplayTypeAnimation(){
+		showInterAnimation();
+		InterBodyAnimation.StartChangeAnimation(_DisplayTypeFragment);
+	}
+	// --, 150309 bwk
 	/////////////////////////////////////////////////////////////////////
 	
 	/////////////////////////////////////////////////////////////////////
@@ -1445,6 +1454,11 @@ public class MenuBaseFragment extends ParentFragment{
 		case Home.SCREEN_STATE_MENU_PREFERENCE_DISPLAYTYPELANG_TOP:
 			_DisplayTypeListFragment.ClickLeft();
 			break;
+		// ++, 150309 bwk
+		case Home.SCREEN_STATE_MENU_PREFERENCE_DISPLAYTYPELANG_TYPE:
+			_DisplayTypeFragment.ClickLeft();
+			break;
+		// --, 150309 bwk
 		// ++, 150206 bwk
 		case Home.SCREEN_STATE_MENU_PREFERENCE_DISPLAYTYPELANG_LANG_CHANGE:
 			_LanguageListFragment.ClickLeft();
@@ -1698,6 +1712,11 @@ public class MenuBaseFragment extends ParentFragment{
 		case Home.SCREEN_STATE_MENU_PREFERENCE_DISPLAYTYPELANG_TOP:
 			_DisplayTypeListFragment.ClickRight();
 			break;
+		// ++, 150309 bwk
+		case Home.SCREEN_STATE_MENU_PREFERENCE_DISPLAYTYPELANG_TYPE:
+			_DisplayTypeFragment.ClickRight();
+			break;
+		// --, 150309 bwk
 		// ++, 150206 bwk
 		case Home.SCREEN_STATE_MENU_PREFERENCE_DISPLAYTYPELANG_LANG_CHANGE:
 			_LanguageListFragment.ClickRight();
@@ -1949,6 +1968,11 @@ public class MenuBaseFragment extends ParentFragment{
 		case Home.SCREEN_STATE_MENU_PREFERENCE_DISPLAYTYPELANG_TOP:
 			_DisplayTypeListFragment.ClickESC();
 			break;
+		// ++, 150309 bwk
+		case Home.SCREEN_STATE_MENU_PREFERENCE_DISPLAYTYPELANG_TYPE:
+			_DisplayTypeFragment.ClickESC();
+			break;
+		// --, 150309 bwk			
 		// ++, 150206 bwk
 		case Home.SCREEN_STATE_MENU_PREFERENCE_DISPLAYTYPELANG_LANG_CHANGE:
 			_LanguageListFragment.ClickESC();
@@ -2200,6 +2224,11 @@ public class MenuBaseFragment extends ParentFragment{
 		case Home.SCREEN_STATE_MENU_PREFERENCE_DISPLAYTYPELANG_TOP:
 			_DisplayTypeListFragment.ClickEnter();
 			break;
+		// ++, 150309 bwk
+		case Home.SCREEN_STATE_MENU_PREFERENCE_DISPLAYTYPELANG_TYPE:
+			_DisplayTypeFragment.ClickEnter();
+			break;
+		// --, 150309 bwk					
 		// ++, 150206 bwk
 		case Home.SCREEN_STATE_MENU_PREFERENCE_DISPLAYTYPELANG_LANG_CHANGE:
 			_LanguageListFragment.ClickEnter();
@@ -2280,9 +2309,12 @@ public class MenuBaseFragment extends ParentFragment{
 			break;
 		default:
 			// ++, 150210 bwk
-			if(ParentActivity.OldScreenIndex == Home.SCREEN_STATE_MAIN_B_TOP)
-			{
-				ParentActivity._MainChangeAnimation.StartChangeAnimation(ParentActivity._MainBBaseFragment);
+			// ++, 150309 bwk
+			//if(ParentActivity.OldScreenIndex == Home.SCREEN_STATE_MAIN_B_TOP){
+				//ParentActivity._MainChangeAnimation.StartChangeAnimation(ParentActivity._MainBBaseFragment);
+			if(ParentActivity.OldScreenIndex == Home.SCREEN_STATE_MAIN_A_TOP || ParentActivity.OldScreenIndex == Home.SCREEN_STATE_MAIN_B_TOP){
+				ParentActivity.showMainScreen();
+			// --, 150309 bwk						
 				ParentActivity.OldScreenIndex = 0;
 			}
 			else

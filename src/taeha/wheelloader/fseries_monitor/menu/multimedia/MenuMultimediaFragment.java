@@ -70,8 +70,13 @@ public class MenuMultimediaFragment extends ParentFragment{
 	}
 	
 	////////////////////////////////////////////////
-	
-	
+    @Override
+    public void onResume() {
+           // TODO Auto-generated method stub
+           super.onResume();
+           CursurIndex = 1;
+           CursurDisplay(CursurIndex);
+    }
 
 	//Common Function//////////////////////////////
 	@Override
@@ -180,11 +185,19 @@ public class MenuMultimediaFragment extends ParentFragment{
 	/////////////////////////////////////////////////////////////////////	
 	public void ClickMediaPlayer(){
 		ParentActivity.KillApps("com.example.wfdsink");
-		Intent intent;
-		intent = ParentActivity.getPackageManager().getLaunchIntentForPackage("com.mxtech.videoplayer.ad");
-		if(intent != null){
-			ParentActivity.startActivity(intent);
+		// ++, 150319 bwk
+		if(CAN1Comm.GetrpmFlag() == false)
+		{
+			CAN1Comm.SetPlayerFlag(true);
+		// --, 150319 bwk
+			Intent intent;
+			intent = ParentActivity.getPackageManager().getLaunchIntentForPackage("com.mxtech.videoplayer.ad");
+			if(intent != null){
+				ParentActivity.startActivity(intent);
+			}
+		// ++, 150319 bwk
 		}
+		// --, 150319 bwk
 		CursurIndex = 1;
 		CursurDisplay(CursurIndex);
 	}

@@ -11,14 +11,14 @@ import taeha.wheelloader.fseries_monitor.main.b.MainBCenterAEBFragment;
 import taeha.wheelloader.fseries_monitor.main.b.MainBCenterBrakePedalCalibrationFragment;
 import taeha.wheelloader.fseries_monitor.main.b.MainBCenterEngineFragment;
 import taeha.wheelloader.fseries_monitor.main.b.MainBCenterFragment;
-import taeha.wheelloader.fseries_monitor.main.b.MainBCenterHourOdometerFragment;
+import taeha.wheelloader.fseries_monitor.main.b.MainBCenterFuelFragment;
 import taeha.wheelloader.fseries_monitor.main.b.MainBCenterMachineStatusFragment;
 import taeha.wheelloader.fseries_monitor.main.b.MainBCenterQuickFragment;
 import taeha.wheelloader.fseries_monitor.main.b.MainBCenterTMFragment;
 import taeha.wheelloader.fseries_monitor.main.b.MainBIndicatorFragment;
 import taeha.wheelloader.fseries_monitor.main.b.MainBKeyTitleFragment;
-import taeha.wheelloader.fseries_monitor.main.b.MainBLeftDownHourOdometerFragment;
-import taeha.wheelloader.fseries_monitor.main.b.MainBLeftDownHourOdometerSelectFragment;
+import taeha.wheelloader.fseries_monitor.main.b.MainBLeftDownFuelFragment;
+import taeha.wheelloader.fseries_monitor.main.b.MainBLeftDownFuelSelectFragment;
 import taeha.wheelloader.fseries_monitor.main.b.MainBLeftDownQuickFragment;
 import taeha.wheelloader.fseries_monitor.main.b.MainBLeftUpMachineStatusFragment;
 import taeha.wheelloader.fseries_monitor.main.b.MainBLeftUpMachineStatusSelectFragment;
@@ -31,7 +31,7 @@ import taeha.wheelloader.fseries_monitor.main.b.MainBRightDownTMShiftModeFragmen
 import taeha.wheelloader.fseries_monitor.main.b.MainBRightDownTMTCLockUpFragment;
 import taeha.wheelloader.fseries_monitor.main.b.MainBRightUpEngineFragment;
 import taeha.wheelloader.fseries_monitor.main.b.MainBRightUpEngineModeFragment;
-import taeha.wheelloader.fseries_monitor.main.b.MainBRightUpEngineWarmingUpFragment;
+import taeha.wheelloader.fseries_monitor.main.b.MainBRightUpHourOdometerSelectFragment;
 import taeha.wheelloader.fseries_monitor.main.b.MainBRightUpQuickFragment;
 import taeha.wheelloader.fseries_monitor.main.b.MainBUpperMenuBarFragment;
 import taeha.wheelloader.fseries_monitor.main.b.MainBVirtualKeyFragment;
@@ -96,58 +96,61 @@ public class MainBBaseFragment extends ParentFragment{
 	//////////////////////////////////////////////////
 	
 	//Fragment////////////////////////////////////////
-	public MainBCenterFragment _MainBCenterFragment;
-	public MainBCenterEngineFragment _MainBCenterEngineFragment; 
-	public MainBCenterTMFragment _MainBCenterTMFragment;
-	public MainBCenterHourOdometerFragment _MainBCenterHourOdometerFragment;
-	public MainBCenterMachineStatusFragment _MainBCenterMachineStatusFragment;
-	public MainBCenterQuickFragment _MainBCenterQuickFragment;
+	public MainBCenterFragment 						_MainBCenterFragment;
+	public MainBCenterEngineFragment 				_MainBCenterEngineFragment; 
+	public MainBCenterTMFragment 					_MainBCenterTMFragment;
+	public MainBCenterFuelFragment 			_MainBCenterHourOdometerFragment;
+	public MainBCenterMachineStatusFragment 		_MainBCenterMachineStatusFragment;
+	public MainBCenterQuickFragment 				_MainBCenterQuickFragment;
 	public MainBCenterBrakePedalCalibrationFragment	_MainBCenterBrakePedalCalibrationFragment;
 	public MainBCenterAEBFragment					_MainBCenterAEBFragment;
 	
-	public MainBIndicatorFragment _MainBIndicatorFragment;
+	public MainBIndicatorFragment 					_MainBIndicatorFragment;
 	
-	public MainBRightUpEngineFragment _MainBRightUpEngineFragment;
-	public MainBRightUpEngineModeFragment _MainBRightUpEngineModeFragment;
-	public MainBRightUpEngineWarmingUpFragment _MainBRightUpEngineWarmingUpFragment;
-	public MainBRightUpQuickFragment _MainBRightUpQuickFragment;
+	public MainBRightUpEngineFragment 				_MainBRightUpEngineFragment;
+	public MainBRightUpEngineModeFragment 			_MainBRightUpEngineModeFragment;
+	// ++, 150316 bwk
+	//public MainBRightUpEngineWarmingUpFragment 		_MainBRightUpEngineWarmingUpFragment;
+	public MainBRightUpHourOdometerSelectFragment	_MainBRightUpHourOdometerSelectFragment;
+	// --, 150316 bwk
+	public MainBRightUpQuickFragment 				_MainBRightUpQuickFragment;
 	
-	public MainBRightDownTMFragment _MainBRightDownTMFragment;
-	public MainBRightDownTMCCOModeFragment _MainBRightDownTMCCOModeFragment;
-	public MainBRightDownTMICCOModeFragment _MainBRightDownTMICCOModeFragment;
-	public MainBRightDownTMShiftModeFragment _MainBRightDownTMShiftModeFragment;
-	public MainBRightDownTMTCLockUpFragment _MainBRightDownTMTCLockUpFragment;
-	public MainBRightDownQuickFragment _MainBRightDownQuickFragment;
+	public MainBRightDownTMFragment 				_MainBRightDownTMFragment;
+	public MainBRightDownTMCCOModeFragment 			_MainBRightDownTMCCOModeFragment;
+	public MainBRightDownTMICCOModeFragment 		_MainBRightDownTMICCOModeFragment;
+	public MainBRightDownTMShiftModeFragment 		_MainBRightDownTMShiftModeFragment;
+	public MainBRightDownTMTCLockUpFragment 		_MainBRightDownTMTCLockUpFragment;
+	public MainBRightDownQuickFragment 				_MainBRightDownQuickFragment;
 	
-	public MainBLeftDownHourOdometerFragment _MainBLeftDownHourOdoFragment;
-	public MainBLeftDownHourOdometerSelectFragment _MainBLeftDownHourOdometerSelectFragment;
-	public MainBLeftDownQuickFragment _MainBLeftDownQuickFragment;
+	public MainBLeftDownFuelFragment 		_MainBLeftDownHourOdoFragment;
+	public MainBLeftDownFuelSelectFragment 	_MainBLeftDownHourOdometerSelectFragment;
+	public MainBLeftDownQuickFragment 				_MainBLeftDownQuickFragment;
 	
-	public MainBLeftUpMachineStatusFragment _MainBLeftUpMachineStatusFragment;
-	public MainBLeftUpMachineStatusSelectFragment _MainBLeftUpMachineStatusSelectFragment;
-	public MainBLeftUpQuickFragment _MainBLeftUpQuickFragment;
+	public MainBLeftUpMachineStatusFragment 		_MainBLeftUpMachineStatusFragment;
+	public MainBLeftUpMachineStatusSelectFragment 	_MainBLeftUpMachineStatusSelectFragment;
+	public MainBLeftUpQuickFragment 				_MainBLeftUpQuickFragment;
 	
-	public MainBUpperMenuBarFragment _MainBUpperMenuBarFragment;
+	public MainBUpperMenuBarFragment 				_MainBUpperMenuBarFragment;
 	
-	public MainBVirtualKeyFragment _MainBVirtualKeyFragment;
+	public MainBVirtualKeyFragment 					_MainBVirtualKeyFragment;
 	
-	public MainBKeyTitleFragment _MainBKeyTitleFragment;
+	public MainBKeyTitleFragment 					_MainBKeyTitleFragment;
 	
-	public MainBKeyMainLightFragment _MainBKeyMainLightFragment;
-	public MainBKeyWorkLightFragment _MainBKeyWorkLightFragment;
-	public MainBKeyAutoGreaseFragment _MainBKeyAutoGreaseFragment;
-	public MainBKeyQuickCouplerFragment _MainBKeyQuickCouplerFragment;
-	public MainBKeyRideControlFragment _MainBKeyRideControlFragment;
-	public MainBKeyWorkLoadFragment _MainBKeyWorkLoadFragment;
-	public MainBKeyBeaconLampFragment _MainBKeyBeaconLampFragment;
-	public MainBKeyRearWiperFragment _MainBKeyRearWiperFragment;
-	public MainBKeyMirrorHeatFragment _MainBKeyMirrorHeatFragment;
-	public MainBKeyDetentFragment _MainBKeyDetentFragment;
-	public MainBKeyFineModulationFragment _MainBKeyFineModulationFragment;
-	public MainBKeyWorkLoadAccumulationFragment _MainBKeyWorkLoadAccumulationFragment;
-	public MainBKeyWorkLoadDisplayFragment _MainBKeyWorkLoadDisplayFragment;
-	public MainBKeyWorkLoadErrorDetectionFragment _MainBKeyWorkLoadErrorDetectionFragment;
-	public MainBKeyRideControlSpeedFragment _MainBKeyRideControlSpeedFragment;
+	public MainBKeyMainLightFragment 				_MainBKeyMainLightFragment;
+	public MainBKeyWorkLightFragment 				_MainBKeyWorkLightFragment;
+	public MainBKeyAutoGreaseFragment 				_MainBKeyAutoGreaseFragment;
+	public MainBKeyQuickCouplerFragment 			_MainBKeyQuickCouplerFragment;
+	public MainBKeyRideControlFragment 				_MainBKeyRideControlFragment;
+	public MainBKeyWorkLoadFragment 				_MainBKeyWorkLoadFragment;
+	public MainBKeyBeaconLampFragment 				_MainBKeyBeaconLampFragment;
+	public MainBKeyRearWiperFragment 				_MainBKeyRearWiperFragment;
+	public MainBKeyMirrorHeatFragment 				_MainBKeyMirrorHeatFragment;
+	public MainBKeyDetentFragment 					_MainBKeyDetentFragment;
+	public MainBKeyFineModulationFragment 			_MainBKeyFineModulationFragment;
+	public MainBKeyWorkLoadAccumulationFragment 	_MainBKeyWorkLoadAccumulationFragment;
+	public MainBKeyWorkLoadDisplayFragment 			_MainBKeyWorkLoadDisplayFragment;
+	public MainBKeyWorkLoadErrorDetectionFragment 	_MainBKeyWorkLoadErrorDetectionFragment;
+	public MainBKeyRideControlSpeedFragment 		_MainBKeyRideControlSpeedFragment;
 	//////////////////////////////////////////////////
 	
 	//ANIMATION///////////////////////////////////////
@@ -322,7 +325,7 @@ public class MainBBaseFragment extends ParentFragment{
 		_MainBCenterFragment = new MainBCenterFragment();
 		_MainBCenterEngineFragment = new MainBCenterEngineFragment();
 		_MainBCenterTMFragment = new MainBCenterTMFragment();
-		_MainBCenterHourOdometerFragment = new MainBCenterHourOdometerFragment();
+		_MainBCenterHourOdometerFragment = new MainBCenterFuelFragment();
 		_MainBCenterMachineStatusFragment = new MainBCenterMachineStatusFragment();
 		_MainBCenterQuickFragment = new MainBCenterQuickFragment();
 		_MainBCenterBrakePedalCalibrationFragment = new MainBCenterBrakePedalCalibrationFragment();
@@ -332,7 +335,10 @@ public class MainBBaseFragment extends ParentFragment{
 		
 		_MainBRightUpEngineFragment = new MainBRightUpEngineFragment();
 		_MainBRightUpEngineModeFragment = new MainBRightUpEngineModeFragment();
-		_MainBRightUpEngineWarmingUpFragment = new MainBRightUpEngineWarmingUpFragment();
+		// ++, 150316 bwk
+		//_MainBRightUpEngineWarmingUpFragment = new MainBRightUpEngineWarmingUpFragment();
+		_MainBRightUpHourOdometerSelectFragment = new MainBRightUpHourOdometerSelectFragment();
+		// --, 150316 bwk
 		_MainBRightUpQuickFragment = new MainBRightUpQuickFragment();
 		
 		_MainBRightDownTMFragment = new MainBRightDownTMFragment();
@@ -342,8 +348,8 @@ public class MainBBaseFragment extends ParentFragment{
 		_MainBRightDownTMTCLockUpFragment = new MainBRightDownTMTCLockUpFragment();
 		_MainBRightDownQuickFragment = new MainBRightDownQuickFragment();
 		
-		_MainBLeftDownHourOdoFragment = new MainBLeftDownHourOdometerFragment();
-		_MainBLeftDownHourOdometerSelectFragment = new MainBLeftDownHourOdometerSelectFragment();
+		_MainBLeftDownHourOdoFragment = new MainBLeftDownFuelFragment();
+		_MainBLeftDownHourOdometerSelectFragment = new MainBLeftDownFuelSelectFragment();
 		_MainBLeftDownQuickFragment = new MainBLeftDownQuickFragment();
 		
 		_MainBLeftUpMachineStatusFragment = new MainBLeftUpMachineStatusFragment();
@@ -497,7 +503,10 @@ public class MainBBaseFragment extends ParentFragment{
 		transaction.detach(_MainBIndicatorFragment);
 		transaction.detach(_MainBRightUpEngineFragment);
 		transaction.detach(_MainBRightUpEngineModeFragment);
-		transaction.detach(_MainBRightUpEngineWarmingUpFragment);
+		// ++, 150316 bwk
+		//transaction.detach(_MainBRightUpEngineWarmingUpFragment);
+		transaction.detach(_MainBRightUpHourOdometerSelectFragment);
+		// --, 150316 bwk
 		transaction.detach(_MainBRightUpQuickFragment);
 		transaction.detach(_MainBRightDownTMFragment);
 		transaction.detach(_MainBRightDownTMCCOModeFragment);
@@ -531,7 +540,10 @@ public class MainBBaseFragment extends ParentFragment{
 			
 		_MainBRightUpEngineFragment 	 = null;
 		_MainBRightUpEngineModeFragment 	 = null;
-		_MainBRightUpEngineWarmingUpFragment 	 = null;
+		// ++, 150316 bwk
+		//_MainBRightUpEngineWarmingUpFragment 	 = null;
+		_MainBRightUpHourOdometerSelectFragment	= null;
+		// --, 150316 bwk
 		_MainBRightUpQuickFragment 	 = null;
 			
 		_MainBRightDownTMFragment 	 = null;
@@ -717,12 +729,20 @@ public class MainBBaseFragment extends ParentFragment{
 		//transaction.addToBackStack("Main_Left");
 		transaction.commit();
 	}
-	public void showRightUpEngineWarmingUp(){
+	// ++, 150316 bwk
+//	public void showRightUpEngineWarmingUp(){
+//		android.app.FragmentTransaction transaction = getFragmentManager().beginTransaction();
+//		transaction.replace(R.id.FrameLayout_screen_main_b_rightup, _MainBRightUpEngineWarmingUpFragment);
+//		//transaction.addToBackStack("Main_Left");
+//		transaction.commit();
+//	}
+	public void showRightUpHourOdoSelect(){
 		android.app.FragmentTransaction transaction = getFragmentManager().beginTransaction();
-		transaction.replace(R.id.FrameLayout_screen_main_b_rightup, _MainBRightUpEngineWarmingUpFragment);
+		transaction.replace(R.id.FrameLayout_screen_main_b_rightup, _MainBRightUpHourOdometerSelectFragment);
 		//transaction.addToBackStack("Main_Left");
 		transaction.commit();
 	}
+	// --, 150316 bwk
 	public void showRightUpQuick(){
 		android.app.FragmentTransaction transaction = getFragmentManager().beginTransaction();
 		transaction.replace(R.id.FrameLayout_screen_main_b_rightup, _MainBRightUpQuickFragment);
@@ -1494,7 +1514,10 @@ public class MainBBaseFragment extends ParentFragment{
 	public void ClickKeyButtonESC(){
 		switch (ParentActivity.ScreenIndex) {
 		case Home.SCREEN_STATE_MAIN_B_RIGHTUP_ENGINE_MODE:
-		case Home.SCREEN_STATE_MAIN_B_RIGHTUP_ENGINE_WARMINGUP:
+		// ++, 150316 bwk
+		//case Home.SCREEN_STATE_MAIN_B_RIGHTUP_ENGINE_WARMINGUP:
+		case Home.SCREEN_STATE_MAIN_B_RIGHTUP_HOURODMETER:
+		// --, 150316 bwk
 			showRightUptoDefaultScreenAnimation();
 			break;
 		case Home.SCREEN_STATE_MAIN_B_RIGHTDOWN_CCOMODE:
@@ -1505,7 +1528,10 @@ public class MainBBaseFragment extends ParentFragment{
 		case Home.SCREEN_STATE_MAIN_B_LEFTUP_MACHINESTATUS:
 			showLeftUptoDefaultScreenAnimation();
 			break;
-		case Home.SCREEN_STATE_MAIN_B_LEFTDOWN_HOURODOMETER:
+		// ++, 150317 bwk
+		//case Home.SCREEN_STATE_MAIN_B_LEFTDOWN_HOURODOMETER:
+		case Home.SCREEN_STATE_MAIN_B_LEFTDOWN_FUEL:
+		// --, 150317 bwk
 			showLeftDowntoDefaultScreenAnimation();
 			break;
 		case Home.SCREEN_STATE_MAIN_B_QUICK_TOP:

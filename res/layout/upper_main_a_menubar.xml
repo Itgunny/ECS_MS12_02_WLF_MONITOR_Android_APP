@@ -1,0 +1,194 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ImageButton
+        android:id="@+id/imageButton_upper_main_a_menubar_time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/_selector_upper_main_a_time_btn1" 
+         android:layout_marginLeft="272dp" />
+    
+    <TextView
+        android:id="@+id/textView_upper_main_a_menubar_time_pm"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/imageButton_upper_main_a_menubar_time"
+        android:layout_marginLeft="314dp"
+        android:layout_marginTop="8dp"
+        android:alpha="0.5"
+        android:text="@string/PM"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:visibility="invisible" />
+    
+    <TextView
+        android:id="@+id/textView_upper_main_a_menubar_time_am"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/textView_upper_main_a_menubar_time_pm"
+        android:layout_marginLeft="314dp"
+        android:alpha="0.5"
+        android:text="@string/AM"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
+    
+    <TextView
+        android:id="@+id/textView_upper_main_a_menubar_time_hour"
+        android:layout_width="wrap_content"
+        android:layout_height="65dp"
+        android:layout_alignBottom="@+id/textView_upper_main_a_menubar_time_am"
+        android:layout_alignTop="@+id/textView_upper_main_a_menubar_time_pm"
+        android:layout_marginLeft="359dp"
+        android:layout_marginTop="-5dp"
+        android:layout_marginBottom="-5dp"
+        android:gravity="right|center_vertical"
+        android:text="12"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textSize="50sp"
+        android:textStyle="bold" />
+    
+    <TextView
+        android:id="@+id/textView_upper_main_a_menubar_time_colon"
+        android:layout_width="wrap_content"
+        android:layout_height="65dp"
+        android:layout_alignBottom="@+id/textView_upper_main_a_menubar_time_am"
+        android:layout_alignTop="@+id/textView_upper_main_a_menubar_time_pm"
+        android:layout_marginLeft="419dp"
+        android:gravity="center"
+        android:layout_marginTop="-5dp"
+        android:layout_marginBottom="-5dp"
+        android:text=":"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textSize="50sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/textView_upper_main_a_menubar_time_min"
+        android:layout_width="wrap_content"
+        android:layout_height="65dp"
+        android:layout_alignBottom="@+id/textView_upper_main_a_menubar_time_am"
+        android:layout_alignTop="@+id/textView_upper_main_a_menubar_time_pm"
+        android:layout_marginLeft="434dp"
+        android:layout_marginTop="-5dp"
+        android:layout_marginBottom="-5dp"
+        android:gravity="right|center_vertical"
+        android:text="00"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textSize="50sp"
+        android:textStyle="bold" />
+    
+    <ImageButton
+        android:id="@+id/imageButton_upper_main_a_menubar_buzzer"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="153dp"
+        android:layout_alignParentBottom="true"
+        android:background="@drawable/_selector_upper_main_a_buzzer_btn1" />
+    
+    <ImageButton
+        android:id="@+id/imageButton_upper_main_a_menubar_wiper"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="525dp"
+        android:layout_alignParentBottom="true"
+        android:background="@drawable/_selector_lower_main_a_menubar_btn1" />
+
+    <ImageButton
+        android:id="@+id/imageButton_upper_main_a_menubar_camera"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="401dp"
+        android:layout_alignParentBottom="true"
+        android:background="@drawable/_selector_lower_main_a_menubar_btn1" />
+    
+    <ImageButton
+        android:id="@+id/imageButton_upper_main_a_menubar_menu"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="277dp"
+        android:layout_alignParentBottom="true"
+        android:background="@drawable/_selector_lower_main_a_menubar_btn1" />
+
+    <ImageView
+        android:id="@+id/imageView_upper_main_a_menubar_buzzer_normal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="179dp"
+        android:layout_alignParentBottom="true"
+        android:src="@drawable/main_a_menubar_icon_buzzer_on" />
+    
+    <ImageView
+        android:id="@+id/imageView_upper_main_a_menubar_buzzer_070_left"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="153dp"
+        android:layout_alignParentBottom="true"
+        android:src="@drawable/main_a_menubar_icon_buzzer_on_red"
+        android:visibility="invisible" />
+
+    <ImageView
+        android:id="@+id/imageView_upper_main_a_menubar_buzzer_070_right"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="223dp"
+        android:layout_alignParentBottom="true"
+        android:src="@drawable/main_a_fault_070"
+        android:visibility="invisible" />
+    
+    <ImageView
+        android:id="@+id/imageView_upper_main_a_menubar_wiper_icon"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="541dp"
+        android:layout_alignParentBottom="true"
+        android:src="@drawable/main_menubar_icon_wiper_off" />
+    
+    <ImageView
+        android:id="@+id/imageView_upper_main_a_menubar_wiper_level_1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="601dp"
+        android:layout_marginTop="433dp"
+        android:src="@drawable/main_menubar_icon_wiper_step_off" />
+    
+    <ImageView
+        android:id="@+id/imageView_upper_main_a_menubar_wiper_level_2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="601dp"
+        android:layout_marginTop="442dp"
+        android:src="@drawable/main_menubar_icon_wiper_step_off" />
+    
+    <ImageView
+        android:id="@+id/imageView_upper_main_a_menubar_wiper_level_3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="601dp"
+        android:layout_marginTop="451dp"
+        android:src="@drawable/main_menubar_icon_wiper_step_off" />
+    
+    <ImageView
+        android:id="@+id/imageView_upper_main_a_menubar_wiper_level_4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="601dp"
+        android:layout_marginTop="460dp"
+        android:layout_alignTop="@+id/imageView_upper_main_a_menubar_wiper_icon"
+        android:src="@drawable/main_menubar_icon_wiper_step_off" />
+    
+    <ImageView
+        android:id="@+id/imageView_upper_main_a_menubar_camera"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="434dp"
+        android:layout_alignParentBottom="true"
+        android:src="@drawable/main_a_menubar_icon_camera" />
+    
+    <ImageView
+        android:id="@+id/imageView_upper_main_a_menubar_menu"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="307dp"
+        android:layout_alignParentBottom="true"
+        android:src="@drawable/main_a_menubar_icon_menu" />    
+</RelativeLayout>

@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/RelativeLayout_key_main_a_mirrorheat"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/main_a_bg_right" >
+   
+    <TextView
+        android:id="@+id/textView_key_main_a_mirrorheat_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/textView_key_main_a_mirrorheat_ok"
+        android:layout_alignRight="@+id/textView_key_main_a_mirrorheat_cancel"
+        android:layout_marginTop="80dp"
+        android:gravity="center"
+        android:text="@string/Do_you_want_to_turn_on_Mirror_Heat"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
+   
+    <TextView
+        android:id="@+id/textView_key_main_a_mirrorheat_ok"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="220dp"
+        android:layout_marginTop="200dp"
+        android:background="@drawable/_selector_key_rearwiper_washer_btn1"
+        android:gravity="center"
+        android:text="@string/OK"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
+    
+    <TextView
+        android:id="@+id/textView_key_main_a_mirrorheat_cancel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="470dp"
+        android:layout_marginTop="200dp"
+        android:background="@drawable/_selector_key_rearwiper_washer_btn1"
+        android:gravity="center"
+        android:text="@string/Off"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
+
+    
+
+</RelativeLayout>

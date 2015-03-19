@@ -118,7 +118,10 @@ public class BrakePedalCalibrationPopup extends ParentPopup{
 	public void ClickOK(){
 		CAN1Comm.Set_RequestBrakePedalPositionSensorCalibration_PGN61184_201(1);
 		CAN1Comm.TxCANToMCU(201);
-		ParentActivity._MainChangeAnimation.StartChangeAnimation(ParentActivity._MainBBaseFragment);
+		// ++, 150309 bwk
+		//ParentActivity._MainChangeAnimation.StartChangeAnimation(ParentActivity._MainBBaseFragment);
+		ParentActivity.showMainScreen();
+		// --, 150309 bwk
 		this.dismiss();
 	}	
 	////////////////////////////////////////////////////////////////////////////////

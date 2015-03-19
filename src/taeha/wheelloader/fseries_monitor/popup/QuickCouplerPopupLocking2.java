@@ -62,7 +62,14 @@ public class QuickCouplerPopupLocking2 extends ParentPopup{
 		
 		StartQuickCouplerSendTimer();
 		CAN1Comm.TxCMDToMCU(CAN1Comm.CMD_BUZ, CAN1Comm.BUZZER_ON);	// Buzzer On
-		ParentActivity.ScreenIndex = ParentActivity.SCREEN_STATE_MAIN_B_KEY_QUICKCOUPLER_POPUP_LOCKING2;
+		// ++, 150314 bwk
+		//ParentActivity.ScreenIndex = ParentActivity.SCREEN_STATE_MAIN_B_KEY_QUICKCOUPLER_POPUP_LOCKING2;
+		if(ParentActivity.DisplayType == ParentActivity.DISPLAY_TYPE_A){
+			ParentActivity.ScreenIndex = ParentActivity.SCREEN_STATE_MAIN_B_KEY_QUICKCOUPLER_POPUP_LOCKING2;
+		}else{
+			ParentActivity.ScreenIndex = ParentActivity.SCREEN_STATE_MAIN_A_KEY_QUICKCOUPLER_POPUP_LOCKING2;
+		}
+		// --, 150314 bwk		
 		ParentActivity.AttachmentStatus = CAN1CommManager.DATA_STATE_KEY_QUICKCOUPLER_LOCK;
 		ParentActivity.SavePref();
 		

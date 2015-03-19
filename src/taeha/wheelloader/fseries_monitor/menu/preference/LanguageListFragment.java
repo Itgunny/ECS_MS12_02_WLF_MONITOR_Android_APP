@@ -450,7 +450,10 @@ public class LanguageListFragment extends ParentFragment{
 		}
 		else
 		{
-			ParentActivity._MainChangeAnimation.StartChangeAnimation(ParentActivity._MainBBaseFragment);
+			// ++, 150309 bwk
+			//ParentActivity._MainChangeAnimation.StartChangeAnimation(ParentActivity._MainBBaseFragment);
+			ParentActivity.showMainScreen();
+			// --, 150309 bwk
 			ParentActivity.OldScreenIndex = 0;			
 		}		
 	}
@@ -744,7 +747,10 @@ public class LanguageListFragment extends ParentFragment{
 		}
 		else
 		{
-			ParentActivity._MainChangeAnimation.StartChangeAnimation(ParentActivity._MainBBaseFragment);
+			// ++, 150309 bwk
+			//ParentActivity._MainChangeAnimation.StartChangeAnimation(ParentActivity._MainBBaseFragment);
+			ParentActivity.showMainScreen();
+			// --, 150309 bwk
 			ParentActivity.OldScreenIndex = 0;			
 		}
 	}

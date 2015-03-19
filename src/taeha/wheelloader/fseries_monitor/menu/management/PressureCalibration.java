@@ -202,9 +202,12 @@ public class PressureCalibration extends ParentFragment{
 		/*
 		ParentActivity._MenuBaseFragment.showCalibrationAnimation();
 		*/
-		if(ParentActivity.OldScreenIndex == Home.SCREEN_STATE_MAIN_B_TOP)
-		{
-			ParentActivity._MainChangeAnimation.StartChangeAnimation(ParentActivity._MainBBaseFragment);
+		// ++, 150309 bwk
+		//if(ParentActivity.OldScreenIndex == Home.SCREEN_STATE_MAIN_B_TOP){
+			//ParentActivity._MainChangeAnimation.StartChangeAnimation(ParentActivity._MainBBaseFragment);
+		if(ParentActivity.OldScreenIndex == Home.SCREEN_STATE_MAIN_A_TOP || ParentActivity.OldScreenIndex == Home.SCREEN_STATE_MAIN_B_TOP){
+			ParentActivity.showMainScreen();
+		// --, 150309 bwk		
 			ParentActivity.OldScreenIndex = 0;
 			//ParentActivity._MainBBaseFragment.showWorkLoadAnimation();
 		}

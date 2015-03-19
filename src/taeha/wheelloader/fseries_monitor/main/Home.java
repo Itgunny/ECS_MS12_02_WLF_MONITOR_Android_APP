@@ -67,8 +67,8 @@ public class Home extends Activity {
 	//
 	public static final int VERSION_HIGH 		= 1;
 	public static final int VERSION_LOW 		= 0;
-	public static final int VERSION_SUB_HIGH 	= 3;
-	public static final int VERSION_SUB_LOW 	= 6;
+	public static final int VERSION_SUB_HIGH 	= 4;
+	public static final int VERSION_SUB_LOW 	= 0;
 	////1.0.2.3
 	// UI B 안 최초 적용 2014.12.10
 	////1.0.2.4
@@ -211,6 +211,11 @@ public class Home extends Activity {
 	//6. 스마트키 사용안함 + 시동제한 일 경우 부팅 시 시동제한 비밀번호 안뜨는 버그 수정(사용안함일 경우 ST로 보내는 부분이 주석되어있었음)
 	////1.0.3.6(15.03.07)
 	//1. RevD.04.01 Revision 대응
+	////1.0.4.0
+	//1. 화면타입설정 추가
+	//2. B안 진행
+	//3. Main : Right Up => Warning Up 제거 및 Hourmeter, Odometer 표시
+	//4. Main : Left Down => Average Fuel, Lastest Fuel Consumed 추가, Hourmenter, Odometer 제거
 	//////////////////////////////////////////////////////////////////////////////////////
 	
 	// TAG
@@ -220,7 +225,10 @@ public class Home extends Activity {
 	
 	public  static final int SCREEN_STATE_MAIN_B_RIGHTUP_TOP								= 0x11000000;
 	public  static final int SCREEN_STATE_MAIN_B_RIGHTUP_ENGINE_MODE						= 0x11100000;
-	public  static final int SCREEN_STATE_MAIN_B_RIGHTUP_ENGINE_WARMINGUP					= 0x11200000;
+	// ++, 150316 bwk
+	//public  static final int SCREEN_STATE_MAIN_B_RIGHTUP_ENGINE_WARMINGUP					= 0x11200000;
+	public  static final int SCREEN_STATE_MAIN_B_RIGHTUP_HOURODMETER						= 0x11200000;
+	// --, 150316 bwk
 	public  static final int SCREEN_STATE_MAIN_B_RIGHTUP_END								= 0x11FFFFFF;
 	
 	public  static final int SCREEN_STATE_MAIN_B_RIGHTDOWN_TOP								= 0x12000000;
@@ -234,7 +242,10 @@ public class Home extends Activity {
 	public  static final int SCREEN_STATE_MAIN_B_LEFTUP_END									= 0x13FFFFFF;
 	
 	public  static final int SCREEN_STATE_MAIN_B_LEFTDOWN_TOP								= 0x14000000;
-	public  static final int SCREEN_STATE_MAIN_B_LEFTDOWN_HOURODOMETER						= 0x14100000;
+	// ++, 150317 bwk
+	//public  static final int SCREEN_STATE_MAIN_B_LEFTDOWN_HOURODOMETER						= 0x14100000;
+	public  static final int SCREEN_STATE_MAIN_B_LEFTDOWN_FUEL								= 0x14100000;
+	// --, 150317 bwk
 	public  static final int SCREEN_STATE_MAIN_B_LEFTDOWN_END								= 0x14FFFFFF;
 	
 	public  static final int SCREEN_STATE_MAIN_B_QUICK_TOP									= 0x15000000;
@@ -437,7 +448,59 @@ public class Home extends Activity {
 	public  static final int SCREEN_STATE_MAIN_ENDING										= 0x60000000;
 	
 	public  static final int SCREEN_STATE_MAIN_A_TOP 										= 0x70000000;
+	// ++, 150310 bwk
+	public  static final int SCREEN_STATE_MAIN_A_RIGHTUP_TOP								= 0x71000000;
+	public  static final int SCREEN_STATE_MAIN_A_RIGHTUP_ENGINE_MODE						= 0x71100000;
+	public  static final int SCREEN_STATE_MAIN_A_RIGHTUP_HOURODMETER						= 0x71200000;
+	public  static final int SCREEN_STATE_MAIN_A_RIGHTUP_END								= 0x71FFFFFF;
 	
+	public  static final int SCREEN_STATE_MAIN_A_RIGHTDOWN_TOP								= 0x72000000;
+	public  static final int SCREEN_STATE_MAIN_A_RIGHTDOWN_CCOMODE							= 0x72100000;
+	public  static final int SCREEN_STATE_MAIN_A_RIGHTDOWN_SHIFTMODE						= 0x72200000;
+	public  static final int SCREEN_STATE_MAIN_A_RIGHTDOWN_TCLOCKUP							= 0x72300000;
+	public  static final int SCREEN_STATE_MAIN_A_RIGHTDOWN_END								= 0x72FFFFFF;
+	
+	public  static final int SCREEN_STATE_MAIN_A_LEFTUP_TOP									= 0x73000000;
+	public  static final int SCREEN_STATE_MAIN_A_LEFTUP_MACHINESTATUS						= 0x73100000;
+	public  static final int SCREEN_STATE_MAIN_A_LEFTUP_END									= 0x73FFFFFF;
+	
+	public  static final int SCREEN_STATE_MAIN_A_LEFTDOWN_TOP								= 0x74000000;
+	public  static final int SCREEN_STATE_MAIN_A_LEFTDOWN_FUEL								= 0x74100000;
+	public  static final int SCREEN_STATE_MAIN_A_LEFTDOWN_END								= 0x74FFFFFF;
+	
+	public  static final int SCREEN_STATE_MAIN_A_QUICK_TOP									= 0x75000000;
+	public  static final int SCREEN_STATE_MAIN_A_QUICK_END									= 0x75FFFFFF;
+	
+	public  static final int SCREEN_STATE_MAIN_A_KEY_TOP									= 0x76000000;
+	public  static final int SCREEN_STATE_MAIN_A_KEY_MAINLIGHT								= 0x76100000;
+	public  static final int SCREEN_STATE_MAIN_A_KEY_WORKLIGHT								= 0x76200000;
+	public  static final int SCREEN_STATE_MAIN_A_KEY_AUTOGREASE								= 0x76300000;
+	public  static final int SCREEN_STATE_MAIN_A_KEY_QUICKCOUPLER							= 0x76400000;
+	public  static final int SCREEN_STATE_MAIN_A_KEY_QUICKCOUPLER_POPUP_LOCKING1			= 0x76410000;
+	public  static final int SCREEN_STATE_MAIN_A_KEY_QUICKCOUPLER_POPUP_LOCKING2			= 0x76420000;
+	public  static final int SCREEN_STATE_MAIN_A_KEY_QUICKCOUPLER_POPUP_UNLOCKING1			= 0x76430000;
+	public  static final int SCREEN_STATE_MAIN_A_KEY_QUICKCOUPLER_POPUP_UNLOCKING2			= 0x76440000;
+	public  static final int SCREEN_STATE_MAIN_A_KEY_QUICKCOUPLER_POPUP_UNLOCKING3			= 0x76450000;
+	public  static final int SCREEN_STATE_MAIN_A_KEY_RIDECONTROL							= 0x76500000;
+	public  static final int SCREEN_STATE_MAIN_A_KEY_RIDECONTROL_SPEED						= 0x76510000;
+	public  static final int SCREEN_STATE_MAIN_A_KEY_WORKLOAD								= 0x76600000;
+	public  static final int SCREEN_STATE_MAIN_A_KEY_WORKLOAD_ACCUMULATION					= 0x76610000;
+	public  static final int SCREEN_STATE_MAIN_A_KEY_WORKLOAD_DISPLAY						= 0x76620000;
+	public  static final int SCREEN_STATE_MAIN_A_KEY_WORKLOAD_ERRORDETECT					= 0x76630000;
+	public  static final int SCREEN_STATE_MAIN_A_KEY_BEACONLAMP								= 0x76700000;
+	public  static final int SCREEN_STATE_MAIN_A_KEY_REARWIPER								= 0x76800000;
+	public  static final int SCREEN_STATE_MAIN_A_KEY_MIRRORHEAT								= 0x76900000;
+	public  static final int SCREEN_STATE_MAIN_A_KEY_DETENT									= 0x76A00000;
+	public  static final int SCREEN_STATE_MAIN_A_KEY_FINEMODULATION							= 0x76B00000;
+	public  static final int SCREEN_STATE_MAIN_A_KEY_FN										= 0x76C00000;
+	public  static final int SCREEN_STATE_MAIN_A_KEY_END									= 0x76FFFFFF;
+	
+	public  static final int SCREEN_STATE_MAIN_A_BRKAEPEDALCALIBRATION_TOP					= 0x77000000;
+	public  static final int SCREEN_STATE_MAIN_A_BRKAEPEDALCALIBRATION_END					= 0x77FFFFFF;
+	public  static final int SCREEN_STATE_MAIN_A_AEB_TOP									= 0x78000000;
+	public  static final int SCREEN_STATE_MAIN_A_AEB_END									= 0x78FFFFFF;
+	// --, 150310 bwk
+		
 	public  static final int SCREEN_STATE_MAIN_A_END 										= 0x7FFFFFFF;
 	
 	public  static final int SCREEN_STATE_EHCUERR_POPUP										= 0x80000000;
@@ -534,6 +597,11 @@ public class Home extends Activity {
 	
 	// HourOdometer Index
 	public int HourOdometerIndex;
+	
+	// ++, 150317 bwk
+	// Fuel Index
+	public int FuelIndex;
+	// --, 150317 bwk
 	
 	// MachineStatus Index
 	public int MachineStatusUpperIndex;
@@ -1030,6 +1098,7 @@ public class Home extends Activity {
 		edit.putInt("UnitWeight", UnitWeight);
 		edit.putInt("UnitPressure", UnitPressure);
 		edit.putInt("HourOdometerIndex", HourOdometerIndex);
+		edit.putInt("FuelIndex", FuelIndex);		// ++, --, 150317 bwk
 		edit.putInt("MachineStatusUpperIndex", MachineStatusUpperIndex);
 		edit.putInt("MachineStatusLowerIndex", MachineStatusLowerIndex);
 		edit.putInt("WeighingErrorDetect", WeighingErrorDetect);
@@ -1049,6 +1118,7 @@ public class Home extends Activity {
 		UnitWeight = SharePref.getInt("UnitWeight", UNIT_WEIGHT_TON);
 		UnitPressure = SharePref.getInt("UnitPressure", UNIT_PRESSURE_BAR);
 		HourOdometerIndex = SharePref.getInt("HourOdometerIndex", CAN1CommManager.DATA_STATE_HOURMETER_LATEST);
+		FuelIndex = SharePref.getInt("FuelIndex", CAN1CommManager.DATA_STATE_CURRENT_FUEL_RATE);	// ++, --, 150317 bwk
 		MachineStatusUpperIndex = SharePref.getInt("MachineStatusUpperIndex", CAN1CommManager.DATA_STATE_MACHINESTATUS_NOSELECT);
 		MachineStatusLowerIndex = SharePref.getInt("MachineStatusLowerIndex", CAN1CommManager.DATA_STATE_MACHINESTATUS_NOSELECT);
 		WeighingErrorDetect = SharePref.getInt("WeighingErrorDetect", CAN1CommManager.DATA_STATE_WEIGHING_ERRORDETECT_OFF);
@@ -1074,6 +1144,7 @@ public class Home extends Activity {
 		strASNum = SharePref.getString("strASNum", "");
 		
 		DisplayType = SharePref.getInt("DisplayType", DISPLAY_TYPE_B);
+		setScreenIndex();	// ++, --, 150310 bwk
 		
 		LanguageIndex = SharePref.getInt("LanguageIndex", STATE_DISPLAY_LANGUAGE_ENGLISH);		// ++, --, 150206 bwk
 		
@@ -1232,7 +1303,26 @@ public class Home extends Activity {
 	}
 	// --, 150213 bwk
 	/////////////////////////////////////////////////////
-	
+	// ++, 150309 bwk
+	public void showMainScreen(){
+		if(DisplayType == DISPLAY_TYPE_A){
+			_MainChangeAnimation.StartChangeAnimation(_MainBBaseFragment);
+		}else{
+			_MainChangeAnimation.StartChangeAnimation(_MainABaseFragment);
+		}
+	}	
+
+	public void setScreenIndex(){
+		Log.d(TAG,"ScreenIndex="+ScreenIndex);
+		if(DisplayType == DISPLAY_TYPE_A){
+			ScreenIndex = SCREEN_STATE_MAIN_B_TOP;
+		}else{
+			ScreenIndex = SCREEN_STATE_MAIN_A_TOP;
+		}
+		Log.d(TAG,"ScreenIndex="+ScreenIndex);
+	}	
+	// --, 150309 bwk
+		
 	//Main Screen Fragment///////////////////////////////
 	public void showMainBFragment(){
 		_MainBBaseFragment = new MainBBaseFragment();
@@ -1553,7 +1643,12 @@ public class Home extends Activity {
 	public void CheckBuzzer(){
 		if(ScreenIndex == SCREEN_STATE_MAIN_B_KEY_QUICKCOUPLER_POPUP_LOCKING2
 		|| ScreenIndex == SCREEN_STATE_MAIN_B_KEY_QUICKCOUPLER_POPUP_UNLOCKING2
-		|| ScreenIndex == SCREEN_STATE_MAIN_B_KEY_QUICKCOUPLER_POPUP_UNLOCKING3){
+		|| ScreenIndex == SCREEN_STATE_MAIN_B_KEY_QUICKCOUPLER_POPUP_UNLOCKING3
+		// ++, 150313 bwk
+		|| ScreenIndex == SCREEN_STATE_MAIN_A_KEY_QUICKCOUPLER_POPUP_LOCKING2
+		|| ScreenIndex == SCREEN_STATE_MAIN_A_KEY_QUICKCOUPLER_POPUP_UNLOCKING2
+		|| ScreenIndex == SCREEN_STATE_MAIN_A_KEY_QUICKCOUPLER_POPUP_UNLOCKING3){
+		// --, 150313 bwk
 			
 		}else{
 			if(BuzzerStopCount > 5){
@@ -1579,6 +1674,7 @@ public class Home extends Activity {
 	}
 	public void CameraDisplay(){
 		if((ScreenIndex >= SCREEN_STATE_MAIN_B_TOP && ScreenIndex <= SCREEN_STATE_MAIN_B_END)
+		|| (ScreenIndex >= SCREEN_STATE_MAIN_A_TOP && ScreenIndex <= SCREEN_STATE_MAIN_A_END)	// ++, --, 150310 bwk
 		|| ScreenIndex == SCREEN_STATE_MAIN_CAMERA_GEAR){
 			if(CameraReverseMode == CAN1CommManager.DATA_STATE_CAMERA_REVERSE_ON){
 				if(SelectGearDirection == CAN1CommManager.DATA_INDEX_SELECTGEAR_DIR_R){	
@@ -1696,7 +1792,10 @@ public class Home extends Activity {
 		}
 	}
 	public void CheckAttachmentUnlock(){
-		if(ScreenIndex == SCREEN_STATE_MAIN_B_TOP){
+		// ++, 150310 bwk
+		//if(ScreenIndex == SCREEN_STATE_MAIN_B_TOP){
+		if(ScreenIndex == SCREEN_STATE_MAIN_B_TOP || ScreenIndex == SCREEN_STATE_MAIN_A_TOP){
+		// --, 150310 bwk
 			if(AttachmentStatus == CAN1CommManager.DATA_STATE_KEY_QUICKCOUPLER_UNLOCK){
 				OldScreenIndex = ScreenIndex;
 				showQuickCouplerPopupUnlocking3();
@@ -1843,6 +1942,18 @@ public class Home extends Activity {
 			|| Data == CAN1CommManager.ESC){
 				ExitCam();
 			}
+		// ++, 150310 bwk
+		}else if(ScreenIndex == SCREEN_STATE_MAIN_A_KEY_QUICKCOUPLER_POPUP_LOCKING2
+				||	 ScreenIndex == SCREEN_STATE_MAIN_A_KEY_QUICKCOUPLER_POPUP_UNLOCKING2
+				||	 ScreenIndex	== SCREEN_STATE_MAIN_A_KEY_QUICKCOUPLER_POPUP_UNLOCKING3){
+			if(Data == CAN1CommManager.CAMERA){
+				ExcuteCamActivitybyKey();
+			}
+			Log.d(TAG,"Click QuickCoupler Key");				
+		}else if((ScreenIndex & SCREEN_STATE_MAIN_A_TOP) == SCREEN_STATE_MAIN_A_TOP){
+			Log.d(TAG,"Click Main A Key");
+			_MainABaseFragment.KeyButtonClick(Data);
+		// --, 150310 bwk
 		}else if(ScreenIndex == SCREEN_STATE_MAIN_CAMERA_GEAR){
 			
 		}else if(ScreenIndex == SCREEN_STATE_MAIN_B_KEY_QUICKCOUPLER_POPUP_LOCKING2
@@ -1859,7 +1970,7 @@ public class Home extends Activity {
 			Log.d(TAG,"Click WeighingInit2 Key");
 			_WorkLoadWeighingInitPopup2.KeyButtonClick(Data);
 		}else if((ScreenIndex & SCREEN_STATE_MAIN_B_TOP) == SCREEN_STATE_MAIN_B_TOP){
-			Log.d(TAG,"Click Main Key");
+			Log.d(TAG,"Click Main B Key");
 			_MainBBaseFragment.KeyButtonClick(Data);
 		}else if((ScreenIndex & SCREEN_STATE_MAIN_ENDING) == SCREEN_STATE_MAIN_ENDING){
 			Log.d(TAG,"Click Ending Key");

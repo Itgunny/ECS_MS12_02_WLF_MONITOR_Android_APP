@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/RelativeLayout_rightup_main_b_hourodomterhourodo"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/main_bg_right_up" >
+    
+    <RadioButton
+        android:id="@+id/radioButton_rightup_main_b_hourodometer_select_latesthourmeter"
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="165dp"
+        android:layout_marginTop="84dp"
+        android:button="@drawable/_selector_radio_btn"
+        android:text="@string/Latest_Hourmeter"
+        android:textColor="@drawable/_selector_radio_txt_white_amber"
+        android:textSize="25sp" />
+	
+	<RadioButton
+	    android:id="@+id/radioButton_rightup_main_b_hourodometer_select_totalodometer"
+	    android:layout_width="250dp"
+	    android:layout_height="wrap_content"
+	    android:layout_marginLeft="440dp"
+	    android:layout_marginTop="84dp"
+	    android:button="@drawable/_selector_radio_btn"
+	    android:text="@string/Total_Odometer"
+	    android:textColor="@drawable/_selector_radio_txt_white_amber"
+	    android:textSize="25sp" />
+	
+	<RadioButton
+	    android:id="@+id/radioButton_rightup_main_b_hourodometer_select_latestodometer"
+	    android:layout_width="250dp"
+	    android:layout_height="wrap_content"
+	    android:layout_marginLeft="165dp"
+	    android:layout_marginTop="155dp"
+	    android:text="@string/Latest_Odometer"
+	    android:button="@drawable/_selector_radio_btn"
+	    android:textColor="@drawable/_selector_radio_txt_white_amber"
+	    android:textSize="25sp" />
+	
+	<RadioButton
+	    android:id="@+id/radioButton_rightup_main_b_hourodometer_select_currentfuelrate"
+	    android:layout_width="250dp"
+	    android:layout_height="wrap_content"
+	    android:layout_marginLeft="440dp"
+	    android:layout_marginTop="155dp"
+	    android:button="@drawable/_selector_radio_btn"
+	    android:text="@string/Current_Fuel_Rate"
+	    android:textColor="@drawable/_selector_radio_txt_white_amber"
+	    android:textSize="25sp" 
+	    android:visibility="invisible" />
+
+</RelativeLayout>

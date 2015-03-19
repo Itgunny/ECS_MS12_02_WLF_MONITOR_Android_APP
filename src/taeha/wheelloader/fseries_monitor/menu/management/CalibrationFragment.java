@@ -132,7 +132,11 @@ public class CalibrationFragment extends MenuBodyList_ParentFragment{
 		// TODO Auto-generated method stub
 		CAN1Comm.Set_RequestAEB_PGN61184_201(1);
 		CAN1Comm.TxCANToMCU(201);
-		ParentActivity._MainChangeAnimation.StartChangeAnimation(ParentActivity._MainBBaseFragment);
+		// ++, 150309 bwk
+		//ParentActivity._MainChangeAnimation.StartChangeAnimation(ParentActivity._MainBBaseFragment);
+		ParentActivity.showMainScreen();
+		// --, 150309 bwk
+		
 		CursurIndex = 4;
 		CursurDisplay(CursurIndex);
 	}

@@ -103,7 +103,7 @@ public class WorkLoadInitPopup extends ParentPopup{
 		*/
 		ParentActivity.ScreenIndex = ParentActivity.OldScreenIndex;
 		try {
-			if(ParentActivity.OldScreenIndex == ParentActivity.SCREEN_STATE_MAIN_B_KEY_WORKLOAD)
+			if(ParentActivity.OldScreenIndex == ParentActivity.SCREEN_STATE_MENU_MODE_HYD_WORKLOAD_TOP)
 				ParentActivity._MenuBaseFragment._WorkLoadFragment.CursurDisplay(11);
 		} catch (NullPointerException e) {
 			// TODO: handle exception
@@ -164,6 +164,10 @@ public class WorkLoadInitPopup extends ParentPopup{
 			ParentActivity._MenuBaseFragment._WorkLoadFragment.SetDefault();
 		else if(ParentActivity.OldScreenIndex == ParentActivity.SCREEN_STATE_MAIN_B_KEY_WORKLOAD)
 			ParentActivity._MainBBaseFragment._MainBKeyWorkLoadFragment.SetDefault();
+		// ++, 150314 bwk
+		else if(ParentActivity.OldScreenIndex == ParentActivity.SCREEN_STATE_MAIN_A_KEY_WORKLOAD)
+			ParentActivity._MainABaseFragment._MainAKeyWorkLoadFragment.SetDefault();
+		// --, 150314 bwk
 		// --, 150210 bwk
 		this.dismiss();
 	}	

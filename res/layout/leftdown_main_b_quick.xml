@@ -23,7 +23,7 @@
         android:gravity="center"
         android:text="@string/Help"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:textColor="@color/main_title_amber"
+        android:textColor="@color/main_quick_help_blue"
         android:textSize="25sp"
         android:textStyle="bold|italic" />
 

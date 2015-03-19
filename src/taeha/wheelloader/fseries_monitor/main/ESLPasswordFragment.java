@@ -35,7 +35,10 @@ public class ESLPasswordFragment extends PasswordFragment{
 					return;
 				else
 					ParentActivity.StartAnimationRunningTimer();
-				ParentActivity._MainChangeAnimation.StartChangeAnimation(ParentActivity._MainBBaseFragment);
+				// ++, 150309 bwk
+				//ParentActivity._MainChangeAnimation.StartChangeAnimation(ParentActivity._MainBBaseFragment);
+				ParentActivity.showMainScreen();
+				// --, 150309 bwk
 			
 			}
 		};
