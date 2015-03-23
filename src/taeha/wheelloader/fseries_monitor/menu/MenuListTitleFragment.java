@@ -174,6 +174,7 @@ public class MenuListTitleFragment extends ParentFragment{
 			case Home.SCREEN_STATE_MENU_MANAGEMENT_CALIBRATION_TOP:
 			case Home.SCREEN_STATE_MENU_MANAGEMENT_SERVICE_TOP:
 			case Home.SCREEN_STATE_MENU_MANAGEMENT_SERVICE_PW:
+			case Home.SCREEN_STATE_MENU_MANAGEMENT_SOFTWAREUPDAT_PW:	// ++, --, 150323 bwk
 				ParentActivity._MenuBaseFragment.showBodyManagement();
 				setBackButtonEnable(false);
 				break;

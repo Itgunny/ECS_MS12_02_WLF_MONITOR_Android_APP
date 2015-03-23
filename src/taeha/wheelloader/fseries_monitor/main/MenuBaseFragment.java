@@ -29,6 +29,7 @@ import taeha.wheelloader.fseries_monitor.menu.management.ServiceMenuSensorMonito
 import taeha.wheelloader.fseries_monitor.menu.management.ServiceMenuSensorMonitoringHiddenFragment;
 import taeha.wheelloader.fseries_monitor.menu.management.ServiceMenuSpeedLimitFragment;
 import taeha.wheelloader.fseries_monitor.menu.management.ServiceMenuWeighingCompensationFragment;
+import taeha.wheelloader.fseries_monitor.menu.management.SoftwareUpdatePasswordFragment;
 import taeha.wheelloader.fseries_monitor.menu.mode.CameraSettingFragment;
 import taeha.wheelloader.fseries_monitor.menu.mode.CoolingFanFragment;
 import taeha.wheelloader.fseries_monitor.menu.mode.DetentFragment;
@@ -87,31 +88,31 @@ public class MenuBaseFragment extends ParentFragment{
 	//RESOURCE////////////////////////////////////////
 	AbsoluteLayout LayoutInter;
 	AbsoluteLayout LayoutList;
-	
+
 	FrameLayout framelayoutInterTitle;
 	FrameLayout framelayoutInterBody;
 	FrameLayout framelayoutListTitle;
 	FrameLayout framelayoutListBody;
 	FrameLayout framelayoutListLeft;
-	
+
 	ImageView imgViewtitleBG;
 	//////////////////////////////////////////////////
-	
+
 	//VALUABLE////////////////////////////////////////
 	public int FirstScreenIndex;
 	//////////////////////////////////////////////////
-	
+
 	//Fragment////////////////////////////////////////
 	public MenuListLeftFragment 	_MenuListLeftFragment;
 	public MenuListTitleFragment 	_MenuListTitleFragment;
 	public MenuInterTitleFragment 	_MenuInterTitleFragment;
-	
+
 	public MenuModeFragment			_MenuModeFragment;
 	public MenuMonitoringFragment 	_MenuMonitoringFragment;
 	public MenuManagementFragment 	_MenuManagementFragment;
 	public MenuPreferenceFragment 	_MenuPreferenceFragment;
 	public MenuMultimediaFragment 	_MenuMultimediaFragment;
-	
+
 	//Mode
 	public EngineSpeedFragment 			_EngineSpeedFragment;
 	public WorkLoadFragment 			_WorkLoadFragment;
@@ -143,7 +144,7 @@ public class MenuBaseFragment extends ParentFragment{
 	public FaultHistoryActiveFragment			_FaultHistoryActiveFragment;
 	public FaultHistoryLoggedFragment			_FaultHistoryLoggedFragment;
 	public FaultHistoryLoggedPasswordFragment	_FaultHistoryLoggedPasswordFragment;
-	
+
 	//Management
 	public MachineSecurityPasswordFragment				_MachineSecurityPasswordFragment;
 	public MachineSecurityListFragment					_MachineSecurityListFragment;
@@ -163,7 +164,8 @@ public class MenuBaseFragment extends ParentFragment{
 	public MaintenanceFragment							_MaintenanceFragment;
 	public MaintenanceDetailFragment					_MaintenanceDetailFragment;
 	public MaintenanceChangeCycleFragment				_MaintenanceChangeCycleFragment;
-	
+	public SoftwareUpdatePasswordFragment				_SoftwareUpdatePasswordFragment;	// ++, --, 150323 bwk
+
 	//Preference
 	public BrightnessFragment						_BrightnessFragment;
 	public ClockFragment							_ClockFragment;
@@ -171,11 +173,11 @@ public class MenuBaseFragment extends ParentFragment{
 	public DisplayTypeListFragment					_DisplayTypeListFragment;
 	public LanguageListFragment						_LanguageListFragment;	// ++, --, 150206 bwk
 	public DisplayTypeFragment						_DisplayTypeFragment;	// ++, --, 150309 bwk
-	
+
 	//UserSwitching
 	public UserSwitching							_UserSwitching;
 	//////////////////////////////////////////////////
-	
+
 	//ANIMATION///////////////////////////////////////
 	ChangeFragmentAnimation ListLeftAnimation;
 	ChangeFragmentAnimation ListTitleAnimation;
@@ -183,9 +185,9 @@ public class MenuBaseFragment extends ParentFragment{
 	ChangeFragmentAnimation InterTitleAnimation;
 	ChangeFragmentAnimation InterBodyAnimation;
 	///////////////////////////////////////////////////
-	
+
 	//TEST////////////////////////////////////////////
-	
+
 	//////////////////////////////////////////////////
 
 	//Life Cycle Function/////////////////////////////
@@ -203,9 +205,9 @@ public class MenuBaseFragment extends ParentFragment{
 
 		ClearCursurIndex();
 		ParentActivity.ScreenIndex = ParentActivity.SCREEN_STATE_MENU_TOP;
-		
+
 		CheckFirstScreen(FirstScreenIndex);
-	
+
 		return mRoot;
 	}
 	@Override
@@ -213,7 +215,7 @@ public class MenuBaseFragment extends ParentFragment{
 		// TODO Auto-generated method stub
 		super.onDestroyView();
 		DestroyFragment();
-	//	Runtime.getRuntime().gc();
+		//	Runtime.getRuntime().gc();
 	}
 	////////////////////////////////////////////////
 
@@ -223,16 +225,16 @@ public class MenuBaseFragment extends ParentFragment{
 		// TODO Auto-generated method stub
 		LayoutInter = (AbsoluteLayout)mRoot.findViewById(R.id.AbsoluteLayout_menu_inter);
 		LayoutList = (AbsoluteLayout)mRoot.findViewById(R.id.AbsoluteLayout_menu_list);
-		
+
 		framelayoutInterTitle = (FrameLayout)mRoot.findViewById(R.id.FrameLayout_menu_inter_title);
 		framelayoutInterBody = (FrameLayout)mRoot.findViewById(R.id.FrameLayout_menu_inter_body);
 		framelayoutListTitle = (FrameLayout)mRoot.findViewById(R.id.FrameLayout_menu_list_title);
 		framelayoutListBody = (FrameLayout)mRoot.findViewById(R.id.FrameLayout_menu_list_body);
 		framelayoutListLeft = (FrameLayout)mRoot.findViewById(R.id.FrameLayout_menu_list_left);
-		
+
 		imgViewtitleBG = (ImageView)mRoot.findViewById(R.id.imageView_menu_title_bg);
 	}
-	
+
 	protected void InitFragment(){
 		_MenuListLeftFragment = new MenuListLeftFragment();
 		_MenuListTitleFragment = new MenuListTitleFragment();
@@ -254,7 +256,7 @@ public class MenuBaseFragment extends ParentFragment{
 		_SpeedometerFreqFragment = new SpeedometerFreqFragment();
 		_WiperFragment = new WiperFragment();
 		_EngineAutoShutdownPWFragment = new EngineAutoShutdownPWFragment();
-		
+
 		_MachineMonitoringFragment = new MachineMonitoringFragment();
 		_OperationHistoryFragment = new OperationHistoryFragment();
 		_FaultHistoryFragment = new FaultHistoryFragment();
@@ -290,6 +292,7 @@ public class MenuBaseFragment extends ParentFragment{
 		_MaintenanceFragment = new MaintenanceFragment();
 		_MaintenanceDetailFragment = new MaintenanceDetailFragment();
 		_MaintenanceChangeCycleFragment = new MaintenanceChangeCycleFragment();
+		_SoftwareUpdatePasswordFragment = new SoftwareUpdatePasswordFragment();	// ++, --, 150323 bwk 
 		_BrightnessFragment = new BrightnessFragment();
 		_ClockFragment = new ClockFragment();
 		_UnitFragment = new UnitFragment();
@@ -298,7 +301,7 @@ public class MenuBaseFragment extends ParentFragment{
 		_LanguageListFragment = new LanguageListFragment();	// ++, --, 150206 bwk
 		_DisplayTypeFragment = new DisplayTypeFragment();	// ++, --, 150309 bwk
 	}
-	
+
 	protected void InitValuables() {
 		// TODO Auto-generated method stub
 		super.InitValuables();
@@ -316,7 +319,7 @@ public class MenuBaseFragment extends ParentFragment{
 
 	public void DestroyFragment(){
 		android.app.FragmentTransaction transaction = getFragmentManager().beginTransaction();
-		
+
 		transaction.detach(_MenuListLeftFragment);
 		transaction.detach(_MenuListTitleFragment);
 		transaction.detach(_MenuInterTitleFragment);		
@@ -372,6 +375,7 @@ public class MenuBaseFragment extends ParentFragment{
 		transaction.detach(_MaintenanceFragment);
 		transaction.detach(_MaintenanceDetailFragment);
 		transaction.detach(_MaintenanceChangeCycleFragment);
+		transaction.detach(_SoftwareUpdatePasswordFragment);	// ++, 150323 bwk
 		transaction.detach(_BrightnessFragment);
 		transaction.detach(_ClockFragment);
 		transaction.detach(_UnitFragment);
@@ -379,9 +383,9 @@ public class MenuBaseFragment extends ParentFragment{
 		transaction.detach(_UserSwitching);
 		transaction.detach(_LanguageListFragment);	// ++, --, 150206 bwk
 		transaction.detach(_DisplayTypeFragment);	// ++, --, 150309 bwk
-		
+
 		transaction.commit();	
-		
+
 	}
 	@Override
 	protected void GetDataFromNative() {
@@ -392,7 +396,7 @@ public class MenuBaseFragment extends ParentFragment{
 	@Override
 	protected void UpdateUI() {
 		// TODO Auto-generated method stub
-		
+
 	}
 	/////////////////////////////////////////////////////////////////////
 	public void setFirstScreenIndex(int Index){
@@ -474,7 +478,7 @@ public class MenuBaseFragment extends ParentFragment{
 		transaction.replace(R.id.FrameLayout_menu_inter_title, _MenuInterTitleFragment);
 		transaction.commit();
 	}
-	
+
 	// List
 	public void showBodyMode(){
 		android.app.FragmentTransaction transaction = getFragmentManager().beginTransaction();
@@ -512,7 +516,7 @@ public class MenuBaseFragment extends ParentFragment{
 		transaction.replace(R.id.FrameLayout_menu_list_body, _FaultHistoryFragment);
 		transaction.commit();
 	}
-	
+
 	public void showBodyMachineSecurityPassword(){
 		android.app.FragmentTransaction transaction = getFragmentManager().beginTransaction();
 		transaction.remove(_MachineSecurityPasswordFragment);
@@ -543,6 +547,14 @@ public class MenuBaseFragment extends ParentFragment{
 		transaction.replace(R.id.FrameLayout_menu_list_body, _ServiceMenuPasswordFragment);
 		transaction.commit();
 	}
+	// ++, 150323 bwk
+	public void showBodySoftwareUpdatePassword(){
+		android.app.FragmentTransaction transaction = getFragmentManager().beginTransaction();
+		transaction.remove(_SoftwareUpdatePasswordFragment);
+		transaction.replace(R.id.FrameLayout_menu_list_body, _SoftwareUpdatePasswordFragment);
+		transaction.commit();
+	}
+	// --, 150323 bwk
 	public void showBodyServiceMenuList(){
 		android.app.FragmentTransaction transaction = getFragmentManager().beginTransaction();
 		transaction.remove(_ServiceMenuListFragment);
@@ -555,106 +567,106 @@ public class MenuBaseFragment extends ParentFragment{
 		transaction.replace(R.id.FrameLayout_menu_list_body, _DisplayTypeListFragment);
 		transaction.commit();
 	}
-	
+
 	// Inter
 	public void showBodyEngineSpeed(){
 		android.app.FragmentTransaction transaction = getFragmentManager().beginTransaction();
 		transaction.remove(_EngineSpeedFragment);
 		transaction.replace(R.id.FrameLayout_menu_inter_body, _EngineSpeedFragment);
 		transaction.commit();
-		
+
 	}
 	public void showBodyWorkLoad(){
 		android.app.FragmentTransaction transaction = getFragmentManager().beginTransaction();
 		transaction.remove(_WorkLoadFragment);
 		transaction.replace(R.id.FrameLayout_menu_inter_body, _WorkLoadFragment);
 		transaction.commit();
-		
+
 	}
 	public void showBodyDetent(){
 		android.app.FragmentTransaction transaction = getFragmentManager().beginTransaction();
 		transaction.remove(_DetentFragment);
 		transaction.replace(R.id.FrameLayout_menu_inter_body, _DetentFragment);
 		transaction.commit();
-		
+
 	}
 	public void showBodyMaxFlow(){
 		android.app.FragmentTransaction transaction = getFragmentManager().beginTransaction();
 		transaction.remove(_MaxFlowFragment);
 		transaction.replace(R.id.FrameLayout_menu_inter_body, _MaxFlowFragment);
 		transaction.commit();
-		
+
 	}
 	public void showBodySoftStop(){
 		android.app.FragmentTransaction transaction = getFragmentManager().beginTransaction();
 		transaction.remove(_MaxFlowFragment);
 		transaction.replace(R.id.FrameLayout_menu_inter_body, _SoftStopFragment);
 		transaction.commit();
-		
+
 	}	
 	public void showBodyEngineAutoShutdown(){
 		android.app.FragmentTransaction transaction = getFragmentManager().beginTransaction();
 		transaction.remove(_EngineAutoShutdownFragment);
 		transaction.replace(R.id.FrameLayout_menu_inter_body, _EngineAutoShutdownFragment);
 		transaction.commit();
-		
+
 	}
 	public void showBodyEngineDelayShutdown(){
 		android.app.FragmentTransaction transaction = getFragmentManager().beginTransaction();
 		transaction.remove(_EngineDelayShutdownFragment);
 		transaction.replace(R.id.FrameLayout_menu_inter_body, _EngineDelayShutdownFragment);
 		transaction.commit();
-		
+
 	}
 	public void showBodyCameraSetting(){
 		android.app.FragmentTransaction transaction = getFragmentManager().beginTransaction();
 		transaction.remove(_CameraSettingFragment);
 		transaction.replace(R.id.FrameLayout_menu_inter_body, _CameraSettingFragment);
 		transaction.commit();
-		
+
 	}
 	public void showBodyCoolingFan(){
 		android.app.FragmentTransaction transaction = getFragmentManager().beginTransaction();
 		transaction.remove(_CoolingFanFragment);
 		transaction.replace(R.id.FrameLayout_menu_inter_body, _CoolingFanFragment);
 		transaction.commit();
-		
+
 	}
 	public void showBodySpeedometerFreq(){
 		android.app.FragmentTransaction transaction = getFragmentManager().beginTransaction();
 		transaction.remove(_SpeedometerFreqFragment);
 		transaction.replace(R.id.FrameLayout_menu_inter_body, _SpeedometerFreqFragment);
 		transaction.commit();
-		
+
 	}
 	public void showBodyWiper(){
 		android.app.FragmentTransaction transaction = getFragmentManager().beginTransaction();
 		transaction.remove(_SpeedometerFreqFragment);
 		transaction.replace(R.id.FrameLayout_menu_inter_body, _WiperFragment);
 		transaction.commit();
-		
+
 	}
 	public void showBodyEngineAutoShutdownPW(){
 		android.app.FragmentTransaction transaction = getFragmentManager().beginTransaction();
 		transaction.remove(_EngineAutoShutdownPWFragment);
 		transaction.replace(R.id.FrameLayout_menu_inter_body, _EngineAutoShutdownPWFragment);
 		transaction.commit();
-		
+
 	}
-	
+
 	public void showBodyMachineMonitoring(){
 		android.app.FragmentTransaction transaction = getFragmentManager().beginTransaction();
 		transaction.remove(_MachineMonitoringFragment);
 		transaction.replace(R.id.FrameLayout_menu_inter_body, _MachineMonitoringFragment);
 		transaction.commit();
-		
+
 	}
 	public void showBodyOperationHistory(){
 		android.app.FragmentTransaction transaction = getFragmentManager().beginTransaction();
 		transaction.remove(_OperationHistoryFragment);
 		transaction.replace(R.id.FrameLayout_menu_inter_body, _OperationHistoryFragment);
 		transaction.commit();
-		
+
 	}
 
 	public void showBodyEHCUIOInfo(){
@@ -662,91 +674,91 @@ public class MenuBaseFragment extends ParentFragment{
 		transaction.remove(_EHCUIOInfoFragment);
 		transaction.replace(R.id.FrameLayout_menu_inter_body, _EHCUIOInfoFragment);
 		transaction.commit();
-		
+
 	}	
 	public void showBodyBoomLeverFloatInfo(){
 		android.app.FragmentTransaction transaction = getFragmentManager().beginTransaction();
 		transaction.remove(_EHCUIOInfoBoomLeverFloatFragment);
 		transaction.replace(R.id.FrameLayout_menu_inter_body, _EHCUIOInfoBoomLeverFloatFragment);
 		transaction.commit();
-		
+
 	}	
 	public void showBodyVersionInfo(){
 		android.app.FragmentTransaction transaction = getFragmentManager().beginTransaction();
 		transaction.remove(_VersionInfoFragment);
 		transaction.replace(R.id.FrameLayout_menu_inter_body, _VersionInfoFragment);
 		transaction.commit();
-		
+
 	}	
 	public void showBodyVersionInfoMonitor(){
 		android.app.FragmentTransaction transaction = getFragmentManager().beginTransaction();
 		transaction.remove(_VersionInfoMonitorFragment);
 		transaction.replace(R.id.FrameLayout_menu_inter_body, _VersionInfoMonitorFragment);
 		transaction.commit();
-		
+
 	}	
 	public void showBodyVersionInfoMCU(){
 		android.app.FragmentTransaction transaction = getFragmentManager().beginTransaction();
 		transaction.remove(_VersionInfoMCUFragment);
 		transaction.replace(R.id.FrameLayout_menu_inter_body, _VersionInfoMCUFragment);
 		transaction.commit();
-		
+
 	}
 	public void showBodyVersionInfoCluster(){
 		android.app.FragmentTransaction transaction = getFragmentManager().beginTransaction();
 		transaction.remove(_VersionInfoClusterFragment);
 		transaction.replace(R.id.FrameLayout_menu_inter_body, _VersionInfoClusterFragment);
 		transaction.commit();
-		
+
 	}
 	public void showBodyVersionInfoEHCU(){
 		android.app.FragmentTransaction transaction = getFragmentManager().beginTransaction();
 		transaction.remove(_VersionInfoEHCUFragment);
 		transaction.replace(R.id.FrameLayout_menu_inter_body, _VersionInfoEHCUFragment);
 		transaction.commit();
-		
+
 	}
 	public void showBodyVersionInfoBKCU(){
 		android.app.FragmentTransaction transaction = getFragmentManager().beginTransaction();
 		transaction.remove(_VersionInfoBKCUFragment);
 		transaction.replace(R.id.FrameLayout_menu_inter_body, _VersionInfoBKCUFragment);
 		transaction.commit();
-		
+
 	}
 	public void showBodyVersionInfoRMCU(){
 		android.app.FragmentTransaction transaction = getFragmentManager().beginTransaction();
 		transaction.remove(_VersionInfoRMCUFragment);
 		transaction.replace(R.id.FrameLayout_menu_inter_body, _VersionInfoRMCUFragment);
 		transaction.commit();
-		
+
 	}
 	public void showBodyVersionInfoTCU(){
 		android.app.FragmentTransaction transaction = getFragmentManager().beginTransaction();
 		transaction.remove(_VersionInfoTCUFragment);
 		transaction.replace(R.id.FrameLayout_menu_inter_body, _VersionInfoTCUFragment);
 		transaction.commit();
-		
+
 	}
 	public void showBodyVersionInfoECM(){
 		android.app.FragmentTransaction transaction = getFragmentManager().beginTransaction();
 		transaction.remove(_VersionInfoECMFragment);
 		transaction.replace(R.id.FrameLayout_menu_inter_body, _VersionInfoECMFragment);
 		transaction.commit();
-		
+
 	}
 	public void showBodyActiveFault(){
 		android.app.FragmentTransaction transaction = getFragmentManager().beginTransaction();
 		transaction.remove(_FaultHistoryActiveFragment);
 		transaction.replace(R.id.FrameLayout_menu_inter_body, _FaultHistoryActiveFragment);
 		transaction.commit();
-		
+
 	}
 	public void showBodyLoggedFault(){
 		android.app.FragmentTransaction transaction = getFragmentManager().beginTransaction();
 		transaction.remove(_FaultHistoryLoggedFragment);
 		transaction.replace(R.id.FrameLayout_menu_inter_body, _FaultHistoryLoggedFragment);
 		transaction.commit();
-		
+
 	}	
 	public void showBodyLoggedFaultPassword(){
 		android.app.FragmentTransaction transaction = getFragmentManager().beginTransaction();
@@ -759,120 +771,120 @@ public class MenuBaseFragment extends ParentFragment{
 		transaction.remove(_MachineSecurityESLFragment);
 		transaction.replace(R.id.FrameLayout_menu_inter_body, _MachineSecurityESLFragment);
 		transaction.commit();
-		
+
 	}
 	public void showBodySmartKey(){
 		android.app.FragmentTransaction transaction = getFragmentManager().beginTransaction();
 		transaction.remove(_MachineSecuritySmartKeyFragment);
 		transaction.replace(R.id.FrameLayout_menu_inter_body, _MachineSecuritySmartKeyFragment);
 		transaction.commit();
-		
+
 	}
 	public void showBodyAngleCalibration(){
 		android.app.FragmentTransaction transaction = getFragmentManager().beginTransaction();
 		transaction.remove(_AngleCalibration);
 		transaction.replace(R.id.FrameLayout_menu_inter_body, _AngleCalibration);
 		transaction.commit();
-		
+
 	}
 	public void showBodyPressureCalibration(){
 		android.app.FragmentTransaction transaction = getFragmentManager().beginTransaction();
 		transaction.remove(_PressureCalibration);
 		transaction.replace(R.id.FrameLayout_menu_inter_body, _PressureCalibration);
 		transaction.commit();
-		
+
 	}
 	public void showBodyChangeASPhoneNumber(){
 		android.app.FragmentTransaction transaction = getFragmentManager().beginTransaction();
 		transaction.remove(_ChangeASPhoneNumberFragment);
 		transaction.replace(R.id.FrameLayout_menu_inter_body, _ChangeASPhoneNumberFragment);
 		transaction.commit();
-		
+
 	}
 	public void showBodySpeedLimit(){
 		android.app.FragmentTransaction transaction = getFragmentManager().beginTransaction();
 		transaction.remove(_ServiceMenuSpeedLimitFragment);
 		transaction.replace(R.id.FrameLayout_menu_inter_body, _ServiceMenuSpeedLimitFragment);
 		transaction.commit();
-		
+
 	}
 	public void showBodyWeighingCompensation(){
 		android.app.FragmentTransaction transaction = getFragmentManager().beginTransaction();
 		transaction.remove(_ServiceMenuWeighingCompensationFragment);
 		transaction.replace(R.id.FrameLayout_menu_inter_body, _ServiceMenuWeighingCompensationFragment);
 		transaction.commit();
-		
+
 	}
 	public void showBodySensorMonitoring(){
 		android.app.FragmentTransaction transaction = getFragmentManager().beginTransaction();
 		transaction.remove(_ServiceMenuWeighingCompensationFragment);
 		transaction.replace(R.id.FrameLayout_menu_inter_body, _ServiceMenuSensorMonitoringFragment);
 		transaction.commit();
-		
+
 	}
 	public void showBodySensorMonitoringHidden(){
 		android.app.FragmentTransaction transaction = getFragmentManager().beginTransaction();
 		transaction.remove(_ServiceMenuWeighingCompensationFragment);
 		transaction.replace(R.id.FrameLayout_menu_inter_body, _ServiceMenuSensorMonitoringHiddenFragment);
 		transaction.commit();
-		
+
 	}
 	public void showBodyMaintenance(){
 		android.app.FragmentTransaction transaction = getFragmentManager().beginTransaction();
 		transaction.remove(_MaintenanceFragment);
 		transaction.replace(R.id.FrameLayout_menu_inter_body, _MaintenanceFragment);
 		transaction.commit();
-		
+
 	}
 	public void showBodyMaintenanceDetail(){
 		android.app.FragmentTransaction transaction = getFragmentManager().beginTransaction();
 		transaction.remove(_MaintenanceDetailFragment);
 		transaction.replace(R.id.FrameLayout_menu_inter_body, _MaintenanceDetailFragment);
 		transaction.commit();
-		
+
 	}
 	public void showBodyMaintenanceChangeCycle(){
 		android.app.FragmentTransaction transaction = getFragmentManager().beginTransaction();
 		transaction.remove(_MaintenanceChangeCycleFragment);
 		transaction.replace(R.id.FrameLayout_menu_inter_body, _MaintenanceChangeCycleFragment);
 		transaction.commit();
-		
+
 	}
 	public void showBodyBrightness(){
 		android.app.FragmentTransaction transaction = getFragmentManager().beginTransaction();
 		transaction.remove(_BrightnessFragment);
 		transaction.replace(R.id.FrameLayout_menu_inter_body, _BrightnessFragment);
 		transaction.commit();
-		
+
 	}
 	public void showBodyClock(){
 		android.app.FragmentTransaction transaction = getFragmentManager().beginTransaction();
 		transaction.remove(_ClockFragment);
 		transaction.replace(R.id.FrameLayout_menu_inter_body, _ClockFragment);
 		transaction.commit();
-		
+
 	}
 	public void showBodyUnit(){
 		android.app.FragmentTransaction transaction = getFragmentManager().beginTransaction();
 		transaction.remove(_UnitFragment);
 		transaction.replace(R.id.FrameLayout_menu_inter_body, _UnitFragment);
 		transaction.commit();
-		
+
 	}
 	public void showUserSwitching(){
 		android.app.FragmentTransaction transaction = getFragmentManager().beginTransaction();
 		transaction.remove(_UserSwitching);
 		transaction.replace(R.id.FrameLayout_menu_inter_body, _UserSwitching);
 		transaction.commit();
-		
+
 	}
-	
+
 	/////////////////////////////////////////////////////////////////////
 	//Show Fragment Animation////////////////////////////////////////////
 	public void showListAnimation(){
 		InterTitleAnimation.StartDisappearAnimation();
 		InterBodyAnimation.StartDisappearAnimation();
-		
+
 		ListLeftAnimation.StartChangeAnimation(_MenuListLeftFragment);
 		ListTitleAnimation.StartChangeAnimation(_MenuListTitleFragment);
 	}
@@ -880,7 +892,7 @@ public class MenuBaseFragment extends ParentFragment{
 		ListLeftAnimation.StartDisappearAnimation();
 		ListTitleAnimation.StartDisappearAnimation();
 		ListBodyAnimation.StartDisappearAnimation();
-		
+
 		InterTitleAnimation.StartChangeAnimation(_MenuInterTitleFragment);
 	}
 	// List
@@ -913,7 +925,7 @@ public class MenuBaseFragment extends ParentFragment{
 		_MenuListLeftFragment.setFirstScreen(Home.SCREEN_STATE_MENU_PREFERENCE_TOP);
 	}
 	public void showBodyMultimediaAnimation(){
-	
+
 	}
 	public void showFaultHistoryAnimation(){
 		DestroyFragment();
@@ -950,7 +962,7 @@ public class MenuBaseFragment extends ParentFragment{
 		ListBodyAnimation.StartChangeAnimation(_DisplayTypeListFragment);
 		_MenuListLeftFragment.setFirstScreen(Home.SCREEN_STATE_MENU_PREFERENCE_TOP);
 	}
-	
+
 	// Inter
 	public void showBodyEngineSpeedAnimation(){
 		showInterAnimation();
@@ -1141,7 +1153,7 @@ public class MenuBaseFragment extends ParentFragment{
 	}
 	// --, 150309 bwk
 	/////////////////////////////////////////////////////////////////////
-	
+
 	/////////////////////////////////////////////////////////////////////
 	public void ClearCursurIndex(){
 		_MenuModeFragment.CursurIndex = 1;
@@ -1153,7 +1165,7 @@ public class MenuBaseFragment extends ParentFragment{
 	/////////////////////////////////////////////////////////////////////
 	public void KeyButtonClick(final int key){
 		Log.d(TAG,"KeyButtonClick : 0x" + Integer.toHexString(key));
-		
+
 		// TODO Auto-generated method stub
 		switch (key) {
 		case CAN1CommManager.MAINLIGHT:			// Num1
@@ -1172,7 +1184,7 @@ public class MenuBaseFragment extends ParentFragment{
 			ClickNum5();
 			break;
 		case CAN1CommManager.WORK_LOAD:
-		
+
 			break;
 		case CAN1CommManager.BEACON_LAMP:		// Num6
 			ClickNum6();
@@ -1436,6 +1448,11 @@ public class MenuBaseFragment extends ParentFragment{
 		case Home.SCREEN_STATE_MENU_MANAGEMENT_ASPHONE_TOP:
 			_ChangeASPhoneNumberFragment.ClickLeft();
 			break;
+			// ++, 150323 bwk
+		case Home.SCREEN_STATE_MENU_MANAGEMENT_SOFTWAREUPDAT_PW:
+			_SoftwareUpdatePasswordFragment.ClickLeft();	
+			break;
+			// --, 150323 bwk
 		case Home.SCREEN_STATE_MENU_PREFERENCE_TOP:
 			_MenuPreferenceFragment.ClickLeft();
 			break;
@@ -1454,16 +1471,16 @@ public class MenuBaseFragment extends ParentFragment{
 		case Home.SCREEN_STATE_MENU_PREFERENCE_DISPLAYTYPELANG_TOP:
 			_DisplayTypeListFragment.ClickLeft();
 			break;
-		// ++, 150309 bwk
+			// ++, 150309 bwk
 		case Home.SCREEN_STATE_MENU_PREFERENCE_DISPLAYTYPELANG_TYPE:
 			_DisplayTypeFragment.ClickLeft();
 			break;
-		// --, 150309 bwk
-		// ++, 150206 bwk
+			// --, 150309 bwk
+			// ++, 150206 bwk
 		case Home.SCREEN_STATE_MENU_PREFERENCE_DISPLAYTYPELANG_LANG_CHANGE:
 			_LanguageListFragment.ClickLeft();
 			break;
-		// --, 150206 bwk;
+			// --, 150206 bwk;
 		case Home.SCREEN_STATE_MENU_PREFERENCE_SOUNDOUTPUT_TOP:
 			ParentActivity._SoundOutputPopup.ClickLeft();
 			break;
@@ -1473,7 +1490,7 @@ public class MenuBaseFragment extends ParentFragment{
 		case Home.SCREEN_STATE_MENU_USERSWITCHING_TOP:
 			_UserSwitching.ClickLeft();
 			break;
-			
+
 		default:
 			break;
 		}
@@ -1694,6 +1711,11 @@ public class MenuBaseFragment extends ParentFragment{
 		case Home.SCREEN_STATE_MENU_MANAGEMENT_ASPHONE_TOP:
 			_ChangeASPhoneNumberFragment.ClickRight();
 			break;
+			// ++, 150323 bwk
+		case Home.SCREEN_STATE_MENU_MANAGEMENT_SOFTWAREUPDAT_PW:
+			_SoftwareUpdatePasswordFragment.ClickRight();	
+			break;
+			// --, 150323 bwk
 		case Home.SCREEN_STATE_MENU_PREFERENCE_TOP:
 			_MenuPreferenceFragment.ClickRight();
 			break;
@@ -1712,16 +1734,16 @@ public class MenuBaseFragment extends ParentFragment{
 		case Home.SCREEN_STATE_MENU_PREFERENCE_DISPLAYTYPELANG_TOP:
 			_DisplayTypeListFragment.ClickRight();
 			break;
-		// ++, 150309 bwk
+			// ++, 150309 bwk
 		case Home.SCREEN_STATE_MENU_PREFERENCE_DISPLAYTYPELANG_TYPE:
 			_DisplayTypeFragment.ClickRight();
 			break;
-		// --, 150309 bwk
-		// ++, 150206 bwk
+			// --, 150309 bwk
+			// ++, 150206 bwk
 		case Home.SCREEN_STATE_MENU_PREFERENCE_DISPLAYTYPELANG_LANG_CHANGE:
 			_LanguageListFragment.ClickRight();
 			break;
-		// --, 150206 bwk;			
+			// --, 150206 bwk;			
 		case Home.SCREEN_STATE_MENU_PREFERENCE_SOUNDOUTPUT_TOP:
 			ParentActivity._SoundOutputPopup.ClickRight();
 			break;
@@ -1950,6 +1972,11 @@ public class MenuBaseFragment extends ParentFragment{
 		case Home.SCREEN_STATE_MENU_MANAGEMENT_ASPHONE_TOP:
 			_ChangeASPhoneNumberFragment.ClickESC();
 			break;
+			// ++, 150323 bwk
+		case Home.SCREEN_STATE_MENU_MANAGEMENT_SOFTWAREUPDAT_PW:
+			_SoftwareUpdatePasswordFragment.ClickESC();	
+			break;
+			// --, 150323 bwk
 		case Home.SCREEN_STATE_MENU_PREFERENCE_TOP:
 			_MenuPreferenceFragment.ClickESC();
 			break;
@@ -1968,16 +1995,16 @@ public class MenuBaseFragment extends ParentFragment{
 		case Home.SCREEN_STATE_MENU_PREFERENCE_DISPLAYTYPELANG_TOP:
 			_DisplayTypeListFragment.ClickESC();
 			break;
-		// ++, 150309 bwk
+			// ++, 150309 bwk
 		case Home.SCREEN_STATE_MENU_PREFERENCE_DISPLAYTYPELANG_TYPE:
 			_DisplayTypeFragment.ClickESC();
 			break;
-		// --, 150309 bwk			
-		// ++, 150206 bwk
+			// --, 150309 bwk			
+			// ++, 150206 bwk
 		case Home.SCREEN_STATE_MENU_PREFERENCE_DISPLAYTYPELANG_LANG_CHANGE:
 			_LanguageListFragment.ClickESC();
 			break;
-		// --, 150206 bwk;				
+			// --, 150206 bwk;				
 		case Home.SCREEN_STATE_MENU_PREFERENCE_SOUNDOUTPUT_TOP:
 			ParentActivity._SoundOutputPopup.ClickESC();
 			break;
@@ -2206,6 +2233,11 @@ public class MenuBaseFragment extends ParentFragment{
 		case Home.SCREEN_STATE_MENU_MANAGEMENT_ASPHONE_TOP:
 			_ChangeASPhoneNumberFragment.ClickEnter();
 			break;
+			// ++, 150323 bwk
+		case Home.SCREEN_STATE_MENU_MANAGEMENT_SOFTWAREUPDAT_PW:
+			_SoftwareUpdatePasswordFragment.ClickEnter();	
+			break;
+			// --, 150323 bwk
 		case Home.SCREEN_STATE_MENU_PREFERENCE_TOP:
 			_MenuPreferenceFragment.ClickEnter();
 			break;
@@ -2224,16 +2256,16 @@ public class MenuBaseFragment extends ParentFragment{
 		case Home.SCREEN_STATE_MENU_PREFERENCE_DISPLAYTYPELANG_TOP:
 			_DisplayTypeListFragment.ClickEnter();
 			break;
-		// ++, 150309 bwk
+			// ++, 150309 bwk
 		case Home.SCREEN_STATE_MENU_PREFERENCE_DISPLAYTYPELANG_TYPE:
 			_DisplayTypeFragment.ClickEnter();
 			break;
-		// --, 150309 bwk					
-		// ++, 150206 bwk
+			// --, 150309 bwk					
+			// ++, 150206 bwk
 		case Home.SCREEN_STATE_MENU_PREFERENCE_DISPLAYTYPELANG_LANG_CHANGE:
 			_LanguageListFragment.ClickEnter();
 			break;
-		// --, 150206 bwk;		
+			// --, 150206 bwk;		
 		case Home.SCREEN_STATE_MENU_PREFERENCE_SOUNDOUTPUT_TOP:
 			ParentActivity._SoundOutputPopup.ClickEnter();
 			break;
@@ -2289,7 +2321,7 @@ public class MenuBaseFragment extends ParentFragment{
 			break;
 		}
 	}
-	
+
 	public void ClickKeyButtonLongLeftRightEnter(){
 		switch (ParentActivity.ScreenIndex) {
 		case Home.SCREEN_STATE_MENU_MULTIMEDIA_TOP:
@@ -2298,9 +2330,9 @@ public class MenuBaseFragment extends ParentFragment{
 		default:
 			break;
 		}
-	
+
 	}
-	
+
 	// ++, 150209 bwk
 	public void ClickKeyButtonHome(){
 		switch (ParentActivity.ScreenIndex) {
@@ -2311,20 +2343,20 @@ public class MenuBaseFragment extends ParentFragment{
 			// ++, 150210 bwk
 			// ++, 150309 bwk
 			//if(ParentActivity.OldScreenIndex == Home.SCREEN_STATE_MAIN_B_TOP){
-				//ParentActivity._MainChangeAnimation.StartChangeAnimation(ParentActivity._MainBBaseFragment);
+			//ParentActivity._MainChangeAnimation.StartChangeAnimation(ParentActivity._MainBBaseFragment);
 			if(ParentActivity.OldScreenIndex == Home.SCREEN_STATE_MAIN_A_TOP || ParentActivity.OldScreenIndex == Home.SCREEN_STATE_MAIN_B_TOP){
 				ParentActivity.showMainScreen();
-			// --, 150309 bwk						
+				// --, 150309 bwk						
 				ParentActivity.OldScreenIndex = 0;
 			}
 			else
-			// --, 150210 bwk
+				// --, 150210 bwk
 				_MenuListTitleFragment.ClickHome();
 			break;
 		}
 	}
 	// --, 150209 bwk
-	
+
 	public void ClickNum1(){
 		switch (ParentActivity.ScreenIndex) {
 
@@ -2349,16 +2381,21 @@ public class MenuBaseFragment extends ParentFragment{
 		case Home.SCREEN_STATE_MENU_MANAGEMENT_SERVICE_PW:
 			_ServiceMenuPasswordFragment.ClickNum1();
 			break;
+		// ++, 150323 bwk
+		case Home.SCREEN_STATE_MENU_MANAGEMENT_SOFTWAREUPDAT_PW:
+			_SoftwareUpdatePasswordFragment.ClickNum1();	
+			break;
+		// --, 150323 bwk
 		case Home.SCREEN_STATE_MENU_MANAGEMENT_SERVICE_WEIGHINGCOMPENSATION_TOP:
 			_ServiceMenuWeighingCompensationFragment.ClickNum1();
 			break;
 		case Home.SCREEN_STATE_MENU_MANAGEMENT_ASPHONE_TOP:
 			_ChangeASPhoneNumberFragment.ClickNum1();
 			break;
-			
+
 		}
 	}
-	
+
 	public void ClickNum2(){
 		switch (ParentActivity.ScreenIndex) {
 
@@ -2383,16 +2420,21 @@ public class MenuBaseFragment extends ParentFragment{
 		case Home.SCREEN_STATE_MENU_MANAGEMENT_SERVICE_PW:
 			_ServiceMenuPasswordFragment.ClickNum2();
 			break;
+		// ++, 150323 bwk
+		case Home.SCREEN_STATE_MENU_MANAGEMENT_SOFTWAREUPDAT_PW:
+			_SoftwareUpdatePasswordFragment.ClickNum2();	
+			break;
+		// --, 150323 bwk
 		case Home.SCREEN_STATE_MENU_MANAGEMENT_SERVICE_WEIGHINGCOMPENSATION_TOP:
 			_ServiceMenuWeighingCompensationFragment.ClickNum2();
 			break;
 		case Home.SCREEN_STATE_MENU_MANAGEMENT_ASPHONE_TOP:
 			_ChangeASPhoneNumberFragment.ClickNum2();
 			break;
-			
+
 		}
 	}
-	
+
 	public void ClickNum3(){
 		switch (ParentActivity.ScreenIndex) {
 
@@ -2417,16 +2459,21 @@ public class MenuBaseFragment extends ParentFragment{
 		case Home.SCREEN_STATE_MENU_MANAGEMENT_SERVICE_PW:
 			_ServiceMenuPasswordFragment.ClickNum3();
 			break;
+		// ++, 150323 bwk
+		case Home.SCREEN_STATE_MENU_MANAGEMENT_SOFTWAREUPDAT_PW:
+			_SoftwareUpdatePasswordFragment.ClickNum3();	
+			break;
+		// --, 150323 bwk
 		case Home.SCREEN_STATE_MENU_MANAGEMENT_SERVICE_WEIGHINGCOMPENSATION_TOP:
 			_ServiceMenuWeighingCompensationFragment.ClickNum3();
 			break;
 		case Home.SCREEN_STATE_MENU_MANAGEMENT_ASPHONE_TOP:
 			_ChangeASPhoneNumberFragment.ClickNum3();
 			break;
-			
+
 		}
 	}
-	
+
 	public void ClickNum4(){
 		switch (ParentActivity.ScreenIndex) {
 
@@ -2451,16 +2498,21 @@ public class MenuBaseFragment extends ParentFragment{
 		case Home.SCREEN_STATE_MENU_MANAGEMENT_SERVICE_PW:
 			_ServiceMenuPasswordFragment.ClickNum4();
 			break;
+		// ++, 150323 bwk
+		case Home.SCREEN_STATE_MENU_MANAGEMENT_SOFTWAREUPDAT_PW:
+			_SoftwareUpdatePasswordFragment.ClickNum4();	
+			break;
+		// --, 150323 bwk
 		case Home.SCREEN_STATE_MENU_MANAGEMENT_SERVICE_WEIGHINGCOMPENSATION_TOP:
 			_ServiceMenuWeighingCompensationFragment.ClickNum4();
 			break;
 		case Home.SCREEN_STATE_MENU_MANAGEMENT_ASPHONE_TOP:
 			_ChangeASPhoneNumberFragment.ClickNum4();
 			break;
-			
+
 		}
 	}
-	
+
 	public void ClickNum5(){
 		switch (ParentActivity.ScreenIndex) {
 
@@ -2485,16 +2537,21 @@ public class MenuBaseFragment extends ParentFragment{
 		case Home.SCREEN_STATE_MENU_MANAGEMENT_SERVICE_PW:
 			_ServiceMenuPasswordFragment.ClickNum5();
 			break;
+		// ++, 150323 bwk
+		case Home.SCREEN_STATE_MENU_MANAGEMENT_SOFTWAREUPDAT_PW:
+			_SoftwareUpdatePasswordFragment.ClickNum5();	
+			break;
+		// --, 150323 bwk
 		case Home.SCREEN_STATE_MENU_MANAGEMENT_SERVICE_WEIGHINGCOMPENSATION_TOP:
 			_ServiceMenuWeighingCompensationFragment.ClickNum5();
 			break;
 		case Home.SCREEN_STATE_MENU_MANAGEMENT_ASPHONE_TOP:
 			_ChangeASPhoneNumberFragment.ClickNum5();
 			break;
-			
+
 		}
 	}
-	
+
 	public void ClickNum6(){
 		switch (ParentActivity.ScreenIndex) {
 
@@ -2519,16 +2576,21 @@ public class MenuBaseFragment extends ParentFragment{
 		case Home.SCREEN_STATE_MENU_MANAGEMENT_SERVICE_PW:
 			_ServiceMenuPasswordFragment.ClickNum6();
 			break;
+		// ++, 150323 bwk
+		case Home.SCREEN_STATE_MENU_MANAGEMENT_SOFTWAREUPDAT_PW:
+			_SoftwareUpdatePasswordFragment.ClickNum6();	
+			break;
+		// --, 150323 bwk
 		case Home.SCREEN_STATE_MENU_MANAGEMENT_SERVICE_WEIGHINGCOMPENSATION_TOP:
 			_ServiceMenuWeighingCompensationFragment.ClickNum6();
 			break;
 		case Home.SCREEN_STATE_MENU_MANAGEMENT_ASPHONE_TOP:
 			_ChangeASPhoneNumberFragment.ClickNum6();
 			break;
-			
+
 		}
 	}
-	
+
 	public void ClickNum7(){
 		switch (ParentActivity.ScreenIndex) {
 
@@ -2553,16 +2615,21 @@ public class MenuBaseFragment extends ParentFragment{
 		case Home.SCREEN_STATE_MENU_MANAGEMENT_SERVICE_PW:
 			_ServiceMenuPasswordFragment.ClickNum7();
 			break;
+		// ++, 150323 bwk
+		case Home.SCREEN_STATE_MENU_MANAGEMENT_SOFTWAREUPDAT_PW:
+			_SoftwareUpdatePasswordFragment.ClickNum7();	
+			break;
+		// --, 150323 bwk
 		case Home.SCREEN_STATE_MENU_MANAGEMENT_SERVICE_WEIGHINGCOMPENSATION_TOP:
 			_ServiceMenuWeighingCompensationFragment.ClickNum7();
 			break;
 		case Home.SCREEN_STATE_MENU_MANAGEMENT_ASPHONE_TOP:
 			_ChangeASPhoneNumberFragment.ClickNum7();
 			break;
-			
+
 		}
 	}
-	
+
 	public void ClickNum8(){
 		switch (ParentActivity.ScreenIndex) {
 
@@ -2587,16 +2654,21 @@ public class MenuBaseFragment extends ParentFragment{
 		case Home.SCREEN_STATE_MENU_MANAGEMENT_SERVICE_PW:
 			_ServiceMenuPasswordFragment.ClickNum8();
 			break;
+		// ++, 150323 bwk
+		case Home.SCREEN_STATE_MENU_MANAGEMENT_SOFTWAREUPDAT_PW:
+			_SoftwareUpdatePasswordFragment.ClickNum8();	
+			break;
+		// --, 150323 bwk
 		case Home.SCREEN_STATE_MENU_MANAGEMENT_SERVICE_WEIGHINGCOMPENSATION_TOP:
 			_ServiceMenuWeighingCompensationFragment.ClickNum8();
 			break;
 		case Home.SCREEN_STATE_MENU_MANAGEMENT_ASPHONE_TOP:
 			_ChangeASPhoneNumberFragment.ClickNum8();
 			break;
-			
+
 		}
 	}
-	
+
 	public void ClickNum9(){
 		switch (ParentActivity.ScreenIndex) {
 
@@ -2621,16 +2693,21 @@ public class MenuBaseFragment extends ParentFragment{
 		case Home.SCREEN_STATE_MENU_MANAGEMENT_SERVICE_PW:
 			_ServiceMenuPasswordFragment.ClickNum9();
 			break;
+		// ++, 150323 bwk
+		case Home.SCREEN_STATE_MENU_MANAGEMENT_SOFTWAREUPDAT_PW:
+			_SoftwareUpdatePasswordFragment.ClickNum9();	
+			break;
+		// --, 150323 bwk
 		case Home.SCREEN_STATE_MENU_MANAGEMENT_SERVICE_WEIGHINGCOMPENSATION_TOP:
 			_ServiceMenuWeighingCompensationFragment.ClickNum9();
 			break;
 		case Home.SCREEN_STATE_MENU_MANAGEMENT_ASPHONE_TOP:
 			_ChangeASPhoneNumberFragment.ClickNum9();
 			break;
-			
+
 		}
 	}
-	
+
 	public void ClickNum0(){
 		switch (ParentActivity.ScreenIndex) {
 
@@ -2655,13 +2732,18 @@ public class MenuBaseFragment extends ParentFragment{
 		case Home.SCREEN_STATE_MENU_MANAGEMENT_SERVICE_PW:
 			_ServiceMenuPasswordFragment.ClickNum0();
 			break;
+		// ++, 150323 bwk
+		case Home.SCREEN_STATE_MENU_MANAGEMENT_SOFTWAREUPDAT_PW:
+			_SoftwareUpdatePasswordFragment.ClickNum0();	
+			break;
+		// --, 150323 bwk
 		case Home.SCREEN_STATE_MENU_MANAGEMENT_SERVICE_WEIGHINGCOMPENSATION_TOP:
 			_ServiceMenuWeighingCompensationFragment.ClickNum0();
 			break;
 		case Home.SCREEN_STATE_MENU_MANAGEMENT_ASPHONE_TOP:
 			_ChangeASPhoneNumberFragment.ClickNum0();
 			break;
-			
+
 		}
 	}
 	/////////////////////////////////////////////////////////////////////////////////////

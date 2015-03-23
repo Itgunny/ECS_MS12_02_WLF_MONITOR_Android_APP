@@ -1,5 +1,6 @@
 package taeha.wheelloader.fseries_monitor.menu.management;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -43,6 +44,28 @@ public class ServiceMenuPasswordFragment extends PasswordFragment{
 			ParentActivity.StartAnimationRunningTimer();
 		ParentActivity._MenuBaseFragment.showBodyServiceMenuList();
 	}
+	
+	// ++, 150323 bwk
+	public void showHWTestScreen() {
+		// TODO Auto-generated method stub
+		try {
+			Thread.sleep(1000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		Intent intent;
+		intent = ParentActivity.getPackageManager().getLaunchIntentForPackage(
+				"taeha.wheelloader.fserieshwtest");
+		
+		if(intent != null){
+			CAN1Comm.Callback_StopCommService();
+			CAN1Comm.CloseComport();
+			startActivity(intent);		
+		}
+	}	
+	// --, 150323 bwk
 
 	@Override
 	public void showUserPasswordNextScreen() {
@@ -66,9 +89,33 @@ public class ServiceMenuPasswordFragment extends PasswordFragment{
 	public void CheckPassword(){
 		int Result;
 		Result = CAN1Comm.Get_PasswordCertificationResult_956_PGN61184_24();
-		Log.d(TAG,"CheckPassword Result : " + Integer.toString(Result));	
+		Log.d(TAG,"CheckPassword Result : " + Integer.toString(Result));
+		
+		// ++, 150323 bwk
+		int TempNumData[]={0x31,0x32,0x33,0x34,0x35,0x36,0x37,0x38,0x39,0x30};
+		int TempResult = 1;
+		for(int i=0;i<DataBufIndex;i++)
+		{
+			if(tempNumDataBuf[i] != TempNumData[i])
+			{
+				TempResult = 0;
+				break;
+			}
+		}
+		if(TempResult == 1)
+		{
+			CancelPasswordCheckTimer();
+			CancelTimeOutTimer();
+			
+			showHWTestScreen();
+			Log.d(TAG,"H/W Test");
+			
+			return;
+		}
+		// --, 150323 bwk
 		//if(Result == 1)	// UserPassword
 		//	Result = 0;
+		
 		
 		switch (Result) {
 		case 0:			// Not OK

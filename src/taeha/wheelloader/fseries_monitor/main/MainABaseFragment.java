@@ -16,18 +16,16 @@ import taeha.wheelloader.fseries_monitor.main.a.MainACenterQuickFragment;
 import taeha.wheelloader.fseries_monitor.main.a.MainACenterTMFragment;
 import taeha.wheelloader.fseries_monitor.main.a.MainAIndicatorFragment;
 import taeha.wheelloader.fseries_monitor.main.a.MainAKeyTitleFragment;
-import taeha.wheelloader.fseries_monitor.main.a.MainALeftDownFuelFragment;
 import taeha.wheelloader.fseries_monitor.main.a.MainALeftDownFuelSelectFragment;
 import taeha.wheelloader.fseries_monitor.main.a.MainALeftQuickFragment;
-import taeha.wheelloader.fseries_monitor.main.a.MainALeftUpMachineStatusFragment;
+import taeha.wheelloader.fseries_monitor.main.a.MainALeftMainFragment;
 import taeha.wheelloader.fseries_monitor.main.a.MainALeftUpMachineStatusSelectFragment;
 import taeha.wheelloader.fseries_monitor.main.a.MainARightDownTMCCOModeFragment;
-import taeha.wheelloader.fseries_monitor.main.a.MainARightDownTMFragment;
+import taeha.wheelloader.fseries_monitor.main.a.MainARightMainFragment;
 import taeha.wheelloader.fseries_monitor.main.a.MainARightDownTMICCOModeFragment;
 import taeha.wheelloader.fseries_monitor.main.a.MainARightDownTMShiftModeFragment;
 import taeha.wheelloader.fseries_monitor.main.a.MainARightDownTMTCLockUpFragment;
 import taeha.wheelloader.fseries_monitor.main.a.MainARightQuickFragment;
-import taeha.wheelloader.fseries_monitor.main.a.MainARightUpEngineFragment;
 import taeha.wheelloader.fseries_monitor.main.a.MainARightUpEngineModeFragment;
 import taeha.wheelloader.fseries_monitor.main.a.MainARightUpHourOdometerSelectFragment;
 import taeha.wheelloader.fseries_monitor.main.a.MainAUpperMenuBarFragment;
@@ -48,10 +46,8 @@ import taeha.wheelloader.fseries_monitor.main.a.key.MainAKeyWorkLoadDisplayFragm
 import taeha.wheelloader.fseries_monitor.main.a.key.MainAKeyWorkLoadErrorDetectionFragment;
 import taeha.wheelloader.fseries_monitor.main.a.key.MainAKeyWorkLoadFragment;
 import android.os.Bundle;
-import android.text.Layout;
 import android.util.Log;
 import android.view.LayoutInflater;
-import android.view.Menu;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AbsoluteLayout;
@@ -68,10 +64,8 @@ public class MainABaseFragment extends ParentFragment{
 	AbsoluteLayout LayoutKey;
 	
 	FrameLayout framelayoutCenter;
-	FrameLayout framelayoutLeftUp;
-	FrameLayout framelayoutLeftDown;
-	FrameLayout framelayoutRightUp;
-	FrameLayout framelayoutRightDown;
+	FrameLayout framelayoutLeft;
+	FrameLayout framelayoutRight;
 	FrameLayout framelayoutIndicator;
 	FrameLayout framelayoutUpperMenuBar;
 	FrameLayout framelayoutVirtualKey;
@@ -81,10 +75,8 @@ public class MainABaseFragment extends ParentFragment{
 	ImageView imgViewKeyTitleBG;
 	ImageView imgViewKeyBodyBG;
 	ImageView imgViewCenterBG;
-	ImageView imgViewRightUpBG;
-	ImageView imgViewRightDownBG;
-	ImageView imgViewLeftUp;
-	ImageView imgViewLeftDown;	
+	ImageView imgViewRightBG;
+	ImageView imgViewLeftBG;
 	//////////////////////////////////////////////////
 	
 	//VALUABLE////////////////////////////////////////
@@ -96,7 +88,7 @@ public class MainABaseFragment extends ParentFragment{
 	public MainACenterFragment 						_MainACenterFragment;
 	public MainACenterEngineFragment 				_MainACenterEngineFragment; 
 	public MainACenterTMFragment 					_MainACenterTMFragment;
-	public MainACenterFuelFragment 					_MainACenterHourOdometerFragment;
+	public MainACenterFuelFragment 					_MainACenterFuelFragment;
 	public MainACenterMachineStatusFragment 		_MainACenterMachineStatusFragment;
 	public MainACenterQuickFragment 				_MainACenterQuickFragment;
 	public MainACenterBrakePedalCalibrationFragment	_MainACenterBrakePedalCalibrationFragment;
@@ -104,25 +96,19 @@ public class MainABaseFragment extends ParentFragment{
 	
 	public MainAIndicatorFragment 					_MainAIndicatorFragment;
 	
-	public MainARightQuickFragment					_MainARightQuickFragment;
-	
-	public MainALeftQuickFragment					_MainALeftQuickFragment;
-	
-	public MainARightUpEngineFragment 				_MainARightUpEngineFragment;
+	public MainARightMainFragment 					_MainARightMainFragment;
 	public MainARightUpEngineModeFragment 			_MainARightUpEngineModeFragment;
 	public MainARightUpHourOdometerSelectFragment 	_MainARightUpHourOdometerSelectFragment;
-	
-	public MainARightDownTMFragment 				_MainARightDownTMFragment;
 	public MainARightDownTMCCOModeFragment 			_MainARightDownTMCCOModeFragment;
 	public MainARightDownTMICCOModeFragment 		_MainARightDownTMICCOModeFragment;
 	public MainARightDownTMShiftModeFragment 		_MainARightDownTMShiftModeFragment;
 	public MainARightDownTMTCLockUpFragment 		_MainARightDownTMTCLockUpFragment;
+	public MainARightQuickFragment					_MainARightQuickFragment;
 	
-	public MainALeftDownFuelFragment 				_MainALeftDownHourOdoFragment;
-	public MainALeftDownFuelSelectFragment 			_MainALeftDownHourOdometerSelectFragment;
-	
-	public MainALeftUpMachineStatusFragment 		_MainALeftUpMachineStatusFragment;
+	public MainALeftMainFragment 					_MainALeftMainFragment;
 	public MainALeftUpMachineStatusSelectFragment 	_MainALeftUpMachineStatusSelectFragment;
+	public MainALeftDownFuelSelectFragment 			_MainALeftDownFuelSelectFragment;
+	public MainALeftQuickFragment					_MainALeftQuickFragment;
 	
 	public MainAUpperMenuBarFragment 				_MainAUpperMenuBarFragment;
 	
@@ -153,61 +139,49 @@ public class MainABaseFragment extends ParentFragment{
 	public MainBodyShiftAnimation _MainAVirtualKeyShiftAnimation;
 	
 	public ChangeFragmentAnimation CenterAnimation;
-	public ChangeFragmentAnimation RightUpChangeAnimation;
-	public ChangeFragmentAnimation RightDownChangeAnimation;
-	public ChangeFragmentAnimation LeftUpChangeAnimation;
-	public ChangeFragmentAnimation LeftDownChangeAnimation;
+	public ChangeFragmentAnimation RightChangeAnimation;
+	public ChangeFragmentAnimation LeftChangeAnimation;
 	public ChangeFragmentAnimation IndicatorChangeAnimation;
 	public ChangeFragmentAnimation VirtualKeyChangeAnimation;
 	public ChangeFragmentAnimation KeyTitleChangeAnimation;
 	public ChangeFragmentAnimation KeyBodyChangeAnimation;
 	
-	public LeftRightShiftAnimation _RightUpShiftAnimation;
-	public LeftRightShiftAnimation _RightDownShiftAnimation;
-	public LeftRightShiftAnimation _LeftUpShiftAnimation;
-	public LeftRightShiftAnimation _LeftDownShiftAnimation;
+	public LeftRightShiftAnimation _RightShiftAnimation;
+	public LeftRightShiftAnimation _LeftShiftAnimation;
 	public LeftRightShiftAnimation _KeyTitleShiftAnimation;
 	public LeftRightShiftAnimation _KeyBodyShiftAnimation;
+	public LeftRightShiftAnimation _RightCenterShiftAnimation;
+	public LeftRightShiftAnimation _LeftCenterShiftAnimation;
 	public LeftRightShiftAnimation _KeyTitleBGShiftAnimation;
 	public LeftRightShiftAnimation _KeyBodyBGShiftAnimation;
-	public LeftRightShiftAnimation _RightUpBGShiftAnimation;
-	public LeftRightShiftAnimation _RightDownBGShiftAnimation;
-	public LeftRightShiftAnimation _LeftUpBGShiftAnimation;
-	public LeftRightShiftAnimation _LeftDownBGShiftAnimation;
+	public LeftRightShiftAnimation _RightBGShiftAnimation;
+	public LeftRightShiftAnimation _LeftBGShiftAnimation;
 	
 	public DisappearAnimation _CenterDisappearAnimation; 
-	public DisappearAnimation _RightUpDisappearAnimation;
-	public DisappearAnimation _RightDownDisappearAnimation;
-	public DisappearAnimation _LeftUpDisappearAnimation;
-	public DisappearAnimation _LeftDownDisappearAnimation;
+	public DisappearAnimation _RightDisappearAnimation;
+	public DisappearAnimation _LeftDisappearAnimation;
 	public DisappearAnimation _KeyTitleDisappearAnimation;
 	public DisappearAnimation _KeyBodyDisappearAnimation;
 	public DisappearAnimation _KeyTitleBGDisappearAnimation;
 	public DisappearAnimation _KeyBodyBGDisappearAnimation;
 	public DisappearAnimation _BodyDisappearAnimation;
 	public DisappearAnimation _KeyDisappearAnimation;
-	public DisappearAnimation _RightUpBGDisappearAnimation;
-	public DisappearAnimation _RightDownBGDisappearAnimation;
-	public DisappearAnimation _LeftUpBGDisappearAnimation;
-	public DisappearAnimation _LeftDownBGDisappearAnimation;
+	public DisappearAnimation _RightBGDisappearAnimation;
+	public DisappearAnimation _LeftBGDisappearAnimation;
 	public DisappearAnimation _CenterBGDisappearAnimation;
 	public DisappearAnimation _VirtualKeyDisappearAnimation;
 	
 	public AppearAnimation _CenterAppearAnimation;
-	public AppearAnimation _RightUpAppearAnimation;
-	public AppearAnimation _RightDownAppearAnimation;
-	public AppearAnimation _LeftUpAppearAnimation;
-	public AppearAnimation _LeftDownAppearAnimation;
+	public AppearAnimation _RightAppearAnimation;
+	public AppearAnimation _LeftAppearAnimation;
 	public AppearAnimation _KeyTitleAppearAnimation;
 	public AppearAnimation _KeyBodyAppearAnimation;
 	public AppearAnimation _KeyTitleBGAppearAnimation;
 	public AppearAnimation _KeyBodyBGAppearAnimation;
 	public AppearAnimation _BodyAppearAnimation;
 	public AppearAnimation _KeyAppearAnimation;
-	public AppearAnimation _RightUpBGAppearAnimation;
-	public AppearAnimation _RightDownBGAppearAnimation;
-	public AppearAnimation _LeftUpBGAppearAnimation;
-	public AppearAnimation _LeftDownBGAppearAnimation;
+	public AppearAnimation _RightBGAppearAnimation;
+	public AppearAnimation _LeftBGAppearAnimation;
 	public AppearAnimation _CenterBGAppearAnimation;
 	public AppearAnimation _VirtualKeyAppearAnimation;	
 	///////////////////////////////////////////////////
@@ -234,10 +208,8 @@ public class MainABaseFragment extends ParentFragment{
 		
 		
 		showIndicator();
-		showRightUpEngine();
-		showRightDownTM();
-		showLeftDownHourOdo();
-		showLeftUpMachineStatus();
+		showRightMain();
+		showLeftMain();
 		showUpperMenuBar();		
 		
 		VirtualKeyChangeAnimation.StartDisappearAnimation();
@@ -274,10 +246,8 @@ public class MainABaseFragment extends ParentFragment{
 		LayoutKey = (AbsoluteLayout)mRoot.findViewById(R.id.AbsoluteLayout_screen_main_a_key);
 		
 		framelayoutCenter = (FrameLayout)mRoot.findViewById(R.id.FrameLayout_screen_main_a_center);
-		framelayoutLeftUp = (FrameLayout)mRoot.findViewById(R.id.FrameLayout_screen_main_a_leftup);
-		framelayoutLeftDown = (FrameLayout)mRoot.findViewById(R.id.FrameLayout_screen_main_a_leftdown);
-		framelayoutRightUp = (FrameLayout)mRoot.findViewById(R.id.FrameLayout_screen_main_a_rightup);
-		framelayoutRightDown = (FrameLayout)mRoot.findViewById(R.id.FrameLayout_screen_main_a_rightdown);
+		framelayoutLeft = (FrameLayout)mRoot.findViewById(R.id.FrameLayout_screen_main_a_left);
+		framelayoutRight = (FrameLayout)mRoot.findViewById(R.id.FrameLayout_screen_main_a_right);
 		framelayoutIndicator = (FrameLayout)mRoot.findViewById(R.id.FrameLayout_screen_main_a_indicator);
 		framelayoutUpperMenuBar = (FrameLayout)mRoot.findViewById(R.id.FrameLayout_screen_main_a_menubar);
 		framelayoutVirtualKey = (FrameLayout)mRoot.findViewById(R.id.FrameLayout_screen_main_a_virtualkey);
@@ -288,10 +258,8 @@ public class MainABaseFragment extends ParentFragment{
 		imgViewKeyBodyBG = (ImageView)mRoot.findViewById(R.id.imageView_screen_main_a_key_body_bg);
 		
 		imgViewCenterBG = (ImageView)mRoot.findViewById(R.id.imageView_screen_main_a_center_bg);
-		imgViewRightUpBG = (ImageView)mRoot.findViewById(R.id.imageView_screen_main_a_rightup_bg);
-		imgViewRightDownBG = (ImageView)mRoot.findViewById(R.id.imageView_screen_main_a_rightdown_bg);
-		imgViewLeftUp = (ImageView)mRoot.findViewById(R.id.imageView_screen_main_a_leftup_bg);
-		imgViewLeftDown = (ImageView)mRoot.findViewById(R.id.imageView_screen_main_a_leftdown_bg);
+		imgViewRightBG = (ImageView)mRoot.findViewById(R.id.imageView_screen_main_a_right_bg);
+		imgViewLeftBG = (ImageView)mRoot.findViewById(R.id.imageView_screen_main_a_left_bg);
 		
 		framelayoutKeyTitle.setVisibility(View.INVISIBLE);
 		framelayoutKeyBody.setVisibility(View.INVISIBLE);		
@@ -301,7 +269,7 @@ public class MainABaseFragment extends ParentFragment{
 		_MainACenterFragment = new MainACenterFragment();
 		_MainACenterEngineFragment = new MainACenterEngineFragment();
 		_MainACenterTMFragment = new MainACenterTMFragment();
-		_MainACenterHourOdometerFragment = new MainACenterFuelFragment();
+		_MainACenterFuelFragment = new MainACenterFuelFragment();
 		_MainACenterMachineStatusFragment = new MainACenterMachineStatusFragment();
 		_MainACenterQuickFragment = new MainACenterQuickFragment();
 		_MainACenterBrakePedalCalibrationFragment = new MainACenterBrakePedalCalibrationFragment();
@@ -313,20 +281,18 @@ public class MainABaseFragment extends ParentFragment{
 		
 		_MainALeftQuickFragment = new MainALeftQuickFragment();
 		
-		_MainARightUpEngineFragment = new MainARightUpEngineFragment();
+		_MainARightMainFragment = new MainARightMainFragment();
 		_MainARightUpEngineModeFragment = new MainARightUpEngineModeFragment();
 		_MainARightUpHourOdometerSelectFragment = new MainARightUpHourOdometerSelectFragment();
 		
-		_MainARightDownTMFragment = new MainARightDownTMFragment();
 		_MainARightDownTMCCOModeFragment = new MainARightDownTMCCOModeFragment();
 		_MainARightDownTMICCOModeFragment = new MainARightDownTMICCOModeFragment();
 		_MainARightDownTMShiftModeFragment = new MainARightDownTMShiftModeFragment();
 		_MainARightDownTMTCLockUpFragment = new MainARightDownTMTCLockUpFragment();
 		
-		_MainALeftDownHourOdoFragment = new MainALeftDownFuelFragment();
-		_MainALeftDownHourOdometerSelectFragment = new MainALeftDownFuelSelectFragment();
+		_MainALeftDownFuelSelectFragment = new MainALeftDownFuelSelectFragment();
 		
-		_MainALeftUpMachineStatusFragment = new MainALeftUpMachineStatusFragment();
+		_MainALeftMainFragment = new MainALeftMainFragment();
 		_MainALeftUpMachineStatusSelectFragment = new MainALeftUpMachineStatusSelectFragment();
 		
 		_MainAUpperMenuBarFragment = new MainAUpperMenuBarFragment();
@@ -361,61 +327,49 @@ public class MainABaseFragment extends ParentFragment{
 		_MainBodyShiftAnimation = new MainBodyShiftAnimation(ParentActivity, LayoutBody);
 		_MainAVirtualKeyShiftAnimation = new MainBodyShiftAnimation(ParentActivity, framelayoutVirtualKey);
 		CenterAnimation = new ChangeFragmentAnimation(ParentActivity, framelayoutCenter, R.id.FrameLayout_screen_main_a_center,_MainACenterFragment);
-		RightUpChangeAnimation = new ChangeFragmentAnimation(ParentActivity, framelayoutRightUp, R.id.FrameLayout_screen_main_a_rightup,_MainARightUpEngineFragment);
-		RightDownChangeAnimation = new ChangeFragmentAnimation(ParentActivity, framelayoutRightDown, R.id.FrameLayout_screen_main_a_rightdown,_MainARightDownTMFragment);
-		LeftUpChangeAnimation = new ChangeFragmentAnimation(ParentActivity, framelayoutLeftUp, R.id.FrameLayout_screen_main_a_leftup,_MainALeftUpMachineStatusFragment);
-		LeftDownChangeAnimation = new ChangeFragmentAnimation(ParentActivity, framelayoutLeftDown, R.id.FrameLayout_screen_main_a_leftdown,_MainALeftDownHourOdoFragment);
+		RightChangeAnimation = new ChangeFragmentAnimation(ParentActivity, framelayoutRight, R.id.FrameLayout_screen_main_a_right,_MainARightMainFragment);
+		LeftChangeAnimation = new ChangeFragmentAnimation(ParentActivity, framelayoutLeft, R.id.FrameLayout_screen_main_a_left,_MainALeftMainFragment);
 		IndicatorChangeAnimation = new ChangeFragmentAnimation(ParentActivity, framelayoutIndicator, R.id.FrameLayout_screen_main_a_indicator,_MainAIndicatorFragment);
 		VirtualKeyChangeAnimation = new ChangeFragmentAnimation(ParentActivity, framelayoutVirtualKey, R.id.FrameLayout_screen_main_a_virtualkey,_MainAVirtualKeyFragment);
 		KeyTitleChangeAnimation = new ChangeFragmentAnimation(ParentActivity, framelayoutKeyTitle, R.id.FrameLayout_screen_main_a_key_title,null);
 		KeyBodyChangeAnimation = new ChangeFragmentAnimation(ParentActivity, framelayoutKeyBody, R.id.FrameLayout_screen_main_a_key_body,null);
 		
-		_RightUpShiftAnimation = new LeftRightShiftAnimation(ParentActivity, framelayoutRightUp,600,0);
-		_RightDownShiftAnimation = new LeftRightShiftAnimation(ParentActivity, framelayoutRightDown,600,0);
-		_LeftUpShiftAnimation = new LeftRightShiftAnimation(ParentActivity, framelayoutLeftUp,-600,0);
-		_LeftDownShiftAnimation = new LeftRightShiftAnimation(ParentActivity, framelayoutLeftDown,-600,0);
+		_RightShiftAnimation = new LeftRightShiftAnimation(ParentActivity, framelayoutRight,600,0);
+		_LeftShiftAnimation = new LeftRightShiftAnimation(ParentActivity, framelayoutLeft,-600,0);
+		_RightCenterShiftAnimation = new LeftRightShiftAnimation(ParentActivity, framelayoutCenter, -400, 0);
+		_LeftCenterShiftAnimation = new LeftRightShiftAnimation(ParentActivity, framelayoutCenter, 400, 0);
 		_KeyTitleShiftAnimation = new LeftRightShiftAnimation(ParentActivity, framelayoutKeyTitle,-400,0);
 		_KeyBodyShiftAnimation = new LeftRightShiftAnimation(ParentActivity, framelayoutKeyBody,1800,0);
 		_KeyTitleBGShiftAnimation = new LeftRightShiftAnimation(ParentActivity, imgViewKeyTitleBG,-400,0);
 		_KeyBodyBGShiftAnimation = new LeftRightShiftAnimation(ParentActivity, imgViewKeyBodyBG,1800,0);
-		_RightUpBGShiftAnimation = new LeftRightShiftAnimation(ParentActivity, imgViewRightUpBG,600,0);
-		_RightDownBGShiftAnimation = new LeftRightShiftAnimation(ParentActivity, imgViewRightDownBG,600,0);
-		_LeftUpBGShiftAnimation = new LeftRightShiftAnimation(ParentActivity, imgViewLeftUp,-600,0);
-		_LeftDownBGShiftAnimation = new LeftRightShiftAnimation(ParentActivity, imgViewLeftDown,-600,0);
+		_RightBGShiftAnimation = new LeftRightShiftAnimation(ParentActivity, imgViewRightBG,600,0);
+		_LeftBGShiftAnimation = new LeftRightShiftAnimation(ParentActivity, imgViewLeftBG,-600,0);
 
 		_CenterDisappearAnimation = new DisappearAnimation(ParentActivity, framelayoutCenter);
-		_RightUpDisappearAnimation = new DisappearAnimation(ParentActivity, framelayoutRightUp);
-		_RightDownDisappearAnimation = new DisappearAnimation(ParentActivity, framelayoutRightDown);
-		_LeftUpDisappearAnimation = new DisappearAnimation(ParentActivity, framelayoutLeftUp);
-		_LeftDownDisappearAnimation = new DisappearAnimation(ParentActivity, framelayoutLeftDown);
+		_RightDisappearAnimation = new DisappearAnimation(ParentActivity, framelayoutRight);
+		_LeftDisappearAnimation = new DisappearAnimation(ParentActivity, framelayoutLeft);
 		_KeyTitleDisappearAnimation = new DisappearAnimation(ParentActivity, framelayoutKeyTitle);
 		_KeyBodyDisappearAnimation = new DisappearAnimation(ParentActivity, framelayoutKeyBody);
 		_KeyTitleBGDisappearAnimation = new DisappearAnimation(ParentActivity, imgViewKeyTitleBG);
 		_KeyBodyBGDisappearAnimation = new DisappearAnimation(ParentActivity, imgViewKeyBodyBG);
 		_BodyDisappearAnimation = new DisappearAnimation(ParentActivity, LayoutBody);
 		_KeyDisappearAnimation = new DisappearAnimation(ParentActivity, LayoutKey);
-		_RightUpBGDisappearAnimation = new DisappearAnimation(ParentActivity, imgViewRightUpBG);
-		_RightDownBGDisappearAnimation = new DisappearAnimation(ParentActivity, imgViewRightDownBG);
-		_LeftUpBGDisappearAnimation = new DisappearAnimation(ParentActivity, imgViewLeftUp);
-		_LeftDownBGDisappearAnimation = new DisappearAnimation(ParentActivity, imgViewLeftDown);
+		_RightBGDisappearAnimation = new DisappearAnimation(ParentActivity, imgViewRightBG);
+		_LeftBGDisappearAnimation = new DisappearAnimation(ParentActivity, imgViewLeftBG);
 		_CenterBGDisappearAnimation = new DisappearAnimation(ParentActivity, imgViewCenterBG);
 		_VirtualKeyDisappearAnimation = new DisappearAnimation(ParentActivity, framelayoutVirtualKey);
 		
 		_CenterAppearAnimation = new AppearAnimation(ParentActivity, framelayoutCenter);
-		_RightUpAppearAnimation = new AppearAnimation(ParentActivity, framelayoutRightUp);
-		_RightDownAppearAnimation = new AppearAnimation(ParentActivity, framelayoutRightDown);
-		_LeftUpAppearAnimation = new AppearAnimation(ParentActivity, framelayoutLeftUp);
-		_LeftDownAppearAnimation = new AppearAnimation(ParentActivity, framelayoutLeftDown);
+		_RightAppearAnimation = new AppearAnimation(ParentActivity, framelayoutRight);
+		_LeftAppearAnimation = new AppearAnimation(ParentActivity, framelayoutLeft);
 		_KeyTitleAppearAnimation = new AppearAnimation(ParentActivity, framelayoutKeyTitle);
 		_KeyBodyAppearAnimation = new AppearAnimation(ParentActivity, framelayoutKeyBody);
 		_KeyTitleBGAppearAnimation = new AppearAnimation(ParentActivity, imgViewKeyTitleBG);
 		_KeyBodyBGAppearAnimation = new AppearAnimation(ParentActivity, imgViewKeyBodyBG);
 		_BodyAppearAnimation = new AppearAnimation(ParentActivity, LayoutBody);
 		_KeyAppearAnimation = new AppearAnimation(ParentActivity, LayoutKey);
-		_RightUpBGAppearAnimation = new AppearAnimation(ParentActivity, imgViewRightUpBG);
-		_RightDownBGAppearAnimation = new AppearAnimation(ParentActivity, imgViewRightDownBG);
-		_LeftUpBGAppearAnimation = new AppearAnimation(ParentActivity, imgViewLeftUp);
-		_LeftDownBGAppearAnimation = new AppearAnimation(ParentActivity, imgViewLeftDown);
+		_RightBGAppearAnimation = new AppearAnimation(ParentActivity, imgViewRightBG);
+		_LeftBGAppearAnimation = new AppearAnimation(ParentActivity, imgViewLeftBG);
 		_CenterBGAppearAnimation = new AppearAnimation(ParentActivity, imgViewCenterBG);
 		_VirtualKeyAppearAnimation = new AppearAnimation(ParentActivity, framelayoutVirtualKey);
 
@@ -465,26 +419,24 @@ public class MainABaseFragment extends ParentFragment{
 		transaction.detach(_MainACenterFragment);
 		transaction.detach(_MainACenterEngineFragment);
 		transaction.detach(_MainACenterTMFragment);
-		transaction.detach(_MainACenterHourOdometerFragment);
+		transaction.detach(_MainACenterFuelFragment);
 		transaction.detach(_MainACenterMachineStatusFragment);
 		transaction.detach(_MainACenterQuickFragment);
 		transaction.detach(_MainACenterBrakePedalCalibrationFragment);
 		transaction.detach(_MainACenterAEBFragment);
 		transaction.detach(_MainAIndicatorFragment);
-		transaction.detach(_MainARightQuickFragment);
-		transaction.detach(_MainALeftQuickFragment);
-		transaction.detach(_MainARightUpEngineFragment);
+		transaction.detach(_MainARightMainFragment);
 		transaction.detach(_MainARightUpEngineModeFragment);
 		transaction.detach(_MainARightUpHourOdometerSelectFragment);
-		transaction.detach(_MainARightDownTMFragment);
 		transaction.detach(_MainARightDownTMCCOModeFragment);
 		transaction.detach(_MainARightDownTMICCOModeFragment);
 		transaction.detach(_MainARightDownTMShiftModeFragment);
 		transaction.detach(_MainARightDownTMTCLockUpFragment);
-		transaction.detach(_MainALeftDownHourOdoFragment);
-		transaction.detach(_MainALeftDownHourOdometerSelectFragment);
-		transaction.detach(_MainALeftUpMachineStatusFragment);
+		transaction.detach(_MainARightQuickFragment);
+		transaction.detach(_MainALeftMainFragment);
 		transaction.detach(_MainALeftUpMachineStatusSelectFragment);
+		transaction.detach(_MainALeftDownFuelSelectFragment);
+		transaction.detach(_MainALeftQuickFragment);
 		transaction.detach(_MainAUpperMenuBarFragment);
 		transaction.detach(_MainAVirtualKeyFragment);
 		transaction.commit();
@@ -495,7 +447,7 @@ public class MainABaseFragment extends ParentFragment{
 		_MainACenterFragment 	 = null;
 		_MainACenterEngineFragment 	 = null;
 		_MainACenterTMFragment 	 = null;
-		_MainACenterHourOdometerFragment 	 = null;
+		_MainACenterFuelFragment 	 = null;
 		_MainACenterMachineStatusFragment 	 = null;
 		_MainACenterQuickFragment 	 = null;
 		_MainACenterBrakePedalCalibrationFragment = null;
@@ -503,25 +455,20 @@ public class MainABaseFragment extends ParentFragment{
 			
 		_MainAIndicatorFragment 	 = null;
 			
-		_MainARightQuickFragment	= null;
-		
-		_MainALeftQuickFragment	= null;
-		
-		_MainARightUpEngineFragment 	 = null;
+		_MainARightMainFragment 	 = null;
 		_MainARightUpEngineModeFragment 	 = null;
 		_MainARightUpHourOdometerSelectFragment 	 = null;
 			
-		_MainARightDownTMFragment 	 = null;
 		_MainARightDownTMCCOModeFragment 	 = null;
 		_MainARightDownTMICCOModeFragment 	 = null;
 		_MainARightDownTMShiftModeFragment 	 = null;
 		_MainARightDownTMTCLockUpFragment 	 = null;
+		_MainARightQuickFragment	= null;
 			
-		_MainALeftDownHourOdoFragment 	 = null;
-		_MainALeftDownHourOdometerSelectFragment 	 = null;
-			
-		_MainALeftUpMachineStatusFragment 	 = null;
+		_MainALeftMainFragment 	 = null;
 		_MainALeftUpMachineStatusSelectFragment 	 = null;
+		_MainALeftDownFuelSelectFragment 	 = null;
+		_MainALeftQuickFragment	= null;
 			
 		_MainAUpperMenuBarFragment 	 = null;
 			
@@ -551,61 +498,49 @@ public class MainABaseFragment extends ParentFragment{
 		_MainBodyShiftAnimation 	 = null;
 		_MainAVirtualKeyShiftAnimation = null;
 		CenterAnimation 	 = null;
-		RightUpChangeAnimation 	 = null;
-		RightDownChangeAnimation 	 = null;
-		LeftUpChangeAnimation 	 = null;
-		LeftDownChangeAnimation 	 = null;
+		RightChangeAnimation 	 = null;
+		LeftChangeAnimation 	 = null;
 		IndicatorChangeAnimation 	 = null;
 		VirtualKeyChangeAnimation 	 = null;
 		KeyTitleChangeAnimation 	 = null;
 		KeyBodyChangeAnimation 	 = null;
 			
-		_RightUpShiftAnimation 	 = null;
-		_RightDownShiftAnimation 	 = null;
-		_LeftUpShiftAnimation 	 = null;
-		_LeftDownShiftAnimation 	 = null;
+		_RightShiftAnimation 	 = null;
+		_LeftShiftAnimation 	 = null;
+		_RightCenterShiftAnimation 	 = null;
+		_LeftCenterShiftAnimation 	 = null;
 		_KeyTitleShiftAnimation 	 = null;
 		_KeyBodyShiftAnimation 	 = null;
 		_KeyTitleBGShiftAnimation 	 = null;
 		_KeyBodyBGShiftAnimation 	 = null;
-		_RightUpBGShiftAnimation 	 = null;
-		_RightDownBGShiftAnimation 	 = null;
-		_LeftUpBGShiftAnimation 	 = null;
-		_LeftDownBGShiftAnimation 	 = null;
+		_RightBGShiftAnimation 	 = null;
+		_LeftBGShiftAnimation 	 = null;
 			
 		_CenterDisappearAnimation 	 = null;
-		_RightUpDisappearAnimation 	 = null;
-		_RightDownDisappearAnimation 	 = null;
-		_LeftUpDisappearAnimation 	 = null;
-		_LeftDownDisappearAnimation 	 = null;
+		_RightDisappearAnimation 	 = null;
+		_LeftDisappearAnimation 	 = null;
 		_KeyTitleDisappearAnimation 	 = null;
 		_KeyBodyDisappearAnimation 	 = null;
 		_KeyTitleBGDisappearAnimation 	 = null;
 		_KeyBodyBGDisappearAnimation 	 = null;
 		_BodyDisappearAnimation 	 = null;
 		_KeyDisappearAnimation 	 = null;
-		_RightUpBGDisappearAnimation 	 = null;
-		_RightDownBGDisappearAnimation 	 = null;
-		_LeftUpBGDisappearAnimation 	 = null;
-		_LeftDownBGDisappearAnimation 	 = null;
+		_RightBGDisappearAnimation 	 = null;
+		_LeftBGDisappearAnimation 	 = null;
 		_CenterBGDisappearAnimation 	 = null;
 		_VirtualKeyDisappearAnimation 	 = null;
 			
 		_CenterAppearAnimation 	 = null;
-		_RightUpAppearAnimation 	 = null;
-		_RightDownAppearAnimation 	 = null;
-		_LeftUpAppearAnimation 	 = null;
-		_LeftDownAppearAnimation 	 = null;
+		_RightAppearAnimation 	 = null;
+		_LeftAppearAnimation 	 = null;
 		_KeyTitleAppearAnimation 	 = null;
 		_KeyBodyAppearAnimation 	 = null;
 		_KeyTitleBGAppearAnimation 	 = null;
 		_KeyBodyBGAppearAnimation 	 = null;
 		_BodyAppearAnimation 	 = null;
 		_KeyAppearAnimation 	 = null;
-		_RightUpBGAppearAnimation 	 = null;
-		_RightDownBGAppearAnimation 	 = null;
-		_LeftUpBGAppearAnimation 	 = null;
-		_LeftDownBGAppearAnimation 	 = null;
+		_RightBGAppearAnimation 	 = null;
+		_LeftBGAppearAnimation 	 = null;
 		_CenterBGAppearAnimation 	 = null;
 		_VirtualKeyAppearAnimation 	 = null;	
 
@@ -640,7 +575,7 @@ public class MainABaseFragment extends ParentFragment{
 	public void showCenterHourOdometer(){
 		Log.d(TAG, "showCenterHourOdometer");
 		android.app.FragmentTransaction transaction = getFragmentManager().beginTransaction();
-		transaction.replace(R.id.FrameLayout_screen_main_a_center, _MainACenterHourOdometerFragment);
+		transaction.replace(R.id.FrameLayout_screen_main_a_center, _MainACenterFuelFragment);
 		//transaction.addToBackStack("Main_Left");
 		transaction.commit();
 	}
@@ -679,101 +614,81 @@ public class MainABaseFragment extends ParentFragment{
 	
 	// Right
 	public void showRightMain(){
+		android.app.FragmentTransaction transaction = getFragmentManager().beginTransaction();
+		transaction.replace(R.id.FrameLayout_screen_main_a_right, _MainARightMainFragment);
+		//transaction.addToBackStack("Main_Left");
+		transaction.commit();
 		
 	}
 	public void showRightQuick(){
 		android.app.FragmentTransaction transaction = getFragmentManager().beginTransaction();
-		transaction.replace(R.id.FrameLayout_screen_main_a_rightup, _MainARightQuickFragment);
+		transaction.replace(R.id.FrameLayout_screen_main_a_right, _MainARightQuickFragment);
 		//transaction.addToBackStack("Main_Left");
 		transaction.commit();
 	}
 	
 	// Right Up
-	public void showRightUpEngine(){
-		android.app.FragmentTransaction transaction = getFragmentManager().beginTransaction();
-		transaction.replace(R.id.FrameLayout_screen_main_a_rightup, _MainARightUpEngineFragment);
-		//transaction.addToBackStack("Main_Left");
-		transaction.commit();
-	}
 	public void showRightUpEngineMode(){
 		android.app.FragmentTransaction transaction = getFragmentManager().beginTransaction();
-		transaction.replace(R.id.FrameLayout_screen_main_a_rightup, _MainARightUpEngineModeFragment);
+		transaction.replace(R.id.FrameLayout_screen_main_a_right, _MainARightUpEngineModeFragment);
 		//transaction.addToBackStack("Main_Left");
 		transaction.commit();
 	}
 	public void showRightUpHourOdoSelect(){
 		android.app.FragmentTransaction transaction = getFragmentManager().beginTransaction();
-		transaction.replace(R.id.FrameLayout_screen_main_a_rightup, _MainARightUpHourOdometerSelectFragment);
+		transaction.replace(R.id.FrameLayout_screen_main_a_right, _MainARightUpHourOdometerSelectFragment);
 		//transaction.addToBackStack("Main_Left");
 		transaction.commit();
 	}
 	
 	// Right Down
-	public void showRightDownTM(){
-		android.app.FragmentTransaction transaction = getFragmentManager().beginTransaction();
-		transaction.replace(R.id.FrameLayout_screen_main_a_rightdown, _MainARightDownTMFragment);
-		//transaction.addToBackStack("Main_Left");
-		transaction.commit();
-	}
 	public void showRightDownTMCCOMode(){
 		android.app.FragmentTransaction transaction = getFragmentManager().beginTransaction();
-		transaction.replace(R.id.FrameLayout_screen_main_a_rightdown, _MainARightDownTMCCOModeFragment);
+		transaction.replace(R.id.FrameLayout_screen_main_a_right, _MainARightDownTMCCOModeFragment);
 		//transaction.addToBackStack("Main_Left");
 		transaction.commit();
 	}
 	public void showRightDownTMICCOMode(){
 		android.app.FragmentTransaction transaction = getFragmentManager().beginTransaction();
-		transaction.replace(R.id.FrameLayout_screen_main_a_rightdown, _MainARightDownTMICCOModeFragment);
+		transaction.replace(R.id.FrameLayout_screen_main_a_right, _MainARightDownTMICCOModeFragment);
 		//transaction.addToBackStack("Main_Left");
 		transaction.commit();
 	}
 	public void showRightDownTMShiftMode(){
 		android.app.FragmentTransaction transaction = getFragmentManager().beginTransaction();
-		transaction.replace(R.id.FrameLayout_screen_main_a_rightdown, _MainARightDownTMShiftModeFragment);
+		transaction.replace(R.id.FrameLayout_screen_main_a_right, _MainARightDownTMShiftModeFragment);
 		//transaction.addToBackStack("Main_Left");
 		transaction.commit();
 	}
 	public void showRightDownTMTCLockUp(){
 		android.app.FragmentTransaction transaction = getFragmentManager().beginTransaction();
-		transaction.replace(R.id.FrameLayout_screen_main_a_rightdown, _MainARightDownTMTCLockUpFragment);
+		transaction.replace(R.id.FrameLayout_screen_main_a_right, _MainARightDownTMTCLockUpFragment);
 		//transaction.addToBackStack("Main_Left");
 		transaction.commit();
 	}	
 	
 	// Left
 	public void showLeftMain(){
-		
+		android.app.FragmentTransaction transaction = getFragmentManager().beginTransaction();
+		transaction.replace(R.id.FrameLayout_screen_main_a_left, _MainALeftMainFragment);
+		//transaction.addToBackStack("Main_Left");
+		transaction.commit();
 	}
 	public void showLeftQuick(){
 		android.app.FragmentTransaction transaction = getFragmentManager().beginTransaction();
-		transaction.replace(R.id.FrameLayout_screen_main_a_leftup, _MainALeftQuickFragment);
+		transaction.replace(R.id.FrameLayout_screen_main_a_left, _MainALeftQuickFragment);
 		//transaction.addToBackStack("Main_Left");
 		transaction.commit();		
 	}
-	
-	// Left Down
-	public void showLeftDownHourOdo(){
-		android.app.FragmentTransaction transaction = getFragmentManager().beginTransaction();
-		transaction.replace(R.id.FrameLayout_screen_main_a_leftdown, _MainALeftDownHourOdoFragment);
-		//transaction.addToBackStack("Main_Left");
-		transaction.commit();
-	}
 	public void showLeftDownHourOdoSelect(){
 		android.app.FragmentTransaction transaction = getFragmentManager().beginTransaction();
-		transaction.replace(R.id.FrameLayout_screen_main_a_leftdown, _MainALeftDownHourOdometerSelectFragment);
-		//transaction.addToBackStack("Main_Left");
-		transaction.commit();
-	}
-	// Left Up
-	public void showLeftUpMachineStatus(){
-		android.app.FragmentTransaction transaction = getFragmentManager().beginTransaction();
-		transaction.replace(R.id.FrameLayout_screen_main_a_leftup, _MainALeftUpMachineStatusFragment);
+		transaction.replace(R.id.FrameLayout_screen_main_a_left, _MainALeftDownFuelSelectFragment);
 		//transaction.addToBackStack("Main_Left");
 		transaction.commit();
 	}
 	public void showLeftUpMachineStatusSelect(){
 		android.app.FragmentTransaction transaction = getFragmentManager().beginTransaction();
-		transaction.replace(R.id.FrameLayout_screen_main_a_leftup, _MainALeftUpMachineStatusSelectFragment);
+		transaction.replace(R.id.FrameLayout_screen_main_a_left, _MainALeftUpMachineStatusSelectFragment);
 		//transaction.addToBackStack("Main_Left");
 		transaction.commit();
 	}
@@ -901,20 +816,14 @@ public class MainABaseFragment extends ParentFragment{
 		_MainAVirtualKeyShiftAnimation.StartShiftZeroAnimation();
 		
 		CenterAnimation.StartChangeAnimation(_MainACenterFragment);
-		RightUpChangeAnimation.StartChangeAnimation(_MainARightUpEngineFragment);
-		RightDownChangeAnimation.StartChangeAnimation(_MainARightDownTMFragment);
-		LeftUpChangeAnimation.StartChangeAnimation(_MainALeftUpMachineStatusFragment);
-		LeftDownChangeAnimation.StartChangeAnimation(_MainALeftDownHourOdoFragment);
+		RightChangeAnimation.StartChangeAnimation(_MainARightMainFragment);
+		LeftChangeAnimation.StartChangeAnimation(_MainALeftMainFragment);
 		
 		
-		_RightUpShiftAnimation.StartShiftAnimation();
-		_RightDownShiftAnimation.StartShiftAnimation();
-		_LeftUpShiftAnimation.StartShiftAnimation();
-		_LeftDownShiftAnimation.StartShiftAnimation();
-		_RightUpBGShiftAnimation.StartShiftAnimation();
-		_RightDownBGShiftAnimation.StartShiftAnimation();
-		_LeftUpBGShiftAnimation.StartShiftAnimation();
-		_LeftDownBGShiftAnimation.StartShiftAnimation();
+		_RightShiftAnimation.StartShiftAnimation();
+		_LeftShiftAnimation.StartShiftAnimation();
+		_RightBGShiftAnimation.StartShiftAnimation();
+		_LeftBGShiftAnimation.StartShiftAnimation();
 		
 		KeyTitleChangeAnimation.StartDisappearAnimation();
 		KeyBodyChangeAnimation.StartDisappearAnimation();
@@ -933,26 +842,21 @@ public class MainABaseFragment extends ParentFragment{
 		_MainAVirtualKeyShiftAnimation.StartShiftZeroAnimation();
 		
 		CenterAnimation.StartChangeAnimation(_MainACenterFragment);
-		RightUpChangeAnimation.StartChangeAnimation(_MainARightUpEngineFragment);
+		RightChangeAnimation.StartChangeAnimation(_MainARightMainFragment);
 		
 		
-		_RightDownAppearAnimation.StartAnimation();
-		_LeftUpAppearAnimation.StartAnimation();
-		_LeftDownAppearAnimation.StartAnimation();
+		_RightAppearAnimation.StartAnimation();
+		_LeftAppearAnimation.StartAnimation();
 		
 		_CenterBGAppearAnimation.StartAnimation();
-		_RightDownBGAppearAnimation.StartAnimation();
-		_LeftUpBGAppearAnimation.StartAnimation();
-		_LeftDownBGAppearAnimation.StartAnimation();
+		_RightBGAppearAnimation.StartAnimation();
+		_LeftBGAppearAnimation.StartAnimation();
 	
 		
-		_RightDownShiftAnimation.StartShiftAnimation();
-		_LeftUpShiftAnimation.StartShiftAnimation();
-		_LeftDownShiftAnimation.StartShiftAnimation();
-		_RightDownBGShiftAnimation.StartShiftAnimation();
-		_LeftUpBGShiftAnimation.StartShiftAnimation();
-		_LeftDownBGShiftAnimation.StartShiftAnimation();
-				
+		_RightShiftAnimation.StartShiftAnimation();
+		_LeftShiftAnimation.StartShiftAnimation();
+		_RightBGShiftAnimation.StartShiftAnimation();
+		_LeftBGShiftAnimation.StartShiftAnimation();
 	}
 	public void showRightDowntoDefaultScreenAnimation(){
 		ParentActivity.ScreenIndex = ParentActivity.SCREEN_STATE_MAIN_A_TOP;
@@ -961,26 +865,22 @@ public class MainABaseFragment extends ParentFragment{
 		_MainAVirtualKeyShiftAnimation.StartShiftZeroAnimation();
 		
 		CenterAnimation.StartChangeAnimation(_MainACenterFragment);
-		RightDownChangeAnimation.StartChangeAnimation(_MainARightDownTMFragment);
+		RightChangeAnimation.StartChangeAnimation(_MainARightMainFragment);
 		
 		
-		_RightUpAppearAnimation.StartAnimation();
-		_LeftUpAppearAnimation.StartAnimation();
-		_LeftDownAppearAnimation.StartAnimation();
+		_RightAppearAnimation.StartAnimation();
+		_LeftAppearAnimation.StartAnimation();
 		
 		_CenterBGAppearAnimation.StartAnimation();
-		_RightUpBGAppearAnimation.StartAnimation();
-		_LeftUpBGAppearAnimation.StartAnimation();
-		_LeftDownBGAppearAnimation.StartAnimation();
+		_RightBGAppearAnimation.StartAnimation();
+		_LeftBGAppearAnimation.StartAnimation();
 		
 		
-		_RightUpShiftAnimation.StartShiftAnimation();
-		_LeftUpShiftAnimation.StartShiftAnimation();
-		_LeftDownShiftAnimation.StartShiftAnimation();
+		_RightShiftAnimation.StartShiftAnimation();
+		_LeftShiftAnimation.StartShiftAnimation();
 		
-		_RightUpBGShiftAnimation.StartShiftAnimation();
-		_LeftUpBGShiftAnimation.StartShiftAnimation();
-		_LeftDownBGShiftAnimation.StartShiftAnimation();
+		_RightBGShiftAnimation.StartShiftAnimation();
+		_LeftBGShiftAnimation.StartShiftAnimation();
 	}
 	public void showLeftDowntoDefaultScreenAnimation(){
 		ParentActivity.ScreenIndex = ParentActivity.SCREEN_STATE_MAIN_A_TOP;
@@ -989,25 +889,21 @@ public class MainABaseFragment extends ParentFragment{
 		_MainAVirtualKeyShiftAnimation.StartShiftZeroAnimation();
 		
 		CenterAnimation.StartChangeAnimation(_MainACenterFragment);
-		LeftDownChangeAnimation.StartChangeAnimation(_MainALeftDownHourOdoFragment);
+		LeftChangeAnimation.StartChangeAnimation(_MainALeftMainFragment);
 		
 		
-		_RightUpAppearAnimation.StartAnimation();
-		_LeftUpAppearAnimation.StartAnimation();
-		_RightDownAppearAnimation.StartAnimation();
+		_RightAppearAnimation.StartAnimation();
+		_LeftAppearAnimation.StartAnimation();
 		
 		_CenterBGAppearAnimation.StartAnimation();
-		_RightUpBGAppearAnimation.StartAnimation();
-		_LeftUpBGAppearAnimation.StartAnimation();
-		_RightDownBGAppearAnimation.StartAnimation();
+		_RightBGAppearAnimation.StartAnimation();
+		_LeftBGAppearAnimation.StartAnimation();
 		
-		_RightUpShiftAnimation.StartShiftAnimation();
-		_LeftUpShiftAnimation.StartShiftAnimation();
-		_RightDownShiftAnimation.StartShiftAnimation();
+		_RightShiftAnimation.StartShiftAnimation();
+		_LeftShiftAnimation.StartShiftAnimation();
 		
-		_RightUpBGShiftAnimation.StartShiftAnimation();
-		_LeftUpBGShiftAnimation.StartShiftAnimation();
-		_RightDownBGShiftAnimation.StartShiftAnimation();
+		_RightBGShiftAnimation.StartShiftAnimation();
+		_LeftBGShiftAnimation.StartShiftAnimation();
 	}
 	public void showLeftUptoDefaultScreenAnimation(){
 		ParentActivity.ScreenIndex = ParentActivity.SCREEN_STATE_MAIN_A_TOP;
@@ -1016,27 +912,17 @@ public class MainABaseFragment extends ParentFragment{
 		_MainAVirtualKeyShiftAnimation.StartShiftZeroAnimation();
 		
 		CenterAnimation.StartChangeAnimation(_MainACenterFragment);
-		LeftUpChangeAnimation.StartChangeAnimation(_MainALeftUpMachineStatusFragment);
+		LeftChangeAnimation.StartChangeAnimation(_MainALeftMainFragment);
 		
 		
-		_RightUpAppearAnimation.StartAnimation();
-		_LeftDownAppearAnimation.StartAnimation();
-		_RightDownAppearAnimation.StartAnimation();
+		_RightAppearAnimation.StartAnimation();
 		
 		_CenterBGAppearAnimation.StartAnimation();
-		_RightUpBGAppearAnimation.StartAnimation();
-		_LeftDownBGAppearAnimation.StartAnimation();
-		_RightDownBGAppearAnimation.StartAnimation();
-		
+		_RightBGAppearAnimation.StartAnimation();
 	
 		
-		_RightUpShiftAnimation.StartShiftAnimation();
-		_LeftDownShiftAnimation.StartShiftAnimation();
-		_RightDownShiftAnimation.StartShiftAnimation();
-		
-		_RightUpBGShiftAnimation.StartShiftAnimation();
-		_LeftDownBGShiftAnimation.StartShiftAnimation();
-		_RightDownBGShiftAnimation.StartShiftAnimation();
+		_RightShiftAnimation.StartShiftAnimation();
+		_RightBGShiftAnimation.StartShiftAnimation();
 	}
 	public void showCalibrationtoDefaultScreenAnimation(){
 		ParentActivity.ScreenIndex = ParentActivity.SCREEN_STATE_MAIN_A_TOP;
@@ -1051,20 +937,14 @@ public class MainABaseFragment extends ParentFragment{
 		_KeyDisappearAnimation.StartAnimation();
 		
 		CenterAnimation.StartChangeAnimation(_MainACenterFragment);
-		RightUpChangeAnimation.StartChangeAnimation(_MainARightUpEngineFragment);
-		RightDownChangeAnimation.StartChangeAnimation(_MainARightDownTMFragment);
-		LeftUpChangeAnimation.StartChangeAnimation(_MainALeftUpMachineStatusFragment);
-		LeftDownChangeAnimation.StartChangeAnimation(_MainALeftDownHourOdoFragment);
+		RightChangeAnimation.StartChangeAnimation(_MainARightMainFragment);
+		LeftChangeAnimation.StartChangeAnimation(_MainALeftMainFragment);
 		
 		
-		_RightUpShiftAnimation.StartShiftAnimation();
-		_RightDownShiftAnimation.StartShiftAnimation();
-		_LeftUpShiftAnimation.StartShiftAnimation();
-		_LeftDownShiftAnimation.StartShiftAnimation();
-		_RightUpBGShiftAnimation.StartShiftAnimation();
-		_RightDownBGShiftAnimation.StartShiftAnimation();
-		_LeftUpBGShiftAnimation.StartShiftAnimation();
-		_LeftDownBGShiftAnimation.StartShiftAnimation();
+		_RightShiftAnimation.StartShiftAnimation();
+		_LeftShiftAnimation.StartShiftAnimation();
+		_RightBGShiftAnimation.StartShiftAnimation();
+		_LeftBGShiftAnimation.StartShiftAnimation();
 		
 		KeyTitleChangeAnimation.StartDisappearAnimation();
 		KeyBodyChangeAnimation.StartDisappearAnimation();
@@ -1073,42 +953,32 @@ public class MainABaseFragment extends ParentFragment{
 		
 	}
 	public void showQuickScreenAnimation(){
-		
 		_MainBodyShiftAnimation.StartShiftZeroAnimation();
-		//_MainAVirtualKeyShiftAnimation.StartShiftZeroAnimation();
-		
-		
-		RightUpChangeAnimation.StartChangeAnimation(_MainARightQuickFragment);
-		LeftUpChangeAnimation.StartChangeAnimation(_MainALeftQuickFragment);
-		
-		_RightUpShiftAnimation.StartShiftAnimation();
-		_RightUpBGShiftAnimation.StartShiftAnimation();
-		_LeftUpShiftAnimation.StartShiftAnimation();
-		_LeftUpBGShiftAnimation.StartShiftAnimation();
 		
 		CenterAnimation.StartChangeAnimation(_MainACenterQuickFragment);
+		RightChangeAnimation.StartChangeAnimation(_MainARightQuickFragment);
+		LeftChangeAnimation.StartChangeAnimation(_MainALeftQuickFragment);
+		
+		_RightShiftAnimation.StartShiftAnimation();
+		_RightBGShiftAnimation.StartShiftAnimation();
+		_LeftShiftAnimation.StartShiftAnimation();
+		_LeftBGShiftAnimation.StartShiftAnimation();
+		
 		
 		KeyTitleChangeAnimation.StartDisappearAnimation();
 		KeyBodyChangeAnimation.StartDisappearAnimation();
-		RightDownChangeAnimation.StartDisappearAnimation();
-		LeftDownChangeAnimation.StartDisappearAnimation();
-
-		//VirtualKeyChangeAnimation.StartChangeAnimation(_MainAVirtualKeyFragment);
 	}
 	
 	public void showVirtualKeytoQuickScreenAnimation(){
-//		_BodyAppearAnimation.StartAnimation();
-		_MainAVirtualKeyShiftAnimation.StartShiftZeroAnimation();
+		VirtualKeyChangeAnimation.StartDisappearAnimation();
 	}
 	
 	public void showVritualKeyScreenAnimation(){
-//		_BodyDisappearAnimation.StartAnimation();
-//		_KeyDisappearAnimation.StartAnimation();
-		_MainAVirtualKeyShiftAnimation.StartShiftVirtualKeyAnimation();
+		_MainAVirtualKeyShiftAnimation.StartShiftZeroAnimation();
+		VirtualKeyChangeAnimation.StartChangeAnimation(_MainAVirtualKeyFragment);
 	}
 	
 	public void showKeyScreenAnimation(){
-		
 		if((ParentActivity.ScreenIndex < ParentActivity.SCREEN_STATE_MAIN_A_KEY_TOP) || (ParentActivity.ScreenIndex > ParentActivity.SCREEN_STATE_MAIN_A_KEY_END)){
 			CenterAnimation.StartChangeAnimation(_MainACenterQuickFragment);
 			_BodyDisappearAnimation.StartAnimation();
@@ -1125,8 +995,6 @@ public class MainABaseFragment extends ParentFragment{
 		}else{
 
 		}
-		
-		
 		
 		Log.d(TAG,"showKeyScreenAnimation");
 		
@@ -1489,7 +1357,7 @@ public class MainABaseFragment extends ParentFragment{
 	}
 
 	public void ClickKeyButtonEnter(){
-		_MainALeftUpMachineStatusFragment.ClickEnter();
+		_MainALeftMainFragment.ClickEnter();
 	}
 
 }

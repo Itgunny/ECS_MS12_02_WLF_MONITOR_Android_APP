@@ -1,0 +1,247 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/RelativeLayout_right_main_a"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/main_a_bg_right" >
+
+    <RelativeLayout
+        android:id="@+id/RelativeLayout_rightup_main_a_engine_top"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" >
+
+        <ImageButton
+            android:id="@+id/imageButton_rightup_main_a_hourodometer"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:background="@drawable/_selector_rightup_main_a_hourodometer_btn1" />
+
+        <ImageButton
+            android:id="@+id/imageButton_rightup_main_a_engine_mode"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="75dp"
+            android:background="@drawable/_selector_right_main_a_btn1" />
+
+        <RelativeLayout
+            android:id="@+id/RelativeLayout_rightup_main_a_hourodometer"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@+id/imageView_rightup_main_a_engine_line"
+            android:layout_alignRight="@+id/imageView_rightup_main_a_engine_line"
+            android:layout_marginTop="8dp" >
+
+            <TextView
+                android:id="@+id/textView_rightup_main_a_hourodometer_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentTop="true"
+                android:layout_marginRight="10dp"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:textColor="@color/main_title_amber_b"
+                android:textStyle="bold|italic" />
+
+            <TextView
+                android:id="@+id/textView_rightup_main_a_hourodometer_data"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignBaseline="@+id/textView_rightup_main_a_hourodometer_unit"
+                android:layout_marginRight="10dp"
+                android:layout_toLeftOf="@+id/textView_rightup_main_a_hourodometer_unit"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:textSize="30sp"
+                android:textStyle="italic" />
+
+            <TextView
+                android:id="@+id/textView_rightup_main_a_hourodometer_unit"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_below="@+id/textView_rightup_main_a_hourodometer_title"
+                android:layout_marginRight="35dp"
+                android:alpha="0.5"
+                android:textAppearance="?android:attr/textAppearanceLarge" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/RelativeLayout_rightup_main_a_engine_mode"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@+id/imageView_rightup_main_a_engine_line"
+            android:layout_alignRight="@+id/imageView_rightup_main_a_engine_line"
+            android:layout_below="@+id/imageView_rightup_main_a_engine_line" >
+
+            <TextView
+                android:id="@+id/textView_rightup_main_a_engine_mode_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentTop="true"
+                android:layout_marginRight="10dp"
+                android:text="@string/ENGINE_MODE"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:textColor="@color/main_title_amber_b"
+                android:textStyle="bold|italic" />
+
+            <TextView
+                android:id="@+id/textView_rightup_main_a_engine_mode_data"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_below="@+id/textView_rightup_main_a_engine_mode_title"
+                android:layout_marginRight="35dp"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:textStyle="italic" />
+        </RelativeLayout>
+
+        <ImageView
+            android:id="@+id/imageView_rightup_main_a_engine_line"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="72dp"
+            android:background="@drawable/main_a_bg_line03" />
+    </RelativeLayout>
+
+	<ImageView
+        android:id="@+id/imageView_screen_main_a_right_line"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/RelativeLayout_rightup_main_a_engine_top"
+        android:background="@drawable/main_a_bg_line01_r_02" />
+
+    <RelativeLayout
+        android:id="@+id/RelativeLayout_rightdown_main_a_tm"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" 
+		android:layout_marginTop="147dp" >
+
+        <ImageButton
+            android:id="@+id/imageButton_rightdown_main_a_tm_ccomode"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/_selector_right_main_a_btn1" />
+
+        <ImageButton
+            android:id="@+id/imageButton_rightdown_main_a_tm_shiftmode"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="65dp"
+            android:background="@drawable/_selector_right_main_a_btn1" />
+
+        <ImageButton
+            android:id="@+id/imageButton_rightdown_main_a_tm_tclockup"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="130dp"
+            android:background="@drawable/_selector_rightdown_main_a_tm_tclockup_btn1" />
+
+        <RelativeLayout
+            android:id="@+id/RelativeLayout_rightdown_main_a_tm_ccomode"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@+id/imageView_rightdown_main_a_tm_line1"
+            android:layout_alignRight="@+id/imageView_rightdown_main_a_tm_line1" >
+
+            <TextView
+                android:id="@+id/textView_rightdown_main_a_tm_ccomode_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="10dp"
+                android:text="@string/CCO_MODE"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:textColor="@color/main_title_amber_b"
+                android:textStyle="bold|italic" />
+
+            <TextView
+                android:id="@+id/textView_rightdown_main_a_tm_ccomode_data"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/textView_rightdown_main_a_tm_ccomode_title"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="35dp"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:textStyle="italic" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/RelativeLayout_rightdown_main_a_tm_shiftmode"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@+id/imageView_rightdown_main_a_tm_line1"
+            android:layout_alignRight="@+id/imageView_rightdown_main_a_tm_line1"
+            android:layout_below="@+id/imageView_rightdown_main_a_tm_line1" >
+
+            <TextView
+                android:id="@+id/textView_rightdown_main_a_tm_shiftmode_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentTop="true"
+                android:layout_marginRight="10dp"
+                android:text="@string/SHIFT_MODE"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:textColor="@color/main_title_amber_b"
+                android:textStyle="bold|italic" />
+
+            <TextView
+                android:id="@+id/textView_rightdown_main_a_tm_shiftmode_data"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_below="@+id/textView_rightdown_main_a_tm_shiftmode_title"
+                android:layout_marginRight="35dp"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:textStyle="italic" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/RelativeLayout_rightdown_main_a_tm_tclockup"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@+id/imageView_rightdown_main_a_tm_line2"
+            android:layout_alignRight="@+id/imageView_rightdown_main_a_tm_line2"
+            android:layout_below="@+id/imageView_rightdown_main_a_tm_line2" >
+
+            <TextView
+                android:id="@+id/textView_rightdown_main_a_tm_tclockup_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentTop="true"
+                android:layout_marginRight="10dp"
+                android:text="@string/TC_LOCK_UP"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:textColor="@color/main_title_amber_b"
+                android:textStyle="bold|italic" />
+
+            <TextView
+                android:id="@+id/textView_rightdown_main_a_tm_tclockup_data"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_below="@+id/textView_rightdown_main_a_tm_tclockup_title"
+                android:layout_marginRight="35dp"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:textStyle="italic" />
+        </RelativeLayout>
+
+        <ImageView
+            android:id="@+id/imageView_rightdown_main_a_tm_line1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="62dp"
+            android:background="@drawable/main_a_bg_line03" />
+
+        <ImageView
+            android:id="@+id/imageView_rightdown_main_a_tm_line2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="127dp"
+            android:background="@drawable/main_a_bg_line03" />
+    </RelativeLayout>
+
+</RelativeLayout>

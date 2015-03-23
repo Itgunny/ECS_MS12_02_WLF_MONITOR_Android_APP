@@ -58,78 +58,49 @@
         android:layout_height="wrap_content"
         android:layout_x="-350dp" >
 
-
         <ImageView
-            android:id="@+id/imageView_screen_main_a_leftdown_bg"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_y="246dp"
-            android:background="@drawable/main_a_bg_left_down" />
-
-        <ImageView
-            android:id="@+id/imageView_screen_main_a_leftup_bg"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:id="@+id/imageView_screen_main_a_left_bg"
+            android:layout_width="750dp"
+            android:layout_height="350dp"
             android:layout_y="65dp"
             android:src="@drawable/main_a_bg_left" />
 
         <ImageView
-            android:id="@+id/imageView_screen_main_a_rightdown_bg"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_x="750dp"
-            android:layout_y="212dp"
-            android:background="@drawable/main_a_bg_right_down" />
-
-        <ImageView
-            android:id="@+id/imageView_screen_main_a_rightup_bg"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:id="@+id/imageView_screen_main_a_right_bg"
+            android:layout_width="750dp"
+            android:layout_height="350dp"
             android:layout_x="750dp"
             android:layout_y="65dp"
             android:background="@drawable/main_a_bg_right" />
         
         <ImageView
             android:id="@+id/imageView_screen_main_a_center_bg"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="336dp"
+            android:layout_height="336dp"
             android:layout_x="583dp"
-            android:layout_y="73dp" />
+            android:layout_y="73dp" 
+            android:background="@drawable/main_a_key_bg"/>
 
         <FrameLayout
-            android:id="@+id/FrameLayout_screen_main_a_leftup"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:id="@+id/FrameLayout_screen_main_a_left"
+            android:layout_width="750dp"
+            android:layout_height="350dp"
             android:layout_y="65dp" >
         </FrameLayout>
 
-        <FrameLayout
-            android:id="@+id/FrameLayout_screen_main_a_leftdown"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_y="246dp" >
-        </FrameLayout>
 
         <FrameLayout
-            android:id="@+id/FrameLayout_screen_main_a_rightup"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:id="@+id/FrameLayout_screen_main_a_right"
+            android:layout_width="750dp"
+            android:layout_height="350dp"
             android:layout_x="750dp"
             android:layout_y="65dp" >
-        </FrameLayout>
-
-        <FrameLayout
-            android:id="@+id/FrameLayout_screen_main_a_rightdown"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_x="750dp"
-            android:layout_y="212dp" >
         </FrameLayout>
 
         <FrameLayout
             android:id="@+id/FrameLayout_screen_main_a_center"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="336dp"
+            android:layout_height="336dp"
             android:layout_x="583dp"
             android:layout_y="73dp" >
         </FrameLayout>
@@ -146,7 +117,7 @@
     <FrameLayout
         android:id="@+id/FrameLayout_screen_main_a_virtualkey"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="350dp"
         android:layout_x="0dp"
         android:layout_y="65dp"
         android:background="@drawable/main_a_virtual_key_bg_up"

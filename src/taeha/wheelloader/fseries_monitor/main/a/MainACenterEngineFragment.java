@@ -87,14 +87,20 @@ public class MainACenterEngineFragment extends ParentFragment{
 	@Override
 	protected void UpdateUI() {
 		// TODO Auto-generated method stub
-		
+		ShowEngineIcon();
 	}
 	/////////////////////////////////////////////////////////////////////	
 	public void ShowEngineIcon(){
-		if(ParentActivity.ScreenIndex == ParentActivity.SCREEN_STATE_MAIN_A_RIGHTUP_HOURODMETER)
-			EngineIcon.setVisibility(View.INVISIBLE);
-		else
-			EngineIcon.setVisibility(View.VISIBLE);
+		try {
+			if(ParentActivity.ScreenIndex == ParentActivity.SCREEN_STATE_MAIN_A_RIGHTUP_HOURODMETER)
+				EngineIcon.setVisibility(View.INVISIBLE);
+			else
+				EngineIcon.setVisibility(View.VISIBLE);
+		} catch (NullPointerException e) {
+			// TODO: handle exception
+			Log.e(TAG,"NullPointerException");
+		}
+		
 	}
 	
 	public void ClickBG(){

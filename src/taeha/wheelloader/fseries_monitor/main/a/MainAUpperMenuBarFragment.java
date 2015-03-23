@@ -210,6 +210,7 @@ public class MainAUpperMenuBarFragment extends ParentFragment{
 	@Override
 	protected void UpdateUI() {
 		// TODO Auto-generated method stub
+		MainBtnDisplay();
 		ClockDisplay(ClockHour, ClockMin);
 		WarningDisplay(Warning,CommErrCount);
 		WiperDisplay(WiperStatus,WiperLevel);
@@ -282,6 +283,28 @@ public class MainAUpperMenuBarFragment extends ParentFragment{
 		}
 	}	
 	/////////////////////////////////////////////////////////////////////
+	public void MainBtnDisplay(){
+		try {
+			if(ParentActivity.ScreenIndex == ParentActivity.SCREEN_STATE_MAIN_A_TOP)
+			{
+				imgbtnBuzzer.setBackgroundResource(R.drawable._selector_upper_main_a_buzzer_btn1);
+				imgbtnWiper.setBackgroundResource(R.drawable._selector_lower_main_a_menubar_btn1);
+				imgbtnCamera.setBackgroundResource(R.drawable._selector_lower_main_a_menubar_btn1);
+				imgbtnMenu.setBackgroundResource(R.drawable._selector_lower_main_a_menubar_btn1);		
+			}
+			else
+			{
+				imgbtnBuzzer.setBackgroundResource(R.drawable._selector_upper_main_a_buzzer_btn2);
+				imgbtnWiper.setBackgroundResource(R.drawable._selector_lower_main_a_menubar_btn2);
+				imgbtnCamera.setBackgroundResource(R.drawable._selector_lower_main_a_menubar_btn2);
+				imgbtnMenu.setBackgroundResource(R.drawable._selector_lower_main_a_menubar_btn2);		
+			}
+		} catch (NullPointerException e) {
+			// TODO: handle exception
+			Log.e(TAG,"NullPointerException");
+		}
+			
+	}
 	public void ClockDisplay(int Hour, int Min){
 		if(ParentActivity.GetAMPM(Hour) == ParentActivity.CLOCK_AM){
 			textViewTimeAM.setVisibility(View.VISIBLE);

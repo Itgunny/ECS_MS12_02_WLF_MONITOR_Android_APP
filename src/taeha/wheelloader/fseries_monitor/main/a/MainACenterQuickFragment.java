@@ -1,5 +1,6 @@
 package taeha.wheelloader.fseries_monitor.main.a;
 
+import taeha.wheelloader.fseries_monitor.main.CAN1CommManager;
 import taeha.wheelloader.fseries_monitor.main.R;
 import android.content.Intent;
 import android.os.Bundle;
@@ -19,13 +20,11 @@ public class MainACenterQuickFragment extends MainACenterFragment{
 	ImageButton imgbtnSmartTerminal;
 	ImageButton imgbtnMedia;
 	ImageButton imgbtnKeypad;
-	
-	ImageButton imgbtnMain;
-	
 	//////////////////////////////////////////////////
 	
 	//VALUABLE////////////////////////////////////////
-
+	int Maint;
+	int FaultCode;
 	//////////////////////////////////////////////////
 	
 	//ANIMATION///////////////////////////////////////
@@ -71,7 +70,7 @@ public class MainACenterQuickFragment extends MainACenterFragment{
 		imgbtnSmartTerminal = (ImageButton)mRoot.findViewById(R.id.imageButton_center_main_a_quick_mirror);
 		imgbtnMedia = (ImageButton)mRoot.findViewById(R.id.imageButton_center_main_a_quick_mediaplayer);
 		imgbtnKeypad = (ImageButton)mRoot.findViewById(R.id.imageButton_center_main_a_quick_keypad);
-		imgbtnMain = (ImageButton)mRoot.findViewById(R.id.imageButton_center_main_a_quick_main);
+		imgbtnOption = (ImageButton)mRoot.findViewById(R.id.imageButton_center_main_a_quick_option);
 		
 	}
 	
@@ -108,7 +107,7 @@ public class MainACenterQuickFragment extends MainACenterFragment{
 				ClickKeypad();
 			}
 		});		
-		imgbtnMain.setOnClickListener(new View.OnClickListener() {
+		imgbtnOption.setOnClickListener(new View.OnClickListener() {
 			
 			@Override
 			public void onClick(View v) {
@@ -117,6 +116,19 @@ public class MainACenterQuickFragment extends MainACenterFragment{
 					ClickBG();
 			}
 		});
+	}
+	
+	@Override
+	protected void GetDataFromNative() {
+		// TODO Auto-generated method stub
+		Maint = CAN1Comm.Get_MaintenanceAlarmLamp_1099_PGN65428();
+		FaultCode = CAN1Comm.Get_DTCAlarmLamp_1509_PGN65427();
+	}
+
+	@Override
+	protected void UpdateUI() {
+		// TODO Auto-generated method stub
+		IconDisplay(FaultCode,Maint);
 	}
 
 	/////////////////////////////////////////////////////////////////////	
@@ -150,19 +162,27 @@ public class MainACenterQuickFragment extends MainACenterFragment{
 		}
 	}	
 	public void ClickKeypad(){
+		if(ParentActivity.AnimationRunningFlag == true)
+			return;
+		else
+			ParentActivity.StartAnimationRunningTimer();
 		
+		ParentActivity._MainABaseFragment.showVritualKeyScreenAnimation();
+		ParentActivity._MainABaseFragment._MainALeftQuickFragment.Clickable(false);
+		ParentActivity._MainABaseFragment._MainARightQuickFragment.Clickable(false);
+		Clickable(false);
 	}
 	
 	public void setClickEnable(boolean flag){
 		ClickFlag = flag;
-		imgbtnMain.setClickable(ClickFlag);
+		imgbtnOption.setClickable(ClickFlag);
 		imgbtnSmartTerminal.setClickable(ClickFlag);
 		imgbtnMedia.setClickable(ClickFlag);
 		imgbtnKeypad.setClickable(ClickFlag);
 	}
 	
 	public void Clickable(boolean flag){
-		imgbtnMain.setClickable(flag);
+		imgbtnOption.setClickable(flag);
 		imgbtnSmartTerminal.setClickable(flag);
 		imgbtnMedia.setClickable(flag);
 		imgbtnKeypad.setClickable(flag);

@@ -39,7 +39,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/RelativeLayout_rightup_main_a_quick"
-        android:background="@drawable/main_a_bg_line01" />
+        android:background="@drawable/main_a_bg_line01_r_01" />
 
     <RelativeLayout
         android:id="@+id/RelativeLayout_rightdown_main_a_quick"

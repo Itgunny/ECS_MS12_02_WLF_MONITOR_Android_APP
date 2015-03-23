@@ -214,8 +214,24 @@ public class Home extends Activity {
 	////1.0.4.0
 	//1. 화면타입설정 추가
 	//2. B안 진행
-	//3. Main : Right Up => Warning Up 제거 및 Hourmeter, Odometer 표시
+	//3. Main : Right Up  
+	//	- WarmingUp 제거
+	//	- Odometer, Hourmeter 위치를 Engine Mode위치로 이동 
+	//	- Engine Mode를 기존 Warming Up 위치로 이동
+	//	- Enigne Mode 표시 시에만 Engine Icon 표시
 	//4. Main : Left Down => Average Fuel, Lastest Fuel Consumed 추가, Hourmenter, Odometer 제거
+	//5. 도움말 글씨 하늘색으로 변경
+	//6. Quick 메뉴 Maintenance 아이콘 변경
+	//7. 각 메뉴에서 메인으로 돌아올 때, A안인지 B타입인지 확인하고 돌아옴
+	//8. 메뉴-멀티미디어-미디어플레이어 
+	//	- 실행 후 돌아왔을 때 포커스 잃은 버그 수정
+	//	- rpm 확인 후 실행
+	//-------svn
+	//9. 가상키 FN 기능 구현
+	//10. 메인 KEY UI에서 램프 클릭 시 라디오 버튼 모두 미선택으로 되는 버그 수정
+	//11. Software Update UI 위치 이동 : 매뉴 - 매니지먼트 - 비밀번호입력 후 진입
+	//12. 관리자 메뉴에서 '1234567890' 누르면 H/W Test로 이동
+	
 	//////////////////////////////////////////////////////////////////////////////////////
 	
 	// TAG
@@ -400,6 +416,9 @@ public class Home extends Activity {
 	public  static final int SCREEN_STATE_MENU_MANAGEMENT_SERVICE_END						= 0x235FFFFF;
 	public  static final int SCREEN_STATE_MENU_MANAGEMENT_ASPHONE_TOP						= 0x23600000;
 	public  static final int SCREEN_STATE_MENU_MANAGEMENT_ASPHONE_END						= 0x236FFFFF;
+	public  static final int SCREEN_STATE_MENU_MANAGEMENT_SOFTWAREUPDAT_TOP					= 0x23700000;
+	public  static final int SCREEN_STATE_MENU_MANAGEMENT_SOFTWAREUPDAT_PW					= 0x2371FFFF;
+	public  static final int SCREEN_STATE_MENU_MANAGEMENT_SOFTWAREUPDAT_END					= 0x237FFFFF;
 	public  static final int SCREEN_STATE_MENU_MANAGEMENT_END								= 0x23FFFFFF;
 	
 	public  static final int SCREEN_STATE_MENU_PREFERENCE_TOP								= 0x24000000;
@@ -1635,7 +1654,7 @@ public class Home extends Activity {
 				CheckBuzzer();
 				CheckEngineAutoShutdown();
 				CheckEHCUErr();
-				Checkrpm();		// ++, --, 150211 bwk
+				Checkrpm(RPM);		// ++, --, 150211 bwk
 			}
 		});
 	
@@ -1857,7 +1876,7 @@ public class Home extends Activity {
 	}
 	
 	// ++, 150211 bwk
-	public void Checkrpm(){
+	public void Checkrpm(int Data){
 		if(CAN1Comm.GetPlayerFlag() == true && PressFnKey == 0)
 		{
 			Log.d(TAG, "Player On");
@@ -1871,7 +1890,12 @@ public class Home extends Activity {
 		
 		if(PressFnKey == 1)
 		{
-			if(CAN1Comm.Get_EngineSpeed_310_PGN65431() >= 1500)
+			if(Data == 0xFFFF)
+				Data = 0;
+			else if(Data > 9999)
+				Data = 9999;
+						
+			if(Data >= 1500)
 			{
 				if(HighrpmCount < 20)
 					HighrpmCount++;

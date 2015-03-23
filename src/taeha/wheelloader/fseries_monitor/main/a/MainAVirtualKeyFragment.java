@@ -264,22 +264,11 @@ public class MainAVirtualKeyFragment extends ParentFragment{
 		else
 			ParentActivity.StartAnimationRunningTimer();
 		
-		if(bScreenOnFlag == true){
-			ParentActivity._MainABaseFragment.showVirtualKeytoQuickScreenAnimation();
-			bScreenOnFlag = false;
-			ParentActivity._MainABaseFragment._MainALeftQuickFragment.Clickable(true);
-			ParentActivity._MainABaseFragment._MainARightQuickFragment.Clickable(true);
-			ParentActivity._MainABaseFragment._MainACenterQuickFragment.Clickable(true);
-		}else{
-			ParentActivity._MainABaseFragment.showVritualKeyScreenAnimation();
-			bScreenOnFlag = true;
-			ParentActivity._MainABaseFragment._MainALeftQuickFragment.Clickable(false);
-			ParentActivity._MainABaseFragment._MainARightQuickFragment.Clickable(false);
-			ParentActivity._MainABaseFragment._MainACenterQuickFragment.Clickable(false);
-		}
-		
-
-
+		ParentActivity._MainABaseFragment.showVirtualKeytoQuickScreenAnimation();
+		bScreenOnFlag = false;
+		ParentActivity._MainABaseFragment._MainALeftQuickFragment.Clickable(true);
+		ParentActivity._MainABaseFragment._MainARightQuickFragment.Clickable(true);
+		ParentActivity._MainABaseFragment._MainACenterQuickFragment.Clickable(true);
 	}
 	public void ClickMainLight(){
 		ParentActivity._MainABaseFragment.showMainLightAnimation();
@@ -332,7 +321,7 @@ public class MainAVirtualKeyFragment extends ParentFragment{
 		
 	}
 	public void ClickFN(){
-		
+		CAN1Comm.ClickFN();
 	}
 	
 	///////////////////////Timer/////////////////////////////////////////

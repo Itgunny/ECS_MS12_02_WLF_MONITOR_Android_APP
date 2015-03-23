@@ -37,9 +37,9 @@ public class MainBCenterFuelFragment extends ParentFragment{
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
-		TAG = "MainBCenterHourOdometerFragment";
+		TAG = "MainBCenterFuelFragment";
 		Log.d(TAG, "onCreateView");
-		mRoot = inflater.inflate(R.layout.center_main_b_hourodometer, null);
+		mRoot = inflater.inflate(R.layout.center_main_b_fuel, null);
 		InitResource();
 		InitValuables();
 		InitButtonListener();
@@ -53,7 +53,7 @@ public class MainBCenterFuelFragment extends ParentFragment{
 	@Override
 	protected void InitResource() {
 		// TODO Auto-generated method stub
-		LayoutTop = (RelativeLayout)mRoot.findViewById(R.id.RelativeLayout_center_main_b_hourodometer);
+		LayoutTop = (RelativeLayout)mRoot.findViewById(R.id.RelativeLayout_center_main_b_fuel);
 	}
 	
 	protected void InitValuables() {

@@ -339,7 +339,7 @@ public class MainBVirtualKeyFragment extends ParentFragment{
 		
 	}
 	public void ClickFN(){
-		
+		CAN1Comm.ClickFN();		// ++, --, 150319 bwk
 	}
 	
 	///////////////////////Timer/////////////////////////////////////////

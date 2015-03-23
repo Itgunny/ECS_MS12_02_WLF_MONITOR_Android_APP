@@ -91,12 +91,12 @@ public class ServiceMenuListFragment extends MenuBodyList_ParentFragment{
 		setClickableList1(true);
 		setClickableList2(true);
 		setClickableList3(true);
-		setClickableList4(true);
+		//setClickableList4(true);		// ++, --, 150323 bwk
 		
 		setListTitle1(ParentActivity.getResources().getString(string.Sensor_Monitoring));
 		setListTitle2(ParentActivity.getResources().getString(string.Speed_Limit_Setting));
 		setListTitle3(ParentActivity.getResources().getString(string.Weighing_System_Compensation));
-		setListTitle4(ParentActivity.getResources().getString(string.Software_Update));
+		//setListTitle4(ParentActivity.getResources().getString(string.Software_Update));		// ++, --, 150323 bwk
 	}
 
 	//////////////////////////////////////////////////////////////////////
@@ -139,17 +139,19 @@ public class ServiceMenuListFragment extends MenuBodyList_ParentFragment{
 	@Override
 	public void ClickList4() {
 		// TODO Auto-generated method stub
-		Intent intent;
-		intent = ParentActivity.getPackageManager().getLaunchIntentForPackage(
-				"taeha.wheelloader.update");
-		
-		if(intent != null){
-			CAN1Comm.Callback_StopCommService();
-			CAN1Comm.CloseComport();
-			startActivity(intent);		
-		}
-		CursurIndex = 4;
-		CursurDisplay(CursurIndex);
+		// ++, 150323 bwk
+//		Intent intent;
+//		intent = ParentActivity.getPackageManager().getLaunchIntentForPackage(
+//				"taeha.wheelloader.update");
+//		
+//		if(intent != null){
+//			CAN1Comm.Callback_StopCommService();
+//			CAN1Comm.CloseComport();
+//			startActivity(intent);		
+//		}
+//		CursurIndex = 4;
+//		CursurDisplay(CursurIndex);
+		// --, 150323 bwk
 	}
 
 	@Override
@@ -199,7 +201,10 @@ public class ServiceMenuListFragment extends MenuBodyList_ParentFragment{
 			
 			break;
 		case 1:
-			CursurIndex = 4;
+			// ++, 150323 bwk
+			//CursurIndex = 4;
+			CursurIndex = 3;
+			// --, 150323 bwk
 			CursurDisplay(CursurIndex);
 			break;
 		case 2:
@@ -232,12 +237,17 @@ public class ServiceMenuListFragment extends MenuBodyList_ParentFragment{
 			CursurDisplay(CursurIndex);
 			break;
 		case 3:
-			CursurIndex++;
+			// ++, 150323 bwk
+			//CursurIndex++;
+			CursurIndex = 1;
+			// --, 150323 bwk
 			CursurDisplay(CursurIndex);
 			break;
 		case 4:
-			CursurIndex = 1;
-			CursurDisplay(CursurIndex);
+			// ++, 150323 bwk
+//			CursurIndex = 1;
+//			CursurDisplay(CursurIndex);
+			// --, 150323 bwk
 			break;
 		default:
 			break;
@@ -257,9 +267,11 @@ public class ServiceMenuListFragment extends MenuBodyList_ParentFragment{
 		case 3:
 			imgbtnList[2].callOnClick();
 			break;
-		case 4:
-			imgbtnList[3].callOnClick();
-			break;
+		// ++, 150323 bwk
+//		case 4:
+//			imgbtnList[3].callOnClick();
+//			break;
+		// --, 150323 bwk			
 		default:
 			break;
 		}

@@ -30,7 +30,7 @@
         android:background="@drawable/_selector_quick_virtualkey_keypad" />
     
     <ImageView
-        android:id="@+id/imageView_center_main_a_quick_main"
+        android:id="@+id/imageView_center_main_a_quick_option"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
@@ -38,7 +38,7 @@
         android:background="@drawable/main_a_center" />
     
     <ImageButton
-        android:id="@+id/imageButton_center_main_a_quick_main"
+        android:id="@+id/imageButton_center_main_a_quick_option"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"

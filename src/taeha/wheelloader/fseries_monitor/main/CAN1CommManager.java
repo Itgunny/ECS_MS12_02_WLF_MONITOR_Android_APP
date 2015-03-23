@@ -490,6 +490,12 @@ public class CAN1CommManager extends ICAN1CommManager.Stub{		// ttySAC1(Linux), 
 		//Callback_KeyButton(POWER_OFF);
 	}
 	// --, 150211 bwk
+	
+	// ++, 150319 bwk
+	public void ClickFN(){
+		service.ClickFN();
+	}
+	// --, 150319 bwk
 	///////////////////////////////////////////////////////////
 	
 	//////////////////////////////////////////////////////////

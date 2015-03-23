@@ -83,8 +83,7 @@
 	        android:layout_width="wrap_content"
 	        android:layout_height="wrap_content"
 	        android:layout_alignBottom="@+id/imageView_key_main_a_ridecontrol_low_bg"
-	        android:layout_alignRight="@+id/ImageButton_key_main_a_ridecontrol_low_ok"
-	        android:layout_marginRight="190dp"
+	        android:layout_toLeftOf="@+id/ImageButton_key_main_a_ridecontrol_low_ok"
 	        android:src="@drawable/main_key_low_line" />
 	   
 	    <ImageButton
@@ -93,7 +92,7 @@
 	        android:layout_height="wrap_content"
 	        android:layout_alignBottom="@+id/imageView_key_main_a_ridecontrol_low_bg"
 	        android:layout_alignRight="@+id/imageView_key_main_a_ridecontrol_low_bg"
-	        android:background="@drawable/_selector_key_centerright_btn1" />
+	        android:background="@drawable/_selector_key_centerright_btn2" />
 	
 	    <RelativeLayout
 	        android:layout_width="wrap_content"

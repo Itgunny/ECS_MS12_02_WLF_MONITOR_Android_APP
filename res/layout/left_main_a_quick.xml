@@ -2,14 +2,15 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/RelativeLayout_left_main_a_quick"
     android:layout_width="match_parent"
-    android:layout_height="match_parent" >
+    android:layout_height="match_parent"
+    android:background="@drawable/main_a_bg_left" >
 
     <RelativeLayout
         android:id="@+id/RelativeLayout_leftup_main_a_quick"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
-        android:background="@drawable/_selector_leftup_quick_btn2" >
+        android:background="@drawable/_selector_leftup_btn" >
 
         <ImageView
             android:id="@+id/imageView_leftup_main_a_quick_icon"
@@ -39,7 +40,7 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="350dp"
         android:layout_below="@+id/RelativeLayout_leftup_main_a_quick"
-        android:background="@drawable/main_a_bg_line01" />
+        android:background="@drawable/main_a_bg_line01_l" />
 
     <RelativeLayout
         android:id="@+id/RelativeLayout_leftdown_main_a_quick"

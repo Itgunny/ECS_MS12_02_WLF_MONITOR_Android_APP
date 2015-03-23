@@ -60,6 +60,7 @@ public abstract class PasswordFragment extends ParentFragment{
 	protected byte[] NumDataBuf;
 	protected byte[] SeedBuf;
 	protected byte[] Password;
+	protected byte[] tempNumDataBuf;	// ++, --, 150323 bwk
 	protected int DataBufIndex;
 	protected static int RequestCount = 0;
 	protected static int ErrCount = 0;
@@ -160,6 +161,7 @@ public abstract class PasswordFragment extends ParentFragment{
 		NumDataBuf = new byte[MAX_DATA_LENGTH];
 		Password = new byte[MAX_DATA_PW_LENGTH];
 		SeedBuf = new byte[SEED_LENGTH];
+		tempNumDataBuf = new byte[MAX_DATA_LENGTH];	// ++, --, 150323 bwk
 		for(int i = 0; i <MAX_DATA_LENGTH; i++){
 			NumDataBuf[i] = (byte)0xFF;
 		}
@@ -171,6 +173,12 @@ public abstract class PasswordFragment extends ParentFragment{
 		for(int i = 0; i < SEED_LENGTH; i++){
 			SeedBuf[i] = (byte)0xFF;
 		}
+		
+		// ++, 150323 bwk
+		for(int i = 0; i <MAX_DATA_LENGTH; i++){
+			tempNumDataBuf[i] = (byte)0xFF;
+		}
+		// --, 150323 bwk
 		DataBufIndex = 0;
 	//	RequestCount = 0;
 		
@@ -732,6 +740,7 @@ public abstract class PasswordFragment extends ParentFragment{
 				
 				for(int i = 0; i <MAX_DATA_LENGTH; i++){
 					//Log.d(TAG,"NumDataBuf[" + Integer.toString(i) + "] : " + Integer.toString(NumDataBuf[i]));	
+					tempNumDataBuf[i] = NumDataBuf[i];		// ++, --, 150323 bwk	
 					NumDataBuf[i] = (byte)0xFF;
 				}
 

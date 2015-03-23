@@ -88,12 +88,14 @@ public class MenuManagementFragment extends MenuBodyList_ParentFragment{
 		setClickableList3(true);
 		setClickableList4(true);
 		setClickableList5(true);
+		setClickableList6(true);	// ++, --, 150323 bwk
 		
 		setListTitle1(ParentActivity.getResources().getString(string.Machine_Security));
 		setListTitle2(ParentActivity.getResources().getString(string.Maintenance));
 		setListTitle3(ParentActivity.getResources().getString(string.Calibration));
 		setListTitle4(ParentActivity.getResources().getString(string.Service_Menu));
 		setListTitle5(ParentActivity.getResources().getString(string.Change_AS_Phone_Number));
+		setListTitle6(ParentActivity.getResources().getString(string.Software_Update));		// ++, --, 150323 bwk
 	}
 
 	//////////////////////////////////////////////////////////////////////
@@ -165,10 +167,17 @@ public class MenuManagementFragment extends MenuBodyList_ParentFragment{
 	@Override
 	public void ClickList6() {
 		// TODO Auto-generated method stub
-		
-		
-		
+		// ++, 150323 bwk
+		if(ParentActivity.AnimationRunningFlag == true)
+			return;
+		else
+			ParentActivity.StartAnimationRunningTimer();
+		ParentActivity._MenuBaseFragment.showBodySoftwareUpdatePassword();
+		CursurIndex = 6;
+		CursurDisplay(CursurIndex);
+		// --, 150323 bwk
 	}
+	
 	public void ClickLeft(){
 		Log.d(TAG,"ClickLeft");
 		switch (CursurIndex) {
@@ -176,7 +185,10 @@ public class MenuManagementFragment extends MenuBodyList_ParentFragment{
 			ParentActivity._MenuBaseFragment._MenuListLeftFragment.ClickMonitoring();
 			break;
 		case 1:
-			CursurIndex = 5;
+			// ++, 150323 bwk
+			//CursurIndex = 5;
+			CursurIndex = 6;
+			// --, 150323 bwk
 			CursurDisplay(CursurIndex);
 			break;
 		case 2:
@@ -196,7 +208,10 @@ public class MenuManagementFragment extends MenuBodyList_ParentFragment{
 			CursurDisplay(CursurIndex);
 			break;
 		case 6:
-			
+			// ++, 150323 bwk
+			CursurIndex--;
+			CursurDisplay(CursurIndex);
+			// --, 150323 bwk
 			break;
 		default:
 			break;
@@ -225,11 +240,17 @@ public class MenuManagementFragment extends MenuBodyList_ParentFragment{
 			CursurDisplay(CursurIndex);
 			break;
 		case 5:
-			CursurIndex = 1;
+			// ++, 150323 bwk
+			//CursurIndex = 1;
+			CursurIndex++;
+			// --, 150323 bwk
 			CursurDisplay(CursurIndex);
 			break;
 		case 6:
-			
+			// ++, 150323 bwk
+			CursurIndex = 1;
+			CursurDisplay(CursurIndex);
+			// --, 150323 bwk
 			break;
 		default:
 			break;
@@ -290,7 +311,7 @@ public class MenuManagementFragment extends MenuBodyList_ParentFragment{
 			imgbtnList[4].callOnClick();
 			break;
 		case 6:
-			
+			imgbtnList[5].callOnClick();		// ++, --, 150323 bwk
 			break;
 		default:
 			break;
@@ -315,6 +336,11 @@ public class MenuManagementFragment extends MenuBodyList_ParentFragment{
 			case 5:
 				setListFocus(5);
 				break;
+			// ++, 150323 bwk
+			case 6:
+				setListFocus(6);
+				break;
+			// --, 150323 bwk
 			default:
 				setListFocus(0);
 				break;

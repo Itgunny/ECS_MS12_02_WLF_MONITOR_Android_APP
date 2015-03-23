@@ -193,7 +193,7 @@
 	        android:layout_width="wrap_content"
 	        android:layout_height="wrap_content"
 	        android:layout_alignBottom="@+id/imageView_key_main_a_ridecontrol_speed_low_bg"
-	        android:layout_alignLeft="@+id/ImageButton_key_main_a_ridecontrol_speed_low_ok"
+	        android:layout_toLeftOf="@+id/ImageButton_key_main_a_ridecontrol_speed_low_ok"
 	        android:src="@drawable/main_key_low_line" />
 	
 	   <ImageView
@@ -201,7 +201,7 @@
 	       android:layout_width="wrap_content"
 	       android:layout_height="wrap_content"
 	       android:layout_alignBottom="@+id/imageView_key_main_a_ridecontrol_speed_low_bg"
-	       android:layout_alignLeft="@+id/ImageButton_key_main_a_ridecontrol_speed_low_cancel"
+	       android:layout_toLeftOf="@+id/ImageButton_key_main_a_ridecontrol_speed_low_cancel"
 	       android:src="@drawable/main_key_low_line" />
 	   
 	    <ImageButton
@@ -210,7 +210,7 @@
 	        android:layout_height="wrap_content"
 	        android:layout_alignBottom="@+id/imageView_key_main_a_ridecontrol_speed_low_bg"
 	        android:layout_alignRight="@+id/imageView_key_main_a_ridecontrol_speed_low_bg"
-	        android:background="@drawable/_selector_key_centerright_btn1" />
+	        android:background="@drawable/_selector_key_centerright_btn2" />
 	    
 	    <ImageButton
 	        android:id="@+id/ImageButton_key_main_a_ridecontrol_speed_low_cancel"
@@ -218,7 +218,7 @@
 	        android:layout_height="wrap_content"
 	        android:layout_alignBottom="@+id/imageView_key_main_a_ridecontrol_speed_low_bg"
 	        android:layout_toLeftOf="@+id/imageView_key_main_a_ridecontrol_speed_low_line_1"
-	        android:background="@drawable/_selector_key_centerright_btn1" />
+	        android:background="@drawable/_selector_key_centerright_btn2" />
 	
 	    <RelativeLayout
 	        android:layout_width="wrap_content"

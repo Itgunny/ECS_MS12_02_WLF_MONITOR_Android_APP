@@ -29,6 +29,14 @@ public class MainBodyShiftAnimation{
 	final  private int SHIFT_POSITION_VIRTUALKEY_X = 0;
 	final  private int SHIFT_POSITION_VIRTUALKEY_Y = -340;
 	
+	// ++, 150319 bwk
+	final private int SHIFT_POSITION_RIGHT_X = -330;
+	final private int SHIFT_POSITION_RIGHT_Y = -0;
+
+	final private int SHIFT_POSITION_LEFT_X = 330;
+	final private int SHIFT_POSITION_LEFT_Y = 0;
+// --, 150319 bwk
+	
 	final  private int ShiftSpeed = 2;
 	final  private int AnimationSpeed = 250;
 	final  private int MOVE_STEP_X			= 5;	
@@ -85,6 +93,16 @@ public class MainBodyShiftAnimation{
 		SetShiftPositionX(SHIFT_POSITION_VIRTUALKEY_X);
 		SetShiftPositionY(SHIFT_POSITION_VIRTUALKEY_Y);
 	}
+	// ++, 150319 bwk
+	public void StartShiftRightAnimation(){
+		SetShiftPositionX(SHIFT_POSITION_RIGHT_X);
+		SetShiftPositionY(SHIFT_POSITION_RIGHT_Y);
+	}
+	public void StartShiftLeftAnimation(){
+		SetShiftPositionX(SHIFT_POSITION_LEFT_X);
+		SetShiftPositionY(SHIFT_POSITION_LEFT_Y);
+	}
+	// --, 150319 bwk
 	public void SetShiftPositionX(int Pos){
 		PositionX = Pos;
 	}
