@@ -68,6 +68,7 @@ import taeha.wheelloader.fseries_monitor.menu.preference.DisplayTypeFragment;
 import taeha.wheelloader.fseries_monitor.menu.preference.DisplayTypeListFragment;
 import taeha.wheelloader.fseries_monitor.menu.preference.LanguageListFragment;
 import taeha.wheelloader.fseries_monitor.menu.preference.MenuPreferenceFragment;
+import taeha.wheelloader.fseries_monitor.menu.preference.SoundOutputSettingFragment;
 import taeha.wheelloader.fseries_monitor.menu.preference.UnitFragment;
 import android.R.integer;
 import android.os.Bundle;
@@ -173,6 +174,7 @@ public class MenuBaseFragment extends ParentFragment{
 	public DisplayTypeListFragment					_DisplayTypeListFragment;
 	public LanguageListFragment						_LanguageListFragment;	// ++, --, 150206 bwk
 	public DisplayTypeFragment						_DisplayTypeFragment;	// ++, --, 150309 bwk
+	public SoundOutputSettingFragment				_SoundOutputSettingFragment;	// ++, --, 150324 bwk
 
 	//UserSwitching
 	public UserSwitching							_UserSwitching;
@@ -300,6 +302,7 @@ public class MenuBaseFragment extends ParentFragment{
 		_UserSwitching = new UserSwitching();
 		_LanguageListFragment = new LanguageListFragment();	// ++, --, 150206 bwk
 		_DisplayTypeFragment = new DisplayTypeFragment();	// ++, --, 150309 bwk
+		_SoundOutputSettingFragment = new SoundOutputSettingFragment();	// ++, --, 150324 bwk
 	}
 
 	protected void InitValuables() {
@@ -383,6 +386,7 @@ public class MenuBaseFragment extends ParentFragment{
 		transaction.detach(_UserSwitching);
 		transaction.detach(_LanguageListFragment);	// ++, --, 150206 bwk
 		transaction.detach(_DisplayTypeFragment);	// ++, --, 150309 bwk
+		transaction.detach(_SoundOutputSettingFragment);	// ++, --, 150324 bwk
 
 		transaction.commit();	
 
@@ -1152,6 +1156,12 @@ public class MenuBaseFragment extends ParentFragment{
 		InterBodyAnimation.StartChangeAnimation(_DisplayTypeFragment);
 	}
 	// --, 150309 bwk
+	// ++, 150324 bwk
+	public void showBodySoundOutputSettingAnimation(){
+		showInterAnimation();
+		InterBodyAnimation.StartChangeAnimation(_SoundOutputSettingFragment);
+	}
+	// --, 150324 bwk
 	/////////////////////////////////////////////////////////////////////
 
 	/////////////////////////////////////////////////////////////////////
@@ -1481,9 +1491,14 @@ public class MenuBaseFragment extends ParentFragment{
 			_LanguageListFragment.ClickLeft();
 			break;
 			// --, 150206 bwk;
-		case Home.SCREEN_STATE_MENU_PREFERENCE_SOUNDOUTPUT_TOP:
-			ParentActivity._SoundOutputPopup.ClickLeft();
+		// ++, 150324 bwk
+//		case Home.SCREEN_STATE_MENU_PREFERENCE_SOUNDOUTPUT_TOP:
+//			ParentActivity._SoundOutputPopup.ClickLeft();
+//			break;
+		case Home.SCREEN_STATE_MENU_PREFERENCE_SOUNDOUTPUT_CHANGE:
+			_SoundOutputSettingFragment.ClickLeft();
 			break;
+		// --, 150324 bwk
 		case Home.SCREEN_STATE_MENU_MULTIMEDIA_TOP:
 			_MenuMultimediaFragment.ClickLeft();
 			break;
@@ -1744,9 +1759,14 @@ public class MenuBaseFragment extends ParentFragment{
 			_LanguageListFragment.ClickRight();
 			break;
 			// --, 150206 bwk;			
-		case Home.SCREEN_STATE_MENU_PREFERENCE_SOUNDOUTPUT_TOP:
-			ParentActivity._SoundOutputPopup.ClickRight();
+		// ++, 150324 bwk
+//		case Home.SCREEN_STATE_MENU_PREFERENCE_SOUNDOUTPUT_TOP:
+//			ParentActivity._SoundOutputPopup.ClickRight();
+//			break;
+		case Home.SCREEN_STATE_MENU_PREFERENCE_SOUNDOUTPUT_CHANGE:
+			_SoundOutputSettingFragment.ClickRight();
 			break;
+		// --, 150324 bwk
 		case Home.SCREEN_STATE_MENU_MULTIMEDIA_TOP:
 			_MenuMultimediaFragment.ClickRight();
 			break;
@@ -2005,9 +2025,14 @@ public class MenuBaseFragment extends ParentFragment{
 			_LanguageListFragment.ClickESC();
 			break;
 			// --, 150206 bwk;				
-		case Home.SCREEN_STATE_MENU_PREFERENCE_SOUNDOUTPUT_TOP:
-			ParentActivity._SoundOutputPopup.ClickESC();
+		// ++, 150324 bwk
+//		case Home.SCREEN_STATE_MENU_PREFERENCE_SOUNDOUTPUT_TOP:
+//			ParentActivity._SoundOutputPopup.ClickESC();
+//			break;
+		case Home.SCREEN_STATE_MENU_PREFERENCE_SOUNDOUTPUT_CHANGE:
+			_SoundOutputSettingFragment.ClickESC();
 			break;
+		// --, 150324 bwk
 		case Home.SCREEN_STATE_MENU_MULTIMEDIA_TOP:
 			_MenuMultimediaFragment.ClickESC();
 			break;
@@ -2266,9 +2291,14 @@ public class MenuBaseFragment extends ParentFragment{
 			_LanguageListFragment.ClickEnter();
 			break;
 			// --, 150206 bwk;		
-		case Home.SCREEN_STATE_MENU_PREFERENCE_SOUNDOUTPUT_TOP:
-			ParentActivity._SoundOutputPopup.ClickEnter();
+		// ++, 150324 bwk
+//		case Home.SCREEN_STATE_MENU_PREFERENCE_SOUNDOUTPUT_TOP:
+//			ParentActivity._SoundOutputPopup.ClickEnter();
+//			break;
+		case Home.SCREEN_STATE_MENU_PREFERENCE_SOUNDOUTPUT_CHANGE:
+			_SoundOutputSettingFragment.ClickEnter();
 			break;
+		// --, 150324 bwk			
 		case Home.SCREEN_STATE_MENU_MULTIMEDIA_TOP:
 			_MenuMultimediaFragment.ClickEnter();
 			break;

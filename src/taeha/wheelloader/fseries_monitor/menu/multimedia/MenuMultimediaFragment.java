@@ -147,6 +147,7 @@ public class MenuMultimediaFragment extends ParentFragment{
 	public void ClickESC(){
 		switch (CursurIndex) {
 		case 0:
+			CAN1Comm.SetMultimediaFlag(false);	// ++, --, 150323 bwk
 			ParentActivity._MenuBaseFragment._MenuListTitleFragment.ClickHome();
 			break;
 		case 1:
@@ -188,16 +189,23 @@ public class MenuMultimediaFragment extends ParentFragment{
 		// ++, 150319 bwk
 		if(CAN1Comm.GetrpmFlag() == false)
 		{
-			CAN1Comm.SetPlayerFlag(true);
 		// --, 150319 bwk
-			Intent intent;
-			intent = ParentActivity.getPackageManager().getLaunchIntentForPackage("com.mxtech.videoplayer.ad");
-			if(intent != null){
-				ParentActivity.startActivity(intent);
-			}
-		// ++, 150319 bwk
-		}
-		// --, 150319 bwk
+			// ++, 150323 bwk
+			if(ParentActivity.CheckRunningApp("com.example.wfdsink")){
+				ParentActivity.OldScreenIndex = ParentActivity.SCREEN_STATE_MENU_MULTIMEDIA_TOP;
+				ParentActivity._MiracastClosePopup.show();
+			}else{
+			// --, 150323 bwk
+				Intent intent;
+				intent = ParentActivity.getPackageManager().getLaunchIntentForPackage("com.mxtech.videoplayer.ad");
+				if(intent != null){
+					CAN1Comm.SetPlayerFlag(true);
+					CAN1Comm.SetMultimediaFlag(true);	// ++, --, 150323 bwk
+					ParentActivity.startActivity(intent);
+					ParentActivity.StartAlwaysOntopService();		// ++, --, 150324 cjg
+				}
+			}	// ++, --, 150323 bwk
+		}	// ++, --, 150319 bwk
 		CursurIndex = 1;
 		CursurDisplay(CursurIndex);
 	}

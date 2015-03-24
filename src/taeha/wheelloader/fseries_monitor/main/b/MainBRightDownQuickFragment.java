@@ -124,13 +124,22 @@ public class MainBRightDownQuickFragment extends ParentFragment{
 	public void ClickMultimedia(){
 		if(CAN1Comm.GetrpmFlag() == false)	// ++, --, 150211 bwk
 		{
-			CAN1Comm.SetPlayerFlag(true);	// ++, --, 150211 bwk
-			
-			ParentActivity.KillApps("com.example.wfdsink");
-			Intent intent;
-			intent = ParentActivity.getPackageManager().getLaunchIntentForPackage("com.mxtech.videoplayer.ad");
-			if(intent != null){
-				ParentActivity.startActivity(intent);
+			if(ParentActivity.CheckRunningApp("com.example.wfdsink")){
+				ParentActivity.OldScreenIndex = ParentActivity.SCREEN_STATE_MAIN_B_QUICK_TOP;
+				ParentActivity._MiracastClosePopup.show();
+			}else{
+				ParentActivity.KillApps("com.example.wfdsink");
+				Intent intent;
+				intent = ParentActivity.getPackageManager().getLaunchIntentForPackage("com.mxtech.videoplayer.ad");
+				if(intent != null){
+					// ++, 150323 bwk
+					CAN1Comm.SetPlayerFlag(true);	
+					CAN1Comm.SetMultimediaFlag(true);
+					CAN1Comm.SetMiracastFlag(false);
+					// --, 150323 bwk
+					ParentActivity.startActivity(intent);
+					ParentActivity.StartAlwaysOntopService(); // ++, --, 150324 cjg
+				}
 			}
 		}
 	}

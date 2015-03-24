@@ -1,9 +1,12 @@
 package taeha.wheelloader.fseries_monitor.main;
 
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.util.Arrays;
+import java.util.List;
 
 import org.acra.collector.CrashReportData;
 import org.acra.sender.ReportSender;
@@ -16,6 +19,7 @@ import android.util.Log;
 public class ErrorReportSender implements ReportSender {
 	public final static String TAG			= "ErrorReportSender";
 	public final static String ROOT_PATH	= "/mnt/sdcard/alarms/";
+	public final static String ROOT_PATH_USB = "/mnt/usb/alarms/";	// ++, --, 150313 cjg
 	public final static String FILE_NAME	= "WheelLoader_Log"; 
 	public final static String FILE_EXT		= ".txt";
 	
@@ -37,6 +41,46 @@ public class ErrorReportSender implements ReportSender {
 		DeleteOldestFile();
 		WiteErrorLog(strIndex,Err);
 	}
+	// ++, 150313 cjg
+	public void copyErrorLogToUSB(){
+		String inputFilePath = ROOT_PATH;
+		String outputFilePath = ROOT_PATH_USB;
+		
+		List<File> dirList = getDirFileList(inputFilePath);
+		
+		for(int i = 0; i < dirList.size(); i++){
+			String fileName = dirList.get(i).getName();
+			fileCopy(inputFilePath + "\\" + fileName, outputFilePath + "\\" + fileName);
+		}
+	}
+	public List<File> getDirFileList(String dirPath){
+		List<File> dirFileList = null;
+		
+		File dir = new File(dirPath);
+		
+		if(dir.exists()){
+			File[] files = dir.listFiles();
+			
+			dirFileList = Arrays.asList(files);
+		}
+		return dirFileList;
+	}
+	public void fileCopy(String inputFilePath, String outputFilePath){
+		try{
+			FileInputStream fis = new FileInputStream(inputFilePath);
+			FileOutputStream fos = new FileOutputStream(outputFilePath);
+			
+			int data = 0;
+			while((data = fis.read()) != -1){
+				fos.write(data);
+			}
+			fis.close();
+			fos.close();
+		} catch(IOException e){
+			e.printStackTrace();
+		}
+	}
+	// --, 150313 cjg	
 	
 	public void WiteErrorLog(String Index, CrashReportData Err){
 		String strFileName;

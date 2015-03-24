@@ -10,7 +10,15 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="160dp"
-        android:layout_marginTop="40dp"
-        android:src="@drawable/main_icon_engine" />
+        android:layout_marginTop="40dp" 
+        android:background="@drawable/main_icon_engine"/>
+
+	<ImageView
+        android:id="@+id/imageView_center_main_b_meter_icon"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="131dp"
+        android:layout_marginTop="44dp"
+        android:background="@drawable/main_icon_hour_odo" />
 
 </RelativeLayout>

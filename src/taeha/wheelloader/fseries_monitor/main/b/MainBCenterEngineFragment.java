@@ -20,6 +20,7 @@ public class MainBCenterEngineFragment extends ParentFragment{
 	RelativeLayout LayoutTop;
 	
 	ImageView EngineIcon;	// ++, --, 150317 bwk
+	ImageView MeterIcon;	// ++, --, 150324 bwk
 	//////////////////////////////////////////////////
 	
 	//VALUABLE////////////////////////////////////////
@@ -58,6 +59,7 @@ public class MainBCenterEngineFragment extends ParentFragment{
 		LayoutTop = (RelativeLayout)mRoot.findViewById(R.id.RelativeLayout_center_main_b_engine);
 		
 		EngineIcon = (ImageView)mRoot.findViewById(R.id.imageView_center_main_b_engine_icon);	// ++, --, 150317 bwk
+		MeterIcon = (ImageView)mRoot.findViewById(R.id.imageView_center_main_b_meter_icon);		// ++, --, 150324 bwk
 	}
 	
 	protected void InitValuables() {
@@ -87,17 +89,28 @@ public class MainBCenterEngineFragment extends ParentFragment{
 	@Override
 	protected void UpdateUI() {
 		// TODO Auto-generated method stub
-		
+		ShowEngineIcon();
 	}
 	/////////////////////////////////////////////////////////////////////	
-	// ++, 150317 bwk
+	// ++, 150324 bwk
 	public void ShowEngineIcon(){
-		if(ParentActivity.ScreenIndex == ParentActivity.SCREEN_STATE_MAIN_B_RIGHTUP_HOURODMETER)
-			EngineIcon.setVisibility(View.INVISIBLE);
-		else
-			EngineIcon.setVisibility(View.VISIBLE);
+		try {
+			if(ParentActivity.ScreenIndex == ParentActivity.SCREEN_STATE_MAIN_B_RIGHTUP_HOURODMETER)
+			{
+				MeterIcon.setVisibility(View.VISIBLE);
+				EngineIcon.setVisibility(View.INVISIBLE);
+			}
+			else if(ParentActivity.ScreenIndex == ParentActivity.SCREEN_STATE_MAIN_B_RIGHTUP_ENGINE_MODE)
+			{
+				MeterIcon.setVisibility(View.INVISIBLE);
+				EngineIcon.setVisibility(View.VISIBLE);
+			}
+		} catch (NullPointerException e) {
+			// TODO: handle exception
+			Log.e(TAG,"NullPointerException");
+		}		
 	}
-	// --, 150317 bwk
+	// --, 150324 bwk
 	
 	public void ClickBG(){
 		if(ParentActivity.AnimationRunningFlag == true)

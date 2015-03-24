@@ -10,7 +10,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="130dp"
-        android:layout_centerVertical="true"
-        android:src="@drawable/main_icon_engine" />
+        android:layout_centerVertical="true" />
 
 </RelativeLayout>

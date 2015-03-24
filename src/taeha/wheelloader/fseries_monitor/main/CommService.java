@@ -21,8 +21,10 @@ import android.media.SoundPool;
 import android.os.Handler;
 import android.os.IBinder;
 import android.os.Message;
+import android.os.SystemClock;
 import android.util.Log;
 import android.view.KeyEvent;
+import android.view.MotionEvent;
 
 public class CommService extends Service{
 
@@ -67,6 +69,15 @@ public class CommService extends Service{
 	private static boolean PlayerFlag = false;		
 	private static boolean rpmFlag = false;
 	// --, 150211 bwk
+
+	// ++, 150320 cjg
+	public static boolean multimediaFlag = false;
+	public static boolean miracastFlag = false;
+	// --, 150320 cjg	
+	// ++, 150324 cjg
+	public static boolean powerOffFlag = false;
+	public static int count = 0;
+	// --, 150324 cjg
 	/////////////////////////////////////////////////////////////////////
 	
 	//////////////////LOAD NATIVELIBRARY/////////////////////////////////
@@ -1110,7 +1121,11 @@ public class CommService extends Service{
 		fVolumeEnding = (float)0.4;
 		
 	}
-	
+	// ++, 150323 bwk
+	public static void setVolume(int _Volume){
+		fVolume = ((float)(_Volume+1)/10); 
+	}
+	// --, 150323 bwk
 	public static void CIDCallBack(){
 		Log.d(TAG,"CIDCallBack");
 		try {
@@ -1147,25 +1162,46 @@ public class CommService extends Service{
 				MenuKeyEvent();
 				SoundPoolKeyButton.play(SoundID, fVolume, fVolume, 0, 0, 1);
 				break;
-				
 			case CAN1CommManager.ESC:
 				// ++, 150211 bwk
 				if(PlayerFlag == true && rpmFlag == false)
 					PlayerFlag = false;
 				// --, 150211 bwk
 				
-//				if(GetScreenTopFlag() == true)
-//				{
-//					CAN1Comm.Callback_KeyButton(Data);
-//				}
-//				else
-//				{
-//					BackKeyEvent();
-//				}
-				BackKeyEvent();
+				// ++, 150324 bwk 하기 주석 품
+				if(GetScreenTopFlag() == true)
+				{
+					CAN1Comm.Callback_KeyButton(Data);
+				}
+				else
+				// --, 150324 bwk 하기 주석 품
+				{
+					// ++, 150320 cjg
+					//BackKeyEvent();
+					if(multimediaFlag == true){
+						HandleKeyButton.sendMessage(HandleKeyButton.obtainMessage(Data));
+					}else{
+						BackKeyEvent();
+					}
+					// --, 150320 cjg				
+				}
 				SoundPoolKeyButton.play(SoundID, fVolume, fVolume, 0, 0, 1);
 				break;
-
+			// ++, 150324 bwk
+			case CAN1CommManager.LEFT:
+				if(GetScreenTopFlag() == true)
+				{
+					if(PlayerFlag == true && rpmFlag == false)
+						PlayerFlag = false;
+					if(multimediaFlag == true)
+						multimediaFlag = false;
+					CAN1Comm.Callback_KeyButton(Data);
+				}
+				else
+					BackKeyEvent();
+				SoundPoolKeyButton.play(SoundID, fVolume, fVolume, 0, 0, 1);
+				break;
+			// --, 150324 bwk
 			case CAN1CommManager.RIGHT:
 				if(GetScreenTopFlag() == true)
 				{
@@ -1184,8 +1220,9 @@ public class CommService extends Service{
 				if(GetScreenTopFlag() == true)
 				{
 					CAN1Comm.Callback_KeyButton(Data);
+				}else{//++, --, 150324 cjg
+					HandleKeyButton.sendMessage(HandleKeyButton.obtainMessage(Data));	
 				}
-				HandleKeyButton.sendMessage(HandleKeyButton.obtainMessage(Data));
 				SoundPoolKeyButtonEnding.play(SoundIDEnding, fVolumeEnding, fVolumeEnding, 0, 0, 1);
 				break;
 			case CAN1CommManager.FN:
@@ -1255,7 +1292,14 @@ public class CommService extends Service{
 			
 		}).start();
 	}
-	
+	// ++, 150324 cjg
+	public static boolean GetPowerOffFlag(){
+		return powerOffFlag;
+	}
+	public static void SetPowerOffFlag(boolean flag){
+		powerOffFlag = flag;
+	}
+	// --, 150324 cjg
 	public static void SetScreenTopFlag(boolean flag){
 		ScreenTopFlag = flag;
 	}
@@ -1279,6 +1323,15 @@ public class CommService extends Service{
 		return rpmFlag;
 	}
 	// --, 150211 bwk
+	
+	// ++, 150323 bwk
+	public void SetMultimediaFlag(boolean flag){
+		multimediaFlag = flag;
+	}
+	public void SetMiracastFlag(boolean flag){
+		miracastFlag = flag;
+	}	
+	// --, 150323 bwk
 	////////////////////////////////////////////////////////////////////////
 		
 	/////////////////OVERRIDE METHOD///////////////////////////////////////
@@ -1312,10 +1365,23 @@ public class CommService extends Service{
 			@Override
 			public void handleMessage(Message msg) {
 				if(msg.what == CAN1CommManager.POWER_OFF){
-					allKillRunningApps("taeha.wheelloader.fseries_monitor.main");
+					//++, 150324 cjg
+					SetPowerOffFlag(true);
+					CallHome();
+					Log.d(TAG, "" + GetPowerOffFlag());
+					//allKillRunningApps("taeha.wheelloader.fseries_monitor.main");
+					//--, 150324 cjg
 				}else if(msg.what == CAN1CommManager.FN){
 					ClickFN();
+				// ++, 150319 cjg
+				}else if(msg.what == CAN1CommManager.ESC){
+					Log.d(TAG, "ESC KEY in CommService");
+					if(CheckTopApps("com.mxtech.videoplayer.ad")){
+						MenuKeyEvent();
+						CloseMXPlayer();
+					}
 				}
+				// --, 150319 cjg
 			
 			}
 		};
@@ -1328,7 +1394,6 @@ public class CommService extends Service{
 		CloseComport();
 		super.onDestroy();
 	}
-	
 	
 	////////////////////////////////////////////////////////////////////////
 	
@@ -1374,7 +1439,13 @@ public class CommService extends Service{
 		Intent intent;
 		intent = getPackageManager().getLaunchIntentForPackage("taeha.wheelloader.fseries_monitor.main");
 		if(intent != null)
+		{
 			startActivity(intent);
+			// ++, 150323 bwk
+			multimediaFlag = false;
+			miracastFlag = false;
+			// --, 150323 bwk
+		}
 	}
 	
 //	public boolean CheckTopApps(String strProcess){
@@ -1447,13 +1518,16 @@ public class CommService extends Service{
 		intent = getPackageManager().getLaunchIntentForPackage("com.mxtech.videoplayer.ad");
 		if(intent != null){
 			startActivity(intent);
+			multimediaFlag = true;		// ++, --, 150323 bwk
 		}
 	}
 	public void RunMirror(){
 		Intent intent;
 		intent = getPackageManager().getLaunchIntentForPackage("com.example.wfdsink");
-		if(intent != null)
+		if(intent != null){
 			startActivity(intent);
+			miracastFlag = true;		// ++, --, 150323 bwk
+		}
 	}
 	public void ClickFN(){
 		if(rpmFlag == false)
@@ -1489,4 +1563,32 @@ public class CommService extends Service{
 		}
 	}
 	// --, 150211 bwk
+	// ++, 150320 cjg
+	public void CloseMXPlayer(){
+		Thread thread = new Thread(new Runnable()	{
+
+			Instrumentation inst = new Instrumentation();
+			long downTime = SystemClock.uptimeMillis();
+			long eventTime = SystemClock.uptimeMillis() + 100;
+			@Override
+			public void run() {
+				// TODO Auto-generated method stub	
+				try {
+					Thread.sleep(500);
+				} catch (InterruptedException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				MotionEvent event = MotionEvent.obtain(downTime, eventTime, MotionEvent.ACTION_DOWN, 700, 455, 0);
+				MotionEvent event2 = MotionEvent.obtain(downTime, eventTime, MotionEvent.ACTION_UP, 700, 455, 0);
+				inst.sendPointerSync(event);
+				inst.sendPointerSync(event2);
+
+			}
+		});
+
+		thread.start();
+		multimediaFlag = false;
+	}
+	// --, 150320 cjg			
 }

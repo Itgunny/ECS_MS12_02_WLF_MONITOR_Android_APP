@@ -127,7 +127,10 @@ public class MainALeftQuickFragment extends ParentFragment{
 		Intent intent;
 		intent = ParentActivity.getPackageManager().getLaunchIntentForPackage("org.ebookdroid");
 		if(intent != null)
+		{
 			startActivity(intent);
+			ParentActivity.StartAlwaysOntopService(); // ++, --, 150324 cjg
+		}
 	}
 
 	public void Clickable(boolean flag){

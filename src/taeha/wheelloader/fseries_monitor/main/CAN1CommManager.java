@@ -133,7 +133,7 @@ public class CAN1CommManager extends ICAN1CommManager.Stub{		// ttySAC1(Linux), 
 	// ++, 150317 bwk
 	public static final int DATA_STATE_CURRENT_FUEL_RATE		= 0;
 	public static final int DATA_STATE_AVERAGE_FUEL_RATE		= 1;
-	public static final int DATA_STATE_LASTEST_FUEL_CONSUMED	= 2;
+	public static final int DATA_STATE_LATEST_FUEL_CONSUMED		= 2;
 	// --, 150317 bwk
 	
 	public static final int DATA_STATE_MACHINESTATUS_NOSELECT	= 0;
@@ -496,6 +496,19 @@ public class CAN1CommManager extends ICAN1CommManager.Stub{		// ttySAC1(Linux), 
 		service.ClickFN();
 	}
 	// --, 150319 bwk
+	
+	// ++, 150323 bwk
+	public void SetMultimediaFlag(boolean flag){
+		service.SetMultimediaFlag(flag);
+	}
+	public void SetMiracastFlag(boolean flag){
+		service.SetMiracastFlag(flag);
+	}	
+	
+	public void setVolume(int _Volume){
+		service.setVolume(_Volume);
+	}
+	// --, 150323 bwk
 	///////////////////////////////////////////////////////////
 	
 	//////////////////////////////////////////////////////////

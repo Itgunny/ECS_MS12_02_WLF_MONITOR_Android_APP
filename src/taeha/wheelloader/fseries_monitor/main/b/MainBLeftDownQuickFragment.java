@@ -115,11 +115,28 @@ public class MainBLeftDownQuickFragment extends ParentFragment{
 			startActivity(intent);
 	}
 	public void ClickMirror(){
-		ParentActivity.KillApps("com.mxtech.videoplayer.ad");
-		Intent intent;
-		intent = ParentActivity.getPackageManager().getLaunchIntentForPackage("com.example.wfdsink");
-		if(intent != null)
-			startActivity(intent);
+		// ++, 150320 cjg
+//		ParentActivity.KillApps("com.mxtech.videoplayer.ad");
+//		Intent intent;
+//		intent = ParentActivity.getPackageManager().getLaunchIntentForPackage("com.example.wfdsink");
+//		if(intent != null)
+//			startActivity(intent);
+		if(ParentActivity.CheckRunningApp("com.mxtech.videoplayer.ad")){
+			ParentActivity.OldScreenIndex = ParentActivity.SCREEN_STATE_MAIN_B_QUICK_TOP;
+			ParentActivity._MultimediaClosePopup.show();
+		}else{
+			Intent intent;
+			intent = ParentActivity.getPackageManager().getLaunchIntentForPackage("com.example.wfdsink");
+			if(intent != null){
+				// ++, 150323 bwk
+				CAN1Comm.SetMultimediaFlag(false);
+				CAN1Comm.SetMiracastFlag(true);
+				// --, 150323 bwk				
+				startActivity(intent);
+				ParentActivity.StartAlwaysOntopService(); // ++, --, 150324 cjg
+			}
+		}
+		// --, 150320 cjg
 	}
 	
 	public void Clickable(boolean flag){

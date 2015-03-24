@@ -93,9 +93,9 @@ public class MainACenterEngineFragment extends ParentFragment{
 	public void ShowEngineIcon(){
 		try {
 			if(ParentActivity.ScreenIndex == ParentActivity.SCREEN_STATE_MAIN_A_RIGHTUP_HOURODMETER)
-				EngineIcon.setVisibility(View.INVISIBLE);
-			else
-				EngineIcon.setVisibility(View.VISIBLE);
+				EngineIcon.setBackgroundResource(R.drawable.main_icon_hour_odo);
+			else if(ParentActivity.ScreenIndex == ParentActivity.SCREEN_STATE_MAIN_A_RIGHTUP_ENGINE_MODE)
+				EngineIcon.setBackgroundResource(R.drawable.main_icon_engine);
 		} catch (NullPointerException e) {
 			// TODO: handle exception
 			Log.e(TAG,"NullPointerException");

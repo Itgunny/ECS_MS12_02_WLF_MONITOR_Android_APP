@@ -30,6 +30,12 @@
             </intent-filter>
         </service>
         
+        <service android:name="taeha.wheelloader.fseries_monitor.main.AlwaysOnTopService" >
+            <intent-filter>
+                <action android:name="taeha.wheelloader.fseries_monitor.main.AlwaysOnTopService" />
+            </intent-filter>
+        </service>           
+        
         <activity
             android:name="taeha.wheelloader.fseries_monitor.main.Home"
             android:label="@string/app_name" 

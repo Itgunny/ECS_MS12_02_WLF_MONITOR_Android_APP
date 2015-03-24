@@ -1,6 +1,5 @@
 package taeha.wheelloader.fseries_monitor.main.a;
 
-import taeha.wheelloader.fseries_monitor.main.CAN1CommManager;
 import taeha.wheelloader.fseries_monitor.main.R;
 import android.content.Intent;
 import android.os.Bundle;
@@ -9,8 +8,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
-import android.widget.ImageView;
-import android.widget.TextView;
 
 public class MainACenterQuickFragment extends MainACenterFragment{
 	//CONSTANT////////////////////////////////////////
@@ -142,22 +139,38 @@ public class MainACenterQuickFragment extends MainACenterFragment{
 		Log.d(TAG,"ClickOption");
 	}
 	public void ClickMirror(){
-		ParentActivity.KillApps("com.mxtech.videoplayer.ad");
-		Intent intent;
-		intent = ParentActivity.getPackageManager().getLaunchIntentForPackage("com.example.wfdsink");
-		if(intent != null)
-			startActivity(intent);
+		if(ParentActivity.CheckRunningApp("com.mxtech.videoplayer.ad")){
+			ParentActivity.OldScreenIndex = ParentActivity.SCREEN_STATE_MAIN_A_QUICK_TOP;
+			ParentActivity._MultimediaClosePopup.show();
+		}else{
+			Intent intent;
+			intent = ParentActivity.getPackageManager().getLaunchIntentForPackage("com.example.wfdsink");
+			if(intent != null){
+				startActivity(intent);
+				// ++, 150323 bwk
+				CAN1Comm.SetMultimediaFlag(false);
+				CAN1Comm.SetMiracastFlag(true);
+				// --, 150323 bwk				
+			}
+		}		
 	}
 	public void ClickMultimedia(){
 		if(CAN1Comm.GetrpmFlag() == false)
 		{
-			CAN1Comm.SetPlayerFlag(true);
-			
-			ParentActivity.KillApps("com.example.wfdsink");
-			Intent intent;
-			intent = ParentActivity.getPackageManager().getLaunchIntentForPackage("com.mxtech.videoplayer.ad");
-			if(intent != null){
-				ParentActivity.startActivity(intent);
+			if(ParentActivity.CheckRunningApp("com.example.wfdsink")){
+				ParentActivity.OldScreenIndex = ParentActivity.SCREEN_STATE_MAIN_A_QUICK_TOP;
+				ParentActivity._MiracastClosePopup.show();
+			}else{
+				ParentActivity.KillApps("com.example.wfdsink");
+				Intent intent;
+				intent = ParentActivity.getPackageManager().getLaunchIntentForPackage("com.mxtech.videoplayer.ad");
+				if(intent != null){
+					CAN1Comm.SetPlayerFlag(true);	
+					CAN1Comm.SetMultimediaFlag(true);
+					CAN1Comm.SetMiracastFlag(false);
+					ParentActivity.startActivity(intent);
+					ParentActivity.StartAlwaysOntopService(); // ++, --, 150324 cjg
+				}
 			}
 		}
 	}	

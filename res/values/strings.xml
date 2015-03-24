@@ -148,7 +148,9 @@
     <string name="Bucket_Full_In_Error_Warning">Bucket is not full in, though weigh may be inaccurate. Press the Enter Key to reweigh.</string>
     <string name="Sudden_Change_Error_Warning">Angular speed is a sudden change, though weigh may be inaccurate. Press the Enter Key to reweigh.</string>
     <string name="Hydraulic_Oil_Temp_Low_Warning">Hydraulic oil temperature low.</string>
-    <string name="Lastest_Fuel_Consumed">Lastest Fuel Consumed</string>
+    <string name="Latest_Fuel_Consumed">Latest Fuel Consumed</string>
+    <string name="CloseMulti">MXPlayer is running. You want to close a MXPlayer?</string>
+    <string name="CloseMira">Miracast is running. You want to close a Miracast?</string>
     <!-- Main End -->
     <!-- Key Start-->
     <string name="Main_Light">Main Light</string>

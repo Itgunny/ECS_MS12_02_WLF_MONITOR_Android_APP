@@ -133,7 +133,7 @@ public class MainALeftDownFuelSelectFragment extends ParentFragment{
 			radioAverageFuel.setChecked(true);
 			radioLastestConsumed.setChecked(false);			
 			break;
-		case CAN1CommManager.DATA_STATE_LASTEST_FUEL_CONSUMED:
+		case CAN1CommManager.DATA_STATE_LATEST_FUEL_CONSUMED:
 			radioCurrentFuel.setChecked(false);
 			radioAverageFuel.setChecked(false);
 			radioLastestConsumed.setChecked(true);			
@@ -167,7 +167,7 @@ public class MainALeftDownFuelSelectFragment extends ParentFragment{
 			return;
 		else
 			ParentActivity.StartAnimationRunningTimer();
-		ParentActivity.FuelIndex = CAN1CommManager.DATA_STATE_LASTEST_FUEL_CONSUMED;
+		ParentActivity.FuelIndex = CAN1CommManager.DATA_STATE_LATEST_FUEL_CONSUMED;
 		ParentActivity._MainABaseFragment.showLeftDowntoDefaultScreenAnimation();
 	}
 	

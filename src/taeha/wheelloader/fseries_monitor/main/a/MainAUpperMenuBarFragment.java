@@ -287,6 +287,7 @@ public class MainAUpperMenuBarFragment extends ParentFragment{
 		try {
 			if(ParentActivity.ScreenIndex == ParentActivity.SCREEN_STATE_MAIN_A_TOP)
 			{
+				imgbtnTime.setBackgroundResource(R.drawable._selector_upper_main_a_time_btn1);
 				imgbtnBuzzer.setBackgroundResource(R.drawable._selector_upper_main_a_buzzer_btn1);
 				imgbtnWiper.setBackgroundResource(R.drawable._selector_lower_main_a_menubar_btn1);
 				imgbtnCamera.setBackgroundResource(R.drawable._selector_lower_main_a_menubar_btn1);
@@ -294,6 +295,7 @@ public class MainAUpperMenuBarFragment extends ParentFragment{
 			}
 			else
 			{
+				imgbtnTime.setBackgroundResource(R.drawable._selector_upper_main_a_time_btn2);
 				imgbtnBuzzer.setBackgroundResource(R.drawable._selector_upper_main_a_buzzer_btn2);
 				imgbtnWiper.setBackgroundResource(R.drawable._selector_lower_main_a_menubar_btn2);
 				imgbtnCamera.setBackgroundResource(R.drawable._selector_lower_main_a_menubar_btn2);

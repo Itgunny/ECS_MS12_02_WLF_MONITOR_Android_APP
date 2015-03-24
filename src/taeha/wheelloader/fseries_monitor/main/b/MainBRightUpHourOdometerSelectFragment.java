@@ -48,7 +48,6 @@ public class MainBRightUpHourOdometerSelectFragment extends ParentFragment{
 		InitButtonListener();
 
 		ParentActivity.ScreenIndex = ParentActivity.SCREEN_STATE_MAIN_B_RIGHTUP_HOURODMETER;
-		ParentActivity._MainBBaseFragment._MainBCenterEngineFragment.ShowEngineIcon();	// ++, --, 150317 bwk
 		return mRoot;
 	}
 

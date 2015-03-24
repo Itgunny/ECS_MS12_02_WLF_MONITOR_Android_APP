@@ -152,7 +152,10 @@ public class MenuPreferenceFragment extends MenuBodyList_ParentFragment{
 	@Override
 	public void ClickList5() {
 		// TODO Auto-generated method stub
+		// ++, 150324 bwk
 		ParentActivity.showSoundOutput();
+		//ParentActivity._MenuBaseFragment.showBodySoundOutputSettingAnimation();
+		// --, 150324 bwk
 		CursurIndex = 5;
 		CursurDisplay(CursurIndex);
 	}

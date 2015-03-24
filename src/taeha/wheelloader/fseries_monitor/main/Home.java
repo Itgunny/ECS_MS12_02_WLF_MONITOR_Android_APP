@@ -20,6 +20,8 @@ import taeha.wheelloader.fseries_monitor.popup.ICCOModePopup;
 import taeha.wheelloader.fseries_monitor.popup.KickDownPopup;
 import taeha.wheelloader.fseries_monitor.popup.LoggedFaultDeletePopup;
 import taeha.wheelloader.fseries_monitor.popup.MaintReplacePopup;
+import taeha.wheelloader.fseries_monitor.popup.MiracastClosePopup;
+import taeha.wheelloader.fseries_monitor.popup.MultimediaClosePopup;
 import taeha.wheelloader.fseries_monitor.popup.OperationHistoryInitPopup;
 import taeha.wheelloader.fseries_monitor.popup.PressureCalibrationResultPopup;
 import taeha.wheelloader.fseries_monitor.popup.QuickCouplerPopupLocking1;
@@ -218,7 +220,7 @@ public class Home extends Activity {
 	//	- WarmingUp 제거
 	//	- Odometer, Hourmeter 위치를 Engine Mode위치로 이동 
 	//	- Engine Mode를 기존 Warming Up 위치로 이동
-	//	- Enigne Mode 표시 시에만 Engine Icon 표시
+	//	- Enigne Mode 표시 시에만 Engine Icon 표시, Fuel, OdoHourmeter 아이콘 추가
 	//4. Main : Left Down => Average Fuel, Lastest Fuel Consumed 추가, Hourmenter, Odometer 제거
 	//5. 도움말 글씨 하늘색으로 변경
 	//6. Quick 메뉴 Maintenance 아이콘 변경
@@ -226,12 +228,23 @@ public class Home extends Activity {
 	//8. 메뉴-멀티미디어-미디어플레이어 
 	//	- 실행 후 돌아왔을 때 포커스 잃은 버그 수정
 	//	- rpm 확인 후 실행
-	//-------svn
 	//9. 가상키 FN 기능 구현
 	//10. 메인 KEY UI에서 램프 클릭 시 라디오 버튼 모두 미선택으로 되는 버그 수정
-	//11. Software Update UI 위치 이동 : 매뉴 - 매니지먼트 - 비밀번호입력 후 진입
+	//11. 일부 UI 위치 이동
+	//	- Software Update UI 위치 이동 : 매뉴 - 매니지먼트 - 비밀번호입력 후 진입
+	//	- Mode - Engine Setting - Warming Up 삭제
 	//12. 관리자 메뉴에서 '1234567890' 누르면 H/W Test로 이동
-	
+	//13. 카메라 채널 1만 표시 -> 활성화 상태에 따라 채널 변경가능(Left, Right 키에 따름)
+	// ## by cjg
+	// 1. 에러리포트 USB 복사 기능 : LEFT - RIGHT 동시에 누를 경우 USB의 ALARM 폴더로 자동 복사됨!!!
+	// 2. 미러링 혹은 MxPlayer를 실행할 때 둘중 한가지 프로그램이 실행되어 있을 경우 종료 요청 팝업 띄움
+	// 3. 미러링 혹은 MxPlayer 필요 시 강제종료
+	// 4. Mxplayer에서 ESC 버튼 눌렀을 경우 어플종료
+	// 5. H/W Test 프로그램(관리자 메뉴에서 특정 숫자 입력 시 H/W Test 프로그램 실행)
+	// 6. Help, Multimedia에서 키패드 안될 경우 맨위 중앙을 누르면 종료할 수 있도록 함
+    //	- Help : 중앙 누르면 바로 종료
+    //	- Multimedia : 중앙 누르면 메뉴 호출
+	// 7. Mediaplayer에서 Ending 나오지 않은 현상 개선
 	//////////////////////////////////////////////////////////////////////////////////////
 	
 	// TAG
@@ -265,6 +278,10 @@ public class Home extends Activity {
 	public  static final int SCREEN_STATE_MAIN_B_LEFTDOWN_END								= 0x14FFFFFF;
 	
 	public  static final int SCREEN_STATE_MAIN_B_QUICK_TOP									= 0x15000000;
+	// ++, 150323 bwk
+	public  static final int SCREEN_STATE_MAIN_B_QUICK_MULTICLOSE							= 0x15100000;
+	public	static final int SCREEN_STATE_MAIN_B_QUICK_MIRACLOSE							= 0x15200000;
+	// --, 150323 bwk
 	public  static final int SCREEN_STATE_MAIN_B_QUICK_END									= 0x15FFFFFF;
 	
 	public  static final int SCREEN_STATE_MAIN_B_KEY_TOP									= 0x16000000;
@@ -439,6 +456,7 @@ public class Home extends Activity {
 	public  static final int SCREEN_STATE_MENU_PREFERENCE_DISPLAYTYPELANG_LANG_END			= 0x2442FFFF;
 	public  static final int SCREEN_STATE_MENU_PREFERENCE_DISPLAYTYPELANG_END				= 0x244FFFFF;
 	public  static final int SCREEN_STATE_MENU_PREFERENCE_SOUNDOUTPUT_TOP					= 0x24500000;
+	public  static final int SCREEN_STATE_MENU_PREFERENCE_SOUNDOUTPUT_CHANGE				= 0x24510000;	// ++, --, 150323 bwk
 	public  static final int SCREEN_STATE_MENU_PREFERENCE_SOUNDOUTPUT_END					= 0x245FFFFF;
 	public  static final int SCREEN_STATE_MENU_PREFERENCE_WIRELESS_TOP						= 0x24600000;
 	public  static final int SCREEN_STATE_MENU_PREFERENCE_WIRELESS_END						= 0x246FFFFF;
@@ -488,6 +506,10 @@ public class Home extends Activity {
 	public  static final int SCREEN_STATE_MAIN_A_LEFTDOWN_END								= 0x74FFFFFF;
 	
 	public  static final int SCREEN_STATE_MAIN_A_QUICK_TOP									= 0x75000000;
+	// ++, 150323 bwk
+	public  static final int SCREEN_STATE_MAIN_A_QUICK_MULTICLOSE							= 0x75100000;
+	public	static final int SCREEN_STATE_MAIN_A_QUICK_MIRACLOSE							= 0x75200000;
+	// --, 150323 bwk
 	public  static final int SCREEN_STATE_MAIN_A_QUICK_END									= 0x75FFFFFF;
 	
 	public  static final int SCREEN_STATE_MAIN_A_KEY_TOP									= 0x76000000;
@@ -547,6 +569,11 @@ public class Home extends Activity {
 	
 	public 	static final int BRIGHTNESS_MIN			= 0;
 	public 	static final int BRIGHTNESS_MAX			= 7;
+	
+	// ++, 150323 bwk
+	public  static final int INTERNAL_SPK_MIN		= 0;
+	public 	static final int INTERNAL_SPK_MAX		= 7;
+	// --, 150323 bwk	
 	
 	public static final int STATE_INTERNAL_SPK		= 0;
 	public static final int STATE_EXTERNAL_AUX	 	= 1;
@@ -635,6 +662,7 @@ public class Home extends Activity {
 	public int CameraOrder3;
 	public int CameraOrder4;
 	public int CameraReverseMode;
+	int SelectCameraNum;			// ++, --, 150324 bwk
 	int SelectGear;
 	int SelectGearRange;
 	int SelectGearDirection;
@@ -656,6 +684,7 @@ public class Home extends Activity {
 	
 	// Sound Output
 	public int SoundState;
+	public int InternalSoundLevel;
 	
 	// SeatBelt
 	public int SeatBelt;
@@ -714,6 +743,10 @@ public class Home extends Activity {
 	public WorkLoadWeighingInitPopup2		_WorkLoadWeighingInitPopup2;
 	public EHCUErrorPopup					_EHCUErrorPopup;
 	public SoftStopInitPopup				_SoftStopInitPopup;
+	// ++, 150313 cjg
+	public MultimediaClosePopup				_MultimediaClosePopup;
+	public MiracastClosePopup				_MiracastClosePopup;
+	// --, 150313 cjg
 	
 	//Toast
 	public WeighingErrorToast				_WeighingErrorToast;
@@ -788,6 +821,8 @@ public class Home extends Activity {
 	int LowrpmCount;
 	int PressFnKey;
 	// --, 150211 bwk
+	
+	public int count = 0;// ++, --, 150324 cjg
 	////////////////////////////////////////////////////
 	
 	//Fragment//////////////////////////////////////////
@@ -853,8 +888,19 @@ public class Home extends Activity {
 		// TODO Auto-generated method stub
 		super.onResume();
 		Log.d(TAG, "onResume");
+		// ++, 150324 cjg
+		if(CommService.GetPowerOffFlag() == true){
+			if(count == 0){
+				//Log.d(TAG, "CommService.GetPowerOffFlag() : " + CommService.GetPowerOffFlag());
+				showEndingFragment();
+				showEndingFragment();
+				count++;
+			}
+		}
+		// --, 150324 cjg		
 		try {
 			StartCommService();
+			StopAlwaysOntopService();	// ++, --, 150324 cjg
 			threadRead = new Thread(new ReadThread(this));
 			threadLoading = new Thread(new LoadingThread(this));
 //			threadLoading.start();
@@ -924,6 +970,8 @@ public class Home extends Activity {
 		PressFnKey = 0;
 		// --, 150211 bwk
 		
+		SelectCameraNum = 1;	// ++, 150324 bwk
+		
 		_CrashApplication = (CrashApplication)getApplicationContext();		
 	}
 	public void InitFragment(){
@@ -963,6 +1011,10 @@ public class Home extends Activity {
 		_WorkLoadWeighingInitPopup2 = new WorkLoadWeighingInitPopup2(this);
 		_EHCUErrorPopup = new EHCUErrorPopup(this);
 		_SoftStopInitPopup = new SoftStopInitPopup(this);
+		// ++, 150313 cjg
+		_MultimediaClosePopup = new MultimediaClosePopup(this);
+		_MiracastClosePopup = new MiracastClosePopup(this);
+		// --, 150313 cjg
 		
 		_WeighingErrorToast = new WeighingErrorToast(this);
 	}
@@ -1000,6 +1052,10 @@ public class Home extends Activity {
 		_WorkLoadWeighingInitPopup2 = new WorkLoadWeighingInitPopup2(this);
 		_EHCUErrorPopup = new EHCUErrorPopup(this);
 		_SoftStopInitPopup = new SoftStopInitPopup(this);
+		// ++, 150323 bwk
+		_MultimediaClosePopup = new MultimediaClosePopup(this);
+		_MiracastClosePopup = new MiracastClosePopup(this);
+		// --, 150323 bwk
 		
 		_WeighingErrorToast = new WeighingErrorToast(this);
 	}
@@ -1049,6 +1105,23 @@ public class Home extends Activity {
 		}
 		return true;
 	}
+	// ++, 150324 bwk
+	public void ChangeCam(int Key){
+		if(Key == CAN1CommManager.LEFT){
+			if(SelectCameraNum > 1)
+				SelectCameraNum--;
+			else
+				SelectCameraNum = ActiveCameraNum;
+		}else if(Key == CAN1CommManager.RIGHT){
+			if(SelectCameraNum < ActiveCameraNum)
+				SelectCameraNum++;
+			else
+				SelectCameraNum = 1;
+		}
+		
+		CAN1Comm.TxCMDToMCU(CAN1Comm.CMD_CAM, SelectCameraNum-1);
+	}
+	// --, 150324 bwk
 
 	public void SaveASPhoneNumber(){
 		byte[] ASNum;
@@ -1127,6 +1200,7 @@ public class Home extends Activity {
 		edit.putInt("BrightnessManualAuto", BrightnessManualAuto);
 		edit.putInt("SoundState", SoundState);
 		edit.putInt("LanguageIndex", LanguageIndex);		// ++, --, 150206 bwk
+		edit.putInt("InternalSoundLevel", InternalSoundLevel);		// ++, --, 150324 bwk
 		edit.commit();
 		Log.d(TAG,"SavePref");
 	}
@@ -1156,13 +1230,14 @@ public class Home extends Activity {
 		BrightnessAutoStartTime = SharePref.getInt("BrightnessAutoStartTime", 8);
 		BrightnessAutoEndTime = SharePref.getInt("BrightnessAutoEndTime", 18);
 		SoundState = SharePref.getInt("SoundState", STATE_INTERNAL_SPK);
+		InternalSoundLevel = SharePref.getInt("InternalSoundLevel", INTERNAL_SPK_MAX);		// ++, --, 150324 bwk
 		
 		SmartKeyUse = SharePref.getInt("SmartKeyUse", CAN1CommManager.DATA_STATE_SMARTKEY_USE_OFF);
 		
 		strASNumDash = SharePref.getString("strASNumDash", "");
 		strASNum = SharePref.getString("strASNum", "");
 		
-		DisplayType = SharePref.getInt("DisplayType", DISPLAY_TYPE_B);
+		DisplayType = SharePref.getInt("DisplayType", DISPLAY_TYPE_A);	// ++, --, 150323 bwk B->A
 		setScreenIndex();	// ++, --, 150310 bwk
 		
 		LanguageIndex = SharePref.getInt("LanguageIndex", STATE_DISPLAY_LANGUAGE_ENGLISH);		// ++, --, 150206 bwk
@@ -1479,6 +1554,16 @@ public class Home extends Activity {
 				}
 				Log.d(TAG,"Click FN!!!");
 			}
+			// ++, 150323 cjg
+			else if(Data == CAN1CommManager.ESC){
+				try{
+					HandleKeyButton.sendMessage(HandleKeyButton.obtainMessage(Data));
+				} catch (NullPointerException e){
+					Log.e(TAG,"NullPointerException");
+				}
+				Log.d(TAG, "Click ESC!!!");
+			}
+			// --, 150323 cjg
 			else if(Data == CAN1CommManager.POWER_OFF){
 				showEndingFragment();
 				allKillRunningApps("taeha.wheelloader.fseries_monitor.main");
@@ -1966,6 +2051,12 @@ public class Home extends Activity {
 			|| Data == CAN1CommManager.ESC){
 				ExitCam();
 			}
+			// ++, 150324 bwk
+			else if(Data == CAN1CommManager.LEFT
+			|| Data == CAN1CommManager.RIGHT){
+				ChangeCam(Data);
+			}
+			// --, 150324 bwk
 		// ++, 150310 bwk
 		}else if(ScreenIndex == SCREEN_STATE_MAIN_A_KEY_QUICKCOUPLER_POPUP_LOCKING2
 				||	 ScreenIndex == SCREEN_STATE_MAIN_A_KEY_QUICKCOUPLER_POPUP_UNLOCKING2
@@ -2375,7 +2466,36 @@ public class Home extends Activity {
 		HomeDialog = _SoftStopInitPopup;
 		HomeDialog.show();
 	}
-	
+	// ++, 150313 cjg
+	public void showMultiClose(){
+		if(AnimationRunningFlag == true)
+			return;
+		else
+			StartAnimationRunningTimer();
+		if(HomeDialog != null){
+			HomeDialog.dismiss();
+			HomeDialog = null;
+		}
+		
+		_MultimediaClosePopup = new MultimediaClosePopup(this);
+		HomeDialog = _MultimediaClosePopup;
+		HomeDialog.show();
+	}
+	public void showMiraClose(){
+		if(AnimationRunningFlag == true)
+			return;
+		else
+			StartAnimationRunningTimer();
+		if(HomeDialog != null){
+			HomeDialog.dismiss();
+			HomeDialog = null;
+		}
+		
+		_MiracastClosePopup = new MiracastClosePopup(this);
+		HomeDialog = _MiracastClosePopup;
+		HomeDialog.show();
+	}
+	// --, 150313 cjg	
 	/////////////////////////////////////////////////////
 	//Timer//////////////////////////////////////////////
 	public class SeatBeltTimerClass extends TimerTask{
@@ -2480,6 +2600,7 @@ public class Home extends Activity {
 			try {
 				if(nSendCommandTimerIndex == 0){
 					setSoundOutput(SoundState);
+					//CAN1Comm.setVolume(InternalSoundLevel);		// ++, --, 150324 bwk
 					CAN1Comm.Set_MaintenanceCommant_1097_PGN61184_12(CAN1CommManager.COMMAND_MAINTENANCE_ITEM_LIST_REQUEST);
 					CAN1Comm.TxCANToMCU(12);
 				}
@@ -3208,6 +3329,22 @@ public class Home extends Activity {
 		return strAS;
 	}
 	/////////////////////////////////////////////////////
+	// ++, 150323 bwk
+	public boolean CheckRunningApp(String strPrcessName){
+		 ActivityManager activity_manager = (ActivityManager)getSystemService(Context.ACTIVITY_SERVICE);
+		 List<RunningAppProcessInfo> app_list = activity_manager.getRunningAppProcesses();
+
+		 for(int i=0; i<app_list.size(); i++)	 {
+	
+			 if(strPrcessName.equals(app_list.get(i).processName) == true)	 {
+				 Log.d(TAG,"Process is running : " + app_list.get(i).processName);
+				 return true;
+			 }
+		 }
+		 System.gc();
+		 return false;
+	}
+	// --, 150323 bwk
 	public void allKillRunningApps(String strPrcessName)	 {
 		 ActivityManager activity_manager = (ActivityManager)getSystemService(Context.ACTIVITY_SERVICE);
 		 List<RunningAppProcessInfo> app_list = activity_manager.getRunningAppProcesses();
@@ -3242,6 +3379,15 @@ public class Home extends Activity {
 		 }
 		 System.gc();
 	}
-
+	// ++, 150324 cjg
+	public void StartAlwaysOntopService(){
+		startService(new Intent(Home.this,AlwaysOnTopService.class));
+	}
+	// --, 150324 cjg
+	// ++, 150324 cjg
+	public void StopAlwaysOntopService(){
+		stopService(new Intent(Home.this,AlwaysOnTopService.class));
+	}
+	// --, 150324 cjg
 	/////////////////////////////////////////////////////
 }

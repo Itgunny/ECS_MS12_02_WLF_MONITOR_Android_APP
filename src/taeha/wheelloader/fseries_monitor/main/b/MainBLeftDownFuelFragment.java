@@ -117,8 +117,8 @@ public class MainBLeftDownFuelFragment extends ParentFragment{
 		case CAN1CommManager.DATA_STATE_AVERAGE_FUEL_RATE:
 			FuelTitleAnimation.FlipAnimation(textViewFuelTitle,getResources().getString(string.Average_Fuel_Rate));
 			break;
-		case CAN1CommManager.DATA_STATE_LASTEST_FUEL_CONSUMED:
-			FuelTitleAnimation.FlipAnimation(textViewFuelTitle,getResources().getString(string.Lastest_Fuel_Consumed));
+		case CAN1CommManager.DATA_STATE_LATEST_FUEL_CONSUMED:
+			FuelTitleAnimation.FlipAnimation(textViewFuelTitle,getResources().getString(string.Latest_Fuel_Consumed));
 			break;
 		default:
 			break;
@@ -134,7 +134,7 @@ public class MainBLeftDownFuelFragment extends ParentFragment{
 			textViewFuelData.setText(ParentActivity.GetFuelRateString(AverageFuel));
 			textViewFuelUnit.setText(ParentActivity.getResources().getString(string.l_h));
 			break;
-		case CAN1CommManager.DATA_STATE_LASTEST_FUEL_CONSUMED:
+		case CAN1CommManager.DATA_STATE_LATEST_FUEL_CONSUMED:
 			textViewFuelData.setText(ParentActivity.GetFuelRateString(LatestConsumed));
 			textViewFuelUnit.setText(ParentActivity.getResources().getString(string.l));
 			break;
