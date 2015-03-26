@@ -1220,14 +1220,24 @@ public class CommService extends Service{
 				if(GetScreenTopFlag() == true)
 				{
 					CAN1Comm.Callback_KeyButton(Data);
-				}else{//++, --, 150324 cjg
+				}
+				// ++, 150326 bwk
+				HandleKeyButton.sendMessage(HandleKeyButton.obtainMessage(Data));	
+				/*
+				else{//++, --, 150324 cjg
 					HandleKeyButton.sendMessage(HandleKeyButton.obtainMessage(Data));	
 				}
-				SoundPoolKeyButtonEnding.play(SoundIDEnding, fVolumeEnding, fVolumeEnding, 0, 0, 1);
+				*/
+				// --, 150326 bwk
+				if(count++==0)	// ++, --, 150325 bwk
+					SoundPoolKeyButtonEnding.play(SoundIDEnding, fVolumeEnding, fVolumeEnding, 0, 0, 1);
 				break;
 			case CAN1CommManager.FN:
 				//CAN1Comm.Callback_KeyButton(Data);
-				if(FNFlag == true)
+				// ++, 150326 cjg
+				//if(FNFlag == true)
+				if(CAN1Comm.CameraCurrentOnOff == false && FNFlag == true)
+				// --, 150326 cjg
 					HandleKeyButton.sendMessage(HandleKeyButton.obtainMessage(Data));
 				
 				SoundPoolKeyButton.play(SoundID, fVolume, fVolume, 0, 0, 1);
@@ -1292,6 +1302,8 @@ public class CommService extends Service{
 			
 		}).start();
 	}
+	// ++, 150326 bwk
+	/*
 	// ++, 150324 cjg
 	public static boolean GetPowerOffFlag(){
 		return powerOffFlag;
@@ -1300,6 +1312,8 @@ public class CommService extends Service{
 		powerOffFlag = flag;
 	}
 	// --, 150324 cjg
+	*/
+	// --, 150326 bwk
 	public static void SetScreenTopFlag(boolean flag){
 		ScreenTopFlag = flag;
 	}
@@ -1365,12 +1379,17 @@ public class CommService extends Service{
 			@Override
 			public void handleMessage(Message msg) {
 				if(msg.what == CAN1CommManager.POWER_OFF){
+					// ++, 150326 bwk
+					allKillRunningApps("taeha.wheelloader.fseries_monitor.main");
+					/*
 					//++, 150324 cjg
+					//allKillRunningApps("taeha.wheelloader.fseries_monitor.main");
 					SetPowerOffFlag(true);
 					CallHome();
 					Log.d(TAG, "" + GetPowerOffFlag());
-					//allKillRunningApps("taeha.wheelloader.fseries_monitor.main");
 					//--, 150324 cjg
+					*/
+					// --, 150326 bwk
 				}else if(msg.what == CAN1CommManager.FN){
 					ClickFN();
 				// ++, 150319 cjg

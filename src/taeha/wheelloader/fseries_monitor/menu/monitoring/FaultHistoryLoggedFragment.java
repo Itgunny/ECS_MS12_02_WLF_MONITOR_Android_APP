@@ -38,17 +38,19 @@ import android.widget.TextView;
 
 public class FaultHistoryLoggedFragment extends ParentFragment{
 	//CONSTANT////////////////////////////////////////
-//	private static final int REQ_ERR_MACHINE_ACTIVE		= 0;
-	private static final int REQ_ERR_MACHINE_LOGGED		= 1;
-	
-//	private static final int REQ_ERR_ENGINE_ACTIVE		= 2;
-	private static final int REQ_ERR_ENGINE_LOGGED		= 3;
-	
-//	private static final int REQ_ERR_TM_ACTIVE			= 4;
-	private static final int REQ_ERR_TM_LOGGED			= 5;
-	
-//	private static final int REQ_ERR_EHCU_ACTIVE		= 6;
-	private static final int REQ_ERR_EHCU_LOGGED		= 7;
+	// ++, 150326 bwk
+////	private static final int REQ_ERR_MACHINE_ACTIVE		= 0;
+//	private static final int REQ_ERR_MACHINE_LOGGED		= 1;
+//	
+////	private static final int REQ_ERR_ENGINE_ACTIVE		= 2;
+//	private static final int REQ_ERR_ENGINE_LOGGED		= 3;
+//	
+////	private static final int REQ_ERR_TM_ACTIVE			= 4;
+//	private static final int REQ_ERR_TM_LOGGED			= 5;
+//	
+////	private static final int REQ_ERR_EHCU_ACTIVE		= 6;
+//	private static final int REQ_ERR_EHCU_LOGGED		= 7;
+	// --, 150326 bwk
 	
 	private static final int EHCU_SPN = 0;
 	private static final int EHCU_FMI = 1;
@@ -191,7 +193,7 @@ public class FaultHistoryLoggedFragment extends ParentFragment{
 		// TODO Auto-generated method stub
 		super.InitValuables();
 		
-		SendDTCIndex = REQ_ERR_MACHINE_LOGGED;
+		SendDTCIndex = ParentActivity.REQ_ERR_MACHINE_LOGGED;
 		SendSeqIndex = 1;
 		
 		Err_Tcu = new int[400];
@@ -352,7 +354,7 @@ public class FaultHistoryLoggedFragment extends ParentFragment{
 		radioTransmission.setChecked(false);
 		radioEHCU.setChecked(false);
 		DetailEnable(false);
-		SelectedMode = REQ_ERR_MACHINE_LOGGED;
+		SelectedMode = Home.REQ_ERR_MACHINE_LOGGED;
 	}
 	public void ClickEngine(){
 		TitleDisplay(ParentActivity.getResources().getString(string.Engine));
@@ -361,7 +363,7 @@ public class FaultHistoryLoggedFragment extends ParentFragment{
 		radioTransmission.setChecked(false);
 		radioEHCU.setChecked(false);
 		DetailEnable(false);
-		SelectedMode = REQ_ERR_ENGINE_LOGGED;
+		SelectedMode = Home.REQ_ERR_ENGINE_LOGGED;
 	}
 	public void ClickTransmission(){
 		TitleDisplay(ParentActivity.getResources().getString(string.Transmission));
@@ -370,7 +372,7 @@ public class FaultHistoryLoggedFragment extends ParentFragment{
 		radioTransmission.setChecked(true);
 		radioEHCU.setChecked(false);
 		DetailEnable(false);
-		SelectedMode = REQ_ERR_TM_LOGGED;
+		SelectedMode = Home.REQ_ERR_TM_LOGGED;
 	}
 	public void ClickEHCU(){
 		TitleDisplay(ParentActivity.getResources().getString(string.EHCU));
@@ -379,7 +381,7 @@ public class FaultHistoryLoggedFragment extends ParentFragment{
 		radioTransmission.setChecked(false);
 		radioEHCU.setChecked(true);
 		DetailEnable(false);
-		SelectedMode = REQ_ERR_EHCU_LOGGED;
+		SelectedMode = Home.REQ_ERR_EHCU_LOGGED;
 	}
 	public void ClickDetailTitle(){
 		DetailEnable(false);
@@ -414,16 +416,16 @@ public class FaultHistoryLoggedFragment extends ParentFragment{
 	}
 	public void ErrListDisplay(){
 		switch (SelectedMode) {
-		case REQ_ERR_MACHINE_LOGGED:
+		case Home.REQ_ERR_MACHINE_LOGGED:
 			SetErrList(DTCTotalMachine, SelectedMode);
 			break;
-		case REQ_ERR_ENGINE_LOGGED:
+		case Home.REQ_ERR_ENGINE_LOGGED:
 			SetErrList(DTCTotalEngine, SelectedMode);
 			break;
-		case REQ_ERR_TM_LOGGED:
+		case Home.REQ_ERR_TM_LOGGED:
 			SetErrList(DTCTotalTM, SelectedMode);
 			break;
-		case REQ_ERR_EHCU_LOGGED:
+		case Home.REQ_ERR_EHCU_LOGGED:
 			SetErrList(DTCTotalEHCU, SelectedMode);
 			break;
 			
@@ -443,7 +445,7 @@ public class FaultHistoryLoggedFragment extends ParentFragment{
 		else
 		{
 			for(int i = 0; i < NumofErr; i++){
-				if(Mode == REQ_ERR_MACHINE_LOGGED)		// MCU 
+				if(Mode == Home.REQ_ERR_MACHINE_LOGGED)		// MCU 
 				{
 					//Log.d(TAG,"ReqMode : " + Integer.toString(ReqMode));
 					Err_Mcu = CAN1Comm.Get_McuErr_Logged();
@@ -464,7 +466,7 @@ public class FaultHistoryLoggedFragment extends ParentFragment{
 				
 				//	Log.d(TAG,"SPN : " + Integer.toString(SPN) + "     FMI : " + Integer.toString(FMI));
 				}
-				else if(Mode == REQ_ERR_ENGINE_LOGGED)	// ECU	
+				else if(Mode == Home.REQ_ERR_ENGINE_LOGGED)	// ECU	
 				{
 					//Log.d(TAG,"ReqMode : " + Integer.toString(ReqMode));
 					Err_Ecu = CAN1Comm.Get_EcuErr_Logged();
@@ -483,7 +485,7 @@ public class FaultHistoryLoggedFragment extends ParentFragment{
 						adapter.addItem(new IconTextItemFault(null,ParentActivity.getResources().getDrawable(R.drawable.menu_information_fault_down_btn), "SPN : " + Integer.toString(SPN)
 								+ "     " + "FMI : " + Integer.toString(FMI), "", ""));
 				}
-				else if(Mode == REQ_ERR_TM_LOGGED)		// TCU
+				else if(Mode == Home.REQ_ERR_TM_LOGGED)		// TCU
 				{
 					Err_Tcu = CAN1Comm.Get_TcuErr_Logged();
 					// ++, 150216 bwk
@@ -495,7 +497,7 @@ public class FaultHistoryLoggedFragment extends ParentFragment{
 					// --, 150216 bwk
 						adapter.addItem(new IconTextItemFault(null,ParentActivity.getResources().getDrawable(R.drawable.menu_information_fault_down_btn), "No : " + Integer.toHexString(Err_Tcu[i]), "", ""));
 				}
-				else if(Mode == REQ_ERR_EHCU_LOGGED)		// EHCU
+				else if(Mode == Home.REQ_ERR_EHCU_LOGGED)		// EHCU
 				{
 					Err_EHCU = CAN1Comm.Get_EHCUErr_Logged();
 					
@@ -525,7 +527,7 @@ public class FaultHistoryLoggedFragment extends ParentFragment{
 		textViewDetailTitle.setText(str);
 		//Log.d(TAG,"ErrDetailDisplay");
 		textViewDetail.setText("Not define");
-		if(SelectedMode == REQ_ERR_MACHINE_LOGGED)
+		if(SelectedMode == Home.REQ_ERR_MACHINE_LOGGED)
 		{
 			SPN = Err_Mcu[Index] & 0xFFFF;
 			SPN |= ((Err_Mcu[Index] & 0xe00000) >> 5);
@@ -536,7 +538,7 @@ public class FaultHistoryLoggedFragment extends ParentFragment{
 
 			}
 		}
-		else if(SelectedMode == REQ_ERR_EHCU_LOGGED)
+		else if(SelectedMode == Home.REQ_ERR_EHCU_LOGGED)
 		{
 			//Log.d(TAG,"ErrDetailDisplay Err_EHCU[Index] : " + Integer.toHexString(Err_EHCU[Index]));
 			int TempSPN;
@@ -556,7 +558,7 @@ public class FaultHistoryLoggedFragment extends ParentFragment{
 			}
 		}
 		// ++, 150202 bwk
-		else if(SelectedMode == REQ_ERR_TM_LOGGED)
+		else if(SelectedMode == Home.REQ_ERR_TM_LOGGED)
 		{
 			for(int i = 0; i < TCU_LENTGH; i++){
 				if(Err_Tcu[Index] == TCU_SPN[i])
@@ -570,7 +572,7 @@ public class FaultHistoryLoggedFragment extends ParentFragment{
 				}
 			}
 		}
-		else if(SelectedMode == REQ_ERR_ENGINE_LOGGED)
+		else if(SelectedMode == Home.REQ_ERR_ENGINE_LOGGED)
 		{
 			SPN = Err_Ecu[Index] & 0xFFFF;
 			SPN |= ((Err_Ecu[Index] & 0xe00000) >> 5);
@@ -620,7 +622,7 @@ public class FaultHistoryLoggedFragment extends ParentFragment{
 	}
 	public void ReqestErrorCode(){
 		switch (SendDTCIndex) {
-		case REQ_ERR_MACHINE_LOGGED:
+		case Home.REQ_ERR_MACHINE_LOGGED:
 			if(SendSeqIndex == 1){
 				RequestErrorCode(SendDTCIndex,1,SendSeqIndex);
 				SendSeqIndex++;
@@ -628,7 +630,7 @@ public class FaultHistoryLoggedFragment extends ParentFragment{
 			}
 			else if(SendSeqIndex > DTCTotalPacketMachine){
 				SendSeqIndex = 1;
-				SendDTCIndex = REQ_ERR_ENGINE_LOGGED;
+				SendDTCIndex = Home.REQ_ERR_ENGINE_LOGGED;
 				SetThreadSleepTime(1000);
 			}
 			else{
@@ -637,7 +639,7 @@ public class FaultHistoryLoggedFragment extends ParentFragment{
 			}
 				
 			break;
-		case REQ_ERR_ENGINE_LOGGED:
+		case Home.REQ_ERR_ENGINE_LOGGED:
 			if(SendSeqIndex == 1){
 				RequestErrorCode(SendDTCIndex,1,SendSeqIndex);
 				SendSeqIndex++;
@@ -645,7 +647,7 @@ public class FaultHistoryLoggedFragment extends ParentFragment{
 			}
 			else if(SendSeqIndex > DTCTotalPacketEngine){
 				SendSeqIndex = 1;
-				SendDTCIndex = REQ_ERR_TM_LOGGED;
+				SendDTCIndex = Home.REQ_ERR_TM_LOGGED;
 				SetThreadSleepTime(1000);
 			}
 			else{
@@ -654,7 +656,7 @@ public class FaultHistoryLoggedFragment extends ParentFragment{
 			}
 				
 			break;
-		case REQ_ERR_TM_LOGGED:
+		case Home.REQ_ERR_TM_LOGGED:
 			if(SendSeqIndex == 1){
 				RequestErrorCode(SendDTCIndex,1,SendSeqIndex);
 				SendSeqIndex++;
@@ -662,7 +664,7 @@ public class FaultHistoryLoggedFragment extends ParentFragment{
 			}
 			else if(SendSeqIndex > DTCTotalPacketTM){
 				SendSeqIndex = 1;
-				SendDTCIndex = REQ_ERR_EHCU_LOGGED;
+				SendDTCIndex = Home.REQ_ERR_EHCU_LOGGED;
 				SetThreadSleepTime(1000);
 			}
 			else{
@@ -671,7 +673,7 @@ public class FaultHistoryLoggedFragment extends ParentFragment{
 			}
 				
 			break;
-		case REQ_ERR_EHCU_LOGGED:
+		case Home.REQ_ERR_EHCU_LOGGED:
 			if(SendSeqIndex == 1){
 				RequestErrorCode(SendDTCIndex,1,SendSeqIndex);
 				SendSeqIndex++;
@@ -679,7 +681,7 @@ public class FaultHistoryLoggedFragment extends ParentFragment{
 			}
 			else if(SendSeqIndex > DTCTotalPacketTM){
 				SendSeqIndex = 1;
-				SendDTCIndex = REQ_ERR_MACHINE_LOGGED;
+				SendDTCIndex = Home.REQ_ERR_MACHINE_LOGGED;
 				SetThreadSleepTime(1000);
 			}
 			else{
@@ -696,13 +698,13 @@ public class FaultHistoryLoggedFragment extends ParentFragment{
 	// ++, 150216 bwk
 	public int CountErrorList(){
 		switch (SelectedMode) {
-			case REQ_ERR_MACHINE_LOGGED:
+			case Home.REQ_ERR_MACHINE_LOGGED:
 				return DTCTotalMachine;
-			case REQ_ERR_ENGINE_LOGGED:
+			case Home.REQ_ERR_ENGINE_LOGGED:
 				return DTCTotalEngine;
-			case REQ_ERR_TM_LOGGED:
+			case Home.REQ_ERR_TM_LOGGED:
 				return DTCTotalTM;
-			case REQ_ERR_EHCU_LOGGED:
+			case Home.REQ_ERR_EHCU_LOGGED:
 				return DTCTotalEHCU;
 			default:
 				return 0;		
@@ -817,16 +819,16 @@ public class FaultHistoryLoggedFragment extends ParentFragment{
 		{
 			switch(SelectedMode)
 			{
-				case REQ_ERR_MACHINE_LOGGED:
+				case Home.REQ_ERR_MACHINE_LOGGED:
 					CursurIndex = 1;
 					break;
-				case REQ_ERR_ENGINE_LOGGED:
+				case Home.REQ_ERR_ENGINE_LOGGED:
 					CursurIndex = 2;
 					break;
-				case REQ_ERR_TM_LOGGED:
+				case Home.REQ_ERR_TM_LOGGED:
 					CursurIndex = 3;
 					break;
-				case REQ_ERR_EHCU_LOGGED:
+				case Home.REQ_ERR_EHCU_LOGGED:
 					CursurIndex = 4;
 					break;
 				default:

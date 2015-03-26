@@ -1,15 +1,21 @@
 package taeha.wheelloader.fseries_monitor.menu.management;
 
+import java.util.Timer;
+import java.util.TimerTask;
+
 import taeha.wheelloader.fseries_monitor.animation.AppearAnimation;
 import taeha.wheelloader.fseries_monitor.animation.ChangeFragmentAnimation;
 import taeha.wheelloader.fseries_monitor.animation.DisappearAnimation;
 import taeha.wheelloader.fseries_monitor.animation.MainBodyShiftAnimation;
 import taeha.wheelloader.fseries_monitor.animation.LeftRightShiftAnimation;
+import taeha.wheelloader.fseries_monitor.main.CAN1CommManager;
 import taeha.wheelloader.fseries_monitor.main.Home;
 import taeha.wheelloader.fseries_monitor.main.ParentFragment;
 import taeha.wheelloader.fseries_monitor.main.R;
+import taeha.wheelloader.fseries_monitor.main.Home.SeatBeltTimerClass;
 import taeha.wheelloader.fseries_monitor.main.R.string;
 import taeha.wheelloader.fseries_monitor.menu.MenuBodyList_ParentFragment;
+import taeha.wheelloader.fseries_monitor.menu.management.MaintenanceFragment.SendCommandTimerClass;
 import android.os.Bundle;
 import android.text.Layout;
 import android.util.Log;
@@ -42,7 +48,7 @@ public class MenuManagementFragment extends MenuBodyList_ParentFragment{
 	
 	///////////////////////////////////////////////////
 	
-	//TEST////////////////////////////////////////////
+	//Test////////////////////////////////////////////
 	
 	//////////////////////////////////////////////////
 
@@ -60,13 +66,14 @@ public class MenuManagementFragment extends MenuBodyList_ParentFragment{
 		ParentActivity.ScreenIndex = ParentActivity.SCREEN_STATE_MENU_MANAGEMENT_TOP;
 		ParentActivity._MenuBaseFragment._MenuListTitleFragment.SetTitleText(ParentActivity.getResources().getString(R.string.Management));
 		CursurDisplay(CursurIndex);
+		// ++, 150325 bwk
+		CAN1Comm.Set_MaintenanceCommant_1097_PGN61184_12(CAN1CommManager.COMMAND_MAINTENANCE_ITEM_LIST_REQUEST);
+		CAN1Comm.TxCANToMCU(12);
+		// --, 150325 bwk
 		return mRoot;
 	}
 	
 	////////////////////////////////////////////////
-	
-	
-
 	//Common Function//////////////////////////////
 
 	@Override

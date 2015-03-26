@@ -570,18 +570,23 @@ public class MaintenanceFragment extends ParentFragment{
 				@Override
 				public void run() {
 					// TODO Auto-generated method stub
-					if(SendCommandFlag == CAN1CommManager.SEND_COMMAND_FLAG_INFO){
-						CAN1Comm.Set_MaintenanceCommant_1097_PGN61184_12(CAN1CommManager.COMMAND_MAINTENANCE_ITEM_LIST_REQUEST);
-						CAN1Comm.TxCANToMCU(12);
-						
-						SendCommandFlag = CAN1CommManager.SEND_COMMAND_FLAG_ALRAM;
-					}else{
-						CAN1Comm.Set_MaintenanceCommant_1097_PGN61184_12(CAN1CommManager.MAINTENANCE_ALARM_LAMP_ON_ITEM_LIST_REQUEST);
-						CAN1Comm.TxCANToMCU(12);
-						
-						SendCommandFlag = CAN1CommManager.SEND_COMMAND_FLAG_INFO;
-								
-					}
+					// ++, 150325 bwk
+//					if(SendCommandFlag == CAN1CommManager.SEND_COMMAND_FLAG_INFO){
+//						CAN1Comm.Set_MaintenanceCommant_1097_PGN61184_12(CAN1CommManager.COMMAND_MAINTENANCE_ITEM_LIST_REQUEST);
+//						CAN1Comm.TxCANToMCU(12);
+//						
+//						SendCommandFlag = CAN1CommManager.SEND_COMMAND_FLAG_ALRAM;
+//					}else{
+//						CAN1Comm.Set_MaintenanceCommant_1097_PGN61184_12(CAN1CommManager.MAINTENANCE_ALARM_LAMP_ON_ITEM_LIST_REQUEST);
+//						CAN1Comm.TxCANToMCU(12);
+//						
+//						SendCommandFlag = CAN1CommManager.SEND_COMMAND_FLAG_INFO;
+//								
+//					}
+					CAN1Comm.Set_MaintenanceCommant_1097_PGN61184_12(CAN1CommManager.MAINTENANCE_ALARM_LAMP_ON_ITEM_LIST_REQUEST);
+					CAN1Comm.TxCANToMCU(12);
+					
+					// --, 150325 bwk
 					
 				}
 				
@@ -594,7 +599,7 @@ public class MaintenanceFragment extends ParentFragment{
 	public void StartSendCommandTimer(){
 		CancelSendCommandTimer();
 		mSendCommandTimer = new Timer();
-		mSendCommandTimer.schedule(new SendCommandTimerClass(),1,3000);	
+		mSendCommandTimer.schedule(new SendCommandTimerClass(),1,1000);	// ++, --, 150325 bwk 3000->1000	
 	}
 	
 	public void CancelSendCommandTimer(){

@@ -129,6 +129,10 @@ public class MainALeftQuickFragment extends ParentFragment{
 		if(intent != null)
 		{
 			startActivity(intent);
+			// ++, 150326 bwk
+			CAN1Comm.SetMiracastFlag(false);
+			CAN1Comm.SetMultimediaFlag(false);
+			// --, 150326 bwk
 			ParentActivity.StartAlwaysOntopService(); // ++, --, 150324 cjg
 		}
 	}

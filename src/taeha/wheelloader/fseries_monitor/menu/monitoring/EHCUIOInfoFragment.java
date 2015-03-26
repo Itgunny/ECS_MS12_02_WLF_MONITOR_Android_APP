@@ -193,8 +193,11 @@ public class EHCUIOInfoFragment extends ParentFragment{
 			return;
 		else
 			ParentActivity.StartAnimationRunningTimer();
-		ParentActivity._MenuBaseFragment.showBodyMonitoringAnimation();
-		ParentActivity._MenuBaseFragment._MenuModeFragment.setFirstScreen(Home.SCREEN_STATE_MENU_MONITORING_TOP);
+		// ++, 150325 bwk
+//		ParentActivity._MenuBaseFragment.showBodyMonitoringAnimation();
+//		ParentActivity._MenuBaseFragment._MenuModeFragment.setFirstScreen(Home.SCREEN_STATE_MENU_MONITORING_TOP);
+		ParentActivity._MenuBaseFragment.showServiceMenuListAnimation();
+		// --, 150325 bwk
 	}
 
 	/////////////////////////////////////////////////////////////////////

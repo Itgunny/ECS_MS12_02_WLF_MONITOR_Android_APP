@@ -1,5 +1,6 @@
 package taeha.wheelloader.fseries_monitor.main.b;
 
+import taeha.wheelloader.fseries_monitor.main.CAN1CommManager;
 import taeha.wheelloader.fseries_monitor.main.R;
 import android.os.Bundle;
 import android.util.Log;
@@ -43,6 +44,10 @@ public class MainBCenterQuickFragment extends MainBCenterFragment{
 		InitButtonListener();
 
 		ParentActivity.ScreenIndex = ParentActivity.SCREEN_STATE_MAIN_B_QUICK_TOP;
+		// ++, 150325 bwk
+		CAN1Comm.Set_MaintenanceCommant_1097_PGN61184_12(CAN1CommManager.COMMAND_MAINTENANCE_ITEM_LIST_REQUEST);
+		CAN1Comm.TxCANToMCU(12);
+		// --, 150325 bwk
 		return mRoot;
 	}
 

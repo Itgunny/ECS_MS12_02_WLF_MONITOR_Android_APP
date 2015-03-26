@@ -27,6 +27,7 @@ public class MainBCenterFragment extends ParentFragment{
 	ImageView imgViewEcoIcon;
 	ImageView imgViewEcoBG;
 	ImageView imgViewEcoBar;
+	ImageView imgViewSmkIcon;	// ++, --, 150326 bwk
 	
 	
 	ImageButton imgbtnOption;
@@ -98,7 +99,7 @@ public class MainBCenterFragment extends ParentFragment{
 		imgViewEcoIcon = (ImageView)mRoot.findViewById(R.id.imageView_center_main_b_eco_title);
 		imgViewEcoBG = (ImageView)mRoot.findViewById(R.id.imageView_center_main_b_eco_bg);
 		imgViewEcoBar = (ImageView)mRoot.findViewById(R.id.imageView_center_main_b_eco_bar);
-		
+		imgViewSmkIcon = (ImageView)mRoot.findViewById(R.id.imageView_center_main_b_smkicon);		// ++, --, 150326 bwk
 
 		
 		imgbtnOption = (ImageButton)mRoot.findViewById(R.id.imageButton_center_main_b_option);
@@ -157,7 +158,7 @@ public class MainBCenterFragment extends ParentFragment{
 		RPMDisplay(RPM);
 		EcoGaugeDisplay(EcoGaugeLevel,EcoGaugeStatus);
 		IconDisplay(FaultCode,Maint);
-	
+		SmkIconDisplay(ParentActivity.SmartIconDisplay);	// ++, --, 150326 bwk
 	}
 	/////////////////////////////////////////////////////////////////////
 	public void RPMDisplay(int Data){
@@ -230,4 +231,17 @@ public class MainBCenterFragment extends ParentFragment{
 		}
 	}
 	//////////////////////////////////////////////////////////////////////
+	// ++, 150326 bwk
+	public void SmkIconDisplay(boolean flag){
+		try{
+			if(flag == false)
+				imgViewSmkIcon.setVisibility(View.INVISIBLE);
+			else
+				imgViewSmkIcon.setVisibility(View.VISIBLE);
+		} catch (NullPointerException e) {
+			// TODO: handle exception
+			Log.e(TAG,"NullPointerException");
+		}
+	}
+	// --, 150326 bwk	
 }

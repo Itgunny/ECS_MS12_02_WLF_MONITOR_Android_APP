@@ -18,6 +18,10 @@ public class MainACenterMachineStatusFragment extends ParentFragment{
 	//////////////////////////////////////////////////
 	//RESOURCE////////////////////////////////////////
 	RelativeLayout LayoutTop;
+	// ++, 150326 bwk
+	ImageView	imageViewUpIcon;
+	ImageView	imageViewDownIcon;
+	// --, 150326 bwk
 	//////////////////////////////////////////////////
 	
 	//VALUABLE////////////////////////////////////////
@@ -83,7 +87,7 @@ public class MainACenterMachineStatusFragment extends ParentFragment{
 	@Override
 	protected void UpdateUI() {
 		// TODO Auto-generated method stub
-		
+		//IconDisplay();
 	}
 	/////////////////////////////////////////////////////////////////////	
 	
@@ -94,5 +98,8 @@ public class MainACenterMachineStatusFragment extends ParentFragment{
 			ParentActivity.StartAnimationRunningTimer();
 		
 		ParentActivity._MainABaseFragment.showLeftUptoDefaultScreenAnimation();
+	}
+	
+	public void IconDisplay(){
 	}
 }

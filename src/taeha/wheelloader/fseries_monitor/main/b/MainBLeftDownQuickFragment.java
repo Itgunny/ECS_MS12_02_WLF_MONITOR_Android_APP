@@ -112,7 +112,14 @@ public class MainBLeftDownQuickFragment extends ParentFragment{
 		Intent intent;
 		intent = ParentActivity.getPackageManager().getLaunchIntentForPackage("org.ebookdroid");
 		if(intent != null)
+		{
 			startActivity(intent);
+			// ++, 150326 bwk
+			CAN1Comm.SetMiracastFlag(false);
+			CAN1Comm.SetMultimediaFlag(false);
+			// --, 150326 bwk
+			ParentActivity.StartAlwaysOntopService(); // ++, --, 150325 cjg
+		}
 	}
 	public void ClickMirror(){
 		// ++, 150320 cjg

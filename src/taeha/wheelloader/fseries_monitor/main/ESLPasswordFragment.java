@@ -8,12 +8,14 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import taeha.wheelloader.fseries_monitor.main.Home;
 import taeha.wheelloader.fseries_monitor.main.R;
 import taeha.wheelloader.fseries_monitor.menu.PasswordFragment;
 
 public class ESLPasswordFragment extends PasswordFragment{
+	RelativeLayout LayoutSmkIcon;	// ++, --, 150325 bwk
 	Handler HandleESLPassword;
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -27,6 +29,7 @@ public class ESLPasswordFragment extends PasswordFragment{
 		InitValuables();
 		InitButtonListener();
 		SetTextIndicatorTitle(1);
+		showSmartkeyIcon();	// ++, --, 150326 bwk
 		
 		HandleESLPassword = new Handler() {
 			@Override
@@ -73,6 +76,10 @@ public class ESLPasswordFragment extends PasswordFragment{
 		
 		imgbtnBack = (ImageButton)mRoot.findViewById(R.id.imageButton_main_esl_password_num_back);
 		imgbtnEnter = (ImageButton)mRoot.findViewById(R.id.imageButton_main_esl_password_num_enter);
+		
+		// ++, 150325 bwk
+		LayoutSmkIcon = (RelativeLayout)mRoot.findViewById(R.id.RelativeLayout_main_esl_password_icon);
+		// --, 150325 bwk
 	}
 	@Override
 	protected void InitButtonListener() {
@@ -91,5 +98,13 @@ public class ESLPasswordFragment extends PasswordFragment{
 		HandleESLPassword.sendMessage(HandleESLPassword.obtainMessage(0));
 	}
 	////////////////////////////////////////////////////////////////////////////////////////
+	// ++, 150325 bwk
+	public void showSmartkeyIcon(){
+		if(ParentActivity.SmartKeyUse == CAN1CommManager.DATA_STATE_SMARTKEY_USE_ON)
+			LayoutSmkIcon.setVisibility(View.VISIBLE);
+		else
+			LayoutSmkIcon.setVisibility(View.GONE);
+	}
+	// --, 150325 bwk
 
 }

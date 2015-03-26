@@ -85,9 +85,16 @@ public class ESLCheckFragment extends ParentFragment{
 					break;
 				case 1:
 					showESLScreen();
+					ParentActivity.SmartIconDisplay = false;	// ++, --, 150326 bwk
 					break;
 				case 2:
 					showMainScreen();
+					// ++, 150326 bwk
+					if(SmartKeyUse == CAN1CommManager.DATA_STATE_SMARTKEY_USE_ON)
+						ParentActivity.SmartIconDisplay = true;		
+					else
+						ParentActivity.SmartIconDisplay = false;
+					// --, 150326 bwk
 					break;
 				default:
 					break;
@@ -146,11 +153,14 @@ public class ESLCheckFragment extends ParentFragment{
 	}
 	/////////////////////////////////////////////////////////////////////
 	public void CheckSMK(){
-		if(SmartKeyUse == CAN1CommManager.DATA_STATE_SMARTKEY_USE_ON){
-			imgViewSMK.setVisibility(View.VISIBLE);
-		}else{
-			imgViewSMK.setVisibility(View.INVISIBLE);
-		}
+		// ++, 150325 bwk
+//		if(SmartKeyUse == CAN1CommManager.DATA_STATE_SMARTKEY_USE_ON){
+//			imgViewSMK.setVisibility(View.VISIBLE);
+//		}else{
+//			imgViewSMK.setVisibility(View.INVISIBLE);
+//		}
+		imgViewSMK.setVisibility(View.INVISIBLE);
+		// --, 150325 bwk
 	}
 	// ESL
 	public void ESLCheck(){

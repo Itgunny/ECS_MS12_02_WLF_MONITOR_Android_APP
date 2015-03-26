@@ -6,6 +6,7 @@ import taeha.wheelloader.fseries_monitor.animation.DisappearAnimation;
 import taeha.wheelloader.fseries_monitor.animation.MainBodyShiftAnimation;
 import taeha.wheelloader.fseries_monitor.animation.LeftRightShiftAnimation;
 import taeha.wheelloader.fseries_monitor.main.CAN1CommManager;
+import taeha.wheelloader.fseries_monitor.main.CheckModel;
 import taeha.wheelloader.fseries_monitor.main.Home;
 import taeha.wheelloader.fseries_monitor.main.ParentFragment;
 import taeha.wheelloader.fseries_monitor.main.R;
@@ -91,12 +92,23 @@ public class ServiceMenuListFragment extends MenuBodyList_ParentFragment{
 		setClickableList1(true);
 		setClickableList2(true);
 		setClickableList3(true);
-		//setClickableList4(true);		// ++, --, 150323 bwk
+		//setClickableList4(true);		// ++, --, 150323 bwk 관리기능 하위로 이동
 		
 		setListTitle1(ParentActivity.getResources().getString(string.Sensor_Monitoring));
 		setListTitle2(ParentActivity.getResources().getString(string.Speed_Limit_Setting));
 		setListTitle3(ParentActivity.getResources().getString(string.Weighing_System_Compensation));
-		//setListTitle4(ParentActivity.getResources().getString(string.Software_Update));		// ++, --, 150323 bwk
+		//setListTitle4(ParentActivity.getResources().getString(string.Software_Update));		// ++, --, 150323 bwk 관리기능 하위로 이동
+
+		// ++, 150325 bwk
+		if(ParentActivity._CheckModel.GetMCUVersion(CAN1Comm.Get_ComponentBasicInformation_1698_PGN65330()) == CheckModel.MODEL_940
+		|| ParentActivity._CheckModel.GetMCUVersion(CAN1Comm.Get_ComponentBasicInformation_1698_PGN65330()) == CheckModel.MODEL_935){
+			setClickableList4(false);
+		}else{
+			setClickableList4(true);
+			setListTitle4(ParentActivity.getResources().getString(string.EHCU_IO_Information));
+		}
+		// --, 150325 bwk
+	
 	}
 
 	//////////////////////////////////////////////////////////////////////
@@ -139,7 +151,17 @@ public class ServiceMenuListFragment extends MenuBodyList_ParentFragment{
 	@Override
 	public void ClickList4() {
 		// TODO Auto-generated method stub
+		// ++, 150325 bwk
+		if(ParentActivity.AnimationRunningFlag == true)
+			return;
+		else
+			ParentActivity.StartAnimationRunningTimer();
+		ParentActivity._MenuBaseFragment.showBodyEHCUIOInfoAnimation();
+		CursurIndex = 4;
+		CursurDisplay(CursurIndex);
+		// --, 150325 bwk
 		// ++, 150323 bwk
+		// 관리 기능 하위로 위치 이동
 //		Intent intent;
 //		intent = ParentActivity.getPackageManager().getLaunchIntentForPackage(
 //				"taeha.wheelloader.update");
@@ -152,6 +174,7 @@ public class ServiceMenuListFragment extends MenuBodyList_ParentFragment{
 //		CursurIndex = 4;
 //		CursurDisplay(CursurIndex);
 		// --, 150323 bwk
+		
 	}
 
 	@Override
@@ -201,10 +224,18 @@ public class ServiceMenuListFragment extends MenuBodyList_ParentFragment{
 			
 			break;
 		case 1:
+			// ++, 150325 bwk
 			// ++, 150323 bwk
-			//CursurIndex = 4;
-			CursurIndex = 3;
+			CursurIndex = 4;
+			//CursurIndex = 3;
 			// --, 150323 bwk
+			if(ParentActivity._CheckModel.GetMCUVersion(CAN1Comm.Get_ComponentBasicInformation_1698_PGN65330()) == CheckModel.MODEL_940
+			|| ParentActivity._CheckModel.GetMCUVersion(CAN1Comm.Get_ComponentBasicInformation_1698_PGN65330()) == CheckModel.MODEL_935){
+				CursurIndex = 3;
+			}else{
+				CursurIndex = 4;
+			}
+			// --, 150325 bwk
 			CursurDisplay(CursurIndex);
 			break;
 		case 2:
@@ -237,17 +268,23 @@ public class ServiceMenuListFragment extends MenuBodyList_ParentFragment{
 			CursurDisplay(CursurIndex);
 			break;
 		case 3:
+			// ++, 150325 bwk
 			// ++, 150323 bwk
 			//CursurIndex++;
-			CursurIndex = 1;
+//			CursurIndex = 1;
 			// --, 150323 bwk
+			if(ParentActivity._CheckModel.GetMCUVersion(CAN1Comm.Get_ComponentBasicInformation_1698_PGN65330()) == CheckModel.MODEL_940
+			|| ParentActivity._CheckModel.GetMCUVersion(CAN1Comm.Get_ComponentBasicInformation_1698_PGN65330()) == CheckModel.MODEL_935){
+				CursurIndex = 1;
+			}else{
+				CursurIndex++;
+			}
+			// --, 150325 bwk
 			CursurDisplay(CursurIndex);
 			break;
 		case 4:
-			// ++, 150323 bwk
-//			CursurIndex = 1;
-//			CursurDisplay(CursurIndex);
-			// --, 150323 bwk
+			CursurIndex = 1;
+			CursurDisplay(CursurIndex);
 			break;
 		default:
 			break;
@@ -267,11 +304,9 @@ public class ServiceMenuListFragment extends MenuBodyList_ParentFragment{
 		case 3:
 			imgbtnList[2].callOnClick();
 			break;
-		// ++, 150323 bwk
-//		case 4:
-//			imgbtnList[3].callOnClick();
-//			break;
-		// --, 150323 bwk			
+		case 4:
+			imgbtnList[3].callOnClick();
+			break;
 		default:
 			break;
 		}

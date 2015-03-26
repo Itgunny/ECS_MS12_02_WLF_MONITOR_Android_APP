@@ -2,6 +2,7 @@ package taeha.wheelloader.fseries_monitor.main;
 
 import java.io.FileDescriptor;
 
+import android.R.bool;
 import android.os.IBinder;
 import android.os.RemoteCallbackList;
 import android.os.RemoteException;
@@ -142,6 +143,10 @@ public class CAN1CommManager extends ICAN1CommManager.Stub{		// ttySAC1(Linux), 
 	public static final int DATA_STATE_MACHINESTATUS_COOLANT	= 3;
 	public static final int DATA_STATE_MACHINESTATUS_TMOIL		= 4;
 	public static final int DATA_STATE_MACHINESTATUS_WEIGHING	= 5;
+	// ++, 150326 bwk
+	public static final int DATA_STATE_MACHINESTATUS_FRONTAXLE	= 6;
+	public static final int DATA_STATE_MACHINESTATUS_REARAXLE	= 7;
+	// --, 150326 bwk
 	
 	
 	public static final int DATA_STATE_WEIGHINGDISPLAY_TOTAL_A	= 0;
@@ -410,6 +415,11 @@ public class CAN1CommManager extends ICAN1CommManager.Stub{		// ttySAC1(Linux), 
 	/////////////////Buzzer Status/////////////////////////////////
 	public int BuzzerStatus = 0;
 	///////////////////////////////////////////////////////////////
+	// ++, 150326 bwk
+	/////////////////Camera Status/////////////////////////////////
+	public boolean CameraCurrentOnOff = false;	// ++, --, 150326 cjg
+	///////////////////////////////////////////////////////////////	
+	// --, 150326 bwk
 	public static CAN1CommManager getInstance(){
 		Log.v(TAG,"getInstance1");
 		return instance;

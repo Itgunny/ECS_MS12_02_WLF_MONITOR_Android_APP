@@ -96,7 +96,10 @@ public class EndingAnimation extends ImageView{
 			}
 			// 배열의 길이를 초과한경우, 처음으로 돌아간다.
 			else if(index >= bitmapArray.length){
-				index = 0;
+				// ++, 150326 cjg
+				//index = 0;
+				return;
+				// --, 150326 cjg
 			}
 			// BitmapFactory를 통해 bitmap을 생성한다.
 			bitmapArray[index] = BitmapFactory.decodeResource(getResources(), sourcesId[index], mOptions);

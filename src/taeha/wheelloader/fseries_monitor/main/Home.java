@@ -38,7 +38,6 @@ import taeha.wheelloader.fseries_monitor.popup.WeighingErrorToast;
 import taeha.wheelloader.fseries_monitor.popup.WorkLoadInitPopup;
 import taeha.wheelloader.fseries_monitor.popup.WorkLoadWeighingInitPopup1;
 import taeha.wheelloader.fseries_monitor.popup.WorkLoadWeighingInitPopup2;
-
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.IBinder;
@@ -245,6 +244,30 @@ public class Home extends Activity {
     //	- Help : 중앙 누르면 바로 종료
     //	- Multimedia : 중앙 누르면 메뉴 호출
 	// 7. Mediaplayer에서 Ending 나오지 않은 현상 개선
+	// 20150325 HHI
+	// 1. menu 상단에서 키패드로 메뉴 움직일 경우 멀티미디어로 가면 바로 미디어 플레이어가 선택됨
+	// 2. 멀티미디어 실행 -> FN키 -> 카메라 키 -> FN키 -> ESC -> 이후 ESC 키 안먹는 현상 개선
+	// 3. 일부 UI 위치 이동
+    //	- EHCU I/O Information : 매니지먼트 - 서비스 메뉴 내로 이동
+	// 4. 멀티미디어 -> 키로 갈때 하이라이트 없앰
+	// 5. 소모품 관리
+	//	- 실제 항목별 주기데이터 표시와 항목별 경고등 on표시, 전체 경고등 on표시의 시간 차이가 큼
+	//	- 각 항목 별 History 표시 UI : 직관적으로 보이도록 재검토 필요
+	//	- MCU - 소모품 관리 기능 : 소모품 항목별 경고 램프 점등 / 소모품관리 경고 램프 점등 각각의 갱신 타이밍을 동일하게 가져가고자 함
+	//	- maintenance 알람
+	//	  => key on 직후, 바로 메뉴 이동 시, 알람 정보 표시 시간 다름
+	//	  => History ui 직관적으로 구성
+	//	  => 처음 교체 시, history 에 0으로 표시 되는 것 확인
+	//	  => 알람 주기 시간 재확인 요망
+	// 6. Key on 시 스마트 태그 인식 성공/실패 여부 message 처리 (기존 graphic 표시 방안 대체)
+	//	- 스마트키 초기 이미지 삭제
+	//	- 메인화면에서 안전벨트 아이콘 보여줄때 같이 스마트키 인증 이미지 보여줌
+	//	- 실패시에는 시동제한 비밀번호 입력창에 빨간색 보여지게 수정
+	// 7. 멀티미디어/도움말 터치 관련 버그 수정
+	//	- 멀티미디어 실행 -> 중앙 터치 -> ESC 키 누르면 종료 안됨
+	//		==> 중앙터치시 종료로 변경
+	//	- 멀티미디어 실행 -> MENU 키 -> LEFt 키 -> 도움말 실행 -> 중앙 터치 시 종료되지 않고 메뉴바 뜸
+	//		==> 도움말 실행 시  Multimediaflag false로 변경!
 	//////////////////////////////////////////////////////////////////////////////////////
 	
 	// TAG
@@ -545,8 +568,7 @@ public class Home extends Activity {
 	public  static final int SCREEN_STATE_MAIN_A_END 										= 0x7FFFFFFF;
 	
 	public  static final int SCREEN_STATE_EHCUERR_POPUP										= 0x80000000;
-	
-	
+
 	public  static final int UNIT_ODO_KM 			= 0;
 	public  static final int UNIT_ODO_MILE 			= 1;
 	
@@ -618,7 +640,22 @@ public class Home extends Activity {
 	public static final int SEATBELT 				= 8;
 	public static final int ENGINEAUTOSHUTDOWN 		= 9;
 
-
+	// ++, 150326 bwk
+	public static final int REQ_ERR_MACHINE_ACTIVE		= 0;
+	public static final int REQ_ERR_MACHINE_LOGGED		= 1;
+	
+	public static final int REQ_ERR_ENGINE_ACTIVE		= 2;
+	public static final int REQ_ERR_ENGINE_LOGGED		= 3;
+	
+	public static final int REQ_ERR_TM_ACTIVE			= 4;
+	public static final int REQ_ERR_TM_LOGGED			= 5;
+	
+	public static final int REQ_ERR_EHCU_ACTIVE			= 6;
+	public static final int REQ_ERR_EHCU_LOGGED			= 7;
+	
+	public static final int REQ_ERR_START				= -1;
+	public static final int REQ_ERR_END					= 15;
+	// --, 150326 bwk
 	////////////////////////////////////////////////////
 	
 	//Resource//////////////////////////////////////////
@@ -681,6 +718,7 @@ public class Home extends Activity {
 	
 	// Smart Key
 	public int SmartKeyUse;
+	public boolean SmartIconDisplay;		// ++, --, 150326 bwk
 	
 	// Sound Output
 	public int SoundState;
@@ -823,6 +861,19 @@ public class Home extends Activity {
 	// --, 150211 bwk
 	
 	public int count = 0;// ++, --, 150324 cjg
+	
+	// ++, 150326 bwk
+	int SendDTCIndex;
+	int SendSeqIndex;
+
+	int DTCTotalPacketMachineActive;
+	int DTCTotalPacketEngineActive;
+	int DTCTotalPacketTMActive;
+	int DTCTotalPacketMachineLogged;
+	int DTCTotalPacketEngineLogged;
+	int DTCTotalPacketTMLogged;
+	int DTCTotalPacketEHCULogged;	
+	// --, 150326 bwk
 	////////////////////////////////////////////////////
 	
 	//Fragment//////////////////////////////////////////
@@ -888,6 +939,8 @@ public class Home extends Activity {
 		// TODO Auto-generated method stub
 		super.onResume();
 		Log.d(TAG, "onResume");
+		// ++, 150326 bwk
+		/*
 		// ++, 150324 cjg
 		if(CommService.GetPowerOffFlag() == true){
 			if(count == 0){
@@ -898,6 +951,8 @@ public class Home extends Activity {
 			}
 		}
 		// --, 150324 cjg		
+		*/
+		// --, 150326 bwk
 		try {
 			StartCommService();
 			StopAlwaysOntopService();	// ++, --, 150324 cjg
@@ -971,6 +1026,11 @@ public class Home extends Activity {
 		// --, 150211 bwk
 		
 		SelectCameraNum = 1;	// ++, 150324 bwk
+		
+		// ++, 150326 bwk
+		SendDTCIndex = Home.REQ_ERR_START;
+		SendSeqIndex = 1;
+		// --, 150326 bwk		
 		
 		_CrashApplication = (CrashApplication)getApplicationContext();		
 	}
@@ -1082,13 +1142,16 @@ public class Home extends Activity {
 		CAN1Comm.CameraOnFlag = CAN1CommManager.STATE_CAMERA_MANUAL;
 		CAN1Comm.TxCMDToMCU(CAN1Comm.CMD_CAM, CameraOrder1);
 		imgViewCameraScreen.setClickable(true);
+		CAN1Comm.CameraCurrentOnOff = true;	// ++, --, 150326 cjg
 	}
 	public void ExcuteCamActivitybyReverseGear(){
 		CAN1Comm.CameraOnFlag = CAN1CommManager.STATE_CAMERA_REVERSEGEAR;
+		CAN1Comm.CameraCurrentOnOff = true;	// ++, --, 150326 cjg
 	}
 	public boolean ExitCam(){
 		ScreenIndex = OldScreenIndex;
 		try {
+			CAN1Comm.CameraCurrentOnOff = false;	// ++, --, 150326 cjg
 			if(CAN1Comm.CameraOnFlag == CAN1CommManager.STATE_CAMERA_MANUAL){
 				CAN1Comm.CameraOnFlag = CAN1CommManager.STATE_CAMERA_OFF;
 				CAN1Comm.TxCMDToMCU(CAN1Comm.CMD_CAM, 0xFF);
@@ -1416,7 +1479,6 @@ public class Home extends Activity {
 		Log.d(TAG,"ScreenIndex="+ScreenIndex);
 	}	
 	// --, 150309 bwk
-		
 	//Main Screen Fragment///////////////////////////////
 	public void showMainBFragment(){
 		_MainBBaseFragment = new MainBBaseFragment();
@@ -1552,7 +1614,7 @@ public class Home extends Activity {
 					// TODO: handle exception
 					Log.e(TAG,"NullPointerException");
 				}
-				Log.d(TAG,"Click FN!!!");
+				//Log.d(TAG,"Click FN!!!");
 			}
 			// ++, 150323 cjg
 			else if(Data == CAN1CommManager.ESC){
@@ -1561,12 +1623,12 @@ public class Home extends Activity {
 				} catch (NullPointerException e){
 					Log.e(TAG,"NullPointerException");
 				}
-				Log.d(TAG, "Click ESC!!!");
+				//Log.d(TAG, "Click ESC!!!");
 			}
 			// --, 150323 cjg
 			else if(Data == CAN1CommManager.POWER_OFF){
 				showEndingFragment();
-				allKillRunningApps("taeha.wheelloader.fseries_monitor.main");
+				//allKillRunningApps("taeha.wheelloader.fseries_monitor.main");	// ++, --, 150326 cjg multimedia ending 개선 
 			}
 			else if(CAN1Comm.GetScreenTopFlag() == true){
 				try {
@@ -2509,6 +2571,7 @@ public class Home extends Activity {
 				public void run() {
 					// TODO Auto-generated method stub
 					SeatBelt = CAN1CommManager.DATA_STATE_LAMP_OFF;
+					SmartIconDisplay = false;	// ++, 150326 bwk
 				}
 			});
 			

@@ -149,8 +149,8 @@
     <string name="Sudden_Change_Error_Warning">Angular speed is a sudden change, though weigh may be inaccurate. Press the Enter Key to reweigh.</string>
     <string name="Hydraulic_Oil_Temp_Low_Warning">Hydraulic oil temperature low.</string>
     <string name="Latest_Fuel_Consumed">Latest Fuel Consumed</string>
-    <string name="CloseMulti">MXPlayer is running. You want to close a MXPlayer?</string>
-    <string name="CloseMira">Miracast is running. You want to close a Miracast?</string>
+    <string name="CloseMulti">Player is running.\nYou want to close a Player?</string>
+    <string name="CloseMira">Miracast is running.\nYou want to close a Miracast?</string>
     <!-- Main End -->
     <!-- Key Start-->
     <string name="Main_Light">Main Light</string>

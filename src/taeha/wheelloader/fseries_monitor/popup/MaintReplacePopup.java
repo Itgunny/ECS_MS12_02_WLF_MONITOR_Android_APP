@@ -75,8 +75,9 @@ public class MaintReplacePopup extends ParentPopup{
 		// TODO Auto-generated method stub
 		super.dismiss();
 		ParentActivity.ScreenIndex = ParentActivity.SCREEN_STATE_MENU_MANAGEMENT_MAINTENANCE_DETAIL_TOP;
-		try {
+		try {	
 			ParentActivity._MenuBaseFragment._MaintenanceDetailFragment.CursurDisplay(3);
+			ParentActivity._MenuBaseFragment._MaintenanceDetailFragment.RestartSendCommandTimer();	// ++, --, 150326 bwk
 		} catch (NullPointerException e) {
 			// TODO: handle exception
 			Log.e(TAG,"NullPointerException dismiss");
@@ -139,6 +140,24 @@ public class MaintReplacePopup extends ParentPopup{
 		CAN1Comm.Set_MaintenanceInterval_1091_PGN61184_12(0xFF);
 		CAN1Comm.TxCANToMCU(12);
 		CAN1Comm.Set_MaintenanceCommant_1097_PGN61184_12(15);
+		// ++, 150325 bwk
+		try {
+			Thread.sleep(100);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		CAN1Comm.Set_MaintenanceCommant_1097_PGN61184_12(CAN1CommManager.MAINTETNANCE_INFORMATION_REQUEST);
+		CAN1Comm.TxCANToMCU(12);
+		try {
+			Thread.sleep(100);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		CAN1Comm.Set_MaintenanceCommant_1097_PGN61184_12(CAN1CommManager.MAINTENANCE_HISTORY_REQUEST);
+		CAN1Comm.TxCANToMCU(12);
+		// --, 150325 bwk
 		this.dismiss();
 	}	
 	public void ClickCancel(){

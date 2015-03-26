@@ -285,7 +285,7 @@ public class MaintenanceDetailFragment extends ParentFragment{
 			// TODO: handle exception
 			Log.e(TAG,"ArrayIndexOutOfBoundsException ClickOK");
 		}
-		
+
 		if(CurrentIndex > 14){
 			Log.e(TAG,"Over Length");
 			ParentActivity._MenuBaseFragment._MaintenanceFragment.setCursurIndex(1);
@@ -627,19 +627,22 @@ public class MaintenanceDetailFragment extends ParentFragment{
 				@Override
 				public void run() {
 					// TODO Auto-generated method stub
-					if(SendCommandFlag == CAN1CommManager.SEND_COMMAND_FLAG_INFO){
-						CAN1Comm.Set_MaintenanceCommant_1097_PGN61184_12(CAN1CommManager.MAINTETNANCE_INFORMATION_REQUEST);
-						CAN1Comm.Set_MaintenanceItem_1098_PGN61184_12(MaintenanceItem);
-						CAN1Comm.TxCANToMCU(12);
-						
-						SendCommandFlag = CAN1CommManager.SEND_COMMAND_FLAG_HISTORY;
-					}else{
-						CAN1Comm.Set_MaintenanceCommant_1097_PGN61184_12(CAN1CommManager.MAINTENANCE_HISTORY_REQUEST);
-						CAN1Comm.Set_MaintenanceItem_1098_PGN61184_12(MaintenanceItem);
-						CAN1Comm.TxCANToMCU(12);
-						
-						SendCommandFlag = CAN1CommManager.SEND_COMMAND_FLAG_INFO;
-								
+					if(ParentActivity.ScreenIndex == ParentActivity.SCREEN_STATE_MENU_MANAGEMENT_MAINTENANCE_DETAIL_TOP)	// ++, --, 150326 bwk
+					{
+						if(SendCommandFlag == CAN1CommManager.SEND_COMMAND_FLAG_INFO){
+							CAN1Comm.Set_MaintenanceCommant_1097_PGN61184_12(CAN1CommManager.MAINTETNANCE_INFORMATION_REQUEST);
+							CAN1Comm.Set_MaintenanceItem_1098_PGN61184_12(MaintenanceItem);
+							CAN1Comm.TxCANToMCU(12);
+							
+							SendCommandFlag = CAN1CommManager.SEND_COMMAND_FLAG_HISTORY;
+						}else{
+							CAN1Comm.Set_MaintenanceCommant_1097_PGN61184_12(CAN1CommManager.MAINTENANCE_HISTORY_REQUEST);
+							CAN1Comm.Set_MaintenanceItem_1098_PGN61184_12(MaintenanceItem);
+							CAN1Comm.TxCANToMCU(12);
+							
+							SendCommandFlag = CAN1CommManager.SEND_COMMAND_FLAG_INFO;
+									
+						}
 					}
 					
 				}
@@ -664,6 +667,12 @@ public class MaintenanceDetailFragment extends ParentFragment{
 		}
 		
 	}
+	
+	// ++, 150326 bwk
+	public void RestartSendCommandTimer(){
+		SendCommandFlag = CAN1CommManager.SEND_COMMAND_FLAG_INFO;
+	}
+	// --, 150326 bwk
 	/////////////////////////////////////////////////////////////////////
 	public void ClickLeft(){
 		switch (CursurIndex) {

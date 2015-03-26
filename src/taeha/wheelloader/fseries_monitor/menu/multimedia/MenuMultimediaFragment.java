@@ -70,14 +70,6 @@ public class MenuMultimediaFragment extends ParentFragment{
 	}
 	
 	////////////////////////////////////////////////
-    @Override
-    public void onResume() {
-           // TODO Auto-generated method stub
-           super.onResume();
-           CursurIndex = 1;
-           CursurDisplay(CursurIndex);
-    }
-
 	//Common Function//////////////////////////////
 	@Override
 	protected void InitResource() {
@@ -89,10 +81,8 @@ public class MenuMultimediaFragment extends ParentFragment{
 	protected void InitValuables() {
 		// TODO Auto-generated method stub
 		super.InitValuables();
-		
-		
-		
 	}
+	
 	@Override
 	protected void InitButtonListener() {
 		// TODO Auto-generated method stub
@@ -115,7 +105,17 @@ public class MenuMultimediaFragment extends ParentFragment{
 	@Override
 	protected void UpdateUI() {
 		// TODO Auto-generated method stub
-		
+		// ++, 150325 bwk
+		// 멀티미디어 실행 후 돌아왔을 때 포커스 잃는 문제가 있어 OnResume에 CursurIndex = 1을 넣었으나,
+		// 상단메뉴에서 Left, Right 키를 누를 경우 바로 멀티미디어에 포커스가 가는 문제가 발생하여
+		// 아래처럼 변경
+		try{
+			CursurDisplay(CursurIndex);
+		} catch (NullPointerException e) {
+			// TODO: handle exception
+			Log.e(TAG,"NullPointerException");
+		}
+		// --, 150325 bwk
 	}
 	
 	/////////////////////////////////////////////////////////////////////

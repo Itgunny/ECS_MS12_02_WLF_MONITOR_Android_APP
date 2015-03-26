@@ -1,22 +1,19 @@
 package taeha.wheelloader.fseries_monitor.main.a;
 
 
+import taeha.wheelloader.fseries_monitor.animation.GaugerpmAnimation;
+import taeha.wheelloader.fseries_monitor.main.CAN1CommManager;
+import taeha.wheelloader.fseries_monitor.main.ParentFragment;
+import taeha.wheelloader.fseries_monitor.main.R;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.ViewGroup.LayoutParams;
-import android.widget.FrameLayout;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import taeha.wheelloader.fseries_monitor.animation.BarAnimation;
-import taeha.wheelloader.fseries_monitor.animation.GaugerpmAnimation;
-import taeha.wheelloader.fseries_monitor.main.CAN1CommManager;
-import taeha.wheelloader.fseries_monitor.main.ParentFragment;
-import taeha.wheelloader.fseries_monitor.main.R;
 
 public class MainACenterFragment extends ParentFragment{
 	//CONSTANT////////////////////////////////////////
@@ -27,6 +24,7 @@ public class MainACenterFragment extends ParentFragment{
 	TextView textViewRPMData;
 	ImageButton imgbtnOption;
 	ImageView imgVeiwrpmGuage;
+	ImageView imgViewSmkIcon;		// ++, --, 150326 bwk
 	//////////////////////////////////////////////////
 	
 	//VALUABLE////////////////////////////////////////
@@ -91,6 +89,8 @@ public class MainACenterFragment extends ParentFragment{
 		textViewRPMData = (TextView)mRoot.findViewById(R.id.textView_center_main_a_rpm);
 		
 		imgbtnOption = (ImageButton)mRoot.findViewById(R.id.imageButton_center_main_a_option);
+		
+		imgViewSmkIcon = (ImageView)mRoot.findViewById(R.id.imageView_center_main_a_smkicon);	// ++, --, 150326 bwk
 	}
 	
 	protected void InitValuables() {
@@ -138,6 +138,7 @@ public class MainACenterFragment extends ParentFragment{
 		// TODO Auto-generated method stub
 		RPMDisplay(RPM);
 		IconDisplay(FaultCode,Maint);
+		SmkIconDisplay(ParentActivity.SmartIconDisplay);	// ++, --, 150326 bwk
 	}
 	/////////////////////////////////////////////////////////////////////
 	public void RPMDisplay(int Data){
@@ -180,4 +181,17 @@ public class MainACenterFragment extends ParentFragment{
 		}
 	}
 	//////////////////////////////////////////////////////////////////////
+	// ++, 150326 bwk
+	public void SmkIconDisplay(boolean flag){
+		try{
+		if(flag == false)
+			imgViewSmkIcon.setVisibility(View.INVISIBLE);
+		else
+			imgViewSmkIcon.setVisibility(View.VISIBLE);
+		} catch (NullPointerException e) {
+			// TODO: handle exception
+			Log.e(TAG,"NullPointerException");
+		}
+	}
+	// --, 150326 bwk
 }

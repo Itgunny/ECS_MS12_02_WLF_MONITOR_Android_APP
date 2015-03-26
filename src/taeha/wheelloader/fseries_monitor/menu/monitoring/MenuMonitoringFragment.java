@@ -95,14 +95,16 @@ public class MenuMonitoringFragment extends MenuBodyList_ParentFragment{
 		setListTitle2(ParentActivity.getResources().getString(string.Operation_History));
 		setListTitle3(ParentActivity.getResources().getString(string.Fault_History));
 		setListTitle4(ParentActivity.getResources().getString(string.Version_Information));
-		if(ParentActivity._CheckModel.GetMCUVersion(CAN1Comm.Get_ComponentBasicInformation_1698_PGN65330()) == CheckModel.MODEL_940
-		|| ParentActivity._CheckModel.GetMCUVersion(CAN1Comm.Get_ComponentBasicInformation_1698_PGN65330()) == CheckModel.MODEL_935){
-			setClickableList5(false);
-		}else{
-			setClickableList5(true);
-			setListTitle5(ParentActivity.getResources().getString(string.EHCU_IO_Information));
-		}
-		
+		// ++, 150325 bwk
+		// 관리자 메뉴 하위로 위치 이동
+//		if(ParentActivity._CheckModel.GetMCUVersion(CAN1Comm.Get_ComponentBasicInformation_1698_PGN65330()) == CheckModel.MODEL_940
+//		|| ParentActivity._CheckModel.GetMCUVersion(CAN1Comm.Get_ComponentBasicInformation_1698_PGN65330()) == CheckModel.MODEL_935){
+//			setClickableList5(false);
+//		}else{
+//			setClickableList5(true);
+//			setListTitle5(ParentActivity.getResources().getString(string.EHCU_IO_Information));
+//		}
+		// --, 150325 bwk
 	}
 
 	//////////////////////////////////////////////////////////////////////
@@ -158,13 +160,16 @@ public class MenuMonitoringFragment extends MenuBodyList_ParentFragment{
 	@Override
 	public void ClickList5() {
 		// TODO Auto-generated method stub
-		if(ParentActivity.AnimationRunningFlag == true)
-			return;
-		else
-			ParentActivity.StartAnimationRunningTimer();
-		ParentActivity._MenuBaseFragment.showBodyEHCUIOInfoAnimation();
-		CursurIndex = 5;
-		CursurDisplay(CursurIndex);
+		// ++, 150325 bwk
+		// 관리자 메뉴 하위로 위치 이동
+//		if(ParentActivity.AnimationRunningFlag == true)
+//			return;
+//		else
+//			ParentActivity.StartAnimationRunningTimer();
+//		ParentActivity._MenuBaseFragment.showBodyEHCUIOInfoAnimation();
+//		CursurIndex = 5;
+//		CursurDisplay(CursurIndex);
+		// --, 150325 bwk
 	}
 
 	@Override
@@ -181,12 +186,14 @@ public class MenuMonitoringFragment extends MenuBodyList_ParentFragment{
 			ParentActivity._MenuBaseFragment._MenuListLeftFragment.ClickMode();
 			break;
 		case 1:
-			if(ParentActivity._CheckModel.GetMCUVersion(CAN1Comm.Get_ComponentBasicInformation_1698_PGN65330()) == CheckModel.MODEL_940
-			|| ParentActivity._CheckModel.GetMCUVersion(CAN1Comm.Get_ComponentBasicInformation_1698_PGN65330()) == CheckModel.MODEL_935){
+			// ++, 150325 bwk
+//			if(ParentActivity._CheckModel.GetMCUVersion(CAN1Comm.Get_ComponentBasicInformation_1698_PGN65330()) == CheckModel.MODEL_940
+//			|| ParentActivity._CheckModel.GetMCUVersion(CAN1Comm.Get_ComponentBasicInformation_1698_PGN65330()) == CheckModel.MODEL_935){
 				CursurIndex = 4;
-			}else{
-				CursurIndex = 5;
-			}
+//			}else{
+//				CursurIndex = 5;
+//			}
+			// --, 150325 bwk
 			CursurDisplay(CursurIndex);
 			break;
 		case 2:
@@ -231,13 +238,15 @@ public class MenuMonitoringFragment extends MenuBodyList_ParentFragment{
 			CursurDisplay(CursurIndex);
 			break;
 		case 4:
-			if(ParentActivity._CheckModel.GetMCUVersion(CAN1Comm.Get_ComponentBasicInformation_1698_PGN65330()) == CheckModel.MODEL_940
-			|| ParentActivity._CheckModel.GetMCUVersion(CAN1Comm.Get_ComponentBasicInformation_1698_PGN65330()) == CheckModel.MODEL_935){
-				CursurIndex = 1;
-			}else{
-				CursurIndex++;
-			}
-			
+			// ++, 150325 bwk
+//			if(ParentActivity._CheckModel.GetMCUVersion(CAN1Comm.Get_ComponentBasicInformation_1698_PGN65330()) == CheckModel.MODEL_940
+//			|| ParentActivity._CheckModel.GetMCUVersion(CAN1Comm.Get_ComponentBasicInformation_1698_PGN65330()) == CheckModel.MODEL_935){
+//				CursurIndex = 1;
+//			}else{
+//				CursurIndex++;
+//			}
+			CursurIndex = 1;
+			// --, 150325 bwk
 			CursurDisplay(CursurIndex);
 			break;
 		case 5:

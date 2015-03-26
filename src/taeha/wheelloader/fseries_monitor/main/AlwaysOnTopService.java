@@ -4,6 +4,7 @@ package taeha.wheelloader.fseries_monitor.main;
 import java.util.List;
 
 import android.app.ActivityManager;
+import android.app.Instrumentation;
 import android.app.Service;
 import android.app.ActivityManager.RunningAppProcessInfo;
 import android.content.ComponentName;
@@ -12,6 +13,7 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.PixelFormat;
 import android.os.IBinder;
+import android.os.SystemClock;
 import android.util.Log;
 import android.util.TypedValue;
 import android.view.Gravity;
@@ -61,12 +63,13 @@ public class AlwaysOnTopService extends Service{
 			// TODO Auto-generated method stub
 			switch(event.getAction()){
 			case MotionEvent.ACTION_DOWN:
-				Log.d("TAG", "x : " + event.getX() + "y : " + event.getY());
+				//Log.d("TAG", "x : " + event.getX() + "y : " + event.getY());
 				if(CommService.multimediaFlag == false){
 					CommService.BackKeyEvent();
 				}else{
 					CommService.MenuKeyEvent();
-					Log.d(TAG, "org.ebook");
+					CloseMXPlayer();	// ++, --, 150326 bwk
+					//Log.d(TAG, "org.ebook");
 				}
 				
 			}
@@ -109,5 +112,33 @@ public class AlwaysOnTopService extends Service{
 		 System.gc();
 		 return false;
 	}
-}
 //--, 150324 cjg
+	// ++, 150326 bwk
+	public void CloseMXPlayer(){
+		Thread thread = new Thread(new Runnable()	{
+
+			Instrumentation inst = new Instrumentation();
+			long downTime = SystemClock.uptimeMillis();
+			long eventTime = SystemClock.uptimeMillis() + 100;
+			@Override
+			public void run() {
+				// TODO Auto-generated method stub	
+				try {
+					Thread.sleep(500);
+				} catch (InterruptedException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				MotionEvent event = MotionEvent.obtain(downTime, eventTime, MotionEvent.ACTION_DOWN, 700, 455, 0);
+				MotionEvent event2 = MotionEvent.obtain(downTime, eventTime, MotionEvent.ACTION_UP, 700, 455, 0);
+				inst.sendPointerSync(event);
+				inst.sendPointerSync(event2);
+
+			}
+		});
+
+		thread.start();
+		CommService.multimediaFlag = false;
+	}
+	// --, 150326 bwk
+}
