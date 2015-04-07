@@ -1669,6 +1669,39 @@ typedef struct
 
 
 }__attribute__((packed))  HCE_ANTI_THEFT_MODIFY_PASSWORD_STATUS_61184_25;
+// ++, 150401 bwk
+typedef struct
+{
+	unsigned char	MessageType;
+
+	unsigned char	OperationHistory_1101;
+
+	unsigned short	Reserved0;
+
+	unsigned int	Reserved1;
+
+
+}__attribute__((packed))  OPERATION_HISTORY_REQUEST_61184_31;
+typedef struct
+{
+	unsigned char	MessageType;
+
+	unsigned char	OperationHistoryType_1101;
+
+	unsigned short	_1storP_HourAverageFuelRateorDayFuelUsed_333_1405;
+	unsigned short	_2ndorS_HourAverageFuelRateorDayFuelUsed_333_1405;
+	unsigned short	_3rdorE_HourAverageFuelRateorDayFuelUsed_333_1405;
+	unsigned short	_4th_HourAverageFuelRateorDayFuelUsed_333_1405;
+	unsigned short	_5th_HourAverageFuelRateorDayFuelUsed_333_1405;
+	unsigned short	_6th_HourAverageFuelRateorDayFuelUsed_333_1405;
+	unsigned short	_7th_HourAverageFuelRateorDayFuelUsed_333_1405;
+	unsigned short	_8th_HourAverageFuelRate_333;
+	unsigned short	_9th_HourAverageFuelRate_333;
+	unsigned short	_10th_HourAverageFuelRate_333;
+	unsigned short	_11th_HourAverageFuelRate_333;
+	unsigned short	_12th_HourAverageFuelRate_333;
+}__attribute__((packed))  AVERAGE_FUEL_RATE_HISTORY_61184_33;
+// --, 150401 bwk
 typedef struct
 {
 	unsigned char	MessageType;
@@ -2261,9 +2294,15 @@ typedef struct
 	unsigned char	EcoGaugeStatus_1305:4;							// HCESPN : 1305
 	unsigned char 	Reserved0:4;
 
+	// ++, 150331 bwk
+	#if 0
 	unsigned short	CurrentFuelRate;
-
 	unsigned short	AverageFuelRate;
+	#else
+	unsigned short	AverageFuelRate_333;
+	unsigned short	ADaysFuelUsed_1405;
+	#endif
+	// --, 150331 bwk
 }__attribute__((packed))  FUEL_INFORMATION_ECO_GAUGE_65390;
 typedef struct
 {
@@ -2445,6 +2484,19 @@ typedef struct
 	unsigned char	DTC_5[3];
 
 }__attribute__((packed))  DTC_INFORMATION_TYPE1_65438;
+// ++, 150327 bwk
+typedef struct
+{
+	unsigned char	Front_Axle_Oil_Temperature_577;
+	unsigned char	Rear_Axle_Oil_Temperature_578;
+	unsigned char	Front_Axle_Oil_Temp_Warning_580:2;
+	unsigned char	Rear_Axle_Oil_Temp_Warning_581:2;
+	unsigned char	Reserved0:4;
+	unsigned char	Reserved1;
+
+	unsigned int	Reserved2;
+}__attribute__((packed))  AXLE_STATUS_65449;
+// --, 150327 bwk
 typedef struct
 {
 	unsigned char	WeighingSystemAccumulationMode_1941:2;

@@ -6,6 +6,7 @@ import android.app.Fragment;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
@@ -16,11 +17,15 @@ import taeha.wheelloader.fseries_monitor.animation.BarAnimation;
 import taeha.wheelloader.fseries_monitor.animation.ImageViewYAxisFlipAnimation;
 import taeha.wheelloader.fseries_monitor.animation.TextViewXAxisFlipAnimation;
 import taeha.wheelloader.fseries_monitor.main.CAN1CommManager;
+import taeha.wheelloader.fseries_monitor.main.CheckModel;
 import taeha.wheelloader.fseries_monitor.main.Home;
+import taeha.wheelloader.fseries_monitor.main.LongPressChecker;
 import taeha.wheelloader.fseries_monitor.main.ParentFragment;
 import taeha.wheelloader.fseries_monitor.main.R;
 import taeha.wheelloader.fseries_monitor.main.R.color;
 import taeha.wheelloader.fseries_monitor.main.R.string;
+import android.view.View.OnTouchListener;
+import taeha.wheelloader.fseries_monitor.main.LongPressChecker.OnLongPressListener;
 
 public class MainALeftMainFragment extends ParentFragment{
 	//CONSTANT////////////////////////////////////////
@@ -70,11 +75,18 @@ public class MainALeftMainFragment extends ParentFragment{
 	int Battery;
 	int TMOil;
 	int Coolant;
-	
+	// ++, 150329 bwk
+	int FrontAxleTemp;
+	int RearAxleTemp;
+	// --, 150329 bwk	
 	int HYDHighWarning;
 	int BatteryLowWarning;
 	int TMOilHighWarning;
 	int CoolantHighWarning;
+	// ++, 150329 bwk
+	int FrontAxleTempHighWarning;
+	int RearAxleTempHighWarning;
+	// --, 150329 bwk		
 	
 	int WeightInfoDataCurrent;
 	int WeightInfoDataDay1;
@@ -92,7 +104,6 @@ public class MainALeftMainFragment extends ParentFragment{
 	int WeighingSystemError_HydraulicOilTemperature;
 	
 	int AverageFuelRate;
-	int CurrentFuelRate;
 	int LastestConsumed;
 	
 	int EcoGaugeLevel;
@@ -108,6 +119,7 @@ public class MainALeftMainFragment extends ParentFragment{
 	TextViewXAxisFlipAnimation	FuelTitleAnimation;
 	
 	public BarAnimation			_EcoGaugeAnimation;
+	public LongPressChecker     mLongPressChecker;	// ++, --, 150406 cjg
 	///////////////////////////////////////////////////
 	
 	//TEST////////////////////////////////////////////
@@ -175,10 +187,7 @@ public class MainALeftMainFragment extends ParentFragment{
 	protected void InitValuables() {
 		// TODO Auto-generated method stub
 		super.InitValuables();
-		
-		Log.d(TAG, "ParentActivity.OldScreenIndex"+ParentActivity.OldScreenIndex);
-		Log.d(TAG, "ParentActivity.ScreenIndex"+ParentActivity.ScreenIndex);
-		
+	
 		UpperStatusIconAnimation = new ImageViewYAxisFlipAnimation(ParentActivity);
 		LowerStatusIconAnimation = new ImageViewYAxisFlipAnimation(ParentActivity);
 		WeighingUpperStatusIconAnimation = new ImageViewYAxisFlipAnimation(ParentActivity);
@@ -220,15 +229,51 @@ public class MainALeftMainFragment extends ParentFragment{
 			  		ClickMachineStatus();
 			}
 		});
+		// ++, 150406 cjg
+//		imgbtnFuel.setOnClickListener(new View.OnClickListener() {
+//			
+//			@Override
+//			public void onClick(View v) {
+//				// TODO Auto-generated method stub
+//				if(ClickFlag == true)
+//					ClickFuel();
+//			}
+//		});
 		imgbtnFuel.setOnClickListener(new View.OnClickListener() {
 			
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
-				if(ClickFlag == true)
-					ClickFuel();
+				if(mLongPressChecker.getLongPressed() == false){
+					if(ClickFlag == true)
+						ClickFuel();
+				}
 			}
 		});
+		imgbtnFuel.setOnTouchListener( new OnTouchListener() {
+			@Override
+			public boolean onTouch(View v, MotionEvent event) {
+				// TODO Auto-generated method stub
+				mLongPressChecker.deliverMotionEvent(v, event);
+				return false;
+			}
+		});
+
+		mLongPressChecker = new LongPressChecker(ParentActivity);
+		mLongPressChecker.setOnLongPressListener( new OnLongPressListener() {
+			@Override
+			public void onLongPressed() {
+//				Log.d(TAG, "Long Pressed");
+				imgbtnFuel.setBackgroundResource(R.drawable.main_a_default_fuel_n);
+				if(ParentActivity.FuelIndex == CAN1CommManager.DATA_STATE_AVERAGE_FUEL_RATE)
+					CAN1Comm.Set_OperationHistory_1101_PGN61184_31(CAN1CommManager.DATA_STATE_AVERAGE_FUEL_RATE_INFO_CLEAR);
+				else if(ParentActivity.FuelIndex == CAN1CommManager.DATA_STATE_LATEST_FUEL_CONSUMED)
+					CAN1Comm.Set_OperationHistory_1101_PGN61184_31(CAN1CommManager.DATA_STATE_A_DAYS_FUEL_USED_CLEAR);
+				CAN1Comm.TxCANToMCU(31);
+				CAN1Comm.Set_OperationHistory_1101_PGN61184_31(0xFF);
+			}
+		});
+		// --, 150406 cjg
 	}
 
 	@Override
@@ -238,10 +283,18 @@ public class MainALeftMainFragment extends ParentFragment{
 		Battery = CAN1Comm.Get_BatteryVoltage_705_PGN65431();
 		Coolant = CAN1Comm.Get_EngineCoolantTemperature_304_PGN65431();
 		TMOil = CAN1Comm.Get_TransmissionOilTemperature_536_PGN65431();
+		// ++, 150329 bwk
+		FrontAxleTemp = CAN1Comm.Get_Front_Axle_Oil_Temperature_577_PGN65449();
+		RearAxleTemp = CAN1Comm.Get_Rear_Axle_Oil_Temperature_578_PGN65449();
+		// --, 150329 bwk
 		HYDHighWarning = CAN1Comm.Get_HydraulicOilTemperatureHigh_102_PGN65427();
 		BatteryLowWarning = CAN1Comm.Get_BatteryVoltageLow_706_PGN65427();
 		CoolantHighWarning = CAN1Comm.Get_EngineCoolantTemperatureHigh_305_PGN65427();
 		TMOilHighWarning = CAN1Comm.Get_TransmissionOilTemperatureHigh_537_PGN65427();
+		// ++, 150329 bwk
+		FrontAxleTempHighWarning = CAN1Comm.Get_Front_Axle_Oil_Temp_Warning_580_PGN65449();
+		RearAxleTempHighWarning = CAN1Comm.Get_Rear_Axle_Oil_Temp_Warning_581_PGN65449();
+		// --, 150329 bwk
 		
 		WeightInfoDataDay1 = CAN1Comm.Get_ADayBeforeWeight_1916_PGN65452();
 		WeightInfoDataToday = CAN1Comm.Get_TodayWeight_1915_PGN65450();
@@ -257,9 +310,8 @@ public class MainALeftMainFragment extends ParentFragment{
 		WeighingSystemError_BucketFullIn = CAN1Comm.Get_WeighingSystemError_BucketFullIn_1943_PGN65450();
 		WeighingSystemError_HydraulicOilTemperature = CAN1Comm.Get_WeighingSystemError_HydraulicOilTemperature_1944_PGN65450();
 		
-		AverageFuelRate = CAN1Comm.Get_AverageFuelRate_PGN65390();
-		CurrentFuelRate = CAN1Comm.Get_CurrentFuelRate_PGN65390();
-		LastestConsumed = 0;
+		AverageFuelRate = CAN1Comm.Get_AverageFuelRate_333_PGN65390();
+		LastestConsumed = CAN1Comm.Get_ADaysFuelUsed_1405_PGN65390();
 		
 		EcoGaugeLevel = CAN1Comm.Get_EcoGaugeLevel_1304_PGN65390();
 		EcoGaugeStatus = CAN1Comm.Get_EcoGaugeStatus_1305_PGN65390();
@@ -271,7 +323,7 @@ public class MainALeftMainFragment extends ParentFragment{
 		try {
 			UpperLowerDisplay(ParentActivity.MachineStatusUpperIndex,ParentActivity.MachineStatusLowerIndex);
 			FuelTitleDisplay(ParentActivity.FuelIndex);
-			FuelDataDisplay(ParentActivity.FuelIndex,AverageFuelRate,CurrentFuelRate,LastestConsumed);
+			FuelDataDisplay(ParentActivity.FuelIndex,AverageFuelRate,LastestConsumed);
 			EcoGaugeDisplay(EcoGaugeLevel,EcoGaugeStatus);
 		} catch (IllegalStateException e) {
 			// TODO: handle exception
@@ -311,8 +363,53 @@ public class MainALeftMainFragment extends ParentFragment{
 			LayoutWeighingUpper.setVisibility(View.GONE);
 			UpperCoolantDisplay(imgViewNormalUpperIcon,textViewNormalUpperData,textViewNormalUpperUnit,Coolant,ParentActivity.UnitTemp);
 			break;
+		// ++, 150327 bwk
+		case CAN1CommManager.DATA_STATE_MACHINESTATUS_FRONTAXLE:
+			if(ParentActivity._CheckModel.GetMCUVersion(CAN1Comm.Get_ComponentBasicInformation_1698_PGN65330()) == CheckModel.MODEL_955
+			|| ParentActivity._CheckModel.GetMCUVersion(CAN1Comm.Get_ComponentBasicInformation_1698_PGN65330()) == CheckModel.MODEL_955TM
+			|| ParentActivity._CheckModel.GetMCUVersion(CAN1Comm.Get_ComponentBasicInformation_1698_PGN65330()) == CheckModel.MODEL_960
+			|| ParentActivity._CheckModel.GetMCUVersion(CAN1Comm.Get_ComponentBasicInformation_1698_PGN65330()) == CheckModel.MODEL_960TM
+			|| ParentActivity._CheckModel.GetMCUVersion(CAN1Comm.Get_ComponentBasicInformation_1698_PGN65330()) == CheckModel.MODEL_965
+			|| ParentActivity._CheckModel.GetMCUVersion(CAN1Comm.Get_ComponentBasicInformation_1698_PGN65330()) == CheckModel.MODEL_965TM
+			|| ParentActivity._CheckModel.GetMCUVersion(CAN1Comm.Get_ComponentBasicInformation_1698_PGN65330()) == CheckModel.MODEL_970
+			|| ParentActivity._CheckModel.GetMCUVersion(CAN1Comm.Get_ComponentBasicInformation_1698_PGN65330()) == CheckModel.MODEL_970TM
+			|| ParentActivity._CheckModel.GetMCUVersion(CAN1Comm.Get_ComponentBasicInformation_1698_PGN65330()) == CheckModel.MODEL_980
+			|| ParentActivity._CheckModel.GetMCUVersion(CAN1Comm.Get_ComponentBasicInformation_1698_PGN65330()) == CheckModel.MODEL_980TM)
+			{
+				LayoutNormalUpper.setVisibility(View.VISIBLE);
+				LayoutWeighingUpper.setVisibility(View.GONE);
+				UpperFrontAxleDisplay(imgViewNormalUpperIcon,textViewNormalUpperData,textViewNormalUpperUnit,FrontAxleTemp,ParentActivity.UnitTemp);
+			}
+			else
+			{
+				ParentActivity.MachineStatusUpperIndex= CAN1CommManager.DATA_STATE_MACHINESTATUS_NOSELECT;
+				LayoutNormalUpper.setVisibility(View.GONE);
+				LayoutWeighingUpper.setVisibility(View.GONE);
+			}
+			break;
+		case CAN1CommManager.DATA_STATE_MACHINESTATUS_REARAXLE:
+			if(ParentActivity._CheckModel.GetMCUVersion(CAN1Comm.Get_ComponentBasicInformation_1698_PGN65330()) == CheckModel.MODEL_965
+			|| ParentActivity._CheckModel.GetMCUVersion(CAN1Comm.Get_ComponentBasicInformation_1698_PGN65330()) == CheckModel.MODEL_965TM
+			|| ParentActivity._CheckModel.GetMCUVersion(CAN1Comm.Get_ComponentBasicInformation_1698_PGN65330()) == CheckModel.MODEL_970
+			|| ParentActivity._CheckModel.GetMCUVersion(CAN1Comm.Get_ComponentBasicInformation_1698_PGN65330()) == CheckModel.MODEL_970TM
+			|| ParentActivity._CheckModel.GetMCUVersion(CAN1Comm.Get_ComponentBasicInformation_1698_PGN65330()) == CheckModel.MODEL_980
+			|| ParentActivity._CheckModel.GetMCUVersion(CAN1Comm.Get_ComponentBasicInformation_1698_PGN65330()) == CheckModel.MODEL_980TM)
+			{
+				LayoutNormalUpper.setVisibility(View.VISIBLE);
+				LayoutWeighingUpper.setVisibility(View.GONE);
+				UpperRearAxleDisplay(imgViewNormalUpperIcon,textViewNormalUpperData,textViewNormalUpperUnit,RearAxleTemp,ParentActivity.UnitTemp);
+			}
+			else
+			{
+				ParentActivity.MachineStatusUpperIndex= CAN1CommManager.DATA_STATE_MACHINESTATUS_NOSELECT;
+				LayoutNormalUpper.setVisibility(View.GONE);
+				LayoutWeighingUpper.setVisibility(View.GONE);
+			}
+			break;
+		// --, 150327 bwk
+			
 		case CAN1CommManager.DATA_STATE_MACHINESTATUS_WEIGHING:
-			LayoutNormalUpper.setVisibility(View.GONE);
+			LayoutNormalUpper.setVisibility(View.GONE);	
 			LayoutWeighingUpper.setVisibility(View.VISIBLE);
 			WeighingUpperDisplay(WeighingSystemError_BoomLiftSpeed,WeighingSystemError_BucketFullIn,WeighingSystemError_HydraulicOilTemperature,
 					WeighingDisplayMode,WeightInfoDataCurrent,WeightInfoDataDay1,WeightInfoDataToday,WeightInfoDataTotalA,WeightInfoDataTotalB,WeightInfoDataTotalC,
@@ -343,6 +440,50 @@ public class MainALeftMainFragment extends ParentFragment{
 			LayoutWeighingLower.setVisibility(View.GONE);
 			LowerCoolantDisplay(imgViewNormalLowerIcon,textViewNormalLowerData,textViewNormalLowerUnit,Coolant,ParentActivity.UnitTemp);
 			break;
+		// ++, 150329 bwk
+		case CAN1CommManager.DATA_STATE_MACHINESTATUS_FRONTAXLE:
+			if(ParentActivity._CheckModel.GetMCUVersion(CAN1Comm.Get_ComponentBasicInformation_1698_PGN65330()) == CheckModel.MODEL_955
+			|| ParentActivity._CheckModel.GetMCUVersion(CAN1Comm.Get_ComponentBasicInformation_1698_PGN65330()) == CheckModel.MODEL_955TM
+			|| ParentActivity._CheckModel.GetMCUVersion(CAN1Comm.Get_ComponentBasicInformation_1698_PGN65330()) == CheckModel.MODEL_960
+			|| ParentActivity._CheckModel.GetMCUVersion(CAN1Comm.Get_ComponentBasicInformation_1698_PGN65330()) == CheckModel.MODEL_960TM
+			|| ParentActivity._CheckModel.GetMCUVersion(CAN1Comm.Get_ComponentBasicInformation_1698_PGN65330()) == CheckModel.MODEL_965
+			|| ParentActivity._CheckModel.GetMCUVersion(CAN1Comm.Get_ComponentBasicInformation_1698_PGN65330()) == CheckModel.MODEL_965TM
+			|| ParentActivity._CheckModel.GetMCUVersion(CAN1Comm.Get_ComponentBasicInformation_1698_PGN65330()) == CheckModel.MODEL_970
+			|| ParentActivity._CheckModel.GetMCUVersion(CAN1Comm.Get_ComponentBasicInformation_1698_PGN65330()) == CheckModel.MODEL_970TM
+			|| ParentActivity._CheckModel.GetMCUVersion(CAN1Comm.Get_ComponentBasicInformation_1698_PGN65330()) == CheckModel.MODEL_980
+			|| ParentActivity._CheckModel.GetMCUVersion(CAN1Comm.Get_ComponentBasicInformation_1698_PGN65330()) == CheckModel.MODEL_980TM)
+			{
+				LayoutNormalLower.setVisibility(View.VISIBLE);
+				LayoutWeighingLower.setVisibility(View.GONE);
+				LowerFrontAxleDisplay(imgViewNormalLowerIcon,textViewNormalLowerData,textViewNormalLowerUnit,FrontAxleTemp,ParentActivity.UnitTemp);
+			}
+			else
+			{
+				ParentActivity.MachineStatusLowerIndex= CAN1CommManager.DATA_STATE_MACHINESTATUS_NOSELECT;
+				LayoutNormalLower.setVisibility(View.GONE);
+				LayoutWeighingLower.setVisibility(View.GONE);
+			}
+			break;
+		case CAN1CommManager.DATA_STATE_MACHINESTATUS_REARAXLE:
+			if(ParentActivity._CheckModel.GetMCUVersion(CAN1Comm.Get_ComponentBasicInformation_1698_PGN65330()) == CheckModel.MODEL_965
+			|| ParentActivity._CheckModel.GetMCUVersion(CAN1Comm.Get_ComponentBasicInformation_1698_PGN65330()) == CheckModel.MODEL_965TM
+			|| ParentActivity._CheckModel.GetMCUVersion(CAN1Comm.Get_ComponentBasicInformation_1698_PGN65330()) == CheckModel.MODEL_970
+			|| ParentActivity._CheckModel.GetMCUVersion(CAN1Comm.Get_ComponentBasicInformation_1698_PGN65330()) == CheckModel.MODEL_970TM
+			|| ParentActivity._CheckModel.GetMCUVersion(CAN1Comm.Get_ComponentBasicInformation_1698_PGN65330()) == CheckModel.MODEL_980
+			|| ParentActivity._CheckModel.GetMCUVersion(CAN1Comm.Get_ComponentBasicInformation_1698_PGN65330()) == CheckModel.MODEL_980TM)
+			{
+				LayoutNormalLower.setVisibility(View.VISIBLE);
+				LayoutWeighingLower.setVisibility(View.GONE);
+				LowerRearAxleDisplay(imgViewNormalLowerIcon,textViewNormalLowerData,textViewNormalLowerUnit,RearAxleTemp,ParentActivity.UnitTemp);
+			}
+			else
+			{
+				ParentActivity.MachineStatusLowerIndex= CAN1CommManager.DATA_STATE_MACHINESTATUS_NOSELECT;
+				LayoutNormalLower.setVisibility(View.GONE);
+				LayoutWeighingLower.setVisibility(View.GONE);
+			}
+			break;
+		// --, 150329 bwk						
 		case CAN1CommManager.DATA_STATE_MACHINESTATUS_WEIGHING:
 			LayoutNormalLower.setVisibility(View.GONE);
 			LayoutWeighingLower.setVisibility(View.VISIBLE);
@@ -420,6 +561,40 @@ public class MainALeftMainFragment extends ParentFragment{
 		}
 		BatteryDisplay(textData,textUnit,Data);
 	}
+	// ++, 150329 bwk
+	public void UpperFrontAxleDisplay(ImageView imgIcon, TextView textData, TextView textUnit, int Data, int Unit){
+		if(FrontAxleTempHighWarning == CAN1CommManager.DATA_STATE_LAMP_ON){
+			UpperStatusIconAnimation.FlipAnimation(imgIcon, R.drawable.main_default_monitoring_icon_front_axl_red);
+		}else{
+			UpperStatusIconAnimation.FlipAnimation(imgIcon, R.drawable.main_default_monitoring_icon_front_axl);
+		}
+		AxleDisplay(textData,textUnit,Data,Unit);
+	}
+	public void LowerFrontAxleDisplay(ImageView imgIcon, TextView textData, TextView textUnit, int Data, int Unit){
+		if(FrontAxleTempHighWarning == CAN1CommManager.DATA_STATE_LAMP_ON){
+			LowerStatusIconAnimation.FlipAnimation(imgIcon, R.drawable.main_default_monitoring_icon_front_axl_red);
+		}else{
+			LowerStatusIconAnimation.FlipAnimation(imgIcon, R.drawable.main_default_monitoring_icon_front_axl);
+		}
+		AxleDisplay(textData,textUnit,Data,Unit);
+	}
+	public void UpperRearAxleDisplay(ImageView imgIcon, TextView textData, TextView textUnit, int Data, int Unit){
+		if(FrontAxleTempHighWarning == CAN1CommManager.DATA_STATE_LAMP_ON){
+			UpperStatusIconAnimation.FlipAnimation(imgIcon, R.drawable.main_default_monitoring_icon_rear_axle_red);
+		}else{
+			UpperStatusIconAnimation.FlipAnimation(imgIcon, R.drawable.main_default_monitoring_icon_rear_axle);
+		}
+		AxleDisplay(textData,textUnit,Data,Unit);
+	}
+	public void LowerRearAxleDisplay(ImageView imgIcon, TextView textData, TextView textUnit, int Data, int Unit){
+		if(FrontAxleTempHighWarning == CAN1CommManager.DATA_STATE_LAMP_ON){
+			LowerStatusIconAnimation.FlipAnimation(imgIcon, R.drawable.main_default_monitoring_icon_rear_axle_red);
+		}else{
+			LowerStatusIconAnimation.FlipAnimation(imgIcon, R.drawable.main_default_monitoring_icon_rear_axle);
+		}
+		AxleDisplay(textData,textUnit,Data,Unit);
+	}
+	// --, 150329 bwk
 	public void HYDDisplay(TextView textData, TextView textUnit, int Data, int Unit){
 		textData.setText(ParentActivity.GetTemp(Data,Unit));
 		if(Unit == ParentActivity.UNIT_TEMP_F){
@@ -448,6 +623,16 @@ public class MainALeftMainFragment extends ParentFragment{
 		textData.setText(ParentActivity.GetBattery(Data));
 		textUnit.setText(ParentActivity.getResources().getString(string.V));
 	}
+	// ++, 150329 bwk
+	public void AxleDisplay(TextView textData, TextView textUnit, int Data, int Unit){
+		textData.setText(ParentActivity.GetTemp(Data,Unit));
+		if(Unit == ParentActivity.UNIT_TEMP_F){
+			textUnit.setText(ParentActivity.getResources().getString(string.F));
+		}else{
+			textUnit.setText(ParentActivity.getResources().getString(string.C));
+		}
+	}
+	// --, 150329 bwk
 
 	public void WeighingUpperDisplay(int BoomLiftSpeedError, int BucketFullInError, int HydOilTempError, int DisplayIndex, int Current, int Day1, int Today, int TotalA, int TotalB, int TotalC, int Unit){
 		if(ParentActivity.UnitWeight == ParentActivity.UNIT_WEIGHT_LB){
@@ -543,24 +728,24 @@ public class MainALeftMainFragment extends ParentFragment{
 	}
 	public void FuelTitleDisplay(int _Index){
 		switch (_Index) {
-		case CAN1CommManager.DATA_STATE_CURRENT_FUEL_RATE:
-			FuelTitleAnimation.FlipAnimation(textViewFuelTitle,getResources().getString(string.Current_Fuel_Rate));
+		case CAN1CommManager.DATA_STATE_FUEL_NOSELECT:
+			FuelTitleAnimation.FlipAnimation(textViewFuelTitle,"");
 			break;
 		case CAN1CommManager.DATA_STATE_AVERAGE_FUEL_RATE:
-			FuelTitleAnimation.FlipAnimation(textViewFuelTitle,getResources().getString(string.Average_Fuel_Rate));
+			FuelTitleAnimation.FlipAnimation(textViewFuelTitle,getResources().getString(string.AVERAGE_FUEL_RATE));
 			break;
 		case CAN1CommManager.DATA_STATE_LATEST_FUEL_CONSUMED:
-			FuelTitleAnimation.FlipAnimation(textViewFuelTitle,getResources().getString(string.Latest_Fuel_Consumed));
+			FuelTitleAnimation.FlipAnimation(textViewFuelTitle,getResources().getString(string.LATEST_FUEL_CONSUMED));
 			break;
 		default:
 			break;
 		}
 	}
-	public void FuelDataDisplay(int _Index, int CurrentFuel, int AverageFuel, int LatestConsumed){
+	public void FuelDataDisplay(int _Index, int AverageFuel, int LatestConsumed){
 		switch (_Index) {
-		case CAN1CommManager.DATA_STATE_CURRENT_FUEL_RATE:
-			textViewFuelData.setText(ParentActivity.GetFuelRateString(CurrentFuel));
-			textViewFuelUnit.setText(ParentActivity.getResources().getString(string.l_h));
+		case CAN1CommManager.DATA_STATE_FUEL_NOSELECT:
+			textViewFuelData.setText("");
+			textViewFuelUnit.setText("");
 			break;
 		case CAN1CommManager.DATA_STATE_AVERAGE_FUEL_RATE:
 			textViewFuelData.setText(ParentActivity.GetFuelRateString(AverageFuel));
@@ -588,9 +773,11 @@ public class MainALeftMainFragment extends ParentFragment{
 			//case CAN1CommManager.DATA_STATE_ECO_RED:
 			//	imgViewEcoBar.setImageResource(R.drawable.main_center_eco_red_all);
 			//	break;
-			case CAN1CommManager.DATA_STATE_ECO_WHITE:
-				imgViewEcoBar.setImageResource(R.drawable.main_center_eco_white_all);
-				break;
+			// ++, 150402 bwk
+//			case CAN1CommManager.DATA_STATE_ECO_WHITE:
+//				imgViewEcoBar.setImageResource(R.drawable.main_center_eco_white_all);
+//				break;
+			// --, 150402 bwk
 		}
 		
 		if(_level == 0xFF){
@@ -608,8 +795,7 @@ public class MainALeftMainFragment extends ParentFragment{
 	}
 	
 	public void ClickMachineStatus(){
-		ShowSelectAnimation(0, ParentActivity._MainABaseFragment._MainACenterMachineStatusFragment,
-				ParentActivity._MainABaseFragment._MainALeftUpMachineStatusSelectFragment);
+		ShowSelectAnimation(0);
 	}
 
 	public void ClickWeighingError(View v){
@@ -640,20 +826,25 @@ public class MainALeftMainFragment extends ParentFragment{
 				showLampPopup(DATA_STATE_CURRENT_WEIHGING_RESULT_BUCKETFULLIN);
 				popupIndicator.show(v);
 			}else{
-				ShowSelectAnimation(0, ParentActivity._MainABaseFragment._MainACenterMachineStatusFragment,
-						ParentActivity._MainABaseFragment._MainALeftUpMachineStatusSelectFragment);
+				// ++, 150330 bwk
+//				ShowSelectAnimation(0, ParentActivity._MainABaseFragment._MainACenterMachineStatusFragment,
+//						ParentActivity._MainABaseFragment._MainALeftUpMachineStatusSelectFragment);
+				ClickMachineStatus();
+				// --, 150330 bwk
 			}
 		}else{
-			ShowSelectAnimation(0, ParentActivity._MainABaseFragment._MainACenterMachineStatusFragment,
-					ParentActivity._MainABaseFragment._MainALeftUpMachineStatusSelectFragment);
+			// ++, 150330 bwk
+//			ShowSelectAnimation(0, ParentActivity._MainABaseFragment._MainACenterMachineStatusFragment,
+//					ParentActivity._MainABaseFragment._MainALeftUpMachineStatusSelectFragment);
+			ClickMachineStatus();
+			// --, 150330 bwk
 		}
 	}
 	public void ClickFuel(){
-		ShowSelectAnimation(1, ParentActivity._MainABaseFragment._MainACenterFuelFragment, 
-				ParentActivity._MainABaseFragment._MainALeftDownFuelSelectFragment);
+		ShowSelectAnimation(1);
 	}
 
-	public void ShowSelectAnimation(int index, Fragment _centerfragment, Fragment _leftfragment){
+	public void ShowSelectAnimation(int index){
 		if(ParentActivity.AnimationRunningFlag == true)
 			return;
 		else
@@ -661,16 +852,49 @@ public class MainALeftMainFragment extends ParentFragment{
 		
 		if(index == 0){
 			ParentActivity._MainABaseFragment._MainACenterMachineStatusFragment = new MainACenterMachineStatusFragment();
-			ParentActivity._MainABaseFragment._MainALeftUpMachineStatusSelectFragment = new MainALeftUpMachineStatusSelectFragment();
-		
+			// ++, 150330 bwk
+			//ParentActivity._MainABaseFragment._MainALeftUpMachineStatusSelectFragment1 = new MainALeftUpMachineStatusSelectFragment1();
+			if(ParentActivity._CheckModel.GetMCUVersion(CAN1Comm.Get_ComponentBasicInformation_1698_PGN65330()) == CheckModel.MODEL_965
+					|| ParentActivity._CheckModel.GetMCUVersion(CAN1Comm.Get_ComponentBasicInformation_1698_PGN65330()) == CheckModel.MODEL_965TM
+					|| ParentActivity._CheckModel.GetMCUVersion(CAN1Comm.Get_ComponentBasicInformation_1698_PGN65330()) == CheckModel.MODEL_970
+					|| ParentActivity._CheckModel.GetMCUVersion(CAN1Comm.Get_ComponentBasicInformation_1698_PGN65330()) == CheckModel.MODEL_970TM
+					|| ParentActivity._CheckModel.GetMCUVersion(CAN1Comm.Get_ComponentBasicInformation_1698_PGN65330()) == CheckModel.MODEL_980
+					|| ParentActivity._CheckModel.GetMCUVersion(CAN1Comm.Get_ComponentBasicInformation_1698_PGN65330()) == CheckModel.MODEL_980TM)
+				ParentActivity._MainABaseFragment._MainALeftUpMachineStatusSelectFragment3 = new MainALeftUpMachineStatusSelectFragment3();
+			else if(ParentActivity._CheckModel.GetMCUVersion(CAN1Comm.Get_ComponentBasicInformation_1698_PGN65330()) == CheckModel.MODEL_955
+					|| ParentActivity._CheckModel.GetMCUVersion(CAN1Comm.Get_ComponentBasicInformation_1698_PGN65330()) == CheckModel.MODEL_955TM
+					|| ParentActivity._CheckModel.GetMCUVersion(CAN1Comm.Get_ComponentBasicInformation_1698_PGN65330()) == CheckModel.MODEL_960
+					|| ParentActivity._CheckModel.GetMCUVersion(CAN1Comm.Get_ComponentBasicInformation_1698_PGN65330()) == CheckModel.MODEL_960TM)
+				ParentActivity._MainABaseFragment._MainALeftUpMachineStatusSelectFragment2 = new MainALeftUpMachineStatusSelectFragment2();
+			else
+				ParentActivity._MainABaseFragment._MainALeftUpMachineStatusSelectFragment1 = new MainALeftUpMachineStatusSelectFragment1();
+			// --, 150330 bwk
+			
+			ParentActivity._MainABaseFragment._MainBodyShiftAnimation.StartShiftLeftAnimation();
+			ParentActivity._MainABaseFragment.CenterAnimation.StartChangeAnimation(ParentActivity._MainABaseFragment._MainACenterMachineStatusFragment);
+			if(ParentActivity._CheckModel.GetMCUVersion(CAN1Comm.Get_ComponentBasicInformation_1698_PGN65330()) == CheckModel.MODEL_965
+					|| ParentActivity._CheckModel.GetMCUVersion(CAN1Comm.Get_ComponentBasicInformation_1698_PGN65330()) == CheckModel.MODEL_965TM
+					|| ParentActivity._CheckModel.GetMCUVersion(CAN1Comm.Get_ComponentBasicInformation_1698_PGN65330()) == CheckModel.MODEL_970
+					|| ParentActivity._CheckModel.GetMCUVersion(CAN1Comm.Get_ComponentBasicInformation_1698_PGN65330()) == CheckModel.MODEL_970TM
+					|| ParentActivity._CheckModel.GetMCUVersion(CAN1Comm.Get_ComponentBasicInformation_1698_PGN65330()) == CheckModel.MODEL_980
+					|| ParentActivity._CheckModel.GetMCUVersion(CAN1Comm.Get_ComponentBasicInformation_1698_PGN65330()) == CheckModel.MODEL_980TM)
+				ParentActivity._MainABaseFragment.LeftChangeAnimation.StartChangeAnimation(ParentActivity._MainABaseFragment._MainALeftUpMachineStatusSelectFragment3);
+			else if(ParentActivity._CheckModel.GetMCUVersion(CAN1Comm.Get_ComponentBasicInformation_1698_PGN65330()) == CheckModel.MODEL_955
+					|| ParentActivity._CheckModel.GetMCUVersion(CAN1Comm.Get_ComponentBasicInformation_1698_PGN65330()) == CheckModel.MODEL_955TM
+					|| ParentActivity._CheckModel.GetMCUVersion(CAN1Comm.Get_ComponentBasicInformation_1698_PGN65330()) == CheckModel.MODEL_960
+					|| ParentActivity._CheckModel.GetMCUVersion(CAN1Comm.Get_ComponentBasicInformation_1698_PGN65330()) == CheckModel.MODEL_960TM)
+				ParentActivity._MainABaseFragment.LeftChangeAnimation.StartChangeAnimation(ParentActivity._MainABaseFragment._MainALeftUpMachineStatusSelectFragment2);
+			else
+				ParentActivity._MainABaseFragment.LeftChangeAnimation.StartChangeAnimation(ParentActivity._MainABaseFragment._MainALeftUpMachineStatusSelectFragment1);
+
 		}else{
 			ParentActivity._MainABaseFragment._MainACenterFuelFragment = new MainACenterFuelFragment();
 			ParentActivity._MainABaseFragment._MainALeftDownFuelSelectFragment = new MainALeftDownFuelSelectFragment();
+			
+			ParentActivity._MainABaseFragment._MainBodyShiftAnimation.StartShiftLeftAnimation();
+			ParentActivity._MainABaseFragment.CenterAnimation.StartChangeAnimation(ParentActivity._MainABaseFragment._MainACenterFuelFragment);
+			ParentActivity._MainABaseFragment.LeftChangeAnimation.StartChangeAnimation(ParentActivity._MainABaseFragment._MainALeftDownFuelSelectFragment);
 		}
-		
-		ParentActivity._MainABaseFragment._MainBodyShiftAnimation.StartShiftLeftAnimation();
-		ParentActivity._MainABaseFragment.CenterAnimation.StartChangeAnimation(_centerfragment);
-		ParentActivity._MainABaseFragment.LeftChangeAnimation.StartChangeAnimation(_leftfragment);
 
 		ParentActivity._MainABaseFragment._RightDisappearAnimation.StartAnimation();
 		ParentActivity._MainABaseFragment._RightBGDisappearAnimation.StartAnimation();

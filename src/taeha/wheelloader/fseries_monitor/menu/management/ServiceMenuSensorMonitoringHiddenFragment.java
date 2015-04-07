@@ -1,31 +1,19 @@
 package taeha.wheelloader.fseries_monitor.menu.management;
 
-import customlist.sensormonitoring.IconTextItem;
-import customlist.sensormonitoring.IconTextListAdapter;
-import taeha.wheelloader.fseries_monitor.animation.AppearAnimation;
-import taeha.wheelloader.fseries_monitor.animation.ChangeFragmentAnimation;
-import taeha.wheelloader.fseries_monitor.animation.DisappearAnimation;
-import taeha.wheelloader.fseries_monitor.animation.MainBodyShiftAnimation;
-import taeha.wheelloader.fseries_monitor.animation.LeftRightShiftAnimation;
-import taeha.wheelloader.fseries_monitor.main.Home;
 import taeha.wheelloader.fseries_monitor.main.ParentFragment;
 import taeha.wheelloader.fseries_monitor.main.R;
-import taeha.wheelloader.fseries_monitor.main.R.string;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
-import android.text.Layout;
 import android.util.Log;
 import android.view.LayoutInflater;
-import android.view.Menu;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AbsoluteLayout;
-import android.widget.FrameLayout;
 import android.widget.ImageButton;
-import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
+import customlist.sensormonitoring.IconTextItem;
+import customlist.sensormonitoring.IconTextListAdapter;
 
 public class ServiceMenuSensorMonitoringHiddenFragment extends ParentFragment{
 	//CONSTANT////////////////////////////////////////
@@ -229,7 +217,7 @@ public class ServiceMenuSensorMonitoringHiddenFragment extends ParentFragment{
 		adapter.addItem(new IconTextItem(ParentActivity.getResources().getDrawable(R.drawable.menu_management_machine_monitoring_bg_dark),ParentActivity.getResources().getDrawable(R.drawable.menu_management_machine_monitoring_bg_line)
 				,"Fan rpm", Integer.toString(FanRpm), "rpm"));
 		adapter.addItem(new IconTextItem(ParentActivity.getResources().getDrawable(R.drawable.menu_management_machine_monitoring_bg_light),ParentActivity.getResources().getDrawable(R.drawable.menu_management_machine_monitoring_bg_line)
-				, "Engine Cooling Fan Valve Current", Integer.toString(EpprCurrent), "mA"));
+				, "Engine Cooling Fan Valve Current", Integer.toString(EpprCurrent), "%"));		// ++, --, 150407 bwk HHI 요청으로 전류단위를 mA에서 %로 변경
 		adapter.notifyDataSetChanged();
 		textViewEpprValue.setText(Integer.toString(EpprCurrent));
 						

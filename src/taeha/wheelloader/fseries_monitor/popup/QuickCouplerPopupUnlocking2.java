@@ -93,14 +93,20 @@ public class QuickCouplerPopupUnlocking2 extends ParentPopup{
 		// TODO Auto-generated method stub
 		super.dismiss();
 		Log.d(TAG,"dismiss");
+		// ++, 150407 bwk
 		// ++, 150314 bwk
 		//ParentActivity.ScreenIndex = ParentActivity.SCREEN_STATE_MAIN_B_KEY_QUICKCOUPLER;
+		/*
 		if(ParentActivity.DisplayType == ParentActivity.DISPLAY_TYPE_A){
 			ParentActivity.ScreenIndex = ParentActivity.SCREEN_STATE_MAIN_B_KEY_QUICKCOUPLER;
 		}else{
 			ParentActivity.ScreenIndex = ParentActivity.SCREEN_STATE_MAIN_A_KEY_QUICKCOUPLER;
 		}
-		// --, 150314 bwk			
+		//
+		 */
+		// --, 150314 bwk
+		ParentActivity.ScreenIndex = ParentActivity.OldScreenIndex;
+		//
 		
 		CancelQuickCouplerSendTimer();
 		CAN1Comm.Set_QuickCouplerOperationStatus_3448_PGN65527(CAN1CommManager.DATA_STATE_KEY_QUICKCOUPLER_OFF);

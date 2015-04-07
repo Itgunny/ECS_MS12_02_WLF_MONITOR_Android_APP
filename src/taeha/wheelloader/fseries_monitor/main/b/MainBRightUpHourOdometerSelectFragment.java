@@ -2,6 +2,8 @@ package taeha.wheelloader.fseries_monitor.main.b;
 
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -19,12 +21,13 @@ public class MainBRightUpHourOdometerSelectFragment extends ParentFragment{
 	//////////////////////////////////////////////////
 	//RESOURCE////////////////////////////////////////
 	RadioButton radioLatestHour;
-	RadioButton radioCurrentFuel;
 	RadioButton radioTotalOdo;
 	RadioButton radioLatestOdo;
 	//////////////////////////////////////////////////
 	
 	//VALUABLE////////////////////////////////////////
+	int CursurIndex;
+	Handler HandleCursurDisplay;
 	//////////////////////////////////////////////////
 	
 	//ANIMATION///////////////////////////////////////
@@ -48,6 +51,12 @@ public class MainBRightUpHourOdometerSelectFragment extends ParentFragment{
 		InitButtonListener();
 
 		ParentActivity.ScreenIndex = ParentActivity.SCREEN_STATE_MAIN_B_RIGHTUP_HOURODMETER;
+		HandleCursurDisplay = new Handler() {
+			@Override
+			public void handleMessage(Message msg) {
+				CursurDisplay(msg.what);
+			}
+		};		
 		return mRoot;
 	}
 
@@ -71,7 +80,6 @@ public class MainBRightUpHourOdometerSelectFragment extends ParentFragment{
 	protected void InitResource() {
 		// TODO Auto-generated method stub
 		radioLatestHour = (RadioButton)mRoot.findViewById(R.id.radioButton_rightup_main_b_hourodometer_select_latesthourmeter);
-		radioCurrentFuel = (RadioButton)mRoot.findViewById(R.id.radioButton_rightup_main_b_hourodometer_select_currentfuelrate);
 		radioTotalOdo = (RadioButton)mRoot.findViewById(R.id.radioButton_rightup_main_b_hourodometer_select_totalodometer);
 		radioLatestOdo = (RadioButton)mRoot.findViewById(R.id.radioButton_rightup_main_b_hourodometer_select_latestodometer);
 	}
@@ -79,6 +87,9 @@ public class MainBRightUpHourOdometerSelectFragment extends ParentFragment{
 	protected void InitValuables() {
 		// TODO Auto-generated method stub
 		super.InitValuables();
+		
+		CursurIndex = 1;
+		CursurDisplay(CursurIndex);		
 	}
 	@Override
 	protected void InitButtonListener() {
@@ -88,15 +99,9 @@ public class MainBRightUpHourOdometerSelectFragment extends ParentFragment{
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
+				CursurIndex = 1;
+				HandleCursurDisplay.sendMessage(HandleCursurDisplay.obtainMessage(CursurIndex));
 				ClickLatestHourmeter();
-			}
-		});
-		radioCurrentFuel.setOnClickListener(new View.OnClickListener() {
-			
-			@Override
-			public void onClick(View v) {
-				// TODO Auto-generated method stub
-				ClickCurrentFuelRate();
 			}
 		});
 		radioTotalOdo.setOnClickListener(new View.OnClickListener() {
@@ -104,6 +109,8 @@ public class MainBRightUpHourOdometerSelectFragment extends ParentFragment{
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
+				CursurIndex = 2;
+				HandleCursurDisplay.sendMessage(HandleCursurDisplay.obtainMessage(CursurIndex));
 				ClickTotalOdometer();
 			}
 		});
@@ -112,6 +119,8 @@ public class MainBRightUpHourOdometerSelectFragment extends ParentFragment{
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
+				CursurIndex = 3;
+				HandleCursurDisplay.sendMessage(HandleCursurDisplay.obtainMessage(CursurIndex));
 				ClickLatestOdometer();
 			}
 		});
@@ -131,30 +140,25 @@ public class MainBRightUpHourOdometerSelectFragment extends ParentFragment{
 	/////////////////////////////////////////////////////////////////////	
 	public void HourOdometerDisplay(int Data){
 		switch (Data) {
-		case CAN1CommManager.DATA_STATE_HOURMETER_LATEST:
-			radioLatestHour.setChecked(true);
-			radioCurrentFuel.setChecked(false);
+		case CAN1CommManager.DATA_STATE_OPERATION_NOSELECT:
+			radioLatestHour.setChecked(false);
 			radioTotalOdo.setChecked(false);
 			radioLatestOdo.setChecked(false);
-
 			break;
-		case CAN1CommManager.DATA_STATE_FUELRATE_CURRENT:
-			radioLatestHour.setChecked(false);
-			radioCurrentFuel.setChecked(true);
+		case CAN1CommManager.DATA_STATE_HOURMETER_LATEST:
+			radioLatestHour.setChecked(true);
 			radioTotalOdo.setChecked(false);
 			radioLatestOdo.setChecked(false);
 
 			break;
 		case CAN1CommManager.DATA_STATE_ODOMETER_TOTAL:
 			radioLatestHour.setChecked(false);
-			radioCurrentFuel.setChecked(false);
 			radioTotalOdo.setChecked(true);
 			radioLatestOdo.setChecked(false);
 
 			break;
 		case CAN1CommManager.DATA_STATE_ODOMETER_LATEST:
 			radioLatestHour.setChecked(false);
-			radioCurrentFuel.setChecked(false);
 			radioTotalOdo.setChecked(false);
 			radioLatestOdo.setChecked(true);
 
@@ -170,14 +174,6 @@ public class MainBRightUpHourOdometerSelectFragment extends ParentFragment{
 		else
 			ParentActivity.StartAnimationRunningTimer();
 		ParentActivity.HourOdometerIndex = CAN1CommManager.DATA_STATE_HOURMETER_LATEST;
-		ParentActivity._MainBBaseFragment.showRightUptoDefaultScreenAnimation();
-	}
-	public void ClickCurrentFuelRate(){
-		if(ParentActivity.AnimationRunningFlag == true)
-			return;
-		else
-			ParentActivity.StartAnimationRunningTimer();
-		ParentActivity.HourOdometerIndex = CAN1CommManager.DATA_STATE_FUELRATE_CURRENT;
 		ParentActivity._MainBBaseFragment.showRightUptoDefaultScreenAnimation();
 	}
 	public void ClickTotalOdometer(){
@@ -204,4 +200,70 @@ public class MainBRightUpHourOdometerSelectFragment extends ParentFragment{
 		edit.commit();
 		Log.d(TAG,"SavePref");
 	}	
+	/////////////////////////////////////////////////////////////////////
+	public void ClickLeft(){
+		switch (CursurIndex) {
+		case 1:
+			CursurIndex = 3;
+			CursurDisplay(CursurIndex);
+			break;
+		case 2:
+		case 3:
+			CursurIndex--;
+			CursurDisplay(CursurIndex);
+			break;
+		default:
+			CursurIndex = 1;
+			CursurDisplay(CursurIndex);
+			break;
+		}
+	}
+	public void ClickRight(){
+		switch (CursurIndex) {
+		case 1:
+		case 2:
+			CursurIndex++;
+			CursurDisplay(CursurIndex);
+			break;
+		case 3:
+		default:
+			CursurIndex = 1;
+			CursurDisplay(CursurIndex);
+			break;
+		}
+	}
+	public void ClickEnter(){
+		switch (CursurIndex) {
+		case 1:
+			ClickLatestHourmeter();
+			break;
+		case 2:
+			ClickTotalOdometer();
+			break;
+		case 3:
+			ClickLatestOdometer();
+			break;
+		default:
+
+			break;
+		}
+	}
+	public void CursurDisplay(int Index){
+		radioLatestHour.setPressed(false);
+		radioTotalOdo.setPressed(false);
+		radioLatestOdo.setPressed(false);
+		switch (CursurIndex) {
+		case 1:
+			radioLatestHour.setPressed(true);
+			break;
+		case 2:
+			radioTotalOdo.setPressed(true);
+			break;
+		case 3:
+			radioLatestOdo.setPressed(true);
+			break;
+		default:
+			break;
+		}
+	}
 }

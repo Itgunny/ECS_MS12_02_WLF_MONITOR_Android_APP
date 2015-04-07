@@ -17,29 +17,26 @@ public class LanguageListFragment extends ParentFragment{
 	//CONSTANT////////////////////////////////////////
 	//////////////////////////////////////////////////
 	//RESOURCE////////////////////////////////////////
+	// ++, --, 150225 bwk 다국어 26개국
+	// ++, 150402 bwk
+	// 양산 사양 확정 13개국어
+	// 한국어, 영어, 독일어, 프랑스어, 스페인어, 포르투갈어, 이탈리아어, 네덜란드어, 스웨덴어, 핀란드어, 슬로바키아어, 에스토니아어, 터키어
+	// 미지원 9개 
+	// 헤브라이어, 중국어, 러시아어, 태국어, 힌디어, 몽골어, 아랍어, 페르시아어, 인도네시아어
+	// --, 1500402 bwk
 	RadioButton radioKorean;
 	RadioButton radioEnglish;
-	// ++, 150225 bwk
 	RadioButton radioGerman;
 	RadioButton radioFrench;
 	RadioButton radioSpanish;
 	RadioButton radioPortuguese;
-	RadioButton radioChinese;
-	RadioButton radioRussian;
 	RadioButton radioItalian;
 	RadioButton radioDutch;
 	RadioButton radioSwedish;
-	RadioButton radioTurkish;
+	RadioButton radioFinnish;
 	RadioButton radioSlovakian;
 	RadioButton radioEstonian;
-	RadioButton radioThai;
-	RadioButton radioHindi;
-	RadioButton radioMongolian;
-	RadioButton radioArabic;
-	RadioButton radioPersian;
-	RadioButton radioIndonesian;
-	RadioButton radioFinnish;
-	// --, 150225 bwk
+	RadioButton radioTurkish;
 	//////////////////////////////////////////////////
 	
 	//VALUABLE////////////////////////////////////////
@@ -110,21 +107,17 @@ public class LanguageListFragment extends ParentFragment{
 		radioFrench = (RadioButton)mRoot.findViewById(R.id.radioButton_menu_body_preference_Lang4);
 		radioSpanish = (RadioButton)mRoot.findViewById(R.id.radioButton_menu_body_preference_Lang5);
 		radioPortuguese = (RadioButton)mRoot.findViewById(R.id.radioButton_menu_body_preference_Lang6);
-		radioChinese = (RadioButton)mRoot.findViewById(R.id.radioButton_menu_body_preference_Lang7);
-		radioRussian = (RadioButton)mRoot.findViewById(R.id.radioButton_menu_body_preference_Lang8);
-		radioItalian = (RadioButton)mRoot.findViewById(R.id.radioButton_menu_body_preference_Lang9);
-		radioDutch = (RadioButton)mRoot.findViewById(R.id.radioButton_menu_body_preference_Lang10);
-		radioSwedish = (RadioButton)mRoot.findViewById(R.id.radioButton_menu_body_preference_Lang11);
-		radioTurkish = (RadioButton)mRoot.findViewById(R.id.radioButton_menu_body_preference_Lang12);
-		radioSlovakian = (RadioButton)mRoot.findViewById(R.id.radioButton_menu_body_preference_Lang13);
-		radioEstonian = (RadioButton)mRoot.findViewById(R.id.radioButton_menu_body_preference_Lang14);
-		radioThai = (RadioButton)mRoot.findViewById(R.id.radioButton_menu_body_preference_Lang15);
-		radioHindi = (RadioButton)mRoot.findViewById(R.id.radioButton_menu_body_preference_Lang16);
-		radioMongolian = (RadioButton)mRoot.findViewById(R.id.radioButton_menu_body_preference_Lang17);
-		radioArabic = (RadioButton)mRoot.findViewById(R.id.radioButton_menu_body_preference_Lang18);
-		radioPersian = (RadioButton)mRoot.findViewById(R.id.radioButton_menu_body_preference_Lang19);
-		radioIndonesian = (RadioButton)mRoot.findViewById(R.id.radioButton_menu_body_preference_Lang20);
-		radioFinnish = (RadioButton)mRoot.findViewById(R.id.radioButton_menu_body_preference_Lang21);
+		radioGerman = (RadioButton)mRoot.findViewById(R.id.radioButton_menu_body_preference_Lang3);
+		radioFrench = (RadioButton)mRoot.findViewById(R.id.radioButton_menu_body_preference_Lang4);
+		radioSpanish = (RadioButton)mRoot.findViewById(R.id.radioButton_menu_body_preference_Lang5);
+		radioPortuguese = (RadioButton)mRoot.findViewById(R.id.radioButton_menu_body_preference_Lang6);
+		radioItalian = (RadioButton)mRoot.findViewById(R.id.radioButton_menu_body_preference_Lang7);
+		radioDutch = (RadioButton)mRoot.findViewById(R.id.radioButton_menu_body_preference_Lang8);
+		radioSwedish = (RadioButton)mRoot.findViewById(R.id.radioButton_menu_body_preference_Lang9);
+		radioFinnish = (RadioButton)mRoot.findViewById(R.id.radioButton_menu_body_preference_Lang10);
+		radioSlovakian = (RadioButton)mRoot.findViewById(R.id.radioButton_menu_body_preference_Lang11);
+		radioEstonian = (RadioButton)mRoot.findViewById(R.id.radioButton_menu_body_preference_Lang12);
+		radioTurkish = (RadioButton)mRoot.findViewById(R.id.radioButton_menu_body_preference_Lang13);
 		// --, 150225 bwk
 	}
 
@@ -192,32 +185,12 @@ public class LanguageListFragment extends ParentFragment{
 				SetLanguage(Home.STATE_DISPLAY_LANGUAGE_PORTUGUE);
 			}
 		});	
-		radioChinese.setOnClickListener(new View.OnClickListener() {
-			
-			@Override
-			public void onClick(View v) {
-				// TODO Auto-generated method stub
-				CursurIndex = 7;
-				HandleCursurDisplay.sendMessage(HandleCursurDisplay.obtainMessage(CursurIndex));
-				SetLanguage(Home.STATE_DISPLAY_LANGUAGE_CHINESE);
-			}
-		});	
-		radioRussian.setOnClickListener(new View.OnClickListener() {
-			
-			@Override
-			public void onClick(View v) {
-				// TODO Auto-generated method stub
-				CursurIndex = 8;
-				HandleCursurDisplay.sendMessage(HandleCursurDisplay.obtainMessage(CursurIndex));
-				SetLanguage(Home.STATE_DISPLAY_LANGUAGE_RUSIAN);
-			}
-		});	
 		radioItalian.setOnClickListener(new View.OnClickListener() {
 			
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
-				CursurIndex = 9;
+				CursurIndex = 7;
 				HandleCursurDisplay.sendMessage(HandleCursurDisplay.obtainMessage(CursurIndex));
 				SetLanguage(Home.STATE_DISPLAY_LANGUAGE_ITALIAN);
 			}
@@ -227,7 +200,7 @@ public class LanguageListFragment extends ParentFragment{
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
-				CursurIndex = 10;
+				CursurIndex = 8;
 				HandleCursurDisplay.sendMessage(HandleCursurDisplay.obtainMessage(CursurIndex));
 				SetLanguage(Home.STATE_DISPLAY_LANGUAGE_NEDERLAND);
 			}
@@ -237,19 +210,19 @@ public class LanguageListFragment extends ParentFragment{
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
-				CursurIndex = 11;
+				CursurIndex = 9;
 				HandleCursurDisplay.sendMessage(HandleCursurDisplay.obtainMessage(CursurIndex));
 				SetLanguage(Home.STATE_DISPLAY_LANGUAGE_SWEDISH);
 			}
 		});	
-		radioTurkish.setOnClickListener(new View.OnClickListener() {
+		radioFinnish.setOnClickListener(new View.OnClickListener() {
 			
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
-				CursurIndex = 12;
+				CursurIndex = 10;
 				HandleCursurDisplay.sendMessage(HandleCursurDisplay.obtainMessage(CursurIndex));
-				SetLanguage(Home.STATE_DISPLAY_LANGUAGE_TURKISH);
+				SetLanguage(Home.STATE_DISPLAY_LANGUAGE_FINNISH);
 			}
 		});	
 		radioSlovakian.setOnClickListener(new View.OnClickListener() {
@@ -257,7 +230,7 @@ public class LanguageListFragment extends ParentFragment{
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
-				CursurIndex = 13;
+				CursurIndex = 11;
 				HandleCursurDisplay.sendMessage(HandleCursurDisplay.obtainMessage(CursurIndex));
 				SetLanguage(Home.STATE_DISPLAY_LANGUAGE_SLOVAKIAN);
 			}
@@ -267,82 +240,21 @@ public class LanguageListFragment extends ParentFragment{
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
-				CursurIndex = 14;
+				CursurIndex = 12;
 				HandleCursurDisplay.sendMessage(HandleCursurDisplay.obtainMessage(CursurIndex));
 				SetLanguage(Home.STATE_DISPLAY_LANGUAGE_ESTONIAN);
 			}
 		});	
-		radioThai.setOnClickListener(new View.OnClickListener() {
+		radioTurkish.setOnClickListener(new View.OnClickListener() {
 			
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
-				CursurIndex = 15;
+				CursurIndex = 13;
 				HandleCursurDisplay.sendMessage(HandleCursurDisplay.obtainMessage(CursurIndex));
-				SetLanguage(Home.STATE_DISPLAY_LANGUAGE_THAILAND);
+				SetLanguage(Home.STATE_DISPLAY_LANGUAGE_TURKISH);
 			}
 		});	
-		radioHindi.setOnClickListener(new View.OnClickListener() {
-			
-			@Override
-			public void onClick(View v) {
-				// TODO Auto-generated method stub
-				CursurIndex = 16;
-				HandleCursurDisplay.sendMessage(HandleCursurDisplay.obtainMessage(CursurIndex));
-				SetLanguage(Home.STATE_DISPLAY_LANGUAGE_HINDI);
-			}
-		});	
-	 	radioMongolian.setOnClickListener(new View.OnClickListener() {
-			
-			@Override
-			public void onClick(View v) {
-				// TODO Auto-generated method stub
-				CursurIndex = 17;
-				HandleCursurDisplay.sendMessage(HandleCursurDisplay.obtainMessage(CursurIndex));
-				SetLanguage(Home.STATE_DISPLAY_LANGUAGE_MONGOL);
-			}
-		});	
-	 	radioArabic.setOnClickListener(new View.OnClickListener() {
-			
-			@Override
-			public void onClick(View v) {
-				// TODO Auto-generated method stub
-				CursurIndex = 18;
-				HandleCursurDisplay.sendMessage(HandleCursurDisplay.obtainMessage(CursurIndex));
-				SetLanguage(Home.STATE_DISPLAY_LANGUAGE_ARABIC);
-			}
-		});	
-		radioPersian.setOnClickListener(new View.OnClickListener() {
-			
-			@Override
-			public void onClick(View v) {
-				// TODO Auto-generated method stub
-				CursurIndex = 19;
-				HandleCursurDisplay.sendMessage(HandleCursurDisplay.obtainMessage(CursurIndex));
-				SetLanguage(Home.STATE_DISPLAY_LANGUAGE_FARSI);
-			}
-		});	
-		radioIndonesian.setOnClickListener(new View.OnClickListener() {
-			
-			@Override
-			public void onClick(View v) {
-				// TODO Auto-generated method stub
-				CursurIndex = 20;
-				HandleCursurDisplay.sendMessage(HandleCursurDisplay.obtainMessage(CursurIndex));
-				SetLanguage(Home.STATE_DISPLAY_LANGUAGE_INDONESIAN);
-			}
-		});	
-		radioFinnish.setOnClickListener(new View.OnClickListener() {
-			
-			@Override
-			public void onClick(View v) {
-				// TODO Auto-generated method stub
-				CursurIndex = 21;
-				HandleCursurDisplay.sendMessage(HandleCursurDisplay.obtainMessage(CursurIndex));
-				SetLanguage(Home.STATE_DISPLAY_LANGUAGE_FINNISH);
-			}
-		});	
-		// --, 150225 bwk
 	}
 
 	@Override
@@ -361,11 +273,10 @@ public class LanguageListFragment extends ParentFragment{
 	public void ClickLeft(){
 		switch (CursurIndex) {
 			case 1:
-				CursurIndex = 21;		// ++, --, 150225 bwk 2->21
+				CursurIndex = 13;		
 				CursurDisplay(CursurIndex);
 				break;
 			case 2:
-			// ++, 150225 bwk
 			case 3:
 			case 4:
 			case 5:
@@ -377,15 +288,6 @@ public class LanguageListFragment extends ParentFragment{
 			case 11:
 			case 12:
 			case 13:
-			case 14:
-			case 15:
-			case 16:
-			case 17:
-			case 18:
-			case 19:
-			case 20:
-			case 21:
-			// --, 150225 bwk
 				CursurIndex--;
 				CursurDisplay(CursurIndex);
 				break;
@@ -400,7 +302,6 @@ public class LanguageListFragment extends ParentFragment{
 	public void ClickRight(){
 		switch (CursurIndex) {
 		case 1:
-		// ++, 150225 bwk
 		case 2:
 		case 3:
 		case 4:
@@ -412,20 +313,11 @@ public class LanguageListFragment extends ParentFragment{
 		case 10:
 		case 11:
 		case 12:
-		case 13:
-		case 14:
-		case 15:
-		case 16:
-		case 17:
-		case 18:
-		case 19:
-		case 20:
-		// --, 150225 bwk			
 			CursurIndex++;
 			CursurDisplay(CursurIndex);
 			
 			break;
-		case 21:		// ++, --, 150225 bwk 2 -> 21
+		case 13:
 			CursurIndex = 1;
 			CursurDisplay(CursurIndex);
 		
@@ -466,7 +358,6 @@ public class LanguageListFragment extends ParentFragment{
 		case 2:
 			SetLanguage(Home.STATE_DISPLAY_LANGUAGE_ENGLISH);
 			break;
-		// ++, 150225 bwk
 		case 3:
 			SetLanguage(Home.STATE_DISPLAY_LANGUAGE_GERMAN);
 			break;
@@ -480,49 +371,25 @@ public class LanguageListFragment extends ParentFragment{
 			SetLanguage(Home.STATE_DISPLAY_LANGUAGE_PORTUGUE);
 			break;
 		case 7:
-			SetLanguage(Home.STATE_DISPLAY_LANGUAGE_CHINESE);
-			break;
-		case 8:
-			SetLanguage(Home.STATE_DISPLAY_LANGUAGE_RUSIAN);
-			break;
-		case 9:
 			SetLanguage(Home.STATE_DISPLAY_LANGUAGE_ITALIAN);
 			break;
-		case 10:
+		case 8:
 			SetLanguage(Home.STATE_DISPLAY_LANGUAGE_NEDERLAND);
 			break;
-		case 11:
+		case 9:
 			SetLanguage(Home.STATE_DISPLAY_LANGUAGE_SWEDISH);
 			break;
-		case 12:
-			SetLanguage(Home.STATE_DISPLAY_LANGUAGE_TURKISH);
+		case 10:
+			SetLanguage(Home.STATE_DISPLAY_LANGUAGE_FINNISH);
 			break;
-		case 13:
+		case 11:
 			SetLanguage(Home.STATE_DISPLAY_LANGUAGE_SLOVAKIAN);
 			break;
-		case 14:
+		case 12:
 			SetLanguage(Home.STATE_DISPLAY_LANGUAGE_ESTONIAN);
 			break;
-		case 15:
-			SetLanguage(Home.STATE_DISPLAY_LANGUAGE_THAILAND);
-			break;
-		case 16:
-			SetLanguage(Home.STATE_DISPLAY_LANGUAGE_HINDI);
-			break;
-		case 17:
-			SetLanguage(Home.STATE_DISPLAY_LANGUAGE_MONGOL);
-			break;
-		case 18:
-			SetLanguage(Home.STATE_DISPLAY_LANGUAGE_ARABIC);
-			break;
-		case 19:
-			SetLanguage(Home.STATE_DISPLAY_LANGUAGE_FARSI);
-			break;
-		case 20:
-			SetLanguage(Home.STATE_DISPLAY_LANGUAGE_INDONESIAN);
-			break;
-		case 21:
-			SetLanguage(Home.STATE_DISPLAY_LANGUAGE_FINNISH);
+		case 13:
+			SetLanguage(Home.STATE_DISPLAY_LANGUAGE_TURKISH);
 			break;
 		// --, 150225 bwk
 		default:
@@ -532,7 +399,50 @@ public class LanguageListFragment extends ParentFragment{
 	}
 	
 	public void CursurFirstDisplay(int data){
-		CursurIndex = data + 1;
+		switch (data) {
+		case Home.STATE_DISPLAY_LANGUAGE_KOREAN:
+			CursurIndex = 1;
+			break;
+		case Home.STATE_DISPLAY_LANGUAGE_ENGLISH:
+			CursurIndex = 2;
+			break;
+		case Home.STATE_DISPLAY_LANGUAGE_GERMAN:
+			CursurIndex = 3;
+			break;
+		case Home.STATE_DISPLAY_LANGUAGE_FRENCH:
+			CursurIndex = 4;
+			break;
+		case Home.STATE_DISPLAY_LANGUAGE_SPANISH:
+			CursurIndex = 5;
+			break;
+		case Home.STATE_DISPLAY_LANGUAGE_PORTUGUE:
+			CursurIndex = 6;
+			break;
+		case Home.STATE_DISPLAY_LANGUAGE_ITALIAN:
+			CursurIndex = 7;
+			break;
+		case Home.STATE_DISPLAY_LANGUAGE_NEDERLAND:
+			CursurIndex = 8;
+			break;
+		case Home.STATE_DISPLAY_LANGUAGE_SWEDISH:
+			CursurIndex = 9;
+			break;
+		case Home.STATE_DISPLAY_LANGUAGE_FINNISH:
+			CursurIndex = 10;
+			break;
+		case Home.STATE_DISPLAY_LANGUAGE_SLOVAKIAN:
+			CursurIndex = 11;
+			break;
+		case Home.STATE_DISPLAY_LANGUAGE_ESTONIAN:
+			CursurIndex = 12;
+			break;
+		case Home.STATE_DISPLAY_LANGUAGE_TURKISH:
+			CursurIndex = 13;
+			break;
+		default:
+			CursurIndex = 1;
+			break;
+		}
 		CursurDisplay(CursurIndex);
 		CheckButtonDisplay(CursurIndex);
 	}
@@ -540,27 +450,17 @@ public class LanguageListFragment extends ParentFragment{
 	public void CursurDisplay(int Index){
 		radioKorean.setPressed(false);
 		radioEnglish.setPressed(false);
-		// ++, 150225 bwk
 		radioGerman.setPressed(false);
 		radioFrench.setPressed(false);
 		radioSpanish.setPressed(false);
 		radioPortuguese.setPressed(false);
-		radioChinese.setPressed(false);
-		radioRussian.setPressed(false);
 		radioItalian.setPressed(false);
 		radioDutch.setPressed(false);
 		radioSwedish.setPressed(false);
 		radioTurkish.setPressed(false);
 		radioSlovakian.setPressed(false);
 		radioEstonian.setPressed(false);
-		radioThai.setPressed(false);
-		radioHindi.setPressed(false);
-		radioMongolian.setPressed(false);
-		radioArabic.setPressed(false);
-		radioPersian.setPressed(false);
-		radioIndonesian.setPressed(false);
 		radioFinnish.setPressed(false);
-		// --, 150225 bwk
 		
 		switch (Index) {
 			case 1:
@@ -569,7 +469,6 @@ public class LanguageListFragment extends ParentFragment{
 			case 2:
 				radioEnglish.setPressed(true);
 				break;
-			// ++, 150225 bwk
 			case 3:
 				radioGerman.setPressed(true);
 				break;
@@ -583,51 +482,26 @@ public class LanguageListFragment extends ParentFragment{
 				radioPortuguese.setPressed(true);
 				break;
 			case 7:
-				radioChinese.setPressed(true);
-				break;
-			case 8:
-				radioRussian.setPressed(true);
-				break;
-			case 9:
 				radioItalian.setPressed(true);
 				break;
-			case 10:
+			case 8:
 				radioDutch.setPressed(true);
 				break;
-			case 11:
+			case 9:
 				radioSwedish.setPressed(true);
 				break;
-			case 12:
-				radioTurkish.setPressed(true);
-				break;
-			case 13:
-				radioSlovakian.setPressed(true);
-				break;
-			case 14:
-				radioEstonian.setPressed(true);
-				break;
-			case 15:
-				radioThai.setPressed(true);
-				break;
-			case 16:
-				radioHindi.setPressed(true);
-				break;
-			case 17:
-				radioMongolian.setPressed(true);
-				break;
-			case 18:
-				radioArabic.setPressed(true);
-				break;
-			case 19:
-				radioPersian.setPressed(true);
-				break;
-			case 20:
-				radioIndonesian.setPressed(true);
-				break;
-			case 21:
+			case 10:
 				radioFinnish.setPressed(true);
 				break;
-			// --, 150225 bwk
+			case 11:
+				radioSlovakian.setPressed(true);
+				break;
+			case 12:
+				radioEstonian.setPressed(true);
+				break;
+			case 13:
+				radioTurkish.setPressed(true);
+				break;
 			default:
 				break;
 		}
@@ -641,20 +515,12 @@ public class LanguageListFragment extends ParentFragment{
 		radioFrench.setChecked(false);
 		radioSpanish.setChecked(false);
 		radioPortuguese.setChecked(false);
-		radioChinese.setChecked(false);
-		radioRussian.setChecked(false);
 		radioItalian.setChecked(false);
 		radioDutch.setChecked(false);
 		radioSwedish.setChecked(false);
 		radioTurkish.setChecked(false);
 		radioSlovakian.setChecked(false);
 		radioEstonian.setChecked(false);
-		radioThai.setChecked(false);
-		radioHindi.setChecked(false);
-		radioMongolian.setChecked(false);
-		radioArabic.setChecked(false);
-		radioPersian.setChecked(false);
-		radioIndonesian.setChecked(false);
 		radioFinnish.setChecked(false);
 		
 		switch (data) {
@@ -677,49 +543,25 @@ public class LanguageListFragment extends ParentFragment{
 				radioPortuguese.setChecked(true);
 				break;
 			case 7:
-				radioChinese.setChecked(true);
-				break;
-			case 8:
-				radioRussian.setChecked(true);
-				break;
-			case 9:
 				radioItalian.setChecked(true);
 				break;
-			case 10:
+			case 8:
 				radioDutch.setChecked(true);
 				break;
-			case 11:
+			case 9:
 				radioSwedish.setChecked(true);
 				break;
-			case 12:
-				radioTurkish.setChecked(true);
+			case 10:
+				radioFinnish.setChecked(true);
 				break;
-			case 13:
+			case 11:
 				radioSlovakian.setChecked(true);
 				break;
-			case 14:
+			case 12:
 				radioEstonian.setChecked(true);
 				break;
-			case 15:
-				radioThai.setChecked(true);
-				break;
-			case 16:
-				radioHindi.setChecked(true);
-				break;
-			case 17:
-				radioMongolian.setChecked(true);
-				break;
-			case 18:
-				radioArabic.setChecked(true);
-				break;
-			case 19:
-				radioPersian.setChecked(true);
-				break;
-			case 20:
-				radioIndonesian.setChecked(true);
-				break;
-			case 21:
-				radioFinnish.setChecked(true);
+			case 13:
+				radioTurkish.setChecked(true);
 				break;
 			default:
 				break;
@@ -733,8 +575,6 @@ public class LanguageListFragment extends ParentFragment{
 		ParentActivity.LanguageIndex = Index;
 		LangClass.setLanugage(Index);
 		ParentActivity.ResetPopup(); 		// ++, --, 150305 bwk
-		
-		CheckButtonDisplay(Index+1);		// ++, --, 150225 bwk
 		
 		if(ParentActivity.OldScreenIndex == ParentActivity.SCREEN_STATE_MENU_PREFERENCE_DISPLAYTYPELANG_TOP)
 		{

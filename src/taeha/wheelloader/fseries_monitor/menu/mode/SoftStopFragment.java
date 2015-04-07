@@ -160,6 +160,7 @@ public class SoftStopFragment extends ParentFragment{
 		|| ParentActivity._CheckModel.GetMCUVersion(CAN1Comm.Get_ComponentBasicInformation_1698_PGN65330()) == CheckModel.MODEL_940TM
 		|| ParentActivity._CheckModel.GetMCUVersion(CAN1Comm.Get_ComponentBasicInformation_1698_PGN65330()) == CheckModel.MODEL_955TM
 		|| ParentActivity._CheckModel.GetMCUVersion(CAN1Comm.Get_ComponentBasicInformation_1698_PGN65330()) == CheckModel.MODEL_960TM
+		|| ParentActivity._CheckModel.GetMCUVersion(CAN1Comm.Get_ComponentBasicInformation_1698_PGN65330()) == CheckModel.MODEL_965TM	// ++, --, 150329 bwk
 		|| ParentActivity._CheckModel.GetMCUVersion(CAN1Comm.Get_ComponentBasicInformation_1698_PGN65330()) == CheckModel.MODEL_970TM
 		|| ParentActivity._CheckModel.GetMCUVersion(CAN1Comm.Get_ComponentBasicInformation_1698_PGN65330()) == CheckModel.MODEL_980TM){
 			
@@ -204,6 +205,9 @@ public class SoftStopFragment extends ParentFragment{
 			radioBucketOutOn.setVisibility(View.VISIBLE);
 			radioBucketOutOff.setVisibility(View.VISIBLE);		
 		}
+		
+		CursurIndex = 1;
+		CursurDisplay(CursurIndex);
 	}
 	@Override
 	protected void InitButtonListener() {
@@ -363,6 +367,7 @@ public class SoftStopFragment extends ParentFragment{
 				|| ParentActivity._CheckModel.GetMCUVersion(CAN1Comm.Get_ComponentBasicInformation_1698_PGN65330()) == CheckModel.MODEL_940TM
 				|| ParentActivity._CheckModel.GetMCUVersion(CAN1Comm.Get_ComponentBasicInformation_1698_PGN65330()) == CheckModel.MODEL_955TM
 				|| ParentActivity._CheckModel.GetMCUVersion(CAN1Comm.Get_ComponentBasicInformation_1698_PGN65330()) == CheckModel.MODEL_960TM
+				|| ParentActivity._CheckModel.GetMCUVersion(CAN1Comm.Get_ComponentBasicInformation_1698_PGN65330()) == CheckModel.MODEL_965TM	// ++, --, 150329 bwk
 				|| ParentActivity._CheckModel.GetMCUVersion(CAN1Comm.Get_ComponentBasicInformation_1698_PGN65330()) == CheckModel.MODEL_970TM
 				|| ParentActivity._CheckModel.GetMCUVersion(CAN1Comm.Get_ComponentBasicInformation_1698_PGN65330()) == CheckModel.MODEL_980TM){
 			CAN1Comm.Set_SoftStopBoomUp_2337_PGN61184_203(BoomUp);

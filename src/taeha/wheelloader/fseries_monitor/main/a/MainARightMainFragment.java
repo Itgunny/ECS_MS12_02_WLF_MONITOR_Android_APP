@@ -231,11 +231,11 @@ public class MainARightMainFragment extends ParentFragment{
 	
 	public void HourOdometerTitleDisplay(int _Index){
 		switch (_Index) {
+		case CAN1CommManager.DATA_STATE_OPERATION_NOSELECT:
+			HourOdometerTitleAnimation.FlipAnimation(textViewHourOdoTitle,"");
+			break;
 		case CAN1CommManager.DATA_STATE_HOURMETER_LATEST:
 			HourOdometerTitleAnimation.FlipAnimation(textViewHourOdoTitle,getResources().getString(string.LATEST_HOURMETER));
-			break;
-		case CAN1CommManager.DATA_STATE_FUELRATE_CURRENT:
-			HourOdometerTitleAnimation.FlipAnimation(textViewHourOdoTitle,getResources().getString(string.CURRENT_FUEL_RATE));
 			break;
 		case CAN1CommManager.DATA_STATE_ODOMETER_TOTAL:
 			HourOdometerTitleAnimation.FlipAnimation(textViewHourOdoTitle,getResources().getString(string.TOTAL_ODOMETER));
@@ -250,6 +250,10 @@ public class MainARightMainFragment extends ParentFragment{
 	}
 	public void HourOdometerDataDisplay(int _Index, int LatestHour, int TotalOdo, int LatestOdo){
 		switch (_Index) {
+		case CAN1CommManager.DATA_STATE_OPERATION_NOSELECT:
+			textViewHourOdoData.setText("");
+			textViewHourOdoUnit.setText("");
+			break;
 		case CAN1CommManager.DATA_STATE_HOURMETER_LATEST:
 			textViewHourOdoData.setText(ParentActivity.GetHourmeterString(LatestHour));
 			textViewHourOdoUnit.setText(ParentActivity.getResources().getString(string.Hr));
@@ -370,32 +374,26 @@ public class MainARightMainFragment extends ParentFragment{
 	}
 	
 	public void ClickHourOdo(){
-		ShowSelectAnimation(0, ParentActivity._MainABaseFragment._MainACenterEngineFragment,
-				ParentActivity._MainABaseFragment._MainARightUpHourOdometerSelectFragment);
+		ShowSelectAnimation(0);
 	}
 	public void ClickMode(){
-		ShowSelectAnimation(1, ParentActivity._MainABaseFragment._MainACenterEngineFragment,
-				ParentActivity._MainABaseFragment._MainARightUpEngineModeFragment);
+		ShowSelectAnimation(1);
 	}
 	
 	public void ClickCCOMode(){
 		if(ParentActivity._CheckModel.GetMCUVersion(CAN1Comm.Get_ComponentBasicInformation_1698_PGN65330()) == CheckModel.MODEL_980)
-			ShowSelectAnimation(2, ParentActivity._MainABaseFragment._MainACenterTMFragment,
-					ParentActivity._MainABaseFragment._MainARightDownTMICCOModeFragment);
+			ShowSelectAnimation(2);
 		else
-			ShowSelectAnimation(2, ParentActivity._MainABaseFragment._MainACenterTMFragment,
-					ParentActivity._MainABaseFragment._MainARightDownTMCCOModeFragment);
+			ShowSelectAnimation(2);
 	}
 	public void ClickShiftMode(){
-		ShowSelectAnimation(3, ParentActivity._MainABaseFragment._MainACenterTMFragment,
-				ParentActivity._MainABaseFragment._MainARightDownTMShiftModeFragment);
+		ShowSelectAnimation(3);
 	}
 	public void ClickTCLockUp(){
-		ShowSelectAnimation(4, ParentActivity._MainABaseFragment._MainACenterTMFragment,
-				ParentActivity._MainABaseFragment._MainARightDownTMTCLockUpFragment);
+		ShowSelectAnimation(4);
 	}
 	
-	public void ShowSelectAnimation(int index, Fragment _centerfragment, Fragment _rightfragment){
+	public void ShowSelectAnimation(int index){
 		if(ParentActivity.AnimationRunningFlag == true)
 			return;
 		else
@@ -403,22 +401,34 @@ public class MainARightMainFragment extends ParentFragment{
 		if(index == 0){
 			ParentActivity._MainABaseFragment._MainACenterEngineFragment = new MainACenterEngineFragment();
 			ParentActivity._MainABaseFragment._MainARightUpHourOdometerSelectFragment = new MainARightUpHourOdometerSelectFragment();
+			ParentActivity._MainABaseFragment._MainBodyShiftAnimation.StartShiftRightAnimation();
+			ParentActivity._MainABaseFragment.CenterAnimation.StartChangeAnimation(ParentActivity._MainABaseFragment._MainACenterEngineFragment);
+			ParentActivity._MainABaseFragment.RightChangeAnimation.StartChangeAnimation(ParentActivity._MainABaseFragment._MainARightUpHourOdometerSelectFragment);
 		}else if(index == 1){
 			ParentActivity._MainABaseFragment._MainACenterEngineFragment = new MainACenterEngineFragment();
 			ParentActivity._MainABaseFragment._MainARightUpEngineModeFragment = new MainARightUpEngineModeFragment();
+			ParentActivity._MainABaseFragment._MainBodyShiftAnimation.StartShiftRightAnimation();
+			ParentActivity._MainABaseFragment.CenterAnimation.StartChangeAnimation(ParentActivity._MainABaseFragment._MainACenterEngineFragment);
+			ParentActivity._MainABaseFragment.RightChangeAnimation.StartChangeAnimation(ParentActivity._MainABaseFragment._MainARightUpEngineModeFragment);
 		}else if(index == 2){
 			ParentActivity._MainABaseFragment._MainACenterTMFragment = new MainACenterTMFragment();
 			ParentActivity._MainABaseFragment._MainARightDownTMCCOModeFragment = new MainARightDownTMCCOModeFragment();
+			ParentActivity._MainABaseFragment._MainBodyShiftAnimation.StartShiftRightAnimation();
+			ParentActivity._MainABaseFragment.CenterAnimation.StartChangeAnimation(ParentActivity._MainABaseFragment._MainACenterTMFragment);
+			ParentActivity._MainABaseFragment.RightChangeAnimation.StartChangeAnimation(ParentActivity._MainABaseFragment._MainARightDownTMCCOModeFragment);
 		}else if(index == 3){
 			ParentActivity._MainABaseFragment._MainACenterTMFragment = new MainACenterTMFragment();
 			ParentActivity._MainABaseFragment._MainARightDownTMShiftModeFragment = new MainARightDownTMShiftModeFragment();
+			ParentActivity._MainABaseFragment._MainBodyShiftAnimation.StartShiftRightAnimation();
+			ParentActivity._MainABaseFragment.CenterAnimation.StartChangeAnimation(ParentActivity._MainABaseFragment._MainACenterTMFragment);
+			ParentActivity._MainABaseFragment.RightChangeAnimation.StartChangeAnimation(ParentActivity._MainABaseFragment._MainARightDownTMCCOModeFragment);
 		}else if(index == 4){
 			ParentActivity._MainABaseFragment._MainACenterTMFragment = new MainACenterTMFragment();
 			ParentActivity._MainABaseFragment._MainARightDownTMTCLockUpFragment = new MainARightDownTMTCLockUpFragment();
+			ParentActivity._MainABaseFragment._MainBodyShiftAnimation.StartShiftRightAnimation();
+			ParentActivity._MainABaseFragment.CenterAnimation.StartChangeAnimation(ParentActivity._MainABaseFragment._MainACenterTMFragment);
+			ParentActivity._MainABaseFragment.RightChangeAnimation.StartChangeAnimation(ParentActivity._MainABaseFragment._MainARightDownTMCCOModeFragment);
 		}
-		ParentActivity._MainABaseFragment._MainBodyShiftAnimation.StartShiftRightAnimation();
-		ParentActivity._MainABaseFragment.CenterAnimation.StartChangeAnimation(_centerfragment);
-		ParentActivity._MainABaseFragment.RightChangeAnimation.StartChangeAnimation(_rightfragment);
 		
 		ParentActivity._MainABaseFragment._LeftDisappearAnimation.StartAnimation();
 		ParentActivity._MainABaseFragment._LeftBGDisappearAnimation.StartAnimation();

@@ -16,6 +16,8 @@ import taeha.wheelloader.fseries_monitor.popup.EHCUErrorPopup;
 import taeha.wheelloader.fseries_monitor.popup.EngineAutoShutdownCountPopup;
 import taeha.wheelloader.fseries_monitor.popup.EngineModePopup;
 import taeha.wheelloader.fseries_monitor.popup.EngineWarmingUpPopup;
+import taeha.wheelloader.fseries_monitor.popup.FineModulationPouup;
+import taeha.wheelloader.fseries_monitor.popup.FuelInitalPopup;
 import taeha.wheelloader.fseries_monitor.popup.ICCOModePopup;
 import taeha.wheelloader.fseries_monitor.popup.KickDownPopup;
 import taeha.wheelloader.fseries_monitor.popup.LoggedFaultDeletePopup;
@@ -69,7 +71,7 @@ public class Home extends Activity {
 	public static final int VERSION_HIGH 		= 1;
 	public static final int VERSION_LOW 		= 0;
 	public static final int VERSION_SUB_HIGH 	= 4;
-	public static final int VERSION_SUB_LOW 	= 0;
+	public static final int VERSION_SUB_LOW 	= 1;
 	////1.0.2.3
 	// UI B 안 최초 적용 2014.12.10
 	////1.0.2.4
@@ -268,6 +270,57 @@ public class Home extends Activity {
 	//		==> 중앙터치시 종료로 변경
 	//	- 멀티미디어 실행 -> MENU 키 -> LEFt 키 -> 도움말 실행 -> 중앙 터치 시 종료되지 않고 메뉴바 뜸
 	//		==> 도움말 실행 시  Multimediaflag false로 변경!
+	//// v1.0.4.1
+	// 1. 장비상태 -> 오른쪽에 현재 상태에 대해 2개 표시
+	// 2. Fault History -> 모니터 화면에 결과 반영이 느림. 갱신 주기 등 수정완료
+	// 3. Model 추가 : 965, 975
+	// 4. 액슬 온도 모니터링
+	//	- 메인 화면 액슬 온도 모니터링 표시 추가 (옵션 미장착 시 감춤)
+	//	- 메뉴 내 장비 상태(Machine monitoring) 표시 기능(온도, 배터리 레벨 등)에 액슬 온도 항목 추가 (옵션 미장착 시 감춤)
+	//	- 프로토콜 신규 추가
+	//	- 액승 오일 경고 프로토콜 추가
+	//	- 램프 심볼 변경(기존 Front 심볼로 하고, Front/Rear 구분을 위해 F 및 R 심볼을 그림에 추가)
+	// 5. Left Down : Current Fuel Rate 표시 삭제
+	// 6. 메인 -> 메뉴들어가면 포커스를 기능설정 상단 탭으로
+	// 7. KEYPAD 중 일부(별도 터치 입력 없이 버튼 입력만으로 작동 가능한 기능)에 대해서만 메뉴 조작 중에도 동작하도록 적용
+	//	- 대상 KEY : Main lamp, Work lamp, Beacon lamp, Rear wiper
+	//	- 적용 방식 : 메뉴 조작 중 대상 KEY 입력 시 UI 화면 전환 없이 단순 CAN Message 송/수신
+	// 8. 시계 PM 10:34 -> 0을 누르면 12시로 변경되는 현상 개선 완료
+	//	- 모니터 시간 설정 화면에서 키패드 숫자버튼 사용 적용
+	// 9. Rear Wiper 버튼 누를 때마다 상태가 변경되어야 하는지(현재 어느 상태이든 누르면 Intermittent로 변경됨) -> 버그 수정
+	// 10. Work Load : 내부 Boom PS calibraion 항목 선택 후, ESC 누르면 Home으로 이동됨 ( 이전 항목으로 이동되도록 변경)
+	// 11. A/S 번호 적용 : 1899-7282
+	// 12. ECO 게이지 그래픽 UI 변경, Status에 상관없이 변경된 UI로 표시
+	// 13. 메인화면 좌상단 작업량 계측 표시
+	//	- 트럭 A, B, C 심볼에서 알파벳이 잘 안보인다는 의견 -> 심볼 크기 및 알파벳 색 수정 검토
+	// 14. 다국어 - 양산 사양 확정(13개국 언어)
+	//	- 다국어 파일 적용
+	// 15. SoftEndStop 초기 페이지 들어갔을 때 커서 없는 버그 수정
+	// 16. User Switching Default 적용
+	//	- 사용자 전환 기능 : 기본값 탭 선택 시 save 버튼 미선택 되도록 할 것 (회색으로 표시)
+	// 17. Fuel Consumption History 메뉴 적용
+	// 18. 냉각팬 EPPR 전류 제어 화면 - 전류 단위를 mA에서 %로 변경
+	// 19. 키패드, 퀵 커플러 버튼
+	//	- UNLOCK - FINISH - 확인 - '팝업창 생성' - LOCKING ATTACHMENT 선택 - FINISH
+	//	- 위 순서대로 동작시 키패드 작동 불가 상태가 됨
+	//	-> 수정완료
+	// 20. Fine Modulation 키패드 버튼
+	//	1) EHCU 인식하여 EHCU 미적용시 다음 메시지 출력 : “EH SYSTEM is NOT equiped.” : 영어로만 표시 합니다.
+	//	2) Fine Modulation 옵션 미적용 시 출력 문구 변경
+	//		A. 기존 : EH SYSTEM is not equipped
+	//		B. 변경 : This machine does not support this feature.
+	// 21. 메인 화면 Default 표시 사양
+	//		A. 좌 상단 : 9A 동일 -> 작동유 온도 / 냉각수 온도
+	//		B. 좌 하단 : 평균 연비
+	//		C. 우 상단 : 9A 동일 -> Total Hourmeter => 없으므로 Latest Hourmeter로 변경 요청
+	// 22. Main 키패드 임시 적용
+	//	- 장비상태
+	//	- Fuel Info
+	//	- OdoHourmeter
+	// ## by cjg
+	// 1. Mediaplayer에서 Ending 나오지 않은 현상 개선(Firmware Update 필요)
+	// 2. Update프로그램 -> BKCU여부 전송
+	// 3. H/W Test프로그램으로 S/N 전송
 	//////////////////////////////////////////////////////////////////////////////////////
 	
 	// TAG
@@ -290,7 +343,12 @@ public class Home extends Activity {
 	public  static final int SCREEN_STATE_MAIN_B_RIGHTDOWN_END								= 0x12FFFFFF;
 	
 	public  static final int SCREEN_STATE_MAIN_B_LEFTUP_TOP									= 0x13000000;
-	public  static final int SCREEN_STATE_MAIN_B_LEFTUP_MACHINESTATUS						= 0x13100000;
+	// ++, 150330 bwk
+	//public  static final int SCREEN_STATE_MAIN_B_LEFTUP_MACHINESTATUS						= 0x13100000;
+	public  static final int SCREEN_STATE_MAIN_B_LEFTUP_MACHINESTATUS1						= 0x13100000;
+	public  static final int SCREEN_STATE_MAIN_B_LEFTUP_MACHINESTATUS2						= 0x13200000;
+	public  static final int SCREEN_STATE_MAIN_B_LEFTUP_MACHINESTATUS3						= 0x13300000;
+	// --, 150330 bwk
 	public  static final int SCREEN_STATE_MAIN_B_LEFTUP_END									= 0x13FFFFFF;
 	
 	public  static final int SCREEN_STATE_MAIN_B_LEFTDOWN_TOP								= 0x14000000;
@@ -328,6 +386,7 @@ public class Home extends Activity {
 	public  static final int SCREEN_STATE_MAIN_B_KEY_MIRRORHEAT								= 0x16900000;
 	public  static final int SCREEN_STATE_MAIN_B_KEY_DETENT									= 0x16A00000;
 	public  static final int SCREEN_STATE_MAIN_B_KEY_FINEMODULATION							= 0x16B00000;
+	public  static final int SCREEN_STATE_MAIN_B_KEY_FINEMODULATION_POPUP					= 0x16B10000;		// ++, --, 150402 bwk
 	public  static final int SCREEN_STATE_MAIN_B_KEY_FN										= 0x16C00000;
 	public  static final int SCREEN_STATE_MAIN_B_KEY_END									= 0x16FFFFFF;
 	
@@ -390,7 +449,14 @@ public class Home extends Activity {
 	
 	public  static final int SCREEN_STATE_MENU_MODE_END										= 0x21FFFFFF;
 	public  static final int SCREEN_STATE_MENU_MONITORING_TOP								= 0x22000000;
-	public  static final int SCREEN_STATE_MENU_MONITORING_MACHINEMONITORING					= 0x22100000;
+	// ++, 150329 bwk
+	//public  static final int SCREEN_STATE_MENU_MONITORING_MACHINEMONITORING					= 0x22100000;
+	public  static final int SCREEN_STATE_MENU_MONITORING_MACHINEMONITORING_TOP				= 0x22100000;
+	public  static final int SCREEN_STATE_MENU_MONITORING_MACHINEMONITORING_1				= 0x22110000;
+	public  static final int SCREEN_STATE_MENU_MONITORING_MACHINEMONITORING_2				= 0x22120000;
+	public  static final int SCREEN_STATE_MENU_MONITORING_MACHINEMONITORING_3				= 0x22130000;
+	public  static final int SCREEN_STATE_MENU_MONITORING_MACHINEMONITORING_END				= 0x221FFFFF;
+	// --, 150329 bwk
 	public  static final int SCREEN_STATE_MENU_MONITORING_OPERATIONHISTORY_TOP				= 0x22200000;
 	public  static final int SCREEN_STATE_MENU_MONITORING_OPERATIONHISTORY_INIT				= 0x22210000;
 	public  static final int SCREEN_STATE_MENU_MONITORING_OPERATIONHISTORY_END				= 0x222FFFFF;
@@ -412,9 +478,18 @@ public class Home extends Activity {
 	public  static final int SCREEN_STATE_MENU_MONITORING_VERSIONINFO_EHCU					= 0x22470000;
 	public  static final int SCREEN_STATE_MENU_MONITORING_VERSIONINFO_BKCU					= 0x22480000;
 	public  static final int SCREEN_STATE_MENU_MONITORING_VERSIONINFO_END					= 0x224FFFFF;
-	public  static final int SCREEN_STATE_MENU_MONITORING_EHCUINFO_TOP						= 0x22500000;
-	public  static final int SCREEN_STATE_MENU_MONITORING_EHCUINFO_BOOMLEVERFLOAT			= 0x22510000;
-	public  static final int SCREEN_STATE_MENU_MONITORING_EHCUINFO_END						= 0x225FFFFF;
+	// ++, 150329 bwk
+//	public  static final int SCREEN_STATE_MENU_MONITORING_EHCUINFO_TOP						= 0x22500000;
+//	public  static final int SCREEN_STATE_MENU_MONITORING_EHCUINFO_BOOMLEVERFLOAT			= 0x22510000;
+//	public  static final int SCREEN_STATE_MENU_MONITORING_EHCUINFO_END						= 0x225FFFFF;
+	// --, 150329 bwk
+	public  static final int SCREEN_STATE_MENU_MONITORING_FUELHISTORY_TOP					= 0x22500000;
+	public  static final int SCREEN_STATE_MENU_MONITORING_FUELHISTORY_GENERALRECORD			= 0x22510000;
+	public  static final int SCREEN_STATE_MENU_MONITORING_FUELHISTORY_HOURLYRECORD			= 0x22520000;
+	public  static final int SCREEN_STATE_MENU_MONITORING_FUELHISTORY_DAILYRECORD			= 0x22530000;
+	public  static final int SCREEN_STATE_MENU_MONITORING_FUELHISTORY_MODERECORD			= 0x22540000;
+	public	static final int SCREEN_STATE_MENU_MONITORING_FUELHISTORY_INITIAL				= 0x25550000;
+	public  static final int SCREEN_STATE_MENU_MONITORING_FUELHISTORY_END					= 0x225FFFFF;
 	public  static final int SCREEN_STATE_MENU_MONITORING_END								= 0x22FFFFFF;
 	
 	public  static final int SCREEN_STATE_MENU_MANAGEMENT_TOP								= 0x23000000;
@@ -451,8 +526,13 @@ public class Home extends Activity {
 	public  static final int SCREEN_STATE_MENU_MANAGEMENT_SERVICE_SPEEDLIMIT_END			= 0x2353FFFF;
 	public  static final int SCREEN_STATE_MENU_MANAGEMENT_SERVICE_WEIGHINGCOMPENSATION_TOP	= 0x23540000;
 	public  static final int SCREEN_STATE_MENU_MANAGEMENT_SERVICE_WEIGHINGCOMPENSATION_END	= 0x2354FFFF;
-	public  static final int SCREEN_STATE_MENU_MANAGEMENT_SERVICE_SOFTWAREUPATE_TOP			= 0x23550000;
-	public  static final int SCREEN_STATE_MENU_MANAGEMENT_SERVICE_SOFTWAREUPATE_END			= 0x2355FFFF;
+	// ++, 150329 bwk
+	//public  static final int SCREEN_STATE_MENU_MANAGEMENT_SERVICE_SOFTWAREUPATE_TOP		= 0x23550000;
+	//public  static final int SCREEN_STATE_MENU_MANAGEMENT_SERVICE_SOFTWAREUPATE_END		= 0x2355FFFF;
+	public  static final int SCREEN_STATE_MENU_MANAGEMENT_SERVICE_EHCUINFO_TOP				= 0x23550000;
+	public  static final int SCREEN_STATE_MENU_MANAGEMENT_SERVICE_EHCUINFO_BOOMLEVERFLOAT	= 0x23551000;
+	public  static final int SCREEN_STATE_MENU_MANAGEMENT_SERVICE_EHCUINFO_END				= 0x2355FFFF;
+	// --, 150329 bwk
 	public  static final int SCREEN_STATE_MENU_MANAGEMENT_SERVICE_END						= 0x235FFFFF;
 	public  static final int SCREEN_STATE_MENU_MANAGEMENT_ASPHONE_TOP						= 0x23600000;
 	public  static final int SCREEN_STATE_MENU_MANAGEMENT_ASPHONE_END						= 0x236FFFFF;
@@ -521,7 +601,9 @@ public class Home extends Activity {
 	public  static final int SCREEN_STATE_MAIN_A_RIGHTDOWN_END								= 0x72FFFFFF;
 	
 	public  static final int SCREEN_STATE_MAIN_A_LEFTUP_TOP									= 0x73000000;
-	public  static final int SCREEN_STATE_MAIN_A_LEFTUP_MACHINESTATUS						= 0x73100000;
+	public  static final int SCREEN_STATE_MAIN_A_LEFTUP_MACHINESTATUS1						= 0x73100000;
+	public  static final int SCREEN_STATE_MAIN_A_LEFTUP_MACHINESTATUS2						= 0x73200000;
+	public  static final int SCREEN_STATE_MAIN_A_LEFTUP_MACHINESTATUS3						= 0x73300000;
 	public  static final int SCREEN_STATE_MAIN_A_LEFTUP_END									= 0x73FFFFFF;
 	
 	public  static final int SCREEN_STATE_MAIN_A_LEFTDOWN_TOP								= 0x74000000;
@@ -556,6 +638,7 @@ public class Home extends Activity {
 	public  static final int SCREEN_STATE_MAIN_A_KEY_MIRRORHEAT								= 0x76900000;
 	public  static final int SCREEN_STATE_MAIN_A_KEY_DETENT									= 0x76A00000;
 	public  static final int SCREEN_STATE_MAIN_A_KEY_FINEMODULATION							= 0x76B00000;
+	public  static final int SCREEN_STATE_MAIN_A_KEY_FINEMODULATION_POPUP					= 0x76B10000;	// ++, --, 150402 bwk
 	public  static final int SCREEN_STATE_MAIN_A_KEY_FN										= 0x76C00000;
 	public  static final int SCREEN_STATE_MAIN_A_KEY_END									= 0x76FFFFFF;
 	
@@ -785,6 +868,8 @@ public class Home extends Activity {
 	public MultimediaClosePopup				_MultimediaClosePopup;
 	public MiracastClosePopup				_MiracastClosePopup;
 	// --, 150313 cjg
+	public FineModulationPouup				_FineModulationPouup;		// ++, --, 150402 bwk
+	public FuelInitalPopup					_FuelInitalPopup;			// ++, --, 150406 bwk
 	
 	//Toast
 	public WeighingErrorToast				_WeighingErrorToast;
@@ -864,15 +949,6 @@ public class Home extends Activity {
 	
 	// ++, 150326 bwk
 	int SendDTCIndex;
-	int SendSeqIndex;
-
-	int DTCTotalPacketMachineActive;
-	int DTCTotalPacketEngineActive;
-	int DTCTotalPacketTMActive;
-	int DTCTotalPacketMachineLogged;
-	int DTCTotalPacketEngineLogged;
-	int DTCTotalPacketTMLogged;
-	int DTCTotalPacketEHCULogged;	
 	// --, 150326 bwk
 	////////////////////////////////////////////////////
 	
@@ -939,20 +1015,11 @@ public class Home extends Activity {
 		// TODO Auto-generated method stub
 		super.onResume();
 		Log.d(TAG, "onResume");
-		// ++, 150326 bwk
-		/*
-		// ++, 150324 cjg
+		// ++, 150403 cjg
 		if(CommService.GetPowerOffFlag() == true){
-			if(count == 0){
-				//Log.d(TAG, "CommService.GetPowerOffFlag() : " + CommService.GetPowerOffFlag());
-				showEndingFragment();
-				showEndingFragment();
-				count++;
-			}
+			showEndingFragment();
 		}
-		// --, 150324 cjg		
-		*/
-		// --, 150326 bwk
+		// --, 150403 cjg		
 		try {
 			StartCommService();
 			StopAlwaysOntopService();	// ++, --, 150324 cjg
@@ -1029,7 +1096,6 @@ public class Home extends Activity {
 		
 		// ++, 150326 bwk
 		SendDTCIndex = Home.REQ_ERR_START;
-		SendSeqIndex = 1;
 		// --, 150326 bwk		
 		
 		_CrashApplication = (CrashApplication)getApplicationContext();		
@@ -1075,6 +1141,8 @@ public class Home extends Activity {
 		_MultimediaClosePopup = new MultimediaClosePopup(this);
 		_MiracastClosePopup = new MiracastClosePopup(this);
 		// --, 150313 cjg
+		_FineModulationPouup = new FineModulationPouup(this);	// ++, --, 150402 bwk
+		_FuelInitalPopup = new FuelInitalPopup(this);
 		
 		_WeighingErrorToast = new WeighingErrorToast(this);
 	}
@@ -1116,6 +1184,8 @@ public class Home extends Activity {
 		_MultimediaClosePopup = new MultimediaClosePopup(this);
 		_MiracastClosePopup = new MiracastClosePopup(this);
 		// --, 150323 bwk
+		_FineModulationPouup = new FineModulationPouup(this);	// ++, --, 150402 bwk
+		_FuelInitalPopup = new FuelInitalPopup(this);
 		
 		_WeighingErrorToast = new WeighingErrorToast(this);
 	}
@@ -1274,9 +1344,9 @@ public class Home extends Activity {
 		UnitWeight = SharePref.getInt("UnitWeight", UNIT_WEIGHT_TON);
 		UnitPressure = SharePref.getInt("UnitPressure", UNIT_PRESSURE_BAR);
 		HourOdometerIndex = SharePref.getInt("HourOdometerIndex", CAN1CommManager.DATA_STATE_HOURMETER_LATEST);
-		FuelIndex = SharePref.getInt("FuelIndex", CAN1CommManager.DATA_STATE_CURRENT_FUEL_RATE);	// ++, --, 150317 bwk
-		MachineStatusUpperIndex = SharePref.getInt("MachineStatusUpperIndex", CAN1CommManager.DATA_STATE_MACHINESTATUS_NOSELECT);
-		MachineStatusLowerIndex = SharePref.getInt("MachineStatusLowerIndex", CAN1CommManager.DATA_STATE_MACHINESTATUS_NOSELECT);
+		FuelIndex = SharePref.getInt("FuelIndex", CAN1CommManager.DATA_STATE_AVERAGE_FUEL_RATE);	// ++, --, 150331 bwk			// ++, --, 150407 bwk 초기값 평균연비
+		MachineStatusUpperIndex = SharePref.getInt("MachineStatusUpperIndex", CAN1CommManager.DATA_STATE_MACHINESTATUS_HYD);		// ++, --, 150407 bwk 9A 동일하게(NoSelect -> 작동유)
+		MachineStatusLowerIndex = SharePref.getInt("MachineStatusLowerIndex", CAN1CommManager.DATA_STATE_MACHINESTATUS_COOLANT);	// ++, --, 150407 bwk 9A 동일하게(NoSelect -> 냉각수)
 		WeighingErrorDetect = SharePref.getInt("WeighingErrorDetect", CAN1CommManager.DATA_STATE_WEIGHING_ERRORDETECT_OFF);
 		
 		ActiveCameraNum = SharePref.getInt("ActiveCameraNum", 4);
@@ -1297,8 +1367,8 @@ public class Home extends Activity {
 		
 		SmartKeyUse = SharePref.getInt("SmartKeyUse", CAN1CommManager.DATA_STATE_SMARTKEY_USE_OFF);
 		
-		strASNumDash = SharePref.getString("strASNumDash", "");
-		strASNum = SharePref.getString("strASNum", "");
+		strASNumDash = SharePref.getString("strASNumDash", "1899-7282");	// ++, --, 150402 bwk A/S 번호 추가 
+		strASNum = SharePref.getString("strASNum", "18997282");	// ++, --, 150402 bwk A/S 번호 추가 
 		
 		DisplayType = SharePref.getInt("DisplayType", DISPLAY_TYPE_A);	// ++, --, 150323 bwk B->A
 		setScreenIndex();	// ++, --, 150310 bwk
@@ -1311,7 +1381,7 @@ public class Home extends Activity {
 	
 	public void SaveUserData(int Index, UserData _userdata){
 		String strEngineMode = "EngineMode" + Integer.toString(Index);
-		String strWarmingUp = "WarmingUp" + Integer.toString(Index);
+		//String strWarmingUp = "WarmingUp" + Integer.toString(Index);
 		String strCCOMode = "CCOMode" + Integer.toString(Index);
 		String strShiftMode = "ShiftMode" + Integer.toString(Index);
 		String strTCLockUp = "TCLockUp" + Integer.toString(Index);
@@ -1326,7 +1396,15 @@ public class Home extends Activity {
 		String strSoftEndStopBucketIn = "SoftEndStopBucketIn" + Integer.toString(Index);
 		String strSoftEndStopBucketDump = "SoftEndStopBucketDump" + Integer.toString(Index);
 		String strDisplayType = "DisplayType" + Integer.toString(Index);
-		String strBrightness = "Brightness" + Integer.toString(Index);
+		// ++, 150407 bwk
+		//String strBrightness = "Brightness" + Integer.toString(Index);
+		String strBrightnessManualAuto = "BrightnessManualAuto" + Integer.toString(Index);
+		String strBrightnessManualLevel = "BrightnessManualLevel" + Integer.toString(Index);
+		String strBrightnessAutoDayLevel = "BrightnessAutoDayLevel" + Integer.toString(Index);
+		String strBrightnessAutoNightLevel = "BrightnessAutoNightLevel" + Integer.toString(Index);
+		String strBrightnessAutoStartTime = "BrightnessAutoStartTime" + Integer.toString(Index);
+		String strBrightnessAutoEndTime = "BrightnessAutoEndTime" + Integer.toString(Index);
+		// --, 150407 bwk
 		String strUnitTemp = "UnitTemp" + Integer.toString(Index);
 		String strUnitOdo = "UnitOdo" + Integer.toString(Index);
 		String strUnitWeight = "UnitWeight" + Integer.toString(Index);
@@ -1336,12 +1414,12 @@ public class Home extends Activity {
 		String strLanguage = "Language" + Integer.toString(Index);
 		String strSoundOutput = "SoundOutput" + Integer.toString(Index);
 		String strHourmeterDisplay = "HourmeterDisplay" + Integer.toString(Index);
-
+		String strFuelDisplay = "FuelDisplay" + Integer.toString(Index);
 
 		SharedPreferences SharePref = getSharedPreferences("Home", 0);
 		SharedPreferences.Editor edit = SharePref.edit();
 		edit.putInt(strEngineMode, _userdata.EngineMode);
-		edit.putInt(strWarmingUp, _userdata.WarmingUp);
+		//edit.putInt(strWarmingUp, _userdata.WarmingUp);
 		edit.putInt(strCCOMode, _userdata.CCOMode);
 		edit.putInt(strShiftMode, _userdata.ShiftMode);
 		edit.putInt(strTCLockUp, _userdata.TCLockUp);
@@ -1355,7 +1433,15 @@ public class Home extends Activity {
 		edit.putInt(strSoftEndStopBoomDown, _userdata.SoftEndStopBoomDown);
 		edit.putInt(strSoftEndStopBucketIn, _userdata.SoftEndStopBucketIn);
 		edit.putInt(strSoftEndStopBucketDump, _userdata.SoftEndStopBucketDump);
-		edit.putInt(strBrightness, _userdata.Brightness);
+		// ++, 150407 bwk
+		//edit.putInt(strBrightness, _userdata.Brightness);
+		edit.putInt(strBrightnessManualAuto, _userdata.BrightnessManualAuto);
+		edit.putInt(strBrightnessManualLevel, _userdata.BrightnessManualLevel);
+		edit.putInt(strBrightnessAutoDayLevel, _userdata.BrightnessAutoDayLevel);
+		edit.putInt(strBrightnessAutoNightLevel, _userdata.BrightnessAutoNightLevel);
+		edit.putInt(strBrightnessAutoStartTime, _userdata.BrightnessAutoStartTime);
+		edit.putInt(strBrightnessAutoEndTime, _userdata.BrightnessAutoEndTime);
+		// --, 150407 bwk		
 		edit.putInt(strDisplayType, _userdata.DisplayType);
 		edit.putInt(strUnitTemp, _userdata.UnitTemp);
 		edit.putInt(strUnitOdo, _userdata.UnitOdo);
@@ -1366,6 +1452,7 @@ public class Home extends Activity {
 		edit.putInt(strLanguage, _userdata.Language);
 		edit.putInt(strSoundOutput, _userdata.SoundOutput);
 		edit.putInt(strHourmeterDisplay, _userdata.HourmeterDisplay);
+		edit.putInt(strFuelDisplay, _userdata.FuelDisplay);
 
 		edit.commit();
 		Log.d(TAG,"SaveUserData" + Integer.toString(Index));
@@ -1373,7 +1460,7 @@ public class Home extends Activity {
 	}
 	public UserData LoadUserData(int Index){
 		String strEngineMode = "EngineMode" + Integer.toString(Index);
-		String strWarmingUp = "WarmingUp" + Integer.toString(Index);
+		//String strWarmingUp = "WarmingUp" + Integer.toString(Index);
 		String strCCOMode = "CCOMode" + Integer.toString(Index);
 		String strShiftMode = "ShiftMode" + Integer.toString(Index);
 		String strTCLockUp = "TCLockUp" + Integer.toString(Index);
@@ -1388,6 +1475,15 @@ public class Home extends Activity {
 		String strSoftEndStopBucketIn = "SoftEndStopBucketIn" + Integer.toString(Index);
 		String strSoftEndStopBucketDump = "SoftEndStopBucketDump" + Integer.toString(Index);
 		String strBrightness = "Brightness" + Integer.toString(Index);
+		// ++, 150407 bwk
+		//String strBrightness = "Brightness" + Integer.toString(Index);
+		String strBrightnessManualAuto = "BrightnessManualAuto" + Integer.toString(Index);
+		String strBrightnessManualLevel = "BrightnessManualLevel" + Integer.toString(Index);
+		String strBrightnessAutoDayLevel = "BrightnessAutoDayLevel" + Integer.toString(Index);
+		String strBrightnessAutoNightLevel = "BrightnessAutoNightLevel" + Integer.toString(Index);
+		String strBrightnessAutoStartTime = "BrightnessAutoStartTime" + Integer.toString(Index);
+		String strBrightnessAutoEndTime = "BrightnessAutoEndTime" + Integer.toString(Index);
+		// --, 150407 bwk		
 		String strDisplayType = "DisplayType" + Integer.toString(Index);
 		String strUnitTemp = "UnitTemp" + Integer.toString(Index);
 		String strUnitOdo = "UnitOdo" + Integer.toString(Index);
@@ -1398,6 +1494,7 @@ public class Home extends Activity {
 		String strLanguage = "Language" + Integer.toString(Index);
 		String strSoundOutput = "SoundOutput" + Integer.toString(Index);
 		String strHourmeterDisplay = "HourmeterDisplay" + Integer.toString(Index);
+		String strFuelDisplay = "FuelDisplay" + Integer.toString(Index);
 		
 		UserData _userdata;
 		_userdata = new UserData();
@@ -1405,7 +1502,7 @@ public class Home extends Activity {
 		SharedPreferences SharePref = getSharedPreferences("Home", 0);
 		
 		_userdata.EngineMode = SharePref.getInt(strEngineMode, CAN1CommManager.DATA_STATE_ENGINE_MODE_PWR);
-		_userdata.WarmingUp = SharePref.getInt(strWarmingUp, CAN1CommManager.DATA_STATE_ENGINE_WARMINGUP_OFF);
+		//_userdata.WarmingUp = SharePref.getInt(strWarmingUp, CAN1CommManager.DATA_STATE_ENGINE_WARMINGUP_OFF);
 		_userdata.CCOMode = SharePref.getInt(strCCOMode, CAN1CommManager.DATA_STATE_TM_CLUTCHCUTOFF_OFF);
 		_userdata.ShiftMode = SharePref.getInt(strShiftMode, CAN1CommManager.DATA_STATE_TM_SHIFTMODE_MANUAL);
 		_userdata.TCLockUp = SharePref.getInt(strTCLockUp, CAN1CommManager.DATA_STATE_TM_LOCKUPCLUTCH_OFF);
@@ -1419,7 +1516,15 @@ public class Home extends Activity {
 		_userdata.SoftEndStopBoomDown = SharePref.getInt(strSoftEndStopBoomDown, CAN1CommManager.DATA_STATE_SOFTSTOP_BOOMDOWN_OFF);
 		_userdata.SoftEndStopBucketIn = SharePref.getInt(strSoftEndStopBucketIn, CAN1CommManager.DATA_STATE_SOFTSTOP_BUCKETIN_OFF);
 		_userdata.SoftEndStopBucketDump = SharePref.getInt(strSoftEndStopBucketDump, CAN1CommManager.DATA_STATE_SOFTSTOP_BUCKETOUT_OFF);
-		_userdata.Brightness = SharePref.getInt(strBrightness,8);
+		// ++, 150407 bwk
+		//_userdata.Brightness = SharePref.getInt(strBrightness,8);
+		_userdata.BrightnessManualAuto = SharePref.getInt(strBrightnessManualAuto,BRIGHTNESS_MANUAL);
+		_userdata.BrightnessManualLevel = SharePref.getInt(strBrightnessManualLevel,BRIGHTNESS_MAX);
+		_userdata.BrightnessAutoDayLevel = SharePref.getInt(strBrightnessAutoDayLevel,BRIGHTNESS_MAX);
+		_userdata.BrightnessAutoNightLevel = SharePref.getInt(strBrightnessAutoNightLevel,BRIGHTNESS_MAX);
+		_userdata.BrightnessAutoStartTime = SharePref.getInt(strBrightnessAutoStartTime,8);
+		_userdata.BrightnessAutoEndTime = SharePref.getInt(strBrightnessAutoEndTime,18);
+		// --, 150407 bwk
 		_userdata.DisplayType = SharePref.getInt(strDisplayType,Home.DISPLAY_TYPE_B);
 		_userdata.UnitTemp = SharePref.getInt(strUnitTemp, Home.UNIT_TEMP_C);
 		_userdata.UnitOdo = SharePref.getInt(strUnitOdo, Home.UNIT_ODO_KM);
@@ -1427,9 +1532,10 @@ public class Home extends Activity {
 		_userdata.UnitPressure = SharePref.getInt(strUnitPressure, Home.UNIT_PRESSURE_BAR);
 		_userdata.MachineStatusUpper = SharePref.getInt(strMachineStatusUpper, CAN1CommManager.DATA_STATE_MACHINESTATUS_NOSELECT);
 		_userdata.MachineStatusLower = SharePref.getInt(strMachineStatusLower, CAN1CommManager.DATA_STATE_MACHINESTATUS_NOSELECT);
-		_userdata.Language = SharePref.getInt(strLanguage,0);
+		_userdata.Language = SharePref.getInt(strLanguage,Home.STATE_DISPLAY_LANGUAGE_KOREAN);
 		_userdata.SoundOutput = SharePref.getInt(strSoundOutput, Home.STATE_INTERNAL_SPK);
-		_userdata.HourmeterDisplay = SharePref.getInt(strHourmeterDisplay, CAN1CommManager.DATA_STATE_HOURMETER_LATEST);
+		_userdata.HourmeterDisplay = SharePref.getInt(strHourmeterDisplay, CAN1CommManager.DATA_STATE_OPERATION_NOSELECT);
+		_userdata.FuelDisplay = SharePref.getInt(strFuelDisplay, CAN1CommManager.DATA_STATE_FUEL_NOSELECT);
 
 
 		Log.d(TAG,"LoadUserData" + Integer.toString(Index));
@@ -1479,6 +1585,27 @@ public class Home extends Activity {
 		Log.d(TAG,"ScreenIndex="+ScreenIndex);
 	}	
 	// --, 150309 bwk
+	// ++, 150331 bwk
+	public void showMaintoKey(int Key){
+		if(DisplayType == DISPLAY_TYPE_A){
+			_MainChangeAnimation.StartChangeAnimation(_MainBBaseFragment);
+			OldScreenIndex = Home.SCREEN_STATE_MAIN_B_TOP;
+			switch(Key){
+				case CAN1CommManager.WORK_LOAD:
+					_MainBBaseFragment.setFirstScreenIndex(Home.SCREEN_STATE_MAIN_B_KEY_WORKLOAD);
+					break;
+			}
+		}else{
+			_MainChangeAnimation.StartChangeAnimation(_MainABaseFragment);
+			OldScreenIndex = Home.SCREEN_STATE_MAIN_A_TOP;
+			switch(Key){
+			case CAN1CommManager.WORK_LOAD:
+				_MainABaseFragment.setFirstScreenIndex(Home.SCREEN_STATE_MAIN_A_KEY_WORKLOAD);
+				break;
+			}
+		}
+	}	
+	// --, 150331 bwk
 	//Main Screen Fragment///////////////////////////////
 	public void showMainBFragment(){
 		_MainBBaseFragment = new MainBBaseFragment();
@@ -1789,6 +1916,13 @@ public class Home extends Activity {
 		_CrashApplication.SetSec(Sec);
 		
 		SetBackLight();
+		
+		// ++, 150326 bwk
+		if(SendDTCIndex > REQ_ERR_START && SendDTCIndex < Home.REQ_ERR_END)
+		{
+			ReqestErrorCode();
+		}
+		// --, 150326 bwk		
 	}
 	public void UpdateUI() {
 		// TODO Auto-generated method stub
@@ -1888,6 +2022,53 @@ public class Home extends Activity {
 		}
 		
 	}
+	/////////////////////////////////////////////////////
+	//FAULT CODE//////////////////////////////////////////
+	// ++, 150326 bwk
+	public void RequestErrorCode(int Err, int Req, int SeqNo){
+		CAN1Comm.Set_DTCInformationRequest_1515_PGN61184_11(Req);
+		CAN1Comm.Set_DTCType_1510_PGN61184_11(Err);
+		CAN1Comm.Set_SeqenceNumberofDTCInformationPacket_1513_PGN61184_11(SeqNo);
+		CAN1Comm.TxCANToMCU(11);
+	}
+	public void ReqestErrorCode(){
+		switch (SendDTCIndex) {
+		case REQ_ERR_MACHINE_ACTIVE:
+			RequestErrorCode(SendDTCIndex,1,1);
+			SendDTCIndex = REQ_ERR_END;
+			try {
+				Thread.sleep(200);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			break;
+		case REQ_ERR_ENGINE_ACTIVE:
+			RequestErrorCode(SendDTCIndex,1,1);
+			SendDTCIndex = REQ_ERR_MACHINE_ACTIVE;
+			try {
+				Thread.sleep(200);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+
+			break;
+		case REQ_ERR_TM_ACTIVE:
+			RequestErrorCode(SendDTCIndex,1,1);
+			SendDTCIndex = REQ_ERR_ENGINE_ACTIVE;
+			try {
+				Thread.sleep(200);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			break;
+		default:
+			break;
+		}
+	}
+	// --, 150326 bwk	
 	/////////////////////////////////////////////////////
 	//Backlight//////////////////////////////////////////
 	public void SetBackLight(){
@@ -2557,7 +2738,37 @@ public class Home extends Activity {
 		HomeDialog = _MiracastClosePopup;
 		HomeDialog.show();
 	}
-	// --, 150313 cjg	
+	// --, 150313 cjg	 
+	// ++, 150402 bwk
+	public void showFineModulation(){
+		if(AnimationRunningFlag == true)
+			return;
+		else
+			StartAnimationRunningTimer();
+		if(HomeDialog != null){
+			HomeDialog.dismiss();
+			HomeDialog = null;
+		}
+		
+		_FineModulationPouup = new FineModulationPouup(this);
+		HomeDialog = _FineModulationPouup;
+		HomeDialog.show();
+	}
+	// --, 150402 bwk	
+	public void showFuelInitalPopup(){
+		if(AnimationRunningFlag == true)
+			return;
+		else
+			StartAnimationRunningTimer();
+		
+		if(HomeDialog != null){
+			HomeDialog.dismiss();
+			HomeDialog = null;
+		}
+
+		HomeDialog = _FuelInitalPopup;
+		HomeDialog.show();
+	}
 	/////////////////////////////////////////////////////
 	//Timer//////////////////////////////////////////////
 	public class SeatBeltTimerClass extends TimerTask{
@@ -2707,6 +2918,7 @@ public class Home extends Activity {
 					CAN1Comm.Set_SpeedmeterUnitChange_PGN65327(3);
 				}
 				else {
+					SendDTCIndex = REQ_ERR_TM_ACTIVE;
 					CancelSendCommandTimer();
 				}
 				nSendCommandTimerIndex++;

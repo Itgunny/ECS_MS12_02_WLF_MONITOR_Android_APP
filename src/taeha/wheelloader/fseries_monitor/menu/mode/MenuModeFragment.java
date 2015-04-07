@@ -96,8 +96,14 @@ public class MenuModeFragment extends ParentFragment{
 		_MenuModeETCFragment = new MenuModeETCFragment();
 		_EngineSettingFragment = new EngineSettingFragment();
 		
-		ModeFocusIndex = STATE_CURSUR_LIST;
 		
+		 // ++, 150331 cjg
+		//ModeFocusIndex = STATE_CURSUR_LIST;
+	      ModeFocusIndex = STATE_CURSUR_TAB;
+	      
+	      ParentActivity._MenuBaseFragment._MenuModeFragment._MenuModeEngTMFragment.CursurIndex = 0;
+	      ParentActivity._MenuBaseFragment._MenuModeFragment._MenuModeEngTMFragment.CursurDisplay(CursurIndex);
+	      // --, 150331 cjg
 	}
 	@Override
 	protected void InitButtonListener() {

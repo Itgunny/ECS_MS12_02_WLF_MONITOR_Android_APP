@@ -55,8 +55,8 @@ public class ClockFragment extends ParentFragment{
 	//////////////////////////////////////////////////
 	
 	//VALUABLE////////////////////////////////////////
-	int Hour;
-	int Min;
+	int OldHour;
+	int OldMin;
 	
 	int ClockIndex;
 	
@@ -146,10 +146,32 @@ public class ClockFragment extends ParentFragment{
 		// TODO Auto-generated method stub
 		super.InitValuables();
 		ClockIndex = 0;
-		Hour = CAN1Comm.Get_RTColock_Hour();
-		Min = CAN1Comm.Get_RTColock_Min();
+		OldHour = CAN1Comm.Get_RTColock_Hour();
+		OldMin = CAN1Comm.Get_RTColock_Min();
 
-		ClockDisplay(Hour,Min);
+		int TempHour;
+		if(OldHour >= 12){
+			textViewAMPM.setText(ParentActivity.getResources().getString(string.PM));
+			AMFlag = false;
+			TempHour = OldHour - 12;
+		}else{
+			textViewAMPM.setText(ParentActivity.getResources().getString(string.AM));
+			AMFlag = true;
+			TempHour = OldHour;
+		}
+		if(TempHour == 0){
+			Hour10 = 1;
+			Hour1 = 2;
+			Min10 = OldMin / 10;
+			Min1 = OldMin % 10;
+		}else{
+			Hour10 = TempHour / 10;
+			Hour1 = TempHour % 10;
+			Min10 = OldMin / 10;
+			Min1 = OldMin % 10;
+		}
+
+		ClockDisplay();
 		CheckButton();
 		CursurIndex = 1;
 	}
@@ -372,6 +394,14 @@ public class ClockFragment extends ParentFragment{
 		}
 	
 
+		int Hour = Hour10 * 10 + Hour1;
+		int Min = Min10 * 10 + Min1;
+		if(Hour == 12 & AMFlag == true)
+			Hour = 0;
+		else if(Hour == 12 & AMFlag == false)
+			Hour = 12;
+		else if(AMFlag == false)
+			Hour = Hour + 12;
 		CAN1Comm.TxCMDToMCU(CAN1Comm.CMD_RTC,ParentActivity.Year,ParentActivity.Month,ParentActivity.Date,0x01,Hour,Min,0x00,0x00);
 		
 	
@@ -394,6 +424,8 @@ public class ClockFragment extends ParentFragment{
 		}
 	}
 	public void ClickNum1(){
+		if(textViewNum1.getAlpha() == 0.5)
+			return;
 		setNumber(1);
 		
 		if(ClockIndex >= 3)
@@ -401,9 +433,11 @@ public class ClockFragment extends ParentFragment{
 		else 
 			ClockIndex++;
 		CheckButton();
-		ClockDisplay(Hour,Min);
+		ClockDisplay();
 	}
 	public void ClickNum2(){
+		if(textViewNum2.getAlpha() == 0.5)
+			return;
 		setNumber(2);
 		
 		if(ClockIndex >= 3)
@@ -411,9 +445,11 @@ public class ClockFragment extends ParentFragment{
 		else 
 			ClockIndex++;
 		CheckButton();
-		ClockDisplay(Hour,Min);
+		ClockDisplay();
 	}
 	public void ClickNum3(){
+		if(textViewNum3.getAlpha() == 0.5)
+			return;
 		setNumber(3);
 		
 		if(ClockIndex >= 3)
@@ -421,9 +457,11 @@ public class ClockFragment extends ParentFragment{
 		else 
 			ClockIndex++;
 		CheckButton();
-		ClockDisplay(Hour,Min);
+		ClockDisplay();
 	}
 	public void ClickNum4(){
+		if(textViewNum4.getAlpha() == 0.5)
+			return;
 		setNumber(4);
 		
 		if(ClockIndex >= 3)
@@ -431,9 +469,11 @@ public class ClockFragment extends ParentFragment{
 		else 
 			ClockIndex++;
 		CheckButton();
-		ClockDisplay(Hour,Min);
+		ClockDisplay();
 	}
 	public void ClickNum5(){
+		if(textViewNum5.getAlpha() == 0.5)
+			return;
 		setNumber(5);
 		
 		if(ClockIndex >= 3)
@@ -441,9 +481,11 @@ public class ClockFragment extends ParentFragment{
 		else 
 			ClockIndex++;
 		CheckButton();
-		ClockDisplay(Hour,Min);
+		ClockDisplay();
 	}
 	public void ClickNum6(){
+		if(textViewNum6.getAlpha() == 0.5)
+			return;
 		setNumber(6);
 		
 		if(ClockIndex >= 3)
@@ -451,9 +493,11 @@ public class ClockFragment extends ParentFragment{
 		else 
 			ClockIndex++;
 		CheckButton();
-		ClockDisplay(Hour,Min);
+		ClockDisplay();
 	}
 	public void ClickNum7(){
+		if(textViewNum7.getAlpha() == 0.5)
+			return;
 		setNumber(7);
 		
 		if(ClockIndex >= 3)
@@ -461,9 +505,11 @@ public class ClockFragment extends ParentFragment{
 		else 
 			ClockIndex++;
 		CheckButton();
-		ClockDisplay(Hour,Min);
+		ClockDisplay();
 	}
 	public void ClickNum8(){
+		if(textViewNum8.getAlpha() == 0.5)
+			return;
 		setNumber(8);
 		
 		if(ClockIndex >= 3)
@@ -471,9 +517,11 @@ public class ClockFragment extends ParentFragment{
 		else 
 			ClockIndex++;
 		CheckButton();
-		ClockDisplay(Hour,Min);
+		ClockDisplay();
 	}
 	public void ClickNum9(){
+		if(textViewNum9.getAlpha() == 0.5)
+			return;
 		setNumber(9);
 	
 		if(ClockIndex >= 3)
@@ -481,9 +529,11 @@ public class ClockFragment extends ParentFragment{
 		else 
 			ClockIndex++;
 		CheckButton();
-		ClockDisplay(Hour,Min);
+		ClockDisplay();
 	}
 	public void ClickNum0(){
+		if(textViewNum0.getAlpha() == 0.5)
+			return;
 		setNumber(0);
 		
 		if(ClockIndex >= 3)
@@ -491,7 +541,7 @@ public class ClockFragment extends ParentFragment{
 		else 
 			ClockIndex++;
 		CheckButton();
-		ClockDisplay(Hour,Min);
+		ClockDisplay();
 	}
 	public void ClickNumBack(){
 		if(ClockIndex <= 0)
@@ -499,7 +549,7 @@ public class ClockFragment extends ParentFragment{
 		else 
 			ClockIndex--;
 		CheckButton();
-		ClockDisplay(Hour,Min);
+		ClockDisplay();
 	}
 	public void ClickNumNext(){
 		if(ClockIndex >= 3)
@@ -507,36 +557,36 @@ public class ClockFragment extends ParentFragment{
 		else 
 			ClockIndex++;
 		CheckButton();
-		ClockDisplay(Hour,Min);
+		ClockDisplay();
 	}
 	public void ClickAMPM(){
 		if(AMFlag == true){
-			Hour += 12;
-			ClockDisplay(Hour,Min);
+			textViewAMPM.setText(ParentActivity.getResources().getString(string.PM));
+			AMFlag = false;
 		}else{
-			Hour -= 12;
-			ClockDisplay(Hour,Min);
+			textViewAMPM.setText(ParentActivity.getResources().getString(string.AM));
+			AMFlag = true;
 		}
 	}
 	public void ClickHour10(){
 		ClockIndex = 0;
 		CheckButton();
-		ClockDisplay(Hour,Min);
+		ClockDisplay();
 	}
 	public void ClickHour1(){
 		ClockIndex = 1;
 		CheckButton();
-		ClockDisplay(Hour,Min);
+		ClockDisplay();
 	}
 	public void ClickMin10(){
 		ClockIndex = 2;
 		CheckButton();
-		ClockDisplay(Hour,Min);
+		ClockDisplay();
 	}
 	public void ClickMin1(){
 		ClockIndex = 3;
 		CheckButton();
-		ClockDisplay(Hour,Min);
+		ClockDisplay();
 	}
 	
 	/////////////////////////////////////////////////////////////////////
@@ -558,23 +608,7 @@ public class ClockFragment extends ParentFragment{
 			break;
 		}
 		
-		Hour = Hour10 * 10 + Hour1;
-		Min = Min10 * 10 + Min1;
-		
-		// ++, 150227 bwk
-		if(AMFlag == true && Hour == 0)
-		{
-			Hour = -1;
-		}
-		// --, 150227 bwk
-
-		if(Hour == 12)
-			Hour = 0;
-		
-		if(AMFlag == false)
-			Hour += 12;
-		
-		Log.d(TAG,"Hour : " + Integer.toString(Hour) + " Min : " + Integer.toString(Min));
+		//Log.d(TAG,"Hour : " + Integer.toString(Hour10 * 10 + Hour1) + " Min : " + Integer.toString(Min10 * 10 + Min1));
 	}
 	public void EnalbeAllButton(){
 		textViewNum1.setClickable(true);
@@ -701,7 +735,7 @@ public class ClockFragment extends ParentFragment{
 					
 				}else{
 					setNumber(0);
-					ClockDisplay(Hour,Min);
+					ClockDisplay();
 				}
 			}else if(Hour10 == 0){
 				DisableHour1Button2();
@@ -713,53 +747,7 @@ public class ClockFragment extends ParentFragment{
 		}
 	}
 	/////////////////////////////////////////////////////////////////////
-	public void ClockDisplay(int Hour, int Min){
-		int TempHour;
-		if(ParentActivity.GetAMPM(Hour) == ParentActivity.CLOCK_AM){
-			textViewAMPM.setText(ParentActivity.getResources().getString(string.AM));
-			if(Hour == 0){
-				Hour10 = 1;
-				Hour1 = 2;
-				Min10 = Min / 10;
-				Min1 = Min % 10;
-			// ++, 150227 bwk
-			// 10시에서 10의자리에서 0을 눌렀을 경우
-			}else if(Hour == -1){
-				Hour10 = 0;
-				Hour1 = 0;
-				Min10 = Min / 10;
-				Min1 = Min % 10;
-			// --, 150227 bwk
-			}else{
-				Hour10 = Hour / 10;
-				Hour1 = Hour % 10;
-				Min10 = Min / 10;
-				Min1 = Min % 10;
-			}
-			AMFlag = true;
-			
-		}else{
-			textViewAMPM.setText(ParentActivity.getResources().getString(string.PM));
-			AMFlag = false;
-			if(Hour == 12){
-				TempHour = Hour;
-				Hour10 = TempHour / 10;
-				Hour1 = TempHour % 10;
-				Min10 = Min / 10;
-				Min1 = Min % 10;
-			}else{
-				TempHour = Hour - 12;
-				Hour10 = TempHour / 10;
-				Hour1 = TempHour % 10;
-				Min10 = Min / 10;
-				Min1 = Min % 10;
-			}
-			
-		}
-//		radioHour10.setText(ParentActivity.GetHour2(Hour10));
-//		radioHour1.setText(ParentActivity.GetHour2(Hour1));
-//		radioMin10.setText(ParentActivity.GetMin2(Min10));
-//		radioMin1.setText(ParentActivity.GetMin2(Min1));
+	public void ClockDisplay(){
 		radioHour10.setText(Integer.toString(Hour10));
 		radioHour1.setText(Integer.toString(Hour1));
 		radioMin10.setText(Integer.toString(Min10));

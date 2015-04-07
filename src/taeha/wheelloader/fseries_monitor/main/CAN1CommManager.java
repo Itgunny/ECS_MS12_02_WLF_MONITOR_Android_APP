@@ -125,14 +125,20 @@ public class CAN1CommManager extends ICAN1CommManager.Stub{		// ttySAC1(Linux), 
   
   	public static final int DATA_STATE_TM_LOCKUPCLUTCH_OFF		 = 0;
 	public static final int DATA_STATE_TM_LOCKUPCLUTCH_ON		 = 1;
-	
-	public static final int DATA_STATE_HOURMETER_LATEST 		= 0;
-	public static final int DATA_STATE_FUELRATE_CURRENT 		= 1;
+
+	// ++, 150403 bwk
+//	public static final int DATA_STATE_HOURMETER_LATEST 		= 0;
+//	public static final int DATA_STATE_FUELRATE_CURRENT 		= 1;
+//	public static final int DATA_STATE_ODOMETER_TOTAL 			= 2;
+//	public static final int DATA_STATE_ODOMETER_LATEST 			= 3;
+	public static final int DATA_STATE_OPERATION_NOSELECT		= 0;
+	public static final int DATA_STATE_HOURMETER_LATEST 		= 1;
 	public static final int DATA_STATE_ODOMETER_TOTAL 			= 2;
 	public static final int DATA_STATE_ODOMETER_LATEST 			= 3;
+	// --, 150403 bwk
 	
 	// ++, 150317 bwk
-	public static final int DATA_STATE_CURRENT_FUEL_RATE		= 0;
+	public static final int DATA_STATE_FUEL_NOSELECT			= 0;
 	public static final int DATA_STATE_AVERAGE_FUEL_RATE		= 1;
 	public static final int DATA_STATE_LATEST_FUEL_CONSUMED		= 2;
 	// --, 150317 bwk
@@ -323,7 +329,6 @@ public class CAN1CommManager extends ICAN1CommManager.Stub{		// ttySAC1(Linux), 
 	public static final int	DATA_STATE_CURRENT_WEIHGING_RESULT_CANCELOK					= 2;
 	// ++, 150212 bwk
 	/*
-	
 	public static final int	DATA_STATE_CURRENT_WEIHGING_RESULT_BOOMLIFTING				= 11;
 	public static final int	DATA_STATE_CURRENT_WEIHGING_RESULT_BUCKETFULLIN				= 12;
 	public static final int	DATA_STATE_CURRENT_WEIHGING_RESULT_BOOMLIFTING_BUCKETFULLIN	= 13;
@@ -344,6 +349,18 @@ public class CAN1CommManager extends ICAN1CommManager.Stub{		// ttySAC1(Linux), 
 	public static final int	DATA_STATE_EHCUERR_ENGINEISNOTSTARTED						= 0x08;
 	public static final int	DATA_STATE_EHCUERR_MACHINEISNOTSTATIONARY					= 0x10;
 	public static final int	DATA_STATE_EHCUERR_TCUPENDING								= 0x20;
+	
+	public static final int DATA_STATE_EXCAVATOR_MODE_HOURS_HISTORY						= 01;
+	public static final int DATA_STATE_HOURLY_FUEL_RATE_INFO							= 11;
+	public static final int DATA_STATE_DAILY_FUEL_RATE_INFO								= 12;
+	public static final int DATA_STATE_MODE_FUEL_RATE_INFO								= 13;
+	public static final int DATA_STATE_TOTAL_WEIGHT_DAILY_HISTORY						= 15;
+	public static final int DATA_STATE_TOTAL_WEIGHT_HOURLY_HISTORY						= 16;
+	public static final int DATA_STATE_HOURLY_FUEL_RATE_INFO_CLEAR						= 111;
+	public static final int DATA_STATE_DAILY_FUEL_RATE_INFO_CLEAR						= 112;
+	public static final int DATA_STATE_MODE_FUEL_RATE_INFO_CLEAR						= 113;
+	public static final int DATA_STATE_AVERAGE_FUEL_RATE_INFO_CLEAR						= 201;
+	public static final int DATA_STATE_A_DAYS_FUEL_USED_CLEAR							= 202;
 	
 	public static final int COMMAND_MAINTENANCE_ITEM_LIST_REQUEST						= 0;
 	public static final int MAINTETNANCE_INFORMATION_REQUEST							= 1;
@@ -770,6 +787,21 @@ public class CAN1CommManager extends ICAN1CommManager.Stub{		// ttySAC1(Linux), 
 	public int Get_PasswordChangeResult_958_PGN61184_25(){ return service.Get_PasswordChangeResult_958_PGN61184_25();}
 	public byte[] Get_HCEAntiTheftPasswordRepresentation_1634_PGN61184_25(){ return service.Get_HCEAntiTheftPasswordRepresentation_1634_PGN61184_25();}
 	public int Get_RecvPasswordChangeResultFlag_PGN61184_25(){ return service.Get_RecvPasswordChangeResultFlag_PGN61184_25();}
+	//////RX_AVERAGE_FUEL_RATE_HISTORY_61184_33///////
+	public int Get_MessageType_PGN61184_33() { return service.Get_MessageType_PGN61184_33();}
+	public int Get_OperationHistoryType_1101_PGN61184_33() { return service.Get_OperationHistoryType_1101_PGN61184_33();}
+	public int Get_1storP_HourAverageFuelRateorDayFuelUsed_333_1405_PGN61184_33() {	return service.Get_1storP_HourAverageFuelRateorDayFuelUsed_333_1405_PGN61184_33();}
+	public int Get_2ndorS_HourAverageFuelRateorDayFuelUsed_333_1405_PGN61184_33() {	return service.Get_2ndorS_HourAverageFuelRateorDayFuelUsed_333_1405_PGN61184_33();}
+	public int Get_3rdorE_HourAverageFuelRateorDayFuelUsed_333_1405_PGN61184_33() {	return service.Get_3rdorE_HourAverageFuelRateorDayFuelUsed_333_1405_PGN61184_33();}
+	public int Get_4th_HourAverageFuelRateorDayFuelUsed_333_1405_PGN61184_33() { return service.Get_4th_HourAverageFuelRateorDayFuelUsed_333_1405_PGN61184_33();}
+	public int Get_5th_HourAverageFuelRateorDayFuelUsed_333_1405_PGN61184_33() { return service.Get_5th_HourAverageFuelRateorDayFuelUsed_333_1405_PGN61184_33();}
+	public int Get_6th_HourAverageFuelRateorDayFuelUsed_333_1405_PGN61184_33() { return service.Get_6th_HourAverageFuelRateorDayFuelUsed_333_1405_PGN61184_33();}
+	public int Get_7th_HourAverageFuelRateorDayFuelUsed_333_1405_PGN61184_33() { return service.Get_7th_HourAverageFuelRateorDayFuelUsed_333_1405_PGN61184_33();}
+	public int Get_8th_HourAverageFuelRate_333_PGN61184_33() { return service.Get_8th_HourAverageFuelRate_333_PGN61184_33();}
+	public int Get_9th_HourAverageFuelRate_333_PGN61184_33() { return service.Get_9th_HourAverageFuelRate_333_PGN61184_33();}
+	public int Get_10th_HourAverageFuelRate_333_PGN61184_33() { return service.Get_10th_HourAverageFuelRate_333_PGN61184_33();}
+	public int Get_11th_HourAverageFuelRate_333_PGN61184_33() { return service.Get_11th_HourAverageFuelRate_333_PGN61184_33();}
+	public int Get_12th_HourAverageFuelRate_333_PGN61184_33() {	return service.Get_12th_HourAverageFuelRate_333_PGN61184_33();}
 	//////RX_COOLING_FAN_SETTING_61184_61///////
 //	public int Get_MessageType_PGN61184_61(){ return service.Get_MessageType_PGN61184_61();}
 //	public int Get_TestMode_PGN61184_61(){ return service.Get_TestMode_PGN61184_61();}
@@ -1026,8 +1058,8 @@ public class CAN1CommManager extends ICAN1CommManager.Stub{		// ttySAC1(Linux), 
 	public int Get_FuelLevel_302_PGN65390(){ return service.Get_FuelLevel_302_PGN65390();}
 	public int Get_EcoGaugeLevel_1304_PGN65390(){ return service.Get_EcoGaugeLevel_1304_PGN65390();}
 	public int Get_EcoGaugeStatus_1305_PGN65390(){ return service.Get_EcoGaugeStatus_1305_PGN65390();}
-	public int Get_AverageFuelRate_PGN65390(){ return service.Get_AverageFuelRate_PGN65390();}
-	public int Get_CurrentFuelRate_PGN65390(){ return service.Get_CurrentFuelRate_PGN65390();}
+	public int Get_AverageFuelRate_333_PGN65390(){ return service.Get_AverageFuelRate_333_PGN65390();}
+	public int Get_ADaysFuelUsed_1405_PGN65390(){ return service.Get_ADaysFuelUsed_1405_PGN65390();}
 	//////RX_CYLINDER_ANGLE_STROKE1_65395///////
 	public int Get_BoomLinkAngle_1920_PGN65395(){ return service.Get_BoomLinkAngle_1920_PGN65395();}
 	public int Get_BellCrankAngle_1921_PGN65395(){ return service.Get_BellCrankAngle_1921_PGN65395();}
@@ -1133,6 +1165,11 @@ public class CAN1CommManager extends ICAN1CommManager.Stub{		// ttySAC1(Linux), 
 	public byte[] Get_DTC_3_PGN65438(){ return service.Get_DTC_3_PGN65438();}
 	public byte[] Get_DTC_4_PGN65438(){ return service.Get_DTC_4_PGN65438();}
 	public byte[] Get_DTC_5_PGN65438(){ return service.Get_DTC_5_PGN65438();}
+	//////RX_AXLE_STATUS_65449///////
+	public int Get_Front_Axle_Oil_Temperature_577_PGN65449(){ return service.Get_Front_Axle_Oil_Temperature_577_PGN65449();}
+	public int Get_Rear_Axle_Oil_Temperature_578_PGN65449(){ return service.Get_Rear_Axle_Oil_Temperature_578_PGN65449();}
+	public int Get_Front_Axle_Oil_Temp_Warning_580_PGN65449(){ return service.Get_Front_Axle_Oil_Temp_Warning_580_PGN65449();}
+	public int Get_Rear_Axle_Oil_Temp_Warning_581_PGN65449(){ return service.Get_Rear_Axle_Oil_Temp_Warning_581_PGN65449();}
 	//////RX_WEIGHING_SYSTEM_STATUS_65450///////
 	public int Get_WeighingSystemAccumulationMode_1941_PGN65450(){ return service.Get_WeighingSystemAccumulationMode_1941_PGN65450();}
 	public int Get_WeighingSystemBuzzer_1907_PGN65450(){ return service.Get_WeighingSystemBuzzer_1907_PGN65450();}
@@ -1255,6 +1292,9 @@ public class CAN1CommManager extends ICAN1CommManager.Stub{		// ttySAC1(Linux), 
 //	public void Set_MessageType_PGN61184_25(int Data){ service.Set_MessageType_PGN61184_25(Data);}
 //	public void Set_PasswordChangeResult_958_PGN61184_25(int Data){ service.Set_PasswordChangeResult_958_PGN61184_25(Data);}
 //	public void Set_HCEAntiTheftPasswordRepresentation_1634_PGN61184_25(byte[] Data){ service.Set_HCEAntiTheftPasswordRepresentation_1634_PGN61184_25(Data);}
+	//////TX_OPERATION_HISTORY_REQUEST_61184_31//////
+	public void Set_MessageType_PGN61184_31(int Data){ service.Set_MessageType_PGN61184_31(Data);}
+	public void Set_OperationHistory_1101_PGN61184_31(int Data){ service.Set_OperationHistory_1101_PGN61184_31(Data);}
 	//////TX_COOLING_FAN_SETTING_61184_61///////
 	public void Set_MessageType_PGN61184_61(int Data){ service.Set_MessageType_PGN61184_61(Data);}
 	public void Set_TestMode_PGN61184_61(int Data){ service.Set_TestMode_PGN61184_61(Data);}

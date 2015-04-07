@@ -17,7 +17,7 @@ import android.widget.RelativeLayout;
 
 public class EndingFragment extends ParentFragment{
 	//CONSTANT////////////////////////////////////////
-	static int count = 0;
+	//static int count = 0;		// ++, --, 150403 cjg
 	//////////////////////////////////////////////////
 	//RESOURCE////////////////////////////////////////
 	RelativeLayout layoutEnding;
@@ -54,8 +54,10 @@ public class EndingFragment extends ParentFragment{
 		TAG = "EndingFragment";
 		Log.d(TAG, "onCreateView");
 		mRoot = inflater.inflate(R.layout.screen_ending, null);
-		count++;
-		Log.d("TAG", "count" + count);
+		// ++, 150403 cjg
+		//count++;		
+		//Log.d("TAG", "count" + count);
+		// --, 150403 cjg
 		InitResource();
 		InitValuables();
 		InitButtonListener();
@@ -67,7 +69,7 @@ public class EndingFragment extends ParentFragment{
 		refreshHandler = new Handler(){
 			public void handleMessage(Message msg){
 				if(msg.what == 1000){
-					Log.d(TAG, "OnHandler");
+					//Log.d(TAG, "OnHandler");
 					Animation.update(layoutEnding);
 					Animation.invalidate();
 					sleep(10);
@@ -79,16 +81,19 @@ public class EndingFragment extends ParentFragment{
 				sendMessageDelayed(obtainMessage(1000), delayMillis);
 			}
 		};
-		if(count == 2){
-			refreshHandler.sendEmptyMessage(1000);
-		}
+		// ++, 150403 cjg
+//		if(count == 2){
+//			refreshHandler.sendEmptyMessage(1000);
+//		}
+		refreshHandler.sendEmptyMessage(1000);
+		// --, 150403 cjg
 		return mRoot;
 	}
 	@Override
 	public void onDestroyView() {
 		// TODO Auto-generated method stub
 		super.onDestroyView();
-		Log.d(TAG,"onDestroy()");
+		//Log.d(TAG,"onDestroy()");
 	}
 	////////////////////////////////////////////////
 
@@ -96,9 +101,9 @@ public class EndingFragment extends ParentFragment{
 	@Override
 	protected void InitResource() {
 		// TODO Auto-generated method stub
-		Log.d(TAG,"InitResource");
+		//Log.d(TAG,"InitResource");
 		layoutEnding = (RelativeLayout)mRoot.findViewById(R.id.imageView_screen_ending);
-		Log.d(TAG,"InitResource2");
+		//Log.d(TAG,"InitResource2");
 	}
 
 	protected void InitValuables() {

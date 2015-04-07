@@ -158,7 +158,7 @@ public class QuickCouplerPopupUnlocking3 extends ParentPopup{
 	}
 
 	public void ClickLocking(){
-		ParentActivity.OldScreenIndex = ParentActivity.ScreenIndex;
+		//ParentActivity.OldScreenIndex = ParentActivity.ScreenIndex;		// ++, --, 150407 bwk
 		ParentActivity.showQuickCouplerPopupLocking2();
 		CAN1Comm.SetFNFlag(true);
 		this.dismiss();

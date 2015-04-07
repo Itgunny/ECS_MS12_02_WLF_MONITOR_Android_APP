@@ -277,6 +277,7 @@
         </RelativeLayout>
 
         <RelativeLayout
+            android:id="@+id/RelativeLayout_menu_body_userswitching_low_save"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignBottom="@+id/ImageButton_menu_body_userswitching_low_save"

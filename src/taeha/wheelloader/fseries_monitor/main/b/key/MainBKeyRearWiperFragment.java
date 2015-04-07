@@ -90,6 +90,8 @@ public class MainBKeyRearWiperFragment extends ParentFragment{
 		WiperSpeedState = CAN1Comm.Get_RearWiperOperationStatus_3451_PGN65527();
 		WiperWasherState = CAN1Comm.Get_RearWiperWasherOperationStatus_3452_PGN65527();
 		
+		SelectWiperSpeedState = WiperSpeedState;		// ++, --, 150331 bwk
+		
 		SendCount = 0;
 		initState = 0;		// ++, 150210 bwk
 	}

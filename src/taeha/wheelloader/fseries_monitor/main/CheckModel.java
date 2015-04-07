@@ -9,20 +9,26 @@ public class CheckModel {
 	
 	private static final int LENGTH_COMPONENTBASICINFORMATION	= 37;
 	
+	// ++, --, 150329 bwk 965 추가
+	// ++, --, 150330 bwk 975 추가
 	public static final int NO_MODEL 	= 0x0;
 	public static final int MODEL_935 	= 0x1;
 	public static final int MODEL_940 	= 0x2;
 	public static final int MODEL_955 	= 0x3;
 	public static final int MODEL_960 	= 0x4;
-	public static final int MODEL_970	= 0x5;
-	public static final int MODEL_980	= 0x6;
+	public static final int MODEL_965 	= 0x5;
+	public static final int MODEL_970	= 0x6;
+	public static final int MODEL_975	= 0x7;
+	public static final int MODEL_980	= 0x8;
 	
 	public static final int MODEL_935TM 	= 0x11;
 	public static final int MODEL_940TM 	= 0x12;
 	public static final int MODEL_955TM 	= 0x13;
 	public static final int MODEL_960TM 	= 0x14;
-	public static final int MODEL_970TM		= 0x15;
-	public static final int MODEL_980TM		= 0x16;
+	public static final int MODEL_965TM 	= 0x15;
+	public static final int MODEL_970TM		= 0x16;
+	public static final int MODEL_975TM		= 0x17;
+	public static final int MODEL_980TM		= 0x18;
 	
 	public static final int	TCU_4SPEED	= 0x00000000;
 	public static final int	TCU_5SPEED	= 0x00000001;
@@ -122,11 +128,27 @@ public class CheckModel {
 					return MODEL_960;
 				}
 			}
+			// ++, 150329 bwk
+			else if(MCUModelNum == 965){
+				if(cSub1 == 'T' && cSub2 == 'M'){
+					return MODEL_965TM;
+				}else{
+					return MODEL_965;
+				}
+			}
+			// --, 150329 bwk
 			else if(MCUModelNum == 970){
 				if(cSub1 == 'T' && cSub2 == 'M'){
 					return MODEL_970TM;
 				}else{
 					return MODEL_970;
+				}
+			}
+			else if(MCUModelNum == 975){
+				if(cSub1 == 'T' && cSub2 == 'M'){
+					return MODEL_975TM;
+				}else{
+					return MODEL_975;
 				}
 			}
 			else if(MCUModelNum == 980){

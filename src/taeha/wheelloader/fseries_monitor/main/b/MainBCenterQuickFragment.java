@@ -94,7 +94,10 @@ public class MainBCenterQuickFragment extends MainBCenterFragment{
 			return;
 		else
 			ParentActivity.StartAnimationRunningTimer();
-		ParentActivity._MainBBaseFragment.showDefaultScreenAnimation();
+		// ++, 150407 bwk
+		//ParentActivity._MainBBaseFragment.showDefaultScreenAnimation();
+		ParentActivity._MainBBaseFragment.showQuicktoDefaultScreenAnimation();
+		// --, 150407 bwk
 		Log.d(TAG,"ClickOption");
 	}
 	

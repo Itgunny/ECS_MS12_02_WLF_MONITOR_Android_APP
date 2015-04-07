@@ -206,9 +206,8 @@ public class PressureCalibration extends ParentFragment{
 		//if(ParentActivity.OldScreenIndex == Home.SCREEN_STATE_MAIN_B_TOP){
 			//ParentActivity._MainChangeAnimation.StartChangeAnimation(ParentActivity._MainBBaseFragment);
 		if(ParentActivity.OldScreenIndex == Home.SCREEN_STATE_MAIN_A_TOP || ParentActivity.OldScreenIndex == Home.SCREEN_STATE_MAIN_B_TOP){
-			ParentActivity.showMainScreen();
+			ParentActivity.showMaintoKey(CAN1CommManager.WORK_LOAD);
 		// --, 150309 bwk		
-			ParentActivity.OldScreenIndex = 0;
 			//ParentActivity._MainBBaseFragment.showWorkLoadAnimation();
 		}
 		

@@ -8,6 +8,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import taeha.wheelloader.fseries_monitor.main.DataProvider;
 import taeha.wheelloader.fseries_monitor.main.R;
 import taeha.wheelloader.fseries_monitor.menu.PasswordFragment;
 
@@ -85,7 +86,12 @@ public class SoftwareUpdatePasswordFragment extends PasswordFragment{
 
 		//if(Result == 1)	// UserPassword
 		//	Result = 0;
-		
+		int getBKCUComponentCode = CAN1Comm.Get_ComponentCode_1699_PGN65330_BKCU();
+		if( getBKCUComponentCode == 255){
+			DataProvider.setAuthkey("-"); 
+		} else {
+			DataProvider.setAuthkey("BKCU");
+		}
 		
 		switch (Result) {
 		case 0:			// Not OK

@@ -19,7 +19,9 @@ import taeha.wheelloader.fseries_monitor.main.a.MainAKeyTitleFragment;
 import taeha.wheelloader.fseries_monitor.main.a.MainALeftDownFuelSelectFragment;
 import taeha.wheelloader.fseries_monitor.main.a.MainALeftQuickFragment;
 import taeha.wheelloader.fseries_monitor.main.a.MainALeftMainFragment;
-import taeha.wheelloader.fseries_monitor.main.a.MainALeftUpMachineStatusSelectFragment;
+import taeha.wheelloader.fseries_monitor.main.a.MainALeftUpMachineStatusSelectFragment1;
+import taeha.wheelloader.fseries_monitor.main.a.MainALeftUpMachineStatusSelectFragment2;
+import taeha.wheelloader.fseries_monitor.main.a.MainALeftUpMachineStatusSelectFragment3;
 import taeha.wheelloader.fseries_monitor.main.a.MainARightDownTMCCOModeFragment;
 import taeha.wheelloader.fseries_monitor.main.a.MainARightMainFragment;
 import taeha.wheelloader.fseries_monitor.main.a.MainARightDownTMICCOModeFragment;
@@ -45,6 +47,8 @@ import taeha.wheelloader.fseries_monitor.main.a.key.MainAKeyWorkLoadAccumulation
 import taeha.wheelloader.fseries_monitor.main.a.key.MainAKeyWorkLoadDisplayFragment;
 import taeha.wheelloader.fseries_monitor.main.a.key.MainAKeyWorkLoadErrorDetectionFragment;
 import taeha.wheelloader.fseries_monitor.main.a.key.MainAKeyWorkLoadFragment;
+import taeha.wheelloader.fseries_monitor.main.b.MainBKeyTitleFragment;
+import taeha.wheelloader.fseries_monitor.main.b.key.MainBKeyWorkLoadFragment;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -82,6 +86,8 @@ public class MainABaseFragment extends ParentFragment{
 	//VALUABLE////////////////////////////////////////
 	int BrakepedalReq;
 	int AEBReq;	
+	
+	int FirstScreenIndex;		// ++, --, 150331 bwk
 	//////////////////////////////////////////////////
 	
 	//Fragment////////////////////////////////////////
@@ -106,7 +112,9 @@ public class MainABaseFragment extends ParentFragment{
 	public MainARightQuickFragment					_MainARightQuickFragment;
 	
 	public MainALeftMainFragment 					_MainALeftMainFragment;
-	public MainALeftUpMachineStatusSelectFragment 	_MainALeftUpMachineStatusSelectFragment;
+	public MainALeftUpMachineStatusSelectFragment1 	_MainALeftUpMachineStatusSelectFragment1;
+	public MainALeftUpMachineStatusSelectFragment2 	_MainALeftUpMachineStatusSelectFragment2;
+	public MainALeftUpMachineStatusSelectFragment3	_MainALeftUpMachineStatusSelectFragment3;
 	public MainALeftDownFuelSelectFragment 			_MainALeftDownFuelSelectFragment;
 	public MainALeftQuickFragment					_MainALeftQuickFragment;
 	
@@ -217,7 +225,9 @@ public class MainABaseFragment extends ParentFragment{
 			CenterAnimation.StartChangeAnimation(_MainACenterBrakePedalCalibrationFragment);
 		}else if (AEBReq == 1){
 			CenterAnimation.StartChangeAnimation(_MainACenterAEBFragment);
-		}		
+		}else{
+			CheckFirstScreen(FirstScreenIndex);		// ++, --, 150331 bwk
+		}
 	
 		ParentActivity.ScreenIndex = ParentActivity.SCREEN_STATE_MAIN_A_TOP;
 		
@@ -293,7 +303,9 @@ public class MainABaseFragment extends ParentFragment{
 		_MainALeftDownFuelSelectFragment = new MainALeftDownFuelSelectFragment();
 		
 		_MainALeftMainFragment = new MainALeftMainFragment();
-		_MainALeftUpMachineStatusSelectFragment = new MainALeftUpMachineStatusSelectFragment();
+		_MainALeftUpMachineStatusSelectFragment1 = new MainALeftUpMachineStatusSelectFragment1();
+		_MainALeftUpMachineStatusSelectFragment2 = new MainALeftUpMachineStatusSelectFragment2();
+		_MainALeftUpMachineStatusSelectFragment3 = new MainALeftUpMachineStatusSelectFragment3();
 		
 		_MainAUpperMenuBarFragment = new MainAUpperMenuBarFragment();
 		
@@ -434,7 +446,9 @@ public class MainABaseFragment extends ParentFragment{
 		transaction.detach(_MainARightDownTMTCLockUpFragment);
 		transaction.detach(_MainARightQuickFragment);
 		transaction.detach(_MainALeftMainFragment);
-		transaction.detach(_MainALeftUpMachineStatusSelectFragment);
+		transaction.detach(_MainALeftUpMachineStatusSelectFragment1);
+		transaction.detach(_MainALeftUpMachineStatusSelectFragment2);
+		transaction.detach(_MainALeftUpMachineStatusSelectFragment3);
 		transaction.detach(_MainALeftDownFuelSelectFragment);
 		transaction.detach(_MainALeftQuickFragment);
 		transaction.detach(_MainAUpperMenuBarFragment);
@@ -466,7 +480,9 @@ public class MainABaseFragment extends ParentFragment{
 		_MainARightQuickFragment	= null;
 			
 		_MainALeftMainFragment 	 = null;
-		_MainALeftUpMachineStatusSelectFragment 	 = null;
+		_MainALeftUpMachineStatusSelectFragment1 	 = null;
+		_MainALeftUpMachineStatusSelectFragment2 	 = null;
+		_MainALeftUpMachineStatusSelectFragment3	 = null;
 		_MainALeftDownFuelSelectFragment 	 = null;
 		_MainALeftQuickFragment	= null;
 			
@@ -686,13 +702,24 @@ public class MainABaseFragment extends ParentFragment{
 		//transaction.addToBackStack("Main_Left");
 		transaction.commit();
 	}
-	public void showLeftUpMachineStatusSelect(){
+	public void showLeftUpMachineStatusSelect1(){
 		android.app.FragmentTransaction transaction = getFragmentManager().beginTransaction();
-		transaction.replace(R.id.FrameLayout_screen_main_a_left, _MainALeftUpMachineStatusSelectFragment);
+		transaction.replace(R.id.FrameLayout_screen_main_a_left, _MainALeftUpMachineStatusSelectFragment1);
 		//transaction.addToBackStack("Main_Left");
 		transaction.commit();
 	}
-	
+	public void showLeftUpMachineStatusSelect2(){
+		android.app.FragmentTransaction transaction = getFragmentManager().beginTransaction();
+		transaction.replace(R.id.FrameLayout_screen_main_a_left, _MainALeftUpMachineStatusSelectFragment2);
+		//transaction.addToBackStack("Main_Left");
+		transaction.commit();
+	}
+	public void showLeftUpMachineStatusSelect3(){
+		android.app.FragmentTransaction transaction = getFragmentManager().beginTransaction();
+		transaction.replace(R.id.FrameLayout_screen_main_a_left, _MainALeftUpMachineStatusSelectFragment3);
+		//transaction.addToBackStack("Main_Left");
+		transaction.commit();
+	}
 	// Upper
 	public void showUpperMenuBar(){
 		android.app.FragmentTransaction transaction = getFragmentManager().beginTransaction();
@@ -1161,7 +1188,38 @@ public class MainABaseFragment extends ParentFragment{
 	//	KeyTitleChangeAnimation.StartChangeAnimation(_MainAKeyTitleFragment);
 		KeyBodyChangeAnimation.StartChangeAnimation(_MainAKeyRideControlSpeedFragment);
 	}
+	/////////////////////////////////////////////////////////////////////
+	// ++, 150331 bwk
+	public void setFirstScreenIndex(int Index){
+		FirstScreenIndex = Index;
+	}
+	public void CheckFirstScreen(int Index){
+		if(Index == Home.SCREEN_STATE_MAIN_A_KEY_WORKLOAD){
+			showWorkLoad();
+			setFirstScreenIndex(0);
+		}
+	}
+	
+	public void showWorkLoad(){
+		LayoutBody.setVisibility(View.INVISIBLE);
+		LayoutKey.setVisibility(View.VISIBLE);
 
+		_KeyTitleShiftAnimation.StartShiftAnimation();
+		_KeyBodyShiftAnimation.StartShiftAnimation();
+		_KeyTitleBGAppearAnimation.StartAnimation();
+		_KeyBodyBGAppearAnimation.StartAnimation();
+		_KeyTitleBGShiftAnimation.StartShiftAnimation();
+		_KeyBodyBGShiftAnimation.StartShiftAnimation();
+		
+		ParentActivity.ScreenIndex = ParentActivity.SCREEN_STATE_MAIN_B_KEY_WORKLOAD;
+		_MainAKeyTitleFragment = new MainAKeyTitleFragment();
+		_MainAKeyWorkLoadFragment = new MainAKeyWorkLoadFragment();
+		_MainAKeyTitleFragment.setTitleIcon(ParentActivity.getResources().getDrawable(R.drawable.main_key_title_workmode));
+		_MainAKeyTitleFragment.setTitleText(ParentActivity.getResources().getString(string.Work_Load));
+		KeyTitleChangeAnimation.StartChangeAnimation(_MainAKeyTitleFragment);
+		KeyBodyChangeAnimation.StartChangeAnimation(_MainAKeyWorkLoadFragment);
+	}
+	// --, 150331 bwk
 	/////////////////////////////////////////////////////////////////////
 	public void KeyButtonClick(final int key){
 		Log.d(TAG,"KeyButtonClick : 0x" + Integer.toHexString(key));
@@ -1240,7 +1298,7 @@ public class MainABaseFragment extends ParentFragment{
 		case CAN1CommManager.FINEMODULATION:
 			if(ParentActivity._CheckModel.GetMCUVersion(CAN1Comm.Get_ComponentBasicInformation_1698_PGN65330()) == CheckModel.MODEL_940
 			|| ParentActivity._CheckModel.GetMCUVersion(CAN1Comm.Get_ComponentBasicInformation_1698_PGN65330()) == CheckModel.MODEL_935){
-				
+				ParentActivity.showFineModulation();	// ++, --, 150402 bwk
 			}else{
 				if(ParentActivity.AnimationRunningFlag == true)
 					return;
@@ -1261,10 +1319,10 @@ public class MainABaseFragment extends ParentFragment{
 			}
 			break;
 		case CAN1CommManager.LEFT:
-			
+			ClickKeyButtonLeft();
 			break;
 		case CAN1CommManager.RIGHT:
-			
+			ClickKeyButtonRight();
 			break;
 		case CAN1CommManager.ESC:
 			ClickKeyButtonESC();
@@ -1300,6 +1358,53 @@ public class MainABaseFragment extends ParentFragment{
 		ParentActivity._MenuBaseFragment.setFirstScreenIndex(Home.SCREEN_STATE_MENU_PREFERENCE_DISPLAYTYPELANG_LANG_CHANGE);
 	}
 	
+	public void ClickKeyButtonLeft(){
+		switch (ParentActivity.ScreenIndex) {
+		case Home.SCREEN_STATE_MAIN_A_LEFTUP_MACHINESTATUS1:
+			_MainALeftUpMachineStatusSelectFragment1.ClickLeft();
+			break;
+		case Home.SCREEN_STATE_MAIN_A_LEFTUP_MACHINESTATUS2:
+			_MainALeftUpMachineStatusSelectFragment2.ClickLeft();
+			break;
+		case Home.SCREEN_STATE_MAIN_A_LEFTUP_MACHINESTATUS3:
+			_MainALeftUpMachineStatusSelectFragment3.ClickLeft();
+			break;
+		case Home.SCREEN_STATE_MAIN_A_LEFTDOWN_FUEL:
+			_MainALeftDownFuelSelectFragment.ClickLeft();
+			break;
+		case Home.SCREEN_STATE_MAIN_A_RIGHTUP_HOURODMETER:
+			_MainARightUpHourOdometerSelectFragment.ClickLeft();
+			break;
+		case  Home.SCREEN_STATE_MAIN_A_QUICK_MULTICLOSE:
+			ParentActivity._MultimediaClosePopup.ClickLeft();
+			break;
+		}
+	}
+	
+	public void ClickKeyButtonRight(){
+		switch (ParentActivity.ScreenIndex) {
+		case Home.SCREEN_STATE_MAIN_A_LEFTUP_MACHINESTATUS1:
+			_MainALeftUpMachineStatusSelectFragment1.ClickRight();
+			break;
+		case Home.SCREEN_STATE_MAIN_A_LEFTUP_MACHINESTATUS2:
+			_MainALeftUpMachineStatusSelectFragment2.ClickRight();
+			break;
+		case Home.SCREEN_STATE_MAIN_A_LEFTUP_MACHINESTATUS3:
+			_MainALeftUpMachineStatusSelectFragment3.ClickRight();
+			break;
+		case Home.SCREEN_STATE_MAIN_A_LEFTDOWN_FUEL:
+			_MainALeftDownFuelSelectFragment.ClickRight();
+			break;
+		case Home.SCREEN_STATE_MAIN_A_RIGHTUP_HOURODMETER:
+			_MainARightUpHourOdometerSelectFragment.ClickRight();
+			break;
+		case  Home.SCREEN_STATE_MAIN_A_QUICK_MULTICLOSE:
+			ParentActivity._MultimediaClosePopup.ClickRight();
+			break;
+			
+		}
+	}
+	
 	public void ClickKeyButtonESC(){
 		switch (ParentActivity.ScreenIndex) {
 		case Home.SCREEN_STATE_MAIN_A_RIGHTUP_ENGINE_MODE:
@@ -1311,7 +1416,9 @@ public class MainABaseFragment extends ParentFragment{
 		case Home.SCREEN_STATE_MAIN_A_RIGHTDOWN_TCLOCKUP:
 			showRightDowntoDefaultScreenAnimation();
 			break;
-		case Home.SCREEN_STATE_MAIN_A_LEFTUP_MACHINESTATUS:
+		case Home.SCREEN_STATE_MAIN_A_LEFTUP_MACHINESTATUS1:
+		case Home.SCREEN_STATE_MAIN_A_LEFTUP_MACHINESTATUS2:
+		case Home.SCREEN_STATE_MAIN_A_LEFTUP_MACHINESTATUS3:
 			showLeftUptoDefaultScreenAnimation();
 			break;
 		case Home.SCREEN_STATE_MAIN_A_LEFTDOWN_FUEL:
@@ -1333,7 +1440,9 @@ public class MainABaseFragment extends ParentFragment{
 		case Home.SCREEN_STATE_MAIN_A_KEY_FINEMODULATION:
 			showKeytoDefaultScreenAnimation();
 			break;	
-			
+		case Home.SCREEN_STATE_MAIN_A_KEY_FINEMODULATION_POPUP:
+			ParentActivity._FineModulationPouup.ClickESC();
+			break;
 		case Home.SCREEN_STATE_MAIN_A_BRKAEPEDALCALIBRATION_TOP:
 		case Home.SCREEN_STATE_MAIN_A_AEB_TOP:
 			showCalibrationtoDefaultScreenAnimation();
@@ -1351,13 +1460,44 @@ public class MainABaseFragment extends ParentFragment{
 		case Home.SCREEN_STATE_MAIN_A_KEY_WORKLOAD_ERRORDETECT:
 			_MainAKeyWorkLoadErrorDetectionFragment.showWorkLoadAnimation();
 			break;
+		case  Home.SCREEN_STATE_MAIN_A_QUICK_MULTICLOSE:
+			ParentActivity._MultimediaClosePopup.ClickESC();
+			break;
+			
 		default:
 			break;
 		}
 	}
 
 	public void ClickKeyButtonEnter(){
-		_MainALeftMainFragment.ClickEnter();
+		switch(ParentActivity.ScreenIndex){
+			case Home.SCREEN_STATE_MAIN_A_LEFTUP_MACHINESTATUS1:
+				_MainALeftUpMachineStatusSelectFragment1.ClickEnter();
+				break;
+			case Home.SCREEN_STATE_MAIN_A_LEFTUP_MACHINESTATUS2:
+				_MainALeftUpMachineStatusSelectFragment2.ClickEnter();
+				break;
+			case Home.SCREEN_STATE_MAIN_A_LEFTUP_MACHINESTATUS3:
+				_MainALeftUpMachineStatusSelectFragment3.ClickEnter();
+				break;
+			case Home.SCREEN_STATE_MAIN_A_LEFTDOWN_FUEL:
+				_MainALeftDownFuelSelectFragment.ClickEnter();
+				break;
+			case Home.SCREEN_STATE_MAIN_A_KEY_FINEMODULATION_POPUP:
+				ParentActivity._FineModulationPouup.ClickEnter();
+				break;
+			case Home.SCREEN_STATE_MAIN_A_RIGHTUP_HOURODMETER:
+				_MainARightUpHourOdometerSelectFragment.ClickEnter();
+				break;
+			case  Home.SCREEN_STATE_MAIN_A_QUICK_MULTICLOSE:
+				ParentActivity._MultimediaClosePopup.ClickEnter();
+				break;
+				
+			default:
+				_MainALeftMainFragment.ClickEnter();
+				break;
+		}
+		
 	}
 
 }

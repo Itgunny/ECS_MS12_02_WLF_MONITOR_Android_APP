@@ -201,9 +201,11 @@ public class MainBCenterFragment extends ParentFragment{
 			//case CAN1CommManager.DATA_STATE_ECO_RED:
 			//	imgViewEcoBar.setImageResource(R.drawable.main_center_eco_red_all);
 			//	break;
-			case CAN1CommManager.DATA_STATE_ECO_WHITE:
-				imgViewEcoBar.setImageResource(R.drawable.main_center_eco_white_all);
-				break;
+			// ++, 150402 bwk
+//			case CAN1CommManager.DATA_STATE_ECO_WHITE:
+//				imgViewEcoBar.setImageResource(R.drawable.main_center_eco_white_all);
+//				break;
+			// --, 150402 bwk
 		}
 		
 		if(_level == 0xFF){

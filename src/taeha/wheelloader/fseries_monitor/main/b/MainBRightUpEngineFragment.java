@@ -223,11 +223,11 @@ public class MainBRightUpEngineFragment extends ParentFragment{
 	*/
 	public void HourOdometerTitleDisplay(int _Index){
 		switch (_Index) {
+		case CAN1CommManager.DATA_STATE_OPERATION_NOSELECT:
+			HourOdometerTitleAnimation.FlipAnimation(textViewHourOdoTitle,"");
+			break;
 		case CAN1CommManager.DATA_STATE_HOURMETER_LATEST:
 			HourOdometerTitleAnimation.FlipAnimation(textViewHourOdoTitle,getResources().getString(string.LATEST_HOURMETER));
-			break;
-		case CAN1CommManager.DATA_STATE_FUELRATE_CURRENT:
-			HourOdometerTitleAnimation.FlipAnimation(textViewHourOdoTitle,getResources().getString(string.CURRENT_FUEL_RATE));
 			break;
 		case CAN1CommManager.DATA_STATE_ODOMETER_TOTAL:
 			HourOdometerTitleAnimation.FlipAnimation(textViewHourOdoTitle,getResources().getString(string.TOTAL_ODOMETER));
@@ -242,6 +242,11 @@ public class MainBRightUpEngineFragment extends ParentFragment{
 	}
 	public void HourOdometerDataDisplay(int _Index, int LatestHour, int TotalOdo, int LatestOdo){
 		switch (_Index) {
+		case CAN1CommManager.DATA_STATE_OPERATION_NOSELECT:
+			textViewHourOdoData.setText("");
+			textViewHourOdoUnit.setText("");
+			break;
+			
 		case CAN1CommManager.DATA_STATE_HOURMETER_LATEST:
 			textViewHourOdoData.setText(ParentActivity.GetHourmeterString(LatestHour));
 			textViewHourOdoUnit.setText(ParentActivity.getResources().getString(string.Hr));

@@ -74,10 +74,11 @@ public class CommService extends Service{
 	public static boolean multimediaFlag = false;
 	public static boolean miracastFlag = false;
 	// --, 150320 cjg	
-	// ++, 150324 cjg
+	// ++, 150403 cjg
 	public static boolean powerOffFlag = false;
-	public static int count = 0;
-	// --, 150324 cjg
+	public static int endingSoundCount = 0;
+	public static int endingKeyIGCount = 0;
+	// --, 150403 cjg
 	/////////////////////////////////////////////////////////////////////
 	
 	//////////////////LOAD NATIVELIBRARY/////////////////////////////////
@@ -187,6 +188,21 @@ public class CommService extends Service{
 	public native int Get_PasswordChangeResult_958_PGN61184_25();
 	public native byte[] Get_HCEAntiTheftPasswordRepresentation_1634_PGN61184_25();
 	public native int Get_RecvPasswordChangeResultFlag_PGN61184_25();
+	//////RX_AVERAGE_FUEL_RATE_HISTORY_61184_33///////
+	public native int Get_MessageType_PGN61184_33();
+	public native int Get_OperationHistoryType_1101_PGN61184_33();
+	public native int Get_1storP_HourAverageFuelRateorDayFuelUsed_333_1405_PGN61184_33();
+	public native int Get_2ndorS_HourAverageFuelRateorDayFuelUsed_333_1405_PGN61184_33();
+	public native int Get_3rdorE_HourAverageFuelRateorDayFuelUsed_333_1405_PGN61184_33();
+	public native int Get_4th_HourAverageFuelRateorDayFuelUsed_333_1405_PGN61184_33();
+	public native int Get_5th_HourAverageFuelRateorDayFuelUsed_333_1405_PGN61184_33();
+	public native int Get_6th_HourAverageFuelRateorDayFuelUsed_333_1405_PGN61184_33();
+	public native int Get_7th_HourAverageFuelRateorDayFuelUsed_333_1405_PGN61184_33();
+	public native int Get_8th_HourAverageFuelRate_333_PGN61184_33();
+	public native int Get_9th_HourAverageFuelRate_333_PGN61184_33();
+	public native int Get_10th_HourAverageFuelRate_333_PGN61184_33();
+	public native int Get_11th_HourAverageFuelRate_333_PGN61184_33();
+	public native int Get_12th_HourAverageFuelRate_333_PGN61184_33();
 	//////RX_COOLING_FAN_SETTING_61184_61///////
 	public native int Get_MessageType_PGN61184_61();
 	public native int Get_TestMode_PGN61184_61();
@@ -447,8 +463,8 @@ public class CommService extends Service{
 	public native int Get_FuelLevel_302_PGN65390();
 	public native int Get_EcoGaugeLevel_1304_PGN65390();
 	public native int Get_EcoGaugeStatus_1305_PGN65390();
-	public native int Get_AverageFuelRate_PGN65390();
-	public native int Get_CurrentFuelRate_PGN65390();
+	public native int Get_AverageFuelRate_333_PGN65390();
+	public native int Get_ADaysFuelUsed_1405_PGN65390();
 	//////RX_CYLINDER_ANGLE_STROKE1_65395///////
 	public native int Get_BoomLinkAngle_1920_PGN65395();
 	public native int Get_BellCrankAngle_1921_PGN65395();
@@ -553,6 +569,11 @@ public class CommService extends Service{
 	public native byte[] Get_DTC_3_PGN65438();
 	public native byte[] Get_DTC_4_PGN65438();
 	public native byte[] Get_DTC_5_PGN65438();
+	//////RX_AXLE_STATUS_65449///////
+	public native int Get_Front_Axle_Oil_Temperature_577_PGN65449();
+	public native int Get_Rear_Axle_Oil_Temperature_578_PGN65449();
+	public native int Get_Front_Axle_Oil_Temp_Warning_580_PGN65449();
+	public native int Get_Rear_Axle_Oil_Temp_Warning_581_PGN65449();
 	//////RX_WEIGHING_SYSTEM_STATUS_65450///////
 	public native int Get_WeighingSystemAccumulationMode_1941_PGN65450();
 	public native int Get_WeighingSystemBuzzer_1907_PGN65450();
@@ -674,6 +695,9 @@ public class CommService extends Service{
 	public native void Set_MessageType_PGN61184_25(int Data);
 	public native void Set_PasswordChangeResult_958_PGN61184_25(int Data);
 	public native void Set_HCEAntiTheftPasswordRepresentation_1634_PGN61184_25(byte[] Data);
+	//////TX_OPERATION_HISTORY_REQUEST_61184_31///////
+	public native void Set_MessageType_PGN61184_31(int Data);
+	public native void Set_OperationHistory_1101_PGN61184_31(int Data);
 	//////TX_COOLING_FAN_SETTING_61184_61///////
 	public native void Set_MessageType_PGN61184_61(int Data);
 	public native void Set_TestMode_PGN61184_61(int Data);
@@ -1217,20 +1241,39 @@ public class CommService extends Service{
 				
 
 			case CAN1CommManager.POWER_OFF:
-				if(GetScreenTopFlag() == true)
-				{
-					CAN1Comm.Callback_KeyButton(Data);
+				// ++, 150403 cjg
+//				if(GetScreenTopFlag() == true)
+//				{
+//					CAN1Comm.Callback_KeyButton(Data);
+//				}
+//				// ++, 150326 bwk
+//				HandleKeyButton.sendMessage(HandleKeyButton.obtainMessage(Data));	
+//				/*
+//				else{//++, --, 150324 cjg
+//					HandleKeyButton.sendMessage(HandleKeyButton.obtainMessage(Data));	
+//				}
+//				*/
+//				// --, 150326 bwk
+//				if(count++==0)	// ++, --, 150325 bwk
+//					SoundPoolKeyButtonEnding.play(SoundIDEnding, fVolumeEnding, fVolumeEnding, 0, 0, 1);
+				if(endingKeyIGCount == 0){
+					if(GetScreenTopFlag() == true)
+					{
+						CAN1Comm.Callback_KeyButton(Data);
+						HandleKeyButton.sendMessage(HandleKeyButton.obtainMessage(Data));
+						
+					}else if(GetScreenTopFlag() == false){
+						HandleKeyButton.sendMessage(HandleKeyButton.obtainMessage(Data));
+					}
+					if(endingSoundCount == 0){
+						if(multimediaFlag == false || miracastFlag == false){
+							SoundPoolKeyButtonEnding.play(SoundIDEnding, fVolumeEnding, fVolumeEnding, 0, 0, 1);
+							endingSoundCount++;
+						}
+					}
+					endingKeyIGCount++;
 				}
-				// ++, 150326 bwk
-				HandleKeyButton.sendMessage(HandleKeyButton.obtainMessage(Data));	
-				/*
-				else{//++, --, 150324 cjg
-					HandleKeyButton.sendMessage(HandleKeyButton.obtainMessage(Data));	
-				}
-				*/
-				// --, 150326 bwk
-				if(count++==0)	// ++, --, 150325 bwk
-					SoundPoolKeyButtonEnding.play(SoundIDEnding, fVolumeEnding, fVolumeEnding, 0, 0, 1);
+				// --, 150403 cjg			
 				break;
 			case CAN1CommManager.FN:
 				//CAN1Comm.Callback_KeyButton(Data);
@@ -1302,18 +1345,14 @@ public class CommService extends Service{
 			
 		}).start();
 	}
-	// ++, 150326 bwk
-	/*
-	// ++, 150324 cjg
+	// ++, 150403 cjg
 	public static boolean GetPowerOffFlag(){
 		return powerOffFlag;
 	}
 	public static void SetPowerOffFlag(boolean flag){
 		powerOffFlag = flag;
 	}
-	// --, 150324 cjg
-	*/
-	// --, 150326 bwk
+	// --, 150403 cjg
 	public static void SetScreenTopFlag(boolean flag){
 		ScreenTopFlag = flag;
 	}
@@ -1379,17 +1418,19 @@ public class CommService extends Service{
 			@Override
 			public void handleMessage(Message msg) {
 				if(msg.what == CAN1CommManager.POWER_OFF){
-					// ++, 150326 bwk
-					allKillRunningApps("taeha.wheelloader.fseries_monitor.main");
-					/*
-					//++, 150324 cjg
+					// ++, 150403 cjg
 					//allKillRunningApps("taeha.wheelloader.fseries_monitor.main");
-					SetPowerOffFlag(true);
-					CallHome();
-					Log.d(TAG, "" + GetPowerOffFlag());
-					//--, 150324 cjg
-					*/
-					// --, 150326 bwk
+					if(GetScreenTopFlag() == true){
+						SetPowerOffFlag(false);
+					}else{
+						if(CheckTopApps("com.mxtech.videoplayer.ad")){
+							ClickFN();
+						}else{
+							CallHome();
+						}
+						SetPowerOffFlag(true);
+					}
+					// --, 150403 cjg
 				}else if(msg.what == CAN1CommManager.FN){
 					ClickFN();
 				// ++, 150319 cjg
@@ -1538,6 +1579,7 @@ public class CommService extends Service{
 		if(intent != null){
 			startActivity(intent);
 			multimediaFlag = true;		// ++, --, 150323 bwk
+			
 		}
 	}
 	public void RunMirror(){
@@ -1554,15 +1596,19 @@ public class CommService extends Service{
 			rpmFlag = false;
 			if(CheckTopApps("com.mxtech.videoplayer.ad") == true){
 				PlayerFlag = false;	// ++, --, 150211 bwk
+				multimediaFlag = false; //++, --, 150403 cjg
 				CallHome();
 			}else if(CheckTopApps("com.example.wfdsink") == true){
 				PlayerFlag = false;	// ++, --, 150211 bwk
+				miracastFlag = false; //++, --, 150403 cjg
 				CallHome();
 			}else if(CheckRunningApp("com.mxtech.videoplayer.ad") == true){
 				PlayerFlag = true;	// ++, --, 150211 bwk
+				multimediaFlag = true; //++, --, 150403 cjg
 				RunMultimedia();
 			}else if(CheckRunningApp("com.example.wfdsink") == true){
 				PlayerFlag = true;	// ++, --, 150211 bwk
+				miracastFlag = true; //++, --, 150403 cjg
 				RunMirror();
 			}
 		}

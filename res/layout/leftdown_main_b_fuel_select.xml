@@ -12,20 +12,10 @@
         android:layout_centerVertical="true"
         android:layout_marginLeft="165dp" >
 
-        <RadioButton
-            android:id="@+id/radioButton_leftdown_main_b_fuel_select_currentfuelrate"
-            android:layout_width="350dp"
-            android:layout_height="wrap_content"
-            android:button="@drawable/_selector_radio_btn"
-            android:text="@string/Current_Fuel_Rate"
-            android:textColor="@drawable/_selector_radio_txt_white_amber"
-            android:textSize="25sp" />
-
-        <RadioButton
+       <RadioButton
             android:id="@+id/radioButton_leftdown_main_b_fuel_select_averagefuelrate"
             android:layout_width="350dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="40dp"
             android:button="@drawable/_selector_radio_btn"
             android:text="@string/Average_Fuel_Rate"
             android:textColor="@drawable/_selector_radio_txt_white_amber"
@@ -35,7 +25,7 @@
             android:id="@+id/radioButton_leftdown_main_b_fuel_select_latestfuelconsumed"
             android:layout_width="350dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="40dp"
+            android:layout_marginTop="60dp"
             android:button="@drawable/_selector_radio_btn"
             android:text="@string/Latest_Fuel_Consumed"
             android:textColor="@drawable/_selector_radio_txt_white_amber"

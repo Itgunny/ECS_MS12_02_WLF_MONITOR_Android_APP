@@ -13,6 +13,8 @@ import taeha.wheelloader.fseries_monitor.menu.UserSwitching;
 import taeha.wheelloader.fseries_monitor.menu.management.AngleCalibration;
 import taeha.wheelloader.fseries_monitor.menu.management.CalibrationFragment;
 import taeha.wheelloader.fseries_monitor.menu.management.ChangeASPhoneNumberFragment;
+import taeha.wheelloader.fseries_monitor.menu.management.EHCUIOInfoBoomLeverFloatFragment;
+import taeha.wheelloader.fseries_monitor.menu.management.EHCUIOInfoFragment;
 import taeha.wheelloader.fseries_monitor.menu.management.MachineSecurityESLFragment;
 import taeha.wheelloader.fseries_monitor.menu.management.MachineSecurityListFragment;
 import taeha.wheelloader.fseries_monitor.menu.management.MachineSecurityPasswordChangeFragment;
@@ -43,13 +45,18 @@ import taeha.wheelloader.fseries_monitor.menu.mode.SoftStopFragment;
 import taeha.wheelloader.fseries_monitor.menu.mode.SpeedometerFreqFragment;
 import taeha.wheelloader.fseries_monitor.menu.mode.WiperFragment;
 import taeha.wheelloader.fseries_monitor.menu.mode.WorkLoadFragment;
-import taeha.wheelloader.fseries_monitor.menu.monitoring.EHCUIOInfoBoomLeverFloatFragment;
-import taeha.wheelloader.fseries_monitor.menu.monitoring.EHCUIOInfoFragment;
 import taeha.wheelloader.fseries_monitor.menu.monitoring.FaultHistoryActiveFragment;
 import taeha.wheelloader.fseries_monitor.menu.monitoring.FaultHistoryFragment;
 import taeha.wheelloader.fseries_monitor.menu.monitoring.FaultHistoryLoggedFragment;
 import taeha.wheelloader.fseries_monitor.menu.monitoring.FaultHistoryLoggedPasswordFragment;
-import taeha.wheelloader.fseries_monitor.menu.monitoring.MachineMonitoringFragment;
+import taeha.wheelloader.fseries_monitor.menu.monitoring.FuelHistoryDailyRecordFragment;
+import taeha.wheelloader.fseries_monitor.menu.monitoring.FuelHistoryGeneralRecordFragment;
+import taeha.wheelloader.fseries_monitor.menu.monitoring.FuelHistoryHourlyRecordFragment;
+import taeha.wheelloader.fseries_monitor.menu.monitoring.FuelHistoryMenuFragment;
+import taeha.wheelloader.fseries_monitor.menu.monitoring.FuelHistoryModeRecordFragment;
+import taeha.wheelloader.fseries_monitor.menu.monitoring.MachineMonitoringFragment1;
+import taeha.wheelloader.fseries_monitor.menu.monitoring.MachineMonitoringFragment2;
+import taeha.wheelloader.fseries_monitor.menu.monitoring.MachineMonitoringFragment3;
 import taeha.wheelloader.fseries_monitor.menu.monitoring.MenuMonitoringFragment;
 import taeha.wheelloader.fseries_monitor.menu.monitoring.OperationHistoryFragment;
 import taeha.wheelloader.fseries_monitor.menu.monitoring.VersionInfoBKCUFragment;
@@ -101,6 +108,22 @@ public class MenuBaseFragment extends ParentFragment{
 
 	//VALUABLE////////////////////////////////////////
 	public int FirstScreenIndex;
+
+	// ++, 150331 bwk
+	// Menu->KeyPad Value
+	// -- MAINLIGHT
+	int HeadLamp;
+	int Illumination;
+	int SelectMainLampStatus;
+	// -- WORKLIGHT
+	int WorkLamp;
+	int RearWorkLamp;
+	int SelectWorkLampStatus;
+	// -- BEACONLAMP
+	int SelectBeaconLamp;
+	// -- WIPER
+	int SelectWiperSpeedState;
+	// --, 150331 bwk
 	//////////////////////////////////////////////////
 
 	//Fragment////////////////////////////////////////
@@ -128,7 +151,9 @@ public class MenuBaseFragment extends ParentFragment{
 	public WiperFragment				_WiperFragment;
 	public EngineAutoShutdownPWFragment	_EngineAutoShutdownPWFragment;
 	//Monitoring
-	public MachineMonitoringFragment			_MachineMonitoringFragment;
+	public MachineMonitoringFragment1			_MachineMonitoringFragment1;
+	public MachineMonitoringFragment2			_MachineMonitoringFragment2;
+	public MachineMonitoringFragment3			_MachineMonitoringFragment3;
 	public OperationHistoryFragment				_OperationHistoryFragment;
 	public FaultHistoryFragment					_FaultHistoryFragment;
 	public EHCUIOInfoFragment					_EHCUIOInfoFragment;
@@ -145,6 +170,13 @@ public class MenuBaseFragment extends ParentFragment{
 	public FaultHistoryActiveFragment			_FaultHistoryActiveFragment;
 	public FaultHistoryLoggedFragment			_FaultHistoryLoggedFragment;
 	public FaultHistoryLoggedPasswordFragment	_FaultHistoryLoggedPasswordFragment;
+	// ++, 150405 bwk
+	public FuelHistoryMenuFragment				_FuelHistoryMenuFragment;
+	public FuelHistoryGeneralRecordFragment		_FuelHistoryGeneralRecordFragment;
+	public FuelHistoryHourlyRecordFragment		_FuelHistoryHourlyRecordFragment;
+	public FuelHistoryDailyRecordFragment		_FuelHistoryDailyRecordFragment;
+	public FuelHistoryModeRecordFragment		_FuelHistoryModeRecordFragment;
+	// --, 150405 bwk
 
 	//Management
 	public MachineSecurityPasswordFragment				_MachineSecurityPasswordFragment;
@@ -259,7 +291,9 @@ public class MenuBaseFragment extends ParentFragment{
 		_WiperFragment = new WiperFragment();
 		_EngineAutoShutdownPWFragment = new EngineAutoShutdownPWFragment();
 
-		_MachineMonitoringFragment = new MachineMonitoringFragment();
+		_MachineMonitoringFragment1 = new MachineMonitoringFragment1();
+		_MachineMonitoringFragment2 = new MachineMonitoringFragment2();
+		_MachineMonitoringFragment3 = new MachineMonitoringFragment3();
 		_OperationHistoryFragment = new OperationHistoryFragment();
 		_FaultHistoryFragment = new FaultHistoryFragment();
 		_EHCUIOInfoFragment = new EHCUIOInfoFragment();
@@ -276,6 +310,11 @@ public class MenuBaseFragment extends ParentFragment{
 		_FaultHistoryActiveFragment = new FaultHistoryActiveFragment();
 		_FaultHistoryLoggedFragment = new FaultHistoryLoggedFragment();
 		_FaultHistoryLoggedPasswordFragment = new FaultHistoryLoggedPasswordFragment();
+		_FuelHistoryMenuFragment = new FuelHistoryMenuFragment();
+		_FuelHistoryGeneralRecordFragment = new FuelHistoryGeneralRecordFragment();
+		_FuelHistoryHourlyRecordFragment = new FuelHistoryHourlyRecordFragment();
+		_FuelHistoryDailyRecordFragment = new FuelHistoryDailyRecordFragment();
+		_FuelHistoryModeRecordFragment = new FuelHistoryModeRecordFragment();
 		_MachineSecurityPasswordFragment = new MachineSecurityPasswordFragment();
 		_MachineSecurityListFragment = new MachineSecurityListFragment();
 		_MachineSecurityESLFragment = new MachineSecurityESLFragment();
@@ -343,7 +382,9 @@ public class MenuBaseFragment extends ParentFragment{
 		transaction.detach(_SpeedometerFreqFragment);
 		transaction.detach(_WiperFragment);
 		transaction.detach(_EngineAutoShutdownPWFragment);
-		transaction.detach(_MachineMonitoringFragment);
+		transaction.detach(_MachineMonitoringFragment1);
+		transaction.detach(_MachineMonitoringFragment2);
+		transaction.detach(_MachineMonitoringFragment3);
 		transaction.detach(_OperationHistoryFragment);
 		transaction.detach(_FaultHistoryFragment);
 		transaction.detach(_EHCUIOInfoFragment);	
@@ -360,6 +401,11 @@ public class MenuBaseFragment extends ParentFragment{
 		transaction.detach(_FaultHistoryActiveFragment);
 		transaction.detach(_FaultHistoryLoggedFragment);
 		transaction.detach(_FaultHistoryLoggedPasswordFragment);
+		transaction.detach(_FuelHistoryMenuFragment);
+		transaction.detach(_FuelHistoryGeneralRecordFragment);
+		transaction.detach(_FuelHistoryHourlyRecordFragment);
+		transaction.detach(_FuelHistoryDailyRecordFragment);
+		transaction.detach(_FuelHistoryModeRecordFragment);
 		transaction.detach(_MachineSecurityPasswordFragment);
 		transaction.detach(_MachineSecurityListFragment);
 		transaction.detach(_MachineSecurityESLFragment);
@@ -394,13 +440,143 @@ public class MenuBaseFragment extends ParentFragment{
 	@Override
 	protected void GetDataFromNative() {
 		// TODO Auto-generated method stub
+		HeadLamp = CAN1Comm.Get_HeadLampOperationStatus_3436_PGN65527();
+		Illumination = CAN1Comm.Get_IlluminationOperationStatus_3438_PGN65527();
+		WorkLamp = CAN1Comm.Get_WorkLampOperationStatus_3435_PGN65527();
+		RearWorkLamp = CAN1Comm.Get_RearWorkLampOperationStatus_3446_PGN65527();
+		SelectBeaconLamp = CAN1Comm.Get_BeaconLampOperationStatus_3444_PGN65527();
+		SelectWiperSpeedState = CAN1Comm.Get_RearWiperOperationStatus_3451_PGN65527();
 
+		MainLightLampStatus(HeadLamp,Illumination);
+		WorkLightLampDisplay(WorkLamp,RearWorkLamp);
 	}
 
 	@Override
 	protected void UpdateUI() {
 		// TODO Auto-generated method stub
 
+	}
+	
+	public void MainLightLampStatus(int _headlamp, int _illumination){
+		if(_headlamp == 0 && _illumination == 0){
+			SelectMainLampStatus = CAN1CommManager.DATA_STATE_KEY_MAINLIGHT_OFF;
+		}else if(_headlamp == 0 && _illumination == 1){
+			SelectMainLampStatus = CAN1CommManager.DATA_STATE_KEY_MAINLIGHT_LV1;
+		}else if(_headlamp == 1 && _illumination == 1){
+			SelectMainLampStatus = CAN1CommManager.DATA_STATE_KEY_MAINLIGHT_LV2;
+		}else{
+			SelectMainLampStatus = CAN1CommManager.DATA_STATE_KEY_MAINLIGHT_OFF;
+		}
+		
+	}
+	
+	public void WorkLightLampDisplay(int _worklamp, int _rearworklamp){
+		if(_worklamp == 0 && _rearworklamp == 0){
+			SelectWorkLampStatus = CAN1CommManager.DATA_STATE_KEY_WORKLIGHT_OFF;
+		}else if(_worklamp == 1 && _rearworklamp == 0){
+			SelectWorkLampStatus = CAN1CommManager.DATA_STATE_KEY_WORKLIGHT_LV1;
+		}else if(_worklamp == 1 && _rearworklamp == 1){
+			SelectWorkLampStatus = CAN1CommManager.DATA_STATE_KEY_WORKLIGHT_LV2;
+		}else{
+			SelectWorkLampStatus = CAN1CommManager.DATA_STATE_KEY_WORKLIGHT_OFF;
+		}
+	}
+	
+	
+	public void ClickMainLightHardKey(){
+		switch (SelectMainLampStatus) {
+		case CAN1CommManager.DATA_STATE_KEY_MAINLIGHT_OFF:
+			SelectMainLampStatus = CAN1CommManager.DATA_STATE_KEY_MAINLIGHT_LV1;
+			CAN1Comm.Set_HeadLampOperationStatus_3436_PGN65527(CAN1CommManager.DATA_STATE_LAMP_OFF);
+			CAN1Comm.Set_IlluminationOperationStatus_3438_PGN65527(CAN1CommManager.DATA_STATE_LAMP_ON);
+			CAN1Comm.TxCANToMCU(247);
+			
+			break;
+		case CAN1CommManager.DATA_STATE_KEY_MAINLIGHT_LV1:
+			SelectMainLampStatus = CAN1CommManager.DATA_STATE_KEY_MAINLIGHT_LV2;
+			CAN1Comm.Set_HeadLampOperationStatus_3436_PGN65527(CAN1CommManager.DATA_STATE_LAMP_ON);
+			CAN1Comm.Set_IlluminationOperationStatus_3438_PGN65527(CAN1CommManager.DATA_STATE_LAMP_ON);
+			CAN1Comm.TxCANToMCU(247);
+			
+			break;
+		case CAN1CommManager.DATA_STATE_KEY_MAINLIGHT_LV2:
+		default:
+			SelectMainLampStatus = CAN1CommManager.DATA_STATE_KEY_MAINLIGHT_OFF;
+			CAN1Comm.Set_HeadLampOperationStatus_3436_PGN65527(CAN1CommManager.DATA_STATE_LAMP_OFF);
+			CAN1Comm.Set_IlluminationOperationStatus_3438_PGN65527(CAN1CommManager.DATA_STATE_LAMP_OFF);
+			CAN1Comm.TxCANToMCU(247);
+			
+			break;
+		}
+	}
+	
+	public void ClickWorkLightHardKey(){
+		switch (SelectWorkLampStatus) {
+		case CAN1CommManager.DATA_STATE_KEY_WORKLIGHT_OFF:
+			SelectWorkLampStatus = CAN1CommManager.DATA_STATE_KEY_WORKLIGHT_LV1;
+			CAN1Comm.Set_WorkLampOperationStatus_3435_PGN65527(CAN1CommManager.DATA_STATE_LAMP_ON);
+			CAN1Comm.Set_RearWorkLampOperationStatus_3446_PGN65527(CAN1CommManager.DATA_STATE_LAMP_OFF);
+			CAN1Comm.TxCANToMCU(247);
+			
+			break;
+		case CAN1CommManager.DATA_STATE_KEY_WORKLIGHT_LV1:
+			SelectWorkLampStatus = CAN1CommManager.DATA_STATE_KEY_WORKLIGHT_LV2;
+			CAN1Comm.Set_WorkLampOperationStatus_3435_PGN65527(CAN1CommManager.DATA_STATE_LAMP_ON);
+			CAN1Comm.Set_RearWorkLampOperationStatus_3446_PGN65527(CAN1CommManager.DATA_STATE_LAMP_ON);
+			CAN1Comm.TxCANToMCU(247);
+			
+			break;
+		case CAN1CommManager.DATA_STATE_KEY_WORKLIGHT_LV2:
+		default:
+			SelectWorkLampStatus = CAN1CommManager.DATA_STATE_KEY_WORKLIGHT_OFF;
+			CAN1Comm.Set_WorkLampOperationStatus_3435_PGN65527(CAN1CommManager.DATA_STATE_LAMP_OFF);
+			CAN1Comm.Set_RearWorkLampOperationStatus_3446_PGN65527(CAN1CommManager.DATA_STATE_LAMP_OFF);
+			CAN1Comm.TxCANToMCU(247);
+			
+			break;
+		}
+	}
+	
+	public void ClickBeaconLampHardKey(){
+		switch (SelectBeaconLamp) {
+		case CAN1CommManager.DATA_STATE_OFF:
+		default:
+			SelectBeaconLamp = CAN1CommManager.DATA_STATE_ON;
+			CAN1Comm.Set_BeaconLampOperationStatus_3444_PGN65527(CAN1CommManager.DATA_STATE_ON);
+			CAN1Comm.TxCANToMCU(247);
+			CAN1Comm.Set_BeaconLampOperationStatus_3444_PGN65527(3);
+			break;
+		case CAN1CommManager.DATA_STATE_ON:
+			SelectBeaconLamp = CAN1CommManager.DATA_STATE_OFF;
+			CAN1Comm.Set_BeaconLampOperationStatus_3444_PGN65527(CAN1CommManager.DATA_STATE_OFF);
+			CAN1Comm.TxCANToMCU(247);
+			CAN1Comm.Set_BeaconLampOperationStatus_3444_PGN65527(3);
+			break;
+		}		
+	}
+	
+	public void ClickRearWiperHardKey(){
+		switch (SelectWiperSpeedState) {
+		case CAN1CommManager.DATA_STATE_KEY_REARWIPER_SPEED_OFF:
+		default:
+			SelectWiperSpeedState = CAN1CommManager.DATA_STATE_KEY_REARWIPER_SPEED_INT;
+			CAN1Comm.Set_RearWiperOperationStatus_3451_PGN65527(CAN1CommManager.DATA_STATE_KEY_REARWIPER_SPEED_INT);
+			CAN1Comm.TxCANToMCU(247);
+			CAN1Comm.Set_RearWiperOperationStatus_3451_PGN65527(3);
+			break;
+		case CAN1CommManager.DATA_STATE_KEY_REARWIPER_SPEED_INT:
+			SelectWiperSpeedState = CAN1CommManager.DATA_STATE_KEY_REARWIPER_SPEED_LOW;
+			CAN1Comm.Set_RearWiperOperationStatus_3451_PGN65527(CAN1CommManager.DATA_STATE_KEY_REARWIPER_SPEED_LOW);
+			CAN1Comm.TxCANToMCU(247);
+			CAN1Comm.Set_RearWiperOperationStatus_3451_PGN65527(3);
+			break;
+		case CAN1CommManager.DATA_STATE_KEY_REARWIPER_SPEED_LOW:
+			SelectWiperSpeedState = CAN1CommManager.DATA_STATE_KEY_REARWIPER_SPEED_OFF;
+			CAN1Comm.Set_RearWiperOperationStatus_3451_PGN65527(CAN1CommManager.DATA_STATE_KEY_REARWIPER_SPEED_OFF);
+			CAN1Comm.TxCANToMCU(247);
+			CAN1Comm.Set_RearWiperOperationStatus_3451_PGN65527(3);
+			break;
+		}
 	}
 	/////////////////////////////////////////////////////////////////////
 	public void setFirstScreenIndex(int Index){
@@ -571,6 +747,12 @@ public class MenuBaseFragment extends ParentFragment{
 		transaction.replace(R.id.FrameLayout_menu_list_body, _DisplayTypeListFragment);
 		transaction.commit();
 	}
+	public void showBodyFuelHistoryList(){
+		android.app.FragmentTransaction transaction = getFragmentManager().beginTransaction();
+		transaction.remove(_FuelHistoryMenuFragment);
+		transaction.replace(R.id.FrameLayout_menu_list_body, _FuelHistoryMenuFragment);
+		transaction.commit();
+	}
 
 	// Inter
 	public void showBodyEngineSpeed(){
@@ -658,10 +840,24 @@ public class MenuBaseFragment extends ParentFragment{
 
 	}
 
-	public void showBodyMachineMonitoring(){
+	public void showBodyMachineMonitoring1(){
 		android.app.FragmentTransaction transaction = getFragmentManager().beginTransaction();
-		transaction.remove(_MachineMonitoringFragment);
-		transaction.replace(R.id.FrameLayout_menu_inter_body, _MachineMonitoringFragment);
+		transaction.remove(_MachineMonitoringFragment1);
+		transaction.replace(R.id.FrameLayout_menu_inter_body, _MachineMonitoringFragment1);
+		transaction.commit();
+
+	}
+	public void showBodyMachineMonitoring2(){
+		android.app.FragmentTransaction transaction = getFragmentManager().beginTransaction();
+		transaction.remove(_MachineMonitoringFragment2);
+		transaction.replace(R.id.FrameLayout_menu_inter_body, _MachineMonitoringFragment2);
+		transaction.commit();
+
+	}
+	public void showBodyMachineMonitoring3(){
+		android.app.FragmentTransaction transaction = getFragmentManager().beginTransaction();
+		transaction.remove(_MachineMonitoringFragment3);
+		transaction.replace(R.id.FrameLayout_menu_inter_body, _MachineMonitoringFragment3);
 		transaction.commit();
 
 	}
@@ -882,6 +1078,34 @@ public class MenuBaseFragment extends ParentFragment{
 		transaction.commit();
 
 	}
+	public void showBodyFuelHistoryGeneralRecord(){
+		android.app.FragmentTransaction transaction = getFragmentManager().beginTransaction();
+		transaction.remove(_FuelHistoryGeneralRecordFragment);
+		transaction.replace(R.id.FrameLayout_menu_inter_body, _FuelHistoryGeneralRecordFragment);
+		transaction.commit();
+
+	}
+	public void showBodyFuelHistoryHourlyRecord(){
+		android.app.FragmentTransaction transaction = getFragmentManager().beginTransaction();
+		transaction.remove(_FuelHistoryHourlyRecordFragment);
+		transaction.replace(R.id.FrameLayout_menu_inter_body, _FuelHistoryHourlyRecordFragment);
+		transaction.commit();
+
+	}
+	public void showBodyFuelHistoryDailyRecord(){
+		android.app.FragmentTransaction transaction = getFragmentManager().beginTransaction();
+		transaction.remove(_FuelHistoryDailyRecordFragment);
+		transaction.replace(R.id.FrameLayout_menu_inter_body, _FuelHistoryDailyRecordFragment);
+		transaction.commit();
+
+	}
+	public void showBodyFuelHistoryModeRecord(){
+		android.app.FragmentTransaction transaction = getFragmentManager().beginTransaction();
+		transaction.remove(_FuelHistoryModeRecordFragment);
+		transaction.replace(R.id.FrameLayout_menu_inter_body, _FuelHistoryModeRecordFragment);
+		transaction.commit();
+
+	}
 
 	/////////////////////////////////////////////////////////////////////
 	//Show Fragment Animation////////////////////////////////////////////
@@ -966,6 +1190,13 @@ public class MenuBaseFragment extends ParentFragment{
 		ListBodyAnimation.StartChangeAnimation(_DisplayTypeListFragment);
 		_MenuListLeftFragment.setFirstScreen(Home.SCREEN_STATE_MENU_PREFERENCE_TOP);
 	}
+	public void showFuelHistoryMenuListAnimation(){
+		DestroyFragment();
+		InitFragment();
+		showListAnimation();
+		ListBodyAnimation.StartChangeAnimation(_FuelHistoryMenuFragment);
+		_MenuListLeftFragment.setFirstScreen(Home.SCREEN_STATE_MENU_MONITORING_TOP);
+	}
 
 	// Inter
 	public void showBodyEngineSpeedAnimation(){
@@ -1016,9 +1247,17 @@ public class MenuBaseFragment extends ParentFragment{
 		showInterAnimation();
 		InterBodyAnimation.StartChangeAnimation(_EngineAutoShutdownPWFragment);
 	}
-	public void showBodyMachineMonitoringAnimation(){
+	public void showBodyMachineMonitoringAnimation1(){
 		showInterAnimation();
-		InterBodyAnimation.StartChangeAnimation(_MachineMonitoringFragment);
+		InterBodyAnimation.StartChangeAnimation(_MachineMonitoringFragment1);
+	}
+	public void showBodyMachineMonitoringAnimation2(){
+		showInterAnimation();
+		InterBodyAnimation.StartChangeAnimation(_MachineMonitoringFragment2);
+	}
+	public void showBodyMachineMonitoringAnimation3(){
+		showInterAnimation();
+		InterBodyAnimation.StartChangeAnimation(_MachineMonitoringFragment3);
 	}
 	public void showBodyOperationHistoryAnimation(){
 		showInterAnimation();
@@ -1162,6 +1401,23 @@ public class MenuBaseFragment extends ParentFragment{
 		InterBodyAnimation.StartChangeAnimation(_SoundOutputSettingFragment);
 	}
 	// --, 150324 bwk
+	
+	public void showBodyFuelHistoryGeneralRecordAnimation(){
+		showInterAnimation();
+		InterBodyAnimation.StartChangeAnimation(_FuelHistoryGeneralRecordFragment);
+	}
+	public void showBodyFuelHistoryHourlyRecordAnimation(){
+		showInterAnimation();
+		InterBodyAnimation.StartChangeAnimation(_FuelHistoryHourlyRecordFragment);
+	}
+	public void showBodyFuelHistoryDailyRecordAnimation(){
+		showInterAnimation();
+		InterBodyAnimation.StartChangeAnimation(_FuelHistoryDailyRecordFragment);
+	}
+	public void showBodyFuelHistoryModeRecordAnimation(){
+		showInterAnimation();
+		InterBodyAnimation.StartChangeAnimation(_FuelHistoryModeRecordFragment);
+	}	
 	/////////////////////////////////////////////////////////////////////
 
 	/////////////////////////////////////////////////////////////////////
@@ -1332,8 +1588,14 @@ public class MenuBaseFragment extends ParentFragment{
 		case Home.SCREEN_STATE_MENU_MONITORING_TOP:
 			_MenuMonitoringFragment.ClickLeft();
 			break;
-		case Home.SCREEN_STATE_MENU_MONITORING_MACHINEMONITORING:
-			_MachineMonitoringFragment.ClickLeft();
+		case Home.SCREEN_STATE_MENU_MONITORING_MACHINEMONITORING_1:
+			_MachineMonitoringFragment1.ClickLeft();
+			break;
+		case Home.SCREEN_STATE_MENU_MONITORING_MACHINEMONITORING_2:
+			_MachineMonitoringFragment2.ClickLeft();
+			break;
+		case Home.SCREEN_STATE_MENU_MONITORING_MACHINEMONITORING_3:
+			_MachineMonitoringFragment3.ClickLeft();
 			break;
 		case Home.SCREEN_STATE_MENU_MONITORING_OPERATIONHISTORY_TOP:
 			_OperationHistoryFragment.ClickLeft();
@@ -1383,10 +1645,25 @@ public class MenuBaseFragment extends ParentFragment{
 		case Home.SCREEN_STATE_MENU_MONITORING_VERSIONINFO_BKCU:
 			_VersionInfoBKCUFragment.ClickLeft();
 			break;
-		case Home.SCREEN_STATE_MENU_MONITORING_EHCUINFO_TOP:
+		case Home.SCREEN_STATE_MENU_MONITORING_FUELHISTORY_TOP:
+			_FuelHistoryMenuFragment.ClickLeft();
+			break;
+		case Home.SCREEN_STATE_MENU_MONITORING_FUELHISTORY_GENERALRECORD:
+			_FuelHistoryGeneralRecordFragment.ClickLeft();
+			break;
+		case Home.SCREEN_STATE_MENU_MONITORING_FUELHISTORY_HOURLYRECORD:
+			_FuelHistoryHourlyRecordFragment.ClickLeft();
+			break;
+		case Home.SCREEN_STATE_MENU_MONITORING_FUELHISTORY_DAILYRECORD:
+			_FuelHistoryDailyRecordFragment.ClickLeft();
+			break;
+		case Home.SCREEN_STATE_MENU_MONITORING_FUELHISTORY_MODERECORD:
+			_FuelHistoryModeRecordFragment.ClickLeft();
+			break;
+		case Home.SCREEN_STATE_MENU_MANAGEMENT_SERVICE_EHCUINFO_TOP:
 			_EHCUIOInfoFragment.ClickLeft();
 			break;
-		case Home.SCREEN_STATE_MENU_MONITORING_EHCUINFO_BOOMLEVERFLOAT:
+		case Home.SCREEN_STATE_MENU_MANAGEMENT_SERVICE_EHCUINFO_BOOMLEVERFLOAT:
 			_EHCUIOInfoBoomLeverFloatFragment.ClickLeft();
 			break;
 		case Home.SCREEN_STATE_MENU_MANAGEMENT_TOP:
@@ -1600,8 +1877,14 @@ public class MenuBaseFragment extends ParentFragment{
 		case Home.SCREEN_STATE_MENU_MONITORING_TOP:
 			_MenuMonitoringFragment.ClickRight();
 			break;
-		case Home.SCREEN_STATE_MENU_MONITORING_MACHINEMONITORING:
-			_MachineMonitoringFragment.ClickRight();
+		case Home.SCREEN_STATE_MENU_MONITORING_MACHINEMONITORING_1:
+			_MachineMonitoringFragment1.ClickRight();
+			break;
+		case Home.SCREEN_STATE_MENU_MONITORING_MACHINEMONITORING_2:
+			_MachineMonitoringFragment2.ClickRight();
+			break;
+		case Home.SCREEN_STATE_MENU_MONITORING_MACHINEMONITORING_3:
+			_MachineMonitoringFragment3.ClickRight();
 			break;
 		case Home.SCREEN_STATE_MENU_MONITORING_OPERATIONHISTORY_TOP:
 			_OperationHistoryFragment.ClickRight();
@@ -1651,10 +1934,25 @@ public class MenuBaseFragment extends ParentFragment{
 		case Home.SCREEN_STATE_MENU_MONITORING_VERSIONINFO_BKCU:
 			_VersionInfoBKCUFragment.ClickRight();
 			break;
-		case Home.SCREEN_STATE_MENU_MONITORING_EHCUINFO_TOP:
+		case Home.SCREEN_STATE_MENU_MONITORING_FUELHISTORY_TOP:
+			_FuelHistoryMenuFragment.ClickRight();
+			break;
+		case Home.SCREEN_STATE_MENU_MONITORING_FUELHISTORY_GENERALRECORD:
+			_FuelHistoryGeneralRecordFragment.ClickRight();
+			break;
+		case Home.SCREEN_STATE_MENU_MONITORING_FUELHISTORY_HOURLYRECORD:
+			_FuelHistoryHourlyRecordFragment.ClickRight();
+			break;
+		case Home.SCREEN_STATE_MENU_MONITORING_FUELHISTORY_DAILYRECORD:
+			_FuelHistoryDailyRecordFragment.ClickRight();
+			break;
+		case Home.SCREEN_STATE_MENU_MONITORING_FUELHISTORY_MODERECORD:
+			_FuelHistoryModeRecordFragment.ClickRight();
+			break;
+		case Home.SCREEN_STATE_MENU_MANAGEMENT_SERVICE_EHCUINFO_TOP:
 			_EHCUIOInfoFragment.ClickRight();
 			break;
-		case Home.SCREEN_STATE_MENU_MONITORING_EHCUINFO_BOOMLEVERFLOAT:
+		case Home.SCREEN_STATE_MENU_MANAGEMENT_SERVICE_EHCUINFO_BOOMLEVERFLOAT:
 			_EHCUIOInfoBoomLeverFloatFragment.ClickRight();
 			break;
 		case Home.SCREEN_STATE_MENU_MANAGEMENT_TOP:
@@ -1866,8 +2164,14 @@ public class MenuBaseFragment extends ParentFragment{
 		case Home.SCREEN_STATE_MENU_MONITORING_TOP:
 			_MenuMonitoringFragment.ClickESC();
 			break;
-		case Home.SCREEN_STATE_MENU_MONITORING_MACHINEMONITORING:
-			_MachineMonitoringFragment.ClickESC();
+		case Home.SCREEN_STATE_MENU_MONITORING_MACHINEMONITORING_1:
+			_MachineMonitoringFragment1.ClickESC();
+			break;
+		case Home.SCREEN_STATE_MENU_MONITORING_MACHINEMONITORING_2:
+			_MachineMonitoringFragment2.ClickESC();
+			break;
+		case Home.SCREEN_STATE_MENU_MONITORING_MACHINEMONITORING_3:
+			_MachineMonitoringFragment3.ClickESC();
 			break;
 		case Home.SCREEN_STATE_MENU_MONITORING_OPERATIONHISTORY_TOP:
 			_OperationHistoryFragment.ClickESC();
@@ -1917,10 +2221,25 @@ public class MenuBaseFragment extends ParentFragment{
 		case Home.SCREEN_STATE_MENU_MONITORING_VERSIONINFO_BKCU:
 			_VersionInfoBKCUFragment.ClickESC();
 			break;
-		case Home.SCREEN_STATE_MENU_MONITORING_EHCUINFO_TOP:
+		case Home.SCREEN_STATE_MENU_MONITORING_FUELHISTORY_TOP:
+			_FuelHistoryMenuFragment.ClickESC();
+			break;
+		case Home.SCREEN_STATE_MENU_MONITORING_FUELHISTORY_GENERALRECORD:
+			_FuelHistoryGeneralRecordFragment.ClickESC();
+			break;
+		case Home.SCREEN_STATE_MENU_MONITORING_FUELHISTORY_HOURLYRECORD:
+			_FuelHistoryHourlyRecordFragment.ClickESC();
+			break;
+		case Home.SCREEN_STATE_MENU_MONITORING_FUELHISTORY_DAILYRECORD:
+			_FuelHistoryDailyRecordFragment.ClickESC();
+			break;
+		case Home.SCREEN_STATE_MENU_MONITORING_FUELHISTORY_MODERECORD:
+			_FuelHistoryModeRecordFragment.ClickESC();
+			break;
+		case Home.SCREEN_STATE_MENU_MANAGEMENT_SERVICE_EHCUINFO_TOP:
 			_EHCUIOInfoFragment.ClickESC();
 			break;
-		case Home.SCREEN_STATE_MENU_MONITORING_EHCUINFO_BOOMLEVERFLOAT:
+		case Home.SCREEN_STATE_MENU_MANAGEMENT_SERVICE_EHCUINFO_BOOMLEVERFLOAT:
 			_EHCUIOInfoBoomLeverFloatFragment.ClickESC();
 			break;
 		case Home.SCREEN_STATE_MENU_MANAGEMENT_TOP:
@@ -2132,8 +2451,14 @@ public class MenuBaseFragment extends ParentFragment{
 		case Home.SCREEN_STATE_MENU_MONITORING_TOP:
 			_MenuMonitoringFragment.ClickEnter();
 			break;
-		case Home.SCREEN_STATE_MENU_MONITORING_MACHINEMONITORING:
-			_MachineMonitoringFragment.ClickEnter();
+		case Home.SCREEN_STATE_MENU_MONITORING_MACHINEMONITORING_1:
+			_MachineMonitoringFragment1.ClickEnter();
+			break;
+		case Home.SCREEN_STATE_MENU_MONITORING_MACHINEMONITORING_2:
+			_MachineMonitoringFragment2.ClickEnter();
+			break;
+		case Home.SCREEN_STATE_MENU_MONITORING_MACHINEMONITORING_3:
+			_MachineMonitoringFragment3.ClickEnter();
 			break;
 		case Home.SCREEN_STATE_MENU_MONITORING_OPERATIONHISTORY_TOP:
 			_OperationHistoryFragment.ClickEnter();
@@ -2183,10 +2508,25 @@ public class MenuBaseFragment extends ParentFragment{
 		case Home.SCREEN_STATE_MENU_MONITORING_VERSIONINFO_BKCU:
 			_VersionInfoBKCUFragment.ClickEnter();
 			break;
-		case Home.SCREEN_STATE_MENU_MONITORING_EHCUINFO_TOP:
+		case Home.SCREEN_STATE_MENU_MONITORING_FUELHISTORY_TOP:
+			_FuelHistoryMenuFragment.ClickEnter();
+			break;
+		case Home.SCREEN_STATE_MENU_MONITORING_FUELHISTORY_GENERALRECORD:
+			_FuelHistoryGeneralRecordFragment.ClickEnter();
+			break;
+		case Home.SCREEN_STATE_MENU_MONITORING_FUELHISTORY_HOURLYRECORD:
+			_FuelHistoryHourlyRecordFragment.ClickEnter();
+			break;
+		case Home.SCREEN_STATE_MENU_MONITORING_FUELHISTORY_DAILYRECORD:
+			_FuelHistoryDailyRecordFragment.ClickEnter();
+			break;
+		case Home.SCREEN_STATE_MENU_MONITORING_FUELHISTORY_MODERECORD:
+			_FuelHistoryModeRecordFragment.ClickEnter();
+			break;
+		case Home.SCREEN_STATE_MENU_MANAGEMENT_SERVICE_EHCUINFO_TOP:
 			_EHCUIOInfoFragment.ClickEnter();
 			break;
-		case Home.SCREEN_STATE_MENU_MONITORING_EHCUINFO_BOOMLEVERFLOAT:
+		case Home.SCREEN_STATE_MENU_MANAGEMENT_SERVICE_EHCUINFO_BOOMLEVERFLOAT:
 			_EHCUIOInfoBoomLeverFloatFragment.ClickEnter();
 			break;
 		case Home.SCREEN_STATE_MENU_MANAGEMENT_TOP:
@@ -2341,7 +2681,7 @@ public class MenuBaseFragment extends ParentFragment{
 		case Home.SCREEN_STATE_MENU_MULTIMEDIA_TOP:
 			_MenuMultimediaFragment.ExcuteFileManaget();
 			break;
-		case Home.SCREEN_STATE_MENU_MONITORING_EHCUINFO_TOP:
+		case Home.SCREEN_STATE_MENU_MANAGEMENT_SERVICE_EHCUINFO_TOP:
 			showBodyBoomLeverFloatInfo();
 			break;
 		case Home.SCREEN_STATE_MENU_MANAGEMENT_SERVICE_SENSORMONITORING_TOP:
@@ -2422,7 +2762,16 @@ public class MenuBaseFragment extends ParentFragment{
 		case Home.SCREEN_STATE_MENU_MANAGEMENT_ASPHONE_TOP:
 			_ChangeASPhoneNumberFragment.ClickNum1();
 			break;
-
+		// ++, 150407 bwk 
+		case Home.SCREEN_STATE_MENU_PREFERENCE_CLOCK_TOP:
+			_ClockFragment.ClickNum1();
+			break;
+		// --, 150407 bwk
+		// ++, 150331 bwk
+		default:
+			ClickMainLightHardKey();
+			break;
+		// --, 150331 bwk
 		}
 	}
 
@@ -2461,7 +2810,16 @@ public class MenuBaseFragment extends ParentFragment{
 		case Home.SCREEN_STATE_MENU_MANAGEMENT_ASPHONE_TOP:
 			_ChangeASPhoneNumberFragment.ClickNum2();
 			break;
-
+		// ++, 150407 bwk 
+		case Home.SCREEN_STATE_MENU_PREFERENCE_CLOCK_TOP:
+			_ClockFragment.ClickNum2();
+			break;
+		// --, 150407 bwk
+		// ++, 150331 bwk
+		default:
+			ClickWorkLightHardKey();
+			break;
+		// --, 150331 bwk
 		}
 	}
 
@@ -2500,6 +2858,11 @@ public class MenuBaseFragment extends ParentFragment{
 		case Home.SCREEN_STATE_MENU_MANAGEMENT_ASPHONE_TOP:
 			_ChangeASPhoneNumberFragment.ClickNum3();
 			break;
+		// ++, 150407 bwk 
+		case Home.SCREEN_STATE_MENU_PREFERENCE_CLOCK_TOP:
+			_ClockFragment.ClickNum3();
+			break;
+		// --, 150407 bwk
 
 		}
 	}
@@ -2539,6 +2902,11 @@ public class MenuBaseFragment extends ParentFragment{
 		case Home.SCREEN_STATE_MENU_MANAGEMENT_ASPHONE_TOP:
 			_ChangeASPhoneNumberFragment.ClickNum4();
 			break;
+		// ++, 150407 bwk 
+		case Home.SCREEN_STATE_MENU_PREFERENCE_CLOCK_TOP:
+			_ClockFragment.ClickNum4();
+			break;
+		// --, 150407 bwk
 
 		}
 	}
@@ -2578,6 +2946,11 @@ public class MenuBaseFragment extends ParentFragment{
 		case Home.SCREEN_STATE_MENU_MANAGEMENT_ASPHONE_TOP:
 			_ChangeASPhoneNumberFragment.ClickNum5();
 			break;
+		// ++, 150407 bwk 
+		case Home.SCREEN_STATE_MENU_PREFERENCE_CLOCK_TOP:
+			_ClockFragment.ClickNum5();
+			break;
+		// --, 150407 bwk
 
 		}
 	}
@@ -2617,7 +2990,17 @@ public class MenuBaseFragment extends ParentFragment{
 		case Home.SCREEN_STATE_MENU_MANAGEMENT_ASPHONE_TOP:
 			_ChangeASPhoneNumberFragment.ClickNum6();
 			break;
-
+		// ++, 150407 bwk 
+		case Home.SCREEN_STATE_MENU_PREFERENCE_CLOCK_TOP:
+			_ClockFragment.ClickNum6();
+			break;
+		// --, 150407 bwk
+			
+		// ++, 150331 bwk
+		default:
+			ClickBeaconLampHardKey();
+			break;
+		// --, 150331 bwk
 		}
 	}
 
@@ -2656,7 +3039,16 @@ public class MenuBaseFragment extends ParentFragment{
 		case Home.SCREEN_STATE_MENU_MANAGEMENT_ASPHONE_TOP:
 			_ChangeASPhoneNumberFragment.ClickNum7();
 			break;
-
+		// ++, 150407 bwk 
+		case Home.SCREEN_STATE_MENU_PREFERENCE_CLOCK_TOP:
+			_ClockFragment.ClickNum7();
+			break;
+		// --, 150407 bwk			
+		// ++, 150331 bwk
+		default:
+			ClickRearWiperHardKey();
+			break;
+		// --, 150331 bwk
 		}
 	}
 
@@ -2695,7 +3087,11 @@ public class MenuBaseFragment extends ParentFragment{
 		case Home.SCREEN_STATE_MENU_MANAGEMENT_ASPHONE_TOP:
 			_ChangeASPhoneNumberFragment.ClickNum8();
 			break;
-
+		// ++, 150407 bwk 
+		case Home.SCREEN_STATE_MENU_PREFERENCE_CLOCK_TOP:
+			_ClockFragment.ClickNum8();
+			break;
+		// --, 150407 bwk
 		}
 	}
 
@@ -2734,7 +3130,11 @@ public class MenuBaseFragment extends ParentFragment{
 		case Home.SCREEN_STATE_MENU_MANAGEMENT_ASPHONE_TOP:
 			_ChangeASPhoneNumberFragment.ClickNum9();
 			break;
-
+		// ++, 150407 bwk 
+		case Home.SCREEN_STATE_MENU_PREFERENCE_CLOCK_TOP:
+			_ClockFragment.ClickNum9();
+			break;
+		// --, 150407 bwk
 		}
 	}
 
@@ -2773,7 +3173,11 @@ public class MenuBaseFragment extends ParentFragment{
 		case Home.SCREEN_STATE_MENU_MANAGEMENT_ASPHONE_TOP:
 			_ChangeASPhoneNumberFragment.ClickNum0();
 			break;
-
+		// ++, 150407 bwk 
+		case Home.SCREEN_STATE_MENU_PREFERENCE_CLOCK_TOP:
+			_ClockFragment.ClickNum0();
+			break;
+		// --, 150407 bwk
 		}
 	}
 	/////////////////////////////////////////////////////////////////////////////////////

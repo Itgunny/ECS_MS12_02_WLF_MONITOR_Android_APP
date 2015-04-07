@@ -3,15 +3,19 @@ package taeha.wheelloader.fseries_monitor.main.b;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.TextView;
 import taeha.wheelloader.fseries_monitor.animation.TextViewXAxisFlipAnimation;
 import taeha.wheelloader.fseries_monitor.main.CAN1CommManager;
+import taeha.wheelloader.fseries_monitor.main.LongPressChecker;
 import taeha.wheelloader.fseries_monitor.main.ParentFragment;
 import taeha.wheelloader.fseries_monitor.main.R;
 import taeha.wheelloader.fseries_monitor.main.R.string;
+import android.view.View.OnTouchListener;
+import taeha.wheelloader.fseries_monitor.main.LongPressChecker.OnLongPressListener;
 
 public class MainBLeftDownFuelFragment extends ParentFragment{
 	//CONSTANT////////////////////////////////////////
@@ -28,8 +32,9 @@ public class MainBLeftDownFuelFragment extends ParentFragment{
 	//VALUABLE////////////////////////////////////////
 	boolean ClickFlag;
 	int AverageFuelRate;
-	int CurrentFuelRate;
 	int LastestConsumed;
+	
+	public LongPressChecker mLongPressChecker;	// ++, --, 150406 cjg
 	//////////////////////////////////////////////////
 	
 	//ANIMATION///////////////////////////////////////
@@ -83,52 +88,87 @@ public class MainBLeftDownFuelFragment extends ParentFragment{
 	@Override
 	protected void InitButtonListener() {
 		// TODO Auto-generated method stub
+		// ++, 150406 cjg
+//		imgbtnFuel.setOnClickListener(new View.OnClickListener() {
+//			
+//			@Override
+//			public void onClick(View v) {
+//				// TODO Auto-generated method stub
+//				if(ClickFlag == true)
+//					ClickFuel();
+//			}
+//		});
 		imgbtnFuel.setOnClickListener(new View.OnClickListener() {
 			
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
-				if(ClickFlag == true)
-					ClickFuel();
+				if(mLongPressChecker.getLongPressed() == false){
+					if(ClickFlag == true)
+						ClickFuel();
+				}
 			}
 		});
+		imgbtnFuel.setOnTouchListener( new OnTouchListener() {
+			@Override
+			public boolean onTouch(View v, MotionEvent event) {
+				mLongPressChecker.deliverMotionEvent(v, event);
+				return false;
+			}
+		});
+
+		mLongPressChecker = new LongPressChecker(ParentActivity);
+		mLongPressChecker.setOnLongPressListener( new OnLongPressListener() {
+			@Override
+			public void onLongPressed() {
+//				Log.d(TAG, "Long Pressed");
+				imgbtnFuel.setBackgroundResource(R.drawable.main_default_monitoringhistory);
+				if(ParentActivity.FuelIndex == CAN1CommManager.DATA_STATE_AVERAGE_FUEL_RATE)
+					CAN1Comm.Set_OperationHistory_1101_PGN61184_31(CAN1CommManager.DATA_STATE_AVERAGE_FUEL_RATE_INFO_CLEAR);
+				else if(ParentActivity.FuelIndex == CAN1CommManager.DATA_STATE_LATEST_FUEL_CONSUMED)
+					CAN1Comm.Set_OperationHistory_1101_PGN61184_31(CAN1CommManager.DATA_STATE_A_DAYS_FUEL_USED_CLEAR);
+				CAN1Comm.TxCANToMCU(31);
+				CAN1Comm.Set_OperationHistory_1101_PGN61184_31(0xFF);
+				
+			}
+		});
+		// --, 150416 cjg
 	}
 
 	@Override
 	protected void GetDataFromNative() {
 		// TODO Auto-generated method stub
-		AverageFuelRate = CAN1Comm.Get_AverageFuelRate_PGN65390();
-		CurrentFuelRate = CAN1Comm.Get_CurrentFuelRate_PGN65390();
-		LastestConsumed = 0;
+		AverageFuelRate = CAN1Comm.Get_AverageFuelRate_333_PGN65390();
+		LastestConsumed = CAN1Comm.Get_ADaysFuelUsed_1405_PGN65390();
 	}
 
 	@Override
 	protected void UpdateUI() {
 		// TODO Auto-generated method stub
 		FuelTitleDisplay(ParentActivity.FuelIndex);
-		FuelDataDisplay(ParentActivity.FuelIndex,AverageFuelRate,CurrentFuelRate,LastestConsumed);
+		FuelDataDisplay(ParentActivity.FuelIndex,AverageFuelRate,LastestConsumed);
 	}
 	/////////////////////////////////////////////////////////////////////	
 	public void FuelTitleDisplay(int _Index){
 		switch (_Index) {
-		case CAN1CommManager.DATA_STATE_CURRENT_FUEL_RATE:
-			FuelTitleAnimation.FlipAnimation(textViewFuelTitle,getResources().getString(string.Current_Fuel_Rate));
+		case CAN1CommManager.DATA_STATE_FUEL_NOSELECT:
+			FuelTitleAnimation.FlipAnimation(textViewFuelTitle,"");
 			break;
 		case CAN1CommManager.DATA_STATE_AVERAGE_FUEL_RATE:
-			FuelTitleAnimation.FlipAnimation(textViewFuelTitle,getResources().getString(string.Average_Fuel_Rate));
+			FuelTitleAnimation.FlipAnimation(textViewFuelTitle,getResources().getString(string.AVERAGE_FUEL_RATE));
 			break;
 		case CAN1CommManager.DATA_STATE_LATEST_FUEL_CONSUMED:
-			FuelTitleAnimation.FlipAnimation(textViewFuelTitle,getResources().getString(string.Latest_Fuel_Consumed));
+			FuelTitleAnimation.FlipAnimation(textViewFuelTitle,getResources().getString(string.LATEST_FUEL_CONSUMED));
 			break;
 		default:
 			break;
 		}
 	}
-	public void FuelDataDisplay(int _Index, int CurrentFuel, int AverageFuel, int LatestConsumed){
+	public void FuelDataDisplay(int _Index, int AverageFuel, int LatestConsumed){
 		switch (_Index) {
-		case CAN1CommManager.DATA_STATE_CURRENT_FUEL_RATE:
-			textViewFuelData.setText(ParentActivity.GetFuelRateString(CurrentFuel));
-			textViewFuelUnit.setText(ParentActivity.getResources().getString(string.l_h));
+		case CAN1CommManager.DATA_STATE_FUEL_NOSELECT:
+			textViewFuelData.setText("");
+			textViewFuelUnit.setText("");
 			break;
 		case CAN1CommManager.DATA_STATE_AVERAGE_FUEL_RATE:
 			textViewFuelData.setText(ParentActivity.GetFuelRateString(AverageFuel));
@@ -149,10 +189,10 @@ public class MainBLeftDownFuelFragment extends ParentFragment{
 		else
 			ParentActivity.StartAnimationRunningTimer();
 		ParentActivity._MainBBaseFragment._MainBCenterHourOdometerFragment = new MainBCenterFuelFragment();
-		ParentActivity._MainBBaseFragment._MainBLeftDownHourOdometerSelectFragment = new MainBLeftDownFuelSelectFragment();
+		ParentActivity._MainBBaseFragment._MainBLeftDownFuelSelectFragment = new MainBLeftDownFuelSelectFragment();
 		ParentActivity._MainBBaseFragment._MainBodyShiftAnimation.StartShiftLeftDownAnimation();
 		ParentActivity._MainBBaseFragment.CenterAnimation.StartChangeAnimation(ParentActivity._MainBBaseFragment._MainBCenterHourOdometerFragment);
-		ParentActivity._MainBBaseFragment.LeftDownChangeAnimation.StartChangeAnimation(ParentActivity._MainBBaseFragment._MainBLeftDownHourOdometerSelectFragment);
+		ParentActivity._MainBBaseFragment.LeftDownChangeAnimation.StartChangeAnimation(ParentActivity._MainBBaseFragment._MainBLeftDownFuelSelectFragment);
 		
 
 		ParentActivity._MainBBaseFragment._RightDownDisappearAnimation.StartAnimation();

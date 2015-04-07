@@ -36,6 +36,9 @@
             </intent-filter>
         </service>           
         
+        <provider android:name="taeha.wheelloader.fseries_monitor.main.DataProvider"
+            	  android:authorities="taeha.wheelloader.fseries_monitor.main" />
+        
         <activity
             android:name="taeha.wheelloader.fseries_monitor.main.Home"
             android:label="@string/app_name" 

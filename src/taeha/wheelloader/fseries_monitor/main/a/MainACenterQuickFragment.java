@@ -23,15 +23,6 @@ public class MainACenterQuickFragment extends MainACenterFragment{
 	//VALUABLE////////////////////////////////////////
 	int Maint;
 	int FaultCode;
-
-	// ++, 150326 bwk
-	int SendDTCIndex;
-	int SendSeqIndex;
-
-	int DTCTotalPacketMachine;
-	int DTCTotalPacketEngine;
-	int DTCTotalPacketTM;
-	// --, 150326 bwk
 	//////////////////////////////////////////////////
 	
 	//ANIMATION///////////////////////////////////////
@@ -88,10 +79,6 @@ public class MainACenterQuickFragment extends MainACenterFragment{
 	protected void InitValuables() {
 		// TODO Auto-generated method stub
 		super.InitValuables();
-		// ++, 150326 bwk
-		SendDTCIndex = Home.REQ_ERR_MACHINE_ACTIVE;
-		SendSeqIndex = 1;
-		// --, 150326 bwk
 	}
 	@Override
 	protected void InitButtonListener() {
@@ -137,15 +124,6 @@ public class MainACenterQuickFragment extends MainACenterFragment{
 		// TODO Auto-generated method stub
 		Maint = CAN1Comm.Get_MaintenanceAlarmLamp_1099_PGN65428();
 		FaultCode = CAN1Comm.Get_DTCAlarmLamp_1509_PGN65427();
-		// ++, 150326 bwk
-		if(SendDTCIndex != Home.REQ_ERR_END)
-		{
-			ReqestErrorCode();
-			DTCTotalPacketMachine = CAN1Comm.Get_gErr_Mcu_TotalPacket();
-			DTCTotalPacketEngine = CAN1Comm.Get_gErr_Ecu_TotalPacket();
-			DTCTotalPacketTM = CAN1Comm.Get_gErr_Tcu_TotalPacket();
-		}
-		// --, 150326 bwk
 	}
 
 	@Override
@@ -154,73 +132,6 @@ public class MainACenterQuickFragment extends MainACenterFragment{
 		IconDisplay(FaultCode,Maint);
 	}
 	/////////////////////////////////////////////////////////////////////
-	// ++, 150326 bwk
-	public void RequestErrorCode(int Err, int Req, int SeqNo){
-		CAN1Comm.Set_DTCInformationRequest_1515_PGN61184_11(Req);
-		CAN1Comm.Set_DTCType_1510_PGN61184_11(Err);
-		CAN1Comm.Set_SeqenceNumberofDTCInformationPacket_1513_PGN61184_11(SeqNo);
-		CAN1Comm.TxCANToMCU(11);
-	}
-	public void ReqestErrorCode(){
-		switch (SendDTCIndex) {
-		case Home.REQ_ERR_MACHINE_ACTIVE:
-			if(SendSeqIndex == 1){
-				RequestErrorCode(SendDTCIndex,1,SendSeqIndex);
-				SendSeqIndex++;
-				SetThreadSleepTime(200);
-			}
-			else if(SendSeqIndex > DTCTotalPacketMachine){
-				SendSeqIndex = 1;
-				SendDTCIndex = Home.REQ_ERR_ENGINE_ACTIVE;
-				SetThreadSleepTime(1000);
-			}
-			else{
-				RequestErrorCode(SendDTCIndex,1,SendSeqIndex);
-				SendSeqIndex++;
-			}
-
-			break;
-		case Home.REQ_ERR_ENGINE_ACTIVE:
-			if(SendSeqIndex == 1){
-				RequestErrorCode(SendDTCIndex,1,SendSeqIndex);
-				SendSeqIndex++;
-				SetThreadSleepTime(200);
-			}
-			else if(SendSeqIndex > DTCTotalPacketEngine){
-				SendSeqIndex = 1;
-				SendDTCIndex = Home.REQ_ERR_TM_ACTIVE;
-				SetThreadSleepTime(1000);
-			}
-			else{
-				RequestErrorCode(SendDTCIndex,1,SendSeqIndex);
-				SendSeqIndex++;
-			}
-
-			break;
-		case Home.REQ_ERR_TM_ACTIVE:
-			if(SendSeqIndex == 1){
-				RequestErrorCode(SendDTCIndex,1,SendSeqIndex);
-				SendSeqIndex++;
-				SetThreadSleepTime(200);
-			}
-			else if(SendSeqIndex > DTCTotalPacketTM){
-				SendSeqIndex = 1;
-				SendDTCIndex = Home.REQ_ERR_END;
-				SetThreadSleepTime(1000);
-			}
-			else{
-				RequestErrorCode(SendDTCIndex,1,SendSeqIndex);
-				SendSeqIndex++;
-			}
-
-			break;
-
-		default:
-			break;
-		}
-	}
-	// --, 150326 bwk
-	/////////////////////////////////////////////////////////////////////	
 	
 	public void ClickBG(){
 		if(ParentActivity.AnimationRunningFlag == true)

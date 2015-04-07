@@ -114,6 +114,7 @@ public class MainAKeyQuickCouplerFragment extends ParentFragment{
 		ParentActivity.showQuickCouplerPopupLocking2();
 	}
 	public void ClickUnlock(){
+		ParentActivity.OldScreenIndex = ParentActivity.SCREEN_STATE_MAIN_A_KEY_QUICKCOUPLER;	// ++, --, 150407 bwk
 		ParentActivity.showQuickCouplerPopupUnlocking2();
 	}
 	public void ClickOK(){

@@ -89,12 +89,14 @@ public class MenuMonitoringFragment extends MenuBodyList_ParentFragment{
 		setClickableList2(true);
 		setClickableList3(true);
 		setClickableList4(true);
+		setClickableList5(true);
 		
 		
 		setListTitle1(ParentActivity.getResources().getString(string.Machine_Monitoring));
 		setListTitle2(ParentActivity.getResources().getString(string.Operation_History));
 		setListTitle3(ParentActivity.getResources().getString(string.Fault_History));
-		setListTitle4(ParentActivity.getResources().getString(string.Version_Information));
+		setListTitle4(ParentActivity.getResources().getString(string.Fuel_Consumption_History));
+		setListTitle5(ParentActivity.getResources().getString(string.Version_Information));
 		// ++, 150325 bwk
 		// 관리자 메뉴 하위로 위치 이동
 //		if(ParentActivity._CheckModel.GetMCUVersion(CAN1Comm.Get_ComponentBasicInformation_1698_PGN65330()) == CheckModel.MODEL_940
@@ -115,11 +117,27 @@ public class MenuMonitoringFragment extends MenuBodyList_ParentFragment{
 			return;
 		else
 			ParentActivity.StartAnimationRunningTimer();
-		ParentActivity._MenuBaseFragment.showBodyMachineMonitoringAnimation();
+		// ++, 150329 bwk
+		//ParentActivity._MenuBaseFragment.showBodyMachineMonitoringAnimation();
+		if(ParentActivity._CheckModel.GetMCUVersion(CAN1Comm.Get_ComponentBasicInformation_1698_PGN65330()) == CheckModel.MODEL_955
+			|| ParentActivity._CheckModel.GetMCUVersion(CAN1Comm.Get_ComponentBasicInformation_1698_PGN65330()) == CheckModel.MODEL_955TM
+			|| ParentActivity._CheckModel.GetMCUVersion(CAN1Comm.Get_ComponentBasicInformation_1698_PGN65330()) == CheckModel.MODEL_960
+			|| ParentActivity._CheckModel.GetMCUVersion(CAN1Comm.Get_ComponentBasicInformation_1698_PGN65330()) == CheckModel.MODEL_960TM)
+			ParentActivity._MenuBaseFragment.showBodyMachineMonitoringAnimation2();
+		else if(ParentActivity._CheckModel.GetMCUVersion(CAN1Comm.Get_ComponentBasicInformation_1698_PGN65330()) == CheckModel.MODEL_965
+				|| ParentActivity._CheckModel.GetMCUVersion(CAN1Comm.Get_ComponentBasicInformation_1698_PGN65330()) == CheckModel.MODEL_965TM
+				|| ParentActivity._CheckModel.GetMCUVersion(CAN1Comm.Get_ComponentBasicInformation_1698_PGN65330()) == CheckModel.MODEL_970
+				|| ParentActivity._CheckModel.GetMCUVersion(CAN1Comm.Get_ComponentBasicInformation_1698_PGN65330()) == CheckModel.MODEL_970TM
+				|| ParentActivity._CheckModel.GetMCUVersion(CAN1Comm.Get_ComponentBasicInformation_1698_PGN65330()) == CheckModel.MODEL_980
+				|| ParentActivity._CheckModel.GetMCUVersion(CAN1Comm.Get_ComponentBasicInformation_1698_PGN65330()) == CheckModel.MODEL_980TM)
+			ParentActivity._MenuBaseFragment.showBodyMachineMonitoringAnimation3();
+		else
+			ParentActivity._MenuBaseFragment.showBodyMachineMonitoringAnimation1();
 		CursurIndex = 1;
 		CursurDisplay(CursurIndex);
 	}
 	
+
 	@Override
 	public void ClickList2() {
 		// TODO Auto-generated method stub
@@ -151,10 +169,9 @@ public class MenuMonitoringFragment extends MenuBodyList_ParentFragment{
 			return;
 		else
 			ParentActivity.StartAnimationRunningTimer();
-		ParentActivity._MenuBaseFragment.showBodyVersionInfoAnimation();
+		ParentActivity._MenuBaseFragment.showBodyFuelHistoryList();
 		CursurIndex = 4;
 		CursurDisplay(CursurIndex);
-		ParentActivity._MenuBaseFragment._VersionInfoFragment.setFirstCursurIndex(1);
 	}
 
 	@Override
@@ -170,6 +187,14 @@ public class MenuMonitoringFragment extends MenuBodyList_ParentFragment{
 //		CursurIndex = 5;
 //		CursurDisplay(CursurIndex);
 		// --, 150325 bwk
+		if(ParentActivity.AnimationRunningFlag == true)
+			return;
+		else
+			ParentActivity.StartAnimationRunningTimer();
+		ParentActivity._MenuBaseFragment.showBodyVersionInfoAnimation();
+		CursurIndex = 5;
+		CursurDisplay(CursurIndex);
+		ParentActivity._MenuBaseFragment._VersionInfoFragment.setFirstCursurIndex(1);
 	}
 
 	@Override
@@ -189,9 +214,9 @@ public class MenuMonitoringFragment extends MenuBodyList_ParentFragment{
 			// ++, 150325 bwk
 //			if(ParentActivity._CheckModel.GetMCUVersion(CAN1Comm.Get_ComponentBasicInformation_1698_PGN65330()) == CheckModel.MODEL_940
 //			|| ParentActivity._CheckModel.GetMCUVersion(CAN1Comm.Get_ComponentBasicInformation_1698_PGN65330()) == CheckModel.MODEL_935){
-				CursurIndex = 4;
+//				CursurIndex = 4;
 //			}else{
-//				CursurIndex = 5;
+				CursurIndex = 5;
 //			}
 			// --, 150325 bwk
 			CursurDisplay(CursurIndex);
@@ -243,9 +268,8 @@ public class MenuMonitoringFragment extends MenuBodyList_ParentFragment{
 //			|| ParentActivity._CheckModel.GetMCUVersion(CAN1Comm.Get_ComponentBasicInformation_1698_PGN65330()) == CheckModel.MODEL_935){
 //				CursurIndex = 1;
 //			}else{
-//				CursurIndex++;
+				CursurIndex++;
 //			}
-			CursurIndex = 1;
 			// --, 150325 bwk
 			CursurDisplay(CursurIndex);
 			break;

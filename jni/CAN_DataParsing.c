@@ -320,6 +320,8 @@ void InitNewProtoclValuable() {
 		0xFF, sizeof(RX_HCE_ANTI_THEFT_PASSWORD_VALID_STATUS_61184_24));
 	memset((unsigned char*) &RX_HCE_ANTI_THEFT_MODIFY_PASSWORD_STATUS_61184_25,
 		0xFF, sizeof(RX_HCE_ANTI_THEFT_MODIFY_PASSWORD_STATUS_61184_25));
+	memset((unsigned char*) &RX_AVERAGE_FUEL_RATE_HISTORY_61184_33,
+		0xFF, sizeof(RX_AVERAGE_FUEL_RATE_HISTORY_61184_33));
 	memset((unsigned char*) &RX_COOLING_FAN_SETTING_61184_61, 0xFF,
 		sizeof(RX_COOLING_FAN_SETTING_61184_61));
 	memset((unsigned char*) &RX_WEIGHING_SYSTEM_SETTING_REQUEST_61184_62, 0xFF,
@@ -419,6 +421,8 @@ void InitNewProtoclValuable() {
 		sizeof(RX_MACHINE_TRAVEL_STATUS_65434));
 	memset((unsigned char*) &RX_DTC_INFORMATION_TYPE1_65438, 0xFF,
 		sizeof(RX_DTC_INFORMATION_TYPE1_65438));
+	memset((unsigned char*) &RX_AXLE_STATUS_65449, 0xFF,
+		sizeof(RX_AXLE_STATUS_65449));
 	memset((unsigned char*) &RX_WEIGHING_SYSTEM_STATUS_65450, 0xFF,
 		sizeof(RX_WEIGHING_SYSTEM_STATUS_65450));
 	memset((unsigned char*) &RX_WEIGHING_SYSTEM_DATA1_65451, 0xFF,
@@ -471,6 +475,8 @@ void InitNewProtoclValuable() {
 		0xFF, sizeof(TX_HCE_ANTI_THEFT_PASSWORD_VALID_STATUS_61184_24));
 	memset((unsigned char*) &TX_HCE_ANTI_THEFT_MODIFY_PASSWORD_STATUS_61184_25,
 		0xFF, sizeof(TX_HCE_ANTI_THEFT_MODIFY_PASSWORD_STATUS_61184_25));
+	memset((unsigned char*) &TX_OPERATION_HISTORY_REQUEST_61184_31,
+		0xFF, sizeof(TX_OPERATION_HISTORY_REQUEST_61184_31));
 	memset((unsigned char*) &TX_COOLING_FAN_SETTING_61184_61, 0xFF,
 		sizeof(TX_COOLING_FAN_SETTING_61184_61));
 	memset((unsigned char*) &TX_WEIGHING_SYSTEM_SETTING_REQUEST_61184_62, 0xFF,
@@ -595,6 +601,7 @@ void InitNewProtoclValuable() {
 	TX_HCE_ANTI_THEFT_REQUEST_61184_23.MessageType = 23;
 	TX_HCE_ANTI_THEFT_PASSWORD_VALID_STATUS_61184_24.MessageType = 24;
 	TX_HCE_ANTI_THEFT_MODIFY_PASSWORD_STATUS_61184_25.MessageType = 25;
+	TX_OPERATION_HISTORY_REQUEST_61184_31.MessageType = 31;
 	TX_COOLING_FAN_SETTING_61184_61.MessageType = 61;
 	TX_WEIGHING_SYSTEM_SETTING_REQUEST_61184_62.MessageType = 62;
 	TX_WEIGHT_OFFSET_61184_63.MessageType = 63;
@@ -759,6 +766,7 @@ void UART1_SeperateData_Default(int Priority, int PF, int PS, unsigned char* Dat
 		case 23	:	memcpy((unsigned char*)&RX_HCE_ANTI_THEFT_REQUEST_61184_23,&Data[7],8);	 break	;
 		case 24	:	memcpy((unsigned char*)&RX_HCE_ANTI_THEFT_PASSWORD_VALID_STATUS_61184_24,&Data[7],8); nRecvPasswordResultFlag = 1;break	;
 		case 25	:	memcpy((unsigned char*)&RX_HCE_ANTI_THEFT_MODIFY_PASSWORD_STATUS_61184_25,&Data[7],8);	 nRecvPasswordChangeResultFlag = 1;break	;
+		case 33 :	memcpy((unsigned char*)&RX_AVERAGE_FUEL_RATE_HISTORY_61184_33,&Data[7],8); break;
 		case 61	:	memcpy((unsigned char*)&RX_COOLING_FAN_SETTING_61184_61,&Data[7],8);	 break	;
 		case 62	:	memcpy((unsigned char*)&RX_WEIGHING_SYSTEM_SETTING_REQUEST_61184_62,&Data[7],8);	 break	;
 		case 63	:	memcpy((unsigned char*)&RX_WEIGHT_OFFSET_61184_63,&Data[7],8);	 break	;
@@ -811,7 +819,7 @@ void UART1_SeperateData_Default(int Priority, int PF, int PS, unsigned char* Dat
 		case 90 :memcpy((unsigned char*)&RX_ENGINE_STATUS2_65370,&Data[7],8); break;
 		case 91 :memcpy((unsigned char*)&RX_ENGINE_STATUS1_65371,&Data[7],8); break;
 		case 109 :memcpy((unsigned char*)&RX_VEHICLE_DISTANCE_65389,&Data[7],8); break;
-		case 110	:	memcpy((unsigned char*) &RX_FUEL_INFORMATION_ECO_GAUGE_65390, &Data[7],8);	break;
+		case 110 :memcpy((unsigned char*) &RX_FUEL_INFORMATION_ECO_GAUGE_65390, &Data[7],8);	break;
 		case 115 :memcpy((unsigned char*)&RX_CYLINDER_ANGLE_STROKE1_65395,&Data[7],8); break;
 		case 116 :memcpy((unsigned char*)&RX_CYLINDER_ANGLE_STROKE2_65396,&Data[7],8); break;
 		case 145 :memcpy((unsigned char*)&RX_AS_PHONE_NUMBER_65425,&Data[7],8);break;
@@ -827,6 +835,7 @@ void UART1_SeperateData_Default(int Priority, int PF, int PS, unsigned char* Dat
 			memcpy((unsigned char*)&RX_DTC_INFORMATION_TYPE1_65438,&Data[7],8);
 			SaveErrorCode_NEW_CAN2();
 			break;
+		case 169 :memcpy((unsigned char*)&RX_AXLE_STATUS_65449,&Data[7],8); break;
 		case 170 :
 			memcpy((unsigned char*)&RX_WEIGHING_SYSTEM_STATUS_65450,&Data[7],8);
 			SetKeypadLamp();
@@ -949,6 +958,7 @@ void UART1_SeperateData_Default_Multi(int Priority, int PF, int PS, unsigned cha
 				memcpy((unsigned char*) &RX_MAINTENANCE_HISTORY_61184_15, &gRecvMulti,sizeof(RX_MAINTENANCE_HISTORY_61184_15));
 				nPF = nPS = nTotalPacketNum = nMultiPacketMessageType = 0;
 			}
+			break;
 
 		case 16:
 
@@ -956,24 +966,34 @@ void UART1_SeperateData_Default_Multi(int Priority, int PF, int PS, unsigned cha
 				memcpy((unsigned char*) &RX_MAINTENANCE_ALARM_LAMP_ON_ITEM_LIST_61184_16, &gRecvMulti,sizeof(RX_MAINTENANCE_ALARM_LAMP_ON_ITEM_LIST_61184_16));
 				nPF = nPS = nTotalPacketNum = nMultiPacketMessageType = 0;
 			}
+			break;
 		case 23:
 
 			if (Data[7] == nTotalPacketNum) {
 				memcpy((unsigned char*) &RX_HCE_ANTI_THEFT_REQUEST_61184_23, &gRecvMulti,sizeof(RX_HCE_ANTI_THEFT_REQUEST_61184_23));
 				nPF = nPS = nTotalPacketNum = nMultiPacketMessageType = 0;
 			}
+			break;
 		case 25:
 			if (Data[7] == nTotalPacketNum) {
 				memcpy((unsigned char*) &RX_HCE_ANTI_THEFT_MODIFY_PASSWORD_STATUS_61184_25, &gRecvMulti,sizeof(RX_HCE_ANTI_THEFT_MODIFY_PASSWORD_STATUS_61184_25));
 				nPF = nPS = nTotalPacketNum = nMultiPacketMessageType = 0;
 				nRecvPasswordChangeResultFlag = 1;
 			}
+			break;
+		case 33:
+			if (Data[7] == nTotalPacketNum) {
+				memcpy((unsigned char*) &RX_AVERAGE_FUEL_RATE_HISTORY_61184_33, &gRecvMulti,sizeof(RX_AVERAGE_FUEL_RATE_HISTORY_61184_33));
+				nPF = nPS = nTotalPacketNum = nMultiPacketMessageType = 0;
+			}
+			break;
 		case 151:
 
 			if (Data[7] == nTotalPacketNum) {
 				memcpy((unsigned char*) &RX_AS_PHONE_NUMBER_SETTING_61184_151, &gRecvMulti,sizeof(RX_AS_PHONE_NUMBER_SETTING_61184_151));
 				nPF = nPS = nTotalPacketNum = nMultiPacketMessageType = 0;
 			}
+			break;
 			/////////////////////////////////////////////////////////Old///////////////////////////////////////
 		case 228:	// 0xEFE4 61412
 
@@ -999,12 +1019,14 @@ void UART1_SeperateData_Default_Multi(int Priority, int PF, int PS, unsigned cha
 				memcpy((unsigned char*) &RX_COMPONENT_IDENTIFICATION_65330, &gRecvMulti,sizeof(RX_COMPONENT_IDENTIFICATION_65330));
 				nPF = nPS = nTotalPacketNum = nMultiPacketMessageType = 0;
 			}
+			break;
 		case 145:
 			memcpy((unsigned char*) &gRecvMulti[(Data[7] - 1) * 7],&Data[8], 7);
 			if (Data[7] == nTotalPacketNum) {
 				memcpy((unsigned char*) &RX_AS_PHONE_NUMBER_65425, &gRecvMulti,sizeof(RX_AS_PHONE_NUMBER_65425));
 				nPF = nPS = nTotalPacketNum = nMultiPacketMessageType = 0;
 			}
+			break;
 		case 158:
 			memcpy((unsigned char*) &gRecvMulti[(Data[7] - 1) * 7],&Data[8], 7);
 			if (Data[7] == nTotalPacketNum) {
@@ -1012,6 +1034,7 @@ void UART1_SeperateData_Default_Multi(int Priority, int PF, int PS, unsigned cha
 				nPF = nPS = nTotalPacketNum = nMultiPacketMessageType = 0;
 				SaveErrorCode_NEW_CAN2();
 			}
+			break;
 
 			/////////////////////////////////////////////////////////Old///////////////////////////////////////
 			//			case 68:	//  65348 Machine Security Status
@@ -1674,7 +1697,9 @@ jint UART1_Tx(JNIEnv *env, jobject this, jint PF, jint PS, jint Flag) {
 			//	memcpy(&tx_buf[4], (unsigned char*) &TX_HCE_ANTI_THEFT_REQUEST_61184_23, sizeof(TX_HCE_ANTI_THEFT_REQUEST_61184_23));
 			break;	// Multi Packet 13
 
-
+		case 31 :
+			MakeCANDataSingle(0x18,0xEF,SA_MCU,SA_MONITOR,(unsigned char*)&TX_OPERATION_HISTORY_REQUEST_61184_31);
+			break;
 
 		case 61	:
 			MakeCANDataSingle(0x18,0xEF,SA_MCU,SA_MONITOR,(unsigned char*)&TX_COOLING_FAN_SETTING_61184_61);
@@ -2908,6 +2933,9 @@ jint _UART1_TxComm(JNIEnv *env, jobject this, jint PS) {
 			memset((unsigned char*) RTSData,0xFF, sizeof(RTSData));
 			memcpy(&RTSData[0], (unsigned char*) &TX_HCE_ANTI_THEFT_REQUEST_61184_23, sizeof(TX_HCE_ANTI_THEFT_REQUEST_61184_23));
 			Send_RTS(0x1C,0xEF,0x00,SA_MCU,SA_MONITOR,nRTSDataLength);
+			break;
+		case 31	:
+			MakeCANDataSingle(0x18,0xEF,SA_MCU,SA_MONITOR,(unsigned char*)&TX_OPERATION_HISTORY_REQUEST_61184_31);
 			break;
 		case 61	:
 			MakeCANDataSingle(0x18,0xEF,SA_MCU,SA_MONITOR,(unsigned char*)&TX_COOLING_FAN_SETTING_61184_61);

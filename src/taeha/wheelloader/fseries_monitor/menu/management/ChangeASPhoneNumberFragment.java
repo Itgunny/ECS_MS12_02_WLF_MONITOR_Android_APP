@@ -457,9 +457,9 @@ public class ChangeASPhoneNumberFragment extends ParentFragment{
 	public void LoadPrefAS(){
 		SharedPreferences SharePref = ParentActivity.getSharedPreferences("Home", 0);
 		
-		strASNum = SharePref.getString("strASNum", "");
-		strASNumDash = SharePref.getString("strASNumDash", "");
-		
+		strASNum = SharePref.getString("strASNum", "18997282");	// ++, --, 150402 bwk A/S 번호 추가 		
+		strASNumDash = SharePref.getString("strASNumDash", "1899-7282");	// ++, --, 150402 bwk A/S 번호 추가 
+
 		Log.d(TAG,"LoadPrefAS : " + strASNum);
 	}
 	public void SavePrefAS(){

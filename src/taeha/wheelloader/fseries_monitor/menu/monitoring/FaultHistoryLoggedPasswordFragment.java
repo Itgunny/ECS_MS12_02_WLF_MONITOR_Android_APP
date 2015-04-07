@@ -16,6 +16,8 @@ import taeha.wheelloader.fseries_monitor.menu.PasswordFragment;
 public class FaultHistoryLoggedPasswordFragment extends PasswordFragment{
 
 	ImageButton imgbtnCancel;
+	
+	int SendDTCIndex;		// ++, --, 150329 bwk
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
@@ -63,6 +65,15 @@ public class FaultHistoryLoggedPasswordFragment extends PasswordFragment{
 		imgbtnEnter = (ImageButton)mRoot.findViewById(R.id.imageButton_menu_body_mode_engineautoshutdown_pw_num_enter);
 		imgbtnCancel = (ImageButton)mRoot.findViewById(R.id.ImageButton_menu_body_mode_engineautoshutdown_pw_low_cancel);
 	}
+	// ++, 150329 bwk
+	@Override
+	protected void InitValuables() {
+		// TODO Auto-generated method stub
+		super.InitValuables();
+		
+		SendDTCIndex = Home.REQ_ERR_EHCU_LOGGED;	
+	}
+	// --, 150329 bwk
 	@Override
 	protected void InitButtonListener() {
 		super.InitButtonListener();
@@ -75,6 +86,52 @@ public class FaultHistoryLoggedPasswordFragment extends PasswordFragment{
 			}
 		});
 	}
+	// ++, 150329 bwk
+	//////////////////////////////////////////////////////
+	@Override
+	protected void GetDataFromNative() {
+		if(SendDTCIndex < Home.REQ_ERR_END)
+		{
+			ReqestErrorCode();
+		}
+	}
+	//FAULT CODE//////////////////////////////////////////
+	public void RequestErrorCode(int Err, int Req, int SeqNo){
+		CAN1Comm.Set_DTCInformationRequest_1515_PGN61184_11(Req);
+		CAN1Comm.Set_DTCType_1510_PGN61184_11(Err);
+		CAN1Comm.Set_SeqenceNumberofDTCInformationPacket_1513_PGN61184_11(SeqNo);
+		CAN1Comm.TxCANToMCU(11);
+	}
+	public void ReqestErrorCode(){
+		switch (SendDTCIndex) {
+		case Home.REQ_ERR_MACHINE_LOGGED:
+			RequestErrorCode(SendDTCIndex,1,1);
+			SendDTCIndex = Home.REQ_ERR_END;
+			SetThreadSleepTime(200);
+			break;
+		case Home.REQ_ERR_ENGINE_LOGGED:
+			RequestErrorCode(SendDTCIndex,1,1);
+			SendDTCIndex = Home.REQ_ERR_MACHINE_LOGGED;
+			SetThreadSleepTime(200);
+
+			break;
+		case Home.REQ_ERR_TM_LOGGED:
+			RequestErrorCode(SendDTCIndex,1,1);
+			SendDTCIndex = Home.REQ_ERR_ENGINE_LOGGED;
+			SetThreadSleepTime(200);
+
+			break;
+		case Home.REQ_ERR_EHCU_LOGGED:
+			RequestErrorCode(SendDTCIndex,1,1);
+			SendDTCIndex = Home.REQ_ERR_TM_LOGGED;
+			SetThreadSleepTime(200);
+			break;
+		default:
+			break;
+		}
+	}
+	// --, 150329 bwk	
+	/////////////////////////////////////////////////////
 	@Override
 	public void showServicePasswordNextScreen() {
 		// TODO Auto-generated method stub

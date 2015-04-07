@@ -8,15 +8,15 @@
     <string name="Crash_Data">Crash Data</string>
     <!-- Common Start-->
     <string name="Hr">Hr</string>
-    <string name="C">ºC</string>
-    <string name="F">ºF</string>
+    <string name="C">℃</string>
+    <string name="F">℉</string>
     <string name="V">V</string>
     <string name="ton">ton</string>
     <string name="lb">lb</string>
     <string name="AM">AM</string>
     <string name="PM">PM</string>
     <string name="OK">OK</string>
-    <string name="Cancel">Cancel</string>
+    <string name="Cancel">CANCEL</string>
     <string name="Active_Fault">Active Fault</string>
     <string name="Maintenance">Maintenance</string>
     <string name="On">On</string>
@@ -82,6 +82,7 @@
     <string name="Finish">Finish</string>
     <string name="Initial_Para_Error_Found">Initial Parameter Error Found</string>
     <string name="Please_Reset_Power">Please Reset Power</string>
+    <string name="l">l</string>
     <!-- Common End-->
     <!-- Main Start-->
     <string name="ENGINE_MODE">ENGINE MODE</string>
@@ -123,7 +124,7 @@
     <string name="Help">Help</string>
     <string name="Bucket_Full_In_Error">Bucket Full In Error</string>
     <string name="Sudden_Change_Error">Sudden Change Error</string>
-    <string name="Plase_press_Enter_key">Plase press Enter key</string>
+    <string name="Please_press_Enter_key">Please press Enter key</string>
     <string name="User1">User1</string>
     <string name="User2">User2</string>
     <string name="User3">User3</string>
@@ -147,6 +148,14 @@
     <string name="Bucket_Full_In_Error_Warning">Bucket is not full in, though weigh may be inaccurate. Press the Enter Key to reweigh.</string>
     <string name="Sudden_Change_Error_Warning">Angular speed is a sudden change, though weigh may be inaccurate. Press the Enter Key to reweigh.</string>
     <string name="Hydraulic_Oil_Temp_Low_Warning">Hydraulic oil temperature low.</string>
+    <string name="LATEST_FUEL_CONSUMED">LATEST FUEL CONSUMED</string>
+    <string name="Latest_Fuel_Consumed">Latest Fuel Consumed</string>
+    <string name="CloseMulti">Player is running.\nYou want to close a Player?</string>
+    <string name="CloseMira">Miracast is running.\nYou want to close a Miracast?</string>
+    <string name="Front_Axle_Temp">Front Axle Temp.</string>
+    <string name="Rear_Axle_Temp">Rear Axle Temp.</string>
+    <string name="A_DAYS_FUEL_USED">A DAYS FUEL USED</string>
+    <string name="A_Days_Fuel_Used">A Days Fuel Used</string>
     <!-- Main End -->
     <!-- Key Start-->
     <string name="Main_Light">Main Light</string>
@@ -182,13 +191,13 @@
     <string name="Save_Position">Save Position</string>
     <string name="Forward">Forward</string>
     <string name="Backward">Backward</string>
-    <string name="Excute_Locking_Attachment">Excute Locking Attachment.</string>
+    <string name="Excute_Locking_Attachment">Execute Locking Attachment.</string>
     <string name="Excuting_Locking_Attachment">Excuting Locking Attachment.</string>
     <string name="Excute_Unlocking_Attachment">Excute Unlocking Attachment.</string>
     <string name="Excuting_Unlocking_Attachment">Excuting Unlocking Attachment.</string>
     <string name="Attachment_Unlocked_Check_Locking_Status">Attachment Unlocked. Check Locking Status.</string>
     <string name="Do_you_want_to_turn_on_Mirror_Heat">Do you want to turn on Mirror Heat?</string>
-    <string name="Do_you_want_to_turn_on_Auto_Grease">Do you want to turn on Auto Grease for once?</string>
+    <string name="Do_you_want_to_turn_on_Auto_Grease">Do you want to turn on Auto Grease?</string>
     <string name="Do_not_show_again">Do not show again</string>
     <!-- Key End -->
     <!-- Menu Start -->
@@ -322,11 +331,16 @@
     <string name="Boom_Down_Response_Adjust">Boom Down Response Adjust</string>
     <string name="Bucket_Dump_Response_Adjust">Bucket Dump Response Adjust</string>
     <string name="Hardware">Hardware</string>
+    <string name="Fuel_Consumption_History">Fuel Consumption History</string>
+    <string name="General_Record">General Record</string>
+    <string name="Hourly_Record">Hourly Record</string>
+    <string name="Daily_Record">Daily Record</string>
+    <string name="Mode_Record">Mode Record</string>
     <!-- Menu Monitoring End -->
     <!-- Menu Management Start -->
     <string name="Machine_Security">Machine Security</string>
     <string name="Calibration">Calibration</string>
-    <string name="Speedometer_Setting">Speedometer Setting</string>
+    <string name="Speedometer_Setting">Speedometer Freq. Setting</string>
     <string name="Change_AS_Phone_Number">Change A/S Phone Number</string>
     <string name="Service_Contact">Service Contact</string>
     <string name="Service_Menu">Service Menu</string>
@@ -334,15 +348,15 @@
     <string name="Change_Password">Change Password</string>
     <string name="Smart_Key">Smart Key</string>
     <string name="On_After_Specific_Time">On, After Specific Time</string>
-    <string name="_5Min">5 Min.</string>
-    <string name="_10Min">10 Min.</string>
-    <string name="_20Min">20 Min.</string>
-    <string name="_30Min">30 Min.</string>
-    <string name="_1Hour">1 Hour</string>
-    <string name="_2Hour">2 Hour</string>
-    <string name="_4Hour">4 Hour</string>
-    <string name="_1Day">1 Day</string>
-    <string name="_2Day">2 Day</string>
+    <string name="_5Min">5Min</string>
+    <string name="_10Min">10Min</string>
+    <string name="_20Min">20Min</string>
+    <string name="_30Min">30Min</string>
+    <string name="_1Hour">1Hour</string>
+    <string name="_2Hour">2Hour</string>
+    <string name="_4Hour">4Hour</string>
+    <string name="_1Day">1Day</string>
+    <string name="_2Day">2Day</string>
     <string name="Manage_Usage">Manage Usage</string>
     <string name="Manage_Tag">Manage Tag</string>
     <string name="Registered_Tag">Registered Tag</string>
@@ -381,9 +395,9 @@
     <string name="_4th_user_tag_registered">4th user tag registered</string>
     <string name="_5th_user_tag_registered">5th user tag registered</string>
     <string name="Tag_already_registered">Tag already registered.</string>
-    <string name="Registration_failed">Registration failed.</string>
-    <string name="All_user_tags_deleted">All user tags deleted.</string>
-    <string name="Delete_failed">Delete failed.</string>
+    <string name="Registration_failed">Registration failed</string>
+    <string name="All_user_tags_deleted">All user tags deleted</string>
+    <string name="Delete_failed">Delete failed</string>
     <string name="Calibration_failed_Machine_Restart">Calibration failed  Machine Restart</string>
     <string name="Calibration_completed">Calibration completed</string>
     <string name="Calibration_failed">Calibration failed</string>
@@ -391,7 +405,7 @@
     <string name="Time_Out">Time Out</string>
     <string name="Boom_Up_Speed_Error">Boom Up Speed Error</string>
     <string name="Pressure_Calibration_Warning">To calibrate it, when the Hydraulic Oil Temp. is above 40ºC(104ºF).</string>
-	<string name="Hydraulic_Oil_Temp_Error">Hydraulic Oil Temp. Error</string>
+    <string name="Hydraulic_Oil_Temp_Error">Hydraulic Oil Temp. Error</string>
     <string name="Fan_EPPR_Current_Adjust">Fan EPPR Current Adjust</string>
     <string name="Turn_the_engine_off_for_sensor_calibration">Turn the engine off for sensor calibration.</string>
     <string name="Engine_oil">Engine oil</string>
@@ -409,8 +423,8 @@
     <string name="Front_axle_oil">Front axle oil</string>
     <string name="Rear_axle_oil">Rear axle oil</string>
     <string name="Crankcase_Ventilation_Filter">Crankcase Ventilation Filter</string>
-    <string name="Aircon_Heater_Outer_Filter">Air-con., Heater Outer Filter</string>
-    <string name="Hydraulic_Tank_Drain_Filter">Hydraulic Tank Drain Filter</string>
+    <string name="Aircon_Heater_Outer_Filter">Air-con. &amp; Heater Outer Filter</string>
+    <string name="Hydraulic_Tank_Drain_Filter">Hydraulic Tank Drain Filter Cartridge</string>
     <string name="Count">Count</string>
     <string name="Elapsed_Time">Elapsed Time</string>
     <string name="Cycle">Cycle</string>
@@ -435,8 +449,8 @@
     <string name="Language">Language</string>
     <string name="Type_A">Type A</string>
     <string name="Type_B">Type B</string>
-    <string name="Unit_C">ºC</string>
-    <string name="Unit_F">ºF</string>
+    <string name="Unit_C">℃</string>
+    <string name="Unit_F">℉</string>
     <!-- Menu Preference End -->
     <!-- Menu Multimedia Start -->
     <string name="Media_Palyer">Media Player</string>
@@ -448,20 +462,12 @@
     <string name="French">French</string>
     <string name="Spanish">Spanish</string>
     <string name="Portuguese">Portuguese</string>
-    <string name="Chinese">Chinese</string>
-    <string name="Russian">Russian</string>
     <string name="Italian">Italian</string>
     <string name="Dutch">Dutch</string>
     <string name="Swedish">Swedish</string>
     <string name="Turkish">Turkish</string>
     <string name="Slovakian">Slovakian</string>
     <string name="Estonian">Estonian</string>
-    <string name="Thai">Thai</string>
-    <string name="Hindi">Hindi</string>
-    <string name="Mongolian">Mongolian</string>
-    <string name="Arabic">Arabic</string>
-    <string name="Persian">Persian</string>
-    <string name="Indonesian">Indonesian</string>
-    <string name="Finnish">Finnish</string>    
-    <!-- Language End -->    
+    <string name="Finnish">Finnish</string>
+    <!-- Language End -->
 </resources>

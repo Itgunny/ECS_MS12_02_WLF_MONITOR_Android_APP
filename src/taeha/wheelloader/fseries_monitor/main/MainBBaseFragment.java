@@ -21,7 +21,9 @@ import taeha.wheelloader.fseries_monitor.main.b.MainBLeftDownFuelFragment;
 import taeha.wheelloader.fseries_monitor.main.b.MainBLeftDownFuelSelectFragment;
 import taeha.wheelloader.fseries_monitor.main.b.MainBLeftDownQuickFragment;
 import taeha.wheelloader.fseries_monitor.main.b.MainBLeftUpMachineStatusFragment;
-import taeha.wheelloader.fseries_monitor.main.b.MainBLeftUpMachineStatusSelectFragment;
+import taeha.wheelloader.fseries_monitor.main.b.MainBLeftUpMachineStatusSelectFragment1;
+import taeha.wheelloader.fseries_monitor.main.b.MainBLeftUpMachineStatusSelectFragment2;
+import taeha.wheelloader.fseries_monitor.main.b.MainBLeftUpMachineStatusSelectFragment3;
 import taeha.wheelloader.fseries_monitor.main.b.MainBLeftUpQuickFragment;
 import taeha.wheelloader.fseries_monitor.main.b.MainBRightDownQuickFragment;
 import taeha.wheelloader.fseries_monitor.main.b.MainBRightDownTMCCOModeFragment;
@@ -93,6 +95,8 @@ public class MainBBaseFragment extends ParentFragment{
 	//VALUABLE////////////////////////////////////////
 	int BrakepedalReq;
 	int AEBReq;
+	
+	int FirstScreenIndex;		// ++, --, 150331 bwk
 	//////////////////////////////////////////////////
 	
 	//Fragment////////////////////////////////////////
@@ -122,12 +126,14 @@ public class MainBBaseFragment extends ParentFragment{
 	public MainBRightDownTMTCLockUpFragment 		_MainBRightDownTMTCLockUpFragment;
 	public MainBRightDownQuickFragment 				_MainBRightDownQuickFragment;
 	
-	public MainBLeftDownFuelFragment 		_MainBLeftDownHourOdoFragment;
-	public MainBLeftDownFuelSelectFragment 	_MainBLeftDownHourOdometerSelectFragment;
+	public MainBLeftDownFuelFragment 				_MainBLeftDownFuelFragment;
+	public MainBLeftDownFuelSelectFragment 			_MainBLeftDownFuelSelectFragment;
 	public MainBLeftDownQuickFragment 				_MainBLeftDownQuickFragment;
 	
 	public MainBLeftUpMachineStatusFragment 		_MainBLeftUpMachineStatusFragment;
-	public MainBLeftUpMachineStatusSelectFragment 	_MainBLeftUpMachineStatusSelectFragment;
+	public MainBLeftUpMachineStatusSelectFragment1 	_MainBLeftUpMachineStatusSelectFragment1;
+	public MainBLeftUpMachineStatusSelectFragment2 	_MainBLeftUpMachineStatusSelectFragment2;
+	public MainBLeftUpMachineStatusSelectFragment3 	_MainBLeftUpMachineStatusSelectFragment3;
 	public MainBLeftUpQuickFragment 				_MainBLeftUpQuickFragment;
 	
 	public MainBUpperMenuBarFragment 				_MainBUpperMenuBarFragment;
@@ -265,6 +271,8 @@ public class MainBBaseFragment extends ParentFragment{
 			CenterAnimation.StartChangeAnimation(_MainBCenterBrakePedalCalibrationFragment);
 		}else if (AEBReq == 1){
 			CenterAnimation.StartChangeAnimation(_MainBCenterAEBFragment);
+		}else{
+			CheckFirstScreen(FirstScreenIndex);		// ++, --, 150331 bwk
 		}
 		
 		ParentActivity.ScreenIndex = ParentActivity.SCREEN_STATE_MAIN_B_TOP;
@@ -348,12 +356,14 @@ public class MainBBaseFragment extends ParentFragment{
 		_MainBRightDownTMTCLockUpFragment = new MainBRightDownTMTCLockUpFragment();
 		_MainBRightDownQuickFragment = new MainBRightDownQuickFragment();
 		
-		_MainBLeftDownHourOdoFragment = new MainBLeftDownFuelFragment();
-		_MainBLeftDownHourOdometerSelectFragment = new MainBLeftDownFuelSelectFragment();
+		_MainBLeftDownFuelFragment = new MainBLeftDownFuelFragment();
+		_MainBLeftDownFuelSelectFragment = new MainBLeftDownFuelSelectFragment();
 		_MainBLeftDownQuickFragment = new MainBLeftDownQuickFragment();
 		
 		_MainBLeftUpMachineStatusFragment = new MainBLeftUpMachineStatusFragment();
-		_MainBLeftUpMachineStatusSelectFragment = new MainBLeftUpMachineStatusSelectFragment();
+		_MainBLeftUpMachineStatusSelectFragment1 = new MainBLeftUpMachineStatusSelectFragment1();
+		_MainBLeftUpMachineStatusSelectFragment2 = new MainBLeftUpMachineStatusSelectFragment2();
+		_MainBLeftUpMachineStatusSelectFragment3 = new MainBLeftUpMachineStatusSelectFragment3();
 		_MainBLeftUpQuickFragment = new MainBLeftUpQuickFragment();
 		
 		_MainBUpperMenuBarFragment = new MainBUpperMenuBarFragment();
@@ -391,7 +401,7 @@ public class MainBBaseFragment extends ParentFragment{
 		RightUpChangeAnimation = new ChangeFragmentAnimation(ParentActivity, framelayoutRightUp, R.id.FrameLayout_screen_main_b_rightup,_MainBRightUpEngineFragment);
 		RightDownChangeAnimation = new ChangeFragmentAnimation(ParentActivity, framelayoutRightDown, R.id.FrameLayout_screen_main_b_rightdown,_MainBRightDownTMFragment);
 		LeftUpChangeAnimation = new ChangeFragmentAnimation(ParentActivity, framelayoutLeftUp, R.id.FrameLayout_screen_main_b_leftup,_MainBLeftUpMachineStatusFragment);
-		LeftDownChangeAnimation = new ChangeFragmentAnimation(ParentActivity, framelayoutLeftDown, R.id.FrameLayout_screen_main_b_leftdown,_MainBLeftDownHourOdoFragment);
+		LeftDownChangeAnimation = new ChangeFragmentAnimation(ParentActivity, framelayoutLeftDown, R.id.FrameLayout_screen_main_b_leftdown,_MainBLeftDownFuelFragment);
 		IndicatorChangeAnimation = new ChangeFragmentAnimation(ParentActivity, framelayoutIndicator, R.id.FrameLayout_screen_main_b_indicator,_MainBIndicatorFragment);
 		VirtualKeyChangeAnimation = new ChangeFragmentAnimation(ParentActivity, framelayoutVirtualKey, R.id.FrameLayout_screen_main_b_virtualkey,_MainBVirtualKeyFragment);
 		KeyTitleChangeAnimation = new ChangeFragmentAnimation(ParentActivity, framelayoutKeyTitle, R.id.FrameLayout_screen_main_b_key_title,null);
@@ -514,11 +524,13 @@ public class MainBBaseFragment extends ParentFragment{
 		transaction.detach(_MainBRightDownTMShiftModeFragment);
 		transaction.detach(_MainBRightDownTMTCLockUpFragment);
 		transaction.detach(_MainBRightDownQuickFragment);
-		transaction.detach(_MainBLeftDownHourOdoFragment);
-		transaction.detach(_MainBLeftDownHourOdometerSelectFragment);
+		transaction.detach(_MainBLeftDownFuelFragment);
+		transaction.detach(_MainBLeftDownFuelSelectFragment);
 		transaction.detach(_MainBLeftDownQuickFragment);
 		transaction.detach(_MainBLeftUpMachineStatusFragment);
-		transaction.detach(_MainBLeftUpMachineStatusSelectFragment);
+		transaction.detach(_MainBLeftUpMachineStatusSelectFragment1);
+		transaction.detach(_MainBLeftUpMachineStatusSelectFragment2);
+		transaction.detach(_MainBLeftUpMachineStatusSelectFragment3);
 		transaction.detach(_MainBLeftUpQuickFragment);
 		transaction.detach(_MainBUpperMenuBarFragment);
 		transaction.detach(_MainBVirtualKeyFragment);
@@ -553,12 +565,14 @@ public class MainBBaseFragment extends ParentFragment{
 		_MainBRightDownTMTCLockUpFragment 	 = null;
 		_MainBRightDownQuickFragment 	 = null;
 			
-		_MainBLeftDownHourOdoFragment 	 = null;
-		_MainBLeftDownHourOdometerSelectFragment 	 = null;
+		_MainBLeftDownFuelFragment 	 = null;
+		_MainBLeftDownFuelSelectFragment 	 = null;
 		_MainBLeftDownQuickFragment 	 = null;
 			
 		_MainBLeftUpMachineStatusFragment 	 = null;
-		_MainBLeftUpMachineStatusSelectFragment 	 = null;
+		_MainBLeftUpMachineStatusSelectFragment1 	 = null;
+		_MainBLeftUpMachineStatusSelectFragment2 	 = null;
+		_MainBLeftUpMachineStatusSelectFragment3 	 = null;
 		_MainBLeftUpQuickFragment 	 = null;
 			
 		_MainBUpperMenuBarFragment 	 = null;
@@ -790,13 +804,13 @@ public class MainBBaseFragment extends ParentFragment{
 	// Left Down
 	public void showLeftDownHourOdo(){
 		android.app.FragmentTransaction transaction = getFragmentManager().beginTransaction();
-		transaction.replace(R.id.FrameLayout_screen_main_b_leftdown, _MainBLeftDownHourOdoFragment);
+		transaction.replace(R.id.FrameLayout_screen_main_b_leftdown, _MainBLeftDownFuelFragment);
 		//transaction.addToBackStack("Main_Left");
 		transaction.commit();
 	}
 	public void showLeftDownHourOdoSelect(){
 		android.app.FragmentTransaction transaction = getFragmentManager().beginTransaction();
-		transaction.replace(R.id.FrameLayout_screen_main_b_leftdown, _MainBLeftDownHourOdometerSelectFragment);
+		transaction.replace(R.id.FrameLayout_screen_main_b_leftdown, _MainBLeftDownFuelSelectFragment);
 		//transaction.addToBackStack("Main_Left");
 		transaction.commit();
 	}
@@ -813,12 +827,24 @@ public class MainBBaseFragment extends ParentFragment{
 		//transaction.addToBackStack("Main_Left");
 		transaction.commit();
 	}
-	public void showLeftUpMachineStatusSelect(){
+	public void showLeftUpMachineStatusSelect1(){
 		android.app.FragmentTransaction transaction = getFragmentManager().beginTransaction();
-		transaction.replace(R.id.FrameLayout_screen_main_b_leftup, _MainBLeftUpMachineStatusSelectFragment);
+		transaction.replace(R.id.FrameLayout_screen_main_b_leftup, _MainBLeftUpMachineStatusSelectFragment1);
 		//transaction.addToBackStack("Main_Left");
 		transaction.commit();
 	}
+	public void showLeftUpMachineStatusSelect2(){
+		android.app.FragmentTransaction transaction = getFragmentManager().beginTransaction();
+		transaction.replace(R.id.FrameLayout_screen_main_b_leftup, _MainBLeftUpMachineStatusSelectFragment2);
+		//transaction.addToBackStack("Main_Left");
+		transaction.commit();
+	}
+	public void showLeftUpMachineStatusSelect3(){
+		android.app.FragmentTransaction transaction = getFragmentManager().beginTransaction();
+		transaction.replace(R.id.FrameLayout_screen_main_b_leftup, _MainBLeftUpMachineStatusSelectFragment3);
+		//transaction.addToBackStack("Main_Left");
+		transaction.commit();
+	}	
 	public void showLeftUpQuick(){
 		android.app.FragmentTransaction transaction = getFragmentManager().beginTransaction();
 		transaction.replace(R.id.FrameLayout_screen_main_b_leftup, _MainBLeftUpQuickFragment);
@@ -956,7 +982,37 @@ public class MainBBaseFragment extends ParentFragment{
 		RightUpChangeAnimation.StartChangeAnimation(_MainBRightUpEngineFragment);
 		RightDownChangeAnimation.StartChangeAnimation(_MainBRightDownTMFragment);
 		LeftUpChangeAnimation.StartChangeAnimation(_MainBLeftUpMachineStatusFragment);
-		LeftDownChangeAnimation.StartChangeAnimation(_MainBLeftDownHourOdoFragment);
+		LeftDownChangeAnimation.StartChangeAnimation(_MainBLeftDownFuelFragment);
+		
+		
+		_RightUpShiftAnimation.StartShiftAnimation();
+		_RightDownShiftAnimation.StartShiftAnimation();
+		_LeftUpShiftAnimation.StartShiftAnimation();
+		_LeftDownShiftAnimation.StartShiftAnimation();
+		_RightUpBGShiftAnimation.StartShiftAnimation();
+		_RightDownBGShiftAnimation.StartShiftAnimation();
+		_LeftUpBGShiftAnimation.StartShiftAnimation();
+		_LeftDownBGShiftAnimation.StartShiftAnimation();
+		
+		KeyTitleChangeAnimation.StartDisappearAnimation();
+		KeyBodyChangeAnimation.StartDisappearAnimation();
+		//VirtualKeyChangeAnimation.StartDisappearAnimation();		// ++, --, 150407 bwk
+		
+		IndicatorChangeAnimation.StartChangeAnimation(_MainBIndicatorFragment);
+	}
+	
+	// ++, 150407 bwk
+	public void showQuicktoDefaultScreenAnimation(){
+		ParentActivity.ScreenIndex = ParentActivity.SCREEN_STATE_MAIN_B_TOP;
+		
+		_MainBodyShiftAnimation.StartShiftZeroAnimation();
+		_MainBVirtualKeyShiftAnimation.StartShiftZeroAnimation();
+		
+		CenterAnimation.StartChangeAnimation(_MainBCenterFragment);
+		RightUpChangeAnimation.StartChangeAnimation(_MainBRightUpEngineFragment);
+		RightDownChangeAnimation.StartChangeAnimation(_MainBRightDownTMFragment);
+		LeftUpChangeAnimation.StartChangeAnimation(_MainBLeftUpMachineStatusFragment);
+		LeftDownChangeAnimation.StartChangeAnimation(_MainBLeftDownFuelFragment);
 		
 		
 		_RightUpShiftAnimation.StartShiftAnimation();
@@ -973,10 +1029,8 @@ public class MainBBaseFragment extends ParentFragment{
 		VirtualKeyChangeAnimation.StartDisappearAnimation();
 		
 		IndicatorChangeAnimation.StartChangeAnimation(_MainBIndicatorFragment);
-	
-		
-		
-	}
+	}	
+	// --, 150407 bwk
 	
 	public void showRightUptoDefaultScreenAnimation(){
 		ParentActivity.ScreenIndex = ParentActivity.SCREEN_STATE_MAIN_B_TOP;
@@ -1033,11 +1087,6 @@ public class MainBBaseFragment extends ParentFragment{
 		_RightUpBGShiftAnimation.StartShiftAnimation();
 		_LeftUpBGShiftAnimation.StartShiftAnimation();
 		_LeftDownBGShiftAnimation.StartShiftAnimation();
-				
-			
-	
-		
-		
 	}
 	
 	public void showLeftDowntoDefaultScreenAnimation(){
@@ -1047,7 +1096,7 @@ public class MainBBaseFragment extends ParentFragment{
 		_MainBVirtualKeyShiftAnimation.StartShiftZeroAnimation();
 		
 		CenterAnimation.StartChangeAnimation(_MainBCenterFragment);
-		LeftDownChangeAnimation.StartChangeAnimation(_MainBLeftDownHourOdoFragment);
+		LeftDownChangeAnimation.StartChangeAnimation(_MainBLeftDownFuelFragment);
 		
 		
 		_RightUpAppearAnimation.StartAnimation();
@@ -1124,7 +1173,7 @@ public class MainBBaseFragment extends ParentFragment{
 		RightUpChangeAnimation.StartChangeAnimation(_MainBRightUpEngineFragment);
 		RightDownChangeAnimation.StartChangeAnimation(_MainBRightDownTMFragment);
 		LeftUpChangeAnimation.StartChangeAnimation(_MainBLeftUpMachineStatusFragment);
-		LeftDownChangeAnimation.StartChangeAnimation(_MainBLeftDownHourOdoFragment);
+		LeftDownChangeAnimation.StartChangeAnimation(_MainBLeftDownFuelFragment);
 		
 		
 		_RightUpShiftAnimation.StartShiftAnimation();
@@ -1138,9 +1187,6 @@ public class MainBBaseFragment extends ParentFragment{
 		
 		KeyTitleChangeAnimation.StartDisappearAnimation();
 		KeyBodyChangeAnimation.StartDisappearAnimation();
-
-	
-		
 	}
 	public void showQuickScreenAnimation(){
 		
@@ -1181,7 +1227,7 @@ public class MainBBaseFragment extends ParentFragment{
 //		_KeyDisappearAnimation.StartAnimation();
 		_MainBVirtualKeyShiftAnimation.StartShiftVirtualKeyAnimation();
 	}
-	
+
 	public void showKeyScreenAnimation(){
 		
 		if((ParentActivity.ScreenIndex < ParentActivity.SCREEN_STATE_MAIN_B_KEY_TOP) || (ParentActivity.ScreenIndex > ParentActivity.SCREEN_STATE_MAIN_B_KEY_END)){
@@ -1195,7 +1241,11 @@ public class MainBBaseFragment extends ParentFragment{
 			_KeyTitleBGShiftAnimation.StartShiftAnimation();
 			_KeyBodyBGShiftAnimation.StartShiftAnimation();
 			VirtualKeyChangeAnimation.StartDisappearAnimation();
-		
+
+			// ++, 150407 bwk
+			if(ParentActivity.ScreenIndex >= ParentActivity.SCREEN_STATE_MAIN_B_QUICK_TOP)
+				IndicatorChangeAnimation.StartChangeAnimation(_MainBIndicatorFragment);		
+			// --, 150407 bwk
 			
 		}else{
 
@@ -1368,7 +1418,36 @@ public class MainBBaseFragment extends ParentFragment{
 	//	KeyTitleChangeAnimation.StartChangeAnimation(_MainBKeyTitleFragment);
 		KeyBodyChangeAnimation.StartChangeAnimation(_MainBKeyRideControlSpeedFragment);
 	}
-
+	/////////////////////////////////////////////////////////////////////
+	// ++, 150331 bwk
+	public void setFirstScreenIndex(int Index){
+		FirstScreenIndex = Index;
+	}
+	public void CheckFirstScreen(int Index){
+		if(Index == Home.SCREEN_STATE_MAIN_B_KEY_WORKLOAD){
+			showWorkLoad();
+			setFirstScreenIndex(0);
+		}
+	}
+	
+	public void showWorkLoad(){
+		LayoutBody.setVisibility(View.INVISIBLE);
+		LayoutKey.setVisibility(View.VISIBLE);
+		_KeyTitleShiftAnimation.StartShiftAnimation();
+		_KeyBodyShiftAnimation.StartShiftAnimation();
+		_KeyTitleBGAppearAnimation.StartAnimation();
+		_KeyBodyBGAppearAnimation.StartAnimation();
+		_KeyTitleBGShiftAnimation.StartShiftAnimation();
+		_KeyBodyBGShiftAnimation.StartShiftAnimation();
+		
+		_MainBKeyTitleFragment = new MainBKeyTitleFragment();
+		_MainBKeyWorkLoadFragment = new MainBKeyWorkLoadFragment();
+		_MainBKeyTitleFragment.setTitleIcon(ParentActivity.getResources().getDrawable(R.drawable.main_key_title_workmode));
+		_MainBKeyTitleFragment.setTitleText(ParentActivity.getResources().getString(string.Work_Load));
+		KeyTitleChangeAnimation.StartChangeAnimation(_MainBKeyTitleFragment);
+		KeyBodyChangeAnimation.StartChangeAnimation(_MainBKeyWorkLoadFragment);
+	}
+	// --, 150331 bwk
 	/////////////////////////////////////////////////////////////////////
 	public void KeyButtonClick(final int key){
 		Log.d(TAG,"KeyButtonClick : 0x" + Integer.toHexString(key));
@@ -1447,7 +1526,7 @@ public class MainBBaseFragment extends ParentFragment{
 		case CAN1CommManager.FINEMODULATION:
 			if(ParentActivity._CheckModel.GetMCUVersion(CAN1Comm.Get_ComponentBasicInformation_1698_PGN65330()) == CheckModel.MODEL_940
 			|| ParentActivity._CheckModel.GetMCUVersion(CAN1Comm.Get_ComponentBasicInformation_1698_PGN65330()) == CheckModel.MODEL_935){
-				
+				ParentActivity.showFineModulation();	// ++, --, 150402 bwk
 			}else{
 				if(ParentActivity.AnimationRunningFlag == true)
 					return;
@@ -1468,10 +1547,10 @@ public class MainBBaseFragment extends ParentFragment{
 			}
 			break;
 		case CAN1CommManager.LEFT:
-			
+			ClickKeyButtonLeft();
 			break;
 		case CAN1CommManager.RIGHT:
-			
+			ClickKeyButtonRight();
 			break;
 		case CAN1CommManager.ESC:
 			ClickKeyButtonESC();
@@ -1511,6 +1590,53 @@ public class MainBBaseFragment extends ParentFragment{
 	}
 	// --, 150210 bwk
 	
+	public void ClickKeyButtonLeft(){
+		switch (ParentActivity.ScreenIndex) {
+		case Home.SCREEN_STATE_MAIN_B_LEFTUP_MACHINESTATUS1:
+			_MainBLeftUpMachineStatusSelectFragment1.ClickLeft();
+			break;
+		case Home.SCREEN_STATE_MAIN_B_LEFTUP_MACHINESTATUS2:
+			_MainBLeftUpMachineStatusSelectFragment2.ClickLeft();
+			break;
+		case Home.SCREEN_STATE_MAIN_B_LEFTUP_MACHINESTATUS3:
+			_MainBLeftUpMachineStatusSelectFragment3.ClickLeft();
+			break;
+		case Home.SCREEN_STATE_MAIN_B_LEFTDOWN_FUEL:
+			_MainBLeftDownFuelSelectFragment.ClickLeft();
+			break;
+		case Home.SCREEN_STATE_MAIN_B_RIGHTUP_HOURODMETER:
+			_MainBRightUpHourOdometerSelectFragment.ClickLeft();
+			break;
+		case  Home.SCREEN_STATE_MAIN_B_QUICK_MULTICLOSE:
+			ParentActivity._MultimediaClosePopup.ClickLeft();
+			break;
+		}
+	}
+	
+	public void ClickKeyButtonRight(){
+		switch (ParentActivity.ScreenIndex) {
+		case Home.SCREEN_STATE_MAIN_B_LEFTUP_MACHINESTATUS1:
+			_MainBLeftUpMachineStatusSelectFragment1.ClickRight();
+			break;
+		case Home.SCREEN_STATE_MAIN_B_LEFTUP_MACHINESTATUS2:
+			_MainBLeftUpMachineStatusSelectFragment2.ClickRight();
+			break;
+		case Home.SCREEN_STATE_MAIN_B_LEFTUP_MACHINESTATUS3:
+			_MainBLeftUpMachineStatusSelectFragment3.ClickRight();
+			break;
+		case Home.SCREEN_STATE_MAIN_B_LEFTDOWN_FUEL:
+			_MainBLeftDownFuelSelectFragment.ClickRight();
+			break;			
+		case Home.SCREEN_STATE_MAIN_B_RIGHTUP_HOURODMETER:
+			_MainBRightUpHourOdometerSelectFragment.ClickRight();
+			break;
+		case  Home.SCREEN_STATE_MAIN_B_QUICK_MULTICLOSE:
+			ParentActivity._MultimediaClosePopup.ClickRight();
+			break;
+			
+		}
+	}
+	
 	public void ClickKeyButtonESC(){
 		switch (ParentActivity.ScreenIndex) {
 		case Home.SCREEN_STATE_MAIN_B_RIGHTUP_ENGINE_MODE:
@@ -1525,7 +1651,9 @@ public class MainBBaseFragment extends ParentFragment{
 		case Home.SCREEN_STATE_MAIN_B_RIGHTDOWN_TCLOCKUP:
 			showRightDowntoDefaultScreenAnimation();
 			break;
-		case Home.SCREEN_STATE_MAIN_B_LEFTUP_MACHINESTATUS:
+		case Home.SCREEN_STATE_MAIN_B_LEFTUP_MACHINESTATUS1:
+		case Home.SCREEN_STATE_MAIN_B_LEFTUP_MACHINESTATUS2:
+		case Home.SCREEN_STATE_MAIN_B_LEFTUP_MACHINESTATUS3:
 			showLeftUptoDefaultScreenAnimation();
 			break;
 		// ++, 150317 bwk
@@ -1550,7 +1678,9 @@ public class MainBBaseFragment extends ParentFragment{
 		case Home.SCREEN_STATE_MAIN_B_KEY_FINEMODULATION:
 			showKeytoDefaultScreenAnimation();
 			break;	
-			
+		case Home.SCREEN_STATE_MAIN_B_KEY_FINEMODULATION_POPUP:
+			ParentActivity._FineModulationPouup.ClickESC();
+			break;
 		case Home.SCREEN_STATE_MAIN_B_BRKAEPEDALCALIBRATION_TOP:
 		case Home.SCREEN_STATE_MAIN_B_AEB_TOP:
 			showCalibrationtoDefaultScreenAnimation();
@@ -1568,6 +1698,9 @@ public class MainBBaseFragment extends ParentFragment{
 		case Home.SCREEN_STATE_MAIN_B_KEY_WORKLOAD_ERRORDETECT:
 			_MainBKeyWorkLoadErrorDetectionFragment.showWorkLoadAnimation();
 			break;
+		case  Home.SCREEN_STATE_MAIN_B_QUICK_MULTICLOSE:
+			ParentActivity._MultimediaClosePopup.ClickESC();
+			break;
 		default:
 			break;
 		}
@@ -1575,7 +1708,32 @@ public class MainBBaseFragment extends ParentFragment{
 
 	// ++, 150212 bwk
 	public void ClickKeyButtonEnter(){
-		_MainBLeftUpMachineStatusFragment.ClickEnter();
+		switch(ParentActivity.ScreenIndex){
+		case Home.SCREEN_STATE_MAIN_B_LEFTUP_MACHINESTATUS1:
+			_MainBLeftUpMachineStatusSelectFragment1.ClickEnter();
+			break;
+		case Home.SCREEN_STATE_MAIN_B_LEFTUP_MACHINESTATUS2:
+			_MainBLeftUpMachineStatusSelectFragment2.ClickEnter();
+			break;
+		case Home.SCREEN_STATE_MAIN_B_LEFTUP_MACHINESTATUS3:
+			_MainBLeftUpMachineStatusSelectFragment3.ClickEnter();
+			break;
+		case Home.SCREEN_STATE_MAIN_B_LEFTDOWN_FUEL:
+			_MainBLeftDownFuelSelectFragment.ClickEnter();
+			break;
+		case Home.SCREEN_STATE_MAIN_B_RIGHTUP_HOURODMETER:
+			_MainBRightUpHourOdometerSelectFragment.ClickEnter();
+			break;
+		case Home.SCREEN_STATE_MAIN_B_KEY_FINEMODULATION_POPUP:
+			ParentActivity._FineModulationPouup.ClickEnter();
+			break;
+		case  Home.SCREEN_STATE_MAIN_B_QUICK_MULTICLOSE:
+			ParentActivity._MultimediaClosePopup.ClickLeft();
+			break;
+		default:
+			_MainBLeftUpMachineStatusFragment.ClickEnter();
+			break;
+		}
 	}
 	// --, 150212 bwk
 }

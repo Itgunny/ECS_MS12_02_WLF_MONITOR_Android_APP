@@ -4,8 +4,6 @@ import customlist.sensormonitoring.IconTextItem;
 import customlist.sensormonitoring.IconTextListAdapter;
 import customlist.userswitching.IconTextItemUserSwitching;
 import customlist.userswitching.IconTextListAdapterUserSwitching;
-import taeha.wheelloader.fseries_monitor.animation.AppearAnimation;
-import taeha.wheelloader.fseries_monitor.animation.ChangeFragmentAnimation;
 import taeha.wheelloader.fseries_monitor.animation.DisappearAnimation;
 import taeha.wheelloader.fseries_monitor.animation.MainBodyShiftAnimation;
 import taeha.wheelloader.fseries_monitor.animation.LeftRightShiftAnimation;
@@ -31,36 +29,38 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.RadioButton;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 public class UserSwitching extends ParentFragment{
 	//CONSTANT////////////////////////////////////////
 	private static final int STATE_ENGINEMODE 				= 0;
-	private static final int STATE_WARMINGUP				= 1;
-	private static final int STATE_CCOMODE					= 2;
-	private static final int STATE_SHIFTMODE				= 3;
-	private static final int STATE_TCLOCKUP					= 4;
-	private static final int STATE_RIDECONTROL				= 5;
-	private static final int STATE_WEIGHINGSYSTEM			= 6;
-	private static final int STATE_WEIGHINGDISPLAY			= 7;
-	private static final int STATE_ERRORDETECTION			= 8;
-	private static final int STATE_KICKDOWN					= 9;
-	private static final int STATE_BUCKETPRIORITY			= 10;
-	private static final int STATE_SOFTENDSTOP_BOOMUP		= 11;
-	private static final int STATE_SOFTENDSTOP_BOOMDOWN		= 12;
-	private static final int STATE_SOFTENDSTOP_BUCKETIN		= 13;
-	private static final int STATE_SOFTENDSTOP_BUCKETDUMP	= 14;
-	private static final int STATE_BRIGHTNESS				= 15;
-	private static final int STATE_DISPLAYTYPE				= 16;
-	private static final int STATE_UNIT_TEMP				= 17;
-	private static final int STATE_UNIT_ODO					= 18;
-	private static final int STATE_UNIT_WEIGHT				= 19;
-	private static final int STATE_UNIT_PRESSURE			= 20;
-	private static final int STATE_MACHINESTATUS_UPPER		= 21;
-	private static final int STATE_MACHINESTATUS_LOWER		= 22;
-	private static final int STATE_LANGUAGE					= 23;
-	private static final int STATE_SOUNDOUTPUT				= 24;
-	private static final int STATE_HOURMETER				= 25;
+	//private static final int STATE_WARMINGUP				= 1;	// ++, --, 150403 bwk 항목 삭제
+	private static final int STATE_CCOMODE					= 1;
+	private static final int STATE_SHIFTMODE				= 2;
+	private static final int STATE_TCLOCKUP					= 3;
+	private static final int STATE_RIDECONTROL				= 4;
+	private static final int STATE_WEIGHINGSYSTEM			= 5;
+	private static final int STATE_WEIGHINGDISPLAY			= 6;
+	private static final int STATE_ERRORDETECTION			= 7;
+	private static final int STATE_KICKDOWN					= 8;
+	private static final int STATE_BUCKETPRIORITY			= 9;
+	private static final int STATE_SOFTENDSTOP_BOOMUP		= 10;
+	private static final int STATE_SOFTENDSTOP_BOOMDOWN		= 11;
+	private static final int STATE_SOFTENDSTOP_BUCKETIN		= 12;
+	private static final int STATE_SOFTENDSTOP_BUCKETDUMP	= 13;
+	private static final int STATE_BRIGHTNESS_MANUALAUTO	= 14;	// ++, --, 150407 bwk 수동 밝기 -> 수동/자동으로 변경
+	private static final int STATE_DISPLAYTYPE				= 15;
+	private static final int STATE_UNIT_TEMP				= 16;
+	private static final int STATE_UNIT_ODO					= 17;
+	private static final int STATE_UNIT_WEIGHT				= 18;
+	private static final int STATE_UNIT_PRESSURE			= 19;
+	private static final int STATE_MACHINESTATUS_UPPER		= 20;
+	private static final int STATE_MACHINESTATUS_LOWER		= 21;
+	private static final int STATE_LANGUAGE					= 22;
+	private static final int STATE_SOUNDOUTPUT				= 23;
+	private static final int STATE_OPERATION_HISTORY		= 24;	// ++, --, 150403 bwk 명칭 변경 STATE_HOURMETER -> STATE_OPERATION_HISTORY
+	private static final int STATE_FUEL_INFO				= 25;	// ++, --, 150403 bwk 항목 추가
 	
 	//////////////////////////////////////////////////
 	//RESOURCE////////////////////////////////////////
@@ -78,11 +78,13 @@ public class UserSwitching extends ParentFragment{
 	ListView listView;
 	// ListItem
 	IconTextListAdapterUserSwitching adapter;
+	
+	RelativeLayout layoutSave;	// ++, --, 150407 bwk
 	//////////////////////////////////////////////////
 	
 	//VALUABLE////////////////////////////////////////
 	public int EngineMode;
-	public int WarmingUp;
+	//public int WarmingUp;
 	public int CCOMode;
 	public int ShiftMode;
 	public int TCLockUp;
@@ -96,7 +98,15 @@ public class UserSwitching extends ParentFragment{
 	public int SoftEndStopBoomDown;
 	public int SoftEndStopBucketIn;
 	public int SoftEndStopBucketDump;
-	public int Brightness;
+	// ++, 150407 bwk
+	//public int Brightness;
+	public int BrightnessManualAuto;    
+	public int BrightnessManualLevel;
+	public int BrightnessAutoDayLevel;
+	public int BrightnessAutoNightLevel;
+	public int BrightnessAutoStartTime;
+	public int BrightnessAutoEndTime;
+	// --, 150407 bwk
 	public int DisplayType;
 	public int UnitTemp;
 	public int UnitOdo;
@@ -107,6 +117,7 @@ public class UserSwitching extends ParentFragment{
 	public int Language;
 	public int SoundOutput;
 	public int HourmeterDisplay;
+	public int FuelDisplay;
 	
 	int CursurIndex;
 	Handler HandleCursurDisplay;
@@ -193,11 +204,12 @@ public class UserSwitching extends ParentFragment{
 		radioUser2 = (RadioButton)mRoot.findViewById(R.id.radioButton_menu_body_userswitching_user2);
 		radioUser3 = (RadioButton)mRoot.findViewById(R.id.radioButton_menu_body_userswitching_user3);
 		radioUser4 = (RadioButton)mRoot.findViewById(R.id.radioButton_menu_body_userswitching_user4);
-		
 	
 		listView = (ListView)mRoot.findViewById(R.id.listView_menu_body_userswitching);
 		adapter = new IconTextListAdapterUserSwitching(ParentActivity);
 		adapter.clearItem();
+		
+		layoutSave = (RelativeLayout)mRoot.findViewById(R.id.RelativeLayout_menu_body_userswitching_low_save);
 	}
 
 	protected void InitValuables() {
@@ -226,11 +238,11 @@ public class UserSwitching extends ParentFragment{
 				ParentActivity.getResources().getString(string.Engine_Mode)
 				, ""
 				, ""));
-		adapter.addItem(new IconTextItemUserSwitching( ParentActivity.getResources().getDrawable(R.drawable.menu_management_machine_monitoring_bg_light),
-				null,
-				ParentActivity.getResources().getString(string.Warming_Up)
-				, ""
-				, ""));
+//		adapter.addItem(new IconTextItemUserSwitching( ParentActivity.getResources().getDrawable(R.drawable.menu_management_machine_monitoring_bg_light),
+//				null,
+//				ParentActivity.getResources().getString(string.Warming_Up)
+//				, ""
+//				, ""));
 		adapter.addItem(new IconTextItemUserSwitching( ParentActivity.getResources().getDrawable(R.drawable.menu_management_machine_monitoring_bg_dark),
 				null,
 				ParentActivity.getResources().getString(string.CCO_Mode)
@@ -351,6 +363,11 @@ public class UserSwitching extends ParentFragment{
 				ParentActivity.getResources().getString(string.Operation_History)
 				, ""
 				, ""));
+		adapter.addItem(new IconTextItemUserSwitching( ParentActivity.getResources().getDrawable(R.drawable.menu_management_machine_monitoring_bg_light),
+				null,
+				ParentActivity.getResources().getString(string.Fuel_Consumption_History)
+				, ""
+				, ""));		
 	}
 	@Override
 	protected void InitButtonListener() {
@@ -442,7 +459,7 @@ public class UserSwitching extends ParentFragment{
 	protected void GetDataFromNative() {
 		// TODO Auto-generated method stub
 		EngineMode = CAN1Comm.Get_EnginePowerMode_347_PGN65350();
-		WarmingUp = CAN1Comm.Get_EngineAlternateLowIdelSwitch_348_PGN65350();
+//		WarmingUp = CAN1Comm.Get_EngineAlternateLowIdelSwitch_348_PGN65350();
 		CCOMode = CAN1Comm.Get_ClutchCutoffMode_544_PGN65434();
 		ShiftMode = CAN1Comm.Get_TransmissionShiftMode_543_PGN65434();
 		TCLockUp = CAN1Comm.Get_TransmissionTCLockupEngaged_568_PGN65434();
@@ -456,7 +473,15 @@ public class UserSwitching extends ParentFragment{
 		SoftEndStopBoomDown = CAN1Comm.Get_SoftStopBoomDown_2338_PGN65524();
 		SoftEndStopBucketIn = CAN1Comm.Get_SoftStopBucketIn_2339_PGN65524();
 		SoftEndStopBucketDump = CAN1Comm.Get_SoftStopBucketOut_2340_PGN65524();
-		Brightness = ParentActivity.BrightnessManualLevel;
+		// ++, 150407 bwk
+		//Brightness = ParentActivity.ManualLevel;		
+		BrightnessManualAuto = ParentActivity.BrightnessManualAuto;    
+		BrightnessManualLevel = ParentActivity.BrightnessManualLevel;
+		BrightnessAutoDayLevel = ParentActivity.BrightnessAutoDayLevel;
+		BrightnessAutoNightLevel = ParentActivity.BrightnessAutoNightLevel;
+		BrightnessAutoStartTime = ParentActivity.BrightnessAutoStartTime;
+		BrightnessAutoEndTime = ParentActivity.BrightnessAutoEndTime;
+		// --, 150407 bwk
 		DisplayType = ParentActivity.DisplayType;
 		UnitTemp = ParentActivity.UnitTemp;
 		UnitOdo = ParentActivity.UnitOdo;
@@ -467,7 +492,7 @@ public class UserSwitching extends ParentFragment{
 		Language = ParentActivity.LanguageIndex;		// ++, --, 150212 bwk
 		SoundOutput = ParentActivity.SoundState;
 		HourmeterDisplay = ParentActivity.HourOdometerIndex;
-
+		FuelDisplay = ParentActivity.FuelIndex;
 	}
 
 	@Override
@@ -481,6 +506,8 @@ public class UserSwitching extends ParentFragment{
 		
 		switch (Index) {
 		case 1:
+			layoutSave.setAlpha((float)0.3);
+			imgbtnSave.setClickable(false);
 			radioDefault.setChecked(true);
 			radioUser1.setChecked(false);
 			radioUser2.setChecked(false);
@@ -488,6 +515,8 @@ public class UserSwitching extends ParentFragment{
 			radioUser4.setChecked(false);
 			break;
 		case 2:
+			layoutSave.setAlpha((float)1.0);
+			imgbtnSave.setClickable(true);
 			radioDefault.setChecked(false);
 			radioUser1.setChecked(true);
 			radioUser2.setChecked(false);
@@ -495,6 +524,8 @@ public class UserSwitching extends ParentFragment{
 			radioUser4.setChecked(false);
 			break;
 		case 3:
+			layoutSave.setAlpha((float)1.0);
+			imgbtnSave.setClickable(true);
 			radioDefault.setChecked(false);
 			radioUser1.setChecked(false);
 			radioUser2.setChecked(true);
@@ -502,6 +533,8 @@ public class UserSwitching extends ParentFragment{
 			radioUser4.setChecked(false);
 			break;
 		case 4:
+			layoutSave.setAlpha((float)1.0);
+			imgbtnSave.setClickable(true);
 			radioDefault.setChecked(false);
 			radioUser1.setChecked(false);
 			radioUser2.setChecked(false);
@@ -509,6 +542,8 @@ public class UserSwitching extends ParentFragment{
 			radioUser4.setChecked(false);
 			break;
 		case 5:
+			layoutSave.setAlpha((float)1.0);
+			imgbtnSave.setClickable(true);
 			radioDefault.setChecked(false);
 			radioUser1.setChecked(false);
 			radioUser2.setChecked(false);
@@ -517,6 +552,8 @@ public class UserSwitching extends ParentFragment{
 			break;
 
 		default:
+			layoutSave.setAlpha((float)1.0);
+			imgbtnSave.setClickable(true);
 			radioDefault.setChecked(false);
 			radioUser1.setChecked(false);
 			radioUser2.setChecked(false);
@@ -550,7 +587,7 @@ public class UserSwitching extends ParentFragment{
 			break;
 		}
 		EngineModeDisplay(EngineMode,_userdata.EngineMode);
-		WarmingUpDisplay(WarmingUp,_userdata.WarmingUp);
+		//WarmingUpDisplay(WarmingUp,_userdata.WarmingUp);	// ++, --, 150402 bwk
 		CCOModeDisplay(CCOMode,_userdata.CCOMode);
 		ShiftModeDisplay(ShiftMode,_userdata.ShiftMode);
 		TCLockUpDisplay(TCLockUp,_userdata.TCLockUp);
@@ -564,7 +601,10 @@ public class UserSwitching extends ParentFragment{
 		SoftEndStopBoomDownDisplay(SoftEndStopBoomDown,_userdata.SoftEndStopBoomDown);
 		SoftEndStopBucketInDisplay(SoftEndStopBucketIn,_userdata.SoftEndStopBucketIn);
 		SoftEndStopBucketDumpDisplay(SoftEndStopBucketDump,_userdata.SoftEndStopBucketDump);
-		BrightnessDisplay(Brightness,_userdata.Brightness);
+		// ++, 150407 bwk
+		//BrightnessDisplay(Brightness,_userdata.Brightness);
+		BrightnessDisplay(BrightnessManualAuto,_userdata.BrightnessManualAuto);
+		// --, 150407 bwk
 		UnitTempDisplay(UnitTemp,_userdata.UnitTemp);
 		UnitOdoDisplay(UnitOdo,_userdata.UnitOdo);
 		UnitWeightDisplay(UnitWeight,_userdata.UnitWeight);
@@ -575,6 +615,7 @@ public class UserSwitching extends ParentFragment{
 		LanguageDisplay(Language, _userdata.Language);	// ++, --, 150213 bwk
 		SoundOutputDisplay(SoundOutput,_userdata.SoundOutput);
 		HourmeterDisplay(HourmeterDisplay,_userdata.HourmeterDisplay);
+		FuelDisplay(FuelDisplay,_userdata.FuelDisplay);		// ++, --, 150403 bwk
 	}
 	public void EngineModeDisplay(int SettingData, int LoadingData){
 		switch (SettingData) {
@@ -611,35 +652,37 @@ public class UserSwitching extends ParentFragment{
 		}
 		adapter.notifyDataSetChanged();
 	}
-	public void WarmingUpDisplay(int SettingData, int LoadingData){
-		switch (SettingData) {
-		case CAN1CommManager.DATA_STATE_ENGINE_WARMINGUP_OFF:
-			adapter.UpdateSecond(STATE_WARMINGUP, ParentActivity.getResources().getString(string.OFF));
-			break;
-		case CAN1CommManager.DATA_STATE_ENGINE_WARMINGUP_ON:
-			adapter.UpdateSecond(STATE_WARMINGUP, ParentActivity.getResources().getString(string.ON));
-			break;
-		default:
-			break;
-		}
-		switch (LoadingData) {
-		case CAN1CommManager.DATA_STATE_ENGINE_WARMINGUP_OFF:
-			adapter.UpdateThird(STATE_WARMINGUP, ParentActivity.getResources().getString(string.OFF));
-			break;
-		case CAN1CommManager.DATA_STATE_ENGINE_WARMINGUP_ON:
-			adapter.UpdateThird(STATE_WARMINGUP, ParentActivity.getResources().getString(string.ON));
-			break;
-		default:
-			break;
-		}
-		
-		if(SettingData != LoadingData){
-			adapter.UpdateIcon(STATE_WARMINGUP, ParentActivity.getResources().getDrawable(R.drawable.main_quick_user_x));
-		}else{
-			adapter.UpdateIcon(STATE_WARMINGUP, null);
-		}
-		adapter.notifyDataSetChanged();
-	}
+	// ++, 150402 bwk 사양 삭제
+//	public void WarmingUpDisplay(int SettingData, int LoadingData){
+//		switch (SettingData) {
+//		case CAN1CommManager.DATA_STATE_ENGINE_WARMINGUP_OFF:
+//			adapter.UpdateSecond(STATE_WARMINGUP, ParentActivity.getResources().getString(string.OFF));
+//			break;
+//		case CAN1CommManager.DATA_STATE_ENGINE_WARMINGUP_ON:
+//			adapter.UpdateSecond(STATE_WARMINGUP, ParentActivity.getResources().getString(string.ON));
+//			break;
+//		default:
+//			break;
+//		}
+//		switch (LoadingData) {
+//		case CAN1CommManager.DATA_STATE_ENGINE_WARMINGUP_OFF:
+//			adapter.UpdateThird(STATE_WARMINGUP, ParentActivity.getResources().getString(string.OFF));
+//			break;
+//		case CAN1CommManager.DATA_STATE_ENGINE_WARMINGUP_ON:
+//			adapter.UpdateThird(STATE_WARMINGUP, ParentActivity.getResources().getString(string.ON));
+//			break;
+//		default:
+//			break;
+//		}
+//		
+//		if(SettingData != LoadingData){
+//			adapter.UpdateIcon(STATE_WARMINGUP, ParentActivity.getResources().getDrawable(R.drawable.main_quick_user_x));
+//		}else{
+//			adapter.UpdateIcon(STATE_WARMINGUP, null);
+//		}
+//		adapter.notifyDataSetChanged();
+//	}
+	// --, 150402 bwk
 	public void CCOModeDisplay(int SettingData, int LoadingData){
 		switch (SettingData) {
 		case CAN1CommManager.DATA_STATE_TM_CLUTCHCUTOFF_OFF:
@@ -1060,18 +1103,47 @@ public class UserSwitching extends ParentFragment{
 		adapter.notifyDataSetChanged();
 	}	
 	public void BrightnessDisplay(int SettingData, int LoadingData){
-		SettingData += 1;
-		LoadingData += 1;
-		adapter.UpdateSecond(STATE_BRIGHTNESS, Integer.toString(SettingData));
-		adapter.UpdateThird(STATE_BRIGHTNESS, Integer.toString(LoadingData));
-		
+		// ++, 150407 bwk
+		//SettingData+=1;
+		//LoadingData+=1;
+		//adapter.UpdateSecond(STATE_BRIGHTNESS_MANUALAUTO, Integer.toString(SettingData));
+		//adapter.UpdateThird(STATE_BRIGHTNESS, Integer.toString(LoadingData));
+//		
+//		if(SettingData != LoadingData){
+//			adapter.UpdateIcon(STATE_BRIGHTNESS, ParentActivity.getResources().getDrawable(R.drawable.main_quick_user_x));
+//		}else{
+//			adapter.UpdateIcon(STATE_BRIGHTNESS, null);
+//		}
+//		adapter.notifyDataSetChanged();
+		switch (SettingData) {
+		case Home.BRIGHTNESS_MANUAL:
+			adapter.UpdateSecond(STATE_BRIGHTNESS_MANUALAUTO, ParentActivity.getResources().getString(string.Manual));
+			break;
+		case Home.BRIGHTNESS_AUTO:
+			adapter.UpdateSecond(STATE_BRIGHTNESS_MANUALAUTO, ParentActivity.getResources().getString(string.Automatic));
+			break;
+		default:
+			break;
+		}
+		switch (LoadingData) {
+		case Home.BRIGHTNESS_MANUAL:
+			adapter.UpdateThird(STATE_BRIGHTNESS_MANUALAUTO, ParentActivity.getResources().getString(string.Manual));
+			break;
+		case Home.BRIGHTNESS_AUTO:
+			adapter.UpdateThird(STATE_BRIGHTNESS_MANUALAUTO, ParentActivity.getResources().getString(string.Automatic));
+			break;
+		default:
+			break;
+		}
 		
 		if(SettingData != LoadingData){
-			adapter.UpdateIcon(STATE_BRIGHTNESS, ParentActivity.getResources().getDrawable(R.drawable.main_quick_user_x));
+			adapter.UpdateIcon(STATE_BRIGHTNESS_MANUALAUTO, ParentActivity.getResources().getDrawable(R.drawable.main_quick_user_x));
 		}else{
-			adapter.UpdateIcon(STATE_BRIGHTNESS, null);
+			adapter.UpdateIcon(STATE_BRIGHTNESS_MANUALAUTO, null);
 		}
 		adapter.notifyDataSetChanged();
+		// --, 150407 bwk
+		
 	}	
 	public void UnitTempDisplay(int SettingData, int LoadingData){
 		switch (SettingData) {
@@ -1357,12 +1429,12 @@ public class UserSwitching extends ParentFragment{
 			case Home.STATE_DISPLAY_LANGUAGE_PORTUGUE:
 				adapter.UpdateSecond(STATE_LANGUAGE, ParentActivity.getResources().getString(string.Portuguese));
 				break;
-			case Home.STATE_DISPLAY_LANGUAGE_CHINESE:
-				adapter.UpdateSecond(STATE_LANGUAGE, ParentActivity.getResources().getString(string.Chinese));
-				break;
-			case Home.STATE_DISPLAY_LANGUAGE_RUSIAN:
-				adapter.UpdateSecond(STATE_LANGUAGE, ParentActivity.getResources().getString(string.Russian));
-				break;
+//			case Home.STATE_DISPLAY_LANGUAGE_CHINESE:
+//				adapter.UpdateSecond(STATE_LANGUAGE, ParentActivity.getResources().getString(string.Chinese));
+//				break;
+//			case Home.STATE_DISPLAY_LANGUAGE_RUSIAN:
+//				adapter.UpdateSecond(STATE_LANGUAGE, ParentActivity.getResources().getString(string.Russian));
+//				break;
 			case Home.STATE_DISPLAY_LANGUAGE_ITALIAN:
 				adapter.UpdateSecond(STATE_LANGUAGE, ParentActivity.getResources().getString(string.Italian));
 				break;
@@ -1381,24 +1453,24 @@ public class UserSwitching extends ParentFragment{
 			case Home.STATE_DISPLAY_LANGUAGE_ESTONIAN:
 				adapter.UpdateSecond(STATE_LANGUAGE, ParentActivity.getResources().getString(string.Estonian));
 				break;
-			case Home.STATE_DISPLAY_LANGUAGE_THAILAND:
-				adapter.UpdateSecond(STATE_LANGUAGE, ParentActivity.getResources().getString(string.Thai));
-				break;
-			case Home.STATE_DISPLAY_LANGUAGE_HINDI:
-				adapter.UpdateSecond(STATE_LANGUAGE, ParentActivity.getResources().getString(string.Hindi));
-				break;
-			case Home.STATE_DISPLAY_LANGUAGE_MONGOL:
-				adapter.UpdateSecond(STATE_LANGUAGE, ParentActivity.getResources().getString(string.Mongolian));
-				break;
-			case Home.STATE_DISPLAY_LANGUAGE_ARABIC:
-				adapter.UpdateSecond(STATE_LANGUAGE, ParentActivity.getResources().getString(string.Arabic));
-				break;
-			case Home.STATE_DISPLAY_LANGUAGE_FARSI:
-				adapter.UpdateSecond(STATE_LANGUAGE, ParentActivity.getResources().getString(string.Persian));
-				break;
-			case Home.STATE_DISPLAY_LANGUAGE_INDONESIAN:
-				adapter.UpdateSecond(STATE_LANGUAGE, ParentActivity.getResources().getString(string.Indonesian));
-				break;
+//			case Home.STATE_DISPLAY_LANGUAGE_THAILAND:
+//				adapter.UpdateSecond(STATE_LANGUAGE, ParentActivity.getResources().getString(string.Thai));
+//				break;
+//			case Home.STATE_DISPLAY_LANGUAGE_HINDI:
+//				adapter.UpdateSecond(STATE_LANGUAGE, ParentActivity.getResources().getString(string.Hindi));
+//				break;
+//			case Home.STATE_DISPLAY_LANGUAGE_MONGOL:
+//				adapter.UpdateSecond(STATE_LANGUAGE, ParentActivity.getResources().getString(string.Mongolian));
+//				break;
+//			case Home.STATE_DISPLAY_LANGUAGE_ARABIC:
+//				adapter.UpdateSecond(STATE_LANGUAGE, ParentActivity.getResources().getString(string.Arabic));
+//				break;
+//			case Home.STATE_DISPLAY_LANGUAGE_FARSI:
+//				adapter.UpdateSecond(STATE_LANGUAGE, ParentActivity.getResources().getString(string.Persian));
+//				break;
+//			case Home.STATE_DISPLAY_LANGUAGE_INDONESIAN:
+//				adapter.UpdateSecond(STATE_LANGUAGE, ParentActivity.getResources().getString(string.Indonesian));
+//				break;
 			case Home.STATE_DISPLAY_LANGUAGE_FINNISH:
 				adapter.UpdateSecond(STATE_LANGUAGE, ParentActivity.getResources().getString(string.Finnish));
 				break;
@@ -1455,45 +1527,81 @@ public class UserSwitching extends ParentFragment{
 	}	
 	public void HourmeterDisplay(int SettingData, int LoadingData){
 		switch (SettingData) {
-		case CAN1CommManager.DATA_STATE_HOURMETER_LATEST:
-			adapter.UpdateSecond(STATE_HOURMETER, ParentActivity.getResources().getString(string.Latest_Hourmeter));
+		case CAN1CommManager.DATA_STATE_OPERATION_NOSELECT:
+			adapter.UpdateSecond(STATE_OPERATION_HISTORY, "-");
 			break;
-		case CAN1CommManager.DATA_STATE_FUELRATE_CURRENT:
-			adapter.UpdateSecond(STATE_HOURMETER, ParentActivity.getResources().getString(string.Current_Fuel_Rate));
+		case CAN1CommManager.DATA_STATE_HOURMETER_LATEST:
+			adapter.UpdateSecond(STATE_OPERATION_HISTORY, ParentActivity.getResources().getString(string.Latest_Hourmeter));
 			break;
 		case CAN1CommManager.DATA_STATE_ODOMETER_TOTAL:
-			adapter.UpdateSecond(STATE_HOURMETER, ParentActivity.getResources().getString(string.Total_Odometer));
+			adapter.UpdateSecond(STATE_OPERATION_HISTORY, ParentActivity.getResources().getString(string.Total_Odometer));
 			break;
 		case CAN1CommManager.DATA_STATE_ODOMETER_LATEST:
-			adapter.UpdateSecond(STATE_HOURMETER, ParentActivity.getResources().getString(string.Latest_Odometer));
+			adapter.UpdateSecond(STATE_OPERATION_HISTORY, ParentActivity.getResources().getString(string.Latest_Odometer));
 			break;
 		default:
 			break;
 		}
 		switch (LoadingData) {
-		case CAN1CommManager.DATA_STATE_HOURMETER_LATEST:
-			adapter.UpdateThird(STATE_HOURMETER, ParentActivity.getResources().getString(string.Latest_Hourmeter));
+		case CAN1CommManager.DATA_STATE_OPERATION_NOSELECT:
+			adapter.UpdateThird(STATE_OPERATION_HISTORY, "-");
 			break;
-		case CAN1CommManager.DATA_STATE_FUELRATE_CURRENT:
-			adapter.UpdateThird(STATE_HOURMETER, ParentActivity.getResources().getString(string.Current_Fuel_Rate));
+		case CAN1CommManager.DATA_STATE_HOURMETER_LATEST:
+			adapter.UpdateThird(STATE_OPERATION_HISTORY, ParentActivity.getResources().getString(string.Latest_Hourmeter));
 			break;
 		case CAN1CommManager.DATA_STATE_ODOMETER_TOTAL:
-			adapter.UpdateThird(STATE_HOURMETER, ParentActivity.getResources().getString(string.Total_Odometer));
+			adapter.UpdateThird(STATE_OPERATION_HISTORY, ParentActivity.getResources().getString(string.Total_Odometer));
 			break;
 		case CAN1CommManager.DATA_STATE_ODOMETER_LATEST:
-			adapter.UpdateThird(STATE_HOURMETER, ParentActivity.getResources().getString(string.Latest_Odometer));
+			adapter.UpdateThird(STATE_OPERATION_HISTORY, ParentActivity.getResources().getString(string.Latest_Odometer));
 			break;
 		default:
 			break;
 		}
 		
 		if(SettingData != LoadingData){
-			adapter.UpdateIcon(STATE_HOURMETER, ParentActivity.getResources().getDrawable(R.drawable.main_quick_user_x));
+			adapter.UpdateIcon(STATE_OPERATION_HISTORY, ParentActivity.getResources().getDrawable(R.drawable.main_quick_user_x));
 		}else{
-			adapter.UpdateIcon(STATE_HOURMETER, null);
+			adapter.UpdateIcon(STATE_OPERATION_HISTORY, null);
 		}
 		adapter.notifyDataSetChanged();
 	}	
+	public void FuelDisplay(int SettingData, int LoadingData){
+		
+		switch (SettingData) {
+		case CAN1CommManager.DATA_STATE_FUEL_NOSELECT:
+			adapter.UpdateSecond(STATE_FUEL_INFO, "-");
+			break;
+		case CAN1CommManager.DATA_STATE_AVERAGE_FUEL_RATE:
+			adapter.UpdateSecond(STATE_FUEL_INFO, ParentActivity.getResources().getString(string.Average_Fuel_Rate));
+			break;
+		case CAN1CommManager.DATA_STATE_LATEST_FUEL_CONSUMED:
+			adapter.UpdateSecond(STATE_FUEL_INFO, ParentActivity.getResources().getString(string.Latest_Fuel_Consumed));
+			break;
+		default:
+			break;
+		}
+		switch (LoadingData) {
+		case CAN1CommManager.DATA_STATE_FUEL_NOSELECT:
+			adapter.UpdateThird(STATE_FUEL_INFO, "-");
+			break;
+		case CAN1CommManager.DATA_STATE_AVERAGE_FUEL_RATE:
+			adapter.UpdateThird(STATE_FUEL_INFO, ParentActivity.getResources().getString(string.Average_Fuel_Rate));
+			break;
+		case CAN1CommManager.DATA_STATE_LATEST_FUEL_CONSUMED:
+			adapter.UpdateThird(STATE_FUEL_INFO, ParentActivity.getResources().getString(string.Latest_Fuel_Consumed));
+			break;
+		default:
+			break;
+		}
+		
+		if(SettingData != LoadingData){
+			adapter.UpdateIcon(STATE_FUEL_INFO, ParentActivity.getResources().getDrawable(R.drawable.main_quick_user_x));
+		}else{
+			adapter.UpdateIcon(STATE_FUEL_INFO, null);
+		}
+		adapter.notifyDataSetChanged();		
+	}
 	/////////////////////////////////////////////////////////////////////	
 
 	public void ClickOK(){
@@ -1513,7 +1621,7 @@ public class UserSwitching extends ParentFragment{
 		_userdata = new UserData();
 		
 		_userdata.EngineMode = EngineMode;
-		_userdata.WarmingUp = WarmingUp;
+		//_userdata.WarmingUp = WarmingUp;
 		_userdata.CCOMode = CCOMode;
 		_userdata.ShiftMode = ShiftMode;
 		_userdata.TCLockUp = TCLockUp;
@@ -1527,7 +1635,15 @@ public class UserSwitching extends ParentFragment{
 		_userdata.SoftEndStopBoomDown = SoftEndStopBoomDown;
 		_userdata.SoftEndStopBucketIn = SoftEndStopBucketIn;
 		_userdata.SoftEndStopBucketDump = SoftEndStopBucketDump;
-		_userdata.Brightness = Brightness;
+		// ++, 150407 bwk
+		//_userdata.Brightness = Brightness;
+		_userdata.BrightnessManualAuto = BrightnessManualAuto;
+		_userdata.BrightnessManualLevel = BrightnessManualLevel;
+		_userdata.BrightnessAutoDayLevel = BrightnessAutoDayLevel;
+		_userdata.BrightnessAutoNightLevel = BrightnessAutoNightLevel;
+		_userdata.BrightnessAutoStartTime = BrightnessAutoStartTime;
+		_userdata.BrightnessAutoEndTime = BrightnessAutoEndTime;
+		// --, 150407 bwk
 		_userdata.DisplayType = DisplayType;
 		_userdata.UnitTemp = UnitTemp;
 		_userdata.UnitOdo = UnitOdo;
@@ -1538,6 +1654,7 @@ public class UserSwitching extends ParentFragment{
 		_userdata.Language = Language;
 		_userdata.SoundOutput = SoundOutput;
 		_userdata.HourmeterDisplay = HourmeterDisplay;
+		_userdata.FuelDisplay = FuelDisplay;
 
 		
 		switch (SelectIndex) {
@@ -1592,7 +1709,7 @@ public class UserSwitching extends ParentFragment{
 		}
 		
 		CAN1Comm.Set_EnginePowerMode_347_PGN61184_101(_userdata.EngineMode);
-		CAN1Comm.Set_EngineAlternateLowIdleSwitch_348_PGN61184_101(_userdata.WarmingUp);
+		//CAN1Comm.Set_EngineAlternateLowIdleSwitch_348_PGN61184_101(_userdata.WarmingUp);
 		CAN1Comm.TxCANToMCU(101);
 		CAN1Comm.Set_EnginePowerMode_347_PGN61184_101(15);
 		CAN1Comm.Set_EngineAlternateLowIdleSwitch_348_PGN61184_101(3);
@@ -1631,17 +1748,37 @@ public class UserSwitching extends ParentFragment{
 		
 		CAN1Comm.Set_SpeedmeterUnitChange_PGN65327(_userdata.UnitOdo);
 		CAN1Comm.TxCANToMCU(47);
-
-		CAN1Comm.Set_BacklightIlluminationLevel_719_PGN61184_109(_userdata.Brightness + 1);
-		CAN1Comm.TxCANToMCU(109);
-		CAN1Comm.Set_BacklightIlluminationLevel_719_PGN61184_109(15);
-		CAN1Comm.TxCMDToMCU(CAN1Comm.CMD_LCD,_userdata.Brightness + 1);
 		
 		ParentActivity.WeighingErrorDetect = _userdata.ErrorDetection;
-		
-		ParentActivity.BrihgtnessCurrent = _userdata.Brightness;
-		ParentActivity.BrightnessManualLevel = _userdata.Brightness;
-		ParentActivity.BrightnessManualAuto = Home.BRIGHTNESS_MANUAL;
+
+		// ++, 150407 bwk
+//		CAN1Comm.Set_BacklightIlluminationLevel_719_PGN61184_109(_userdata.Brightness + 1);
+//		CAN1Comm.TxCANToMCU(109);
+//		CAN1Comm.Set_BacklightIlluminationLevel_719_PGN61184_109(15);
+//		CAN1Comm.TxCMDToMCU(CAN1Comm.CMD_LCD,_userdata.Brightness + 1);
+//		
+//		ParentActivity.BrihgtnessCurrent = _userdata.Brightness;
+//		ParentActivity.BrightnessManualLevel = _userdata.Brightness;
+//		ParentActivity.BrightnessManualAuto = Home.BRIGHTNESS_MANUAL;
+		ParentActivity.BrightnessManualAuto = _userdata.BrightnessManualAuto;
+		if(_userdata.BrightnessManualAuto == Home.BRIGHTNESS_MANUAL)
+		{
+//			CAN1Comm.Set_BacklightIlluminationLevel_719_PGN61184_109(_userdata.Brightness + 1);
+//			CAN1Comm.TxCANToMCU(109);
+//			CAN1Comm.Set_BacklightIlluminationLevel_719_PGN61184_109(15);
+//			CAN1Comm.TxCMDToMCU(CAN1Comm.CMD_LCD,_userdata.Brightness + 1);			
+			CAN1Comm.Set_BacklightIlluminationLevel_719_PGN61184_109(BrightnessManualLevel + 1);
+			CAN1Comm.TxCANToMCU(109);
+			CAN1Comm.TxCMDToMCU(CAN1Comm.CMD_LCD, ParentActivity.BrightnessManualLevel + 1);
+			ParentActivity.BrihgtnessCurrent = _userdata.BrightnessManualLevel;
+			ParentActivity.BrightnessManualLevel = _userdata.BrightnessManualLevel;
+		}else{
+			ParentActivity.BrightnessAutoDayLevel = _userdata.BrightnessAutoDayLevel;
+			ParentActivity.BrightnessAutoNightLevel = _userdata.BrightnessAutoNightLevel;
+			ParentActivity.BrightnessAutoStartTime = _userdata.BrightnessAutoStartTime;
+			ParentActivity.BrightnessAutoEndTime = _userdata.BrightnessAutoEndTime;
+		}
+		// --, 150407 bwk
 		
 		ParentActivity.UnitOdo = _userdata.UnitOdo;
 		ParentActivity.UnitTemp = _userdata.UnitTemp;
@@ -1654,6 +1791,7 @@ public class UserSwitching extends ParentFragment{
 		ParentActivity.SoundState = _userdata.SoundOutput;
 
 		ParentActivity.HourOdometerIndex = _userdata.HourmeterDisplay;
+		ParentActivity.FuelIndex = _userdata.FuelDisplay;
 		
 		// ++, 150213 bwk
 		ParentActivity.LanguageIndex = _userdata.Language;

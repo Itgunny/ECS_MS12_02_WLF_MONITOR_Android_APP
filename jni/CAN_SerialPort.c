@@ -177,6 +177,49 @@ jbyteArray Get_HCEAntiTheftPasswordRepresentation_1634_PGN61184_25(JNIEnv * env,
 jint Get_RecvPasswordChangeResultFlag_PGN61184_25(JNIEnv * env, jobject this) {
 	return nRecvPasswordChangeResultFlag;
 }
+//////RX_AVERAGE_FUEL_RATE_HISTORY_61184_33///////
+jint Get_MessageType_PGN61184_33(JNIEnv * env, jobject this) {
+	return RX_AVERAGE_FUEL_RATE_HISTORY_61184_33.MessageType;
+}
+jint Get_OperationHistoryType_1101_PGN61184_33(JNIEnv * env, jobject this) {
+	return RX_AVERAGE_FUEL_RATE_HISTORY_61184_33.OperationHistoryType_1101;
+}
+jint Get_1storP_HourAverageFuelRateorDayFuelUsed_333_1405_PGN61184_33(JNIEnv * env, jobject this) {
+	return RX_AVERAGE_FUEL_RATE_HISTORY_61184_33._1storP_HourAverageFuelRateorDayFuelUsed_333_1405;
+}
+jint Get_2ndorS_HourAverageFuelRateorDayFuelUsed_333_1405_PGN61184_33(JNIEnv * env, jobject this) {
+	return RX_AVERAGE_FUEL_RATE_HISTORY_61184_33._2ndorS_HourAverageFuelRateorDayFuelUsed_333_1405;
+}
+jint Get_3rdorE_HourAverageFuelRateorDayFuelUsed_333_1405_PGN61184_33(JNIEnv * env, jobject this) {
+	return RX_AVERAGE_FUEL_RATE_HISTORY_61184_33._3rdorE_HourAverageFuelRateorDayFuelUsed_333_1405;
+}
+jint Get_4th_HourAverageFuelRateorDayFuelUsed_333_1405_PGN61184_33(JNIEnv * env, jobject this) {
+	return RX_AVERAGE_FUEL_RATE_HISTORY_61184_33._4th_HourAverageFuelRateorDayFuelUsed_333_1405;
+}
+jint Get_5th_HourAverageFuelRateorDayFuelUsed_333_1405_PGN61184_33(JNIEnv * env, jobject this) {
+	return RX_AVERAGE_FUEL_RATE_HISTORY_61184_33._5th_HourAverageFuelRateorDayFuelUsed_333_1405;
+}
+jint Get_6th_HourAverageFuelRateorDayFuelUsed_333_1405_PGN61184_33(JNIEnv * env, jobject this) {
+	return RX_AVERAGE_FUEL_RATE_HISTORY_61184_33._6th_HourAverageFuelRateorDayFuelUsed_333_1405;
+}
+jint Get_7th_HourAverageFuelRateorDayFuelUsed_333_1405_PGN61184_33(JNIEnv * env, jobject this) {
+	return RX_AVERAGE_FUEL_RATE_HISTORY_61184_33._7th_HourAverageFuelRateorDayFuelUsed_333_1405;
+}
+jint Get_8th_HourAverageFuelRate_333_PGN61184_33(JNIEnv * env, jobject this) {
+	return RX_AVERAGE_FUEL_RATE_HISTORY_61184_33._8th_HourAverageFuelRate_333;
+}
+jint Get_9th_HourAverageFuelRate_333_PGN61184_33(JNIEnv * env, jobject this) {
+	return RX_AVERAGE_FUEL_RATE_HISTORY_61184_33._9th_HourAverageFuelRate_333;
+}
+jint Get_10th_HourAverageFuelRate_333_PGN61184_33(JNIEnv * env, jobject this) {
+	return RX_AVERAGE_FUEL_RATE_HISTORY_61184_33._10th_HourAverageFuelRate_333;
+}
+jint Get_11th_HourAverageFuelRate_333_PGN61184_33(JNIEnv * env, jobject this) {
+	return RX_AVERAGE_FUEL_RATE_HISTORY_61184_33._11th_HourAverageFuelRate_333;
+}
+jint Get_12th_HourAverageFuelRate_333_PGN61184_33(JNIEnv * env, jobject this) {
+	return RX_AVERAGE_FUEL_RATE_HISTORY_61184_33._12th_HourAverageFuelRate_333;
+}
 //////RX_COOLING_FAN_SETTING_61184_61///////
 jint Get_MessageType_PGN61184_61(JNIEnv * env, jobject this) {
 	return RX_COOLING_FAN_SETTING_61184_61.MessageType;
@@ -947,11 +990,11 @@ jint Get_EcoGaugeLevel_1304_PGN65390(JNIEnv *env, jobject this) {
 jint Get_EcoGaugeStatus_1305_PGN65390(JNIEnv *env, jobject this) {
 	return RX_FUEL_INFORMATION_ECO_GAUGE_65390.EcoGaugeStatus_1305;
 }
-jint Get_AverageFuelRate_PGN65390(JNIEnv *env, jobject this) {
-	return RX_FUEL_INFORMATION_ECO_GAUGE_65390.AverageFuelRate;
+jint Get_AverageFuelRate_333_PGN65390(JNIEnv *env, jobject this) {
+	return RX_FUEL_INFORMATION_ECO_GAUGE_65390.AverageFuelRate_333;
 }
-jint Get_CurrentFuelRate_PGN65390(JNIEnv *env, jobject this) {
-	return RX_FUEL_INFORMATION_ECO_GAUGE_65390.CurrentFuelRate;
+jint Get_ADaysFuelUsed_1405_PGN65390(JNIEnv *env, jobject this) {
+	return RX_FUEL_INFORMATION_ECO_GAUGE_65390.ADaysFuelUsed_1405;
 }
 //////////////////////////////////////////////////////////////////////////////////////////
 //////RX_CYLINDER_ANGLE_STROKE1_65395///////
@@ -1278,6 +1321,21 @@ jbyteArray Get_DTC_5_PGN65438(JNIEnv * env, jobject this) {
 	(*env)->SetByteArrayRegion(env, Data, 0, sizeof(RX_DTC_INFORMATION_TYPE1_65438.DTC_5),RX_DTC_INFORMATION_TYPE1_65438.DTC_5);
 
 	return Data;
+}
+//////RX_AXLE_STATUS_65449///////
+jint Get_Front_Axle_Oil_Temperature_577_PGN65449(JNIEnv * env,
+		jobject this) {
+	return RX_AXLE_STATUS_65449.Front_Axle_Oil_Temperature_577;
+}
+jint Get_Rear_Axle_Oil_Temperature_578_PGN65449(JNIEnv * env, jobject this) {
+	return RX_AXLE_STATUS_65449.Rear_Axle_Oil_Temperature_578;
+}
+jint Get_Front_Axle_Oil_Temp_Warning_580_PGN65449(JNIEnv * env,
+		jobject this) {
+	return RX_AXLE_STATUS_65449.Front_Axle_Oil_Temp_Warning_580;
+}
+jint Get_Rear_Axle_Oil_Temp_Warning_581_PGN65449(JNIEnv * env, jobject this) {
+	return RX_AXLE_STATUS_65449.Rear_Axle_Oil_Temp_Warning_581;
 }
 //////RX_WEIGHING_SYSTEM_STATUS_65450///////
 jint Get_WeighingSystemAccumulationMode_1941_PGN65450(JNIEnv * env,
@@ -1696,6 +1754,13 @@ void Set_HCEAntiTheftPasswordRepresentation_1634_PGN61184_25(JNIEnv * env,
 
 	(*env)->ReleaseByteArrayElements(env, Data, pArr, 0);
 
+}
+//////TX_OPERATION_HISTORY_REQUEST_61184_31///////
+void Set_MessageType_PGN61184_31(JNIEnv * env, jobject this, int Data) {
+	TX_OPERATION_HISTORY_REQUEST_61184_31.MessageType = Data;
+}
+void Set_OperationHistory_1101_PGN61184_31(JNIEnv * env, jobject this, int Data) {
+	TX_OPERATION_HISTORY_REQUEST_61184_31.OperationHistory_1101 = Data;
 }
 //////TX_COOLING_FAN_SETTING_61184_61///////
 void Set_MessageType_PGN61184_61(JNIEnv * env, jobject this, int Data) {
@@ -3489,6 +3554,21 @@ static JNINativeMethod methods[] =
 						Get_HCEAntiTheftPasswordRepresentation_1634_PGN61184_25 },
 				{ "Get_RecvPasswordChangeResultFlag_PGN61184_25", "()I",
 										(void*) Get_RecvPasswordChangeResultFlag_PGN61184_25 },
+				//////RX_AVERAGE_FUEL_RATE_HISTORY_61184_33///////
+				{ "Get_MessageType_PGN61184_33", "()I",(void*) Get_MessageType_PGN61184_33 },
+				{"Get_OperationHistoryType_1101_PGN61184_33", "()I",(void*) Get_OperationHistoryType_1101_PGN61184_33 },
+				{"Get_1storP_HourAverageFuelRateorDayFuelUsed_333_1405_PGN61184_33", "()I",(void*) Get_1storP_HourAverageFuelRateorDayFuelUsed_333_1405_PGN61184_33 },
+				{"Get_2ndorS_HourAverageFuelRateorDayFuelUsed_333_1405_PGN61184_33", "()I",(void*) Get_2ndorS_HourAverageFuelRateorDayFuelUsed_333_1405_PGN61184_33 },
+				{"Get_3rdorE_HourAverageFuelRateorDayFuelUsed_333_1405_PGN61184_33", "()I",(void*) Get_3rdorE_HourAverageFuelRateorDayFuelUsed_333_1405_PGN61184_33 },
+				{"Get_4th_HourAverageFuelRateorDayFuelUsed_333_1405_PGN61184_33", "()I",(void*) Get_4th_HourAverageFuelRateorDayFuelUsed_333_1405_PGN61184_33 },
+				{"Get_5th_HourAverageFuelRateorDayFuelUsed_333_1405_PGN61184_33", "()I",(void*) Get_5th_HourAverageFuelRateorDayFuelUsed_333_1405_PGN61184_33 },
+				{"Get_6th_HourAverageFuelRateorDayFuelUsed_333_1405_PGN61184_33", "()I",(void*) Get_6th_HourAverageFuelRateorDayFuelUsed_333_1405_PGN61184_33 },
+				{"Get_7th_HourAverageFuelRateorDayFuelUsed_333_1405_PGN61184_33", "()I",(void*) Get_7th_HourAverageFuelRateorDayFuelUsed_333_1405_PGN61184_33 },
+				{"Get_8th_HourAverageFuelRate_333_PGN61184_33", "()I",(void*) Get_8th_HourAverageFuelRate_333_PGN61184_33 },
+				{"Get_9th_HourAverageFuelRate_333_PGN61184_33", "()I",(void*) Get_9th_HourAverageFuelRate_333_PGN61184_33 },
+				{"Get_10th_HourAverageFuelRate_333_PGN61184_33", "()I",(void*) Get_10th_HourAverageFuelRate_333_PGN61184_33 },
+				{"Get_11th_HourAverageFuelRate_333_PGN61184_33", "()I",(void*) Get_11th_HourAverageFuelRate_333_PGN61184_33 },
+				{"Get_12th_HourAverageFuelRate_333_PGN61184_33", "()I",(void*) Get_12th_HourAverageFuelRate_333_PGN61184_33 },
 				//////RX_COOLING_FAN_SETTING_61184_61///////
 				{ "Get_MessageType_PGN61184_61", "()I",(void*) Get_MessageType_PGN61184_61 },
 				{"Get_TestMode_PGN61184_61", "()I",(void*) Get_TestMode_PGN61184_61 },
@@ -3886,8 +3966,8 @@ static JNINativeMethod methods[] =
 				{"Get_FuelLevel_302_PGN65390", "()I", (void*) Get_FuelLevel_302_PGN65390 },
 				{"Get_EcoGaugeLevel_1304_PGN65390", "()I",(void*) Get_EcoGaugeLevel_1304_PGN65390 },
 				{"Get_EcoGaugeStatus_1305_PGN65390", "()I",(void*) Get_EcoGaugeStatus_1305_PGN65390 },
-				{"Get_AverageFuelRate_PGN65390", "()I",(void*) Get_AverageFuelRate_PGN65390 },
-				{"Get_CurrentFuelRate_PGN65390", "()I",(void*) Get_CurrentFuelRate_PGN65390 },
+				{"Get_AverageFuelRate_333_PGN65390", "()I",(void*) Get_AverageFuelRate_333_PGN65390 },
+				{"Get_ADaysFuelUsed_1405_PGN65390", "()I",(void*) Get_ADaysFuelUsed_1405_PGN65390 },
 
 				//////RX_CYLINDER_ANGLE_STROKE1_65395///////
 				{ "Get_BoomLinkAngle_1920_PGN65395", "()I",
@@ -4084,6 +4164,15 @@ static JNINativeMethod methods[] =
 						"Get_DTC_3_PGN65438", "()[B", Get_DTC_3_PGN65438 }, {
 						"Get_DTC_4_PGN65438", "()[B", Get_DTC_4_PGN65438 }, {
 						"Get_DTC_5_PGN65438", "()[B", Get_DTC_5_PGN65438 },
+				//////RX_AXLE_STATUS_65449///////
+				{ "Get_Front_Axle_Oil_Temperature_577_PGN65449", "()I",
+						(void*) Get_Front_Axle_Oil_Temperature_577_PGN65449 },
+				{ "Get_Rear_Axle_Oil_Temperature_578_PGN65449", "()I",
+						(void*) Get_Rear_Axle_Oil_Temperature_578_PGN65449 },
+				{ "Get_Front_Axle_Oil_Temp_Warning_580_PGN65449", "()I",
+						(void*) Get_Front_Axle_Oil_Temp_Warning_580_PGN65449 },
+				{ "Get_Rear_Axle_Oil_Temp_Warning_581_PGN65449", "()I",
+						(void*) Get_Rear_Axle_Oil_Temp_Warning_581_PGN65449 },
 				//////RX_WEIGHING_SYSTEM_STATUS_65450///////
 				{ "Get_WeighingSystemAccumulationMode_1941_PGN65450",
 						"()I",
@@ -4296,6 +4385,9 @@ static JNINativeMethod methods[] =
 				{ "Set_HCEAntiTheftPasswordRepresentation_1634_PGN61184_25",
 						"([B)V",
 						Set_HCEAntiTheftPasswordRepresentation_1634_PGN61184_25 },
+				//////TX_OPERATION_HISTORY_REQUEST_61184_31///////
+				{ "Set_MessageType_PGN61184_31", "(I)V",(void*) Set_MessageType_PGN61184_31 },
+				{"Set_OperationHistory_1101_PGN61184_31", "(I)V",(void*) Set_OperationHistory_1101_PGN61184_31 },
 				//////TX_COOLING_FAN_SETTING_61184_61///////
 				{ "Set_MessageType_PGN61184_61", "(I)V",(void*) Set_MessageType_PGN61184_61 },
 				{"Set_TestMode_PGN61184_61", "(I)V",(void*) Set_TestMode_PGN61184_61 },

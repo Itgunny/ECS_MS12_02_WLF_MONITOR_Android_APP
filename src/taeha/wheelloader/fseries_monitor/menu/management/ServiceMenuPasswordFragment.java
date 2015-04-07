@@ -8,11 +8,17 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import taeha.wheelloader.fseries_monitor.main.DataProvider;
 import taeha.wheelloader.fseries_monitor.main.R;
 import taeha.wheelloader.fseries_monitor.menu.PasswordFragment;
 
 public class ServiceMenuPasswordFragment extends PasswordFragment{
-
+	
+	// ++, 150403 cjg
+	public static String monitorSerialNumber;
+	protected byte[] ComponentBasicInformation;
+	// --, 150403 cjg
+	
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
@@ -168,4 +174,49 @@ public class ServiceMenuPasswordFragment extends PasswordFragment{
 		}
 	}
 	// --, 150216 bwk
+	
+	// ++, 150403 cjg
+	@Override
+	protected void GetDataFromNative() {
+		ComponentBasicInformation = ParentActivity.GetMonitorComponentBasicInfo();
+		String serialNumber = getSerialNumber(ComponentBasicInformation);
+		DataProvider.setAuthkey(serialNumber);
+	}
+	
+	public String getSerialNumber(byte[] BasicInfo)throws NullPointerException{
+		boolean DataCheckFlag = true;
+		String strSerial;
+		int Index = 0;
+		for(int i = 4; i < 20; i++){
+			if(BasicInfo[i] != 0x2A)
+			{
+				Index++;
+			}
+			else{
+				
+				break;
+			}
+		}
+		
+		char[] Serial;
+		Serial = new char [Index];
+		int[] Temp;
+		Temp = new int[Index];
+		
+		for(int i = 0; i < Index; i++){
+			Serial[i] = (char) BasicInfo[i+4];
+			Temp[i] = (int)(BasicInfo[i+4] & 0xFF);
+			if(Temp[i] > 254){
+				DataCheckFlag = false;
+			}
+		}
+		strSerial = new String(Serial,0,Serial.length);
+		if(DataCheckFlag == false){
+			return "-";
+		}else{
+			return strSerial;
+		}
+		
+	}
+	// --, 150403 cjg	
 }

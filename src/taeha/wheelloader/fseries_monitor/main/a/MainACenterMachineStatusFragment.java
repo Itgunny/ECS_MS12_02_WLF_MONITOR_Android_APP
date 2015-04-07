@@ -9,6 +9,8 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import taeha.wheelloader.fseries_monitor.main.CAN1CommManager;
+import taeha.wheelloader.fseries_monitor.main.CheckModel;
 import taeha.wheelloader.fseries_monitor.main.ParentFragment;
 import taeha.wheelloader.fseries_monitor.main.R;
 
@@ -58,6 +60,9 @@ public class MainACenterMachineStatusFragment extends ParentFragment{
 	protected void InitResource() {
 		// TODO Auto-generated method stub
 		LayoutTop = (RelativeLayout)mRoot.findViewById(R.id.RelativeLayout_center_main_a_machinestatus);
+		
+		imageViewUpIcon = (ImageView)mRoot.findViewById(R.id.imageView_center_main_a_machinestatus_up);
+		imageViewDownIcon = (ImageView)mRoot.findViewById(R.id.imageView_center_main_a_machinestatus_down);
 	}
 	
 	protected void InitValuables() {
@@ -87,7 +92,7 @@ public class MainACenterMachineStatusFragment extends ParentFragment{
 	@Override
 	protected void UpdateUI() {
 		// TODO Auto-generated method stub
-		//IconDisplay();
+		IconDisplay(ParentActivity.MachineStatusUpperIndex,ParentActivity.MachineStatusLowerIndex);
 	}
 	/////////////////////////////////////////////////////////////////////	
 	
@@ -100,6 +105,100 @@ public class MainACenterMachineStatusFragment extends ParentFragment{
 		ParentActivity._MainABaseFragment.showLeftUptoDefaultScreenAnimation();
 	}
 	
-	public void IconDisplay(){
+	public void IconDisplay(int Upper, int Lower){
+		imageViewUpIcon.setVisibility(View.VISIBLE);
+		imageViewDownIcon.setVisibility(View.VISIBLE);
+		switch (Upper) {
+		case CAN1CommManager.DATA_STATE_MACHINESTATUS_HYD:
+			imageViewUpIcon.setBackgroundResource(R.drawable.main_icon_hyd);
+			break;
+		case CAN1CommManager.DATA_STATE_MACHINESTATUS_TMOIL:
+			imageViewUpIcon.setBackgroundResource(R.drawable.main_icon_tm_oil);
+			break;
+		case CAN1CommManager.DATA_STATE_MACHINESTATUS_BATTERY:
+			imageViewUpIcon.setBackgroundResource(R.drawable.main_icon_batt);
+			break;
+		case CAN1CommManager.DATA_STATE_MACHINESTATUS_WEIGHING:
+			imageViewUpIcon.setBackgroundResource(R.drawable.main_icon_work);
+			break;
+		case CAN1CommManager.DATA_STATE_MACHINESTATUS_COOLANT:
+			imageViewUpIcon.setBackgroundResource(R.drawable.main_icon_coolant);
+			break;
+		case CAN1CommManager.DATA_STATE_MACHINESTATUS_FRONTAXLE:
+			if(ParentActivity._CheckModel.GetMCUVersion(CAN1Comm.Get_ComponentBasicInformation_1698_PGN65330()) == CheckModel.MODEL_955
+			|| ParentActivity._CheckModel.GetMCUVersion(CAN1Comm.Get_ComponentBasicInformation_1698_PGN65330()) == CheckModel.MODEL_955TM
+			|| ParentActivity._CheckModel.GetMCUVersion(CAN1Comm.Get_ComponentBasicInformation_1698_PGN65330()) == CheckModel.MODEL_960
+			|| ParentActivity._CheckModel.GetMCUVersion(CAN1Comm.Get_ComponentBasicInformation_1698_PGN65330()) == CheckModel.MODEL_960TM
+			|| ParentActivity._CheckModel.GetMCUVersion(CAN1Comm.Get_ComponentBasicInformation_1698_PGN65330()) == CheckModel.MODEL_965
+			|| ParentActivity._CheckModel.GetMCUVersion(CAN1Comm.Get_ComponentBasicInformation_1698_PGN65330()) == CheckModel.MODEL_965TM
+			|| ParentActivity._CheckModel.GetMCUVersion(CAN1Comm.Get_ComponentBasicInformation_1698_PGN65330()) == CheckModel.MODEL_970
+			|| ParentActivity._CheckModel.GetMCUVersion(CAN1Comm.Get_ComponentBasicInformation_1698_PGN65330()) == CheckModel.MODEL_970TM
+			|| ParentActivity._CheckModel.GetMCUVersion(CAN1Comm.Get_ComponentBasicInformation_1698_PGN65330()) == CheckModel.MODEL_980
+			|| ParentActivity._CheckModel.GetMCUVersion(CAN1Comm.Get_ComponentBasicInformation_1698_PGN65330()) == CheckModel.MODEL_980TM)
+				imageViewUpIcon.setBackgroundResource(R.drawable.main_icon_front_axle);
+			break;
+		case CAN1CommManager.DATA_STATE_MACHINESTATUS_REARAXLE:
+			if(ParentActivity._CheckModel.GetMCUVersion(CAN1Comm.Get_ComponentBasicInformation_1698_PGN65330()) == CheckModel.MODEL_965
+			|| ParentActivity._CheckModel.GetMCUVersion(CAN1Comm.Get_ComponentBasicInformation_1698_PGN65330()) == CheckModel.MODEL_965TM
+			|| ParentActivity._CheckModel.GetMCUVersion(CAN1Comm.Get_ComponentBasicInformation_1698_PGN65330()) == CheckModel.MODEL_970
+			|| ParentActivity._CheckModel.GetMCUVersion(CAN1Comm.Get_ComponentBasicInformation_1698_PGN65330()) == CheckModel.MODEL_970TM
+			|| ParentActivity._CheckModel.GetMCUVersion(CAN1Comm.Get_ComponentBasicInformation_1698_PGN65330()) == CheckModel.MODEL_980
+			|| ParentActivity._CheckModel.GetMCUVersion(CAN1Comm.Get_ComponentBasicInformation_1698_PGN65330()) == CheckModel.MODEL_980TM)
+				imageViewUpIcon.setBackgroundResource(R.drawable.main_icon_rear_axle);
+			break;
+		case CAN1CommManager.DATA_STATE_MACHINESTATUS_NOSELECT:
+			imageViewUpIcon.setVisibility(View.INVISIBLE);
+			break;
+		default:
+			break;
+		}
+		switch (Lower) {
+		case CAN1CommManager.DATA_STATE_MACHINESTATUS_HYD:
+			imageViewDownIcon.setBackgroundResource(R.drawable.main_icon_hyd);
+			break;
+		case CAN1CommManager.DATA_STATE_MACHINESTATUS_TMOIL:
+			imageViewDownIcon.setBackgroundResource(R.drawable.main_icon_tm_oil);
+			break;
+		case CAN1CommManager.DATA_STATE_MACHINESTATUS_BATTERY:
+			imageViewDownIcon.setBackgroundResource(R.drawable.main_icon_batt);
+			break;
+		case CAN1CommManager.DATA_STATE_MACHINESTATUS_WEIGHING:
+			if(Upper != CAN1CommManager.DATA_STATE_MACHINESTATUS_WEIGHING)
+				imageViewDownIcon.setBackgroundResource(R.drawable.main_icon_work);
+			else
+				imageViewDownIcon.setVisibility(View.INVISIBLE);
+			break;
+		case CAN1CommManager.DATA_STATE_MACHINESTATUS_COOLANT:
+			imageViewDownIcon.setBackgroundResource(R.drawable.main_icon_coolant);
+			break;
+		case CAN1CommManager.DATA_STATE_MACHINESTATUS_FRONTAXLE:
+			if(ParentActivity._CheckModel.GetMCUVersion(CAN1Comm.Get_ComponentBasicInformation_1698_PGN65330()) == CheckModel.MODEL_955
+			|| ParentActivity._CheckModel.GetMCUVersion(CAN1Comm.Get_ComponentBasicInformation_1698_PGN65330()) == CheckModel.MODEL_955TM
+			|| ParentActivity._CheckModel.GetMCUVersion(CAN1Comm.Get_ComponentBasicInformation_1698_PGN65330()) == CheckModel.MODEL_960
+			|| ParentActivity._CheckModel.GetMCUVersion(CAN1Comm.Get_ComponentBasicInformation_1698_PGN65330()) == CheckModel.MODEL_960TM
+			|| ParentActivity._CheckModel.GetMCUVersion(CAN1Comm.Get_ComponentBasicInformation_1698_PGN65330()) == CheckModel.MODEL_965
+			|| ParentActivity._CheckModel.GetMCUVersion(CAN1Comm.Get_ComponentBasicInformation_1698_PGN65330()) == CheckModel.MODEL_965TM
+			|| ParentActivity._CheckModel.GetMCUVersion(CAN1Comm.Get_ComponentBasicInformation_1698_PGN65330()) == CheckModel.MODEL_970
+			|| ParentActivity._CheckModel.GetMCUVersion(CAN1Comm.Get_ComponentBasicInformation_1698_PGN65330()) == CheckModel.MODEL_970TM
+			|| ParentActivity._CheckModel.GetMCUVersion(CAN1Comm.Get_ComponentBasicInformation_1698_PGN65330()) == CheckModel.MODEL_980
+			|| ParentActivity._CheckModel.GetMCUVersion(CAN1Comm.Get_ComponentBasicInformation_1698_PGN65330()) == CheckModel.MODEL_980TM)
+				imageViewDownIcon.setBackgroundResource(R.drawable.main_icon_front_axle);
+			break;
+		case CAN1CommManager.DATA_STATE_MACHINESTATUS_REARAXLE:
+			if(ParentActivity._CheckModel.GetMCUVersion(CAN1Comm.Get_ComponentBasicInformation_1698_PGN65330()) == CheckModel.MODEL_965
+			|| ParentActivity._CheckModel.GetMCUVersion(CAN1Comm.Get_ComponentBasicInformation_1698_PGN65330()) == CheckModel.MODEL_965TM
+			|| ParentActivity._CheckModel.GetMCUVersion(CAN1Comm.Get_ComponentBasicInformation_1698_PGN65330()) == CheckModel.MODEL_970
+			|| ParentActivity._CheckModel.GetMCUVersion(CAN1Comm.Get_ComponentBasicInformation_1698_PGN65330()) == CheckModel.MODEL_970TM
+			|| ParentActivity._CheckModel.GetMCUVersion(CAN1Comm.Get_ComponentBasicInformation_1698_PGN65330()) == CheckModel.MODEL_980
+			|| ParentActivity._CheckModel.GetMCUVersion(CAN1Comm.Get_ComponentBasicInformation_1698_PGN65330()) == CheckModel.MODEL_980TM)
+				imageViewDownIcon.setBackgroundResource(R.drawable.main_icon_rear_axle);
+			break;
+		case CAN1CommManager.DATA_STATE_MACHINESTATUS_NOSELECT:
+			imageViewDownIcon.setVisibility(View.INVISIBLE);
+			break;
+
+		default:
+			break;
+		}		
 	}
 }

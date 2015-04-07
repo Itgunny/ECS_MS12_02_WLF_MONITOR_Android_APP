@@ -162,6 +162,7 @@ public class MenuListTitleFragment extends ParentFragment{
 				ParentActivity._MenuBaseFragment._MenuModeFragment.showTab();
 				break;
 			case Home.SCREEN_STATE_MENU_MONITORING_FAULTHISTORY_TOP:
+			case Home.SCREEN_STATE_MENU_MONITORING_FUELHISTORY_TOP:
 				ParentActivity._MenuBaseFragment.showBodyMonitoring();
 				setBackButtonEnable(false);
 				break;
