@@ -12,6 +12,7 @@ import taeha.wheelloader.fseries_monitor.popup.AngleCalibrationResultPopup;
 import taeha.wheelloader.fseries_monitor.popup.BrakePedalCalibrationPopup;
 import taeha.wheelloader.fseries_monitor.popup.BucketPriorityPopup;
 import taeha.wheelloader.fseries_monitor.popup.CCOModePopup;
+import taeha.wheelloader.fseries_monitor.popup.CoolingFanManualPopup;
 import taeha.wheelloader.fseries_monitor.popup.EHCUErrorPopup;
 import taeha.wheelloader.fseries_monitor.popup.EngineAutoShutdownCountPopup;
 import taeha.wheelloader.fseries_monitor.popup.EngineModePopup;
@@ -357,6 +358,17 @@ public class Home extends Activity {
 	//	  MiracastClose, MultimediaClose, ShiftMode, SoundOutput, T.C.Lock Up
 	//	  WorkLoadWeighingInitPopup1
 	// 15. FuelInfoPopup에서 ESC를 눌렀을 경우 각 페이지의 초기화 버튼으로 커서 이동
+	//// v1.0.4.2
+	// 1. 보정 List 상에서 키패드 안되는 버그 수정
+	// 2. Cooling fan reverse mode Ui 수정
+	// 3. 과거 고장 삭제 팝업에서 ESC 눌렀을 경우 과거고장 페이지에서 커서 잃는 버그 수정
+	// 4. Version 정보에서 EHCU 없을 때 LEFT/RIGHT 커서 버그 수정
+	// 5. MainAKeyWorkLoadDisplayFragment에서 팝업 띄우고 ESC 누르면 Crash뜨는 버그 수정
+	// 6. WorkLoadWeighingInitPopup1, 2 팝업 ESC 누르면 포커스 잃는 버그 수정
+	// 7. QuickCouple, ECHU Error, 엔진자동정지 Popup 빼고 모두 Keypad 호환 완료 
+	// 8. 스마트키 인증 화면 B안 이미지 축소(HHI 요청)
+	// 9. 미라캐스트 패키지명 수정
+	// 10. 보정, 엔진설정, 연료 정보 포커스 초기화되는 버그 수정
 	//////////////////////////////////////////////////////////////////////////////////////
 	
 	// TAG
@@ -466,9 +478,9 @@ public class Home extends Activity {
 	public  static final int SCREEN_STATE_MENU_MODE_ETC_FREQ_INIT							= 0x21311000;
 	public  static final int SCREEN_STATE_MENU_MODE_ETC_FREQ_END							= 0x2131FFFF;
 	public  static final int SCREEN_STATE_MENU_MODE_ETC_COOLINGFAN_TOP						= 0x21320000;
-	public  static final int SCREEN_STATE_MENU_MODE_ETC_COOLINGFAN_OFF						= 0x21321000;
-	public  static final int SCREEN_STATE_MENU_MODE_ETC_COOLINGFAN_AUTO						= 0x21322000;
-	public  static final int SCREEN_STATE_MENU_MODE_ETC_COOLINGFAN_MANUAL					= 0x21323000;
+//	public  static final int SCREEN_STATE_MENU_MODE_ETC_COOLINGFAN_OFF						= 0x21321000;
+//	public  static final int SCREEN_STATE_MENU_MODE_ETC_COOLINGFAN_AUTO						= 0x21322000;
+	public  static final int SCREEN_STATE_MENU_MODE_ETC_COOLINGFAN_MANUAL					= 0x21321000;
 	public  static final int SCREEN_STATE_MENU_MODE_ETC_COOLINGFAN_END						= 0x2132FFFF;
 	public  static final int SCREEN_STATE_MENU_MODE_ETC_AUTOSHUTDOWN_TOP					= 0x21330000;
 	public  static final int SCREEN_STATE_MENU_MODE_ETC_AUTOSHUTDOWN_PW						= 0x21331000;
@@ -917,6 +929,7 @@ public class Home extends Activity {
 	public MiracastClosePopup				_MiracastClosePopup;
 	// --, 150313 cjg
 	public FuelInitalPopup					_FuelInitalPopup;			// ++, --, 150406 bwk
+	public CoolingFanManualPopup			_CoolingFanManualPopup;		// ++,, --, 150410 bwk 
 	
 	//Toast
 	public WeighingErrorToast				_WeighingErrorToast;
@@ -1189,6 +1202,7 @@ public class Home extends Activity {
 		_MiracastClosePopup = new MiracastClosePopup(this);
 		// --, 150313 cjg
 		_FuelInitalPopup = new FuelInitalPopup(this);
+		_CoolingFanManualPopup = new CoolingFanManualPopup(this);
 		
 		_WeighingErrorToast = new WeighingErrorToast(this);
 	}
@@ -1231,6 +1245,7 @@ public class Home extends Activity {
 		_MiracastClosePopup = new MiracastClosePopup(this);
 		// --, 150323 bwk
 		_FuelInitalPopup = new FuelInitalPopup(this);
+		_CoolingFanManualPopup = new CoolingFanManualPopup(this);
 		
 		_WeighingErrorToast = new WeighingErrorToast(this);
 	}
@@ -2332,7 +2347,7 @@ public class Home extends Activity {
 	}
 	
 	public void KeyButtonClick(final int Data){
-		Log.d(TAG,"KeyButtonClick");
+		Log.d(TAG,"KeyButtonClick : ScreenIndex"+Integer.toHexString(ScreenIndex));
 		// TODO Auto-generated method stub
 		if(ScreenIndex == SCREEN_STATE_MAIN_CAMERA_KEY){
 			if(Data == CAN1CommManager.CAMERA
@@ -2796,6 +2811,20 @@ public class Home extends Activity {
 		}
 
 		HomeDialog = _FuelInitalPopup;
+		HomeDialog.show();
+	}
+	public void showCoolingFanManualPopup(){
+		if(AnimationRunningFlag == true)
+			return;
+		else
+			StartAnimationRunningTimer();
+		
+		if(HomeDialog != null){
+			HomeDialog.dismiss();
+			HomeDialog = null;
+		}
+
+		HomeDialog = _CoolingFanManualPopup;
 		HomeDialog.show();
 	}
 	/////////////////////////////////////////////////////

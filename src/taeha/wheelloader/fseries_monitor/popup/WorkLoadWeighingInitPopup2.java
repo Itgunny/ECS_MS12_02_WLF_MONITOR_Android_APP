@@ -85,6 +85,15 @@ public class WorkLoadWeighingInitPopup2 extends ParentPopup{
 		super.dismiss();
 		Log.d(TAG,"dismiss");
 		ParentActivity.ScreenIndex = ParentActivity.OldScreenIndex;
+		if(ParentActivity.OldScreenIndex == ParentActivity.SCREEN_STATE_MENU_MODE_HYD_WORKLOAD_TOP)
+		{
+			try {
+				ParentActivity._MenuBaseFragment._WorkLoadFragment.CursurDisplay(10);
+			} catch (NullPointerException e) {
+				// TODO: handle exception
+				Log.e(TAG,"NullPointerException dismiss");
+			}		
+		}		
 	}
 
 	@Override
@@ -123,7 +132,6 @@ public class WorkLoadWeighingInitPopup2 extends ParentPopup{
 	@Override
 	protected void GetDataFromNative() {
 		// TODO Auto-generated method stub
-		
 	}
 
 	@Override

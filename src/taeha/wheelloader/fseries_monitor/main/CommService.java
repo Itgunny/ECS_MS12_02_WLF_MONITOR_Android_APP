@@ -1584,7 +1584,7 @@ public class CommService extends Service{
 	}
 	public void RunMirror(){
 		Intent intent;
-		intent = getPackageManager().getLaunchIntentForPackage("com.example.wfdsink");
+		intent = getPackageManager().getLaunchIntentForPackage("com.powerone.wfd.sink");
 		if(intent != null){
 			startActivity(intent);
 			miracastFlag = true;		// ++, --, 150323 bwk
@@ -1598,7 +1598,7 @@ public class CommService extends Service{
 				PlayerFlag = false;	// ++, --, 150211 bwk
 				multimediaFlag = false; //++, --, 150403 cjg
 				CallHome();
-			}else if(CheckTopApps("com.example.wfdsink") == true){
+			}else if(CheckTopApps("com.powerone.wfd.sink") == true){
 				PlayerFlag = false;	// ++, --, 150211 bwk
 				miracastFlag = false; //++, --, 150403 cjg
 				CallHome();
@@ -1606,7 +1606,7 @@ public class CommService extends Service{
 				PlayerFlag = true;	// ++, --, 150211 bwk
 				multimediaFlag = true; //++, --, 150403 cjg
 				RunMultimedia();
-			}else if(CheckRunningApp("com.example.wfdsink") == true){
+			}else if(CheckRunningApp("com.powerone.wfd.sink") == true){
 				PlayerFlag = true;	// ++, --, 150211 bwk
 				miracastFlag = true; //++, --, 150403 cjg
 				RunMirror();

@@ -30,7 +30,6 @@ import taeha.wheelloader.fseries_monitor.menu.management.ServiceMenuWeighingComp
 import taeha.wheelloader.fseries_monitor.menu.management.SoftwareUpdatePasswordFragment;
 import taeha.wheelloader.fseries_monitor.menu.mode.AngleCalibration;
 import taeha.wheelloader.fseries_monitor.menu.mode.CalibrationFragment;
-import taeha.wheelloader.fseries_monitor.menu.mode.CoolingFanFragment;
 import taeha.wheelloader.fseries_monitor.menu.mode.CoolingFanReverseModeFragment;
 import taeha.wheelloader.fseries_monitor.menu.mode.DetentFragment;
 import taeha.wheelloader.fseries_monitor.menu.mode.EngineAutoShutdownFragment;
@@ -146,7 +145,6 @@ public class MenuBaseFragment extends ParentFragment{
 	public EngineAutoShutdownFragment		_EngineAutoShutdownFragment;
 	public EngineDelayShutdownFragment		_EngineDelayShutdownFragment;
 	public CameraSettingFragment 			_CameraSettingFragment;
-	public CoolingFanFragment				_CoolingFanFragment;
 	public CoolingFanReverseModeFragment	_CoolingFanReverseModeFragment;
 	public SpeedometerFreqFragment			_SpeedometerFreqFragment;
 	public WiperFragment					_WiperFragment;
@@ -287,7 +285,7 @@ public class MenuBaseFragment extends ParentFragment{
 		_EngineAutoShutdownFragment = new EngineAutoShutdownFragment();
 		_EngineDelayShutdownFragment = new EngineDelayShutdownFragment();
 		_CameraSettingFragment = new CameraSettingFragment();
-		_CoolingFanFragment = new CoolingFanFragment();
+		_CoolingFanReverseModeFragment = new CoolingFanReverseModeFragment();
 		_SpeedometerFreqFragment = new SpeedometerFreqFragment();
 		_WiperFragment = new WiperFragment();
 		_EngineAutoShutdownPWFragment = new EngineAutoShutdownPWFragment();
@@ -379,7 +377,7 @@ public class MenuBaseFragment extends ParentFragment{
 		transaction.detach(_EngineAutoShutdownFragment);
 		transaction.detach(_EngineDelayShutdownFragment);
 		transaction.detach(_CameraSettingFragment);
-		transaction.detach(_CoolingFanFragment);
+		transaction.detach(_CoolingFanReverseModeFragment);
 		transaction.detach(_SpeedometerFreqFragment);
 		transaction.detach(_WiperFragment);
 		transaction.detach(_EngineAutoShutdownPWFragment);
@@ -812,10 +810,10 @@ public class MenuBaseFragment extends ParentFragment{
 		transaction.commit();
 
 	}
-	public void showBodyCoolingFan(){
+	public void showBodyCoolingFanReverse(){
 		android.app.FragmentTransaction transaction = getFragmentManager().beginTransaction();
-		transaction.remove(_CoolingFanFragment);
-		transaction.replace(R.id.FrameLayout_menu_inter_body, _CoolingFanFragment);
+		transaction.remove(_CoolingFanReverseModeFragment);
+		transaction.replace(R.id.FrameLayout_menu_inter_body, _CoolingFanReverseModeFragment);
 		transaction.commit();
 
 	}
@@ -1234,9 +1232,9 @@ public class MenuBaseFragment extends ParentFragment{
 		showInterAnimation();
 		InterBodyAnimation.StartChangeAnimation(_CameraSettingFragment);
 	}
-	public void showBodyCoolingFanAnimation(){
+	public void showBodyCoolingFanReverseModeAnimation(){
 		showInterAnimation();
-		InterBodyAnimation.StartChangeAnimation(_CoolingFanFragment);
+		InterBodyAnimation.StartChangeAnimation(_CoolingFanReverseModeFragment);
 	}
 	public void showBodySpeedometerFreqAnimation(){
 		showInterAnimation();
@@ -1567,14 +1565,11 @@ public class MenuBaseFragment extends ParentFragment{
 		case Home.SCREEN_STATE_MENU_MODE_ETC_FREQ_INIT:
 			ParentActivity._SpeedometerInitPopup.ClickLeft();
 			break;
-		case Home.SCREEN_STATE_MENU_MODE_ETC_COOLINGFAN_OFF:
-			_CoolingFanFragment._CoolingFanOffFragment.ClickLeft();
-			break;
-		case Home.SCREEN_STATE_MENU_MODE_ETC_COOLINGFAN_AUTO:
-			_CoolingFanFragment._CoolingFanAutoFragment.ClickLeft();
+		case Home.SCREEN_STATE_MENU_MODE_ETC_COOLINGFAN_TOP:
+			_CoolingFanReverseModeFragment.ClickLeft();
 			break;
 		case Home.SCREEN_STATE_MENU_MODE_ETC_COOLINGFAN_MANUAL:
-			_CoolingFanFragment._CoolingFanManualFragment.ClickLeft();
+			ParentActivity._CoolingFanManualPopup.ClickLeft();
 			break;
 		case Home.SCREEN_STATE_MENU_MODE_ETC_WIPER_TOP:
 			_WiperFragment.ClickLeft();
@@ -1703,7 +1698,8 @@ public class MenuBaseFragment extends ParentFragment{
 			_MaintenanceChangeCycleFragment.ClickLeft();
 			break;
 		case Home.SCREEN_STATE_MENU_MODE_ETC_CALIBRATION_TOP:
-			_CalibrationFragment.ClickLeft();
+			//_CalibrationFragment.ClickLeft();
+			_MenuModeFragment._CalibrationFragment.ClickLeft(); 
 			break;
 		case Home.SCREEN_STATE_MENU_MODE_ETC_CALIBRATION_ANGLE_TOP:
 			_AngleCalibration.ClickLeft();
@@ -1854,14 +1850,11 @@ public class MenuBaseFragment extends ParentFragment{
 		case Home.SCREEN_STATE_MENU_MODE_ETC_FREQ_INIT:
 			ParentActivity._SpeedometerInitPopup.ClickRight();
 			break;
-		case Home.SCREEN_STATE_MENU_MODE_ETC_COOLINGFAN_OFF:
-			_CoolingFanFragment._CoolingFanOffFragment.ClickRight();
-			break;
-		case Home.SCREEN_STATE_MENU_MODE_ETC_COOLINGFAN_AUTO:
-			_CoolingFanFragment._CoolingFanAutoFragment.ClickRight();
+		case Home.SCREEN_STATE_MENU_MODE_ETC_COOLINGFAN_TOP:
+			_CoolingFanReverseModeFragment.ClickRight();
 			break;
 		case Home.SCREEN_STATE_MENU_MODE_ETC_COOLINGFAN_MANUAL:
-			_CoolingFanFragment._CoolingFanManualFragment.ClickRight();
+			ParentActivity._CoolingFanManualPopup.ClickRight();
 			break;
 		case Home.SCREEN_STATE_MENU_MODE_ETC_WIPER_TOP:
 			_WiperFragment.ClickRight();
@@ -1990,7 +1983,8 @@ public class MenuBaseFragment extends ParentFragment{
 			_MaintenanceChangeCycleFragment.ClickRight();
 			break;
 		case Home.SCREEN_STATE_MENU_MODE_ETC_CALIBRATION_TOP:
-			_CalibrationFragment.ClickRight();
+			//_CalibrationFragment.ClickRight();
+			_MenuModeFragment._CalibrationFragment.ClickRight(); 
 			break;
 		case Home.SCREEN_STATE_MENU_MODE_ETC_CALIBRATION_ANGLE_TOP:
 			_AngleCalibration.ClickRight();
@@ -2139,14 +2133,11 @@ public class MenuBaseFragment extends ParentFragment{
 		case Home.SCREEN_STATE_MENU_MODE_ETC_FREQ_INIT:
 			ParentActivity._SpeedometerInitPopup.ClickESC();
 			break;
-		case Home.SCREEN_STATE_MENU_MODE_ETC_COOLINGFAN_OFF:
-			_CoolingFanFragment._CoolingFanOffFragment.ClickESC();
-			break;
-		case Home.SCREEN_STATE_MENU_MODE_ETC_COOLINGFAN_AUTO:
-			_CoolingFanFragment._CoolingFanAutoFragment.ClickESC();
+		case Home.SCREEN_STATE_MENU_MODE_ETC_COOLINGFAN_TOP:
+			_CoolingFanReverseModeFragment.ClickESC();
 			break;
 		case Home.SCREEN_STATE_MENU_MODE_ETC_COOLINGFAN_MANUAL:
-			_CoolingFanFragment._CoolingFanManualFragment.ClickESC();
+			ParentActivity._CoolingFanManualPopup.ClickESC();
 			break;
 		case Home.SCREEN_STATE_MENU_MODE_ETC_WIPER_TOP:
 			_WiperFragment.ClickESC();
@@ -2427,14 +2418,11 @@ public class MenuBaseFragment extends ParentFragment{
 		case Home.SCREEN_STATE_MENU_MODE_ETC_FREQ_INIT:
 			ParentActivity._SpeedometerInitPopup.ClickEnter();
 			break;
-		case Home.SCREEN_STATE_MENU_MODE_ETC_COOLINGFAN_OFF:
-			_CoolingFanFragment._CoolingFanOffFragment.ClickEnter();
-			break;
-		case Home.SCREEN_STATE_MENU_MODE_ETC_COOLINGFAN_AUTO:
-			_CoolingFanFragment._CoolingFanAutoFragment.ClickEnter();
+		case Home.SCREEN_STATE_MENU_MODE_ETC_COOLINGFAN_TOP:
+			_CoolingFanReverseModeFragment.ClickEnter();
 			break;
 		case Home.SCREEN_STATE_MENU_MODE_ETC_COOLINGFAN_MANUAL:
-			_CoolingFanFragment._CoolingFanManualFragment.ClickEnter();
+			ParentActivity._CoolingFanManualPopup.ClickEnter();
 			break;
 		case Home.SCREEN_STATE_MENU_MODE_ETC_WIPER_TOP:
 			_WiperFragment.ClickEnter();
@@ -2563,7 +2551,8 @@ public class MenuBaseFragment extends ParentFragment{
 			_MaintenanceChangeCycleFragment.ClickEnter();
 			break;
 		case Home.SCREEN_STATE_MENU_MODE_ETC_CALIBRATION_TOP:
-			_CalibrationFragment.ClickEnter();
+			//_CalibrationFragment.ClickEnter();
+			_MenuModeFragment._CalibrationFragment.ClickEnter(); 
 			break;
 		case Home.SCREEN_STATE_MENU_MODE_ETC_CALIBRATION_ANGLE_TOP:
 			_AngleCalibration.ClickEnter();

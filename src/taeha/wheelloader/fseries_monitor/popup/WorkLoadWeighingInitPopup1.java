@@ -68,7 +68,19 @@ public class WorkLoadWeighingInitPopup1 extends ParentPopup{
 		// TODO Auto-generated method stub
 		super.dismiss();
 		Log.d(TAG,"dismiss");
-		ParentActivity.ScreenIndex = ParentActivity.OldScreenIndex;
+		if(ParentActivity.ScreenIndex != ParentActivity.SCREEN_STATE_MENU_MODE_HYD_WORKLOAD_WEIGHING_INIT2)
+		{
+			ParentActivity.ScreenIndex = ParentActivity.OldScreenIndex;
+			if(ParentActivity.OldScreenIndex == ParentActivity.SCREEN_STATE_MENU_MODE_HYD_WORKLOAD_TOP)
+			{
+				try {
+					ParentActivity._MenuBaseFragment._WorkLoadFragment.CursurDisplay(10);
+				} catch (NullPointerException e) {
+					// TODO: handle exception
+					Log.e(TAG,"NullPointerException dismiss");
+				}		
+			}
+		}
 	}
 	@Override
 	public void InitValuable(){

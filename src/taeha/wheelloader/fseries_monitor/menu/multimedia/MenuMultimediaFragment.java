@@ -185,13 +185,13 @@ public class MenuMultimediaFragment extends ParentFragment{
 	}
 	/////////////////////////////////////////////////////////////////////	
 	public void ClickMediaPlayer(){
-		ParentActivity.KillApps("com.example.wfdsink");
+		ParentActivity.KillApps("com.powerone.wfd.sink");
 		// ++, 150319 bwk
 		if(CAN1Comm.GetrpmFlag() == false)
 		{
 		// --, 150319 bwk
 			// ++, 150323 bwk
-			if(ParentActivity.CheckRunningApp("com.example.wfdsink")){
+			if(ParentActivity.CheckRunningApp("com.powerone.wfd.sink")){
 				ParentActivity.OldScreenIndex = ParentActivity.SCREEN_STATE_MENU_MULTIMEDIA_TOP;
 				ParentActivity._MiracastClosePopup.show();
 			}else{

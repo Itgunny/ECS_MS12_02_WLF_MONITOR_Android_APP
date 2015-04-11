@@ -95,6 +95,12 @@ public class LoggedFaultDeletePopup extends ParentPopup{
 		// TODO Auto-generated method stub
 		super.dismiss();
 		ParentActivity.ScreenIndex = ParentActivity.SCREEN_STATE_MENU_MONITORING_FAULTHISTORY_LOGGED_TOP;
+		try {
+			ParentActivity._MenuBaseFragment._FaultHistoryLoggedFragment.CursurDisplay(5);
+		} catch (NullPointerException e) {
+			// TODO: handle exception
+			Log.e(TAG,"NullPointerException dismiss");
+		}		
 	}
 
 	@Override

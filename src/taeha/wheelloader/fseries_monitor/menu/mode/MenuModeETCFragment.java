@@ -138,7 +138,8 @@ public class MenuModeETCFragment extends MenuBodyList_ParentFragment{
 			return;
 		else
 			ParentActivity.StartAnimationRunningTimer();
-		ParentActivity._MenuBaseFragment.showBodyCoolingFanAnimation();
+		//ParentActivity._MenuBaseFragment.showBodyCoolingFanAnimation();
+		ParentActivity._MenuBaseFragment.showBodyCoolingFanReverseModeAnimation();
 		CursurIndex = 2;
 		CursurDisplay(CursurIndex);
 		ParentActivity._MenuBaseFragment._MenuModeFragment.SetModeFocusIndex(MenuModeFragment.STATE_CURSUR_LIST);

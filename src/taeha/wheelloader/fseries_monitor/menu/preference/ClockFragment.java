@@ -403,6 +403,7 @@ public class ClockFragment extends ParentFragment{
 		else if(AMFlag == false)
 			Hour = Hour + 12;
 		CAN1Comm.TxCMDToMCU(CAN1Comm.CMD_RTC,ParentActivity.Year,ParentActivity.Month,ParentActivity.Date,0x01,Hour,Min,0x00,0x00);
+//		Log.d(TAG,"Hour : " + Integer.toString(Hour) + " Min : " + Integer.toString(Min));
 		
 	
 	}

@@ -30,7 +30,7 @@ public class CalibrationFragment extends MenuBodyList_ParentFragment{
 	//////////////////////////////////////////////////
 	
 	//VALUABLE////////////////////////////////////////
-	int CursurIndex;
+	static int CursurIndex = 1;
 	//////////////////////////////////////////////////
 	
 	//Fragment////////////////////////////////////////
@@ -54,7 +54,6 @@ public class CalibrationFragment extends MenuBodyList_ParentFragment{
 		 TAG = "CalibrationFragment";
 		Log.d(TAG, "onCreateView");
 		
-		CursurIndex = 1;
 		InitList();
 		ParentActivity._MenuBaseFragment._MenuListTitleFragment.setBackButtonEnable(true);
 		ParentActivity.ScreenIndex = ParentActivity.SCREEN_STATE_MENU_MODE_ETC_CALIBRATION_TOP;
@@ -196,6 +195,7 @@ public class CalibrationFragment extends MenuBodyList_ParentFragment{
 		}
 	}
 	public void ClickESC(){
+		CursurIndex = 1;
 		ParentActivity._MenuBaseFragment._MenuListTitleFragment.ClickBack();
 	}
 	public void ClickEnter(){

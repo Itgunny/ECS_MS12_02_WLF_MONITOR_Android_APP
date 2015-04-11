@@ -147,7 +147,7 @@ public class MainACenterQuickFragment extends MainACenterFragment{
 			ParentActivity._MultimediaClosePopup.show();
 		}else{
 			Intent intent;
-			intent = ParentActivity.getPackageManager().getLaunchIntentForPackage("com.example.wfdsink");
+			intent = ParentActivity.getPackageManager().getLaunchIntentForPackage("com.powerone.wfd.sink");
 			if(intent != null){
 				startActivity(intent);
 				// ++, 150323 bwk
@@ -160,11 +160,11 @@ public class MainACenterQuickFragment extends MainACenterFragment{
 	public void ClickMultimedia(){
 		if(CAN1Comm.GetrpmFlag() == false)
 		{
-			if(ParentActivity.CheckRunningApp("com.example.wfdsink")){
+			if(ParentActivity.CheckRunningApp("com.powerone.wfd.sink")){
 				ParentActivity.OldScreenIndex = ParentActivity.SCREEN_STATE_MAIN_A_QUICK_TOP;
 				ParentActivity._MiracastClosePopup.show();
 			}else{
-				ParentActivity.KillApps("com.example.wfdsink");
+				ParentActivity.KillApps("com.powerone.wfd.sink");
 				Intent intent;
 				intent = ParentActivity.getPackageManager().getLaunchIntentForPackage("com.mxtech.videoplayer.ad");
 				if(intent != null){

@@ -39,10 +39,7 @@ public class EngineSettingFragment extends MenuBodyList_ParentFragment{
 	//////////////////////////////////////////////////
 	
 	//Fragment////////////////////////////////////////
-	// ++, 150323 bwk
-	//static int CursurIndex = 1;
-	int CursurIndex;
-	// --, 150323 bwk
+	static int CursurIndex = 1;
 	//////////////////////////////////////////////////
 	
 	//ANIMATION///////////////////////////////////////
@@ -62,7 +59,6 @@ public class EngineSettingFragment extends MenuBodyList_ParentFragment{
 		 TAG = "EngineSettingFragment";
 		Log.d(TAG, "onCreateView");
 		
-		CursurIndex = 1;
 		InitList();
 		ParentActivity._MenuBaseFragment._MenuListTitleFragment.setBackButtonEnable(true);
 		ParentActivity.ScreenIndex = ParentActivity.SCREEN_STATE_MENU_MODE_ENGINETM_ENGINESETTING_TOP;
@@ -295,6 +291,7 @@ public class EngineSettingFragment extends MenuBodyList_ParentFragment{
 		}
 	}
 	public void ClickESC(){
+		CursurIndex = 1;
 		ParentActivity._MenuBaseFragment._MenuListTitleFragment.ClickBack();
 	}
 	public void ClickEnter(){

@@ -176,6 +176,7 @@ public class FaultHistoryFragment extends MenuBodyList_ParentFragment{
 		}
 	}
 	public void ClickESC(){
+		CursurIndex = 1;
 		ParentActivity._MenuBaseFragment._MenuListTitleFragment.ClickBack();
 	}
 	public void ClickEnter(){

@@ -134,7 +134,7 @@ public class MiracastClosePopup extends ParentPopup {
 	///////////////////////////////////////////////////////////////////////////////
 	public void ClickOK(){
 		this.dismiss();
-		ParentActivity.KillApps("com.android.settings");
+		ParentActivity.KillApps("com.powerone.wfd.sink");
 		Intent intent;
 		intent = ParentActivity.getPackageManager().getLaunchIntentForPackage("com.mxtech.videoplayer.ad");
 		if(intent != null){

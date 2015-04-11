@@ -447,9 +447,15 @@ public class VersionInfoFragment extends ParentFragment{
 		case 5:
 		case 6:
 		case 7:
-		case 8:
 		case 9:
 			CursurIndex--;
+			CursurDisplay(CursurIndex);
+			break;
+		case 8:
+			if(CAN1Comm.Get_ComponentCode_1699_PGN65330_EHCU() != CAN1CommManager.STATE_COMPONENTCODE_EHCU)
+				CursurIndex = 6;
+			else
+				CursurIndex--;
 			CursurDisplay(CursurIndex);
 			break;
 		default:
@@ -464,10 +470,16 @@ public class VersionInfoFragment extends ParentFragment{
 		case 3:
 		case 4:
 		case 5:
-		case 6:
 		case 7:
 		case 8:
 			CursurIndex++;
+			CursurDisplay(CursurIndex);
+			break;
+		case 6:
+			if(CAN1Comm.Get_ComponentCode_1699_PGN65330_EHCU() != CAN1CommManager.STATE_COMPONENTCODE_EHCU)
+				CursurIndex = 8;
+			else
+				CursurIndex++;
 			CursurDisplay(CursurIndex);
 			break;
 		case 9:

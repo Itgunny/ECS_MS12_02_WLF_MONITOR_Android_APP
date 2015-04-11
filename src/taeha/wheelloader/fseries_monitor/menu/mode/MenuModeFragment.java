@@ -98,9 +98,10 @@ public class MenuModeFragment extends ParentFragment{
 		_EngineSettingFragment = new EngineSettingFragment();
 		_CalibrationFragment = new CalibrationFragment();
 		
+		// ++, --, 150410 bwk ฟ๘บน 
 		 // ++, 150331 cjg
 		ModeFocusIndex = STATE_CURSUR_LIST;
-	    //  ModeFocusIndex = STATE_CURSUR_TAB;
+// 		ModeFocusIndex = STATE_CURSUR_TAB;
 //	      
 //	      ParentActivity._MenuBaseFragment._MenuModeFragment._MenuModeEngTMFragment.CursurIndex = 0;
 //	      ParentActivity._MenuBaseFragment._MenuModeFragment._MenuModeEngTMFragment.CursurDisplay(CursurIndex);

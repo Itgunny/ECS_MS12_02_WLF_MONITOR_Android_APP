@@ -125,7 +125,7 @@ public class MainBLeftDownQuickFragment extends ParentFragment{
 		// ++, 150320 cjg
 //		ParentActivity.KillApps("com.mxtech.videoplayer.ad");
 //		Intent intent;
-//		intent = ParentActivity.getPackageManager().getLaunchIntentForPackage("com.example.wfdsink");
+//		intent = ParentActivity.getPackageManager().getLaunchIntentForPackage("com.powerone.wfd.sink");
 //		if(intent != null)
 //			startActivity(intent);
 		if(ParentActivity.CheckRunningApp("com.mxtech.videoplayer.ad")){
@@ -133,7 +133,7 @@ public class MainBLeftDownQuickFragment extends ParentFragment{
 			ParentActivity._MultimediaClosePopup.show();
 		}else{
 			Intent intent;
-			intent = ParentActivity.getPackageManager().getLaunchIntentForPackage("com.example.wfdsink");
+			intent = ParentActivity.getPackageManager().getLaunchIntentForPackage("com.powerone.wfd.sink");
 			if(intent != null){
 				// ++, 150323 bwk
 				CAN1Comm.SetMultimediaFlag(false);
