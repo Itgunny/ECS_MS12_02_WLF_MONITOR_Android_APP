@@ -65,7 +65,7 @@ public class BrakePedalCalibrationPopup extends ParentPopup{
 		InitButtonListener();
 		InitValuable();
 		
-		ParentActivity.ScreenIndex = ParentActivity.SCREEN_STATE_MENU_MANAGEMENT_CALIBRATION_BRAKEPEDAL_TOP;
+		ParentActivity.ScreenIndex = ParentActivity.SCREEN_STATE_MENU_MODE_ETC_CALIBRATION_BRAKEPEDAL_TOP;
 	}
 
 	@Override
@@ -78,7 +78,7 @@ public class BrakePedalCalibrationPopup extends ParentPopup{
 	public void dismiss() {
 		// TODO Auto-generated method stub
 		super.dismiss();
-		ParentActivity.ScreenIndex = ParentActivity.SCREEN_STATE_MENU_MANAGEMENT_CALIBRATION_TOP;
+		ParentActivity.ScreenIndex = ParentActivity.SCREEN_STATE_MENU_MODE_ETC_CALIBRATION_TOP;
 	}
 
 	@Override

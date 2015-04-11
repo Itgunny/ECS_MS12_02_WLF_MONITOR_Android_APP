@@ -89,6 +89,7 @@ public class MenuPreferenceFragment extends MenuBodyList_ParentFragment{
 		setClickableList3(true);
 		setClickableList4(true);
 		setClickableList5(true);
+		setClickableList6(true);
 
 		
 		setListTitle1(ParentActivity.getResources().getString(string.Brightness_Setting));
@@ -97,7 +98,7 @@ public class MenuPreferenceFragment extends MenuBodyList_ParentFragment{
 		setListTitle4(ParentActivity.getResources().getString(string.Display_Style) 
 				+ " / " + ParentActivity.getResources().getString(string.Language));
 		setListTitle5(ParentActivity.getResources().getString(string.Sound_Output_Setting));
-		
+		setListTitle6(ParentActivity.getResources().getString(string.Camera_Setting));
 		
 	}
 
@@ -163,6 +164,7 @@ public class MenuPreferenceFragment extends MenuBodyList_ParentFragment{
 	@Override
 	public void ClickList6() {
 		// TODO Auto-generated method stub
+		ParentActivity._MenuBaseFragment.showBodyCameraSettingAnimation();
 		CursurIndex = 6;
 		CursurDisplay(CursurIndex);
 		
@@ -202,7 +204,7 @@ public class MenuPreferenceFragment extends MenuBodyList_ParentFragment{
 			ParentActivity._MenuBaseFragment._MenuListLeftFragment.ClickManagement();
 			break;
 		case 1:
-			CursurIndex = 5;
+			CursurIndex = 6;
 			CursurDisplay(CursurIndex);
 			break;
 		case 2:
@@ -222,7 +224,8 @@ public class MenuPreferenceFragment extends MenuBodyList_ParentFragment{
 			CursurDisplay(CursurIndex);
 			break;
 		case 6:
-			
+			CursurIndex--;
+			CursurDisplay(CursurIndex);
 			break;
 		default:
 			break;
@@ -251,10 +254,12 @@ public class MenuPreferenceFragment extends MenuBodyList_ParentFragment{
 			CursurDisplay(CursurIndex);
 			break;
 		case 5:
-			CursurIndex = 1;
+			CursurIndex++;
 			CursurDisplay(CursurIndex);
 			break;
 		case 6:
+			CursurIndex = 1;
+			CursurDisplay(CursurIndex);
 			
 			break;
 		default:

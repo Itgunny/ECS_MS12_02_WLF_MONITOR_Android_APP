@@ -226,7 +226,7 @@ public class WorkLoadWeighingInitPopup1 extends ParentPopup{
 		}
 	}
 	public void ClickESC(){
-		
+		this.dismiss();
 	}
 	public void ClickEnter(){
 		switch (CursurIndex) {

@@ -123,7 +123,7 @@ public class FuelHistoryModeRecordFragment  extends ParentFragment{
 				// TODO Auto-generated method stub
 				CursurIndex = 2;
 				HandleCursurDisplay.sendMessage(HandleCursurDisplay.obtainMessage(CursurIndex));
-				ClickDelete();
+				ClickInitial();
 			}
 		});
 		imgbtnOK.setOnClickListener(new View.OnClickListener() {
@@ -260,7 +260,7 @@ public class FuelHistoryModeRecordFragment  extends ParentFragment{
 		}
 	}	
 	/////////////////////////////////////////////////////////////////////	
-	public void ClickDelete(){
+	public void ClickInitial(){
 		ParentActivity.OldScreenIndex = ParentActivity.SCREEN_STATE_MENU_MONITORING_FUELHISTORY_MODERECORD;
 		ParentActivity._FuelInitalPopup.setMode(CAN1CommManager.DATA_STATE_MODE_FUEL_RATE_INFO_CLEAR);
 		ParentActivity.showFuelInitalPopup();
@@ -307,7 +307,14 @@ public class FuelHistoryModeRecordFragment  extends ParentFragment{
 		ClickOK();
 	}
 	public void ClickEnter(){
-		ClickOK();
+		switch (CursurIndex) {
+		case 2:		
+			ClickInitial();
+			break;
+		default:
+			ClickOK();
+			break;
+		}
 	}
 	public void CursurDisplay(int Index){
 		imgbtnInital.setPressed(false);

@@ -7,7 +7,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
+import taeha.wheelloader.fseries_monitor.main.CAN1CommManager;
 import taeha.wheelloader.fseries_monitor.main.ParentFragment;
 import taeha.wheelloader.fseries_monitor.main.R;
 
@@ -20,10 +22,13 @@ public class MainAKeyQuickCouplerFragment extends ParentFragment{
 	TextView textViewUnlock;
 	
 	ImageButton imgbtnOK;
+	
+	RelativeLayout	layoutAvailable;
+	RelativeLayout	layoutNotAvailable;
 	//////////////////////////////////////////////////
 	
 	//VALUABLE////////////////////////////////////////
-
+	int Quickcoupler;
 	//////////////////////////////////////////////////
 	
 	//ANIMATION///////////////////////////////////////
@@ -60,12 +65,16 @@ public class MainAKeyQuickCouplerFragment extends ParentFragment{
 		textViewUnlock = (TextView)mRoot.findViewById(R.id.textView_key_main_a_quickcoupler_unlock);
 		
 		imgbtnOK = (ImageButton)mRoot.findViewById(R.id.ImageButton_key_main_a_quickcoupler_low_ok);
+
+		layoutAvailable = (RelativeLayout)mRoot.findViewById(R.id.RelativeLayout_key_main_a_quickcoupler_available);
+		layoutNotAvailable = (RelativeLayout)mRoot.findViewById(R.id.RelativeLayout_key_main_a_quickcoupler_notavailable);
 	}
 	
 	protected void InitValuables() {
 		// TODO Auto-generated method stub
 		super.InitValuables();
 		
+		Quickcoupler = CAN1Comm.Get_QuickCouplerOperationStatus_3448_PGN65527();
 	}
 	@Override
 	protected void InitButtonListener() {
@@ -100,13 +109,26 @@ public class MainAKeyQuickCouplerFragment extends ParentFragment{
 	@Override
 	protected void GetDataFromNative() {
 		// TODO Auto-generated method stub
-		
+		Quickcoupler = CAN1Comm.Get_QuickCouplerOperationStatus_3448_PGN65527();
 	}
 
 	@Override
 	protected void UpdateUI() {
 		// TODO Auto-generated method stub
-		
+		KeyBGDisplay(Quickcoupler);
+	}
+	/////////////////////////////////////////////////////////////////////	
+	public void KeyBGDisplay(int Data){
+		switch (Data){
+		case CAN1CommManager.DATA_STATE_NOTAVAILABLE:
+			layoutAvailable.setVisibility(View.INVISIBLE);
+			layoutNotAvailable.setVisibility(View.VISIBLE);
+			break;
+		default:
+			layoutAvailable.setVisibility(View.VISIBLE);
+			layoutNotAvailable.setVisibility(View.INVISIBLE);
+			break;
+		}
 	}
 	/////////////////////////////////////////////////////////////////////	
 	public void ClickLock(){

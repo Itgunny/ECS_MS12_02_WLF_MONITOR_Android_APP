@@ -3042,15 +3042,23 @@ void SetKeypadLamp()
 	else if(RX_ELECTRICAL_SWITCH_RELAY_OPERATION_STATUS_65527.RearWorkLampOperationStatus_3446 == 1)
 		TX_CMD_Lamp.WorkLight2 = 1;
 
-	if(RX_INDICATOR_LAMP_65428.AutoGreaseGreenLEDStatus_3453 == 0)
+	if(RX_ELECTRICAL_SWITCH_RELAY_OPERATION_STATUS_65527.AutoGreaseOperationStatus_3449 == 3)
+	{
 		TX_CMD_Lamp.AutoGrease1 = 0;
-	else if(RX_INDICATOR_LAMP_65428.AutoGreaseGreenLEDStatus_3453 == 1)
-		TX_CMD_Lamp.AutoGrease1 = 1;
-
-	if(RX_INDICATOR_LAMP_65428.AutoGreaseRedLEDStatus_3453 == 0)
 		TX_CMD_Lamp.AutoGrease2 = 0;
-	else if(RX_INDICATOR_LAMP_65428.AutoGreaseRedLEDStatus_3453 == 1)
-		TX_CMD_Lamp.AutoGrease2 = 1;
+	}
+	else
+	{
+		if(RX_INDICATOR_LAMP_65428.AutoGreaseGreenLEDStatus_3453 == 0)
+			TX_CMD_Lamp.AutoGrease1 = 0;
+		else if(RX_INDICATOR_LAMP_65428.AutoGreaseGreenLEDStatus_3453 == 1)
+			TX_CMD_Lamp.AutoGrease1 = 1;
+
+		if(RX_INDICATOR_LAMP_65428.AutoGreaseRedLEDStatus_3453 == 0)
+			TX_CMD_Lamp.AutoGrease2 = 0;
+		else if(RX_INDICATOR_LAMP_65428.AutoGreaseRedLEDStatus_3453 == 1)
+			TX_CMD_Lamp.AutoGrease2 = 1;
+	}
 
 	if(RX_ELECTRICAL_SWITCH_RELAY_OPERATION_STATUS_65527.QuickCouplerOperationStatus_3448 == 0){
 		TX_CMD_Lamp.QuickCoupler1 = 0;
@@ -3059,7 +3067,7 @@ void SetKeypadLamp()
 	else if(RX_ELECTRICAL_SWITCH_RELAY_OPERATION_STATUS_65527.QuickCouplerOperationStatus_3448 == 1){
 		TX_CMD_Lamp.QuickCoupler1 = 1;
 		TX_CMD_Lamp.QuickCoupler2 = 0;
-	}else{
+	}else if(RX_ELECTRICAL_SWITCH_RELAY_OPERATION_STATUS_65527.QuickCouplerOperationStatus_3448 == 3){
 		TX_CMD_Lamp.QuickCoupler1 = 0;
 		TX_CMD_Lamp.QuickCoupler2 = 0;
 	}
@@ -3068,16 +3076,19 @@ void SetKeypadLamp()
 		TX_CMD_Lamp.RideControl1 = 0;
 		TX_CMD_Lamp.RideControl2 = 0;
 	}
-
 	else if(RX_ELECTRICAL_SWITCH_RELAY_OPERATION_STATUS_65527.RideControlOperationStatus_3447 == 1){
 		TX_CMD_Lamp.RideControl1 = 1;
 		TX_CMD_Lamp.RideControl2 = 0;
 	}
-
 	else if(RX_ELECTRICAL_SWITCH_RELAY_OPERATION_STATUS_65527.RideControlOperationStatus_3447 == 2){
 		TX_CMD_Lamp.RideControl1 = 0;
 		TX_CMD_Lamp.RideControl2 = 1;
 	}
+	else if(RX_ELECTRICAL_SWITCH_RELAY_OPERATION_STATUS_65527.RideControlOperationStatus_3447 == 3){
+		TX_CMD_Lamp.RideControl1 = 0;
+		TX_CMD_Lamp.RideControl2 = 0;
+	}
+
 
 	if(RX_WEIGHING_SYSTEM_STATUS_65450.WeighingSystemAccumulationMode_1941 == 0){
 		TX_CMD_Lamp.WorkLoad1 = 0;
@@ -3098,6 +3109,8 @@ void SetKeypadLamp()
 		TX_CMD_Lamp.BeaconLamp = 0;
 	else if(RX_ELECTRICAL_SWITCH_RELAY_OPERATION_STATUS_65527.BeaconLampOperationStatus_3444 == 1)
 		TX_CMD_Lamp.BeaconLamp = 1;
+	else if(RX_ELECTRICAL_SWITCH_RELAY_OPERATION_STATUS_65527.BeaconLampOperationStatus_3444 == 3)
+		TX_CMD_Lamp.BeaconLamp = 0;
 
 	if(RX_ELECTRICAL_SWITCH_RELAY_OPERATION_STATUS_65527.RearWiperOperationStatus_3451 == 0)
 		TX_CMD_Lamp.RearWiper = 0;
@@ -3105,11 +3118,15 @@ void SetKeypadLamp()
 		||	RX_ELECTRICAL_SWITCH_RELAY_OPERATION_STATUS_65527.RearWiperOperationStatus_3451 == 2)
 		TX_CMD_Lamp.RearWiper = 1;
 
-	if(RX_INDICATOR_LAMP_65428.MirrorHeaterStatus_724 == 0)
+	if(RX_ELECTRICAL_SWITCH_RELAY_OPERATION_STATUS_65527.MirrorHeatOperationStatus_3450 == 3)
 		TX_CMD_Lamp.MirrorHeat = 0;
-	else if(RX_INDICATOR_LAMP_65428.MirrorHeaterStatus_724 == 1)
-		TX_CMD_Lamp.MirrorHeat = 1;
-
+	else
+	{
+		if(RX_INDICATOR_LAMP_65428.MirrorHeaterStatus_724 == 0)
+			TX_CMD_Lamp.MirrorHeat = 0;
+		else if(RX_INDICATOR_LAMP_65428.MirrorHeaterStatus_724 == 1)
+			TX_CMD_Lamp.MirrorHeat = 1;
+	}
 
 	if(RX_DETENT_MODE_STATUS_61184_124.BoomDetentMode_223 > 0 && RX_DETENT_MODE_STATUS_61184_124.BoomDetentMode_223 < 4)
 		TX_CMD_Lamp.AutoPosition1 = 1;
@@ -3126,6 +3143,8 @@ void SetKeypadLamp()
 		TX_CMD_Lamp.FineModulation = 0;
 	else if(RX_WHEEL_LOADER_EHCU_STATUS_65517.FlowFineModulationOperation_2302 == 1)
 		TX_CMD_Lamp.FineModulation = 1;
+	else
+		TX_CMD_Lamp.FineModulation = 0;
 
 
 

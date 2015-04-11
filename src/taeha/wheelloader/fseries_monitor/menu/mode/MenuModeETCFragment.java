@@ -86,7 +86,8 @@ public class MenuModeETCFragment extends MenuBodyList_ParentFragment{
 		setListTitle1(ParentActivity.getResources().getString(string.Speedometer_Setting));
 		setListTitle2(ParentActivity.getResources().getString(string.Cooling_Fan_Reverse_Mode));
 		setListTitle3(ParentActivity.getResources().getString(string.Wiper_Level_Setting));
-		setListTitle4(ParentActivity.getResources().getString(string.Camera_Setting));
+		//setListTitle4(ParentActivity.getResources().getString(string.Camera_Setting));
+		setListTitle4(ParentActivity.getResources().getString(string.Calibration));
 		if(CAN1Comm.Get_CheckBKCUComm() == 1){
 			setListTitle5(ParentActivity.getResources().getString(string.Engine_Auto_Shutdown));
 			setClickableList5(true);
@@ -167,7 +168,11 @@ public class MenuModeETCFragment extends MenuBodyList_ParentFragment{
 		else
 			ParentActivity.StartAnimationRunningTimer();
 		
-		ParentActivity._MenuBaseFragment.showBodyCameraSettingAnimation();
+		// ++, 150409 cjg
+		ParentActivity._MenuBaseFragment._MenuModeFragment.HideTab();
+		ParentActivity._MenuBaseFragment._MenuModeFragment.HideETC();
+		ParentActivity._MenuBaseFragment._MenuModeFragment.showCalibrationSetting();
+		// --, 150409 cjg
 		CursurIndex = 4;
 		CursurDisplay(CursurIndex);
 		ParentActivity._MenuBaseFragment._MenuModeFragment.SetModeFocusIndex(MenuModeFragment.STATE_CURSUR_LIST);

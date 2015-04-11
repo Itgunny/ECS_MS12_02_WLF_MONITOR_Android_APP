@@ -192,7 +192,7 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="171dp"
             android:gravity="center"
-            android:text="99.9" />
+            android:text="00" />
 
         <TextView
             android:id="@+id/textView_menu_body_monitoring_fuelhistory_moderecord_graph_text_2"
@@ -208,7 +208,7 @@
             android:layout_width="42dp"
             android:layout_height="wrap_content"
             android:layout_marginLeft="188dp"
-            android:layout_toRightOf="@+id/RelativeLayout_menu_body_monitoring_fuelhistory_moderecord_graph_value2"
+            android:layout_toRightOf="@+id/textView_menu_body_monitoring_fuelhistory_moderecord_graph_text_2"
             android:gravity="center"
             android:text="00" />
     </RelativeLayout>

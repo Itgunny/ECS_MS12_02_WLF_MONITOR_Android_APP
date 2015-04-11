@@ -1189,7 +1189,6 @@ public class MainBBaseFragment extends ParentFragment{
 		KeyBodyChangeAnimation.StartDisappearAnimation();
 	}
 	public void showQuickScreenAnimation(){
-		
 		_MainBodyShiftAnimation.StartShiftZeroAnimation();
 		_MainBVirtualKeyShiftAnimation.StartShiftZeroAnimation();
 	
@@ -1214,7 +1213,6 @@ public class MainBBaseFragment extends ParentFragment{
 		VirtualKeyChangeAnimation.StartChangeAnimation(_MainBVirtualKeyFragment);
 		
 		IndicatorChangeAnimation.StartDisappearAnimation();
-	
 	}
 	
 	public void showVirtualKeytoQuickScreenAnimation(){
@@ -1242,11 +1240,7 @@ public class MainBBaseFragment extends ParentFragment{
 			_KeyBodyBGShiftAnimation.StartShiftAnimation();
 			VirtualKeyChangeAnimation.StartDisappearAnimation();
 
-			// ++, 150407 bwk
-			if(ParentActivity.ScreenIndex >= ParentActivity.SCREEN_STATE_MAIN_B_QUICK_TOP)
-				IndicatorChangeAnimation.StartChangeAnimation(_MainBIndicatorFragment);		
-			// --, 150407 bwk
-			
+			IndicatorChangeAnimation.StartChangeAnimation(_MainBIndicatorFragment);
 		}else{
 
 		}
@@ -1451,6 +1445,7 @@ public class MainBBaseFragment extends ParentFragment{
 	/////////////////////////////////////////////////////////////////////
 	public void KeyButtonClick(final int key){
 		Log.d(TAG,"KeyButtonClick : 0x" + Integer.toHexString(key));
+		Log.d(TAG,"KeyButtonClick ParentActivity.ScreenIndex"+ParentActivity.ScreenIndex);	
 		
 		// TODO Auto-generated method stub
 		switch (key) {
@@ -1524,16 +1519,16 @@ public class MainBBaseFragment extends ParentFragment{
 			showDetentAnimation();
 			break;
 		case CAN1CommManager.FINEMODULATION:
-			if(CAN1Comm.Get_ComponentCode_1699_PGN65330_EHCU() != CAN1CommManager.STATE_COMPONENTCODE_EHCU){
-				ParentActivity.showFineModulation();	// ++, --, 150402 bwk
-			}else{
+//			if(CAN1Comm.Get_ComponentCode_1699_PGN65330_EHCU() != CAN1CommManager.STATE_COMPONENTCODE_EHCU){
+//				ParentActivity.showFineModulation();	// ++, --, 150402 bwk
+//			}else{
 				if(ParentActivity.AnimationRunningFlag == true)
 					return;
 				if(ParentActivity.ScreenIndex != ParentActivity.SCREEN_STATE_MAIN_B_KEY_FINEMODULATION)
 					showFineModulationAnimation();
 				else
 					_MainBKeyFineModulationFragment.ClickHardKey();
-			}
+//			}
 
 			break;
 		case CAN1CommManager.CAMERA:
@@ -1609,6 +1604,9 @@ public class MainBBaseFragment extends ParentFragment{
 		case  Home.SCREEN_STATE_MAIN_B_QUICK_MULTICLOSE:
 			ParentActivity._MultimediaClosePopup.ClickLeft();
 			break;
+		case Home.SCREEN_STATE_MAIN_B_QUICK_MIRACLOSE:
+			ParentActivity._MiracastClosePopup.ClickLeft();
+			break;
 		}
 	}
 	
@@ -1631,6 +1629,9 @@ public class MainBBaseFragment extends ParentFragment{
 			break;
 		case  Home.SCREEN_STATE_MAIN_B_QUICK_MULTICLOSE:
 			ParentActivity._MultimediaClosePopup.ClickRight();
+			break;
+		case Home.SCREEN_STATE_MAIN_B_QUICK_MIRACLOSE:
+			ParentActivity._MiracastClosePopup.ClickRight();
 			break;
 			
 		}
@@ -1677,9 +1678,6 @@ public class MainBBaseFragment extends ParentFragment{
 		case Home.SCREEN_STATE_MAIN_B_KEY_FINEMODULATION:
 			showKeytoDefaultScreenAnimation();
 			break;	
-		case Home.SCREEN_STATE_MAIN_B_KEY_FINEMODULATION_POPUP:
-			ParentActivity._FineModulationPouup.ClickESC();
-			break;
 		case Home.SCREEN_STATE_MAIN_B_BRKAEPEDALCALIBRATION_TOP:
 		case Home.SCREEN_STATE_MAIN_B_AEB_TOP:
 			showCalibrationtoDefaultScreenAnimation();
@@ -1700,6 +1698,10 @@ public class MainBBaseFragment extends ParentFragment{
 		case  Home.SCREEN_STATE_MAIN_B_QUICK_MULTICLOSE:
 			ParentActivity._MultimediaClosePopup.ClickESC();
 			break;
+		case Home.SCREEN_STATE_MAIN_B_QUICK_MIRACLOSE:
+			ParentActivity._MiracastClosePopup.ClickESC();
+			break;
+			
 		default:
 			break;
 		}
@@ -1723,11 +1725,11 @@ public class MainBBaseFragment extends ParentFragment{
 		case Home.SCREEN_STATE_MAIN_B_RIGHTUP_HOURODMETER:
 			_MainBRightUpHourOdometerSelectFragment.ClickEnter();
 			break;
-		case Home.SCREEN_STATE_MAIN_B_KEY_FINEMODULATION_POPUP:
-			ParentActivity._FineModulationPouup.ClickEnter();
-			break;
 		case  Home.SCREEN_STATE_MAIN_B_QUICK_MULTICLOSE:
-			ParentActivity._MultimediaClosePopup.ClickLeft();
+			ParentActivity._MultimediaClosePopup.ClickEnter();
+			break;
+		case Home.SCREEN_STATE_MAIN_B_QUICK_MIRACLOSE:
+			ParentActivity._MiracastClosePopup.ClickEnter();
 			break;
 		default:
 			_MainBLeftUpMachineStatusFragment.ClickEnter();

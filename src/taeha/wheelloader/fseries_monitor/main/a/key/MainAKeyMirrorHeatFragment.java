@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.RadioButton;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import taeha.wheelloader.fseries_monitor.main.CAN1CommManager;
 import taeha.wheelloader.fseries_monitor.main.ParentFragment;
@@ -20,6 +21,9 @@ public class MainAKeyMirrorHeatFragment extends ParentFragment{
 	//RESOURCE////////////////////////////////////////
 	TextView textViewOK;
 	TextView textViewCancel;
+	
+	RelativeLayout	layoutAvailable;
+	RelativeLayout	layoutNotAvailable;
 	//////////////////////////////////////////////////
 	
 	//VALUABLE////////////////////////////////////////
@@ -57,10 +61,12 @@ public class MainAKeyMirrorHeatFragment extends ParentFragment{
 	//Common Function//////////////////////////////
 	@Override
 	protected void InitResource() {
-		// TODO Auto-generated method stub
-		
+		// TODO Auto-generated method stub	
 		textViewOK = (TextView)mRoot.findViewById(R.id.textView_key_main_a_mirrorheat_ok);
 		textViewCancel = (TextView)mRoot.findViewById(R.id.textView_key_main_a_mirrorheat_cancel);
+
+		layoutAvailable = (RelativeLayout)mRoot.findViewById(R.id.RelativeLayout_key_main_a_mirrorheat_available);
+		layoutNotAvailable = (RelativeLayout)mRoot.findViewById(R.id.RelativeLayout_key_main_a_mirrorheat_notavailable);
 	}
 	
 	protected void InitValuables() {
@@ -99,6 +105,20 @@ public class MainAKeyMirrorHeatFragment extends ParentFragment{
 	@Override
 	protected void UpdateUI() {
 		// TODO Auto-generated method stub
+		KeyBGDisplay(MirrorHeat);
+	}
+	/////////////////////////////////////////////////////////////////////	
+	public void KeyBGDisplay(int Data){
+		switch (Data){
+		case CAN1CommManager.DATA_STATE_NOTAVAILABLE:
+			layoutAvailable.setVisibility(View.INVISIBLE);
+			layoutNotAvailable.setVisibility(View.VISIBLE);
+			break;
+		default:
+			layoutAvailable.setVisibility(View.VISIBLE);
+			layoutNotAvailable.setVisibility(View.INVISIBLE);
+			break;
+		}
 	}
 	/////////////////////////////////////////////////////////////////////	
 	

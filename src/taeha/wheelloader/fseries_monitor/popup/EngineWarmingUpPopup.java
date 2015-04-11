@@ -153,7 +153,7 @@ public class EngineWarmingUpPopup extends ParentPopup{
 		}
 	}
 	public void ClickESC(){
-		
+		this.dismiss();
 	}
 	public void ClickEnter(){
 		switch (CursurIndex) {

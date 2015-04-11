@@ -90,8 +90,9 @@ public class MenuModeEngTMFragment extends MenuBodyList_ParentFragment{
 			setListTitle3(ParentActivity.getResources().getString(string.CCO_Mode));
 		
 		setListTitle4(ParentActivity.getResources().getString(string.Shift_Mode));
-		
-		if(CAN1Comm.Get_ComponentCode_1699_PGN65330_EHCU() != CAN1CommManager.STATE_COMPONENTCODE_EHCU){
+
+		if(ParentActivity._CheckModel.GetMCUVersion(CAN1Comm.Get_ComponentBasicInformation_1698_PGN65330()) == CheckModel.MODEL_940
+			|| ParentActivity._CheckModel.GetMCUVersion(CAN1Comm.Get_ComponentBasicInformation_1698_PGN65330()) == CheckModel.MODEL_935){
 			setClickableList5(false);
 		}else if(ParentActivity._CheckModel.GetTCUModel(CAN1Comm.Get_ComponentBasicInformation_1698_PGN65330_TCU()) == CheckModel.TCU_4SPEED){
 			setClickableList5(false);
@@ -195,7 +196,8 @@ public class MenuModeEngTMFragment extends MenuBodyList_ParentFragment{
 		case MenuModeFragment.STATE_CURSUR_LIST:
 			switch (CursurIndex) {
 			case 1:
-				if(CAN1Comm.Get_ComponentCode_1699_PGN65330_EHCU() != CAN1CommManager.STATE_COMPONENTCODE_EHCU){
+				if(ParentActivity._CheckModel.GetMCUVersion(CAN1Comm.Get_ComponentBasicInformation_1698_PGN65330()) == CheckModel.MODEL_940
+					|| ParentActivity._CheckModel.GetMCUVersion(CAN1Comm.Get_ComponentBasicInformation_1698_PGN65330()) == CheckModel.MODEL_935){
 					CursurIndex = 4;
 				}else if(ParentActivity._CheckModel.GetTCUModel(CAN1Comm.Get_ComponentBasicInformation_1698_PGN65330_TCU()) == CheckModel.TCU_4SPEED){
 					CursurIndex = 4;
@@ -255,7 +257,8 @@ public class MenuModeEngTMFragment extends MenuBodyList_ParentFragment{
 				CursurDisplay(CursurIndex);
 				break;
 			case 4:
-				if(CAN1Comm.Get_ComponentCode_1699_PGN65330_EHCU() != CAN1CommManager.STATE_COMPONENTCODE_EHCU){
+				if(ParentActivity._CheckModel.GetMCUVersion(CAN1Comm.Get_ComponentBasicInformation_1698_PGN65330()) == CheckModel.MODEL_940
+					|| ParentActivity._CheckModel.GetMCUVersion(CAN1Comm.Get_ComponentBasicInformation_1698_PGN65330()) == CheckModel.MODEL_935){
 					CursurIndex = 1;
 				}else if(ParentActivity._CheckModel.GetTCUModel(CAN1Comm.Get_ComponentBasicInformation_1698_PGN65330_TCU()) == CheckModel.TCU_4SPEED){
 					CursurIndex = 1;

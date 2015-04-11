@@ -84,10 +84,7 @@ public class MainALeftDownFuelSelectFragment extends ParentFragment{
 	
 	protected void InitValuables() {
 		// TODO Auto-generated method stub
-		super.InitValuables();
-		
-		CursurIndex = 1;
-		CursurDisplay(CursurIndex);		
+		super.InitValuables();	
 	}
 	@Override
 	protected void InitButtonListener() {
@@ -129,9 +126,9 @@ public class MainALeftDownFuelSelectFragment extends ParentFragment{
 	public void FuelDisplay(int Data){
 		switch (Data) {
 		case CAN1CommManager.DATA_STATE_FUEL_NOSELECT:
-			radioAverageFuel.setChecked(false);
-			radioADaysFuelUsed.setChecked(false);			
-			break;
+//			radioAverageFuel.setChecked(false);
+//			radioADaysFuelUsed.setChecked(false);	
+//			break;
 		case CAN1CommManager.DATA_STATE_AVERAGE_FUEL_RATE:
 			radioAverageFuel.setChecked(true);
 			radioADaysFuelUsed.setChecked(false);			
@@ -143,7 +140,8 @@ public class MainALeftDownFuelSelectFragment extends ParentFragment{
 		default:
 			break;
 		}
-		
+		CursurIndex = Data;
+		CursurDisplay(CursurIndex);	
 	}
 	
 	public void ClickAverageFuelRate(){

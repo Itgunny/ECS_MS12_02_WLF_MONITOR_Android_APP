@@ -58,7 +58,7 @@ public class UserData {
 		BrightnessManualAuto = Home.BRIGHTNESS_MANUAL;
 		BrightnessManualLevel = Home.BRIGHTNESS_MAX;
 		BrightnessAutoDayLevel = Home.BRIGHTNESS_MAX;
-		BrightnessAutoNightLevel = Home.BRIGHTNESS_MAX;
+		BrightnessAutoNightLevel = 4;
 		BrightnessAutoStartTime = 8;
 		BrightnessAutoEndTime = 18;
 		// --, 150407 bwk		

@@ -43,6 +43,7 @@ public class MenuModeFragment extends ParentFragment{
 	public MenuModeHYDFragment 				_MenuModeHYDFragment;
 	public MenuModeETCFragment 				_MenuModeETCFragment;
 	public EngineSettingFragment 			_EngineSettingFragment;
+	public CalibrationFragment				_CalibrationFragment;
 	//////////////////////////////////////////////////
 	
 	//ANIMATION///////////////////////////////////////
@@ -95,14 +96,14 @@ public class MenuModeFragment extends ParentFragment{
 		_MenuModeHYDFragment = new MenuModeHYDFragment();
 		_MenuModeETCFragment = new MenuModeETCFragment();
 		_EngineSettingFragment = new EngineSettingFragment();
-		
+		_CalibrationFragment = new CalibrationFragment();
 		
 		 // ++, 150331 cjg
-		//ModeFocusIndex = STATE_CURSUR_LIST;
-	      ModeFocusIndex = STATE_CURSUR_TAB;
-	      
-	      ParentActivity._MenuBaseFragment._MenuModeFragment._MenuModeEngTMFragment.CursurIndex = 0;
-	      ParentActivity._MenuBaseFragment._MenuModeFragment._MenuModeEngTMFragment.CursurDisplay(CursurIndex);
+		ModeFocusIndex = STATE_CURSUR_LIST;
+	    //  ModeFocusIndex = STATE_CURSUR_TAB;
+//	      
+//	      ParentActivity._MenuBaseFragment._MenuModeFragment._MenuModeEngTMFragment.CursurIndex = 0;
+//	      ParentActivity._MenuBaseFragment._MenuModeFragment._MenuModeEngTMFragment.CursurDisplay(CursurIndex);
 	      // --, 150331 cjg
 	}
 	@Override
@@ -148,7 +149,11 @@ public class MenuModeFragment extends ParentFragment{
 		transaction.replace(R.id.FrameLayout_menu_body_mode_list, _EngineSettingFragment);
 		transaction.commit();
 	}
-	
+	public void showCalibrationSetting(){
+		android.app.FragmentTransaction transaction = getFragmentManager().beginTransaction();
+		transaction.replace(R.id.FrameLayout_menu_body_mode_list, _CalibrationFragment);
+		transaction.commit();
+	}	
 	public void showBlank(){
 		android.app.FragmentTransaction transaction = getFragmentManager().beginTransaction();
 		transaction.remove(_MenuModeEngTMFragment);
@@ -166,6 +171,11 @@ public class MenuModeFragment extends ParentFragment{
 		transaction.remove(_MenuModeEngTMFragment);
 		transaction.commit();	
 	}
+	public void HideETC(){
+		android.app.FragmentTransaction transaction = getFragmentManager().beginTransaction();
+		transaction.remove(_MenuModeETCFragment);
+		transaction.commit();	
+	}	
 	//Navi KeyButton//////////////////////////////////////////////////////////
 	public void ClickLeft(){
 

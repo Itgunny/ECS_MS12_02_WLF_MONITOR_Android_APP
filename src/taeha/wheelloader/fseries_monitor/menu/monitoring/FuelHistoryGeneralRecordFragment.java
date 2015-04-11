@@ -195,7 +195,18 @@ public class FuelHistoryGeneralRecordFragment  extends ParentFragment{
 		ClickOK();
 	}
 	public void ClickEnter(){
-		ClickOK();
+		switch (CursurIndex) {
+		case 1:
+			ClickAverageInitial();
+			break;
+		case 2:
+			ClickDaysInitial();
+			break;
+		case 3:
+			ClickOK();
+			break;
+	}		
+		
 	}
 	public void CursurDisplay(int Index){
 		textViewAvgInital.setPressed(false);

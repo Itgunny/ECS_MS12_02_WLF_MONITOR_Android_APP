@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.RadioButton;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import taeha.wheelloader.fseries_monitor.main.CAN1CommManager;
 import taeha.wheelloader.fseries_monitor.main.ParentFragment;
@@ -23,6 +24,9 @@ public class MainAKeyRideControlFragment extends ParentFragment{
 	RadioButton radioOnConditional;
 	
 	ImageButton imgbtnOK;
+	
+	RelativeLayout	layoutAvailable;
+	RelativeLayout	layoutNotAvailable;
 	//////////////////////////////////////////////////
 	
 	//VALUABLE////////////////////////////////////////
@@ -65,6 +69,9 @@ public class MainAKeyRideControlFragment extends ParentFragment{
 		radioOnConditional = (RadioButton)mRoot.findViewById(R.id.radioButton_key_main_a_ridecontrol_on_conditional);
 
 		imgbtnOK = (ImageButton)mRoot.findViewById(R.id.ImageButton_key_main_a_ridecontrol_low_ok);
+
+		layoutAvailable = (RelativeLayout)mRoot.findViewById(R.id.RelativeLayout_key_main_a_ridecontrol_available);
+		layoutNotAvailable = (RelativeLayout)mRoot.findViewById(R.id.RelativeLayout_key_main_a_ridecontrol_notavailable);
 	}
 	
 	protected void InitValuables() {
@@ -113,13 +120,27 @@ public class MainAKeyRideControlFragment extends ParentFragment{
 	@Override
 	protected void GetDataFromNative() {
 		// TODO Auto-generated method stub
-		
+		RideControl = CAN1Comm.Get_RideControlOperationStatus_3447_PGN65527();
 	}
 
 	@Override
 	protected void UpdateUI() {
 		// TODO Auto-generated method stub
-		
+		RideControlDisplay(RideControl);
+		KeyBGDisplay(RideControl);
+	}
+	/////////////////////////////////////////////////////////////////////	
+	public void KeyBGDisplay(int Data){
+		switch (Data){
+		case CAN1CommManager.DATA_STATE_NOTAVAILABLE:
+			layoutAvailable.setVisibility(View.INVISIBLE);
+			layoutNotAvailable.setVisibility(View.VISIBLE);
+			break;
+		default:
+			layoutAvailable.setVisibility(View.VISIBLE);
+			layoutNotAvailable.setVisibility(View.INVISIBLE);
+			break;
+		}
 	}
 	/////////////////////////////////////////////////////////////////////	
 	public void RideControlDisplay(int Data){

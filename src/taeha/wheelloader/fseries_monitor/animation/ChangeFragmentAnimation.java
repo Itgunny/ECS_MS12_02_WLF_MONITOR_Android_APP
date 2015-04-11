@@ -59,7 +59,10 @@ public class ChangeFragmentAnimation extends View{
 			public void onAnimationStart(Animator animation) {
 				// TODO Auto-generated method stub
 				AnimiationRunning = true;
-				
+				// ++, 150409 cjg
+				if(nFrameLayoutID == R.id.FrameLayout_screen_main_b_virtualkey)
+					viewItem.setVisibility(View.INVISIBLE);
+				// --, 150409 cjg
 			}
 			
 			@Override

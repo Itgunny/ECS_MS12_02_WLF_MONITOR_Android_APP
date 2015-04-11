@@ -213,6 +213,8 @@ public class CheckModel {
 			return TCU_4SPEED;
 		}else if(strModel.equals("6057018633") == true){
 			return TCU_4SPEED;
+		}else if(strModel.equals("6057018809") == true){
+			return TCU_4SPEED;
 		}else if(strModel.equals("6057018646") == true){
 			return TCU_4SPEED;
 		}else{

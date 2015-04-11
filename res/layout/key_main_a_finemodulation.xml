@@ -6,7 +6,7 @@
     android:background="@drawable/main_a_bg_right" >
 
     <RelativeLayout
-        android:id="@+id/RelativeLayout_key_main_a_finemodulation_radio"
+        android:id="@+id/RelativeLayout_key_main_a_finemodulation_available"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerVertical="true" >
@@ -39,18 +39,17 @@
     </RelativeLayout>
 
     <RelativeLayout
-        android:id="@+id/RelativeLayout_key_main_a_finemodulation_text"
+        android:id="@+id/RelativeLayout_key_main_a_finemodulation_notavailable"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
+        android:layout_marginLeft="205dp"
         android:layout_centerVertical="true"
         android:visibility="invisible" >
 
         <TextView
-            android:id="@+id/textView_key_main_a_finemodulation"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="This machine does not support this feature."
+            android:text="@string/This_machine_does_not_support_this_feature"
             android:textColor="@drawable/_selector_radio_txt_white_amber"
             android:textSize="25sp" />
     </RelativeLayout>

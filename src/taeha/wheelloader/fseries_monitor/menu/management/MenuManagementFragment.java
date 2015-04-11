@@ -95,14 +95,13 @@ public class MenuManagementFragment extends MenuBodyList_ParentFragment{
 		setClickableList3(true);
 		setClickableList4(true);
 		setClickableList5(true);
-		setClickableList6(true);	// ++, --, 150323 bwk
 		
 		setListTitle1(ParentActivity.getResources().getString(string.Machine_Security));
 		setListTitle2(ParentActivity.getResources().getString(string.Maintenance));
-		setListTitle3(ParentActivity.getResources().getString(string.Calibration));
-		setListTitle4(ParentActivity.getResources().getString(string.Service_Menu));
-		setListTitle5(ParentActivity.getResources().getString(string.Change_AS_Phone_Number));
-		setListTitle6(ParentActivity.getResources().getString(string.Software_Update));		// ++, --, 150323 bwk
+		//setListTitle3(ParentActivity.getResources().getString(string.Calibration));
+		setListTitle3(ParentActivity.getResources().getString(string.Service_Menu));
+		setListTitle4(ParentActivity.getResources().getString(string.Change_AS_Phone_Number));
+		setListTitle5(ParentActivity.getResources().getString(string.Software_Update));		// ++, --, 150323 bwk
 	}
 
 	//////////////////////////////////////////////////////////////////////
@@ -141,7 +140,8 @@ public class MenuManagementFragment extends MenuBodyList_ParentFragment{
 		else
 			ParentActivity.StartAnimationRunningTimer();
 		
-		ParentActivity._MenuBaseFragment.showBodyCalibration();
+		//ParentActivity._MenuBaseFragment.showBodyCalibration();
+		ParentActivity._MenuBaseFragment.showBodyServiceMenuPassword();
 		CursurIndex = 3;
 		CursurDisplay(CursurIndex);
 	}
@@ -153,7 +153,7 @@ public class MenuManagementFragment extends MenuBodyList_ParentFragment{
 			return;
 		else
 			ParentActivity.StartAnimationRunningTimer();
-		ParentActivity._MenuBaseFragment.showBodyServiceMenuPassword();
+		ParentActivity._MenuBaseFragment.showBodyChangeASPhoneNumberAnimation();
 		CursurIndex = 4;
 		CursurDisplay(CursurIndex);
 		
@@ -166,7 +166,7 @@ public class MenuManagementFragment extends MenuBodyList_ParentFragment{
 			return;
 		else
 			ParentActivity.StartAnimationRunningTimer();
-		ParentActivity._MenuBaseFragment.showBodyChangeASPhoneNumberAnimation();
+		ParentActivity._MenuBaseFragment.showBodySoftwareUpdatePassword();
 		CursurIndex = 5;
 		CursurDisplay(CursurIndex);
 	}
@@ -179,7 +179,6 @@ public class MenuManagementFragment extends MenuBodyList_ParentFragment{
 			return;
 		else
 			ParentActivity.StartAnimationRunningTimer();
-		ParentActivity._MenuBaseFragment.showBodySoftwareUpdatePassword();
 		CursurIndex = 6;
 		CursurDisplay(CursurIndex);
 		// --, 150323 bwk
@@ -192,10 +191,7 @@ public class MenuManagementFragment extends MenuBodyList_ParentFragment{
 			ParentActivity._MenuBaseFragment._MenuListLeftFragment.ClickMonitoring();
 			break;
 		case 1:
-			// ++, 150323 bwk
-			//CursurIndex = 5;
-			CursurIndex = 6;
-			// --, 150323 bwk
+			CursurIndex = 5;
 			CursurDisplay(CursurIndex);
 			break;
 		case 2:
@@ -248,8 +244,7 @@ public class MenuManagementFragment extends MenuBodyList_ParentFragment{
 			break;
 		case 5:
 			// ++, 150323 bwk
-			//CursurIndex = 1;
-			CursurIndex++;
+			CursurIndex = 1;
 			// --, 150323 bwk
 			CursurDisplay(CursurIndex);
 			break;

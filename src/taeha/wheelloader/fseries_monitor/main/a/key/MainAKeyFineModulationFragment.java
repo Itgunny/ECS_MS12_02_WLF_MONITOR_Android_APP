@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.RadioButton;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import taeha.wheelloader.fseries_monitor.main.CAN1CommManager;
 import taeha.wheelloader.fseries_monitor.main.ParentFragment;
@@ -19,7 +20,10 @@ public class MainAKeyFineModulationFragment extends ParentFragment{
 	//////////////////////////////////////////////////
 	//RESOURCE////////////////////////////////////////
 	RadioButton radioOff;
-	RadioButton radioOn;
+	RadioButton radioOn;	
+	
+	RelativeLayout	layoutAvailable;
+	RelativeLayout	layoutNotAvailable;
 	//////////////////////////////////////////////////
 	
 	//VALUABLE////////////////////////////////////////
@@ -61,6 +65,9 @@ public class MainAKeyFineModulationFragment extends ParentFragment{
 		// TODO Auto-generated method stub
 		radioOff = (RadioButton)mRoot.findViewById(R.id.radioButton_key_main_a_finemodulation_off);
 		radioOn = (RadioButton)mRoot.findViewById(R.id.radioButton_key_main_a_finemodulation_on);
+
+		layoutAvailable = (RelativeLayout)mRoot.findViewById(R.id.RelativeLayout_key_main_a_finemodulation_available);
+		layoutNotAvailable = (RelativeLayout)mRoot.findViewById(R.id.RelativeLayout_key_main_a_finemodulation_notavailable);
 	}
 	
 	protected void InitValuables() {
@@ -99,9 +106,22 @@ public class MainAKeyFineModulationFragment extends ParentFragment{
 	@Override
 	protected void UpdateUI() {
 		// TODO Auto-generated method stub
+		EHCUDisplay(CAN1Comm.Get_ComponentCode_1699_PGN65330_EHCU());
 		FineModulationDisplay(FineModulation);
 	}
 	/////////////////////////////////////////////////////////////////////	
+	public void EHCUDisplay(int Data){
+		switch (Data){
+		case CAN1CommManager.STATE_COMPONENTCODE_EHCU:
+			layoutAvailable.setVisibility(View.VISIBLE);
+			layoutNotAvailable.setVisibility(View.INVISIBLE);
+			break;
+		default:
+			layoutAvailable.setVisibility(View.INVISIBLE);
+			layoutNotAvailable.setVisibility(View.VISIBLE);
+			break;
+		}
+	}
 	public void FineModulationDisplay(int Data){
 		switch (Data) {
 		case CAN1CommManager.DATA_STATE_OFF:

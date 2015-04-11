@@ -84,6 +84,30 @@ public class FuelInitalPopup extends ParentPopup{
 		// TODO Auto-generated method stub
 		super.dismiss();
 		ParentActivity.ScreenIndex = ParentActivity.OldScreenIndex;
+		try {
+			switch (SelectMode) {
+			case CAN1CommManager.DATA_STATE_HOURLY_FUEL_RATE_INFO_CLEAR:
+				ParentActivity._MenuBaseFragment._FuelHistoryHourlyRecordFragment.CursurDisplay(2);
+				break;
+			case CAN1CommManager.DATA_STATE_DAILY_FUEL_RATE_INFO_CLEAR:
+				ParentActivity._MenuBaseFragment._FuelHistoryDailyRecordFragment.CursurDisplay(2);
+				break;
+			case CAN1CommManager.DATA_STATE_MODE_FUEL_RATE_INFO_CLEAR:
+				ParentActivity._MenuBaseFragment._FuelHistoryModeRecordFragment.CursurDisplay(2);
+				break;
+			case CAN1CommManager.DATA_STATE_AVERAGE_FUEL_RATE_INFO_CLEAR:
+				ParentActivity._MenuBaseFragment._FuelHistoryGeneralRecordFragment.CursurDisplay(1);
+				break;
+			case CAN1CommManager.DATA_STATE_A_DAYS_FUEL_USED_CLEAR:
+				ParentActivity._MenuBaseFragment._FuelHistoryGeneralRecordFragment.CursurDisplay(2);
+				break;
+			default:
+				break;		
+			}
+		} catch (NullPointerException e) {
+			// TODO: handle exception
+			Log.e(TAG,"NullPointerException dismiss");
+		}		
 	}
 
 	@Override
@@ -157,6 +181,8 @@ public class FuelInitalPopup extends ParentPopup{
 		
 	}
 	public void setTitle(int Index){
+		setMode(Index);
+		
 		switch (Index) {
 		case CAN1CommManager.DATA_STATE_HOURLY_FUEL_RATE_INFO_CLEAR:
 			textViewTitle.setText(ParentActivity.getResources().getString(string.Initialize_) 

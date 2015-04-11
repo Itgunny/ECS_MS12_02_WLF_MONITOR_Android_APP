@@ -99,16 +99,36 @@ public class MainALeftUpMachineStatusSelectFragment2 extends ParentFragment{
 		textViewOK = (TextView)mRoot.findViewById(R.id.textView_leftup_main_a_machinestatus_select_ok);
 		
 		imgbtnOK = (ImageButton)mRoot.findViewById(R.id.ImageButton_leftup_main_a_machinestatus_select_ok);
-		 
-		CursurIndex = 1;
-		CursurDisplay(CursurIndex);
 	}
 	
 	protected void InitValuables() {
 		// TODO Auto-generated method stub
 		super.InitValuables();
 		SelectFlag = SELECT_UPPER;
-		CursurIndex = 1;
+		switch (ParentActivity.MachineStatusUpperIndex) {
+		case CAN1CommManager.DATA_STATE_MACHINESTATUS_HYD:
+			CursurIndex = 1;
+			break;
+		case CAN1CommManager.DATA_STATE_MACHINESTATUS_TMOIL:
+			CursurIndex = 2;
+			break;
+		case CAN1CommManager.DATA_STATE_MACHINESTATUS_BATTERY:
+			CursurIndex = 3;
+			break;
+		case CAN1CommManager.DATA_STATE_MACHINESTATUS_WEIGHING:
+			CursurIndex = 4;
+			break;
+		case CAN1CommManager.DATA_STATE_MACHINESTATUS_COOLANT:
+			CursurIndex = 5;
+			break;
+		case CAN1CommManager.DATA_STATE_MACHINESTATUS_FRONTAXLE:
+			CursurIndex = 6;
+			break;
+		case CAN1CommManager.DATA_STATE_MACHINESTATUS_NOSELECT:
+		default:
+			CursurIndex = 1;
+			break;
+		}
 		CursurDisplay(CursurIndex);
 	}
 	@Override

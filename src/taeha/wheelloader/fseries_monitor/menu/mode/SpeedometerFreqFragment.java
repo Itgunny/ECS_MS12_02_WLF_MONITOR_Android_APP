@@ -366,7 +366,6 @@ public class SpeedometerFreqFragment extends ParentFragment{
 			ParentActivity.StartAnimationRunningTimer();
 		ParentActivity._MenuBaseFragment.showBodyModeAnimation();
 		ParentActivity._MenuBaseFragment._MenuModeFragment.setFirstScreen(Home.SCREEN_STATE_MENU_MODE_ETC_TOP);
-
 		
 		CAN1Comm.Set_SettingSelection_PGN61184_105(1);
 		CAN1Comm.Set_SpeedometerFrequency_534_PGN61184_105(SpeedometerFreq);

@@ -1,4 +1,4 @@
-package taeha.wheelloader.fseries_monitor.menu.management;
+package taeha.wheelloader.fseries_monitor.menu.mode;
 
 import java.util.Timer;
 import java.util.TimerTask;
@@ -93,7 +93,7 @@ public class PressureCalibration extends ParentFragment{
 		InitValuables();
 		InitButtonListener();
 		CursurDisplay(CursurIndex);
-		ParentActivity.ScreenIndex = ParentActivity.SCREEN_STATE_MENU_MANAGEMENT_CALIBRATION_PRESSURE_TOP;
+		ParentActivity.ScreenIndex = ParentActivity.SCREEN_STATE_MENU_MODE_ETC_CALIBRATION_PRESSURE_TOP;
 		ParentActivity._MenuBaseFragment._MenuInterTitleFragment.SetTitleText(ParentActivity.getResources().getString(R.string.Boom_Pressure_Calibration));
 		HandleCursurDisplay = new Handler() {
 			@Override
@@ -213,11 +213,17 @@ public class PressureCalibration extends ParentFragment{
 		
 		else if(ParentActivity.OldScreenIndex == ParentActivity.SCREEN_STATE_MENU_MODE_HYD_WORKLOAD_TOP)
 		{
-			ParentActivity.OldScreenIndex = ParentActivity.SCREEN_STATE_MENU_MANAGEMENT_CALIBRATION_PRESSURE_TOP;
+			ParentActivity.OldScreenIndex = ParentActivity.SCREEN_STATE_MENU_MODE_ETC_CALIBRATION_PRESSURE_TOP;
 			ParentActivity._MenuBaseFragment.showBodyWorkLoad();
 		}	
 		else
-			ParentActivity._MenuBaseFragment.showCalibrationAnimation();
+		{
+			// ++, 150409 cjg
+//			ParentActivity._MenuBaseFragment.showCalibrationAnimation();
+			ParentActivity._MenuBaseFragment.showBodyModeAnimation();
+			ParentActivity._MenuBaseFragment._MenuModeFragment.setFirstScreen(Home.SCREEN_STATE_MENU_MODE_ETC_CALIBRATION_TOP);
+			// --, 150409 cjg
+		}
 	}
 	public void ClickStart(){
 		if(Order == 0){

@@ -2,7 +2,6 @@ package taeha.wheelloader.fseries_monitor.main;
 
 import taeha.wheelloader.fseries_monitor.animation.AppearAnimation;
 import taeha.wheelloader.fseries_monitor.animation.ChangeFragmentAnimation;
-import taeha.wheelloader.fseries_monitor.animation.DisappearAnimation;
 import taeha.wheelloader.fseries_monitor.animation.MainBodyShiftAnimation;
 import taeha.wheelloader.fseries_monitor.animation.LeftRightShiftAnimation;
 import taeha.wheelloader.fseries_monitor.main.R.string;
@@ -10,8 +9,6 @@ import taeha.wheelloader.fseries_monitor.menu.MenuInterTitleFragment;
 import taeha.wheelloader.fseries_monitor.menu.MenuListLeftFragment;
 import taeha.wheelloader.fseries_monitor.menu.MenuListTitleFragment;
 import taeha.wheelloader.fseries_monitor.menu.UserSwitching;
-import taeha.wheelloader.fseries_monitor.menu.management.AngleCalibration;
-import taeha.wheelloader.fseries_monitor.menu.management.CalibrationFragment;
 import taeha.wheelloader.fseries_monitor.menu.management.ChangeASPhoneNumberFragment;
 import taeha.wheelloader.fseries_monitor.menu.management.EHCUIOInfoBoomLeverFloatFragment;
 import taeha.wheelloader.fseries_monitor.menu.management.EHCUIOInfoFragment;
@@ -24,7 +21,6 @@ import taeha.wheelloader.fseries_monitor.menu.management.MaintenanceChangeCycleF
 import taeha.wheelloader.fseries_monitor.menu.management.MaintenanceDetailFragment;
 import taeha.wheelloader.fseries_monitor.menu.management.MaintenanceFragment;
 import taeha.wheelloader.fseries_monitor.menu.management.MenuManagementFragment;
-import taeha.wheelloader.fseries_monitor.menu.management.PressureCalibration;
 import taeha.wheelloader.fseries_monitor.menu.management.ServiceMenuListFragment;
 import taeha.wheelloader.fseries_monitor.menu.management.ServiceMenuPasswordFragment;
 import taeha.wheelloader.fseries_monitor.menu.management.ServiceMenuSensorMonitoringFragment;
@@ -32,8 +28,10 @@ import taeha.wheelloader.fseries_monitor.menu.management.ServiceMenuSensorMonito
 import taeha.wheelloader.fseries_monitor.menu.management.ServiceMenuSpeedLimitFragment;
 import taeha.wheelloader.fseries_monitor.menu.management.ServiceMenuWeighingCompensationFragment;
 import taeha.wheelloader.fseries_monitor.menu.management.SoftwareUpdatePasswordFragment;
-import taeha.wheelloader.fseries_monitor.menu.mode.CameraSettingFragment;
+import taeha.wheelloader.fseries_monitor.menu.mode.AngleCalibration;
+import taeha.wheelloader.fseries_monitor.menu.mode.CalibrationFragment;
 import taeha.wheelloader.fseries_monitor.menu.mode.CoolingFanFragment;
+import taeha.wheelloader.fseries_monitor.menu.mode.CoolingFanReverseModeFragment;
 import taeha.wheelloader.fseries_monitor.menu.mode.DetentFragment;
 import taeha.wheelloader.fseries_monitor.menu.mode.EngineAutoShutdownFragment;
 import taeha.wheelloader.fseries_monitor.menu.mode.EngineAutoShutdownPWFragment;
@@ -41,6 +39,7 @@ import taeha.wheelloader.fseries_monitor.menu.mode.EngineDelayShutdownFragment;
 import taeha.wheelloader.fseries_monitor.menu.mode.EngineSpeedFragment;
 import taeha.wheelloader.fseries_monitor.menu.mode.MaxFlowFragment;
 import taeha.wheelloader.fseries_monitor.menu.mode.MenuModeFragment;
+import taeha.wheelloader.fseries_monitor.menu.mode.PressureCalibration;
 import taeha.wheelloader.fseries_monitor.menu.mode.SoftStopFragment;
 import taeha.wheelloader.fseries_monitor.menu.mode.SpeedometerFreqFragment;
 import taeha.wheelloader.fseries_monitor.menu.mode.WiperFragment;
@@ -70,6 +69,7 @@ import taeha.wheelloader.fseries_monitor.menu.monitoring.VersionInfoRMCUFragment
 import taeha.wheelloader.fseries_monitor.menu.monitoring.VersionInfoTCUFragment;
 import taeha.wheelloader.fseries_monitor.menu.multimedia.MenuMultimediaFragment;
 import taeha.wheelloader.fseries_monitor.menu.preference.BrightnessFragment;
+import taeha.wheelloader.fseries_monitor.menu.preference.CameraSettingFragment;
 import taeha.wheelloader.fseries_monitor.menu.preference.ClockFragment;
 import taeha.wheelloader.fseries_monitor.menu.preference.DisplayTypeFragment;
 import taeha.wheelloader.fseries_monitor.menu.preference.DisplayTypeListFragment;
@@ -138,18 +138,19 @@ public class MenuBaseFragment extends ParentFragment{
 	public MenuMultimediaFragment 	_MenuMultimediaFragment;
 
 	//Mode
-	public EngineSpeedFragment 			_EngineSpeedFragment;
-	public WorkLoadFragment 			_WorkLoadFragment;
-	public DetentFragment				_DetentFragment;
-	public MaxFlowFragment 				_MaxFlowFragment;
-	public SoftStopFragment				_SoftStopFragment;
-	public EngineAutoShutdownFragment	_EngineAutoShutdownFragment;
-	public EngineDelayShutdownFragment	_EngineDelayShutdownFragment;
-	public CameraSettingFragment 		_CameraSettingFragment;
-	public CoolingFanFragment			_CoolingFanFragment;
-	public SpeedometerFreqFragment		_SpeedometerFreqFragment;
-	public WiperFragment				_WiperFragment;
-	public EngineAutoShutdownPWFragment	_EngineAutoShutdownPWFragment;
+	public EngineSpeedFragment 				_EngineSpeedFragment;
+	public WorkLoadFragment 				_WorkLoadFragment;
+	public DetentFragment					_DetentFragment;
+	public MaxFlowFragment 					_MaxFlowFragment;
+	public SoftStopFragment					_SoftStopFragment;
+	public EngineAutoShutdownFragment		_EngineAutoShutdownFragment;
+	public EngineDelayShutdownFragment		_EngineDelayShutdownFragment;
+	public CameraSettingFragment 			_CameraSettingFragment;
+	public CoolingFanFragment				_CoolingFanFragment;
+	public CoolingFanReverseModeFragment	_CoolingFanReverseModeFragment;
+	public SpeedometerFreqFragment			_SpeedometerFreqFragment;
+	public WiperFragment					_WiperFragment;
+	public EngineAutoShutdownPWFragment		_EngineAutoShutdownPWFragment;
 	//Monitoring
 	public MachineMonitoringFragment1			_MachineMonitoringFragment1;
 	public MachineMonitoringFragment2			_MachineMonitoringFragment2;
@@ -595,7 +596,7 @@ public class MenuBaseFragment extends ParentFragment{
 			framelayoutListLeft.setVisibility(View.INVISIBLE);
 			showBodyUserSwitchingAnimation();
 			setFirstScreenIndex(0);
-		}else if(Index == Home.SCREEN_STATE_MENU_MANAGEMENT_CALIBRATION_PRESSURE_TOP){
+		}else if(Index == Home.SCREEN_STATE_MENU_MODE_ETC_CALIBRATION_PRESSURE_TOP){
 			framelayoutListTitle.setVisibility(View.INVISIBLE);
 			framelayoutListBody.setVisibility(View.INVISIBLE);
 			framelayoutListLeft.setVisibility(View.INVISIBLE);
@@ -1169,13 +1170,15 @@ public class MenuBaseFragment extends ParentFragment{
 		ListBodyAnimation.StartChangeAnimation(_MachineSecurityListFragment);
 		_MenuListLeftFragment.setFirstScreen(Home.SCREEN_STATE_MENU_MANAGEMENT_TOP);
 	}
-	public void showCalibrationAnimation(){
-		DestroyFragment();
-		InitFragment();
-		showListAnimation();
-		ListBodyAnimation.StartChangeAnimation(_CalibrationFragment);
-		_MenuListLeftFragment.setFirstScreen(Home.SCREEN_STATE_MENU_MANAGEMENT_TOP);
-	}
+	// ++, 150409 cjg
+//	public void showCalibrationAnimation(){
+//		DestroyFragment();
+//		InitFragment();
+//		showListAnimation();
+//		ListBodyAnimation.StartChangeAnimation(_CalibrationFragment);
+//		_MenuListLeftFragment.setFirstScreen(Home.SCREEN_STATE_MENU_MANAGEMENT_TOP);
+//	}
+	// --, 150409 cjg
 	public void showServiceMenuListAnimation(){
 		DestroyFragment();
 		InitFragment();
@@ -1582,7 +1585,7 @@ public class MenuBaseFragment extends ParentFragment{
 		case Home.SCREEN_STATE_MENU_MODE_ETC_AUTOSHUTDOWN_PW:
 			_EngineAutoShutdownPWFragment.ClickLeft();
 			break;
-		case Home.SCREEN_STATE_MENU_MODE_ETC_CAMERASETTING_TOP:
+		case Home.SCREEN_STATE_MENU_PREFERENCE_CAMERASETTING_TOP:
 			_CameraSettingFragment.ClickLeft();
 			break;
 		case Home.SCREEN_STATE_MENU_MONITORING_TOP:
@@ -1660,6 +1663,9 @@ public class MenuBaseFragment extends ParentFragment{
 		case Home.SCREEN_STATE_MENU_MONITORING_FUELHISTORY_MODERECORD:
 			_FuelHistoryModeRecordFragment.ClickLeft();
 			break;
+		case Home.SCREEN_STATE_MENU_MONITORING_FUELHISTORY_INITIAL:
+			ParentActivity._FuelInitalPopup.ClickLeft();
+			break;
 		case Home.SCREEN_STATE_MENU_MANAGEMENT_SERVICE_EHCUINFO_TOP:
 			_EHCUIOInfoFragment.ClickLeft();
 			break;
@@ -1696,22 +1702,22 @@ public class MenuBaseFragment extends ParentFragment{
 		case Home.SCREEN_STATE_MENU_MANAGEMENT_MAINTENANCE_DETAIL_CHANGECYCLE:
 			_MaintenanceChangeCycleFragment.ClickLeft();
 			break;
-		case Home.SCREEN_STATE_MENU_MANAGEMENT_CALIBRATION_TOP:
+		case Home.SCREEN_STATE_MENU_MODE_ETC_CALIBRATION_TOP:
 			_CalibrationFragment.ClickLeft();
 			break;
-		case Home.SCREEN_STATE_MENU_MANAGEMENT_CALIBRATION_ANGLE_TOP:
+		case Home.SCREEN_STATE_MENU_MODE_ETC_CALIBRATION_ANGLE_TOP:
 			_AngleCalibration.ClickLeft();
 			break;
-		case Home.SCREEN_STATE_MENU_MANAGEMENT_CALIBRATION_ANGLE_RESULT:
+		case Home.SCREEN_STATE_MENU_MODE_ETC_CALIBRATION_ANGLE_RESULT:
 			ParentActivity._AngleCalibrationResultPopup.ClickLeft();
 			break;
-		case Home.SCREEN_STATE_MENU_MANAGEMENT_CALIBRATION_PRESSURE_TOP:
+		case Home.SCREEN_STATE_MENU_MODE_ETC_CALIBRATION_PRESSURE_TOP:
 			_PressureCalibration.ClickLeft();
 			break;
-		case Home.SCREEN_STATE_MENU_MANAGEMENT_CALIBRATION_PRESSURE_RESULT:
+		case Home.SCREEN_STATE_MENU_MODE_ETC_CALIBRATION_PRESSURE_RESULT:
 			ParentActivity._PressureCalibrationResultPopup.ClickLeft();
 			break;
-		case Home.SCREEN_STATE_MENU_MANAGEMENT_CALIBRATION_BRAKEPEDAL_TOP:
+		case Home.SCREEN_STATE_MENU_MODE_ETC_CALIBRATION_BRAKEPEDAL_TOP:
 			ParentActivity._BrakePedalCalibrationPopup.ClickLeft();
 			break;
 		case Home.SCREEN_STATE_MENU_MANAGEMENT_SERVICE_TOP:
@@ -1768,14 +1774,9 @@ public class MenuBaseFragment extends ParentFragment{
 			_LanguageListFragment.ClickLeft();
 			break;
 			// --, 150206 bwk;
-		// ++, 150324 bwk
-//		case Home.SCREEN_STATE_MENU_PREFERENCE_SOUNDOUTPUT_TOP:
-//			ParentActivity._SoundOutputPopup.ClickLeft();
-//			break;
-		case Home.SCREEN_STATE_MENU_PREFERENCE_SOUNDOUTPUT_CHANGE:
-			_SoundOutputSettingFragment.ClickLeft();
+		case Home.SCREEN_STATE_MENU_PREFERENCE_SOUNDOUTPUT_TOP:
+			ParentActivity._SoundOutputPopup.ClickLeft();
 			break;
-		// --, 150324 bwk
 		case Home.SCREEN_STATE_MENU_MULTIMEDIA_TOP:
 			_MenuMultimediaFragment.ClickLeft();
 			break;
@@ -1871,7 +1872,7 @@ public class MenuBaseFragment extends ParentFragment{
 		case Home.SCREEN_STATE_MENU_MODE_ETC_AUTOSHUTDOWN_PW:
 			_EngineAutoShutdownPWFragment.ClickRight();
 			break;
-		case Home.SCREEN_STATE_MENU_MODE_ETC_CAMERASETTING_TOP:
+		case Home.SCREEN_STATE_MENU_PREFERENCE_CAMERASETTING_TOP:
 			_CameraSettingFragment.ClickRight();
 			break;
 		case Home.SCREEN_STATE_MENU_MONITORING_TOP:
@@ -1949,6 +1950,9 @@ public class MenuBaseFragment extends ParentFragment{
 		case Home.SCREEN_STATE_MENU_MONITORING_FUELHISTORY_MODERECORD:
 			_FuelHistoryModeRecordFragment.ClickRight();
 			break;
+		case Home.SCREEN_STATE_MENU_MONITORING_FUELHISTORY_INITIAL:
+			ParentActivity._FuelInitalPopup.ClickRight();
+			break;
 		case Home.SCREEN_STATE_MENU_MANAGEMENT_SERVICE_EHCUINFO_TOP:
 			_EHCUIOInfoFragment.ClickRight();
 			break;
@@ -1985,22 +1989,22 @@ public class MenuBaseFragment extends ParentFragment{
 		case Home.SCREEN_STATE_MENU_MANAGEMENT_MAINTENANCE_DETAIL_CHANGECYCLE:
 			_MaintenanceChangeCycleFragment.ClickRight();
 			break;
-		case Home.SCREEN_STATE_MENU_MANAGEMENT_CALIBRATION_TOP:
+		case Home.SCREEN_STATE_MENU_MODE_ETC_CALIBRATION_TOP:
 			_CalibrationFragment.ClickRight();
 			break;
-		case Home.SCREEN_STATE_MENU_MANAGEMENT_CALIBRATION_ANGLE_TOP:
+		case Home.SCREEN_STATE_MENU_MODE_ETC_CALIBRATION_ANGLE_TOP:
 			_AngleCalibration.ClickRight();
 			break;
-		case Home.SCREEN_STATE_MENU_MANAGEMENT_CALIBRATION_ANGLE_RESULT:
+		case Home.SCREEN_STATE_MENU_MODE_ETC_CALIBRATION_ANGLE_RESULT:
 			ParentActivity._AngleCalibrationResultPopup.ClickRight();
 			break;
-		case Home.SCREEN_STATE_MENU_MANAGEMENT_CALIBRATION_PRESSURE_TOP:
+		case Home.SCREEN_STATE_MENU_MODE_ETC_CALIBRATION_PRESSURE_TOP:
 			_PressureCalibration.ClickRight();
 			break;
-		case Home.SCREEN_STATE_MENU_MANAGEMENT_CALIBRATION_PRESSURE_RESULT:
+		case Home.SCREEN_STATE_MENU_MODE_ETC_CALIBRATION_PRESSURE_RESULT:
 			ParentActivity._PressureCalibrationResultPopup.ClickRight();
 			break;
-		case Home.SCREEN_STATE_MENU_MANAGEMENT_CALIBRATION_BRAKEPEDAL_TOP:
+		case Home.SCREEN_STATE_MENU_MODE_ETC_CALIBRATION_BRAKEPEDAL_TOP:
 			ParentActivity._BrakePedalCalibrationPopup.ClickRight();
 			break;
 		case Home.SCREEN_STATE_MENU_MANAGEMENT_SERVICE_TOP:
@@ -2057,14 +2061,9 @@ public class MenuBaseFragment extends ParentFragment{
 			_LanguageListFragment.ClickRight();
 			break;
 			// --, 150206 bwk;			
-		// ++, 150324 bwk
-//		case Home.SCREEN_STATE_MENU_PREFERENCE_SOUNDOUTPUT_TOP:
-//			ParentActivity._SoundOutputPopup.ClickRight();
-//			break;
-		case Home.SCREEN_STATE_MENU_PREFERENCE_SOUNDOUTPUT_CHANGE:
-			_SoundOutputSettingFragment.ClickRight();
+		case Home.SCREEN_STATE_MENU_PREFERENCE_SOUNDOUTPUT_TOP:
+			ParentActivity._SoundOutputPopup.ClickRight();
 			break;
-		// --, 150324 bwk
 		case Home.SCREEN_STATE_MENU_MULTIMEDIA_TOP:
 			_MenuMultimediaFragment.ClickRight();
 			break;
@@ -2158,7 +2157,7 @@ public class MenuBaseFragment extends ParentFragment{
 		case Home.SCREEN_STATE_MENU_MODE_ETC_AUTOSHUTDOWN_PW:
 			_EngineAutoShutdownPWFragment.ClickESC();
 			break;
-		case Home.SCREEN_STATE_MENU_MODE_ETC_CAMERASETTING_TOP:
+		case Home.SCREEN_STATE_MENU_PREFERENCE_CAMERASETTING_TOP:
 			_CameraSettingFragment.ClickESC();
 			break;
 		case Home.SCREEN_STATE_MENU_MONITORING_TOP:
@@ -2236,6 +2235,9 @@ public class MenuBaseFragment extends ParentFragment{
 		case Home.SCREEN_STATE_MENU_MONITORING_FUELHISTORY_MODERECORD:
 			_FuelHistoryModeRecordFragment.ClickESC();
 			break;
+		case Home.SCREEN_STATE_MENU_MONITORING_FUELHISTORY_INITIAL:
+			ParentActivity._FuelInitalPopup.ClickESC();
+			break;
 		case Home.SCREEN_STATE_MENU_MANAGEMENT_SERVICE_EHCUINFO_TOP:
 			_EHCUIOInfoFragment.ClickESC();
 			break;
@@ -2272,22 +2274,25 @@ public class MenuBaseFragment extends ParentFragment{
 		case Home.SCREEN_STATE_MENU_MANAGEMENT_MAINTENANCE_DETAIL_CHANGECYCLE:
 			_MaintenanceChangeCycleFragment.ClickESC();
 			break;
-		case Home.SCREEN_STATE_MENU_MANAGEMENT_CALIBRATION_TOP:
-			_CalibrationFragment.ClickESC();
+		case Home.SCREEN_STATE_MENU_MODE_ETC_CALIBRATION_TOP:
+			// ++, 150409 cjg
+			//_CalibrationFragment.ClickESC();
+			_MenuModeFragment._CalibrationFragment.ClickESC(); 
+			// --, 150409 cjg
 			break;
-		case Home.SCREEN_STATE_MENU_MANAGEMENT_CALIBRATION_ANGLE_TOP:
+		case Home.SCREEN_STATE_MENU_MODE_ETC_CALIBRATION_ANGLE_TOP:
 			_AngleCalibration.ClickESC();
 			break;
-		case Home.SCREEN_STATE_MENU_MANAGEMENT_CALIBRATION_ANGLE_RESULT:
+		case Home.SCREEN_STATE_MENU_MODE_ETC_CALIBRATION_ANGLE_RESULT:
 			ParentActivity._AngleCalibrationResultPopup.ClickESC();
 			break;
-		case Home.SCREEN_STATE_MENU_MANAGEMENT_CALIBRATION_PRESSURE_TOP:
+		case Home.SCREEN_STATE_MENU_MODE_ETC_CALIBRATION_PRESSURE_TOP:
 			_PressureCalibration.ClickESC();
 			break;
-		case Home.SCREEN_STATE_MENU_MANAGEMENT_CALIBRATION_PRESSURE_RESULT:
+		case Home.SCREEN_STATE_MENU_MODE_ETC_CALIBRATION_PRESSURE_RESULT:
 			ParentActivity._PressureCalibrationResultPopup.ClickESC();
 			break;
-		case Home.SCREEN_STATE_MENU_MANAGEMENT_CALIBRATION_BRAKEPEDAL_TOP:
+		case Home.SCREEN_STATE_MENU_MODE_ETC_CALIBRATION_BRAKEPEDAL_TOP:
 			ParentActivity._BrakePedalCalibrationPopup.ClickESC();
 			break;
 		case Home.SCREEN_STATE_MENU_MANAGEMENT_SERVICE_TOP:
@@ -2344,14 +2349,9 @@ public class MenuBaseFragment extends ParentFragment{
 			_LanguageListFragment.ClickESC();
 			break;
 			// --, 150206 bwk;				
-		// ++, 150324 bwk
-//		case Home.SCREEN_STATE_MENU_PREFERENCE_SOUNDOUTPUT_TOP:
-//			ParentActivity._SoundOutputPopup.ClickESC();
-//			break;
-		case Home.SCREEN_STATE_MENU_PREFERENCE_SOUNDOUTPUT_CHANGE:
-			_SoundOutputSettingFragment.ClickESC();
+		case Home.SCREEN_STATE_MENU_PREFERENCE_SOUNDOUTPUT_TOP:
+			ParentActivity._SoundOutputPopup.ClickESC();
 			break;
-		// --, 150324 bwk
 		case Home.SCREEN_STATE_MENU_MULTIMEDIA_TOP:
 			_MenuMultimediaFragment.ClickESC();
 			break;
@@ -2445,7 +2445,7 @@ public class MenuBaseFragment extends ParentFragment{
 		case Home.SCREEN_STATE_MENU_MODE_ETC_AUTOSHUTDOWN_PW:
 			_EngineAutoShutdownPWFragment.ClickEnter();
 			break;
-		case Home.SCREEN_STATE_MENU_MODE_ETC_CAMERASETTING_TOP:
+		case Home.SCREEN_STATE_MENU_PREFERENCE_CAMERASETTING_TOP:
 			_CameraSettingFragment.ClickEnter();
 			break;
 		case Home.SCREEN_STATE_MENU_MONITORING_TOP:
@@ -2523,6 +2523,9 @@ public class MenuBaseFragment extends ParentFragment{
 		case Home.SCREEN_STATE_MENU_MONITORING_FUELHISTORY_MODERECORD:
 			_FuelHistoryModeRecordFragment.ClickEnter();
 			break;
+		case Home.SCREEN_STATE_MENU_MONITORING_FUELHISTORY_INITIAL:
+			ParentActivity._FuelInitalPopup.ClickEnter();
+			break;
 		case Home.SCREEN_STATE_MENU_MANAGEMENT_SERVICE_EHCUINFO_TOP:
 			_EHCUIOInfoFragment.ClickEnter();
 			break;
@@ -2559,22 +2562,22 @@ public class MenuBaseFragment extends ParentFragment{
 		case Home.SCREEN_STATE_MENU_MANAGEMENT_MAINTENANCE_DETAIL_CHANGECYCLE:
 			_MaintenanceChangeCycleFragment.ClickEnter();
 			break;
-		case Home.SCREEN_STATE_MENU_MANAGEMENT_CALIBRATION_TOP:
+		case Home.SCREEN_STATE_MENU_MODE_ETC_CALIBRATION_TOP:
 			_CalibrationFragment.ClickEnter();
 			break;
-		case Home.SCREEN_STATE_MENU_MANAGEMENT_CALIBRATION_ANGLE_TOP:
+		case Home.SCREEN_STATE_MENU_MODE_ETC_CALIBRATION_ANGLE_TOP:
 			_AngleCalibration.ClickEnter();
 			break;
-		case Home.SCREEN_STATE_MENU_MANAGEMENT_CALIBRATION_ANGLE_RESULT:
+		case Home.SCREEN_STATE_MENU_MODE_ETC_CALIBRATION_ANGLE_RESULT:
 			ParentActivity._AngleCalibrationResultPopup.ClickEnter();
 			break;
-		case Home.SCREEN_STATE_MENU_MANAGEMENT_CALIBRATION_PRESSURE_TOP:
+		case Home.SCREEN_STATE_MENU_MODE_ETC_CALIBRATION_PRESSURE_TOP:
 			_PressureCalibration.ClickEnter();
 			break;
-		case Home.SCREEN_STATE_MENU_MANAGEMENT_CALIBRATION_PRESSURE_RESULT:
+		case Home.SCREEN_STATE_MENU_MODE_ETC_CALIBRATION_PRESSURE_RESULT:
 			ParentActivity._PressureCalibrationResultPopup.ClickEnter();
 			break;
-		case Home.SCREEN_STATE_MENU_MANAGEMENT_CALIBRATION_BRAKEPEDAL_TOP:
+		case Home.SCREEN_STATE_MENU_MODE_ETC_CALIBRATION_BRAKEPEDAL_TOP:
 			ParentActivity._BrakePedalCalibrationPopup.ClickEnter();
 			break;
 		case Home.SCREEN_STATE_MENU_MANAGEMENT_SERVICE_TOP:
@@ -2631,14 +2634,9 @@ public class MenuBaseFragment extends ParentFragment{
 			_LanguageListFragment.ClickEnter();
 			break;
 			// --, 150206 bwk;		
-		// ++, 150324 bwk
-//		case Home.SCREEN_STATE_MENU_PREFERENCE_SOUNDOUTPUT_TOP:
-//			ParentActivity._SoundOutputPopup.ClickEnter();
-//			break;
-		case Home.SCREEN_STATE_MENU_PREFERENCE_SOUNDOUTPUT_CHANGE:
-			_SoundOutputSettingFragment.ClickEnter();
+		case Home.SCREEN_STATE_MENU_PREFERENCE_SOUNDOUTPUT_TOP:
+			ParentActivity._SoundOutputPopup.ClickEnter();
 			break;
-		// --, 150324 bwk			
 		case Home.SCREEN_STATE_MENU_MULTIMEDIA_TOP:
 			_MenuMultimediaFragment.ClickEnter();
 			break;

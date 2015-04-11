@@ -199,6 +199,12 @@
     <string name="Do_you_want_to_turn_on_Mirror_Heat">Do you want to turn on Mirror Heat?</string>
     <string name="Do_you_want_to_turn_on_Auto_Grease">Do you want to turn on Auto Grease?</string>
     <string name="Do_not_show_again">Do not show again</string>
+    <string name="This_machine_does_not_support_this_feature">This machine does not support this feature.</string>
+    <string name="Auto_Grease_is_NOT_equipped">Auto Grease is NOT equipped.</string>
+    <string name="Beacon_Lamp_is_NOT_equipped">Beacon Lamp is NOT equipped.</string>
+    <string name="Mirror_Heat_is_NOT_equipped">Mirror Heat is NOT equipped.</string>
+    <string name="Quick_Coupler_is_NOT_equipped">Quick Coupler is NOT equipped.</string>
+    <string name="Ride_Control_is_NOT_equipped">Ride Control is NOT equipped.</string>
     <!-- Key End -->
     <!-- Menu Start -->
     <string name="Mode">Asetukset</string>

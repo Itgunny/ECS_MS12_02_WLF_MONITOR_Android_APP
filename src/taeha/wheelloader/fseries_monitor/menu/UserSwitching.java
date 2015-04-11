@@ -1771,13 +1771,12 @@ public class UserSwitching extends ParentFragment{
 			CAN1Comm.TxCANToMCU(109);
 			CAN1Comm.TxCMDToMCU(CAN1Comm.CMD_LCD, ParentActivity.BrightnessManualLevel + 1);
 			ParentActivity.BrihgtnessCurrent = _userdata.BrightnessManualLevel;
-			ParentActivity.BrightnessManualLevel = _userdata.BrightnessManualLevel;
-		}else{
-			ParentActivity.BrightnessAutoDayLevel = _userdata.BrightnessAutoDayLevel;
-			ParentActivity.BrightnessAutoNightLevel = _userdata.BrightnessAutoNightLevel;
-			ParentActivity.BrightnessAutoStartTime = _userdata.BrightnessAutoStartTime;
-			ParentActivity.BrightnessAutoEndTime = _userdata.BrightnessAutoEndTime;
 		}
+		ParentActivity.BrightnessManualLevel = _userdata.BrightnessManualLevel;
+		ParentActivity.BrightnessAutoDayLevel = _userdata.BrightnessAutoDayLevel;
+		ParentActivity.BrightnessAutoNightLevel = _userdata.BrightnessAutoNightLevel;
+		ParentActivity.BrightnessAutoStartTime = _userdata.BrightnessAutoStartTime;
+		ParentActivity.BrightnessAutoEndTime = _userdata.BrightnessAutoEndTime;
 		// --, 150407 bwk
 		
 		ParentActivity.UnitOdo = _userdata.UnitOdo;

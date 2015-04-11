@@ -16,7 +16,6 @@ import taeha.wheelloader.fseries_monitor.popup.EHCUErrorPopup;
 import taeha.wheelloader.fseries_monitor.popup.EngineAutoShutdownCountPopup;
 import taeha.wheelloader.fseries_monitor.popup.EngineModePopup;
 import taeha.wheelloader.fseries_monitor.popup.EngineWarmingUpPopup;
-import taeha.wheelloader.fseries_monitor.popup.FineModulationPouup;
 import taeha.wheelloader.fseries_monitor.popup.FuelInitalPopup;
 import taeha.wheelloader.fseries_monitor.popup.ICCOModePopup;
 import taeha.wheelloader.fseries_monitor.popup.KickDownPopup;
@@ -332,6 +331,32 @@ public class Home extends Activity {
 	// 3. Axle Temp 임시 삭제(HHI 임혁준 요청)
 	// 4. 메인 엔진자동정지 램프 가이던스 한국어 -> 영어로 변경
 	// 5. 사용자 전환 Default 값 -> 출하 Default값과 동일하게 변경
+	// 2015.04.09 HHI
+	// 1. 밝기조절기능 : 자동 탭의 야간 밝기 레벨 default 값을 60%로 낮출것(4)
+	// 2. A타입 메인화면으로 나올 때 가상 키패드 버튼이 잠깐 나타나는 버그 수정
+	// 3. 한국어 번역 추가(연비관련, 메인, 기능설정 관련)
+	// 4. Key on 시 다음 기능들의 can 상태 값이 Not available로 들어올 경우 옵션 미장착 표시 추가
+	//	- Auto Grease, Wuick coupler, Ride control, Beacon lamp, Mirror heat, Fine Modulation
+	//	- Fine Modulation : 팝업 -> 키패드 창으로 표시 방법 변경
+	//	- LED의 경우 status 값을 우선순위로 보고, Fine Modulation은 미확정(추후 협의 예정)
+	//	- 문구 다국어 추가
+	// 5. A안 좌하단 title 길이 240dp로 지정
+	// 6. 메인화면 커서 첫번째 라디오 버튼 위치에서 선택된 것을 기준으로 변경
+	// 7. 일부 UI 위치 이동
+	//	- 카메라 설정 -> 환경설정으로 이동
+	//	- 보정 -> 기능설정 - 기타탭으로 이동
+	// 8. TCU 4SPEED 모델 추가
+	//	- 6057018809
+	// 9. T.C Lock UP 메뉴는 EHCU와 관련없이 모델을 보는 것이므로 원래대로 복구(940,935일 경우 삭제)
+	// 10. 기능설정 상단탭 이동 원상복구(커서 잃는 버그로 인함)
+	// 11. SoftEndStop Default 값 UserSwitch과 동일하게 변경
+	// 12. Fuel Info 메뉴 키패드 Enter 값 버그 수정
+	// 13. UserSwitch 밝기 관련 수동/자동 상관없이 값 저장
+	// 14. Popup ESC 추가
+	//	- BucketPriority, CCOMode, EngineMode, WarmingUp, ICCO, KickDown,
+	//	  MiracastClose, MultimediaClose, ShiftMode, SoundOutput, T.C.Lock Up
+	//	  WorkLoadWeighingInitPopup1
+	// 15. FuelInfoPopup에서 ESC를 눌렀을 경우 각 페이지의 초기화 버튼으로 커서 이동
 	//////////////////////////////////////////////////////////////////////////////////////
 	
 	// TAG
@@ -397,7 +422,6 @@ public class Home extends Activity {
 	public  static final int SCREEN_STATE_MAIN_B_KEY_MIRRORHEAT								= 0x16900000;
 	public  static final int SCREEN_STATE_MAIN_B_KEY_DETENT									= 0x16A00000;
 	public  static final int SCREEN_STATE_MAIN_B_KEY_FINEMODULATION							= 0x16B00000;
-	public  static final int SCREEN_STATE_MAIN_B_KEY_FINEMODULATION_POPUP					= 0x16B10000;		// ++, --, 150402 bwk
 	public  static final int SCREEN_STATE_MAIN_B_KEY_FN										= 0x16C00000;
 	public  static final int SCREEN_STATE_MAIN_B_KEY_END									= 0x16FFFFFF;
 	
@@ -451,8 +475,20 @@ public class Home extends Activity {
 	public  static final int SCREEN_STATE_MENU_MODE_ETC_AUTOSHUTDOWN_END					= 0x2133FFFF;
 	public  static final int SCREEN_STATE_MENU_MODE_ETC_WIPER_TOP							= 0x21340000;
 	public  static final int SCREEN_STATE_MENU_MODE_ETC_WIPER_END							= 0x2134FFFF;
-	public  static final int SCREEN_STATE_MENU_MODE_ETC_CAMERASETTING_TOP					= 0x21350000;
-	public  static final int SCREEN_STATE_MENU_MODE_ETC_CAMERASETTING_END					= 0x2135FFFF;
+//	public  static final int SCREEN_STATE_MENU_MODE_ETC_CAMERASETTING_TOP					= 0x21350000;
+//	public  static final int SCREEN_STATE_MENU_MODE_ETC_CAMERASETTING_END					= 0x2135FFFF;
+	public  static final int SCREEN_STATE_MENU_MODE_ETC_CALIBRATION_TOP						= 0x21350000;
+	public  static final int SCREEN_STATE_MENU_MODE_ETC_CALIBRATION_ANGLE_TOP				= 0x21351000;
+	public  static final int SCREEN_STATE_MENU_MODE_ETC_CALIBRATION_ANGLE_RESULT			= 0x21351100;
+	public  static final int SCREEN_STATE_MENU_MODE_ETC_CALIBRATION_ANGLE_END				= 0x21351FFF;
+	public  static final int SCREEN_STATE_MENU_MODE_ETC_CALIBRATION_PRESSURE_TOP			= 0x21352000;
+	public  static final int SCREEN_STATE_MENU_MODE_ETC_CALIBRATION_PRESSURE_RESULT			= 0x21352100;
+	public  static final int SCREEN_STATE_MENU_MODE_ETC_CALIBRATION_PRESSURE_END			= 0x21352FFF;
+	public  static final int SCREEN_STATE_MENU_MODE_ETC_CALIBRATION_BRAKEPEDAL_TOP			= 0x21353000;
+	public  static final int SCREEN_STATE_MENU_MODE_ETC_CALIBRATION_BRAKEPEDAL_END			= 0x21353FFF;
+	public  static final int SCREEN_STATE_MENU_MODE_ETC_CALIBRATION_AEB_TOP					= 0x21354000;
+	public  static final int SCREEN_STATE_MENU_MODE_ETC_CALIBRATION_AEB_END					= 0x21354FFF;
+	public  static final int SCREEN_STATE_MENU_MODE_ETC_CALIBRATION_END						= 0x2135FFFF;
 	public  static final int SCREEN_STATE_MENU_MODE_ETC_DELAYSHUTDOWN_TOP					= 0x21360000;
 	public  static final int SCREEN_STATE_MENU_MODE_ETC_DELAYSHUTDOWN_END					= 0x2136FFFF;
 	public  static final int SCREEN_STATE_MENU_MODE_ETC_END									= 0x213FFFFF;
@@ -516,40 +552,40 @@ public class Home extends Activity {
 	public  static final int SCREEN_STATE_MENU_MANAGEMENT_MAINTENANCE_DETAIL_CHANGECYCLE	= 0x23212000;
 	public  static final int SCREEN_STATE_MENU_MANAGEMENT_MAINTENANCE_DETAIL_END			= 0x2321FFFF;
 	public  static final int SCREEN_STATE_MENU_MANAGEMENT_MAINTENANCE_END					= 0x232FFFFF;
-	public  static final int SCREEN_STATE_MENU_MANAGEMENT_CALIBRATION_TOP					= 0x23300000;
-	public  static final int SCREEN_STATE_MENU_MANAGEMENT_CALIBRATION_ANGLE_TOP				= 0x23310000;
-	public  static final int SCREEN_STATE_MENU_MANAGEMENT_CALIBRATION_ANGLE_RESULT			= 0x23311000;
-	public  static final int SCREEN_STATE_MENU_MANAGEMENT_CALIBRATION_ANGLE_END				= 0x2331FFFF;
-	public  static final int SCREEN_STATE_MENU_MANAGEMENT_CALIBRATION_PRESSURE_TOP			= 0x23320000;
-	public  static final int SCREEN_STATE_MENU_MANAGEMENT_CALIBRATION_PRESSURE_RESULT		= 0x23321000;
-	public  static final int SCREEN_STATE_MENU_MANAGEMENT_CALIBRATION_PRESSURE_END			= 0x2332FFFF;
-	public  static final int SCREEN_STATE_MENU_MANAGEMENT_CALIBRATION_BRAKEPEDAL_TOP		= 0x23330000;
-	public  static final int SCREEN_STATE_MENU_MANAGEMENT_CALIBRATION_BRAKEPEDAL_END		= 0x2333FFFF;
-	public  static final int SCREEN_STATE_MENU_MANAGEMENT_CALIBRATION_AEB_TOP				= 0x23340000;
-	public  static final int SCREEN_STATE_MENU_MANAGEMENT_CALIBRATION_AEB_END				= 0x2334FFFF;
-	public  static final int SCREEN_STATE_MENU_MANAGEMENT_CALIBRATION_END					= 0x233FFFFF;
-	public  static final int SCREEN_STATE_MENU_MANAGEMENT_SERVICE_TOP						= 0x23500000;
-	public  static final int SCREEN_STATE_MENU_MANAGEMENT_SERVICE_PW						= 0x23510000;
-	public  static final int SCREEN_STATE_MENU_MANAGEMENT_SERVICE_SENSORMONITORING_TOP		= 0x23520000;
-	public  static final int SCREEN_STATE_MENU_MANAGEMENT_SERVICE_SENSORMONITORING_HIDDEN	= 0x23521000;
-	public  static final int SCREEN_STATE_MENU_MANAGEMENT_SERVICE_SENSORMONITORING_END		= 0x2352FFFF;
-	public  static final int SCREEN_STATE_MENU_MANAGEMENT_SERVICE_SPEEDLIMIT_TOP			= 0x23530000;
-	public  static final int SCREEN_STATE_MENU_MANAGEMENT_SERVICE_SPEEDLIMIT_END			= 0x2353FFFF;
-	public  static final int SCREEN_STATE_MENU_MANAGEMENT_SERVICE_WEIGHINGCOMPENSATION_TOP	= 0x23540000;
-	public  static final int SCREEN_STATE_MENU_MANAGEMENT_SERVICE_WEIGHINGCOMPENSATION_END	= 0x2354FFFF;
+//	public  static final int SCREEN_STATE_MENU_MANAGEMENT_CALIBRATION_TOP					= 0x23300000;
+//	public  static final int SCREEN_STATE_MENU_MANAGEMENT_CALIBRATION_ANGLE_TOP				= 0x23310000;
+//	public  static final int SCREEN_STATE_MENU_MANAGEMENT_CALIBRATION_ANGLE_RESULT			= 0x23311000;
+//	public  static final int SCREEN_STATE_MENU_MANAGEMENT_CALIBRATION_ANGLE_END				= 0x2331FFFF;
+//	public  static final int SCREEN_STATE_MENU_MANAGEMENT_CALIBRATION_PRESSURE_TOP			= 0x23320000;
+//	public  static final int SCREEN_STATE_MENU_MANAGEMENT_CALIBRATION_PRESSURE_RESULT		= 0x23321000;
+//	public  static final int SCREEN_STATE_MENU_MANAGEMENT_CALIBRATION_PRESSURE_END			= 0x2332FFFF;
+//	public  static final int SCREEN_STATE_MENU_MANAGEMENT_CALIBRATION_BRAKEPEDAL_TOP		= 0x23330000;
+//	public  static final int SCREEN_STATE_MENU_MANAGEMENT_CALIBRATION_BRAKEPEDAL_END		= 0x2333FFFF;
+//	public  static final int SCREEN_STATE_MENU_MANAGEMENT_CALIBRATION_AEB_TOP				= 0x23340000;
+//	public  static final int SCREEN_STATE_MENU_MANAGEMENT_CALIBRATION_AEB_END				= 0x2334FFFF;
+//	public  static final int SCREEN_STATE_MENU_MANAGEMENT_CALIBRATION_END					= 0x233FFFFF;
+	public  static final int SCREEN_STATE_MENU_MANAGEMENT_SERVICE_TOP						= 0x23300000;
+	public  static final int SCREEN_STATE_MENU_MANAGEMENT_SERVICE_PW						= 0x23310000;
+	public  static final int SCREEN_STATE_MENU_MANAGEMENT_SERVICE_SENSORMONITORING_TOP		= 0x23320000;
+	public  static final int SCREEN_STATE_MENU_MANAGEMENT_SERVICE_SENSORMONITORING_HIDDEN	= 0x23321000;
+	public  static final int SCREEN_STATE_MENU_MANAGEMENT_SERVICE_SENSORMONITORING_END		= 0x2332FFFF;
+	public  static final int SCREEN_STATE_MENU_MANAGEMENT_SERVICE_SPEEDLIMIT_TOP			= 0x23330000;
+	public  static final int SCREEN_STATE_MENU_MANAGEMENT_SERVICE_SPEEDLIMIT_END			= 0x2333FFFF;
+	public  static final int SCREEN_STATE_MENU_MANAGEMENT_SERVICE_WEIGHINGCOMPENSATION_TOP	= 0x23340000;
+	public  static final int SCREEN_STATE_MENU_MANAGEMENT_SERVICE_WEIGHINGCOMPENSATION_END	= 0x2334FFFF;
 	// ++, 150329 bwk
 	//public  static final int SCREEN_STATE_MENU_MANAGEMENT_SERVICE_SOFTWAREUPATE_TOP		= 0x23550000;
 	//public  static final int SCREEN_STATE_MENU_MANAGEMENT_SERVICE_SOFTWAREUPATE_END		= 0x2355FFFF;
-	public  static final int SCREEN_STATE_MENU_MANAGEMENT_SERVICE_EHCUINFO_TOP				= 0x23550000;
-	public  static final int SCREEN_STATE_MENU_MANAGEMENT_SERVICE_EHCUINFO_BOOMLEVERFLOAT	= 0x23551000;
-	public  static final int SCREEN_STATE_MENU_MANAGEMENT_SERVICE_EHCUINFO_END				= 0x2355FFFF;
+	public  static final int SCREEN_STATE_MENU_MANAGEMENT_SERVICE_EHCUINFO_TOP				= 0x23350000;
+	public  static final int SCREEN_STATE_MENU_MANAGEMENT_SERVICE_EHCUINFO_BOOMLEVERFLOAT	= 0x23351000;
+	public  static final int SCREEN_STATE_MENU_MANAGEMENT_SERVICE_EHCUINFO_END				= 0x2335FFFF;
 	// --, 150329 bwk
-	public  static final int SCREEN_STATE_MENU_MANAGEMENT_SERVICE_END						= 0x235FFFFF;
-	public  static final int SCREEN_STATE_MENU_MANAGEMENT_ASPHONE_TOP						= 0x23600000;
-	public  static final int SCREEN_STATE_MENU_MANAGEMENT_ASPHONE_END						= 0x236FFFFF;
-	public  static final int SCREEN_STATE_MENU_MANAGEMENT_SOFTWAREUPDAT_TOP					= 0x23700000;
-	public  static final int SCREEN_STATE_MENU_MANAGEMENT_SOFTWAREUPDAT_PW					= 0x2371FFFF;
-	public  static final int SCREEN_STATE_MENU_MANAGEMENT_SOFTWAREUPDAT_END					= 0x237FFFFF;
+	public  static final int SCREEN_STATE_MENU_MANAGEMENT_SERVICE_END						= 0x233FFFFF;
+	public  static final int SCREEN_STATE_MENU_MANAGEMENT_ASPHONE_TOP						= 0x23400000;
+	public  static final int SCREEN_STATE_MENU_MANAGEMENT_ASPHONE_END						= 0x234FFFFF;
+	public  static final int SCREEN_STATE_MENU_MANAGEMENT_SOFTWAREUPDAT_TOP					= 0x23500000;
+	public  static final int SCREEN_STATE_MENU_MANAGEMENT_SOFTWAREUPDAT_PW					= 0x2351FFFF;
+	public  static final int SCREEN_STATE_MENU_MANAGEMENT_SOFTWAREUPDAT_END					= 0x235FFFFF;
 	public  static final int SCREEN_STATE_MENU_MANAGEMENT_END								= 0x23FFFFFF;
 	
 	public  static final int SCREEN_STATE_MENU_PREFERENCE_TOP								= 0x24000000;
@@ -572,8 +608,10 @@ public class Home extends Activity {
 	public  static final int SCREEN_STATE_MENU_PREFERENCE_SOUNDOUTPUT_TOP					= 0x24500000;
 	public  static final int SCREEN_STATE_MENU_PREFERENCE_SOUNDOUTPUT_CHANGE				= 0x24510000;	// ++, --, 150323 bwk
 	public  static final int SCREEN_STATE_MENU_PREFERENCE_SOUNDOUTPUT_END					= 0x245FFFFF;
-	public  static final int SCREEN_STATE_MENU_PREFERENCE_WIRELESS_TOP						= 0x24600000;
-	public  static final int SCREEN_STATE_MENU_PREFERENCE_WIRELESS_END						= 0x246FFFFF;
+	public  static final int SCREEN_STATE_MENU_PREFERENCE_CAMERASETTING_TOP					= 0x24600000;
+	public  static final int SCREEN_STATE_MENU_PREFERENCE_CAMERASETTING_END					= 0x246FFFFF;
+	public  static final int SCREEN_STATE_MENU_PREFERENCE_WIRELESS_TOP						= 0x24700000;
+	public  static final int SCREEN_STATE_MENU_PREFERENCE_WIRELESS_END						= 0x247FFFFF;
 	public  static final int SCREEN_STATE_MENU_PREFERENCE_END								= 0x24FFFFFF;
 	
 	public  static final int SCREEN_STATE_MENU_MULTIMEDIA_TOP								= 0x25000000;
@@ -649,7 +687,6 @@ public class Home extends Activity {
 	public  static final int SCREEN_STATE_MAIN_A_KEY_MIRRORHEAT								= 0x76900000;
 	public  static final int SCREEN_STATE_MAIN_A_KEY_DETENT									= 0x76A00000;
 	public  static final int SCREEN_STATE_MAIN_A_KEY_FINEMODULATION							= 0x76B00000;
-	public  static final int SCREEN_STATE_MAIN_A_KEY_FINEMODULATION_POPUP					= 0x76B10000;	// ++, --, 150402 bwk
 	public  static final int SCREEN_STATE_MAIN_A_KEY_FN										= 0x76C00000;
 	public  static final int SCREEN_STATE_MAIN_A_KEY_END									= 0x76FFFFFF;
 	
@@ -879,7 +916,6 @@ public class Home extends Activity {
 	public MultimediaClosePopup				_MultimediaClosePopup;
 	public MiracastClosePopup				_MiracastClosePopup;
 	// --, 150313 cjg
-	public FineModulationPouup				_FineModulationPouup;		// ++, --, 150402 bwk
 	public FuelInitalPopup					_FuelInitalPopup;			// ++, --, 150406 bwk
 	
 	//Toast
@@ -1152,7 +1188,6 @@ public class Home extends Activity {
 		_MultimediaClosePopup = new MultimediaClosePopup(this);
 		_MiracastClosePopup = new MiracastClosePopup(this);
 		// --, 150313 cjg
-		_FineModulationPouup = new FineModulationPouup(this);	// ++, --, 150402 bwk
 		_FuelInitalPopup = new FuelInitalPopup(this);
 		
 		_WeighingErrorToast = new WeighingErrorToast(this);
@@ -1195,7 +1230,6 @@ public class Home extends Activity {
 		_MultimediaClosePopup = new MultimediaClosePopup(this);
 		_MiracastClosePopup = new MiracastClosePopup(this);
 		// --, 150323 bwk
-		_FineModulationPouup = new FineModulationPouup(this);	// ++, --, 150402 bwk
 		_FuelInitalPopup = new FuelInitalPopup(this);
 		
 		_WeighingErrorToast = new WeighingErrorToast(this);
@@ -1370,7 +1404,7 @@ public class Home extends Activity {
 		BrightnessManualAuto = SharePref.getInt("BrightnessManualAuto", BRIGHTNESS_MANUAL);
 		BrightnessManualLevel = SharePref.getInt("BrightnessManualLevel", BRIGHTNESS_MAX);
 		BrightnessAutoDayLevel = SharePref.getInt("BrightnessAutoDayLevel", BRIGHTNESS_MAX);
-		BrightnessAutoNightLevel = SharePref.getInt("BrightnessAutoNightLevel", BRIGHTNESS_MAX);
+		BrightnessAutoNightLevel = SharePref.getInt("BrightnessAutoNightLevel", 4);
 		BrightnessAutoStartTime = SharePref.getInt("BrightnessAutoStartTime", 8);
 		BrightnessAutoEndTime = SharePref.getInt("BrightnessAutoEndTime", 18);
 		SoundState = SharePref.getInt("SoundState", STATE_INTERNAL_SPK);
@@ -1512,19 +1546,19 @@ public class Home extends Activity {
 		
 		SharedPreferences SharePref = getSharedPreferences("Home", 0);
 		
-		_userdata.EngineMode = SharePref.getInt(strEngineMode, CAN1CommManager.DATA_STATE_ENGINE_MODE_PWR);
+		_userdata.EngineMode = SharePref.getInt(strEngineMode, CAN1CommManager.DATA_STATE_ENGINE_MODE_STD);
 		//_userdata.WarmingUp = SharePref.getInt(strWarmingUp, CAN1CommManager.DATA_STATE_ENGINE_WARMINGUP_OFF);
 		_userdata.CCOMode = SharePref.getInt(strCCOMode, CAN1CommManager.DATA_STATE_TM_CLUTCHCUTOFF_OFF);
 		_userdata.ShiftMode = SharePref.getInt(strShiftMode, CAN1CommManager.DATA_STATE_TM_SHIFTMODE_MANUAL);
 		_userdata.TCLockUp = SharePref.getInt(strTCLockUp, CAN1CommManager.DATA_STATE_TM_LOCKUPCLUTCH_OFF);
 		_userdata.RideControl = SharePref.getInt(strRideControl, CAN1CommManager.DATA_STATE_RIDECONTROL_OFF);
-		_userdata.WeighingSystem = SharePref.getInt(strWeighingSystem, CAN1CommManager.DATA_STATE_WEIGHING_ACCUMULATION_MANUAL);
+		_userdata.WeighingSystem = SharePref.getInt(strWeighingSystem, CAN1CommManager.DATA_STATE_WEIGHING_ACCUMULATION_AUTO);
 		_userdata.WeighingDisplay = SharePref.getInt(strWeighingDisplay, CAN1CommManager.DATA_STATE_WEIGHINGDISPLAY_TOTAL_A);
-		_userdata.ErrorDetection = SharePref.getInt(strErrorDetection, CAN1CommManager.DATA_STATE_WEIGHING_ERRORDETECT_OFF);
+		_userdata.ErrorDetection = SharePref.getInt(strErrorDetection, CAN1CommManager.DATA_STATE_WEIGHING_ERRORDETECT_ON);
 		_userdata.KickDown = SharePref.getInt(strKickDown, CAN1CommManager.DATA_STATE_KICKDOWN_UPDOWN);
 		_userdata.BucketPriority = SharePref.getInt(strBucketPriority, CAN1CommManager.DATA_STATE_BUCKETPRIORITY_OFF);
-		_userdata.SoftEndStopBoomUp = SharePref.getInt(strSoftEndStopBoomUp, CAN1CommManager.DATA_STATE_SOFTSTOP_BOOMUP_OFF);
-		_userdata.SoftEndStopBoomDown = SharePref.getInt(strSoftEndStopBoomDown, CAN1CommManager.DATA_STATE_SOFTSTOP_BOOMDOWN_OFF);
+		_userdata.SoftEndStopBoomUp = SharePref.getInt(strSoftEndStopBoomUp, CAN1CommManager.DATA_STATE_SOFTSTOP_BOOMUP_ON);
+		_userdata.SoftEndStopBoomDown = SharePref.getInt(strSoftEndStopBoomDown, CAN1CommManager.DATA_STATE_SOFTSTOP_BOOMDOWN_ON);
 		_userdata.SoftEndStopBucketIn = SharePref.getInt(strSoftEndStopBucketIn, CAN1CommManager.DATA_STATE_SOFTSTOP_BUCKETIN_OFF);
 		_userdata.SoftEndStopBucketDump = SharePref.getInt(strSoftEndStopBucketDump, CAN1CommManager.DATA_STATE_SOFTSTOP_BUCKETOUT_OFF);
 		// ++, 150407 bwk
@@ -1532,21 +1566,21 @@ public class Home extends Activity {
 		_userdata.BrightnessManualAuto = SharePref.getInt(strBrightnessManualAuto,BRIGHTNESS_MANUAL);
 		_userdata.BrightnessManualLevel = SharePref.getInt(strBrightnessManualLevel,BRIGHTNESS_MAX);
 		_userdata.BrightnessAutoDayLevel = SharePref.getInt(strBrightnessAutoDayLevel,BRIGHTNESS_MAX);
-		_userdata.BrightnessAutoNightLevel = SharePref.getInt(strBrightnessAutoNightLevel,BRIGHTNESS_MAX);
+		_userdata.BrightnessAutoNightLevel = SharePref.getInt(strBrightnessAutoNightLevel,4);
 		_userdata.BrightnessAutoStartTime = SharePref.getInt(strBrightnessAutoStartTime,8);
 		_userdata.BrightnessAutoEndTime = SharePref.getInt(strBrightnessAutoEndTime,18);
 		// --, 150407 bwk
-		_userdata.DisplayType = SharePref.getInt(strDisplayType,Home.DISPLAY_TYPE_B);
+		_userdata.DisplayType = SharePref.getInt(strDisplayType,Home.DISPLAY_TYPE_A);
 		_userdata.UnitTemp = SharePref.getInt(strUnitTemp, Home.UNIT_TEMP_C);
 		_userdata.UnitOdo = SharePref.getInt(strUnitOdo, Home.UNIT_ODO_KM);
 		_userdata.UnitWeight = SharePref.getInt(strUnitWeight, Home.UNIT_WEIGHT_TON);
 		_userdata.UnitPressure = SharePref.getInt(strUnitPressure, Home.UNIT_PRESSURE_BAR);
-		_userdata.MachineStatusUpper = SharePref.getInt(strMachineStatusUpper, CAN1CommManager.DATA_STATE_MACHINESTATUS_NOSELECT);
-		_userdata.MachineStatusLower = SharePref.getInt(strMachineStatusLower, CAN1CommManager.DATA_STATE_MACHINESTATUS_NOSELECT);
-		_userdata.Language = SharePref.getInt(strLanguage,Home.STATE_DISPLAY_LANGUAGE_KOREAN);
+		_userdata.MachineStatusUpper = SharePref.getInt(strMachineStatusUpper, CAN1CommManager.DATA_STATE_MACHINESTATUS_HYD);
+		_userdata.MachineStatusLower = SharePref.getInt(strMachineStatusLower, CAN1CommManager.DATA_STATE_MACHINESTATUS_COOLANT);
+		_userdata.Language = SharePref.getInt(strLanguage,Home.STATE_DISPLAY_LANGUAGE_ENGLISH);
 		_userdata.SoundOutput = SharePref.getInt(strSoundOutput, Home.STATE_INTERNAL_SPK);
-		_userdata.HourmeterDisplay = SharePref.getInt(strHourmeterDisplay, CAN1CommManager.DATA_STATE_OPERATION_NOSELECT);
-		_userdata.FuelDisplay = SharePref.getInt(strFuelDisplay, CAN1CommManager.DATA_STATE_FUEL_NOSELECT);
+		_userdata.HourmeterDisplay = SharePref.getInt(strHourmeterDisplay, CAN1CommManager.DATA_STATE_HOURMETER_LATEST);
+		_userdata.FuelDisplay = SharePref.getInt(strFuelDisplay, CAN1CommManager.DATA_STATE_AVERAGE_FUEL_RATE);
 
 
 		Log.d(TAG,"LoadUserData" + Integer.toString(Index));
@@ -2750,22 +2784,6 @@ public class Home extends Activity {
 		HomeDialog.show();
 	}
 	// --, 150313 cjg	 
-	// ++, 150402 bwk
-	public void showFineModulation(){
-		if(AnimationRunningFlag == true)
-			return;
-		else
-			StartAnimationRunningTimer();
-		if(HomeDialog != null){
-			HomeDialog.dismiss();
-			HomeDialog = null;
-		}
-		
-		_FineModulationPouup = new FineModulationPouup(this);
-		HomeDialog = _FineModulationPouup;
-		HomeDialog.show();
-	}
-	// --, 150402 bwk	
 	public void showFuelInitalPopup(){
 		if(AnimationRunningFlag == true)
 			return;

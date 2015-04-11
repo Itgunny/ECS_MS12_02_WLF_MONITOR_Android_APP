@@ -145,7 +145,7 @@ public class WorkLoadFragment extends ParentFragment{
 		CursurFirstDisplay(WeighingSystemModeIndex);
 		
 		// ++, 150210 bwk
-		if(ParentActivity.OldScreenIndex == ParentActivity.SCREEN_STATE_MENU_MANAGEMENT_CALIBRATION_PRESSURE_TOP)
+		if(ParentActivity.OldScreenIndex == ParentActivity.SCREEN_STATE_MENU_MODE_ETC_CALIBRATION_PRESSURE_TOP)
 		{
 			CursurIndex = 9;
 			CursurDisplay(CursurIndex);
@@ -357,7 +357,7 @@ public class WorkLoadFragment extends ParentFragment{
 //		CAN1Comm.Set_RequestReweighing_PGN61184_62(3);
 //		CAN1Comm.TxCANToMCU(62);
 //		CAN1Comm.Set_RequestTotalWorkWeightReset_PGN61184_62(15);
-		ParentActivity.OldScreenIndex = ParentActivity.ScreenIndex;
+		ParentActivity.OldScreenIndex = ParentActivity.SCREEN_STATE_MENU_MODE_HYD_WORKLOAD_TOP;
 		ParentActivity.showWorkLoadWeighingInit1();
 		
 	}

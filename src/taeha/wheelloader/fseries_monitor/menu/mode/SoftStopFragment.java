@@ -339,8 +339,8 @@ public class SoftStopFragment extends ParentFragment{
 	public void SetDefault(){
 		BoomUp = CAN1CommManager.DATA_STATE_SOFTSTOP_BOOMUP_ON;
 		BoomDown = CAN1CommManager.DATA_STATE_SOFTSTOP_BOOMDOWN_ON;
-		BucketIn = CAN1CommManager.DATA_STATE_SOFTSTOP_BUCKETIN_ON;
-		BucketOut = CAN1CommManager.DATA_STATE_SOFTSTOP_BUCKETOUT_ON;
+		BucketIn = CAN1CommManager.DATA_STATE_SOFTSTOP_BUCKETIN_OFF;
+		BucketOut = CAN1CommManager.DATA_STATE_SOFTSTOP_BUCKETOUT_OFF;
 		
 		CAN1Comm.Set_SoftStopBoomUp_2337_PGN61184_203(BoomUp);
 		CAN1Comm.Set_SoftStopBoomDown_2338_PGN61184_203(BoomDown);

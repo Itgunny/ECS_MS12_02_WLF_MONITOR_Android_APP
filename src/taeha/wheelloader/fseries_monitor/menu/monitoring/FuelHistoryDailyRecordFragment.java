@@ -307,7 +307,14 @@ public class FuelHistoryDailyRecordFragment  extends ParentFragment{
 		ClickOK();
 	}
 	public void ClickEnter(){
-		ClickOK();
+		switch (CursurIndex) {
+		case 2:		
+			ClickInitial();
+			break;
+		default:
+			ClickOK();
+			break;
+		}
 	}
 	public void CursurDisplay(int Index){
 		imgbtnInital.setPressed(false);

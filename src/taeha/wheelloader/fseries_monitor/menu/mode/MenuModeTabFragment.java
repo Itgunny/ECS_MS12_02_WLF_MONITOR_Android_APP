@@ -259,6 +259,11 @@ public class MenuModeTabFragment extends ParentFragment{
 			setClickNull();
 			ParentActivity._MenuBaseFragment._MenuModeFragment.SetModeFocusIndex(MenuModeFragment.STATE_CURSUR_LEFT);
 			break;
+		case Home.SCREEN_STATE_MENU_MODE_ETC_CALIBRATION_TOP:
+			ParentActivity._MenuBaseFragment._MenuModeFragment.HideTab();
+			ParentActivity._MenuBaseFragment._MenuModeFragment.HideETC();
+			ParentActivity._MenuBaseFragment._MenuModeFragment.showCalibrationSetting();
+			break;
 		}
 	}
 	/////////////////////////////////////////////////////////////////////

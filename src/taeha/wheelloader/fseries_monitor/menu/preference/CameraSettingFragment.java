@@ -1,4 +1,4 @@
-package taeha.wheelloader.fseries_monitor.menu.mode;
+package taeha.wheelloader.fseries_monitor.menu.preference;
 
 import taeha.wheelloader.fseries_monitor.animation.AppearAnimation;
 import taeha.wheelloader.fseries_monitor.animation.ChangeFragmentAnimation;
@@ -89,7 +89,7 @@ public class CameraSettingFragment extends ParentFragment{
 		InitValuables();
 		InitButtonListener();
 		
-		ParentActivity.ScreenIndex = ParentActivity.SCREEN_STATE_MENU_MODE_ETC_CAMERASETTING_TOP;
+		ParentActivity.ScreenIndex = ParentActivity.SCREEN_STATE_MENU_PREFERENCE_CAMERASETTING_TOP;
 		ParentActivity._MenuBaseFragment._MenuInterTitleFragment.SetTitleText(ParentActivity.getResources().getString(R.string.Camera_Setting));
 		HandleCursurDisplay = new Handler() {
 			@Override
@@ -263,8 +263,8 @@ public class CameraSettingFragment extends ParentFragment{
 			return;
 		else
 			ParentActivity.StartAnimationRunningTimer();
-		ParentActivity._MenuBaseFragment.showBodyModeAnimation();
-		ParentActivity._MenuBaseFragment._MenuModeFragment.setFirstScreen(Home.SCREEN_STATE_MENU_MODE_ETC_TOP);
+		ParentActivity._MenuBaseFragment.showBodyPreferenceAnimation();
+		ParentActivity._MenuBaseFragment._MenuModeFragment.setFirstScreen(Home.SCREEN_STATE_MENU_PREFERENCE_TOP);
 		
 		ParentActivity.ActiveCameraNum = ActiveCameraNum;
 		ParentActivity.CameraOrder1 = CameraOrder1;
@@ -280,8 +280,8 @@ public class CameraSettingFragment extends ParentFragment{
 			return;
 		else
 			ParentActivity.StartAnimationRunningTimer();
-		ParentActivity._MenuBaseFragment.showBodyModeAnimation();
-		ParentActivity._MenuBaseFragment._MenuModeFragment.setFirstScreen(Home.SCREEN_STATE_MENU_MODE_ETC_TOP);
+		ParentActivity._MenuBaseFragment.showBodyPreferenceAnimation();
+		ParentActivity._MenuBaseFragment._MenuModeFragment.setFirstScreen(Home.SCREEN_STATE_MENU_PREFERENCE_TOP);
 	}
 	public void ClickMinus(){
 		if(ActiveCameraNum <= 1){

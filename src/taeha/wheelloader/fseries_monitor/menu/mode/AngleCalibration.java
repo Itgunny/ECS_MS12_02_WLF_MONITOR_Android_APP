@@ -1,4 +1,4 @@
-package taeha.wheelloader.fseries_monitor.menu.management;
+package taeha.wheelloader.fseries_monitor.menu.mode;
 
 import taeha.wheelloader.fseries_monitor.animation.AppearAnimation;
 import taeha.wheelloader.fseries_monitor.animation.ChangeFragmentAnimation;
@@ -82,7 +82,7 @@ public class AngleCalibration extends ParentFragment{
 		InitValuables();
 		InitButtonListener();
 		CursurDisplay(CursurIndex);
-		ParentActivity.ScreenIndex = ParentActivity.SCREEN_STATE_MENU_MANAGEMENT_CALIBRATION_ANGLE_TOP;
+		ParentActivity.ScreenIndex = ParentActivity.SCREEN_STATE_MENU_MODE_ETC_CALIBRATION_ANGLE_TOP;
 		ParentActivity._MenuBaseFragment._MenuInterTitleFragment.SetTitleText(ParentActivity.getResources().getString(R.string.Boom_Bucket_Angle_Calibration));
 		HandleCursurDisplay = new Handler() {
 			@Override
@@ -190,7 +190,12 @@ public class AngleCalibration extends ParentFragment{
 			return;
 		else
 			ParentActivity.StartAnimationRunningTimer();
-		ParentActivity._MenuBaseFragment.showCalibrationAnimation();
+		// ++, 150409 cjg
+//		ParentActivity._MenuBaseFragment.showCalibrationAnimation();
+		ParentActivity._MenuBaseFragment.showBodyModeAnimation();
+		ParentActivity._MenuBaseFragment._MenuModeFragment.setFirstScreen(Home.SCREEN_STATE_MENU_MODE_ETC_CALIBRATION_TOP);
+		// --, 150409 cjg
+		
 	}
 	public void ClickNext(){
 		CAN1Comm.Set_RequestBoomBucketAngleSensorCalibration_PGN61184_201(m_BoomAngleCaliStep);
@@ -401,7 +406,7 @@ public class AngleCalibration extends ParentFragment{
 				// TODO Auto-generated method stub
 				int Reply = CAN1Comm.Get_AngleSensorCalibrationStatus_1909_PGN61184_202();
 				
-				Log.d(TAG,"Reply : " + Integer.toString(Reply));
+				//Log.d(TAG,"Reply : " + Integer.toString(Reply));
 				if(AngleError_Flag == 1)		// Error Popup
 				{
 					CAN1Comm.Set_RequestBoomPressureCalibration_PGN61184_201(0);

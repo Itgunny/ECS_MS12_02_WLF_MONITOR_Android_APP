@@ -155,7 +155,7 @@ public class ICCOModePopup extends ParentPopup{
 		}
 	}
 	public void ClickESC(){
-		
+		this.dismiss();
 	}
 	public void ClickEnter(){
 		switch (CursurIndex) {

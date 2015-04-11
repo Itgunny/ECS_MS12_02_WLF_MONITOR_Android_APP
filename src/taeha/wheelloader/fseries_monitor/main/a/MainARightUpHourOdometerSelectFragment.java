@@ -88,9 +88,6 @@ public class MainARightUpHourOdometerSelectFragment extends ParentFragment{
 	protected void InitValuables() {
 		// TODO Auto-generated method stub
 		super.InitValuables();
-		
-		CursurIndex = 1;
-		CursurDisplay(CursurIndex);		
 	}
 	@Override
 	protected void InitButtonListener() {
@@ -142,11 +139,10 @@ public class MainARightUpHourOdometerSelectFragment extends ParentFragment{
 	public void HourOdometerDisplay(int Data){
 		switch (Data) {
 		case CAN1CommManager.DATA_STATE_OPERATION_NOSELECT:
-			radioLatestHour.setChecked(false);
-			radioTotalOdo.setChecked(false);
-			radioLatestOdo.setChecked(false);
-			break;
-			
+//			radioLatestHour.setChecked(false);
+//			radioTotalOdo.setChecked(false);
+//			radioLatestOdo.setChecked(false);
+//			break;
 		case CAN1CommManager.DATA_STATE_HOURMETER_LATEST:
 			radioLatestHour.setChecked(true);
 			radioTotalOdo.setChecked(false);
@@ -169,6 +165,9 @@ public class MainARightUpHourOdometerSelectFragment extends ParentFragment{
 			break;
 		}
 		
+		CursurIndex = Data;
+		CursurDisplay(CursurIndex);		
+
 	}
 	public void ClickLatestHourmeter(){
 		if(ParentActivity.AnimationRunningFlag == true)

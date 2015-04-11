@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.RadioButton;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import taeha.wheelloader.fseries_monitor.main.CAN1CommManager;
 import taeha.wheelloader.fseries_monitor.main.ParentFragment;
@@ -20,6 +21,9 @@ public class MainAKeyBeaconLampFragment extends ParentFragment{
 	//RESOURCE////////////////////////////////////////
 	RadioButton radioOff;
 	RadioButton radioOn;
+	
+	RelativeLayout	layoutAvailable;
+	RelativeLayout	layoutNotAvailable;
 	//////////////////////////////////////////////////
 	
 	//VALUABLE////////////////////////////////////////
@@ -63,6 +67,8 @@ public class MainAKeyBeaconLampFragment extends ParentFragment{
 		radioOff = (RadioButton)mRoot.findViewById(R.id.radioButton_key_main_a_beaconlamp_off);
 		radioOn = (RadioButton)mRoot.findViewById(R.id.radioButton_key_main_a_beaconlamp_on);
 
+		layoutAvailable = (RelativeLayout)mRoot.findViewById(R.id.RelativeLayout_key_main_a_beaconlamp_available);
+		layoutNotAvailable = (RelativeLayout)mRoot.findViewById(R.id.RelativeLayout_key_main_a_beaconlamp_notavailable);
 	}
 	
 	protected void InitValuables() {
@@ -102,6 +108,20 @@ public class MainAKeyBeaconLampFragment extends ParentFragment{
 	protected void UpdateUI() {
 		// TODO Auto-generated method stub
 		BeaconLampDisplay(BeaconLamp);
+		KeyBGDisplay(BeaconLamp);
+	}
+	/////////////////////////////////////////////////////////////////////	
+	public void KeyBGDisplay(int Data){
+		switch (Data){
+		case CAN1CommManager.DATA_STATE_NOTAVAILABLE:
+			layoutAvailable.setVisibility(View.INVISIBLE);
+			layoutNotAvailable.setVisibility(View.VISIBLE);
+			break;
+		default:
+			layoutAvailable.setVisibility(View.VISIBLE);
+			layoutNotAvailable.setVisibility(View.INVISIBLE);
+			break;
+		}
 	}
 	/////////////////////////////////////////////////////////////////////	
 	public void BeaconLampDisplay(int Data){

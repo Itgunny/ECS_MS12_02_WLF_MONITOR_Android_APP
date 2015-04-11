@@ -257,7 +257,7 @@ public class MainBKeyWorkLoadFragment extends ParentFragment{
 		
 		ParentActivity._MainChangeAnimation.StartChangeAnimation(ParentActivity._MenuBaseFragment);
 		ParentActivity.OldScreenIndex = Home.SCREEN_STATE_MAIN_B_TOP;
-		ParentActivity._MenuBaseFragment.setFirstScreenIndex(Home.SCREEN_STATE_MENU_MANAGEMENT_CALIBRATION_PRESSURE_TOP);
+		ParentActivity._MenuBaseFragment.setFirstScreenIndex(Home.SCREEN_STATE_MENU_MODE_ETC_CALIBRATION_PRESSURE_TOP);
 	}
 	
 	// ++, 150210 bwk

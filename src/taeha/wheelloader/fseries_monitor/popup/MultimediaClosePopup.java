@@ -62,12 +62,12 @@ public class MultimediaClosePopup extends ParentPopup {
 		InitButtonListener();
 		InitValuable();
 		super.show();
-		// ++, 150323 bwk
-//		if(ParentActivity.DisplayType == Home.DISPLAY_TYPE_A)
-//			ParentActivity.ScreenIndex = ParentActivity.SCREEN_STATE_MAIN_B_QUICK_MULTICLOSE;
-//		else if(ParentActivity.DisplayType == Home.DISPLAY_TYPE_B)
-//			ParentActivity.ScreenIndex = ParentActivity.SCREEN_STATE_MAIN_A_QUICK_MULTICLOSE;
-		// --, 150323 bwk
+
+		if(ParentActivity.DisplayType == Home.DISPLAY_TYPE_A)
+			ParentActivity.ScreenIndex = ParentActivity.SCREEN_STATE_MAIN_B_QUICK_MULTICLOSE;
+		else if(ParentActivity.DisplayType == Home.DISPLAY_TYPE_B)
+			ParentActivity.ScreenIndex = ParentActivity.SCREEN_STATE_MAIN_A_QUICK_MULTICLOSE;
+
 	}
 
 	@Override

@@ -729,8 +729,8 @@ public class MainALeftMainFragment extends ParentFragment{
 	public void FuelTitleDisplay(int _Index){
 		switch (_Index) {
 		case CAN1CommManager.DATA_STATE_FUEL_NOSELECT:
-			FuelTitleAnimation.FlipAnimation(textViewFuelTitle,"");
-			break;
+//			FuelTitleAnimation.FlipAnimation(textViewFuelTitle,"");
+//			break;
 		case CAN1CommManager.DATA_STATE_AVERAGE_FUEL_RATE:
 			FuelTitleAnimation.FlipAnimation(textViewFuelTitle,getResources().getString(string.AVERAGE_FUEL_RATE));
 			break;
@@ -744,9 +744,9 @@ public class MainALeftMainFragment extends ParentFragment{
 	public void FuelDataDisplay(int _Index, int AverageFuel, int LatestConsumed){
 		switch (_Index) {
 		case CAN1CommManager.DATA_STATE_FUEL_NOSELECT:
-			textViewFuelData.setText("");
-			textViewFuelUnit.setText("");
-			break;
+//			textViewFuelData.setText("");
+//			textViewFuelUnit.setText("");
+//			break;
 		case CAN1CommManager.DATA_STATE_AVERAGE_FUEL_RATE:
 			textViewFuelData.setText(ParentActivity.GetFuelRateString(AverageFuel));
 			textViewFuelUnit.setText(ParentActivity.getResources().getString(string.l_h));

@@ -232,8 +232,8 @@ public class MainARightMainFragment extends ParentFragment{
 	public void HourOdometerTitleDisplay(int _Index){
 		switch (_Index) {
 		case CAN1CommManager.DATA_STATE_OPERATION_NOSELECT:
-			HourOdometerTitleAnimation.FlipAnimation(textViewHourOdoTitle,"");
-			break;
+//			HourOdometerTitleAnimation.FlipAnimation(textViewHourOdoTitle,"");
+//			break;
 		case CAN1CommManager.DATA_STATE_HOURMETER_LATEST:
 			HourOdometerTitleAnimation.FlipAnimation(textViewHourOdoTitle,getResources().getString(string.LATEST_HOURMETER));
 			break;
@@ -251,9 +251,9 @@ public class MainARightMainFragment extends ParentFragment{
 	public void HourOdometerDataDisplay(int _Index, int LatestHour, int TotalOdo, int LatestOdo){
 		switch (_Index) {
 		case CAN1CommManager.DATA_STATE_OPERATION_NOSELECT:
-			textViewHourOdoData.setText("");
-			textViewHourOdoUnit.setText("");
-			break;
+//			textViewHourOdoData.setText("");
+//			textViewHourOdoUnit.setText("");
+//			break;
 		case CAN1CommManager.DATA_STATE_HOURMETER_LATEST:
 			textViewHourOdoData.setText(ParentActivity.GetHourmeterString(LatestHour));
 			textViewHourOdoUnit.setText(ParentActivity.getResources().getString(string.Hr));
@@ -282,7 +282,8 @@ public class MainARightMainFragment extends ParentFragment{
 	}	
 	
 	public void TCLockUpShow(){
-		if(CAN1Comm.Get_ComponentCode_1699_PGN65330_EHCU() != CAN1CommManager.STATE_COMPONENTCODE_EHCU){
+		if(ParentActivity._CheckModel.GetMCUVersion(CAN1Comm.Get_ComponentBasicInformation_1698_PGN65330()) == CheckModel.MODEL_940
+			|| ParentActivity._CheckModel.GetMCUVersion(CAN1Comm.Get_ComponentBasicInformation_1698_PGN65330()) == CheckModel.MODEL_935){
 			layoutTCLockUp.setVisibility(View.GONE);
 			imgbtnTCLockUp.setClickable(false);
 		}else if(ParentActivity._CheckModel.GetTCUModel(CAN1Comm.Get_ComponentBasicInformation_1698_PGN65330_TCU()) == CheckModel.TCU_4SPEED){

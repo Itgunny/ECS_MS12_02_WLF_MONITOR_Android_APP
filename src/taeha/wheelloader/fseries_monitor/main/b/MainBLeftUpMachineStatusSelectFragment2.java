@@ -105,7 +105,30 @@ public class MainBLeftUpMachineStatusSelectFragment2 extends ParentFragment{
 		// TODO Auto-generated method stub
 		super.InitValuables();
 		SelectFlag = SELECT_UPPER;
-		CursurIndex = 1;
+		switch (ParentActivity.MachineStatusUpperIndex) {
+		case CAN1CommManager.DATA_STATE_MACHINESTATUS_HYD:
+			CursurIndex = 1;
+			break;
+		case CAN1CommManager.DATA_STATE_MACHINESTATUS_TMOIL:
+			CursurIndex = 2;
+			break;
+		case CAN1CommManager.DATA_STATE_MACHINESTATUS_BATTERY:
+			CursurIndex = 3;
+			break;
+		case CAN1CommManager.DATA_STATE_MACHINESTATUS_WEIGHING:
+			CursurIndex = 4;
+			break;
+		case CAN1CommManager.DATA_STATE_MACHINESTATUS_COOLANT:
+			CursurIndex = 5;
+			break;
+		case CAN1CommManager.DATA_STATE_MACHINESTATUS_FRONTAXLE:
+			CursurIndex = 6;
+			break;
+		case CAN1CommManager.DATA_STATE_MACHINESTATUS_NOSELECT:
+		default:
+			CursurIndex = 1;
+			break;
+		}
 		CursurDisplay(CursurIndex);
 	}
 	@Override

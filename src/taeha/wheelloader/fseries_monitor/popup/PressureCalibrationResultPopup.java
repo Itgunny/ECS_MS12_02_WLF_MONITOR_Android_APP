@@ -68,7 +68,7 @@ public class PressureCalibrationResultPopup extends ParentPopup{
 		InitButtonListener();
 		InitValuable();
 		
-		ParentActivity.ScreenIndex = ParentActivity.SCREEN_STATE_MENU_MANAGEMENT_CALIBRATION_PRESSURE_RESULT;
+		ParentActivity.ScreenIndex = ParentActivity.SCREEN_STATE_MENU_MODE_ETC_CALIBRATION_PRESSURE_RESULT;
 	}
 
 	@Override
@@ -81,7 +81,7 @@ public class PressureCalibrationResultPopup extends ParentPopup{
 	public void dismiss() {
 		// TODO Auto-generated method stub
 		super.dismiss();
-		ParentActivity.ScreenIndex = ParentActivity.SCREEN_STATE_MENU_MANAGEMENT_CALIBRATION_PRESSURE_TOP;
+		ParentActivity.ScreenIndex = ParentActivity.SCREEN_STATE_MENU_MODE_ETC_CALIBRATION_PRESSURE_TOP;
 		try {
 			ParentActivity._MenuBaseFragment._PressureCalibration.CursurDisplay(1);
 		} catch (NullPointerException e) {
@@ -131,7 +131,13 @@ public class PressureCalibrationResultPopup extends ParentPopup{
 	public void ClickOK(){
 		Log.d(TAG,"bExitPage : " + Boolean.toString(bExitPage));
 		if(bExitPage == true)
-			ParentActivity._MenuBaseFragment.showCalibrationAnimation();
+		{
+			// ++, 150409 cjg
+//			ParentActivity._MenuBaseFragment.showCalibrationAnimation();
+			ParentActivity._MenuBaseFragment.showBodyModeAnimation();
+			ParentActivity._MenuBaseFragment._MenuModeFragment.setFirstScreen(Home.SCREEN_STATE_MENU_MODE_ETC_CALIBRATION_TOP);
+			// --, 150409 cjg
+		}
 		this.dismiss();
 	}	
 	////////////////////////////////////////////////////////////////////////////////

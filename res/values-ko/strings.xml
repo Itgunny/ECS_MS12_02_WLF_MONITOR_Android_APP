@@ -85,16 +85,16 @@
     <string name="l">l</string>
     <!-- Common End-->
     <!-- Main Start-->
-    <string name="ENGINE_MODE">ENGINE MODE</string>
-    <string name="WARMING_UP">WARMING UP</string>
-    <string name="CCO_MODE">C.C.O. MODE</string>
-    <string name="ICCO_MODE">I.C.C.O. MODE</string>
-    <string name="SHIFT_MODE">SHIFT MODE</string>
-    <string name="TC_LOCK_UP">T.C. LOCK UP</string>
+    <string name="ENGINE_MODE">엔진 모드</string>
+    <string name="WARMING_UP">워밍업</string>
+    <string name="CCO_MODE">C.C.O. 모드</string>
+    <string name="ICCO_MODE">I.C.C.O. 모드</string>
+    <string name="SHIFT_MODE">변속 모드</string>
+    <string name="TC_LOCK_UP">T.C. 잠금 모드</string>
     <string name="TOTAL_HOURMETER">전체 작업시간</string>
     <string name="LATEST_HOURMETER">최근 작업시간</string>
-    <string name="AVERAGE_FUEL_RATE">AVERAGE FUEL RATE</string>
-    <string name="CURRENT_FUEL_RATE">CURRENT FUEL RATE</string>
+    <string name="AVERAGE_FUEL_RATE">평균 연비</string>
+    <string name="CURRENT_FUEL_RATE">순간 연비</string>
     <string name="TOTAL_ODOMETER">전체 주행거리</string>
     <string name="LATEST_ODOMETER">최근 주행거리</string>
     <string name="ECONO">ECONO</string>
@@ -111,8 +111,8 @@
     <string name="AH">AH</string>
     <string name="Total_Hourmeter">전체 작업시간</string>
     <string name="Latest_Hourmeter">최근 작업시간</string>
-    <string name="Average_Fuel_Rate">Average Fuel Rate</string>
-    <string name="Current_Fuel_Rate">Current Fuel Rate</string>
+    <string name="Average_Fuel_Rate">평균 연비</string>
+    <string name="Current_Fuel_Rate">순간 연비</string>
     <string name="Total_Odometer">전체 주행거리</string>
     <string name="Latest_Odometer">최근 주행거리</string>
     <string name="HYD_Temp">작동유 온도</string>
@@ -129,8 +129,8 @@
     <string name="User2">사용자2</string>
     <string name="User3">사용자3</string>
     <string name="User4">사용자4</string>
-    <string name="Save">Save</string>
-    <string name="Apply">Apply</string>
+    <string name="Save">저장</string>
+    <string name="Apply">적용</string>
     <string name="Item">Item</string>
     <string name="Current_Data">Current Data</string>
     <string name="Loading_Data">Loading Data</string>
@@ -144,9 +144,9 @@
     <string name="Lamp_FuelWarmer">Fuel Warmer</string>
     <string name="Lamp_Preheat">Preheat</string>
     <string name="Lamp_FloatMode">Float Mode</string>
-    <string name="SuddenChange_BucketFullIn_Error_Warning">bucket full in이 되지 않고, 작업장치의 각속도가 급변하여 계측값이 부정확할 수 있습니다. Enter 키를 눌러 재계측 하십시오.</string>
-    <string name="Bucket_Full_In_Error_Warning">bucket full in이 되지 않아 계측값이 부정확 할 수 있습니다. Enter 키를 눌러 재계측 하십시오.</string>
-    <string name="Sudden_Change_Error_Warning">작업장치의 각속도가 급변하여 계측값이 부정확 할 수 있습니다. Enter 키를 눌러 재계측 하십시오.</string>
+    <string name="SuddenChange_BucketFullIn_Error_Warning">Bucket is not full in and angular speed is a sudden change, though weigh may be inaccurate. Press the Enter Key to reweigh.</string>
+    <string name="Bucket_Full_In_Error_Warning">Bucket is not full in, though weigh may be inaccurate. Press the Enter Key to reweigh.</string>
+    <string name="Sudden_Change_Error_Warning">Angular speed is a sudden change, though weigh may be inaccurate. Press the Enter Key to reweigh.</string>
     <string name="Hydraulic_Oil_Temp_Low_Warning">Hydraulic oil temperature low.</string>
     <string name="LATEST_FUEL_CONSUMED">LATEST FUEL CONSUMED</string>
     <string name="Latest_Fuel_Consumed">Latest Fuel Consumed</string>
@@ -154,28 +154,28 @@
     <string name="CloseMira">Miracast is running.\nYou want to close a Miracast?</string>
     <string name="Front_Axle_Temp">Front Axle Temp.</string>
     <string name="Rear_Axle_Temp">Rear Axle Temp.</string>
-    <string name="A_DAYS_FUEL_USED">A DAYS FUEL USED</string>
-    <string name="A_Days_Fuel_Used">A Days Fuel Used</string>
+    <string name="A_DAYS_FUEL_USED">하루 연료 소모량</string>
+    <string name="A_Days_Fuel_Used">하루 연료 소모량</string>
     <!-- Main End -->
     <!-- Key Start-->
-    <string name="Main_Light">Main Light</string>
-    <string name="Work_Light">Work Light</string>
-    <string name="Auto_Grease">Auto Grease</string>
-    <string name="Quick_Coupler">Quick Coupler</string>
-    <string name="Ride_Control">Ride Control</string>
-    <string name="Work_Load">Work Load</string>
-    <string name="Beacon_Lamp">Beacon Lamp</string>
-    <string name="Rear_Wiper">Rear Wiper</string>
-    <string name="Mirror_Heat">Mirror Heat</string>
-    <string name="Detent_Setting">Detent Setting</string>
-    <string name="Fine_Modulation">Fine Modulation</string>
+    <string name="Main_Light">메인 라이트</string>
+    <string name="Work_Light">작업등</string>
+    <string name="Auto_Grease">자동 급지</string>
+    <string name="Quick_Coupler">퀵 커플러</string>
+    <string name="Ride_Control">라이드 컨트롤</string>
+    <string name="Work_Load">작업량 설정</string>
+    <string name="Beacon_Lamp">경광등</string>
+    <string name="Rear_Wiper">후방 와이퍼</string>
+    <string name="Mirror_Heat">미러 김서림 방지</string>
+    <string name="Detent_Setting">디텐트 설정</string>
+    <string name="Fine_Modulation">파인 모듈레이션</string>
     <string name="FN">FN</string>
     <string name="Position_Lamp">포지션 램프</string>
     <string name="Head_Lamp">헤드 램프</string>
     <string name="Front">전방</string>
     <string name="Rear">후방</string>
-    <string name="Locking_Attachment">Locking Attachment</string>
-    <string name="Unlocking_Attachment">Unlocking Attachment</string>
+    <string name="Locking_Attachment">작업장치 고정</string>
+    <string name="Unlocking_Attachment">작업장치 해제</string>
     <string name="On_Conditional_Speed">지정 속도에서 동작</string>
     <string name="Weighing_System_Mode">작업량 적산 방식</string>
     <string name="Weighing_Display">작업량 표시</string>
@@ -185,9 +185,9 @@
     <string name="Total_A">전체 A</string>
     <string name="Total_B">전체 B</string>
     <string name="Total_C">전체 C</string>
-    <string name="Intermittent">Intermittent</string>
-    <string name="Low">Low</string>
-    <string name="Washer">Washer</string>
+    <string name="Intermittent">간헐적</string>
+    <string name="Low">저속</string>
+    <string name="Washer">워셔</string>
     <string name="Save_Position">위치 저장</string>
     <string name="Forward">전진</string>
     <string name="Backward">후진</string>
@@ -199,6 +199,12 @@
     <string name="Do_you_want_to_turn_on_Mirror_Heat">Do you want to turn on Mirror Heat?</string>
     <string name="Do_you_want_to_turn_on_Auto_Grease">Do you want to turn on Auto Grease?</string>
     <string name="Do_not_show_again">Do not show again</string>
+    <string name="This_machine_does_not_support_this_feature">This machine does not support this feature.</string>
+    <string name="Auto_Grease_is_NOT_equipped">Auto Grease is NOT equipped.</string>
+    <string name="Beacon_Lamp_is_NOT_equipped">Beacon Lamp is NOT equipped.</string>
+    <string name="Mirror_Heat_is_NOT_equipped">Mirror Heat is NOT equipped.</string>
+    <string name="Quick_Coupler_is_NOT_equipped">Quick Coupler is NOT equipped.</string>
+    <string name="Ride_Control_is_NOT_equipped">Ride Control is NOT equipped.</string>
     <!-- Key End -->
     <!-- Menu Start -->
     <string name="Mode">기능설정</string>
@@ -212,27 +218,27 @@
     <string name="TM">TM.</string>
     <string name="HYD">유압</string>
     <string name="ETC">기타</string>
-    <string name="CCO_Mode">C.C.O Mode</string>
-    <string name="ICCO_Mode">I.C.C.O. Mode</string>
-    <string name="Shift_Mode">Shift Mode</string>
+    <string name="CCO_Mode">C.C.O 모드</string>
+    <string name="ICCO_Mode">I.C.C.O. 모드</string>
+    <string name="Shift_Mode">변속 모드</string>
     <string name="Kick_Down">킥 다운</string>
     <string name="Engine_Speed">엔진 rpm 설정</string>
     <string name="Engine_Setting">엔진 설정</string>
-    <string name="Warming_Up">Warming Up</string>
-    <string name="TC_Lock_Up">T.C. Lock Up</string>
+    <string name="Warming_Up">워밍업</string>
+    <string name="TC_Lock_Up">T.C. 잠금 모드</string>
     <string name="Bucket_Priority">버켓 우선 기능</string>
-    <string name="Boom_Bucket_Detent_Mode">Boom Bucket Detent Mode</string>
+    <string name="Boom_Bucket_Detent_Mode">붐/버켓 디텐트 모드</string>
     <string name="Auxilliary_Attachment_Max_Flow_Level">보조 작업장치 유량 단계 설정</string>
-    <string name="Soft_End_Stop">Soft End Stop</string>
+    <string name="Soft_End_Stop">소프트 앤드 스탑</string>
     <string name="Engine_Auto_Shutdown">엔진 자동 정지</string>
     <string name="Engine_Delay_Shutdown">엔진 지연 정지</string>
     <string name="Camera_Setting">카메라 설정</string>
     <string name="Cooling_Fan_Reverse_Mode">냉각팬 역회전 설정</string>
     <string name="Wiper_Level_Setting">와이퍼 단수 설정</string>
-    <string name="MODE1">MODE 1</string>
-    <string name="MODE2">MODE 2</string>
-    <string name="MODE1_DOWN_UP">MODE 1 : DOWN / UP</string>
-    <string name="MODE2_DOWN_ONLY">MODE 2 : DOWN ONLY</string>
+    <string name="MODE1">모드 1</string>
+    <string name="MODE2">모드 2</string>
+    <string name="MODE1_DOWN_UP">모드 1 : 다운/업</string>
+    <string name="MODE2_DOWN_ONLY">모드 2 : 다운만</string>
     <string name="Active_Camera">동작 카메라 수</string>
     <string name="Display_Order">카메라 순서</string>
     <string name="CAM_1">CAM 1</string>
@@ -246,19 +252,19 @@
     <string name="Gear_Linkage_Mode">후진기어 연동모드</string>
     <string name="Interval">주기</string>
     <string name="Time">시간</string>
-    <string name="Boom_Up">Boom Up</string>
-    <string name="Boom_Down">Boom Down</string>
-    <string name="Bucket_In">Bucket In</string>
-    <string name="Bucket_Dump">Bucket Dump</string>
-    <string name="Engine_Mode">Engine Mode</string>
+    <string name="Boom_Up">붐 상승</string>
+    <string name="Boom_Down">붐 하강</string>
+    <string name="Bucket_In">버켓 롤백</string>
+    <string name="Bucket_Dump">버켓 덤프</string>
+    <string name="Engine_Mode">엔진 모드</string>
     <string name="Econo">Econo</string>
     <string name="Standard">Standard</string>
     <string name="Power">Power</string>
     <string name="Hz">Hz</string>
-    <string name="Slow">Slow</string>
-    <string name="Normal">Normal</string>
-    <string name="Fast">Fast</string>
-    <string name="Very_Fast">Very Fast</string>
+    <string name="Slow">저속</string>
+    <string name="Normal">보통</string>
+    <string name="Fast">고속</string>
+    <string name="Very_Fast">매우 고속</string>
     <string name="Excute">Excute</string>
     <string name="Push_and_hold_to_reverse_rotation">Push and hold to reverse rotation.</string>
     <string name="rpm_km_h">rpm/km/h</string>
@@ -270,9 +276,9 @@
     <string name="Fault_History">고장 이력</string>
     <string name="EHCU_IO_Information">전자유압제어 입출력 정보</string>
     <string name="Version_Information">버전정보</string>
-    <string name="Operation">Operation</string>
-    <string name="Joystick_Stroke">Joystick Stroke</string>
-    <string name="EPPR_Current">EPPR Current</string>
+    <string name="Operation">진단</string>
+    <string name="Joystick_Stroke">조이스틱 행정</string>
+    <string name="EPPR_Current">EPPR 전류</string>
     <string name="Aux_Up">Aux Up</string>
     <string name="Aux_Down">Aux Down</string>
     <string name="Current">현재</string>
@@ -331,11 +337,11 @@
     <string name="Boom_Down_Response_Adjust">Boom Down Response Adjust</string>
     <string name="Bucket_Dump_Response_Adjust">Bucket Dump Response Adjust</string>
     <string name="Hardware">Hardware</string>
-    <string name="Fuel_Consumption_History">Fuel Consumption History</string>
-    <string name="General_Record">General Record</string>
-    <string name="Hourly_Record">Hourly Record</string>
-    <string name="Daily_Record">Daily Record</string>
-    <string name="Mode_Record">Mode Record</string>
+    <string name="Fuel_Consumption_History">연료 소비량 정보</string>
+    <string name="General_Record">평균 연비/하루 연료 소모량</string>
+    <string name="Hourly_Record">시간 별 평균 연비</string>
+    <string name="Daily_Record">일자 별 연료 소모량</string>
+    <string name="Mode_Record">모드 별 연비</string>
     <!-- Menu Monitoring End -->
     <!-- Menu Management Start -->
     <string name="Machine_Security">시동제한</string>
@@ -471,6 +477,5 @@
     <string name="Finnish">핀란드어</string>
     <!-- Language End -->
 </resources>
-
 
 

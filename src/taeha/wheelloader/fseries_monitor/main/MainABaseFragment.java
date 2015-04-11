@@ -1017,7 +1017,6 @@ public class MainABaseFragment extends ParentFragment{
 			_KeyTitleBGShiftAnimation.StartShiftAnimation();
 			_KeyBodyBGShiftAnimation.StartShiftAnimation();
 			VirtualKeyChangeAnimation.StartDisappearAnimation();
-		
 			
 		}else{
 
@@ -1296,16 +1295,16 @@ public class MainABaseFragment extends ParentFragment{
 			showDetentAnimation();
 			break;
 		case CAN1CommManager.FINEMODULATION:
-			if(CAN1Comm.Get_ComponentCode_1699_PGN65330_EHCU() != CAN1CommManager.STATE_COMPONENTCODE_EHCU){
-				ParentActivity.showFineModulation();	// ++, --, 150402 bwk
-			}else{
+//			if(CAN1Comm.Get_ComponentCode_1699_PGN65330_EHCU() != CAN1CommManager.STATE_COMPONENTCODE_EHCU){
+//				ParentActivity.showFineModulation();	// ++, --, 150402 bwk
+//			}else{
 				if(ParentActivity.AnimationRunningFlag == true)
 					return;
 				if(ParentActivity.ScreenIndex != ParentActivity.SCREEN_STATE_MAIN_A_KEY_FINEMODULATION)
 					showFineModulationAnimation();
 				else
 					_MainAKeyFineModulationFragment.ClickHardKey();
-			}
+//			}
 
 			break;
 		case CAN1CommManager.CAMERA:
@@ -1377,6 +1376,9 @@ public class MainABaseFragment extends ParentFragment{
 		case  Home.SCREEN_STATE_MAIN_A_QUICK_MULTICLOSE:
 			ParentActivity._MultimediaClosePopup.ClickLeft();
 			break;
+		case Home.SCREEN_STATE_MAIN_A_QUICK_MIRACLOSE:
+			ParentActivity._MiracastClosePopup.ClickLeft();
+			break;
 		}
 	}
 	
@@ -1399,6 +1401,9 @@ public class MainABaseFragment extends ParentFragment{
 			break;
 		case  Home.SCREEN_STATE_MAIN_A_QUICK_MULTICLOSE:
 			ParentActivity._MultimediaClosePopup.ClickRight();
+			break;
+		case Home.SCREEN_STATE_MAIN_A_QUICK_MIRACLOSE:
+			ParentActivity._MiracastClosePopup.ClickRight();
 			break;
 			
 		}
@@ -1439,9 +1444,6 @@ public class MainABaseFragment extends ParentFragment{
 		case Home.SCREEN_STATE_MAIN_A_KEY_FINEMODULATION:
 			showKeytoDefaultScreenAnimation();
 			break;	
-		case Home.SCREEN_STATE_MAIN_A_KEY_FINEMODULATION_POPUP:
-			ParentActivity._FineModulationPouup.ClickESC();
-			break;
 		case Home.SCREEN_STATE_MAIN_A_BRKAEPEDALCALIBRATION_TOP:
 		case Home.SCREEN_STATE_MAIN_A_AEB_TOP:
 			showCalibrationtoDefaultScreenAnimation();
@@ -1461,6 +1463,9 @@ public class MainABaseFragment extends ParentFragment{
 			break;
 		case  Home.SCREEN_STATE_MAIN_A_QUICK_MULTICLOSE:
 			ParentActivity._MultimediaClosePopup.ClickESC();
+			break;
+		case Home.SCREEN_STATE_MAIN_A_QUICK_MIRACLOSE:
+			ParentActivity._MiracastClosePopup.ClickESC();
 			break;
 			
 		default:
@@ -1482,14 +1487,14 @@ public class MainABaseFragment extends ParentFragment{
 			case Home.SCREEN_STATE_MAIN_A_LEFTDOWN_FUEL:
 				_MainALeftDownFuelSelectFragment.ClickEnter();
 				break;
-			case Home.SCREEN_STATE_MAIN_A_KEY_FINEMODULATION_POPUP:
-				ParentActivity._FineModulationPouup.ClickEnter();
-				break;
 			case Home.SCREEN_STATE_MAIN_A_RIGHTUP_HOURODMETER:
 				_MainARightUpHourOdometerSelectFragment.ClickEnter();
 				break;
 			case  Home.SCREEN_STATE_MAIN_A_QUICK_MULTICLOSE:
 				ParentActivity._MultimediaClosePopup.ClickEnter();
+				break;
+			case Home.SCREEN_STATE_MAIN_A_QUICK_MIRACLOSE:
+				ParentActivity._MiracastClosePopup.ClickEnter();
 				break;
 				
 			default:

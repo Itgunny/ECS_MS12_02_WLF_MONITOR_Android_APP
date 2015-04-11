@@ -23,7 +23,7 @@
 
         <TextView
             android:id="@+id/textView_leftdown_fuel_title"
-            android:layout_width="wrap_content"
+            android:layout_width="230dp"
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
             android:layout_marginTop="10dp"
