@@ -39,30 +39,6 @@ public class VersionInfoDetailFragment extends ParentFragment{
 	protected static final int STATE_MAKER					 				= 1;
 	protected static final int STATE_VERSION					 			= 2;
 	
-	
-	protected static final int STATE_COMPONENTCODE_MCU							= 1;
-	protected static final int STATE_COMPONENTCODE_ECM							= 5;	
-	protected static final int STATE_COMPONENTCODE_TCU 							= 8;
-	protected static final int STATE_COMPONENTCODE_MONITOR 						= 11;
-	protected static final int STATE_COMPONENTCODE_SCU							= 15;
-	protected static final int STATE_COMPONENTCODE_HAPTIC						= 16;
-	protected static final int STATE_COMPONENTCODE_CLUSTER						= 21;
-	protected static final int STATE_COMPONENTCODE_RCU							= 25;
-	protected static final int STATE_COMPONENTCODE_RMCU							= 31;
-	protected static final int STATE_COMPONENTCODE_HCE_DT						= 41;
-	protected static final int STATE_COMPONENTCODE_HCU							= 51;
-	protected static final int STATE_COMPONENTCODE_EPCU							= 53;
-	protected static final int STATE_COMPONENTCODE_UCC 							= 55;
-	protected static final int STATE_COMPONENTCODE_APTC							= 61;
-	protected static final int STATE_COMPONENTCODE_AIRCONCONTROLLER				= 62;
-	protected static final int STATE_COMPONENTCODE_JOYSTICKSTEERINGCONTROLLER	= 71;
-	protected static final int STATE_COMPONENTCODE_ELECTRICJOYSTIC_STEERING		= 72;
-	protected static final int STATE_COMPONENTCODE_ELECTRICJOYSTIC_ATTACHMENT	= 73;
-	protected static final int STATE_COMPONENTCODE_SMK							= 81;
-	protected static final int STATE_COMPONENTCODE_ALLAROUNDVIEWCONTROLLER		= 85;
-	protected static final int STATE_COMPONENTCODE_EHCU							= 91;
-	protected static final int STATE_COMPONENTCODE_ENGINE						= 101;
-	
 	protected static final int STATE_MANUFACTURERCODE_TAEHA						= 1;
 	protected static final int STATE_MANUFACTURERCODE_FREEMS					= 10;
 	protected static final int STATE_MANUFACTURERCODE_KYUNGWOO					= 20;

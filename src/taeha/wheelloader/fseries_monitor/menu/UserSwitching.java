@@ -1575,8 +1575,8 @@ public class UserSwitching extends ParentFragment{
 		case CAN1CommManager.DATA_STATE_AVERAGE_FUEL_RATE:
 			adapter.UpdateSecond(STATE_FUEL_INFO, ParentActivity.getResources().getString(string.Average_Fuel_Rate));
 			break;
-		case CAN1CommManager.DATA_STATE_LATEST_FUEL_CONSUMED:
-			adapter.UpdateSecond(STATE_FUEL_INFO, ParentActivity.getResources().getString(string.Latest_Fuel_Consumed));
+		case CAN1CommManager.DATA_STATE_A_DAYS_FUEL_USED:
+			adapter.UpdateSecond(STATE_FUEL_INFO, ParentActivity.getResources().getString(string.A_Days_Fuel_Used));
 			break;
 		default:
 			break;
@@ -1588,8 +1588,8 @@ public class UserSwitching extends ParentFragment{
 		case CAN1CommManager.DATA_STATE_AVERAGE_FUEL_RATE:
 			adapter.UpdateThird(STATE_FUEL_INFO, ParentActivity.getResources().getString(string.Average_Fuel_Rate));
 			break;
-		case CAN1CommManager.DATA_STATE_LATEST_FUEL_CONSUMED:
-			adapter.UpdateThird(STATE_FUEL_INFO, ParentActivity.getResources().getString(string.Latest_Fuel_Consumed));
+		case CAN1CommManager.DATA_STATE_A_DAYS_FUEL_USED:
+			adapter.UpdateThird(STATE_FUEL_INFO, ParentActivity.getResources().getString(string.A_Days_Fuel_Used));
 			break;
 		default:
 			break;

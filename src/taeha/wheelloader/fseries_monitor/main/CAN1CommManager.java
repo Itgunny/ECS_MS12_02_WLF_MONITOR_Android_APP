@@ -140,7 +140,7 @@ public class CAN1CommManager extends ICAN1CommManager.Stub{		// ttySAC1(Linux), 
 	// ++, 150317 bwk
 	public static final int DATA_STATE_FUEL_NOSELECT			= 0;
 	public static final int DATA_STATE_AVERAGE_FUEL_RATE		= 1;
-	public static final int DATA_STATE_LATEST_FUEL_CONSUMED		= 2;
+	public static final int DATA_STATE_A_DAYS_FUEL_USED			= 2;
 	// --, 150317 bwk
 	
 	public static final int DATA_STATE_MACHINESTATUS_NOSELECT	= 0;
@@ -361,6 +361,30 @@ public class CAN1CommManager extends ICAN1CommManager.Stub{		// ttySAC1(Linux), 
 	public static final int DATA_STATE_MODE_FUEL_RATE_INFO_CLEAR						= 113;
 	public static final int DATA_STATE_AVERAGE_FUEL_RATE_INFO_CLEAR						= 201;
 	public static final int DATA_STATE_A_DAYS_FUEL_USED_CLEAR							= 202;
+	
+	public static final int STATE_COMPONENTCODE_MCU									= 1;
+	public static final int STATE_COMPONENTCODE_ECM									= 5;	
+	public static final int STATE_COMPONENTCODE_TCU 								= 8;
+	public static final int STATE_COMPONENTCODE_MONITOR 							= 11;
+	public static final int STATE_COMPONENTCODE_SCU									= 15;
+	public static final int STATE_COMPONENTCODE_HAPTIC								= 16;
+	public static final int STATE_COMPONENTCODE_CLUSTER								= 21;
+	public static final int STATE_COMPONENTCODE_RCU									= 25;
+	public static final int STATE_COMPONENTCODE_RMCU								= 31;
+	public static final int STATE_COMPONENTCODE_HCE_DT								= 41;
+	public static final int STATE_COMPONENTCODE_HCU									= 51;
+	public static final int STATE_COMPONENTCODE_EPCU								= 53;
+	public static final int STATE_COMPONENTCODE_UCC 								= 55;
+	public static final int STATE_COMPONENTCODE_APTC								= 61;
+	public static final int STATE_COMPONENTCODE_AIRCONCONTROLLER					= 62;
+	public static final int STATE_COMPONENTCODE_JOYSTICKSTEERINGCONTROLLER			= 71;
+	public static final int STATE_COMPONENTCODE_ELECTRICJOYSTIC_STEERING			= 72;
+	public static final int STATE_COMPONENTCODE_ELECTRICJOYSTIC_ATTACHMENT			= 73;
+	public static final int STATE_COMPONENTCODE_SMK									= 81;
+	public static final int STATE_COMPONENTCODE_ALLAROUNDVIEWCONTROLLER				= 85;
+	public static final int STATE_COMPONENTCODE_EHCU								= 91;
+	public static final int STATE_COMPONENTCODE_ENGINE								= 101;	
+	
 	
 	public static final int COMMAND_MAINTENANCE_ITEM_LIST_REQUEST						= 0;
 	public static final int MAINTETNANCE_INFORMATION_REQUEST							= 1;

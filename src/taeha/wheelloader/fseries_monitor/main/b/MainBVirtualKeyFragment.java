@@ -250,8 +250,7 @@ public class MainBVirtualKeyFragment extends ParentFragment{
 	}
 	/////////////////////////////////////////////////////////////////////	
 	public void FineModulsationDisplay(){
-		if(ParentActivity._CheckModel.GetMCUVersion(CAN1Comm.Get_ComponentBasicInformation_1698_PGN65330()) == CheckModel.MODEL_940
-		|| ParentActivity._CheckModel.GetMCUVersion(CAN1Comm.Get_ComponentBasicInformation_1698_PGN65330()) == CheckModel.MODEL_935){
+		if(CAN1Comm.Get_ComponentCode_1699_PGN65330_EHCU() != CAN1Comm.STATE_COMPONENTCODE_EHCU){
 			imgbtnFineModulation.setAlpha((float)0.2);
 		}else{
 			imgbtnFineModulation.setAlpha((float)1);
@@ -329,9 +328,8 @@ public class MainBVirtualKeyFragment extends ParentFragment{
 		ParentActivity._MainBBaseFragment.IndicatorChangeAnimation.StartAppearAnimation(ParentActivity._MainBBaseFragment._MainBIndicatorFragment);
 	}
 	public void ClickFineModulation(){
-		if(ParentActivity._CheckModel.GetMCUVersion(CAN1Comm.Get_ComponentBasicInformation_1698_PGN65330()) == CheckModel.MODEL_940
-		|| ParentActivity._CheckModel.GetMCUVersion(CAN1Comm.Get_ComponentBasicInformation_1698_PGN65330()) == CheckModel.MODEL_935){
-			
+		if(CAN1Comm.Get_ComponentCode_1699_PGN65330_EHCU() != CAN1Comm.STATE_COMPONENTCODE_EHCU){
+			ParentActivity.showFineModulation();
 		}else{
 			ParentActivity._MainBBaseFragment.showFineModulationAnimation();
 			ParentActivity._MainBBaseFragment.IndicatorChangeAnimation.StartAppearAnimation(ParentActivity._MainBBaseFragment._MainBIndicatorFragment);

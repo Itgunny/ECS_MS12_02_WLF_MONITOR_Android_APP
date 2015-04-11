@@ -92,22 +92,17 @@ public class ServiceMenuListFragment extends MenuBodyList_ParentFragment{
 		setClickableList1(true);
 		setClickableList2(true);
 		setClickableList3(true);
-		//setClickableList4(true);		// ++, --, 150323 bwk 관리기능 하위로 이동
 		
 		setListTitle1(ParentActivity.getResources().getString(string.Sensor_Monitoring));
 		setListTitle2(ParentActivity.getResources().getString(string.Speed_Limit_Setting));
 		setListTitle3(ParentActivity.getResources().getString(string.Weighing_System_Compensation));
-		//setListTitle4(ParentActivity.getResources().getString(string.Software_Update));		// ++, --, 150323 bwk 관리기능 하위로 이동
 
-		// ++, 150325 bwk
-		if(ParentActivity._CheckModel.GetMCUVersion(CAN1Comm.Get_ComponentBasicInformation_1698_PGN65330()) == CheckModel.MODEL_940
-		|| ParentActivity._CheckModel.GetMCUVersion(CAN1Comm.Get_ComponentBasicInformation_1698_PGN65330()) == CheckModel.MODEL_935){
+		if(CAN1Comm.Get_ComponentCode_1699_PGN65330_EHCU() != CAN1CommManager.STATE_COMPONENTCODE_EHCU){
 			setClickableList4(false);
 		}else{
 			setClickableList4(true);
 			setListTitle4(ParentActivity.getResources().getString(string.EHCU_IO_Information));
 		}
-		// --, 150325 bwk
 	
 	}
 
@@ -224,18 +219,12 @@ public class ServiceMenuListFragment extends MenuBodyList_ParentFragment{
 			
 			break;
 		case 1:
-			// ++, 150325 bwk
-			// ++, 150323 bwk
 			CursurIndex = 4;
-			//CursurIndex = 3;
-			// --, 150323 bwk
-			if(ParentActivity._CheckModel.GetMCUVersion(CAN1Comm.Get_ComponentBasicInformation_1698_PGN65330()) == CheckModel.MODEL_940
-			|| ParentActivity._CheckModel.GetMCUVersion(CAN1Comm.Get_ComponentBasicInformation_1698_PGN65330()) == CheckModel.MODEL_935){
+			if(CAN1Comm.Get_ComponentCode_1699_PGN65330_EHCU() != CAN1CommManager.STATE_COMPONENTCODE_EHCU){
 				CursurIndex = 3;
 			}else{
 				CursurIndex = 4;
 			}
-			// --, 150325 bwk
 			CursurDisplay(CursurIndex);
 			break;
 		case 2:
@@ -268,18 +257,11 @@ public class ServiceMenuListFragment extends MenuBodyList_ParentFragment{
 			CursurDisplay(CursurIndex);
 			break;
 		case 3:
-			// ++, 150325 bwk
-			// ++, 150323 bwk
-			//CursurIndex++;
-//			CursurIndex = 1;
-			// --, 150323 bwk
-			if(ParentActivity._CheckModel.GetMCUVersion(CAN1Comm.Get_ComponentBasicInformation_1698_PGN65330()) == CheckModel.MODEL_940
-			|| ParentActivity._CheckModel.GetMCUVersion(CAN1Comm.Get_ComponentBasicInformation_1698_PGN65330()) == CheckModel.MODEL_935){
+			if(CAN1Comm.Get_ComponentCode_1699_PGN65330_EHCU() != CAN1CommManager.STATE_COMPONENTCODE_EHCU){
 				CursurIndex = 1;
 			}else{
 				CursurIndex++;
 			}
-			// --, 150325 bwk
 			CursurDisplay(CursurIndex);
 			break;
 		case 4:

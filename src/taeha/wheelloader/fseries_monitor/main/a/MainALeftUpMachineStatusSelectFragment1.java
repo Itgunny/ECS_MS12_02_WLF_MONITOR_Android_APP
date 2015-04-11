@@ -283,11 +283,6 @@ public class MainALeftUpMachineStatusSelectFragment1 extends ParentFragment{
 		MachineStatusDisplay(ParentActivity.MachineStatusUpperIndex,ParentActivity.MachineStatusLowerIndex);
 		ParentActivity.SavePref();
 	}
-	public void ClickFrontAxleTemp(){
-		ClickRadio(CAN1CommManager.DATA_STATE_MACHINESTATUS_FRONTAXLE);
-		MachineStatusDisplay(ParentActivity.MachineStatusUpperIndex,ParentActivity.MachineStatusLowerIndex);
-		ParentActivity.SavePref();
-	}	
 	public void ClickWeighing(){
 		SelectFlag = SELECT_UPPER;
 		if(ParentActivity.MachineStatusUpperIndex == CAN1CommManager.DATA_STATE_MACHINESTATUS_WEIGHING){

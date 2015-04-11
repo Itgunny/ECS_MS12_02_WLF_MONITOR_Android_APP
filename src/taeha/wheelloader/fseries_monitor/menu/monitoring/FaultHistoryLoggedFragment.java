@@ -395,8 +395,7 @@ public class FaultHistoryLoggedFragment extends ParentFragment{
 	}
 	/////////////////////////////////////////////////////////////////////
 	public void EHCUShow(){
-		if(ParentActivity._CheckModel.GetMCUVersion(CAN1Comm.Get_ComponentBasicInformation_1698_PGN65330()) == CheckModel.MODEL_940
-		|| ParentActivity._CheckModel.GetMCUVersion(CAN1Comm.Get_ComponentBasicInformation_1698_PGN65330()) == CheckModel.MODEL_935){
+		if(CAN1Comm.Get_ComponentCode_1699_PGN65330_EHCU() != CAN1CommManager.STATE_COMPONENTCODE_EHCU){
 			radioEHCU.setVisibility(View.GONE);
 		}else{
 			radioEHCU.setVisibility(View.VISIBLE);

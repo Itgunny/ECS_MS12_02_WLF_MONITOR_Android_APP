@@ -67,11 +67,11 @@ public class UserData {
 		UnitOdo = Home.UNIT_ODO_KM;
 		UnitWeight = Home.UNIT_WEIGHT_TON;
 		UnitPressure = Home.UNIT_PRESSURE_BAR;
-		MachineStatusUpper = CAN1CommManager.DATA_STATE_MACHINESTATUS_NOSELECT;
-		MachineStatusLower = CAN1CommManager.DATA_STATE_MACHINESTATUS_NOSELECT;
+		MachineStatusUpper = CAN1CommManager.DATA_STATE_MACHINESTATUS_HYD;
+		MachineStatusLower = CAN1CommManager.DATA_STATE_MACHINESTATUS_COOLANT;
 		Language = Home.STATE_DISPLAY_LANGUAGE_ENGLISH;
 		SoundOutput = Home.STATE_INTERNAL_SPK;
-		HourmeterDisplay = CAN1CommManager.DATA_STATE_OPERATION_NOSELECT;
-		FuelDisplay = CAN1CommManager.DATA_STATE_FUEL_NOSELECT;			// ++, --, 150403 bwk 추가
+		HourmeterDisplay = CAN1CommManager.DATA_STATE_HOURMETER_LATEST;
+		FuelDisplay = CAN1CommManager.DATA_STATE_AVERAGE_FUEL_RATE;			// ++, --, 150403 bwk 추가
 	}
 }

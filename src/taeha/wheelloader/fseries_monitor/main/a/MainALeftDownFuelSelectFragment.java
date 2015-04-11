@@ -19,7 +19,7 @@ public class MainALeftDownFuelSelectFragment extends ParentFragment{
 	//////////////////////////////////////////////////
 	//RESOURCE////////////////////////////////////////
 	RadioButton radioAverageFuel;
-	RadioButton radioLastestConsumed;
+	RadioButton radioADaysFuelUsed;
 	//////////////////////////////////////////////////
 	
 	//VALUABLE////////////////////////////////////////
@@ -79,7 +79,7 @@ public class MainALeftDownFuelSelectFragment extends ParentFragment{
 	protected void InitResource() {
 		// TODO Auto-generated method stub
 		radioAverageFuel = (RadioButton)mRoot.findViewById(R.id.radioButton_leftdown_main_a_fuel_select_averagefuelrate);
-		radioLastestConsumed = (RadioButton)mRoot.findViewById(R.id.radioButton_leftdown_main_a_fuel_select_latestfuelconsumed);
+		radioADaysFuelUsed = (RadioButton)mRoot.findViewById(R.id.radioButton_leftdown_main_a_fuel_select_adaysfuelused);
 	}
 	
 	protected void InitValuables() {
@@ -102,7 +102,7 @@ public class MainALeftDownFuelSelectFragment extends ParentFragment{
 				ClickAverageFuelRate();
 			}
 		});
-		radioLastestConsumed.setOnClickListener(new View.OnClickListener() {
+		radioADaysFuelUsed.setOnClickListener(new View.OnClickListener() {
 			
 			@Override
 			public void onClick(View v) {
@@ -130,15 +130,15 @@ public class MainALeftDownFuelSelectFragment extends ParentFragment{
 		switch (Data) {
 		case CAN1CommManager.DATA_STATE_FUEL_NOSELECT:
 			radioAverageFuel.setChecked(false);
-			radioLastestConsumed.setChecked(false);			
+			radioADaysFuelUsed.setChecked(false);			
 			break;
 		case CAN1CommManager.DATA_STATE_AVERAGE_FUEL_RATE:
 			radioAverageFuel.setChecked(true);
-			radioLastestConsumed.setChecked(false);			
+			radioADaysFuelUsed.setChecked(false);			
 			break;
-		case CAN1CommManager.DATA_STATE_LATEST_FUEL_CONSUMED:
+		case CAN1CommManager.DATA_STATE_A_DAYS_FUEL_USED:
 			radioAverageFuel.setChecked(false);
-			radioLastestConsumed.setChecked(true);			
+			radioADaysFuelUsed.setChecked(true);			
 			break;
 		default:
 			break;
@@ -160,7 +160,7 @@ public class MainALeftDownFuelSelectFragment extends ParentFragment{
 			return;
 		else
 			ParentActivity.StartAnimationRunningTimer();
-		ParentActivity.FuelIndex = CAN1CommManager.DATA_STATE_LATEST_FUEL_CONSUMED;
+		ParentActivity.FuelIndex = CAN1CommManager.DATA_STATE_A_DAYS_FUEL_USED;
 		ParentActivity._MainABaseFragment.showLeftDowntoDefaultScreenAnimation();
 	}
 	
@@ -216,13 +216,13 @@ public class MainALeftDownFuelSelectFragment extends ParentFragment{
 	}
 	public void CursurDisplay(int Index){
 		radioAverageFuel.setPressed(false);
-		radioLastestConsumed.setPressed(false);
+		radioADaysFuelUsed.setPressed(false);
 		switch (CursurIndex) {
 		case 1:
 			radioAverageFuel.setPressed(true);
 			break;
 		case 2:
-			radioLastestConsumed.setPressed(true);
+			radioADaysFuelUsed.setPressed(true);
 			break;
 		default:
 			break;

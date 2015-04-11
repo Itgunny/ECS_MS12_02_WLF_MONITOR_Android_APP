@@ -321,6 +321,17 @@ public class Home extends Activity {
 	// 1. Mediaplayer에서 Ending 나오지 않은 현상 개선(Firmware Update 필요)
 	// 2. Update프로그램 -> BKCU여부 전송
 	// 3. H/W Test프로그램으로 S/N 전송
+	// 2015.04.08 HHI
+	// 1. Latest Fuel Consumed -> A Days Fuel Used로 명칭 변경(HHI 요청)
+	// 2. EHCU 유무 판별방법 변경
+	//	- 변경 전 : MCU Model = 940, 935
+	//		if(ParentActivity._CheckModel.GetMCUVersion(CAN1Comm.Get_ComponentBasicInformation_1698_PGN65330()) == CheckModel.MODEL_940
+	//			|| ParentActivity._CheckModel.GetMCUVersion(CAN1Comm.Get_ComponentBasicInformation_1698_PGN65330()) == CheckModel.MODEL_935)
+	//	- 변경 후 : EHCU CID 판별
+	//		if(CAN1Comm.Get_ComponentCode_1699_PGN65330_EHCU() != CAN1CommManager.STATE_COMPONENTCODE_EHCU)
+	// 3. Axle Temp 임시 삭제(HHI 임혁준 요청)
+	// 4. 메인 엔진자동정지 램프 가이던스 한국어 -> 영어로 변경
+	// 5. 사용자 전환 Default 값 -> 출하 Default값과 동일하게 변경
 	//////////////////////////////////////////////////////////////////////////////////////
 	
 	// TAG

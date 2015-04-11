@@ -125,7 +125,7 @@ public class MainBLeftDownFuelFragment extends ParentFragment{
 				imgbtnFuel.setBackgroundResource(R.drawable.main_default_monitoringhistory);
 				if(ParentActivity.FuelIndex == CAN1CommManager.DATA_STATE_AVERAGE_FUEL_RATE)
 					CAN1Comm.Set_OperationHistory_1101_PGN61184_31(CAN1CommManager.DATA_STATE_AVERAGE_FUEL_RATE_INFO_CLEAR);
-				else if(ParentActivity.FuelIndex == CAN1CommManager.DATA_STATE_LATEST_FUEL_CONSUMED)
+				else if(ParentActivity.FuelIndex == CAN1CommManager.DATA_STATE_A_DAYS_FUEL_USED)
 					CAN1Comm.Set_OperationHistory_1101_PGN61184_31(CAN1CommManager.DATA_STATE_A_DAYS_FUEL_USED_CLEAR);
 				CAN1Comm.TxCANToMCU(31);
 				CAN1Comm.Set_OperationHistory_1101_PGN61184_31(0xFF);
@@ -157,8 +157,8 @@ public class MainBLeftDownFuelFragment extends ParentFragment{
 		case CAN1CommManager.DATA_STATE_AVERAGE_FUEL_RATE:
 			FuelTitleAnimation.FlipAnimation(textViewFuelTitle,getResources().getString(string.AVERAGE_FUEL_RATE));
 			break;
-		case CAN1CommManager.DATA_STATE_LATEST_FUEL_CONSUMED:
-			FuelTitleAnimation.FlipAnimation(textViewFuelTitle,getResources().getString(string.LATEST_FUEL_CONSUMED));
+		case CAN1CommManager.DATA_STATE_A_DAYS_FUEL_USED:
+			FuelTitleAnimation.FlipAnimation(textViewFuelTitle,getResources().getString(string.A_DAYS_FUEL_USED));
 			break;
 		default:
 			break;
@@ -174,7 +174,7 @@ public class MainBLeftDownFuelFragment extends ParentFragment{
 			textViewFuelData.setText(ParentActivity.GetFuelRateString(AverageFuel));
 			textViewFuelUnit.setText(ParentActivity.getResources().getString(string.l_h));
 			break;
-		case CAN1CommManager.DATA_STATE_LATEST_FUEL_CONSUMED:
+		case CAN1CommManager.DATA_STATE_A_DAYS_FUEL_USED:
 			textViewFuelData.setText(ParentActivity.GetFuelRateString(LatestConsumed));
 			textViewFuelUnit.setText(ParentActivity.getResources().getString(string.l));
 			break;

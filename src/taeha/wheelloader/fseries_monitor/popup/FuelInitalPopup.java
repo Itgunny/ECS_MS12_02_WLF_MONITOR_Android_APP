@@ -176,7 +176,7 @@ public class FuelInitalPopup extends ParentPopup{
 			break;
 		case CAN1CommManager.DATA_STATE_A_DAYS_FUEL_USED_CLEAR:
 			textViewTitle.setText(ParentActivity.getResources().getString(string.Initialize_) 
-					+ "\r\n(" +ParentActivity.getResources().getString(string.Latest_Fuel_Consumed) +")");
+					+ "\r\n(" +ParentActivity.getResources().getString(string.A_Days_Fuel_Used) +")");
 			break;
 		default:
 			break;

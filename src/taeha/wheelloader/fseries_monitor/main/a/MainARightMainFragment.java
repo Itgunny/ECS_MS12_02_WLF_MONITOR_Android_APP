@@ -282,8 +282,7 @@ public class MainARightMainFragment extends ParentFragment{
 	}	
 	
 	public void TCLockUpShow(){
-		if(ParentActivity._CheckModel.GetMCUVersion(CAN1Comm.Get_ComponentBasicInformation_1698_PGN65330()) == CheckModel.MODEL_935
-		|| ParentActivity._CheckModel.GetMCUVersion(CAN1Comm.Get_ComponentBasicInformation_1698_PGN65330()) == CheckModel.MODEL_940){
+		if(CAN1Comm.Get_ComponentCode_1699_PGN65330_EHCU() != CAN1CommManager.STATE_COMPONENTCODE_EHCU){
 			layoutTCLockUp.setVisibility(View.GONE);
 			imgbtnTCLockUp.setClickable(false);
 		}else if(ParentActivity._CheckModel.GetTCUModel(CAN1Comm.Get_ComponentBasicInformation_1698_PGN65330_TCU()) == CheckModel.TCU_4SPEED){
@@ -421,13 +420,13 @@ public class MainARightMainFragment extends ParentFragment{
 			ParentActivity._MainABaseFragment._MainARightDownTMShiftModeFragment = new MainARightDownTMShiftModeFragment();
 			ParentActivity._MainABaseFragment._MainBodyShiftAnimation.StartShiftRightAnimation();
 			ParentActivity._MainABaseFragment.CenterAnimation.StartChangeAnimation(ParentActivity._MainABaseFragment._MainACenterTMFragment);
-			ParentActivity._MainABaseFragment.RightChangeAnimation.StartChangeAnimation(ParentActivity._MainABaseFragment._MainARightDownTMCCOModeFragment);
+			ParentActivity._MainABaseFragment.RightChangeAnimation.StartChangeAnimation(ParentActivity._MainABaseFragment._MainARightDownTMShiftModeFragment);
 		}else if(index == 4){
 			ParentActivity._MainABaseFragment._MainACenterTMFragment = new MainACenterTMFragment();
 			ParentActivity._MainABaseFragment._MainARightDownTMTCLockUpFragment = new MainARightDownTMTCLockUpFragment();
 			ParentActivity._MainABaseFragment._MainBodyShiftAnimation.StartShiftRightAnimation();
 			ParentActivity._MainABaseFragment.CenterAnimation.StartChangeAnimation(ParentActivity._MainABaseFragment._MainACenterTMFragment);
-			ParentActivity._MainABaseFragment.RightChangeAnimation.StartChangeAnimation(ParentActivity._MainABaseFragment._MainARightDownTMCCOModeFragment);
+			ParentActivity._MainABaseFragment.RightChangeAnimation.StartChangeAnimation(ParentActivity._MainABaseFragment._MainARightDownTMTCLockUpFragment);
 		}
 		
 		ParentActivity._MainABaseFragment._LeftDisappearAnimation.StartAnimation();

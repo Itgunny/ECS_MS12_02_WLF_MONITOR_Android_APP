@@ -89,7 +89,7 @@
 		        android:layout_marginTop="10dp"
 		        android:layout_marginLeft="10dp"
 		        android:gravity="center"
-		        android:text="@string/Latest_Fuel_Consumed"
+		        android:text="@string/A_Days_Fuel_Used"
 		        android:textAppearance="?android:attr/textAppearanceLarge"
 		        android:textSize="25sp" />
 
