@@ -10,6 +10,7 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 import taeha.wheelloader.fseries_monitor.animation.TextViewXAxisFlipAnimation;
 import taeha.wheelloader.fseries_monitor.main.CAN1CommManager;
+import taeha.wheelloader.fseries_monitor.main.Home;
 import taeha.wheelloader.fseries_monitor.main.LongPressChecker;
 import taeha.wheelloader.fseries_monitor.main.ParentFragment;
 import taeha.wheelloader.fseries_monitor.main.R;
@@ -123,12 +124,19 @@ public class MainBLeftDownFuelFragment extends ParentFragment{
 			public void onLongPressed() {
 //				Log.d(TAG, "Long Pressed");
 				imgbtnFuel.setBackgroundResource(R.drawable.main_default_monitoringhistory);
+//				if(ParentActivity.FuelIndex == CAN1CommManager.DATA_STATE_AVERAGE_FUEL_RATE)
+//					CAN1Comm.Set_OperationHistory_1101_PGN61184_31(CAN1CommManager.DATA_STATE_AVERAGE_FUEL_RATE_INFO_CLEAR);
+//				else if(ParentActivity.FuelIndex == CAN1CommManager.DATA_STATE_A_DAYS_FUEL_USED)
+//					CAN1Comm.Set_OperationHistory_1101_PGN61184_31(CAN1CommManager.DATA_STATE_A_DAYS_FUEL_USED_CLEAR);
+//				CAN1Comm.TxCANToMCU(31);
+//				CAN1Comm.Set_OperationHistory_1101_PGN61184_31(0xFF);
+				ParentActivity.OldScreenIndex = Home.SCREEN_STATE_MAIN_B_TOP;
 				if(ParentActivity.FuelIndex == CAN1CommManager.DATA_STATE_AVERAGE_FUEL_RATE)
-					CAN1Comm.Set_OperationHistory_1101_PGN61184_31(CAN1CommManager.DATA_STATE_AVERAGE_FUEL_RATE_INFO_CLEAR);
+					ParentActivity._FuelInitalPopup.setMode(CAN1CommManager.DATA_STATE_AVERAGE_FUEL_RATE_INFO_CLEAR);
 				else if(ParentActivity.FuelIndex == CAN1CommManager.DATA_STATE_A_DAYS_FUEL_USED)
-					CAN1Comm.Set_OperationHistory_1101_PGN61184_31(CAN1CommManager.DATA_STATE_A_DAYS_FUEL_USED_CLEAR);
-				CAN1Comm.TxCANToMCU(31);
-				CAN1Comm.Set_OperationHistory_1101_PGN61184_31(0xFF);
+					ParentActivity._FuelInitalPopup.setMode(CAN1CommManager.DATA_STATE_A_DAYS_FUEL_USED_CLEAR);
+				ParentActivity.showFuelInitalPopup();
+
 				
 			}
 		});

@@ -117,6 +117,8 @@ public class FaultHistoryLoggedFragment extends ParentFragment{
 	int CursurDetailIndex;
 	Handler HandleCursurDisplay;
 	// --, 150211 bwk	
+	
+	public boolean bCursurIndex; 
 	//////////////////////////////////////////////////
 	
 	//Fragment////////////////////////////////////////
@@ -338,6 +340,9 @@ public class FaultHistoryLoggedFragment extends ParentFragment{
 		ErrListDisplay();
 		ErrorNumberDisplay();
 		EHCUShow();
+		
+		if(bCursurIndex == false && ParentActivity.ScreenIndex == ParentActivity.SCREEN_STATE_MENU_MONITORING_FAULTHISTORY_LOGGED_TOP)
+			CursurDisplay(CursurIndex);
 	}
 	/////////////////////////////////////////////////////////////////////	
 	public void ClickOK(){
@@ -389,6 +394,7 @@ public class FaultHistoryLoggedFragment extends ParentFragment{
 	public void ClickDelete(){
 		ParentActivity._LoggedFaultDeletePopup.setMode(SelectedMode);
 		ParentActivity.showLoggedFaultDelete();
+		bCursurIndex = false;
 	}
 	public void setMode(int Index){
 		SelectedMode = Index;
@@ -897,6 +903,7 @@ public class FaultHistoryLoggedFragment extends ParentFragment{
 	
 	// ++, 150211 bwk
 	public void CursurDisplay(int Index){
+		bCursurIndex = true;
 		radioMachine.setPressed(false);
 		radioEngine.setPressed(false);
 		radioTransmission.setPressed(false);
@@ -944,6 +951,7 @@ public class FaultHistoryLoggedFragment extends ParentFragment{
 
 		
 	}
+
 	// --, 150211 bwk
 	/////////////////////////////////////////////////////////////////////
 	static final int EHCU_SPNFMI[][] = {{842,9},{844,9},{978,9},{2316,9},{2317,9},{2319,2},{2320,2},{2321,2},{2322,2},{2323,2},{2324,2},

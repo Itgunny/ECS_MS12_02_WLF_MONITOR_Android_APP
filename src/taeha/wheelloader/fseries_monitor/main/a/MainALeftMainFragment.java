@@ -1,5 +1,8 @@
 package taeha.wheelloader.fseries_monitor.main.a;
 
+import java.util.Timer;
+import java.util.TimerTask;
+
 import actionpopup.ActionItem;
 import actionpopup.QuickAction;
 import android.app.Fragment;
@@ -26,6 +29,7 @@ import taeha.wheelloader.fseries_monitor.main.R.color;
 import taeha.wheelloader.fseries_monitor.main.R.string;
 import android.view.View.OnTouchListener;
 import taeha.wheelloader.fseries_monitor.main.LongPressChecker.OnLongPressListener;
+import taeha.wheelloader.fseries_monitor.popup.FuelInitalPopup.PopupOffTimerClass;
 
 public class MainALeftMainFragment extends ParentFragment{
 	//CONSTANT////////////////////////////////////////
@@ -87,6 +91,10 @@ public class MainALeftMainFragment extends ParentFragment{
 	int FrontAxleTempHighWarning;
 	int RearAxleTempHighWarning;
 	// --, 150329 bwk		
+	
+	boolean FrontAxleTempWarningFlag;
+	boolean RearAxleTempWarningFlag;
+	int nCameraBackCnt;
 	
 	int WeightInfoDataCurrent;
 	int WeightInfoDataDay1;
@@ -187,7 +195,7 @@ public class MainALeftMainFragment extends ParentFragment{
 	protected void InitValuables() {
 		// TODO Auto-generated method stub
 		super.InitValuables();
-	
+		
 		UpperStatusIconAnimation = new ImageViewYAxisFlipAnimation(ParentActivity);
 		LowerStatusIconAnimation = new ImageViewYAxisFlipAnimation(ParentActivity);
 		WeighingUpperStatusIconAnimation = new ImageViewYAxisFlipAnimation(ParentActivity);
@@ -207,6 +215,10 @@ public class MainALeftMainFragment extends ParentFragment{
 		} else if (EcoGaugeLevel < 0) {
 			EcoGaugeLevel = 0;
 		}
+		
+		FrontAxleTempWarningFlag = false;
+		RearAxleTempWarningFlag = false;
+		nCameraBackCnt = 0;
 	}
 	@Override
 	protected void InitButtonListener() {
@@ -265,12 +277,18 @@ public class MainALeftMainFragment extends ParentFragment{
 			public void onLongPressed() {
 //				Log.d(TAG, "Long Pressed");
 				imgbtnFuel.setBackgroundResource(R.drawable.main_a_default_fuel_n);
+				ParentActivity.OldScreenIndex = Home.SCREEN_STATE_MAIN_A_TOP;
 				if(ParentActivity.FuelIndex == CAN1CommManager.DATA_STATE_AVERAGE_FUEL_RATE)
-					CAN1Comm.Set_OperationHistory_1101_PGN61184_31(CAN1CommManager.DATA_STATE_AVERAGE_FUEL_RATE_INFO_CLEAR);
+					ParentActivity._FuelInitalPopup.setMode(CAN1CommManager.DATA_STATE_AVERAGE_FUEL_RATE_INFO_CLEAR);
 				else if(ParentActivity.FuelIndex == CAN1CommManager.DATA_STATE_A_DAYS_FUEL_USED)
-					CAN1Comm.Set_OperationHistory_1101_PGN61184_31(CAN1CommManager.DATA_STATE_A_DAYS_FUEL_USED_CLEAR);
-				CAN1Comm.TxCANToMCU(31);
-				CAN1Comm.Set_OperationHistory_1101_PGN61184_31(0xFF);
+					ParentActivity._FuelInitalPopup.setMode(CAN1CommManager.DATA_STATE_A_DAYS_FUEL_USED_CLEAR);
+				ParentActivity.showFuelInitalPopup();
+//				if(ParentActivity.FuelIndex == CAN1CommManager.DATA_STATE_AVERAGE_FUEL_RATE)
+//					CAN1Comm.Set_OperationHistory_1101_PGN61184_31(CAN1CommManager.DATA_STATE_AVERAGE_FUEL_RATE_INFO_CLEAR);
+//				else if(ParentActivity.FuelIndex == CAN1CommManager.DATA_STATE_A_DAYS_FUEL_USED)
+//					CAN1Comm.Set_OperationHistory_1101_PGN61184_31(CAN1CommManager.DATA_STATE_A_DAYS_FUEL_USED_CLEAR);
+//				CAN1Comm.TxCANToMCU(31);
+//				CAN1Comm.Set_OperationHistory_1101_PGN61184_31(0xFF);
 			}
 		});
 		// --, 150406 cjg
@@ -325,6 +343,64 @@ public class MainALeftMainFragment extends ParentFragment{
 			FuelTitleDisplay(ParentActivity.FuelIndex);
 			FuelDataDisplay(ParentActivity.FuelIndex,AverageFuelRate,LastestConsumed);
 			EcoGaugeDisplay(EcoGaugeLevel,EcoGaugeStatus);
+			
+//			if(ParentActivity._CheckModel.CheckMCUVersionHigh(CAN1Comm.Get_ComponentBasicInformation_1698_PGN65330(), 955) == true)
+//			{
+//				if((FrontAxleTempWarningFlag == false) && (FrontAxleTempHighWarning == CAN1CommManager.DATA_STATE_LAMP_ON))
+//				{
+//					if(ParentActivity.OldScreenIndex == Home.SCREEN_STATE_MAIN_CAMERA_KEY)
+//					{
+//						if(nCameraBackCnt++ >= 15)
+//						{
+//							ParentActivity.OldScreenIndex = ParentActivity.ScreenIndex;
+//							nCameraBackCnt = 0;
+//						}
+//					}else{
+//						if(ParentActivity.ScreenIndex != Home.SCREEN_STATE_MAIN_CAMERA_KEY)
+//						{
+//							FrontAxleTempWarningFlag = true;
+//							ParentActivity.showAxleTempWarningPopup();
+//						}
+//					}
+//				}
+//				else if((FrontAxleTempWarningFlag == true) && (FrontAxleTempHighWarning == CAN1CommManager.DATA_STATE_LAMP_OFF))
+//				{
+//					FrontAxleTempWarningFlag = false;
+//					nCameraBackCnt = 0;
+//				}
+//			}else{
+//				FrontAxleTempWarningFlag = false;
+//				nCameraBackCnt = 0;
+//			}
+//
+//			if(ParentActivity._CheckModel.CheckMCUVersionHigh(CAN1Comm.Get_ComponentBasicInformation_1698_PGN65330(), 965) == true)
+//			{
+//				if((RearAxleTempWarningFlag == false) && (RearAxleTempHighWarning == CAN1CommManager.DATA_STATE_LAMP_ON))
+//				{
+//					if(ParentActivity.OldScreenIndex == Home.SCREEN_STATE_MAIN_CAMERA_KEY)
+//					{
+//						if(nCameraBackCnt++ >= 15)
+//						{
+//							ParentActivity.OldScreenIndex = ParentActivity.ScreenIndex;
+//							nCameraBackCnt = 0;
+//						}
+//					}else{
+//						if(ParentActivity.ScreenIndex != Home.SCREEN_STATE_MAIN_CAMERA_KEY)
+//						{
+//							RearAxleTempWarningFlag = true;
+//							ParentActivity.showAxleTempWarningPopup();
+//						}
+//					}
+//				}
+//				else if((RearAxleTempWarningFlag == true) && (RearAxleTempHighWarning == CAN1CommManager.DATA_STATE_LAMP_OFF))
+//				{
+//					RearAxleTempWarningFlag = false;
+//					nCameraBackCnt = 0;
+//				}
+//			}else{
+//				RearAxleTempWarningFlag = false;
+//				nCameraBackCnt = 0;
+//			}
 		} catch (IllegalStateException e) {
 			// TODO: handle exception
 			Log.e(TAG,"IllegalStateException");
@@ -365,22 +441,13 @@ public class MainALeftMainFragment extends ParentFragment{
 			break;
 		// ++, 150327 bwk
 		case CAN1CommManager.DATA_STATE_MACHINESTATUS_FRONTAXLE:
-			if(ParentActivity._CheckModel.GetMCUVersion(CAN1Comm.Get_ComponentBasicInformation_1698_PGN65330()) == CheckModel.MODEL_955
-			|| ParentActivity._CheckModel.GetMCUVersion(CAN1Comm.Get_ComponentBasicInformation_1698_PGN65330()) == CheckModel.MODEL_955TM
-			|| ParentActivity._CheckModel.GetMCUVersion(CAN1Comm.Get_ComponentBasicInformation_1698_PGN65330()) == CheckModel.MODEL_960
-			|| ParentActivity._CheckModel.GetMCUVersion(CAN1Comm.Get_ComponentBasicInformation_1698_PGN65330()) == CheckModel.MODEL_960TM
-			|| ParentActivity._CheckModel.GetMCUVersion(CAN1Comm.Get_ComponentBasicInformation_1698_PGN65330()) == CheckModel.MODEL_965
-			|| ParentActivity._CheckModel.GetMCUVersion(CAN1Comm.Get_ComponentBasicInformation_1698_PGN65330()) == CheckModel.MODEL_965TM
-			|| ParentActivity._CheckModel.GetMCUVersion(CAN1Comm.Get_ComponentBasicInformation_1698_PGN65330()) == CheckModel.MODEL_970
-			|| ParentActivity._CheckModel.GetMCUVersion(CAN1Comm.Get_ComponentBasicInformation_1698_PGN65330()) == CheckModel.MODEL_970TM
-			|| ParentActivity._CheckModel.GetMCUVersion(CAN1Comm.Get_ComponentBasicInformation_1698_PGN65330()) == CheckModel.MODEL_980
-			|| ParentActivity._CheckModel.GetMCUVersion(CAN1Comm.Get_ComponentBasicInformation_1698_PGN65330()) == CheckModel.MODEL_980TM)
-			{
-				LayoutNormalUpper.setVisibility(View.VISIBLE);
-				LayoutWeighingUpper.setVisibility(View.GONE);
-				UpperFrontAxleDisplay(imgViewNormalUpperIcon,textViewNormalUpperData,textViewNormalUpperUnit,FrontAxleTemp,ParentActivity.UnitTemp);
-			}
-			else
+//			if(ParentActivity._CheckModel.CheckMCUVersionHigh(CAN1Comm.Get_ComponentBasicInformation_1698_PGN65330(), 955) == true)
+//			{
+//				LayoutNormalUpper.setVisibility(View.VISIBLE);
+//				LayoutWeighingUpper.setVisibility(View.GONE);
+//				UpperFrontAxleDisplay(imgViewNormalUpperIcon,textViewNormalUpperData,textViewNormalUpperUnit,FrontAxleTemp,ParentActivity.UnitTemp);
+//			}
+//			else
 			{
 				ParentActivity.MachineStatusUpperIndex= CAN1CommManager.DATA_STATE_MACHINESTATUS_NOSELECT;
 				LayoutNormalUpper.setVisibility(View.GONE);
@@ -388,18 +455,13 @@ public class MainALeftMainFragment extends ParentFragment{
 			}
 			break;
 		case CAN1CommManager.DATA_STATE_MACHINESTATUS_REARAXLE:
-			if(ParentActivity._CheckModel.GetMCUVersion(CAN1Comm.Get_ComponentBasicInformation_1698_PGN65330()) == CheckModel.MODEL_965
-			|| ParentActivity._CheckModel.GetMCUVersion(CAN1Comm.Get_ComponentBasicInformation_1698_PGN65330()) == CheckModel.MODEL_965TM
-			|| ParentActivity._CheckModel.GetMCUVersion(CAN1Comm.Get_ComponentBasicInformation_1698_PGN65330()) == CheckModel.MODEL_970
-			|| ParentActivity._CheckModel.GetMCUVersion(CAN1Comm.Get_ComponentBasicInformation_1698_PGN65330()) == CheckModel.MODEL_970TM
-			|| ParentActivity._CheckModel.GetMCUVersion(CAN1Comm.Get_ComponentBasicInformation_1698_PGN65330()) == CheckModel.MODEL_980
-			|| ParentActivity._CheckModel.GetMCUVersion(CAN1Comm.Get_ComponentBasicInformation_1698_PGN65330()) == CheckModel.MODEL_980TM)
-			{
-				LayoutNormalUpper.setVisibility(View.VISIBLE);
-				LayoutWeighingUpper.setVisibility(View.GONE);
-				UpperRearAxleDisplay(imgViewNormalUpperIcon,textViewNormalUpperData,textViewNormalUpperUnit,RearAxleTemp,ParentActivity.UnitTemp);
-			}
-			else
+//			if(ParentActivity._CheckModel.CheckMCUVersionHigh(CAN1Comm.Get_ComponentBasicInformation_1698_PGN65330(), 965) == true)
+//			{
+//				LayoutNormalUpper.setVisibility(View.VISIBLE);
+//				LayoutWeighingUpper.setVisibility(View.GONE);
+//				UpperRearAxleDisplay(imgViewNormalUpperIcon,textViewNormalUpperData,textViewNormalUpperUnit,RearAxleTemp,ParentActivity.UnitTemp);
+//			}
+//			else
 			{
 				ParentActivity.MachineStatusUpperIndex= CAN1CommManager.DATA_STATE_MACHINESTATUS_NOSELECT;
 				LayoutNormalUpper.setVisibility(View.GONE);
@@ -440,50 +502,34 @@ public class MainALeftMainFragment extends ParentFragment{
 			LayoutWeighingLower.setVisibility(View.GONE);
 			LowerCoolantDisplay(imgViewNormalLowerIcon,textViewNormalLowerData,textViewNormalLowerUnit,Coolant,ParentActivity.UnitTemp);
 			break;
-//		// ++, 150329 bwk
-//		case CAN1CommManager.DATA_STATE_MACHINESTATUS_FRONTAXLE:
-//			if(ParentActivity._CheckModel.GetMCUVersion(CAN1Comm.Get_ComponentBasicInformation_1698_PGN65330()) == CheckModel.MODEL_955
-//			|| ParentActivity._CheckModel.GetMCUVersion(CAN1Comm.Get_ComponentBasicInformation_1698_PGN65330()) == CheckModel.MODEL_955TM
-//			|| ParentActivity._CheckModel.GetMCUVersion(CAN1Comm.Get_ComponentBasicInformation_1698_PGN65330()) == CheckModel.MODEL_960
-//			|| ParentActivity._CheckModel.GetMCUVersion(CAN1Comm.Get_ComponentBasicInformation_1698_PGN65330()) == CheckModel.MODEL_960TM
-//			|| ParentActivity._CheckModel.GetMCUVersion(CAN1Comm.Get_ComponentBasicInformation_1698_PGN65330()) == CheckModel.MODEL_965
-//			|| ParentActivity._CheckModel.GetMCUVersion(CAN1Comm.Get_ComponentBasicInformation_1698_PGN65330()) == CheckModel.MODEL_965TM
-//			|| ParentActivity._CheckModel.GetMCUVersion(CAN1Comm.Get_ComponentBasicInformation_1698_PGN65330()) == CheckModel.MODEL_970
-//			|| ParentActivity._CheckModel.GetMCUVersion(CAN1Comm.Get_ComponentBasicInformation_1698_PGN65330()) == CheckModel.MODEL_970TM
-//			|| ParentActivity._CheckModel.GetMCUVersion(CAN1Comm.Get_ComponentBasicInformation_1698_PGN65330()) == CheckModel.MODEL_980
-//			|| ParentActivity._CheckModel.GetMCUVersion(CAN1Comm.Get_ComponentBasicInformation_1698_PGN65330()) == CheckModel.MODEL_980TM)
+		case CAN1CommManager.DATA_STATE_MACHINESTATUS_FRONTAXLE:
+//			if(ParentActivity._CheckModel.CheckMCUVersionHigh(CAN1Comm.Get_ComponentBasicInformation_1698_PGN65330(), 955) == true)
 //			{
 //				LayoutNormalLower.setVisibility(View.VISIBLE);
 //				LayoutWeighingLower.setVisibility(View.GONE);
 //				LowerFrontAxleDisplay(imgViewNormalLowerIcon,textViewNormalLowerData,textViewNormalLowerUnit,FrontAxleTemp,ParentActivity.UnitTemp);
 //			}
 //			else
-//			{
-//				ParentActivity.MachineStatusLowerIndex= CAN1CommManager.DATA_STATE_MACHINESTATUS_NOSELECT;
-//				LayoutNormalLower.setVisibility(View.GONE);
-//				LayoutWeighingLower.setVisibility(View.GONE);
-//			}
-//			break;
-//		case CAN1CommManager.DATA_STATE_MACHINESTATUS_REARAXLE:
-//			if(ParentActivity._CheckModel.GetMCUVersion(CAN1Comm.Get_ComponentBasicInformation_1698_PGN65330()) == CheckModel.MODEL_965
-//			|| ParentActivity._CheckModel.GetMCUVersion(CAN1Comm.Get_ComponentBasicInformation_1698_PGN65330()) == CheckModel.MODEL_965TM
-//			|| ParentActivity._CheckModel.GetMCUVersion(CAN1Comm.Get_ComponentBasicInformation_1698_PGN65330()) == CheckModel.MODEL_970
-//			|| ParentActivity._CheckModel.GetMCUVersion(CAN1Comm.Get_ComponentBasicInformation_1698_PGN65330()) == CheckModel.MODEL_970TM
-//			|| ParentActivity._CheckModel.GetMCUVersion(CAN1Comm.Get_ComponentBasicInformation_1698_PGN65330()) == CheckModel.MODEL_980
-//			|| ParentActivity._CheckModel.GetMCUVersion(CAN1Comm.Get_ComponentBasicInformation_1698_PGN65330()) == CheckModel.MODEL_980TM)
+			{
+				ParentActivity.MachineStatusLowerIndex= CAN1CommManager.DATA_STATE_MACHINESTATUS_NOSELECT;
+				LayoutNormalLower.setVisibility(View.GONE);
+				LayoutWeighingLower.setVisibility(View.GONE);
+			}
+			break;
+		case CAN1CommManager.DATA_STATE_MACHINESTATUS_REARAXLE:
+//			if(ParentActivity._CheckModel.CheckMCUVersionHigh(CAN1Comm.Get_ComponentBasicInformation_1698_PGN65330(), 965) == true)
 //			{
 //				LayoutNormalLower.setVisibility(View.VISIBLE);
 //				LayoutWeighingLower.setVisibility(View.GONE);
 //				LowerRearAxleDisplay(imgViewNormalLowerIcon,textViewNormalLowerData,textViewNormalLowerUnit,RearAxleTemp,ParentActivity.UnitTemp);
 //			}
 //			else
-//			{
-//				ParentActivity.MachineStatusLowerIndex= CAN1CommManager.DATA_STATE_MACHINESTATUS_NOSELECT;
-//				LayoutNormalLower.setVisibility(View.GONE);
-//				LayoutWeighingLower.setVisibility(View.GONE);
-//			}
-//			break;
-//		// --, 150329 bwk						
+			{
+				ParentActivity.MachineStatusLowerIndex= CAN1CommManager.DATA_STATE_MACHINESTATUS_NOSELECT;
+				LayoutNormalLower.setVisibility(View.GONE);
+				LayoutWeighingLower.setVisibility(View.GONE);
+			}
+			break;
 		case CAN1CommManager.DATA_STATE_MACHINESTATUS_WEIGHING:
 			LayoutNormalLower.setVisibility(View.GONE);
 			LayoutWeighingLower.setVisibility(View.VISIBLE);
@@ -854,17 +900,9 @@ public class MainALeftMainFragment extends ParentFragment{
 			ParentActivity._MainABaseFragment._MainACenterMachineStatusFragment = new MainACenterMachineStatusFragment();
 			// ++, 150330 bwk
 			//ParentActivity._MainABaseFragment._MainALeftUpMachineStatusSelectFragment1 = new MainALeftUpMachineStatusSelectFragment1();
-//			if(ParentActivity._CheckModel.GetMCUVersion(CAN1Comm.Get_ComponentBasicInformation_1698_PGN65330()) == CheckModel.MODEL_965
-//					|| ParentActivity._CheckModel.GetMCUVersion(CAN1Comm.Get_ComponentBasicInformation_1698_PGN65330()) == CheckModel.MODEL_965TM
-//					|| ParentActivity._CheckModel.GetMCUVersion(CAN1Comm.Get_ComponentBasicInformation_1698_PGN65330()) == CheckModel.MODEL_970
-//					|| ParentActivity._CheckModel.GetMCUVersion(CAN1Comm.Get_ComponentBasicInformation_1698_PGN65330()) == CheckModel.MODEL_970TM
-//					|| ParentActivity._CheckModel.GetMCUVersion(CAN1Comm.Get_ComponentBasicInformation_1698_PGN65330()) == CheckModel.MODEL_980
-//					|| ParentActivity._CheckModel.GetMCUVersion(CAN1Comm.Get_ComponentBasicInformation_1698_PGN65330()) == CheckModel.MODEL_980TM)
+//			if(ParentActivity._CheckModel.CheckMCUVersionHigh(CAN1Comm.Get_ComponentBasicInformation_1698_PGN65330(), 965) == true)
 //				ParentActivity._MainABaseFragment._MainALeftUpMachineStatusSelectFragment3 = new MainALeftUpMachineStatusSelectFragment3();
-//			else if(ParentActivity._CheckModel.GetMCUVersion(CAN1Comm.Get_ComponentBasicInformation_1698_PGN65330()) == CheckModel.MODEL_955
-//					|| ParentActivity._CheckModel.GetMCUVersion(CAN1Comm.Get_ComponentBasicInformation_1698_PGN65330()) == CheckModel.MODEL_955TM
-//					|| ParentActivity._CheckModel.GetMCUVersion(CAN1Comm.Get_ComponentBasicInformation_1698_PGN65330()) == CheckModel.MODEL_960
-//					|| ParentActivity._CheckModel.GetMCUVersion(CAN1Comm.Get_ComponentBasicInformation_1698_PGN65330()) == CheckModel.MODEL_960TM)
+//			else if(ParentActivity._CheckModel.CheckMCUVersionHigh(CAN1Comm.Get_ComponentBasicInformation_1698_PGN65330(), 955) == true)
 //				ParentActivity._MainABaseFragment._MainALeftUpMachineStatusSelectFragment2 = new MainALeftUpMachineStatusSelectFragment2();
 //			else
 				ParentActivity._MainABaseFragment._MainALeftUpMachineStatusSelectFragment1 = new MainALeftUpMachineStatusSelectFragment1();
@@ -872,17 +910,9 @@ public class MainALeftMainFragment extends ParentFragment{
 			
 			ParentActivity._MainABaseFragment._MainBodyShiftAnimation.StartShiftLeftAnimation();
 			ParentActivity._MainABaseFragment.CenterAnimation.StartChangeAnimation(ParentActivity._MainABaseFragment._MainACenterMachineStatusFragment);
-//			if(ParentActivity._CheckModel.GetMCUVersion(CAN1Comm.Get_ComponentBasicInformation_1698_PGN65330()) == CheckModel.MODEL_965
-//					|| ParentActivity._CheckModel.GetMCUVersion(CAN1Comm.Get_ComponentBasicInformation_1698_PGN65330()) == CheckModel.MODEL_965TM
-//					|| ParentActivity._CheckModel.GetMCUVersion(CAN1Comm.Get_ComponentBasicInformation_1698_PGN65330()) == CheckModel.MODEL_970
-//					|| ParentActivity._CheckModel.GetMCUVersion(CAN1Comm.Get_ComponentBasicInformation_1698_PGN65330()) == CheckModel.MODEL_970TM
-//					|| ParentActivity._CheckModel.GetMCUVersion(CAN1Comm.Get_ComponentBasicInformation_1698_PGN65330()) == CheckModel.MODEL_980
-//					|| ParentActivity._CheckModel.GetMCUVersion(CAN1Comm.Get_ComponentBasicInformation_1698_PGN65330()) == CheckModel.MODEL_980TM)
+//			if(ParentActivity._CheckModel.CheckMCUVersionHigh(CAN1Comm.Get_ComponentBasicInformation_1698_PGN65330(), 965) == true)
 //				ParentActivity._MainABaseFragment.LeftChangeAnimation.StartChangeAnimation(ParentActivity._MainABaseFragment._MainALeftUpMachineStatusSelectFragment3);
-//			else if(ParentActivity._CheckModel.GetMCUVersion(CAN1Comm.Get_ComponentBasicInformation_1698_PGN65330()) == CheckModel.MODEL_955
-//					|| ParentActivity._CheckModel.GetMCUVersion(CAN1Comm.Get_ComponentBasicInformation_1698_PGN65330()) == CheckModel.MODEL_955TM
-//					|| ParentActivity._CheckModel.GetMCUVersion(CAN1Comm.Get_ComponentBasicInformation_1698_PGN65330()) == CheckModel.MODEL_960
-//					|| ParentActivity._CheckModel.GetMCUVersion(CAN1Comm.Get_ComponentBasicInformation_1698_PGN65330()) == CheckModel.MODEL_960TM)
+//			else if(ParentActivity._CheckModel.CheckMCUVersionHigh(CAN1Comm.Get_ComponentBasicInformation_1698_PGN65330(), 955) == true)
 //				ParentActivity._MainABaseFragment.LeftChangeAnimation.StartChangeAnimation(ParentActivity._MainABaseFragment._MainALeftUpMachineStatusSelectFragment2);
 //			else
 				ParentActivity._MainABaseFragment.LeftChangeAnimation.StartChangeAnimation(ParentActivity._MainABaseFragment._MainALeftUpMachineStatusSelectFragment1);

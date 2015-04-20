@@ -133,12 +133,12 @@ public class MainBRightDownQuickFragment extends ParentFragment{
 				intent = ParentActivity.getPackageManager().getLaunchIntentForPackage("com.mxtech.videoplayer.ad");
 				if(intent != null){
 					// ++, 150323 bwk
-					CAN1Comm.SetPlayerFlag(true);	
-					CAN1Comm.SetMultimediaFlag(true);
+					//CAN1Comm.SetMultimediaFlag(true);
 					CAN1Comm.SetMiracastFlag(false);
 					// --, 150323 bwk
 					ParentActivity.startActivity(intent);
 					ParentActivity.StartAlwaysOntopService(); // ++, --, 150324 cjg
+					ParentActivity.StartCheckMultimediaTimer();
 				}
 			}
 		}

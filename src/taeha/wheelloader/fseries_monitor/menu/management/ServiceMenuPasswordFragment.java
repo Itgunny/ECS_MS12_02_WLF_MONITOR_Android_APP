@@ -72,6 +72,59 @@ public class ServiceMenuPasswordFragment extends PasswordFragment{
 		}
 	}	
 	// --, 150323 bwk
+	@Override
+	public void EnterClick(){
+		if(ErrCount >= MAX_ERR_CNT){
+			return;
+		}
+		if(DataBufIndex < 5)
+		{
+			SetTextIndicatorTitle(4);
+			PasswordIndicatorDisplay();
+			
+			StartIndicatorTitleTimer(1000);
+		}
+		else
+		{
+			
+			SetTextIndicatorTitle(5);
+			CAN1Comm.Set_MessageType_PGN61184_21(21);
+			CAN1Comm.TxCANToMCU(21);
+			
+			StartSeedCheckTimer(1,100);
+			StartTimeOutTimer(3000);
+			
+			CheckHWTest();
+		}
+		
+		
+	}
+	public void CheckHWTest(){
+		Log.d(TAG,"CheckHWTest Result");
+		
+		// ++, 150323 bwk
+		int TempNumData[]={0x30,0x33,0x31,0x34,0x34,0x35,0x31,0x32,0x32,0x37};
+		int TempResult = 1;
+		for(int i=0;i<DataBufIndex;i++)
+		{
+			if(NumDataBuf[i] != TempNumData[i])
+			{
+				TempResult = 0;
+				break;
+			}
+		}
+		if(TempResult == 1)
+		{
+			CancelPasswordCheckTimer();
+			CancelTimeOutTimer();
+			
+			showHWTestScreen();
+			Log.d(TAG,"H/W Test");
+			
+			return;
+		}
+	}
+	
 
 	@Override
 	public void showUserPasswordNextScreen() {
@@ -98,26 +151,26 @@ public class ServiceMenuPasswordFragment extends PasswordFragment{
 		Log.d(TAG,"CheckPassword Result : " + Integer.toString(Result));
 		
 		// ++, 150323 bwk
-		int TempNumData[]={0x31,0x32,0x33,0x34,0x35,0x36,0x37,0x38,0x39,0x30};
-		int TempResult = 1;
-		for(int i=0;i<DataBufIndex;i++)
-		{
-			if(tempNumDataBuf[i] != TempNumData[i])
-			{
-				TempResult = 0;
-				break;
-			}
-		}
-		if(TempResult == 1)
-		{
-			CancelPasswordCheckTimer();
-			CancelTimeOutTimer();
-			
-			showHWTestScreen();
-			Log.d(TAG,"H/W Test");
-			
-			return;
-		}
+//		int TempNumData[]={0x30,0x33,0x31,0x34,0x34,0x35,0x31,0x32,0x32,0x37};
+//		int TempResult = 1;
+//		for(int i=0;i<DataBufIndex;i++)
+//		{
+//			if(tempNumDataBuf[i] != TempNumData[i])
+//			{
+//				TempResult = 0;
+//				break;
+//			}
+//		}
+//		if(TempResult == 1)
+//		{
+//			CancelPasswordCheckTimer();
+//			CancelTimeOutTimer();
+//			
+//			showHWTestScreen();
+//			Log.d(TAG,"H/W Test");
+//			
+//			return;
+//		}
 		// --, 150323 bwk
 		//if(Result == 1)	// UserPassword
 		//	Result = 0;

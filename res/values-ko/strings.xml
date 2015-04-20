@@ -275,7 +275,7 @@
     <string name="Weighing_Information">작업량 정보</string>
     <string name="Fault_History">고장 이력</string>
     <string name="EHCU_IO_Information">전자유압제어 입출력 정보</string>
-    <string name="Version_Information">버전정보</string>
+    <string name="Version_Information">장비정보</string>
     <string name="Operation">진단</string>
     <string name="Joystick_Stroke">조이스틱 행정</string>
     <string name="EPPR_Current">EPPR 전류</string>
@@ -477,5 +477,3 @@
     <string name="Finnish">핀란드어</string>
     <!-- Language End -->
 </resources>
-
-

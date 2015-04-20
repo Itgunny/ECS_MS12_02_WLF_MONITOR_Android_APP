@@ -37,12 +37,16 @@ public class VersionInfoBKCUFragment extends VersionInfoDetailFragment{
 	protected void InitValuables(){
 		super.InitValuables();
 
-		adapter.addItem(new IconTextItemVersion(ParentActivity.getResources().getDrawable(R.drawable.menu_management_machine_monitoring_bg_dark),null,
-				ParentActivity.getResources().getString(string.Serial_Number),"" , ""));
-		adapter.addItem(new IconTextItemVersion(ParentActivity.getResources().getDrawable(R.drawable.menu_management_machine_monitoring_bg_light),null,
-				ParentActivity.getResources().getString(string.Manufacturer),"" , ""));
+//		adapter.addItem(new IconTextItemVersion(ParentActivity.getResources().getDrawable(R.drawable.menu_management_machine_monitoring_bg_dark),null,
+//				ParentActivity.getResources().getString(string.Serial_Number),"" , ""));
+//		adapter.addItem(new IconTextItemVersion(ParentActivity.getResources().getDrawable(R.drawable.menu_management_machine_monitoring_bg_light),null,
+//				ParentActivity.getResources().getString(string.Manufacturer),"" , ""));
+//		adapter.addItem(new IconTextItemVersion(ParentActivity.getResources().getDrawable(R.drawable.menu_management_machine_monitoring_bg_dark),null,
+//				ParentActivity.getResources().getString(string.Program_Version),"" , ""));
 		adapter.addItem(new IconTextItemVersion(ParentActivity.getResources().getDrawable(R.drawable.menu_management_machine_monitoring_bg_dark),null,
 				ParentActivity.getResources().getString(string.Program_Version),"" , ""));
+		adapter.addItem(new IconTextItemVersion(ParentActivity.getResources().getDrawable(R.drawable.menu_management_machine_monitoring_bg_light),null,
+				ParentActivity.getResources().getString(string.Serial_Number),"" , ""));
 
 		listView.setAdapter(adapter);
 
@@ -51,7 +55,7 @@ public class VersionInfoBKCUFragment extends VersionInfoDetailFragment{
 	protected void GetDataFromNative() {
 		// TODO Auto-generated method stub
 		ComponentCode = CAN1Comm.Get_ComponentCode_1699_PGN65330_BKCU();
-		ManufacturerCode = CAN1Comm.Get_ManufacturerCode_1700_PGN65330_BKCU();
+		//ManufacturerCode = CAN1Comm.Get_ManufacturerCode_1700_PGN65330_BKCU();
 		ComponentBasicInformation = CAN1Comm.Get_ComponentBasicInformation_1698_PGN65330_BKCU();
 		ProgramSubVersion = ParentActivity.FindProgramSubInfo(ComponentBasicInformation);
 	}
@@ -63,7 +67,7 @@ public class VersionInfoBKCUFragment extends VersionInfoDetailFragment{
 		ManufactureDayDisplay(ComponentBasicInformation);
 		VersionDisplay(ComponentBasicInformation,ProgramSubVersion);
 		SerialNumberDisplay(ComponentBasicInformation);
-		ManufacturerDisplay(ManufacturerCode);
+		//ManufacturerDisplay(ManufacturerCode);
 	
 		adapter.notifyDataSetChanged();
 	}

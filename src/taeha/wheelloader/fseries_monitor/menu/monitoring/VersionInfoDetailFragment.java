@@ -35,9 +35,12 @@ public class VersionInfoDetailFragment extends ParentFragment{
 //	protected static final int STATE_MAKER					 				= 2;
 //	protected static final int STATE_VERSION					 			= 3;
 	
-	protected static final int STATE_SERIALNUMBER					 		= 0;
-	protected static final int STATE_MAKER					 				= 1;
-	protected static final int STATE_VERSION					 			= 2;
+//	protected static final int STATE_SERIALNUMBER					 		= 0;
+//	protected static final int STATE_MAKER					 				= 1;
+//	protected static final int STATE_VERSION					 			= 2;
+	protected static final int STATE_MAKER					 				= 0;
+	protected static final int STATE_VERSION					 			= 0;
+	protected static final int STATE_SERIALNUMBER					 		= 1;
 	
 	protected static final int STATE_MANUFACTURERCODE_TAEHA						= 1;
 	protected static final int STATE_MANUFACTURERCODE_FREEMS					= 10;

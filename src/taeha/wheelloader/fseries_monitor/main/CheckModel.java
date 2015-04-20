@@ -1,5 +1,6 @@
 package taeha.wheelloader.fseries_monitor.main;
 
+import android.R.integer;
 import android.util.Log;
 
 
@@ -40,6 +41,132 @@ public class CheckModel {
 	/////////////////////VARIABLE//////////////////////////////////
 
 	/////////////////////////////////////////////////////////////////
+	public boolean CheckMCUVersionHigh(byte[] BasicInfo, int nStandardModel){
+		int Index = 4;
+		int Index2 = 0;
+		boolean bAsterisk = false;
+		int n100,n10,n1;
+		int MCUModelNum;
+		char cSub1 = 0, cSub2 = 0;
+		////////////// Find Serial Number/////////////
+		for(int i = 4; i < 20; i++){
+			if(BasicInfo[i] != 0x2A)
+			{
+				Index++;
+				bAsterisk = false;
+			}
+			else{
+				bAsterisk = true;
+				break;
+			}
+		}		
+		/////////////////////////////////////////////
+		
+		//////////// Find Model Name/////////////////
+		for(int i = Index + 1; i < LENGTH_COMPONENTBASICINFORMATION; i++){
+			if(BasicInfo[i] != 0x2A)
+			{
+				Index2++;
+				bAsterisk = false;
+			}
+			else{
+				bAsterisk = true;
+				break;
+			}
+		}
+		/////////////////////////////////////////////
+		int[] Model;
+		Model = new int [Index2];
+	
+		
+		if(bAsterisk == false){
+			return false;
+		}else{
+			for(int i = 0; i < Index2; i++){
+				Model[i] = (int)BasicInfo[i+Index+1];
+			}
+			
+			n100 = Model[2] - 48;
+			n10 = Model[3] - 48;
+			n1 = Model[4] - 48;
+			
+			
+			MCUModelNum = n100 * 100 + n10 * 10 + n1;
+			
+			if(Index2 >= 7){
+				cSub1 = (char) Model[5];
+				cSub2 = (char) Model[6];
+			}
+			
+			if(nStandardModel <= MCUModelNum)
+				return true;
+			else
+				return false;
+		}
+	}
+	
+	public boolean CheckMCUVersionLow(byte[] BasicInfo, int nStandardModel){
+		int Index = 4;
+		int Index2 = 0;
+		boolean bAsterisk = false;
+		int n100,n10,n1;
+		int MCUModelNum;
+		char cSub1 = 0, cSub2 = 0;
+		////////////// Find Serial Number/////////////
+		for(int i = 4; i < 20; i++){
+			if(BasicInfo[i] != 0x2A)
+			{
+				Index++;
+				bAsterisk = false;
+			}
+			else{
+				bAsterisk = true;
+				break;
+			}
+		}		
+		/////////////////////////////////////////////
+		
+		//////////// Find Model Name/////////////////
+		for(int i = Index + 1; i < LENGTH_COMPONENTBASICINFORMATION; i++){
+			if(BasicInfo[i] != 0x2A)
+			{
+				Index2++;
+				bAsterisk = false;
+			}
+			else{
+				bAsterisk = true;
+				break;
+			}
+		}
+		/////////////////////////////////////////////
+		int[] Model;
+		Model = new int [Index2];
+	
+		
+		if(bAsterisk == false){
+			return false;
+		}else{
+			for(int i = 0; i < Index2; i++){
+				Model[i] = (int)BasicInfo[i+Index+1];
+			}
+			
+			n100 = Model[2] - 48;
+			n10 = Model[3] - 48;
+			n1 = Model[4] - 48;
+			
+			
+			MCUModelNum = n100 * 100 + n10 * 10 + n1;
+			
+			if(Index2 >= 7){
+				cSub1 = (char) Model[5];
+				cSub2 = (char) Model[6];
+			}
+			if(nStandardModel >= MCUModelNum)
+				return true;
+			else
+				return false;
+		}
+	}	
 	
 	public int GetMCUVersion(byte[] BasicInfo){
 		boolean DataCheckFlag = true;

@@ -1467,7 +1467,9 @@ public class MainABaseFragment extends ParentFragment{
 		case Home.SCREEN_STATE_MAIN_A_QUICK_MIRACLOSE:
 			ParentActivity._MiracastClosePopup.ClickESC();
 			break;
-			
+		case Home.SCREEN_STATE_MAIN_A_LEFTUP_MACHINESTATUS_POPUP:
+			ParentActivity._AxleTempWarningPopup.ClickESC();
+			break;
 		default:
 			break;
 		}

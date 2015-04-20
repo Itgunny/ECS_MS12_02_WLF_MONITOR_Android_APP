@@ -387,6 +387,8 @@ unsigned int		nRecvSeedFlag;
 unsigned int		nRecvPasswordResultFlag;
 unsigned int		nRecvPasswordChangeResultFlag;
 unsigned int		nRecvResDownFlag;
+
+unsigned char		nFNLamp = 0;
 /////////////////////// CMD Data/////////////////
 RES_RTC							RX_RES_RTC;
 RES_VERSION						RX_RES_Version;

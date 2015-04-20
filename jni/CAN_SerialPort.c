@@ -3407,6 +3407,12 @@ jint Get_gErr_EHCU_Total_Logged(JNIEnv *env, jobject this) {
 }
 
 
+void SetFNKeypadLamp(JNIEnv * env, jobject this,
+		int Data) {
+	nFNLamp = Data;
+	SetKeypadLamp();
+}
+
 static JNINativeMethod methods[] =
 		{
 				{ "Open_UART1", "(Ljava/lang/String;II)Ljava/io/FileDescriptor;",(void*) _Open_UART1 },
@@ -3418,6 +3424,9 @@ static JNINativeMethod methods[] =
 				{ "Close_UART3", "()V",(void*) _Close_UART3 },
 				{ "Write_UART3", "([BI)I",(void*) _Write_UART3 },
 				{ "UART3_TxComm", "(IIIIIIIII)I",(void*) _UART3_TxComm },
+
+				{ "SetFNKeypadLamp", "(I)V",
+						(void*) SetFNKeypadLamp },
 
 				{"Get_TcuErr_FromNative", "()[I", (void*) _Get_TcuErr },
 				{"Get_EcuErr_FromNative", "()[I", (void*) _Get_EcuErr },
@@ -5038,6 +5047,7 @@ static JNINativeMethod methods[] =
 						(void*) Set_RearWiperOperationStatus_3451_PGN65527 },
 				{ "Set_RearWiperWasherOperationStatus_3452_PGN65527", "(I)V",
 						(void*) Set_RearWiperWasherOperationStatus_3452_PGN65527 },
+
 				///////////////////////////////////////////////////////////////////////////////////////////////////////
 				{ "Get_FirmwareVersionHigh", "()I",(void*) Get_FirmwareVersionHigh },
 				{ "Get_FirmwareVersionLow", "()I",(void*) Get_FirmwareVersionLow },
@@ -5091,8 +5101,6 @@ static JNINativeMethod methods[] =
 
 
 				///////////////////////////////////////////////////////////////////////////////////////////////////////
-
-
 
 		};
 

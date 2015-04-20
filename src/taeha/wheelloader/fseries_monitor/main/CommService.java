@@ -66,7 +66,6 @@ public class CommService extends Service{
 	
 	// MediaPlayer
 	// ++, 150211 bwk
-	private static boolean PlayerFlag = false;		
 	private static boolean rpmFlag = false;
 	// --, 150211 bwk
 
@@ -133,6 +132,8 @@ public class CommService extends Service{
 	public native void Close_UART3();				// UART 1만 close 됨
 	public native int Write_UART3(byte[] Data, int size);
 	public native int UART3_TxComm(int CMD, int DAT1, int DAT2, int DAT3, int DAT4, int DAT5, int DAT6, int DAT7, int DAT8);
+	
+	public native void SetFNKeypadLamp(int Data);
 	
 	///////////////////////////NEW CAN2//////////////////////////////////////
 	public native int UART1_Tx(int PF, int PS, int Flag);
@@ -1187,11 +1188,6 @@ public class CommService extends Service{
 				SoundPoolKeyButton.play(SoundID, fVolume, fVolume, 0, 0, 1);
 				break;
 			case CAN1CommManager.ESC:
-				// ++, 150211 bwk
-				if(PlayerFlag == true && rpmFlag == false)
-					PlayerFlag = false;
-				// --, 150211 bwk
-				
 				// ++, 150324 bwk 하기 주석 품
 				if(GetScreenTopFlag() == true)
 				{
@@ -1215,8 +1211,6 @@ public class CommService extends Service{
 			case CAN1CommManager.LEFT:
 				if(GetScreenTopFlag() == true)
 				{
-					if(PlayerFlag == true && rpmFlag == false)
-						PlayerFlag = false;
 					if(multimediaFlag == true)
 						multimediaFlag = false;
 					CAN1Comm.Callback_KeyButton(Data);
@@ -1366,12 +1360,6 @@ public class CommService extends Service{
 		return FNFlag;
 	}
 	// ++, 150211 bwk
-	public static void SetPlayerFlag(boolean flag){
-		PlayerFlag = flag;
-	}
-	public static boolean GetPlayerFlag(){
-		return PlayerFlag;
-	}
 	public static boolean GetrpmFlag(){
 		return rpmFlag;
 	}
@@ -1380,11 +1368,38 @@ public class CommService extends Service{
 	// ++, 150323 bwk
 	public void SetMultimediaFlag(boolean flag){
 		multimediaFlag = flag;
+		if(multimediaFlag == true || miracastFlag == true 
+			|| CheckRunningApp("com.mxtech.videoplayer.ad") == true
+			|| CheckRunningApp("com.powerone.wfd.sink") == true)
+			SetFNKeypadLamp(1);
+		else 
+			SetFNKeypadLamp(0);
+	}
+	public boolean GetMultimediaFlag(){
+		return multimediaFlag;
 	}
 	public void SetMiracastFlag(boolean flag){
 		miracastFlag = flag;
+		if(multimediaFlag == true || miracastFlag == true
+			|| CheckRunningApp("com.mxtech.videoplayer.ad") == true
+			|| CheckRunningApp("com.powerone.wfd.sink") == true)
+			SetFNKeypadLamp(1);
+		else 
+			SetFNKeypadLamp(0);
 	}	
 	// --, 150323 bwk
+	public void CheckMultimedia()
+	{
+		if(CheckRunningApp("com.mxtech.videoplayer.ad") == false)
+		{
+			SetMultimediaFlag(false);
+			rpmFlag = false;
+		}
+		else
+		{
+			SetMultimediaFlag(true);
+		}
+	}
 	////////////////////////////////////////////////////////////////////////
 		
 	/////////////////OVERRIDE METHOD///////////////////////////////////////
@@ -1548,7 +1563,7 @@ public class CommService extends Service{
 		 for(int i=0; i<app_list.size(); i++)	 {
 	
 			 if(strPrcessName.equals(app_list.get(i).processName) == true)	 {
-				 Log.d(TAG,"Process is running : " + app_list.get(i).processName);
+				 //Log.d(TAG,"Process is running : " + app_list.get(i).processName);
 				 return true;
 			 }
 		 }
@@ -1578,8 +1593,9 @@ public class CommService extends Service{
 		intent = getPackageManager().getLaunchIntentForPackage("com.mxtech.videoplayer.ad");
 		if(intent != null){
 			startActivity(intent);
-			multimediaFlag = true;		// ++, --, 150323 bwk
-			
+			SetMultimediaFlag(true);
+			//multimediaFlag = true;		// ++, --, 150323 bwk
+			SetFNKeypadLamp(1);
 		}
 	}
 	public void RunMirror(){
@@ -1588,6 +1604,7 @@ public class CommService extends Service{
 		if(intent != null){
 			startActivity(intent);
 			miracastFlag = true;		// ++, --, 150323 bwk
+			SetFNKeypadLamp(1);
 		}
 	}
 	public void ClickFN(){
@@ -1595,20 +1612,20 @@ public class CommService extends Service{
 		{
 			rpmFlag = false;
 			if(CheckTopApps("com.mxtech.videoplayer.ad") == true){
-				PlayerFlag = false;	// ++, --, 150211 bwk
-				multimediaFlag = false; //++, --, 150403 cjg
+				SetMiracastFlag(false);
+				//multimediaFlag = false; //++, --, 150403 cjg
 				CallHome();
 			}else if(CheckTopApps("com.powerone.wfd.sink") == true){
-				PlayerFlag = false;	// ++, --, 150211 bwk
-				miracastFlag = false; //++, --, 150403 cjg
+				SetMiracastFlag(false);
+				//miracastFlag = false; //++, --, 150403 cjg
 				CallHome();
 			}else if(CheckRunningApp("com.mxtech.videoplayer.ad") == true){
-				PlayerFlag = true;	// ++, --, 150211 bwk
-				multimediaFlag = true; //++, --, 150403 cjg
+				SetMultimediaFlag(true);
+				//multimediaFlag = true; //++, --, 150403 cjg
 				RunMultimedia();
 			}else if(CheckRunningApp("com.powerone.wfd.sink") == true){
-				PlayerFlag = true;	// ++, --, 150211 bwk
-				miracastFlag = true; //++, --, 150403 cjg
+				SetMiracastFlag(true);
+				//miracastFlag = true; //++, --, 150403 cjg
 				RunMirror();
 			}
 		}
@@ -1653,7 +1670,7 @@ public class CommService extends Service{
 		});
 
 		thread.start();
-		multimediaFlag = false;
+		//multimediaFlag = false;
 	}
 	// --, 150320 cjg			
 }

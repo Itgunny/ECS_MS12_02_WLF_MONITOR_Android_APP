@@ -291,6 +291,26 @@ void Send_ASPhoneNumber()
 }
 
 
+void Send_CID()
+{
+	int Length = 2;
+	int Cnt=0;
+	int i;
+	for(i = 0; i < sizeof(TX_COMPONENT_IDENTIFICATION_MONITOR_65330); i++){
+		if(TX_COMPONENT_IDENTIFICATION_MONITOR_65330.ComponentBasicInformation_1698[i] == 0x2A)
+		{
+			if(++Cnt == 2)
+				break;
+		}
+		else
+			Length++;
+	}
+
+	MakeCANDataMultiBoradcast(0x1C,0xFF,0x32,0xFF,SA_MONITOR,&TX_COMPONENT_IDENTIFICATION_MONITOR_65330,Length);
+}
+
+
+
 //////////////////////////////////////////////////////////////////////////////////////////////////
 
 
@@ -1737,7 +1757,10 @@ jint UART1_Tx(JNIEnv *env, jobject this, jint PF, jint PS, jint Flag) {
 		case 47	:
 			MakeCANDataSingle(0x18,0xFF,PS,SA_MONITOR,(unsigned char*)&TX_MONIOTR_STATUS_65327);
 			break;
-			//case 50	:	memcpy(&tx_buf[4], (unsigned char*) &TX_COMPONENT_IDENTIFICATION_MONITOR_65330, sizeof(TX_COMPONENT_IDENTIFICATION_MONITOR_65330));break;
+		case 50	:	
+			Send_CID();
+			//memcpy(&tx_buf[4], (unsigned char*) &TX_COMPONENT_IDENTIFICATION_MONITOR_65330, sizeof(TX_COMPONENT_IDENTIFICATION_MONITOR_65330));
+			break;
 		case 145	:	// Multi Packet	13
 			//memcpy(&tx_buf[4], (unsigned char*) &TX_AS_PHONE_NUMBER_65425, sizeof(TX_AS_PHONE_NUMBER_65425));
 			break;
@@ -2973,7 +2996,10 @@ jint _UART1_TxComm(JNIEnv *env, jobject this, jint PS) {
 		case 47	:
 			MakeCANDataSingle(0x18,0xFF,PS,SA_MONITOR,(unsigned char*)&TX_MONIOTR_STATUS_65327);
 			break;
-			//case 50	:	memcpy(&tx_buf[4], (unsigned char*) &TX_COMPONENT_IDENTIFICATION_MONITOR_65330, sizeof(TX_COMPONENT_IDENTIFICATION_MONITOR_65330));break;
+		case 50	:	
+			Send_CID();
+			//memcpy(&tx_buf[4], (unsigned char*) &TX_COMPONENT_IDENTIFICATION_MONITOR_65330, sizeof(TX_COMPONENT_IDENTIFICATION_MONITOR_65330));
+			break;
 		case 145	:
 			Send_ASPhoneNumber();
 			break;
@@ -3139,13 +3165,21 @@ void SetKeypadLamp()
 	else
 		TX_CMD_Lamp.AutoPosition2 = 0;
 
-	if(RX_WHEEL_LOADER_EHCU_STATUS_65517.FlowFineModulationOperation_2302 == 0)
+	if(RX_COMPONENT_IDENTIFICATION_EHCU_65330.ComponentCode_1699 != 91)	// STATE_COMPONENTCODE_EHCU = 91
+	{
 		TX_CMD_Lamp.FineModulation = 0;
-	else if(RX_WHEEL_LOADER_EHCU_STATUS_65517.FlowFineModulationOperation_2302 == 1)
-		TX_CMD_Lamp.FineModulation = 1;
+	}
 	else
-		TX_CMD_Lamp.FineModulation = 0;
+	{
+		if(RX_WHEEL_LOADER_EHCU_STATUS_65517.FlowFineModulationOperation_2302 == 0)
+			TX_CMD_Lamp.FineModulation = 0;
+		else if(RX_WHEEL_LOADER_EHCU_STATUS_65517.FlowFineModulationOperation_2302 == 1)
+			TX_CMD_Lamp.FineModulation = 1;
+		else
+			TX_CMD_Lamp.FineModulation = 0;
+	}
 
+	TX_CMD_Lamp.FN = nFNLamp;
 
 
 	if(RX_ELECTRICAL_SWITCH_RELAY_OPERATION_STATUS_65527.IlluminationOperationStatus_3438 == 0)

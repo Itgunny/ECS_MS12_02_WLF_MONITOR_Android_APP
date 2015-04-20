@@ -15,12 +15,15 @@ public class VersionInfoTCUFragment extends VersionInfoDetailFragment{
 	/////////////////CONSTANT////////////////////////////////////////////
 	private static final int LENGTH_SOFTWAREIDENTIFICATION = 67;
 	
-	private static final int STATE_EST37A_PART_NUMBER 		= 0;
-	private static final int STATE_HARDWARE_PART_NUMBER		= 1;
-	private static final int STATE_SOFTWARE_VERSION			= 2;
-	private static final int STATE_HARDWARE_SERIAL_NUMBER	= 3;
-	private static final int STATE_CUSTOMER_SERIAL_NUMBER	= 4;
-	private static final int STATE_MAKER					= 5;
+//	private static final int STATE_EST37A_PART_NUMBER 		= 0;
+//	private static final int STATE_HARDWARE_PART_NUMBER		= 1;
+//	private static final int STATE_SOFTWARE_VERSION			= 2;
+//	private static final int STATE_HARDWARE_SERIAL_NUMBER	= 3;
+//	private static final int STATE_CUSTOMER_SERIAL_NUMBER	= 4;
+//	private static final int STATE_MAKER					= 5;
+	private static final int STATE_MAKER 					= 0;
+	private static final int STATE_HARDWARE_SERIAL_NUMBER	= 1;
+	
 	/////////////////////////////////////////////////////////////////////
 	/////////////////////VALUABLE////////////////////////////////////////
 	int Est37APartNumberIndex;
@@ -58,18 +61,23 @@ public class VersionInfoTCUFragment extends VersionInfoDetailFragment{
 
 
 		
+//		adapter.addItem(new IconTextItemVersion(ParentActivity.getResources().getDrawable(R.drawable.menu_management_machine_monitoring_bg_light),null,
+//				ParentActivity.getResources().getString(string.EST37A_Part_Number),"" , ""));
+//		adapter.addItem(new IconTextItemVersion(ParentActivity.getResources().getDrawable(R.drawable.menu_management_machine_monitoring_bg_dark),null,
+//				ParentActivity.getResources().getString(string.Hardware_Part_Number),"" , ""));
+//		adapter.addItem(new IconTextItemVersion(ParentActivity.getResources().getDrawable(R.drawable.menu_management_machine_monitoring_bg_light),null,
+//				ParentActivity.getResources().getString(string.Software_Version),"" , ""));
+//		adapter.addItem(new IconTextItemVersion(ParentActivity.getResources().getDrawable(R.drawable.menu_management_machine_monitoring_bg_dark),null,
+//				ParentActivity.getResources().getString(string.Hardware_Serial_Number),"" , ""));
+//		adapter.addItem(new IconTextItemVersion(ParentActivity.getResources().getDrawable(R.drawable.menu_management_machine_monitoring_bg_light),null,
+//				ParentActivity.getResources().getString(string.Customer_Serial_Number),"" , ""));
+//		adapter.addItem(new IconTextItemVersion(ParentActivity.getResources().getDrawable(R.drawable.menu_management_machine_monitoring_bg_dark),null,
+//				ParentActivity.getResources().getString(string.Manufacturer),"" , ""));
 		adapter.addItem(new IconTextItemVersion(ParentActivity.getResources().getDrawable(R.drawable.menu_management_machine_monitoring_bg_light),null,
-				ParentActivity.getResources().getString(string.EST37A_Part_Number),"" , ""));
-		adapter.addItem(new IconTextItemVersion(ParentActivity.getResources().getDrawable(R.drawable.menu_management_machine_monitoring_bg_dark),null,
-				ParentActivity.getResources().getString(string.Hardware_Part_Number),"" , ""));
-		adapter.addItem(new IconTextItemVersion(ParentActivity.getResources().getDrawable(R.drawable.menu_management_machine_monitoring_bg_light),null,
-				ParentActivity.getResources().getString(string.Software_Version),"" , ""));
+				ParentActivity.getResources().getString(string.Manufacturer),"" , ""));
 		adapter.addItem(new IconTextItemVersion(ParentActivity.getResources().getDrawable(R.drawable.menu_management_machine_monitoring_bg_dark),null,
 				ParentActivity.getResources().getString(string.Hardware_Serial_Number),"" , ""));
-		adapter.addItem(new IconTextItemVersion(ParentActivity.getResources().getDrawable(R.drawable.menu_management_machine_monitoring_bg_light),null,
-				ParentActivity.getResources().getString(string.Customer_Serial_Number),"" , ""));
-		adapter.addItem(new IconTextItemVersion(ParentActivity.getResources().getDrawable(R.drawable.menu_management_machine_monitoring_bg_dark),null,
-				ParentActivity.getResources().getString(string.Manufacturer),"" , ""));
+		
 		listView.setAdapter(adapter);
 
 	}
@@ -79,7 +87,7 @@ public class VersionInfoTCUFragment extends VersionInfoDetailFragment{
 		ComponentCode = CAN1Comm.Get_ComponentCode_1699_PGN65330_TCU();
 		ManufacturerCode = CAN1Comm.Get_ManufacturerCode_1700_PGN65330_TCU();
 		SoftwareIdentification = CAN1Comm.Get_ComponentBasicInformation_1698_PGN65330_TCU();	
-		ProgramSubVersion = ParentActivity.FindProgramSubInfo(ComponentBasicInformation);
+//		ProgramSubVersion = ParentActivity.FindProgramSubInfo(ComponentBasicInformation);
 	}
 
 	@Override
@@ -87,11 +95,12 @@ public class VersionInfoTCUFragment extends VersionInfoDetailFragment{
 		// TODO Auto-generated method stub
 		ManufacturerDisplay(ManufacturerCode);
 		
-		HardwarePartNumberIndex = SoftwareIDDisplay(SoftwareIdentification,1,12,STATE_EST37A_PART_NUMBER);
-		SoftwareVersionIndex = SoftwareIDDisplay(SoftwareIdentification,HardwarePartNumberIndex,12,STATE_HARDWARE_PART_NUMBER);
-		HardwareSerialNumberIndex = SoftwareIDDisplay(SoftwareIdentification,SoftwareVersionIndex,12,STATE_SOFTWARE_VERSION);
-		CutomerSerialNumberIndex = SoftwareIDDisplay(SoftwareIdentification,HardwareSerialNumberIndex,9,STATE_HARDWARE_SERIAL_NUMBER);
-		LastIndex = SoftwareIDDisplay(SoftwareIdentification,CutomerSerialNumberIndex,16,STATE_CUSTOMER_SERIAL_NUMBER);
+//		HardwarePartNumberIndex = SoftwareIDDisplay(SoftwareIdentification,1,12,STATE_EST37A_PART_NUMBER);
+//		SoftwareVersionIndex = SoftwareIDDisplay(SoftwareIdentification,HardwarePartNumberIndex,12,STATE_HARDWARE_PART_NUMBER);
+//		HardwareSerialNumberIndex = SoftwareIDDisplay(SoftwareIdentification,SoftwareVersionIndex,12,STATE_SOFTWARE_VERSION);
+//		CutomerSerialNumberIndex = SoftwareIDDisplay(SoftwareIdentification,HardwareSerialNumberIndex,9,STATE_HARDWARE_SERIAL_NUMBER);
+//		LastIndex = SoftwareIDDisplay(SoftwareIdentification,CutomerSerialNumberIndex,16,STATE_CUSTOMER_SERIAL_NUMBER);
+		SoftwareIDDisplay(SoftwareIdentification,40,9,STATE_HARDWARE_SERIAL_NUMBER);
 	
 		adapter.notifyDataSetChanged();
 	}

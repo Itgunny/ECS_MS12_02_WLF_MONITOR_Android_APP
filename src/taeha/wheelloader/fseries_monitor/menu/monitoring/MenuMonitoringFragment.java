@@ -10,6 +10,9 @@ import taeha.wheelloader.fseries_monitor.main.Home;
 import taeha.wheelloader.fseries_monitor.main.ParentFragment;
 import taeha.wheelloader.fseries_monitor.main.R;
 import taeha.wheelloader.fseries_monitor.main.R.string;
+import taeha.wheelloader.fseries_monitor.main.a.MainALeftUpMachineStatusSelectFragment1;
+import taeha.wheelloader.fseries_monitor.main.a.MainALeftUpMachineStatusSelectFragment2;
+import taeha.wheelloader.fseries_monitor.main.a.MainALeftUpMachineStatusSelectFragment3;
 import taeha.wheelloader.fseries_monitor.menu.MenuBodyList_ParentFragment;
 import taeha.wheelloader.fseries_monitor.menu.mode.MenuModeFragment;
 import android.os.Bundle;
@@ -109,20 +112,13 @@ public class MenuMonitoringFragment extends MenuBodyList_ParentFragment{
 			ParentActivity.StartAnimationRunningTimer();
 		// ++, 150329 bwk
 		//ParentActivity._MenuBaseFragment.showBodyMachineMonitoringAnimation();
-//		if(ParentActivity._CheckModel.GetMCUVersion(CAN1Comm.Get_ComponentBasicInformation_1698_PGN65330()) == CheckModel.MODEL_955
-//			|| ParentActivity._CheckModel.GetMCUVersion(CAN1Comm.Get_ComponentBasicInformation_1698_PGN65330()) == CheckModel.MODEL_955TM
-//			|| ParentActivity._CheckModel.GetMCUVersion(CAN1Comm.Get_ComponentBasicInformation_1698_PGN65330()) == CheckModel.MODEL_960
-//			|| ParentActivity._CheckModel.GetMCUVersion(CAN1Comm.Get_ComponentBasicInformation_1698_PGN65330()) == CheckModel.MODEL_960TM)
-//			ParentActivity._MenuBaseFragment.showBodyMachineMonitoringAnimation2();
-//		else if(ParentActivity._CheckModel.GetMCUVersion(CAN1Comm.Get_ComponentBasicInformation_1698_PGN65330()) == CheckModel.MODEL_965
-//				|| ParentActivity._CheckModel.GetMCUVersion(CAN1Comm.Get_ComponentBasicInformation_1698_PGN65330()) == CheckModel.MODEL_965TM
-//				|| ParentActivity._CheckModel.GetMCUVersion(CAN1Comm.Get_ComponentBasicInformation_1698_PGN65330()) == CheckModel.MODEL_970
-//				|| ParentActivity._CheckModel.GetMCUVersion(CAN1Comm.Get_ComponentBasicInformation_1698_PGN65330()) == CheckModel.MODEL_970TM
-//				|| ParentActivity._CheckModel.GetMCUVersion(CAN1Comm.Get_ComponentBasicInformation_1698_PGN65330()) == CheckModel.MODEL_980
-//				|| ParentActivity._CheckModel.GetMCUVersion(CAN1Comm.Get_ComponentBasicInformation_1698_PGN65330()) == CheckModel.MODEL_980TM)
+//		if(ParentActivity._CheckModel.CheckMCUVersionHigh(CAN1Comm.Get_ComponentBasicInformation_1698_PGN65330(), 965) == true)
 //			ParentActivity._MenuBaseFragment.showBodyMachineMonitoringAnimation3();
+//		else if(ParentActivity._CheckModel.CheckMCUVersionHigh(CAN1Comm.Get_ComponentBasicInformation_1698_PGN65330(), 955) == true)
+//			ParentActivity._MenuBaseFragment.showBodyMachineMonitoringAnimation2();
 //		else
 			ParentActivity._MenuBaseFragment.showBodyMachineMonitoringAnimation1();
+		
 		CursurIndex = 1;
 		CursurDisplay(CursurIndex);
 	}

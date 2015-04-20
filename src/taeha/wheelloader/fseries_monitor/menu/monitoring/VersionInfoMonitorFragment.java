@@ -18,7 +18,8 @@ import android.widget.TextView;
 
 public class VersionInfoMonitorFragment extends VersionInfoDetailFragment{
 	/////////////////CONSTANT////////////////////////////////////////////
-	protected static final int STATE_FIRMWARE_VERSION				 	= 3;
+	protected static final int STATE_FIRMWARE_VERSION				 	= 1;
+	protected static final int STATE_SERIALNUMBER				= 2;
 	/////////////////////////////////////////////////////////////////////
 	TextView textViewHardwareData;
 	RelativeLayout layoutHardware;
@@ -73,14 +74,20 @@ public class VersionInfoMonitorFragment extends VersionInfoDetailFragment{
 	protected void InitValuables(){
 		super.InitValuables();
 
-		adapter.addItem(new IconTextItemVersion(ParentActivity.getResources().getDrawable(R.drawable.menu_management_machine_monitoring_bg_light),null,
-				ParentActivity.getResources().getString(string.Serial_Number),"" , ""));
+//		adapter.addItem(new IconTextItemVersion(ParentActivity.getResources().getDrawable(R.drawable.menu_management_machine_monitoring_bg_light),null,
+//				ParentActivity.getResources().getString(string.Serial_Number),"" , ""));
+//		adapter.addItem(new IconTextItemVersion(ParentActivity.getResources().getDrawable(R.drawable.menu_management_machine_monitoring_bg_dark),null,
+//				ParentActivity.getResources().getString(string.Manufacturer),"" , ""));
+//		adapter.addItem(new IconTextItemVersion(ParentActivity.getResources().getDrawable(R.drawable.menu_management_machine_monitoring_bg_light),null,
+//				ParentActivity.getResources().getString(string.Program_Version),"" , ""));
+//		adapter.addItem(new IconTextItemVersion(ParentActivity.getResources().getDrawable(R.drawable.menu_management_machine_monitoring_bg_dark),null,
+//				ParentActivity.getResources().getString(string.Firmware_Version),"" , ""));
 		adapter.addItem(new IconTextItemVersion(ParentActivity.getResources().getDrawable(R.drawable.menu_management_machine_monitoring_bg_dark),null,
-				ParentActivity.getResources().getString(string.Manufacturer),"" , ""));
-		adapter.addItem(new IconTextItemVersion(ParentActivity.getResources().getDrawable(R.drawable.menu_management_machine_monitoring_bg_light),null,
 				ParentActivity.getResources().getString(string.Program_Version),"" , ""));
-		adapter.addItem(new IconTextItemVersion(ParentActivity.getResources().getDrawable(R.drawable.menu_management_machine_monitoring_bg_dark),null,
+		adapter.addItem(new IconTextItemVersion(ParentActivity.getResources().getDrawable(R.drawable.menu_management_machine_monitoring_bg_light),null,
 				ParentActivity.getResources().getString(string.Firmware_Version),"" , ""));
+		adapter.addItem(new IconTextItemVersion(ParentActivity.getResources().getDrawable(R.drawable.menu_management_machine_monitoring_bg_dark),null,
+				ParentActivity.getResources().getString(string.Serial_Number),"" , ""));
 		
 		
 	
@@ -91,7 +98,7 @@ public class VersionInfoMonitorFragment extends VersionInfoDetailFragment{
 	protected void GetDataFromNative() {
 		// TODO Auto-generated method stub
 		ComponentCode = GetMonitorComponentCode();
-		ManufacturerCode = GetMonitorManufacturerCode();
+//		ManufacturerCode = GetMonitorManufacturerCode();
 		ComponentBasicInformation = ParentActivity.GetMonitorComponentBasicInfo();
 		
 		FirmwareVersionHigh = CAN1Comm.Get_FirmwareVersionHigh();
@@ -108,7 +115,7 @@ public class VersionInfoMonitorFragment extends VersionInfoDetailFragment{
 		ManufactureDayDisplay(ComponentBasicInformation);
 		HardwareDisplay(HWVersion);
 		SerialNumberDisplay(ComponentBasicInformation);
-		ManufacturerDisplay(ManufacturerCode);
+//		ManufacturerDisplay(ManufacturerCode);
 		ApplicationVersionDisplay(ParentActivity.VERSION_HIGH,ParentActivity.VERSION_LOW
 								,ParentActivity.VERSION_SUB_HIGH,ParentActivity.VERSION_SUB_LOW);
 		FirmwareVersionDisplay(FirmwareVersionHigh,FirmwareVersionLow,FirmwareVersionSubHigh,FirmwareVersionSubLow);
@@ -125,6 +132,41 @@ public class VersionInfoMonitorFragment extends VersionInfoDetailFragment{
 		return SharePref.getInt("ManufacturerCode_Monitor", 0xFF);
 	}
 	////////////////////////////////////////////////
+	public void SerialNumberDisplay(byte[] BasicInfo)throws NullPointerException{
+		boolean DataCheckFlag = true;
+		String strSerial;
+		int Index = 0;
+		for(int i = 4; i < 20; i++){
+			if(BasicInfo[i] != 0x2A)
+			{
+				Index++;
+			}
+			else{
+				
+				break;
+			}
+		}
+		
+		char[] Serial;
+		Serial = new char [Index];
+		int[] Temp;
+		Temp = new int[Index];
+		
+		for(int i = 0; i < Index; i++){
+			Serial[i] = (char) BasicInfo[i+4];
+			Temp[i] = (int)(BasicInfo[i+4] & 0xFF);
+			if(Temp[i] > 254){
+				DataCheckFlag = false;
+			}
+		}
+		strSerial = new String(Serial,0,Serial.length);
+		if(DataCheckFlag == false){
+			adapter.UpdateSecond(STATE_SERIALNUMBER, "-");
+		}else{
+			adapter.UpdateSecond(STATE_SERIALNUMBER, strSerial);
+		}
+		
+	}
 	public void ApplicationVersionDisplay(int VersionHigh, int VersionLow, int VersionSubHigh, int VersionSubLow){
 		adapter.UpdateSecond(STATE_VERSION, Integer.toString(VersionHigh) + "." + Integer.toString(VersionLow)
 				+ "." + Integer.toHexString(VersionSubHigh) + "." + Integer.toHexString(VersionSubLow));

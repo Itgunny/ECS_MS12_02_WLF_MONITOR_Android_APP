@@ -135,14 +135,14 @@ public class MiracastClosePopup extends ParentPopup {
 	public void ClickOK(){
 		this.dismiss();
 		ParentActivity.KillApps("com.powerone.wfd.sink");
+		CAN1Comm.SetMiracastFlag(false);
 		Intent intent;
 		intent = ParentActivity.getPackageManager().getLaunchIntentForPackage("com.mxtech.videoplayer.ad");
 		if(intent != null){
-			CAN1Comm.SetPlayerFlag(true);
-			CAN1Comm.SetMultimediaFlag(true);
-			CAN1Comm.SetMiracastFlag(false);
+			//CAN1Comm.SetMultimediaFlag(true);
 			ParentActivity.startActivity(intent);
 			ParentActivity.StartAlwaysOntopService();		// ++, --, 150324 cjg
+			ParentActivity.StartCheckMultimediaTimer();
 		}
 		
 	}	

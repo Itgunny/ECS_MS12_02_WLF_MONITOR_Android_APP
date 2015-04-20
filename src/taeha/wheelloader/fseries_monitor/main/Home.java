@@ -9,6 +9,7 @@ import java.util.TimerTask;
 
 import taeha.wheelloader.fseries_monitor.animation.ChangeFragmentAnimation;
 import taeha.wheelloader.fseries_monitor.popup.AngleCalibrationResultPopup;
+import taeha.wheelloader.fseries_monitor.popup.AxleTempWarningPopup;
 import taeha.wheelloader.fseries_monitor.popup.BrakePedalCalibrationPopup;
 import taeha.wheelloader.fseries_monitor.popup.BucketPriorityPopup;
 import taeha.wheelloader.fseries_monitor.popup.CCOModePopup;
@@ -71,7 +72,7 @@ public class Home extends Activity {
 	public static final int VERSION_HIGH 		= 1;
 	public static final int VERSION_LOW 		= 0;
 	public static final int VERSION_SUB_HIGH 	= 4;
-	public static final int VERSION_SUB_LOW 	= 1;
+	public static final int VERSION_SUB_LOW 	= 2;
 	////1.0.2.3
 	// UI B 안 최초 적용 2014.12.10
 	////1.0.2.4
@@ -361,7 +362,7 @@ public class Home extends Activity {
 	//// v1.0.4.2
 	// 1. 보정 List 상에서 키패드 안되는 버그 수정
 	// 2. Cooling fan reverse mode Ui 수정
-	// 3. 과거 고장 삭제 팝업에서 ESC 눌렀을 경우 과거고장 페이지에서 커서 잃는 버그 수정
+	// 3. 과거 고장 삭제 팝업에서 ESC 눌렀을 경우 과거고장 페이지에서 커서 잃는 버그 수정(Crash -> UpdateUI사용으로 변경)
 	// 4. Version 정보에서 EHCU 없을 때 LEFT/RIGHT 커서 버그 수정
 	// 5. MainAKeyWorkLoadDisplayFragment에서 팝업 띄우고 ESC 누르면 Crash뜨는 버그 수정
 	// 6. WorkLoadWeighingInitPopup1, 2 팝업 ESC 누르면 포커스 잃는 버그 수정
@@ -369,6 +370,18 @@ public class Home extends Activity {
 	// 8. 스마트키 인증 화면 B안 이미지 축소(HHI 요청)
 	// 9. 미라캐스트 패키지명 수정
 	// 10. 보정, 엔진설정, 연료 정보 포커스 초기화되는 버그 수정
+	// 11. 과거고장삭제 팝업 : 문구 /n 추가
+	// 12. 관리기능 - 관리자메뉴 - 비밀번호 입력창 : 롱키로 비밀번호 해제 기능 삭제
+	// 13. 관리기능 - 관리자메뉴 - 소프트웨어 업데이트 : 롱키 비밀번호 해제 기능 추가 - CAN 없이 업데이트 가능
+	// 14. 메뉴 왼쪽 바 및 리스트 멀티터치 차단
+	// 15. Fine Modulation 관련하여 EHCU CID 미수신 시 LED Off
+	// 16. 미디어 플레이어 : RPM 연동하여 RPM 상승시 백그라운드로 동작(flag 변수 통합 및 동작 중 LED 표시)
+	// 17. HW Test 프로그램 CAN 없이 가능하게 수정 및 비밀번호 변경(0314451227)
+	// 18. 버전 정보 표시화면 변경
+	//	- 버전정보 -> 장비정보 이름 변경(한국어)
+	//	- ECM 표시내용 : 제조사, ECM Identifier
+	//	- TCM 표시 내용 : 제조사, HW Serial Number
+	//	- 그외 항목 표시내용 : 프로그램 버전, 시리얼 번호
 	//////////////////////////////////////////////////////////////////////////////////////
 	
 	// TAG
@@ -397,6 +410,7 @@ public class Home extends Activity {
 	public  static final int SCREEN_STATE_MAIN_B_LEFTUP_MACHINESTATUS2						= 0x13200000;
 	public  static final int SCREEN_STATE_MAIN_B_LEFTUP_MACHINESTATUS3						= 0x13300000;
 	// --, 150330 bwk
+	public  static final int SCREEN_STATE_MAIN_B_LEFTUP_MACHINESTATUS_POPUP					= 0x13400000;
 	public  static final int SCREEN_STATE_MAIN_B_LEFTUP_END									= 0x13FFFFFF;
 	
 	public  static final int SCREEN_STATE_MAIN_B_LEFTDOWN_TOP								= 0x14000000;
@@ -665,6 +679,7 @@ public class Home extends Activity {
 	public  static final int SCREEN_STATE_MAIN_A_LEFTUP_MACHINESTATUS1						= 0x73100000;
 	public  static final int SCREEN_STATE_MAIN_A_LEFTUP_MACHINESTATUS2						= 0x73200000;
 	public  static final int SCREEN_STATE_MAIN_A_LEFTUP_MACHINESTATUS3						= 0x73300000;
+	public	static final int SCREEN_STATE_MAIN_A_LEFTUP_MACHINESTATUS_POPUP					= 0x73400000;
 	public  static final int SCREEN_STATE_MAIN_A_LEFTUP_END									= 0x73FFFFFF;
 	
 	public  static final int SCREEN_STATE_MAIN_A_LEFTDOWN_TOP								= 0x74000000;
@@ -930,6 +945,7 @@ public class Home extends Activity {
 	// --, 150313 cjg
 	public FuelInitalPopup					_FuelInitalPopup;			// ++, --, 150406 bwk
 	public CoolingFanManualPopup			_CoolingFanManualPopup;		// ++,, --, 150410 bwk 
+	public AxleTempWarningPopup				_AxleTempWarningPopup;
 	
 	//Toast
 	public WeighingErrorToast				_WeighingErrorToast;
@@ -942,6 +958,7 @@ public class Home extends Activity {
 	private Timer mCommErrStopTimer = null;
 	private Timer mMirrorHeatTimer = null;
 	private Timer mAutoGreaseTimer = null;
+	private Timer mCheckMultimediaTimer = null;
 	
 	// Count
 	int MirrorHeatTimerCount;
@@ -1044,6 +1061,7 @@ public class Home extends Activity {
 		InitAnimation();
 		InitButtonListener();
 		LoadPref();
+		//LoadCID();
 		imgViewCameraScreen.setClickable(false);
 		
 		
@@ -1203,6 +1221,7 @@ public class Home extends Activity {
 		// --, 150313 cjg
 		_FuelInitalPopup = new FuelInitalPopup(this);
 		_CoolingFanManualPopup = new CoolingFanManualPopup(this);
+		_AxleTempWarningPopup = new AxleTempWarningPopup(this);
 		
 		_WeighingErrorToast = new WeighingErrorToast(this);
 	}
@@ -1246,6 +1265,7 @@ public class Home extends Activity {
 		// --, 150323 bwk
 		_FuelInitalPopup = new FuelInitalPopup(this);
 		_CoolingFanManualPopup = new CoolingFanManualPopup(this);
+		_AxleTempWarningPopup = new AxleTempWarningPopup(this);
 		
 		_WeighingErrorToast = new WeighingErrorToast(this);
 	}
@@ -1280,6 +1300,7 @@ public class Home extends Activity {
 	}
 	public boolean ExitCam(){
 		ScreenIndex = OldScreenIndex;
+		OldScreenIndex = SCREEN_STATE_MAIN_CAMERA_KEY;
 		try {
 			CAN1Comm.CameraCurrentOnOff = false;	// ++, --, 150326 cjg
 			if(CAN1Comm.CameraOnFlag == CAN1CommManager.STATE_CAMERA_MANUAL){
@@ -1374,6 +1395,34 @@ public class Home extends Activity {
 		edit.commit();
 		Log.d(TAG,"SaveCID");
 		Log.d(TAG,"length : " + Integer.toString(_componentbasicinformation.length));
+	}
+	public void LoadCID(){
+		int componentcode;
+		int manufacturecode;
+		String str;
+		byte[] componetbasicinfo;
+		componetbasicinfo = new byte[CAN1CommManager.LENGTH_COMPONENTBASICINFORMATION];
+		for(int i = 0; i < CAN1CommManager.LENGTH_COMPONENTBASICINFORMATION; i++){
+			componetbasicinfo[i] = (byte) 0xFF;
+		}
+		SharedPreferences SharePref = getSharedPreferences("CID", 0);
+		
+		componentcode = SharePref.getInt("ComponentCode_Monitor", 11);
+		manufacturecode = SharePref.getInt("ManufacturerCode_Monitor", 1);
+		str = SharePref.getString("ComponentBasicInformation_Monitor", "");
+		byte[] Temp;
+		Temp = new byte[str.length()];
+		
+		Temp = str.getBytes();
+		
+		for(int i = 0; i < str.length(); i++){
+			componetbasicinfo[i] = Temp[i];
+		}
+			
+		CAN1Comm.Set_ComponentCode_1699_PGN65330_MONITOR(componentcode);
+		CAN1Comm.Set_ManufacturerCode_1700_PGN65330_MONITOR(manufacturecode);
+		CAN1Comm.Set_ComponentBasicInformation_1698_PGN65330_MONITOR(componetbasicinfo);
+		
 	}
 	public void SavePref(){
 		SharedPreferences SharePref = getSharedPreferences("Home", 0);
@@ -2265,15 +2314,20 @@ public class Home extends Activity {
 	
 	// ++, 150211 bwk
 	public void Checkrpm(int Data){
-		if(CAN1Comm.GetPlayerFlag() == true && PressFnKey == 0)
+		if(CAN1Comm.GetMultimediaFlag() == true && PressFnKey == 0)
 		{
 			Log.d(TAG, "Player On");
 			PressFnKey = 1;
 		}
-		else if(CAN1Comm.GetPlayerFlag() == false && PressFnKey == 1)
+		else if(CAN1Comm.GetMultimediaFlag() == false && PressFnKey == 1)
 		{
 			Log.d(TAG, "Player OFF");
 			PressFnKey = 0;
+		}
+		
+		if(CAN1Comm.GetMultimediaFlag() == true)
+		{
+			CAN1Comm.CheckMultimedia();
 		}
 		
 		if(PressFnKey == 1)
@@ -2827,7 +2881,20 @@ public class Home extends Activity {
 		HomeDialog = _CoolingFanManualPopup;
 		HomeDialog.show();
 	}
-	/////////////////////////////////////////////////////
+	public void showAxleTempWarningPopup(){
+		if(AnimationRunningFlag == true)
+			return;
+		else
+			StartAnimationRunningTimer();
+		
+		if(HomeDialog != null){
+			HomeDialog.dismiss();
+			HomeDialog = null;
+		}
+
+		HomeDialog = _AxleTempWarningPopup;
+		HomeDialog.show();
+	}	/////////////////////////////////////////////////////
 	//Timer//////////////////////////////////////////////
 	public class SeatBeltTimerClass extends TimerTask{
 
@@ -2975,9 +3042,15 @@ public class Home extends Activity {
 					CAN1Comm.TxCANToMCU(47);
 					CAN1Comm.Set_SpeedmeterUnitChange_PGN65327(3);
 				}
-				else {
+				else if(nSendCommandTimerIndex == 8){
 					SendDTCIndex = REQ_ERR_TM_ACTIVE;
 					CancelSendCommandTimer();
+					//CAN1Comm.TxCANToMCU(50);
+				}
+				else {
+					//CAN1Comm.TxCANToMCU(50);
+					//if(nSendCommandTimerIndex >= 27)
+						CancelSendCommandTimer();
 				}
 				nSendCommandTimerIndex++;
 			} catch (RuntimeException e) {
@@ -3103,6 +3176,43 @@ public class Home extends Activity {
 			mAutoGreaseTimer.cancel();
 			mAutoGreaseTimer.purge();
 			mAutoGreaseTimer = null;
+		}
+		
+	}
+	
+	public class CheckMultimediaTimerClass extends TimerTask{
+
+		@Override
+		public void run() {
+			// TODO Auto-generated method stub
+			runOnUiThread(new Runnable() {
+				
+				@Override
+				public void run() {
+					// TODO Auto-generated method stub
+					CAN1Comm.CheckMultimedia();
+					if(CAN1Comm.GetMultimediaFlag() == true){
+						CancelCheckMultimediaTimer();
+					}
+				}
+			});
+			
+		}
+		
+	}
+	
+	public void StartCheckMultimediaTimer(){
+		CancelCheckMultimediaTimer();
+		mCheckMultimediaTimer = new Timer();
+		mCheckMultimediaTimer.schedule(new CheckMultimediaTimerClass(),1,200);	
+	}
+	
+	public void CancelCheckMultimediaTimer(){
+		Log.d(TAG,"CancelCheckMultimediaTimer()");
+		if(mCheckMultimediaTimer != null){
+			mCheckMultimediaTimer.cancel();
+			mCheckMultimediaTimer.purge();
+			mCheckMultimediaTimer = null;
 		}
 		
 	}

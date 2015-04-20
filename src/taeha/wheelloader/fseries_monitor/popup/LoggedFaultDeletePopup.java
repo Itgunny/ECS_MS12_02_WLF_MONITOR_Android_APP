@@ -24,18 +24,7 @@ import taeha.wheelloader.fseries_monitor.popup.SpeedometerInitPopup.PopupOffTime
 
 public class LoggedFaultDeletePopup extends ParentPopup{
 	//CONSTANT////////////////////////////////////////
-//	private static final int REQ_ERR_MACHINE_ACTIVE		= 0;
-	private static final int REQ_ERR_MACHINE_LOGGED		= 1;
-	
-//	private static final int REQ_ERR_ENGINE_ACTIVE		= 2;
-	private static final int REQ_ERR_ENGINE_LOGGED		= 3;
-	
-//	private static final int REQ_ERR_TM_ACTIVE			= 4;
-	private static final int REQ_ERR_TM_LOGGED			= 5;
-	
-//	private static final int REQ_ERR_EHCU_ACTIVE		= 6;
-	private static final int REQ_ERR_EHCU_LOGGED		= 7;
-	//////////////////////////////////////////////////
+
 	//RESOURCE////////////////////////////////////////
 
 	ImageButton imgbtnOK;
@@ -95,12 +84,7 @@ public class LoggedFaultDeletePopup extends ParentPopup{
 		// TODO Auto-generated method stub
 		super.dismiss();
 		ParentActivity.ScreenIndex = ParentActivity.SCREEN_STATE_MENU_MONITORING_FAULTHISTORY_LOGGED_TOP;
-		try {
-			ParentActivity._MenuBaseFragment._FaultHistoryLoggedFragment.CursurDisplay(5);
-		} catch (NullPointerException e) {
-			// TODO: handle exception
-			Log.e(TAG,"NullPointerException dismiss");
-		}		
+		ParentActivity._MenuBaseFragment._FaultHistoryLoggedFragment.bCursurIndex = false;
 	}
 
 	@Override
@@ -178,21 +162,21 @@ public class LoggedFaultDeletePopup extends ParentPopup{
 	}
 	public void setTitle(int Index){
 		switch (Index) {
-		case REQ_ERR_MACHINE_LOGGED:
+		case Home.REQ_ERR_MACHINE_LOGGED:
 			textViewTitle.setText(ParentActivity.getResources().getString(string.Delete_Logged_Fault) 
-					+ "(" +ParentActivity.getResources().getString(string.Machine) +")");
+					+ "\n(" +ParentActivity.getResources().getString(string.Machine) +")");
 			break;
-		case REQ_ERR_ENGINE_LOGGED:
+		case Home.REQ_ERR_ENGINE_LOGGED:
 			textViewTitle.setText(ParentActivity.getResources().getString(string.Delete_Logged_Fault) 
-					+ "(" +ParentActivity.getResources().getString(string.Engine) +")");
+					+ "\n(" +ParentActivity.getResources().getString(string.Engine) +")");
 			break;
-		case REQ_ERR_TM_LOGGED:
+		case Home.REQ_ERR_TM_LOGGED:
 			textViewTitle.setText(ParentActivity.getResources().getString(string.Delete_Logged_Fault) 
-					+ "(" +ParentActivity.getResources().getString(string.Transmission) +")");
+					+ "\n(" +ParentActivity.getResources().getString(string.Transmission) +")");
 			break;
-		case REQ_ERR_EHCU_LOGGED:
+		case Home.REQ_ERR_EHCU_LOGGED:
 			textViewTitle.setText(ParentActivity.getResources().getString(string.Delete_Logged_Fault) 
-					+ "(" +ParentActivity.getResources().getString(string.EHCU) +")");
+					+ "\n(" +ParentActivity.getResources().getString(string.EHCU) +")");
 			break;
 		default:
 			break;

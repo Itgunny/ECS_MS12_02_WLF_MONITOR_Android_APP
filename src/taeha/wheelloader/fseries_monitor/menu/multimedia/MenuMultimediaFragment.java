@@ -199,10 +199,10 @@ public class MenuMultimediaFragment extends ParentFragment{
 				Intent intent;
 				intent = ParentActivity.getPackageManager().getLaunchIntentForPackage("com.mxtech.videoplayer.ad");
 				if(intent != null){
-					CAN1Comm.SetPlayerFlag(true);
-					CAN1Comm.SetMultimediaFlag(true);	// ++, --, 150323 bwk
+					//CAN1Comm.SetMultimediaFlag(true);	// ++, --, 150323 bwk
 					ParentActivity.startActivity(intent);
 					ParentActivity.StartAlwaysOntopService();		// ++, --, 150324 cjg
+					ParentActivity.StartCheckMultimediaTimer();
 				}
 			}	// ++, --, 150323 bwk
 		}	// ++, --, 150319 bwk

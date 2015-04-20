@@ -168,11 +168,11 @@ public class MainACenterQuickFragment extends MainACenterFragment{
 				Intent intent;
 				intent = ParentActivity.getPackageManager().getLaunchIntentForPackage("com.mxtech.videoplayer.ad");
 				if(intent != null){
-					CAN1Comm.SetPlayerFlag(true);	
-					CAN1Comm.SetMultimediaFlag(true);
+					//CAN1Comm.SetMultimediaFlag(true);
 					CAN1Comm.SetMiracastFlag(false);
 					ParentActivity.startActivity(intent);
 					ParentActivity.StartAlwaysOntopService(); // ++, --, 150324 cjg
+					ParentActivity.StartCheckMultimediaTimer();
 				}
 			}
 		}

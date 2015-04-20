@@ -520,12 +520,6 @@ public class CAN1CommManager extends ICAN1CommManager.Stub{		// ttySAC1(Linux), 
 	}
 
 	// ++, 150211 bwk
-	public void SetPlayerFlag(boolean flag){
-		service.SetPlayerFlag(flag);
-	}
-	public boolean GetPlayerFlag(){
-		return service.GetPlayerFlag();
-	}
 	public boolean GetrpmFlag(){
 		return service.GetrpmFlag();
 	}
@@ -553,6 +547,9 @@ public class CAN1CommManager extends ICAN1CommManager.Stub{		// ttySAC1(Linux), 
 	public void SetMultimediaFlag(boolean flag){
 		service.SetMultimediaFlag(flag);
 	}
+	public boolean GetMultimediaFlag(){
+		return service.GetMultimediaFlag();
+	}
 	public void SetMiracastFlag(boolean flag){
 		service.SetMiracastFlag(flag);
 	}	
@@ -561,6 +558,11 @@ public class CAN1CommManager extends ICAN1CommManager.Stub{		// ttySAC1(Linux), 
 		service.setVolume(_Volume);
 	}
 	// --, 150323 bwk
+	
+	public void CheckMultimedia()
+	{
+		service.CheckMultimedia();
+	}
 	///////////////////////////////////////////////////////////
 	
 	//////////////////////////////////////////////////////////
@@ -752,6 +754,11 @@ public class CAN1CommManager extends ICAN1CommManager.Stub{		// ttySAC1(Linux), 
 	public int TxCMDToMCU(int CMD) {
 		// TODO Auto-generated method stub
 		return service.UART3_TxComm(CMD, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF);
+	}
+	
+	public void SetFNKeypadLamp(int Data){
+		// TODO Auto-generated method stub
+		service.SetFNKeypadLamp(Data);
 	}
 	///////////////////////////////////////////////////////////
 	

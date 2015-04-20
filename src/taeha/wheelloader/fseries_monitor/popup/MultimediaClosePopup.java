@@ -131,12 +131,11 @@ public class MultimediaClosePopup extends ParentPopup {
 	public void ClickOK(){
 		this.dismiss();
 		ParentActivity.KillApps("com.mxtech.videoplayer.ad");
-		CAN1Comm.SetPlayerFlag(false);
+		CAN1Comm.SetMultimediaFlag(false);
 		Intent intent;
 		intent = ParentActivity.getPackageManager().getLaunchIntentForPackage("com.powerone.wfd.sink");
 		if(intent != null){
 			// ++, 150323 bwk
-			CAN1Comm.SetMultimediaFlag(false);
 			CAN1Comm.SetMiracastFlag(true);
 			// --, 150323 bwk				
 			ParentActivity.startActivity(intent);
