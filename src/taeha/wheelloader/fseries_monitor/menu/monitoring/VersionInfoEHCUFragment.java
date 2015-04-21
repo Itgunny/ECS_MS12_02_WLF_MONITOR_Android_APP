@@ -29,7 +29,7 @@ public class VersionInfoEHCUFragment extends VersionInfoDetailFragment{
 		Log.d(TAG, "onCreateView");
 		
 		ParentActivity.ScreenIndex = ParentActivity.SCREEN_STATE_MENU_MONITORING_VERSIONINFO_EHCU;
-		ParentActivity._MenuBaseFragment._MenuInterTitleFragment.SetTitleText(ParentActivity.getResources().getString(R.string.Version_Information)
+		ParentActivity._MenuBaseFragment._MenuInterTitleFragment.SetTitleText(ParentActivity.getResources().getString(R.string.Machine_Information)
 				+ " - " + ParentActivity.getResources().getString(R.string.EHCU));
 		return mRoot;
 	}

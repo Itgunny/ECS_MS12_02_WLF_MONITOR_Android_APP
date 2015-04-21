@@ -38,11 +38,11 @@ public class UserData {
 	public int FuelDisplay;		// ++, --, 150403 bwk 추가
 	
 	public UserData(){
-		EngineMode = CAN1CommManager.DATA_STATE_ENGINE_MODE_STD;
+		EngineMode = CAN1CommManager.DATA_STATE_ENGINE_MODE_PWR;
 		//WarmingUp = CAN1CommManager.DATA_STATE_ENGINE_WARMINGUP_OFF;	// ++, --, 150403 bwk 삭제
 		CCOMode = CAN1CommManager.DATA_STATE_TM_CLUTCHCUTOFF_OFF;
 		ShiftMode = CAN1CommManager.DATA_STATE_TM_SHIFTMODE_MANUAL;
-		TCLockUp = CAN1CommManager.DATA_STATE_TM_LOCKUPCLUTCH_OFF;
+		TCLockUp = CAN1CommManager.DATA_STATE_TM_LOCKUPCLUTCH_ON;
 		RideControl = CAN1CommManager.DATA_STATE_RIDECONTROL_OFF;
 		WeighingSystem = CAN1CommManager.DATA_STATE_WEIGHING_ACCUMULATION_AUTO;
 		WeighingDisplay = CAN1CommManager.DATA_STATE_WEIGHINGDISPLAY_TOTAL_A;
@@ -67,8 +67,8 @@ public class UserData {
 		UnitOdo = Home.UNIT_ODO_KM;
 		UnitWeight = Home.UNIT_WEIGHT_TON;
 		UnitPressure = Home.UNIT_PRESSURE_BAR;
-		MachineStatusUpper = CAN1CommManager.DATA_STATE_MACHINESTATUS_HYD;
-		MachineStatusLower = CAN1CommManager.DATA_STATE_MACHINESTATUS_COOLANT;
+		MachineStatusUpper = CAN1CommManager.DATA_STATE_MACHINESTATUS_COOLANT;
+		MachineStatusLower = CAN1CommManager.DATA_STATE_MACHINESTATUS_BATTERY;
 		Language = Home.STATE_DISPLAY_LANGUAGE_ENGLISH;
 		SoundOutput = Home.STATE_INTERNAL_SPK;
 		HourmeterDisplay = CAN1CommManager.DATA_STATE_HOURMETER_LATEST;

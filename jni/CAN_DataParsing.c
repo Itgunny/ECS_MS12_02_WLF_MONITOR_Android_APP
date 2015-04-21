@@ -299,6 +299,7 @@ void Send_CID()
 	for(i = 0; i < sizeof(TX_COMPONENT_IDENTIFICATION_MONITOR_65330); i++){
 		if(TX_COMPONENT_IDENTIFICATION_MONITOR_65330.ComponentBasicInformation_1698[i] == 0x2A)
 		{
+			Length++;
 			if(++Cnt == 2)
 				break;
 		}
@@ -306,7 +307,7 @@ void Send_CID()
 			Length++;
 	}
 
-	MakeCANDataMultiBoradcast(0x1C,0xFF,0x32,0xFF,SA_MONITOR,&TX_COMPONENT_IDENTIFICATION_MONITOR_65330,Length);
+	MakeCANDataMultiBoradcast(0x1C,0xFF,0x32,0xFF,SA_MONITOR,&TX_COMPONENT_IDENTIFICATION_MONITOR_65330,Length+1);
 }
 
 

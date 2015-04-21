@@ -342,6 +342,7 @@
     <string name="Hourly_Record">시간 별 평균 연비</string>
     <string name="Daily_Record">일자 별 연료 소모량</string>
     <string name="Mode_Record">모드 별 연비</string>
+    <string name="Machine_Information">장비 정보</string>
     <!-- Menu Monitoring End -->
     <!-- Menu Management Start -->
     <string name="Machine_Security">시동제한</string>

@@ -22,7 +22,7 @@ public class VersionInfoTCUFragment extends VersionInfoDetailFragment{
 //	private static final int STATE_CUSTOMER_SERIAL_NUMBER	= 4;
 //	private static final int STATE_MAKER					= 5;
 	private static final int STATE_MAKER 					= 0;
-	private static final int STATE_HARDWARE_SERIAL_NUMBER	= 1;
+	private static final int STATE_SOFTWARE_VERSION			= 1;
 	
 	/////////////////////////////////////////////////////////////////////
 	/////////////////////VALUABLE////////////////////////////////////////
@@ -44,7 +44,7 @@ public class VersionInfoTCUFragment extends VersionInfoDetailFragment{
 		Log.d(TAG, "onCreateView");
 		
 		ParentActivity.ScreenIndex = ParentActivity.SCREEN_STATE_MENU_MONITORING_VERSIONINFO_TCU;
-		ParentActivity._MenuBaseFragment._MenuInterTitleFragment.SetTitleText(ParentActivity.getResources().getString(R.string.Version_Information)
+		ParentActivity._MenuBaseFragment._MenuInterTitleFragment.SetTitleText(ParentActivity.getResources().getString(R.string.Machine_Information)
 				+ " - " + ParentActivity.getResources().getString(R.string.TCU));
 		return mRoot;
 	}
@@ -76,7 +76,7 @@ public class VersionInfoTCUFragment extends VersionInfoDetailFragment{
 		adapter.addItem(new IconTextItemVersion(ParentActivity.getResources().getDrawable(R.drawable.menu_management_machine_monitoring_bg_light),null,
 				ParentActivity.getResources().getString(string.Manufacturer),"" , ""));
 		adapter.addItem(new IconTextItemVersion(ParentActivity.getResources().getDrawable(R.drawable.menu_management_machine_monitoring_bg_dark),null,
-				ParentActivity.getResources().getString(string.Hardware_Serial_Number),"" , ""));
+				ParentActivity.getResources().getString(string.Software_Version),"" , ""));
 		
 		listView.setAdapter(adapter);
 
@@ -87,7 +87,7 @@ public class VersionInfoTCUFragment extends VersionInfoDetailFragment{
 		ComponentCode = CAN1Comm.Get_ComponentCode_1699_PGN65330_TCU();
 		ManufacturerCode = CAN1Comm.Get_ManufacturerCode_1700_PGN65330_TCU();
 		SoftwareIdentification = CAN1Comm.Get_ComponentBasicInformation_1698_PGN65330_TCU();	
-//		ProgramSubVersion = ParentActivity.FindProgramSubInfo(ComponentBasicInformation);
+		ProgramSubVersion = ParentActivity.FindProgramSubInfo(ComponentBasicInformation);
 	}
 
 	@Override
@@ -100,7 +100,8 @@ public class VersionInfoTCUFragment extends VersionInfoDetailFragment{
 //		HardwareSerialNumberIndex = SoftwareIDDisplay(SoftwareIdentification,SoftwareVersionIndex,12,STATE_SOFTWARE_VERSION);
 //		CutomerSerialNumberIndex = SoftwareIDDisplay(SoftwareIdentification,HardwareSerialNumberIndex,9,STATE_HARDWARE_SERIAL_NUMBER);
 //		LastIndex = SoftwareIDDisplay(SoftwareIdentification,CutomerSerialNumberIndex,16,STATE_CUSTOMER_SERIAL_NUMBER);
-		SoftwareIDDisplay(SoftwareIdentification,40,9,STATE_HARDWARE_SERIAL_NUMBER);
+		//SoftwareIDDisplay(SoftwareIdentification,40,9,STATE_HARDWARE_SERIAL_NUMBER);
+		SoftwareIDDisplay(SoftwareIdentification,27,12,STATE_SOFTWARE_VERSION);
 	
 		adapter.notifyDataSetChanged();
 	}

@@ -379,9 +379,14 @@ public class Home extends Activity {
 	// 17. HW Test 프로그램 CAN 없이 가능하게 수정 및 비밀번호 변경(0314451227)
 	// 18. 버전 정보 표시화면 변경
 	//	- 버전정보 -> 장비정보 이름 변경(한국어)
-	//	- ECM 표시내용 : 제조사, ECM Identifier
-	//	- TCM 표시 내용 : 제조사, HW Serial Number
-	//	- 그외 항목 표시내용 : 프로그램 버전, 시리얼 번호
+	//	- ECM 표시내용 : 제조사, ECM Identifier(성현균 대리)->Calibration_Version_Number(임혁준씨)
+	//	- TCM 표시 내용 : 제조사, HW Serial Number(성현균 대리)->Software Version(임혁준씨)
+	//	- 그외 항목 표시내용 : 프로그램 버전, 시리얼 번호(RMCU 불필요한 상세정보 모두 감춤)
+	// 19. User switching 기본값 변경(HHI 150421 요청)
+	//	- ENIGNE MODE : STANDARD -> POWER
+	//	- TC LOCK UP : OFF -> ON
+	//	- 장비정보 : HYD/COOLANT -> COOLANT/BATTERY
+	// 20. 초기 멀티패킷 전송 후 10초간 CID 송신
 	//////////////////////////////////////////////////////////////////////////////////////
 	
 	// TAG
@@ -1061,7 +1066,6 @@ public class Home extends Activity {
 		InitAnimation();
 		InitButtonListener();
 		LoadPref();
-		//LoadCID();
 		imgViewCameraScreen.setClickable(false);
 		
 		
@@ -1396,33 +1400,59 @@ public class Home extends Activity {
 		Log.d(TAG,"SaveCID");
 		Log.d(TAG,"length : " + Integer.toString(_componentbasicinformation.length));
 	}
-	public void LoadCID(){
-		int componentcode;
-		int manufacturecode;
-		String str;
-		byte[] componetbasicinfo;
-		componetbasicinfo = new byte[CAN1CommManager.LENGTH_COMPONENTBASICINFORMATION];
-		for(int i = 0; i < CAN1CommManager.LENGTH_COMPONENTBASICINFORMATION; i++){
-			componetbasicinfo[i] = (byte) 0xFF;
-		}
+	public void SendCID(){
+		int _Componentcode;
+		int _Manufacturecode;
+		byte[] _ComponentBasicInformation;
+		String strModel;
+		int Index = 4;
+		int Index2 = 0;
+		boolean bAsterisk = false;
+		
+		_ComponentBasicInformation = new byte[CAN1CommManager.LENGTH_COMPONENTBASICINFORMATION];
+
 		SharedPreferences SharePref = getSharedPreferences("CID", 0);
 		
-		componentcode = SharePref.getInt("ComponentCode_Monitor", 11);
-		manufacturecode = SharePref.getInt("ManufacturerCode_Monitor", 1);
-		str = SharePref.getString("ComponentBasicInformation_Monitor", "");
-		byte[] Temp;
-		Temp = new byte[str.length()];
+		_Componentcode = SharePref.getInt("ComponentCode_Monitor", 11);
+		_Manufacturecode = SharePref.getInt("ManufacturerCode_Monitor", 1);
+		_ComponentBasicInformation = GetMonitorComponentBasicInfo();
 		
-		Temp = str.getBytes();
-		
-		for(int i = 0; i < str.length(); i++){
-			componetbasicinfo[i] = Temp[i];
+		_ComponentBasicInformation[3] = ((VERSION_HIGH & 0x0F) << 4) + (VERSION_LOW & 0x0F);
+
+		//////////////Find Serial Number/////////////
+		for(int i = 4; i < 20; i++){
+			if(_ComponentBasicInformation[i] != 0x2A)
+			{
+				Index++;
+				bAsterisk = false;
+			}
+			else{
+				bAsterisk = true;
+				break;
+			}
 		}
-			
-		CAN1Comm.Set_ComponentCode_1699_PGN65330_MONITOR(componentcode);
-		CAN1Comm.Set_ManufacturerCode_1700_PGN65330_MONITOR(manufacturecode);
-		CAN1Comm.Set_ComponentBasicInformation_1698_PGN65330_MONITOR(componetbasicinfo);
+		/////////////////////////////////////////////
+
+		//////////// Find Model Name/////////////////
+		for(int i = Index + 1; i < CAN1CommManager.LENGTH_COMPONENTBASICINFORMATION; i++){
+			if(_ComponentBasicInformation[i] != 0x2A)
+			{
+				Index2++;
+				bAsterisk = false;
+			}
+			else{
+				bAsterisk = true;
+				break;
+			}
+		}
+		/////////////////////////////////////////////
+		_ComponentBasicInformation[Index + Index2+2] = ((VERSION_SUB_HIGH & 0x0F) << 4) + (VERSION_SUB_LOW & 0x0F);
+
+		CAN1Comm.Set_ComponentCode_1699_PGN65330_MONITOR(_Componentcode);
+		CAN1Comm.Set_ManufacturerCode_1700_PGN65330_MONITOR(_Manufacturecode);
+		CAN1Comm.Set_ComponentBasicInformation_1698_PGN65330_MONITOR(_ComponentBasicInformation);
 		
+		CAN1Comm.TxCANToMCU(50);
 	}
 	public void SavePref(){
 		SharedPreferences SharePref = getSharedPreferences("Home", 0);
@@ -1610,11 +1640,11 @@ public class Home extends Activity {
 		
 		SharedPreferences SharePref = getSharedPreferences("Home", 0);
 		
-		_userdata.EngineMode = SharePref.getInt(strEngineMode, CAN1CommManager.DATA_STATE_ENGINE_MODE_STD);
+		_userdata.EngineMode = SharePref.getInt(strEngineMode, CAN1CommManager.DATA_STATE_ENGINE_MODE_PWR);
 		//_userdata.WarmingUp = SharePref.getInt(strWarmingUp, CAN1CommManager.DATA_STATE_ENGINE_WARMINGUP_OFF);
 		_userdata.CCOMode = SharePref.getInt(strCCOMode, CAN1CommManager.DATA_STATE_TM_CLUTCHCUTOFF_OFF);
 		_userdata.ShiftMode = SharePref.getInt(strShiftMode, CAN1CommManager.DATA_STATE_TM_SHIFTMODE_MANUAL);
-		_userdata.TCLockUp = SharePref.getInt(strTCLockUp, CAN1CommManager.DATA_STATE_TM_LOCKUPCLUTCH_OFF);
+		_userdata.TCLockUp = SharePref.getInt(strTCLockUp, CAN1CommManager.DATA_STATE_TM_LOCKUPCLUTCH_ON);
 		_userdata.RideControl = SharePref.getInt(strRideControl, CAN1CommManager.DATA_STATE_RIDECONTROL_OFF);
 		_userdata.WeighingSystem = SharePref.getInt(strWeighingSystem, CAN1CommManager.DATA_STATE_WEIGHING_ACCUMULATION_AUTO);
 		_userdata.WeighingDisplay = SharePref.getInt(strWeighingDisplay, CAN1CommManager.DATA_STATE_WEIGHINGDISPLAY_TOTAL_A);
@@ -1639,8 +1669,8 @@ public class Home extends Activity {
 		_userdata.UnitOdo = SharePref.getInt(strUnitOdo, Home.UNIT_ODO_KM);
 		_userdata.UnitWeight = SharePref.getInt(strUnitWeight, Home.UNIT_WEIGHT_TON);
 		_userdata.UnitPressure = SharePref.getInt(strUnitPressure, Home.UNIT_PRESSURE_BAR);
-		_userdata.MachineStatusUpper = SharePref.getInt(strMachineStatusUpper, CAN1CommManager.DATA_STATE_MACHINESTATUS_HYD);
-		_userdata.MachineStatusLower = SharePref.getInt(strMachineStatusLower, CAN1CommManager.DATA_STATE_MACHINESTATUS_COOLANT);
+		_userdata.MachineStatusUpper = SharePref.getInt(strMachineStatusUpper, CAN1CommManager.DATA_STATE_MACHINESTATUS_COOLANT);
+		_userdata.MachineStatusLower = SharePref.getInt(strMachineStatusLower, CAN1CommManager.DATA_STATE_MACHINESTATUS_BATTERY);
 		_userdata.Language = SharePref.getInt(strLanguage,Home.STATE_DISPLAY_LANGUAGE_ENGLISH);
 		_userdata.SoundOutput = SharePref.getInt(strSoundOutput, Home.STATE_INTERNAL_SPK);
 		_userdata.HourmeterDisplay = SharePref.getInt(strHourmeterDisplay, CAN1CommManager.DATA_STATE_HOURMETER_LATEST);
@@ -3044,12 +3074,12 @@ public class Home extends Activity {
 				}
 				else if(nSendCommandTimerIndex == 8){
 					SendDTCIndex = REQ_ERR_TM_ACTIVE;
-					CancelSendCommandTimer();
-					//CAN1Comm.TxCANToMCU(50);
+					//CancelSendCommandTimer();
+					SendCID();
 				}
 				else {
-					//CAN1Comm.TxCANToMCU(50);
-					//if(nSendCommandTimerIndex >= 27)
+					SendCID();
+					if(nSendCommandTimerIndex >= 27)
 						CancelSendCommandTimer();
 				}
 				nSendCommandTimerIndex++;

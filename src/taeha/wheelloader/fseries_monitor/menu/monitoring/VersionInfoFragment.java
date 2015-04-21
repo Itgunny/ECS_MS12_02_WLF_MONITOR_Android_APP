@@ -108,7 +108,7 @@ public class VersionInfoFragment extends ParentFragment{
 		CheckEHCU();	// ++, --, 150211 bwk
 		
 		ParentActivity.ScreenIndex = ParentActivity.SCREEN_STATE_MENU_MONITORING_VERSIONINFO_TOP;
-		ParentActivity._MenuBaseFragment._MenuInterTitleFragment.SetTitleText(ParentActivity.getResources().getString(R.string.Version_Information));
+		ParentActivity._MenuBaseFragment._MenuInterTitleFragment.SetTitleText(ParentActivity.getResources().getString(R.string.Machine_Information));
 		
 		HandleCursurDisplay = new Handler() {
 			@Override

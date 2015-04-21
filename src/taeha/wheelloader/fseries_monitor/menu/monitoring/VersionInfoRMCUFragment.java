@@ -92,7 +92,7 @@ public class VersionInfoRMCUFragment extends VersionInfoDetailFragment{
 		Log.d(TAG, "onCreateView");
 		
 		ParentActivity.ScreenIndex = ParentActivity.SCREEN_STATE_MENU_MONITORING_VERSIONINFO_RMCU;
-		ParentActivity._MenuBaseFragment._MenuInterTitleFragment.SetTitleText(ParentActivity.getResources().getString(R.string.Version_Information)
+		ParentActivity._MenuBaseFragment._MenuInterTitleFragment.SetTitleText(ParentActivity.getResources().getString(R.string.Machine_Information)
 				+ " - " + ParentActivity.getResources().getString(R.string.RMCU));
 		return mRoot;
 	}

@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8" standalone="no"?>
-<resources>    
+<resources>
     <string name="app_name">Wheel_Loader_F_Series_UI</string>
     <string name="action_settings">Settings</string>
     <string name="hello_world">Hello world!</string>
@@ -342,6 +342,7 @@
     <string name="Hourly_Record">Hourly Record</string>
     <string name="Daily_Record">Daily Record</string>
     <string name="Mode_Record">Mode Record</string>
+    <string name="Machine_Information">Machine Information</string>
     <!-- Menu Monitoring End -->
     <!-- Menu Management Start -->
     <string name="Machine_Security">OPSTART BEVEILIGING</string>
@@ -422,7 +423,7 @@
     <string name="Fuel_filter_element">Brandstoffilter</string>
     <string name="Fuel_Pre_filter">Voorfilter brandstof</string>
     <string name="Breather_Hydraulic_tank">Ontluchter Hydraulische tank</string>
-    <string name="Hydraulic_Tank_Air_Breather_Filter"></string>
+    <string name="Hydraulic_Tank_Air_Breather_Filter"/>
     <string name="Radiator_engine_coolant">Radiator koelvloeistof motor</string>
     <string name="Transmission_oil">Transmissie olie</string>
     <string name="Transmission_oil_filter">Filter Transmissie olie</string>
@@ -477,10 +478,3 @@
     <string name="Finnish">Finnish</string>
     <!-- Language End -->
 </resources>
-
-
-
-
-
-
-

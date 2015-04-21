@@ -99,7 +99,7 @@ public class MenuMonitoringFragment extends MenuBodyList_ParentFragment{
 		setListTitle2(ParentActivity.getResources().getString(string.Operation_History));
 		setListTitle3(ParentActivity.getResources().getString(string.Fault_History));
 		setListTitle4(ParentActivity.getResources().getString(string.Fuel_Consumption_History));
-		setListTitle5(ParentActivity.getResources().getString(string.Version_Information));
+		setListTitle5(ParentActivity.getResources().getString(string.Machine_Information));
 	}
 
 	//////////////////////////////////////////////////////////////////////

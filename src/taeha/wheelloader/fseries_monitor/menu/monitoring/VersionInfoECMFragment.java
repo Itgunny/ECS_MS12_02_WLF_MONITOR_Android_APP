@@ -23,7 +23,7 @@ public class VersionInfoECMFragment extends VersionInfoDetailFragment{
 //	protected static final int STATE_PRODUCT_ID_CUMMINS						= 5;
 //	protected static final int STATE_MAKER_CUMMINS							= 6;
 	protected static final int STATE_MAKER_CUMMINS							= 0;
-	protected static final int STATE_ECM_IDENTIFIER_CUMMINS					= 1;
+	protected static final int STATE_CALIBRATION_VERSION_NUMBER_CUMMINS		= 1;
 
 	
 	protected static final int STATE_ECU_PART_NUMBER_SCANIA					= 0;
@@ -33,9 +33,11 @@ public class VersionInfoECMFragment extends VersionInfoDetailFragment{
 	protected static final int STATE_ECU_MANUFACTURER_NAMESCANIA			= 4;
 	//protected static final int STATE_MAKER_SCANIA							= 5;
 	
-	protected static final int STATE_ECU_CALIBRATION_VERSION_NUMBER			= 0;
-	protected static final int STATE_ECU_CALIBRATION_ID						= 1;
-	protected static final int STATE_MAKER_SCANIA							= 2;
+//	protected static final int STATE_ECU_CALIBRATION_VERSION_NUMBER			= 0;
+//	protected static final int STATE_ECU_CALIBRATION_ID						= 1;
+//	protected static final int STATE_MAKER_SCANIA							= 2;
+	protected static final int STATE_MAKER_SCANIA							= 0;
+	protected static final int STATE_ECU_CALIBRATION_VERSION_NUMBER			= 1;
 	/////////////////////////////////////////////////////////////////////
 	/////////////////////VALUABLE////////////////////////////////////////
 	int ECMPartNumberIndex;
@@ -66,7 +68,7 @@ public class VersionInfoECMFragment extends VersionInfoDetailFragment{
 		Log.d(TAG, "onCreateView");
 		
 		ParentActivity.ScreenIndex = ParentActivity.SCREEN_STATE_MENU_MONITORING_VERSIONINFO_ECM;
-		ParentActivity._MenuBaseFragment._MenuInterTitleFragment.SetTitleText(ParentActivity.getResources().getString(R.string.Version_Information)
+		ParentActivity._MenuBaseFragment._MenuInterTitleFragment.SetTitleText(ParentActivity.getResources().getString(R.string.Machine_Information)
 				+ " - " + ParentActivity.getResources().getString(R.string.ECM));
 		return mRoot;
 	}
@@ -128,7 +130,7 @@ public class VersionInfoECMFragment extends VersionInfoDetailFragment{
 			adapter.addItem(new IconTextItemVersion(ParentActivity.getResources().getDrawable(R.drawable.menu_management_machine_monitoring_bg_dark),null,
 					ParentActivity.getResources().getString(string.Manufacturer),"" , ""));
 			adapter.addItem(new IconTextItemVersion(ParentActivity.getResources().getDrawable(R.drawable.menu_management_machine_monitoring_bg_light),null,
-					ParentActivity.getResources().getString(string.ECM_Identifier),"" , ""));
+					ParentActivity.getResources().getString(string.Calibration_Version_Number),"" , ""));
 			
 //			ECMSerialNumberIndex = SoftwareIDDisplay(SoftwareIdentification,1,8,STATE_ECM_PART_NUMBER_CUMMINS);
 //			SoftwareDataDateStampIndex = SoftwareIDDisplay(SoftwareIdentification,ECMSerialNumberIndex,8,STATE_ECM_SERIAL_NUMBER_CUMMINS);
@@ -136,7 +138,8 @@ public class VersionInfoECMFragment extends VersionInfoDetailFragment{
 //			ECMIdentifierIndex = SoftwareIDDisplay(SoftwareIdentification,CalibrationVersionNumberIndex,8,STATE_CALIBRATION_VERSION_NUMBER_CUMMINS);
 //			ProductIDIndex = SoftwareIDDisplay(SoftwareIdentification,ECMIdentifierIndex,2,STATE_ECM_IDENTIFIER_CUMMINS);
 //			LastIndex = SoftwareIDDisplay(SoftwareIdentification,ProductIDIndex,3,STATE_PRODUCT_ID_CUMMINS);
-			SoftwareIDDisplay(SoftwareIdentification,41,2,STATE_ECM_IDENTIFIER_CUMMINS);
+//			SoftwareIDDisplay(SoftwareIdentification,41,2,STATE_ECM_IDENTIFIER_CUMMINS);
+			SoftwareIDDisplay(SoftwareIdentification,32,8,STATE_CALIBRATION_VERSION_NUMBER_CUMMINS);
 
 			adapter.notifyDataSetChanged();		
 			
@@ -145,12 +148,16 @@ public class VersionInfoECMFragment extends VersionInfoDetailFragment{
 		case STATE_MANUFACTURERCODE_SCANIA:
 
 			
-			adapter.addItem(new IconTextItemVersion(ParentActivity.getResources().getDrawable(R.drawable.menu_management_machine_monitoring_bg_dark),null,
-					ParentActivity.getResources().getString(string.Calibration_Version_Number),"" , ""));
-			adapter.addItem(new IconTextItemVersion(ParentActivity.getResources().getDrawable(R.drawable.menu_management_machine_monitoring_bg_light),null,
-					ParentActivity.getResources().getString(string.Calibration_ID),"" , ""));
+//			adapter.addItem(new IconTextItemVersion(ParentActivity.getResources().getDrawable(R.drawable.menu_management_machine_monitoring_bg_dark),null,
+//					ParentActivity.getResources().getString(string.Calibration_Version_Number),"" , ""));
+//			adapter.addItem(new IconTextItemVersion(ParentActivity.getResources().getDrawable(R.drawable.menu_management_machine_monitoring_bg_light),null,
+//					ParentActivity.getResources().getString(string.Calibration_ID),"" , ""));
+//			adapter.addItem(new IconTextItemVersion(ParentActivity.getResources().getDrawable(R.drawable.menu_management_machine_monitoring_bg_dark),null,
+//					ParentActivity.getResources().getString(string.Manufacturer),"" , ""));
 			adapter.addItem(new IconTextItemVersion(ParentActivity.getResources().getDrawable(R.drawable.menu_management_machine_monitoring_bg_dark),null,
 					ParentActivity.getResources().getString(string.Manufacturer),"" , ""));
+			adapter.addItem(new IconTextItemVersion(ParentActivity.getResources().getDrawable(R.drawable.menu_management_machine_monitoring_bg_light),null,
+					ParentActivity.getResources().getString(string.Calibration_Version_Number),"" , ""));
 	
 			ScaniaECMDisplay(SoftwareIdentification);
 			adapter.notifyDataSetChanged();		
@@ -176,7 +183,7 @@ public class VersionInfoECMFragment extends VersionInfoDetailFragment{
 			adapter.addItem(new IconTextItemVersion(ParentActivity.getResources().getDrawable(R.drawable.menu_management_machine_monitoring_bg_dark),null,
 					ParentActivity.getResources().getString(string.Manufacturer),"" , ""));
 			adapter.addItem(new IconTextItemVersion(ParentActivity.getResources().getDrawable(R.drawable.menu_management_machine_monitoring_bg_light),null,
-					ParentActivity.getResources().getString(string.ECM_Identifier),"" , ""));
+					ParentActivity.getResources().getString(string.Calibration_Version_Number),"" , ""));
 			adapter.notifyDataSetChanged();		
 			
 			break;
@@ -193,14 +200,14 @@ public class VersionInfoECMFragment extends VersionInfoDetailFragment{
 		adapter.UpdateSecond(STATE_ECU_CALIBRATION_VERSION_NUMBER,strCaliVersionNum);
 		
 		
-		char[] cString;
-		String strCaliID;
-		cString = new char[16];
-		for(int i = 0; i < 16; i++){
-			cString[i] = (char) _softwareid[i+4];
-		}
-		strCaliID = new String(cString,0,cString.length);
-		adapter.UpdateSecond(STATE_ECU_CALIBRATION_ID,strCaliID);
+//		char[] cString;
+//		String strCaliID;
+//		cString = new char[16];
+//		for(int i = 0; i < 16; i++){
+//			cString[i] = (char) _softwareid[i+4];
+//		}
+//		strCaliID = new String(cString,0,cString.length);
+//		adapter.UpdateSecond(STATE_ECU_CALIBRATION_ID,strCaliID);
 	}
 	
 	public void ManufacturerDisplay(int Code){
