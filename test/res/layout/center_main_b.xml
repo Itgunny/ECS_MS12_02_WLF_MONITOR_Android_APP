@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/RelativeLayout_center_main_b_bg"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/main_bg_center" >
+
+    <RelativeLayout
+        android:id="@+id/RelativeLayout_center_main_b_icon"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" >
+        
+        <ImageButton
+	        android:id="@+id/imageButton_center_main_b_option"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:background="@drawable/_selector_center_main_b_btn" />
+	        
+	    <ImageView
+	        android:id="@+id/imageView_center_main_b_eco_title"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:layout_marginLeft="138dp"
+	        android:layout_marginTop="35dp"
+	        android:layout_x="138dp"
+	        android:layout_y="35dp"
+	        android:src="@drawable/main_center_eco_icon" />
+	
+	    <ImageView
+	        android:id="@+id/imageView_center_main_b_eco_bg"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:layout_marginLeft="84dp"
+	        android:layout_marginTop="67dp"
+	        android:layout_x="84dp"
+	        android:layout_y="67dp"
+	        android:src="@drawable/main_center_eco_bg" />
+	
+	    <TextView
+	        android:id="@+id/textView_center_main_b_rpm"
+	        android:layout_width="200dp"
+	        android:layout_height="wrap_content"
+	        android:layout_centerVertical="true"
+	        android:layout_marginLeft="30dp"
+	        android:layout_x="55dp"
+	        android:layout_y="110dp"
+	        android:gravity="bottom|right"
+	        android:textAppearance="?android:attr/textAppearanceLarge"
+	        android:textSize="70sp"
+	        android:textStyle="bold|italic" />
+	    
+	    <TextView
+	        android:id="@+id/textView_center_main_b_rpm_unit"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:layout_marginLeft="240dp"
+	        android:layout_marginTop="150dp"
+	        android:layout_x="55dp"
+	        android:layout_y="110dp"
+	        android:gravity="bottom|right"
+	        android:text="@string/rpm"
+	        android:textAppearance="?android:attr/textAppearanceLarge"
+	        android:textColor="@color/gray"
+	        android:textSize="30sp"
+	        android:textStyle="bold" />
+
+	    <RelativeLayout
+	        android:id="@+id/RelativeLayout_center_main_b_icon_eco_bar"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:layout_marginLeft="95dp"
+	        android:layout_marginTop="76dp" >
+
+	        <ImageView
+	            android:id="@+id/imageView_center_main_b_eco_bar"
+	            android:layout_width="wrap_content"
+	            android:layout_height="wrap_content"
+	            android:scaleType="matrix"
+	            android:src="@drawable/main_center_eco_all" />
+
+	    </RelativeLayout>
+
+    </RelativeLayout>
+    <ImageView
+        android:id="@+id/imageView_center_main_b_smkicon"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:background="@drawable/main_smart_key_green"
+        android:visibility="invisible" />
+    
+
+</RelativeLayout>

@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/AbsoluteLayout1"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
+
+    <ImageView
+        android:id="@+id/imageView_indicator_main_a_WarmingUp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:src="@drawable/main_indicator_warmimgup" />
+
+    <ImageView
+        android:id="@+id/imageView_indicator_main_a_FuelWarmer"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:layout_toRightOf="@+id/imageView_indicator_main_a_WarmingUp"
+        android:layout_marginLeft="1dp"
+        android:src="@drawable/main_indicator_fuelwamer" />
+
+    <ImageView
+        android:id="@+id/imageView_indicator_main_a_PreHeat"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:layout_toRightOf="@+id/imageView_indicator_main_a_FuelWarmer"
+        android:layout_marginLeft="1dp"
+        android:src="@drawable/main_indicator_preheat" />
+
+    <ImageView
+        android:id="@+id/imageView_indicator_main_a_ReverseFan"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toLeftOf="@+id/imageView_indicator_main_a_ClutchCutOff"
+        android:layout_marginTop="5dp"
+        android:layout_marginRight="1dp"
+        android:src="@drawable/main_indicator_fanreverse" />
+
+    <ImageView
+        android:id="@+id/imageView_indicator_main_a_ClutchCutOff"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+		android:layout_toLeftOf="@+id/imageView_indicator_main_a_LockUpClutch"
+        android:layout_marginTop="5dp"
+        android:layout_marginRight="1dp"        
+        android:src="@drawable/main_indicator_clutchcutoff" />
+
+    <ImageView
+        android:id="@+id/imageView_indicator_main_a_LockUpClutch"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:layout_alignParentRight="true"
+        android:src="@drawable/main_indicator_lockupclutch" />
+        
+    <ImageView
+        android:id="@+id/imageView_indicator_main_a_SeatBelt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+       	android:layout_alignParentBottom="true"
+        android:layout_marginBottom="5dp"
+        android:src="@drawable/main_indicator_seatbelt" />
+        
+    <ImageView
+        android:id="@+id/imageView_indicator_main_a_RideControl"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="5dp"
+        android:layout_toRightOf="@+id/imageView_indicator_main_a_SeatBelt"
+        android:layout_marginLeft="1dp"
+        android:src="@drawable/main_indicator_rideoff" />
+
+    <ImageView
+        android:id="@+id/imageView_indicator_main_a_FloatingMode"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toLeftOf="@+id/imageView_indicator_main_a_EngineAutoShutdown"
+ 		android:layout_alignParentBottom="true"
+        android:layout_marginBottom="5dp"
+        android:layout_marginRight="1dp"
+        android:src="@drawable/main_indicator_floatmode" />    
+
+    <ImageView
+        android:id="@+id/imageView_indicator_main_a_EngineAutoShutdown"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="5dp"
+        android:layout_alignParentRight="true"
+        android:src="@drawable/main_indicator_engineautoshutdown" />
+    
+</RelativeLayout>

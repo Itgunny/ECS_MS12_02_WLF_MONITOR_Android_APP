@@ -1,0 +1,207 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/RelativeLayout1"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+    
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/Relativelayout_menu_body_monitoring_fuelhistory_generalrecord_low"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true" >
+
+        <RelativeLayout
+            android:id="@+id/RelativeLayout_menu_body_monitoring_fuelhistory_generalrecord_average"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/menu_information_fuel_general_bg" >
+            
+            <TextView
+		        android:id="@+id/textView_menu_body_monitoring_fuelhistory_generalrecord_average"
+		        android:layout_width="342dp"
+		        android:layout_height="wrap_content"
+		        android:layout_marginTop="10dp"
+		        android:layout_marginLeft="10dp"
+                android:gravity="center"
+		        android:text="@string/Average_Fuel_Rate"
+		        android:textAppearance="?android:attr/textAppearanceLarge"
+		        android:textSize="25sp" />
+
+            <TextView
+                android:id="@+id/textView_menu_body_monitoring_fuelhistory_generalrecord_average_data"
+		        android:layout_width="252dp"
+		        android:layout_height="191dp"
+		        android:layout_marginLeft="10dp"
+		        android:layout_marginTop="46dp"
+                android:gravity="right|center_vertical"
+                android:text="0"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:textSize="50sp"  />
+
+            <TextView
+                android:id="@+id/textView_menu_body_monitoring_fuelhistory_generalrecord_average_unit"
+                android:layout_width="80dp"
+                android:layout_height="wrap_content"
+                android:layout_alignBottom="@+id/textView_menu_body_monitoring_fuelhistory_generalrecord_average_data"
+                android:layout_alignTop="@+id/textView_menu_body_monitoring_fuelhistory_generalrecord_average_data"
+                android:layout_marginLeft="10dp"
+                android:layout_toRightOf="@+id/textView_menu_body_monitoring_fuelhistory_generalrecord_average_data"
+                android:gravity="left|center_vertical"
+                android:text="@string/l_h"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:textColor="@color/gray" 
+                android:textSize="50sp"  />
+	          
+        </RelativeLayout>
+
+		<TextView
+		    android:id="@+id/textView_menu_body_monitoring_fuelhistory_generalrecord_average_init"
+		    android:layout_width="wrap_content"
+		    android:layout_height="wrap_content"
+		    android:layout_marginLeft="10dp"
+		    android:layout_alignLeft="@+id/RelativeLayout_menu_body_monitoring_fuelhistory_generalrecord_average"
+		    android:layout_alignBottom="@+id/RelativeLayout_menu_body_monitoring_fuelhistory_generalrecord_average"
+		    android:layout_marginBottom="5dp"
+		    android:background="@drawable/_selector_menu_body_monitoring_fuel_init_btn"
+		    android:gravity="center"
+		    android:text="@string/Initialization"
+		    android:textAppearance="?android:attr/textAppearanceLarge" />   			          
+       
+        
+		<RelativeLayout
+		    android:id="@+id/RelativeLayout_menu_body_monitoring_fuelhistory_generalrecord_a_days_fuel_used"
+		    android:layout_width="wrap_content"
+		    android:layout_height="wrap_content"
+		    android:layout_marginLeft="30dp"
+		    android:layout_marginTop="10dp"
+		    android:layout_toRightOf="@+id/RelativeLayout_menu_body_monitoring_fuelhistory_generalrecord_average"
+		    android:background="@drawable/menu_information_fuel_general_bg" >
+
+		    <TextView
+		        android:id="@+id/textView_menu_body_monitoring_fuelhistory_generalrecord_a_days_fuel_used"
+		        android:layout_width="342dp"
+		        android:layout_height="wrap_content"
+		        android:layout_marginTop="10dp"
+		        android:layout_marginLeft="10dp"
+		        android:gravity="center"
+		        android:text="@string/A_Days_Fuel_Used"
+		        android:textAppearance="?android:attr/textAppearanceLarge"
+		        android:textSize="25sp" />
+
+            <TextView
+                android:id="@+id/textView_menu_body_monitoring_fuelhistory_generalrecord_a_days_fuel_used_data"
+		        android:layout_width="252dp"
+		        android:layout_height="191dp"
+		        android:layout_marginLeft="10dp"
+		        android:layout_marginTop="46dp"
+                android:gravity="right|center_vertical"
+                android:text="0"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:textSize="50sp" />
+
+            <TextView
+                android:id="@+id/textView_menu_body_monitoring_fuelhistory_generalrecord_a_days_fuel_used_unit"
+                android:layout_width="80dp"
+                android:layout_height="wrap_content"
+                android:layout_alignBottom="@+id/textView_menu_body_monitoring_fuelhistory_generalrecord_a_days_fuel_used_data"
+                android:layout_alignTop="@+id/textView_menu_body_monitoring_fuelhistory_generalrecord_a_days_fuel_used_data"
+                android:layout_marginLeft="10dp"
+                android:layout_toRightOf="@+id/textView_menu_body_monitoring_fuelhistory_generalrecord_a_days_fuel_used_data"
+                android:gravity="left|center_vertical"
+                android:text="@string/l"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:textColor="@color/gray"
+                android:textSize="50sp" />
+
+        </RelativeLayout>
+        
+		<TextView
+		    android:id="@+id/textView_menu_body_monitoring_fuelhistory_generalrecord_a_days_fuel_used_init"
+		    android:layout_width="wrap_content"
+		    android:layout_height="wrap_content"
+		    android:layout_marginLeft="10dp"
+		    android:layout_alignLeft="@+id/RelativeLayout_menu_body_monitoring_fuelhistory_generalrecord_a_days_fuel_used"
+		    android:layout_alignBottom="@+id/RelativeLayout_menu_body_monitoring_fuelhistory_generalrecord_a_days_fuel_used"
+		    android:layout_marginBottom="5dp"
+		    android:background="@drawable/_selector_menu_body_monitoring_fuel_init_btn"
+		    android:gravity="center"
+		    android:text="@string/Initialization"
+		    android:textAppearance="?android:attr/textAppearanceLarge" />
+		
+    </RelativeLayout>
+    
+    
+
+    
+    <RelativeLayout
+        android:id="@+id/Relativelayout_menu_body_monitoring_fuelhistory_generalrecord_low"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true" >
+       
+        <ImageView
+            android:id="@+id/imageView_menu_body_monitoring_fuelhistory_generalrecord_low_bg"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/menu_low_bg" />
+	   
+	    <ImageButton
+	        android:id="@+id/ImageButton_menu_body_monitoring_fuelhistory_generalrecord_low_ok"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:layout_alignBottom="@+id/imageView_menu_body_monitoring_fuelhistory_generalrecord_low_bg"
+	        android:layout_alignRight="@+id/imageView_menu_body_monitoring_fuelhistory_generalrecord_low_bg"
+	        android:background="@drawable/_selector_menu_low_right_btn" />
+	
+	    <ImageView
+	        android:id="@+id/imageView_menu_body_monitoring_fuelhistory_generalrecord_low_line"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:layout_alignBottom="@+id/ImageButton_menu_body_monitoring_fuelhistory_generalrecord_low_ok"
+	        android:layout_alignLeft="@+id/ImageButton_menu_body_monitoring_fuelhistory_generalrecord_low_ok"
+	        android:src="@drawable/main_key_low_line" />
+	    
+	    <RelativeLayout
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:layout_alignBottom="@+id/ImageButton_menu_body_monitoring_fuelhistory_generalrecord_low_ok"
+	        android:layout_alignLeft="@+id/ImageButton_menu_body_monitoring_fuelhistory_generalrecord_low_ok"
+	        android:layout_alignRight="@+id/ImageButton_menu_body_monitoring_fuelhistory_generalrecord_low_ok"
+	        android:layout_alignTop="@+id/ImageButton_menu_body_monitoring_fuelhistory_generalrecord_low_ok" >
+	
+	        <LinearLayout
+	            android:layout_width="wrap_content"
+	            android:layout_height="wrap_content"
+	            android:layout_centerHorizontal="true"
+	            android:layout_centerVertical="true" >
+	
+	            <ImageView
+	                android:id="@+id/imageView_menu_body_monitoring_fuelhistory_generalrecord_low_ok_icon"
+	                android:layout_width="wrap_content"
+	                android:layout_height="wrap_content"
+	                android:layout_alignBottom="@+id/ImageButton_menu_body_monitoring_fuelhistory_generalrecord_low_ok"
+	                android:layout_alignLeft="@+id/ImageButton_menu_body_monitoring_fuelhistory_generalrecord_low_ok"
+	                android:layout_alignTop="@+id/ImageButton_menu_body_monitoring_fuelhistory_generalrecord_low_ok"
+	                android:src="@drawable/menu_low_icon_ok" />
+	
+	            <TextView
+	                android:id="@+id/textView_menu_body_monitoring_fuelhistory_generalrecord_low_ok"
+	                android:layout_width="wrap_content"
+	                android:layout_height="match_parent"
+	                android:layout_marginLeft="10dp"
+	                android:gravity="center"
+	                android:text="@string/OK"
+	                android:textAppearance="?android:attr/textAppearanceLarge"
+	                android:textSize="25sp"
+	                android:textStyle="bold" />
+
+	        </LinearLayout>
+	    </RelativeLayout>
+
+    </RelativeLayout>
+</RelativeLayout>

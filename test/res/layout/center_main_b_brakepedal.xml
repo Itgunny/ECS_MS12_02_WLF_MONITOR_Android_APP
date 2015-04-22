@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/RelativeLayout_center_main_b_brakepedal"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/main_bg_center" >
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="10dp"
+        android:layout_toRightOf="@+id/imageView_center_main_b_brakepedal_gear"
+        android:orientation="vertical" >
+
+        <ImageView
+            android:id="@+id/imageView_center_main_b_brakepedal_gear_level_up"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/select_gear_up_off" />
+
+        <ImageView
+            android:id="@+id/imageView_center_main_b_brakepedal_gear_level_4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="7dp"
+            android:src="@drawable/select_gear_off" />
+
+        <ImageView
+            android:id="@+id/imageView_center_main_b_brakepedal_gear_level_3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="7dp"
+            android:src="@drawable/select_gear_off" />
+
+        <ImageView
+            android:id="@+id/imageView_center_main_b_brakepedal_gear_level_2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="7dp"
+            android:src="@drawable/select_gear_off" />
+        
+        <ImageView
+            android:id="@+id/imageView_center_main_b_brakepedal_gear_level_1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="7dp"
+            android:src="@drawable/select_gear_off" />
+        
+        <ImageView
+            android:id="@+id/imageView_center_main_b_brakepedal_gear_level_down"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/select_gear_down_off" />
+
+    </LinearLayout>
+
+    <ImageView
+        android:id="@+id/imageView_center_main_b_brakepedal_gear"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="50dp"
+        android:src="@drawable/actual_gear_st" />
+ 
+</RelativeLayout>
