@@ -23,6 +23,10 @@ public class VersionInfoTCUFragment extends VersionInfoDetailFragment{
 //	private static final int STATE_MAKER					= 5;
 	private static final int STATE_MAKER 					= 0;
 	private static final int STATE_SOFTWARE_VERSION			= 1;
+	private static final int STATE_EST37A_PART_NUMBER 		= 2;
+	private static final int STATE_HARDWARE_PART_NUMBER		= 3;
+	private static final int STATE_HARDWARE_SERIAL_NUMBER	= 4;
+	private static final int STATE_CUSTOMER_SERIAL_NUMBER	= 5;
 	
 	/////////////////////////////////////////////////////////////////////
 	/////////////////////VALUABLE////////////////////////////////////////
@@ -82,6 +86,18 @@ public class VersionInfoTCUFragment extends VersionInfoDetailFragment{
 
 	}
 	@Override
+	public void ShowHiddenPage(){
+		adapter.addItem(new IconTextItemVersion(ParentActivity.getResources().getDrawable(R.drawable.menu_management_machine_monitoring_bg_light),null,
+				ParentActivity.getResources().getString(string.EST37A_Part_Number),"" , ""));
+		adapter.addItem(new IconTextItemVersion(ParentActivity.getResources().getDrawable(R.drawable.menu_management_machine_monitoring_bg_dark),null,
+				ParentActivity.getResources().getString(string.Hardware_Part_Number),"" , ""));
+		adapter.addItem(new IconTextItemVersion(ParentActivity.getResources().getDrawable(R.drawable.menu_management_machine_monitoring_bg_light),null,
+				ParentActivity.getResources().getString(string.Hardware_Serial_Number),"" , ""));
+		adapter.addItem(new IconTextItemVersion(ParentActivity.getResources().getDrawable(R.drawable.menu_management_machine_monitoring_bg_dark),null,
+				ParentActivity.getResources().getString(string.Customer_Serial_Number),"" , ""));
+	}
+
+	@Override
 	protected void GetDataFromNative() {
 		// TODO Auto-generated method stub
 		ComponentCode = CAN1Comm.Get_ComponentCode_1699_PGN65330_TCU();
@@ -95,13 +111,18 @@ public class VersionInfoTCUFragment extends VersionInfoDetailFragment{
 		// TODO Auto-generated method stub
 		ManufacturerDisplay(ManufacturerCode);
 		
-//		HardwarePartNumberIndex = SoftwareIDDisplay(SoftwareIdentification,1,12,STATE_EST37A_PART_NUMBER);
-//		SoftwareVersionIndex = SoftwareIDDisplay(SoftwareIdentification,HardwarePartNumberIndex,12,STATE_HARDWARE_PART_NUMBER);
-//		HardwareSerialNumberIndex = SoftwareIDDisplay(SoftwareIdentification,SoftwareVersionIndex,12,STATE_SOFTWARE_VERSION);
-//		CutomerSerialNumberIndex = SoftwareIDDisplay(SoftwareIdentification,HardwareSerialNumberIndex,9,STATE_HARDWARE_SERIAL_NUMBER);
-//		LastIndex = SoftwareIDDisplay(SoftwareIdentification,CutomerSerialNumberIndex,16,STATE_CUSTOMER_SERIAL_NUMBER);
-		//SoftwareIDDisplay(SoftwareIdentification,40,9,STATE_HARDWARE_SERIAL_NUMBER);
-		SoftwareIDDisplay(SoftwareIdentification,27,12,STATE_SOFTWARE_VERSION);
+		if(ManufactureDayDisplayFlag == true)
+		{
+			HardwarePartNumberIndex = SoftwareIDDisplay(SoftwareIdentification,1,12,STATE_EST37A_PART_NUMBER);
+			SoftwareVersionIndex = SoftwareIDDisplay(SoftwareIdentification,HardwarePartNumberIndex,12,STATE_HARDWARE_PART_NUMBER);
+			HardwareSerialNumberIndex = SoftwareIDDisplay(SoftwareIdentification,SoftwareVersionIndex,12,STATE_SOFTWARE_VERSION);
+			CutomerSerialNumberIndex = SoftwareIDDisplay(SoftwareIdentification,HardwareSerialNumberIndex,9,STATE_HARDWARE_SERIAL_NUMBER);
+			LastIndex = SoftwareIDDisplay(SoftwareIdentification,CutomerSerialNumberIndex,16,STATE_CUSTOMER_SERIAL_NUMBER);
+		}
+		else{
+			//SoftwareIDDisplay(SoftwareIdentification,40,9,STATE_HARDWARE_SERIAL_NUMBER);
+			SoftwareIDDisplay(SoftwareIdentification,27,12,STATE_SOFTWARE_VERSION);
+		}
 	
 		adapter.notifyDataSetChanged();
 	}

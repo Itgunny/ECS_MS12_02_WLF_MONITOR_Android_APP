@@ -14,6 +14,7 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import taeha.wheelloader.fseries_monitor.main.CAN1CommManager;
 import taeha.wheelloader.fseries_monitor.main.CheckModel;
 import taeha.wheelloader.fseries_monitor.main.ParentFragment;
 import taeha.wheelloader.fseries_monitor.main.R;
@@ -43,6 +44,13 @@ public class MainBVirtualKeyFragment extends ParentFragment{
 	
 	//VALUABLE////////////////////////////////////////
 	public boolean bScreenOnFlag;
+	
+	int AutoGrease;
+	int Quickcoupler;
+	int RideControl;
+	int BeaconLamp;
+	int MirrorHeat;
+	int FineModulation;
 	//////////////////////////////////////////////////
 	
 	//ANIMATION///////////////////////////////////////
@@ -240,20 +248,80 @@ public class MainBVirtualKeyFragment extends ParentFragment{
 	@Override
 	protected void GetDataFromNative() {
 		// TODO Auto-generated method stub
-		
+		AutoGrease = CAN1Comm.Get_AutoGreaseOperationStatus_3449_PGN65527();
+		Quickcoupler = CAN1Comm.Get_QuickCouplerOperationStatus_3448_PGN65527();
+		RideControl = CAN1Comm.Get_RideControlOperationStatus_3447_PGN65527();
+		BeaconLamp = CAN1Comm.Get_BeaconLampOperationStatus_3444_PGN65527();
+		MirrorHeat = CAN1Comm.Get_MirrorHeatOperationStatus_3450_PGN65527();
+		FineModulation = CAN1Comm.Get_ComponentCode_1699_PGN65330_EHCU();
 	}
 
 	@Override
 	protected void UpdateUI() {
 		// TODO Auto-generated method stub
-		FineModulsationDisplay();
+		FineModulationDisplay(FineModulation);
+		AutoGreaseDisplay(AutoGrease);
+		QuickcouplerDisplay(Quickcoupler);
+		RideControlDisplay(RideControl);
+		BeaconLampDisplay(BeaconLamp);
+		MirrorHeatDisplay(MirrorHeat);
 	}
 	/////////////////////////////////////////////////////////////////////	
-	public void FineModulsationDisplay(){
-		if(CAN1Comm.Get_ComponentCode_1699_PGN65330_EHCU() != CAN1Comm.STATE_COMPONENTCODE_EHCU){
+	public void FineModulationDisplay(int Data){
+		if(Data != CAN1CommManager.STATE_COMPONENTCODE_EHCU){
 			imgbtnFineModulation.setAlpha((float)0.2);
 		}else{
 			imgbtnFineModulation.setAlpha((float)1);
+		}
+	}
+	public void AutoGreaseDisplay(int Data){
+		switch (Data){
+		case CAN1CommManager.DATA_STATE_NOTAVAILABLE:
+			imgbtnAutoGrease.setAlpha((float)0.2);
+			break;
+		default:
+			imgbtnAutoGrease.setAlpha((float)1);
+			break;
+		}
+	}
+	public void QuickcouplerDisplay(int Data){
+		switch (Data){
+		case CAN1CommManager.DATA_STATE_NOTAVAILABLE:
+			imgbtnQuickCoupler.setAlpha((float)0.2);
+			break;
+		default:
+			imgbtnQuickCoupler.setAlpha((float)1);
+			break;
+		}
+	}
+	public void RideControlDisplay(int Data){
+		switch (Data){
+		case CAN1CommManager.DATA_STATE_NOTAVAILABLE:
+			imgbtnRideControl.setAlpha((float)0.2);
+			break;
+		default:
+			imgbtnRideControl.setAlpha((float)1);
+			break;
+		}
+	}
+	public void BeaconLampDisplay(int Data){
+		switch (Data){
+		case CAN1CommManager.DATA_STATE_NOTAVAILABLE:
+			imgbtnBeaconLamp.setAlpha((float)0.2);
+			break;
+		default:
+			imgbtnBeaconLamp.setAlpha((float)1);
+			break;
+		}
+	}
+	public void MirrorHeatDisplay(int Data){
+		switch (Data){
+		case CAN1CommManager.DATA_STATE_NOTAVAILABLE:
+			imgbtnMirrorHeat.setAlpha((float)0.2);
+			break;
+		default:
+			imgbtnMirrorHeat.setAlpha((float)1);
+			break;
 		}
 	}
 	/////////////////////////////////////////////////////////////////////

@@ -52,10 +52,16 @@ public class VersionInfoEHCUFragment extends VersionInfoDetailFragment{
 
 	}
 	@Override
+	public void ShowHiddenPage(){
+		adapter.addItem(new IconTextItemVersion(ParentActivity.getResources().getDrawable(R.drawable.menu_management_machine_monitoring_bg_dark),null,
+				ParentActivity.getResources().getString(string.Manufacturer),"" , ""));
+	}
+	@Override
 	protected void GetDataFromNative() {
 		// TODO Auto-generated method stub
 		ComponentCode = CAN1Comm.Get_ComponentCode_1699_PGN65330_EHCU();
-//		ManufacturerCode = CAN1Comm.Get_ManufacturerCode_1700_PGN65330_EHCU();
+		if(ManufactureDayDisplayFlag == true)
+			ManufacturerCode = CAN1Comm.Get_ManufacturerCode_1700_PGN65330_EHCU();
 		ComponentBasicInformation = CAN1Comm.Get_ComponentBasicInformation_1698_PGN65330_EHCU();
 		ProgramSubVersion = ParentActivity.FindProgramSubInfo(ComponentBasicInformation);
 	}
@@ -67,7 +73,8 @@ public class VersionInfoEHCUFragment extends VersionInfoDetailFragment{
 		ManufactureDayDisplay(ComponentBasicInformation);
 		VersionDisplay(ComponentBasicInformation,ProgramSubVersion);
 		SerialNumberDisplay(ComponentBasicInformation);
-//		ManufacturerDisplay(ManufacturerCode);
+		if(ManufactureDayDisplayFlag == true)
+			ManufacturerDisplay(ManufacturerCode);
 	
 		adapter.notifyDataSetChanged();
 	}

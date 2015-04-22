@@ -38,9 +38,9 @@ public class VersionInfoDetailFragment extends ParentFragment{
 //	protected static final int STATE_SERIALNUMBER					 		= 0;
 //	protected static final int STATE_MAKER					 				= 1;
 //	protected static final int STATE_VERSION					 			= 2;
-	protected static final int STATE_MAKER					 				= 0;
 	protected static final int STATE_VERSION					 			= 0;
 	protected static final int STATE_SERIALNUMBER					 		= 1;
+	protected static final int STATE_MAKER					 				= 2;
 	
 	protected static final int STATE_MANUFACTURERCODE_TAEHA						= 1;
 	protected static final int STATE_MANUFACTURERCODE_FREEMS					= 10;
@@ -199,6 +199,9 @@ public class VersionInfoDetailFragment extends ParentFragment{
 	
 	/////////////////////////////////////////////////////////////////////
 	public void ShowManufactureDay(final boolean flag){
+		if(ManufactureDayDisplayFlag == flag && flag == true)
+			return;
+		
 		ManufactureDayDisplayFlag = flag;
 		
 		ParentActivity.runOnUiThread(new Runnable() {
@@ -212,6 +215,7 @@ public class VersionInfoDetailFragment extends ParentFragment{
 					RelativeLayout.LayoutParams params = (RelativeLayout.LayoutParams)listView.getLayoutParams();
 					params.addRule(RelativeLayout.ALIGN_PARENT_TOP,0);
 					listView.setLayoutParams(params); //causes layout update
+					ShowHiddenPage();
 				}
 					
 				else{
@@ -223,6 +227,9 @@ public class VersionInfoDetailFragment extends ParentFragment{
 				}
 			}
 		});
+	}
+	public void ShowHiddenPage(){
+		
 	}
 	public int SoftwareIDDisplay(byte[] softwareID, int StartIndex, int MaxLength, int LineIndex)throws NullPointerException{
 		int Index = 0;

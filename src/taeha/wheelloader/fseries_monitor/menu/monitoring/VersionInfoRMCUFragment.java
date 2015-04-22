@@ -151,24 +151,52 @@ public class VersionInfoRMCUFragment extends VersionInfoDetailFragment{
 
 	}
 	@Override
+	public void ShowHiddenPage(){
+		adapter.addItem(new IconTextItemVersion(ParentActivity.getResources().getDrawable(R.drawable.menu_management_machine_monitoring_bg_dark),null,
+				ParentActivity.getResources().getString(string.Manufacturer),"" , ""));
+		adapter.addItem(new IconTextItemVersion(ParentActivity.getResources().getDrawable(R.drawable.menu_management_machine_monitoring_bg_light),null,
+				ParentActivity.getResources().getString(string.Network_Type),"" , ""));
+		adapter.addItem(new IconTextItemVersion(ParentActivity.getResources().getDrawable(R.drawable.menu_management_machine_monitoring_bg_dark),null,
+				ParentActivity.getResources().getString(string.Number_of_Messages_to_Transmit),"" , ""));
+		adapter.addItem(new IconTextItemVersion(ParentActivity.getResources().getDrawable(R.drawable.menu_management_machine_monitoring_bg_light),null,
+				ParentActivity.getResources().getString(string.Back_up_Battery_Voltage),"" , ""));
+		adapter.addItem(new IconTextItemVersion(ParentActivity.getResources().getDrawable(R.drawable.menu_management_machine_monitoring_bg_dark),null,
+				ParentActivity.getResources().getString(string.Network_Communication_Status),"" , ""));
+		adapter.addItem(new IconTextItemVersion(ParentActivity.getResources().getDrawable(R.drawable.menu_management_machine_monitoring_bg_light),null,
+				ParentActivity.getResources().getString(string.Network_Service),"" , ""));
+		adapter.addItem(new IconTextItemVersion(ParentActivity.getResources().getDrawable(R.drawable.menu_management_machine_monitoring_bg_dark),null,
+				ParentActivity.getResources().getString(string.Communication_Antenna),"" , ""));
+		adapter.addItem(new IconTextItemVersion(ParentActivity.getResources().getDrawable(R.drawable.menu_management_machine_monitoring_bg_light),null,
+				ParentActivity.getResources().getString(string.GPS_Antenna),"" , ""));
+		adapter.addItem(new IconTextItemVersion(ParentActivity.getResources().getDrawable(R.drawable.menu_management_machine_monitoring_bg_dark),null,
+				ParentActivity.getResources().getString(string.Position_Update),"" , ""));
+		adapter.addItem(new IconTextItemVersion(ParentActivity.getResources().getDrawable(R.drawable.menu_management_machine_monitoring_bg_light),null,
+				ParentActivity.getResources().getString(string.Outside_of_Boundary),"" , ""));
+		adapter.addItem(new IconTextItemVersion(ParentActivity.getResources().getDrawable(R.drawable.menu_management_machine_monitoring_bg_dark),null,
+				ParentActivity.getResources().getString(string.Lock_Level),"" , ""));
+	}
+	@Override
 	protected void GetDataFromNative() {
 		// TODO Auto-generated method stub
 		ComponentCode = CAN1Comm.Get_ComponentCode_1699_PGN65330_RMCU();
-//		ManufacturerCode = CAN1Comm.Get_ManufacturerCode_1700_PGN65330_RMCU();
 		ComponentBasicInformation = CAN1Comm.Get_ComponentBasicInformation_1698_PGN65330_RMCU();
-//		RMCUNetworkType = CAN1Comm.Get_RMCUNetworkType_1621_PGN65329();
-//		RMCUBackupBatteryVolt = CAN1Comm.Get_RMCUBackupBatteryVoltage_1590_PGN65329();
-//		RMCUPowerSource = CAN1Comm.Get_RMCUPowerSource_1594_PGN65329();
-//		RMCUBoxOpeningStatus = CAN1Comm.Get_RMCUBoxOpeningStatus_PGN65329();
-//		NetworkCommStatus1 = CAN1Comm.Get_NetworkCommunicationStatus1_1622_PGN65329();
-//		PositionUpdateStatus = CAN1Comm.Get_PositionUpdateStatus_852_PGN65329();
-//		MachinePositionStatus = CAN1Comm.Get_MachinePositionStatus_1593_PGN65329();
-//		GPSAntennaConnectionAlarmStatus = CAN1Comm.Get_GPSAntennaConnectionAlarmStatus_1595_PGN65329();
-//		NetworkTransceiverStatus1 = CAN1Comm.Get_NetworkTransceiverStatus1_1623_PGN65329();
-//		NetworkServiceStatus1 = CAN1Comm.Get_NetworkServiceStatus1_1624_PGN65329();
-//		NetworkAntennaStatus1 = CAN1Comm.Get_NetworkAntennaStatus1_1625_PGN65329();
-//		RMCUData = CAN1Comm.Get_RMCUData_NumberofMessagestoTransmit_855_PGN65329();
-//		LockLevel = CAN1Comm.Get_LockLevel_823_PGN65348();
+		if(ManufactureDayDisplayFlag == true)
+		{
+			ManufacturerCode = CAN1Comm.Get_ManufacturerCode_1700_PGN65330_RMCU();
+			RMCUNetworkType = CAN1Comm.Get_RMCUNetworkType_1621_PGN65329();
+			RMCUBackupBatteryVolt = CAN1Comm.Get_RMCUBackupBatteryVoltage_1590_PGN65329();
+			RMCUPowerSource = CAN1Comm.Get_RMCUPowerSource_1594_PGN65329();
+			RMCUBoxOpeningStatus = CAN1Comm.Get_RMCUBoxOpeningStatus_PGN65329();
+			NetworkCommStatus1 = CAN1Comm.Get_NetworkCommunicationStatus1_1622_PGN65329();
+			PositionUpdateStatus = CAN1Comm.Get_PositionUpdateStatus_852_PGN65329();
+			MachinePositionStatus = CAN1Comm.Get_MachinePositionStatus_1593_PGN65329();
+			GPSAntennaConnectionAlarmStatus = CAN1Comm.Get_GPSAntennaConnectionAlarmStatus_1595_PGN65329();
+			NetworkTransceiverStatus1 = CAN1Comm.Get_NetworkTransceiverStatus1_1623_PGN65329();
+			NetworkServiceStatus1 = CAN1Comm.Get_NetworkServiceStatus1_1624_PGN65329();
+			NetworkAntennaStatus1 = CAN1Comm.Get_NetworkAntennaStatus1_1625_PGN65329();
+			RMCUData = CAN1Comm.Get_RMCUData_NumberofMessagestoTransmit_855_PGN65329();
+			LockLevel = CAN1Comm.Get_LockLevel_823_PGN65348();
+		}
 	
 		ProgramSubVersion = ParentActivity.FindProgramSubInfo(ComponentBasicInformation);
 	}
@@ -180,17 +208,20 @@ public class VersionInfoRMCUFragment extends VersionInfoDetailFragment{
 		ModelDisplay(ComponentBasicInformation);
 		VersionDisplay(ComponentBasicInformation, ProgramSubVersion);
 		SerialNumberDisplay(ComponentBasicInformation);
-//		ManufacturerDisplay(ManufacturerCode);
-//		NetworkTypeDisplay(RMCUNetworkType);
-//		NumofDataDisplay(RMCUData);
-//		BackupBatteryVoltDisplay(RMCUBackupBatteryVolt);
-//		CommStatusDisplay(NetworkCommStatus1);
-//		NetworkServiceDisplay(NetworkServiceStatus1);
-//		NetworkAntennaDisplay(NetworkAntennaStatus1);
-//		GPSAntennaDisplay(GPSAntennaConnectionAlarmStatus);
-//		PositionUpdateDisplay(PositionUpdateStatus);
-//		GuardDisplay(MachinePositionStatus);
-//		LockLevelDisplay(LockLevel);
+		if(ManufactureDayDisplayFlag == true)
+		{
+			ManufacturerDisplay(ManufacturerCode);
+			NetworkTypeDisplay(RMCUNetworkType);
+			NumofDataDisplay(RMCUData);
+			BackupBatteryVoltDisplay(RMCUBackupBatteryVolt);
+			CommStatusDisplay(NetworkCommStatus1);
+			NetworkServiceDisplay(NetworkServiceStatus1);
+			NetworkAntennaDisplay(NetworkAntennaStatus1);
+			GPSAntennaDisplay(GPSAntennaConnectionAlarmStatus);
+			PositionUpdateDisplay(PositionUpdateStatus);
+			GuardDisplay(MachinePositionStatus);
+			LockLevelDisplay(LockLevel);
+		}
 	
 		adapter.notifyDataSetChanged();
 	}

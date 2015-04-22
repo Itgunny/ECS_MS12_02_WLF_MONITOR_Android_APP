@@ -18,8 +18,9 @@ import android.widget.TextView;
 
 public class VersionInfoMonitorFragment extends VersionInfoDetailFragment{
 	/////////////////CONSTANT////////////////////////////////////////////
-	protected static final int STATE_FIRMWARE_VERSION				 	= 1;
+	protected static final int STATE_FIRMWARE_VERSION			= 1;
 	protected static final int STATE_SERIALNUMBER				= 2;
+	protected static final int STATE_MAKER						= 3;
 	/////////////////////////////////////////////////////////////////////
 	TextView textViewHardwareData;
 	RelativeLayout layoutHardware;
@@ -82,11 +83,11 @@ public class VersionInfoMonitorFragment extends VersionInfoDetailFragment{
 //				ParentActivity.getResources().getString(string.Program_Version),"" , ""));
 //		adapter.addItem(new IconTextItemVersion(ParentActivity.getResources().getDrawable(R.drawable.menu_management_machine_monitoring_bg_dark),null,
 //				ParentActivity.getResources().getString(string.Firmware_Version),"" , ""));
-		adapter.addItem(new IconTextItemVersion(ParentActivity.getResources().getDrawable(R.drawable.menu_management_machine_monitoring_bg_dark),null,
-				ParentActivity.getResources().getString(string.Program_Version),"" , ""));
 		adapter.addItem(new IconTextItemVersion(ParentActivity.getResources().getDrawable(R.drawable.menu_management_machine_monitoring_bg_light),null,
-				ParentActivity.getResources().getString(string.Firmware_Version),"" , ""));
+				ParentActivity.getResources().getString(string.Program_Version),"" , ""));
 		adapter.addItem(new IconTextItemVersion(ParentActivity.getResources().getDrawable(R.drawable.menu_management_machine_monitoring_bg_dark),null,
+				ParentActivity.getResources().getString(string.Firmware_Version),"" , ""));
+		adapter.addItem(new IconTextItemVersion(ParentActivity.getResources().getDrawable(R.drawable.menu_management_machine_monitoring_bg_light),null,
 				ParentActivity.getResources().getString(string.Serial_Number),"" , ""));
 		
 		
@@ -95,10 +96,14 @@ public class VersionInfoMonitorFragment extends VersionInfoDetailFragment{
 
 	}
 	@Override
+	public void ShowHiddenPage(){
+		adapter.addItem(new IconTextItemVersion(ParentActivity.getResources().getDrawable(R.drawable.menu_management_machine_monitoring_bg_dark),null,
+				ParentActivity.getResources().getString(string.Manufacturer),"" , ""));
+	}
+	@Override
 	protected void GetDataFromNative() {
 		// TODO Auto-generated method stub
 		ComponentCode = GetMonitorComponentCode();
-//		ManufacturerCode = GetMonitorManufacturerCode();
 		ComponentBasicInformation = ParentActivity.GetMonitorComponentBasicInfo();
 		
 		FirmwareVersionHigh = CAN1Comm.Get_FirmwareVersionHigh();
@@ -106,6 +111,8 @@ public class VersionInfoMonitorFragment extends VersionInfoDetailFragment{
 		FirmwareVersionSubHigh = CAN1Comm.Get_FirmwareVersionSubHigh();
 		FirmwareVersionSubLow = CAN1Comm.Get_FirmwareVersionSubLow();
 		HWVersion = CAN1Comm.Get_HWVersion();
+		if(ManufactureDayDisplayFlag == true)
+			ManufacturerCode = GetMonitorManufacturerCode();
 	}
 
 	@Override
@@ -115,10 +122,13 @@ public class VersionInfoMonitorFragment extends VersionInfoDetailFragment{
 		ManufactureDayDisplay(ComponentBasicInformation);
 		HardwareDisplay(HWVersion);
 		SerialNumberDisplay(ComponentBasicInformation);
-//		ManufacturerDisplay(ManufacturerCode);
 		ApplicationVersionDisplay(ParentActivity.VERSION_HIGH,ParentActivity.VERSION_LOW
 								,ParentActivity.VERSION_SUB_HIGH,ParentActivity.VERSION_SUB_LOW);
 		FirmwareVersionDisplay(FirmwareVersionHigh,FirmwareVersionLow,FirmwareVersionSubHigh,FirmwareVersionSubLow);
+		
+		if(ManufactureDayDisplayFlag == true)
+			ManufacturerDisplay(ManufacturerCode);
+		
 		adapter.notifyDataSetChanged();
 	}
 	////////////////////////////////////////////////
@@ -190,8 +200,66 @@ public class VersionInfoMonitorFragment extends VersionInfoDetailFragment{
 		}
 	}
 	////////////////////////////////////////////////
+	public void ManufacturerDisplay(int Code){
+		switch (Code) {
+		case STATE_MANUFACTURERCODE_TAEHA:
+			adapter.UpdateSecond(STATE_MAKER, "Taeha");
+			break;
+		case STATE_MANUFACTURERCODE_FREEMS:
+			adapter.UpdateSecond(STATE_MAKER, "FreeMs Corp.");
+			break;
+		case STATE_MANUFACTURERCODE_KYUNGWOO:
+			adapter.UpdateSecond(STATE_MAKER, "KYUNGWOO");
+			break;
+		case STATE_MANUFACTURERCODE_DONHWAN:
+			adapter.UpdateSecond(STATE_MAKER, "DongHwan");
+			break;
+		case STATE_MANUFACTURERCODE_CONTINENTAL:
+			adapter.UpdateSecond(STATE_MAKER, "Continental");
+			break;
+		case STATE_MANUFACTURERCODE_ZF:
+			adapter.UpdateSecond(STATE_MAKER, "ZF");
+			break;
+		case STATE_MANUFACTURERCODE_SAUNERDANFOSS:
+			adapter.UpdateSecond(STATE_MAKER, "Danfoss Power Solution");
+			break;
+		case STATE_MANUFACTURERCODE_FIND:
+			adapter.UpdateSecond(STATE_MAKER, "FIND");
+			break;
+		case STATE_MANUFACTURERCODE_GIMIS:
+			adapter.UpdateSecond(STATE_MAKER, "GIMIS");
+			break;
+		case STATE_MANUFACTURERCODE_HMC:
+			adapter.UpdateSecond(STATE_MAKER, "HMC");
+			break;
+		case STATE_MANUFACTURERCODE_CUMMINS:
+			adapter.UpdateSecond(STATE_MAKER, "Cummins");
+			break;
+		case STATE_MANUFACTURERCODE_MITSUBISHI:
+			adapter.UpdateSecond(STATE_MAKER, "Mitsubishi");
+			break;
+		case STATE_MANUFACTURERCODE_YANMAR:
+			adapter.UpdateSecond(STATE_MAKER, "Yanmar");
+			break;
+		case STATE_MANUFACTURERCODE_PERKINS:
+			adapter.UpdateSecond(STATE_MAKER, "Perkins");
+			break;
+		case STATE_MANUFACTURERCODE_SCANIA:
+			adapter.UpdateSecond(STATE_MAKER, "Scania");
+			break;
+		case 0xFF:
+			adapter.UpdateSecond(STATE_MAKER, "-");
+			break;
+		default:
+			adapter.UpdateSecond(STATE_MAKER, "-");
+			break;
+		}
+	}
 	@Override
 	public void ShowManufactureDay(final boolean flag){
+		if(ManufactureDayDisplayFlag == flag && flag == true)
+			return;
+		
 		ManufactureDayDisplayFlag = flag;
 		
 		ParentActivity.runOnUiThread(new Runnable() {
@@ -206,6 +274,7 @@ public class VersionInfoMonitorFragment extends VersionInfoDetailFragment{
 					RelativeLayout.LayoutParams params = (RelativeLayout.LayoutParams)listView.getLayoutParams();
 					params.addRule(RelativeLayout.ALIGN_PARENT_TOP,0);
 					listView.setLayoutParams(params); //causes layout update
+					ShowHiddenPage();
 				}
 					
 				else{

@@ -72,7 +72,7 @@ public class Home extends Activity {
 	public static final int VERSION_HIGH 		= 1;
 	public static final int VERSION_LOW 		= 0;
 	public static final int VERSION_SUB_HIGH 	= 4;
-	public static final int VERSION_SUB_LOW 	= 2;
+	public static final int VERSION_SUB_LOW 	= 3;
 	////1.0.2.3
 	// UI B 안 최초 적용 2014.12.10
 	////1.0.2.4
@@ -387,6 +387,12 @@ public class Home extends Activity {
 	//	- TC LOCK UP : OFF -> ON
 	//	- 장비정보 : HYD/COOLANT -> COOLANT/BATTERY
 	// 20. 초기 멀티패킷 전송 후 10초간 CID 송신
+	// 21. 메인 - Fuel Init(롱 터치) -> 팝업띄우는 형태로 변경
+	////v1.0.4.3
+	// 1. 가상키 FN, Fine Modulation 이미지 변경
+	// 2. EHCU POUUP 0xFFFF일 경우 막음
+	// 3. 가상키 Not available일 경우 회색 음영 처리(Auto grease, Quick coupler, Ride control, Beacon lamp, Mirror heat)
+	// 4. 장비정보 삭제한 항목 -> Hidden Page에서 보여줌
 	//////////////////////////////////////////////////////////////////////////////////////
 	
 	// TAG
@@ -2073,7 +2079,7 @@ public class Home extends Activity {
 				CameraDisplay();
 				CheckBuzzer();
 				CheckEngineAutoShutdown();
-				CheckEHCUErr();
+				CheckEHCUErr(JoystickSteeringEnableFailCondition);
 				Checkrpm(RPM);		// ++, --, 150211 bwk
 			}
 		});
@@ -2296,7 +2302,7 @@ public class Home extends Activity {
 		
 		
 	}
-	public void CheckEHCUErr(){
+	public void CheckEHCUErr(int Data){
 		// ++, 150209 bwk
 		/*
 		if(JoystickSteeringEnableFailCondition != 0xFFFF
@@ -2313,25 +2319,44 @@ public class Home extends Activity {
 					}
 				}
 		*/
+//		if(bEHCUErrPopup == false)
+//		{
+//			if(JoystickSteeringEnableFailCondition == 0xFFFF || JoystickSteeringEnableFailCondition == 0x0000)
+//			{
+//				OldJoystickSteeringEnableFailCondition = JoystickSteeringEnableFailCondition;
+//				bEHCUErrPopup = false;
+//			}
+//			else if(JoystickSteeringEnableFailCondition != 0xFFFF && JoystickSteeringEnableFailCondition != 0x0000){
+//				if(bEHCUErrPopup == false){
+//					if(JoystickSteeringEnableFailCondition != 0){
+//						if(JoystickSteeringEnableFailCondition != OldJoystickSteeringEnableFailCondition){
+//							OldJoystickSteeringEnableFailCondition = JoystickSteeringEnableFailCondition;
+//							OldScreenIndex = ScreenIndex;
+//							showEHCUErr();
+//						}
+//					}
+//					
+//				}
+//			}
 		if(bEHCUErrPopup == false)
 		{
-			if(JoystickSteeringEnableFailCondition == 0xFFFF || JoystickSteeringEnableFailCondition == 0x0000)
+			if(Data == 0xFFFF || Data == 0x0000)
 			{
-				OldJoystickSteeringEnableFailCondition = JoystickSteeringEnableFailCondition;
+				OldJoystickSteeringEnableFailCondition = Data;
 				bEHCUErrPopup = false;
 			}
-			else if(JoystickSteeringEnableFailCondition != 0xFFFF && JoystickSteeringEnableFailCondition != 0x0000){
+			else if(Data != 0xFFFF && Data != 0x0000){
 				if(bEHCUErrPopup == false){
-					if(JoystickSteeringEnableFailCondition != 0){
-						if(JoystickSteeringEnableFailCondition != OldJoystickSteeringEnableFailCondition){
-							OldJoystickSteeringEnableFailCondition = JoystickSteeringEnableFailCondition;
+					if(Data != 0){
+						if(Data != OldJoystickSteeringEnableFailCondition){
+							OldJoystickSteeringEnableFailCondition = Data;
 							OldScreenIndex = ScreenIndex;
 							showEHCUErr();
 						}
 					}
 					
 				}
-			}
+			}		
 		}else if(ScreenIndex == SCREEN_STATE_MAIN_ENDING){
 			if(HomeDialog != null){
 				HomeDialog.dismiss();
