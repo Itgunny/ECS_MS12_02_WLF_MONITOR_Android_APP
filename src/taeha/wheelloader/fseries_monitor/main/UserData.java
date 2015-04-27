@@ -40,7 +40,7 @@ public class UserData {
 	public UserData(){
 		EngineMode = CAN1CommManager.DATA_STATE_ENGINE_MODE_PWR;
 		//WarmingUp = CAN1CommManager.DATA_STATE_ENGINE_WARMINGUP_OFF;	// ++, --, 150403 bwk ªË¡¶
-		CCOMode = CAN1CommManager.DATA_STATE_TM_CLUTCHCUTOFF_OFF;
+		CCOMode = CAN1CommManager.DATA_STATE_TM_CLUTCHCUTOFF_H;
 		ShiftMode = CAN1CommManager.DATA_STATE_TM_SHIFTMODE_MANUAL;
 		TCLockUp = CAN1CommManager.DATA_STATE_TM_LOCKUPCLUTCH_ON;
 		RideControl = CAN1CommManager.DATA_STATE_RIDECONTROL_OFF;
@@ -62,7 +62,7 @@ public class UserData {
 		BrightnessAutoStartTime = 8;
 		BrightnessAutoEndTime = 18;
 		// --, 150407 bwk		
-		DisplayType = Home.DISPLAY_TYPE_A;
+		DisplayType = Home.DISPLAY_TYPE_B;
 		UnitTemp = Home.UNIT_TEMP_C;
 		UnitOdo = Home.UNIT_ODO_KM;
 		UnitWeight = Home.UNIT_WEIGHT_TON;

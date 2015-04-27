@@ -2,6 +2,8 @@ package taeha.wheelloader.fseries_monitor.main.a;
 
 
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -26,6 +28,9 @@ public class MainARightUpEngineModeFragment extends ParentFragment{
 	
 	//VALUABLE////////////////////////////////////////
 	int EngineMode;
+	
+	int CursurIndex;
+	Handler HandleCursurDisplay;
 	//////////////////////////////////////////////////
 	
 	//ANIMATION///////////////////////////////////////
@@ -49,6 +54,12 @@ public class MainARightUpEngineModeFragment extends ParentFragment{
 		InitButtonListener();
 
 		ParentActivity.ScreenIndex = ParentActivity.SCREEN_STATE_MAIN_A_RIGHTUP_ENGINE_MODE;
+		HandleCursurDisplay = new Handler() {
+			@Override
+			public void handleMessage(Message msg) {
+				CursurDisplay(msg.what);
+			}
+		};		
 		return mRoot;
 	}
 
@@ -85,6 +96,8 @@ public class MainARightUpEngineModeFragment extends ParentFragment{
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
+				CursurIndex = 1;
+				HandleCursurDisplay.sendMessage(HandleCursurDisplay.obtainMessage(CursurIndex));
 				ClickPower();
 			}
 		});
@@ -93,6 +106,8 @@ public class MainARightUpEngineModeFragment extends ParentFragment{
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
+				CursurIndex = 2;
+				HandleCursurDisplay.sendMessage(HandleCursurDisplay.obtainMessage(CursurIndex));
 				ClickStandard();
 			}
 		});
@@ -101,6 +116,8 @@ public class MainARightUpEngineModeFragment extends ParentFragment{
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
+				CursurIndex = 3;
+				HandleCursurDisplay.sendMessage(HandleCursurDisplay.obtainMessage(CursurIndex));
 				ClickEcono();
 			}
 		});
@@ -138,6 +155,10 @@ public class MainARightUpEngineModeFragment extends ParentFragment{
 		default:
 			break;
 		}
+		
+		CursurIndex = _EngineMode+1;
+		CursurDisplay(CursurIndex);		
+
 	}
 	public void ClickPower(){
 		if(ParentActivity.AnimationRunningFlag == true)
@@ -165,5 +186,71 @@ public class MainARightUpEngineModeFragment extends ParentFragment{
 		CAN1Comm.Set_EnginePowerMode_347_PGN61184_101(CAN1CommManager.DATA_STATE_ENGINE_MODE_ECONO);
 		CAN1Comm.TxCANToMCU(101);
 		ParentActivity._MainABaseFragment.showRightUptoDefaultScreenAnimation();
+	}
+	/////////////////////////////////////////////////////////////////////
+	public void ClickLeft(){
+		switch (CursurIndex) {
+		case 1:
+			CursurIndex = 3;
+			CursurDisplay(CursurIndex);
+			break;
+		case 2:
+		case 3:
+			CursurIndex--;
+			CursurDisplay(CursurIndex);
+			break;
+		default:
+			CursurIndex = 1;
+			CursurDisplay(CursurIndex);
+			break;
+		}
+	}
+	public void ClickRight(){
+		switch (CursurIndex) {
+		case 1:
+		case 2:
+			CursurIndex++;
+			CursurDisplay(CursurIndex);
+			break;
+		case 3:
+		default:
+			CursurIndex = 1;
+			CursurDisplay(CursurIndex);
+			break;
+		}
+	}
+	public void ClickEnter(){
+		switch (CursurIndex) {
+		case 1:
+			ClickPower();
+			break;
+		case 2:
+			ClickStandard();
+			break;
+		case 3:
+			ClickEcono();
+			break;
+		default:
+
+			break;
+		}
+	}
+	public void CursurDisplay(int Index){
+		radioPower.setPressed(false);
+		radioStandard.setPressed(false);
+		radioEcono.setPressed(false);
+		switch (CursurIndex) {
+		case 1:
+			radioPower.setPressed(true);
+			break;
+		case 2:
+			radioStandard.setPressed(true);
+			break;
+		case 3:
+			radioEcono.setPressed(true);
+			break;
+		default:
+			break;
+		}
 	}
 }

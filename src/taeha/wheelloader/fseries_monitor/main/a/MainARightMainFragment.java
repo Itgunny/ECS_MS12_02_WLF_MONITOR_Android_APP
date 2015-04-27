@@ -220,6 +220,7 @@ public class MainARightMainFragment extends ParentFragment{
 				EngineModeDataAnimation.FlipAnimation(textViewModeData,getResources().getString(string.ECONO));
 				break;
 			default:
+				EngineModeDataAnimation.FlipAnimation(textViewModeData,getResources().getString(string.POWER));
 				break;
 			}
 		} catch (IllegalStateException e) {
@@ -325,6 +326,7 @@ public class MainARightMainFragment extends ParentFragment{
 				TMCCOModeDataAnimation.FlipAnimation(textViewCCOModeData,getResources().getString(string.H));
 				break;
 			default:
+				TMCCOModeDataAnimation.FlipAnimation(textViewCCOModeData,getResources().getString(string.OFF));
 				break;
 			}
 		} catch (IllegalStateException e) {
@@ -348,6 +350,7 @@ public class MainARightMainFragment extends ParentFragment{
 				TMShiftModeDataAnimation.FlipAnimation(textViewShiftModeData,getResources().getString(string.AH));
 				break;
 			default:
+				TMShiftModeDataAnimation.FlipAnimation(textViewShiftModeData,getResources().getString(string.MANUAL));
 				break;
 			}
 		} catch (IllegalStateException e) {
@@ -365,6 +368,7 @@ public class MainARightMainFragment extends ParentFragment{
 				TMTCLockUpDataAnimation.FlipAnimation(textViewTCLockUpData,getResources().getString(string.ON));
 				break;
 			default:
+				TMTCLockUpDataAnimation.FlipAnimation(textViewTCLockUpData,getResources().getString(string.OFF));
 				break;
 			}
 		} catch (IllegalStateException e) {

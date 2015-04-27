@@ -190,6 +190,7 @@ public class MainBRightUpEngineFragment extends ParentFragment{
 				EngineModeDataAnimation.FlipAnimation(textViewModeData,getResources().getString(string.ECONO));
 				break;
 			default:
+				EngineModeDataAnimation.FlipAnimation(textViewModeData,getResources().getString(string.POWER));
 				break;
 			}
 		} catch (IllegalStateException e) {

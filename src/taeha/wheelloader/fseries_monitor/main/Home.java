@@ -72,7 +72,7 @@ public class Home extends Activity {
 	public static final int VERSION_HIGH 		= 1;
 	public static final int VERSION_LOW 		= 0;
 	public static final int VERSION_SUB_HIGH 	= 4;
-	public static final int VERSION_SUB_LOW 	= 3;
+	public static final int VERSION_SUB_LOW 	= 4;
 	////1.0.2.3
 	// UI B 안 최초 적용 2014.12.10
 	////1.0.2.4
@@ -393,6 +393,15 @@ public class Home extends Activity {
 	// 2. EHCU POUUP 0xFFFF일 경우 막음
 	// 3. 가상키 Not available일 경우 회색 음영 처리(Auto grease, Quick coupler, Ride control, Beacon lamp, Mirror heat)
 	// 4. 장비정보 삭제한 항목 -> Hidden Page에서 보여줌
+	////v1.0.4.4
+	// 1. User Switching / Default -> Display Type : A -> B
+	// 2. User Switching / Default -> CCO MODE : OFF -> H
+	// 3. MCU <-> Monitor 수신 오류 시 값 설정
+	//	- Engine Mode : Power
+	//	- CCO Mode : Off
+	//	- Shift Mode : Manual
+	//	- TC Lock Up : Off
+	// 4. CID 없을 경우 초기 SendCommandTimer 무한으로 도는 현상 개선
 	//////////////////////////////////////////////////////////////////////////////////////
 	
 	// TAG
@@ -970,11 +979,13 @@ public class Home extends Activity {
 	private Timer mMirrorHeatTimer = null;
 	private Timer mAutoGreaseTimer = null;
 	private Timer mCheckMultimediaTimer = null;
+	private Timer mSendCIDTimer = null;
 	
 	// Count
 	int MirrorHeatTimerCount;
 	int AutoGreaseTimerCount;
 	public int BuzzerStopCount;
+	int CIDTimerCount;
 
 	// Flag
 	public boolean AnimationRunningFlag;
@@ -1452,7 +1463,9 @@ public class Home extends Activity {
 			}
 		}
 		/////////////////////////////////////////////
-		_ComponentBasicInformation[Index + Index2+2] = ((VERSION_SUB_HIGH & 0x0F) << 4) + (VERSION_SUB_LOW & 0x0F);
+
+		if(bAsterisk == true)
+			_ComponentBasicInformation[Index + Index2+2] = ((VERSION_SUB_HIGH & 0x0F) << 4) + (VERSION_SUB_LOW & 0x0F);
 
 		CAN1Comm.Set_ComponentCode_1699_PGN65330_MONITOR(_Componentcode);
 		CAN1Comm.Set_ManufacturerCode_1700_PGN65330_MONITOR(_Manufacturecode);
@@ -1490,8 +1503,8 @@ public class Home extends Activity {
 		UnitPressure = SharePref.getInt("UnitPressure", UNIT_PRESSURE_BAR);
 		HourOdometerIndex = SharePref.getInt("HourOdometerIndex", CAN1CommManager.DATA_STATE_HOURMETER_LATEST);
 		FuelIndex = SharePref.getInt("FuelIndex", CAN1CommManager.DATA_STATE_AVERAGE_FUEL_RATE);	// ++, --, 150331 bwk			// ++, --, 150407 bwk 초기값 평균연비
-		MachineStatusUpperIndex = SharePref.getInt("MachineStatusUpperIndex", CAN1CommManager.DATA_STATE_MACHINESTATUS_HYD);		// ++, --, 150407 bwk 9A 동일하게(NoSelect -> 작동유)
-		MachineStatusLowerIndex = SharePref.getInt("MachineStatusLowerIndex", CAN1CommManager.DATA_STATE_MACHINESTATUS_COOLANT);	// ++, --, 150407 bwk 9A 동일하게(NoSelect -> 냉각수)
+		MachineStatusUpperIndex = SharePref.getInt("MachineStatusUpperIndex", CAN1CommManager.DATA_STATE_MACHINESTATUS_COOLANT);		// ++, --, 150407 bwk 9A 동일하게(NoSelect -> 작동유)
+		MachineStatusLowerIndex = SharePref.getInt("MachineStatusLowerIndex", CAN1CommManager.DATA_STATE_MACHINESTATUS_BATTERY);	// ++, --, 150407 bwk 9A 동일하게(NoSelect -> 냉각수)
 		WeighingErrorDetect = SharePref.getInt("WeighingErrorDetect", CAN1CommManager.DATA_STATE_WEIGHING_ERRORDETECT_OFF);
 		
 		ActiveCameraNum = SharePref.getInt("ActiveCameraNum", 4);
@@ -1515,7 +1528,7 @@ public class Home extends Activity {
 		strASNumDash = SharePref.getString("strASNumDash", "1899-7282");	// ++, --, 150402 bwk A/S 번호 추가 
 		strASNum = SharePref.getString("strASNum", "18997282");	// ++, --, 150402 bwk A/S 번호 추가 
 		
-		DisplayType = SharePref.getInt("DisplayType", DISPLAY_TYPE_A);	// ++, --, 150323 bwk B->A
+		DisplayType = SharePref.getInt("DisplayType", DISPLAY_TYPE_B);	// ++, --, 150323 bwk B->A
 		setScreenIndex();	// ++, --, 150310 bwk
 		
 		LanguageIndex = SharePref.getInt("LanguageIndex", STATE_DISPLAY_LANGUAGE_ENGLISH);		// ++, --, 150206 bwk
@@ -3027,6 +3040,37 @@ public class Home extends Activity {
 		
 	}
 	
+	public void StartSendCIDTimer(){
+		CIDTimerCount = 0;
+		CancelSendCIDTimer();
+		mSendCIDTimer = new Timer();
+		mSendCIDTimer.schedule(new SendCIDTimerClass(),1,1000);
+	}
+	
+	public void CancelSendCIDTimer(){
+		if(mSendCIDTimer != null){
+			mSendCIDTimer.cancel();
+			mSendCIDTimer.purge();
+			mSendCIDTimer = null;
+		}
+		
+	}
+	
+	public class SendCIDTimerClass extends TimerTask{
+
+		@Override
+		public void run() {
+			// TODO Auto-generated method stub
+			Log.d(TAG, "CIDTimerCount"+CIDTimerCount);
+			CIDTimerCount++;
+			if(CIDTimerCount > 20){
+				CancelSendCIDTimer();
+			}else{
+				SendCID();
+			}
+		}
+		
+	}	
 	
 	public void StartSendCommandTimer(){
 		CancelSendCommandTimer();
@@ -3049,7 +3093,7 @@ public class Home extends Activity {
 		public void run() {
 			// TODO Auto-generated method stub
 			// TODO Auto-generated method stub
-			Log.d(TAG,"mSendCommandTimer");	
+			Log.d(TAG,"mSendCommandTimer"+nSendCommandTimerIndex);	
 						
 			try {
 				if(nSendCommandTimerIndex == 0){
@@ -3099,12 +3143,13 @@ public class Home extends Activity {
 				}
 				else if(nSendCommandTimerIndex == 8){
 					SendDTCIndex = REQ_ERR_TM_ACTIVE;
-					//CancelSendCommandTimer();
-					SendCID();
+					StartSendCIDTimer();
+					CancelSendCommandTimer();
+					//SendCID();
 				}
 				else {
-					SendCID();
-					if(nSendCommandTimerIndex >= 27)
+	//				SendCID();
+	//				if(nSendCommandTimerIndex >= 27)
 						CancelSendCommandTimer();
 				}
 				nSendCommandTimerIndex++;
