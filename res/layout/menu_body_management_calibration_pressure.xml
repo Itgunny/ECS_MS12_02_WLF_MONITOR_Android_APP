@@ -58,7 +58,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="64dp"
+        android:layout_marginTop="55dp"
         android:src="@drawable/line_menu_step1" />
 
     <RelativeLayout
@@ -86,7 +86,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/textView_menu_body_management_calibration_pressure_main_step_1"
-            android:layout_marginTop="5dp"
+            android:layout_marginTop="3dp"
             android:text="2. "
             android:textAppearance="?android:attr/textAppearanceLarge" />
 
@@ -95,7 +95,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/textView_menu_body_management_calibration_pressure_main_step_2"
-            android:layout_marginTop="5dp"
+            android:layout_marginTop="3dp"
             android:text="* "
             android:textAppearance="?android:attr/textAppearanceLarge"
             android:textColor="@color/gray" />
@@ -113,7 +113,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/textView_menu_body_management_calibration_pressure_main_step_1"
-            android:layout_marginTop="5dp"
+            android:layout_marginTop="3dp"
             android:layout_toRightOf="@+id/textView_menu_body_management_calibration_pressure_main_order_2"
             android:text="@string/Press_Start_button_lift_the_boom_with_the_hydraulic_control_in_detent_position"
             android:textAppearance="?android:attr/textAppearanceLarge" />
@@ -123,7 +123,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/textView_menu_body_management_calibration_pressure_main_step_2"
-            android:layout_marginTop="5dp"
+            android:layout_marginTop="3dp"
             android:layout_toRightOf="@+id/textView_menu_body_management_calibration_pressure_main_order_3"
             android:text="@string/Boom_lifting_will_be_stopped_automatically_at_a_certain_position_and_calibration_is_completed"
             android:textAppearance="?android:attr/textAppearanceLarge"
@@ -134,7 +134,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_above="@+id/textView_menu_body_management_calibration_pressure_main_warning"
-            android:layout_marginTop="5dp"
             android:text="@string/HYD_Temp"
             android:textAppearance="?android:attr/textAppearanceLarge"
             android:textColor="@color/white" />
@@ -145,7 +144,6 @@
             android:layout_height="wrap_content"
             android:layout_above="@+id/textView_menu_body_management_calibration_pressure_main_warning"
             android:layout_toRightOf="@+id/textView_menu_body_management_calibration_pressure_main_HYD_Temp"
-           android:layout_marginTop="5dp"
             android:layout_marginLeft="5dp"
             android:text=":"
             android:textAppearance="?android:attr/textAppearanceLarge"

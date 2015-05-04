@@ -612,6 +612,9 @@ public class SpeedometerFreqFragment extends ParentFragment{
 		
 		SpeedometerFreq = CAN1Comm.Get_SpeedometerFrequency_534_PGN61184_106();
 		
+		if(SpeedometerFreq == 0xFFFF)
+			SpeedometerFreq = 0;
+		
 		SpeedometerFreq_Num10 = SpeedometerFreq / 1000;
 		SpeedometerFreq_Num1 = (SpeedometerFreq % 1000) / 100;
 		SpeedometerFreq_Num_Under1 = (SpeedometerFreq % 100) / 10;

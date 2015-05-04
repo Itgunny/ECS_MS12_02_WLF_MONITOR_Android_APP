@@ -199,7 +199,7 @@ public class MainBRightDownTMFragment extends ParentFragment{
 				TMCCOModeDataAnimation.FlipAnimation(textViewCCOModeData,getResources().getString(string.H));
 				break;
 			default:
-				TMCCOModeDataAnimation.FlipAnimation(textViewCCOModeData,getResources().getString(string.OFF));
+//				TMCCOModeDataAnimation.FlipAnimation(textViewCCOModeData,getResources().getString(string.OFF));
 				break;
 			}
 		} catch (IllegalStateException e) {
@@ -223,7 +223,7 @@ public class MainBRightDownTMFragment extends ParentFragment{
 				TMShiftModeDataAnimation.FlipAnimation(textViewShiftModeData,getResources().getString(string.AH));
 				break;
 			default:
-				TMShiftModeDataAnimation.FlipAnimation(textViewShiftModeData,getResources().getString(string.MANUAL));
+//				TMShiftModeDataAnimation.FlipAnimation(textViewShiftModeData,getResources().getString(string.MANUAL));
 				break;
 			}
 		} catch (IllegalStateException e) {
@@ -241,7 +241,7 @@ public class MainBRightDownTMFragment extends ParentFragment{
 				TMTCLockUpDataAnimation.FlipAnimation(textViewTCLockUpData,getResources().getString(string.ON));
 				break;
 			default:
-				TMTCLockUpDataAnimation.FlipAnimation(textViewTCLockUpData,getResources().getString(string.OFF));
+//				TMTCLockUpDataAnimation.FlipAnimation(textViewTCLockUpData,getResources().getString(string.OFF));
 				break;
 			}
 		} catch (IllegalStateException e) {
@@ -256,7 +256,10 @@ public class MainBRightDownTMFragment extends ParentFragment{
 			ParentActivity.StartAnimationRunningTimer();
 		
 		ParentActivity._MainBBaseFragment._MainBCenterTMFragment = new MainBCenterTMFragment();
-		ParentActivity._MainBBaseFragment._MainBRightDownTMCCOModeFragment = new MainBRightDownTMCCOModeFragment();
+		if(ParentActivity._CheckModel.GetMCUVersion(CAN1Comm.Get_ComponentBasicInformation_1698_PGN65330()) == CheckModel.MODEL_980)
+			ParentActivity._MainBBaseFragment._MainBRightDownTMICCOModeFragment = new MainBRightDownTMICCOModeFragment();
+		else
+			ParentActivity._MainBBaseFragment._MainBRightDownTMCCOModeFragment = new MainBRightDownTMCCOModeFragment();
 		ParentActivity._MainBBaseFragment._MainBodyShiftAnimation.StartShiftRightDownAnimation();
 		ParentActivity._MainBBaseFragment.CenterAnimation.StartChangeAnimation(ParentActivity._MainBBaseFragment._MainBCenterTMFragment);
 		
@@ -333,4 +336,20 @@ public class MainBRightDownTMFragment extends ParentFragment{
 		imgbtnShiftMode.setClickable(ClickFlag);
 		imgbtnTCLockUp.setClickable(ClickFlag);
 	}
+	public void CursurDisplayDetail(int index){
+		imgbtnCCOMode.setBackgroundResource(R.drawable._selector_rightdown_main_b_tm_ccomode_btn1);
+		imgbtnShiftMode.setBackgroundResource(R.drawable._selector_rightdown_main_b_tm_shiftmode_btn1);
+		imgbtnTCLockUp.setBackgroundResource(R.drawable._selector_rightdown_main_b_tm_tclockup_btn1);
+		switch(index){
+			case 7:
+				imgbtnCCOMode.setBackgroundResource(R.drawable.main_default_tm01_selected02);
+				break;
+			case 8:
+				imgbtnShiftMode.setBackgroundResource(R.drawable.main_default_tm02_selected02);
+				break;
+			case 9:
+				imgbtnShiftMode.setBackgroundResource(R.drawable.main_default_tm03_selected02);
+				break;
+		}
+	}	
 }

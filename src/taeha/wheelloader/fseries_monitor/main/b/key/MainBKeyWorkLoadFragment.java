@@ -32,6 +32,7 @@ public class MainBKeyWorkLoadFragment extends ParentFragment{
 	TextView textViewErrorDetectData;
 	
 	TextView textViewPressureCalibration;
+	TextView textViewInitialization;
 	//////////////////////////////////////////////////
 	
 	//VALUABLE////////////////////////////////////////
@@ -85,6 +86,24 @@ public class MainBKeyWorkLoadFragment extends ParentFragment{
 		textViewErrorDetectData = (TextView)mRoot.findViewById(R.id.textView_key_main_b_workload_errordetect_data);
 		
 		textViewPressureCalibration = (TextView)mRoot.findViewById(R.id.textView_key_main_b_workload_calibration);
+		textViewInitialization = (TextView)mRoot.findViewById(R.id.textView_key_main_b_workload_initialization);
+		
+		float fontsize;
+		if(ParentActivity.LanguageIndex == Home.STATE_DISPLAY_LANGUAGE_KOREAN)
+			fontsize = 22;
+		else if(ParentActivity.LanguageIndex == Home.STATE_DISPLAY_LANGUAGE_ENGLISH
+				|| ParentActivity.LanguageIndex == Home.STATE_DISPLAY_LANGUAGE_SWEDISH)
+			fontsize = 20;
+		else if(ParentActivity.LanguageIndex == Home.STATE_DISPLAY_LANGUAGE_TURKISH
+				|| ParentActivity.LanguageIndex == Home.STATE_DISPLAY_LANGUAGE_SPANISH
+				|| ParentActivity.LanguageIndex == Home.STATE_DISPLAY_LANGUAGE_GERMAN)
+			fontsize = 15;
+		else if(ParentActivity.LanguageIndex == Home.STATE_DISPLAY_LANGUAGE_ITALIAN)
+			fontsize = 13;
+		else
+			fontsize = 18;
+		
+		textViewPressureCalibration.setTextSize(fontsize);
 		
 	}
 	
@@ -153,7 +172,14 @@ public class MainBKeyWorkLoadFragment extends ParentFragment{
 				ClickCalibration();
 			}
 		});
-		
+		textViewInitialization.setOnClickListener(new View.OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				ClickInitial();
+			}
+		});
 	}
 
 	@Override
@@ -259,7 +285,11 @@ public class MainBKeyWorkLoadFragment extends ParentFragment{
 		ParentActivity.OldScreenIndex = Home.SCREEN_STATE_MAIN_B_TOP;
 		ParentActivity._MenuBaseFragment.setFirstScreenIndex(Home.SCREEN_STATE_MENU_MODE_ETC_CALIBRATION_PRESSURE_TOP);
 	}
-	
+	public void ClickInitial(){
+		ParentActivity.OldScreenIndex = ParentActivity.ScreenIndex;
+		ParentActivity.showWorkLoadWeighingInit1();
+	}
+
 	// ++, 150210 bwk
 	public void SetDefault(){
 		CAN1Comm.Set_WeighingSystemAccumulationMode_1941_PGN61184_62(CAN1CommManager.DATA_STATE_WEIGHING_ACCUMULATION_AUTO);

@@ -1,5 +1,8 @@
 package taeha.wheelloader.fseries_monitor.main.b;
 
+import java.util.Timer;
+import java.util.TimerTask;
+
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
@@ -10,10 +13,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.RadioButton;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import taeha.wheelloader.fseries_monitor.main.CAN1CommManager;
 import taeha.wheelloader.fseries_monitor.main.ParentFragment;
 import taeha.wheelloader.fseries_monitor.main.R;
+import taeha.wheelloader.fseries_monitor.main.a.MainALeftDownFuelSelectFragment.EnableButtonTimerClass;
 
 public class MainBLeftDownFuelSelectFragment extends ParentFragment{
 	//CONSTANT////////////////////////////////////////
@@ -23,11 +28,14 @@ public class MainBLeftDownFuelSelectFragment extends ParentFragment{
 	RadioButton radioAverageFuel;
 	RadioButton radioADaysFuelUsed;
 	
+	RelativeLayout LayoutBG;
 	//////////////////////////////////////////////////
 	
 	//VALUABLE////////////////////////////////////////
 	int CursurIndex;
 	Handler HandleCursurDisplay;
+	
+	Timer	mEnableButtonTimer = null;
 	//////////////////////////////////////////////////
 	
 	//ANIMATION///////////////////////////////////////
@@ -50,6 +58,8 @@ public class MainBLeftDownFuelSelectFragment extends ParentFragment{
 		InitValuables();
 		InitButtonListener();
 
+		EnableRadioButton(false);
+		StartEnableButtonTimer();
 		ParentActivity.ScreenIndex = ParentActivity.SCREEN_STATE_MAIN_B_LEFTDOWN_FUEL;
 		HandleCursurDisplay = new Handler() {
 			@Override
@@ -83,6 +93,8 @@ public class MainBLeftDownFuelSelectFragment extends ParentFragment{
 		// TODO Auto-generated method stub
 		radioAverageFuel = (RadioButton)mRoot.findViewById(R.id.radioButton_leftdown_main_b_fuel_select_averagefuelrate);
 		radioADaysFuelUsed = (RadioButton)mRoot.findViewById(R.id.radioButton_leftdown_main_b_fuel_select_adaysfuelused);
+		
+		LayoutBG = (RelativeLayout)mRoot.findViewById(R.id.RelativeLayout_leftdown_main_b_fuelselect);
 	}
 	
 	protected void InitValuables() {
@@ -173,6 +185,43 @@ public class MainBLeftDownFuelSelectFragment extends ParentFragment{
 		Log.d(TAG,"SavePref");
 	}
 	/////////////////////////////////////////////////////////////////////
+	public class EnableButtonTimerClass extends TimerTask{
+
+		@Override
+		public void run() {
+			// TODO Auto-generated method stub
+			ParentActivity.runOnUiThread(new Runnable() {
+				
+				@Override
+				public void run() {
+					// TODO Auto-generated method stub
+					if(ParentActivity.AnimationRunningFlag == false)
+					{
+						CancelEnableButtonTimer();
+						EnableRadioButton(true);
+					}
+				}
+			});
+			
+		}
+		
+	}
+	
+	public void StartEnableButtonTimer(){
+		CancelEnableButtonTimer();
+		mEnableButtonTimer = new Timer();
+		mEnableButtonTimer.schedule(new EnableButtonTimerClass(),1,50);	
+	}
+	
+	public void CancelEnableButtonTimer(){
+		if(mEnableButtonTimer != null){
+			mEnableButtonTimer.cancel();
+			mEnableButtonTimer.purge();
+			mEnableButtonTimer = null;
+		}
+		
+	}
+	/////////////////////////////////////////////////////////////////////
 	public void ClickLeft(){
 		switch (CursurIndex) {
 		case 1:
@@ -214,6 +263,18 @@ public class MainBLeftDownFuelSelectFragment extends ParentFragment{
 
 			break;
 		}
+	}
+	public void EnableRadioButton(boolean bEnable){
+		float alpha;
+		if(bEnable == true)
+			alpha = (float)1;
+		else
+			alpha = (float)0;
+		
+		LayoutBG.setAlpha(alpha);
+
+		radioAverageFuel.setClickable(bEnable);
+		radioADaysFuelUsed.setClickable(bEnable);
 	}
 	public void CursurDisplay(int Index){
 		radioAverageFuel.setPressed(false);

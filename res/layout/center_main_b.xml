@@ -14,7 +14,7 @@
 	        android:id="@+id/imageButton_center_main_b_option"
 	        android:layout_width="wrap_content"
 	        android:layout_height="wrap_content"
-	        android:background="@drawable/_selector_center_main_b_btn" />
+	        android:background="@drawable/_selector_center_main_b_quick_btn" />
 	        
 	    <ImageView
 	        android:id="@+id/imageView_center_main_b_eco_title"

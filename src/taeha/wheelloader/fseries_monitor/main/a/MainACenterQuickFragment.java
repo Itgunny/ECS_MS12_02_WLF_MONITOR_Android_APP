@@ -118,7 +118,9 @@ public class MainACenterQuickFragment extends MainACenterFragment{
 			}
 		});
 	}
-	
+
+	/////////////////////////////////////////////////////////////////////
+
 	@Override
 	protected void GetDataFromNative() {
 		// TODO Auto-generated method stub
@@ -203,5 +205,18 @@ public class MainACenterQuickFragment extends MainACenterFragment{
 		imgbtnMedia.setClickable(flag);
 		imgbtnKeypad.setClickable(flag);
 	}
+	//////////////////////////////////////////////////////////////////////
+	public void IconDisplay(int _fault, int _maint){
+		if(_fault == CAN1CommManager.DATA_STATE_LAMP_ON && _maint == CAN1CommManager.DATA_STATE_LAMP_ON){
+			imgbtnOption.setBackgroundResource(R.drawable._selector_center_main_a_faultmaint_btn);
+		}else if(_fault == CAN1CommManager.DATA_STATE_LAMP_ON){
+			imgbtnOption.setBackgroundResource(R.drawable._selector_center_main_a_fault_btn);
+		}else if(_maint == CAN1CommManager.DATA_STATE_LAMP_ON){
+			imgbtnOption.setBackgroundResource(R.drawable._selector_center_main_a_maint_btn);
+		}else{
+			imgbtnOption.setBackgroundResource(R.drawable._selector_center_main_a_home_btn);
+		}
+	}
+
 	
 }

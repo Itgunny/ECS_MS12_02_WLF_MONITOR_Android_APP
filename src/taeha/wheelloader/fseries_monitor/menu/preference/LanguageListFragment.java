@@ -1,5 +1,8 @@
 package taeha.wheelloader.fseries_monitor.menu.preference;
 
+import java.util.Timer;
+import java.util.TimerTask;
+
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -8,10 +11,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.RadioButton;
+import android.widget.RelativeLayout;
+import taeha.wheelloader.fseries_monitor.main.CAN1CommManager;
 import taeha.wheelloader.fseries_monitor.main.Home;
 import taeha.wheelloader.fseries_monitor.main.LanguageClass;
 import taeha.wheelloader.fseries_monitor.main.ParentFragment;
 import taeha.wheelloader.fseries_monitor.main.R;
+import taeha.wheelloader.fseries_monitor.main.Home.SeatBeltTimerClass;
 
 public class LanguageListFragment extends ParentFragment{
 	//CONSTANT////////////////////////////////////////
@@ -37,6 +43,8 @@ public class LanguageListFragment extends ParentFragment{
 	RadioButton radioSlovakian;
 	RadioButton radioEstonian;
 	RadioButton radioTurkish;
+	
+	RelativeLayout	LayoutBG;
 	//////////////////////////////////////////////////
 	
 	//VALUABLE////////////////////////////////////////
@@ -45,6 +53,8 @@ public class LanguageListFragment extends ParentFragment{
 	
 	Handler HandleCursurDisplay;
 	int CursurIndex;
+	
+	Timer	mEnableButtonTimer = null;
 	//////////////////////////////////////////////////
 	
 	//Fragment////////////////////////////////////////
@@ -71,12 +81,14 @@ public class LanguageListFragment extends ParentFragment{
 		InitButtonListener();
 		
 		CursurFirstDisplay(ParentActivity.LanguageIndex);
+		EnableRadioButton(false);
+		StartEnableButtonTimer();
 		ParentActivity.ScreenIndex = ParentActivity.SCREEN_STATE_MENU_PREFERENCE_DISPLAYTYPELANG_LANG_CHANGE;
 		ParentActivity._MenuBaseFragment._MenuInterTitleFragment.SetTitleText(ParentActivity.getResources().getString(R.string.Language));
 		HandleCursurDisplay = new Handler() {
 			@Override
 			public void handleMessage(Message msg) {
-				CursurDisplay(msg.what);
+					CursurDisplay(msg.what);
 			}
 		};
 		
@@ -119,13 +131,14 @@ public class LanguageListFragment extends ParentFragment{
 		radioEstonian = (RadioButton)mRoot.findViewById(R.id.radioButton_menu_body_preference_Lang12);
 		radioTurkish = (RadioButton)mRoot.findViewById(R.id.radioButton_menu_body_preference_Lang13);
 		// --, 150225 bwk
+		
+		LayoutBG = (RelativeLayout)mRoot.findViewById(R.id.RelativeLayout_menu_body_preference_language);
 	}
 
 	@Override
 	protected void InitButtonListener() {
 		// TODO Auto-generated method stub
 		radioKorean.setOnClickListener(new View.OnClickListener() {
-			
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
@@ -266,9 +279,44 @@ public class LanguageListFragment extends ParentFragment{
 	@Override
 	protected void UpdateUI() {
 		// TODO Auto-generated method stub
+	}
+	/////////////////////////////////////////////////////////////////////
+	public class EnableButtonTimerClass extends TimerTask{
+
+		@Override
+		public void run() {
+			// TODO Auto-generated method stub
+			ParentActivity.runOnUiThread(new Runnable() {
+				
+				@Override
+				public void run() {
+					// TODO Auto-generated method stub
+					if(ParentActivity.AnimationRunningFlag == false)
+					{
+						CancelEnableButtonTimer();
+						EnableRadioButton(true);
+					}
+				}
+			});
+			
+		}
 		
 	}
 	
+	public void StartEnableButtonTimer(){
+		CancelEnableButtonTimer();
+		mEnableButtonTimer = new Timer();
+		mEnableButtonTimer.schedule(new EnableButtonTimerClass(),1,50);	
+	}
+	
+	public void CancelEnableButtonTimer(){
+		if(mEnableButtonTimer != null){
+			mEnableButtonTimer.cancel();
+			mEnableButtonTimer.purge();
+			mEnableButtonTimer = null;
+		}
+		
+	}
 	/////////////////////////////////////////////////////////////////////
 	public void ClickLeft(){
 		switch (CursurIndex) {
@@ -447,7 +495,32 @@ public class LanguageListFragment extends ParentFragment{
 		CheckButtonDisplay(CursurIndex);
 	}
 	
+	public void EnableRadioButton(boolean bEnable){
+		float alpha;
+		if(bEnable == true)
+			alpha = (float)1;
+		else
+			alpha = (float)0;
+		
+		LayoutBG.setAlpha(alpha);
+
+		radioKorean.setClickable(bEnable);
+		radioEnglish.setClickable(bEnable);
+		radioGerman.setClickable(bEnable);
+		radioFrench.setClickable(bEnable);
+		radioSpanish.setClickable(bEnable);
+		radioPortuguese.setClickable(bEnable);
+		radioItalian.setClickable(bEnable);
+		radioDutch.setClickable(bEnable);
+		radioSwedish.setClickable(bEnable);
+		radioTurkish.setClickable(bEnable);
+		radioSlovakian.setClickable(bEnable);
+		radioEstonian.setClickable(bEnable);
+		radioFinnish.setClickable(bEnable);		
+	}
+	
 	public void CursurDisplay(int Index){
+		CheckButtonDisplay(Index);
 		radioKorean.setPressed(false);
 		radioEnglish.setPressed(false);
 		radioGerman.setPressed(false);
@@ -579,7 +652,10 @@ public class LanguageListFragment extends ParentFragment{
 		if(ParentActivity.OldScreenIndex == ParentActivity.SCREEN_STATE_MENU_PREFERENCE_DISPLAYTYPELANG_TOP)
 		{
 			if(ParentActivity.AnimationRunningFlag == true)
+			{
+				Log.d(TAG, "ParentActivity.AnimationRunningFlag == true");
 				return;
+			}
 			else
 				ParentActivity.StartAnimationRunningTimer();
 			

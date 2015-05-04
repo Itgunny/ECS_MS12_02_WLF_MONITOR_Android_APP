@@ -1,13 +1,19 @@
 package taeha.wheelloader.fseries_monitor.main.a;
 
 
+import java.util.Timer;
+import java.util.TimerTask;
+
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.RadioButton;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import taeha.wheelloader.fseries_monitor.main.CAN1CommManager;
 import taeha.wheelloader.fseries_monitor.main.ParentFragment;
@@ -22,10 +28,16 @@ public class MainARightDownTMCCOModeFragment extends ParentFragment{
 	RadioButton radioL;
 	RadioButton radioM;
 	RadioButton radioH;
+	
+	RelativeLayout LayoutBG;
 	//////////////////////////////////////////////////
 	
 	//VALUABLE////////////////////////////////////////
 	int CCOMode;
+	int CursurIndex;
+	Handler HandleCursurDisplay;
+	
+	Timer	mEnableButtonTimer = null;
 	//////////////////////////////////////////////////
 	
 	//ANIMATION///////////////////////////////////////
@@ -48,7 +60,15 @@ public class MainARightDownTMCCOModeFragment extends ParentFragment{
 		InitValuables();
 		InitButtonListener();
 		
+		EnableRadioButton(false);
+		StartEnableButtonTimer();
 		ParentActivity.ScreenIndex = ParentActivity.SCREEN_STATE_MAIN_A_RIGHTDOWN_CCOMODE;
+		HandleCursurDisplay = new Handler() {
+			@Override
+			public void handleMessage(Message msg) {
+				CursurDisplay(msg.what);
+			}
+		};		
 		return mRoot;
 	}
 
@@ -71,6 +91,7 @@ public class MainARightDownTMCCOModeFragment extends ParentFragment{
 		radioM = (RadioButton)mRoot.findViewById(R.id.radioButton_rightdown_main_a_tmccomode_m);
 		radioH = (RadioButton)mRoot.findViewById(R.id.radioButton_rightdown_main_a_tmccomode_h);
 		
+		LayoutBG = (RelativeLayout)mRoot.findViewById(R.id.RelativeLayout_rightdown_main_a_tmccomode);
 	}
 	
 	protected void InitValuables() {
@@ -88,6 +109,8 @@ public class MainARightDownTMCCOModeFragment extends ParentFragment{
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
+				CursurIndex = 1;
+				HandleCursurDisplay.sendMessage(HandleCursurDisplay.obtainMessage(CursurIndex));
 				ClickOff();
 			}
 		});
@@ -96,6 +119,8 @@ public class MainARightDownTMCCOModeFragment extends ParentFragment{
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
+				CursurIndex = 2;
+				HandleCursurDisplay.sendMessage(HandleCursurDisplay.obtainMessage(CursurIndex));
 				ClickL();
 			}
 		});
@@ -104,6 +129,8 @@ public class MainARightDownTMCCOModeFragment extends ParentFragment{
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
+				CursurIndex = 3;
+				HandleCursurDisplay.sendMessage(HandleCursurDisplay.obtainMessage(CursurIndex));
 				ClickM();
 			}
 		});
@@ -112,6 +139,8 @@ public class MainARightDownTMCCOModeFragment extends ParentFragment{
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
+				CursurIndex = 4;
+				HandleCursurDisplay.sendMessage(HandleCursurDisplay.obtainMessage(CursurIndex));
 				ClickH();
 			}
 		});
@@ -162,6 +191,8 @@ public class MainARightDownTMCCOModeFragment extends ParentFragment{
 		default:
 			break;
 		}
+		CursurIndex = Data+1;
+		CursurDisplay(CursurIndex);	
 
 	}
 
@@ -206,4 +237,132 @@ public class MainARightDownTMCCOModeFragment extends ParentFragment{
 		ParentActivity._MainABaseFragment.showRightDowntoDefaultScreenAnimation();
 
 	}
-}
+	/////////////////////////////////////////////////////////////////////
+	public class EnableButtonTimerClass extends TimerTask{
+
+		@Override
+		public void run() {
+			// TODO Auto-generated method stub
+			ParentActivity.runOnUiThread(new Runnable() {
+				
+				@Override
+				public void run() {
+					// TODO Auto-generated method stub
+					if(ParentActivity.AnimationRunningFlag == false)
+					{
+						CancelEnableButtonTimer();
+						EnableRadioButton(true);
+					}
+				}
+			});
+			
+		}
+		
+	}
+	
+	public void StartEnableButtonTimer(){
+		CancelEnableButtonTimer();
+		mEnableButtonTimer = new Timer();
+		mEnableButtonTimer.schedule(new EnableButtonTimerClass(),1,50);	
+	}
+	
+	public void CancelEnableButtonTimer(){
+		if(mEnableButtonTimer != null){
+			mEnableButtonTimer.cancel();
+			mEnableButtonTimer.purge();
+			mEnableButtonTimer = null;
+		}
+		
+	}
+	/////////////////////////////////////////////////////////////////////
+	public void ClickLeft(){
+		switch (CursurIndex) {
+		case 1:
+			CursurIndex = 4;
+			CursurDisplay(CursurIndex);
+			break;
+		case 2:
+		case 3:
+		case 4:
+			CursurIndex--;
+			CursurDisplay(CursurIndex);
+			break;
+		default:
+			CursurIndex = 1;
+			CursurDisplay(CursurIndex);
+			break;
+		}
+	}
+	public void ClickRight(){
+		switch (CursurIndex) {
+		case 1:
+		case 2:
+		case 3:
+			CursurIndex++;
+			CursurDisplay(CursurIndex);
+			break;
+		case 4:
+		default:
+			CursurIndex = 1;
+			CursurDisplay(CursurIndex);
+			break;
+		}
+	}
+	public void ClickEnter(){
+		switch (CursurIndex) {
+		case 1:
+			ClickOff();
+			break;
+		case 2:
+			ClickL();
+			break;
+		case 3:
+			ClickM();
+			break;
+		case 4:
+			ClickH();
+			break;
+		default:
+
+			break;
+		}
+	}
+
+	public void EnableRadioButton(boolean bEnable){
+		float alpha;
+		if(bEnable == true)
+			alpha = (float)1;
+		else
+			alpha = (float)0;
+		
+		LayoutBG.setAlpha(alpha);
+		
+		radioOff.setClickable(bEnable);
+		radioL.setClickable(bEnable);
+		radioM.setClickable(bEnable);
+		radioH.setClickable(bEnable);
+	}
+		
+	public void CursurDisplay(int Index){
+		radioOff.setPressed(false);
+		radioL.setPressed(false);
+		radioM.setPressed(false);
+		radioH.setPressed(false);
+		switch (CursurIndex) {
+		case 1:
+			radioOff.setPressed(true);
+			break;
+		case 2:
+			radioL.setPressed(true);
+			break;
+		case 3:
+			radioM.setPressed(true);
+			break;
+		case 4:
+			radioH.setPressed(true);
+			break;
+		default:
+			break;
+		}
+	}
+}	

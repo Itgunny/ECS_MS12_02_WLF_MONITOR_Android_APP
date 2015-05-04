@@ -1,6 +1,7 @@
 package taeha.wheelloader.fseries_monitor.main.b;
 
 import taeha.wheelloader.fseries_monitor.main.CAN1CommManager;
+import taeha.wheelloader.fseries_monitor.main.Home;
 import taeha.wheelloader.fseries_monitor.main.R;
 import android.os.Bundle;
 import android.util.Log;
@@ -109,4 +110,17 @@ public class MainBCenterQuickFragment extends MainBCenterFragment{
 	public void Clickable(boolean flag){
 		imgbtnOption.setClickable(flag);
 	}
+	/////////////////////////////////////////////////////////////////////	
+	public void IconDisplay(int _fault, int _maint){
+		if(_fault == CAN1CommManager.DATA_STATE_LAMP_ON && _maint == CAN1CommManager.DATA_STATE_LAMP_ON){
+			imgbtnOption.setBackgroundResource(R.drawable._selector_center_main_b_faultmaint_btn);
+		}else if(_fault == CAN1CommManager.DATA_STATE_LAMP_ON){
+			imgbtnOption.setBackgroundResource(R.drawable._selector_center_main_b_fault_btn);
+		}else if(_maint == CAN1CommManager.DATA_STATE_LAMP_ON){
+			imgbtnOption.setBackgroundResource(R.drawable._selector_center_main_b_maint_btn);
+		}else{
+			imgbtnOption.setBackgroundResource(R.drawable._selector_center_main_b_home_btn);
+		}
+	}
+
 }

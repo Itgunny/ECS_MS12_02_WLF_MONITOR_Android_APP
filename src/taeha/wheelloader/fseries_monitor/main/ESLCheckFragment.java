@@ -226,7 +226,7 @@ public class ESLCheckFragment extends ParentFragment{
 		// ++, 150309 bwk
 			//ParentActivity._MainChangeAnimation.StartChangeAnimation(ParentActivity._MainBBaseFragment);
 			ParentActivity.showMainScreen();
-			ParentActivity.setScreenIndex();
+//			ParentActivity.setScreenIndex();
 		// --, 150309 bwk
 	//	}
 	}

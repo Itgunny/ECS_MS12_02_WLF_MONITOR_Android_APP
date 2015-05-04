@@ -396,12 +396,23 @@ public class Home extends Activity {
 	////v1.0.4.4
 	// 1. User Switching / Default -> Display Type : A -> B
 	// 2. User Switching / Default -> CCO MODE : OFF -> H
-	// 3. MCU <-> Monitor 수신 오류 시 값 설정
-	//	- Engine Mode : Power
-	//	- CCO Mode : Off
-	//	- Shift Mode : Manual
-	//	- TC Lock Up : Off
-	// 4. CID 없을 경우 초기 SendCommandTimer 무한으로 도는 현상 개선
+	// 3. CID 없을 경우 초기 SendCommandTimer 무한으로 도는 현상 개선
+	// 4. 부팅 시 Main 애니메이션 전 키 무작위로 누를 경우 Crash일어나는 현상 막음(setScreenIndex 주석처리)
+	// 5. 페이지 이동 후 라이오버튼 클릭으로 나오는 페이지일 경우 초기 애니메이션 중 빠르게 다른 항목 누를 경우 이중 선택 혹은 페이지에서 나오지 못하는 현상 발생 
+	//	-> 애니메이션이 완료되면 화면을 활성화
+	//		- 다국어 설정
+	//		- 메인(Fuel Select, ODO/HOURMETER Select, Engine Mode, CCO/ICCO Mode, Shift Mode, T.C.Lock Up)
+	// 6. 다국어 - 한국어, 영어 최종본 적용
+	// 7. 다국어 - 한국어 적용에 따라 보정 - 붐압력 보정 문구가 길어진 관계로 UI 배열 변경
+	// 8. MAIN-KEY-WORKLOAD -> 붐압력보정 버튼 옆에 초기화 버튼 추가
+	// 9. 관리기능 - 관리자메뉴 - 작업량 보정 : CAN 없을 경우 ESC 안먹는 현상 개선
+	// 10. 퀵 메인 -> 홈화면 갈 경우 아이콘 HOME 아이콘으로 변경
+	// 11. 980 장비 Main -> ICCO Mode Change 일때 버그 수정
+	// 12. 속도계설정 : 초기 값이 0xffff인 경우 0으로 표시
+	// 13. 메인 - 장비상태 - 작업량일 경우 Long키로 초기화 팝업 추가
+	//	- 장비상태 위/아래 버튼 활성화 이미지 변경
+	// 14. 메인 키패드 연동(Engine Mode, CCO Mode, ICCO Mode, Shift Mode, TC Lock Up)
+	// 15. RMCU관련 MCU Error Description 추가
 	//////////////////////////////////////////////////////////////////////////////////////
 	
 	// TAG
@@ -1529,7 +1540,7 @@ public class Home extends Activity {
 		strASNum = SharePref.getString("strASNum", "18997282");	// ++, --, 150402 bwk A/S 번호 추가 
 		
 		DisplayType = SharePref.getInt("DisplayType", DISPLAY_TYPE_B);	// ++, --, 150323 bwk B->A
-		setScreenIndex();	// ++, --, 150310 bwk
+//		setScreenIndex();	// ++, --, 150310 bwk
 		
 		LanguageIndex = SharePref.getInt("LanguageIndex", STATE_DISPLAY_LANGUAGE_ENGLISH);		// ++, --, 150206 bwk
 		
@@ -2351,6 +2362,7 @@ public class Home extends Activity {
 //					
 //				}
 //			}
+//		}
 		if(bEHCUErrPopup == false)
 		{
 			if(Data == 0xFFFF || Data == 0x0000)
@@ -2469,6 +2481,10 @@ public class Home extends Activity {
 	}
 	
 	public void KeyButtonClick(final int Data){
+		if(ScreenIndex == 0){
+			Log.d(TAG, "KeyButtonClick:NULL");
+			return;
+		}
 		Log.d(TAG,"KeyButtonClick : ScreenIndex"+Integer.toHexString(ScreenIndex));
 		// TODO Auto-generated method stub
 		if(ScreenIndex == SCREEN_STATE_MAIN_CAMERA_KEY){
@@ -3062,11 +3078,16 @@ public class Home extends Activity {
 		public void run() {
 			// TODO Auto-generated method stub
 			Log.d(TAG, "CIDTimerCount"+CIDTimerCount);
-			CIDTimerCount++;
-			if(CIDTimerCount > 20){
+			if(++CIDTimerCount > 10){
 				CancelSendCIDTimer();
 			}else{
 				SendCID();
+				try {
+					Thread.sleep(200);
+				} catch (InterruptedException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 			}
 		}
 		
@@ -3143,8 +3164,8 @@ public class Home extends Activity {
 				}
 				else if(nSendCommandTimerIndex == 8){
 					SendDTCIndex = REQ_ERR_TM_ACTIVE;
-					StartSendCIDTimer();
 					CancelSendCommandTimer();
+					StartSendCIDTimer();
 					//SendCID();
 				}
 				else {

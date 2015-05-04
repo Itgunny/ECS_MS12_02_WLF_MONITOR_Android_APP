@@ -530,7 +530,7 @@ public class FaultHistoryLoggedFragment extends ParentFragment{
 		int FMI = 0;
 		String str = adapter.getFirst(Index);
 		textViewDetailTitle.setText(str);
-		//Log.d(TAG,"ErrDetailDisplay");
+//		Log.d(TAG,"ErrDetailDisplay:SelectedMode"+SelectedMode);
 		textViewDetail.setText("Not define");
 		if(SelectedMode == Home.REQ_ERR_MACHINE_LOGGED)
 		{
@@ -975,10 +975,13 @@ public class FaultHistoryLoggedFragment extends ParentFragment{
 	static final int SPNDATA[] = {101,101,145,145,172,172,173,173,174,174,181,181,183,183,187,187,202,202,202,202		
 		,203,203,203,203,204,204,204,204,205,205,205,205,301,301,304,304,310,318,322,322,325,325,327,327,346		
 		,346,503,503,503,503,507,507,507,507,551,551,552,552,558,558,558,558,701,705,705,707,723,723,727,727		
-		,728,728,729,729,730,830,840,841,842,843,844,850,869};
+		,728,728,729,729,730,830,840,841,842,843,844,850,869
+		,2000,2000,2001,2001,2002,2003,2003,2004,2005};		// RMCU 관련 오류 추가
 	static final int FMIDATA[] = {3, 4,	5,	6,	4,	6,	4,	6,	4,	6,	4,	6,	4,	6,	4,	6,	0,	1,	2,	4,	0,	1,	2,	4,	0,	
 		1,	2,	4,	0,	1,	2,	4,	3,	4,	3,	4,	8,	8,	4,	6,	4,	6,	4,	6,	3,	4,	0,	1,	2,	4,	0,	1,	2,	4,	3,	4,	3,	
-		4,	0,	1,	2,	4,	4,	0,	1,	1,	3,	4,	4,	6,	3,	4,	3,	4,	19,	12,	2,	2,	2,	2,	2,	2, 2};
+		4,	0,	1,	2,	4,	4,	0,	1,	1,	3,	4,	4,	6,	3,	4,	3,	4,	19,	12,	2,	2,	2,	2,	2,	2,	2,
+		5,	1,	5,	1,	1, 19,	2,	0,	0};		// RMCU 관련 오류 추가
+
 	
 	// ++, 150202 bwk : 150128 HHI 임혁준 요청
 	static final int TCU_SPN[] = {0x10,0x11,0x12,0x13,0x14,0x15,0x16,0x17,0x18,0x19,0x1A,0x1B,0x1C,0x1D,0x1E,0x1F,
@@ -1181,6 +1184,16 @@ public class FaultHistoryLoggedFragment extends ParentFragment{
 		"Monitor Communication Error", 
 		"RCM Communication Error", 
 		"BKCU Communication error",
+		// RMCU 오류 추가
+		"Satellite/Mobile antenna connection is not OK.",
+		"Satellite/Mobile is not linked.",
+		"GPS antenna connection is not OK.",
+		"GPS position is not updated.",
+		"Test message is not transmitted.",
+		"Current gauge request is not received.",
+		"Current gauge reply is not transmitted.",
+		"Step 4",
+		"Step 5",
 		"Not define."	
 	};
 

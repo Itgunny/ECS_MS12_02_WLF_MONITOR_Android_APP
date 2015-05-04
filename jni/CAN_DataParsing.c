@@ -296,7 +296,7 @@ void Send_CID()
 	int Length = 2;
 	int Cnt=0;
 	int i;
-	for(i = 0; i < sizeof(TX_COMPONENT_IDENTIFICATION_MONITOR_65330); i++){
+	for(i = 0; i < 37; i++){
 		if(TX_COMPONENT_IDENTIFICATION_MONITOR_65330.ComponentBasicInformation_1698[i] == 0x2A)
 		{
 			Length++;

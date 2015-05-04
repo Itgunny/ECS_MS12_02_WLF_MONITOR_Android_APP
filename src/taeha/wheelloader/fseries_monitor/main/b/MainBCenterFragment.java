@@ -14,6 +14,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import taeha.wheelloader.fseries_monitor.animation.BarAnimation;
 import taeha.wheelloader.fseries_monitor.main.CAN1CommManager;
+import taeha.wheelloader.fseries_monitor.main.Home;
 import taeha.wheelloader.fseries_monitor.main.ParentFragment;
 import taeha.wheelloader.fseries_monitor.main.R;
 
@@ -33,6 +34,8 @@ public class MainBCenterFragment extends ParentFragment{
 	ImageButton imgbtnOption;
 	
 	RelativeLayout layoutEcoBar;
+	
+	RelativeLayout layoutBG;
 	//////////////////////////////////////////////////
 	
 	//VALUABLE////////////////////////////////////////
@@ -106,7 +109,7 @@ public class MainBCenterFragment extends ParentFragment{
 		
 		layoutEcoBar = (RelativeLayout)mRoot.findViewById(R.id.RelativeLayout_center_main_b_icon_eco_bar);
 		
-		
+		layoutBG = (RelativeLayout)mRoot.findViewById(R.id.RelativeLayout_center_main_b_bg);
 
 	}
 	
@@ -229,7 +232,7 @@ public class MainBCenterFragment extends ParentFragment{
 		}else if(_maint == CAN1CommManager.DATA_STATE_LAMP_ON){
 			imgbtnOption.setBackgroundResource(R.drawable._selector_center_main_b_maint_btn);
 		}else{
-			imgbtnOption.setBackgroundResource(R.drawable._selector_center_main_b_btn);
+			imgbtnOption.setBackgroundResource(R.drawable._selector_center_main_b_quick_btn);
 		}
 	}
 	//////////////////////////////////////////////////////////////////////
@@ -246,4 +249,10 @@ public class MainBCenterFragment extends ParentFragment{
 		}
 	}
 	// --, 150326 bwk	
+	public void CursurDisplayDetail(int index){
+		if(index == 4)
+			layoutBG.setBackgroundResource(R.drawable.main_bg_center);
+		else
+			layoutBG.setBackgroundResource(R.drawable.main_bg_center_s_02);
+	}
 }

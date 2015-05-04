@@ -26,7 +26,7 @@ public class MainBKeyWorkLoadDisplayFragment extends ParentFragment{
 	
 	ImageButton imgbtnOK;
 	
-	TextView textViewInitialization;
+	//TextView textViewInitialization;
 	//////////////////////////////////////////////////
 	
 	//VALUABLE////////////////////////////////////////
@@ -77,7 +77,7 @@ public class MainBKeyWorkLoadDisplayFragment extends ParentFragment{
 		radioTotalC = (RadioButton)mRoot.findViewById(R.id.radioButton_key_main_b_workload_display_totalc);
 			
 		
-		textViewInitialization = (TextView)mRoot.findViewById(R.id.textView_key_main_b_workload_display_init);
+//		textViewInitialization = (TextView)mRoot.findViewById(R.id.textView_key_main_b_workload_display_init);
 		imgbtnOK = (ImageButton)mRoot.findViewById(R.id.ImageButton_key_main_b_workload_display_low_ok);
 	}
 	
@@ -122,14 +122,14 @@ public class MainBKeyWorkLoadDisplayFragment extends ParentFragment{
 				ClickTotalC();
 			}
 		});
-		textViewInitialization.setOnClickListener(new View.OnClickListener() {
-			
-			@Override
-			public void onClick(View v) {
-				// TODO Auto-generated method stub
-				ClickInit();
-			}
-		});
+//		textViewInitialization.setOnClickListener(new View.OnClickListener() {
+//			
+//			@Override
+//			public void onClick(View v) {
+//				// TODO Auto-generated method stub
+//				ClickInit();
+//			}
+//		});
 		imgbtnOK.setOnClickListener(new View.OnClickListener() {
 			
 			@Override
@@ -211,14 +211,14 @@ public class MainBKeyWorkLoadDisplayFragment extends ParentFragment{
 		WeighingDisplayMode = CAN1CommManager.DATA_STATE_WEIGHINGDISPLAY_TOTAL_C;
 		WeighingDisplayDisplay(WeighingDisplayMode);
 	}
-	public void ClickInit(){
-//		CAN1Comm.Set_RequestTotalWorkWeightReset_PGN61184_62(WeighingDisplayMode);
-//		CAN1Comm.Set_RequestReweighing_PGN61184_62(3);
-//		CAN1Comm.TxCANToMCU(62);
-//		CAN1Comm.Set_RequestTotalWorkWeightReset_PGN61184_62(15);
-		ParentActivity.OldScreenIndex = ParentActivity.ScreenIndex;
-		ParentActivity.showWorkLoadWeighingInit1();
-	}
+//	public void ClickInit(){
+////		CAN1Comm.Set_RequestTotalWorkWeightReset_PGN61184_62(WeighingDisplayMode);
+////		CAN1Comm.Set_RequestReweighing_PGN61184_62(3);
+////		CAN1Comm.TxCANToMCU(62);
+////		CAN1Comm.Set_RequestTotalWorkWeightReset_PGN61184_62(15);
+//		ParentActivity.OldScreenIndex = ParentActivity.ScreenIndex;
+//		ParentActivity.showWorkLoadWeighingInit1();
+//	}
 	public void ClickOK(){
 		CAN1Comm.Set_WeighingDisplayMode1_1910_PGN61184_62(WeighingDisplayMode);
 		CAN1Comm.TxCANToMCU(62);

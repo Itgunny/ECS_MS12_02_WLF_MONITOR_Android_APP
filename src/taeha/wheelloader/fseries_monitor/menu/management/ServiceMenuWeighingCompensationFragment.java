@@ -1108,6 +1108,7 @@ public class ServiceMenuWeighingCompensationFragment extends ParentFragment{
 		
 		switch (data) {
 		case CAN1CommManager.DATA_STATE_WEIGHT_OFFSET_SETTING_NOOFFSET:
+		default:
 			CursurIndex = 1;
 			CursurDisplay(CursurIndex);
 			break;
@@ -1122,8 +1123,6 @@ public class ServiceMenuWeighingCompensationFragment extends ParentFragment{
 		case CAN1CommManager.DATA_STATE_WEIGHT_OFFSET_SETTING_WORKTOOL_3:
 			CursurIndex = 4;
 			CursurDisplay(CursurIndex);
-			break;
-		default:
 			break;
 		}
 		

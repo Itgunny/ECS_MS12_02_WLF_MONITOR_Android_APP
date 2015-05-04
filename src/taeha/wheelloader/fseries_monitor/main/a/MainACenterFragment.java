@@ -3,6 +3,7 @@ package taeha.wheelloader.fseries_monitor.main.a;
 
 import taeha.wheelloader.fseries_monitor.animation.GaugerpmAnimation;
 import taeha.wheelloader.fseries_monitor.main.CAN1CommManager;
+import taeha.wheelloader.fseries_monitor.main.Home;
 import taeha.wheelloader.fseries_monitor.main.ParentFragment;
 import taeha.wheelloader.fseries_monitor.main.R;
 import android.os.Bundle;
@@ -177,7 +178,7 @@ public class MainACenterFragment extends ParentFragment{
 		}else if(_maint == CAN1CommManager.DATA_STATE_LAMP_ON){
 			imgbtnOption.setBackgroundResource(R.drawable._selector_center_main_a_maint_btn);
 		}else{
-			imgbtnOption.setBackgroundResource(R.drawable._selector_center_main_a_btn);
+			imgbtnOption.setBackgroundResource(R.drawable._selector_center_main_a_quick_btn);
 		}
 	}
 	//////////////////////////////////////////////////////////////////////

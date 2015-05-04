@@ -22,7 +22,7 @@ public class LongPressChecker {
 	private int mLongPressTimeout;
 	private int mScaledTouchSlope;
 	
-	private View mTargetView;
+	public View mTargetView;
 	private OnLongPressListener mOnLongPressListener;
 	private boolean mLongPressed = false;
 	

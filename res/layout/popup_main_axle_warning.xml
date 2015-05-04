@@ -21,7 +21,7 @@
            android:layout_marginRight="20dp"
            android:layout_toRightOf="@+id/imageView_popup_main_axle_warning"
            android:gravity="left"
-           android:text="@string/Axle_Warning"
+           android:text="@string/Axle_Warning_Popup"
            android:textAppearance="?android:attr/textAppearanceLarge"
            android:textColor="@color/red"
            android:textSize="20sp" />

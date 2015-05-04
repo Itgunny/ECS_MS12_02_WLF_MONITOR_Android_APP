@@ -97,6 +97,7 @@ public class MainBBaseFragment extends ParentFragment{
 	int AEBReq;
 	
 	int FirstScreenIndex;		// ++, --, 150331 bwk
+	int CursurIndex;
 	//////////////////////////////////////////////////
 	
 	//Fragment////////////////////////////////////////
@@ -460,6 +461,7 @@ public class MainBBaseFragment extends ParentFragment{
 		_CenterBGAppearAnimation = new AppearAnimation(ParentActivity, imgViewCenterBG);
 		_VirtualKeyAppearAnimation = new AppearAnimation(ParentActivity, framelayoutVirtualKey);
 
+		CursurIndex = 0;
 	}
 	
 	@Override
@@ -1445,7 +1447,7 @@ public class MainBBaseFragment extends ParentFragment{
 	/////////////////////////////////////////////////////////////////////
 	public void KeyButtonClick(final int key){
 		Log.d(TAG,"KeyButtonClick : 0x" + Integer.toHexString(key));
-		Log.d(TAG,"KeyButtonClick ParentActivity.ScreenIndex"+ParentActivity.ScreenIndex);	
+		Log.d(TAG,"KeyButtonClick ParentActivity.ScreenIndex"+Integer.toHexString(ParentActivity.ScreenIndex));	
 		
 		// TODO Auto-generated method stub
 		switch (key) {
@@ -1601,12 +1603,35 @@ public class MainBBaseFragment extends ParentFragment{
 		case Home.SCREEN_STATE_MAIN_B_RIGHTUP_HOURODMETER:
 			_MainBRightUpHourOdometerSelectFragment.ClickLeft();
 			break;
+		case Home.SCREEN_STATE_MAIN_B_RIGHTUP_ENGINE_MODE:
+			_MainBRightUpEngineModeFragment.ClickLeft();
+			break;
+		case Home.SCREEN_STATE_MAIN_B_RIGHTDOWN_CCOMODE:
+			if(ParentActivity._CheckModel.GetMCUVersion(CAN1Comm.Get_ComponentBasicInformation_1698_PGN65330()) == CheckModel.MODEL_980)
+				_MainBRightDownTMICCOModeFragment.ClickLeft();
+			else
+				_MainBRightDownTMCCOModeFragment.ClickLeft();
+			break;
+		case Home.SCREEN_STATE_MAIN_B_RIGHTDOWN_SHIFTMODE:
+			_MainBRightDownTMShiftModeFragment.ClickLeft();
+			break;
+		case Home.SCREEN_STATE_MAIN_B_RIGHTDOWN_TCLOCKUP:
+			_MainBRightDownTMTCLockUpFragment.ClickLeft();
+			break;
 		case  Home.SCREEN_STATE_MAIN_B_QUICK_MULTICLOSE:
 			ParentActivity._MultimediaClosePopup.ClickLeft();
 			break;
 		case Home.SCREEN_STATE_MAIN_B_QUICK_MIRACLOSE:
 			ParentActivity._MiracastClosePopup.ClickLeft();
 			break;
+		case Home.SCREEN_STATE_MAIN_B_TOP:
+//			if(CursurIndex > 0)
+//				CursurIndex--;
+//			else
+//				CursurIndex = 9;
+//			CursurDisplay(CursurIndex);
+			break;
+			
 		}
 	}
 	
@@ -1627,11 +1652,33 @@ public class MainBBaseFragment extends ParentFragment{
 		case Home.SCREEN_STATE_MAIN_B_RIGHTUP_HOURODMETER:
 			_MainBRightUpHourOdometerSelectFragment.ClickRight();
 			break;
+		case Home.SCREEN_STATE_MAIN_B_RIGHTUP_ENGINE_MODE:
+			_MainBRightUpEngineModeFragment.ClickRight();
+			break;
+		case Home.SCREEN_STATE_MAIN_B_RIGHTDOWN_CCOMODE:
+			if(ParentActivity._CheckModel.GetMCUVersion(CAN1Comm.Get_ComponentBasicInformation_1698_PGN65330()) == CheckModel.MODEL_980)
+				_MainBRightDownTMICCOModeFragment.ClickRight();
+			else
+				_MainBRightDownTMCCOModeFragment.ClickRight();
+			break;
+		case Home.SCREEN_STATE_MAIN_B_RIGHTDOWN_SHIFTMODE:
+			_MainBRightDownTMShiftModeFragment.ClickRight();
+			break;
+		case Home.SCREEN_STATE_MAIN_B_RIGHTDOWN_TCLOCKUP:
+			_MainBRightDownTMTCLockUpFragment.ClickRight();
+			break;
 		case  Home.SCREEN_STATE_MAIN_B_QUICK_MULTICLOSE:
 			ParentActivity._MultimediaClosePopup.ClickRight();
 			break;
 		case Home.SCREEN_STATE_MAIN_B_QUICK_MIRACLOSE:
 			ParentActivity._MiracastClosePopup.ClickRight();
+			break;
+		case Home.SCREEN_STATE_MAIN_B_TOP:
+//			if(CursurIndex < 9)
+//				CursurIndex++;
+//			else
+//				CursurIndex = 0;
+//			CursurDisplay(CursurIndex);
 			break;
 			
 		}
@@ -1704,6 +1751,11 @@ public class MainBBaseFragment extends ParentFragment{
 		case Home.SCREEN_STATE_MAIN_B_LEFTUP_MACHINESTATUS_POPUP:
 			ParentActivity._AxleTempWarningPopup.ClickESC();
 			break;
+			
+		case Home.SCREEN_STATE_MAIN_B_TOP:
+//			CursurIndex = 0;
+//			CursurDisplay(CursurIndex);
+			break;
 
 		default:
 			break;
@@ -1728,16 +1780,73 @@ public class MainBBaseFragment extends ParentFragment{
 		case Home.SCREEN_STATE_MAIN_B_RIGHTUP_HOURODMETER:
 			_MainBRightUpHourOdometerSelectFragment.ClickEnter();
 			break;
+		case Home.SCREEN_STATE_MAIN_B_RIGHTUP_ENGINE_MODE:
+			_MainBRightUpEngineModeFragment.ClickEnter();
+			break;
+		case Home.SCREEN_STATE_MAIN_B_RIGHTDOWN_CCOMODE:
+			if(ParentActivity._CheckModel.GetMCUVersion(CAN1Comm.Get_ComponentBasicInformation_1698_PGN65330()) == CheckModel.MODEL_980)
+				_MainBRightDownTMICCOModeFragment.ClickEnter();
+			else
+				_MainBRightDownTMCCOModeFragment.ClickEnter();
+			break;
+		case Home.SCREEN_STATE_MAIN_B_RIGHTDOWN_SHIFTMODE:
+			_MainBRightDownTMShiftModeFragment.ClickEnter();
+			break;
+		case Home.SCREEN_STATE_MAIN_B_RIGHTDOWN_TCLOCKUP:
+			_MainBRightDownTMTCLockUpFragment.ClickEnter();
+			break;
 		case  Home.SCREEN_STATE_MAIN_B_QUICK_MULTICLOSE:
 			ParentActivity._MultimediaClosePopup.ClickEnter();
 			break;
 		case Home.SCREEN_STATE_MAIN_B_QUICK_MIRACLOSE:
 			ParentActivity._MiracastClosePopup.ClickEnter();
 			break;
+		case Home.SCREEN_STATE_MAIN_B_TOP:
+			switch(CursurIndex)
+			{
+				case 0:
+					_MainBLeftUpMachineStatusFragment.ClickEnter();
+					break;
+//				case 1:
+//				case 2:
+//					_MainBLeftUpMachineStatusFragment.ClickMachineStatus();
+//					break;
+//				case 3:
+//					_MainBLeftUpMachineStatusFragment.ClickEnter();
+//					break;
+//				case 4:
+//					_MainBLeftUpMachineStatusFragment.ClickEnter();
+//					break;
+//				case 5:
+//					_MainBLeftUpMachineStatusFragment.ClickEnter();
+//					break;
+//				case 6:
+//					_MainBLeftUpMachineStatusFragment.ClickEnter();
+//					break;
+//				case 7:
+//					_MainBLeftUpMachineStatusFragment.ClickEnter();
+//					break;
+//				case 8:
+//					_MainBLeftUpMachineStatusFragment.ClickEnter();
+//					break;
+//				case 9:
+//					_MainBLeftUpMachineStatusFragment.ClickEnter();
+//					break;
+			}
+			break;
 		default:
-			_MainBLeftUpMachineStatusFragment.ClickEnter();
 			break;
 		}
 	}
 	// --, 150212 bwk
+	
+	public void CursurDisplay(int index)
+	{
+//		Log.d(TAG,"CursurDisplay:index="+index);
+//		_MainBLeftUpMachineStatusFragment.CursurDisplayDetail(index);
+//		_MainBLeftDownFuelFragment.CursurDisplayDetail(index);
+//		_MainBCenterFragment.CursurDisplayDetail(index);
+//		_MainBRightUpEngineFragment.CursurDisplayDetail(index);
+//		_MainBRightDownTMFragment.CursurDisplayDetail(index);
+	}
 }

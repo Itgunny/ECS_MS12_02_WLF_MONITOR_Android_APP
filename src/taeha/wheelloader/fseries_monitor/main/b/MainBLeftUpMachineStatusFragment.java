@@ -5,8 +5,10 @@ import actionpopup.QuickAction;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.View.OnTouchListener;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
@@ -15,8 +17,10 @@ import taeha.wheelloader.fseries_monitor.animation.ImageViewYAxisFlipAnimation;
 import taeha.wheelloader.fseries_monitor.main.CAN1CommManager;
 import taeha.wheelloader.fseries_monitor.main.CheckModel;
 import taeha.wheelloader.fseries_monitor.main.Home;
+import taeha.wheelloader.fseries_monitor.main.LongPressChecker;
 import taeha.wheelloader.fseries_monitor.main.ParentFragment;
 import taeha.wheelloader.fseries_monitor.main.R;
+import taeha.wheelloader.fseries_monitor.main.LongPressChecker.OnLongPressListener;
 import taeha.wheelloader.fseries_monitor.main.R.color;
 import taeha.wheelloader.fseries_monitor.main.R.string;
 import taeha.wheelloader.fseries_monitor.main.a.MainALeftUpMachineStatusSelectFragment1;
@@ -51,12 +55,16 @@ public class MainBLeftUpMachineStatusFragment extends ParentFragment{
 	ImageView imgViewWeighingUpperIcon;
 	ImageView imgViewWeighingLowerIcon;
 	
-	ImageButton imgbtnMachineStatus;
+//	ImageButton imgbtnMachineStatus;
+	ImageButton imgbtnMachineStatus1;
+	ImageButton imgbtnMachineStatus2;
 
 	// ++, 150212 bwk
 	private QuickAction popupIndicator;
 	private ActionItem actionitemIndicator;
 	// --, 150212 bwk
+	
+	public LongPressChecker     mLongPressChecker;
 	//////////////////////////////////////////////////
 	
 	//VALUABLE////////////////////////////////////////
@@ -159,7 +167,9 @@ public class MainBLeftUpMachineStatusFragment extends ParentFragment{
 		imgViewWeighingUpperIcon = (ImageView)mRoot.findViewById(R.id.imageView_leftup_machinestatus_weighing_upper_icon);
 		imgViewWeighingLowerIcon = (ImageView)mRoot.findViewById(R.id.imageView_leftup_machinestatus_weighing_lower_icon);
 		
-		imgbtnMachineStatus = (ImageButton)mRoot.findViewById(R.id.imageButton_leftup_main_b_machinestatus);
+//		imgbtnMachineStatus = (ImageButton)mRoot.findViewById(R.id.imageButton_leftup_main_b_machinestatus);
+		imgbtnMachineStatus1 = (ImageButton)mRoot.findViewById(R.id.imageButton_leftup_main_b_machinestatus1);
+		imgbtnMachineStatus2 = (ImageButton)mRoot.findViewById(R.id.imageButton_leftup_main_b_machinestatus2);
 
 	}
 	
@@ -196,13 +206,69 @@ public class MainBLeftUpMachineStatusFragment extends ParentFragment{
 			}
 		});
 		// --, 150212 bwk
-		imgbtnMachineStatus.setOnClickListener(new View.OnClickListener() {
+//		imgbtnMachineStatus.setOnClickListener(new View.OnClickListener() {
+//			
+//			@Override
+//			public void onClick(View v) {
+//				// TODO Auto-generated method stub
+//			  	if(ClickFlag == true)
+//			  		ClickMachineStatus();
+//			}
+//		});
+		imgbtnMachineStatus1.setOnClickListener(new View.OnClickListener() {
 			
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
-			  	if(ClickFlag == true)
-			  		ClickMachineStatus();
+				if(mLongPressChecker.getLongPressed() == false){
+					if(ClickFlag == true)
+						ClickMachineStatus();
+				}
+			}
+		});
+		imgbtnMachineStatus1.setOnTouchListener( new OnTouchListener() {
+			@Override
+			public boolean onTouch(View v, MotionEvent event) {
+				// TODO Auto-generated method stub
+				mLongPressChecker.deliverMotionEvent(v, event);
+				return false;
+			}
+		});
+
+		imgbtnMachineStatus2.setOnClickListener(new View.OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				if(mLongPressChecker.getLongPressed() == false){
+					if(ClickFlag == true)
+						ClickMachineStatus();
+				}
+			}
+		});		
+		imgbtnMachineStatus2.setOnTouchListener( new OnTouchListener() {
+			@Override
+			public boolean onTouch(View v, MotionEvent event) {
+				// TODO Auto-generated method stub
+				mLongPressChecker.deliverMotionEvent(v, event);
+				return false;
+			}
+		});
+
+		mLongPressChecker = new LongPressChecker(ParentActivity);
+		mLongPressChecker.setOnLongPressListener( new OnLongPressListener() {
+			@Override
+			public void onLongPressed() {
+//				Log.d(TAG, "Long Pressed");
+				if(mLongPressChecker.mTargetView == imgbtnMachineStatus1 || mLongPressChecker.mTargetView == imgbtnMachineStatus2)
+				{
+					if(ParentActivity.MachineStatusUpperIndex == CAN1CommManager.DATA_STATE_MACHINESTATUS_WEIGHING
+							|| ParentActivity.MachineStatusLowerIndex == CAN1CommManager.DATA_STATE_MACHINESTATUS_WEIGHING)
+						ClickLongKeyWeight(mLongPressChecker.mTargetView, WeighingDisplayMode);
+					else
+						if(ClickFlag == true)
+							ClickMachineStatus();
+				}
 			}
 		});
 	}
@@ -700,6 +766,41 @@ public class MainBLeftUpMachineStatusFragment extends ParentFragment{
 		}	
 	}
 	
+	public void ClickLongKeyWeight(View v, int DisplayIndex){
+		if(v == imgbtnMachineStatus1)
+		{
+			switch (DisplayIndex) {
+			case CAN1CommManager.DATA_STATE_WEIGHINGDISPLAY_TOTAL_A:
+			case CAN1CommManager.DATA_STATE_WEIGHINGDISPLAY_TOTAL_B:
+			case CAN1CommManager.DATA_STATE_WEIGHINGDISPLAY_TOTAL_C:
+				ParentActivity.OldScreenIndex = Home.SCREEN_STATE_MAIN_B_TOP;
+				ParentActivity._WorkLoadWeighingInitPopup2.setMode(3);
+				ParentActivity.showWorkLoadWeighingInit2();
+				break;
+			default:
+				ClickMachineStatus();
+				break;
+			}			
+		
+		}
+		else if(v == imgbtnMachineStatus2)
+		{
+			switch (DisplayIndex) {
+			case CAN1CommManager.DATA_STATE_WEIGHINGDISPLAY_TOTAL_A:
+			case CAN1CommManager.DATA_STATE_WEIGHINGDISPLAY_TOTAL_B:
+			case CAN1CommManager.DATA_STATE_WEIGHINGDISPLAY_TOTAL_C:
+				ParentActivity.OldScreenIndex = Home.SCREEN_STATE_MAIN_B_TOP;
+				ParentActivity._WorkLoadWeighingInitPopup2.setMode(DisplayIndex);
+				ParentActivity.showWorkLoadWeighingInit2();
+				break;
+			default:
+				ClickMachineStatus();
+				break;
+			}			
+		}
+	}
+
+	///////////////////////////////////////////////////////////////////////////////////////////////////////////
 	public void ClickMachineStatus(){
 		if(ParentActivity.AnimationRunningFlag == true)
 			return;
@@ -806,7 +907,9 @@ public class MainBLeftUpMachineStatusFragment extends ParentFragment{
 	
 	public void setClickEnable(boolean flag){
 		ClickFlag = flag;
-		imgbtnMachineStatus.setClickable(ClickFlag);
+//		imgbtnMachineStatus.setClickable(ClickFlag);
+		imgbtnMachineStatus1.setClickable(ClickFlag);
+		imgbtnMachineStatus2.setClickable(ClickFlag);
 	}
 
 	// ++, 150212 bwk
@@ -854,4 +957,16 @@ public class MainBLeftUpMachineStatusFragment extends ParentFragment{
 		}
 	}
 	// --, 150212 bwk
+	public void CursurDisplayDetail(int index){
+		imgbtnMachineStatus1.setBackgroundResource(R.drawable._selector_leftup_main_b_machinestatus_up_btn);
+		imgbtnMachineStatus2.setBackgroundResource(R.drawable._selector_leftup_main_b_machinestatus_down_btn);
+		switch(index){
+			case 1:
+				imgbtnMachineStatus1.setBackgroundResource(R.drawable.main_default_monitoring_01_selected02);
+				break;
+			case 2:
+				imgbtnMachineStatus2.setBackgroundResource(R.drawable.main_default_monitoring_02_selected02);
+				break;
+		}
+	}
 }

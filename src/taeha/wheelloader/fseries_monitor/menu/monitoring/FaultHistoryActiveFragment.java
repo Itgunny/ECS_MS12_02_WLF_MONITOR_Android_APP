@@ -1,40 +1,25 @@
 package taeha.wheelloader.fseries_monitor.menu.monitoring;
 
-import customlist.sensormonitoring.IconTextItem;
-import customlist.sensormonitoring.IconTextListAdapter;
-import customlist_fault.IconTextItemFault;
-import customlist_fault.IconTextListAdapterFault;
-import taeha.wheelloader.fseries_monitor.animation.AppearAnimation;
-import taeha.wheelloader.fseries_monitor.animation.ChangeFragmentAnimation;
-import taeha.wheelloader.fseries_monitor.animation.DisappearAnimation;
-import taeha.wheelloader.fseries_monitor.animation.MainBodyShiftAnimation;
-import taeha.wheelloader.fseries_monitor.animation.LeftRightShiftAnimation;
 import taeha.wheelloader.fseries_monitor.main.CAN1CommManager;
-import taeha.wheelloader.fseries_monitor.main.CheckModel;
 import taeha.wheelloader.fseries_monitor.main.Home;
 import taeha.wheelloader.fseries_monitor.main.ParentFragment;
 import taeha.wheelloader.fseries_monitor.main.R;
 import taeha.wheelloader.fseries_monitor.main.R.string;
-import android.R.color;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
-import android.text.Layout;
 import android.util.Log;
 import android.view.LayoutInflater;
-import android.view.Menu;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AbsoluteLayout;
 import android.widget.AdapterView;
-import android.widget.FrameLayout;
 import android.widget.ImageButton;
-import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.RadioButton;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import customlist_fault.IconTextItemFault;
+import customlist_fault.IconTextListAdapterFault;
 
 public class FaultHistoryActiveFragment extends ParentFragment{
 	//CONSTANT////////////////////////////////////////
@@ -1241,10 +1226,12 @@ public class FaultHistoryActiveFragment extends ParentFragment{
 	static final int SPNDATA[] = {101,101,145,145,172,172,173,173,174,174,181,181,183,183,187,187,202,202,202,202		
 		,203,203,203,203,204,204,204,204,205,205,205,205,301,301,304,304,310,318,322,322,325,325,327,327,346		
 		,346,503,503,503,503,507,507,507,507,551,551,552,552,558,558,558,558,701,705,705,707,723,723,727,727		
-		,728,728,729,729,730,830,840,841,842,843,844,850,869};
+		,728,728,729,729,730,830,840,841,842,843,844,850,869
+		,2000,2000,2001,2001,2002,2003,2003,2004,2005};		// RMCU 관련 오류 추가
 	static final int FMIDATA[] = {3, 4,	5,	6,	4,	6,	4,	6,	4,	6,	4,	6,	4,	6,	4,	6,	0,	1,	2,	4,	0,	1,	2,	4,	0,	
 		1,	2,	4,	0,	1,	2,	4,	3,	4,	3,	4,	8,	8,	4,	6,	4,	6,	4,	6,	3,	4,	0,	1,	2,	4,	0,	1,	2,	4,	3,	4,	3,	
-		4,	0,	1,	2,	4,	4,	0,	1,	1,	3,	4,	4,	6,	3,	4,	3,	4,	19,	12,	2,	2,	2,	2,	2,	2, 2};
+		4,	0,	1,	2,	4,	4,	0,	1,	1,	3,	4,	4,	6,	3,	4,	3,	4,	19,	12,	2,	2,	2,	2,	2,	2, 	2,
+		5,	1,	5,	1,	1, 19,	2,	0,	0};		// RMCU 관련 오류 추가
 	// ++, 150202 bwk : 150128 HHI 임혁준 요청
 	static final int TCU_SPN[] = {0x10,0x11,0x12,0x13,0x14,0x15,0x16,0x17,0x18,0x19,0x1A,0x1B,0x1C,0x1D,0x1E,0x1F,
 		0x21,0x22,0x23,0x24,0x25,0x26,0x27,0x28,0x29,0x2A,0x2B,0x2C,0x2D,0x2E,0x2F,
@@ -1446,6 +1433,16 @@ public class FaultHistoryActiveFragment extends ParentFragment{
 		"Monitor Communication Error", 
 		"RCM Communication Error", 
 		"BKCU Communication error",
+		// RMCU 오류 추가
+		"Satellite/Mobile antenna connection is not OK.",
+		"Satellite/Mobile is not linked.",
+		"GPS antenna connection is not OK.",
+		"GPS position is not updated.",
+		"Test message is not transmitted.",
+		"Current gauge request is not received.",
+		"Current gauge reply is not transmitted.",
+		"Step 4",
+		"Step 5",
 		"Not define."	
 	};
 

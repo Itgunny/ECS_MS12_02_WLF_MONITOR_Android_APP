@@ -220,7 +220,7 @@ public class MainARightMainFragment extends ParentFragment{
 				EngineModeDataAnimation.FlipAnimation(textViewModeData,getResources().getString(string.ECONO));
 				break;
 			default:
-				EngineModeDataAnimation.FlipAnimation(textViewModeData,getResources().getString(string.POWER));
+//				EngineModeDataAnimation.FlipAnimation(textViewModeData,getResources().getString(string.POWER));
 				break;
 			}
 		} catch (IllegalStateException e) {
@@ -326,7 +326,7 @@ public class MainARightMainFragment extends ParentFragment{
 				TMCCOModeDataAnimation.FlipAnimation(textViewCCOModeData,getResources().getString(string.H));
 				break;
 			default:
-				TMCCOModeDataAnimation.FlipAnimation(textViewCCOModeData,getResources().getString(string.OFF));
+//				TMCCOModeDataAnimation.FlipAnimation(textViewCCOModeData,getResources().getString(string.OFF));
 				break;
 			}
 		} catch (IllegalStateException e) {
@@ -350,7 +350,7 @@ public class MainARightMainFragment extends ParentFragment{
 				TMShiftModeDataAnimation.FlipAnimation(textViewShiftModeData,getResources().getString(string.AH));
 				break;
 			default:
-				TMShiftModeDataAnimation.FlipAnimation(textViewShiftModeData,getResources().getString(string.MANUAL));
+//				TMShiftModeDataAnimation.FlipAnimation(textViewShiftModeData,getResources().getString(string.MANUAL));
 				break;
 			}
 		} catch (IllegalStateException e) {
@@ -368,7 +368,7 @@ public class MainARightMainFragment extends ParentFragment{
 				TMTCLockUpDataAnimation.FlipAnimation(textViewTCLockUpData,getResources().getString(string.ON));
 				break;
 			default:
-				TMTCLockUpDataAnimation.FlipAnimation(textViewTCLockUpData,getResources().getString(string.OFF));
+//				TMTCLockUpDataAnimation.FlipAnimation(textViewTCLockUpData,getResources().getString(string.OFF));
 				break;
 			}
 		} catch (IllegalStateException e) {
@@ -416,10 +416,16 @@ public class MainARightMainFragment extends ParentFragment{
 			ParentActivity._MainABaseFragment.RightChangeAnimation.StartChangeAnimation(ParentActivity._MainABaseFragment._MainARightUpEngineModeFragment);
 		}else if(index == 2){
 			ParentActivity._MainABaseFragment._MainACenterTMFragment = new MainACenterTMFragment();
-			ParentActivity._MainABaseFragment._MainARightDownTMCCOModeFragment = new MainARightDownTMCCOModeFragment();
+			if(ParentActivity._CheckModel.GetMCUVersion(CAN1Comm.Get_ComponentBasicInformation_1698_PGN65330()) == CheckModel.MODEL_980)
+				ParentActivity._MainABaseFragment._MainARightDownTMICCOModeFragment = new MainARightDownTMICCOModeFragment();
+			else
+				ParentActivity._MainABaseFragment._MainARightDownTMCCOModeFragment = new MainARightDownTMCCOModeFragment();
 			ParentActivity._MainABaseFragment._MainBodyShiftAnimation.StartShiftRightAnimation();
 			ParentActivity._MainABaseFragment.CenterAnimation.StartChangeAnimation(ParentActivity._MainABaseFragment._MainACenterTMFragment);
-			ParentActivity._MainABaseFragment.RightChangeAnimation.StartChangeAnimation(ParentActivity._MainABaseFragment._MainARightDownTMCCOModeFragment);
+			if(ParentActivity._CheckModel.GetMCUVersion(CAN1Comm.Get_ComponentBasicInformation_1698_PGN65330()) == CheckModel.MODEL_980)
+				ParentActivity._MainABaseFragment.RightChangeAnimation.StartChangeAnimation(ParentActivity._MainABaseFragment._MainARightDownTMICCOModeFragment);
+			else
+				ParentActivity._MainABaseFragment.RightChangeAnimation.StartChangeAnimation(ParentActivity._MainABaseFragment._MainARightDownTMCCOModeFragment);
 		}else if(index == 3){
 			ParentActivity._MainABaseFragment._MainACenterTMFragment = new MainACenterTMFragment();
 			ParentActivity._MainABaseFragment._MainARightDownTMShiftModeFragment = new MainARightDownTMShiftModeFragment();

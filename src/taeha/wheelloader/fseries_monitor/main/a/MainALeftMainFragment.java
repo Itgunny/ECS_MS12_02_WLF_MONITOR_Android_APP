@@ -66,7 +66,9 @@ public class MainALeftMainFragment extends ParentFragment{
 	ImageView imgViewEcoBG;
 	ImageView imgViewEcoBar;	
 	
-	ImageButton imgbtnMachineStatus;
+//	ImageButton imgbtnMachineStatus;
+	ImageButton imgbtnMachineStatus1;
+	ImageButton imgbtnMachineStatus2;
 	ImageButton imgbtnFuel;
 
 	private QuickAction popupIndicator;
@@ -187,7 +189,9 @@ public class MainALeftMainFragment extends ParentFragment{
 		imgViewEcoBG = (ImageView)mRoot.findViewById(R.id.imageView_center_main_a_eco_bg);
 		imgViewEcoBar = (ImageView)mRoot.findViewById(R.id.imageView_center_main_a_eco_bar);
 		
-		imgbtnMachineStatus = (ImageButton)mRoot.findViewById(R.id.imageButton_leftup_main_a_machinestatus);
+//		imgbtnMachineStatus = (ImageButton)mRoot.findViewById(R.id.imageButton_leftup_main_a_machinestatus);
+		imgbtnMachineStatus1 = (ImageButton)mRoot.findViewById(R.id.imageButton_leftup_main_a_machinestatus1);
+		imgbtnMachineStatus2 = (ImageButton)mRoot.findViewById(R.id.imageButton_leftup_main_a_machinestatus2);
 		imgbtnFuel = (ImageButton)mRoot.findViewById(R.id.imageButton_leftdown_main_a_fuel);		
 
 	}
@@ -232,15 +236,55 @@ public class MainALeftMainFragment extends ParentFragment{
 			  		ClickWeighingError(v);
 			}
 		});
-		imgbtnMachineStatus.setOnClickListener(new View.OnClickListener() {
+//		imgbtnMachineStatus.setOnClickListener(new View.OnClickListener() {
+//			
+//			@Override
+//			public void onClick(View v) {
+//				// TODO Auto-generated method stub
+//			  	if(ClickFlag == true)
+//			  		ClickMachineStatus();
+//			}
+//		});
+		imgbtnMachineStatus1.setOnClickListener(new View.OnClickListener() {
 			
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
-			  	if(ClickFlag == true)
-			  		ClickMachineStatus();
+				if(mLongPressChecker.getLongPressed() == false){
+					if(ClickFlag == true)
+						ClickMachineStatus();
+				}
 			}
 		});
+		imgbtnMachineStatus1.setOnTouchListener( new OnTouchListener() {
+			@Override
+			public boolean onTouch(View v, MotionEvent event) {
+				// TODO Auto-generated method stub
+				mLongPressChecker.deliverMotionEvent(v, event);
+				return false;
+			}
+		});
+
+		imgbtnMachineStatus2.setOnClickListener(new View.OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				if(mLongPressChecker.getLongPressed() == false){
+					if(ClickFlag == true)
+						ClickMachineStatus();
+				}
+			}
+		});		
+		imgbtnMachineStatus2.setOnTouchListener( new OnTouchListener() {
+			@Override
+			public boolean onTouch(View v, MotionEvent event) {
+				// TODO Auto-generated method stub
+				mLongPressChecker.deliverMotionEvent(v, event);
+				return false;
+			}
+		});
+
 		// ++, 150406 cjg
 //		imgbtnFuel.setOnClickListener(new View.OnClickListener() {
 //			
@@ -276,19 +320,31 @@ public class MainALeftMainFragment extends ParentFragment{
 			@Override
 			public void onLongPressed() {
 //				Log.d(TAG, "Long Pressed");
-				imgbtnFuel.setBackgroundResource(R.drawable.main_a_default_fuel_n);
-				ParentActivity.OldScreenIndex = Home.SCREEN_STATE_MAIN_A_TOP;
-				if(ParentActivity.FuelIndex == CAN1CommManager.DATA_STATE_AVERAGE_FUEL_RATE)
-					ParentActivity._FuelInitalPopup.setMode(CAN1CommManager.DATA_STATE_AVERAGE_FUEL_RATE_INFO_CLEAR);
-				else if(ParentActivity.FuelIndex == CAN1CommManager.DATA_STATE_A_DAYS_FUEL_USED)
-					ParentActivity._FuelInitalPopup.setMode(CAN1CommManager.DATA_STATE_A_DAYS_FUEL_USED_CLEAR);
-				ParentActivity.showFuelInitalPopup();
-//				if(ParentActivity.FuelIndex == CAN1CommManager.DATA_STATE_AVERAGE_FUEL_RATE)
-//					CAN1Comm.Set_OperationHistory_1101_PGN61184_31(CAN1CommManager.DATA_STATE_AVERAGE_FUEL_RATE_INFO_CLEAR);
-//				else if(ParentActivity.FuelIndex == CAN1CommManager.DATA_STATE_A_DAYS_FUEL_USED)
-//					CAN1Comm.Set_OperationHistory_1101_PGN61184_31(CAN1CommManager.DATA_STATE_A_DAYS_FUEL_USED_CLEAR);
-//				CAN1Comm.TxCANToMCU(31);
-//				CAN1Comm.Set_OperationHistory_1101_PGN61184_31(0xFF);
+				if(mLongPressChecker.mTargetView == imgbtnFuel)
+				{
+					imgbtnFuel.setBackgroundResource(R.drawable.main_a_default_fuel_n);
+					ParentActivity.OldScreenIndex = Home.SCREEN_STATE_MAIN_A_TOP;
+					if(ParentActivity.FuelIndex == CAN1CommManager.DATA_STATE_AVERAGE_FUEL_RATE)
+						ParentActivity._FuelInitalPopup.setMode(CAN1CommManager.DATA_STATE_AVERAGE_FUEL_RATE_INFO_CLEAR);
+					else if(ParentActivity.FuelIndex == CAN1CommManager.DATA_STATE_A_DAYS_FUEL_USED)
+						ParentActivity._FuelInitalPopup.setMode(CAN1CommManager.DATA_STATE_A_DAYS_FUEL_USED_CLEAR);
+					ParentActivity.showFuelInitalPopup();
+	//				if(ParentActivity.FuelIndex == CAN1CommManager.DATA_STATE_AVERAGE_FUEL_RATE)
+	//					CAN1Comm.Set_OperationHistory_1101_PGN61184_31(CAN1CommManager.DATA_STATE_AVERAGE_FUEL_RATE_INFO_CLEAR);
+	//				else if(ParentActivity.FuelIndex == CAN1CommManager.DATA_STATE_A_DAYS_FUEL_USED)
+	//					CAN1Comm.Set_OperationHistory_1101_PGN61184_31(CAN1CommManager.DATA_STATE_A_DAYS_FUEL_USED_CLEAR);
+	//				CAN1Comm.TxCANToMCU(31);
+	//				CAN1Comm.Set_OperationHistory_1101_PGN61184_31(0xFF);
+				}
+				else if(mLongPressChecker.mTargetView == imgbtnMachineStatus1 || mLongPressChecker.mTargetView == imgbtnMachineStatus2)
+				{
+					if(ParentActivity.MachineStatusUpperIndex == CAN1CommManager.DATA_STATE_MACHINESTATUS_WEIGHING
+							|| ParentActivity.MachineStatusLowerIndex == CAN1CommManager.DATA_STATE_MACHINESTATUS_WEIGHING)
+						ClickLongKeyWeight(mLongPressChecker.mTargetView, WeighingDisplayMode);
+					else
+						if(ClickFlag == true)
+							ClickMachineStatus();
+				}
 			}
 		});
 		// --, 150406 cjg
@@ -772,6 +828,40 @@ public class MainALeftMainFragment extends ParentFragment{
 			break;
 		}	
 	}
+	public void ClickLongKeyWeight(View v, int DisplayIndex){
+		if(v == imgbtnMachineStatus1)
+		{
+			switch (DisplayIndex) {
+			case CAN1CommManager.DATA_STATE_WEIGHINGDISPLAY_TOTAL_A:
+			case CAN1CommManager.DATA_STATE_WEIGHINGDISPLAY_TOTAL_B:
+			case CAN1CommManager.DATA_STATE_WEIGHINGDISPLAY_TOTAL_C:
+				ParentActivity.OldScreenIndex = Home.SCREEN_STATE_MAIN_A_TOP;
+				ParentActivity._WorkLoadWeighingInitPopup2.setMode(3);
+				ParentActivity.showWorkLoadWeighingInit2();
+				break;
+			default:
+				ClickMachineStatus();
+				break;
+			}			
+		
+		}
+		else if(v == imgbtnMachineStatus2)
+		{
+			switch (DisplayIndex) {
+			case CAN1CommManager.DATA_STATE_WEIGHINGDISPLAY_TOTAL_A:
+			case CAN1CommManager.DATA_STATE_WEIGHINGDISPLAY_TOTAL_B:
+			case CAN1CommManager.DATA_STATE_WEIGHINGDISPLAY_TOTAL_C:
+				ParentActivity.OldScreenIndex = Home.SCREEN_STATE_MAIN_A_TOP;
+				ParentActivity._WorkLoadWeighingInitPopup2.setMode(DisplayIndex);
+				ParentActivity.showWorkLoadWeighingInit2();
+				break;
+			default:
+				ClickMachineStatus();
+				break;
+			}			
+		}
+	}
+
 	public void FuelTitleDisplay(int _Index){
 		switch (_Index) {
 		case CAN1CommManager.DATA_STATE_FUEL_NOSELECT:
@@ -936,7 +1026,9 @@ public class MainALeftMainFragment extends ParentFragment{
 	
 	public void setClickEnable(boolean flag){
 		ClickFlag = flag;
-		imgbtnMachineStatus.setClickable(ClickFlag);
+//		imgbtnMachineStatus.setClickable(ClickFlag);
+		imgbtnMachineStatus1.setClickable(ClickFlag);
+		imgbtnMachineStatus2.setClickable(ClickFlag);
 		imgbtnFuel.setClickable(ClickFlag);
 	}
 

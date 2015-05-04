@@ -1373,6 +1373,21 @@ public class MainABaseFragment extends ParentFragment{
 		case Home.SCREEN_STATE_MAIN_A_RIGHTUP_HOURODMETER:
 			_MainARightUpHourOdometerSelectFragment.ClickLeft();
 			break;
+		case Home.SCREEN_STATE_MAIN_A_RIGHTUP_ENGINE_MODE:
+			_MainARightUpEngineModeFragment.ClickLeft();
+			break;
+		case Home.SCREEN_STATE_MAIN_A_RIGHTDOWN_CCOMODE:
+			if(ParentActivity._CheckModel.GetMCUVersion(CAN1Comm.Get_ComponentBasicInformation_1698_PGN65330()) == CheckModel.MODEL_980)
+				_MainARightDownTMICCOModeFragment.ClickLeft();
+			else
+				_MainARightDownTMCCOModeFragment.ClickLeft();
+			break;
+		case Home.SCREEN_STATE_MAIN_A_RIGHTDOWN_SHIFTMODE:
+			_MainARightDownTMShiftModeFragment.ClickLeft();
+			break;
+		case Home.SCREEN_STATE_MAIN_A_RIGHTDOWN_TCLOCKUP:
+			_MainARightDownTMTCLockUpFragment.ClickLeft();
+			break;
 		case  Home.SCREEN_STATE_MAIN_A_QUICK_MULTICLOSE:
 			ParentActivity._MultimediaClosePopup.ClickLeft();
 			break;
@@ -1398,6 +1413,21 @@ public class MainABaseFragment extends ParentFragment{
 			break;
 		case Home.SCREEN_STATE_MAIN_A_RIGHTUP_HOURODMETER:
 			_MainARightUpHourOdometerSelectFragment.ClickRight();
+			break;
+		case Home.SCREEN_STATE_MAIN_A_RIGHTUP_ENGINE_MODE:
+			_MainARightUpEngineModeFragment.ClickRight();
+			break;
+		case Home.SCREEN_STATE_MAIN_A_RIGHTDOWN_CCOMODE:
+			if(ParentActivity._CheckModel.GetMCUVersion(CAN1Comm.Get_ComponentBasicInformation_1698_PGN65330()) == CheckModel.MODEL_980)
+				_MainARightDownTMICCOModeFragment.ClickRight();
+			else
+				_MainARightDownTMCCOModeFragment.ClickRight();
+			break;
+		case Home.SCREEN_STATE_MAIN_A_RIGHTDOWN_SHIFTMODE:
+			_MainARightDownTMShiftModeFragment.ClickRight();
+			break;
+		case Home.SCREEN_STATE_MAIN_A_RIGHTDOWN_TCLOCKUP:
+			_MainARightDownTMTCLockUpFragment.ClickRight();
 			break;
 		case  Home.SCREEN_STATE_MAIN_A_QUICK_MULTICLOSE:
 			ParentActivity._MultimediaClosePopup.ClickRight();
@@ -1491,6 +1521,21 @@ public class MainABaseFragment extends ParentFragment{
 				break;
 			case Home.SCREEN_STATE_MAIN_A_RIGHTUP_HOURODMETER:
 				_MainARightUpHourOdometerSelectFragment.ClickEnter();
+				break;
+			case Home.SCREEN_STATE_MAIN_A_RIGHTUP_ENGINE_MODE:
+				_MainARightUpEngineModeFragment.ClickEnter();
+				break;
+			case Home.SCREEN_STATE_MAIN_A_RIGHTDOWN_CCOMODE:
+				if(ParentActivity._CheckModel.GetMCUVersion(CAN1Comm.Get_ComponentBasicInformation_1698_PGN65330()) == CheckModel.MODEL_980)
+					_MainARightDownTMICCOModeFragment.ClickEnter();
+				else
+					_MainARightDownTMCCOModeFragment.ClickEnter();
+				break;
+			case Home.SCREEN_STATE_MAIN_A_RIGHTDOWN_SHIFTMODE:
+				_MainARightDownTMShiftModeFragment.ClickEnter();
+				break;
+			case Home.SCREEN_STATE_MAIN_A_RIGHTDOWN_TCLOCKUP:
+				_MainARightDownTMTCLockUpFragment.ClickEnter();
 				break;
 			case  Home.SCREEN_STATE_MAIN_A_QUICK_MULTICLOSE:
 				ParentActivity._MultimediaClosePopup.ClickEnter();

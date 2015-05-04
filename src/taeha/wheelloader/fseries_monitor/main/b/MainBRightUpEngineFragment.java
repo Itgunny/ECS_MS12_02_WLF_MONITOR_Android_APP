@@ -190,7 +190,7 @@ public class MainBRightUpEngineFragment extends ParentFragment{
 				EngineModeDataAnimation.FlipAnimation(textViewModeData,getResources().getString(string.ECONO));
 				break;
 			default:
-				EngineModeDataAnimation.FlipAnimation(textViewModeData,getResources().getString(string.POWER));
+//				EngineModeDataAnimation.FlipAnimation(textViewModeData,getResources().getString(string.POWER));
 				break;
 			}
 		} catch (IllegalStateException e) {
@@ -365,5 +365,17 @@ public class MainBRightUpEngineFragment extends ParentFragment{
 		//imgbtnWarmingUp.setClickable(ClickFlag);
 		imgbtnHourOdo.setClickable(ClickFlag);
 		// --, 150317 bwk
+	}
+	public void CursurDisplayDetail(int index){
+		imgbtnHourOdo.setBackgroundResource(R.drawable._selector_rightup_main_b_hourodometer_btn1);
+		imgbtnMode.setBackgroundResource(R.drawable._selector_rightup_main_b_engine_mode_btn1);
+		switch(index){
+			case 5:
+				imgbtnHourOdo.setBackgroundResource(R.drawable.main_default_engine01_selected02);
+				break;
+			case 6:
+				imgbtnMode.setBackgroundResource(R.drawable.main_default_engine02_selected02);
+				break;
+		}
 	}
 }

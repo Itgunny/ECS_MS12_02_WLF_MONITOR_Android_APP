@@ -59,7 +59,7 @@ public class EHCUErrorPopup extends ParentPopup{
 		InitResource();
 		InitButtonListener();
 		InitValuable();
-		
+	
 		EHCUErrInitDisplay(ParentActivity.OldJoystickSteeringEnableFailCondition);	// ++, --, 150210 bwk
 		
 		ParentActivity.bEHCUErrPopup = true;
@@ -230,8 +230,6 @@ public class EHCUErrorPopup extends ParentPopup{
 		String str = "";
 		//str += ParentActivity.getResources().getString(string.Check_joystick_steering_enable_fail_condition);
 		// ++, 150210 bwk
-		//Log.d(TAG,"Data : " + Integer.toHexString(Data));
-		
 		if(JoystickSteeringEnableFailCondition == 0xFFFF || Data == 0xFFFF)
 			return;
 		

@@ -27,7 +27,7 @@
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
         android:layout_centerVertical="true"
-        android:background="@drawable/_selector_center_main_a_btn" />
+        android:background="@drawable/_selector_center_main_a_quick_btn" />
     
     <TextView
         android:id="@+id/textView_center_main_a_rpm"

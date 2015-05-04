@@ -220,4 +220,10 @@ public class MainBLeftDownFuelFragment extends ParentFragment{
 		ClickFlag = flag;
 		imgbtnFuel.setClickable(ClickFlag);
 	}
+	public void CursurDisplayDetail(int index){
+		if(index == 3)
+			imgbtnFuel.setBackgroundResource(R.drawable._selector_leftdown_main_b_fuel_btn1);
+		else
+			imgbtnFuel.setBackgroundResource(R.drawable.main_default_monitoringhistory_selected02);
+	}
 }

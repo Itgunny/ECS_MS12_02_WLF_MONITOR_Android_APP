@@ -10,7 +10,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="205dp"
-        android:layout_marginTop="80dp"
+        android:layout_marginTop="100dp"
         android:src="@drawable/main_key_line" />
     
     <ImageView
@@ -80,7 +80,7 @@
 	    android:text="@string/Total_C"
 	    android:textColor="@drawable/_selector_radio_txt_white_amber"
 	    android:textSize="25sp" />
-	
+	<!-- 
 	<RelativeLayout
         android:id="@+id/RelativeLayout_key_main_a_workload_display_init"
         android:layout_width="wrap_content"
@@ -101,7 +101,7 @@
             android:textAppearance="?android:attr/textAppearanceLarge" />
 
     </RelativeLayout>
-    
+     -->
 	<RelativeLayout
         android:id="@+id/Relativelayout_key_main_a_workload_display_low"
         android:layout_width="wrap_content"

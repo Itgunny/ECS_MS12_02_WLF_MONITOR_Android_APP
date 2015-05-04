@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/RelativeLayout_leftdown_main_b_hourodomterhourodo"
+    android:id="@+id/RelativeLayout_leftdown_main_b_fuelselect"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/main_bg_left_down_ani" >

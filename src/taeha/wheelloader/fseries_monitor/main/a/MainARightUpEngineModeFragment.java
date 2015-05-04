@@ -1,6 +1,9 @@
 package taeha.wheelloader.fseries_monitor.main.a;
 
 
+import java.util.Timer;
+import java.util.TimerTask;
+
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -10,6 +13,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.RadioButton;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import taeha.wheelloader.fseries_monitor.main.CAN1CommManager;
 import taeha.wheelloader.fseries_monitor.main.ParentFragment;
@@ -24,6 +28,8 @@ public class MainARightUpEngineModeFragment extends ParentFragment{
 	RadioButton radioPower;
 	RadioButton radioStandard;
 	RadioButton radioEcono;
+	
+	RelativeLayout LayoutBG;
 	//////////////////////////////////////////////////
 	
 	//VALUABLE////////////////////////////////////////
@@ -31,6 +37,8 @@ public class MainARightUpEngineModeFragment extends ParentFragment{
 	
 	int CursurIndex;
 	Handler HandleCursurDisplay;
+	
+	Timer	mEnableButtonTimer = null;
 	//////////////////////////////////////////////////
 	
 	//ANIMATION///////////////////////////////////////
@@ -53,6 +61,8 @@ public class MainARightUpEngineModeFragment extends ParentFragment{
 		InitValuables();
 		InitButtonListener();
 
+		EnableRadioButton(false);
+		StartEnableButtonTimer();
 		ParentActivity.ScreenIndex = ParentActivity.SCREEN_STATE_MAIN_A_RIGHTUP_ENGINE_MODE;
 		HandleCursurDisplay = new Handler() {
 			@Override
@@ -80,6 +90,7 @@ public class MainARightUpEngineModeFragment extends ParentFragment{
 		radioStandard = (RadioButton)mRoot.findViewById(R.id.radioButton_rightup_main_a_enginemode_standard);
 		radioEcono = (RadioButton)mRoot.findViewById(R.id.radioButton_rightup_main_a_enginemode_econo);
 		
+		LayoutBG = (RelativeLayout)mRoot.findViewById(R.id.RelativeLayout_rightup_main_a_engine_mode_top);
 	}
 	
 	protected void InitValuables() {
@@ -91,16 +102,17 @@ public class MainARightUpEngineModeFragment extends ParentFragment{
 	@Override
 	protected void InitButtonListener() {
 		// TODO Auto-generated method stub
-		radioPower.setOnClickListener(new View.OnClickListener() {
+		radioEcono.setOnClickListener(new View.OnClickListener() {
 			
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
 				CursurIndex = 1;
 				HandleCursurDisplay.sendMessage(HandleCursurDisplay.obtainMessage(CursurIndex));
-				ClickPower();
+				ClickEcono();
 			}
 		});
+
 		radioStandard.setOnClickListener(new View.OnClickListener() {
 				
 			@Override
@@ -111,14 +123,14 @@ public class MainARightUpEngineModeFragment extends ParentFragment{
 				ClickStandard();
 			}
 		});
-		radioEcono.setOnClickListener(new View.OnClickListener() {
-		
+		radioPower.setOnClickListener(new View.OnClickListener() {
+			
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
-				CursurIndex = 3;
+				CursurIndex = 4;
 				HandleCursurDisplay.sendMessage(HandleCursurDisplay.obtainMessage(CursurIndex));
-				ClickEcono();
+				ClickPower();
 			}
 		});
 	}
@@ -138,16 +150,19 @@ public class MainARightUpEngineModeFragment extends ParentFragment{
 	public void EngineModeDisplay(int _EngineMode){
 		switch (_EngineMode) {
 		case CAN1CommManager.DATA_STATE_ENGINE_MODE_PWR:
+			CursurIndex = 3;
 			radioPower.setChecked(true);
 			radioStandard.setChecked(false);
 			radioEcono.setChecked(false);
 			break;
 		case CAN1CommManager.DATA_STATE_ENGINE_MODE_STD:
+			CursurIndex = 2;
 			radioPower.setChecked(false);
 			radioStandard.setChecked(true);
 			radioEcono.setChecked(false);
 			break;
 		case CAN1CommManager.DATA_STATE_ENGINE_MODE_ECONO:
+			CursurIndex = 1;
 			radioPower.setChecked(false);
 			radioStandard.setChecked(false);
 			radioEcono.setChecked(true);
@@ -155,10 +170,7 @@ public class MainARightUpEngineModeFragment extends ParentFragment{
 		default:
 			break;
 		}
-		
-		CursurIndex = _EngineMode+1;
 		CursurDisplay(CursurIndex);		
-
 	}
 	public void ClickPower(){
 		if(ParentActivity.AnimationRunningFlag == true)
@@ -187,6 +199,44 @@ public class MainARightUpEngineModeFragment extends ParentFragment{
 		CAN1Comm.TxCANToMCU(101);
 		ParentActivity._MainABaseFragment.showRightUptoDefaultScreenAnimation();
 	}
+	/////////////////////////////////////////////////////////////////////
+	public class EnableButtonTimerClass extends TimerTask{
+
+		@Override
+		public void run() {
+			// TODO Auto-generated method stub
+			ParentActivity.runOnUiThread(new Runnable() {
+				
+				@Override
+				public void run() {
+					// TODO Auto-generated method stub
+					if(ParentActivity.AnimationRunningFlag == false)
+					{
+						CancelEnableButtonTimer();
+						EnableRadioButton(true);
+					}
+				}
+			});
+			
+		}
+		
+	}
+	
+	public void StartEnableButtonTimer(){
+		CancelEnableButtonTimer();
+		mEnableButtonTimer = new Timer();
+		mEnableButtonTimer.schedule(new EnableButtonTimerClass(),1,50);	
+	}
+	
+	public void CancelEnableButtonTimer(){
+		if(mEnableButtonTimer != null){
+			mEnableButtonTimer.cancel();
+			mEnableButtonTimer.purge();
+			mEnableButtonTimer = null;
+		}
+		
+	}
+
 	/////////////////////////////////////////////////////////////////////
 	public void ClickLeft(){
 		switch (CursurIndex) {
@@ -222,32 +272,46 @@ public class MainARightUpEngineModeFragment extends ParentFragment{
 	public void ClickEnter(){
 		switch (CursurIndex) {
 		case 1:
-			ClickPower();
+			ClickEcono();
 			break;
 		case 2:
 			ClickStandard();
 			break;
 		case 3:
-			ClickEcono();
+			ClickPower();
 			break;
 		default:
 
 			break;
 		}
 	}
+	public void EnableRadioButton(boolean bEnable){
+		float alpha;
+		if(bEnable == true)
+			alpha = (float)1;
+		else
+			alpha = (float)0;
+		
+		LayoutBG.setAlpha(alpha);
+
+		radioPower.setClickable(bEnable);
+		radioStandard.setClickable(bEnable);
+		radioEcono.setClickable(bEnable);
+	}
+
 	public void CursurDisplay(int Index){
 		radioPower.setPressed(false);
 		radioStandard.setPressed(false);
 		radioEcono.setPressed(false);
 		switch (CursurIndex) {
 		case 1:
-			radioPower.setPressed(true);
+			radioEcono.setPressed(true);
 			break;
 		case 2:
 			radioStandard.setPressed(true);
 			break;
 		case 3:
-			radioEcono.setPressed(true);
+			radioPower.setPressed(true);
 			break;
 		default:
 			break;

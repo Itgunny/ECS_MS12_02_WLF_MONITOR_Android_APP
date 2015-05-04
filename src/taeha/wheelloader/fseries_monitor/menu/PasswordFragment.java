@@ -564,9 +564,11 @@ public abstract class PasswordFragment extends ParentFragment{
 				case 13:
 					textViewTitle.setText(ParentActivity.getResources().getString(string.Access_Denied));
 					break;
+				/*
 				case 14:
 					textViewTitle.setText(ParentActivity.getResources().getString(string.Input_new_phone_number));
 					break;
+				*/
 				case 15:
 					textViewTitle.setText(ParentActivity.getResources().getString(string._5_12_digits));
 					break;
