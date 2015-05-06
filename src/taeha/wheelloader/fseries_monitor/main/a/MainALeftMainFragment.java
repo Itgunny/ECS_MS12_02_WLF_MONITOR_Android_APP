@@ -223,6 +223,8 @@ public class MainALeftMainFragment extends ParentFragment{
 		FrontAxleTempWarningFlag = false;
 		RearAxleTempWarningFlag = false;
 		nCameraBackCnt = 0;
+		
+		CursurDisplayDetail(ParentActivity._MainABaseFragment.CursurIndex);
 	}
 	@Override
 	protected void InitButtonListener() {
@@ -250,6 +252,7 @@ public class MainALeftMainFragment extends ParentFragment{
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
+				ParentActivity._MainABaseFragment.CursurIndex = 1;
 				if(mLongPressChecker.getLongPressed() == false){
 					if(ClickFlag == true)
 						ClickMachineStatus();
@@ -270,6 +273,7 @@ public class MainALeftMainFragment extends ParentFragment{
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
+				ParentActivity._MainABaseFragment.CursurIndex = 2;
 				if(mLongPressChecker.getLongPressed() == false){
 					if(ClickFlag == true)
 						ClickMachineStatus();
@@ -300,6 +304,7 @@ public class MainALeftMainFragment extends ParentFragment{
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
+				ParentActivity._MainABaseFragment.CursurIndex = 3;
 				if(mLongPressChecker.getLongPressed() == false){
 					if(ClickFlag == true)
 						ClickFuel();
@@ -899,22 +904,29 @@ public class MainALeftMainFragment extends ParentFragment{
 	public void EcoGaugeDisplay(int _level, int _status) {
 		float Scale = 0;
 		switch (_status) {
-			case CAN1CommManager.DATA_STATE_ECO_GREEN:
-			default:
-				imgViewEcoBar.setImageResource(R.drawable.main_center_eco_all);
-				break;
-			//case CAN1CommManager.DATA_STATE_ECO_YELLOW:
-			//	imgViewEcoBar.setImageResource(R.drawable.main_center_eco_yellow_all);
-			//	break;
-			//case CAN1CommManager.DATA_STATE_ECO_RED:
-			//	imgViewEcoBar.setImageResource(R.drawable.main_center_eco_red_all);
-			//	break;
-			// ++, 150402 bwk
-//			case CAN1CommManager.DATA_STATE_ECO_WHITE:
-//				imgViewEcoBar.setImageResource(R.drawable.main_center_eco_white_all);
+//			case CAN1CommManager.DATA_STATE_ECO_GREEN:
+//			default:
+//				imgViewEcoBar.setImageResource(R.drawable.main_center_eco_all);
 //				break;
-			// --, 150402 bwk
+//			//case CAN1CommManager.DATA_STATE_ECO_YELLOW:
+//			//	imgViewEcoBar.setImageResource(R.drawable.main_center_eco_yellow_all);
+//			//	break;
+//			//case CAN1CommManager.DATA_STATE_ECO_RED:
+//			//	imgViewEcoBar.setImageResource(R.drawable.main_center_eco_red_all);
+//			//	break;
+//			// ++, 150402 bwk
+////			case CAN1CommManager.DATA_STATE_ECO_WHITE:
+////				imgViewEcoBar.setImageResource(R.drawable.main_center_eco_white_all);
+////				break;
+//			// --, 150402 bwk
+			case CAN1CommManager.DATA_STATE_ECO_WHITE:
+				imgViewEcoBar.setImageResource(R.drawable.main_center_eco_all_white);
+				break;
+			default:
+				imgViewEcoBar.setImageResource(R.drawable.main_center_eco_all_green);
+				break;
 		}
+		
 		
 		if(_level == 0xFF){
 			_level = 0;
@@ -1040,7 +1052,7 @@ public class MainALeftMainFragment extends ParentFragment{
 			popupIndicator.addActionItem(actionitemIndicator);
 			break;
 		case DATA_STATE_CURRENT_WEIHGING_RESULT_BOOMLIFTING_BUCKETFULLIN:
-			actionitemIndicator = new ActionItem(0, ParentActivity.getResources().getString(R.string.SuddenChange_BucketFullIn_Error_Warning));
+			actionitemIndicator = new ActionItem(0, ParentActivity.getResources().getString(R.string.Sudden_Change_Error_Warning)+"\n"+ParentActivity.getResources().getString(R.string.Bucket_Full_In_Error_Warning));
 			popupIndicator.addActionItem(actionitemIndicator);
 			break;
 		case DATA_STATE_CURRENT_WEIHGING_RESULT_BOOMLIFTING:
@@ -1073,6 +1085,23 @@ public class MainALeftMainFragment extends ParentFragment{
 				CAN1Comm.TxCANToMCU(62);
 				CAN1Comm.Set_RequestReweighing_PGN61184_62(3);
 			}
+		}
+	}
+	
+	public void CursurDisplayDetail(int index){
+		imgbtnMachineStatus1.setBackgroundResource(R.drawable._selector_leftup_btn1);
+		imgbtnMachineStatus2.setBackgroundResource(R.drawable._selector_leftup_btn2);
+		imgbtnFuel.setBackgroundResource(R.drawable._selector_leftdown_main_a_fuel_btn);
+		switch(index){
+			case 1:
+				imgbtnMachineStatus1.setBackgroundResource(R.drawable.main_b_default_monitoring_01_s_02);
+				break;
+			case 2:
+				imgbtnMachineStatus2.setBackgroundResource(R.drawable.main_b_default_monitoring_02_s_02);
+				break;
+			case 3:
+				imgbtnFuel.setBackgroundResource(R.drawable.main_b_default_fuelinfo_s_02);
+				break;
 		}
 	}
 }

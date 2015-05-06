@@ -9,6 +9,7 @@ import taeha.wheelloader.fseries_monitor.main.R;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
@@ -26,6 +27,7 @@ public class MainACenterFragment extends ParentFragment{
 	ImageButton imgbtnOption;
 	ImageView imgVeiwrpmGuage;
 	ImageView imgViewSmkIcon;		// ++, --, 150326 bwk
+	ImageView imgViewOptionSelect;
 	//////////////////////////////////////////////////
 	
 	//VALUABLE////////////////////////////////////////
@@ -68,7 +70,7 @@ public class MainACenterFragment extends ParentFragment{
 		Log.d(TAG,"onResume");
 		ClickFlag = true;
 		setClickEnable(ClickFlag);
-		ParentActivity.ScreenIndex = ParentActivity.SCREEN_STATE_MAIN_A_TOP;
+//		ParentActivity.ScreenIndex = ParentActivity.SCREEN_STATE_MAIN_A_TOP;
 		ParentActivity.CheckAttachmentUnlock();
 	}
 
@@ -92,11 +94,16 @@ public class MainACenterFragment extends ParentFragment{
 		imgbtnOption = (ImageButton)mRoot.findViewById(R.id.imageButton_center_main_a_option);
 		
 		imgViewSmkIcon = (ImageView)mRoot.findViewById(R.id.imageView_center_main_a_smkicon);	// ++, --, 150326 bwk
+		imgViewOptionSelect = (ImageView)mRoot.findViewById(R.id.imageView_center_main_a_option_select);
+		
+		Layoutcenter.setClickable(false);
 	}
 	
 	protected void InitValuables() {
 		// TODO Auto-generated method stub
 		super.InitValuables();
+
+		CursurDisplayDetail(ParentActivity._MainABaseFragment.CursurIndex);
 	}
 	public void InitAnimation(){
 		rpmAnimation = new GaugerpmAnimation(ParentActivity, imgVeiwrpmGuage);
@@ -105,11 +112,12 @@ public class MainACenterFragment extends ParentFragment{
 	@Override
 	protected void InitButtonListener() {
 		// TODO Auto-generated method stub
-		Layoutcenter.setOnClickListener(new View.OnClickListener() {
+		Layoutcenter.setOnTouchListener(new View.OnTouchListener() {
 			
 			@Override
-			public void onClick(View v) {
+			public boolean onTouch(View v, MotionEvent event) {
 				// TODO Auto-generated method stub
+				return true;
 			}
 		});
 		
@@ -195,4 +203,10 @@ public class MainACenterFragment extends ParentFragment{
 		}
 	}
 	// --, 150326 bwk
+	public void CursurDisplayDetail(int index){
+		if(index == 4)
+			imgViewOptionSelect.setVisibility(View.VISIBLE);
+		else
+			imgViewOptionSelect.setVisibility(View.GONE);
+	}
 }

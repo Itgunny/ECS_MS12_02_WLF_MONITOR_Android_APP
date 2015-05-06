@@ -115,7 +115,7 @@ public class MainBRightUpEngineFragment extends ParentFragment{
 		HourOdometerTitleAnimation = new TextViewXAxisFlipAnimation(ParentActivity);
 		// --, 150317 bwk
 		
-	
+		CursurDisplayDetail(ParentActivity._MainBBaseFragment.CursurIndex);
 				
 	}
 	@Override
@@ -126,6 +126,7 @@ public class MainBRightUpEngineFragment extends ParentFragment{
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
+				ParentActivity._MainBBaseFragment.CursurIndex = 6;
 				if(ClickFlag == true)
 					ClickMode();
 			}
@@ -145,6 +146,7 @@ public class MainBRightUpEngineFragment extends ParentFragment{
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
+				ParentActivity._MainBBaseFragment.CursurIndex = 5;
 				if(ClickFlag == true)
 					ClickHourOdo();
 			}

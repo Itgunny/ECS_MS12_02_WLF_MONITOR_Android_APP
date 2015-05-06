@@ -1,6 +1,8 @@
 package taeha.wheelloader.fseries_monitor.main.a.key;
 
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -29,6 +31,8 @@ public class MainAKeyQuickCouplerFragment extends ParentFragment{
 	
 	//VALUABLE////////////////////////////////////////
 	int Quickcoupler;
+	int CursurIndex;
+	Handler HandleCursurDisplay;
 	//////////////////////////////////////////////////
 	
 	//ANIMATION///////////////////////////////////////
@@ -52,6 +56,12 @@ public class MainAKeyQuickCouplerFragment extends ParentFragment{
 		InitButtonListener();
 
 		ParentActivity.ScreenIndex = ParentActivity.SCREEN_STATE_MAIN_A_KEY_QUICKCOUPLER;
+		HandleCursurDisplay = new Handler() {
+			@Override
+			public void handleMessage(Message msg) {
+				CursurDisplay(msg.what);
+			}
+		};
 		return mRoot;
 	}
 
@@ -75,6 +85,8 @@ public class MainAKeyQuickCouplerFragment extends ParentFragment{
 		super.InitValuables();
 		
 		Quickcoupler = CAN1Comm.Get_QuickCouplerOperationStatus_3448_PGN65527();
+		CursurIndex = 1;
+		CursurDisplay(CursurIndex);
 	}
 	@Override
 	protected void InitButtonListener() {
@@ -84,6 +96,8 @@ public class MainAKeyQuickCouplerFragment extends ParentFragment{
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
+				CursurIndex = 1;
+				HandleCursurDisplay.sendMessage(HandleCursurDisplay.obtainMessage(CursurIndex));
 				ClickLock();
 			}
 		});
@@ -92,6 +106,8 @@ public class MainAKeyQuickCouplerFragment extends ParentFragment{
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
+				CursurIndex = 2;
+				HandleCursurDisplay.sendMessage(HandleCursurDisplay.obtainMessage(CursurIndex));
 				ClickUnlock();
 			}
 		});
@@ -100,6 +116,8 @@ public class MainAKeyQuickCouplerFragment extends ParentFragment{
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
+				CursurIndex = 3;
+				HandleCursurDisplay.sendMessage(HandleCursurDisplay.obtainMessage(CursurIndex));
 				ClickOK();
 			}
 		});
@@ -142,5 +160,72 @@ public class MainAKeyQuickCouplerFragment extends ParentFragment{
 	public void ClickOK(){
 		ParentActivity._MainABaseFragment.showKeytoDefaultScreenAnimation();
 	}
+	/////////////////////////////////////////////////////////////////////
+	public void ClickLeft(){
+		switch (CursurIndex) {
+		case 1:
+			CursurIndex = 3;
+			CursurDisplay(CursurIndex);
+			break;
+		case 2:
+		case 3:
+			CursurIndex--;
+			CursurDisplay(CursurIndex);
+			break;
+		default:
+			CursurIndex = 1;
+			CursurDisplay(CursurIndex);
+			break;
+		}
+	}
+	public void ClickRight(){
+		switch (CursurIndex) {
+		case 1:
+		case 2:
+			CursurIndex++;
+			CursurDisplay(CursurIndex);
+			break;
+		case 3:
+		default:
+			CursurIndex = 1;
+			CursurDisplay(CursurIndex);
+			break;
+		}
+	}
+	public void ClickEnter(){
+		switch (CursurIndex) {
+		case 1:
+			ClickLock();
+			break;
+		case 2:
+			ClickUnlock();
+			break;
+		case 3:
+			ClickOK();
+			break;
+		default:
+			break;
+		}
+	}
+	
+	public void CursurDisplay(int Index){
+		textViewLock.setPressed(false);
+		textViewUnlock.setPressed(false);
+		imgbtnOK.setPressed(false);
+		switch (CursurIndex) {
+		case 1:
+			textViewLock.setPressed(true);
+			break;
+		case 2:
+			textViewUnlock.setPressed(true);
+			break;
+		case 3:
+			imgbtnOK.setPressed(true);
+			break;
+		default:
+			break;
+		}
+	}
+
 	
 }

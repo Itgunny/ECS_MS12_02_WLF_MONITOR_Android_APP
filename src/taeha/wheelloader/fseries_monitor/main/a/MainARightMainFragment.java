@@ -41,6 +41,8 @@ public class MainARightMainFragment extends ParentFragment{
 	ImageButton imgbtnTCLockUp;
 	
 	RelativeLayout layoutTCLockUp;
+	RelativeLayout layoutRightB;
+	RelativeLayout layoutRightBNonTCLockUp;
 	//////////////////////////////////////////////////
 	
 	//VALUABLE////////////////////////////////////////
@@ -54,6 +56,8 @@ public class MainARightMainFragment extends ParentFragment{
 	int CCOMode;
 	int ShiftMode;
 	int TCLockUp;
+	
+	boolean OptionTCLockUp;
 	//////////////////////////////////////////////////
 	
 	//ANIMATION///////////////////////////////////////
@@ -96,6 +100,30 @@ public class MainARightMainFragment extends ParentFragment{
 	@Override
 	protected void InitResource() {
 		// TODO Auto-generated method stub
+		layoutRightB = (RelativeLayout)mRoot.findViewById(R.id.RelativeLayout_right_main_a);
+		layoutRightBNonTCLockUp = (RelativeLayout)mRoot.findViewById(R.id.RelativeLayout_right_main_a_non_tclockup);
+		
+		InitResource_TCLockUp();
+	}
+	public void InitResource_nonTCLockUp(){
+		textViewModeTitle = (TextView)mRoot.findViewById(R.id.textView_rightup_main_a_engine_mode_title_non_tclockup);
+		textViewModeData = (TextView)mRoot.findViewById(R.id.textView_rightup_main_a_engine_mode_data_non_tclockup);
+		textViewHourOdoTitle = (TextView)mRoot.findViewById(R.id.textView_rightup_main_a_hourodometer_title_non_tclockup);
+		textViewHourOdoData = (TextView)mRoot.findViewById(R.id.textView_rightup_main_a_hourodometer_data_non_tclockup);
+		textViewHourOdoUnit = (TextView)mRoot.findViewById(R.id.textView_rightup_main_a_hourodometer_unit_non_tclockup);
+		
+		imgbtnMode = (ImageButton)mRoot.findViewById(R.id.imageButton_rightup_main_a_engine_mode_non_tclockup);
+		imgbtnHourOdo = (ImageButton)mRoot.findViewById(R.id.imageButton_rightup_main_a_hourodometer_non_tclockup);
+		textViewCCOModeTitle = (TextView)mRoot.findViewById(R.id.textView_rightdown_main_a_tm_ccomode_title_non_tclockup);
+		textViewCCOModeData = (TextView)mRoot.findViewById(R.id.textView_rightdown_main_a_tm_ccomode_data_non_tclockup);
+		
+		textViewShiftModeTitle = (TextView)mRoot.findViewById(R.id.textView_rightdown_main_a_tm_shiftmode_title_non_tclockup);
+		textViewShiftModeData = (TextView)mRoot.findViewById(R.id.textView_rightdown_main_a_tm_shiftmode_data_non_tclockup);
+		
+		imgbtnCCOMode = (ImageButton)mRoot.findViewById(R.id.imageButton_rightdown_main_a_tm_ccomode_non_tclockup);
+		imgbtnShiftMode = (ImageButton)mRoot.findViewById(R.id.imageButton_rightdown_main_a_tm_shiftmode_non_tclockup);
+	}
+	public void InitResource_TCLockUp(){
 		textViewModeTitle = (TextView)mRoot.findViewById(R.id.textView_rightup_main_a_engine_mode_title);
 		textViewModeData = (TextView)mRoot.findViewById(R.id.textView_rightup_main_a_engine_mode_data);
 		textViewHourOdoTitle = (TextView)mRoot.findViewById(R.id.textView_rightup_main_a_hourodometer_title);
@@ -118,26 +146,40 @@ public class MainARightMainFragment extends ParentFragment{
 		imgbtnTCLockUp = (ImageButton)mRoot.findViewById(R.id.imageButton_rightdown_main_a_tm_tclockup);
 		
 		layoutTCLockUp = (RelativeLayout)mRoot.findViewById(R.id.RelativeLayout_rightdown_main_a_tm_tclockup);
+		
 	}
 	
 	protected void InitValuables() {
 		// TODO Auto-generated method stub
 		super.InitValuables();
+//		EngineModeDataAnimation = new TextViewXAxisFlipAnimation(ParentActivity);
+//		HourOdometerTitleAnimation = new TextViewXAxisFlipAnimation(ParentActivity);
+//		//TMCCOModeTitleDataAnimation = new TextViewXAxisFlipAnimation(ParentActivity);	// ++, --, 150305 HHI 변경 요청
+//		TMCCOModeDataAnimation = new TextViewXAxisFlipAnimation(ParentActivity);
+//		TMShiftModeDataAnimation = new TextViewXAxisFlipAnimation(ParentActivity);
+//		TMTCLockUpDataAnimation = new TextViewXAxisFlipAnimation(ParentActivity);		
+		InitAnimation();
+		
+		OptionTCLockUp = true;
+		CursurDisplayDetail(ParentActivity._MainABaseFragment.CursurIndex);
+	}
+	public void InitAnimation(){
 		EngineModeDataAnimation = new TextViewXAxisFlipAnimation(ParentActivity);
 		HourOdometerTitleAnimation = new TextViewXAxisFlipAnimation(ParentActivity);
 		//TMCCOModeTitleDataAnimation = new TextViewXAxisFlipAnimation(ParentActivity);	// ++, --, 150305 HHI 변경 요청
 		TMCCOModeDataAnimation = new TextViewXAxisFlipAnimation(ParentActivity);
 		TMShiftModeDataAnimation = new TextViewXAxisFlipAnimation(ParentActivity);
 		TMTCLockUpDataAnimation = new TextViewXAxisFlipAnimation(ParentActivity);		
+		
 	}
 	@Override
 	protected void InitButtonListener() {
 		// TODO Auto-generated method stub
 		imgbtnHourOdo.setOnClickListener(new View.OnClickListener() {
-			
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
+				ParentActivity._MainABaseFragment.CursurIndex = 5;
 				if(ClickFlag == true)
 					ClickHourOdo();
 			}
@@ -147,6 +189,7 @@ public class MainARightMainFragment extends ParentFragment{
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
+				ParentActivity._MainABaseFragment.CursurIndex = 6;
 				if(ClickFlag == true)
 					ClickMode();
 			}
@@ -157,6 +200,7 @@ public class MainARightMainFragment extends ParentFragment{
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
+				ParentActivity._MainABaseFragment.CursurIndex = 7;
 				if(ClickFlag == true)
 					ClickCCOMode();
 			}
@@ -166,6 +210,7 @@ public class MainARightMainFragment extends ParentFragment{
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
+				ParentActivity._MainABaseFragment.CursurIndex = 8;
 				if(ClickFlag == true)
 					ClickShiftMode();
 			}
@@ -175,6 +220,7 @@ public class MainARightMainFragment extends ParentFragment{
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
+				ParentActivity._MainABaseFragment.CursurIndex = 9;
 				if(ClickFlag == true)
 					ClickTCLockUp();
 			}
@@ -283,16 +329,42 @@ public class MainARightMainFragment extends ParentFragment{
 	}	
 	
 	public void TCLockUpShow(){
-		if(ParentActivity._CheckModel.GetMCUVersion(CAN1Comm.Get_ComponentBasicInformation_1698_PGN65330()) == CheckModel.MODEL_940
-			|| ParentActivity._CheckModel.GetMCUVersion(CAN1Comm.Get_ComponentBasicInformation_1698_PGN65330()) == CheckModel.MODEL_935){
-			layoutTCLockUp.setVisibility(View.GONE);
-			imgbtnTCLockUp.setClickable(false);
-		}else if(ParentActivity._CheckModel.GetTCUModel(CAN1Comm.Get_ComponentBasicInformation_1698_PGN65330_TCU()) == CheckModel.TCU_4SPEED){
-			layoutTCLockUp.setVisibility(View.GONE);
-			imgbtnTCLockUp.setClickable(false);
-		}else{
-			layoutTCLockUp.setVisibility(View.VISIBLE);
-			imgbtnTCLockUp.setClickable(true);
+		if(OptionTCLockUp == true)
+		{
+			if(ParentActivity._CheckModel.GetMCUVersion(CAN1Comm.Get_ComponentBasicInformation_1698_PGN65330()) == CheckModel.MODEL_940
+				|| ParentActivity._CheckModel.GetMCUVersion(CAN1Comm.Get_ComponentBasicInformation_1698_PGN65330()) == CheckModel.MODEL_935){
+				InitResource_nonTCLockUp();
+				InitButtonListener();
+				InitAnimation();
+				layoutTCLockUp.setVisibility(View.GONE);
+				imgbtnTCLockUp.setClickable(false);
+				layoutRightB.setVisibility(View.GONE);
+				layoutRightBNonTCLockUp.setVisibility(View.VISIBLE);
+				OptionTCLockUp = false;
+			}else if(ParentActivity._CheckModel.GetTCUModel(CAN1Comm.Get_ComponentBasicInformation_1698_PGN65330_TCU()) == CheckModel.TCU_4SPEED){
+				InitResource_nonTCLockUp();
+				InitButtonListener();
+				InitAnimation();
+				layoutTCLockUp.setVisibility(View.GONE);
+				imgbtnTCLockUp.setClickable(false);
+				layoutRightB.setVisibility(View.GONE);
+				layoutRightBNonTCLockUp.setVisibility(View.VISIBLE);
+				OptionTCLockUp = false;
+			}
+		}else if(OptionTCLockUp == false){
+			if(ParentActivity._CheckModel.GetMCUVersion(CAN1Comm.Get_ComponentBasicInformation_1698_PGN65330()) == CheckModel.MODEL_940
+					|| ParentActivity._CheckModel.GetMCUVersion(CAN1Comm.Get_ComponentBasicInformation_1698_PGN65330()) == CheckModel.MODEL_935){
+			}else if(ParentActivity._CheckModel.GetTCUModel(CAN1Comm.Get_ComponentBasicInformation_1698_PGN65330_TCU()) == CheckModel.TCU_4SPEED){
+			}else{
+				InitResource_TCLockUp();
+				InitButtonListener();
+				InitAnimation();
+				layoutRightB.setVisibility(View.VISIBLE);
+				layoutRightBNonTCLockUp.setVisibility(View.GONE);
+				layoutTCLockUp.setVisibility(View.VISIBLE);
+				imgbtnTCLockUp.setClickable(false);
+				OptionTCLockUp = true;
+			}
 		}
 	}
 	public void TMCCOModeTitleDisplay(int Model){
@@ -457,5 +529,56 @@ public class MainARightMainFragment extends ParentFragment{
 		imgbtnCCOMode.setClickable(ClickFlag);
 		imgbtnShiftMode.setClickable(ClickFlag);
 		imgbtnTCLockUp.setClickable(ClickFlag);
+	}
+
+	public void CursurDisplayDetail(int index){
+		if(OptionTCLockUp == true){
+			imgbtnHourOdo.setBackgroundResource(R.drawable._selector_rightup_main_a_hourodometer_btn1);
+			imgbtnMode.setBackgroundResource(R.drawable._selector_right_main_a_middle_btn1);
+			imgbtnCCOMode.setBackgroundResource(R.drawable._selector_right_main_a_middle_btn1);
+			imgbtnShiftMode.setBackgroundResource(R.drawable._selector_right_main_a_middle_btn1);
+			imgbtnTCLockUp.setBackgroundResource(R.drawable._selector_rightdown_main_a_tm_tclockup_btn1);
+
+			switch(index){
+				case 5:
+					imgbtnHourOdo.setBackgroundResource(R.drawable.main_b_default_enginemode_s_02);
+					break;
+				case 6:
+					imgbtnMode.setBackgroundResource(R.drawable.main_b_default_warmingup_s_02);
+					break;
+				case 7:
+					imgbtnCCOMode.setBackgroundResource(R.drawable.main_b_default_cco_s_02);
+					break;
+				case 8:
+					imgbtnShiftMode.setBackgroundResource(R.drawable.main_b_default_shift_s_02);
+					break;
+				case 9:
+					imgbtnTCLockUp.setBackgroundResource(R.drawable.main_b_default_tclockup_s_02);
+					break;
+			}
+		
+		}
+		else{
+			imgbtnHourOdo.setBackgroundResource(R.drawable._selector_rightup_main_a_hourodometer_btn2);
+			imgbtnMode.setBackgroundResource(R.drawable._selector_right_main_a_middle_btn2);
+			imgbtnCCOMode.setBackgroundResource(R.drawable._selector_right_main_a_middle_btn3);
+			imgbtnShiftMode.setBackgroundResource(R.drawable._selector_rightdown_main_a_tm_shiftmode_btn1);
+			
+			switch(index){
+				case 5:
+					imgbtnHourOdo.setBackgroundResource(R.drawable.main_b_default_no_tclockup_01_odometer_s_02);
+					break;
+				case 6:
+					imgbtnMode.setBackgroundResource(R.drawable.main_b_default_no_tclockup_02_enginemode_s_02);
+					break;
+				case 7:
+					imgbtnCCOMode.setBackgroundResource(R.drawable.main_b_default_no_tclockup_03_cco_s_02);
+					break;
+				case 8:
+					imgbtnShiftMode.setBackgroundResource(R.drawable.main_b_default_no_tclockup_04_shift_s_02);
+					break;
+			}
+
+		}
 	}
 }

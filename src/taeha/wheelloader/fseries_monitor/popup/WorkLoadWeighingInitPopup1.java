@@ -61,24 +61,36 @@ public class WorkLoadWeighingInitPopup1 extends ParentPopup{
 		InitButtonListener();
 		InitValuable();
 		
-		ParentActivity.ScreenIndex = Home.SCREEN_STATE_MENU_MODE_HYD_WORKLOAD_WEIGHING_INIT1;
+		if(ParentActivity.OldScreenIndex == Home.SCREEN_STATE_MENU_MODE_HYD_WORKLOAD_TOP)
+			ParentActivity.ScreenIndex = Home.SCREEN_STATE_MENU_MODE_HYD_WORKLOAD_WEIGHING_INIT1;
+		else if(ParentActivity.OldScreenIndex == Home.SCREEN_STATE_MAIN_A_KEY_WORKLOAD)
+			ParentActivity.ScreenIndex = Home.SCREEN_STATE_MAIN_A_KEY_WORKLOAD_WEIGHING_INIT1;
+		else if(ParentActivity.OldScreenIndex == Home.SCREEN_STATE_MAIN_B_KEY_WORKLOAD)
+			ParentActivity.ScreenIndex = Home.SCREEN_STATE_MAIN_B_KEY_WORKLOAD_WEIGHING_INIT1;
 	}
 	@Override
 	public void dismiss() {
 		// TODO Auto-generated method stub
 		super.dismiss();
 		Log.d(TAG,"dismiss");
-		if(ParentActivity.ScreenIndex != ParentActivity.SCREEN_STATE_MENU_MODE_HYD_WORKLOAD_WEIGHING_INIT2)
+		if(ParentActivity.ScreenIndex != Home.SCREEN_STATE_MENU_MODE_HYD_WORKLOAD_WEIGHING_INIT2)
 		{
 			ParentActivity.ScreenIndex = ParentActivity.OldScreenIndex;
-			if(ParentActivity.OldScreenIndex == ParentActivity.SCREEN_STATE_MENU_MODE_HYD_WORKLOAD_TOP)
-			{
+			if(ParentActivity.OldScreenIndex == Home.SCREEN_STATE_MENU_MODE_HYD_WORKLOAD_TOP){
 				try {
 					ParentActivity._MenuBaseFragment._WorkLoadFragment.CursurDisplay(10);
 				} catch (NullPointerException e) {
 					// TODO: handle exception
 					Log.e(TAG,"NullPointerException dismiss");
 				}		
+			}else if(ParentActivity.OldScreenIndex == Home.SCREEN_STATE_MAIN_A_KEY_WORKLOAD){
+				try {
+					ParentActivity._MainABaseFragment._MainAKeyWorkLoadFragment.CursurDisplay(5);
+				} catch (NullPointerException e) {
+					// TODO: handle exception
+					Log.e(TAG,"NullPointerException dismiss");
+				}
+
 			}
 		}
 	}
@@ -147,24 +159,24 @@ public class WorkLoadWeighingInitPopup1 extends ParentPopup{
 	}
 	///////////////////////////////////////////////////////////////////////////////
 	public void ClickCurrent(){
+		this.dismiss();
 		ParentActivity._WorkLoadWeighingInitPopup2.setMode(3);
 		ParentActivity.showWorkLoadWeighingInit2();
-		this.dismiss();
 	}	
 	public void ClickTotalA(){
+		this.dismiss();
 		ParentActivity._WorkLoadWeighingInitPopup2.setMode(CAN1CommManager.DATA_STATE_WEIGHINGDISPLAY_TOTAL_A);
 		ParentActivity.showWorkLoadWeighingInit2();
-		this.dismiss();
 	}	
 	public void ClickTotalB(){
+		this.dismiss();
 		ParentActivity._WorkLoadWeighingInitPopup2.setMode(CAN1CommManager.DATA_STATE_WEIGHINGDISPLAY_TOTAL_B);
 		ParentActivity.showWorkLoadWeighingInit2();
-		this.dismiss();
 	}	
 	public void ClickTotalC(){
+		this.dismiss();
 		ParentActivity._WorkLoadWeighingInitPopup2.setMode(CAN1CommManager.DATA_STATE_WEIGHINGDISPLAY_TOTAL_C);
 		ParentActivity.showWorkLoadWeighingInit2();
-		this.dismiss();
 	}	
 	
 	

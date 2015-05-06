@@ -72,7 +72,7 @@ public class Home extends Activity {
 	public static final int VERSION_HIGH 		= 1;
 	public static final int VERSION_LOW 		= 0;
 	public static final int VERSION_SUB_HIGH 	= 4;
-	public static final int VERSION_SUB_LOW 	= 4;
+	public static final int VERSION_SUB_LOW 	= 5;
 	////1.0.2.3
 	// UI B 안 최초 적용 2014.12.10
 	////1.0.2.4
@@ -413,6 +413,17 @@ public class Home extends Activity {
 	//	- 장비상태 위/아래 버튼 활성화 이미지 변경
 	// 14. 메인 키패드 연동(Engine Mode, CCO Mode, ICCO Mode, Shift Mode, TC Lock Up)
 	// 15. RMCU관련 MCU Error Description 추가
+	////v1.0.4.5
+	// 1. 퀵 ScreenIndex 안맞는 현상 개선
+	// 2. 메인 키패드 연동
+	// 3. 홈에서 사용자 전환, 고장진단, 소모품 관리 ESC 눌렀을 때 퀵으로 돌아가게 변경 
+	// 4. ECO Gauge 사양변경(White인 경우와 그 외의 경우로 나눠서 이미지 다르게 Display)
+	// 5. TC LOCK UP 미장착시 TYPE B 메인 화면 수정
+	// 6. Preference - Sound Output Setting - External AUX 아래 경고 문구 추가
+	// 7. Preference - DisplayStyle/Language - DisplayStyle : 애니메이션 후 Display 적용
+	// 8. Disply type B에서 rpm부분 클릭 시 rpm 숫자 깜밖이는 현상(젤리빈) - 개선(Touch OFF)
+	// 9. 냉각팬 수동 작은 아이콘 배경 투명하게 변경
+	// 10. 메인 키 키패드 연동(B안)
 	//////////////////////////////////////////////////////////////////////////////////////
 	
 	// TAG
@@ -474,6 +485,9 @@ public class Home extends Activity {
 	public  static final int SCREEN_STATE_MAIN_B_KEY_WORKLOAD_ACCUMULATION					= 0x16610000;
 	public  static final int SCREEN_STATE_MAIN_B_KEY_WORKLOAD_DISPLAY						= 0x16620000;
 	public  static final int SCREEN_STATE_MAIN_B_KEY_WORKLOAD_ERRORDETECT					= 0x16630000;
+	public  static final int SCREEN_STATE_MAIN_B_KEY_WORKLOAD_INIT							= 0x16640000;
+	public  static final int SCREEN_STATE_MAIN_B_KEY_WORKLOAD_WEIGHING_INIT1				= 0x16650000;
+	public  static final int SCREEN_STATE_MAIN_B_KEY_WORKLOAD_WEIGHING_INIT2				= 0x16660000;
 	public  static final int SCREEN_STATE_MAIN_B_KEY_BEACONLAMP								= 0x16700000;
 	public  static final int SCREEN_STATE_MAIN_B_KEY_REARWIPER								= 0x16800000;
 	public  static final int SCREEN_STATE_MAIN_B_KEY_MIRRORHEAT								= 0x16900000;
@@ -740,6 +754,9 @@ public class Home extends Activity {
 	public  static final int SCREEN_STATE_MAIN_A_KEY_WORKLOAD_ACCUMULATION					= 0x76610000;
 	public  static final int SCREEN_STATE_MAIN_A_KEY_WORKLOAD_DISPLAY						= 0x76620000;
 	public  static final int SCREEN_STATE_MAIN_A_KEY_WORKLOAD_ERRORDETECT					= 0x76630000;
+	public  static final int SCREEN_STATE_MAIN_A_KEY_WORKLOAD_INIT							= 0x76640000;
+	public  static final int SCREEN_STATE_MAIN_A_KEY_WORKLOAD_WEIGHING_INIT1				= 0x76650000;
+	public  static final int SCREEN_STATE_MAIN_A_KEY_WORKLOAD_WEIGHING_INIT2				= 0x76660000;
 	public  static final int SCREEN_STATE_MAIN_A_KEY_BEACONLAMP								= 0x76700000;
 	public  static final int SCREEN_STATE_MAIN_A_KEY_REARWIPER								= 0x76800000;
 	public  static final int SCREEN_STATE_MAIN_A_KEY_MIRRORHEAT								= 0x76900000;
@@ -1745,13 +1762,13 @@ public class Home extends Activity {
 	}	
 
 	public void setScreenIndex(){
-		Log.d(TAG,"ScreenIndex="+ScreenIndex);
+//		Log.d(TAG,"ScreenIndex="+Integer.toHexString(ScreenIndex));
 		if(DisplayType == DISPLAY_TYPE_A){
 			ScreenIndex = SCREEN_STATE_MAIN_B_TOP;
 		}else{
 			ScreenIndex = SCREEN_STATE_MAIN_A_TOP;
 		}
-		Log.d(TAG,"ScreenIndex="+ScreenIndex);
+//		Log.d(TAG,"ScreenIndex="+Integer.toHexString(ScreenIndex));
 	}	
 	// --, 150309 bwk
 	// ++, 150331 bwk
@@ -1766,7 +1783,6 @@ public class Home extends Activity {
 			}
 		}else{
 			_MainChangeAnimation.StartChangeAnimation(_MainABaseFragment);
-			OldScreenIndex = Home.SCREEN_STATE_MAIN_A_TOP;
 			switch(Key){
 			case CAN1CommManager.WORK_LOAD:
 				_MainABaseFragment.setFirstScreenIndex(Home.SCREEN_STATE_MAIN_A_KEY_WORKLOAD);
@@ -2396,12 +2412,12 @@ public class Home extends Activity {
 	public void Checkrpm(int Data){
 		if(CAN1Comm.GetMultimediaFlag() == true && PressFnKey == 0)
 		{
-			Log.d(TAG, "Player On");
+//			Log.d(TAG, "Player On");
 			PressFnKey = 1;
 		}
 		else if(CAN1Comm.GetMultimediaFlag() == false && PressFnKey == 1)
 		{
-			Log.d(TAG, "Player OFF");
+//			Log.d(TAG, "Player OFF");
 			PressFnKey = 0;
 		}
 		
@@ -2409,6 +2425,11 @@ public class Home extends Activity {
 		{
 			CAN1Comm.CheckMultimedia();
 		}
+		
+		if(CAN1Comm.GetMiracastFlag() == true)
+		{
+			CAN1Comm.GetMiracastFlag();
+		}		
 		
 		if(PressFnKey == 1)
 		{
@@ -2504,6 +2525,11 @@ public class Home extends Activity {
 				||	 ScreenIndex	== SCREEN_STATE_MAIN_A_KEY_QUICKCOUPLER_POPUP_UNLOCKING3){
 			if(Data == CAN1CommManager.CAMERA){
 				ExcuteCamActivitybyKey();
+			}else if(Data == CAN1CommManager.ESC || Data == CAN1CommManager.ENTER){
+				if(ScreenIndex == SCREEN_STATE_MAIN_A_KEY_QUICKCOUPLER_POPUP_LOCKING2)
+					_QuickCouplerPopupLocking2.ClickCancel();
+				else if(ScreenIndex == SCREEN_STATE_MAIN_A_KEY_QUICKCOUPLER_POPUP_UNLOCKING2)
+					_QuickCouplerPopupUnlocking2.ClickCancel();
 			}
 			Log.d(TAG,"Click QuickCoupler Key");				
 		}else if((ScreenIndex & SCREEN_STATE_MAIN_A_TOP) == SCREEN_STATE_MAIN_A_TOP){

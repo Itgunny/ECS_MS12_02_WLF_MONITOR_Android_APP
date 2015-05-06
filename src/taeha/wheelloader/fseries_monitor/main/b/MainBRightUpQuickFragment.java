@@ -70,7 +70,7 @@ public class MainBRightUpQuickFragment extends ParentFragment{
 	protected void InitValuables() {
 		// TODO Auto-generated method stub
 		super.InitValuables();
-		
+		CursurDisplayDetail(ParentActivity._MainBBaseFragment.CursurIndex);
 	}
 	@Override
 	protected void InitButtonListener() {
@@ -80,6 +80,7 @@ public class MainBRightUpQuickFragment extends ParentFragment{
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
+				ParentActivity._MainBBaseFragment.CursurIndex = 5;
 				ClickActiveFault();
 			}
 		});
@@ -116,5 +117,13 @@ public class MainBRightUpQuickFragment extends ParentFragment{
 	}
 	public void Clickable(boolean flag){
 		LayoutBG.setClickable(flag);
+	}
+	public void CursurDisplayDetail(int index){
+		LayoutBG.setBackgroundResource(R.drawable._selector_rightup_quick_btn);
+		switch(index){
+			case 5:
+				LayoutBG.setBackgroundResource(R.drawable.main_bg_right_up_quick_s_02);
+				break;
+		}
 	}
 }

@@ -52,7 +52,7 @@
 
             <RadioButton
                 android:id="@+id/radioButton_key_main_a_ridecontrol_on_conditional"
-                android:layout_width="500dp"
+                android:layout_width="700dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
                 android:button="@drawable/_selector_radio_btn"

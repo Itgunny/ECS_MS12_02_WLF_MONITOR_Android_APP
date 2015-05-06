@@ -97,6 +97,16 @@ public class QuickCouplerPopupLocking2 extends ParentPopup{
 		super.dismiss();
 		Log.d(TAG,"dismiss");
 		ParentActivity.ScreenIndex = ParentActivity.OldScreenIndex;
+		try {
+			if(ParentActivity.DisplayType == ParentActivity.DISPLAY_TYPE_A){
+				//ParentActivity._MainBBaseFragment._MainBKeyQuickCouplerFragment.CursurDisplay(1);
+			}else{
+				ParentActivity._MainABaseFragment._MainAKeyQuickCouplerFragment.CursurDisplay(1);
+			}
+		} catch (NullPointerException e) {
+			// TODO: handle exception
+			Log.e(TAG,"NullPointerException dismiss");
+		}		
 		CancelQuickCouplerSendTimer();
 		CAN1Comm.Set_QuickCouplerOperationStatus_3448_PGN65527(CAN1CommManager.DATA_STATE_KEY_QUICKCOUPLER_OFF);
 		CAN1Comm.TxCANToMCU(247);

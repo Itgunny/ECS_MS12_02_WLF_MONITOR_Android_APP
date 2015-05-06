@@ -431,9 +431,18 @@ public class FaultHistoryActiveFragment extends ParentFragment{
 		//if(ParentActivity.OldScreenIndex == Home.SCREEN_STATE_MAIN_B_TOP){
 			//ParentActivity._MainChangeAnimation.StartChangeAnimation(ParentActivity._MainBBaseFragment);
 		if(ParentActivity.OldScreenIndex == Home.SCREEN_STATE_MAIN_A_TOP || ParentActivity.OldScreenIndex == Home.SCREEN_STATE_MAIN_B_TOP){
-			ParentActivity.showMainScreen();
-		// --, 150309 bwk			
-			ParentActivity.OldScreenIndex = 0;
+//			ParentActivity.showMainScreen();
+//		// --, 150309 bwk			
+//			ParentActivity.OldScreenIndex = 0;
+			if(ParentActivity.DisplayType == Home.DISPLAY_TYPE_A){
+				ParentActivity._MainChangeAnimation.StartChangeAnimation(ParentActivity._MainBBaseFragment);
+				ParentActivity.OldScreenIndex = Home.SCREEN_STATE_MENU_MONITORING_FAULTHISTORY_ACTIVE_TOP;
+				ParentActivity._MainBBaseFragment.setFirstScreenIndex(Home.SCREEN_STATE_MAIN_B_QUICK_TOP);
+			}else{
+				ParentActivity._MainChangeAnimation.StartChangeAnimation(ParentActivity._MainABaseFragment);
+				ParentActivity.OldScreenIndex = Home.SCREEN_STATE_MENU_MONITORING_FAULTHISTORY_ACTIVE_TOP;
+				ParentActivity._MainABaseFragment.setFirstScreenIndex(Home.SCREEN_STATE_MAIN_A_QUICK_TOP);
+			}
 		}
 		else{
 			ParentActivity._MenuBaseFragment.showFaultHistoryAnimation();

@@ -4,6 +4,8 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -38,6 +40,8 @@ public class MainAKeyDetentFragment extends ParentFragment{
 	
 	int SendCount;
 
+	int CursurIndex;
+	Handler HandleCursurDisplay;
 	//////////////////////////////////////////////////
 	
 	//ANIMATION///////////////////////////////////////
@@ -63,7 +67,17 @@ public class MainAKeyDetentFragment extends ParentFragment{
 		ParentActivity.ScreenIndex = ParentActivity.SCREEN_STATE_MAIN_A_KEY_DETENT;
 		DetentBoomDisplay(BoomDetentMode);
 		DetentBucketDisplay(BucketDetentMode);
-
+		if(BoomDetentMode == CAN1CommManager.DATA_STATE_KEY_DETENT_BOOM_UPDOWN)
+			CursurIndex = 2;
+		else
+			CursurIndex = 1;
+		CursurDisplay(CursurIndex);
+		HandleCursurDisplay = new Handler() {
+			@Override
+			public void handleMessage(Message msg) {
+				CursurDisplay(msg.what);
+			}
+		};
 		return mRoot;
 	}
 	@Override
@@ -105,6 +119,8 @@ public class MainAKeyDetentFragment extends ParentFragment{
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
+				CursurIndex = 1;
+				HandleCursurDisplay.sendMessage(HandleCursurDisplay.obtainMessage(CursurIndex));
 				ClickBoomOff();
 			}
 		});
@@ -113,6 +129,8 @@ public class MainAKeyDetentFragment extends ParentFragment{
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
+				CursurIndex = 2;
+				HandleCursurDisplay.sendMessage(HandleCursurDisplay.obtainMessage(CursurIndex));
 				ClickBoomOn();
 			}
 		});
@@ -121,6 +139,8 @@ public class MainAKeyDetentFragment extends ParentFragment{
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
+				CursurIndex = 3;
+				HandleCursurDisplay.sendMessage(HandleCursurDisplay.obtainMessage(CursurIndex));
 				ClickBucketOff();
 			}
 		});
@@ -129,6 +149,8 @@ public class MainAKeyDetentFragment extends ParentFragment{
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
+				CursurIndex = 4;
+				HandleCursurDisplay.sendMessage(HandleCursurDisplay.obtainMessage(CursurIndex));
 				ClickBucketOn();
 			}
 		});
@@ -157,6 +179,8 @@ public class MainAKeyDetentFragment extends ParentFragment{
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
+				CursurIndex = 5;
+				HandleCursurDisplay.sendMessage(HandleCursurDisplay.obtainMessage(CursurIndex));
 				ClickOK();
 			}
 		});
@@ -254,6 +278,95 @@ public class MainAKeyDetentFragment extends ParentFragment{
 	public void ClickOK(){
 		ParentActivity._MainABaseFragment.showKeytoDefaultScreenAnimation();
 	}
+
+	/////////////////////////////////////////////////////////////////////
+	public void ClickLeft(){
+		switch (CursurIndex) {
+		case 1:
+			CursurIndex = 5;
+			CursurDisplay(CursurIndex);
+			break;
+		case 2:
+		case 3:
+		case 4:
+		case 5:
+			CursurIndex--;
+			CursurDisplay(CursurIndex);
+			break;
+		default:
+			CursurIndex = 1;
+			CursurDisplay(CursurIndex);
+			break;
+		}
+	}
+	public void ClickRight(){
+		switch (CursurIndex) {
+		case 1:
+		case 2:
+		case 3:
+		case 4:
+			CursurIndex++;
+			CursurDisplay(CursurIndex);
+			break;
+		case 5:
+		default:
+			CursurIndex = 1;
+			CursurDisplay(CursurIndex);
+			break;
+		}
+	}
+	public void ClickEnter(){
+		switch (CursurIndex) {
+		case 1:
+			ClickBoomOff();
+			DetentBoomDisplay(CAN1CommManager.DATA_STATE_KEY_DETENT_BOOM_OFF);
+			break;
+		case 2:
+			ClickBoomOn();
+			DetentBoomDisplay(CAN1CommManager.DATA_STATE_KEY_DETENT_BOOM_UPDOWN);
+			break;
+		case 3:
+			ClickBucketOff();
+			DetentBucketDisplay(CAN1CommManager.DATA_STATE_KEY_DETENT_BUCKET_OFF);
+			break;
+		case 4:
+			ClickBucketOn();
+			DetentBucketDisplay(CAN1CommManager.DATA_STATE_KEY_DETENT_BUCKET_IN);
+			break;
+		case 5:
+			ClickOK();
+			break;
+		default:
+			break;
+		}
+		
+
+	}
 	
-	
+	public void CursurDisplay(int Index){
+		radioBoomOff.setPressed(false);
+		radioBoomOn.setPressed(false);
+		radioBucketOff.setPressed(false);
+		radioBucketOn.setPressed(false);
+		imgbtnOK.setPressed(false);		
+		switch (CursurIndex) {
+		case 1:
+			radioBoomOff.setPressed(true);
+			break;
+		case 2:
+			radioBoomOn.setPressed(true);
+			break;
+		case 3:
+			radioBucketOff.setPressed(true);
+			break;
+		case 4:
+			radioBucketOn.setPressed(true);
+			break;
+		case 5:
+			imgbtnOK.setPressed(true);
+			break;
+		default:
+			break;
+		}
+	}
 }

@@ -97,7 +97,7 @@ public class MainBBaseFragment extends ParentFragment{
 	int AEBReq;
 	
 	int FirstScreenIndex;		// ++, --, 150331 bwk
-	int CursurIndex;
+	public int CursurIndex;
 	//////////////////////////////////////////////////
 	
 	//Fragment////////////////////////////////////////
@@ -277,6 +277,7 @@ public class MainBBaseFragment extends ParentFragment{
 		}
 		
 		ParentActivity.ScreenIndex = ParentActivity.SCREEN_STATE_MAIN_B_TOP;
+//		Log.d(TAG,"1ScreenIndex="+Integer.toHexString(ParentActivity.ScreenIndex));
 		
 		ParentActivity.StartSeatBeltTimer();
 		
@@ -986,7 +987,6 @@ public class MainBBaseFragment extends ParentFragment{
 		LeftUpChangeAnimation.StartChangeAnimation(_MainBLeftUpMachineStatusFragment);
 		LeftDownChangeAnimation.StartChangeAnimation(_MainBLeftDownFuelFragment);
 		
-		
 		_RightUpShiftAnimation.StartShiftAnimation();
 		_RightDownShiftAnimation.StartShiftAnimation();
 		_LeftUpShiftAnimation.StartShiftAnimation();
@@ -1005,10 +1005,19 @@ public class MainBBaseFragment extends ParentFragment{
 	
 	// ++, 150407 bwk
 	public void showQuicktoDefaultScreenAnimation(){
+		CursurIndex = 0;
+		
 		ParentActivity.ScreenIndex = ParentActivity.SCREEN_STATE_MAIN_B_TOP;
 		
 		_MainBodyShiftAnimation.StartShiftZeroAnimation();
 		_MainBVirtualKeyShiftAnimation.StartShiftZeroAnimation();
+		
+		_MainBCenterFragment = new MainBCenterFragment();
+		_MainBRightUpEngineFragment = new MainBRightUpEngineFragment();
+		_MainBRightDownTMFragment = new MainBRightDownTMFragment();
+		_MainBLeftUpMachineStatusFragment = new MainBLeftUpMachineStatusFragment();
+		_MainBLeftDownFuelFragment = new MainBLeftDownFuelFragment();
+		_MainBIndicatorFragment = new MainBIndicatorFragment();
 		
 		CenterAnimation.StartChangeAnimation(_MainBCenterFragment);
 		RightUpChangeAnimation.StartChangeAnimation(_MainBRightUpEngineFragment);
@@ -1060,7 +1069,8 @@ public class MainBBaseFragment extends ParentFragment{
 		_RightDownBGShiftAnimation.StartShiftAnimation();
 		_LeftUpBGShiftAnimation.StartShiftAnimation();
 		_LeftDownBGShiftAnimation.StartShiftAnimation();
-				
+		
+		CursurDisplay(CursurIndex);		
 	}
 	public void showRightDowntoDefaultScreenAnimation(){
 		ParentActivity.ScreenIndex = ParentActivity.SCREEN_STATE_MAIN_B_TOP;
@@ -1089,6 +1099,8 @@ public class MainBBaseFragment extends ParentFragment{
 		_RightUpBGShiftAnimation.StartShiftAnimation();
 		_LeftUpBGShiftAnimation.StartShiftAnimation();
 		_LeftDownBGShiftAnimation.StartShiftAnimation();
+		
+		CursurDisplay(CursurIndex);
 	}
 	
 	public void showLeftDowntoDefaultScreenAnimation(){
@@ -1120,10 +1132,7 @@ public class MainBBaseFragment extends ParentFragment{
 		_LeftUpBGShiftAnimation.StartShiftAnimation();
 		_RightDownBGShiftAnimation.StartShiftAnimation();
 				
-			
-	
-		
-		
+		CursurDisplay(CursurIndex);
 	}
 	public void showLeftUptoDefaultScreenAnimation(){
 		ParentActivity.ScreenIndex = ParentActivity.SCREEN_STATE_MAIN_B_TOP;
@@ -1154,10 +1163,7 @@ public class MainBBaseFragment extends ParentFragment{
 		_LeftDownBGShiftAnimation.StartShiftAnimation();
 		_RightDownBGShiftAnimation.StartShiftAnimation();
 				
-			
-		
-		
-		
+		CursurDisplay(CursurIndex);	
 	}
 	public void showCalibrationtoDefaultScreenAnimation(){
 		ParentActivity.ScreenIndex = ParentActivity.SCREEN_STATE_MAIN_B_TOP;
@@ -1170,6 +1176,12 @@ public class MainBBaseFragment extends ParentFragment{
 		
 		_BodyAppearAnimation.StartAnimation();
 		_KeyDisappearAnimation.StartAnimation();
+		
+		_MainBCenterFragment = new MainBCenterFragment();
+		_MainBRightUpEngineFragment = new MainBRightUpEngineFragment();
+		_MainBRightDownTMFragment = new MainBRightDownTMFragment();
+		_MainBLeftUpMachineStatusFragment = new MainBLeftUpMachineStatusFragment();
+		_MainBLeftDownFuelFragment = new MainBLeftDownFuelFragment();
 		
 		CenterAnimation.StartChangeAnimation(_MainBCenterFragment);
 		RightUpChangeAnimation.StartChangeAnimation(_MainBRightUpEngineFragment);
@@ -1191,9 +1203,17 @@ public class MainBBaseFragment extends ParentFragment{
 		KeyBodyChangeAnimation.StartDisappearAnimation();
 	}
 	public void showQuickScreenAnimation(){
+		CursurIndex = 0;
+		
 		_MainBodyShiftAnimation.StartShiftZeroAnimation();
 		_MainBVirtualKeyShiftAnimation.StartShiftZeroAnimation();
 	
+		_MainBCenterQuickFragment = new MainBCenterQuickFragment();
+		_MainBRightUpQuickFragment = new MainBRightUpQuickFragment();
+		_MainBRightDownQuickFragment = new MainBRightDownQuickFragment();
+		_MainBLeftUpQuickFragment = new MainBLeftUpQuickFragment();
+		_MainBLeftDownQuickFragment = new MainBLeftDownQuickFragment();
+		
 		CenterAnimation.StartChangeAnimation(_MainBCenterQuickFragment);
 		RightUpChangeAnimation.StartChangeAnimation(_MainBRightUpQuickFragment);
 		RightDownChangeAnimation.StartChangeAnimation(_MainBRightDownQuickFragment);
@@ -1420,8 +1440,27 @@ public class MainBBaseFragment extends ParentFragment{
 		FirstScreenIndex = Index;
 	}
 	public void CheckFirstScreen(int Index){
+//		Log.d(TAG,"CheckFirstScreen:"+Integer.toHexString(Index));
 		if(Index == Home.SCREEN_STATE_MAIN_B_KEY_WORKLOAD){
 			showWorkLoad();
+			setFirstScreenIndex(0);
+		}
+		else if(Index == Home.SCREEN_STATE_MAIN_B_QUICK_TOP){
+			switch(ParentActivity.OldScreenIndex)
+			{
+				case Home.SCREEN_STATE_MENU_USERSWITCHING_TOP:
+					CursurIndex = 1;
+					break;
+				case Home.SCREEN_STATE_MENU_MONITORING_FAULTHISTORY_ACTIVE_TOP:
+					CursurIndex = 5;
+					break;
+				case Home.SCREEN_STATE_MENU_MANAGEMENT_MAINTENANCE_TOP:
+					CursurIndex = 6;
+					break;
+			}
+			ParentActivity.OldScreenIndex = 0;		
+			
+			showQuickScreen();
 			setFirstScreenIndex(0);
 		}
 	}
@@ -1444,6 +1483,18 @@ public class MainBBaseFragment extends ParentFragment{
 		KeyBodyChangeAnimation.StartChangeAnimation(_MainBKeyWorkLoadFragment);
 	}
 	// --, 150331 bwk
+	public void showQuickScreen(){
+		VirtualKeyChangeAnimation.StartChangeAnimation(_MainBVirtualKeyFragment);
+		
+		showCenterQuick();
+		showRightUpQuick();
+		showRightDownQuick();
+		showLeftDownQuick();
+		showLeftUpQuick();
+//		showVirtualKey();
+		
+		IndicatorChangeAnimation.StartDisappearAnimation();		
+	}
 	/////////////////////////////////////////////////////////////////////
 	public void KeyButtonClick(final int key){
 		Log.d(TAG,"KeyButtonClick : 0x" + Integer.toHexString(key));
@@ -1582,6 +1633,7 @@ public class MainBBaseFragment extends ParentFragment{
 		
 		ParentActivity._MainChangeAnimation.StartChangeAnimation(ParentActivity._MenuBaseFragment);
 		ParentActivity.OldScreenIndex = Home.SCREEN_STATE_MAIN_B_TOP;
+		Log.d(TAG,"10ScreenIndex="+Integer.toHexString(ParentActivity.ScreenIndex));
 		ParentActivity._MenuBaseFragment.setFirstScreenIndex(Home.SCREEN_STATE_MENU_PREFERENCE_DISPLAYTYPELANG_LANG_CHANGE);
 	}
 	// --, 150210 bwk
@@ -1625,11 +1677,26 @@ public class MainBBaseFragment extends ParentFragment{
 			ParentActivity._MiracastClosePopup.ClickLeft();
 			break;
 		case Home.SCREEN_STATE_MAIN_B_TOP:
-//			if(CursurIndex > 0)
-//				CursurIndex--;
-//			else
-//				CursurIndex = 9;
-//			CursurDisplay(CursurIndex);
+			if(CursurIndex > 0)
+				CursurIndex--;
+			else 
+			{
+				if(ParentActivity._CheckModel.GetMCUVersion(CAN1Comm.Get_ComponentBasicInformation_1698_PGN65330()) == CheckModel.MODEL_940
+						|| ParentActivity._CheckModel.GetMCUVersion(CAN1Comm.Get_ComponentBasicInformation_1698_PGN65330()) == CheckModel.MODEL_935){
+					CursurIndex = 8;
+				}else if(ParentActivity._CheckModel.GetTCUModel(CAN1Comm.Get_ComponentBasicInformation_1698_PGN65330_TCU()) == CheckModel.TCU_4SPEED){
+					CursurIndex = 8;
+				}else
+					CursurIndex = 9;
+			}
+			CursurDisplay(CursurIndex);
+			break;
+		case Home.SCREEN_STATE_MAIN_B_QUICK_TOP:
+			if(CursurIndex > 0)
+				CursurIndex--;
+			else
+				CursurIndex = 7;
+			CursurDisplay(CursurIndex);
 			break;
 			
 		}
@@ -1674,13 +1741,29 @@ public class MainBBaseFragment extends ParentFragment{
 			ParentActivity._MiracastClosePopup.ClickRight();
 			break;
 		case Home.SCREEN_STATE_MAIN_B_TOP:
-//			if(CursurIndex < 9)
-//				CursurIndex++;
-//			else
-//				CursurIndex = 0;
-//			CursurDisplay(CursurIndex);
+			if(CursurIndex == 8)
+			{
+				if(ParentActivity._CheckModel.GetMCUVersion(CAN1Comm.Get_ComponentBasicInformation_1698_PGN65330()) == CheckModel.MODEL_940
+						|| ParentActivity._CheckModel.GetMCUVersion(CAN1Comm.Get_ComponentBasicInformation_1698_PGN65330()) == CheckModel.MODEL_935){
+					CursurIndex = 0;
+				}else if(ParentActivity._CheckModel.GetTCUModel(CAN1Comm.Get_ComponentBasicInformation_1698_PGN65330_TCU()) == CheckModel.TCU_4SPEED){
+					CursurIndex = 0;
+				}else
+					CursurIndex++;
+			}
+			else if(CursurIndex < 9)
+				CursurIndex++;
+			else
+				CursurIndex = 0;
+			CursurDisplay(CursurIndex);
 			break;
-			
+		case Home.SCREEN_STATE_MAIN_B_QUICK_TOP:
+			if(CursurIndex < 7)
+				CursurIndex++;
+			else
+				CursurIndex = 0;
+			CursurDisplay(CursurIndex);
+			break;
 		}
 	}
 	
@@ -1710,7 +1793,10 @@ public class MainBBaseFragment extends ParentFragment{
 			showLeftDowntoDefaultScreenAnimation();
 			break;
 		case Home.SCREEN_STATE_MAIN_B_QUICK_TOP:
-			showDefaultScreenAnimation();
+			CursurIndex = 0;
+			CursurDisplay(CursurIndex);
+//			showDefaultScreenAnimation();
+			showQuicktoDefaultScreenAnimation();
 			break;
 		case Home.SCREEN_STATE_MAIN_B_KEY_MAINLIGHT:
 		case Home.SCREEN_STATE_MAIN_B_KEY_WORKLIGHT:
@@ -1753,10 +1839,10 @@ public class MainBBaseFragment extends ParentFragment{
 			break;
 			
 		case Home.SCREEN_STATE_MAIN_B_TOP:
-//			CursurIndex = 0;
-//			CursurDisplay(CursurIndex);
+			CursurIndex = 0;
+			CursurDisplay(CursurIndex);
 			break;
-
+		
 		default:
 			break;
 		}
@@ -1801,39 +1887,71 @@ public class MainBBaseFragment extends ParentFragment{
 		case Home.SCREEN_STATE_MAIN_B_QUICK_MIRACLOSE:
 			ParentActivity._MiracastClosePopup.ClickEnter();
 			break;
+		
 		case Home.SCREEN_STATE_MAIN_B_TOP:
 			switch(CursurIndex)
 			{
 				case 0:
 					_MainBLeftUpMachineStatusFragment.ClickEnter();
 					break;
-//				case 1:
-//				case 2:
-//					_MainBLeftUpMachineStatusFragment.ClickMachineStatus();
-//					break;
-//				case 3:
-//					_MainBLeftUpMachineStatusFragment.ClickEnter();
-//					break;
-//				case 4:
-//					_MainBLeftUpMachineStatusFragment.ClickEnter();
-//					break;
-//				case 5:
-//					_MainBLeftUpMachineStatusFragment.ClickEnter();
-//					break;
-//				case 6:
-//					_MainBLeftUpMachineStatusFragment.ClickEnter();
-//					break;
-//				case 7:
-//					_MainBLeftUpMachineStatusFragment.ClickEnter();
-//					break;
-//				case 8:
-//					_MainBLeftUpMachineStatusFragment.ClickEnter();
-//					break;
-//				case 9:
-//					_MainBLeftUpMachineStatusFragment.ClickEnter();
-//					break;
+				case 1:
+				case 2:
+					_MainBLeftUpMachineStatusFragment.ClickMachineStatus();
+					break;
+				case 3:
+					_MainBLeftDownFuelFragment.ClickFuel();
+					break;
+				case 4:
+					CursurIndex = 0;
+					_MainBCenterFragment.ClickBG();
+					break;
+				case 5:
+					_MainBRightUpEngineFragment.ClickHourOdo();
+					break;
+				case 6:
+					_MainBRightUpEngineFragment.ClickMode();
+					break;
+				case 7:
+					_MainBRightDownTMFragment.ClickCCOMode();
+					break;
+				case 8:
+					_MainBRightDownTMFragment.ClickShiftMode();
+					break;
+				case 9:
+					_MainBRightDownTMFragment.ClickTCLockUp();
+					break;
+				default:
+					_MainBLeftUpMachineStatusFragment.ClickEnter();
+					break;
 			}
 			break;
+		case Home.SCREEN_STATE_MAIN_B_QUICK_TOP:
+			switch(CursurIndex)
+			{
+				case 1:
+					_MainBLeftUpQuickFragment.ClickUserSwitching();
+					break;
+				case 2:
+					_MainBLeftDownQuickFragment.ClickHelp();
+					break;
+				case 3:
+					_MainBLeftDownQuickFragment.ClickMirror();
+					break;
+				case 4:
+					CursurIndex = 0;
+					_MainBCenterQuickFragment.ClickBG();
+					break;
+				case 5:
+					_MainBRightUpQuickFragment.ClickActiveFault();
+					break;
+				case 6:
+					_MainBRightDownQuickFragment.ClickMaintenance();
+					break;
+				case 7:
+					_MainBRightDownQuickFragment.ClickMultimedia();
+					break;
+			}
+			break;			
 		default:
 			break;
 		}
@@ -1843,10 +1961,19 @@ public class MainBBaseFragment extends ParentFragment{
 	public void CursurDisplay(int index)
 	{
 //		Log.d(TAG,"CursurDisplay:index="+index);
-//		_MainBLeftUpMachineStatusFragment.CursurDisplayDetail(index);
-//		_MainBLeftDownFuelFragment.CursurDisplayDetail(index);
-//		_MainBCenterFragment.CursurDisplayDetail(index);
-//		_MainBRightUpEngineFragment.CursurDisplayDetail(index);
-//		_MainBRightDownTMFragment.CursurDisplayDetail(index);
+//		Log.d(TAG,"CursurDisplay:ScreenIndex="+ParentActivity.ScreenIndex);
+		if(ParentActivity.ScreenIndex == Home.SCREEN_STATE_MAIN_B_TOP){
+			_MainBLeftUpMachineStatusFragment.CursurDisplayDetail(index);
+			_MainBLeftDownFuelFragment.CursurDisplayDetail(index);
+			_MainBCenterFragment.CursurDisplayDetail(index);
+			_MainBRightUpEngineFragment.CursurDisplayDetail(index);
+			_MainBRightDownTMFragment.CursurDisplayDetail(index);
+		}else if(ParentActivity.ScreenIndex == Home.SCREEN_STATE_MAIN_B_QUICK_TOP){
+			_MainBLeftUpQuickFragment.CursurDisplayDetail(index);
+			_MainBLeftDownQuickFragment.CursurDisplayDetail(index);
+			_MainBCenterQuickFragment.CursurDisplayDetail(index);
+			_MainBRightUpQuickFragment.CursurDisplayDetail(index);
+			_MainBRightDownQuickFragment.CursurDisplayDetail(index);
+		}
 	}
 }

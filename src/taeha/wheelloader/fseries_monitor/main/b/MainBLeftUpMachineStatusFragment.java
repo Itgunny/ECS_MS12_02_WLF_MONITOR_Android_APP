@@ -191,6 +191,8 @@ public class MainBLeftUpMachineStatusFragment extends ParentFragment{
 		actionitemIndicator = new ActionItem(0, ParentActivity.getResources().getString(R.string.Bucket_Full_In_Error_Warning), getResources().getDrawable(R.drawable.main_default_monitoring_icon_fullin));
 		popupIndicator.addActionItem(actionitemIndicator);		
 		// --, 150212 bwk
+		
+		CursurDisplayDetail(ParentActivity._MainBBaseFragment.CursurIndex);
 	}
 	@Override
 	protected void InitButtonListener() {
@@ -220,6 +222,7 @@ public class MainBLeftUpMachineStatusFragment extends ParentFragment{
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
+				ParentActivity._MainBBaseFragment.CursurIndex = 1;
 				if(mLongPressChecker.getLongPressed() == false){
 					if(ClickFlag == true)
 						ClickMachineStatus();
@@ -240,6 +243,7 @@ public class MainBLeftUpMachineStatusFragment extends ParentFragment{
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
+				ParentActivity._MainBBaseFragment.CursurIndex = 2;
 				if(mLongPressChecker.getLongPressed() == false){
 					if(ClickFlag == true)
 						ClickMachineStatus();
@@ -921,7 +925,7 @@ public class MainBLeftUpMachineStatusFragment extends ParentFragment{
 			popupIndicator.addActionItem(actionitemIndicator);
 			break;
 		case DATA_STATE_CURRENT_WEIHGING_RESULT_BOOMLIFTING_BUCKETFULLIN:
-			actionitemIndicator = new ActionItem(0, ParentActivity.getResources().getString(R.string.SuddenChange_BucketFullIn_Error_Warning));
+			actionitemIndicator = new ActionItem(0, ParentActivity.getResources().getString(R.string.Sudden_Change_Error_Warning)+"\n"+ParentActivity.getResources().getString(R.string.Bucket_Full_In_Error_Warning));
 			popupIndicator.addActionItem(actionitemIndicator);
 			break;
 		case DATA_STATE_CURRENT_WEIHGING_RESULT_BOOMLIFTING:

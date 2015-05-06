@@ -85,6 +85,8 @@ public class MainBLeftDownFuelFragment extends ParentFragment{
 		// TODO Auto-generated method stub
 		super.InitValuables();
 		FuelTitleAnimation = new TextViewXAxisFlipAnimation(ParentActivity);
+		
+		CursurDisplayDetail(ParentActivity._MainBBaseFragment.CursurIndex);
 	}
 	@Override
 	protected void InitButtonListener() {
@@ -104,6 +106,7 @@ public class MainBLeftDownFuelFragment extends ParentFragment{
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
+				ParentActivity._MainBBaseFragment.CursurIndex = 3;
 				if(mLongPressChecker.getLongPressed() == false){
 					if(ClickFlag == true)
 						ClickFuel();
@@ -221,9 +224,12 @@ public class MainBLeftDownFuelFragment extends ParentFragment{
 		imgbtnFuel.setClickable(ClickFlag);
 	}
 	public void CursurDisplayDetail(int index){
-		if(index == 3)
-			imgbtnFuel.setBackgroundResource(R.drawable._selector_leftdown_main_b_fuel_btn1);
-		else
-			imgbtnFuel.setBackgroundResource(R.drawable.main_default_monitoringhistory_selected02);
+		imgbtnFuel.setBackgroundResource(R.drawable._selector_leftdown_main_b_fuel_btn1);
+		switch(index){
+			case 3:
+				imgbtnFuel.setBackgroundResource(R.drawable.main_default_monitoringhistory_selected02);
+				break;
+		}		
+		
 	}
 }

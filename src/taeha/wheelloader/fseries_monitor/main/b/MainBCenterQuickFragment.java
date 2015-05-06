@@ -45,6 +45,7 @@ public class MainBCenterQuickFragment extends MainBCenterFragment{
 		InitButtonListener();
 
 		ParentActivity.ScreenIndex = ParentActivity.SCREEN_STATE_MAIN_B_QUICK_TOP;
+//		Log.d(TAG,"14ScreenIndex="+Integer.toHexString(ParentActivity.ScreenIndex));
 		// ++, 150325 bwk
 		CAN1Comm.Set_MaintenanceCommant_1097_PGN61184_12(CAN1CommManager.COMMAND_MAINTENANCE_ITEM_LIST_REQUEST);
 		CAN1Comm.TxCANToMCU(12);
@@ -73,6 +74,7 @@ public class MainBCenterQuickFragment extends MainBCenterFragment{
 		// TODO Auto-generated method stub
 		super.InitValuables();
 		
+		CursurDisplayDetail(ParentActivity._MainBBaseFragment.CursurIndex);
 	}
 	@Override
 	protected void InitButtonListener() {
@@ -122,5 +124,12 @@ public class MainBCenterQuickFragment extends MainBCenterFragment{
 			imgbtnOption.setBackgroundResource(R.drawable._selector_center_main_b_home_btn);
 		}
 	}
-
+	public void CursurDisplayDetail(int index){
+		layoutBG.setBackgroundResource(R.drawable.main_bg_center);
+		switch(index){
+			case 4:
+				layoutBG.setBackgroundResource(R.drawable.main_bg_center_s_02);
+				break;
+		}		
+	}
 }

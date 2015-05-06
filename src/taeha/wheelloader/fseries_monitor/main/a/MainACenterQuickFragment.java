@@ -10,6 +10,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 
 public class MainACenterQuickFragment extends MainACenterFragment{
 	//CONSTANT////////////////////////////////////////
@@ -18,6 +19,9 @@ public class MainACenterQuickFragment extends MainACenterFragment{
 	ImageButton imgbtnSmartTerminal;
 	ImageButton imgbtnMedia;
 	ImageButton imgbtnKeypad;
+	ImageView	imgViewOptionSelect;
+	ImageView	imgViewSmartTerminalSelect;
+	ImageView	imgViewMediaSelect;
 	//////////////////////////////////////////////////
 	
 	//VALUABLE////////////////////////////////////////
@@ -74,11 +78,16 @@ public class MainACenterQuickFragment extends MainACenterFragment{
 		imgbtnKeypad = (ImageButton)mRoot.findViewById(R.id.imageButton_center_main_a_quick_keypad);
 		imgbtnOption = (ImageButton)mRoot.findViewById(R.id.imageButton_center_main_a_quick_option);
 		
+		imgViewOptionSelect = (ImageView)mRoot.findViewById(R.id.imageView_center_main_a_quick_option_select);
+		imgViewSmartTerminalSelect = (ImageView)mRoot.findViewById(R.id.imageView_center_main_a_quick_mirror_select);
+		imgViewMediaSelect = (ImageView)mRoot.findViewById(R.id.imageView_center_main_a_quick_mediaplayer_select);
+	
 	}
 	
 	protected void InitValuables() {
 		// TODO Auto-generated method stub
 		super.InitValuables();
+		CursurDisplayDetail(ParentActivity._MainABaseFragment.CursurIndex);
 	}
 	@Override
 	protected void InitButtonListener() {
@@ -89,6 +98,8 @@ public class MainACenterQuickFragment extends MainACenterFragment{
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
+				ParentActivity._MainABaseFragment.CursurIndex = 3;
+				ParentActivity._MainABaseFragment.CursurDisplay(ParentActivity._MainABaseFragment.CursurIndex);
 				ClickMirror();
 			}
 		});
@@ -97,6 +108,8 @@ public class MainACenterQuickFragment extends MainACenterFragment{
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
+				ParentActivity._MainABaseFragment.CursurIndex = 5;
+				ParentActivity._MainABaseFragment.CursurDisplay(ParentActivity._MainABaseFragment.CursurIndex);
 				ClickMultimedia();
 			}
 		});
@@ -218,5 +231,20 @@ public class MainACenterQuickFragment extends MainACenterFragment{
 		}
 	}
 
-	
+	public void CursurDisplayDetail(int index){
+		imgViewSmartTerminalSelect.setVisibility(View.GONE);
+		imgViewMediaSelect.setVisibility(View.GONE);
+		imgViewOptionSelect.setVisibility(View.GONE);
+		switch(index){
+			case 3:
+				imgViewSmartTerminalSelect.setVisibility(View.VISIBLE);
+				break;
+			case 4:
+				imgViewOptionSelect.setVisibility(View.VISIBLE);
+				break;
+			case 5:
+				imgViewMediaSelect.setVisibility(View.VISIBLE);
+				break;
+		}
+	}
 }

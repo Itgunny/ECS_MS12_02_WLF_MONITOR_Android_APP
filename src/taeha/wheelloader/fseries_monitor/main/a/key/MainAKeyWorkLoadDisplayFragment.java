@@ -2,6 +2,8 @@ package taeha.wheelloader.fseries_monitor.main.a.key;
 
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,6 +13,7 @@ import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.TextView;
 import taeha.wheelloader.fseries_monitor.main.CAN1CommManager;
+import taeha.wheelloader.fseries_monitor.main.Home;
 import taeha.wheelloader.fseries_monitor.main.ParentFragment;
 import taeha.wheelloader.fseries_monitor.main.R;
 
@@ -31,6 +34,8 @@ public class MainAKeyWorkLoadDisplayFragment extends ParentFragment{
 	
 	//VALUABLE////////////////////////////////////////
 	int WeighingDisplayMode;
+	int CursurIndex;
+	Handler HandleCursurDisplay;
 	//////////////////////////////////////////////////
 	
 	//ANIMATION///////////////////////////////////////
@@ -53,8 +58,15 @@ public class MainAKeyWorkLoadDisplayFragment extends ParentFragment{
 		InitValuables();
 		InitButtonListener();
 
-		ParentActivity.ScreenIndex = ParentActivity.SCREEN_STATE_MAIN_A_KEY_WORKLOAD_DISPLAY;
+		ParentActivity.ScreenIndex = Home.SCREEN_STATE_MAIN_A_KEY_WORKLOAD_DISPLAY;
 		WeighingDisplayDisplay(WeighingDisplayMode);
+
+		HandleCursurDisplay = new Handler() {
+			@Override
+			public void handleMessage(Message msg) {
+				CursurDisplay(msg.what);
+			}
+		};
 		return mRoot;
 	}
 
@@ -95,6 +107,8 @@ public class MainAKeyWorkLoadDisplayFragment extends ParentFragment{
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
+				CursurIndex = 1;
+				HandleCursurDisplay.sendMessage(HandleCursurDisplay.obtainMessage(CursurIndex));
 				ClickDaily();
 			}
 		});
@@ -103,6 +117,8 @@ public class MainAKeyWorkLoadDisplayFragment extends ParentFragment{
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
+				CursurIndex = 2;
+				HandleCursurDisplay.sendMessage(HandleCursurDisplay.obtainMessage(CursurIndex));
 				ClickTotalA();
 			}
 		});
@@ -111,6 +127,8 @@ public class MainAKeyWorkLoadDisplayFragment extends ParentFragment{
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
+				CursurIndex = 3;
+				HandleCursurDisplay.sendMessage(HandleCursurDisplay.obtainMessage(CursurIndex));
 				ClickTotalB();
 			}
 		});
@@ -119,6 +137,8 @@ public class MainAKeyWorkLoadDisplayFragment extends ParentFragment{
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
+				CursurIndex = 4;
+				HandleCursurDisplay.sendMessage(HandleCursurDisplay.obtainMessage(CursurIndex));
 				ClickTotalC();
 			}
 		});
@@ -135,6 +155,8 @@ public class MainAKeyWorkLoadDisplayFragment extends ParentFragment{
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
+				CursurIndex = 5;
+				HandleCursurDisplay.sendMessage(HandleCursurDisplay.obtainMessage(CursurIndex));
 				ClickOK();
 			}
 		});
@@ -163,6 +185,7 @@ public class MainAKeyWorkLoadDisplayFragment extends ParentFragment{
 			radioTotalC.setChecked(false);
 //			textViewInitialization.setText(ParentActivity.getResources().getString(R.string.Daily) 
 //					+ " " + ParentActivity.getResources().getString(R.string.Initialization));
+			CursurIndex = 1;
 			break;
 		case CAN1CommManager.DATA_STATE_WEIGHINGDISPLAY_TOTAL_A:
 			radioDaily.setChecked(false);
@@ -171,6 +194,7 @@ public class MainAKeyWorkLoadDisplayFragment extends ParentFragment{
 			radioTotalC.setChecked(false);
 //			textViewInitialization.setText(ParentActivity.getResources().getString(R.string.Total_A) 
 //					+ " " + ParentActivity.getResources().getString(R.string.Initialization));
+			CursurIndex = 2;
 			break;
 		case CAN1CommManager.DATA_STATE_WEIGHINGDISPLAY_TOTAL_B:
 			radioDaily.setChecked(false);
@@ -179,6 +203,7 @@ public class MainAKeyWorkLoadDisplayFragment extends ParentFragment{
 			radioTotalC.setChecked(false);
 //			textViewInitialization.setText(ParentActivity.getResources().getString(R.string.Total_B) 
 //					+ " " + ParentActivity.getResources().getString(R.string.Initialization));
+			CursurIndex = 3;
 			break;
 		case CAN1CommManager.DATA_STATE_WEIGHINGDISPLAY_TOTAL_C:
 			radioDaily.setChecked(false);
@@ -187,12 +212,14 @@ public class MainAKeyWorkLoadDisplayFragment extends ParentFragment{
 			radioTotalC.setChecked(true);
 //			textViewInitialization.setText(ParentActivity.getResources().getString(R.string.Total_C) 
 //					+ " " + ParentActivity.getResources().getString(R.string.Initialization));
+			CursurIndex = 4;
 			break;
 		
 		default:
 			break;
 		}
-		
+		CursurDisplay(CursurIndex);
+
 	}
 	
 	public void ClickDaily(){
@@ -231,9 +258,11 @@ public class MainAKeyWorkLoadDisplayFragment extends ParentFragment{
 		else
 			ParentActivity.StartAnimationRunningTimer();
 
-		ParentActivity.ScreenIndex = ParentActivity.SCREEN_STATE_MAIN_A_KEY_WORKLOAD;
+		ParentActivity.OldScreenIndex = Home.SCREEN_STATE_MAIN_A_KEY_WORKLOAD_DISPLAY;
+		ParentActivity.ScreenIndex = Home.SCREEN_STATE_MAIN_A_KEY_WORKLOAD;
 		ParentActivity._MainABaseFragment._MainAKeyWorkLoadFragment = new MainAKeyWorkLoadFragment();
 		ParentActivity._MainABaseFragment.KeyBodyChangeAnimation.StartChangeAnimation(ParentActivity._MainABaseFragment._MainAKeyWorkLoadFragment);
+		
 	}
 	
 	public void SavePref(){
@@ -241,6 +270,90 @@ public class MainAKeyWorkLoadDisplayFragment extends ParentFragment{
 		SharedPreferences.Editor edit = SharePref.edit();
 		edit.commit();
 		Log.d(TAG,"SavePref");
+	}
+	/////////////////////////////////////////////////////////////////////
+	public void ClickLeft(){
+		switch (CursurIndex) {
+		case 1:
+			CursurIndex = 5;
+			CursurDisplay(CursurIndex);
+			break;
+		case 2:
+		case 3:
+		case 4:
+		case 5:
+			CursurIndex--;
+			CursurDisplay(CursurIndex);
+			break;
+		default:
+			CursurIndex = 1;
+			CursurDisplay(CursurIndex);
+			break;
+		}
+	}
+	public void ClickRight(){
+		switch (CursurIndex) {
+		case 1:
+		case 2:
+		case 3:
+		case 4:
+			CursurIndex++;
+			CursurDisplay(CursurIndex);
+			break;
+		case 5:
+		default:
+			CursurIndex = 1;
+			CursurDisplay(CursurIndex);
+			break;
+		}
+	}
+	public void ClickEnter(){
+		switch (CursurIndex) {
+		case 1:
+			ClickDaily();
+			break;
+		case 2:
+			ClickTotalA();
+			break;
+		case 3:
+			ClickTotalB();
+			break;
+		case 4:
+			ClickTotalC();
+			break;
+		case 5:
+			ClickOK();
+			break;
+		default:
+			break;
+		}
+	}
+	
+	public void CursurDisplay(int Index){
+		radioDaily.setPressed(false);
+		radioTotalA.setPressed(false);
+		radioTotalB.setPressed(false);
+		radioTotalC.setPressed(false);
+		imgbtnOK.setPressed(false);
+		switch (CursurIndex) {
+			case 1:
+				radioDaily.setPressed(true);
+				break;
+			case 2:
+				radioTotalA.setPressed(true);
+				break;
+			case 3:
+				radioTotalB.setPressed(true);
+				break;
+			case 4:
+				radioTotalC.setPressed(true);
+				break;
+			case 5:
+				imgbtnOK.setPressed(true);
+				break;
+			default:
+				break;
+		}
 	}
 	
 }

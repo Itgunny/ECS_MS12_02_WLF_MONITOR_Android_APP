@@ -1,6 +1,8 @@
 package taeha.wheelloader.fseries_monitor.main.a.key;
 
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -31,6 +33,8 @@ public class MainAKeyRideControlFragment extends ParentFragment{
 	
 	//VALUABLE////////////////////////////////////////
 	int RideControl;
+	int CursurIndex;
+	Handler HandleCursurDisplay;
 	//////////////////////////////////////////////////
 	
 	//ANIMATION///////////////////////////////////////
@@ -55,6 +59,12 @@ public class MainAKeyRideControlFragment extends ParentFragment{
 
 		ParentActivity.ScreenIndex = ParentActivity.SCREEN_STATE_MAIN_A_KEY_RIDECONTROL;
 		RideControlDisplay(RideControl);
+		HandleCursurDisplay = new Handler() {
+			@Override
+			public void handleMessage(Message msg) {
+				CursurDisplay(msg.what);
+			}
+		};
 		return mRoot;
 	}
 
@@ -78,6 +88,8 @@ public class MainAKeyRideControlFragment extends ParentFragment{
 		// TODO Auto-generated method stub
 		super.InitValuables();
 		RideControl = CAN1Comm.Get_RideControlOperationStatus_3447_PGN65527();
+		CursurIndex = RideControl+1;
+		CursurDisplay(CursurIndex);
 	}
 	@Override
 	protected void InitButtonListener() {
@@ -87,6 +99,8 @@ public class MainAKeyRideControlFragment extends ParentFragment{
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
+				CursurIndex = 1;
+				HandleCursurDisplay.sendMessage(HandleCursurDisplay.obtainMessage(CursurIndex));
 				ClickOff();
 			}
 		});
@@ -95,6 +109,8 @@ public class MainAKeyRideControlFragment extends ParentFragment{
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
+				CursurIndex = 2;
+				HandleCursurDisplay.sendMessage(HandleCursurDisplay.obtainMessage(CursurIndex));
 				ClickOnAlways();
 			}
 		});
@@ -103,6 +119,8 @@ public class MainAKeyRideControlFragment extends ParentFragment{
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
+				CursurIndex = 3;
+				HandleCursurDisplay.sendMessage(HandleCursurDisplay.obtainMessage(CursurIndex));
 				ClickOnConditional();
 			}
 		});
@@ -111,6 +129,8 @@ public class MainAKeyRideControlFragment extends ParentFragment{
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
+				CursurIndex = 4;
+				HandleCursurDisplay.sendMessage(HandleCursurDisplay.obtainMessage(CursurIndex));
 				ClickOK();
 			}
 		});
@@ -163,6 +183,8 @@ public class MainAKeyRideControlFragment extends ParentFragment{
 		default:
 			break;
 		}
+		
+
 	}
 	public void ClickOff(){
 		CAN1Comm.Set_RideControlOperationStatus_3447_PGN65527(CAN1CommManager.DATA_STATE_KEY_RIDECONTROL_OFF);	// Off
@@ -180,6 +202,79 @@ public class MainAKeyRideControlFragment extends ParentFragment{
 	public void ClickOK(){
 		ParentActivity._MainABaseFragment.showKeytoDefaultScreenAnimation();	
 	}
+	/////////////////////////////////////////////////////////////////////
+	public void ClickLeft(){
+		switch (CursurIndex) {
+		case 1:
+			CursurIndex = 4;
+			CursurDisplay(CursurIndex);
+			break;
+		case 2:
+		case 3:
+		case 4:
+			CursurIndex--;
+			CursurDisplay(CursurIndex);
+			break;
+		default:
+			CursurIndex = 1;
+			CursurDisplay(CursurIndex);
+			break;
+		}
+	}
+	public void ClickRight(){
+		switch (CursurIndex) {
+		case 1:
+		case 2:
+		case 3:
+			CursurIndex++;
+			CursurDisplay(CursurIndex);
+			break;
+		case 4:
+		default:
+			CursurIndex = 1;
+			CursurDisplay(CursurIndex);
+			break;
+		}
+	}
+	public void ClickEnter(){
+		switch (CursurIndex) {
+		case 1:
+			ClickOff();
+			break;
+		case 2:
+			ClickOnAlways();
+			break;
+		case 3:
+			ClickOnConditional();
+			break;
+		case 4:
+			ClickOK();
+			break;
+		default:
+			break;
+		}
+	}
 	
-	
+	public void CursurDisplay(int Index){
+		radioOff.setPressed(false);
+		radioOnAlways.setPressed(false);
+		radioOnConditional.setPressed(false);
+		imgbtnOK.setPressed(false);
+		switch (CursurIndex) {
+		case 1:
+			radioOff.setPressed(true);
+			break;
+		case 2:
+			radioOnAlways.setPressed(true);
+			break;
+		case 3:
+			radioOnConditional.setPressed(true);
+			break;
+		case 4:
+			imgbtnOK.setPressed(true);
+			break;
+		default:
+			break;
+		}
+	}
 }

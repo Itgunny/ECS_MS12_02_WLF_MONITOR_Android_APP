@@ -283,6 +283,7 @@ public class MainBKeyWorkLoadFragment extends ParentFragment{
 		
 		ParentActivity._MainChangeAnimation.StartChangeAnimation(ParentActivity._MenuBaseFragment);
 		ParentActivity.OldScreenIndex = Home.SCREEN_STATE_MAIN_B_TOP;
+//		Log.d(TAG,"12ScreenIndex="+Integer.toHexString(ParentActivity.ScreenIndex));
 		ParentActivity._MenuBaseFragment.setFirstScreenIndex(Home.SCREEN_STATE_MENU_MODE_ETC_CALIBRATION_PRESSURE_TOP);
 	}
 	public void ClickInitial(){

@@ -76,7 +76,7 @@ public class MainARightQuickFragment extends ParentFragment{
 	protected void InitValuables() {
 		// TODO Auto-generated method stub
 		super.InitValuables();
-		
+		CursurDisplayDetail(ParentActivity._MainABaseFragment.CursurIndex);
 	}
 	@Override
 	protected void InitButtonListener() {
@@ -87,6 +87,7 @@ public class MainARightQuickFragment extends ParentFragment{
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
+				ParentActivity._MainABaseFragment.CursurIndex = 6;
 				ClickActiveFault();
 			}
 		});		
@@ -96,6 +97,7 @@ public class MainARightQuickFragment extends ParentFragment{
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
+				ParentActivity._MainABaseFragment.CursurIndex = 7;
 				ClickMaintenance();
 			}
 		});
@@ -155,5 +157,17 @@ public class MainARightQuickFragment extends ParentFragment{
 		LayoutBGUp.setClickable(flag);
 		LayoutBGDown.setClickable(flag);
 	}
-	
+
+	public void CursurDisplayDetail(int index){
+		LayoutBGUp.setBackgroundResource(R.drawable._selector_rightup_quick_btn2);
+		LayoutBGDown.setBackgroundResource(R.drawable._selector_rightdown_quick_btn2);
+		switch(index){
+			case 6:
+				LayoutBGUp.setBackgroundResource(R.drawable.main_b_quick_fault_s_02);
+				break;
+			case 7:
+				LayoutBGDown.setBackgroundResource(R.drawable.main_b_quick_maintenance_s_02);
+				break;
+		}
+	}
 }

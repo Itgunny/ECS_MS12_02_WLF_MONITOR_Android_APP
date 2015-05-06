@@ -1,6 +1,8 @@
 package taeha.wheelloader.fseries_monitor.main.a.key;
 
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -29,6 +31,9 @@ public class MainAKeyAutoGreaseFragment extends ParentFragment{
 	//VALUABLE////////////////////////////////////////
 	int AutoGrease;
 	int SelectAutoGrease;
+	
+	int CursurIndex;
+	Handler HandleCursurDisplay;
 	//////////////////////////////////////////////////
 	
 	//ANIMATION///////////////////////////////////////
@@ -52,7 +57,12 @@ public class MainAKeyAutoGreaseFragment extends ParentFragment{
 		InitButtonListener();
 
 		ParentActivity.ScreenIndex = ParentActivity.SCREEN_STATE_MAIN_A_KEY_AUTOGREASE;
-
+		HandleCursurDisplay = new Handler() {
+			@Override
+			public void handleMessage(Message msg) {
+				CursurDisplay(msg.what);
+			}
+		};
 		return mRoot;
 	}
 
@@ -74,6 +84,8 @@ public class MainAKeyAutoGreaseFragment extends ParentFragment{
 		super.InitValuables();
 		AutoGrease = CAN1Comm.Get_AutoGreaseOperationStatus_3449_PGN65527();
 		SelectAutoGrease = AutoGrease;
+		CursurIndex = 1;
+		CursurDisplay(CursurIndex);
 	}
 	@Override
 	protected void InitButtonListener() {
@@ -83,6 +95,8 @@ public class MainAKeyAutoGreaseFragment extends ParentFragment{
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
+				CursurIndex = 1;
+				HandleCursurDisplay.sendMessage(HandleCursurDisplay.obtainMessage(CursurIndex));
 				ClickOK();
 			}
 		});
@@ -91,6 +105,8 @@ public class MainAKeyAutoGreaseFragment extends ParentFragment{
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
+				CursurIndex = 2;
+				HandleCursurDisplay.sendMessage(HandleCursurDisplay.obtainMessage(CursurIndex));
 				ClickCancel();
 			}
 		});
@@ -140,5 +156,62 @@ public class MainAKeyAutoGreaseFragment extends ParentFragment{
 		ParentActivity.StartAutoGreaseTimer();
 		ParentActivity._MainABaseFragment.showKeytoDefaultScreenAnimation();
 	}
+	/////////////////////////////////////////////////////////////////////
+	public void ClickLeft(){
+		switch (CursurIndex) {
+		case 1:
+			CursurIndex = 2;
+			CursurDisplay(CursurIndex);
+			break;
+		case 2:
+			CursurIndex--;
+			CursurDisplay(CursurIndex);
+			break;
+		default:
+			CursurIndex = 1;
+			CursurDisplay(CursurIndex);
+			break;
+		}
+	}
+	public void ClickRight(){
+		switch (CursurIndex) {
+		case 1:
+			CursurIndex++;
+			CursurDisplay(CursurIndex);
+			break;
+		case 2:
+		default:
+			CursurIndex = 1;
+			CursurDisplay(CursurIndex);
+			break;
+		}
+	}
+	public void ClickEnter(){
+		switch (CursurIndex) {
+		case 1:
+			ClickOK();
+			break;
+		case 2:
+			ClickCancel();
+			break;
+		default:
+			break;
+		}
+	}
 	
+	public void CursurDisplay(int Index){
+		textViewOK.setPressed(false);
+		textViewCancel.setPressed(false);
+		switch (CursurIndex) {
+		case 1:
+			textViewOK.setPressed(true);
+			break;
+		case 2:
+			textViewCancel.setPressed(true);
+			break;
+		default:
+			break;
+		}
+	}
+
 }

@@ -76,7 +76,7 @@ public class MainALeftQuickFragment extends ParentFragment{
 	protected void InitValuables() {
 		// TODO Auto-generated method stub
 		super.InitValuables();
-		
+		CursurDisplayDetail(ParentActivity._MainABaseFragment.CursurIndex);
 	}
 	@Override
 	protected void InitButtonListener() {
@@ -86,6 +86,7 @@ public class MainALeftQuickFragment extends ParentFragment{
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
+				ParentActivity._MainABaseFragment.CursurIndex = 1;
 				ClickUserSwitching();
 			}
 		});
@@ -95,6 +96,8 @@ public class MainALeftQuickFragment extends ParentFragment{
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
+				ParentActivity._MainABaseFragment.CursurIndex = 2;
+				ParentActivity._MainABaseFragment.CursurDisplay(ParentActivity._MainABaseFragment.CursurIndex);
 				ClickHelp();
 			}
 		});
@@ -140,5 +143,18 @@ public class MainALeftQuickFragment extends ParentFragment{
 	public void Clickable(boolean flag){
 		LayoutBGUp.setClickable(flag);
 		LayoutBGDown.setClickable(flag);
+	}
+
+	public void CursurDisplayDetail(int index){
+		LayoutBGUp.setBackgroundResource(R.drawable._selector_leftup_btn);
+		LayoutBGDown.setBackgroundResource(R.drawable._selector_leftdown_quick_btn2);
+		switch(index){
+			case 1:
+				LayoutBGUp.setBackgroundResource(R.drawable.main_b_quick_userswitching_s_02);
+				break;
+			case 2:
+				LayoutBGDown.setBackgroundResource(R.drawable.main_b_quick_help_s_02);
+				break;
+		}
 	}
 }

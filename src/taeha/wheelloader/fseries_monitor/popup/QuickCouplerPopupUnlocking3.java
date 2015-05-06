@@ -96,6 +96,7 @@ public class QuickCouplerPopupUnlocking3 extends ParentPopup{
 		//ParentActivity.ScreenIndex = ParentActivity.OldScreenIndex;
 		// ++, 150310 bwk
 		//ParentActivity.ScreenIndex = Home.SCREEN_STATE_MAIN_B_TOP;
+//		Log.d(TAG,"13ScreenIndex="+Integer.toHexString(ParentActivity.ScreenIndex));
 		ParentActivity.setScreenIndex();
 		// --, 150310 bwk
 	}

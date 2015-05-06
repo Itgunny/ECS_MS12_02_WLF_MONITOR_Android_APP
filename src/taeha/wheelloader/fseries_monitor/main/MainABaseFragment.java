@@ -47,7 +47,13 @@ import taeha.wheelloader.fseries_monitor.main.a.key.MainAKeyWorkLoadAccumulation
 import taeha.wheelloader.fseries_monitor.main.a.key.MainAKeyWorkLoadDisplayFragment;
 import taeha.wheelloader.fseries_monitor.main.a.key.MainAKeyWorkLoadErrorDetectionFragment;
 import taeha.wheelloader.fseries_monitor.main.a.key.MainAKeyWorkLoadFragment;
+import taeha.wheelloader.fseries_monitor.main.b.MainBCenterFragment;
+import taeha.wheelloader.fseries_monitor.main.b.MainBIndicatorFragment;
 import taeha.wheelloader.fseries_monitor.main.b.MainBKeyTitleFragment;
+import taeha.wheelloader.fseries_monitor.main.b.MainBLeftDownFuelFragment;
+import taeha.wheelloader.fseries_monitor.main.b.MainBLeftUpMachineStatusFragment;
+import taeha.wheelloader.fseries_monitor.main.b.MainBRightDownTMFragment;
+import taeha.wheelloader.fseries_monitor.main.b.MainBRightUpEngineFragment;
 import taeha.wheelloader.fseries_monitor.main.b.key.MainBKeyWorkLoadFragment;
 import android.os.Bundle;
 import android.util.Log;
@@ -87,6 +93,7 @@ public class MainABaseFragment extends ParentFragment{
 	int BrakepedalReq;
 	int AEBReq;	
 	
+	public int CursurIndex;
 	int FirstScreenIndex;		// ++, --, 150331 bwk
 	//////////////////////////////////////////////////
 	
@@ -385,7 +392,7 @@ public class MainABaseFragment extends ParentFragment{
 		_CenterBGAppearAnimation = new AppearAnimation(ParentActivity, imgViewCenterBG);
 		_VirtualKeyAppearAnimation = new AppearAnimation(ParentActivity, framelayoutVirtualKey);
 
-
+		CursurIndex = 0;
 	}
 	
 	@Override
@@ -837,15 +844,19 @@ public class MainABaseFragment extends ParentFragment{
 	}	
 	/////////////////////////////////////////////////////////////////////
 	public void showDefaultScreenAnimation(){
+		CursurIndex = 0;
 		ParentActivity.ScreenIndex = ParentActivity.SCREEN_STATE_MAIN_A_TOP;
 		
 		_MainBodyShiftAnimation.StartShiftZeroAnimation();
 		_MainAVirtualKeyShiftAnimation.StartShiftZeroAnimation();
 		
+		_MainACenterFragment = new MainACenterFragment();
+		_MainARightMainFragment = new MainARightMainFragment();
+		_MainALeftMainFragment = new MainALeftMainFragment();
+		
 		CenterAnimation.StartChangeAnimation(_MainACenterFragment);
 		RightChangeAnimation.StartChangeAnimation(_MainARightMainFragment);
 		LeftChangeAnimation.StartChangeAnimation(_MainALeftMainFragment);
-		
 		
 		_RightShiftAnimation.StartShiftAnimation();
 		_LeftShiftAnimation.StartShiftAnimation();
@@ -857,9 +868,6 @@ public class MainABaseFragment extends ParentFragment{
 		VirtualKeyChangeAnimation.StartDisappearAnimation();
 		
 		IndicatorChangeAnimation.StartChangeAnimation(_MainAIndicatorFragment);
-	
-		
-		
 	}
 	
 	public void showRightUptoDefaultScreenAnimation(){
@@ -884,6 +892,7 @@ public class MainABaseFragment extends ParentFragment{
 		_LeftShiftAnimation.StartShiftAnimation();
 		_RightBGShiftAnimation.StartShiftAnimation();
 		_LeftBGShiftAnimation.StartShiftAnimation();
+		CursurDisplay(CursurIndex);
 	}
 	public void showRightDowntoDefaultScreenAnimation(){
 		ParentActivity.ScreenIndex = ParentActivity.SCREEN_STATE_MAIN_A_TOP;
@@ -908,6 +917,7 @@ public class MainABaseFragment extends ParentFragment{
 		
 		_RightBGShiftAnimation.StartShiftAnimation();
 		_LeftBGShiftAnimation.StartShiftAnimation();
+		CursurDisplay(CursurIndex);
 	}
 	public void showLeftDowntoDefaultScreenAnimation(){
 		ParentActivity.ScreenIndex = ParentActivity.SCREEN_STATE_MAIN_A_TOP;
@@ -931,6 +941,7 @@ public class MainABaseFragment extends ParentFragment{
 		
 		_RightBGShiftAnimation.StartShiftAnimation();
 		_LeftBGShiftAnimation.StartShiftAnimation();
+		CursurDisplay(CursurIndex);
 	}
 	public void showLeftUptoDefaultScreenAnimation(){
 		ParentActivity.ScreenIndex = ParentActivity.SCREEN_STATE_MAIN_A_TOP;
@@ -950,6 +961,7 @@ public class MainABaseFragment extends ParentFragment{
 		
 		_RightShiftAnimation.StartShiftAnimation();
 		_RightBGShiftAnimation.StartShiftAnimation();
+		CursurDisplay(CursurIndex);
 	}
 	public void showCalibrationtoDefaultScreenAnimation(){
 		ParentActivity.ScreenIndex = ParentActivity.SCREEN_STATE_MAIN_A_TOP;
@@ -962,6 +974,10 @@ public class MainABaseFragment extends ParentFragment{
 		
 		_BodyAppearAnimation.StartAnimation();
 		_KeyDisappearAnimation.StartAnimation();
+		
+		_MainACenterFragment = new MainACenterFragment();
+		_MainARightMainFragment = new MainARightMainFragment();
+		_MainALeftMainFragment = new MainALeftMainFragment();
 		
 		CenterAnimation.StartChangeAnimation(_MainACenterFragment);
 		RightChangeAnimation.StartChangeAnimation(_MainARightMainFragment);
@@ -980,7 +996,13 @@ public class MainABaseFragment extends ParentFragment{
 		
 	}
 	public void showQuickScreenAnimation(){
+		CursurIndex = 0;
+		ParentActivity.ScreenIndex = ParentActivity.SCREEN_STATE_MAIN_A_QUICK_TOP;
 		_MainBodyShiftAnimation.StartShiftZeroAnimation();
+		
+		_MainACenterQuickFragment = new MainACenterQuickFragment();
+		_MainARightQuickFragment = new MainARightQuickFragment();
+		_MainALeftQuickFragment = new MainALeftQuickFragment();
 		
 		CenterAnimation.StartChangeAnimation(_MainACenterQuickFragment);
 		RightChangeAnimation.StartChangeAnimation(_MainARightQuickFragment);
@@ -1019,7 +1041,12 @@ public class MainABaseFragment extends ParentFragment{
 			VirtualKeyChangeAnimation.StartDisappearAnimation();
 			
 		}else{
-
+			if(ParentActivity.ScreenIndex == Home.SCREEN_STATE_MAIN_A_KEY_WORKLOAD_INIT)
+				ParentActivity._WorkLoadInitPopup.ClickESC();
+			else if(ParentActivity.ScreenIndex == Home.SCREEN_STATE_MAIN_A_KEY_WORKLOAD_WEIGHING_INIT1)
+				ParentActivity._WorkLoadWeighingInitPopup1.ClickESC();
+			else if(ParentActivity.ScreenIndex == Home.SCREEN_STATE_MAIN_A_KEY_WORKLOAD_WEIGHING_INIT2)
+				ParentActivity._WorkLoadWeighingInitPopup2.ClickESC();
 		}
 		
 		Log.d(TAG,"showKeyScreenAnimation");
@@ -1196,6 +1223,23 @@ public class MainABaseFragment extends ParentFragment{
 		if(Index == Home.SCREEN_STATE_MAIN_A_KEY_WORKLOAD){
 			showWorkLoad();
 			setFirstScreenIndex(0);
+		}else if(Index == Home.SCREEN_STATE_MAIN_A_QUICK_TOP){
+			switch(ParentActivity.OldScreenIndex)
+			{
+				case Home.SCREEN_STATE_MENU_USERSWITCHING_TOP:
+					CursurIndex = 1;
+					break;
+				case Home.SCREEN_STATE_MENU_MONITORING_FAULTHISTORY_ACTIVE_TOP:
+					CursurIndex = 6;
+					break;
+				case Home.SCREEN_STATE_MENU_MANAGEMENT_MAINTENANCE_TOP:
+					CursurIndex = 7;
+					break;
+			}
+			ParentActivity.OldScreenIndex = 0;
+				
+			showQuickScreen();
+			setFirstScreenIndex(0);
 		}
 	}
 	
@@ -1219,6 +1263,11 @@ public class MainABaseFragment extends ParentFragment{
 		KeyBodyChangeAnimation.StartChangeAnimation(_MainAKeyWorkLoadFragment);
 	}
 	// --, 150331 bwk
+	public void showQuickScreen(){
+		showCenterQuick();
+		showRightQuick();
+		showLeftQuick();
+	}
 	/////////////////////////////////////////////////////////////////////
 	public void KeyButtonClick(final int key){
 		Log.d(TAG,"KeyButtonClick : 0x" + Integer.toHexString(key));
@@ -1394,6 +1443,84 @@ public class MainABaseFragment extends ParentFragment{
 		case Home.SCREEN_STATE_MAIN_A_QUICK_MIRACLOSE:
 			ParentActivity._MiracastClosePopup.ClickLeft();
 			break;
+			
+		case Home.SCREEN_STATE_MAIN_A_KEY_MAINLIGHT:
+			_MainAKeyMainLightFragment.ClickLeft();
+			break;
+		case Home.SCREEN_STATE_MAIN_A_KEY_WORKLIGHT:
+			_MainAKeyWorkLightFragment.ClickLeft();
+			break;
+		case Home.SCREEN_STATE_MAIN_A_KEY_AUTOGREASE:
+			_MainAKeyAutoGreaseFragment.ClickLeft();
+			break;
+		case Home.SCREEN_STATE_MAIN_A_KEY_QUICKCOUPLER:
+			_MainAKeyQuickCouplerFragment.ClickLeft();
+			break;
+		case Home.SCREEN_STATE_MAIN_A_KEY_RIDECONTROL:
+			_MainAKeyRideControlFragment.ClickLeft();
+			break;
+		case Home.SCREEN_STATE_MAIN_A_KEY_RIDECONTROL_SPEED:
+			_MainAKeyRideControlSpeedFragment.ClickLeft();
+			break;
+		case Home.SCREEN_STATE_MAIN_A_KEY_WORKLOAD:
+			_MainAKeyWorkLoadFragment.ClickLeft();
+			break;
+		case Home.SCREEN_STATE_MAIN_A_KEY_WORKLOAD_INIT:
+			ParentActivity._WorkLoadInitPopup.ClickLeft();
+			break;
+		case Home.SCREEN_STATE_MAIN_A_KEY_WORKLOAD_WEIGHING_INIT1:
+			ParentActivity._WorkLoadWeighingInitPopup1.ClickLeft();
+			break;
+		case Home.SCREEN_STATE_MAIN_A_KEY_WORKLOAD_WEIGHING_INIT2:
+			ParentActivity._WorkLoadWeighingInitPopup2.ClickLeft();
+			break;
+		case Home.SCREEN_STATE_MAIN_A_KEY_WORKLOAD_ACCUMULATION:
+			_MainAKeyWorkLoadAccumulationFragment.ClickLeft();
+			break;
+		case Home.SCREEN_STATE_MAIN_A_KEY_WORKLOAD_DISPLAY:
+			_MainAKeyWorkLoadDisplayFragment.ClickLeft();
+			break;
+		case Home.SCREEN_STATE_MAIN_A_KEY_WORKLOAD_ERRORDETECT:
+			_MainAKeyWorkLoadErrorDetectionFragment.ClickLeft();
+			break;
+		case Home.SCREEN_STATE_MAIN_A_KEY_BEACONLAMP:
+			_MainAKeyBeaconLampFragment.ClickLeft();
+			break;
+		case Home.SCREEN_STATE_MAIN_A_KEY_REARWIPER:
+			_MainAKeyRearWiperFragment.ClickLeft();
+			break;
+		case Home.SCREEN_STATE_MAIN_A_KEY_MIRRORHEAT:
+			_MainAKeyMirrorHeatFragment.ClickLeft();
+			break;
+		case Home.SCREEN_STATE_MAIN_A_KEY_DETENT:
+			_MainAKeyDetentFragment.ClickLeft();
+			break;
+		case Home.SCREEN_STATE_MAIN_A_KEY_FINEMODULATION:
+			_MainAKeyFineModulationFragment.ClickLeft();
+			break;			
+			
+		case Home.SCREEN_STATE_MAIN_A_TOP:
+			if(CursurIndex > 0)
+				CursurIndex--;
+			else 
+			{
+				if(ParentActivity._CheckModel.GetMCUVersion(CAN1Comm.Get_ComponentBasicInformation_1698_PGN65330()) == CheckModel.MODEL_940
+						|| ParentActivity._CheckModel.GetMCUVersion(CAN1Comm.Get_ComponentBasicInformation_1698_PGN65330()) == CheckModel.MODEL_935){
+					CursurIndex = 8;
+				}else if(ParentActivity._CheckModel.GetTCUModel(CAN1Comm.Get_ComponentBasicInformation_1698_PGN65330_TCU()) == CheckModel.TCU_4SPEED){
+					CursurIndex = 8;
+				}else
+					CursurIndex = 9;
+			}
+			CursurDisplay(CursurIndex);
+			break;
+		case Home.SCREEN_STATE_MAIN_A_QUICK_TOP:
+			if(CursurIndex > 0)
+				CursurIndex--;
+			else
+				CursurIndex = 7;
+			CursurDisplay(CursurIndex);
+			break;
 		}
 	}
 	
@@ -1436,6 +1563,85 @@ public class MainABaseFragment extends ParentFragment{
 			ParentActivity._MiracastClosePopup.ClickRight();
 			break;
 			
+		case Home.SCREEN_STATE_MAIN_A_KEY_MAINLIGHT:
+			_MainAKeyMainLightFragment.ClickRight();
+			break;
+		case Home.SCREEN_STATE_MAIN_A_KEY_WORKLIGHT:
+			_MainAKeyWorkLightFragment.ClickRight();
+			break;
+		case Home.SCREEN_STATE_MAIN_A_KEY_AUTOGREASE:
+			_MainAKeyAutoGreaseFragment.ClickRight();
+			break;
+		case Home.SCREEN_STATE_MAIN_A_KEY_QUICKCOUPLER:
+			_MainAKeyQuickCouplerFragment.ClickRight();
+			break;
+		case Home.SCREEN_STATE_MAIN_A_KEY_RIDECONTROL:
+			_MainAKeyRideControlFragment.ClickRight();
+			break;
+		case Home.SCREEN_STATE_MAIN_A_KEY_RIDECONTROL_SPEED:
+			_MainAKeyRideControlSpeedFragment.ClickRight();
+			break;
+		case Home.SCREEN_STATE_MAIN_A_KEY_WORKLOAD:
+			_MainAKeyWorkLoadFragment.ClickRight();
+			break;
+		case Home.SCREEN_STATE_MAIN_A_KEY_WORKLOAD_INIT:
+			ParentActivity._WorkLoadInitPopup.ClickRight();
+			break;
+		case Home.SCREEN_STATE_MAIN_A_KEY_WORKLOAD_WEIGHING_INIT1:
+			ParentActivity._WorkLoadWeighingInitPopup1.ClickRight();
+			break;
+		case Home.SCREEN_STATE_MAIN_A_KEY_WORKLOAD_WEIGHING_INIT2:
+			ParentActivity._WorkLoadWeighingInitPopup2.ClickRight();
+			break;
+		case Home.SCREEN_STATE_MAIN_A_KEY_WORKLOAD_ACCUMULATION:
+			_MainAKeyWorkLoadAccumulationFragment.ClickRight();
+			break;
+		case Home.SCREEN_STATE_MAIN_A_KEY_WORKLOAD_DISPLAY:
+			_MainAKeyWorkLoadDisplayFragment.ClickRight();
+			break;
+		case Home.SCREEN_STATE_MAIN_A_KEY_WORKLOAD_ERRORDETECT:
+			_MainAKeyWorkLoadErrorDetectionFragment.ClickRight();
+			break;
+		case Home.SCREEN_STATE_MAIN_A_KEY_BEACONLAMP:
+			_MainAKeyBeaconLampFragment.ClickRight();
+			break;
+		case Home.SCREEN_STATE_MAIN_A_KEY_REARWIPER:
+			_MainAKeyRearWiperFragment.ClickRight();
+			break;
+		case Home.SCREEN_STATE_MAIN_A_KEY_MIRRORHEAT:
+			_MainAKeyMirrorHeatFragment.ClickRight();
+			break;
+		case Home.SCREEN_STATE_MAIN_A_KEY_DETENT:
+			_MainAKeyDetentFragment.ClickRight();
+			break;
+		case Home.SCREEN_STATE_MAIN_A_KEY_FINEMODULATION:
+			_MainAKeyFineModulationFragment.ClickRight();
+			break;
+			
+		case Home.SCREEN_STATE_MAIN_A_TOP:
+			if(CursurIndex == 8)
+			{
+				if(ParentActivity._CheckModel.GetMCUVersion(CAN1Comm.Get_ComponentBasicInformation_1698_PGN65330()) == CheckModel.MODEL_940
+						|| ParentActivity._CheckModel.GetMCUVersion(CAN1Comm.Get_ComponentBasicInformation_1698_PGN65330()) == CheckModel.MODEL_935){
+					CursurIndex = 0;
+				}else if(ParentActivity._CheckModel.GetTCUModel(CAN1Comm.Get_ComponentBasicInformation_1698_PGN65330_TCU()) == CheckModel.TCU_4SPEED){
+					CursurIndex = 0;
+				}else
+					CursurIndex++;
+			}
+			else if(CursurIndex < 9)
+				CursurIndex++;
+			else
+				CursurIndex = 0;
+			CursurDisplay(CursurIndex);
+			break;
+		case Home.SCREEN_STATE_MAIN_A_QUICK_TOP:
+			if(CursurIndex < 7)
+				CursurIndex++;
+			else
+				CursurIndex = 0;
+			CursurDisplay(CursurIndex);
+			break;
 		}
 	}
 	
@@ -1459,6 +1665,8 @@ public class MainABaseFragment extends ParentFragment{
 			showLeftDowntoDefaultScreenAnimation();
 			break;
 		case Home.SCREEN_STATE_MAIN_A_QUICK_TOP:
+			CursurIndex = 0;
+			CursurDisplay(CursurIndex);
 			showDefaultScreenAnimation();
 			break;
 		case Home.SCREEN_STATE_MAIN_A_KEY_MAINLIGHT:
@@ -1474,6 +1682,15 @@ public class MainABaseFragment extends ParentFragment{
 		case Home.SCREEN_STATE_MAIN_A_KEY_FINEMODULATION:
 			showKeytoDefaultScreenAnimation();
 			break;	
+		case Home.SCREEN_STATE_MAIN_A_KEY_WORKLOAD_INIT:
+			ParentActivity._WorkLoadInitPopup.ClickESC();
+			break;			
+		case Home.SCREEN_STATE_MAIN_A_KEY_WORKLOAD_WEIGHING_INIT1:
+			ParentActivity._WorkLoadWeighingInitPopup1.ClickESC();
+			break;
+		case Home.SCREEN_STATE_MAIN_A_KEY_WORKLOAD_WEIGHING_INIT2:
+			ParentActivity._WorkLoadWeighingInitPopup2.ClickESC();
+			break;
 		case Home.SCREEN_STATE_MAIN_A_BRKAEPEDALCALIBRATION_TOP:
 		case Home.SCREEN_STATE_MAIN_A_AEB_TOP:
 			showCalibrationtoDefaultScreenAnimation();
@@ -1500,6 +1717,11 @@ public class MainABaseFragment extends ParentFragment{
 		case Home.SCREEN_STATE_MAIN_A_LEFTUP_MACHINESTATUS_POPUP:
 			ParentActivity._AxleTempWarningPopup.ClickESC();
 			break;
+		case Home.SCREEN_STATE_MAIN_A_TOP:
+			CursurIndex = 0;
+			CursurDisplay(CursurIndex);
+			break;
+
 		default:
 			break;
 		}
@@ -1544,11 +1766,143 @@ public class MainABaseFragment extends ParentFragment{
 				ParentActivity._MiracastClosePopup.ClickEnter();
 				break;
 				
+			case Home.SCREEN_STATE_MAIN_A_KEY_MAINLIGHT:
+				_MainAKeyMainLightFragment.ClickEnter();
+				break;
+			case Home.SCREEN_STATE_MAIN_A_KEY_WORKLIGHT:
+				_MainAKeyWorkLightFragment.ClickEnter();
+				break;
+			case Home.SCREEN_STATE_MAIN_A_KEY_AUTOGREASE:
+				_MainAKeyAutoGreaseFragment.ClickEnter();
+				break;
+			case Home.SCREEN_STATE_MAIN_A_KEY_QUICKCOUPLER:
+				_MainAKeyQuickCouplerFragment.ClickEnter();
+				break;
+			case Home.SCREEN_STATE_MAIN_A_KEY_RIDECONTROL:
+				_MainAKeyRideControlFragment.ClickEnter();
+				break;
+			case Home.SCREEN_STATE_MAIN_A_KEY_RIDECONTROL_SPEED:
+				_MainAKeyRideControlSpeedFragment.ClickEnter();
+				break;
+			case Home.SCREEN_STATE_MAIN_A_KEY_WORKLOAD:
+				_MainAKeyWorkLoadFragment.ClickEnter();
+				break;
+			case Home.SCREEN_STATE_MAIN_A_KEY_WORKLOAD_ACCUMULATION:
+				_MainAKeyWorkLoadAccumulationFragment.ClickEnter();
+				break;
+			case Home.SCREEN_STATE_MAIN_A_KEY_WORKLOAD_DISPLAY:
+				_MainAKeyWorkLoadDisplayFragment.ClickEnter();
+				break;
+			case Home.SCREEN_STATE_MAIN_A_KEY_WORKLOAD_ERRORDETECT:
+				_MainAKeyWorkLoadErrorDetectionFragment.ClickEnter();
+				break;
+			case Home.SCREEN_STATE_MAIN_A_KEY_WORKLOAD_INIT:
+				ParentActivity._WorkLoadInitPopup.ClickEnter();
+				break;
+			case Home.SCREEN_STATE_MAIN_A_KEY_WORKLOAD_WEIGHING_INIT1:
+				ParentActivity._WorkLoadWeighingInitPopup1.ClickEnter();
+				break;
+			case Home.SCREEN_STATE_MAIN_A_KEY_WORKLOAD_WEIGHING_INIT2:
+				ParentActivity._WorkLoadWeighingInitPopup2.ClickEnter();
+				break;
+			case Home.SCREEN_STATE_MAIN_A_KEY_BEACONLAMP:
+				_MainAKeyBeaconLampFragment.ClickEnter();
+				break;
+			case Home.SCREEN_STATE_MAIN_A_KEY_REARWIPER:
+				_MainAKeyRearWiperFragment.ClickEnter();
+				break;
+			case Home.SCREEN_STATE_MAIN_A_KEY_MIRRORHEAT:
+				_MainAKeyMirrorHeatFragment.ClickEnter();
+				break;
+			case Home.SCREEN_STATE_MAIN_A_KEY_DETENT:
+				_MainAKeyDetentFragment.ClickEnter();
+				break;
+			case Home.SCREEN_STATE_MAIN_A_KEY_FINEMODULATION:
+				_MainAKeyFineModulationFragment.ClickEnter();
+				break;		
+				
+			case Home.SCREEN_STATE_MAIN_A_TOP:
+				switch(CursurIndex)
+				{
+					case 0:
+						_MainALeftMainFragment.ClickEnter();
+						break;
+					case 1:
+					case 2:
+						_MainALeftMainFragment.ClickMachineStatus();
+						break;
+					case 3:
+						_MainALeftMainFragment.ClickFuel();
+						break;
+					case 4:
+						CursurIndex = 0;
+						_MainACenterFragment.ClickBG();
+						break;
+					case 5:
+						_MainARightMainFragment.ClickHourOdo();
+						break;
+					case 6:
+						_MainARightMainFragment.ClickMode();
+						break;
+					case 7:
+						_MainARightMainFragment.ClickCCOMode();
+						break;
+					case 8:
+						_MainARightMainFragment.ClickShiftMode();
+						break;
+					case 9:
+						_MainARightMainFragment.ClickTCLockUp();
+						break;
+					default:
+						_MainALeftMainFragment.ClickEnter();
+						break;
+				}
+				break;
+			case Home.SCREEN_STATE_MAIN_A_QUICK_TOP:
+				switch(CursurIndex)
+				{
+					case 1:
+						_MainALeftQuickFragment.ClickUserSwitching();
+						break;
+					case 2:
+						_MainALeftQuickFragment.ClickHelp();
+						break;
+					case 3:
+						_MainACenterQuickFragment.ClickMirror();
+						break;
+					case 4:
+						CursurIndex = 0;
+						_MainACenterQuickFragment.ClickBG();
+						break;
+					case 5:
+						_MainACenterQuickFragment.ClickMultimedia();
+						break;
+					case 6:
+						_MainARightQuickFragment.ClickActiveFault();
+						break;
+					case 7:
+						_MainARightQuickFragment.ClickMaintenance();
+						break;
+				}
+				break;		
 			default:
-				_MainALeftMainFragment.ClickEnter();
+				
 				break;
 		}
 		
+	}
+	public void CursurDisplay(int index)
+	{
+//		Log.d(TAG,"CursurDisplay:index="+index);
+		if(ParentActivity.ScreenIndex == Home.SCREEN_STATE_MAIN_A_TOP){
+			_MainALeftMainFragment.CursurDisplayDetail(index);
+			_MainACenterFragment.CursurDisplayDetail(index);
+			_MainARightMainFragment.CursurDisplayDetail(index);
+		}else if(ParentActivity.ScreenIndex == Home.SCREEN_STATE_MAIN_A_QUICK_TOP){
+			_MainALeftQuickFragment.CursurDisplayDetail(index);
+			_MainACenterQuickFragment.CursurDisplayDetail(index);
+			_MainARightQuickFragment.CursurDisplayDetail(index);
+		}
 	}
 
 }

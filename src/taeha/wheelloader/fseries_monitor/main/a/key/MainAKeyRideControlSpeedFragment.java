@@ -1,6 +1,8 @@
 package taeha.wheelloader.fseries_monitor.main.a.key;
 
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,6 +12,7 @@ import android.widget.ImageView;
 import android.widget.SeekBar;
 import android.widget.TextView;
 import taeha.wheelloader.fseries_monitor.main.CAN1CommManager;
+import taeha.wheelloader.fseries_monitor.main.Home;
 import taeha.wheelloader.fseries_monitor.main.ParentFragment;
 import taeha.wheelloader.fseries_monitor.main.R;
 import taeha.wheelloader.fseries_monitor.main.R.string;
@@ -43,6 +46,8 @@ public class MainAKeyRideControlSpeedFragment extends ParentFragment{
 	int SpeedForward;
 	int SpeedBackward;
 
+	int CursurIndex;
+	Handler HandleCursurDisplay;
 	//////////////////////////////////////////////////
 	
 	//ANIMATION///////////////////////////////////////
@@ -75,6 +80,14 @@ public class MainAKeyRideControlSpeedFragment extends ParentFragment{
 		SpeedDisplay(textViewBackwardData,SpeedBackward,ParentActivity.UnitOdo);
 		SetSeekBarPosition(seekBarForward,SpeedForward-1);
 		SetSeekBarPosition(seekBarBackward,SpeedBackward-1);
+		CursurIndex = 1;
+		CursurDisplay(CursurIndex);
+		HandleCursurDisplay = new Handler() {
+			@Override
+			public void handleMessage(Message msg) {
+				CursurDisplay(msg.what);
+			}
+		};
 		return mRoot;
 	}
 	
@@ -130,6 +143,8 @@ public class MainAKeyRideControlSpeedFragment extends ParentFragment{
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
+				CursurIndex = 4;
+				HandleCursurDisplay.sendMessage(HandleCursurDisplay.obtainMessage(CursurIndex));
 				ClickOK();
 			}
 		});
@@ -138,6 +153,8 @@ public class MainAKeyRideControlSpeedFragment extends ParentFragment{
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
+				CursurIndex = 3;
+				HandleCursurDisplay.sendMessage(HandleCursurDisplay.obtainMessage(CursurIndex));
 				ClickCancel();
 			}
 		});
@@ -150,6 +167,8 @@ public class MainAKeyRideControlSpeedFragment extends ParentFragment{
 			
 				SpeedForward = progress+1;
 				SpeedDisplay(textViewForwardData,SpeedForward,ParentActivity.UnitOdo);
+				CursurIndex = 1;
+				HandleCursurDisplay.sendMessage(HandleCursurDisplay.obtainMessage(CursurIndex));
 			}
 			
 			@Override
@@ -161,7 +180,6 @@ public class MainAKeyRideControlSpeedFragment extends ParentFragment{
 			public void onProgressChanged(SeekBar seekBar, int progress,
 					boolean fromUser) {
 				// TODO Auto-generated method stub
-
 				SpeedForward = progress+1;
 				SpeedDisplay(textViewForwardData,SpeedForward,ParentActivity.UnitOdo);
 				
@@ -173,6 +191,8 @@ public class MainAKeyRideControlSpeedFragment extends ParentFragment{
 			public void onStopTrackingTouch(SeekBar seekBar) {
 				// TODO Auto-generated method stub
 				int progress = seekBar.getProgress();
+				CursurIndex = 2;
+				HandleCursurDisplay.sendMessage(HandleCursurDisplay.obtainMessage(CursurIndex));
 
 				SpeedBackward = progress+1;
 				SpeedDisplay(textViewBackwardData,SpeedBackward,ParentActivity.UnitOdo);
@@ -188,7 +208,6 @@ public class MainAKeyRideControlSpeedFragment extends ParentFragment{
 			public void onProgressChanged(SeekBar seekBar, int progress,
 					boolean fromUser) {
 				// TODO Auto-generated method stub
-			
 				SpeedBackward = progress+1;
 				SpeedDisplay(textViewBackwardData,SpeedBackward,ParentActivity.UnitOdo);
 			}
@@ -261,6 +280,100 @@ public class MainAKeyRideControlSpeedFragment extends ParentFragment{
 		ParentActivity._MainABaseFragment._MainAKeyRideControlFragment = new MainAKeyRideControlFragment();
 		ParentActivity._MainABaseFragment.KeyBodyChangeAnimation.StartChangeAnimation(ParentActivity._MainABaseFragment._MainAKeyRideControlFragment);
 	}
-	//////////////////////////////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////////
+	public void ClickLeft(){
+		switch (CursurIndex) {
+		case 1:
+			SpeedForward -= 1;
+			if(SpeedForward < MIN_LEVEL){
+				SpeedForward = MIN_LEVEL;
+			}
+			seekBarForward.setProgress(SpeedForward-1);	
+			break;
+		case 2:
+			SpeedBackward -= 1;
+			if(SpeedBackward < MIN_LEVEL){
+				SpeedBackward = MIN_LEVEL;
+			}
+			seekBarBackward.setProgress(SpeedBackward-1);	
+			break;
+		case 3:
+		case 4:
+			CursurIndex--;
+			CursurDisplay(CursurIndex);
+			break;
+		default:
+			CursurIndex = 1;
+			CursurDisplay(CursurIndex);
+			break;
+		}
+	}
+	public void ClickRight(){
+		switch (CursurIndex) {
+		case 3:
+			CursurIndex++;
+			CursurDisplay(CursurIndex);
+			break;
+		case 1:
+			SpeedForward += 1;
+			if(SpeedForward > MAX_LEVEL){
+				SpeedForward = MAX_LEVEL;
+			}
+			seekBarForward.setProgress(SpeedForward-1);	
+			break;
+		case 2:
+			SpeedBackward += 1;
+			if(SpeedBackward > MAX_LEVEL){
+				SpeedBackward = MAX_LEVEL;
+			}
+			seekBarBackward.setProgress(SpeedBackward-1);	
+			break;			
+		case 4:
+		default:
+			CursurIndex = 1;
+			CursurDisplay(CursurIndex);
+			break;
+		}
+	}
+	public void ClickEnter(){
+		switch (CursurIndex) {
+		case 1:
+		case 2:
+			CursurIndex++;
+			CursurDisplay(CursurIndex);
+			break;
+		case 3:
+			ClickCancel();
+			break;
+		case 4:
+			ClickOK();
+			break;
+		default:
+			break;
+		}
+	}
+	
+	public void CursurDisplay(int Index){
+		seekBarForward.setPressed(false);
+		seekBarBackward.setPressed(false);
+		imgbtnCancel.setPressed(false);
+		imgbtnOK.setPressed(false);
+		switch (CursurIndex) {
+		case 1:
+			seekBarForward.setPressed(true);
+			break;
+		case 2:
+			seekBarBackward.setPressed(true);
+			break;
+		case 3:
+			imgbtnCancel.setPressed(true);
+			break;
+		case 4:
+			imgbtnOK.setPressed(true);
+			break;
+		default:
+			break;
+		}
+	}
 	
 }

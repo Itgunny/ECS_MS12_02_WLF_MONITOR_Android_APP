@@ -59,7 +59,7 @@ public class GaugerpmAnimation extends View{
 	private float CalRPM(int rpm){
 		float result;
 
-		final int MAX = 4500;
+		final int MAX = 4000;
 		final int MIN = 0;
 
 		if(rpm > MAX){

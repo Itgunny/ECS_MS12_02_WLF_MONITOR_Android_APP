@@ -553,6 +553,9 @@ public class CAN1CommManager extends ICAN1CommManager.Stub{		// ttySAC1(Linux), 
 	public void SetMiracastFlag(boolean flag){
 		service.SetMiracastFlag(flag);
 	}	
+	public boolean GetMiracastFlag(){
+		return service.GetMiracastFlag();
+	}
 	
 	public void setVolume(int _Volume){
 		service.setVolume(_Volume);
@@ -562,6 +565,10 @@ public class CAN1CommManager extends ICAN1CommManager.Stub{		// ttySAC1(Linux), 
 	public void CheckMultimedia()
 	{
 		service.CheckMultimedia();
+	}
+	public void CheckMiracast()
+	{
+		service.CheckMiracast();
 	}
 	///////////////////////////////////////////////////////////
 	

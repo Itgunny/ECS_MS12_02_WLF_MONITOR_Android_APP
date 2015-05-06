@@ -95,6 +95,8 @@ public class MainBRightDownTMFragment extends ParentFragment{
 		imgbtnTCLockUp = (ImageButton)mRoot.findViewById(R.id.imageButton_rightdown_main_b_tm_tclockup);
 		
 		layoutTCLockUp = (RelativeLayout)mRoot.findViewById(R.id.RelativeLayout_rightdown_main_b_tm_tclockup);
+		
+		CursurDisplayDetail(ParentActivity._MainBBaseFragment.CursurIndex);
 	}
 	
 	protected void InitValuables() {
@@ -113,6 +115,7 @@ public class MainBRightDownTMFragment extends ParentFragment{
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
+				ParentActivity._MainBBaseFragment.CursurIndex = 7;
 				if(ClickFlag == true)
 					ClickCCOMode();
 			}
@@ -122,6 +125,7 @@ public class MainBRightDownTMFragment extends ParentFragment{
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
+				ParentActivity._MainBBaseFragment.CursurIndex = 8;
 				if(ClickFlag == true)
 					ClickShiftMode();
 			}
@@ -131,6 +135,7 @@ public class MainBRightDownTMFragment extends ParentFragment{
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
+				ParentActivity._MainBBaseFragment.CursurIndex = 9;
 				if(ClickFlag == true)
 					ClickTCLockUp();
 			}
@@ -348,7 +353,7 @@ public class MainBRightDownTMFragment extends ParentFragment{
 				imgbtnShiftMode.setBackgroundResource(R.drawable.main_default_tm02_selected02);
 				break;
 			case 9:
-				imgbtnShiftMode.setBackgroundResource(R.drawable.main_default_tm03_selected02);
+				imgbtnTCLockUp.setBackgroundResource(R.drawable.main_default_tm03_selected02);
 				break;
 		}
 	}	

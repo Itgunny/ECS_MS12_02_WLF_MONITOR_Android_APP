@@ -75,7 +75,7 @@ public class MainBRightDownQuickFragment extends ParentFragment{
 	protected void InitValuables() {
 		// TODO Auto-generated method stub
 		super.InitValuables();
-		
+		CursurDisplayDetail(ParentActivity._MainBBaseFragment.CursurIndex);
 	}
 	@Override
 	protected void InitButtonListener() {
@@ -85,6 +85,7 @@ public class MainBRightDownQuickFragment extends ParentFragment{
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
+				ParentActivity._MainBBaseFragment.CursurIndex = 6;
 				ClickMaintenance();
 			}
 		});
@@ -93,6 +94,8 @@ public class MainBRightDownQuickFragment extends ParentFragment{
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
+				ParentActivity._MainBBaseFragment.CursurIndex = 7;
+				ParentActivity._MainBBaseFragment.CursurDisplay(ParentActivity._MainBBaseFragment.CursurIndex);
 				ClickMultimedia();
 			}
 		});
@@ -154,5 +157,16 @@ public class MainBRightDownQuickFragment extends ParentFragment{
 		LayoutBG.setClickable(flag);
 		imgbtnMultimedia.setClickable(flag);
 	}
-	
+	public void CursurDisplayDetail(int index){
+		LayoutBG.setBackgroundResource(R.drawable._selector_rightdown_quick_btn);
+		imgbtnMultimedia.setBackgroundResource(R.drawable._selector_virtualkey_media);
+		switch(index){
+			case 6:
+				LayoutBG.setBackgroundResource(R.drawable.main_bg_right_down_quick_s_02);
+				break;
+			case 7:
+				imgbtnMultimedia.setBackgroundResource(R.drawable.main_virtual_key_btn_media_player_on);
+				break;
+		}
+	}
 }

@@ -1,5 +1,8 @@
 package taeha.wheelloader.fseries_monitor.menu.preference;
 
+import java.util.Timer;
+import java.util.TimerTask;
+
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
@@ -8,9 +11,11 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import taeha.wheelloader.fseries_monitor.main.ParentFragment;
 import taeha.wheelloader.fseries_monitor.main.R;
+import taeha.wheelloader.fseries_monitor.menu.preference.LanguageListFragment.EnableButtonTimerClass;
 
 public class DisplayTypeFragment extends ParentFragment{
 	//CONSTANT////////////////////////////////////////
@@ -19,12 +24,15 @@ public class DisplayTypeFragment extends ParentFragment{
 	//RESOURCE////////////////////////////////////////
 	TextView textViewTypeA;
 	TextView textViewTypeB;
+	
+	RelativeLayout	LayoutBG;
 	//////////////////////////////////////////////////
 
 	//VALUABLE////////////////////////////////////////
 	Handler HandleCursurDisplay;
 	int CursurIndex;
 
+	Timer	mEnableButtonTimer = null;
 	//////////////////////////////////////////////////
 
 	//Fragment////////////////////////////////////////
@@ -55,7 +63,8 @@ public class DisplayTypeFragment extends ParentFragment{
 		ParentActivity._MenuBaseFragment._MenuInterTitleFragment.SetTitleText(ParentActivity.getResources().getString(R.string.Display_Style));
 		
 		CursurDisplay(CursurIndex);
-
+		EnableRadioButton(false);
+		StartEnableButtonTimer();
 		HandleCursurDisplay = new Handler() {
 			@Override
 			public void handleMessage(Message msg) {
@@ -82,6 +91,7 @@ public class DisplayTypeFragment extends ParentFragment{
 		// TODO Auto-generated method stub
 		textViewTypeA = (TextView)mRoot.findViewById(R.id.textView_menu_body_preference_displaytype_a);
 		textViewTypeB = (TextView)mRoot.findViewById(R.id.textView_menu_body_preference_displaytype_b);
+		LayoutBG = (RelativeLayout)mRoot.findViewById(R.id.RelativeLayout_menu_body_preference_displaytype);
 	}
 	
 	@Override
@@ -119,6 +129,43 @@ public class DisplayTypeFragment extends ParentFragment{
 	@Override
 	protected void UpdateUI() {
 		// TODO Auto-generated method stub
+
+	}
+	/////////////////////////////////////////////////////////////////////
+	public class EnableButtonTimerClass extends TimerTask{
+
+		@Override
+		public void run() {
+			// TODO Auto-generated method stub
+			ParentActivity.runOnUiThread(new Runnable() {
+
+				@Override
+				public void run() {
+					// TODO Auto-generated method stub
+					if(ParentActivity.AnimationRunningFlag == false)
+					{
+						CancelEnableButtonTimer();
+						EnableRadioButton(true);
+					}
+				}
+			});
+
+		}
+
+	}
+
+	public void StartEnableButtonTimer(){
+		CancelEnableButtonTimer();
+		mEnableButtonTimer = new Timer();
+		mEnableButtonTimer.schedule(new EnableButtonTimerClass(),1,50);	
+	}
+
+	public void CancelEnableButtonTimer(){
+		if(mEnableButtonTimer != null){
+			mEnableButtonTimer.cancel();
+			mEnableButtonTimer.purge();
+			mEnableButtonTimer = null;
+		}
 
 	}
 	/////////////////////////////////////////////////////////////////////
@@ -162,6 +209,18 @@ public class DisplayTypeFragment extends ParentFragment{
 		SetDisplayType();
 	}
 	/////////////////////////////////////////////////////////////////////	
+	public void EnableRadioButton(boolean bEnable){
+		float alpha;
+		if(bEnable == true)
+			alpha = (float)1;
+		else
+			alpha = (float)0;
+		
+		LayoutBG.setAlpha(alpha);
+
+		textViewTypeA.setClickable(bEnable);
+		textViewTypeB.setClickable(bEnable);
+	}
 	public void CursurDisplay(int Index){
 		textViewTypeA.setPressed(false);
 		textViewTypeB.setPressed(false);

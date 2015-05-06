@@ -71,6 +71,7 @@ public class MainBCenterFragment extends ParentFragment{
 		InitButtonListener();
 
 		ParentActivity.ScreenIndex = ParentActivity.SCREEN_STATE_MAIN_B_TOP;
+//		Log.d(TAG,"10ScreenIndex="+Integer.toHexString(ParentActivity.ScreenIndex));
 		
 		return mRoot;
 	}
@@ -81,7 +82,8 @@ public class MainBCenterFragment extends ParentFragment{
 		Log.d(TAG,"onResume");
 		ClickFlag = true;
 		setClickEnable(ClickFlag);
-		ParentActivity.ScreenIndex = ParentActivity.SCREEN_STATE_MAIN_B_TOP;
+//		ParentActivity.ScreenIndex = ParentActivity.SCREEN_STATE_MAIN_B_TOP;
+//		Log.d(TAG,"11ScreenIndex="+Integer.toHexString(ParentActivity.ScreenIndex));
 		ParentActivity.CheckAttachmentUnlock();
 	}
 
@@ -124,6 +126,8 @@ public class MainBCenterFragment extends ParentFragment{
 		} else if (EcoGaugeLevel < 0) {
 			EcoGaugeLevel = 0;
 		}
+		
+		CursurDisplayDetail(ParentActivity._MainBBaseFragment.CursurIndex);
 		
 	//	_EcoGaugeAnimation = new BarAnimation(ParentActivity, imgViewEcoBar,EcoGaugeLevel);
 		
@@ -194,21 +198,27 @@ public class MainBCenterFragment extends ParentFragment{
 	public void EcoGaugeDisplay(int _level, int _status) {
 		float Scale = 0;
 		switch (_status) {
-			case CAN1CommManager.DATA_STATE_ECO_GREEN:
-			default:
-				imgViewEcoBar.setImageResource(R.drawable.main_center_eco_all);
-				break;
-			//case CAN1CommManager.DATA_STATE_ECO_YELLOW:
-			//	imgViewEcoBar.setImageResource(R.drawable.main_center_eco_yellow_all);
-			//	break;
-			//case CAN1CommManager.DATA_STATE_ECO_RED:
-			//	imgViewEcoBar.setImageResource(R.drawable.main_center_eco_red_all);
-			//	break;
-			// ++, 150402 bwk
-//			case CAN1CommManager.DATA_STATE_ECO_WHITE:
-//				imgViewEcoBar.setImageResource(R.drawable.main_center_eco_white_all);
+//			case CAN1CommManager.DATA_STATE_ECO_GREEN:
+//			default:
+//				imgViewEcoBar.setImageResource(R.drawable.main_center_eco_all);
 //				break;
-			// --, 150402 bwk
+//			//case CAN1CommManager.DATA_STATE_ECO_YELLOW:
+//			//	imgViewEcoBar.setImageResource(R.drawable.main_center_eco_yellow_all);
+//			//	break;
+//			//case CAN1CommManager.DATA_STATE_ECO_RED:
+//			//	imgViewEcoBar.setImageResource(R.drawable.main_center_eco_red_all);
+//			//	break;
+//			// ++, 150402 bwk
+////			case CAN1CommManager.DATA_STATE_ECO_WHITE:
+////				imgViewEcoBar.setImageResource(R.drawable.main_center_eco_white_all);
+////				break;
+//			// --, 150402 bwk
+			case CAN1CommManager.DATA_STATE_ECO_WHITE:
+				imgViewEcoBar.setImageResource(R.drawable.main_center_eco_all_white);
+				break;
+			default:
+				imgViewEcoBar.setImageResource(R.drawable.main_center_eco_all_green);
+				break;
 		}
 		
 		if(_level == 0xFF){
@@ -250,9 +260,11 @@ public class MainBCenterFragment extends ParentFragment{
 	}
 	// --, 150326 bwk	
 	public void CursurDisplayDetail(int index){
-		if(index == 4)
-			layoutBG.setBackgroundResource(R.drawable.main_bg_center);
-		else
-			layoutBG.setBackgroundResource(R.drawable.main_bg_center_s_02);
+		layoutBG.setBackgroundResource(R.drawable.main_bg_center);
+		switch(index){
+			case 4:
+				layoutBG.setBackgroundResource(R.drawable.main_bg_center_s_02);
+				break;
+		}		
 	}
 }

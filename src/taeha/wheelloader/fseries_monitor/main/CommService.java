@@ -1387,6 +1387,9 @@ public class CommService extends Service{
 		else 
 			SetFNKeypadLamp(0);
 	}	
+	public boolean GetMiracastFlag(){
+		return miracastFlag;
+	}
 	// --, 150323 bwk
 	public void CheckMultimedia()
 	{
@@ -1400,6 +1403,17 @@ public class CommService extends Service{
 			SetMultimediaFlag(true);
 		}
 	}
+	public void CheckMiracast()
+	{
+		if(CheckRunningApp("com.powerone.wfd.sink") == false)
+		{
+			SetMiracastFlag(false);
+		}
+		else
+		{
+			SetMiracastFlag(true);
+		}
+	}	
 	////////////////////////////////////////////////////////////////////////
 		
 	/////////////////OVERRIDE METHOD///////////////////////////////////////

@@ -72,7 +72,7 @@ public class MainBLeftDownQuickFragment extends ParentFragment{
 	protected void InitValuables() {
 		// TODO Auto-generated method stub
 		super.InitValuables();
-		
+		CursurDisplayDetail(ParentActivity._MainBBaseFragment.CursurIndex);
 	}
 	@Override
 	protected void InitButtonListener() {
@@ -82,6 +82,8 @@ public class MainBLeftDownQuickFragment extends ParentFragment{
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
+				ParentActivity._MainBBaseFragment.CursurIndex = 2;
+				ParentActivity._MainBBaseFragment.CursurDisplay(ParentActivity._MainBBaseFragment.CursurIndex);
 				ClickHelp();
 			}
 		});
@@ -90,6 +92,8 @@ public class MainBLeftDownQuickFragment extends ParentFragment{
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
+				ParentActivity._MainBBaseFragment.CursurIndex = 3;
+				ParentActivity._MainBBaseFragment.CursurDisplay(ParentActivity._MainBBaseFragment.CursurIndex);
 				ClickMirror();
 			}
 		});
@@ -149,5 +153,19 @@ public class MainBLeftDownQuickFragment extends ParentFragment{
 	public void Clickable(boolean flag){
 		LayoutBG.setClickable(flag);
 		imgbtnMirror.setClickable(flag);
+	}
+	public void CursurDisplayDetail(int index){
+		Log.d(TAG, "CursurDisplayDetail:index"+index);
+		
+		LayoutBG.setBackgroundResource(R.drawable._selector_leftdown_quick_btn);
+		imgbtnMirror.setBackgroundResource(R.drawable._selector_virtualkey_mirroring);
+		switch(index){
+			case 2:
+				LayoutBG.setBackgroundResource(R.drawable.main_bg_left_down_quick_s_02);
+				break;
+			case 3:
+				imgbtnMirror.setBackgroundResource(R.drawable.main_quick_btn_screen_mirroring_s);
+				break;
+		}
 	}
 }
