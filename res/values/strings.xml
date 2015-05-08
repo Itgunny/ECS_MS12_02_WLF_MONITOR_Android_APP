@@ -438,6 +438,7 @@
     <!-- Menu Preference End -->
     <!-- Menu Multimedia Start -->
     <string name="Media_Palyer">Media Player</string>
+    <string name="Smart_Terminal">Smart Terminal</string>
     <!-- Menu Multimedia End -->
     <!-- Language Start -->
     <string name="Korean">Korean</string>

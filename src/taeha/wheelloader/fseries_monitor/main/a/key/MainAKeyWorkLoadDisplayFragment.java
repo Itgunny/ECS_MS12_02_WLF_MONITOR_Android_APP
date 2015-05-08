@@ -216,6 +216,7 @@ public class MainAKeyWorkLoadDisplayFragment extends ParentFragment{
 			break;
 		
 		default:
+			CursurIndex = 1;
 			break;
 		}
 		CursurDisplay(CursurIndex);

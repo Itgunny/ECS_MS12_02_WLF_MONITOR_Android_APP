@@ -2,6 +2,8 @@ package taeha.wheelloader.fseries_monitor.main.b.key;
 
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,6 +13,7 @@ import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.TextView;
 import taeha.wheelloader.fseries_monitor.main.CAN1CommManager;
+import taeha.wheelloader.fseries_monitor.main.Home;
 import taeha.wheelloader.fseries_monitor.main.ParentFragment;
 import taeha.wheelloader.fseries_monitor.main.R;
 import taeha.wheelloader.fseries_monitor.main.R.string;
@@ -27,6 +30,8 @@ public class MainBKeyWorkLoadErrorDetectionFragment extends ParentFragment{
 	//////////////////////////////////////////////////
 	
 	//VALUABLE////////////////////////////////////////
+	int CursurIndex;
+	Handler HandleCursurDisplay;
 
 	//////////////////////////////////////////////////
 	
@@ -50,8 +55,14 @@ public class MainBKeyWorkLoadErrorDetectionFragment extends ParentFragment{
 		InitValuables();
 		InitButtonListener();
 
-		ParentActivity.ScreenIndex = ParentActivity.SCREEN_STATE_MAIN_B_KEY_WORKLOAD_ERRORDETECT;
+		ParentActivity.ScreenIndex = Home.SCREEN_STATE_MAIN_B_KEY_WORKLOAD_ERRORDETECT;
 		ErrorDetectDisplay(ParentActivity.WeighingErrorDetect);
+		HandleCursurDisplay = new Handler() {
+			@Override
+			public void handleMessage(Message msg) {
+				CursurDisplay(msg.what);
+			}
+		};
 		return mRoot;
 	}
 	@Override
@@ -85,6 +96,8 @@ public class MainBKeyWorkLoadErrorDetectionFragment extends ParentFragment{
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
+				CursurIndex = 1;
+				HandleCursurDisplay.sendMessage(HandleCursurDisplay.obtainMessage(CursurIndex));
 				ClickOff();
 			}
 		});
@@ -93,6 +106,8 @@ public class MainBKeyWorkLoadErrorDetectionFragment extends ParentFragment{
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
+				CursurIndex = 2;
+				HandleCursurDisplay.sendMessage(HandleCursurDisplay.obtainMessage(CursurIndex));
 				ClickOn();
 			}
 		});
@@ -125,6 +140,8 @@ public class MainBKeyWorkLoadErrorDetectionFragment extends ParentFragment{
 		default:
 			break;
 		}
+		CursurIndex = Data+1;
+		CursurDisplay(CursurIndex);
 		
 	}
 	public void ClickOff(){
@@ -142,7 +159,8 @@ public class MainBKeyWorkLoadErrorDetectionFragment extends ParentFragment{
 		else
 			ParentActivity.StartAnimationRunningTimer();
 
-		ParentActivity.ScreenIndex = ParentActivity.SCREEN_STATE_MAIN_B_KEY_WORKLOAD;
+		ParentActivity.OldScreenIndex = Home.SCREEN_STATE_MAIN_B_KEY_WORKLOAD_ERRORDETECT;
+		ParentActivity.ScreenIndex = Home.SCREEN_STATE_MAIN_B_KEY_WORKLOAD;
 		ParentActivity._MainBBaseFragment._MainBKeyWorkLoadFragment = new MainBKeyWorkLoadFragment();
 		ParentActivity._MainBBaseFragment.KeyBodyChangeAnimation.StartChangeAnimation(ParentActivity._MainBBaseFragment._MainBKeyWorkLoadFragment);
 	}
@@ -154,6 +172,61 @@ public class MainBKeyWorkLoadErrorDetectionFragment extends ParentFragment{
 		edit.commit();
 		Log.d(TAG,"SavePref");
 	}
+	/////////////////////////////////////////////////////////////////////
+	public void ClickLeft(){
+		switch (CursurIndex) {
+		case 1:
+			CursurIndex = 2;
+			CursurDisplay(CursurIndex);
+			break;
+		case 2:
+			CursurIndex--;
+			CursurDisplay(CursurIndex);
+			break;
+		default:
+			CursurIndex = 1;
+			CursurDisplay(CursurIndex);
+			break;
+		}
+	}
+	public void ClickRight(){
+		switch (CursurIndex) {
+		case 1:
+			CursurIndex++;
+			CursurDisplay(CursurIndex);
+			break;
+		case 2:
+		default:
+			CursurIndex = 1;
+			CursurDisplay(CursurIndex);
+			break;
+		}
+	}
+	public void ClickEnter(){
+		switch (CursurIndex) {
+		case 1:
+			ClickOff();
+			break;
+		case 2:
+			ClickOn();
+			break;
+		default:
+			break;
+		}
+	}
 	
-	
+	public void CursurDisplay(int Index){
+		radioOff.setPressed(false);
+		radioOn.setPressed(false);
+		switch (CursurIndex) {
+		case 1:
+			radioOff.setPressed(true);
+			break;
+		case 2:
+			radioOn.setPressed(true);
+			break;
+		default:
+			break;
+		}
+	}
 }

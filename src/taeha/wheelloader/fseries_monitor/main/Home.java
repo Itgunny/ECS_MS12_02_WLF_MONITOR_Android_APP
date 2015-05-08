@@ -421,9 +421,16 @@ public class Home extends Activity {
 	// 5. TC LOCK UP 미장착시 TYPE B 메인 화면 수정
 	// 6. Preference - Sound Output Setting - External AUX 아래 경고 문구 추가
 	// 7. Preference - DisplayStyle/Language - DisplayStyle : 애니메이션 후 Display 적용
-	// 8. Disply type B에서 rpm부분 클릭 시 rpm 숫자 깜밖이는 현상(젤리빈) - 개선(Touch OFF)
+	// 8. Display type B에서 rpm부분 클릭 시 rpm 숫자 깜밖이는 현상(젤리빈) - 개선(Touch OFF)
 	// 9. 냉각팬 수동 작은 아이콘 배경 투명하게 변경
-	// 10. 메인 키 키패드 연동(B안)
+	// 10. 메인 키 키패드 연동(A/B안)
+	// 11. ICCO Mode일 경우 'H'가 아닌 'ON'으로 표시
+	// 12. Weight 에러 2개 떴을 경우 가이던스 누르면 Crash뜨는 현상 개선
+	// 13. 미디어 플레이어에서 가운데 터치하여 종료하였을 경우 FN LED 꺼지지 않는 현상 개선
+	// 14. Quick Coupler LED 꺼지지 않는 현상 확인 후 프로토콜 추가(2에 대한 사양이 없었음 -> MCU LED OFF 사양으로 확인 됨)
+	// 15. 멀티미디어 리스트로 변경(스마트 터미널 추가)
+	// 16. 스마트 터미널 ON/OFF에 대한 FN LED 제어 추가
+	// 17. AUX 경고문구 사이즈 작게 변경
 	//////////////////////////////////////////////////////////////////////////////////////
 	
 	// TAG
@@ -1007,6 +1014,7 @@ public class Home extends Activity {
 	private Timer mMirrorHeatTimer = null;
 	private Timer mAutoGreaseTimer = null;
 	private Timer mCheckMultimediaTimer = null;
+	private Timer mCheckSmartTerminalTimer = null;
 	private Timer mSendCIDTimer = null;
 	
 	// Count
@@ -1775,7 +1783,6 @@ public class Home extends Activity {
 	public void showMaintoKey(int Key){
 		if(DisplayType == DISPLAY_TYPE_A){
 			_MainChangeAnimation.StartChangeAnimation(_MainBBaseFragment);
-			OldScreenIndex = Home.SCREEN_STATE_MAIN_B_TOP;
 			switch(Key){
 				case CAN1CommManager.WORK_LOAD:
 					_MainBBaseFragment.setFirstScreenIndex(Home.SCREEN_STATE_MAIN_B_KEY_WORKLOAD);
@@ -1784,9 +1791,9 @@ public class Home extends Activity {
 		}else{
 			_MainChangeAnimation.StartChangeAnimation(_MainABaseFragment);
 			switch(Key){
-			case CAN1CommManager.WORK_LOAD:
-				_MainABaseFragment.setFirstScreenIndex(Home.SCREEN_STATE_MAIN_A_KEY_WORKLOAD);
-				break;
+				case CAN1CommManager.WORK_LOAD:
+					_MainABaseFragment.setFirstScreenIndex(Home.SCREEN_STATE_MAIN_A_KEY_WORKLOAD);
+					break;
 			}
 		}
 	}	
@@ -2428,7 +2435,7 @@ public class Home extends Activity {
 		
 		if(CAN1Comm.GetMiracastFlag() == true)
 		{
-			CAN1Comm.GetMiracastFlag();
+			CAN1Comm.CheckMiracast();
 		}		
 		
 		if(PressFnKey == 1)
@@ -3157,8 +3164,7 @@ public class Home extends Activity {
 					CAN1Comm.Set_BoomDetentMode_223_PGN61184_123(7);
 					CAN1Comm.Set_BucketDetentMode_224_PGN61184_123(7);
 					CAN1Comm.TxCANToMCU(123);							
-				}
-				else if(nSendCommandTimerIndex == 3){
+				}else if(nSendCommandTimerIndex == 3){
 					CAN1Comm.Set_SettingSelection_PGN61184_105(0xF);
 					CAN1Comm.Set_SpeedometerFrequency_534_PGN61184_105(0xFFFF);
 					CAN1Comm.Set_AutoRideControlOperationSpeedForward_574_PGN61184_105(0xF);
@@ -3166,18 +3172,14 @@ public class Home extends Activity {
 					CAN1Comm.Set_VehicleSpeedLimit_572_PGN61184_105(0xFF);
 					CAN1Comm.TxCANToMCU(105);
 					CAN1Comm.Set_SettingSelection_PGN61184_105(15);
-				}
-				
-				else if (nSendCommandTimerIndex == 4){
+				}else if (nSendCommandTimerIndex == 4){
 					CAN1Comm.Set_WeightOffsetSetting_PGN61184_62(0); //STATE_WEIGHT_OFFSET_SETTING_CALL
 					CAN1Comm.TxCANToMCU(62);
 					CAN1Comm.Set_WeightOffsetSetting_PGN61184_62(3);
 					CAN1Comm.Set_WeighingDisplayMode1_1910_PGN61184_62(15);
-				}	
-				else if (nSendCommandTimerIndex == 5){
+				}else if (nSendCommandTimerIndex == 5){
 					CAN1Comm.TxCMDToMCU(CAN1Comm.CMD_VERSION,1);
-				}	
-				else if(nSendCommandTimerIndex == 6){
+				}else if(nSendCommandTimerIndex == 6){
 					CAN1Comm.Set_AutomaticEngineShutdown_363_PGN61184_121(3);
 					CAN1Comm.Set_AutomaticEngineShutdownTypeControlByte_PGN61184_121(3);
 					CAN1Comm.Set_EngineShutdownCotrolByte_PGN61184_121(0xF);
@@ -3360,6 +3362,42 @@ public class Home extends Activity {
 			mCheckMultimediaTimer.cancel();
 			mCheckMultimediaTimer.purge();
 			mCheckMultimediaTimer = null;
+		}
+		
+	}
+	public class CheckSmartTerminalTimerClass extends TimerTask{
+
+		@Override
+		public void run() {
+			// TODO Auto-generated method stub
+			runOnUiThread(new Runnable() {
+				
+				@Override
+				public void run() {
+					// TODO Auto-generated method stub
+					CAN1Comm.CheckMiracast();
+					if(CAN1Comm.GetMiracastFlag() == true){
+						CancelCheckSmartTerminalTimer();
+					}
+				}
+			});
+			
+		}
+		
+	}
+	
+	public void StartCheckSmartTerminalTimer(){
+		CancelCheckSmartTerminalTimer();
+		mCheckSmartTerminalTimer = new Timer();
+		mCheckSmartTerminalTimer.schedule(new CheckSmartTerminalTimerClass(),1,200);	
+	}
+	
+	public void CancelCheckSmartTerminalTimer(){
+//		Log.d(TAG,"CancelCheckSmartTerminalTimer()");
+		if(mCheckSmartTerminalTimer != null){
+			mCheckSmartTerminalTimer.cancel();
+			mCheckSmartTerminalTimer.purge();
+			mCheckSmartTerminalTimer = null;
 		}
 		
 	}

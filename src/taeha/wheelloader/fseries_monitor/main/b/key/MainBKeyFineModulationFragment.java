@@ -1,6 +1,7 @@
 package taeha.wheelloader.fseries_monitor.main.b.key;
 
 import android.os.Bundle;
+import android.os.Handler;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -29,6 +30,8 @@ public class MainBKeyFineModulationFragment extends ParentFragment{
 	//VALUABLE////////////////////////////////////////
 	int FineModulation;
 	int SelectFineModulation;
+	int CursurIndex;
+	Handler HandleCursurDisplay;
 	//////////////////////////////////////////////////
 	
 	//ANIMATION///////////////////////////////////////
@@ -84,6 +87,8 @@ public class MainBKeyFineModulationFragment extends ParentFragment{
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
+				CursurIndex = 1;
+				HandleCursurDisplay.sendMessage(HandleCursurDisplay.obtainMessage(CursurIndex));
 				ClickOff();
 			}
 		});
@@ -92,6 +97,8 @@ public class MainBKeyFineModulationFragment extends ParentFragment{
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
+				CursurIndex = 2;
+				HandleCursurDisplay.sendMessage(HandleCursurDisplay.obtainMessage(CursurIndex));
 				ClickOn();
 			}
 		});
@@ -146,14 +153,17 @@ public class MainBKeyFineModulationFragment extends ParentFragment{
 			CAN1Comm.Set_FlowFineModulationOperation_2302_PGN61184_203(CAN1CommManager.DATA_STATE_ON);
 			CAN1Comm.TxCANToMCU(203);
 			CAN1Comm.Set_FlowFineModulationOperation_2302_PGN61184_203(3);
+			CursurIndex = 2;
 			break;
 		case CAN1CommManager.DATA_STATE_ON:
 			SelectFineModulation = CAN1CommManager.DATA_STATE_OFF;
 			CAN1Comm.Set_FlowFineModulationOperation_2302_PGN61184_203(CAN1CommManager.DATA_STATE_OFF);
 			CAN1Comm.TxCANToMCU(203);
 			CAN1Comm.Set_FlowFineModulationOperation_2302_PGN61184_203(3);
+			CursurIndex = 1;
 			break;
 		}
+		CursurDisplay(CursurIndex);
 		
 	}
 	public void ClickOff(){
@@ -168,5 +178,62 @@ public class MainBKeyFineModulationFragment extends ParentFragment{
 		CAN1Comm.Set_FlowFineModulationOperation_2302_PGN61184_203(3);
 		ParentActivity._MainBBaseFragment.showKeytoDefaultScreenAnimation();
 	}
+	/////////////////////////////////////////////////////////////////////
+	public void ClickLeft(){
+		switch (CursurIndex) {
+		case 1:
+			CursurIndex = 2;
+			CursurDisplay(CursurIndex);
+			break;
+		case 2:
+			CursurIndex--;
+			CursurDisplay(CursurIndex);
+			break;
+		default:
+			CursurIndex = 1;
+			CursurDisplay(CursurIndex);
+			break;
+		}
+	}
+	public void ClickRight(){
+		switch (CursurIndex) {
+		case 1:
+			CursurIndex++;
+			CursurDisplay(CursurIndex);
+			break;
+		case 2:
+		default:
+			CursurIndex = 1;
+			CursurDisplay(CursurIndex);
+			break;
+		}
+	}
+	public void ClickEnter(){
+		switch (CursurIndex) {
+		case 1:
+			ClickOff();
+			break;
+		case 2:
+			ClickOn();
+			break;
+		default:
+			break;
+		}
+	}
 	
+	public void CursurDisplay(int Index){
+		radioOff.setPressed(false);
+		radioOn.setPressed(false);
+		switch (CursurIndex) {
+		case 1:
+			radioOff.setPressed(true);
+			break;
+		case 2:
+			radioOn.setPressed(true);
+			break;
+		default:
+			break;
+		}
+	}
+
 }

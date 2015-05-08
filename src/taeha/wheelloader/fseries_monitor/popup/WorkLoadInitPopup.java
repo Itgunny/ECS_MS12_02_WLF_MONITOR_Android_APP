@@ -108,10 +108,12 @@ public class WorkLoadInitPopup extends ParentPopup{
 		*/
 		ParentActivity.ScreenIndex = ParentActivity.OldScreenIndex;
 		try {
-			if(ParentActivity.OldScreenIndex == ParentActivity.SCREEN_STATE_MENU_MODE_HYD_WORKLOAD_TOP)
+			if(ParentActivity.OldScreenIndex == Home.SCREEN_STATE_MENU_MODE_HYD_WORKLOAD_TOP)
 				ParentActivity._MenuBaseFragment._WorkLoadFragment.CursurDisplay(11);
-			else if(ParentActivity.OldScreenIndex == ParentActivity.SCREEN_STATE_MAIN_A_KEY_WORKLOAD)
+			else if(ParentActivity.OldScreenIndex == Home.SCREEN_STATE_MAIN_A_KEY_WORKLOAD)
 				ParentActivity._MainABaseFragment._MainAKeyWorkLoadFragment.CursurDisplay(6);
+			else if(ParentActivity.OldScreenIndex == Home.SCREEN_STATE_MAIN_B_KEY_WORKLOAD)
+				ParentActivity._MainBBaseFragment._MainBKeyWorkLoadFragment.CursurDisplay(6);
 		} catch (NullPointerException e) {
 			// TODO: handle exception
 			Log.e(TAG,"NullPointerException dismiss");

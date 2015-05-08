@@ -1,6 +1,8 @@
 package taeha.wheelloader.fseries_monitor.main.b.key;
 
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
@@ -35,6 +37,8 @@ public class MainBKeyRearWiperFragment extends ParentFragment{
 	int SendCount;
 	
 	int initState;	// ++, 150211 bwk
+	int CursurIndex;
+	Handler HandleCursurDisplay;
 	//////////////////////////////////////////////////
 	
 	//ANIMATION///////////////////////////////////////
@@ -60,6 +64,12 @@ public class MainBKeyRearWiperFragment extends ParentFragment{
 		ParentActivity.ScreenIndex = ParentActivity.SCREEN_STATE_MAIN_B_KEY_REARWIPER;
 		RearWiperSpeedDisplay(WiperSpeedState);
 		ClickHardKey();
+		HandleCursurDisplay = new Handler() {
+			@Override
+			public void handleMessage(Message msg) {
+				CursurDisplay(msg.what);
+			}
+		};
 		return mRoot;
 	}
 	@Override
@@ -103,6 +113,8 @@ public class MainBKeyRearWiperFragment extends ParentFragment{
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
+				CursurIndex = 1;
+				HandleCursurDisplay.sendMessage(HandleCursurDisplay.obtainMessage(CursurIndex));
 				ClickOff();
 			}
 		});
@@ -111,6 +123,8 @@ public class MainBKeyRearWiperFragment extends ParentFragment{
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
+				CursurIndex = 2;
+				HandleCursurDisplay.sendMessage(HandleCursurDisplay.obtainMessage(CursurIndex));
 				ClickIntermittent();
 			}
 		});
@@ -119,6 +133,8 @@ public class MainBKeyRearWiperFragment extends ParentFragment{
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
+				CursurIndex = 3;
+				HandleCursurDisplay.sendMessage(HandleCursurDisplay.obtainMessage(CursurIndex));
 				ClickLow();
 			}
 		});
@@ -217,20 +233,24 @@ public class MainBKeyRearWiperFragment extends ParentFragment{
 			CAN1Comm.Set_RearWiperOperationStatus_3451_PGN65527(CAN1CommManager.DATA_STATE_KEY_REARWIPER_SPEED_LOW);
 			CAN1Comm.TxCANToMCU(247);
 			CAN1Comm.Set_RearWiperOperationStatus_3451_PGN65527(3);
+			CursurIndex = 3;
 			break;
 		case CAN1CommManager.DATA_STATE_KEY_REARWIPER_SPEED_INT:
 			SelectWiperSpeedState = CAN1CommManager.DATA_STATE_KEY_REARWIPER_SPEED_OFF;
 			CAN1Comm.Set_RearWiperOperationStatus_3451_PGN65527(CAN1CommManager.DATA_STATE_KEY_REARWIPER_SPEED_OFF);
 			CAN1Comm.TxCANToMCU(247);
 			CAN1Comm.Set_RearWiperOperationStatus_3451_PGN65527(3);
+			CursurIndex = 1;
 			break;
 		case CAN1CommManager.DATA_STATE_KEY_REARWIPER_SPEED_LOW:
 			SelectWiperSpeedState = CAN1CommManager.DATA_STATE_KEY_REARWIPER_SPEED_INT;
 			CAN1Comm.Set_RearWiperOperationStatus_3451_PGN65527(CAN1CommManager.DATA_STATE_KEY_REARWIPER_SPEED_INT);
 			CAN1Comm.TxCANToMCU(247);
 			CAN1Comm.Set_RearWiperOperationStatus_3451_PGN65527(3);
+			CursurIndex = 2;
 			break;
 		}		
+		CursurDisplay(CursurIndex);
 	}
 	// --, 150211 bwk
 	public void ClickHardKey(){
@@ -242,20 +262,24 @@ public class MainBKeyRearWiperFragment extends ParentFragment{
 			CAN1Comm.Set_RearWiperOperationStatus_3451_PGN65527(CAN1CommManager.DATA_STATE_KEY_REARWIPER_SPEED_INT);
 			CAN1Comm.TxCANToMCU(247);
 			CAN1Comm.Set_RearWiperOperationStatus_3451_PGN65527(3);
+			CursurIndex = 2;
 			break;
 		case CAN1CommManager.DATA_STATE_KEY_REARWIPER_SPEED_INT:
 			SelectWiperSpeedState = CAN1CommManager.DATA_STATE_KEY_REARWIPER_SPEED_LOW;
 			CAN1Comm.Set_RearWiperOperationStatus_3451_PGN65527(CAN1CommManager.DATA_STATE_KEY_REARWIPER_SPEED_LOW);
 			CAN1Comm.TxCANToMCU(247);
 			CAN1Comm.Set_RearWiperOperationStatus_3451_PGN65527(3);
+			CursurIndex = 3;
 			break;
 		case CAN1CommManager.DATA_STATE_KEY_REARWIPER_SPEED_LOW:
 			SelectWiperSpeedState = CAN1CommManager.DATA_STATE_KEY_REARWIPER_SPEED_OFF;
 			CAN1Comm.Set_RearWiperOperationStatus_3451_PGN65527(CAN1CommManager.DATA_STATE_KEY_REARWIPER_SPEED_OFF);
 			CAN1Comm.TxCANToMCU(247);
 			CAN1Comm.Set_RearWiperOperationStatus_3451_PGN65527(3);
+			CursurIndex = 1;
 			break;
 		}
+		CursurDisplay(CursurIndex);
 		initState++;	// ++, 150211 bwk
 	}
 	
@@ -273,5 +297,72 @@ public class MainBKeyRearWiperFragment extends ParentFragment{
 		CAN1Comm.Set_RearWiperOperationStatus_3451_PGN65527(CAN1CommManager.DATA_STATE_KEY_REARWIPER_SPEED_LOW);
 		CAN1Comm.TxCANToMCU(247);
 		CAN1Comm.Set_RearWiperOperationStatus_3451_PGN65527(3);
+	}
+	/////////////////////////////////////////////////////////////////////
+	public void ClickLeft(){
+		switch (CursurIndex) {
+		case 1:
+			CursurIndex = 3;
+			CursurDisplay(CursurIndex);
+			break;
+		case 2:
+		case 3:
+			CursurIndex--;
+			CursurDisplay(CursurIndex);
+			break;
+		default:
+			CursurIndex = 1;
+			CursurDisplay(CursurIndex);
+			break;
+		}
+	}
+	public void ClickRight(){
+		switch (CursurIndex) {
+		case 1:
+		case 2:
+			CursurIndex++;
+			CursurDisplay(CursurIndex);
+			break;
+		case 3:
+		default:
+			CursurIndex = 1;
+			CursurDisplay(CursurIndex);
+			break;
+		}
+	}
+	public void ClickEnter(){
+		switch (CursurIndex) {
+		case 1:
+			ClickOff();
+			break;
+		case 2:
+			ClickIntermittent();
+			break;
+		case 3:
+			ClickLow();
+			break;
+		default:
+			break;
+		}
+	}
+	
+	public void CursurDisplay(int Index){
+		radioOff.setPressed(false);
+		radioIntermittent.setPressed(false);
+		radioLow.setPressed(false);
+		textViewWasher.setPressed(false);
+		switch (CursurIndex) {
+		case 1:
+			radioOff.setPressed(true);
+			break;
+		case 2:
+			radioIntermittent.setPressed(true);
+			break;
+		case 3:
+			radioLow.setPressed(true);
+			break;
+		default:
+			break;
+		}
 	}
 }

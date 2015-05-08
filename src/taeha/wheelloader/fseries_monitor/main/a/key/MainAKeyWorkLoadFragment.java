@@ -3,6 +3,7 @@ package taeha.wheelloader.fseries_monitor.main.a.key;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
+import android.os.Message;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -33,7 +34,7 @@ public class MainAKeyWorkLoadFragment extends ParentFragment{
 	TextView textViewErrorDetectData;
 	
 	TextView textViewPressureCalibration;
-	TextView textViewPressureInitial;
+	TextView textViewInitialization;
 	//////////////////////////////////////////////////
 	
 	//VALUABLE////////////////////////////////////////
@@ -65,6 +66,12 @@ public class MainAKeyWorkLoadFragment extends ParentFragment{
 		InitButtonListener();
 
 		ParentActivity.ScreenIndex = Home.SCREEN_STATE_MAIN_A_KEY_WORKLOAD;
+		HandleCursurDisplay = new Handler() {
+			@Override
+			public void handleMessage(Message msg) {
+				CursurDisplay(msg.what);
+			}
+		};
 		return mRoot;
 	}
 
@@ -90,7 +97,7 @@ public class MainAKeyWorkLoadFragment extends ParentFragment{
 		textViewErrorDetectData = (TextView)mRoot.findViewById(R.id.textView_key_main_a_workload_errordetect_data);
 		
 		textViewPressureCalibration = (TextView)mRoot.findViewById(R.id.textView_key_main_a_workload_calibration);
-		textViewPressureInitial = (TextView)mRoot.findViewById(R.id.textView_key_main_a_workload_initialization);
+		textViewInitialization = (TextView)mRoot.findViewById(R.id.textView_key_main_a_workload_initialization);
 		
 		float fontsize;
 		if(ParentActivity.LanguageIndex == Home.STATE_DISPLAY_LANGUAGE_KOREAN)
@@ -203,7 +210,7 @@ public class MainAKeyWorkLoadFragment extends ParentFragment{
 				CursurIndex = 4;
 			}
 		});
-		textViewPressureInitial.setOnClickListener(new View.OnClickListener() {
+		textViewInitialization.setOnClickListener(new View.OnClickListener() {
 			
 			@Override
 			public void onClick(View v) {
@@ -417,7 +424,7 @@ public class MainAKeyWorkLoadFragment extends ParentFragment{
 		imgbtnDisplay.setPressed(false);
 		imgbtnErrorDetect.setPressed(false);
 		textViewPressureCalibration.setPressed(false);
-		textViewPressureInitial.setPressed(false);
+		textViewInitialization.setPressed(false);
 		imgbtnDefault.setPressed(false);
 		imgbtnOK.setPressed(false);
 		switch (CursurIndex) {
@@ -434,7 +441,7 @@ public class MainAKeyWorkLoadFragment extends ParentFragment{
 				textViewPressureCalibration.setPressed(true);
 				break;
 			case 5:
-				textViewPressureInitial.setPressed(true);
+				textViewInitialization.setPressed(true);
 				break;
 			case 6:
 				imgbtnDefault.setPressed(true);

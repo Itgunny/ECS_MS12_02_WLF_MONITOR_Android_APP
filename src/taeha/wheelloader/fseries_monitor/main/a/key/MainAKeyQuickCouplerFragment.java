@@ -150,7 +150,7 @@ public class MainAKeyQuickCouplerFragment extends ParentFragment{
 	}
 	/////////////////////////////////////////////////////////////////////	
 	public void ClickLock(){
-		ParentActivity.OldScreenIndex = ParentActivity.ScreenIndex;
+		ParentActivity.OldScreenIndex = ParentActivity.SCREEN_STATE_MAIN_A_KEY_QUICKCOUPLER;
 		ParentActivity.showQuickCouplerPopupLocking2();
 	}
 	public void ClickUnlock(){

@@ -1264,6 +1264,12 @@ public class MainBBaseFragment extends ParentFragment{
 
 			IndicatorChangeAnimation.StartChangeAnimation(_MainBIndicatorFragment);
 		}else{
+			if(ParentActivity.ScreenIndex == Home.SCREEN_STATE_MAIN_B_KEY_WORKLOAD_INIT)
+				ParentActivity._WorkLoadInitPopup.ClickESC();
+			else if(ParentActivity.ScreenIndex == Home.SCREEN_STATE_MAIN_B_KEY_WORKLOAD_WEIGHING_INIT1)
+				ParentActivity._WorkLoadWeighingInitPopup1.ClickESC();
+			else if(ParentActivity.ScreenIndex == Home.SCREEN_STATE_MAIN_B_KEY_WORKLOAD_WEIGHING_INIT2)
+				ParentActivity._WorkLoadWeighingInitPopup2.ClickESC();
 
 		}
 		
@@ -1676,6 +1682,61 @@ public class MainBBaseFragment extends ParentFragment{
 		case Home.SCREEN_STATE_MAIN_B_QUICK_MIRACLOSE:
 			ParentActivity._MiracastClosePopup.ClickLeft();
 			break;
+			
+		case Home.SCREEN_STATE_MAIN_B_KEY_MAINLIGHT:
+			_MainBKeyMainLightFragment.ClickLeft();
+			break;
+		case Home.SCREEN_STATE_MAIN_B_KEY_WORKLIGHT:
+			_MainBKeyWorkLightFragment.ClickLeft();
+			break;
+		case Home.SCREEN_STATE_MAIN_B_KEY_AUTOGREASE:
+			_MainBKeyAutoGreaseFragment.ClickLeft();
+			break;
+		case Home.SCREEN_STATE_MAIN_B_KEY_QUICKCOUPLER:
+			_MainBKeyQuickCouplerFragment.ClickLeft();
+			break;
+		case Home.SCREEN_STATE_MAIN_B_KEY_RIDECONTROL:
+			_MainBKeyRideControlFragment.ClickLeft();
+			break;
+		case Home.SCREEN_STATE_MAIN_B_KEY_RIDECONTROL_SPEED:
+			_MainBKeyRideControlSpeedFragment.ClickLeft();
+			break;
+		case Home.SCREEN_STATE_MAIN_B_KEY_WORKLOAD:
+			_MainBKeyWorkLoadFragment.ClickLeft();
+			break;
+		case Home.SCREEN_STATE_MAIN_B_KEY_WORKLOAD_INIT:
+			ParentActivity._WorkLoadInitPopup.ClickLeft();
+			break;
+		case Home.SCREEN_STATE_MAIN_B_KEY_WORKLOAD_WEIGHING_INIT1:
+			ParentActivity._WorkLoadWeighingInitPopup1.ClickLeft();
+			break;
+		case Home.SCREEN_STATE_MAIN_B_KEY_WORKLOAD_WEIGHING_INIT2:
+			ParentActivity._WorkLoadWeighingInitPopup2.ClickLeft();
+			break;
+		case Home.SCREEN_STATE_MAIN_B_KEY_WORKLOAD_ACCUMULATION:
+			_MainBKeyWorkLoadAccumulationFragment.ClickLeft();
+			break;
+		case Home.SCREEN_STATE_MAIN_B_KEY_WORKLOAD_DISPLAY:
+			_MainBKeyWorkLoadDisplayFragment.ClickLeft();
+			break;
+		case Home.SCREEN_STATE_MAIN_B_KEY_WORKLOAD_ERRORDETECT:
+			_MainBKeyWorkLoadErrorDetectionFragment.ClickLeft();
+			break;
+		case Home.SCREEN_STATE_MAIN_B_KEY_BEACONLAMP:
+			_MainBKeyBeaconLampFragment.ClickLeft();
+			break;
+		case Home.SCREEN_STATE_MAIN_B_KEY_REARWIPER:
+			_MainBKeyRearWiperFragment.ClickLeft();
+			break;
+		case Home.SCREEN_STATE_MAIN_B_KEY_MIRRORHEAT:
+			_MainBKeyMirrorHeatFragment.ClickLeft();
+			break;
+		case Home.SCREEN_STATE_MAIN_B_KEY_DETENT:
+			_MainBKeyDetentFragment.ClickLeft();
+			break;
+		case Home.SCREEN_STATE_MAIN_B_KEY_FINEMODULATION:
+			_MainBKeyFineModulationFragment.ClickLeft();
+			break;			
 		case Home.SCREEN_STATE_MAIN_B_TOP:
 			if(CursurIndex > 0)
 				CursurIndex--;
@@ -1740,6 +1801,60 @@ public class MainBBaseFragment extends ParentFragment{
 		case Home.SCREEN_STATE_MAIN_B_QUICK_MIRACLOSE:
 			ParentActivity._MiracastClosePopup.ClickRight();
 			break;
+			
+		case Home.SCREEN_STATE_MAIN_B_KEY_MAINLIGHT:
+			_MainBKeyMainLightFragment.ClickRight();
+			break;
+		case Home.SCREEN_STATE_MAIN_B_KEY_WORKLIGHT:
+			_MainBKeyWorkLightFragment.ClickRight();
+			break;
+		case Home.SCREEN_STATE_MAIN_B_KEY_AUTOGREASE:
+			_MainBKeyAutoGreaseFragment.ClickRight();
+			break;
+		case Home.SCREEN_STATE_MAIN_B_KEY_QUICKCOUPLER:
+			_MainBKeyQuickCouplerFragment.ClickRight();
+			break;
+		case Home.SCREEN_STATE_MAIN_B_KEY_RIDECONTROL:
+			_MainBKeyRideControlFragment.ClickRight();
+			break;
+		case Home.SCREEN_STATE_MAIN_B_KEY_RIDECONTROL_SPEED:
+			_MainBKeyRideControlSpeedFragment.ClickRight();
+			break;
+		case Home.SCREEN_STATE_MAIN_B_KEY_WORKLOAD:
+			_MainBKeyWorkLoadFragment.ClickRight();
+			break;
+		case Home.SCREEN_STATE_MAIN_B_KEY_WORKLOAD_INIT:
+			ParentActivity._WorkLoadInitPopup.ClickRight();
+			break;
+		case Home.SCREEN_STATE_MAIN_B_KEY_WORKLOAD_WEIGHING_INIT1:
+			ParentActivity._WorkLoadWeighingInitPopup1.ClickRight();
+			break;
+		case Home.SCREEN_STATE_MAIN_B_KEY_WORKLOAD_WEIGHING_INIT2:
+			ParentActivity._WorkLoadWeighingInitPopup2.ClickRight();
+			break;
+		case Home.SCREEN_STATE_MAIN_B_KEY_WORKLOAD_ACCUMULATION:
+			_MainBKeyWorkLoadAccumulationFragment.ClickRight();
+			break;
+		case Home.SCREEN_STATE_MAIN_B_KEY_WORKLOAD_DISPLAY:
+			_MainBKeyWorkLoadDisplayFragment.ClickRight();
+			break;
+		case Home.SCREEN_STATE_MAIN_B_KEY_WORKLOAD_ERRORDETECT:
+			_MainBKeyWorkLoadErrorDetectionFragment.ClickRight();
+			break;
+		case Home.SCREEN_STATE_MAIN_B_KEY_BEACONLAMP:
+			_MainBKeyBeaconLampFragment.ClickRight();
+			break;
+		case Home.SCREEN_STATE_MAIN_B_KEY_REARWIPER:
+			_MainBKeyRearWiperFragment.ClickRight();
+			break;
+		case Home.SCREEN_STATE_MAIN_B_KEY_MIRRORHEAT:
+			_MainBKeyMirrorHeatFragment.ClickRight();
+			break;
+		case Home.SCREEN_STATE_MAIN_B_KEY_DETENT:
+			_MainBKeyDetentFragment.ClickRight();
+			break;
+		case Home.SCREEN_STATE_MAIN_B_KEY_FINEMODULATION:
+			_MainBKeyFineModulationFragment.ClickRight();			
 		case Home.SCREEN_STATE_MAIN_B_TOP:
 			if(CursurIndex == 8)
 			{
@@ -1811,6 +1926,15 @@ public class MainBBaseFragment extends ParentFragment{
 		case Home.SCREEN_STATE_MAIN_B_KEY_FINEMODULATION:
 			showKeytoDefaultScreenAnimation();
 			break;	
+		case Home.SCREEN_STATE_MAIN_B_KEY_WORKLOAD_INIT:
+			ParentActivity._WorkLoadInitPopup.ClickESC();
+			break;			
+		case Home.SCREEN_STATE_MAIN_B_KEY_WORKLOAD_WEIGHING_INIT1:
+			ParentActivity._WorkLoadWeighingInitPopup1.ClickESC();
+			break;
+		case Home.SCREEN_STATE_MAIN_B_KEY_WORKLOAD_WEIGHING_INIT2:
+			ParentActivity._WorkLoadWeighingInitPopup2.ClickESC();
+			break;
 		case Home.SCREEN_STATE_MAIN_B_BRKAEPEDALCALIBRATION_TOP:
 		case Home.SCREEN_STATE_MAIN_B_AEB_TOP:
 			showCalibrationtoDefaultScreenAnimation();
@@ -1888,6 +2012,60 @@ public class MainBBaseFragment extends ParentFragment{
 			ParentActivity._MiracastClosePopup.ClickEnter();
 			break;
 		
+		case Home.SCREEN_STATE_MAIN_B_KEY_MAINLIGHT:
+			_MainBKeyMainLightFragment.ClickEnter();
+			break;
+		case Home.SCREEN_STATE_MAIN_B_KEY_WORKLIGHT:
+			_MainBKeyWorkLightFragment.ClickEnter();
+			break;
+		case Home.SCREEN_STATE_MAIN_B_KEY_AUTOGREASE:
+			_MainBKeyAutoGreaseFragment.ClickEnter();
+			break;
+		case Home.SCREEN_STATE_MAIN_B_KEY_QUICKCOUPLER:
+			_MainBKeyQuickCouplerFragment.ClickEnter();
+			break;
+		case Home.SCREEN_STATE_MAIN_B_KEY_RIDECONTROL:
+			_MainBKeyRideControlFragment.ClickEnter();
+			break;
+		case Home.SCREEN_STATE_MAIN_B_KEY_RIDECONTROL_SPEED:
+			_MainBKeyRideControlSpeedFragment.ClickEnter();
+			break;
+		case Home.SCREEN_STATE_MAIN_B_KEY_WORKLOAD:
+			_MainBKeyWorkLoadFragment.ClickEnter();
+			break;
+		case Home.SCREEN_STATE_MAIN_B_KEY_WORKLOAD_ACCUMULATION:
+			_MainBKeyWorkLoadAccumulationFragment.ClickEnter();
+			break;
+		case Home.SCREEN_STATE_MAIN_B_KEY_WORKLOAD_DISPLAY:
+			_MainBKeyWorkLoadDisplayFragment.ClickEnter();
+			break;
+		case Home.SCREEN_STATE_MAIN_B_KEY_WORKLOAD_ERRORDETECT:
+			_MainBKeyWorkLoadErrorDetectionFragment.ClickEnter();
+			break;
+		case Home.SCREEN_STATE_MAIN_B_KEY_WORKLOAD_INIT:
+			ParentActivity._WorkLoadInitPopup.ClickEnter();
+			break;
+		case Home.SCREEN_STATE_MAIN_B_KEY_WORKLOAD_WEIGHING_INIT1:
+			ParentActivity._WorkLoadWeighingInitPopup1.ClickEnter();
+			break;
+		case Home.SCREEN_STATE_MAIN_B_KEY_WORKLOAD_WEIGHING_INIT2:
+			ParentActivity._WorkLoadWeighingInitPopup2.ClickEnter();
+			break;
+		case Home.SCREEN_STATE_MAIN_B_KEY_BEACONLAMP:
+			_MainBKeyBeaconLampFragment.ClickEnter();
+			break;
+		case Home.SCREEN_STATE_MAIN_B_KEY_REARWIPER:
+			_MainBKeyRearWiperFragment.ClickEnter();
+			break;
+		case Home.SCREEN_STATE_MAIN_B_KEY_MIRRORHEAT:
+			_MainBKeyMirrorHeatFragment.ClickEnter();
+			break;
+		case Home.SCREEN_STATE_MAIN_B_KEY_DETENT:
+			_MainBKeyDetentFragment.ClickEnter();
+			break;
+		case Home.SCREEN_STATE_MAIN_B_KEY_FINEMODULATION:
+			_MainBKeyFineModulationFragment.ClickEnter();
+			break;		
 		case Home.SCREEN_STATE_MAIN_B_TOP:
 			switch(CursurIndex)
 			{

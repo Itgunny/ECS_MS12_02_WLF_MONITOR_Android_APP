@@ -395,7 +395,10 @@ public class MainARightMainFragment extends ParentFragment{
 				TMCCOModeDataAnimation.FlipAnimation(textViewCCOModeData,getResources().getString(string.M));
 				break;
 			case CAN1CommManager.DATA_STATE_TM_CLUTCHCUTOFF_H:
-				TMCCOModeDataAnimation.FlipAnimation(textViewCCOModeData,getResources().getString(string.H));
+				if(ParentActivity._CheckModel.GetMCUVersion(CAN1Comm.Get_ComponentBasicInformation_1698_PGN65330()) == CheckModel.MODEL_980)
+					TMCCOModeDataAnimation.FlipAnimation(textViewCCOModeData,getResources().getString(string.ON));
+				else
+					TMCCOModeDataAnimation.FlipAnimation(textViewCCOModeData,getResources().getString(string.H));
 				break;
 			default:
 //				TMCCOModeDataAnimation.FlipAnimation(textViewCCOModeData,getResources().getString(string.OFF));
@@ -457,10 +460,7 @@ public class MainARightMainFragment extends ParentFragment{
 	}
 	
 	public void ClickCCOMode(){
-		if(ParentActivity._CheckModel.GetMCUVersion(CAN1Comm.Get_ComponentBasicInformation_1698_PGN65330()) == CheckModel.MODEL_980)
-			ShowSelectAnimation(2);
-		else
-			ShowSelectAnimation(2);
+		ShowSelectAnimation(2);
 	}
 	public void ClickShiftMode(){
 		ShowSelectAnimation(3);

@@ -214,7 +214,4 @@ public class MainAKeyMirrorHeatFragment extends ParentFragment{
 			break;
 		}
 	}
-
-	
-	
 }

@@ -108,7 +108,7 @@ public class QuickCouplerPopupUnlocking2 extends ParentPopup{
 		ParentActivity.ScreenIndex = ParentActivity.OldScreenIndex;
 		try {
 			if(ParentActivity.DisplayType == ParentActivity.DISPLAY_TYPE_A){
-				//ParentActivity._MainBBaseFragment._MainBKeyQuickCouplerFragment.CursurDisplay(2);
+				ParentActivity._MainBBaseFragment._MainBKeyQuickCouplerFragment.CursurDisplay(2);
 			}else{
 				ParentActivity._MainABaseFragment._MainAKeyQuickCouplerFragment.CursurDisplay(2);
 			}

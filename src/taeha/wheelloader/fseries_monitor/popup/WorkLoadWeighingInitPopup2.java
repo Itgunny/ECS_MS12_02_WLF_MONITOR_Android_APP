@@ -98,23 +98,30 @@ public class WorkLoadWeighingInitPopup2 extends ParentPopup{
 		super.dismiss();
 		Log.d(TAG,"dismiss");
 		ParentActivity.ScreenIndex = ParentActivity.OldScreenIndex;
-		if(ParentActivity.OldScreenIndex == ParentActivity.SCREEN_STATE_MENU_MODE_HYD_WORKLOAD_TOP){
+		if(ParentActivity.OldScreenIndex == Home.SCREEN_STATE_MENU_MODE_HYD_WORKLOAD_TOP){
 			try {
 				ParentActivity._MenuBaseFragment._WorkLoadFragment.CursurDisplay(10);
 			} catch (NullPointerException e) {
 				// TODO: handle exception
 				Log.e(TAG,"NullPointerException dismiss");
 			}		
-		}else if(ParentActivity.OldScreenIndex == ParentActivity.SCREEN_STATE_MAIN_A_KEY_WORKLOAD
-				|| ParentActivity.OldScreenIndex == ParentActivity.SCREEN_STATE_MAIN_A_KEY_WORKLOAD_WEIGHING_INIT1){
+		}else if(ParentActivity.OldScreenIndex == Home.SCREEN_STATE_MAIN_A_KEY_WORKLOAD
+				|| ParentActivity.OldScreenIndex == Home.SCREEN_STATE_MAIN_A_KEY_WORKLOAD_WEIGHING_INIT1){
 			try {
 				ParentActivity._MainABaseFragment._MainAKeyWorkLoadFragment.CursurDisplay(5);
 			} catch (NullPointerException e) {
 				// TODO: handle exception
 				Log.e(TAG,"NullPointerException dismiss");
 			}
-
-		}		
+		}else if(ParentActivity.OldScreenIndex == Home.SCREEN_STATE_MAIN_B_KEY_WORKLOAD
+				|| ParentActivity.OldScreenIndex == Home.SCREEN_STATE_MAIN_B_KEY_WORKLOAD_WEIGHING_INIT1){
+			try {
+				ParentActivity._MainBBaseFragment._MainBKeyWorkLoadFragment.CursurDisplay(5);
+			} catch (NullPointerException e) {
+				// TODO: handle exception
+				Log.e(TAG,"NullPointerException dismiss");
+			}
+		}			
 	}
 
 	@Override

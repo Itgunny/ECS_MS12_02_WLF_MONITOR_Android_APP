@@ -3090,9 +3090,11 @@ void SetKeypadLamp()
 	if(RX_ELECTRICAL_SWITCH_RELAY_OPERATION_STATUS_65527.QuickCouplerOperationStatus_3448 == 0){
 		TX_CMD_Lamp.QuickCoupler1 = 0;
 		TX_CMD_Lamp.QuickCoupler2 = 1;
-	}
-	else if(RX_ELECTRICAL_SWITCH_RELAY_OPERATION_STATUS_65527.QuickCouplerOperationStatus_3448 == 1){
+	}else if(RX_ELECTRICAL_SWITCH_RELAY_OPERATION_STATUS_65527.QuickCouplerOperationStatus_3448 == 1){
 		TX_CMD_Lamp.QuickCoupler1 = 1;
+		TX_CMD_Lamp.QuickCoupler2 = 0;
+	}else if(RX_ELECTRICAL_SWITCH_RELAY_OPERATION_STATUS_65527.QuickCouplerOperationStatus_3448 == 2){
+		TX_CMD_Lamp.QuickCoupler1 = 0;
 		TX_CMD_Lamp.QuickCoupler2 = 0;
 	}else if(RX_ELECTRICAL_SWITCH_RELAY_OPERATION_STATUS_65527.QuickCouplerOperationStatus_3448 == 3){
 		TX_CMD_Lamp.QuickCoupler1 = 0;

@@ -138,7 +138,7 @@ public class AlwaysOnTopService extends Service{
 		});
 
 		thread.start();
-		CommService.multimediaFlag = false;
+//		CommService.multimediaFlag = false;
 	}
 	// --, 150326 bwk
 }

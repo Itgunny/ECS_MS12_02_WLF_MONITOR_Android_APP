@@ -400,7 +400,10 @@ public class MenuModeEngTMFragment extends MenuBodyList_ParentFragment{
 			setListData3(ParentActivity.getResources().getString(string.M));
 			break;
 		case CAN1CommManager.DATA_STATE_TM_CLUTCHCUTOFF_H:
-			setListData3(ParentActivity.getResources().getString(string.H));
+			if(ParentActivity._CheckModel.GetMCUVersion(CAN1Comm.Get_ComponentBasicInformation_1698_PGN65330()) == CheckModel.MODEL_980)
+				setListData3(ParentActivity.getResources().getString(string.On));
+			else
+				setListData3(ParentActivity.getResources().getString(string.H));
 			break;
 		default:
 			break;

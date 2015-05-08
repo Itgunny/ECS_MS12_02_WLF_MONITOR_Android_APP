@@ -191,11 +191,10 @@ public class MainAKeyRideControlSpeedFragment extends ParentFragment{
 			public void onStopTrackingTouch(SeekBar seekBar) {
 				// TODO Auto-generated method stub
 				int progress = seekBar.getProgress();
-				CursurIndex = 2;
-				HandleCursurDisplay.sendMessage(HandleCursurDisplay.obtainMessage(CursurIndex));
-
 				SpeedBackward = progress+1;
 				SpeedDisplay(textViewBackwardData,SpeedBackward,ParentActivity.UnitOdo);
+				CursurIndex = 2;
+				HandleCursurDisplay.sendMessage(HandleCursurDisplay.obtainMessage(CursurIndex));
 			}
 			
 			@Override

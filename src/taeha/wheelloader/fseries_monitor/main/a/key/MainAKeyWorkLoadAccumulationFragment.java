@@ -130,6 +130,7 @@ public class MainAKeyWorkLoadAccumulationFragment extends ParentFragment{
 			break;
 		
 		default:
+			CursurIndex = 1;
 			break;
 		}
 		CursurDisplay(CursurIndex);

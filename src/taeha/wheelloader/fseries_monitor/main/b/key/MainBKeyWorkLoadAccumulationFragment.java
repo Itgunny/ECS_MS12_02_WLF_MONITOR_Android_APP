@@ -1,6 +1,8 @@
 package taeha.wheelloader.fseries_monitor.main.b.key;
 
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -25,6 +27,8 @@ public class MainBKeyWorkLoadAccumulationFragment extends ParentFragment{
 	
 	//VALUABLE////////////////////////////////////////
 	int WeighingSystemMode;
+	int CursurIndex;
+	Handler HandleCursurDisplay;
 	//////////////////////////////////////////////////
 	
 	//ANIMATION///////////////////////////////////////
@@ -49,6 +53,12 @@ public class MainBKeyWorkLoadAccumulationFragment extends ParentFragment{
 
 		ParentActivity.ScreenIndex = ParentActivity.SCREEN_STATE_MAIN_B_KEY_WORKLOAD_ACCUMULATION;
 		ErrorDetectDisplay(WeighingSystemMode);
+		HandleCursurDisplay = new Handler() {
+			@Override
+			public void handleMessage(Message msg) {
+				CursurDisplay(msg.what);
+			}
+		};
 		return mRoot;
 	}
 
@@ -75,6 +85,8 @@ public class MainBKeyWorkLoadAccumulationFragment extends ParentFragment{
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
+				CursurIndex = 1;
+				HandleCursurDisplay.sendMessage(HandleCursurDisplay.obtainMessage(CursurIndex));
 				ClickManual();
 			}
 		});
@@ -83,6 +95,8 @@ public class MainBKeyWorkLoadAccumulationFragment extends ParentFragment{
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
+				CursurIndex = 2;
+				HandleCursurDisplay.sendMessage(HandleCursurDisplay.obtainMessage(CursurIndex));
 				ClickAuto();
 			}
 		});
@@ -106,15 +120,19 @@ public class MainBKeyWorkLoadAccumulationFragment extends ParentFragment{
 		case CAN1CommManager.DATA_STATE_WEIGHING_ACCUMULATION_MANUAL:
 			radioManual.setChecked(true);
 			radioAuto.setChecked(false);
+			CursurIndex = 1;
 			break;
 		case CAN1CommManager.DATA_STATE_WEIGHING_ACCUMULATION_AUTO:
 			radioManual.setChecked(false);
 			radioAuto.setChecked(true);
+			CursurIndex = 2;
 			break;
 		
 		default:
+			CursurIndex = 1;
 			break;
 		}
+		CursurDisplay(CursurIndex);
 		
 	}
 	public void ClickManual(){
@@ -137,6 +155,63 @@ public class MainBKeyWorkLoadAccumulationFragment extends ParentFragment{
 		ParentActivity.ScreenIndex = ParentActivity.SCREEN_STATE_MAIN_B_KEY_WORKLOAD;
 		ParentActivity._MainBBaseFragment._MainBKeyWorkLoadFragment = new MainBKeyWorkLoadFragment();
 		ParentActivity._MainBBaseFragment.KeyBodyChangeAnimation.StartChangeAnimation(ParentActivity._MainBBaseFragment._MainBKeyWorkLoadFragment);
+	}
+	/////////////////////////////////////////////////////////////////////
+	public void ClickLeft(){
+		switch (CursurIndex) {
+		case 1:
+			CursurIndex = 2;
+			CursurDisplay(CursurIndex);
+			break;
+		case 2:
+			CursurIndex--;
+			CursurDisplay(CursurIndex);
+			break;
+		default:
+			CursurIndex = 1;
+			CursurDisplay(CursurIndex);
+			break;
+		}
+	}
+	public void ClickRight(){
+		switch (CursurIndex) {
+		case 1:
+			CursurIndex++;
+			CursurDisplay(CursurIndex);
+			break;
+		case 2:
+		default:
+			CursurIndex = 1;
+			CursurDisplay(CursurIndex);
+			break;
+		}
+	}
+	public void ClickEnter(){
+		switch (CursurIndex) {
+		case 1:
+			ClickManual();
+			break;
+		case 2:
+			ClickAuto();
+			break;
+		default:
+			break;
+		}
+	}
+	
+	public void CursurDisplay(int Index){
+		radioManual.setPressed(false);
+		radioAuto.setPressed(false);
+		switch (CursurIndex) {
+		case 1:
+			radioManual.setPressed(true);
+			break;
+		case 2:
+			radioAuto.setPressed(true);
+			break;
+		default:
+			break;
+		}
 	}
 	
 }

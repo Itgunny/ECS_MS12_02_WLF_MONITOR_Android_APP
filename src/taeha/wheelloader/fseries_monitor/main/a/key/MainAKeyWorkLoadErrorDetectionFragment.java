@@ -228,7 +228,4 @@ public class MainAKeyWorkLoadErrorDetectionFragment extends ParentFragment{
 			break;
 		}
 	}
-
-	
-	
 }

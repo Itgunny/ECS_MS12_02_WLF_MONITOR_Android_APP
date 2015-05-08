@@ -2,6 +2,8 @@ package taeha.wheelloader.fseries_monitor.main.b.key;
 
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -38,6 +40,8 @@ public class MainBKeyWorkLoadFragment extends ParentFragment{
 	//VALUABLE////////////////////////////////////////
 	int WeighingSystemMode;
 	int WeighingDisplayMode;
+	int CursurIndex;
+	Handler HandleCursurDisplay;
 	//////////////////////////////////////////////////
 	
 	//ANIMATION///////////////////////////////////////
@@ -61,6 +65,12 @@ public class MainBKeyWorkLoadFragment extends ParentFragment{
 		InitButtonListener();
 
 		ParentActivity.ScreenIndex = ParentActivity.SCREEN_STATE_MAIN_B_KEY_WORKLOAD;
+		HandleCursurDisplay = new Handler() {
+			@Override
+			public void handleMessage(Message msg) {
+				CursurDisplay(msg.what);
+			}
+		};
 		return mRoot;
 	}
 
@@ -110,7 +120,24 @@ public class MainBKeyWorkLoadFragment extends ParentFragment{
 	protected void InitValuables() {
 		// TODO Auto-generated method stub
 		super.InitValuables();
-		
+		switch(ParentActivity.OldScreenIndex)
+		{
+			case Home.SCREEN_STATE_MAIN_B_KEY_WORKLOAD_DISPLAY:
+				CursurIndex = 2;
+				break;
+			case Home.SCREEN_STATE_MAIN_B_KEY_WORKLOAD_ERRORDETECT:
+				CursurIndex = 3;
+				break;
+			case Home.SCREEN_STATE_MENU_MODE_ETC_CALIBRATION_PRESSURE_TOP:
+				CursurIndex = 4;
+				break;
+			default:
+				CursurIndex = 1;
+				break;
+					
+		}
+		ParentActivity.OldScreenIndex = 0;
+		CursurDisplay(CursurIndex);		
 	}
 	@Override
 	protected void InitButtonListener() {
@@ -120,6 +147,8 @@ public class MainBKeyWorkLoadFragment extends ParentFragment{
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
+				CursurIndex = 1;
+				HandleCursurDisplay.sendMessage(HandleCursurDisplay.obtainMessage(CursurIndex));
 				ClickAccumulation();
 			}
 		});
@@ -128,6 +157,8 @@ public class MainBKeyWorkLoadFragment extends ParentFragment{
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
+				CursurIndex = 2;
+				HandleCursurDisplay.sendMessage(HandleCursurDisplay.obtainMessage(CursurIndex));
 				ClickDisplay();
 			}
 		});
@@ -136,6 +167,8 @@ public class MainBKeyWorkLoadFragment extends ParentFragment{
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
+				CursurIndex = 3;
+				HandleCursurDisplay.sendMessage(HandleCursurDisplay.obtainMessage(CursurIndex));
 				ClickErrorDetect();
 			}
 		});
@@ -145,6 +178,8 @@ public class MainBKeyWorkLoadFragment extends ParentFragment{
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
+				CursurIndex = 7;
+				HandleCursurDisplay.sendMessage(HandleCursurDisplay.obtainMessage(CursurIndex));
 				ClickOK();
 			}
 		});
@@ -162,6 +197,7 @@ public class MainBKeyWorkLoadFragment extends ParentFragment{
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
 				ClickDefault();
+				CursurIndex = 6;
 			}
 		});
 		textViewPressureCalibration.setOnClickListener(new View.OnClickListener() {
@@ -170,6 +206,7 @@ public class MainBKeyWorkLoadFragment extends ParentFragment{
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
 				ClickCalibration();
+				CursurIndex = 4;
 			}
 		});
 		textViewInitialization.setOnClickListener(new View.OnClickListener() {
@@ -178,6 +215,7 @@ public class MainBKeyWorkLoadFragment extends ParentFragment{
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
 				ClickInitial();
+				CursurIndex = 5;
 			}
 		});
 	}
@@ -312,6 +350,108 @@ public class MainBKeyWorkLoadFragment extends ParentFragment{
 		edit.putInt("WeighingErrorDetect", ParentActivity.WeighingErrorDetect);
 		edit.commit();
 		Log.d(TAG,"SavePref");
+	}
+	/////////////////////////////////////////////////////////////////////
+	public void ClickLeft(){
+		switch (CursurIndex) {
+		case 1:
+			CursurIndex = 7;
+			CursurDisplay(CursurIndex);
+			break;
+		case 2:
+		case 3:
+		case 4:
+		case 5:
+		case 6:
+		case 7:
+			CursurIndex--;
+			CursurDisplay(CursurIndex);
+			break;
+		default:
+			CursurIndex = 1;
+			CursurDisplay(CursurIndex);
+			break;
+		}
+	}
+	public void ClickRight(){
+		switch (CursurIndex) {
+		case 1:
+		case 2:
+		case 3:
+		case 4:
+		case 5:
+		case 6:
+			CursurIndex++;
+			CursurDisplay(CursurIndex);
+			break;
+		case 7:
+		default:
+			CursurIndex = 1;
+			CursurDisplay(CursurIndex);
+			break;
+		}
+	}
+	public void ClickEnter(){
+		switch (CursurIndex) {
+			case 1:
+				ClickAccumulation();
+				break;
+			case 2:
+				ClickDisplay();
+				break;
+			case 3:
+				ClickErrorDetect();
+				break;
+			case 4:
+				ClickCalibration();
+				break;
+			case 5:
+				ClickInitial();
+				break;
+			case 6:
+				ClickDefault();
+				break;
+			case 7:
+				ClickOK();
+				break;
+			default:
+				break;
+		}
+	}
+	
+	public void CursurDisplay(int Index){
+		imgbtnAccumulation.setPressed(false);
+		imgbtnDisplay.setPressed(false);
+		imgbtnErrorDetect.setPressed(false);
+		textViewPressureCalibration.setPressed(false);
+		textViewInitialization.setPressed(false);
+		imgbtnDefault.setPressed(false);
+		imgbtnOK.setPressed(false);
+		switch (CursurIndex) {
+			case 1:
+				imgbtnAccumulation.setPressed(true);
+				break;
+			case 2:
+				imgbtnDisplay.setPressed(true);
+				break;
+			case 3:
+				imgbtnErrorDetect.setPressed(true);
+				break;
+			case 4:
+				textViewPressureCalibration.setPressed(true);
+				break;
+			case 5:
+				textViewInitialization.setPressed(true);
+				break;
+			case 6:
+				imgbtnDefault.setPressed(true);
+				break;		
+			case 7:
+				imgbtnOK.setPressed(true);
+				break;						
+			default:
+				break;
+		}
 	}
 	
 }

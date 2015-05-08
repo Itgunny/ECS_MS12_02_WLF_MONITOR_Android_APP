@@ -90,7 +90,13 @@ public class WorkLoadWeighingInitPopup1 extends ParentPopup{
 					// TODO: handle exception
 					Log.e(TAG,"NullPointerException dismiss");
 				}
-
+			}else if(ParentActivity.OldScreenIndex == Home.SCREEN_STATE_MAIN_B_KEY_WORKLOAD){
+				try {
+					ParentActivity._MainBBaseFragment._MainBKeyWorkLoadFragment.CursurDisplay(5);
+				} catch (NullPointerException e) {
+					// TODO: handle exception
+					Log.e(TAG,"NullPointerException dismiss");
+				}
 			}
 		}
 	}

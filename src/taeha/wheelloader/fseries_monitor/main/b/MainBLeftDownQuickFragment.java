@@ -141,10 +141,11 @@ public class MainBLeftDownQuickFragment extends ParentFragment{
 			if(intent != null){
 				// ++, 150323 bwk
 				CAN1Comm.SetMultimediaFlag(false);
-				CAN1Comm.SetMiracastFlag(true);
+//				CAN1Comm.SetMiracastFlag(true);
 				// --, 150323 bwk				
-				startActivity(intent);
-				ParentActivity.StartAlwaysOntopService(); // ++, --, 150324 cjg
+				ParentActivity.startActivity(intent);
+				ParentActivity.StartCheckSmartTerminalTimer();
+//				ParentActivity.StartAlwaysOntopService(); // ++, --, 150324 cjg
 			}
 		}
 		// --, 150320 cjg

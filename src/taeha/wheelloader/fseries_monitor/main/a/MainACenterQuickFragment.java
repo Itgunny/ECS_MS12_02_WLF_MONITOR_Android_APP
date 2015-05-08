@@ -164,10 +164,11 @@ public class MainACenterQuickFragment extends MainACenterFragment{
 			Intent intent;
 			intent = ParentActivity.getPackageManager().getLaunchIntentForPackage("com.powerone.wfd.sink");
 			if(intent != null){
-				startActivity(intent);
+				ParentActivity.startActivity(intent);
 				// ++, 150323 bwk
 				CAN1Comm.SetMultimediaFlag(false);
-				CAN1Comm.SetMiracastFlag(true);
+//				CAN1Comm.SetMiracastFlag(true);
+				ParentActivity.StartCheckSmartTerminalTimer();
 				// --, 150323 bwk				
 			}
 		}		

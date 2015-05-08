@@ -1,6 +1,8 @@
 package taeha.wheelloader.fseries_monitor.main.b.key;
 
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -29,6 +31,8 @@ public class MainBKeyWorkLightFragment extends ParentFragment{
 	int RearWorkLamp;
 	int WorkLampStatus;
 	int SelectWorkLampStatus;
+	int CursurIndex;
+	Handler HandleCursurDisplay;
 	//////////////////////////////////////////////////
 	
 	//ANIMATION///////////////////////////////////////
@@ -54,6 +58,12 @@ public class MainBKeyWorkLightFragment extends ParentFragment{
 		ParentActivity.ScreenIndex = ParentActivity.SCREEN_STATE_MAIN_B_KEY_WORKLIGHT;
 		SelectWorkLampStatus = WorkLightLampDisplay(WorkLamp,RearWorkLamp);
 		ClickHardKey();
+		HandleCursurDisplay = new Handler() {
+			@Override
+			public void handleMessage(Message msg) {
+				CursurDisplay(msg.what);
+			}
+		};
 		return mRoot;
 	}
 
@@ -89,6 +99,8 @@ public class MainBKeyWorkLightFragment extends ParentFragment{
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
+				CursurIndex = 1;
+				HandleCursurDisplay.sendMessage(HandleCursurDisplay.obtainMessage(CursurIndex));
 				ClickOff();
 			}
 		});
@@ -97,6 +109,8 @@ public class MainBKeyWorkLightFragment extends ParentFragment{
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
+				CursurIndex = 2;
+				HandleCursurDisplay.sendMessage(HandleCursurDisplay.obtainMessage(CursurIndex));
 				ClickFront();
 			}
 		});
@@ -105,6 +119,8 @@ public class MainBKeyWorkLightFragment extends ParentFragment{
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
+				CursurIndex = 3;
+				HandleCursurDisplay.sendMessage(HandleCursurDisplay.obtainMessage(CursurIndex));
 				ClickRear();
 			}
 		});
@@ -174,14 +190,14 @@ public class MainBKeyWorkLightFragment extends ParentFragment{
 			CAN1Comm.Set_WorkLampOperationStatus_3435_PGN65527(CAN1CommManager.DATA_STATE_LAMP_ON);
 			CAN1Comm.Set_RearWorkLampOperationStatus_3446_PGN65527(CAN1CommManager.DATA_STATE_LAMP_OFF);
 			CAN1Comm.TxCANToMCU(247);
-			
+			CursurIndex = 2;
 			break;
 		case CAN1CommManager.DATA_STATE_KEY_WORKLIGHT_LV1:
 			SelectWorkLampStatus = CAN1CommManager.DATA_STATE_KEY_WORKLIGHT_LV2;
 			CAN1Comm.Set_WorkLampOperationStatus_3435_PGN65527(CAN1CommManager.DATA_STATE_LAMP_ON);
 			CAN1Comm.Set_RearWorkLampOperationStatus_3446_PGN65527(CAN1CommManager.DATA_STATE_LAMP_ON);
 			CAN1Comm.TxCANToMCU(247);
-			
+			CursurIndex = 3;
 			break;
 		case CAN1CommManager.DATA_STATE_KEY_WORKLIGHT_LV2:
 		default:
@@ -189,10 +205,76 @@ public class MainBKeyWorkLightFragment extends ParentFragment{
 			CAN1Comm.Set_WorkLampOperationStatus_3435_PGN65527(CAN1CommManager.DATA_STATE_LAMP_OFF);
 			CAN1Comm.Set_RearWorkLampOperationStatus_3446_PGN65527(CAN1CommManager.DATA_STATE_LAMP_OFF);
 			CAN1Comm.TxCANToMCU(247);
-			
+			CursurIndex = 1;
 			break;
 		}
-
+		CursurDisplay(CursurIndex);		
+	}
+	/////////////////////////////////////////////////////////////////////
+	public void ClickLeft(){
+		switch (CursurIndex) {
+		case 1:
+			CursurIndex = 3;
+			CursurDisplay(CursurIndex);
+			break;
+		case 2:
+		case 3:
+			CursurIndex--;
+			CursurDisplay(CursurIndex);
+			break;
+		default:
+			CursurIndex = 1;
+			CursurDisplay(CursurIndex);
+			break;
+		}
+	}
+	public void ClickRight(){
+		switch (CursurIndex) {
+		case 1:
+		case 2:
+			CursurIndex++;
+			CursurDisplay(CursurIndex);
+			break;
+		case 3:
+		default:
+			CursurIndex = 1;
+			CursurDisplay(CursurIndex);
+			break;
+		}
+	}
+	public void ClickEnter(){
+		switch (CursurIndex) {
+		case 1:
+			ClickOff();
+			break;
+		case 2:
+			ClickFront();
+			break;
+		case 3:
+			ClickRear();
+			break;
+		default:
+			break;
+		}
+	}
+	
+	public void CursurDisplay(int Index){
+		radioOff.setPressed(false);
+		radioFront.setPressed(false);
+		radioRear.setPressed(false);
+		switch (CursurIndex) {
+		case 1:
+			radioOff.setPressed(true);
+			break;
+		case 2:
+			radioFront.setPressed(true);
+			break;
+		case 3:
+			radioRear.setPressed(true);
+			break;
+		default:
+			break;
+		}
 	}
 	
 }
