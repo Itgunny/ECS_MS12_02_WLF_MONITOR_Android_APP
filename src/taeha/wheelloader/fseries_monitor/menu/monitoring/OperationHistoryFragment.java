@@ -10,6 +10,7 @@ import taeha.wheelloader.fseries_monitor.main.Home;
 import taeha.wheelloader.fseries_monitor.main.ParentFragment;
 import taeha.wheelloader.fseries_monitor.main.R;
 import taeha.wheelloader.fseries_monitor.main.R.string;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -141,11 +142,24 @@ public class OperationHistoryFragment extends ParentFragment{
 		
 		textViewInit = (TextView)mRoot.findViewById(R.id.textView_menu_body_monitoring_operationhistory_init);
 
-		checkWorkTotalA = (CheckBox)mRoot.findViewById(R.id.checkBox_menu_body_monitoring_operationhistory_work_totala);
-		checkWorkTotalB = (CheckBox)mRoot.findViewById(R.id.checkBox_menu_body_monitoring_operationhistory_work_totalb);
-		checkWorkTotalC = (CheckBox)mRoot.findViewById(R.id.checkBox_menu_body_monitoring_operationhistory_work_totalc);
-		checkOdoLatest = (CheckBox)mRoot.findViewById(R.id.checkBox_menu_body_monitoring_operationhistory_odo_latest);
-		checkHourLatest = (CheckBox)mRoot.findViewById(R.id.checkBox_menu_body_monitoring_operationhistory_hour_latest);
+		if(Build.VERSION.SDK_INT <= Build.VERSION_CODES.ICE_CREAM_SANDWICH_MR1){	
+			checkWorkTotalA = (CheckBox)mRoot.findViewById(R.id.checkBox_menu_body_monitoring_operationhistory_work_totala);
+			checkWorkTotalA.setPadding(50, 0, 0, 0);
+			checkWorkTotalB = (CheckBox)mRoot.findViewById(R.id.checkBox_menu_body_monitoring_operationhistory_work_totalb);
+			checkWorkTotalB.setPadding(50, 0, 0, 0);
+			checkWorkTotalC = (CheckBox)mRoot.findViewById(R.id.checkBox_menu_body_monitoring_operationhistory_work_totalc);
+			checkWorkTotalC.setPadding(50, 0, 0, 0);
+			checkOdoLatest = (CheckBox)mRoot.findViewById(R.id.checkBox_menu_body_monitoring_operationhistory_odo_latest);
+			checkOdoLatest.setPadding(50, 0, 0, 0);
+			checkHourLatest = (CheckBox)mRoot.findViewById(R.id.checkBox_menu_body_monitoring_operationhistory_hour_latest);
+			checkHourLatest.setPadding(50, 0, 0, 0);
+		} else {
+			checkWorkTotalA = (CheckBox)mRoot.findViewById(R.id.checkBox_menu_body_monitoring_operationhistory_work_totala);
+			checkWorkTotalB = (CheckBox)mRoot.findViewById(R.id.checkBox_menu_body_monitoring_operationhistory_work_totalb);
+			checkWorkTotalC = (CheckBox)mRoot.findViewById(R.id.checkBox_menu_body_monitoring_operationhistory_work_totalc);
+			checkOdoLatest = (CheckBox)mRoot.findViewById(R.id.checkBox_menu_body_monitoring_operationhistory_odo_latest);
+			checkHourLatest = (CheckBox)mRoot.findViewById(R.id.checkBox_menu_body_monitoring_operationhistory_hour_latest);
+		}
 		
 	}
 

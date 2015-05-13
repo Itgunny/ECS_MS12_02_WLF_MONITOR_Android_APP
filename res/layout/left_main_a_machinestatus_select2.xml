@@ -12,7 +12,7 @@
         android:layout_marginLeft="41dp"
         android:layout_marginTop="42dp"
         android:button="@drawable/_selector_radio_btn"
-        android:paddingLeft="90dp"
+        android:paddingLeft="45dp"
         android:text="@string/HYD_Temp"
         android:textColor="@drawable/_selector_radio_txt_white_amber"
         android:textSize="23sp" />
@@ -24,7 +24,7 @@
         android:layout_marginLeft="316dp"
         android:layout_marginTop="42dp"
         android:button="@drawable/_selector_radio_btn"
-        android:paddingLeft="90dp"
+        android:paddingLeft="45dp"
         android:text="@string/TM_Oil_Temp"
         android:textColor="@drawable/_selector_radio_txt_white_amber"
         android:textSize="23sp" />
@@ -36,7 +36,7 @@
         android:layout_marginLeft="41dp"
         android:layout_marginTop="127dp"
         android:button="@drawable/_selector_radio_btn"
-        android:paddingLeft="90dp"
+        android:paddingLeft="45dp"
         android:text="@string/Battery_Volt"
         android:textColor="@drawable/_selector_radio_txt_white_amber"
         android:textSize="23sp" />
@@ -48,7 +48,7 @@
         android:layout_marginLeft="316dp"
         android:layout_marginTop="127dp"
         android:button="@drawable/_selector_radio_btn"
-        android:paddingLeft="90dp"
+        android:paddingLeft="45dp"
         android:text="@string/Weighing_System"
         android:textColor="@drawable/_selector_radio_txt_white_amber"
         android:textSize="23sp" />
@@ -60,7 +60,7 @@
         android:layout_marginLeft="41dp"
         android:layout_marginTop="212dp"
         android:button="@drawable/_selector_radio_btn"
-        android:paddingLeft="90dp"
+        android:paddingLeft="45dp"
         android:text="@string/Coolant_Temp"
         android:textColor="@drawable/_selector_radio_txt_white_amber"
         android:textSize="23sp" />
@@ -72,7 +72,7 @@
         android:layout_marginLeft="316dp"
         android:layout_marginTop="212dp"
         android:button="@drawable/_selector_radio_btn"
-        android:paddingLeft="90dp"
+        android:paddingLeft="45dp"
         android:text="@string/Front_Axle_Temp"
         android:textColor="@drawable/_selector_radio_txt_white_amber"
         android:textSize="23sp" />

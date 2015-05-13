@@ -72,7 +72,7 @@ public class Home extends Activity {
 	public static final int VERSION_HIGH 		= 1;
 	public static final int VERSION_LOW 		= 0;
 	public static final int VERSION_SUB_HIGH 	= 4;
-	public static final int VERSION_SUB_LOW 	= 5;
+	public static final int VERSION_SUB_LOW 	= 6;
 	////1.0.2.3
 	// UI B 안 최초 적용 2014.12.10
 	////1.0.2.4
@@ -433,6 +433,10 @@ public class Home extends Activity {
 	// 17. AUX 경고문구 사이즈 작게 변경
 	////v1.0.4.5(20150508)
 	// 1. RevD.05.01 적용
+	////v1.0.4.6(20150511)
+	// 1. JB 업데이트간 UI 버전별로 적용
+	// 2. JB 업데이트간 키패드 소리안나는 현상 수정
+	// 3. RevD.05.01 -> RevF.01.01로 변경
 	//////////////////////////////////////////////////////////////////////////////////////
 	
 	// TAG

@@ -18,6 +18,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.media.AudioManager;
 import android.media.SoundPool;
+import android.os.Build;
 import android.os.Handler;
 import android.os.IBinder;
 import android.os.Message;
@@ -1137,11 +1138,21 @@ public class CommService extends Service{
 	}
 	// Sound Init
 	private void InitSound(){
-		SoundPoolKeyButton = new SoundPool(1,AudioManager.USE_DEFAULT_STREAM_TYPE,0);
+		//++, 150510 cjg
+		if(Build.VERSION.SDK_INT <= Build.VERSION_CODES.ICE_CREAM_SANDWICH_MR1)
+			SoundPoolKeyButton = new SoundPool(1,AudioManager.USE_DEFAULT_STREAM_TYPE,0);
+		else
+			SoundPoolKeyButton = new SoundPool(1,AudioManager.STREAM_MUSIC,0);	
+		//--, 150510 cjg
 		SoundID = SoundPoolKeyButton.load(this, R.raw.touch, 1);
 		fVolume = (float)0.4;
 		
-		SoundPoolKeyButtonEnding = new SoundPool(1,AudioManager.USE_DEFAULT_STREAM_TYPE,0);
+		//++, 150510 cjg
+		if(Build.VERSION.SDK_INT <= Build.VERSION_CODES.ICE_CREAM_SANDWICH_MR1)
+			SoundPoolKeyButtonEnding = new SoundPool(1,AudioManager.USE_DEFAULT_STREAM_TYPE,0);
+		else
+			SoundPoolKeyButtonEnding = new SoundPool(1,AudioManager.STREAM_MUSIC,0);	
+		//--, 150510 cjg
 		SoundIDEnding = SoundPoolKeyButtonEnding.load(this, R.raw.ending, 1);
 		fVolumeEnding = (float)0.4;
 		

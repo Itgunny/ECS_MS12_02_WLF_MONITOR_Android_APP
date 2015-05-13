@@ -71,7 +71,7 @@
                 android:layout_marginTop="5dp"
                 android:button="@drawable/_selector_check_btn"
                 android:gravity="top"
-                android:paddingLeft="50dp"
+                android:paddingLeft="25dp"
                 android:paddingTop="5dp"
                 android:text="@string/Total_A"
                 android:textColor="@drawable/_selector_radio_txt_white_amber" />
@@ -118,7 +118,7 @@
                 android:layout_marginTop="5dp"
                 android:button="@drawable/_selector_check_btn"
                 android:gravity="top"
-                android:paddingLeft="50dp"
+                android:paddingLeft="25dp"
                 android:paddingTop="5dp"
                 android:text="@string/Total_B"
                 android:textColor="@drawable/_selector_radio_txt_white_amber" />
@@ -165,7 +165,7 @@
                 android:layout_marginTop="5dp"
                 android:button="@drawable/_selector_check_btn"
                 android:gravity="top"
-                android:paddingLeft="50dp"
+                android:paddingLeft="25dp"
                 android:paddingTop="5dp"
                 android:text="@string/Total_C"
                 android:textColor="@drawable/_selector_radio_txt_white_amber" />
@@ -256,7 +256,7 @@
                 android:layout_marginTop="5dp"
                 android:button="@drawable/_selector_check_btn"
                 android:gravity="top"
-                android:paddingLeft="50dp"
+                android:paddingLeft="25dp"
                 android:paddingTop="5dp"
                 android:text="@string/Latest_Odometer"
                 android:textColor="@drawable/_selector_radio_txt_white_amber" />
@@ -303,7 +303,7 @@
                 android:layout_marginTop="5dp"
                 android:button="@drawable/_selector_check_btn"
                 android:gravity="top"
-                android:paddingLeft="50dp"
+                android:paddingLeft="25dp"
                 android:paddingTop="5dp"
                 android:text="@string/Latest_Hourmeter"
                 android:textColor="@drawable/_selector_radio_txt_white_amber" />

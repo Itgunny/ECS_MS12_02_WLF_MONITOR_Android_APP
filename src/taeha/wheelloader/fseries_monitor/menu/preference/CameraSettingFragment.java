@@ -11,6 +11,7 @@ import taeha.wheelloader.fseries_monitor.main.ParentFragment;
 import taeha.wheelloader.fseries_monitor.main.R;
 import taeha.wheelloader.fseries_monitor.main.R.string;
 import android.content.SharedPreferences;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -126,8 +127,12 @@ public class CameraSettingFragment extends ParentFragment{
 		textViewCAM4txt = (TextView)mRoot.findViewById(R.id.textView_menu_body_mode_camerasetting_dislayorder_txt4);
 		
 		textViewCameraNum = (TextView)mRoot.findViewById(R.id.textView_menu_body_mode_camerasetting_cameranumber_data);
-		
-		checkReverseMode = (CheckBox)mRoot.findViewById(R.id.checkBox_menu_body_mode_camerasetting_gearmode);
+		if(Build.VERSION.SDK_INT <= Build.VERSION_CODES.ICE_CREAM_SANDWICH_MR1){	
+			checkReverseMode = (CheckBox)mRoot.findViewById(R.id.checkBox_menu_body_mode_camerasetting_gearmode);
+			checkReverseMode.setPadding(50, 0, 0, 0);
+		} else {
+			checkReverseMode = (CheckBox)mRoot.findViewById(R.id.checkBox_menu_body_mode_camerasetting_gearmode);
+		}
 	}
 
 	protected void InitValuables() {

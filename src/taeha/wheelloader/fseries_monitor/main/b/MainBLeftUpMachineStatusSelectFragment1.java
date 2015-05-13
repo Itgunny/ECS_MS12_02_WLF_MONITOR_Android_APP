@@ -1,5 +1,6 @@
 package taeha.wheelloader.fseries_monitor.main.b;
 
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -87,12 +88,24 @@ public class MainBLeftUpMachineStatusSelectFragment1 extends ParentFragment{
 	@Override
 	protected void InitResource() {
 		// TODO Auto-generated method stub
-		
-		radioHYDTemp = (RadioButton)mRoot.findViewById(R.id.radioButton_leftup_main_b_machinestatus_select_hydtemp);
-		radioTMOilTemp = (RadioButton)mRoot.findViewById(R.id.radioButton_leftup_main_b_machinestatus_select_tmoiltemp);
-		radioBatteryVoltage = (RadioButton)mRoot.findViewById(R.id.radioButton_leftup_main_b_machinestatus_select_battery);
-		radioWeighingSystem = (RadioButton)mRoot.findViewById(R.id.radioButton_leftup_main_b_machinestatus_select_weighing);
-		radioCoolantTemp = (RadioButton)mRoot.findViewById(R.id.radioButton_leftup_main_b_machinestatus_select_coolanttemp);
+		if(Build.VERSION.SDK_INT <= Build.VERSION_CODES.ICE_CREAM_SANDWICH_MR1){
+			radioHYDTemp = (RadioButton)mRoot.findViewById(R.id.radioButton_leftup_main_b_machinestatus_select_hydtemp);
+			radioHYDTemp.setPadding(90, 0, 0, 0);
+			radioTMOilTemp = (RadioButton)mRoot.findViewById(R.id.radioButton_leftup_main_b_machinestatus_select_tmoiltemp);
+			radioTMOilTemp.setPadding(90, 0, 0, 0);
+			radioBatteryVoltage = (RadioButton)mRoot.findViewById(R.id.radioButton_leftup_main_b_machinestatus_select_battery);
+			radioBatteryVoltage.setPadding(90, 0, 0, 0);
+			radioWeighingSystem = (RadioButton)mRoot.findViewById(R.id.radioButton_leftup_main_b_machinestatus_select_weighing);
+			radioWeighingSystem.setPadding(90, 0, 0, 0);
+			radioCoolantTemp = (RadioButton)mRoot.findViewById(R.id.radioButton_leftup_main_b_machinestatus_select_coolanttemp);
+			radioCoolantTemp.setPadding(90, 0, 0, 0);
+		} else {
+			radioHYDTemp = (RadioButton)mRoot.findViewById(R.id.radioButton_leftup_main_b_machinestatus_select_hydtemp);
+			radioTMOilTemp = (RadioButton)mRoot.findViewById(R.id.radioButton_leftup_main_b_machinestatus_select_tmoiltemp);
+			radioBatteryVoltage = (RadioButton)mRoot.findViewById(R.id.radioButton_leftup_main_b_machinestatus_select_battery);
+			radioWeighingSystem = (RadioButton)mRoot.findViewById(R.id.radioButton_leftup_main_b_machinestatus_select_weighing);
+			radioCoolantTemp = (RadioButton)mRoot.findViewById(R.id.radioButton_leftup_main_b_machinestatus_select_coolanttemp);
+		}
 		
 		textViewOK = (TextView)mRoot.findViewById(R.id.textView_leftup_main_b_machinestatus_select_ok);
 		

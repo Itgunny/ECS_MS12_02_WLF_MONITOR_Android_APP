@@ -209,7 +209,7 @@
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
             android:button="@drawable/_selector_check_btn"
-            android:paddingLeft="50dp"
+            android:paddingLeft="25dp"
             android:text="@string/Gear_Linkage_Mode"
             android:textColor="@drawable/_selector_radio_txt_white_amber"
             android:textSize="25sp" />
