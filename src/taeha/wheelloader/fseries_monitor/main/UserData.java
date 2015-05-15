@@ -36,6 +36,8 @@ public class UserData {
 	public int SoundOutput;
 	public int HourmeterDisplay;
 	public int FuelDisplay;		// ++, --, 150403 bwk 추가
+	public int BoomDetentMode;
+	public int BucketDetentMode;
 	
 	public UserData(){
 		EngineMode = CAN1CommManager.DATA_STATE_ENGINE_MODE_PWR;
@@ -73,5 +75,7 @@ public class UserData {
 		SoundOutput = Home.STATE_INTERNAL_SPK;
 		HourmeterDisplay = CAN1CommManager.DATA_STATE_HOURMETER_LATEST;
 		FuelDisplay = CAN1CommManager.DATA_STATE_AVERAGE_FUEL_RATE;			// ++, --, 150403 bwk 추가
+		BoomDetentMode = CAN1CommManager.DATA_STATE_KEY_DETENT_BOOM_UPDOWN;
+		BucketDetentMode = CAN1CommManager.DATA_STATE_KEY_DETENT_BUCKET_IN;
 	}
 }

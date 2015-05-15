@@ -72,7 +72,7 @@ public class Home extends Activity {
 	public static final int VERSION_HIGH 		= 1;
 	public static final int VERSION_LOW 		= 0;
 	public static final int VERSION_SUB_HIGH 	= 4;
-	public static final int VERSION_SUB_LOW 	= 6;
+	public static final int VERSION_SUB_LOW 	= 7;
 	////1.0.2.3
 	// UI B 안 최초 적용 2014.12.10
 	////1.0.2.4
@@ -437,6 +437,10 @@ public class Home extends Activity {
 	// 1. JB 업데이트간 UI 버전별로 적용
 	// 2. JB 업데이트간 키패드 소리안나는 현상 수정
 	// 3. RevD.05.01 -> RevF.01.01로 변경
+	////v1.0.4.7
+	// EHCU Error Popup 변경건
+	// HCEPGN 65524 (4~5) : 0x0000 - Joystick Steering Enable OK -> 0x0000 - Not Available
+	// HCEPGN 65517 (2.5) : OK -> 팝업 종료 및 팝업 띄우지 않음
 	//////////////////////////////////////////////////////////////////////////////////////
 	
 	// TAG
@@ -1077,6 +1081,7 @@ public class Home extends Activity {
 	// EHCU Err
 	public int JoystickSteeringEnableFailCondition;
 	public int OldJoystickSteeringEnableFailCondition;
+	public int JoystickSteeringActiveStatus;
 	public boolean bEHCUErrPopup;
 	
 	// ++, 150211 bwk
@@ -1199,6 +1204,7 @@ public class Home extends Activity {
 		LangClass = new LanguageClass(this);
 		LangClass.setLanugage(LangClass.GetLanguage());
 		JoystickSteeringEnableFailCondition = 0;
+		JoystickSteeringActiveStatus = 0;
 		// --, 150209 bwk
 		ScreenIndex = 0;
 		SeatBelt = CAN1CommManager.DATA_STATE_LAMP_ON;
@@ -2098,6 +2104,7 @@ public class Home extends Activity {
 		EngineAutoShutdownMode = CAN1Comm.Get_AutomaticEngineShutdown_363_PGN61184_122();
 		
 		JoystickSteeringEnableFailCondition = CAN1Comm.Get_JoystickSteeringEnableFailCondition_2343_PGN65524();
+		JoystickSteeringActiveStatus = CAN1Comm.Get_JoystickSteeringActiveStatusEHCU_186_PGN65517();
 
 		Year = CAN1Comm.Get_RTColock_Year();
 		Month = CAN1Comm.Get_RTColock_Month();
@@ -2132,7 +2139,7 @@ public class Home extends Activity {
 				CameraDisplay();
 				CheckBuzzer();
 				CheckEngineAutoShutdown();
-				CheckEHCUErr(JoystickSteeringEnableFailCondition);
+				CheckEHCUErr(JoystickSteeringEnableFailCondition, JoystickSteeringActiveStatus);
 				Checkrpm(RPM);		// ++, --, 150211 bwk
 			}
 		});
@@ -2355,7 +2362,7 @@ public class Home extends Activity {
 		
 		
 	}
-	public void CheckEHCUErr(int Data){
+	public void CheckEHCUErr(int Data, int PopupOff){
 		// ++, 150209 bwk
 		/*
 		if(JoystickSteeringEnableFailCondition != 0xFFFF
@@ -2399,7 +2406,7 @@ public class Home extends Activity {
 				OldJoystickSteeringEnableFailCondition = Data;
 				bEHCUErrPopup = false;
 			}
-			else if(Data != 0xFFFF && Data != 0x0000){
+			else if(Data != 0xFFFF && Data != 0x0000 && PopupOff != 1){
 				if(bEHCUErrPopup == false){
 					if(Data != 0){
 						if(Data != OldJoystickSteeringEnableFailCondition){
