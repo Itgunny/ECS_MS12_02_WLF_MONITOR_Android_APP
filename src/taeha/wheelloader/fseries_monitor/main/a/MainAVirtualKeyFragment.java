@@ -269,7 +269,7 @@ public class MainAVirtualKeyFragment extends ParentFragment{
 	/////////////////////////////////////////////////////////////////////	
 	public void FineModulationDisplay(int Data){
 		if(Data != CAN1CommManager.STATE_COMPONENTCODE_EHCU){
-			imgbtnFineModulation.setAlpha((float)0.2);
+			imgbtnFineModulation.setAlpha((float)0.5);
 		}else{
 			imgbtnFineModulation.setAlpha((float)1);
 		}
@@ -277,7 +277,7 @@ public class MainAVirtualKeyFragment extends ParentFragment{
 	public void AutoGreaseDisplay(int Data){
 		switch (Data){
 		case CAN1CommManager.DATA_STATE_NOTAVAILABLE:
-			imgbtnAutoGrease.setAlpha((float)0.2);
+			imgbtnAutoGrease.setAlpha((float)0.5);
 			break;
 		default:
 			imgbtnAutoGrease.setAlpha((float)1);
@@ -287,7 +287,7 @@ public class MainAVirtualKeyFragment extends ParentFragment{
 	public void QuickcouplerDisplay(int Data){
 		switch (Data){
 		case CAN1CommManager.DATA_STATE_NOTAVAILABLE:
-			imgbtnQuickCoupler.setAlpha((float)0.2);
+			imgbtnQuickCoupler.setAlpha((float)0.5);
 			break;
 		default:
 			imgbtnQuickCoupler.setAlpha((float)1);
@@ -297,7 +297,7 @@ public class MainAVirtualKeyFragment extends ParentFragment{
 	public void RideControlDisplay(int Data){
 		switch (Data){
 		case CAN1CommManager.DATA_STATE_NOTAVAILABLE:
-			imgbtnRideControl.setAlpha((float)0.2);
+			imgbtnRideControl.setAlpha((float)0.5);
 			break;
 		default:
 			imgbtnRideControl.setAlpha((float)1);
@@ -307,7 +307,7 @@ public class MainAVirtualKeyFragment extends ParentFragment{
 	public void BeaconLampDisplay(int Data){
 		switch (Data){
 		case CAN1CommManager.DATA_STATE_NOTAVAILABLE:
-			imgbtnBeaconLamp.setAlpha((float)0.2);
+			imgbtnBeaconLamp.setAlpha((float)0.5);
 			break;
 		default:
 			imgbtnBeaconLamp.setAlpha((float)1);
@@ -317,7 +317,7 @@ public class MainAVirtualKeyFragment extends ParentFragment{
 	public void MirrorHeatDisplay(int Data){
 		switch (Data){
 		case CAN1CommManager.DATA_STATE_NOTAVAILABLE:
-			imgbtnMirrorHeat.setAlpha((float)0.2);
+			imgbtnMirrorHeat.setAlpha((float)0.5);
 			break;
 		default:
 			imgbtnMirrorHeat.setAlpha((float)1);

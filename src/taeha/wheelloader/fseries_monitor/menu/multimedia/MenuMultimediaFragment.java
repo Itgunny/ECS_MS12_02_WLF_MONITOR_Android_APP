@@ -28,7 +28,7 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-
+/*
 public class MenuMultimediaFragment extends MenuBodyList_ParentFragment{
 	//CONSTANT////////////////////////////////////////
 	
@@ -140,7 +140,7 @@ public class MenuMultimediaFragment extends MenuBodyList_ParentFragment{
 	/////////////////////////////////////////////////////////////////////	
 	public void ClickMediaPlayer(){
 		// ++, 150319 bwk
-		if(CAN1Comm.GetrpmFlag() == false)
+		//if(CAN1Comm.GetrpmFlag() == false)
 		{
 		// --, 150319 bwk
 			// ++, 150323 bwk
@@ -329,14 +329,15 @@ public class MenuMultimediaFragment extends MenuBodyList_ParentFragment{
 		
 	}
 	/////////////////////////////////////////////////////////////////////
+*/
 
-/*
 public class MenuMultimediaFragment extends ParentFragment{
 	//CONSTANT////////////////////////////////////////
 	
 	//////////////////////////////////////////////////
 	//RESOURCE////////////////////////////////////////
 	TextView textViewMediaPlayer;
+	TextView textViewSmartTerminal;
 	//////////////////////////////////////////////////
 	
 	//VALUABLE////////////////////////////////////////
@@ -381,6 +382,7 @@ public class MenuMultimediaFragment extends ParentFragment{
 		// TODO Auto-generated method stub
 		
 		textViewMediaPlayer = (TextView)mRoot.findViewById(R.id.textView_menu_body_multimedia);
+		textViewSmartTerminal = (TextView)mRoot.findViewById(R.id.textView_menu_body_smartterminal);
 	}
 
 	protected void InitValuables() {
@@ -399,6 +401,13 @@ public class MenuMultimediaFragment extends ParentFragment{
 				ClickMediaPlayer();
 			}
 		});
+		textViewSmartTerminal.setOnClickListener(new View.OnClickListener(	) {
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				ClickSmartTerminal();
+			}
+		});
 	}
 
 	@Override
@@ -410,6 +419,7 @@ public class MenuMultimediaFragment extends ParentFragment{
 	@Override
 	protected void UpdateUI() {
 		// TODO Auto-generated method stub
+		/*
 		// ++, 150325 bwk
 		// 멀티미디어 실행 후 돌아왔을 때 포커스 잃는 문제가 있어 OnResume에 CursurIndex = 1을 넣었으나,
 		// 상단메뉴에서 Left, Right 키를 누를 경우 바로 멀티미디어에 포커스가 가는 문제가 발생하여
@@ -421,8 +431,17 @@ public class MenuMultimediaFragment extends ParentFragment{
 			Log.e(TAG,"NullPointerException");
 		}
 		// --, 150325 bwk
+		 */
 	}
 	
+	@Override
+	public void onResume() {
+		// TODO Auto-generated method stub
+		super.onResume();
+		CursurDisplay(CursurIndex);
+	}
+	
+	/////////////////////////////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////////
 	public void ClickLeft(){
 		switch (CursurIndex) {
@@ -430,7 +449,12 @@ public class MenuMultimediaFragment extends ParentFragment{
 			ParentActivity._MenuBaseFragment._MenuListLeftFragment.ClickPreference();
 			break;
 		case 1:
-
+			CursurIndex = 2;
+			CursurDisplay(CursurIndex);
+			break;
+		case 2:
+			CursurIndex--;
+			CursurDisplay(CursurIndex);
 			break;
 		default:
 			break;
@@ -440,10 +464,15 @@ public class MenuMultimediaFragment extends ParentFragment{
 		switch (CursurIndex) {
 		case 0:
 			ParentActivity._MenuBaseFragment._MenuModeFragment.setFirstScreen(Home.SCREEN_STATE_MENU_MODE_TOP);
-			ParentActivity._MenuBaseFragment._MenuListLeftFragment.ClickMode();
+			ParentActivity._MenuBaseFragment._MenuListLeftFragment.ClickMode();			
 			break;
 		case 1:
-
+			CursurIndex++;
+			CursurDisplay(CursurIndex);
+			break;
+		case 2:
+			CursurIndex = 1;
+			CursurDisplay(CursurIndex);
 			break;
 		default:
 			break;
@@ -452,14 +481,11 @@ public class MenuMultimediaFragment extends ParentFragment{
 	public void ClickESC(){
 		switch (CursurIndex) {
 		case 0:
-			CAN1Comm.SetMultimediaFlag(false);	// ++, --, 150323 bwk
 			ParentActivity._MenuBaseFragment._MenuListTitleFragment.ClickHome();
 			break;
-		case 1:
+		default:
 			CursurIndex = 0;
 			CursurDisplay(CursurIndex);
-			break;
-		default:
 			break;
 		}
 	}
@@ -472,6 +498,9 @@ public class MenuMultimediaFragment extends ParentFragment{
 		case 1:
 			ClickMediaPlayer();
 			break;
+		case 2:
+			ClickSmartTerminal();
+			break;
 		default:
 			break;
 		}
@@ -480,9 +509,15 @@ public class MenuMultimediaFragment extends ParentFragment{
 		switch (Index) {
 		case 0:
 			textViewMediaPlayer.setPressed(false);
+			textViewSmartTerminal.setPressed(false);
 			break;
 		case 1:
 			textViewMediaPlayer.setPressed(true);
+			textViewSmartTerminal.setPressed(false);
+			break;
+		case 2:
+			textViewMediaPlayer.setPressed(false);
+			textViewSmartTerminal.setPressed(true);
 			break;
 		default:
 			break;
@@ -492,7 +527,7 @@ public class MenuMultimediaFragment extends ParentFragment{
 	public void ClickMediaPlayer(){
 		ParentActivity.KillApps("com.powerone.wfd.sink");
 		// ++, 150319 bwk
-		if(CAN1Comm.GetrpmFlag() == false)
+		//if(CAN1Comm.GetrpmFlag() == false)
 		{
 		// --, 150319 bwk
 			// ++, 150323 bwk
@@ -514,6 +549,23 @@ public class MenuMultimediaFragment extends ParentFragment{
 		CursurIndex = 1;
 		CursurDisplay(CursurIndex);
 	}
+	public void ClickSmartTerminal(){
+		if(ParentActivity.CheckRunningApp("com.mxtech.videoplayer.ad")){
+			ParentActivity.OldScreenIndex = ParentActivity.SCREEN_STATE_MENU_MULTIMEDIA_TOP;
+			ParentActivity._MultimediaClosePopup.show();
+		}else{
+			Intent intent;
+			intent = ParentActivity.getPackageManager().getLaunchIntentForPackage("com.powerone.wfd.sink");
+			if(intent != null){
+				ParentActivity.startActivity(intent);
+				CAN1Comm.SetMultimediaFlag(false);
+				ParentActivity.StartCheckSmartTerminalTimer();
+			}
+		}		
+
+		CursurIndex = 2;
+		CursurDisplay(CursurIndex);
+	}
 	public void ExcuteFileManaget(){
 		Intent intent;
 		intent = ParentActivity.getPackageManager().getLaunchIntentForPackage(
@@ -531,5 +583,5 @@ public class MenuMultimediaFragment extends ParentFragment{
 	/////////////////////////////////////////////////////////////////////
 	
 	/////////////////////////////////////////////////////////////////////
-*/	
+
 }

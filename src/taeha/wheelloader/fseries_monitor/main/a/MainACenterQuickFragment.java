@@ -153,6 +153,11 @@ public class MainACenterQuickFragment extends MainACenterFragment{
 			return;
 		else
 			ParentActivity.StartAnimationRunningTimer();
+		//++, 150511 cjg	
+		ParentActivity._MainABaseFragment._MainALeftQuickFragment.Clickable(false);
+		ParentActivity._MainABaseFragment._MainARightQuickFragment.Clickable(false);
+		Clickable(false);
+		//--, 150511 cjg
 		ParentActivity._MainABaseFragment.showDefaultScreenAnimation();
 		Log.d(TAG,"ClickOption");
 	}
@@ -165,8 +170,13 @@ public class MainACenterQuickFragment extends MainACenterFragment{
 			intent = ParentActivity.getPackageManager().getLaunchIntentForPackage("com.powerone.wfd.sink");
 			if(intent != null){
 				ParentActivity.startActivity(intent);
-				// ++, 150323 bwk
 				CAN1Comm.SetMultimediaFlag(false);
+				//++, 150511 cjg	
+				ParentActivity._MainABaseFragment._MainALeftQuickFragment.Clickable(false);
+				ParentActivity._MainABaseFragment._MainARightQuickFragment.Clickable(false);
+				Clickable(false);
+				//--, 150511 cjg	
+				// ++, 150323 bwk
 //				CAN1Comm.SetMiracastFlag(true);
 				ParentActivity.StartCheckSmartTerminalTimer();
 				// --, 150323 bwk				
@@ -174,7 +184,7 @@ public class MainACenterQuickFragment extends MainACenterFragment{
 		}		
 	}
 	public void ClickMultimedia(){
-		if(CAN1Comm.GetrpmFlag() == false)
+		//if(CAN1Comm.GetrpmFlag() == false)
 		{
 			if(ParentActivity.CheckRunningApp("com.powerone.wfd.sink")){
 				ParentActivity.OldScreenIndex = ParentActivity.SCREEN_STATE_MAIN_A_QUICK_TOP;
@@ -184,9 +194,14 @@ public class MainACenterQuickFragment extends MainACenterFragment{
 				Intent intent;
 				intent = ParentActivity.getPackageManager().getLaunchIntentForPackage("com.mxtech.videoplayer.ad");
 				if(intent != null){
-					//CAN1Comm.SetMultimediaFlag(true);
-					CAN1Comm.SetMiracastFlag(false);
 					ParentActivity.startActivity(intent);
+					CAN1Comm.SetMiracastFlag(false);
+					//++, 150511 cjg	
+					ParentActivity._MainABaseFragment._MainALeftQuickFragment.Clickable(false);
+					ParentActivity._MainABaseFragment._MainARightQuickFragment.Clickable(false);
+					Clickable(false);
+					//--, 150511 cjg	
+					//CAN1Comm.SetMultimediaFlag(true);
 					ParentActivity.StartAlwaysOntopService(); // ++, --, 150324 cjg
 					ParentActivity.StartCheckMultimediaTimer();
 				}
@@ -199,10 +214,10 @@ public class MainACenterQuickFragment extends MainACenterFragment{
 		else
 			ParentActivity.StartAnimationRunningTimer();
 		
-		ParentActivity._MainABaseFragment.showVritualKeyScreenAnimation();
 		ParentActivity._MainABaseFragment._MainALeftQuickFragment.Clickable(false);
 		ParentActivity._MainABaseFragment._MainARightQuickFragment.Clickable(false);
 		Clickable(false);
+		ParentActivity._MainABaseFragment.showVritualKeyScreenAnimation();
 	}
 	
 	public void setClickEnable(boolean flag){

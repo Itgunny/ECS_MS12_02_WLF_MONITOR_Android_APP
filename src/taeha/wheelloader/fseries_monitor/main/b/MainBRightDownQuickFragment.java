@@ -125,7 +125,7 @@ public class MainBRightDownQuickFragment extends ParentFragment{
 		
 	}
 	public void ClickMultimedia(){
-		if(CAN1Comm.GetrpmFlag() == false)	// ++, --, 150211 bwk
+		//if(CAN1Comm.GetrpmFlag() == false)	// ++, --, 150211 bwk
 		{
 			if(ParentActivity.CheckRunningApp("com.powerone.wfd.sink")){
 				ParentActivity.OldScreenIndex = ParentActivity.SCREEN_STATE_MAIN_B_QUICK_TOP;

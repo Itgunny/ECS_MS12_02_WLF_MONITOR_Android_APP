@@ -441,6 +441,11 @@ public class Home extends Activity {
 	// EHCU Error Popup 변경건
 	// HCEPGN 65524 (4~5) : 0x0000 - Joystick Steering Enable OK -> 0x0000 - Not Available
 	// HCEPGN 65517 (2.5) : OK -> 팝업 종료 및 팝업 띄우지 않음
+	////v1.0.4.8
+	// 1. Display Type B : Center 아무 곳이나 빠르게 클릭할 경우 Crash뜨는 현상 개선
+	// 2. Mediaplay rpm연동  기능제거(HHI요청)
+	// 3. 타 apk에서 메뉴/ESC/좌측 키 누를 경우 소리 두번들리는 현상 개선
+	// 4. 멀티미디어 UI 변경 : 미디어 플레이어, 스마트 터미널 두개 기능 이미지 아이콘으로 표시
 	//////////////////////////////////////////////////////////////////////////////////////
 	
 	// TAG
@@ -1038,7 +1043,7 @@ public class Home extends Activity {
 	
 	// Data
 	int PreHeat;
-	int RPM;
+	//int RPM;
 	
 	// MirrorHeat
 	boolean MirrorHeatPreHeatFlag;
@@ -2094,7 +2099,7 @@ public class Home extends Activity {
 	}
 	public void GetDataFromNative(){
 		PreHeat = CAN1Comm.Get_MirrorHeaterStatus_724_PGN65428();
-		RPM = CAN1Comm.Get_EngineSpeed_310_PGN65431();
+		//RPM = CAN1Comm.Get_EngineSpeed_310_PGN65431();
 		Buzzer = CAN1Comm.Get_Buzzer_723_PGN65364();
 		SelectGear = CAN1Comm.Get_SelectGear_541_PGN65434();
 		SelectGearRange = SelectGear & 0x0F;
@@ -2140,7 +2145,8 @@ public class Home extends Activity {
 				CheckBuzzer();
 				CheckEngineAutoShutdown();
 				CheckEHCUErr(JoystickSteeringEnableFailCondition, JoystickSteeringActiveStatus);
-				Checkrpm(RPM);		// ++, --, 150211 bwk
+				//Checkrpm(RPM);		// ++, --, 150211 bwk
+				CheckFNLed();
 			}
 		});
 	
@@ -2428,7 +2434,21 @@ public class Home extends Activity {
 		
 	}
 	
+	public void CheckFNLed(){
+		
+		if(CAN1Comm.GetMultimediaFlag() == true)
+		{
+			CAN1Comm.CheckMultimedia();
+		}
+		
+		if(CAN1Comm.GetMiracastFlag() == true)
+		{
+			CAN1Comm.CheckMiracast();
+		}		
+	}
+	
 	// ++, 150211 bwk
+	/*
 	public void Checkrpm(int Data){
 		if(CAN1Comm.GetMultimediaFlag() == true && PressFnKey == 0)
 		{
@@ -2440,17 +2460,7 @@ public class Home extends Activity {
 //			Log.d(TAG, "Player OFF");
 			PressFnKey = 0;
 		}
-		
-		if(CAN1Comm.GetMultimediaFlag() == true)
-		{
-			CAN1Comm.CheckMultimedia();
-		}
-		
-		if(CAN1Comm.GetMiracastFlag() == true)
-		{
-			CAN1Comm.CheckMiracast();
-		}		
-		
+
 		if(PressFnKey == 1)
 		{
 			if(Data == 0xFFFF)
@@ -2490,6 +2500,7 @@ public class Home extends Activity {
 		
 	}
 	// --, 150210 bwk
+	 */
 	/////////////////////////////////////////////////////
 	
 	//Key Button/////////////////////////////////////////

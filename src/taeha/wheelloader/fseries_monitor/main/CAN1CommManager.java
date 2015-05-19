@@ -519,6 +519,7 @@ public class CAN1CommManager extends ICAN1CommManager.Stub{		// ttySAC1(Linux), 
 		return service.GetFNFlag();
 	}
 
+	/*
 	// ++, 150211 bwk
 	public boolean GetrpmFlag(){
 		return service.GetrpmFlag();
@@ -530,7 +531,7 @@ public class CAN1CommManager extends ICAN1CommManager.Stub{		// ttySAC1(Linux), 
 	public void ChangeHometoMedia(){
 		service.ChangeHometoMedia();
 	}
-	
+	*/
 	public void StartEnding(){
 		service.BackKeyEvent();
 		//Callback_KeyButton(POWER_OFF);

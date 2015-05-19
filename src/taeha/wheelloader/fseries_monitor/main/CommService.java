@@ -67,7 +67,7 @@ public class CommService extends Service{
 	
 	// MediaPlayer
 	// ++, 150211 bwk
-	private static boolean rpmFlag = false;
+	//private static boolean rpmFlag = false;
 	// --, 150211 bwk
 
 	// ++, 150320 cjg
@@ -1196,13 +1196,15 @@ public class CommService extends Service{
 				break;
 			case CAN1CommManager.MENU:
 				MenuKeyEvent();
-				SoundPoolKeyButton.play(SoundID, fVolume, fVolume, 0, 0, 1);
+				if(GetScreenTopFlag() == true)	// 타 apk에서 소리 2번 울림
+					SoundPoolKeyButton.play(SoundID, fVolume, fVolume, 0, 0, 1);
 				break;
 			case CAN1CommManager.ESC:
 				// ++, 150324 bwk 하기 주석 품
 				if(GetScreenTopFlag() == true)
 				{
 					CAN1Comm.Callback_KeyButton(Data);
+					SoundPoolKeyButton.play(SoundID, fVolume, fVolume, 0, 0, 1);		// 타 apk에서 소리 2번 울림
 				}
 				else
 				// --, 150324 bwk 하기 주석 품
@@ -1216,14 +1218,11 @@ public class CommService extends Service{
 					}
 					// --, 150320 cjg				
 				}
-				SoundPoolKeyButton.play(SoundID, fVolume, fVolume, 0, 0, 1);
 				break;
 			// ++, 150324 bwk
 			case CAN1CommManager.LEFT:
 				if(GetScreenTopFlag() == true)
 				{
-					if(multimediaFlag == true)
-						multimediaFlag = false;
 					CAN1Comm.Callback_KeyButton(Data);
 				}
 				else
@@ -1370,11 +1369,11 @@ public class CommService extends Service{
 	public static boolean GetFNFlag(){
 		return FNFlag;
 	}
-	// ++, 150211 bwk
+	/*
 	public static boolean GetrpmFlag(){
 		return rpmFlag;
 	}
-	// --, 150211 bwk
+	 */
 	
 	// ++, 150323 bwk
 	public void SetMultimediaFlag(boolean flag){
@@ -1407,7 +1406,7 @@ public class CommService extends Service{
 		if(CheckRunningApp("com.mxtech.videoplayer.ad") == false)
 		{
 			SetMultimediaFlag(false);
-			rpmFlag = false;
+			//rpmFlag = false;
 		}
 		else
 		{
@@ -1628,14 +1627,15 @@ public class CommService extends Service{
 		intent = getPackageManager().getLaunchIntentForPackage("com.powerone.wfd.sink");
 		if(intent != null){
 			startActivity(intent);
-			miracastFlag = true;		// ++, --, 150323 bwk
+			SetMiracastFlag(true);
+//			miracastFlag = true;		// ++, --, 150323 bwk
 			SetFNKeypadLamp(1);
 		}
 	}
 	public void ClickFN(){
-		if(rpmFlag == false)
+		//if(rpmFlag == false)
 		{
-			rpmFlag = false;
+			//rpmFlag = false;
 			if(CheckTopApps("com.mxtech.videoplayer.ad") == true){
 				SetMiracastFlag(false);
 				//multimediaFlag = false; //++, --, 150403 cjg
@@ -1655,7 +1655,7 @@ public class CommService extends Service{
 			}
 		}
 	}
-	// ++, 150211 bwk
+	/*
 	public void ChangeMediatoHome(){
 		if(CheckTopApps("com.mxtech.videoplayer.ad") == true){
 			rpmFlag = true;
@@ -1669,7 +1669,7 @@ public class CommService extends Service{
 			RunMultimedia();
 		}
 	}
-	// --, 150211 bwk
+	 */
 	// ++, 150320 cjg
 	public void CloseMXPlayer(){
 		Thread thread = new Thread(new Runnable()	{

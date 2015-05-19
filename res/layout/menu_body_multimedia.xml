@@ -4,24 +4,37 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical" >
-<!-- 
+
+    <!-- ImageButton
+        android:id="@+id/imageButton_menu_body_smartterminal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/imageButton_menu_body_multimedia"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="44dp"
+        android:background="@drawable/_selector_menu_body_multimedia_btn2" />
+         -->
+
+    <!-- 
     <ImageButton
         android:id="@+id/imageButton_menu_body_multimedia"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_above="@+id/imageButton_menu_body_smartterminal"
         android:layout_centerHorizontal="true"
-        android:layout_centerVertical="true"
-        android:layout_marginLeft="264dp"
-        android:layout_marginTop="159dp"
+        android:layout_marginBottom="39dp"
         android:background="@drawable/_selector_menu_body_multimedia_btn1" />
- -->
+	 -->
+
+
 
     <TextView
         android:id="@+id/textView_menu_body_multimedia"
         android:layout_width="551dp"
         android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:layout_centerVertical="true"
+        android:layout_marginTop="43dp"
         android:background="@drawable/_selector_menu_body_multimedia_btn1"
         android:gravity="center"
         android:paddingLeft="200dp"
@@ -29,5 +42,19 @@
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:textColor="@drawable/_selector_menu_body_multimedia_txt"
         android:textSize="25sp" />
-
+    
+    <TextView
+        android:id="@+id/textView_menu_body_smartterminal"
+        android:layout_width="551dp"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/textView_menu_body_multimedia"
+        android:layout_below="@+id/textView_menu_body_multimedia"
+        android:layout_marginTop="25dp"
+        android:background="@drawable/_selector_menu_body_multimedia_btn2"
+        android:gravity="center"
+        android:paddingLeft="200dp"
+        android:text="@string/Smart_Terminal"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textColor="@drawable/_selector_menu_body_multimedia_txt"
+        android:textSize="25sp" />
 </RelativeLayout>
