@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/RelativeLayout_menu_body_preference_displaytype"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+
+        <TextView
+            android:id="@+id/textView_menu_body_preference_displaytype_a"
+            android:layout_width="350dp"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="40dp"
+            android:background="@drawable/_selector_menu_body_preference_displaytype_a_btn1"
+            android:gravity="center"
+            android:paddingTop="200dp"
+            android:text="@string/Type_A"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:textColor="@drawable/_selector_menu_body_preference_displaytype_a_txt"
+            android:textSize="25sp" />
+
+        <TextView
+            android:id="@+id/textView_menu_body_preference_displaytype_b"
+            android:layout_width="350dp"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="40dp"
+            android:layout_toRightOf="@+id/textView_menu_body_preference_displaytype_a"
+            android:background="@drawable/_selector_menu_body_preference_displaytype_b_btn1"
+            android:gravity="center"
+            android:paddingTop="200dp"
+            android:text="@string/Type_B"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:textColor="@drawable/_selector_menu_body_preference_displaytype_b_txt"
+            android:textSize="25sp" />
+
+</RelativeLayout>

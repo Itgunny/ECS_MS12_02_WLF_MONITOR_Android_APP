@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/RelativeLayout_menu_body_preference_language"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
+
+        <RadioButton
+            android:id="@+id/radioButton_menu_body_preference_Lang1"
+            android:layout_width="250dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="15dp"
+            android:layout_marginTop="20dp"
+            android:button="@drawable/_selector_radio_btn"
+            android:text="한국어"
+            android:textColor="@drawable/_selector_radio_txt_white_amber"
+            android:textSize="25sp" />
+
+        <RadioButton
+            android:id="@+id/radioButton_menu_body_preference_Lang2"
+            android:layout_width="250dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_toRightOf="@+id/radioButton_menu_body_preference_Lang1"
+            android:layout_alignTop="@+id/radioButton_menu_body_preference_Lang1"
+            android:button="@drawable/_selector_radio_btn"
+            android:text="English"
+            android:textColor="@drawable/_selector_radio_txt_white_amber"
+            android:textSize="25sp" />
+
+        <RadioButton
+            android:id="@+id/radioButton_menu_body_preference_Lang3"
+            android:layout_width="250dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_toRightOf="@+id/radioButton_menu_body_preference_Lang2"
+            android:layout_alignTop="@+id/radioButton_menu_body_preference_Lang1"
+            android:button="@drawable/_selector_radio_btn"
+            android:text="Deutsch"
+            android:textColor="@drawable/_selector_radio_txt_white_amber"
+            android:textSize="25sp" />
+
+        <RadioButton
+            android:id="@+id/radioButton_menu_body_preference_Lang4"
+            android:layout_width="250dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/radioButton_menu_body_preference_Lang1"
+            android:layout_marginTop="30dp"
+            android:layout_marginLeft="15dp"
+            android:button="@drawable/_selector_radio_btn"
+            android:text="Français"
+            android:textColor="@drawable/_selector_radio_txt_white_amber"
+            android:textSize="25sp" />
+
+		<RadioButton
+            android:id="@+id/radioButton_menu_body_preference_Lang5"
+            android:layout_width="250dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_alignTop="@+id/radioButton_menu_body_preference_Lang4"
+            android:layout_toRightOf="@+id/radioButton_menu_body_preference_Lang4"
+            android:button="@drawable/_selector_radio_btn"
+            android:text="Español"
+            android:textColor="@drawable/_selector_radio_txt_white_amber"
+            android:textSize="25sp" />
+
+        <RadioButton
+            android:id="@+id/radioButton_menu_body_preference_Lang6"
+            android:layout_width="250dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_alignTop="@+id/radioButton_menu_body_preference_Lang4"
+            android:layout_toRightOf="@+id/radioButton_menu_body_preference_Lang5"
+            android:button="@drawable/_selector_radio_btn"
+            android:text="Porutukaleo"
+            android:textColor="@drawable/_selector_radio_txt_white_amber"
+            android:textSize="25sp" />
+
+        <RadioButton
+            android:id="@+id/radioButton_menu_body_preference_Lang7"
+            android:layout_width="250dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="15dp"
+            android:layout_below="@+id/radioButton_menu_body_preference_Lang4"
+            android:layout_marginTop="30dp"
+            android:button="@drawable/_selector_radio_btn"
+            android:text="Italiano"
+            android:textColor="@drawable/_selector_radio_txt_white_amber"
+            android:textSize="25sp" />
+
+        <RadioButton
+            android:id="@+id/radioButton_menu_body_preference_Lang8"
+            android:layout_width="250dp"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@+id/radioButton_menu_body_preference_Lang7"
+            android:layout_alignTop="@+id/radioButton_menu_body_preference_Lang7"
+            android:layout_marginLeft="10dp"
+            android:button="@drawable/_selector_radio_btn"
+            android:text="Nederlands"
+            android:textColor="@drawable/_selector_radio_txt_white_amber"
+            android:textSize="25sp" />
+        
+		<RadioButton
+            android:id="@+id/radioButton_menu_body_preference_Lang9"
+            android:layout_width="250dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_toRightOf="@+id/radioButton_menu_body_preference_Lang8"
+            android:layout_alignTop="@+id/radioButton_menu_body_preference_Lang7"
+            android:button="@drawable/_selector_radio_btn"
+            android:text="Swedish"
+            android:textColor="@drawable/_selector_radio_txt_white_amber"
+            android:textSize="25sp" />
+
+        <RadioButton
+            android:id="@+id/radioButton_menu_body_preference_Lang10"
+            android:layout_width="250dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="15dp"
+            android:layout_below="@+id/radioButton_menu_body_preference_Lang7"
+            android:layout_marginTop="30dp"
+            android:button="@drawable/_selector_radio_btn"
+            android:text="Suomi"
+            android:textColor="@drawable/_selector_radio_txt_white_amber"
+            android:textSize="25sp" />
+
+
+        <RadioButton
+            android:id="@+id/radioButton_menu_body_preference_Lang11"
+            android:layout_width="250dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_toRightOf="@+id/radioButton_menu_body_preference_Lang10"
+            android:layout_alignTop="@+id/radioButton_menu_body_preference_Lang10" 
+            android:button="@drawable/_selector_radio_btn"
+            android:text="Slovakian"
+            android:textColor="@drawable/_selector_radio_txt_white_amber"
+            android:textSize="25sp" />
+
+        <RadioButton
+            android:id="@+id/radioButton_menu_body_preference_Lang12"
+            android:layout_width="250dp"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@+id/radioButton_menu_body_preference_Lang11"
+            android:layout_alignTop="@+id/radioButton_menu_body_preference_Lang10"
+            android:layout_marginLeft="10dp"
+            android:button="@drawable/_selector_radio_btn"
+            android:text="Estonian"
+            android:textColor="@drawable/_selector_radio_txt_white_amber"
+            android:textSize="25sp" />
+        
+		<RadioButton
+            android:id="@+id/radioButton_menu_body_preference_Lang13"
+            android:layout_width="250dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="15dp"
+            android:layout_below="@+id/radioButton_menu_body_preference_Lang10"
+            android:layout_marginTop="30dp"
+            android:button="@drawable/_selector_radio_btn"
+            android:text="Türkçe"
+            android:textColor="@drawable/_selector_radio_txt_white_amber"
+            android:textSize="25sp" />
+        
+</RelativeLayout>

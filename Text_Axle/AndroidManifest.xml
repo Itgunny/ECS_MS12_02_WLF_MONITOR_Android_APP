@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="taeha.wheelloader.fseries_monitor.main"
+    android:versionCode="1"
+    android:versionName="1.0" 
+    android:sharedUserId="android.uid.system">
+
+    <uses-sdk
+        android:minSdkVersion="8"
+        android:targetSdkVersion="15" />
+    
+    <uses-permission android:name="android.permission.READ_LOGS"/>
+	<uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+	<uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+	<uses-permission android:name="android.permission.GET_TASKS"/> 
+	<uses-permission android:name="android.permission.REORDER_TASKS" />
+	<uses-permission android:name="android.permission.KILL_BACKGROUND_PROCESSES" />
+
+    <application
+        android:name=".CrashApplication"
+        android:allowBackup="true"
+        android:icon="@drawable/ic_launcher"
+        android:label="@string/app_name"
+        android:theme="@style/AppTheme" 
+        android:largeHeap="true">
+        
+        <service android:name="taeha.wheelloader.fseries_monitor.main.CommService" >
+            <intent-filter>
+                <action android:name="taeha.wheelloader.fseries_monitor.main.CommService" />
+            </intent-filter>
+        </service>
+        
+        <service android:name="taeha.wheelloader.fseries_monitor.main.AlwaysOnTopService" >
+            <intent-filter>
+                <action android:name="taeha.wheelloader.fseries_monitor.main.AlwaysOnTopService" />
+            </intent-filter>
+        </service>           
+        
+        <provider android:name="taeha.wheelloader.fseries_monitor.main.DataProvider"
+            	  android:authorities="taeha.wheelloader.fseries_monitor.main" />
+        
+        <activity
+            android:name="taeha.wheelloader.fseries_monitor.main.Home"
+            android:label="@string/app_name" 
+            android:launchMode="singleInstance" 
+            android:screenOrientation="landscape"
+            android:theme="@android:style/Theme.NoTitleBar.Fullscreen">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        
+        <activity
+		    android:name = "org.acra.CrashReportDialog"
+		    android:theme="@android:style/Theme.Dialog"
+		    android:launchMode="singleInstance"
+		    android:excludeFromRecents="true"
+		    android:finishOnTaskLaunch="true" />
+    </application>
+
+</manifest>

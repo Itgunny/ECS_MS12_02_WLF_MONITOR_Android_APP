@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/RelativeLayout_lower_main_a_virtualkey"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" 
+    android:background="@drawable/main_a_virtual_key_bg_up">
+    
+    <ImageButton
+        android:id="@+id/imageButton_lower_main_a_virtualkey_mainlight"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/imageButton_lower_main_a_virtualkey_beaconlamp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginBottom="11dp"
+        android:background="@drawable/_selector_virtualkey_1" />
+
+    <ImageButton
+        android:id="@+id/imageButton_lower_main_a_virtualkey_worklight"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/imageButton_lower_main_a_virtualkey_mainlight"
+        android:layout_toRightOf="@+id/imageButton_lower_main_a_virtualkey_mainlight"
+        android:layout_marginLeft="6dp"
+        android:background="@drawable/_selector_virtualkey_2" />
+
+    <ImageButton
+        android:id="@+id/imageButton_lower_main_a_virtualkey_autogrease"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/imageButton_lower_main_a_virtualkey_mainlight"
+        android:layout_toRightOf="@+id/imageButton_lower_main_a_virtualkey_worklight"
+        android:layout_marginLeft="6dp"
+        android:background="@drawable/_selector_virtualkey_3" />
+
+    <ImageButton
+        android:id="@+id/imageButton_lower_main_a_virtualkey_quickcoupler"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/imageButton_lower_main_a_virtualkey_mainlight"
+        android:layout_toRightOf="@+id/imageButton_lower_main_a_virtualkey_autogrease"
+        android:layout_marginLeft="6dp"
+        android:background="@drawable/_selector_virtualkey_4" />
+
+    <ImageButton
+        android:id="@+id/imageButton_lower_main_a_virtualkey_ridecontrol"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/imageButton_lower_main_a_virtualkey_mainlight"
+        android:layout_toRightOf="@+id/imageButton_lower_main_a_virtualkey_quickcoupler"
+        android:layout_marginLeft="6dp"
+        android:background="@drawable/_selector_virtualkey_5" />
+    <ImageButton
+        android:id="@+id/imageButton_lower_main_a_virtualkey_workload"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/imageButton_lower_main_a_virtualkey_mainlight"
+        android:layout_toRightOf="@+id/imageButton_lower_main_a_virtualkey_ridecontrol"
+        android:layout_marginLeft="6dp"
+        android:background="@drawable/_selector_virtualkey_6" />
+    
+    <ImageButton
+        android:id="@+id/imageButton_lower_main_a_virtualkey_beaconlamp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginLeft="16dp"
+        android:layout_marginBottom="35dp"
+        android:background="@drawable/_selector_virtualkey_7" />
+
+    <ImageButton
+        android:id="@+id/imageButton_lower_main_a_virtualkey_rearwiper"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@+id/imageButton_lower_main_a_virtualkey_beaconlamp"
+        android:layout_alignParentBottom="true"
+        android:layout_marginLeft="6dp"
+        android:layout_marginBottom="35dp"
+        android:background="@drawable/_selector_virtualkey_8" />
+
+    <ImageButton
+        android:id="@+id/imageButton_lower_main_a_virtualkey_mirrorheat"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@+id/imageButton_lower_main_a_virtualkey_rearwiper"
+        android:layout_alignParentBottom="true"
+        android:layout_marginLeft="6dp"
+        android:layout_marginBottom="35dp"
+        android:background="@drawable/_selector_virtualkey_9" />
+
+    <ImageButton
+        android:id="@+id/imageButton_lower_main_a_virtualkey_detent"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@+id/imageButton_lower_main_a_virtualkey_mirrorheat"
+        android:layout_alignParentBottom="true"
+        android:layout_marginLeft="6dp"
+        android:layout_marginBottom="35dp"
+        android:background="@drawable/_selector_virtualkey_10" />
+
+    <ImageButton
+        android:id="@+id/imageButton_lower_main_a_virtualkey_finemodulation"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@+id/imageButton_lower_main_a_virtualkey_detent"
+        android:layout_alignParentBottom="true"
+        android:layout_marginLeft="6dp"
+        android:layout_marginBottom="35dp"
+        android:background="@drawable/_selector_virtualkey_11" />
+    <ImageButton
+        android:id="@+id/imageButton_lower_main_a_virtualkey_fn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@+id/imageButton_lower_main_a_virtualkey_finemodulation"
+        android:layout_alignParentBottom="true"
+        android:layout_marginLeft="6dp"
+        android:layout_marginBottom="35dp"
+        android:background="@drawable/_selector_virtualkey_12" />
+
+    <ImageButton
+        android:id="@+id/imageButton_lower_main_a_virtualkey_keypad"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="661dp"
+        android:layout_marginTop="18dp"
+        android:background="@drawable/_selector_virtualkey_close" />
+
+</RelativeLayout>
