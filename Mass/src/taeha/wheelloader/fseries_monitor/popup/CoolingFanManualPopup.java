@@ -7,6 +7,7 @@ import android.content.Context;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Handler;
+import android.os.Message;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
@@ -29,6 +30,7 @@ public class CoolingFanManualPopup extends ParentPopup{
 	//////////////////////////////////////////////////
 	//RESOURCE////////////////////////////////////////
 	ImageView imgViewCoolingFanIcon;
+	ImageView imgViewExcuteBoader;
 	
 	ImageButton imgbtnExcute;
 	ImageButton imgbtnOK;
@@ -61,6 +63,12 @@ public class CoolingFanManualPopup extends ParentPopup{
 		this.addContentView(mRoot,  new LayoutParams(448,288));
 		this.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
 		
+		HandleCursurDisplay = new Handler() {
+			@Override
+			public void handleMessage(Message msg) {
+				CursurDisplay(msg.what);
+			}
+		};
 		
 	}
 
@@ -99,6 +107,7 @@ public class CoolingFanManualPopup extends ParentPopup{
 	protected void InitResource() {
 		// TODO Auto-generated method stub
 		imgViewCoolingFanIcon = (ImageView)mRoot.findViewById(R.id.imageView_popup_coolingfan_manual);
+		imgViewExcuteBoader = (ImageView)mRoot.findViewById(R.id.imageView_popup_coolingfan_manual_excute_boarder);
 		
 		imgbtnExcute = (ImageButton)mRoot.findViewById(R.id.imageButton_popup_coolingfan_manual_excute);
 		imgbtnOK = (ImageButton)mRoot.findViewById(R.id.imageButton_popup_coolingfan_manual_ok);
@@ -112,6 +121,8 @@ public class CoolingFanManualPopup extends ParentPopup{
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
+				CursurIndex = 2;
+				HandleCursurDisplay.sendMessage(HandleCursurDisplay.obtainMessage(CursurIndex));
 				ClickOK();
 			}
 		});
@@ -182,22 +193,78 @@ public class CoolingFanManualPopup extends ParentPopup{
 	}	
 	////////////////////////////////////////////////////////////////////////////////
 	public void ClickLeft(){
-		CursurIndex = 1;
-		CursurDisplay(CursurIndex);
+		if(imgbtnExcute.isPressed() == true)
+			return;
+		switch(CursurIndex){
+			case 1:
+				CursurIndex = 2;
+				CursurDisplay(CursurIndex);
+				break;
+			case 2:
+				CursurIndex--;
+				CursurDisplay(CursurIndex);
+				break;
+			default:
+				break;
+		}
 	}
 	public void ClickRight(){
-		CursurIndex = 1;
-		CursurDisplay(CursurIndex);
+		if(imgbtnExcute.isPressed() == true)
+			return;
+		switch(CursurIndex){
+			case 1:
+				CursurIndex++;
+				CursurDisplay(CursurIndex);
+				break;
+			case 2:
+				CursurIndex = 1;
+				CursurDisplay(CursurIndex);
+				break;
+			default:
+				break;
+		}
 	}
 	public void ClickESC(){
 		ClickOK();
 	}
 	public void ClickEnter(){
-		ClickOK();
+		switch(CursurIndex){
+			case 1:
+				CursurIndex = 3;
+				CursurDisplay(CursurIndex);
+				break;
+			case 2:
+				ClickOK();
+				break;
+			case 3:
+				CursurIndex = 1;
+				CursurDisplay(CursurIndex);
+				break;
+			default:
+				break;
+		}
 	}
 	////////////////////////////////////////////////////////////////////////////////
 	public void CursurDisplay(int Index){
-		imgbtnOK.setPressed(true);
+		imgbtnOK.setPressed(false);
+		imgbtnExcute.setPressed(false);
+		imgViewExcuteBoader.setVisibility(View.INVISIBLE);
+		
+		switch(CursurIndex){
+			case 1:
+				imgbtnExcute.setPressed(false);
+				imgViewExcuteBoader.setVisibility(View.VISIBLE);
+				break;
+			case 2:
+				imgbtnOK.setPressed(true);
+				break;
+			case 3:
+				imgbtnExcute.setPressed(true);
+				imgViewExcuteBoader.setVisibility(View.VISIBLE);
+				break;
+			default:
+				break;
+		}
 	}
 	////////////////////////////////////////////////////////////////////////////////
 }

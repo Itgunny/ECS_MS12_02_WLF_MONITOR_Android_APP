@@ -114,9 +114,9 @@
         android:layout_alignBottom="@+id/imageView_leftup_main_a_machinestatus_line"
         android:layout_alignLeft="@+id/imageView_leftup_main_a_machinestatus_line"
         android:layout_alignRight="@+id/imageView_leftup_main_a_machinestatus_line"
-        android:layout_alignTop="@+id/imageButton_leftup_main_a_machinestatus"
+        android:layout_alignTop="@+id/imageButton_leftup_main_a_machinestatus1"
         android:visibility="invisible" >
-
+        
         <ImageView
             android:id="@+id/imageView_leftup_machinestatus_weighing_upper_icon"
             android:layout_width="wrap_content"

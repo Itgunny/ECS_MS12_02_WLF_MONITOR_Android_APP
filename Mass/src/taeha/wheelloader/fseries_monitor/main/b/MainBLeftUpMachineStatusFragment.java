@@ -197,17 +197,29 @@ public class MainBLeftUpMachineStatusFragment extends ParentFragment{
 	@Override
 	protected void InitButtonListener() {
 		// TODO Auto-generated method stub
-		// ++, 150212 bwk
-		imgViewWeighingUpperIcon.setOnClickListener(new View.OnClickListener() {
+//		imgViewWeighingUpperIcon.setOnClickListener(new View.OnClickListener() {
+//			
+//			@Override
+//			public void onClick(View v) {
+//				// TODO Auto-generated method stub
+//			  	if(ClickFlag == true)
+//			  		ClickWeighingError(v);
+//			}
+//		});
+		imgViewWeighingUpperIcon.setOnTouchListener(new View.OnTouchListener() {
 			
 			@Override
-			public void onClick(View v) {
-				// TODO Auto-generated method stub
-			  	if(ClickFlag == true)
-			  		ClickWeighingError(v);
+			public boolean onTouch(View v, MotionEvent event) {
+				switch(event.getAction()){
+				case MotionEvent.ACTION_DOWN:
+					//Log.d(TAG, "x : " + event.getX() + "y : " + event.getY());
+					if(ClickFlag == true)
+				  		ClickWeighingError(v, event.getX());
+				}
+				return false;
 			}
 		});
-		// --, 150212 bwk
+		
 //		imgbtnMachineStatus.setOnClickListener(new View.OnClickListener() {
 //			
 //			@Override
@@ -837,7 +849,7 @@ public class MainBLeftUpMachineStatusFragment extends ParentFragment{
 	}
 
 	// ++, 150212 bwk
-	public void ClickWeighingError(View v){
+	public void ClickWeighingError(View v, float X){
 		if(ParentActivity.AnimationRunningFlag == true)
 			return;
 		else
@@ -854,7 +866,10 @@ public class MainBLeftUpMachineStatusFragment extends ParentFragment{
 			else if(WeighingSystemError_BoomLiftSpeed == CAN1CommManager.DATA_STATE_WEIGHTING_SYSGEM_ERROR
 					&& WeighingSystemError_BucketFullIn == CAN1CommManager.DATA_STATE_WEIGHTING_SYSGEM_ERROR
 					&& ParentActivity.WeighingErrorDetect == CAN1CommManager.DATA_STATE_WEIGHING_ERRORDETECT_ON){
-				showLampPopup(DATA_STATE_CURRENT_WEIHGING_RESULT_BOOMLIFTING_BUCKETFULLIN);
+				if(X < 60)
+					showLampPopup(DATA_STATE_CURRENT_WEIHGING_RESULT_BUCKETFULLIN);
+				else
+					showLampPopup(DATA_STATE_CURRENT_WEIHGING_RESULT_BOOMLIFTING);
 				popupIndicator.show(v);
 			}else if(WeighingSystemError_BoomLiftSpeed == CAN1CommManager.DATA_STATE_WEIGHTING_SYSGEM_ERROR
 					&& ParentActivity.WeighingErrorDetect == CAN1CommManager.DATA_STATE_WEIGHING_ERRORDETECT_ON){

@@ -30,6 +30,8 @@ public class MainBKeyDetentFragment extends ParentFragment{
 	
 	TextView textViewBoomSavePosition;
 	TextView textViewBucketSavePosition;
+	ImageView imageViewBoomSavePositionBoarder;
+	ImageView imageViewBucketSavePositionBoarder;
 	
 	ImageButton imgbtnOK;
 	//////////////////////////////////////////////////
@@ -40,6 +42,7 @@ public class MainBKeyDetentFragment extends ParentFragment{
 	
 	int SendCount;
 
+	int OldCursurIndex;
 	int CursurIndex;
 	Handler HandleCursurDisplay;
 	//////////////////////////////////////////////////
@@ -84,7 +87,8 @@ public class MainBKeyDetentFragment extends ParentFragment{
 	public void onDestroyView() {
 		// TODO Auto-generated method stub
 		super.onDestroyView();
-
+		CAN1Comm.Set_RequestDetentReleasePositionSetting_PGN61184_123(15);
+		CAN1Comm.TxCANToMCU(123);
 	}
 	////////////////////////////////////////////////
 	
@@ -99,6 +103,8 @@ public class MainBKeyDetentFragment extends ParentFragment{
 		
 		textViewBoomSavePosition = (TextView)mRoot.findViewById(R.id.textView_key_main_b_detent_boom_saveposition);
 		textViewBucketSavePosition = (TextView)mRoot.findViewById(R.id.textView_key_main_b_detent_bucket_saveposition);
+		imageViewBoomSavePositionBoarder = (ImageView)mRoot.findViewById(R.id.imageView_key_main_b_detent_boom_boarder);
+		imageViewBucketSavePositionBoarder = (ImageView)mRoot.findViewById(R.id.imageView_key_main_b_detent_bucket_boarder);
 		
 		imgbtnOK = (ImageButton)mRoot.findViewById(R.id.ImageButton_key_main_b_detent_low_ok);
 	}
@@ -134,12 +140,23 @@ public class MainBKeyDetentFragment extends ParentFragment{
 				ClickBoomOn();
 			}
 		});
-		radioBucketOff.setOnClickListener(new View.OnClickListener() {
+		textViewBoomSavePosition.setOnClickListener(new View.OnClickListener() {
 			
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
 				CursurIndex = 3;
+				HandleCursurDisplay.sendMessage(HandleCursurDisplay.obtainMessage(CursurIndex));
+				ClickBoomSavePosition();
+			}
+		});
+		
+		radioBucketOff.setOnClickListener(new View.OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				CursurIndex = 4;
 				HandleCursurDisplay.sendMessage(HandleCursurDisplay.obtainMessage(CursurIndex));
 				ClickBucketOff();
 			}
@@ -149,17 +166,9 @@ public class MainBKeyDetentFragment extends ParentFragment{
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
-				CursurIndex = 4;
+				CursurIndex = 5;
 				HandleCursurDisplay.sendMessage(HandleCursurDisplay.obtainMessage(CursurIndex));
 				ClickBucketOn();
-			}
-		});
-		textViewBoomSavePosition.setOnClickListener(new View.OnClickListener() {
-			
-			@Override
-			public void onClick(View v) {
-				// TODO Auto-generated method stub
-				ClickBoomSavePosition();
 			}
 		});
 		textViewBucketSavePosition.setOnClickListener(new View.OnClickListener() {
@@ -167,6 +176,8 @@ public class MainBKeyDetentFragment extends ParentFragment{
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
+				CursurIndex = 6;
+				HandleCursurDisplay.sendMessage(HandleCursurDisplay.obtainMessage(CursurIndex));
 				ClickBucketSavePosition();
 			}
 		});
@@ -179,7 +190,7 @@ public class MainBKeyDetentFragment extends ParentFragment{
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
-				CursurIndex = 5;
+				CursurIndex = 7;
 				HandleCursurDisplay.sendMessage(HandleCursurDisplay.obtainMessage(CursurIndex));
 				ClickOK();
 			}
@@ -231,10 +242,28 @@ public class MainBKeyDetentFragment extends ParentFragment{
 	public void CheckBoomBucketDetent(){
 		if(SendCount > 5){
 			if(textViewBoomSavePosition.isPressed() == true){
+				if((CursurIndex == 3) || (CursurIndex == 8)){
+					
+				}else
+				{
+					CursurIndex = 3;
+					imageViewBucketSavePositionBoarder.setVisibility(View.INVISIBLE);
+					CursurDisplay(CursurIndex);
+				}
+				
 				CAN1Comm.Set_RequestDetentReleasePositionSetting_PGN61184_123(CAN1CommManager.DATA_STATE_KEY_DETENT_BOOM_POS);
 				CAN1Comm.TxCANToMCU(123);
 				CAN1Comm.Set_RequestDetentReleasePositionSetting_PGN61184_123(15);
 			}else if(textViewBucketSavePosition.isPressed() == true){
+				if((CursurIndex == 6) || (CursurIndex == 8)){
+					
+				}else
+				{
+					CursurIndex = 6;
+					imageViewBoomSavePositionBoarder.setVisibility(View.INVISIBLE);
+					CursurDisplay(CursurIndex);
+				}
+				
 				CAN1Comm.Set_RequestDetentReleasePositionSetting_PGN61184_123(CAN1CommManager.DATA_STATE_KEY_DETENT_BUCKET_POS);
 				CAN1Comm.TxCANToMCU(123);
 				CAN1Comm.Set_RequestDetentReleasePositionSetting_PGN61184_123(15);
@@ -251,21 +280,25 @@ public class MainBKeyDetentFragment extends ParentFragment{
 		CAN1Comm.Set_BoomDetentMode_223_PGN61184_123(CAN1CommManager.DATA_STATE_KEY_DETENT_BOOM_OFF);
 		CAN1Comm.TxCANToMCU(123);
 		CAN1Comm.Set_BoomDetentMode_223_PGN61184_123(7);
+		DetentBoomDisplay(CAN1CommManager.DATA_STATE_KEY_DETENT_BOOM_OFF);
 	}
 	public void ClickBoomOn(){
 		CAN1Comm.Set_BoomDetentMode_223_PGN61184_123(CAN1CommManager.DATA_STATE_KEY_DETENT_BOOM_UPDOWN);
 		CAN1Comm.TxCANToMCU(123);
 		CAN1Comm.Set_BoomDetentMode_223_PGN61184_123(7);
+		DetentBoomDisplay(CAN1CommManager.DATA_STATE_KEY_DETENT_BOOM_UPDOWN);
 	}
 	public void ClickBucketOff(){
 		CAN1Comm.Set_BucketDetentMode_224_PGN61184_123(CAN1CommManager.DATA_STATE_KEY_DETENT_BUCKET_OFF);
 		CAN1Comm.TxCANToMCU(123);
 		CAN1Comm.Set_BucketDetentMode_224_PGN61184_123(7);
+		DetentBucketDisplay(CAN1CommManager.DATA_STATE_KEY_DETENT_BUCKET_OFF);
 	}
 	public void ClickBucketOn(){
 		CAN1Comm.Set_BucketDetentMode_224_PGN61184_123(CAN1CommManager.DATA_STATE_KEY_DETENT_BUCKET_IN);
 		CAN1Comm.TxCANToMCU(123);
 		CAN1Comm.Set_BucketDetentMode_224_PGN61184_123(7);
+		DetentBucketDisplay(CAN1CommManager.DATA_STATE_KEY_DETENT_BUCKET_IN);
 	}
 	public void ClickBoomSavePosition(){
 		CAN1Comm.Set_RequestDetentReleasePositionSetting_PGN61184_123(15);
@@ -281,35 +314,40 @@ public class MainBKeyDetentFragment extends ParentFragment{
 
 	/////////////////////////////////////////////////////////////////////
 	public void ClickLeft(){
+		if((textViewBoomSavePosition.isPressed() == true) || (textViewBucketSavePosition.isPressed() == true))
+			return;
 		switch (CursurIndex) {
 		case 1:
-			CursurIndex = 5;
+			CursurIndex = 7;
 			CursurDisplay(CursurIndex);
 			break;
 		case 2:
 		case 3:
 		case 4:
 		case 5:
+		case 6:
+		case 7:
 			CursurIndex--;
 			CursurDisplay(CursurIndex);
 			break;
 		default:
-			CursurIndex = 1;
-			CursurDisplay(CursurIndex);
 			break;
 		}
 	}
 	public void ClickRight(){
+		if((textViewBoomSavePosition.isPressed() == true) || (textViewBucketSavePosition.isPressed() == true))
+			return;
 		switch (CursurIndex) {
 		case 1:
 		case 2:
 		case 3:
 		case 4:
+		case 5:
+		case 6:
 			CursurIndex++;
 			CursurDisplay(CursurIndex);
 			break;
-		case 5:
-		default:
+		case 7:
 			CursurIndex = 1;
 			CursurDisplay(CursurIndex);
 			break;
@@ -319,22 +357,38 @@ public class MainBKeyDetentFragment extends ParentFragment{
 		switch (CursurIndex) {
 		case 1:
 			ClickBoomOff();
-			DetentBoomDisplay(CAN1CommManager.DATA_STATE_KEY_DETENT_BOOM_OFF);
+			
 			break;
 		case 2:
 			ClickBoomOn();
-			DetentBoomDisplay(CAN1CommManager.DATA_STATE_KEY_DETENT_BOOM_UPDOWN);
 			break;
 		case 3:
-			ClickBucketOff();
-			DetentBucketDisplay(CAN1CommManager.DATA_STATE_KEY_DETENT_BUCKET_OFF);
+			OldCursurIndex = 3;
+			CursurIndex = 8;
+			CursurDisplay(CursurIndex);
 			break;
-		case 4:
-			ClickBucketOn();
-			DetentBucketDisplay(CAN1CommManager.DATA_STATE_KEY_DETENT_BUCKET_IN);
+		case 4:			
+			ClickBucketOff();
 			break;
 		case 5:
+			ClickBucketOn();
+			break;
+		case 6:
+			OldCursurIndex = 6;
+			CursurIndex = 8;
+			CursurDisplay(CursurIndex);
+			break;			
+		case 7:
 			ClickOK();
+			break;
+		case 8:
+			if(OldCursurIndex == 3){
+				CursurIndex  = 3;
+				CursurDisplay(CursurIndex);	
+			} else if(OldCursurIndex == 6){
+				CursurIndex  = 6;
+				CursurDisplay(CursurIndex);				
+			}
 			break;
 		default:
 			break;
@@ -349,6 +403,11 @@ public class MainBKeyDetentFragment extends ParentFragment{
 		radioBucketOff.setPressed(false);
 		radioBucketOn.setPressed(false);
 		imgbtnOK.setPressed(false);		
+		textViewBoomSavePosition.setPressed(false);
+		textViewBucketSavePosition.setPressed(false);
+		imageViewBoomSavePositionBoarder.setVisibility(View.INVISIBLE);
+		imageViewBucketSavePositionBoarder.setVisibility(View.INVISIBLE);
+		
 		switch (CursurIndex) {
 		case 1:
 			radioBoomOff.setPressed(true);
@@ -357,13 +416,32 @@ public class MainBKeyDetentFragment extends ParentFragment{
 			radioBoomOn.setPressed(true);
 			break;
 		case 3:
-			radioBucketOff.setPressed(true);
+			textViewBoomSavePosition.setPressed(false);
+			imageViewBoomSavePositionBoarder.setVisibility(View.VISIBLE);
+			ClickBoomSavePosition();
 			break;
 		case 4:
-			radioBucketOn.setPressed(true);
+			radioBucketOff.setPressed(true);
 			break;
 		case 5:
+			radioBucketOn.setPressed(true);
+			break;
+		case 6:
+			textViewBucketSavePosition.setPressed(false);
+			imageViewBucketSavePositionBoarder.setVisibility(View.VISIBLE);
+			ClickBucketSavePosition();
+			break;
+		case 7:
 			imgbtnOK.setPressed(true);
+			break;
+		case 8:
+			if(OldCursurIndex == 3){
+				textViewBoomSavePosition.setPressed(true);
+				imageViewBoomSavePositionBoarder.setVisibility(View.VISIBLE);
+			}else if(OldCursurIndex == 6){
+				textViewBucketSavePosition.setPressed(true);
+				imageViewBucketSavePositionBoarder.setVisibility(View.VISIBLE);
+			}
 			break;
 		default:
 			break;

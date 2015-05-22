@@ -416,17 +416,17 @@ typedef struct
 //=================================================================
 
 
-typedef struct
-{
-	unsigned char 	DashProgVer;
-	unsigned char 	DashHardVer;
-	unsigned char 	MirrorHeaterStatus:2;
-	unsigned char 	HighBeamStatus:2;
-	unsigned char 	FrontRearLampStatus:2;
-	unsigned char 	Reserved0:2;
-	unsigned char 	Reserved1;
-	unsigned int	Reserved2;
-}__attribute__((packed))  WHEEL_LOADER_DASHBOARD;
+//typedef struct
+//{
+//	unsigned char 	DashProgVer;
+//	unsigned char 	DashHardVer;
+//	unsigned char 	MirrorHeaterStatus:2;
+//	unsigned char 	HighBeamStatus:2;
+//	unsigned char 	FrontRearLampStatus:2;
+//	unsigned char 	Reserved0:2;
+//	unsigned char 	Reserved1;
+//	unsigned int	Reserved2;
+//}__attribute__((packed))  WHEEL_LOADER_DASHBOARD;
 
 
 //=================================================================
@@ -2484,6 +2484,24 @@ typedef struct
 	unsigned char	DTC_5[3];
 
 }__attribute__((packed))  DTC_INFORMATION_TYPE1_65438;
+
+typedef struct
+{
+	unsigned char Dashboard_Program_Version_988;                         //HCESPN 988
+	unsigned char Dashboard_Hardware_Version_989;                        //HCESPN 989
+
+	unsigned char Mirror_Heater_Status_724:2;                                         //HCESPN 724
+	unsigned char High_Beam_Status_725:2;                                             //HCESPN 725
+	unsigned char Front_Rear_Lamp_Status_726:2;                             //HCESPN 726
+	unsigned char DM0:2;
+
+	unsigned char DM1;
+	unsigned char DM2;
+	unsigned char DM3;
+	unsigned char DM4;
+
+	unsigned char HW_Vers_Sub;
+}__attribute__((packed))  CLUSTER_STATUS_65445;
 // ++, 150327 bwk
 typedef struct
 {
@@ -2534,6 +2552,7 @@ typedef struct
 	unsigned int	ADayBeforeWeight_1916;
 
 }__attribute__((packed))  WEIGHING_SYSTEM_DATA2_65452;
+
 
 typedef struct
 {

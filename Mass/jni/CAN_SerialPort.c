@@ -1322,6 +1322,25 @@ jbyteArray Get_DTC_5_PGN65438(JNIEnv * env, jobject this) {
 
 	return Data;
 }
+//////RX_CLUSTER_STATUS_65445///////
+jint Get_Dashboard_Program_Version_988_PGN65445(JNIEnv * env, jobject this) {
+	return RX_CLUSTER_STATUS_65445.Dashboard_Program_Version_988;
+}
+jint Get_Dashboard_Hardware_Version_989_PGN65445(JNIEnv * env, jobject this) {
+	return RX_CLUSTER_STATUS_65445.Dashboard_Hardware_Version_989;
+}
+jint Get_Mirror_Heater_Status_724_PGN65445(JNIEnv * env, jobject this) {
+	return RX_CLUSTER_STATUS_65445.Mirror_Heater_Status_724;
+}
+jint Get_High_Beam_Status_725_PGN65445(JNIEnv * env, jobject this) {
+	return RX_CLUSTER_STATUS_65445.High_Beam_Status_725;
+}
+jint Get_Front_Rear_Lamp_Status_726_PGN65445(JNIEnv * env, jobject this) {
+	return RX_CLUSTER_STATUS_65445.Front_Rear_Lamp_Status_726;
+}
+jint Get_HW_Vers_Sub_PGN65445(JNIEnv * env, jobject this) {
+	return RX_CLUSTER_STATUS_65445.HW_Vers_Sub;
+}
 //////RX_AXLE_STATUS_65449///////
 jint Get_Front_Axle_Oil_Temperature_577_PGN65449(JNIEnv * env,
 		jobject this) {
@@ -4173,6 +4192,19 @@ static JNINativeMethod methods[] =
 						"Get_DTC_3_PGN65438", "()[B", Get_DTC_3_PGN65438 }, {
 						"Get_DTC_4_PGN65438", "()[B", Get_DTC_4_PGN65438 }, {
 						"Get_DTC_5_PGN65438", "()[B", Get_DTC_5_PGN65438 },
+				//////RX_CLUSTER_STATUS_65445///////
+				{ "Get_Dashboard_Program_Version_988_PGN65445", "()I",
+						(void*) Get_Dashboard_Program_Version_988_PGN65445 }, {
+						"Get_Dashboard_Hardware_Version_989_PGN65445", "()I",
+						(void*) Get_Dashboard_Hardware_Version_989_PGN65445 },{
+						"Get_Mirror_Heater_Status_724_PGN65445", "()I",
+						(void*) Get_Mirror_Heater_Status_724_PGN65445 }, {
+						"Get_High_Beam_Status_725_PGN65445", "()I",
+						(void*) Get_High_Beam_Status_725_PGN65445 },{
+						"Get_Front_Rear_Lamp_Status_726_PGN65445", "()I",
+						(void*) Get_Front_Rear_Lamp_Status_726_PGN65445 }, {
+						"Get_HW_Vers_Sub_PGN65445", "()I",
+						(void*) Get_HW_Vers_Sub_PGN65445 },
 				//////RX_AXLE_STATUS_65449///////
 				{ "Get_Front_Axle_Oil_Temperature_577_PGN65449", "()I",
 						(void*) Get_Front_Axle_Oil_Temperature_577_PGN65449 },

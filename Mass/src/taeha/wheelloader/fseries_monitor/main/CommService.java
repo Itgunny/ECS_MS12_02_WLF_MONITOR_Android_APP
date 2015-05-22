@@ -571,6 +571,13 @@ public class CommService extends Service{
 	public native byte[] Get_DTC_3_PGN65438();
 	public native byte[] Get_DTC_4_PGN65438();
 	public native byte[] Get_DTC_5_PGN65438();
+	//////RX_CLUSTER_STATUS_65445///////
+	public native int Get_Dashboard_Program_Version_988_PGN65445();
+	public native int Get_Dashboard_Hardware_Version_989_PGN65445();
+	public native int Get_Mirror_Heater_Status_724_PGN65445();
+	public native int Get_High_Beam_Status_725_PGN65445();
+	public native int Get_Front_Rear_Lamp_Status_726_PGN65445();
+	public native int Get_HW_Vers_Sub_PGN65445();
 	//////RX_AXLE_STATUS_65449///////
 	public native int Get_Front_Axle_Oil_Temperature_577_PGN65449();
 	public native int Get_Rear_Axle_Oil_Temperature_578_PGN65449();
@@ -1201,7 +1208,7 @@ public class CommService extends Service{
 				break;
 			case CAN1CommManager.ESC:
 				// ++, 150324 bwk 하기 주석 품
-				if(GetScreenTopFlag() == true)
+				if(GetScreenTopFlag() == true || CAN1Comm.CameraCurrentOnOff == true)
 				{
 					CAN1Comm.Callback_KeyButton(Data);
 					SoundPoolKeyButton.play(SoundID, fVolume, fVolume, 0, 0, 1);		// 타 apk에서 소리 2번 울림
@@ -1221,17 +1228,19 @@ public class CommService extends Service{
 				break;
 			// ++, 150324 bwk
 			case CAN1CommManager.LEFT:
-				if(GetScreenTopFlag() == true)
+				if(GetScreenTopFlag() == true || CAN1Comm.CameraCurrentOnOff == true)
 				{
 					CAN1Comm.Callback_KeyButton(Data);
 				}
 				else
+				{
 					BackKeyEvent();
+				}
 				SoundPoolKeyButton.play(SoundID, fVolume, fVolume, 0, 0, 1);
 				break;
 			// --, 150324 bwk
 			case CAN1CommManager.RIGHT:
-				if(GetScreenTopFlag() == true)
+				if(GetScreenTopFlag() == true || CAN1Comm.CameraCurrentOnOff == true)
 				{
 					CAN1Comm.TxCMDToMCU(CAN1Comm.CMD_BUZ, 0);
 					CAN1Comm.Set_RequestBuzzerStop_PGN65327(1);
@@ -1287,6 +1296,14 @@ public class CommService extends Service{
 				// --, 150326 cjg
 					HandleKeyButton.sendMessage(HandleKeyButton.obtainMessage(Data));
 				
+				SoundPoolKeyButton.play(SoundID, fVolume, fVolume, 0, 0, 1);
+				break;
+			case CAN1CommManager.MAINLIGHT:
+			case CAN1CommManager.WORKLIGHT:
+			case CAN1CommManager.BEACON_LAMP:
+			case CAN1CommManager.REAR_WIPER:
+			case CAN1CommManager.CAMERA:
+				CAN1Comm.Callback_KeyButton(Data);
 				SoundPoolKeyButton.play(SoundID, fVolume, fVolume, 0, 0, 1);
 				break;
 			default:

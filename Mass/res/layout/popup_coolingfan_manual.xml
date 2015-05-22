@@ -54,7 +54,13 @@
 	        android:layout_width="wrap_content"
 	        android:layout_height="wrap_content"
 	        android:background="@drawable/_selector_popup01_short_btn1" />
-	
+        
+	    <ImageView
+       		android:id="@+id/imageView_popup_coolingfan_manual_excute_boarder"
+        	android:layout_width="wrap_content"
+        	android:layout_height="wrap_content"
+        	android:src="@drawable/menu_mode_fan_manual_btn_s2" />
+	    	
 	    <ImageButton
 	        android:id="@+id/imageButton_popup_coolingfan_manual_ok"
 	        android:layout_width="wrap_content"

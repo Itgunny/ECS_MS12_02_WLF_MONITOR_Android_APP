@@ -53,5 +53,14 @@
         android:gravity="center"
         android:text="@string/Washer"
         android:textAppearance="?android:attr/textAppearanceLarge" />
-
+    
+    <ImageView
+        android:id="@+id/imageView_key_main_b_rearwiper_washer_boarder"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="400dp"
+       	android:layout_marginTop="150dp"
+        android:gravity="center"
+        android:src="@drawable/main_key_washer_btn_s02" />
+    
 </RelativeLayout>

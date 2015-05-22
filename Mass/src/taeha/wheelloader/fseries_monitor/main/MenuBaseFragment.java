@@ -107,22 +107,6 @@ public class MenuBaseFragment extends ParentFragment{
 
 	//VALUABLE////////////////////////////////////////
 	public int FirstScreenIndex;
-
-	// ++, 150331 bwk
-	// Menu->KeyPad Value
-	// -- MAINLIGHT
-	int HeadLamp;
-	int Illumination;
-	int SelectMainLampStatus;
-	// -- WORKLIGHT
-	int WorkLamp;
-	int RearWorkLamp;
-	int SelectWorkLampStatus;
-	// -- BEACONLAMP
-	int SelectBeaconLamp;
-	// -- WIPER
-	int SelectWiperSpeedState;
-	// --, 150331 bwk
 	//////////////////////////////////////////////////
 
 	//Fragment////////////////////////////////////////
@@ -439,143 +423,12 @@ public class MenuBaseFragment extends ParentFragment{
 	@Override
 	protected void GetDataFromNative() {
 		// TODO Auto-generated method stub
-		HeadLamp = CAN1Comm.Get_HeadLampOperationStatus_3436_PGN65527();
-		Illumination = CAN1Comm.Get_IlluminationOperationStatus_3438_PGN65527();
-		WorkLamp = CAN1Comm.Get_WorkLampOperationStatus_3435_PGN65527();
-		RearWorkLamp = CAN1Comm.Get_RearWorkLampOperationStatus_3446_PGN65527();
-		SelectBeaconLamp = CAN1Comm.Get_BeaconLampOperationStatus_3444_PGN65527();
-		SelectWiperSpeedState = CAN1Comm.Get_RearWiperOperationStatus_3451_PGN65527();
-
-		MainLightLampStatus(HeadLamp,Illumination);
-		WorkLightLampDisplay(WorkLamp,RearWorkLamp);
 	}
 
 	@Override
 	protected void UpdateUI() {
 		// TODO Auto-generated method stub
 
-	}
-	
-	public void MainLightLampStatus(int _headlamp, int _illumination){
-		if(_headlamp == 0 && _illumination == 0){
-			SelectMainLampStatus = CAN1CommManager.DATA_STATE_KEY_MAINLIGHT_OFF;
-		}else if(_headlamp == 0 && _illumination == 1){
-			SelectMainLampStatus = CAN1CommManager.DATA_STATE_KEY_MAINLIGHT_LV1;
-		}else if(_headlamp == 1 && _illumination == 1){
-			SelectMainLampStatus = CAN1CommManager.DATA_STATE_KEY_MAINLIGHT_LV2;
-		}else{
-			SelectMainLampStatus = CAN1CommManager.DATA_STATE_KEY_MAINLIGHT_OFF;
-		}
-		
-	}
-	
-	public void WorkLightLampDisplay(int _worklamp, int _rearworklamp){
-		if(_worklamp == 0 && _rearworklamp == 0){
-			SelectWorkLampStatus = CAN1CommManager.DATA_STATE_KEY_WORKLIGHT_OFF;
-		}else if(_worklamp == 1 && _rearworklamp == 0){
-			SelectWorkLampStatus = CAN1CommManager.DATA_STATE_KEY_WORKLIGHT_LV1;
-		}else if(_worklamp == 1 && _rearworklamp == 1){
-			SelectWorkLampStatus = CAN1CommManager.DATA_STATE_KEY_WORKLIGHT_LV2;
-		}else{
-			SelectWorkLampStatus = CAN1CommManager.DATA_STATE_KEY_WORKLIGHT_OFF;
-		}
-	}
-	
-	
-	public void ClickMainLightHardKey(){
-		switch (SelectMainLampStatus) {
-		case CAN1CommManager.DATA_STATE_KEY_MAINLIGHT_OFF:
-			SelectMainLampStatus = CAN1CommManager.DATA_STATE_KEY_MAINLIGHT_LV1;
-			CAN1Comm.Set_HeadLampOperationStatus_3436_PGN65527(CAN1CommManager.DATA_STATE_LAMP_OFF);
-			CAN1Comm.Set_IlluminationOperationStatus_3438_PGN65527(CAN1CommManager.DATA_STATE_LAMP_ON);
-			CAN1Comm.TxCANToMCU(247);
-			
-			break;
-		case CAN1CommManager.DATA_STATE_KEY_MAINLIGHT_LV1:
-			SelectMainLampStatus = CAN1CommManager.DATA_STATE_KEY_MAINLIGHT_LV2;
-			CAN1Comm.Set_HeadLampOperationStatus_3436_PGN65527(CAN1CommManager.DATA_STATE_LAMP_ON);
-			CAN1Comm.Set_IlluminationOperationStatus_3438_PGN65527(CAN1CommManager.DATA_STATE_LAMP_ON);
-			CAN1Comm.TxCANToMCU(247);
-			
-			break;
-		case CAN1CommManager.DATA_STATE_KEY_MAINLIGHT_LV2:
-		default:
-			SelectMainLampStatus = CAN1CommManager.DATA_STATE_KEY_MAINLIGHT_OFF;
-			CAN1Comm.Set_HeadLampOperationStatus_3436_PGN65527(CAN1CommManager.DATA_STATE_LAMP_OFF);
-			CAN1Comm.Set_IlluminationOperationStatus_3438_PGN65527(CAN1CommManager.DATA_STATE_LAMP_OFF);
-			CAN1Comm.TxCANToMCU(247);
-			
-			break;
-		}
-	}
-	
-	public void ClickWorkLightHardKey(){
-		switch (SelectWorkLampStatus) {
-		case CAN1CommManager.DATA_STATE_KEY_WORKLIGHT_OFF:
-			SelectWorkLampStatus = CAN1CommManager.DATA_STATE_KEY_WORKLIGHT_LV1;
-			CAN1Comm.Set_WorkLampOperationStatus_3435_PGN65527(CAN1CommManager.DATA_STATE_LAMP_ON);
-			CAN1Comm.Set_RearWorkLampOperationStatus_3446_PGN65527(CAN1CommManager.DATA_STATE_LAMP_OFF);
-			CAN1Comm.TxCANToMCU(247);
-			
-			break;
-		case CAN1CommManager.DATA_STATE_KEY_WORKLIGHT_LV1:
-			SelectWorkLampStatus = CAN1CommManager.DATA_STATE_KEY_WORKLIGHT_LV2;
-			CAN1Comm.Set_WorkLampOperationStatus_3435_PGN65527(CAN1CommManager.DATA_STATE_LAMP_ON);
-			CAN1Comm.Set_RearWorkLampOperationStatus_3446_PGN65527(CAN1CommManager.DATA_STATE_LAMP_ON);
-			CAN1Comm.TxCANToMCU(247);
-			
-			break;
-		case CAN1CommManager.DATA_STATE_KEY_WORKLIGHT_LV2:
-		default:
-			SelectWorkLampStatus = CAN1CommManager.DATA_STATE_KEY_WORKLIGHT_OFF;
-			CAN1Comm.Set_WorkLampOperationStatus_3435_PGN65527(CAN1CommManager.DATA_STATE_LAMP_OFF);
-			CAN1Comm.Set_RearWorkLampOperationStatus_3446_PGN65527(CAN1CommManager.DATA_STATE_LAMP_OFF);
-			CAN1Comm.TxCANToMCU(247);
-			
-			break;
-		}
-	}
-	
-	public void ClickBeaconLampHardKey(){
-		switch (SelectBeaconLamp) {
-		case CAN1CommManager.DATA_STATE_OFF:
-		default:
-			SelectBeaconLamp = CAN1CommManager.DATA_STATE_ON;
-			CAN1Comm.Set_BeaconLampOperationStatus_3444_PGN65527(CAN1CommManager.DATA_STATE_ON);
-			CAN1Comm.TxCANToMCU(247);
-			CAN1Comm.Set_BeaconLampOperationStatus_3444_PGN65527(3);
-			break;
-		case CAN1CommManager.DATA_STATE_ON:
-			SelectBeaconLamp = CAN1CommManager.DATA_STATE_OFF;
-			CAN1Comm.Set_BeaconLampOperationStatus_3444_PGN65527(CAN1CommManager.DATA_STATE_OFF);
-			CAN1Comm.TxCANToMCU(247);
-			CAN1Comm.Set_BeaconLampOperationStatus_3444_PGN65527(3);
-			break;
-		}		
-	}
-	
-	public void ClickRearWiperHardKey(){
-		switch (SelectWiperSpeedState) {
-		case CAN1CommManager.DATA_STATE_KEY_REARWIPER_SPEED_OFF:
-		default:
-			SelectWiperSpeedState = CAN1CommManager.DATA_STATE_KEY_REARWIPER_SPEED_INT;
-			CAN1Comm.Set_RearWiperOperationStatus_3451_PGN65527(CAN1CommManager.DATA_STATE_KEY_REARWIPER_SPEED_INT);
-			CAN1Comm.TxCANToMCU(247);
-			CAN1Comm.Set_RearWiperOperationStatus_3451_PGN65527(3);
-			break;
-		case CAN1CommManager.DATA_STATE_KEY_REARWIPER_SPEED_INT:
-			SelectWiperSpeedState = CAN1CommManager.DATA_STATE_KEY_REARWIPER_SPEED_LOW;
-			CAN1Comm.Set_RearWiperOperationStatus_3451_PGN65527(CAN1CommManager.DATA_STATE_KEY_REARWIPER_SPEED_LOW);
-			CAN1Comm.TxCANToMCU(247);
-			CAN1Comm.Set_RearWiperOperationStatus_3451_PGN65527(3);
-			break;
-		case CAN1CommManager.DATA_STATE_KEY_REARWIPER_SPEED_LOW:
-			SelectWiperSpeedState = CAN1CommManager.DATA_STATE_KEY_REARWIPER_SPEED_OFF;
-			CAN1Comm.Set_RearWiperOperationStatus_3451_PGN65527(CAN1CommManager.DATA_STATE_KEY_REARWIPER_SPEED_OFF);
-			CAN1Comm.TxCANToMCU(247);
-			CAN1Comm.Set_RearWiperOperationStatus_3451_PGN65527(3);
-			break;
-		}
 	}
 	/////////////////////////////////////////////////////////////////////
 	public void setFirstScreenIndex(int Index){
@@ -1494,6 +1347,10 @@ public class MenuBaseFragment extends ParentFragment{
 			break;
 		case CAN1CommManager.FN:
 			Log.d(TAG,"Click FN");
+			break;
+		case CAN1CommManager.CAMERA:
+			Log.d(TAG, "Click CAMERA");
+			ParentActivity.ExcuteCamActivitybyKey();
 			break;
 		default:
 			break;
@@ -2759,7 +2616,7 @@ public class MenuBaseFragment extends ParentFragment{
 		// --, 150407 bwk
 		// ++, 150331 bwk
 		default:
-			ClickMainLightHardKey();
+			ParentActivity.ClickMainLightHardKey();
 			break;
 		// --, 150331 bwk
 		}
@@ -2807,7 +2664,7 @@ public class MenuBaseFragment extends ParentFragment{
 		// --, 150407 bwk
 		// ++, 150331 bwk
 		default:
-			ClickWorkLightHardKey();
+			ParentActivity.ClickWorkLightHardKey();
 			break;
 		// --, 150331 bwk
 		}
@@ -2988,7 +2845,7 @@ public class MenuBaseFragment extends ParentFragment{
 			
 		// ++, 150331 bwk
 		default:
-			ClickBeaconLampHardKey();
+			ParentActivity.ClickBeaconLampHardKey();
 			break;
 		// --, 150331 bwk
 		}
@@ -3036,7 +2893,7 @@ public class MenuBaseFragment extends ParentFragment{
 		// --, 150407 bwk			
 		// ++, 150331 bwk
 		default:
-			ClickRearWiperHardKey();
+			ParentActivity.ClickRearWiperHardKey();
 			break;
 		// --, 150331 bwk
 		}

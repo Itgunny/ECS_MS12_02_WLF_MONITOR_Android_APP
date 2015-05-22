@@ -256,9 +256,9 @@ public class AngleCalibration extends ParentFragment{
 		imgViewStep5.setImageResource(R.drawable.menu_management_boom_pressure_step_off);
 		textViewTitle.setText(ParentActivity.getResources().getString(R.string.Max_retraction_of_bucket_cylinder));
 		
-		textViewAngle.setVisibility(View.INVISIBLE);
-		textViewAngleTitle.setVisibility(View.INVISIBLE);
-		textViewAngleColon.setVisibility(View.INVISIBLE);
+		textViewAngle.setVisibility(View.VISIBLE);
+		textViewAngleTitle.setVisibility(View.VISIBLE);
+		textViewAngleColon.setVisibility(View.VISIBLE);
 	}
 	public void SetStep5Display(){
 		imgViewIcon.setImageResource(R.drawable.menu_management_boom_angle_img_05);
@@ -269,9 +269,9 @@ public class AngleCalibration extends ParentFragment{
 		imgViewStep5.setImageResource(R.drawable.menu_management_boom_pressure_step_on);
 		textViewTitle.setText(ParentActivity.getResources().getString(R.string.Max_extension_of_bucket_cylinder));
 		
-		textViewAngle.setVisibility(View.INVISIBLE);
-		textViewAngleTitle.setVisibility(View.INVISIBLE);
-		textViewAngleColon.setVisibility(View.INVISIBLE);
+		textViewAngle.setVisibility(View.VISIBLE);
+		textViewAngleTitle.setVisibility(View.VISIBLE);
+		textViewAngleColon.setVisibility(View.VISIBLE);
 	}
 	public void AngleDisplay(int Angle, int AngleDot){
 		textViewAngle.setText(Integer.toString(Angle) + "." + Integer.toString(AngleDot) + "им");

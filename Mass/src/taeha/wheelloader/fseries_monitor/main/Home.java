@@ -69,10 +69,10 @@ public class Home extends Activity {
 	//CONSTANT//////////////////////////////////////////
 	//Version/////////////////////////////////////////////////////////////////////////////
 	//
-	public static final int VERSION_HIGH 		= 1;
+	public static final int VERSION_HIGH 		= 2;
 	public static final int VERSION_LOW 		= 0;
-	public static final int VERSION_SUB_HIGH 	= 4;
-	public static final int VERSION_SUB_LOW 	= 7;
+	public static final int VERSION_SUB_HIGH 	= 0;
+	public static final int VERSION_SUB_LOW 	= 0;
 	////1.0.2.3
 	// UI B 안 최초 적용 2014.12.10
 	////1.0.2.4
@@ -446,6 +446,37 @@ public class Home extends Activity {
 	// 2. Mediaplay rpm연동  기능제거(HHI요청)
 	// 3. 타 apk에서 메뉴/ESC/좌측 키 누를 경우 소리 두번들리는 현상 개선
 	// 4. 멀티미디어 UI 변경 : 미디어 플레이어, 스마트 터미널 두개 기능 이미지 아이콘으로 표시
+	// 5. 워셔 롱키 원복(상태 복구시키는 부분 버그 있어서 롱키일때 상태변하고 워셔하는 것으로 둠 -> 수정필요)
+	// 6. 비활성화 된 키의 밝기가 너무 어두운 것 같음 (아무것도 없는 빈 공간 누르니 해당 버튼 화면이 뜨는 느낌)
+	// 7. Axle 관련 사양 적용(svn참조)
+	////v.2.0.0.0
+	// 1.붐/버켓 각도보정 기능
+	//	- Step 1 : 그림 수정 (bucket full in 상태로)
+	//  - Step 4, 5 : 붐 각도 상태 표시 step 3 이후로 유지
+	//	- Boom 각도 두줄로 표시
+	// 2. 롱키 동작 기능 키패드 구현 방안
+	//	A. 롱키 동작 기능 :냉각팬 수동 실행, Detent - Save position, Rear Wiper ? Washer
+	//	B. 키패드 구현
+	//		- 엔터 1회 입력 : (커서 사라지면서) 터치 시작
+	//		- 엔터 1회 추가 입력 또는 ESC 입력 또는 화면 터치 입력 : (커서 나타나면서) 터치 끝
+	//		- 터치 시작과 끝 사이에는 다른 키패드 동작(ex. 커서이동) 안되도록
+	// 3. UserSwitching
+	//	- Boom Detent Mode 추가
+	//	- Bucket Detent Mode 추가
+	//	- Display Type 적용안되는 부분 수정
+	//	- Fuel 라인  Drak gray 버그 수정
+	// 4. 메뉴에서 CAM 버튼, 후진기어 연동 : home 버튼 + cam 화면 표시 
+	// 5. 미디어 플레이어 / 스마트 터미널 / PDF 리더
+	//	- CAM 버튼, 후진기어 연동 : 화면전환 버튼 + cam 화면 표시 (복귀 : 메인 화면)
+	//	- 램프류/후방와이퍼 버튼 : 백그라운드에서 프로토콜만 송부할 것. (메뉴 화면에서의 사양과 동일)
+	// 6. 워셔 롱키 버그 수정
+	//	- ST 수정필요(1.0.2.3)
+	// 7. auxilliary -> auxiliary 오타수정 
+	// 8. 멀티미디어 UI 수정(미디어플레이어 회색이미지 테두리 하얀색 수정)
+	// 9. 메인 - LeftUp
+	//	- Weight 에러 두개 떴을 경우 아이콘 나누어서 클릭된 것으로만 가이던스 표시로 변경
+	//	- UI Ton 좌표 맞춤
+	// 10. 클러스터 H/W Version 표시 추가
 	//////////////////////////////////////////////////////////////////////////////////////
 	
 	// TAG
@@ -1101,6 +1132,22 @@ public class Home extends Activity {
 	// ++, 150326 bwk
 	int SendDTCIndex;
 	// --, 150326 bwk
+	
+	// ++, 150520 bwk
+	// Menu->KeyPad Value
+	// -- MAINLIGHT
+	int HeadLamp;
+	int Illumination;
+	int SelectMainLampStatus;
+	// -- WORKLIGHT
+	int WorkLamp;
+	int RearWorkLamp;
+	int SelectWorkLampStatus;
+	// -- BEACONLAMP
+	int SelectBeaconLamp;
+	// -- WIPER
+	int SelectWiperSpeedState;
+	// --, 150520 bwk	
 	////////////////////////////////////////////////////
 	
 	//Fragment//////////////////////////////////////////
@@ -1361,6 +1408,7 @@ public class Home extends Activity {
 		
 	}
 	public void ExcuteCamActivitybyKey(){
+		//Log.d(TAG,"ExcuteCamActivitybyKey" + CAN1Comm.GetScreenTopFlag());
 		OldScreenIndex = ScreenIndex;
 		ScreenIndex = SCREEN_STATE_MAIN_CAMERA_KEY;
 		CAN1Comm.CameraOnFlag = CAN1CommManager.STATE_CAMERA_MANUAL;
@@ -1626,6 +1674,8 @@ public class Home extends Activity {
 		String strSoundOutput = "SoundOutput" + Integer.toString(Index);
 		String strHourmeterDisplay = "HourmeterDisplay" + Integer.toString(Index);
 		String strFuelDisplay = "FuelDisplay" + Integer.toString(Index);
+		String strBoomDetentMode = "BoomDetentMode" + Integer.toString(Index);
+		String strBucketDetentMode = "BucketDetentMode" + Integer.toString(Index);
 
 		SharedPreferences SharePref = getSharedPreferences("Home", 0);
 		SharedPreferences.Editor edit = SharePref.edit();
@@ -1665,6 +1715,9 @@ public class Home extends Activity {
 		edit.putInt(strHourmeterDisplay, _userdata.HourmeterDisplay);
 		edit.putInt(strFuelDisplay, _userdata.FuelDisplay);
 
+		edit.putInt(strBoomDetentMode, _userdata.BoomDetentMode);
+		edit.putInt(strBucketDetentMode, _userdata.BucketDetentMode);
+		
 		edit.commit();
 		Log.d(TAG,"SaveUserData" + Integer.toString(Index));
 		
@@ -1706,6 +1759,8 @@ public class Home extends Activity {
 		String strSoundOutput = "SoundOutput" + Integer.toString(Index);
 		String strHourmeterDisplay = "HourmeterDisplay" + Integer.toString(Index);
 		String strFuelDisplay = "FuelDisplay" + Integer.toString(Index);
+		String strBoomDetentMode = "BoomDetentMode" + Integer.toString(Index);
+		String strBucketDetentMode = "BucketDetentMode" + Integer.toString(Index);
 		
 		UserData _userdata;
 		_userdata = new UserData();
@@ -1748,6 +1803,8 @@ public class Home extends Activity {
 		_userdata.HourmeterDisplay = SharePref.getInt(strHourmeterDisplay, CAN1CommManager.DATA_STATE_HOURMETER_LATEST);
 		_userdata.FuelDisplay = SharePref.getInt(strFuelDisplay, CAN1CommManager.DATA_STATE_AVERAGE_FUEL_RATE);
 
+		_userdata.BoomDetentMode = SharePref.getInt(strBoomDetentMode, CAN1CommManager.DATA_STATE_KEY_DETENT_BOOM_UPDOWN);
+		_userdata.BucketDetentMode = SharePref.getInt(strBucketDetentMode, CAN1CommManager.DATA_STATE_KEY_DETENT_BUCKET_IN);
 
 		Log.d(TAG,"LoadUserData" + Integer.toString(Index));
 		return _userdata;
@@ -1776,6 +1833,128 @@ public class Home extends Activity {
 		}
 	}
 	// --, 150213 bwk
+/////////////////////////////////////////////////////
+	public void MainLightLampStatus(int _headlamp, int _illumination){
+		if(_headlamp == 0 && _illumination == 0){
+			SelectMainLampStatus = CAN1CommManager.DATA_STATE_KEY_MAINLIGHT_OFF;
+		}else if(_headlamp == 0 && _illumination == 1){
+			SelectMainLampStatus = CAN1CommManager.DATA_STATE_KEY_MAINLIGHT_LV1;
+		}else if(_headlamp == 1 && _illumination == 1){
+			SelectMainLampStatus = CAN1CommManager.DATA_STATE_KEY_MAINLIGHT_LV2;
+		}else{
+			SelectMainLampStatus = CAN1CommManager.DATA_STATE_KEY_MAINLIGHT_OFF;
+		}
+		
+	}
+	
+	public void WorkLightLampDisplay(int _worklamp, int _rearworklamp){
+		if(_worklamp == 0 && _rearworklamp == 0){
+			SelectWorkLampStatus = CAN1CommManager.DATA_STATE_KEY_WORKLIGHT_OFF;
+		}else if(_worklamp == 1 && _rearworklamp == 0){
+			SelectWorkLampStatus = CAN1CommManager.DATA_STATE_KEY_WORKLIGHT_LV1;
+		}else if(_worklamp == 1 && _rearworklamp == 1){
+			SelectWorkLampStatus = CAN1CommManager.DATA_STATE_KEY_WORKLIGHT_LV2;
+		}else{
+			SelectWorkLampStatus = CAN1CommManager.DATA_STATE_KEY_WORKLIGHT_OFF;
+		}
+	}
+	
+	
+	public void ClickMainLightHardKey(){
+		switch (SelectMainLampStatus) {
+		case CAN1CommManager.DATA_STATE_KEY_MAINLIGHT_OFF:
+			SelectMainLampStatus = CAN1CommManager.DATA_STATE_KEY_MAINLIGHT_LV1;
+			CAN1Comm.Set_HeadLampOperationStatus_3436_PGN65527(CAN1CommManager.DATA_STATE_LAMP_OFF);
+			CAN1Comm.Set_IlluminationOperationStatus_3438_PGN65527(CAN1CommManager.DATA_STATE_LAMP_ON);
+			CAN1Comm.TxCANToMCU(247);
+			
+			break;
+		case CAN1CommManager.DATA_STATE_KEY_MAINLIGHT_LV1:
+			SelectMainLampStatus = CAN1CommManager.DATA_STATE_KEY_MAINLIGHT_LV2;
+			CAN1Comm.Set_HeadLampOperationStatus_3436_PGN65527(CAN1CommManager.DATA_STATE_LAMP_ON);
+			CAN1Comm.Set_IlluminationOperationStatus_3438_PGN65527(CAN1CommManager.DATA_STATE_LAMP_ON);
+			CAN1Comm.TxCANToMCU(247);
+			
+			break;
+		case CAN1CommManager.DATA_STATE_KEY_MAINLIGHT_LV2:
+		default:
+			SelectMainLampStatus = CAN1CommManager.DATA_STATE_KEY_MAINLIGHT_OFF;
+			CAN1Comm.Set_HeadLampOperationStatus_3436_PGN65527(CAN1CommManager.DATA_STATE_LAMP_OFF);
+			CAN1Comm.Set_IlluminationOperationStatus_3438_PGN65527(CAN1CommManager.DATA_STATE_LAMP_OFF);
+			CAN1Comm.TxCANToMCU(247);
+			
+			break;
+		}
+	}
+	
+	public void ClickWorkLightHardKey(){
+		switch (SelectWorkLampStatus) {
+		case CAN1CommManager.DATA_STATE_KEY_WORKLIGHT_OFF:
+			SelectWorkLampStatus = CAN1CommManager.DATA_STATE_KEY_WORKLIGHT_LV1;
+			CAN1Comm.Set_WorkLampOperationStatus_3435_PGN65527(CAN1CommManager.DATA_STATE_LAMP_ON);
+			CAN1Comm.Set_RearWorkLampOperationStatus_3446_PGN65527(CAN1CommManager.DATA_STATE_LAMP_OFF);
+			CAN1Comm.TxCANToMCU(247);
+			
+			break;
+		case CAN1CommManager.DATA_STATE_KEY_WORKLIGHT_LV1:
+			SelectWorkLampStatus = CAN1CommManager.DATA_STATE_KEY_WORKLIGHT_LV2;
+			CAN1Comm.Set_WorkLampOperationStatus_3435_PGN65527(CAN1CommManager.DATA_STATE_LAMP_ON);
+			CAN1Comm.Set_RearWorkLampOperationStatus_3446_PGN65527(CAN1CommManager.DATA_STATE_LAMP_ON);
+			CAN1Comm.TxCANToMCU(247);
+			
+			break;
+		case CAN1CommManager.DATA_STATE_KEY_WORKLIGHT_LV2:
+		default:
+			SelectWorkLampStatus = CAN1CommManager.DATA_STATE_KEY_WORKLIGHT_OFF;
+			CAN1Comm.Set_WorkLampOperationStatus_3435_PGN65527(CAN1CommManager.DATA_STATE_LAMP_OFF);
+			CAN1Comm.Set_RearWorkLampOperationStatus_3446_PGN65527(CAN1CommManager.DATA_STATE_LAMP_OFF);
+			CAN1Comm.TxCANToMCU(247);
+			
+			break;
+		}
+	}
+	
+	public void ClickBeaconLampHardKey(){
+		switch (SelectBeaconLamp) {
+		case CAN1CommManager.DATA_STATE_OFF:
+		default:
+			SelectBeaconLamp = CAN1CommManager.DATA_STATE_ON;
+			CAN1Comm.Set_BeaconLampOperationStatus_3444_PGN65527(CAN1CommManager.DATA_STATE_ON);
+			CAN1Comm.TxCANToMCU(247);
+			CAN1Comm.Set_BeaconLampOperationStatus_3444_PGN65527(3);
+			break;
+		case CAN1CommManager.DATA_STATE_ON:
+			SelectBeaconLamp = CAN1CommManager.DATA_STATE_OFF;
+			CAN1Comm.Set_BeaconLampOperationStatus_3444_PGN65527(CAN1CommManager.DATA_STATE_OFF);
+			CAN1Comm.TxCANToMCU(247);
+			CAN1Comm.Set_BeaconLampOperationStatus_3444_PGN65527(3);
+			break;
+		}		
+	}
+	
+	public void ClickRearWiperHardKey(){
+		switch (SelectWiperSpeedState) {
+		case CAN1CommManager.DATA_STATE_KEY_REARWIPER_SPEED_OFF:
+		default:
+			SelectWiperSpeedState = CAN1CommManager.DATA_STATE_KEY_REARWIPER_SPEED_INT;
+			CAN1Comm.Set_RearWiperOperationStatus_3451_PGN65527(CAN1CommManager.DATA_STATE_KEY_REARWIPER_SPEED_INT);
+			CAN1Comm.TxCANToMCU(247);
+			CAN1Comm.Set_RearWiperOperationStatus_3451_PGN65527(3);
+			break;
+		case CAN1CommManager.DATA_STATE_KEY_REARWIPER_SPEED_INT:
+			SelectWiperSpeedState = CAN1CommManager.DATA_STATE_KEY_REARWIPER_SPEED_LOW;
+			CAN1Comm.Set_RearWiperOperationStatus_3451_PGN65527(CAN1CommManager.DATA_STATE_KEY_REARWIPER_SPEED_LOW);
+			CAN1Comm.TxCANToMCU(247);
+			CAN1Comm.Set_RearWiperOperationStatus_3451_PGN65527(3);
+			break;
+		case CAN1CommManager.DATA_STATE_KEY_REARWIPER_SPEED_LOW:
+			SelectWiperSpeedState = CAN1CommManager.DATA_STATE_KEY_REARWIPER_SPEED_OFF;
+			CAN1Comm.Set_RearWiperOperationStatus_3451_PGN65527(CAN1CommManager.DATA_STATE_KEY_REARWIPER_SPEED_OFF);
+			CAN1Comm.TxCANToMCU(247);
+			CAN1Comm.Set_RearWiperOperationStatus_3451_PGN65527(3);
+			break;
+		}
+	}
 	/////////////////////////////////////////////////////
 	// ++, 150309 bwk
 	public void showMainScreen(){
@@ -1973,6 +2152,28 @@ public class Home extends Activity {
 					// TODO: handle exception
 					Log.e(TAG,"NullPointerException");
 				}
+			}else if(Data == CAN1CommManager.MAINLIGHT){
+				ClickMainLightHardKey();
+			}else if(Data == CAN1CommManager.WORKLIGHT){
+				ClickWorkLightHardKey();
+			}else if(Data == CAN1CommManager.BEACON_LAMP){
+				ClickBeaconLampHardKey();
+			}else if(Data == CAN1CommManager.REAR_WIPER){
+				ClickRearWiperHardKey();
+			}else if(Data == CAN1CommManager.LEFT || Data == CAN1CommManager.RIGHT){
+				if(ScreenIndex == SCREEN_STATE_MAIN_CAMERA_KEY){
+					ChangeCam(Data);
+				}
+			}else if(Data == CAN1CommManager.ESC){
+				if(ScreenIndex == SCREEN_STATE_MAIN_CAMERA_KEY){
+					ExitCam();
+				}
+			}else if(Data == CAN1CommManager.CAMERA){
+				if(CAN1Comm.CameraOnFlag ==  CAN1CommManager.STATE_CAMERA_OFF){
+					ExcuteCamActivitybyKey();
+				}else{
+					ExitCam();
+				}
 			}
 				
 		}
@@ -2132,7 +2333,18 @@ public class Home extends Activity {
 		{
 			ReqestErrorCode();
 		}
-		// --, 150326 bwk		
+		// --, 150326 bwk
+		
+		HeadLamp = CAN1Comm.Get_HeadLampOperationStatus_3436_PGN65527();
+		Illumination = CAN1Comm.Get_IlluminationOperationStatus_3438_PGN65527();
+		WorkLamp = CAN1Comm.Get_WorkLampOperationStatus_3435_PGN65527();
+		RearWorkLamp = CAN1Comm.Get_RearWorkLampOperationStatus_3446_PGN65527();
+		SelectBeaconLamp = CAN1Comm.Get_BeaconLampOperationStatus_3444_PGN65527();
+		SelectWiperSpeedState = CAN1Comm.Get_RearWiperOperationStatus_3451_PGN65527();
+
+		MainLightLampStatus(HeadLamp,Illumination);
+		WorkLightLampDisplay(WorkLamp,RearWorkLamp);
+		
 	}
 	public void UpdateUI() {
 		// TODO Auto-generated method stub
@@ -2186,6 +2398,7 @@ public class Home extends Activity {
 	public void CameraDisplay(){
 		if((ScreenIndex >= SCREEN_STATE_MAIN_B_TOP && ScreenIndex <= SCREEN_STATE_MAIN_B_END)
 		|| (ScreenIndex >= SCREEN_STATE_MAIN_A_TOP && ScreenIndex <= SCREEN_STATE_MAIN_A_END)	// ++, --, 150310 bwk
+		|| (ScreenIndex >= SCREEN_STATE_MENU_TOP   && ScreenIndex <= SCREEN_STATE_MENU_END)
 		|| ScreenIndex == SCREEN_STATE_MAIN_CAMERA_GEAR){
 			if(CameraReverseMode == CAN1CommManager.DATA_STATE_CAMERA_REVERSE_ON){
 				if(SelectGearDirection == CAN1CommManager.DATA_INDEX_SELECTGEAR_DIR_R){	

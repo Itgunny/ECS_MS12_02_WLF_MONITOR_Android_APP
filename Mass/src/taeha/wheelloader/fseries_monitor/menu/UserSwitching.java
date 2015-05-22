@@ -61,7 +61,8 @@ public class UserSwitching extends ParentFragment{
 	private static final int STATE_SOUNDOUTPUT				= 23;
 	private static final int STATE_OPERATION_HISTORY		= 24;	// ++, --, 150403 bwk 명칭 변경 STATE_HOURMETER -> STATE_OPERATION_HISTORY
 	private static final int STATE_FUEL_INFO				= 25;	// ++, --, 150403 bwk 항목 추가
-	
+	private static final int STATE_BOOM_DETENT_MODE			= 26;
+	private static final int STATE_BUCKET_DETENT_MODE		= 27;	
 	//////////////////////////////////////////////////
 	//RESOURCE////////////////////////////////////////
 	ImageButton imgbtnOK;
@@ -118,6 +119,9 @@ public class UserSwitching extends ParentFragment{
 	public int SoundOutput;
 	public int HourmeterDisplay;
 	public int FuelDisplay;
+
+	public int BoomDetentMode;
+	public int BucketDetentMode;
 	
 	int CursurIndex;
 	Handler HandleCursurDisplay;
@@ -363,11 +367,22 @@ public class UserSwitching extends ParentFragment{
 				ParentActivity.getResources().getString(string.Operation_History)
 				, ""
 				, ""));
-		adapter.addItem(new IconTextItemUserSwitching( ParentActivity.getResources().getDrawable(R.drawable.menu_management_machine_monitoring_bg_light),
+		adapter.addItem(new IconTextItemUserSwitching( ParentActivity.getResources().getDrawable(R.drawable.menu_management_machine_monitoring_bg_dark),
 				null,
 				ParentActivity.getResources().getString(string.Fuel_Consumption_History)
 				, ""
 				, ""));		
+		adapter.addItem(new IconTextItemUserSwitching( ParentActivity.getResources().getDrawable(R.drawable.menu_management_machine_monitoring_bg_light),
+				null,
+				ParentActivity.getResources().getString(string.Boom_Detent_Mode)
+				, ""
+				, ""));
+		adapter.addItem(new IconTextItemUserSwitching( ParentActivity.getResources().getDrawable(R.drawable.menu_management_machine_monitoring_bg_dark),
+				null,
+				ParentActivity.getResources().getString(string.Bucket_Detent_Mode)
+				, ""
+				, ""));		
+		
 	}
 	@Override
 	protected void InitButtonListener() {
@@ -493,6 +508,9 @@ public class UserSwitching extends ParentFragment{
 		SoundOutput = ParentActivity.SoundState;
 		HourmeterDisplay = ParentActivity.HourOdometerIndex;
 		FuelDisplay = ParentActivity.FuelIndex;
+		
+		BoomDetentMode = CAN1Comm.Get_BoomDetentMode_223_PGN61184_124();
+		BucketDetentMode = CAN1Comm.Get_BucketDetentMode_224_PGN61184_124();
 	}
 
 	@Override
@@ -616,6 +634,8 @@ public class UserSwitching extends ParentFragment{
 		SoundOutputDisplay(SoundOutput,_userdata.SoundOutput);
 		HourmeterDisplay(HourmeterDisplay,_userdata.HourmeterDisplay);
 		FuelDisplay(FuelDisplay,_userdata.FuelDisplay);		// ++, --, 150403 bwk
+		BoomDetentModeDisplay(BoomDetentMode, _userdata.BoomDetentMode);
+		BucketDetentModeDisplay(BucketDetentMode, _userdata.BucketDetentMode);
 	}
 	public void EngineModeDisplay(int SettingData, int LoadingData){
 		switch (SettingData) {
@@ -1602,7 +1622,69 @@ public class UserSwitching extends ParentFragment{
 		}
 		adapter.notifyDataSetChanged();		
 	}
-	/////////////////////////////////////////////////////////////////////	
+	/////////////////////////////////////////////////////////////////////
+	void BoomDetentModeDisplay(int SettingData, int LoadingData){
+		
+		switch (SettingData) {
+		case CAN1CommManager.DATA_STATE_KEY_DETENT_BOOM_OFF:
+			adapter.UpdateSecond(STATE_BOOM_DETENT_MODE, ParentActivity.getResources().getString(string.Off));
+			break;
+		case CAN1CommManager.DATA_STATE_KEY_DETENT_BOOM_UPDOWN:
+			adapter.UpdateSecond(STATE_BOOM_DETENT_MODE, ParentActivity.getResources().getString(string.On));
+			break;
+		default:
+			break;
+		}
+		switch (LoadingData) {
+		case CAN1CommManager.DATA_STATE_KEY_DETENT_BOOM_OFF:
+			adapter.UpdateThird(STATE_BOOM_DETENT_MODE, ParentActivity.getResources().getString(string.Off));
+			break;
+		case CAN1CommManager.DATA_STATE_KEY_DETENT_BOOM_UPDOWN:
+			adapter.UpdateThird(STATE_BOOM_DETENT_MODE, ParentActivity.getResources().getString(string.On));
+			break;
+		default:
+			break;
+		}
+		
+		if(SettingData != LoadingData){
+			adapter.UpdateIcon(STATE_BOOM_DETENT_MODE, ParentActivity.getResources().getDrawable(R.drawable.main_quick_user_x));
+		}else{
+			adapter.UpdateIcon(STATE_BOOM_DETENT_MODE, null);
+		}
+		adapter.notifyDataSetChanged();		
+	}
+	/////////////////////////////////////////////////////////////////////
+	void BucketDetentModeDisplay(int SettingData, int LoadingData){
+		
+		switch (SettingData) {
+		case CAN1CommManager.DATA_STATE_KEY_DETENT_BUCKET_OFF:
+			adapter.UpdateSecond(STATE_BUCKET_DETENT_MODE, ParentActivity.getResources().getString(string.Off));
+			break;
+		case CAN1CommManager.DATA_STATE_KEY_DETENT_BUCKET_IN:
+			adapter.UpdateSecond(STATE_BUCKET_DETENT_MODE, ParentActivity.getResources().getString(string.On));
+			break;
+		default:
+			break;
+		}
+		switch (LoadingData) {
+		case CAN1CommManager.DATA_STATE_KEY_DETENT_BUCKET_OFF:
+			adapter.UpdateThird(STATE_BUCKET_DETENT_MODE, ParentActivity.getResources().getString(string.Off));
+			break;
+		case CAN1CommManager.DATA_STATE_KEY_DETENT_BUCKET_IN:
+			adapter.UpdateThird(STATE_BUCKET_DETENT_MODE, ParentActivity.getResources().getString(string.On));
+			break;
+		default:
+			break;
+		}
+		
+		if(SettingData != LoadingData){
+			adapter.UpdateIcon(STATE_BUCKET_DETENT_MODE, ParentActivity.getResources().getDrawable(R.drawable.main_quick_user_x));
+		}else{
+			adapter.UpdateIcon(STATE_BUCKET_DETENT_MODE, null);
+		}
+		adapter.notifyDataSetChanged();		
+	}
+	/////////////////////////////////////////////////////////////////////
 
 	public void ClickOK(){
 		ParentActivity.UserIndex = SelectIndex;		// ++, --, 150212 bwk
@@ -1664,7 +1746,8 @@ public class UserSwitching extends ParentFragment{
 		_userdata.SoundOutput = SoundOutput;
 		_userdata.HourmeterDisplay = HourmeterDisplay;
 		_userdata.FuelDisplay = FuelDisplay;
-
+		_userdata.BoomDetentMode = BoomDetentMode;
+		_userdata.BucketDetentMode = BucketDetentMode;
 		
 		switch (SelectIndex) {
 		case 1:
@@ -1758,6 +1841,15 @@ public class UserSwitching extends ParentFragment{
 		CAN1Comm.Set_SpeedmeterUnitChange_PGN65327(_userdata.UnitOdo);
 		CAN1Comm.TxCANToMCU(47);
 		
+		
+		CAN1Comm.Set_BoomDetentMode_223_PGN61184_123(_userdata.BoomDetentMode);
+		CAN1Comm.TxCANToMCU(123);
+		CAN1Comm.Set_BoomDetentMode_223_PGN61184_123(7);
+
+		CAN1Comm.Set_BucketDetentMode_224_PGN61184_123(_userdata.BucketDetentMode);
+		CAN1Comm.TxCANToMCU(123);
+		CAN1Comm.Set_BucketDetentMode_224_PGN61184_123(7);
+		
 		ParentActivity.WeighingErrorDetect = _userdata.ErrorDetection;
 
 		// ++, 150407 bwk
@@ -1803,9 +1895,13 @@ public class UserSwitching extends ParentFragment{
 		
 		// ++, 150213 bwk
 		ParentActivity.LanguageIndex = _userdata.Language;
-		ParentActivity.setLanguage();	
+		ParentActivity.setLanguage();
 		// --, 150213 bwk
+		
+		ParentActivity.DisplayType = _userdata.DisplayType;
 		ParentActivity.SavePref();
+		
+		
 	}
 	public void ClickDefault(){
 		SelectIndex = 1;

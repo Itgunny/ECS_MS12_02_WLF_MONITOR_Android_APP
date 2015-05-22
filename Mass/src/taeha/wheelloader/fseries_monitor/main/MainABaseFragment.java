@@ -1136,6 +1136,19 @@ public class MainABaseFragment extends ParentFragment{
 		ParentActivity.ScreenIndex = ParentActivity.SCREEN_STATE_MAIN_A_KEY_REARWIPER;
 		_MainAKeyTitleFragment = new MainAKeyTitleFragment();
 		_MainAKeyRearWiperFragment = new MainAKeyRearWiperFragment();
+		_MainAKeyRearWiperFragment.LongKey = 0;
+		_MainAKeyTitleFragment.setTitleIcon(ParentActivity.getResources().getDrawable(R.drawable.main_key_title_rearwiper));
+		_MainAKeyTitleFragment.setTitleText(ParentActivity.getResources().getString(string.Rear_Wiper));
+		KeyTitleChangeAnimation.StartChangeAnimation(_MainAKeyTitleFragment);
+		KeyBodyChangeAnimation.StartChangeAnimation(_MainAKeyRearWiperFragment);
+	}
+	public void showRearWiperLongKeyAnimation(){
+		ParentActivity.StartAnimationRunningTimer();
+		showKeyScreenAnimation();
+		ParentActivity.ScreenIndex = ParentActivity.SCREEN_STATE_MAIN_A_KEY_REARWIPER;
+		_MainAKeyTitleFragment = new MainAKeyTitleFragment();
+		_MainAKeyRearWiperFragment = new MainAKeyRearWiperFragment();
+		_MainAKeyRearWiperFragment.LongKey = 1;
 		_MainAKeyTitleFragment.setTitleIcon(ParentActivity.getResources().getDrawable(R.drawable.main_key_title_rearwiper));
 		_MainAKeyTitleFragment.setTitleText(ParentActivity.getResources().getString(string.Rear_Wiper));
 		KeyTitleChangeAnimation.StartChangeAnimation(_MainAKeyTitleFragment);
@@ -1387,6 +1400,13 @@ public class MainABaseFragment extends ParentFragment{
 		case CAN1CommManager.LONG_LEFT_RIGHT_ENTER:
 			ClickKeyButtonLongLeftRightEnter();
 			break;
+		case CAN1CommManager.LONG_REAR_WIPER:
+			if(ParentActivity.AnimationRunningFlag == true)
+				return;
+			if(ParentActivity.ScreenIndex != ParentActivity.SCREEN_STATE_MAIN_A_KEY_REARWIPER)
+				showRearWiperLongKeyAnimation();
+			break;
+			
 		default:
 			break;
 		}

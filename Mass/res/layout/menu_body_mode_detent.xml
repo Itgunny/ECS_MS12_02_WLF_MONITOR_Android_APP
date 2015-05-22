@@ -83,6 +83,15 @@
                 android:text="@string/Save_Position"
                 android:textAppearance="?android:attr/textAppearanceLarge" />
 
+      		 <ImageView
+        		android:id="@+id/imageView_menu_body_mode_detent_boom_boarder"
+        		android:layout_width="wrap_content"
+        		android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_marginTop="59dp"
+        		android:gravity="center"
+        		android:src="@drawable/main_key_washer_btn_s02" />
+            
         </RelativeLayout>
         
         <RelativeLayout
@@ -151,6 +160,15 @@
                 android:text="@string/Save_Position"
                 android:textAppearance="?android:attr/textAppearanceLarge" />
 
+      		 <ImageView
+        		android:id="@+id/imageView_menu_body_mode_detent_bucket_boarder"
+        		android:layout_width="wrap_content"
+        		android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_marginTop="59dp"
+        		android:gravity="center"
+        		android:src="@drawable/main_key_washer_btn_s02" />
+      		             
         </RelativeLayout>
 
     </RelativeLayout>
