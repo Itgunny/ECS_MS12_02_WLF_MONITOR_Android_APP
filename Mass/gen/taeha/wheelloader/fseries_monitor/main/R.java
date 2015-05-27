@@ -3618,7 +3618,7 @@ public final class R {
         public static final int touch=0x7f050001;
     }
     public static final class string {
-        public static final int ACU=0x7f0801bf;
+        public static final int ACU=0x7f0801c0;
         public static final int AEB=0x7f080153;
         public static final int AH=0x7f080065;
         public static final int AL=0x7f080063;
@@ -3654,14 +3654,14 @@ public final class R {
         public static final int Boom_Bucket_Detent_Mode=0x7f0800d0;
         public static final int Boom_Detent_Mode=0x7f080091;
         public static final int Boom_Down=0x7f0800e9;
-        public static final int Boom_Down_Response_Adjust=0x7f0801c2;
-        public static final int Boom_Lever_Floating_Position_Adjust=0x7f0801c0;
+        public static final int Boom_Down_Response_Adjust=0x7f0801c3;
+        public static final int Boom_Lever_Floating_Position_Adjust=0x7f0801c1;
         public static final int Boom_Pressure_Calibration=0x7f0800a8;
         public static final int Boom_Up=0x7f0800e8;
         public static final int Boom_Up_Speed_Error=0x7f08017a;
         public static final int Boom_lifting_will_be_stopped_automatically_at_a_certain_position_and_calibration_is_completed=0x7f080160;
         public static final int Brake_Pedal_Sensor_Calibration=0x7f080152;
-        public static final int Breather_Hydraulic_tank=0x7f0801ca;
+        public static final int Breather_Hydraulic_tank=0x7f0801cb;
         /**  Menu Management End 
  Menu Preference Start 
  Menu Management End 
@@ -3693,11 +3693,11 @@ public final class R {
  Menu Management End 
  Menu Preference Start 
          */
-        public static final int Brightness_Setting=0x7f080196;
+        public static final int Brightness_Setting=0x7f080197;
         public static final int Bucket=0x7f08001c;
         public static final int Bucket_Detent_Mode=0x7f080092;
         public static final int Bucket_Dump=0x7f0800eb;
-        public static final int Bucket_Dump_Response_Adjust=0x7f0801c3;
+        public static final int Bucket_Dump_Response_Adjust=0x7f0801c4;
         public static final int Bucket_Full_In_Error=0x7f080072;
         public static final int Bucket_Full_In_Error_Warning=0x7f080087;
         public static final int Bucket_In=0x7f0800ea;
@@ -3709,7 +3709,7 @@ public final class R {
         public static final int CAM_4=0x7f0800e0;
         public static final int CCO_MODE=0x7f080052;
         public static final int CCO_Mode=0x7f0800c8;
-        public static final int CURRENT_FUEL_RATE=0x7f0801b8;
+        public static final int CURRENT_FUEL_RATE=0x7f0801b9;
         public static final int Calibration=0x7f08013b;
         public static final int Calibration_ID=0x7f08012d;
         public static final int Calibration_Version_Number=0x7f080125;
@@ -3719,41 +3719,41 @@ public final class R {
         public static final int Camera_Setting=0x7f0800d4;
         public static final int Cancel=0x7f08000f;
         public static final int Change_AS_Phone_Number=0x7f08013d;
-        public static final int Change_Cycle=0x7f080191;
+        public static final int Change_Cycle=0x7f080192;
         public static final int Change_Password=0x7f080140;
         public static final int Check_Armrest_Swtich_On=0x7f080049;
         public static final int Check_EHCU_Fault_Code=0x7f080046;
         public static final int Check_Engine_Run=0x7f08004a;
         public static final int Check_Machine_Stop=0x7f08004b;
-        public static final int Check_Radio_mode_is_AUX_mode=0x7f0801a5;
+        public static final int Check_Radio_mode_is_AUX_mode=0x7f0801a6;
         public static final int Check_Seat_Switch_On=0x7f080048;
         public static final int Check_Steering_Joystick_Position=0x7f080047;
         public static final int Check_TM_Control_Selection=0x7f08004c;
         public static final int Check_joystick_steering_enable_fail_condition=0x7f080045;
         public static final int Clear=0x7f080023;
-        public static final int Clock_Setting=0x7f080197;
+        public static final int Clock_Setting=0x7f080198;
         public static final int CloseMira=0x7f08008b;
         public static final int CloseMulti=0x7f08008a;
         public static final int Cluster=0x7f080109;
         public static final int Communication_Antenna=0x7f080117;
         public static final int Complete=0x7f08015a;
-        public static final int Confirm_Reset_elapsed_time=0x7f080194;
+        public static final int Confirm_Reset_elapsed_time=0x7f080195;
         public static final int Coolant_Temp=0x7f08006f;
         public static final int Cooling_Fan_Reverse_Mode=0x7f0800d5;
-        public static final int Count=0x7f08018e;
+        public static final int Count=0x7f08018f;
         public static final int Crankcase_Ventilation_Filter=0x7f08018c;
         public static final int Crash_Data=0x7f080005;
         public static final int Crash_Toast_Text=0x7f080003;
         public static final int Current=0x7f080102;
         public static final int Current_Data=0x7f08007b;
-        public static final int Current_Fuel_Rate=0x7f0801b9;
+        public static final int Current_Fuel_Rate=0x7f0801ba;
         public static final int Current_Password=0x7f08003b;
         public static final int Customer_Serial_Number=0x7f080120;
-        public static final int Cycle=0x7f080190;
+        public static final int Cycle=0x7f080191;
         public static final int Daily=0x7f0800a9;
         public static final int Daily_Record=0x7f080137;
         public static final int Day=0x7f080030;
-        public static final int Daytime=0x7f08019c;
+        public static final int Daytime=0x7f08019d;
         public static final int Default=0x7f080018;
         public static final int Delete=0x7f080150;
         public static final int Delete_Logged_Fault=0x7f080132;
@@ -3762,11 +3762,11 @@ public final class R {
         public static final int Detent_Setting=0x7f08009c;
         public static final int Disable=0x7f080014;
         public static final int Display_Order=0x7f0800dc;
-        public static final int Display_Style=0x7f08019a;
+        public static final int Display_Style=0x7f08019b;
         public static final int Do_not_show_again=0x7f0800b8;
         public static final int Do_you_want_to_turn_on_Auto_Grease=0x7f0800b7;
         public static final int Do_you_want_to_turn_on_Mirror_Heat=0x7f0800b6;
-        public static final int Dutch=0x7f0801af;
+        public static final int Dutch=0x7f0801b0;
         public static final int ECM=0x7f080106;
         public static final int ECM_Identifier=0x7f080126;
         public static final int ECM_Part_Number=0x7f080122;
@@ -3816,7 +3816,7 @@ public final class R {
         public static final int EST37A_Part_Number=0x7f08011d;
         public static final int ETC=0x7f0800c7;
         public static final int Econo=0x7f0800ed;
-        public static final int Elapsed_Time=0x7f08018f;
+        public static final int Elapsed_Time=0x7f080190;
         public static final int Enable=0x7f080015;
         /**  Menu End 
  Menu Mode Start 
@@ -3852,36 +3852,36 @@ public final class R {
         public static final int Eng=0x7f0800c4;
         public static final int Engine=0x7f08012f;
         public static final int Engine_Auto_Shutdown=0x7f0800d3;
-        public static final int Engine_Delay_Shutdown=0x7f0801bd;
+        public static final int Engine_Delay_Shutdown=0x7f0801be;
         public static final int Engine_Mode=0x7f0800ec;
         public static final int Engine_Setting=0x7f0800cd;
         public static final int Engine_Speed=0x7f0800cc;
         public static final int Engine_oil=0x7f08017f;
         public static final int Engine_oil_filter=0x7f080183;
-        public static final int English=0x7f0801a9;
+        public static final int English=0x7f0801aa;
         public static final int Error_Detection=0x7f0800a7;
         public static final int Error_Report=0x7f080004;
-        public static final int Estonian=0x7f0801b3;
+        public static final int Estonian=0x7f0801b4;
         public static final int Excute=0x7f0800f5;
-        public static final int Excute_Locking_Attachment=0x7f0801ba;
-        public static final int Excute_Unlocking_Attachment=0x7f0801bb;
+        public static final int Excute_Locking_Attachment=0x7f0801bb;
+        public static final int Excute_Unlocking_Attachment=0x7f0801bc;
         public static final int Excuting_Locking_Attachment=0x7f0800b3;
         public static final int Excuting_Unlocking_Attachment=0x7f0800b4;
-        public static final int External_Aux=0x7f08019f;
+        public static final int External_Aux=0x7f0801a0;
         public static final int F=0x7f080008;
-        public static final int FN=0x7f0801c8;
+        public static final int FN=0x7f0801c9;
         public static final int Fan_EPPR_Current_Adjust=0x7f08017d;
         public static final int Fast=0x7f0800f3;
         public static final int Fault_History=0x7f0800fa;
         public static final int Fine_Modulation=0x7f08009d;
-        public static final int Fingertip_Calibration=0x7f0801c1;
+        public static final int Fingertip_Calibration=0x7f0801c2;
         public static final int Finish=0x7f08004d;
-        public static final int Finnish=0x7f0801b4;
+        public static final int Finnish=0x7f0801b5;
         public static final int Firmware_Version=0x7f08011c;
         public static final int First_Calibration=0x7f08015c;
         public static final int First_boom_pressure_calibration_completed=0x7f080165;
         public static final int Forward=0x7f0800b1;
-        public static final int French=0x7f0801ab;
+        public static final int French=0x7f0801ac;
         public static final int Front=0x7f0800a0;
         public static final int Front_Axle_Temp=0x7f08008c;
         public static final int Front_axle_oil=0x7f08018a;
@@ -3891,7 +3891,7 @@ public final class R {
         public static final int GPS_Antenna=0x7f080118;
         public static final int Gear_Linkage_Mode=0x7f0800e5;
         public static final int General_Record=0x7f080135;
-        public static final int German=0x7f0801aa;
+        public static final int German=0x7f0801ab;
         public static final int H=0x7f080061;
         public static final int HYD=0x7f0800c6;
         public static final int HYD_Temp=0x7f08006b;
@@ -3922,7 +3922,7 @@ public final class R {
         public static final int Hydraulic_Oil_Temp_Error=0x7f08017c;
         public static final int Hydraulic_Oil_Temp_Low_Warning=0x7f080089;
         public static final int Hydraulic_Tank_Air_Breather_Filter=0x7f080186;
-        public static final int Hydraulic_Tank_Drain_Filter=0x7f0801cb;
+        public static final int Hydraulic_Tank_Drain_Filter=0x7f08018e;
         public static final int Hydraulic_oil=0x7f080180;
         public static final int Hydraulic_oil_return_filter=0x7f080182;
         public static final int Hz=0x7f0800f0;
@@ -3939,11 +3939,11 @@ public final class R {
  Language End 
  ETC Start 
          */
-        public static final int Input_new_phone_number=0x7f0801b5;
+        public static final int Input_new_phone_number=0x7f0801b6;
         public static final int Intermittent=0x7f0800ad;
-        public static final int Internal_Speaker=0x7f08019e;
+        public static final int Internal_Speaker=0x7f08019f;
         public static final int Interval=0x7f0800e6;
-        public static final int Italian=0x7f0801ae;
+        public static final int Italian=0x7f0801af;
         public static final int Item=0x7f08007a;
         public static final int Joystick_Stroke=0x7f0800fe;
         public static final int Kick_Down=0x7f0800cb;
@@ -3978,7 +3978,7 @@ public final class R {
  Menu Multimedia End 
  Language Start 
          */
-        public static final int Korean=0x7f0801a8;
+        public static final int Korean=0x7f0801a9;
         public static final int L=0x7f08005f;
         public static final int LATEST_FUEL_CONSUMED=0x7f0801cd;
         public static final int LATEST_HOURMETER=0x7f080056;
@@ -3993,8 +3993,8 @@ public final class R {
         public static final int Lamp_RideControl=0x7f080081;
         public static final int Lamp_SeatBelt=0x7f08007d;
         public static final int Lamp_Warmingup=0x7f080083;
-        public static final int Language=0x7f0801a0;
-        public static final int Latest_Fuel_Consumed=0x7f0801c7;
+        public static final int Language=0x7f0801a1;
+        public static final int Latest_Fuel_Consumed=0x7f0801c8;
         public static final int Latest_Hourmeter=0x7f080067;
         public static final int Latest_Odometer=0x7f08006a;
         public static final int Lift_the_boom_to__5_0=0x7f080156;
@@ -4111,7 +4111,7 @@ public final class R {
          */
         public static final int Main_Light=0x7f080093;
         public static final int Maintenance=0x7f080011;
-        public static final int Maintenance_History=0x7f080193;
+        public static final int Maintenance_History=0x7f080194;
         public static final int Manage_Tag=0x7f08014d;
         public static final int Manage_Usage=0x7f08014c;
         public static final int Management=0x7f0800c1;
@@ -4151,7 +4151,7 @@ public final class R {
  Menu Preference End 
  Menu Multimedia Start 
          */
-        public static final int Media_Palyer=0x7f0801a6;
+        public static final int Media_Palyer=0x7f0801a7;
         public static final int Min=0x7f08002f;
         public static final int Mirror_Heat=0x7f08009b;
         public static final int Mirror_Heat_is_NOT_equipped=0x7f0800bc;
@@ -4198,7 +4198,7 @@ public final class R {
         public static final int Network_Type=0x7f08010e;
         public static final int New_Password=0x7f08003c;
         public static final int Next=0x7f080159;
-        public static final int Nighttime=0x7f08019d;
+        public static final int Nighttime=0x7f08019e;
         public static final int No_Changes_executed=0x7f080040;
         public static final int No_Offset=0x7f080166;
         public static final int Normal=0x7f0800f2;
@@ -4221,9 +4221,9 @@ public final class R {
         public static final int Percent=0x7f080043;
         public static final int Pilot_line_filter_element=0x7f080181;
         public static final int Please_Reset_Power=0x7f08004f;
-        public static final int Please_press_Enter_key=0x7f0801c5;
+        public static final int Please_press_Enter_key=0x7f0801c6;
         public static final int Please_refer_to_machine_manual_for_more_detailed_description=0x7f080131;
-        public static final int Portuguese=0x7f0801ad;
+        public static final int Portuguese=0x7f0801ae;
         public static final int Position_Lamp=0x7f08009e;
         public static final int Position_Update=0x7f080119;
         public static final int Power=0x7f0800ef;
@@ -4238,7 +4238,7 @@ public final class R {
         public static final int Quick_Coupler=0x7f080096;
         public static final int Quick_Coupler_is_NOT_equipped=0x7f0800bd;
         public static final int RMCU=0x7f08010a;
-        public static final int RMCU_Machine_Information=0x7f0801c9;
+        public static final int RMCU_Machine_Information=0x7f0801ca;
         public static final int Radiator_engine_coolant=0x7f080187;
         public static final int Re_entering_New_Password=0x7f08003d;
         public static final int Re_entering_Password=0x7f08003a;
@@ -4246,12 +4246,12 @@ public final class R {
         public static final int Rear_Axle_Temp=0x7f08008d;
         public static final int Rear_Wiper=0x7f08009a;
         public static final int Rear_axle_oil=0x7f08018b;
-        public static final int Recommend_deleting_unused_tag_for_security_when_you_register_new_tag=0x7f080195;
+        public static final int Recommend_deleting_unused_tag_for_security_when_you_register_new_tag=0x7f080196;
         public static final int Registered_Tag=0x7f08014e;
         public static final int Registering=0x7f08016a;
         public static final int Registration=0x7f08014f;
         public static final int Registration_failed=0x7f080172;
-        public static final int Replacement=0x7f080192;
+        public static final int Replacement=0x7f080193;
         public static final int Ride_Control=0x7f080097;
         public static final int Ride_Control_is_NOT_equipped=0x7f0800be;
         public static final int Roll_in_the_bucket_at_max_range_lower_the_boom_at_min_height=0x7f08015e;
@@ -4265,45 +4265,45 @@ public final class R {
         public static final int Sensor_Error=0x7f080178;
         public static final int Sensor_Monitoring=0x7f080162;
         public static final int Serial_Number=0x7f080111;
-        public static final int Service_Contact=0x7f0801c4;
+        public static final int Service_Contact=0x7f0801c5;
         public static final int Service_Menu=0x7f08013e;
         public static final int Service_Password=0x7f080035;
         public static final int Set_P_mode_step_on_pedal_max_range_press_Start_button_lift_the_boom_with_the_hydraulic_control_in_detent_position=0x7f080161;
         public static final int Setting=0x7f080022;
         public static final int Shift_Mode=0x7f0800ca;
         public static final int Skip=0x7f080041;
-        public static final int Slovakian=0x7f0801b2;
+        public static final int Slovakian=0x7f0801b3;
         public static final int Slow=0x7f0800f1;
         public static final int Smart_Key=0x7f080141;
-        public static final int Smart_Terminal=0x7f0801a7;
+        public static final int Smart_Terminal=0x7f0801a8;
         public static final int Soft_End_Stop=0x7f0800d2;
         public static final int Software_Data_Date_Stamp=0x7f080124;
         public static final int Software_Update=0x7f08010d;
         public static final int Software_Version=0x7f080121;
-        public static final int Sound_Output_Setting=0x7f080199;
-        public static final int Spanish=0x7f0801ac;
+        public static final int Sound_Output_Setting=0x7f08019a;
+        public static final int Spanish=0x7f0801ad;
         public static final int Speed=0x7f080027;
         public static final int Speed_Limit_Setting=0x7f080163;
         public static final int Speedometer_Setting=0x7f08013c;
         public static final int Standard=0x7f0800ee;
         public static final int Start=0x7f08015b;
-        public static final int SuddenChange_BucketFullIn_Error_Warning=0x7f0801c6;
+        public static final int SuddenChange_BucketFullIn_Error_Warning=0x7f0801c7;
         public static final int Sudden_Change_Error=0x7f080073;
         public static final int Sudden_Change_Error_Warning=0x7f080088;
-        public static final int Swedish=0x7f0801b0;
+        public static final int Swedish=0x7f0801b1;
         public static final int TCU=0x7f080105;
         public static final int TC_LOCK_UP=0x7f080055;
         public static final int TC_Lock_Up=0x7f0800ce;
         public static final int TM=0x7f0800c5;
         public static final int TM_Oil_Temp=0x7f08006c;
-        public static final int TOTAL_HOURMETER=0x7f0801b7;
+        public static final int TOTAL_HOURMETER=0x7f0801b8;
         public static final int TOTAL_ODOMETER=0x7f080058;
         public static final int Tag_already_registered=0x7f080171;
         public static final int Temp=0x7f080026;
         public static final int This_machine_does_not_support_this_feature=0x7f0800b9;
         public static final int Time=0x7f0800e7;
         public static final int Time_Out=0x7f080179;
-        public static final int Time_settings_for_daytime=0x7f08019b;
+        public static final int Time_settings_for_daytime=0x7f08019c;
         public static final int Total_A=0x7f0800aa;
         public static final int Total_B=0x7f0800ab;
         public static final int Total_C=0x7f0800ac;
@@ -4312,13 +4312,13 @@ public final class R {
         public static final int Transmission=0x7f080130;
         public static final int Transmission_oil=0x7f080188;
         public static final int Transmission_oil_filter=0x7f080189;
-        public static final int Turkish=0x7f0801b1;
+        public static final int Turkish=0x7f0801b2;
         public static final int Turn_the_engine_off_for_sensor_calibration=0x7f08017e;
-        public static final int Type_A=0x7f0801a1;
-        public static final int Type_B=0x7f0801a2;
-        public static final int Unit_C=0x7f0801a3;
-        public static final int Unit_F=0x7f0801a4;
-        public static final int Unit_Setting=0x7f080198;
+        public static final int Type_A=0x7f0801a2;
+        public static final int Type_B=0x7f0801a3;
+        public static final int Unit_C=0x7f0801a4;
+        public static final int Unit_F=0x7f0801a5;
+        public static final int Unit_Setting=0x7f080199;
         public static final int Unlocking_Attachment=0x7f0800a3;
         public static final int User1=0x7f080074;
         public static final int User2=0x7f080075;
@@ -4329,12 +4329,12 @@ public final class R {
         public static final int V=0x7f080009;
         public static final int Version_Information=0x7f0800fc;
         public static final int Very_Fast=0x7f0800f4;
-        public static final int WARMING_UP=0x7f0801b6;
+        public static final int WARMING_UP=0x7f0801b7;
         public static final int Waiting_for_initialization=0x7f080033;
-        public static final int Warming_Up=0x7f0801bc;
+        public static final int Warming_Up=0x7f0801bd;
         public static final int Washer=0x7f0800af;
         public static final int Weighing_Display=0x7f0800a6;
-        public static final int Weighing_Information=0x7f0801be;
+        public static final int Weighing_Information=0x7f0801bf;
         public static final int Weighing_System=0x7f08006e;
         public static final int Weighing_System_Compensation=0x7f080164;
         public static final int Weighing_System_Mode=0x7f0800a5;

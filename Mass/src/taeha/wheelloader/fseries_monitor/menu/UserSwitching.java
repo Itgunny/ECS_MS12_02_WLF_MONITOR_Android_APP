@@ -1687,7 +1687,7 @@ public class UserSwitching extends ParentFragment{
 	/////////////////////////////////////////////////////////////////////
 
 	public void ClickOK(){
-		ParentActivity.UserIndex = SelectIndex;		// ++, --, 150212 bwk
+//		ParentActivity.UserIndex = SelectIndex;		// ++, --, 150212 bwk
 		if(ParentActivity.AnimationRunningFlag == true)
 			return;
 		else
@@ -1776,6 +1776,7 @@ public class UserSwitching extends ParentFragment{
 		
 	}
 	public void ClickApply(){
+		ParentActivity.UserIndex = SelectIndex;
 		UserData _userdata;
 		_userdata = new UserData();
 		switch (SelectIndex) {
@@ -1901,6 +1902,18 @@ public class UserSwitching extends ParentFragment{
 		ParentActivity.DisplayType = _userdata.DisplayType;
 		ParentActivity.SavePref();
 		
+		ParentActivity.SoundState = _userdata.SoundOutput;
+		ParentActivity.SavePref();
+		try {
+			CAN1Comm.LineOutfromJNI(_userdata.SoundOutput);
+		} catch (NullPointerException e) {
+			// TODO: handle exception
+			Log.e(TAG,"NullPointerException");
+		}
+		catch (Throwable t) {
+			// TODO: handle exception
+			Log.e(TAG,"Load Library Error");
+		}			
 		
 	}
 	public void ClickDefault(){

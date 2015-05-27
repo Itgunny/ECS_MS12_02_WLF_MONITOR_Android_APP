@@ -115,6 +115,7 @@ public class MainBKeyAutoGreaseFragment extends ParentFragment{
 	protected void GetDataFromNative() {
 		// TODO Auto-generated method stub
 		AutoGrease = CAN1Comm.Get_AutoGreaseOperationStatus_3449_PGN65527();
+//		Log.d(TAG,"AutoGrease="+AutoGrease);
 	}
 
 	@Override

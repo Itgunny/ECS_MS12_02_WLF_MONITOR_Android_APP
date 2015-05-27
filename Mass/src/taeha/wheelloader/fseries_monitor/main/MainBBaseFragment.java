@@ -1503,6 +1503,7 @@ public class MainBBaseFragment extends ParentFragment{
 	}
 	// --, 150331 bwk
 	public void showQuickScreen(){
+		_MainBVirtualKeyFragment = new MainBVirtualKeyFragment();
 		VirtualKeyChangeAnimation.StartChangeAnimation(_MainBVirtualKeyFragment);
 		
 		showCenterQuick();

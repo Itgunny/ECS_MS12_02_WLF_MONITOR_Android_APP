@@ -72,7 +72,7 @@ public class Home extends Activity {
 	public static final int VERSION_HIGH 		= 2;
 	public static final int VERSION_LOW 		= 0;
 	public static final int VERSION_SUB_HIGH 	= 0;
-	public static final int VERSION_SUB_LOW 	= 0;
+	public static final int VERSION_SUB_LOW 	= 1;
 	////1.0.2.3
 	// UI B 안 최초 적용 2014.12.10
 	////1.0.2.4
@@ -478,6 +478,15 @@ public class Home extends Activity {
 	//	- UI Ton 좌표 맞춤
 	// 10. 클러스터 H/W Version 표시 추가
 	// 11. F.01.01 저항값 범위 변경 : 708~728 -> 688~738
+	//// v2.0.0.1
+	// 1. Maintance : draulic Tank Air Breather Filter에서 주기변경 누르면 Crash 뜨는 현상
+	//	- 다국어 적용하면서 문구가 삭제되어 발생 -> 변경된 문구로 표시
+	// 2. Main - Detent : 위치저장 안되는 현상 해결
+	// 3. CCO, Display Mode : 초기값과 UserSwitch Default 값 통일
+	// 4. Main A Quick에서 소모품관리/UserSwitch/현재고장 페이지 이동하였다가 Back하였을 경우 가상키패드 안되는 현상 해결
+	// 5. UserSwitching
+	//	- 초기 커서 위치를 마지막 선택한 User에서 기본값 혹은 적용된 사용자전환 으로 표시
+	//	- 사운드 적용안되는 현상 개선
 	//////////////////////////////////////////////////////////////////////////////////////
 	
 	// TAG
@@ -1770,7 +1779,7 @@ public class Home extends Activity {
 		
 		_userdata.EngineMode = SharePref.getInt(strEngineMode, CAN1CommManager.DATA_STATE_ENGINE_MODE_PWR);
 		//_userdata.WarmingUp = SharePref.getInt(strWarmingUp, CAN1CommManager.DATA_STATE_ENGINE_WARMINGUP_OFF);
-		_userdata.CCOMode = SharePref.getInt(strCCOMode, CAN1CommManager.DATA_STATE_TM_CLUTCHCUTOFF_OFF);
+		_userdata.CCOMode = SharePref.getInt(strCCOMode, CAN1CommManager.DATA_STATE_TM_CLUTCHCUTOFF_H);
 		_userdata.ShiftMode = SharePref.getInt(strShiftMode, CAN1CommManager.DATA_STATE_TM_SHIFTMODE_MANUAL);
 		_userdata.TCLockUp = SharePref.getInt(strTCLockUp, CAN1CommManager.DATA_STATE_TM_LOCKUPCLUTCH_ON);
 		_userdata.RideControl = SharePref.getInt(strRideControl, CAN1CommManager.DATA_STATE_RIDECONTROL_OFF);
@@ -1792,7 +1801,7 @@ public class Home extends Activity {
 		_userdata.BrightnessAutoStartTime = SharePref.getInt(strBrightnessAutoStartTime,8);
 		_userdata.BrightnessAutoEndTime = SharePref.getInt(strBrightnessAutoEndTime,18);
 		// --, 150407 bwk
-		_userdata.DisplayType = SharePref.getInt(strDisplayType,Home.DISPLAY_TYPE_A);
+		_userdata.DisplayType = SharePref.getInt(strDisplayType,Home.DISPLAY_TYPE_B);
 		_userdata.UnitTemp = SharePref.getInt(strUnitTemp, Home.UNIT_TEMP_C);
 		_userdata.UnitOdo = SharePref.getInt(strUnitOdo, Home.UNIT_ODO_KM);
 		_userdata.UnitWeight = SharePref.getInt(strUnitWeight, Home.UNIT_WEIGHT_TON);

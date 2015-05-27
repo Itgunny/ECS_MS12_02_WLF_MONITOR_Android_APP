@@ -242,27 +242,27 @@ public class MainBKeyDetentFragment extends ParentFragment{
 	public void CheckBoomBucketDetent(){
 		if(SendCount > 5){
 			if(textViewBoomSavePosition.isPressed() == true){
-				if((CursurIndex == 3) || (CursurIndex == 8)){
-					
-				}else
-				{
-					CursurIndex = 3;
-					imageViewBucketSavePositionBoarder.setVisibility(View.INVISIBLE);
-					CursurDisplay(CursurIndex);
-				}
+//				if((CursurIndex == 3) || (CursurIndex == 8)){
+//					
+//				}else
+//				{
+//					CursurIndex = 3;
+//					imageViewBucketSavePositionBoarder.setVisibility(View.INVISIBLE);
+//					CursurDisplay(CursurIndex);
+//				}
 				
 				CAN1Comm.Set_RequestDetentReleasePositionSetting_PGN61184_123(CAN1CommManager.DATA_STATE_KEY_DETENT_BOOM_POS);
 				CAN1Comm.TxCANToMCU(123);
 				CAN1Comm.Set_RequestDetentReleasePositionSetting_PGN61184_123(15);
 			}else if(textViewBucketSavePosition.isPressed() == true){
-				if((CursurIndex == 6) || (CursurIndex == 8)){
-					
-				}else
-				{
-					CursurIndex = 6;
-					imageViewBoomSavePositionBoarder.setVisibility(View.INVISIBLE);
-					CursurDisplay(CursurIndex);
-				}
+//				if((CursurIndex == 6) || (CursurIndex == 8)){
+//					
+//				}else
+//				{
+//					CursurIndex = 6;
+//					imageViewBoomSavePositionBoarder.setVisibility(View.INVISIBLE);
+//					CursurDisplay(CursurIndex);
+//				}
 				
 				CAN1Comm.Set_RequestDetentReleasePositionSetting_PGN61184_123(CAN1CommManager.DATA_STATE_KEY_DETENT_BUCKET_POS);
 				CAN1Comm.TxCANToMCU(123);
