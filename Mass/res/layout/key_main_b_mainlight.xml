@@ -3,14 +3,16 @@
     android:id="@+id/RelativeLayout_key_main_b_mainlight"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/main_key_bg" >
+    android:background="@drawable/main_key_bg" 
+    android:splitMotionEvents="false">
     
     <RadioGroup
         android:id="@+id/radioGroup_key_main_b_mainlight"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="111dp"
-        android:layout_marginTop="101dp" >
+        android:layout_marginTop="101dp" 
+        android:splitMotionEvents="false">
 
        <RadioButton
            android:id="@+id/radioButton_key_main_b_mainlight_off"

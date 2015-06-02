@@ -3220,6 +3220,7 @@ jint _Get_EHCUTotalError(JNIEnv *env, jobject this) {
 jint _Get_EHCUTotalPacket(JNIEnv *env, jobject this) {
 	int temp;
 	temp = _Get_EHCUTotalError(env, this);
+	#if 1
 	if (temp <= 5)
 		return 1;
 	else if (temp <= 10)
@@ -3228,6 +3229,9 @@ jint _Get_EHCUTotalPacket(JNIEnv *env, jobject this) {
 		return 3;
 	else
 		return 1;
+	#else
+	return temp/4;
+	#endif
 }
 
 jint _Get_EHCUSingleErrorData(JNIEnv *env, jobject this) {

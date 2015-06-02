@@ -3,7 +3,8 @@
     android:id="@+id/RelativeLayout_center_main_b_engine"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/main_bg_center_engine_monitoring_ani" >
+    android:background="@drawable/main_bg_center_engine_monitoring_ani" 
+    android:splitMotionEvents="false">
 
     <ImageView
         android:id="@+id/imageView_center_main_b_engine_icon"

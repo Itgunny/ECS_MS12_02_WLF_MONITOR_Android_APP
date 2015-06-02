@@ -3,7 +3,8 @@
     android:id="@+id/RelativeLayout_rightdown_main_b_tm"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/main_bg_right_down" >
+    android:background="@drawable/main_bg_right_down" 
+    android:splitMotionEvents="false">
 
     <ImageButton
         android:id="@+id/imageButton_rightdown_main_b_tm_ccomode"
@@ -36,7 +37,8 @@
         android:layout_alignBottom="@+id/imageView_rightdown_main_b_tm_line1"
         android:layout_alignRight="@+id/imageView_rightdown_main_b_tm_line1"
         android:layout_marginBottom="5dp"
-        android:layout_marginRight="17dp" >
+        android:layout_marginRight="17dp" 
+        android:splitMotionEvents="false">
 
         <TextView
             android:id="@+id/textView_rightdown_main_b_tm_ccomode_title"
@@ -68,7 +70,8 @@
         android:layout_alignRight="@+id/imageView_rightdown_main_b_tm_line1"
         android:layout_below="@+id/imageView_rightdown_main_b_tm_line1"
         android:layout_marginRight="17dp"
-        android:layout_marginTop="5dp" >
+        android:layout_marginTop="5dp" 
+        android:splitMotionEvents="false">
 
         <TextView
             android:id="@+id/textView_rightdown_main_b_tm_shiftmode_title"
@@ -100,7 +103,8 @@
         android:layout_alignRight="@+id/imageView_rightdown_main_b_tm_line2"
         android:layout_below="@+id/imageView_rightdown_main_b_tm_line2"
         android:layout_marginRight="17dp"
-        android:layout_marginTop="5dp" >
+        android:layout_marginTop="5dp" 
+        android:splitMotionEvents="false">
 
         <TextView
             android:id="@+id/textView_rightdown_main_b_tm_tclockup_title"

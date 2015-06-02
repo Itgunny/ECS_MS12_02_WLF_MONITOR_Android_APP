@@ -2,7 +2,8 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/menu_popup02_bg" >
+    android:background="@drawable/menu_popup02_bg" 
+    android:splitMotionEvents="false">
 
     <ImageView
         android:id="@+id/imageView_popup_ehcu_err_line"
@@ -45,7 +46,8 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="vertical" >
+            android:orientation="vertical" 
+            android:splitMotionEvents="false">
 
             <TextView
                 android:id="@+id/textView_popup_ehcu_err_data"

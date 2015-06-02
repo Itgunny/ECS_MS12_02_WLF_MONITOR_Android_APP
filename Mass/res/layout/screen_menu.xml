@@ -3,7 +3,8 @@
     android:id="@+id/AbsoluteLayout_menu"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/black" >
+    android:background="@color/black" 
+    android:splitMotionEvents="false">
     
 	<ImageView
         android:id="@+id/imageView_menu_title_bg"
@@ -14,14 +15,16 @@
 	<AbsoluteLayout
 	    android:id="@+id/AbsoluteLayout_menu_inter"
 	    android:layout_width="match_parent"
-	    android:layout_height="match_parent" >
+	    android:layout_height="match_parent" 
+	    android:splitMotionEvents="false">
         
         <FrameLayout
             android:id="@+id/FrameLayout_menu_inter_title"
             android:layout_width="800dp"
             android:layout_height="66dp"
             android:layout_x="0dp"
-            android:layout_y="0dp" >
+            android:layout_y="0dp" 
+            android:splitMotionEvents="false">
 
         </FrameLayout>
         
@@ -30,7 +33,8 @@
             android:layout_width="800dp"
             android:layout_height="414dp"
             android:layout_x="0dp"
-            android:layout_y="66dp" >
+            android:layout_y="66dp" 
+            android:splitMotionEvents="false">
 
         </FrameLayout>
 
@@ -39,14 +43,16 @@
     <AbsoluteLayout
         android:id="@+id/AbsoluteLayout_menu_list"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" >
+        android:layout_height="match_parent" 
+        android:splitMotionEvents="false">
         
         <FrameLayout
             android:id="@+id/FrameLayout_menu_list_title"
             android:layout_width="630dp"
             android:layout_height="66dp"
             android:layout_x="170dp"
-            android:layout_y="0dp" >
+            android:layout_y="0dp" 
+            android:splitMotionEvents="false">
 
         </FrameLayout>
 
@@ -54,7 +60,8 @@
             android:id="@+id/FrameLayout_menu_list_left"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="@drawable/menu_bg" >
+            android:background="@drawable/menu_bg" 
+            android:splitMotionEvents="false">
 
         </FrameLayout>
         
@@ -63,7 +70,8 @@
             android:layout_width="630dp"
             android:layout_height="414dp"
             android:layout_x="170dp"
-            android:layout_y="66dp" >
+            android:layout_y="66dp" 
+            android:splitMotionEvents="false">
 
         </FrameLayout>
 

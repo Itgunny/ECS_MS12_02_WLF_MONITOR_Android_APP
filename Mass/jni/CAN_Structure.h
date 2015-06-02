@@ -1229,7 +1229,7 @@ typedef struct
 {
 	unsigned char		LampStatus;
 	unsigned char		SAEReserved;
-	unsigned int		DTC_Error[14];
+	unsigned int		DTC_Error[50];
 }__attribute__((packed))  EHCU_ERROR_MULTI;
 
 

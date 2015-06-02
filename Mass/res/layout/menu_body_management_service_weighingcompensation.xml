@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent" >
+    android:layout_height="match_parent" 
+    android:splitMotionEvents="false">
     
     <RelativeLayout
         android:layout_width="wrap_content"
@@ -9,14 +10,16 @@
         android:layout_above="@+id/RelativeLayout_menu_body_management_service_weighingcompensation_low"
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
-        android:layout_toLeftOf="@+id/RelativeLayout_menu_body_management_service_weighingcompensation_num" >
+        android:layout_toLeftOf="@+id/RelativeLayout_menu_body_management_service_weighingcompensation_num" 
+        android:splitMotionEvents="false">
 	    
         <RadioGroup
             android:id="@+id/radioGroup_menu_body_management_service_weighingcompensation"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
-            android:layout_centerVertical="true" >
+            android:layout_centerVertical="true" 
+            android:splitMotionEvents="false">
 
        <RadioButton
            android:id="@+id/radioButton_menu_body_management_service_weighingcompensation_nooffset"
@@ -43,7 +46,8 @@
            android:layout_height="match_parent"
            android:layout_marginTop="10dp"
            android:background="@drawable/menu_management_weighing_inputbox"
-           android:visibility="gone" >
+           android:visibility="gone" 
+           android:splitMotionEvents="false">
 
            <TextView
                android:id="@+id/textView_menu_body_management_service_weighingcompensation_worktool1_data"
@@ -85,7 +89,8 @@
            android:layout_height="match_parent"
            android:layout_marginTop="10dp"
            android:background="@drawable/menu_management_weighing_inputbox"
-           android:visibility="gone" >
+           android:visibility="gone" 
+           android:splitMotionEvents="false">
 
            <TextView
                android:id="@+id/textView_menu_body_management_service_weighingcompensation_worktool2_data"
@@ -127,7 +132,8 @@
            android:layout_height="match_parent"
            android:layout_marginTop="10dp"
            android:background="@drawable/menu_management_weighing_inputbox"
-           android:visibility="gone" >
+           android:visibility="gone" 
+           android:splitMotionEvents="false">
 
            <TextView
                android:id="@+id/textView_menu_body_management_service_weighingcompensation_worktool3_data"
@@ -164,7 +170,8 @@
         android:layout_alignParentRight="true"
         android:layout_alignParentTop="true"
         android:layout_marginRight="30dp"
-        android:layout_marginTop="10dp" >
+        android:layout_marginTop="10dp" 
+        android:splitMotionEvents="false">
 
         <TextView
             android:id="@+id/textView_menu_body_management_service_weighingcompensation_num_1"
@@ -338,7 +345,8 @@
         android:id="@+id/RelativeLayout_menu_body_management_service_weighingcompensation_low"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true" >
+        android:layout_alignParentBottom="true" 
+        android:splitMotionEvents="false">
         
         <ImageView
             android:id="@+id/imageView_menu_body_management_service_weighingcompensation_low_bg"
@@ -386,13 +394,15 @@
 	        android:layout_alignBottom="@+id/ImageButton_menu_body_management_service_weighingcompensation_low_ok"
 	        android:layout_alignLeft="@+id/ImageButton_menu_body_management_service_weighingcompensation_low_ok"
 	        android:layout_alignRight="@+id/ImageButton_menu_body_management_service_weighingcompensation_low_ok"
-	        android:layout_alignTop="@+id/ImageButton_menu_body_management_service_weighingcompensation_low_ok" >
+	        android:layout_alignTop="@+id/ImageButton_menu_body_management_service_weighingcompensation_low_ok" 
+	        android:splitMotionEvents="false">
 	
 	        <LinearLayout
 	            android:layout_width="wrap_content"
 	            android:layout_height="wrap_content"
 	            android:layout_centerHorizontal="true"
-	            android:layout_centerVertical="true" >
+	            android:layout_centerVertical="true" 
+	            android:splitMotionEvents="false">
 	
 	            <ImageView
 	                android:id="@+id/imageView_menu_body_management_service_weighingcompensation_low_ok_icon"
@@ -423,13 +433,15 @@
 	        android:layout_alignBottom="@+id/ImageButton_menu_body_management_service_weighingcompensation_low_cancel"
 	        android:layout_alignLeft="@+id/ImageButton_menu_body_management_service_weighingcompensation_low_cancel"
 	        android:layout_alignRight="@+id/ImageButton_menu_body_management_service_weighingcompensation_low_cancel"
-	        android:layout_alignTop="@+id/ImageButton_menu_body_management_service_weighingcompensation_low_cancel" >
+	        android:layout_alignTop="@+id/ImageButton_menu_body_management_service_weighingcompensation_low_cancel" 
+	        android:splitMotionEvents="false">
 	
 	        <LinearLayout
 	            android:layout_width="wrap_content"
 	            android:layout_height="wrap_content"
 	            android:layout_centerHorizontal="true"
-	            android:layout_centerVertical="true" >
+	            android:layout_centerVertical="true" 
+	            android:splitMotionEvents="false">
 	
 	            <ImageView
 	                android:id="@+id/imageView_menu_body_management_service_weighingcompensation_low_cancel_icon"

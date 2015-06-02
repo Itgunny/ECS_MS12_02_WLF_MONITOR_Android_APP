@@ -3,14 +3,16 @@
     android:id="@+id/RelativeLayout_rightup_main_a_hourodomterhourodo"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/main_a_bg_right" >
+    android:background="@drawable/main_a_bg_right" 
+    android:splitMotionEvents="false">
 
     <RadioGroup
         android:id="@+id/radioGroup_rightup_main_a_hourodometer_select"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerVertical="true"
-        android:layout_marginLeft="205dp" >
+        android:layout_marginLeft="205dp" 
+        android:splitMotionEvents="false">
 
         <RadioButton
             android:id="@+id/radioButton_rightup_main_a_hourodometer_select_latesthourmeter"

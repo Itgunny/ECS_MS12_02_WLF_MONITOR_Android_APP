@@ -3,7 +3,8 @@
     android:id="@+id/RelativeLayout_key_main_b_workload_display"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/main_key_bg" >
+    android:background="@drawable/main_key_bg" 
+    android:splitMotionEvents="false">
 
     <ImageView
         android:id="@+id/imageView_key_main_b_workload_display_line_1"
@@ -107,7 +108,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" 
         android:layout_marginLeft="52dp"
-        android:layout_marginTop="303dp">
+        android:layout_marginTop="303dp"
+        android:splitMotionEvents="false">
        
         <ImageView
 	        android:id="@+id/imageView_key_main_b_workload_display_low_bg"
@@ -138,13 +140,15 @@
 	        android:layout_alignBottom="@+id/ImageButton_key_main_b_workload_display_low_ok"
 	        android:layout_alignLeft="@+id/ImageButton_key_main_b_workload_display_low_ok"
 	        android:layout_alignRight="@+id/ImageButton_key_main_b_workload_display_low_ok"
-	        android:layout_alignTop="@+id/ImageButton_key_main_b_workload_display_low_ok" >
+	        android:layout_alignTop="@+id/ImageButton_key_main_b_workload_display_low_ok" 
+	        android:splitMotionEvents="false">
 	
 	        <LinearLayout
 	            android:layout_width="wrap_content"
 	            android:layout_height="wrap_content"
 	            android:layout_centerHorizontal="true"
-	            android:layout_centerVertical="true" >
+	            android:layout_centerVertical="true" 
+	            android:splitMotionEvents="false">
 	
 	            <ImageView
 	                android:id="@+id/imageView_key_main_b_workload_display_low_ok_icon"

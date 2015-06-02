@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent" >
+    android:layout_height="match_parent" 
+    android:splitMotionEvents="false">
 
     <ImageView
         android:id="@+id/imageView_menu_body_preference_soundoutput_line"
@@ -17,7 +18,8 @@
         android:layout_alignBottom="@+id/imageView_menu_body_preference_soundoutput_line"
         android:layout_alignLeft="@+id/imageView_menu_body_preference_soundoutput_line"
         android:layout_alignParentTop="true"
-        android:layout_alignRight="@+id/imageView_menu_body_preference_soundoutput_line" >
+        android:layout_alignRight="@+id/imageView_menu_body_preference_soundoutput_line" 
+        android:splitMotionEvents="false">
 
         <RadioGroup
             android:id="@+id/radioGroup_menu_body_preference_soundoutput_setting"
@@ -25,7 +27,8 @@
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
             android:layout_marginLeft="20dp"
-            android:orientation="horizontal" >
+            android:orientation="horizontal" 
+            android:splitMotionEvents="false">
 
             <RadioButton
                 android:id="@+id/radioButton_menu_body_preference_soundoutput_internal_speaker"
@@ -55,7 +58,8 @@
         android:layout_above="@+id/RelativeLayout_menu_body_preference_soundoutput_low"
         android:layout_alignLeft="@+id/imageView_menu_body_preference_soundoutput_line"
         android:layout_alignRight="@+id/imageView_menu_body_preference_soundoutput_line"
-        android:layout_below="@+id/imageView_menu_body_preference_soundoutput_line" >
+        android:layout_below="@+id/imageView_menu_body_preference_soundoutput_line" 
+        android:splitMotionEvents="false">
 
         <TextView
             android:id="@+id/textView_menu_body_preference_soundoutput_internal_min"
@@ -85,7 +89,8 @@
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
             android:layout_centerVertical="true"
-            android:layout_marginLeft="140dp" >
+            android:layout_marginLeft="140dp" 
+            android:splitMotionEvents="false">
 
             <ImageView
                 android:id="@+id/imageView_menu_body_preference_soundoutput_internal_seekbar_bg"
@@ -113,7 +118,8 @@
         android:id="@+id/RelativeLayout_menu_body_preference_soundoutput_low"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true" >
+        android:layout_alignParentBottom="true" 
+        android:splitMotionEvents="false">
 
         <ImageView
             android:id="@+id/imageView_menu_body_preference_soundoutput_low_bg"
@@ -159,13 +165,15 @@
             android:layout_alignBottom="@+id/ImageButton_menu_body_preference_soundoutput_low_ok"
             android:layout_alignLeft="@+id/ImageButton_menu_body_preference_soundoutput_low_ok"
             android:layout_alignRight="@+id/ImageButton_menu_body_preference_soundoutput_low_ok"
-            android:layout_alignTop="@+id/ImageButton_menu_body_preference_soundoutput_low_ok" >
+            android:layout_alignTop="@+id/ImageButton_menu_body_preference_soundoutput_low_ok" 
+            android:splitMotionEvents="false">
 
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerHorizontal="true"
-                android:layout_centerVertical="true" >
+                android:layout_centerVertical="true" 
+                android:splitMotionEvents="false">
 
                 <ImageView
                     android:id="@+id/imageView_menu_body_preference_soundoutput_low_ok_icon"
@@ -195,13 +203,15 @@
             android:layout_alignBottom="@+id/ImageButton_menu_body_preference_soundoutput_low_cancel"
             android:layout_alignLeft="@+id/ImageButton_menu_body_preference_soundoutput_low_cancel"
             android:layout_alignRight="@+id/ImageButton_menu_body_preference_soundoutput_low_cancel"
-            android:layout_alignTop="@+id/ImageButton_menu_body_preference_soundoutput_low_cancel" >
+            android:layout_alignTop="@+id/ImageButton_menu_body_preference_soundoutput_low_cancel" 
+            android:splitMotionEvents="false">
 
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerHorizontal="true"
-                android:layout_centerVertical="true" >
+                android:layout_centerVertical="true" 
+                android:splitMotionEvents="false">
 
                 <ImageView
                     android:id="@+id/imageView_menu_body_preference_soundoutput_low_cancel_icon"

@@ -3,7 +3,8 @@
     android:id="@+id/RelativeLayout1"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical" >
+    android:orientation="vertical" 
+    android:splitMotionEvents="false">
     
     <ImageView
         android:id="@+id/imageView_menu_body_mode_workload_line_1"
@@ -38,7 +39,8 @@
         android:layout_alignBottom="@+id/imageView_menu_body_mode_workload_line_1"
         android:layout_alignLeft="@+id/imageView_menu_body_mode_workload_line_1"
         android:layout_alignParentTop="true"
-        android:layout_alignRight="@+id/imageView_menu_body_mode_workload_line_1" >
+        android:layout_alignRight="@+id/imageView_menu_body_mode_workload_line_1" 
+        android:splitMotionEvents="false">
         
         <ImageView
             android:id="@+id/imageView_menu_body_mode_workload_accumulation_point"
@@ -63,7 +65,8 @@
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
             android:layout_marginLeft="300dp"
-            android:orientation="horizontal" >
+            android:orientation="horizontal" 
+            android:splitMotionEvents="false">
 	
 	       <RadioButton
 	           android:id="@+id/radioButton_menu_body_mode_workload_accumulation_manual"
@@ -97,7 +100,8 @@
         android:layout_alignBottom="@+id/imageView_menu_body_mode_workload_line_2"
         android:layout_alignLeft="@+id/imageView_menu_body_mode_workload_line_2"
         android:layout_alignRight="@+id/imageView_menu_body_mode_workload_line_2"
-        android:layout_alignTop="@+id/imageView_menu_body_mode_workload_line_1" >
+        android:layout_alignTop="@+id/imageView_menu_body_mode_workload_line_1" 
+        android:splitMotionEvents="false">
         
         <ImageView
             android:id="@+id/imageView_menu_body_mode_workload_display_point"
@@ -170,7 +174,8 @@
         android:layout_alignBottom="@+id/imageView_menu_body_mode_workload_line_3"
         android:layout_alignLeft="@+id/imageView_menu_body_mode_workload_line_1"
         android:layout_alignRight="@+id/imageView_menu_body_mode_workload_line_1"
-        android:layout_alignTop="@+id/imageView_menu_body_mode_workload_line_2" >
+        android:layout_alignTop="@+id/imageView_menu_body_mode_workload_line_2" 
+        android:splitMotionEvents="false">
         
         <ImageView
             android:id="@+id/imageView_menu_body_mode_workload_errordetect_point"
@@ -195,7 +200,8 @@
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
             android:layout_marginLeft="300dp"
-            android:orientation="horizontal" >
+            android:orientation="horizontal" 
+            android:splitMotionEvents="false">
 	
 	       <RadioButton
 	           android:id="@+id/radioButton_menu_body_mode_workload_errordetect_on"
@@ -227,7 +233,8 @@
         android:layout_above="@+id/RelativeLayout_menu_body_mode_workload_low"
         android:layout_alignLeft="@+id/imageView_menu_body_mode_workload_line_1"
         android:layout_alignRight="@+id/imageView_menu_body_mode_workload_line_1"
-        android:layout_below="@+id/imageView_menu_body_mode_workload_line_3" >
+        android:layout_below="@+id/imageView_menu_body_mode_workload_line_3" 
+        android:splitMotionEvents="false">
         
         <TextView
             android:id="@+id/textView_menu_body_mode_workload_calibration"
@@ -258,7 +265,8 @@
         android:id="@+id/RelativeLayout_menu_body_mode_workload_low"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true" >
+        android:layout_alignParentBottom="true" 
+        android:splitMotionEvents="false">
         
         <ImageView
             android:id="@+id/imageView_menu_body_mode_workload_low_bg"
@@ -312,13 +320,15 @@
 	        android:layout_alignBottom="@+id/ImageButton_menu_body_mode_workload_low_ok"
 	        android:layout_alignLeft="@+id/ImageButton_menu_body_mode_workload_low_ok"
 	        android:layout_alignRight="@+id/ImageButton_menu_body_mode_workload_low_ok"
-	        android:layout_alignTop="@+id/ImageButton_menu_body_mode_workload_low_ok" >
+	        android:layout_alignTop="@+id/ImageButton_menu_body_mode_workload_low_ok" 
+	        android:splitMotionEvents="false">
 	
 	        <LinearLayout
 	            android:layout_width="wrap_content"
 	            android:layout_height="wrap_content"
 	            android:layout_centerHorizontal="true"
-	            android:layout_centerVertical="true" >
+	            android:layout_centerVertical="true" 
+	            android:splitMotionEvents="false">
 	
 	            <ImageView
 	                android:id="@+id/imageView_menu_body_mode_workload_low_ok_icon"
@@ -349,13 +359,15 @@
 	        android:layout_alignBottom="@+id/ImageButton_menu_body_mode_workload_low_cancel"
 	        android:layout_alignLeft="@+id/ImageButton_menu_body_mode_workload_low_cancel"
 	        android:layout_alignRight="@+id/ImageButton_menu_body_mode_workload_low_cancel"
-	        android:layout_alignTop="@+id/ImageButton_menu_body_mode_workload_low_cancel" >
+	        android:layout_alignTop="@+id/ImageButton_menu_body_mode_workload_low_cancel" 
+	        android:splitMotionEvents="false">
 	
 	        <LinearLayout
 	            android:layout_width="wrap_content"
 	            android:layout_height="wrap_content"
 	            android:layout_centerHorizontal="true"
-	            android:layout_centerVertical="true" >
+	            android:layout_centerVertical="true" 
+	            android:splitMotionEvents="false">
 	
 	            <ImageView
 	                android:id="@+id/imageView_menu_body_mode_workload_low_cancel_icon"
@@ -386,13 +398,15 @@
 	        android:layout_alignBottom="@+id/ImageButton_menu_body_mode_workload_low_default"
 	        android:layout_alignLeft="@+id/ImageButton_menu_body_mode_workload_low_default"
 	        android:layout_alignRight="@+id/ImageButton_menu_body_mode_workload_low_default"
-	        android:layout_alignTop="@+id/ImageButton_menu_body_mode_workload_low_default" >
+	        android:layout_alignTop="@+id/ImageButton_menu_body_mode_workload_low_default" 
+	        android:splitMotionEvents="false">
 	
 	        <LinearLayout
 	            android:layout_width="wrap_content"
 	            android:layout_height="wrap_content"
 	            android:layout_centerHorizontal="true"
-	            android:layout_centerVertical="true" >
+	            android:layout_centerVertical="true" 
+	            android:splitMotionEvents="false">
 	
 	            <ImageView
 	                android:id="@+id/imageView_menu_body_mode_workload_low_default_icon"

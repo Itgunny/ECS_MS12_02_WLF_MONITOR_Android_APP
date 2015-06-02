@@ -3,7 +3,8 @@
     android:id="@+id/RelativeLayout1"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical" >
+    android:orientation="vertical" 
+    android:splitMotionEvents="false">
     
     <ImageView
         android:id="@+id/imageView_menu_body_mode_coolingfan_line"
@@ -19,7 +20,8 @@
         android:layout_alignBottom="@+id/imageView_menu_body_mode_coolingfan_line"
         android:layout_alignLeft="@+id/imageView_menu_body_mode_coolingfan_line"
         android:layout_alignParentTop="true"
-        android:layout_alignRight="@+id/imageView_menu_body_mode_coolingfan_line" >
+        android:layout_alignRight="@+id/imageView_menu_body_mode_coolingfan_line" 
+        android:splitMotionEvents="false">
 
         <RadioGroup
             android:id="@+id/radioGroup_menu_body_mode_coolingfan"
@@ -27,7 +29,8 @@
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
             android:layout_marginLeft="20dp"
-            android:orientation="horizontal" >
+            android:orientation="horizontal" 
+            android:splitMotionEvents="false">
 
             <RadioButton
                 android:id="@+id/radioButton_menu_body_mode_coolingfan_off"
@@ -64,7 +67,8 @@
         android:id="@+id/FrameLayout_menu_body_mode_coolingfan"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@+id/imageView_menu_body_mode_coolingfan_line" >
+        android:layout_below="@+id/imageView_menu_body_mode_coolingfan_line" 
+        android:splitMotionEvents="false">
 
     </FrameLayout>
 

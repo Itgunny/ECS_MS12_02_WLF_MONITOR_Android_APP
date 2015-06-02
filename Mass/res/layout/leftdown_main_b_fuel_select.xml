@@ -3,14 +3,16 @@
     android:id="@+id/RelativeLayout_leftdown_main_b_fuelselect"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/main_bg_left_down_ani" >
+    android:background="@drawable/main_bg_left_down_ani" 
+    android:splitMotionEvents="false">
 
     <RadioGroup
         android:id="@+id/radioButton_leftdown_main_b_fuel_select"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerVertical="true"
-        android:layout_marginLeft="165dp" >
+        android:layout_marginLeft="165dp" 
+        android:splitMotionEvents="false">
 
        <RadioButton
             android:id="@+id/radioButton_leftdown_main_b_fuel_select_averagefuelrate"

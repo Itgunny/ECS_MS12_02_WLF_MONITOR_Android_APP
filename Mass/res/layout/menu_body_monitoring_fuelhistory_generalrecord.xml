@@ -3,7 +3,8 @@
     android:id="@+id/RelativeLayout1"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical" >
+    android:orientation="vertical" 
+    android:splitMotionEvents="false">
     
     <RelativeLayout
         android:layout_width="wrap_content"
@@ -11,7 +12,8 @@
         android:layout_above="@+id/Relativelayout_menu_body_monitoring_fuelhistory_generalrecord_low"
         android:layout_alignParentLeft="true"
         android:layout_alignParentRight="true"
-        android:layout_alignParentTop="true" >
+        android:layout_alignParentTop="true" 
+        android:splitMotionEvents="false">
 
         <RelativeLayout
             android:id="@+id/RelativeLayout_menu_body_monitoring_fuelhistory_generalrecord_average"
@@ -19,7 +21,8 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="20dp"
             android:layout_marginTop="10dp"
-            android:background="@drawable/menu_information_fuel_general_bg" >
+            android:background="@drawable/menu_information_fuel_general_bg" 
+            android:splitMotionEvents="false">
             
             <TextView
 		        android:id="@+id/textView_menu_body_monitoring_fuelhistory_generalrecord_average"
@@ -80,7 +83,8 @@
 		    android:layout_marginLeft="30dp"
 		    android:layout_marginTop="10dp"
 		    android:layout_toRightOf="@+id/RelativeLayout_menu_body_monitoring_fuelhistory_generalrecord_average"
-		    android:background="@drawable/menu_information_fuel_general_bg" >
+		    android:background="@drawable/menu_information_fuel_general_bg" 
+		    android:splitMotionEvents="false">
 
 		    <TextView
 		        android:id="@+id/textView_menu_body_monitoring_fuelhistory_generalrecord_a_days_fuel_used"
@@ -142,7 +146,8 @@
         android:id="@+id/Relativelayout_menu_body_monitoring_fuelhistory_generalrecord_low"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true" >
+        android:layout_alignParentBottom="true" 
+        android:splitMotionEvents="false">
        
         <ImageView
             android:id="@+id/imageView_menu_body_monitoring_fuelhistory_generalrecord_low_bg"
@@ -172,13 +177,15 @@
 	        android:layout_alignBottom="@+id/ImageButton_menu_body_monitoring_fuelhistory_generalrecord_low_ok"
 	        android:layout_alignLeft="@+id/ImageButton_menu_body_monitoring_fuelhistory_generalrecord_low_ok"
 	        android:layout_alignRight="@+id/ImageButton_menu_body_monitoring_fuelhistory_generalrecord_low_ok"
-	        android:layout_alignTop="@+id/ImageButton_menu_body_monitoring_fuelhistory_generalrecord_low_ok" >
+	        android:layout_alignTop="@+id/ImageButton_menu_body_monitoring_fuelhistory_generalrecord_low_ok" 
+	        android:splitMotionEvents="false">
 	
 	        <LinearLayout
 	            android:layout_width="wrap_content"
 	            android:layout_height="wrap_content"
 	            android:layout_centerHorizontal="true"
-	            android:layout_centerVertical="true" >
+	            android:layout_centerVertical="true" 
+	            android:splitMotionEvents="false">
 	
 	            <ImageView
 	                android:id="@+id/imageView_menu_body_monitoring_fuelhistory_generalrecord_low_ok_icon"

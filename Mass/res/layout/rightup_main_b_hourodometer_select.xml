@@ -3,7 +3,8 @@
     android:id="@+id/RelativeLayout_rightup_main_b_hourodomterhourodo"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/main_bg_right_up" >
+    android:background="@drawable/main_bg_right_up" 
+    android:splitMotionEvents="false">
     
     <RadioButton
         android:id="@+id/radioButton_rightup_main_b_hourodometer_select_latesthourmeter"

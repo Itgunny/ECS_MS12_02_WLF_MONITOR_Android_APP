@@ -1,13 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent" >
+    android:layout_height="match_parent" 
+    android:splitMotionEvents="false">
     
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_above="@+id/RelativeLayout_menu_body_management_calibration_angle_low"
-        android:layout_alignParentTop="true" >
+        android:layout_alignParentTop="true" 
+        android:splitMotionEvents="false">
 
         <RelativeLayout
             android:id="@+id/RelativeLayout_menu_body_management_calibration_angle_main"
@@ -15,7 +17,8 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="29dp"
             android:layout_marginTop="16dp"
-            android:background="@drawable/menu_management_boom_angle_img_bg" >
+            android:background="@drawable/menu_management_boom_angle_img_bg" 
+            android:splitMotionEvents="false">
             
             <ImageView
                 android:id="@+id/imageView_menu_body_management_calibration_angle_main_line"
@@ -83,7 +86,8 @@
             android:layout_height="wrap_content"
             android:layout_alignTop="@+id/RelativeLayout_menu_body_management_calibration_angle_main"
             android:layout_marginLeft="10dp"
-            android:layout_toRightOf="@+id/RelativeLayout_menu_body_management_calibration_angle_main" >
+            android:layout_toRightOf="@+id/RelativeLayout_menu_body_management_calibration_angle_main" 
+            android:splitMotionEvents="false">
             
             <TextView
                 android:id="@+id/textView_menu_body_management_calibration_angle_next"
@@ -111,7 +115,8 @@
             android:layout_alignParentBottom="true"
             android:layout_below="@+id/RelativeLayout_menu_body_management_calibration_angle_main"
             android:layout_centerHorizontal="true"
-            android:layout_marginTop="10dp" >
+            android:layout_marginTop="10dp" 
+            android:splitMotionEvents="false">
             
             <ImageView
                 android:id="@+id/imageView_menu_body_management_calibration_angle_step_1"
@@ -156,7 +161,8 @@
         android:id="@+id/RelativeLayout_menu_body_management_calibration_angle_low"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true" >
+        android:layout_alignParentBottom="true" 
+        android:splitMotionEvents="false">
         
         <ImageView
             android:id="@+id/imageView_menu_body_management_calibration_angle_low_bg"
@@ -206,13 +212,15 @@
 	        android:layout_alignLeft="@+id/ImageButton_menu_body_management_calibration_angle_low_ok"
 	        android:layout_alignRight="@+id/ImageButton_menu_body_management_calibration_angle_low_ok"
 	        android:layout_alignTop="@+id/ImageButton_menu_body_management_calibration_angle_low_ok"
-	        android:visibility="invisible" >
+	        android:visibility="invisible" 
+	        android:splitMotionEvents="false">
 	
 	        <LinearLayout
 	            android:layout_width="wrap_content"
 	            android:layout_height="wrap_content"
 	            android:layout_centerHorizontal="true"
-	            android:layout_centerVertical="true" >
+	            android:layout_centerVertical="true" 
+	            android:splitMotionEvents="false">
 	
 	            <ImageView
 	                android:id="@+id/imageView_menu_body_management_calibration_angle_low_ok_icon"
@@ -243,13 +251,15 @@
 	        android:layout_alignBottom="@+id/ImageButton_menu_body_management_calibration_angle_low_cancel"
 	        android:layout_alignLeft="@+id/ImageButton_menu_body_management_calibration_angle_low_cancel"
 	        android:layout_alignRight="@+id/ImageButton_menu_body_management_calibration_angle_low_cancel"
-	        android:layout_alignTop="@+id/ImageButton_menu_body_management_calibration_angle_low_cancel" >
+	        android:layout_alignTop="@+id/ImageButton_menu_body_management_calibration_angle_low_cancel" 
+	        android:splitMotionEvents="false">
 	
 	        <LinearLayout
 	            android:layout_width="wrap_content"
 	            android:layout_height="wrap_content"
 	            android:layout_centerHorizontal="true"
-	            android:layout_centerVertical="true" >
+	            android:layout_centerVertical="true" 
+	            android:splitMotionEvents="false">
 	
 	            <ImageView
 	                android:id="@+id/imageView_menu_body_management_calibration_angle_low_cancel_icon"

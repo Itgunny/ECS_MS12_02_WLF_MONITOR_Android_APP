@@ -3,7 +3,8 @@
     android:id="@+id/RelativeLayout_lower_main_b_virtualkey"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/main_virtual_key_bg_up" >
+    android:background="@drawable/main_virtual_key_bg_up" 
+    android:splitMotionEvents="false">
     
     <ImageButton
         android:id="@+id/imageButton_lower_main_b_virtualkey_mainlight"

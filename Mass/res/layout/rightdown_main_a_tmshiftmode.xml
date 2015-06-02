@@ -3,7 +3,8 @@
     android:id="@+id/RelativeLayout_rightdown_main_a_tmshiftmode"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/main_a_bg_right" >
+    android:background="@drawable/main_a_bg_right" 
+    android:splitMotionEvents="false">
     
     <TextView
         android:id="@+id/textView_rightdown_main_a_tmshiftmode_title"

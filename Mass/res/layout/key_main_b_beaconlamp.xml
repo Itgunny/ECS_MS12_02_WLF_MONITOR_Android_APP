@@ -3,19 +3,22 @@
     android:id="@+id/RelativeLayout_key_main_b_beaconlamp"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/main_key_bg" >
+    android:background="@drawable/main_key_bg" 
+    android:splitMotionEvents="false">
 
     <RelativeLayout
         android:id="@+id/RelativeLayout_key_main_b_beaconlamp_available"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content" >
+        android:layout_height="wrap_content" 
+        android:splitMotionEvents="false">
 
         <RadioGroup
             android:id="@+id/radioGroup_key_main_b_beaconlamp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="111dp"
-            android:layout_marginTop="121dp" >
+            android:layout_marginTop="121dp" 
+            android:splitMotionEvents="false">
 
             <RadioButton
                 android:id="@+id/radioButton_key_main_b_beaconlamp_off"
@@ -44,7 +47,8 @@
         android:layout_height="wrap_content"
         android:layout_centerVertical="true"
         android:layout_marginLeft="111dp"
-        android:visibility="invisible" >
+        android:visibility="invisible" 
+        android:splitMotionEvents="false">
 
         <TextView
             android:layout_width="wrap_content"

@@ -69,7 +69,7 @@ public class GaugerpmAnimation extends View{
 			rpm = MIN;
 		}
 
-		result = (rpm - 2000) / 16.66f;
+		result = (rpm - 2000) / 15.99f;		//result = (rpm - 2000) / 16.66f;
 
 		return result;
 
@@ -80,7 +80,8 @@ public class GaugerpmAnimation extends View{
 		rpm = rpm / 70;
 		rpm = rpm * 70;
 		fDegree = CalRPM(rpm);
-		nDegree = (int)fDegree;
+		nDegree = (int)fDegree + 2;	//nDegree = (int)fDegree;
+
 		//Log.d(TAG,"nDegree: " + Integer.toString(nDegree));
 	}
 
