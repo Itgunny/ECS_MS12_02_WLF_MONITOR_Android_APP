@@ -105,11 +105,12 @@ public class QuickCouplerPopupUnlocking2 extends ParentPopup{
 		//
 		 */
 		// --, 150314 bwk
-		ParentActivity.ScreenIndex = ParentActivity.OldScreenIndex;
 		try {
 			if(ParentActivity.DisplayType == ParentActivity.DISPLAY_TYPE_A){
+				ParentActivity.ScreenIndex = ParentActivity.SCREEN_STATE_MAIN_B_KEY_QUICKCOUPLER;
 				ParentActivity._MainBBaseFragment._MainBKeyQuickCouplerFragment.CursurDisplay(2);
 			}else{
+				ParentActivity.ScreenIndex = ParentActivity.SCREEN_STATE_MAIN_A_KEY_QUICKCOUPLER;
 				ParentActivity._MainABaseFragment._MainAKeyQuickCouplerFragment.CursurDisplay(2);
 			}
 		} catch (NullPointerException e) {
@@ -127,7 +128,6 @@ public class QuickCouplerPopupUnlocking2 extends ParentPopup{
 	@Override
 	protected void InitResource() {
 		// TODO Auto-generated method stub
-
 		LayoutBG = (RelativeLayout)mRoot.findViewById(R.id.RelativeLayout_popup_key_quickcoupler_unlocking_2);
 		imgbtnCancel = (ImageButton)mRoot.findViewById(R.id.imageButton_popup_key_quickcoupler_unlocking_2_cancel);
 	}

@@ -72,7 +72,7 @@ public class Home extends Activity {
 	public static final int VERSION_HIGH 		= 2;
 	public static final int VERSION_LOW 		= 0;
 	public static final int VERSION_SUB_HIGH 	= 0;
-	public static final int VERSION_SUB_LOW 	= 1;
+	public static final int VERSION_SUB_LOW 	= 2;
 	////1.0.2.3
 	// UI B 안 최초 적용 2014.12.10
 	////1.0.2.4
@@ -490,6 +490,9 @@ public class Home extends Activity {
 	//// v2.0.0.2
 	// 1. MultiTouch 막음
 	// 2. rpm gauge 맞춤
+	// 3. 장비정보 표시기능 - BKCU 버전 항목 CID 인식 여부에 따라 감춤
+	// 4. Quick coupler 기능 - unlock 후 lock 시에 부저소리 이상 개선 
+	// 5. 다국어 설정 - 한국어 설정 후 KEY OFF 시 영어로 바뀜(타 언어도 동일 현상으로 추정) -> 개선
 	//////////////////////////////////////////////////////////////////////////////////////
 	
 	// TAG
@@ -942,7 +945,7 @@ public class Home extends Activity {
 	// Display Type
 	public int DisplayType;
 	public int LanguageIndex;	// ++, --, 150206 bwk
-	LanguageClass LangClass;	// ++, --, 150209 bwk
+	public LanguageClass LangClass;	// ++, --, 150209 bwk
 	
 	// Unit
 	public int UnitOdo;
@@ -1217,7 +1220,6 @@ public class Home extends Activity {
 		return true;
 	}
 	
-	
 	/////////////////////////////////////////////////////
 
 
@@ -1231,7 +1233,7 @@ public class Home extends Activity {
 			showEndingFragment();
 		}
 		// --, 150403 cjg		
-		try {
+		try {			
 			StartCommService();
 			StopAlwaysOntopService();	// ++, --, 150324 cjg
 			threadRead = new Thread(new ReadThread(this));
@@ -1267,7 +1269,8 @@ public class Home extends Activity {
 	public void InitValuable(){
 		// ++, 150209 bwk
 		LangClass = new LanguageClass(this);
-		LangClass.setLanugage(LangClass.GetLanguage());
+		//LangClass.setLanugage(LangClass.GetLanguage());
+		SetLanguage();
 		JoystickSteeringEnableFailCondition = 0;
 		JoystickSteeringActiveStatus = 0;
 		// --, 150209 bwk
@@ -1311,6 +1314,74 @@ public class Home extends Activity {
 		// --, 150326 bwk		
 		
 		_CrashApplication = (CrashApplication)getApplicationContext();		
+	}
+	
+	public void SetLanguage(){
+		try {  
+			Locale locale;
+			
+			switch (LangClass.GetLanguage()) {
+			case Home.STATE_DISPLAY_LANGUAGE_KOREAN:
+				locale = new Locale("ko");
+				break;
+			case Home.STATE_DISPLAY_LANGUAGE_ENGLISH:
+				locale = new Locale("en");
+				break;
+			case Home.STATE_DISPLAY_LANGUAGE_GERMAN:
+				locale = new Locale("de");
+				break;
+			case Home.STATE_DISPLAY_LANGUAGE_FRENCH:
+				locale = new Locale("fr");
+				break;
+			case Home.STATE_DISPLAY_LANGUAGE_SPANISH:
+				locale = new Locale("es");
+				break;
+			case Home.STATE_DISPLAY_LANGUAGE_PORTUGUE:
+				locale = new Locale("pt");
+				break;
+			case Home.STATE_DISPLAY_LANGUAGE_ITALIAN:
+				locale = new Locale("it");
+				break;
+			case Home.STATE_DISPLAY_LANGUAGE_NEDERLAND:
+				locale = new Locale("nl");
+				break;
+			case Home.STATE_DISPLAY_LANGUAGE_SWEDISH:
+				locale = new Locale("sv");
+				break;
+			case Home.STATE_DISPLAY_LANGUAGE_TURKISH:
+				locale = new Locale("tr");
+				break;
+			case Home.STATE_DISPLAY_LANGUAGE_SLOVAKIAN:
+				locale = new Locale("sk");
+				break;
+			case Home.STATE_DISPLAY_LANGUAGE_ESTONIAN:
+				locale = new Locale("et");
+				break;
+			case Home.STATE_DISPLAY_LANGUAGE_FINNISH:
+				locale = new Locale("fi");
+				break;
+			default:
+				locale = new Locale("en");
+				break;
+		}
+			
+            Class<?> activityManagerNative = Class.forName("android.app.ActivityManagerNative");  
+            Log.i("amnType", activityManagerNative.toString());  
+              
+            Object am=activityManagerNative.getMethod("getDefault").invoke(activityManagerNative);  
+            Log.i("amType", am.getClass().toString());  
+              
+            Object config=am.getClass().getMethod("getConfiguration").invoke(am);  
+            Log.i("configType", config.getClass().toString());  
+            config.getClass().getDeclaredField("locale").set(config, locale);  
+            config.getClass().getDeclaredField("userSetLocale").setBoolean(config, true);  
+                  
+            am.getClass().getMethod("updateConfiguration",android.content.res.Configuration.class).invoke(am,config);  
+          
+        }catch (Exception e) {  
+            e.printStackTrace();  
+        }  
+			
 	}
 	public void InitFragment(){
 		_MainBBaseFragment = new MainBBaseFragment();
@@ -1428,10 +1499,13 @@ public class Home extends Activity {
 		CAN1Comm.TxCMDToMCU(CAN1Comm.CMD_CAM, CameraOrder1);
 		imgViewCameraScreen.setClickable(true);
 		CAN1Comm.CameraCurrentOnOff = true;	// ++, --, 150326 cjg
+		
+		
 	}
 	public void ExcuteCamActivitybyReverseGear(){
 		CAN1Comm.CameraOnFlag = CAN1CommManager.STATE_CAMERA_REVERSEGEAR;
 		CAN1Comm.CameraCurrentOnOff = true;	// ++, --, 150326 cjg
+		
 	}
 	public boolean ExitCam(){
 		ScreenIndex = OldScreenIndex;
@@ -1448,11 +1522,14 @@ public class Home extends Activity {
 				return false;
 			else 
 				return true;
+			
 		} catch (NullPointerException e) {
 			// TODO: handle exception
 			Log.e(TAG,"NullPointerException");
 		}
+		
 		return true;
+		
 	}
 	// ++, 150324 bwk
 	public void ChangeCam(int Key){
@@ -1646,6 +1723,7 @@ public class Home extends Activity {
 //		setScreenIndex();	// ++, --, 150310 bwk
 		
 		LanguageIndex = SharePref.getInt("LanguageIndex", STATE_DISPLAY_LANGUAGE_ENGLISH);		// ++, --, 150206 bwk
+		//LangClass.setLanugage(LanguageIndex);
 		
 		AttachmentStatus = SharePref.getInt("AttachmentStatus", CAN1CommManager.DATA_STATE_KEY_QUICKCOUPLER_OFF);
 		Log.d(TAG,"LoadPref");
@@ -2383,7 +2461,8 @@ public class Home extends Activity {
 		// ++, 150313 bwk
 		|| ScreenIndex == SCREEN_STATE_MAIN_A_KEY_QUICKCOUPLER_POPUP_LOCKING2
 		|| ScreenIndex == SCREEN_STATE_MAIN_A_KEY_QUICKCOUPLER_POPUP_UNLOCKING2
-		|| ScreenIndex == SCREEN_STATE_MAIN_A_KEY_QUICKCOUPLER_POPUP_UNLOCKING3){
+		|| ScreenIndex == SCREEN_STATE_MAIN_A_KEY_QUICKCOUPLER_POPUP_UNLOCKING3
+		|| (ScreenIndex >= SCREEN_STATE_MAIN_CAMERA_TOP && ScreenIndex <= SCREEN_STATE_MAIN_CAMERA_END)){
 		// --, 150313 bwk
 			
 		}else{
@@ -2782,14 +2861,10 @@ public class Home extends Activity {
 				||	 ScreenIndex	== SCREEN_STATE_MAIN_A_KEY_QUICKCOUPLER_POPUP_UNLOCKING3){
 			if(Data == CAN1CommManager.CAMERA){
 				ExcuteCamActivitybyKey();
-			}else if(Data == CAN1CommManager.ESC || Data == CAN1CommManager.ENTER){
-				if(ScreenIndex == SCREEN_STATE_MAIN_A_KEY_QUICKCOUPLER_POPUP_LOCKING2)
-					_QuickCouplerPopupLocking2.ClickCancel();
-				else if(ScreenIndex == SCREEN_STATE_MAIN_A_KEY_QUICKCOUPLER_POPUP_UNLOCKING2)
-					_QuickCouplerPopupUnlocking2.ClickCancel();
 			}
 			Log.d(TAG,"Click QuickCoupler Key");				
-		}else if((ScreenIndex & SCREEN_STATE_MAIN_A_TOP) == SCREEN_STATE_MAIN_A_TOP){
+		}
+		else if((ScreenIndex & SCREEN_STATE_MAIN_A_TOP) == SCREEN_STATE_MAIN_A_TOP){
 			Log.d(TAG,"Click Main A Key");
 			_MainABaseFragment.KeyButtonClick(Data);
 		// --, 150310 bwk

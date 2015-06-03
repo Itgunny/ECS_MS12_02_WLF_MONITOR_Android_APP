@@ -13,16 +13,16 @@ public class LanguageClass {
 	//CONSTANT////////////////////////////////////////
 	public static final String 				TAG 					= "LanguageClass";
 	
-		
+	protected Home ParentActivity;
 	//////////////////////////////////////////////////
 	//RESOURCE////////////////////////////////////////
-	Context context;
+	//Context context;
 	protected View mRoot;
 
 	//////////////////////////////////////////////////
 	
 	//VALUABLE////////////////////////////////////////
-	public int LanguageIndex;
+	int LanguageIndex;
 	
 	//////////////////////////////////////////////////
 	
@@ -38,15 +38,17 @@ public class LanguageClass {
 	
 	//////////////////////////////////////////////////
 	public LanguageClass(Context _context){
-		context = _context;
+		//context = _context;
+		ParentActivity = (Home)_context;
 		LoadPref();
 	}
 
 	public void setLanugage(int list){
 		LanguageIndex = list;
 		SavePref();
-
-		Resources res = context.getResources();
+		 
+		//Resources res = context.getResources();
+		Resources res = ParentActivity.getResources();
 		DisplayMetrics dm = res.getDisplayMetrics();
 		android.content.res.Configuration conf = res.getConfiguration();
 		conf.locale = new Locale("en");
@@ -106,7 +108,8 @@ public class LanguageClass {
 	
 
 	public void SavePref(){
-		SharedPreferences SharePref = context.getSharedPreferences("Home", 0);
+		//SharedPreferences SharePref = context.getSharedPreferences("Home", 0);
+		SharedPreferences SharePref = ParentActivity.getSharedPreferences("Home", 0);
 		SharedPreferences.Editor edit = SharePref.edit();
 		edit.putInt("LanguageIndex", LanguageIndex);
 		edit.commit();
@@ -114,9 +117,10 @@ public class LanguageClass {
 	}
 	
 	public void LoadPref(){
-		SharedPreferences SharePref = context.getSharedPreferences("Home", 0);
+		//SharedPreferences SharePref = context.getSharedPreferences("Home", 0);
+		SharedPreferences SharePref = ParentActivity.getSharedPreferences("Home", 0);
 		LanguageIndex = SharePref.getInt("LanguageIndex", Home.STATE_DISPLAY_LANGUAGE_ENGLISH);
-		Log.d(TAG,"LanguageIndex : " + Integer.toString(LanguageIndex));
+		Log.d(TAG, "LanguageIndex : " + Integer.toString(LanguageIndex));
 		Log.d(TAG,"LoadPref");
 	}
 		

@@ -48,6 +48,7 @@ public class QuickCouplerPopupLocking2 extends ParentPopup{
 		mRoot = inflater.inflate(R.layout.popup_key_quickcoupler_locking_2, null);
 		this.addContentView(mRoot,  new LayoutParams(548,288));
 		this.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+		QuickCouplerPopupUnlocking3 quickCouplerPopupUnlocking3 = new QuickCouplerPopupUnlocking3(_context);
 		
 	}
 	
@@ -96,12 +97,30 @@ public class QuickCouplerPopupLocking2 extends ParentPopup{
 		// TODO Auto-generated method stub
 		super.dismiss();
 		Log.d(TAG,"dismiss");
-		ParentActivity.ScreenIndex = ParentActivity.OldScreenIndex;
+		//ParentActivity.ScreenIndex = ParentActivity.OldScreenIndex;
 		try {
 			if(ParentActivity.DisplayType == ParentActivity.DISPLAY_TYPE_A){
+				if(QuickCouplerPopupUnlocking3.QuickCouplerOldScreenIndex == 1){
+					if((ParentActivity.OldScreenIndex >= ParentActivity.SCREEN_STATE_MAIN_CAMERA_TOP
+							&& ParentActivity.OldScreenIndex <= ParentActivity.SCREEN_STATE_MAIN_CAMERA_END)){
+								ParentActivity.setScreenIndex();
+					}
+					ParentActivity.setScreenIndex();
+				}else{
+					ParentActivity.ScreenIndex = ParentActivity.SCREEN_STATE_MAIN_B_KEY_QUICKCOUPLER;
 				ParentActivity._MainBBaseFragment._MainBKeyQuickCouplerFragment.CursurDisplay(1);
+				}
 			}else{
+				if(QuickCouplerPopupUnlocking3.QuickCouplerOldScreenIndex == 1){
+					if((ParentActivity.OldScreenIndex >= ParentActivity.SCREEN_STATE_MAIN_CAMERA_TOP
+							&& ParentActivity.OldScreenIndex <= ParentActivity.SCREEN_STATE_MAIN_CAMERA_END)){
+						ParentActivity.setScreenIndex();
+					}
+					ParentActivity.setScreenIndex();
+			}else{
+					ParentActivity.ScreenIndex = ParentActivity.SCREEN_STATE_MAIN_A_KEY_QUICKCOUPLER;
 				ParentActivity._MainABaseFragment._MainAKeyQuickCouplerFragment.CursurDisplay(1);
+			}
 			}
 		} catch (NullPointerException e) {
 			// TODO: handle exception
@@ -110,7 +129,6 @@ public class QuickCouplerPopupLocking2 extends ParentPopup{
 		CancelQuickCouplerSendTimer();
 		CAN1Comm.Set_QuickCouplerOperationStatus_3448_PGN65527(CAN1CommManager.DATA_STATE_KEY_QUICKCOUPLER_OFF);
 		CAN1Comm.TxCANToMCU(247);
-		
 	}
 
 	@Override
@@ -194,6 +212,7 @@ public class QuickCouplerPopupLocking2 extends ParentPopup{
 		CAN1Comm.TxCMDToMCU(CAN1Comm.CMD_BUZ, CAN1Comm.BUZZER_OFF);	// Buzzer Off
 		CAN1Comm.SetFNFlag(true);
 		this.dismiss();
+		QuickCouplerPopupUnlocking3.QuickCouplerOldScreenIndex = 0;
 	}
 
 }

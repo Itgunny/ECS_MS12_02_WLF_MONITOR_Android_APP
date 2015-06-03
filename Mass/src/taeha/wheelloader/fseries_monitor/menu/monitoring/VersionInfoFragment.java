@@ -53,6 +53,7 @@ public class VersionInfoFragment extends ParentFragment{
 	TextView textViewModel;
 	
 	RelativeLayout	layoutEHCU;		// ++, --, 150211 bwk;
+	RelativeLayout	layoutBKCU;		
 	//////////////////////////////////////////////////
 	
 	//VALUABLE////////////////////////////////////////
@@ -106,6 +107,7 @@ public class VersionInfoFragment extends ParentFragment{
 		CAN1Comm.TxCMDToMCU(CAN1Comm.CMD_VERSION);
 		
 		CheckEHCU();	// ++, --, 150211 bwk
+		CheckBKCU();
 		
 		ParentActivity.ScreenIndex = ParentActivity.SCREEN_STATE_MENU_MONITORING_VERSIONINFO_TOP;
 		ParentActivity._MenuBaseFragment._MenuInterTitleFragment.SetTitleText(ParentActivity.getResources().getString(R.string.Machine_Information));
@@ -151,6 +153,7 @@ public class VersionInfoFragment extends ParentFragment{
 		textViewModel = (TextView)mRoot.findViewById(R.id.textView_menu_body_monitoring_version_model_data);
 		
 		layoutEHCU = (RelativeLayout)mRoot.findViewById(R.id.RelativeLayout_menu_body_monitoring_version_ehcu);	// ++, --, 150211 bwk
+		layoutBKCU = (RelativeLayout)mRoot.findViewById(R.id.RelativeLayout_menu_body_monitoring_version_bkcu);
 	}
 
 	protected void InitValuables() {
@@ -330,6 +333,14 @@ public class VersionInfoFragment extends ParentFragment{
 					setClickableEHCU(true);
 				}
 	}
+	public void CheckBKCU(){
+		if(CAN1Comm.Get_CheckBKCUComm() == 1){
+			setClickableBKCU(true);
+		}else{
+			setClickableBKCU(false);
+		}
+		
+	}
 	
 	public void setClickableEHCU(boolean flag){
 		if(flag == true){
@@ -338,6 +349,14 @@ public class VersionInfoFragment extends ParentFragment{
 			layoutEHCU.setVisibility(View.INVISIBLE);
 		}
 	}
+	
+	public void setClickableBKCU(boolean flag){
+		if(flag == true){
+			layoutBKCU.setVisibility(View.VISIBLE);
+		}else{
+			layoutBKCU.setVisibility(View.INVISIBLE);
+		}
+	}	
 	// --, 150211 bwk
 	/////////////////////////////////////////////////////////////////////	
 	public void ClickOK(){

@@ -49,7 +49,7 @@ public class LanguageListFragment extends ParentFragment{
 	
 	//VALUABLE////////////////////////////////////////
 	
-	LanguageClass LangClass;
+	//LanguageClass LangClass;
 	
 	Handler HandleCursurDisplay;
 	int CursurIndex;
@@ -105,7 +105,7 @@ public class LanguageListFragment extends ParentFragment{
 	@Override
 	protected void InitValuables(){
 		super.InitValuables();
-		LangClass = new LanguageClass(ParentActivity);
+		//LangClass = new LanguageClass(ParentActivity);
 	}
 	
 	@Override
@@ -646,7 +646,8 @@ public class LanguageListFragment extends ParentFragment{
 	public void SetLanguage(int Index)
 	{
 		ParentActivity.LanguageIndex = Index;
-		LangClass.setLanugage(Index);
+		ParentActivity.LangClass.setLanugage(Index);
+		ParentActivity.SavePref();
 		ParentActivity.ResetPopup(); 		// ++, --, 150305 bwk
 		
 		if(ParentActivity.OldScreenIndex == ParentActivity.SCREEN_STATE_MENU_PREFERENCE_DISPLAYTYPELANG_TOP)
