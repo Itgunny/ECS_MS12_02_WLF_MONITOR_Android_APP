@@ -1,14 +1,19 @@
 package taeha.wheelloader.fseries_monitor.menu.mode;
 
+import java.util.Timer;
+import java.util.TimerTask;
+
 import taeha.wheelloader.fseries_monitor.animation.AppearAnimation;
 import taeha.wheelloader.fseries_monitor.animation.ChangeFragmentAnimation;
 import taeha.wheelloader.fseries_monitor.animation.DisappearAnimation;
 import taeha.wheelloader.fseries_monitor.animation.MainBodyShiftAnimation;
 import taeha.wheelloader.fseries_monitor.animation.LeftRightShiftAnimation;
+import taeha.wheelloader.fseries_monitor.main.CAN1CommManager;
 import taeha.wheelloader.fseries_monitor.main.Home;
 import taeha.wheelloader.fseries_monitor.main.ParentFragment;
 import taeha.wheelloader.fseries_monitor.main.R;
 import taeha.wheelloader.fseries_monitor.main.R.string;
+import taeha.wheelloader.fseries_monitor.menu.mode.PressureCalibration.EnableButtonTimerClass;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -56,6 +61,8 @@ public class AngleCalibration extends ParentFragment{
 	
 	int CursurIndex;
 	Handler HandleCursurDisplay;
+	
+	private Timer	mEnableButtonTimer = null;	
 	//////////////////////////////////////////////////
 	
 	//Fragment////////////////////////////////////////
@@ -84,6 +91,10 @@ public class AngleCalibration extends ParentFragment{
 		CursurDisplay(CursurIndex);
 		ParentActivity.ScreenIndex = ParentActivity.SCREEN_STATE_MENU_MODE_ETC_CALIBRATION_ANGLE_TOP;
 		ParentActivity._MenuBaseFragment._MenuInterTitleFragment.SetTitleText(ParentActivity.getResources().getString(R.string.Boom_Bucket_Angle_Calibration));
+		
+		if(CAN1Comm.Get_ComponentCode_1699_PGN65330_EHCU() == CAN1CommManager.STATE_COMPONENTCODE_EHCU)
+			StartEnableButtonTimer();
+
 		HandleCursurDisplay = new Handler() {
 			@Override
 			public void handleMessage(Message msg) {
@@ -473,6 +484,43 @@ public class AngleCalibration extends ParentFragment{
 
 		});
 		
+	}
+	/////////////////////////////////////////////////////////////////////
+	public class EnableButtonTimerClass extends TimerTask{
+
+		@Override
+		public void run() {
+			// TODO Auto-generated method stub
+			ParentActivity.runOnUiThread(new Runnable() {
+
+				@Override
+				public void run() {
+					// TODO Auto-generated method stub
+					if(ParentActivity.AnimationRunningFlag == false)
+					{
+						CancelEnableButtonTimer();
+						ParentActivity.showCalibrationEHCUPopup();
+					}
+				}
+			});
+
+		}
+
+	}
+
+	public void StartEnableButtonTimer(){
+		CancelEnableButtonTimer();
+		mEnableButtonTimer = new Timer();
+		mEnableButtonTimer.schedule(new EnableButtonTimerClass(),1,50);	
+	}
+
+	public void CancelEnableButtonTimer(){
+		if(mEnableButtonTimer != null){
+			mEnableButtonTimer.cancel();
+			mEnableButtonTimer.purge();
+			mEnableButtonTimer = null;
+		}
+
 	}
 	/////////////////////////////////////////////////////////////////////
 	public void ClickLeft(){

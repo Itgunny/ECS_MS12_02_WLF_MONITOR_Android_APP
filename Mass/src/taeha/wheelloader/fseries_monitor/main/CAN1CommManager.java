@@ -90,6 +90,8 @@ public class CAN1CommManager extends ICAN1CommManager.Stub{		// ttySAC1(Linux), 
 	public static final int LONG_MENU_ENTER 	= 0x01000011;	
 	public static final int LONG_LEFT_RIGHT 	= 0X0100000C;
 	public static final int LONG_LEFT_RIGHT_ENTER 		= 0x0100001C;
+	public static final int LONG_8_0	 		= 0x01140000;
+	public static final int LONG_8_9_0	 		= 0x011C0000;
 
 	
 	public static final int POWER_OFF 			= 0x000000F5;

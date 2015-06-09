@@ -257,6 +257,7 @@
     <string name="Excute">Excute</string>
     <string name="Push_and_hold_to_reverse_rotation">Push and hold to reverse rotation.</string>
     <string name="rpm_km_h">rpm/km/h</string>
+	<string name="You_should_turn_OFF_Soft_end_stop_before_start_calibration">You should turn OFF Soft end stop before start calibration.</string>
     <!-- Menu Mode End -->
     <!-- Menu Monitoring Start -->
     <string name="Machine_Monitoring">Machine Monitoring</string>
@@ -411,7 +412,7 @@
     <string name="Rear_axle_oil">Rear axle oil</string>
     <string name="Crankcase_Ventilation_Filter">Crankcase Ventilation Filter</string>
     <string name="Aircon_Heater_Outer_Filter">Air-con. &amp; Heater Outer Filter</string>
-    <string name="Hydraulic_Tank_Drain_Filter"></string>
+    <string name="Hydraulic_Tank_Drain_Filter"/>
     <string name="Count">Count</string>
     <string name="Elapsed_Time">Elapsed Time</string>
     <string name="Cycle">Cycle</string>

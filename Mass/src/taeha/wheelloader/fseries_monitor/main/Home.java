@@ -13,6 +13,7 @@ import taeha.wheelloader.fseries_monitor.popup.AxleTempWarningPopup;
 import taeha.wheelloader.fseries_monitor.popup.BrakePedalCalibrationPopup;
 import taeha.wheelloader.fseries_monitor.popup.BucketPriorityPopup;
 import taeha.wheelloader.fseries_monitor.popup.CCOModePopup;
+import taeha.wheelloader.fseries_monitor.popup.CalibrationEHCUPopup;
 import taeha.wheelloader.fseries_monitor.popup.CoolingFanManualPopup;
 import taeha.wheelloader.fseries_monitor.popup.EHCUErrorPopup;
 import taeha.wheelloader.fseries_monitor.popup.EngineAutoShutdownCountPopup;
@@ -72,7 +73,7 @@ public class Home extends Activity {
 	public static final int VERSION_HIGH 		= 2;
 	public static final int VERSION_LOW 		= 0;
 	public static final int VERSION_SUB_HIGH 	= 0;
-	public static final int VERSION_SUB_LOW 	= 2;
+	public static final int VERSION_SUB_LOW 	= 3;
 	////1.0.2.3
 	// UI B 안 최초 적용 2014.12.10
 	////1.0.2.4
@@ -496,6 +497,15 @@ public class Home extends Activity {
 	//	- 통신에러 관련하여 타이머 비종료 현상 개선
 	// 5. 다국어 설정 - 한국어 설정 후 KEY OFF 시 영어로 바뀜(타 언어도 동일 현상으로 추정) -> 개선
 	// 6. CID S/N 없는 경우 '-'로 표시
+	//// v2.0.0.3
+	// 1. SmartKey SA 무시
+	// 2. 히든 키 변경
+	//	- 진단기능-장비정보-각 장비화면 / 8+0 / Hidden 정보 표시
+	//	- 멀티미디어 / 8+0 / File manager
+	//	- 멀티미디어 / 8+9+0 / 시스템 설정 실행
+	// 3. 붐/버켓 각도보정, 붐 압력보정 기능 - EHCU CID 인식하여 EHCU 장착 장비에서는 최초 화면에 추가 문구 or 팝업 표시 
+	//	- "You should turn OFF Soft end stop before start calibration."
+	// 4. Main lamp류 오류 클릭 후 팝업 종료 시 crash 해결
 	//////////////////////////////////////////////////////////////////////////////////////
 	
 	// TAG
@@ -622,10 +632,12 @@ public class Home extends Activity {
 //	public  static final int SCREEN_STATE_MENU_MODE_ETC_CAMERASETTING_END					= 0x2135FFFF;
 	public  static final int SCREEN_STATE_MENU_MODE_ETC_CALIBRATION_TOP						= 0x21350000;
 	public  static final int SCREEN_STATE_MENU_MODE_ETC_CALIBRATION_ANGLE_TOP				= 0x21351000;
-	public  static final int SCREEN_STATE_MENU_MODE_ETC_CALIBRATION_ANGLE_RESULT			= 0x21351100;
+	public  static final int SCREEN_STATE_MENU_MODE_ETC_CALIBRATION_ANGLE_POPUP				= 0x21351100;
+	public  static final int SCREEN_STATE_MENU_MODE_ETC_CALIBRATION_ANGLE_RESULT			= 0x21351200;
 	public  static final int SCREEN_STATE_MENU_MODE_ETC_CALIBRATION_ANGLE_END				= 0x21351FFF;
 	public  static final int SCREEN_STATE_MENU_MODE_ETC_CALIBRATION_PRESSURE_TOP			= 0x21352000;
-	public  static final int SCREEN_STATE_MENU_MODE_ETC_CALIBRATION_PRESSURE_RESULT			= 0x21352100;
+	public  static final int SCREEN_STATE_MENU_MODE_ETC_CALIBRATION_PRESSURE_POPUP			= 0x21352100;
+	public  static final int SCREEN_STATE_MENU_MODE_ETC_CALIBRATION_PRESSURE_RESULT			= 0x21352200;
 	public  static final int SCREEN_STATE_MENU_MODE_ETC_CALIBRATION_PRESSURE_END			= 0x21352FFF;
 	public  static final int SCREEN_STATE_MENU_MODE_ETC_CALIBRATION_BRAKEPEDAL_TOP			= 0x21353000;
 	public  static final int SCREEN_STATE_MENU_MODE_ETC_CALIBRATION_BRAKEPEDAL_END			= 0x21353FFF;
@@ -1066,6 +1078,7 @@ public class Home extends Activity {
 	public FuelInitalPopup					_FuelInitalPopup;			// ++, --, 150406 bwk
 	public CoolingFanManualPopup			_CoolingFanManualPopup;		// ++,, --, 150410 bwk 
 	public AxleTempWarningPopup				_AxleTempWarningPopup;
+	public CalibrationEHCUPopup				_CalibrationEHCUPopup;
 	
 	//Toast
 	public WeighingErrorToast				_WeighingErrorToast;
@@ -1430,6 +1443,7 @@ public class Home extends Activity {
 		_FuelInitalPopup = new FuelInitalPopup(this);
 		_CoolingFanManualPopup = new CoolingFanManualPopup(this);
 		_AxleTempWarningPopup = new AxleTempWarningPopup(this);
+		_CalibrationEHCUPopup = new CalibrationEHCUPopup(this);
 		
 		_WeighingErrorToast = new WeighingErrorToast(this);
 	}
@@ -1476,6 +1490,7 @@ public class Home extends Activity {
 		_AxleTempWarningPopup = new AxleTempWarningPopup(this);
 		
 		_WeighingErrorToast = new WeighingErrorToast(this);
+		_CalibrationEHCUPopup = new CalibrationEHCUPopup(this);
 	}
 	// --, 150306 bwk
 	
@@ -3339,7 +3354,23 @@ public class Home extends Activity {
 
 		HomeDialog = _AxleTempWarningPopup;
 		HomeDialog.show();
-	}	/////////////////////////////////////////////////////
+	}
+	public void showCalibrationEHCUPopup(){
+		if(AnimationRunningFlag == true)
+			return;
+		else
+			StartAnimationRunningTimer();
+		
+		if(HomeDialog != null){
+			HomeDialog.dismiss();
+			HomeDialog = null;
+		}
+	
+		HomeDialog = _CalibrationEHCUPopup;
+		HomeDialog.show();
+	}
+	/////////////////////////////////////////////////////
+
 	//Timer//////////////////////////////////////////////
 	public class SeatBeltTimerClass extends TimerTask{
 

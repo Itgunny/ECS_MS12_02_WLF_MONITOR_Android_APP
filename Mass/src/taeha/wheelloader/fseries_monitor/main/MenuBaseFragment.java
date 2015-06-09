@@ -1336,8 +1336,11 @@ public class MenuBaseFragment extends ParentFragment{
 		case CAN1CommManager.LONG_LEFT_RIGHT:
 			ClickKeyButtonLongLeftRight();
 			break;
-		case CAN1CommManager.LONG_LEFT_RIGHT_ENTER:
-			ClickKeyButtonLongLeftRightEnter();
+		case CAN1CommManager.LONG_8_9_0:
+			ClickKeyButtonLong890();
+			break;
+		case CAN1CommManager.LONG_8_0:
+			ClickKeyButtonLong80();
 			break;
 		case CAN1CommManager.MENU:
 			// ++, 150209 bwk
@@ -1415,6 +1418,25 @@ public class MenuBaseFragment extends ParentFragment{
 			break;
 		case Home.SCREEN_STATE_MENU_MODE_ETC_TOP:
 			_MenuModeFragment._MenuModeETCFragment.ClickLeft();
+			break;
+		case Home.SCREEN_STATE_MENU_MODE_ETC_CALIBRATION_TOP:
+			//_CalibrationFragment.ClickLeft();
+			_MenuModeFragment._CalibrationFragment.ClickLeft(); 
+			break;
+		case Home.SCREEN_STATE_MENU_MODE_ETC_CALIBRATION_ANGLE_TOP:
+			_AngleCalibration.ClickLeft();
+			break;
+		case Home.SCREEN_STATE_MENU_MODE_ETC_CALIBRATION_ANGLE_RESULT:
+			ParentActivity._AngleCalibrationResultPopup.ClickLeft();
+			break;
+		case Home.SCREEN_STATE_MENU_MODE_ETC_CALIBRATION_PRESSURE_TOP:
+			_PressureCalibration.ClickLeft();
+			break;
+		case Home.SCREEN_STATE_MENU_MODE_ETC_CALIBRATION_PRESSURE_RESULT:
+			ParentActivity._PressureCalibrationResultPopup.ClickLeft();
+			break;
+		case Home.SCREEN_STATE_MENU_MODE_ETC_CALIBRATION_BRAKEPEDAL_TOP:
+			ParentActivity._BrakePedalCalibrationPopup.ClickLeft();
 			break;
 		case Home.SCREEN_STATE_MENU_MODE_ETC_FREQ_TOP:
 			_SpeedometerFreqFragment.ClickLeft();
@@ -1554,25 +1576,6 @@ public class MenuBaseFragment extends ParentFragment{
 		case Home.SCREEN_STATE_MENU_MANAGEMENT_MAINTENANCE_DETAIL_CHANGECYCLE:
 			_MaintenanceChangeCycleFragment.ClickLeft();
 			break;
-		case Home.SCREEN_STATE_MENU_MODE_ETC_CALIBRATION_TOP:
-			//_CalibrationFragment.ClickLeft();
-			_MenuModeFragment._CalibrationFragment.ClickLeft(); 
-			break;
-		case Home.SCREEN_STATE_MENU_MODE_ETC_CALIBRATION_ANGLE_TOP:
-			_AngleCalibration.ClickLeft();
-			break;
-		case Home.SCREEN_STATE_MENU_MODE_ETC_CALIBRATION_ANGLE_RESULT:
-			ParentActivity._AngleCalibrationResultPopup.ClickLeft();
-			break;
-		case Home.SCREEN_STATE_MENU_MODE_ETC_CALIBRATION_PRESSURE_TOP:
-			_PressureCalibration.ClickLeft();
-			break;
-		case Home.SCREEN_STATE_MENU_MODE_ETC_CALIBRATION_PRESSURE_RESULT:
-			ParentActivity._PressureCalibrationResultPopup.ClickLeft();
-			break;
-		case Home.SCREEN_STATE_MENU_MODE_ETC_CALIBRATION_BRAKEPEDAL_TOP:
-			ParentActivity._BrakePedalCalibrationPopup.ClickLeft();
-			break;
 		case Home.SCREEN_STATE_MENU_MANAGEMENT_SERVICE_TOP:
 			_ServiceMenuListFragment.ClickLeft();
 			break;
@@ -1701,6 +1704,26 @@ public class MenuBaseFragment extends ParentFragment{
 		case Home.SCREEN_STATE_MENU_MODE_ETC_TOP:
 			_MenuModeFragment._MenuModeETCFragment.ClickRight();
 			break;
+		case Home.SCREEN_STATE_MENU_MODE_ETC_CALIBRATION_TOP:
+			//_CalibrationFragment.ClickRight();
+			_MenuModeFragment._CalibrationFragment.ClickRight(); 
+			break;
+		case Home.SCREEN_STATE_MENU_MODE_ETC_CALIBRATION_ANGLE_TOP:
+			_AngleCalibration.ClickRight();
+			break;
+		case Home.SCREEN_STATE_MENU_MODE_ETC_CALIBRATION_ANGLE_RESULT:
+			ParentActivity._AngleCalibrationResultPopup.ClickRight();
+			break;
+		case Home.SCREEN_STATE_MENU_MODE_ETC_CALIBRATION_PRESSURE_TOP:
+			_PressureCalibration.ClickRight();
+			break;
+		case Home.SCREEN_STATE_MENU_MODE_ETC_CALIBRATION_PRESSURE_RESULT:
+			ParentActivity._PressureCalibrationResultPopup.ClickRight();
+			break;
+		case Home.SCREEN_STATE_MENU_MODE_ETC_CALIBRATION_BRAKEPEDAL_TOP:
+			ParentActivity._BrakePedalCalibrationPopup.ClickRight();
+			break;
+			
 		case Home.SCREEN_STATE_MENU_MODE_ETC_FREQ_TOP:
 			_SpeedometerFreqFragment.ClickRight();
 			break;
@@ -1839,25 +1862,6 @@ public class MenuBaseFragment extends ParentFragment{
 		case Home.SCREEN_STATE_MENU_MANAGEMENT_MAINTENANCE_DETAIL_CHANGECYCLE:
 			_MaintenanceChangeCycleFragment.ClickRight();
 			break;
-		case Home.SCREEN_STATE_MENU_MODE_ETC_CALIBRATION_TOP:
-			//_CalibrationFragment.ClickRight();
-			_MenuModeFragment._CalibrationFragment.ClickRight(); 
-			break;
-		case Home.SCREEN_STATE_MENU_MODE_ETC_CALIBRATION_ANGLE_TOP:
-			_AngleCalibration.ClickRight();
-			break;
-		case Home.SCREEN_STATE_MENU_MODE_ETC_CALIBRATION_ANGLE_RESULT:
-			ParentActivity._AngleCalibrationResultPopup.ClickRight();
-			break;
-		case Home.SCREEN_STATE_MENU_MODE_ETC_CALIBRATION_PRESSURE_TOP:
-			_PressureCalibration.ClickRight();
-			break;
-		case Home.SCREEN_STATE_MENU_MODE_ETC_CALIBRATION_PRESSURE_RESULT:
-			ParentActivity._PressureCalibrationResultPopup.ClickRight();
-			break;
-		case Home.SCREEN_STATE_MENU_MODE_ETC_CALIBRATION_BRAKEPEDAL_TOP:
-			ParentActivity._BrakePedalCalibrationPopup.ClickRight();
-			break;
 		case Home.SCREEN_STATE_MENU_MANAGEMENT_SERVICE_TOP:
 			_ServiceMenuListFragment.ClickRight();
 			break;
@@ -1983,6 +1987,31 @@ public class MenuBaseFragment extends ParentFragment{
 			break;
 		case Home.SCREEN_STATE_MENU_MODE_ETC_TOP:
 			_MenuModeFragment._MenuModeETCFragment.ClickESC();
+			break;
+		case Home.SCREEN_STATE_MENU_MODE_ETC_CALIBRATION_TOP:
+			// ++, 150409 cjg
+			//_CalibrationFragment.ClickESC();
+			_MenuModeFragment._CalibrationFragment.ClickESC(); 
+			// --, 150409 cjg
+			break;
+		case Home.SCREEN_STATE_MENU_MODE_ETC_CALIBRATION_ANGLE_TOP:
+			_AngleCalibration.ClickESC();
+			break;
+		case Home.SCREEN_STATE_MENU_MODE_ETC_CALIBRATION_ANGLE_RESULT:
+			ParentActivity._AngleCalibrationResultPopup.ClickESC();
+			break;
+		case Home.SCREEN_STATE_MENU_MODE_ETC_CALIBRATION_ANGLE_POPUP:
+		case Home.SCREEN_STATE_MENU_MODE_ETC_CALIBRATION_PRESSURE_POPUP:
+			ParentActivity._CalibrationEHCUPopup.ClickESC();
+			break;
+		case Home.SCREEN_STATE_MENU_MODE_ETC_CALIBRATION_PRESSURE_TOP:
+			_PressureCalibration.ClickESC();
+			break;
+		case Home.SCREEN_STATE_MENU_MODE_ETC_CALIBRATION_PRESSURE_RESULT:
+			ParentActivity._PressureCalibrationResultPopup.ClickESC();
+			break;
+		case Home.SCREEN_STATE_MENU_MODE_ETC_CALIBRATION_BRAKEPEDAL_TOP:
+			ParentActivity._BrakePedalCalibrationPopup.ClickESC();
 			break;
 		case Home.SCREEN_STATE_MENU_MODE_ETC_FREQ_TOP:
 			_SpeedometerFreqFragment.ClickESC();
@@ -2122,27 +2151,6 @@ public class MenuBaseFragment extends ParentFragment{
 		case Home.SCREEN_STATE_MENU_MANAGEMENT_MAINTENANCE_DETAIL_CHANGECYCLE:
 			_MaintenanceChangeCycleFragment.ClickESC();
 			break;
-		case Home.SCREEN_STATE_MENU_MODE_ETC_CALIBRATION_TOP:
-			// ++, 150409 cjg
-			//_CalibrationFragment.ClickESC();
-			_MenuModeFragment._CalibrationFragment.ClickESC(); 
-			// --, 150409 cjg
-			break;
-		case Home.SCREEN_STATE_MENU_MODE_ETC_CALIBRATION_ANGLE_TOP:
-			_AngleCalibration.ClickESC();
-			break;
-		case Home.SCREEN_STATE_MENU_MODE_ETC_CALIBRATION_ANGLE_RESULT:
-			ParentActivity._AngleCalibrationResultPopup.ClickESC();
-			break;
-		case Home.SCREEN_STATE_MENU_MODE_ETC_CALIBRATION_PRESSURE_TOP:
-			_PressureCalibration.ClickESC();
-			break;
-		case Home.SCREEN_STATE_MENU_MODE_ETC_CALIBRATION_PRESSURE_RESULT:
-			ParentActivity._PressureCalibrationResultPopup.ClickESC();
-			break;
-		case Home.SCREEN_STATE_MENU_MODE_ETC_CALIBRATION_BRAKEPEDAL_TOP:
-			ParentActivity._BrakePedalCalibrationPopup.ClickESC();
-			break;
 		case Home.SCREEN_STATE_MENU_MANAGEMENT_SERVICE_TOP:
 			_ServiceMenuListFragment.ClickESC();
 			break;
@@ -2268,6 +2276,29 @@ public class MenuBaseFragment extends ParentFragment{
 			break;
 		case Home.SCREEN_STATE_MENU_MODE_ETC_TOP:
 			_MenuModeFragment._MenuModeETCFragment.ClickEnter();
+			break;
+		case Home.SCREEN_STATE_MENU_MODE_ETC_CALIBRATION_TOP:
+			//_CalibrationFragment.ClickEnter();
+			_MenuModeFragment._CalibrationFragment.ClickEnter(); 
+			break;
+		case Home.SCREEN_STATE_MENU_MODE_ETC_CALIBRATION_ANGLE_TOP:
+			_AngleCalibration.ClickEnter();
+			break;
+		case Home.SCREEN_STATE_MENU_MODE_ETC_CALIBRATION_ANGLE_RESULT:
+			ParentActivity._AngleCalibrationResultPopup.ClickEnter();
+			break;
+		case Home.SCREEN_STATE_MENU_MODE_ETC_CALIBRATION_ANGLE_POPUP:
+		case Home.SCREEN_STATE_MENU_MODE_ETC_CALIBRATION_PRESSURE_POPUP:
+			ParentActivity._CalibrationEHCUPopup.ClickEnter();
+			break;
+		case Home.SCREEN_STATE_MENU_MODE_ETC_CALIBRATION_PRESSURE_TOP:
+			_PressureCalibration.ClickEnter();
+			break;
+		case Home.SCREEN_STATE_MENU_MODE_ETC_CALIBRATION_PRESSURE_RESULT:
+			ParentActivity._PressureCalibrationResultPopup.ClickEnter();
+			break;
+		case Home.SCREEN_STATE_MENU_MODE_ETC_CALIBRATION_BRAKEPEDAL_TOP:
+			ParentActivity._BrakePedalCalibrationPopup.ClickEnter();
 			break;
 		case Home.SCREEN_STATE_MENU_MODE_ETC_FREQ_TOP:
 			_SpeedometerFreqFragment.ClickEnter();
@@ -2407,25 +2438,6 @@ public class MenuBaseFragment extends ParentFragment{
 		case Home.SCREEN_STATE_MENU_MANAGEMENT_MAINTENANCE_DETAIL_CHANGECYCLE:
 			_MaintenanceChangeCycleFragment.ClickEnter();
 			break;
-		case Home.SCREEN_STATE_MENU_MODE_ETC_CALIBRATION_TOP:
-			//_CalibrationFragment.ClickEnter();
-			_MenuModeFragment._CalibrationFragment.ClickEnter(); 
-			break;
-		case Home.SCREEN_STATE_MENU_MODE_ETC_CALIBRATION_ANGLE_TOP:
-			_AngleCalibration.ClickEnter();
-			break;
-		case Home.SCREEN_STATE_MENU_MODE_ETC_CALIBRATION_ANGLE_RESULT:
-			ParentActivity._AngleCalibrationResultPopup.ClickEnter();
-			break;
-		case Home.SCREEN_STATE_MENU_MODE_ETC_CALIBRATION_PRESSURE_TOP:
-			_PressureCalibration.ClickEnter();
-			break;
-		case Home.SCREEN_STATE_MENU_MODE_ETC_CALIBRATION_PRESSURE_RESULT:
-			ParentActivity._PressureCalibrationResultPopup.ClickEnter();
-			break;
-		case Home.SCREEN_STATE_MENU_MODE_ETC_CALIBRATION_BRAKEPEDAL_TOP:
-			ParentActivity._BrakePedalCalibrationPopup.ClickEnter();
-			break;
 		case Home.SCREEN_STATE_MENU_MANAGEMENT_SERVICE_TOP:
 			_ServiceMenuListFragment.ClickEnter();
 			break;
@@ -2495,59 +2507,66 @@ public class MenuBaseFragment extends ParentFragment{
 	}
 	public void ClickKeyButtonLongLeftRight(){
 		switch (ParentActivity.ScreenIndex) {
-		case Home.SCREEN_STATE_MENU_MONITORING_VERSIONINFO_ECM:
-			_VersionInfoECMFragment.ShowManufactureDay(true);
-			break;
-		case Home.SCREEN_STATE_MENU_MONITORING_VERSIONINFO_TCU:
-			_VersionInfoTCUFragment.ShowManufactureDay(true);
-			break;
-		case Home.SCREEN_STATE_MENU_MONITORING_VERSIONINFO_MONITOR:
-			_VersionInfoMonitorFragment.ShowManufactureDay(true);
-			break;
-		case Home.SCREEN_STATE_MENU_MONITORING_VERSIONINFO_MCU:
-			_VersionInfoMCUFragment.ShowManufactureDay(true);
-			break;
-		case Home.SCREEN_STATE_MENU_MONITORING_VERSIONINFO_CLUSTER:
-			_VersionInfoClusterFragment.ShowManufactureDay(true);
-			break;
-		case Home.SCREEN_STATE_MENU_MONITORING_VERSIONINFO_RMCU:
-			_VersionInfoRMCUFragment.ShowManufactureDay(true);
-			break;
-		case Home.SCREEN_STATE_MENU_MONITORING_VERSIONINFO_EHCU:
-			_VersionInfoEHCUFragment.ShowManufactureDay(true);
-			break;
-		case Home.SCREEN_STATE_MENU_MONITORING_VERSIONINFO_BKCU:
-			_VersionInfoBKCUFragment.ShowManufactureDay(true);
-			break;
-//		case Home.SCREEN_STATE_MENU_MANAGEMENT_SERVICE_PW:
-//			_ServiceMenuPasswordFragment.showServicePasswordNextScreen();
-//			break;
-		case Home.SCREEN_STATE_MENU_MANAGEMENT_SOFTWAREUPDAT_PW:
-			_SoftwareUpdatePasswordFragment.showServicePasswordNextScreen();
-			break;
-		case Home.SCREEN_STATE_MENU_MULTIMEDIA_TOP:
-			_MenuMultimediaFragment.ExcuteFileManaget();
-			break;
-		case Home.SCREEN_STATE_MENU_MANAGEMENT_SERVICE_EHCUINFO_TOP:
-			showBodyBoomLeverFloatInfo();
-			break;
-		case Home.SCREEN_STATE_MENU_MANAGEMENT_SERVICE_SENSORMONITORING_TOP:
-			showBodySensorMonitoringHidden();
-			break;
-		default:
-			break;
+	//		case Home.SCREEN_STATE_MENU_MANAGEMENT_SERVICE_PW:
+	//			_ServiceMenuPasswordFragment.showServicePasswordNextScreen();
+	//			break;
+			case Home.SCREEN_STATE_MENU_MANAGEMENT_SOFTWAREUPDAT_PW:
+				_SoftwareUpdatePasswordFragment.showServicePasswordNextScreen();
+				break;
+			case Home.SCREEN_STATE_MENU_MANAGEMENT_SERVICE_EHCUINFO_TOP:
+				showBodyBoomLeverFloatInfo();
+				break;
+			case Home.SCREEN_STATE_MENU_MANAGEMENT_SERVICE_SENSORMONITORING_TOP:
+				showBodySensorMonitoringHidden();
+				break;
+			default:
+				break;
 		}
 	}
 
-	public void ClickKeyButtonLongLeftRightEnter(){
+	public void ClickKeyButtonLong890(){
 		switch (ParentActivity.ScreenIndex) {
-		case Home.SCREEN_STATE_MENU_MULTIMEDIA_TOP:
-			_MenuMultimediaFragment.ExcuteSettings();
-			break;
-		default:
-			break;
+			case Home.SCREEN_STATE_MENU_MULTIMEDIA_TOP:
+				_MenuMultimediaFragment.ExcuteSettings();
+				break;
+			default:
+				break;
 		}
 
+	}
+	public void ClickKeyButtonLong80(){
+		switch (ParentActivity.ScreenIndex) {
+			case Home.SCREEN_STATE_MENU_MONITORING_VERSIONINFO_ECM:
+				_VersionInfoECMFragment.ShowManufactureDay(true);
+				break;
+			case Home.SCREEN_STATE_MENU_MONITORING_VERSIONINFO_TCU:
+				_VersionInfoTCUFragment.ShowManufactureDay(true);
+				break;
+			case Home.SCREEN_STATE_MENU_MONITORING_VERSIONINFO_MONITOR:
+				_VersionInfoMonitorFragment.ShowManufactureDay(true);
+				break;
+			case Home.SCREEN_STATE_MENU_MONITORING_VERSIONINFO_MCU:
+				_VersionInfoMCUFragment.ShowManufactureDay(true);
+				break;
+			case Home.SCREEN_STATE_MENU_MONITORING_VERSIONINFO_CLUSTER:
+				_VersionInfoClusterFragment.ShowManufactureDay(true);
+				break;
+			case Home.SCREEN_STATE_MENU_MONITORING_VERSIONINFO_RMCU:
+				_VersionInfoRMCUFragment.ShowManufactureDay(true);
+				break;
+			case Home.SCREEN_STATE_MENU_MONITORING_VERSIONINFO_EHCU:
+				_VersionInfoEHCUFragment.ShowManufactureDay(true);
+				break;
+			case Home.SCREEN_STATE_MENU_MONITORING_VERSIONINFO_BKCU:
+				_VersionInfoBKCUFragment.ShowManufactureDay(true);
+				break;
+			case Home.SCREEN_STATE_MENU_MULTIMEDIA_TOP:
+				_MenuMultimediaFragment.ExcuteFileManaget();
+				break;
+			default:
+				break;
+		}
+		
 	}
 
 	// ++, 150209 bwk

@@ -106,6 +106,7 @@ jclass jObject;
 #define		SA_CID						0xF4
 #define		SA_ACU						0x19
 #define		SA_BKCU						0x34
+#define		SA_SMK						0x29
 ////////////////////////////////////////////////////
 #define		ERR_BUF_SIZE				400
 #define		MULTI_BUF_SIZE				400

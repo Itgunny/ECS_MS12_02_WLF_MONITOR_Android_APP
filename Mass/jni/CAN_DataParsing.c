@@ -736,6 +736,8 @@ void InitNewProtoclValuable() {
 void UART1_SeperateData_NEWCAN2(int Priority, int PF, int PS, int SourceAddress, unsigned char* Data)
 {
 	switch (SourceAddress) {
+		case SA_SMK:
+			break;
 		case SA_MCU:
 		default:
 			UART1_SeperateData_Default(Priority,PF,PS,Data);
