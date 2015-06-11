@@ -73,7 +73,7 @@ public class Home extends Activity {
 	public static final int VERSION_HIGH 		= 2;
 	public static final int VERSION_LOW 		= 0;
 	public static final int VERSION_SUB_HIGH 	= 0;
-	public static final int VERSION_SUB_LOW 	= 3;
+	public static final int VERSION_SUB_LOW 	= 4;
 	////1.0.2.3
 	// UI B 안 최초 적용 2014.12.10
 	////1.0.2.4
@@ -506,6 +506,13 @@ public class Home extends Activity {
 	// 3. 붐/버켓 각도보정, 붐 압력보정 기능 - EHCU CID 인식하여 EHCU 장착 장비에서는 최초 화면에 추가 문구 or 팝업 표시 
 	//	- "You should turn OFF Soft end stop before start calibration."
 	// 4. Main lamp류 오류 클릭 후 팝업 종료 시 crash 해결
+	//// v2.0.0.4
+	// 1. Axle Popup 3초 -> 5초로 변경
+	// 2. DTC List (HL9XX 시리즈, 15년 5월 22일 기준) 적용
+	// 3. TCU 4SPEED 모델 추가
+	//	- 6057018709 
+	// 4. 후방카메라 연동 시 후진기어일 경우 부저 울리지 않는 현상 개선
+	//	- 퀵커플러와 충돌로 인함
 	//////////////////////////////////////////////////////////////////////////////////////
 	
 	// TAG
@@ -2475,13 +2482,16 @@ public class Home extends Activity {
 	public void CheckBuzzer(){
 		if(ScreenIndex == SCREEN_STATE_MAIN_B_KEY_QUICKCOUPLER_POPUP_LOCKING2
 		|| ScreenIndex == SCREEN_STATE_MAIN_B_KEY_QUICKCOUPLER_POPUP_UNLOCKING2
-		|| ScreenIndex == SCREEN_STATE_MAIN_B_KEY_QUICKCOUPLER_POPUP_UNLOCKING3
 		// ++, 150313 bwk
 		|| ScreenIndex == SCREEN_STATE_MAIN_A_KEY_QUICKCOUPLER_POPUP_LOCKING2
-		|| ScreenIndex == SCREEN_STATE_MAIN_A_KEY_QUICKCOUPLER_POPUP_UNLOCKING2
-		|| ScreenIndex == SCREEN_STATE_MAIN_A_KEY_QUICKCOUPLER_POPUP_UNLOCKING3
-		|| (ScreenIndex >= SCREEN_STATE_MAIN_CAMERA_TOP && ScreenIndex <= SCREEN_STATE_MAIN_CAMERA_END)){
+		|| ScreenIndex == SCREEN_STATE_MAIN_A_KEY_QUICKCOUPLER_POPUP_UNLOCKING2){
 		// --, 150313 bwk
+			
+		}else if((ScreenIndex >= SCREEN_STATE_MAIN_CAMERA_TOP && ScreenIndex <= SCREEN_STATE_MAIN_CAMERA_END)
+			&&(OldScreenIndex == SCREEN_STATE_MAIN_B_KEY_QUICKCOUPLER_POPUP_LOCKING2
+					|| OldScreenIndex == SCREEN_STATE_MAIN_B_KEY_QUICKCOUPLER_POPUP_UNLOCKING2
+					|| OldScreenIndex == SCREEN_STATE_MAIN_A_KEY_QUICKCOUPLER_POPUP_LOCKING2
+					|| OldScreenIndex == SCREEN_STATE_MAIN_A_KEY_QUICKCOUPLER_POPUP_UNLOCKING2)){
 			
 		}else{
 			if(BuzzerStopCount > 5){
@@ -2547,6 +2557,7 @@ public class Home extends Activity {
 					}
 				}
 			}
+			
 			if(CAN1Comm.CameraOnFlag == CAN1CommManager.STATE_CAMERA_REVERSEGEAR
 			|| CAN1Comm.CameraOnFlag == CAN1CommManager.STATE_CAMERA_MANUAL){
 				imgViewCameraScreen.setClickable(true);

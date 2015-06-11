@@ -133,7 +133,7 @@ public class AxleTempWarningPopup extends ParentPopup{
 	public void StartPopupOffTimer(){
 		CancelPopupOffTimer();
 		mPopupOffTimer = new Timer();
-		mPopupOffTimer.schedule(new PopupOffTimerClass(),3000);	
+		mPopupOffTimer.schedule(new PopupOffTimerClass(),5000);	
 	}
 	
 	public void CancelPopupOffTimer(){

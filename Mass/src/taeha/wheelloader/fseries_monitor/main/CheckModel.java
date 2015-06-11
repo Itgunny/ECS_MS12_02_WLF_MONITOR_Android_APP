@@ -12,6 +12,9 @@ public class CheckModel {
 	
 	// ++, --, 150329 bwk 965 추가
 	// ++, --, 150330 bwk 975 추가
+//	String[] MCUModelName = {"HL935", "HL940", "HL955", "HL960", "HL965", "HL970", "HL975", "HL980"};		
+//	String[] MCUModelExtraName = {"_v", "TM", "XT"};
+	
 	public static final int NO_MODEL 	= 0x0;
 	public static final int MODEL_935 	= 0x1;
 	public static final int MODEL_940 	= 0x2;
@@ -343,6 +346,9 @@ public class CheckModel {
 		}else if(strModel.equals("6057018809") == true){
 			return TCU_4SPEED;
 		}else if(strModel.equals("6057018646") == true){
+			return TCU_4SPEED;
+		// ++, 150610 추가
+		}else if(strModel.equals("6057018709") == true){
 			return TCU_4SPEED;
 		}else{
 			return TCU_5SPEED;

@@ -56,7 +56,7 @@ public class CalibrationEHCUPopup extends ParentPopup{
 		InitButtonListener();
 		InitValuable();
 		
-		Log.d(TAG, "ScreenIndex"+Integer.toHexString(ParentActivity.ScreenIndex));
+		//Log.d(TAG, "ScreenIndex"+Integer.toHexString(ParentActivity.ScreenIndex));
 		if(ParentActivity.ScreenIndex == Home.SCREEN_STATE_MENU_MODE_ETC_CALIBRATION_ANGLE_TOP)
 		{
 			ParentActivity.OldScreenIndex = Home.SCREEN_STATE_MENU_MODE_ETC_CALIBRATION_ANGLE_TOP;
