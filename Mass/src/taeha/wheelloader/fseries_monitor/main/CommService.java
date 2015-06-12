@@ -1208,12 +1208,13 @@ public class CommService extends Service{
 				break;
 			case CAN1CommManager.ESC:
 				// ++, 150324 bwk 하기 주석 품
-				if(GetScreenTopFlag() == true || CAN1Comm.CameraCurrentOnOff == true)
+				//if(GetScreenTopFlag() == true || CAN1Comm.CameraCurrentOnOff == true)
+				if(GetScreenTopFlag() == true || (CAN1Comm.CameraCurrentOnOff == true && CAN1Comm.CameraOnFlag != CAN1CommManager.STATE_CAMERA_REVERSEGEAR))
 				{
 					CAN1Comm.Callback_KeyButton(Data);
 					SoundPoolKeyButton.play(SoundID, fVolume, fVolume, 0, 0, 1);		// 타 apk에서 소리 2번 울림
-				}
-				else
+				}else if(CAN1Comm.CameraOnFlag == CAN1CommManager.STATE_CAMERA_REVERSEGEAR){
+				}else
 				// --, 150324 bwk 하기 주석 품
 				{
 					// ++, 150320 cjg
@@ -1222,17 +1223,19 @@ public class CommService extends Service{
 						HandleKeyButton.sendMessage(HandleKeyButton.obtainMessage(Data));
 					}else{
 						BackKeyEvent();
+						SoundPoolKeyButton.play(SoundID, fVolume, fVolume, 0, 0, 1);
 					}
 					// --, 150320 cjg				
 				}
 				break;
 			// ++, 150324 bwk
 			case CAN1CommManager.LEFT:
-				if(GetScreenTopFlag() == true || CAN1Comm.CameraCurrentOnOff == true)
+				//if(GetScreenTopFlag() == true || CAN1Comm.CameraCurrentOnOff == true)
+				if(GetScreenTopFlag() == true || (CAN1Comm.CameraCurrentOnOff == true && CAN1Comm.CameraOnFlag != CAN1CommManager.STATE_CAMERA_REVERSEGEAR))
 				{
 					CAN1Comm.Callback_KeyButton(Data);
-				}
-				else
+				}else if(CAN1Comm.CameraOnFlag == CAN1CommManager.STATE_CAMERA_REVERSEGEAR){
+				}else
 				{
 					BackKeyEvent();
 				}
@@ -1240,7 +1243,8 @@ public class CommService extends Service{
 				break;
 			// --, 150324 bwk
 			case CAN1CommManager.RIGHT:
-				if(GetScreenTopFlag() == true || CAN1Comm.CameraCurrentOnOff == true)
+				//if(GetScreenTopFlag() == true || CAN1Comm.CameraCurrentOnOff == true)
+				if(GetScreenTopFlag() == true || (CAN1Comm.CameraCurrentOnOff == true && CAN1Comm.CameraOnFlag != CAN1CommManager.STATE_CAMERA_REVERSEGEAR))
 				{
 					CAN1Comm.TxCMDToMCU(CAN1Comm.CMD_BUZ, 0);
 					CAN1Comm.Set_RequestBuzzerStop_PGN65327(1);
@@ -1558,8 +1562,8 @@ public class CommService extends Service{
 		{
 			startActivity(intent);
 			// ++, 150323 bwk
-			multimediaFlag = false;
-			miracastFlag = false;
+			//multimediaFlag = false;
+			//miracastFlag = false;
 			// --, 150323 bwk
 		}
 	}
@@ -1654,11 +1658,11 @@ public class CommService extends Service{
 		{
 			//rpmFlag = false;
 			if(CheckTopApps("com.mxtech.videoplayer.ad") == true){
-				SetMiracastFlag(false);
+				SetMultimediaFlag(false);
 				//multimediaFlag = false; //++, --, 150403 cjg
 				CallHome();
 			}else if(CheckTopApps("com.powerone.wfd.sink") == true){
-				SetMiracastFlag(false);
+				//SetMiracastFlag(false);		// 현재 FN키 누르면 해제됨
 				//miracastFlag = false; //++, --, 150403 cjg
 				CallHome();
 			}else if(CheckRunningApp("com.mxtech.videoplayer.ad") == true){

@@ -42,22 +42,21 @@ import taeha.wheelloader.fseries_monitor.popup.WeighingErrorToast;
 import taeha.wheelloader.fseries_monitor.popup.WorkLoadInitPopup;
 import taeha.wheelloader.fseries_monitor.popup.WorkLoadWeighingInitPopup1;
 import taeha.wheelloader.fseries_monitor.popup.WorkLoadWeighingInitPopup2;
-import android.os.Bundle;
-import android.os.Handler;
-import android.os.IBinder;
-import android.os.Message;
-import android.os.RemoteException;
 import android.app.Activity;
 import android.app.ActivityManager;
 import android.app.ActivityManager.RunningAppProcessInfo;
 import android.app.Dialog;
-import android.app.ActivityManager.RunningTaskInfo;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.ServiceConnection;
 import android.content.SharedPreferences;
 import android.graphics.drawable.AnimationDrawable;
+import android.os.Bundle;
+import android.os.Handler;
+import android.os.IBinder;
+import android.os.Message;
+import android.os.RemoteException;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.Menu;
@@ -513,6 +512,18 @@ public class Home extends Activity {
 	//	- 6057018709 
 	// 4. 후방카메라 연동 시 후진기어일 경우 부저 울리지 않는 현상 개선
 	//	- 퀵커플러와 충돌로 인함
+	//// v2.0.0.5
+	// 1. PDF에서 ESC키 눌렀을 경우 소리안나는 현상 개선
+	// 2. 팝업을 켠 채로 카메라 모드로 들어가면 팝업이 꺼지거나 클릭되는 현상 개선
+	//	- ParentPopup에서 카메라의 상태를 보고 막음
+	// 3. 후방카메라일 경우 화면 터치하면 키/터치 불능현상 개선
+	//	- Home에서 imgViewCameraScreen를 Click 이벤트에서 Touch 이벤트로 변경
+	//	- 타 apk 실행 시 카메라 버튼 막음
+	// 4. 메뉴 - 멀티미디어 - 미디어 플레이어 선택 시 강제로 스마트터미널을 Off하는 부분 삭제
+	// 5. 멀티미디어 실행 중 스마트 터미널 실행 시 LED Off 되는 현상 개선
+	// 6. 스마트 터미널 실행 중 FN키 누르면 LED 꺼지지 않는 현상 개선
+	// 7. H/W Revision 저항 F.01.01 738 인식 보드 발생 -> max를 740으로 변경
+	// 8. MainKeyRearWiper ClickRight,ClickLeft 시 textview 없을 경우 NullPoint현상 보완
 	//////////////////////////////////////////////////////////////////////////////////////
 	
 	// TAG
@@ -954,7 +965,7 @@ public class Home extends Activity {
 	public static final int REQ_ERR_END					= 15;
 	// --, 150326 bwk
 	////////////////////////////////////////////////////
-	
+
 	//Resource//////////////////////////////////////////
 	FrameLayout framelayoutMain;
 	ImageView imgViewCameraScreen;
@@ -1505,13 +1516,28 @@ public class Home extends Activity {
 		
 	}
 	public void InitButtonListener(){	
-		
-		imgViewCameraScreen.setOnClickListener(new View.OnClickListener() {
+//		imgViewCameraScreen.setOnClickListener(new View.OnClickListener() {
+//			
+//			@Override
+//			public void onClick(View v) {
+//				// TODO Auto-generated method stub
+//				ExitCam();
+//			}
+//		});
+		imgViewCameraScreen.setOnTouchListener(new View.OnTouchListener() {
 			
 			@Override
-			public void onClick(View v) {
-				// TODO Auto-generated method stub
-				ExitCam();
+			public boolean onTouch(View v, MotionEvent event) {
+				switch(event.getAction()){
+					case MotionEvent.ACTION_UP:
+						Log.d(TAG, "imgViewCameraScreen.ScreenIndex"+Integer.toHexString(ScreenIndex));
+						if(CAN1Comm.CameraOnFlag == CAN1CommManager.STATE_CAMERA_MANUAL)
+							ExitCam();
+						else
+							Log.d(TAG, "imgViewCameraScreen.setOnClickListener"+CAN1Comm.CameraOnFlag);
+						
+				}
+				return false;
 			}
 		});
 		
@@ -2287,7 +2313,7 @@ public class Home extends Activity {
 			}else if(Data == CAN1CommManager.CAMERA){
 				if(CAN1Comm.CameraOnFlag ==  CAN1CommManager.STATE_CAMERA_OFF){
 					ExcuteCamActivitybyKey();
-				}else{
+				}else if(CAN1Comm.CameraOnFlag != CAN1CommManager.STATE_CAMERA_REVERSEGEAR){
 					ExitCam();
 				}
 			}
@@ -2477,8 +2503,9 @@ public class Home extends Activity {
 				CheckFNLed();
 			}
 		});
-	
 	}
+
+	
 	public void CheckBuzzer(){
 		if(ScreenIndex == SCREEN_STATE_MAIN_B_KEY_QUICKCOUPLER_POPUP_LOCKING2
 		|| ScreenIndex == SCREEN_STATE_MAIN_B_KEY_QUICKCOUPLER_POPUP_UNLOCKING2
@@ -2519,7 +2546,7 @@ public class Home extends Activity {
 		if((ScreenIndex >= SCREEN_STATE_MAIN_B_TOP && ScreenIndex <= SCREEN_STATE_MAIN_B_END)
 		|| (ScreenIndex >= SCREEN_STATE_MAIN_A_TOP && ScreenIndex <= SCREEN_STATE_MAIN_A_END)	// ++, --, 150310 bwk
 		|| (ScreenIndex >= SCREEN_STATE_MENU_TOP   && ScreenIndex <= SCREEN_STATE_MENU_END)
-		|| ScreenIndex == SCREEN_STATE_MAIN_CAMERA_GEAR){
+		|| (ScreenIndex == SCREEN_STATE_MAIN_CAMERA_GEAR)){
 			if(CameraReverseMode == CAN1CommManager.DATA_STATE_CAMERA_REVERSE_ON){
 				if(SelectGearDirection == CAN1CommManager.DATA_INDEX_SELECTGEAR_DIR_R){	
 					CameraReverseOffCount = 0; 
@@ -2536,6 +2563,7 @@ public class Home extends Activity {
 						ScreenIndex = SCREEN_STATE_MAIN_CAMERA_GEAR;
 						CAN1Comm.CameraOnFlag = CAN1CommManager.STATE_CAMERA_REVERSEGEAR;
 						CAN1Comm.TxCMDToMCU(CAN1Comm.CMD_CAM, CameraOrder1);
+						CAN1Comm.CameraCurrentOnOff = true;
 						imgViewCameraScreen.setClickable(false);
 						CameraReverseOnCount = 0;
 					}
@@ -2553,6 +2581,7 @@ public class Home extends Activity {
 						CAN1Comm.CameraOnFlag = CAN1CommManager.STATE_CAMERA_OFF;
 						ScreenIndex = OldScreenIndex;
 						CAN1Comm.TxCMDToMCU(CAN1Comm.CMD_CAM, 0xFF);
+						CAN1Comm.CameraCurrentOnOff = false;
 						imgViewCameraScreen.setClickable(false);
 					}
 				}

@@ -136,10 +136,10 @@ public class MultimediaClosePopup extends ParentPopup {
 		intent = ParentActivity.getPackageManager().getLaunchIntentForPackage("com.powerone.wfd.sink");
 		if(intent != null){
 			// ++, 150323 bwk
-			CAN1Comm.SetMiracastFlag(true);
+			//CAN1Comm.SetMiracastFlag(true);
 			// --, 150323 bwk				
 			ParentActivity.startActivity(intent);
-			ParentActivity.StartAlwaysOntopService();		// ++, --, 150324 cjg
+			ParentActivity.StartCheckSmartTerminalTimer();
 		}
 		
 	}	

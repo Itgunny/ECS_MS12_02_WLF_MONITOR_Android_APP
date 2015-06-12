@@ -9,7 +9,9 @@ import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Message;
 import android.util.Log;
+import android.util.MonthDisplayHelper;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup.LayoutParams;
 
@@ -44,6 +46,18 @@ public abstract class ParentPopup extends Dialog{
 		CursurIndex = 0;
 		inflater = (LayoutInflater)_context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 	}
+
+	@Override
+	public boolean dispatchTouchEvent(MotionEvent ev) {
+		if(ParentActivity.ScreenIndex >= Home.SCREEN_STATE_MAIN_CAMERA_TOP && ParentActivity.ScreenIndex <= Home.SCREEN_STATE_MAIN_CAMERA_END)
+		{
+			if(CAN1Comm.CameraOnFlag == CAN1CommManager.STATE_CAMERA_MANUAL)
+				ParentActivity.ExitCam();
+			return false;
+		}
+		else
+			return super.dispatchTouchEvent(ev);
+    }
 	
 	@Override
 	public void dismiss() {

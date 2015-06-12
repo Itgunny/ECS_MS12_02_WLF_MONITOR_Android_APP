@@ -309,9 +309,14 @@ public class MainBKeyRearWiperFragment extends ParentFragment{
 	}
 	/////////////////////////////////////////////////////////////////////
 	public void ClickLeft(){
-		if(textViewWasher.isPressed() == true 	// Washer Button Push
-				|| (CAN1Comm.Get_RX_RES_KEY_LongFlag() == 1 && CAN1Comm.Get_RX_RES_KEY_RearWiper() == 1 ))
-			return;
+		try {
+			if(textViewWasher.isPressed() == true 	// Washer Button Push
+					|| (CAN1Comm.Get_RX_RES_KEY_LongFlag() == 1 && CAN1Comm.Get_RX_RES_KEY_RearWiper() == 1 ))
+				return;
+		} catch (NullPointerException e) {
+			// TODO: handle exception
+			Log.e(TAG,"NullPointerException MainBKeyRearWiperFragment");
+		}		
 		switch (CursurIndex) {
 		case 1:
 			CursurIndex = 4;
@@ -328,9 +333,14 @@ public class MainBKeyRearWiperFragment extends ParentFragment{
 		}
 	}
 	public void ClickRight(){
-		if(textViewWasher.isPressed() == true 	// Washer Button Push
-				|| (CAN1Comm.Get_RX_RES_KEY_LongFlag() == 1 && CAN1Comm.Get_RX_RES_KEY_RearWiper() == 1 ))
-			return;
+		try {
+			if(textViewWasher.isPressed() == true 	// Washer Button Push
+					|| (CAN1Comm.Get_RX_RES_KEY_LongFlag() == 1 && CAN1Comm.Get_RX_RES_KEY_RearWiper() == 1 ))
+				return;
+		} catch (NullPointerException e) {
+			// TODO: handle exception
+			Log.e(TAG,"NullPointerException MainBKeyRearWiperFragment");
+		}		
 		switch (CursurIndex) {
 		case 1:
 		case 2:
