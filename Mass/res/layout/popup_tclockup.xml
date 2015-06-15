@@ -24,27 +24,27 @@
         android:textSize="25sp" />
     
     <TextView
-        android:id="@+id/textView_popup_tclockup_on"
+        android:id="@+id/textView_popup_tclockup_off"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="44dp"
         android:layout_marginTop="97dp"
         android:background="@drawable/_selector_popup01_long_btn1"
         android:gravity="center"
-        android:text="@string/On"
+        android:text="@string/Off"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:textColor="@color/black" />
 
     
     <TextView
-        android:id="@+id/textView_popup_tclockup_off"
+        android:id="@+id/textView_popup_tclockup_on"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="44dp"
         android:layout_marginTop="181dp"
         android:background="@drawable/_selector_popup01_long_btn1"
         android:gravity="center"
-        android:text="@string/Off"
+        android:text="@string/On"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:textColor="@color/black" />
     

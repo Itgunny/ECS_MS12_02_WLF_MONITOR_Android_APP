@@ -497,7 +497,7 @@ public class Home extends Activity {
 	// 5. 다국어 설정 - 한국어 설정 후 KEY OFF 시 영어로 바뀜(타 언어도 동일 현상으로 추정) -> 개선
 	// 6. CID S/N 없는 경우 '-'로 표시
 	//// v2.0.0.3
-	// 1. SmartKey SA 무시
+	// 1. SmartKey SA 무시(MCU의 CID와 겹쳐보임)
 	// 2. 히든 키 변경
 	//	- 진단기능-장비정보-각 장비화면 / 8+0 / Hidden 정보 표시
 	//	- 멀티미디어 / 8+0 / File manager
@@ -512,7 +512,7 @@ public class Home extends Activity {
 	//	- 6057018709 
 	// 4. 후방카메라 연동 시 후진기어일 경우 부저 울리지 않는 현상 개선
 	//	- 퀵커플러와 충돌로 인함
-	//// v2.0.0.5
+	//// v2.0.0.5 15.06.12
 	// 1. PDF에서 ESC키 눌렀을 경우 소리안나는 현상 개선
 	// 2. 팝업을 켠 채로 카메라 모드로 들어가면 팝업이 꺼지거나 클릭되는 현상 개선
 	//	- ParentPopup에서 카메라의 상태를 보고 막음
@@ -524,10 +524,19 @@ public class Home extends Activity {
 	// 6. 스마트 터미널 실행 중 FN키 누르면 LED 꺼지지 않는 현상 개선
 	// 7. H/W Revision 저항 F.01.01 738 인식 보드 발생 -> max를 740으로 변경
 	// 8. MainKeyRearWiper ClickRight,ClickLeft 시 textview 없을 경우 NullPoint현상 보완
+	//// v2.0.0.5 15.06.15
+	// 1. [카메라 설정 기능]의 첫번째 카메라에 후진기어연동 전용 표시
+	// 2. 락업클러치 기능 켜짐/꺼짐 위아래 위치 바꿈 (ICCO 모드 기능과 비교했을 때) : 메인화면, 메뉴 내 전부
+	// 3. 엔진 자동정지 기능 팝업 뜨고 취소 버튼 누르면 직후 키패드 입력 시 CRASH 개선
+	// 4. 온도 값이 0xff이상일 경우 '-'로 표시
+	// 5. A안 Finemodulation 화면 Touch 시 crash 개선
+	// 6. Sync 적용
 	//////////////////////////////////////////////////////////////////////////////////////
 	
 	// TAG
 	private  final String TAG = "Home";
+	
+	public  static final int SCREEN_STATE_FILTER 											= 0xF0000000;
 	
 	public  static final int SCREEN_STATE_MAIN_B_TOP 										= 0x10000000;
 	
@@ -1547,7 +1556,7 @@ public class Home extends Activity {
 		OldScreenIndex = ScreenIndex;
 		ScreenIndex = SCREEN_STATE_MAIN_CAMERA_KEY;
 		CAN1Comm.CameraOnFlag = CAN1CommManager.STATE_CAMERA_MANUAL;
-		CAN1Comm.TxCMDToMCU(CAN1Comm.CMD_CAM, CameraOrder1);
+		CAN1Comm.TxCMDToMCU(CAN1CommManager.CMD_CAM, CameraOrder1);
 		imgViewCameraScreen.setClickable(true);
 		CAN1Comm.CameraCurrentOnOff = true;	// ++, --, 150326 cjg
 		
@@ -1565,7 +1574,7 @@ public class Home extends Activity {
 			CAN1Comm.CameraCurrentOnOff = false;	// ++, --, 150326 cjg
 			if(CAN1Comm.CameraOnFlag == CAN1CommManager.STATE_CAMERA_MANUAL){
 				CAN1Comm.CameraOnFlag = CAN1CommManager.STATE_CAMERA_OFF;
-				CAN1Comm.TxCMDToMCU(CAN1Comm.CMD_CAM, 0xFF);
+				CAN1Comm.TxCMDToMCU(CAN1CommManager.CMD_CAM, 0xFF);
 				imgViewCameraScreen.setClickable(false);
 				
 				return true;
@@ -1596,7 +1605,7 @@ public class Home extends Activity {
 				SelectCameraNum = 1;
 		}
 		
-		CAN1Comm.TxCMDToMCU(CAN1Comm.CMD_CAM, SelectCameraNum-1);
+		CAN1Comm.TxCMDToMCU(CAN1CommManager.CMD_CAM, SelectCameraNum-1);
 	}
 	// --, 150324 bwk
 
@@ -1663,7 +1672,6 @@ public class Home extends Activity {
 		int _Componentcode;
 		int _Manufacturecode;
 		byte[] _ComponentBasicInformation;
-		String strModel;
 		int Index = 4;
 		int Index2 = 0;
 		boolean bAsterisk = false;
@@ -2286,6 +2294,18 @@ public class Home extends Activity {
 			else if(Data == CAN1CommManager.POWER_OFF){
 				showEndingFragment();
 				//allKillRunningApps("taeha.wheelloader.fseries_monitor.main");	// ++, --, 150326 cjg multimedia ending 개선 
+				// ++, 150615 cjg
+				try {
+					CAN1Comm.native_system_sync_Native();
+				} catch (NullPointerException e) {
+					// TODO: handle exception
+					Log.e(TAG,"NullPointerException");
+				}
+				catch (Throwable t) {
+					// TODO: handle exception
+					Log.e(TAG,"Load Library Error");
+				}	
+				// --, 150615 cjg
 			}
 			else if(CAN1Comm.GetScreenTopFlag() == true){
 				try {
@@ -2342,7 +2362,7 @@ public class Home extends Activity {
 			
 			SaveCID(ComponentCode,ManufacturerCode,ComponentBasicInformation);
 			
-			CAN1Comm.TxCMDToMCU(CAN1Comm.CMD_RTC,ComponentBasicInformation[0],ComponentBasicInformation[1],ComponentBasicInformation[2],0x01,Hour,Min,Sec,0x00);
+			CAN1Comm.TxCMDToMCU(CAN1CommManager.CMD_RTC,ComponentBasicInformation[0],ComponentBasicInformation[1],ComponentBasicInformation[2],0x01,Hour,Min,Sec,0x00);
 		}
 
 		@Override
@@ -2693,8 +2713,8 @@ public class Home extends Activity {
 			&& EngineAutoShutdownMode == 1
 			&& EngineAutoShutdownRemainingTime <= 60){
 			
-			showEngineAutoShutdownCount();
 			OldScreenIndex = ScreenIndex;
+			showEngineAutoShutdownCount();
 			
 		}else if(ScreenIndex == SCREEN_STATE_ENGINEAUTOSHUTDOWNCOUNT_TOP){
 			if( EngineAutoShutdownMode == 0
@@ -2922,7 +2942,7 @@ public class Home extends Activity {
 			}
 			Log.d(TAG,"Click QuickCoupler Key");				
 		}
-		else if((ScreenIndex & SCREEN_STATE_MAIN_A_TOP) == SCREEN_STATE_MAIN_A_TOP){
+		else if((ScreenIndex & SCREEN_STATE_FILTER) == SCREEN_STATE_MAIN_A_TOP){
 			Log.d(TAG,"Click Main A Key");
 			_MainABaseFragment.KeyButtonClick(Data);
 		// --, 150310 bwk
@@ -2941,16 +2961,19 @@ public class Home extends Activity {
 		}else if(ScreenIndex == SCREEN_STATE_MENU_MODE_HYD_WORKLOAD_WEIGHING_INIT2){
 			Log.d(TAG,"Click WeighingInit2 Key");
 			_WorkLoadWeighingInitPopup2.KeyButtonClick(Data);
-		}else if((ScreenIndex & SCREEN_STATE_MAIN_B_TOP) == SCREEN_STATE_MAIN_B_TOP){
+		}else if((ScreenIndex & SCREEN_STATE_FILTER) == SCREEN_STATE_MAIN_B_TOP){
 			Log.d(TAG,"Click Main B Key");
 			_MainBBaseFragment.KeyButtonClick(Data);
-		}else if((ScreenIndex & SCREEN_STATE_MAIN_ENDING) == SCREEN_STATE_MAIN_ENDING){
+		}else if((ScreenIndex & SCREEN_STATE_FILTER) == SCREEN_STATE_MAIN_ENDING){
 			Log.d(TAG,"Click Ending Key");
 			
-		}else if((ScreenIndex & SCREEN_STATE_MENU_TOP) == SCREEN_STATE_MENU_TOP){
+		}else if((ScreenIndex & SCREEN_STATE_FILTER) == SCREEN_STATE_MENU_TOP){
 			Log.d(TAG,"Click Menu Key");
 			_MenuBaseFragment.KeyButtonClick(Data);
-		} 
+		}else if(ScreenIndex == SCREEN_STATE_ENGINEAUTOSHUTDOWNCOUNT_TOP){
+			Log.d(TAG,"Click EngineAutoShutdownCount Key");
+			_EngineAutoShutdownCountPopup.KeyButtonClick(Data);
+		}
 	}
 	/////////////////////////////////////////////////////
 	//Popup//////////////////////////////////////////////
@@ -4059,15 +4082,22 @@ public class Home extends Activity {
 	public String GetTemp(int _Temp, int Unit){
 		String strTemp;
 		int nTemp;
+		long long_Temp;
 		
-		nTemp = GetTemp(_Temp);
-		if(Unit == UNIT_TEMP_F){
-			nTemp *= 18;
-			nTemp = nTemp / 10;
-			nTemp += 32;
-			strTemp = GetNumberString(nTemp);
-		}else{
-			strTemp = GetNumberString(nTemp);
+		long_Temp = (_Temp  & 0xFFFFFFFFL);
+		if(long_Temp >= 0xFFL){
+			return "-";
+		}else
+		{
+			nTemp = GetTemp(_Temp);
+			if(Unit == UNIT_TEMP_F){
+				nTemp *= 18;
+				nTemp = nTemp / 10;
+				nTemp += 32;
+				strTemp = GetNumberString(nTemp);
+			}else{
+				strTemp = GetNumberString(nTemp);
+			}
 		}
 		
 		return strTemp;

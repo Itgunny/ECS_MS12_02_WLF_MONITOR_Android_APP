@@ -257,7 +257,7 @@
     <string name="Excute">Excute</string>
     <string name="Push_and_hold_to_reverse_rotation">Push and hold to reverse rotation.</string>
     <string name="rpm_km_h">rpm/km/h</string>
-	<string name="You_should_turn_OFF_Soft_end_stop_before_start_calibration">You should turn OFF Soft end stop before start calibration.</string>
+    <string name="You_should_turn_OFF_Soft_end_stop_before_start_calibration">You should turn OFF Soft end stop before start calibration.</string>
     <!-- Menu Mode End -->
     <!-- Menu Monitoring Start -->
     <string name="Machine_Monitoring">Machine Monitoring</string>
@@ -439,6 +439,7 @@
     <string name="Unit_C">℃</string>
     <string name="Unit_F">℉</string>
     <string name="Check_Radio_mode_is_AUX_mode">(Check Radio mode is AUX mode)</string>
+    <string name="Reverse_camera">(Reverse Camera)</string>
     <!-- Menu Preference End -->
     <!-- Menu Multimedia Start -->
     <string name="Media_Palyer">Media Player</string>

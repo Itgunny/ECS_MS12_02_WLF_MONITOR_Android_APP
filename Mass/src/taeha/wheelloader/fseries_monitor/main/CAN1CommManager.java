@@ -593,6 +593,11 @@ public class CAN1CommManager extends ICAN1CommManager.Stub{		// ttySAC1(Linux), 
 		return ReqPopup;
 	}
 	//////////////////////////////////////////////////////////
+	// ++, 150615 cjg
+	public int native_system_sync_Native(){
+		return service.native_system_sync();
+	}
+	// --, 150615 cjg
 	
 	public int LineOutfromJNI(int spk){
 		return service.LineOutfromJNI_Native(spk);
@@ -1880,5 +1885,4 @@ public class CAN1CommManager extends ICAN1CommManager.Stub{		// ttySAC1(Linux), 
 		
 		callbacks.finishBroadcast();
 	}
-
 }

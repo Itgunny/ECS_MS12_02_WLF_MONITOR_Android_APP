@@ -5,14 +5,10 @@ import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
 
-
-import android.app.Activity;
 import android.app.ActivityManager;
-import android.app.Instrumentation;
-import android.app.PendingIntent;
-import android.app.Service;
 import android.app.ActivityManager.RunningAppProcessInfo;
-import android.app.ActivityManager.RunningTaskInfo;
+import android.app.Instrumentation;
+import android.app.Service;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
@@ -87,6 +83,7 @@ public class CommService extends Service{
 			System.loadLibrary("can_serial_port");
 			System.loadLibrary("can_data_parsing");
 			System.loadLibrary("LineOutclientjni");
+			System.loadLibrary("issynctrack"); 		// ++, --, 150615 cjg
 		} catch (Throwable t) {
 			// TODO: handle exception
 			Log.e(TAG,"Load Library Error");
@@ -95,7 +92,7 @@ public class CommService extends Service{
 	}
 	/////////////////////////////////////////////////////////////////////
 	//////////////////NATIVE METHOD/////////////////////////////////////
-	
+	public static native int native_system_sync();		// ++, --, 150615 cjg
 	public native int LineOutfromJNI_Native(int spk);
 	
 	public native int[] Get_TcuErr_FromNative();
@@ -1246,7 +1243,7 @@ public class CommService extends Service{
 				//if(GetScreenTopFlag() == true || CAN1Comm.CameraCurrentOnOff == true)
 				if(GetScreenTopFlag() == true || (CAN1Comm.CameraCurrentOnOff == true && CAN1Comm.CameraOnFlag != CAN1CommManager.STATE_CAMERA_REVERSEGEAR))
 				{
-					CAN1Comm.TxCMDToMCU(CAN1Comm.CMD_BUZ, 0);
+					CAN1Comm.TxCMDToMCU(CAN1CommManager.CMD_BUZ, 0);
 					CAN1Comm.Set_RequestBuzzerStop_PGN65327(1);
 					CAN1Comm.TxCANToMCU(47);
 					CAN1Comm.Callback_KeyButton(Data);
@@ -1290,6 +1287,18 @@ public class CommService extends Service{
 					}
 					endingKeyIGCount++;
 				}
+				// ++, 150615 cjg
+				try {
+					CAN1Comm.native_system_sync_Native();
+				} catch (NullPointerException e) {
+					// TODO: handle exception
+					Log.e(TAG,"NullPointerException");
+				}
+				catch (Throwable t) {
+					// TODO: handle exception
+					Log.e(TAG,"Load Library Error");
+				}	
+				// --, 150615 cjg
 				// --, 150403 cjg			
 				break;
 			case CAN1CommManager.FN:

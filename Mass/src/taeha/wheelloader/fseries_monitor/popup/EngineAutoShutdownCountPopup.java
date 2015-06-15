@@ -71,7 +71,7 @@ public class EngineAutoShutdownCountPopup extends ParentPopup{
 		InitButtonListener();
 		InitValuable();
 		
-		ParentActivity.ScreenIndex = ParentActivity.SCREEN_STATE_ENGINEAUTOSHUTDOWNCOUNT_TOP;
+		ParentActivity.ScreenIndex = Home.SCREEN_STATE_ENGINEAUTOSHUTDOWNCOUNT_TOP;
 	}
 	@Override
 	public boolean onTouchEvent(MotionEvent event) {
@@ -90,14 +90,15 @@ public class EngineAutoShutdownCountPopup extends ParentPopup{
 	@Override
 	public void InitValuable(){
 		super.InitValuable();
-
+		CursurIndex = 2;
+		CursurDisplay(CursurIndex);
 	}
 	@Override
 	public void dismiss() {
 		// TODO Auto-generated method stub
 		super.dismiss();
 	//	Log.d(TAG, "ScreenIndex="+Integer.toHexString(ParentActivity.OldScreenIndex));
-		ParentActivity.ScreenIndex = ParentActivity.OldScreenIndex;
+	//	ParentActivity.ScreenIndex = ParentActivity.OldScreenIndex;
 	}
 
 	@Override
@@ -146,6 +147,7 @@ public class EngineAutoShutdownCountPopup extends ParentPopup{
 		CAN1Comm.Set_EngineShutdownCotrolByte_PGN61184_121(STATE_COTROL_AUTO_SKIP);
 		CAN1Comm.TxCANToMCU(121);
 		CAN1Comm.Set_EngineShutdownCotrolByte_PGN61184_121(15);
+		ParentActivity.ScreenIndex = ParentActivity.OldScreenIndex;
 		this.dismiss();
 	}	
 	public void ClickCancel(){
@@ -153,9 +155,81 @@ public class EngineAutoShutdownCountPopup extends ParentPopup{
 		CAN1Comm.Set_EngineShutdownCotrolByte_PGN61184_121(STATE_COTROL_AUTO_CANCEL);
 		CAN1Comm.TxCANToMCU(121);
 		CAN1Comm.Set_EngineShutdownCotrolByte_PGN61184_121(15);
+		ParentActivity.ScreenIndex = ParentActivity.OldScreenIndex;
 		this.dismiss();
 	}
 	////////////////////////////////////////////////////////////////////////////////
+	public void KeyButtonClick(int key){
+		switch (key) {
+		case CAN1CommManager.LEFT:
+			ClickLeft();
+			break;
+		case CAN1CommManager.RIGHT:
+			ClickRight();
+			break;
+		case CAN1CommManager.ENTER:
+			ClickEnter();
+			break;
+		default:
+			break;
+		}
+	}
+	
+	public void ClickLeft(){
+		switch (CursurIndex) {
+		case 1:
+			CursurIndex = 2;
+			CursurDisplay(CursurIndex);
+			break;
+		case 2:
+			CursurIndex--;
+			CursurDisplay(CursurIndex);
+			break;
+		default:
+			break;
+		}
+	}
+	public void ClickRight(){
+		switch (CursurIndex) {
+		case 1:
+			CursurIndex++;
+			CursurDisplay(CursurIndex);
+			break;
+		case 2:
+			CursurIndex = 1;
+			CursurDisplay(CursurIndex);
+			break;
+		default:
+			break;
+		}
+	}
+	public void ClickEnter(){
+		switch (CursurIndex) {
+		case 1:
+			ClickSkip();
+			break;
+		case 2:
+			ClickCancel();
+			break;
+		default:
+			break;
+		}
+	}	
+	////////////////////////////////////////////////////////////////////////////////
+	public void CursurDisplay(int Index){
+		switch (Index) {
+		case 1:
+			imgbtnSkip.setPressed(true);
+			imgbtnCancel.setPressed(false);
+			break;
+		case 2:
+			imgbtnSkip.setPressed(false);
+			imgbtnCancel.setPressed(true);
+			break;
+		default:
+			break;
+		}
+	}	
 	public void CountDisplay(int _data){
 		textViewTime.setText(Integer.toString(_data) + ParentActivity.getResources().getString(string.Sec));
 	}

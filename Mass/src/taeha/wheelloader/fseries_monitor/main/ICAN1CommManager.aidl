@@ -7,7 +7,7 @@ interface ICAN1CommManager
 
 	int LineOutfromJNI(int spk);
 	
-	
+	int native_system_sync_Native();
 	
 	
 	

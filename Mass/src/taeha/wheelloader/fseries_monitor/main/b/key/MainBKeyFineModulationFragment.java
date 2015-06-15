@@ -2,6 +2,7 @@ package taeha.wheelloader.fseries_monitor.main.b.key;
 
 import android.os.Bundle;
 import android.os.Handler;
+import android.os.Message;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -57,6 +58,14 @@ public class MainBKeyFineModulationFragment extends ParentFragment{
 		ParentActivity.ScreenIndex = ParentActivity.SCREEN_STATE_MAIN_B_KEY_FINEMODULATION;
 		FineModulationDisplay(FineModulation);
 		ClickHardKey();
+		
+		HandleCursurDisplay = new Handler() {
+			@Override
+			public void handleMessage(Message msg) {
+				CursurDisplay(msg.what);
+			}
+		};
+		
 		return mRoot;
 	}
 
