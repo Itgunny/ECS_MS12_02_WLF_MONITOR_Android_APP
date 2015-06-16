@@ -531,6 +531,9 @@ public class Home extends Activity {
 	// 4. 온도 값이 0xff이상일 경우 '-'로 표시
 	// 5. A안 Finemodulation 화면 Touch 시 crash 개선
 	// 6. Sync 적용
+	// 7. KeyButton Filter 수정
+	//// v2.0.0.5 15.06.16
+	// 1. 엔진자동정지 60초 이하데이터 나오고 60초 이상 데이터 올 경우 팝업이 안뜨는 현상 해결
 	//////////////////////////////////////////////////////////////////////////////////////
 	
 	// TAG
@@ -2722,6 +2725,8 @@ public class Home extends Activity {
 				
 				if(HomeDialog != null){
 					HomeDialog.dismiss();
+					ScreenIndex = OldScreenIndex;
+					//Log.d(TAG,"CheckEngineAutoShutdown Dismiss");
 					HomeDialog = null;
 				}
 			}
