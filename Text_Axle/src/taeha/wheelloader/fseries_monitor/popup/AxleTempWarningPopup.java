@@ -61,8 +61,6 @@ public class AxleTempWarningPopup extends ParentPopup{
 		InitButtonListener();
 		InitValuable();
 		
-		ParentActivity.OldScreenIndex = ParentActivity.ScreenIndex;
-		
 		if(ParentActivity.DisplayType == Home.DISPLAY_TYPE_A)
 			ParentActivity.ScreenIndex = Home.SCREEN_STATE_MAIN_B_LEFTUP_MACHINESTATUS_POPUP; 
 		else 
@@ -110,11 +108,11 @@ public class AxleTempWarningPopup extends ParentPopup{
 	}
 	///////////////////////////////////////////////////////////////////////////////
 	public void ClickCancel(){
-		ParentActivity.ScreenIndex = ParentActivity.OldScreenIndex;
-//		if(ParentActivity.DisplayType == Home.DISPLAY_TYPE_A)
-//			ParentActivity.ScreenIndex = Home.SCREEN_STATE_MAIN_B_TOP; 
-//		else 
-//			ParentActivity.ScreenIndex = Home.SCREEN_STATE_MAIN_A_TOP; 
+		//Log.d(TAG,"AxleClickCancel:ScreenIndex="+Integer.toHexString(ParentActivity.ScreenIndex)+"OldScreenIndex="+Integer.toHexString(ParentActivity.OldScreenIndex));
+		
+		 if(((ParentActivity.ScreenIndex & Home.SCREEN_STATE_FILTER) == Home.SCREEN_STATE_MAIN_A_TOP)
+				 ||((ParentActivity.ScreenIndex & Home.SCREEN_STATE_FILTER) == Home.SCREEN_STATE_MAIN_B_TOP))
+			ParentActivity.setScreenIndex();
 		
 		this.dismiss();
 	}

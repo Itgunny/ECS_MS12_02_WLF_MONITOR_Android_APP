@@ -1914,14 +1914,19 @@ public class MainABaseFragment extends ParentFragment{
 	public void CursurDisplay(int index)
 	{
 //		Log.d(TAG,"CursurDisplay:index="+index);
-		if(ParentActivity.ScreenIndex == Home.SCREEN_STATE_MAIN_A_TOP){
-			_MainALeftMainFragment.CursurDisplayDetail(index);
-			_MainACenterFragment.CursurDisplayDetail(index);
-			_MainARightMainFragment.CursurDisplayDetail(index);
-		}else if(ParentActivity.ScreenIndex == Home.SCREEN_STATE_MAIN_A_QUICK_TOP){
-			_MainALeftQuickFragment.CursurDisplayDetail(index);
-			_MainACenterQuickFragment.CursurDisplayDetail(index);
-			_MainARightQuickFragment.CursurDisplayDetail(index);
+		try {
+			if(ParentActivity.ScreenIndex == Home.SCREEN_STATE_MAIN_A_TOP){
+				_MainALeftMainFragment.CursurDisplayDetail(index);
+				_MainACenterFragment.CursurDisplayDetail(index);
+				_MainARightMainFragment.CursurDisplayDetail(index);
+			}else if(ParentActivity.ScreenIndex == Home.SCREEN_STATE_MAIN_A_QUICK_TOP){
+				_MainALeftQuickFragment.CursurDisplayDetail(index);
+				_MainACenterQuickFragment.CursurDisplayDetail(index);
+				_MainARightQuickFragment.CursurDisplayDetail(index);
+			}
+		} catch (NullPointerException e) {
+			// TODO: handle exception
+			Log.e(TAG,"NullPointerException dismiss");
 		}
 	}
 

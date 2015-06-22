@@ -65,10 +65,10 @@ public class QuickCouplerPopupUnlocking3 extends ParentPopup{
 		// ++, 150314 bwk
 		//ParentActivity.ScreenIndex = ParentActivity.SCREEN_STATE_MAIN_B_KEY_QUICKCOUPLER_POPUP_UNLOCKING3;
 		QuickCouplerOldScreenIndex = 0;
-		if(ParentActivity.DisplayType == ParentActivity.DISPLAY_TYPE_A){
-			ParentActivity.ScreenIndex = ParentActivity.SCREEN_STATE_MAIN_B_KEY_QUICKCOUPLER_POPUP_UNLOCKING3;
+		if(ParentActivity.DisplayType == Home.DISPLAY_TYPE_A){
+			ParentActivity.ScreenIndex = Home.SCREEN_STATE_MAIN_B_KEY_QUICKCOUPLER_POPUP_UNLOCKING3;
 		}else{
-			ParentActivity.ScreenIndex = ParentActivity.SCREEN_STATE_MAIN_A_KEY_QUICKCOUPLER_POPUP_UNLOCKING3;
+			ParentActivity.ScreenIndex = Home.SCREEN_STATE_MAIN_A_KEY_QUICKCOUPLER_POPUP_UNLOCKING3;
 		}
 		// --, 150314 bwk			
 
@@ -157,7 +157,10 @@ public class QuickCouplerPopupUnlocking3 extends ParentPopup{
 		}
 		ParentActivity.SavePref();
 		CAN1Comm.SetFNFlag(true);
-		ParentActivity.setScreenIndex();
+
+		if(((ParentActivity.ScreenIndex & Home.SCREEN_STATE_FILTER) == Home.SCREEN_STATE_MAIN_A_TOP)
+				 ||((ParentActivity.ScreenIndex & Home.SCREEN_STATE_FILTER) == Home.SCREEN_STATE_MAIN_B_TOP))
+			 ParentActivity.setScreenIndex();
 		this.dismiss();
 	}
 
