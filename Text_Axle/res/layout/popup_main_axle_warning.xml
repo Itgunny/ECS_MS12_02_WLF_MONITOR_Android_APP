@@ -3,14 +3,16 @@
     android:id="@+id/RelativeLayout_popup_main_axle_warning"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/menu_popup01_bg" >
+    android:background="@drawable/menu_popup01_bg" 
+    android:splitMotionEvents="false">
 
     <RelativeLayout
         android:id="@+id/RelativeLayout_popup_main_axle_warning_title"
         android:layout_width="448dp"
         android:layout_height="200dp"
         android:layout_centerHorizontal="true"
-        android:layout_centerVertical="true" >
+        android:layout_centerVertical="true" 
+        android:splitMotionEvents="false">
         
        <TextView
            android:id="@+id/textView_popup_main_axle_warning_title"

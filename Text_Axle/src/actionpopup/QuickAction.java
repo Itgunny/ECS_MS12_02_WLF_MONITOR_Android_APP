@@ -11,6 +11,7 @@ import android.widget.ScrollView;
 import android.widget.RelativeLayout;
 import android.widget.PopupWindow.OnDismissListener;
 
+import android.os.Handler;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -67,6 +68,8 @@ public class QuickAction extends PopupWindows implements OnDismissListener {
 	public static final int ANIM_GROW_FROM_CENTER = 3;
 	public static final int ANIM_REFLECT = 4;
 	public static final int ANIM_AUTO = 5;
+	
+	Handler handler = new Handler();
 	
     /**
      * Constructor for default vertical layout
@@ -534,13 +537,21 @@ public class QuickAction extends PopupWindows implements OnDismissListener {
 	
 	public class CloseTimerClass extends TimerTask{
 
-		@Override
-		public void run() {
-			// TODO Auto-generated method stub
-			mWindow.dismiss();
-		}
-		
-	}
+        @Override
+        public void run() {
+                // TODO Auto-generated method stub
+                handler.post(new Runnable() {
+
+                       public void run() {
+                               mWindow.dismiss();
+                       }
+
+                });
+                
+        }
+        
+ }
+
 	
 	public void StartCloseTimer(){
 		CancelCloseTimer();

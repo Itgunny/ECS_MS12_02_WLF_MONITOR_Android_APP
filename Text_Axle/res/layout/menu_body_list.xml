@@ -11,7 +11,8 @@
         android:layout_width="match_parent"
         android:layout_height="65dp"
         android:layout_marginBottom="1dp"
-        android:layout_marginTop="1dp" >
+        android:layout_marginTop="1dp" 
+        android:splitMotionEvents="false">
 
         <ImageButton
             android:id="@+id/imageButton_menu_body_list_1"
@@ -58,7 +59,8 @@
     android:layout_width="match_parent"
     android:layout_height="65dp"
     android:layout_marginBottom="1dp"
-    android:layout_marginTop="1dp" >
+    android:layout_marginTop="1dp" 
+    android:splitMotionEvents="false">
         
         <ImageButton
             android:id="@+id/imageButton_menu_body_list_2"
@@ -105,7 +107,8 @@
         android:layout_width="match_parent"
         android:layout_height="65dp"
         android:layout_marginBottom="1dp"
-        android:layout_marginTop="1dp" >
+        android:layout_marginTop="1dp" 
+        android:splitMotionEvents="false">
         
         <ImageButton
             android:id="@+id/imageButton_menu_body_list_3"
@@ -152,7 +155,8 @@
         android:layout_width="match_parent"
         android:layout_height="65dp"
         android:layout_marginBottom="1dp"
-        android:layout_marginTop="1dp" >
+        android:layout_marginTop="1dp" 
+        android:splitMotionEvents="false">
         
         <ImageButton
             android:id="@+id/imageButton_menu_body_list_4"
@@ -199,7 +203,8 @@
         android:layout_width="match_parent"
         android:layout_height="65dp"
         android:layout_marginBottom="1dp"
-        android:layout_marginTop="1dp" >
+        android:layout_marginTop="1dp" 
+        android:splitMotionEvents="false">
         
         <ImageButton
             android:id="@+id/imageButton_menu_body_list_5"
@@ -246,7 +251,8 @@
         android:layout_width="match_parent"
         android:layout_height="65dp"
         android:layout_marginBottom="1dp"
-        android:layout_marginTop="1dp" >
+        android:layout_marginTop="1dp" 
+        android:splitMotionEvents="false">
 
         <ImageButton
             android:id="@+id/imageButton_menu_body_list_6"

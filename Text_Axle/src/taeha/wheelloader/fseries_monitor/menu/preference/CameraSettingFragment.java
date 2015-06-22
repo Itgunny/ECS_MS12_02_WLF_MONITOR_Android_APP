@@ -85,7 +85,7 @@ public class CameraSettingFragment extends ParentFragment{
 		// TODO Auto-generated method stub
 		 TAG = "CameraSettingFragment";
 		Log.d(TAG, "onCreateView");
-		mRoot = inflater.inflate(R.layout.menu_body_mode_camerasetting, null);
+		mRoot = inflater.inflate(R.layout.menu_body_preference_camerasetting, null);
 		InitResource();
 		InitValuables();
 		InitButtonListener();
@@ -110,28 +110,28 @@ public class CameraSettingFragment extends ParentFragment{
 	@Override
 	protected void InitResource() {
 		// TODO Auto-generated method stub
-		imgbtnOK = (ImageButton)mRoot.findViewById(R.id.ImageButton_menu_body_mode_camerasetting_low_ok);
-		imgbtnCancel = (ImageButton)mRoot.findViewById(R.id.ImageButton_menu_body_mode_camerasetting_low_cancel);
+		imgbtnOK = (ImageButton)mRoot.findViewById(R.id.ImageButton_menu_body_preference_camerasetting_low_ok);
+		imgbtnCancel = (ImageButton)mRoot.findViewById(R.id.ImageButton_menu_body_preference_camerasetting_low_cancel);
 
-		imgbtnActiveCameraMinus = (ImageButton)mRoot.findViewById(R.id.imageButton_menu_body_mode_camerasetting_cameranumber_minus);
-		imgbtnActiveCameraPlus = (ImageButton)mRoot.findViewById(R.id.imageButton_menu_body_mode_camerasetting_cameranumber_plus);
+		imgbtnActiveCameraMinus = (ImageButton)mRoot.findViewById(R.id.imageButton_menu_body_preference_camerasetting_cameranumber_minus);
+		imgbtnActiveCameraPlus = (ImageButton)mRoot.findViewById(R.id.imageButton_menu_body_preference_camerasetting_cameranumber_plus);
 	
-		textViewCAM1 = (TextView)mRoot.findViewById(R.id.textView_menu_body_mode_camerasetting_dislayorder_btn1);
-		textViewCAM2 = (TextView)mRoot.findViewById(R.id.textView_menu_body_mode_camerasetting_dislayorder_btn2);
-		textViewCAM3 = (TextView)mRoot.findViewById(R.id.textView_menu_body_mode_camerasetting_dislayorder_btn3);
-		textViewCAM4 = (TextView)mRoot.findViewById(R.id.textView_menu_body_mode_camerasetting_dislayorder_btn4);
+		textViewCAM1 = (TextView)mRoot.findViewById(R.id.textView_menu_body_preference_camerasetting_dislayorder_btn1);
+		textViewCAM2 = (TextView)mRoot.findViewById(R.id.textView_menu_body_preference_camerasetting_dislayorder_btn2);
+		textViewCAM3 = (TextView)mRoot.findViewById(R.id.textView_menu_body_preference_camerasetting_dislayorder_btn3);
+		textViewCAM4 = (TextView)mRoot.findViewById(R.id.textView_menu_body_preference_camerasetting_dislayorder_btn4);
 		
-		textViewCAM1txt = (TextView)mRoot.findViewById(R.id.textView_menu_body_mode_camerasetting_dislayorder_txt1);
-		textViewCAM2txt = (TextView)mRoot.findViewById(R.id.textView_menu_body_mode_camerasetting_dislayorder_txt2);
-		textViewCAM3txt = (TextView)mRoot.findViewById(R.id.textView_menu_body_mode_camerasetting_dislayorder_txt3);
-		textViewCAM4txt = (TextView)mRoot.findViewById(R.id.textView_menu_body_mode_camerasetting_dislayorder_txt4);
+		textViewCAM1txt = (TextView)mRoot.findViewById(R.id.textView_menu_body_preference_camerasetting_dislayorder_txt1);
+		textViewCAM2txt = (TextView)mRoot.findViewById(R.id.textView_menu_body_preference_camerasetting_dislayorder_txt2);
+		textViewCAM3txt = (TextView)mRoot.findViewById(R.id.textView_menu_body_preference_camerasetting_dislayorder_txt3);
+		textViewCAM4txt = (TextView)mRoot.findViewById(R.id.textView_menu_body_preference_camerasetting_dislayorder_txt4);
 		
-		textViewCameraNum = (TextView)mRoot.findViewById(R.id.textView_menu_body_mode_camerasetting_cameranumber_data);
+		textViewCameraNum = (TextView)mRoot.findViewById(R.id.textView_menu_body_preference_camerasetting_cameranumber_data);
 		if(Build.VERSION.SDK_INT <= Build.VERSION_CODES.ICE_CREAM_SANDWICH_MR1){	
-			checkReverseMode = (CheckBox)mRoot.findViewById(R.id.checkBox_menu_body_mode_camerasetting_gearmode);
+			checkReverseMode = (CheckBox)mRoot.findViewById(R.id.checkBox_menu_body_preference_camerasetting_gearmode);
 			checkReverseMode.setPadding(50, 0, 0, 0);
 		} else {
-			checkReverseMode = (CheckBox)mRoot.findViewById(R.id.checkBox_menu_body_mode_camerasetting_gearmode);
+			checkReverseMode = (CheckBox)mRoot.findViewById(R.id.checkBox_menu_body_preference_camerasetting_gearmode);
 		}
 	}
 

@@ -147,6 +147,8 @@
     <string name="A_DAYS_FUEL_USED">하루 연료 소모량</string>
     <string name="A_Days_Fuel_Used">하루 연료 소모량</string>
     <string name="Axle_Warning_Popup">"경고!\n하나 이상의 액슬에서 오일 온도가 정상 범위를 초과했습니다!!\n경고 램프가 꺼질 때까지 장비 운행을 멈추시고 액슬 오일을 식히시기 바랍니다."</string>
+    <string name="Boom_Detent_Mode">붐 디텐트 모드</string>
+    <string name="Bucket_Detent_Mode">버켓 디텐트 모드</string>
     <!-- Main End -->
     <!-- Key Start-->
     <string name="Main_Light">메인 라이트</string>
@@ -254,6 +256,7 @@
     <string name="Excute">역회전</string>
     <string name="Push_and_hold_to_reverse_rotation">버튼을 누르고 있는 동안 냉각팬 역회전이 실행됩니다.</string>
     <string name="rpm_km_h">rpm/km/h</string>
+    <string name="You_should_turn_OFF_Soft_end_stop_before_start_calibration">보정을 시작하기 전에 소프트 앤드 스탑을 꺼주십시오.</string>
     <!-- Menu Mode End -->
     <!-- Menu Monitoring Start -->
     <string name="Machine_Monitoring">장비상태</string>
@@ -434,9 +437,11 @@
     <string name="Unit_C">섭씨</string>
     <string name="Unit_F">화씨</string>
     <string name="Check_Radio_mode_is_AUX_mode">(라디오 모드 설정을 AUX 모드로 변경해야 합니다)</string>
+    <string name="Reverse_camera">(후진기어연동 전용)</string>
     <!-- Menu Preference End -->
     <!-- Menu Multimedia Start -->
     <string name="Media_Palyer">미디어 플레이어</string>
+    <string name="Smart_Terminal">스마트 터미널</string>
     <!-- Menu Multimedia End -->
     <!-- Language Start -->
     <string name="Korean">한국어</string>

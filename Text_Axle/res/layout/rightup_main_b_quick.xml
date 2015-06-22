@@ -3,7 +3,8 @@
     android:id="@+id/RelativeLayout_rightup_main_b_quick"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/_selector_rightup_quick_btn" >
+    android:background="@drawable/_selector_rightup_quick_btn" 
+    android:splitMotionEvents="false">
 
     <ImageView
         android:id="@+id/imageView_rightup_main_b_quick_icon"

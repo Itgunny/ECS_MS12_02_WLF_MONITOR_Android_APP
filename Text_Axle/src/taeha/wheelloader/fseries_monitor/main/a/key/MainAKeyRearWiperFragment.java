@@ -26,6 +26,7 @@ public class MainAKeyRearWiperFragment extends ParentFragment{
 	RadioButton radioLow;
 	
 	TextView textViewWasher;
+	ImageView imageViewWasherBoarder;
 	//////////////////////////////////////////////////
 	
 	//VALUABLE////////////////////////////////////////
@@ -38,6 +39,7 @@ public class MainAKeyRearWiperFragment extends ParentFragment{
 	
 //	int initState;	// ++, 150211 bwk
 	int CursurIndex;
+	public int LongKey = 0;
 	Handler HandleCursurDisplay;
 	//////////////////////////////////////////////////
 	
@@ -63,7 +65,8 @@ public class MainAKeyRearWiperFragment extends ParentFragment{
 
 		ParentActivity.ScreenIndex = ParentActivity.SCREEN_STATE_MAIN_A_KEY_REARWIPER;
 		RearWiperSpeedDisplay(WiperSpeedState);
-		ClickHardKey();
+		if(LongKey != 1)
+			ClickHardKey();
 		HandleCursurDisplay = new Handler() {
 			@Override
 			public void handleMessage(Message msg) {
@@ -92,6 +95,7 @@ public class MainAKeyRearWiperFragment extends ParentFragment{
 		radioLow = (RadioButton)mRoot.findViewById(R.id.radioButton_key_main_a_rearwiper_low);
 		
 		textViewWasher = (TextView)mRoot.findViewById(R.id.textView_key_main_a_rearwiper_washer);
+		imageViewWasherBoarder = (ImageView)mRoot.findViewById(R.id.imageView_key_main_a_rearwiper_washer_boarder);
 	}
 	
 	protected void InitValuables() {
@@ -143,6 +147,8 @@ public class MainAKeyRearWiperFragment extends ParentFragment{
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
+				CursurIndex = 4;
+				HandleCursurDisplay.sendMessage(HandleCursurDisplay.obtainMessage(CursurIndex));
 				Log.d(TAG,"textViewWasher Click");
 				ClickWasherOff();
 			}
@@ -305,33 +311,50 @@ public class MainAKeyRearWiperFragment extends ParentFragment{
 	}
 	/////////////////////////////////////////////////////////////////////
 	public void ClickLeft(){
+		try {
+			if(textViewWasher.isPressed() == true 	// Washer Button Push
+					|| (CAN1Comm.Get_RX_RES_KEY_LongFlag() == 1 && CAN1Comm.Get_RX_RES_KEY_RearWiper() == 1 ))
+				return;
+		} catch (NullPointerException e) {
+			// TODO: handle exception
+			Log.e(TAG,"NullPointerException MainAKeyRearWiperFragment");
+		}
 		switch (CursurIndex) {
 		case 1:
-			CursurIndex = 3;
+			CursurIndex = 4;
 			CursurDisplay(CursurIndex);
 			break;
 		case 2:
 		case 3:
+		case 4:
 			CursurIndex--;
 			CursurDisplay(CursurIndex);
 			break;
 		default:
-			CursurIndex = 1;
-			CursurDisplay(CursurIndex);
 			break;
 		}
 	}
 	public void ClickRight(){
+		try {
+			if(textViewWasher.isPressed() == true 	// Washer Button Push
+					|| (CAN1Comm.Get_RX_RES_KEY_LongFlag() == 1 && CAN1Comm.Get_RX_RES_KEY_RearWiper() == 1 ))
+				return;
+		} catch (NullPointerException e) {
+			// TODO: handle exception
+			Log.e(TAG,"NullPointerException MainAKeyRearWiperFragment");
+		}
 		switch (CursurIndex) {
 		case 1:
 		case 2:
+		case 3:
 			CursurIndex++;
 			CursurDisplay(CursurIndex);
 			break;
-		case 3:
-		default:
+		case 4:
 			CursurIndex = 1;
 			CursurDisplay(CursurIndex);
+			break;
+		default:
 			break;
 		}
 	}
@@ -346,6 +369,14 @@ public class MainAKeyRearWiperFragment extends ParentFragment{
 		case 3:
 			ClickLow();
 			break;
+		case 4:
+			CursurIndex = 5;
+			CursurDisplay(CursurIndex);
+			break;
+		case 5:
+			CursurIndex = 4;
+			CursurDisplay(CursurIndex);
+			break;
 		default:
 			break;
 		}
@@ -356,6 +387,7 @@ public class MainAKeyRearWiperFragment extends ParentFragment{
 		radioIntermittent.setPressed(false);
 		radioLow.setPressed(false);
 		textViewWasher.setPressed(false);
+		imageViewWasherBoarder.setVisibility(View.INVISIBLE);
 		switch (CursurIndex) {
 		case 1:
 			radioOff.setPressed(true);
@@ -365,6 +397,14 @@ public class MainAKeyRearWiperFragment extends ParentFragment{
 			break;
 		case 3:
 			radioLow.setPressed(true);
+			break;
+		case 4:
+			textViewWasher.setPressed(false);
+			imageViewWasherBoarder.setVisibility(View.VISIBLE);
+			break;
+		case 5:
+			textViewWasher.setPressed(true);
+			imageViewWasherBoarder.setVisibility(View.VISIBLE);
 			break;
 		default:
 			break;

@@ -106,6 +106,7 @@ jclass jObject;
 #define		SA_CID						0xF4
 #define		SA_ACU						0x19
 #define		SA_BKCU						0x34
+#define		SA_SMK						0x29
 ////////////////////////////////////////////////////
 #define		ERR_BUF_SIZE				400
 #define		MULTI_BUF_SIZE				400
@@ -262,7 +263,7 @@ MACHINE_SECURITY_STATUS_SINGLE	rx_mach_security_stat_s;
 MAINTENANCE_INFORMATION2		rx_maintenance_info;
 MAINTENANCE_INFORMATION3		rx_maintenance_history;
 VEHICLE_INFORMATION				rx_machine_version;
-WHEEL_LOADER_DASHBOARD			rx_cluster_version;
+//WHEEL_LOADER_DASHBOARD			rx_cluster_version;
 MACH_STATE						rx_machine_state;
 SMK_RESULT						rx_smk_result;
 EHCU_STATUS						rx_ehcu_status;
@@ -460,6 +461,7 @@ GAUGE_65431															RX_GAUGE_65431;
 HOURMETER_CLOCK_WIPER_65433											RX_HOURMETER_CLOCK_WIPER_65433;
 MACHINE_TRAVEL_STATUS_65434											RX_MACHINE_TRAVEL_STATUS_65434;
 DTC_INFORMATION_TYPE1_65438											RX_DTC_INFORMATION_TYPE1_65438;
+CLUSTER_STATUS_65445												RX_CLUSTER_STATUS_65445;
 AXLE_STATUS_65449													RX_AXLE_STATUS_65449;		// ++, --, 150327 bwk
 WEIGHING_SYSTEM_STATUS_65450										RX_WEIGHING_SYSTEM_STATUS_65450;
 WEIGHING_SYSTEM_DATA1_65451											RX_WEIGHING_SYSTEM_DATA1_65451;

@@ -33,6 +33,7 @@ public class QuickCouplerPopupUnlocking3 extends ParentPopup{
 	//////////////////////////////////////////////////
 	
 	//VALUABLE////////////////////////////////////////
+	public static int QuickCouplerOldScreenIndex = 0;
 	//////////////////////////////////////////////////
 	
 	//ANIMATION///////////////////////////////////////
@@ -63,6 +64,7 @@ public class QuickCouplerPopupUnlocking3 extends ParentPopup{
 		
 		// ++, 150314 bwk
 		//ParentActivity.ScreenIndex = ParentActivity.SCREEN_STATE_MAIN_B_KEY_QUICKCOUPLER_POPUP_UNLOCKING3;
+		QuickCouplerOldScreenIndex = 0;
 		if(ParentActivity.DisplayType == ParentActivity.DISPLAY_TYPE_A){
 			ParentActivity.ScreenIndex = ParentActivity.SCREEN_STATE_MAIN_B_KEY_QUICKCOUPLER_POPUP_UNLOCKING3;
 		}else{
@@ -97,7 +99,7 @@ public class QuickCouplerPopupUnlocking3 extends ParentPopup{
 		// ++, 150310 bwk
 		//ParentActivity.ScreenIndex = Home.SCREEN_STATE_MAIN_B_TOP;
 //		Log.d(TAG,"13ScreenIndex="+Integer.toHexString(ParentActivity.ScreenIndex));
-		ParentActivity.setScreenIndex();
+//		ParentActivity.setScreenIndex();
 		// --, 150310 bwk
 	}
 
@@ -155,11 +157,13 @@ public class QuickCouplerPopupUnlocking3 extends ParentPopup{
 		}
 		ParentActivity.SavePref();
 		CAN1Comm.SetFNFlag(true);
+		ParentActivity.setScreenIndex();
 		this.dismiss();
 	}
 
 	public void ClickLocking(){
 		//ParentActivity.OldScreenIndex = ParentActivity.ScreenIndex;		// ++, --, 150407 bwk
+		QuickCouplerOldScreenIndex = 1;
 		ParentActivity.showQuickCouplerPopupLocking2();
 		CAN1Comm.SetFNFlag(true);
 		this.dismiss();

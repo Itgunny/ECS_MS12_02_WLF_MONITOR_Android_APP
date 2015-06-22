@@ -973,14 +973,17 @@ public class FaultHistoryLoggedFragment extends ParentFragment{
 		// --, 150202 bwk
 		
 	static final int SPNDATA[] = {101,101,145,145,172,172,173,173,174,174,181,181,183,183,187,187,202,202,202,202		
-		,203,203,203,203,204,204,204,204,205,205,205,205,301,301,304,304,310,318,322,322,325,325,327,327,346		
-		,346,503,503,503,503,507,507,507,507,551,551,552,552,558,558,558,558,701,705,705,707,723,723,727,727		
-		,728,728,729,729,730,830,840,841,842,843,844,850,869
-		,2000,2000,2001,2001,2002,2003,2003,2004,2005};		// RMCU 관련 오류 추가
-	static final int FMIDATA[] = {3, 4,	5,	6,	4,	6,	4,	6,	4,	6,	4,	6,	4,	6,	4,	6,	0,	1,	2,	4,	0,	1,	2,	4,	0,	
-		1,	2,	4,	0,	1,	2,	4,	3,	4,	3,	4,	8,	8,	4,	6,	4,	6,	4,	6,	3,	4,	0,	1,	2,	4,	0,	1,	2,	4,	3,	4,	3,	
-		4,	0,	1,	2,	4,	4,	0,	1,	1,	3,	4,	4,	6,	3,	4,	3,	4,	19,	12,	2,	2,	2,	2,	2,	2,	2,
-		5,	1,	5,	1,	1, 19,	2,	0,	0};		// RMCU 관련 오류 추가
+	   ,203,203,203,203,204,204,204,204,205,205,205,205,301,301,304,304,310,318,322,322,325,325,327,327,346		
+	   ,346,503,503,503,503,507,507,507,507,551,551,552,552,558,558,558,558,701,705,705,707,723,723,727,727		
+	   ,728,728,729,729,730,830,840,841,842,843,844,850,869
+	   ,2000,2000,2001,2001,2002,2003,2003,2004,2005	// RMCU 관련 오류 추가
+	   ,861,339,339,343,343,557,557};	// 	DTC List (HL9XX 시리즈, 15년 5월 22일 기준) 적용
+	static final int FMIDATA[] = {3, 4,	5,	6,	4,	6,	4,	6,	4,	6,	4,	6,	4,	6,	4,	6,	0,	1,	2,	4,	
+		0,	1,	2,	4,	0,	1,	2,	4,	0,	1,	2,	4,	3,	4,	3,	4,	8,	8,	4,	6,	4,	6,	4,	6,	3,	
+		4,	0,	1,	2,	4,	0,	1,	2,	4,	3,	4,	3,	4,	0,	1,	2,	4,	4,	0,	1,	1,	3,	4,	4,	6,	
+		3,	4,	3,	4,	19,	12,	2,	2,	2,	2,	2,	2,	2,
+		5,	1,	5,	1,	1, 19,	2,	0,	0,	// RMCU 관련 오류 추가
+		2,	3,	4,	3,	4,	0,	4};		// 	DTC List (HL9XX 시리즈, 15년 5월 22일 기준) 적용
 
 	
 	// ++, 150202 bwk : 150128 HHI 임혁준 요청
@@ -1101,8 +1104,8 @@ public class FaultHistoryLoggedFragment extends ParentFragment{
 	
 	static final String	textErrorCode[] = 
 		{
-		"Hydraulic Oil Temperature Sensor Circuit Voltage Above Normal, or Shorted to High Source(or Open Circuit)",
-		"Hydraulic Oil Temperature Sensor Circuit Voltage Below Normal, or Shorted to Low Source", 
+		"Hydraulic Oil Temperature Sensor Circuit - Voltage Above Normal, or Shorted to High Source (or Open Circuit)",	// 15.06.10 수정 
+		"Hydraulic Oil Temperature Sensor Circuit - Voltage Below Normal, or Shorted to Low Source",	// 15.06.10 수정 
 		"Engine Cooling Fan EPPR Valve Circuit Current Below Normal, or Open Circuit ",
 		"Engine Cooling Fan EPPR Valve Circuit Current Above Norma", 
 		"Boom Up Lever Detent Solenoid Circuit Voltage Below Normal, or Shorted to Low Source(or Open Circuit)", 
@@ -1110,80 +1113,80 @@ public class FaultHistoryLoggedFragment extends ParentFragment{
 		"Boom Down Lever Detent Solenoid Circuit Voltage Below Normal, or Shorted to Low Source(or Open Circuit)", 
 		"Boom Down Lever Detent Solenoid Circuit Current Above Norma",
 		"Bucket Lever Detent Solenoid Circuit Voltage Below Normal, or Shorted to Low Source(or Open Circuit)", 
-		"Bucket Lever Detent Solenoid Circuit Current Above Norma", 
+		"Bucket Lever Detent Solenoid Circuit Current Above Norma", //10
 		"Engine Cooling Fan Reverse Solenoid Circuit Voltage Below Normal, or Shorted to Low Source(or Open Circuit)",
 		"Engine Cooling Fan Reverse Solenoid Circuit Current Above Norma", 
 		"Engine Cooling Fan Reverse Driving Status Signal Circuit - Voltage Below Normal, or Shorted to Low Source(or Open Circuit)", 
 		"Engine Cooling Fan Reverse Driving Status Signal Circuit - Current Above Norma", 
 		"Emergency Steering Pump Relay Circuit Voltage Below Normal, or Shorted to Low Source(or Open Circuit)",
-		"Emergency Steering Pump Relay Circuit Current Above Norma", 
-		"Steering Main Pump Pressure Sensor Data Above Normal Range(or Open Circuit)",
+		"Emergency Steering Pump Relay Circuit Current Above Norma",
+		"Steering Main Pump Pressure Sensor Data Above Normal Range (or Open Circuit)",	// 15.06.10 수정 
 		"Steering Main Pump Pressure Sensor Data Below Normal Range", 
 		"Steering Main Pump Pressure Sensor Data Error",  
-		"Steering Main Pump Pressure Sensor Circuit - Voltage Below Normal, or Shorted to Low Source", 
+		"Steering Main Pump Pressure Sensor Circuit - Voltage Below Normal, or Shorted to Low Source",	// 15.06.10 수정  //20 
 		"Emergency Steering Pump Pressure Sensor Data Above Normal Range (or Open Circuit)", 
 		"Emergency Steering Pump Pressure Sensor Data Below Normal Range",
 		"Emergency Steering Pump Pressure Sensor Data Error", 
 		"Emergency Steering Pump Pressure Sensor Circuit - Voltage Below Normal, or Shorted to Low Source", 
-		"Boom Cylinder Pressure Sensor Data Above Normal Range(or Open Circuit)", 
+		"Boom Cylinder Head Pressure Sensor Data Above Normal Range (or Open Circuit)",		// 15.06.10 수정  
 		"Boom Cylinder Pressure Sensor Data Below Normal Range", 
 		"Boom Cylinder Pressure Sensor Data Error",
-		"Boom Cylinder Pressure Sensor Circuit - Voltage Below Normal, or Shorted to Low Source", 
-		"Bucket Cylinder Pressure Sensor Data Above Normal Range(or Open Circuit)", 
-		"Bucket Cylinder Pressure Sensor Data Below Normal Range", 
+		"Boom Cylinder Head Pressure Sensor Circuit - Voltage Below Normal, or Shorted to Low Source", 		// 15.06.10 수정
+		"Boom Cylinder Rod Pressure Sensor Data Above Normal Range (or Open Circuit)", 		// 15.06.10 수정
+		"Bucket Cylinder Pressure Sensor Data Below Normal Range", //30
 		"Bucket Cylinder Pressure Sensor Data Error", 
-		"Bucket Cylinder Pressure Sensor Circuit - Voltage Below Normal, or Shorted to Low Source", 
-		"Fuel Level Sensor Circuit - Voltage Above Normal, or Shorted to High Source(or Open Circuit)", 
-		"Fuel Level Sensor Circuit - Voltage Below Normal, or Shorted to Low Source", 
+		"Boom Cylinder Rod Pressure Sensor Circuit - Voltage Below Normal, or Shorted to Low Source", 	// 15.06.10 수정
+		"Fuel Level Sensor Circuit - Voltage Above Normal, or Shorted to High Source (or Open Circuit)", 	// 15.06.10 수정
+		"Fuel Level Sensor Circuit - Voltage Below Normal, or Shorted to Low Source", 	// 15.06.10 수정
 		"Engine Coolant Temperature Sensor Circuit - Voltage Above Normal, or Shorted to High Source(or Open Circuit)",
 		"Engine Coolant Temperature Sensor Circuit - Voltage Below Normal, or Shorted to Low Source", 
 		"Engine Speed Signal Error Abnormal Frequency or Pulse Width", 
-		"Engine Cooling Fan Speed Signal Error Abnormal Frequency or Pulse Width",
+		"Cooling Fan Speed Signal Error - Abnormal Frequency or Pulse Width",	// 15.06.10 수정
 		"Engine Preheat Relay Circuit Voltage Below Normal, or Shorted to Low Source(or Open Circuit)",
-		"Engine Preheat Relay Circuit Current Above Norma", 
+		"Engine Preheat Relay Circuit Current Above Norma",	// 40 
 		"Fuel Warmer Relay Circuit Voltage Below Normal, or Shorted to Low Source(or Open Circuit)",
 		"Fuel Warmer Relay Circuit Current Above Norma", 
 		"Anti-Restart Relay Circuit Voltage Below Normal, or Shorted to Low Source(or Open Circuit)",
 		"Anti-Restart Relay Circuit Current Above Norma", 
 		"Engine Power Mode Selector Circuit Voltage Above Normal, or Shorted to Low Source(or Open Circuit)", 
 		"Engine Power Mode Selector Circuit Voltage Below Normal, or Shorted to Low Source", 
-		"Brake Oil Pressure Sensor Data Above Normal Range (or Open Circuit)", 
+		"Brake Pressure Sensor Data Above Normal Range (or Open Circuit)",		// 15.06.10 수정
 		"Brake Oil Pressure Sensor Data Below Normal Range", 
 		"Brake Oil Pressure Sensor Data Error", 
-		"Brake Oil Pressure Sensor Circuit Voltage Below Normal, or Shorted to Low Source", 
-		"Parking Oil Pressure Sensor Data Above Normal Range(or Open Circuit)", 
+		"Brake Pressure Sensor Circuit - Voltage Below Normal, or Shorted to Low Source",	// 15.06.10 수정	// 50
+		"Parking Oil Pressure Sensor Data Above Normal Range (or Open Circuit)",		// 15.06.10 수정
 		"Parking Oil Pressure Sensor Data Below Normal Range", 
 		"Parking Oil Pressure Sensor Data Error", 
-		"Parking Oil Pressure Sensor Circuit Voltage Below Normal, or Shorted to Low Source", 
+		"Parking Oil Pressure Sensor Circuit - Voltage Below Normal, or Shorted to Low Source",	// 15.06.10 수정 
 		"Clutch Cutoff Mode Selector Circuit Voltage Above Normal, or Shorted to High Source(or Open Circuit)",
 		"Clutch Cutoff Mode Selector Circuit Voltage Below Normal, or Shorted to Low Source", 
 		"Transmission Shift Mode Selector Circuit Voltage Above Normal, or Shorted to High Source(or Open Circuit)", 
 		"Transmission Shift Mode Selector Circuit Voltage Below Normal, or Shorted to Low Source",
-		"Differential Lock Pressure Sensor Data Above Normal Range (or Open Circuit)",
-		"Differential Lock Pressure Sensor Data Below Normal Range", 
+		"Differential Lock Pressure Sensor Data Above Normal Range (or Open Circuit)",	// 15.06.10 수정
+		"Differential Lock Pressure Sensor Data Below Normal Range", 	// 60
 		"Differential Lock Pressure Sensor Data Error", 
-		"Differential Lock Pressure Sensor Circuit Voltage Below Normal, or Shorted to Low Source", 
+		"Differential Lock Pressure Sensor Circuit - Voltage Below Normal, or Shorted to Low Source",	// 15.06.10 수정
 		"Hourmeter Circuit - Voltage Below Normal, or Shorted to Low Source", 
-		"Battery Voltage High", 
-		"Battery Voltage Low", 
-		"Alternator Node I Voltage Low(or Open Circuit)", 
+		"MCU Input Voltage High",	// 15.06.10 수정 
+		"MCU Input Voltage Low",	// 15.06.10 수정
+		"Alternator Node I Voltage Low (or Open Circuit)",	// 15.06.10 수정
 		"Buzzer Circuit - Voltage Above Normal, or Shorted to High Source", 
 		"Buzzer Circuit - Voltage Below Normal, or Shorted to Low Source (or Open Circuit)", 
 		"Wiper Relay Circuit - Voltage Below Normal, or Shorted to Low Source (or Open Circuit)",
-		"Wiper Relay Circuit - Current Above Norma", 
-		"Boom Position Sensor Signal Circuit Voltage Above Normal, or Shorted to High Source(or Open Circuit)", 
-		"Boom Position Sensor Signal Circuit Voltage Below Normal, or Shorted to Low Source", 
-		"Bucket Position Sensor Signal Circuit Voltage Above Normal, or Shorted to High Source(or Open Circuit)", 
-		"Bucket Position Sensor Signal Circuit Voltage Below Normal, or Shorted to Low Source", 
+		"Wiper Relay Circuit - Current Above Norma",	// 70 
+		"Boom Link Angle Sensor Circuit - Voltage Above Normal, or Shorted to High Source (or Open Circuit)",	// 15.06.10 수정  
+		"Boom Link Angle Sensor Circuit - Voltage Below Normal, or Shorted to Low Source",	// 15.06.10 수정  
+		"Bell Crank Angle Sensor Circuit - Voltage Above Normal, or Shorted to High Source (or Open Circuit)",	// 15.06.10 수정  
+		"Bell Crank Angle Sensor Circuit - Voltage Below Normal, or Shorted to Low Source",	// 15.06.10 수정  
 		"ATPC Heater PWM Output Duty Operation Error", 
 		"MCU Internal Memory Error",
 		"Cluster Communication Error", 
-		"ECM Communication Error",
-		"TCU Communication Error", 
-		"APTC Communication Error", 
-		"Monitor Communication Error", 
-		"RCM Communication Error", 
-		"BKCU Communication error",
+		"ECM Communication Data Error",
+		"TCU Communication Data Error", 
+		"APTC Communication Error", // 80
+		"Monitor Communication Data Error", 
+		"RMCU Communication Data Error", 
+		"BKCU Communication Data error",
 		// RMCU 오류 추가
 		"Satellite/Mobile antenna connection is not OK.",
 		"Satellite/Mobile is not linked.",
@@ -1191,9 +1194,16 @@ public class FaultHistoryLoggedFragment extends ParentFragment{
 		"GPS position is not updated.",
 		"Test message is not transmitted.",
 		"Current gauge request is not received.",
-		"Current gauge reply is not transmitted.",
+		"Current gauge reply is not transmitted.",		// 90
 		"Step 4",
 		"Step 5",
+		"EHCU Communication Data error",
+		"Accel Pedal Position 1 Sensor Circuit - Voltage Above Normal, or Shorted to High Source (or Open Circuit)",	// 15.06.10 수정  
+		"Accel Pedal Position 1 Sensor Circuit - Voltage Below Normal, or Shorted to Low Source",	// 15.06.10 수정  
+		"Accel Pedal Position 2 Sensor Circuit - Voltage Above Normal, or Shorted to High Source (or Open Circuit)",	// 15.06.10 수정  
+		"Accel Pedal Position 2 Sensor Circuit - Voltage Below Normal, or Shorted to Low Source",	// 15.06.10 수정  
+		"Brake Priority Pressure Sensor Data Above Normal Range (or Open Circuit)",	// 15.06.10 수정  
+		"Brake Priority Pressure Sensor Circuit - Voltage Below Normal, or Shorted to Low Source",	// 15.06.10 수정  
 		"Not define."	
 	};
 

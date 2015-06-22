@@ -3,7 +3,8 @@
     android:id="@+id/RelativeLayout_center_main_a_machinestatus"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/main_a_key_bg" >
+    android:background="@drawable/main_a_key_bg" 
+    android:splitMotionEvents="false">
     
     <ImageView
         android:id="@+id/imageView_center_main_a_machinestatus_up"

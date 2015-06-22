@@ -1,13 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent" >
+    android:layout_height="match_parent" 
+    android:splitMotionEvents="false">
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_above="@+id/Relativelayout_menu_body_monitoring_ehcuioinfo_low"
-        android:layout_alignParentTop="true" >
+        android:layout_alignParentTop="true" 
+        android:splitMotionEvents="false">
 
         <TextView
             android:id="@+id/textView_menu_body_monitoring_ehcuioinfo_operation_title"
@@ -46,7 +48,8 @@
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="54dp"
-            android:background="@drawable/menu_information_ehcu_bg_dark" >
+            android:background="@drawable/menu_information_ehcu_bg_dark" 
+            android:splitMotionEvents="false">
 
             <TextView
                 android:id="@+id/textView_menu_body_monitoring_ehcuioinfo_boomup_operation"
@@ -132,7 +135,8 @@
 	        android:layout_below="@+id/RelativeLayout_menu_body_monitoring_ehcuioinfo_boomup"
 	        android:layout_centerHorizontal="true"
 	        android:layout_marginTop="3dp"
-	        android:background="@drawable/menu_information_ehcu_bg_light" >
+	        android:background="@drawable/menu_information_ehcu_bg_light" 
+	        android:splitMotionEvents="false">
 
             <TextView
                 android:id="@+id/textView_menu_body_monitoring_ehcuioinfo_boomdown_operation"
@@ -218,7 +222,8 @@
 	        android:layout_below="@+id/RelativeLayout_menu_body_monitoring_ehcuioinfo_boomdown"
 	        android:layout_centerHorizontal="true"
 	        android:layout_marginTop="3dp"
-	        android:background="@drawable/menu_information_ehcu_bg_dark" >
+	        android:background="@drawable/menu_information_ehcu_bg_dark" 
+	        android:splitMotionEvents="false">
 
             <TextView
                 android:id="@+id/textView_menu_body_monitoring_ehcuioinfo_bucketin_operation"
@@ -304,7 +309,8 @@
 	        android:layout_below="@+id/RelativeLayout_menu_body_monitoring_ehcuioinfo_bucketin"
 	        android:layout_centerHorizontal="true"
 	        android:layout_marginTop="3dp"
-	        android:background="@drawable/menu_information_ehcu_bg_light" >
+	        android:background="@drawable/menu_information_ehcu_bg_light" 
+	        android:splitMotionEvents="false">
 
             <TextView
                 android:id="@+id/textView_menu_body_monitoring_ehcuioinfo_bucketout_operation"
@@ -390,7 +396,8 @@
 	        android:layout_below="@+id/RelativeLayout_menu_body_monitoring_ehcuioinfo_bucketout"
 	        android:layout_centerHorizontal="true"
 	        android:layout_marginTop="3dp"
-	        android:background="@drawable/menu_information_ehcu_bg_dark" >
+	        android:background="@drawable/menu_information_ehcu_bg_dark" 
+	        android:splitMotionEvents="false">
 
             <TextView
                 android:id="@+id/textView_menu_body_monitoring_ehcuioinfo_auxup_operation"
@@ -476,7 +483,8 @@
 	        android:layout_below="@+id/RelativeLayout_menu_body_monitoring_ehcuioinfo_auxup"
 	        android:layout_centerHorizontal="true"
 	        android:layout_marginTop="3dp"
-	        android:background="@drawable/menu_information_ehcu_bg_light" >
+	        android:background="@drawable/menu_information_ehcu_bg_light" 
+	        android:splitMotionEvents="false">
 
             <TextView
                 android:id="@+id/textView_menu_body_monitoring_ehcuioinfo_auxdown_operation"
@@ -562,7 +570,8 @@
         android:id="@+id/Relativelayout_menu_body_monitoring_ehcuioinfo_low"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true" >
+        android:layout_alignParentBottom="true" 
+        android:splitMotionEvents="false">
        
         <ImageView
             android:id="@+id/imageView_menu_body_monitoring_ehcuioinfo_low_bg"
@@ -593,13 +602,15 @@
 	        android:layout_alignBottom="@+id/ImageButton_menu_body_monitoring_ehcuioinfo_low_ok"
 	        android:layout_alignLeft="@+id/ImageButton_menu_body_monitoring_ehcuioinfo_low_ok"
 	        android:layout_alignRight="@+id/ImageButton_menu_body_monitoring_ehcuioinfo_low_ok"
-	        android:layout_alignTop="@+id/ImageButton_menu_body_monitoring_ehcuioinfo_low_ok" >
+	        android:layout_alignTop="@+id/ImageButton_menu_body_monitoring_ehcuioinfo_low_ok" 
+	        android:splitMotionEvents="false">
 	
 	        <LinearLayout
 	            android:layout_width="wrap_content"
 	            android:layout_height="wrap_content"
 	            android:layout_centerHorizontal="true"
-	            android:layout_centerVertical="true" >
+	            android:layout_centerVertical="true" 
+	            android:splitMotionEvents="false">
 	
 	            <ImageView
 	                android:id="@+id/imageView_menu_body_monitoring_ehcuioinfo_low_ok_icon"

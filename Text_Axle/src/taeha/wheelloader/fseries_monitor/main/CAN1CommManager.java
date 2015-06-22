@@ -83,12 +83,15 @@ public class CAN1CommManager extends ICAN1CommManager.Stub{		// ttySAC1(Linux), 
 	public static final int LONG_LEFT 			= 0X01000004;
 	public static final int LONG_RIGHT 			= 0X01000008;
 	public static final int LONG_ENTER 			= 0x01000010;
+	public static final int LONG_REAR_WIPER		= 0x01020000;
 	
 	public static final int LONG_MENU_LEFT 		= 0x01000005;
 	public static final int LONG_MENU_RIGHT 	= 0x01000009;
 	public static final int LONG_MENU_ENTER 	= 0x01000011;	
 	public static final int LONG_LEFT_RIGHT 	= 0X0100000C;
 	public static final int LONG_LEFT_RIGHT_ENTER 		= 0x0100001C;
+	public static final int LONG_8_0	 		= 0x01140000;
+	public static final int LONG_8_9_0	 		= 0x011C0000;
 
 	
 	public static final int POWER_OFF 			= 0x000000F5;
@@ -590,6 +593,11 @@ public class CAN1CommManager extends ICAN1CommManager.Stub{		// ttySAC1(Linux), 
 		return ReqPopup;
 	}
 	//////////////////////////////////////////////////////////
+	// ++, 150615 cjg
+	public int native_system_sync_Native(){
+		return service.native_system_sync();
+	}
+	// --, 150615 cjg
 	
 	public int LineOutfromJNI(int spk){
 		return service.LineOutfromJNI_Native(spk);
@@ -1205,6 +1213,12 @@ public class CAN1CommManager extends ICAN1CommManager.Stub{		// ttySAC1(Linux), 
 	public byte[] Get_DTC_3_PGN65438(){ return service.Get_DTC_3_PGN65438();}
 	public byte[] Get_DTC_4_PGN65438(){ return service.Get_DTC_4_PGN65438();}
 	public byte[] Get_DTC_5_PGN65438(){ return service.Get_DTC_5_PGN65438();}
+	//////RX_CLUSTER_STATUS_65445///////
+	public int Get_Dashboard_Program_Version_988_PGN65445(){ return service.Get_Dashboard_Program_Version_988_PGN65445();}
+	public int Get_Dashboard_Hardware_Version_989_PGN65445(){ return service.Get_Dashboard_Hardware_Version_989_PGN65445();}
+	public int Get_Mirror_Heater_Status_724_PGN65445(){ return service.Get_Mirror_Heater_Status_724_PGN65445();}
+	public int Get_High_Beam_Status_725_PGN65445(){ return service.Get_High_Beam_Status_725_PGN65445();}
+	public int Get_Front_Rear_Lamp_Status_726_PGN65445(){ return service.Get_Front_Rear_Lamp_Status_726_PGN65445();}
 	//////RX_AXLE_STATUS_65449///////
 	public int Get_Front_Axle_Oil_Temperature_577_PGN65449(){ return service.Get_Front_Axle_Oil_Temperature_577_PGN65449();}
 	public int Get_Rear_Axle_Oil_Temperature_578_PGN65449(){ return service.Get_Rear_Axle_Oil_Temperature_578_PGN65449();}
@@ -1228,6 +1242,7 @@ public class CAN1CommManager extends ICAN1CommManager.Stub{		// ttySAC1(Linux), 
 	//////RX_WEIGHING_SYSTEM_DATA2_65452///////
 	public int Get_TotalWorkCWeight_1914_PGN65452(){ return service.Get_TotalWorkCWeight_1914_PGN65452();}
 	public int Get_ADayBeforeWeight_1916_PGN65452(){ return service.Get_ADayBeforeWeight_1916_PGN65452();}
+	public int Get_HW_Vers_Sub_PGN65445(){ return service.Get_HW_Vers_Sub_PGN65445();}
 	//////RX_BKCU_STATUS_65514///////
 	public int Get_ButtonKeyPosition_3471_PGN65514(){ return service.Get_ButtonKeyPosition_3471_PGN65514();}
 	//////RX_JOYSTICK_POSITION_STATUS_65515///////
@@ -1870,5 +1885,4 @@ public class CAN1CommManager extends ICAN1CommManager.Stub{		// ttySAC1(Linux), 
 		
 		callbacks.finishBroadcast();
 	}
-
 }

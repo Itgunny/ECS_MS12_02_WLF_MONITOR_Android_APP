@@ -3,7 +3,8 @@
     android:id="@+id/RelativeLayout_center_main_b_brakepedal"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/main_bg_center" >
+    android:background="@drawable/main_bg_center" 
+    android:splitMotionEvents="false">
 
     <LinearLayout
         android:layout_width="wrap_content"
@@ -11,7 +12,8 @@
         android:layout_centerVertical="true"
         android:layout_marginLeft="10dp"
         android:layout_toRightOf="@+id/imageView_center_main_b_brakepedal_gear"
-        android:orientation="vertical" >
+        android:orientation="vertical" 
+        android:splitMotionEvents="false">
 
         <ImageView
             android:id="@+id/imageView_center_main_b_brakepedal_gear_level_up"

@@ -525,7 +525,6 @@ public class MenuMultimediaFragment extends ParentFragment{
 	}
 	/////////////////////////////////////////////////////////////////////	
 	public void ClickMediaPlayer(){
-		ParentActivity.KillApps("com.powerone.wfd.sink");
 		// ++, 150319 bwk
 		//if(CAN1Comm.GetrpmFlag() == false)
 		{

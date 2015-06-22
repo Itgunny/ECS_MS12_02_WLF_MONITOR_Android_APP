@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent" >
+    android:layout_height="match_parent" 
+    android:splitMotionEvents="false">
 
     <RelativeLayout
         android:id="@+id/Relativelayout_menu_body_management_maint_detail_title"
@@ -11,7 +12,8 @@
         android:layout_alignParentRight="true"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
-        android:layout_marginTop="10dp" >
+        android:layout_marginTop="10dp" 
+        android:splitMotionEvents="false">
 
         
         <ImageButton
@@ -35,7 +37,8 @@
 		    android:layout_width="wrap_content"
 		    android:layout_height="wrap_content"
 		    android:layout_centerHorizontal="true"
-		    android:layout_centerVertical="true" >
+		    android:layout_centerVertical="true" 
+		    android:splitMotionEvents="false">
 		    
 		    <ImageView
 		        android:id="@+id/imageView_menu_body_management_maint_detail_title_icon"
@@ -64,13 +67,15 @@
         android:layout_alignParentRight="true"
         android:layout_below="@+id/Relativelayout_menu_body_management_maint_detail_title"
         android:layout_marginTop="10dp"
-        android:background="@drawable/menu_management_maintenance_block01" >
+        android:background="@drawable/menu_management_maintenance_block01" 
+        android:splitMotionEvents="false">
 
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="40dp"
-            android:layout_marginTop="8dp" >
+            android:layout_marginTop="8dp" 
+            android:splitMotionEvents="false">
 
 			<TextView
 			    android:id="@+id/textView_menu_body_management_maint_detail_time_use_title"
@@ -108,7 +113,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="420dp"
-            android:layout_marginTop="8dp" >
+            android:layout_marginTop="8dp" 
+            android:splitMotionEvents="false">
 
 			<TextView
 			    android:id="@+id/textView_menu_body_management_maint_detail_time_cycle_title"
@@ -160,7 +166,8 @@
         android:layout_alignParentRight="true"
         android:layout_below="@+id/Relativelayout_menu_body_management_maint_detail_time"
         android:layout_marginTop="10dp"
-        android:background="@drawable/menu_management_maintenance_block02" >
+        android:background="@drawable/menu_management_maintenance_block02" 
+        android:splitMotionEvents="false">
 
         
         
@@ -168,7 +175,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
         	android:layout_marginLeft="40dp"
-            android:layout_marginTop="8dp" >
+            android:layout_marginTop="8dp" 
+            android:splitMotionEvents="false">
 			
 		    <TextView
 	            android:id="@+id/textView_menu_body_management_maint_detail_history_title_title"
@@ -200,7 +208,8 @@
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
             android:layout_marginRight="25dp"
-            android:layout_marginTop="8dp" >
+            android:layout_marginTop="8dp" 
+            android:splitMotionEvents="false">
 			
 		    <TextView
 	            android:id="@+id/textView_menu_body_management_maint_detail_history_count_title"
@@ -330,13 +339,15 @@
         android:layout_above="@+id/Relativelayout_menu_body_management_maint_detail_low"
         android:layout_alignParentLeft="true"
         android:layout_alignParentRight="true"
-        android:layout_below="@+id/Relativelayout_menu_body_management_maint_detail_history" >
+        android:layout_below="@+id/Relativelayout_menu_body_management_maint_detail_history" 
+        android:splitMotionEvents="false">
 
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
-            android:layout_centerVertical="true" >
+            android:layout_centerVertical="true" 
+            android:splitMotionEvents="false">
 			
             <TextView
                 android:id="@+id/textView_menu_body_management_maint_detail_button_replace"
@@ -369,7 +380,8 @@
         android:id="@+id/Relativelayout_menu_body_management_maint_detail_low"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true" >
+        android:layout_alignParentBottom="true" 
+        android:splitMotionEvents="false">
        
         <ImageView
             android:id="@+id/imageView_menu_body_management_maint_detail_low_bg"
@@ -399,13 +411,15 @@
 	        android:layout_alignBottom="@+id/ImageButton_menu_body_management_maint_detail_low_ok"
 	        android:layout_alignLeft="@+id/ImageButton_menu_body_management_maint_detail_low_ok"
 	        android:layout_alignRight="@+id/ImageButton_menu_body_management_maint_detail_low_ok"
-	        android:layout_alignTop="@+id/ImageButton_menu_body_management_maint_detail_low_ok" >
+	        android:layout_alignTop="@+id/ImageButton_menu_body_management_maint_detail_low_ok" 
+	        android:splitMotionEvents="false">
 	
 	        <LinearLayout
 	            android:layout_width="wrap_content"
 	            android:layout_height="wrap_content"
 	            android:layout_centerHorizontal="true"
-	            android:layout_centerVertical="true" >
+	            android:layout_centerVertical="true" 
+	            android:splitMotionEvents="false">
 	
 	            <ImageView
 	                android:id="@+id/imageView_menu_body_management_maint_detail_low_ok_icon"

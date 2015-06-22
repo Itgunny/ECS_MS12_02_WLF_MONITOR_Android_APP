@@ -2,18 +2,21 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/main_a_bg_right" >
+    android:background="@drawable/main_a_bg_right" 
+    android:splitMotionEvents="false">
 
     <RelativeLayout
         android:id="@+id/RelativeLayout_right_main_a"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@drawable/main_a_bg_right" >
+        android:background="@drawable/main_a_bg_right" 
+        android:splitMotionEvents="false">
 
         <RelativeLayout
             android:id="@+id/RelativeLayout_rightup_main_a_engine_top"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content" >
+            android:layout_height="wrap_content" 
+            android:splitMotionEvents="false">
 
             <ImageButton
                 android:id="@+id/imageButton_rightup_main_a_hourodometer"
@@ -35,7 +38,8 @@
                 android:layout_height="wrap_content"
                 android:layout_alignLeft="@+id/imageView_rightup_main_a_engine_line"
                 android:layout_alignRight="@+id/imageView_rightup_main_a_engine_line"
-                android:layout_marginTop="8dp" >
+                android:layout_marginTop="8dp" 
+                android:splitMotionEvents="false">
 
                 <TextView
                     android:id="@+id/textView_rightup_main_a_hourodometer_title"
@@ -76,7 +80,8 @@
                 android:layout_height="wrap_content"
                 android:layout_alignLeft="@+id/imageView_rightup_main_a_engine_line"
                 android:layout_alignRight="@+id/imageView_rightup_main_a_engine_line"
-                android:layout_below="@+id/imageView_rightup_main_a_engine_line" >
+                android:layout_below="@+id/imageView_rightup_main_a_engine_line" 
+                android:splitMotionEvents="false">
 
                 <TextView
                     android:id="@+id/textView_rightup_main_a_engine_mode_title"
@@ -120,7 +125,8 @@
             android:id="@+id/RelativeLayout_rightdown_main_a_tm"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="147dp" >
+            android:layout_marginTop="147dp" 
+            android:splitMotionEvents="false">
 
             <ImageButton
                 android:id="@+id/imageButton_rightdown_main_a_tm_ccomode"
@@ -147,7 +153,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignLeft="@+id/imageView_rightdown_main_a_tm_line1"
-                android:layout_alignRight="@+id/imageView_rightdown_main_a_tm_line1" >
+                android:layout_alignRight="@+id/imageView_rightdown_main_a_tm_line1" 
+                android:splitMotionEvents="false">
 
                 <TextView
                     android:id="@+id/textView_rightdown_main_a_tm_ccomode_title"
@@ -178,7 +185,8 @@
                 android:layout_height="wrap_content"
                 android:layout_alignLeft="@+id/imageView_rightdown_main_a_tm_line1"
                 android:layout_alignRight="@+id/imageView_rightdown_main_a_tm_line1"
-                android:layout_below="@+id/imageView_rightdown_main_a_tm_line1" >
+                android:layout_below="@+id/imageView_rightdown_main_a_tm_line1" 
+                android:splitMotionEvents="false">
 
                 <TextView
                     android:id="@+id/textView_rightdown_main_a_tm_shiftmode_title"
@@ -209,7 +217,8 @@
                 android:layout_height="wrap_content"
                 android:layout_alignLeft="@+id/imageView_rightdown_main_a_tm_line2"
                 android:layout_alignRight="@+id/imageView_rightdown_main_a_tm_line2"
-                android:layout_below="@+id/imageView_rightdown_main_a_tm_line2" >
+                android:layout_below="@+id/imageView_rightdown_main_a_tm_line2" 
+                android:splitMotionEvents="false">
 
                 <TextView
                     android:id="@+id/textView_rightdown_main_a_tm_tclockup_title"
@@ -255,12 +264,14 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@drawable/main_a_bg_right"
-        android:visibility="invisible" >
+        android:visibility="invisible" 
+        android:splitMotionEvents="false">
 
         <RelativeLayout
             android:id="@+id/RelativeLayout_rightup_main_a_engine_top_non_tclockup"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content" >
+            android:layout_height="wrap_content" 
+            android:splitMotionEvents="false">
 
             <ImageButton
                 android:id="@+id/imageButton_rightup_main_a_hourodometer_non_tclockup"
@@ -289,7 +300,8 @@
                 android:layout_height="wrap_content"
                 android:layout_alignLeft="@+id/imageView_rightup_main_a_engine_line_non_tclockup"
                 android:layout_alignRight="@+id/imageView_rightup_main_a_engine_line_non_tclockup"
-                android:layout_marginTop="8dp" >
+                android:layout_marginTop="8dp" 
+                android:splitMotionEvents="false">
 
                 <TextView
                     android:id="@+id/textView_rightup_main_a_hourodometer_title_non_tclockup"
@@ -331,7 +343,8 @@
                 android:layout_height="wrap_content"
                 android:layout_alignLeft="@+id/imageView_rightup_main_a_engine_line_non_tclockup"
                 android:layout_alignRight="@+id/imageView_rightup_main_a_engine_line_non_tclockup"
-                android:layout_below="@+id/imageView_rightup_main_a_engine_line_non_tclockup" >
+                android:layout_below="@+id/imageView_rightup_main_a_engine_line_non_tclockup" 
+                android:splitMotionEvents="false">
 
                 <TextView
                     android:id="@+id/textView_rightup_main_a_engine_mode_title_non_tclockup"
@@ -369,7 +382,8 @@
             android:id="@+id/RelativeLayout_rightdown_main_a_tm_non_tclockup"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/imageView_screen_main_a_right_line_non_tclockup" >
+            android:layout_below="@+id/imageView_screen_main_a_right_line_non_tclockup" 
+            android:splitMotionEvents="false">
 
             <ImageButton
                 android:id="@+id/imageButton_rightdown_main_a_tm_ccomode_non_tclockup"
@@ -396,7 +410,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignLeft="@+id/imageView_rightdown_main_a_tm_line1_non_tclockup"
-                android:layout_alignRight="@+id/imageView_rightdown_main_a_tm_line1_non_tclockup" >
+                android:layout_alignRight="@+id/imageView_rightdown_main_a_tm_line1_non_tclockup" 
+                android:splitMotionEvents="false">
 
                 <TextView
                     android:id="@+id/textView_rightdown_main_a_tm_ccomode_title_non_tclockup"
@@ -428,7 +443,8 @@
                 android:layout_height="wrap_content"
                 android:layout_alignLeft="@+id/imageView_rightdown_main_a_tm_line1_non_tclockup"
                 android:layout_alignRight="@+id/imageView_rightdown_main_a_tm_line1_non_tclockup"
-                android:layout_below="@+id/imageView_rightdown_main_a_tm_line1_non_tclockup" >
+                android:layout_below="@+id/imageView_rightdown_main_a_tm_line1_non_tclockup" 
+                android:splitMotionEvents="false">
 
                 <TextView
                     android:id="@+id/textView_rightdown_main_a_tm_shiftmode_title_non_tclockup"

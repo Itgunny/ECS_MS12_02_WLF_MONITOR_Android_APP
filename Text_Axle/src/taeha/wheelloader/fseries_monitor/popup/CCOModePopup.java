@@ -1,20 +1,16 @@
 package taeha.wheelloader.fseries_monitor.popup;
 
-import android.content.Context;
-import android.graphics.Color;
-import android.graphics.drawable.ColorDrawable;
-import android.util.Log;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup.LayoutParams;
-import android.widget.ImageButton;
-import android.widget.RelativeLayout;
-import android.widget.TextView;
 import taeha.wheelloader.fseries_monitor.main.CAN1CommManager;
 import taeha.wheelloader.fseries_monitor.main.Home;
 import taeha.wheelloader.fseries_monitor.main.ParentPopup;
 import taeha.wheelloader.fseries_monitor.main.R;
-import taeha.wheelloader.fseries_monitor.main.R.string;
+import android.content.Context;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup.LayoutParams;
+import android.widget.TextView;
 
 public class CCOModePopup extends ParentPopup{
 	//CONSTANT////////////////////////////////////////
@@ -47,8 +43,6 @@ public class CCOModePopup extends ParentPopup{
 		mRoot = inflater.inflate(R.layout.popup_ccomode, null);
 		this.addContentView(mRoot,  new LayoutParams(448,288));
 		this.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-		
-		
 	}
 	
 	@Override

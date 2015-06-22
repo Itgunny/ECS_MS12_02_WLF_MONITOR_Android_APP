@@ -5,14 +5,10 @@ import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
 
-
-import android.app.Activity;
 import android.app.ActivityManager;
-import android.app.Instrumentation;
-import android.app.PendingIntent;
-import android.app.Service;
 import android.app.ActivityManager.RunningAppProcessInfo;
-import android.app.ActivityManager.RunningTaskInfo;
+import android.app.Instrumentation;
+import android.app.Service;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
@@ -87,6 +83,7 @@ public class CommService extends Service{
 			System.loadLibrary("can_serial_port");
 			System.loadLibrary("can_data_parsing");
 			System.loadLibrary("LineOutclientjni");
+			System.loadLibrary("issynctrack"); 		// ++, --, 150615 cjg
 		} catch (Throwable t) {
 			// TODO: handle exception
 			Log.e(TAG,"Load Library Error");
@@ -95,7 +92,7 @@ public class CommService extends Service{
 	}
 	/////////////////////////////////////////////////////////////////////
 	//////////////////NATIVE METHOD/////////////////////////////////////
-	
+	public static native int native_system_sync();		// ++, --, 150615 cjg
 	public native int LineOutfromJNI_Native(int spk);
 	
 	public native int[] Get_TcuErr_FromNative();
@@ -571,6 +568,13 @@ public class CommService extends Service{
 	public native byte[] Get_DTC_3_PGN65438();
 	public native byte[] Get_DTC_4_PGN65438();
 	public native byte[] Get_DTC_5_PGN65438();
+	//////RX_CLUSTER_STATUS_65445///////
+	public native int Get_Dashboard_Program_Version_988_PGN65445();
+	public native int Get_Dashboard_Hardware_Version_989_PGN65445();
+	public native int Get_Mirror_Heater_Status_724_PGN65445();
+	public native int Get_High_Beam_Status_725_PGN65445();
+	public native int Get_Front_Rear_Lamp_Status_726_PGN65445();
+	public native int Get_HW_Vers_Sub_PGN65445();
 	//////RX_AXLE_STATUS_65449///////
 	public native int Get_Front_Axle_Oil_Temperature_577_PGN65449();
 	public native int Get_Rear_Axle_Oil_Temperature_578_PGN65449();
@@ -1201,12 +1205,13 @@ public class CommService extends Service{
 				break;
 			case CAN1CommManager.ESC:
 				// ++, 150324 bwk 하기 주석 품
-				if(GetScreenTopFlag() == true)
+				//if(GetScreenTopFlag() == true || CAN1Comm.CameraCurrentOnOff == true)
+				if(GetScreenTopFlag() == true || (CAN1Comm.CameraCurrentOnOff == true && CAN1Comm.CameraOnFlag != CAN1CommManager.STATE_CAMERA_REVERSEGEAR))
 				{
 					CAN1Comm.Callback_KeyButton(Data);
 					SoundPoolKeyButton.play(SoundID, fVolume, fVolume, 0, 0, 1);		// 타 apk에서 소리 2번 울림
-				}
-				else
+				}else if(CAN1Comm.CameraOnFlag == CAN1CommManager.STATE_CAMERA_REVERSEGEAR){
+				}else
 				// --, 150324 bwk 하기 주석 품
 				{
 					// ++, 150320 cjg
@@ -1215,25 +1220,30 @@ public class CommService extends Service{
 						HandleKeyButton.sendMessage(HandleKeyButton.obtainMessage(Data));
 					}else{
 						BackKeyEvent();
+						SoundPoolKeyButton.play(SoundID, fVolume, fVolume, 0, 0, 1);
 					}
 					// --, 150320 cjg				
 				}
 				break;
 			// ++, 150324 bwk
 			case CAN1CommManager.LEFT:
-				if(GetScreenTopFlag() == true)
+				//if(GetScreenTopFlag() == true || CAN1Comm.CameraCurrentOnOff == true)
+				if(GetScreenTopFlag() == true || (CAN1Comm.CameraCurrentOnOff == true && CAN1Comm.CameraOnFlag != CAN1CommManager.STATE_CAMERA_REVERSEGEAR))
 				{
 					CAN1Comm.Callback_KeyButton(Data);
-				}
-				else
+				}else if(CAN1Comm.CameraOnFlag == CAN1CommManager.STATE_CAMERA_REVERSEGEAR){
+				}else
+				{
 					BackKeyEvent();
+				}
 				SoundPoolKeyButton.play(SoundID, fVolume, fVolume, 0, 0, 1);
 				break;
 			// --, 150324 bwk
 			case CAN1CommManager.RIGHT:
-				if(GetScreenTopFlag() == true)
+				//if(GetScreenTopFlag() == true || CAN1Comm.CameraCurrentOnOff == true)
+				if(GetScreenTopFlag() == true || (CAN1Comm.CameraCurrentOnOff == true && CAN1Comm.CameraOnFlag != CAN1CommManager.STATE_CAMERA_REVERSEGEAR))
 				{
-					CAN1Comm.TxCMDToMCU(CAN1Comm.CMD_BUZ, 0);
+					CAN1Comm.TxCMDToMCU(CAN1CommManager.CMD_BUZ, 0);
 					CAN1Comm.Set_RequestBuzzerStop_PGN65327(1);
 					CAN1Comm.TxCANToMCU(47);
 					CAN1Comm.Callback_KeyButton(Data);
@@ -1277,6 +1287,18 @@ public class CommService extends Service{
 					}
 					endingKeyIGCount++;
 				}
+				// ++, 150615 cjg
+				try {
+					CAN1Comm.native_system_sync_Native();
+				} catch (NullPointerException e) {
+					// TODO: handle exception
+					Log.e(TAG,"NullPointerException");
+				}
+				catch (Throwable t) {
+					// TODO: handle exception
+					Log.e(TAG,"Load Library Error");
+				}	
+				// --, 150615 cjg
 				// --, 150403 cjg			
 				break;
 			case CAN1CommManager.FN:
@@ -1287,6 +1309,14 @@ public class CommService extends Service{
 				// --, 150326 cjg
 					HandleKeyButton.sendMessage(HandleKeyButton.obtainMessage(Data));
 				
+				SoundPoolKeyButton.play(SoundID, fVolume, fVolume, 0, 0, 1);
+				break;
+			case CAN1CommManager.MAINLIGHT:
+			case CAN1CommManager.WORKLIGHT:
+			case CAN1CommManager.BEACON_LAMP:
+			case CAN1CommManager.REAR_WIPER:
+			case CAN1CommManager.CAMERA:
+				CAN1Comm.Callback_KeyButton(Data);
 				SoundPoolKeyButton.play(SoundID, fVolume, fVolume, 0, 0, 1);
 				break;
 			default:
@@ -1541,8 +1571,8 @@ public class CommService extends Service{
 		{
 			startActivity(intent);
 			// ++, 150323 bwk
-			multimediaFlag = false;
-			miracastFlag = false;
+			//multimediaFlag = false;
+			//miracastFlag = false;
 			// --, 150323 bwk
 		}
 	}
@@ -1637,11 +1667,11 @@ public class CommService extends Service{
 		{
 			//rpmFlag = false;
 			if(CheckTopApps("com.mxtech.videoplayer.ad") == true){
-				SetMiracastFlag(false);
+				SetMultimediaFlag(false);
 				//multimediaFlag = false; //++, --, 150403 cjg
 				CallHome();
 			}else if(CheckTopApps("com.powerone.wfd.sink") == true){
-				SetMiracastFlag(false);
+				//SetMiracastFlag(false);		// 현재 FN키 누르면 해제됨
 				//miracastFlag = false; //++, --, 150403 cjg
 				CallHome();
 			}else if(CheckRunningApp("com.mxtech.videoplayer.ad") == true){

@@ -3,12 +3,14 @@
     android:id="@+id/RelativeLayout1"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical" >
+    android:orientation="vertical" 
+    android:splitMotionEvents="false">
 
     <RelativeLayout
         android:id="@+id/RelativeLayout_menu_body_monitoring_fuelhistory_hourlyrecord_graph"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content" >
+        android:layout_height="wrap_content" 
+        android:splitMotionEvents="false">
 
         <ImageView
             android:id="@+id/imageView_menu_body_monitoring_fuelhistory_hourlyrecord_graph_bg"
@@ -313,7 +315,8 @@
             android:layout_height="wrap_content"
             android:layout_alignBottom="@+id/imageView_menu_body_monitoring_fuelhistory_hourlyrecord_graph_bg"
             android:layout_marginBottom="6dp"
-            android:layout_marginLeft="67dp" >
+            android:layout_marginLeft="67dp" 
+            android:splitMotionEvents="false">
 
             <ImageView
                 android:id="@+id/imageView_menu_body_monitoring_fuelhistory_hourlyrecord_graph_value1"
@@ -330,7 +333,8 @@
             android:layout_alignBottom="@+id/imageView_menu_body_monitoring_fuelhistory_hourlyrecord_graph_bg"
             android:layout_marginBottom="6dp"
             android:layout_marginLeft="32dp"
-            android:layout_toRightOf="@+id/RelativeLayout_menu_body_monitoring_fuelhistory_hourlyrecord_graph_value1" >
+            android:layout_toRightOf="@+id/RelativeLayout_menu_body_monitoring_fuelhistory_hourlyrecord_graph_value1" 
+            android:splitMotionEvents="false">
 
             <ImageView
                 android:id="@+id/imageView_menu_body_monitoring_fuelhistory_hourlyrecord_graph_value2"
@@ -347,7 +351,8 @@
             android:layout_alignBottom="@+id/imageView_menu_body_monitoring_fuelhistory_hourlyrecord_graph_bg"
             android:layout_marginBottom="6dp"
             android:layout_marginLeft="32dp"
-            android:layout_toRightOf="@+id/RelativeLayout_menu_body_monitoring_fuelhistory_hourlyrecord_graph_value2" >
+            android:layout_toRightOf="@+id/RelativeLayout_menu_body_monitoring_fuelhistory_hourlyrecord_graph_value2" 
+            android:splitMotionEvents="false">
 
             <ImageView
                 android:id="@+id/imageView_menu_body_monitoring_fuelhistory_hourlyrecord_graph_value3"
@@ -364,7 +369,8 @@
             android:layout_alignBottom="@+id/imageView_menu_body_monitoring_fuelhistory_hourlyrecord_graph_bg"
             android:layout_marginBottom="6dp"
             android:layout_marginLeft="32dp"
-            android:layout_toRightOf="@+id/RelativeLayout_menu_body_monitoring_fuelhistory_hourlyrecord_graph_value3" >
+            android:layout_toRightOf="@+id/RelativeLayout_menu_body_monitoring_fuelhistory_hourlyrecord_graph_value3" 
+            android:splitMotionEvents="false">
 
             <ImageView
                 android:id="@+id/imageView_menu_body_monitoring_fuelhistory_hourlyrecord_graph_value4"
@@ -381,7 +387,8 @@
             android:layout_alignBottom="@+id/imageView_menu_body_monitoring_fuelhistory_hourlyrecord_graph_bg"
             android:layout_marginBottom="6dp"
             android:layout_marginLeft="32dp"
-            android:layout_toRightOf="@+id/RelativeLayout_menu_body_monitoring_fuelhistory_hourlyrecord_graph_value4" >
+            android:layout_toRightOf="@+id/RelativeLayout_menu_body_monitoring_fuelhistory_hourlyrecord_graph_value4" 
+            android:splitMotionEvents="false">
 
             <ImageView
                 android:id="@+id/imageView_menu_body_monitoring_fuelhistory_hourlyrecord_graph_value5"
@@ -398,7 +405,8 @@
             android:layout_alignBottom="@+id/imageView_menu_body_monitoring_fuelhistory_hourlyrecord_graph_bg"
             android:layout_marginBottom="6dp"
             android:layout_marginLeft="32dp"
-            android:layout_toRightOf="@+id/RelativeLayout_menu_body_monitoring_fuelhistory_hourlyrecord_graph_value5" >
+            android:layout_toRightOf="@+id/RelativeLayout_menu_body_monitoring_fuelhistory_hourlyrecord_graph_value5" 
+            android:splitMotionEvents="false">
 
             <ImageView
                 android:id="@+id/imageView_menu_body_monitoring_fuelhistory_hourlyrecord_graph_value6"
@@ -415,7 +423,8 @@
             android:layout_alignBottom="@+id/imageView_menu_body_monitoring_fuelhistory_hourlyrecord_graph_bg"
             android:layout_marginBottom="6dp"
             android:layout_marginLeft="32dp"
-            android:layout_toRightOf="@+id/RelativeLayout_menu_body_monitoring_fuelhistory_hourlyrecord_graph_value6" >
+            android:layout_toRightOf="@+id/RelativeLayout_menu_body_monitoring_fuelhistory_hourlyrecord_graph_value6" 
+            android:splitMotionEvents="false">
 
             <ImageView
                 android:id="@+id/imageView_menu_body_monitoring_fuelhistory_hourlyrecord_graph_value7"
@@ -432,7 +441,8 @@
             android:layout_alignBottom="@+id/imageView_menu_body_monitoring_fuelhistory_hourlyrecord_graph_bg"
             android:layout_marginBottom="6dp"
             android:layout_marginLeft="32dp"
-            android:layout_toRightOf="@+id/RelativeLayout_menu_body_monitoring_fuelhistory_hourlyrecord_graph_value7" >
+            android:layout_toRightOf="@+id/RelativeLayout_menu_body_monitoring_fuelhistory_hourlyrecord_graph_value7" 
+            android:splitMotionEvents="false">
 
             <ImageView
                 android:id="@+id/imageView_menu_body_monitoring_fuelhistory_hourlyrecord_graph_value8"
@@ -449,7 +459,8 @@
             android:layout_alignBottom="@+id/imageView_menu_body_monitoring_fuelhistory_hourlyrecord_graph_bg"
             android:layout_marginBottom="6dp"
             android:layout_marginLeft="32dp"
-            android:layout_toRightOf="@+id/RelativeLayout_menu_body_monitoring_fuelhistory_hourlyrecord_graph_value8" >
+            android:layout_toRightOf="@+id/RelativeLayout_menu_body_monitoring_fuelhistory_hourlyrecord_graph_value8" 
+            android:splitMotionEvents="false">
 
             <ImageView
                 android:id="@+id/imageView_menu_body_monitoring_fuelhistory_hourlyrecord_graph_value9"
@@ -466,7 +477,8 @@
             android:layout_alignBottom="@+id/imageView_menu_body_monitoring_fuelhistory_hourlyrecord_graph_bg"
             android:layout_marginBottom="6dp"
             android:layout_marginLeft="32dp"
-            android:layout_toRightOf="@+id/RelativeLayout_menu_body_monitoring_fuelhistory_hourlyrecord_graph_value9" >
+            android:layout_toRightOf="@+id/RelativeLayout_menu_body_monitoring_fuelhistory_hourlyrecord_graph_value9" 
+            android:splitMotionEvents="false">
 
             <ImageView
                 android:id="@+id/imageView_menu_body_monitoring_fuelhistory_hourlyrecord_graph_value10"
@@ -483,7 +495,8 @@
             android:layout_alignBottom="@+id/imageView_menu_body_monitoring_fuelhistory_hourlyrecord_graph_bg"
             android:layout_marginBottom="6dp"
             android:layout_marginLeft="32dp"
-            android:layout_toRightOf="@+id/RelativeLayout_menu_body_monitoring_fuelhistory_hourlyrecord_graph_value10" >
+            android:layout_toRightOf="@+id/RelativeLayout_menu_body_monitoring_fuelhistory_hourlyrecord_graph_value10" 
+            android:splitMotionEvents="false">
 
             <ImageView
                 android:id="@+id/imageView_menu_body_monitoring_fuelhistory_hourlyrecord_graph_value11"
@@ -500,7 +513,8 @@
             android:layout_alignBottom="@+id/imageView_menu_body_monitoring_fuelhistory_hourlyrecord_graph_bg"
             android:layout_marginBottom="6dp"
             android:layout_marginLeft="32dp"
-            android:layout_toRightOf="@+id/RelativeLayout_menu_body_monitoring_fuelhistory_hourlyrecord_graph_value11" >
+            android:layout_toRightOf="@+id/RelativeLayout_menu_body_monitoring_fuelhistory_hourlyrecord_graph_value11" 
+            android:splitMotionEvents="false">
 
             <ImageView
                 android:id="@+id/imageView_menu_body_monitoring_fuelhistory_hourlyrecord_graph_value12"
@@ -619,7 +633,8 @@
         android:id="@+id/RelativeLayout_menu_body_monitoring_fuelhistory_hourlyrecord_low"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true" >
+        android:layout_alignParentBottom="true" 
+        android:splitMotionEvents="false">
 
         <ImageView
             android:id="@+id/imageView_menu_body_monitoring_fuelhistory_hourlyrecord_low_bg"
@@ -673,13 +688,15 @@
             android:layout_alignBottom="@+id/ImageButton_menu_body_monitoring_fuelhistory_hourlyrecord_low_ok"
             android:layout_alignLeft="@+id/ImageButton_menu_body_monitoring_fuelhistory_hourlyrecord_low_ok"
             android:layout_alignRight="@+id/ImageButton_menu_body_monitoring_fuelhistory_hourlyrecord_low_ok"
-            android:layout_alignTop="@+id/ImageButton_menu_body_monitoring_fuelhistory_hourlyrecord_low_ok" >
+            android:layout_alignTop="@+id/ImageButton_menu_body_monitoring_fuelhistory_hourlyrecord_low_ok" 
+            android:splitMotionEvents="false">
 
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerHorizontal="true"
-                android:layout_centerVertical="true" >
+                android:layout_centerVertical="true" 
+                android:splitMotionEvents="false">
 
                 <ImageView
                     android:id="@+id/imageView_menu_body_monitoring_fuelhistory_hourlyrecord_low_ok_icon"
@@ -709,13 +726,15 @@
             android:layout_alignBottom="@+id/ImageButton_menu_body_monitoring_fuelhistory_hourlyrecord_low_initialization"
             android:layout_alignLeft="@+id/ImageButton_menu_body_monitoring_fuelhistory_hourlyrecord_low_initialization"
             android:layout_alignRight="@+id/ImageButton_menu_body_monitoring_fuelhistory_hourlyrecord_low_initialization"
-            android:layout_alignTop="@+id/ImageButton_menu_body_monitoring_fuelhistory_hourlyrecord_low_initialization" >
+            android:layout_alignTop="@+id/ImageButton_menu_body_monitoring_fuelhistory_hourlyrecord_low_initialization" 
+            android:splitMotionEvents="false">
 
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerHorizontal="true"
-                android:layout_centerVertical="true" >
+                android:layout_centerVertical="true" 
+                android:splitMotionEvents="false">
 
                 <TextView
                     android:id="@+id/textView_menu_body_monitoring_fuelhistory_hourlyrecord_low_initialization"

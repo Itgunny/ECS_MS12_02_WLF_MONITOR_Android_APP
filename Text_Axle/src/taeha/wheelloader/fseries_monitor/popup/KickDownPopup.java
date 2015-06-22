@@ -1,20 +1,16 @@
 package taeha.wheelloader.fseries_monitor.popup;
 
-import android.content.Context;
-import android.graphics.Color;
-import android.graphics.drawable.ColorDrawable;
-import android.util.Log;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup.LayoutParams;
-import android.widget.ImageButton;
-import android.widget.RelativeLayout;
-import android.widget.TextView;
 import taeha.wheelloader.fseries_monitor.main.CAN1CommManager;
 import taeha.wheelloader.fseries_monitor.main.Home;
 import taeha.wheelloader.fseries_monitor.main.ParentPopup;
 import taeha.wheelloader.fseries_monitor.main.R;
-import taeha.wheelloader.fseries_monitor.main.R.string;
+import android.content.Context;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup.LayoutParams;
+import android.widget.TextView;
 
 public class KickDownPopup extends ParentPopup{
 	//CONSTANT////////////////////////////////////////
@@ -55,14 +51,13 @@ public class KickDownPopup extends ParentPopup{
 		InitButtonListener();
 		InitValuable();
 		
-		ParentActivity.ScreenIndex = ParentActivity.SCREEN_STATE_MENU_MODE_ENGINETM_KICKDOWN;
+		ParentActivity.ScreenIndex = Home.SCREEN_STATE_MENU_MODE_ENGINETM_KICKDOWN;
 	}
-
 	@Override
 	public void dismiss() {
 		// TODO Auto-generated method stub
 		super.dismiss();
-		ParentActivity.ScreenIndex = ParentActivity.SCREEN_STATE_MENU_MODE_ENGINETM_TOP;
+		ParentActivity.ScreenIndex = Home.SCREEN_STATE_MENU_MODE_ENGINETM_TOP;
 	}
 	@Override
 	public void InitValuable(){

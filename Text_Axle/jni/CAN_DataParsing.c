@@ -442,6 +442,8 @@ void InitNewProtoclValuable() {
 		sizeof(RX_MACHINE_TRAVEL_STATUS_65434));
 	memset((unsigned char*) &RX_DTC_INFORMATION_TYPE1_65438, 0xFF,
 		sizeof(RX_DTC_INFORMATION_TYPE1_65438));
+	memset((unsigned char*) &RX_CLUSTER_STATUS_65445, 0xFF,
+		sizeof(RX_CLUSTER_STATUS_65445));
 	memset((unsigned char*) &RX_AXLE_STATUS_65449, 0xFF,
 		sizeof(RX_AXLE_STATUS_65449));
 	memset((unsigned char*) &RX_WEIGHING_SYSTEM_STATUS_65450, 0xFF,
@@ -734,6 +736,8 @@ void InitNewProtoclValuable() {
 void UART1_SeperateData_NEWCAN2(int Priority, int PF, int PS, int SourceAddress, unsigned char* Data)
 {
 	switch (SourceAddress) {
+		case SA_SMK:
+			break;
 		case SA_MCU:
 		default:
 			UART1_SeperateData_Default(Priority,PF,PS,Data);
@@ -1128,7 +1132,8 @@ void UART1_SeperateData_Cluster(int Priority, int PF, int PS, unsigned char* Dat
 		default:
 			switch (PS) {
 		case 50 :memcpy((unsigned char*)&RX_COMPONENT_IDENTIFICATION_CLUSTER_65330,&Data[7],8); break;
-		case 165	:	memcpy((unsigned char*) &rx_cluster_version, &Data[7], 8);	break;
+		case 165:memcpy((unsigned char*)&RX_CLUSTER_STATUS_65445,&Data[7],8); break;
+		//case 165	:	memcpy((unsigned char*) &rx_cluster_version, &Data[7], 8);	break;
 		default:
 			break;
 			}

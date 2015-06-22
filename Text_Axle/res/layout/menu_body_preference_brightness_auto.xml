@@ -1,14 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent" >
+    android:layout_height="match_parent" 
+    android:splitMotionEvents="false">
 
     <RelativeLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_above="@+id/RelativeLayout_menu_body_preference_brightness_auto_low"
         android:layout_alignParentTop="true"
-        android:layout_marginRight="10dp" >
+        android:layout_marginRight="10dp" 
+        android:splitMotionEvents="false">
         
         <RelativeLayout
             android:id="@+id/RelativeLayout_menu_body_preference_brightness_auto_time_title"
@@ -17,7 +19,8 @@
             android:layout_alignBottom="@+id/RelativeLayout_menu_body_preference_brightness_auto_time"
             android:layout_alignParentLeft="true"
             android:layout_alignTop="@+id/RelativeLayout_menu_body_preference_brightness_auto_time"
-            android:layout_toLeftOf="@+id/RelativeLayout_menu_body_preference_brightness_auto_time" >
+            android:layout_toLeftOf="@+id/RelativeLayout_menu_body_preference_brightness_auto_time" 
+            android:splitMotionEvents="false">
             
             <ImageView
                 android:id="@+id/imageView_menu_body_preference_brightness_auto_time_title"
@@ -46,7 +49,8 @@
 	        android:layout_alignBottom="@+id/RelativeLayout_menu_body_preference_brightness_auto_day"
 	        android:layout_alignParentLeft="true"
 	        android:layout_alignTop="@+id/RelativeLayout_menu_body_preference_brightness_auto_day"
-	        android:layout_toLeftOf="@+id/RelativeLayout_menu_body_preference_brightness_auto_day" >
+	        android:layout_toLeftOf="@+id/RelativeLayout_menu_body_preference_brightness_auto_day" 
+	        android:splitMotionEvents="false">
             
 	        <ImageView
                 android:id="@+id/imageView_menu_body_preference_brightness_auto_day_title"
@@ -75,7 +79,8 @@
 	        android:layout_alignBottom="@+id/RelativeLayout_menu_body_preference_brightness_auto_night"
 	        android:layout_alignParentLeft="true"
 	        android:layout_alignTop="@+id/RelativeLayout_menu_body_preference_brightness_auto_night"
-	        android:layout_toLeftOf="@+id/RelativeLayout_menu_body_preference_brightness_auto_night" >
+	        android:layout_toLeftOf="@+id/RelativeLayout_menu_body_preference_brightness_auto_night" 
+	        android:splitMotionEvents="false">
             
 	        <ImageView
                 android:id="@+id/imageView_menu_body_preference_brightness_auto_night_title"
@@ -104,14 +109,16 @@
             android:layout_above="@+id/RelativeLayout_menu_body_preference_brightness_auto_day"
             android:layout_alignLeft="@+id/RelativeLayout_menu_body_preference_brightness_auto_day"
             android:layout_alignParentRight="true"
-            android:layout_alignParentTop="true" >
+            android:layout_alignParentTop="true" 
+            android:splitMotionEvents="false">
 
 	        <LinearLayout
 	            android:id="@+id/LinearLayout_menu_body_preference_brightness_auto_time_start"
 	            android:layout_width="wrap_content"
 	            android:layout_height="wrap_content"
 	            android:layout_alignParentLeft="true"
-	            android:layout_centerVertical="true" >
+	            android:layout_centerVertical="true" 
+	            android:splitMotionEvents="false">
 	            
 	            <ImageButton
 		            android:id="@+id/imageButton_menu_body_preference_brightness_auto_time_start_minus"
@@ -155,7 +162,8 @@
 	            android:layout_width="wrap_content"
 	            android:layout_height="wrap_content"
 	            android:layout_alignParentRight="true"
-	            android:layout_centerVertical="true" >
+	            android:layout_centerVertical="true" 
+	            android:splitMotionEvents="false">
 	            
 	            <ImageButton
 		            android:id="@+id/imageButton_menu_body_preference_brightness_auto_time_end_minus"
@@ -189,14 +197,16 @@
 	        android:layout_width="wrap_content"
 	        android:layout_height="wrap_content"
 	        android:layout_alignParentRight="true"
-	        android:layout_centerVertical="true" >
+	        android:layout_centerVertical="true" 
+	        android:splitMotionEvents="false">
 	
 	        <RelativeLayout
 	            android:id="@+id/RelativeLayout_menu_body_preference_brightness_auto_day_seekbar"
 	            android:layout_width="wrap_content"
 	            android:layout_height="wrap_content"
 	            android:layout_centerHorizontal="true"
-	            android:layout_centerVertical="true" >
+	            android:layout_centerVertical="true" 
+	            android:splitMotionEvents="false">
 	
 	            <ImageView
 	                android:id="@+id/imageView_menu_body_preference_brightness_auto_day_seekbar_bg"
@@ -226,14 +236,16 @@
 	        android:layout_width="wrap_content"
 	        android:layout_height="wrap_content"
 	        android:layout_alignParentRight="true"
-	        android:layout_below="@+id/RelativeLayout_menu_body_preference_brightness_auto_day" >
+	        android:layout_below="@+id/RelativeLayout_menu_body_preference_brightness_auto_day" 
+	        android:splitMotionEvents="false">
 	
 	        <RelativeLayout
 	            android:id="@+id/RelativeLayout_menu_body_preference_brightness_auto_night_seekbar"
 	            android:layout_width="wrap_content"
 	            android:layout_height="wrap_content"
 	            android:layout_centerHorizontal="true"
-	            android:layout_centerVertical="true" >
+	            android:layout_centerVertical="true" 
+	            android:splitMotionEvents="false">
 	
 	            <ImageView
 	                android:id="@+id/imageView_menu_body_preference_brightness_auto_night_seekbar_bg"
@@ -267,7 +279,8 @@
         android:id="@+id/RelativeLayout_menu_body_preference_brightness_auto_low"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true" >
+        android:layout_alignParentBottom="true" 
+        android:splitMotionEvents="false">
 
         <ImageView
             android:id="@+id/imageView_menu_body_preference_brightness_auto_low_bg"
@@ -315,13 +328,15 @@
             android:layout_alignBottom="@+id/ImageButton_menu_body_preference_brightness_auto_low_ok"
             android:layout_alignLeft="@+id/ImageButton_menu_body_preference_brightness_auto_low_ok"
             android:layout_alignRight="@+id/ImageButton_menu_body_preference_brightness_auto_low_ok"
-            android:layout_alignTop="@+id/ImageButton_menu_body_preference_brightness_auto_low_ok" >
+            android:layout_alignTop="@+id/ImageButton_menu_body_preference_brightness_auto_low_ok" 
+            android:splitMotionEvents="false">
 
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerHorizontal="true"
-                android:layout_centerVertical="true" >
+                android:layout_centerVertical="true" 
+                android:splitMotionEvents="false">
 
                 <ImageView
                     android:id="@+id/imageView_menu_body_preference_brightness_auto_low_ok_icon"
@@ -351,13 +366,15 @@
             android:layout_alignBottom="@+id/ImageButton_menu_body_preference_brightness_auto_low_cancel"
             android:layout_alignLeft="@+id/ImageButton_menu_body_preference_brightness_auto_low_cancel"
             android:layout_alignRight="@+id/ImageButton_menu_body_preference_brightness_auto_low_cancel"
-            android:layout_alignTop="@+id/ImageButton_menu_body_preference_brightness_auto_low_cancel" >
+            android:layout_alignTop="@+id/ImageButton_menu_body_preference_brightness_auto_low_cancel" 
+            android:splitMotionEvents="false">
 
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerHorizontal="true"
-                android:layout_centerVertical="true" >
+                android:layout_centerVertical="true" 
+                android:splitMotionEvents="false">
 
                 <ImageView
                     android:id="@+id/imageView_menu_body_preference_brightness_auto_low_cancel_icon"

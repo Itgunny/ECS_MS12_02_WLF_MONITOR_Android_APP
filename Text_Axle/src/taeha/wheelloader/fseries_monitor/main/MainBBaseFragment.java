@@ -1362,11 +1362,24 @@ public class MainBBaseFragment extends ParentFragment{
 		ParentActivity.ScreenIndex = ParentActivity.SCREEN_STATE_MAIN_B_KEY_REARWIPER;
 		_MainBKeyTitleFragment = new MainBKeyTitleFragment();
 		_MainBKeyRearWiperFragment = new MainBKeyRearWiperFragment();
+		_MainBKeyRearWiperFragment.LongKey = 0;
 		_MainBKeyTitleFragment.setTitleIcon(ParentActivity.getResources().getDrawable(R.drawable.main_key_title_rearwiper));
 		_MainBKeyTitleFragment.setTitleText(ParentActivity.getResources().getString(string.Rear_Wiper));
 		KeyTitleChangeAnimation.StartChangeAnimation(_MainBKeyTitleFragment);
 		KeyBodyChangeAnimation.StartChangeAnimation(_MainBKeyRearWiperFragment);
 	}
+	public void showRearWiperLongKeyAnimation(){
+		ParentActivity.StartAnimationRunningTimer();
+		showKeyScreenAnimation();
+		ParentActivity.ScreenIndex = ParentActivity.SCREEN_STATE_MAIN_B_KEY_REARWIPER;
+		_MainBKeyTitleFragment = new MainBKeyTitleFragment();
+		_MainBKeyRearWiperFragment = new MainBKeyRearWiperFragment();
+		_MainBKeyRearWiperFragment.LongKey = 1;
+		_MainBKeyTitleFragment.setTitleIcon(ParentActivity.getResources().getDrawable(R.drawable.main_key_title_rearwiper));
+		_MainBKeyTitleFragment.setTitleText(ParentActivity.getResources().getString(string.Rear_Wiper));
+		KeyTitleChangeAnimation.StartChangeAnimation(_MainBKeyTitleFragment);
+		KeyBodyChangeAnimation.StartChangeAnimation(_MainBKeyRearWiperFragment);
+	}	
 	public void showMirrorHeatAnimation(){
 		ParentActivity.StartAnimationRunningTimer();
 		showKeyScreenAnimation();
@@ -1490,6 +1503,7 @@ public class MainBBaseFragment extends ParentFragment{
 	}
 	// --, 150331 bwk
 	public void showQuickScreen(){
+		_MainBVirtualKeyFragment = new MainBVirtualKeyFragment();
 		VirtualKeyChangeAnimation.StartChangeAnimation(_MainBVirtualKeyFragment);
 		
 		showCenterQuick();
@@ -1623,6 +1637,12 @@ public class MainBBaseFragment extends ParentFragment{
 			ClickKeyButtonLongLeftRightEnter();
 			break;
 		// --, 150210 bwk
+		case CAN1CommManager.LONG_REAR_WIPER:
+			if(ParentActivity.AnimationRunningFlag == true)
+				return;
+			if(ParentActivity.ScreenIndex != ParentActivity.SCREEN_STATE_MAIN_B_KEY_REARWIPER)
+				showRearWiperLongKeyAnimation();
+			break;
 		default:
 			break;
 		}

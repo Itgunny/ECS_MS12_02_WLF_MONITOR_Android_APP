@@ -30,6 +30,7 @@ public class QuickCouplerPopupLocking2 extends ParentPopup{
 	
 	//VALUABLE////////////////////////////////////////
 	private Timer mQuickCouplerSendTimer = null;
+	int	mQuickCouplerSend;
 	//////////////////////////////////////////////////
 	
 	//ANIMATION///////////////////////////////////////
@@ -48,6 +49,7 @@ public class QuickCouplerPopupLocking2 extends ParentPopup{
 		mRoot = inflater.inflate(R.layout.popup_key_quickcoupler_locking_2, null);
 		this.addContentView(mRoot,  new LayoutParams(548,288));
 		this.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+		QuickCouplerPopupUnlocking3 quickCouplerPopupUnlocking3 = new QuickCouplerPopupUnlocking3(_context);
 		
 	}
 	
@@ -96,21 +98,39 @@ public class QuickCouplerPopupLocking2 extends ParentPopup{
 		// TODO Auto-generated method stub
 		super.dismiss();
 		Log.d(TAG,"dismiss");
-		ParentActivity.ScreenIndex = ParentActivity.OldScreenIndex;
+		CancelQuickCouplerSendTimer();
+		//ParentActivity.ScreenIndex = ParentActivity.OldScreenIndex;
 		try {
 			if(ParentActivity.DisplayType == ParentActivity.DISPLAY_TYPE_A){
-				ParentActivity._MainBBaseFragment._MainBKeyQuickCouplerFragment.CursurDisplay(1);
+				if(QuickCouplerPopupUnlocking3.QuickCouplerOldScreenIndex == 1){
+					if((ParentActivity.OldScreenIndex >= ParentActivity.SCREEN_STATE_MAIN_CAMERA_TOP
+							&& ParentActivity.OldScreenIndex <= ParentActivity.SCREEN_STATE_MAIN_CAMERA_END)){
+						ParentActivity.setScreenIndex();
+					}
+					ParentActivity.setScreenIndex();
+				}else{
+					ParentActivity.ScreenIndex = ParentActivity.SCREEN_STATE_MAIN_B_KEY_QUICKCOUPLER;
+					ParentActivity._MainBBaseFragment._MainBKeyQuickCouplerFragment.CursurDisplay(1);
+				}
 			}else{
-				ParentActivity._MainABaseFragment._MainAKeyQuickCouplerFragment.CursurDisplay(1);
+				if(QuickCouplerPopupUnlocking3.QuickCouplerOldScreenIndex == 1){
+					if((ParentActivity.OldScreenIndex >= ParentActivity.SCREEN_STATE_MAIN_CAMERA_TOP
+							&& ParentActivity.OldScreenIndex <= ParentActivity.SCREEN_STATE_MAIN_CAMERA_END)){
+						ParentActivity.setScreenIndex();
+					}
+					ParentActivity.setScreenIndex();
+				}else{
+					ParentActivity.ScreenIndex = ParentActivity.SCREEN_STATE_MAIN_A_KEY_QUICKCOUPLER;
+					ParentActivity._MainABaseFragment._MainAKeyQuickCouplerFragment.CursurDisplay(1);
+				}
 			}
 		} catch (NullPointerException e) {
 			// TODO: handle exception
 			Log.e(TAG,"NullPointerException dismiss");
 		}		
-		CancelQuickCouplerSendTimer();
 		CAN1Comm.Set_QuickCouplerOperationStatus_3448_PGN65527(CAN1CommManager.DATA_STATE_KEY_QUICKCOUPLER_OFF);
 		CAN1Comm.TxCANToMCU(247);
-		
+		Log.d(TAG, "DATA_STATE_KEY_QUICKCOUPLER_OFF");
 	}
 
 	@Override
@@ -157,15 +177,20 @@ public class QuickCouplerPopupLocking2 extends ParentPopup{
 				@Override
 				public void run() {
 					// TODO Auto-generated method stub
-					try {
-						CAN1Comm.Set_QuickCouplerOperationStatus_3448_PGN65527(CAN1CommManager.DATA_STATE_KEY_QUICKCOUPLER_LOCK);
-						CAN1Comm.TxCANToMCU(247);
-						CAN1Comm.TxCMDToMCU(CAN1Comm.CMD_BUZ, CAN1Comm.BUZZER_ON);	// Buzzer On
-						Log.d(TAG,"QuickCouplerSendTimerClass");
-					} catch (NullPointerException e) {
-						// TODO: handle exception
-						Log.e(TAG,"NullPointerException");
+					if(mQuickCouplerSend==1)
+					{
+						try {
+							CAN1Comm.Set_QuickCouplerOperationStatus_3448_PGN65527(CAN1CommManager.DATA_STATE_KEY_QUICKCOUPLER_LOCK);
+							CAN1Comm.TxCANToMCU(247);
+							CAN1Comm.TxCMDToMCU(CAN1Comm.CMD_BUZ, CAN1Comm.BUZZER_ON);	// Buzzer On
+							Log.d(TAG,"QuickCouplerSendTimerClass");
+						} catch (NullPointerException e) {
+							// TODO: handle exception
+							Log.e(TAG,"NullPointerException");
+						}
 					}
+					else
+						Log.d(TAG,"QuickCouplerSendTimerClass_No!!!!");
 				}
 			});
 			
@@ -175,11 +200,13 @@ public class QuickCouplerPopupLocking2 extends ParentPopup{
 	
 	public void StartQuickCouplerSendTimer(){
 		CancelQuickCouplerSendTimer();
+		mQuickCouplerSend = 1;
 		mQuickCouplerSendTimer = new Timer();
 		mQuickCouplerSendTimer.schedule(new QuickCouplerSendTimerClass(),1,100);	
 	}
 	
 	public void CancelQuickCouplerSendTimer(){
+		mQuickCouplerSend = 0;
 		if(mQuickCouplerSendTimer != null){
 			mQuickCouplerSendTimer.cancel();
 			mQuickCouplerSendTimer.purge();
@@ -194,6 +221,7 @@ public class QuickCouplerPopupLocking2 extends ParentPopup{
 		CAN1Comm.TxCMDToMCU(CAN1Comm.CMD_BUZ, CAN1Comm.BUZZER_OFF);	// Buzzer Off
 		CAN1Comm.SetFNFlag(true);
 		this.dismiss();
+		QuickCouplerPopupUnlocking3.QuickCouplerOldScreenIndex = 0;
 	}
 
 }

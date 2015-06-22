@@ -31,6 +31,7 @@ public class QuickCouplerPopupUnlocking2 extends ParentPopup{
 	
 	//VALUABLE////////////////////////////////////////
 	private Timer mQuickCouplerSendTimer = null;
+	int	mQuickCouplerSend;	
 	//////////////////////////////////////////////////
 	
 	//ANIMATION///////////////////////////////////////
@@ -92,6 +93,7 @@ public class QuickCouplerPopupUnlocking2 extends ParentPopup{
 	public void dismiss() {
 		// TODO Auto-generated method stub
 		super.dismiss();
+		CancelQuickCouplerSendTimer();
 		Log.d(TAG,"dismiss");
 		// ++, 150407 bwk
 		// ++, 150314 bwk
@@ -105,11 +107,12 @@ public class QuickCouplerPopupUnlocking2 extends ParentPopup{
 		//
 		 */
 		// --, 150314 bwk
-		ParentActivity.ScreenIndex = ParentActivity.OldScreenIndex;
 		try {
 			if(ParentActivity.DisplayType == ParentActivity.DISPLAY_TYPE_A){
+				ParentActivity.ScreenIndex = ParentActivity.SCREEN_STATE_MAIN_B_KEY_QUICKCOUPLER;
 				ParentActivity._MainBBaseFragment._MainBKeyQuickCouplerFragment.CursurDisplay(2);
 			}else{
+				ParentActivity.ScreenIndex = ParentActivity.SCREEN_STATE_MAIN_A_KEY_QUICKCOUPLER;
 				ParentActivity._MainABaseFragment._MainAKeyQuickCouplerFragment.CursurDisplay(2);
 			}
 		} catch (NullPointerException e) {
@@ -118,7 +121,6 @@ public class QuickCouplerPopupUnlocking2 extends ParentPopup{
 		}
 		//
 		
-		CancelQuickCouplerSendTimer();
 		CAN1Comm.Set_QuickCouplerOperationStatus_3448_PGN65527(CAN1CommManager.DATA_STATE_KEY_QUICKCOUPLER_OFF);
 		CAN1Comm.TxCANToMCU(247);
 		
@@ -127,7 +129,6 @@ public class QuickCouplerPopupUnlocking2 extends ParentPopup{
 	@Override
 	protected void InitResource() {
 		// TODO Auto-generated method stub
-
 		LayoutBG = (RelativeLayout)mRoot.findViewById(R.id.RelativeLayout_popup_key_quickcoupler_unlocking_2);
 		imgbtnCancel = (ImageButton)mRoot.findViewById(R.id.imageButton_popup_key_quickcoupler_unlocking_2_cancel);
 	}
@@ -168,16 +169,20 @@ public class QuickCouplerPopupUnlocking2 extends ParentPopup{
 				@Override
 				public void run() {
 					// TODO Auto-generated method stub
-					try {
-						CAN1Comm.Set_QuickCouplerOperationStatus_3448_PGN65527(CAN1CommManager.DATA_STATE_KEY_QUICKCOUPLER_UNLOCK);
-						CAN1Comm.TxCANToMCU(247);
-						CAN1Comm.TxCMDToMCU(CAN1Comm.CMD_BUZ, CAN1Comm.BUZZER_ON);	// Buzzer On
-						Log.d(TAG,"QuickCouplerSendTimerClass");
-					} catch (NullPointerException e) {
-						// TODO: handle exception
-						Log.e(TAG,"NullPointerException");
+					if(mQuickCouplerSend == 1)
+					{
+						try {
+							CAN1Comm.Set_QuickCouplerOperationStatus_3448_PGN65527(CAN1CommManager.DATA_STATE_KEY_QUICKCOUPLER_UNLOCK);
+							CAN1Comm.TxCANToMCU(247);
+							CAN1Comm.TxCMDToMCU(CAN1Comm.CMD_BUZ, CAN1Comm.BUZZER_ON);	// Buzzer On
+							Log.d(TAG,"QuickCouplerSendTimerClass");
+						} catch (NullPointerException e) {
+							// TODO: handle exception
+							Log.e(TAG,"NullPointerException");
+						}
 					}
-					
+					else
+						Log.d(TAG,"QuickCouplerSendTimerClass_No!!!!");
 					
 				}
 			});
@@ -188,11 +193,13 @@ public class QuickCouplerPopupUnlocking2 extends ParentPopup{
 	
 	public void StartQuickCouplerSendTimer(){
 		CancelQuickCouplerSendTimer();
+		mQuickCouplerSend = 1;
 		mQuickCouplerSendTimer = new Timer();
 		mQuickCouplerSendTimer.schedule(new QuickCouplerSendTimerClass(),1,100);	
 	}
 	
 	public void CancelQuickCouplerSendTimer(){
+		mQuickCouplerSend = 0;
 		if(mQuickCouplerSendTimer != null){
 			mQuickCouplerSendTimer.cancel();
 			mQuickCouplerSendTimer.purge();

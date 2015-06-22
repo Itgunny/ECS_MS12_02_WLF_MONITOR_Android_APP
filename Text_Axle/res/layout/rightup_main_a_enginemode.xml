@@ -3,7 +3,8 @@
     android:id="@+id/RelativeLayout_rightup_main_a_engine_mode_top"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/main_a_bg_right" >
+    android:background="@drawable/main_a_bg_right" 
+    android:splitMotionEvents="false">
     
     <TextView
         android:id="@+id/textView_rightup_main_a_enginemode_title"
@@ -30,7 +31,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerVertical="true"
-        android:layout_marginLeft="450dp" >
+        android:layout_marginLeft="450dp" 
+        android:splitMotionEvents="false">
 
        <RadioButton
            android:id="@+id/radioButton_rightup_main_a_enginemode_econo"

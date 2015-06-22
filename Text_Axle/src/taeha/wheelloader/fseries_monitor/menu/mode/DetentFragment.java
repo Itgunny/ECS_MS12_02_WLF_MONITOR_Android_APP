@@ -37,6 +37,8 @@ public class DetentFragment extends ParentFragment{
 	
 	TextView textViewBoomSavePosition;
 	TextView textViewBucketSavePosition;
+	ImageView imageViewBoomSavePositionBoarder;
+	ImageView imageViewBucketSavePositionBoarder;
 	
 	RadioButton radioBoomOff;
 	RadioButton radioBoomOn;
@@ -52,6 +54,7 @@ public class DetentFragment extends ParentFragment{
 	
 	private Timer mPosTimer = null;
 	
+	int OldCursurIndex;
 	int CursurIndex;
 	
 	Handler HandleCursurDisplay;
@@ -100,6 +103,8 @@ public class DetentFragment extends ParentFragment{
 	public void onDestroyView() {
 		// TODO Auto-generated method stub
 		super.onDestroyView();
+		CAN1Comm.Set_RequestDetentReleasePositionSetting_PGN61184_123(15);
+		CAN1Comm.TxCANToMCU(123);
 
 	}
 	////////////////////////////////////////////////
@@ -116,6 +121,8 @@ public class DetentFragment extends ParentFragment{
 
 		textViewBoomSavePosition = (TextView)mRoot.findViewById(R.id.textView_menu_body_mode_detent_boom_saveposition);
 		textViewBucketSavePosition = (TextView)mRoot.findViewById(R.id.textView_menu_body_mode_detent_bucket_saveposition);
+		imageViewBoomSavePositionBoarder = (ImageView)mRoot.findViewById(R.id.imageView_menu_body_mode_detent_boom_boarder);
+		imageViewBucketSavePositionBoarder = (ImageView)mRoot.findViewById(R.id.imageView_menu_body_mode_detent_bucket_boarder);
 
 		radioBoomOff = (RadioButton)mRoot.findViewById(R.id.radioButton_menu_body_mode_detent_boom_off);
 		radioBoomOn = (RadioButton)mRoot.findViewById(R.id.radioButton_menu_body_mode_detent_boom_on);
@@ -136,44 +143,14 @@ public class DetentFragment extends ParentFragment{
 	@Override
 	protected void InitButtonListener() {
 		// TODO Auto-generated method stub
-		imgbtnOK.setOnClickListener(new View.OnClickListener() {
-			
-			@Override
-			public void onClick(View v) {
-				// TODO Auto-generated method stub
-				ClickOK();
-				CursurIndex = 7;
-				HandleCursurDisplay.sendMessage(HandleCursurDisplay.obtainMessage(CursurIndex));
-			}
-		});
-		textViewBoomSavePosition.setOnClickListener(new View.OnClickListener() {
-			
-			@Override
-			public void onClick(View v) {
-				// TODO Auto-generated method stub
-				ClickBoomSavePosition();
-			//	CursurIndex = 3;
-			//	HandleCursurDisplay.sendMessage(HandleCursurDisplay.obtainMessage(CursurIndex));
-			}
-		});
-		textViewBucketSavePosition.setOnClickListener(new View.OnClickListener() {
-			
-			@Override
-			public void onClick(View v) {
-				// TODO Auto-generated method stub
-				ClickBucketSavePosition();
-			//	CursurIndex = 6;
-			//	HandleCursurDisplay.sendMessage(HandleCursurDisplay.obtainMessage(CursurIndex));
-			}
-		});
 		radioBoomOff.setOnClickListener(new View.OnClickListener() {
 			
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
-				ClickBoomOff();
 				CursurIndex = 1;
 				HandleCursurDisplay.sendMessage(HandleCursurDisplay.obtainMessage(CursurIndex));
+				ClickBoomOff();
 			}
 		});
 		radioBoomOn.setOnClickListener(new View.OnClickListener() {
@@ -181,9 +158,19 @@ public class DetentFragment extends ParentFragment{
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
-				ClickBoomOn();
 				CursurIndex = 2;
 				HandleCursurDisplay.sendMessage(HandleCursurDisplay.obtainMessage(CursurIndex));
+				ClickBoomOn();
+			}
+		});
+		textViewBoomSavePosition.setOnClickListener(new View.OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				CursurIndex = 3;
+				HandleCursurDisplay.sendMessage(HandleCursurDisplay.obtainMessage(CursurIndex));
+				ClickBoomSavePosition();
 			}
 		});
 		radioBucketOff.setOnClickListener(new View.OnClickListener() {
@@ -191,9 +178,9 @@ public class DetentFragment extends ParentFragment{
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
-				ClickBucketOff();
 				CursurIndex = 4;
 				HandleCursurDisplay.sendMessage(HandleCursurDisplay.obtainMessage(CursurIndex));
+				ClickBucketOff();
 			}
 		});
 		radioBucketOn.setOnClickListener(new View.OnClickListener() {
@@ -201,9 +188,29 @@ public class DetentFragment extends ParentFragment{
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
-				ClickBucketOn();
 				CursurIndex = 5;
 				HandleCursurDisplay.sendMessage(HandleCursurDisplay.obtainMessage(CursurIndex));
+				ClickBucketOn();
+			}
+		});
+		textViewBucketSavePosition.setOnClickListener(new View.OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				CursurIndex = 6;
+				HandleCursurDisplay.sendMessage(HandleCursurDisplay.obtainMessage(CursurIndex));
+				ClickBucketSavePosition();
+			}
+		});
+		imgbtnOK.setOnClickListener(new View.OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				CursurIndex = 7;
+				HandleCursurDisplay.sendMessage(HandleCursurDisplay.obtainMessage(CursurIndex));
+				ClickOK();
 			}
 		});
 		
@@ -313,64 +320,36 @@ public class DetentFragment extends ParentFragment{
 	}
 	/////////////////////////////////////////////////////////////////////
 	public void ClickLeft(){
+		if((textViewBoomSavePosition.isPressed() == true) || (textViewBucketSavePosition.isPressed() == true))
+			return;
 		switch (CursurIndex) {
 		case 1:
 			CursurIndex = 7;
 			CursurDisplay(CursurIndex);
 			break;
 		case 2:
-			CursurIndex--;
-			CursurDisplay(CursurIndex);
-			break;
 		case 3:
-			CursurIndex--;
-			CursurDisplay(CursurIndex);
-			break;
 		case 4:
-			CursurIndex = 2;
-			CursurDisplay(CursurIndex);
-			break;
 		case 5:
-			CursurIndex--;
-			CursurDisplay(CursurIndex);
-			break;
 		case 6:
-			CursurIndex--;
-			CursurDisplay(CursurIndex);
-			break;
 		case 7:
-			CursurIndex = 5;
+			CursurIndex--;
 			CursurDisplay(CursurIndex);
 			break;
 		default:
-			CursurIndex = 1;
-			CursurDisplay(CursurIndex);
 			break;
 		}
 		
 	}
 	public void ClickRight(){
+		if((textViewBoomSavePosition.isPressed() == true) || (textViewBucketSavePosition.isPressed() == true))
+			return;
 		switch (CursurIndex) {
 		case 1:
-			CursurIndex++;
-			CursurDisplay(CursurIndex);
-			break;
 		case 2:
-			CursurIndex = 4;
-			CursurDisplay(CursurIndex);
-			break;
 		case 3:
-			CursurIndex++;
-			CursurDisplay(CursurIndex);
-			break;
 		case 4:
-			CursurIndex++;
-			CursurDisplay(CursurIndex);
-			break;
 		case 5:
-			CursurIndex = 7;
-			CursurDisplay(CursurIndex);
-			break;
 		case 6:
 			CursurIndex++;
 			CursurDisplay(CursurIndex);
@@ -380,8 +359,6 @@ public class DetentFragment extends ParentFragment{
 			CursurDisplay(CursurIndex);
 			break;
 		default:
-			CursurIndex = 1;
-			CursurDisplay(CursurIndex);
 			break;
 		}
 	}
@@ -397,7 +374,9 @@ public class DetentFragment extends ParentFragment{
 			ClickBoomOn();
 			break;
 		case 3:
-
+			OldCursurIndex = 3;
+			CursurIndex = 8;
+			CursurDisplay(CursurIndex);
 			break;
 		case 4:
 			ClickBucketOff();
@@ -406,12 +385,22 @@ public class DetentFragment extends ParentFragment{
 			ClickBucketOn();
 			break;
 		case 6:
-
+			OldCursurIndex = 6;
+			CursurIndex = 8;
+			CursurDisplay(CursurIndex);
 			break;
 		case 7:
 			ClickOK();
 			break;
-			
+		case 8:
+			if(OldCursurIndex == 3){
+				CursurIndex  = 3;
+				CursurDisplay(CursurIndex);	
+			} else if(OldCursurIndex == 6){
+				CursurIndex  = 6;
+				CursurDisplay(CursurIndex);				
+			}
+			break;			
 		default:
 			break;
 		}
@@ -438,6 +427,8 @@ public class DetentFragment extends ParentFragment{
 		radioBoomOn.setPressed(false);
 		radioBucketOff.setPressed(false);
 		radioBucketOn.setPressed(false);
+		imageViewBoomSavePositionBoarder.setVisibility(View.INVISIBLE);
+		imageViewBucketSavePositionBoarder.setVisibility(View.INVISIBLE);
 		
 		switch (CursurIndex) {
 		case 1:
@@ -447,7 +438,8 @@ public class DetentFragment extends ParentFragment{
 			radioBoomOn.setPressed(true);
 			break;
 		case 3:
-			textViewBoomSavePosition.setPressed(true);
+			textViewBoomSavePosition.setPressed(false);
+			imageViewBoomSavePositionBoarder.setVisibility(View.VISIBLE);
 			break;
 		case 4:
 			radioBucketOff.setPressed(true);
@@ -456,10 +448,20 @@ public class DetentFragment extends ParentFragment{
 			radioBucketOn.setPressed(true);
 			break;
 		case 6:
-			textViewBucketSavePosition.setPressed(true);
+			textViewBucketSavePosition.setPressed(false);
+			imageViewBucketSavePositionBoarder.setVisibility(View.VISIBLE);
 			break;
 		case 7:
 			imgbtnOK.setPressed(true);
+			break;
+		case 8:
+			if(OldCursurIndex == 3){
+				textViewBoomSavePosition.setPressed(true);
+				imageViewBoomSavePositionBoarder.setVisibility(View.VISIBLE);
+			}else if(OldCursurIndex == 6){
+				textViewBucketSavePosition.setPressed(true);
+				imageViewBucketSavePositionBoarder.setVisibility(View.VISIBLE);
+			}
 			break;
 			
 		default:

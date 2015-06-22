@@ -239,7 +239,7 @@ public class DisplayTypeFragment extends ParentFragment{
 	public void SetDisplayType(){
 		ParentActivity.DisplayType = CursurIndex;
 		SavePref();
-
+		
 		if(ParentActivity.AnimationRunningFlag == true)
 			return;
 		else
@@ -253,8 +253,8 @@ public class DisplayTypeFragment extends ParentFragment{
 		SharedPreferences.Editor edit = SharePref.edit();
 		edit.putInt("DisplayType", CursurIndex);
 		edit.commit();
-		Log.d(TAG,"SavePref");
 	}
+	
 	/////////////////////////////////////////////////////////////////////
 
 }

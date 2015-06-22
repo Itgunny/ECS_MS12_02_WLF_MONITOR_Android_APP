@@ -61,14 +61,22 @@ public class AxleTempWarningPopup extends ParentPopup{
 		InitButtonListener();
 		InitValuable();
 		
+		ParentActivity.OldScreenIndex = ParentActivity.ScreenIndex;
+		
 		if(ParentActivity.DisplayType == Home.DISPLAY_TYPE_A)
 			ParentActivity.ScreenIndex = Home.SCREEN_STATE_MAIN_B_LEFTUP_MACHINESTATUS_POPUP; 
 		else 
 			ParentActivity.ScreenIndex = Home.SCREEN_STATE_MAIN_A_LEFTUP_MACHINESTATUS_POPUP; 
-		
+
 		StartPopupOffTimer();
 	}
-	
+	@Override
+	public boolean onTouchEvent(MotionEvent event) {
+		// TODO Auto-generated method stub
+		ClickCancel();
+		
+		return false;
+	}	
 	@Override
 	public void InitValuable(){
 		super.InitValuable();
@@ -77,11 +85,6 @@ public class AxleTempWarningPopup extends ParentPopup{
 	public void dismiss() {
 		// TODO Auto-generated method stub
 		super.dismiss();
-		
-		if(ParentActivity.DisplayType == Home.DISPLAY_TYPE_A)
-			ParentActivity.ScreenIndex = Home.SCREEN_STATE_MAIN_B_TOP; 
-		else 
-			ParentActivity.ScreenIndex = Home.SCREEN_STATE_MAIN_A_TOP; 
 	}
 
 	@Override
@@ -107,6 +110,12 @@ public class AxleTempWarningPopup extends ParentPopup{
 	}
 	///////////////////////////////////////////////////////////////////////////////
 	public void ClickCancel(){
+		ParentActivity.ScreenIndex = ParentActivity.OldScreenIndex;
+//		if(ParentActivity.DisplayType == Home.DISPLAY_TYPE_A)
+//			ParentActivity.ScreenIndex = Home.SCREEN_STATE_MAIN_B_TOP; 
+//		else 
+//			ParentActivity.ScreenIndex = Home.SCREEN_STATE_MAIN_A_TOP; 
+		
 		this.dismiss();
 	}
 	////////////////////////////////////////////////////////////////////////////////
@@ -133,7 +142,7 @@ public class AxleTempWarningPopup extends ParentPopup{
 	public void StartPopupOffTimer(){
 		CancelPopupOffTimer();
 		mPopupOffTimer = new Timer();
-		mPopupOffTimer.schedule(new PopupOffTimerClass(),3000);	
+		mPopupOffTimer.schedule(new PopupOffTimerClass(),5000);	
 	}
 	
 	public void CancelPopupOffTimer(){

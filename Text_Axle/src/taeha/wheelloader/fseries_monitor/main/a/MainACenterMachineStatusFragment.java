@@ -124,14 +124,14 @@ public class MainACenterMachineStatusFragment extends ParentFragment{
 		case CAN1CommManager.DATA_STATE_MACHINESTATUS_COOLANT:
 			imageViewUpIcon.setBackgroundResource(R.drawable.main_icon_coolant);
 			break;
-//		case CAN1CommManager.DATA_STATE_MACHINESTATUS_FRONTAXLE:
-//			if(ParentActivity._CheckModel.CheckMCUVersionHigh(CAN1Comm.Get_ComponentBasicInformation_1698_PGN65330(), 955) == true)
-//				imageViewUpIcon.setBackgroundResource(R.drawable.main_icon_front_axle);
-//			break;
-//		case CAN1CommManager.DATA_STATE_MACHINESTATUS_REARAXLE:
-//			if(ParentActivity._CheckModel.CheckMCUVersionHigh(CAN1Comm.Get_ComponentBasicInformation_1698_PGN65330(), 965) == true)
-//				imageViewUpIcon.setBackgroundResource(R.drawable.main_icon_rear_axle);
-//			break;
+		case CAN1CommManager.DATA_STATE_MACHINESTATUS_FRONTAXLE:
+			//if(ParentActivity._CheckModel.CheckMCUVersionHigh(CAN1Comm.Get_ComponentBasicInformation_1698_PGN65330(), 955) == true)
+				imageViewUpIcon.setBackgroundResource(R.drawable.main_icon_front_axle);
+			break;
+		case CAN1CommManager.DATA_STATE_MACHINESTATUS_REARAXLE:
+			//if(ParentActivity._CheckModel.CheckMCUVersionHigh(CAN1Comm.Get_ComponentBasicInformation_1698_PGN65330(), 965) == true)
+				imageViewUpIcon.setBackgroundResource(R.drawable.main_icon_rear_axle);
+			break;
 		case CAN1CommManager.DATA_STATE_MACHINESTATUS_NOSELECT:
 		default:
 			imageViewUpIcon.setVisibility(View.INVISIBLE);
@@ -156,14 +156,14 @@ public class MainACenterMachineStatusFragment extends ParentFragment{
 		case CAN1CommManager.DATA_STATE_MACHINESTATUS_COOLANT:
 			imageViewDownIcon.setBackgroundResource(R.drawable.main_icon_coolant);
 			break;
-//		case CAN1CommManager.DATA_STATE_MACHINESTATUS_FRONTAXLE:
-//			if(ParentActivity._CheckModel.CheckMCUVersionHigh(CAN1Comm.Get_ComponentBasicInformation_1698_PGN65330(), 955) == true)
-//				imageViewDownIcon.setBackgroundResource(R.drawable.main_icon_front_axle);
-//			break;
-//		case CAN1CommManager.DATA_STATE_MACHINESTATUS_REARAXLE:
-//			if(ParentActivity._CheckModel.CheckMCUVersionHigh(CAN1Comm.Get_ComponentBasicInformation_1698_PGN65330(), 965) == true)
-//				imageViewDownIcon.setBackgroundResource(R.drawable.main_icon_rear_axle);
-//			break;
+		case CAN1CommManager.DATA_STATE_MACHINESTATUS_FRONTAXLE:
+			//if(ParentActivity._CheckModel.CheckMCUVersionHigh(CAN1Comm.Get_ComponentBasicInformation_1698_PGN65330(), 955) == true)
+				imageViewDownIcon.setBackgroundResource(R.drawable.main_icon_front_axle);
+			break;
+		case CAN1CommManager.DATA_STATE_MACHINESTATUS_REARAXLE:
+			//if(ParentActivity._CheckModel.CheckMCUVersionHigh(CAN1Comm.Get_ComponentBasicInformation_1698_PGN65330(), 965) == true)
+				imageViewDownIcon.setBackgroundResource(R.drawable.main_icon_rear_axle);
+			break;
 		case CAN1CommManager.DATA_STATE_MACHINESTATUS_NOSELECT:
 		default:
 			imageViewDownIcon.setVisibility(View.INVISIBLE);

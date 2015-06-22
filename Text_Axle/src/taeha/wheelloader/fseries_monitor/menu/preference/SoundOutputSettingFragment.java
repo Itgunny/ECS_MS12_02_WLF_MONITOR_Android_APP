@@ -205,8 +205,8 @@ public class SoundOutputSettingFragment extends ParentFragment{
 		ParentActivity._MenuBaseFragment._MenuModeFragment.setFirstScreen(Home.SCREEN_STATE_MENU_PREFERENCE_TOP);
 
 		ParentActivity.SoundState = SoundState;
-		ParentActivity.InternalSoundLevel = InternalSoundLevel;
-		CAN1Comm.setVolume(InternalSoundLevel);
+//		ParentActivity.InternalSoundLevel = InternalSoundLevel;
+//		CAN1Comm.setVolume(InternalSoundLevel);
 		ParentActivity.SavePref();
 		try {
 			CAN1Comm.LineOutfromJNI(SoundState);

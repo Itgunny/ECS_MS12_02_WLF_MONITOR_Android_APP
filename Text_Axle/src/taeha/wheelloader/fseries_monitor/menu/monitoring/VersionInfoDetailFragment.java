@@ -295,10 +295,11 @@ public class VersionInfoDetailFragment extends ParentFragment{
 		strSerial = new String(Serial,0,Serial.length);
 		if(DataCheckFlag == false){
 			adapter.UpdateSecond(STATE_SERIALNUMBER, "-");
+		}else if(Serial.length == 0){
+			adapter.UpdateSecond(STATE_SERIALNUMBER, "-");
 		}else{
 			adapter.UpdateSecond(STATE_SERIALNUMBER, strSerial);
 		}
-		
 	}
 	public void ManufactureDayDisplay(byte[] BasicInfo)throws NullPointerException{
 //		int Year, Month, Day;

@@ -13,6 +13,7 @@ import taeha.wheelloader.fseries_monitor.popup.AxleTempWarningPopup;
 import taeha.wheelloader.fseries_monitor.popup.BrakePedalCalibrationPopup;
 import taeha.wheelloader.fseries_monitor.popup.BucketPriorityPopup;
 import taeha.wheelloader.fseries_monitor.popup.CCOModePopup;
+import taeha.wheelloader.fseries_monitor.popup.CalibrationEHCUPopup;
 import taeha.wheelloader.fseries_monitor.popup.CoolingFanManualPopup;
 import taeha.wheelloader.fseries_monitor.popup.EHCUErrorPopup;
 import taeha.wheelloader.fseries_monitor.popup.EngineAutoShutdownCountPopup;
@@ -41,22 +42,21 @@ import taeha.wheelloader.fseries_monitor.popup.WeighingErrorToast;
 import taeha.wheelloader.fseries_monitor.popup.WorkLoadInitPopup;
 import taeha.wheelloader.fseries_monitor.popup.WorkLoadWeighingInitPopup1;
 import taeha.wheelloader.fseries_monitor.popup.WorkLoadWeighingInitPopup2;
-import android.os.Bundle;
-import android.os.Handler;
-import android.os.IBinder;
-import android.os.Message;
-import android.os.RemoteException;
 import android.app.Activity;
 import android.app.ActivityManager;
 import android.app.ActivityManager.RunningAppProcessInfo;
 import android.app.Dialog;
-import android.app.ActivityManager.RunningTaskInfo;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.ServiceConnection;
 import android.content.SharedPreferences;
 import android.graphics.drawable.AnimationDrawable;
+import android.os.Bundle;
+import android.os.Handler;
+import android.os.IBinder;
+import android.os.Message;
+import android.os.RemoteException;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.Menu;
@@ -69,10 +69,10 @@ public class Home extends Activity {
 	//CONSTANT//////////////////////////////////////////
 	//Version/////////////////////////////////////////////////////////////////////////////
 	//
-	public static final int VERSION_HIGH 		= 1;
+	public static final int VERSION_HIGH 		= 2;
 	public static final int VERSION_LOW 		= 0;
-	public static final int VERSION_SUB_HIGH 	= 4;
-	public static final int VERSION_SUB_LOW 	= 8;
+	public static final int VERSION_SUB_HIGH 	= 0;
+	public static final int VERSION_SUB_LOW 	= 10;
 	////1.0.2.3
 	// UI B 안 최초 적용 2014.12.10
 	////1.0.2.4
@@ -447,17 +447,109 @@ public class Home extends Activity {
 	// 3. 타 apk에서 메뉴/ESC/좌측 키 누를 경우 소리 두번들리는 현상 개선
 	// 4. 멀티미디어 UI 변경 : 미디어 플레이어, 스마트 터미널 두개 기능 이미지 아이콘으로 표시
 	// 5. 워셔 롱키 원복(상태 복구시키는 부분 버그 있어서 롱키일때 상태변하고 워셔하는 것으로 둠 -> 수정필요)
-	// 6. Axle 관련 사양 적용
+	// 6. 비활성화 된 키의 밝기가 너무 어두운 것 같음 (아무것도 없는 빈 공간 누르니 해당 버튼 화면이 뜨는 느낌)
+	// 7. Axle 관련 사양 적용
 	//	- 옵션 상관없이 Front, Rear Axle 표시(메인/메뉴)
 	//	- 경고가 둘 중 하나라도 발생했을 시 메인에서 Axle oil temp 선택 유무ㅡ 상관없이 경고 팝업 표시
 	//	- Axle이 미선택일 경우 경고가 발생할 경우 경고 Axle Oil Temp로 변겨
 	//	- Popup은 Warning On 시점부터 off될 때까지 최초 1회 3초간 발생, 다시 warning이 발생할 경우 pop up도 다시 동작
 	//	- 사용자가 메뉴, 후방카메라 화면에 들어가 있는 상태에서 warning 발생 히 메인화면으로 전환된 시점에서 경고 표시
 	//	  (Buzzer는 MCU에서 처리하기로 협의완료, 카메라 화면에서 메인화면으로 전환된 시점 3초 후)
+	////v.2.0.0.0
+	// 1.붐/버켓 각도보정 기능
+	//	- Step 1 : 그림 수정 (bucket full in 상태로)
+	//  - Step 4, 5 : 붐 각도 상태 표시 step 3 이후로 유지
+	//	- Boom 각도 두줄로 표시
+	// 2. 롱키 동작 기능 키패드 구현 방안
+	//	A. 롱키 동작 기능 :냉각팬 수동 실행, Detent - Save position, Rear Wiper ? Washer
+	//	B. 키패드 구현
+	//		- 엔터 1회 입력 : (커서 사라지면서) 터치 시작
+	//		- 엔터 1회 추가 입력 또는 ESC 입력 또는 화면 터치 입력 : (커서 나타나면서) 터치 끝
+	//		- 터치 시작과 끝 사이에는 다른 키패드 동작(ex. 커서이동) 안되도록
+	// 3. UserSwitching
+	//	- Boom Detent Mode 추가
+	//	- Bucket Detent Mode 추가
+	//	- Display Type 적용안되는 부분 수정
+	//	- Fuel 라인  Drak gray 버그 수정
+	// 4. 메뉴에서 CAM 버튼, 후진기어 연동 : home 버튼 + cam 화면 표시 
+	// 5. 미디어 플레이어 / 스마트 터미널 / PDF 리더
+	//	- CAM 버튼, 후진기어 연동 : 화면전환 버튼 + cam 화면 표시 (복귀 : 메인 화면)
+	//	- 램프류/후방와이퍼 버튼 : 백그라운드에서 프로토콜만 송부할 것. (메뉴 화면에서의 사양과 동일)
+	// 6. 워셔 롱키 버그 수정
+	//	- ST 수정필요(1.0.2.3)
+	// 7. auxilliary -> auxiliary 오타수정 
+	// 8. 멀티미디어 UI 수정(미디어플레이어 회색이미지 테두리 하얀색 수정)
+	// 9. 메인 - LeftUp
+	//	- Weight 에러 두개 떴을 경우 아이콘 나누어서 클릭된 것으로만 가이던스 표시로 변경
+	//	- UI Ton 좌표 맞춤
+	// 10. 클러스터 H/W Version 표시 추가
+	// 11. F.01.01 저항값 범위 변경 : 708~728 -> 688~738
+	//// v2.0.0.1
+	// 1. Maintance : draulic Tank Air Breather Filter에서 주기변경 누르면 Crash 뜨는 현상
+	//	- 다국어 적용하면서 문구가 삭제되어 발생 -> 변경된 문구로 표시
+	// 2. Main - Detent : 위치저장 안되는 현상 해결
+	// 3. CCO, Display Mode : 초기값과 UserSwitch Default 값 통일
+	// 4. Main A Quick에서 소모품관리/UserSwitch/현재고장 페이지 이동하였다가 Back하였을 경우 가상키패드 안되는 현상 해결
+	// 5. UserSwitching
+	//	- 초기 커서 위치를 마지막 선택한 User에서 기본값 혹은 적용된 사용자전환 으로 표시
+	//	- 사운드 적용안되는 현상 개선
+	//// v2.0.0.2
+	// 1. MultiTouch 막음
+	// 2. rpm gauge 맞춤
+	// 3. 장비정보 표시기능 - BKCU 버전 항목 CID 인식 여부에 따라 감춤
+	// 4. Quick coupler 기능
+	//	- unlock 후 lock 시에 부저소리 이상 개선 
+	//	- 통신에러 관련하여 타이머 비종료 현상 개선
+	// 5. 다국어 설정 - 한국어 설정 후 KEY OFF 시 영어로 바뀜(타 언어도 동일 현상으로 추정) -> 개선
+	// 6. CID S/N 없는 경우 '-'로 표시
+	//// v2.0.0.3
+	// 1. SmartKey SA 무시(MCU의 CID와 겹쳐보임)
+	// 2. 히든 키 변경
+	//	- 진단기능-장비정보-각 장비화면 / 8+0 / Hidden 정보 표시
+	//	- 멀티미디어 / 8+0 / File manager
+	//	- 멀티미디어 / 8+9+0 / 시스템 설정 실행
+	// 3. 붐/버켓 각도보정, 붐 압력보정 기능 - EHCU CID 인식하여 EHCU 장착 장비에서는 최초 화면에 추가 문구 or 팝업 표시 
+	//	- "You should turn OFF Soft end stop before start calibration."
+	// 4. Main lamp류 오류 클릭 후 팝업 종료 시 crash 해결
+	//// v2.0.0.4
+	// 1. Axle Popup 3초 -> 5초로 변경
+	// 2. DTC List (HL9XX 시리즈, 15년 5월 22일 기준) 적용
+	// 3. TCU 4SPEED 모델 추가
+	//	- 6057018709 
+	// 4. 후방카메라 연동 시 후진기어일 경우 부저 울리지 않는 현상 개선
+	//	- 퀵커플러와 충돌로 인함
+	//// v2.0.0.5 15.06.12
+	// 1. PDF에서 ESC키 눌렀을 경우 소리안나는 현상 개선
+	// 2. 팝업을 켠 채로 카메라 모드로 들어가면 팝업이 꺼지거나 클릭되는 현상 개선
+	//	- ParentPopup에서 카메라의 상태를 보고 막음
+	// 3. 후방카메라일 경우 화면 터치하면 키/터치 불능현상 개선
+	//	- Home에서 imgViewCameraScreen를 Click 이벤트에서 Touch 이벤트로 변경
+	//	- 타 apk 실행 시 카메라 버튼 막음
+	// 4. 메뉴 - 멀티미디어 - 미디어 플레이어 선택 시 강제로 스마트터미널을 Off하는 부분 삭제
+	// 5. 멀티미디어 실행 중 스마트 터미널 실행 시 LED Off 되는 현상 개선
+	// 6. 스마트 터미널 실행 중 FN키 누르면 LED 꺼지지 않는 현상 개선
+	// 7. H/W Revision 저항 F.01.01 738 인식 보드 발생 -> max를 740으로 변경
+	// 8. MainKeyRearWiper ClickRight,ClickLeft 시 textview 없을 경우 NullPoint현상 보완
+	//// v2.0.0.5 15.06.15
+	// 1. [카메라 설정 기능]의 첫번째 카메라에 후진기어연동 전용 표시
+	// 2. 락업클러치 기능 켜짐/꺼짐 위아래 위치 바꿈 (ICCO 모드 기능과 비교했을 때) : 메인화면, 메뉴 내 전부
+	// 3. 엔진 자동정지 기능 팝업 뜨고 취소 버튼 누르면 직후 키패드 입력 시 CRASH 개선
+	// 4. 온도 값이 0xff이상일 경우 '-'로 표시
+	// 5. A안 Finemodulation 화면 Touch 시 crash 개선
+	// 6. Sync 적용
+	// 7. KeyButton Filter 수정
+	//// v2.0.0.5 15.06.16
+	// 1. 엔진자동정지 60초 이하데이터 나오고 60초 이상 데이터 올 경우 팝업이 안뜨는 현상 해결
+	//// v2.0.0.a 15.06.22
+	// 1. 2.0.0.5 + Axle 적용
+	// 2. Menu 갔다가 돌아왔을 경우 팝업안뜨는 현상 개선
+	// 3. 팝업이 떳을 경우 키 하나도 동작안함
 	//////////////////////////////////////////////////////////////////////////////////////
 	
 	// TAG
 	private  final String TAG = "Home";
+	
+	public  static final int SCREEN_STATE_FILTER 											= 0xF0000000;
 	
 	public  static final int SCREEN_STATE_MAIN_B_TOP 										= 0x10000000;
 	
@@ -580,10 +672,12 @@ public class Home extends Activity {
 //	public  static final int SCREEN_STATE_MENU_MODE_ETC_CAMERASETTING_END					= 0x2135FFFF;
 	public  static final int SCREEN_STATE_MENU_MODE_ETC_CALIBRATION_TOP						= 0x21350000;
 	public  static final int SCREEN_STATE_MENU_MODE_ETC_CALIBRATION_ANGLE_TOP				= 0x21351000;
-	public  static final int SCREEN_STATE_MENU_MODE_ETC_CALIBRATION_ANGLE_RESULT			= 0x21351100;
+	public  static final int SCREEN_STATE_MENU_MODE_ETC_CALIBRATION_ANGLE_POPUP				= 0x21351100;
+	public  static final int SCREEN_STATE_MENU_MODE_ETC_CALIBRATION_ANGLE_RESULT			= 0x21351200;
 	public  static final int SCREEN_STATE_MENU_MODE_ETC_CALIBRATION_ANGLE_END				= 0x21351FFF;
 	public  static final int SCREEN_STATE_MENU_MODE_ETC_CALIBRATION_PRESSURE_TOP			= 0x21352000;
-	public  static final int SCREEN_STATE_MENU_MODE_ETC_CALIBRATION_PRESSURE_RESULT			= 0x21352100;
+	public  static final int SCREEN_STATE_MENU_MODE_ETC_CALIBRATION_PRESSURE_POPUP			= 0x21352100;
+	public  static final int SCREEN_STATE_MENU_MODE_ETC_CALIBRATION_PRESSURE_RESULT			= 0x21352200;
 	public  static final int SCREEN_STATE_MENU_MODE_ETC_CALIBRATION_PRESSURE_END			= 0x21352FFF;
 	public  static final int SCREEN_STATE_MENU_MODE_ETC_CALIBRATION_BRAKEPEDAL_TOP			= 0x21353000;
 	public  static final int SCREEN_STATE_MENU_MODE_ETC_CALIBRATION_BRAKEPEDAL_END			= 0x21353FFF;
@@ -906,7 +1000,7 @@ public class Home extends Activity {
 	// Display Type
 	public int DisplayType;
 	public int LanguageIndex;	// ++, --, 150206 bwk
-	LanguageClass LangClass;	// ++, --, 150209 bwk
+	public LanguageClass LangClass;	// ++, --, 150209 bwk
 	
 	// Unit
 	public int UnitOdo;
@@ -1024,6 +1118,7 @@ public class Home extends Activity {
 	public FuelInitalPopup					_FuelInitalPopup;			// ++, --, 150406 bwk
 	public CoolingFanManualPopup			_CoolingFanManualPopup;		// ++,, --, 150410 bwk 
 	public AxleTempWarningPopup				_AxleTempWarningPopup;
+	public CalibrationEHCUPopup				_CalibrationEHCUPopup;
 	
 	//Toast
 	public WeighingErrorToast				_WeighingErrorToast;
@@ -1109,6 +1204,22 @@ public class Home extends Activity {
 	// ++, 150326 bwk
 	int SendDTCIndex;
 	// --, 150326 bwk
+	
+	// ++, 150520 bwk
+	// Menu->KeyPad Value
+	// -- MAINLIGHT
+	int HeadLamp;
+	int Illumination;
+	int SelectMainLampStatus;
+	// -- WORKLIGHT
+	int WorkLamp;
+	int RearWorkLamp;
+	int SelectWorkLampStatus;
+	// -- BEACONLAMP
+	int SelectBeaconLamp;
+	// -- WIPER
+	int SelectWiperSpeedState;
+	// --, 150520 bwk	
 	////////////////////////////////////////////////////
 	
 	//Fragment//////////////////////////////////////////
@@ -1165,7 +1276,6 @@ public class Home extends Activity {
 		return true;
 	}
 	
-	
 	/////////////////////////////////////////////////////
 
 
@@ -1215,7 +1325,8 @@ public class Home extends Activity {
 	public void InitValuable(){
 		// ++, 150209 bwk
 		LangClass = new LanguageClass(this);
-		LangClass.setLanugage(LangClass.GetLanguage());
+		//LangClass.setLanugage(LangClass.GetLanguage());
+		SetLanguage();
 		JoystickSteeringEnableFailCondition = 0;
 		JoystickSteeringActiveStatus = 0;
 		// --, 150209 bwk
@@ -1259,6 +1370,74 @@ public class Home extends Activity {
 		// --, 150326 bwk		
 		
 		_CrashApplication = (CrashApplication)getApplicationContext();		
+	}
+	
+	public void SetLanguage(){
+		try {  
+			Locale locale;
+			
+			switch (LangClass.GetLanguage()) {
+			case Home.STATE_DISPLAY_LANGUAGE_KOREAN:
+				locale = new Locale("ko");
+				break;
+			case Home.STATE_DISPLAY_LANGUAGE_ENGLISH:
+				locale = new Locale("en");
+				break;
+			case Home.STATE_DISPLAY_LANGUAGE_GERMAN:
+				locale = new Locale("de");
+				break;
+			case Home.STATE_DISPLAY_LANGUAGE_FRENCH:
+				locale = new Locale("fr");
+				break;
+			case Home.STATE_DISPLAY_LANGUAGE_SPANISH:
+				locale = new Locale("es");
+				break;
+			case Home.STATE_DISPLAY_LANGUAGE_PORTUGUE:
+				locale = new Locale("pt");
+				break;
+			case Home.STATE_DISPLAY_LANGUAGE_ITALIAN:
+				locale = new Locale("it");
+				break;
+			case Home.STATE_DISPLAY_LANGUAGE_NEDERLAND:
+				locale = new Locale("nl");
+				break;
+			case Home.STATE_DISPLAY_LANGUAGE_SWEDISH:
+				locale = new Locale("sv");
+				break;
+			case Home.STATE_DISPLAY_LANGUAGE_TURKISH:
+				locale = new Locale("tr");
+				break;
+			case Home.STATE_DISPLAY_LANGUAGE_SLOVAKIAN:
+				locale = new Locale("sk");
+				break;
+			case Home.STATE_DISPLAY_LANGUAGE_ESTONIAN:
+				locale = new Locale("et");
+				break;
+			case Home.STATE_DISPLAY_LANGUAGE_FINNISH:
+				locale = new Locale("fi");
+				break;
+			default:
+				locale = new Locale("en");
+				break;
+		}
+			
+            Class<?> activityManagerNative = Class.forName("android.app.ActivityManagerNative");  
+            Log.i("amnType", activityManagerNative.toString());  
+              
+            Object am=activityManagerNative.getMethod("getDefault").invoke(activityManagerNative);  
+            Log.i("amType", am.getClass().toString());  
+              
+            Object config=am.getClass().getMethod("getConfiguration").invoke(am);  
+            Log.i("configType", config.getClass().toString());  
+            config.getClass().getDeclaredField("locale").set(config, locale);  
+            config.getClass().getDeclaredField("userSetLocale").setBoolean(config, true);  
+                  
+            am.getClass().getMethod("updateConfiguration",android.content.res.Configuration.class).invoke(am,config);  
+          
+        }catch (Exception e) {  
+            e.printStackTrace();  
+        }  
+			
 	}
 	public void InitFragment(){
 		_MainBBaseFragment = new MainBBaseFragment();
@@ -1304,6 +1483,7 @@ public class Home extends Activity {
 		_FuelInitalPopup = new FuelInitalPopup(this);
 		_CoolingFanManualPopup = new CoolingFanManualPopup(this);
 		_AxleTempWarningPopup = new AxleTempWarningPopup(this);
+		_CalibrationEHCUPopup = new CalibrationEHCUPopup(this);
 		
 		_WeighingErrorToast = new WeighingErrorToast(this);
 	}
@@ -1350,6 +1530,7 @@ public class Home extends Activity {
 		_AxleTempWarningPopup = new AxleTempWarningPopup(this);
 		
 		_WeighingErrorToast = new WeighingErrorToast(this);
+		_CalibrationEHCUPopup = new CalibrationEHCUPopup(this);
 	}
 	// --, 150306 bwk
 	
@@ -1357,28 +1538,47 @@ public class Home extends Activity {
 		
 	}
 	public void InitButtonListener(){	
-		
-		imgViewCameraScreen.setOnClickListener(new View.OnClickListener() {
+//		imgViewCameraScreen.setOnClickListener(new View.OnClickListener() {
+//			
+//			@Override
+//			public void onClick(View v) {
+//				// TODO Auto-generated method stub
+//				ExitCam();
+//			}
+//		});
+		imgViewCameraScreen.setOnTouchListener(new View.OnTouchListener() {
 			
 			@Override
-			public void onClick(View v) {
-				// TODO Auto-generated method stub
+			public boolean onTouch(View v, MotionEvent event) {
+				switch(event.getAction()){
+					case MotionEvent.ACTION_UP:
+						Log.d(TAG, "imgViewCameraScreen.ScreenIndex"+Integer.toHexString(ScreenIndex));
+						if(CAN1Comm.CameraOnFlag == CAN1CommManager.STATE_CAMERA_MANUAL)
 				ExitCam();
+						else
+							Log.d(TAG, "imgViewCameraScreen.setOnClickListener"+CAN1Comm.CameraOnFlag);
+						
+				}
+				return false;
 			}
 		});
 		
 	}
 	public void ExcuteCamActivitybyKey(){
+		//Log.d(TAG,"ExcuteCamActivitybyKey" + CAN1Comm.GetScreenTopFlag());
+		imgViewCameraScreen.setClickable(true);
+		CAN1Comm.CameraCurrentOnOff = true;	// ++, --, 150326 cjg
 		OldScreenIndex = ScreenIndex;
 		ScreenIndex = SCREEN_STATE_MAIN_CAMERA_KEY;
 		CAN1Comm.CameraOnFlag = CAN1CommManager.STATE_CAMERA_MANUAL;
-		CAN1Comm.TxCMDToMCU(CAN1Comm.CMD_CAM, CameraOrder1);
-		imgViewCameraScreen.setClickable(true);
-		CAN1Comm.CameraCurrentOnOff = true;	// ++, --, 150326 cjg
+		CAN1Comm.TxCMDToMCU(CAN1CommManager.CMD_CAM, CameraOrder1);
+		
+		
 	}
 	public void ExcuteCamActivitybyReverseGear(){
 		CAN1Comm.CameraOnFlag = CAN1CommManager.STATE_CAMERA_REVERSEGEAR;
 		CAN1Comm.CameraCurrentOnOff = true;	// ++, --, 150326 cjg
+		
 	}
 	public boolean ExitCam(){
 		ScreenIndex = OldScreenIndex;
@@ -1387,7 +1587,7 @@ public class Home extends Activity {
 			CAN1Comm.CameraCurrentOnOff = false;	// ++, --, 150326 cjg
 			if(CAN1Comm.CameraOnFlag == CAN1CommManager.STATE_CAMERA_MANUAL){
 				CAN1Comm.CameraOnFlag = CAN1CommManager.STATE_CAMERA_OFF;
-				CAN1Comm.TxCMDToMCU(CAN1Comm.CMD_CAM, 0xFF);
+				CAN1Comm.TxCMDToMCU(CAN1CommManager.CMD_CAM, 0xFF);
 				imgViewCameraScreen.setClickable(false);
 				
 				return true;
@@ -1395,11 +1595,14 @@ public class Home extends Activity {
 				return false;
 			else 
 				return true;
+			
 		} catch (NullPointerException e) {
 			// TODO: handle exception
 			Log.e(TAG,"NullPointerException");
 		}
+		
 		return true;
+		
 	}
 	// ++, 150324 bwk
 	public void ChangeCam(int Key){
@@ -1415,7 +1618,7 @@ public class Home extends Activity {
 				SelectCameraNum = 1;
 		}
 		
-		CAN1Comm.TxCMDToMCU(CAN1Comm.CMD_CAM, SelectCameraNum-1);
+		CAN1Comm.TxCMDToMCU(CAN1CommManager.CMD_CAM, SelectCameraNum-1);
 	}
 	// --, 150324 bwk
 
@@ -1482,7 +1685,6 @@ public class Home extends Activity {
 		int _Componentcode;
 		int _Manufacturecode;
 		byte[] _ComponentBasicInformation;
-		String strModel;
 		int Index = 4;
 		int Index2 = 0;
 		boolean bAsterisk = false;
@@ -1593,6 +1795,7 @@ public class Home extends Activity {
 //		setScreenIndex();	// ++, --, 150310 bwk
 		
 		LanguageIndex = SharePref.getInt("LanguageIndex", STATE_DISPLAY_LANGUAGE_ENGLISH);		// ++, --, 150206 bwk
+		//LangClass.setLanugage(LanguageIndex);
 		
 		AttachmentStatus = SharePref.getInt("AttachmentStatus", CAN1CommManager.DATA_STATE_KEY_QUICKCOUPLER_OFF);
 		Log.d(TAG,"LoadPref");
@@ -1634,6 +1837,8 @@ public class Home extends Activity {
 		String strSoundOutput = "SoundOutput" + Integer.toString(Index);
 		String strHourmeterDisplay = "HourmeterDisplay" + Integer.toString(Index);
 		String strFuelDisplay = "FuelDisplay" + Integer.toString(Index);
+		String strBoomDetentMode = "BoomDetentMode" + Integer.toString(Index);
+		String strBucketDetentMode = "BucketDetentMode" + Integer.toString(Index);
 
 		SharedPreferences SharePref = getSharedPreferences("Home", 0);
 		SharedPreferences.Editor edit = SharePref.edit();
@@ -1673,6 +1878,9 @@ public class Home extends Activity {
 		edit.putInt(strHourmeterDisplay, _userdata.HourmeterDisplay);
 		edit.putInt(strFuelDisplay, _userdata.FuelDisplay);
 
+		edit.putInt(strBoomDetentMode, _userdata.BoomDetentMode);
+		edit.putInt(strBucketDetentMode, _userdata.BucketDetentMode);
+		
 		edit.commit();
 		Log.d(TAG,"SaveUserData" + Integer.toString(Index));
 		
@@ -1714,6 +1922,8 @@ public class Home extends Activity {
 		String strSoundOutput = "SoundOutput" + Integer.toString(Index);
 		String strHourmeterDisplay = "HourmeterDisplay" + Integer.toString(Index);
 		String strFuelDisplay = "FuelDisplay" + Integer.toString(Index);
+		String strBoomDetentMode = "BoomDetentMode" + Integer.toString(Index);
+		String strBucketDetentMode = "BucketDetentMode" + Integer.toString(Index);
 		
 		UserData _userdata;
 		_userdata = new UserData();
@@ -1722,7 +1932,7 @@ public class Home extends Activity {
 		
 		_userdata.EngineMode = SharePref.getInt(strEngineMode, CAN1CommManager.DATA_STATE_ENGINE_MODE_PWR);
 		//_userdata.WarmingUp = SharePref.getInt(strWarmingUp, CAN1CommManager.DATA_STATE_ENGINE_WARMINGUP_OFF);
-		_userdata.CCOMode = SharePref.getInt(strCCOMode, CAN1CommManager.DATA_STATE_TM_CLUTCHCUTOFF_OFF);
+		_userdata.CCOMode = SharePref.getInt(strCCOMode, CAN1CommManager.DATA_STATE_TM_CLUTCHCUTOFF_H);
 		_userdata.ShiftMode = SharePref.getInt(strShiftMode, CAN1CommManager.DATA_STATE_TM_SHIFTMODE_MANUAL);
 		_userdata.TCLockUp = SharePref.getInt(strTCLockUp, CAN1CommManager.DATA_STATE_TM_LOCKUPCLUTCH_ON);
 		_userdata.RideControl = SharePref.getInt(strRideControl, CAN1CommManager.DATA_STATE_RIDECONTROL_OFF);
@@ -1744,7 +1954,7 @@ public class Home extends Activity {
 		_userdata.BrightnessAutoStartTime = SharePref.getInt(strBrightnessAutoStartTime,8);
 		_userdata.BrightnessAutoEndTime = SharePref.getInt(strBrightnessAutoEndTime,18);
 		// --, 150407 bwk
-		_userdata.DisplayType = SharePref.getInt(strDisplayType,Home.DISPLAY_TYPE_A);
+		_userdata.DisplayType = SharePref.getInt(strDisplayType,Home.DISPLAY_TYPE_B);
 		_userdata.UnitTemp = SharePref.getInt(strUnitTemp, Home.UNIT_TEMP_C);
 		_userdata.UnitOdo = SharePref.getInt(strUnitOdo, Home.UNIT_ODO_KM);
 		_userdata.UnitWeight = SharePref.getInt(strUnitWeight, Home.UNIT_WEIGHT_TON);
@@ -1756,6 +1966,8 @@ public class Home extends Activity {
 		_userdata.HourmeterDisplay = SharePref.getInt(strHourmeterDisplay, CAN1CommManager.DATA_STATE_HOURMETER_LATEST);
 		_userdata.FuelDisplay = SharePref.getInt(strFuelDisplay, CAN1CommManager.DATA_STATE_AVERAGE_FUEL_RATE);
 
+		_userdata.BoomDetentMode = SharePref.getInt(strBoomDetentMode, CAN1CommManager.DATA_STATE_KEY_DETENT_BOOM_UPDOWN);
+		_userdata.BucketDetentMode = SharePref.getInt(strBucketDetentMode, CAN1CommManager.DATA_STATE_KEY_DETENT_BUCKET_IN);
 
 		Log.d(TAG,"LoadUserData" + Integer.toString(Index));
 		return _userdata;
@@ -1784,6 +1996,128 @@ public class Home extends Activity {
 		}
 	}
 	// --, 150213 bwk
+	/////////////////////////////////////////////////////
+	public void MainLightLampStatus(int _headlamp, int _illumination){
+		if(_headlamp == 0 && _illumination == 0){
+			SelectMainLampStatus = CAN1CommManager.DATA_STATE_KEY_MAINLIGHT_OFF;
+		}else if(_headlamp == 0 && _illumination == 1){
+			SelectMainLampStatus = CAN1CommManager.DATA_STATE_KEY_MAINLIGHT_LV1;
+		}else if(_headlamp == 1 && _illumination == 1){
+			SelectMainLampStatus = CAN1CommManager.DATA_STATE_KEY_MAINLIGHT_LV2;
+		}else{
+			SelectMainLampStatus = CAN1CommManager.DATA_STATE_KEY_MAINLIGHT_OFF;
+		}
+		
+	}
+	
+	public void WorkLightLampDisplay(int _worklamp, int _rearworklamp){
+		if(_worklamp == 0 && _rearworklamp == 0){
+			SelectWorkLampStatus = CAN1CommManager.DATA_STATE_KEY_WORKLIGHT_OFF;
+		}else if(_worklamp == 1 && _rearworklamp == 0){
+			SelectWorkLampStatus = CAN1CommManager.DATA_STATE_KEY_WORKLIGHT_LV1;
+		}else if(_worklamp == 1 && _rearworklamp == 1){
+			SelectWorkLampStatus = CAN1CommManager.DATA_STATE_KEY_WORKLIGHT_LV2;
+		}else{
+			SelectWorkLampStatus = CAN1CommManager.DATA_STATE_KEY_WORKLIGHT_OFF;
+		}
+	}
+	
+	
+	public void ClickMainLightHardKey(){
+		switch (SelectMainLampStatus) {
+		case CAN1CommManager.DATA_STATE_KEY_MAINLIGHT_OFF:
+			SelectMainLampStatus = CAN1CommManager.DATA_STATE_KEY_MAINLIGHT_LV1;
+			CAN1Comm.Set_HeadLampOperationStatus_3436_PGN65527(CAN1CommManager.DATA_STATE_LAMP_OFF);
+			CAN1Comm.Set_IlluminationOperationStatus_3438_PGN65527(CAN1CommManager.DATA_STATE_LAMP_ON);
+			CAN1Comm.TxCANToMCU(247);
+			
+			break;
+		case CAN1CommManager.DATA_STATE_KEY_MAINLIGHT_LV1:
+			SelectMainLampStatus = CAN1CommManager.DATA_STATE_KEY_MAINLIGHT_LV2;
+			CAN1Comm.Set_HeadLampOperationStatus_3436_PGN65527(CAN1CommManager.DATA_STATE_LAMP_ON);
+			CAN1Comm.Set_IlluminationOperationStatus_3438_PGN65527(CAN1CommManager.DATA_STATE_LAMP_ON);
+			CAN1Comm.TxCANToMCU(247);
+			
+			break;
+		case CAN1CommManager.DATA_STATE_KEY_MAINLIGHT_LV2:
+		default:
+			SelectMainLampStatus = CAN1CommManager.DATA_STATE_KEY_MAINLIGHT_OFF;
+			CAN1Comm.Set_HeadLampOperationStatus_3436_PGN65527(CAN1CommManager.DATA_STATE_LAMP_OFF);
+			CAN1Comm.Set_IlluminationOperationStatus_3438_PGN65527(CAN1CommManager.DATA_STATE_LAMP_OFF);
+			CAN1Comm.TxCANToMCU(247);
+			
+			break;
+		}
+	}
+	
+	public void ClickWorkLightHardKey(){
+		switch (SelectWorkLampStatus) {
+		case CAN1CommManager.DATA_STATE_KEY_WORKLIGHT_OFF:
+			SelectWorkLampStatus = CAN1CommManager.DATA_STATE_KEY_WORKLIGHT_LV1;
+			CAN1Comm.Set_WorkLampOperationStatus_3435_PGN65527(CAN1CommManager.DATA_STATE_LAMP_ON);
+			CAN1Comm.Set_RearWorkLampOperationStatus_3446_PGN65527(CAN1CommManager.DATA_STATE_LAMP_OFF);
+			CAN1Comm.TxCANToMCU(247);
+			
+			break;
+		case CAN1CommManager.DATA_STATE_KEY_WORKLIGHT_LV1:
+			SelectWorkLampStatus = CAN1CommManager.DATA_STATE_KEY_WORKLIGHT_LV2;
+			CAN1Comm.Set_WorkLampOperationStatus_3435_PGN65527(CAN1CommManager.DATA_STATE_LAMP_ON);
+			CAN1Comm.Set_RearWorkLampOperationStatus_3446_PGN65527(CAN1CommManager.DATA_STATE_LAMP_ON);
+			CAN1Comm.TxCANToMCU(247);
+			
+			break;
+		case CAN1CommManager.DATA_STATE_KEY_WORKLIGHT_LV2:
+		default:
+			SelectWorkLampStatus = CAN1CommManager.DATA_STATE_KEY_WORKLIGHT_OFF;
+			CAN1Comm.Set_WorkLampOperationStatus_3435_PGN65527(CAN1CommManager.DATA_STATE_LAMP_OFF);
+			CAN1Comm.Set_RearWorkLampOperationStatus_3446_PGN65527(CAN1CommManager.DATA_STATE_LAMP_OFF);
+			CAN1Comm.TxCANToMCU(247);
+			
+			break;
+		}
+	}
+	
+	public void ClickBeaconLampHardKey(){
+		switch (SelectBeaconLamp) {
+		case CAN1CommManager.DATA_STATE_OFF:
+		default:
+			SelectBeaconLamp = CAN1CommManager.DATA_STATE_ON;
+			CAN1Comm.Set_BeaconLampOperationStatus_3444_PGN65527(CAN1CommManager.DATA_STATE_ON);
+			CAN1Comm.TxCANToMCU(247);
+			CAN1Comm.Set_BeaconLampOperationStatus_3444_PGN65527(3);
+			break;
+		case CAN1CommManager.DATA_STATE_ON:
+			SelectBeaconLamp = CAN1CommManager.DATA_STATE_OFF;
+			CAN1Comm.Set_BeaconLampOperationStatus_3444_PGN65527(CAN1CommManager.DATA_STATE_OFF);
+			CAN1Comm.TxCANToMCU(247);
+			CAN1Comm.Set_BeaconLampOperationStatus_3444_PGN65527(3);
+			break;
+		}		
+	}
+	
+	public void ClickRearWiperHardKey(){
+		switch (SelectWiperSpeedState) {
+		case CAN1CommManager.DATA_STATE_KEY_REARWIPER_SPEED_OFF:
+		default:
+			SelectWiperSpeedState = CAN1CommManager.DATA_STATE_KEY_REARWIPER_SPEED_INT;
+			CAN1Comm.Set_RearWiperOperationStatus_3451_PGN65527(CAN1CommManager.DATA_STATE_KEY_REARWIPER_SPEED_INT);
+			CAN1Comm.TxCANToMCU(247);
+			CAN1Comm.Set_RearWiperOperationStatus_3451_PGN65527(3);
+			break;
+		case CAN1CommManager.DATA_STATE_KEY_REARWIPER_SPEED_INT:
+			SelectWiperSpeedState = CAN1CommManager.DATA_STATE_KEY_REARWIPER_SPEED_LOW;
+			CAN1Comm.Set_RearWiperOperationStatus_3451_PGN65527(CAN1CommManager.DATA_STATE_KEY_REARWIPER_SPEED_LOW);
+			CAN1Comm.TxCANToMCU(247);
+			CAN1Comm.Set_RearWiperOperationStatus_3451_PGN65527(3);
+			break;
+		case CAN1CommManager.DATA_STATE_KEY_REARWIPER_SPEED_LOW:
+			SelectWiperSpeedState = CAN1CommManager.DATA_STATE_KEY_REARWIPER_SPEED_OFF;
+			CAN1Comm.Set_RearWiperOperationStatus_3451_PGN65527(CAN1CommManager.DATA_STATE_KEY_REARWIPER_SPEED_OFF);
+			CAN1Comm.TxCANToMCU(247);
+			CAN1Comm.Set_RearWiperOperationStatus_3451_PGN65527(3);
+			break;
+		}
+	}
 	/////////////////////////////////////////////////////
 	// ++, 150309 bwk
 	public void showMainScreen(){
@@ -1973,6 +2307,18 @@ public class Home extends Activity {
 			else if(Data == CAN1CommManager.POWER_OFF){
 				showEndingFragment();
 				//allKillRunningApps("taeha.wheelloader.fseries_monitor.main");	// ++, --, 150326 cjg multimedia ending 개선 
+				// ++, 150615 cjg
+				try {
+					CAN1Comm.native_system_sync_Native();
+				} catch (NullPointerException e) {
+					// TODO: handle exception
+					Log.e(TAG,"NullPointerException");
+				}
+				catch (Throwable t) {
+					// TODO: handle exception
+					Log.e(TAG,"Load Library Error");
+				}	
+				// --, 150615 cjg
 			}
 			else if(CAN1Comm.GetScreenTopFlag() == true){
 				try {
@@ -1980,6 +2326,28 @@ public class Home extends Activity {
 				} catch (NullPointerException e) {
 					// TODO: handle exception
 					Log.e(TAG,"NullPointerException");
+				}
+			}else if(Data == CAN1CommManager.MAINLIGHT){
+				ClickMainLightHardKey();
+			}else if(Data == CAN1CommManager.WORKLIGHT){
+				ClickWorkLightHardKey();
+			}else if(Data == CAN1CommManager.BEACON_LAMP){
+				ClickBeaconLampHardKey();
+			}else if(Data == CAN1CommManager.REAR_WIPER){
+				ClickRearWiperHardKey();
+			}else if(Data == CAN1CommManager.LEFT || Data == CAN1CommManager.RIGHT){
+				if(ScreenIndex == SCREEN_STATE_MAIN_CAMERA_KEY){
+					ChangeCam(Data);
+				}
+			}else if(Data == CAN1CommManager.ESC){
+				if(ScreenIndex == SCREEN_STATE_MAIN_CAMERA_KEY){
+					ExitCam();
+				}
+			}else if(Data == CAN1CommManager.CAMERA){
+				if(CAN1Comm.CameraOnFlag ==  CAN1CommManager.STATE_CAMERA_OFF){
+					ExcuteCamActivitybyKey();
+				}else if(CAN1Comm.CameraOnFlag != CAN1CommManager.STATE_CAMERA_REVERSEGEAR){
+					ExitCam();
 				}
 			}
 				
@@ -2007,7 +2375,7 @@ public class Home extends Activity {
 			
 			SaveCID(ComponentCode,ManufacturerCode,ComponentBasicInformation);
 			
-			CAN1Comm.TxCMDToMCU(CAN1Comm.CMD_RTC,ComponentBasicInformation[0],ComponentBasicInformation[1],ComponentBasicInformation[2],0x01,Hour,Min,Sec,0x00);
+			CAN1Comm.TxCMDToMCU(CAN1CommManager.CMD_RTC,ComponentBasicInformation[0],ComponentBasicInformation[1],ComponentBasicInformation[2],0x01,Hour,Min,Sec,0x00);
 		}
 
 		@Override
@@ -2141,6 +2509,17 @@ public class Home extends Activity {
 			ReqestErrorCode();
 		}
 		// --, 150326 bwk		
+		
+		HeadLamp = CAN1Comm.Get_HeadLampOperationStatus_3436_PGN65527();
+		Illumination = CAN1Comm.Get_IlluminationOperationStatus_3438_PGN65527();
+		WorkLamp = CAN1Comm.Get_WorkLampOperationStatus_3435_PGN65527();
+		RearWorkLamp = CAN1Comm.Get_RearWorkLampOperationStatus_3446_PGN65527();
+		SelectBeaconLamp = CAN1Comm.Get_BeaconLampOperationStatus_3444_PGN65527();
+		SelectWiperSpeedState = CAN1Comm.Get_RearWiperOperationStatus_3451_PGN65527();
+
+		MainLightLampStatus(HeadLamp,Illumination);
+		WorkLightLampDisplay(WorkLamp,RearWorkLamp);
+		
 	}
 	public void UpdateUI() {
 		// TODO Auto-generated method stub
@@ -2157,17 +2536,22 @@ public class Home extends Activity {
 				CheckFNLed();
 			}
 		});
-	
 	}
+
+	
 	public void CheckBuzzer(){
 		if(ScreenIndex == SCREEN_STATE_MAIN_B_KEY_QUICKCOUPLER_POPUP_LOCKING2
 		|| ScreenIndex == SCREEN_STATE_MAIN_B_KEY_QUICKCOUPLER_POPUP_UNLOCKING2
-		|| ScreenIndex == SCREEN_STATE_MAIN_B_KEY_QUICKCOUPLER_POPUP_UNLOCKING3
 		// ++, 150313 bwk
 		|| ScreenIndex == SCREEN_STATE_MAIN_A_KEY_QUICKCOUPLER_POPUP_LOCKING2
-		|| ScreenIndex == SCREEN_STATE_MAIN_A_KEY_QUICKCOUPLER_POPUP_UNLOCKING2
-		|| ScreenIndex == SCREEN_STATE_MAIN_A_KEY_QUICKCOUPLER_POPUP_UNLOCKING3){
+		|| ScreenIndex == SCREEN_STATE_MAIN_A_KEY_QUICKCOUPLER_POPUP_UNLOCKING2){
 		// --, 150313 bwk
+			
+		}else if((ScreenIndex >= SCREEN_STATE_MAIN_CAMERA_TOP && ScreenIndex <= SCREEN_STATE_MAIN_CAMERA_END)
+			&&(OldScreenIndex == SCREEN_STATE_MAIN_B_KEY_QUICKCOUPLER_POPUP_LOCKING2
+					|| OldScreenIndex == SCREEN_STATE_MAIN_B_KEY_QUICKCOUPLER_POPUP_UNLOCKING2
+					|| OldScreenIndex == SCREEN_STATE_MAIN_A_KEY_QUICKCOUPLER_POPUP_LOCKING2
+					|| OldScreenIndex == SCREEN_STATE_MAIN_A_KEY_QUICKCOUPLER_POPUP_UNLOCKING2)){
 			
 		}else{
 			if(BuzzerStopCount > 5){
@@ -2194,7 +2578,8 @@ public class Home extends Activity {
 	public void CameraDisplay(){
 		if((ScreenIndex >= SCREEN_STATE_MAIN_B_TOP && ScreenIndex <= SCREEN_STATE_MAIN_B_END)
 		|| (ScreenIndex >= SCREEN_STATE_MAIN_A_TOP && ScreenIndex <= SCREEN_STATE_MAIN_A_END)	// ++, --, 150310 bwk
-		|| ScreenIndex == SCREEN_STATE_MAIN_CAMERA_GEAR){
+		|| (ScreenIndex >= SCREEN_STATE_MENU_TOP   && ScreenIndex <= SCREEN_STATE_MENU_END)
+		|| (ScreenIndex == SCREEN_STATE_MAIN_CAMERA_GEAR)){
 			if(CameraReverseMode == CAN1CommManager.DATA_STATE_CAMERA_REVERSE_ON){
 				if(SelectGearDirection == CAN1CommManager.DATA_INDEX_SELECTGEAR_DIR_R){	
 					CameraReverseOffCount = 0; 
@@ -2211,6 +2596,7 @@ public class Home extends Activity {
 						ScreenIndex = SCREEN_STATE_MAIN_CAMERA_GEAR;
 						CAN1Comm.CameraOnFlag = CAN1CommManager.STATE_CAMERA_REVERSEGEAR;
 						CAN1Comm.TxCMDToMCU(CAN1Comm.CMD_CAM, CameraOrder1);
+						CAN1Comm.CameraCurrentOnOff = true;
 						imgViewCameraScreen.setClickable(false);
 						CameraReverseOnCount = 0;
 					}
@@ -2228,10 +2614,12 @@ public class Home extends Activity {
 						CAN1Comm.CameraOnFlag = CAN1CommManager.STATE_CAMERA_OFF;
 						ScreenIndex = OldScreenIndex;
 						CAN1Comm.TxCMDToMCU(CAN1Comm.CMD_CAM, 0xFF);
+						CAN1Comm.CameraCurrentOnOff = false;
 						imgViewCameraScreen.setClickable(false);
 					}
 				}
 			}
+			
 			if(CAN1Comm.CameraOnFlag == CAN1CommManager.STATE_CAMERA_REVERSEGEAR
 			|| CAN1Comm.CameraOnFlag == CAN1CommManager.STATE_CAMERA_MANUAL){
 				imgViewCameraScreen.setClickable(true);
@@ -2338,8 +2726,8 @@ public class Home extends Activity {
 			&& EngineAutoShutdownMode == 1
 			&& EngineAutoShutdownRemainingTime <= 60){
 			
-			showEngineAutoShutdownCount();
 			OldScreenIndex = ScreenIndex;
+			showEngineAutoShutdownCount();
 			
 		}else if(ScreenIndex == SCREEN_STATE_ENGINEAUTOSHUTDOWNCOUNT_TOP){
 			if( EngineAutoShutdownMode == 0
@@ -2347,6 +2735,8 @@ public class Home extends Activity {
 				
 				if(HomeDialog != null){
 					HomeDialog.dismiss();
+					ScreenIndex = OldScreenIndex;
+					//Log.d(TAG,"CheckEngineAutoShutdown Dismiss");
 					HomeDialog = null;
 				}
 			}
@@ -2564,14 +2954,15 @@ public class Home extends Activity {
 				||	 ScreenIndex	== SCREEN_STATE_MAIN_A_KEY_QUICKCOUPLER_POPUP_UNLOCKING3){
 			if(Data == CAN1CommManager.CAMERA){
 				ExcuteCamActivitybyKey();
-			}else if(Data == CAN1CommManager.ESC || Data == CAN1CommManager.ENTER){
-				if(ScreenIndex == SCREEN_STATE_MAIN_A_KEY_QUICKCOUPLER_POPUP_LOCKING2)
-					_QuickCouplerPopupLocking2.ClickCancel();
-				else if(ScreenIndex == SCREEN_STATE_MAIN_A_KEY_QUICKCOUPLER_POPUP_UNLOCKING2)
-					_QuickCouplerPopupUnlocking2.ClickCancel();
 			}
 			Log.d(TAG,"Click QuickCoupler Key");				
-		}else if((ScreenIndex & SCREEN_STATE_MAIN_A_TOP) == SCREEN_STATE_MAIN_A_TOP){
+		}else if(ScreenIndex == SCREEN_STATE_MAIN_B_LEFTUP_MACHINESTATUS_POPUP
+				|| ScreenIndex == SCREEN_STATE_MAIN_A_LEFTUP_MACHINESTATUS_POPUP)
+		{
+			Log.d(TAG,"Click Key - AxleWarning");
+			//if(Data == CAN1CommManager.ESC)
+		}
+		else if((ScreenIndex & SCREEN_STATE_FILTER) == SCREEN_STATE_MAIN_A_TOP){
 			Log.d(TAG,"Click Main A Key");
 			_MainABaseFragment.KeyButtonClick(Data);
 		// --, 150310 bwk
@@ -2590,15 +2981,18 @@ public class Home extends Activity {
 		}else if(ScreenIndex == SCREEN_STATE_MENU_MODE_HYD_WORKLOAD_WEIGHING_INIT2){
 			Log.d(TAG,"Click WeighingInit2 Key");
 			_WorkLoadWeighingInitPopup2.KeyButtonClick(Data);
-		}else if((ScreenIndex & SCREEN_STATE_MAIN_B_TOP) == SCREEN_STATE_MAIN_B_TOP){
+		}else if((ScreenIndex & SCREEN_STATE_FILTER) == SCREEN_STATE_MAIN_B_TOP){
 			Log.d(TAG,"Click Main B Key");
 			_MainBBaseFragment.KeyButtonClick(Data);
-		}else if((ScreenIndex & SCREEN_STATE_MAIN_ENDING) == SCREEN_STATE_MAIN_ENDING){
+		}else if((ScreenIndex & SCREEN_STATE_FILTER) == SCREEN_STATE_MAIN_ENDING){
 			Log.d(TAG,"Click Ending Key");
 			
-		}else if((ScreenIndex & SCREEN_STATE_MENU_TOP) == SCREEN_STATE_MENU_TOP){
+		}else if((ScreenIndex & SCREEN_STATE_FILTER) == SCREEN_STATE_MENU_TOP){
 			Log.d(TAG,"Click Menu Key");
 			_MenuBaseFragment.KeyButtonClick(Data);
+		}else if(ScreenIndex == SCREEN_STATE_ENGINEAUTOSHUTDOWNCOUNT_TOP){
+			Log.d(TAG,"Click EngineAutoShutdownCount Key");
+			_EngineAutoShutdownCountPopup.KeyButtonClick(Data);
 		} 
 	}
 	/////////////////////////////////////////////////////
@@ -3044,7 +3438,23 @@ public class Home extends Activity {
 
 		HomeDialog = _AxleTempWarningPopup;
 		HomeDialog.show();
-	}	/////////////////////////////////////////////////////
+	}
+	public void showCalibrationEHCUPopup(){
+		if(AnimationRunningFlag == true)
+			return;
+		else
+			StartAnimationRunningTimer();
+		
+		if(HomeDialog != null){
+			HomeDialog.dismiss();
+			HomeDialog = null;
+		}
+	
+		HomeDialog = _CalibrationEHCUPopup;
+		HomeDialog.show();
+	}
+	/////////////////////////////////////////////////////
+
 	//Timer//////////////////////////////////////////////
 	public class SeatBeltTimerClass extends TimerTask{
 
@@ -3578,8 +3988,8 @@ public class Home extends Activity {
 	}
 	public String GetVersionString(int VersionHigh, int VersionLow, int VersionSubHigh, int VersionSubLow)throws NullPointerException{
 		String strVersion;
-		strVersion = Integer.toString(VersionHigh) + "." + Integer.toString(VersionLow) 
-				+ "." +Integer.toString(VersionSubHigh)  + "." + Integer.toString(VersionSubLow);
+		strVersion = Integer.toHexString(VersionHigh) + "." + Integer.toHexString(VersionLow) 
+				+ "." +Integer.toHexString(VersionSubHigh)  + "." + Integer.toHexString(VersionSubLow);
 		return strVersion;
 	}
 	/////////////////////////////////////////////////////
@@ -3693,7 +4103,13 @@ public class Home extends Activity {
 	public String GetTemp(int _Temp, int Unit){
 		String strTemp;
 		int nTemp;
+		long long_Temp;
 		
+		long_Temp = (_Temp  & 0xFFFFFFFFL);
+		if(long_Temp >= 0xFFL){
+			return "-";
+		}else
+		{
 		nTemp = GetTemp(_Temp);
 		if(Unit == UNIT_TEMP_F){
 			nTemp *= 18;
@@ -3702,6 +4118,7 @@ public class Home extends Activity {
 			strTemp = GetNumberString(nTemp);
 		}else{
 			strTemp = GetNumberString(nTemp);
+		}
 		}
 		
 		return strTemp;

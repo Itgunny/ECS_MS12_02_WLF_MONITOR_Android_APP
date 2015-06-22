@@ -148,6 +148,8 @@
     <string name="A_DAYS_FUEL_USED">A DAYS FUEL USED</string>
     <string name="A_Days_Fuel_Used">A Days Fuel Used</string>
     <string name="Axle_Warning_Popup">"CAUTION!\nOne of axles exceeds allowable oil temperature‼/nStop operating the machine and cool down axle oil\nuntil warning lamp goes off"</string>
+    <string name="Boom_Detent_Mode">Boom Detent Mode</string>
+    <string name="Bucket_Detent_Mode">Bucket Detent Mode</string>
     <!-- Main End -->
     <!-- Key Start-->
     <string name="Main_Light">Main Light</string>
@@ -216,7 +218,7 @@
     <string name="TC_Lock_Up">T.C. Lock Up</string>
     <string name="Bucket_Priority">Bucket Priority</string>
     <string name="Boom_Bucket_Detent_Mode">Boom Bucket Detent Mode</string>
-    <string name="Auxilliary_Attachment_Max_Flow_Level">Auxilliary Attachment Max Flow Level</string>
+    <string name="Auxilliary_Attachment_Max_Flow_Level">Auxiliary Attachment Max Flow Level</string>
     <string name="Soft_End_Stop">Soft End Stop</string>
     <string name="Engine_Auto_Shutdown">Engine Auto Shutdown</string>
     <string name="Camera_Setting">Camera Setting</string>
@@ -438,6 +440,7 @@
     <!-- Menu Preference End -->
     <!-- Menu Multimedia Start -->
     <string name="Media_Palyer">Media Player</string>
+    <string name="Smart_Terminal">Smart Terminal</string>
     <!-- Menu Multimedia End -->
     <!-- Language Start -->
     <string name="Korean">Korean</string>
