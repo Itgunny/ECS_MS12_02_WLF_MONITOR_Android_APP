@@ -35,6 +35,7 @@ import taeha.wheelloader.fseries_monitor.popup.QuickCouplerPopupUnlocking2;
 import taeha.wheelloader.fseries_monitor.popup.QuickCouplerPopupUnlocking3;
 import taeha.wheelloader.fseries_monitor.popup.ShiftModePopup;
 import taeha.wheelloader.fseries_monitor.popup.SoftStopInitPopup;
+import taeha.wheelloader.fseries_monitor.popup.SoftwareUpdateErrorPopup;
 import taeha.wheelloader.fseries_monitor.popup.SoundOutputPopup;
 import taeha.wheelloader.fseries_monitor.popup.SpeedometerInitPopup;
 import taeha.wheelloader.fseries_monitor.popup.TCLockUpPopup;
@@ -73,6 +74,7 @@ public class Home extends Activity {
 	public static final int VERSION_LOW 		= 0;
 	public static final int VERSION_SUB_HIGH 	= 0;
 	public static final int VERSION_SUB_LOW 	= 5;
+	public static final int VERSION_TAEHA		= 1;
 	////1.0.2.3
 	// UI B 안 최초 적용 2014.12.10
 	////1.0.2.4
@@ -534,6 +536,23 @@ public class Home extends Activity {
 	// 7. KeyButton Filter 수정
 	//// v2.0.0.5 15.06.16
 	// 1. 엔진자동정지 60초 이하데이터 나오고 60초 이상 데이터 올 경우 팝업이 안뜨는 현상 해결
+	//// v2.0.0.a 15.06.22(Axle Test) : svn 참조
+	//// v2.0.0.6 15.06.23(Axle Test) : svn 참조
+	//// v2.0.0.51 
+	// 1. Main B 라이드 컨트롤 UI 이미지 깨짐 현상 개선
+	// 2. Software Update 개선방안 준비중(시동 중일 경우 Software Update를 하지 않고 경고 팝업만 띄움(Key on시에만 업데이트 되도록))
+	// 3. 시계 -> RTC 값이 24이상일 경우 12로 고정
+	// 4. Icon 적용 
+	// 5. Hidden version 추가(모니터 정보에서 MENU+ESC+LEFT+RIGHT+ENTER)
+	// 6. Sync 관련 보완(native_system_updates_native 추가)
+	// 5. 2.0.0.a + 2.0.0.6에 적용됨
+	//	- main 장비 상태 선택 페이지 UI 맞춤(한국어 두줄표시 변경)
+	//	- main 장비상태 보여주는 부분 Axle 관련 팝업 표시 삭제 -> Home으로 이동예정(우선순위는 퀵커플러가 높음)
+	//	- Main CurserDisplay Null Point 에러 try catch문 적용(품질 김태훈 과장)
+	//	- Axle 팝업이 떳을 경우 키 하나도 동작안함(터치로 꺼지는 것만 가능)
+	//	- Axle, Quick coupler 팝업 OFF 후 빠르게 키 혹은 터치누를 경우 ScreenIndex가 꼬이는 현상 개선
+	//	- 카메라버튼 누르고 빠르게 메뉴 누르면 ScreenIndex 바뀌는 현상 개선(품질 김태훈 과장)
+	//	- GetVersionString Hex로 표시
 	//////////////////////////////////////////////////////////////////////////////////////
 	
 	// TAG
@@ -770,6 +789,7 @@ public class Home extends Activity {
 	public  static final int SCREEN_STATE_MENU_MANAGEMENT_ASPHONE_END						= 0x234FFFFF;
 	public  static final int SCREEN_STATE_MENU_MANAGEMENT_SOFTWAREUPDAT_TOP					= 0x23500000;
 	public  static final int SCREEN_STATE_MENU_MANAGEMENT_SOFTWAREUPDAT_PW					= 0x2351FFFF;
+	public  static final int SCREEN_STATE_MENU_MANAGEMENT_SOFTWAREUPDAT_POPUP				= 0x2352FFFF;
 	public  static final int SCREEN_STATE_MENU_MANAGEMENT_SOFTWAREUPDAT_END					= 0x235FFFFF;
 	public  static final int SCREEN_STATE_MENU_MANAGEMENT_END								= 0x23FFFFFF;
 	
@@ -1109,6 +1129,7 @@ public class Home extends Activity {
 	public CoolingFanManualPopup			_CoolingFanManualPopup;		// ++,, --, 150410 bwk 
 	public AxleTempWarningPopup				_AxleTempWarningPopup;
 	public CalibrationEHCUPopup				_CalibrationEHCUPopup;
+	public SoftwareUpdateErrorPopup			_SoftwareUpdateErrorPopup;
 	
 	//Toast
 	public WeighingErrorToast				_WeighingErrorToast;
@@ -1474,6 +1495,7 @@ public class Home extends Activity {
 		_CoolingFanManualPopup = new CoolingFanManualPopup(this);
 		_AxleTempWarningPopup = new AxleTempWarningPopup(this);
 		_CalibrationEHCUPopup = new CalibrationEHCUPopup(this);
+		_SoftwareUpdateErrorPopup = new SoftwareUpdateErrorPopup(this);
 		
 		_WeighingErrorToast = new WeighingErrorToast(this);
 	}
@@ -1521,6 +1543,7 @@ public class Home extends Activity {
 		
 		_WeighingErrorToast = new WeighingErrorToast(this);
 		_CalibrationEHCUPopup = new CalibrationEHCUPopup(this);
+		_SoftwareUpdateErrorPopup = new SoftwareUpdateErrorPopup(this);
 	}
 	// --, 150306 bwk
 	
@@ -1556,12 +1579,12 @@ public class Home extends Activity {
 	}
 	public void ExcuteCamActivitybyKey(){
 		//Log.d(TAG,"ExcuteCamActivitybyKey" + CAN1Comm.GetScreenTopFlag());
+		imgViewCameraScreen.setClickable(true);
+		CAN1Comm.CameraCurrentOnOff = true;	// ++, --, 150326 cjg
 		OldScreenIndex = ScreenIndex;
 		ScreenIndex = SCREEN_STATE_MAIN_CAMERA_KEY;
 		CAN1Comm.CameraOnFlag = CAN1CommManager.STATE_CAMERA_MANUAL;
 		CAN1Comm.TxCMDToMCU(CAN1CommManager.CMD_CAM, CameraOrder1);
-		imgViewCameraScreen.setClickable(true);
-		CAN1Comm.CameraCurrentOnOff = true;	// ++, --, 150326 cjg
 		
 		
 	}
@@ -2300,6 +2323,7 @@ public class Home extends Activity {
 				// ++, 150615 cjg
 				try {
 					CAN1Comm.native_system_sync_Native();
+					Log.d(TAG, "sync");
 				} catch (NullPointerException e) {
 					// TODO: handle exception
 					Log.e(TAG,"NullPointerException");
@@ -2752,9 +2776,6 @@ public class Home extends Activity {
 				HomeDialog = null;
 			}
 		}
-		
-		
-		
 	}
 	public void CheckEHCUErr(int Data, int PopupOff){
 		// ++, 150209 bwk
@@ -3410,10 +3431,10 @@ public class Home extends Activity {
 		HomeDialog.show();
 	}
 	public void showAxleTempWarningPopup(){
-		if(AnimationRunningFlag == true)
-			return;
-		else
-			StartAnimationRunningTimer();
+//		if(AnimationRunningFlag == true)
+//			return;
+//		else
+//			StartAnimationRunningTimer();
 		
 		if(HomeDialog != null){
 			HomeDialog.dismiss();
@@ -3437,6 +3458,21 @@ public class Home extends Activity {
 		HomeDialog = _CalibrationEHCUPopup;
 		HomeDialog.show();
 	}
+	public void showSoftwareUpdateErrorPopup(){
+		if(AnimationRunningFlag == true)
+			return;
+		else
+			StartAnimationRunningTimer();
+		
+		if(HomeDialog != null){
+			HomeDialog.dismiss();
+			HomeDialog = null;
+		}
+	
+		HomeDialog = _SoftwareUpdateErrorPopup;
+		HomeDialog.show();
+	}
+	
 	/////////////////////////////////////////////////////
 
 	//Timer//////////////////////////////////////////////
@@ -3972,8 +4008,8 @@ public class Home extends Activity {
 	}
 	public String GetVersionString(int VersionHigh, int VersionLow, int VersionSubHigh, int VersionSubLow)throws NullPointerException{
 		String strVersion;
-		strVersion = Integer.toString(VersionHigh) + "." + Integer.toString(VersionLow) 
-				+ "." +Integer.toString(VersionSubHigh)  + "." + Integer.toString(VersionSubLow);
+		strVersion = Integer.toHexString(VersionHigh) + "." + Integer.toHexString(VersionLow) 
+				+ "." +Integer.toHexString(VersionSubHigh)  + "." + Integer.toHexString(VersionSubLow);
 		return strVersion;
 	}
 	/////////////////////////////////////////////////////
@@ -4125,7 +4161,10 @@ public class Home extends Activity {
 		int AbsHour;
 		AbsHour = Math.abs(_Hour);
 		
-		if(AbsHour > 12){
+		if(AbsHour >= 24){
+			AbsHour = 12;
+		}
+		else if(AbsHour > 12){
 			AbsHour = AbsHour - 12;
 		}
 		

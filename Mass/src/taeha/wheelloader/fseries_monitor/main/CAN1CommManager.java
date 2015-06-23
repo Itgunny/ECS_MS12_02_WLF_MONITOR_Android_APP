@@ -92,6 +92,7 @@ public class CAN1CommManager extends ICAN1CommManager.Stub{		// ttySAC1(Linux), 
 	public static final int LONG_LEFT_RIGHT_ENTER 		= 0x0100001C;
 	public static final int LONG_8_0	 		= 0x01140000;
 	public static final int LONG_8_9_0	 		= 0x011C0000;
+	public static final int LONG_HIDDEN_5KEY	= 0x0100001f;
 
 	
 	public static final int POWER_OFF 			= 0x000000F5;
@@ -594,6 +595,9 @@ public class CAN1CommManager extends ICAN1CommManager.Stub{		// ttySAC1(Linux), 
 	}
 	//////////////////////////////////////////////////////////
 	// ++, 150615 cjg
+	public int native_system_updates_Native(){
+		return service.native_system_updates();
+	}
 	public int native_system_sync_Native(){
 		return service.native_system_sync();
 	}

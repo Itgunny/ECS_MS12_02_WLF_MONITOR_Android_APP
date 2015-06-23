@@ -419,6 +419,7 @@
     <string name="Maintenance_History">교환이력</string>
     <string name="Confirm_Reset_elapsed_time">소모품을 교환하였습니까?</string>
     <string name="Recommend_deleting_unused_tag_for_security_when_you_register_new_tag">태그 신규 등록 시 보안을 위해 기 등록된 미사용 태그는 삭제를 권장합니다.</string>
+    <string name="Software_Update_Warning">소프트웨어 업데이트를 위해 시동을 꺼주십시오.</string>
     <!-- Menu Management End -->
     <!-- Menu Preference Start -->
     <string name="Brightness_Setting">화면밝기 조정</string>

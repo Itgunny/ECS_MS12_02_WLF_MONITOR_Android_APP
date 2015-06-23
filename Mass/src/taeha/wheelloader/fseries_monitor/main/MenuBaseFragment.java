@@ -1342,6 +1342,9 @@ public class MenuBaseFragment extends ParentFragment{
 		case CAN1CommManager.LONG_8_0:
 			ClickKeyButtonLong80();
 			break;
+		case CAN1CommManager.LONG_HIDDEN_5KEY:
+			ClickKeyButtonLongHiddenVersion();
+			break;
 		case CAN1CommManager.MENU:
 			// ++, 150209 bwk
 			//_MenuListTitleFragment.ClickHome();
@@ -2172,11 +2175,12 @@ public class MenuBaseFragment extends ParentFragment{
 		case Home.SCREEN_STATE_MENU_MANAGEMENT_ASPHONE_TOP:
 			_ChangeASPhoneNumberFragment.ClickESC();
 			break;
-			// ++, 150323 bwk
 		case Home.SCREEN_STATE_MENU_MANAGEMENT_SOFTWAREUPDAT_PW:
 			_SoftwareUpdatePasswordFragment.ClickESC();	
 			break;
-			// --, 150323 bwk
+		case Home.SCREEN_STATE_MENU_MANAGEMENT_SOFTWAREUPDAT_POPUP:
+			ParentActivity._SoftwareUpdateErrorPopup.ClickESC();
+			break;
 		case Home.SCREEN_STATE_MENU_PREFERENCE_TOP:
 			_MenuPreferenceFragment.ClickESC();
 			break;
@@ -2463,6 +2467,9 @@ public class MenuBaseFragment extends ParentFragment{
 		case Home.SCREEN_STATE_MENU_MANAGEMENT_SOFTWAREUPDAT_PW:
 			_SoftwareUpdatePasswordFragment.ClickEnter();	
 			break;
+		case Home.SCREEN_STATE_MENU_MANAGEMENT_SOFTWAREUPDAT_POPUP:
+			ParentActivity._SoftwareUpdateErrorPopup.ClickEnter();
+			break;
 			// --, 150323 bwk
 		case Home.SCREEN_STATE_MENU_PREFERENCE_TOP:
 			_MenuPreferenceFragment.ClickEnter();
@@ -2566,7 +2573,15 @@ public class MenuBaseFragment extends ParentFragment{
 			default:
 				break;
 		}
-		
+	}
+	public void ClickKeyButtonLongHiddenVersion(){
+		switch (ParentActivity.ScreenIndex) {
+		case Home.SCREEN_STATE_MENU_MONITORING_VERSIONINFO_MONITOR:
+			_VersionInfoMonitorFragment.ShowMonitorHiddenVersion();
+			break;
+		default:
+			break;
+	}		
 	}
 
 	// ++, 150209 bwk

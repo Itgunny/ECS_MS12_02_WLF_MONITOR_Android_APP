@@ -92,7 +92,8 @@ public class CommService extends Service{
 	}
 	/////////////////////////////////////////////////////////////////////
 	//////////////////NATIVE METHOD/////////////////////////////////////
-	public static native int native_system_sync();		// ++, --, 150615 cjg
+	public native int native_system_updates();
+	public native int native_system_sync();		// ++, --, 150615 cjg
 	public native int LineOutfromJNI_Native(int spk);
 	
 	public native int[] Get_TcuErr_FromNative();
@@ -1290,6 +1291,7 @@ public class CommService extends Service{
 				// ++, 150615 cjg
 				try {
 					CAN1Comm.native_system_sync_Native();
+					Log.d(TAG, "sync");
 				} catch (NullPointerException e) {
 					// TODO: handle exception
 					Log.e(TAG,"NullPointerException");

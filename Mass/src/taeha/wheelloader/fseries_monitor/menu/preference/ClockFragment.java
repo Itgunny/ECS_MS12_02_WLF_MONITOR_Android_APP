@@ -150,7 +150,11 @@ public class ClockFragment extends ParentFragment{
 		OldMin = CAN1Comm.Get_RTColock_Min();
 
 		int TempHour;
-		if(OldHour >= 12){
+		if(OldHour >= 24){
+			textViewAMPM.setText(ParentActivity.getResources().getString(string.PM));
+			AMFlag = false;
+			TempHour = 12;
+		}else if(OldHour >= 12){
 			textViewAMPM.setText(ParentActivity.getResources().getString(string.PM));
 			AMFlag = false;
 			TempHour = OldHour - 12;

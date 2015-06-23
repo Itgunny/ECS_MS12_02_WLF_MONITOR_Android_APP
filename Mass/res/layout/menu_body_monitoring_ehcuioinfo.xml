@@ -594,8 +594,38 @@
 	        android:layout_alignBottom="@+id/ImageButton_menu_body_monitoring_ehcuioinfo_low_ok"
 	        android:layout_alignLeft="@+id/ImageButton_menu_body_monitoring_ehcuioinfo_low_ok"
 	        android:src="@drawable/main_key_low_line" />
-	    
-	
+<!-- 
+        <TextView
+            android:id="@+id/textView_menu_body_monitoring_ehcuioinfo_low_boom_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="150dp"
+            android:gravity="center"
+            android:text="@string/Boom"
+            android:textAppearance="?android:attr/textAppearanceLarge" />
+
+        <TextView
+            android:id="@+id/textView_menu_body_monitoring_ehcuioinfo_low_boom_colon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@+id/textView_menu_body_monitoring_ehcuioinfo_low_boom_title"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="10dp"
+            android:gravity="center"
+            android:text=":"
+            android:textAppearance="?android:attr/textAppearanceLarge" />
+
+        <TextView
+            android:id="@+id/textView_menu_body_monitoring_ehcuioinfo_low_boom_data"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_toRightOf="@+id/textView_menu_body_monitoring_ehcuioinfo_low_boom_colon"
+            android:layout_centerVertical="true"
+            android:gravity="center"
+            android:textAppearance="?android:attr/textAppearanceLarge" />
+	 -->
 	    <RelativeLayout
 	        android:layout_width="wrap_content"
 	        android:layout_height="wrap_content"

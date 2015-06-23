@@ -94,10 +94,6 @@ public class MainALeftMainFragment extends ParentFragment{
 	int RearAxleTempHighWarning;
 	// --, 150329 bwk		
 	
-	boolean FrontAxleTempWarningFlag;
-	boolean RearAxleTempWarningFlag;
-	int nCameraBackCnt;
-	
 	int WeightInfoDataCurrent;
 	int WeightInfoDataDay1;
 	int WeightInfoDataToday;
@@ -220,9 +216,8 @@ public class MainALeftMainFragment extends ParentFragment{
 			EcoGaugeLevel = 0;
 		}
 		
-		FrontAxleTempWarningFlag = false;
-		RearAxleTempWarningFlag = false;
-		nCameraBackCnt = 0;
+		FrontAxleTempHighWarning = CAN1Comm.Get_Front_Axle_Oil_Temp_Warning_580_PGN65449();
+		RearAxleTempHighWarning = CAN1Comm.Get_Rear_Axle_Oil_Temp_Warning_581_PGN65449();
 		
 		CursurDisplayDetail(ParentActivity._MainABaseFragment.CursurIndex);
 	}
@@ -417,64 +412,6 @@ public class MainALeftMainFragment extends ParentFragment{
 			FuelTitleDisplay(ParentActivity.FuelIndex);
 			FuelDataDisplay(ParentActivity.FuelIndex,AverageFuelRate,LastestConsumed);
 			EcoGaugeDisplay(EcoGaugeLevel,EcoGaugeStatus);
-			
-//			if(ParentActivity._CheckModel.CheckMCUVersionHigh(CAN1Comm.Get_ComponentBasicInformation_1698_PGN65330(), 955) == true)
-//			{
-//				if((FrontAxleTempWarningFlag == false) && (FrontAxleTempHighWarning == CAN1CommManager.DATA_STATE_LAMP_ON))
-//				{
-//					if(ParentActivity.OldScreenIndex == Home.SCREEN_STATE_MAIN_CAMERA_KEY)
-//					{
-//						if(nCameraBackCnt++ >= 15)
-//						{
-//							ParentActivity.OldScreenIndex = ParentActivity.ScreenIndex;
-//							nCameraBackCnt = 0;
-//						}
-//					}else{
-//						if(ParentActivity.ScreenIndex != Home.SCREEN_STATE_MAIN_CAMERA_KEY)
-//						{
-//							FrontAxleTempWarningFlag = true;
-//							ParentActivity.showAxleTempWarningPopup();
-//						}
-//					}
-//				}
-//				else if((FrontAxleTempWarningFlag == true) && (FrontAxleTempHighWarning == CAN1CommManager.DATA_STATE_LAMP_OFF))
-//				{
-//					FrontAxleTempWarningFlag = false;
-//					nCameraBackCnt = 0;
-//				}
-//			}else{
-//				FrontAxleTempWarningFlag = false;
-//				nCameraBackCnt = 0;
-//			}
-//
-//			if(ParentActivity._CheckModel.CheckMCUVersionHigh(CAN1Comm.Get_ComponentBasicInformation_1698_PGN65330(), 965) == true)
-//			{
-//				if((RearAxleTempWarningFlag == false) && (RearAxleTempHighWarning == CAN1CommManager.DATA_STATE_LAMP_ON))
-//				{
-//					if(ParentActivity.OldScreenIndex == Home.SCREEN_STATE_MAIN_CAMERA_KEY)
-//					{
-//						if(nCameraBackCnt++ >= 15)
-//						{
-//							ParentActivity.OldScreenIndex = ParentActivity.ScreenIndex;
-//							nCameraBackCnt = 0;
-//						}
-//					}else{
-//						if(ParentActivity.ScreenIndex != Home.SCREEN_STATE_MAIN_CAMERA_KEY)
-//						{
-//							RearAxleTempWarningFlag = true;
-//							ParentActivity.showAxleTempWarningPopup();
-//						}
-//					}
-//				}
-//				else if((RearAxleTempWarningFlag == true) && (RearAxleTempHighWarning == CAN1CommManager.DATA_STATE_LAMP_OFF))
-//				{
-//					RearAxleTempWarningFlag = false;
-//					nCameraBackCnt = 0;
-//				}
-//			}else{
-//				RearAxleTempWarningFlag = false;
-//				nCameraBackCnt = 0;
-//			}
 		} catch (IllegalStateException e) {
 			// TODO: handle exception
 			Log.e(TAG,"IllegalStateException");
@@ -699,7 +636,7 @@ public class MainALeftMainFragment extends ParentFragment{
 		AxleDisplay(textData,textUnit,Data,Unit);
 	}
 	public void UpperRearAxleDisplay(ImageView imgIcon, TextView textData, TextView textUnit, int Data, int Unit){
-		if(FrontAxleTempHighWarning == CAN1CommManager.DATA_STATE_LAMP_ON){
+		if(RearAxleTempHighWarning == CAN1CommManager.DATA_STATE_LAMP_ON){
 			UpperStatusIconAnimation.FlipAnimation(imgIcon, R.drawable.main_default_monitoring_icon_rear_axle_red);
 		}else{
 			UpperStatusIconAnimation.FlipAnimation(imgIcon, R.drawable.main_default_monitoring_icon_rear_axle);
@@ -707,7 +644,7 @@ public class MainALeftMainFragment extends ParentFragment{
 		AxleDisplay(textData,textUnit,Data,Unit);
 	}
 	public void LowerRearAxleDisplay(ImageView imgIcon, TextView textData, TextView textUnit, int Data, int Unit){
-		if(FrontAxleTempHighWarning == CAN1CommManager.DATA_STATE_LAMP_ON){
+		if(RearAxleTempHighWarning == CAN1CommManager.DATA_STATE_LAMP_ON){
 			LowerStatusIconAnimation.FlipAnimation(imgIcon, R.drawable.main_default_monitoring_icon_rear_axle_red);
 		}else{
 			LowerStatusIconAnimation.FlipAnimation(imgIcon, R.drawable.main_default_monitoring_icon_rear_axle);

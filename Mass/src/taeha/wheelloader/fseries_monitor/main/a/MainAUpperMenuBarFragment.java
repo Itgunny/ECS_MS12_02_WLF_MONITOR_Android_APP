@@ -5,7 +5,6 @@ import java.util.TimerTask;
 
 import actionpopup.ActionItem;
 import actionpopup.QuickAction;
-import android.R.integer;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -200,7 +199,6 @@ public class MainAUpperMenuBarFragment extends ParentFragment{
 		// TODO Auto-generated method stub
 		ClockHour = CAN1Comm.Get_RTColock_Hour();
 		ClockMin = CAN1Comm.Get_RTColock_Min();
-		
 		
 		Warning = CAN1Comm.BuzzerStatus;
 		CommErrCount = CAN1Comm.Get_CommErrCnt();

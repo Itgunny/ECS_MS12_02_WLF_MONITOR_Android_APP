@@ -68,7 +68,7 @@
     
     <RadioButton
         android:id="@+id/radioButton_leftup_main_b_machinestatus_select_frontaxletemp"
-        android:layout_width="280dp"
+        android:layout_width="290dp"
         android:layout_height="wrap_content"
         android:layout_marginLeft="416dp"
         android:layout_marginTop="162dp"

@@ -2160,6 +2160,7 @@ public class MainBBaseFragment extends ParentFragment{
 	{
 //		Log.d(TAG,"CursurDisplay:index="+index);
 //		Log.d(TAG,"CursurDisplay:ScreenIndex="+ParentActivity.ScreenIndex);
+		try{
 		if(ParentActivity.ScreenIndex == Home.SCREEN_STATE_MAIN_B_TOP){
 			_MainBLeftUpMachineStatusFragment.CursurDisplayDetail(index);
 			_MainBLeftDownFuelFragment.CursurDisplayDetail(index);
@@ -2172,6 +2173,10 @@ public class MainBBaseFragment extends ParentFragment{
 			_MainBCenterQuickFragment.CursurDisplayDetail(index);
 			_MainBRightUpQuickFragment.CursurDisplayDetail(index);
 			_MainBRightDownQuickFragment.CursurDisplayDetail(index);
+		}
+		} catch (NullPointerException e) {
+			// TODO: handle exception
+			Log.e(TAG,"NullPointerException dismiss");
 		}
 	}
 }

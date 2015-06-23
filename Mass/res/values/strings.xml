@@ -421,6 +421,7 @@
     <string name="Maintenance_History">Maintenance History</string>
     <string name="Confirm_Reset_elapsed_time">Confirm: Reset elapsed time</string>
     <string name="Recommend_deleting_unused_tag_for_security_when_you_register_new_tag">Recommend deleting unused tag for security when you register new tag.</string>
+    <string name="Software_Update_Warning">Turn the engine off for software update.</string>
     <!-- Menu Management End -->
     <!-- Menu Preference Start -->
     <string name="Brightness_Setting">Brightness Setting</string>

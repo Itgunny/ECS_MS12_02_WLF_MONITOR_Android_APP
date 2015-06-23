@@ -39,13 +39,13 @@ public class SoftwareUpdatePasswordFragment extends PasswordFragment{
 	@Override
 	public void showServicePasswordNextScreen() {
 		// TODO Auto-generated method stub
-
 		try {
 			Thread.sleep(1000);
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		
 		Intent intent;
 		intent = ParentActivity.getPackageManager().getLaunchIntentForPackage(
 				"taeha.wheelloader.update");
@@ -60,13 +60,13 @@ public class SoftwareUpdatePasswordFragment extends PasswordFragment{
 
 	@Override
 	public void showUserPasswordNextScreen() {
-		// TODO Auto-generated method stub
 		try {
 			Thread.sleep(1000);
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		
 		Intent intent;
 		intent = ParentActivity.getPackageManager().getLaunchIntentForPackage(
 				"taeha.wheelloader.update");

@@ -1,8 +1,5 @@
 package taeha.wheelloader.fseries_monitor.menu.monitoring;
 
-import customlist.sensormonitoring.IconTextItem;
-import customlist.versiondetail.IconTextItemVersion;
-import customlist.versiondetail.IconTextListAdapterVersion;
 import taeha.wheelloader.fseries_monitor.main.R;
 import taeha.wheelloader.fseries_monitor.main.R.string;
 import android.content.SharedPreferences;
@@ -15,6 +12,8 @@ import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import customlist.versiondetail.IconTextItemVersion;
+import customlist.versiondetail.IconTextListAdapterVersion;
 
 public class VersionInfoMonitorFragment extends VersionInfoDetailFragment{
 	/////////////////CONSTANT////////////////////////////////////////////
@@ -31,6 +30,7 @@ public class VersionInfoMonitorFragment extends VersionInfoDetailFragment{
 	int FirmwareVersionSubHigh;
 	int FirmwareVersionSubLow;
 	int HWVersion;
+	boolean HiddenVersionFlag;
 	/////////////////////////////////////////////////////////////////////	
 	
 	//Life Cycle Function/////////////////////////////
@@ -93,6 +93,8 @@ public class VersionInfoMonitorFragment extends VersionInfoDetailFragment{
 		
 	
 		listView.setAdapter(adapter);
+		
+		HiddenVersionFlag = false;
 
 	}
 	@Override
@@ -122,8 +124,14 @@ public class VersionInfoMonitorFragment extends VersionInfoDetailFragment{
 		ManufactureDayDisplay(ComponentBasicInformation);
 		HardwareDisplay(HWVersion);
 		SerialNumberDisplay(ComponentBasicInformation);
-		ApplicationVersionDisplay(ParentActivity.VERSION_HIGH,ParentActivity.VERSION_LOW
+		if(HiddenVersionFlag == false)
+			ApplicationVersionDisplay(ParentActivity.VERSION_HIGH,ParentActivity.VERSION_LOW
 								,ParentActivity.VERSION_SUB_HIGH,ParentActivity.VERSION_SUB_LOW);
+		else
+			ApplicationVersionDisplayHidden(ParentActivity.VERSION_HIGH,ParentActivity.VERSION_LOW
+					,ParentActivity.VERSION_SUB_HIGH,ParentActivity.VERSION_SUB_LOW, ParentActivity.VERSION_TAEHA);
+			
+		
 		FirmwareVersionDisplay(FirmwareVersionHigh,FirmwareVersionLow,FirmwareVersionSubHigh,FirmwareVersionSubLow);
 		
 		if(ManufactureDayDisplayFlag == true)
@@ -181,6 +189,10 @@ public class VersionInfoMonitorFragment extends VersionInfoDetailFragment{
 		adapter.UpdateSecond(STATE_VERSION, Integer.toString(VersionHigh) + "." + Integer.toString(VersionLow)
 				+ "." + Integer.toHexString(VersionSubHigh) + "." + Integer.toHexString(VersionSubLow));
 	}
+	public void ApplicationVersionDisplayHidden(int VersionHigh, int VersionLow, int VersionSubHigh, int VersionSubLow, int VersionTaeha){
+		adapter.UpdateSecond(STATE_VERSION, Integer.toString(VersionHigh) + "." + Integer.toString(VersionLow)
+				+ "." + Integer.toHexString(VersionSubHigh) + "." + Integer.toHexString(VersionSubLow) + Integer.toHexString(VersionTaeha));
+	}	
 	public void FirmwareVersionDisplay(int VersionHigh, int VersionLow, int SubVersionHigh, int SubVersionLow){
 		adapter.UpdateSecond(STATE_FIRMWARE_VERSION, Integer.toString(VersionHigh) + "." + Integer.toString(VersionLow) 
 				+ "." + Integer.toHexString(SubVersionHigh) + "." + Integer.toHexString(SubVersionLow));
@@ -291,4 +303,9 @@ public class VersionInfoMonitorFragment extends VersionInfoDetailFragment{
 			}
 		});
 	}
+	
+	public void ShowMonitorHiddenVersion(){
+		HiddenVersionFlag = true;
+		ShowManufactureDay(true);
+	}	
 }

@@ -44,6 +44,8 @@ public class EHCUIOInfoFragment extends ParentFragment{
 	TextView textviewEPPRCurrentBucketDump;
 	TextView textviewEPPRCurrentAuxUp;
 	TextView textviewEPPRCurrentAuxDown;
+	
+//	TextView textviewBoomAngle;
 	//////////////////////////////////////////////////
 	
 	//VALUABLE////////////////////////////////////////
@@ -61,6 +63,8 @@ public class EHCUIOInfoFragment extends ParentFragment{
 	int EPPRCurrentBucketDump;
 	int EPPRCurrentAuxUp;
 	int EPPRCurrentAuxDown;
+	
+	//int BoomAngle;
 	
 	int CursurIndex;
 	
@@ -127,6 +131,8 @@ public class EHCUIOInfoFragment extends ParentFragment{
 		textviewEPPRCurrentBucketDump = (TextView)mRoot.findViewById(R.id.textView_menu_body_monitoring_ehcuioinfo_bucketout_epprcurrent_data);
 		textviewEPPRCurrentAuxUp = (TextView)mRoot.findViewById(R.id.textView_menu_body_monitoring_ehcuioinfo_auxup_epprcurrent_data);
 		textviewEPPRCurrentAuxDown = (TextView)mRoot.findViewById(R.id.textView_menu_body_monitoring_ehcuioinfo_auxdown_epprcurrent_data);
+		
+		//textviewBoomAngle = (TextView)mRoot.findViewById(R.id.textView_menu_body_monitoring_ehcuioinfo_low_boom_data);
 	}
 
 	protected void InitValuables() {
@@ -168,6 +174,8 @@ public class EHCUIOInfoFragment extends ParentFragment{
 		 EPPRCurrentBucketDump = CAN1Comm.Get_BucketOutEPPRValveCurrent_2307_PGN65517();
 		 EPPRCurrentAuxUp = CAN1Comm.Get_AUX1EPPRValveCurrent_2308_PGN65517();
 		 EPPRCurrentAuxDown = CAN1Comm.Get_AUX2EPPRValveCurrent_2309_PGN65517();
+		 
+		 //BoomAngle = CAN1Comm.Get_BoomLinkAngle_1920_PGN65395();
 	}
 
 	@Override
@@ -186,7 +194,42 @@ public class EHCUIOInfoFragment extends ParentFragment{
 		EPPRCurrentDisplay(EPPRCurrentBucketDump,textviewEPPRCurrentBucketDump);
 		EPPRCurrentDisplay(EPPRCurrentAuxUp,textviewEPPRCurrentAuxUp);
 		EPPRCurrentDisplay(EPPRCurrentAuxDown,textviewEPPRCurrentAuxDown);
+		
+		//BoomBucketAngleCurrAngle(BoomAngle);
 	}
+	/////////////////////////////////////////////////////////////////////
+//	public void AngleDisplay(int Angle, int AngleDot){
+//		textviewBoomAngle.setText(Integer.toString(Angle) + "." + Integer.toString(AngleDot) + "им");
+//	}
+//	
+//	public void BoomBucketAngleCurrAngle(int _BoomAngle){
+//		int BoomAngleDot = 0;
+//
+//		if( _BoomAngle == 0xffff )
+//			_BoomAngle = 1800;
+//
+//		if( _BoomAngle == 1800 )		// 0
+//		{
+//			_BoomAngle = 0;
+//			BoomAngleDot = 0;
+//		}
+//		else if( _BoomAngle > 1800 )	// +
+//		{
+//			_BoomAngle -= 1800;
+//			BoomAngleDot = _BoomAngle % 10;
+//			_BoomAngle /= 10;	
+//		}
+//		else						// -
+//		{
+//			_BoomAngle = 1800 - _BoomAngle;
+//			BoomAngleDot = _BoomAngle % 10;
+//			_BoomAngle /= 10;
+//			_BoomAngle *= -1;
+//		}
+//		
+//		AngleDisplay(_BoomAngle,BoomAngleDot);
+//
+//	}
 	/////////////////////////////////////////////////////////////////////	
 	public void ClickOK(){
 		if(ParentActivity.AnimationRunningFlag == true)
