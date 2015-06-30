@@ -73,7 +73,7 @@ public class Home extends Activity {
 	public static final int VERSION_HIGH 		= 2;
 	public static final int VERSION_LOW 		= 0;
 	public static final int VERSION_SUB_HIGH 	= 0;
-	public static final int VERSION_SUB_LOW 	= 6;
+	public static final int VERSION_SUB_LOW 	= 7;
 	public static final int VERSION_TAEHA		= 0;
 	////1.0.2.3
 	// UI B 안 최초 적용 2014.12.10
@@ -553,7 +553,7 @@ public class Home extends Activity {
 	//	- Axle, Quick coupler 팝업 OFF 후 빠르게 키 혹은 터치누를 경우 ScreenIndex가 꼬이는 현상 개선
 	//	- 카메라버튼 누르고 빠르게 메뉴 누르면 ScreenIndex 바뀌는 현상 개선(품질 김태훈 과장)
 	//	- GetVersionString Hex로 표시
-	//// v2.0.0.6 
+	//// v2.0.0.7 
 	// 1. SmartKey 패킷 받을 경우 Timeout Timer 종료
 	// 2. F/W Hidden 버전 추가
 	// 3. EHCU 과거고장 표시 오류 개선
