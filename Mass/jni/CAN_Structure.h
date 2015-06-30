@@ -32,8 +32,9 @@ typedef struct
 
 	unsigned short	HWVersion;
 
-
-	unsigned char	DM[4];
+	unsigned char	SWVersionHidden:4;
+	unsigned char	DM0:4;
+	unsigned char	DM1[3];
 
 }__attribute__((packed))  RES_VERSION;
 

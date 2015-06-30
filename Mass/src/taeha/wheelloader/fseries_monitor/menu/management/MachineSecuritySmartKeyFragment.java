@@ -138,7 +138,6 @@ public class MachineSecuritySmartKeyFragment extends ParentFragment{
 		
 		SmartKeyUse = ParentActivity.SmartKeyUse;
 		
-		
 		TagCount = 0;
 		Result = 0;
 		ButtonIndex = CAN1CommManager.DATA_INDEX_TAG_REGISTRATION;
@@ -311,9 +310,11 @@ public class MachineSecuritySmartKeyFragment extends ParentFragment{
 			switch (Data) {
 			case CAN1CommManager.DATA_STATE_1ST_TAG_REG_SUCCESS:
 				textViewDetail.setText(ParentActivity.getResources().getString(string._1st_user_tag_registered));
+				CancelManagementDisplayTimer();
 				break;
 			case CAN1CommManager.DATA_STATE_2ND_TAG_REG_SUCCESS:
 				textViewDetail.setText(ParentActivity.getResources().getString(string._2nd_user_tag_registered));
+				CancelManagementDisplayTimer();
 				break;
 
 			case CAN1CommManager.DATA_STATE_TAG_NO_REALIZE:
@@ -322,31 +323,39 @@ public class MachineSecuritySmartKeyFragment extends ParentFragment{
 			case CAN1CommManager.DATA_STATE_FAIL:
 				if(ButtonIndex == CAN1CommManager.DATA_INDEX_TAG_REGISTRATION){
 					textViewDetail.setText(ParentActivity.getResources().getString(string.Registration_failed));
+					CancelManagementDisplayTimer();
 				}else if(ButtonIndex == CAN1CommManager.DATA_INDEX_TAG_ELIMINATION){
 					textViewDetail.setText(ParentActivity.getResources().getString(string.Delete_failed));
+					CancelManagementDisplayTimer();
 				}
 				break;
 				
 			case CAN1CommManager.DATA_STATE_TAG_ALREADY_REG:
 				textViewDetail.setText(ParentActivity.getResources().getString(string.Tag_already_registered));
+				CancelManagementDisplayTimer();
 				break;
 			case CAN1CommManager.DATA_STATE_TAG_ELIMINATION_SUCESS:
 				textViewDetail.setText(ParentActivity.getResources().getString(string.All_user_tags_deleted));
+				CancelManagementDisplayTimer();
 				break;
 			case CAN1CommManager.DATA_STATE_3RD_TAG_REG_SUCCESS:
 				textViewDetail.setText(ParentActivity.getResources().getString(string._3rd_user_tag_registered));
+				CancelManagementDisplayTimer();
 				break;
 			case CAN1CommManager.DATA_STATE_4TH_TAG_REG_SUCCESS:
 				textViewDetail.setText(ParentActivity.getResources().getString(string._4th_user_tag_registered));
+				CancelManagementDisplayTimer();
 				break;
 			case CAN1CommManager.DATA_STATE_5TH_TAG_REG_SUCCESS:
 				textViewDetail.setText(ParentActivity.getResources().getString(string._5th_user_tag_registered));
+				CancelManagementDisplayTimer();
 				break;
 			default:
 				textViewDetail.setText("");
 				break;
 			}
 			Log.d(TAG,"Data : " + Integer.toString(Data));
+			
 		}
 		
 	}

@@ -1,5 +1,6 @@
 package taeha.wheelloader.fseries_monitor.menu.monitoring;
 
+import taeha.wheelloader.fseries_monitor.main.Home;
 import taeha.wheelloader.fseries_monitor.main.R;
 import taeha.wheelloader.fseries_monitor.main.R.string;
 import android.content.SharedPreferences;
@@ -29,6 +30,7 @@ public class VersionInfoMonitorFragment extends VersionInfoDetailFragment{
 	int FirmwareVersionLow;
 	int FirmwareVersionSubHigh;
 	int FirmwareVersionSubLow;
+	int FirmwareVersionHidden;
 	int HWVersion;
 	boolean HiddenVersionFlag;
 	/////////////////////////////////////////////////////////////////////	
@@ -47,7 +49,7 @@ public class VersionInfoMonitorFragment extends VersionInfoDetailFragment{
 		
 		ShowManufactureDay(ManufactureDayDisplayFlag);
 		
-		ParentActivity.ScreenIndex = ParentActivity.SCREEN_STATE_MENU_MONITORING_VERSIONINFO_MONITOR;
+		ParentActivity.ScreenIndex = Home.SCREEN_STATE_MENU_MONITORING_VERSIONINFO_MONITOR;
 		ParentActivity._MenuBaseFragment._MenuInterTitleFragment.SetTitleText(ParentActivity.getResources().getString(R.string.Machine_Information)
 				+ " - " + ParentActivity.getResources().getString(R.string.Monitor));
 		return mRoot;
@@ -112,6 +114,7 @@ public class VersionInfoMonitorFragment extends VersionInfoDetailFragment{
 		FirmwareVersionLow = CAN1Comm.Get_FirmwareVersionLow();
 		FirmwareVersionSubHigh = CAN1Comm.Get_FirmwareVersionSubHigh();
 		FirmwareVersionSubLow = CAN1Comm.Get_FirmwareVersionSubLow();
+		FirmwareVersionHidden = CAN1Comm.Get_FirmwareVersionHidden();
 		HWVersion = CAN1Comm.Get_HWVersion();
 		if(ManufactureDayDisplayFlag == true)
 			ManufacturerCode = GetMonitorManufacturerCode();
@@ -131,8 +134,10 @@ public class VersionInfoMonitorFragment extends VersionInfoDetailFragment{
 			ApplicationVersionDisplayHidden(ParentActivity.VERSION_HIGH,ParentActivity.VERSION_LOW
 					,ParentActivity.VERSION_SUB_HIGH,ParentActivity.VERSION_SUB_LOW, ParentActivity.VERSION_TAEHA);
 			
-		
-		FirmwareVersionDisplay(FirmwareVersionHigh,FirmwareVersionLow,FirmwareVersionSubHigh,FirmwareVersionSubLow);
+		if(HiddenVersionFlag == false)
+			FirmwareVersionDisplay(FirmwareVersionHigh,FirmwareVersionLow,FirmwareVersionSubHigh,FirmwareVersionSubLow);
+		else
+			FirmwareVersionDisplayHidden(FirmwareVersionHigh,FirmwareVersionLow,FirmwareVersionSubHigh,FirmwareVersionSubLow,FirmwareVersionHidden);
 		
 		if(ManufactureDayDisplayFlag == true)
 			ManufacturerDisplay(ManufacturerCode);
@@ -196,6 +201,10 @@ public class VersionInfoMonitorFragment extends VersionInfoDetailFragment{
 	public void FirmwareVersionDisplay(int VersionHigh, int VersionLow, int SubVersionHigh, int SubVersionLow){
 		adapter.UpdateSecond(STATE_FIRMWARE_VERSION, Integer.toString(VersionHigh) + "." + Integer.toString(VersionLow) 
 				+ "." + Integer.toHexString(SubVersionHigh) + "." + Integer.toHexString(SubVersionLow));
+	}
+	public void FirmwareVersionDisplayHidden(int VersionHigh, int VersionLow, int VersionSubHigh, int VersionSubLow, int VersionHidden){
+		adapter.UpdateSecond(STATE_FIRMWARE_VERSION, Integer.toString(VersionHigh) + "." + Integer.toString(VersionLow)
+				+ "." + Integer.toHexString(VersionSubHigh) + "." + Integer.toHexString(VersionSubLow) + Integer.toHexString(VersionHidden));
 	}
 	public void HardwareDisplay(int _data){
 		if(_data > 357 && _data < 387){		// 10k

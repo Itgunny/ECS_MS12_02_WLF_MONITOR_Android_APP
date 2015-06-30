@@ -3138,6 +3138,9 @@ jint Get_FirmwareVersionSubHigh(JNIEnv * env, jobject this) {
 jint Get_FirmwareVersionSubLow(JNIEnv * env, jobject this) {
 	return RX_RES_Version.SWVersionSubLow;
 }
+jint Get_FirmwareVersionHidden(JNIEnv * env, jobject this) {
+	return RX_RES_Version.SWVersionHidden;
+}
 jint Get_HWVersion(JNIEnv * env, jobject this) {
 	return RX_RES_Version.HWVersion;
 }
@@ -5089,6 +5092,7 @@ static JNINativeMethod methods[] =
 				{ "Get_FirmwareVersionLow", "()I",(void*) Get_FirmwareVersionLow },
 				{ "Get_FirmwareVersionSubHigh", "()I",(void*) Get_FirmwareVersionSubHigh },
 				{ "Get_FirmwareVersionSubLow", "()I",(void*) Get_FirmwareVersionSubLow },
+				{ "Get_FirmwareVersionHidden", "()I",(void*) Get_FirmwareVersionHidden },
 				{ "Get_HWVersion", "()I",(void*) Get_HWVersion },
 				{ "Get_CommErrCnt", "()I",(void*) Get_CommErrCnt },
 				{ "Get_CheckBKCUComm", "()I",(void*) Get_CheckBKCUComm },

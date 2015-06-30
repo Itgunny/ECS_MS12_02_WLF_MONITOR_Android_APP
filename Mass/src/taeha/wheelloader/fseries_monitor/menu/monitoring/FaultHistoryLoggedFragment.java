@@ -522,6 +522,7 @@ public class FaultHistoryLoggedFragment extends ParentFragment{
 				}
 			}
 		}
+		
 		adapter.notifyDataSetChanged();
 	}
 	public void ErrDetailDisplay(int Index){
@@ -684,7 +685,7 @@ public class FaultHistoryLoggedFragment extends ParentFragment{
 				SendSeqIndex++;
 				SetThreadSleepTime(200);
 			}
-			else if(SendSeqIndex > DTCTotalPacketTM){
+			else if(SendSeqIndex > DTCTotalPacketEHCU){
 				SendSeqIndex = 1;
 				SendDTCIndex = Home.REQ_ERR_MACHINE_LOGGED;
 				SetThreadSleepTime(1000);
