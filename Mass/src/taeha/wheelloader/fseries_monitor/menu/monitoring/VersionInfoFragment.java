@@ -53,7 +53,8 @@ public class VersionInfoFragment extends ParentFragment{
 	TextView textViewModel;
 	
 	RelativeLayout	layoutEHCU;		// ++, --, 150211 bwk;
-	RelativeLayout	layoutBKCU;		
+	RelativeLayout	layoutBKCU;
+	RelativeLayout	layoutRMCU;
 	//////////////////////////////////////////////////
 	
 	//VALUABLE////////////////////////////////////////
@@ -108,6 +109,7 @@ public class VersionInfoFragment extends ParentFragment{
 		
 		CheckEHCU();	// ++, --, 150211 bwk
 		CheckBKCU();
+//		CheckRMCU();
 		
 		ParentActivity.ScreenIndex = ParentActivity.SCREEN_STATE_MENU_MONITORING_VERSIONINFO_TOP;
 		ParentActivity._MenuBaseFragment._MenuInterTitleFragment.SetTitleText(ParentActivity.getResources().getString(R.string.Machine_Information));
@@ -154,6 +156,7 @@ public class VersionInfoFragment extends ParentFragment{
 		
 		layoutEHCU = (RelativeLayout)mRoot.findViewById(R.id.RelativeLayout_menu_body_monitoring_version_ehcu);	// ++, --, 150211 bwk
 		layoutBKCU = (RelativeLayout)mRoot.findViewById(R.id.RelativeLayout_menu_body_monitoring_version_bkcu);
+		layoutRMCU = (RelativeLayout)mRoot.findViewById(R.id.RelativeLayout_menu_body_monitoring_version_rmcu);
 	}
 
 	protected void InitValuables() {
@@ -328,10 +331,10 @@ public class VersionInfoFragment extends ParentFragment{
 	// ++, 150211 bwk
 	public void CheckEHCU(){
 		if(CAN1Comm.Get_ComponentCode_1699_PGN65330_EHCU() != CAN1CommManager.STATE_COMPONENTCODE_EHCU){
-					setClickableEHCU(false);
-				}else{
-					setClickableEHCU(true);
-				}
+			setClickableEHCU(false);
+		}else{
+			setClickableEHCU(true);
+		}
 	}
 	public void CheckBKCU(){
 		if(CAN1Comm.Get_CheckBKCUComm() == 1){
@@ -340,6 +343,13 @@ public class VersionInfoFragment extends ParentFragment{
 			setClickableBKCU(false);
 		}
 		
+	}
+	public void CheckRMCU(){
+		if(CAN1Comm.Get_ComponentCode_1699_PGN65330_RMCU() != CAN1CommManager.STATE_COMPONENTCODE_RMCU){
+			setClickableRMCU(false);
+		}else{
+			setClickableRMCU(true);
+		}
 	}
 	
 	public void setClickableEHCU(boolean flag){
@@ -355,6 +365,13 @@ public class VersionInfoFragment extends ParentFragment{
 			layoutBKCU.setVisibility(View.VISIBLE);
 		}else{
 			layoutBKCU.setVisibility(View.INVISIBLE);
+		}
+	}	
+	public void setClickableRMCU(boolean flag){
+		if(flag == true){
+			layoutRMCU.setVisibility(View.VISIBLE);
+		}else{
+			layoutRMCU.setVisibility(View.INVISIBLE);
 		}
 	}	
 	// --, 150211 bwk

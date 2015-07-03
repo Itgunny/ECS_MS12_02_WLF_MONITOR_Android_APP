@@ -458,16 +458,25 @@ public class FaultHistoryLoggedFragment extends ParentFragment{
 					SPN = Err_Mcu[i] & 0xffff;
 					SPN |= ((Err_Mcu[i] & 0xe00000) >> 5);
 					FMI = ((Err_Mcu[i] & 0x1f0000) >> 16);
-					// ++, 150216 bwk
-					if(CursurIndex == 7 && CursurDetailIndex == i)
+//					if((SPN == 0) && (FMI == 0))
+//					{
+//						if(CursurIndex == 7 && CursurDetailIndex == i)
+//							adapter.addItem(new IconTextItemFault(null,ParentActivity.getResources().getDrawable(R.drawable.menu_information_fault_down_btn_selected), "HCESPN :      FMI :  ", "", ""));
+//						else
+//							adapter.addItem(new IconTextItemFault(null,ParentActivity.getResources().getDrawable(R.drawable.menu_information_fault_down_btn), "HCESPN :      FMI :  ", "", ""));
+//					}
+//					else
 					{
-						adapter.addItem(new IconTextItemFault(null,ParentActivity.getResources().getDrawable(R.drawable.menu_information_fault_down_btn_selected), "HCESPN : " + Integer.toString(SPN)
-								+ "     " + "FMI : " + Integer.toString(FMI), "", ""));
+						if(CursurIndex == 7 && CursurDetailIndex == i)
+						{
+							adapter.addItem(new IconTextItemFault(null,ParentActivity.getResources().getDrawable(R.drawable.menu_information_fault_down_btn_selected), "HCESPN : " + Integer.toString(SPN)
+									+ "     " + "FMI : " + Integer.toString(FMI), "", ""));
+						}
+						else
+						// --, 150216 bwk
+							adapter.addItem(new IconTextItemFault(null,ParentActivity.getResources().getDrawable(R.drawable.menu_information_fault_down_btn), "HCESPN : " + Integer.toString(SPN)
+									+ "     " + "FMI : " + Integer.toString(FMI), "", ""));
 					}
-					else
-					// --, 150216 bwk
-						adapter.addItem(new IconTextItemFault(null,ParentActivity.getResources().getDrawable(R.drawable.menu_information_fault_down_btn), "HCESPN : " + Integer.toString(SPN)
-								+ "     " + "FMI : " + Integer.toString(FMI), "", ""));
 				
 				//	Log.d(TAG,"SPN : " + Integer.toString(SPN) + "     FMI : " + Integer.toString(FMI));
 				}
@@ -479,28 +488,41 @@ public class FaultHistoryLoggedFragment extends ParentFragment{
 					SPN = Err_Ecu[i] & 0xffff;
 					SPN |= ((Err_Ecu[i] & 0xe00000) >> 5);
 					FMI = ((Err_Ecu[i] & 0x1f0000) >> 16); 
-					// ++, 150216 bwk
-					if(CursurIndex == 7 && CursurDetailIndex == i)
+
+//					if((SPN == 0) && (FMI == 0))
+//					{
+//						if(CursurIndex == 7 && CursurDetailIndex == i)
+//							adapter.addItem(new IconTextItemFault(null,ParentActivity.getResources().getDrawable(R.drawable.menu_information_fault_down_btn_selected), "SPN :      FMI :  ", "", ""));
+//						else
+//							adapter.addItem(new IconTextItemFault(null,ParentActivity.getResources().getDrawable(R.drawable.menu_information_fault_down_btn), "SPN :      FMI :  ", "", ""));
+//					}
+//					else
 					{
-						adapter.addItem(new IconTextItemFault(null,ParentActivity.getResources().getDrawable(R.drawable.menu_information_fault_down_btn_selected), "SPN : " + Integer.toString(SPN)
-								+ "     " + "FMI : " + Integer.toString(FMI), "", ""));
+						if(CursurIndex == 7 && CursurDetailIndex == i)
+							adapter.addItem(new IconTextItemFault(null,ParentActivity.getResources().getDrawable(R.drawable.menu_information_fault_down_btn_selected), "SPN : " + Integer.toString(SPN)
+									+ "     " + "FMI : " + Integer.toString(FMI), "", ""));
+						else
+							adapter.addItem(new IconTextItemFault(null,ParentActivity.getResources().getDrawable(R.drawable.menu_information_fault_down_btn), "SPN : " + Integer.toString(SPN)
+									+ "     " + "FMI : " + Integer.toString(FMI), "", ""));
 					}
-					else
-					// --, 150216 bwk
-						adapter.addItem(new IconTextItemFault(null,ParentActivity.getResources().getDrawable(R.drawable.menu_information_fault_down_btn), "SPN : " + Integer.toString(SPN)
-								+ "     " + "FMI : " + Integer.toString(FMI), "", ""));
 				}
 				else if(Mode == Home.REQ_ERR_TM_LOGGED)		// TCU
 				{
 					Err_Tcu = CAN1Comm.Get_TcuErr_Logged();
-					// ++, 150216 bwk
-					if(CursurIndex == 7 && CursurDetailIndex == i)
+//					if(Err_Tcu[i] == 0)
+//					{
+//						if(CursurIndex == 7 && CursurDetailIndex == i)
+//							adapter.addItem(new IconTextItemFault(null,ParentActivity.getResources().getDrawable(R.drawable.menu_information_fault_down_btn_selected), "No :      ", "", ""));
+//						else
+//							adapter.addItem(new IconTextItemFault(null,ParentActivity.getResources().getDrawable(R.drawable.menu_information_fault_down_btn), "No :      ", "", ""));
+//					}
+//					else
 					{
-						adapter.addItem(new IconTextItemFault(null,ParentActivity.getResources().getDrawable(R.drawable.menu_information_fault_down_btn_selected), "No : " + Integer.toHexString(Err_Tcu[i]), "", ""));
+						if(CursurIndex == 7 && CursurDetailIndex == i)
+							adapter.addItem(new IconTextItemFault(null,ParentActivity.getResources().getDrawable(R.drawable.menu_information_fault_down_btn_selected), "No : " + Integer.toHexString(Err_Tcu[i]), "", ""));
+						else
+							adapter.addItem(new IconTextItemFault(null,ParentActivity.getResources().getDrawable(R.drawable.menu_information_fault_down_btn), "No : " + Integer.toHexString(Err_Tcu[i]), "", ""));
 					}
-					else
-					// --, 150216 bwk
-						adapter.addItem(new IconTextItemFault(null,ParentActivity.getResources().getDrawable(R.drawable.menu_information_fault_down_btn), "No : " + Integer.toHexString(Err_Tcu[i]), "", ""));
 				}
 				else if(Mode == Home.REQ_ERR_EHCU_LOGGED)		// EHCU
 				{
@@ -509,16 +531,22 @@ public class FaultHistoryLoggedFragment extends ParentFragment{
 					SPN = Err_EHCU[i] & 0x0000FFFF;
 					FMI = ((Err_EHCU[i] & 0x00FF0000) >> 16);
 
-					// ++, 150216 bwk
-					if(CursurIndex == 7 && CursurDetailIndex == i)
+//					if((SPN == 0) && (FMI == 0))
+//					{
+//						if(CursurIndex == 7 && CursurDetailIndex == i)
+//							adapter.addItem(new IconTextItemFault(null,ParentActivity.getResources().getDrawable(R.drawable.menu_information_fault_down_btn_selected), "SPN :      FMI :  ", "", ""));
+//						else
+//							adapter.addItem(new IconTextItemFault(null,ParentActivity.getResources().getDrawable(R.drawable.menu_information_fault_down_btn), "SPN :      FMI :  ", "", ""));
+//					}
+//					else
 					{
-						adapter.addItem(new IconTextItemFault(null,ParentActivity.getResources().getDrawable(R.drawable.menu_information_fault_down_btn_selected), "SPN : " + Integer.toString(SPN)
-								+ "     " + "FMI : " + Integer.toString(FMI), "", ""));
+						if(CursurIndex == 7 && CursurDetailIndex == i)
+							adapter.addItem(new IconTextItemFault(null,ParentActivity.getResources().getDrawable(R.drawable.menu_information_fault_down_btn_selected), "SPN : " + Integer.toString(SPN)
+									+ "     " + "FMI : " + Integer.toString(FMI), "", ""));
+						else
+							adapter.addItem(new IconTextItemFault(null,ParentActivity.getResources().getDrawable(R.drawable.menu_information_fault_down_btn), "SPN : " + Integer.toString(SPN)
+									+ "     " + "FMI : " + Integer.toString(FMI), "", ""));
 					}
-					else
-					// --, 150216 bwk
-						adapter.addItem(new IconTextItemFault(null,ParentActivity.getResources().getDrawable(R.drawable.menu_information_fault_down_btn), "SPN : " + Integer.toString(SPN)
-								+ "     " + "FMI : " + Integer.toString(FMI), "", ""));
 				}
 			}
 		}

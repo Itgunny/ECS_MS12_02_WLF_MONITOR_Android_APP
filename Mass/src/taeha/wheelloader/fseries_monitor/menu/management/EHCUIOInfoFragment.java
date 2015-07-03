@@ -64,7 +64,7 @@ public class EHCUIOInfoFragment extends ParentFragment{
 	int EPPRCurrentAuxUp;
 	int EPPRCurrentAuxDown;
 	
-	//int BoomAngle;
+//	int BoomAngle;
 	
 	int CursurIndex;
 	
@@ -132,7 +132,7 @@ public class EHCUIOInfoFragment extends ParentFragment{
 		textviewEPPRCurrentAuxUp = (TextView)mRoot.findViewById(R.id.textView_menu_body_monitoring_ehcuioinfo_auxup_epprcurrent_data);
 		textviewEPPRCurrentAuxDown = (TextView)mRoot.findViewById(R.id.textView_menu_body_monitoring_ehcuioinfo_auxdown_epprcurrent_data);
 		
-		//textviewBoomAngle = (TextView)mRoot.findViewById(R.id.textView_menu_body_monitoring_ehcuioinfo_low_boom_data);
+//		textviewBoomAngle = (TextView)mRoot.findViewById(R.id.textView_menu_body_monitoring_ehcuioinfo_low_boom_data);
 	}
 
 	protected void InitValuables() {
@@ -175,7 +175,7 @@ public class EHCUIOInfoFragment extends ParentFragment{
 		 EPPRCurrentAuxUp = CAN1Comm.Get_AUX1EPPRValveCurrent_2308_PGN65517();
 		 EPPRCurrentAuxDown = CAN1Comm.Get_AUX2EPPRValveCurrent_2309_PGN65517();
 		 
-		 //BoomAngle = CAN1Comm.Get_BoomLinkAngle_1920_PGN65395();
+//		 BoomAngle = CAN1Comm.Get_BoomLinkAngle_1920_PGN65395();
 	}
 
 	@Override
@@ -195,7 +195,7 @@ public class EHCUIOInfoFragment extends ParentFragment{
 		EPPRCurrentDisplay(EPPRCurrentAuxUp,textviewEPPRCurrentAuxUp);
 		EPPRCurrentDisplay(EPPRCurrentAuxDown,textviewEPPRCurrentAuxDown);
 		
-		//BoomBucketAngleCurrAngle(BoomAngle);
+//		BoomBucketAngleCurrAngle(BoomAngle);
 	}
 	/////////////////////////////////////////////////////////////////////
 //	public void AngleDisplay(int Angle, int AngleDot){

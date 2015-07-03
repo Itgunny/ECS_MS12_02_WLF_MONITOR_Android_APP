@@ -258,12 +258,14 @@ public class MachineSecuritySmartKeyFragment extends ParentFragment{
 		ParentActivity._MenuBaseFragment.showMachineSecurityListAnimation();
 	}
 	public void ClickRegistration(){
+//		Log.d(TAG,"Smarkt__Registration");
 		ButtonIndex = CAN1CommManager.DATA_INDEX_TAG_REGISTRATION;
 		CAN1Comm.TxCMDToMCU(CAN1CommManager.CMD_SMK, CAN1CommManager.DATA_INDEX_TAG_REGISTRATION);
 		textViewDetail.setText(ParentActivity.getResources().getString(string.Registering));
 		StartManagementDisplayTimer();
 	}
 	public void ClickDelete(){
+//		Log.d(TAG,"Smarkt__Delete");
 		ButtonIndex = CAN1CommManager.DATA_INDEX_TAG_ELIMINATION;
 		CAN1Comm.TxCMDToMCU(CAN1CommManager.CMD_SMK, CAN1CommManager.DATA_INDEX_TAG_ELIMINATION);
 		textViewDetail.setText(ParentActivity.getResources().getString(string.Deleting));
@@ -307,6 +309,7 @@ public class MachineSecuritySmartKeyFragment extends ParentFragment{
 	}
 	public void ManagementDisplay(int Data){
 		if(CAN1Comm.Get_RecvSMK_Flag() == 1){
+//			Log.d(TAG,"Smarkt__ManagementDisplay"+Data);
 			switch (Data) {
 			case CAN1CommManager.DATA_STATE_1ST_TAG_REG_SUCCESS:
 				textViewDetail.setText(ParentActivity.getResources().getString(string._1st_user_tag_registered));
