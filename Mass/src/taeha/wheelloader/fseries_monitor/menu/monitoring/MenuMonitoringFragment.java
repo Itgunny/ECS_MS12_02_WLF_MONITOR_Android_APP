@@ -110,13 +110,12 @@ public class MenuMonitoringFragment extends MenuBodyList_ParentFragment{
 			return;
 		else
 			ParentActivity.StartAnimationRunningTimer();
-		// ++, 150329 bwk
-		//ParentActivity._MenuBaseFragment.showBodyMachineMonitoringAnimation();
-//		if(ParentActivity._CheckModel.CheckMCUVersionHigh(CAN1Comm.Get_ComponentBasicInformation_1698_PGN65330(), 965) == true)
-//			ParentActivity._MenuBaseFragment.showBodyMachineMonitoringAnimation3();
-//		else if(ParentActivity._CheckModel.CheckMCUVersionHigh(CAN1Comm.Get_ComponentBasicInformation_1698_PGN65330(), 955) == true)
-//			ParentActivity._MenuBaseFragment.showBodyMachineMonitoringAnimation2();
-//		else
+
+		if(CAN1Comm.Get_Rear_Axle_Oil_Temperature_578_PGN65449() != 0xFF)
+			ParentActivity._MenuBaseFragment.showBodyMachineMonitoringAnimation3();
+		else if(CAN1Comm.Get_Front_Axle_Oil_Temperature_577_PGN65449() != 0xFF)
+			ParentActivity._MenuBaseFragment.showBodyMachineMonitoringAnimation2();
+		else
 			ParentActivity._MenuBaseFragment.showBodyMachineMonitoringAnimation1();
 		
 		CursurIndex = 1;

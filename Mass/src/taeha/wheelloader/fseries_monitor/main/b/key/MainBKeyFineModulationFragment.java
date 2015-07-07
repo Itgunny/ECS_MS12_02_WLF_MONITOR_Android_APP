@@ -31,6 +31,7 @@ public class MainBKeyFineModulationFragment extends ParentFragment{
 	//VALUABLE////////////////////////////////////////
 	int FineModulation;
 	int SelectFineModulation;
+	int OldOption;
 	int CursurIndex;
 	Handler HandleCursurDisplay;
 	//////////////////////////////////////////////////
@@ -86,6 +87,7 @@ public class MainBKeyFineModulationFragment extends ParentFragment{
 		// TODO Auto-generated method stub
 		super.InitValuables();
 		FineModulation = CAN1Comm.Get_FlowFineModulationOperation_2302_PGN65517();
+		OldOption = -1;
 		SelectFineModulation = FineModulation;
 	}
 	@Override
@@ -127,15 +129,20 @@ public class MainBKeyFineModulationFragment extends ParentFragment{
 	}
 	/////////////////////////////////////////////////////////////////////	
 	public void EHCUDisplay(int Data){
-		switch (Data){
-		case CAN1CommManager.STATE_COMPONENTCODE_EHCU:
-			layoutAvailable.setVisibility(View.VISIBLE);
-			layoutNotAvailable.setVisibility(View.INVISIBLE);
-			break;
-		default:
-			layoutAvailable.setVisibility(View.INVISIBLE);
-			layoutNotAvailable.setVisibility(View.VISIBLE);
-			break;
+		if(OldOption != Data)
+		{
+			OldOption = Data;
+			switch (Data){
+			case CAN1CommManager.STATE_COMPONENTCODE_EHCU:
+				layoutAvailable.setVisibility(View.VISIBLE);
+				layoutNotAvailable.setVisibility(View.INVISIBLE);
+				break;
+			default:
+				ParentActivity.StartBackHomeTimer();
+				layoutAvailable.setVisibility(View.INVISIBLE);
+				layoutNotAvailable.setVisibility(View.VISIBLE);
+				break;
+			}
 		}
 	}
 	public void FineModulationDisplay(int Data){
@@ -243,6 +250,7 @@ public class MainBKeyFineModulationFragment extends ParentFragment{
 		default:
 			break;
 		}
+		ParentActivity.StartBackHomeTimer();
 	}
 
 }

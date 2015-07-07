@@ -138,6 +138,8 @@ public class MachineSecuritySmartKeyFragment extends ParentFragment{
 		
 		SmartKeyUse = ParentActivity.SmartKeyUse;
 		
+		//CAN1Comm.TxCMDToMCU(CAN1CommManager.CMD_SMK, CAN1CommManager.DATA_INDEX_TAG_AUTHENTICATION);
+		
 		TagCount = 0;
 		Result = 0;
 		ButtonIndex = CAN1CommManager.DATA_INDEX_TAG_REGISTRATION;
@@ -258,14 +260,14 @@ public class MachineSecuritySmartKeyFragment extends ParentFragment{
 		ParentActivity._MenuBaseFragment.showMachineSecurityListAnimation();
 	}
 	public void ClickRegistration(){
-//		Log.d(TAG,"Smarkt__Registration");
+		Log.d(TAG,"Smarkt__Registration");
 		ButtonIndex = CAN1CommManager.DATA_INDEX_TAG_REGISTRATION;
 		CAN1Comm.TxCMDToMCU(CAN1CommManager.CMD_SMK, CAN1CommManager.DATA_INDEX_TAG_REGISTRATION);
 		textViewDetail.setText(ParentActivity.getResources().getString(string.Registering));
 		StartManagementDisplayTimer();
 	}
 	public void ClickDelete(){
-//		Log.d(TAG,"Smarkt__Delete");
+		Log.d(TAG,"Smarkt__Delete");
 		ButtonIndex = CAN1CommManager.DATA_INDEX_TAG_ELIMINATION;
 		CAN1Comm.TxCMDToMCU(CAN1CommManager.CMD_SMK, CAN1CommManager.DATA_INDEX_TAG_ELIMINATION);
 		textViewDetail.setText(ParentActivity.getResources().getString(string.Deleting));
@@ -309,7 +311,7 @@ public class MachineSecuritySmartKeyFragment extends ParentFragment{
 	}
 	public void ManagementDisplay(int Data){
 		if(CAN1Comm.Get_RecvSMK_Flag() == 1){
-//			Log.d(TAG,"Smarkt__ManagementDisplay"+Data);
+			Log.d(TAG,"Smarkt__ManagementDisplay"+Data);
 			switch (Data) {
 			case CAN1CommManager.DATA_STATE_1ST_TAG_REG_SUCCESS:
 				textViewDetail.setText(ParentActivity.getResources().getString(string._1st_user_tag_registered));
@@ -351,6 +353,9 @@ public class MachineSecuritySmartKeyFragment extends ParentFragment{
 				break;
 			case CAN1CommManager.DATA_STATE_5TH_TAG_REG_SUCCESS:
 				textViewDetail.setText(ParentActivity.getResources().getString(string._5th_user_tag_registered));
+				CancelManagementDisplayTimer();
+				break;
+			case CAN1CommManager.DATA_STATE_AUTHENTICATION:
 				CancelManagementDisplayTimer();
 				break;
 			default:
@@ -546,34 +551,39 @@ public class MachineSecuritySmartKeyFragment extends ParentFragment{
 		}
 	}
 	public void CursurDisplay(int Index){
-		imgbtnOK.setPressed(false);
-		imgbtnCancel.setPressed(false);
-		radioDisable.setPressed(false);
-		radioEnable.setPressed(false);
-		textViewRegistration.setPressed(false);
-		textViewDelete.setPressed(false);
+		try{
+			imgbtnOK.setPressed(false);
+			imgbtnCancel.setPressed(false);
+			radioDisable.setPressed(false);
+			radioEnable.setPressed(false);
+			textViewRegistration.setPressed(false);
+			textViewDelete.setPressed(false);
 
-		switch (CursurIndex) {
-			case 1:
-				radioDisable.setPressed(true);
-				break;
-			case 2:
-				radioEnable.setPressed(true);
-				break;
-			case 3:
-				textViewRegistration.setPressed(true);
-				break;
-			case 4:
-				textViewDelete.setPressed(true);
-				break;
-			case 5:
-				imgbtnCancel.setPressed(true);
-				break;
-			case 6:
-				imgbtnOK.setPressed(true);
-				break;
-			default:
-				break;
+			switch (CursurIndex) {
+				case 1:
+					radioDisable.setPressed(true);
+					break;
+				case 2:
+					radioEnable.setPressed(true);
+					break;
+				case 3:
+					textViewRegistration.setPressed(true);
+					break;
+				case 4:
+					textViewDelete.setPressed(true);
+					break;
+				case 5:
+					imgbtnCancel.setPressed(true);
+					break;
+				case 6:
+					imgbtnOK.setPressed(true);
+					break;
+				default:
+					break;
+			}
+		} catch (NullPointerException e) {
+			// TODO: handle exception
+			Log.e(TAG,"NullPointerException CursurDisplay");
 		}
 	}
 	/////////////////////////////////////////////////////////////////////

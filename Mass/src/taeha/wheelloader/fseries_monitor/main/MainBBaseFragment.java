@@ -1612,6 +1612,7 @@ public class MainBBaseFragment extends ParentFragment{
 			}else{
 				ParentActivity.ExitCam();
 			}
+			ParentActivity.StartBackHomeTimer();
 			break;
 		case CAN1CommManager.LEFT:
 			ClickKeyButtonLeft();
@@ -2176,7 +2177,7 @@ public class MainBBaseFragment extends ParentFragment{
 		}
 		} catch (NullPointerException e) {
 			// TODO: handle exception
-			Log.e(TAG,"NullPointerException dismiss");
+			Log.e(TAG,"NullPointerException CursurDisplay");
 		}
 	}
 }

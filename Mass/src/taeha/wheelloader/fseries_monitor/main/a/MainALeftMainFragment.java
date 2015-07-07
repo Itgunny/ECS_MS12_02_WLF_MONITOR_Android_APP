@@ -452,13 +452,13 @@ public class MainALeftMainFragment extends ParentFragment{
 			break;
 		// ++, 150327 bwk
 		case CAN1CommManager.DATA_STATE_MACHINESTATUS_FRONTAXLE:
-//			if(ParentActivity._CheckModel.CheckMCUVersionHigh(CAN1Comm.Get_ComponentBasicInformation_1698_PGN65330(), 955) == true)
-//			{
-//				LayoutNormalUpper.setVisibility(View.VISIBLE);
-//				LayoutWeighingUpper.setVisibility(View.GONE);
-//				UpperFrontAxleDisplay(imgViewNormalUpperIcon,textViewNormalUpperData,textViewNormalUpperUnit,FrontAxleTemp,ParentActivity.UnitTemp);
-//			}
-//			else
+			if(CAN1Comm.Get_Front_Axle_Oil_Temperature_577_PGN65449() != 0xFF)
+			{
+				LayoutNormalUpper.setVisibility(View.VISIBLE);
+				LayoutWeighingUpper.setVisibility(View.GONE);
+				UpperFrontAxleDisplay(imgViewNormalUpperIcon,textViewNormalUpperData,textViewNormalUpperUnit,FrontAxleTemp,ParentActivity.UnitTemp);
+			}
+			else
 			{
 				ParentActivity.MachineStatusUpperIndex= CAN1CommManager.DATA_STATE_MACHINESTATUS_NOSELECT;
 				LayoutNormalUpper.setVisibility(View.GONE);
@@ -466,13 +466,13 @@ public class MainALeftMainFragment extends ParentFragment{
 			}
 			break;
 		case CAN1CommManager.DATA_STATE_MACHINESTATUS_REARAXLE:
-//			if(ParentActivity._CheckModel.CheckMCUVersionHigh(CAN1Comm.Get_ComponentBasicInformation_1698_PGN65330(), 965) == true)
-//			{
-//				LayoutNormalUpper.setVisibility(View.VISIBLE);
-//				LayoutWeighingUpper.setVisibility(View.GONE);
-//				UpperRearAxleDisplay(imgViewNormalUpperIcon,textViewNormalUpperData,textViewNormalUpperUnit,RearAxleTemp,ParentActivity.UnitTemp);
-//			}
-//			else
+			if(CAN1Comm.Get_Rear_Axle_Oil_Temperature_578_PGN65449() != 0xFF)
+			{
+				LayoutNormalUpper.setVisibility(View.VISIBLE);
+				LayoutWeighingUpper.setVisibility(View.GONE);
+				UpperRearAxleDisplay(imgViewNormalUpperIcon,textViewNormalUpperData,textViewNormalUpperUnit,RearAxleTemp,ParentActivity.UnitTemp);
+			}
+			else
 			{
 				ParentActivity.MachineStatusUpperIndex= CAN1CommManager.DATA_STATE_MACHINESTATUS_NOSELECT;
 				LayoutNormalUpper.setVisibility(View.GONE);
@@ -514,13 +514,13 @@ public class MainALeftMainFragment extends ParentFragment{
 			LowerCoolantDisplay(imgViewNormalLowerIcon,textViewNormalLowerData,textViewNormalLowerUnit,Coolant,ParentActivity.UnitTemp);
 			break;
 		case CAN1CommManager.DATA_STATE_MACHINESTATUS_FRONTAXLE:
-//			if(ParentActivity._CheckModel.CheckMCUVersionHigh(CAN1Comm.Get_ComponentBasicInformation_1698_PGN65330(), 955) == true)
-//			{
-//				LayoutNormalLower.setVisibility(View.VISIBLE);
-//				LayoutWeighingLower.setVisibility(View.GONE);
-//				LowerFrontAxleDisplay(imgViewNormalLowerIcon,textViewNormalLowerData,textViewNormalLowerUnit,FrontAxleTemp,ParentActivity.UnitTemp);
-//			}
-//			else
+			if(CAN1Comm.Get_Front_Axle_Oil_Temperature_577_PGN65449() != 0xFF)
+			{
+				LayoutNormalLower.setVisibility(View.VISIBLE);
+				LayoutWeighingLower.setVisibility(View.GONE);
+				LowerFrontAxleDisplay(imgViewNormalLowerIcon,textViewNormalLowerData,textViewNormalLowerUnit,FrontAxleTemp,ParentActivity.UnitTemp);
+			}
+			else
 			{
 				ParentActivity.MachineStatusLowerIndex= CAN1CommManager.DATA_STATE_MACHINESTATUS_NOSELECT;
 				LayoutNormalLower.setVisibility(View.GONE);
@@ -528,13 +528,13 @@ public class MainALeftMainFragment extends ParentFragment{
 			}
 			break;
 		case CAN1CommManager.DATA_STATE_MACHINESTATUS_REARAXLE:
-//			if(ParentActivity._CheckModel.CheckMCUVersionHigh(CAN1Comm.Get_ComponentBasicInformation_1698_PGN65330(), 965) == true)
-//			{
-//				LayoutNormalLower.setVisibility(View.VISIBLE);
-//				LayoutWeighingLower.setVisibility(View.GONE);
-//				LowerRearAxleDisplay(imgViewNormalLowerIcon,textViewNormalLowerData,textViewNormalLowerUnit,RearAxleTemp,ParentActivity.UnitTemp);
-//			}
-//			else
+			if(CAN1Comm.Get_Rear_Axle_Oil_Temperature_578_PGN65449() != 0xFF)
+			{
+				LayoutNormalLower.setVisibility(View.VISIBLE);
+				LayoutWeighingLower.setVisibility(View.GONE);
+				LowerRearAxleDisplay(imgViewNormalLowerIcon,textViewNormalLowerData,textViewNormalLowerUnit,RearAxleTemp,ParentActivity.UnitTemp);
+			}
+			else
 			{
 				ParentActivity.MachineStatusLowerIndex= CAN1CommManager.DATA_STATE_MACHINESTATUS_NOSELECT;
 				LayoutNormalLower.setVisibility(View.GONE);
@@ -682,8 +682,8 @@ public class MainALeftMainFragment extends ParentFragment{
 	}
 	// ++, 150329 bwk
 	public void AxleDisplay(TextView textData, TextView textUnit, int Data, int Unit){
-		textData.setText(ParentActivity.GetTemp(Data,Unit));
-		if(Unit == ParentActivity.UNIT_TEMP_F){
+		textData.setText(ParentActivity.GetTempAxle(Data,Unit));
+		if(Unit == Home.UNIT_TEMP_F){
 			textUnit.setText(ParentActivity.getResources().getString(string.F));
 		}else{
 			textUnit.setText(ParentActivity.getResources().getString(string.C));
@@ -692,7 +692,7 @@ public class MainALeftMainFragment extends ParentFragment{
 	// --, 150329 bwk
 
 	public void WeighingUpperDisplay(int BoomLiftSpeedError, int BucketFullInError, int HydOilTempError, int DisplayIndex, int Current, int Day1, int Today, int TotalA, int TotalB, int TotalC, int Unit){
-		if(ParentActivity.UnitWeight == ParentActivity.UNIT_WEIGHT_LB){
+		if(ParentActivity.UnitWeight == Home.UNIT_WEIGHT_LB){
 			textViewWeighingUpperUnit.setText(ParentActivity.getResources().getString(string.lb));
 			textViewWeighingLowerUnit.setText(ParentActivity.getResources().getString(string.lb));
 		}else{
@@ -953,23 +953,20 @@ public class MainALeftMainFragment extends ParentFragment{
 		
 		if(index == 0){
 			ParentActivity._MainABaseFragment._MainACenterMachineStatusFragment = new MainACenterMachineStatusFragment();
-			// ++, 150330 bwk
-			//ParentActivity._MainABaseFragment._MainALeftUpMachineStatusSelectFragment1 = new MainALeftUpMachineStatusSelectFragment1();
-//			if(ParentActivity._CheckModel.CheckMCUVersionHigh(CAN1Comm.Get_ComponentBasicInformation_1698_PGN65330(), 965) == true)
-//				ParentActivity._MainABaseFragment._MainALeftUpMachineStatusSelectFragment3 = new MainALeftUpMachineStatusSelectFragment3();
-//			else if(ParentActivity._CheckModel.CheckMCUVersionHigh(CAN1Comm.Get_ComponentBasicInformation_1698_PGN65330(), 955) == true)
-//				ParentActivity._MainABaseFragment._MainALeftUpMachineStatusSelectFragment2 = new MainALeftUpMachineStatusSelectFragment2();
-//			else
+			if(CAN1Comm.Get_Rear_Axle_Oil_Temperature_578_PGN65449() != 0xFF)
+				ParentActivity._MainABaseFragment._MainALeftUpMachineStatusSelectFragment3 = new MainALeftUpMachineStatusSelectFragment3();
+			else if(CAN1Comm.Get_Front_Axle_Oil_Temperature_577_PGN65449() != 0xFF)
+				ParentActivity._MainABaseFragment._MainALeftUpMachineStatusSelectFragment2 = new MainALeftUpMachineStatusSelectFragment2();
+			else
 				ParentActivity._MainABaseFragment._MainALeftUpMachineStatusSelectFragment1 = new MainALeftUpMachineStatusSelectFragment1();
-			// --, 150330 bwk
 			
 			ParentActivity._MainABaseFragment._MainBodyShiftAnimation.StartShiftLeftAnimation();
 			ParentActivity._MainABaseFragment.CenterAnimation.StartChangeAnimation(ParentActivity._MainABaseFragment._MainACenterMachineStatusFragment);
-//			if(ParentActivity._CheckModel.CheckMCUVersionHigh(CAN1Comm.Get_ComponentBasicInformation_1698_PGN65330(), 965) == true)
-//				ParentActivity._MainABaseFragment.LeftChangeAnimation.StartChangeAnimation(ParentActivity._MainABaseFragment._MainALeftUpMachineStatusSelectFragment3);
-//			else if(ParentActivity._CheckModel.CheckMCUVersionHigh(CAN1Comm.Get_ComponentBasicInformation_1698_PGN65330(), 955) == true)
-//				ParentActivity._MainABaseFragment.LeftChangeAnimation.StartChangeAnimation(ParentActivity._MainABaseFragment._MainALeftUpMachineStatusSelectFragment2);
-//			else
+			if(CAN1Comm.Get_Rear_Axle_Oil_Temperature_578_PGN65449() != 0xFF)
+				ParentActivity._MainABaseFragment.LeftChangeAnimation.StartChangeAnimation(ParentActivity._MainABaseFragment._MainALeftUpMachineStatusSelectFragment3);
+			else if(CAN1Comm.Get_Front_Axle_Oil_Temperature_577_PGN65449() != 0xFF)
+				ParentActivity._MainABaseFragment.LeftChangeAnimation.StartChangeAnimation(ParentActivity._MainABaseFragment._MainALeftUpMachineStatusSelectFragment2);
+			else
 				ParentActivity._MainABaseFragment.LeftChangeAnimation.StartChangeAnimation(ParentActivity._MainABaseFragment._MainALeftUpMachineStatusSelectFragment1);
 
 		}else{

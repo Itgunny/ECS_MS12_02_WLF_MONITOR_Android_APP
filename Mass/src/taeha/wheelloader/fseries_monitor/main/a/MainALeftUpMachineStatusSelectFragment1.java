@@ -42,6 +42,7 @@ public class MainALeftUpMachineStatusSelectFragment1 extends ParentFragment{
 	//VALUABLE////////////////////////////////////////
 	int SelectFlag;
 	
+	int InitialCursur = 0;
 	int CursurIndex;
 	Handler HandleCursurDisplay;
 	//////////////////////////////////////////////////
@@ -118,6 +119,7 @@ public class MainALeftUpMachineStatusSelectFragment1 extends ParentFragment{
 	protected void InitValuables() {
 		// TODO Auto-generated method stub
 		super.InitValuables();
+		InitialCursur = 0;
 		SelectFlag = SELECT_UPPER;
 		
 		switch (ParentActivity.MachineStatusUpperIndex) {
@@ -442,5 +444,10 @@ public class MainALeftUpMachineStatusSelectFragment1 extends ParentFragment{
 			default:
 				break;
 		}
+		
+		if(InitialCursur == 0)
+			InitialCursur = 1;
+		else
+			ParentActivity.StartBackHomeTimer();
 	}
 }

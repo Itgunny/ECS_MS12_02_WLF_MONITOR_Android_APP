@@ -259,6 +259,7 @@ public class PressureCalibration extends ParentFragment{
 		textViewText2.setText(ParentActivity.getResources().getString(string.Set_P_mode_step_on_pedal_max_range_press_Start_button_lift_the_boom_with_the_hydraulic_control_in_detent_position));
 		imgViewStep1.setImageResource(R.drawable.menu_management_boom_pressure_step_off);
 		imgViewStep2.setImageResource(R.drawable.menu_management_boom_pressure_step_on);
+		StatusCNT = 0;
 	}
 	public void BoomPressureProgressDisplay(int progress){
 		progressBoomPressure.setProgress(progress);

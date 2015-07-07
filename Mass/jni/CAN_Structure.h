@@ -46,7 +46,10 @@ typedef struct
 
 	unsigned char	Count;
 
-	unsigned char	DM[5];
+	unsigned char Response_Code;
+	unsigned char Response_Flag;
+
+	unsigned char	DM[3];
 
 }__attribute__((packed))  RES_SMK;
 typedef struct
@@ -982,8 +985,10 @@ typedef struct
 	unsigned char		SMK_Auth_Result;
 	unsigned char		SMK_Msg_Result;
 	unsigned char		SMK_Tag_Reg_Count;
+	unsigned char		SMK_Response_Code;
+	unsigned char		SMK_Response_Flag;
 	unsigned char		Reserved0;
-	unsigned int		Reserved1;
+	unsigned short	Reserved1;
 }__attribute__((packed))  SMK_RESULT;
 
 

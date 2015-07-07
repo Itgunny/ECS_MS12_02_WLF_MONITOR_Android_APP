@@ -310,13 +310,14 @@ public class CAN1CommManager extends ICAN1CommManager.Stub{		// ttySAC1(Linux), 
 	public static final int DATA_STATE_3RD_TAG_REG_SUCCESS 			= 0x07;
 	public static final int DATA_STATE_4TH_TAG_REG_SUCCESS 			= 0x08;
 	public static final int DATA_STATE_5TH_TAG_REG_SUCCESS 			= 0x09;
+	public static final int DATA_STATE_AUTHENTICATION			 	= 0x0A;
 	
 	
 	public static final int DATA_INDEX_TAG_REQ_SUCCESS	 			= 0x00;
 	public static final int DATA_INDEX_TAG_REGISTRATION			 	= 0x01;
 	public static final int DATA_INDEX_TAG_ELIMINATION	 			= 0x02;
 	public static final int DATA_INDEX_TAG_USE_SAVE		 			= 0x03;
-	public static final int DATA_INDEX_TAG_USE_LOAD		 			= 0x04;
+	public static final int DATA_INDEX_TAG_AUTHENTICATION 			= 0x04;
 	
 	public static final int DATA_INDEX_SELECTGEAR_DIR_N 	= 0x00000;
 	public static final int DATA_INDEX_SELECTGEAR_DIR_F 	= 0x00001;

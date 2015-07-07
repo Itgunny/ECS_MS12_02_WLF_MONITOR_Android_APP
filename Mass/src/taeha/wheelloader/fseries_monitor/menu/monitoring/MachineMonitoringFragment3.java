@@ -285,7 +285,7 @@ public class MachineMonitoringFragment3 extends ParentFragment{
 		}
 	}
 	public void FrontAxleDisplay(int _data, int _status, int _unit){
-		textViewFrontAxle.setText(ParentActivity.GetTemp(_data,_unit));
+		textViewFrontAxle.setText(ParentActivity.GetTempAxle(_data,_unit));
 		if(_unit == ParentActivity.UNIT_TEMP_F){
 			textViewFrontAxleUnit.setText(ParentActivity.getResources().getString(string.F));
 		}else{
@@ -303,7 +303,7 @@ public class MachineMonitoringFragment3 extends ParentFragment{
 		}
 	}
 	public void RearAxleDisplay(int _data, int _status, int _unit){
-		textViewRearAxle.setText(ParentActivity.GetTemp(_data,_unit));
+		textViewRearAxle.setText(ParentActivity.GetTempAxle(_data,_unit));
 		if(_unit == ParentActivity.UNIT_TEMP_F){
 			textViewRearAxleUnit.setText(ParentActivity.getResources().getString(string.F));
 		}else{

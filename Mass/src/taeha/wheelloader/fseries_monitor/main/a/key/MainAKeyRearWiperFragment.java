@@ -67,6 +67,7 @@ public class MainAKeyRearWiperFragment extends ParentFragment{
 		RearWiperSpeedDisplay(WiperSpeedState);
 		if(LongKey != 1)
 			ClickHardKey();
+			
 		HandleCursurDisplay = new Handler() {
 			@Override
 			public void handleMessage(Message msg) {
@@ -214,13 +215,15 @@ public class MainAKeyRearWiperFragment extends ParentFragment{
 			|| (CAN1Comm.Get_RX_RES_KEY_LongFlag() == 1 && CAN1Comm.Get_RX_RES_KEY_RearWiper() == 1 )){	// RearWiper Long Key	
 				CAN1Comm.Set_RearWiperWasherOperationStatus_3452_PGN65527(CAN1CommManager.DATA_STATE_KEY_REARWIPER_WASHER_ON);
 				CAN1Comm.TxCANToMCU(247);
-				// ++, 150211 bwk
-				// Long키가 눌러진 경우는 그 전값을 바꾸지 않다는 뜻이므로 한단계 이전으로 변경.
-//				if(initState>=2)
-//					ReturnStatusWiperSpeedState();
-				// --, 150211 bwk
+				ParentActivity.ResetBackHomeCount();
 				Log.d(TAG,"Washer On");
 			}else{
+				if(LongKey == 1)
+				{
+					LongKey = 0;
+					CursurIndex = 4;
+					ParentActivity.StartBackHomeTimer();
+				}
 				CAN1Comm.Set_RearWiperWasherOperationStatus_3452_PGN65527(CAN1CommManager.DATA_STATE_KEY_REARWIPER_WASHER_OFF);
 				CAN1Comm.TxCANToMCU(247);
 				Log.d(TAG,"Washer Off");
@@ -409,6 +412,7 @@ public class MainAKeyRearWiperFragment extends ParentFragment{
 		default:
 			break;
 		}
+		ParentActivity.StartBackHomeTimer();
 	}
 
 }

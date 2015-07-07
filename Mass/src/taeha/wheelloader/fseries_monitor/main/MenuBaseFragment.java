@@ -2199,16 +2199,15 @@ public class MenuBaseFragment extends ParentFragment{
 		case Home.SCREEN_STATE_MENU_PREFERENCE_DISPLAYTYPELANG_TOP:
 			_DisplayTypeListFragment.ClickESC();
 			break;
-			// ++, 150309 bwk
 		case Home.SCREEN_STATE_MENU_PREFERENCE_DISPLAYTYPELANG_TYPE:
 			_DisplayTypeFragment.ClickESC();
 			break;
-			// --, 150309 bwk			
-			// ++, 150206 bwk
 		case Home.SCREEN_STATE_MENU_PREFERENCE_DISPLAYTYPELANG_LANG_CHANGE:
 			_LanguageListFragment.ClickESC();
 			break;
-			// --, 150206 bwk;				
+		case Home.SCREEN_STATE_MENU_PREFERENCE_DISPLAYTYPELANG_LANG_CHANGE_POPUP:
+			ParentActivity._LanguageChangePopup.ClickOK();
+			break;
 		case Home.SCREEN_STATE_MENU_PREFERENCE_SOUNDOUTPUT_TOP:
 			ParentActivity._SoundOutputPopup.ClickESC();
 			break;
@@ -2489,16 +2488,15 @@ public class MenuBaseFragment extends ParentFragment{
 		case Home.SCREEN_STATE_MENU_PREFERENCE_DISPLAYTYPELANG_TOP:
 			_DisplayTypeListFragment.ClickEnter();
 			break;
-			// ++, 150309 bwk
 		case Home.SCREEN_STATE_MENU_PREFERENCE_DISPLAYTYPELANG_TYPE:
 			_DisplayTypeFragment.ClickEnter();
 			break;
-			// --, 150309 bwk					
-			// ++, 150206 bwk
 		case Home.SCREEN_STATE_MENU_PREFERENCE_DISPLAYTYPELANG_LANG_CHANGE:
 			_LanguageListFragment.ClickEnter();
 			break;
-			// --, 150206 bwk;		
+		case Home.SCREEN_STATE_MENU_PREFERENCE_DISPLAYTYPELANG_LANG_CHANGE_POPUP:
+			ParentActivity._LanguageChangePopup.ClickOK();
+			break;
 		case Home.SCREEN_STATE_MENU_PREFERENCE_SOUNDOUTPUT_TOP:
 			ParentActivity._SoundOutputPopup.ClickEnter();
 			break;

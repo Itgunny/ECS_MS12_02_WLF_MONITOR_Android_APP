@@ -1198,8 +1198,9 @@ public class CommService extends Service{
 		try {
 			switch (Data) {
 			case CAN1CommManager.OFF:
-				CAN1Comm.Callback_KeyButton(Data);
-				break;
+				return;
+				//CAN1Comm.Callback_KeyButton(Data);
+				//break;
 			case CAN1CommManager.MENU:
 				MenuKeyEvent();
 				if(GetScreenTopFlag() == true)	// 타 apk에서 소리 2번 울림

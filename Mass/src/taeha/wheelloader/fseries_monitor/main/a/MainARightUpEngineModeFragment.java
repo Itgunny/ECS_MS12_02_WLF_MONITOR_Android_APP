@@ -254,6 +254,7 @@ public class MainARightUpEngineModeFragment extends ParentFragment{
 			CursurDisplay(CursurIndex);
 			break;
 		}
+		ParentActivity.StartBackHomeTimer();
 	}
 	public void ClickRight(){
 		switch (CursurIndex) {
@@ -268,6 +269,7 @@ public class MainARightUpEngineModeFragment extends ParentFragment{
 			CursurDisplay(CursurIndex);
 			break;
 		}
+		ParentActivity.StartBackHomeTimer();
 	}
 	public void ClickEnter(){
 		switch (CursurIndex) {

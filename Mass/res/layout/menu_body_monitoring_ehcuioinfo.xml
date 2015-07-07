@@ -578,12 +578,12 @@
             android:layout_alignBottom="@+id/imageView_menu_body_monitoring_ehcuioinfo_low_bg"
             android:layout_alignRight="@+id/imageView_menu_body_monitoring_ehcuioinfo_low_bg"
             android:background="@drawable/_selector_menu_low_right_btn" />
-<!-- 
+ 
   		<TextView
             android:id="@+id/textView_menu_body_monitoring_ehcuioinfo_low_boom_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="30dp"
+            android:layout_marginLeft="130dp"
             android:gravity="center"
             android:layout_centerVertical="true"
             android:text="@string/Boom"
@@ -612,7 +612,7 @@
             android:gravity="center"
             android:textColor="@color/white"
             android:textAppearance="?android:attr/textAppearanceLarge" />      
- -->
+
         <ImageView
             android:id="@+id/imageView_menu_body_monitoring_ehcuioinfo_low_line"
             android:layout_width="wrap_content"

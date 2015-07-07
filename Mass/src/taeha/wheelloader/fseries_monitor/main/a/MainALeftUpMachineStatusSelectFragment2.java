@@ -41,7 +41,7 @@ public class MainALeftUpMachineStatusSelectFragment2 extends ParentFragment{
 	
 	//VALUABLE////////////////////////////////////////
 	int SelectFlag;
-	
+	int InitialCursur = 0;
 	int CursurIndex;
 	Handler HandleCursurDisplay;
 	//////////////////////////////////////////////////
@@ -120,6 +120,7 @@ public class MainALeftUpMachineStatusSelectFragment2 extends ParentFragment{
 		// TODO Auto-generated method stub
 		super.InitValuables();
 		SelectFlag = SELECT_UPPER;
+		InitialCursur = 0;
 		switch (ParentActivity.MachineStatusUpperIndex) {
 		case CAN1CommManager.DATA_STATE_MACHINESTATUS_HYD:
 			CursurIndex = 1;
@@ -473,5 +474,10 @@ public class MainALeftUpMachineStatusSelectFragment2 extends ParentFragment{
 		default:
 			break;
 		}
+		if(InitialCursur == 0)
+			InitialCursur = 1;
+		else
+			ParentActivity.StartBackHomeTimer();
+		
 	}
 }

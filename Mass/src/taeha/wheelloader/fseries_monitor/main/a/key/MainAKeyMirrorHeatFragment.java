@@ -31,6 +31,7 @@ public class MainAKeyMirrorHeatFragment extends ParentFragment{
 	//VALUABLE////////////////////////////////////////
 	int MirrorHeat;
 	int SelectMirrorHeat;
+	int OldMirrorHeat;
 	int CursurIndex;
 	Handler HandleCursurDisplay;
 	//////////////////////////////////////////////////
@@ -84,6 +85,7 @@ public class MainAKeyMirrorHeatFragment extends ParentFragment{
 		super.InitValuables();
 		MirrorHeat = CAN1Comm.Get_MirrorHeatOperationStatus_3450_PGN65527();
 		SelectMirrorHeat = MirrorHeat;
+		OldMirrorHeat = -1;
 		CursurIndex = 1;
 		CursurDisplay(CursurIndex);
 
@@ -126,15 +128,20 @@ public class MainAKeyMirrorHeatFragment extends ParentFragment{
 	}
 	/////////////////////////////////////////////////////////////////////	
 	public void KeyBGDisplay(int Data){
-		switch (Data){
-		case CAN1CommManager.DATA_STATE_NOTAVAILABLE:
-			layoutAvailable.setVisibility(View.INVISIBLE);
-			layoutNotAvailable.setVisibility(View.VISIBLE);
-			break;
-		default:
-			layoutAvailable.setVisibility(View.VISIBLE);
-			layoutNotAvailable.setVisibility(View.INVISIBLE);
-			break;
+		if(OldMirrorHeat != Data)
+		{
+			OldMirrorHeat = Data;
+			switch (Data){
+			case CAN1CommManager.DATA_STATE_NOTAVAILABLE:
+				ParentActivity.StartBackHomeTimer();
+				layoutAvailable.setVisibility(View.INVISIBLE);
+				layoutNotAvailable.setVisibility(View.VISIBLE);
+				break;
+			default:
+				layoutAvailable.setVisibility(View.VISIBLE);
+				layoutNotAvailable.setVisibility(View.INVISIBLE);
+				break;
+			}
 		}
 	}
 	/////////////////////////////////////////////////////////////////////	
@@ -173,6 +180,7 @@ public class MainAKeyMirrorHeatFragment extends ParentFragment{
 			CursurDisplay(CursurIndex);
 			break;
 		}
+		ParentActivity.StartBackHomeTimer();
 	}
 	public void ClickRight(){
 		switch (CursurIndex) {
@@ -186,6 +194,7 @@ public class MainAKeyMirrorHeatFragment extends ParentFragment{
 			CursurDisplay(CursurIndex);
 			break;
 		}
+		ParentActivity.StartBackHomeTimer();
 	}
 	public void ClickEnter(){
 		switch (CursurIndex) {

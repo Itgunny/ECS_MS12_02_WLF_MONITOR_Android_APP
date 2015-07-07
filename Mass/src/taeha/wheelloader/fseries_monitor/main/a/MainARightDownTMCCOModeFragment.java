@@ -292,6 +292,7 @@ public class MainARightDownTMCCOModeFragment extends ParentFragment{
 			CursurDisplay(CursurIndex);
 			break;
 		}
+		ParentActivity.StartBackHomeTimer();
 	}
 	public void ClickRight(){
 		switch (CursurIndex) {
@@ -307,6 +308,7 @@ public class MainARightDownTMCCOModeFragment extends ParentFragment{
 			CursurDisplay(CursurIndex);
 			break;
 		}
+		ParentActivity.StartBackHomeTimer();
 	}
 	public void ClickEnter(){
 		switch (CursurIndex) {

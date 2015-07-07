@@ -72,6 +72,10 @@ public class MainACenterFragment extends ParentFragment{
 		setClickEnable(ClickFlag);
 //		ParentActivity.ScreenIndex = ParentActivity.SCREEN_STATE_MAIN_A_TOP;
 		ParentActivity.CheckAttachmentUnlock();
+		
+		ParentActivity.FrontAxleWarningFlag = false;
+		ParentActivity.RearAxleWarningFlag = false;
+		
 	}
 
 	@Override

@@ -163,16 +163,16 @@ public class MenuManagementFragment extends MenuBodyList_ParentFragment{
 	public void ClickList5() {
 		// TODO Auto-generated method stub
 		
-//		int rpm = CAN1Comm.Get_EngineSpeed_310_PGN65431();
-//		int AlternatorVoltage = CAN1Comm.Get_AlternatorVoltage_707_PGN65360();
-//		
-//		Log.d(TAG, "rpm="+rpm+"AlternatorVoltage"+AlternatorVoltage);
-//
-//		if((rpm >= 500 && rpm < 8031) && (AlternatorVoltage > 255 && AlternatorVoltage <= 360))
-//		{
-//			ParentActivity.showSoftwareUpdateErrorPopup();
-//		}
-//		else
+		int rpm = CAN1Comm.Get_EngineSpeed_310_PGN65431();
+		int AlternatorVoltage = CAN1Comm.Get_AlternatorVoltage_707_PGN65360();
+		
+		Log.d(TAG, "rpm="+rpm+"AlternatorVoltage"+AlternatorVoltage);
+
+		if((rpm >= 500 && rpm < 8031) && (AlternatorVoltage > 255 && AlternatorVoltage <= 360))
+		{
+			ParentActivity.showSoftwareUpdateErrorPopup();
+		}
+		else
 		{
 			if(ParentActivity.AnimationRunningFlag == true)
 				return;

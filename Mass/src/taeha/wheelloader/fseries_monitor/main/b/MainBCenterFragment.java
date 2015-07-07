@@ -85,6 +85,8 @@ public class MainBCenterFragment extends ParentFragment{
 //		ParentActivity.ScreenIndex = ParentActivity.SCREEN_STATE_MAIN_B_TOP;
 //		Log.d(TAG,"11ScreenIndex="+Integer.toHexString(ParentActivity.ScreenIndex));
 		ParentActivity.CheckAttachmentUnlock();
+		ParentActivity.FrontAxleWarningFlag = false;
+		ParentActivity.RearAxleWarningFlag = false;
 	}
 
 	@Override

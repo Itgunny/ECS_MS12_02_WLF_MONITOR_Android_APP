@@ -1,5 +1,8 @@
 package taeha.wheelloader.fseries_monitor.main.b.key;
 
+import taeha.wheelloader.fseries_monitor.main.CAN1CommManager;
+import taeha.wheelloader.fseries_monitor.main.ParentFragment;
+import taeha.wheelloader.fseries_monitor.main.R;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -7,14 +10,8 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageButton;
-import android.widget.ImageView;
-import android.widget.RadioButton;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import taeha.wheelloader.fseries_monitor.main.CAN1CommManager;
-import taeha.wheelloader.fseries_monitor.main.ParentFragment;
-import taeha.wheelloader.fseries_monitor.main.R;
 
 public class MainBKeyMirrorHeatFragment extends ParentFragment{
 	//CONSTANT////////////////////////////////////////
@@ -30,6 +27,7 @@ public class MainBKeyMirrorHeatFragment extends ParentFragment{
 	//VALUABLE////////////////////////////////////////
 	int MirrorHeat;
 	int SelectMirrorHeat;
+	int OldMirrorHeat;
 	int CursurIndex;
 	Handler HandleCursurDisplay;
 	//////////////////////////////////////////////////
@@ -83,6 +81,7 @@ public class MainBKeyMirrorHeatFragment extends ParentFragment{
 		super.InitValuables();
 		MirrorHeat = CAN1Comm.Get_MirrorHeatOperationStatus_3450_PGN65527();
 		SelectMirrorHeat = MirrorHeat;
+		OldMirrorHeat = -1;
 		CursurIndex = 1;
 		CursurDisplay(CursurIndex);
 	}
@@ -124,15 +123,20 @@ public class MainBKeyMirrorHeatFragment extends ParentFragment{
 	}
 	/////////////////////////////////////////////////////////////////////	
 	public void KeyBGDisplay(int Data){
-		switch (Data){
-		case CAN1CommManager.DATA_STATE_NOTAVAILABLE:
-			layoutAvailable.setVisibility(View.INVISIBLE);
-			layoutNotAvailable.setVisibility(View.VISIBLE);
-			break;
-		default:
-			layoutAvailable.setVisibility(View.VISIBLE);
-			layoutNotAvailable.setVisibility(View.INVISIBLE);
-			break;
+		if(OldMirrorHeat != Data)
+		{
+			OldMirrorHeat = Data;
+			switch (Data){
+			case CAN1CommManager.DATA_STATE_NOTAVAILABLE:
+				ParentActivity.StartBackHomeTimer();
+				layoutAvailable.setVisibility(View.INVISIBLE);
+				layoutNotAvailable.setVisibility(View.VISIBLE);
+				break;
+			default:
+				layoutAvailable.setVisibility(View.VISIBLE);
+				layoutNotAvailable.setVisibility(View.INVISIBLE);
+				break;
+			}
 		}
 	}
 	/////////////////////////////////////////////////////////////////////	
@@ -171,6 +175,7 @@ public class MainBKeyMirrorHeatFragment extends ParentFragment{
 			CursurDisplay(CursurIndex);
 			break;
 		}
+		ParentActivity.StartBackHomeTimer();
 	}
 	public void ClickRight(){
 		switch (CursurIndex) {
@@ -184,6 +189,7 @@ public class MainBKeyMirrorHeatFragment extends ParentFragment{
 			CursurDisplay(CursurIndex);
 			break;
 		}
+		ParentActivity.StartBackHomeTimer();
 	}
 	public void ClickEnter(){
 		switch (CursurIndex) {

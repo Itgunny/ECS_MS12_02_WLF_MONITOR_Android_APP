@@ -32,6 +32,7 @@ public class MainBKeyQuickCouplerFragment extends ParentFragment{
 	//VALUABLE////////////////////////////////////////
 	int Quickcoupler;
 	int CursurIndex;
+	int OldQuickcoupler;
 	Handler HandleCursurDisplay;
 	//////////////////////////////////////////////////
 	
@@ -85,6 +86,7 @@ public class MainBKeyQuickCouplerFragment extends ParentFragment{
 		super.InitValuables();
 		
 		Quickcoupler = CAN1Comm.Get_QuickCouplerOperationStatus_3448_PGN65527();
+		OldQuickcoupler = -1;
 		CursurIndex = 1;
 		CursurDisplay(CursurIndex);
 	}
@@ -137,15 +139,20 @@ public class MainBKeyQuickCouplerFragment extends ParentFragment{
 	}
 	/////////////////////////////////////////////////////////////////////	
 	public void KeyBGDisplay(int Data){
-		switch (Data){
-		case CAN1CommManager.DATA_STATE_NOTAVAILABLE:
-			layoutAvailable.setVisibility(View.INVISIBLE);
-			layoutNotAvailable.setVisibility(View.VISIBLE);
-			break;
-		default:
-			layoutAvailable.setVisibility(View.VISIBLE);
-			layoutNotAvailable.setVisibility(View.INVISIBLE);
-			break;
+		if(OldQuickcoupler != Data)
+		{
+			OldQuickcoupler = Data;
+			switch (Data){
+			case CAN1CommManager.DATA_STATE_NOTAVAILABLE:
+				ParentActivity.StartBackHomeTimer();
+				layoutAvailable.setVisibility(View.INVISIBLE);
+				layoutNotAvailable.setVisibility(View.VISIBLE);
+				break;
+			default:
+				layoutAvailable.setVisibility(View.VISIBLE);
+				layoutNotAvailable.setVisibility(View.INVISIBLE);
+				break;
+			}
 		}
 	}
 	/////////////////////////////////////////////////////////////////////	

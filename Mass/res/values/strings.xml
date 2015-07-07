@@ -441,6 +441,7 @@
     <string name="Unit_F">℉</string>
     <string name="Check_Radio_mode_is_AUX_mode">(Check Radio mode is AUX mode)</string>
     <string name="Reverse_camera">(Reverse Camera)</string>
+    <string name="Language_Warning"> To ensure that the entire system reflects the change, Key OFF and ON.</string>
     <!-- Menu Preference End -->
     <!-- Menu Multimedia Start -->
     <string name="Media_Palyer">Media Player</string>

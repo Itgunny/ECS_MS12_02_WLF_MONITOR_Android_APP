@@ -272,7 +272,7 @@ public class MachineMonitoringFragment2 extends ParentFragment{
 		}
 	}
 	public void FrontAxleDisplay(int _data, int _status, int _unit){
-		textViewFrontAxle.setText(ParentActivity.GetTemp(_data,_unit));
+		textViewFrontAxle.setText(ParentActivity.GetTempAxle(_data,_unit));
 		if(_unit == ParentActivity.UNIT_TEMP_F){
 			textViewFrontAxleUnit.setText(ParentActivity.getResources().getString(string.F));
 		}else{

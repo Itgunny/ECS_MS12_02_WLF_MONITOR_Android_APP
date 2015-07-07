@@ -458,14 +458,14 @@ public class FaultHistoryLoggedFragment extends ParentFragment{
 					SPN = Err_Mcu[i] & 0xffff;
 					SPN |= ((Err_Mcu[i] & 0xe00000) >> 5);
 					FMI = ((Err_Mcu[i] & 0x1f0000) >> 16);
-//					if((SPN == 0) && (FMI == 0))
-//					{
-//						if(CursurIndex == 7 && CursurDetailIndex == i)
-//							adapter.addItem(new IconTextItemFault(null,ParentActivity.getResources().getDrawable(R.drawable.menu_information_fault_down_btn_selected), "HCESPN :      FMI :  ", "", ""));
-//						else
-//							adapter.addItem(new IconTextItemFault(null,ParentActivity.getResources().getDrawable(R.drawable.menu_information_fault_down_btn), "HCESPN :      FMI :  ", "", ""));
-//					}
-//					else
+					if((SPN == 0) && (FMI == 0))
+					{
+						if(CursurIndex == 7 && CursurDetailIndex == i)
+							adapter.addItem(new IconTextItemFault(null,ParentActivity.getResources().getDrawable(R.drawable.menu_information_fault_down_btn_selected), "HCESPN :      FMI :  ", "", ""));
+						else
+							adapter.addItem(new IconTextItemFault(null,ParentActivity.getResources().getDrawable(R.drawable.menu_information_fault_down_btn), "HCESPN :      FMI :  ", "", ""));
+					}
+					else
 					{
 						if(CursurIndex == 7 && CursurDetailIndex == i)
 						{
@@ -489,14 +489,14 @@ public class FaultHistoryLoggedFragment extends ParentFragment{
 					SPN |= ((Err_Ecu[i] & 0xe00000) >> 5);
 					FMI = ((Err_Ecu[i] & 0x1f0000) >> 16); 
 
-//					if((SPN == 0) && (FMI == 0))
-//					{
-//						if(CursurIndex == 7 && CursurDetailIndex == i)
-//							adapter.addItem(new IconTextItemFault(null,ParentActivity.getResources().getDrawable(R.drawable.menu_information_fault_down_btn_selected), "SPN :      FMI :  ", "", ""));
-//						else
-//							adapter.addItem(new IconTextItemFault(null,ParentActivity.getResources().getDrawable(R.drawable.menu_information_fault_down_btn), "SPN :      FMI :  ", "", ""));
-//					}
-//					else
+					if((SPN == 0) && (FMI == 0))
+					{
+						if(CursurIndex == 7 && CursurDetailIndex == i)
+							adapter.addItem(new IconTextItemFault(null,ParentActivity.getResources().getDrawable(R.drawable.menu_information_fault_down_btn_selected), "SPN :      FMI :  ", "", ""));
+						else
+							adapter.addItem(new IconTextItemFault(null,ParentActivity.getResources().getDrawable(R.drawable.menu_information_fault_down_btn), "SPN :      FMI :  ", "", ""));
+					}
+					else
 					{
 						if(CursurIndex == 7 && CursurDetailIndex == i)
 							adapter.addItem(new IconTextItemFault(null,ParentActivity.getResources().getDrawable(R.drawable.menu_information_fault_down_btn_selected), "SPN : " + Integer.toString(SPN)
@@ -509,14 +509,14 @@ public class FaultHistoryLoggedFragment extends ParentFragment{
 				else if(Mode == Home.REQ_ERR_TM_LOGGED)		// TCU
 				{
 					Err_Tcu = CAN1Comm.Get_TcuErr_Logged();
-//					if(Err_Tcu[i] == 0)
-//					{
-//						if(CursurIndex == 7 && CursurDetailIndex == i)
-//							adapter.addItem(new IconTextItemFault(null,ParentActivity.getResources().getDrawable(R.drawable.menu_information_fault_down_btn_selected), "No :      ", "", ""));
-//						else
-//							adapter.addItem(new IconTextItemFault(null,ParentActivity.getResources().getDrawable(R.drawable.menu_information_fault_down_btn), "No :      ", "", ""));
-//					}
-//					else
+					if(Err_Tcu[i] == 0)
+					{
+						if(CursurIndex == 7 && CursurDetailIndex == i)
+							adapter.addItem(new IconTextItemFault(null,ParentActivity.getResources().getDrawable(R.drawable.menu_information_fault_down_btn_selected), "No :      ", "", ""));
+						else
+							adapter.addItem(new IconTextItemFault(null,ParentActivity.getResources().getDrawable(R.drawable.menu_information_fault_down_btn), "No :      ", "", ""));
+					}
+					else
 					{
 						if(CursurIndex == 7 && CursurDetailIndex == i)
 							adapter.addItem(new IconTextItemFault(null,ParentActivity.getResources().getDrawable(R.drawable.menu_information_fault_down_btn_selected), "No : " + Integer.toHexString(Err_Tcu[i]), "", ""));
@@ -531,14 +531,14 @@ public class FaultHistoryLoggedFragment extends ParentFragment{
 					SPN = Err_EHCU[i] & 0x0000FFFF;
 					FMI = ((Err_EHCU[i] & 0x00FF0000) >> 16);
 
-//					if((SPN == 0) && (FMI == 0))
-//					{
-//						if(CursurIndex == 7 && CursurDetailIndex == i)
-//							adapter.addItem(new IconTextItemFault(null,ParentActivity.getResources().getDrawable(R.drawable.menu_information_fault_down_btn_selected), "SPN :      FMI :  ", "", ""));
-//						else
-//							adapter.addItem(new IconTextItemFault(null,ParentActivity.getResources().getDrawable(R.drawable.menu_information_fault_down_btn), "SPN :      FMI :  ", "", ""));
-//					}
-//					else
+					if((SPN == 0) && (FMI == 0))
+					{
+						if(CursurIndex == 7 && CursurDetailIndex == i)
+							adapter.addItem(new IconTextItemFault(null,ParentActivity.getResources().getDrawable(R.drawable.menu_information_fault_down_btn_selected), "SPN :      FMI :  ", "", ""));
+						else
+							adapter.addItem(new IconTextItemFault(null,ParentActivity.getResources().getDrawable(R.drawable.menu_information_fault_down_btn), "SPN :      FMI :  ", "", ""));
+					}
+					else
 					{
 						if(CursurIndex == 7 && CursurDetailIndex == i)
 							adapter.addItem(new IconTextItemFault(null,ParentActivity.getResources().getDrawable(R.drawable.menu_information_fault_down_btn_selected), "SPN : " + Integer.toString(SPN)

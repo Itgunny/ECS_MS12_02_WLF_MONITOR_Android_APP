@@ -650,26 +650,27 @@ public class LanguageListFragment extends ParentFragment{
 		ParentActivity.SavePref();
 		ParentActivity.ResetPopup(); 		// ++, --, 150305 bwk
 		
-		if(ParentActivity.OldScreenIndex == ParentActivity.SCREEN_STATE_MENU_PREFERENCE_DISPLAYTYPELANG_TOP)
-		{
-			if(ParentActivity.AnimationRunningFlag == true)
-			{
-				Log.d(TAG, "ParentActivity.AnimationRunningFlag == true");
-				return;
-			}
-			else
-				ParentActivity.StartAnimationRunningTimer();
-			
-			ParentActivity._MenuBaseFragment.showDisplayTypeLangAnimation();
-		}
-		else
-		{
-			// ++, 150309 bwk
-			//ParentActivity._MainChangeAnimation.StartChangeAnimation(ParentActivity._MainBBaseFragment);
-			ParentActivity.showMainScreen();
-			// --, 150309 bwk
-			ParentActivity.OldScreenIndex = 0;			
-		}
+//		if(ParentActivity.OldScreenIndex == ParentActivity.SCREEN_STATE_MENU_PREFERENCE_DISPLAYTYPELANG_TOP)
+//		{
+//			if(ParentActivity.AnimationRunningFlag == true)
+//			{
+//				Log.d(TAG, "ParentActivity.AnimationRunningFlag == true");
+//				return;
+//			}
+//			else
+//				ParentActivity.StartAnimationRunningTimer();
+//			
+//			ParentActivity._MenuBaseFragment.showDisplayTypeLangAnimation();
+//		}
+//		else
+//		{
+//			// ++, 150309 bwk
+//			//ParentActivity._MainChangeAnimation.StartChangeAnimation(ParentActivity._MainBBaseFragment);
+//			ParentActivity.showMainScreen();
+//			// --, 150309 bwk
+//			ParentActivity.OldScreenIndex = 0;			
+//		}
+		ParentActivity.showLanguageChangePopup();
 	}
 	
 }

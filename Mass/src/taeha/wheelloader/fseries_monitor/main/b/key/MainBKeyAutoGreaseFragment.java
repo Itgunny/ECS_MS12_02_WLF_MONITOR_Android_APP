@@ -30,7 +30,7 @@ public class MainBKeyAutoGreaseFragment extends ParentFragment{
 	//VALUABLE////////////////////////////////////////
 	int AutoGrease;
 	int SelectAutoGrease;
-
+	int OldAutoGrease;
 	int CursurIndex;
 	Handler HandleCursurDisplay;
 	//////////////////////////////////////////////////
@@ -83,6 +83,7 @@ public class MainBKeyAutoGreaseFragment extends ParentFragment{
 		super.InitValuables();
 		AutoGrease = CAN1Comm.Get_AutoGreaseOperationStatus_3449_PGN65527();
 		SelectAutoGrease = AutoGrease;
+		OldAutoGrease = -1;
 		CursurIndex = 1;
 		CursurDisplay(CursurIndex);
 	}
@@ -125,15 +126,20 @@ public class MainBKeyAutoGreaseFragment extends ParentFragment{
 	}
 	/////////////////////////////////////////////////////////////////////	
 	public void KeyBGDisplay(int Data){
-		switch (Data){
-		case CAN1CommManager.DATA_STATE_NOTAVAILABLE:
-			layoutAvailable.setVisibility(View.INVISIBLE);
-			layoutNotAvailable.setVisibility(View.VISIBLE);
-			break;
-		default:
-			layoutAvailable.setVisibility(View.VISIBLE);
-			layoutNotAvailable.setVisibility(View.INVISIBLE);
-			break;
+		if(OldAutoGrease != Data)
+		{
+			OldAutoGrease = Data;
+			switch (Data){
+			case CAN1CommManager.DATA_STATE_NOTAVAILABLE:
+				ParentActivity.StartBackHomeTimer();
+				layoutAvailable.setVisibility(View.INVISIBLE);
+				layoutNotAvailable.setVisibility(View.VISIBLE);
+				break;
+			default:
+				layoutAvailable.setVisibility(View.VISIBLE);
+				layoutNotAvailable.setVisibility(View.INVISIBLE);
+				break;
+			}
 		}
 	}
 	/////////////////////////////////////////////////////////////////////	
@@ -172,6 +178,7 @@ public class MainBKeyAutoGreaseFragment extends ParentFragment{
 			CursurDisplay(CursurIndex);
 			break;
 		}
+		ParentActivity.StartBackHomeTimer();
 	}
 	public void ClickRight(){
 		switch (CursurIndex) {
@@ -185,6 +192,7 @@ public class MainBKeyAutoGreaseFragment extends ParentFragment{
 			CursurDisplay(CursurIndex);
 			break;
 		}
+		ParentActivity.StartBackHomeTimer();
 	}
 	public void ClickEnter(){
 		switch (CursurIndex) {

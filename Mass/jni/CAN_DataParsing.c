@@ -737,6 +737,7 @@ void UART1_SeperateData_NEWCAN2(int Priority, int PF, int PS, int SourceAddress,
 {
 	switch (SourceAddress) {
 		case SA_SMK:
+			__android_log_print(ANDROID_LOG_INFO, "SA_SMK","Receive PF[%d] PS[%d]\n",PF,PS);
 			break;
 		case SA_MCU:
 		default:
@@ -2014,10 +2015,12 @@ void UART3_SeparateData(unsigned char RES_Kind) {
 		}
 
 		rx_smk_result.SMK_Tag_Reg_Count = RX_RES_SMK.Count;
+		rx_smk_result.SMK_Response_Code = RX_RES_SMK.Response_Code;
+		rx_smk_result.SMK_Response_Flag = RX_RES_SMK.Response_Flag;
 
 		gRecvSMK = 1;
-		__android_log_print(ANDROID_LOG_INFO, "NATIVE", "SMK Auth[0x%x] Msg[0x%x] Count[0x%x]",rx_smk_result.SMK_Auth_Result
-				,rx_smk_result.SMK_Msg_Result,rx_smk_result.SMK_Tag_Reg_Count);
+		__android_log_print(ANDROID_LOG_INFO, "NATIVE", "SMK Auth[0x%x] Msg[0x%x] Count[0x%x] ReCode[0x%x] ReFlag[0x%x]",rx_smk_result.SMK_Auth_Result
+				,rx_smk_result.SMK_Msg_Result,rx_smk_result.SMK_Tag_Reg_Count,rx_smk_result.SMK_Response_Code,rx_smk_result.SMK_Response_Flag);
 		break;
 	case LampRES:
 
@@ -2107,7 +2110,7 @@ void *Thread_Read_UART1(void *data)
 	while (bReadRunningFlag_UART1)
 	{
 		dwRead = 0;
-		//	占쏙옙占�占쏙옙占쏙옙 占쏙옙 1byte占쏙옙 占싻곤옙, 占쏙옙占쏙옙 占쏙옙占쏙옙占싶몌옙 占쏙옙占쏙옙占쏙옙 占쏙옙占쏙옙占쏙옙占싶댐옙 占쏙옙 占쏙옙占쏙옙占쏙옙占�占쌨는댐옙.
+		//	통신 시작 후 1byte씩 읽고, 정상 데이터를 수신한 다음부터는 원래 싸이즈로 받는다.
 		if (UART1ReadFlag == 0 || UART1ReadFlag == 1)
 		{
 			dwRead = read(fd_UART1, UART1_ReadBuff, 1);
@@ -2129,7 +2132,7 @@ void *Thread_Read_UART1(void *data)
 
 		}
 
-		//	CAN PACKET 占쏙옙占쏙옙占쏙옙 占싣니몌옙 占쏙옙占쏙옙 占쏙옙占쏙옙 占쏙옙占�占쏙옙占쏙옙占쏙옙.
+		//	CAN PACKET 구조가 아니면 들어온 것을 모두 버린다.
 		if (UART1ReadFlag == 2)
 		{
 			if (UART1_ReadBuff[0] != SERIAL_RX_STX || UART1_ReadBuff[UART1_RXPACKET_SIZE - 1] != SERIAL_RX_ETX)
@@ -2179,7 +2182,7 @@ void *Thread_Read_UART1(void *data)
 				}
 			}
 		}
-		sleep(0); // 占쌕몌옙 Thread 占쏙옙占쏙옙 占쏙옙占쏙옙占쏙옙 占쏙옙占쏙옙 占쏙옙占�
+		sleep(0); // 다른 Thread 들의 점유를 위해 사용
 	}
 	__android_log_print(ANDROID_LOG_INFO, "NATIVE", "Thread_Read1 Finish\n");
 	(*glpVM)->DetachCurrentThread(glpVM);
@@ -2206,7 +2209,7 @@ void *Thread_Read_UART3(void *data) {
 
 	while (bReadRunningFlag_UART3) {
 		dwRead = 0;
-		//	占쏙옙占�占쏙옙占쏙옙 占쏙옙 1byte占쏙옙 占싻곤옙, 占쏙옙占쏙옙 占쏙옙占쏙옙占싶몌옙 占쏙옙占쏙옙占쏙옙 占쏙옙占쏙옙占쏙옙占싶댐옙 占쏙옙 占쏙옙占쏙옙占쏙옙占�占쌨는댐옙.
+		//	통신 시작 후 1byte씩 읽고, 정상 데이터를 수신한 다음부터는 원래 싸이즈로 받는다.
 		if (UART3ReadFlag == 0 || UART3ReadFlag == 1) {
 			dwRead = read(fd_UART3, UART3_ReadBuff, 1);
 			__android_log_print(ANDROID_LOG_INFO, "UART3_ReadBuff","UART3_ReadBuff UART3_ReadBuff[0x%x]\n",UART3_ReadBuff[0]);
@@ -2219,7 +2222,7 @@ void *Thread_Read_UART3(void *data) {
 			//												  ,UART3_ReadBuff[8],UART3_ReadBuff[9],UART3_ReadBuff[10]);
 		}
 
-		//	CAN PACKET 占쏙옙占쏙옙占쏙옙 占싣니몌옙 占쏙옙占쏙옙 占쏙옙占쏙옙 占쏙옙占�占쏙옙占쏙옙占쏙옙.
+		//	CMD PACKET 구조가 아니면 들어온 것을 모두 버린다.
 		if (UART3ReadFlag == 2) {
 			if (UART3_ReadBuff[UART3_RXPACKET_SIZE - 1] != SERIAL_RX_ETX) {
 				//if (dwRead == UART3_RXPACKET_SIZE) {
@@ -2270,7 +2273,7 @@ void *Thread_Read_UART3(void *data) {
 				}
 			}
 		}
-		sleep(0); // 占쌕몌옙 Thread 占쏙옙占쏙옙 占쏙옙占쏙옙占쏙옙 占쏙옙占쏙옙 占쏙옙占�
+		sleep(0); // 다른 Thread 들의 점유를 위해 사용
 	}
 	__android_log_print(ANDROID_LOG_INFO, "NATIVE", "Thread_Read3 Finish\n");
 	(*glpVM)->DetachCurrentThread(glpVM);
@@ -2303,7 +2306,7 @@ void *Thread_Read_UART1(void *data)
 	while (bReadRunningFlag_UART1)
 	{
 		dwRead = 0;
-		//	占쏙옙占�占쏙옙占쏙옙 占쏙옙 1byte占쏙옙 占싻곤옙, 占쏙옙占쏙옙 占쏙옙占쏙옙占싶몌옙 占쏙옙占쏙옙占쏙옙 占쏙옙占쏙옙占쏙옙占싶댐옙 占쏙옙 占쏙옙占쏙옙占쏙옙占�占쌨는댐옙.
+		//	통신 시작 후 1byte씩 읽고, 정상 데이터를 수신한 다음부터는 원래 싸이즈로 받는다.
 		if (UART1ReadFlag == 0)
 		{
 			dwRead = read(fd_UART1, &UART1_SingleBuff, 1);
@@ -2322,7 +2325,7 @@ void *Thread_Read_UART1(void *data)
 			//					,UART1_ReadBuff[10],UART1_ReadBuff[11],UART1_ReadBuff[12],UART1_ReadBuff[13],UART1_ReadBuff[14]);
 		}
 
-		//	CAN PACKET 占쏙옙占쏙옙占쏙옙 占싣니몌옙 占쏙옙占쏙옙 占쏙옙占쏙옙 占쏙옙占�占쏙옙占쏙옙占쏙옙.
+		//	CAN PACKET 구조가 아니면 들어온 것을 모두 버린다.
 		if (UART1ReadFlag == 1)
 		{
 			if (UART1_ReadBuff[0] != SERIAL_RX_STX || UART1_ReadBuff[1] != SERIAL_RX_ID || UART1_ReadBuff[UART1_RXPACKET_SIZE - 1] != SERIAL_RX_ETX)
@@ -2393,7 +2396,7 @@ void *Thread_Read_UART1(void *data)
 
 		}
 
-		sleep(0); // 占쌕몌옙 Thread 占쏙옙占쏙옙 占쏙옙占쏙옙占쏙옙 占쏙옙占쏙옙 占쏙옙占�
+		sleep(0); // 다른 Thread 들의 점유를 위해 사용
 	}
 	__android_log_print(ANDROID_LOG_INFO, "NATIVE", "Thread_Read1 Finish\n");
 	(*glpVM)->DetachCurrentThread(glpVM);
@@ -2427,7 +2430,7 @@ void *Thread_Read_UART3(void *data) {
 	while (bReadRunningFlag_UART3)
 	{
 		dwRead = 0;
-		//	占쏙옙占�占쏙옙占쏙옙 占쏙옙 1byte占쏙옙 占싻곤옙, 占쏙옙占쏙옙 占쏙옙占쏙옙占싶몌옙 占쏙옙占쏙옙占쏙옙 占쏙옙占쏙옙占쏙옙占싶댐옙 占쏙옙 占쏙옙占쏙옙占쏙옙占�占쌨는댐옙.
+		//	통신 시작 후 1byte씩 읽고, 정상 데이터를 수신한 다음부터는 원래 싸이즈로 받는다.
 		if (UART3ReadFlag == 0)
 		{
 			dwRead = read(fd_UART3, &UART3_SingleBuff, 1);
@@ -2438,7 +2441,7 @@ void *Thread_Read_UART3(void *data) {
 			dwRead = read(fd_UART3, UART3_ReadBuff, UART3_RXPACKET_SIZE);
 		}
 
-		//	CMD PACKET 占쏙옙占쏙옙占쏙옙 占싣니몌옙 占쏙옙占쏙옙 占쏙옙占쏙옙 占쏙옙占�占쏙옙占쏙옙占쏙옙.
+		//	CMD PACKET 구조가 아니면 들어온 것을 모두 버린다.
 		if (UART3ReadFlag == 1)
 		{
 			if (UART3_ReadBuff[0] != SERIAL_RX_STX || UART3_ReadBuff[UART3_RXPACKET_SIZE - 1] != SERIAL_RX_ETX)
@@ -2498,7 +2501,7 @@ void *Thread_Read_UART3(void *data) {
 
 		}
 
-		sleep(0); // 占쌕몌옙 Thread 占쏙옙占쏙옙 占쏙옙占쏙옙占쏙옙 占쏙옙占쏙옙 占쏙옙占�
+		sleep(0); // 다른 Thread 들의 점유를 위해 사용
 	}
 	__android_log_print(ANDROID_LOG_INFO, "NATIVE", "Thread_Read1 Finish\n");
 	(*glpVM)->DetachCurrentThread(glpVM);

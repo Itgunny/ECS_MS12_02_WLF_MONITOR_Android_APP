@@ -31,6 +31,7 @@ public class MainBKeyBeaconLampFragment extends ParentFragment{
 	int BeaconLamp;
 	int SelectBeaconLamp;
 	int CursurIndex;
+	int OldBeconLamp;
 	Handler HandleCursurDisplay;
 	//////////////////////////////////////////////////
 	
@@ -85,6 +86,7 @@ public class MainBKeyBeaconLampFragment extends ParentFragment{
 		super.InitValuables();
 		BeaconLamp = CAN1Comm.Get_BeaconLampOperationStatus_3444_PGN65527();
 		SelectBeaconLamp = BeaconLamp;
+		OldBeconLamp = -1;
 	}
 	@Override
 	protected void InitButtonListener() {
@@ -125,15 +127,20 @@ public class MainBKeyBeaconLampFragment extends ParentFragment{
 	}
 	/////////////////////////////////////////////////////////////////////	
 	public void KeyBGDisplay(int Data){
-		switch (Data){
-		case CAN1CommManager.DATA_STATE_NOTAVAILABLE:
-			layoutAvailable.setVisibility(View.INVISIBLE);
-			layoutNotAvailable.setVisibility(View.VISIBLE);
-			break;
-		default:
-			layoutAvailable.setVisibility(View.VISIBLE);
-			layoutNotAvailable.setVisibility(View.INVISIBLE);
-			break;
+		if(OldBeconLamp != Data)
+		{
+			OldBeconLamp = Data;
+			switch (Data){
+			case CAN1CommManager.DATA_STATE_NOTAVAILABLE:
+				ParentActivity.StartBackHomeTimer();
+				layoutAvailable.setVisibility(View.INVISIBLE);
+				layoutNotAvailable.setVisibility(View.VISIBLE);
+				break;
+			default:
+				layoutAvailable.setVisibility(View.VISIBLE);
+				layoutNotAvailable.setVisibility(View.INVISIBLE);
+				break;
+			}
 		}
 	}
 	/////////////////////////////////////////////////////////////////////	
@@ -240,6 +247,7 @@ public class MainBKeyBeaconLampFragment extends ParentFragment{
 		default:
 			break;
 		}
+		ParentActivity.StartBackHomeTimer();
 	}
 	
 }

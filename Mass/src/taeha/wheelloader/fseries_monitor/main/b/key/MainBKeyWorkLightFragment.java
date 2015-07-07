@@ -275,6 +275,7 @@ public class MainBKeyWorkLightFragment extends ParentFragment{
 		default:
 			break;
 		}
+		ParentActivity.StartBackHomeTimer();
 	}
 	
 }
