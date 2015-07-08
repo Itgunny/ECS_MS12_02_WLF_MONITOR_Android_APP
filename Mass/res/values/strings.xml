@@ -147,7 +147,7 @@
     <string name="Rear_Axle_Temp">Rear Axle Temp.</string>
     <string name="A_DAYS_FUEL_USED">A DAYS FUEL USED</string>
     <string name="A_Days_Fuel_Used">A Days Fuel Used</string>
-    <string name="Axle_Warning_Popup">"CAUTION!\nOne of axles exceeds allowable oil temperature‼/nStop operating the machine and cool down axle oil\nuntil warning lamp goes off"</string>
+    <string name="Axle_Warning_Popup">"CAUTION!\nOne of axles exceeds allowable oil temperature‼\nStop operating the machine and cool down axle oil\nuntil warning lamp goes off"</string>
     <string name="Boom_Detent_Mode">Boom Detent Mode</string>
     <string name="Bucket_Detent_Mode">Bucket Detent Mode</string>
     <!-- Main End -->
@@ -441,7 +441,7 @@
     <string name="Unit_F">℉</string>
     <string name="Check_Radio_mode_is_AUX_mode">(Check Radio mode is AUX mode)</string>
     <string name="Reverse_camera">(Reverse Camera)</string>
-    <string name="Language_Warning"> To ensure that the entire system reflects the change, Key OFF and ON.</string>
+    <string name="Language_Warning">To ensure that the entire system reflects the change, please Restart the machine.</string>
     <!-- Menu Preference End -->
     <!-- Menu Multimedia Start -->
     <string name="Media_Palyer">Media Player</string>

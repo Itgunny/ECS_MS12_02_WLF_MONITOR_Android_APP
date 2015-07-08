@@ -75,7 +75,7 @@ public class Home extends Activity {
 	public static final int VERSION_LOW 		= 0;
 	public static final int VERSION_SUB_HIGH 	= 0;
 	public static final int VERSION_SUB_LOW 	= 6;
-	public static final int VERSION_TAEHA		= 1;
+	public static final int VERSION_TAEHA		= 2;
 	////1.0.2.3
 	// UI B 안 최초 적용 2014.12.10
 	////1.0.2.4
@@ -571,6 +571,11 @@ public class Home extends Activity {
 	// 8. 버튼키 입력 일정 시간(10초) 후 메인화면으로 복귀
 	// 9. 다국어 변경 시 팝업 추가 (시스템 적용은 KEY OFF/ON하라는 문구)
 	// 10. 각도보정 3번째 이미지 변경(아래로 향하도록)
+	//// v2.0.0.62
+	// 1. 다국어 변경시 popup 내용 HHI 사양 적용
+	// 2. Axle 경고로 인해 장비상태가 변경되었을 때 작업량인 경우 아래 미표기로 변경
+	// 3. Axle 경고 popup 내용 /n -> \n 오타 수정
+	// 4. 역회전 popup 종료 시 역회전 꺼짐 패킷 전송
 	//////////////////////////////////////////////////////////////////////////////////////
 	
 	// TAG
@@ -2996,10 +3001,18 @@ public class Home extends Activity {
 						if((MachineStatusUpperIndex != CAN1CommManager.DATA_STATE_MACHINESTATUS_FRONTAXLE)
 								&& (MachineStatusLowerIndex != CAN1CommManager.DATA_STATE_MACHINESTATUS_FRONTAXLE))
 						{
-							if(MachineStatusUpperIndex != CAN1CommManager.DATA_STATE_MACHINESTATUS_REARAXLE)
+							if(MachineStatusUpperIndex == CAN1CommManager.DATA_STATE_MACHINESTATUS_WEIGHING)
+							{
 								MachineStatusUpperIndex = CAN1CommManager.DATA_STATE_MACHINESTATUS_FRONTAXLE;
-							else 
-								MachineStatusLowerIndex = CAN1CommManager.DATA_STATE_MACHINESTATUS_FRONTAXLE;
+								MachineStatusLowerIndex = CAN1CommManager.DATA_STATE_MACHINESTATUS_NOSELECT;
+							}
+							else
+							{
+								if(MachineStatusUpperIndex != CAN1CommManager.DATA_STATE_MACHINESTATUS_REARAXLE)
+									MachineStatusUpperIndex = CAN1CommManager.DATA_STATE_MACHINESTATUS_FRONTAXLE;
+								else 
+									MachineStatusLowerIndex = CAN1CommManager.DATA_STATE_MACHINESTATUS_FRONTAXLE;
+							}
 						}
 
 					}
@@ -3010,10 +3023,18 @@ public class Home extends Activity {
 						if((MachineStatusUpperIndex != CAN1CommManager.DATA_STATE_MACHINESTATUS_REARAXLE)
 								&& (MachineStatusLowerIndex != CAN1CommManager.DATA_STATE_MACHINESTATUS_REARAXLE))
 						{
-							if(MachineStatusUpperIndex != CAN1CommManager.DATA_STATE_MACHINESTATUS_FRONTAXLE)
+							if(MachineStatusUpperIndex == CAN1CommManager.DATA_STATE_MACHINESTATUS_WEIGHING)
+							{
 								MachineStatusUpperIndex = CAN1CommManager.DATA_STATE_MACHINESTATUS_REARAXLE;
-							else 
-								MachineStatusLowerIndex = CAN1CommManager.DATA_STATE_MACHINESTATUS_REARAXLE;
+								MachineStatusLowerIndex = CAN1CommManager.DATA_STATE_MACHINESTATUS_NOSELECT;
+							}
+							else
+							{
+								if(MachineStatusUpperIndex != CAN1CommManager.DATA_STATE_MACHINESTATUS_FRONTAXLE)
+									MachineStatusUpperIndex = CAN1CommManager.DATA_STATE_MACHINESTATUS_REARAXLE;
+								else 
+									MachineStatusLowerIndex = CAN1CommManager.DATA_STATE_MACHINESTATUS_REARAXLE;
+							}
 						}
 						
 					}

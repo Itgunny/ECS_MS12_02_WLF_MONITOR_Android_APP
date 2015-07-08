@@ -93,6 +93,10 @@ public class CoolingFanManualPopup extends ParentPopup{
 	public void dismiss() {
 		// TODO Auto-generated method stub
 		super.dismiss();
+		CAN1Comm.Set_CoolingFanReverseManual_PGN61184_61(0);
+		CAN1Comm.TxCANToMCU(61);
+		CAN1Comm.Set_CoolingFanReverseManual_PGN61184_61(3);
+		
 		ParentActivity.ScreenIndex = ParentActivity.SCREEN_STATE_MENU_MODE_ETC_COOLINGFAN_TOP;
 		try {
 			ParentActivity._MenuBaseFragment._CoolingFanReverseModeFragment.CursurDisplay(5);

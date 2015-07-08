@@ -439,7 +439,7 @@
     <string name="Unit_F">화씨</string>
     <string name="Check_Radio_mode_is_AUX_mode">(라디오 모드 설정을 AUX 모드로 변경해야 합니다)</string>
     <string name="Reverse_camera">(후진기어연동 전용)</string>
-    <string name="Language_Warning">전 시스템에 적용하기 위해서 KEY를  OFF/ON 하여 주십시오.</string>
+    <string name="Language_Warning">변경 사항을 전 시스템에 적용하기 위해서 장비를 KEY OFF하여 재시작 해주십시오.</string>
     <!-- Menu Preference End -->
     <!-- Menu Multimedia Start -->
     <string name="Media_Palyer">미디어 플레이어</string>
