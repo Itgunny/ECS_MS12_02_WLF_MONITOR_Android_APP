@@ -63,6 +63,7 @@ public class MainARightDownTMShiftModeFragment extends ParentFragment{
 
 		EnableRadioButton(false);
 		StartEnableButtonTimer();
+		ParentActivity.StartBackHomeTimer();
 		ParentActivity.ScreenIndex = ParentActivity.SCREEN_STATE_MAIN_A_RIGHTDOWN_SHIFTMODE;
 		HandleCursurDisplay = new Handler() {
 			@Override

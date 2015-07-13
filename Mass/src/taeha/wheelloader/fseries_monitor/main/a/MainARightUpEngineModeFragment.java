@@ -63,6 +63,7 @@ public class MainARightUpEngineModeFragment extends ParentFragment{
 
 		EnableRadioButton(false);
 		StartEnableButtonTimer();
+		ParentActivity.StartBackHomeTimer();
 		ParentActivity.ScreenIndex = ParentActivity.SCREEN_STATE_MAIN_A_RIGHTUP_ENGINE_MODE;
 		HandleCursurDisplay = new Handler() {
 			@Override

@@ -74,8 +74,8 @@ public class Home extends Activity {
 	public static final int VERSION_HIGH 		= 2;
 	public static final int VERSION_LOW 		= 0;
 	public static final int VERSION_SUB_HIGH 	= 0;
-	public static final int VERSION_SUB_LOW 	= 6;
-	public static final int VERSION_TAEHA		= 2;
+	public static final int VERSION_SUB_LOW 	= 7;
+	public static final int VERSION_TAEHA		= 0;
 	////1.0.2.3
 	// UI B 안 최초 적용 2014.12.10
 	////1.0.2.4
@@ -571,11 +571,20 @@ public class Home extends Activity {
 	// 8. 버튼키 입력 일정 시간(10초) 후 메인화면으로 복귀
 	// 9. 다국어 변경 시 팝업 추가 (시스템 적용은 KEY OFF/ON하라는 문구)
 	// 10. 각도보정 3번째 이미지 변경(아래로 향하도록)
-	//// v2.0.0.62
+	//// v2.0.0.7
 	// 1. 다국어 변경시 popup 내용 HHI 사양 적용
 	// 2. Axle 경고로 인해 장비상태가 변경되었을 때 작업량인 경우 아래 미표기로 변경
 	// 3. Axle 경고 popup 내용 /n -> \n 오타 수정
 	// 4. 역회전 popup 종료 시 역회전 꺼짐 패킷 전송
+	// 5. 스마트키 통신 인증 시 태그 개수 받을 수 있게 변경
+	// 6. 버튼키 입력 일정 시간(10초) 후 메인화면으로 복귀 사양 적용된 페이지 입력값 없어도 10초 후 복귀
+	//	- KEY : AutoGrease, MirrorHeat
+	//	- Main : FuelSelect, MachineStatusSelect, TMCCOMode/ICCOMode/ShiftMode/TCLockUp, EngineMode, HourOdometerSelect
+	// 7. 10초 복귀 중일 때 미적용된 페이지 버튼 누를 경우에도 복귀되는 버그 수정
+	// 8. 역회전 관련 버그 개선
+	//	- [실행] 커서 선택 후 ENTER 키 입력 -> 이때 역회전 터치시 방향키 작동 안됨 -> CurserIndex 추가
+	//	- [실행] 커서 선택 후 ENTER 키 입력 -> 이때 ESC 키 입력 시 수동 역회전 꺼지지 않고 계속 동작 -> 팝업꺼질 경우 OFF 프로토콜 송부
+
 	//////////////////////////////////////////////////////////////////////////////////////
 	
 	// TAG
@@ -583,6 +592,7 @@ public class Home extends Activity {
 	
 	public  static final int SCREEN_STATE_FILTER 											= 0xF0000000;
 	public	static final int SCREEN_STATE_MAIN_FILTER 										= 0x0F000000;
+	public	static final int SCREEN_STATE_MAIN_KEY_FILTER 									= 0x00F00000;
 	
 	public  static final int SCREEN_STATE_MAIN_B_TOP 										= 0x10000000;
 	
@@ -4054,56 +4064,64 @@ public class Home extends Activity {
 						CancelBackHomeTimer();
 					} else if(((ScreenIndex & SCREEN_STATE_FILTER) == SCREEN_STATE_MAIN_A_TOP)
 							|| ((ScreenIndex & SCREEN_STATE_FILTER) == SCREEN_STATE_MAIN_B_TOP)) {
-						if (BackHomeCount++ >= 10) {
-
-							if ((ScreenIndex & SCREEN_STATE_MAIN_FILTER) == 0x06000000) {
-								Log.d(TAG, "BackHomeKey!!!");
-								if (DisplayType == DISPLAY_TYPE_A) {
-									_MainBBaseFragment.showKeytoDefaultScreenAnimation();
-								} else {
-									_MainABaseFragment.showKeytoDefaultScreenAnimation();
-								}
-							} else if((ScreenIndex & SCREEN_STATE_MAIN_FILTER) == 0x01000000){
-								Log.d(TAG, "BackHomeRightUp!!!");
-								SavePref();
-								if (DisplayType == DISPLAY_TYPE_A) {
-									_MainBBaseFragment.showRightUptoDefaultScreenAnimation();
-								} else {
-									_MainABaseFragment.showRightUptoDefaultScreenAnimation();
-								}
-							} else if((ScreenIndex & SCREEN_STATE_MAIN_FILTER) == 0x02000000){
-								Log.d(TAG, "BackHomeRightDown!!!");
-								SavePref();
-								if (DisplayType == DISPLAY_TYPE_A) {
-									_MainBBaseFragment.showRightDowntoDefaultScreenAnimation();
-								} else {
-									_MainABaseFragment.showRightDowntoDefaultScreenAnimation();
-								}
-							} else if((ScreenIndex & SCREEN_STATE_MAIN_FILTER) == 0x03000000){
-								Log.d(TAG, "BackHomeLeftUp!!!");
-								SavePref();
-								if (DisplayType == DISPLAY_TYPE_A) {
-									_MainBBaseFragment.showLeftUptoDefaultScreenAnimation();
-								} else {
-									_MainABaseFragment.showLeftUptoDefaultScreenAnimation();
-								}
-							} else if((ScreenIndex & SCREEN_STATE_MAIN_FILTER) == 0x04000000){
-								Log.d(TAG, "BackHomeLeftDown!!!");
-								SavePref();
-								if (DisplayType == DISPLAY_TYPE_A) {
-									_MainBBaseFragment.showLeftDowntoDefaultScreenAnimation();
-								} else {
-									_MainABaseFragment.showLeftDowntoDefaultScreenAnimation();
-								}
-							} else {
-								Log.d(TAG, "BackHome!!!" + Integer.toHexString(ScreenIndex));
-								showMainScreen();
-								setScreenIndex();
-							}
-							BackHomeCount = 0xff;
+						if(((ScreenIndex & SCREEN_STATE_MAIN_FILTER) == 0x06000000) &&
+							(((ScreenIndex & SCREEN_STATE_MAIN_KEY_FILTER) == 0x00400000) || ((ScreenIndex & SCREEN_STATE_MAIN_KEY_FILTER) == 0x00500000)
+									|| ((ScreenIndex & SCREEN_STATE_MAIN_KEY_FILTER) == 0x00600000) || ((ScreenIndex & SCREEN_STATE_MAIN_KEY_FILTER) == 0x00A00000)))
+						{
+							CancelBackHomeTimer();
+							BackHomeCount = 0;
 						}
-//						else
-//							Log.d(TAG, "BackHomeCount" + BackHomeCount);
+						else {
+							if (BackHomeCount++ >= 10) {
+								if ((ScreenIndex & SCREEN_STATE_MAIN_FILTER) == 0x06000000) {
+									Log.d(TAG, "BackHomeKey!!!");
+									if (DisplayType == DISPLAY_TYPE_A) {
+										_MainBBaseFragment.showKeytoDefaultScreenAnimation();
+									} else {
+										_MainABaseFragment.showKeytoDefaultScreenAnimation();
+									}
+								} else if((ScreenIndex & SCREEN_STATE_MAIN_FILTER) == 0x01000000){
+									Log.d(TAG, "BackHomeRightUp!!!");
+									SavePref();
+									if (DisplayType == DISPLAY_TYPE_A) {
+										_MainBBaseFragment.showRightUptoDefaultScreenAnimation();
+									} else {
+										_MainABaseFragment.showRightUptoDefaultScreenAnimation();
+									}
+								} else if((ScreenIndex & SCREEN_STATE_MAIN_FILTER) == 0x02000000){
+									Log.d(TAG, "BackHomeRightDown!!!");
+									SavePref();
+									if (DisplayType == DISPLAY_TYPE_A) {
+										_MainBBaseFragment.showRightDowntoDefaultScreenAnimation();
+									} else {
+										_MainABaseFragment.showRightDowntoDefaultScreenAnimation();
+									}
+								} else if((ScreenIndex & SCREEN_STATE_MAIN_FILTER) == 0x03000000){
+									Log.d(TAG, "BackHomeLeftUp!!!");
+									SavePref();
+									if (DisplayType == DISPLAY_TYPE_A) {
+										_MainBBaseFragment.showLeftUptoDefaultScreenAnimation();
+									} else {
+										_MainABaseFragment.showLeftUptoDefaultScreenAnimation();
+									}
+								} else if((ScreenIndex & SCREEN_STATE_MAIN_FILTER) == 0x04000000){
+									Log.d(TAG, "BackHomeLeftDown!!!");
+									SavePref();
+									if (DisplayType == DISPLAY_TYPE_A) {
+										_MainBBaseFragment.showLeftDowntoDefaultScreenAnimation();
+									} else {
+										_MainABaseFragment.showLeftDowntoDefaultScreenAnimation();
+									}
+								} else {
+									Log.d(TAG, "BackHome!!!" + Integer.toHexString(ScreenIndex));
+									showMainScreen();
+									setScreenIndex();
+								}
+								BackHomeCount = 0xff;
+							}
+							else
+								Log.d(TAG, "BackHomeCount" + BackHomeCount);
+						}
 					}
 					else if((ScreenIndex & SCREEN_STATE_FILTER) == SCREEN_STATE_MAIN_CAMERA_TOP){
 						BackHomeCount = 0;

@@ -63,6 +63,7 @@ public class MainBRightDownTMCCOModeFragment extends ParentFragment{
 		
 		EnableRadioButton(false);
 		StartEnableButtonTimer();
+		ParentActivity.StartBackHomeTimer();
 		ParentActivity.ScreenIndex = ParentActivity.SCREEN_STATE_MAIN_B_RIGHTDOWN_CCOMODE;
 		HandleCursurDisplay = new Handler() {
 			@Override

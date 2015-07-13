@@ -61,6 +61,7 @@ public class MainBRightDownTMTCLockUpFragment extends ParentFragment{
 
 		EnableRadioButton(false);
 		StartEnableButtonTimer();
+		ParentActivity.StartBackHomeTimer();
 		ParentActivity.ScreenIndex = ParentActivity.SCREEN_STATE_MAIN_B_RIGHTDOWN_TCLOCKUP;
 		HandleCursurDisplay = new Handler() {
 			@Override

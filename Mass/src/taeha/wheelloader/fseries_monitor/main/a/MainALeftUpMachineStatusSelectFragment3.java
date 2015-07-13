@@ -66,7 +66,8 @@ public class MainALeftUpMachineStatusSelectFragment3 extends ParentFragment{
 		InitResource();
 		InitValuables();
 		InitButtonListener();
-
+		
+		ParentActivity.StartBackHomeTimer();
 		ParentActivity.ScreenIndex = ParentActivity.SCREEN_STATE_MAIN_A_LEFTUP_MACHINESTATUS3;
 		HandleCursurDisplay = new Handler() {
 			@Override

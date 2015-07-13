@@ -57,6 +57,7 @@ public class MainALeftDownFuelSelectFragment extends ParentFragment{
 
 		EnableRadioButton(false);
 		StartEnableButtonTimer();
+		ParentActivity.StartBackHomeTimer();
 		ParentActivity.ScreenIndex = ParentActivity.SCREEN_STATE_MAIN_A_LEFTDOWN_FUEL;
 		HandleCursurDisplay = new Handler() {
 			@Override

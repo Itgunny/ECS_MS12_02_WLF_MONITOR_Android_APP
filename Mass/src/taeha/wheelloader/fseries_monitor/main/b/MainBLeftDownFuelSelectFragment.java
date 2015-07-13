@@ -60,6 +60,7 @@ public class MainBLeftDownFuelSelectFragment extends ParentFragment{
 
 		EnableRadioButton(false);
 		StartEnableButtonTimer();
+		ParentActivity.StartBackHomeTimer();
 		ParentActivity.ScreenIndex = ParentActivity.SCREEN_STATE_MAIN_B_LEFTDOWN_FUEL;
 		HandleCursurDisplay = new Handler() {
 			@Override

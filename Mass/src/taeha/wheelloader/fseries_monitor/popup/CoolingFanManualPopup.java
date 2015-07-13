@@ -135,6 +135,10 @@ public class CoolingFanManualPopup extends ParentPopup{
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
+//				Log.d(TAG,"imgbtnExcute.isPressed()="+imgbtnExcute.isPressed());
+//				Log.d(TAG,"CursurIndex="+CursurIndex);
+				CursurIndex = 1;
+				HandleCursurDisplay.sendMessage(HandleCursurDisplay.obtainMessage(CursurIndex));
 				ClickExcute();
 			}
 		});

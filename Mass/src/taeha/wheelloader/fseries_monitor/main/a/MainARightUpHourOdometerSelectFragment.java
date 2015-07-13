@@ -60,6 +60,7 @@ public class MainARightUpHourOdometerSelectFragment extends ParentFragment{
 
 		EnableRadioButton(false);
 		StartEnableButtonTimer();
+		ParentActivity.StartBackHomeTimer();
 		ParentActivity.ScreenIndex = ParentActivity.SCREEN_STATE_MAIN_A_RIGHTUP_HOURODMETER;
 		HandleCursurDisplay = new Handler() {
 			@Override

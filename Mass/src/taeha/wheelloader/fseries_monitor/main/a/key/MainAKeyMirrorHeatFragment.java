@@ -55,6 +55,8 @@ public class MainAKeyMirrorHeatFragment extends ParentFragment{
 		InitResource();
 		InitValuables();
 		InitButtonListener();
+		
+		ParentActivity.StartBackHomeTimer();
 
 		ParentActivity.ScreenIndex = ParentActivity.SCREEN_STATE_MAIN_A_KEY_MIRRORHEAT;
 		HandleCursurDisplay = new Handler() {

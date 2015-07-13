@@ -56,6 +56,8 @@ public class MainAKeyAutoGreaseFragment extends ParentFragment{
 		InitValuables();
 		InitButtonListener();
 
+		ParentActivity.StartBackHomeTimer();
+
 		ParentActivity.ScreenIndex = ParentActivity.SCREEN_STATE_MAIN_A_KEY_AUTOGREASE;
 		HandleCursurDisplay = new Handler() {
 			@Override
