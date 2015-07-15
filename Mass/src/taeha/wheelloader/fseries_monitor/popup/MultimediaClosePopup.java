@@ -130,7 +130,17 @@ public class MultimediaClosePopup extends ParentPopup {
 	///////////////////////////////////////////////////////////////////////////////
 	public void ClickOK(){
 		this.dismiss();
-		ParentActivity.KillApps("com.mxtech.videoplayer.ad");
+		//++, 150715 cjg
+		Runtime runtime = Runtime.getRuntime();
+		Process process;
+		try{
+			String cmd = "am force-stop com.mxtech.videoplayer.ad";
+			process = runtime.exec(cmd);
+			Log.d(TAG, "am force-stop com.mxtech.videoplayer.ad");
+		}catch(Exception e){
+			e.fillInStackTrace();
+		}
+		//--, 150715 cjg
 		CAN1Comm.SetMultimediaFlag(false);
 		Intent intent;
 		intent = ParentActivity.getPackageManager().getLaunchIntentForPackage("com.powerone.wfd.sink");

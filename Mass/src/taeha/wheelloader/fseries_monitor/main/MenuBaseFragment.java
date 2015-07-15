@@ -1450,9 +1450,6 @@ public class MenuBaseFragment extends ParentFragment{
 		case Home.SCREEN_STATE_MENU_MODE_ETC_COOLINGFAN_TOP:
 			_CoolingFanReverseModeFragment.ClickLeft();
 			break;
-		case Home.SCREEN_STATE_MENU_MODE_ETC_COOLINGFAN_MANUAL:
-			ParentActivity._CoolingFanManualPopup.ClickLeft();
-			break;
 		case Home.SCREEN_STATE_MENU_MODE_ETC_WIPER_TOP:
 			_WiperFragment.ClickLeft();
 			break;
@@ -1735,9 +1732,6 @@ public class MenuBaseFragment extends ParentFragment{
 			break;
 		case Home.SCREEN_STATE_MENU_MODE_ETC_COOLINGFAN_TOP:
 			_CoolingFanReverseModeFragment.ClickRight();
-			break;
-		case Home.SCREEN_STATE_MENU_MODE_ETC_COOLINGFAN_MANUAL:
-			ParentActivity._CoolingFanManualPopup.ClickRight();
 			break;
 		case Home.SCREEN_STATE_MENU_MODE_ETC_WIPER_TOP:
 			_WiperFragment.ClickRight();
@@ -2025,9 +2019,6 @@ public class MenuBaseFragment extends ParentFragment{
 		case Home.SCREEN_STATE_MENU_MODE_ETC_COOLINGFAN_TOP:
 			_CoolingFanReverseModeFragment.ClickESC();
 			break;
-		case Home.SCREEN_STATE_MENU_MODE_ETC_COOLINGFAN_MANUAL:
-			ParentActivity._CoolingFanManualPopup.ClickESC();
-			break;
 		case Home.SCREEN_STATE_MENU_MODE_ETC_WIPER_TOP:
 			_WiperFragment.ClickESC();
 			break;
@@ -2311,9 +2302,6 @@ public class MenuBaseFragment extends ParentFragment{
 			break;
 		case Home.SCREEN_STATE_MENU_MODE_ETC_COOLINGFAN_TOP:
 			_CoolingFanReverseModeFragment.ClickEnter();
-			break;
-		case Home.SCREEN_STATE_MENU_MODE_ETC_COOLINGFAN_MANUAL:
-			ParentActivity._CoolingFanManualPopup.ClickEnter();
 			break;
 		case Home.SCREEN_STATE_MENU_MODE_ETC_WIPER_TOP:
 			_WiperFragment.ClickEnter();

@@ -1073,6 +1073,7 @@ public class CAN1CommManager extends ICAN1CommManager.Stub{		// ttySAC1(Linux), 
 	public int Get_CoolingFanSpeed_318_PGN65369(){ return service.Get_CoolingFanSpeed_318_PGN65369();}
 	public int Get_CoolingFanReverseIntervalTime_211_PGN65369(){ return service.Get_CoolingFanReverseIntervalTime_211_PGN65369();}
 	public int Get_CoolingFanReverseOperatingTime_212_PGN65369(){ return service.Get_CoolingFanReverseOperatingTime_212_PGN65369();}
+	public int Get_FanSpeedMaxControlMode_210_PGN65369(){ return service.Get_FanSpeedMaxControlMode_210_PGN65369();}
 	//////RX_ENGINE_STATUS2_65370///////
 	public int Get_EngineFuelRate_331_PGN65370(){ return service.Get_EngineFuelRate_331_PGN65370();}
 	public int Get_EnginePercentLoadatCurrentSpeed_334_PGN65370(){ return service.Get_EnginePercentLoadatCurrentSpeed_334_PGN65370();}
@@ -1363,6 +1364,7 @@ public class CAN1CommManager extends ICAN1CommManager.Stub{		// ttySAC1(Linux), 
 	public void Set_CoolingFanValveCurrent_146_PGN61184_61(int Data){ service.Set_CoolingFanValveCurrent_146_PGN61184_61(Data);}
 	public void Set_CoolingFanReverseIntervalTime_211_PGN61184_61(int Data){ service.Set_CoolingFanReverseIntervalTime_211_PGN61184_61(Data);}
 	public void Set_CoolingFanReverseOperatingTime_212_PGN61184_61(int Data){ service.Set_CoolingFanReverseOperatingTime_212_PGN61184_61(Data);}
+	public void Set_FanSpeedMaxControlMode_210_PGN61184_61(int Data){ service.Set_FanSpeedMaxControlMode_210_PGN61184_61(Data);}
 	//////TX_WEIGHING_SYSTEM_SETTING_REQUEST_61184_62///////
 	public void Set_MessageType_PGN61184_62(int Data){ service.Set_MessageType_PGN61184_62(Data);}
 	public void Set_WeighingSystemAccumulationMode_1941_PGN61184_62(int Data){ service.Set_WeighingSystemAccumulationMode_1941_PGN61184_62(Data);}
@@ -1556,6 +1558,7 @@ public class CAN1CommManager extends ICAN1CommManager.Stub{		// ttySAC1(Linux), 
 //	public void Set_CoolingFanSpeed_318_PGN65369(int Data){ service.Set_CoolingFanSpeed_318_PGN65369(Data);}
 //	public void Set_CoolingFanReverseIntervalTime_211_PGN65369(int Data){ service.Set_CoolingFanReverseIntervalTime_211_PGN65369(Data);}
 //	public void Set_CoolingFanReverseOperatingTime_212_PGN65369(int Data){ service.Set_CoolingFanReverseOperatingTime_212_PGN65369(Data);}
+//	public void Set_FanSpeedMaxControlMode_210_PGN65369(int Data){ service.Set_FanSpeedMaxControlMode_210_PGN65369(Data);}
 //	//////TX_ENGINE_STATUS1_65371///////
 //	public void Set_EngineOperatingCondition_336_PGN65371(int Data){ service.Set_EngineOperatingCondition_336_PGN65371(Data);}
 //	public void Set_DEFTankLevel_362_PGN65371(int Data){ service.Set_DEFTankLevel_362_PGN65371(Data);}

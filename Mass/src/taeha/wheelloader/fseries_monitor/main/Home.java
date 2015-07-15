@@ -14,7 +14,6 @@ import taeha.wheelloader.fseries_monitor.popup.BrakePedalCalibrationPopup;
 import taeha.wheelloader.fseries_monitor.popup.BucketPriorityPopup;
 import taeha.wheelloader.fseries_monitor.popup.CCOModePopup;
 import taeha.wheelloader.fseries_monitor.popup.CalibrationEHCUPopup;
-import taeha.wheelloader.fseries_monitor.popup.CoolingFanManualPopup;
 import taeha.wheelloader.fseries_monitor.popup.EHCUErrorPopup;
 import taeha.wheelloader.fseries_monitor.popup.EngineAutoShutdownCountPopup;
 import taeha.wheelloader.fseries_monitor.popup.EngineModePopup;
@@ -74,7 +73,7 @@ public class Home extends Activity {
 	public static final int VERSION_HIGH 		= 2;
 	public static final int VERSION_LOW 		= 0;
 	public static final int VERSION_SUB_HIGH 	= 0;
-	public static final int VERSION_SUB_LOW 	= 7;
+	public static final int VERSION_SUB_LOW 	= 8;
 	public static final int VERSION_TAEHA		= 0;
 	////1.0.2.3
 	// UI B 안 최초 적용 2014.12.10
@@ -584,7 +583,20 @@ public class Home extends Activity {
 	// 8. 역회전 관련 버그 개선
 	//	- [실행] 커서 선택 후 ENTER 키 입력 -> 이때 역회전 터치시 방향키 작동 안됨 -> CurserIndex 추가
 	//	- [실행] 커서 선택 후 ENTER 키 입력 -> 이때 ESC 키 입력 시 수동 역회전 꺼지지 않고 계속 동작 -> 팝업꺼질 경우 OFF 프로토콜 송부
-
+	//// v2.0.0.8
+	// 1. 냉각팬 UI 변경 및 로직 변경
+	//	- 자동일 경우 ok버튼 누를 경우에만 프로토콜 전송
+	//	- 수동일 경우 라디오버튼 수동누를 경우 자동 OFF 프로토콜 전송
+	//	- 한 페이지에서 선택된 것에 따라 UI 표시(팝업사라짐)
+	// 2. 붐 각도보정 이미지 1,2,3단계 F시리즈 버켓모양으로 변경
+	// 3. Fan EPPR Current Adjust 시안 변경
+	//	- 냉각팬 자동/수동 선택 추가
+	//	- 냉각팬 수동 Excute 추가
+	//	- MaxFanControl 프로토콜 및 UI 추가
+	// 4. 카메라 Left/Right 버그 수정
+	//	- 마지막에 3채널로 해놓고 카메라를 OFF 했을 경우 초기 1 -> Right 키를 누르면 CH4로 변경되는 버그 수정(항상 첫번째 카메라를 보여줌)
+	// 5. Excute -> Exectue로 오타 변경
+	// 6. 멀티미디어 종료 방법 변경
 	//////////////////////////////////////////////////////////////////////////////////////
 	
 	// TAG
@@ -703,8 +715,8 @@ public class Home extends Activity {
 	public  static final int SCREEN_STATE_MENU_MODE_ETC_FREQ_END							= 0x2131FFFF;
 	public  static final int SCREEN_STATE_MENU_MODE_ETC_COOLINGFAN_TOP						= 0x21320000;
 //	public  static final int SCREEN_STATE_MENU_MODE_ETC_COOLINGFAN_OFF						= 0x21321000;
-//	public  static final int SCREEN_STATE_MENU_MODE_ETC_COOLINGFAN_AUTO						= 0x21322000;
-	public  static final int SCREEN_STATE_MENU_MODE_ETC_COOLINGFAN_MANUAL					= 0x21321000;
+//	public  static final int SCREEN_STATE_MENU_MODE_ETC_COOLINGFAN_AUTO						= 0x21321000;
+//	public  static final int SCREEN_STATE_MENU_MODE_ETC_COOLINGFAN_MANUAL					= 0x21322000;
 	public  static final int SCREEN_STATE_MENU_MODE_ETC_COOLINGFAN_END						= 0x2132FFFF;
 	public  static final int SCREEN_STATE_MENU_MODE_ETC_AUTOSHUTDOWN_TOP					= 0x21330000;
 	public  static final int SCREEN_STATE_MENU_MODE_ETC_AUTOSHUTDOWN_PW						= 0x21331000;
@@ -1167,7 +1179,6 @@ public class Home extends Activity {
 	public MiracastClosePopup				_MiracastClosePopup;
 	// --, 150313 cjg
 	public FuelInitalPopup					_FuelInitalPopup;			// ++, --, 150406 bwk
-	public CoolingFanManualPopup			_CoolingFanManualPopup;		// ++,, --, 150410 bwk 
 	public AxleTempWarningPopup				_AxleTempWarningPopup;
 	public CalibrationEHCUPopup				_CalibrationEHCUPopup;
 	public SoftwareUpdateErrorPopup			_SoftwareUpdateErrorPopup;
@@ -1540,7 +1551,6 @@ public class Home extends Activity {
 		_MiracastClosePopup = new MiracastClosePopup(this);
 		// --, 150313 cjg
 		_FuelInitalPopup = new FuelInitalPopup(this);
-		_CoolingFanManualPopup = new CoolingFanManualPopup(this);
 		_AxleTempWarningPopup = new AxleTempWarningPopup(this);
 		_CalibrationEHCUPopup = new CalibrationEHCUPopup(this);
 		_SoftwareUpdateErrorPopup = new SoftwareUpdateErrorPopup(this);
@@ -1587,7 +1597,6 @@ public class Home extends Activity {
 		_MiracastClosePopup = new MiracastClosePopup(this);
 		// --, 150323 bwk
 		_FuelInitalPopup = new FuelInitalPopup(this);
-		_CoolingFanManualPopup = new CoolingFanManualPopup(this);
 		_AxleTempWarningPopup = new AxleTempWarningPopup(this);
 		
 		_WeighingErrorToast = new WeighingErrorToast(this);
@@ -1615,7 +1624,7 @@ public class Home extends Activity {
 			public boolean onTouch(View v, MotionEvent event) {
 				switch(event.getAction()){
 					case MotionEvent.ACTION_UP:
-						Log.d(TAG, "imgViewCameraScreen.ScreenIndex"+Integer.toHexString(ScreenIndex));
+						//Log.d(TAG, "imgViewCameraScreen.ScreenIndex"+Integer.toHexString(ScreenIndex));
 						if(CAN1Comm.CameraOnFlag == CAN1CommManager.STATE_CAMERA_MANUAL)
 							ExitCam();
 						else
@@ -1634,6 +1643,7 @@ public class Home extends Activity {
 		OldScreenIndex = ScreenIndex;
 		ScreenIndex = SCREEN_STATE_MAIN_CAMERA_KEY;
 		CAN1Comm.CameraOnFlag = CAN1CommManager.STATE_CAMERA_MANUAL;
+		SelectCameraNum = CameraOrder1+1;
 		CAN1Comm.TxCMDToMCU(CAN1CommManager.CMD_CAM, CameraOrder1);
 	}
 	public void ExcuteCamActivitybyReverseGear(){
@@ -1642,6 +1652,7 @@ public class Home extends Activity {
 		
 	}
 	public boolean ExitCam(){
+		//Log.d(TAG,"ExitCam() CameraCurrentOnOff : "+CAN1Comm.CameraCurrentOnOff+"CameraOnFlag"+CAN1Comm.CameraOnFlag);
 		ScreenIndex = OldScreenIndex;
 		OldScreenIndex = SCREEN_STATE_MAIN_CAMERA_KEY;
 		try {
@@ -3580,20 +3591,6 @@ public class Home extends Activity {
 		}
 
 		HomeDialog = _FuelInitalPopup;
-		HomeDialog.show();
-	}
-	public void showCoolingFanManualPopup(){
-		if(AnimationRunningFlag == true)
-			return;
-		else
-			StartAnimationRunningTimer();
-		
-		if(HomeDialog != null){
-			HomeDialog.dismiss();
-			HomeDialog = null;
-		}
-
-		HomeDialog = _CoolingFanManualPopup;
 		HomeDialog.show();
 	}
 	public void showAxleTempWarningPopup(){

@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
 <resources>
     <string name="app_name">Wheel_Loader_F_Series_UI</string>
     <string name="action_settings">Settings</string>
@@ -265,7 +265,7 @@
     <string name="Normal">Normal</string>
     <string name="Fast">Rápido</string>
     <string name="Very_Fast">Muito rápido</string>
-    <string name="Excute">Excute</string>
+    <string name="Excute">Execute</string>
     <string name="Push_and_hold_to_reverse_rotation">Push and hold to reverse rotation.</string>
     <string name="rpm_km_h">rpm/km/h</string>
     <!-- Menu Mode End -->

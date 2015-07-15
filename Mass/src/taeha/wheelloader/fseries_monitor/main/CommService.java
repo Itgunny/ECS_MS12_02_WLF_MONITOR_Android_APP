@@ -425,6 +425,7 @@ public class CommService extends Service{
 	public native int Get_CoolingFanSpeed_318_PGN65369();
 	public native int Get_CoolingFanReverseIntervalTime_211_PGN65369();
 	public native int Get_CoolingFanReverseOperatingTime_212_PGN65369();
+	public native int Get_FanSpeedMaxControlMode_210_PGN65369();
 	//////RX_ENGINE_STATUS2_65370///////
 	public native int Get_EngineFuelRate_331_PGN65370();
 	public native int Get_EnginePercentLoadatCurrentSpeed_334_PGN65370();
@@ -713,6 +714,7 @@ public class CommService extends Service{
 	public native void Set_CoolingFanValveCurrent_146_PGN61184_61(int Data);
 	public native void Set_CoolingFanReverseIntervalTime_211_PGN61184_61(int Data);
 	public native void Set_CoolingFanReverseOperatingTime_212_PGN61184_61(int Data);
+	public native void Set_FanSpeedMaxControlMode_210_PGN61184_61(int Data);	
 	//////TX_WEIGHING_SYSTEM_SETTING_REQUEST_61184_62///////
 	public native void Set_MessageType_PGN61184_62(int Data);
 	public native void Set_WeighingSystemAccumulationMode_1941_PGN61184_62(int Data);
@@ -906,6 +908,7 @@ public class CommService extends Service{
 	public native void Set_CoolingFanSpeed_318_PGN65369(int Data);
 	public native void Set_CoolingFanReverseIntervalTime_211_PGN65369(int Data);
 	public native void Set_CoolingFanReverseOperatingTime_212_PGN65369(int Data);
+	public native void Set_FanSpeedMaxControlMode_210_PGN65369(int Data);	
 	//////TX_ENGINE_STATUS1_65371///////
 	public native void Set_EngineOperatingCondition_336_PGN65371(int Data);
 	public native void Set_DEFTankLevel_362_PGN65371(int Data);
@@ -1510,7 +1513,7 @@ public class CommService extends Service{
 				}else if(msg.what == CAN1CommManager.ESC){
 					Log.d(TAG, "ESC KEY in CommService");
 					if(CheckTopApps("com.mxtech.videoplayer.ad")){
-						MenuKeyEvent();
+						//MenuKeyEvent();
 						CloseMXPlayer();
 					}
 				}
@@ -1706,7 +1709,7 @@ public class CommService extends Service{
 	 */
 	// ++, 150320 cjg
 	public void CloseMXPlayer(){
-		Thread thread = new Thread(new Runnable()	{
+		/*Thread thread = new Thread(new Runnable()	{
 
 			Instrumentation inst = new Instrumentation();
 			long downTime = SystemClock.uptimeMillis();
@@ -1730,6 +1733,18 @@ public class CommService extends Service{
 
 		thread.start();
 		//multimediaFlag = false;
+	}*/
+	// --, 150320 cjg
+		//++, 150715 cjg
+		Runtime runtime = Runtime.getRuntime();
+		Process process;
+		try{
+			String cmd = "am force-stop com.mxtech.videoplayer.ad";
+			process = runtime.exec(cmd);
+			Log.d(TAG, "am force-stop com.mxtech.videoplayer.ad");
+		}catch(Exception e){
+			e.fillInStackTrace();
+		}
+		//--, 150715 cjg
 	}
-	// --, 150320 cjg			
 }

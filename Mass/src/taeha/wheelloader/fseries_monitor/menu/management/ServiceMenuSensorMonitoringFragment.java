@@ -244,12 +244,10 @@ public class ServiceMenuSensorMonitoringFragment extends ParentFragment{
 	
 	 
 	public void StatusListDisplay(){
-		int Value;
 		int FanRPM,EngineRPM,AlternatorVolt,BoomPosSensorVolt,BucketPosSensorVolt,EngineModeSelVolt,ClutchModeSelVolt
 		,TMModeSelVolt,BrakeFailureWarningPS,ParkingPS,BoomHeadCylinderPS,BommRodCylinderPS,SteeringPumpPS,EmergencyMotorPumpPS
 		,DifferentialLockPS,BrakePriorityPS,BrakePedalPosVolt,AccPedalPositionVolt,AccPedalPositionPercent;
 		int IntegerValue, Point;
-		String str;
 		adapter.clearItem();
 	
 //		for(int i = 0; i < 23; i++){

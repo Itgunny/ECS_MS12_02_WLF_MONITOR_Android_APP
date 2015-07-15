@@ -184,8 +184,8 @@
     <string name="Save_Position">Save Position</string>
     <string name="Forward">Forward</string>
     <string name="Backward">Backward</string>
-    <string name="Excuting_Locking_Attachment">Excuting Locking Attachment.</string>
-    <string name="Excuting_Unlocking_Attachment">Excuting Unlocking Attachment.</string>
+    <string name="Excuting_Locking_Attachment">Executing Locking Attachment.</string>
+    <string name="Excuting_Unlocking_Attachment">Executing Unlocking Attachment.</string>
     <string name="Attachment_Unlocked_Check_Locking_Status">Attachment Unlocked. Check Locking Status.</string>
     <string name="Do_you_want_to_turn_on_Mirror_Heat">Do you want to turn on Mirror Heat?</string>
     <string name="Do_you_want_to_turn_on_Auto_Grease">Do you want to turn on Auto Grease?</string>
@@ -254,7 +254,7 @@
     <string name="Normal">Normal</string>
     <string name="Fast">Fast</string>
     <string name="Very_Fast">Very Fast</string>
-    <string name="Excute">Excute</string>
+    <string name="Excute">Execute</string>
     <string name="Push_and_hold_to_reverse_rotation">Push and hold to reverse rotation.</string>
     <string name="rpm_km_h">rpm/km/h</string>
     <string name="You_should_turn_OFF_Soft_end_stop_before_start_calibration">You should turn OFF Soft end stop before start calibration.</string>
@@ -469,7 +469,7 @@
     <string name="CURRENT_FUEL_RATE">CURRENT FUEL RATE</string>
     <string name="Current_Fuel_Rate">Current Fuel Rate</string>
     <string name="Excute_Locking_Attachment">Execute Locking Attachment.</string>
-    <string name="Excute_Unlocking_Attachment">Excute Unlocking Attachment.</string>
+    <string name="Excute_Unlocking_Attachment">Execute Unlocking Attachment.</string>
     <string name="Warming_Up">Warming Up</string>
     <string name="Engine_Delay_Shutdown">Engine Delay Shutdown</string>
     <string name="Weighing_Information">Weighing Information</string>

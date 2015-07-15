@@ -67,9 +67,17 @@ public class AlwaysOnTopService extends Service{
 				if(CommService.multimediaFlag == false){
 					CommService.BackKeyEvent();
 				}else{
-					CommService.MenuKeyEvent();
-					CloseMXPlayer();	// ++, --, 150326 bwk
-					//Log.d(TAG, "org.ebook");
+					//++, 150715 cjg
+					Runtime runtime = Runtime.getRuntime();
+					Process process;
+					try{
+						String cmd = "am force-stop com.mxtech.videoplayer.ad";
+						process = runtime.exec(cmd);
+						Log.d(TAG, "am force-stop com.mxtech.videoplayer.ad");
+					}catch(Exception e){
+						e.fillInStackTrace();
+					}
+					//--, 150715 cjg
 				}
 				
 			}

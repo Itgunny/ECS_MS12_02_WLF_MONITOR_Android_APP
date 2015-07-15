@@ -241,6 +241,11 @@ jint Get_CoolingFanReverseOperatingTime_212_PGN61184_61(JNIEnv * env,
 		jobject this) {
 	return RX_COOLING_FAN_SETTING_61184_61.CoolingFanReverseOperatingTime_212;
 }
+jint Get_FanSpeedMaxControlMode_210_PGN61184_61(JNIEnv * env,
+		jobject this) {
+	return RX_COOLING_FAN_SETTING_61184_61.FanSpeedMaxControlMode_210;
+}
+
 //////RX_WEIGHING_SYSTEM_SETTING_REQUEST_61184_62///////
 jint Get_MessageType_PGN61184_62(JNIEnv * env, jobject this) {
 	return RX_WEIGHING_SYSTEM_SETTING_REQUEST_61184_62.MessageType;
@@ -886,6 +891,10 @@ jint Get_CoolingFanReverseIntervalTime_211_PGN65369(JNIEnv * env, jobject this) 
 jint Get_CoolingFanReverseOperatingTime_212_PGN65369(JNIEnv * env, jobject this) {
 	return RX_COOLING_FAN_STATUS_65369.CoolingFanReverseOperatingTime_212;
 }
+jint Get_FanSpeedMaxControlMode_210_PGN65369(JNIEnv * env, jobject this) {
+	return RX_COOLING_FAN_STATUS_65369.FanSpeedMaxControlMode_210;
+}
+
 //////RX_ENGINE_STATUS2_65370///////
 jint Get_EngineFuelRate_331_PGN65370(JNIEnv * env, jobject this) {
 	return RX_ENGINE_STATUS2_65370.EngineFuelRate_331;
@@ -1808,6 +1817,10 @@ void Set_CoolingFanReverseOperatingTime_212_PGN61184_61(JNIEnv * env,
 		jobject this, int Data) {
 	TX_COOLING_FAN_SETTING_61184_61.CoolingFanReverseOperatingTime_212 = Data;
 }
+void Set_FanSpeedMaxControlMode_210_PGN61184_61(JNIEnv * env,
+		jobject this, int Data) {
+	TX_COOLING_FAN_SETTING_61184_61.FanSpeedMaxControlMode_210= Data;
+}
 //////TX_WEIGHING_SYSTEM_SETTING_REQUEST_61184_62///////
 void Set_MessageType_PGN61184_62(JNIEnv * env, jobject this, int Data) {
 	TX_WEIGHING_SYSTEM_SETTING_REQUEST_61184_62.MessageType = Data;
@@ -2489,6 +2502,10 @@ void Set_CoolingFanReverseIntervalTime_211_PGN65369(JNIEnv * env, jobject this,
 void Set_CoolingFanReverseOperatingTime_212_PGN65369(JNIEnv * env, jobject this,
 		int Data) {
 	TX_COOLING_FAN_STATUS_65369.CoolingFanReverseOperatingTime_212 = Data;
+}
+void Set_FanSpeedMaxControlMode_210_PGN65369(JNIEnv * env, jobject this,
+		int Data) {
+	TX_COOLING_FAN_STATUS_65369.FanSpeedMaxControlMode_210= Data;
 }
 //////TX_ENGINE_STATUS1_65371///////
 void Set_EngineOperatingCondition_336_PGN65371(JNIEnv * env, jobject this,
@@ -3961,6 +3978,8 @@ static JNINativeMethod methods[] =
 						(void*) Get_CoolingFanReverseIntervalTime_211_PGN65369 },
 				{ "Get_CoolingFanReverseOperatingTime_212_PGN65369", "()I",
 						(void*) Get_CoolingFanReverseOperatingTime_212_PGN65369 },
+				{ "Get_FanSpeedMaxControlMode_210_PGN65369", "()I",
+						(void*) Get_FanSpeedMaxControlMode_210_PGN65369 },
 				//////RX_ENGINE_STATUS2_65370///////
 				{"Get_EngineFuelRate_331_PGN65370", "()I", (void*) Get_EngineFuelRate_331_PGN65370 },
 				{"Get_EnginePercentLoadatCurrentSpeed_334_PGN65370", "()I", (void*) Get_EnginePercentLoadatCurrentSpeed_334_PGN65370 },
@@ -4444,6 +4463,7 @@ static JNINativeMethod methods[] =
 				{"Set_CoolingFanValveCurrent_146_PGN61184_61", "(I)V",(void*) Set_CoolingFanValveCurrent_146_PGN61184_61 },
 				{ "Set_CoolingFanReverseIntervalTime_211_PGN61184_61", "(I)V",(void*) Set_CoolingFanReverseIntervalTime_211_PGN61184_61 },
 				{ "Set_CoolingFanReverseOperatingTime_212_PGN61184_61", "(I)V",(void*) Set_CoolingFanReverseOperatingTime_212_PGN61184_61 },
+				{ "Set_FanSpeedMaxControlMode_210_PGN61184_61", "(I)V",(void*) Set_FanSpeedMaxControlMode_210_PGN61184_61 },
 				//////TX_WEIGHING_SYSTEM_SETTING_REQUEST_61184_62///////
 				{ "Set_MessageType_PGN61184_62", "(I)V",
 						(void*) Set_MessageType_PGN61184_62 },
@@ -4778,6 +4798,8 @@ static JNINativeMethod methods[] =
 						(void*) Set_CoolingFanReverseIntervalTime_211_PGN65369 },
 				{ "Set_CoolingFanReverseOperatingTime_212_PGN65369", "(I)V",
 						(void*) Set_CoolingFanReverseOperatingTime_212_PGN65369 },
+				{ "Set_FanSpeedMaxControlMode_210_PGN65369", "(I)V",
+						(void*) Set_FanSpeedMaxControlMode_210_PGN65369 },
 				//////TX_ENGINE_STATUS1_65371///////
 				{ "Set_EngineOperatingCondition_336_PGN65371", "(I)V",
 						(void*) Set_EngineOperatingCondition_336_PGN65371 }, {

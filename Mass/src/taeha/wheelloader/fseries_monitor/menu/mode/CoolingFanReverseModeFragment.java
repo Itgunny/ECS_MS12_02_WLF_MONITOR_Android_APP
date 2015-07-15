@@ -13,6 +13,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.RelativeLayout;
 import android.widget.SeekBar;
@@ -27,15 +28,17 @@ public class CoolingFanReverseModeFragment extends ParentFragment{
 	private  final int STEP				= 10;
 	//////////////////////////////////////////////////
 	//RESOURCE////////////////////////////////////////
-	RadioButton radioOn;
-	RadioButton radioOff;
+	RadioButton radioAuto;
+	RadioButton radioManual;
 	
-	RelativeLayout	layoutInterval;
-	RelativeLayout	layoutTime;
+	RelativeLayout	layoutAuto;
+	RelativeLayout	layoutManual;
 
 	ImageButton imgbtnOK;
-	ImageButton imgbtnCancel;
-	ImageButton imgbtnManual;
+	TextView textViewExcute;
+	
+	ImageView imgViewCoolingFanIcon;
+	ImageView imgViewExcuteBoader;
 	
 	TextView textViewIntervalData;
 	TextView textViewIntervalMax;
@@ -51,6 +54,9 @@ public class CoolingFanReverseModeFragment extends ParentFragment{
 	//VALUABLE////////////////////////////////////////
 	int CoolingFanReverse;
 	int SelectMode;
+	
+	boolean ManualPress;
+	int ReverseFan;
 	
 	int Interval;
 	int OperationTime;
@@ -85,6 +91,10 @@ public class CoolingFanReverseModeFragment extends ParentFragment{
 		InitButtonListener();
 		
 		setCoolingFanReverseRadio(CoolingFanReverse);
+		
+		if(CoolingFanReverse == CAN1CommManager.DATA_STATE_REVERSEFAN_AUTO)
+			ClickAuto();
+
 		ParentActivity.ScreenIndex = ParentActivity.SCREEN_STATE_MENU_MODE_ETC_COOLINGFAN_TOP;
 		ParentActivity._MenuBaseFragment._MenuInterTitleFragment.SetTitleText(ParentActivity.getResources().getString(R.string.Cooling_Fan_Reverse_Mode));
 		HandleCursurDisplay = new Handler() {
@@ -103,6 +113,15 @@ public class CoolingFanReverseModeFragment extends ParentFragment{
 		CursurDisplay(CursurIndex);
 
 	}
+	@Override
+	public void onDestroyView(){
+		super.onDestroyView();
+		
+		// Manual Off
+		CAN1Comm.Set_CoolingFanReverseManual_PGN61184_61(0);
+		CAN1Comm.TxCANToMCU(61);
+		CAN1Comm.Set_CoolingFanReverseManual_PGN61184_61(3);
+	}
 	////////////////////////////////////////////////
 	
 	
@@ -111,15 +130,17 @@ public class CoolingFanReverseModeFragment extends ParentFragment{
 	@Override
 	protected void InitResource() {
 		// TODO Auto-generated method stub
-		radioOn = (RadioButton)mRoot.findViewById(R.id.radioButton_menu_body_mode_coolingfanreversemode_auto_on);
-		radioOff = (RadioButton)mRoot.findViewById(R.id.radioButton_menu_body_mode_coolingfanreversemode_auto_off);
+		radioAuto = (RadioButton)mRoot.findViewById(R.id.radioButton_menu_body_mode_coolingfanreversemode_auto);
+		radioManual = (RadioButton)mRoot.findViewById(R.id.radioButton_menu_body_mode_coolingfanreversemode_manual);
 		
-		layoutInterval = (RelativeLayout)mRoot.findViewById(R.id.RelativeLayout_menu_body_mode_coolingfan_auto_interval);
-		layoutTime = (RelativeLayout)mRoot.findViewById(R.id.RelativeLayout_menu_body_mode_coolingfan_auto_time);
+		layoutAuto = (RelativeLayout)mRoot.findViewById(R.id.RelativeLayout_menu_body_mode_coolingfan_Auto);
+		layoutManual = (RelativeLayout)mRoot.findViewById(R.id.RelativeLayout_menu_body_mode_coolingfan_manual);
 		
 		imgbtnOK = (ImageButton)mRoot.findViewById(R.id.ImageButton_menu_body_mode_coolingfanreversemode_low_ok);
-		imgbtnCancel = (ImageButton)mRoot.findViewById(R.id.ImageButton_menu_body_mode_coolingfanreversemode_low_cancel);
-		imgbtnManual = (ImageButton)mRoot.findViewById(R.id.ImageButton_menu_body_mode_coolingfanreversemode_low_manual);
+		textViewExcute = (TextView)mRoot.findViewById(R.id.textView_menu_body_mode_coolingfan_manual_excute);
+		
+		imgViewExcuteBoader = (ImageView)mRoot.findViewById(R.id.imageView_menu_body_mode_coolingfan_manual_excute_boarder);
+		imgViewCoolingFanIcon = (ImageView)mRoot.findViewById(R.id.imageView_menu_body_mode_coolingfan_manual);
 		
 		textViewIntervalData = (TextView)mRoot.findViewById(R.id.textView_menu_body_mode_coolingfan_auto_interval_time);
 		textViewIntervalMax = (TextView)mRoot.findViewById(R.id.textView_menu_body_mode_coolingfan_auto_interval_max);
@@ -156,30 +177,11 @@ public class CoolingFanReverseModeFragment extends ParentFragment{
 		textViewIntervalMin.setText(ParentActivity.GetSectoMinString(30,ParentActivity.getResources().getString(string.Hour),ParentActivity.getResources().getString(string.Min)));
 		textViewOperationTimeMax.setText(ParentActivity.GetSectoMinString(300,ParentActivity.getResources().getString(string.Min),ParentActivity.getResources().getString(string.Sec)));
 		textViewOperationTimeMin.setText(ParentActivity.GetSectoMinString(30,ParentActivity.getResources().getString(string.Min),ParentActivity.getResources().getString(string.Sec)));
-		
-		Interval = CAN1Comm.Get_CoolingFanReverseIntervalTime_211_PGN65369();
-		OperationTime = CAN1Comm.Get_CoolingFanReverseOperatingTime_212_PGN65369();
-		
-		if(Interval > MAX_LEVEL)
-			Interval = MAX_LEVEL;
-		else if(Interval < MIN_LEVEL)
-			Interval = MIN_LEVEL;
-		
-		if(OperationTime > MAX_LEVEL)
-			OperationTime = MAX_LEVEL;
-		else if(OperationTime < MIN_LEVEL)
-			OperationTime = MIN_LEVEL;
-		
-		IntervalTextDisplay(Interval);
-		OperationTimeTextDisplay(OperationTime);
-		SetSeekBarPositionbyData(seekbarInterval,Interval);
-		SetSeekBarPositionbyData(seekbarOperationTime,OperationTime);
-
 	}
 	@Override
 	protected void InitButtonListener() {
 		// TODO Auto-generated method stub
-		radioOn.setOnClickListener(new View.OnClickListener() {
+		radioAuto.setOnClickListener(new View.OnClickListener() {
 			
 			@Override
 			public void onClick(View v) {
@@ -188,9 +190,10 @@ public class CoolingFanReverseModeFragment extends ParentFragment{
 				HandleCursurDisplay.sendMessage(HandleCursurDisplay.obtainMessage(CursurIndex));
 				SelectMode = CAN1CommManager.DATA_STATE_REVERSEFAN_AUTO;
 				setCoolingFanReverseRadio(SelectMode);
+				ClickAuto();
 			}
 		});
-		radioOff.setOnClickListener(new View.OnClickListener() {
+		radioManual.setOnClickListener(new View.OnClickListener() {
 			
 			@Override
 			public void onClick(View v) {
@@ -198,37 +201,32 @@ public class CoolingFanReverseModeFragment extends ParentFragment{
 				CursurIndex = 2;
 				HandleCursurDisplay.sendMessage(HandleCursurDisplay.obtainMessage(CursurIndex));
 				SelectMode = CAN1CommManager.DATA_STATE_REVERSEFAN_OFF;
+				
 				setCoolingFanReverseRadio(SelectMode);
+				ClickManual();
 			}
 		});
+		textViewExcute.setOnClickListener(new View.OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+//				Log.d(TAG,"imgbtnExcute.isPressed()="+imgbtnExcute.isPressed());
+//				Log.d(TAG,"CursurIndex="+CursurIndex);
+				CursurIndex = 3;
+				HandleCursurDisplay.sendMessage(HandleCursurDisplay.obtainMessage(CursurIndex));
+				ClickExcute();
+			}
+		});
+
 		imgbtnOK.setOnClickListener(new View.OnClickListener() {
-			
-			@Override
-			public void onClick(View v) {
-				// TODO Auto-generated method stub
-				CursurIndex = 7;
-				HandleCursurDisplay.sendMessage(HandleCursurDisplay.obtainMessage(CursurIndex));
-				ClickOK();
-			}
-		});
-		imgbtnCancel.setOnClickListener(new View.OnClickListener() {
-			
-			@Override
-			public void onClick(View v) {
-				// TODO Auto-generated method stub
-				CursurIndex = 6;
-				HandleCursurDisplay.sendMessage(HandleCursurDisplay.obtainMessage(CursurIndex));
-				ClickCancel();
-			}
-		});
-		imgbtnManual.setOnClickListener(new View.OnClickListener() {
 			
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
 				CursurIndex = 5;
 				HandleCursurDisplay.sendMessage(HandleCursurDisplay.obtainMessage(CursurIndex));
-				ClickManual();
+				ClickOK();
 			}
 		});
 		seekbarInterval.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
@@ -290,15 +288,76 @@ public class CoolingFanReverseModeFragment extends ParentFragment{
 	@Override
 	protected void GetDataFromNative() {
 		// TODO Auto-generated method stub
-		
+		if(SelectMode == CAN1CommManager.DATA_STATE_REVERSEFAN_OFF)
+		{
+			CheckCoolingFanManualButton();
+			ReverseFan = CAN1Comm.Get_CoolingFandrivingStatus_180_PGN65428();
+		}
 	}
 
 	@Override
 	protected void UpdateUI() {
 		// TODO Auto-generated method stub
+		if(SelectMode == CAN1CommManager.DATA_STATE_REVERSEFAN_OFF)
+			ReverseFanDisplay(ReverseFan);
 		
 	}
 	/////////////////////////////////////////////////////////////////////	
+	public void ClickExcute(){
+		CheckCoolingFanManualButton();
+	}
+	public void CheckCoolingFanManualButton(){
+		if(textViewExcute.isPressed() == true){
+//			Log.d(TAG, "Set_CoolingFanReverseManual_PGN61184_61(1)");
+			CAN1Comm.Set_CoolingFanReverseManual_PGN61184_61(1);
+			CAN1Comm.TxCANToMCU(61);
+			CAN1Comm.Set_CoolingFanReverseManual_PGN61184_61(3);
+			ManualPress = true;
+		}
+		
+		if(ManualPress == true && textViewExcute.isPressed() == false){
+//			Log.d(TAG, "Set_CoolingFanReverseManual_PGN61184_61(3)");
+			CAN1Comm.Set_CoolingFanReverseManual_PGN61184_61(0);
+			CAN1Comm.TxCANToMCU(61);
+			CAN1Comm.Set_CoolingFanReverseManual_PGN61184_61(3);
+			ManualPress = false;
+		}
+	}
+	
+	public void ClickAuto(){
+		// Manual Off
+		CAN1Comm.Set_CoolingFanReverseManual_PGN61184_61(0);
+		CAN1Comm.TxCANToMCU(61);
+		CAN1Comm.Set_CoolingFanReverseManual_PGN61184_61(3);
+		
+		// Auto Mode
+		Interval = CAN1Comm.Get_CoolingFanReverseIntervalTime_211_PGN65369();
+		OperationTime = CAN1Comm.Get_CoolingFanReverseOperatingTime_212_PGN65369();
+		
+		if(Interval > MAX_LEVEL)
+			Interval = MAX_LEVEL;
+		else if(Interval < MIN_LEVEL)
+			Interval = MIN_LEVEL;
+		
+		if(OperationTime > MAX_LEVEL)
+			OperationTime = MAX_LEVEL;
+		else if(OperationTime < MIN_LEVEL)
+			OperationTime = MIN_LEVEL;
+		
+		IntervalTextDisplay(Interval);
+		OperationTimeTextDisplay(OperationTime);
+		SetSeekBarPositionbyData(seekbarInterval,Interval);
+		SetSeekBarPositionbyData(seekbarOperationTime,OperationTime);
+	}
+	public void ClickManual(){
+		CAN1Comm.Set_CoolingFanReverseOperatingTime_212_PGN61184_61(0xFF);
+		CAN1Comm.Set_CoolingFanReverseIntervalTime_211_PGN61184_61(0xFF);
+		CAN1Comm.Set_CoolingFanReverseMode_182_PGN61184_61(CAN1CommManager.DATA_STATE_REVERSEFAN_OFF);
+		CAN1Comm.TxCANToMCU(61);
+		CAN1Comm.Set_CoolingFanReverseOperatingTime_212_PGN61184_61(0xFF);
+		CAN1Comm.Set_CoolingFanReverseIntervalTime_211_PGN61184_61(0xFF);
+		CAN1Comm.Set_CoolingFanReverseMode_182_PGN61184_61(3);
+	}
 	public void ClickOK(){
 		if(ParentActivity.AnimationRunningFlag == true)
 			return;
@@ -306,6 +365,10 @@ public class CoolingFanReverseModeFragment extends ParentFragment{
 			ParentActivity.StartAnimationRunningTimer();
 		ParentActivity._MenuBaseFragment.showBodyModeAnimation();
 		ParentActivity._MenuBaseFragment._MenuModeFragment.setFirstScreen(Home.SCREEN_STATE_MENU_MODE_ETC_TOP);
+		
+		CAN1Comm.Set_CoolingFanReverseManual_PGN61184_61(0);
+		CAN1Comm.TxCANToMCU(61);
+		CAN1Comm.Set_CoolingFanReverseManual_PGN61184_61(3);		
 		
 		if(SelectMode == CAN1CommManager.DATA_STATE_REVERSEFAN_AUTO)
 		{
@@ -335,30 +398,49 @@ public class CoolingFanReverseModeFragment extends ParentFragment{
 			ParentActivity.StartAnimationRunningTimer();
 		ParentActivity._MenuBaseFragment.showBodyModeAnimation();
 		ParentActivity._MenuBaseFragment._MenuModeFragment.setFirstScreen(Home.SCREEN_STATE_MENU_MODE_ETC_TOP);
-	}
-	public void ClickManual(){
-		ParentActivity.showCoolingFanManualPopup();
+		
+		CAN1Comm.Set_CoolingFanReverseManual_PGN61184_61(0);
+		CAN1Comm.TxCANToMCU(61);
+		CAN1Comm.Set_CoolingFanReverseManual_PGN61184_61(3);		
 	}
 	/////////////////////////////////////////////////////////////////////
+	public void ReverseFanDisplay(int Data){
+		switch (Data) {
+		case CAN1CommManager.DATA_STATE_COOLINGFAN_OFF:
+			imgViewCoolingFanIcon.setImageResource(R.drawable.menu_mode_fan_manual_icon_gray_popup);
+
+			break;
+		case CAN1CommManager.DATA_STATE_COOLINGFAN_FORWARD:
+			imgViewCoolingFanIcon.setImageResource(R.drawable.menu_mode_fan_manual_icon_gray_popup);
+
+			break;
+		case CAN1CommManager.DATA_STATE_COOLINGFAN_REVERSE:
+			imgViewCoolingFanIcon.setImageResource(R.drawable.menu_mode_fan_manual_icon_green_popup);
+
+			break;
+		default:
+			break;
+		}
+	}
 	public void setCoolingFanReverseRadio(int data){
 		switch (data) {
 		case CAN1CommManager.DATA_STATE_REVERSEFAN_OFF:
-			radioOff.setChecked(true);
-			radioOn.setChecked(false);
-			layoutInterval.setAlpha((float)0.1);
-			layoutTime.setAlpha((float)0.1);
-			seekbarInterval.setClickable(false);
-			seekbarOperationTime.setClickable(false);
+			radioManual.setChecked(true);
+			radioAuto.setChecked(false);
+			ReverseFan = CAN1Comm.Get_CoolingFandrivingStatus_180_PGN65428();
+			imgViewCoolingFanIcon.setImageResource(R.drawable.menu_mode_fan_manual_icon_gray_popup);
+			layoutAuto.setVisibility(View.INVISIBLE);
+			layoutManual.setVisibility(View.VISIBLE);
 			break;
 		case CAN1CommManager.DATA_STATE_REVERSEFAN_AUTO:
-			radioOff.setChecked(false);
-			radioOn.setChecked(true);
-			layoutInterval.setAlpha((float)1);
-			layoutTime.setAlpha((float)1);
-			seekbarInterval.setClickable(true);
-			seekbarOperationTime.setClickable(true);
+			radioManual.setChecked(false);
+			radioAuto.setChecked(true);
+			layoutAuto.setVisibility(View.VISIBLE);
+			layoutManual.setVisibility(View.INVISIBLE);
 			break;
 		default:
+			layoutAuto.setVisibility(View.INVISIBLE);
+			layoutManual.setVisibility(View.INVISIBLE);
 			break;
 		}
 	}
@@ -443,9 +525,13 @@ public class CoolingFanReverseModeFragment extends ParentFragment{
 		CursurIndex = Index;
 	}
 	public void ClickLeft(){
+//		Log.d(TAG, "ClickRight() CursurIndex="+CursurIndex);
+		if((SelectMode == CAN1CommManager.DATA_STATE_REVERSEFAN_OFF) && (textViewExcute.isPressed() == true))
+			return;
+		
 		switch (CursurIndex) {
 		case 1:
-			CursurIndex = 7;
+			CursurIndex = 5;
 			CursurDisplay(CursurIndex);
 			break;
 		case 2:
@@ -453,11 +539,16 @@ public class CoolingFanReverseModeFragment extends ParentFragment{
 			CursurDisplay(CursurIndex);
 			break;
 		case 3:
-			Interval -= 3;
-			if(Interval < MIN_LEVEL)
-				Interval = MIN_LEVEL;
-			IntervalTextDisplay(Interval);
-			SetSeekBarPositionbyData(seekbarInterval,Interval);
+			if(SelectMode == CAN1CommManager.DATA_STATE_REVERSEFAN_AUTO){
+				Interval -= 3;
+				if(Interval < MIN_LEVEL)
+					Interval = MIN_LEVEL;
+				IntervalTextDisplay(Interval);
+				SetSeekBarPositionbyData(seekbarInterval,Interval);
+			}else {
+				CursurIndex = 2;
+				CursurDisplay(CursurIndex);
+			}
 			break;
 		case 4:
 			OperationTime -= 3;
@@ -468,54 +559,56 @@ public class CoolingFanReverseModeFragment extends ParentFragment{
 			break;
 		case 5:
 			if(SelectMode == CAN1CommManager.DATA_STATE_REVERSEFAN_OFF)
-				CursurIndex = 2;
-			else
+				CursurIndex = 3;
+			else if(SelectMode == CAN1CommManager.DATA_STATE_REVERSEFAN_OFF)
 				CursurIndex--;
-			CursurDisplay(CursurIndex);
-			break;
-		case 6:
-		case 7:
-			CursurIndex--;
+			else
+				CursurIndex = 2;
 			CursurDisplay(CursurIndex);
 			break;
 		default:
-			CursurIndex = 7;
+			CursurIndex = 5;
 			CursurDisplay(CursurIndex);
 			break;
 		}
 	}
 	public void ClickRight(){
+//		Log.d(TAG, "ClickRight() CursurIndex="+CursurIndex);
+		if((SelectMode == CAN1CommManager.DATA_STATE_REVERSEFAN_OFF) && (textViewExcute.isPressed() == true))
+			return;
 		switch (CursurIndex) {
 		case 3:
-			Interval += 3;
-			if(Interval > MAX_LEVEL)
-				Interval = MAX_LEVEL;
-			IntervalTextDisplay(Interval);
-			SetSeekBarPositionbyData(seekbarInterval,Interval);
-		
+			if(SelectMode == CAN1CommManager.DATA_STATE_REVERSEFAN_AUTO){
+				Interval += 3;
+				if(Interval > MAX_LEVEL)
+					Interval = MAX_LEVEL;
+				IntervalTextDisplay(Interval);
+				SetSeekBarPositionbyData(seekbarInterval,Interval);
+			}else if(SelectMode == CAN1CommManager.DATA_STATE_REVERSEFAN_OFF){
+				CursurIndex = 5;
+				CursurDisplay(CursurIndex);
+			}
 			break;
 		case 4:
-			OperationTime += 3;
-			if(OperationTime > MAX_LEVEL)
-				OperationTime = MAX_LEVEL;
-			OperationTimeTextDisplay(OperationTime);
-			SetSeekBarPositionbyData(seekbarOperationTime,OperationTime);
-			
+			if(SelectMode == CAN1CommManager.DATA_STATE_REVERSEFAN_AUTO)
+			{
+				OperationTime += 3;
+				if(OperationTime > MAX_LEVEL)
+					OperationTime = MAX_LEVEL;
+				OperationTimeTextDisplay(OperationTime);
+				SetSeekBarPositionbyData(seekbarOperationTime,OperationTime);
+			}
 			break;
+		case 1:
 		case 2:
-			if(SelectMode == CAN1CommManager.DATA_STATE_REVERSEFAN_OFF)
+			if((SelectMode != CAN1CommManager.DATA_STATE_REVERSEFAN_AUTO) && (SelectMode != CAN1CommManager.DATA_STATE_REVERSEFAN_OFF)
+					&& (CursurIndex == 2))
 				CursurIndex = 5;
 			else
 				CursurIndex++;
 			CursurDisplay(CursurIndex);
 			break;
-		case 1:
 		case 5:
-		case 6:
-			CursurIndex++;
-			CursurDisplay(CursurIndex);
-			break;
-		case 7:
 			CursurIndex = 1;
 			CursurDisplay(CursurIndex);
 			
@@ -527,40 +620,65 @@ public class CoolingFanReverseModeFragment extends ParentFragment{
 		}
 	}
 	public void ClickESC(){
-		switch (CursurIndex) {
-		case 3:
-		case 4:
-			CursurIndex = 1;
-			CursurDisplay(CursurIndex);
-			break;
-		default:
-			ClickCancel();
-			break;
+		if(SelectMode == CAN1CommManager.DATA_STATE_REVERSEFAN_AUTO)
+		{
+			switch (CursurIndex) {
+			case 3:
+			case 4:
+					CursurIndex = 1;
+					CursurDisplay(CursurIndex);
+				break;
+			default:
+				ClickOK();
+				break;
+			}
+		}
+		else if(SelectMode == CAN1CommManager.DATA_STATE_REVERSEFAN_OFF)
+		{
+			switch (CursurIndex) {
+			case 3:
+					CursurIndex = 1;
+					CursurDisplay(CursurIndex);
+				break;
+			default:
+				ClickCancel();
+				break;
+			}
 		}
 		
 	}
 	public void ClickEnter(){
 		switch (CursurIndex) {
 		case 1:
-			SelectMode = CAN1CommManager.DATA_STATE_REVERSEFAN_AUTO;
-			setCoolingFanReverseRadio(SelectMode);
+			if(SelectMode == CAN1CommManager.DATA_STATE_REVERSEFAN_AUTO){
+				CursurIndex = 3;
+				CursurDisplay(CursurIndex);
+			}else{
+				SelectMode = CAN1CommManager.DATA_STATE_REVERSEFAN_AUTO;
+				setCoolingFanReverseRadio(SelectMode);
+			}
 			break;
 		case 2:
-			SelectMode = CAN1CommManager.DATA_STATE_REVERSEFAN_OFF;
-			setCoolingFanReverseRadio(SelectMode);
+			if(SelectMode == CAN1CommManager.DATA_STATE_REVERSEFAN_OFF){
+				CursurIndex = 3;
+				CursurDisplay(CursurIndex);
+			}else{
+				SelectMode = CAN1CommManager.DATA_STATE_REVERSEFAN_OFF;
+				setCoolingFanReverseRadio(SelectMode);
+			}
 			break;
 		case 3:
-		case 4:
 			CursurIndex++;
 			CursurDisplay(CursurIndex);
 			break;
+		case 4:
+			if(SelectMode == CAN1CommManager.DATA_STATE_REVERSEFAN_AUTO)
+				CursurIndex++;
+			else if(SelectMode == CAN1CommManager.DATA_STATE_REVERSEFAN_OFF)
+				CursurIndex = 3;
+			CursurDisplay(CursurIndex);
+			break;
 		case 5:
-			ClickManual();
-			break;
-		case 6:
-			ClickCancel();
-			break;
-		case 7:
 			ClickOK();
 			break;
 		default:
@@ -570,33 +688,41 @@ public class CoolingFanReverseModeFragment extends ParentFragment{
 	}
 	public void CursurDisplay(int Index){
 		try {
-			radioOn.setPressed(false);
-			radioOff.setPressed(false);
-			imgbtnCancel.setPressed(false);
-			imgbtnManual.setPressed(false);
+			radioAuto.setPressed(false);
+			radioManual.setPressed(false);
 			imgbtnOK.setPressed(false);
-			seekbarInterval.setPressed(false);
-			seekbarOperationTime.setPressed(false);
+			
+			if(SelectMode == CAN1CommManager.DATA_STATE_REVERSEFAN_AUTO){
+				seekbarOperationTime.setPressed(false);
+				seekbarInterval.setPressed(false);
+			}else if(SelectMode == CAN1CommManager.DATA_STATE_REVERSEFAN_OFF){
+				imgViewExcuteBoader.setVisibility(View.INVISIBLE);
+				textViewExcute.setPressed(false);
+			}
 			switch (CursurIndex) {
 				case 1:
-					radioOn.setPressed(true);
+					radioAuto.setPressed(true);
 					break;
 				case 2:
-					radioOff.setPressed(true);
+					radioManual.setPressed(true);
 					break;
 				case 3:
-					seekbarInterval.setPressed(true);
+					if(SelectMode == CAN1CommManager.DATA_STATE_REVERSEFAN_AUTO)
+						seekbarInterval.setPressed(true);
+					else if(SelectMode == CAN1CommManager.DATA_STATE_REVERSEFAN_OFF){
+						textViewExcute.setPressed(false);
+						imgViewExcuteBoader.setVisibility(View.VISIBLE);
+					}
 					break;
 				case 4:
-					seekbarOperationTime.setPressed(true);
+					if(SelectMode == CAN1CommManager.DATA_STATE_REVERSEFAN_AUTO)
+						seekbarOperationTime.setPressed(true);
+					else if(SelectMode == CAN1CommManager.DATA_STATE_REVERSEFAN_OFF){
+						textViewExcute.setPressed(true);
+						imgViewExcuteBoader.setVisibility(View.VISIBLE);
+					}
 					break;
 				case 5:
-					imgbtnManual.setPressed(true);
-					break;
-				case 6:
-					imgbtnCancel.setPressed(true);
-					break;
-				case 7:
 					imgbtnOK.setPressed(true);
 					break;
 				default:
@@ -604,7 +730,7 @@ public class CoolingFanReverseModeFragment extends ParentFragment{
 			}
 		} catch (NullPointerException e) {
 			// TODO: handle exception
-			Log.e(TAG,"NullPointerException CursurDisplay");
+			Log.e(TAG,"NullPointerException CursurDisplay"+CursurIndex+"SelectMode"+SelectMode);
 		}
 	
 	}
