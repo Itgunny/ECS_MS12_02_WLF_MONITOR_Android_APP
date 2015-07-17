@@ -140,10 +140,11 @@ public class MainBLeftDownQuickFragment extends ParentFragment{
 			intent = ParentActivity.getPackageManager().getLaunchIntentForPackage("com.powerone.wfd.sink");
 			if(intent != null){
 				// ++, 150323 bwk
+				ParentActivity.startActivity(intent);
 				CAN1Comm.SetMultimediaFlag(false);
 //				CAN1Comm.SetMiracastFlag(true);
-				// --, 150323 bwk				
-				ParentActivity.startActivity(intent);
+				// --, 150323 bwk
+				ParentActivity.StartAlwaysOntopService();
 				ParentActivity.StartCheckSmartTerminalTimer();
 //				ParentActivity.StartAlwaysOntopService(); // ++, --, 150324 cjg
 			}

@@ -18,6 +18,7 @@ import taeha.wheelloader.fseries_monitor.popup.EHCUErrorPopup;
 import taeha.wheelloader.fseries_monitor.popup.EngineAutoShutdownCountPopup;
 import taeha.wheelloader.fseries_monitor.popup.EngineModePopup;
 import taeha.wheelloader.fseries_monitor.popup.EngineWarmingUpPopup;
+import taeha.wheelloader.fseries_monitor.popup.FanSelectModePopup;
 import taeha.wheelloader.fseries_monitor.popup.FuelInitalPopup;
 import taeha.wheelloader.fseries_monitor.popup.ICCOModePopup;
 import taeha.wheelloader.fseries_monitor.popup.KickDownPopup;
@@ -593,10 +594,16 @@ public class Home extends Activity {
 	//	- 냉각팬 자동/수동 선택 추가
 	//	- 냉각팬 수동 Excute 추가
 	//	- MaxFanControl 프로토콜 및 UI 추가
+	//	- SelectMode에 따라 해당 페이지 제어(팝업추가)
 	// 4. 카메라 Left/Right 버그 수정
 	//	- 마지막에 3채널로 해놓고 카메라를 OFF 했을 경우 초기 1 -> Right 키를 누르면 CH4로 변경되는 버그 수정(항상 첫번째 카메라를 보여줌)
 	// 5. Excute -> Exectue로 오타 변경
-	// 6. 멀티미디어 종료 방법 변경
+	// 6. 멀티미디어(MediaPlayer, 스마트 터미널) 종료 방법 변경
+	// 7. '밧데리' -> '배터리' 표준어 맞춤 
+	// 8. Wiper 사양변경
+	//	- 스위치에 따라 표시된는 것이 아니라 Level 에 따라 표시
+	//	- 와이퍼 색깔 메뉴와 부저와 동일하게 변경
+	// 9. 스마트 터미널 가운데 위에 터치로 종료 기능 추가
 	//////////////////////////////////////////////////////////////////////////////////////
 	
 	// TAG
@@ -817,7 +824,8 @@ public class Home extends Activity {
 	public  static final int SCREEN_STATE_MENU_MANAGEMENT_SERVICE_TOP						= 0x23300000;
 	public  static final int SCREEN_STATE_MENU_MANAGEMENT_SERVICE_PW						= 0x23310000;
 	public  static final int SCREEN_STATE_MENU_MANAGEMENT_SERVICE_SENSORMONITORING_TOP		= 0x23320000;
-	public  static final int SCREEN_STATE_MENU_MANAGEMENT_SERVICE_SENSORMONITORING_HIDDEN	= 0x23321000;
+	public  static final int SCREEN_STATE_MENU_MANAGEMENT_SERVICE_SENSORMONITORING_POPUP	= 0x23321000;
+	public  static final int SCREEN_STATE_MENU_MANAGEMENT_SERVICE_SENSORMONITORING_HIDDEN	= 0x23322000;
 	public  static final int SCREEN_STATE_MENU_MANAGEMENT_SERVICE_SENSORMONITORING_END		= 0x2332FFFF;
 	public  static final int SCREEN_STATE_MENU_MANAGEMENT_SERVICE_SPEEDLIMIT_TOP			= 0x23330000;
 	public  static final int SCREEN_STATE_MENU_MANAGEMENT_SERVICE_SPEEDLIMIT_END			= 0x2333FFFF;
@@ -1183,6 +1191,7 @@ public class Home extends Activity {
 	public CalibrationEHCUPopup				_CalibrationEHCUPopup;
 	public SoftwareUpdateErrorPopup			_SoftwareUpdateErrorPopup;
 	public LanguageChangePopup 				_LanguageChangePopup;
+	public FanSelectModePopup				_FanSelectModePopup;
 	
 	//Toast
 	public WeighingErrorToast				_WeighingErrorToast;
@@ -1555,6 +1564,7 @@ public class Home extends Activity {
 		_CalibrationEHCUPopup = new CalibrationEHCUPopup(this);
 		_SoftwareUpdateErrorPopup = new SoftwareUpdateErrorPopup(this);
 		_LanguageChangePopup = new LanguageChangePopup(this);
+		_FanSelectModePopup = new FanSelectModePopup(this);
 		
 		_WeighingErrorToast = new WeighingErrorToast(this);
 	}
@@ -1603,6 +1613,7 @@ public class Home extends Activity {
 		_CalibrationEHCUPopup = new CalibrationEHCUPopup(this);
 		_SoftwareUpdateErrorPopup = new SoftwareUpdateErrorPopup(this);
 		_LanguageChangePopup = new LanguageChangePopup(this);
+		_FanSelectModePopup = new FanSelectModePopup(this);
 	}
 	// --, 150306 bwk
 	
@@ -3650,6 +3661,22 @@ public class Home extends Activity {
 		HomeDialog = _LanguageChangePopup;
 		HomeDialog.show();
 	}
+	public void showFanSelectModePopup() {
+		if (AnimationRunningFlag == true)
+			return;
+		else
+			StartAnimationRunningTimer();
+
+		if (HomeDialog != null) {
+			HomeDialog.dismiss();
+			HomeDialog = null;
+		}
+
+		HomeDialog = _FanSelectModePopup;
+		HomeDialog.show();
+	}
+
+	
 	/////////////////////////////////////////////////////
 
 	//Timer//////////////////////////////////////////////

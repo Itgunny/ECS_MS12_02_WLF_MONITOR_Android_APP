@@ -538,6 +538,7 @@ public class MenuMultimediaFragment extends ParentFragment{
 				Intent intent;
 				intent = ParentActivity.getPackageManager().getLaunchIntentForPackage("com.mxtech.videoplayer.ad");
 				if(intent != null){
+					CAN1Comm.SetMiracastFlag(false);
 					//CAN1Comm.SetMultimediaFlag(true);	// ++, --, 150323 bwk
 					ParentActivity.startActivity(intent);
 					ParentActivity.StartAlwaysOntopService();		// ++, --, 150324 cjg
@@ -558,6 +559,7 @@ public class MenuMultimediaFragment extends ParentFragment{
 			if(intent != null){
 				ParentActivity.startActivity(intent);
 				CAN1Comm.SetMultimediaFlag(false);
+				ParentActivity.StartAlwaysOntopService();
 				ParentActivity.StartCheckSmartTerminalTimer();
 			}
 		}		

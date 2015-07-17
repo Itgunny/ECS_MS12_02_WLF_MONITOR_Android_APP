@@ -111,7 +111,7 @@
     <string name="Latest_Odometer">최근 주행거리</string>
     <string name="HYD_Temp">작동유 온도</string>
     <string name="TM_Oil_Temp">TM 오일 온도</string>
-    <string name="Battery_Volt">밧데리 전압</string>
+    <string name="Battery_Volt">배터리 전압</string>
     <string name="Weighing_System">작업량 계측 상태</string>
     <string name="Coolant_Temp">냉각수 온도</string>
     <string name="User_Switching">사용자 전환</string>

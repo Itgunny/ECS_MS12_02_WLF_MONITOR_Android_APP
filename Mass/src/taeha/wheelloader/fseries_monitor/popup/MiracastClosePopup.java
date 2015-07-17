@@ -46,7 +46,7 @@ public class MiracastClosePopup extends ParentPopup {
 	public MiracastClosePopup(Context _context) {
 		super(_context);
 		// TODO Auto-generated constructor stub
-		TAG = "OperationHistoryInitPopup";
+		TAG = "MiracastClosePopup";
 		ParentActivity = (Home)_context;
 		inflater = (LayoutInflater)_context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 		mRoot = inflater.inflate(R.layout.popup_miracast_close, null);
@@ -134,7 +134,18 @@ public class MiracastClosePopup extends ParentPopup {
 	///////////////////////////////////////////////////////////////////////////////
 	public void ClickOK(){
 		this.dismiss();
-		ParentActivity.KillApps("com.powerone.wfd.sink");
+//		ParentActivity.KillApps("com.powerone.wfd.sink");
+		//++, 150715 cjg
+		Runtime runtime = Runtime.getRuntime();
+		Process process;
+		try{
+			String cmd = "am force-stop com.powerone.wfd.sink";
+			process = runtime.exec(cmd);
+			Log.d(TAG, "am force-stop com.powerone.wfd.sink");
+		}catch(Exception e){
+			e.fillInStackTrace();
+		}
+		//--, 150715 cjg
 		CAN1Comm.SetMiracastFlag(false);
 		Intent intent;
 		intent = ParentActivity.getPackageManager().getLaunchIntentForPackage("com.mxtech.videoplayer.ad");

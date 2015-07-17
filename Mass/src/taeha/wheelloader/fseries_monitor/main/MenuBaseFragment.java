@@ -1585,6 +1585,9 @@ public class MenuBaseFragment extends ParentFragment{
 		case Home.SCREEN_STATE_MENU_MANAGEMENT_SERVICE_SENSORMONITORING_TOP:
 			_ServiceMenuSensorMonitoringFragment.ClickLeft();
 			break;
+		case Home.SCREEN_STATE_MENU_MANAGEMENT_SERVICE_SENSORMONITORING_POPUP:
+			ParentActivity._FanSelectModePopup.ClickLeft();
+			break;
 		case Home.SCREEN_STATE_MENU_MANAGEMENT_SERVICE_SENSORMONITORING_HIDDEN:
 			_ServiceMenuSensorMonitoringHiddenFragment.ClickLeft();
 			break;
@@ -1868,6 +1871,9 @@ public class MenuBaseFragment extends ParentFragment{
 		case Home.SCREEN_STATE_MENU_MANAGEMENT_SERVICE_SENSORMONITORING_TOP:
 			_ServiceMenuSensorMonitoringFragment.ClickRight();
 			break;
+		case Home.SCREEN_STATE_MENU_MANAGEMENT_SERVICE_SENSORMONITORING_POPUP:
+			ParentActivity._FanSelectModePopup.ClickRight();
+			break;			
 		case Home.SCREEN_STATE_MENU_MANAGEMENT_SERVICE_SENSORMONITORING_HIDDEN:
 			_ServiceMenuSensorMonitoringHiddenFragment.ClickRight();
 			break;
@@ -2154,6 +2160,9 @@ public class MenuBaseFragment extends ParentFragment{
 		case Home.SCREEN_STATE_MENU_MANAGEMENT_SERVICE_SENSORMONITORING_TOP:
 			_ServiceMenuSensorMonitoringFragment.ClickESC();
 			break;
+		case Home.SCREEN_STATE_MENU_MANAGEMENT_SERVICE_SENSORMONITORING_POPUP:
+			ParentActivity._FanSelectModePopup.ClickESC();
+			break;
 		case Home.SCREEN_STATE_MENU_MANAGEMENT_SERVICE_SENSORMONITORING_HIDDEN:
 			_ServiceMenuSensorMonitoringHiddenFragment.ClickESC();
 			break;
@@ -2437,6 +2446,9 @@ public class MenuBaseFragment extends ParentFragment{
 			break;
 		case Home.SCREEN_STATE_MENU_MANAGEMENT_SERVICE_SENSORMONITORING_TOP:
 			_ServiceMenuSensorMonitoringFragment.ClickEnter();
+			break;
+		case Home.SCREEN_STATE_MENU_MANAGEMENT_SERVICE_SENSORMONITORING_POPUP:
+			ParentActivity._FanSelectModePopup.ClickEnter();
 			break;
 		case Home.SCREEN_STATE_MENU_MANAGEMENT_SERVICE_SENSORMONITORING_HIDDEN:
 			_ServiceMenuSensorMonitoringHiddenFragment.ClickEnter();

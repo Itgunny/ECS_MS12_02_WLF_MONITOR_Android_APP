@@ -64,9 +64,7 @@ public class AlwaysOnTopService extends Service{
 			switch(event.getAction()){
 			case MotionEvent.ACTION_DOWN:
 				//Log.d("TAG", "x : " + event.getX() + "y : " + event.getY());
-				if(CommService.multimediaFlag == false){
-					CommService.BackKeyEvent();
-				}else{
+				if (CommService.multimediaFlag == true){
 					//++, 150715 cjg
 					Runtime runtime = Runtime.getRuntime();
 					Process process;
@@ -78,7 +76,19 @@ public class AlwaysOnTopService extends Service{
 						e.fillInStackTrace();
 					}
 					//--, 150715 cjg
-				}
+				}else if(CommService.miracastFlag == true){
+					Runtime runtime = Runtime.getRuntime();
+					Process process;
+					try{
+						String cmd = "am force-stop com.powerone.wfd.sink";
+						process = runtime.exec(cmd);
+						Log.d(TAG, "am force-stop com.powerone.wfd.sink");
+					}catch(Exception e){
+						e.fillInStackTrace();
+					}
+				}else
+					CommService.BackKeyEvent();
+
 				
 			}
 			return false;

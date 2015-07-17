@@ -1222,7 +1222,7 @@ public class CommService extends Service{
 				{
 					// ++, 150320 cjg
 					//BackKeyEvent();
-					if(multimediaFlag == true){
+					if((miracastFlag == true) || (multimediaFlag == true)){
 						HandleKeyButton.sendMessage(HandleKeyButton.obtainMessage(Data));
 					}else{
 						BackKeyEvent();
@@ -1515,6 +1515,8 @@ public class CommService extends Service{
 					if(CheckTopApps("com.mxtech.videoplayer.ad")){
 						//MenuKeyEvent();
 						CloseMXPlayer();
+					}else if(CheckTopApps("com.powerone.wfd.sink")){
+						CloseSmartTerminal();
 					}
 				}
 				// --, 150319 cjg
@@ -1746,5 +1748,17 @@ public class CommService extends Service{
 			e.fillInStackTrace();
 		}
 		//--, 150715 cjg
+	}
+	public void CloseSmartTerminal(){
+		Runtime runtime = Runtime.getRuntime();
+		Process process;
+		try{
+			String cmd = "am force-stop com.powerone.wfd.sink";
+			process = runtime.exec(cmd);
+			Log.d(TAG, "am force-stop com.powerone.wfd.sink");
+		}catch(Exception e){
+			e.fillInStackTrace();
+		}
+		
 	}
 }

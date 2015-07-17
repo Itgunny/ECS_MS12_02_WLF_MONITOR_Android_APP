@@ -131,7 +131,6 @@ public class MainBRightDownQuickFragment extends ParentFragment{
 				ParentActivity.OldScreenIndex = ParentActivity.SCREEN_STATE_MAIN_B_QUICK_TOP;
 				ParentActivity._MiracastClosePopup.show();
 			}else{
-				ParentActivity.KillApps("com.powerone.wfd.sink");
 				Intent intent;
 				intent = ParentActivity.getPackageManager().getLaunchIntentForPackage("com.mxtech.videoplayer.ad");
 				if(intent != null){

@@ -370,27 +370,33 @@ public class MainAUpperMenuBarFragment extends ParentFragment{
 	}	
 	
 	public void WiperDisplay(int Status, int Level){
-		if(Status == CAN1CommManager.DATA_STATE_WIPER_OFF){
-			imgViewWiperIcon.setImageResource(R.drawable.main_menubar_icon_wiper_off);
-			imgViewWiperLevel1.setImageResource(R.drawable.main_menubar_icon_wiper_step_off);
-			imgViewWiperLevel2.setImageResource(R.drawable.main_menubar_icon_wiper_step_off);
-			imgViewWiperLevel3.setImageResource(R.drawable.main_menubar_icon_wiper_step_off);
-			imgViewWiperLevel4.setImageResource(R.drawable.main_menubar_icon_wiper_step_off);
-			
-			imgViewWiperIcon.setAlpha((float)0.1);
-			imgViewWiperLevel1.setAlpha((float)0.1);
-			imgViewWiperLevel2.setAlpha((float)0.1);
-			imgViewWiperLevel3.setAlpha((float)0.1);
-			imgViewWiperLevel4.setAlpha((float)0.1);
-			
-			setWiperButtonEnable(false);
-		}else{
+//		if(Status == CAN1CommManager.DATA_STATE_WIPER_OFF){
+//			imgViewWiperIcon.setImageResource(R.drawable.main_menubar_icon_wiper_off);
+//			imgViewWiperLevel1.setImageResource(R.drawable.main_menubar_icon_wiper_step_off);
+//			imgViewWiperLevel2.setImageResource(R.drawable.main_menubar_icon_wiper_step_off);
+//			imgViewWiperLevel3.setImageResource(R.drawable.main_menubar_icon_wiper_step_off);
+//			imgViewWiperLevel4.setImageResource(R.drawable.main_menubar_icon_wiper_step_off);
+//			
+//			imgViewWiperIcon.setAlpha((float)0.1);
+//			imgViewWiperLevel1.setAlpha((float)0.1);
+//			imgViewWiperLevel2.setAlpha((float)0.1);
+//			imgViewWiperLevel3.setAlpha((float)0.1);
+//			imgViewWiperLevel4.setAlpha((float)0.1);
+//			
+//			setWiperButtonEnable(false);
+//		}else
+		{
+			imgViewWiperIcon.setImageResource(R.drawable.main_menubar_icon_wiper_on);
+			imgViewWiperLevel1.setImageResource(R.drawable.main_menubar_icon_wiper_step_on);
+			imgViewWiperLevel2.setImageResource(R.drawable.main_menubar_icon_wiper_step_on);
+			imgViewWiperLevel3.setImageResource(R.drawable.main_menubar_icon_wiper_step_on);
+			imgViewWiperLevel4.setImageResource(R.drawable.main_menubar_icon_wiper_step_on);
 			if(Level == 1){
-				imgViewWiperIcon.setImageResource(R.drawable.main_menubar_icon_wiper_on);
-				imgViewWiperLevel1.setImageResource(R.drawable.main_menubar_icon_wiper_step_on);
-				imgViewWiperLevel2.setImageResource(R.drawable.main_menubar_icon_wiper_step_off);
-				imgViewWiperLevel3.setImageResource(R.drawable.main_menubar_icon_wiper_step_off);
-				imgViewWiperLevel4.setImageResource(R.drawable.main_menubar_icon_wiper_step_off);
+//				imgViewWiperIcon.setImageResource(R.drawable.main_menubar_icon_wiper_on);
+//				imgViewWiperLevel1.setImageResource(R.drawable.main_menubar_icon_wiper_step_on);
+//				imgViewWiperLevel2.setImageResource(R.drawable.main_menubar_icon_wiper_step_off);
+//				imgViewWiperLevel3.setImageResource(R.drawable.main_menubar_icon_wiper_step_off);
+//				imgViewWiperLevel4.setImageResource(R.drawable.main_menubar_icon_wiper_step_off);
 				
 				imgViewWiperIcon.setAlpha((float)1);
 				imgViewWiperLevel1.setAlpha((float)1);
@@ -399,11 +405,11 @@ public class MainAUpperMenuBarFragment extends ParentFragment{
 				imgViewWiperLevel4.setAlpha((float)0.1);
 			}
 			else if(Level == 2){
-				imgViewWiperIcon.setImageResource(R.drawable.main_menubar_icon_wiper_on);
-				imgViewWiperLevel1.setImageResource(R.drawable.main_menubar_icon_wiper_step_on);
-				imgViewWiperLevel2.setImageResource(R.drawable.main_menubar_icon_wiper_step_on);
-				imgViewWiperLevel3.setImageResource(R.drawable.main_menubar_icon_wiper_step_off);
-				imgViewWiperLevel4.setImageResource(R.drawable.main_menubar_icon_wiper_step_off);
+//				imgViewWiperIcon.setImageResource(R.drawable.main_menubar_icon_wiper_on);
+//				imgViewWiperLevel1.setImageResource(R.drawable.main_menubar_icon_wiper_step_on);
+//				imgViewWiperLevel2.setImageResource(R.drawable.main_menubar_icon_wiper_step_on);
+//				imgViewWiperLevel3.setImageResource(R.drawable.main_menubar_icon_wiper_step_off);
+//				imgViewWiperLevel4.setImageResource(R.drawable.main_menubar_icon_wiper_step_off);
 				
 				imgViewWiperIcon.setAlpha((float)1);
 				imgViewWiperLevel1.setAlpha((float)1);
@@ -412,11 +418,11 @@ public class MainAUpperMenuBarFragment extends ParentFragment{
 				imgViewWiperLevel4.setAlpha((float)0.1);
 			}
 			else if(Level == 3){
-				imgViewWiperIcon.setImageResource(R.drawable.main_menubar_icon_wiper_on);
-				imgViewWiperLevel1.setImageResource(R.drawable.main_menubar_icon_wiper_step_on);
-				imgViewWiperLevel2.setImageResource(R.drawable.main_menubar_icon_wiper_step_on);
-				imgViewWiperLevel3.setImageResource(R.drawable.main_menubar_icon_wiper_step_on);
-				imgViewWiperLevel4.setImageResource(R.drawable.main_menubar_icon_wiper_step_off);
+//				imgViewWiperIcon.setImageResource(R.drawable.main_menubar_icon_wiper_on);
+//				imgViewWiperLevel1.setImageResource(R.drawable.main_menubar_icon_wiper_step_on);
+//				imgViewWiperLevel2.setImageResource(R.drawable.main_menubar_icon_wiper_step_on);
+//				imgViewWiperLevel3.setImageResource(R.drawable.main_menubar_icon_wiper_step_on);
+//				imgViewWiperLevel4.setImageResource(R.drawable.main_menubar_icon_wiper_step_off);
 				
 				imgViewWiperIcon.setAlpha((float)1);
 				imgViewWiperLevel1.setAlpha((float)1);
@@ -425,11 +431,11 @@ public class MainAUpperMenuBarFragment extends ParentFragment{
 				imgViewWiperLevel4.setAlpha((float)0.1);
 			}
 			else if(Level == 4){
-				imgViewWiperIcon.setImageResource(R.drawable.main_menubar_icon_wiper_on);
-				imgViewWiperLevel1.setImageResource(R.drawable.main_menubar_icon_wiper_step_on);
-				imgViewWiperLevel2.setImageResource(R.drawable.main_menubar_icon_wiper_step_on);
-				imgViewWiperLevel3.setImageResource(R.drawable.main_menubar_icon_wiper_step_on);
-				imgViewWiperLevel4.setImageResource(R.drawable.main_menubar_icon_wiper_step_on);
+//				imgViewWiperIcon.setImageResource(R.drawable.main_menubar_icon_wiper_on);
+//				imgViewWiperLevel1.setImageResource(R.drawable.main_menubar_icon_wiper_step_on);
+//				imgViewWiperLevel2.setImageResource(R.drawable.main_menubar_icon_wiper_step_on);
+//				imgViewWiperLevel3.setImageResource(R.drawable.main_menubar_icon_wiper_step_on);
+//				imgViewWiperLevel4.setImageResource(R.drawable.main_menubar_icon_wiper_step_on);
 				
 				imgViewWiperIcon.setAlpha((float)1);
 				imgViewWiperLevel1.setAlpha((float)1);

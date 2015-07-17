@@ -169,6 +169,7 @@ public class MainACenterQuickFragment extends MainACenterFragment{
 				ParentActivity.startActivity(intent);
 				CAN1Comm.SetMultimediaFlag(false);
 				Clickable(false);	// ++, --, 150511 cjg
+				ParentActivity.StartAlwaysOntopService();
 //				CAN1Comm.SetMiracastFlag(true);
 				ParentActivity.StartCheckSmartTerminalTimer();
 			}
@@ -181,7 +182,6 @@ public class MainACenterQuickFragment extends MainACenterFragment{
 				ParentActivity.OldScreenIndex = ParentActivity.SCREEN_STATE_MAIN_A_QUICK_TOP;
 				ParentActivity._MiracastClosePopup.show();
 			}else{
-				ParentActivity.KillApps("com.powerone.wfd.sink");
 				Intent intent;
 				intent = ParentActivity.getPackageManager().getLaunchIntentForPackage("com.mxtech.videoplayer.ad");
 				if(intent != null){

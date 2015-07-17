@@ -1,5 +1,8 @@
 package taeha.wheelloader.fseries_monitor.menu.management;
 
+import java.util.Timer;
+import java.util.TimerTask;
+
 import taeha.wheelloader.fseries_monitor.main.CAN1CommManager;
 import taeha.wheelloader.fseries_monitor.main.Home;
 import taeha.wheelloader.fseries_monitor.main.ParentFragment;
@@ -21,9 +24,13 @@ import android.widget.TextView;
 import customlist.sensormonitoring.IconTextItem;
 import customlist.sensormonitoring.IconTextListAdapter;
 
+
+
 public class ServiceMenuSensorMonitoringHiddenFragment extends ParentFragment{
 	//CONSTANT////////////////////////////////////////
-	private static final int NumofItem = 20;
+	private static final int ADJUST_MODE = 1;
+	private static final int FAN_SPEED_MAX_MODE = 2;
+	private static final int FAN_REVERSE_MODE = 3;
 	//////////////////////////////////////////////////
 	//RESOURCE////////////////////////////////////////
 	ImageButton imgbtnOK;
@@ -50,6 +57,7 @@ public class ServiceMenuSensorMonitoringHiddenFragment extends ParentFragment{
 	//////////////////////////////////////////////////
 	
 	//VALUABLE////////////////////////////////////////
+	int SelectMode;
 	int nFanRpm;
 	int nEpprCurrent;
 	int nBreakeFailureWarningPS;
@@ -63,6 +71,9 @@ public class ServiceMenuSensorMonitoringHiddenFragment extends ParentFragment{
 	
 	int CursurIndex;
 	Handler HandleCursurDisplay;
+	
+	private Timer	mEnableButtonTimer = null;	
+	
 	//////////////////////////////////////////////////
 	
 	//Fragment////////////////////////////////////////
@@ -89,6 +100,8 @@ public class ServiceMenuSensorMonitoringHiddenFragment extends ParentFragment{
 		InitValuables();
 		InitButtonListener();
 		
+		StartEnableButtonTimer();
+		
 		CAN1Comm.Set_TestMode_PGN61184_61(0);
 		CAN1Comm.Set_FanSpeedMaxControlMode_210_PGN61184_61(CAN1CommManager.DATA_STATE_OFF);
 		CAN1Comm.TxCANToMCU(61);
@@ -97,7 +110,6 @@ public class ServiceMenuSensorMonitoringHiddenFragment extends ParentFragment{
 		setCoolingFanReverseRadio(CoolingFanReverse);
 		SetMaxControlFanSpeed(MaxControlFanSpeed);
 		
-		CursurDisplay(CursurIndex);
 		ParentActivity.ScreenIndex = ParentActivity.SCREEN_STATE_MENU_MANAGEMENT_SERVICE_SENSORMONITORING_HIDDEN;
 		ParentActivity._MenuBaseFragment._MenuInterTitleFragment.SetTitleText(ParentActivity.getResources().getString(R.string.Fan_EPPR_Current_Adjust));
 		HandleCursurDisplay = new Handler() {
@@ -109,6 +121,7 @@ public class ServiceMenuSensorMonitoringHiddenFragment extends ParentFragment{
 		};
 		return mRoot;
 	}
+	
 	@Override
 	public void onDestroyView() {
 		// TODO Auto-generated method stub
@@ -158,12 +171,10 @@ public class ServiceMenuSensorMonitoringHiddenFragment extends ParentFragment{
 		EpprActive = false;
 		ManualPress = false;
 		listView.setAdapter(adapter);
+		SelectMode = ADJUST_MODE;
 		
 		CoolingFanReverse = CAN1Comm.Get_CoolingFanReverseMode_182_PGN65369();
 		MaxControlFanSpeed = CAN1Comm.Get_FanSpeedMaxControlMode_210_PGN65369();
-		
-		CursurIndex = 1;
-		
 	}
 	@Override
 	protected void InitButtonListener() {
@@ -257,25 +268,68 @@ public class ServiceMenuSensorMonitoringHiddenFragment extends ParentFragment{
 	@Override
 	protected void UpdateUI() {
 		// TODO Auto-generated method stub
-		CheckCoolingFanManualButton();
+		if(SelectMode == FAN_REVERSE_MODE)
+			CheckCoolingFanManualButton();
 		StatusListDisplay(nFanRpm,nEpprCurrent,nBreakeFailureWarningPS,nBrakePriorityPS);
 		ReverseFanDisplay(ReverseFan);
 		SetMaxControlFanSpeed(MaxControlFanSpeed);
 	}
 	/////////////////////////////////////////////////////////////////////
+	public void SetSelectMode(int index){
+		SelectMode = index;
+		
+		imgbtnDown.setClickable(false);
+		imgbtnUp.setClickable(false);
+		radioAuto.setClickable(false);
+		radioManual.setClickable(false);
+		textViewExcute.setClickable(false);
+		checkMaxControl.setClickable(false);
+		textViewMaxControl.setClickable(false);
+
+		imgbtnDown.setAlpha((float)0.5);
+		imgbtnUp.setAlpha((float)0.5);
+		radioAuto.setAlpha((float)0.5);
+		radioManual.setAlpha((float)0.5);
+		textViewExcute.setAlpha((float)0.5);
+		checkMaxControl.setAlpha((float)0.5);
+		textViewMaxControl.setAlpha((float)0.5);		
+		switch(index){
+			case ADJUST_MODE:
+			default:
+				imgbtnDown.setClickable(true);
+				imgbtnUp.setClickable(true);
+				imgbtnDown.setAlpha((float)1);
+				imgbtnUp.setAlpha((float)1);
+				CursurIndex = 1;
+				break;
+			case FAN_SPEED_MAX_MODE:
+				checkMaxControl.setClickable(true);
+				textViewMaxControl.setClickable(true);
+				checkMaxControl.setAlpha((float)1);
+				textViewMaxControl.setAlpha((float)1);
+				CursurIndex = 5;
+				break;
+			case FAN_REVERSE_MODE:
+				radioAuto.setClickable(true);
+				radioManual.setClickable(true);
+				textViewExcute.setClickable(true);
+				radioAuto.setAlpha((float)1);
+				radioManual.setAlpha((float)1);
+				textViewExcute.setAlpha((float)1);
+				CursurIndex = 3;
+				break;
+		}
+		CursurDisplay(CursurIndex);
+		
+		if(checkMaxControl.isChecked() == true)
+			checkMaxControl.setChecked(false);
+	}
 	public void CheckCoolingFanManualButton(){
 		if(textViewExcute.isPressed() == true){
 //			Log.d(TAG, "Set_CoolingFanReverseManual_PGN61184_61(1)");
 			CAN1Comm.Set_CoolingFanReverseManual_PGN61184_61(1);
 			CAN1Comm.TxCANToMCU(61);
 			CAN1Comm.Set_CoolingFanReverseManual_PGN61184_61(3);
-			if(ManualPress == false)
-			{
-				checkMaxControl.setClickable(false);
-				checkMaxControl.setAlpha((float)0.5);
-				textViewMaxControl.setClickable(false);
-				textViewMaxControl.setAlpha((float)0.5);
-			}
 			ManualPress = true;
 			
 		}
@@ -285,11 +339,6 @@ public class ServiceMenuSensorMonitoringHiddenFragment extends ParentFragment{
 			CAN1Comm.Set_CoolingFanReverseManual_PGN61184_61(0);
 			CAN1Comm.TxCANToMCU(61);
 			CAN1Comm.Set_CoolingFanReverseManual_PGN61184_61(3);
-			
-			checkMaxControl.setClickable(true);
-			checkMaxControl.setAlpha((float)1);
-			textViewMaxControl.setClickable(true);
-			textViewMaxControl.setAlpha((float)1);
 			
 			ManualPress = false;
 		}
@@ -301,22 +350,18 @@ public class ServiceMenuSensorMonitoringHiddenFragment extends ParentFragment{
 			radioAuto.setChecked(false);
 			ReverseFan = CAN1Comm.Get_CoolingFandrivingStatus_180_PGN65428();
 			imgViewCoolingFanIcon.setImageResource(R.drawable.menu_mode_fan_manual_icon_gray_popup);
-			checkMaxControl.setClickable(true);
-			checkMaxControl.setAlpha((float)1);
-			textViewExcute.setClickable(true);
-			textViewExcute.setAlpha((float)1);
-			textViewMaxControl.setClickable(true);
-			textViewMaxControl.setAlpha((float)1);
+			if(SelectMode == FAN_REVERSE_MODE){
+				textViewExcute.setClickable(true);
+				textViewExcute.setAlpha((float)1);
+			}
 			break;
 		case CAN1CommManager.DATA_STATE_REVERSEFAN_AUTO:
 			radioManual.setChecked(false);
 			radioAuto.setChecked(true);
-			textViewExcute.setClickable(false);
-			textViewExcute.setAlpha((float)0.5);
-			checkMaxControl.setClickable(false);
-			checkMaxControl.setAlpha((float)0.5);
-			textViewMaxControl.setClickable(false);
-			textViewMaxControl.setAlpha((float)0.5);
+			if(SelectMode == FAN_REVERSE_MODE){
+				textViewExcute.setClickable(false);
+				textViewExcute.setAlpha((float)0.5);
+			}
 			break;
 		}
 	}
@@ -351,7 +396,6 @@ public class ServiceMenuSensorMonitoringHiddenFragment extends ParentFragment{
 		}		
 	}
 	/////////////////////////////////////////////////////////////////////	
-
 	public void ClickOK(){
 		if(ParentActivity.AnimationRunningFlag == true)
 			return;
@@ -413,12 +457,8 @@ public class ServiceMenuSensorMonitoringHiddenFragment extends ParentFragment{
 	public void ClickMaxControl(){
 		if(checkMaxControl.isChecked() == true){
 			CAN1Comm.Set_FanSpeedMaxControlMode_210_PGN61184_61(CAN1CommManager.DATA_STATE_ON);
-			textViewExcute.setClickable(false);
-			textViewExcute.setAlpha((float)0.5);			
 		}else{
 			CAN1Comm.Set_FanSpeedMaxControlMode_210_PGN61184_61(CAN1CommManager.DATA_STATE_OFF);
-			textViewExcute.setClickable(true);
-			textViewExcute.setAlpha((float)1);			
 		}
 		CAN1Comm.TxCANToMCU(61);
 		CAN1Comm.Set_FanSpeedMaxControlMode_210_PGN61184_61(3);
@@ -522,54 +562,133 @@ public class ServiceMenuSensorMonitoringHiddenFragment extends ParentFragment{
 		}
 		return Result;
 	}
-	
+	/////////////////////////////////////////////////////////////////////
+	public class EnableButtonTimerClass extends TimerTask{
+
+		@Override
+		public void run() {
+			// TODO Auto-generated method stub
+			ParentActivity.runOnUiThread(new Runnable() {
+
+				@Override
+				public void run() {
+					// TODO Auto-generated method stub
+					if(ParentActivity.AnimationRunningFlag == false)
+					{
+						CancelEnableButtonTimer();
+						ParentActivity.showFanSelectModePopup();
+					}
+				}
+			});
+
+		}
+
+	}
+
+	public void StartEnableButtonTimer(){
+		CancelEnableButtonTimer();
+		mEnableButtonTimer = new Timer();
+		mEnableButtonTimer.schedule(new EnableButtonTimerClass(),1,50);	
+	}
+
+	public void CancelEnableButtonTimer(){
+		if(mEnableButtonTimer != null){
+			mEnableButtonTimer.cancel();
+			mEnableButtonTimer.purge();
+			mEnableButtonTimer = null;
+		}
+
+	}
 	/////////////////////////////////////////////////////////////////////
 	public void ClickLeft(){
-		switch (CursurIndex) {
-		case 1:
-			CursurIndex = 6;
-			CursurDisplay(CursurIndex);
-			break;
-		case 2:
-		case 3:
-		case 4:
-		case 5:
-			CursurIndex--;
-			CursurDisplay(CursurIndex);
-			break;
-		case 6:
-			if((CoolingFanReverse == CAN1CommManager.DATA_STATE_REVERSEFAN_OFF) && (textViewExcute.isPressed() == false))
-				CursurIndex--;
-			else
-				CursurIndex = 4;;
-			CursurDisplay(CursurIndex);
-			break;
-		default:
-			break;
+		switch(SelectMode){
+			case ADJUST_MODE:
+				switch (CursurIndex) {
+				case 1:
+					CursurIndex = 6;
+					break;
+				case 2:
+				default:
+					CursurIndex = 1;
+					break;
+				case 6:
+					CursurIndex = 2;
+					break;
+				}
+				CursurDisplay(CursurIndex);
+				break;
+			case FAN_SPEED_MAX_MODE:
+				switch (CursurIndex) {
+				case 5:
+					CursurIndex = 6;
+					break;
+				case 6:
+				default:
+					CursurIndex = 5;
+					break;
+				}
+				CursurDisplay(CursurIndex);
+				break;
+			case FAN_REVERSE_MODE:
+				switch (CursurIndex) {
+				case 3:
+					CursurIndex = 6;
+					break;
+				case 4:
+				default:
+					CursurIndex = 3;
+					break;
+				case 6:
+					CursurIndex = 4;
+					break;
+				}
+				CursurDisplay(CursurIndex);
+				break;
 		}
-		
 	}
 	public void ClickRight(){
-		switch (CursurIndex) {
-		case 1:
-		case 2:
-		case 3:
-		case 5:
-			CursurIndex++;
-			CursurDisplay(CursurIndex);
-			break;
-		case 4:
-			if((CoolingFanReverse == CAN1CommManager.DATA_STATE_REVERSEFAN_OFF) && (textViewExcute.isPressed() == false))
-				CursurIndex++;
-			else
+		switch(SelectMode){
+		case ADJUST_MODE:
+			switch (CursurIndex) {
+			case 1:
+				CursurIndex = 2;
+				break;
+			case 2:
 				CursurIndex = 6;
+				break;
+			case 6:
+			default:
+				CursurIndex = 1;
+				break;
+			}
 			CursurDisplay(CursurIndex);
 			break;
-		case 6:
-			CursurIndex = 1;
+		case FAN_SPEED_MAX_MODE:
+			switch (CursurIndex) {
+			case 5:
+				CursurIndex = 6;
+				break;
+			case 6:
+			default:
+				CursurIndex = 5;
+				break;
+			}
 			CursurDisplay(CursurIndex);
 			break;
-		default:
+		case FAN_REVERSE_MODE:
+			switch (CursurIndex) {
+			case 3:
+				CursurIndex = 4;
+				break;
+			case 4:
+				CursurIndex = 6;
+				break;
+			case 6:
+			default:
+				CursurIndex = 3;
+				break;
+			}
+			CursurDisplay(CursurIndex);
 			break;
 		}
 	}

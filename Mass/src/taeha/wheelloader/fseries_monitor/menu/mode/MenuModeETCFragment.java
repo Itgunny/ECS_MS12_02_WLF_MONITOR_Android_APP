@@ -428,9 +428,9 @@ public class MenuModeETCFragment extends MenuBodyList_ParentFragment{
 		}
 	}
 	public void WiperDisplay(int status, int level){
-		if(status == CAN1CommManager.DATA_STATE_WIPER_OFF){
-			setListData3(ParentActivity.getResources().getString(string.Off));
-		}else if(status == CAN1CommManager.DATA_STATE_WIPER_ON){
+//		if(status == CAN1CommManager.DATA_STATE_WIPER_OFF){
+//			setListData3(ParentActivity.getResources().getString(string.Off));
+//		}else if(status == CAN1CommManager.DATA_STATE_WIPER_ON){
 			switch (level) {
 			case CAN1CommManager.DATA_STATE_WIPER_LEVEL1:
 				setListData3(ParentActivity.getResources().getString(string.Slow));
@@ -447,7 +447,7 @@ public class MenuModeETCFragment extends MenuBodyList_ParentFragment{
 			default:
 				break;
 			}
-		}
+//		}
 	}
 	/////////////////////////////////////////////////////////////////////
 	
