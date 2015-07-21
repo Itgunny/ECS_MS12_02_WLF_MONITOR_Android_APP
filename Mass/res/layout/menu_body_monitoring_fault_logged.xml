@@ -144,11 +144,11 @@
                     android:layout_alignLeft="@+id/imageView_menu_body_monitoring_fault_logged_detail_title_line"
                     android:layout_alignRight="@+id/imageView_menu_body_monitoring_fault_logged_detail_title_line"
                     android:layout_alignTop="@+id/imageView_menu_body_monitoring_fault_logged_detail_title_icon"
-                    android:layout_marginLeft="10dp"
+                    android:layout_marginLeft="20dp"
                     android:gravity="center_vertical"
                     android:text="Large Text"
                     android:textColor="@drawable/_selector_menu_body_monitoring_fault_txt"
-                    android:textAppearance="?android:attr/textAppearanceLarge" />
+                    android:textSize="25sp" />
 		       
                 <ImageView
                     android:id="@+id/imageView_menu_body_monitoring_fault_logged_detail_title_line"
@@ -156,16 +156,17 @@
                     android:layout_height="wrap_content"
                     android:layout_centerHorizontal="true"
                     android:layout_centerVertical="false"
-                    android:layout_marginTop="50dp"
+                    android:layout_marginTop="46dp"
                     android:src="@drawable/menu_information_fault_line_horizontal2" />
                 
                 <ImageView
                     android:id="@+id/imageView_menu_body_monitoring_fault_logged_detail_title_icon"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_alignParentTop="true"
+                    android:layout_centerHorizontal="true"
                     android:layout_alignBottom="@+id/imageView_menu_body_monitoring_fault_logged_detail_title_line"
                     android:layout_alignRight="@+id/imageView_menu_body_monitoring_fault_logged_detail_title_line"
-                    android:layout_marginBottom="10dp"
                     android:src="@drawable/menu_information_fault_up_btn_selected"/>
                 
                 <TextView

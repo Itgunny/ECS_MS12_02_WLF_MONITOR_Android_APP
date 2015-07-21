@@ -75,7 +75,7 @@ public class Home extends Activity {
 	public static final int VERSION_LOW 		= 0;
 	public static final int VERSION_SUB_HIGH 	= 0;
 	public static final int VERSION_SUB_LOW 	= 8;
-	public static final int VERSION_TAEHA		= 0;
+	public static final int VERSION_TAEHA		= 1;
 	////1.0.2.3
 	// UI B 안 최초 적용 2014.12.10
 	////1.0.2.4
@@ -604,6 +604,13 @@ public class Home extends Activity {
 	//	- 스위치에 따라 표시된는 것이 아니라 Level 에 따라 표시
 	//	- 와이퍼 색깔 메뉴와 부저와 동일하게 변경
 	// 9. 스마트 터미널 가운데 위에 터치로 종료 기능 추가
+	//// v2.0.0.81
+	// 1. PDF Viewr ESC 누를 경우 종료
+	// 2. popup dismiss 될 때 Homedialog = null로 변경
+	// 3. 과거고장일 경우 detail view가 켜져있을 때 삭제하는 경우 detail view가 계속 남아있는 현상 개선
+	// 4. 현재고장/과거고장 UI 맞춤
+	//// v2.0.0.9 예정
+	// 1. 붐 각도 보정 이미지 변경 필요
 	//////////////////////////////////////////////////////////////////////////////////////
 	
 	// TAG

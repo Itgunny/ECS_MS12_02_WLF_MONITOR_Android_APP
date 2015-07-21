@@ -392,6 +392,7 @@ public class FaultHistoryLoggedFragment extends ParentFragment{
 		DetailEnable(false);
 	}
 	public void ClickDelete(){
+		DetailEnable(false);
 		ParentActivity._LoggedFaultDeletePopup.setMode(SelectedMode);
 		ParentActivity.showLoggedFaultDelete();
 		bCursurIndex = false;

@@ -65,6 +65,7 @@ public abstract class ParentPopup extends Dialog{
 		super.dismiss();
 		Log.d(TAG,"dismiss");
 		threadRead.interrupt();
+		ParentActivity.HomeDialog= null;
 	}
 	
 	public void InitValuable(){

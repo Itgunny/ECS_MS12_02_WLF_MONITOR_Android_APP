@@ -1222,12 +1222,14 @@ public class CommService extends Service{
 				{
 					// ++, 150320 cjg
 					//BackKeyEvent();
-					if((miracastFlag == true) || (multimediaFlag == true)){
-						HandleKeyButton.sendMessage(HandleKeyButton.obtainMessage(Data));
-					}else{
-						BackKeyEvent();
-						SoundPoolKeyButton.play(SoundID, fVolume, fVolume, 0, 0, 1);
-					}
+//					if((miracastFlag == true) || (multimediaFlag == true)){
+//						HandleKeyButton.sendMessage(HandleKeyButton.obtainMessage(Data));
+//					}else{
+//						BackKeyEvent();
+//						SoundPoolKeyButton.play(SoundID, fVolume, fVolume, 0, 0, 1);
+//					}
+					SoundPoolKeyButton.play(SoundID, fVolume, fVolume, 0, 0, 1);
+					HandleKeyButton.sendMessage(HandleKeyButton.obtainMessage(Data));
 					// --, 150320 cjg				
 				}
 				break;
@@ -1517,6 +1519,8 @@ public class CommService extends Service{
 						CloseMXPlayer();
 					}else if(CheckTopApps("com.powerone.wfd.sink")){
 						CloseSmartTerminal();
+					}else if(CheckTopApps("org.ebookdroid")){
+						ClosePDFViewer();
 					}
 				}
 				// --, 150319 cjg
@@ -1756,6 +1760,18 @@ public class CommService extends Service{
 			String cmd = "am force-stop com.powerone.wfd.sink";
 			process = runtime.exec(cmd);
 			Log.d(TAG, "am force-stop com.powerone.wfd.sink");
+		}catch(Exception e){
+			e.fillInStackTrace();
+		}
+		
+	}
+	public void ClosePDFViewer(){
+		Runtime runtime = Runtime.getRuntime();
+		Process process;
+		try{
+			String cmd = "am force-stop org.ebookdroid";
+			process = runtime.exec(cmd);
+			Log.d(TAG, "am force-stop org.ebookdroid");
 		}catch(Exception e){
 			e.fillInStackTrace();
 		}

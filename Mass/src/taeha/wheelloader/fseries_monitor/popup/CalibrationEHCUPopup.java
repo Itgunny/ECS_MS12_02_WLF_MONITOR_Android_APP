@@ -80,6 +80,25 @@ public class CalibrationEHCUPopup extends ParentPopup{
 	public void dismiss() {
 		// TODO Auto-generated method stub
 		super.dismiss();
+		if(ParentActivity.OldScreenIndex == Home.SCREEN_STATE_MENU_MODE_ETC_CALIBRATION_ANGLE_TOP)
+		{
+			ParentActivity.ScreenIndex = Home.SCREEN_STATE_MENU_MODE_ETC_CALIBRATION_ANGLE_TOP;
+			try {
+				ParentActivity._MenuBaseFragment._AngleCalibration.CursurDisplay(1);
+			} catch (NullPointerException e) {
+				// TODO: handle exception
+				Log.e(TAG,"NullPointerException dismiss");
+			}
+		}else if(ParentActivity.OldScreenIndex == Home.SCREEN_STATE_MENU_MODE_ETC_CALIBRATION_PRESSURE_TOP)
+		{
+			ParentActivity.ScreenIndex = Home.SCREEN_STATE_MENU_MODE_ETC_CALIBRATION_PRESSURE_TOP;
+			try {
+				ParentActivity._MenuBaseFragment._PressureCalibration.CursurDisplay(1);
+			} catch (NullPointerException e) {
+				// TODO: handle exception
+				Log.e(TAG,"NullPointerException dismiss");
+			}
+		}		
 	}
 
 	@Override
@@ -117,26 +136,6 @@ public class CalibrationEHCUPopup extends ParentPopup{
 	}
 	///////////////////////////////////////////////////////////////////////////////
 	public void ClickOK(){
-		if(ParentActivity.OldScreenIndex == Home.SCREEN_STATE_MENU_MODE_ETC_CALIBRATION_ANGLE_TOP)
-		{
-			ParentActivity.ScreenIndex = Home.SCREEN_STATE_MENU_MODE_ETC_CALIBRATION_ANGLE_TOP;
-			try {
-				ParentActivity._MenuBaseFragment._AngleCalibration.CursurDisplay(1);
-			} catch (NullPointerException e) {
-				// TODO: handle exception
-				Log.e(TAG,"NullPointerException dismiss");
-			}
-		}else if(ParentActivity.OldScreenIndex == Home.SCREEN_STATE_MENU_MODE_ETC_CALIBRATION_PRESSURE_TOP)
-		{
-			ParentActivity.ScreenIndex = Home.SCREEN_STATE_MENU_MODE_ETC_CALIBRATION_PRESSURE_TOP;
-			try {
-				ParentActivity._MenuBaseFragment._PressureCalibration.CursurDisplay(1);
-			} catch (NullPointerException e) {
-				// TODO: handle exception
-				Log.e(TAG,"NullPointerException dismiss");
-			}
-		}
-		
 		this.dismiss();
 	}	
 	////////////////////////////////////////////////////////////////////////////////
