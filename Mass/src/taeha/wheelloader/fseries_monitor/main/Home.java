@@ -75,7 +75,7 @@ public class Home extends Activity {
 	public static final int VERSION_LOW 		= 0;
 	public static final int VERSION_SUB_HIGH 	= 0;
 	public static final int VERSION_SUB_LOW 	= 8;
-	public static final int VERSION_TAEHA		= 1;
+	public static final int VERSION_TAEHA		= 2;
 	////1.0.2.3
 	// UI B 안 최초 적용 2014.12.10
 	////1.0.2.4
@@ -609,6 +609,9 @@ public class Home extends Activity {
 	// 2. popup dismiss 될 때 Homedialog = null로 변경
 	// 3. 과거고장일 경우 detail view가 켜져있을 때 삭제하는 경우 detail view가 계속 남아있는 현상 개선
 	// 4. 현재고장/과거고장 UI 맞춤
+	//// v2.0.0.82
+	// 1. Revision 저항 3.9K 적용
+	// 2. cluster hidden version 추가
 	//// v2.0.0.9 예정
 	// 1. 붐 각도 보정 이미지 변경 필요
 	//////////////////////////////////////////////////////////////////////////////////////

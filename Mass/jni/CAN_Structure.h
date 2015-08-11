@@ -2507,8 +2507,8 @@ typedef struct
 
 	unsigned char DM1;
 	unsigned char DM2;
-	unsigned char DM3;
-	unsigned char DM4;
+	unsigned char Dashboard_Program_Version2;
+	unsigned char Dashboard_Program_Version_H;
 
 	unsigned char HW_Vers_Sub;
 }__attribute__((packed))  CLUSTER_STATUS_65445;

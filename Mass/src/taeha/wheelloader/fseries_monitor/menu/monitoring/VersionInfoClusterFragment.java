@@ -19,6 +19,10 @@ public class VersionInfoClusterFragment extends VersionInfoDetailFragment{
 	/////////////////////VALUABLE////////////////////////////////////////
 	int HWVersion;
 	int HWVersionSub;
+	boolean HiddenVersionFlag;
+	int AppVersion;
+	int AppVersionSub;
+	int AppVersionHidden;
 	/////////////////////////////////////////////////////////////////////	
 	
 	//Life Cycle Function/////////////////////////////
@@ -52,6 +56,8 @@ public class VersionInfoClusterFragment extends VersionInfoDetailFragment{
 
 		listView.setAdapter(adapter);
 
+		HiddenVersionFlag = false;
+
 	}
 	@Override
 	public void ShowHiddenPage(){
@@ -72,7 +78,13 @@ public class VersionInfoClusterFragment extends VersionInfoDetailFragment{
 		}
 		ComponentBasicInformation = CAN1Comm.Get_ComponentBasicInformation_1698_PGN65330_CLUSTER();
 		ProgramSubVersion = ParentActivity.FindProgramSubInfo(ComponentBasicInformation);
-
+		
+		if(HiddenVersionFlag == true)
+		{
+			AppVersion = CAN1Comm.Get_Dashboard_Program_Version_988_PGN65445();
+			AppVersionSub = CAN1Comm.Get_Dashboard_Program_Version2_PGN65445();
+			AppVersionHidden = CAN1Comm.Get_Dashboard_Program_Version_H_PGN65445();
+		}
 	}
 
 	@Override
@@ -80,7 +92,10 @@ public class VersionInfoClusterFragment extends VersionInfoDetailFragment{
 		// TODO Auto-generated method stub
 		ModelDisplay(ComponentBasicInformation);
 		ManufactureDayDisplay(ComponentBasicInformation);
-		VersionDisplay(ComponentBasicInformation,ProgramSubVersion);
+		if(HiddenVersionFlag == false)
+			VersionDisplay(ComponentBasicInformation,ProgramSubVersion);
+		else
+			VersionDisplayHidden(AppVersion,AppVersionSub, AppVersionHidden);
 		SerialNumberDisplay(ComponentBasicInformation);
 		if(ManufactureDayDisplayFlag == true)
 		{
@@ -106,6 +121,9 @@ public class VersionInfoClusterFragment extends VersionInfoDetailFragment{
 		}
 	}
 	////////////////////////////////////////////////
-	
+	public void ShowMonitorHiddenVersion(){
+		HiddenVersionFlag = true;
+		ShowManufactureDay(true);
+	}	
 	////////////////////////////////////////////////
 }

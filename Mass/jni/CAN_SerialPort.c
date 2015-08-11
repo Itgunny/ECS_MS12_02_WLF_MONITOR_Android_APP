@@ -1347,6 +1347,12 @@ jint Get_High_Beam_Status_725_PGN65445(JNIEnv * env, jobject this) {
 jint Get_Front_Rear_Lamp_Status_726_PGN65445(JNIEnv * env, jobject this) {
 	return RX_CLUSTER_STATUS_65445.Front_Rear_Lamp_Status_726;
 }
+jint Get_Dashboard_Program_Version2_PGN65445(JNIEnv * env, jobject this) {
+	return RX_CLUSTER_STATUS_65445.Dashboard_Program_Version2;
+}
+jint Get_Dashboard_Program_Version_H_PGN65445(JNIEnv * env, jobject this) {
+	return RX_CLUSTER_STATUS_65445.Dashboard_Program_Version_H;
+}
 jint Get_HW_Vers_Sub_PGN65445(JNIEnv * env, jobject this) {
 	return RX_CLUSTER_STATUS_65445.HW_Vers_Sub;
 }
@@ -4229,6 +4235,10 @@ static JNINativeMethod methods[] =
 						(void*) Get_High_Beam_Status_725_PGN65445 },{
 						"Get_Front_Rear_Lamp_Status_726_PGN65445", "()I",
 						(void*) Get_Front_Rear_Lamp_Status_726_PGN65445 }, {
+						"Get_Dashboard_Program_Version2_PGN65445", "()I",
+						(void*) Get_Dashboard_Program_Version2_PGN65445 }, {
+						"Get_Dashboard_Program_Version_H_PGN65445", "()I",
+						(void*) Get_Dashboard_Program_Version_H_PGN65445 }, {
 						"Get_HW_Vers_Sub_PGN65445", "()I",
 						(void*) Get_HW_Vers_Sub_PGN65445 },
 				//////RX_AXLE_STATUS_65449///////

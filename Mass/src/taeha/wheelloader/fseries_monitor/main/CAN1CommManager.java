@@ -1225,6 +1225,9 @@ public class CAN1CommManager extends ICAN1CommManager.Stub{		// ttySAC1(Linux), 
 	public int Get_Mirror_Heater_Status_724_PGN65445(){ return service.Get_Mirror_Heater_Status_724_PGN65445();}
 	public int Get_High_Beam_Status_725_PGN65445(){ return service.Get_High_Beam_Status_725_PGN65445();}
 	public int Get_Front_Rear_Lamp_Status_726_PGN65445(){ return service.Get_Front_Rear_Lamp_Status_726_PGN65445();}
+	public int Get_Dashboard_Program_Version2_PGN65445(){ return service.Get_Dashboard_Program_Version2_PGN65445();}
+	public int Get_Dashboard_Program_Version_H_PGN65445(){ return service.Get_Dashboard_Program_Version_H_PGN65445();}
+	public int Get_HW_Vers_Sub_PGN65445(){ return service.Get_HW_Vers_Sub_PGN65445();}
 	//////RX_AXLE_STATUS_65449///////
 	public int Get_Front_Axle_Oil_Temperature_577_PGN65449(){ return service.Get_Front_Axle_Oil_Temperature_577_PGN65449();}
 	public int Get_Rear_Axle_Oil_Temperature_578_PGN65449(){ return service.Get_Rear_Axle_Oil_Temperature_578_PGN65449();}
@@ -1248,7 +1251,6 @@ public class CAN1CommManager extends ICAN1CommManager.Stub{		// ttySAC1(Linux), 
 	//////RX_WEIGHING_SYSTEM_DATA2_65452///////
 	public int Get_TotalWorkCWeight_1914_PGN65452(){ return service.Get_TotalWorkCWeight_1914_PGN65452();}
 	public int Get_ADayBeforeWeight_1916_PGN65452(){ return service.Get_ADayBeforeWeight_1916_PGN65452();}
-	public int Get_HW_Vers_Sub_PGN65445(){ return service.Get_HW_Vers_Sub_PGN65445();}
 	//////RX_BKCU_STATUS_65514///////
 	public int Get_ButtonKeyPosition_3471_PGN65514(){ return service.Get_ButtonKeyPosition_3471_PGN65514();}
 	//////RX_JOYSTICK_POSITION_STATUS_65515///////

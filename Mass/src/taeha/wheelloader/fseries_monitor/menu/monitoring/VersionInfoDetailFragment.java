@@ -386,6 +386,10 @@ public class VersionInfoDetailFragment extends ParentFragment{
 	public void VersionDisplay(byte[] _data, int _subinfo){
 		adapter.UpdateSecond(STATE_VERSION, ParentActivity.GetVersionString(_data, _subinfo));
 	}
+	public void VersionDisplayHidden(int _info, int _subinfo, int _Hiddeninfo){
+		adapter.UpdateSecond(STATE_VERSION, Integer.toString(((_info & 0xF0) >> 4)) + "." + Integer.toString((_info & 0x0F))
+				+ "." + Integer.toHexString(((_subinfo & 0xF0) >> 4)) + "." + Integer.toHexString((_subinfo & 0x0F)) + Integer.toHexString((_Hiddeninfo & 0x0F)));
+	}
 	/////////////////////////////////////////////////////////////////////
 	public void ClickLeft(){
 		int TotalItem;

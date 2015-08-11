@@ -2574,6 +2574,9 @@ public class MenuBaseFragment extends ParentFragment{
 	}
 	public void ClickKeyButtonLongHiddenVersion(){
 		switch (ParentActivity.ScreenIndex) {
+		case Home.SCREEN_STATE_MENU_MONITORING_VERSIONINFO_CLUSTER:
+			_VersionInfoClusterFragment.ShowMonitorHiddenVersion();
+			break;
 		case Home.SCREEN_STATE_MENU_MONITORING_VERSIONINFO_MONITOR:
 			_VersionInfoMonitorFragment.ShowMonitorHiddenVersion();
 			break;

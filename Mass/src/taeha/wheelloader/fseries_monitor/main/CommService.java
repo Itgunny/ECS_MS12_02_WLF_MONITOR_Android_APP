@@ -576,6 +576,8 @@ public class CommService extends Service{
 	public native int Get_Mirror_Heater_Status_724_PGN65445();
 	public native int Get_High_Beam_Status_725_PGN65445();
 	public native int Get_Front_Rear_Lamp_Status_726_PGN65445();
+	public native int Get_Dashboard_Program_Version2_PGN65445();
+	public native int Get_Dashboard_Program_Version_H_PGN65445();
 	public native int Get_HW_Vers_Sub_PGN65445();
 	//////RX_AXLE_STATUS_65449///////
 	public native int Get_Front_Axle_Oil_Temperature_577_PGN65449();
