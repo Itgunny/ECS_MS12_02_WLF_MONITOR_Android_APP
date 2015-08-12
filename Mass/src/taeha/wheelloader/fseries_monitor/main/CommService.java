@@ -1523,6 +1523,8 @@ public class CommService extends Service{
 						CloseSmartTerminal();
 					}else if(CheckTopApps("org.ebookdroid")){
 						ClosePDFViewer();
+					}else{
+						BackKeyEvent();
 					}
 				}
 				// --, 150319 cjg
@@ -1664,6 +1666,7 @@ public class CommService extends Service{
 			startActivity(intent);
 			SetMultimediaFlag(true);
 			//multimediaFlag = true;		// ++, --, 150323 bwk
+			startService(new Intent(this,AlwaysOnTopService.class));
 			SetFNKeypadLamp(1);
 		}
 	}
@@ -1674,6 +1677,7 @@ public class CommService extends Service{
 			startActivity(intent);
 			SetMiracastFlag(true);
 //			miracastFlag = true;		// ++, --, 150323 bwk
+			startService(new Intent(this,AlwaysOnTopService.class));
 			SetFNKeypadLamp(1);
 		}
 	}
