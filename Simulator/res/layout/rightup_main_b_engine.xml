@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/RelativeLayout_rightup_main_b_engine_top"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/main_bg_right_up" 
+    android:splitMotionEvents="false">
+    
+    <ImageButton
+        android:id="@+id/imageButton_rightup_main_b_hourodometer"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="2dp"
+        android:layout_marginTop="107dp"
+        android:background="@drawable/_selector_rightup_main_b_hourodometer_btn1" />
+    
+    <ImageButton
+        android:id="@+id/imageButton_rightup_main_b_engine_mode"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="38dp"
+        android:layout_marginTop="207dp"
+        android:background="@drawable/_selector_rightup_main_b_engine_mode_btn1" />
+
+    <RelativeLayout
+        android:id="@+id/RelativeLayout_rightup_main_b_hourodometer"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/imageView_rightup_main_b_engine_line"
+        android:layout_alignRight="@+id/imageView_rightup_main_b_engine_line"
+        android:layout_marginBottom="5dp"
+        android:layout_marginRight="10dp" 
+        android:splitMotionEvents="false">
+
+        <TextView
+            android:id="@+id/textView_rightup_main_b_hourodometer_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentTop="true"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:textColor="@color/main_title_amber"
+            android:textStyle="bold|italic" />
+        
+	    <TextView
+	        android:id="@+id/textView_rightup_main_b_hourodometer_data"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:layout_alignBaseline="@+id/textView_rightup_main_b_hourodometer_unit"
+	        android:layout_marginRight="10dp"
+	        android:layout_toLeftOf="@+id/textView_rightup_main_b_hourodometer_unit"
+	        android:textAppearance="?android:attr/textAppearanceLarge"
+	        android:textSize="30sp"
+	        android:textStyle="italic" />
+	
+	    <TextView
+	        android:id="@+id/textView_rightup_main_b_hourodometer_unit"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:layout_alignParentRight="true"
+	        android:layout_below="@+id/textView_rightup_main_b_hourodometer_title"
+	        android:layout_marginRight="25dp"
+	        android:alpha="0.5"
+	        android:textAppearance="?android:attr/textAppearanceLarge" />
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/RelativeLayout_rightup_main_b_engine_mode"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignRight="@+id/imageView_rightup_main_b_engine_line"
+        android:layout_below="@+id/imageView_rightup_main_b_engine_line"
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="5dp" 
+        android:splitMotionEvents="false">
+
+        <TextView
+            android:id="@+id/textView_rightup_main_b_engine_mode_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentTop="true"
+            android:text="@string/ENGINE_MODE"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:textColor="@color/main_title_amber"
+            android:textStyle="bold|italic" />
+
+        <TextView
+            android:id="@+id/textView_rightup_main_b_engine_mode_data"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+	        android:layout_alignParentRight="true"
+	        android:layout_below="@+id/textView_rightup_main_b_engine_mode_title"
+            android:layout_marginRight="25dp"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:textStyle="italic" />
+
+    </RelativeLayout>
+    
+    
+    <ImageView
+        android:id="@+id/imageView_rightup_main_b_engine_line"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_marginLeft="71dp"
+        android:layout_marginTop="205dp"
+        android:background="@drawable/main_default_engine_line"
+        android:src="@drawable/main_default_engine_line" />
+
+</RelativeLayout>

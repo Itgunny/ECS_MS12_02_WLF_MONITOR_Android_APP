@@ -1,0 +1,384 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/RelativeLayout1"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:splitMotionEvents="false" >
+
+    <ImageView
+        android:id="@+id/imageView_menu_body_mode_coolingfanreversemode_line_1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="29dp"
+        android:layout_marginTop="64dp"
+        android:src="@drawable/line_menu_step1" />
+
+    <RelativeLayout
+        android:id="@+id/RelativeLayout_menu_body_mode_coolingfanreversemode_mode"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/imageView_menu_body_mode_coolingfanreversemode_line_1"
+        android:layout_alignLeft="@+id/imageView_menu_body_mode_coolingfanreversemode_line_1"
+        android:layout_alignParentTop="true"
+        android:layout_alignRight="@+id/imageView_menu_body_mode_coolingfanreversemode_line_1"
+        android:splitMotionEvents="false" >
+
+        <RadioGroup
+            android:id="@+id/radioGroup_menu_body_mode_coolingfanreversemode_mode"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:orientation="horizontal"
+            android:splitMotionEvents="false" >
+
+            <RadioButton
+                android:id="@+id/radioButton_menu_body_mode_coolingfanreversemode_auto"
+                android:layout_width="300dp"
+                android:layout_height="wrap_content"
+                android:button="@drawable/_selector_radio_btn"
+                android:text="@string/Automatic"
+                android:textColor="@drawable/_selector_radio_txt_white_amber"
+                android:textSize="25sp" />
+
+            <RadioButton
+                android:id="@+id/radioButton_menu_body_mode_coolingfanreversemode_manual"
+                android:layout_width="300dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="30dp"
+                android:button="@drawable/_selector_radio_btn"
+                android:text="@string/Manual"
+                android:textColor="@drawable/_selector_radio_txt_white_amber"
+                android:textSize="25sp" />
+        </RadioGroup>
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/RelativeLayout_menu_body_mode_coolingfan_manual"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/RelativeLayout_menu_body_mode_coolingfanreversemode_low"
+        android:layout_alignLeft="@+id/imageView_menu_body_mode_coolingfanreversemode_line_1"
+        android:layout_alignRight="@+id/imageView_menu_body_mode_coolingfanreversemode_line_1"
+        android:layout_below="@+id/imageView_menu_body_mode_coolingfanreversemode_line_1"
+        android:visibility="invisible"
+        android:splitMotionEvents="false" >
+
+        <TextView
+            android:id="@+id/textView_menu_body_mode_coolingfan_manual_description"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="10dp"
+            android:text="@string/Push_and_hold_to_reverse_rotation"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:textColor="@color/menu_body_monitoring_version_data_gray"
+            android:textSize="20sp" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:splitMotionEvents="false" >
+
+            <ImageView
+                android:id="@+id/imageView_menu_body_mode_coolingfan_manual"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/menu_mode_fan_manual_icon_off" />
+
+            <RelativeLayout
+                android:id="@+id/RelativeLayout_menu_body_mode_coolingfan_manual_btn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="100dp"
+                android:splitMotionEvents="false" >
+
+                <TextView
+                    android:id="@+id/textView_menu_body_mode_coolingfan_manual_excute"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/_selector_menu_body_mode_coolingfan_manual_btn1"
+                    android:gravity="center"
+                    android:text="@string/Excute"
+		            android:textAppearance="?android:attr/textAppearanceLarge"
+		            android:textColor="@drawable/_selector_radio_txt_white_black" 
+                    android:textSize="40sp" />
+                
+                <ImageView
+                    android:id="@+id/imageView_menu_body_mode_coolingfan_manual_excute_boarder"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/menu_mode_fan_manual_btn_s2" />
+
+                </RelativeLayout>
+        </LinearLayout>
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/RelativeLayout_menu_body_mode_coolingfan_Auto"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/RelativeLayout_menu_body_mode_coolingfanreversemode_low"
+        android:layout_alignLeft="@+id/imageView_menu_body_mode_coolingfanreversemode_line_1"
+        android:layout_alignRight="@+id/imageView_menu_body_mode_coolingfanreversemode_line_1"
+        android:layout_below="@+id/imageView_menu_body_mode_coolingfanreversemode_line_1"
+        android:splitMotionEvents="false" >
+
+        <ImageView
+            android:id="@+id/imageView_menu_body_mode_coolingfanreversemode_line_2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:src="@drawable/line_menu_step1" />
+
+        <RelativeLayout
+            android:id="@+id/RelativeLayout_menu_body_mode_coolingfan_auto_interval"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/imageView_menu_body_mode_coolingfanreversemode_line_2"
+            android:layout_alignParentTop="true"
+            android:splitMotionEvents="false" >
+
+            <ImageView
+                android:id="@+id/imageView_menu_body_mode_coolingfan_auto_interval_point"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:src="@drawable/menu_bluedot" />
+
+            <TextView
+                android:id="@+id/textView_menu_body_mode_coolingfan_auto_interval_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="10dp"
+                android:layout_toRightOf="@+id/imageView_menu_body_mode_coolingfan_auto_interval_point"
+                android:text="@string/Interval"
+                android:textAppearance="?android:attr/textAppearanceLarge" />
+
+            <TextView
+                android:id="@+id/textView_menu_body_mode_coolingfan_auto_interval_time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignLeft="@+id/RelativeLayout_menu_body_mode_coolingfan_auto_interval_seekbar"
+                android:layout_alignRight="@+id/RelativeLayout_menu_body_mode_coolingfan_auto_interval_seekbar"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="10dp"
+                android:gravity="center"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:textColor="@color/menu_left_amber" />
+
+            <TextView
+                android:id="@+id/textView_menu_body_mode_coolingfan_auto_interval_min"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignLeft="@+id/RelativeLayout_menu_body_mode_coolingfan_auto_interval_seekbar"
+                android:layout_below="@+id/RelativeLayout_menu_body_mode_coolingfan_auto_interval_seekbar"
+                android:layout_marginTop="-10dp"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:textColor="@color/gray"
+                android:textSize="20sp" />
+
+            <TextView
+                android:id="@+id/textView_menu_body_mode_coolingfan_auto_interval_max"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignRight="@+id/RelativeLayout_menu_body_mode_coolingfan_auto_interval_seekbar"
+                android:layout_below="@+id/RelativeLayout_menu_body_mode_coolingfan_auto_interval_seekbar"
+                android:layout_marginTop="-10dp"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:textColor="@color/gray"
+                android:textSize="20sp" />
+
+            <RelativeLayout
+                android:id="@+id/RelativeLayout_menu_body_mode_coolingfan_auto_interval_seekbar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:splitMotionEvents="false" >
+
+                <ImageView
+                    android:id="@+id/imageView_menu_body_mode_coolingfan_auto_interval_seekbar_bg"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:src="@drawable/menu_mode_fan_slide_bg" />
+
+                <SeekBar
+                    android:id="@+id/seekBar_menu_body_mode_coolingfan_auto_interval"
+                    style="@style/RideControlSpeedSeekBar"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignLeft="@+id/imageView_menu_body_mode_coolingfan_auto_interval_seekbar_bg"
+                    android:layout_alignRight="@+id/imageView_menu_body_mode_coolingfan_auto_interval_seekbar_bg"
+                    android:minHeight="5dip"
+                    android:paddingLeft="20dp"
+                    android:paddingRight="20dp"
+                    android:thumb="@drawable/_selector_seekbar_thumb" />
+            </RelativeLayout>
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/RelativeLayout_menu_body_mode_coolingfan_auto_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_below="@+id/imageView_menu_body_mode_coolingfanreversemode_line_2"
+            android:layout_centerVertical="true"
+            android:splitMotionEvents="false" >
+
+            <ImageView
+                android:id="@+id/imageView_menu_body_mode_coolingfan_auto_time_point"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:src="@drawable/menu_bluedot" />
+
+            <TextView
+                android:id="@+id/textView_menu_body_mode_coolingfan_auto_time_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="10dp"
+                android:layout_toRightOf="@+id/imageView_menu_body_mode_coolingfan_auto_time_point"
+                android:text="@string/Time"
+                android:textAppearance="?android:attr/textAppearanceLarge" />
+
+            <TextView
+                android:id="@+id/textView_menu_body_mode_coolingfan_auto_time_time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignLeft="@+id/RelativeLayout_menu_body_mode_coolingfan_auto_time_seekbar"
+                android:layout_alignRight="@+id/RelativeLayout_menu_body_mode_coolingfan_auto_time_seekbar"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="10dp"
+                android:gravity="center"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:textColor="@color/menu_left_amber" />
+
+            <TextView
+                android:id="@+id/textView_menu_body_mode_coolingfan_auto_time_min"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignLeft="@+id/RelativeLayout_menu_body_mode_coolingfan_auto_time_seekbar"
+                android:layout_below="@+id/RelativeLayout_menu_body_mode_coolingfan_auto_time_seekbar"
+                android:layout_marginTop="-10dp"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:textColor="@color/gray"
+                android:textSize="20sp" />
+
+            <TextView
+                android:id="@+id/textView_menu_body_mode_coolingfan_auto_time_max"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignRight="@+id/RelativeLayout_menu_body_mode_coolingfan_auto_time_seekbar"
+                android:layout_below="@+id/RelativeLayout_menu_body_mode_coolingfan_auto_time_seekbar"
+                android:layout_marginTop="-10dp"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:textColor="@color/gray"
+                android:textSize="20sp" />
+
+            <RelativeLayout
+                android:id="@+id/RelativeLayout_menu_body_mode_coolingfan_auto_time_seekbar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:splitMotionEvents="false" >
+
+                <ImageView
+                    android:id="@+id/imageView_menu_body_mode_coolingfan_auto_time_seekbar_bg"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:src="@drawable/menu_mode_fan_slide_bg" />
+
+                <SeekBar
+                    android:id="@+id/seekBar_menu_body_mode_coolingfan_auto_time"
+                    style="@style/RideControlSpeedSeekBar"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignLeft="@+id/imageView_menu_body_mode_coolingfan_auto_time_seekbar_bg"
+                    android:layout_alignRight="@+id/imageView_menu_body_mode_coolingfan_auto_time_seekbar_bg"
+                    android:minHeight="5dip"
+                    android:paddingLeft="20dp"
+                    android:paddingRight="20dp"
+                    android:thumb="@drawable/_selector_seekbar_thumb" />
+            </RelativeLayout>
+        </RelativeLayout>
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/RelativeLayout_menu_body_mode_coolingfanreversemode_low"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:splitMotionEvents="false" >
+
+        <ImageView
+            android:id="@+id/imageView_menu_body_mode_coolingfanreversemode_low_bg"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/menu_low_bg" />
+
+        <ImageButton
+            android:id="@+id/ImageButton_menu_body_mode_coolingfanreversemode_low_ok"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@+id/imageView_menu_body_mode_coolingfanreversemode_low_bg"
+            android:layout_alignRight="@+id/imageView_menu_body_mode_coolingfanreversemode_low_bg"
+            android:background="@drawable/_selector_menu_low_right_btn" />
+
+        <ImageView
+            android:id="@+id/imageView_menu_body_mode_coolingfanreversemode_low_line_1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@+id/imageView_menu_body_mode_coolingfanreversemode_low_bg"
+            android:layout_alignLeft="@+id/ImageButton_menu_body_mode_coolingfanreversemode_low_ok"
+            android:src="@drawable/main_key_low_line" />
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@+id/ImageButton_menu_body_mode_coolingfanreversemode_low_ok"
+            android:layout_alignLeft="@+id/ImageButton_menu_body_mode_coolingfanreversemode_low_ok"
+            android:layout_alignRight="@+id/ImageButton_menu_body_mode_coolingfanreversemode_low_ok"
+            android:layout_alignTop="@+id/ImageButton_menu_body_mode_coolingfanreversemode_low_ok"
+            android:splitMotionEvents="false" >
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_centerVertical="true"
+                android:splitMotionEvents="false" >
+
+                <ImageView
+                    android:id="@+id/imageView_menu_body_mode_coolingfanreversemode_low_ok_icon"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignBottom="@+id/ImageButton_menu_body_mode_coolingfanreversemode_low_ok"
+                    android:layout_alignLeft="@+id/ImageButton_menu_body_mode_coolingfanreversemode_low_ok"
+                    android:layout_alignTop="@+id/ImageButton_menu_body_mode_coolingfanreversemode_low_ok"
+                    android:src="@drawable/menu_low_icon_ok" />
+
+                <TextView
+                    android:id="@+id/textView_menu_body_mode_coolingfanreversemode_low_ok"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="10dp"
+                    android:gravity="center"
+                    android:text="@string/OK"
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:textSize="25sp"
+                    android:textStyle="bold" />
+            </LinearLayout>
+        </RelativeLayout>
+    </RelativeLayout>
+
+</RelativeLayout>

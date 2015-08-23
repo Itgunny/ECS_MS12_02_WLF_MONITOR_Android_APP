@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/menu_popup01_bg" 
+    android:splitMotionEvents="false">
+
+    <ImageView
+        android:id="@+id/imageView_popup_iccomode_line"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="68dp"
+        android:src="@drawable/menu_popup01_line" />
+
+    <TextView
+        android:id="@+id/textView_popup_iccomode_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="25dp"
+        android:text="@string/ICCO_Mode"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textColor="@color/black"
+        android:textSize="25sp" />
+    
+    <TextView
+        android:id="@+id/textView_popup_iccomode_off"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="44dp"
+        android:layout_marginTop="97dp"
+        android:background="@drawable/_selector_popup01_long_btn1"
+        android:gravity="center"
+        android:text="@string/Off"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textColor="@color/black" />
+
+    
+    <TextView
+        android:id="@+id/textView_popup_iccomode_h"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="44dp"
+        android:layout_marginTop="181dp"
+        android:background="@drawable/_selector_popup01_long_btn1"
+        android:gravity="center"
+        android:text="@string/On"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textColor="@color/black" />
+    
+
+</RelativeLayout>
