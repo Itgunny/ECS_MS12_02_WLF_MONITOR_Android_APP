@@ -632,7 +632,15 @@ public abstract class PasswordFragment extends ParentFragment{
 				case 16:
 					textViewTitle.setText(ParentActivity.getResources().getString(string.No_Changes_executed));
 					break;
-				
+
+					
+				case 17:
+					textViewTitle.setText(ParentActivity.getResources().getString(string.Serial_No));
+					break;
+				case 18:
+					textViewTitle.setText(ParentActivity.getResources().getString(string.Re_entering_Serial_No));
+					break;
+					
 				default:
 					break;
 				}

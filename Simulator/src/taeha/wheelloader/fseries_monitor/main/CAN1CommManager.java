@@ -391,6 +391,17 @@ public class CAN1CommManager extends ICAN1CommManager.Stub{		// ttySAC1(Linux), 
 	public static final int STATE_COMPONENTCODE_EHCU								= 91;
 	public static final int STATE_COMPONENTCODE_ENGINE								= 101;	
 	
+	public static final int SA_MCU													= 0x47;
+	public static final int SA_MONITOR												= 0x28;
+	public static final int SA_CLUSTER												= 0x17;
+	public static final int SA_RMCU													= 0x4A;
+	public static final int SA_EHCU													= 0xE4;
+	public static final int SA_TCU													= 0x03;
+	public static final int SA_ECM													= 0x00;
+	public static final int SA_CID													= 0xF4;
+	public static final int SA_ACU													= 0x19;
+	public static final int SA_BKCU													= 0x34;
+	public static final int SA_SMK													= 0x29;
 	
 	public static final int COMMAND_MAINTENANCE_ITEM_LIST_REQUEST						= 0;
 	public static final int MAINTETNANCE_INFORMATION_REQUEST							= 1;
@@ -1305,8 +1316,10 @@ public class CAN1CommManager extends ICAN1CommManager.Stub{		// ttySAC1(Linux), 
 	public int Get_MirrorHeatOperationStatus_3450_PGN65527(){ return service.Get_MirrorHeatOperationStatus_3450_PGN65527();}
 	public int Get_RearWiperOperationStatus_3451_PGN65527(){ return service.Get_RearWiperOperationStatus_3451_PGN65527();}
 	public int Get_RearWiperWasherOperationStatus_3452_PGN65527(){ return service.Get_RearWiperWasherOperationStatus_3452_PGN65527();}
-		
-//////TX_DTC_INFORMATION_REQUEST_61184_11///////
+	//////TX_HCEPGN_REQUEST_59904//////
+	public void Set_TargetSourceAddress(int Data){ service.Set_TargetSourceAddress(Data);}
+	public void Set_MessageType_PGN59904(int Data){ service.Set_MessageType_PGN59904(Data);}
+	//////TX_DTC_INFORMATION_REQUEST_61184_11///////
 	public void Set_MessageType_PGN61184_11(int Data){ service.Set_MessageType_PGN61184_11(Data);}
 	public void Set_DTCInformationRequest_1515_PGN61184_11(int Data){ service.Set_DTCInformationRequest_1515_PGN61184_11(Data);}
 	public void Set_DTCType_1510_PGN61184_11(int Data){ service.Set_DTCType_1510_PGN61184_11(Data);}
@@ -1474,6 +1487,7 @@ public class CAN1CommManager extends ICAN1CommManager.Stub{		// ttySAC1(Linux), 
 	public void Set_RequestBuzzerStop_PGN65327(int Data){ service.Set_RequestBuzzerStop_PGN65327(Data);}
 	public void Set_SpeedmeterUnitChange_PGN65327(int Data){ service.Set_SpeedmeterUnitChange_PGN65327(Data);}
 	public void Set_MonitorScreenNumber_836_PGN65327(int Data){ service.Set_MonitorScreenNumber_836_PGN65327(Data);}
+	public void Set_MachineSerialNumber2_962_PGN65327(byte[] Data){ service.Set_MachineSerialNumber2_962_PGN65327(Data);}
 	//////TX_RMCU_STATUS_65329///////
 //	public void Set_RMCUNetworkType_1621_PGN65329(int Data){ service.Set_RMCUNetworkType_1621_PGN65329(Data);}
 //	public void Set_RMCUBackupBatteryVoltage_1590_PGN65329(int Data){ service.Set_RMCUBackupBatteryVoltage_1590_PGN65329(Data);}

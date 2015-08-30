@@ -1760,6 +1760,11 @@ jint UART1_Tx(JNIEnv *env, jobject this, jint PF, jint PS, jint Flag) {
 			__android_log_print(ANDROID_LOG_INFO, "NATIVE", "UART1_Tx EHCU\n");
 			break;
 			///////////////////////////////////
+			/////////////0xEAxx////////////////
+		case 234	:
+			MakeCANDataSingle(0x18,0xEA,TargetSourceAddress,SA_MONITOR,(unsigned char*)&TX_HCEPGN_REQUEST_59904);
+			break;
+			///////////////////////////////////
 			/////////////0xFFxx////////////////
 		case 47	:
 			MakeCANDataSingle(0x18,0xFF,PS,SA_MONITOR,(unsigned char*)&TX_MONIOTR_STATUS_65327);
@@ -1830,8 +1835,8 @@ void InitUART1Valuable() {
 		sizeof(rx_Weihing_System_Mode));
 	memset((unsigned char*) &rx_Joystick_Position_Status, 0xff,
 		sizeof(rx_Joystick_Position_Status));
-	memset((unsigned char*) &tx_request_hcepgn, 0xff,
-		sizeof(tx_request_hcepgn));
+	memset((unsigned char*) &TX_HCEPGN_REQUEST_59904, 0xff,
+		sizeof(TX_HCEPGN_REQUEST_59904));
 	memset((unsigned char*) &tx_request_hcespn_data, 0xff,
 		sizeof(tx_request_hcespn_data));
 	memset((unsigned char*) &tx_esl_password69, 0xff,
@@ -1877,6 +1882,9 @@ void InitUART1Valuable() {
 	tx_monitor_request.ReqTripReset = 0x03;
 
 	ehcu_s_or_m = 0;
+
+	TX_HCEPGN_REQUEST_59904.Reserved0 = 0x00;
+	TargetSourceAddress = 0xff;
 
 #ifdef NEW_CAN2
 	InitNewProtoclValuable();
@@ -1935,7 +1943,7 @@ void ThreadParsing_UART3(void *data) {
 	//			UART3_DataParsing(UART3_DataCurr);
 	//			bParsingFlag_UART3 = 0;
 	//		}
-	//		sleep(0); // 占쌕몌옙 Thread 占쏙옙占쏙옙 占쏙옙占쏙옙占쏙옙 占쏙옙占쏙옙 占쏙옙占�
+	//		sleep(0); // ?�쌕몌옙 Thread ?�쏙?�占?�옙 ?�쏙?�占?�옙?�쏙???�쏙?�占?�옙 ?�쏙?�占�?
 	//
 	//	}
 
@@ -2110,7 +2118,7 @@ void *Thread_Read_UART1(void *data)
 	while (bReadRunningFlag_UART1)
 	{
 		dwRead = 0;
-		//	통신 시작 후 1byte씩 읽고, 정상 데이터를 수신한 다음부터는 원래 싸이즈로 받는다.
+		//	?�신 ?�작 ??1byte???�고, ?�상 ?�이?��? ?�신???�음부?�는 ?�래 ?�이즈로 받는??
 		if (UART1ReadFlag == 0 || UART1ReadFlag == 1)
 		{
 			dwRead = read(fd_UART1, UART1_ReadBuff, 1);
@@ -2132,7 +2140,7 @@ void *Thread_Read_UART1(void *data)
 
 		}
 
-		//	CAN PACKET 구조가 아니면 들어온 것을 모두 버린다.
+		//	CAN PACKET 구조가 ?�니�??�어??것을 모두 버린??
 		if (UART1ReadFlag == 2)
 		{
 			if (UART1_ReadBuff[0] != SERIAL_RX_STX || UART1_ReadBuff[UART1_RXPACKET_SIZE - 1] != SERIAL_RX_ETX)
@@ -2182,7 +2190,7 @@ void *Thread_Read_UART1(void *data)
 				}
 			}
 		}
-		sleep(0); // 다른 Thread 들의 점유를 위해 사용
+		sleep(0); // ?�른 Thread ?�의 ?�유�??�해 ?�용
 	}
 	__android_log_print(ANDROID_LOG_INFO, "NATIVE", "Thread_Read1 Finish\n");
 	(*glpVM)->DetachCurrentThread(glpVM);
@@ -2209,7 +2217,7 @@ void *Thread_Read_UART3(void *data) {
 
 	while (bReadRunningFlag_UART3) {
 		dwRead = 0;
-		//	통신 시작 후 1byte씩 읽고, 정상 데이터를 수신한 다음부터는 원래 싸이즈로 받는다.
+		//	?�신 ?�작 ??1byte???�고, ?�상 ?�이?��? ?�신???�음부?�는 ?�래 ?�이즈로 받는??
 		if (UART3ReadFlag == 0 || UART3ReadFlag == 1) {
 			dwRead = read(fd_UART3, UART3_ReadBuff, 1);
 			__android_log_print(ANDROID_LOG_INFO, "UART3_ReadBuff","UART3_ReadBuff UART3_ReadBuff[0x%x]\n",UART3_ReadBuff[0]);
@@ -2222,7 +2230,7 @@ void *Thread_Read_UART3(void *data) {
 			//												  ,UART3_ReadBuff[8],UART3_ReadBuff[9],UART3_ReadBuff[10]);
 		}
 
-		//	CMD PACKET 구조가 아니면 들어온 것을 모두 버린다.
+		//	CMD PACKET 구조가 ?�니�??�어??것을 모두 버린??
 		if (UART3ReadFlag == 2) {
 			if (UART3_ReadBuff[UART3_RXPACKET_SIZE - 1] != SERIAL_RX_ETX) {
 				//if (dwRead == UART3_RXPACKET_SIZE) {
@@ -2273,7 +2281,7 @@ void *Thread_Read_UART3(void *data) {
 				}
 			}
 		}
-		sleep(0); // 다른 Thread 들의 점유를 위해 사용
+		sleep(0); // ?�른 Thread ?�의 ?�유�??�해 ?�용
 	}
 	__android_log_print(ANDROID_LOG_INFO, "NATIVE", "Thread_Read3 Finish\n");
 	(*glpVM)->DetachCurrentThread(glpVM);
@@ -2306,7 +2314,7 @@ void *Thread_Read_UART1(void *data)
 	while (bReadRunningFlag_UART1)
 	{
 		dwRead = 0;
-		//	통신 시작 후 1byte씩 읽고, 정상 데이터를 수신한 다음부터는 원래 싸이즈로 받는다.
+		//	?�신 ?�작 ??1byte???�고, ?�상 ?�이?��? ?�신???�음부?�는 ?�래 ?�이즈로 받는??
 		if (UART1ReadFlag == 0)
 		{
 			dwRead = read(fd_UART1, &UART1_SingleBuff, 1);
@@ -2325,7 +2333,7 @@ void *Thread_Read_UART1(void *data)
 			//					,UART1_ReadBuff[10],UART1_ReadBuff[11],UART1_ReadBuff[12],UART1_ReadBuff[13],UART1_ReadBuff[14]);
 		}
 
-		//	CAN PACKET 구조가 아니면 들어온 것을 모두 버린다.
+		//	CAN PACKET 구조가 ?�니�??�어??것을 모두 버린??
 		if (UART1ReadFlag == 1)
 		{
 			if (UART1_ReadBuff[0] != SERIAL_RX_STX || UART1_ReadBuff[1] != SERIAL_RX_ID || UART1_ReadBuff[UART1_RXPACKET_SIZE - 1] != SERIAL_RX_ETX)
@@ -2396,7 +2404,7 @@ void *Thread_Read_UART1(void *data)
 
 		}
 
-		sleep(0); // 다른 Thread 들의 점유를 위해 사용
+		sleep(0); // ?�른 Thread ?�의 ?�유�??�해 ?�용
 	}
 	__android_log_print(ANDROID_LOG_INFO, "NATIVE", "Thread_Read1 Finish\n");
 	(*glpVM)->DetachCurrentThread(glpVM);
@@ -2430,7 +2438,7 @@ void *Thread_Read_UART3(void *data) {
 	while (bReadRunningFlag_UART3)
 	{
 		dwRead = 0;
-		//	통신 시작 후 1byte씩 읽고, 정상 데이터를 수신한 다음부터는 원래 싸이즈로 받는다.
+		//	?�신 ?�작 ??1byte???�고, ?�상 ?�이?��? ?�신???�음부?�는 ?�래 ?�이즈로 받는??
 		if (UART3ReadFlag == 0)
 		{
 			dwRead = read(fd_UART3, &UART3_SingleBuff, 1);
@@ -2441,7 +2449,7 @@ void *Thread_Read_UART3(void *data) {
 			dwRead = read(fd_UART3, UART3_ReadBuff, UART3_RXPACKET_SIZE);
 		}
 
-		//	CMD PACKET 구조가 아니면 들어온 것을 모두 버린다.
+		//	CMD PACKET 구조가 ?�니�??�어??것을 모두 버린??
 		if (UART3ReadFlag == 1)
 		{
 			if (UART3_ReadBuff[0] != SERIAL_RX_STX || UART3_ReadBuff[UART3_RXPACKET_SIZE - 1] != SERIAL_RX_ETX)
@@ -2501,7 +2509,7 @@ void *Thread_Read_UART3(void *data) {
 
 		}
 
-		sleep(0); // 다른 Thread 들의 점유를 위해 사용
+		sleep(0); // ?�른 Thread ?�의 ?�유�??�해 ?�용
 	}
 	__android_log_print(ANDROID_LOG_INFO, "NATIVE", "Thread_Read1 Finish\n");
 	(*glpVM)->DetachCurrentThread(glpVM);
@@ -2999,6 +3007,11 @@ jint _UART1_TxComm(JNIEnv *env, jobject this, jint PS) {
 		case 203	:
 			MakeCANDataSingle(0x18,0xEF,SA_EHCU,SA_MONITOR,(unsigned char*)&TX_WHEEL_LOADER_EHCU_SETTING_61184_203);
 			__android_log_print(ANDROID_LOG_INFO, "NATIVE", "UART1_Tx EHCU\n");
+			break;
+			///////////////////////////////////
+			/////////////0xEAxx////////////////
+		case 234	:
+			MakeCANDataSingle(0x18,0xEA,TargetSourceAddress,SA_MONITOR,(unsigned char*)&TX_HCEPGN_REQUEST_59904);
 			break;
 			///////////////////////////////////
 			/////////////0xFFxx////////////////

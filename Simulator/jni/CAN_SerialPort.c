@@ -1576,6 +1576,15 @@ jint Get_RearWiperWasherOperationStatus_3452_PGN65527(JNIEnv * env,
 		jobject this) {
 	return RX_ELECTRICAL_SWITCH_RELAY_OPERATION_STATUS_65527.RearWiperWasherOperationStatus_3452;
 }
+
+//////TX_HCEPGN_REQUEST_59904//////
+void Set_TargetSourceAddress(JNIEnv * env, jobject this, int Data)
+{
+	TargetSourceAddress = Data;
+}
+void Set_MessageType_PGN59904(JNIEnv * env, jobject this, int Data) {
+	TX_HCEPGN_REQUEST_59904.HCEPGN = Data;
+}
 //////TX_DTC_INFORMATION_REQUEST_61184_11///////
 void Set_MessageType_PGN61184_11(JNIEnv * env, jobject this, int Data) {
 	TX_DTC_INFORMATION_REQUEST_61184_11.MessageType = Data;
@@ -2196,6 +2205,24 @@ void Set_SpeedmeterUnitChange_PGN65327(JNIEnv * env, jobject this, int Data) {
 }
 void Set_MonitorScreenNumber_836_PGN65327(JNIEnv * env, jobject this, int Data) {
 	TX_MONIOTR_STATUS_65327.MonitorScreenNumber_836 = Data;
+}
+void Set_MachineSerialNumber2_962_PGN65327(JNIEnv * env, jobject this, jbyteArray Data) {
+	jbyte *pArr;
+	int i;
+	int size = sizeof(TX_MONIOTR_STATUS_65327.MachineSerialNumber2_962);
+
+	pArr = (*env)->GetByteArrayElements(env, Data, NULL);
+
+	for (i = 0; i < size; i++)
+	{
+		TX_MONIOTR_STATUS_65327.MachineSerialNumber2_962[i] = pArr[i];
+		__android_log_print(ANDROID_LOG_INFO, "RingBuffer","TX_MONIOTR_STATUS_65327.MachineSerialNumber2_962[%d]=[%d]\n",i,TX_MONIOTR_STATUS_65327.MachineSerialNumber2_962);
+
+	}
+
+
+	(*env)->ReleaseByteArrayElements(env, Data, pArr, 0);
+
 }
 //////TX_RMCU_STATUS_65329///////
 void Set_RMCUNetworkType_1621_PGN65329(JNIEnv * env, jobject this, int Data) {
@@ -4370,6 +4397,11 @@ static JNINativeMethod methods[] =
 						(void*) Get_RearWiperOperationStatus_3451_PGN65527 },
 				{ "Get_RearWiperWasherOperationStatus_3452_PGN65527", "()I",
 						(void*) Get_RearWiperWasherOperationStatus_3452_PGN65527 },
+				//////TX_HCEPGN_REQUEST_59904//////
+				{ "Set_TargetSourceAddress", "(I)V",
+						(void*) Set_TargetSourceAddress }, {
+						"Set_MessageType_PGN59904", "(I)V",
+						(void*) Set_MessageType_PGN59904 },
 				//////TX_DTC_INFORMATION_REQUEST_61184_11///////
 				{ "Set_MessageType_PGN61184_11", "(I)V",
 						(void*) Set_MessageType_PGN61184_11 }, {
@@ -4650,6 +4682,7 @@ static JNINativeMethod methods[] =
 						{"Set_RequestBuzzerStop_PGN65327", "(I)V",(void*) Set_RequestBuzzerStop_PGN65327 },
 						{"Set_SpeedmeterUnitChange_PGN65327", "(I)V",(void*) Set_SpeedmeterUnitChange_PGN65327 },
 						{"Set_MonitorScreenNumber_836_PGN65327", "(I)V",(void*) Set_MonitorScreenNumber_836_PGN65327 },
+						{"Set_MachineSerialNumber2_962_PGN65327", "([B)V",Set_MachineSerialNumber2_962_PGN65327},
 				//////TX_RMCU_STATUS_65329///////
 				{ "Set_RMCUNetworkType_1621_PGN65329", "(I)V",
 						(void*) Set_RMCUNetworkType_1621_PGN65329 }, {

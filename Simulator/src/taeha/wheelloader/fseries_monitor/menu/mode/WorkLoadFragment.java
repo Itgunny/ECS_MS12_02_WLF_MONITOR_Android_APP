@@ -433,6 +433,7 @@ public class WorkLoadFragment extends ParentFragment{
 	}
 	public void WeighingSystemDisplayDisplay(int data){
 		switch (data) {
+		default:
 		case CAN1CommManager.DATA_STATE_WEIGHINGDISPLAY_DAILY:
 			radioWeighingDaily.setChecked(true);
 			radioWeighingTotalA.setChecked(false);
@@ -456,8 +457,6 @@ public class WorkLoadFragment extends ParentFragment{
 			radioWeighingTotalA.setChecked(false);
 			radioWeighingTotalB.setChecked(false);
 			radioWeighingTotalC.setChecked(true);
-			break;
-		default:
 			break;
 		}
 	}

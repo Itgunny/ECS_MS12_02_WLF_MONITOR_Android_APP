@@ -1,4 +1,4 @@
-package taeha.wheelloader.fseries_monitor.menu.mode;
+package taeha.wheelloader.fseries_monitor.menu.management;
 
 import android.os.Bundle;
 import android.os.Handler;
@@ -9,13 +9,15 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
 import android.widget.ImageButton;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import taeha.wheelloader.fseries_monitor.main.Home;
 import taeha.wheelloader.fseries_monitor.main.R;
+import taeha.wheelloader.fseries_monitor.main.R.string;
 import taeha.wheelloader.fseries_monitor.menu.PasswordFragment;
 
-public class EngineAutoShutdownPWFragment extends PasswordFragment{
-
+public class ServiceMenuChangeMachineSerialFragment extends PasswordFragment{
+	
 	ImageButton imgbtnCancel;
 	
 	@Override
@@ -23,16 +25,20 @@ public class EngineAutoShutdownPWFragment extends PasswordFragment{
 			Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
 		//super.onCreateView(inflater, container, savedInstanceState);
-		 TAG = "EngineAutoShutdownPWFragment";
+		TAG = "ServiceMenuChangeMachineSerialFragment";
 		Log.d(TAG, "onCreateView");		
+		
 		mRoot = inflater.inflate(R.layout.menu_body_mode_engineautoshutdown_pw, null);
 		InitResource();
 		InitValuables();
 		InitButtonListener();
-		SetTextIndicatorTitle(1);
+		setTitleText(ParentActivity.getResources().getString(string.Serial_No)+" "+Integer.toString(ParentActivity.MachineSerialNumber));
 		
-		ParentActivity.ScreenIndex = ParentActivity.SCREEN_STATE_MENU_MODE_ETC_AUTOSHUTDOWN_PW;
-		ParentActivity._MenuBaseFragment._MenuInterTitleFragment.SetTitleText(ParentActivity.getResources().getString(R.string.Engine_Auto_Shutdown));
+		InitialMachineSerialNumber();
+
+		ParentActivity.ScreenIndex = ParentActivity.SCREEN_STATE_MENU_MANAGEMENT_SERVICE_MACHINESERIALNUMBER_TOP;
+		ParentActivity._MenuBaseFragment._MenuInterTitleFragment.SetTitleText(ParentActivity.getResources().getString(R.string.Machine_Serial_Number));
+		
 		HandleCursurDisplay = new Handler() {
 			@Override
 			public void handleMessage(Message msg) {
@@ -41,9 +47,12 @@ public class EngineAutoShutdownPWFragment extends PasswordFragment{
 			}
 		};
 		CursurDisplay(CursurIndex);
+		
+		MAX_INPUT_LENGTH = 6;
+		
 		return mRoot;
 	}
-	
+
 	@Override
 	protected void InitResource() {
 		// TODO Auto-generated method stub
@@ -67,6 +76,7 @@ public class EngineAutoShutdownPWFragment extends PasswordFragment{
 
 		checkDisplay = (CheckBox)mRoot.findViewById(R.id.checkBox_menu_body_mode_engineautoshutdown_pw_display);
 	}
+	
 	@Override
 	protected void InitButtonListener() {
 		super.InitButtonListener();
@@ -75,10 +85,11 @@ public class EngineAutoShutdownPWFragment extends PasswordFragment{
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
-				ClickCancel();
+				ClickESC();
 			}
 		});
 	}
+	
 	@Override
 	public void showServicePasswordNextScreen() {
 		// TODO Auto-generated method stub
@@ -86,10 +97,7 @@ public class EngineAutoShutdownPWFragment extends PasswordFragment{
 			return;
 		else
 			ParentActivity.StartAnimationRunningTimer();
-		
-		ParentActivity._MenuBaseFragment.showBodyESL();
-		
-		ParentActivity.OldScreenIndex = Home.SCREEN_STATE_MENU_MODE_ETC_AUTOSHUTDOWN_PW;
+		ParentActivity._MenuBaseFragment.showServiceMenuListAnimation();
 	}
 
 	@Override
@@ -100,91 +108,83 @@ public class EngineAutoShutdownPWFragment extends PasswordFragment{
 			return;
 		else
 			ParentActivity.StartAnimationRunningTimer();
-		
-		ParentActivity._MenuBaseFragment.showBodyESL();
-		
-		ParentActivity.OldScreenIndex = Home.SCREEN_STATE_MENU_MODE_ETC_AUTOSHUTDOWN_PW;
+		ParentActivity._MenuBaseFragment.showServiceMenuListAnimation();
+	}
+	////////////////////////////////////////////////////////////////////////////////////////
+	public void InitialMachineSerialNumber(){
+		ParentActivity.tempMachineSerialNumber = 0xffffff;
+		checkDisplay.setVisibility(View.GONE);
+	}
+	public int GetMachineSerialNumber(){
+		int number = 0;
+		int nibble = 1;
+		if(DataBufIndex > 0)
+		{
+			for(int i = 0; i < DataBufIndex; i++){
+				number += (NumDataBuf[DataBufIndex-1-i]-0x30) * nibble;
+				nibble *= 10;
+			}
+		}
+		return number;
 	}
 	@Override
-	public void CheckPassword(){
-		int Result;
-		Result = CAN1Comm.Get_PasswordCertificationResult_956_PGN61184_24();
-		Log.d(TAG,"CheckPassword Result : " + Integer.toString(Result));	
-		//if(Result == 1)	// UserPassword
-		//	Result = 0;
-		
-		switch (Result) {
-		case 0:			// Not OK
-		case 13:		// TimeOut
-			ErrCount++;
-			DataBufIndex = 0;
-			PasswordIndicatorDisplay();
-			if(ErrCount >= MAX_ERR_CNT)
-			{
-				CancelPasswordCheckTimer();
-				CancelTimeOutTimer();
-				SetTextIndicatorTitle(13);
-				return;
-			}
-			
-			SetTextIndicatorTitle(3);
-			try {
-				Thread.sleep(1000);
-			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			CancelPasswordCheckTimer();
-			CancelTimeOutTimer();
-			SetTextIndicatorTitle(1);
+	public void PasswordIndicatorDisplay(){			// Password number Ç¥½Ã
+		ParentActivity.runOnUiThread(new Runnable(){
 
-			break;
-		case 1:	// UserPassword	OK
-		case 2:	// Service Password OK
-		
-			CancelPasswordCheckTimer();
-			CancelTimeOutTimer();
+			@Override
+			public void run() {
+				// TODO Auto-generated method stub
+				String IndicatorText = "";
+
+				if(DataBufIndex > 0)
+				{
+					for(int i = 0; i < DataBufIndex; i++){
+						IndicatorText += Integer.toString(NumDataBuf[i]-0x30);
+					}
+				}
+				textViewPassword.setText(IndicatorText);
+			}
+		});
+	}
+	@Override
+	public void EnterClick(){
+		if(DataBufIndex < 1)
+		{
+			PasswordIndicatorDisplay();
 			
-			if(Result == 2)
+			SetTitleIndex(17);
+			StartIndicatorTitleTimer(500);
+		}
+		else
+		{
+			if(ParentActivity.tempMachineSerialNumber == 0xffffff)
 			{
+				ParentActivity.tempMachineSerialNumber = GetMachineSerialNumber();
+				SetTextIndicatorTitle(18);
+				PasswordIndicatorDisplay();
+				
+				SetTitleIndex(18);
+				StartIndicatorTitleTimer(500);
+			}
+			else if(GetMachineSerialNumber() != ParentActivity.tempMachineSerialNumber)
+			{
+				ParentActivity.tempMachineSerialNumber = 0xffffff;
+				PasswordIndicatorDisplay();
+				
+				setTitleText(ParentActivity.getResources().getString(string.Serial_No)+" "+Integer.toString(ParentActivity.MachineSerialNumber));
+				StartIndicatorTitleTimer(500);
+			}
+			else 
+			{
+				ParentActivity.MachineSerialNumber = GetMachineSerialNumber();
+				ParentActivity.SaveMachineSerialNumber();
 				showServicePasswordNextScreen();
 			}
-			else if(Result == 1)
-			{
-				showUserPasswordNextScreen();
-			}
-			Log.d(TAG,"Password OK : " + Integer.toString(Result));
-			break;
-		
-		case 5:	// MLC Password OK
-		case 10:	// Master Password OK
-		case 15:
-		default:
-			break;
-		}
+
+		}		
 	}
-	public void ClickCancel(){
-		if(ParentActivity.AnimationRunningFlag == true)
-			return;
-		else
-			ParentActivity.StartAnimationRunningTimer();
-		ParentActivity._MenuBaseFragment.showBodyEngineAutoShutdown();
-	}
-	/////////////////////////////////////////////////////////////////////////////////////
-	public void ClickLeft(){
-		super.ClickLeft();
-	}
-	public void ClickRight(){	
-		super.ClickRight();
-	}
+	@Override
 	public void ClickESC(){
-		ClickCancel();
+		showServicePasswordNextScreen();
 	}
-	public void ClickEnter(){
-		super.ClickEnter();
-	}
-	public void CursurDisplay(int Index){
-		super.CursurDisplay(Index);
-	}
-	/////////////////////////////////////////////////////////////////////////////////////
 }

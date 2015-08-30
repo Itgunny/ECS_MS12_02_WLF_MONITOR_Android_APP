@@ -39,10 +39,9 @@ public class ESLPasswordFragment extends PasswordFragment{
 					return;
 				else
 					ParentActivity.StartAnimationRunningTimer();
-				// ++, 150309 bwk
 				//ParentActivity._MainChangeAnimation.StartChangeAnimation(ParentActivity._MainBBaseFragment);
-				ParentActivity.showMainScreen();
-				// --, 150309 bwk
+				//ParentActivity.showMainScreen();
+				ParentActivity.showInputMachineSerial();
 			
 			}
 		};
@@ -53,6 +52,7 @@ public class ESLPasswordFragment extends PasswordFragment{
 				CursurDisplay(msg.what);
 			}
 		};
+		CursurDisplay(CursurIndex);
 		
 		ParentActivity.ScreenIndex = ParentActivity.SCREEN_STATE_MAIN_ESL_PASSWORD;
 		return mRoot;
@@ -108,5 +108,21 @@ public class ESLPasswordFragment extends PasswordFragment{
 			LayoutSmkIcon.setVisibility(View.GONE);
 	}
 	// --, 150325 bwk
+	////////////////////////////////////////////////////////////////////////////////////////
+	public void KeyButtonClick(int key){
+		switch (key) {
+		case CAN1CommManager.LEFT:
+			ClickLeft();
+			break;
+		case CAN1CommManager.RIGHT:
+			ClickRight();
+			break;
+		case CAN1CommManager.ENTER:
+			ClickEnter();
+			break;
+		default:
+			break;
+		}
+	}
 
 }

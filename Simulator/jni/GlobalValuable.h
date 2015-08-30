@@ -321,7 +321,7 @@ CMD_DATA						rx_CMD_Data;
 ////////////////////////////////////////////////////
 /////////////////////// CAN TX Data/////////////////
 
-HCEPGN_REQUEST						tx_request_hcepgn;
+HCEPGN_REQUEST_59904				TX_HCEPGN_REQUEST_59904;
 HCESPN_DATA_REQUEST					tx_request_hcespn_data;
 
 ESL_PASSWORD_SETTING				tx_esl_password69;
@@ -390,6 +390,8 @@ unsigned int		nRecvPasswordChangeResultFlag;
 unsigned int		nRecvResDownFlag;
 
 unsigned char		nFNLamp = 0;
+
+unsigned char		TargetSourceAddress;
 /////////////////////// CMD Data/////////////////
 RES_RTC							RX_RES_RTC;
 RES_VERSION						RX_RES_Version;

@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent" 
-    android:splitMotionEvents="false">
-    
+    android:layout_height="match_parent"
+    android:splitMotionEvents="false" >
+
     <FrameLayout
         android:id="@+id/FrameLayout_menu_body_mode_engineautoshutdown_pw"
         android:layout_width="match_parent"
@@ -11,11 +11,10 @@
         android:layout_above="@+id/RelativeLayout_menu_body_mode_engineautoshutdown_pw_low"
         android:layout_alignParentLeft="true"
         android:layout_alignParentRight="true"
-        android:layout_alignParentTop="true" 
-        android:splitMotionEvents="false">
-
+        android:layout_alignParentTop="true"
+        android:splitMotionEvents="false" >
     </FrameLayout>
-    
+
     <RelativeLayout
         android:id="@+id/RelativeLayout_menu_body_mode_engineautoshutdown_pw_num"
         android:layout_width="wrap_content"
@@ -24,8 +23,8 @@
         android:layout_alignParentRight="true"
         android:layout_alignParentTop="true"
         android:layout_marginRight="30dp"
-        android:layout_marginTop="10dp" 
-        android:splitMotionEvents="false">
+        android:layout_marginTop="10dp"
+        android:splitMotionEvents="false" >
 
         <TextView
             android:id="@+id/textView_menu_body_mode_engineautoshutdown_pw_num_1"
@@ -37,7 +36,7 @@
             android:textAppearance="?android:attr/textAppearanceLarge"
             android:textColor="@drawable/_selector_menu_body_multimedia_txt"
             android:textSize="40sp" />
-        
+
         <TextView
             android:id="@+id/textView_menu_body_mode_engineautoshutdown_pw_num_2"
             android:layout_width="wrap_content"
@@ -50,7 +49,7 @@
             android:textAppearance="?android:attr/textAppearanceLarge"
             android:textColor="@drawable/_selector_menu_body_multimedia_txt"
             android:textSize="40sp" />
-        
+
         <TextView
             android:id="@+id/textView_menu_body_mode_engineautoshutdown_pw_num_3"
             android:layout_width="wrap_content"
@@ -63,7 +62,7 @@
             android:textAppearance="?android:attr/textAppearanceLarge"
             android:textColor="@drawable/_selector_menu_body_multimedia_txt"
             android:textSize="40sp" />
-        
+
         <TextView
             android:id="@+id/textView_menu_body_mode_engineautoshutdown_pw_num_4"
             android:layout_width="wrap_content"
@@ -77,7 +76,7 @@
             android:textAppearance="?android:attr/textAppearanceLarge"
             android:textColor="@drawable/_selector_menu_body_multimedia_txt"
             android:textSize="40sp" />
-        
+
         <TextView
             android:id="@+id/textView_menu_body_mode_engineautoshutdown_pw_num_5"
             android:layout_width="wrap_content"
@@ -90,7 +89,7 @@
             android:textAppearance="?android:attr/textAppearanceLarge"
             android:textColor="@drawable/_selector_menu_body_multimedia_txt"
             android:textSize="40sp" />
-        
+
         <TextView
             android:id="@+id/textView_menu_body_mode_engineautoshutdown_pw_num_6"
             android:layout_width="wrap_content"
@@ -103,7 +102,7 @@
             android:textAppearance="?android:attr/textAppearanceLarge"
             android:textColor="@drawable/_selector_menu_body_multimedia_txt"
             android:textSize="40sp" />
-        
+
         <TextView
             android:id="@+id/textView_menu_body_mode_engineautoshutdown_pw_num_7"
             android:layout_width="wrap_content"
@@ -117,7 +116,7 @@
             android:textAppearance="?android:attr/textAppearanceLarge"
             android:textColor="@drawable/_selector_menu_body_multimedia_txt"
             android:textSize="40sp" />
-        
+
         <TextView
             android:id="@+id/textView_menu_body_mode_engineautoshutdown_pw_num_8"
             android:layout_width="wrap_content"
@@ -130,7 +129,7 @@
             android:textAppearance="?android:attr/textAppearanceLarge"
             android:textColor="@drawable/_selector_menu_body_multimedia_txt"
             android:textSize="40sp" />
-        
+
         <TextView
             android:id="@+id/textView_menu_body_mode_engineautoshutdown_pw_num_9"
             android:layout_width="wrap_content"
@@ -143,7 +142,7 @@
             android:textAppearance="?android:attr/textAppearanceLarge"
             android:textColor="@drawable/_selector_menu_body_multimedia_txt"
             android:textSize="40sp" />
-        
+
         <TextView
             android:id="@+id/textView_menu_body_mode_engineautoshutdown_pw_num_0"
             android:layout_width="wrap_content"
@@ -175,7 +174,6 @@
             android:layout_below="@+id/textView_menu_body_mode_engineautoshutdown_pw_num_9"
             android:layout_marginTop="6dp"
             android:background="@drawable/_selector_menu_body_num_normal_enter_btn1" />
-
     </RelativeLayout>
 
     <RelativeLayout
@@ -184,16 +182,16 @@
         android:layout_height="match_parent"
         android:layout_above="@+id/RelativeLayout_menu_body_mode_engineautoshutdown_pw_low"
         android:layout_alignParentLeft="true"
-        android:layout_toLeftOf="@+id/RelativeLayout_menu_body_mode_engineautoshutdown_pw_num" 
-        android:splitMotionEvents="false">
+        android:layout_toLeftOf="@+id/RelativeLayout_menu_body_mode_engineautoshutdown_pw_num"
+        android:splitMotionEvents="false" >
 
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
             android:layout_centerVertical="true"
-            android:orientation="vertical" 
-            android:splitMotionEvents="false">
+            android:orientation="vertical"
+            android:splitMotionEvents="false" >
 
             <TextView
                 android:id="@+id/textView_menu_body_mode_engineautoshutdown_pw_text_title"
@@ -202,152 +200,155 @@
                 android:gravity="center"
                 android:textAppearance="?android:attr/textAppearanceLarge" />
 
-            <TextView
-                android:id="@+id/textView_menu_body_mode_engineautoshutdown_pw_text_data"
+            <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
-                android:background="@drawable/menu_numpad_inputbox_gray"
-                android:gravity="right|center_vertical"
-                android:padding="10dp"
-                android:textAppearance="?android:attr/textAppearanceLarge"
-                android:textColor="@color/main_title_amber"
-                android:textSize="30sp" />
+                android:splitMotionEvents="false" >
 
+                <TextView
+                    android:id="@+id/textView_menu_body_mode_engineautoshutdown_pw_text_data"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/menu_numpad_inputbox_gray"
+                    android:gravity="right|center_vertical"
+                    android:padding="10dp"
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:textColor="@color/main_title_amber"
+                    android:textSize="30sp" />
+
+                <CheckBox
+                    android:id="@+id/checkBox_menu_body_mode_engineautoshutdown_pw_display"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="20dp"
+                    android:layout_gravity="center" />
+            </LinearLayout>
         </LinearLayout>
-
     </RelativeLayout>
-    
-    
+
     <RelativeLayout
         android:id="@+id/RelativeLayout_menu_body_mode_engineautoshutdown_pw_low"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true" 
-        android:splitMotionEvents="false">
-        
+        android:layout_alignParentBottom="true"
+        android:splitMotionEvents="false" >
+
         <ImageView
             android:id="@+id/imageView_menu_body_mode_engineautoshutdown_pw_low_bg"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@drawable/menu_low_bg" />
-	    
-	    
-	   
-	    <ImageButton
-	        android:id="@+id/ImageButton_menu_body_mode_engineautoshutdown_pw_low_ok"
-	        android:layout_width="wrap_content"
-	        android:layout_height="wrap_content"
-	        android:layout_alignBottom="@+id/imageView_menu_body_mode_engineautoshutdown_pw_low_bg"
-	        android:layout_alignRight="@+id/imageView_menu_body_mode_engineautoshutdown_pw_low_bg"
-	        android:background="@drawable/_selector_menu_low_right_btn"
-	        android:visibility="invisible" />
-	    
-	    <ImageButton
-	        android:id="@+id/ImageButton_menu_body_mode_engineautoshutdown_pw_low_cancel"
-	        android:layout_width="wrap_content"
-	        android:layout_height="wrap_content"
-	        android:layout_alignBottom="@+id/imageView_menu_body_mode_engineautoshutdown_pw_low_bg"
-	        android:layout_toLeftOf="@+id/imageView_menu_body_mode_engineautoshutdown_pw_low_line_1"
-	        android:background="@drawable/_selector_menu_low_center_btn" />
-	    
-	    <ImageView
-	        android:id="@+id/imageView_menu_body_mode_engineautoshutdown_pw_low_line_1"
-	        android:layout_width="wrap_content"
-	        android:layout_height="wrap_content"
-	        android:layout_alignBottom="@+id/imageView_menu_body_mode_engineautoshutdown_pw_low_bg"
-	        android:layout_alignLeft="@+id/ImageButton_menu_body_mode_engineautoshutdown_pw_low_ok"
-	        android:src="@drawable/main_key_low_line" />
-	
-	   <ImageView
-	       android:id="@+id/imageView_menu_body_mode_engineautoshutdown_pw_low_line_2"
-	       android:layout_width="wrap_content"
-	       android:layout_height="wrap_content"
-	       android:layout_alignBottom="@+id/imageView_menu_body_mode_engineautoshutdown_pw_low_bg"
-	       android:layout_alignLeft="@+id/ImageButton_menu_body_mode_engineautoshutdown_pw_low_cancel"
-	       android:src="@drawable/main_key_low_line" />
-	   
-	
-	    <RelativeLayout
-	        android:layout_width="wrap_content"
-	        android:layout_height="wrap_content"
-	        android:layout_alignBottom="@+id/ImageButton_menu_body_mode_engineautoshutdown_pw_low_ok"
-	        android:layout_alignLeft="@+id/ImageButton_menu_body_mode_engineautoshutdown_pw_low_ok"
-	        android:layout_alignRight="@+id/ImageButton_menu_body_mode_engineautoshutdown_pw_low_ok"
-	        android:layout_alignTop="@+id/ImageButton_menu_body_mode_engineautoshutdown_pw_low_ok"
-	        android:visibility="invisible" 
-	        android:splitMotionEvents="false">
-	
-	        <LinearLayout
-	            android:layout_width="wrap_content"
-	            android:layout_height="wrap_content"
-	            android:layout_centerHorizontal="true"
-	            android:layout_centerVertical="true" 
-	            android:splitMotionEvents="false">
-	
-	            <ImageView
-	                android:id="@+id/imageView_menu_body_mode_engineautoshutdown_pw_low_ok_icon"
-	                android:layout_width="wrap_content"
-	                android:layout_height="wrap_content"
-	                android:layout_alignBottom="@+id/ImageButton_menu_body_mode_engineautoshutdown_pw_low_ok"
-	                android:layout_alignLeft="@+id/ImageButton_menu_body_mode_engineautoshutdown_pw_low_ok"
-	                android:layout_alignTop="@+id/ImageButton_menu_body_mode_engineautoshutdown_pw_low_ok"
-	                android:src="@drawable/menu_low_icon_ok" />
-	
-	            <TextView
-	                android:id="@+id/textView_menu_body_mode_engineautoshutdown_pw_low_ok"
-	                android:layout_width="wrap_content"
-	                android:layout_height="match_parent"
-	                android:layout_marginLeft="10dp"
-	                android:gravity="center"
-	                android:text="@string/OK"
-	                android:textAppearance="?android:attr/textAppearanceLarge"
-	                android:textSize="25sp"
-	                android:textStyle="bold" />
-	
-	        </LinearLayout>
-	    </RelativeLayout>
-	    
-	    <RelativeLayout
-	        android:layout_width="wrap_content"
-	        android:layout_height="wrap_content"
-	        android:layout_alignBottom="@+id/ImageButton_menu_body_mode_engineautoshutdown_pw_low_cancel"
-	        android:layout_alignLeft="@+id/ImageButton_menu_body_mode_engineautoshutdown_pw_low_cancel"
-	        android:layout_alignRight="@+id/ImageButton_menu_body_mode_engineautoshutdown_pw_low_cancel"
-	        android:layout_alignTop="@+id/ImageButton_menu_body_mode_engineautoshutdown_pw_low_cancel" 
-	        android:splitMotionEvents="false">
-	
-	        <LinearLayout
-	            android:layout_width="wrap_content"
-	            android:layout_height="wrap_content"
-	            android:layout_centerHorizontal="true"
-	            android:layout_centerVertical="true" 
-	            android:splitMotionEvents="false">
-	
-	            <ImageView
-	                android:id="@+id/imageView_menu_body_mode_engineautoshutdown_pw_low_cancel_icon"
-	                android:layout_width="wrap_content"
-	                android:layout_height="wrap_content"
-	                android:layout_alignBottom="@+id/ImageButton_menu_body_mode_engineautoshutdown_pw_low_cancel"
-	                android:layout_alignLeft="@+id/ImageButton_menu_body_mode_engineautoshutdown_pw_low_cancel"
-	                android:layout_alignTop="@+id/ImageButton_menu_body_mode_engineautoshutdown_pw_low_cancel"
-	                android:src="@drawable/menu_low_icon_cancel" />
-	
-	            <TextView
-	                android:id="@+id/textView_menu_body_mode_engineautoshutdown_pw_low_cancel"
-	                android:layout_width="wrap_content"
-	                android:layout_height="match_parent"
-	                android:layout_marginLeft="10dp"
-	                android:gravity="center"
-	                android:text="@string/Cancel"
-	                android:textAppearance="?android:attr/textAppearanceLarge"
-	                android:textSize="25sp"
-	                android:textStyle="bold" />
-	
-	        </LinearLayout>
-	    </RelativeLayout>
 
+        <ImageButton
+            android:id="@+id/ImageButton_menu_body_mode_engineautoshutdown_pw_low_ok"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@+id/imageView_menu_body_mode_engineautoshutdown_pw_low_bg"
+            android:layout_alignRight="@+id/imageView_menu_body_mode_engineautoshutdown_pw_low_bg"
+            android:background="@drawable/_selector_menu_low_right_btn"
+            android:visibility="invisible" />
+
+        <ImageButton
+            android:id="@+id/ImageButton_menu_body_mode_engineautoshutdown_pw_low_cancel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@+id/imageView_menu_body_mode_engineautoshutdown_pw_low_bg"
+            android:layout_toLeftOf="@+id/imageView_menu_body_mode_engineautoshutdown_pw_low_line_1"
+            android:background="@drawable/_selector_menu_low_center_btn" />
+
+        <ImageView
+            android:id="@+id/imageView_menu_body_mode_engineautoshutdown_pw_low_line_1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@+id/imageView_menu_body_mode_engineautoshutdown_pw_low_bg"
+            android:layout_alignLeft="@+id/ImageButton_menu_body_mode_engineautoshutdown_pw_low_ok"
+            android:src="@drawable/main_key_low_line" />
+
+        <ImageView
+            android:id="@+id/imageView_menu_body_mode_engineautoshutdown_pw_low_line_2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@+id/imageView_menu_body_mode_engineautoshutdown_pw_low_bg"
+            android:layout_alignLeft="@+id/ImageButton_menu_body_mode_engineautoshutdown_pw_low_cancel"
+            android:src="@drawable/main_key_low_line" />
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@+id/ImageButton_menu_body_mode_engineautoshutdown_pw_low_ok"
+            android:layout_alignLeft="@+id/ImageButton_menu_body_mode_engineautoshutdown_pw_low_ok"
+            android:layout_alignRight="@+id/ImageButton_menu_body_mode_engineautoshutdown_pw_low_ok"
+            android:layout_alignTop="@+id/ImageButton_menu_body_mode_engineautoshutdown_pw_low_ok"
+            android:splitMotionEvents="false"
+            android:visibility="invisible" >
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_centerVertical="true"
+                android:splitMotionEvents="false" >
+
+                <ImageView
+                    android:id="@+id/imageView_menu_body_mode_engineautoshutdown_pw_low_ok_icon"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignBottom="@+id/ImageButton_menu_body_mode_engineautoshutdown_pw_low_ok"
+                    android:layout_alignLeft="@+id/ImageButton_menu_body_mode_engineautoshutdown_pw_low_ok"
+                    android:layout_alignTop="@+id/ImageButton_menu_body_mode_engineautoshutdown_pw_low_ok"
+                    android:src="@drawable/menu_low_icon_ok" />
+
+                <TextView
+                    android:id="@+id/textView_menu_body_mode_engineautoshutdown_pw_low_ok"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="10dp"
+                    android:gravity="center"
+                    android:text="@string/OK"
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:textSize="25sp"
+                    android:textStyle="bold" />
+            </LinearLayout>
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@+id/ImageButton_menu_body_mode_engineautoshutdown_pw_low_cancel"
+            android:layout_alignLeft="@+id/ImageButton_menu_body_mode_engineautoshutdown_pw_low_cancel"
+            android:layout_alignRight="@+id/ImageButton_menu_body_mode_engineautoshutdown_pw_low_cancel"
+            android:layout_alignTop="@+id/ImageButton_menu_body_mode_engineautoshutdown_pw_low_cancel"
+            android:splitMotionEvents="false" >
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_centerVertical="true"
+                android:splitMotionEvents="false" >
+
+                <ImageView
+                    android:id="@+id/imageView_menu_body_mode_engineautoshutdown_pw_low_cancel_icon"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignBottom="@+id/ImageButton_menu_body_mode_engineautoshutdown_pw_low_cancel"
+                    android:layout_alignLeft="@+id/ImageButton_menu_body_mode_engineautoshutdown_pw_low_cancel"
+                    android:layout_alignTop="@+id/ImageButton_menu_body_mode_engineautoshutdown_pw_low_cancel"
+                    android:src="@drawable/menu_low_icon_cancel" />
+
+                <TextView
+                    android:id="@+id/textView_menu_body_mode_engineautoshutdown_pw_low_cancel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="10dp"
+                    android:gravity="center"
+                    android:text="@string/Cancel"
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:textSize="25sp"
+                    android:textStyle="bold" />
+            </LinearLayout>
+        </RelativeLayout>
     </RelativeLayout>
-    
 
 </RelativeLayout>

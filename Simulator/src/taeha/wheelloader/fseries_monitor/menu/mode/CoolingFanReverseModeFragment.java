@@ -171,7 +171,10 @@ public class CoolingFanReverseModeFragment extends ParentFragment{
 		else if(CoolingFanReverse == CAN1CommManager.DATA_STATE_REVERSEFAN_OFF)
 			CursurIndex = 2;
 		else 
+		{
+			CoolingFanReverse = CAN1CommManager.DATA_STATE_REVERSEFAN_AUTO;
 			CursurIndex = 1;
+		}
 
 		textViewIntervalMax.setText(ParentActivity.GetSectoMinString(300,ParentActivity.getResources().getString(string.Hour),ParentActivity.getResources().getString(string.Min)));
 		textViewIntervalMin.setText(ParentActivity.GetSectoMinString(30,ParentActivity.getResources().getString(string.Hour),ParentActivity.getResources().getString(string.Min)));

@@ -73,7 +73,7 @@ public class MaintenanceFragment extends ParentFragment{
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
-		 TAG = "PressureCalibration";
+		 TAG = "MaintenanceFragment";
 		Log.d(TAG, "onCreateView");
 		mRoot = inflater.inflate(R.layout.menu_body_management_maint, null);
 		InitResource();
@@ -142,13 +142,30 @@ public class MaintenanceFragment extends ParentFragment{
 		MaintenanceItem = new byte[ITEMNUMBER];
 		MaintennanceAlramOn = new byte[ITEMNUMBER];
 		
-		TotalNumberofMaintenanceItems = CAN1Comm.Get_TotalNumberofMaintenanceItems_1100_PGN61184_13();
+		TotalNumberofMaintenanceItems = 15;	// CAN1Comm.Get_TotalNumberofMaintenanceItems_1100_PGN61184_13();
 		if(TotalNumberofMaintenanceItems > ITEMNUMBER)
 			TotalNumberofMaintenanceItems = ITEMNUMBER;
 
 		for(int i  = 0; i < ITEMNUMBER; i++){
 			imgbtnMaintItem[i].setVisibility(View.GONE);
-			MaintenanceItem[i] = (byte)0xFF;
+			switch(i){
+				case 0:		MaintenanceItem[i] = (byte)0x1;break;
+				case 1:		MaintenanceItem[i] = (byte)0x4;break;
+				case 2:		MaintenanceItem[i] = (byte)0x5;break;
+				case 3:		MaintenanceItem[i] = (byte)0x7;break;
+				case 4:		MaintenanceItem[i] = (byte)0x8;break;
+				case 5:		MaintenanceItem[i] = (byte)0x9;break;
+				case 6:		MaintenanceItem[i] = (byte)0xa;break;
+				case 7:		MaintenanceItem[i] = (byte)0xb;break;
+				case 8:		MaintenanceItem[i] = (byte)0xd;break;
+				case 9:		MaintenanceItem[i] = (byte)0xf;break;
+				case 10:	MaintenanceItem[i] = (byte)0x10;break;
+				case 11:	MaintenanceItem[i] = (byte)0x11;break;
+				case 12:	MaintenanceItem[i] = (byte)0x12;break;
+				case 13:	MaintenanceItem[i] = (byte)0x16;break;
+				case 14:	MaintenanceItem[i] = (byte)0x17;break;
+			}
+			
 			MaintennanceAlramOn[i] = (byte)0xFF;
 		}
 		for(int i  = 0; i < TotalNumberofMaintenanceItems; i++){
@@ -296,7 +313,7 @@ public class MaintenanceFragment extends ParentFragment{
 	@Override
 	protected void GetDataFromNative() {
 		// TODO Auto-generated method stub
-		MaintenanceItem = CAN1Comm.Get_MaintenanceItem_1098_PGN61184_13();
+	//	MaintenanceItem = CAN1Comm.Get_MaintenanceItem_1098_PGN61184_13();
 		MaintennanceAlramOn = CAN1Comm.Get_MaintenanceItem_PGN61184_16();
 		TotalAlramOnItems = CAN1Comm.Get_TotalNumberofMaintenanceAlarmLampOnItems_1100_PGN61184_16();
 	}
@@ -362,10 +379,12 @@ public class MaintenanceFragment extends ParentFragment{
 	}
 	/////////////////////////////////////////////////////////////////////
 	public void MaintenanceItemDisplay(int MaintNumber, byte[] MaintItem, int MaintAlarmNumber, byte[] MaintAlarm){
+		Log.d(TAG, "MaintenanceItemDisplay : MaintNumber"+MaintNumber);
 		for(int i  = 0; i < ITEMNUMBER; i++){
 			imgbtnMaintItem[i].setVisibility(View.GONE);
 		}
 		for(int i = 0; i < MaintNumber; i++){
+			Log.d(TAG, "MaintenanceItemDisplay : MaintItem["+i+"]="+Integer.toHexString(MaintItem[i]));
 			imgbtnMaintItem[i].setVisibility(View.VISIBLE);
 			if(MaintNumber > ITEMNUMBER)
 				break;

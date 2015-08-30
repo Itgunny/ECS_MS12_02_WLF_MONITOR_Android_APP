@@ -748,7 +748,7 @@ typedef struct
 	unsigned short 	HCEPGN;
 	unsigned short 	Reserved0;
 	unsigned int 	Reserved1;
-}__attribute__((packed))  HCEPGN_REQUEST;
+}__attribute__((packed))  HCEPGN_REQUEST_59904;
 
 
 //=================================================================
@@ -2012,8 +2012,9 @@ typedef struct
 	unsigned char	SpeedmeterUnitChange:2;
 
 	unsigned char	MonitorScreenNumber_836;
+	unsigned char	MachineSerialNumber2_962[3];
 
-	unsigned char	DM0[6];
+	unsigned char	DM0[3];
 
 }__attribute__((packed))  MONIOTR_STATUS_65327;
 typedef struct
