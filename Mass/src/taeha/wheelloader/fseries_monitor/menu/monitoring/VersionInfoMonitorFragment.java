@@ -128,16 +128,27 @@ public class VersionInfoMonitorFragment extends VersionInfoDetailFragment{
 		HardwareDisplay(HWVersion);
 		SerialNumberDisplay(ComponentBasicInformation);
 		if(HiddenVersionFlag == false)
-			ApplicationVersionDisplay(ParentActivity.VERSION_HIGH,ParentActivity.VERSION_LOW
-								,ParentActivity.VERSION_SUB_HIGH,ParentActivity.VERSION_SUB_LOW);
+		{
+			if(ManufactureDayDisplayFlag == true)
+				ApplicationHiddenVersionDisplay(ParentActivity.VERSION_HIGH,ParentActivity.VERSION_LOW
+						,ParentActivity.VERSION_SUB_HIGH,ParentActivity.VERSION_SUB_LOW);
+			else
+				ApplicationVersionDisplay(ParentActivity.VERSION_HIGH,ParentActivity.VERSION_LOW
+						,ParentActivity.VERSION_SUB_HIGH);
+		}
 		else
-			ApplicationVersionDisplayHidden(ParentActivity.VERSION_HIGH,ParentActivity.VERSION_LOW
+			ApplicationVersionDisplayTaehaHidden(ParentActivity.VERSION_HIGH,ParentActivity.VERSION_LOW
 					,ParentActivity.VERSION_SUB_HIGH,ParentActivity.VERSION_SUB_LOW, ParentActivity.VERSION_TAEHA);
 			
 		if(HiddenVersionFlag == false)
-			FirmwareVersionDisplay(FirmwareVersionHigh,FirmwareVersionLow,FirmwareVersionSubHigh,FirmwareVersionSubLow);
+		{
+			if(ManufactureDayDisplayFlag == true)
+				FirmwareHiddenVersionDisplay(FirmwareVersionHigh,FirmwareVersionLow,FirmwareVersionSubHigh,FirmwareVersionSubLow);
+			else
+				FirmwareVersionDisplay(FirmwareVersionHigh,FirmwareVersionLow,FirmwareVersionSubHigh);
+		}
 		else
-			FirmwareVersionDisplayHidden(FirmwareVersionHigh,FirmwareVersionLow,FirmwareVersionSubHigh,FirmwareVersionSubLow,FirmwareVersionHidden);
+			FirmwareVersionDisplayTaehaHidden(FirmwareVersionHigh,FirmwareVersionLow,FirmwareVersionSubHigh,FirmwareVersionSubLow,FirmwareVersionHidden);
 		
 		if(ManufactureDayDisplayFlag == true)
 			ManufacturerDisplay(ManufacturerCode);
@@ -190,19 +201,28 @@ public class VersionInfoMonitorFragment extends VersionInfoDetailFragment{
 		}
 		
 	}
-	public void ApplicationVersionDisplay(int VersionHigh, int VersionLow, int VersionSubHigh, int VersionSubLow){
+	public void ApplicationVersionDisplay(int VersionHigh, int VersionLow, int VersionSubHigh){
+		adapter.UpdateSecond(STATE_VERSION, Integer.toString(VersionHigh) + "." + Integer.toString(VersionLow)
+				+ "." + Integer.toHexString(VersionSubHigh));
+	}
+	public void ApplicationHiddenVersionDisplay(int VersionHigh, int VersionLow, int VersionSubHigh, int VersionSubLow){
 		adapter.UpdateSecond(STATE_VERSION, Integer.toString(VersionHigh) + "." + Integer.toString(VersionLow)
 				+ "." + Integer.toHexString(VersionSubHigh) + "." + Integer.toHexString(VersionSubLow));
 	}
-	public void ApplicationVersionDisplayHidden(int VersionHigh, int VersionLow, int VersionSubHigh, int VersionSubLow, int VersionTaeha){
+	
+	public void ApplicationVersionDisplayTaehaHidden(int VersionHigh, int VersionLow, int VersionSubHigh, int VersionSubLow, int VersionTaeha){
 		adapter.UpdateSecond(STATE_VERSION, Integer.toString(VersionHigh) + "." + Integer.toString(VersionLow)
 				+ "." + Integer.toHexString(VersionSubHigh) + "." + Integer.toHexString(VersionSubLow) + Integer.toHexString(VersionTaeha));
 	}	
-	public void FirmwareVersionDisplay(int VersionHigh, int VersionLow, int SubVersionHigh, int SubVersionLow){
+	public void FirmwareVersionDisplay(int VersionHigh, int VersionLow, int SubVersionHigh){
+		adapter.UpdateSecond(STATE_FIRMWARE_VERSION, Integer.toString(VersionHigh) + "." + Integer.toString(VersionLow) 
+				+ "." + Integer.toHexString(SubVersionHigh));
+	}
+	public void FirmwareHiddenVersionDisplay(int VersionHigh, int VersionLow, int SubVersionHigh, int SubVersionLow){
 		adapter.UpdateSecond(STATE_FIRMWARE_VERSION, Integer.toString(VersionHigh) + "." + Integer.toString(VersionLow) 
 				+ "." + Integer.toHexString(SubVersionHigh) + "." + Integer.toHexString(SubVersionLow));
 	}
-	public void FirmwareVersionDisplayHidden(int VersionHigh, int VersionLow, int VersionSubHigh, int VersionSubLow, int VersionHidden){
+	public void FirmwareVersionDisplayTaehaHidden(int VersionHigh, int VersionLow, int VersionSubHigh, int VersionSubLow, int VersionHidden){
 		adapter.UpdateSecond(STATE_FIRMWARE_VERSION, Integer.toString(VersionHigh) + "." + Integer.toString(VersionLow)
 				+ "." + Integer.toHexString(VersionSubHigh) + "." + Integer.toHexString(VersionSubLow) + Integer.toHexString(VersionHidden));
 	}
@@ -215,7 +235,7 @@ public class VersionInfoMonitorFragment extends VersionInfoDetailFragment{
 			textViewHardwareData.setText("RevD.03.01");
 		}else if(_data > 596 && _data < 626){	// 5.7k
 			textViewHardwareData.setText("RevD.04.01");
-		}else if(_data > 688 && _data < 740){	// 4.7k	
+		}else if(_data > 686 && _data < 740){	// 4.7k	
 			textViewHardwareData.setText("RevF.01.01");
 		}else if(_data > 805 && _data < 865){	// 3.9k	
 		textViewHardwareData.setText("RevF.03.01");

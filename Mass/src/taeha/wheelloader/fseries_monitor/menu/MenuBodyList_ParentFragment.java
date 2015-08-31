@@ -304,6 +304,15 @@ public abstract class MenuBodyList_ParentFragment extends ParentFragment{
 	public void setListData6(String str){
 		textViewData6.setText(str);
 	}
+	public void setListColor(int Index, int Color){
+		switch(Index){
+		case 1:	textViewTitle1.setTextColor(Color); break;
+		case 2:	textViewTitle2.setTextColor(Color); break;
+		case 3:	textViewTitle3.setTextColor(Color); break;
+		case 4:	textViewTitle4.setTextColor(Color); break;
+		case 5:	textViewTitle5.setTextColor(Color); break;
+		}
+	}
 	
 	public void setListFocus(int Index){
 		switch (Index) {

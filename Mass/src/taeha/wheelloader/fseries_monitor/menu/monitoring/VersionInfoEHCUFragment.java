@@ -71,7 +71,11 @@ public class VersionInfoEHCUFragment extends VersionInfoDetailFragment{
 		// TODO Auto-generated method stub
 		ModelDisplay(ComponentBasicInformation);
 		ManufactureDayDisplay(ComponentBasicInformation);
-		VersionDisplay(ComponentBasicInformation,ProgramSubVersion);
+		if(ManufactureDayDisplayFlag == true)
+			VersionDisplayHidden(ComponentBasicInformation,ProgramSubVersion);
+		else
+			VersionDisplay(ComponentBasicInformation,ProgramSubVersion);
+		
 		SerialNumberDisplay(ComponentBasicInformation);
 		if(ManufactureDayDisplayFlag == true)
 			ManufacturerDisplay(ManufacturerCode);

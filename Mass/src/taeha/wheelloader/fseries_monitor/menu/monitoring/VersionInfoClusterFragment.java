@@ -93,9 +93,14 @@ public class VersionInfoClusterFragment extends VersionInfoDetailFragment{
 		ModelDisplay(ComponentBasicInformation);
 		ManufactureDayDisplay(ComponentBasicInformation);
 		if(HiddenVersionFlag == false)
-			VersionDisplay(ComponentBasicInformation,ProgramSubVersion);
+		{
+			if(ManufactureDayDisplayFlag == true)
+				VersionDisplayHidden(ComponentBasicInformation,ProgramSubVersion);
+			else
+				VersionDisplay(ComponentBasicInformation,ProgramSubVersion);
+		}
 		else
-			VersionDisplayHidden(AppVersion,AppVersionSub, AppVersionHidden);
+			VersionDisplayTaehaHidden(AppVersion,AppVersionSub, AppVersionHidden);
 		SerialNumberDisplay(ComponentBasicInformation);
 		if(ManufactureDayDisplayFlag == true)
 		{

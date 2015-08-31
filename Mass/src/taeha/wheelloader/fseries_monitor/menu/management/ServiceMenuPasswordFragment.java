@@ -91,9 +91,6 @@ public class ServiceMenuPasswordFragment extends PasswordFragment{
 			CAN1Comm.Set_MessageType_PGN61184_21(21);
 			CAN1Comm.TxCANToMCU(21);
 			
-			StartSeedCheckTimer(1,100);
-			StartTimeOutTimer(3000);
-			
 			CheckHWTest();
 		}
 		
@@ -123,6 +120,9 @@ public class ServiceMenuPasswordFragment extends PasswordFragment{
 			
 			return;
 		}
+		
+		StartSeedCheckTimer(1,100);
+		StartTimeOutTimer(3000);
 	}
 	
 

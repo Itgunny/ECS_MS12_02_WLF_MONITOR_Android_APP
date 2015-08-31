@@ -23,6 +23,7 @@ import android.view.Menu;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AbsoluteLayout;
+import android.widget.CheckBox;
 import android.widget.FrameLayout;
 import android.widget.ImageButton;
 import android.widget.ImageView;
@@ -54,6 +55,8 @@ public abstract class PasswordFragment extends ParentFragment{
 	
 	protected ImageButton imgbtnBack;
 	protected ImageButton imgbtnEnter;
+	
+	protected CheckBox	checkDisplay;
 	//////////////////////////////////////////////////
 	
 	//VALUABLE////////////////////////////////////////
@@ -151,7 +154,7 @@ public abstract class PasswordFragment extends ParentFragment{
 		imgbtnBack = (ImageButton)mRoot.findViewById(R.id.imageButton_menu_body_password_num_back);
 		imgbtnEnter = (ImageButton)mRoot.findViewById(R.id.imageButton_menu_body_password_num_enter);
 
-
+		checkDisplay = (CheckBox)mRoot.findViewById(R.id.checkBox_menu_body_password_display);
 	}
 
 	protected void InitValuables() {
@@ -188,7 +191,6 @@ public abstract class PasswordFragment extends ParentFragment{
 		
 		HCEAntiTheftCommand = CAN1CommManager.DATA_STATE_PASSWORD_IDENTIFICATION_REQUEST;
 		CursurIndex = 1;
-		
 	}
 	@Override
 	protected void InitButtonListener() {
@@ -307,6 +309,15 @@ public abstract class PasswordFragment extends ParentFragment{
 				// TODO Auto-generated method stub
 				LongClickBack();
 				return true;
+			}
+		});
+		checkDisplay.setOnClickListener(new View.OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+
+				PasswordIndicatorDisplay();
 			}
 		});
 	}
@@ -575,7 +586,15 @@ public abstract class PasswordFragment extends ParentFragment{
 				case 16:
 					textViewTitle.setText(ParentActivity.getResources().getString(string.No_Changes_executed));
 					break;
-				
+
+					
+				case 17:
+					textViewTitle.setText(ParentActivity.getResources().getString(string.Serial_No));
+					break;
+				case 18:
+					textViewTitle.setText(ParentActivity.getResources().getString(string.Re_entering_Serial_No));
+					break;
+					
 				default:
 					break;
 				}
@@ -597,12 +616,18 @@ public abstract class PasswordFragment extends ParentFragment{
 				if(DataBufIndex > 0)
 				{
 					for(int i = 0; i < DataBufIndex; i++){
-						if(NumDataBuf[i] == 0x23){
-							IndicatorText += "#";
+						if(checkDisplay.isChecked() == true)
+						{
+							if(NumDataBuf[i] == 0x23){
+								IndicatorText += "#";
+							}
+							else{
+								IndicatorText += Integer.toString(NumDataBuf[i]-0x30);
+							}
 						}
-						else{
-							IndicatorText += Integer.toString(NumDataBuf[i]-0x30);
-						}
+						else
+							IndicatorText += "*";
+							
 						
 					}
 				}

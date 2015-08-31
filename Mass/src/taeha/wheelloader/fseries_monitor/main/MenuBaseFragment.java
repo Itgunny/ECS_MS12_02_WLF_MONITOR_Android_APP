@@ -21,6 +21,7 @@ import taeha.wheelloader.fseries_monitor.menu.management.MaintenanceChangeCycleF
 import taeha.wheelloader.fseries_monitor.menu.management.MaintenanceDetailFragment;
 import taeha.wheelloader.fseries_monitor.menu.management.MaintenanceFragment;
 import taeha.wheelloader.fseries_monitor.menu.management.MenuManagementFragment;
+import taeha.wheelloader.fseries_monitor.menu.management.ServiceMenuChangeMachineSerialFragment;
 import taeha.wheelloader.fseries_monitor.menu.management.ServiceMenuListFragment;
 import taeha.wheelloader.fseries_monitor.menu.management.ServiceMenuPasswordFragment;
 import taeha.wheelloader.fseries_monitor.menu.management.ServiceMenuSensorMonitoringFragment;
@@ -172,6 +173,7 @@ public class MenuBaseFragment extends ParentFragment{
 	public PressureCalibration							_PressureCalibration;
 	public ChangeASPhoneNumberFragment					_ChangeASPhoneNumberFragment;
 	public ServiceMenuPasswordFragment					_ServiceMenuPasswordFragment;
+	public ServiceMenuChangeMachineSerialFragment		_ServiceMenuChangeMachineSerialFragment;
 	public ServiceMenuListFragment						_ServiceMenuListFragment;
 	public ServiceMenuSpeedLimitFragment				_ServiceMenuSpeedLimitFragment;
 	public ServiceMenuWeighingCompensationFragment		_ServiceMenuWeighingCompensationFragment;
@@ -281,6 +283,7 @@ public class MenuBaseFragment extends ParentFragment{
 		_FaultHistoryFragment = new FaultHistoryFragment();
 		_EHCUIOInfoFragment = new EHCUIOInfoFragment();
 		_EHCUIOInfoBoomLeverFloatFragment = new EHCUIOInfoBoomLeverFloatFragment();
+		_ServiceMenuChangeMachineSerialFragment = new ServiceMenuChangeMachineSerialFragment();
 		_VersionInfoFragment = new VersionInfoFragment();
 		_VersionInfoMonitorFragment = new VersionInfoMonitorFragment();
 		_VersionInfoMCUFragment = new VersionInfoMCUFragment();
@@ -372,6 +375,7 @@ public class MenuBaseFragment extends ParentFragment{
 		transaction.detach(_FaultHistoryFragment);
 		transaction.detach(_EHCUIOInfoFragment);	
 		transaction.detach(_EHCUIOInfoBoomLeverFloatFragment);	
+		transaction.detach(_ServiceMenuChangeMachineSerialFragment);
 		transaction.detach(_VersionInfoFragment);
 		transaction.detach(_VersionInfoMonitorFragment);
 		transaction.detach(_VersionInfoMCUFragment);
@@ -579,6 +583,13 @@ public class MenuBaseFragment extends ParentFragment{
 		transaction.replace(R.id.FrameLayout_menu_list_body, _ServiceMenuPasswordFragment);
 		transaction.commit();
 	}
+	public void showBodyServiceMenuChangeMachineSerial(){
+		android.app.FragmentTransaction transaction = getFragmentManager().beginTransaction();
+		transaction.remove(_ServiceMenuChangeMachineSerialFragment);
+		transaction.replace(R.id.FrameLayout_menu_inter_body, _ServiceMenuChangeMachineSerialFragment);
+		transaction.commit();
+
+	}	
 	// ++, 150323 bwk
 	public void showBodySoftwareUpdatePassword(){
 		android.app.FragmentTransaction transaction = getFragmentManager().beginTransaction();
@@ -735,6 +746,7 @@ public class MenuBaseFragment extends ParentFragment{
 		transaction.commit();
 
 	}	
+	
 	public void showBodyVersionInfo(){
 		android.app.FragmentTransaction transaction = getFragmentManager().beginTransaction();
 		transaction.remove(_VersionInfoFragment);
@@ -1124,6 +1136,10 @@ public class MenuBaseFragment extends ParentFragment{
 	public void showBodyBoomLeverFloatAnimation(){
 		showInterAnimation();
 		InterBodyAnimation.StartChangeAnimation(_EHCUIOInfoBoomLeverFloatFragment);
+	}
+	public void showBodyChangeMachineSerialAnimation(){
+		showInterAnimation();
+		InterBodyAnimation.StartChangeAnimation(_ServiceMenuChangeMachineSerialFragment);
 	}
 	public void showBodyVersionInfoAnimation(){
 		showInterAnimation();
@@ -1546,6 +1562,9 @@ public class MenuBaseFragment extends ParentFragment{
 		case Home.SCREEN_STATE_MENU_MANAGEMENT_SERVICE_EHCUINFO_BOOMLEVERFLOAT:
 			_EHCUIOInfoBoomLeverFloatFragment.ClickLeft();
 			break;
+		case Home.SCREEN_STATE_MENU_MANAGEMENT_SERVICE_MACHINESERIALNUMBER_TOP:
+			_ServiceMenuChangeMachineSerialFragment.ClickLeft();
+			break;			
 		case Home.SCREEN_STATE_MENU_MANAGEMENT_TOP:
 			_MenuManagementFragment.ClickLeft();
 			break;
@@ -1832,6 +1851,9 @@ public class MenuBaseFragment extends ParentFragment{
 		case Home.SCREEN_STATE_MENU_MANAGEMENT_SERVICE_EHCUINFO_BOOMLEVERFLOAT:
 			_EHCUIOInfoBoomLeverFloatFragment.ClickRight();
 			break;
+		case Home.SCREEN_STATE_MENU_MANAGEMENT_SERVICE_MACHINESERIALNUMBER_TOP:
+			_ServiceMenuChangeMachineSerialFragment.ClickRight();
+			break;			
 		case Home.SCREEN_STATE_MENU_MANAGEMENT_TOP:
 			_MenuManagementFragment.ClickRight();
 			break;
@@ -2121,6 +2143,9 @@ public class MenuBaseFragment extends ParentFragment{
 		case Home.SCREEN_STATE_MENU_MANAGEMENT_SERVICE_EHCUINFO_BOOMLEVERFLOAT:
 			_EHCUIOInfoBoomLeverFloatFragment.ClickESC();
 			break;
+		case Home.SCREEN_STATE_MENU_MANAGEMENT_SERVICE_MACHINESERIALNUMBER_TOP:
+			_ServiceMenuChangeMachineSerialFragment.ClickESC();
+			break;			
 		case Home.SCREEN_STATE_MENU_MANAGEMENT_TOP:
 			_MenuManagementFragment.ClickESC();
 			break;
@@ -2408,6 +2433,9 @@ public class MenuBaseFragment extends ParentFragment{
 		case Home.SCREEN_STATE_MENU_MANAGEMENT_SERVICE_EHCUINFO_BOOMLEVERFLOAT:
 			_EHCUIOInfoBoomLeverFloatFragment.ClickEnter();
 			break;
+		case Home.SCREEN_STATE_MENU_MANAGEMENT_SERVICE_MACHINESERIALNUMBER_TOP:
+			_ServiceMenuChangeMachineSerialFragment.ClickEnter();
+			break;			
 		case Home.SCREEN_STATE_MENU_MANAGEMENT_TOP:
 			_MenuManagementFragment.ClickEnter();
 			break;
@@ -2524,6 +2552,8 @@ public class MenuBaseFragment extends ParentFragment{
 			case Home.SCREEN_STATE_MENU_MANAGEMENT_SERVICE_SENSORMONITORING_TOP:
 				showBodySensorMonitoringHidden();
 				break;
+			case Home.SCREEN_STATE_MENU_MANAGEMENT_SERVICE_PW:
+				_ServiceMenuPasswordFragment.showHWTestScreen();
 			default:
 				break;
 		}

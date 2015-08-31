@@ -206,7 +206,10 @@ public class VersionInfoRMCUFragment extends VersionInfoDetailFragment{
 		// TODO Auto-generated method stub
 		ManufactureDayDisplay(ComponentBasicInformation);
 		ModelDisplay(ComponentBasicInformation);
-		VersionDisplay(ComponentBasicInformation, ProgramSubVersion);
+		if(ManufactureDayDisplayFlag == true)
+			VersionDisplayHidden(ComponentBasicInformation,ProgramSubVersion);
+		else
+			VersionDisplay(ComponentBasicInformation,ProgramSubVersion);
 		SerialNumberDisplay(ComponentBasicInformation);
 		if(ManufactureDayDisplayFlag == true)
 		{

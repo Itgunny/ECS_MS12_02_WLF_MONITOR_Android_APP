@@ -1760,6 +1760,11 @@ jint UART1_Tx(JNIEnv *env, jobject this, jint PF, jint PS, jint Flag) {
 			__android_log_print(ANDROID_LOG_INFO, "NATIVE", "UART1_Tx EHCU\n");
 			break;
 			///////////////////////////////////
+			/////////////0xEAxx////////////////
+		case 234	:
+			MakeCANDataSingle(0x18,0xEA,TargetSourceAddress,SA_MONITOR,(unsigned char*)&TX_HCEPGN_REQUEST_59904);
+			break;
+			///////////////////////////////////
 			/////////////0xFFxx////////////////
 		case 47	:
 			MakeCANDataSingle(0x18,0xFF,PS,SA_MONITOR,(unsigned char*)&TX_MONIOTR_STATUS_65327);
@@ -1830,8 +1835,8 @@ void InitUART1Valuable() {
 		sizeof(rx_Weihing_System_Mode));
 	memset((unsigned char*) &rx_Joystick_Position_Status, 0xff,
 		sizeof(rx_Joystick_Position_Status));
-	memset((unsigned char*) &tx_request_hcepgn, 0xff,
-		sizeof(tx_request_hcepgn));
+	memset((unsigned char*) &TX_HCEPGN_REQUEST_59904, 0xff,
+		sizeof(TX_HCEPGN_REQUEST_59904));
 	memset((unsigned char*) &tx_request_hcespn_data, 0xff,
 		sizeof(tx_request_hcespn_data));
 	memset((unsigned char*) &tx_esl_password69, 0xff,
@@ -1877,6 +1882,9 @@ void InitUART1Valuable() {
 	tx_monitor_request.ReqTripReset = 0x03;
 
 	ehcu_s_or_m = 0;
+
+	TX_HCEPGN_REQUEST_59904.Reserved0 = 0x00;
+	TargetSourceAddress = 0xff;
 
 #ifdef NEW_CAN2
 	InitNewProtoclValuable();
@@ -2999,6 +3007,11 @@ jint _UART1_TxComm(JNIEnv *env, jobject this, jint PS) {
 		case 203	:
 			MakeCANDataSingle(0x18,0xEF,SA_EHCU,SA_MONITOR,(unsigned char*)&TX_WHEEL_LOADER_EHCU_SETTING_61184_203);
 			__android_log_print(ANDROID_LOG_INFO, "NATIVE", "UART1_Tx EHCU\n");
+			break;
+			///////////////////////////////////
+			/////////////0xEAxx////////////////
+		case 234	:
+			MakeCANDataSingle(0x18,0xEA,TargetSourceAddress,SA_MONITOR,(unsigned char*)&TX_HCEPGN_REQUEST_59904);
 			break;
 			///////////////////////////////////
 			/////////////0xFFxx////////////////

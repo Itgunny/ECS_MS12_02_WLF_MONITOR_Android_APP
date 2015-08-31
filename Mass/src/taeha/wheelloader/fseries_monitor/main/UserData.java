@@ -54,7 +54,7 @@ public class UserData {
 		SoftEndStopBoomUp = CAN1CommManager.DATA_STATE_SOFTSTOP_BOOMUP_ON;
 		SoftEndStopBoomDown = CAN1CommManager.DATA_STATE_SOFTSTOP_BOOMDOWN_ON;
 		SoftEndStopBucketIn = CAN1CommManager.DATA_STATE_SOFTSTOP_BUCKETIN_OFF;
-		SoftEndStopBucketDump = CAN1CommManager.DATA_STATE_SOFTSTOP_BUCKETOUT_OFF;
+		SoftEndStopBucketDump = CAN1CommManager.DATA_STATE_SOFTSTOP_BUCKETOUT_ON;
 		// ++, 150407 bwk
 		//Brightness = 7;
 		BrightnessManualAuto = Home.BRIGHTNESS_MANUAL;

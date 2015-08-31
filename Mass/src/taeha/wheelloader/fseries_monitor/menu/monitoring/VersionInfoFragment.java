@@ -454,7 +454,8 @@ public class VersionInfoFragment extends ParentFragment{
 		textViewModel.setText(ParentActivity.GetModelNameString(_data));
 	}
 	public void MonitorVersionDisplay(int _versionhigh, int _versionlow, int _subhigh, int _sublow){
-		textViewMonitorVersion.setText(ParentActivity.GetVersionString(_versionhigh, _versionlow, _subhigh, _sublow));
+		//textViewMonitorVersion.setText(ParentActivity.GetVersionString(_versionhigh, _versionlow, _subhigh, _sublow));
+		textViewMonitorVersion.setText(ParentActivity.GetVersionString(_versionhigh, _versionlow, _subhigh));
 	}
 	public void VersionDisplay(byte[] _data, int _subinfo, TextView textview){
 		textview.setText(ParentActivity.GetVersionString(_data, _subinfo));

@@ -20,7 +20,6 @@ import android.view.ViewGroup;
 import android.widget.AbsoluteLayout;
 import android.widget.FrameLayout;
 import android.widget.ImageButton;
-import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -386,7 +385,10 @@ public class VersionInfoDetailFragment extends ParentFragment{
 	public void VersionDisplay(byte[] _data, int _subinfo){
 		adapter.UpdateSecond(STATE_VERSION, ParentActivity.GetVersionString(_data, _subinfo));
 	}
-	public void VersionDisplayHidden(int _info, int _subinfo, int _Hiddeninfo){
+	public void VersionDisplayHidden(byte[] _data, int _subinfo){
+		adapter.UpdateSecond(STATE_VERSION, ParentActivity.GetHiddenVersionString(_data, _subinfo));
+	}
+	public void VersionDisplayTaehaHidden(int _info, int _subinfo, int _Hiddeninfo){
 		adapter.UpdateSecond(STATE_VERSION, Integer.toString(((_info & 0xF0) >> 4)) + "." + Integer.toString((_info & 0x0F))
 				+ "." + Integer.toHexString(((_subinfo & 0xF0) >> 4)) + "." + Integer.toHexString((_subinfo & 0x0F)) + Integer.toHexString((_Hiddeninfo & 0x0F)));
 	}
