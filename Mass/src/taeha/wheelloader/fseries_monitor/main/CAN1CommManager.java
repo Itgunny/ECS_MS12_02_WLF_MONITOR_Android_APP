@@ -1318,7 +1318,7 @@ public class CAN1CommManager extends ICAN1CommManager.Stub{		// ttySAC1(Linux), 
 	public int Get_RearWiperWasherOperationStatus_3452_PGN65527(){ return service.Get_RearWiperWasherOperationStatus_3452_PGN65527();}
 	//////TX_HCEPGN_REQUEST_59904//////
 	public void Set_TargetSourceAddress(int Data){ service.Set_TargetSourceAddress(Data);}
-	public void Set_MessageType_PGN59904(int Data){ service.Set_MessageType_PGN59904(Data);}
+	public void Set_HCEPGN_PGN59904(int Data){ service.Set_HCEPGN_PGN59904(Data);}
 	//////TX_DTC_INFORMATION_REQUEST_61184_11///////
 	public void Set_MessageType_PGN61184_11(int Data){ service.Set_MessageType_PGN61184_11(Data);}
 	public void Set_DTCInformationRequest_1515_PGN61184_11(int Data){ service.Set_DTCInformationRequest_1515_PGN61184_11(Data);}

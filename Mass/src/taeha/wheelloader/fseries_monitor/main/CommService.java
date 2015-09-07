@@ -658,7 +658,7 @@ public class CommService extends Service{
 	public native int Get_RearWiperWasherOperationStatus_3452_PGN65527();		
 	//////TX_HCEPGN_REQUEST_59904//////
 	public native void Set_TargetSourceAddress(int Data);
-	public native void Set_MessageType_PGN59904(int Data);
+	public native void Set_HCEPGN_PGN59904(int Data);
 	//////TX_DTC_INFORMATION_REQUEST_61184_11///////
 	public native void Set_MessageType_PGN61184_11(int Data);
 	public native void Set_DTCInformationRequest_1515_PGN61184_11(int Data);

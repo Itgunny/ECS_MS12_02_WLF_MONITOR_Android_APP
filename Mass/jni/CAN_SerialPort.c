@@ -1582,7 +1582,7 @@ void Set_TargetSourceAddress(JNIEnv * env, jobject this, int Data)
 {
 	TargetSourceAddress = Data;
 }
-void Set_MessageType_PGN59904(JNIEnv * env, jobject this, int Data) {
+void Set_HCEPGN_PGN59904(JNIEnv * env, jobject this, int Data) {
 	TX_HCEPGN_REQUEST_59904.HCEPGN = Data;
 }
 //////TX_DTC_INFORMATION_REQUEST_61184_11///////
@@ -4400,8 +4400,8 @@ static JNINativeMethod methods[] =
 				//////TX_HCEPGN_REQUEST_59904//////
 				{ "Set_TargetSourceAddress", "(I)V",
 						(void*) Set_TargetSourceAddress }, {
-						"Set_MessageType_PGN59904", "(I)V",
-						(void*) Set_MessageType_PGN59904 },
+						"Set_HCEPGN_PGN59904", "(I)V",
+						(void*) Set_HCEPGN_PGN59904 },
 				//////TX_DTC_INFORMATION_REQUEST_61184_11///////
 				{ "Set_MessageType_PGN61184_11", "(I)V",
 						(void*) Set_MessageType_PGN61184_11 }, {

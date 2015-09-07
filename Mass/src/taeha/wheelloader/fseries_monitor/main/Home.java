@@ -1826,7 +1826,7 @@ public class Home extends Activity {
 	}
 	public void CheckCID(){
 		Log.d(TAG,"CheckCID");
-		CAN1Comm.Set_MessageType_PGN59904(65330);
+		CAN1Comm.Set_HCEPGN_PGN59904(65330);
 		
 		if((CAN1Comm.Get_ComponentCode_1699_PGN65330() != CAN1CommManager.STATE_COMPONENTCODE_MCU)
 			|| (CAN1Comm.Get_ComponentCode_1699_PGN65330_CLUSTER() != CAN1CommManager.STATE_COMPONENTCODE_CLUSTER)
