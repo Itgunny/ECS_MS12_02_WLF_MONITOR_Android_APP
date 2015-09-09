@@ -76,7 +76,7 @@ public class Home extends Activity {
 	public static final int VERSION_SUB_HIGH 	= 0;
 	public static final int VERSION_SUB_LOW 	= 9;
 	public static final int VERSION_TAEHA		= 0;
-	//// v1.0.0.0
+	//// v2.0.0.9
 	// 1. 양산 v2.0.0.82
 	// 2. 장비 정보에서 표시되는 프로그램 버전을 3자리까지만 표시, 상세화면(hidden)에서는 전체자리 수 출력
 	// 3. 패스워드 입력창 표시 * 또는 숫자 중 택 1 할 수 있도록 개선
@@ -93,6 +93,7 @@ public class Home extends Activity {
 	// 13. UI 충돌/FW 업데이트/OS 업데이트 이후 버전 정보 소실 현상 개선
 	//	- MONITOR CID 전송 후 CID 정보가 없을 경우 1회 요청
 	// 14. pdf reader, media player, 스마트 터미널 등 기능에서 Axle 경고(pop up 또는 lamp)가 발생할 시 바로 종료 되고 메인화면으로 전환
+	// 15. Version 정보 모두 표시(BKCU, RMCU)
 	//////////////////////////////////////////////////////////////////////////////////////
 	
 	// TAG

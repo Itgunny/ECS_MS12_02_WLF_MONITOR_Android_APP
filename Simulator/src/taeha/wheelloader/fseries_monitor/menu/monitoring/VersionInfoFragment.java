@@ -107,9 +107,9 @@ public class VersionInfoFragment extends ParentFragment{
 		
 		CAN1Comm.TxCMDToMCU(CAN1Comm.CMD_VERSION);
 		
-		CheckEHCU();	// ++, --, 150211 bwk
-		CheckBKCU();
-		CheckRMCU();
+		//CheckEHCU();	// ++, --, 150211 bwk
+		//CheckBKCU();
+		//CheckRMCU();
 		
 		ParentActivity.ScreenIndex = ParentActivity.SCREEN_STATE_MENU_MONITORING_VERSIONINFO_TOP;
 		ParentActivity._MenuBaseFragment._MenuInterTitleFragment.SetTitleText(ParentActivity.getResources().getString(R.string.Machine_Information));
@@ -489,9 +489,9 @@ public class VersionInfoFragment extends ParentFragment{
 			CursurDisplay(CursurIndex);
 			break;
 		case 8:
-			if(CAN1Comm.Get_ComponentCode_1699_PGN65330_EHCU() != CAN1CommManager.STATE_COMPONENTCODE_EHCU)
-				CursurIndex = 6;
-			else
+//			if(CAN1Comm.Get_ComponentCode_1699_PGN65330_EHCU() != CAN1CommManager.STATE_COMPONENTCODE_EHCU)
+//				CursurIndex = 6;
+//			else
 				CursurIndex--;
 			CursurDisplay(CursurIndex);
 			break;
@@ -513,9 +513,9 @@ public class VersionInfoFragment extends ParentFragment{
 			CursurDisplay(CursurIndex);
 			break;
 		case 6:
-			if(CAN1Comm.Get_ComponentCode_1699_PGN65330_EHCU() != CAN1CommManager.STATE_COMPONENTCODE_EHCU)
-				CursurIndex = 8;
-			else
+//			if(CAN1Comm.Get_ComponentCode_1699_PGN65330_EHCU() != CAN1CommManager.STATE_COMPONENTCODE_EHCU)
+//				CursurIndex = 8;
+//			else
 				CursurIndex++;
 			CursurDisplay(CursurIndex);
 			break;
