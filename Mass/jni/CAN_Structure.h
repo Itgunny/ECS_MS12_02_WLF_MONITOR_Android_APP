@@ -2617,6 +2617,16 @@ typedef struct
 }__attribute__((packed))  WHEEL_LOADER_EHCU_STATUS_65517;
 typedef struct
 {
+	unsigned char	AmbientTemperature_3411;
+	unsigned char	InCabTemperature_3412;
+	unsigned char	DuctTemperature_3413;
+
+	unsigned char	Reserved0;
+
+	unsigned int	Reserved1;
+}__attribute__((packed))  AMBIENT_CONDITIONS_65519;
+typedef struct
+{
 	unsigned char	SoftStopBoomUp_2337:2;
 	unsigned char	SoftStopBoomDown_2338:2;
 	unsigned char	SoftStopBucketIn_2339:2;

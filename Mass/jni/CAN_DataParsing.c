@@ -458,6 +458,8 @@ void InitNewProtoclValuable() {
 		sizeof(RX_JOYSTICK_POSITION_STATUS_65515));
 	memset((unsigned char*) &RX_WHEEL_LOADER_EHCU_STATUS_65517, 0xFF,
 		sizeof(RX_WHEEL_LOADER_EHCU_STATUS_65517));
+	memset((unsigned char*) &RX_AMBIENT_CONDITIONS_65519, 0xFF,
+		sizeof(RX_AMBIENT_CONDITIONS_65519));
 	memset((unsigned char*) &RX_WHEEL_LOADER_EHCU_STATUS2_65524, 0xFF,
 			sizeof(RX_WHEEL_LOADER_EHCU_STATUS2_65524));
 	memset((unsigned char*) &RX_ELECTRICAL_SWITCH_RELAY_OPERATION_STATUS_65527,
@@ -1532,7 +1534,7 @@ void UART1_SeperateData_ACU(int Priority, int PF, int PS, unsigned char* Data)
 			switch (PS) {
 				case 50 :memcpy((unsigned char*)&RX_COMPONENT_IDENTIFICATION_ACU_65330,&Data[7],8); break;
 				case 93 :memcpy((unsigned char*)&RX_AIR_CONDITIONER_STATUS_65373,&Data[7],8); break;
-
+				case 239 : memcpy((unsigned char*)&RX_AMBIENT_CONDITIONS_65519,&Data[7],8); break;
 				default:
 					break;
 			}

@@ -100,6 +100,7 @@ public class FaultHistoryActiveFragment extends ParentFragment{
 	int[] Err_Ecu;
 	int[] Err_EHCU;	
 	int[] Err_ACU;
+	int[] Err_ACU_List;
 	
 	int FATCSettingTemperatureCelsius;
 	int FATCSettingTemperatureFahrenheit;
@@ -218,12 +219,14 @@ public class FaultHistoryActiveFragment extends ParentFragment{
 		Err_Ecu = new int[400];
 		Err_EHCU = new int[400];
 		Err_ACU = new int[400];
+		Err_ACU_List = new int[400];
 		for(int i = 0; i < 400; i++){
 			Err_Tcu[i] = 0;
 			Err_Mcu[i] = 0;
 			Err_Ecu[i] = 0;
 			Err_EHCU[i] = 0;
 			Err_ACU[i] = 0;
+			Err_ACU_List[i] = 0;
 		}
 		
 		listView.setAdapter(adapter);
@@ -418,7 +421,7 @@ public class FaultHistoryActiveFragment extends ParentFragment{
 		ErrListDisplay();
 		ErrorNumberDisplay();
 		EHCUShow();
-		
+		ACUShow();
 	}
 	/////////////////////////////////////////////////////////////////////	
 	public void ClickOK(){
@@ -541,6 +544,13 @@ public class FaultHistoryActiveFragment extends ParentFragment{
 			radioEHCU.setVisibility(View.VISIBLE);
 		}
 	}
+	public void ACUShow(){
+		if(CAN1Comm.Get_ComponentCode_1699_PGN65330_ACU() != CAN1CommManager.STATE_COMPONENTCODE_AIRCONCONTROLLER){
+			radioACU.setVisibility(View.GONE);
+		}else{
+			radioACU.setVisibility(View.VISIBLE);
+		}
+	}
 	public void ASDisplay(String str){
 		textViewAS.setText(ParentActivity.getResources().getString(string.AS) + " " + str);
 	}
@@ -578,9 +588,18 @@ public class FaultHistoryActiveFragment extends ParentFragment{
 	public void SetACUErrList(){
 		adapter.clearItem();
 		for(int i = 0; i < 16; i++){
+			Err_ACU_List[i] = 0;
+		}
+		int Count = 0;
+		for(int i = 0; i < 16; i++){
 			if(Err_ACU[i] == 1){
-				adapter.addItem(new IconTextItemFault(null,ParentActivity.getResources().getDrawable(R.drawable.menu_information_fault_down_btn), 
-						"No : " + Integer.toString(i), "", ""));
+				if(CursurIndex == 7 && CursurDetailIndex == Count)
+					adapter.addItem(new IconTextItemFault(null,ParentActivity.getResources().getDrawable(R.drawable.menu_information_fault_down_btn_selected), 
+							"No : " + Integer.toString(i+1), "", ""));
+				else
+					adapter.addItem(new IconTextItemFault(null,ParentActivity.getResources().getDrawable(R.drawable.menu_information_fault_down_btn), 
+							"No : " + Integer.toString(i+1), "", ""));
+				Err_ACU_List[Count++] = i;
 			}
 		}
 		adapter.notifyDataSetChanged();
@@ -760,7 +779,7 @@ public class FaultHistoryActiveFragment extends ParentFragment{
 		}else if(SelectedMode == REQ_ERR_ACU_ACTIVE)
 		{
 			try {
-				textViewDetail.setText(textACUErrCode[Index]);
+				textViewDetail.setText(textACUErrCode[Err_ACU_List[Index]]);
 			} catch (ArrayIndexOutOfBoundsException e) {
 				// TODO: handle exception
 				Log.e(TAG,"ArrayIndexOutOfBoundsException ErrDetailDisplay");
@@ -987,6 +1006,7 @@ public class FaultHistoryActiveFragment extends ParentFragment{
 			case Home.REQ_ERR_EHCU_ACTIVE:
 				return DTCTotalEHCU;
 			case REQ_ERR_ACU_ACTIVE:
+				return DTCTotalACU;
 			default:
 				return 0;		
 		}
@@ -1006,8 +1026,21 @@ public class FaultHistoryActiveFragment extends ParentFragment{
 			CursurIndex--;
 			CursurDisplay(CursurIndex);
 			break;
+		case 5:
+			if(CAN1Comm.Get_ComponentCode_1699_PGN65330_EHCU() == CAN1CommManager.STATE_COMPONENTCODE_EHCU)
+				CursurIndex--;
+			else
+				CursurIndex = 3;
+			CursurDisplay(CursurIndex);
+			break;
 		case 6:
-			CursurIndex = 4;
+			if(CAN1Comm.Get_ComponentCode_1699_PGN65330_ACU() == CAN1CommManager.STATE_COMPONENTCODE_AIRCONCONTROLLER)
+				CursurIndex = 5;
+			else if(CAN1Comm.Get_ComponentCode_1699_PGN65330_EHCU() == CAN1CommManager.STATE_COMPONENTCODE_EHCU)
+				CursurIndex = 4;
+			else
+				CursurIndex = 3;
+			
 			CursurDisplay(CursurIndex);
 			break;
 		// ++, 150216 bwk
@@ -1042,7 +1075,6 @@ public class FaultHistoryActiveFragment extends ParentFragment{
 			}			
 			break;
 		// --, 150216 bwk
-		case 5:
 		default:
 			break;
 		}
@@ -1053,11 +1085,26 @@ public class FaultHistoryActiveFragment extends ParentFragment{
 		switch (CursurIndex) {
 		case 1:
 		case 2:
-		case 3:
 			CursurIndex++;
 			CursurDisplay(CursurIndex);
 			break;
+		case 3:
+			if(CAN1Comm.Get_ComponentCode_1699_PGN65330_EHCU() == CAN1CommManager.STATE_COMPONENTCODE_EHCU)
+				CursurIndex = 4;
+			else if(CAN1Comm.Get_ComponentCode_1699_PGN65330_ACU() == CAN1CommManager.STATE_COMPONENTCODE_AIRCONCONTROLLER)
+				CursurIndex = 5;
+			else
+				CursurIndex = 6;
+			CursurDisplay(CursurIndex);
+			break;
 		case 4:
+			if(CAN1Comm.Get_ComponentCode_1699_PGN65330_ACU() == CAN1CommManager.STATE_COMPONENTCODE_AIRCONCONTROLLER)
+				CursurIndex = 5;
+			else
+				CursurIndex = 6;
+			CursurDisplay(CursurIndex);
+			break;
+		case 5:
 			CursurIndex = 6;
 			CursurDisplay(CursurIndex);
 			break;
@@ -1089,7 +1136,7 @@ public class FaultHistoryActiveFragment extends ParentFragment{
 			}
 			break;
 		// --, 150213 bwk			
-		case 5:
+		
 		default:
 			break;
 		}
@@ -1123,7 +1170,7 @@ public class FaultHistoryActiveFragment extends ParentFragment{
 		}
 		else if(CursurIndex == 8)
 		{
-			CursurIndex =7;
+			CursurIndex = 7;
 			CursurDisplay(CursurIndex);
 			ClickDetailTitle();
 		}
@@ -1204,7 +1251,7 @@ public class FaultHistoryActiveFragment extends ParentFragment{
 		radioEngine.setPressed(false);
 		radioTransmission.setPressed(false);
 		radioEHCU.setPressed(false);
-		//radioACU.setPressed(false);
+		radioACU.setPressed(false);
 		imgbtnOK.setPressed(false);
 		// ++, 150213 bwk
 		if(adapter.getCount() > 0)

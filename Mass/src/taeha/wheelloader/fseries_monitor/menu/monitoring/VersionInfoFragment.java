@@ -36,6 +36,7 @@ public class VersionInfoFragment extends ParentFragment{
 
 	TextView textViewTCU;
 	TextView textViewECM;
+	TextView textViewACU;
 	TextView textViewMonitor;
 	TextView textViewMCU;
 	TextView textViewCluster;
@@ -105,13 +106,14 @@ public class VersionInfoFragment extends ParentFragment{
 		InitValuables();
 		InitButtonListener();
 		
-		CAN1Comm.TxCMDToMCU(CAN1Comm.CMD_VERSION);
+		CAN1Comm.TxCMDToMCU(CAN1CommManager.CMD_VERSION);
 		
+		CheckACU();
 		CheckEHCU();	// ++, --, 150211 bwk
 		CheckBKCU();
 		CheckRMCU();
 		
-		ParentActivity.ScreenIndex = ParentActivity.SCREEN_STATE_MENU_MONITORING_VERSIONINFO_TOP;
+		ParentActivity.ScreenIndex = Home.SCREEN_STATE_MENU_MONITORING_VERSIONINFO_TOP;
 		ParentActivity._MenuBaseFragment._MenuInterTitleFragment.SetTitleText(ParentActivity.getResources().getString(R.string.Machine_Information));
 		
 		HandleCursurDisplay = new Handler() {
@@ -134,10 +136,10 @@ public class VersionInfoFragment extends ParentFragment{
 	protected void InitResource() {
 		// TODO Auto-generated method stub
 		imgbtnOK = (ImageButton)mRoot.findViewById(R.id.ImageButton_menu_body_monitoring_version_low_ok);
-
 		
 		textViewTCU = (TextView)mRoot.findViewById(R.id.textView_menu_body_monitoring_version_tcu);
 		textViewECM = (TextView)mRoot.findViewById(R.id.textView_menu_body_monitoring_version_ecm);
+		textViewACU = (TextView)mRoot.findViewById(R.id.textView_menu_body_monitoring_version_acu);
 		textViewMonitor = (TextView)mRoot.findViewById(R.id.textView_menu_body_monitoring_version_monitor_title);
 		textViewMCU = (TextView)mRoot.findViewById(R.id.textView_menu_body_monitoring_version_mcu_title);
 		textViewCluster = (TextView)mRoot.findViewById(R.id.textView_menu_body_monitoring_version_cluster_title);
@@ -233,12 +235,22 @@ public class VersionInfoFragment extends ParentFragment{
 				ClickECM();
 			}
 		});
-		textViewMonitor.setOnClickListener(new View.OnClickListener() {
+		textViewACU.setOnClickListener(new View.OnClickListener() {
 			
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
 				CursurIndex = 3;
+				HandleCursurDisplay.sendMessage(HandleCursurDisplay.obtainMessage(CursurIndex));
+				ClickACU();
+			}
+		});
+		textViewMonitor.setOnClickListener(new View.OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				CursurIndex = 4;
 				HandleCursurDisplay.sendMessage(HandleCursurDisplay.obtainMessage(CursurIndex));
 				ClickMonitor();
 			}
@@ -248,7 +260,7 @@ public class VersionInfoFragment extends ParentFragment{
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
-				CursurIndex = 4;
+				CursurIndex = 5;
 				HandleCursurDisplay.sendMessage(HandleCursurDisplay.obtainMessage(CursurIndex));
 				ClickMCU();
 			}
@@ -258,7 +270,7 @@ public class VersionInfoFragment extends ParentFragment{
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
-				CursurIndex = 5;
+				CursurIndex = 6;
 				HandleCursurDisplay.sendMessage(HandleCursurDisplay.obtainMessage(CursurIndex));
 				ClickCluster();
 			}
@@ -268,7 +280,7 @@ public class VersionInfoFragment extends ParentFragment{
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
-				CursurIndex = 6;
+				CursurIndex = 7;
 				HandleCursurDisplay.sendMessage(HandleCursurDisplay.obtainMessage(CursurIndex));
 				ClickRMCU();
 			}
@@ -278,7 +290,7 @@ public class VersionInfoFragment extends ParentFragment{
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
-				CursurIndex = 7;
+				CursurIndex = 8;
 				HandleCursurDisplay.sendMessage(HandleCursurDisplay.obtainMessage(CursurIndex));
 				ClickEHCU();
 			}
@@ -288,7 +300,7 @@ public class VersionInfoFragment extends ParentFragment{
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
-				CursurIndex = 8;
+				CursurIndex = 9;
 				HandleCursurDisplay.sendMessage(HandleCursurDisplay.obtainMessage(CursurIndex));
 				ClickBKCU();
 			}
@@ -329,6 +341,13 @@ public class VersionInfoFragment extends ParentFragment{
 	}
 	/////////////////////////////////////////////////////////////////////	
 	// ++, 150211 bwk
+	public void CheckACU(){
+		if(CAN1Comm.Get_ComponentCode_1699_PGN65330_ACU() != CAN1CommManager.STATE_COMPONENTCODE_AIRCONCONTROLLER){
+			setClickableACU(false);
+		}else{
+			setClickableACU(true);
+		}		
+	}
 	public void CheckEHCU(){
 		if(CAN1Comm.Get_ComponentCode_1699_PGN65330_EHCU() != CAN1CommManager.STATE_COMPONENTCODE_EHCU){
 			setClickableEHCU(false);
@@ -352,6 +371,15 @@ public class VersionInfoFragment extends ParentFragment{
 		}
 	}
 	
+	public void setClickableACU(boolean flag){
+		if(flag == true){
+			textViewTCU.setBackgroundResource(R.drawable._selector_menu_body_monitoring_version_tcu_btn2);
+			textViewECM.setBackgroundResource(R.drawable._selector_menu_body_monitoring_version_tcu_btn2);
+			textViewACU.setVisibility(View.VISIBLE);
+		}else{
+			textViewACU.setVisibility(View.INVISIBLE);
+		}
+	}
 	public void setClickableEHCU(boolean flag){
 		if(flag == true){
 			layoutEHCU.setVisibility(View.VISIBLE);
@@ -400,13 +428,21 @@ public class VersionInfoFragment extends ParentFragment{
 		ParentActivity._MenuBaseFragment.showBodyVersionInfoECM();
 		ParentActivity._MenuBaseFragment._VersionInfoFragment.setFirstCursurIndex(2);
 	}
+	public void ClickACU(){
+		if(ParentActivity.AnimationRunningFlag == true)
+			return;
+		else
+			ParentActivity.StartAnimationRunningTimer();
+		ParentActivity._MenuBaseFragment.showBodyVersionInfoACU();
+		ParentActivity._MenuBaseFragment._VersionInfoFragment.setFirstCursurIndex(3);
+	}
 	public void ClickMonitor(){
 		if(ParentActivity.AnimationRunningFlag == true)
 			return;
 		else
 			ParentActivity.StartAnimationRunningTimer();
 		ParentActivity._MenuBaseFragment.showBodyVersionInfoMonitor();
-		ParentActivity._MenuBaseFragment._VersionInfoFragment.setFirstCursurIndex(3);
+		ParentActivity._MenuBaseFragment._VersionInfoFragment.setFirstCursurIndex(4);
 	}
 	public void ClickMCU(){
 		if(ParentActivity.AnimationRunningFlag == true)
@@ -414,7 +450,7 @@ public class VersionInfoFragment extends ParentFragment{
 		else
 			ParentActivity.StartAnimationRunningTimer();
 		ParentActivity._MenuBaseFragment.showBodyVersionInfoMCU();
-		ParentActivity._MenuBaseFragment._VersionInfoFragment.setFirstCursurIndex(4);
+		ParentActivity._MenuBaseFragment._VersionInfoFragment.setFirstCursurIndex(5);
 	}
 	public void ClickCluster(){
 		if(ParentActivity.AnimationRunningFlag == true)
@@ -422,7 +458,7 @@ public class VersionInfoFragment extends ParentFragment{
 		else
 			ParentActivity.StartAnimationRunningTimer();
 		ParentActivity._MenuBaseFragment.showBodyVersionInfoCluster();
-		ParentActivity._MenuBaseFragment._VersionInfoFragment.setFirstCursurIndex(5);
+		ParentActivity._MenuBaseFragment._VersionInfoFragment.setFirstCursurIndex(6);
 	}
 	public void ClickRMCU(){
 		if(ParentActivity.AnimationRunningFlag == true)
@@ -430,7 +466,7 @@ public class VersionInfoFragment extends ParentFragment{
 		else
 			ParentActivity.StartAnimationRunningTimer();
 		ParentActivity._MenuBaseFragment.showBodyVersionInfoRMCU();
-		ParentActivity._MenuBaseFragment._VersionInfoFragment.setFirstCursurIndex(6);
+		ParentActivity._MenuBaseFragment._VersionInfoFragment.setFirstCursurIndex(7);
 	}
 	public void ClickEHCU(){
 		if(ParentActivity.AnimationRunningFlag == true)
@@ -438,7 +474,7 @@ public class VersionInfoFragment extends ParentFragment{
 		else
 			ParentActivity.StartAnimationRunningTimer();
 		ParentActivity._MenuBaseFragment.showBodyVersionInfoEHCU();
-		ParentActivity._MenuBaseFragment._VersionInfoFragment.setFirstCursurIndex(7);
+		ParentActivity._MenuBaseFragment._VersionInfoFragment.setFirstCursurIndex(8);
 	}
 	public void ClickBKCU(){
 		if(ParentActivity.AnimationRunningFlag == true)
@@ -446,7 +482,7 @@ public class VersionInfoFragment extends ParentFragment{
 		else
 			ParentActivity.StartAnimationRunningTimer();
 		ParentActivity._MenuBaseFragment.showBodyVersionInfoBKCU();
-		ParentActivity._MenuBaseFragment._VersionInfoFragment.setFirstCursurIndex(8);
+		ParentActivity._MenuBaseFragment._VersionInfoFragment.setFirstCursurIndex(9);
 	}
 	
 	/////////////////////////////////////////////////////////////////////
@@ -475,26 +511,51 @@ public class VersionInfoFragment extends ParentFragment{
 	public void ClickLeft(){
 		switch (CursurIndex) {
 		case 1:
-			CursurIndex = 9;
+			CursurIndex = 10;
 			CursurDisplay(CursurIndex);
 			break;
 		case 2:
 		case 3:
-		case 4:
 		case 5:
 		case 6:
 		case 7:
-		case 9:
 			CursurIndex--;
 			CursurDisplay(CursurIndex);
 			break;
-		case 8:
-			if(CAN1Comm.Get_ComponentCode_1699_PGN65330_EHCU() != CAN1CommManager.STATE_COMPONENTCODE_EHCU)
-				CursurIndex = 6;
+		case 4:
+			if(CAN1Comm.Get_ComponentCode_1699_PGN65330_ACU() != CAN1CommManager.STATE_COMPONENTCODE_AIRCONCONTROLLER)
+				CursurIndex = 2;
 			else
 				CursurIndex--;
 			CursurDisplay(CursurIndex);
+			break;		
+		case 8:
+			if(CAN1Comm.Get_ComponentCode_1699_PGN65330_RMCU() == CAN1CommManager.STATE_COMPONENTCODE_RMCU)
+				CursurIndex = 7;
+			else
+				CursurIndex = 6;
+			CursurDisplay(CursurIndex);
 			break;
+		case 9:
+			if(CAN1Comm.Get_ComponentCode_1699_PGN65330_EHCU() == CAN1CommManager.STATE_COMPONENTCODE_EHCU)
+				CursurIndex = 8;
+			else if(CAN1Comm.Get_ComponentCode_1699_PGN65330_RMCU() == CAN1CommManager.STATE_COMPONENTCODE_RMCU)
+				CursurIndex = 7;
+			else
+				CursurIndex = 6;
+			CursurDisplay(CursurIndex);
+			break;
+		case 10:
+			if(CAN1Comm.Get_CheckBKCUComm() == 1)
+				CursurIndex = 9;
+			else if(CAN1Comm.Get_ComponentCode_1699_PGN65330_EHCU() == CAN1CommManager.STATE_COMPONENTCODE_EHCU)
+				CursurIndex = 8;
+			else if(CAN1Comm.Get_ComponentCode_1699_PGN65330_RMCU() == CAN1CommManager.STATE_COMPONENTCODE_RMCU)
+				CursurIndex = 7;
+			else
+				CursurIndex = 6;
+			CursurDisplay(CursurIndex);
+			break;			
 		default:
 			break;
 		}
@@ -503,23 +564,48 @@ public class VersionInfoFragment extends ParentFragment{
 	public void ClickRight(){
 		switch (CursurIndex) {
 		case 1:
-		case 2:
 		case 3:
 		case 4:
 		case 5:
-		case 7:
-		case 8:
+		case 9:
 			CursurIndex++;
 			CursurDisplay(CursurIndex);
 			break;
-		case 6:
-			if(CAN1Comm.Get_ComponentCode_1699_PGN65330_EHCU() != CAN1CommManager.STATE_COMPONENTCODE_EHCU)
-				CursurIndex = 8;
+		case 2:
+			if(CAN1Comm.Get_ComponentCode_1699_PGN65330_ACU() != CAN1CommManager.STATE_COMPONENTCODE_AIRCONCONTROLLER)
+				CursurIndex = 4;
 			else
 				CursurIndex++;
 			CursurDisplay(CursurIndex);
 			break;
-		case 9:
+		case 6:
+			if(CAN1Comm.Get_ComponentCode_1699_PGN65330_RMCU() == CAN1CommManager.STATE_COMPONENTCODE_RMCU)
+				CursurIndex = 7;
+			else if(CAN1Comm.Get_ComponentCode_1699_PGN65330_EHCU() == CAN1CommManager.STATE_COMPONENTCODE_EHCU)
+				CursurIndex = 8;
+			else if(CAN1Comm.Get_CheckBKCUComm() == 1)
+				CursurIndex = 9;
+			else
+				CursurIndex = 10;
+			CursurDisplay(CursurIndex);
+			break;
+		case 7:
+			if(CAN1Comm.Get_ComponentCode_1699_PGN65330_EHCU() == CAN1CommManager.STATE_COMPONENTCODE_EHCU)
+				CursurIndex = 8;
+			else if(CAN1Comm.Get_CheckBKCUComm() == 1)
+				CursurIndex = 9;
+			else
+				CursurIndex = 10;
+			CursurDisplay(CursurIndex);
+			break;
+		case 8:
+			if(CAN1Comm.Get_CheckBKCUComm() == 1)
+				CursurIndex = 9;
+			else
+				CursurIndex = 10;
+			CursurDisplay(CursurIndex);
+			break;
+		case 10:
 			CursurIndex = 1;
 			CursurDisplay(CursurIndex);
 			break;
@@ -539,24 +625,27 @@ public class VersionInfoFragment extends ParentFragment{
 			ClickECM();
 			break;
 		case 3:
-			ClickMonitor();
+			ClickACU();
 			break;
 		case 4:
-			ClickMCU();
+			ClickMonitor();
 			break;
 		case 5:
-			ClickCluster();
+			ClickMCU();
 			break;
 		case 6:
-			ClickRMCU();
+			ClickCluster();
 			break;
 		case 7:
-			ClickEHCU();
+			ClickRMCU();
 			break;
 		case 8:
-			ClickBKCU();
+			ClickEHCU();
 			break;
 		case 9:
+			ClickBKCU();
+			break;
+		case 10:
 			ClickOK();
 			break;
 		default:
@@ -568,6 +657,7 @@ public class VersionInfoFragment extends ParentFragment{
 		imgbtnOK.setPressed(false);
 		textViewTCU.setPressed(false);
 		textViewECM.setPressed(false);
+		textViewACU.setPressed(false);
 		textViewMonitor.setPressed(false);
 		textViewMCU.setPressed(false);
 		textViewCluster.setPressed(false);
@@ -589,30 +679,33 @@ public class VersionInfoFragment extends ParentFragment{
 			textViewECM.setPressed(true);
 			break;
 		case 3:
+			textViewACU.setPressed(true);
+			break;			
+		case 4:
 			textViewMonitor.setPressed(true);
 			textViewMonitorVersion.setTextColor(ParentActivity.getResources().getColor(R.color.black));
 			break;
-		case 4:
+		case 5:
 			textViewMCU.setPressed(true);
 			textViewMCUVersion.setTextColor(ParentActivity.getResources().getColor(R.color.black));
 			break;
-		case 5:
+		case 6:
 			textViewCluster.setPressed(true);
 			textViewClusterVersion.setTextColor(ParentActivity.getResources().getColor(R.color.black));
 			break;
-		case 6:
+		case 7:
 			textViewRMCU.setPressed(true);
 			textViewRMCUVersion.setTextColor(ParentActivity.getResources().getColor(R.color.black));
 			break;
-		case 7:
+		case 8:
 			textViewEHCU.setPressed(true);
 			textViewEHCUVersion.setTextColor(ParentActivity.getResources().getColor(R.color.black));	
 			break;
-		case 8:
+		case 9:
 			textViewBKCU.setPressed(true);
 			textViewBKCUVersion.setTextColor(ParentActivity.getResources().getColor(R.color.black));	
 			break;
-		case 9:
+		case 10:
 			imgbtnOK.setPressed(true);
 			break;
 		default:

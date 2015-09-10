@@ -625,6 +625,10 @@ public class CommService extends Service{
 	public native int Get_BucketOutEPPRValveCurrent_2307_PGN65517();
 	public native int Get_AUX1EPPRValveCurrent_2308_PGN65517();
 	public native int Get_AUX2EPPRValveCurrent_2309_PGN65517();
+	//////RX_AMBIENT_CONDITIONS_65519///////
+	public native int Get_AmbientTemperature_3411_PGN65519();
+	public native int Get_InCabTemperature_3412_PGN65519();
+	public native int Get_DuctTemperature_3413_PGN65519();
 	//////RX_WHEEL_LOADER_EHCU_STATUS2_65524///////
 	public native int Get_SoftStopBoomUp_2337_PGN65524();
 	public native int Get_SoftStopBoomDown_2338_PGN65524();

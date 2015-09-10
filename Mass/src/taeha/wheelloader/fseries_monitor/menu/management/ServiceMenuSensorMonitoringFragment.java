@@ -29,7 +29,7 @@ import android.widget.TextView;
 
 public class ServiceMenuSensorMonitoringFragment extends ParentFragment{
 	//CONSTANT////////////////////////////////////////
-	private static final int NumofItem = 20;
+	private static final int NumofItem = 23;
 	//////////////////////////////////////////////////
 	//RESOURCE////////////////////////////////////////
 	ImageButton imgbtnOK;
@@ -156,6 +156,9 @@ public class ServiceMenuSensorMonitoringFragment extends ParentFragment{
 		StatusValue[17] = CAN1Comm.Get_AcceleratorPedalPositionVoltage1_710_PGN65368();
 		StatusValue[18] = CAN1Comm.Get_AcceleratorPedalPositionVoltage2_710_PGN65368();
 		StatusValue[19] = CAN1Comm.Get_AcceleratorPedalPosition1_339_PGN65368();
+		StatusValue[20] = CAN1Comm.Get_FATCSettingTemperatureCelsius_3408_PGN65373();
+		StatusValue[21] = CAN1Comm.Get_AmbientTemperature_3411_PGN65519();
+		StatusValue[22] = CAN1Comm.Get_InCabTemperature_3412_PGN65519();
 		
 		TotalHourmeter = CAN1Comm.Get_Hourmeter_1601_PGN65433();
 	}
@@ -241,12 +244,44 @@ public class ServiceMenuSensorMonitoringFragment extends ParentFragment{
 		return Result;
 	}
 	
+	public int TempConvert(int Temp, int Unit){
+		int tmp = Temp;
+
+		switch (Unit) {
+		case Home.UNIT_TEMP_C:
+			tmp = (int)(tmp*10-400);
+			break;
+		case Home.UNIT_TEMP_F:
+			tmp = (int)((float)(tmp*10-400) * 18 / 10 + 320);
+			break;
+		}
+		return tmp;
+	}
+	public String GetTempUnit(int Unit){
+		String Result;
+		
+		switch (Unit) {
+		case Home.UNIT_TEMP_F:
+			Result = ParentActivity.getResources().getString(string.F);
+			break;
+		case Home.UNIT_TEMP_C:
+			Result = ParentActivity.getResources().getString(string.C);
+			break;
+	
+		default:
+			Result = ParentActivity.getResources().getString(string.C);
+			break;
+		}
+		return Result;
+	}
+	
 	
 	 
 	public void StatusListDisplay(){
 		int FanRPM,EngineRPM,AlternatorVolt,BoomPosSensorVolt,BucketPosSensorVolt,EngineModeSelVolt,ClutchModeSelVolt
 		,TMModeSelVolt,BrakeFailureWarningPS,ParkingPS,BoomHeadCylinderPS,BommRodCylinderPS,SteeringPumpPS,EmergencyMotorPumpPS
-		,DifferentialLockPS,BrakePriorityPS,BrakePedalPosVolt,AccPedalPositionVolt,AccPedalPositionPercent;
+		,DifferentialLockPS,BrakePriorityPS,BrakePedalPosVolt,AccPedalPositionVolt,AccPedalPositionPercent
+		,FATCSettingTemperature,AmbientTemperature,InCabTemperature;
 		int IntegerValue, Point;
 		adapter.clearItem();
 	
@@ -317,6 +352,8 @@ public class ServiceMenuSensorMonitoringFragment extends ParentFragment{
 		
 		}
 		
+
+		
 //		// 6. Engine Mode Sel. Sensor Volt. : V
 //		if(StatusValue[5] != 0xff){
 //			EngineModeSelVolt = StatusValue[5];
@@ -367,7 +404,7 @@ public class ServiceMenuSensorMonitoringFragment extends ParentFragment{
 				BackgroundFlag = true;
 //				adapter.addItem(new IconTextItem(ParentActivity.getResources().getDrawable(R.drawable.menu_management_machine_monitoring_bg_light),ParentActivity.getResources().getDrawable(R.drawable.menu_management_machine_monitoring_bg_line),"Brake Pedal Pos. Voltage", 
 //						Float.toString(fBrakePedalPosVolt), "V"));
-				adapter.addItem(new IconTextItem(ParentActivity.getResources().getDrawable(R.drawable.menu_management_machine_monitoring_bg_dark),ParentActivity.getResources().getDrawable(R.drawable.menu_management_machine_monitoring_bg_line),"Brake Pedal Pos. Voltage", 
+				adapter.addItem(new IconTextItem(ParentActivity.getResources().getDrawable(R.drawable.menu_management_machine_monitoring_bg_light),ParentActivity.getResources().getDrawable(R.drawable.menu_management_machine_monitoring_bg_line),"Brake Pedal Pos. Voltage", 
 						Integer.toString(nBrakePedalVolt) + "." + Integer.toString(nBrakePedalVolt_Under), "V"));
 			}
 			
@@ -563,7 +600,57 @@ public class ServiceMenuSensorMonitoringFragment extends ParentFragment{
 		}
 		
 		
+		// 21. FATC Setting Temperature Celsius : C
+		if(StatusValue[20] != 0xff){
+			FATCSettingTemperature = TempConvert(StatusValue[20],ParentActivity.UnitTemp);
+			IntegerValue = FATCSettingTemperature / 10;
+			Point = FATCSettingTemperature % 10;
+			
+			if(BackgroundFlag == true){
+				BackgroundFlag = false;
+				adapter.addItem(new IconTextItem(ParentActivity.getResources().getDrawable(R.drawable.menu_management_machine_monitoring_bg_dark),ParentActivity.getResources().getDrawable(R.drawable.menu_management_machine_monitoring_bg_line), "FATC Setting Temperature", Integer.toString(IntegerValue) + "." 
+						+ Integer.toString(Point), GetTempUnit(ParentActivity.UnitTemp)));
+			}else{
+				BackgroundFlag = true;
+				adapter.addItem(new IconTextItem(ParentActivity.getResources().getDrawable(R.drawable.menu_management_machine_monitoring_bg_light),ParentActivity.getResources().getDrawable(R.drawable.menu_management_machine_monitoring_bg_line), "FATC Setting Temperature", Integer.toString(IntegerValue) + "." 
+						+ Integer.toString(Point), GetTempUnit(ParentActivity.UnitTemp)));
+			}
+		}
+
+		// 22. Ambient Temperature : C
+		if(StatusValue[21] != 0xff){
+			AmbientTemperature = TempConvert(StatusValue[21],ParentActivity.UnitTemp);
+			IntegerValue = AmbientTemperature / 10;
+			Point = AmbientTemperature % 10;
+
+			if(BackgroundFlag == true){
+				BackgroundFlag = false;
+				adapter.addItem(new IconTextItem(ParentActivity.getResources().getDrawable(R.drawable.menu_management_machine_monitoring_bg_dark),ParentActivity.getResources().getDrawable(R.drawable.menu_management_machine_monitoring_bg_line), "Ambient Temperature", Integer.toString(IntegerValue) + "." 
+						+ Integer.toString(Point), GetTempUnit(ParentActivity.UnitTemp)));
+			}else{
+				BackgroundFlag = true;
+				adapter.addItem(new IconTextItem(ParentActivity.getResources().getDrawable(R.drawable.menu_management_machine_monitoring_bg_light),ParentActivity.getResources().getDrawable(R.drawable.menu_management_machine_monitoring_bg_line), "Ambient Temperature", Integer.toString(IntegerValue) + "." 
+						+ Integer.toString(Point), GetTempUnit(ParentActivity.UnitTemp)));
+			}
+
+		}
 		
+		// 23. In-Cab Temperature : C
+		if(StatusValue[22] != 0xff){
+			InCabTemperature = TempConvert(StatusValue[22],ParentActivity.UnitTemp);
+			IntegerValue = InCabTemperature / 10;
+			Point = InCabTemperature % 10;
+
+			if(BackgroundFlag == true){
+				BackgroundFlag = false;
+				adapter.addItem(new IconTextItem(ParentActivity.getResources().getDrawable(R.drawable.menu_management_machine_monitoring_bg_dark),ParentActivity.getResources().getDrawable(R.drawable.menu_management_machine_monitoring_bg_line), "In-Cab Temperature", Integer.toString(IntegerValue) + "." 
+						+ Integer.toString(Point), GetTempUnit(ParentActivity.UnitTemp)));
+			}else{
+				BackgroundFlag = true;
+				adapter.addItem(new IconTextItem(ParentActivity.getResources().getDrawable(R.drawable.menu_management_machine_monitoring_bg_light),ParentActivity.getResources().getDrawable(R.drawable.menu_management_machine_monitoring_bg_line), "In-Cab Temperature", Integer.toString(IntegerValue) + "." 
+						+ Integer.toString(Point), GetTempUnit(ParentActivity.UnitTemp)));
+			}
+		}		
 		
 		adapter.notifyDataSetChanged();
 	}

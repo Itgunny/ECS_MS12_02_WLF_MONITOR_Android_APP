@@ -75,7 +75,7 @@ public class Home extends Activity {
 	public static final int VERSION_LOW 		= 0;
 	public static final int VERSION_SUB_HIGH 	= 0;
 	public static final int VERSION_SUB_LOW 	= 9;
-	public static final int VERSION_TAEHA		= 0;
+	public static final int VERSION_TAEHA		= 1;
 	////1.0.2.3
 	// UI B 안 최초 적용 2014.12.10
 	////1.0.2.4
@@ -627,6 +627,12 @@ public class Home extends Activity {
 	// 9. UI 충돌/FW 업데이트/OS 업데이트 이후 버전 정보 소실 현상 개선
 	//	- MONITOR CID 전송 후 CID 정보가 없을 경우 1회 요청
 	// 10. pdf reader, media player, 스마트 터미널 등 기능에서 Axle 경고(pop up 또는 lamp)가 발생할 시 바로 종료 되고 메인화면으로 전환
+	//// v2.0.0.91
+	// 1. HCEPGN 65330 CID : 장비 정보에 버전정보 표시 항목(FATC) 추가 
+	// 2. HCEPGN 65373 Air Conditioner Status : 고장 이력 - 현재 고장에 표시항목(FATC) 추가
+	//  - 과거 고장 : MCU담당과 협의 후 추후 구현
+	// 3. HCEPGN 65373 Air Conditioner Status : 관리자 메뉴 - 장비 모니터링에 표시 항목(FATC Setting Temperature (Celsius)) 추가
+	// 4. HCEPGN 65519 Ambient Conditions : 관리자 메뉴 - 장비 모니터링에 표시 항목(Ambient Temperature, In-cab Temperature) 추가
 	//////////////////////////////////////////////////////////////////////////////////////
 	
 	// TAG
@@ -804,6 +810,7 @@ public class Home extends Activity {
 	public  static final int SCREEN_STATE_MENU_MONITORING_VERSIONINFO_RMCU					= 0x22460000;
 	public  static final int SCREEN_STATE_MENU_MONITORING_VERSIONINFO_EHCU					= 0x22470000;
 	public  static final int SCREEN_STATE_MENU_MONITORING_VERSIONINFO_BKCU					= 0x22480000;
+	public  static final int SCREEN_STATE_MENU_MONITORING_VERSIONINFO_ACU					= 0x22490000;
 	public  static final int SCREEN_STATE_MENU_MONITORING_VERSIONINFO_END					= 0x224FFFFF;
 	// ++, 150329 bwk
 //	public  static final int SCREEN_STATE_MENU_MONITORING_EHCUINFO_TOP						= 0x22500000;

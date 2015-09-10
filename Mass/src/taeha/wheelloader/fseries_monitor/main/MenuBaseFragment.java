@@ -58,6 +58,7 @@ import taeha.wheelloader.fseries_monitor.menu.monitoring.MachineMonitoringFragme
 import taeha.wheelloader.fseries_monitor.menu.monitoring.MachineMonitoringFragment3;
 import taeha.wheelloader.fseries_monitor.menu.monitoring.MenuMonitoringFragment;
 import taeha.wheelloader.fseries_monitor.menu.monitoring.OperationHistoryFragment;
+import taeha.wheelloader.fseries_monitor.menu.monitoring.VersionInfoACUFragment;
 import taeha.wheelloader.fseries_monitor.menu.monitoring.VersionInfoBKCUFragment;
 import taeha.wheelloader.fseries_monitor.menu.monitoring.VersionInfoClusterFragment;
 import taeha.wheelloader.fseries_monitor.menu.monitoring.VersionInfoECMFragment;
@@ -151,6 +152,7 @@ public class MenuBaseFragment extends ParentFragment{
 	public VersionInfoRMCUFragment				_VersionInfoRMCUFragment;
 	public VersionInfoTCUFragment				_VersionInfoTCUFragment;
 	public VersionInfoECMFragment				_VersionInfoECMFragment;
+	public VersionInfoACUFragment				_VersionInfoACUFragment;
 	public FaultHistoryActiveFragment			_FaultHistoryActiveFragment;
 	public FaultHistoryLoggedFragment			_FaultHistoryLoggedFragment;
 	public FaultHistoryLoggedPasswordFragment	_FaultHistoryLoggedPasswordFragment;
@@ -293,6 +295,7 @@ public class MenuBaseFragment extends ParentFragment{
 		_VersionInfoRMCUFragment = new VersionInfoRMCUFragment();
 		_VersionInfoTCUFragment = new VersionInfoTCUFragment();
 		_VersionInfoECMFragment = new VersionInfoECMFragment();
+		_VersionInfoACUFragment = new VersionInfoACUFragment();
 		_FaultHistoryActiveFragment = new FaultHistoryActiveFragment();
 		_FaultHistoryLoggedFragment = new FaultHistoryLoggedFragment();
 		_FaultHistoryLoggedPasswordFragment = new FaultHistoryLoggedPasswordFragment();
@@ -385,6 +388,7 @@ public class MenuBaseFragment extends ParentFragment{
 		transaction.detach(_VersionInfoRMCUFragment);
 		transaction.detach(_VersionInfoTCUFragment);
 		transaction.detach(_VersionInfoECMFragment);
+		transaction.detach(_VersionInfoACUFragment);
 		transaction.detach(_FaultHistoryActiveFragment);
 		transaction.detach(_FaultHistoryLoggedFragment);
 		transaction.detach(_FaultHistoryLoggedPasswordFragment);
@@ -810,6 +814,13 @@ public class MenuBaseFragment extends ParentFragment{
 		transaction.commit();
 
 	}
+	public void showBodyVersionInfoACU(){
+		android.app.FragmentTransaction transaction = getFragmentManager().beginTransaction();
+		transaction.remove(_VersionInfoACUFragment);
+		transaction.replace(R.id.FrameLayout_menu_inter_body, _VersionInfoACUFragment);
+		transaction.commit();
+
+	}
 	public void showBodyActiveFault(){
 		android.app.FragmentTransaction transaction = getFragmentManager().beginTransaction();
 		transaction.remove(_FaultHistoryActiveFragment);
@@ -1177,6 +1188,10 @@ public class MenuBaseFragment extends ParentFragment{
 		showInterAnimation();
 		InterBodyAnimation.StartChangeAnimation(_VersionInfoECMFragment);
 	}
+	public void showBodyVersionInfoACUAniamtion(){
+		showInterAnimation();
+		InterBodyAnimation.StartChangeAnimation(_VersionInfoACUFragment);
+	}
 	public void showBodyActiveFaultAnimation(){
 		showInterAnimation();
 		InterBodyAnimation.StartChangeAnimation(_FaultHistoryActiveFragment);
@@ -1520,6 +1535,9 @@ public class MenuBaseFragment extends ParentFragment{
 		case Home.SCREEN_STATE_MENU_MONITORING_VERSIONINFO_ECM:
 			_VersionInfoECMFragment.ClickLeft();
 			break;
+		case Home.SCREEN_STATE_MENU_MONITORING_VERSIONINFO_ACU:
+			_VersionInfoACUFragment.ClickLeft();
+			break;
 		case Home.SCREEN_STATE_MENU_MONITORING_VERSIONINFO_MONITOR:
 			_VersionInfoMonitorFragment.ClickLeft();
 			break;
@@ -1808,6 +1826,9 @@ public class MenuBaseFragment extends ParentFragment{
 			break;
 		case Home.SCREEN_STATE_MENU_MONITORING_VERSIONINFO_ECM:
 			_VersionInfoECMFragment.ClickRight();
+			break;
+		case Home.SCREEN_STATE_MENU_MONITORING_VERSIONINFO_ACU:
+			_VersionInfoACUFragment.ClickRight();
 			break;
 		case Home.SCREEN_STATE_MENU_MONITORING_VERSIONINFO_MONITOR:
 			_VersionInfoMonitorFragment.ClickRight();
@@ -2101,6 +2122,9 @@ public class MenuBaseFragment extends ParentFragment{
 		case Home.SCREEN_STATE_MENU_MONITORING_VERSIONINFO_ECM:
 			_VersionInfoECMFragment.ClickESC();
 			break;
+		case Home.SCREEN_STATE_MENU_MONITORING_VERSIONINFO_ACU:
+			_VersionInfoACUFragment.ClickESC();
+			break;
 		case Home.SCREEN_STATE_MENU_MONITORING_VERSIONINFO_MONITOR:
 			_VersionInfoMonitorFragment.ClickESC();
 			break;
@@ -2391,6 +2415,9 @@ public class MenuBaseFragment extends ParentFragment{
 		case Home.SCREEN_STATE_MENU_MONITORING_VERSIONINFO_ECM:
 			_VersionInfoECMFragment.ClickEnter();
 			break;
+		case Home.SCREEN_STATE_MENU_MONITORING_VERSIONINFO_ACU:
+			_VersionInfoACUFragment.ClickEnter();
+			break;
 		case Home.SCREEN_STATE_MENU_MONITORING_VERSIONINFO_MONITOR:
 			_VersionInfoMonitorFragment.ClickEnter();
 			break;
@@ -2576,6 +2603,9 @@ public class MenuBaseFragment extends ParentFragment{
 				break;
 			case Home.SCREEN_STATE_MENU_MONITORING_VERSIONINFO_TCU:
 				_VersionInfoTCUFragment.ShowManufactureDay(true);
+				break;
+			case Home.SCREEN_STATE_MENU_MONITORING_VERSIONINFO_ACU:
+				_VersionInfoACUFragment.ShowManufactureDay(true);
 				break;
 			case Home.SCREEN_STATE_MENU_MONITORING_VERSIONINFO_MONITOR:
 				_VersionInfoMonitorFragment.ShowManufactureDay(true);

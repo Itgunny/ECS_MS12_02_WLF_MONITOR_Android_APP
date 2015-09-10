@@ -1481,6 +1481,16 @@ jint Get_AUX1EPPRValveCurrent_2308_PGN65517(JNIEnv * env, jobject this) {
 jint Get_AUX2EPPRValveCurrent_2309_PGN65517(JNIEnv * env, jobject this) {
 	return RX_WHEEL_LOADER_EHCU_STATUS_65517.AUX2EPPRValveCurrent_2309;
 }
+//////RX_AMBIENT_CONDITIONS_65519///////
+jint Get_AmbientTemperature_3411_PGN65519(JNIEnv * env, jobject this) {
+	return RX_AMBIENT_CONDITIONS_65519.AmbientTemperature_3411;
+}
+jint Get_InCabTemperature_3412_PGN65519(JNIEnv * env, jobject this) {
+	return RX_AMBIENT_CONDITIONS_65519.InCabTemperature_3412;
+}
+jint Get_DuctTemperature_3413_PGN65519(JNIEnv * env, jobject this) {
+	return RX_AMBIENT_CONDITIONS_65519.DuctTemperature_3413;
+}
 //////RX_WHEEL_LOADER_EHCU_STATUS2_65524///////
 jint Get_SoftStopBoomUp_2337_PGN65524(JNIEnv * env, jobject this) {
 	return RX_WHEEL_LOADER_EHCU_STATUS2_65524.SoftStopBoomUp_2337;
@@ -4343,6 +4353,11 @@ static JNINativeMethod methods[] =
 						(void*) Get_AUX1EPPRValveCurrent_2308_PGN65517 }, {
 						"Get_AUX2EPPRValveCurrent_2309_PGN65517", "()I",
 						(void*) Get_AUX2EPPRValveCurrent_2309_PGN65517 },
+
+				//////RX_AMBIENT_CONDITIONS_65519///////
+				{ "Get_AmbientTemperature_3411_PGN65519", "()I",(void*) Get_AmbientTemperature_3411_PGN65519 },
+				{ "Get_InCabTemperature_3412_PGN65519", "()I",	(void*) Get_InCabTemperature_3412_PGN65519 },
+				{ "Get_DuctTemperature_3413_PGN65519", "()I",	(void*) Get_DuctTemperature_3413_PGN65519 },
 
 				//////RX_WHEEL_LOADER_EHCU_STATUS2_65524///////
 				{"Get_SoftStopBoomUp_2337_PGN65524", "()I",(void*) Get_SoftStopBoomUp_2337_PGN65524 },
