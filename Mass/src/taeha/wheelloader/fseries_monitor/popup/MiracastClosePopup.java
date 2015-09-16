@@ -11,6 +11,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
+import android.net.wifi.WifiManager;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -137,6 +138,11 @@ public class MiracastClosePopup extends ParentPopup {
 //		ParentActivity.KillApps("com.powerone.wfd.sink");
 		//++, 150715 cjg
 		Runtime runtime = Runtime.getRuntime();
+		//++, 150910 cjg
+		String service = Context.WIFI_SERVICE;
+		final WifiManager wifi = (WifiManager)ParentActivity.getSystemService(service);
+		wifi.setWifiEnabled(false);
+		//--, 150910 cjg
 		Process process;
 		try{
 			String cmd = "am force-stop com.powerone.wfd.sink";

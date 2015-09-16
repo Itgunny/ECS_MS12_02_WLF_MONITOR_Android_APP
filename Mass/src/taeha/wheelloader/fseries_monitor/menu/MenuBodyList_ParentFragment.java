@@ -270,39 +270,51 @@ public abstract class MenuBodyList_ParentFragment extends ParentFragment{
 	}
 	public void setListTitle1(String str){
 		textViewTitle1.setText(str);
+		textViewTitle1.clearAnimation();
 	}
 	public void setListTitle2(String str){
 		textViewTitle2.setText(str);
+		textViewTitle2.clearAnimation();
 	}
 	public void setListTitle3(String str){
 		textViewTitle3.setText(str);
+		textViewTitle3.clearAnimation();
 	}
 	public void setListTitle4(String str){
 		textViewTitle4.setText(str);
+		textViewTitle4.clearAnimation();
 	}
 	public void setListTitle5(String str){
 		textViewTitle5.setText(str);
+		textViewTitle5.clearAnimation();
 	}
 	public void setListTitle6(String str){
 		textViewTitle6.setText(str);
+		textViewTitle6.clearAnimation();
 	}
 	public void setListData1(String str){
 		textViewData1.setText(str);
+		textViewData1.clearAnimation();
 	}
 	public void setListData2(String str){
 		textViewData2.setText(str);
+		textViewData2.clearAnimation();
 	}
 	public void setListData3(String str){
 		textViewData3.setText(str);
+		textViewData3.clearAnimation();
 	}
 	public void setListData4(String str){
 		textViewData4.setText(str);
+		textViewData4.clearAnimation();
 	}
 	public void setListData5(String str){
 		textViewData5.setText(str);
+		textViewData5.clearAnimation();
 	}
 	public void setListData6(String str){
 		textViewData6.setText(str);
+		textViewData6.clearAnimation();
 	}
 	public void setListColor(int Index, int Color){
 		switch(Index){

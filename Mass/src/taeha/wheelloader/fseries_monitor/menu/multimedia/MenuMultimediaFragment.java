@@ -14,7 +14,9 @@ import taeha.wheelloader.fseries_monitor.main.R.string;
 import taeha.wheelloader.fseries_monitor.menu.MenuBodyList_ParentFragment;
 import android.app.ActivityManager;
 import android.app.ActivityManager.RunningTaskInfo;
+import android.content.Context;
 import android.content.Intent;
+import android.net.wifi.WifiManager;
 import android.os.Bundle;
 import android.text.Layout;
 import android.util.Log;
@@ -27,309 +29,6 @@ import android.widget.FrameLayout;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
-
-/*
-public class MenuMultimediaFragment extends MenuBodyList_ParentFragment{
-	//CONSTANT////////////////////////////////////////
-	
-	//////////////////////////////////////////////////
-	//RESOURCE////////////////////////////////////////
-	FrameLayout LayoutList;
-	//////////////////////////////////////////////////
-	
-	//VALUABLE////////////////////////////////////////
-
-	//////////////////////////////////////////////////
-	
-	//Fragment////////////////////////////////////////
-
-	//////////////////////////////////////////////////
-	
-	//ANIMATION///////////////////////////////////////
-	
-	///////////////////////////////////////////////////
-	
-	//TEST////////////////////////////////////////////
-	
-	//////////////////////////////////////////////////
-
-	//Life Cycle Function/////////////////////////////
-	@Override
-	public View onCreateView(LayoutInflater inflater, ViewGroup container,
-			Bundle savedInstanceState) {
-		// TODO Auto-generated method stub
-		super.onCreateView(inflater, container, savedInstanceState);
-		 TAG = "MenuMultimediaFragment";
-		Log.d(TAG, "onCreateView");
-		
-		InitList();
-		ParentActivity._MenuBaseFragment._MenuListTitleFragment.setBackButtonEnable(false);
-		ParentActivity.ScreenIndex = ParentActivity.SCREEN_STATE_MENU_MULTIMEDIA_TOP;
-		ParentActivity._MenuBaseFragment._MenuListTitleFragment.SetTitleText(ParentActivity.getResources().getString(R.string.Multimedia));
-		CursurDisplay(CursurIndex);
-		return mRoot;
-	}
-	
-	////////////////////////////////////////////////
-	
-	
-
-	//Common Function//////////////////////////////
-
-	@Override
-	protected void GetDataFromNative() {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	protected void UpdateUI() {
-		// TODO Auto-generated method stub
-		
-	}
-	@Override
-	protected void InitList() {
-		// TODO Auto-generated method stub
-		setClickableList1(true);
-		setClickableList2(true);
-		
-		
-		setListTitle1(ParentActivity.getResources().getString(string.Media_Palyer));
-		setListTitle2(ParentActivity.getResources().getString(string.Smart_Terminal));
-	}
-
-	//////////////////////////////////////////////////////////////////////
-	@Override
-	public void ClickList1() {
-		// TODO Auto-generated method stub
-		ClickMediaPlayer();
-		
-		CursurIndex = 1;
-		CursurDisplay(CursurIndex);
-	}
-	
-
-	@Override
-	public void ClickList2() {
-		// TODO Auto-generated method stub
-		ClickSmartTerminal();	
-		
-		CursurIndex = 2;
-		CursurDisplay(CursurIndex);
-	}
-
-	@Override
-	public void ClickList3() {
-		// TODO Auto-generated method stub
-	}
-
-	@Override
-	public void ClickList4() {
-		// TODO Auto-generated method stub
-	}
-
-	@Override
-	public void ClickList5() {
-		// TODO Auto-generated method stub
-	}
-
-	@Override
-	public void ClickList6() {
-		// TODO Auto-generated method stub
-	}
-	/////////////////////////////////////////////////////////////////////	
-	public void ClickMediaPlayer(){
-		// ++, 150319 bwk
-		//if(CAN1Comm.GetrpmFlag() == false)
-		{
-		// --, 150319 bwk
-			// ++, 150323 bwk
-			if(ParentActivity.CheckRunningApp("com.powerone.wfd.sink")){
-				ParentActivity.OldScreenIndex = ParentActivity.SCREEN_STATE_MENU_MULTIMEDIA_TOP;
-				ParentActivity._MiracastClosePopup.show();
-			}else{
-			// --, 150323 bwk
-				Intent intent;
-				intent = ParentActivity.getPackageManager().getLaunchIntentForPackage("com.mxtech.videoplayer.ad");
-				if(intent != null){
-					//CAN1Comm.SetMultimediaFlag(true);	// ++, --, 150323 bwk
-					CAN1Comm.SetMiracastFlag(false);
-					ParentActivity.startActivity(intent);
-					ParentActivity.StartAlwaysOntopService();		// ++, --, 150324 cjg
-					ParentActivity.StartCheckMultimediaTimer();
-				}
-			}	// ++, --, 150323 bwk
-		}	// ++, --, 150319 bwk
-		CursurIndex = 1;
-		CursurDisplay(CursurIndex);
-	}
-	public void ClickSmartTerminal(){
-		if(ParentActivity.CheckRunningApp("com.mxtech.videoplayer.ad")){
-			ParentActivity.OldScreenIndex = ParentActivity.SCREEN_STATE_MENU_MULTIMEDIA_TOP;
-			ParentActivity._MultimediaClosePopup.show();
-		}else{
-			Intent intent;
-			intent = ParentActivity.getPackageManager().getLaunchIntentForPackage("com.powerone.wfd.sink");
-			if(intent != null){
-				ParentActivity.startActivity(intent);
-				CAN1Comm.SetMultimediaFlag(false);
-				ParentActivity.StartCheckSmartTerminalTimer();
-			}
-		}		
-
-		CursurIndex = 2;
-		CursurDisplay(CursurIndex);
-	}
-	
-	public void ExcuteFileManaget(){
-		Intent intent;
-		intent = ParentActivity.getPackageManager().getLaunchIntentForPackage(
-				"com.rhmsoft.fm.hd");
-		if(intent != null)
-			startActivity(intent);
-	}
-	public void ExcuteSettings(){
-		Intent intent;
-		intent = ParentActivity.getPackageManager().getLaunchIntentForPackage(
-				"com.android.settings");
-		if(intent != null)
-			startActivity(intent);
-	}
-	/////////////////////////////////////////////////////////////////////
-	public void ClickLeft(){
-		Log.d(TAG,"ClickLeft");
-		switch (CursurIndex) {
-		case 0:
-			ParentActivity._MenuBaseFragment._MenuListLeftFragment.ClickPreference();
-			break;
-		case 1:
-			CursurIndex = 2;
-			CursurDisplay(CursurIndex);
-			break;
-		case 2:
-			CursurIndex--;
-			CursurDisplay(CursurIndex);
-			break;
-		case 3:
-		case 4:
-		case 5:
-		case 6:
-			
-			break;
-		default:
-			break;
-		}
-	}
-	public void ClickRight(){
-		Log.d(TAG,"ClickRight");
-		switch (CursurIndex) {
-		case 0:
-			ParentActivity._MenuBaseFragment._MenuModeFragment.setFirstScreen(Home.SCREEN_STATE_MENU_MODE_TOP);
-			ParentActivity._MenuBaseFragment._MenuListLeftFragment.ClickMode();			
-			break;
-		case 1:
-			CursurIndex++;
-			CursurDisplay(CursurIndex);
-			break;
-		case 2:
-			CursurIndex = 1;
-			CursurDisplay(CursurIndex);
-			break;
-		case 3:
-		case 4:
-		case 5:
-		case 6:
-		default:
-			CursurIndex = 1;
-			CursurDisplay(CursurIndex);
-			break;
-		}
-	}
-	public void ClickESC(){
-		switch (CursurIndex) {
-		case 0:
-			ParentActivity._MenuBaseFragment._MenuListTitleFragment.ClickHome();
-			break;
-		case 1:
-			CursurIndex = 0;
-			CursurDisplay(CursurIndex);
-			break;
-		case 2:
-			CursurIndex = 0;
-			CursurDisplay(CursurIndex);
-			break;
-		case 3:
-			CursurIndex = 0;
-			CursurDisplay(CursurIndex);
-			break;
-		case 4:
-			CursurIndex = 0;
-			CursurDisplay(CursurIndex);
-			break;
-		case 5:
-			CursurIndex = 0;
-			CursurDisplay(CursurIndex);
-			break;
-		case 6:
-			CursurIndex = 0;
-			CursurDisplay(CursurIndex);
-			break;
-		default:
-			break;
-		}
-	}
-	public void ClickEnter(){
-		switch (CursurIndex) {
-		case 0:
-			CursurIndex = 1;
-			CursurDisplay(CursurIndex);
-			break;
-		case 1:
-			imgbtnList[0].callOnClick();
-			break;
-		case 2:
-			imgbtnList[1].callOnClick();
-			break;
-		case 3:
-			break;
-		case 4:
-			break;
-		case 5:
-			break;
-		case 6:
-			break;
-		default:
-			break;
-		}
-	}
-	/////////////////////////////////////////////////////////////////////	
-	public void CursurDisplay(int Index){
-		try {
-			switch (Index) {
-			case 1:
-				setListFocus(1);
-				break;
-			case 2:
-				setListFocus(2);
-				break;
-			case 3:
-				break;
-			case 4:
-				break;
-			case 5:
-				break;
-			default:
-				setListFocus(0);
-				break;
-			}
-		} catch (NullPointerException e) {
-			// TODO: handle exception
-			Log.e(TAG,"NullPointerException CursurDisplay");
-		}
-		
-	}
-	/////////////////////////////////////////////////////////////////////
-*/
 
 public class MenuMultimediaFragment extends ParentFragment{
 	//CONSTANT////////////////////////////////////////
@@ -554,6 +253,19 @@ public class MenuMultimediaFragment extends ParentFragment{
 			ParentActivity.OldScreenIndex = ParentActivity.SCREEN_STATE_MENU_MULTIMEDIA_TOP;
 			ParentActivity._MultimediaClosePopup.show();
 		}else{
+			String service = Context.WIFI_SERVICE;
+			final WifiManager wifi = (WifiManager)ParentActivity.getSystemService(service);
+			if(wifi.isWifiEnabled()){
+				wifi.setWifiEnabled(false);
+				synchronized (wifi) {
+					try {
+						wifi.wait(500);
+					} catch (InterruptedException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+				}
+			}
 			Intent intent;
 			intent = ParentActivity.getPackageManager().getLaunchIntentForPackage("com.powerone.wfd.sink");
 			if(intent != null){

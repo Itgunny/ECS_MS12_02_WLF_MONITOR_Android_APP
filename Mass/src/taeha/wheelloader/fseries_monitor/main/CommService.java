@@ -14,6 +14,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.media.AudioManager;
 import android.media.SoundPool;
+import android.net.wifi.WifiManager;
 import android.os.Build;
 import android.os.Handler;
 import android.os.IBinder;
@@ -1770,6 +1771,11 @@ public class CommService extends Service{
 	public void CloseSmartTerminal(){
 		Runtime runtime = Runtime.getRuntime();
 		Process process;
+		//++, 150910 cjg
+		String service = Context.WIFI_SERVICE;
+		final WifiManager wifi = (WifiManager)getSystemService(service);
+		wifi.setWifiEnabled(false);
+		//--, 150910 cjg
 		try{
 			String cmd = "am force-stop com.powerone.wfd.sink";
 			process = runtime.exec(cmd);

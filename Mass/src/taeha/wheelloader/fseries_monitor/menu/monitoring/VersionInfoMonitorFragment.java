@@ -227,18 +227,20 @@ public class VersionInfoMonitorFragment extends VersionInfoDetailFragment{
 				+ "." + Integer.toHexString(VersionSubHigh) + "." + Integer.toHexString(VersionSubLow) + Integer.toHexString(VersionHidden));
 	}
 	public void HardwareDisplay(int _data){
-		if(_data > 357 && _data < 387){		// 10k
+		if(_data > 357 && _data < 387){		// 10k 372
 			textViewHardwareData.setText("RevB.02.01");
-		}else if(_data > 390 && _data < 420){	// 9.1k
+		}else if(_data > 390 && _data < 420){	// 9.1k 405
 			textViewHardwareData.setText("RevD.02.01");
-		}else if(_data > 499 && _data < 551){	// 6.8k
+		}else if(_data > 499 && _data < 551){	// 6.8k 525
 			textViewHardwareData.setText("RevD.03.01");
-		}else if(_data > 596 && _data < 626){	// 5.7k
+		}else if(_data > 596 && _data < 626){	// 5.7k 611
 			textViewHardwareData.setText("RevD.04.01");
-		}else if(_data > 686 && _data < 740){	// 4.7k	
+		}else if(_data > 688 && _data < 740){	// 4.7k	718
 			textViewHardwareData.setText("RevF.01.01");
-		}else if(_data > 805 && _data < 865){	// 3.9k	
-		textViewHardwareData.setText("RevF.03.01");
+		}else if(_data > 805 && _data < 865){	// 3.9k	835
+			textViewHardwareData.setText("RevF.03.01");
+		}else if(_data > 865 && _data < 920){	// 3.6k	890
+			textViewHardwareData.setText("RevF.04.01");
 		}
 		else{
 			Log.d(TAG,"HardwareDisplay:"+_data);

@@ -134,20 +134,20 @@ public class VersionInfoECMFragment extends VersionInfoDetailFragment{
 //			adapter.addItem(new IconTextItemVersion(ParentActivity.getResources().getDrawable(R.drawable.menu_management_machine_monitoring_bg_dark),null,
 //					ParentActivity.getResources().getString(string.Manufacturer),"" , ""));
 			adapter.addItem(new IconTextItemVersion(ParentActivity.getResources().getDrawable(R.drawable.menu_management_machine_monitoring_bg_dark),null,
-					ParentActivity.getResources().getString(string.Manufacturer),"" , ""));
+					ParentActivity.getResources().getString(string.Manufacturer),"-" , ""));
 			adapter.addItem(new IconTextItemVersion(ParentActivity.getResources().getDrawable(R.drawable.menu_management_machine_monitoring_bg_light),null,
-					ParentActivity.getResources().getString(string.Calibration_Version_Number),"" , ""));
+					ParentActivity.getResources().getString(string.Calibration_Version_Number),"-" , ""));
 			if(ManufactureDayDisplayFlag == true){
 				adapter.addItem(new IconTextItemVersion(ParentActivity.getResources().getDrawable(R.drawable.menu_management_machine_monitoring_bg_dark),null,
-						ParentActivity.getResources().getString(string.ECM_Part_Number),"" , ""));
+						ParentActivity.getResources().getString(string.ECM_Part_Number),"-" , ""));
 				adapter.addItem(new IconTextItemVersion(ParentActivity.getResources().getDrawable(R.drawable.menu_management_machine_monitoring_bg_light),null,
-						ParentActivity.getResources().getString(string.ECM_Serial_Number),"" , ""));
+						ParentActivity.getResources().getString(string.ECM_Serial_Number),"-" , ""));
 				adapter.addItem(new IconTextItemVersion(ParentActivity.getResources().getDrawable(R.drawable.menu_management_machine_monitoring_bg_dark),null,
-						ParentActivity.getResources().getString(string.Software_Data_Date_Stamp),"" , ""));
+						ParentActivity.getResources().getString(string.Software_Data_Date_Stamp),"-" , ""));
 				adapter.addItem(new IconTextItemVersion(ParentActivity.getResources().getDrawable(R.drawable.menu_management_machine_monitoring_bg_light),null,
-						ParentActivity.getResources().getString(string.ECM_Identifier),"" , ""));
+						ParentActivity.getResources().getString(string.ECM_Identifier),"-" , ""));
 				adapter.addItem(new IconTextItemVersion(ParentActivity.getResources().getDrawable(R.drawable.menu_management_machine_monitoring_bg_dark),null,
-						ParentActivity.getResources().getString(string.Product_ID),"" , ""));
+						ParentActivity.getResources().getString(string.Product_ID),"-" , ""));
 			}
 			
 			if(ManufactureDayDisplayFlag == true){
@@ -175,12 +175,12 @@ public class VersionInfoECMFragment extends VersionInfoDetailFragment{
 //			adapter.addItem(new IconTextItemVersion(ParentActivity.getResources().getDrawable(R.drawable.menu_management_machine_monitoring_bg_dark),null,
 //					ParentActivity.getResources().getString(string.Manufacturer),"" , ""));
 			adapter.addItem(new IconTextItemVersion(ParentActivity.getResources().getDrawable(R.drawable.menu_management_machine_monitoring_bg_dark),null,
-					ParentActivity.getResources().getString(string.Manufacturer),"" , ""));
+					ParentActivity.getResources().getString(string.Manufacturer),"-" , ""));
 			adapter.addItem(new IconTextItemVersion(ParentActivity.getResources().getDrawable(R.drawable.menu_management_machine_monitoring_bg_light),null,
-					ParentActivity.getResources().getString(string.Calibration_Version_Number),"" , ""));
+					ParentActivity.getResources().getString(string.Calibration_Version_Number),"-" , ""));
 			if(ManufactureDayDisplayFlag == true){
 				adapter.addItem(new IconTextItemVersion(ParentActivity.getResources().getDrawable(R.drawable.menu_management_machine_monitoring_bg_dark),null,
-						ParentActivity.getResources().getString(string.Calibration_ID),"" , ""));
+						ParentActivity.getResources().getString(string.Calibration_ID),"-" , ""));
 			}
 	
 			ScaniaECMDisplay(SoftwareIdentification);
@@ -205,20 +205,20 @@ public class VersionInfoECMFragment extends VersionInfoDetailFragment{
 //			adapter.addItem(new IconTextItemVersion(ParentActivity.getResources().getDrawable(R.drawable.menu_management_machine_monitoring_bg_dark),null,
 //					ParentActivity.getResources().getString(string.Manufacturer),"" , ""));
 			adapter.addItem(new IconTextItemVersion(ParentActivity.getResources().getDrawable(R.drawable.menu_management_machine_monitoring_bg_dark),null,
-					ParentActivity.getResources().getString(string.Manufacturer),"" , ""));
+					ParentActivity.getResources().getString(string.Manufacturer),"-" , ""));
 			adapter.addItem(new IconTextItemVersion(ParentActivity.getResources().getDrawable(R.drawable.menu_management_machine_monitoring_bg_light),null,
-					ParentActivity.getResources().getString(string.Calibration_Version_Number),"" , ""));
+					ParentActivity.getResources().getString(string.Calibration_Version_Number),"-" , ""));
 			if(ManufactureDayDisplayFlag == true){
 				adapter.addItem(new IconTextItemVersion(ParentActivity.getResources().getDrawable(R.drawable.menu_management_machine_monitoring_bg_dark),null,
-						ParentActivity.getResources().getString(string.ECM_Part_Number),"" , ""));
+						ParentActivity.getResources().getString(string.ECM_Part_Number),"-" , ""));
 				adapter.addItem(new IconTextItemVersion(ParentActivity.getResources().getDrawable(R.drawable.menu_management_machine_monitoring_bg_light),null,
-						ParentActivity.getResources().getString(string.ECM_Serial_Number),"" , ""));
+						ParentActivity.getResources().getString(string.ECM_Serial_Number),"-" , ""));
 				adapter.addItem(new IconTextItemVersion(ParentActivity.getResources().getDrawable(R.drawable.menu_management_machine_monitoring_bg_dark),null,
-						ParentActivity.getResources().getString(string.Software_Data_Date_Stamp),"" , ""));
+						ParentActivity.getResources().getString(string.Software_Data_Date_Stamp),"-" , ""));
 				adapter.addItem(new IconTextItemVersion(ParentActivity.getResources().getDrawable(R.drawable.menu_management_machine_monitoring_bg_light),null,
-						ParentActivity.getResources().getString(string.ECM_Identifier),"" , ""));
+						ParentActivity.getResources().getString(string.ECM_Identifier),"-" , ""));
 				adapter.addItem(new IconTextItemVersion(ParentActivity.getResources().getDrawable(R.drawable.menu_management_machine_monitoring_bg_dark),null,
-						ParentActivity.getResources().getString(string.Product_ID),"" , ""));
+						ParentActivity.getResources().getString(string.Product_ID),"-" , ""));
 			}
 			adapter.notifyDataSetChanged();		
 			

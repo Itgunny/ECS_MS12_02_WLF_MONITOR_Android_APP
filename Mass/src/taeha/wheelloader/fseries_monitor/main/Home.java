@@ -75,7 +75,7 @@ public class Home extends Activity {
 	public static final int VERSION_LOW 		= 0;
 	public static final int VERSION_SUB_HIGH 	= 0;
 	public static final int VERSION_SUB_LOW 	= 9;
-	public static final int VERSION_TAEHA		= 1;
+	public static final int VERSION_TAEHA		= 2;
 	////1.0.2.3
 	// UI B 안 최초 적용 2014.12.10
 	////1.0.2.4
@@ -614,7 +614,7 @@ public class Home extends Activity {
 	// 2. cluster hidden version 추가
 	// 3. FN 키로 멀티미디어 진입할 경우 가운데 터치로 종료되지 않는 현상 개선
 	// 4. PDF, 멀티미디어, 스마트터미널 외 다른 어플 ESC로 종료되지 않는 현상 개선(환경설정, File Viewer 등)
-	//// v2.0.0.9 예정
+	//// v2.0.0.90
 	// 1. 붐 각도 보정 이미지 변경(겹치는 현상으로 인해 옆으로 이동)
 	// 2. 장비 정보에서 표시되는 프로그램 버전을 3자리까지만 표시, 상세화면(hidden)에서는 전체자리 수 출력
 	// 3. 패스워드 입력창 표시 * 또는 숫자 중 택 1 할 수 있도록 개선
@@ -633,6 +633,23 @@ public class Home extends Activity {
 	//  - 과거 고장 : MCU담당과 협의 후 추후 구현
 	// 3. HCEPGN 65373 Air Conditioner Status : 관리자 메뉴 - 장비 모니터링에 표시 항목(FATC Setting Temperature (Celsius)) 추가
 	// 4. HCEPGN 65519 Ambient Conditions : 관리자 메뉴 - 장비 모니터링에 표시 항목(Ambient Temperature, In-cab Temperature) 추가
+	//// v2.0.0.83(1번항목때문에 v2.0.0.82에서 임시 수정)
+	// 1. TextViewXAxisFlipAnimation 기울어진 문자일 경우 떨림 현상 임시 개선
+	// 2. H/W Test LEFT+RIGHT 키로 이동
+	// 3. H/W Test 들어갈 때 잘 들어가지지 않는 현상 개선
+	// 4. WeighingErrorDetect 초기값 ON으로 변경
+	// 5. RevF.04.01 적용
+	//// v2.0.0.92
+	// 1. TextViewXAxisFlipAnimation 기울어진 문자일 경우 떨림 현상 개선
+	// 2. RPM 게이지 애니메이션 (바늘 움직임)
+	//	- 변경 전 : 최초 부팅시 + 타 화면에서 메인화면 집입 시
+	//	- 변경 후 : 최초 부팅시
+	// 3. RevF.04.01 적용
+	// 4. MenuList textView Title, Data clearAnimation 추가
+	// 5. TCU, ECM은 Model 및 Manufacture Date가 없음!! Hidden페이지에서 삭제(실차장비확인요망)
+	// 6. 장비정보 빈칸표시는 모두 '-'로 통일.
+	// 7. Loading 이미지 추가(실차에서는 안보일듯)
+	// 8. 미라캐스트 실행 및 종료 시 WiFi OFF
 	//////////////////////////////////////////////////////////////////////////////////////
 	
 	// TAG
@@ -1250,6 +1267,7 @@ public class Home extends Activity {
 
 	// Flag
 	public boolean AnimationRunningFlag;
+	public boolean rpmRunningFlag;
 	
 	// Data
 	int PreHeat;
@@ -1484,6 +1502,8 @@ public class Home extends Activity {
 		// --, 150326 bwk		
 		FrontAxleWarningFlag = false;
 		RearAxleWarningFlag = false;
+		
+		rpmRunningFlag = true;
 		
 		_CrashApplication = (CrashApplication)getApplicationContext();		
 	}
@@ -1830,6 +1850,9 @@ public class Home extends Activity {
 		edit.commit();
 		Log.d(TAG,"SaveCID");
 		Log.d(TAG,"length : " + Integer.toString(_componentbasicinformation.length));
+		
+		MachineSerialNumber = 0xffffff;
+		SaveMachineSerialNumber();
 	}
 	public void CheckCID(){
 		Log.d(TAG,"CheckCID");
@@ -1846,47 +1869,57 @@ public class Home extends Activity {
 		}
 		else
 		{
-			if(CAN1Comm.Get_ComponentCode_1699_PGN65330() != CAN1CommManager.STATE_COMPONENTCODE_MCU)
-			{
-				Log.d(TAG,"MCU CID Request");
-				CAN1Comm.Set_TargetSourceAddress(CAN1CommManager.SA_MCU);
-				CAN1Comm.TxCANToMCU(0xEA);
-			}
-			if(CAN1Comm.Get_ComponentCode_1699_PGN65330_CLUSTER() != CAN1CommManager.STATE_COMPONENTCODE_CLUSTER)
-			{
-				Log.d(TAG,"Cluster CID Request");
-				CAN1Comm.Set_TargetSourceAddress(CAN1CommManager.SA_CLUSTER);
-				CAN1Comm.TxCANToMCU(0xEA);
-			}
-			if(CAN1Comm.Get_ComponentCode_1699_PGN65330_TCU() != CAN1CommManager.STATE_COMPONENTCODE_TCU)
-			{
-				Log.d(TAG,"TCU CID Request");
-				CAN1Comm.Set_TargetSourceAddress(CAN1CommManager.SA_TCU);
-				CAN1Comm.TxCANToMCU(0xEA);
-			}
-			if(CAN1Comm.Get_ComponentCode_1699_PGN65330_ECM() != CAN1CommManager.STATE_COMPONENTCODE_ECM)
-			{
-				Log.d(TAG,"ECM CID Request");
-				CAN1Comm.Set_TargetSourceAddress(CAN1CommManager.SA_ECM);
-				CAN1Comm.TxCANToMCU(0xEA);
-			}
 			if(CAN1Comm.Get_ComponentCode_1699_PGN65330_BKCU() != CAN1CommManager.STATE_COMPONENTCODE_SMK)
 			{
 				Log.d(TAG,"BKCU CID Request");
 				CAN1Comm.Set_TargetSourceAddress(CAN1CommManager.SA_BKCU);
 				CAN1Comm.TxCANToMCU(0xEA);
+				
+				try {
+					Thread.sleep(200);
+				} catch (InterruptedException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 			}
 			if(CAN1Comm.Get_ComponentCode_1699_PGN65330_EHCU() != CAN1CommManager.STATE_COMPONENTCODE_EHCU)
 			{
 				Log.d(TAG,"EHCU CID Request");
 				CAN1Comm.Set_TargetSourceAddress(CAN1CommManager.SA_EHCU);
 				CAN1Comm.TxCANToMCU(0xEA);
+				
+				try {
+					Thread.sleep(200);
+				} catch (InterruptedException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 			}
 			if(CAN1Comm.Get_ComponentCode_1699_PGN65330_RMCU() != CAN1CommManager.STATE_COMPONENTCODE_RMCU)
 			{
 				Log.d(TAG,"RMCU CID Request");
 				CAN1Comm.Set_TargetSourceAddress(CAN1CommManager.SA_RMCU);
 				CAN1Comm.TxCANToMCU(0xEA);
+				
+				try {
+					Thread.sleep(200);
+				} catch (InterruptedException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+			if(CAN1Comm.Get_ComponentCode_1699_PGN65330_ACU() != CAN1CommManager.STATE_COMPONENTCODE_AIRCONCONTROLLER)
+			{
+				Log.d(TAG,"ACU CID Request");
+				CAN1Comm.Set_TargetSourceAddress(CAN1CommManager.SA_ACU);
+				CAN1Comm.TxCANToMCU(0xEA);
+				
+				try {
+					Thread.sleep(200);
+				} catch (InterruptedException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 			}
 		}
 	}
@@ -4571,7 +4604,7 @@ public class Home extends Activity {
 		Temp = new int[Index2];
 		
 		if(bAsterisk == false){
-			strModel = "";
+			strModel = "-";
 		}else{
 			for(int i = 0; i < Index2; i++){
 				Model[i] = (char)BasicInfo[i+Index+1];
@@ -4584,14 +4617,13 @@ public class Home extends Activity {
 	public String GetProgramVersion(byte[] BasicInfo)throws NullPointerException{
 		int nVersion;
 		int VersionHigh, VersionLow;
-		float fVersion;
 		String strVer;
 		nVersion = (BasicInfo[3] & 0xFF);
 		VersionHigh = ((nVersion & 0xF0) >> 4);
 		VersionLow = (nVersion & 0x0F);
 
 		if(VersionLow > 10 && VersionHigh >= 15){
-			strVer = "";
+			strVer = "-";
 		}else{
 			strVer = Integer.toString(VersionHigh) + "." + Integer.toString(VersionLow);
 		}

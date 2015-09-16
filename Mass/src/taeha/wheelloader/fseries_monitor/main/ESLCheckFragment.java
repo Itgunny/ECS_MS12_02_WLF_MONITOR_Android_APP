@@ -27,6 +27,7 @@ public class ESLCheckFragment extends ParentFragment{
 	//////////////////////////////////////////////////
 	//RESOURCE////////////////////////////////////////
 	ImageView imgViewSMK;
+	ImageView imgViewLoading;
 	//////////////////////////////////////////////////
 	
 	//VALUABLE////////////////////////////////////////
@@ -43,6 +44,7 @@ public class ESLCheckFragment extends ParentFragment{
 	int RecSMKFlag;
 	int RecPWFlag;
 	int TimeoutIndex;
+	int Count = 0;
 	
 	// Handler
 	Handler HandleSMKImgChange;
@@ -125,12 +127,14 @@ public class ESLCheckFragment extends ParentFragment{
 		// TODO Auto-generated method stub
 
 		imgViewSMK = (ImageView)mRoot.findViewById(R.id.imageView_main_esl_check);
+		imgViewLoading = (ImageView)mRoot.findViewById(R.id.imageView_main_loading);
 	}
 	
 	protected void InitValuables() {
 		// TODO Auto-generated method stub
 		super.InitValuables();
 		RecESLFlag = 0;
+		Count = 0;
 		TimeoutIndex = 0;
 		SmartKeyUse = ParentActivity.SmartKeyUse;
 
@@ -150,9 +154,28 @@ public class ESLCheckFragment extends ParentFragment{
 	@Override
 	protected void UpdateUI() {
 		// TODO Auto-generated method stub
-	
+		DisplayLoading();
 	}
 	/////////////////////////////////////////////////////////////////////
+	public void DisplayLoading(){
+		switch(Count)
+		{
+			case 0:	imgViewLoading.setBackgroundResource(R.drawable.loading_01); break;
+			case 1:	imgViewLoading.setBackgroundResource(R.drawable.loading_02); break;
+			case 2:	imgViewLoading.setBackgroundResource(R.drawable.loading_03); break;
+			case 3:	imgViewLoading.setBackgroundResource(R.drawable.loading_04); break;
+			case 4:	imgViewLoading.setBackgroundResource(R.drawable.loading_05); break;
+			case 5:	imgViewLoading.setBackgroundResource(R.drawable.loading_06); break;
+			case 6:	imgViewLoading.setBackgroundResource(R.drawable.loading_07); break;
+			case 7:	imgViewLoading.setBackgroundResource(R.drawable.loading_08); break;
+			case 8:	imgViewLoading.setBackgroundResource(R.drawable.loading_09); break;
+			case 9:	imgViewLoading.setBackgroundResource(R.drawable.loading_10); break;
+			case 10:	imgViewLoading.setBackgroundResource(R.drawable.loading_11); break;
+			case 11:	imgViewLoading.setBackgroundResource(R.drawable.loading_12); break;
+		}
+		if(++Count > 11)
+			Count = 0;
+	}
 	public void CheckSMK(){
 		// ++, 150325 bwk
 //		if(SmartKeyUse == CAN1CommManager.DATA_STATE_SMARTKEY_USE_ON){

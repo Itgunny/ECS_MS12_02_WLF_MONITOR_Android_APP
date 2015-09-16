@@ -209,12 +209,24 @@ public class VersionInfoDetailFragment extends ParentFragment{
 			public void run() {
 				// TODO Auto-generated method stub
 				if(flag == true){
-					layoutModel.setVisibility(View.VISIBLE);
-					layoutDate.setVisibility(View.VISIBLE);
-					RelativeLayout.LayoutParams params = (RelativeLayout.LayoutParams)listView.getLayoutParams();
-					params.addRule(RelativeLayout.ALIGN_PARENT_TOP,0);
-					listView.setLayoutParams(params); //causes layout update
-					ShowHiddenPage();
+					if((ParentActivity.ScreenIndex != Home.SCREEN_STATE_MENU_MONITORING_VERSIONINFO_TCU)
+							&& (ParentActivity.ScreenIndex != Home.SCREEN_STATE_MENU_MONITORING_VERSIONINFO_ECM)){
+						layoutModel.setVisibility(View.VISIBLE);
+						layoutDate.setVisibility(View.VISIBLE);
+						RelativeLayout.LayoutParams params = (RelativeLayout.LayoutParams)listView.getLayoutParams();
+						params.addRule(RelativeLayout.ALIGN_PARENT_TOP,0);
+						listView.setLayoutParams(params); //causes layout update
+						ShowHiddenPage();
+					}
+					else
+					{
+						layoutModel.setVisibility(View.INVISIBLE);
+						layoutDate.setVisibility(View.INVISIBLE);
+						RelativeLayout.LayoutParams params = (RelativeLayout.LayoutParams)listView.getLayoutParams();
+						params.addRule(RelativeLayout.ALIGN_PARENT_TOP,1);
+						listView.setLayoutParams(params); //causes layout update
+						ShowHiddenPage();
+					}
 				}
 					
 				else{

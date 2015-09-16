@@ -5,6 +5,7 @@ import java.util.TimerTask;
 
 import taeha.wheelloader.fseries_monitor.main.Home;
 import android.content.Context;
+import android.util.Log;
 import android.view.View;
 
 public class GaugerpmAnimation extends View{
@@ -19,6 +20,10 @@ public class GaugerpmAnimation extends View{
 	private float fDegree;
 	private int nDegree;
 	private int nRPM;
+	private int nCurrentPosition;
+	private int nEndPosition;
+	
+	private boolean InitFlag = false;
 
 	////// Animation Speed////
 	final static private int PointSpeed = 15;
@@ -28,7 +33,7 @@ public class GaugerpmAnimation extends View{
 	// Timer
 	private Timer viewrpmPointerTimer;
 
-	public GaugerpmAnimation(Context _context, View Point) {
+	public GaugerpmAnimation(Context _context, View Point, int _rpm) {
 		super(_context);
 		// TODO Auto-generated constructor stub
 
@@ -36,6 +41,16 @@ public class GaugerpmAnimation extends View{
 		context = _context;
 		ParentActivity = (Home) _context;
 
+		Setrpm(_rpm);
+		if(ParentActivity.rpmRunningFlag == true)
+		{
+			nCurrentPosition = 0;
+			ParentActivity.rpmRunningFlag = false;
+		}
+		else
+		{
+			nCurrentPosition = GetDegree();
+		}
 		StartPointerTimer();
 
 	}
@@ -101,14 +116,11 @@ public class GaugerpmAnimation extends View{
 	}
 
 	public class viewrpmPointerTimerClass extends TimerTask{
-		private int nCurrentPosition;
-		private int nEndPosition;
 		@Override
 		public void run() {		
 			ParentActivity.runOnUiThread(new Runnable() {
 				@Override
 				public void run() {
-
 					nEndPosition = GetDegree();
 
 					if(nCurrentPosition > nEndPosition){		// Increase
@@ -122,7 +134,12 @@ public class GaugerpmAnimation extends View{
 						viewrpmPoint.setPivotY(120);
 						viewrpmPoint.setRotation(nCurrentPosition);
 					}else{
-
+						if(InitFlag == false){
+							viewrpmPoint.setPivotX(20);
+							viewrpmPoint.setPivotY(120);
+							viewrpmPoint.setRotation(nCurrentPosition);
+							InitFlag = true;
+						}
 					}
 
 				}

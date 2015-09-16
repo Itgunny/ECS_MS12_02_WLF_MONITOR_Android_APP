@@ -106,11 +106,13 @@ public class MainACenterFragment extends ParentFragment{
 	protected void InitValuables() {
 		// TODO Auto-generated method stub
 		super.InitValuables();
+		
+		RPM = CAN1Comm.Get_EngineSpeed_310_PGN65431();
 
 		CursurDisplayDetail(ParentActivity._MainABaseFragment.CursurIndex);
 	}
 	public void InitAnimation(){
-		rpmAnimation = new GaugerpmAnimation(ParentActivity, imgVeiwrpmGuage);
+		rpmAnimation = new GaugerpmAnimation(ParentActivity, imgVeiwrpmGuage, RPM);
 	}
 	boolean Temp = false;
 	@Override

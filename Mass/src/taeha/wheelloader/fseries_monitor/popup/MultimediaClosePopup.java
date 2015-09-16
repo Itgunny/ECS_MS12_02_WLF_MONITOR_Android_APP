@@ -11,6 +11,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
+import android.net.wifi.WifiManager;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -142,6 +143,19 @@ public class MultimediaClosePopup extends ParentPopup {
 		}
 		//--, 150715 cjg
 		CAN1Comm.SetMultimediaFlag(false);
+		String service = Context.WIFI_SERVICE;
+		final WifiManager wifi = (WifiManager)ParentActivity.getSystemService(service);
+		if(wifi.isWifiEnabled()){
+			wifi.setWifiEnabled(false);
+			synchronized (wifi) {
+				try {
+					wifi.wait(500);
+				} catch (InterruptedException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+		}
 		Intent intent;
 		intent = ParentActivity.getPackageManager().getLaunchIntentForPackage("com.powerone.wfd.sink");
 		if(intent != null){

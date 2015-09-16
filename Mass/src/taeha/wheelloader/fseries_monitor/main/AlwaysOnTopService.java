@@ -12,6 +12,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.PixelFormat;
+import android.net.wifi.WifiManager;
 import android.os.IBinder;
 import android.os.SystemClock;
 import android.util.Log;
@@ -79,6 +80,11 @@ public class AlwaysOnTopService extends Service{
 				}else if(CommService.miracastFlag == true){
 					Runtime runtime = Runtime.getRuntime();
 					Process process;
+					//++, 150910 cjg
+					String service = Context.WIFI_SERVICE;
+					final WifiManager wifi = (WifiManager)getSystemService(service);
+					wifi.setWifiEnabled(false);
+					//--, 150910 cjg
 					try{
 						String cmd = "am force-stop com.powerone.wfd.sink";
 						process = runtime.exec(cmd);

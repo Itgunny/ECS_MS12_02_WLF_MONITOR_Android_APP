@@ -1,6 +1,8 @@
 package taeha.wheelloader.fseries_monitor.main.b;
 
+import android.content.Context;
 import android.content.Intent;
+import android.net.wifi.WifiManager;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -136,6 +138,19 @@ public class MainBLeftDownQuickFragment extends ParentFragment{
 			ParentActivity.OldScreenIndex = ParentActivity.SCREEN_STATE_MAIN_B_QUICK_TOP;
 			ParentActivity._MultimediaClosePopup.show();
 		}else{
+			String service = Context.WIFI_SERVICE;
+			final WifiManager wifi = (WifiManager)ParentActivity.getSystemService(service);
+			if(wifi.isWifiEnabled()){
+				wifi.setWifiEnabled(false);
+				synchronized (wifi) {
+					try {
+						wifi.wait(500);
+					} catch (InterruptedException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+				}
+			}
 			Intent intent;
 			intent = ParentActivity.getPackageManager().getLaunchIntentForPackage("com.powerone.wfd.sink");
 			if(intent != null){
