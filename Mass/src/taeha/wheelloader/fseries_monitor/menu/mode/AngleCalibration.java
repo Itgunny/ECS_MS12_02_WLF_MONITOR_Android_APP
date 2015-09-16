@@ -284,8 +284,14 @@ public class AngleCalibration extends ParentFragment{
 		textViewAngleTitle.setVisibility(View.VISIBLE);
 		textViewAngleColon.setVisibility(View.VISIBLE);
 	}
-	public void AngleDisplay(int Angle, int AngleDot){
-		textViewAngle.setText(Integer.toString(Angle) + "." + Integer.toString(AngleDot) + "━");
+//	public void AngleDisplay(int Angle, int AngleDot){
+//		textViewAngle.setText(Integer.toString(Angle) + "." + Integer.toString(AngleDot) + "━");
+//	}
+	public void AngleDisplay(int Sign, int Angle, int AngleDot){
+		if(Sign == 1)
+			textViewAngle.setText("-" + Integer.toString(Angle) + "." + Integer.toString(AngleDot) + "━");
+		else
+			textViewAngle.setText(Integer.toString(Angle) + "." + Integer.toString(AngleDot) + "━");
 	}
 	public void CalStepDisplay(final int Step){
 			
@@ -325,6 +331,7 @@ public class AngleCalibration extends ParentFragment{
 		int	 BoomAngleDot;
 		int	 BoomAngleVolt = CAN1Comm.Get_BoomLinkAngleSensorSignalVoltage_728_PGN65395();
 		int  BoomVolt_to_Angle;
+		int	 BoomSign=0;
 
 		if( BoomAngle == 0xffff )
 			BoomAngle = 1800;
@@ -356,7 +363,8 @@ public class AngleCalibration extends ParentFragment{
 				BoomAngle = 1800 - BoomAngle;
 				BoomAngleDot = BoomAngle % 10;
 				BoomAngle /= 10;
-				BoomAngle *= -1;
+				//BoomAngle *= -1;
+				BoomSign = 1;
 			}
 		}
 		else
@@ -400,12 +408,13 @@ public class AngleCalibration extends ParentFragment{
 					AngleError_Flag = 0;
 					BoomAngleDot = BoomAngle % 10;
 					BoomAngle /= 10;
-					BoomAngle *= -1;
+					//BoomAngle *= -1;
+					BoomSign = 1;
 				}	
 			}
 		}
 		
-		AngleDisplay(BoomAngle,BoomAngleDot);
+		AngleDisplay(BoomSign,BoomAngle,BoomAngleDot);
 
 	}
 

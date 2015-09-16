@@ -198,12 +198,18 @@ public class EHCUIOInfoFragment extends ParentFragment{
 		BoomBucketAngleCurrAngle(BoomAngle);
 	}
 	/////////////////////////////////////////////////////////////////////
-	public void AngleDisplay(int Angle, int AngleDot){
-		textviewBoomAngle.setText(Integer.toString(Angle) + "." + Integer.toString(AngleDot) + "━");
+//	public void AngleDisplay(int Angle, int AngleDot){
+//		textviewBoomAngle.setText(Integer.toString(Angle) + "." + Integer.toString(AngleDot) + "━");
+//	}
+	public void AngleDisplay(int Sign, int Angle, int AngleDot){
+		if(Sign == 1)
+			textviewBoomAngle.setText("-" + Integer.toString(Angle) + "." + Integer.toString(AngleDot) + "━");
+		else
+			textviewBoomAngle.setText(Integer.toString(Angle) + "." + Integer.toString(AngleDot) + "━");
 	}
-	
 	public void BoomBucketAngleCurrAngle(int _BoomAngle){
 		int BoomAngleDot = 0;
+		int BoomSign = 0;
 
 		if( _BoomAngle == 0xffff )
 			_BoomAngle = 1800;
@@ -224,10 +230,11 @@ public class EHCUIOInfoFragment extends ParentFragment{
 			_BoomAngle = 1800 - _BoomAngle;
 			BoomAngleDot = _BoomAngle % 10;
 			_BoomAngle /= 10;
-			_BoomAngle *= -1;
+			//_BoomAngle *= -1;
+			BoomSign = 1;
 		}
 		
-		AngleDisplay(_BoomAngle,BoomAngleDot);
+		AngleDisplay(BoomSign,_BoomAngle,BoomAngleDot);
 
 	}
 	/////////////////////////////////////////////////////////////////////	
