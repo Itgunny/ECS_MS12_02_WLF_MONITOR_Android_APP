@@ -650,6 +650,8 @@ public class Home extends Activity {
 	// 6. 장비정보 빈칸표시는 모두 '-'로 통일.
 	// 7. Loading 이미지 추가(실차에서는 안보일듯)
 	// 8. 미라캐스트 실행 및 종료 시 WiFi OFF
+	////
+	// 1. UserSwitching 옵션 적용 바람!!!!
 	//////////////////////////////////////////////////////////////////////////////////////
 	
 	// TAG
@@ -1869,7 +1871,7 @@ public class Home extends Activity {
 		}
 		else
 		{
-			if(CAN1Comm.Get_ComponentCode_1699_PGN65330_BKCU() != CAN1CommManager.STATE_COMPONENTCODE_SMK)
+			if(CAN1Comm.Get_ComponentCode_1699_PGN65330_BKCU() != CAN1CommManager.STATE_COMPONENTCODE_BKCU)
 			{
 				Log.d(TAG,"BKCU CID Request");
 				CAN1Comm.Set_TargetSourceAddress(CAN1CommManager.SA_BKCU);
@@ -1908,19 +1910,19 @@ public class Home extends Activity {
 					e.printStackTrace();
 				}
 			}
-			if(CAN1Comm.Get_ComponentCode_1699_PGN65330_ACU() != CAN1CommManager.STATE_COMPONENTCODE_AIRCONCONTROLLER)
-			{
-				Log.d(TAG,"ACU CID Request");
-				CAN1Comm.Set_TargetSourceAddress(CAN1CommManager.SA_ACU);
-				CAN1Comm.TxCANToMCU(0xEA);
-				
-				try {
-					Thread.sleep(200);
-				} catch (InterruptedException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-			}
+//			if(CAN1Comm.Get_ComponentCode_1699_PGN65330_ACU() != CAN1CommManager.STATE_COMPONENTCODE_AIRCONCONTROLLER)
+//			{
+//				Log.d(TAG,"ACU CID Request");
+//				CAN1Comm.Set_TargetSourceAddress(CAN1CommManager.SA_ACU);
+//				CAN1Comm.TxCANToMCU(0xEA);
+//				
+//				try {
+//					Thread.sleep(200);
+//				} catch (InterruptedException e) {
+//					// TODO Auto-generated catch block
+//					e.printStackTrace();
+//				}
+//			}
 		}
 	}
 	public void SendCID(){

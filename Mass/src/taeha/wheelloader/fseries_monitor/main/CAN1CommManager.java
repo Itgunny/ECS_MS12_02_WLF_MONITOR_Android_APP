@@ -376,6 +376,7 @@ public class CAN1CommManager extends ICAN1CommManager.Stub{		// ttySAC1(Linux), 
 	public static final int STATE_COMPONENTCODE_HAPTIC								= 16;
 	public static final int STATE_COMPONENTCODE_CLUSTER								= 21;
 	public static final int STATE_COMPONENTCODE_RCU									= 25;
+	public static final int STATE_COMPONENTCODE_BKCU								= 26;	
 	public static final int STATE_COMPONENTCODE_RMCU								= 31;
 	public static final int STATE_COMPONENTCODE_HCE_DT								= 41;
 	public static final int STATE_COMPONENTCODE_HCU									= 51;
