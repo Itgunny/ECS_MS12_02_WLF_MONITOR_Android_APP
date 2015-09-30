@@ -73,9 +73,12 @@ public class MainACenterFragment extends ParentFragment{
 //		ParentActivity.ScreenIndex = ParentActivity.SCREEN_STATE_MAIN_A_TOP;
 		ParentActivity.CheckAttachmentUnlock();
 		
-		ParentActivity.FrontAxleWarningFlag = false;
-		ParentActivity.RearAxleWarningFlag = false;
-		
+		if(ParentActivity.AxleWarningFlag != true)
+		{
+			Log.d(TAG, "AxleInit ");
+			ParentActivity.FrontAxleWarningFlag = false;
+			ParentActivity.RearAxleWarningFlag = false;
+		}	
 	}
 
 	@Override

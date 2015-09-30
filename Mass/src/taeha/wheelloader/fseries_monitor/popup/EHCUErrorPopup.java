@@ -31,7 +31,7 @@ public class EHCUErrorPopup extends ParentPopup{
 	
 	//VALUABLE////////////////////////////////////////
 	int JoystickSteeringEnableFailCondition;
-	int Safety_CPU_Error;		// ++, --, 150209 bwk
+	public int Safety_CPU_Error;		// ++, --, 150209 bwk
 	int	JoystickSteeringActiveStatus;
 	//////////////////////////////////////////////////
 	
@@ -64,7 +64,7 @@ public class EHCUErrorPopup extends ParentPopup{
 		EHCUErrInitDisplay(ParentActivity.OldJoystickSteeringEnableFailCondition);	// ++, --, 150210 bwk
 		
 		ParentActivity.bEHCUErrPopup = true;
-		ParentActivity.ScreenIndex = ParentActivity.SCREEN_STATE_EHCUERR_POPUP;
+		ParentActivity.ScreenIndex = Home.SCREEN_STATE_EHCUERR_POPUP;
 	}
 	// ++, 150209 bwk
 	@Override
@@ -90,7 +90,10 @@ public class EHCUErrorPopup extends ParentPopup{
 		// TODO Auto-generated method stub
 		super.dismiss();
 		ParentActivity.bEHCUErrPopup = false;
-		ParentActivity.ScreenIndex = ParentActivity.OldScreenIndex;
+		if(ParentActivity.ScreenIndex != Home.SCREEN_STATE_MAIN_ENDING)
+			ParentActivity.ScreenIndex = ParentActivity.OldScreenIndex;
+		else
+			Log.d(TAG, "Ending!!!");
 //		ParentActivity.OldJoystickSteeringEnableFailCondition = JoystickSteeringEnableFailCondition;	// ++, --, 150212 bwk
 	}
 	

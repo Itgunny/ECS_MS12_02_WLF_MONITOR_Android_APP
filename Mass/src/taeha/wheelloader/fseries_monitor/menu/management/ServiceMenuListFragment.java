@@ -38,7 +38,7 @@ public class ServiceMenuListFragment extends MenuBodyList_ParentFragment{
 	int nSpeedLimit;
 	int SpeedLimitStatus;
 	static int CursurIndex = 1;
-	int nInputMachineSerial=0;
+	//int nInputMachineSerial=0;
 	//////////////////////////////////////////////////
 	
 	//Fragment////////////////////////////////////////
@@ -67,7 +67,7 @@ public class ServiceMenuListFragment extends MenuBodyList_ParentFragment{
 		ParentActivity.ScreenIndex = ParentActivity.SCREEN_STATE_MENU_MANAGEMENT_SERVICE_TOP;
 		ParentActivity._MenuBaseFragment._MenuListTitleFragment.SetTitleText(ParentActivity.getResources().getString(R.string.Service_Menu));
 		CursurDisplay(CursurIndex);
-		MachineSerialDisplay();
+//		MachineSerialDisplay();
 		return mRoot;
 	}
 	
@@ -93,7 +93,7 @@ public class ServiceMenuListFragment extends MenuBodyList_ParentFragment{
 	protected void InitList() {
 		// TODO Auto-generated method stub
 		int Hourmeter = CAN1Comm.Get_Hourmeter_1601_PGN65433()/3600;
-		nInputMachineSerial = 0;
+		//nInputMachineSerial = 0;
 		
 		Log.d(TAG, "CAN1Comm.Get_TripTime_849_PGN65344()"+CAN1Comm.Get_TripTime_849_PGN65344());
 		Log.d(TAG, "Hourmeter="+Hourmeter);
@@ -107,27 +107,27 @@ public class ServiceMenuListFragment extends MenuBodyList_ParentFragment{
 		setListTitle3(ParentActivity.getResources().getString(string.Weighing_System_Compensation));
 		
 		if(CAN1Comm.Get_ComponentCode_1699_PGN65330_EHCU() != CAN1CommManager.STATE_COMPONENTCODE_EHCU){
-			setClickableList4(true);
-			setListTitle4(ParentActivity.getResources().getString(string.Machine_Serial_Number));
-			if(Hourmeter < 20)
-				nInputMachineSerial = 4;
-			else
-				nInputMachineSerial = 1;
+//			setClickableList4(true);
+//			setListTitle4(ParentActivity.getResources().getString(string.Machine_Serial_Number));
+//			if(Hourmeter < 20)
+//				nInputMachineSerial = 4;
+//			else
+//				nInputMachineSerial = 1;
 		}else{
 			setClickableList4(true);
 			setListTitle4(ParentActivity.getResources().getString(string.EHCU_IO_Information));
 
-			setClickableList5(true);
-			setListTitle5(ParentActivity.getResources().getString(string.Machine_Serial_Number));	
-
-			if(Hourmeter < 20)
-				nInputMachineSerial = 5;
-			else
-				nInputMachineSerial = 2;
+//			setClickableList5(true);
+//			setListTitle5(ParentActivity.getResources().getString(string.Machine_Serial_Number));	
+//
+//			if(Hourmeter < 20)
+//				nInputMachineSerial = 5;
+//			else
+//				nInputMachineSerial = 2;
 		}
 		
-		if((nInputMachineSerial == 1) || (nInputMachineSerial == 2))
-			setListColor(nInputMachineSerial+3, ParentActivity.getResources().getColor(color.main_title_gray));
+//		if((nInputMachineSerial == 1) || (nInputMachineSerial == 2))
+//			setListColor(nInputMachineSerial+3, ParentActivity.getResources().getColor(color.main_title_gray));
 		
 	}
 
@@ -177,13 +177,13 @@ public class ServiceMenuListFragment extends MenuBodyList_ParentFragment{
 		else
 			ParentActivity.StartAnimationRunningTimer();
 		
-		if(nInputMachineSerial == 4)
-		{
-			ParentActivity._MenuBaseFragment.showBodyChangeMachineSerialAnimation();
-			CursurIndex = 4;
-			CursurDisplay(CursurIndex);		
-		}
-		else if(nInputMachineSerial != 1)
+//		if(nInputMachineSerial == 4)
+//		{
+//			ParentActivity._MenuBaseFragment.showBodyChangeMachineSerialAnimation();
+//			CursurIndex = 4;
+//			CursurDisplay(CursurIndex);		
+//		}
+//		else if(nInputMachineSerial != 1)
 		{
 			ParentActivity._MenuBaseFragment.showBodyEHCUIOInfoAnimation();
 			CursurIndex = 4;
@@ -210,12 +210,12 @@ public class ServiceMenuListFragment extends MenuBodyList_ParentFragment{
 	@Override
 	public void ClickList5() {
 		// TODO Auto-generated method stub
-		if(nInputMachineSerial == 5)
-		{
-			ParentActivity._MenuBaseFragment.showBodyChangeMachineSerialAnimation();
-			CursurIndex = 5;
-			CursurDisplay(CursurIndex);
-		}
+//		if(nInputMachineSerial == 5)
+//		{
+//			ParentActivity._MenuBaseFragment.showBodyChangeMachineSerialAnimation();
+//			CursurIndex = 5;
+//			CursurDisplay(CursurIndex);
+//		}
 		
 	}
 
@@ -252,30 +252,30 @@ public class ServiceMenuListFragment extends MenuBodyList_ParentFragment{
 	public void SpeedDisplay(int _data, int _unit){
 
 	}
-	public void MachineSerialDisplay(){
-		if(ParentActivity.MachineSerialNumber != 0xffffff)
-		{
-			switch(nInputMachineSerial)
-			{
-				case 1:	case 4:
-					setListData4(Integer.toString(ParentActivity.MachineSerialNumber));
-					break;
-				case 2: case 5:
-					setListData5(Integer.toString(ParentActivity.MachineSerialNumber));
-					break;
-			}
-		}
-		
-	}	
+//	public void MachineSerialDisplay(){
+//		if(ParentActivity.MachineSerialNumber != 0xffffff)
+//		{
+//			switch(nInputMachineSerial)
+//			{
+//				case 1:	case 4:
+//					setListData4(Integer.toString(ParentActivity.MachineSerialNumber));
+//					break;
+//				case 2: case 5:
+//					setListData5(Integer.toString(ParentActivity.MachineSerialNumber));
+//					break;
+//			}
+//		}
+//		
+//	}	
 	/////////////////////////////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////////
+	// 장비 호기 수 추가되면 Left, Right 다시 구현 해야 함!!!
 	public void ClickLeft(){
 		switch (CursurIndex) {
 		case 0:
 			
 			break;
 		case 1:
-			CursurIndex = 4;
 			if(CAN1Comm.Get_ComponentCode_1699_PGN65330_EHCU() != CAN1CommManager.STATE_COMPONENTCODE_EHCU){
 				CursurIndex = 3;
 			}else{

@@ -63,6 +63,7 @@ public class MenuModeETCFragment extends MenuBodyList_ParentFragment{
 		Log.d(TAG, "onCreateView");
 
 		InitList();
+		ParentActivity.OldScreenIndex = Home.SCREEN_STATE_MENU_MODE_ETC_TOP;
 		ParentActivity.ScreenIndex = Home.SCREEN_STATE_MENU_MODE_ETC_TOP;
 		ParentActivity._MenuBaseFragment._MenuModeFragment.setFirstScreen(Home.SCREEN_STATE_MENU_MODE_ETC_TOP);
 		CursurDisplay(CursurIndex);

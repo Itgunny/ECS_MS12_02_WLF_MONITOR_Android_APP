@@ -57,7 +57,8 @@ public class MenuPreferenceFragment extends MenuBodyList_ParentFragment{
 		
 		InitList();
 		ParentActivity._MenuBaseFragment._MenuListTitleFragment.setBackButtonEnable(false);
-		ParentActivity.ScreenIndex = ParentActivity.SCREEN_STATE_MENU_PREFERENCE_TOP;
+		ParentActivity.ScreenIndex = Home.SCREEN_STATE_MENU_PREFERENCE_TOP;
+		ParentActivity.OldScreenIndex = Home.SCREEN_STATE_MENU_PREFERENCE_TOP;
 		ParentActivity._MenuBaseFragment._MenuListTitleFragment.SetTitleText(ParentActivity.getResources().getString(R.string.Preference));
 		CursurDisplay(CursurIndex);
 		return mRoot;

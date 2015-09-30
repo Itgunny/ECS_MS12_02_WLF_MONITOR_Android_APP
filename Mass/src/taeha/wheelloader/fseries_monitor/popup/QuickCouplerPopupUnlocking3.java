@@ -160,7 +160,7 @@ public class QuickCouplerPopupUnlocking3 extends ParentPopup{
 
 		if(((ParentActivity.ScreenIndex & Home.SCREEN_STATE_FILTER) == Home.SCREEN_STATE_MAIN_A_TOP)
 				 ||((ParentActivity.ScreenIndex & Home.SCREEN_STATE_FILTER) == Home.SCREEN_STATE_MAIN_B_TOP))
-		ParentActivity.setScreenIndex();
+			ParentActivity.setScreenIndex();
 		this.dismiss();
 	}
 

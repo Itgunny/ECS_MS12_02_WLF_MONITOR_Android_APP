@@ -3,12 +3,14 @@ package taeha.wheelloader.fseries_monitor.popup;
 import java.util.Timer;
 import java.util.TimerTask;
 
+import taeha.wheelloader.fseries_monitor.main.CAN1CommManager;
 import taeha.wheelloader.fseries_monitor.main.Home;
 import taeha.wheelloader.fseries_monitor.main.ParentPopup;
 import taeha.wheelloader.fseries_monitor.main.R;
 import android.content.Context;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.ViewGroup.LayoutParams;
@@ -52,10 +54,8 @@ public class AxleTempWarningPopup extends ParentPopup{
 		InitButtonListener();
 		InitValuable();
 		
-		if(ParentActivity.DisplayType == Home.DISPLAY_TYPE_A)
-			ParentActivity.ScreenIndex = Home.SCREEN_STATE_MAIN_B_LEFTUP_MACHINESTATUS_POPUP; 
-		else 
-			ParentActivity.ScreenIndex = Home.SCREEN_STATE_MAIN_A_LEFTUP_MACHINESTATUS_POPUP; 
+		ParentActivity.ScreenIndex = Home.SCREEN_STATE_AXLE_POPUP; 
+		ParentActivity.AxleWarningFlag = true;
 		
 		StartPopupOffTimer();
 	}
@@ -73,7 +73,8 @@ public class AxleTempWarningPopup extends ParentPopup{
 	@Override
 	public void dismiss() {
 		// TODO Auto-generated method stub
-		
+		ParentActivity.AxleWarningFlag = false;
+		CancelPopupOffTimer();
 		super.dismiss();
 	}
 
@@ -100,16 +101,37 @@ public class AxleTempWarningPopup extends ParentPopup{
 	}
 	///////////////////////////////////////////////////////////////////////////////
 	public void ClickCancel(){
+		//Log.d(TAG,"AxleClickCancel");
 		//Log.d(TAG,"AxleClickCancel:ScreenIndex="+Integer.toHexString(ParentActivity.ScreenIndex)+"OldScreenIndex="+Integer.toHexString(ParentActivity.OldScreenIndex));
 		
-		 if(((ParentActivity.ScreenIndex & Home.SCREEN_STATE_FILTER) == Home.SCREEN_STATE_MAIN_A_TOP)
-				 ||((ParentActivity.ScreenIndex & Home.SCREEN_STATE_FILTER) == Home.SCREEN_STATE_MAIN_B_TOP))
-			ParentActivity.setScreenIndex();
+//		 if(((ParentActivity.ScreenIndex & Home.SCREEN_STATE_FILTER) == Home.SCREEN_STATE_MAIN_A_TOP)
+//				 ||((ParentActivity.ScreenIndex & Home.SCREEN_STATE_FILTER) == Home.SCREEN_STATE_MAIN_B_TOP))
+//			ParentActivity.setScreenIndex();
+		if(ParentActivity.ScreenIndex != Home.SCREEN_STATE_AXLE_POPUP)
+		{
+			Log.d(TAG,"Crash!!!AxleClickCancel:ScreenIndex="+Integer.toHexString(ParentActivity.ScreenIndex)+"OldScreenIndex="+Integer.toHexString(ParentActivity.OldScreenIndex));
+		}
+		else
+		{
+			 ParentActivity.setScreenIndex();
+		}
 		
 		this.dismiss();
 	}
 	////////////////////////////////////////////////////////////////////////////////
 	//////////////////////////////////////////////////////////////////////
+	public void KeyButtonClick(final int key){
+		switch (key) {
+		case CAN1CommManager.ESC:
+			ClickESC();
+			break;
+		case CAN1CommManager.ENTER:
+			ClickEnter();
+			break;
+		default:
+			break;
+		}
+	}
 	public void ClickESC(){
 		ClickCancel();
 	}

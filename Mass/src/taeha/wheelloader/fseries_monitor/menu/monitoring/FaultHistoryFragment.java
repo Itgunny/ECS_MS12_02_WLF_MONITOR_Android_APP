@@ -56,6 +56,7 @@ public class FaultHistoryFragment extends MenuBodyList_ParentFragment{
 		
 		InitList();
 		ParentActivity._MenuBaseFragment._MenuListTitleFragment.setBackButtonEnable(true);
+		ParentActivity.OldScreenIndex = ParentActivity.SCREEN_STATE_MENU_MONITORING_FAULTHISTORY_TOP;
 		ParentActivity.ScreenIndex = ParentActivity.SCREEN_STATE_MENU_MONITORING_FAULTHISTORY_TOP;
 		ParentActivity._MenuBaseFragment._MenuListTitleFragment.SetTitleText(ParentActivity.getResources().getString(R.string.Fault_History));
 		CursurDisplay(CursurIndex);

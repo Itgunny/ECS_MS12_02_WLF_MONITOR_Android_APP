@@ -92,7 +92,7 @@
     <string name="ICCO_MODE">I.C.C.O. MODE</string>
     <string name="SHIFT_MODE">SHIFT MODE</string>
     <string name="TC_LOCK_UP">T.C. LOCK UP</string>
-    <string name="LATEST_HOURMETER">LATEST HOURMETER</string>
+    <string name="LATEST_HOURMETER">LATEST HOUR METER</string>
     <string name="AVERAGE_FUEL_RATE">AVERAGE FUEL RATE</string>
     <string name="TOTAL_ODOMETER">TOTAL ODOMETER</string>
     <string name="LATEST_ODOMETER">LATEST ODOMETER</string>
@@ -109,7 +109,7 @@
     <string name="AN">AN</string>
     <string name="AH">AH</string>
     <string name="Total_Hourmeter">Total Hourmeter</string>
-    <string name="Latest_Hourmeter">Latest Hourmeter</string>
+    <string name="Latest_Hourmeter">Latest Hour meter</string>
     <string name="Average_Fuel_Rate">Average Fuel Rate</string>
     <string name="Total_Odometer">Total Odometer</string>
     <string name="Latest_Odometer">Latest Odometer</string>

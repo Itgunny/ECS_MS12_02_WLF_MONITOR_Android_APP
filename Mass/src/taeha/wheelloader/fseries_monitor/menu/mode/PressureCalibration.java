@@ -219,9 +219,9 @@ public class PressureCalibration extends ParentFragment{
 			//ParentActivity._MainBBaseFragment.showWorkLoadAnimation();
 		}
 		
-		else if(ParentActivity.OldScreenIndex == ParentActivity.SCREEN_STATE_MENU_MODE_HYD_WORKLOAD_TOP)
+		else if(ParentActivity.OldScreenIndex == Home.SCREEN_STATE_MENU_MODE_HYD_WORKLOAD_TOP)
 		{
-			ParentActivity.OldScreenIndex = ParentActivity.SCREEN_STATE_MENU_MODE_ETC_CALIBRATION_PRESSURE_TOP;
+			ParentActivity.OldScreenIndex = Home.SCREEN_STATE_MENU_MODE_ETC_CALIBRATION_PRESSURE_TOP;
 			ParentActivity._MenuBaseFragment.showBodyWorkLoad();
 		}	
 		else
@@ -281,7 +281,7 @@ public class PressureCalibration extends ParentFragment{
 	/////////////////////////////////////////////////////////////////////
 	// ++, 150204 bwk
 	public void HYDDisplay(TextView textData, int Data, int Unit){
-		if(Unit == ParentActivity.UNIT_TEMP_F){
+		if(Unit == Home.UNIT_TEMP_F){
 			textData.setText(": " + ParentActivity.GetTemp(Data,Unit) + " " + ParentActivity.getResources().getString(string.F));
 		}else{
 			textData.setText(": " + ParentActivity.GetTemp(Data,Unit) + " " + ParentActivity.getResources().getString(string.C));
@@ -292,7 +292,7 @@ public class PressureCalibration extends ParentFragment{
 	public void CheckBoomPressureProgressStatus(int StatusCnt){
 		int Result;
 		Result = CAN1Comm.Get_BoomPressureCalibrationStatus_1908_PGN61184_202();
-		Log.d(TAG,"Result : " + Integer.toString(Result));
+		Log.d(TAG,"Result : " + Integer.toString(Result)+" StatusCnt:"+Integer.toString(StatusCnt));
 		//if((StatusCnt >= 25) && (StatusCnt <= 90)) // 5 Sec ~ 15 Sec
 		if((StatusCnt >= 25)) // 5 Sec ~ 
 		{

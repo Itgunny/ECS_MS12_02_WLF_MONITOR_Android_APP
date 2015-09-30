@@ -5,6 +5,7 @@ import taeha.wheelloader.fseries_monitor.animation.ChangeFragmentAnimation;
 import taeha.wheelloader.fseries_monitor.animation.DisappearAnimation;
 import taeha.wheelloader.fseries_monitor.animation.MainBodyShiftAnimation;
 import taeha.wheelloader.fseries_monitor.animation.LeftRightShiftAnimation;
+import taeha.wheelloader.fseries_monitor.main.Home;
 import taeha.wheelloader.fseries_monitor.main.ParentFragment;
 import taeha.wheelloader.fseries_monitor.main.R;
 import taeha.wheelloader.fseries_monitor.main.R.string;
@@ -56,7 +57,8 @@ public class CalibrationFragment extends MenuBodyList_ParentFragment{
 		
 		InitList();
 		ParentActivity._MenuBaseFragment._MenuListTitleFragment.setBackButtonEnable(true);
-		ParentActivity.ScreenIndex = ParentActivity.SCREEN_STATE_MENU_MODE_ETC_CALIBRATION_TOP;
+		ParentActivity.OldScreenIndex = Home.SCREEN_STATE_MENU_MODE_ETC_CALIBRATION_TOP;
+		ParentActivity.ScreenIndex = Home.SCREEN_STATE_MENU_MODE_ETC_CALIBRATION_TOP;
 		ParentActivity._MenuBaseFragment._MenuListTitleFragment.SetTitleText(ParentActivity.getResources().getString(R.string.Calibration));
 		CursurDisplay(CursurIndex);
 

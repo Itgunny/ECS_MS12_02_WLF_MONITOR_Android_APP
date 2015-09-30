@@ -32,7 +32,7 @@ public class ServiceMenuChangeMachineSerialFragment extends PasswordFragment{
 		InitResource();
 		InitValuables();
 		InitButtonListener();
-		setTitleText(ParentActivity.getResources().getString(string.Serial_No)+" "+Integer.toString(ParentActivity.MachineSerialNumber));
+//		setTitleText(ParentActivity.getResources().getString(string.Serial_No)+" "+Integer.toString(ParentActivity.MachineSerialNumber));
 		
 		InitialMachineSerialNumber();
 
@@ -112,7 +112,7 @@ public class ServiceMenuChangeMachineSerialFragment extends PasswordFragment{
 	}
 	////////////////////////////////////////////////////////////////////////////////////////
 	public void InitialMachineSerialNumber(){
-		ParentActivity.tempMachineSerialNumber = 0xffffff;
+//		ParentActivity.tempMachineSerialNumber = 0xffffff;
 		checkDisplay.setVisibility(View.GONE);
 	}
 	public int GetMachineSerialNumber(){
@@ -157,29 +157,29 @@ public class ServiceMenuChangeMachineSerialFragment extends PasswordFragment{
 		}
 		else
 		{
-			if(ParentActivity.tempMachineSerialNumber == 0xffffff)
-			{
-				ParentActivity.tempMachineSerialNumber = GetMachineSerialNumber();
-				SetTextIndicatorTitle(18);
-				PasswordIndicatorDisplay();
-				
-				SetTitleIndex(18);
-				StartIndicatorTitleTimer(500);
-			}
-			else if(GetMachineSerialNumber() != ParentActivity.tempMachineSerialNumber)
-			{
-				ParentActivity.tempMachineSerialNumber = 0xffffff;
-				PasswordIndicatorDisplay();
-				
-				setTitleText(ParentActivity.getResources().getString(string.Serial_No)+" "+Integer.toString(ParentActivity.MachineSerialNumber));
-				StartIndicatorTitleTimer(500);
-			}
-			else 
-			{
-				ParentActivity.MachineSerialNumber = GetMachineSerialNumber();
-				ParentActivity.SaveMachineSerialNumber();
-				showServicePasswordNextScreen();
-			}
+//			if(ParentActivity.tempMachineSerialNumber == 0xffffff)
+//			{
+//				ParentActivity.tempMachineSerialNumber = GetMachineSerialNumber();
+//				SetTextIndicatorTitle(18);
+//				PasswordIndicatorDisplay();
+//				
+//				SetTitleIndex(18);
+//				StartIndicatorTitleTimer(500);
+//			}
+//			else if(GetMachineSerialNumber() != ParentActivity.tempMachineSerialNumber)
+//			{
+//				ParentActivity.tempMachineSerialNumber = 0xffffff;
+//				PasswordIndicatorDisplay();
+//				
+//				setTitleText(ParentActivity.getResources().getString(string.Serial_No)+" "+Integer.toString(ParentActivity.MachineSerialNumber));
+//				StartIndicatorTitleTimer(500);
+//			}
+//			else 
+//			{
+//				ParentActivity.MachineSerialNumber = GetMachineSerialNumber();
+//				ParentActivity.SaveMachineSerialNumber();
+//				showServicePasswordNextScreen();
+//			}
 
 		}		
 	}

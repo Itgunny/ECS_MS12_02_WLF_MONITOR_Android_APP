@@ -41,7 +41,7 @@ public class InputMachineSerialFragment extends PasswordFragment{
 				else
 					ParentActivity.StartAnimationRunningTimer();
 
-				ParentActivity.SetMachineSerialNumber();
+//				ParentActivity.SetMachineSerialNumber();
 			}
 		};
 		HandleCursurDisplay = new Handler() {
@@ -55,7 +55,7 @@ public class InputMachineSerialFragment extends PasswordFragment{
 		
 		MAX_INPUT_LENGTH = 6;
 		
-		ParentActivity.ScreenIndex = ParentActivity.SCREEN_STATE_MAIN_CHECK_MACHINE_SERIAL;
+		ParentActivity.ScreenIndex = Home.SCREEN_STATE_MAIN_CHECK_MACHINE_SERIAL;
 		return mRoot;
 	}
 	
@@ -149,29 +149,29 @@ public class InputMachineSerialFragment extends PasswordFragment{
 		}
 		else
 		{
-			if(ParentActivity.tempMachineSerialNumber == 0xffffff)
-			{
-				ParentActivity.tempMachineSerialNumber = GetMachineSerialNumber();
-				SetTextIndicatorTitle(18);
-				PasswordIndicatorDisplay();
-				
-				SetTitleIndex(18);
-				StartIndicatorTitleTimer(500);
-			}
-			else if(GetMachineSerialNumber() != ParentActivity.tempMachineSerialNumber)
-			{
-				ParentActivity.tempMachineSerialNumber = 0xffffff;
-				PasswordIndicatorDisplay();
-				
-				SetTitleIndex(17);
-				StartIndicatorTitleTimer(500);
-			}
-			else 
-			{
-				ParentActivity.MachineSerialNumber = GetMachineSerialNumber();
-				ParentActivity.SaveMachineSerialNumber();
-				HandleMainScreen.sendMessage(HandleMainScreen.obtainMessage(0));
-			}
+//			if(ParentActivity.tempMachineSerialNumber == 0xffffff)
+//			{
+//				ParentActivity.tempMachineSerialNumber = GetMachineSerialNumber();
+//				SetTextIndicatorTitle(18);
+//				PasswordIndicatorDisplay();
+//				
+//				SetTitleIndex(18);
+//				StartIndicatorTitleTimer(500);
+//			}
+//			else if(GetMachineSerialNumber() != ParentActivity.tempMachineSerialNumber)
+//			{
+//				ParentActivity.tempMachineSerialNumber = 0xffffff;
+//				PasswordIndicatorDisplay();
+//				
+//				SetTitleIndex(17);
+//				StartIndicatorTitleTimer(500);
+//			}
+//			else 
+//			{
+//				ParentActivity.MachineSerialNumber = GetMachineSerialNumber();
+//				ParentActivity.SaveMachineSerialNumber();
+//				HandleMainScreen.sendMessage(HandleMainScreen.obtainMessage(0));
+//			}
 		}		
 	}
 	@Override

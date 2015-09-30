@@ -1713,6 +1713,19 @@ public class CommService extends Service{
 			}
 		}
 	}
+	public void ClickFN_Axle(){
+		if(CheckTopApps("com.mxtech.videoplayer.ad") == true){
+			SetMultimediaFlag(false);
+			//multimediaFlag = false; //++, --, 150403 cjg
+			CallHome();
+		}else if(CheckTopApps("com.powerone.wfd.sink") == true){
+			//SetMiracastFlag(false);		// 현재 FN키 누르면 해제됨
+			//miracastFlag = false; //++, --, 150403 cjg
+			CallHome();
+		}else{
+			CallHome();
+		}
+	}
 	/*
 	public void ChangeMediatoHome(){
 		if(CheckTopApps("com.mxtech.videoplayer.ad") == true){

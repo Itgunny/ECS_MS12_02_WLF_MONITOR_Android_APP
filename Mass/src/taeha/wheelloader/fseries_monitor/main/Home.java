@@ -75,7 +75,7 @@ public class Home extends Activity {
 	public static final int VERSION_LOW 		= 0;
 	public static final int VERSION_SUB_HIGH 	= 0;
 	public static final int VERSION_SUB_LOW 	= 9;
-	public static final int VERSION_TAEHA		= 2;
+	public static final int VERSION_TAEHA		= 3;
 	////1.0.2.3
 	// UI B 안 최초 적용 2014.12.10
 	////1.0.2.4
@@ -650,8 +650,26 @@ public class Home extends Activity {
 	// 6. 장비정보 빈칸표시는 모두 '-'로 통일.
 	// 7. Loading 이미지 추가(실차에서는 안보일듯)
 	// 8. 미라캐스트 실행 및 종료 시 WiFi OFF
-	////
-	// 1. UserSwitching 옵션 적용 바람!!!!
+	// 9. Boom -0.1~-0.9 표시 안되는 버그 수정
+	// 10. BKCU Component 추가 
+	//// v2.0.0.93
+	// 1. 에어컨 관련 내용 표시 기능 제거
+	// 2. RMCU 호기수 입력 제거
+	// 3. HOUR METER 표기 띄어쓰기 적용
+	// 4. UserSwitching 기능에서 옵션 미적용 항목은 표시 감춤
+	// 5. Popup 우선순위 배정
+	//	- 우선 순위 높음 
+	//		a. 엔진 자동정지, Locking, UnLocking : 작동 중 다른 팝업 발생 x
+	//		b. Q coupler 조작 중 자동정지 발생 시 자동정지 카운트 팝업 우선
+	//	- 우선 순위 중간
+	//		a. Engine SCR Temp High, Axle Temp, Joystick EHCU > Quickcoupler Unlock Alarm
+	//		b. 시간에 따라 가장 최근에 발생한 팝업 우선 표시
+	// 6. 기타 버그 개선
+	//	- 다른 팝업에 의해 OldScreenIndex가 메인으로 되었을 경우 이전 메뉴로 이동안하는 버그
+	//		a. Mode-ETC-Calibration-붐압력보정
+	//		b. Preference-Clock Setting
+	//		c. Monitoring-Fault History-Active Fault
+	//		d. Management-Maintenance
 	//////////////////////////////////////////////////////////////////////////////////////
 	
 	// TAG
@@ -1011,7 +1029,9 @@ public class Home extends Activity {
 		
 	public  static final int SCREEN_STATE_MAIN_A_END 										= 0x7FFFFFFF;
 	
-	public  static final int SCREEN_STATE_EHCUERR_POPUP										= 0x80000000;
+	public  static final int SCREEN_STATE_POPUP												= 0x80000000;
+	public  static final int SCREEN_STATE_EHCUERR_POPUP										= 0x81000000;
+	public  static final int SCREEN_STATE_AXLE_POPUP										= 0x82000000;
 
 	public  static final int SCREEN_STATE_MAIN_CHECK_MACHINE_SERIAL							= 0x90000000;
 	
@@ -1188,6 +1208,7 @@ public class Home extends Activity {
 	public boolean RearAxleWarningFlag;
 	public int FrontAxleTempWarning;
 	public int RearAxleTempWarning;
+	public boolean AxleWarningFlag;
 	
 	// User Data
 	public UserData UserDataDefault;
@@ -1304,8 +1325,8 @@ public class Home extends Activity {
 	
 	// Model
 	public CheckModel _CheckModel;
-	public int MachineSerialNumber;
-	public int tempMachineSerialNumber;
+	//public int MachineSerialNumber;
+	//public int tempMachineSerialNumber;
 	
 	// Time
 	public int Year;
@@ -1488,7 +1509,7 @@ public class Home extends Activity {
 		
 		UserIndex = 1;		// ++, 150212 bwk
 		
-		tempMachineSerialNumber = 0xffffff;
+		//tempMachineSerialNumber = 0xffffff;
 		
 		// ++, 150211 bwk
 //		HighrpmCount = 0;
@@ -1504,6 +1525,7 @@ public class Home extends Activity {
 		// --, 150326 bwk		
 		FrontAxleWarningFlag = false;
 		RearAxleWarningFlag = false;
+		AxleWarningFlag = false;
 		
 		rpmRunningFlag = true;
 		
@@ -1769,31 +1791,31 @@ public class Home extends Activity {
 		CAN1Comm.TxCMDToMCU(CAN1CommManager.CMD_CAM, SelectCameraNum-1);
 	}
 	// --, 150324 bwk
-	public void SetMachineSerialNumber()
-	{
-		SaveMachineSerialNumber();
-		showMainScreen();
-		StartSeatBeltTimer();
-	}
-	public void SaveMachineSerialNumber(){
-		String str= Integer.toString(MachineSerialNumber);
-		int tempNumber = Integer.parseInt(str,16);
-		
-		byte[] Temp = new byte[3];
-		Temp[0] = (byte)( (tempNumber >>> 16) & 0xFF );
-		Temp[1] = (byte)( (tempNumber >>> 8) & 0xFF );
-		Temp[2] = (byte)( (tempNumber >>> 0) & 0xFF );
-		
-		CAN1Comm.Set_MachineSerialNumber2_962_PGN65327(Temp);
-		CAN1Comm.TxCANToMCU(47);
-
-		SharedPreferences SharePref = getSharedPreferences("Home", 0);
-		SharedPreferences.Editor edit = SharePref.edit();
-		edit.putInt("MachineSerialNumber", MachineSerialNumber);
-		edit.commit();
-		
-		Log.d(TAG,"SaveMachineSerialNumber");
-	}
+//	public void SetMachineSerialNumber()
+//	{
+//		SaveMachineSerialNumber();
+//		showMainScreen();
+//		StartSeatBeltTimer();
+//	}
+//	public void SaveMachineSerialNumber(){
+//		String str= Integer.toString(MachineSerialNumber);
+//		int tempNumber = Integer.parseInt(str,16);
+//		
+//		byte[] Temp = new byte[3];
+//		Temp[0] = (byte)( (tempNumber >>> 16) & 0xFF );
+//		Temp[1] = (byte)( (tempNumber >>> 8) & 0xFF );
+//		Temp[2] = (byte)( (tempNumber >>> 0) & 0xFF );
+//		
+//		CAN1Comm.Set_MachineSerialNumber2_962_PGN65327(Temp);
+//		CAN1Comm.TxCANToMCU(47);
+//
+//		SharedPreferences SharePref = getSharedPreferences("Home", 0);
+//		SharedPreferences.Editor edit = SharePref.edit();
+//		edit.putInt("MachineSerialNumber", MachineSerialNumber);
+//		edit.commit();
+//		
+//		Log.d(TAG,"SaveMachineSerialNumber");
+//	}
 	public void SaveASPhoneNumber(){
 		byte[] ASNum;
 		int Index = 0;
@@ -1853,8 +1875,8 @@ public class Home extends Activity {
 		Log.d(TAG,"SaveCID");
 		Log.d(TAG,"length : " + Integer.toString(_componentbasicinformation.length));
 		
-		MachineSerialNumber = 0xffffff;
-		SaveMachineSerialNumber();
+//		MachineSerialNumber = 0xffffff;
+//		SaveMachineSerialNumber();
 	}
 	public void CheckCID(){
 		Log.d(TAG,"CheckCID");
@@ -2043,7 +2065,7 @@ public class Home extends Activity {
 		
 		AttachmentStatus = SharePref.getInt("AttachmentStatus", CAN1CommManager.DATA_STATE_KEY_QUICKCOUPLER_OFF);
 		
-		MachineSerialNumber = SharePref.getInt("MachineSerialNumber", 0xFFFFFF);
+//		MachineSerialNumber = SharePref.getInt("MachineSerialNumber", 0xFFFFFF);
 		Log.d(TAG,"LoadPref");
 	}
 	
@@ -2365,16 +2387,16 @@ public class Home extends Activity {
 		}
 	}
 	/////////////////////////////////////////////////////
-	public void showInputMachineSerial(){
-		if(MachineSerialNumber == 0xffffff)
-		{
-			_MainChangeAnimation.StartChangeAnimation(_InputMachineSerialFragment);
-		}
-		else
-		{
-			SetMachineSerialNumber();
-		}
-	}
+//	public void showInputMachineSerial(){
+//		if(MachineSerialNumber == 0xffffff)
+//		{
+//			_MainChangeAnimation.StartChangeAnimation(_InputMachineSerialFragment);
+//		}
+//		else
+//		{
+//			SetMachineSerialNumber();
+//		}
+//	}
 	// ++, 150309 bwk
 	public void showMainScreen(){
 		if(DisplayType == DISPLAY_TYPE_A){
@@ -3019,9 +3041,21 @@ public class Home extends Activity {
 	public void CheckAttachmentUnlock(){
 		// ++, 150310 bwk
 		//if(ScreenIndex == SCREEN_STATE_MAIN_B_TOP){
-		if(ScreenIndex == SCREEN_STATE_MAIN_B_TOP || ScreenIndex == SCREEN_STATE_MAIN_A_TOP){
+		if(ScreenIndex == SCREEN_STATE_ENGINEAUTOSHUTDOWNCOUNT_TOP || ScreenIndex == SCREEN_STATE_MAIN_B_KEY_QUICKCOUPLER_POPUP_UNLOCKING3
+				|| ScreenIndex == SCREEN_STATE_MAIN_A_KEY_QUICKCOUPLER_POPUP_UNLOCKING3 || ScreenIndex == SCREEN_STATE_MAIN_B_KEY_QUICKCOUPLER_POPUP_UNLOCKING2
+				|| ScreenIndex == SCREEN_STATE_MAIN_A_KEY_QUICKCOUPLER_POPUP_UNLOCKING2 || ScreenIndex == SCREEN_STATE_MAIN_B_KEY_QUICKCOUPLER_POPUP_LOCKING2
+				|| ScreenIndex == SCREEN_STATE_MAIN_A_KEY_QUICKCOUPLER_POPUP_LOCKING2)
+			{
+			}
+		else if(ScreenIndex == SCREEN_STATE_MAIN_B_TOP || ScreenIndex == SCREEN_STATE_MAIN_A_TOP){
 		// --, 150310 bwk
-			if(AttachmentStatus == CAN1CommManager.DATA_STATE_KEY_QUICKCOUPLER_UNLOCK){
+			if((FrontAxleTempWarning  == CAN1CommManager.DATA_STATE_LAMP_ON)
+					|| (RearAxleTempWarning  == CAN1CommManager.DATA_STATE_LAMP_ON)
+					|| AxleWarningFlag == true)
+			{
+				// AxleTempWarning일 경우 이거 뜨고 바로 경고창 뜨므로, PASS
+			}
+			else if(AttachmentStatus == CAN1CommManager.DATA_STATE_KEY_QUICKCOUPLER_UNLOCK){
 				OldScreenIndex = ScreenIndex;
 				showQuickCouplerPopupUnlocking3();
 			}
@@ -3069,7 +3103,12 @@ public class Home extends Activity {
 //				}
 //			}
 //		}
-		if(bEHCUErrPopup == false)
+		if(ScreenIndex == SCREEN_STATE_ENGINEAUTOSHUTDOWNCOUNT_TOP || ScreenIndex == SCREEN_STATE_MAIN_B_KEY_QUICKCOUPLER_POPUP_UNLOCKING2
+			|| ScreenIndex == SCREEN_STATE_MAIN_A_KEY_QUICKCOUPLER_POPUP_UNLOCKING2 || ScreenIndex == SCREEN_STATE_MAIN_B_KEY_QUICKCOUPLER_POPUP_LOCKING2
+			|| ScreenIndex == SCREEN_STATE_MAIN_A_KEY_QUICKCOUPLER_POPUP_LOCKING2)
+		{
+		}
+		else if(bEHCUErrPopup == false)
 		{
 			if(Data == 0xFFFF || Data == 0x0000)
 			{
@@ -3081,14 +3120,20 @@ public class Home extends Activity {
 					if(Data != 0){
 						if(Data != OldJoystickSteeringEnableFailCondition){
 							OldJoystickSteeringEnableFailCondition = Data;
-							OldScreenIndex = ScreenIndex;
+							if(ScreenIndex == SCREEN_STATE_AXLE_POPUP)
+								_AxleTempWarningPopup.ClickCancel();
+							else if(ScreenIndex == SCREEN_STATE_MAIN_A_KEY_QUICKCOUPLER_POPUP_UNLOCKING3
+									|| ScreenIndex == SCREEN_STATE_MAIN_B_KEY_QUICKCOUPLER_POPUP_UNLOCKING3)
+								_QuickCouplerPopupUnlocking3.ClickOK();
+							//OldScreenIndex = ScreenIndex;
 							showEHCUErr();
 						}
 					}
 					
 				}
 			}		
-		}else if(ScreenIndex == SCREEN_STATE_MAIN_ENDING){
+		}
+		else if(ScreenIndex == SCREEN_STATE_MAIN_ENDING){
 			if(HomeDialog != null){
 				HomeDialog.dismiss();
 				HomeDialog = null;
@@ -3172,76 +3217,7 @@ public class Home extends Activity {
 			if(((_FrontAxleTempWarning  == CAN1CommManager.DATA_STATE_LAMP_ON) && (FrontAxleWarningFlag == false))
 					|| ((_RearAxleTempWarning  == CAN1CommManager.DATA_STATE_LAMP_ON) && (RearAxleWarningFlag == false)))
 			{
-				if(((_FrontAxleTempWarning  == CAN1CommManager.DATA_STATE_LAMP_ON) && (FrontAxleWarningFlag == false))
-						&& ((_RearAxleTempWarning  == CAN1CommManager.DATA_STATE_LAMP_ON) && (RearAxleWarningFlag == false)))
-				{
-					FrontAxleWarningFlag = true;
-					RearAxleWarningFlag = true;
-
-					if((MachineStatusUpperIndex != CAN1CommManager.DATA_STATE_MACHINESTATUS_FRONTAXLE)
-							&& (MachineStatusLowerIndex != CAN1CommManager.DATA_STATE_MACHINESTATUS_FRONTAXLE))
-					{
-						if(MachineStatusUpperIndex != CAN1CommManager.DATA_STATE_MACHINESTATUS_REARAXLE)
-							MachineStatusUpperIndex = CAN1CommManager.DATA_STATE_MACHINESTATUS_FRONTAXLE;
-						else 
-							MachineStatusLowerIndex = CAN1CommManager.DATA_STATE_MACHINESTATUS_FRONTAXLE;
-					}
-
-					if((MachineStatusUpperIndex != CAN1CommManager.DATA_STATE_MACHINESTATUS_REARAXLE)
-							&& (MachineStatusLowerIndex != CAN1CommManager.DATA_STATE_MACHINESTATUS_REARAXLE))
-					{
-						if(MachineStatusUpperIndex != CAN1CommManager.DATA_STATE_MACHINESTATUS_FRONTAXLE)
-							MachineStatusUpperIndex = CAN1CommManager.DATA_STATE_MACHINESTATUS_REARAXLE;
-						else 
-							MachineStatusLowerIndex = CAN1CommManager.DATA_STATE_MACHINESTATUS_REARAXLE;
-					}
-				}
-				else if((_FrontAxleTempWarning  == CAN1CommManager.DATA_STATE_LAMP_ON) && (FrontAxleWarningFlag == false))
-				{
-					FrontAxleWarningFlag = true;
-
-					if((MachineStatusUpperIndex != CAN1CommManager.DATA_STATE_MACHINESTATUS_FRONTAXLE)
-							&& (MachineStatusLowerIndex != CAN1CommManager.DATA_STATE_MACHINESTATUS_FRONTAXLE))
-					{
-						if(MachineStatusUpperIndex == CAN1CommManager.DATA_STATE_MACHINESTATUS_WEIGHING)
-						{
-							MachineStatusUpperIndex = CAN1CommManager.DATA_STATE_MACHINESTATUS_FRONTAXLE;
-							MachineStatusLowerIndex = CAN1CommManager.DATA_STATE_MACHINESTATUS_NOSELECT;
-						}
-						else
-						{
-							if(MachineStatusUpperIndex != CAN1CommManager.DATA_STATE_MACHINESTATUS_REARAXLE)
-								MachineStatusUpperIndex = CAN1CommManager.DATA_STATE_MACHINESTATUS_FRONTAXLE;
-							else 
-								MachineStatusLowerIndex = CAN1CommManager.DATA_STATE_MACHINESTATUS_FRONTAXLE;
-						}
-					}
-
-				}
-				else if((_RearAxleTempWarning  == CAN1CommManager.DATA_STATE_LAMP_ON) && (RearAxleWarningFlag == false))
-				{
-					RearAxleWarningFlag = true;
-
-					if((MachineStatusUpperIndex != CAN1CommManager.DATA_STATE_MACHINESTATUS_REARAXLE)
-							&& (MachineStatusLowerIndex != CAN1CommManager.DATA_STATE_MACHINESTATUS_REARAXLE))
-					{
-						if(MachineStatusUpperIndex == CAN1CommManager.DATA_STATE_MACHINESTATUS_WEIGHING)
-						{
-							MachineStatusUpperIndex = CAN1CommManager.DATA_STATE_MACHINESTATUS_REARAXLE;
-							MachineStatusLowerIndex = CAN1CommManager.DATA_STATE_MACHINESTATUS_NOSELECT;
-						}
-						else
-						{
-							if(MachineStatusUpperIndex != CAN1CommManager.DATA_STATE_MACHINESTATUS_FRONTAXLE)
-								MachineStatusUpperIndex = CAN1CommManager.DATA_STATE_MACHINESTATUS_REARAXLE;
-							else 
-								MachineStatusLowerIndex = CAN1CommManager.DATA_STATE_MACHINESTATUS_REARAXLE;
-						}
-					}
-
-				}
-				//OldScreenIndex = ScreenIndex;
-				Log.d(TAG,"AxleTempWarningPopup"+Integer.toHexString(ScreenIndex));
+				Log.d(TAG,"GetScreenTopFlag() false AxleTempWarningPopup");
 				if(ScreenIndex != SCREEN_STATE_MAIN_B_TOP && ScreenIndex != SCREEN_STATE_MAIN_A_TOP){
 					Log.d(TAG,"No Mian!!!!! Move to Main");
 					
@@ -3284,7 +3260,7 @@ public class Home extends Activity {
 								_MainABaseFragment.showLeftDowntoDefaultScreenAnimation();
 							}
 						} else if((ScreenIndex & SCREEN_STATE_MAIN_FILTER) == 0x05000000){
-							Log.d(TAG, "BackHomeLeftDown!!!");
+							Log.d(TAG, "BackHomeQucik!!!");
 							if (DisplayType == DISPLAY_TYPE_A) {
 								_MainBBaseFragment.showDefaultScreenAnimation();
 							} else {
@@ -3292,13 +3268,13 @@ public class Home extends Activity {
 							}
 						}
 					}else{
-						Log.d(TAG, "BackNoHome!!!");
-						setScreenIndex();
+						Log.d(TAG, "BackNoHome!!!"+Integer.toHexString(ScreenIndex));
 						showMainScreen();
+						setScreenIndex();
 					}
 				}
-
-				CAN1Comm.ClickFN();
+				
+				CAN1Comm.ClickFN_Axle();
 			}
 			else if(((_FrontAxleTempWarning  == CAN1CommManager.DATA_STATE_LAMP_OFF) && (FrontAxleWarningFlag == true))
 					|| ((_RearAxleTempWarning  == CAN1CommManager.DATA_STATE_LAMP_OFF) && (RearAxleWarningFlag == true)))
@@ -3317,11 +3293,10 @@ public class Home extends Activity {
 			}
 
 		}
-		else if(ScreenIndex == SCREEN_STATE_MAIN_B_TOP || ScreenIndex == SCREEN_STATE_MAIN_A_TOP){
-//			if(((_CheckModel.CheckMCUVersionHigh(CAN1Comm.Get_ComponentBasicInformation_1698_PGN65330(), 955) == true) && (FrontAxleTempWarning  == CAN1CommManager.DATA_STATE_LAMP_ON))
-//				|| ((_CheckModel.CheckMCUVersionHigh(CAN1Comm.Get_ComponentBasicInformation_1698_PGN65330(), 965) == true) && (RearAxleTempWarning  == CAN1CommManager.DATA_STATE_LAMP_ON)))
-			if(ScreenIndex != SCREEN_STATE_MAIN_B_KEY_QUICKCOUPLER_POPUP_UNLOCKING3 
-					&& ScreenIndex != SCREEN_STATE_MAIN_A_KEY_QUICKCOUPLER_POPUP_UNLOCKING3)
+		else if(ScreenIndex == SCREEN_STATE_MAIN_B_KEY_QUICKCOUPLER_POPUP_UNLOCKING3 
+				|| ScreenIndex == SCREEN_STATE_MAIN_A_KEY_QUICKCOUPLER_POPUP_UNLOCKING3
+				|| (ScreenIndex == SCREEN_STATE_EHCUERR_POPUP && _EHCUErrorPopup.Safety_CPU_Error != 1)
+				|| ScreenIndex == SCREEN_STATE_MAIN_B_TOP || ScreenIndex == SCREEN_STATE_MAIN_A_TOP){
 			{
 				if(((_FrontAxleTempWarning  == CAN1CommManager.DATA_STATE_LAMP_ON) && (FrontAxleWarningFlag == false))
 				   || ((_RearAxleTempWarning  == CAN1CommManager.DATA_STATE_LAMP_ON) && (RearAxleWarningFlag == false)))
@@ -3414,7 +3389,24 @@ public class Home extends Activity {
 						RearAxleWarningFlag = false;
 				}
 			}
-		}else if(ScreenIndex == SCREEN_STATE_MAIN_ENDING){
+		}else if(ScreenIndex != SCREEN_STATE_MAIN_ENDING){
+			if(((_FrontAxleTempWarning  == CAN1CommManager.DATA_STATE_LAMP_OFF) && (FrontAxleWarningFlag == true))
+					   || ((_RearAxleTempWarning  == CAN1CommManager.DATA_STATE_LAMP_OFF) && (RearAxleWarningFlag == true)))
+			{
+				Log.d(TAG,"showAxleTempWarningPopupInit");
+				if(((_FrontAxleTempWarning  == CAN1CommManager.DATA_STATE_LAMP_OFF) && (FrontAxleWarningFlag == true))
+						   && ((_RearAxleTempWarning  == CAN1CommManager.DATA_STATE_LAMP_OFF) && (RearAxleWarningFlag == true)))
+				{
+					FrontAxleWarningFlag = false;
+					RearAxleWarningFlag = false;
+				}
+				else if((_FrontAxleTempWarning  == CAN1CommManager.DATA_STATE_LAMP_OFF) && (FrontAxleWarningFlag == true))
+					FrontAxleWarningFlag = false;
+				else if((_RearAxleTempWarning  == CAN1CommManager.DATA_STATE_LAMP_OFF) && (RearAxleWarningFlag == true))
+					RearAxleWarningFlag = false;
+			}
+		}
+		else if(ScreenIndex == SCREEN_STATE_MAIN_ENDING){
 			if(HomeDialog != null){
 				HomeDialog.dismiss();
 				HomeDialog = null;
@@ -3475,10 +3467,9 @@ public class Home extends Activity {
 				ExcuteCamActivitybyKey();
 			}
 			Log.d(TAG,"Click QuickCoupler Key");	
-		} else if (ScreenIndex == SCREEN_STATE_MAIN_B_LEFTUP_MACHINESTATUS_POPUP
-				|| ScreenIndex == SCREEN_STATE_MAIN_A_LEFTUP_MACHINESTATUS_POPUP) {
+		} else if (ScreenIndex == SCREEN_STATE_AXLE_POPUP || AxleWarningFlag == true) {
 			Log.d(TAG, "Click Key - AxleWarning");
-			// if(Data == CAN1CommManager.ESC)
+			 _AxleTempWarningPopup.KeyButtonClick(Data);
 		} else if((ScreenIndex & SCREEN_STATE_FILTER) == SCREEN_STATE_MAIN_A_TOP){
 			Log.d(TAG,"Click Main A Key");
 			_MainABaseFragment.KeyButtonClick(Data);
@@ -3872,6 +3863,8 @@ public class Home extends Activity {
 			HomeDialog.dismiss();
 			HomeDialog = null;
 		}
+		
+		OldScreenIndex = ScreenIndex;
 
 		HomeDialog = _EHCUErrorPopup;
 		HomeDialog.show();
@@ -3941,6 +3934,7 @@ public class Home extends Activity {
 //			StartAnimationRunningTimer();
 		
 		if(HomeDialog != null){
+			//Log.d(TAG, "Dismiss()"+Integer.toHexString(ScreenIndex));
 			HomeDialog.dismiss();
 			HomeDialog = null;
 		}
