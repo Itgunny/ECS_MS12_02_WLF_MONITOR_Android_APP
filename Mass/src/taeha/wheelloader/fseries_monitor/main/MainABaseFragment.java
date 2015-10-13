@@ -880,17 +880,17 @@ public class MainABaseFragment extends ParentFragment{
 		RightChangeAnimation.StartChangeAnimation(_MainARightMainFragment);
 		
 		
-		_RightAppearAnimation.StartAnimation();
+//		_RightAppearAnimation.StartAnimation();
 		_LeftAppearAnimation.StartAnimation();
 		
 		_CenterBGAppearAnimation.StartAnimation();
-		_RightBGAppearAnimation.StartAnimation();
+//		_RightBGAppearAnimation.StartAnimation();
 		_LeftBGAppearAnimation.StartAnimation();
 	
 		
-		_RightShiftAnimation.StartShiftAnimation();
+//		_RightShiftAnimation.StartShiftAnimation();
 		_LeftShiftAnimation.StartShiftAnimation();
-		_RightBGShiftAnimation.StartShiftAnimation();
+//		_RightBGShiftAnimation.StartShiftAnimation();
 		_LeftBGShiftAnimation.StartShiftAnimation();
 		CursurDisplay(CursurIndex);
 	}
@@ -904,18 +904,18 @@ public class MainABaseFragment extends ParentFragment{
 		RightChangeAnimation.StartChangeAnimation(_MainARightMainFragment);
 		
 		
-		_RightAppearAnimation.StartAnimation();
+//		_RightAppearAnimation.StartAnimation();
 		_LeftAppearAnimation.StartAnimation();
 		
 		_CenterBGAppearAnimation.StartAnimation();
-		_RightBGAppearAnimation.StartAnimation();
+//		_RightBGAppearAnimation.StartAnimation();
 		_LeftBGAppearAnimation.StartAnimation();
 		
 		
-		_RightShiftAnimation.StartShiftAnimation();
+//		_RightShiftAnimation.StartShiftAnimation();
 		_LeftShiftAnimation.StartShiftAnimation();
 		
-		_RightBGShiftAnimation.StartShiftAnimation();
+//		_RightBGShiftAnimation.StartShiftAnimation();
 		_LeftBGShiftAnimation.StartShiftAnimation();
 		CursurDisplay(CursurIndex);
 	}
@@ -930,17 +930,17 @@ public class MainABaseFragment extends ParentFragment{
 		
 		
 		_RightAppearAnimation.StartAnimation();
-		_LeftAppearAnimation.StartAnimation();
+//		_LeftAppearAnimation.StartAnimation();
 		
 		_CenterBGAppearAnimation.StartAnimation();
 		_RightBGAppearAnimation.StartAnimation();
-		_LeftBGAppearAnimation.StartAnimation();
+//		_LeftBGAppearAnimation.StartAnimation();
 		
 		_RightShiftAnimation.StartShiftAnimation();
-		_LeftShiftAnimation.StartShiftAnimation();
+//		_LeftShiftAnimation.StartShiftAnimation();
 		
 		_RightBGShiftAnimation.StartShiftAnimation();
-		_LeftBGShiftAnimation.StartShiftAnimation();
+//		_LeftBGShiftAnimation.StartShiftAnimation();
 		CursurDisplay(CursurIndex);
 	}
 	public void showLeftUptoDefaultScreenAnimation(){
