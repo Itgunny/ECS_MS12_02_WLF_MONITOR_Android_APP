@@ -59,8 +59,6 @@ public class EngineAutoShutdownCountPopup extends ParentPopup{
 		mRoot = inflater.inflate(R.layout.popup_engineautoshutdown_count, null);
 		this.addContentView(mRoot,  new LayoutParams(448,288));
 		this.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-		
-		
 	}
 
 	@Override
@@ -97,6 +95,7 @@ public class EngineAutoShutdownCountPopup extends ParentPopup{
 	public void dismiss() {
 		// TODO Auto-generated method stub
 		super.dismiss();
+//		Log.d(TAG, "dismiss>> ScreenIndex="+Integer.toHexString(ParentActivity.ScreenIndex));
 	//	Log.d(TAG, "ScreenIndex="+Integer.toHexString(ParentActivity.OldScreenIndex));
 	//	ParentActivity.ScreenIndex = ParentActivity.OldScreenIndex;
 	}
@@ -155,7 +154,21 @@ public class EngineAutoShutdownCountPopup extends ParentPopup{
 		CAN1Comm.Set_EngineShutdownCotrolByte_PGN61184_121(STATE_COTROL_AUTO_CANCEL);
 		CAN1Comm.TxCANToMCU(121);
 		CAN1Comm.Set_EngineShutdownCotrolByte_PGN61184_121(15);
+//		Log.d(TAG, "ClickCancel>> OldScreenIndex="+Integer.toHexString(ParentActivity.OldScreenIndex));
+//		Log.d(TAG, "ClickCancel>> FrontAxleWarningFlag="+ParentActivity.FrontAxleWarningFlag
+//				+" RearAxleWarningFlag="+ParentActivity.RearAxleWarningFlag);
+//		Log.d(TAG, "ClickCancel>> OldJoystickSteeringEnableFailCondition="+Integer.toHexString(ParentActivity.OldJoystickSteeringEnableFailCondition));
+//		Log.d(TAG, "ClickCancel>> bEHCUErrPopup="+ParentActivity.bEHCUErrPopup
+//				+" Safety_CPU_Error="+ParentActivity._EHCUErrorPopup.Safety_CPU_Error);
+//		FrontAxleWarningFlag = false;
+//		RearAxleWarningFlag = false;
+//
+//		OldJoystickSteeringEnableFailCondition = 0xffff;
+//		bEHCUErrPopup = false;
+//		_EHCUErrorPopup.Safety_CPU_Error = 0;
 		ParentActivity.ScreenIndex = ParentActivity.OldScreenIndex;
+//		Log.d(TAG, "ClickCancel>> ScreenIndex="+Integer.toHexString(ParentActivity.ScreenIndex));
+		
 		this.dismiss();
 	}
 	////////////////////////////////////////////////////////////////////////////////

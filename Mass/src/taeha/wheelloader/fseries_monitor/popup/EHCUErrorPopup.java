@@ -240,8 +240,8 @@ public class EHCUErrorPopup extends ParentPopup{
 		//str += ParentActivity.getResources().getString(string.Check_joystick_steering_enable_fail_condition);
 		// ++, 150210 bwk
 		ParentActivity.OldJoystickSteeringEnableFailCondition = Data;
-		Log.d(TAG, "EHCUErrDisplay PopupOff"+PopupOff);
-		Log.d(TAG, "EHCUErrDisplay Data"+Data);
+		//Log.d(TAG, "EHCUErrDisplay PopupOff"+PopupOff);
+		//Log.d(TAG, "EHCUErrDisplay Data"+Data);
 
 		if(JoystickSteeringEnableFailCondition == 0xFFFF || Data == 0xFFFF
 				|| JoystickSteeringEnableFailCondition == 0 || Data == 0)

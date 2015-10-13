@@ -1,5 +1,6 @@
 package taeha.wheelloader.fseries_monitor.main;
 
+import java.util.List;
 import java.util.Locale;
 
 import android.content.Context;
@@ -8,6 +9,8 @@ import android.content.res.Resources;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.View;
+import android.view.inputmethod.InputMethodInfo;
+import android.view.inputmethod.InputMethodManager;
 
 public class LanguageClass {
 	//CONSTANT////////////////////////////////////////
@@ -23,7 +26,10 @@ public class LanguageClass {
 	
 	//VALUABLE////////////////////////////////////////
 	int LanguageIndex;
-	
+
+	InputMethodManager showSoftInput;
+	List <InputMethodInfo> imis;
+	InputMethodInfo imi;
 	//////////////////////////////////////////////////
 	
 	//Fragment////////////////////////////////////////
@@ -40,6 +46,15 @@ public class LanguageClass {
 	public LanguageClass(Context _context){
 		//context = _context;
 		ParentActivity = (Home)_context;
+		
+		showSoftInput = (InputMethodManager)ParentActivity.getSystemService(Context.INPUT_METHOD_SERVICE);
+		imis = showSoftInput.getInputMethodList();
+		for(int i = 0; i < imis.size(); i++){
+			imi = imis.get(i);
+			//imi.getId();
+			Log.d(TAG, "input method" + imi.getId());
+		}
+		
 		LoadPref();
 	}
 
@@ -122,6 +137,17 @@ public class LanguageClass {
 		LanguageIndex = SharePref.getInt("LanguageIndex", Home.STATE_DISPLAY_LANGUAGE_ENGLISH);
 		Log.d(TAG, "LanguageIndex : " + Integer.toString(LanguageIndex));
 		Log.d(TAG,"LoadPref");
+		
+		if(LanguageIndex == Home.STATE_DISPLAY_LANGUAGE_KOREAN){
+			try{
+				showSoftInput.setInputMethod(null,imis.get(1).getId());	
+			}catch(IndexOutOfBoundsException e){
+				showSoftInput.setInputMethod(null, imis.get(0).getId());
+			}
+		}else{
+			showSoftInput.setInputMethod(null, imis.get(0).getId());
+			
+		}
 	}
 		
 }

@@ -1713,8 +1713,16 @@ public class CommService extends Service{
 			}
 		}
 	}
-	public void ClickFN_Axle(){
-		if(CheckTopApps("com.mxtech.videoplayer.ad") == true){
+	public void ClickFN_Home(){
+		if(CheckTopApps("taeha.wheelloader.update") == true)
+		{
+			ScreenTopFlag = true;
+		}
+		else if(CheckTopApps("com.google.android.inputmethod.korean") == true)
+		{
+			
+		}
+		else if(CheckTopApps("com.mxtech.videoplayer.ad") == true){
 			SetMultimediaFlag(false);
 			//multimediaFlag = false; //++, --, 150403 cjg
 			CallHome();

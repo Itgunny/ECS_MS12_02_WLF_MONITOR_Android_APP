@@ -559,8 +559,8 @@ public class CAN1CommManager extends ICAN1CommManager.Stub{		// ttySAC1(Linux), 
 	public void ClickFN(){
 		service.ClickFN();
 	}
-	public void ClickFN_Axle(){
-		service.ClickFN_Axle();
+	public void ClickFN_Home(){
+		service.ClickFN_Home();
 	}
 	// --, 150319 bwk
 	

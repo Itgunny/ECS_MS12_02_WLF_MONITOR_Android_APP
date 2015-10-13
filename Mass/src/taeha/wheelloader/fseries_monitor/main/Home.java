@@ -75,7 +75,7 @@ public class Home extends Activity {
 	public static final int VERSION_LOW 		= 0;
 	public static final int VERSION_SUB_HIGH 	= 0;
 	public static final int VERSION_SUB_LOW 	= 9;
-	public static final int VERSION_TAEHA		= 3;
+	public static final int VERSION_TAEHA		= 4;
 	////1.0.2.3
 	// UI B 안 최초 적용 2014.12.10
 	////1.0.2.4
@@ -670,6 +670,18 @@ public class Home extends Activity {
 	//		b. Preference-Clock Setting
 	//		c. Monitoring-Fault History-Active Fault
 	//		d. Management-Maintenance
+	////v2.0.0.94
+	// 1. EHCU error 표시
+	//		A.     “Please reset power” 팝업과 엔진 자동정지 countdown 팝업 동시 발생 시 처리방안 적용
+	//	  		- 자동정지 팝업을 우선 처리하고, EHCU error 팝업 관련 플래그 리셋.(“Please reset power” 팝업이 다시 나타나도록)
+	//		B.     그 외 Joystick Steering 관련 팝업 시에도 마찬가지로 자동정지 팝업을 우선 처리.
+	// 2. 편의용 App(PDF Viewer, Media Player, Smart Terminal) 구동 중 경고 표시
+	//		A.     다음 경고 표시 발생 시 모니터 메인화면으로 복귀할 것 (구동중이던 App은 백그라운드 동작, 단 PDF Viewer는 종료 됨)
+	//			i.     엔진 자동정지 countdown 팝업
+	//			ii.     Axle Temperature Warning 팝업
+	//			iii.     EHCU error 팝업
+	//			iv.     Buzzer 발생 (MCU 또는 모니터 070 에러 발생 시)
+	// 3. 한국어 키패드 적용(키패드 어플리케이션 설치해야 함)
 	//////////////////////////////////////////////////////////////////////////////////////
 	
 	// TAG
@@ -2847,15 +2859,21 @@ public class Home extends Activity {
 		}else{
 			if(BuzzerStopCount > 5){
 				if(CAN1Comm.Get_CommErrCnt() < 1000){
-					if(Buzzer == CAN1Comm.BUZZER_ON){
+					if(Buzzer == CAN1CommManager.BUZZER_ON){
 						BuzzerOnFlag = true;
-						if(CAN1Comm.BuzzerStatus == CAN1Comm.BUZZER_OFF || CAN1Comm.BuzzerStatus == CAN1Comm.BUZZER_STOP){
-							CAN1Comm.TxCMDToMCU(CAN1Comm.CMD_BUZ, CAN1Comm.BUZZER_ON);	// Buzzer On
+						
+						if(CAN1Comm.BuzzerStatus == CAN1CommManager.BUZZER_OFF || CAN1Comm.BuzzerStatus == CAN1CommManager.BUZZER_STOP){
+							CAN1Comm.TxCMDToMCU(CAN1CommManager.CMD_BUZ, CAN1CommManager.BUZZER_ON);	// Buzzer On
+							if(CAN1Comm.GetScreenTopFlag() == false)
+							{
+								Log.d(TAG,"GetScreenTopFlag() false CheckBuzzer");
+								CAN1Comm.ClickFN_Home();
+							}
 						}
-					}else if(Buzzer == CAN1Comm.BUZZER_OFF){
-						if(CAN1Comm.BuzzerStatus == CAN1Comm.BUZZER_ON){
-							CAN1Comm.TxCMDToMCU(CAN1Comm.CMD_BUZ, CAN1Comm.BUZZER_OFF);	// Buzzer Off
-							CAN1Comm.BuzzerStatus = CAN1Comm.BUZZER_STOP;
+					}else if(Buzzer == CAN1CommManager.BUZZER_OFF){
+						if(CAN1Comm.BuzzerStatus == CAN1CommManager.BUZZER_ON){
+							CAN1Comm.TxCMDToMCU(CAN1CommManager.CMD_BUZ, CAN1CommManager.BUZZER_OFF);	// Buzzer Off
+							CAN1Comm.BuzzerStatus = CAN1CommManager.BUZZER_STOP;
 						}
 					}			
 				}
@@ -3012,22 +3030,47 @@ public class Home extends Activity {
 	}
 	
 	public void CheckEngineAutoShutdown(){
-		if(ScreenIndex != SCREEN_STATE_ENGINEAUTOSHUTDOWNCOUNT_TOP
+		if(CAN1Comm.GetScreenTopFlag() == false)
+		{
+			if(EngineAutoShutdownMode == 1 && EngineAutoShutdownRemainingTime <= 60)
+			{
+				Log.d(TAG,"GetScreenTopFlag() false CheckEngineAutoShutdown");
+				CAN1Comm.ClickFN_Home();
+			}
+		}
+		else if(ScreenIndex != SCREEN_STATE_ENGINEAUTOSHUTDOWNCOUNT_TOP
 			&& ScreenIndex != SCREEN_STATE_MAIN_ENDING
 			&& EngineAutoShutdownMode == 1
 			&& EngineAutoShutdownRemainingTime <= 60){
 			
-			OldScreenIndex = ScreenIndex;
+			if(ScreenIndex == SCREEN_STATE_AXLE_POPUP)
+				_AxleTempWarningPopup.ClickCancel();
+			else if(ScreenIndex == SCREEN_STATE_MAIN_A_KEY_QUICKCOUPLER_POPUP_UNLOCKING3
+					|| ScreenIndex == SCREEN_STATE_MAIN_B_KEY_QUICKCOUPLER_POPUP_UNLOCKING3)
+				_QuickCouplerPopupUnlocking3.ClickOK();
+			else if(ScreenIndex == SCREEN_STATE_EHCUERR_POPUP)
+			{
+				Log.d(TAG, "CheckEngineAutoShutdown _EHCUErrorPopup.dismiss()");
+				_EHCUErrorPopup.dismiss();
+			}
+			
+			//OldScreenIndex = ScreenIndex;
 			showEngineAutoShutdownCount();
+			FrontAxleWarningFlag = false;
+			RearAxleWarningFlag = false;
+
+			OldJoystickSteeringEnableFailCondition = 0xffff;
+			bEHCUErrPopup = false;
+			_EHCUErrorPopup.Safety_CPU_Error = 0;
 			
 		}else if(ScreenIndex == SCREEN_STATE_ENGINEAUTOSHUTDOWNCOUNT_TOP){
 			if( EngineAutoShutdownMode == 0
 					|| EngineAutoShutdownRemainingTime > 60){
-				
+
 				if(HomeDialog != null){
 					HomeDialog.dismiss();
 					ScreenIndex = OldScreenIndex;
-					//Log.d(TAG,"CheckEngineAutoShutdown Dismiss");
+					//Log.d(TAG,"CheckEngineAutoShutdown Dismiss : ");
 					HomeDialog = null;
 				}
 			}
@@ -3117,7 +3160,15 @@ public class Home extends Activity {
 			}
 			else if(Data != 0xFFFF && Data != 0x0000 && PopupOff != 1){
 				if(bEHCUErrPopup == false){
-					if(Data != 0){
+					if(CAN1Comm.GetScreenTopFlag() == false)
+					{
+						if(Data != 0 && Data != OldJoystickSteeringEnableFailCondition)
+						{
+							Log.d(TAG,"GetScreenTopFlag() false showEHCUErr");
+							CAN1Comm.ClickFN_Home();
+						}
+					}
+					else if(Data != 0){
 						if(Data != OldJoystickSteeringEnableFailCondition){
 							OldJoystickSteeringEnableFailCondition = Data;
 							if(ScreenIndex == SCREEN_STATE_AXLE_POPUP)
@@ -3274,7 +3325,7 @@ public class Home extends Activity {
 					}
 				}
 				
-				CAN1Comm.ClickFN_Axle();
+				CAN1Comm.ClickFN_Home();
 			}
 			else if(((_FrontAxleTempWarning  == CAN1CommManager.DATA_STATE_LAMP_OFF) && (FrontAxleWarningFlag == true))
 					|| ((_RearAxleTempWarning  == CAN1CommManager.DATA_STATE_LAMP_OFF) && (RearAxleWarningFlag == true)))
@@ -3369,9 +3420,24 @@ public class Home extends Activity {
 						}
 						
 					}
-					OldScreenIndex = ScreenIndex;
-					Log.d(TAG,"showAxleTempWarningPopup");
-					showAxleTempWarningPopup();
+					if(ScreenIndex == SCREEN_STATE_MAIN_B_KEY_QUICKCOUPLER_POPUP_UNLOCKING3 
+							|| ScreenIndex == SCREEN_STATE_MAIN_A_KEY_QUICKCOUPLER_POPUP_UNLOCKING3
+							|| (ScreenIndex == SCREEN_STATE_EHCUERR_POPUP && _EHCUErrorPopup.Safety_CPU_Error != 1)){
+						if(ScreenIndex == SCREEN_STATE_MAIN_A_KEY_QUICKCOUPLER_POPUP_UNLOCKING3
+								|| ScreenIndex == SCREEN_STATE_MAIN_B_KEY_QUICKCOUPLER_POPUP_UNLOCKING3)
+							_QuickCouplerPopupUnlocking3.ClickOK();
+						else if((ScreenIndex == SCREEN_STATE_EHCUERR_POPUP) && 
+								((OldScreenIndex == SCREEN_STATE_MAIN_B_TOP) || (OldScreenIndex == SCREEN_STATE_MAIN_A_TOP)))
+							_EHCUErrorPopup.dismiss();
+					}
+					
+					if(ScreenIndex == SCREEN_STATE_MAIN_B_TOP || ScreenIndex == SCREEN_STATE_MAIN_A_TOP){
+						Log.d(TAG,"showAxleTempWarningPopup");
+						showAxleTempWarningPopup();
+					}else{
+						FrontAxleWarningFlag = false;
+						RearAxleWarningFlag = false;
+					}
 				}
 				else if(((_FrontAxleTempWarning  == CAN1CommManager.DATA_STATE_LAMP_OFF) && (FrontAxleWarningFlag == true))
 						   || ((_RearAxleTempWarning  == CAN1CommManager.DATA_STATE_LAMP_OFF) && (RearAxleWarningFlag == true)))
@@ -3770,15 +3836,18 @@ public class Home extends Activity {
 		HomeDialog.show();
 	}
 	public void showEngineAutoShutdownCount(){
-		if(AnimationRunningFlag == true)
-			return;
-		else
-			StartAnimationRunningTimer();
+//		if(AnimationRunningFlag == true)
+//			return;
+//		else
+//			StartAnimationRunningTimer();
 		
 		if(HomeDialog != null){
 			HomeDialog.dismiss();
 			HomeDialog = null;
 		}
+		
+		OldScreenIndex = ScreenIndex;
+	//	Log.d(TAG, "showEngineAutoShutdownCount:OldScreenIndex"+Integer.toHexString(OldScreenIndex));
 
 		HomeDialog = _EngineAutoShutdownCountPopup;
 		HomeDialog.show();
@@ -3854,10 +3923,10 @@ public class Home extends Activity {
 		HomeDialog.show();
 	}
 	public void showEHCUErr(){
-		if(AnimationRunningFlag == true)
-			return;
-		else
-			StartAnimationRunningTimer();
+//		if(AnimationRunningFlag == true)
+//			return;
+//		else
+//			StartAnimationRunningTimer();
 		
 		if(HomeDialog != null){
 			HomeDialog.dismiss();
@@ -3938,6 +4007,8 @@ public class Home extends Activity {
 			HomeDialog.dismiss();
 			HomeDialog = null;
 		}
+		OldScreenIndex = ScreenIndex;
+		//Log.d(TAG, "showAxleTempWarningPopup:OldScreenIndex"+Integer.toHexString(OldScreenIndex));
 
 		HomeDialog = _AxleTempWarningPopup;
 		HomeDialog.show();
@@ -4216,6 +4287,11 @@ public class Home extends Activity {
 			if(CommErrCount == 1000){
 				CAN1Comm.TxCMDToMCU(CAN1Comm.CMD_BUZ, CAN1Comm.BUZZER_ON);	// Buzzer On
 				//IndicatorFragment.WarningDisplay(1);	
+				if(CAN1Comm.GetScreenTopFlag() == false)
+				{
+					Log.d(TAG,"GetScreenTopFlag() false CommErrStopTimerClass");
+					CAN1Comm.ClickFN_Home();
+				}
 			}
 			if(CommErrCount >= 1000){
 				CommErrCount = 1001;	
