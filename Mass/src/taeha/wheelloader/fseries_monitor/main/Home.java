@@ -72,10 +72,10 @@ public class Home extends Activity {
 	//Version/////////////////////////////////////////////////////////////////////////////
 	//
 	public static final int VERSION_HIGH 		= 2;
-	public static final int VERSION_LOW 		= 0;
+	public static final int VERSION_LOW 		= 1;
 	public static final int VERSION_SUB_HIGH 	= 0;
-	public static final int VERSION_SUB_LOW 	= 9;
-	public static final int VERSION_TAEHA		= 4;
+	public static final int VERSION_SUB_LOW 	= 0;
+	public static final int VERSION_TAEHA		= 0;
 	////1.0.2.3
 	// UI B 안 최초 적용 2014.12.10
 	////1.0.2.4
@@ -670,7 +670,8 @@ public class Home extends Activity {
 	//		b. Preference-Clock Setting
 	//		c. Monitoring-Fault History-Active Fault
 	//		d. Management-Maintenance
-	////v2.0.0.94
+	// 7. B안 애니메이션 버그 수정
+	////v2.1.0.00
 	// 1. EHCU error 표시
 	//		A.     “Please reset power” 팝업과 엔진 자동정지 countdown 팝업 동시 발생 시 처리방안 적용
 	//	  		- 자동정지 팝업을 우선 처리하고, EHCU error 팝업 관련 플래그 리셋.(“Please reset power” 팝업이 다시 나타나도록)
