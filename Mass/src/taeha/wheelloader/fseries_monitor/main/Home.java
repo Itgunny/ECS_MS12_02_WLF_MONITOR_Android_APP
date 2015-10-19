@@ -75,7 +75,7 @@ public class Home extends Activity {
 	public static final int VERSION_LOW 		= 1;
 	public static final int VERSION_SUB_HIGH 	= 0;
 	public static final int VERSION_SUB_LOW 	= 0;
-	public static final int VERSION_TAEHA		= 0;
+	public static final int VERSION_TAEHA		= 1;
 	////1.0.2.3
 	// UI B 안 최초 적용 2014.12.10
 	////1.0.2.4
@@ -683,6 +683,9 @@ public class Home extends Activity {
 	//			iii.     EHCU error 팝업
 	//			iv.     Buzzer 발생 (MCU 또는 모니터 070 에러 발생 시)
 	// 3. 한국어 키패드 적용(키패드 어플리케이션 설치해야 함)
+	////v2.1.0.01
+	// 1. H/W Test 프로그램 띄우면 070 에러뜨므로 UI로 복귀하는 문제 해결
+	// 2. Update 프로그램에서 10초이내 App 설치시 070 에러뜨므로 UI로 복귀하는 문제 해결
 	//////////////////////////////////////////////////////////////////////////////////////
 	
 	// TAG

@@ -51,6 +51,7 @@ public class SoftwareUpdatePasswordFragment extends PasswordFragment{
 				"taeha.wheelloader.update");
 		
 		if(intent != null){
+			ParentActivity.CancelCommErrStopTimer();
 			CAN1Comm.Callback_StopCommService();
 			CAN1Comm.CloseComport();
 			startActivity(intent);		
@@ -72,6 +73,7 @@ public class SoftwareUpdatePasswordFragment extends PasswordFragment{
 				"taeha.wheelloader.update");
 		
 		if(intent != null){
+			ParentActivity.CancelCommErrStopTimer();
 			CAN1Comm.Callback_StopCommService();
 			CAN1Comm.CloseComport();
 			startActivity(intent);		

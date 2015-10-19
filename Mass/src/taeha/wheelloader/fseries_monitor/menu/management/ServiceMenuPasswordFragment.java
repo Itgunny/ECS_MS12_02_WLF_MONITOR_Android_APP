@@ -66,6 +66,7 @@ public class ServiceMenuPasswordFragment extends PasswordFragment{
 				"taeha.wheelloader.fserieshwtest");
 		
 		if(intent != null){
+			ParentActivity.CancelCommErrStopTimer();
 			CAN1Comm.Callback_StopCommService();
 			CAN1Comm.CloseComport();
 			startActivity(intent);		
