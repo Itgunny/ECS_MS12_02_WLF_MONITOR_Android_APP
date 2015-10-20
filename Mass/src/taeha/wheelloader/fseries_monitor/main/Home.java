@@ -686,6 +686,7 @@ public class Home extends Activity {
 	////v2.1.0.01
 	// 1. H/W Test 프로그램 띄우면 070 에러뜨므로 UI로 복귀하는 문제 해결
 	// 2. Update 프로그램에서 10초이내 App 설치시 070 에러뜨므로 UI로 복귀하는 문제 해결
+	// 3. SoftEndStop BucketOut OFF -> ON(메뉴에서 Default할 때)
 	//////////////////////////////////////////////////////////////////////////////////////
 	
 	// TAG
