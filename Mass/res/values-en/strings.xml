@@ -477,4 +477,11 @@
     <string name="Bucket_Dump_Response_Adjust">Bucket Dump Response Adjust</string>
     <string name="Service_Contact">Service Contact</string>
     <!-- ETC End -->
+    <!-- 151020 add start -->
+    <string name="METRIC">METRIC</string>
+    <string name="US">US</string>
+    <string name="CUSTOM">CUSTOM</string>
+    <string name="FuelRate">Fuel Rate</string>
+    <string name="gal_h">gal/h</string>
+    <!-- 151020 add end -->    
 </resources>

@@ -72,7 +72,7 @@
             android:layout_alignTop="@+id/radioButton_menu_body_preference_Lang4"
             android:layout_toRightOf="@+id/radioButton_menu_body_preference_Lang5"
             android:button="@drawable/_selector_radio_btn"
-            android:text="Porutukaleo"
+            android:text="Português"
             android:textColor="@drawable/_selector_radio_txt_white_amber"
             android:textSize="25sp" />
 
@@ -108,7 +108,7 @@
             android:layout_toRightOf="@+id/radioButton_menu_body_preference_Lang8"
             android:layout_alignTop="@+id/radioButton_menu_body_preference_Lang7"
             android:button="@drawable/_selector_radio_btn"
-            android:text="Swedish"
+            android:text="Svenska"
             android:textColor="@drawable/_selector_radio_txt_white_amber"
             android:textSize="25sp" />
 
@@ -133,7 +133,7 @@
             android:layout_toRightOf="@+id/radioButton_menu_body_preference_Lang10"
             android:layout_alignTop="@+id/radioButton_menu_body_preference_Lang10" 
             android:button="@drawable/_selector_radio_btn"
-            android:text="Slovakian"
+            android:text="Slovenský"
             android:textColor="@drawable/_selector_radio_txt_white_amber"
             android:textSize="25sp" />
 
@@ -145,7 +145,7 @@
             android:layout_alignTop="@+id/radioButton_menu_body_preference_Lang10"
             android:layout_marginLeft="10dp"
             android:button="@drawable/_selector_radio_btn"
-            android:text="Estonian"
+            android:text="Eesti"
             android:textColor="@drawable/_selector_radio_txt_white_amber"
             android:textSize="25sp" />
         

@@ -74,8 +74,8 @@ public class Home extends Activity {
 	public static final int VERSION_HIGH 		= 2;
 	public static final int VERSION_LOW 		= 1;
 	public static final int VERSION_SUB_HIGH 	= 0;
-	public static final int VERSION_SUB_LOW 	= 0;
-	public static final int VERSION_TAEHA		= 1;
+	public static final int VERSION_SUB_LOW 	= 1;
+	public static final int VERSION_TAEHA		= 0;
 	////1.0.2.3
 	// UI B 안 최초 적용 2014.12.10
 	////1.0.2.4
@@ -687,6 +687,16 @@ public class Home extends Activity {
 	// 1. H/W Test 프로그램 띄우면 070 에러뜨므로 UI로 복귀하는 문제 해결
 	// 2. Update 프로그램에서 10초이내 App 설치시 070 에러뜨므로 UI로 복귀하는 문제 해결
 	// 3. SoftEndStop BucketOut OFF -> ON(메뉴에서 Default할 때)
+	////v2.1.0.10
+	// 1. 추후 호기수 입력 시 장비정보에서 확인할 수 있도록 주석처리해놓음!
+	// 2. 모니터 단위설정 기능 변경(METRIC, US, CUSTOM)
+	// 3. 단위설정 연비 추가(l/h, gal/h)
+	// 4. 무게설정 단위 US ton 추가
+	// 5. 다국어 명칭 변경(정확한 명칭은 다국어 페이지에서 확인!!!! 아래는 영어로 표기)
+	//	- Porutukaleo -> Portugues
+	//	- Swedish -> Svenska
+	//	- Slovakian -> Slovensky
+	//	- Estonian -> Eesti
 	//////////////////////////////////////////////////////////////////////////////////////
 	
 	// TAG
@@ -1052,6 +1062,13 @@ public class Home extends Activity {
 
 	public  static final int SCREEN_STATE_MAIN_CHECK_MACHINE_SERIAL							= 0x90000000;
 	
+	public	static final int UNIT_TYPE_METRIC		= 0;
+	public	static final int UNIT_TYPE_US			= 1;
+	public	static final int UNIT_TYPE_CUSTOM		= 2;
+	
+	public  static final int UNIT_FUEL_L 			= 0;
+	public  static final int UNIT_FUEL_GAL 			= 1;
+	
 	public  static final int UNIT_ODO_KM 			= 0;
 	public  static final int UNIT_ODO_MILE 			= 1;
 	
@@ -1060,6 +1077,7 @@ public class Home extends Activity {
 	
 	public  static final int UNIT_WEIGHT_TON 		= 0;
 	public  static final int UNIT_WEIGHT_LB 		= 1;
+	public  static final int UNIT_WEIGHT_US_TON		= 2;
 	
 	public  static final int UNIT_PRESSURE_BAR 		= 0;
 	public  static final int UNIT_PRESSURE_MPA 		= 1;
@@ -1156,6 +1174,8 @@ public class Home extends Activity {
 	public LanguageClass LangClass;	// ++, --, 150209 bwk
 	
 	// Unit
+	public int UnitType;
+	public int UnitFuel;
 	public int UnitOdo;
 	public int UnitTemp;
 	public int UnitWeight;
@@ -2022,6 +2042,8 @@ public class Home extends Activity {
 	public void SavePref(){
 		SharedPreferences SharePref = getSharedPreferences("Home", 0);
 		SharedPreferences.Editor edit = SharePref.edit();
+		edit.putInt("UnitType", UnitType);
+		edit.putInt("UnitFuel", UnitFuel);
 		edit.putInt("UnitOdo", UnitOdo);
 		edit.putInt("UnitTemp", UnitTemp);
 		edit.putInt("UnitWeight", UnitWeight);
@@ -2043,6 +2065,8 @@ public class Home extends Activity {
 	}
 	public void LoadPref(){
 		SharedPreferences SharePref = getSharedPreferences("Home", 0);
+		UnitType = SharePref.getInt("UnitType", UNIT_TYPE_CUSTOM);
+		UnitFuel = SharePref.getInt("UnitFuel", UNIT_FUEL_L);
 		UnitOdo = SharePref.getInt("UnitOdo", UNIT_ODO_KM);
 		UnitTemp = SharePref.getInt("UnitTemp", UNIT_TEMP_C);
 		UnitWeight = SharePref.getInt("UnitWeight", UNIT_WEIGHT_TON);
@@ -2112,6 +2136,8 @@ public class Home extends Activity {
 		String strBrightnessAutoStartTime = "BrightnessAutoStartTime" + Integer.toString(Index);
 		String strBrightnessAutoEndTime = "BrightnessAutoEndTime" + Integer.toString(Index);
 		// --, 150407 bwk
+		//String strUnitType = "UnitType" + Integer.toString(Index);
+		//String strUnitFuel = "UnitFuel" + Integer.toString(Index);
 		String strUnitTemp = "UnitTemp" + Integer.toString(Index);
 		String strUnitOdo = "UnitOdo" + Integer.toString(Index);
 		String strUnitWeight = "UnitWeight" + Integer.toString(Index);
@@ -2152,6 +2178,8 @@ public class Home extends Activity {
 		edit.putInt(strBrightnessAutoEndTime, _userdata.BrightnessAutoEndTime);
 		// --, 150407 bwk		
 		edit.putInt(strDisplayType, _userdata.DisplayType);
+		//edit.putInt(strUnitType, _userdata.UnitType);
+//		edit.putInt(strUnitFuel, _userdata.UnitFuel);
 		edit.putInt(strUnitTemp, _userdata.UnitTemp);
 		edit.putInt(strUnitOdo, _userdata.UnitOdo);
 		edit.putInt(strUnitWeight, _userdata.UnitWeight);
@@ -2197,6 +2225,8 @@ public class Home extends Activity {
 		String strBrightnessAutoEndTime = "BrightnessAutoEndTime" + Integer.toString(Index);
 		// --, 150407 bwk		
 		String strDisplayType = "DisplayType" + Integer.toString(Index);
+		//String strUnitType = "UnitType" + Integer.toString(Index);
+		//String strUnitFuel = "UnitFuel" + Integer.toString(Index);
 		String strUnitTemp = "UnitTemp" + Integer.toString(Index);
 		String strUnitOdo = "UnitOdo" + Integer.toString(Index);
 		String strUnitWeight = "UnitWeight" + Integer.toString(Index);
@@ -2240,6 +2270,8 @@ public class Home extends Activity {
 		_userdata.BrightnessAutoEndTime = SharePref.getInt(strBrightnessAutoEndTime,18);
 		// --, 150407 bwk
 		_userdata.DisplayType = SharePref.getInt(strDisplayType,Home.DISPLAY_TYPE_B);
+		//_userdata.UnitType = SharePref.getInt(strUnitType, Home.UNIT_TYPE_CUSTOM);
+		//_userdata.UnitFuel = SharePref.getInt(strUnitFuel, Home.UNIT_FUEL_L);
 		_userdata.UnitTemp = SharePref.getInt(strUnitTemp, Home.UNIT_TEMP_C);
 		_userdata.UnitOdo = SharePref.getInt(strUnitOdo, Home.UNIT_ODO_KM);
 		_userdata.UnitWeight = SharePref.getInt(strUnitWeight, Home.UNIT_WEIGHT_TON);
@@ -4749,7 +4781,8 @@ public class Home extends Activity {
 		strNumber = NumberFormat.getNumberInstance(Locale.US).format(_Number);
 		return strNumber;
 	}
-	public String GetFuelRateString(int _FuelRate){
+//	public String GetFuelRateString(int _FuelRate){
+	public String GetFuelRateString(int _FuelRate, int _unit){
 		String strFuelRate;
 		long long_Fuel;
 		int nFuel;
@@ -4762,8 +4795,15 @@ public class Home extends Activity {
 		
 		long_Fuel *= 500;
 		
-		nFuel = (int)(long_Fuel / 10000);
-		nFuel_Under = (int)((long_Fuel % 10000) / 1000);
+		if(_unit == UNIT_FUEL_GAL){
+			long_Fuel *= 264172;
+			long_Fuel /= 1000000;
+			nFuel = (int)(long_Fuel / 10000);
+			nFuel_Under = (int)((long_Fuel % 10000) / 1000);
+		}else{
+			nFuel = (int)(long_Fuel / 10000);
+			nFuel_Under = (int)((long_Fuel % 10000) / 1000);
+		}
 		
 		strFuelRate = Integer.toString(nFuel) + "." + Integer.toString(nFuel_Under);
 		return strFuelRate;
@@ -4821,6 +4861,14 @@ public class Home extends Activity {
 			long_Weight *= 220462;
 			nWeight =  (long_Weight / 1000);
 			nWeight_Under = ( (long_Weight % 1000) / 100);
+		}else if(Unit == UNIT_WEIGHT_US_TON){
+			long_Weight *= 1012311;
+			nWeight =  (long_Weight / 10000000);
+			nWeight_Under = ( (long_Weight % 10000000) / 100000);
+			if((nWeight_Under % 10) < 5)
+				nWeight_Under = nWeight_Under / 10;
+			else
+				nWeight_Under = (nWeight_Under / 10) + 1;
 		}else{
 			nWeight =  (long_Weight / 10);
 			nWeight_Under =  (long_Weight % 10);

@@ -616,9 +616,12 @@ public class MainBLeftUpMachineStatusFragment extends ParentFragment{
 	//public void WeighingUpperDisplay(int CurrentWeighingResult, int DisplayIndex, int Current, int Day1, int Today, int TotalA, int TotalB, int TotalC, int Unit){
 	public void WeighingUpperDisplay(int BoomLiftSpeedError, int BucketFullInError, int HydOilTempError, int DisplayIndex, int Current, int Day1, int Today, int TotalA, int TotalB, int TotalC, int Unit){
 	// --, 150212 bwk
-		if(ParentActivity.UnitWeight == ParentActivity.UNIT_WEIGHT_LB){
+		if(ParentActivity.UnitWeight == Home.UNIT_WEIGHT_LB){
 			textViewWeighingUpperUnit.setText(ParentActivity.getResources().getString(string.lb));
 			textViewWeighingLowerUnit.setText(ParentActivity.getResources().getString(string.lb));
+		}else if(ParentActivity.UnitWeight == Home.UNIT_WEIGHT_US_TON){
+			textViewWeighingUpperUnit.setText(ParentActivity.getResources().getString(string.USTon));
+			textViewWeighingLowerUnit.setText(ParentActivity.getResources().getString(string.USTon));
 		}else{
 			textViewWeighingUpperUnit.setText(ParentActivity.getResources().getString(string.ton));
 			textViewWeighingLowerUnit.setText(ParentActivity.getResources().getString(string.ton));
@@ -687,9 +690,12 @@ public class MainBLeftUpMachineStatusFragment extends ParentFragment{
 		}
 	}
 	public void WeighingLowerDisplay(int DisplayIndex, int Current, int Day1, int Today, int TotalA, int TotalB, int TotalC, int Unit){
-		if(ParentActivity.UnitWeight == ParentActivity.UNIT_WEIGHT_LB){
+		if(ParentActivity.UnitWeight == Home.UNIT_WEIGHT_LB){
 			textViewWeighingUpperUnit.setText(ParentActivity.getResources().getString(string.lb));
 			textViewWeighingLowerUnit.setText(ParentActivity.getResources().getString(string.lb));
+		}else if(ParentActivity.UnitWeight == Home.UNIT_WEIGHT_US_TON){
+			textViewWeighingUpperUnit.setText(ParentActivity.getResources().getString(string.USTon));
+			textViewWeighingLowerUnit.setText(ParentActivity.getResources().getString(string.USTon));
 		}else{
 			textViewWeighingUpperUnit.setText(ParentActivity.getResources().getString(string.ton));
 			textViewWeighingLowerUnit.setText(ParentActivity.getResources().getString(string.ton));

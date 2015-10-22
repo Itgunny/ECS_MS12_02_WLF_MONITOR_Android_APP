@@ -1571,6 +1571,9 @@ public class UserSwitching extends ParentFragment{
 		case Home.UNIT_WEIGHT_LB:
 			adapter.UpdateSecond(STATE_UNIT_WEIGHT, ParentActivity.getResources().getString(string.lb));
 			break;
+		case Home.UNIT_WEIGHT_US_TON:
+			adapter.UpdateSecond(STATE_UNIT_WEIGHT, ParentActivity.getResources().getString(string.USTon));
+			break;
 		default:
 			break;
 		}
@@ -1580,6 +1583,9 @@ public class UserSwitching extends ParentFragment{
 			break;
 		case Home.UNIT_WEIGHT_LB:
 			adapter.UpdateThird(STATE_UNIT_WEIGHT, ParentActivity.getResources().getString(string.lb));
+			break;
+		case Home.UNIT_WEIGHT_US_TON:
+			adapter.UpdateThird(STATE_UNIT_WEIGHT, ParentActivity.getResources().getString(string.USTon));
 			break;
 		default:
 			break;
@@ -1645,10 +1651,10 @@ public class UserSwitching extends ParentFragment{
 			break;
 		}
 		switch (LoadingData) {
-		case Home.UNIT_WEIGHT_TON:
+		case Home.DISPLAY_TYPE_A:
 			adapter.UpdateThird(STATE_DISPLAYTYPE, ParentActivity.getResources().getString(string.Type_A));
 			break;
-		case Home.UNIT_WEIGHT_LB:
+		case Home.DISPLAY_TYPE_B:
 			adapter.UpdateThird(STATE_DISPLAYTYPE, ParentActivity.getResources().getString(string.Type_B));
 			break;
 		default:

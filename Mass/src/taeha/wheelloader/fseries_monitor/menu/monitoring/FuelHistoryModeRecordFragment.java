@@ -4,8 +4,10 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 import taeha.wheelloader.fseries_monitor.main.CAN1CommManager;
+import taeha.wheelloader.fseries_monitor.main.Home;
 import taeha.wheelloader.fseries_monitor.main.ParentFragment;
 import taeha.wheelloader.fseries_monitor.main.R;
+import taeha.wheelloader.fseries_monitor.main.R.string;
 import taeha.wheelloader.fseries_monitor.menu.monitoring.FuelHistoryDailyRecordFragment.SendCommandTimerClass;
 import android.R.color;
 import android.os.Bundle;
@@ -28,6 +30,7 @@ public class FuelHistoryModeRecordFragment  extends ParentFragment{
 	//RESOURCE////////////////////////////////////////
 	ImageView[]	imgViewMode;
 	TextView[]	textViewMode;
+	TextView	textViewUnit;
 	
 	ImageButton imgbtnInital;
 	ImageButton	imgbtnOK;
@@ -65,6 +68,7 @@ public class FuelHistoryModeRecordFragment  extends ParentFragment{
 		InitValuables();
 		InitResource();
 		InitButtonListener();
+		SetUnit();
 		
 		StartSendCommandTimer();
 		
@@ -104,6 +108,8 @@ public class FuelHistoryModeRecordFragment  extends ParentFragment{
 		
 		imgbtnOK = (ImageButton)mRoot.findViewById(R.id.ImageButton_menu_body_monitoring_fuelhistory_moderecord_low_ok);
 		imgbtnInital = (ImageButton)mRoot.findViewById(R.id.ImageButton_menu_body_monitoring_fuelhistory_moderecord_low_initialization);
+		
+		textViewUnit = (TextView)mRoot.findViewById(R.id.textView_menu_body_monitoring_fuelhistory_moderecord_graph_unit);
 	}
 	
 	@Override
@@ -168,6 +174,16 @@ public class FuelHistoryModeRecordFragment  extends ParentFragment{
 			Log.e(TAG,"IllegalStateException");
 		}
 				
+	}
+	/////////////////////////////////////////////////////////////////////
+	public void SetUnit(){
+		if(ParentActivity.UnitFuel == Home.UNIT_FUEL_GAL){
+			textViewUnit.setText(ParentActivity.getResources().getString(string.gal_h));
+		}
+		else{
+			textViewUnit.setText(ParentActivity.getResources().getString(string.l_h));
+		}
+	
 	}
 	/////////////////////////////////////////////////////////////////////	
 	public class SendCommandTimerClass extends TimerTask{
@@ -241,7 +257,7 @@ public class FuelHistoryModeRecordFragment  extends ParentFragment{
 			if(_FuelUsed[i] == 0xFFFF || _FuelUsed[i] < 0)
 				_FuelUsed[i] = 0;
 			Scale = (float) ((float) _FuelUsed[i] / 1000.0);
-			textViewMode[i].setText(ParentActivity.GetFuelRateString(_FuelUsed[i]));
+			textViewMode[i].setText(ParentActivity.GetFuelRateString(_FuelUsed[i], ParentActivity.UnitFuel));
 			RelativeLayout.LayoutParams Params = (RelativeLayout.LayoutParams)textViewMode[i].getLayoutParams(); 
 			if(_FuelUsed[i] >= 1000)
 			{
@@ -261,7 +277,7 @@ public class FuelHistoryModeRecordFragment  extends ParentFragment{
 	}	
 	/////////////////////////////////////////////////////////////////////	
 	public void ClickInitial(){
-		ParentActivity.OldScreenIndex = ParentActivity.SCREEN_STATE_MENU_MONITORING_FUELHISTORY_MODERECORD;
+		ParentActivity.OldScreenIndex = Home.SCREEN_STATE_MENU_MONITORING_FUELHISTORY_MODERECORD;
 		ParentActivity._FuelInitalPopup.setMode(CAN1CommManager.DATA_STATE_MODE_FUEL_RATE_INFO_CLEAR);
 		ParentActivity.showFuelInitalPopup();
 	}

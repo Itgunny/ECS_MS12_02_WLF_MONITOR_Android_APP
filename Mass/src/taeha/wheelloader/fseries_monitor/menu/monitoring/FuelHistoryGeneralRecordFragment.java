@@ -13,8 +13,10 @@ import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.TextView;
 import taeha.wheelloader.fseries_monitor.main.CAN1CommManager;
+import taeha.wheelloader.fseries_monitor.main.Home;
 import taeha.wheelloader.fseries_monitor.main.ParentFragment;
 import taeha.wheelloader.fseries_monitor.main.R;
+import taeha.wheelloader.fseries_monitor.main.R.string;
 import taeha.wheelloader.fseries_monitor.menu.monitoring.FuelHistoryDailyRecordFragment.SendCommandTimerClass;
 
 public class FuelHistoryGeneralRecordFragment  extends ParentFragment{
@@ -26,6 +28,9 @@ public class FuelHistoryGeneralRecordFragment  extends ParentFragment{
 	TextView	textViewDaysData;
 	TextView	textViewAvgInital;
 	TextView	textViewDaysInital;
+	
+	TextView	textViewAvgUnit;
+	TextView	textViewDayUnit;
 	
 	ImageButton	imgbtnOK;
 	//////////////////////////////////////////////////
@@ -60,8 +65,9 @@ public class FuelHistoryGeneralRecordFragment  extends ParentFragment{
 		InitResource();
 		InitValuables();
 		InitButtonListener();
+		SetUnit();
 		
-		ParentActivity.ScreenIndex = ParentActivity.SCREEN_STATE_MENU_MONITORING_FUELHISTORY_GENERALRECORD;
+		ParentActivity.ScreenIndex = Home.SCREEN_STATE_MENU_MONITORING_FUELHISTORY_GENERALRECORD;
 		ParentActivity._MenuBaseFragment._MenuInterTitleFragment.SetTitleText(ParentActivity.getResources().getString(R.string.General_Record));
 		
 		CursurIndex = 1;
@@ -92,6 +98,8 @@ public class FuelHistoryGeneralRecordFragment  extends ParentFragment{
 		textViewDaysInital = (TextView)mRoot.findViewById(R.id.textView_menu_body_monitoring_fuelhistory_generalrecord_a_days_fuel_used_init);
 		imgbtnOK = (ImageButton)mRoot.findViewById(R.id.ImageButton_menu_body_monitoring_fuelhistory_generalrecord_low_ok);
 		
+		textViewAvgUnit = (TextView)mRoot.findViewById(R.id.textView_menu_body_monitoring_fuelhistory_generalrecord_average_unit);
+		textViewDayUnit = (TextView)mRoot.findViewById(R.id.textView_menu_body_monitoring_fuelhistory_generalrecord_a_days_fuel_used_unit);
 	}
 
 	@Override
@@ -141,19 +149,31 @@ public class FuelHistoryGeneralRecordFragment  extends ParentFragment{
 		// TODO Auto-generated method stub
 		DisplayFuelData(AverageFuelRate, LatestFuelConsumed);
 	}
+	/////////////////////////////////////////////////////////////////////
+	public void SetUnit(){
+		if(ParentActivity.UnitFuel == Home.UNIT_FUEL_GAL){
+			textViewAvgUnit.setText(ParentActivity.getResources().getString(string.gal_h));
+			textViewDayUnit.setText(ParentActivity.getResources().getString(string.gal));
+		}
+		else{
+			textViewAvgUnit.setText(ParentActivity.getResources().getString(string.l_h));
+			textViewDayUnit.setText(ParentActivity.getResources().getString(string.l));
+		}
+	
+	}
 	/////////////////////////////////////////////////////////////////////	
 	public void DisplayFuelData(int _AverageFuelRate, int _LatestFuelConsumed){
-		textViewAvgData.setText(ParentActivity.GetFuelRateString(_AverageFuelRate));
-		textViewDaysData.setText(ParentActivity.GetFuelRateString(_LatestFuelConsumed));
+		textViewAvgData.setText(ParentActivity.GetFuelRateString(_AverageFuelRate,ParentActivity.UnitFuel));
+		textViewDaysData.setText(ParentActivity.GetFuelRateString(_LatestFuelConsumed,ParentActivity.UnitFuel));
 	}
 	/////////////////////////////////////////////////////////////////////	
 	public void ClickAverageInitial(){
-		ParentActivity.OldScreenIndex = ParentActivity.SCREEN_STATE_MENU_MONITORING_FUELHISTORY_GENERALRECORD;
+		ParentActivity.OldScreenIndex = Home.SCREEN_STATE_MENU_MONITORING_FUELHISTORY_GENERALRECORD;
 		ParentActivity._FuelInitalPopup.setMode(CAN1CommManager.DATA_STATE_AVERAGE_FUEL_RATE_INFO_CLEAR);
 		ParentActivity.showFuelInitalPopup();
 	}
 	public void ClickDaysInitial(){
-		ParentActivity.OldScreenIndex = ParentActivity.SCREEN_STATE_MENU_MONITORING_FUELHISTORY_GENERALRECORD;
+		ParentActivity.OldScreenIndex = Home.SCREEN_STATE_MENU_MONITORING_FUELHISTORY_GENERALRECORD;
 		ParentActivity._FuelInitalPopup.setMode(CAN1CommManager.DATA_STATE_A_DAYS_FUEL_USED_CLEAR);
 		ParentActivity.showFuelInitalPopup();
 	}

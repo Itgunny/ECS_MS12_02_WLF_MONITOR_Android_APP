@@ -19,6 +19,7 @@ import taeha.wheelloader.fseries_monitor.main.CAN1CommManager;
 import taeha.wheelloader.fseries_monitor.main.Home;
 import taeha.wheelloader.fseries_monitor.main.ParentFragment;
 import taeha.wheelloader.fseries_monitor.main.R;
+import taeha.wheelloader.fseries_monitor.main.R.string;
 import taeha.wheelloader.fseries_monitor.menu.management.MaintenanceDetailFragment.SendCommandTimerClass;
 
 public class FuelHistoryDailyRecordFragment  extends ParentFragment{
@@ -28,6 +29,8 @@ public class FuelHistoryDailyRecordFragment  extends ParentFragment{
 	//RESOURCE////////////////////////////////////////
 	ImageView[]	imgViewDay;
 	TextView[]	textViewDay;
+	
+	TextView	textViewUnit;
 	
 	ImageButton imgbtnInital;
 	ImageButton	imgbtnOK;
@@ -66,6 +69,7 @@ public class FuelHistoryDailyRecordFragment  extends ParentFragment{
 		InitResource();
 		InitButtonListener();
 		StartSendCommandTimer();
+		SetUnit();
 		
 		ParentActivity.ScreenIndex = ParentActivity.SCREEN_STATE_MENU_MONITORING_FUELHISTORY_DAILYRECORD;
 		ParentActivity._MenuBaseFragment._MenuInterTitleFragment.SetTitleText(ParentActivity.getResources().getString(R.string.Daily_Record));
@@ -109,6 +113,8 @@ public class FuelHistoryDailyRecordFragment  extends ParentFragment{
 		
 		imgbtnOK = (ImageButton)mRoot.findViewById(R.id.ImageButton_menu_body_monitoring_fuelhistory_dailyrecord_low_ok);
 		imgbtnInital = (ImageButton)mRoot.findViewById(R.id.ImageButton_menu_body_monitoring_fuelhistory_dailyrecord_low_initialization);
+		
+		textViewUnit = (TextView)mRoot.findViewById(R.id.textView_menu_body_monitoring_fuelhistory_dailyrecord_graph_unit);
 	}
 	
 	@Override
@@ -179,6 +185,14 @@ public class FuelHistoryDailyRecordFragment  extends ParentFragment{
 			Log.e(TAG,"IllegalStateException");
 		}		
 	}
+	/////////////////////////////////////////////////////////////////////
+	public void SetUnit(){
+		if(ParentActivity.UnitFuel == Home.UNIT_FUEL_GAL)
+			textViewUnit.setText(ParentActivity.getResources().getString(string.gal));
+		else
+			textViewUnit.setText(ParentActivity.getResources().getString(string.l));
+			
+	}
 	/////////////////////////////////////////////////////////////////////	
 	public class SendCommandTimerClass extends TimerTask{
 
@@ -242,7 +256,7 @@ public class FuelHistoryDailyRecordFragment  extends ParentFragment{
 			if(_FuelUsed[i] == 0xFFFF || _FuelUsed[i] < 0)
 				_FuelUsed[i] = 0;
 			Scale = (float) ((float) _FuelUsed[i] / 12000.0);
-			textViewDay[i].setText(ParentActivity.GetFuelRateString(_FuelUsed[i]));
+			textViewDay[i].setText(ParentActivity.GetFuelRateString(_FuelUsed[i],ParentActivity.UnitFuel));
 			RelativeLayout.LayoutParams Params = (RelativeLayout.LayoutParams)textViewDay[i].getLayoutParams(); 
 			if(_FuelUsed[i] >= 12000)
 			{

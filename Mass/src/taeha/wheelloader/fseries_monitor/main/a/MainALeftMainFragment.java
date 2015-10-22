@@ -695,6 +695,9 @@ public class MainALeftMainFragment extends ParentFragment{
 		if(ParentActivity.UnitWeight == Home.UNIT_WEIGHT_LB){
 			textViewWeighingUpperUnit.setText(ParentActivity.getResources().getString(string.lb));
 			textViewWeighingLowerUnit.setText(ParentActivity.getResources().getString(string.lb));
+		}else if(ParentActivity.UnitWeight == Home.UNIT_WEIGHT_US_TON){
+			textViewWeighingUpperUnit.setText(ParentActivity.getResources().getString(string.USTon));
+			textViewWeighingLowerUnit.setText(ParentActivity.getResources().getString(string.USTon));
 		}else{
 			textViewWeighingUpperUnit.setText(ParentActivity.getResources().getString(string.ton));
 			textViewWeighingLowerUnit.setText(ParentActivity.getResources().getString(string.ton));
@@ -753,9 +756,12 @@ public class MainALeftMainFragment extends ParentFragment{
 		}
 	}
 	public void WeighingLowerDisplay(int DisplayIndex, int Current, int Day1, int Today, int TotalA, int TotalB, int TotalC, int Unit){
-		if(ParentActivity.UnitWeight == ParentActivity.UNIT_WEIGHT_LB){
+		if(ParentActivity.UnitWeight == Home.UNIT_WEIGHT_LB){
 			textViewWeighingUpperUnit.setText(ParentActivity.getResources().getString(string.lb));
 			textViewWeighingLowerUnit.setText(ParentActivity.getResources().getString(string.lb));
+		}else if(ParentActivity.UnitWeight == Home.UNIT_WEIGHT_US_TON){
+			textViewWeighingUpperUnit.setText(ParentActivity.getResources().getString(string.USTon));
+			textViewWeighingLowerUnit.setText(ParentActivity.getResources().getString(string.USTon));
 		}else{
 			textViewWeighingUpperUnit.setText(ParentActivity.getResources().getString(string.ton));
 			textViewWeighingLowerUnit.setText(ParentActivity.getResources().getString(string.ton));
@@ -839,12 +845,18 @@ public class MainALeftMainFragment extends ParentFragment{
 //			textViewFuelUnit.setText("");
 //			break;
 		case CAN1CommManager.DATA_STATE_AVERAGE_FUEL_RATE:
-			textViewFuelData.setText(ParentActivity.GetFuelRateString(AverageFuel));
-			textViewFuelUnit.setText(ParentActivity.getResources().getString(string.l_h));
+			textViewFuelData.setText(ParentActivity.GetFuelRateString(AverageFuel, ParentActivity.UnitFuel));
+			if(ParentActivity.UnitFuel == Home.UNIT_FUEL_GAL)
+				textViewFuelUnit.setText(ParentActivity.getResources().getString(string.gal_h));
+			else
+				textViewFuelUnit.setText(ParentActivity.getResources().getString(string.l_h));
 			break;
 		case CAN1CommManager.DATA_STATE_A_DAYS_FUEL_USED:
-			textViewFuelData.setText(ParentActivity.GetFuelRateString(LatestConsumed));
-			textViewFuelUnit.setText(ParentActivity.getResources().getString(string.l));
+			textViewFuelData.setText(ParentActivity.GetFuelRateString(LatestConsumed, ParentActivity.UnitFuel));
+			if(ParentActivity.UnitFuel == Home.UNIT_FUEL_GAL)
+				textViewFuelUnit.setText(ParentActivity.getResources().getString(string.gal));
+			else
+				textViewFuelUnit.setText(ParentActivity.getResources().getString(string.l));
 			break;
 		default:
 			break;

@@ -55,10 +55,11 @@
                 android:layout_marginLeft="10dp"
                 android:layout_toRightOf="@+id/textView_menu_body_monitoring_fuelhistory_generalrecord_average_data"
                 android:gravity="left|center_vertical"
-                android:text="@string/l_h"
+                android:layout_marginTop="15dp"
+                android:text="@string/gal_h"
                 android:textAppearance="?android:attr/textAppearanceLarge"
                 android:textColor="@color/gray" 
-                android:textSize="50sp"  />
+                android:textSize="30sp"  />
 	          
         </RelativeLayout>
 
@@ -115,12 +116,13 @@
                 android:layout_alignBottom="@+id/textView_menu_body_monitoring_fuelhistory_generalrecord_a_days_fuel_used_data"
                 android:layout_alignTop="@+id/textView_menu_body_monitoring_fuelhistory_generalrecord_a_days_fuel_used_data"
                 android:layout_marginLeft="10dp"
+                android:layout_marginTop="15dp"
                 android:layout_toRightOf="@+id/textView_menu_body_monitoring_fuelhistory_generalrecord_a_days_fuel_used_data"
                 android:gravity="left|center_vertical"
                 android:text="@string/l"
                 android:textAppearance="?android:attr/textAppearanceLarge"
                 android:textColor="@color/gray"
-                android:textSize="50sp" />
+                android:textSize="30sp" />
 
         </RelativeLayout>
         
