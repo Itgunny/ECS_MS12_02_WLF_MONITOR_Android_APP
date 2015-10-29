@@ -75,7 +75,7 @@ public class Home extends Activity {
 	public static final int VERSION_LOW 		= 1;
 	public static final int VERSION_SUB_HIGH 	= 0;
 	public static final int VERSION_SUB_LOW 	= 1;
-	public static final int VERSION_TAEHA		= 0;
+	public static final int VERSION_TAEHA		= 1;
 	////1.0.2.3
 	// UI B 안 최초 적용 2014.12.10
 	////1.0.2.4
@@ -697,6 +697,9 @@ public class Home extends Activity {
 	//	- Swedish -> Svenska
 	//	- Slovakian -> Slovensky
 	//	- Estonian -> Eesti
+	////v2.1.0.11
+	// 1. A안일 경우 Axle 후 Quick->Home으로 올 때 Keypad 숨겨지지 않는 버그 수정
+	// 2. ESL 지정시간 후 동작 Enter 입력 시 커서 안움직이는 현상 개선(확인필요)
 	//////////////////////////////////////////////////////////////////////////////////////
 	
 	// TAG
@@ -3350,7 +3353,7 @@ public class Home extends Activity {
 						} else if((ScreenIndex & SCREEN_STATE_MAIN_FILTER) == 0x05000000){
 							Log.d(TAG, "BackHomeQucik!!!");
 							if (DisplayType == DISPLAY_TYPE_A) {
-								_MainBBaseFragment.showDefaultScreenAnimation();
+								_MainBBaseFragment.showQuicktoDefaultScreenAnimation();
 							} else {
 								_MainABaseFragment.showDefaultScreenAnimation();
 							}

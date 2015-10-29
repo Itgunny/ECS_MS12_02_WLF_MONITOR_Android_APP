@@ -759,6 +759,8 @@ public class MachineSecurityESLFragment extends ParentFragment{
 				CursurDisplay(CursurIndex);
 				break;
 			default:
+				CursurIndex = 4;
+		        HandleCursurDisplay.sendMessage(HandleCursurDisplay.obtainMessage(CursurIndex));
 				break;
 			}
 			
