@@ -43,6 +43,7 @@ public class FuelHistoryModeRecordFragment  extends ParentFragment{
 	Handler HandleCursurDisplay;
 	
 	private Timer mSendCommandTimer = null;
+	public boolean bCursurIndex;
 	//////////////////////////////////////////////////
 	
 	//Fragment////////////////////////////////////////
@@ -72,7 +73,7 @@ public class FuelHistoryModeRecordFragment  extends ParentFragment{
 		
 		StartSendCommandTimer();
 		
-		ParentActivity.ScreenIndex = ParentActivity.SCREEN_STATE_MENU_MONITORING_FUELHISTORY_MODERECORD;
+		ParentActivity.ScreenIndex = Home.SCREEN_STATE_MENU_MONITORING_FUELHISTORY_MODERECORD;
 		ParentActivity._MenuBaseFragment._MenuInterTitleFragment.SetTitleText(ParentActivity.getResources().getString(R.string.Mode_Record));
 		
 		CursurIndex = 1;
@@ -118,6 +119,8 @@ public class FuelHistoryModeRecordFragment  extends ParentFragment{
 		ModeFuelUsed = new int[3];
 		imgViewMode = new ImageView[3];
 		textViewMode = new TextView[3];
+		
+		bCursurIndex = true;
 	}
 	@Override
 	protected void InitButtonListener() {
@@ -169,6 +172,9 @@ public class FuelHistoryModeRecordFragment  extends ParentFragment{
 		try {
 			DisplayModeGraph(ModeFuelUsed);
 			DisplayModeText(ModeFuelUsed);
+			
+			if(bCursurIndex == false && ParentActivity.ScreenIndex == Home.SCREEN_STATE_MENU_MONITORING_FUELHISTORY_MODERECORD)
+				CursurDisplay(CursurIndex);
 		} catch (IllegalStateException e) {
 			// TODO: handle exception
 			Log.e(TAG,"IllegalStateException");
@@ -177,10 +183,10 @@ public class FuelHistoryModeRecordFragment  extends ParentFragment{
 	}
 	/////////////////////////////////////////////////////////////////////
 	public void SetUnit(){
-		if(ParentActivity.UnitFuel == Home.UNIT_FUEL_GAL){
+		/*if(ParentActivity.UnitFuel == Home.UNIT_FUEL_GAL){
 			textViewUnit.setText(ParentActivity.getResources().getString(string.gal_h));
 		}
-		else{
+		else*/{
 			textViewUnit.setText(ParentActivity.getResources().getString(string.l_h));
 		}
 	
@@ -333,6 +339,7 @@ public class FuelHistoryModeRecordFragment  extends ParentFragment{
 		}
 	}
 	public void CursurDisplay(int Index){
+		bCursurIndex = true;
 		imgbtnInital.setPressed(false);
 		imgbtnOK.setPressed(false);
 		switch (Index) {

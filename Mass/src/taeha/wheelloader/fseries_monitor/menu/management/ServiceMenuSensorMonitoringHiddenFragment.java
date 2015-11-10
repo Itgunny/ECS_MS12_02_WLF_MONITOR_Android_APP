@@ -482,7 +482,6 @@ public class ServiceMenuSensorMonitoringHiddenFragment extends ParentFragment{
 				,"Fan rpm", Integer.toString(FanRpm), "rpm"));
 //		adapter.addItem(new IconTextItem(ParentActivity.getResources().getDrawable(R.drawable.menu_management_machine_monitoring_bg_light),ParentActivity.getResources().getDrawable(R.drawable.menu_management_machine_monitoring_bg_line)
 //				, "Engine Cooling Fan Valve Current", Integer.toString(EpprCurrent), "%"));		// ++, --, 150407 bwk HHI 요청으로 전류단위를 mA에서 %로 변경
-		adapter.notifyDataSetChanged();
 		textViewEpprValue.setText(Integer.toString(EpprCurrent));
 		
 		BackgroundFlag = true;
@@ -517,7 +516,7 @@ public class ServiceMenuSensorMonitoringHiddenFragment extends ParentFragment{
 			}
 		
 		}
-		
+		adapter.notifyDataSetChanged();
 						
 	}
 	

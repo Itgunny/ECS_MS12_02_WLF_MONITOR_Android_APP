@@ -286,9 +286,9 @@ public class OperationHistoryFragment extends ParentFragment{
 		_textviewData.setText(ParentActivity.GetWeighit(_data, _unit));
 		if(_unit == Home.UNIT_WEIGHT_LB){
 			_textviewUnit.setText(ParentActivity.getResources().getString(string.lb));
-		}else if(_unit == Home.UNIT_WEIGHT_US_TON){
+		}/*else if(_unit == Home.UNIT_WEIGHT_US_TON){
 			_textviewUnit.setText(ParentActivity.getResources().getString(string.USTon));
-		}else{
+		}*/else{
 			_textviewUnit.setText(ParentActivity.getResources().getString(string.ton));
 		}
 	}

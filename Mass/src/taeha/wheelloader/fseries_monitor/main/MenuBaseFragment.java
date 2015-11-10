@@ -1435,6 +1435,12 @@ public class MenuBaseFragment extends ParentFragment{
 		case Home.SCREEN_STATE_MENU_MODE_HYD_WORKLOAD_INIT:
 			ParentActivity._WorkLoadInitPopup.ClickLeft();
 			break;
+		case Home.SCREEN_STATE_MENU_MODE_HYD_WORKLOAD_WEIGHING_INIT1:
+			ParentActivity._WorkLoadWeighingInitPopup1.ClickLeft();
+			break;
+		case Home.SCREEN_STATE_MENU_MODE_HYD_WORKLOAD_WEIGHING_INIT2:
+			ParentActivity._WorkLoadWeighingInitPopup2.ClickLeft();
+			break;
 		case Home.SCREEN_STATE_MENU_MODE_HYD_DETENT:
 			_DetentFragment.ClickLeft();
 			break;
@@ -1726,6 +1732,12 @@ public class MenuBaseFragment extends ParentFragment{
 		case Home.SCREEN_STATE_MENU_MODE_HYD_WORKLOAD_INIT:
 			ParentActivity._WorkLoadInitPopup.ClickRight();
 			break;
+		case Home.SCREEN_STATE_MENU_MODE_HYD_WORKLOAD_WEIGHING_INIT1:
+			ParentActivity._WorkLoadWeighingInitPopup1.ClickRight();
+			break;
+		case Home.SCREEN_STATE_MENU_MODE_HYD_WORKLOAD_WEIGHING_INIT2:
+			ParentActivity._WorkLoadWeighingInitPopup2.ClickRight();
+			break;
 		case Home.SCREEN_STATE_MENU_MODE_HYD_DETENT:
 			_DetentFragment.ClickRight();
 			break;
@@ -2015,6 +2027,12 @@ public class MenuBaseFragment extends ParentFragment{
 			break;
 		case Home.SCREEN_STATE_MENU_MODE_HYD_WORKLOAD_INIT:
 			ParentActivity._WorkLoadInitPopup.ClickESC();
+			break;
+		case Home.SCREEN_STATE_MENU_MODE_HYD_WORKLOAD_WEIGHING_INIT1:
+			ParentActivity._WorkLoadWeighingInitPopup1.ClickESC();
+			break;
+		case Home.SCREEN_STATE_MENU_MODE_HYD_WORKLOAD_WEIGHING_INIT2:
+			ParentActivity._WorkLoadWeighingInitPopup2.ClickESC();
 			break;
 		case Home.SCREEN_STATE_MENU_MODE_HYD_DETENT:
 			_DetentFragment.ClickESC();
@@ -2310,6 +2328,12 @@ public class MenuBaseFragment extends ParentFragment{
 			break;
 		case Home.SCREEN_STATE_MENU_MODE_HYD_WORKLOAD_INIT:
 			ParentActivity._WorkLoadInitPopup.ClickEnter();
+			break;
+		case Home.SCREEN_STATE_MENU_MODE_HYD_WORKLOAD_WEIGHING_INIT1:
+			ParentActivity._WorkLoadWeighingInitPopup1.ClickEnter();
+			break;
+		case Home.SCREEN_STATE_MENU_MODE_HYD_WORKLOAD_WEIGHING_INIT2:
+			ParentActivity._WorkLoadWeighingInitPopup2.ClickEnter();
 			break;
 		case Home.SCREEN_STATE_MENU_MODE_HYD_DETENT:
 			_DetentFragment.ClickEnter();

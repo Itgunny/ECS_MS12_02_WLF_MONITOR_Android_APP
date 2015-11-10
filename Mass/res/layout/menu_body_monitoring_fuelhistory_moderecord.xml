@@ -245,7 +245,7 @@
             android:layout_height="wrap_content"
             android:layout_alignBottom="@+id/imageView_menu_body_monitoring_fuelhistory_moderecord_low_bg"
             android:layout_toLeftOf="@+id/imageView_menu_body_monitoring_fuelhistory_moderecord_low_line_1"
-            android:background="@drawable/_selector_menu_low_center_btn" />
+            android:background="@drawable/menu_low_center" />
 
         <ImageButton
             android:id="@+id/ImageButton_menu_body_monitoring_fuelhistory_moderecord_low_initialization"

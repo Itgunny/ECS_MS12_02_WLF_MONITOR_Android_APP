@@ -161,6 +161,7 @@ public class UserSwitching extends ParentFragment{
 	
 	boolean CheckTCLockUp = false;
 	boolean CheckEHCU = false;
+	boolean CheckTM = false;
 	
 	//////////////////////////////////////////////////
 	
@@ -283,7 +284,8 @@ public class UserSwitching extends ParentFragment{
 //				ParentActivity.getResources().getString(string.Warming_Up)
 //				, ""
 //				, ""));
-		if(ParentActivity._CheckModel.GetMCUVersion(CAN1Comm.Get_ComponentBasicInformation_1698_PGN65330()) == CheckModel.MODEL_980)
+		//if(ParentActivity._CheckModel.GetMCUVersion(CAN1Comm.Get_ComponentBasicInformation_1698_PGN65330()) == CheckModel.MODEL_980)
+		if(ParentActivity._CheckModel.GetMCUModelNum(CAN1Comm.Get_ComponentBasicInformation_1698_PGN65330()) == 980)
 		{
 			adapter.addItem(new IconTextItemUserSwitching( ParentActivity.getResources().getDrawable(R.drawable.menu_management_machine_monitoring_bg_dark),
 					null,
@@ -304,10 +306,10 @@ public class UserSwitching extends ParentFragment{
 				ParentActivity.getResources().getString(string.Shift_Mode)
 				, ""
 				, ""));
-		if(ParentActivity._CheckModel.GetMCUVersion(CAN1Comm.Get_ComponentBasicInformation_1698_PGN65330()) == CheckModel.MODEL_940
+		/*if(ParentActivity._CheckModel.GetMCUVersion(CAN1Comm.Get_ComponentBasicInformation_1698_PGN65330()) == CheckModel.MODEL_940
 				|| ParentActivity._CheckModel.GetMCUVersion(CAN1Comm.Get_ComponentBasicInformation_1698_PGN65330()) == CheckModel.MODEL_935){
 			CheckTCLockUp = false;
-		}else if(ParentActivity._CheckModel.GetTCUModel(CAN1Comm.Get_ComponentBasicInformation_1698_PGN65330_TCU()) == CheckModel.TCU_4SPEED){
+		}else*/ if(ParentActivity._CheckModel.GetTCUModel(CAN1Comm.Get_ComponentBasicInformation_1698_PGN65330_TCU()) == CheckModel.TCU_4SPEED){
 			CheckTCLockUp = false;
 		}else{
 			CheckTCLockUp = true;
@@ -381,6 +383,13 @@ public class UserSwitching extends ParentFragment{
 		{
 			CheckEHCU = true;
 			
+			String strModelOption = ParentActivity._CheckModel.GetMCUModelOption(CAN1Comm.Get_ComponentBasicInformation_1698_PGN65330());
+			if(strModelOption.equals("TM"))
+				CheckTM = true;
+			else
+				CheckTM = false;
+				
+			
 			if(BackgroundFlag == false)
 			{
 				adapter.addItem(new IconTextItemUserSwitching( ParentActivity.getResources().getDrawable(R.drawable.menu_management_machine_monitoring_bg_light),
@@ -393,23 +402,27 @@ public class UserSwitching extends ParentFragment{
 						ParentActivity.getResources().getString(string.Soft_End_Stop) + "/" + ParentActivity.getResources().getString(string.Boom_Up)
 						, ""
 						, ""));
-				adapter.addItem(new IconTextItemUserSwitching( ParentActivity.getResources().getDrawable(R.drawable.menu_management_machine_monitoring_bg_light),
-						null,
-						ParentActivity.getResources().getString(string.Soft_End_Stop) + "/" + ParentActivity.getResources().getString(string.Boom_Down)
-						, ""
-						, ""));
-				adapter.addItem(new IconTextItemUserSwitching( ParentActivity.getResources().getDrawable(R.drawable.menu_management_machine_monitoring_bg_dark),
-						null,
-						ParentActivity.getResources().getString(string.Soft_End_Stop) + "/" + ParentActivity.getResources().getString(string.Bucket_In)
-						, ""
-						, ""));
-				adapter.addItem(new IconTextItemUserSwitching( ParentActivity.getResources().getDrawable(R.drawable.menu_management_machine_monitoring_bg_light),
-						null,
-						ParentActivity.getResources().getString(string.Soft_End_Stop) + "/" + ParentActivity.getResources().getString(string.Bucket_Dump)
-						, ""
-						, ""));
-				BackgroundFlag = true;
-
+				BackgroundFlag = false;
+				
+				if(CheckTM == false)
+				{
+					adapter.addItem(new IconTextItemUserSwitching( ParentActivity.getResources().getDrawable(R.drawable.menu_management_machine_monitoring_bg_light),
+							null,
+							ParentActivity.getResources().getString(string.Soft_End_Stop) + "/" + ParentActivity.getResources().getString(string.Boom_Down)
+							, ""
+							, ""));
+					adapter.addItem(new IconTextItemUserSwitching( ParentActivity.getResources().getDrawable(R.drawable.menu_management_machine_monitoring_bg_dark),
+							null,
+							ParentActivity.getResources().getString(string.Soft_End_Stop) + "/" + ParentActivity.getResources().getString(string.Bucket_In)
+							, ""
+							, ""));
+					adapter.addItem(new IconTextItemUserSwitching( ParentActivity.getResources().getDrawable(R.drawable.menu_management_machine_monitoring_bg_light),
+							null,
+							ParentActivity.getResources().getString(string.Soft_End_Stop) + "/" + ParentActivity.getResources().getString(string.Bucket_Dump)
+							, ""
+							, ""));
+					BackgroundFlag = true;
+				}
 			}
 			else
 			{
@@ -423,26 +436,34 @@ public class UserSwitching extends ParentFragment{
 						ParentActivity.getResources().getString(string.Soft_End_Stop) + "/" + ParentActivity.getResources().getString(string.Boom_Up)
 						, ""
 						, ""));
-				adapter.addItem(new IconTextItemUserSwitching( ParentActivity.getResources().getDrawable(R.drawable.menu_management_machine_monitoring_bg_dark),
-						null,
-						ParentActivity.getResources().getString(string.Soft_End_Stop) + "/" + ParentActivity.getResources().getString(string.Boom_Down)
-						, ""
-						, ""));
-				adapter.addItem(new IconTextItemUserSwitching( ParentActivity.getResources().getDrawable(R.drawable.menu_management_machine_monitoring_bg_light),
-						null,
-						ParentActivity.getResources().getString(string.Soft_End_Stop) + "/" + ParentActivity.getResources().getString(string.Bucket_In)
-						, ""
-						, ""));
-				adapter.addItem(new IconTextItemUserSwitching( ParentActivity.getResources().getDrawable(R.drawable.menu_management_machine_monitoring_bg_dark),
-						null,
-						ParentActivity.getResources().getString(string.Soft_End_Stop) + "/" + ParentActivity.getResources().getString(string.Bucket_Dump)
-						, ""
-						, ""));
-				BackgroundFlag = false;
+				BackgroundFlag = true;
+				if(CheckTM == false)
+				{
+					adapter.addItem(new IconTextItemUserSwitching( ParentActivity.getResources().getDrawable(R.drawable.menu_management_machine_monitoring_bg_dark),
+							null,
+							ParentActivity.getResources().getString(string.Soft_End_Stop) + "/" + ParentActivity.getResources().getString(string.Boom_Down)
+							, ""
+							, ""));
+					adapter.addItem(new IconTextItemUserSwitching( ParentActivity.getResources().getDrawable(R.drawable.menu_management_machine_monitoring_bg_light),
+							null,
+							ParentActivity.getResources().getString(string.Soft_End_Stop) + "/" + ParentActivity.getResources().getString(string.Bucket_In)
+							, ""
+							, ""));
+					adapter.addItem(new IconTextItemUserSwitching( ParentActivity.getResources().getDrawable(R.drawable.menu_management_machine_monitoring_bg_dark),
+							null,
+							ParentActivity.getResources().getString(string.Soft_End_Stop) + "/" + ParentActivity.getResources().getString(string.Bucket_Dump)
+							, ""
+							, ""));
+					BackgroundFlag = false;
+				}
+				
 			}
 		}
 		else
+		{
 			CheckEHCU = false;
+			CheckTM = false;
+		}
 		
 		if(BackgroundFlag == false)
 		{
@@ -603,23 +624,43 @@ public class UserSwitching extends ParentFragment{
 			STATE_KICKDOWN					    = 8;
 			STATE_BUCKETPRIORITY			    = 9;
 			STATE_SOFTENDSTOP_BOOMUP		  	= 10;
-			STATE_SOFTENDSTOP_BOOMDOWN			= 11;
-			STATE_SOFTENDSTOP_BUCKETIN			= 12;
-			STATE_SOFTENDSTOP_BUCKETDUMP		= 13;
-			STATE_BRIGHTNESS_MANUALAUTO	  		= 14;	
-			STATE_DISPLAYTYPE				    = 15;
-			STATE_UNIT_TEMP				        = 16;
-			STATE_UNIT_ODO					    = 17;
-			STATE_UNIT_WEIGHT				    = 18;
-			STATE_UNIT_PRESSURE			      	= 19;
-			STATE_MACHINESTATUS_UPPER		  	= 20;
-			STATE_MACHINESTATUS_LOWER		  	= 21;
-			STATE_LANGUAGE					    = 22;
-			STATE_SOUNDOUTPUT				    = 23;
-			STATE_OPERATION_HISTORY		    	= 24;
-			STATE_FUEL_INFO				        = 25;
-			STATE_BOOM_DETENT_MODE			  	= 26;
-			STATE_BUCKET_DETENT_MODE		  	= 27;	
+			if(CheckTM == false)
+			{
+				STATE_SOFTENDSTOP_BOOMDOWN			= 11;
+				STATE_SOFTENDSTOP_BUCKETIN			= 12;
+				STATE_SOFTENDSTOP_BUCKETDUMP		= 13;
+				STATE_BRIGHTNESS_MANUALAUTO	  		= 14;	
+				STATE_DISPLAYTYPE				    = 15;
+				STATE_UNIT_TEMP				        = 16;
+				STATE_UNIT_ODO					    = 17;
+				STATE_UNIT_WEIGHT				    = 18;
+				STATE_UNIT_PRESSURE			      	= 19;
+				STATE_MACHINESTATUS_UPPER		  	= 20;
+				STATE_MACHINESTATUS_LOWER		  	= 21;
+				STATE_LANGUAGE					    = 22;
+				STATE_SOUNDOUTPUT				    = 23;
+				STATE_OPERATION_HISTORY		    	= 24;
+				STATE_FUEL_INFO				        = 25;
+				STATE_BOOM_DETENT_MODE			  	= 26;
+				STATE_BUCKET_DETENT_MODE		  	= 27;
+			}
+			else
+			{
+				STATE_BRIGHTNESS_MANUALAUTO	  		= 11;	
+				STATE_DISPLAYTYPE				    = 12;
+				STATE_UNIT_TEMP				        = 13;
+				STATE_UNIT_ODO					    = 14;
+				STATE_UNIT_WEIGHT				    = 15;
+				STATE_UNIT_PRESSURE			      	= 16;
+				STATE_MACHINESTATUS_UPPER		  	= 17;
+				STATE_MACHINESTATUS_LOWER		  	= 18;
+				STATE_LANGUAGE					    = 19;
+				STATE_SOUNDOUTPUT				    = 20;
+				STATE_OPERATION_HISTORY		    	= 21;
+				STATE_FUEL_INFO				        = 22;
+				STATE_BOOM_DETENT_MODE			  	= 23;
+				STATE_BUCKET_DETENT_MODE		  	= 24;
+			}
 		}else if(CheckTCLockUp){
 			STATE_TCLOCKUP						= 3;
 			STATE_RIDECONTROL				    = 4;
@@ -651,23 +692,43 @@ public class UserSwitching extends ParentFragment{
 			STATE_KICKDOWN					    = 7;
 			STATE_BUCKETPRIORITY			    = 8;
 			STATE_SOFTENDSTOP_BOOMUP		  	= 9;
-			STATE_SOFTENDSTOP_BOOMDOWN			= 10;
-			STATE_SOFTENDSTOP_BUCKETIN			= 11;
-			STATE_SOFTENDSTOP_BUCKETDUMP		= 12;
-			STATE_BRIGHTNESS_MANUALAUTO	  		= 13;	
-			STATE_DISPLAYTYPE				    = 14;
-			STATE_UNIT_TEMP				        = 15;
-			STATE_UNIT_ODO					    = 16;
-			STATE_UNIT_WEIGHT				    = 17;
-			STATE_UNIT_PRESSURE			      	= 18;
-			STATE_MACHINESTATUS_UPPER		  	= 19;
-			STATE_MACHINESTATUS_LOWER		  	= 20;
-			STATE_LANGUAGE					    = 21;
-			STATE_SOUNDOUTPUT				    = 22;
-			STATE_OPERATION_HISTORY		    	= 23;
-			STATE_FUEL_INFO				        = 24;
-			STATE_BOOM_DETENT_MODE			  	= 25;
-			STATE_BUCKET_DETENT_MODE		  	= 26;
+			if(CheckTM == false)
+			{
+				STATE_SOFTENDSTOP_BOOMDOWN			= 10;
+				STATE_SOFTENDSTOP_BUCKETIN			= 11;
+				STATE_SOFTENDSTOP_BUCKETDUMP		= 12;
+				STATE_BRIGHTNESS_MANUALAUTO	  		= 13;	
+				STATE_DISPLAYTYPE				    = 14;
+				STATE_UNIT_TEMP				        = 15;
+				STATE_UNIT_ODO					    = 16;
+				STATE_UNIT_WEIGHT				    = 17;
+				STATE_UNIT_PRESSURE			      	= 18;
+				STATE_MACHINESTATUS_UPPER		  	= 19;
+				STATE_MACHINESTATUS_LOWER		  	= 20;
+				STATE_LANGUAGE					    = 21;
+				STATE_SOUNDOUTPUT				    = 22;
+				STATE_OPERATION_HISTORY		    	= 23;
+				STATE_FUEL_INFO				        = 24;
+				STATE_BOOM_DETENT_MODE			  	= 25;
+				STATE_BUCKET_DETENT_MODE		  	= 26;
+			}
+			else
+			{
+				STATE_BRIGHTNESS_MANUALAUTO	  		= 10;	
+				STATE_DISPLAYTYPE				    = 11;
+				STATE_UNIT_TEMP				        = 12;
+				STATE_UNIT_ODO					    = 13;
+				STATE_UNIT_WEIGHT				    = 14;
+				STATE_UNIT_PRESSURE			      	= 15;
+				STATE_MACHINESTATUS_UPPER		  	= 16;
+				STATE_MACHINESTATUS_LOWER		  	= 17;
+				STATE_LANGUAGE					    = 18;
+				STATE_SOUNDOUTPUT				    = 19;
+				STATE_OPERATION_HISTORY		    	= 20;
+				STATE_FUEL_INFO				        = 21;
+				STATE_BOOM_DETENT_MODE			  	= 22;
+				STATE_BUCKET_DETENT_MODE		  	= 23;
+			}
 		}
 		else{
 			STATE_RIDECONTROL				    = 3;
@@ -795,9 +856,12 @@ public class UserSwitching extends ParentFragment{
 		{
 			BucketPriority = CAN1Comm.Get_BucketPriorityOperation_2301_PGN65517();
 			SoftEndStopBoomUp = CAN1Comm.Get_SoftStopBoomUp_2337_PGN65524();
-			SoftEndStopBoomDown = CAN1Comm.Get_SoftStopBoomDown_2338_PGN65524();
-			SoftEndStopBucketIn = CAN1Comm.Get_SoftStopBucketIn_2339_PGN65524();
-			SoftEndStopBucketDump = CAN1Comm.Get_SoftStopBucketOut_2340_PGN65524();
+			if(CheckTM == false)
+			{
+				SoftEndStopBoomDown = CAN1Comm.Get_SoftStopBoomDown_2338_PGN65524();
+				SoftEndStopBucketIn = CAN1Comm.Get_SoftStopBucketIn_2339_PGN65524();
+				SoftEndStopBucketDump = CAN1Comm.Get_SoftStopBucketOut_2340_PGN65524();
+			}
 		}
 		// ++, 150407 bwk
 		//Brightness = ParentActivity.ManualLevel;		
@@ -930,9 +994,12 @@ public class UserSwitching extends ParentFragment{
 		{
 			BucketPriorityDisplay(BucketPriority,_userdata.BucketPriority);
 			SoftEndStopBoomUpDisplay(SoftEndStopBoomUp,_userdata.SoftEndStopBoomUp);
-			SoftEndStopBoomDownDisplay(SoftEndStopBoomDown,_userdata.SoftEndStopBoomDown);
-			SoftEndStopBucketInDisplay(SoftEndStopBucketIn,_userdata.SoftEndStopBucketIn);
-			SoftEndStopBucketDumpDisplay(SoftEndStopBucketDump,_userdata.SoftEndStopBucketDump);
+			if(CheckTM == false)
+			{
+				SoftEndStopBoomDownDisplay(SoftEndStopBoomDown,_userdata.SoftEndStopBoomDown);
+				SoftEndStopBucketInDisplay(SoftEndStopBucketIn,_userdata.SoftEndStopBucketIn);
+				SoftEndStopBucketDumpDisplay(SoftEndStopBucketDump,_userdata.SoftEndStopBucketDump);
+			}
 		}
 		// ++, 150407 bwk
 		//BrightnessDisplay(Brightness,_userdata.Brightness);
@@ -1019,7 +1086,8 @@ public class UserSwitching extends ParentFragment{
 //	}
 	// --, 150402 bwk
 	public void CCOModeDisplay(int SettingData, int LoadingData){
-		if(ParentActivity._CheckModel.GetMCUVersion(CAN1Comm.Get_ComponentBasicInformation_1698_PGN65330()) == CheckModel.MODEL_980)
+		//if(ParentActivity._CheckModel.GetMCUVersion(CAN1Comm.Get_ComponentBasicInformation_1698_PGN65330()) == CheckModel.MODEL_980)
+		if(ParentActivity._CheckModel.GetMCUModelNum(CAN1Comm.Get_ComponentBasicInformation_1698_PGN65330()) == 980)
 		{
 			switch (SettingData) {
 			case CAN1CommManager.DATA_STATE_TM_CLUTCHCUTOFF_OFF:
@@ -1571,9 +1639,9 @@ public class UserSwitching extends ParentFragment{
 		case Home.UNIT_WEIGHT_LB:
 			adapter.UpdateSecond(STATE_UNIT_WEIGHT, ParentActivity.getResources().getString(string.lb));
 			break;
-		case Home.UNIT_WEIGHT_US_TON:
+		/*case Home.UNIT_WEIGHT_US_TON:
 			adapter.UpdateSecond(STATE_UNIT_WEIGHT, ParentActivity.getResources().getString(string.USTon));
-			break;
+			break;*/
 		default:
 			break;
 		}
@@ -1584,9 +1652,9 @@ public class UserSwitching extends ParentFragment{
 		case Home.UNIT_WEIGHT_LB:
 			adapter.UpdateThird(STATE_UNIT_WEIGHT, ParentActivity.getResources().getString(string.lb));
 			break;
-		case Home.UNIT_WEIGHT_US_TON:
+		/*case Home.UNIT_WEIGHT_US_TON:
 			adapter.UpdateThird(STATE_UNIT_WEIGHT, ParentActivity.getResources().getString(string.USTon));
-			break;
+			break;*/
 		default:
 			break;
 		}

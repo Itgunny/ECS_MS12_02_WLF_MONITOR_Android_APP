@@ -1447,7 +1447,8 @@ public class MainABaseFragment extends ParentFragment{
 			_MainARightUpEngineModeFragment.ClickLeft();
 			break;
 		case Home.SCREEN_STATE_MAIN_A_RIGHTDOWN_CCOMODE:
-			if(ParentActivity._CheckModel.GetMCUVersion(CAN1Comm.Get_ComponentBasicInformation_1698_PGN65330()) == CheckModel.MODEL_980)
+			//if(ParentActivity._CheckModel.GetMCUVersion(CAN1Comm.Get_ComponentBasicInformation_1698_PGN65330()) == CheckModel.MODEL_980)
+			if(ParentActivity._CheckModel.GetMCUModelNum(CAN1Comm.Get_ComponentBasicInformation_1698_PGN65330()) == 980)
 				_MainARightDownTMICCOModeFragment.ClickLeft();
 			else
 				_MainARightDownTMCCOModeFragment.ClickLeft();
@@ -1525,10 +1526,12 @@ public class MainABaseFragment extends ParentFragment{
 				CursurIndex--;
 			else 
 			{
+				/*
 				if(ParentActivity._CheckModel.GetMCUVersion(CAN1Comm.Get_ComponentBasicInformation_1698_PGN65330()) == CheckModel.MODEL_940
 						|| ParentActivity._CheckModel.GetMCUVersion(CAN1Comm.Get_ComponentBasicInformation_1698_PGN65330()) == CheckModel.MODEL_935){
 					CursurIndex = 8;
-				}else if(ParentActivity._CheckModel.GetTCUModel(CAN1Comm.Get_ComponentBasicInformation_1698_PGN65330_TCU()) == CheckModel.TCU_4SPEED){
+				}else 
+				*/if(ParentActivity._CheckModel.GetTCUModel(CAN1Comm.Get_ComponentBasicInformation_1698_PGN65330_TCU()) == CheckModel.TCU_4SPEED){
 					CursurIndex = 8;
 				}else
 					CursurIndex = 9;
@@ -1566,7 +1569,8 @@ public class MainABaseFragment extends ParentFragment{
 			_MainARightUpEngineModeFragment.ClickRight();
 			break;
 		case Home.SCREEN_STATE_MAIN_A_RIGHTDOWN_CCOMODE:
-			if(ParentActivity._CheckModel.GetMCUVersion(CAN1Comm.Get_ComponentBasicInformation_1698_PGN65330()) == CheckModel.MODEL_980)
+			//if(ParentActivity._CheckModel.GetMCUVersion(CAN1Comm.Get_ComponentBasicInformation_1698_PGN65330()) == CheckModel.MODEL_980)
+			if(ParentActivity._CheckModel.GetMCUModelNum(CAN1Comm.Get_ComponentBasicInformation_1698_PGN65330()) == 980)
 				_MainARightDownTMICCOModeFragment.ClickRight();
 			else
 				_MainARightDownTMCCOModeFragment.ClickRight();
@@ -1642,10 +1646,10 @@ public class MainABaseFragment extends ParentFragment{
 		case Home.SCREEN_STATE_MAIN_A_TOP:
 			if(CursurIndex == 8)
 			{
-				if(ParentActivity._CheckModel.GetMCUVersion(CAN1Comm.Get_ComponentBasicInformation_1698_PGN65330()) == CheckModel.MODEL_940
+				/*if(ParentActivity._CheckModel.GetMCUVersion(CAN1Comm.Get_ComponentBasicInformation_1698_PGN65330()) == CheckModel.MODEL_940
 						|| ParentActivity._CheckModel.GetMCUVersion(CAN1Comm.Get_ComponentBasicInformation_1698_PGN65330()) == CheckModel.MODEL_935){
 					CursurIndex = 0;
-				}else if(ParentActivity._CheckModel.GetTCUModel(CAN1Comm.Get_ComponentBasicInformation_1698_PGN65330_TCU()) == CheckModel.TCU_4SPEED){
+				}else*/ if(ParentActivity._CheckModel.GetTCUModel(CAN1Comm.Get_ComponentBasicInformation_1698_PGN65330_TCU()) == CheckModel.TCU_4SPEED){
 					CursurIndex = 0;
 				}else
 					CursurIndex++;
@@ -1769,7 +1773,8 @@ public class MainABaseFragment extends ParentFragment{
 				_MainARightUpEngineModeFragment.ClickEnter();
 				break;
 			case Home.SCREEN_STATE_MAIN_A_RIGHTDOWN_CCOMODE:
-				if(ParentActivity._CheckModel.GetMCUVersion(CAN1Comm.Get_ComponentBasicInformation_1698_PGN65330()) == CheckModel.MODEL_980)
+				//if(ParentActivity._CheckModel.GetMCUVersion(CAN1Comm.Get_ComponentBasicInformation_1698_PGN65330()) == CheckModel.MODEL_980)
+				if(ParentActivity._CheckModel.GetMCUModelNum(CAN1Comm.Get_ComponentBasicInformation_1698_PGN65330()) == 980)
 					_MainARightDownTMICCOModeFragment.ClickEnter();
 				else
 					_MainARightDownTMCCOModeFragment.ClickEnter();

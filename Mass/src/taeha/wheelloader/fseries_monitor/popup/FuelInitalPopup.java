@@ -91,21 +91,27 @@ public class FuelInitalPopup extends ParentPopup{
 		else
 		{
 			try {
+				// Crash 뜨는 현상으로 flag로 변경
 				switch (SelectMode) {
 				case CAN1CommManager.DATA_STATE_HOURLY_FUEL_RATE_INFO_CLEAR:
-					ParentActivity._MenuBaseFragment._FuelHistoryHourlyRecordFragment.CursurDisplay(2);
+					//ParentActivity._MenuBaseFragment._FuelHistoryHourlyRecordFragment.CursurDisplay(2);
+					ParentActivity._MenuBaseFragment._FuelHistoryHourlyRecordFragment.bCursurIndex = false;
 					break;
 				case CAN1CommManager.DATA_STATE_DAILY_FUEL_RATE_INFO_CLEAR:
-					ParentActivity._MenuBaseFragment._FuelHistoryDailyRecordFragment.CursurDisplay(2);
+					//ParentActivity._MenuBaseFragment._FuelHistoryDailyRecordFragment.CursurDisplay(2);
+					ParentActivity._MenuBaseFragment._FuelHistoryDailyRecordFragment.bCursurIndex = false;
 					break;
 				case CAN1CommManager.DATA_STATE_MODE_FUEL_RATE_INFO_CLEAR:
-					ParentActivity._MenuBaseFragment._FuelHistoryModeRecordFragment.CursurDisplay(2);
+					//ParentActivity._MenuBaseFragment._FuelHistoryModeRecordFragment.CursurDisplay(2);
+					ParentActivity._MenuBaseFragment._FuelHistoryModeRecordFragment.bCursurIndex = false;
 					break;
 				case CAN1CommManager.DATA_STATE_AVERAGE_FUEL_RATE_INFO_CLEAR:
-					ParentActivity._MenuBaseFragment._FuelHistoryGeneralRecordFragment.CursurDisplay(1);
+					//ParentActivity._MenuBaseFragment._FuelHistoryGeneralRecordFragment.CursurDisplay(1);
+					ParentActivity._MenuBaseFragment._FuelHistoryGeneralRecordFragment.bCursurIndex = false;
 					break;
 				case CAN1CommManager.DATA_STATE_A_DAYS_FUEL_USED_CLEAR:
-					ParentActivity._MenuBaseFragment._FuelHistoryGeneralRecordFragment.CursurDisplay(2);
+					//ParentActivity._MenuBaseFragment._FuelHistoryGeneralRecordFragment.CursurDisplay(2);
+					ParentActivity._MenuBaseFragment._FuelHistoryGeneralRecordFragment.bCursurIndex = false;
 					break;
 				default:
 					break;		

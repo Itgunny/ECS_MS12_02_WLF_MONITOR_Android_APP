@@ -619,10 +619,10 @@ public class MainBLeftUpMachineStatusFragment extends ParentFragment{
 		if(ParentActivity.UnitWeight == Home.UNIT_WEIGHT_LB){
 			textViewWeighingUpperUnit.setText(ParentActivity.getResources().getString(string.lb));
 			textViewWeighingLowerUnit.setText(ParentActivity.getResources().getString(string.lb));
-		}else if(ParentActivity.UnitWeight == Home.UNIT_WEIGHT_US_TON){
+		}/*else if(ParentActivity.UnitWeight == Home.UNIT_WEIGHT_US_TON){
 			textViewWeighingUpperUnit.setText(ParentActivity.getResources().getString(string.USTon));
 			textViewWeighingLowerUnit.setText(ParentActivity.getResources().getString(string.USTon));
-		}else{
+		}*/else{
 			textViewWeighingUpperUnit.setText(ParentActivity.getResources().getString(string.ton));
 			textViewWeighingLowerUnit.setText(ParentActivity.getResources().getString(string.ton));
 		}
@@ -683,7 +683,6 @@ public class MainBLeftUpMachineStatusFragment extends ParentFragment{
 				textViewWeighingUpperData.setText(ParentActivity.GetWeighit(WeightInfoDataCurrent, ParentActivity.UnitWeight));
 			
 				break;
-
 			default:
 				break;
 			}
@@ -693,10 +692,10 @@ public class MainBLeftUpMachineStatusFragment extends ParentFragment{
 		if(ParentActivity.UnitWeight == Home.UNIT_WEIGHT_LB){
 			textViewWeighingUpperUnit.setText(ParentActivity.getResources().getString(string.lb));
 			textViewWeighingLowerUnit.setText(ParentActivity.getResources().getString(string.lb));
-		}else if(ParentActivity.UnitWeight == Home.UNIT_WEIGHT_US_TON){
+		}/*else if(ParentActivity.UnitWeight == Home.UNIT_WEIGHT_US_TON){
 			textViewWeighingUpperUnit.setText(ParentActivity.getResources().getString(string.USTon));
 			textViewWeighingLowerUnit.setText(ParentActivity.getResources().getString(string.USTon));
-		}else{
+		}*/else{
 			textViewWeighingUpperUnit.setText(ParentActivity.getResources().getString(string.ton));
 			textViewWeighingLowerUnit.setText(ParentActivity.getResources().getString(string.ton));
 		}
@@ -718,7 +717,6 @@ public class MainBLeftUpMachineStatusFragment extends ParentFragment{
 			WeighingLowerStatusIconAnimation.FlipAnimation(imgViewWeighingLowerIcon,R.drawable.main_default_monitoring_icon_total_c);
 			textViewWeighingLowerData.setText(ParentActivity.GetWeighit(WeightInfoDataTotalC, ParentActivity.UnitWeight));
 			break;
-
 		default:
 			break;
 		}	

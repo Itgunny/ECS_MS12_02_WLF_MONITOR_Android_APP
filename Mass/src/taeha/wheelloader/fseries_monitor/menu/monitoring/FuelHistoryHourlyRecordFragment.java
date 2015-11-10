@@ -43,6 +43,7 @@ public class FuelHistoryHourlyRecordFragment  extends ParentFragment{
 	Handler HandleCursurDisplay;
 	
 	private Timer mSendCommandTimer = null;
+	public boolean bCursurIndex;
 	//////////////////////////////////////////////////
 	
 	//Fragment////////////////////////////////////////
@@ -135,6 +136,8 @@ public class FuelHistoryHourlyRecordFragment  extends ParentFragment{
 		HourFuelUsed = new int[12];
 		imgViewHour = new ImageView[12];
 		textViewHour = new TextView[12];
+		
+		bCursurIndex = true;
 	}
 	@Override
 	protected void InitButtonListener() {
@@ -195,6 +198,9 @@ public class FuelHistoryHourlyRecordFragment  extends ParentFragment{
 		try {
 			DisplayHourlyGraph(HourFuelUsed);
 			DisplayHourlyText(HourFuelUsed);
+			
+			if(bCursurIndex == false && ParentActivity.ScreenIndex == Home.SCREEN_STATE_MENU_MONITORING_FUELHISTORY_HOURLYRECORD)
+				CursurDisplay(CursurIndex);
 		} catch (IllegalStateException e) {
 			// TODO: handle exception
 			Log.e(TAG,"IllegalStateException");
@@ -202,9 +208,9 @@ public class FuelHistoryHourlyRecordFragment  extends ParentFragment{
 	}
 	/////////////////////////////////////////////////////////////////////	
 	public void SetUnit(){
-		if(ParentActivity.UnitFuel == Home.UNIT_FUEL_GAL)
+		/*if(ParentActivity.UnitFuel == Home.UNIT_FUEL_GAL)
 			textViewUnit.setText(ParentActivity.getResources().getString(string.gal_h));
-		else
+		else*/
 			textViewUnit.setText(ParentActivity.getResources().getString(string.l_h));
 	}
 	/////////////////////////////////////////////////////////////////////	
@@ -347,6 +353,7 @@ public class FuelHistoryHourlyRecordFragment  extends ParentFragment{
 		}
 	}
 	public void CursurDisplay(int Index){
+		bCursurIndex = true;
 		imgbtnInital.setPressed(false);
 		imgbtnOK.setPressed(false);
 		switch (Index) {

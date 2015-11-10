@@ -16,6 +16,7 @@ public class CheckModel {
 //	String[] MCUModelExtraName = {"_v", "TM", "XT"};
 	
 	public static final int NO_MODEL 	= 0x0;
+	/*
 	public static final int MODEL_935 	= 0x1;
 	public static final int MODEL_940 	= 0x2;
 	public static final int MODEL_955 	= 0x3;
@@ -33,6 +34,7 @@ public class CheckModel {
 	public static final int MODEL_970TM		= 0x16;
 	public static final int MODEL_975TM		= 0x17;
 	public static final int MODEL_980TM		= 0x18;
+	*/
 	
 	public static final int	TCU_4SPEED	= 0x00000000;
 	public static final int	TCU_5SPEED	= 0x00000001;
@@ -171,15 +173,12 @@ public class CheckModel {
 		}
 	}	
 	
-	public int GetMCUVersion(byte[] BasicInfo){
-		boolean DataCheckFlag = true;
-		String strModel;
+	public int GetMCUModelNum(byte[] BasicInfo){
 		int Index = 4;
 		int Index2 = 0;
 		boolean bAsterisk = false;
 		int n100,n10,n1;
 		int MCUModelNum;
-		char cSub1 = 0, cSub2 = 0;
 		////////////// Find Serial Number/////////////
 		for(int i = 4; i < 20; i++){
 			if(BasicInfo[i] != 0x2A)
@@ -225,82 +224,76 @@ public class CheckModel {
 			
 			MCUModelNum = n100 * 100 + n10 * 10 + n1;
 			
-			if(Index2 >= 7){
-				cSub1 = (char) Model[5];
-				cSub2 = (char) Model[6];
-			}
-			
-			if(MCUModelNum == 935){
-				if(cSub1 == 'T' && cSub2 == 'M'){
-					return MODEL_935TM;
-				}else{
-					return MODEL_935;
-				}
-			}
-			else if(MCUModelNum == 940){
-				if(cSub1 == 'T' && cSub2 == 'M'){
-					return MODEL_940TM;
-				}else{
-					return MODEL_940;
-				}
-			}
-			else if(MCUModelNum == 955){
-				if(cSub1 == 'T' && cSub2 == 'M'){
-					return MODEL_955TM;
-				}else{
-					return MODEL_955;
-				}
-			}
-			else if(MCUModelNum == 960){
-				if(cSub1 == 'T' && cSub2 == 'M'){
-					return MODEL_960TM;
-				}else{
-					return MODEL_960;
-				}
-			}
-			// ++, 150329 bwk
-			else if(MCUModelNum == 965){
-				if(cSub1 == 'T' && cSub2 == 'M'){
-					return MODEL_965TM;
-				}else{
-					return MODEL_965;
-				}
-			}
-			// --, 150329 bwk
-			else if(MCUModelNum == 970){
-				if(cSub1 == 'T' && cSub2 == 'M'){
-					return MODEL_970TM;
-				}else{
-					return MODEL_970;
-				}
-			}
-			else if(MCUModelNum == 975){
-				if(cSub1 == 'T' && cSub2 == 'M'){
-					return MODEL_975TM;
-				}else{
-					return MODEL_975;
-				}
-			}
-			else if(MCUModelNum == 980){
-				if(cSub1 == 'T' && cSub2 == 'M'){
-					return MODEL_980TM;
-				}else{
-					return MODEL_980;
-				}
-			}
-			else{
-				return NO_MODEL;
-			}
-				
-						
+			return MCUModelNum;
 		}
 	}
+
+	public String GetMCUModelOption(byte[] BasicInfo){
+		int Index = 4;
+		int Index2 = 0;
+		boolean bAsterisk = false;
+		
+		////////////// Find Serial Number/////////////
+		for(int i = 4; i < 20; i++){
+			if(BasicInfo[i] != 0x2A)
+			{
+				Index++;
+				bAsterisk = false;
+			}
+			else{
+				bAsterisk = true;
+				break;
+			}
+		}		
+		/////////////////////////////////////////////
+		
+		//////////// Find Model Name/////////////////
+		for(int i = Index + 1; i < LENGTH_COMPONENTBASICINFORMATION; i++){
+			if(BasicInfo[i] != 0x2A)
+			{
+				Index2++;
+				bAsterisk = false;
+			}
+			else{
+				bAsterisk = true;
+				break;
+			}
+		}
+		/////////////////////////////////////////////
+		int[] Model;
+		Model = new int [Index2];
+		Log.d(TAG, "bAsterisk:"+Boolean.toString(bAsterisk));
+		
+		if(bAsterisk == false){
+			return "-";
+		}else{
+			for(int i = 0; i < Index2; i++){
+				Model[i] = (int)BasicInfo[i+Index+1];
+			}
+						
+			Log.d(TAG, "Index2:"+Integer.toString(Index2));
+			if(Index2 >= 6){
+								
+				char[] cString;
+				String strString;
+				cString = new char[Index2-5];
+				for(int i = 5; i < Index2; i++){
+					cString[i-5] = (char) Model[i];
+				}
+				strString = new String(cString,0,cString.length);
+				Log.d(TAG, "GetMCUModelOption:"+strString);
+				return strString;
+			}else{
+				return "-";
+			}
+		}
+	}	
 	
 	public String GetTCUEST37APartNumber(byte[] softwareID){
 		int Index = 0;
 		boolean bAsterisk = false;
 		try {
-			for(int i = 1; i < 13; i++){
+			for(int i = 1; i < 14; i++){
 				if(softwareID[i] == 0x2A){
 					bAsterisk = true;
 					break;
@@ -331,29 +324,31 @@ public class CheckModel {
 	public int GetTCUModel(byte[] softwareID){
 		String strModel;
 		strModel = GetTCUEST37APartNumber(softwareID);
-		if(strModel.equals("6057018671") == true){
+		//Log.d(TAG, "before))strModel="+strModel);
+		strModel = strModel.replaceAll(" ", "");
+		//Log.d(TAG, "after))strModel="+strModel);
+		if(strModel.equals("6057018671") == true){			// HL740-F
 			return TCU_4SPEED;
-		}else if(strModel.equals("6057018608") == true){
+		}else if(strModel.equals("6057018608") == true){	// HL757-F
 			return TCU_4SPEED;
-		}else if(strModel.equals("6057018554") == true){
+		}else if(strModel.equals("6057018554") == true){	// HL760-F
 			return TCU_4SPEED;
-		}else if(strModel.equals("6057018641") == true){
+		}else if(strModel.equals("6057018641") == true){	// HL767-F
 			return TCU_4SPEED;
-		}else if(strModel.equals("6057018610") == true){
+		}else if(strModel.equals("6057018610") == true){	// HL770-F
 			return TCU_4SPEED;
-		}else if(strModel.equals("6057018633") == true){
+		}else if(strModel.equals("6057018633") == true){	// HL777-F(old)
 			return TCU_4SPEED;
-		}else if(strModel.equals("6057018809") == true){
+		}else if(strModel.equals("6057018809") == true){	// HL777-F(new)
 			return TCU_4SPEED;
-		}else if(strModel.equals("6057018646") == true){
+		}else if(strModel.equals("6057018646") == true){	// HL780-F	
 			return TCU_4SPEED;
 		// ++, 150610 Ãß°¡
-		}else if(strModel.equals("6057018709") == true){
+		}else if(strModel.equals("6057018709") == true){	// HL730-F	
 			return TCU_4SPEED;
 		}else{
 			return TCU_5SPEED;
 		}
-	
 	}
 	
 	

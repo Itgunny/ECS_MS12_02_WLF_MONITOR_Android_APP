@@ -153,7 +153,8 @@ public class MainBRightDownTMFragment extends ParentFragment{
 	@Override
 	protected void UpdateUI() {
 		// TODO Auto-generated method stub
-		TMCCOModeTitleDisplay(ParentActivity._CheckModel.GetMCUVersion(CAN1Comm.Get_ComponentBasicInformation_1698_PGN65330()));
+		//TMCCOModeTitleDisplay(ParentActivity._CheckModel.GetMCUVersion(CAN1Comm.Get_ComponentBasicInformation_1698_PGN65330()));
+		TMCCOModeTitleDisplay(ParentActivity._CheckModel.GetMCUModelNum(CAN1Comm.Get_ComponentBasicInformation_1698_PGN65330()));
 		TMCCOModeDisplay(CCOMode);
 		TMShiftModeDisplay(ShiftMode);
 		TMTCLockUpDisplay(TCLockUp);
@@ -161,11 +162,11 @@ public class MainBRightDownTMFragment extends ParentFragment{
 	}
 	/////////////////////////////////////////////////////////////////////	
 	public void TCLockUpShow(){
-		if(ParentActivity._CheckModel.GetMCUVersion(CAN1Comm.Get_ComponentBasicInformation_1698_PGN65330()) == CheckModel.MODEL_940
+		/*if(ParentActivity._CheckModel.GetMCUVersion(CAN1Comm.Get_ComponentBasicInformation_1698_PGN65330()) == CheckModel.MODEL_940
 			|| ParentActivity._CheckModel.GetMCUVersion(CAN1Comm.Get_ComponentBasicInformation_1698_PGN65330()) == CheckModel.MODEL_935){
 			layoutTCLockUp.setVisibility(View.GONE);
 			imgbtnTCLockUp.setClickable(false);
-		}else if(ParentActivity._CheckModel.GetTCUModel(CAN1Comm.Get_ComponentBasicInformation_1698_PGN65330_TCU()) == CheckModel.TCU_4SPEED){
+		}else*/ if(ParentActivity._CheckModel.GetTCUModel(CAN1Comm.Get_ComponentBasicInformation_1698_PGN65330_TCU()) == CheckModel.TCU_4SPEED){
 			layoutTCLockUp.setVisibility(View.GONE);
 			imgbtnTCLockUp.setClickable(false);
 		}else{
@@ -180,7 +181,8 @@ public class MainBRightDownTMFragment extends ParentFragment{
 		//}else{
 		//	TMCCOModeTitleDataAnimation.FlipAnimation(textViewCCOModeTitle,getResources().getString(string.CCO_MODE));
 		//}
-		if(Model == CheckModel.MODEL_980){
+		//if(Model == CheckModel.MODEL_980){
+		if(Model == 980){
 			textViewCCOModeTitle.setText(getResources().getString(string.ICCO_MODE));
 		}else{
 			textViewCCOModeTitle.setText(getResources().getString(string.CCO_MODE));
@@ -201,7 +203,8 @@ public class MainBRightDownTMFragment extends ParentFragment{
 				TMCCOModeDataAnimation.FlipAnimation(textViewCCOModeData,getResources().getString(string.M));
 				break;
 			case CAN1CommManager.DATA_STATE_TM_CLUTCHCUTOFF_H:
-				if(ParentActivity._CheckModel.GetMCUVersion(CAN1Comm.Get_ComponentBasicInformation_1698_PGN65330()) == CheckModel.MODEL_980)
+				//if(ParentActivity._CheckModel.GetMCUVersion(CAN1Comm.Get_ComponentBasicInformation_1698_PGN65330()) == CheckModel.MODEL_980)
+				if(ParentActivity._CheckModel.GetMCUModelNum(CAN1Comm.Get_ComponentBasicInformation_1698_PGN65330()) == 980)
 					TMCCOModeDataAnimation.FlipAnimation(textViewCCOModeData,getResources().getString(string.ON));
 				else
 					TMCCOModeDataAnimation.FlipAnimation(textViewCCOModeData,getResources().getString(string.H));
@@ -264,14 +267,16 @@ public class MainBRightDownTMFragment extends ParentFragment{
 			ParentActivity.StartAnimationRunningTimer();
 		
 		ParentActivity._MainBBaseFragment._MainBCenterTMFragment = new MainBCenterTMFragment();
-		if(ParentActivity._CheckModel.GetMCUVersion(CAN1Comm.Get_ComponentBasicInformation_1698_PGN65330()) == CheckModel.MODEL_980)
+		//if(ParentActivity._CheckModel.GetMCUVersion(CAN1Comm.Get_ComponentBasicInformation_1698_PGN65330()) == CheckModel.MODEL_980)
+		if(ParentActivity._CheckModel.GetMCUModelNum(CAN1Comm.Get_ComponentBasicInformation_1698_PGN65330()) == 980)
 			ParentActivity._MainBBaseFragment._MainBRightDownTMICCOModeFragment = new MainBRightDownTMICCOModeFragment();
 		else
 			ParentActivity._MainBBaseFragment._MainBRightDownTMCCOModeFragment = new MainBRightDownTMCCOModeFragment();
 		ParentActivity._MainBBaseFragment._MainBodyShiftAnimation.StartShiftRightDownAnimation();
 		ParentActivity._MainBBaseFragment.CenterAnimation.StartChangeAnimation(ParentActivity._MainBBaseFragment._MainBCenterTMFragment);
 		
-		if(ParentActivity._CheckModel.GetMCUVersion(CAN1Comm.Get_ComponentBasicInformation_1698_PGN65330()) == CheckModel.MODEL_980)
+		//if(ParentActivity._CheckModel.GetMCUVersion(CAN1Comm.Get_ComponentBasicInformation_1698_PGN65330()) == CheckModel.MODEL_980)
+		if(ParentActivity._CheckModel.GetMCUModelNum(CAN1Comm.Get_ComponentBasicInformation_1698_PGN65330()) == 980)
 			ParentActivity._MainBBaseFragment.RightDownChangeAnimation.StartChangeAnimation(ParentActivity._MainBBaseFragment._MainBRightDownTMICCOModeFragment);
 		else
 			ParentActivity._MainBBaseFragment.RightDownChangeAnimation.StartChangeAnimation(ParentActivity._MainBBaseFragment._MainBRightDownTMCCOModeFragment);

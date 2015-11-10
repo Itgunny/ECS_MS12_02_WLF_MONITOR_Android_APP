@@ -40,6 +40,7 @@ public class FuelHistoryGeneralRecordFragment  extends ParentFragment{
 	int LatestFuelConsumed;
 	int CursurIndex;		
 	Handler HandleCursurDisplay;	
+	public boolean bCursurIndex = true;
 	//////////////////////////////////////////////////
 	
 	//Fragment////////////////////////////////////////
@@ -148,14 +149,17 @@ public class FuelHistoryGeneralRecordFragment  extends ParentFragment{
 	protected void UpdateUI() {
 		// TODO Auto-generated method stub
 		DisplayFuelData(AverageFuelRate, LatestFuelConsumed);
+		
+		if(bCursurIndex == false && ParentActivity.ScreenIndex == Home.SCREEN_STATE_MENU_MONITORING_FUELHISTORY_GENERALRECORD)
+			CursurDisplay(CursurIndex);
 	}
 	/////////////////////////////////////////////////////////////////////
 	public void SetUnit(){
-		if(ParentActivity.UnitFuel == Home.UNIT_FUEL_GAL){
+		/*if(ParentActivity.UnitFuel == Home.UNIT_FUEL_GAL){
 			textViewAvgUnit.setText(ParentActivity.getResources().getString(string.gal_h));
 			textViewDayUnit.setText(ParentActivity.getResources().getString(string.gal));
 		}
-		else{
+		else*/{
 			textViewAvgUnit.setText(ParentActivity.getResources().getString(string.l_h));
 			textViewDayUnit.setText(ParentActivity.getResources().getString(string.l));
 		}
@@ -229,6 +233,7 @@ public class FuelHistoryGeneralRecordFragment  extends ParentFragment{
 		
 	}
 	public void CursurDisplay(int Index){
+		bCursurIndex = true;
 		textViewAvgInital.setPressed(false);
 		textViewDaysInital.setPressed(false);
 		imgbtnOK.setPressed(false);

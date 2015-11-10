@@ -74,8 +74,8 @@ public class Home extends Activity {
 	public static final int VERSION_HIGH 		= 2;
 	public static final int VERSION_LOW 		= 1;
 	public static final int VERSION_SUB_HIGH 	= 0;
-	public static final int VERSION_SUB_LOW 	= 1;
-	public static final int VERSION_TAEHA		= 1;
+	public static final int VERSION_SUB_LOW 	= 2;
+	public static final int VERSION_TAEHA		= 0;
 	////1.0.2.3
 	// UI B 안 최초 적용 2014.12.10
 	////1.0.2.4
@@ -700,6 +700,16 @@ public class Home extends Activity {
 	////v2.1.0.11
 	// 1. A안일 경우 Axle 후 Quick->Home으로 올 때 Keypad 숨겨지지 않는 버그 수정
 	// 2. ESL 지정시간 후 동작 Enter 입력 시 커서 안움직이는 현상 개선(확인필요)
+	////v2.1.0.20
+	// 1. T.C Lock Up 사양 변경(모델정보는 비교하지 않고, TCU 정보로만 판별. Default값은 5Speed)
+	// 2. ESL 지정시간 후 동작 Enter 입력 시 커서 안움직이는 현상 개선(확인완료)
+	// 3. MCU Model Num Check 사양 변경(HL980, HL980XT, HL980TM 모두 동일한 HL980으로 처리)
+	// 4. MCU Model Option Check 사양 변경(5글자 이후를 모두 옵션으로 봄)
+	// 5. 장비모니터링 Hidden 페이지 ListVeiw 클릭 시 crash 나는 현상 개선
+	// 6. 모니터 단위설정기능, 무게설정 단위 USton, 단위 설정 연비추가 관련하여 원래기능으로 원복
+	// 7. Fuel 팝업 초기화 중 팝업이외 클릭 시 crash 뜨는 현상 및 초기화와 OK 버튼 사이 클릭 시 UI 색상 바뀌는 현상 개선
+	// 8. UserSwitching SoftEndStop TM 옵션 적용 
+	// 9. Workload Init 팝업 후진기어연동, 카메라버튼 되도록 변경
 	//////////////////////////////////////////////////////////////////////////////////////
 	
 	// TAG
@@ -1070,7 +1080,7 @@ public class Home extends Activity {
 	public	static final int UNIT_TYPE_CUSTOM		= 2;
 	
 	public  static final int UNIT_FUEL_L 			= 0;
-	public  static final int UNIT_FUEL_GAL 			= 1;
+	//public  static final int UNIT_FUEL_GAL 			= 1;
 	
 	public  static final int UNIT_ODO_KM 			= 0;
 	public  static final int UNIT_ODO_MILE 			= 1;
@@ -1080,7 +1090,7 @@ public class Home extends Activity {
 	
 	public  static final int UNIT_WEIGHT_TON 		= 0;
 	public  static final int UNIT_WEIGHT_LB 		= 1;
-	public  static final int UNIT_WEIGHT_US_TON		= 2;
+	//public  static final int UNIT_WEIGHT_US_TON		= 2;
 	
 	public  static final int UNIT_PRESSURE_BAR 		= 0;
 	public  static final int UNIT_PRESSURE_MPA 		= 1;
@@ -1170,6 +1180,7 @@ public class Home extends Activity {
 	//Valuable//////////////////////////////////////////
 	public int ScreenIndex;
 	public int OldScreenIndex;
+	public int TempScreenIndex;
 	
 	// Display Type
 	public int DisplayType;
@@ -1177,7 +1188,7 @@ public class Home extends Activity {
 	public LanguageClass LangClass;	// ++, --, 150209 bwk
 	
 	// Unit
-	public int UnitType;
+	//public int UnitType;
 	public int UnitFuel;
 	public int UnitOdo;
 	public int UnitTemp;
@@ -1199,19 +1210,19 @@ public class Home extends Activity {
 	// Weighing Display Index
 	
 	// Camera
-	public int ActiveCameraNum;
-	public int CameraOrder1;
-	public int CameraOrder2;
-	public int CameraOrder3;
-	public int CameraOrder4;
-	public int CameraReverseMode;
+	public int ActiveCameraNum;		//the number of Available Camera
+	public int CameraOrder1;		//CH1
+	public int CameraOrder2;		//CH2
+	public int CameraOrder3;		//CH3
+	public int CameraOrder4;		//CH4
+	public int CameraReverseMode;	//GEAE Reverse Mode
 	int SelectCameraNum;			// ++, --, 150324 bwk
-	int SelectGear;
-	int SelectGearRange;
-	int SelectGearDirection;
-	int GearIndex;
-	int CameraReverseOnCount;
-	int CameraReverseOffCount;
+	int SelectGear;					//Select GEAR
+	int SelectGearRange;			//Select GEAR 범위
+	int SelectGearDirection;		//Select GEAR 방향
+	int GearIndex;					//GEAR 위치
+	int CameraReverseOnCount;		// CAMERA REVERSE ON COUNTER
+	int CameraReverseOffCount;		// CAMERA REVERSE OFF COUNTER
 	
 	// Brightness
 	public int BrightnessManualAuto;
@@ -1773,21 +1784,27 @@ public class Home extends Activity {
 		//Log.d(TAG,"ExcuteCamActivitybyKey" + CAN1Comm.GetScreenTopFlag());
 		imgViewCameraScreen.setClickable(true);
 		CAN1Comm.CameraCurrentOnOff = true;	// ++, --, 150326 cjg
+		TempScreenIndex = OldScreenIndex;	// ++, --, 151110 cjg
 		OldScreenIndex = ScreenIndex;
 		ScreenIndex = SCREEN_STATE_MAIN_CAMERA_KEY;
 		CAN1Comm.CameraOnFlag = CAN1CommManager.STATE_CAMERA_MANUAL;
 		SelectCameraNum = CameraOrder1+1;
 		CAN1Comm.TxCMDToMCU(CAN1CommManager.CMD_CAM, CameraOrder1);
 	}
-	public void ExcuteCamActivitybyReverseGear(){
-		CAN1Comm.CameraOnFlag = CAN1CommManager.STATE_CAMERA_REVERSEGEAR;
-		CAN1Comm.CameraCurrentOnOff = true;	// ++, --, 150326 cjg
-		
-	}
+	// 아래 함수 사용안함으로 지움 (++, --, 151110 cjg)
+//	public void ExcuteCamActivitybyReverseGear(){
+//		CAN1Comm.CameraOnFlag = CAN1CommManager.STATE_CAMERA_REVERSEGEAR;
+//		CAN1Comm.CameraCurrentOnOff = true;	// ++, --, 150326 cjg
+//		
+//	}
 	public boolean ExitCam(){
 		//Log.d(TAG,"ExitCam() CameraCurrentOnOff : "+CAN1Comm.CameraCurrentOnOff+"CameraOnFlag"+CAN1Comm.CameraOnFlag);
+		// ++, 151110 cjg
+//		ScreenIndex = OldScreenIndex;
+//		OldScreenIndex = SCREEN_STATE_MAIN_CAMERA_KEY;
 		ScreenIndex = OldScreenIndex;
-		OldScreenIndex = SCREEN_STATE_MAIN_CAMERA_KEY;
+		OldScreenIndex = TempScreenIndex;
+		// --, 151110 cjg
 		try {
 			CAN1Comm.CameraCurrentOnOff = false;	// ++, --, 150326 cjg
 			if(CAN1Comm.CameraOnFlag == CAN1CommManager.STATE_CAMERA_MANUAL){
@@ -2045,7 +2062,7 @@ public class Home extends Activity {
 	public void SavePref(){
 		SharedPreferences SharePref = getSharedPreferences("Home", 0);
 		SharedPreferences.Editor edit = SharePref.edit();
-		edit.putInt("UnitType", UnitType);
+		//edit.putInt("UnitType", UnitType);
 		edit.putInt("UnitFuel", UnitFuel);
 		edit.putInt("UnitOdo", UnitOdo);
 		edit.putInt("UnitTemp", UnitTemp);
@@ -2068,7 +2085,7 @@ public class Home extends Activity {
 	}
 	public void LoadPref(){
 		SharedPreferences SharePref = getSharedPreferences("Home", 0);
-		UnitType = SharePref.getInt("UnitType", UNIT_TYPE_CUSTOM);
+		//UnitType = SharePref.getInt("UnitType", UNIT_TYPE_CUSTOM);
 		UnitFuel = SharePref.getInt("UnitFuel", UNIT_FUEL_L);
 		UnitOdo = SharePref.getInt("UnitOdo", UNIT_ODO_KM);
 		UnitTemp = SharePref.getInt("UnitTemp", UNIT_TEMP_C);
@@ -2941,6 +2958,7 @@ public class Home extends Activity {
 						CameraReverseOnCount = 0;
 					}
 					if(CameraReverseOnCount >= 2){
+						TempScreenIndex = OldScreenIndex;	// ++, --, 151110 cjg
 						OldScreenIndex = ScreenIndex;
 						ScreenIndex = SCREEN_STATE_MAIN_CAMERA_GEAR;
 						CAN1Comm.CameraOnFlag = CAN1CommManager.STATE_CAMERA_REVERSEGEAR;
@@ -2962,6 +2980,7 @@ public class Home extends Activity {
 					if(CameraReverseOffCount >= 2){
 						CAN1Comm.CameraOnFlag = CAN1CommManager.STATE_CAMERA_OFF;
 						ScreenIndex = OldScreenIndex;
+						OldScreenIndex = TempScreenIndex;
 						CAN1Comm.TxCMDToMCU(CAN1Comm.CMD_CAM, 0xFF);
 						CAN1Comm.CameraCurrentOnOff = false;
 						imgViewCameraScreen.setClickable(false);
@@ -3589,13 +3608,14 @@ public class Home extends Activity {
 				ExcuteCamActivitybyKey();
 			}
 			Log.d(TAG,"Click QuickCoupler Key");
-		
-		}else if(ScreenIndex == SCREEN_STATE_MENU_MODE_HYD_WORKLOAD_WEIGHING_INIT1){
-			Log.d(TAG,"Click WeighingInit1 Key");
-			_WorkLoadWeighingInitPopup1.KeyButtonClick(Data);
-		}else if(ScreenIndex == SCREEN_STATE_MENU_MODE_HYD_WORKLOAD_WEIGHING_INIT2){
-			Log.d(TAG,"Click WeighingInit2 Key");
-			_WorkLoadWeighingInitPopup2.KeyButtonClick(Data);
+		// ++, 151110 cjg Menu 안으로 이동
+//		}else if(ScreenIndex == SCREEN_STATE_MENU_MODE_HYD_WORKLOAD_WEIGHING_INIT1){
+//			Log.d(TAG,"Click WeighingInit1 Key");
+//			_WorkLoadWeighingInitPopup1.KeyButtonClick(Data);
+//		}else if(ScreenIndex == SCREEN_STATE_MENU_MODE_HYD_WORKLOAD_WEIGHING_INIT2){
+//			Log.d(TAG,"Click WeighingInit2 Key");
+//			_WorkLoadWeighingInitPopup2.KeyButtonClick(Data);
+		// --, 151110 cjg
 		}else if((ScreenIndex & SCREEN_STATE_FILTER) == SCREEN_STATE_MAIN_B_TOP){
 			Log.d(TAG,"Click Main B Key");
 			_MainBBaseFragment.KeyButtonClick(Data);
@@ -4798,12 +4818,12 @@ public class Home extends Activity {
 		
 		long_Fuel *= 500;
 		
-		if(_unit == UNIT_FUEL_GAL){
+		/*if(_unit == UNIT_FUEL_GAL){
 			long_Fuel *= 264172;
 			long_Fuel /= 1000000;
 			nFuel = (int)(long_Fuel / 10000);
 			nFuel_Under = (int)((long_Fuel % 10000) / 1000);
-		}else{
+		}else*/{
 			nFuel = (int)(long_Fuel / 10000);
 			nFuel_Under = (int)((long_Fuel % 10000) / 1000);
 		}
@@ -4864,7 +4884,7 @@ public class Home extends Activity {
 			long_Weight *= 220462;
 			nWeight =  (long_Weight / 1000);
 			nWeight_Under = ( (long_Weight % 1000) / 100);
-		}else if(Unit == UNIT_WEIGHT_US_TON){
+		}/*else if(Unit == UNIT_WEIGHT_US_TON){
 			long_Weight *= 1012311;
 			nWeight =  (long_Weight / 10000000);
 			nWeight_Under = ( (long_Weight % 10000000) / 100000);
@@ -4872,7 +4892,7 @@ public class Home extends Activity {
 				nWeight_Under = nWeight_Under / 10;
 			else
 				nWeight_Under = (nWeight_Under / 10) + 1;
-		}else{
+		}*/else{
 			nWeight =  (long_Weight / 10);
 			nWeight_Under =  (long_Weight % 10);
 		}
