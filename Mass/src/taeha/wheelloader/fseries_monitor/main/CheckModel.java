@@ -297,8 +297,11 @@ public class CheckModel {
 				if(softwareID[i] == 0x2A){
 					bAsterisk = true;
 					break;
-				}else{
+				}else if(softwareID[i] == 0x20 || (softwareID[i] >= 0x30 && softwareID[i] <= 0x39)){
 					Index++;
+				}else{
+					bAsterisk = true;
+					break;
 				}
 			}
 			if(Index > 1 && bAsterisk == true){

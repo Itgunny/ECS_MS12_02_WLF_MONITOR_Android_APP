@@ -701,7 +701,7 @@ public class Home extends Activity {
 	// 1. A안일 경우 Axle 후 Quick->Home으로 올 때 Keypad 숨겨지지 않는 버그 수정
 	// 2. ESL 지정시간 후 동작 Enter 입력 시 커서 안움직이는 현상 개선(확인필요)
 	////v2.1.0.20
-	// 1. T.C Lock Up 사양 변경(모델정보는 비교하지 않고, TCU 정보로만 판별. Default값은 5Speed)
+	// 1. T.C Lock Up 사양 변경(모델정보는 비교하지 않고, TCU 정보로만 판별(0x20, 숫자만 유효데이터로 함). Default값은 5Speed)
 	// 2. ESL 지정시간 후 동작 Enter 입력 시 커서 안움직이는 현상 개선(확인완료)
 	// 3. MCU Model Num Check 사양 변경(HL980, HL980XT, HL980TM 모두 동일한 HL980으로 처리)
 	// 4. MCU Model Option Check 사양 변경(5글자 이후를 모두 옵션으로 봄)
