@@ -2223,7 +2223,10 @@ public class UserSwitching extends ParentFragment{
 		
 		CAN1Comm.Set_ClutchCutoffMode_544_PGN61184_104(_userdata.CCOMode);
 		CAN1Comm.Set_TransmisstionShiftMode_543_PGN61184_104(_userdata.ShiftMode);
-		CAN1Comm.Set_TransmissionTCLockupEngaged_568_PGN61184_104(_userdata.TCLockUp);
+		if(CheckTCLockUp)
+			CAN1Comm.Set_TransmissionTCLockupEngaged_568_PGN61184_104(_userdata.TCLockUp);
+		else
+			CAN1Comm.Set_TransmissionTCLockupEngaged_568_PGN61184_104(3);
 		CAN1Comm.Set_KickDownShiftMode_547_PGN61184_104(_userdata.KickDown);
 		CAN1Comm.TxCANToMCU(104);
 		CAN1Comm.Set_ClutchCutoffMode_544_PGN61184_104(15);
@@ -2241,12 +2244,24 @@ public class UserSwitching extends ParentFragment{
 		CAN1Comm.Set_WeighingDisplayMode1_1910_PGN61184_62(15);
 		
 
-		CAN1Comm.Set_BucketPriorityOperation_2301_PGN61184_203(_userdata.BucketPriority);
-		CAN1Comm.Set_SoftStopBoomUp_2337_PGN61184_203(_userdata.SoftEndStopBoomUp);
-		CAN1Comm.Set_SoftStopBoomDown_2338_PGN61184_203(_userdata.SoftEndStopBoomDown);
-		CAN1Comm.Set_SoftStopBucketIn_2339_PGN61184_203(_userdata.SoftEndStopBucketIn);
-		CAN1Comm.Set_SoftStopBucketOut_2340_PGN61184_203(_userdata.SoftEndStopBucketDump);
-		CAN1Comm.TxCANToMCU(203);
+		if(CheckEHCU)
+		{
+			CAN1Comm.Set_BucketPriorityOperation_2301_PGN61184_203(_userdata.BucketPriority);
+			CAN1Comm.Set_SoftStopBoomUp_2337_PGN61184_203(_userdata.SoftEndStopBoomUp);
+			if(CheckTM == false)
+			{
+				CAN1Comm.Set_SoftStopBoomDown_2338_PGN61184_203(_userdata.SoftEndStopBoomDown);
+				CAN1Comm.Set_SoftStopBucketIn_2339_PGN61184_203(_userdata.SoftEndStopBucketIn);
+				CAN1Comm.Set_SoftStopBucketOut_2340_PGN61184_203(_userdata.SoftEndStopBucketDump);
+			}
+			else
+			{
+				CAN1Comm.Set_SoftStopBoomDown_2338_PGN61184_203(3);
+				CAN1Comm.Set_SoftStopBucketIn_2339_PGN61184_203(3);
+				CAN1Comm.Set_SoftStopBucketOut_2340_PGN61184_203(3);
+			}
+			CAN1Comm.TxCANToMCU(203);
+		}
 		CAN1Comm.Set_BucketPriorityOperation_2301_PGN61184_203(3);
 		CAN1Comm.Set_SoftStopBoomUp_2337_PGN61184_203(3);
 		CAN1Comm.Set_SoftStopBoomDown_2338_PGN61184_203(3);

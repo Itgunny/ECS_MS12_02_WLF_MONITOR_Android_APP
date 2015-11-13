@@ -345,15 +345,38 @@ public class SoftStopFragment extends ParentFragment{
 		BucketIn = CAN1CommManager.DATA_STATE_SOFTSTOP_BUCKETIN_OFF;
 		BucketOut = CAN1CommManager.DATA_STATE_SOFTSTOP_BUCKETOUT_ON;
 		
-		CAN1Comm.Set_SoftStopBoomUp_2337_PGN61184_203(BoomUp);
-		CAN1Comm.Set_SoftStopBoomDown_2338_PGN61184_203(BoomDown);
-		CAN1Comm.Set_SoftStopBucketIn_2339_PGN61184_203(BucketIn);
-		CAN1Comm.Set_SoftStopBucketOut_2340_PGN61184_203(BucketOut);
-		CAN1Comm.TxCANToMCU(203);
-		CAN1Comm.Set_SoftStopBoomUp_2337_PGN61184_203(3);
-		CAN1Comm.Set_SoftStopBoomDown_2338_PGN61184_203(3);
-		CAN1Comm.Set_SoftStopBucketIn_2339_PGN61184_203(3);
-		CAN1Comm.Set_SoftStopBucketOut_2340_PGN61184_203(3);
+//		CAN1Comm.Set_SoftStopBoomUp_2337_PGN61184_203(BoomUp);
+//		CAN1Comm.Set_SoftStopBoomDown_2338_PGN61184_203(BoomDown);
+//		CAN1Comm.Set_SoftStopBucketIn_2339_PGN61184_203(BucketIn);
+//		CAN1Comm.Set_SoftStopBucketOut_2340_PGN61184_203(BucketOut);
+//		CAN1Comm.TxCANToMCU(203);
+//		CAN1Comm.Set_SoftStopBoomUp_2337_PGN61184_203(3);
+//		CAN1Comm.Set_SoftStopBoomDown_2338_PGN61184_203(3);
+//		CAN1Comm.Set_SoftStopBucketIn_2339_PGN61184_203(3);
+//		CAN1Comm.Set_SoftStopBucketOut_2340_PGN61184_203(3);
+		
+		String strModelOption = ParentActivity._CheckModel.GetMCUModelOption(CAN1Comm.Get_ComponentBasicInformation_1698_PGN65330());
+		if(strModelOption.equals("TM")){
+			CAN1Comm.Set_SoftStopBoomUp_2337_PGN61184_203(BoomUp);
+			CAN1Comm.Set_SoftStopBoomDown_2338_PGN61184_203(3);
+			CAN1Comm.Set_SoftStopBucketIn_2339_PGN61184_203(3);
+			CAN1Comm.Set_SoftStopBucketOut_2340_PGN61184_203(3);
+			CAN1Comm.TxCANToMCU(203);
+			CAN1Comm.Set_SoftStopBoomUp_2337_PGN61184_203(3);
+			CAN1Comm.Set_SoftStopBoomDown_2338_PGN61184_203(3);
+			CAN1Comm.Set_SoftStopBucketIn_2339_PGN61184_203(3);
+			CAN1Comm.Set_SoftStopBucketOut_2340_PGN61184_203(3);
+		}else{
+			CAN1Comm.Set_SoftStopBoomUp_2337_PGN61184_203(BoomUp);
+			CAN1Comm.Set_SoftStopBoomDown_2338_PGN61184_203(BoomDown);
+			CAN1Comm.Set_SoftStopBucketIn_2339_PGN61184_203(BucketIn);
+			CAN1Comm.Set_SoftStopBucketOut_2340_PGN61184_203(BucketOut);
+			CAN1Comm.TxCANToMCU(203);
+			CAN1Comm.Set_SoftStopBoomUp_2337_PGN61184_203(3);
+			CAN1Comm.Set_SoftStopBoomDown_2338_PGN61184_203(3);
+			CAN1Comm.Set_SoftStopBucketIn_2339_PGN61184_203(3);
+			CAN1Comm.Set_SoftStopBucketOut_2340_PGN61184_203(3);
+		}
 		
 		BoomUpDisplay(BoomUp);
 		BoomDownDisplay(BoomDown);

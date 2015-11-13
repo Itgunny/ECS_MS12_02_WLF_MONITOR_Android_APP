@@ -75,7 +75,7 @@ public class Home extends Activity {
 	public static final int VERSION_LOW 		= 1;
 	public static final int VERSION_SUB_HIGH 	= 0;
 	public static final int VERSION_SUB_LOW 	= 2;
-	public static final int VERSION_TAEHA		= 0;
+	public static final int VERSION_TAEHA		= 1;
 	////1.0.2.3
 	// UI B 안 최초 적용 2014.12.10
 	////1.0.2.4
@@ -697,7 +697,7 @@ public class Home extends Activity {
 	//	- Swedish -> Svenska
 	//	- Slovakian -> Slovensky
 	//	- Estonian -> Eesti
-	////v2.1.0.11
+	////v2.1.0.11(배포안함)
 	// 1. A안일 경우 Axle 후 Quick->Home으로 올 때 Keypad 숨겨지지 않는 버그 수정
 	// 2. ESL 지정시간 후 동작 Enter 입력 시 커서 안움직이는 현상 개선(확인필요)
 	////v2.1.0.20
@@ -710,6 +710,10 @@ public class Home extends Activity {
 	// 7. Fuel 팝업 초기화 중 팝업이외 클릭 시 crash 뜨는 현상 및 초기화와 OK 버튼 사이 클릭 시 UI 색상 바뀌는 현상 개선
 	// 8. UserSwitching SoftEndStop TM 옵션 적용 
 	// 9. Workload Init 팝업 후진기어연동, 카메라버튼 되도록 변경
+	////v2.1.0.21
+	// 1. Gauge Animation 수정 : TimerTask 종료되지 않는 현상 수정
+	// 2. SoftEndStop Default 적용 시 TM 옵션 상관없이 모든 데이터 전송하는 버그 수정
+	// 3. UserSwitching에서 옵션유무 적용하여 CAN 데이터 전송(옵션에 의해 감춰지더라도 CAN 데이터전송되었음)
 	//////////////////////////////////////////////////////////////////////////////////////
 	
 	// TAG
