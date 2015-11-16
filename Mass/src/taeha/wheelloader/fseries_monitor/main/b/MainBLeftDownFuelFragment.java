@@ -183,16 +183,16 @@ public class MainBLeftDownFuelFragment extends ParentFragment{
 //			break;
 		case CAN1CommManager.DATA_STATE_AVERAGE_FUEL_RATE:
 			textViewFuelData.setText(ParentActivity.GetFuelRateString(AverageFuel, ParentActivity.UnitFuel));
-			/*if(ParentActivity.UnitFuel == Home.UNIT_FUEL_GAL)
+			if(ParentActivity.UnitFuel == Home.UNIT_FUEL_GAL)
 				textViewFuelUnit.setText(ParentActivity.getResources().getString(string.gal_h));
-			else*/
+			else
 				textViewFuelUnit.setText(ParentActivity.getResources().getString(string.l_h));
 			break;
 		case CAN1CommManager.DATA_STATE_A_DAYS_FUEL_USED:
 			textViewFuelData.setText(ParentActivity.GetFuelRateString(LatestConsumed, ParentActivity.UnitFuel));
-			/*if(ParentActivity.UnitFuel == Home.UNIT_FUEL_GAL)
+			if(ParentActivity.UnitFuel == Home.UNIT_FUEL_GAL)
 				textViewFuelUnit.setText(ParentActivity.getResources().getString(string.gal));
-			else*/
+			else
 				textViewFuelUnit.setText(ParentActivity.getResources().getString(string.l));
 			break;
 		default:

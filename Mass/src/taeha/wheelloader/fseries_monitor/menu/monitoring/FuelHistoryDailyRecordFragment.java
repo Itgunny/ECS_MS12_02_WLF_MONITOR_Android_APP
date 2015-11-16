@@ -193,9 +193,9 @@ public class FuelHistoryDailyRecordFragment  extends ParentFragment{
 	}
 	/////////////////////////////////////////////////////////////////////
 	public void SetUnit(){
-		/*if(ParentActivity.UnitFuel == Home.UNIT_FUEL_GAL)
+		if(ParentActivity.UnitFuel == Home.UNIT_FUEL_GAL)
 			textViewUnit.setText(ParentActivity.getResources().getString(string.gal));
-		else*/
+		else
 			textViewUnit.setText(ParentActivity.getResources().getString(string.l));
 			
 	}

@@ -82,18 +82,19 @@ public class UserSwitching extends ParentFragment{
 	private int STATE_SOFTENDSTOP_BUCKETDUMP	= 13;
 	private int STATE_BRIGHTNESS_MANUALAUTO	= 14;	// ++, --, 150407 bwk 수동 밝기 -> 수동/자동으로 변경
 	private int STATE_DISPLAYTYPE				= 15;
-	private int STATE_UNIT_TEMP				= 16;
-	private int STATE_UNIT_ODO					= 17;
-	private int STATE_UNIT_WEIGHT				= 18;
-	private int STATE_UNIT_PRESSURE			= 19;
-	private int STATE_MACHINESTATUS_UPPER		= 20;
-	private int STATE_MACHINESTATUS_LOWER		= 21;
-	private int STATE_LANGUAGE					= 22;
-	private int STATE_SOUNDOUTPUT				= 23;
-	private int STATE_OPERATION_HISTORY		= 24;	// ++, --, 150403 bwk 명칭 변경 STATE_HOURMETER -> STATE_OPERATION_HISTORY
-	private int STATE_FUEL_INFO				= 25;	// ++, --, 150403 bwk 항목 추가
-	private int STATE_BOOM_DETENT_MODE			= 26;
-	private int STATE_BUCKET_DETENT_MODE		= 27;		
+	private int STATE_UNIT_FUEL				= 16;
+	private int STATE_UNIT_TEMP				= 17;
+	private int STATE_UNIT_ODO					= 18;
+	private int STATE_UNIT_WEIGHT				= 19;
+	private int STATE_UNIT_PRESSURE			= 20;
+	private int STATE_MACHINESTATUS_UPPER		= 21;
+	private int STATE_MACHINESTATUS_LOWER		= 22;
+	private int STATE_LANGUAGE					= 23;
+	private int STATE_SOUNDOUTPUT				= 24;
+	private int STATE_OPERATION_HISTORY		= 25;	// ++, --, 150403 bwk 명칭 변경 STATE_HOURMETER -> STATE_OPERATION_HISTORY
+	private int STATE_FUEL_INFO				= 26;	// ++, --, 150403 bwk 항목 추가
+	private int STATE_BOOM_DETENT_MODE			= 27;
+	private int STATE_BUCKET_DETENT_MODE		= 28;		
 	//////////////////////////////////////////////////
 	//RESOURCE////////////////////////////////////////
 	ImageButton imgbtnOK;
@@ -140,6 +141,7 @@ public class UserSwitching extends ParentFragment{
 	public int BrightnessAutoEndTime;
 	// --, 150407 bwk
 	public int DisplayType;
+	public int UnitFuel;
 	public int UnitTemp;
 	public int UnitOdo;
 	public int UnitWeight;
@@ -479,60 +481,65 @@ public class UserSwitching extends ParentFragment{
 					, ""));
 			adapter.addItem(new IconTextItemUserSwitching( ParentActivity.getResources().getDrawable(R.drawable.menu_management_machine_monitoring_bg_light),
 					null,
-					ParentActivity.getResources().getString(string.Temp)
+					ParentActivity.getResources().getString(string.FuelRate)
 					, ""
 					, ""));
 			adapter.addItem(new IconTextItemUserSwitching( ParentActivity.getResources().getDrawable(R.drawable.menu_management_machine_monitoring_bg_dark),
+					null,
+					ParentActivity.getResources().getString(string.Temp)
+					, ""
+					, ""));
+			adapter.addItem(new IconTextItemUserSwitching( ParentActivity.getResources().getDrawable(R.drawable.menu_management_machine_monitoring_bg_light),
 					null,
 					ParentActivity.getResources().getString(string.Speed)
 					, ""
 					, ""));
-			adapter.addItem(new IconTextItemUserSwitching( ParentActivity.getResources().getDrawable(R.drawable.menu_management_machine_monitoring_bg_light),
+			adapter.addItem(new IconTextItemUserSwitching( ParentActivity.getResources().getDrawable(R.drawable.menu_management_machine_monitoring_bg_dark),
 					null,
 					ParentActivity.getResources().getString(string.Weight)
 					, ""
 					, ""));
-			adapter.addItem(new IconTextItemUserSwitching( ParentActivity.getResources().getDrawable(R.drawable.menu_management_machine_monitoring_bg_dark),
+			adapter.addItem(new IconTextItemUserSwitching( ParentActivity.getResources().getDrawable(R.drawable.menu_management_machine_monitoring_bg_light),
 					null,
 					ParentActivity.getResources().getString(string.Pressure)
 					, ""
 					, ""));
-			adapter.addItem(new IconTextItemUserSwitching( ParentActivity.getResources().getDrawable(R.drawable.menu_management_machine_monitoring_bg_light),
-					null,
-					ParentActivity.getResources().getString(string.Machine_Monitoring)
-					, ""
-					, ""));
 			adapter.addItem(new IconTextItemUserSwitching( ParentActivity.getResources().getDrawable(R.drawable.menu_management_machine_monitoring_bg_dark),
 					null,
 					ParentActivity.getResources().getString(string.Machine_Monitoring)
 					, ""
 					, ""));
 			adapter.addItem(new IconTextItemUserSwitching( ParentActivity.getResources().getDrawable(R.drawable.menu_management_machine_monitoring_bg_light),
+					null,
+					ParentActivity.getResources().getString(string.Machine_Monitoring)
+					, ""
+					, ""));
+			adapter.addItem(new IconTextItemUserSwitching( ParentActivity.getResources().getDrawable(R.drawable.menu_management_machine_monitoring_bg_dark),
 					null,
 					ParentActivity.getResources().getString(string.Language)
 					, ""
 					, ""));
-			adapter.addItem(new IconTextItemUserSwitching( ParentActivity.getResources().getDrawable(R.drawable.menu_management_machine_monitoring_bg_dark),
+			adapter.addItem(new IconTextItemUserSwitching( ParentActivity.getResources().getDrawable(R.drawable.menu_management_machine_monitoring_bg_light),
 					null,
 					ParentActivity.getResources().getString(string.Sound_Output_Setting)
 					, ""
 					, ""));
-			adapter.addItem(new IconTextItemUserSwitching( ParentActivity.getResources().getDrawable(R.drawable.menu_management_machine_monitoring_bg_light),
+			adapter.addItem(new IconTextItemUserSwitching( ParentActivity.getResources().getDrawable(R.drawable.menu_management_machine_monitoring_bg_dark),
 					null,
 					ParentActivity.getResources().getString(string.Operation_History)
 					, ""
 					, ""));
-			adapter.addItem(new IconTextItemUserSwitching( ParentActivity.getResources().getDrawable(R.drawable.menu_management_machine_monitoring_bg_dark),
+			adapter.addItem(new IconTextItemUserSwitching( ParentActivity.getResources().getDrawable(R.drawable.menu_management_machine_monitoring_bg_light),
 					null,
 					ParentActivity.getResources().getString(string.Fuel_Consumption_History)
 					, ""
 					, ""));		
-			adapter.addItem(new IconTextItemUserSwitching( ParentActivity.getResources().getDrawable(R.drawable.menu_management_machine_monitoring_bg_light),
+			adapter.addItem(new IconTextItemUserSwitching( ParentActivity.getResources().getDrawable(R.drawable.menu_management_machine_monitoring_bg_dark),
 					null,
 					ParentActivity.getResources().getString(string.Boom_Detent_Mode)
 					, ""
 					, ""));
-			adapter.addItem(new IconTextItemUserSwitching( ParentActivity.getResources().getDrawable(R.drawable.menu_management_machine_monitoring_bg_dark),
+			adapter.addItem(new IconTextItemUserSwitching( ParentActivity.getResources().getDrawable(R.drawable.menu_management_machine_monitoring_bg_light),
 					null,
 					ParentActivity.getResources().getString(string.Bucket_Detent_Mode)
 					, ""
@@ -552,204 +559,216 @@ public class UserSwitching extends ParentFragment{
 					, ""));
 			adapter.addItem(new IconTextItemUserSwitching( ParentActivity.getResources().getDrawable(R.drawable.menu_management_machine_monitoring_bg_dark),
 					null,
-					ParentActivity.getResources().getString(string.Temp)
+					ParentActivity.getResources().getString(string.FuelRate)
 					, ""
 					, ""));
 			adapter.addItem(new IconTextItemUserSwitching( ParentActivity.getResources().getDrawable(R.drawable.menu_management_machine_monitoring_bg_light),
+					null,
+					ParentActivity.getResources().getString(string.Temp)
+					, ""
+					, ""));
+			adapter.addItem(new IconTextItemUserSwitching( ParentActivity.getResources().getDrawable(R.drawable.menu_management_machine_monitoring_bg_dark),
 					null,
 					ParentActivity.getResources().getString(string.Speed)
 					, ""
 					, ""));
-			adapter.addItem(new IconTextItemUserSwitching( ParentActivity.getResources().getDrawable(R.drawable.menu_management_machine_monitoring_bg_dark),
+			adapter.addItem(new IconTextItemUserSwitching( ParentActivity.getResources().getDrawable(R.drawable.menu_management_machine_monitoring_bg_light),
 					null,
 					ParentActivity.getResources().getString(string.Weight)
 					, ""
 					, ""));
-			adapter.addItem(new IconTextItemUserSwitching( ParentActivity.getResources().getDrawable(R.drawable.menu_management_machine_monitoring_bg_light),
+			adapter.addItem(new IconTextItemUserSwitching( ParentActivity.getResources().getDrawable(R.drawable.menu_management_machine_monitoring_bg_dark),
 					null,
 					ParentActivity.getResources().getString(string.Pressure)
 					, ""
 					, ""));
-			adapter.addItem(new IconTextItemUserSwitching( ParentActivity.getResources().getDrawable(R.drawable.menu_management_machine_monitoring_bg_dark),
-					null,
-					ParentActivity.getResources().getString(string.Machine_Monitoring)
-					, ""
-					, ""));
 			adapter.addItem(new IconTextItemUserSwitching( ParentActivity.getResources().getDrawable(R.drawable.menu_management_machine_monitoring_bg_light),
 					null,
 					ParentActivity.getResources().getString(string.Machine_Monitoring)
 					, ""
 					, ""));
 			adapter.addItem(new IconTextItemUserSwitching( ParentActivity.getResources().getDrawable(R.drawable.menu_management_machine_monitoring_bg_dark),
+					null,
+					ParentActivity.getResources().getString(string.Machine_Monitoring)
+					, ""
+					, ""));
+			adapter.addItem(new IconTextItemUserSwitching( ParentActivity.getResources().getDrawable(R.drawable.menu_management_machine_monitoring_bg_light),
 					null,
 					ParentActivity.getResources().getString(string.Language)
 					, ""
 					, ""));
-			adapter.addItem(new IconTextItemUserSwitching( ParentActivity.getResources().getDrawable(R.drawable.menu_management_machine_monitoring_bg_light),
+			adapter.addItem(new IconTextItemUserSwitching( ParentActivity.getResources().getDrawable(R.drawable.menu_management_machine_monitoring_bg_dark),
 					null,
 					ParentActivity.getResources().getString(string.Sound_Output_Setting)
 					, ""
 					, ""));
-			adapter.addItem(new IconTextItemUserSwitching( ParentActivity.getResources().getDrawable(R.drawable.menu_management_machine_monitoring_bg_dark),
+			adapter.addItem(new IconTextItemUserSwitching( ParentActivity.getResources().getDrawable(R.drawable.menu_management_machine_monitoring_bg_light),
 					null,
 					ParentActivity.getResources().getString(string.Operation_History)
 					, ""
 					, ""));
-			adapter.addItem(new IconTextItemUserSwitching( ParentActivity.getResources().getDrawable(R.drawable.menu_management_machine_monitoring_bg_light),
+			adapter.addItem(new IconTextItemUserSwitching( ParentActivity.getResources().getDrawable(R.drawable.menu_management_machine_monitoring_bg_dark),
 					null,
 					ParentActivity.getResources().getString(string.Fuel_Consumption_History)
 					, ""
 					, ""));		
-			adapter.addItem(new IconTextItemUserSwitching( ParentActivity.getResources().getDrawable(R.drawable.menu_management_machine_monitoring_bg_dark),
+			adapter.addItem(new IconTextItemUserSwitching( ParentActivity.getResources().getDrawable(R.drawable.menu_management_machine_monitoring_bg_light),
 					null,
 					ParentActivity.getResources().getString(string.Boom_Detent_Mode)
 					, ""
 					, ""));
-			adapter.addItem(new IconTextItemUserSwitching( ParentActivity.getResources().getDrawable(R.drawable.menu_management_machine_monitoring_bg_light),
+			adapter.addItem(new IconTextItemUserSwitching( ParentActivity.getResources().getDrawable(R.drawable.menu_management_machine_monitoring_bg_dark),
 					null,
 					ParentActivity.getResources().getString(string.Bucket_Detent_Mode)
 					, ""
 					, ""));				
 		}
 		
-		STATE_ENGINEMODE 				= 0;
-		STATE_CCOMODE					= 1;
-		STATE_SHIFTMODE					= 2;
+		int nIndex = 0;
+		STATE_ENGINEMODE 				= nIndex++;
+		STATE_CCOMODE					= nIndex++;
+		STATE_SHIFTMODE					= nIndex++;
 		if(CheckTCLockUp && CheckEHCU){
-			STATE_TCLOCKUP					    = 3;
-			STATE_RIDECONTROL				    = 4;
-			STATE_WEIGHINGSYSTEM			    = 5;
-			STATE_WEIGHINGDISPLAY			    = 6;
-			STATE_ERRORDETECTION			    = 7;
-			STATE_KICKDOWN					    = 8;
-			STATE_BUCKETPRIORITY			    = 9;
-			STATE_SOFTENDSTOP_BOOMUP		  	= 10;
+			STATE_TCLOCKUP					    = nIndex++;
+			STATE_RIDECONTROL				    = nIndex++;
+			STATE_WEIGHINGSYSTEM			    = nIndex++;
+			STATE_WEIGHINGDISPLAY			    = nIndex++;
+			STATE_ERRORDETECTION			    = nIndex++;
+			STATE_KICKDOWN					    = nIndex++;
+			STATE_BUCKETPRIORITY			    = nIndex++;
+			STATE_SOFTENDSTOP_BOOMUP		  	= nIndex++;
 			if(CheckTM == false)
 			{
-				STATE_SOFTENDSTOP_BOOMDOWN			= 11;
-				STATE_SOFTENDSTOP_BUCKETIN			= 12;
-				STATE_SOFTENDSTOP_BUCKETDUMP		= 13;
-				STATE_BRIGHTNESS_MANUALAUTO	  		= 14;	
-				STATE_DISPLAYTYPE				    = 15;
-				STATE_UNIT_TEMP				        = 16;
-				STATE_UNIT_ODO					    = 17;
-				STATE_UNIT_WEIGHT				    = 18;
-				STATE_UNIT_PRESSURE			      	= 19;
-				STATE_MACHINESTATUS_UPPER		  	= 20;
-				STATE_MACHINESTATUS_LOWER		  	= 21;
-				STATE_LANGUAGE					    = 22;
-				STATE_SOUNDOUTPUT				    = 23;
-				STATE_OPERATION_HISTORY		    	= 24;
-				STATE_FUEL_INFO				        = 25;
-				STATE_BOOM_DETENT_MODE			  	= 26;
-				STATE_BUCKET_DETENT_MODE		  	= 27;
+				STATE_SOFTENDSTOP_BOOMDOWN			= nIndex++;
+				STATE_SOFTENDSTOP_BUCKETIN			= nIndex++;
+				STATE_SOFTENDSTOP_BUCKETDUMP		= nIndex++;
+				STATE_BRIGHTNESS_MANUALAUTO	  		= nIndex++;	
+				STATE_DISPLAYTYPE				    = nIndex++;
+				STATE_UNIT_FUEL				        = nIndex++;
+				STATE_UNIT_TEMP				        = nIndex++;
+				STATE_UNIT_ODO					    = nIndex++;
+				STATE_UNIT_WEIGHT				    = nIndex++;
+				STATE_UNIT_PRESSURE			      	= nIndex++;
+				STATE_MACHINESTATUS_UPPER		  	= nIndex++;
+				STATE_MACHINESTATUS_LOWER		  	= nIndex++;
+				STATE_LANGUAGE					    = nIndex++;
+				STATE_SOUNDOUTPUT				    = nIndex++;
+				STATE_OPERATION_HISTORY		    	= nIndex++;
+				STATE_FUEL_INFO				        = nIndex++;
+				STATE_BOOM_DETENT_MODE			  	= nIndex++;
+				STATE_BUCKET_DETENT_MODE		  	= nIndex++;
 			}
 			else
 			{
-				STATE_BRIGHTNESS_MANUALAUTO	  		= 11;	
-				STATE_DISPLAYTYPE				    = 12;
-				STATE_UNIT_TEMP				        = 13;
-				STATE_UNIT_ODO					    = 14;
-				STATE_UNIT_WEIGHT				    = 15;
-				STATE_UNIT_PRESSURE			      	= 16;
-				STATE_MACHINESTATUS_UPPER		  	= 17;
-				STATE_MACHINESTATUS_LOWER		  	= 18;
-				STATE_LANGUAGE					    = 19;
-				STATE_SOUNDOUTPUT				    = 20;
-				STATE_OPERATION_HISTORY		    	= 21;
-				STATE_FUEL_INFO				        = 22;
-				STATE_BOOM_DETENT_MODE			  	= 23;
-				STATE_BUCKET_DETENT_MODE		  	= 24;
+				STATE_BRIGHTNESS_MANUALAUTO	  		= nIndex++;	
+				STATE_DISPLAYTYPE				    = nIndex++;
+				STATE_UNIT_FUEL				        = nIndex++;
+				STATE_UNIT_TEMP				        = nIndex++;
+				STATE_UNIT_ODO					    = nIndex++;
+				STATE_UNIT_WEIGHT				    = nIndex++;
+				STATE_UNIT_PRESSURE			      	= nIndex++;
+				STATE_MACHINESTATUS_UPPER		  	= nIndex++;
+				STATE_MACHINESTATUS_LOWER		  	= nIndex++;
+				STATE_LANGUAGE					    = nIndex++;
+				STATE_SOUNDOUTPUT				    = nIndex++;
+				STATE_OPERATION_HISTORY		    	= nIndex++;
+				STATE_FUEL_INFO				        = nIndex++;
+				STATE_BOOM_DETENT_MODE			  	= nIndex++;
+				STATE_BUCKET_DETENT_MODE		  	= nIndex++;
 			}
 		}else if(CheckTCLockUp){
-			STATE_TCLOCKUP						= 3;
-			STATE_RIDECONTROL				    = 4;
-			STATE_WEIGHINGSYSTEM			    = 5;
-			STATE_WEIGHINGDISPLAY			    = 6;
-			STATE_ERRORDETECTION			    = 7;
-			STATE_KICKDOWN					    = 8;
-			STATE_BRIGHTNESS_MANUALAUTO	  		= 9;
-			STATE_DISPLAYTYPE				    = 10;
-			STATE_UNIT_TEMP				        = 11;
-			STATE_UNIT_ODO					    = 12;
-			STATE_UNIT_WEIGHT				    = 13;
-			STATE_UNIT_PRESSURE			      	= 14;
-			STATE_MACHINESTATUS_UPPER		  	= 15;
-			STATE_MACHINESTATUS_LOWER		  	= 16;
-			STATE_LANGUAGE					    = 17;
-			STATE_SOUNDOUTPUT				    = 18;
-			STATE_OPERATION_HISTORY		    	= 19;
-			STATE_FUEL_INFO				        = 20;
-			STATE_BOOM_DETENT_MODE			  	= 21;
-			STATE_BUCKET_DETENT_MODE		  	= 22;
+			STATE_TCLOCKUP						= nIndex++;
+			STATE_RIDECONTROL				    = nIndex++;
+			STATE_WEIGHINGSYSTEM			    = nIndex++;
+			STATE_WEIGHINGDISPLAY			    = nIndex++;
+			STATE_ERRORDETECTION			    = nIndex++;
+			STATE_KICKDOWN					    = nIndex++;
+			STATE_BRIGHTNESS_MANUALAUTO	  		= nIndex++;
+			STATE_DISPLAYTYPE				    = nIndex++;
+			STATE_UNIT_FUEL				        = nIndex++;
+			STATE_UNIT_TEMP				        = nIndex++;
+			STATE_UNIT_ODO					    = nIndex++;
+			STATE_UNIT_WEIGHT				    = nIndex++;
+			STATE_UNIT_PRESSURE			      	= nIndex++;
+			STATE_MACHINESTATUS_UPPER		  	= nIndex++;
+			STATE_MACHINESTATUS_LOWER		  	= nIndex++;
+			STATE_LANGUAGE					    = nIndex++;
+			STATE_SOUNDOUTPUT				    = nIndex++;
+			STATE_OPERATION_HISTORY		    	= nIndex++;
+			STATE_FUEL_INFO				        = nIndex++;
+			STATE_BOOM_DETENT_MODE			  	= nIndex++;
+			STATE_BUCKET_DETENT_MODE		  	= nIndex++;
 		}
 		else if(CheckEHCU)
 		{
-			STATE_RIDECONTROL				    = 3;
-			STATE_WEIGHINGSYSTEM			    = 4;
-			STATE_WEIGHINGDISPLAY			    = 5;
-			STATE_ERRORDETECTION			    = 6;
-			STATE_KICKDOWN					    = 7;
-			STATE_BUCKETPRIORITY			    = 8;
-			STATE_SOFTENDSTOP_BOOMUP		  	= 9;
+			STATE_RIDECONTROL				    = nIndex++;
+			STATE_WEIGHINGSYSTEM			    = nIndex++;
+			STATE_WEIGHINGDISPLAY			    = nIndex++;
+			STATE_ERRORDETECTION			    = nIndex++;
+			STATE_KICKDOWN					    = nIndex++;
+			STATE_BUCKETPRIORITY			    = nIndex++;
+			STATE_SOFTENDSTOP_BOOMUP		  	= nIndex++;
 			if(CheckTM == false)
 			{
-				STATE_SOFTENDSTOP_BOOMDOWN			= 10;
-				STATE_SOFTENDSTOP_BUCKETIN			= 11;
-				STATE_SOFTENDSTOP_BUCKETDUMP		= 12;
-				STATE_BRIGHTNESS_MANUALAUTO	  		= 13;	
-				STATE_DISPLAYTYPE				    = 14;
-				STATE_UNIT_TEMP				        = 15;
-				STATE_UNIT_ODO					    = 16;
-				STATE_UNIT_WEIGHT				    = 17;
-				STATE_UNIT_PRESSURE			      	= 18;
-				STATE_MACHINESTATUS_UPPER		  	= 19;
-				STATE_MACHINESTATUS_LOWER		  	= 20;
-				STATE_LANGUAGE					    = 21;
-				STATE_SOUNDOUTPUT				    = 22;
-				STATE_OPERATION_HISTORY		    	= 23;
-				STATE_FUEL_INFO				        = 24;
-				STATE_BOOM_DETENT_MODE			  	= 25;
-				STATE_BUCKET_DETENT_MODE		  	= 26;
+				STATE_SOFTENDSTOP_BOOMDOWN			= nIndex++;
+				STATE_SOFTENDSTOP_BUCKETIN			= nIndex++;
+				STATE_SOFTENDSTOP_BUCKETDUMP		= nIndex++;
+				STATE_BRIGHTNESS_MANUALAUTO	  		= nIndex++;	
+				STATE_DISPLAYTYPE				    = nIndex++;
+				STATE_UNIT_FUEL				        = nIndex++;
+				STATE_UNIT_TEMP				        = nIndex++;
+				STATE_UNIT_ODO					    = nIndex++;
+				STATE_UNIT_WEIGHT				    = nIndex++;
+				STATE_UNIT_PRESSURE			      	= nIndex++;
+				STATE_MACHINESTATUS_UPPER		  	= nIndex++;
+				STATE_MACHINESTATUS_LOWER		  	= nIndex++;
+				STATE_LANGUAGE					    = nIndex++;
+				STATE_SOUNDOUTPUT				    = nIndex++;
+				STATE_OPERATION_HISTORY		    	= nIndex++;
+				STATE_FUEL_INFO				        = nIndex++;
+				STATE_BOOM_DETENT_MODE			  	= nIndex++;
+				STATE_BUCKET_DETENT_MODE		  	= nIndex++;
 			}
 			else
 			{
-				STATE_BRIGHTNESS_MANUALAUTO	  		= 10;	
-				STATE_DISPLAYTYPE				    = 11;
-				STATE_UNIT_TEMP				        = 12;
-				STATE_UNIT_ODO					    = 13;
-				STATE_UNIT_WEIGHT				    = 14;
-				STATE_UNIT_PRESSURE			      	= 15;
-				STATE_MACHINESTATUS_UPPER		  	= 16;
-				STATE_MACHINESTATUS_LOWER		  	= 17;
-				STATE_LANGUAGE					    = 18;
-				STATE_SOUNDOUTPUT				    = 19;
-				STATE_OPERATION_HISTORY		    	= 20;
-				STATE_FUEL_INFO				        = 21;
-				STATE_BOOM_DETENT_MODE			  	= 22;
-				STATE_BUCKET_DETENT_MODE		  	= 23;
+				STATE_BRIGHTNESS_MANUALAUTO	  		= nIndex++;	
+				STATE_DISPLAYTYPE				    = nIndex++;
+				STATE_UNIT_FUEL				        = nIndex++;
+				STATE_UNIT_TEMP				        = nIndex++;
+				STATE_UNIT_ODO					    = nIndex++;
+				STATE_UNIT_WEIGHT				    = nIndex++;
+				STATE_UNIT_PRESSURE			      	= nIndex++;
+				STATE_MACHINESTATUS_UPPER		  	= nIndex++;
+				STATE_MACHINESTATUS_LOWER		  	= nIndex++;
+				STATE_LANGUAGE					    = nIndex++;
+				STATE_SOUNDOUTPUT				    = nIndex++;
+				STATE_OPERATION_HISTORY		    	= nIndex++;
+				STATE_FUEL_INFO				        = nIndex++;
+				STATE_BOOM_DETENT_MODE			  	= nIndex++;
+				STATE_BUCKET_DETENT_MODE		  	= nIndex++;
 			}
 		}
 		else{
-			STATE_RIDECONTROL				    = 3;
-			STATE_WEIGHINGSYSTEM			    = 4;
-			STATE_WEIGHINGDISPLAY			    = 5;
-			STATE_ERRORDETECTION			    = 6;
-			STATE_KICKDOWN					    = 7;
-			STATE_BRIGHTNESS_MANUALAUTO	  		= 8;
-			STATE_DISPLAYTYPE				    = 9;
-			STATE_UNIT_TEMP				        = 10;
-			STATE_UNIT_ODO					    = 11;
-			STATE_UNIT_WEIGHT				    = 12;
-			STATE_UNIT_PRESSURE			      	= 13;
-			STATE_MACHINESTATUS_UPPER		  	= 14;
-			STATE_MACHINESTATUS_LOWER		  	= 15;
-			STATE_LANGUAGE					    = 16;
-			STATE_SOUNDOUTPUT				    = 17;
-			STATE_OPERATION_HISTORY		    	= 18;
-			STATE_FUEL_INFO				        = 19;
-			STATE_BOOM_DETENT_MODE			  	= 20;
-			STATE_BUCKET_DETENT_MODE		  	= 21;
+			STATE_RIDECONTROL				    = nIndex++;
+			STATE_WEIGHINGSYSTEM			    = nIndex++;
+			STATE_WEIGHINGDISPLAY			    = nIndex++;
+			STATE_ERRORDETECTION			    = nIndex++;
+			STATE_KICKDOWN					    = nIndex++;
+			STATE_BRIGHTNESS_MANUALAUTO	  		= nIndex++;
+			STATE_DISPLAYTYPE				    = nIndex++;
+			STATE_UNIT_FUEL				        = nIndex++;
+			STATE_UNIT_TEMP				        = nIndex++;
+			STATE_UNIT_ODO					    = nIndex++;
+			STATE_UNIT_WEIGHT				    = nIndex++;
+			STATE_UNIT_PRESSURE			      	= nIndex++;
+			STATE_MACHINESTATUS_UPPER		  	= nIndex++;
+			STATE_MACHINESTATUS_LOWER		  	= nIndex++;
+			STATE_LANGUAGE					    = nIndex++;
+			STATE_SOUNDOUTPUT				    = nIndex++;
+			STATE_OPERATION_HISTORY		    	= nIndex++;
+			STATE_FUEL_INFO				        = nIndex++;
+			STATE_BOOM_DETENT_MODE			  	= nIndex++;
+			STATE_BUCKET_DETENT_MODE		  	= nIndex++;
 		}
 	}
 	@Override
@@ -873,6 +892,7 @@ public class UserSwitching extends ParentFragment{
 		BrightnessAutoEndTime = ParentActivity.BrightnessAutoEndTime;
 		// --, 150407 bwk
 		DisplayType = ParentActivity.DisplayType;
+		UnitFuel = ParentActivity.UnitFuel;
 		UnitTemp = ParentActivity.UnitTemp;
 		UnitOdo = ParentActivity.UnitOdo;
 		UnitWeight = ParentActivity.UnitWeight;
@@ -1005,6 +1025,7 @@ public class UserSwitching extends ParentFragment{
 		//BrightnessDisplay(Brightness,_userdata.Brightness);
 		BrightnessDisplay(BrightnessManualAuto,_userdata.BrightnessManualAuto);
 		// --, 150407 bwk
+		UnitFuelDisplay(UnitFuel,_userdata.UnitFuel);
 		UnitTempDisplay(UnitTemp,_userdata.UnitTemp);
 		UnitOdoDisplay(UnitOdo,_userdata.UnitOdo);
 		UnitWeightDisplay(UnitWeight,_userdata.UnitWeight);
@@ -1573,6 +1594,35 @@ public class UserSwitching extends ParentFragment{
 		// --, 150407 bwk
 		
 	}	
+	public void UnitFuelDisplay(int SettingData, int LoadingData){
+		switch (SettingData) {
+		case Home.UNIT_FUEL_L:
+			adapter.UpdateSecond(STATE_UNIT_FUEL, ParentActivity.getResources().getString(string.l_h));
+			break;
+		case Home.UNIT_FUEL_GAL:
+			adapter.UpdateSecond(STATE_UNIT_FUEL, ParentActivity.getResources().getString(string.gal_h));
+			break;
+		default:
+			break;
+		}
+		switch (LoadingData) {
+		case Home.UNIT_FUEL_L:
+			adapter.UpdateThird(STATE_UNIT_FUEL, ParentActivity.getResources().getString(string.l_h));
+			break;
+		case Home.UNIT_FUEL_GAL:
+			adapter.UpdateThird(STATE_UNIT_FUEL, ParentActivity.getResources().getString(string.gal_h));
+			break;
+		default:
+			break;
+		}
+		
+		if(SettingData != LoadingData){
+			adapter.UpdateIcon(STATE_UNIT_FUEL, ParentActivity.getResources().getDrawable(R.drawable.main_quick_user_x));
+		}else{
+			adapter.UpdateIcon(STATE_UNIT_FUEL, null);
+		}
+		adapter.notifyDataSetChanged();
+	}	
 	public void UnitTempDisplay(int SettingData, int LoadingData){
 		switch (SettingData) {
 		case Home.UNIT_TEMP_C:
@@ -1639,9 +1689,9 @@ public class UserSwitching extends ParentFragment{
 		case Home.UNIT_WEIGHT_LB:
 			adapter.UpdateSecond(STATE_UNIT_WEIGHT, ParentActivity.getResources().getString(string.lb));
 			break;
-		/*case Home.UNIT_WEIGHT_US_TON:
+		case Home.UNIT_WEIGHT_US_TON:
 			adapter.UpdateSecond(STATE_UNIT_WEIGHT, ParentActivity.getResources().getString(string.USTon));
-			break;*/
+			break;
 		default:
 			break;
 		}
@@ -1652,9 +1702,9 @@ public class UserSwitching extends ParentFragment{
 		case Home.UNIT_WEIGHT_LB:
 			adapter.UpdateThird(STATE_UNIT_WEIGHT, ParentActivity.getResources().getString(string.lb));
 			break;
-		/*case Home.UNIT_WEIGHT_US_TON:
+		case Home.UNIT_WEIGHT_US_TON:
 			adapter.UpdateThird(STATE_UNIT_WEIGHT, ParentActivity.getResources().getString(string.USTon));
-			break;*/
+			break;
 		default:
 			break;
 		}
@@ -2150,6 +2200,7 @@ public class UserSwitching extends ParentFragment{
 		_userdata.BrightnessAutoEndTime = BrightnessAutoEndTime;
 		// --, 150407 bwk
 		_userdata.DisplayType = DisplayType;
+		_userdata.UnitFuel = UnitFuel;
 		_userdata.UnitTemp = UnitTemp;
 		_userdata.UnitOdo = UnitOdo;
 		_userdata.UnitWeight = UnitWeight;
@@ -2310,6 +2361,8 @@ public class UserSwitching extends ParentFragment{
 		ParentActivity.BrightnessAutoEndTime = _userdata.BrightnessAutoEndTime;
 		// --, 150407 bwk
 		
+		ParentActivity.UnitType = Home.UNIT_TYPE_CUSTOM;
+		ParentActivity.UnitFuel = _userdata.UnitFuel;
 		ParentActivity.UnitOdo = _userdata.UnitOdo;
 		ParentActivity.UnitTemp = _userdata.UnitTemp;
 		ParentActivity.UnitWeight = _userdata.UnitWeight;
@@ -2329,7 +2382,6 @@ public class UserSwitching extends ParentFragment{
 		// --, 150213 bwk
 		
 		ParentActivity.DisplayType = _userdata.DisplayType;
-		ParentActivity.SavePref();
 		
 		ParentActivity.SoundState = _userdata.SoundOutput;
 		ParentActivity.SavePref();

@@ -26,6 +26,7 @@ public class UserData {
 	public int BrightnessAutoEndTime;
 	// --, 150407 bwk
 	public int DisplayType;
+	public int UnitFuel;
 	public int UnitTemp;
 	public int UnitOdo;
 	public int UnitWeight;
@@ -65,6 +66,7 @@ public class UserData {
 		BrightnessAutoEndTime = 18;
 		// --, 150407 bwk		
 		DisplayType = Home.DISPLAY_TYPE_B;
+		UnitFuel = Home.UNIT_FUEL_L;
 		UnitTemp = Home.UNIT_TEMP_C;
 		UnitOdo = Home.UNIT_ODO_KM;
 		UnitWeight = Home.UNIT_WEIGHT_TON;

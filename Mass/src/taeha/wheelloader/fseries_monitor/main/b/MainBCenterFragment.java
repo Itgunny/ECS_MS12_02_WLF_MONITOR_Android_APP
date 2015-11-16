@@ -1,6 +1,9 @@
 package taeha.wheelloader.fseries_monitor.main.b;
 
 
+import java.util.Timer;
+import java.util.TimerTask;
+
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -17,6 +20,7 @@ import taeha.wheelloader.fseries_monitor.main.CAN1CommManager;
 import taeha.wheelloader.fseries_monitor.main.Home;
 import taeha.wheelloader.fseries_monitor.main.ParentFragment;
 import taeha.wheelloader.fseries_monitor.main.R;
+import taeha.wheelloader.fseries_monitor.main.b.MainBUpperMenuBarFragment.BuzzerStopTimerClass;
 
 public class MainBCenterFragment extends ParentFragment{
 	//CONSTANT////////////////////////////////////////
@@ -48,6 +52,8 @@ public class MainBCenterFragment extends ParentFragment{
 	
 	int Maint;
 	int FaultCode;
+	
+	private Timer mBuzzerStopTimer = null;
 	//////////////////////////////////////////////////
 	
 	//ANIMATION///////////////////////////////////////
@@ -187,12 +193,47 @@ public class MainBCenterFragment extends ParentFragment{
 			Log.e(TAG,"IllegalStateException");
 		}
 	}
+	//--------------------------------------------------------------------------
+	public class BuzzerStopTimerClass extends TimerTask{
+
+		@Override
+		public void run() {
+			// TODO Auto-generated method stub
+			CAN1Comm.Set_RequestBuzzerStop_PGN65327(0);
+			CAN1Comm.TxCANToMCU(47);
+			
+		}
+		
+	}
+	public void StartBuzzerStopTimer(){
+		CancelBuzzerStopTimer();
+		mBuzzerStopTimer = new Timer();
+		mBuzzerStopTimer.schedule(new BuzzerStopTimerClass(),1000);	
+	}
 	
+	public void CancelBuzzerStopTimer(){
+		if(mBuzzerStopTimer != null){
+			mBuzzerStopTimer.cancel();
+			mBuzzerStopTimer.purge();
+			mBuzzerStopTimer = null;
+		}
+	}
+	public void ClickBuzzer(){
+		if(CAN1Comm.BuzzerStatus == CAN1CommManager.BUZZER_ON){
+			CAN1Comm.Set_RequestBuzzerStop_PGN65327(1);
+			CAN1Comm.TxCANToMCU(47);
+			CAN1Comm.TxCMDToMCU(CAN1CommManager.CMD_BUZ, CAN1CommManager.BUZZER_OFF);	// Buzzer Off
+			CAN1Comm.BuzzerStatus = CAN1CommManager.BUZZER_STOP;
+			ParentActivity.BuzzerStopCount = 0;
+			StartBuzzerStopTimer();
+		}
+	}
 	public void ClickBG(){
 		if(ParentActivity.AnimationRunningFlag == true)
 			return;
 		else
 			ParentActivity.StartAnimationRunningTimer();
+		ClickBuzzer();
 		ParentActivity._MainBBaseFragment.showQuickScreenAnimation();
 		Log.d(TAG,"ClickOption");
 	}

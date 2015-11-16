@@ -208,9 +208,9 @@ public class FuelHistoryHourlyRecordFragment  extends ParentFragment{
 	}
 	/////////////////////////////////////////////////////////////////////	
 	public void SetUnit(){
-		/*if(ParentActivity.UnitFuel == Home.UNIT_FUEL_GAL)
+		if(ParentActivity.UnitFuel == Home.UNIT_FUEL_GAL)
 			textViewUnit.setText(ParentActivity.getResources().getString(string.gal_h));
-		else*/
+		else
 			textViewUnit.setText(ParentActivity.getResources().getString(string.l_h));
 	}
 	/////////////////////////////////////////////////////////////////////	
