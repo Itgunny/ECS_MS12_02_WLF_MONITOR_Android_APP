@@ -72,9 +72,9 @@ public class Home extends Activity {
 	//Version/////////////////////////////////////////////////////////////////////////////
 	//
 	public static final int VERSION_HIGH 		= 2;
-	public static final int VERSION_LOW 		= 2;
+	public static final int VERSION_LOW 		= 1;
 	public static final int VERSION_SUB_HIGH 	= 0;
-	public static final int VERSION_SUB_LOW 	= 0;
+	public static final int VERSION_SUB_LOW 	= 3;
 	public static final int VERSION_TAEHA		= 0;
 	////1.0.2.3
 	// UI B 안 최초 적용 2014.12.10
@@ -714,12 +714,15 @@ public class Home extends Activity {
 	// 1. Gauge Animation 수정 : TimerTask 종료되지 않는 현상 수정
 	// 2. SoftEndStop Default 적용 시 TM 옵션 상관없이 모든 데이터 전송하는 버그 수정
 	// 3. UserSwitching에서 옵션유무 적용하여 CAN 데이터 전송(옵션에 의해 감춰지더라도 CAN 데이터전송되었음)
-	////v2.2.0.00
+	////v2.1.0.30
 	// 1. 모니터 단위설정기능, 무게설정 단위 USton, 단위 설정 연비추가
 	// 2. 부저 ON일 때 메인 가운데의 Fault code 발생 경고등 터치 시 부저 OFF기능 추가
 	// 3. UserSwitching Fuel 추가
+	//----출장 중 변경
+	// 4. US ton 단위 환산 수정(1.012311 -> 1.1.02311)
+	// 5. Userswitching에서 언어 설정 시 팝업에 적용되지 않는 현상 개선
+	// 6. Userswitching에 메인 좌 상단 Axle 설정 시 미표기되는 현상 개선
 	//////////////////////////////////////////////////////////////////////////////////////
-	
 	// TAG
 	private  final String TAG = "Home";
 	
@@ -4889,7 +4892,7 @@ public class Home extends Activity {
 			nWeight =  (long_Weight / 1000);
 			nWeight_Under = ( (long_Weight % 1000) / 100);
 		}else if(Unit == UNIT_WEIGHT_US_TON){
-			long_Weight *= 1012311;
+			long_Weight *= 1102311;
 			nWeight =  (long_Weight / 10000000);
 			nWeight_Under = ( (long_Weight % 10000000) / 100000);
 			if((nWeight_Under % 10) < 5)

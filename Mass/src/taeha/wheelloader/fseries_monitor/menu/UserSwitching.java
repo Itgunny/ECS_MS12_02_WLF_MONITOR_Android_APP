@@ -1806,6 +1806,12 @@ public class UserSwitching extends ParentFragment{
 		case CAN1CommManager.DATA_STATE_MACHINESTATUS_WEIGHING:
 			adapter.UpdateSecond(STATE_MACHINESTATUS_UPPER, ParentActivity.getResources().getString(string.Weighing_System));
 			break;
+		case CAN1CommManager.DATA_STATE_MACHINESTATUS_FRONTAXLE:
+			adapter.UpdateSecond(STATE_MACHINESTATUS_UPPER, ParentActivity.getResources().getString(string.Front_Axle_Temp));
+			break;
+		case CAN1CommManager.DATA_STATE_MACHINESTATUS_REARAXLE:
+			adapter.UpdateSecond(STATE_MACHINESTATUS_UPPER, ParentActivity.getResources().getString(string.Rear_Axle_Temp));
+			break;
 		default:
 			break;
 		}
@@ -1827,6 +1833,12 @@ public class UserSwitching extends ParentFragment{
 			break;
 		case CAN1CommManager.DATA_STATE_MACHINESTATUS_WEIGHING:
 			adapter.UpdateThird(STATE_MACHINESTATUS_UPPER, ParentActivity.getResources().getString(string.Weighing_System));
+			break;
+		case CAN1CommManager.DATA_STATE_MACHINESTATUS_FRONTAXLE:
+			adapter.UpdateThird(STATE_MACHINESTATUS_UPPER, ParentActivity.getResources().getString(string.Front_Axle_Temp));
+			break;
+		case CAN1CommManager.DATA_STATE_MACHINESTATUS_REARAXLE:
+			adapter.UpdateThird(STATE_MACHINESTATUS_UPPER, ParentActivity.getResources().getString(string.Rear_Axle_Temp));
 			break;
 		default:
 			break;
@@ -1858,6 +1870,12 @@ public class UserSwitching extends ParentFragment{
 		case CAN1CommManager.DATA_STATE_MACHINESTATUS_WEIGHING:
 			adapter.UpdateSecond(STATE_MACHINESTATUS_LOWER, ParentActivity.getResources().getString(string.Weighing_System));
 			break;
+		case CAN1CommManager.DATA_STATE_MACHINESTATUS_FRONTAXLE:
+			adapter.UpdateSecond(STATE_MACHINESTATUS_LOWER, ParentActivity.getResources().getString(string.Front_Axle_Temp));
+			break;
+		case CAN1CommManager.DATA_STATE_MACHINESTATUS_REARAXLE:
+			adapter.UpdateSecond(STATE_MACHINESTATUS_LOWER, ParentActivity.getResources().getString(string.Rear_Axle_Temp));
+			break;
 		default:
 			break;
 		}
@@ -1879,6 +1897,12 @@ public class UserSwitching extends ParentFragment{
 			break;
 		case CAN1CommManager.DATA_STATE_MACHINESTATUS_WEIGHING:
 			adapter.UpdateThird(STATE_MACHINESTATUS_LOWER, ParentActivity.getResources().getString(string.Weighing_System));
+			break;
+		case CAN1CommManager.DATA_STATE_MACHINESTATUS_FRONTAXLE:
+			adapter.UpdateThird(STATE_MACHINESTATUS_LOWER, ParentActivity.getResources().getString(string.Front_Axle_Temp));
+			break;
+		case CAN1CommManager.DATA_STATE_MACHINESTATUS_REARAXLE:
+			adapter.UpdateThird(STATE_MACHINESTATUS_LOWER, ParentActivity.getResources().getString(string.Rear_Axle_Temp));
 			break;
 		default:
 			break;
@@ -2379,6 +2403,8 @@ public class UserSwitching extends ParentFragment{
 		// ++, 150213 bwk
 		ParentActivity.LanguageIndex = _userdata.Language;
 		ParentActivity.setLanguage();
+		ParentActivity.ResetPopup(); 		// ++, --, 150305 bwk
+		
 		// --, 150213 bwk
 		
 		ParentActivity.DisplayType = _userdata.DisplayType;
