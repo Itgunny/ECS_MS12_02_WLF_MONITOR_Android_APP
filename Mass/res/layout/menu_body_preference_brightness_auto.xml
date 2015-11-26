@@ -145,7 +145,7 @@
 
 	        </LinearLayout>
 
-	        <taeha.wheelloader.fseries_monitor.main.TextFitTextView
+	        <TextView
 	            android:id="@+id/textView_menu_body_preference_brightness_auto_time_dash"
 	            android:layout_width="wrap_content"
 	            android:layout_height="wrap_content"

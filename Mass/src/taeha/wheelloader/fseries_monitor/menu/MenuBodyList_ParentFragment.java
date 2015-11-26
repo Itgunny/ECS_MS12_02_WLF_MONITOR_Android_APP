@@ -282,6 +282,15 @@ public abstract class MenuBodyList_ParentFragment extends ParentFragment{
 		textViewTitle2.setLayoutParams(plControl);
 		
 	}
+	public void setWidthTitle4(int size){
+		
+		ViewGroup.LayoutParams plControl = (ViewGroup.LayoutParams) textViewTitle4.getLayoutParams();
+		
+		plControl.width = size;
+		
+		textViewTitle4.setLayoutParams(plControl);
+		
+	}
 	public void setListTitle1(String str, int index){
 		if(ParentActivity.langDb.findStrGetString(index, ParentActivity.LanguageIndex) == null){
 		textViewTitle1.setText(str);

@@ -98,15 +98,6 @@
                 android:text="@string/Next"
                 android:textAppearance="?android:attr/textAppearanceLarge" />
 
-            <ImageView
-                android:id="@+id/imageView_menu_body_management_calibration_angle_next"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignRight="@+id/textView_menu_body_management_calibration_angle_next"
-                android:layout_centerVertical="true"
-                android:layout_marginRight="10dp"
-                android:src="@drawable/menu_management_boom_angle_next_arrow" />
-
         </RelativeLayout>
 
         <LinearLayout

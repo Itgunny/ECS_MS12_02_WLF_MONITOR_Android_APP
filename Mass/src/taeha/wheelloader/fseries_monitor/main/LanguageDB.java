@@ -70,7 +70,7 @@ public class LanguageDB {
 				{
 					return null;
 				}else{
-					Log.d(TAG, "name : " + name);
+					//Log.d(TAG, "name : " + name);
 					return name;
 				}
 			}catch(ArrayIndexOutOfBoundsException e){

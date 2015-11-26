@@ -13,7 +13,7 @@
         android:background="@drawable/menu_management_machine_monitoring_bg_dark"
         android:splitMotionEvents="false" >
 
-        <taeha.wheelloader.fseries_monitor.main.TextFitTextView
+        <TextView
             android:id="@+id/textView_menu_body_management_service_sensormonitoring_hidden_current_title"
             android:layout_width="350dp"
             android:layout_height="wrap_content"

@@ -89,6 +89,7 @@ public class MenuModeHYDFragment extends MenuBodyList_ParentFragment{
 			setClickableList5(true);
 			setListTitle3(ParentActivity.getResources().getString(string.Bucket_Priority), 211);
 			setListTitle4(ParentActivity.getResources().getString(string.Auxilliary_Attachment_Max_Flow_Level), 213);
+			setWidthTitle4(500);
 			setListTitle5(ParentActivity.getResources().getString(string.Soft_End_Stop), 214);
 		}
 		
