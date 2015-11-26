@@ -73,8 +73,8 @@ public class InputMachineSerialFragment extends PasswordFragment{
 		textViewNum9 = (TextView)mRoot.findViewById(R.id.textView_main_input_machineserial_num_9);
 		textViewNum0 = (TextView)mRoot.findViewById(R.id.textView_main_input_machineserial_num_0);
 		
-		textViewTitle = (TextView)mRoot.findViewById(R.id.textView_main_input_machineserial_text_title);
-		textViewPassword = (TextView)mRoot.findViewById(R.id.textView_main_input_machineserial_text_data);
+		textViewTitle = (TextFitTextView)mRoot.findViewById(R.id.textView_main_input_machineserial_text_title);
+		textViewPassword = (TextFitTextView)mRoot.findViewById(R.id.textView_main_input_machineserial_text_data);
 		
 		imgbtnBack = (ImageButton)mRoot.findViewById(R.id.imageButton_main_input_machineserial_num_back);
 		imgbtnEnter = (ImageButton)mRoot.findViewById(R.id.imageButton_main_input_machineserial_num_enter);

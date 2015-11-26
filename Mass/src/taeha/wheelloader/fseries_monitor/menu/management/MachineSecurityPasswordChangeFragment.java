@@ -33,7 +33,7 @@ public class MachineSecurityPasswordChangeFragment extends PasswordFragment{
 		
 		ParentActivity._MenuBaseFragment._MenuListTitleFragment.setBackButtonEnable(true);
 		ParentActivity.ScreenIndex = ParentActivity.SCREEN_STATE_MENU_MANAGEMENT_MACHINESECURITY_PWCHANGE;
-		ParentActivity._MenuBaseFragment._MenuListTitleFragment.SetTitleText(ParentActivity.getResources().getString(R.string.Change_Password));
+		ParentActivity._MenuBaseFragment._MenuListTitleFragment.SetTitleText(ParentActivity.getResources().getString(R.string.Change_Password), 325);
 		SetTitleIndex(1);
 		SetTextIndicatorTitle(1);
 		HandleCursurDisplay = new Handler() {

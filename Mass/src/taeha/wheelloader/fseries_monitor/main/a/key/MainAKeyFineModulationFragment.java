@@ -15,6 +15,8 @@ import android.widget.TextView;
 import taeha.wheelloader.fseries_monitor.main.CAN1CommManager;
 import taeha.wheelloader.fseries_monitor.main.ParentFragment;
 import taeha.wheelloader.fseries_monitor.main.R;
+import taeha.wheelloader.fseries_monitor.main.R.string;
+import taeha.wheelloader.fseries_monitor.main.TextFitTextView;
 
 public class MainAKeyFineModulationFragment extends ParentFragment{
 	//CONSTANT////////////////////////////////////////
@@ -23,6 +25,8 @@ public class MainAKeyFineModulationFragment extends ParentFragment{
 	//RESOURCE////////////////////////////////////////
 	RadioButton radioOff;
 	RadioButton radioOn;	
+	TextFitTextView textViewTitleNotAvailable;
+	
 	
 	RelativeLayout	layoutAvailable;
 	RelativeLayout	layoutNotAvailable;
@@ -74,8 +78,15 @@ public class MainAKeyFineModulationFragment extends ParentFragment{
 	@Override
 	protected void InitResource() {
 		// TODO Auto-generated method stub
+		textViewTitleNotAvailable = (TextFitTextView)mRoot.findViewById(R.id.textView_key_main_a_finemodulation_notavailable_title);
+		textViewTitleNotAvailable.setText(getString(ParentActivity.getResources().getString(string.This_machine_does_not_support_this_feature), 189));
+		
 		radioOff = (RadioButton)mRoot.findViewById(R.id.radioButton_key_main_a_finemodulation_off);
+		radioOff.setText(getString(ParentActivity.getResources().getString(string.Off), 20));
+		ParentActivity.setMarqueeRadio(radioOff);
 		radioOn = (RadioButton)mRoot.findViewById(R.id.radioButton_key_main_a_finemodulation_on);
+		radioOn.setText(getString(ParentActivity.getResources().getString(string.On), 19));
+		ParentActivity.setMarqueeRadio(radioOn);
 
 		layoutAvailable = (RelativeLayout)mRoot.findViewById(R.id.RelativeLayout_key_main_a_finemodulation_available);
 		layoutNotAvailable = (RelativeLayout)mRoot.findViewById(R.id.RelativeLayout_key_main_a_finemodulation_notavailable);

@@ -20,6 +20,7 @@ import taeha.wheelloader.fseries_monitor.main.ParentPopup;
 import taeha.wheelloader.fseries_monitor.main.R;
 import taeha.wheelloader.fseries_monitor.main.Home.SeatBeltTimerClass;
 import taeha.wheelloader.fseries_monitor.main.R.string;
+import taeha.wheelloader.fseries_monitor.main.TextFitTextView;
 import taeha.wheelloader.fseries_monitor.popup.SpeedometerInitPopup.PopupOffTimerClass;
 
 public class AngleCalibrationResultPopup extends ParentPopup{
@@ -29,7 +30,7 @@ public class AngleCalibrationResultPopup extends ParentPopup{
 	//RESOURCE////////////////////////////////////////
 
 	ImageButton imgbtnOK;
-
+	TextView	textViewOK;
 	
 	TextView textViewTitle;
 	
@@ -94,10 +95,10 @@ public class AngleCalibrationResultPopup extends ParentPopup{
 	protected void InitResource() {
 		// TODO Auto-generated method stub
 		imgbtnOK = (ImageButton)mRoot.findViewById(R.id.imageButton_popup_anglecalibration_result_ok);
-
+		textViewOK = (TextView)mRoot.findViewById(R.id.textView_popup_anglecalibration_result_ok);
+		textViewOK.setText(getString(ParentActivity.getResources().getString(string.OK), 15));
 	
 		textViewTitle = (TextView)mRoot.findViewById(R.id.textView_popup_anglecalibration_result_title);
-
 		textViewTitle.setText(strTitle);
 	
 	}

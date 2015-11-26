@@ -8,6 +8,7 @@ import taeha.wheelloader.fseries_monitor.main.Home;
 import taeha.wheelloader.fseries_monitor.main.ParentFragment;
 import taeha.wheelloader.fseries_monitor.main.R;
 import taeha.wheelloader.fseries_monitor.main.R.string;
+import taeha.wheelloader.fseries_monitor.main.TextFitTextView;
 import taeha.wheelloader.fseries_monitor.menu.monitoring.FuelHistoryDailyRecordFragment.SendCommandTimerClass;
 import android.R.color;
 import android.os.Bundle;
@@ -32,8 +33,12 @@ public class FuelHistoryModeRecordFragment  extends ParentFragment{
 	TextView[]	textViewMode;
 	TextView	textViewUnit;
 	
-	ImageButton imgbtnInital;
+	ImageButton imgbtnInitial;
+	TextFitTextView	textViewInitial;
 	ImageButton	imgbtnOK;
+	TextFitTextView	textViewOK;
+	
+	TextFitTextView 	textViewGraphUnit;
 	//////////////////////////////////////////////////
 	
 	//VALUABLE////////////////////////////////////////
@@ -73,8 +78,8 @@ public class FuelHistoryModeRecordFragment  extends ParentFragment{
 		
 		StartSendCommandTimer();
 		
-		ParentActivity.ScreenIndex = Home.SCREEN_STATE_MENU_MONITORING_FUELHISTORY_MODERECORD;
-		ParentActivity._MenuBaseFragment._MenuInterTitleFragment.SetTitleText(ParentActivity.getResources().getString(R.string.Mode_Record));
+		ParentActivity.ScreenIndex = ParentActivity.SCREEN_STATE_MENU_MONITORING_FUELHISTORY_MODERECORD;
+		ParentActivity._MenuBaseFragment._MenuInterTitleFragment.SetTitleText(ParentActivity.getResources().getString(R.string.Mode_Record), 317);
 		
 		CursurIndex = 1;
 		CursurDisplay(CursurIndex);
@@ -108,7 +113,15 @@ public class FuelHistoryModeRecordFragment  extends ParentFragment{
 		textViewMode[2] = (TextView)mRoot.findViewById(R.id.textView_menu_body_monitoring_fuelhistory_moderecord_graph_text_3);
 		
 		imgbtnOK = (ImageButton)mRoot.findViewById(R.id.ImageButton_menu_body_monitoring_fuelhistory_moderecord_low_ok);
-		imgbtnInital = (ImageButton)mRoot.findViewById(R.id.ImageButton_menu_body_monitoring_fuelhistory_moderecord_low_initialization);
+		textViewOK = (TextFitTextView)mRoot.findViewById(R.id.textView_menu_body_monitoring_fuelhistory_moderecord_low_ok);
+		textViewOK.setText(getString(ParentActivity.getResources().getString(R.string.OK), 15));
+		
+		imgbtnInitial = (ImageButton)mRoot.findViewById(R.id.ImageButton_menu_body_monitoring_fuelhistory_moderecord_low_initialization);
+		textViewInitial = (TextFitTextView)mRoot.findViewById(R.id.textView_menu_body_monitoring_fuelhistory_moderecord_low_initialization);
+		textViewInitial.setText(getString(ParentActivity.getResources().getString(R.string.Initialization), 30));
+		
+		textViewGraphUnit = (TextFitTextView)mRoot.findViewById(R.id.textView_menu_body_monitoring_fuelhistory_moderecord_graph_unit);
+		textViewGraphUnit.setText(getString(ParentActivity.getResources().getString(R.string.l_h), 33));
 		
 		textViewUnit = (TextView)mRoot.findViewById(R.id.textView_menu_body_monitoring_fuelhistory_moderecord_graph_unit);
 	}
@@ -125,7 +138,7 @@ public class FuelHistoryModeRecordFragment  extends ParentFragment{
 	@Override
 	protected void InitButtonListener() {
 		// TODO Auto-generated method stub
-		imgbtnInital.setOnClickListener(new View.OnClickListener() {
+		imgbtnInitial.setOnClickListener(new View.OnClickListener() {
 			
 			@Override
 			public void onClick(View v) {
@@ -283,7 +296,7 @@ public class FuelHistoryModeRecordFragment  extends ParentFragment{
 	}	
 	/////////////////////////////////////////////////////////////////////	
 	public void ClickInitial(){
-		ParentActivity.OldScreenIndex = Home.SCREEN_STATE_MENU_MONITORING_FUELHISTORY_MODERECORD;
+		ParentActivity.OldScreenIndex = ParentActivity.SCREEN_STATE_MENU_MONITORING_FUELHISTORY_MODERECORD;
 		ParentActivity._FuelInitalPopup.setMode(CAN1CommManager.DATA_STATE_MODE_FUEL_RATE_INFO_CLEAR);
 		ParentActivity.showFuelInitalPopup();
 	}
@@ -339,12 +352,11 @@ public class FuelHistoryModeRecordFragment  extends ParentFragment{
 		}
 	}
 	public void CursurDisplay(int Index){
-		bCursurIndex = true;
-		imgbtnInital.setPressed(false);
+		imgbtnInitial.setPressed(false);
 		imgbtnOK.setPressed(false);
 		switch (Index) {
 		case 2:
-			imgbtnInital.setPressed(true);
+			imgbtnInitial.setPressed(true);
 			break;
 		case 3:		
 			imgbtnOK.setPressed(true);
@@ -354,5 +366,4 @@ public class FuelHistoryModeRecordFragment  extends ParentFragment{
 		}
 	}
 	/////////////////////////////////////////////////////////////////////
-
 }

@@ -61,7 +61,7 @@ public class EngineDelayShutdownFragment extends ParentFragment{
 		InitButtonListener();
 		
 		ParentActivity.ScreenIndex = ParentActivity.SCREEN_STATE_MENU_MODE_ETC_DELAYSHUTDOWN_TOP;
-		ParentActivity._MenuBaseFragment._MenuInterTitleFragment.SetTitleText(ParentActivity.getResources().getString(R.string.Engine_Delay_Shutdown));
+		ParentActivity._MenuBaseFragment._MenuInterTitleFragment.SetTitleText(ParentActivity.getResources().getString(R.string.Engine_Delay_Shutdown),453);
 		return mRoot;
 	}
 	

@@ -30,7 +30,7 @@ public class VersionInfoBKCUFragment extends VersionInfoDetailFragment{
 		
 		ParentActivity.ScreenIndex = ParentActivity.SCREEN_STATE_MENU_MONITORING_VERSIONINFO_BKCU;
 		ParentActivity._MenuBaseFragment._MenuInterTitleFragment.SetTitleText(ParentActivity.getResources().getString(R.string.Machine_Information)
-				+ " - " + ParentActivity.getResources().getString(R.string.BKCU));
+				+ " - " + ParentActivity.getResources().getString(R.string.BKCU), 318, 273);
 		return mRoot;
 	}
 	@Override
@@ -44,9 +44,9 @@ public class VersionInfoBKCUFragment extends VersionInfoDetailFragment{
 //		adapter.addItem(new IconTextItemVersion(ParentActivity.getResources().getDrawable(R.drawable.menu_management_machine_monitoring_bg_dark),null,
 //				ParentActivity.getResources().getString(string.Program_Version),"" , ""));
 		adapter.addItem(new IconTextItemVersion(ParentActivity.getResources().getDrawable(R.drawable.menu_management_machine_monitoring_bg_dark),null,
-				ParentActivity.getResources().getString(string.Program_Version),"" , ""));
+				getString(ParentActivity.getResources().getString(string.Program_Version), 277),"" , ""));
 		adapter.addItem(new IconTextItemVersion(ParentActivity.getResources().getDrawable(R.drawable.menu_management_machine_monitoring_bg_light),null,
-				ParentActivity.getResources().getString(string.Serial_Number),"" , ""));
+				getString(ParentActivity.getResources().getString(string.Serial_Number), 278),"" , ""));
 
 		listView.setAdapter(adapter);
 
@@ -54,7 +54,7 @@ public class VersionInfoBKCUFragment extends VersionInfoDetailFragment{
 	@Override
 	public void ShowHiddenPage(){
 		adapter.addItem(new IconTextItemVersion(ParentActivity.getResources().getDrawable(R.drawable.menu_management_machine_monitoring_bg_dark),null,
-				ParentActivity.getResources().getString(string.Manufacturer),"" , ""));
+				getString(ParentActivity.getResources().getString(string.Manufacturer), 279),"" , ""));
 	}
 	@Override
 	protected void GetDataFromNative() {
@@ -82,7 +82,15 @@ public class VersionInfoBKCUFragment extends VersionInfoDetailFragment{
 		adapter.notifyDataSetChanged();
 	}
 	////////////////////////////////////////////////
-
+	public String getString(String str, int index){
+		if(ParentActivity.langDb.findStrGetString(index, ParentActivity.LanguageIndex) == null){
+			Log.d(TAG, "Android");
+			return str;
+		}else {
+			Log.d(TAG, "Excel");
+			return ParentActivity.langDb.findStrGetString(index, ParentActivity.LanguageIndex);	
+		}
+	}
 	////////////////////////////////////////////////
 	
 	////////////////////////////////////////////////

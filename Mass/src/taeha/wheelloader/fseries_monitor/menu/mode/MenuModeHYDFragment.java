@@ -77,8 +77,8 @@ public class MenuModeHYDFragment extends MenuBodyList_ParentFragment{
 		setClickableList1(true);
 		setClickableList2(true);
 		
-		setListTitle1(ParentActivity.getResources().getString(string.Work_Load));
-		setListTitle2(ParentActivity.getResources().getString(string.Boom_Bucket_Detent_Mode));
+		setListTitle1(ParentActivity.getResources().getString(string.Work_Load),156);
+		setListTitle2(ParentActivity.getResources().getString(string.Boom_Bucket_Detent_Mode),212);
 		if(CAN1Comm.Get_ComponentCode_1699_PGN65330_EHCU() != CAN1CommManager.STATE_COMPONENTCODE_EHCU){
 			setClickableList3(false);
 			setClickableList4(false);
@@ -87,9 +87,9 @@ public class MenuModeHYDFragment extends MenuBodyList_ParentFragment{
 			setClickableList3(true);
 			setClickableList4(true);
 			setClickableList5(true);
-			setListTitle3(ParentActivity.getResources().getString(string.Bucket_Priority));
-			setListTitle4(ParentActivity.getResources().getString(string.Auxilliary_Attachment_Max_Flow_Level));
-			setListTitle5(ParentActivity.getResources().getString(string.Soft_End_Stop));
+			setListTitle3(ParentActivity.getResources().getString(string.Bucket_Priority), 211);
+			setListTitle4(ParentActivity.getResources().getString(string.Auxilliary_Attachment_Max_Flow_Level), 213);
+			setListTitle5(ParentActivity.getResources().getString(string.Soft_End_Stop), 214);
 		}
 		
 	}
@@ -385,10 +385,10 @@ public class MenuModeHYDFragment extends MenuBodyList_ParentFragment{
 	public void BucketPriorityDisplay(int data){
 		switch (data) {
 		case CAN1CommManager.DATA_STATE_BUCKETPRIORITY_OFF:
-			setListData3(ParentActivity.getResources().getString(string.Off));
+			setListData3(ParentActivity.getResources().getString(string.Off), 20);
 			break;
 		case CAN1CommManager.DATA_STATE_BUCKETPRIORITY_ON:
-			setListData3(ParentActivity.getResources().getString(string.On));
+			setListData3(ParentActivity.getResources().getString(string.On), 19);
 			break;
 		default:
 			break;
@@ -402,5 +402,4 @@ public class MenuModeHYDFragment extends MenuBodyList_ParentFragment{
 	/////////////////////////////////////////////////////////////////////
 	
 	/////////////////////////////////////////////////////////////////////
-	
 }

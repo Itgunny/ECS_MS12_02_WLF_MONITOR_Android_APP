@@ -1060,7 +1060,7 @@ public class MainABaseFragment extends ParentFragment{
 		_MainAKeyMainLightFragment = new MainAKeyMainLightFragment();
 		
 		_MainAKeyTitleFragment.setTitleIcon(ParentActivity.getResources().getDrawable(R.drawable.main_key_title_mainlight));
-		_MainAKeyTitleFragment.setTitleText(ParentActivity.getResources().getString(string.Main_Light));
+		_MainAKeyTitleFragment.setTitleText(getString(ParentActivity.getResources().getString(string.Main_Light), 151));
 		KeyTitleChangeAnimation.StartChangeAnimation(_MainAKeyTitleFragment);
 		KeyBodyChangeAnimation.StartChangeAnimation(_MainAKeyMainLightFragment);
 	}
@@ -1071,7 +1071,7 @@ public class MainABaseFragment extends ParentFragment{
 		_MainAKeyTitleFragment = new MainAKeyTitleFragment();
 		_MainAKeyWorkLightFragment = new MainAKeyWorkLightFragment();
 		_MainAKeyTitleFragment.setTitleIcon(ParentActivity.getResources().getDrawable(R.drawable.main_key_title_worklight));
-		_MainAKeyTitleFragment.setTitleText(ParentActivity.getResources().getString(string.Work_Light));
+		_MainAKeyTitleFragment.setTitleText(getString(ParentActivity.getResources().getString(string.Work_Light), 152));
 		KeyTitleChangeAnimation.StartChangeAnimation(_MainAKeyTitleFragment);
 		KeyBodyChangeAnimation.StartChangeAnimation(_MainAKeyWorkLightFragment);
 	}
@@ -1082,7 +1082,7 @@ public class MainABaseFragment extends ParentFragment{
 		_MainAKeyTitleFragment = new MainAKeyTitleFragment();
 		_MainAKeyAutoGreaseFragment = new MainAKeyAutoGreaseFragment();
 		_MainAKeyTitleFragment.setTitleIcon(ParentActivity.getResources().getDrawable(R.drawable.main_key_title_auto_grease));
-		_MainAKeyTitleFragment.setTitleText(ParentActivity.getResources().getString(string.Auto_Grease));
+		_MainAKeyTitleFragment.setTitleText(getString(ParentActivity.getResources().getString(string.Auto_Grease), 153));
 		KeyTitleChangeAnimation.StartChangeAnimation(_MainAKeyTitleFragment);
 		KeyBodyChangeAnimation.StartChangeAnimation(_MainAKeyAutoGreaseFragment);
 	}
@@ -1093,7 +1093,7 @@ public class MainABaseFragment extends ParentFragment{
 		_MainAKeyTitleFragment = new MainAKeyTitleFragment();
 		_MainAKeyQuickCouplerFragment = new MainAKeyQuickCouplerFragment();
 		_MainAKeyTitleFragment.setTitleIcon(ParentActivity.getResources().getDrawable(R.drawable.main_key_title_quick));
-		_MainAKeyTitleFragment.setTitleText(ParentActivity.getResources().getString(string.Quick_Coupler));
+		_MainAKeyTitleFragment.setTitleText(getString(ParentActivity.getResources().getString(string.Quick_Coupler), 154));
 		KeyTitleChangeAnimation.StartChangeAnimation(_MainAKeyTitleFragment);
 		KeyBodyChangeAnimation.StartChangeAnimation(_MainAKeyQuickCouplerFragment);
 	}
@@ -1104,7 +1104,7 @@ public class MainABaseFragment extends ParentFragment{
 		_MainAKeyTitleFragment = new MainAKeyTitleFragment();
 		_MainAKeyRideControlFragment = new MainAKeyRideControlFragment();
 		_MainAKeyTitleFragment.setTitleIcon(ParentActivity.getResources().getDrawable(R.drawable.main_key_title_ridecontrol));
-		_MainAKeyTitleFragment.setTitleText(ParentActivity.getResources().getString(string.Ride_Control));
+		_MainAKeyTitleFragment.setTitleText(getString(ParentActivity.getResources().getString(string.Ride_Control), 155));
 		KeyTitleChangeAnimation.StartChangeAnimation(_MainAKeyTitleFragment);
 		KeyBodyChangeAnimation.StartChangeAnimation(_MainAKeyRideControlFragment);
 	}
@@ -1115,7 +1115,7 @@ public class MainABaseFragment extends ParentFragment{
 		_MainAKeyTitleFragment = new MainAKeyTitleFragment();
 		_MainAKeyWorkLoadFragment = new MainAKeyWorkLoadFragment();
 		_MainAKeyTitleFragment.setTitleIcon(ParentActivity.getResources().getDrawable(R.drawable.main_key_title_workmode));
-		_MainAKeyTitleFragment.setTitleText(ParentActivity.getResources().getString(string.Work_Load));
+		_MainAKeyTitleFragment.setTitleText(getString(ParentActivity.getResources().getString(string.Work_Load), 156));
 		KeyTitleChangeAnimation.StartChangeAnimation(_MainAKeyTitleFragment);
 		KeyBodyChangeAnimation.StartChangeAnimation(_MainAKeyWorkLoadFragment);
 	}
@@ -1126,7 +1126,7 @@ public class MainABaseFragment extends ParentFragment{
 		_MainAKeyTitleFragment = new MainAKeyTitleFragment();
 		_MainAKeyBeaconLampFragment = new MainAKeyBeaconLampFragment();
 		_MainAKeyTitleFragment.setTitleIcon(ParentActivity.getResources().getDrawable(R.drawable.main_key_title_beacon));
-		_MainAKeyTitleFragment.setTitleText(ParentActivity.getResources().getString(string.Beacon_Lamp));
+		_MainAKeyTitleFragment.setTitleText(getString(ParentActivity.getResources().getString(string.Beacon_Lamp), 157));
 		KeyTitleChangeAnimation.StartChangeAnimation(_MainAKeyTitleFragment);
 		KeyBodyChangeAnimation.StartChangeAnimation(_MainAKeyBeaconLampFragment);
 	}
@@ -1138,7 +1138,7 @@ public class MainABaseFragment extends ParentFragment{
 		_MainAKeyRearWiperFragment = new MainAKeyRearWiperFragment();
 		_MainAKeyRearWiperFragment.LongKey = 0;
 		_MainAKeyTitleFragment.setTitleIcon(ParentActivity.getResources().getDrawable(R.drawable.main_key_title_rearwiper));
-		_MainAKeyTitleFragment.setTitleText(ParentActivity.getResources().getString(string.Rear_Wiper));
+		_MainAKeyTitleFragment.setTitleText(getString(ParentActivity.getResources().getString(string.Rear_Wiper), 158));
 		KeyTitleChangeAnimation.StartChangeAnimation(_MainAKeyTitleFragment);
 		KeyBodyChangeAnimation.StartChangeAnimation(_MainAKeyRearWiperFragment);
 	}
@@ -1150,7 +1150,7 @@ public class MainABaseFragment extends ParentFragment{
 		_MainAKeyRearWiperFragment = new MainAKeyRearWiperFragment();
 		_MainAKeyRearWiperFragment.LongKey = 1;
 		_MainAKeyTitleFragment.setTitleIcon(ParentActivity.getResources().getDrawable(R.drawable.main_key_title_rearwiper));
-		_MainAKeyTitleFragment.setTitleText(ParentActivity.getResources().getString(string.Rear_Wiper));
+		_MainAKeyTitleFragment.setTitleText(getString(ParentActivity.getResources().getString(string.Rear_Wiper), 158));
 		KeyTitleChangeAnimation.StartChangeAnimation(_MainAKeyTitleFragment);
 		KeyBodyChangeAnimation.StartChangeAnimation(_MainAKeyRearWiperFragment);
 	}
@@ -1161,7 +1161,7 @@ public class MainABaseFragment extends ParentFragment{
 		_MainAKeyTitleFragment = new MainAKeyTitleFragment();
 		_MainAKeyMirrorHeatFragment = new MainAKeyMirrorHeatFragment();
 		_MainAKeyTitleFragment.setTitleIcon(ParentActivity.getResources().getDrawable(R.drawable.main_key_title_mirror));
-		_MainAKeyTitleFragment.setTitleText(ParentActivity.getResources().getString(string.Mirror_Heat));
+		_MainAKeyTitleFragment.setTitleText(getString(ParentActivity.getResources().getString(string.Mirror_Heat), 159));
 		KeyTitleChangeAnimation.StartChangeAnimation(_MainAKeyTitleFragment);
 		KeyBodyChangeAnimation.StartChangeAnimation(_MainAKeyMirrorHeatFragment);
 	}
@@ -1172,7 +1172,7 @@ public class MainABaseFragment extends ParentFragment{
 		_MainAKeyTitleFragment = new MainAKeyTitleFragment();
 		_MainAKeyDetentFragment = new MainAKeyDetentFragment();
 		_MainAKeyTitleFragment.setTitleIcon(ParentActivity.getResources().getDrawable(R.drawable.main_key_title_autoposition));
-		_MainAKeyTitleFragment.setTitleText(ParentActivity.getResources().getString(string.Detent_Setting));
+		_MainAKeyTitleFragment.setTitleText(getString(ParentActivity.getResources().getString(string.Detent_Setting), 160));
 		KeyTitleChangeAnimation.StartChangeAnimation(_MainAKeyTitleFragment);
 		KeyBodyChangeAnimation.StartChangeAnimation(_MainAKeyDetentFragment);
 	}
@@ -1183,7 +1183,7 @@ public class MainABaseFragment extends ParentFragment{
 		_MainAKeyTitleFragment = new MainAKeyTitleFragment();
 		_MainAKeyFineModulationFragment = new MainAKeyFineModulationFragment();
 		_MainAKeyTitleFragment.setTitleIcon(ParentActivity.getResources().getDrawable(R.drawable.main_key_title_fine));
-		_MainAKeyTitleFragment.setTitleText(ParentActivity.getResources().getString(string.Fine_Modulation));
+		_MainAKeyTitleFragment.setTitleText(getString(ParentActivity.getResources().getString(string.Fine_Modulation), 161));
 		KeyTitleChangeAnimation.StartChangeAnimation(_MainAKeyTitleFragment);
 		KeyBodyChangeAnimation.StartChangeAnimation(_MainAKeyFineModulationFragment);
 	}
@@ -1193,7 +1193,7 @@ public class MainABaseFragment extends ParentFragment{
 		ParentActivity.ScreenIndex = ParentActivity.SCREEN_STATE_MAIN_A_KEY_WORKLOAD_ACCUMULATION;
 		_MainAKeyWorkLoadAccumulationFragment = new MainAKeyWorkLoadAccumulationFragment();
 		_MainAKeyTitleFragment.setTitleIcon(ParentActivity.getResources().getDrawable(R.drawable.main_key_title_workmode));
-		_MainAKeyTitleFragment.setTitleText(ParentActivity.getResources().getString(string.Work_Load));
+		_MainAKeyTitleFragment.setTitleText(getString(ParentActivity.getResources().getString(string.Work_Load), 156));
 	//	KeyTitleChangeAnimation.StartChangeAnimation(_MainAKeyTitleFragment);
 		KeyBodyChangeAnimation.StartChangeAnimation(_MainAKeyWorkLoadAccumulationFragment);
 	}
@@ -1203,7 +1203,7 @@ public class MainABaseFragment extends ParentFragment{
 		ParentActivity.ScreenIndex = ParentActivity.SCREEN_STATE_MAIN_A_KEY_WORKLOAD_DISPLAY;
 		_MainAKeyWorkLoadDisplayFragment = new MainAKeyWorkLoadDisplayFragment();
 		_MainAKeyTitleFragment.setTitleIcon(ParentActivity.getResources().getDrawable(R.drawable.main_key_title_workmode));
-		_MainAKeyTitleFragment.setTitleText(ParentActivity.getResources().getString(string.Work_Load));
+		_MainAKeyTitleFragment.setTitleText(getString(ParentActivity.getResources().getString(string.Work_Load), 156));
 	//	KeyTitleChangeAnimation.StartChangeAnimation(_MainAKeyTitleFragment);
 		KeyBodyChangeAnimation.StartChangeAnimation(_MainAKeyWorkLoadDisplayFragment);
 	}
@@ -1213,7 +1213,7 @@ public class MainABaseFragment extends ParentFragment{
 		ParentActivity.ScreenIndex = ParentActivity.SCREEN_STATE_MAIN_A_KEY_WORKLOAD_ERRORDETECT;
 		_MainAKeyWorkLoadErrorDetectionFragment = new MainAKeyWorkLoadErrorDetectionFragment();
 		_MainAKeyTitleFragment.setTitleIcon(ParentActivity.getResources().getDrawable(R.drawable.main_key_title_workmode));
-		_MainAKeyTitleFragment.setTitleText(ParentActivity.getResources().getString(string.Work_Load));
+		_MainAKeyTitleFragment.setTitleText(getString(ParentActivity.getResources().getString(string.Work_Load), 156));
 	//	KeyTitleChangeAnimation.StartChangeAnimation(_MainAKeyTitleFragment);
 		KeyBodyChangeAnimation.StartChangeAnimation(_MainAKeyWorkLoadErrorDetectionFragment);
 	}
@@ -1223,7 +1223,7 @@ public class MainABaseFragment extends ParentFragment{
 		ParentActivity.ScreenIndex = ParentActivity.SCREEN_STATE_MAIN_A_KEY_RIDECONTROL_SPEED;
 		_MainAKeyRideControlSpeedFragment = new MainAKeyRideControlSpeedFragment();
 		_MainAKeyTitleFragment.setTitleIcon(ParentActivity.getResources().getDrawable(R.drawable.main_key_title_ridecontrol));
-		_MainAKeyTitleFragment.setTitleText(ParentActivity.getResources().getString(string.Ride_Control));
+		_MainAKeyTitleFragment.setTitleText(getString(ParentActivity.getResources().getString(string.Ride_Control), 155));
 	//	KeyTitleChangeAnimation.StartChangeAnimation(_MainAKeyTitleFragment);
 		KeyBodyChangeAnimation.StartChangeAnimation(_MainAKeyRideControlSpeedFragment);
 	}
@@ -1271,7 +1271,7 @@ public class MainABaseFragment extends ParentFragment{
 		_MainAKeyTitleFragment = new MainAKeyTitleFragment();
 		_MainAKeyWorkLoadFragment = new MainAKeyWorkLoadFragment();
 		_MainAKeyTitleFragment.setTitleIcon(ParentActivity.getResources().getDrawable(R.drawable.main_key_title_workmode));
-		_MainAKeyTitleFragment.setTitleText(ParentActivity.getResources().getString(string.Work_Load));
+		_MainAKeyTitleFragment.setTitleText(getString(ParentActivity.getResources().getString(string.Work_Load), 156));
 		KeyTitleChangeAnimation.StartChangeAnimation(_MainAKeyTitleFragment);
 		KeyBodyChangeAnimation.StartChangeAnimation(_MainAKeyWorkLoadFragment);
 	}
@@ -1423,7 +1423,11 @@ public class MainABaseFragment extends ParentFragment{
 		
 		ParentActivity._MainChangeAnimation.StartChangeAnimation(ParentActivity._MenuBaseFragment);
 		ParentActivity.OldScreenIndex = Home.SCREEN_STATE_MAIN_A_TOP;
+		if(ParentActivity.langDb.getOpenState() == true){
+			ParentActivity._MenuBaseFragment.setFirstScreenIndex(Home.SCREEN_STATE_MENU_PREFERENCE_DISPLAYTYPELANG_EXCEL_LANG_CHANGE);
+		}else {
 		ParentActivity._MenuBaseFragment.setFirstScreenIndex(Home.SCREEN_STATE_MENU_PREFERENCE_DISPLAYTYPELANG_LANG_CHANGE);
+	}
 	}
 	
 	public void ClickKeyButtonLeft(){
@@ -1447,7 +1451,6 @@ public class MainABaseFragment extends ParentFragment{
 			_MainARightUpEngineModeFragment.ClickLeft();
 			break;
 		case Home.SCREEN_STATE_MAIN_A_RIGHTDOWN_CCOMODE:
-			//if(ParentActivity._CheckModel.GetMCUVersion(CAN1Comm.Get_ComponentBasicInformation_1698_PGN65330()) == CheckModel.MODEL_980)
 			if(ParentActivity._CheckModel.GetMCUModelNum(CAN1Comm.Get_ComponentBasicInformation_1698_PGN65330()) == 980)
 				_MainARightDownTMICCOModeFragment.ClickLeft();
 			else
@@ -1526,12 +1529,7 @@ public class MainABaseFragment extends ParentFragment{
 				CursurIndex--;
 			else 
 			{
-				/*
-				if(ParentActivity._CheckModel.GetMCUVersion(CAN1Comm.Get_ComponentBasicInformation_1698_PGN65330()) == CheckModel.MODEL_940
-						|| ParentActivity._CheckModel.GetMCUVersion(CAN1Comm.Get_ComponentBasicInformation_1698_PGN65330()) == CheckModel.MODEL_935){
-					CursurIndex = 8;
-				}else 
-				*/if(ParentActivity._CheckModel.GetTCUModel(CAN1Comm.Get_ComponentBasicInformation_1698_PGN65330_TCU()) == CheckModel.TCU_4SPEED){
+				if(ParentActivity._CheckModel.GetTCUModel(CAN1Comm.Get_ComponentBasicInformation_1698_PGN65330_TCU()) == CheckModel.TCU_4SPEED){
 					CursurIndex = 8;
 				}else
 					CursurIndex = 9;
@@ -1569,7 +1567,6 @@ public class MainABaseFragment extends ParentFragment{
 			_MainARightUpEngineModeFragment.ClickRight();
 			break;
 		case Home.SCREEN_STATE_MAIN_A_RIGHTDOWN_CCOMODE:
-			//if(ParentActivity._CheckModel.GetMCUVersion(CAN1Comm.Get_ComponentBasicInformation_1698_PGN65330()) == CheckModel.MODEL_980)
 			if(ParentActivity._CheckModel.GetMCUModelNum(CAN1Comm.Get_ComponentBasicInformation_1698_PGN65330()) == 980)
 				_MainARightDownTMICCOModeFragment.ClickRight();
 			else
@@ -1646,10 +1643,7 @@ public class MainABaseFragment extends ParentFragment{
 		case Home.SCREEN_STATE_MAIN_A_TOP:
 			if(CursurIndex == 8)
 			{
-				/*if(ParentActivity._CheckModel.GetMCUVersion(CAN1Comm.Get_ComponentBasicInformation_1698_PGN65330()) == CheckModel.MODEL_940
-						|| ParentActivity._CheckModel.GetMCUVersion(CAN1Comm.Get_ComponentBasicInformation_1698_PGN65330()) == CheckModel.MODEL_935){
-					CursurIndex = 0;
-				}else*/ if(ParentActivity._CheckModel.GetTCUModel(CAN1Comm.Get_ComponentBasicInformation_1698_PGN65330_TCU()) == CheckModel.TCU_4SPEED){
+				if(ParentActivity._CheckModel.GetTCUModel(CAN1Comm.Get_ComponentBasicInformation_1698_PGN65330_TCU()) == CheckModel.TCU_4SPEED){
 					CursurIndex = 0;
 				}else
 					CursurIndex++;
@@ -1773,7 +1767,6 @@ public class MainABaseFragment extends ParentFragment{
 				_MainARightUpEngineModeFragment.ClickEnter();
 				break;
 			case Home.SCREEN_STATE_MAIN_A_RIGHTDOWN_CCOMODE:
-				//if(ParentActivity._CheckModel.GetMCUVersion(CAN1Comm.Get_ComponentBasicInformation_1698_PGN65330()) == CheckModel.MODEL_980)
 				if(ParentActivity._CheckModel.GetMCUModelNum(CAN1Comm.Get_ComponentBasicInformation_1698_PGN65330()) == 980)
 					_MainARightDownTMICCOModeFragment.ClickEnter();
 				else

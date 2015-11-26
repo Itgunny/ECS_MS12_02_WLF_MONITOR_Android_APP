@@ -213,7 +213,7 @@ public class UserSwitching extends ParentFragment{
 		}
 		// --, 150212 bwk
 		ParentActivity.ScreenIndex = ParentActivity.SCREEN_STATE_MENU_USERSWITCHING_TOP;
-		ParentActivity._MenuBaseFragment._MenuInterTitleFragment.SetTitleText(ParentActivity.getResources().getString(R.string.User_Switching));
+		ParentActivity._MenuBaseFragment._MenuInterTitleFragment.SetTitleText(ParentActivity.getResources().getString(R.string.User_Switching), 116);
 		HandleCursurDisplay = new Handler() {
 			@Override
 			public void handleMessage(Message msg) {
@@ -278,7 +278,7 @@ public class UserSwitching extends ParentFragment{
 		
 		adapter.addItem(new IconTextItemUserSwitching( ParentActivity.getResources().getDrawable(R.drawable.menu_management_machine_monitoring_bg_light),
 				null,
-				ParentActivity.getResources().getString(string.Engine_Mode)
+				getString(ParentActivity.getResources().getString(string.Engine_Mode), 240)
 				, ""
 				, ""));
 //		adapter.addItem(new IconTextItemUserSwitching( ParentActivity.getResources().getDrawable(R.drawable.menu_management_machine_monitoring_bg_light),
@@ -291,7 +291,7 @@ public class UserSwitching extends ParentFragment{
 		{
 			adapter.addItem(new IconTextItemUserSwitching( ParentActivity.getResources().getDrawable(R.drawable.menu_management_machine_monitoring_bg_dark),
 					null,
-					ParentActivity.getResources().getString(string.ICCO_Mode)
+					getString(ParentActivity.getResources().getString(string.ICCO_Mode), 205)
 					, ""
 					, ""));
 		}
@@ -299,13 +299,13 @@ public class UserSwitching extends ParentFragment{
 		{
 			adapter.addItem(new IconTextItemUserSwitching( ParentActivity.getResources().getDrawable(R.drawable.menu_management_machine_monitoring_bg_dark),
 					null,
-					ParentActivity.getResources().getString(string.CCO_Mode)
+					getString(ParentActivity.getResources().getString(string.CCO_Mode), 204)
 					, ""
 					, ""));
 		}
 		adapter.addItem(new IconTextItemUserSwitching( ParentActivity.getResources().getDrawable(R.drawable.menu_management_machine_monitoring_bg_light),
 				null,
-				ParentActivity.getResources().getString(string.Shift_Mode)
+				getString(ParentActivity.getResources().getString(string.Shift_Mode), 206)
 				, ""
 				, ""));
 		/*if(ParentActivity._CheckModel.GetMCUVersion(CAN1Comm.Get_ComponentBasicInformation_1698_PGN65330()) == CheckModel.MODEL_940
@@ -318,7 +318,7 @@ public class UserSwitching extends ParentFragment{
 			BackgroundFlag = false;
 			adapter.addItem(new IconTextItemUserSwitching( ParentActivity.getResources().getDrawable(R.drawable.menu_management_machine_monitoring_bg_dark),
 					null,
-					ParentActivity.getResources().getString(string.TC_Lock_Up)
+					getString(ParentActivity.getResources().getString(string.TC_Lock_Up), 210)
 					, ""
 					, ""));
 		}
@@ -327,27 +327,27 @@ public class UserSwitching extends ParentFragment{
 		{
 			adapter.addItem(new IconTextItemUserSwitching( ParentActivity.getResources().getDrawable(R.drawable.menu_management_machine_monitoring_bg_light),
 					null,
-					ParentActivity.getResources().getString(string.Ride_Control)
+					getString(ParentActivity.getResources().getString(string.Ride_Control), 155)
 					, ""
 					, ""));
 			adapter.addItem(new IconTextItemUserSwitching( ParentActivity.getResources().getDrawable(R.drawable.menu_management_machine_monitoring_bg_dark),
 					null,
-					ParentActivity.getResources().getString(string.Weighing_System)
+					getString(ParentActivity.getResources().getString(string.Weighing_System), 114)
 					, ""
 					, ""));
 			adapter.addItem(new IconTextItemUserSwitching( ParentActivity.getResources().getDrawable(R.drawable.menu_management_machine_monitoring_bg_light),
 					null,
-					ParentActivity.getResources().getString(string.Weighing_Display)
+					getString(ParentActivity.getResources().getString(string.Weighing_Display), 170)
 					, ""
 					, ""));
 			adapter.addItem(new IconTextItemUserSwitching( ParentActivity.getResources().getDrawable(R.drawable.menu_management_machine_monitoring_bg_dark),
 					null,
-					ParentActivity.getResources().getString(string.Error_Detection)
+					getString(ParentActivity.getResources().getString(string.Error_Detection), 171)
 					, ""
 					, ""));
 			adapter.addItem(new IconTextItemUserSwitching( ParentActivity.getResources().getDrawable(R.drawable.menu_management_machine_monitoring_bg_light),
 					null,
-					ParentActivity.getResources().getString(string.Kick_Down)
+					getString(ParentActivity.getResources().getString(string.Kick_Down), 207)
 					, ""
 					, ""));
 			BackgroundFlag = true;
@@ -356,27 +356,27 @@ public class UserSwitching extends ParentFragment{
 		{
 			adapter.addItem(new IconTextItemUserSwitching( ParentActivity.getResources().getDrawable(R.drawable.menu_management_machine_monitoring_bg_dark),
 					null,
-					ParentActivity.getResources().getString(string.Ride_Control)
+					getString(ParentActivity.getResources().getString(string.Ride_Control), 155)
 					, ""
 					, ""));
 			adapter.addItem(new IconTextItemUserSwitching( ParentActivity.getResources().getDrawable(R.drawable.menu_management_machine_monitoring_bg_light),
 					null,
-					ParentActivity.getResources().getString(string.Weighing_System)
+					getString(ParentActivity.getResources().getString(string.Weighing_System), 114)
 					, ""
 					, ""));
 			adapter.addItem(new IconTextItemUserSwitching( ParentActivity.getResources().getDrawable(R.drawable.menu_management_machine_monitoring_bg_dark),
 					null,
-					ParentActivity.getResources().getString(string.Weighing_Display)
+					getString(ParentActivity.getResources().getString(string.Weighing_Display), 170)
 					, ""
 					, ""));
 			adapter.addItem(new IconTextItemUserSwitching( ParentActivity.getResources().getDrawable(R.drawable.menu_management_machine_monitoring_bg_light),
 					null,
-					ParentActivity.getResources().getString(string.Error_Detection)
+					getString(ParentActivity.getResources().getString(string.Error_Detection), 171)
 					, ""
 					, ""));
 			adapter.addItem(new IconTextItemUserSwitching( ParentActivity.getResources().getDrawable(R.drawable.menu_management_machine_monitoring_bg_dark),
 					null,
-					ParentActivity.getResources().getString(string.Kick_Down)
+					getString(ParentActivity.getResources().getString(string.Kick_Down), 207)
 					, ""
 					, ""));	
 			BackgroundFlag = false;
@@ -396,12 +396,12 @@ public class UserSwitching extends ParentFragment{
 			{
 				adapter.addItem(new IconTextItemUserSwitching( ParentActivity.getResources().getDrawable(R.drawable.menu_management_machine_monitoring_bg_light),
 						null,
-						ParentActivity.getResources().getString(string.Bucket_Priority)
+						getString(ParentActivity.getResources().getString(string.Bucket_Priority), 211)
 						, ""
 						, ""));
 				adapter.addItem(new IconTextItemUserSwitching( ParentActivity.getResources().getDrawable(R.drawable.menu_management_machine_monitoring_bg_dark),
 						null,
-						ParentActivity.getResources().getString(string.Soft_End_Stop) + "/" + ParentActivity.getResources().getString(string.Boom_Up)
+						getString(ParentActivity.getResources().getString(string.Soft_End_Stop), 214) + "/" + getString(ParentActivity.getResources().getString(string.Boom_Up), 236)
 						, ""
 						, ""));
 				BackgroundFlag = false;
@@ -410,17 +410,17 @@ public class UserSwitching extends ParentFragment{
 				{
 					adapter.addItem(new IconTextItemUserSwitching( ParentActivity.getResources().getDrawable(R.drawable.menu_management_machine_monitoring_bg_light),
 							null,
-							ParentActivity.getResources().getString(string.Soft_End_Stop) + "/" + ParentActivity.getResources().getString(string.Boom_Down)
+							getString(ParentActivity.getResources().getString(string.Soft_End_Stop), 214) + "/" + getString(ParentActivity.getResources().getString(string.Boom_Down), 237)
 							, ""
 							, ""));
 					adapter.addItem(new IconTextItemUserSwitching( ParentActivity.getResources().getDrawable(R.drawable.menu_management_machine_monitoring_bg_dark),
 							null,
-							ParentActivity.getResources().getString(string.Soft_End_Stop) + "/" + ParentActivity.getResources().getString(string.Bucket_In)
+							getString(ParentActivity.getResources().getString(string.Soft_End_Stop), 214) + "/" + getString(ParentActivity.getResources().getString(string.Bucket_In), 238)
 							, ""
 							, ""));
 					adapter.addItem(new IconTextItemUserSwitching( ParentActivity.getResources().getDrawable(R.drawable.menu_management_machine_monitoring_bg_light),
 							null,
-							ParentActivity.getResources().getString(string.Soft_End_Stop) + "/" + ParentActivity.getResources().getString(string.Bucket_Dump)
+							getString(ParentActivity.getResources().getString(string.Soft_End_Stop), 214) + "/" + getString(ParentActivity.getResources().getString(string.Bucket_Dump), 239)
 							, ""
 							, ""));
 					BackgroundFlag = true;
@@ -430,12 +430,12 @@ public class UserSwitching extends ParentFragment{
 			{
 				adapter.addItem(new IconTextItemUserSwitching( ParentActivity.getResources().getDrawable(R.drawable.menu_management_machine_monitoring_bg_dark),
 						null,
-						ParentActivity.getResources().getString(string.Bucket_Priority)
+						getString(ParentActivity.getResources().getString(string.Bucket_Priority), 211)
 						, ""
 						, ""));
 				adapter.addItem(new IconTextItemUserSwitching( ParentActivity.getResources().getDrawable(R.drawable.menu_management_machine_monitoring_bg_light),
 						null,
-						ParentActivity.getResources().getString(string.Soft_End_Stop) + "/" + ParentActivity.getResources().getString(string.Boom_Up)
+						getString(ParentActivity.getResources().getString(string.Soft_End_Stop), 214) + "/" + getString(ParentActivity.getResources().getString(string.Boom_Up), 236)
 						, ""
 						, ""));
 				BackgroundFlag = true;
@@ -443,17 +443,17 @@ public class UserSwitching extends ParentFragment{
 				{
 					adapter.addItem(new IconTextItemUserSwitching( ParentActivity.getResources().getDrawable(R.drawable.menu_management_machine_monitoring_bg_dark),
 							null,
-							ParentActivity.getResources().getString(string.Soft_End_Stop) + "/" + ParentActivity.getResources().getString(string.Boom_Down)
+							getString(ParentActivity.getResources().getString(string.Soft_End_Stop), 214) + "/" + getString(ParentActivity.getResources().getString(string.Boom_Down), 237)
 							, ""
 							, ""));
 					adapter.addItem(new IconTextItemUserSwitching( ParentActivity.getResources().getDrawable(R.drawable.menu_management_machine_monitoring_bg_light),
 							null,
-							ParentActivity.getResources().getString(string.Soft_End_Stop) + "/" + ParentActivity.getResources().getString(string.Bucket_In)
+							getString(ParentActivity.getResources().getString(string.Soft_End_Stop), 214) + "/" + getString(ParentActivity.getResources().getString(string.Bucket_In), 238)
 							, ""
 							, ""));
 					adapter.addItem(new IconTextItemUserSwitching( ParentActivity.getResources().getDrawable(R.drawable.menu_management_machine_monitoring_bg_dark),
 							null,
-							ParentActivity.getResources().getString(string.Soft_End_Stop) + "/" + ParentActivity.getResources().getString(string.Bucket_Dump)
+							getString(ParentActivity.getResources().getString(string.Soft_End_Stop), 214) + "/" + getString(ParentActivity.getResources().getString(string.Bucket_Dump), 239)
 							, ""
 							, ""));
 					BackgroundFlag = false;
@@ -471,77 +471,77 @@ public class UserSwitching extends ParentFragment{
 		{
 			adapter.addItem(new IconTextItemUserSwitching( ParentActivity.getResources().getDrawable(R.drawable.menu_management_machine_monitoring_bg_light),
 					null,
-					ParentActivity.getResources().getString(string.Brightness_Setting)
+					getString(ParentActivity.getResources().getString(string.Brightness_Setting), 412)
 					, ""
 					, ""));
 			adapter.addItem(new IconTextItemUserSwitching( ParentActivity.getResources().getDrawable(R.drawable.menu_management_machine_monitoring_bg_dark),
 					null,
-					ParentActivity.getResources().getString(string.Display_Style)
+					getString(ParentActivity.getResources().getString(string.Display_Style), 416)
 					, ""
 					, ""));
 			adapter.addItem(new IconTextItemUserSwitching( ParentActivity.getResources().getDrawable(R.drawable.menu_management_machine_monitoring_bg_light),
 					null,
-					ParentActivity.getResources().getString(string.FuelRate)
+					getString(ParentActivity.getResources().getString(string.FuelRate), 464)
 					, ""
 					, ""));
 			adapter.addItem(new IconTextItemUserSwitching( ParentActivity.getResources().getDrawable(R.drawable.menu_management_machine_monitoring_bg_dark),
 					null,
-					ParentActivity.getResources().getString(string.Temp)
+					getString(ParentActivity.getResources().getString(string.Temp), 39)
 					, ""
 					, ""));
 			adapter.addItem(new IconTextItemUserSwitching( ParentActivity.getResources().getDrawable(R.drawable.menu_management_machine_monitoring_bg_light),
 					null,
-					ParentActivity.getResources().getString(string.Speed)
+					getString(ParentActivity.getResources().getString(string.Speed), 40)
 					, ""
 					, ""));
 			adapter.addItem(new IconTextItemUserSwitching( ParentActivity.getResources().getDrawable(R.drawable.menu_management_machine_monitoring_bg_dark),
 					null,
-					ParentActivity.getResources().getString(string.Weight)
+					getString(ParentActivity.getResources().getString(string.Weight), 41)
 					, ""
 					, ""));
 			adapter.addItem(new IconTextItemUserSwitching( ParentActivity.getResources().getDrawable(R.drawable.menu_management_machine_monitoring_bg_light),
 					null,
-					ParentActivity.getResources().getString(string.Pressure)
+					getString(ParentActivity.getResources().getString(string.Pressure), 42)
 					, ""
 					, ""));
 			adapter.addItem(new IconTextItemUserSwitching( ParentActivity.getResources().getDrawable(R.drawable.menu_management_machine_monitoring_bg_dark),
 					null,
-					ParentActivity.getResources().getString(string.Machine_Monitoring)
+					getString(ParentActivity.getResources().getString(string.Machine_Monitoring), 253)
 					, ""
 					, ""));
 			adapter.addItem(new IconTextItemUserSwitching( ParentActivity.getResources().getDrawable(R.drawable.menu_management_machine_monitoring_bg_light),
 					null,
-					ParentActivity.getResources().getString(string.Machine_Monitoring)
+					getString(ParentActivity.getResources().getString(string.Machine_Monitoring), 253)
 					, ""
 					, ""));
 			adapter.addItem(new IconTextItemUserSwitching( ParentActivity.getResources().getDrawable(R.drawable.menu_management_machine_monitoring_bg_dark),
 					null,
-					ParentActivity.getResources().getString(string.Language)
+					getString(ParentActivity.getResources().getString(string.Language), 423)
 					, ""
 					, ""));
 			adapter.addItem(new IconTextItemUserSwitching( ParentActivity.getResources().getDrawable(R.drawable.menu_management_machine_monitoring_bg_light),
 					null,
-					ParentActivity.getResources().getString(string.Sound_Output_Setting)
+					getString(ParentActivity.getResources().getString(string.Sound_Output_Setting), 415)
 					, ""
 					, ""));
 			adapter.addItem(new IconTextItemUserSwitching( ParentActivity.getResources().getDrawable(R.drawable.menu_management_machine_monitoring_bg_dark),
 					null,
-					ParentActivity.getResources().getString(string.Operation_History)
+					getString(ParentActivity.getResources().getString(string.Operation_History), 254)
 					, ""
 					, ""));
 			adapter.addItem(new IconTextItemUserSwitching( ParentActivity.getResources().getDrawable(R.drawable.menu_management_machine_monitoring_bg_light),
 					null,
-					ParentActivity.getResources().getString(string.Fuel_Consumption_History)
+					getString(ParentActivity.getResources().getString(string.Fuel_Consumption_History), 313)
 					, ""
 					, ""));		
 			adapter.addItem(new IconTextItemUserSwitching( ParentActivity.getResources().getDrawable(R.drawable.menu_management_machine_monitoring_bg_dark),
 					null,
-					ParentActivity.getResources().getString(string.Boom_Detent_Mode)
+					getString(ParentActivity.getResources().getString(string.Boom_Detent_Mode), 149)
 					, ""
 					, ""));
 			adapter.addItem(new IconTextItemUserSwitching( ParentActivity.getResources().getDrawable(R.drawable.menu_management_machine_monitoring_bg_light),
 					null,
-					ParentActivity.getResources().getString(string.Bucket_Detent_Mode)
+					getString(ParentActivity.getResources().getString(string.Bucket_Detent_Mode), 150)
 					, ""
 					, ""));		
 		}
@@ -549,77 +549,77 @@ public class UserSwitching extends ParentFragment{
 		{
 			adapter.addItem(new IconTextItemUserSwitching( ParentActivity.getResources().getDrawable(R.drawable.menu_management_machine_monitoring_bg_dark),
 					null,
-					ParentActivity.getResources().getString(string.Brightness_Setting)
+					getString(ParentActivity.getResources().getString(string.Brightness_Setting), 412)
 					, ""
 					, ""));
 			adapter.addItem(new IconTextItemUserSwitching( ParentActivity.getResources().getDrawable(R.drawable.menu_management_machine_monitoring_bg_light),
 					null,
-					ParentActivity.getResources().getString(string.Display_Style)
+					getString(ParentActivity.getResources().getString(string.Display_Style), 416)
 					, ""
 					, ""));
 			adapter.addItem(new IconTextItemUserSwitching( ParentActivity.getResources().getDrawable(R.drawable.menu_management_machine_monitoring_bg_dark),
 					null,
-					ParentActivity.getResources().getString(string.FuelRate)
+					getString(ParentActivity.getResources().getString(string.FuelRate), 464)
 					, ""
 					, ""));
 			adapter.addItem(new IconTextItemUserSwitching( ParentActivity.getResources().getDrawable(R.drawable.menu_management_machine_monitoring_bg_light),
 					null,
-					ParentActivity.getResources().getString(string.Temp)
+					getString(ParentActivity.getResources().getString(string.Temp), 39)
 					, ""
 					, ""));
 			adapter.addItem(new IconTextItemUserSwitching( ParentActivity.getResources().getDrawable(R.drawable.menu_management_machine_monitoring_bg_dark),
 					null,
-					ParentActivity.getResources().getString(string.Speed)
+					getString(ParentActivity.getResources().getString(string.Speed), 40)
 					, ""
 					, ""));
 			adapter.addItem(new IconTextItemUserSwitching( ParentActivity.getResources().getDrawable(R.drawable.menu_management_machine_monitoring_bg_light),
 					null,
-					ParentActivity.getResources().getString(string.Weight)
+					getString(ParentActivity.getResources().getString(string.Weight), 41)
 					, ""
 					, ""));
 			adapter.addItem(new IconTextItemUserSwitching( ParentActivity.getResources().getDrawable(R.drawable.menu_management_machine_monitoring_bg_dark),
 					null,
-					ParentActivity.getResources().getString(string.Pressure)
+					getString(ParentActivity.getResources().getString(string.Pressure), 42)
 					, ""
 					, ""));
 			adapter.addItem(new IconTextItemUserSwitching( ParentActivity.getResources().getDrawable(R.drawable.menu_management_machine_monitoring_bg_light),
 					null,
-					ParentActivity.getResources().getString(string.Machine_Monitoring)
+					getString(ParentActivity.getResources().getString(string.Machine_Monitoring), 253)
 					, ""
 					, ""));
 			adapter.addItem(new IconTextItemUserSwitching( ParentActivity.getResources().getDrawable(R.drawable.menu_management_machine_monitoring_bg_dark),
 					null,
-					ParentActivity.getResources().getString(string.Machine_Monitoring)
+					getString(ParentActivity.getResources().getString(string.Machine_Monitoring), 253)
 					, ""
 					, ""));
 			adapter.addItem(new IconTextItemUserSwitching( ParentActivity.getResources().getDrawable(R.drawable.menu_management_machine_monitoring_bg_light),
 					null,
-					ParentActivity.getResources().getString(string.Language)
+					getString(ParentActivity.getResources().getString(string.Language), 422)
 					, ""
 					, ""));
 			adapter.addItem(new IconTextItemUserSwitching( ParentActivity.getResources().getDrawable(R.drawable.menu_management_machine_monitoring_bg_dark),
 					null,
-					ParentActivity.getResources().getString(string.Sound_Output_Setting)
+					getString(ParentActivity.getResources().getString(string.Sound_Output_Setting), 415)
 					, ""
 					, ""));
 			adapter.addItem(new IconTextItemUserSwitching( ParentActivity.getResources().getDrawable(R.drawable.menu_management_machine_monitoring_bg_light),
 					null,
-					ParentActivity.getResources().getString(string.Operation_History)
+					getString(ParentActivity.getResources().getString(string.Operation_History), 254)
 					, ""
 					, ""));
 			adapter.addItem(new IconTextItemUserSwitching( ParentActivity.getResources().getDrawable(R.drawable.menu_management_machine_monitoring_bg_dark),
 					null,
-					ParentActivity.getResources().getString(string.Fuel_Consumption_History)
+					getString(ParentActivity.getResources().getString(string.Fuel_Consumption_History), 313)
 					, ""
 					, ""));		
 			adapter.addItem(new IconTextItemUserSwitching( ParentActivity.getResources().getDrawable(R.drawable.menu_management_machine_monitoring_bg_light),
 					null,
-					ParentActivity.getResources().getString(string.Boom_Detent_Mode)
+					getString(ParentActivity.getResources().getString(string.Boom_Detent_Mode), 149)
 					, ""
 					, ""));
 			adapter.addItem(new IconTextItemUserSwitching( ParentActivity.getResources().getDrawable(R.drawable.menu_management_machine_monitoring_bg_dark),
 					null,
-					ParentActivity.getResources().getString(string.Bucket_Detent_Mode)
+					getString(ParentActivity.getResources().getString(string.Bucket_Detent_Mode), 150)
 					, ""
 					, ""));				
 		}
@@ -1043,26 +1043,26 @@ public class UserSwitching extends ParentFragment{
 	public void EngineModeDisplay(int SettingData, int LoadingData){
 		switch (SettingData) {
 		case CAN1CommManager.DATA_STATE_ENGINE_MODE_PWR:
-			adapter.UpdateSecond(STATE_ENGINEMODE, ParentActivity.getResources().getString(string.POWER));
+			adapter.UpdateSecond(STATE_ENGINEMODE, getString(ParentActivity.getResources().getString(string.POWER), 96));
 			break;
 		case CAN1CommManager.DATA_STATE_ENGINE_MODE_STD:
-			adapter.UpdateSecond(STATE_ENGINEMODE, ParentActivity.getResources().getString(string.STANDARD));
+			adapter.UpdateSecond(STATE_ENGINEMODE, getString(ParentActivity.getResources().getString(string.STANDARD), 95));
 			break;
 		case CAN1CommManager.DATA_STATE_ENGINE_MODE_ECONO:
-			adapter.UpdateSecond(STATE_ENGINEMODE, ParentActivity.getResources().getString(string.ECONO));
+			adapter.UpdateSecond(STATE_ENGINEMODE, getString(ParentActivity.getResources().getString(string.ECONO), 94));
 			break;
 		default:
 			break;
 		}
 		switch (LoadingData) {
 		case CAN1CommManager.DATA_STATE_ENGINE_MODE_PWR:
-			adapter.UpdateThird(STATE_ENGINEMODE, ParentActivity.getResources().getString(string.POWER));
+			adapter.UpdateThird(STATE_ENGINEMODE, getString(ParentActivity.getResources().getString(string.POWER), 96));
 			break;
 		case CAN1CommManager.DATA_STATE_ENGINE_MODE_STD:
-			adapter.UpdateThird(STATE_ENGINEMODE, ParentActivity.getResources().getString(string.STANDARD));
+			adapter.UpdateThird(STATE_ENGINEMODE, getString(ParentActivity.getResources().getString(string.STANDARD), 95));
 			break;
 		case CAN1CommManager.DATA_STATE_ENGINE_MODE_ECONO:
-			adapter.UpdateThird(STATE_ENGINEMODE, ParentActivity.getResources().getString(string.ECONO));
+			adapter.UpdateThird(STATE_ENGINEMODE, getString(ParentActivity.getResources().getString(string.ECONO), 94));
 			break;
 		default:
 			break;
@@ -1112,20 +1112,20 @@ public class UserSwitching extends ParentFragment{
 		{
 			switch (SettingData) {
 			case CAN1CommManager.DATA_STATE_TM_CLUTCHCUTOFF_OFF:
-				adapter.UpdateSecond(STATE_CCOMODE, ParentActivity.getResources().getString(string.OFF));
+				adapter.UpdateSecond(STATE_CCOMODE, getString(ParentActivity.getResources().getString(string.OFF), 98));
 				break;
 			case CAN1CommManager.DATA_STATE_TM_CLUTCHCUTOFF_H:
-				adapter.UpdateSecond(STATE_CCOMODE, ParentActivity.getResources().getString(string.ON));
+				adapter.UpdateSecond(STATE_CCOMODE, getString(ParentActivity.getResources().getString(string.ON), 97));
 				break;
 			default:
 				break;
 			}
 			switch (LoadingData) {
 			case CAN1CommManager.DATA_STATE_TM_CLUTCHCUTOFF_OFF:
-				adapter.UpdateThird(STATE_CCOMODE, ParentActivity.getResources().getString(string.OFF));
+				adapter.UpdateThird(STATE_CCOMODE, getString(ParentActivity.getResources().getString(string.OFF), 98));
 				break;
 			case CAN1CommManager.DATA_STATE_TM_CLUTCHCUTOFF_H:
-				adapter.UpdateThird(STATE_CCOMODE, ParentActivity.getResources().getString(string.ON));
+				adapter.UpdateThird(STATE_CCOMODE, getString(ParentActivity.getResources().getString(string.ON), 97));
 				break;
 			default:
 				break;
@@ -1134,32 +1134,32 @@ public class UserSwitching extends ParentFragment{
 		else{
 			switch (SettingData) {
 			case CAN1CommManager.DATA_STATE_TM_CLUTCHCUTOFF_OFF:
-				adapter.UpdateSecond(STATE_CCOMODE, ParentActivity.getResources().getString(string.OFF));
+				adapter.UpdateSecond(STATE_CCOMODE, getString(ParentActivity.getResources().getString(string.OFF), 98));
 				break;
 			case CAN1CommManager.DATA_STATE_TM_CLUTCHCUTOFF_L:
-				adapter.UpdateSecond(STATE_CCOMODE, ParentActivity.getResources().getString(string.L));
+				adapter.UpdateSecond(STATE_CCOMODE, getString(ParentActivity.getResources().getString(string.L), 99));
 				break;
 			case CAN1CommManager.DATA_STATE_TM_CLUTCHCUTOFF_M:
-				adapter.UpdateSecond(STATE_CCOMODE, ParentActivity.getResources().getString(string.M));
+				adapter.UpdateSecond(STATE_CCOMODE, getString(ParentActivity.getResources().getString(string.M), 100));
 				break;
 			case CAN1CommManager.DATA_STATE_TM_CLUTCHCUTOFF_H:
-				adapter.UpdateSecond(STATE_CCOMODE, ParentActivity.getResources().getString(string.H));
+				adapter.UpdateSecond(STATE_CCOMODE, getString(ParentActivity.getResources().getString(string.H), 101));
 				break;
 			default:
 				break;
 			}
 			switch (LoadingData) {
 			case CAN1CommManager.DATA_STATE_TM_CLUTCHCUTOFF_OFF:
-				adapter.UpdateThird(STATE_CCOMODE, ParentActivity.getResources().getString(string.OFF));
+				adapter.UpdateThird(STATE_CCOMODE, getString(ParentActivity.getResources().getString(string.OFF), 98));
 				break;
 			case CAN1CommManager.DATA_STATE_TM_CLUTCHCUTOFF_L:
-				adapter.UpdateThird(STATE_CCOMODE, ParentActivity.getResources().getString(string.L));
+				adapter.UpdateThird(STATE_CCOMODE, getString(ParentActivity.getResources().getString(string.L), 99));
 				break;
 			case CAN1CommManager.DATA_STATE_TM_CLUTCHCUTOFF_M:
-				adapter.UpdateThird(STATE_CCOMODE, ParentActivity.getResources().getString(string.M));
+				adapter.UpdateThird(STATE_CCOMODE, getString(ParentActivity.getResources().getString(string.M), 100));
 				break;
 			case CAN1CommManager.DATA_STATE_TM_CLUTCHCUTOFF_H:
-				adapter.UpdateThird(STATE_CCOMODE, ParentActivity.getResources().getString(string.H));
+				adapter.UpdateThird(STATE_CCOMODE, getString(ParentActivity.getResources().getString(string.H), 101));
 				break;
 			default:
 				break;
@@ -1176,32 +1176,32 @@ public class UserSwitching extends ParentFragment{
 	public void ShiftModeDisplay(int SettingData, int LoadingData){
 		switch (SettingData) {
 		case CAN1CommManager.DATA_STATE_TM_SHIFTMODE_MANUAL:
-			adapter.UpdateSecond(STATE_SHIFTMODE, ParentActivity.getResources().getString(string.MANUAL));
+			adapter.UpdateSecond(STATE_SHIFTMODE, getString(ParentActivity.getResources().getString(string.MANUAL), 102));
 			break;
 		case CAN1CommManager.DATA_STATE_TM_SHIFTMODE_AL:
-			adapter.UpdateSecond(STATE_SHIFTMODE, ParentActivity.getResources().getString(string.AL));
+			adapter.UpdateSecond(STATE_SHIFTMODE, getString(ParentActivity.getResources().getString(string.AL), 103));
 			break;
 		case CAN1CommManager.DATA_STATE_TM_SHIFTMODE_AN:
-			adapter.UpdateSecond(STATE_SHIFTMODE, ParentActivity.getResources().getString(string.AN));
+			adapter.UpdateSecond(STATE_SHIFTMODE, getString(ParentActivity.getResources().getString(string.AN), 104));
 			break;
 		case CAN1CommManager.DATA_STATE_TM_SHIFTMODE_AH:
-			adapter.UpdateSecond(STATE_SHIFTMODE, ParentActivity.getResources().getString(string.AH));
+			adapter.UpdateSecond(STATE_SHIFTMODE, getString(ParentActivity.getResources().getString(string.AH), 105));
 			break;
 		default:
 			break;
 		}
 		switch (LoadingData) {
 		case CAN1CommManager.DATA_STATE_TM_CLUTCHCUTOFF_OFF:
-			adapter.UpdateThird(STATE_SHIFTMODE, ParentActivity.getResources().getString(string.MANUAL));
+			adapter.UpdateThird(STATE_SHIFTMODE, getString(ParentActivity.getResources().getString(string.MANUAL), 102));
 			break;
 		case CAN1CommManager.DATA_STATE_TM_SHIFTMODE_AL:
-			adapter.UpdateThird(STATE_SHIFTMODE, ParentActivity.getResources().getString(string.AL));
+			adapter.UpdateThird(STATE_SHIFTMODE, getString(ParentActivity.getResources().getString(string.AL), 103));
 			break;
 		case CAN1CommManager.DATA_STATE_TM_SHIFTMODE_AN:
-			adapter.UpdateThird(STATE_SHIFTMODE, ParentActivity.getResources().getString(string.AN));
+			adapter.UpdateThird(STATE_SHIFTMODE, getString(ParentActivity.getResources().getString(string.AN), 104));
 			break;
 		case CAN1CommManager.DATA_STATE_TM_SHIFTMODE_AH:
-			adapter.UpdateThird(STATE_SHIFTMODE, ParentActivity.getResources().getString(string.AH));
+			adapter.UpdateThird(STATE_SHIFTMODE, getString(ParentActivity.getResources().getString(string.AH), 105));
 			break;
 		default:
 			break;
@@ -1217,20 +1217,20 @@ public class UserSwitching extends ParentFragment{
 	public void TCLockUpDisplay(int SettingData, int LoadingData){
 		switch (SettingData) {
 		case CAN1CommManager.DATA_STATE_TM_LOCKUPCLUTCH_OFF:
-			adapter.UpdateSecond(STATE_TCLOCKUP, ParentActivity.getResources().getString(string.OFF));
+			adapter.UpdateSecond(STATE_TCLOCKUP, getString(ParentActivity.getResources().getString(string.OFF), 98));
 			break;
 		case CAN1CommManager.DATA_STATE_TM_LOCKUPCLUTCH_ON:
-			adapter.UpdateSecond(STATE_TCLOCKUP, ParentActivity.getResources().getString(string.ON));
+			adapter.UpdateSecond(STATE_TCLOCKUP, getString(ParentActivity.getResources().getString(string.ON), 97));
 			break;
 		default:
 			break;
 		}
 		switch (LoadingData) {
 		case CAN1CommManager.DATA_STATE_TM_LOCKUPCLUTCH_OFF:
-			adapter.UpdateThird(STATE_TCLOCKUP, ParentActivity.getResources().getString(string.OFF));
+			adapter.UpdateThird(STATE_TCLOCKUP, getString(ParentActivity.getResources().getString(string.OFF), 98));
 			break;
 		case CAN1CommManager.DATA_STATE_TM_LOCKUPCLUTCH_ON:
-			adapter.UpdateThird(STATE_TCLOCKUP, ParentActivity.getResources().getString(string.ON));
+			adapter.UpdateThird(STATE_TCLOCKUP, getString(ParentActivity.getResources().getString(string.ON), 97));
 			break;
 		default:
 			break;
@@ -1246,26 +1246,26 @@ public class UserSwitching extends ParentFragment{
 	public void RideControlDisplay(int SettingData, int LoadingData){
 		switch (SettingData) {
 		case CAN1CommManager.DATA_STATE_KEY_RIDECONTROL_OFF:
-			adapter.UpdateSecond(STATE_RIDECONTROL, ParentActivity.getResources().getString(string.Off));
+			adapter.UpdateSecond(STATE_RIDECONTROL, getString(ParentActivity.getResources().getString(string.OFF), 98));
 			break;
 		case CAN1CommManager.DATA_STATE_KEY_RIDECONTROL_MANUAL:
-			adapter.UpdateSecond(STATE_RIDECONTROL, ParentActivity.getResources().getString(string.On_Always));
+			adapter.UpdateSecond(STATE_RIDECONTROL, getString(ParentActivity.getResources().getString(string.On_Always), 23));
 			break;
 		case CAN1CommManager.DATA_STATE_KEY_RIDECONTROL_AUTO:
-			adapter.UpdateSecond(STATE_RIDECONTROL, ParentActivity.getResources().getString(string.On_Conditional_Speed));
+			adapter.UpdateSecond(STATE_RIDECONTROL, getString(ParentActivity.getResources().getString(string.On_Conditional_Speed), 168));
 			break;
 		default:
 			break;
 		}
 		switch (LoadingData) {
 		case CAN1CommManager.DATA_STATE_KEY_RIDECONTROL_OFF:
-			adapter.UpdateThird(STATE_RIDECONTROL, ParentActivity.getResources().getString(string.Off));
+			adapter.UpdateThird(STATE_RIDECONTROL, getString(ParentActivity.getResources().getString(string.OFF), 98));
 			break;
 		case CAN1CommManager.DATA_STATE_KEY_RIDECONTROL_MANUAL:
-			adapter.UpdateThird(STATE_RIDECONTROL, ParentActivity.getResources().getString(string.On_Always));
+			adapter.UpdateThird(STATE_RIDECONTROL, getString(ParentActivity.getResources().getString(string.On_Always), 23));
 			break;
 		case CAN1CommManager.DATA_STATE_KEY_RIDECONTROL_AUTO:
-			adapter.UpdateThird(STATE_RIDECONTROL, ParentActivity.getResources().getString(string.On_Conditional_Speed));
+			adapter.UpdateThird(STATE_RIDECONTROL, getString(ParentActivity.getResources().getString(string.On_Conditional_Speed), 168));
 			break;
 		default:
 			break;
@@ -1281,20 +1281,20 @@ public class UserSwitching extends ParentFragment{
 	public void WeighingSystemDisplay(int SettingData, int LoadingData){
 		switch (SettingData) {
 		case CAN1CommManager.DATA_STATE_WEIGHING_ACCUMULATION_MANUAL:
-			adapter.UpdateSecond(STATE_WEIGHINGSYSTEM, ParentActivity.getResources().getString(string.Manual));
+			adapter.UpdateSecond(STATE_WEIGHINGSYSTEM, getString(ParentActivity.getResources().getString(string.Manual), 26));
 			break;
 		case CAN1CommManager.DATA_STATE_WEIGHING_ACCUMULATION_AUTO:
-			adapter.UpdateSecond(STATE_WEIGHINGSYSTEM, ParentActivity.getResources().getString(string.Automatic));
+			adapter.UpdateSecond(STATE_WEIGHINGSYSTEM, getString(ParentActivity.getResources().getString(string.Automatic), 27));
 			break;
 		default:
 			break;
 		}
 		switch (LoadingData) {
 		case CAN1CommManager.DATA_STATE_WEIGHING_ACCUMULATION_MANUAL:
-			adapter.UpdateThird(STATE_WEIGHINGSYSTEM, ParentActivity.getResources().getString(string.Manual));
+			adapter.UpdateThird(STATE_WEIGHINGSYSTEM, getString(ParentActivity.getResources().getString(string.Manual), 26));
 			break;
 		case CAN1CommManager.DATA_STATE_WEIGHING_ACCUMULATION_AUTO:
-			adapter.UpdateThird(STATE_WEIGHINGSYSTEM, ParentActivity.getResources().getString(string.Automatic));
+			adapter.UpdateThird(STATE_WEIGHINGSYSTEM, getString(ParentActivity.getResources().getString(string.Automatic), 27));
 			break;
 		default:
 			break;
@@ -1310,32 +1310,32 @@ public class UserSwitching extends ParentFragment{
 	public void WeighingDisplayDisplay(int SettingData, int LoadingData){
 		switch (SettingData) {
 		case CAN1CommManager.DATA_STATE_WEIGHINGDISPLAY_DAILY:
-			adapter.UpdateSecond(STATE_WEIGHINGDISPLAY, ParentActivity.getResources().getString(string.Daily));
+			adapter.UpdateSecond(STATE_WEIGHINGDISPLAY, getString(ParentActivity.getResources().getString(string.Daily), 173));
 			break;
 		case CAN1CommManager.DATA_STATE_WEIGHINGDISPLAY_TOTAL_A:
-			adapter.UpdateSecond(STATE_WEIGHINGDISPLAY, ParentActivity.getResources().getString(string.Total_A));
+			adapter.UpdateSecond(STATE_WEIGHINGDISPLAY, getString(ParentActivity.getResources().getString(string.Total_A), 174));
 			break;
 		case CAN1CommManager.DATA_STATE_WEIGHINGDISPLAY_TOTAL_B:
-			adapter.UpdateSecond(STATE_WEIGHINGDISPLAY, ParentActivity.getResources().getString(string.Total_B));
+			adapter.UpdateSecond(STATE_WEIGHINGDISPLAY, getString(ParentActivity.getResources().getString(string.Total_B), 175));
 			break;
 		case CAN1CommManager.DATA_STATE_WEIGHINGDISPLAY_TOTAL_C:
-			adapter.UpdateSecond(STATE_WEIGHINGDISPLAY, ParentActivity.getResources().getString(string.Total_C));
+			adapter.UpdateSecond(STATE_WEIGHINGDISPLAY, getString(ParentActivity.getResources().getString(string.Total_C), 176));
 			break;
 		default:
 			break;
 		}
 		switch (LoadingData) {
 		case CAN1CommManager.DATA_STATE_WEIGHINGDISPLAY_DAILY:
-			adapter.UpdateThird(STATE_WEIGHINGDISPLAY, ParentActivity.getResources().getString(string.Daily));
+			adapter.UpdateThird(STATE_WEIGHINGDISPLAY, getString(ParentActivity.getResources().getString(string.Daily), 173));
 			break;
 		case CAN1CommManager.DATA_STATE_WEIGHINGDISPLAY_TOTAL_A:
-			adapter.UpdateThird(STATE_WEIGHINGDISPLAY, ParentActivity.getResources().getString(string.Total_A));
+			adapter.UpdateThird(STATE_WEIGHINGDISPLAY, getString(ParentActivity.getResources().getString(string.Total_A), 174));
 			break;
 		case CAN1CommManager.DATA_STATE_WEIGHINGDISPLAY_TOTAL_B:
-			adapter.UpdateThird(STATE_WEIGHINGDISPLAY, ParentActivity.getResources().getString(string.Total_B));
+			adapter.UpdateThird(STATE_WEIGHINGDISPLAY, getString(ParentActivity.getResources().getString(string.Total_B), 175));
 			break;
 		case CAN1CommManager.DATA_STATE_WEIGHINGDISPLAY_TOTAL_C:
-			adapter.UpdateThird(STATE_WEIGHINGDISPLAY, ParentActivity.getResources().getString(string.Total_C));
+			adapter.UpdateThird(STATE_WEIGHINGDISPLAY, getString(ParentActivity.getResources().getString(string.Total_C), 176));
 			break;
 		default:
 			break;
@@ -1351,20 +1351,20 @@ public class UserSwitching extends ParentFragment{
 	public void ErrorDetectionDisplay(int SettingData, int LoadingData){
 		switch (SettingData) {
 		case CAN1CommManager.DATA_STATE_WEIGHING_ERRORDETECT_OFF:
-			adapter.UpdateSecond(STATE_ERRORDETECTION, ParentActivity.getResources().getString(string.Off));
+			adapter.UpdateSecond(STATE_ERRORDETECTION, getString(ParentActivity.getResources().getString(string.Off), 20));
 			break;
 		case CAN1CommManager.DATA_STATE_WEIGHING_ERRORDETECT_ON:
-			adapter.UpdateSecond(STATE_ERRORDETECTION, ParentActivity.getResources().getString(string.On));
+			adapter.UpdateSecond(STATE_ERRORDETECTION, getString(ParentActivity.getResources().getString(string.On), 19));
 			break;
 		default:
 			break;
 		}
 		switch (LoadingData) {
 		case CAN1CommManager.DATA_STATE_WEIGHING_ERRORDETECT_OFF:
-			adapter.UpdateThird(STATE_ERRORDETECTION, ParentActivity.getResources().getString(string.Off));
+			adapter.UpdateThird(STATE_ERRORDETECTION, getString(ParentActivity.getResources().getString(string.Off), 20));
 			break;
 		case CAN1CommManager.DATA_STATE_WEIGHING_ERRORDETECT_ON:
-			adapter.UpdateThird(STATE_ERRORDETECTION, ParentActivity.getResources().getString(string.On));
+			adapter.UpdateThird(STATE_ERRORDETECTION, getString(ParentActivity.getResources().getString(string.On), 19));
 			break;
 		default:
 			break;
@@ -1380,20 +1380,20 @@ public class UserSwitching extends ParentFragment{
 	public void KickDownDisplay(int SettingData, int LoadingData){
 		switch (SettingData) {
 		case CAN1CommManager.DATA_STATE_KICKDOWN_UPDOWN:
-			adapter.UpdateSecond(STATE_KICKDOWN, ParentActivity.getResources().getString(string.MODE1_DOWN_UP));
+			adapter.UpdateSecond(STATE_KICKDOWN, getString(ParentActivity.getResources().getString(string.MODE1_DOWN_UP), 221));
 			break;
 		case CAN1CommManager.DATA_STATE_KICKDOWN_DOWNONLY:
-			adapter.UpdateSecond(STATE_KICKDOWN, ParentActivity.getResources().getString(string.MODE2_DOWN_ONLY));
+			adapter.UpdateSecond(STATE_KICKDOWN, getString(ParentActivity.getResources().getString(string.MODE2_DOWN_ONLY), 222));
 			break;
 		default:
 			break;
 		}
 		switch (LoadingData) {
 		case CAN1CommManager.DATA_STATE_KICKDOWN_UPDOWN:
-			adapter.UpdateThird(STATE_KICKDOWN, ParentActivity.getResources().getString(string.MODE1_DOWN_UP));
+			adapter.UpdateThird(STATE_KICKDOWN, getString(ParentActivity.getResources().getString(string.MODE1_DOWN_UP), 221));
 			break;
 		case CAN1CommManager.DATA_STATE_KICKDOWN_DOWNONLY:
-			adapter.UpdateThird(STATE_KICKDOWN, ParentActivity.getResources().getString(string.MODE2_DOWN_ONLY));
+			adapter.UpdateThird(STATE_KICKDOWN, getString(ParentActivity.getResources().getString(string.MODE2_DOWN_ONLY), 222));
 			break;
 		default:
 			break;
@@ -1409,20 +1409,20 @@ public class UserSwitching extends ParentFragment{
 	public void BucketPriorityDisplay(int SettingData, int LoadingData){
 		switch (SettingData) {
 		case CAN1CommManager.DATA_STATE_BUCKETPRIORITY_OFF:
-			adapter.UpdateSecond(STATE_BUCKETPRIORITY, ParentActivity.getResources().getString(string.Off));
+			adapter.UpdateSecond(STATE_BUCKETPRIORITY, getString(ParentActivity.getResources().getString(string.Off), 20));
 			break;
 		case CAN1CommManager.DATA_STATE_BUCKETPRIORITY_ON:
-			adapter.UpdateSecond(STATE_BUCKETPRIORITY, ParentActivity.getResources().getString(string.On));
+			adapter.UpdateSecond(STATE_BUCKETPRIORITY, getString(ParentActivity.getResources().getString(string.On), 19));
 			break;
 		default:
 			break;
 		}
 		switch (LoadingData) {
 		case CAN1CommManager.DATA_STATE_BUCKETPRIORITY_OFF:
-			adapter.UpdateThird(STATE_BUCKETPRIORITY, ParentActivity.getResources().getString(string.Off));
+			adapter.UpdateThird(STATE_BUCKETPRIORITY, getString(ParentActivity.getResources().getString(string.Off), 20));
 			break;
 		case CAN1CommManager.DATA_STATE_BUCKETPRIORITY_ON:
-			adapter.UpdateThird(STATE_BUCKETPRIORITY, ParentActivity.getResources().getString(string.On));
+			adapter.UpdateThird(STATE_BUCKETPRIORITY, getString(ParentActivity.getResources().getString(string.On), 19));
 			break;
 		default:
 			break;
@@ -1438,20 +1438,20 @@ public class UserSwitching extends ParentFragment{
 	public void SoftEndStopBoomUpDisplay(int SettingData, int LoadingData){
 		switch (SettingData) {
 		case CAN1CommManager.DATA_STATE_SOFTSTOP_BOOMUP_OFF:
-			adapter.UpdateSecond(STATE_SOFTENDSTOP_BOOMUP, ParentActivity.getResources().getString(string.Off));
+			adapter.UpdateSecond(STATE_SOFTENDSTOP_BOOMUP, getString(ParentActivity.getResources().getString(string.Off), 20));
 			break;
 		case CAN1CommManager.DATA_STATE_SOFTSTOP_BOOMUP_ON:
-			adapter.UpdateSecond(STATE_SOFTENDSTOP_BOOMUP, ParentActivity.getResources().getString(string.On));
+			adapter.UpdateSecond(STATE_SOFTENDSTOP_BOOMUP, getString(ParentActivity.getResources().getString(string.On), 19));
 			break;
 		default:
 			break;
 		}
 		switch (LoadingData) {
 		case CAN1CommManager.DATA_STATE_SOFTSTOP_BOOMUP_OFF:
-			adapter.UpdateThird(STATE_SOFTENDSTOP_BOOMUP, ParentActivity.getResources().getString(string.Off));
+			adapter.UpdateThird(STATE_SOFTENDSTOP_BOOMUP, getString(ParentActivity.getResources().getString(string.Off), 20));
 			break;
 		case CAN1CommManager.DATA_STATE_SOFTSTOP_BOOMUP_ON:
-			adapter.UpdateThird(STATE_SOFTENDSTOP_BOOMUP, ParentActivity.getResources().getString(string.On));
+			adapter.UpdateThird(STATE_SOFTENDSTOP_BOOMUP, getString(ParentActivity.getResources().getString(string.On), 19));
 			break;
 		default:
 			break;
@@ -1467,20 +1467,20 @@ public class UserSwitching extends ParentFragment{
 	public void SoftEndStopBoomDownDisplay(int SettingData, int LoadingData){
 		switch (SettingData) {
 		case CAN1CommManager.DATA_STATE_SOFTSTOP_BOOMDOWN_OFF:
-			adapter.UpdateSecond(STATE_SOFTENDSTOP_BOOMDOWN, ParentActivity.getResources().getString(string.Off));
+			adapter.UpdateSecond(STATE_SOFTENDSTOP_BOOMDOWN, getString(ParentActivity.getResources().getString(string.Off), 20));
 			break;
 		case CAN1CommManager.DATA_STATE_SOFTSTOP_BOOMDOWN_ON:
-			adapter.UpdateSecond(STATE_SOFTENDSTOP_BOOMDOWN, ParentActivity.getResources().getString(string.On));
+			adapter.UpdateSecond(STATE_SOFTENDSTOP_BOOMDOWN, getString(ParentActivity.getResources().getString(string.On), 19));
 			break;
 		default:
 			break;
 		}
 		switch (LoadingData) {
 		case CAN1CommManager.DATA_STATE_SOFTSTOP_BOOMDOWN_OFF:
-			adapter.UpdateThird(STATE_SOFTENDSTOP_BOOMDOWN, ParentActivity.getResources().getString(string.Off));
+			adapter.UpdateThird(STATE_SOFTENDSTOP_BOOMDOWN, getString(ParentActivity.getResources().getString(string.Off), 20));
 			break;
 		case CAN1CommManager.DATA_STATE_SOFTSTOP_BOOMDOWN_ON:
-			adapter.UpdateThird(STATE_SOFTENDSTOP_BOOMDOWN, ParentActivity.getResources().getString(string.On));
+			adapter.UpdateThird(STATE_SOFTENDSTOP_BOOMDOWN, getString(ParentActivity.getResources().getString(string.On), 19));
 			break;
 		default:
 			break;
@@ -1496,20 +1496,20 @@ public class UserSwitching extends ParentFragment{
 	public void SoftEndStopBucketInDisplay(int SettingData, int LoadingData){
 		switch (SettingData) {
 		case CAN1CommManager.DATA_STATE_SOFTSTOP_BUCKETIN_OFF:
-			adapter.UpdateSecond(STATE_SOFTENDSTOP_BUCKETIN, ParentActivity.getResources().getString(string.Off));
+			adapter.UpdateSecond(STATE_SOFTENDSTOP_BUCKETIN, getString(ParentActivity.getResources().getString(string.Off), 20));
 			break;
 		case CAN1CommManager.DATA_STATE_SOFTSTOP_BUCKETIN_ON:
-			adapter.UpdateSecond(STATE_SOFTENDSTOP_BUCKETIN, ParentActivity.getResources().getString(string.On));
+			adapter.UpdateSecond(STATE_SOFTENDSTOP_BUCKETIN, getString(ParentActivity.getResources().getString(string.On), 19));
 			break;
 		default:
 			break;
 		}
 		switch (LoadingData) {
 		case CAN1CommManager.DATA_STATE_SOFTSTOP_BUCKETIN_OFF:
-			adapter.UpdateThird(STATE_SOFTENDSTOP_BUCKETIN, ParentActivity.getResources().getString(string.Off));
+			adapter.UpdateThird(STATE_SOFTENDSTOP_BUCKETIN, getString(ParentActivity.getResources().getString(string.Off), 20));
 			break;
 		case CAN1CommManager.DATA_STATE_SOFTSTOP_BUCKETIN_ON:
-			adapter.UpdateThird(STATE_SOFTENDSTOP_BUCKETIN, ParentActivity.getResources().getString(string.On));
+			adapter.UpdateThird(STATE_SOFTENDSTOP_BUCKETIN, getString(ParentActivity.getResources().getString(string.On), 19));
 			break;
 		default:
 			break;
@@ -1525,20 +1525,20 @@ public class UserSwitching extends ParentFragment{
 	public void SoftEndStopBucketDumpDisplay(int SettingData, int LoadingData){
 		switch (SettingData) {
 		case CAN1CommManager.DATA_STATE_SOFTSTOP_BUCKETOUT_OFF:
-			adapter.UpdateSecond(STATE_SOFTENDSTOP_BUCKETDUMP, ParentActivity.getResources().getString(string.Off));
+			adapter.UpdateSecond(STATE_SOFTENDSTOP_BUCKETDUMP, getString(ParentActivity.getResources().getString(string.Off), 20));
 			break;
 		case CAN1CommManager.DATA_STATE_SOFTSTOP_BUCKETOUT_ON:
-			adapter.UpdateSecond(STATE_SOFTENDSTOP_BUCKETDUMP, ParentActivity.getResources().getString(string.On));
+			adapter.UpdateSecond(STATE_SOFTENDSTOP_BUCKETDUMP, getString(ParentActivity.getResources().getString(string.On), 19));
 			break;
 		default:
 			break;
 		}
 		switch (LoadingData) {
 		case CAN1CommManager.DATA_STATE_SOFTSTOP_BUCKETOUT_OFF:
-			adapter.UpdateThird(STATE_SOFTENDSTOP_BUCKETDUMP, ParentActivity.getResources().getString(string.Off));
+			adapter.UpdateThird(STATE_SOFTENDSTOP_BUCKETDUMP, getString(ParentActivity.getResources().getString(string.Off), 20));
 			break;
 		case CAN1CommManager.DATA_STATE_SOFTSTOP_BUCKETOUT_ON:
-			adapter.UpdateThird(STATE_SOFTENDSTOP_BUCKETDUMP, ParentActivity.getResources().getString(string.On));
+			adapter.UpdateThird(STATE_SOFTENDSTOP_BUCKETDUMP, getString(ParentActivity.getResources().getString(string.On), 19));
 			break;
 		default:
 			break;
@@ -1566,20 +1566,20 @@ public class UserSwitching extends ParentFragment{
 //		adapter.notifyDataSetChanged();
 		switch (SettingData) {
 		case Home.BRIGHTNESS_MANUAL:
-			adapter.UpdateSecond(STATE_BRIGHTNESS_MANUALAUTO, ParentActivity.getResources().getString(string.Manual));
+			adapter.UpdateSecond(STATE_BRIGHTNESS_MANUALAUTO, getString(ParentActivity.getResources().getString(string.Manual), 26));
 			break;
 		case Home.BRIGHTNESS_AUTO:
-			adapter.UpdateSecond(STATE_BRIGHTNESS_MANUALAUTO, ParentActivity.getResources().getString(string.Automatic));
+			adapter.UpdateSecond(STATE_BRIGHTNESS_MANUALAUTO, getString(ParentActivity.getResources().getString(string.Automatic), 27));
 			break;
 		default:
 			break;
 		}
 		switch (LoadingData) {
 		case Home.BRIGHTNESS_MANUAL:
-			adapter.UpdateThird(STATE_BRIGHTNESS_MANUALAUTO, ParentActivity.getResources().getString(string.Manual));
+			adapter.UpdateThird(STATE_BRIGHTNESS_MANUALAUTO, getString(ParentActivity.getResources().getString(string.Manual), 26));
 			break;
 		case Home.BRIGHTNESS_AUTO:
-			adapter.UpdateThird(STATE_BRIGHTNESS_MANUALAUTO, ParentActivity.getResources().getString(string.Automatic));
+			adapter.UpdateThird(STATE_BRIGHTNESS_MANUALAUTO, getString(ParentActivity.getResources().getString(string.Automatic), 27));
 			break;
 		default:
 			break;
@@ -1597,20 +1597,20 @@ public class UserSwitching extends ParentFragment{
 	public void UnitFuelDisplay(int SettingData, int LoadingData){
 		switch (SettingData) {
 		case Home.UNIT_FUEL_L:
-			adapter.UpdateSecond(STATE_UNIT_FUEL, ParentActivity.getResources().getString(string.l_h));
+			adapter.UpdateSecond(STATE_UNIT_FUEL, getString(ParentActivity.getResources().getString(string.l_h), 33));
 			break;
 		case Home.UNIT_FUEL_GAL:
-			adapter.UpdateSecond(STATE_UNIT_FUEL, ParentActivity.getResources().getString(string.gal_h));
+			adapter.UpdateSecond(STATE_UNIT_FUEL, getString(ParentActivity.getResources().getString(string.gal_h), 465));
 			break;
 		default:
 			break;
 		}
 		switch (LoadingData) {
 		case Home.UNIT_FUEL_L:
-			adapter.UpdateThird(STATE_UNIT_FUEL, ParentActivity.getResources().getString(string.l_h));
+			adapter.UpdateThird(STATE_UNIT_FUEL, getString(ParentActivity.getResources().getString(string.l_h), 33));
 			break;
 		case Home.UNIT_FUEL_GAL:
-			adapter.UpdateThird(STATE_UNIT_FUEL, ParentActivity.getResources().getString(string.gal_h));
+			adapter.UpdateThird(STATE_UNIT_FUEL, getString(ParentActivity.getResources().getString(string.gal_h), 465));
 			break;
 		default:
 			break;
@@ -1626,20 +1626,20 @@ public class UserSwitching extends ParentFragment{
 	public void UnitTempDisplay(int SettingData, int LoadingData){
 		switch (SettingData) {
 		case Home.UNIT_TEMP_C:
-			adapter.UpdateSecond(STATE_UNIT_TEMP, ParentActivity.getResources().getString(string.C));
+			adapter.UpdateSecond(STATE_UNIT_TEMP, getString(ParentActivity.getResources().getString(string.C), 8));
 			break;
 		case Home.UNIT_TEMP_F:
-			adapter.UpdateSecond(STATE_UNIT_TEMP, ParentActivity.getResources().getString(string.F));
+			adapter.UpdateSecond(STATE_UNIT_TEMP, getString(ParentActivity.getResources().getString(string.F), 9));
 			break;
 		default:
 			break;
 		}
 		switch (LoadingData) {
 		case Home.UNIT_TEMP_C:
-			adapter.UpdateThird(STATE_UNIT_TEMP, ParentActivity.getResources().getString(string.C));
+			adapter.UpdateThird(STATE_UNIT_TEMP, getString(ParentActivity.getResources().getString(string.C), 8));
 			break;
 		case Home.UNIT_TEMP_F:
-			adapter.UpdateThird(STATE_UNIT_TEMP, ParentActivity.getResources().getString(string.F));
+			adapter.UpdateThird(STATE_UNIT_TEMP, getString(ParentActivity.getResources().getString(string.F), 9));
 			break;
 		default:
 			break;
@@ -1655,20 +1655,20 @@ public class UserSwitching extends ParentFragment{
 	public void UnitOdoDisplay(int SettingData, int LoadingData){
 		switch (SettingData) {
 		case Home.UNIT_ODO_KM:
-			adapter.UpdateSecond(STATE_UNIT_ODO, ParentActivity.getResources().getString(string.km));
+			adapter.UpdateSecond(STATE_UNIT_ODO, getString(ParentActivity.getResources().getString(string.km), 37));
 			break;
 		case Home.UNIT_ODO_MILE:
-			adapter.UpdateSecond(STATE_UNIT_ODO, ParentActivity.getResources().getString(string.mile));
+			adapter.UpdateSecond(STATE_UNIT_ODO, getString(ParentActivity.getResources().getString(string.mile), 38));
 			break;
 		default:
 			break;
 		}
 		switch (LoadingData) {
 		case Home.UNIT_ODO_KM:
-			adapter.UpdateThird(STATE_UNIT_ODO, ParentActivity.getResources().getString(string.km));
+			adapter.UpdateThird(STATE_UNIT_ODO, getString(ParentActivity.getResources().getString(string.km), 37));
 			break;
 		case Home.UNIT_ODO_MILE:
-			adapter.UpdateThird(STATE_UNIT_ODO, ParentActivity.getResources().getString(string.mile));
+			adapter.UpdateThird(STATE_UNIT_ODO, getString(ParentActivity.getResources().getString(string.mile), 38));
 			break;
 		default:
 			break;
@@ -1684,26 +1684,26 @@ public class UserSwitching extends ParentFragment{
 	public void UnitWeightDisplay(int SettingData, int LoadingData){
 		switch (SettingData) {
 		case Home.UNIT_WEIGHT_TON:
-			adapter.UpdateSecond(STATE_UNIT_WEIGHT, ParentActivity.getResources().getString(string.ton));
+			adapter.UpdateSecond(STATE_UNIT_WEIGHT, getString(ParentActivity.getResources().getString(string.ton), 11));
 			break;
 		case Home.UNIT_WEIGHT_LB:
-			adapter.UpdateSecond(STATE_UNIT_WEIGHT, ParentActivity.getResources().getString(string.lb));
+			adapter.UpdateSecond(STATE_UNIT_WEIGHT, getString(ParentActivity.getResources().getString(string.lb), 12));
 			break;
 		case Home.UNIT_WEIGHT_US_TON:
-			adapter.UpdateSecond(STATE_UNIT_WEIGHT, ParentActivity.getResources().getString(string.USTon));
+			adapter.UpdateSecond(STATE_UNIT_WEIGHT, getString(ParentActivity.getResources().getString(string.USTon), 467));
 			break;
 		default:
 			break;
 		}
 		switch (LoadingData) {
 		case Home.UNIT_WEIGHT_TON:
-			adapter.UpdateThird(STATE_UNIT_WEIGHT, ParentActivity.getResources().getString(string.ton));
+			adapter.UpdateThird(STATE_UNIT_WEIGHT, getString(ParentActivity.getResources().getString(string.ton), 11));
 			break;
 		case Home.UNIT_WEIGHT_LB:
-			adapter.UpdateThird(STATE_UNIT_WEIGHT, ParentActivity.getResources().getString(string.lb));
+			adapter.UpdateThird(STATE_UNIT_WEIGHT, getString(ParentActivity.getResources().getString(string.lb), 12));
 			break;
 		case Home.UNIT_WEIGHT_US_TON:
-			adapter.UpdateThird(STATE_UNIT_WEIGHT, ParentActivity.getResources().getString(string.USTon));
+			adapter.UpdateThird(STATE_UNIT_WEIGHT, getString(ParentActivity.getResources().getString(string.USTon), 467));
 			break;
 		default:
 			break;
@@ -1719,32 +1719,32 @@ public class UserSwitching extends ParentFragment{
 	public void UnitPressureDisplay(int SettingData, int LoadingData){
 		switch (SettingData) {
 		case Home.UNIT_PRESSURE_BAR:
-			adapter.UpdateSecond(STATE_UNIT_PRESSURE, ParentActivity.getResources().getString(string.bar));
+			adapter.UpdateSecond(STATE_UNIT_PRESSURE, getString(ParentActivity.getResources().getString(string.bar), 43));
 			break;
 		case Home.UNIT_PRESSURE_MPA:
-			adapter.UpdateSecond(STATE_UNIT_PRESSURE, ParentActivity.getResources().getString(string.Mpa));
+			adapter.UpdateSecond(STATE_UNIT_PRESSURE, getString(ParentActivity.getResources().getString(string.Mpa), 44));
 			break;
 		case Home.UNIT_PRESSURE_KGF:
-			adapter.UpdateSecond(STATE_UNIT_PRESSURE, ParentActivity.getResources().getString(string.kgf_cm));
+			adapter.UpdateSecond(STATE_UNIT_PRESSURE, getString(ParentActivity.getResources().getString(string.kgf_cm), 45));
 			break;
 		case Home.UNIT_PRESSURE_PSI:
-			adapter.UpdateSecond(STATE_UNIT_PRESSURE, ParentActivity.getResources().getString(string.Psi));
+			adapter.UpdateSecond(STATE_UNIT_PRESSURE, getString(ParentActivity.getResources().getString(string.Psi), 46));
 			break;
 		default:
 			break;
 		}
 		switch (LoadingData) {
 		case Home.UNIT_PRESSURE_BAR:
-			adapter.UpdateThird(STATE_UNIT_PRESSURE, ParentActivity.getResources().getString(string.bar));
+			adapter.UpdateThird(STATE_UNIT_PRESSURE, getString(ParentActivity.getResources().getString(string.bar), 43));
 			break;
 		case Home.UNIT_PRESSURE_MPA:
-			adapter.UpdateThird(STATE_UNIT_PRESSURE, ParentActivity.getResources().getString(string.Mpa));
+			adapter.UpdateThird(STATE_UNIT_PRESSURE, getString(ParentActivity.getResources().getString(string.Mpa), 44));
 			break;
 		case Home.UNIT_PRESSURE_KGF:
-			adapter.UpdateThird(STATE_UNIT_PRESSURE, ParentActivity.getResources().getString(string.kgf_cm));
+			adapter.UpdateThird(STATE_UNIT_PRESSURE, getString(ParentActivity.getResources().getString(string.kgf_cm), 45));
 			break;
 		case Home.UNIT_PRESSURE_PSI:
-			adapter.UpdateThird(STATE_UNIT_PRESSURE, ParentActivity.getResources().getString(string.Psi));
+			adapter.UpdateThird(STATE_UNIT_PRESSURE, getString(ParentActivity.getResources().getString(string.Psi), 46));
 			break;
 		default:
 			break;
@@ -1760,20 +1760,20 @@ public class UserSwitching extends ParentFragment{
 	public void DisplayTypeDisplay(int SettingData, int LoadingData){
 		switch (SettingData) {
 		case Home.DISPLAY_TYPE_A:
-			adapter.UpdateSecond(STATE_DISPLAYTYPE, ParentActivity.getResources().getString(string.Type_A));
+			adapter.UpdateSecond(STATE_DISPLAYTYPE, getString(ParentActivity.getResources().getString(string.Type_A), 423));
 			break;
 		case Home.DISPLAY_TYPE_B:
-			adapter.UpdateSecond(STATE_DISPLAYTYPE, ParentActivity.getResources().getString(string.Type_B));
+			adapter.UpdateSecond(STATE_DISPLAYTYPE, getString(ParentActivity.getResources().getString(string.Type_B), 424));
 			break;
 		default:
 			break;
 		}
 		switch (LoadingData) {
 		case Home.DISPLAY_TYPE_A:
-			adapter.UpdateThird(STATE_DISPLAYTYPE, ParentActivity.getResources().getString(string.Type_A));
+			adapter.UpdateThird(STATE_DISPLAYTYPE, getString(ParentActivity.getResources().getString(string.Type_A), 423));
 			break;
 		case Home.DISPLAY_TYPE_B:
-			adapter.UpdateThird(STATE_DISPLAYTYPE, ParentActivity.getResources().getString(string.Type_B));
+			adapter.UpdateThird(STATE_DISPLAYTYPE, getString(ParentActivity.getResources().getString(string.Type_B), 424));
 			break;
 		default:
 			break;
@@ -1792,25 +1792,25 @@ public class UserSwitching extends ParentFragment{
 			adapter.UpdateSecond(STATE_MACHINESTATUS_UPPER, "-");
 			break;
 		case CAN1CommManager.DATA_STATE_MACHINESTATUS_HYD:
-			adapter.UpdateSecond(STATE_MACHINESTATUS_UPPER, ParentActivity.getResources().getString(string.HYD_Temp));
+			adapter.UpdateSecond(STATE_MACHINESTATUS_UPPER, getString(ParentActivity.getResources().getString(string.HYD_Temp), 111));
 			break;
 		case CAN1CommManager.DATA_STATE_MACHINESTATUS_BATTERY:
-			adapter.UpdateSecond(STATE_MACHINESTATUS_UPPER, ParentActivity.getResources().getString(string.Battery_Volt));
+			adapter.UpdateSecond(STATE_MACHINESTATUS_UPPER, getString(ParentActivity.getResources().getString(string.Battery_Volt), 113));
 			break;
 		case CAN1CommManager.DATA_STATE_MACHINESTATUS_COOLANT:
-			adapter.UpdateSecond(STATE_MACHINESTATUS_UPPER, ParentActivity.getResources().getString(string.Coolant_Temp));
+			adapter.UpdateSecond(STATE_MACHINESTATUS_UPPER, getString(ParentActivity.getResources().getString(string.Coolant_Temp), 115));
 			break;
 		case CAN1CommManager.DATA_STATE_MACHINESTATUS_TMOIL:
-			adapter.UpdateSecond(STATE_MACHINESTATUS_UPPER, ParentActivity.getResources().getString(string.TM_Oil_Temp));
+			adapter.UpdateSecond(STATE_MACHINESTATUS_UPPER, getString(ParentActivity.getResources().getString(string.TM_Oil_Temp), 112));
 			break;
 		case CAN1CommManager.DATA_STATE_MACHINESTATUS_WEIGHING:
-			adapter.UpdateSecond(STATE_MACHINESTATUS_UPPER, ParentActivity.getResources().getString(string.Weighing_System));
+			adapter.UpdateSecond(STATE_MACHINESTATUS_UPPER, getString(ParentActivity.getResources().getString(string.Weighing_System), 114));
 			break;
 		case CAN1CommManager.DATA_STATE_MACHINESTATUS_FRONTAXLE:
-			adapter.UpdateSecond(STATE_MACHINESTATUS_UPPER, ParentActivity.getResources().getString(string.Front_Axle_Temp));
+			adapter.UpdateSecond(STATE_MACHINESTATUS_UPPER, getString(ParentActivity.getResources().getString(string.Front_Axle_Temp), 144));
 			break;
 		case CAN1CommManager.DATA_STATE_MACHINESTATUS_REARAXLE:
-			adapter.UpdateSecond(STATE_MACHINESTATUS_UPPER, ParentActivity.getResources().getString(string.Rear_Axle_Temp));
+			adapter.UpdateSecond(STATE_MACHINESTATUS_UPPER, getString(ParentActivity.getResources().getString(string.Rear_Axle_Temp), 145));
 			break;
 		default:
 			break;
@@ -1820,25 +1820,25 @@ public class UserSwitching extends ParentFragment{
 			adapter.UpdateThird(STATE_MACHINESTATUS_UPPER, "-");
 			break;
 		case CAN1CommManager.DATA_STATE_MACHINESTATUS_HYD:
-			adapter.UpdateThird(STATE_MACHINESTATUS_UPPER, ParentActivity.getResources().getString(string.HYD_Temp));
+			adapter.UpdateThird(STATE_MACHINESTATUS_UPPER, getString(ParentActivity.getResources().getString(string.HYD_Temp), 111));
 			break;
 		case CAN1CommManager.DATA_STATE_MACHINESTATUS_BATTERY:
-			adapter.UpdateThird(STATE_MACHINESTATUS_UPPER, ParentActivity.getResources().getString(string.Battery_Volt));
+			adapter.UpdateThird(STATE_MACHINESTATUS_UPPER, getString(ParentActivity.getResources().getString(string.Battery_Volt), 113));
 			break;
 		case CAN1CommManager.DATA_STATE_MACHINESTATUS_COOLANT:
-			adapter.UpdateThird(STATE_MACHINESTATUS_UPPER, ParentActivity.getResources().getString(string.Coolant_Temp));
+			adapter.UpdateThird(STATE_MACHINESTATUS_UPPER, getString(ParentActivity.getResources().getString(string.Coolant_Temp), 115));
 			break;
 		case CAN1CommManager.DATA_STATE_MACHINESTATUS_TMOIL:
-			adapter.UpdateThird(STATE_MACHINESTATUS_UPPER, ParentActivity.getResources().getString(string.TM_Oil_Temp));
+			adapter.UpdateThird(STATE_MACHINESTATUS_UPPER, getString(ParentActivity.getResources().getString(string.TM_Oil_Temp), 112));
 			break;
 		case CAN1CommManager.DATA_STATE_MACHINESTATUS_WEIGHING:
-			adapter.UpdateThird(STATE_MACHINESTATUS_UPPER, ParentActivity.getResources().getString(string.Weighing_System));
+			adapter.UpdateThird(STATE_MACHINESTATUS_UPPER, getString(ParentActivity.getResources().getString(string.Weighing_System), 114));
 			break;
 		case CAN1CommManager.DATA_STATE_MACHINESTATUS_FRONTAXLE:
-			adapter.UpdateThird(STATE_MACHINESTATUS_UPPER, ParentActivity.getResources().getString(string.Front_Axle_Temp));
+			adapter.UpdateThird(STATE_MACHINESTATUS_UPPER, getString(ParentActivity.getResources().getString(string.Front_Axle_Temp), 144));
 			break;
 		case CAN1CommManager.DATA_STATE_MACHINESTATUS_REARAXLE:
-			adapter.UpdateThird(STATE_MACHINESTATUS_UPPER, ParentActivity.getResources().getString(string.Rear_Axle_Temp));
+			adapter.UpdateThird(STATE_MACHINESTATUS_UPPER, getString(ParentActivity.getResources().getString(string.Rear_Axle_Temp), 145));
 			break;
 		default:
 			break;
@@ -1856,25 +1856,25 @@ public class UserSwitching extends ParentFragment{
 			adapter.UpdateSecond(STATE_MACHINESTATUS_LOWER, "-");
 			break;
 		case CAN1CommManager.DATA_STATE_MACHINESTATUS_HYD:
-			adapter.UpdateSecond(STATE_MACHINESTATUS_LOWER, ParentActivity.getResources().getString(string.HYD_Temp));
+			adapter.UpdateSecond(STATE_MACHINESTATUS_LOWER, getString(ParentActivity.getResources().getString(string.HYD_Temp), 111));
 			break;
 		case CAN1CommManager.DATA_STATE_MACHINESTATUS_BATTERY:
-			adapter.UpdateSecond(STATE_MACHINESTATUS_LOWER, ParentActivity.getResources().getString(string.Battery_Volt));
+			adapter.UpdateSecond(STATE_MACHINESTATUS_LOWER, getString(ParentActivity.getResources().getString(string.Battery_Volt), 113));
 			break;
 		case CAN1CommManager.DATA_STATE_MACHINESTATUS_COOLANT:
-			adapter.UpdateSecond(STATE_MACHINESTATUS_LOWER, ParentActivity.getResources().getString(string.Coolant_Temp));
+			adapter.UpdateSecond(STATE_MACHINESTATUS_LOWER, getString(ParentActivity.getResources().getString(string.Coolant_Temp), 115));
 			break;
 		case CAN1CommManager.DATA_STATE_MACHINESTATUS_TMOIL:
-			adapter.UpdateSecond(STATE_MACHINESTATUS_LOWER, ParentActivity.getResources().getString(string.TM_Oil_Temp));
+			adapter.UpdateSecond(STATE_MACHINESTATUS_LOWER, getString(ParentActivity.getResources().getString(string.TM_Oil_Temp), 112));
 			break;
 		case CAN1CommManager.DATA_STATE_MACHINESTATUS_WEIGHING:
-			adapter.UpdateSecond(STATE_MACHINESTATUS_LOWER, ParentActivity.getResources().getString(string.Weighing_System));
+			adapter.UpdateSecond(STATE_MACHINESTATUS_LOWER, getString(ParentActivity.getResources().getString(string.Weighing_System), 114));
 			break;
 		case CAN1CommManager.DATA_STATE_MACHINESTATUS_FRONTAXLE:
-			adapter.UpdateSecond(STATE_MACHINESTATUS_LOWER, ParentActivity.getResources().getString(string.Front_Axle_Temp));
+			adapter.UpdateSecond(STATE_MACHINESTATUS_LOWER, getString(ParentActivity.getResources().getString(string.Front_Axle_Temp), 144));
 			break;
 		case CAN1CommManager.DATA_STATE_MACHINESTATUS_REARAXLE:
-			adapter.UpdateSecond(STATE_MACHINESTATUS_LOWER, ParentActivity.getResources().getString(string.Rear_Axle_Temp));
+			adapter.UpdateSecond(STATE_MACHINESTATUS_LOWER, getString(ParentActivity.getResources().getString(string.Rear_Axle_Temp), 145));
 			break;
 		default:
 			break;
@@ -1884,25 +1884,25 @@ public class UserSwitching extends ParentFragment{
 			adapter.UpdateThird(STATE_MACHINESTATUS_LOWER, "-");
 			break;
 		case CAN1CommManager.DATA_STATE_MACHINESTATUS_HYD:
-			adapter.UpdateThird(STATE_MACHINESTATUS_LOWER, ParentActivity.getResources().getString(string.HYD_Temp));
+			adapter.UpdateThird(STATE_MACHINESTATUS_LOWER, getString(ParentActivity.getResources().getString(string.HYD_Temp), 111));
 			break;
 		case CAN1CommManager.DATA_STATE_MACHINESTATUS_BATTERY:
-			adapter.UpdateThird(STATE_MACHINESTATUS_LOWER, ParentActivity.getResources().getString(string.Battery_Volt));
+			adapter.UpdateThird(STATE_MACHINESTATUS_LOWER, getString(ParentActivity.getResources().getString(string.Battery_Volt), 113));
 			break;
 		case CAN1CommManager.DATA_STATE_MACHINESTATUS_COOLANT:
-			adapter.UpdateThird(STATE_MACHINESTATUS_LOWER, ParentActivity.getResources().getString(string.Coolant_Temp));
+			adapter.UpdateThird(STATE_MACHINESTATUS_LOWER, getString(ParentActivity.getResources().getString(string.Coolant_Temp), 115));
 			break;
 		case CAN1CommManager.DATA_STATE_MACHINESTATUS_TMOIL:
-			adapter.UpdateThird(STATE_MACHINESTATUS_LOWER, ParentActivity.getResources().getString(string.TM_Oil_Temp));
+			adapter.UpdateThird(STATE_MACHINESTATUS_LOWER, getString(ParentActivity.getResources().getString(string.TM_Oil_Temp), 112));
 			break;
 		case CAN1CommManager.DATA_STATE_MACHINESTATUS_WEIGHING:
-			adapter.UpdateThird(STATE_MACHINESTATUS_LOWER, ParentActivity.getResources().getString(string.Weighing_System));
+			adapter.UpdateThird(STATE_MACHINESTATUS_LOWER, getString(ParentActivity.getResources().getString(string.Weighing_System), 114));
 			break;
 		case CAN1CommManager.DATA_STATE_MACHINESTATUS_FRONTAXLE:
-			adapter.UpdateThird(STATE_MACHINESTATUS_LOWER, ParentActivity.getResources().getString(string.Front_Axle_Temp));
+			adapter.UpdateThird(STATE_MACHINESTATUS_LOWER, getString(ParentActivity.getResources().getString(string.Front_Axle_Temp), 144));
 			break;
 		case CAN1CommManager.DATA_STATE_MACHINESTATUS_REARAXLE:
-			adapter.UpdateThird(STATE_MACHINESTATUS_LOWER, ParentActivity.getResources().getString(string.Rear_Axle_Temp));
+			adapter.UpdateThird(STATE_MACHINESTATUS_LOWER, getString(ParentActivity.getResources().getString(string.Rear_Axle_Temp), 145));
 			break;
 		default:
 			break;
@@ -1919,23 +1919,23 @@ public class UserSwitching extends ParentFragment{
 		// ++, 150212 bwk
 		switch (SettingData) {
 			case Home.STATE_DISPLAY_LANGUAGE_KOREAN:
-				adapter.UpdateSecond(STATE_LANGUAGE, ParentActivity.getResources().getString(string.Korean));
+				adapter.UpdateSecond(STATE_LANGUAGE, getString(ParentActivity.getResources().getString(string.Korean), 432));
 				break;
 			case Home.STATE_DISPLAY_LANGUAGE_ENGLISH:
-				adapter.UpdateSecond(STATE_LANGUAGE, ParentActivity.getResources().getString(string.English));
+				adapter.UpdateSecond(STATE_LANGUAGE, getString(ParentActivity.getResources().getString(string.English), 433));
 				break;
 			// ++, 150225 bwk
 			case Home.STATE_DISPLAY_LANGUAGE_GERMAN:
-				adapter.UpdateSecond(STATE_LANGUAGE, ParentActivity.getResources().getString(string.German));
+				adapter.UpdateSecond(STATE_LANGUAGE, getString(ParentActivity.getResources().getString(string.German), 434));
 				break;
 			case Home.STATE_DISPLAY_LANGUAGE_FRENCH:
-				adapter.UpdateSecond(STATE_LANGUAGE, ParentActivity.getResources().getString(string.French));
+				adapter.UpdateSecond(STATE_LANGUAGE, getString(ParentActivity.getResources().getString(string.French), 435));
 				break;
 			case Home.STATE_DISPLAY_LANGUAGE_SPANISH:
-				adapter.UpdateSecond(STATE_LANGUAGE, ParentActivity.getResources().getString(string.Spanish));
+				adapter.UpdateSecond(STATE_LANGUAGE, getString(ParentActivity.getResources().getString(string.Spanish), 436));
 				break;
 			case Home.STATE_DISPLAY_LANGUAGE_PORTUGUE:
-				adapter.UpdateSecond(STATE_LANGUAGE, ParentActivity.getResources().getString(string.Portuguese));
+				adapter.UpdateSecond(STATE_LANGUAGE, getString(ParentActivity.getResources().getString(string.Portuguese), 437));
 				break;
 //			case Home.STATE_DISPLAY_LANGUAGE_CHINESE:
 //				adapter.UpdateSecond(STATE_LANGUAGE, ParentActivity.getResources().getString(string.Chinese));
@@ -1944,22 +1944,22 @@ public class UserSwitching extends ParentFragment{
 //				adapter.UpdateSecond(STATE_LANGUAGE, ParentActivity.getResources().getString(string.Russian));
 //				break;
 			case Home.STATE_DISPLAY_LANGUAGE_ITALIAN:
-				adapter.UpdateSecond(STATE_LANGUAGE, ParentActivity.getResources().getString(string.Italian));
+				adapter.UpdateSecond(STATE_LANGUAGE, getString(ParentActivity.getResources().getString(string.Italian), 438));
 				break;
 			case Home.STATE_DISPLAY_LANGUAGE_NEDERLAND:
-				adapter.UpdateSecond(STATE_LANGUAGE, ParentActivity.getResources().getString(string.Dutch));
+				adapter.UpdateSecond(STATE_LANGUAGE, getString(ParentActivity.getResources().getString(string.Dutch), 439));
 				break;
 			case Home.STATE_DISPLAY_LANGUAGE_SWEDISH:
-				adapter.UpdateSecond(STATE_LANGUAGE, ParentActivity.getResources().getString(string.Swedish));
+				adapter.UpdateSecond(STATE_LANGUAGE, getString(ParentActivity.getResources().getString(string.Swedish), 440));
 				break;
 			case Home.STATE_DISPLAY_LANGUAGE_TURKISH:
-				adapter.UpdateSecond(STATE_LANGUAGE, ParentActivity.getResources().getString(string.Turkish));
+				adapter.UpdateSecond(STATE_LANGUAGE, getString(ParentActivity.getResources().getString(string.Turkish), 441));
 				break;
 			case Home.STATE_DISPLAY_LANGUAGE_SLOVAKIAN:
-				adapter.UpdateSecond(STATE_LANGUAGE, ParentActivity.getResources().getString(string.Slovakian));
+				adapter.UpdateSecond(STATE_LANGUAGE, getString(ParentActivity.getResources().getString(string.Slovakian), 442));
 				break;
 			case Home.STATE_DISPLAY_LANGUAGE_ESTONIAN:
-				adapter.UpdateSecond(STATE_LANGUAGE, ParentActivity.getResources().getString(string.Estonian));
+				adapter.UpdateSecond(STATE_LANGUAGE, getString(ParentActivity.getResources().getString(string.Estonian), 443));
 				break;
 //			case Home.STATE_DISPLAY_LANGUAGE_THAILAND:
 //				adapter.UpdateSecond(STATE_LANGUAGE, ParentActivity.getResources().getString(string.Thai));
@@ -1980,16 +1980,16 @@ public class UserSwitching extends ParentFragment{
 //				adapter.UpdateSecond(STATE_LANGUAGE, ParentActivity.getResources().getString(string.Indonesian));
 //				break;
 			case Home.STATE_DISPLAY_LANGUAGE_FINNISH:
-				adapter.UpdateSecond(STATE_LANGUAGE, ParentActivity.getResources().getString(string.Finnish));
+				adapter.UpdateSecond(STATE_LANGUAGE, getString(ParentActivity.getResources().getString(string.Finnish), 444));
 				break;
 			// --, 150225 bwk
 		}
 		switch (LoadingData) {
 		case Home.STATE_DISPLAY_LANGUAGE_KOREAN:
-			adapter.UpdateThird(STATE_LANGUAGE, ParentActivity.getResources().getString(string.Korean));
+			adapter.UpdateThird(STATE_LANGUAGE, getString(ParentActivity.getResources().getString(string.Korean), 432));
 			break;
 		case Home.STATE_DISPLAY_LANGUAGE_ENGLISH:
-			adapter.UpdateThird(STATE_LANGUAGE, ParentActivity.getResources().getString(string.English));
+			adapter.UpdateThird(STATE_LANGUAGE, getString(ParentActivity.getResources().getString(string.English), 433));
 			break;
 		}
 		// --, 150212 bwk
@@ -2007,20 +2007,20 @@ public class UserSwitching extends ParentFragment{
 	public void SoundOutputDisplay(int SettingData, int LoadingData){
 		switch (SettingData) {
 		case Home.STATE_INTERNAL_SPK:
-			adapter.UpdateSecond(STATE_SOUNDOUTPUT, ParentActivity.getResources().getString(string.Internal_Speaker));
+			adapter.UpdateSecond(STATE_SOUNDOUTPUT, getString(ParentActivity.getResources().getString(string.Internal_Speaker), 420));
 			break;
 		case Home.STATE_EXTERNAL_AUX:
-			adapter.UpdateSecond(STATE_SOUNDOUTPUT, ParentActivity.getResources().getString(string.External_Aux));
+			adapter.UpdateSecond(STATE_SOUNDOUTPUT, getString(ParentActivity.getResources().getString(string.External_Aux), 421));
 			break;
 		default:
 			break;
 		}
 		switch (LoadingData) {
 		case Home.STATE_INTERNAL_SPK:
-			adapter.UpdateThird(STATE_SOUNDOUTPUT, ParentActivity.getResources().getString(string.Internal_Speaker));
+			adapter.UpdateThird(STATE_SOUNDOUTPUT, getString(ParentActivity.getResources().getString(string.Internal_Speaker), 420));
 			break;
 		case Home.STATE_EXTERNAL_AUX:
-			adapter.UpdateThird(STATE_SOUNDOUTPUT, ParentActivity.getResources().getString(string.External_Aux));
+			adapter.UpdateThird(STATE_SOUNDOUTPUT, getString(ParentActivity.getResources().getString(string.External_Aux), 421));
 			break;
 		default:
 			break;
@@ -2039,13 +2039,13 @@ public class UserSwitching extends ParentFragment{
 			adapter.UpdateSecond(STATE_OPERATION_HISTORY, "-");
 			break;
 		case CAN1CommManager.DATA_STATE_HOURMETER_LATEST:
-			adapter.UpdateSecond(STATE_OPERATION_HISTORY, ParentActivity.getResources().getString(string.Latest_Hourmeter));
+			adapter.UpdateSecond(STATE_OPERATION_HISTORY, getString(ParentActivity.getResources().getString(string.Latest_Hourmeter), 107));
 			break;
 		case CAN1CommManager.DATA_STATE_ODOMETER_TOTAL:
-			adapter.UpdateSecond(STATE_OPERATION_HISTORY, ParentActivity.getResources().getString(string.Total_Odometer));
+			adapter.UpdateSecond(STATE_OPERATION_HISTORY, getString(ParentActivity.getResources().getString(string.Total_Odometer), 109));
 			break;
 		case CAN1CommManager.DATA_STATE_ODOMETER_LATEST:
-			adapter.UpdateSecond(STATE_OPERATION_HISTORY, ParentActivity.getResources().getString(string.Latest_Odometer));
+			adapter.UpdateSecond(STATE_OPERATION_HISTORY, getString(ParentActivity.getResources().getString(string.Latest_Odometer), 110));
 			break;
 		default:
 			break;
@@ -2055,13 +2055,13 @@ public class UserSwitching extends ParentFragment{
 			adapter.UpdateThird(STATE_OPERATION_HISTORY, "-");
 			break;
 		case CAN1CommManager.DATA_STATE_HOURMETER_LATEST:
-			adapter.UpdateThird(STATE_OPERATION_HISTORY, ParentActivity.getResources().getString(string.Latest_Hourmeter));
+			adapter.UpdateThird(STATE_OPERATION_HISTORY, getString(ParentActivity.getResources().getString(string.Latest_Hourmeter), 107));
 			break;
 		case CAN1CommManager.DATA_STATE_ODOMETER_TOTAL:
-			adapter.UpdateThird(STATE_OPERATION_HISTORY, ParentActivity.getResources().getString(string.Total_Odometer));
+			adapter.UpdateThird(STATE_OPERATION_HISTORY, getString(ParentActivity.getResources().getString(string.Total_Odometer), 109));
 			break;
 		case CAN1CommManager.DATA_STATE_ODOMETER_LATEST:
-			adapter.UpdateThird(STATE_OPERATION_HISTORY, ParentActivity.getResources().getString(string.Latest_Odometer));
+			adapter.UpdateThird(STATE_OPERATION_HISTORY, getString(ParentActivity.getResources().getString(string.Latest_Odometer), 110));
 			break;
 		default:
 			break;
@@ -2081,10 +2081,10 @@ public class UserSwitching extends ParentFragment{
 			adapter.UpdateSecond(STATE_FUEL_INFO, "-");
 			break;
 		case CAN1CommManager.DATA_STATE_AVERAGE_FUEL_RATE:
-			adapter.UpdateSecond(STATE_FUEL_INFO, ParentActivity.getResources().getString(string.Average_Fuel_Rate));
+			adapter.UpdateSecond(STATE_FUEL_INFO, getString(ParentActivity.getResources().getString(string.Average_Fuel_Rate), 108));
 			break;
 		case CAN1CommManager.DATA_STATE_A_DAYS_FUEL_USED:
-			adapter.UpdateSecond(STATE_FUEL_INFO, ParentActivity.getResources().getString(string.A_Days_Fuel_Used));
+			adapter.UpdateSecond(STATE_FUEL_INFO, getString(ParentActivity.getResources().getString(string.A_Days_Fuel_Used), 147));
 			break;
 		default:
 			break;
@@ -2094,10 +2094,10 @@ public class UserSwitching extends ParentFragment{
 			adapter.UpdateThird(STATE_FUEL_INFO, "-");
 			break;
 		case CAN1CommManager.DATA_STATE_AVERAGE_FUEL_RATE:
-			adapter.UpdateThird(STATE_FUEL_INFO, ParentActivity.getResources().getString(string.Average_Fuel_Rate));
+			adapter.UpdateThird(STATE_FUEL_INFO, getString(ParentActivity.getResources().getString(string.Average_Fuel_Rate), 108));
 			break;
 		case CAN1CommManager.DATA_STATE_A_DAYS_FUEL_USED:
-			adapter.UpdateThird(STATE_FUEL_INFO, ParentActivity.getResources().getString(string.A_Days_Fuel_Used));
+			adapter.UpdateThird(STATE_FUEL_INFO, getString(ParentActivity.getResources().getString(string.A_Days_Fuel_Used), 147));
 			break;
 		default:
 			break;
@@ -2115,20 +2115,20 @@ public class UserSwitching extends ParentFragment{
 		
 		switch (SettingData) {
 		case CAN1CommManager.DATA_STATE_KEY_DETENT_BOOM_OFF:
-			adapter.UpdateSecond(STATE_BOOM_DETENT_MODE, ParentActivity.getResources().getString(string.Off));
+			adapter.UpdateSecond(STATE_BOOM_DETENT_MODE, getString(ParentActivity.getResources().getString(string.Off), 20));
 			break;
 		case CAN1CommManager.DATA_STATE_KEY_DETENT_BOOM_UPDOWN:
-			adapter.UpdateSecond(STATE_BOOM_DETENT_MODE, ParentActivity.getResources().getString(string.On));
+			adapter.UpdateSecond(STATE_BOOM_DETENT_MODE, getString(ParentActivity.getResources().getString(string.On), 19));
 			break;
 		default:
 			break;
 		}
 		switch (LoadingData) {
 		case CAN1CommManager.DATA_STATE_KEY_DETENT_BOOM_OFF:
-			adapter.UpdateThird(STATE_BOOM_DETENT_MODE, ParentActivity.getResources().getString(string.Off));
+			adapter.UpdateThird(STATE_BOOM_DETENT_MODE, getString(ParentActivity.getResources().getString(string.Off), 20));
 			break;
 		case CAN1CommManager.DATA_STATE_KEY_DETENT_BOOM_UPDOWN:
-			adapter.UpdateThird(STATE_BOOM_DETENT_MODE, ParentActivity.getResources().getString(string.On));
+			adapter.UpdateThird(STATE_BOOM_DETENT_MODE, getString(ParentActivity.getResources().getString(string.On), 19));
 			break;
 		default:
 			break;
@@ -2146,20 +2146,20 @@ public class UserSwitching extends ParentFragment{
 		
 		switch (SettingData) {
 		case CAN1CommManager.DATA_STATE_KEY_DETENT_BUCKET_OFF:
-			adapter.UpdateSecond(STATE_BUCKET_DETENT_MODE, ParentActivity.getResources().getString(string.Off));
+			adapter.UpdateSecond(STATE_BUCKET_DETENT_MODE, getString(ParentActivity.getResources().getString(string.Off), 20));
 			break;
 		case CAN1CommManager.DATA_STATE_KEY_DETENT_BUCKET_IN:
-			adapter.UpdateSecond(STATE_BUCKET_DETENT_MODE, ParentActivity.getResources().getString(string.On));
+			adapter.UpdateSecond(STATE_BUCKET_DETENT_MODE, getString(ParentActivity.getResources().getString(string.On), 19));
 			break;
 		default:
 			break;
 		}
 		switch (LoadingData) {
 		case CAN1CommManager.DATA_STATE_KEY_DETENT_BUCKET_OFF:
-			adapter.UpdateThird(STATE_BUCKET_DETENT_MODE, ParentActivity.getResources().getString(string.Off));
+			adapter.UpdateThird(STATE_BUCKET_DETENT_MODE, getString(ParentActivity.getResources().getString(string.Off), 20));
 			break;
 		case CAN1CommManager.DATA_STATE_KEY_DETENT_BUCKET_IN:
-			adapter.UpdateThird(STATE_BUCKET_DETENT_MODE, ParentActivity.getResources().getString(string.On));
+			adapter.UpdateThird(STATE_BUCKET_DETENT_MODE, getString(ParentActivity.getResources().getString(string.On), 19));
 			break;
 		default:
 			break;

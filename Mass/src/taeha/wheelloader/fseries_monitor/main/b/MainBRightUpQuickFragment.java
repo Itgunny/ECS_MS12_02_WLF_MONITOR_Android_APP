@@ -13,6 +13,7 @@ import taeha.wheelloader.fseries_monitor.main.CAN1CommManager;
 import taeha.wheelloader.fseries_monitor.main.Home;
 import taeha.wheelloader.fseries_monitor.main.ParentFragment;
 import taeha.wheelloader.fseries_monitor.main.R;
+import taeha.wheelloader.fseries_monitor.main.TextFitTextView;
 
 public class MainBRightUpQuickFragment extends ParentFragment{
 	//CONSTANT////////////////////////////////////////
@@ -23,7 +24,7 @@ public class MainBRightUpQuickFragment extends ParentFragment{
 	
 	ImageView imgViewIcon;
 	
-	TextView textViewTitle;
+	TextFitTextView textViewTitle;
 	//////////////////////////////////////////////////
 	
 	//VALUABLE////////////////////////////////////////
@@ -63,7 +64,8 @@ public class MainBRightUpQuickFragment extends ParentFragment{
 		
 		imgViewIcon = (ImageView)mRoot.findViewById(R.id.imageView_rightup_main_b_quick_icon);
 
-		textViewTitle = (TextView)mRoot.findViewById(R.id.textView_rightup_main_b_quick_title);
+		textViewTitle = (TextFitTextView)mRoot.findViewById(R.id.textView_rightup_main_b_quick_title);
+		textViewTitle.setText(getString(ParentActivity.getResources().getString(R.string.Active_Fault), 17));
 		
 	}
 	

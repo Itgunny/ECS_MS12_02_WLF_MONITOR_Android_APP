@@ -4,6 +4,7 @@ import taeha.wheelloader.fseries_monitor.main.CAN1CommManager;
 import taeha.wheelloader.fseries_monitor.main.Home;
 import taeha.wheelloader.fseries_monitor.main.ParentPopup;
 import taeha.wheelloader.fseries_monitor.main.R;
+import taeha.wheelloader.fseries_monitor.main.TextFitTextView;
 import android.content.Context;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
@@ -17,10 +18,11 @@ public class CCOModePopup extends ParentPopup{
 
 	//////////////////////////////////////////////////
 	//RESOURCE////////////////////////////////////////
-	TextView textViewOff;
-	TextView textViewL;
-	TextView textViewM;
-	TextView textViewH;
+	TextFitTextView textViewTitle;
+	TextFitTextView textViewOff;
+	TextFitTextView textViewL;
+	TextFitTextView textViewM;
+	TextFitTextView textViewH;
 	//////////////////////////////////////////////////
 	
 	//VALUABLE////////////////////////////////////////
@@ -71,10 +73,16 @@ public class CCOModePopup extends ParentPopup{
 	@Override
 	protected void InitResource() {
 		// TODO Auto-generated method stub
-		textViewOff = (TextView)mRoot.findViewById(R.id.textView_popup_ccomode_off);
-		textViewL = (TextView)mRoot.findViewById(R.id.textView_popup_ccomode_L);
-		textViewM = (TextView)mRoot.findViewById(R.id.textView_popup_ccomode_M);
-		textViewH = (TextView)mRoot.findViewById(R.id.textView_popup_ccomode_H);
+		textViewTitle = (TextFitTextView)mRoot.findViewById(R.id.textView_popup_ccomode_title);
+		textViewTitle.setText(getString(ParentActivity.getResources().getString(R.string.CCO_Mode), 204));
+		textViewOff = (TextFitTextView)mRoot.findViewById(R.id.textView_popup_ccomode_off);
+		textViewOff.setText(getString(ParentActivity.getResources().getString(R.string.Off), 20));
+		textViewL = (TextFitTextView)mRoot.findViewById(R.id.textView_popup_ccomode_L);
+		textViewL.setText(getString(ParentActivity.getResources().getString(R.string.L), 99));
+		textViewM = (TextFitTextView)mRoot.findViewById(R.id.textView_popup_ccomode_M);
+		textViewM.setText(getString(ParentActivity.getResources().getString(R.string.M), 100));
+		textViewH = (TextFitTextView)mRoot.findViewById(R.id.textView_popup_ccomode_H);
+		textViewH.setText(getString(ParentActivity.getResources().getString(R.string.H), 101));
 	}
 
 	@Override

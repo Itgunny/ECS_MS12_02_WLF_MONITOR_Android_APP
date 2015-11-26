@@ -3,6 +3,7 @@ package taeha.wheelloader.fseries_monitor.main.b.key;
 import taeha.wheelloader.fseries_monitor.main.CAN1CommManager;
 import taeha.wheelloader.fseries_monitor.main.ParentFragment;
 import taeha.wheelloader.fseries_monitor.main.R;
+import taeha.wheelloader.fseries_monitor.main.TextFitTextView;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -18,8 +19,10 @@ public class MainBKeyMirrorHeatFragment extends ParentFragment{
 	
 	//////////////////////////////////////////////////
 	//RESOURCE////////////////////////////////////////
-	TextView textViewOK;
-	TextView textViewCancel;
+	TextFitTextView textViewOK;
+	TextFitTextView textViewCancel;
+	TextFitTextView textViewTitle;
+	TextFitTextView textViewNotTitle;
 	RelativeLayout	layoutAvailable;
 	RelativeLayout	layoutNotAvailable;
 	//////////////////////////////////////////////////
@@ -70,9 +73,15 @@ public class MainBKeyMirrorHeatFragment extends ParentFragment{
 	@Override
 	protected void InitResource() {
 		// TODO Auto-generated method stub		
-		textViewOK = (TextView)mRoot.findViewById(R.id.textView_key_main_b_mirrorheat_ok);
-		textViewCancel = (TextView)mRoot.findViewById(R.id.textView_key_main_b_mirrorheat_cancel);
+		textViewOK = (TextFitTextView)mRoot.findViewById(R.id.textView_key_main_b_mirrorheat_ok);
+		textViewOK.setText(getString(ParentActivity.getResources().getString(R.string.OK), 15));
+		textViewCancel = (TextFitTextView)mRoot.findViewById(R.id.textView_key_main_b_mirrorheat_cancel);
+		textViewCancel.setText(getString(ParentActivity.getResources().getString(R.string.Cancel), 16));
+		textViewTitle = (TextFitTextView)mRoot.findViewById(R.id.textView_key_main_b_mirrorheat_title);
+		textViewTitle.setText(getString(ParentActivity.getResources().getString(R.string.Do_you_want_to_turn_on_Mirror_Heat), 186));
 
+		textViewNotTitle = (TextFitTextView)mRoot.findViewById(R.id.textView_key_main_b_mirrorheat_notavailable_title); 
+		textViewNotTitle.setText(getString(ParentActivity.getResources().getString(R.string.Mirror_Heat_is_NOT_equipped), 192));
 		layoutAvailable = (RelativeLayout)mRoot.findViewById(R.id.RelativeLayout_key_main_b_mirrorheat_available);
 		layoutNotAvailable = (RelativeLayout)mRoot.findViewById(R.id.RelativeLayout_key_main_b_mirrorheat_notavailable);
 	}

@@ -18,6 +18,8 @@ import taeha.wheelloader.fseries_monitor.main.Home;
 import taeha.wheelloader.fseries_monitor.main.MainBBaseFragment;
 import taeha.wheelloader.fseries_monitor.main.ParentFragment;
 import taeha.wheelloader.fseries_monitor.main.R;
+import taeha.wheelloader.fseries_monitor.main.TextFitTextView;
+import taeha.wheelloader.fseries_monitor.main.R.string;
 
 public class MainAUpperMenuBarFragment extends ParentFragment{
 	//CONSTANT////////////////////////////////////////
@@ -25,11 +27,11 @@ public class MainAUpperMenuBarFragment extends ParentFragment{
 	//////////////////////////////////////////////////
 	//RESOURCE////////////////////////////////////////
 	// Upper
-	TextView textViewTimeAM;
-	TextView textViewTimePM;
-	TextView textViewTimeHour;
+	TextFitTextView textViewTimeAM;
+	TextFitTextView textViewTimePM;
+	TextFitTextView textViewTimeHour;
 	TextView textViewTimeColon;
-	TextView textViewTimeMin;
+	TextFitTextView textViewTimeMin;
 	
 	ImageButton imgbtnTime;
 	
@@ -114,11 +116,14 @@ public class MainAUpperMenuBarFragment extends ParentFragment{
 	@Override
 	protected void InitResource() {
 		// TODO Auto-generated method stub
-		textViewTimeAM = (TextView)mRoot.findViewById(R.id.textView_upper_main_a_menubar_time_am);
-		textViewTimePM = (TextView)mRoot.findViewById(R.id.textView_upper_main_a_menubar_time_pm);
-		textViewTimeHour = (TextView)mRoot.findViewById(R.id.textView_upper_main_a_menubar_time_hour);
+		textViewTimeAM = (TextFitTextView)mRoot.findViewById(R.id.textView_upper_main_a_menubar_time_am);
+		textViewTimeAM.setText(getString(ParentActivity.getResources().getString(string.AM), 13));
+		textViewTimePM = (TextFitTextView)mRoot.findViewById(R.id.textView_upper_main_a_menubar_time_pm);
+		textViewTimePM.setText(getString(ParentActivity.getResources().getString(string.PM), 14));
+		
+		textViewTimeHour = (TextFitTextView)mRoot.findViewById(R.id.textView_upper_main_a_menubar_time_hour);
 		textViewTimeColon = (TextView)mRoot.findViewById(R.id.textView_upper_main_a_menubar_time_colon);
-		textViewTimeMin = (TextView)mRoot.findViewById(R.id.textView_upper_main_a_menubar_time_min);
+		textViewTimeMin = (TextFitTextView)mRoot.findViewById(R.id.textView_upper_main_a_menubar_time_min);
 		
 		imgbtnTime = (ImageButton)mRoot.findViewById(R.id.imageButton_upper_main_a_menubar_time);
 		

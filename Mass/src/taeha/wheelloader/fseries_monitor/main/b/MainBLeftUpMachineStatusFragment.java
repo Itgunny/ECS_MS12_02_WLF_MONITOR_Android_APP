@@ -23,6 +23,7 @@ import taeha.wheelloader.fseries_monitor.main.R;
 import taeha.wheelloader.fseries_monitor.main.LongPressChecker.OnLongPressListener;
 import taeha.wheelloader.fseries_monitor.main.R.color;
 import taeha.wheelloader.fseries_monitor.main.R.string;
+import taeha.wheelloader.fseries_monitor.main.TextFitTextView;
 import taeha.wheelloader.fseries_monitor.main.a.MainALeftUpMachineStatusSelectFragment1;
 import taeha.wheelloader.fseries_monitor.main.a.MainALeftUpMachineStatusSelectFragment2;
 
@@ -41,14 +42,14 @@ public class MainBLeftUpMachineStatusFragment extends ParentFragment{
 	RelativeLayout LayoutWeighingUpper;
 	RelativeLayout LayoutWeighingLower;
 	
-	TextView textViewNormalUpperData;
-	TextView textViewNormalUpperUnit;
-	TextView textViewNormalLowerData;
-	TextView textViewNormalLowerUnit;
-	TextView textViewWeighingUpperData;
-	TextView textViewWeighingUpperUnit;
-	TextView textViewWeighingLowerData;
-	TextView textViewWeighingLowerUnit;
+	TextFitTextView textViewNormalUpperData;
+	TextFitTextView textViewNormalUpperUnit;
+	TextFitTextView textViewNormalLowerData;
+	TextFitTextView textViewNormalLowerUnit;
+	TextFitTextView textViewWeighingUpperData;
+	TextFitTextView textViewWeighingUpperUnit;
+	TextFitTextView textViewWeighingLowerData;
+	TextFitTextView textViewWeighingLowerUnit;
 	
 	ImageView imgViewNormalUpperIcon;
 	ImageView imgViewNormalLowerIcon;
@@ -149,14 +150,14 @@ public class MainBLeftUpMachineStatusFragment extends ParentFragment{
 		LayoutWeighingUpper = (RelativeLayout)mRoot.findViewById(R.id.RelativeLayout_leftup_main_b_machinestatus_weighing_upper);
 		LayoutWeighingLower = (RelativeLayout)mRoot.findViewById(R.id.RelativeLayout_leftup_main_b_machinestatus_weighing_lower);
 		
-		textViewNormalUpperData = (TextView)mRoot.findViewById(R.id.textView_leftup_machinestatus_normal_upper_data);
-		textViewNormalUpperUnit = (TextView)mRoot.findViewById(R.id.textView_leftup_machinestatus_normal_upper_unit);
-		textViewNormalLowerData = (TextView)mRoot.findViewById(R.id.textView_leftup_machinestatus_normal_lower_data);
-		textViewNormalLowerUnit = (TextView)mRoot.findViewById(R.id.textView_leftup_machinestatus_normal_lower_unit);
-		textViewWeighingUpperData = (TextView)mRoot.findViewById(R.id.textView_leftup_machinestatus_weighing_upper_data);
-		textViewWeighingUpperUnit = (TextView)mRoot.findViewById(R.id.textView_leftup_machinestatus_weighing_upper_unit);
-		textViewWeighingLowerData = (TextView)mRoot.findViewById(R.id.textView_leftup_machinestatus_weighing_lower_data);
-		textViewWeighingLowerUnit = (TextView)mRoot.findViewById(R.id.textView_leftup_machinestatus_weighing_lower_unit);
+		textViewNormalUpperData = (TextFitTextView)mRoot.findViewById(R.id.textView_leftup_machinestatus_normal_upper_data);
+		textViewNormalUpperUnit = (TextFitTextView)mRoot.findViewById(R.id.textView_leftup_machinestatus_normal_upper_unit);
+		textViewNormalLowerData = (TextFitTextView)mRoot.findViewById(R.id.textView_leftup_machinestatus_normal_lower_data);
+		textViewNormalLowerUnit = (TextFitTextView)mRoot.findViewById(R.id.textView_leftup_machinestatus_normal_lower_unit);
+		textViewWeighingUpperData = (TextFitTextView)mRoot.findViewById(R.id.textView_leftup_machinestatus_weighing_upper_data);
+		textViewWeighingUpperUnit = (TextFitTextView)mRoot.findViewById(R.id.textView_leftup_machinestatus_weighing_upper_unit);
+		textViewWeighingLowerData = (TextFitTextView)mRoot.findViewById(R.id.textView_leftup_machinestatus_weighing_lower_data);
+		textViewWeighingLowerUnit = (TextFitTextView)mRoot.findViewById(R.id.textView_leftup_machinestatus_weighing_lower_unit);
 		
 		imgViewNormalUpperIcon = (ImageView)mRoot.findViewById(R.id.imageView_leftup_machinestatus_normal_upper_icon);
 		imgViewNormalLowerIcon = (ImageView)mRoot.findViewById(R.id.imageView_leftup_machinestatus_normal_lower_icon);
@@ -183,7 +184,7 @@ public class MainBLeftUpMachineStatusFragment extends ParentFragment{
 		
 		// ++, 150212 bwk
 		popupIndicator = new QuickAction(ParentActivity, QuickAction.VERTICAL);
-		actionitemIndicator = new ActionItem(0, ParentActivity.getResources().getString(R.string.Bucket_Full_In_Error_Warning), getResources().getDrawable(R.drawable.main_default_monitoring_icon_fullin));
+		actionitemIndicator = new ActionItem(0, getString(ParentActivity.getResources().getString(R.string.Bucket_Full_In_Error_Warning), 139), getResources().getDrawable(R.drawable.main_default_monitoring_icon_fullin));
 		popupIndicator.addActionItem(actionitemIndicator);		
 		// --, 150212 bwk
 		
@@ -576,25 +577,25 @@ public class MainBLeftUpMachineStatusFragment extends ParentFragment{
 	public void HYDDisplay(TextView textData, TextView textUnit, int Data, int Unit){
 		textData.setText(ParentActivity.GetTemp(Data,Unit));
 		if(Unit == ParentActivity.UNIT_TEMP_F){
-			textUnit.setText(ParentActivity.getResources().getString(string.F));
+			textUnit.setText(getString(ParentActivity.getResources().getString(string.F), 9));
 		}else{
-			textUnit.setText(ParentActivity.getResources().getString(string.C));
+			textUnit.setText(getString(ParentActivity.getResources().getString(string.C), 8));
 		}
 	}
 	public void TMOilDisplay(TextView textData, TextView textUnit, int Data, int Unit){
 		textData.setText(ParentActivity.GetTemp(Data,Unit));
 		if(Unit == ParentActivity.UNIT_TEMP_F){
-			textUnit.setText(ParentActivity.getResources().getString(string.F));
+			textUnit.setText(getString(ParentActivity.getResources().getString(string.F), 9));
 		}else{
-			textUnit.setText(ParentActivity.getResources().getString(string.C));
+			textUnit.setText(getString(ParentActivity.getResources().getString(string.C), 8));
 		}
 	}
 	public void CoolantDisplay(TextView textData, TextView textUnit, int Data, int Unit){
 		textData.setText(ParentActivity.GetTemp(Data,Unit));
 		if(Unit == ParentActivity.UNIT_TEMP_F){
-			textUnit.setText(ParentActivity.getResources().getString(string.F));
+			textUnit.setText(getString(ParentActivity.getResources().getString(string.F), 9));
 		}else{
-			textUnit.setText(ParentActivity.getResources().getString(string.C));
+			textUnit.setText(getString(ParentActivity.getResources().getString(string.C), 8));
 		}
 	}
 	public void BatteryDisplay(TextView textData, TextView textUnit, int Data){
@@ -605,9 +606,9 @@ public class MainBLeftUpMachineStatusFragment extends ParentFragment{
 	public void AxleDisplay(TextView textData, TextView textUnit, int Data, int Unit){
 		textData.setText(ParentActivity.GetTempAxle(Data,Unit));
 		if(Unit == ParentActivity.UNIT_TEMP_F){
-			textUnit.setText(ParentActivity.getResources().getString(string.F));
+			textUnit.setText(getString(ParentActivity.getResources().getString(string.F), 9));
 		}else{
-			textUnit.setText(ParentActivity.getResources().getString(string.C));
+			textUnit.setText(getString(ParentActivity.getResources().getString(string.C), 8));
 		}
 	}
 	// --, 150327 bwk
@@ -871,19 +872,20 @@ public class MainBLeftUpMachineStatusFragment extends ParentFragment{
 		popupIndicator.removeAllActionItem();
 		switch (Index) {
 		case DATA_STATE_CURRENT_WEIHGING_RESULT_HYDRAULICOILTEMP:
-			actionitemIndicator = new ActionItem(0, ParentActivity.getResources().getString(R.string.Hydraulic_Oil_Temp_Low_Warning));
+			actionitemIndicator = new ActionItem(0, getString(ParentActivity.getResources().getString(R.string.Hydraulic_Oil_Temp_Low_Warning), 141));
 			popupIndicator.addActionItem(actionitemIndicator);
 			break;
 		case DATA_STATE_CURRENT_WEIHGING_RESULT_BOOMLIFTING_BUCKETFULLIN:
-			actionitemIndicator = new ActionItem(0, ParentActivity.getResources().getString(R.string.Sudden_Change_Error_Warning)+"\n"+ParentActivity.getResources().getString(R.string.Bucket_Full_In_Error_Warning));
+			actionitemIndicator = new ActionItem(0, getString(ParentActivity.getResources().getString(R.string.Sudden_Change_Error_Warning), 140)+"\n"+
+								getString(ParentActivity.getResources().getString(R.string.Bucket_Full_In_Error_Warning), 139));
 			popupIndicator.addActionItem(actionitemIndicator);
 			break;
 		case DATA_STATE_CURRENT_WEIHGING_RESULT_BOOMLIFTING:
-			actionitemIndicator = new ActionItem(0, ParentActivity.getResources().getString(R.string.Sudden_Change_Error_Warning));
+			actionitemIndicator = new ActionItem(0, getString(ParentActivity.getResources().getString(R.string.Sudden_Change_Error_Warning), 140));
 			popupIndicator.addActionItem(actionitemIndicator);
 			break;
 		case DATA_STATE_CURRENT_WEIHGING_RESULT_BUCKETFULLIN:
-			actionitemIndicator = new ActionItem(0, ParentActivity.getResources().getString(R.string.Bucket_Full_In_Error_Warning));
+			actionitemIndicator = new ActionItem(0, getString(ParentActivity.getResources().getString(R.string.Bucket_Full_In_Error_Warning), 139));
 			popupIndicator.addActionItem(actionitemIndicator);
 			break;
 		default:

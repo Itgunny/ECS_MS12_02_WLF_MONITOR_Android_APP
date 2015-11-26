@@ -7,6 +7,7 @@ import taeha.wheelloader.fseries_monitor.main.Home;
 import taeha.wheelloader.fseries_monitor.main.ParentPopup;
 import taeha.wheelloader.fseries_monitor.main.R;
 import taeha.wheelloader.fseries_monitor.main.R.string;
+import taeha.wheelloader.fseries_monitor.main.TextFitTextView;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
@@ -28,9 +29,9 @@ public class MultimediaClosePopup extends ParentPopup {
 	ImageButton imgbtnOK;
 	ImageButton imgbtnCancel;
 	
-	public TextView textViewTitle;
-	TextView textViewOK;
-	TextView textViewCancel;
+	TextView textViewTitle;
+	TextFitTextView textViewOK;
+	TextFitTextView textViewCancel;
 	//////////////////////////////////////////////////
 	
 	//VALUABLE////////////////////////////////////////
@@ -92,9 +93,13 @@ public class MultimediaClosePopup extends ParentPopup {
 		imgbtnCancel = (ImageButton)mRoot.findViewById(R.id.imageButton_popup_multimedia_close_cancel);
 	
 		textViewTitle = (TextView)mRoot.findViewById(R.id.textView_popup_multimedia_close_title);
+		textViewTitle.setText(getString(ParentActivity.getResources().getString(R.string.CloseMulti), 142));
 
-		textViewOK = (TextView)mRoot.findViewById(R.id.textView_popup_multimedia_close_ok);
-		textViewCancel = (TextView)mRoot.findViewById(R.id.textView_popup_multimedia_close_cancel);
+		textViewOK = (TextFitTextView)mRoot.findViewById(R.id.textView_popup_multimedia_close_ok);
+		textViewOK.setText(getString(ParentActivity.getResources().getString(R.string.OK), 15));
+		
+		textViewCancel = (TextFitTextView)mRoot.findViewById(R.id.textView_popup_multimedia_close_cancel);
+		textViewCancel.setText(getString(ParentActivity.getResources().getString(R.string.Cancel), 16));
 	}
 	@Override
 	protected void InitButtonListener() {
@@ -163,6 +168,11 @@ public class MultimediaClosePopup extends ParentPopup {
 			//CAN1Comm.SetMiracastFlag(true);
 			// --, 150323 bwk				
 			ParentActivity.startActivity(intent);
+			if(CommService.pi != null){
+				if(CommService.pi.versionName.equals("1.0.6BF")){
+					CAN1Comm.setRunningCheckMiracast(true);
+				}					
+			}
 			ParentActivity.StartCheckSmartTerminalTimer();
 		}
 		

@@ -14,6 +14,7 @@ import taeha.wheelloader.fseries_monitor.main.Home;
 import taeha.wheelloader.fseries_monitor.main.LongPressChecker;
 import taeha.wheelloader.fseries_monitor.main.ParentFragment;
 import taeha.wheelloader.fseries_monitor.main.R;
+import taeha.wheelloader.fseries_monitor.main.TextFitTextView;
 import taeha.wheelloader.fseries_monitor.main.R.string;
 import android.view.View.OnTouchListener;
 import taeha.wheelloader.fseries_monitor.main.LongPressChecker.OnLongPressListener;
@@ -23,9 +24,9 @@ public class MainBLeftDownFuelFragment extends ParentFragment{
 	
 	//////////////////////////////////////////////////
 	//RESOURCE////////////////////////////////////////
-	TextView textViewFuelTitle;
-	TextView textViewFuelData;
-	TextView textViewFuelUnit;
+	TextFitTextView textViewFuelTitle;
+	TextFitTextView textViewFuelData;
+	TextFitTextView textViewFuelUnit;
 	
 	ImageButton imgbtnFuel;
 	//////////////////////////////////////////////////
@@ -73,9 +74,9 @@ public class MainBLeftDownFuelFragment extends ParentFragment{
 	@Override
 	protected void InitResource() {
 		// TODO Auto-generated method stub
-		textViewFuelTitle = (TextView)mRoot.findViewById(R.id.textView_leftdown_fuel_title);
-		textViewFuelData = (TextView)mRoot.findViewById(R.id.textView_leftdown_fuel_data);
-		textViewFuelUnit = (TextView)mRoot.findViewById(R.id.textView_leftdown_fuel_unit);
+		textViewFuelTitle = (TextFitTextView)mRoot.findViewById(R.id.textView_leftdown_fuel_title);
+		textViewFuelData = (TextFitTextView)mRoot.findViewById(R.id.textView_leftdown_fuel_data);
+		textViewFuelUnit = (TextFitTextView)mRoot.findViewById(R.id.textView_leftdown_fuel_unit);
 		
 		
 		imgbtnFuel = (ImageButton)mRoot.findViewById(R.id.imageButton_leftdown_fuel);
@@ -166,10 +167,10 @@ public class MainBLeftDownFuelFragment extends ParentFragment{
 //			FuelTitleAnimation.FlipAnimation(textViewFuelTitle,"");
 //			break;
 		case CAN1CommManager.DATA_STATE_AVERAGE_FUEL_RATE:
-			FuelTitleAnimation.FlipAnimation(textViewFuelTitle,getResources().getString(string.AVERAGE_FUEL_RATE));
+			FuelTitleAnimation.FlipAnimation(textViewFuelTitle,getString(getResources().getString(string.AVERAGE_FUEL_RATE), 91));
 			break;
 		case CAN1CommManager.DATA_STATE_A_DAYS_FUEL_USED:
-			FuelTitleAnimation.FlipAnimation(textViewFuelTitle,getResources().getString(string.A_DAYS_FUEL_USED));
+			FuelTitleAnimation.FlipAnimation(textViewFuelTitle,getString(getResources().getString(string.A_DAYS_FUEL_USED), 146));
 			break;
 		default:
 			break;
@@ -184,16 +185,16 @@ public class MainBLeftDownFuelFragment extends ParentFragment{
 		case CAN1CommManager.DATA_STATE_AVERAGE_FUEL_RATE:
 			textViewFuelData.setText(ParentActivity.GetFuelRateString(AverageFuel, ParentActivity.UnitFuel));
 			if(ParentActivity.UnitFuel == Home.UNIT_FUEL_GAL)
-				textViewFuelUnit.setText(ParentActivity.getResources().getString(string.gal_h));
+				textViewFuelUnit.setText(getString(ParentActivity.getResources().getString(string.gal_h), 465));
 			else
-				textViewFuelUnit.setText(ParentActivity.getResources().getString(string.l_h));
+				textViewFuelUnit.setText(getString(ParentActivity.getResources().getString(string.l_h), 33));
 			break;
 		case CAN1CommManager.DATA_STATE_A_DAYS_FUEL_USED:
 			textViewFuelData.setText(ParentActivity.GetFuelRateString(LatestConsumed, ParentActivity.UnitFuel));
 			if(ParentActivity.UnitFuel == Home.UNIT_FUEL_GAL)
-				textViewFuelUnit.setText(ParentActivity.getResources().getString(string.gal));
+				textViewFuelUnit.setText(getString(ParentActivity.getResources().getString(string.gal), 466));
 			else
-				textViewFuelUnit.setText(ParentActivity.getResources().getString(string.l));
+				textViewFuelUnit.setText(getString(ParentActivity.getResources().getString(string.l), 81));
 			break;
 		default:
 			break;

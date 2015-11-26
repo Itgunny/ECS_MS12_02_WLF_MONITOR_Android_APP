@@ -24,6 +24,7 @@ public class MainARightDownTMTCLockUpFragment extends ParentFragment{
 
 	//////////////////////////////////////////////////
 	//RESOURCE////////////////////////////////////////
+	TextView	textViewTitle;
 	RadioButton radioOff;
 	RadioButton radioOn;
 	
@@ -85,8 +86,15 @@ public class MainARightDownTMTCLockUpFragment extends ParentFragment{
 	@Override
 	protected void InitResource() {
 		// TODO Auto-generated method stub
+		textViewTitle = (TextView)mRoot.findViewById(R.id.textView_rightdown_main_a_tmtclockup_title);
+		textViewTitle.setText(getString(ParentActivity.getResources().getString(R.string.TC_LOCK_UP), 89));
+		ParentActivity.setMarqueeText(textViewTitle);
 		radioOff = (RadioButton)mRoot.findViewById(R.id.radioButton_rightdown_main_a_tmtclockup_off);
+		radioOff.setText(getString(ParentActivity.getResources().getString(R.string.OFF), 98));
+		ParentActivity.setMarqueeRadio(radioOff);
 		radioOn = (RadioButton)mRoot.findViewById(R.id.radioButton_rightdown_main_a_tmtclockup_on);
+		radioOn.setText(getString(ParentActivity.getResources().getString(R.string.ON), 97));
+		ParentActivity.setMarqueeRadio(radioOn);
 		
 		LayoutBG = (RelativeLayout)mRoot.findViewById(R.id.RelativeLayout_rightdown_main_a_engine_tmtclockup_top);
 	}

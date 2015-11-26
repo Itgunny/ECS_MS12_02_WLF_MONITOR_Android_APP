@@ -123,4 +123,13 @@ public abstract class ParentPopup extends Dialog{
 	
 	}
 
+	public String getString(String str, int index){
+		if(ParentActivity.langDb.findStrGetString(index, ParentActivity.LanguageIndex) == null){
+			Log.d(TAG, "Android");
+			return str;
+		}else {
+			Log.d(TAG, "Excel");
+			return ParentActivity.langDb.findStrGetString(index, ParentActivity.LanguageIndex);	
+		}
+	}
 }

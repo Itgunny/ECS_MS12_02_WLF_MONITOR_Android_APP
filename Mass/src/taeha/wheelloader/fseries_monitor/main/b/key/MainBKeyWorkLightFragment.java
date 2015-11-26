@@ -75,13 +75,18 @@ public class MainBKeyWorkLightFragment extends ParentFragment{
 	protected void InitResource() {
 		// TODO Auto-generated method stub
 		radioOff = (RadioButton)mRoot.findViewById(R.id.radioButton_key_main_b_worklight_off);
+		radioOff.setText(getString(ParentActivity.getResources().getString(R.string.Off), 20));
+		ParentActivity.setMarqueeRadio(radioOff);
 		radioFront = (RadioButton)mRoot.findViewById(R.id.radioButton_key_main_b_worklight_front);
+		radioFront.setText(getString(ParentActivity.getResources().getString(R.string.Front), 164));
+		ParentActivity.setMarqueeRadio(radioFront);
 		radioRear = (RadioButton)mRoot.findViewById(R.id.radioButton_key_main_b_worklight_rear);
 		
 		// ++, 150210 bwk
-		radioRear.setText(ParentActivity.getResources().getString(string.Front)
-				+ " + " +ParentActivity.getResources().getString(string.Rear));
+		radioRear.setText(getString(ParentActivity.getResources().getString(string.Front), 164)
+				+ " + " +getString(ParentActivity.getResources().getString(string.Rear), 165));
 		// --, 150210 bwk
+		ParentActivity.setMarqueeRadio(radioRear);
 		
 	}
 	

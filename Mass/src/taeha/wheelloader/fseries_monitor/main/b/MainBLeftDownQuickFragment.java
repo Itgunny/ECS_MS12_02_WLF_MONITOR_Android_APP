@@ -12,8 +12,10 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import taeha.wheelloader.fseries_monitor.main.CommService;
 import taeha.wheelloader.fseries_monitor.main.ParentFragment;
 import taeha.wheelloader.fseries_monitor.main.R;
+import taeha.wheelloader.fseries_monitor.main.TextFitTextView;
 
 public class MainBLeftDownQuickFragment extends ParentFragment{
 	//CONSTANT////////////////////////////////////////
@@ -24,7 +26,7 @@ public class MainBLeftDownQuickFragment extends ParentFragment{
 	
 	ImageView imgViewIcon;
 	
-	TextView textViewTitle;
+	TextFitTextView textViewTitle;
 	
 	ImageButton imgbtnMirror;
 	//////////////////////////////////////////////////
@@ -66,7 +68,8 @@ public class MainBLeftDownQuickFragment extends ParentFragment{
 		
 		imgViewIcon = (ImageView)mRoot.findViewById(R.id.imageView_leftdown_main_b_quick_icon);
 
-		textViewTitle = (TextView)mRoot.findViewById(R.id.textView_leftdown_main_b_quick_title);
+		textViewTitle = (TextFitTextView)mRoot.findViewById(R.id.textView_leftdown_main_b_quick_title);
+		textViewTitle.setText(getString(ParentActivity.getResources().getString(R.string.Help), 117));
 		
 		imgbtnMirror = (ImageButton)mRoot.findViewById(R.id.imageButton_leftdown_main_b_quick_mirror);
 	}
@@ -140,14 +143,16 @@ public class MainBLeftDownQuickFragment extends ParentFragment{
 		}else{
 			String service = Context.WIFI_SERVICE;
 			final WifiManager wifi = (WifiManager)ParentActivity.getSystemService(service);
-			if(wifi.isWifiEnabled()){
-				wifi.setWifiEnabled(false);
-				synchronized (wifi) {
-					try {
-						wifi.wait(500);
-					} catch (InterruptedException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
+			if(!ParentActivity.CheckRunningApp("com.powerone.wfd.sink")){
+				if(wifi.isWifiEnabled()){
+					wifi.setWifiEnabled(false);
+					synchronized (wifi) {
+						try {
+							wifi.wait(500);
+						} catch (InterruptedException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
 					}
 				}
 			}
@@ -159,6 +164,11 @@ public class MainBLeftDownQuickFragment extends ParentFragment{
 				CAN1Comm.SetMultimediaFlag(false);
 //				CAN1Comm.SetMiracastFlag(true);
 				// --, 150323 bwk
+				if(CommService.pi != null){
+					if(CommService.pi.versionName.equals("1.0.6BF")){
+						CAN1Comm.setRunningCheckMiracast(true);
+					}					
+				}
 				ParentActivity.StartAlwaysOntopService();
 				ParentActivity.StartCheckSmartTerminalTimer();
 //				ParentActivity.StartAlwaysOntopService(); // ++, --, 150324 cjg

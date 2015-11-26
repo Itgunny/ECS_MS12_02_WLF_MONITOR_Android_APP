@@ -1,31 +1,22 @@
 package taeha.wheelloader.fseries_monitor.menu;
 
 import taeha.wheelloader.fseries_monitor.animation.AppearAnimation;
-import taeha.wheelloader.fseries_monitor.animation.ChangeFragmentAnimation;
-import taeha.wheelloader.fseries_monitor.animation.DisappearAnimation;
-import taeha.wheelloader.fseries_monitor.animation.MainBodyShiftAnimation;
 import taeha.wheelloader.fseries_monitor.animation.LeftRightShiftAnimation;
 import taeha.wheelloader.fseries_monitor.main.ParentFragment;
 import taeha.wheelloader.fseries_monitor.main.R;
+import taeha.wheelloader.fseries_monitor.main.TextFitTextView;
 import android.os.Bundle;
-import android.text.Layout;
 import android.util.Log;
 import android.view.LayoutInflater;
-import android.view.Menu;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AbsoluteLayout;
-import android.widget.FrameLayout;
-import android.widget.ImageButton;
-import android.widget.ImageView;
-import android.widget.TextView;
 
 public class MenuInterTitleFragment extends ParentFragment{
 	//CONSTANT////////////////////////////////////////
 	
 	//////////////////////////////////////////////////
 	//RESOURCE////////////////////////////////////////
-	TextView textViewTitle;
+	TextFitTextView textViewTitle;
 	//////////////////////////////////////////////////
 	
 	//VALUABLE////////////////////////////////////////
@@ -69,7 +60,7 @@ public class MenuInterTitleFragment extends ParentFragment{
 	protected void InitResource() {
 		// TODO Auto-generated method stub
 
-		textViewTitle = (TextView)mRoot.findViewById(R.id.textView_menu_inter_title_text);
+		textViewTitle = (TextFitTextView)mRoot.findViewById(R.id.textView_menu_inter_title_text);
 	
 	}
 
@@ -103,6 +94,29 @@ public class MenuInterTitleFragment extends ParentFragment{
 	/////////////////////////////////////////////////////////////////////
 	public void SetTitleText(String str){
 		textViewTitle.setText(str);
+		TitleTextShiftAnimation.StartShiftAnimation();
+		TitleTextAppearAnimation.StartAnimation();
+	}
+	public void SetTitleText(String str, int index){
+		if(ParentActivity.langDb.findStrGetString(index, ParentActivity.LanguageIndex) == null){
+			textViewTitle.setText(str);
+			Log.d(TAG, "Android");
+		}else {
+			textViewTitle.setText(ParentActivity.langDb.findStrGetString(index, ParentActivity.LanguageIndex));
+			Log.d(TAG, "Excel");
+		}
+		TitleTextShiftAnimation.StartShiftAnimation();
+		TitleTextAppearAnimation.StartAnimation();
+	}
+	public void SetTitleText(String str, int index, int index2){
+		if((ParentActivity.langDb.findStrGetString(index, ParentActivity.LanguageIndex) == null) || 
+				(ParentActivity.langDb.findStrGetString(index2, ParentActivity.LanguageIndex) == null)){
+			textViewTitle.setText(str);
+			Log.d(TAG, "Android");
+		}else {
+			textViewTitle.setText(ParentActivity.langDb.findStrGetString(index, ParentActivity.LanguageIndex) + " - " + ParentActivity.langDb.findStrGetString(index2, ParentActivity.LanguageIndex));
+			Log.d(TAG, "Excel");
+		}
 		TitleTextShiftAnimation.StartShiftAnimation();
 		TitleTextAppearAnimation.StartAnimation();
 	}

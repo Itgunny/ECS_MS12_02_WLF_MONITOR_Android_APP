@@ -9,6 +9,7 @@ import taeha.wheelloader.fseries_monitor.main.Home;
 import taeha.wheelloader.fseries_monitor.main.ParentFragment;
 import taeha.wheelloader.fseries_monitor.main.R;
 import taeha.wheelloader.fseries_monitor.main.R.string;
+import taeha.wheelloader.fseries_monitor.main.TextFitTextView;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -32,6 +33,9 @@ public class ClockFragment extends ParentFragment{
 	//RESOURCE////////////////////////////////////////
 	ImageButton imgbtnOK;
 	ImageButton imgbtnCancel;
+	TextFitTextView	textViewOK;
+	TextFitTextView	textViewCancel;
+	
 	
 	TextView textViewNum1;
 	TextView textViewNum2;
@@ -51,7 +55,7 @@ public class ClockFragment extends ParentFragment{
 	RadioButton radioHour1;
 	RadioButton radioMin10;
 	RadioButton radioMin1;
-	TextView textViewAMPM;
+	TextFitTextView textViewAMPM;
 	//////////////////////////////////////////////////
 	
 	//VALUABLE////////////////////////////////////////
@@ -98,7 +102,7 @@ public class ClockFragment extends ParentFragment{
 		
 		CursurDisplay(CursurIndex);
 		ParentActivity.ScreenIndex = ParentActivity.SCREEN_STATE_MENU_PREFERENCE_CLOCK_TOP;
-		ParentActivity._MenuBaseFragment._MenuInterTitleFragment.SetTitleText(ParentActivity.getResources().getString(R.string.Clock_Setting));
+		ParentActivity._MenuBaseFragment._MenuInterTitleFragment.SetTitleText(ParentActivity.getResources().getString(R.string.Clock_Setting), 413);
 		HandleCursurDisplay = new Handler() {
 			@Override
 			public void handleMessage(Message msg) {
@@ -118,7 +122,10 @@ public class ClockFragment extends ParentFragment{
 		// TODO Auto-generated method stub
 		imgbtnOK = (ImageButton)mRoot.findViewById(R.id.ImageButton_menu_body_preference_clock_low_ok);
 		imgbtnCancel = (ImageButton)mRoot.findViewById(R.id.ImageButton_menu_body_preference_clock_low_cancel);
-		
+		textViewOK = (TextFitTextView)mRoot.findViewById(R.id.textView_menu_body_preference_clock_low_ok);
+		textViewOK.setText(getString(ParentActivity.getResources().getString(R.string.OK), 15));
+		textViewCancel = (TextFitTextView)mRoot.findViewById(R.id.textView_menu_body_preference_clock_low_cancel);
+		textViewCancel.setText(getString(ParentActivity.getResources().getString(R.string.Cancel), 16));
 		
 		textViewNum1 = (TextView)mRoot.findViewById(R.id.textView_menu_body_preference_clock_num_1);
 		textViewNum2 = (TextView)mRoot.findViewById(R.id.textView_menu_body_preference_clock_num_2);
@@ -134,7 +141,7 @@ public class ClockFragment extends ParentFragment{
 		imgbtnBack = (ImageButton)mRoot.findViewById(R.id.imageButton_menu_body_preference_clock_num_back);
 		imgbtnNext = (ImageButton)mRoot.findViewById(R.id.imageButton_menu_body_preference_clock_num_next);
 		
-		textViewAMPM = (TextView)mRoot.findViewById(R.id.textView_menu_body_preference_clock_ampm);
+		textViewAMPM = (TextFitTextView)mRoot.findViewById(R.id.textView_menu_body_preference_clock_ampm);
 		
 		radioHour10 = (RadioButton)mRoot.findViewById(R.id.radio_menu_body_preference_clock_hour_10);
 		radioHour1 = (RadioButton)mRoot.findViewById(R.id.radio_menu_body_preference_clock_hour_1);
@@ -151,15 +158,15 @@ public class ClockFragment extends ParentFragment{
 
 		int TempHour;
 		if(OldHour >= 24){
-			textViewAMPM.setText(ParentActivity.getResources().getString(string.PM));
+			textViewAMPM.setText(getString(ParentActivity.getResources().getString(string.PM), 14));
 			AMFlag = false;
 			TempHour = 12;
 		}else if(OldHour >= 12){
-			textViewAMPM.setText(ParentActivity.getResources().getString(string.PM));
+			textViewAMPM.setText(getString(ParentActivity.getResources().getString(string.PM), 14));
 			AMFlag = false;
 			TempHour = OldHour - 12;
 		}else{
-			textViewAMPM.setText(ParentActivity.getResources().getString(string.AM));
+			textViewAMPM.setText(getString(ParentActivity.getResources().getString(string.AM), 13));
 			AMFlag = true;
 			TempHour = OldHour;
 		}
@@ -566,10 +573,10 @@ public class ClockFragment extends ParentFragment{
 	}
 	public void ClickAMPM(){
 		if(AMFlag == true){
-			textViewAMPM.setText(ParentActivity.getResources().getString(string.PM));
+			textViewAMPM.setText(getString(ParentActivity.getResources().getString(string.PM), 14));
 			AMFlag = false;
 		}else{
-			textViewAMPM.setText(ParentActivity.getResources().getString(string.AM));
+			textViewAMPM.setText(getString(ParentActivity.getResources().getString(string.AM), 13));
 			AMFlag = true;
 		}
 	}
@@ -1228,4 +1235,13 @@ public class ClockFragment extends ParentFragment{
 	
 	
 	/////////////////////////////////////////////////////////////////////
+	public String getString(String str, int index){
+		if(ParentActivity.langDb.findStrGetString(index, ParentActivity.LanguageIndex) == null){
+			Log.d(TAG, "Android");
+			return str;
+		}else {
+			Log.d(TAG, "Excel");
+			return ParentActivity.langDb.findStrGetString(index, ParentActivity.LanguageIndex);	
+		}
+	}
 }

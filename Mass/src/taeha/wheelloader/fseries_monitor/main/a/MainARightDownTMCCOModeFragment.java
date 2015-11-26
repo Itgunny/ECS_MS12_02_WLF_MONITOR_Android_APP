@@ -24,6 +24,7 @@ public class MainARightDownTMCCOModeFragment extends ParentFragment{
 	
 	//////////////////////////////////////////////////
 	//RESOURCE////////////////////////////////////////
+	TextView	textViewTitle;
 	RadioButton radioOff;
 	RadioButton radioL;
 	RadioButton radioM;
@@ -87,10 +88,21 @@ public class MainARightDownTMCCOModeFragment extends ParentFragment{
 	@Override
 	protected void InitResource() {
 		// TODO Auto-generated method stub
+		textViewTitle = (TextView)mRoot.findViewById(R.id.textView_rightdown_main_a_tmccomode_title);
+		textViewTitle.setText(getString(ParentActivity.getResources().getString(R.string.CCO_MODE), 86));
+		ParentActivity.setMarqueeText(textViewTitle);
 		radioOff = (RadioButton)mRoot.findViewById(R.id.radioButton_rightdown_main_a_tmccomode_off);
+		radioOff.setText(getString(ParentActivity.getResources().getString(R.string.OFF), 98));
+		ParentActivity.setMarqueeRadio(radioOff);
 		radioL = (RadioButton)mRoot.findViewById(R.id.radioButton_rightdown_main_a_tmccomode_l);
+		radioL.setText(getString(ParentActivity.getResources().getString(R.string.L), 99));
+		ParentActivity.setMarqueeRadio(radioL);
 		radioM = (RadioButton)mRoot.findViewById(R.id.radioButton_rightdown_main_a_tmccomode_m);
+		radioM.setText(getString(ParentActivity.getResources().getString(R.string.M), 100));
+		ParentActivity.setMarqueeRadio(radioM);
 		radioH = (RadioButton)mRoot.findViewById(R.id.radioButton_rightdown_main_a_tmccomode_h);
+		radioH.setText(getString(ParentActivity.getResources().getString(R.string.H), 101));
+		ParentActivity.setMarqueeRadio(radioH);
 		
 		LayoutBG = (RelativeLayout)mRoot.findViewById(R.id.RelativeLayout_rightdown_main_a_tmccomode);
 	}

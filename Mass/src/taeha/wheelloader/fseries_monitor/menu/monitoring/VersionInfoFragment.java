@@ -10,6 +10,7 @@ import taeha.wheelloader.fseries_monitor.main.CheckModel;
 import taeha.wheelloader.fseries_monitor.main.Home;
 import taeha.wheelloader.fseries_monitor.main.ParentFragment;
 import taeha.wheelloader.fseries_monitor.main.R;
+import taeha.wheelloader.fseries_monitor.main.TextFitTextView;
 import taeha.wheelloader.fseries_monitor.main.R.string;
 import android.os.Bundle;
 import android.os.Handler;
@@ -33,6 +34,7 @@ public class VersionInfoFragment extends ParentFragment{
 	//////////////////////////////////////////////////
 	//RESOURCE////////////////////////////////////////
 	ImageButton imgbtnOK;
+	TextView	textViewOK;
 
 	TextView textViewTCU;
 	TextView textViewECM;
@@ -51,6 +53,7 @@ public class VersionInfoFragment extends ParentFragment{
 	TextView textViewEHCUVersion;
 	TextView textViewBKCUVersion;
 	
+	TextView textViewModelTitle;
 	TextView textViewModel;
 	
 	RelativeLayout	layoutEHCU;		// ++, --, 150211 bwk;
@@ -114,7 +117,7 @@ public class VersionInfoFragment extends ParentFragment{
 		CheckRMCU();
 		
 		ParentActivity.ScreenIndex = Home.SCREEN_STATE_MENU_MONITORING_VERSIONINFO_TOP;
-		ParentActivity._MenuBaseFragment._MenuInterTitleFragment.SetTitleText(ParentActivity.getResources().getString(R.string.Machine_Information));
+		ParentActivity._MenuBaseFragment._MenuInterTitleFragment.SetTitleText(ParentActivity.getResources().getString(R.string.Machine_Information), 318);
 		
 		HandleCursurDisplay = new Handler() {
 			@Override
@@ -136,16 +139,28 @@ public class VersionInfoFragment extends ParentFragment{
 	protected void InitResource() {
 		// TODO Auto-generated method stub
 		imgbtnOK = (ImageButton)mRoot.findViewById(R.id.ImageButton_menu_body_monitoring_version_low_ok);
+		textViewOK = (TextView)mRoot.findViewById(R.id.textView_menu_body_monitoring_version_low_ok);
+		textViewOK.setText(getString(ParentActivity.getResources().getString(R.string.OK), 15));
 		
 		textViewTCU = (TextView)mRoot.findViewById(R.id.textView_menu_body_monitoring_version_tcu);
+		textViewTCU.setText(getString(ParentActivity.getResources().getString(R.string.TCU), 266));
 		textViewECM = (TextView)mRoot.findViewById(R.id.textView_menu_body_monitoring_version_ecm);
+		textViewECM.setText(getString(ParentActivity.getResources().getString(R.string.ECM), 267));
 		textViewACU = (TextView)mRoot.findViewById(R.id.textView_menu_body_monitoring_version_acu);
+		textViewACU.setText(getString(ParentActivity.getResources().getString(R.string.ACU), 455));
+		
 		textViewMonitor = (TextView)mRoot.findViewById(R.id.textView_menu_body_monitoring_version_monitor_title);
+		textViewMonitor.setText(getString(ParentActivity.getResources().getString(R.string.Monitor), 268));
 		textViewMCU = (TextView)mRoot.findViewById(R.id.textView_menu_body_monitoring_version_mcu_title);
+		textViewMCU.setText(getString(ParentActivity.getResources().getString(R.string.MCU), 269));
 		textViewCluster = (TextView)mRoot.findViewById(R.id.textView_menu_body_monitoring_version_cluster_title);
+		textViewCluster.setText(getString(ParentActivity.getResources().getString(R.string.Cluster), 270));
 		textViewRMCU = (TextView)mRoot.findViewById(R.id.textView_menu_body_monitoring_version_rmcu_title);
+		textViewRMCU.setText(getString(ParentActivity.getResources().getString(R.string.RMCU), 271));
 		textViewEHCU = (TextView)mRoot.findViewById(R.id.textView_menu_body_monitoring_version_ehcu_title);
+		textViewEHCU.setText(getString(ParentActivity.getResources().getString(R.string.EHCU), 272));
 		textViewBKCU = (TextView)mRoot.findViewById(R.id.textView_menu_body_monitoring_version_bkcu_title);
+		textViewBKCU.setText(getString(ParentActivity.getResources().getString(R.string.BKCU), 273));
 		
 		textViewMonitorVersion = (TextView)mRoot.findViewById(R.id.textView_menu_body_monitoring_version_monitor_data);
 		textViewMCUVersion = (TextView)mRoot.findViewById(R.id.textView_menu_body_monitoring_version_mcu_data);
@@ -154,6 +169,8 @@ public class VersionInfoFragment extends ParentFragment{
 		textViewEHCUVersion = (TextView)mRoot.findViewById(R.id.textView_menu_body_monitoring_version_ehcu_data);
 		textViewBKCUVersion = (TextView)mRoot.findViewById(R.id.textView_menu_body_monitoring_version_bkcu_data);
 		
+		textViewModelTitle = (TextView)mRoot.findViewById(R.id.textView_menu_body_monitoring_version_model_title);
+		textViewModelTitle.setText(getString(ParentActivity.getResources().getString(string.Model), 265));
 		textViewModel = (TextView)mRoot.findViewById(R.id.textView_menu_body_monitoring_version_model_data);
 		
 		layoutEHCU = (RelativeLayout)mRoot.findViewById(R.id.RelativeLayout_menu_body_monitoring_version_ehcu);	// ++, --, 150211 bwk

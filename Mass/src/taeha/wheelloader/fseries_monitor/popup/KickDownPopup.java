@@ -4,6 +4,7 @@ import taeha.wheelloader.fseries_monitor.main.CAN1CommManager;
 import taeha.wheelloader.fseries_monitor.main.Home;
 import taeha.wheelloader.fseries_monitor.main.ParentPopup;
 import taeha.wheelloader.fseries_monitor.main.R;
+import taeha.wheelloader.fseries_monitor.main.TextFitTextView;
 import android.content.Context;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
@@ -17,8 +18,9 @@ public class KickDownPopup extends ParentPopup{
 
 	//////////////////////////////////////////////////
 	//RESOURCE////////////////////////////////////////
-	TextView textViewMode1;
-	TextView textViewMode2;
+	TextFitTextView textViewTitle;
+	TextFitTextView textViewMode1;
+	TextFitTextView textViewMode2;
 	//////////////////////////////////////////////////
 	
 	//VALUABLE////////////////////////////////////////
@@ -68,8 +70,12 @@ public class KickDownPopup extends ParentPopup{
 	@Override
 	protected void InitResource() {
 		// TODO Auto-generated method stub
-		textViewMode1 = (TextView)mRoot.findViewById(R.id.textView_popup_kickdown_mode1);
-		textViewMode2 = (TextView)mRoot.findViewById(R.id.textView_popup_kickdown_mode2);
+		textViewTitle = (TextFitTextView)mRoot.findViewById(R.id.textView_popup_kickdown_title);
+		textViewTitle.setText(getString(ParentActivity.getResources().getString(R.string.Kick_Down), 207));
+		textViewMode1 = (TextFitTextView)mRoot.findViewById(R.id.textView_popup_kickdown_mode1);
+		textViewMode1.setText(getString(ParentActivity.getResources().getString(R.string.MODE1_DOWN_UP), 221));
+		textViewMode2 = (TextFitTextView)mRoot.findViewById(R.id.textView_popup_kickdown_mode2);
+		textViewMode2.setText(getString(ParentActivity.getResources().getString(R.string.MODE2_DOWN_ONLY), 222));
 	}
 
 	@Override

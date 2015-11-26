@@ -22,7 +22,7 @@ public class MachineSecurityPasswordFragment extends PasswordFragment{
 		
 		ParentActivity._MenuBaseFragment._MenuListTitleFragment.setBackButtonEnable(true);
 		ParentActivity.ScreenIndex = ParentActivity.SCREEN_STATE_MENU_MANAGEMENT_MACHINESECURITY_PW;
-		ParentActivity._MenuBaseFragment._MenuListTitleFragment.SetTitleText(ParentActivity.getResources().getString(R.string.Machine_Security));
+		ParentActivity._MenuBaseFragment._MenuListTitleFragment.SetTitleText(ParentActivity.getResources().getString(R.string.Machine_Security), 319);
 		SetTextIndicatorTitle(1);
 		HandleCursurDisplay = new Handler() {
 			@Override

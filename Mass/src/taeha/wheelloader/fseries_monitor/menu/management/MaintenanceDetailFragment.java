@@ -12,6 +12,7 @@ import taeha.wheelloader.fseries_monitor.main.CAN1CommManager;
 import taeha.wheelloader.fseries_monitor.main.Home;
 import taeha.wheelloader.fseries_monitor.main.ParentFragment;
 import taeha.wheelloader.fseries_monitor.main.R;
+import taeha.wheelloader.fseries_monitor.main.TextFitTextView;
 import taeha.wheelloader.fseries_monitor.main.R.string;
 import android.os.Bundle;
 import android.os.Handler;
@@ -36,24 +37,31 @@ public class MaintenanceDetailFragment extends ParentFragment{
 	//////////////////////////////////////////////////
 	//RESOURCE////////////////////////////////////////
 	ImageButton imgbtnOK;
-	TextView	textViewAS;
+	TextFitTextView	textViewOK;
+	TextFitTextView	textViewAS;
 	
 	ImageButton	imgbtnLeft;
 	ImageButton	imgbtnRight;
 	ImageView	imgViewIcon;
 	
-	TextView	textViewTitle;
+	TextFitTextView	textViewTitle;
 	
-	TextView	textViewElapsedTime;
-	TextView	textViewCycle;
+	TextFitTextView	textViewElapsedTimeTitle;
+	TextFitTextView	textViewCycleTitle;
+	TextFitTextView	textViewChangeCountTitle;
+	TextFitTextView	textViewHistoryTitle;
 	
-	TextView	textViewChangeCount;
+	TextFitTextView	textViewElapsedTime;
+	TextFitTextView	textViewCycle;
+	TextFitTextView	textViewChangeCount;
+	TextFitTextView	textViewLast;
+	TextFitTextView[]	textViewHistory;
 	
-	TextView	textViewLast;
-	TextView[]	textViewHistory;
+	TextFitTextView	textViewElapsedTimeUnit;
+	TextFitTextView	textViewCycleUnit;
 	
-	TextView	textViewReplace;
-	TextView	textViewChangeCycle;
+	TextFitTextView	textViewReplace;
+	TextFitTextView	textViewChangeCycle;
 
 	ProgressBar	progressTime;
 	//////////////////////////////////////////////////
@@ -106,7 +114,7 @@ public class MaintenanceDetailFragment extends ParentFragment{
 		StartSendCommandTimer();
 		CursurDisplay(CursurIndex);
 		ParentActivity.ScreenIndex = ParentActivity.SCREEN_STATE_MENU_MANAGEMENT_MAINTENANCE_DETAIL_TOP;
-		ParentActivity._MenuBaseFragment._MenuInterTitleFragment.SetTitleText(ParentActivity.getResources().getString(R.string.Maintenance));
+		ParentActivity._MenuBaseFragment._MenuInterTitleFragment.SetTitleText(ParentActivity.getResources().getString(R.string.Maintenance), 18);
 		HandleCursurDisplay = new Handler() {
 			@Override
 			public void handleMessage(Message msg) {
@@ -131,35 +139,54 @@ public class MaintenanceDetailFragment extends ParentFragment{
 	@Override
 	protected void InitResource() {
 		// TODO Auto-generated method stub
-		textViewHistory = new TextView[9];
+		textViewHistory = new TextFitTextView[9];
 		imgbtnOK = (ImageButton)mRoot.findViewById(R.id.ImageButton_menu_body_management_maint_detail_low_ok);
-
-		textViewAS = (TextView)mRoot.findViewById(R.id.textView_menu_body_management_maint_detail_low_as);
+		textViewOK = (TextFitTextView)mRoot.findViewById(R.id.textView_menu_body_management_maint_detail_low_ok);
+		textViewOK.setText(getString(ParentActivity.getResources().getString(string.OK), 15));
+		textViewAS = (TextFitTextView)mRoot.findViewById(R.id.textView_menu_body_management_maint_detail_low_as);
+		textViewAS.setText(getString(ParentActivity.getResources().getString(string.AS), 67));
 		
 		imgbtnLeft = (ImageButton)mRoot.findViewById(R.id.imageButton_menu_body_management_maint_detail_title_left);
 		imgbtnRight = (ImageButton)mRoot.findViewById(R.id.imageButton_menu_body_management_maint_detail_title_right);
 		imgViewIcon = (ImageView)mRoot.findViewById(R.id.imageView_menu_body_management_maint_detail_title_icon);
 		
-		textViewTitle = (TextView)mRoot.findViewById(R.id.textView_menu_body_management_maint_detail_title);
+		textViewTitle = (TextFitTextView)mRoot.findViewById(R.id.textView_menu_body_management_maint_detail_title);
 		
-		textViewElapsedTime = (TextView)mRoot.findViewById(R.id.textView_menu_body_management_maint_detail_time_use_data);
-		textViewCycle = (TextView)mRoot.findViewById(R.id.textView_menu_body_management_maint_detail_time_cycle_data);
+		textViewElapsedTimeTitle = (TextFitTextView)mRoot.findViewById(R.id.textView_menu_body_management_maint_detail_time_use_title);
+		textViewElapsedTimeTitle.setText(getString(ParentActivity.getResources().getString(string.Elapsed_Time), 404));
+		textViewElapsedTime = (TextFitTextView)mRoot.findViewById(R.id.textView_menu_body_management_maint_detail_time_use_data);
+		textViewElapsedTimeUnit = (TextFitTextView)mRoot.findViewById(R.id.textView_menu_body_management_maint_detail_time_use_unit);
+		textViewElapsedTimeUnit.setText(getString(ParentActivity.getResources().getString(string.Hour), 47));
 
-		textViewChangeCount = (TextView)mRoot.findViewById(R.id.textView_menu_body_management_maint_detail_history_count_data);
+		textViewCycleTitle = (TextFitTextView)mRoot.findViewById(R.id.textView_menu_body_management_maint_detail_time_cycle_title);
+		textViewCycleTitle.setText(getString(ParentActivity.getResources().getString(string.Cycle), 405));
+		textViewCycle = (TextFitTextView)mRoot.findViewById(R.id.textView_menu_body_management_maint_detail_time_cycle_data);
+		textViewCycleUnit = (TextFitTextView)mRoot.findViewById(R.id.textView_menu_body_management_maint_detail_time_cycle_unit);
+		textViewCycleUnit.setText(getString(ParentActivity.getResources().getString(string.Hour), 47));
 		
-		textViewLast = (TextView)mRoot.findViewById(R.id.textView_menu_body_management_maint_detail_history_title_data);
-		textViewHistory[0] = (TextView)mRoot.findViewById(R.id.textView_menu_body_management_maint_detail_history_1);
-		textViewHistory[1] = (TextView)mRoot.findViewById(R.id.textView_menu_body_management_maint_detail_history_2);
-		textViewHistory[2] = (TextView)mRoot.findViewById(R.id.textView_menu_body_management_maint_detail_history_3);
-		textViewHistory[3] = (TextView)mRoot.findViewById(R.id.textView_menu_body_management_maint_detail_history_4);
-		textViewHistory[4] = (TextView)mRoot.findViewById(R.id.textView_menu_body_management_maint_detail_history_5);
-		textViewHistory[5] = (TextView)mRoot.findViewById(R.id.textView_menu_body_management_maint_detail_history_6);
-		textViewHistory[6] = (TextView)mRoot.findViewById(R.id.textView_menu_body_management_maint_detail_history_7);
-		textViewHistory[7] = (TextView)mRoot.findViewById(R.id.textView_menu_body_management_maint_detail_history_8);
-		textViewHistory[8] = (TextView)mRoot.findViewById(R.id.textView_menu_body_management_maint_detail_history_9);
+		textViewHistoryTitle = (TextFitTextView)mRoot.findViewById(R.id.textView_menu_body_management_maint_detail_history_title_title);
+		textViewHistoryTitle.setText(getString(ParentActivity.getResources().getString(string.Maintenance_History), 408));
+		textViewLast = (TextFitTextView)mRoot.findViewById(R.id.textView_menu_body_management_maint_detail_history_title_data);
+		textViewHistory[0] = (TextFitTextView)mRoot.findViewById(R.id.textView_menu_body_management_maint_detail_history_1);
+		textViewHistory[1] = (TextFitTextView)mRoot.findViewById(R.id.textView_menu_body_management_maint_detail_history_2);
+		textViewHistory[2] = (TextFitTextView)mRoot.findViewById(R.id.textView_menu_body_management_maint_detail_history_3);
+		textViewHistory[3] = (TextFitTextView)mRoot.findViewById(R.id.textView_menu_body_management_maint_detail_history_4);
+		textViewHistory[4] = (TextFitTextView)mRoot.findViewById(R.id.textView_menu_body_management_maint_detail_history_5);
+		textViewHistory[5] = (TextFitTextView)mRoot.findViewById(R.id.textView_menu_body_management_maint_detail_history_6);
+		textViewHistory[6] = (TextFitTextView)mRoot.findViewById(R.id.textView_menu_body_management_maint_detail_history_7);
+		textViewHistory[7] = (TextFitTextView)mRoot.findViewById(R.id.textView_menu_body_management_maint_detail_history_8);
+		textViewHistory[8] = (TextFitTextView)mRoot.findViewById(R.id.textView_menu_body_management_maint_detail_history_9);
 		
-		textViewReplace = (TextView)mRoot.findViewById(R.id.textView_menu_body_management_maint_detail_button_replace);
-		textViewChangeCycle = (TextView)mRoot.findViewById(R.id.textView_menu_body_management_maint_detail_button_changecycle);
+		textViewChangeCountTitle = (TextFitTextView)mRoot.findViewById(R.id.textView_menu_body_management_maint_detail_history_count_title);
+		textViewChangeCountTitle.setText(getString(ParentActivity.getResources().getString(string.Count), 403));
+		textViewChangeCount = (TextFitTextView)mRoot.findViewById(R.id.textView_menu_body_management_maint_detail_history_count_data);
+				
+
+		
+		textViewReplace = (TextFitTextView)mRoot.findViewById(R.id.textView_menu_body_management_maint_detail_button_replace);
+		textViewReplace.setText(getString(ParentActivity.getResources().getString(string.Replacement), 407));
+		textViewChangeCycle = (TextFitTextView)mRoot.findViewById(R.id.textView_menu_body_management_maint_detail_button_changecycle);
+		textViewChangeCycle.setText(getString(ParentActivity.getResources().getString(string.Change_Cycle), 406));
 		
 		progressTime = (ProgressBar)mRoot.findViewById(R.id.progressBar_menu_body_management_maint_detail_time);
 		progressTime.setMax(100);	
@@ -420,7 +447,7 @@ public class MaintenanceDetailFragment extends ParentFragment{
 			}else{
 				imgViewIcon.setImageResource(R.drawable.menu_management_maintenance_icon_01_small);
 			}
-			textViewTitle.setText(ParentActivity.getResources().getString(string.Engine_oil));
+			textViewTitle.setText(getString(ParentActivity.getResources().getString(string.Engine_oil), 388));
 			break;
 		case	CAN1CommManager.TRAVEL_REDUCTION_GEAR_CASE	:	
 			
@@ -434,7 +461,7 @@ public class MaintenanceDetailFragment extends ParentFragment{
 			}else{
 				imgViewIcon.setImageResource(R.drawable.menu_management_maintenance_icon_05_small);
 			}
-			textViewTitle.setText(ParentActivity.getResources().getString(string.Hydraulic_oil));
+			textViewTitle.setText(getString(ParentActivity.getResources().getString(string.Hydraulic_oil), 389));
 			break;
 		case	CAN1CommManager.PILOT_LINE_FILTER_ELEMENT	:	
 			if(Alarm == CAN1CommManager.DATA_STATE_LAMP_ON){
@@ -442,7 +469,7 @@ public class MaintenanceDetailFragment extends ParentFragment{
 			}else{
 				imgViewIcon.setImageResource(R.drawable.menu_management_maintenance_icon_07_small);
 			}
-			textViewTitle.setText(ParentActivity.getResources().getString(string.Pilot_line_filter_element));
+			textViewTitle.setText(getString(ParentActivity.getResources().getString(string.Pilot_line_filter_element), 390));
 			break;
 		case	CAN1CommManager.HYDRAULIC_TANK_DRAIN_FILTER_CARTRIDGE	:	
 			
@@ -453,7 +480,7 @@ public class MaintenanceDetailFragment extends ParentFragment{
 			}else{
 				imgViewIcon.setImageResource(R.drawable.menu_management_maintenance_icon_06_small);
 			}
-			textViewTitle.setText(ParentActivity.getResources().getString(string.Hydraulic_oil_return_filter));
+			textViewTitle.setText(getString(ParentActivity.getResources().getString(string.Hydraulic_oil_return_filter), 391));
 			break;
 		case	CAN1CommManager.ENGINE_OIL_FILTER	:	
 			if(Alarm == CAN1CommManager.DATA_STATE_LAMP_ON){
@@ -461,7 +488,7 @@ public class MaintenanceDetailFragment extends ParentFragment{
 			}else{
 				imgViewIcon.setImageResource(R.drawable.menu_management_maintenance_icon_02_small);
 			}
-			textViewTitle.setText(ParentActivity.getResources().getString(string.Engine_oil_filter));
+			textViewTitle.setText(getString(ParentActivity.getResources().getString(string.Engine_oil_filter), 392));
 			break;
 		case	CAN1CommManager.FUEL_FILTER_ELEMENT	:	
 			
@@ -470,7 +497,7 @@ public class MaintenanceDetailFragment extends ParentFragment{
 			}else{
 				imgViewIcon.setImageResource(R.drawable.menu_management_maintenance_icon_03_small);
 			}
-			textViewTitle.setText(ParentActivity.getResources().getString(string.Fuel_filter_element));
+			textViewTitle.setText(getString(ParentActivity.getResources().getString(string.Fuel_filter_element), 393));
 			break;
 		case	CAN1CommManager.PRE_FILTER	:	
 			if(Alarm == CAN1CommManager.DATA_STATE_LAMP_ON){
@@ -478,7 +505,7 @@ public class MaintenanceDetailFragment extends ParentFragment{
 			}else{
 				imgViewIcon.setImageResource(R.drawable.menu_management_maintenance_icon_04_small);
 			}
-			textViewTitle.setText(ParentActivity.getResources().getString(string.Fuel_Pre_filter));
+			textViewTitle.setText(getString(ParentActivity.getResources().getString(string.Fuel_Pre_filter), 394));
 			break;
 		case	CAN1CommManager.HYDRAULIC_TANK_AIR_BREATHER_ELEMENT	:	
 			if(Alarm == CAN1CommManager.DATA_STATE_LAMP_ON){
@@ -486,7 +513,7 @@ public class MaintenanceDetailFragment extends ParentFragment{
 			}else{
 				imgViewIcon.setImageResource(R.drawable.menu_management_maintenance_icon_08_small);
 			}
-			textViewTitle.setText(ParentActivity.getResources().getString(string.Hydraulic_Tank_Air_Breather_Filter));
+			textViewTitle.setText(getString(ParentActivity.getResources().getString(string.Hydraulic_Tank_Air_Breather_Filter), 395));
 			break;
 		case	CAN1CommManager.AIR_CLEANER_ELEMENT	:	
 		
@@ -497,7 +524,7 @@ public class MaintenanceDetailFragment extends ParentFragment{
 			}else{
 				imgViewIcon.setImageResource(R.drawable.menu_management_maintenance_icon_13_small);
 			}
-			textViewTitle.setText(ParentActivity.getResources().getString(string.Radiator_engine_coolant));
+			textViewTitle.setText(getString(ParentActivity.getResources().getString(string.Radiator_engine_coolant), 396));
 			break;
 		case	CAN1CommManager.SWING_BEARING_GEAR_PINION_GREASE	:	
 			
@@ -508,7 +535,7 @@ public class MaintenanceDetailFragment extends ParentFragment{
 			}else{
 				imgViewIcon.setImageResource(R.drawable.menu_management_maintenance_icon_09_small);
 			}
-			textViewTitle.setText(ParentActivity.getResources().getString(string.Transmission_oil));
+			textViewTitle.setText(getString(ParentActivity.getResources().getString(string.Transmission_oil), 397));
 			break;
 		case	CAN1CommManager.TRANSMISSION_OIL_FILTER	:	
 			if(Alarm == CAN1CommManager.DATA_STATE_LAMP_ON){
@@ -516,7 +543,7 @@ public class MaintenanceDetailFragment extends ParentFragment{
 			}else{
 				imgViewIcon.setImageResource(R.drawable.menu_management_maintenance_icon_10_small);
 			}
-			textViewTitle.setText(ParentActivity.getResources().getString(string.Transmission_oil_filter));
+			textViewTitle.setText(getString(ParentActivity.getResources().getString(string.Transmission_oil_filter), 398));
 			break;
 		case	CAN1CommManager.FRONT_AXLE_DIFFERENTIAL_GEAR_OIL	:	
 			if(Alarm == CAN1CommManager.DATA_STATE_LAMP_ON){
@@ -524,7 +551,7 @@ public class MaintenanceDetailFragment extends ParentFragment{
 			}else{
 				imgViewIcon.setImageResource(R.drawable.menu_management_maintenance_icon_11_small);
 			}
-			textViewTitle.setText(ParentActivity.getResources().getString(string.Front_axle_oil));
+			textViewTitle.setText(getString(ParentActivity.getResources().getString(string.Front_axle_oil), 399));
 			break;
 		case	CAN1CommManager.REAR_AXLE_DIFFERENTIAL_GEAR_OIL	:	
 			if(Alarm == CAN1CommManager.DATA_STATE_LAMP_ON){
@@ -532,7 +559,7 @@ public class MaintenanceDetailFragment extends ParentFragment{
 			}else{
 				imgViewIcon.setImageResource(R.drawable.menu_management_maintenance_icon_12_small);
 			}
-			textViewTitle.setText(ParentActivity.getResources().getString(string.Rear_axle_oil));
+			textViewTitle.setText(getString(ParentActivity.getResources().getString(string.Rear_axle_oil), 400));
 			break;
 		case	CAN1CommManager.AXLE_PLANETARY_GEAR_OIL	:	
 			
@@ -549,7 +576,7 @@ public class MaintenanceDetailFragment extends ParentFragment{
 			}else{
 				imgViewIcon.setImageResource(R.drawable.menu_management_maintenance_icon_14_small);
 			}
-			textViewTitle.setText(ParentActivity.getResources().getString(string.Crankcase_Ventilation_Filter));
+			textViewTitle.setText(getString(ParentActivity.getResources().getString(string.Crankcase_Ventilation_Filter), 401));
 			break;
 		case	CAN1CommManager.AIR_CON_HEATER_OUTER_FILTER	:	
 			if(Alarm == CAN1CommManager.DATA_STATE_LAMP_ON){
@@ -557,7 +584,7 @@ public class MaintenanceDetailFragment extends ParentFragment{
 			}else{
 				imgViewIcon.setImageResource(R.drawable.menu_management_maintenance_icon_15_small);
 			}
-			textViewTitle.setText(ParentActivity.getResources().getString(string.Aircon_Heater_Outer_Filter));
+			textViewTitle.setText(getString(ParentActivity.getResources().getString(string.Aircon_Heater_Outer_Filter), 402));
 			break;
 		default:
 			break;

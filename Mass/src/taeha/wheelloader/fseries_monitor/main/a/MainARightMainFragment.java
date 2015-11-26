@@ -9,11 +9,13 @@ import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import taeha.wheelloader.fseries_monitor.animation.TextFitTextViewAxisFlipAnimation;
 import taeha.wheelloader.fseries_monitor.animation.TextViewXAxisFlipAnimation;
 import taeha.wheelloader.fseries_monitor.main.CAN1CommManager;
 import taeha.wheelloader.fseries_monitor.main.CheckModel;
 import taeha.wheelloader.fseries_monitor.main.ParentFragment;
 import taeha.wheelloader.fseries_monitor.main.R;
+import taeha.wheelloader.fseries_monitor.main.TextFitTextView;
 import taeha.wheelloader.fseries_monitor.main.R.string;
 
 public class MainARightMainFragment extends ParentFragment{
@@ -21,18 +23,18 @@ public class MainARightMainFragment extends ParentFragment{
 	
 	//////////////////////////////////////////////////
 	//RESOURCE////////////////////////////////////////
-	TextView textViewModeTitle;
-	TextView textViewModeData;	
-	TextView textViewHourOdoTitle;
-	TextView textViewHourOdoData;
-	TextView textViewHourOdoUnit;
+	TextFitTextView textViewModeTitle;
+	TextFitTextView textViewModeData;	
+	TextFitTextView textViewHourOdoTitle;
+	TextFitTextView textViewHourOdoData;
+	TextFitTextView textViewHourOdoUnit;
 	
-	TextView textViewCCOModeTitle;
-	TextView textViewCCOModeData;
-	TextView textViewShiftModeTitle;
-	TextView textViewShiftModeData;
-	TextView textViewTCLockUpTitle;
-	TextView textViewTCLockUpData;
+	TextFitTextView textViewCCOModeTitle;
+	TextFitTextView textViewCCOModeData;
+	TextFitTextView textViewShiftModeTitle;
+	TextFitTextView textViewShiftModeData;
+	TextFitTextView textViewTCLockUpTitle;
+	TextFitTextView textViewTCLockUpData;
 	
 	ImageButton imgbtnMode;
 	ImageButton imgbtnHourOdo;
@@ -61,12 +63,12 @@ public class MainARightMainFragment extends ParentFragment{
 	//////////////////////////////////////////////////
 	
 	//ANIMATION///////////////////////////////////////
-	TextViewXAxisFlipAnimation EngineModeDataAnimation;
-	TextViewXAxisFlipAnimation HourOdometerTitleAnimation;	
+	TextFitTextViewAxisFlipAnimation EngineModeDataAnimation;
+	TextFitTextViewAxisFlipAnimation HourOdometerTitleAnimation;	
 	//TextViewXAxisFlipAnimation TMCCOModeTitleDataAnimation;	// ++, --, 150305 HHI 변경 요청
-	TextViewXAxisFlipAnimation TMCCOModeDataAnimation;
-	TextViewXAxisFlipAnimation TMShiftModeDataAnimation;
-	TextViewXAxisFlipAnimation TMTCLockUpDataAnimation;
+	TextFitTextViewAxisFlipAnimation TMCCOModeDataAnimation;
+	TextFitTextViewAxisFlipAnimation TMShiftModeDataAnimation;
+	TextFitTextViewAxisFlipAnimation TMTCLockUpDataAnimation;
 	///////////////////////////////////////////////////
 	
 	//TEST////////////////////////////////////////////
@@ -106,40 +108,55 @@ public class MainARightMainFragment extends ParentFragment{
 		InitResource_TCLockUp();
 	}
 	public void InitResource_nonTCLockUp(){
-		textViewModeTitle = (TextView)mRoot.findViewById(R.id.textView_rightup_main_a_engine_mode_title_non_tclockup);
-		textViewModeData = (TextView)mRoot.findViewById(R.id.textView_rightup_main_a_engine_mode_data_non_tclockup);
-		textViewHourOdoTitle = (TextView)mRoot.findViewById(R.id.textView_rightup_main_a_hourodometer_title_non_tclockup);
-		textViewHourOdoData = (TextView)mRoot.findViewById(R.id.textView_rightup_main_a_hourodometer_data_non_tclockup);
-		textViewHourOdoUnit = (TextView)mRoot.findViewById(R.id.textView_rightup_main_a_hourodometer_unit_non_tclockup);
+		textViewModeTitle = (TextFitTextView)mRoot.findViewById(R.id.textView_rightup_main_a_engine_mode_title_non_tclockup);
+		textViewModeTitle.setText(getString(ParentActivity.getResources().getString(R.string.ENGINE_MODE), 85));
+		
+		textViewModeData = (TextFitTextView)mRoot.findViewById(R.id.textView_rightup_main_a_engine_mode_data_non_tclockup);
+		
+		textViewHourOdoTitle = (TextFitTextView)mRoot.findViewById(R.id.textView_rightup_main_a_hourodometer_title_non_tclockup);
+		//textViewHourOdoTitle.setText(getString(ParentActivity.getResources().getString(R.string.LATEST_HOURMETER), 90));
+	
+		textViewHourOdoData = (TextFitTextView)mRoot.findViewById(R.id.textView_rightup_main_a_hourodometer_data_non_tclockup);
+		textViewHourOdoUnit = (TextFitTextView)mRoot.findViewById(R.id.textView_rightup_main_a_hourodometer_unit_non_tclockup);
+		textViewHourOdoUnit.setText(getString(ParentActivity.getResources().getString(R.string.Hr), 7));
 		
 		imgbtnMode = (ImageButton)mRoot.findViewById(R.id.imageButton_rightup_main_a_engine_mode_non_tclockup);
 		imgbtnHourOdo = (ImageButton)mRoot.findViewById(R.id.imageButton_rightup_main_a_hourodometer_non_tclockup);
-		textViewCCOModeTitle = (TextView)mRoot.findViewById(R.id.textView_rightdown_main_a_tm_ccomode_title_non_tclockup);
-		textViewCCOModeData = (TextView)mRoot.findViewById(R.id.textView_rightdown_main_a_tm_ccomode_data_non_tclockup);
+		textViewCCOModeTitle = (TextFitTextView)mRoot.findViewById(R.id.textView_rightdown_main_a_tm_ccomode_title_non_tclockup);
+		textViewCCOModeTitle.setText(getString(ParentActivity.getResources().getString(R.string.CCO_MODE), 86));
+		textViewCCOModeData = (TextFitTextView)mRoot.findViewById(R.id.textView_rightdown_main_a_tm_ccomode_data_non_tclockup);
 		
-		textViewShiftModeTitle = (TextView)mRoot.findViewById(R.id.textView_rightdown_main_a_tm_shiftmode_title_non_tclockup);
-		textViewShiftModeData = (TextView)mRoot.findViewById(R.id.textView_rightdown_main_a_tm_shiftmode_data_non_tclockup);
+		textViewShiftModeTitle = (TextFitTextView)mRoot.findViewById(R.id.textView_rightdown_main_a_tm_shiftmode_title_non_tclockup);
+		textViewShiftModeTitle.setText(getString(ParentActivity.getResources().getString(R.string.SHIFT_MODE), 88));
+		textViewShiftModeData = (TextFitTextView)mRoot.findViewById(R.id.textView_rightdown_main_a_tm_shiftmode_data_non_tclockup);
 		
 		imgbtnCCOMode = (ImageButton)mRoot.findViewById(R.id.imageButton_rightdown_main_a_tm_ccomode_non_tclockup);
 		imgbtnShiftMode = (ImageButton)mRoot.findViewById(R.id.imageButton_rightdown_main_a_tm_shiftmode_non_tclockup);
 	}
 	public void InitResource_TCLockUp(){
-		textViewModeTitle = (TextView)mRoot.findViewById(R.id.textView_rightup_main_a_engine_mode_title);
-		textViewModeData = (TextView)mRoot.findViewById(R.id.textView_rightup_main_a_engine_mode_data);
-		textViewHourOdoTitle = (TextView)mRoot.findViewById(R.id.textView_rightup_main_a_hourodometer_title);
-		textViewHourOdoData = (TextView)mRoot.findViewById(R.id.textView_rightup_main_a_hourodometer_data);
-		textViewHourOdoUnit = (TextView)mRoot.findViewById(R.id.textView_rightup_main_a_hourodometer_unit);
+		textViewModeTitle = (TextFitTextView)mRoot.findViewById(R.id.textView_rightup_main_a_engine_mode_title);
+		textViewModeTitle.setText(getString(ParentActivity.getResources().getString(R.string.ENGINE_MODE), 85));
+		textViewModeData = (TextFitTextView)mRoot.findViewById(R.id.textView_rightup_main_a_engine_mode_data);
+		
+		textViewHourOdoTitle = (TextFitTextView)mRoot.findViewById(R.id.textView_rightup_main_a_hourodometer_title);
+		//textViewHourOdoTitle.setText(getString(ParentActivity.getResources().getString(R.string.LATEST_HOURMETER), 90));
+		textViewHourOdoData = (TextFitTextView)mRoot.findViewById(R.id.textView_rightup_main_a_hourodometer_data);
+		textViewHourOdoUnit = (TextFitTextView)mRoot.findViewById(R.id.textView_rightup_main_a_hourodometer_unit);
+		textViewHourOdoUnit.setText(getString(ParentActivity.getResources().getString(R.string.Hr), 7));
 		
 		imgbtnMode = (ImageButton)mRoot.findViewById(R.id.imageButton_rightup_main_a_engine_mode);
 		imgbtnHourOdo = (ImageButton)mRoot.findViewById(R.id.imageButton_rightup_main_a_hourodometer);
-		textViewCCOModeTitle = (TextView)mRoot.findViewById(R.id.textView_rightdown_main_a_tm_ccomode_title);
-		textViewCCOModeData = (TextView)mRoot.findViewById(R.id.textView_rightdown_main_a_tm_ccomode_data);
+		textViewCCOModeTitle = (TextFitTextView)mRoot.findViewById(R.id.textView_rightdown_main_a_tm_ccomode_title);
+		textViewCCOModeTitle.setText(getString(ParentActivity.getResources().getString(R.string.CCO_MODE), 86));
+		textViewCCOModeData = (TextFitTextView)mRoot.findViewById(R.id.textView_rightdown_main_a_tm_ccomode_data);
 		
-		textViewShiftModeTitle = (TextView)mRoot.findViewById(R.id.textView_rightdown_main_a_tm_shiftmode_title);
-		textViewShiftModeData = (TextView)mRoot.findViewById(R.id.textView_rightdown_main_a_tm_shiftmode_data);
+		textViewShiftModeTitle = (TextFitTextView)mRoot.findViewById(R.id.textView_rightdown_main_a_tm_shiftmode_title);
+		textViewShiftModeTitle.setText(getString(ParentActivity.getResources().getString(R.string.SHIFT_MODE), 88));
+		textViewShiftModeData = (TextFitTextView)mRoot.findViewById(R.id.textView_rightdown_main_a_tm_shiftmode_data);
 		
-		textViewTCLockUpTitle = (TextView)mRoot.findViewById(R.id.textView_rightdown_main_a_tm_tclockup_title);
-		textViewTCLockUpData = (TextView)mRoot.findViewById(R.id.textView_rightdown_main_a_tm_tclockup_data);
+		textViewTCLockUpTitle = (TextFitTextView)mRoot.findViewById(R.id.textView_rightdown_main_a_tm_tclockup_title);
+		textViewTCLockUpTitle.setText(getString(ParentActivity.getResources().getString(R.string.TC_LOCK_UP), 89));
+		textViewTCLockUpData = (TextFitTextView)mRoot.findViewById(R.id.textView_rightdown_main_a_tm_tclockup_data);
 		
 		imgbtnCCOMode = (ImageButton)mRoot.findViewById(R.id.imageButton_rightdown_main_a_tm_ccomode);
 		imgbtnShiftMode = (ImageButton)mRoot.findViewById(R.id.imageButton_rightdown_main_a_tm_shiftmode);
@@ -164,12 +181,12 @@ public class MainARightMainFragment extends ParentFragment{
 		CursurDisplayDetail(ParentActivity._MainABaseFragment.CursurIndex);
 	}
 	public void InitAnimation(){
-		EngineModeDataAnimation = new TextViewXAxisFlipAnimation(ParentActivity);
-		HourOdometerTitleAnimation = new TextViewXAxisFlipAnimation(ParentActivity);
+		EngineModeDataAnimation = new TextFitTextViewAxisFlipAnimation(ParentActivity);
+		HourOdometerTitleAnimation = new TextFitTextViewAxisFlipAnimation(ParentActivity);
 		//TMCCOModeTitleDataAnimation = new TextViewXAxisFlipAnimation(ParentActivity);	// ++, --, 150305 HHI 변경 요청
-		TMCCOModeDataAnimation = new TextViewXAxisFlipAnimation(ParentActivity);
-		TMShiftModeDataAnimation = new TextViewXAxisFlipAnimation(ParentActivity);
-		TMTCLockUpDataAnimation = new TextViewXAxisFlipAnimation(ParentActivity);		
+		TMCCOModeDataAnimation = new TextFitTextViewAxisFlipAnimation(ParentActivity);
+		TMShiftModeDataAnimation = new TextFitTextViewAxisFlipAnimation(ParentActivity);
+		TMTCLockUpDataAnimation = new TextFitTextViewAxisFlipAnimation(ParentActivity);		
 		
 	}
 	@Override
@@ -258,13 +275,13 @@ public class MainARightMainFragment extends ParentFragment{
 		try {
 			switch (_EngineMode) {
 			case CAN1CommManager.DATA_STATE_ENGINE_MODE_PWR:
-				EngineModeDataAnimation.FlipAnimation(textViewModeData,getResources().getString(string.POWER));
+				EngineModeDataAnimation.FlipAnimation(textViewModeData,getString(getResources().getString(string.POWER), 96));
 				break;
 			case CAN1CommManager.DATA_STATE_ENGINE_MODE_STD:
-				EngineModeDataAnimation.FlipAnimation(textViewModeData,getResources().getString(string.STANDARD));
+				EngineModeDataAnimation.FlipAnimation(textViewModeData,getString(getResources().getString(string.STANDARD), 95));
 				break;
 			case CAN1CommManager.DATA_STATE_ENGINE_MODE_ECONO:
-				EngineModeDataAnimation.FlipAnimation(textViewModeData,getResources().getString(string.ECONO));
+				EngineModeDataAnimation.FlipAnimation(textViewModeData,getString(getResources().getString(string.ECONO), 94));
 				break;
 			default:
 //				EngineModeDataAnimation.FlipAnimation(textViewModeData,getResources().getString(string.POWER));
@@ -283,13 +300,13 @@ public class MainARightMainFragment extends ParentFragment{
 //			HourOdometerTitleAnimation.FlipAnimation(textViewHourOdoTitle,"");
 //			break;
 		case CAN1CommManager.DATA_STATE_HOURMETER_LATEST:
-			HourOdometerTitleAnimation.FlipAnimation(textViewHourOdoTitle,getResources().getString(string.LATEST_HOURMETER));
+			HourOdometerTitleAnimation.FlipAnimation(textViewHourOdoTitle,getString(getResources().getString(string.LATEST_HOURMETER), 90));
 			break;
 		case CAN1CommManager.DATA_STATE_ODOMETER_TOTAL:
-			HourOdometerTitleAnimation.FlipAnimation(textViewHourOdoTitle,getResources().getString(string.TOTAL_ODOMETER));
+			HourOdometerTitleAnimation.FlipAnimation(textViewHourOdoTitle,getString(getResources().getString(string.TOTAL_ODOMETER), 92));
 			break;
 		case CAN1CommManager.DATA_STATE_ODOMETER_LATEST:
-			HourOdometerTitleAnimation.FlipAnimation(textViewHourOdoTitle,getResources().getString(string.LATEST_ODOMETER));
+			HourOdometerTitleAnimation.FlipAnimation(textViewHourOdoTitle,getString(getResources().getString(string.LATEST_ODOMETER), 93));
 			break;
 
 		default:
@@ -304,22 +321,22 @@ public class MainARightMainFragment extends ParentFragment{
 //			break;
 		case CAN1CommManager.DATA_STATE_HOURMETER_LATEST:
 			textViewHourOdoData.setText(ParentActivity.GetHourmeterString(LatestHour));
-			textViewHourOdoUnit.setText(ParentActivity.getResources().getString(string.Hr));
+			textViewHourOdoUnit.setText(getString(ParentActivity.getResources().getString(string.Hr), 7));
 			break;
 		case CAN1CommManager.DATA_STATE_ODOMETER_TOTAL:
 			textViewHourOdoData.setText(ParentActivity.GetOdometerStrng(TotalOdo,ParentActivity.UnitOdo));
 			if(ParentActivity.UnitOdo == ParentActivity.UNIT_ODO_MILE){
-				textViewHourOdoUnit.setText(ParentActivity.getResources().getString(string.mile));
+				textViewHourOdoUnit.setText(getString(ParentActivity.getResources().getString(string.mile), 38));
 			}else{
-				textViewHourOdoUnit.setText(ParentActivity.getResources().getString(string.km));
+				textViewHourOdoUnit.setText(getString(ParentActivity.getResources().getString(string.km), 37));
 			}
 			break;
 		case CAN1CommManager.DATA_STATE_ODOMETER_LATEST:
 			textViewHourOdoData.setText(ParentActivity.GetOdometerStrng(LatestOdo,ParentActivity.UnitOdo));
 			if(ParentActivity.UnitOdo == ParentActivity.UNIT_ODO_MILE){
-				textViewHourOdoUnit.setText(ParentActivity.getResources().getString(string.mile));
+				textViewHourOdoUnit.setText(getString(ParentActivity.getResources().getString(string.mile), 38));
 			}else{
-				textViewHourOdoUnit.setText(ParentActivity.getResources().getString(string.km));
+				textViewHourOdoUnit.setText(getString(ParentActivity.getResources().getString(string.km), 37));
 			}
 			break;
 
@@ -377,9 +394,9 @@ public class MainARightMainFragment extends ParentFragment{
 		//}
 		//if(Model == CheckModel.MODEL_980){
 		if(Model == 980){
-			textViewCCOModeTitle.setText(getResources().getString(string.ICCO_MODE));
+			textViewCCOModeTitle.setText(getString(getResources().getString(string.ICCO_MODE), 87));
 		}else{
-			textViewCCOModeTitle.setText(getResources().getString(string.CCO_MODE));
+			textViewCCOModeTitle.setText(getString(getResources().getString(string.CCO_MODE), 86));
 		}
 		// --, 150305 bwk
 		
@@ -388,20 +405,20 @@ public class MainARightMainFragment extends ParentFragment{
 		try {
 			switch (Data) {
 			case CAN1CommManager.DATA_STATE_TM_CLUTCHCUTOFF_OFF:
-				TMCCOModeDataAnimation.FlipAnimation(textViewCCOModeData,getResources().getString(string.OFF));
+				TMCCOModeDataAnimation.FlipAnimation(textViewCCOModeData,getString(getResources().getString(string.OFF), 98));
 				break;
 			case CAN1CommManager.DATA_STATE_TM_CLUTCHCUTOFF_L:
-				TMCCOModeDataAnimation.FlipAnimation(textViewCCOModeData,getResources().getString(string.L));
+				TMCCOModeDataAnimation.FlipAnimation(textViewCCOModeData,getString(getResources().getString(string.L), 99));
 				break;
 			case CAN1CommManager.DATA_STATE_TM_CLUTCHCUTOFF_M:
-				TMCCOModeDataAnimation.FlipAnimation(textViewCCOModeData,getResources().getString(string.M));
+				TMCCOModeDataAnimation.FlipAnimation(textViewCCOModeData,getString(getResources().getString(string.M), 100));
 				break;
 			case CAN1CommManager.DATA_STATE_TM_CLUTCHCUTOFF_H:
 				//if(ParentActivity._CheckModel.GetMCUVersion(CAN1Comm.Get_ComponentBasicInformation_1698_PGN65330()) == CheckModel.MODEL_980)
 				if(ParentActivity._CheckModel.GetMCUModelNum(CAN1Comm.Get_ComponentBasicInformation_1698_PGN65330()) == 980)
-					TMCCOModeDataAnimation.FlipAnimation(textViewCCOModeData,getResources().getString(string.ON));
+					TMCCOModeDataAnimation.FlipAnimation(textViewCCOModeData,getString(getResources().getString(string.ON), 97));
 				else
-					TMCCOModeDataAnimation.FlipAnimation(textViewCCOModeData,getResources().getString(string.H));
+					TMCCOModeDataAnimation.FlipAnimation(textViewCCOModeData,getString(getResources().getString(string.H), 101));
 				break;
 			default:
 //				TMCCOModeDataAnimation.FlipAnimation(textViewCCOModeData,getResources().getString(string.OFF));
@@ -416,16 +433,16 @@ public class MainARightMainFragment extends ParentFragment{
 		try {
 			switch (Data) {
 			case CAN1CommManager.DATA_STATE_TM_SHIFTMODE_MANUAL:
-				TMShiftModeDataAnimation.FlipAnimation(textViewShiftModeData,getResources().getString(string.MANUAL));
+				TMShiftModeDataAnimation.FlipAnimation(textViewShiftModeData,getString(getResources().getString(string.MANUAL), 102));
 				break;
 			case CAN1CommManager.DATA_STATE_TM_SHIFTMODE_AL:
-				TMShiftModeDataAnimation.FlipAnimation(textViewShiftModeData,getResources().getString(string.AL));
+				TMShiftModeDataAnimation.FlipAnimation(textViewShiftModeData,getString(getResources().getString(string.AL), 103));
 				break;
 			case CAN1CommManager.DATA_STATE_TM_SHIFTMODE_AN:
-				TMShiftModeDataAnimation.FlipAnimation(textViewShiftModeData,getResources().getString(string.AN));
+				TMShiftModeDataAnimation.FlipAnimation(textViewShiftModeData,getString(getResources().getString(string.AN), 104));
 				break;
 			case CAN1CommManager.DATA_STATE_TM_SHIFTMODE_AH:
-				TMShiftModeDataAnimation.FlipAnimation(textViewShiftModeData,getResources().getString(string.AH));
+				TMShiftModeDataAnimation.FlipAnimation(textViewShiftModeData,getString(getResources().getString(string.AH), 105));
 				break;
 			default:
 //				TMShiftModeDataAnimation.FlipAnimation(textViewShiftModeData,getResources().getString(string.MANUAL));
@@ -440,10 +457,10 @@ public class MainARightMainFragment extends ParentFragment{
 		try {
 			switch (Data) {
 			case CAN1CommManager.DATA_STATE_TM_LOCKUPCLUTCH_OFF:
-				TMTCLockUpDataAnimation.FlipAnimation(textViewTCLockUpData,getResources().getString(string.OFF));
+				TMTCLockUpDataAnimation.FlipAnimation(textViewTCLockUpData,getString(getResources().getString(string.OFF), 98));
 				break;
 			case CAN1CommManager.DATA_STATE_TM_LOCKUPCLUTCH_ON:
-				TMTCLockUpDataAnimation.FlipAnimation(textViewTCLockUpData,getResources().getString(string.ON));
+				TMTCLockUpDataAnimation.FlipAnimation(textViewTCLockUpData,getString(getResources().getString(string.ON), 97));
 				break;
 			default:
 //				TMTCLockUpDataAnimation.FlipAnimation(textViewTCLockUpData,getResources().getString(string.OFF));

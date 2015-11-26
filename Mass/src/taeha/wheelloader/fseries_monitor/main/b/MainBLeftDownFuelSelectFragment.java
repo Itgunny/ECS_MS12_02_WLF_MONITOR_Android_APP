@@ -93,7 +93,9 @@ public class MainBLeftDownFuelSelectFragment extends ParentFragment{
 	protected void InitResource() {
 		// TODO Auto-generated method stub
 		radioAverageFuel = (RadioButton)mRoot.findViewById(R.id.radioButton_leftdown_main_b_fuel_select_averagefuelrate);
+		radioAverageFuel.setText(getString(ParentActivity.getResources().getString(R.string.Average_Fuel_Rate), 108));
 		radioADaysFuelUsed = (RadioButton)mRoot.findViewById(R.id.radioButton_leftdown_main_b_fuel_select_adaysfuelused);
+		radioADaysFuelUsed.setText(getString(ParentActivity.getResources().getString(R.string.A_Days_Fuel_Used), 147));
 		
 		LayoutBG = (RelativeLayout)mRoot.findViewById(R.id.RelativeLayout_leftdown_main_b_fuelselect);
 	}

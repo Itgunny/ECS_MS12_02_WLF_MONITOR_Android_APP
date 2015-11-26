@@ -1,20 +1,19 @@
 <?xml version="1.0" encoding="utf-8" standalone="no"?>
 <resources>
-    <string name="app_name">Wheel_Loader_F_Series_UI</string>
+     <string name="app_name">Wheel_Loader_F_Series_UI</string>
     <string name="action_settings">Settings</string>
     <string name="hello_world">Hello world!</string>
     <string name="Crash_Toast_Text">Crash</string>
     <string name="Error_Report">Error Report</string>
     <string name="Crash_Data">Crash Data</string>
-    <!-- Common Start-->
-    <string name="Hr">Tim</string>
+    <string name="Hr">Hr</string>
     <string name="C">℃</string>
     <string name="F">℉</string>
     <string name="V">V</string>
     <string name="ton">ton</string>
-    <string name="lb">pund</string>
-    <string name="AM">fm</string>
-    <string name="PM">em</string>
+    <string name="lb">lb</string>
+    <string name="AM">AM</string>
+    <string name="PM">PM</string>
     <string name="OK">OK</string>
     <string name="Cancel">CANCEL</string>
     <string name="Active_Fault">aktuella fel</string>
@@ -31,9 +30,9 @@
     <string name="Boom">Bom</string>
     <string name="Bucket">Skopan</string>
     <string name="Initialization">Förbereda</string>
-    <string name="km_h">km/tim</string>
+    <string name="km_h">km/h</string>
     <string name="mph">mph</string>
-    <string name="l_h">L/tim</string>
+    <string name="l_h">l/h</string>
     <string name="rpm">rpm</string>
     <string name="Setting">Inställning</string>
     <string name="Clear">Ta bort</string>
@@ -64,7 +63,6 @@
     <string name="New_Password">NYTT LÖSENORD</string>
     <string name="Re_entering_New_Password">FÖRSÖK IGEN</string>
     <string name="Access_Denied">Åtkomst nekad</string>
-    <string name="Input_new_phone_number">Mata in nytt telefonnummer</string>
     <string name="_5_12_digits">5~12 siffror</string>
     <string name="No_Changes_executed">Inga ändringar slutförda</string>
     <string name="Skip">Hoppa över</string>
@@ -83,18 +81,16 @@
     <string name="Initial_Para_Error_Found">Initial Parameter Error Found</string>
     <string name="Please_Reset_Power">Please Reset Power</string>
     <string name="l">l</string>
-    <!-- Common End-->
-    <!-- Main Start-->
+    <string name="Machine_Serial_Number">Machine Serial Number</string>
+    <string name="Serial_No">Serial No :</string>
+    <string name="Re_entering_Serial_No">Re-entering Serial No :</string>
     <string name="ENGINE_MODE">MOTOR LÄGE</string>
-    <string name="WARMING_UP">UPPVÄRMNING</string>
     <string name="CCO_MODE">C.C.O LÄGE</string>
     <string name="ICCO_MODE">I.C.C.O LÄGE</string>
     <string name="SHIFT_MODE">VÄXLINGS LÄGE</string>
     <string name="TC_LOCK_UP">T.C. LOCK UP</string>
-    <string name="TOTAL_HOURMETER">TOTAL TIMMÄTARE</string>
     <string name="LATEST_HOURMETER">SENASTE TIMMÄTARE</string>
     <string name="AVERAGE_FUEL_RATE">GENOMSNITT BRÄNSLEFÖRBRUKNING</string>
-    <string name="CURRENT_FUEL_RATE">NUVARANDE BRÄNSLEFÖRBRUKNING</string>
     <string name="TOTAL_ODOMETER">TOTAL TRIPPMÄTARE</string>
     <string name="LATEST_ODOMETER">SENASTE TRIPPMÄTARE</string>
     <string name="ECONO">EKONOMI</string>
@@ -112,7 +108,6 @@
     <string name="Total_Hourmeter">TOTAL TIMMÄTARE</string>
     <string name="Latest_Hourmeter">SENASTE TIMMÄTARE</string>
     <string name="Average_Fuel_Rate">GENOMSNITT BRÄNSLEFÖRBRUKNING</string>
-    <string name="Current_Fuel_Rate">NUVARANDE BRÄNSLEFÖRBRUKNING</string>
     <string name="Total_Odometer">TOTAL TRIPPMÄTARE</string>
     <string name="Latest_Odometer">SENASTE TRIPPMÄTARE</string>
     <string name="HYD_Temp">HYD Temp.</string>
@@ -124,7 +119,6 @@
     <string name="Help">Hjälp</string>
     <string name="Bucket_Full_In_Error">Bucket Full In Error</string>
     <string name="Sudden_Change_Error">Sudden Change Error</string>
-    <string name="Please_press_Enter_key">Please press Enter key</string>
     <string name="User1">User1</string>
     <string name="User2">User2</string>
     <string name="User3">User3</string>
@@ -144,20 +138,18 @@
     <string name="Lamp_FuelWarmer">Fuel Warmer</string>
     <string name="Lamp_Preheat">Preheat</string>
     <string name="Lamp_FloatMode">Float Mode</string>
-    <string name="SuddenChange_BucketFullIn_Error_Warning">Bucket is not full in and angular speed is a sudden change, though weigh may be inaccurate. Press the Enter Key to reweigh.</string>
     <string name="Bucket_Full_In_Error_Warning">Bucket is not full in, though weigh may be inaccurate. Press the Enter Key to reweigh.</string>
     <string name="Sudden_Change_Error_Warning">Angular speed is a sudden change, though weigh may be inaccurate. Press the Enter Key to reweigh.</string>
     <string name="Hydraulic_Oil_Temp_Low_Warning">Hydraulic oil temperature low.</string>
-    <string name="LATEST_FUEL_CONSUMED">LATEST FUEL CONSUMED</string>
-    <string name="Latest_Fuel_Consumed">Latest Fuel Consumed</string>
-    <string name="CloseMulti">Player is running.\nYou want to close a Player?</string>
-    <string name="CloseMira">Miracast is running.\nYou want to close a Miracast?</string>
+    <string name="CloseMulti">"Player is running.\nYou want to close a Player?"</string>
+    <string name="CloseMira">"Smart Terminal is running.\nYou want to close a Miracast?"</string>
     <string name="Front_Axle_Temp">Front Axle Temp.</string>
     <string name="Rear_Axle_Temp">Rear Axle Temp.</string>
     <string name="A_DAYS_FUEL_USED">A DAYS FUEL USED</string>
     <string name="A_Days_Fuel_Used">A Days Fuel Used</string>
-    <!-- Main End -->
-    <!-- Key Start-->
+    <string name="Axle_Warning_Popup">"CAUTION!\nOne of axles exceeds allowable oil temperature‼\nStop operating the machine and cool down axle oil\nuntil warning lamp goes off."</string>
+    <string name="Boom_Detent_Mode">Boom Detent Mode</string>
+    <string name="Bucket_Detent_Mode">Bucket Detent Mode</string>
     <string name="Main_Light">Färdbelysning</string>
     <string name="Work_Light">Arbetsbelysning</string>
     <string name="Auto_Grease">Centralsmörjning</string>
@@ -169,7 +161,6 @@
     <string name="Mirror_Heat">Uppvärmning backspeglar</string>
     <string name="Detent_Setting">Spärrad inställning</string>
     <string name="Fine_Modulation">Mjukstart</string>
-    <string name="FN">Funktion</string>
     <string name="Position_Lamp">Positionsljus</string>
     <string name="Head_Lamp">Huvudstrålkastare</string>
     <string name="Front">Fram</string>
@@ -191,9 +182,7 @@
     <string name="Save_Position">Spara position</string>
     <string name="Forward">Framåt</string>
     <string name="Backward">Bakåt</string>
-    <string name="Excute_Locking_Attachment">Lås redskap</string>
     <string name="Excuting_Locking_Attachment">Lås redskap</string>
-    <string name="Excute_Unlocking_Attachment">Lås upp redskap</string>
     <string name="Excuting_Unlocking_Attachment">Lås upp redskap</string>
     <string name="Attachment_Unlocked_Check_Locking_Status">Attachment Unlocked. Check Locking Status.</string>
     <string name="Do_you_want_to_turn_on_Mirror_Heat">Do you want to turn on Mirror Heat?</string>
@@ -205,15 +194,11 @@
     <string name="Mirror_Heat_is_NOT_equipped">Mirror Heat is NOT equipped.</string>
     <string name="Quick_Coupler_is_NOT_equipped">Quick Coupler is NOT equipped.</string>
     <string name="Ride_Control_is_NOT_equipped">Ride Control is NOT equipped.</string>
-    <!-- Key End -->
-    <!-- Menu Start -->
-    <string name="Mode"><font size="14">GRUNDINSTÄLLNINGAR</font></string>
+    <string name="Mode">GRUNDINSTÄLLNINGAR</string>
     <string name="Monitoring">ÖVERVAKNING</string>
-    <string name="Management"><font size="18">HANDHAVANDE</font></string>
+    <string name="Management">HANDHAVANDE</string>
     <string name="Preference">Förval</string>
     <string name="Multimedia">Multimedia</string>
-    <!-- Menu End -->
-    <!-- Menu Mode Start -->
     <string name="Eng">ENG.</string>
     <string name="TM">TM.</string>
     <string name="HYD">HYD.</string>
@@ -224,14 +209,12 @@
     <string name="Kick_Down">Kick Down</string>
     <string name="Engine_Speed">MOTORVARVTAL</string>
     <string name="Engine_Setting">Motorinställning</string>
-    <string name="Warming_Up">Uppvärmning</string>
     <string name="TC_Lock_Up">T.C. Lock Up</string>
     <string name="Bucket_Priority">Prioritering av skopan</string>
     <string name="Boom_Bucket_Detent_Mode">Bom Skopa Spärrat läge</string>
     <string name="Auxilliary_Attachment_Max_Flow_Level">Extrahydraulik Max flödesnivå</string>
     <string name="Soft_End_Stop">Mjukt ändläge</string>
     <string name="Engine_Auto_Shutdown">Motor Automatisk avstängning</string>
-    <string name="Engine_Delay_Shutdown">Motor Fördröjd avstängning</string>
     <string name="Camera_Setting">Kamerainställning</string>
     <string name="Cooling_Fan_Reverse_Mode">Vända riktning kylfläkt</string>
     <string name="Wiper_Level_Setting">Torkare inställning</string>
@@ -268,11 +251,9 @@
     <string name="Excute">Execute</string>
     <string name="Push_and_hold_to_reverse_rotation">Push and hold to reverse rotation.</string>
     <string name="rpm_km_h">rpm/km/h</string>
-    <!-- Menu Mode End -->
-    <!-- Menu Monitoring Start -->
+    <string name="You_should_turn_OFF_Soft_end_stop_before_start_calibration">You should turn OFF Soft end stop before start calibration.</string>
     <string name="Machine_Monitoring">ÖVERVAKNING</string>
     <string name="Operation_History">Arbetshistorik</string>
-    <string name="Weighing_Information">Viktinformation</string>
     <string name="Fault_History">Felhistorik</string>
     <string name="EHCU_IO_Information">EHCU I/O Information</string>
     <string name="Version_Information">Information om versioner</string>
@@ -291,10 +272,8 @@
     <string name="Cluster">Cluster</string>
     <string name="RMCU">RMCU</string>
     <string name="EHCU">EHCU</string>
-    <string name="ACU">ACU</string>
     <string name="BKCU">BKCU</string>
     <string name="Software_Update">Programvaruppdatering</string>
-    <string name="RMCU_Machine_Information">RMCU Information</string>
     <string name="Network_Type">Nätverk Typ</string>
     <string name="Manufacture_Date">Tillverkningsdatum</string>
     <string name="Program_Version">Program Version</string>
@@ -327,29 +306,22 @@
     <string name="ECU_Type">ECU Type</string>
     <string name="ECU_Manufacturer_Name">ECU Manufacturer Name</string>
     <string name="Calibration_ID">Calibration ID</string>
-    <string name="Boom_Lever_Floating_Position_Adjust">Bomspak flytläge justering</string>
     <string name="Machine">MASKIN FELKODER</string>
     <string name="Engine">Motor</string>
     <string name="Transmission">Transmission</string>
     <string name="Please_refer_to_machine_manual_for_more_detailed_description">Se maskinens förarhandbok för en mer utförlig beskrivning.</string>
     <string name="Delete_Logged_Fault">Ta bort tidigare fel</string>
-    <string name="Fingertip_Calibration">Fingertopp kalibrering</string>
-    <string name="Boom_Down_Response_Adjust">Justering startläge bom ner</string>
-    <string name="Bucket_Dump_Response_Adjust">Justering startläge skopa ut</string>
     <string name="Hardware">Hardware</string>
     <string name="Fuel_Consumption_History">Fuel Consumption History</string>
     <string name="General_Record">General Record</string>
     <string name="Hourly_Record">Hourly Record</string>
     <string name="Daily_Record">Daily Record</string>
     <string name="Mode_Record">Mode Record</string>
-    <string name="Machine_Information">Machine Information</string>
-    <!-- Menu Monitoring End -->
-    <!-- Menu Management Start -->
+    <string name="Machine_Information">Information om versioner</string>
     <string name="Machine_Security">SÄKERHET VID START</string>
     <string name="Calibration">Kalibrering</string>
     <string name="Speedometer_Setting">Hastighetsmätare Freq. Inställning</string>
     <string name="Change_AS_Phone_Number">Byta kontakt telefonnummer</string>
-    <string name="Service_Contact">SERVICE KONTAKT</string>
     <string name="Service_Menu">SERVICE MENY</string>
     <string name="ESL_System_Setting">ESL SYSTEM INSTÄLLNINGAR</string>
     <string name="Change_Password">BYTA LÖSENORD</string>
@@ -375,8 +347,8 @@
     <string name="Lower_the_boom_at_min_height">Sänk bommen till lägsta position</string>
     <string name="Lift_up_the_boom_at_max_height">Lyft bommen till högsta position</string>
     <string name="Lift_the_boom_to__5_0">Lyft bommen till - 5.0º</string>
-    <string name="Max_retraction_of_bucket_cylinder">Max ändläge på skopcylinder in </string>
-    <string name="Max_extension_of_bucket_cylinder">Max ändläge på skopcylinder ut </string>
+    <string name="Max_retraction_of_bucket_cylinder">Max ändläge på skopcylinder in</string>
+    <string name="Max_extension_of_bucket_cylinder">Max ändläge på skopcylinder ut</string>
     <string name="Next">Nästa</string>
     <string name="Complete">Slutförd</string>
     <string name="Start">Start</string>
@@ -422,8 +394,7 @@
     <string name="Engine_oil_filter">Motoroljefilter</string>
     <string name="Fuel_filter_element">Bränslefilter</string>
     <string name="Fuel_Pre_filter">Bränsleförfilter</string>
-    <string name="Breather_Hydraulic_tank">Hydraultank ventilator</string>
-    <string name="Hydraulic_Tank_Air_Breather_Filter"/>
+    <string name="Hydraulic_Tank_Air_Breather_Filter">Hydraulic Tank Air Breather Filter</string>
     <string name="Radiator_engine_coolant">Kylvätska motor</string>
     <string name="Transmission_oil">Transmississionsolja</string>
     <string name="Transmission_oil_filter">Transmissionsoljefilter</string>
@@ -431,7 +402,6 @@
     <string name="Rear_axle_oil">Bakaxel olja</string>
     <string name="Crankcase_Ventilation_Filter">Crankcase Ventilation Filter</string>
     <string name="Aircon_Heater_Outer_Filter">Air-con. &amp; Heater Outer Filter</string>
-    <string name="Hydraulic_Tank_Drain_Filter">Filterelement hydraultank</string>
     <string name="Count">RÄKNA</string>
     <string name="Elapsed_Time">PÅGÅENDE TID</string>
     <string name="Cycle">DRIFTCYKEL</string>
@@ -440,13 +410,11 @@
     <string name="Maintenance_History">Servicehistorik</string>
     <string name="Confirm_Reset_elapsed_time">Bekräfta: Återställ körtid</string>
     <string name="Recommend_deleting_unused_tag_for_security_when_you_register_new_tag">Recommend deleting unused tag for security when you register new tag.</string>
-    <!-- Menu Management End -->
-    <!-- Menu Preference Start -->
+    <string name="Software_Update_Warning">Turn the engine off for software update.</string>
     <string name="Brightness_Setting">LJUSSTYRKA INSTÄLLNINGAR</string>
     <string name="Clock_Setting">Inställning klocka</string>
     <string name="Unit_Setting">Inställning värde</string>
     <string name="Sound_Output_Setting">Ljudinställning</string>
-    <string name="Wireless_Communication_Setting">Inställning Trådlös överföring</string>
     <string name="Display_Style">Utseende display</string>
     <string name="Time_settings_for_daytime">Tidsinställningar för dagtid</string>
     <string name="Daytime">Dagtid</string>
@@ -458,11 +426,11 @@
     <string name="Type_B">Type B</string>
     <string name="Unit_C">℃</string>
     <string name="Unit_F">℉</string>
-    <!-- Menu Preference End -->
-    <!-- Menu Multimedia Start -->
+    <string name="Check_Radio_mode_is_AUX_mode">(Check Radio mode is AUX mode)</string>
+    <string name="Reverse_camera">(Reverse Camera)</string>
+    <string name="Language_Warning">To ensure that the entire system reflects the change, please Restart the machine.</string>
     <string name="Media_Palyer">Mediaspelare</string>
-    <!-- Menu Multimedia End -->
-    <!-- Language Start -->
+    <string name="Smart_Terminal">Smart Terminal</string>
     <string name="Korean">Korean</string>
     <string name="English">English</string>
     <string name="German">German</string>
@@ -476,5 +444,31 @@
     <string name="Slovakian">Slovakian</string>
     <string name="Estonian">Estonian</string>
     <string name="Finnish">Finnish</string>
-    <!-- Language End -->
+    <string name="Input_new_phone_number">Mata in nytt telefonnummer</string>
+    <string name="WARMING_UP">UPPVÄRMNING</string>
+    <string name="TOTAL_HOURMETER">TOTAL TIMMÄTARE</string>
+    <string name="CURRENT_FUEL_RATE">NUVARANDE BRÄNSLEFÖRBRUKNING</string>
+    <string name="Current_Fuel_Rate">NUVARANDE BRÄNSLEFÖRBRUKNING</string>
+    <string name="Excute_Locking_Attachment">Lås redskap</string>
+    <string name="Excute_Unlocking_Attachment">Lås upp redskap</string>
+    <string name="Warming_Up">Uppvärmning</string>
+    <string name="Engine_Delay_Shutdown">Motor Fördröjd avstängning</string>
+    <string name="Weighing_Information">Viktinformation</string>
+    <string name="ACU">ACU</string>
+    <string name="Boom_Lever_Floating_Position_Adjust">Bomspak flytläge justering</string>
+    <string name="Fingertip_Calibration">Fingertopp kalibrering</string>
+    <string name="Boom_Down_Response_Adjust">Justering startläge bom ner</string>
+    <string name="Bucket_Dump_Response_Adjust">Justering startläge skopa ut</string>
+    <string name="Service_Contact">SERVICE KONTAKT</string>
+    <string name="METRIC">Metrisk enhet</string>
+    <string name="US">US enhet</string>
+    <string name="CUSTOM">Användarinställning</string>
+    <string name="FuelRate">Fuel Rate</string>
+    <string name="gal_h">gal/h</string>
+    <string name="gal">gal</string>
+    <string name="USTon">US ton</string>
+    <string name="Volume">Volum</string>
+    <string name="Volume_L">L</string>
+    <string name="Volume_gallon">gal</string>
+    <string name="Distance">Avstånd</string>
 </resources>

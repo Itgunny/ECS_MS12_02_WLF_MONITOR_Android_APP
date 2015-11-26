@@ -16,6 +16,7 @@ import taeha.wheelloader.fseries_monitor.main.CAN1CommManager;
 import taeha.wheelloader.fseries_monitor.main.CheckModel;
 import taeha.wheelloader.fseries_monitor.main.ParentFragment;
 import taeha.wheelloader.fseries_monitor.main.R;
+import taeha.wheelloader.fseries_monitor.main.TextFitTextView;
 import taeha.wheelloader.fseries_monitor.main.R.string;
 
 public class MainBLeftUpMachineStatusSelectFragment1 extends ParentFragment{
@@ -34,7 +35,7 @@ public class MainBLeftUpMachineStatusSelectFragment1 extends ParentFragment{
 	RadioButton radioWeighingSystem;
 	RadioButton radioCoolantTemp;
 	
-	TextView textViewOK;
+	TextFitTextView textViewOK;
 
 	ImageButton imgbtnOK;
 	//////////////////////////////////////////////////
@@ -92,24 +93,52 @@ public class MainBLeftUpMachineStatusSelectFragment1 extends ParentFragment{
 		if(Build.VERSION.SDK_INT <= Build.VERSION_CODES.ICE_CREAM_SANDWICH_MR1){
 			radioHYDTemp = (RadioButton)mRoot.findViewById(R.id.radioButton_leftup_main_b_machinestatus_select_hydtemp);
 			radioHYDTemp.setPadding(90, 0, 0, 0);
+			radioHYDTemp.setText(getString(ParentActivity.getResources().getString(R.string.HYD_Temp), 111));
+			ParentActivity.setMarqueeRadio(radioHYDTemp);
+			
 			radioTMOilTemp = (RadioButton)mRoot.findViewById(R.id.radioButton_leftup_main_b_machinestatus_select_tmoiltemp);
 			radioTMOilTemp.setPadding(90, 0, 0, 0);
+			radioTMOilTemp.setText(getString(ParentActivity.getResources().getString(R.string.TM_Oil_Temp), 112));
+			ParentActivity.setMarqueeRadio(radioTMOilTemp);
+			
 			radioBatteryVoltage = (RadioButton)mRoot.findViewById(R.id.radioButton_leftup_main_b_machinestatus_select_battery);
 			radioBatteryVoltage.setPadding(90, 0, 0, 0);
+			radioBatteryVoltage.setText(getString(ParentActivity.getResources().getString(R.string.Battery_Volt), 113));
+			ParentActivity.setMarqueeRadio(radioBatteryVoltage);
+			
 			radioWeighingSystem = (RadioButton)mRoot.findViewById(R.id.radioButton_leftup_main_b_machinestatus_select_weighing);
 			radioWeighingSystem.setPadding(90, 0, 0, 0);
+			radioWeighingSystem.setText(getString(ParentActivity.getResources().getString(R.string.Weighing_System), 114));
+			ParentActivity.setMarqueeRadio(radioWeighingSystem);
+			
 			radioCoolantTemp = (RadioButton)mRoot.findViewById(R.id.radioButton_leftup_main_b_machinestatus_select_coolanttemp);
 			radioCoolantTemp.setPadding(90, 0, 0, 0);
+			radioCoolantTemp.setText(getString(ParentActivity.getResources().getString(R.string.Coolant_Temp), 115));
+			ParentActivity.setMarqueeRadio(radioCoolantTemp);
 		} else {
 			radioHYDTemp = (RadioButton)mRoot.findViewById(R.id.radioButton_leftup_main_b_machinestatus_select_hydtemp);
+			radioHYDTemp.setText(getString(ParentActivity.getResources().getString(R.string.HYD_Temp), 111));
+			ParentActivity.setMarqueeRadio(radioHYDTemp);
+			
 			radioTMOilTemp = (RadioButton)mRoot.findViewById(R.id.radioButton_leftup_main_b_machinestatus_select_tmoiltemp);
+			radioTMOilTemp.setText(getString(ParentActivity.getResources().getString(R.string.TM_Oil_Temp), 112));
+			ParentActivity.setMarqueeRadio(radioTMOilTemp);
+			
 			radioBatteryVoltage = (RadioButton)mRoot.findViewById(R.id.radioButton_leftup_main_b_machinestatus_select_battery);
+			radioBatteryVoltage.setText(getString(ParentActivity.getResources().getString(R.string.Battery_Volt), 113));
+			ParentActivity.setMarqueeRadio(radioBatteryVoltage);
+			
 			radioWeighingSystem = (RadioButton)mRoot.findViewById(R.id.radioButton_leftup_main_b_machinestatus_select_weighing);
+			radioWeighingSystem.setText(getString(ParentActivity.getResources().getString(R.string.Weighing_System), 114));
+			ParentActivity.setMarqueeRadio(radioWeighingSystem);
+			
 			radioCoolantTemp = (RadioButton)mRoot.findViewById(R.id.radioButton_leftup_main_b_machinestatus_select_coolanttemp);
+			radioCoolantTemp.setText(getString(ParentActivity.getResources().getString(R.string.Coolant_Temp), 115));
+			ParentActivity.setMarqueeRadio(radioCoolantTemp);
 		}
 		
-		textViewOK = (TextView)mRoot.findViewById(R.id.textView_leftup_main_b_machinestatus_select_ok);
-		
+		textViewOK = (TextFitTextView)mRoot.findViewById(R.id.textView_leftup_main_b_machinestatus_select_ok);
+		textViewOK.setText(getString(ParentActivity.getResources().getString(R.string.OK), 15));
 		imgbtnOK = (ImageButton)mRoot.findViewById(R.id.ImageButton_leftup_main_b_machinestatus_select_ok);
 	}
 	

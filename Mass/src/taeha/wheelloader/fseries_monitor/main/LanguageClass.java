@@ -108,6 +108,9 @@ public class LanguageClass {
 			case Home.STATE_DISPLAY_LANGUAGE_FINNISH:
 				conf.locale = new Locale("fi");
 				break;
+			case Home.STATE_DISPLAY_LANGUAGE_HEBREW:
+				conf.locale = new Locale("iw");
+				break;
 			default:
 				conf.locale = new Locale("en");
 				break;

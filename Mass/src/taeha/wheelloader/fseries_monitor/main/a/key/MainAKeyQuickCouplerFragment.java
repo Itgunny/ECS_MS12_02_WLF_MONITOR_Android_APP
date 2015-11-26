@@ -14,15 +14,19 @@ import android.widget.TextView;
 import taeha.wheelloader.fseries_monitor.main.CAN1CommManager;
 import taeha.wheelloader.fseries_monitor.main.ParentFragment;
 import taeha.wheelloader.fseries_monitor.main.R;
+import taeha.wheelloader.fseries_monitor.main.R.string;
+import taeha.wheelloader.fseries_monitor.main.TextFitTextView;
 
 public class MainAKeyQuickCouplerFragment extends ParentFragment{
 	//CONSTANT////////////////////////////////////////
 	
 	//////////////////////////////////////////////////
 	//RESOURCE////////////////////////////////////////
-	TextView textViewLock;
-	TextView textViewUnlock;
+	TextFitTextView textViewLock;
+	TextFitTextView textViewUnlock;
+	TextFitTextView textViewTitleNotAvailable;
 	
+	TextFitTextView	textViewOK;
 	ImageButton imgbtnOK;
 	
 	RelativeLayout	layoutAvailable;
@@ -72,10 +76,17 @@ public class MainAKeyQuickCouplerFragment extends ParentFragment{
 	@Override
 	protected void InitResource() {
 		// TODO Auto-generated method stub
-		textViewLock = (TextView)mRoot.findViewById(R.id.textView_key_main_a_quickcoupler_lock);
-		textViewUnlock = (TextView)mRoot.findViewById(R.id.textView_key_main_a_quickcoupler_unlock);
+		textViewLock = (TextFitTextView)mRoot.findViewById(R.id.textView_key_main_a_quickcoupler_lock);
+		textViewLock.setText(getString(ParentActivity.getResources().getString(string.Locking_Attachment), 166));
+		textViewUnlock = (TextFitTextView)mRoot.findViewById(R.id.textView_key_main_a_quickcoupler_unlock);
+		textViewUnlock.setText(getString(ParentActivity.getResources().getString(string.Unlocking_Attachment), 167));
 		
 		imgbtnOK = (ImageButton)mRoot.findViewById(R.id.ImageButton_key_main_a_quickcoupler_low_ok);
+		textViewOK = (TextFitTextView)mRoot.findViewById(R.id.textView_key_main_a_quickcoupler_low_ok);
+		textViewOK.setText(getString(ParentActivity.getResources().getString(string.OK), 15));
+		
+		textViewTitleNotAvailable = (TextFitTextView)mRoot.findViewById(R.id.textView_key_main_a_quickcoupler_notavailable_title);
+		textViewTitleNotAvailable.setText(getString(ParentActivity.getResources().getString(string.Quick_Coupler_is_NOT_equipped), 193));
 
 		layoutAvailable = (RelativeLayout)mRoot.findViewById(R.id.RelativeLayout_key_main_a_quickcoupler_available);
 		layoutNotAvailable = (RelativeLayout)mRoot.findViewById(R.id.RelativeLayout_key_main_a_quickcoupler_notavailable);

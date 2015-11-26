@@ -18,6 +18,7 @@ import taeha.wheelloader.fseries_monitor.main.CAN1CommManager;
 import taeha.wheelloader.fseries_monitor.main.Home;
 import taeha.wheelloader.fseries_monitor.main.ParentPopup;
 import taeha.wheelloader.fseries_monitor.main.R;
+import taeha.wheelloader.fseries_monitor.main.TextFitTextView;
 import taeha.wheelloader.fseries_monitor.main.Home.SeatBeltTimerClass;
 import taeha.wheelloader.fseries_monitor.main.R.string;
 
@@ -30,9 +31,9 @@ public class SpeedometerInitPopup extends ParentPopup{
 	ImageButton imgbtnOK;
 	ImageButton imgbtnCancel;
 	
-	TextView textViewTitle;
-	TextView textViewOK;
-	TextView textViewCancel;
+	TextFitTextView textViewTitle;
+	TextFitTextView textViewOK;
+	TextFitTextView textViewCancel;
 	//////////////////////////////////////////////////
 	
 	//VALUABLE////////////////////////////////////////
@@ -88,7 +89,7 @@ public class SpeedometerInitPopup extends ParentPopup{
 		imgbtnCancel.setVisibility(View.VISIBLE);
 		textViewOK.setVisibility(View.VISIBLE);
 		textViewCancel.setVisibility(View.VISIBLE);
-		textViewTitle.setText(ParentActivity.getResources().getString(string.Initialize_));
+		textViewTitle.setText(getString(ParentActivity.getResources().getString(string.Initialize_), 51));
 	}
 	@Override
 	public void dismiss() {
@@ -114,10 +115,14 @@ public class SpeedometerInitPopup extends ParentPopup{
 		imgbtnOK = (ImageButton)mRoot.findViewById(R.id.imageButton_popup_speedometer_freq_init_ok);
 		imgbtnCancel = (ImageButton)mRoot.findViewById(R.id.imageButton_popup_speedometer_freq_init_cancel);
 		
-		textViewTitle = (TextView)mRoot.findViewById(R.id.textView_popup_speedometer_freq_init_title);
+		textViewTitle = (TextFitTextView)mRoot.findViewById(R.id.textView_popup_speedometer_freq_init_title);
+		textViewTitle.setText(getString(ParentActivity.getResources().getString(string.Initialize_), 51));
+		
+		textViewOK = (TextFitTextView)mRoot.findViewById(R.id.textView_popup_speedometer_freq_init_ok);
+		textViewOK.setText(getString(ParentActivity.getResources().getString(string.OK), 15));
 
-		textViewOK = (TextView)mRoot.findViewById(R.id.textView_popup_speedometer_freq_init_ok);
-		textViewCancel = (TextView)mRoot.findViewById(R.id.textView_popup_speedometer_freq_init_cancel);
+		textViewCancel = (TextFitTextView)mRoot.findViewById(R.id.textView_popup_speedometer_freq_init_cancel);
+		textViewCancel.setText(getString(ParentActivity.getResources().getString(string.Cancel), 16));
 	}
 
 	@Override

@@ -69,7 +69,7 @@ public class MenuModeFragment extends ParentFragment{
 		showTab();
 		ParentActivity._MenuBaseFragment._MenuListTitleFragment.setBackButtonEnable(false);
 		ParentActivity.ScreenIndex = ParentActivity.SCREEN_STATE_MENU_MODE_TOP;
-		ParentActivity._MenuBaseFragment._MenuListTitleFragment.SetTitleText(ParentActivity.getResources().getString(R.string.Mode));
+		ParentActivity._MenuBaseFragment._MenuListTitleFragment.SetTitleText(ParentActivity.getResources().getString(R.string.Mode), 195);
 		_MenuModeTabFragment.setFirstScreen(FirstScreenIndex);
 		return mRoot;
 	}

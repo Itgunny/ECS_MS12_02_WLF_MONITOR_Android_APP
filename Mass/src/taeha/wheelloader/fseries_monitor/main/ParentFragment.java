@@ -236,4 +236,11 @@ public abstract class ParentFragment extends Fragment{
 
 	}
 	/////////////////////////////////////////////////////////////////////
+	public String getString(String str, int index){
+		if(ParentActivity.langDb.findStrGetString(index, ParentActivity.LanguageIndex) == null){
+			return str;
+		}else {
+			return ParentActivity.langDb.findStrGetString(index, ParentActivity.LanguageIndex);	
+		}
+	}
 }

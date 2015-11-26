@@ -9,6 +9,7 @@ import taeha.wheelloader.fseries_monitor.main.CAN1CommManager;
 import taeha.wheelloader.fseries_monitor.main.Home;
 import taeha.wheelloader.fseries_monitor.main.ParentFragment;
 import taeha.wheelloader.fseries_monitor.main.R;
+import taeha.wheelloader.fseries_monitor.main.TextFitTextView;
 import taeha.wheelloader.fseries_monitor.main.R.string;
 import android.os.Bundle;
 import android.os.Handler;
@@ -38,11 +39,13 @@ public class EngineAutoShutdownFragment extends ParentFragment{
 	//////////////////////////////////////////////////
 	//RESOURCE////////////////////////////////////////
 	ImageButton imgbtnOK;
+	TextFitTextView textViewOK;
 	ImageButton	imgbtnCancel;
+	TextFitTextView textViewCancel;
 	
-	TextView	textViewTime;
-	TextView 	textViewMax;
-	TextView 	textViewMin;
+	TextFitTextView	textViewTime;
+	TextFitTextView textViewMax;
+	TextFitTextView textViewMin;
 	
 	RadioButton radioOnOnce;
 	RadioButton radioOnAlways;
@@ -55,7 +58,8 @@ public class EngineAutoShutdownFragment extends ParentFragment{
 	
 	ImageView imgViewLine;
 	
-	TextView textViewESL;
+	TextFitTextView textViewESLTitle;
+	TextFitTextView textViewESL;
 	
 	ImageView imgViewESL;
 	//////////////////////////////////////////////////
@@ -98,7 +102,7 @@ public class EngineAutoShutdownFragment extends ParentFragment{
 		InitButtonListener();
 		
 		ParentActivity.ScreenIndex = ParentActivity.SCREEN_STATE_MENU_MODE_ETC_AUTOSHUTDOWN_TOP;
-		ParentActivity._MenuBaseFragment._MenuInterTitleFragment.SetTitleText(ParentActivity.getResources().getString(R.string.Engine_Auto_Shutdown));
+		ParentActivity._MenuBaseFragment._MenuInterTitleFragment.SetTitleText(ParentActivity.getResources().getString(R.string.Engine_Auto_Shutdown), 215);
 		HandleCursurDisplay = new Handler() {
 			@Override
 			public void handleMessage(Message msg) {
@@ -125,14 +129,24 @@ public class EngineAutoShutdownFragment extends ParentFragment{
 		// TODO Auto-generated method stub
 		imgbtnOK = (ImageButton)mRoot.findViewById(R.id.ImageButton_menu_body_mode_engineautoshutdown_low_ok);
 		imgbtnCancel = (ImageButton)mRoot.findViewById(R.id.ImageButton_menu_body_mode_engineautoshutdown_low_cancel);
+		textViewOK = (TextFitTextView)mRoot.findViewById(R.id.textView_menu_body_mode_engineautoshutdown_low_ok);
+		textViewOK.setText(getString(ParentActivity.getResources().getString(string.OK), 15));
+		textViewCancel = (TextFitTextView)mRoot.findViewById(R.id.textView_menu_body_mode_engineautoshutdown_low_cancel);
+		textViewCancel.setText(getString(ParentActivity.getResources().getString(string.Cancel), 16));
 
-		textViewTime = (TextView)mRoot.findViewById(R.id.textView_menu_body_mode_engineautoshutdown_time);
-		textViewMax = (TextView)mRoot.findViewById(R.id.textView_menu_body_mode_engineautoshutdown_max);
-		textViewMin = (TextView)mRoot.findViewById(R.id.textView_menu_body_mode_engineautoshutdown_min);
+		textViewTime = (TextFitTextView)mRoot.findViewById(R.id.textView_menu_body_mode_engineautoshutdown_time);
+		textViewMax = (TextFitTextView)mRoot.findViewById(R.id.textView_menu_body_mode_engineautoshutdown_max);
+		textViewMin = (TextFitTextView)mRoot.findViewById(R.id.textView_menu_body_mode_engineautoshutdown_min);
 
 		radioOnOnce = (RadioButton)mRoot.findViewById(R.id.radioButton_menu_body_mode_engineautoshutdown_use_on_once);
+		radioOnOnce.setText(getString(ParentActivity.getResources().getString(string.On_Once), 24));
+		ParentActivity.setMarqueeRadio(radioOnOnce);
 		radioOnAlways = (RadioButton)mRoot.findViewById(R.id.radioButton_menu_body_mode_engineautoshutdown_use_on_always);
+		radioOnAlways.setText(getString(ParentActivity.getResources().getString(string.On_Always), 23));
+		ParentActivity.setMarqueeRadio(radioOnAlways);
 		radioOff = (RadioButton)mRoot.findViewById(R.id.radioButton_menu_body_mode_engineautoshutdown_use_off);
+		radioOff.setText(getString(ParentActivity.getResources().getString(string.Disable), 21));
+		ParentActivity.setMarqueeRadio(radioOff);
 	
 		seekbarTime = (SeekBar)mRoot.findViewById(R.id.seekBar_menu_body_mode_engineautoshutdown);
 		
@@ -141,7 +155,10 @@ public class EngineAutoShutdownFragment extends ParentFragment{
 		
 		imgViewLine = (ImageView)mRoot.findViewById(R.id.imageView_menu_body_mode_engineautoshutdown_line2);
 		
-		textViewESL = (TextView)mRoot.findViewById(R.id.textView_menu_body_mode_engineautoshutdown_esl_time);
+		textViewESLTitle = (TextFitTextView)mRoot.findViewById(R.id.textView_menu_body_mode_engineautoshutdown_esl_title);
+		textViewESLTitle.setText(getString(ParentActivity.getResources().getString(string.ESL_System_Setting), 324));
+		
+		textViewESL = (TextFitTextView)mRoot.findViewById(R.id.textView_menu_body_mode_engineautoshutdown_esl_time);
 		imgViewESL = (ImageView)mRoot.findViewById(R.id.imageView_menu_body_mode_engineautoshutdown_esl_check);
 		
 		seekbarTime.setMax(TOTAL_STEP);
@@ -189,8 +206,10 @@ public class EngineAutoShutdownFragment extends ParentFragment{
 		SetSeekBarPositionbyData(seekbarTime,EngineAutoShutdownTime);
 		ESLSystemDisplay(ESLMode,ESLInterval);
 		
-		textViewMax.setText(ParentActivity.GetSectoMinString(2400,ParentActivity.getResources().getString(string.Min),ParentActivity.getResources().getString(string.Sec)));
-		textViewMin.setText(ParentActivity.GetSectoMinString(120,ParentActivity.getResources().getString(string.Min),ParentActivity.getResources().getString(string.Sec)));
+		textViewMax.setText(ParentActivity.GetSectoMinString(2400, getString(ParentActivity.getResources().getString(string.Min), 48)
+				,getString(ParentActivity.getResources().getString(string.Sec), 50)));
+		textViewMin.setText(ParentActivity.GetSectoMinString(120,  getString(ParentActivity.getResources().getString(string.Min), 48)
+				,getString(ParentActivity.getResources().getString(string.Sec), 50)));
 		
 		
 	}
@@ -456,45 +475,47 @@ public class EngineAutoShutdownFragment extends ParentFragment{
 	public void TimeTextDisplay(int _data){
 		int CalData;
 		CalData = _data * 10;
-		textViewTime.setText(ParentActivity.GetSectoMinString(CalData, ParentActivity.getResources().getString(string.Min),ParentActivity.getResources().getString(string.Sec)));
+		textViewTime.setText(ParentActivity.GetSectoMinString(CalData, getString(ParentActivity.getResources().getString(string.Min), 48),
+				getString(ParentActivity.getResources().getString(string.Sec), 50)));
 	}
 	public void ESLSystemDisplay(int mode, int interval){
 		String str = "";
 		switch (mode) {
 		case CAN1CommManager.DATA_STATE_ESL_MODE_DISABLE:
-			str = ParentActivity.getResources().getString(string.Disable);
+			str = getString(ParentActivity.getResources().getString(string.Disable), 21);
+			
 			break;
 		case CAN1CommManager.DATA_STATE_ESL_MODE_ENABLE_CONTINUOUS:
-			str = ParentActivity.getResources().getString(string.On_Always);
+			str = getString(ParentActivity.getResources().getString(string.On_Always), 23);
 			break;
 		case CAN1CommManager.DATA_STATE_ESL_MODE_ENABLE_INTERVAL:
 			switch (interval) {
 			case CAN1CommManager.DATA_STATE_ESL_INTERVAL_5MIN:
-				str = "5" + ParentActivity.getResources().getString(string.Min);
+				str = "5" + getString(ParentActivity.getResources().getString(string.Min), 48);
 				break;
 			case CAN1CommManager.DATA_STATE_ESL_INTERVAL_10MIN:
-				str = "10" + ParentActivity.getResources().getString(string.Min);
+				str = "10" + getString(ParentActivity.getResources().getString(string.Min), 48);
 				break;
 			case CAN1CommManager.DATA_STATE_ESL_INTERVAL_20MIN:
-				str = "20" + ParentActivity.getResources().getString(string.Min);
+				str = "20" + getString(ParentActivity.getResources().getString(string.Min), 48);
 				break;
 			case CAN1CommManager.DATA_STATE_ESL_INTERVAL_30MIN:
-				str = "30" + ParentActivity.getResources().getString(string.Min);
+				str = "30" + getString(ParentActivity.getResources().getString(string.Min), 48);
 				break;
 			case CAN1CommManager.DATA_STATE_ESL_INTERVAL_1HR:
-				str = "1" + ParentActivity.getResources().getString(string.Hour);
+				str = "1" + getString(ParentActivity.getResources().getString(string.Hour), 47); 
 				break;
 			case CAN1CommManager.DATA_STATE_ESL_INTERVAL_2HR:
-				str = "2" + ParentActivity.getResources().getString(string.Hour);
+				str = "2" + getString(ParentActivity.getResources().getString(string.Hour), 47);
 				break;
 			case CAN1CommManager.DATA_STATE_ESL_INTERVAL_4HR:
-				str = "4" + ParentActivity.getResources().getString(string.Hour);
+				str = "4" + getString(ParentActivity.getResources().getString(string.Hour), 47);
 				break;
 			case CAN1CommManager.DATA_STATE_ESL_INTERVAL_1DAY:
-				str = "1" + ParentActivity.getResources().getString(string.Day);
+				str = "1" + getString(ParentActivity.getResources().getString(string.Day), 49);
 				break;
 			case CAN1CommManager.DATA_STATE_ESL_INTERVAL_2DAY:
-				str = "2" + ParentActivity.getResources().getString(string.Day);
+				str = "2" + getString(ParentActivity.getResources().getString(string.Day), 49);
 				break;
 
 			default:
@@ -504,7 +525,6 @@ public class EngineAutoShutdownFragment extends ParentFragment{
 		default:
 			break;
 		}
-		
 		textViewESL.setText(str);
 	}
 	/////////////////////////////////////////////////////////////////////

@@ -12,6 +12,7 @@ import taeha.wheelloader.fseries_monitor.main.CAN1CommManager;
 import taeha.wheelloader.fseries_monitor.main.Home;
 import taeha.wheelloader.fseries_monitor.main.ParentFragment;
 import taeha.wheelloader.fseries_monitor.main.R;
+import taeha.wheelloader.fseries_monitor.main.TextFitTextView;
 import taeha.wheelloader.fseries_monitor.main.R.string;
 import android.os.Bundle;
 import android.os.Handler;
@@ -38,9 +39,11 @@ public class MaintenanceFragment extends ParentFragment{
 	//RESOURCE////////////////////////////////////////
 
 	ImageButton imgbtnOK;
+	TextFitTextView	textViewOK;
+	
 	ImageButton	imgbtnMaintItem[];
 	
-	TextView	textViewAS;
+	TextFitTextView	textViewAS;
 	//////////////////////////////////////////////////
 	
 	//VALUABLE////////////////////////////////////////
@@ -83,7 +86,7 @@ public class MaintenanceFragment extends ParentFragment{
 		
 		CursurDisplay(CursurIndex);
 		ParentActivity.ScreenIndex = ParentActivity.SCREEN_STATE_MENU_MANAGEMENT_MAINTENANCE_TOP;
-		ParentActivity._MenuBaseFragment._MenuInterTitleFragment.SetTitleText(ParentActivity.getResources().getString(R.string.Maintenance));
+		ParentActivity._MenuBaseFragment._MenuInterTitleFragment.SetTitleText(ParentActivity.getResources().getString(R.string.Maintenance), 18);
 		HandleCursurDisplay = new Handler() {
 			@Override
 			public void handleMessage(Message msg) {
@@ -113,6 +116,8 @@ public class MaintenanceFragment extends ParentFragment{
 		
 		
 		imgbtnOK = (ImageButton)mRoot.findViewById(R.id.ImageButton_menu_body_management_maint_low_ok);
+		textViewOK = (TextFitTextView)mRoot.findViewById(R.id.textView_menu_body_management_maint_low_ok);
+		textViewOK.setText(getString(ParentActivity.getResources().getString(R.string.OK), 15));
 		
 		imgbtnMaintItem[0] =	 (ImageButton)mRoot.findViewById(R.id.imageButton_menu_body_management_maint_list1);
 		imgbtnMaintItem[1] =	 (ImageButton)mRoot.findViewById(R.id.imageButton_menu_body_management_maint_list2);
@@ -130,7 +135,8 @@ public class MaintenanceFragment extends ParentFragment{
 		imgbtnMaintItem[13] =	 (ImageButton)mRoot.findViewById(R.id.imageButton_menu_body_management_maint_list14);
 		imgbtnMaintItem[14] =	 (ImageButton)mRoot.findViewById(R.id.imageButton_menu_body_management_maint_list15);
 		
-		textViewAS = (TextView)mRoot.findViewById(R.id.textView_menu_body_management_maint_low_as);
+		textViewAS = (TextFitTextView)mRoot.findViewById(R.id.textView_menu_body_management_maint_low_as);
+		textViewAS.setText(getString(ParentActivity.getResources().getString(R.string.AS), 67));
 		
 		ASDisplay(ParentActivity.strASNumDash);
 	}
@@ -566,7 +572,7 @@ public class MaintenanceFragment extends ParentFragment{
 		}
 	}
 	public void ASDisplay(String str){
-		textViewAS.setText(ParentActivity.getResources().getString(string.AS) + " " + str);
+		textViewAS.setText(getString(ParentActivity.getResources().getString(string.AS), 67) + " " + str);
 	}
 	/////////////////////////////////////////////////////////////////////
 	public class SendCommandTimerClass extends TimerTask{

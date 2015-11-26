@@ -59,7 +59,7 @@ public class MachineSecurityListFragment extends MenuBodyList_ParentFragment{
 		InitList();
 		ParentActivity._MenuBaseFragment._MenuListTitleFragment.setBackButtonEnable(true);
 		ParentActivity.ScreenIndex = ParentActivity.SCREEN_STATE_MENU_MANAGEMENT_MACHINESECURITY_TOP;
-		ParentActivity._MenuBaseFragment._MenuListTitleFragment.SetTitleText(ParentActivity.getResources().getString(R.string.Machine_Security));
+		ParentActivity._MenuBaseFragment._MenuListTitleFragment.SetTitleText(ParentActivity.getResources().getString(R.string.Machine_Security), 319);
 		CursurDisplay(CursurIndex);
 		return mRoot;
 	}
@@ -90,9 +90,9 @@ public class MachineSecurityListFragment extends MenuBodyList_ParentFragment{
 		setClickableList2(true);
 		setClickableList3(true);
 		
-		setListTitle1(ParentActivity.getResources().getString(string.ESL_System_Setting));
-		setListTitle2(ParentActivity.getResources().getString(string.Change_Password));
-		setListTitle3(ParentActivity.getResources().getString(string.Smart_Key));
+		setListTitle1(ParentActivity.getResources().getString(string.ESL_System_Setting), 324);
+		setListTitle2(ParentActivity.getResources().getString(string.Change_Password), 325);
+		setListTitle3(ParentActivity.getResources().getString(string.Smart_Key), 326);
 	}
 
 	//////////////////////////////////////////////////////////////////////
@@ -161,38 +161,85 @@ public class MachineSecurityListFragment extends MenuBodyList_ParentFragment{
 		switch (mode) {
 		case CAN1CommManager.DATA_STATE_ESL_MODE_DISABLE:
 			str = ParentActivity.getResources().getString(string.Disable);
+			setListData1(str, 21);
 			break;
 		case CAN1CommManager.DATA_STATE_ESL_MODE_ENABLE_CONTINUOUS:
 			str = ParentActivity.getResources().getString(string.On_Always);
+			setListData1(str, 23);
 			break;
 		case CAN1CommManager.DATA_STATE_ESL_MODE_ENABLE_INTERVAL:
 			switch (interval) {
 			case CAN1CommManager.DATA_STATE_ESL_INTERVAL_5MIN:
+				if(ParentActivity.langDb.findStrGetString(48, ParentActivity.LanguageIndex) == null){
 				str = "5" + ParentActivity.getResources().getString(string.Min);
+				}else {
+					str = "5" + ParentActivity.langDb.findStrGetString(48, ParentActivity.LanguageIndex);
+				}
+				setListData1(str);
 				break;
 			case CAN1CommManager.DATA_STATE_ESL_INTERVAL_10MIN:
+				if(ParentActivity.langDb.findStrGetString(48, ParentActivity.LanguageIndex) == null){
 				str = "10" + ParentActivity.getResources().getString(string.Min);
+				}else {
+					str = "10" + ParentActivity.langDb.findStrGetString(48, ParentActivity.LanguageIndex);
+				}
+				setListData1(str);
 				break;
 			case CAN1CommManager.DATA_STATE_ESL_INTERVAL_20MIN:
+				if(ParentActivity.langDb.findStrGetString(48, ParentActivity.LanguageIndex) == null){
 				str = "20" + ParentActivity.getResources().getString(string.Min);
+				}else {
+					str = "20" + ParentActivity.langDb.findStrGetString(48, ParentActivity.LanguageIndex);
+				}
+				setListData1(str);
 				break;
 			case CAN1CommManager.DATA_STATE_ESL_INTERVAL_30MIN:
+				if(ParentActivity.langDb.findStrGetString(48, ParentActivity.LanguageIndex) == null){
 				str = "30" + ParentActivity.getResources().getString(string.Min);
+				}else {
+					str = "30" + ParentActivity.langDb.findStrGetString(48, ParentActivity.LanguageIndex);
+				}
+				setListData1(str);
 				break;
 			case CAN1CommManager.DATA_STATE_ESL_INTERVAL_1HR:
+				if(ParentActivity.langDb.findStrGetString(48, ParentActivity.LanguageIndex) == null){
 				str = "1" + ParentActivity.getResources().getString(string.Hour);
+				}else {
+					str = "1" + ParentActivity.langDb.findStrGetString(47, ParentActivity.LanguageIndex);
+				}
+				setListData1(str);
 				break;
 			case CAN1CommManager.DATA_STATE_ESL_INTERVAL_2HR:
+				if(ParentActivity.langDb.findStrGetString(48, ParentActivity.LanguageIndex) == null){
 				str = "2" + ParentActivity.getResources().getString(string.Hour);
+				}else {
+					str = "2" + ParentActivity.langDb.findStrGetString(47, ParentActivity.LanguageIndex);
+				}
+				setListData1(str);
 				break;
 			case CAN1CommManager.DATA_STATE_ESL_INTERVAL_4HR:
+				if(ParentActivity.langDb.findStrGetString(48, ParentActivity.LanguageIndex) == null){
 				str = "4" + ParentActivity.getResources().getString(string.Hour);
+				}else {
+					str = "4" + ParentActivity.langDb.findStrGetString(47, ParentActivity.LanguageIndex);
+				}
+				setListData1(str);
 				break;
 			case CAN1CommManager.DATA_STATE_ESL_INTERVAL_1DAY:
+				if(ParentActivity.langDb.findStrGetString(48, ParentActivity.LanguageIndex) == null){
 				str = "1" + ParentActivity.getResources().getString(string.Day);
+				}else {
+					str = "1" + ParentActivity.langDb.findStrGetString(49, ParentActivity.LanguageIndex);
+				}
+				setListData1(str);
 				break;
 			case CAN1CommManager.DATA_STATE_ESL_INTERVAL_2DAY:
+				if(ParentActivity.langDb.findStrGetString(48, ParentActivity.LanguageIndex) == null){
 				str = "2" + ParentActivity.getResources().getString(string.Day);
+				}else {
+					str = "2" + ParentActivity.langDb.findStrGetString(49, ParentActivity.LanguageIndex);
+				}
+				setListData1(str);
 				break;
 
 			default:
@@ -202,16 +249,14 @@ public class MachineSecurityListFragment extends MenuBodyList_ParentFragment{
 		default:
 			break;
 		}
-		
-		setListData1(str);
 	}
 	public void SmartKeyDisplay(int _data){
 		switch (_data) {
 		case CAN1CommManager.DATA_STATE_SMARTKEY_USE_OFF:
-			setListData3(ParentActivity.getResources().getString(string.Disable));
+			setListData3(ParentActivity.getResources().getString(string.Disable), 21);
 			break;
 		case CAN1CommManager.DATA_STATE_SMARTKEY_USE_ON:
-			setListData3(ParentActivity.getResources().getString(string.Enable));
+			setListData3(ParentActivity.getResources().getString(string.Enable), 22);
 			break;
 		default:
 			break;

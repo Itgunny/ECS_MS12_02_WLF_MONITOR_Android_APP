@@ -1,6 +1,7 @@
 package taeha.wheelloader.fseries_monitor.main.a;
 
 import taeha.wheelloader.fseries_monitor.main.CAN1CommManager;
+import taeha.wheelloader.fseries_monitor.main.CommService;
 import taeha.wheelloader.fseries_monitor.main.Home;
 import taeha.wheelloader.fseries_monitor.main.R;
 import android.content.Context;
@@ -155,7 +156,6 @@ public class MainACenterQuickFragment extends MainACenterFragment{
 			return;
 		else
 			ParentActivity.StartAnimationRunningTimer();
-			
 		Clickable(false);	// ++, --, 150511 cjg
 		ParentActivity._MainABaseFragment.showDefaultScreenAnimation();
 		Log.d(TAG,"ClickOption");
@@ -167,14 +167,16 @@ public class MainACenterQuickFragment extends MainACenterFragment{
 		}else{
 			String service = Context.WIFI_SERVICE;
 			final WifiManager wifi = (WifiManager)ParentActivity.getSystemService(service);
-			if(wifi.isWifiEnabled()){
-				wifi.setWifiEnabled(false);
-				synchronized (wifi) {
-					try {
-						wifi.wait(500);
-					} catch (InterruptedException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
+			if(!ParentActivity.CheckRunningApp("com.powerone.wfd.sink")){
+				if(wifi.isWifiEnabled()){
+					wifi.setWifiEnabled(false);
+					synchronized (wifi) {
+						try {
+							wifi.wait(500);
+						} catch (InterruptedException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
 					}
 				}
 			}
@@ -186,6 +188,11 @@ public class MainACenterQuickFragment extends MainACenterFragment{
 				Clickable(false);	// ++, --, 150511 cjg
 				ParentActivity.StartAlwaysOntopService();
 //				CAN1Comm.SetMiracastFlag(true);
+				if(CommService.pi != null){
+					if(CommService.pi.versionName.equals("1.0.6BF")){
+						CAN1Comm.setRunningCheckMiracast(true);
+					}					
+				}
 				ParentActivity.StartCheckSmartTerminalTimer();
 			}
 		}		

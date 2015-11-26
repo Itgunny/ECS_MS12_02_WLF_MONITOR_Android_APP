@@ -1,12 +1,11 @@
 <?xml version="1.0" encoding="utf-8" standalone="no"?>
 <resources>
-    <string name="app_name">Wheel_Loader_F_Series_UI</string>
+     <string name="app_name">Wheel_Loader_F_Series_UI</string>
     <string name="action_settings">Settings</string>
     <string name="hello_world">Hello world!</string>
     <string name="Crash_Toast_Text">Crash</string>
     <string name="Error_Report">Error Report</string>
     <string name="Crash_Data">Crash Data</string>
-    <!-- Common Start-->
     <string name="Hr">Hr</string>
     <string name="C">℃</string>
     <string name="F">℉</string>
@@ -64,7 +63,6 @@
     <string name="New_Password">Uusi salasana</string>
     <string name="Re_entering_New_Password">Toista salasana</string>
     <string name="Access_Denied">Pääsy evätty</string>
-    <string name="Input_new_phone_number">Syötä uusi puhelinnumero</string>
     <string name="_5_12_digits">5~12 numeroa</string>
     <string name="No_Changes_executed">Muutokset peruutettu</string>
     <string name="Skip">Ohita</string>
@@ -83,18 +81,16 @@
     <string name="Initial_Para_Error_Found">Initial Parameter Error Found</string>
     <string name="Please_Reset_Power">Please Reset Power</string>
     <string name="l">l</string>
-    <!-- Common End-->
-    <!-- Main Start-->
+    <string name="Machine_Serial_Number">Machine Serial Number</string>
+    <string name="Serial_No">Serial No :</string>
+    <string name="Re_entering_Serial_No">Re-entering Serial No :</string>
     <string name="ENGINE_MODE">MOOTTORIN TILA</string>
-    <string name="WARMING_UP">LÄMMITYSKÄYTTÖ</string>
     <string name="CCO_MODE">C.C.O. TILA</string>
     <string name="ICCO_MODE">I.C.C.O. TILA</string>
     <string name="SHIFT_MODE">VAIHDON TILA</string>
     <string name="TC_LOCK_UP">VAIHTEISTO LOCK UP</string>
-    <string name="TOTAL_HOURMETER">TUNTIMITTARI KOKONAIS</string>
     <string name="LATEST_HOURMETER">TUNTIMITTARI VIIMEISIN</string>
     <string name="AVERAGE_FUEL_RATE">POLTTOAINEEN KULUTUS KESKIMÄÄRIN</string>
-    <string name="CURRENT_FUEL_RATE">POLTTOAINEEN KULUTUS HETKELLINEN</string>
     <string name="TOTAL_ODOMETER">KILOMETRIT KOKONAIS</string>
     <string name="LATEST_ODOMETER">KILOMETRIT VIIMEINEN</string>
     <string name="ECONO">ECONO</string>
@@ -112,7 +108,6 @@
     <string name="Total_Hourmeter">Tuntimittari Kokonais</string>
     <string name="Latest_Hourmeter">Tuntimittari Viimeinen</string>
     <string name="Average_Fuel_Rate">Polttoaineen kulutus Keskimäärin</string>
-    <string name="Current_Fuel_Rate">Polttoaineen Kulutus Hetkellinen</string>
     <string name="Total_Odometer">Kilometrit Kokonais</string>
     <string name="Latest_Odometer">Kilometrit Viimeinen</string>
     <string name="HYD_Temp">Hydrauliikan Lämpö</string>
@@ -124,7 +119,6 @@
     <string name="Help">Apua</string>
     <string name="Bucket_Full_In_Error">Bucket Full In Error</string>
     <string name="Sudden_Change_Error">Sudden Change Error</string>
-    <string name="Please_press_Enter_key">Please press Enter key</string>
     <string name="User1">User1</string>
     <string name="User2">User2</string>
     <string name="User3">User3</string>
@@ -144,20 +138,18 @@
     <string name="Lamp_FuelWarmer">Fuel Warmer</string>
     <string name="Lamp_Preheat">Preheat</string>
     <string name="Lamp_FloatMode">Float Mode</string>
-    <string name="SuddenChange_BucketFullIn_Error_Warning">Bucket is not full in and angular speed is a sudden change, though weigh may be inaccurate. Press the Enter Key to reweigh.</string>
     <string name="Bucket_Full_In_Error_Warning">Bucket is not full in, though weigh may be inaccurate. Press the Enter Key to reweigh.</string>
     <string name="Sudden_Change_Error_Warning">Angular speed is a sudden change, though weigh may be inaccurate. Press the Enter Key to reweigh.</string>
     <string name="Hydraulic_Oil_Temp_Low_Warning">Hydraulic oil temperature low.</string>
-    <string name="LATEST_FUEL_CONSUMED">LATEST FUEL CONSUMED</string>
-    <string name="Latest_Fuel_Consumed">Latest Fuel Consumed</string>
-    <string name="CloseMulti">Player is running.\nYou want to close a Player?</string>
-    <string name="CloseMira">Miracast is running.\nYou want to close a Miracast?</string>
+    <string name="CloseMulti">"Player is running.\nYou want to close a Player?"</string>
+    <string name="CloseMira">"Smart Terminal is running.\nYou want to close a Miracast?"</string>
     <string name="Front_Axle_Temp">Front Axle Temp.</string>
     <string name="Rear_Axle_Temp">Rear Axle Temp.</string>
     <string name="A_DAYS_FUEL_USED">A DAYS FUEL USED</string>
     <string name="A_Days_Fuel_Used">A Days Fuel Used</string>
-    <!-- Main End -->
-    <!-- Key Start-->
+    <string name="Axle_Warning_Popup">"CAUTION!\nOne of axles exceeds allowable oil temperature‼\nStop operating the machine and cool down axle oil\nuntil warning lamp goes off."</string>
+    <string name="Boom_Detent_Mode">Boom Detent Mode</string>
+    <string name="Bucket_Detent_Mode">Bucket Detent Mode</string>
     <string name="Main_Light">Päävalot</string>
     <string name="Work_Light">Työvalot</string>
     <string name="Auto_Grease">Automaattivoitelu</string>
@@ -169,7 +161,6 @@
     <string name="Mirror_Heat">Peilin Lämmitin</string>
     <string name="Detent_Setting">Säädon portaat</string>
     <string name="Fine_Modulation">Hienosäätö</string>
-    <string name="FN">FN</string>
     <string name="Position_Lamp">Seisontavalo</string>
     <string name="Head_Lamp">Ajovalo</string>
     <string name="Front">Etu</string>
@@ -191,9 +182,7 @@
     <string name="Save_Position">Tallenna Asema</string>
     <string name="Forward">Eteenpäin</string>
     <string name="Backward">Taaksepäin</string>
-    <string name="Excute_Locking_Attachment">Lukitse Työkalu.</string>
     <string name="Excuting_Locking_Attachment">Lukitaan Työkalua.</string>
-    <string name="Excute_Unlocking_Attachment">Irrota Työkalu</string>
     <string name="Excuting_Unlocking_Attachment">Irrotetaan Työkalua.</string>
     <string name="Attachment_Unlocked_Check_Locking_Status">Attachment Unlocked. Check Locking Status.</string>
     <string name="Do_you_want_to_turn_on_Mirror_Heat">Do you want to turn on Mirror Heat?</string>
@@ -205,15 +194,11 @@
     <string name="Mirror_Heat_is_NOT_equipped">Mirror Heat is NOT equipped.</string>
     <string name="Quick_Coupler_is_NOT_equipped">Quick Coupler is NOT equipped.</string>
     <string name="Ride_Control_is_NOT_equipped">Ride Control is NOT equipped.</string>
-    <!-- Key End -->
-    <!-- Menu Start -->
     <string name="Mode">Asetukset</string>
-    <string name="Monitoring"><font size="18"> Koneen valvonta </font></string>
-    <string name="Management"><font size="15"> Huollot ja järjestelmä</font></string>
+    <string name="Monitoring">Koneen valvonta</string>
+    <string name="Management">Huollot ja järjestelmä</string>
     <string name="Preference">Ensijainen</string>
     <string name="Multimedia">Multimedia</string>
-    <!-- Menu End -->
-    <!-- Menu Mode Start -->
     <string name="Eng">ENG.</string>
     <string name="TM">TM.</string>
     <string name="HYD">HYD.</string>
@@ -224,14 +209,12 @@
     <string name="Kick_Down">Kick Down</string>
     <string name="Engine_Speed">Moottorin käyntinopeus</string>
     <string name="Engine_Setting">Moottorin Asetus</string>
-    <string name="Warming_Up">Esilämmitys</string>
     <string name="TC_Lock_Up">Vaihteisto Lock Up</string>
     <string name="Bucket_Priority">Kauhan ensisijaistus</string>
     <string name="Boom_Bucket_Detent_Mode">Puomi Kauha Askel Tila</string>
     <string name="Auxilliary_Attachment_Max_Flow_Level">Lisälaitteen Maksimi Öljynvirtaus</string>
     <string name="Soft_End_Stop">Liikkeen Lopeuksen Vaimennus</string>
     <string name="Engine_Auto_Shutdown">Moottorin Automaattinen Sammutus</string>
-    <string name="Engine_Delay_Shutdown">Moottorin Viivästetty Sammutus</string>
     <string name="Camera_Setting">Kamera Asetukset</string>
     <string name="Cooling_Fan_Reverse_Mode">Puhaltimen Peruutus Tila</string>
     <string name="Wiper_Level_Setting">Lasinpyyhkijän nopeus</string>
@@ -245,10 +228,10 @@
     <string name="CAM_2">CAM 2</string>
     <string name="CAM_3">CAM 3</string>
     <string name="CAM_4">CAM 4</string>
-    <string name="_1st">1.</string>
-    <string name="_2nd">2.</string>
-    <string name="_3rd">3.</string>
-    <string name="_4th">4.</string>
+    <string name="_1st">1</string>
+    <string name="_2nd">2</string>
+    <string name="_3rd">3</string>
+    <string name="_4th">4</string>
     <string name="Gear_Linkage_Mode">Vaihteiden Kytkentä Tila</string>
     <string name="Interval">Jakso</string>
     <string name="Time">Aika</string>
@@ -268,11 +251,9 @@
     <string name="Excute">Execute</string>
     <string name="Push_and_hold_to_reverse_rotation">Push and hold to reverse rotation.</string>
     <string name="rpm_km_h">rpm/km/h</string>
-    <!-- Menu Mode End -->
-    <!-- Menu Monitoring Start -->
+    <string name="You_should_turn_OFF_Soft_end_stop_before_start_calibration">You should turn OFF Soft end stop before start calibration.</string>
     <string name="Machine_Monitoring">Koneen valvonta</string>
     <string name="Operation_History">Käytön Historia</string>
-    <string name="Weighing_Information">Punnituksen Tiedot</string>
     <string name="Fault_History">Vikahistoria</string>
     <string name="EHCU_IO_Information">EHCU I/O Info</string>
     <string name="Version_Information">Versio / tiedot</string>
@@ -291,10 +272,8 @@
     <string name="Cluster">Cluster</string>
     <string name="RMCU">RMCU</string>
     <string name="EHCU">EHCU</string>
-    <string name="ACU">ACU</string>
     <string name="BKCU">BKCU</string>
     <string name="Software_Update">Ohjelman päivitys</string>
-    <string name="RMCU_Machine_Information">RMCU Tiedot</string>
     <string name="Network_Type">Yhteyden Tyyppi</string>
     <string name="Manufacture_Date">Valmistuspäivä</string>
     <string name="Program_Version">Ohjelmaversio</string>
@@ -327,29 +306,22 @@
     <string name="ECU_Type">Ecu Malli</string>
     <string name="ECU_Manufacturer_Name">ECU Valmistaja</string>
     <string name="Calibration_ID">Kalibroinnin numero</string>
-    <string name="Boom_Lever_Floating_Position_Adjust">Puomin Kellunnan Aseman asetus</string>
     <string name="Machine">Kone</string>
     <string name="Engine">Moottori</string>
     <string name="Transmission">Vaihteisto</string>
     <string name="Please_refer_to_machine_manual_for_more_detailed_description">Tarkemmat tiedot koneen ohjekirjassa</string>
-    <string name="Delete_Logged_Fault">Poista tallennetut  vikakoodit</string>
-    <string name="Fingertip_Calibration">Hallintavipujen Kalibrointi</string>
-    <string name="Boom_Down_Response_Adjust">Puomi Alas Vasteen Säätö</string>
-    <string name="Bucket_Dump_Response_Adjust">Kauha Auki Vasteen Säätö</string>
+    <string name="Delete_Logged_Fault">Poista tallennetut vikakoodit</string>
     <string name="Hardware">Hardware</string>
     <string name="Fuel_Consumption_History">Fuel Consumption History</string>
     <string name="General_Record">General Record</string>
     <string name="Hourly_Record">Hourly Record</string>
     <string name="Daily_Record">Daily Record</string>
     <string name="Mode_Record">Mode Record</string>
-    <string name="Machine_Information">Machine Information</string>
-    <!-- Menu Monitoring End -->
-    <!-- Menu Management Start -->
+    <string name="Machine_Information">Versio/tiedot</string>
     <string name="Machine_Security">Koneen Turvavalikko</string>
     <string name="Calibration">Kalibrointi</string>
     <string name="Speedometer_Setting">Ajonopeuden taajuuden säätö</string>
     <string name="Change_AS_Phone_Number">Vaihda huollon Puhelinnumero</string>
-    <string name="Service_Contact">Huollon yhteystieto</string>
     <string name="Service_Menu">Huollon valikko</string>
     <string name="ESL_System_Setting">ESL Asetukset</string>
     <string name="Change_Password">Vaihda salasana</string>
@@ -422,8 +394,7 @@
     <string name="Engine_oil_filter">Moottoriöljyn suodatin</string>
     <string name="Fuel_filter_element">Polttoainesuodatin</string>
     <string name="Fuel_Pre_filter">Polttoaineen esisuodatin</string>
-    <string name="Breather_Hydraulic_tank">Hydraulisäiliön huohotin</string>
-    <string name="Hydraulic_Tank_Air_Breather_Filter"/>
+    <string name="Hydraulic_Tank_Air_Breather_Filter">Hydraulic Tank Air Breather Filter</string>
     <string name="Radiator_engine_coolant">Moottorin jäähdytinneste</string>
     <string name="Transmission_oil">Vaihteistoöljy</string>
     <string name="Transmission_oil_filter">Vaihteistoöljyn suodatin</string>
@@ -431,7 +402,6 @@
     <string name="Rear_axle_oil">Taka-akselin öljy</string>
     <string name="Crankcase_Ventilation_Filter">Kampikammion huohottimen suodatin</string>
     <string name="Aircon_Heater_Outer_Filter">Ohjaamon ulompi suodatin</string>
-    <string name="Hydraulic_Tank_Drain_Filter">Hydrauliikan Vuotolinjan Suodatin</string>
     <string name="Count">Laskea</string>
     <string name="Elapsed_Time">Kulunut aika</string>
     <string name="Cycle">Jakso/Väli</string>
@@ -440,13 +410,11 @@
     <string name="Maintenance_History">Huoltohistoria</string>
     <string name="Confirm_Reset_elapsed_time">Vahvista: Nollaa kulutettu aika</string>
     <string name="Recommend_deleting_unused_tag_for_security_when_you_register_new_tag">Recommend deleting unused tag for security when you register new tag.</string>
-    <!-- Menu Management End -->
-    <!-- Menu Preference Start -->
+    <string name="Software_Update_Warning">Turn the engine off for software update.</string>
     <string name="Brightness_Setting">Kirkkauden asetus</string>
     <string name="Clock_Setting">Kellon Asetus</string>
     <string name="Unit_Setting">Yksikön Valinta</string>
     <string name="Sound_Output_Setting">Äänen Asetus</string>
-    <string name="Wireless_Communication_Setting">Johdottoman Valinnan Asetus</string>
     <string name="Display_Style">Näytön Tyyli</string>
     <string name="Time_settings_for_daytime">Päivän pituuden asetus</string>
     <string name="Daytime">Päiväaika</string>
@@ -458,11 +426,11 @@
     <string name="Type_B">Type B</string>
     <string name="Unit_C">℃</string>
     <string name="Unit_F">℉</string>
-    <!-- Menu Preference End -->
-    <!-- Menu Multimedia Start -->
+    <string name="Check_Radio_mode_is_AUX_mode">(Check Radio mode is AUX mode)</string>
+    <string name="Reverse_camera">(Reverse Camera)</string>
+    <string name="Language_Warning">To ensure that the entire system reflects the change, please Restart the machine.</string>
     <string name="Media_Palyer">Media Soitin</string>
-    <!-- Menu Multimedia End -->
-    <!-- Language Start -->
+    <string name="Smart_Terminal">Smart Terminal</string>
     <string name="Korean">Korean</string>
     <string name="English">English</string>
     <string name="German">German</string>
@@ -476,5 +444,31 @@
     <string name="Slovakian">Slovakian</string>
     <string name="Estonian">Estonian</string>
     <string name="Finnish">Finnish</string>
-    <!-- Language End -->
+    <string name="Input_new_phone_number">Syötä uusi puhelinnumero</string>
+    <string name="WARMING_UP">LÄMMITYSKÄYTTÖ</string>
+    <string name="TOTAL_HOURMETER">TUNTIMITTARI KOKONAIS</string>
+    <string name="CURRENT_FUEL_RATE">POLTTOAINEEN KULUTUS HETKELLINEN</string>
+    <string name="Current_Fuel_Rate">Polttoaineen Kulutus Hetkellinen</string>
+    <string name="Excute_Locking_Attachment">Lukitse Työkalu.</string>
+    <string name="Excute_Unlocking_Attachment">Irrota Työkalu</string>
+    <string name="Warming_Up">Esilämmitys</string>
+    <string name="Engine_Delay_Shutdown">Moottorin Viivästetty Sammutus</string>
+    <string name="Weighing_Information">Punnituksen Tiedot</string>
+    <string name="ACU">ACU</string>
+    <string name="Boom_Lever_Floating_Position_Adjust">Puomin Kellunnan Aseman asetus</string>
+    <string name="Fingertip_Calibration">Hallintavipujen Kalibrointi</string>
+    <string name="Boom_Down_Response_Adjust">Puomi Alas Vasteen Säätö</string>
+    <string name="Bucket_Dump_Response_Adjust">Kauha Auki Vasteen Säätö</string>
+    <string name="Service_Contact">Huollon yhteystieto</string>
+    <string name="METRIC">Metric Unit</string>
+    <string name="US">US Unit</string>
+    <string name="CUSTOM">User Setting</string>
+    <string name="FuelRate">Fuel Rate</string>
+    <string name="gal_h">gal/h</string>
+    <string name="gal">gal</string>
+    <string name="USTon">US ton</string>
+    <string name="Volume">tilavuus</string>
+    <string name="Volume_L">L</string>
+    <string name="Volume_gallon">gal</string>
+    <string name="Distance">Etäisyys</string>
 </resources>

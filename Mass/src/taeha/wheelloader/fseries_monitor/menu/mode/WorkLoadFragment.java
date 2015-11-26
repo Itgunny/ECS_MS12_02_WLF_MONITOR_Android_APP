@@ -9,6 +9,7 @@ import taeha.wheelloader.fseries_monitor.main.CAN1CommManager;
 import taeha.wheelloader.fseries_monitor.main.Home;
 import taeha.wheelloader.fseries_monitor.main.ParentFragment;
 import taeha.wheelloader.fseries_monitor.main.R;
+import taeha.wheelloader.fseries_monitor.main.TextFitTextView;
 import taeha.wheelloader.fseries_monitor.main.R.string;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -35,9 +36,17 @@ public class WorkLoadFragment extends ParentFragment{
 	ImageButton imgbtnOK;
 	ImageButton imgbtnCancel;
 	ImageButton imgbtnDefault;
+	TextFitTextView textViewOK;
+	TextFitTextView	textViewCancel;
+	TextFitTextView	textViewDefault;
 	
-	TextView textViewCalibration;
-	TextView textViewInitialization;
+	TextFitTextView textViewWeighingSystemTitle;
+	TextFitTextView	textViewWeighingDisplayTitle;
+	TextFitTextView	textViewErrorDetectionTitle;
+	
+	
+	TextFitTextView textViewCalibration;
+	TextFitTextView textViewInitialization;
 	
 	RadioButton radioWeighingModeManual;
 	RadioButton radioWeighingModeAuto;
@@ -86,7 +95,7 @@ public class WorkLoadFragment extends ParentFragment{
 		InitButtonListener();
 	
 		ParentActivity.ScreenIndex = ParentActivity.SCREEN_STATE_MENU_MODE_HYD_WORKLOAD_TOP;
-		ParentActivity._MenuBaseFragment._MenuInterTitleFragment.SetTitleText(ParentActivity.getResources().getString(R.string.Work_Load));
+		ParentActivity._MenuBaseFragment._MenuInterTitleFragment.SetTitleText(ParentActivity.getResources().getString(R.string.Work_Load), 156);
 		
 		HandleCursurDisplay = new Handler() {
 			@Override
@@ -115,19 +124,53 @@ public class WorkLoadFragment extends ParentFragment{
 		imgbtnCancel = (ImageButton)mRoot.findViewById(R.id.ImageButton_menu_body_mode_workload_low_cancel);
 		imgbtnDefault = (ImageButton)mRoot.findViewById(R.id.ImageButton_menu_body_mode_workload_low_default);
 
-		textViewCalibration = (TextView)mRoot.findViewById(R.id.textView_menu_body_mode_workload_calibration);
-		textViewInitialization = (TextView)mRoot.findViewById(R.id.textView_menu_body_mode_workload_initialization);
+		textViewOK = (TextFitTextView)mRoot.findViewById(R.id.textView_menu_body_mode_workload_low_ok);
+		textViewOK.setText(getString(ParentActivity.getResources().getString(R.string.OK), 15));
+		textViewCancel = (TextFitTextView)mRoot.findViewById(R.id.textView_menu_body_mode_workload_low_cancel);
+		textViewCancel.setText(getString(ParentActivity.getResources().getString(R.string.Cancel), 16));
+		textViewDefault = (TextFitTextView)mRoot.findViewById(R.id.textView_menu_body_mode_workload_low_default);
+		textViewDefault.setText(getString(ParentActivity.getResources().getString(R.string.Default), 25));
+		
+		textViewCalibration = (TextFitTextView)mRoot.findViewById(R.id.textView_menu_body_mode_workload_calibration);
+		textViewCalibration.setText(getString(ParentActivity.getResources().getString(R.string.Boom_Pressure_Calibration), 172));
+		
+		textViewInitialization = (TextFitTextView)mRoot.findViewById(R.id.textView_menu_body_mode_workload_initialization);
+		textViewInitialization.setText(getString(ParentActivity.getResources().getString(R.string.Initialization), 30));
 		
 		radioWeighingModeManual = (RadioButton)mRoot.findViewById(R.id.radioButton_menu_body_mode_workload_accumulation_manual);
+		radioWeighingModeManual.setText(getString(ParentActivity.getResources().getString(R.string.Manual), 26));
+		ParentActivity.setMarqueeRadio(radioWeighingModeManual);
 		radioWeighingModeAuto = (RadioButton)mRoot.findViewById(R.id.radioButton_menu_body_mode_workload_accumulation_auto);
+		radioWeighingModeAuto.setText(getString(ParentActivity.getResources().getString(R.string.Automatic), 27));
+		ParentActivity.setMarqueeRadio(radioWeighingModeAuto);
 		
 		radioWeighingDaily = (RadioButton)mRoot.findViewById(R.id.radioButton_menu_body_mode_workload_display_daily);
+		radioWeighingDaily.setText(getString(ParentActivity.getResources().getString(R.string.Daily), 173));
+		ParentActivity.setMarqueeRadio(radioWeighingDaily);
 		radioWeighingTotalA = (RadioButton)mRoot.findViewById(R.id.radioButton_menu_body_mode_workload_display_totala);
+		radioWeighingTotalA.setText(getString(ParentActivity.getResources().getString(R.string.Total_A), 174));
+		ParentActivity.setMarqueeRadio(radioWeighingTotalA);
 		radioWeighingTotalB = (RadioButton)mRoot.findViewById(R.id.radioButton_menu_body_mode_workload_display_totalb);
+		radioWeighingTotalB.setText(getString(ParentActivity.getResources().getString(R.string.Total_B), 175));
+		ParentActivity.setMarqueeRadio(radioWeighingTotalB);
 		radioWeighingTotalC = (RadioButton)mRoot.findViewById(R.id.radioButton_menu_body_mode_workload_display_totalc);
+		radioWeighingTotalC.setText(getString(ParentActivity.getResources().getString(R.string.Total_C), 176));
+		ParentActivity.setMarqueeRadio(radioWeighingTotalC);
 		
 		radioErrorDetectionOn = (RadioButton)mRoot.findViewById(R.id.radioButton_menu_body_mode_workload_errordetect_on);
+		radioErrorDetectionOn.setText(getString(ParentActivity.getResources().getString(R.string.On), 19));
+		ParentActivity.setMarqueeRadio(radioErrorDetectionOn);
 		radioErrorDetectionOff = (RadioButton)mRoot.findViewById(R.id.radioButton_menu_body_mode_workload_errordetect_off);
+		radioErrorDetectionOff.setText(getString(ParentActivity.getResources().getString(R.string.Off), 20));
+		ParentActivity.setMarqueeRadio(radioErrorDetectionOff);
+		
+		textViewWeighingSystemTitle  = (TextFitTextView)mRoot.findViewById(R.id.textView_menu_body_mode_workload_accumulation_title);
+		textViewWeighingSystemTitle.setText(getString(ParentActivity.getResources().getString(R.string.Weighing_System), 114));
+		textViewWeighingDisplayTitle = (TextFitTextView)mRoot.findViewById(R.id.textView_menu_body_mode_workload_display_title);
+		textViewWeighingDisplayTitle.setText(getString(ParentActivity.getResources().getString(R.string.Weighing_Display), 170));
+		textViewErrorDetectionTitle  = (TextFitTextView)mRoot.findViewById(R.id.textView_menu_body_mode_workload_errordetect_title);
+		textViewErrorDetectionTitle.setText(getString(ParentActivity.getResources().getString(R.string.Error_Detection), 171));
+		
 	}
 
 	protected void InitValuables() {
@@ -478,20 +521,20 @@ public class WorkLoadFragment extends ParentFragment{
 	public void InitButtonDisplay(int data){
 		switch (data) {
 		case CAN1CommManager.DATA_STATE_WEIGHINGDISPLAY_DAILY:
-			textViewInitialization.setText(ParentActivity.getResources().getString(string.Daily) + " "
-					 + ParentActivity.getResources().getString(string.Initialization));
+			textViewInitialization.setText(getString(ParentActivity.getResources().getString(string.Daily), 173) + " "
+					 + getString(ParentActivity.getResources().getString(string.Initialization), 30));
 			break;
 		case CAN1CommManager.DATA_STATE_WEIGHINGDISPLAY_TOTAL_A:
-			textViewInitialization.setText(ParentActivity.getResources().getString(string.Total_A) + " "
-					 + ParentActivity.getResources().getString(string.Initialization));
+			textViewInitialization.setText(getString(ParentActivity.getResources().getString(string.Total_A), 174) + " "
+					 + getString(ParentActivity.getResources().getString(string.Initialization), 30));
 			break;
 		case CAN1CommManager.DATA_STATE_WEIGHINGDISPLAY_TOTAL_B:
-			textViewInitialization.setText(ParentActivity.getResources().getString(string.Total_B) + " "
-					 + ParentActivity.getResources().getString(string.Initialization));
+			textViewInitialization.setText(getString(ParentActivity.getResources().getString(string.Total_B), 175) + " "
+					 + getString(ParentActivity.getResources().getString(string.Initialization), 30));
 			break;
 		case CAN1CommManager.DATA_STATE_WEIGHINGDISPLAY_TOTAL_C:
-			textViewInitialization.setText(ParentActivity.getResources().getString(string.Total_C) + " "
-					 + ParentActivity.getResources().getString(string.Initialization));
+			textViewInitialization.setText(getString(ParentActivity.getResources().getString(string.Total_C), 176) + " "
+					 + getString(ParentActivity.getResources().getString(string.Initialization), 30));
 			break;
 		default:
 			break;
@@ -679,5 +722,5 @@ public class WorkLoadFragment extends ParentFragment{
 	
 	}
 	/////////////////////////////////////////////////////////////////////
-	
+
 }

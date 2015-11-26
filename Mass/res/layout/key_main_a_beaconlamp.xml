@@ -26,6 +26,7 @@
                 android:layout_height="wrap_content"
                 android:button="@drawable/_selector_radio_btn"
                 android:text="@string/Off"
+                android:singleLine="true"
                 android:textColor="@drawable/_selector_radio_txt_white_amber"
                 android:textSize="25sp" />
 
@@ -36,6 +37,7 @@
                 android:layout_marginTop="60dp"
                 android:button="@drawable/_selector_radio_btn"
                 android:text="@string/On"
+                android:singleLine="true"
                 android:textColor="@drawable/_selector_radio_txt_white_amber"
                 android:textSize="25sp" />
         </RadioGroup>
@@ -50,7 +52,8 @@
         android:visibility="invisible" 
         android:splitMotionEvents="false">
 
-        <TextView
+        <taeha.wheelloader.fseries_monitor.main.TextFitTextView
+            android:id="@+id/textView_key_main_a_beaconlamp_notavailable_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/Beacon_Lamp_is_NOT_equipped"

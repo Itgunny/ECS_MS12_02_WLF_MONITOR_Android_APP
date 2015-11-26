@@ -21,6 +21,7 @@ import taeha.wheelloader.fseries_monitor.main.ParentPopup;
 import taeha.wheelloader.fseries_monitor.main.R;
 import taeha.wheelloader.fseries_monitor.main.Home.SeatBeltTimerClass;
 import taeha.wheelloader.fseries_monitor.main.R.string;
+import taeha.wheelloader.fseries_monitor.main.TextFitTextView;
 import taeha.wheelloader.fseries_monitor.popup.SpeedometerInitPopup.PopupOffTimerClass;
 
 public class EngineAutoShutdownCountPopup extends ParentPopup{
@@ -35,7 +36,11 @@ public class EngineAutoShutdownCountPopup extends ParentPopup{
 	ImageButton imgbtnSkip;
 	ImageButton imgbtnCancel;
 	
-	TextView textViewTime;
+	TextFitTextView	textViewSkip;
+	TextFitTextView	textViewCancel;
+	
+	TextFitTextView textViewTitle;
+	TextFitTextView textViewTime;
 
 	//////////////////////////////////////////////////
 	
@@ -106,7 +111,17 @@ public class EngineAutoShutdownCountPopup extends ParentPopup{
 		imgbtnSkip = (ImageButton)mRoot.findViewById(R.id.imageButton_popup_engineautoshutdown_count_skip);
 		imgbtnCancel = (ImageButton)mRoot.findViewById(R.id.imageButton_popup_engineautoshutdown_count_cancel);
 	
-		textViewTime = (TextView)mRoot.findViewById(R.id.textView_popup_engineautoshutdown_count_time);
+		textViewSkip = (TextFitTextView)mRoot.findViewById(R.id.textView_popup_engineautoshutdown_count_skip);
+		textViewSkip.setText(getString(ParentActivity.getResources().getString(R.string.Skip), 66));
+		
+		textViewCancel = (TextFitTextView)mRoot.findViewById(R.id.textView_popup_engineautoshutdown_count_cancel);
+		textViewCancel.setText(getString(ParentActivity.getResources().getString(R.string.Cancel), 16));
+		
+		textViewTitle = (TextFitTextView)mRoot.findViewById(R.id.textView_popup_engineautoshutdown_count_title);
+		textViewTitle.setText(getString(ParentActivity.getResources().getString(R.string.Engine_Auto_Shutdown), 215));
+		
+		
+		textViewTime = (TextFitTextView)mRoot.findViewById(R.id.textView_popup_engineautoshutdown_count_time);
 	}
 
 	@Override
@@ -244,7 +259,7 @@ public class EngineAutoShutdownCountPopup extends ParentPopup{
 		}
 	}	
 	public void CountDisplay(int _data){
-		textViewTime.setText(Integer.toString(_data) + ParentActivity.getResources().getString(string.Sec));
+		textViewTime.setText(Integer.toString(_data) + getString(ParentActivity.getResources().getString(string.Sec), 50));
 	}
 	////////////////////////////////////////////////////////////////////////////////
 }

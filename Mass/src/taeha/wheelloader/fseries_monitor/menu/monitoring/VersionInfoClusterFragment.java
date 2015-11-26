@@ -36,7 +36,7 @@ public class VersionInfoClusterFragment extends VersionInfoDetailFragment{
 		
 		ParentActivity.ScreenIndex = ParentActivity.SCREEN_STATE_MENU_MONITORING_VERSIONINFO_CLUSTER;
 		ParentActivity._MenuBaseFragment._MenuInterTitleFragment.SetTitleText(ParentActivity.getResources().getString(R.string.Machine_Information)
-				+ " - " + ParentActivity.getResources().getString(R.string.Cluster));
+				+ " - " + ParentActivity.getResources().getString(R.string.Cluster), 318, 270);
 		return mRoot;
 	}
 	@Override
@@ -50,9 +50,9 @@ public class VersionInfoClusterFragment extends VersionInfoDetailFragment{
 //		adapter.addItem(new IconTextItemVersion(ParentActivity.getResources().getDrawable(R.drawable.menu_management_machine_monitoring_bg_dark),null,
 //				ParentActivity.getResources().getString(string.Program_Version),"" , ""));
 		adapter.addItem(new IconTextItemVersion(ParentActivity.getResources().getDrawable(R.drawable.menu_management_machine_monitoring_bg_dark),null,
-				ParentActivity.getResources().getString(string.Program_Version),"" , ""));
+				getString(ParentActivity.getResources().getString(string.Program_Version), 277),"" , ""));
 		adapter.addItem(new IconTextItemVersion(ParentActivity.getResources().getDrawable(R.drawable.menu_management_machine_monitoring_bg_light),null,
-				ParentActivity.getResources().getString(string.Serial_Number),"" , ""));
+				getString(ParentActivity.getResources().getString(string.Serial_Number), 278),"" , ""));
 
 		listView.setAdapter(adapter);
 
@@ -62,9 +62,9 @@ public class VersionInfoClusterFragment extends VersionInfoDetailFragment{
 	@Override
 	public void ShowHiddenPage(){
 		adapter.addItem(new IconTextItemVersion(ParentActivity.getResources().getDrawable(R.drawable.menu_management_machine_monitoring_bg_dark),null,
-				ParentActivity.getResources().getString(string.Manufacturer),"" , ""));
+				getString(ParentActivity.getResources().getString(string.Manufacturer), 279),"" , ""));
 		adapter.addItem(new IconTextItemVersion(ParentActivity.getResources().getDrawable(R.drawable.menu_management_machine_monitoring_bg_light),null,
-				ParentActivity.getResources().getString(string.Hardware),"" , ""));
+				getString(ParentActivity.getResources().getString(string.Hardware), 312),"" , ""));
 	}
 	@Override
 	protected void GetDataFromNative() {

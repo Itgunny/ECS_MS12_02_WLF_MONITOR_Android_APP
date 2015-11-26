@@ -40,6 +40,7 @@
                 android:button="@drawable/_selector_radio_btn"
                 android:text="@string/Automatic"
                 android:textColor="@drawable/_selector_radio_txt_white_amber"
+                android:singleLine="true"
                 android:textSize="25sp" />
 
             <RadioButton
@@ -50,6 +51,7 @@
                 android:button="@drawable/_selector_radio_btn"
                 android:text="@string/Manual"
                 android:textColor="@drawable/_selector_radio_txt_white_amber"
+                android:singleLine="true"
                 android:textSize="25sp" />
         </RadioGroup>
     </RelativeLayout>
@@ -65,7 +67,7 @@
         android:visibility="invisible"
         android:splitMotionEvents="false" >
 
-        <TextView
+        <taeha.wheelloader.fseries_monitor.main.TextFitTextView
             android:id="@+id/textView_menu_body_mode_coolingfan_manual_description"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -97,7 +99,7 @@
                 android:layout_marginLeft="100dp"
                 android:splitMotionEvents="false" >
 
-                <TextView
+                <taeha.wheelloader.fseries_monitor.main.TextFitTextView
                     android:id="@+id/textView_menu_body_mode_coolingfan_manual_excute"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -150,7 +152,7 @@
                 android:layout_centerVertical="true"
                 android:src="@drawable/menu_bluedot" />
 
-            <TextView
+            <taeha.wheelloader.fseries_monitor.main.TextFitTextView
                 android:id="@+id/textView_menu_body_mode_coolingfan_auto_interval_title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -160,7 +162,7 @@
                 android:text="@string/Interval"
                 android:textAppearance="?android:attr/textAppearanceLarge" />
 
-            <TextView
+            <taeha.wheelloader.fseries_monitor.main.TextFitTextView
                 android:id="@+id/textView_menu_body_mode_coolingfan_auto_interval_time"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -172,7 +174,7 @@
                 android:textAppearance="?android:attr/textAppearanceLarge"
                 android:textColor="@color/menu_left_amber" />
 
-            <TextView
+            <taeha.wheelloader.fseries_monitor.main.TextFitTextView
                 android:id="@+id/textView_menu_body_mode_coolingfan_auto_interval_min"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -183,7 +185,7 @@
                 android:textColor="@color/gray"
                 android:textSize="20sp" />
 
-            <TextView
+            <taeha.wheelloader.fseries_monitor.main.TextFitTextView
                 android:id="@+id/textView_menu_body_mode_coolingfan_auto_interval_max"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -239,7 +241,7 @@
                 android:layout_centerVertical="true"
                 android:src="@drawable/menu_bluedot" />
 
-            <TextView
+            <taeha.wheelloader.fseries_monitor.main.TextFitTextView
                 android:id="@+id/textView_menu_body_mode_coolingfan_auto_time_title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -249,7 +251,7 @@
                 android:text="@string/Time"
                 android:textAppearance="?android:attr/textAppearanceLarge" />
 
-            <TextView
+            <taeha.wheelloader.fseries_monitor.main.TextFitTextView
                 android:id="@+id/textView_menu_body_mode_coolingfan_auto_time_time"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -261,7 +263,7 @@
                 android:textAppearance="?android:attr/textAppearanceLarge"
                 android:textColor="@color/menu_left_amber" />
 
-            <TextView
+            <taeha.wheelloader.fseries_monitor.main.TextFitTextView
                 android:id="@+id/textView_menu_body_mode_coolingfan_auto_time_min"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -272,7 +274,7 @@
                 android:textColor="@color/gray"
                 android:textSize="20sp" />
 
-            <TextView
+            <taeha.wheelloader.fseries_monitor.main.TextFitTextView
                 android:id="@+id/textView_menu_body_mode_coolingfan_auto_time_max"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -367,7 +369,7 @@
                     android:layout_alignTop="@+id/ImageButton_menu_body_mode_coolingfanreversemode_low_ok"
                     android:src="@drawable/menu_low_icon_ok" />
 
-                <TextView
+                <taeha.wheelloader.fseries_monitor.main.TextFitTextView
                     android:id="@+id/textView_menu_body_mode_coolingfanreversemode_low_ok"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"

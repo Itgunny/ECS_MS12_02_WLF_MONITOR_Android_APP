@@ -14,18 +14,19 @@ import taeha.wheelloader.fseries_monitor.main.CheckModel;
 import taeha.wheelloader.fseries_monitor.main.ParentFragment;
 import taeha.wheelloader.fseries_monitor.main.R;
 import taeha.wheelloader.fseries_monitor.main.R.string;
+import taeha.wheelloader.fseries_monitor.main.TextFitTextView;
 
 public class MainBRightDownTMFragment extends ParentFragment{
 	//CONSTANT////////////////////////////////////////
 	
 	//////////////////////////////////////////////////
 	//RESOURCE////////////////////////////////////////
-	TextView textViewCCOModeTitle;
-	TextView textViewCCOModeData;
-	TextView textViewShiftModeTitle;
-	TextView textViewShiftModeData;
-	TextView textViewTCLockUpTitle;
-	TextView textViewTCLockUpData;
+	TextFitTextView textViewCCOModeTitle;
+	TextFitTextView textViewCCOModeData;
+	TextFitTextView textViewShiftModeTitle;
+	TextFitTextView textViewShiftModeData;
+	TextFitTextView textViewTCLockUpTitle;
+	TextFitTextView textViewTCLockUpData;
 	
 	ImageButton imgbtnCCOMode;
 	ImageButton imgbtnShiftMode;
@@ -81,14 +82,17 @@ public class MainBRightDownTMFragment extends ParentFragment{
 	protected void InitResource() {
 		// TODO Auto-generated method stub
 
-		textViewCCOModeTitle = (TextView)mRoot.findViewById(R.id.textView_rightdown_main_b_tm_ccomode_title);
-		textViewCCOModeData = (TextView)mRoot.findViewById(R.id.textView_rightdown_main_b_tm_ccomode_data);
+		textViewCCOModeTitle = (TextFitTextView)mRoot.findViewById(R.id.textView_rightdown_main_b_tm_ccomode_title);
+		textViewCCOModeTitle.setText(getString(ParentActivity.getResources().getString(R.string.CCO_MODE), 86)  + " ");
+		textViewCCOModeData = (TextFitTextView)mRoot.findViewById(R.id.textView_rightdown_main_b_tm_ccomode_data);
 		
-		textViewShiftModeTitle = (TextView)mRoot.findViewById(R.id.textView_rightdown_main_b_tm_shiftmode_title);
-		textViewShiftModeData = (TextView)mRoot.findViewById(R.id.textView_rightdown_main_b_tm_shiftmode_data);
+		textViewShiftModeTitle = (TextFitTextView)mRoot.findViewById(R.id.textView_rightdown_main_b_tm_shiftmode_title);
+		textViewShiftModeTitle.setText(getString(ParentActivity.getResources().getString(R.string.SHIFT_MODE), 88)  + " ");
+		textViewShiftModeData = (TextFitTextView)mRoot.findViewById(R.id.textView_rightdown_main_b_tm_shiftmode_data);
 		
-		textViewTCLockUpTitle = (TextView)mRoot.findViewById(R.id.textView_rightdown_main_b_tm_tclockup_title);
-		textViewTCLockUpData = (TextView)mRoot.findViewById(R.id.textView_rightdown_main_b_tm_tclockup_data);
+		textViewTCLockUpTitle = (TextFitTextView)mRoot.findViewById(R.id.textView_rightdown_main_b_tm_tclockup_title);
+		textViewTCLockUpTitle.setText(getString(ParentActivity.getResources().getString(R.string.TC_LOCK_UP), 89)  + " ");
+		textViewTCLockUpData = (TextFitTextView)mRoot.findViewById(R.id.textView_rightdown_main_b_tm_tclockup_data);
 		
 		imgbtnCCOMode = (ImageButton)mRoot.findViewById(R.id.imageButton_rightdown_main_b_tm_ccomode);
 		imgbtnShiftMode = (ImageButton)mRoot.findViewById(R.id.imageButton_rightdown_main_b_tm_shiftmode);
@@ -183,9 +187,9 @@ public class MainBRightDownTMFragment extends ParentFragment{
 		//}
 		//if(Model == CheckModel.MODEL_980){
 		if(Model == 980){
-			textViewCCOModeTitle.setText(getResources().getString(string.ICCO_MODE));
+			textViewCCOModeTitle.setText(getString(getResources().getString(string.ICCO_MODE), 87) + " ");
 		}else{
-			textViewCCOModeTitle.setText(getResources().getString(string.CCO_MODE));
+			textViewCCOModeTitle.setText(getString(getResources().getString(string.CCO_MODE), 86)  + " ");
 		}
 		// --, 150305 bwk
 		
@@ -194,20 +198,20 @@ public class MainBRightDownTMFragment extends ParentFragment{
 		try {
 			switch (Data) {
 			case CAN1CommManager.DATA_STATE_TM_CLUTCHCUTOFF_OFF:
-				TMCCOModeDataAnimation.FlipAnimation(textViewCCOModeData,getResources().getString(string.OFF));
+				TMCCOModeDataAnimation.FlipAnimation(textViewCCOModeData,getString(getResources().getString(string.OFF), 98));
 				break;
 			case CAN1CommManager.DATA_STATE_TM_CLUTCHCUTOFF_L:
-				TMCCOModeDataAnimation.FlipAnimation(textViewCCOModeData,getResources().getString(string.L));
+				TMCCOModeDataAnimation.FlipAnimation(textViewCCOModeData,getString(getResources().getString(string.L), 99));
 				break;
 			case CAN1CommManager.DATA_STATE_TM_CLUTCHCUTOFF_M:
-				TMCCOModeDataAnimation.FlipAnimation(textViewCCOModeData,getResources().getString(string.M));
+				TMCCOModeDataAnimation.FlipAnimation(textViewCCOModeData,getString(getResources().getString(string.M), 100));
 				break;
 			case CAN1CommManager.DATA_STATE_TM_CLUTCHCUTOFF_H:
 				//if(ParentActivity._CheckModel.GetMCUVersion(CAN1Comm.Get_ComponentBasicInformation_1698_PGN65330()) == CheckModel.MODEL_980)
 				if(ParentActivity._CheckModel.GetMCUModelNum(CAN1Comm.Get_ComponentBasicInformation_1698_PGN65330()) == 980)
-					TMCCOModeDataAnimation.FlipAnimation(textViewCCOModeData,getResources().getString(string.ON));
+					TMCCOModeDataAnimation.FlipAnimation(textViewCCOModeData,getString(getResources().getString(string.ON), 97));
 				else
-					TMCCOModeDataAnimation.FlipAnimation(textViewCCOModeData,getResources().getString(string.H));
+					TMCCOModeDataAnimation.FlipAnimation(textViewCCOModeData,getString(getResources().getString(string.H), 101));
 				break;
 			default:
 //				TMCCOModeDataAnimation.FlipAnimation(textViewCCOModeData,getResources().getString(string.OFF));
@@ -222,16 +226,16 @@ public class MainBRightDownTMFragment extends ParentFragment{
 		try {
 			switch (Data) {
 			case CAN1CommManager.DATA_STATE_TM_SHIFTMODE_MANUAL:
-				TMShiftModeDataAnimation.FlipAnimation(textViewShiftModeData,getResources().getString(string.MANUAL));
+				TMShiftModeDataAnimation.FlipAnimation(textViewShiftModeData,getString(getResources().getString(string.MANUAL), 102));
 				break;
 			case CAN1CommManager.DATA_STATE_TM_SHIFTMODE_AL:
-				TMShiftModeDataAnimation.FlipAnimation(textViewShiftModeData,getResources().getString(string.AL));
+				TMShiftModeDataAnimation.FlipAnimation(textViewShiftModeData,getString(getResources().getString(string.AL), 103));
 				break;
 			case CAN1CommManager.DATA_STATE_TM_SHIFTMODE_AN:
-				TMShiftModeDataAnimation.FlipAnimation(textViewShiftModeData,getResources().getString(string.AN));
+				TMShiftModeDataAnimation.FlipAnimation(textViewShiftModeData,getString(getResources().getString(string.AN), 104));
 				break;
 			case CAN1CommManager.DATA_STATE_TM_SHIFTMODE_AH:
-				TMShiftModeDataAnimation.FlipAnimation(textViewShiftModeData,getResources().getString(string.AH));
+				TMShiftModeDataAnimation.FlipAnimation(textViewShiftModeData,getString(getResources().getString(string.AH), 105));
 				break;
 			default:
 //				TMShiftModeDataAnimation.FlipAnimation(textViewShiftModeData,getResources().getString(string.MANUAL));
@@ -246,10 +250,10 @@ public class MainBRightDownTMFragment extends ParentFragment{
 		try {
 			switch (Data) {
 			case CAN1CommManager.DATA_STATE_TM_LOCKUPCLUTCH_OFF:
-				TMTCLockUpDataAnimation.FlipAnimation(textViewTCLockUpData,getResources().getString(string.OFF));
+				TMTCLockUpDataAnimation.FlipAnimation(textViewTCLockUpData,getString(getResources().getString(string.OFF), 98));
 				break;
 			case CAN1CommManager.DATA_STATE_TM_LOCKUPCLUTCH_ON:
-				TMTCLockUpDataAnimation.FlipAnimation(textViewTCLockUpData,getResources().getString(string.ON));
+				TMTCLockUpDataAnimation.FlipAnimation(textViewTCLockUpData,getString(getResources().getString(string.ON), 97));
 				break;
 			default:
 //				TMTCLockUpDataAnimation.FlipAnimation(textViewTCLockUpData,getResources().getString(string.OFF));

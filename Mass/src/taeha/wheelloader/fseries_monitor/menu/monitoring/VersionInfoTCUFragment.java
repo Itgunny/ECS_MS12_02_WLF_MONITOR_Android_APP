@@ -49,7 +49,7 @@ public class VersionInfoTCUFragment extends VersionInfoDetailFragment{
 		
 		ParentActivity.ScreenIndex = ParentActivity.SCREEN_STATE_MENU_MONITORING_VERSIONINFO_TCU;
 		ParentActivity._MenuBaseFragment._MenuInterTitleFragment.SetTitleText(ParentActivity.getResources().getString(R.string.Machine_Information)
-				+ " - " + ParentActivity.getResources().getString(R.string.TCU));
+				+ " - " + ParentActivity.getResources().getString(R.string.TCU), 318, 266);
 		return mRoot;
 	}
 	@Override
@@ -78,9 +78,9 @@ public class VersionInfoTCUFragment extends VersionInfoDetailFragment{
 //		adapter.addItem(new IconTextItemVersion(ParentActivity.getResources().getDrawable(R.drawable.menu_management_machine_monitoring_bg_dark),null,
 //				ParentActivity.getResources().getString(string.Manufacturer),"" , ""));
 		adapter.addItem(new IconTextItemVersion(ParentActivity.getResources().getDrawable(R.drawable.menu_management_machine_monitoring_bg_light),null,
-				ParentActivity.getResources().getString(string.Manufacturer),"" , ""));
+				getString(ParentActivity.getResources().getString(string.Manufacturer), 279),"" , ""));
 		adapter.addItem(new IconTextItemVersion(ParentActivity.getResources().getDrawable(R.drawable.menu_management_machine_monitoring_bg_dark),null,
-				ParentActivity.getResources().getString(string.Software_Version),"" , ""));
+				getString(ParentActivity.getResources().getString(string.Software_Version), 294),"" , ""));
 		
 		listView.setAdapter(adapter);
 
@@ -88,13 +88,13 @@ public class VersionInfoTCUFragment extends VersionInfoDetailFragment{
 	@Override
 	public void ShowHiddenPage(){
 		adapter.addItem(new IconTextItemVersion(ParentActivity.getResources().getDrawable(R.drawable.menu_management_machine_monitoring_bg_light),null,
-				ParentActivity.getResources().getString(string.EST37A_Part_Number),"" , ""));
+				getString(ParentActivity.getResources().getString(string.EST37A_Part_Number), 290),"" , ""));
 		adapter.addItem(new IconTextItemVersion(ParentActivity.getResources().getDrawable(R.drawable.menu_management_machine_monitoring_bg_dark),null,
-				ParentActivity.getResources().getString(string.Hardware_Part_Number),"" , ""));
+				getString(ParentActivity.getResources().getString(string.Hardware_Part_Number), 291),"" , ""));
 		adapter.addItem(new IconTextItemVersion(ParentActivity.getResources().getDrawable(R.drawable.menu_management_machine_monitoring_bg_light),null,
-				ParentActivity.getResources().getString(string.Hardware_Serial_Number),"" , ""));
+				getString(ParentActivity.getResources().getString(string.Hardware_Serial_Number), 292),"" , ""));
 		adapter.addItem(new IconTextItemVersion(ParentActivity.getResources().getDrawable(R.drawable.menu_management_machine_monitoring_bg_dark),null,
-				ParentActivity.getResources().getString(string.Customer_Serial_Number),"" , ""));
+				getString(ParentActivity.getResources().getString(string.Customer_Serial_Number), 293),"" , ""));
 	}
 
 	@Override

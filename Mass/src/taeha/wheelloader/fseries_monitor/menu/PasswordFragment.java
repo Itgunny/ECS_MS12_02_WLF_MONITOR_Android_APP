@@ -13,11 +13,13 @@ import taeha.wheelloader.fseries_monitor.main.Home;
 import taeha.wheelloader.fseries_monitor.main.ParentFragment;
 import taeha.wheelloader.fseries_monitor.main.R;
 import taeha.wheelloader.fseries_monitor.main.R.string;
+import taeha.wheelloader.fseries_monitor.main.TextFitTextView;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.text.Layout;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.View;
@@ -50,8 +52,8 @@ public abstract class PasswordFragment extends ParentFragment{
 	protected TextView textViewNum9;
 	protected TextView textViewNum0;
 	
-	protected TextView textViewPassword;
-	protected TextView textViewTitle;
+	protected TextFitTextView textViewPassword;
+	protected TextFitTextView textViewTitle;
 	
 	protected ImageButton imgbtnBack;
 	protected ImageButton imgbtnEnter;
@@ -148,8 +150,8 @@ public abstract class PasswordFragment extends ParentFragment{
 		textViewNum9 = (TextView)mRoot.findViewById(R.id.textView_menu_body_password_num_9);
 		textViewNum0 = (TextView)mRoot.findViewById(R.id.textView_menu_body_password_num_0);
 		
-		textViewTitle = (TextView)mRoot.findViewById(R.id.textView_menu_body_password_text_title);
-		textViewPassword = (TextView)mRoot.findViewById(R.id.textView_menu_body_password_text_data);
+		textViewTitle = (TextFitTextView)mRoot.findViewById(R.id.textView_menu_body_password_text_title);
+		textViewPassword = (TextFitTextView)mRoot.findViewById(R.id.textView_menu_body_password_text_data);
 		
 		imgbtnBack = (ImageButton)mRoot.findViewById(R.id.imageButton_menu_body_password_num_back);
 		imgbtnEnter = (ImageButton)mRoot.findViewById(R.id.imageButton_menu_body_password_num_enter);
@@ -533,47 +535,54 @@ public abstract class PasswordFragment extends ParentFragment{
 				// TODO Auto-generated method stub
 				switch (nText) {
 				case 0:
-					textViewTitle.setText("");
+					setTitleText("");
 					break;
 				case 1:
-					textViewTitle.setText(ParentActivity.getResources().getString(string.User_Password));
+					setTitleText(ParentActivity.getResources().getString(string.User_Password), 53);
 					break;
 				case 2:
-					textViewTitle.setText(ParentActivity.getResources().getString(string.Service_Password));
+					setTitleText(ParentActivity.getResources().getString(string.Service_Password), 54);
 					break;
 				case 3:
+					if(ParentActivity.langDb.findStrGetString(55, ParentActivity.LanguageIndex) == null){
 					textViewTitle.setText(ParentActivity.getResources().getString(string.Incorrect_Password)
 							 + " (" + Integer.toString(ErrCount) + "/" + Integer.toString(MAX_ERR_CNT) + ")");
+						Log.d(TAG, "Android");
+					}else {
+						textViewTitle.setText(ParentActivity.langDb.findStrGetString(55, ParentActivity.LanguageIndex)
+								 + " (" + Integer.toString(ErrCount) + "/" + Integer.toString(MAX_ERR_CNT) + ")");
+						Log.d(TAG, "Excel");
+					}
 					break;
 				case 4:
-					textViewTitle.setText(ParentActivity.getResources().getString(string._5_10_digits));
+					setTitleText(ParentActivity.getResources().getString(string._5_10_digits), 56);
 					break;
 				case 5:
-					textViewTitle.setText(ParentActivity.getResources().getString(string.Searching));
+					setTitleText(ParentActivity.getResources().getString(string.Searching), 57);
 					break;
 				case 6:
-					textViewTitle.setText(ParentActivity.getResources().getString(string.Password_Changed));
+					setTitleText(ParentActivity.getResources().getString(string.Password_Changed), 58);
 					break;
 				case 7:
-					textViewTitle.setText(ParentActivity.getResources().getString(string.Re_entering_Password));
+					setTitleText(ParentActivity.getResources().getString(string.Re_entering_Password), 59);
 					break;
 				case 8:
-					textViewTitle.setText(ParentActivity.getResources().getString(string.Current_Password));
+					setTitleText(ParentActivity.getResources().getString(string.Current_Password), 60);
 					break;
 				case 9:
-					textViewTitle.setText(ParentActivity.getResources().getString(string.Current_Password));
+					setTitleText(ParentActivity.getResources().getString(string.Current_Password), 60);
 					break;
 				case 10:
-					textViewTitle.setText(ParentActivity.getResources().getString(string.Change_Password));
+					setTitleText(ParentActivity.getResources().getString(string.Change_Password), 325);
 					break;
 				case 11:
-					textViewTitle.setText(ParentActivity.getResources().getString(string.New_Password));
+					setTitleText(ParentActivity.getResources().getString(string.New_Password), 61);
 					break;
 				case 12:
-					textViewTitle.setText(ParentActivity.getResources().getString(string.Re_entering_New_Password));
+					setTitleText(ParentActivity.getResources().getString(string.Re_entering_New_Password), 62);
 					break;
 				case 13:
-					textViewTitle.setText(ParentActivity.getResources().getString(string.Access_Denied));
+					setTitleText(ParentActivity.getResources().getString(string.Access_Denied), 63);
 					break;
 				/*
 				case 14:
@@ -581,20 +590,17 @@ public abstract class PasswordFragment extends ParentFragment{
 					break;
 				*/
 				case 15:
-					textViewTitle.setText(ParentActivity.getResources().getString(string._5_12_digits));
+					setTitleText(ParentActivity.getResources().getString(string._5_12_digits), 64);
 					break;
 				case 16:
-					textViewTitle.setText(ParentActivity.getResources().getString(string.No_Changes_executed));
+					setTitleText(ParentActivity.getResources().getString(string.No_Changes_executed), 65);
 					break;
-
-					
 				case 17:
-					textViewTitle.setText(ParentActivity.getResources().getString(string.Serial_No));
+					setTitleText(ParentActivity.getResources().getString(string.Serial_No), 83);
 					break;
 				case 18:
-					textViewTitle.setText(ParentActivity.getResources().getString(string.Re_entering_Serial_No));
+					setTitleText(ParentActivity.getResources().getString(string.Re_entering_Serial_No), 84);
 					break;
-					
 				default:
 					break;
 				}
@@ -843,6 +849,14 @@ public abstract class PasswordFragment extends ParentFragment{
 	public void setTitleText(String str){
 		textViewTitle.setText(str);
 	}
+	public void setTitleText(String str, int index){
+		if(ParentActivity.langDb.findStrGetString(index, ParentActivity.LanguageIndex) == null){
+			textViewTitle.setText(str);
+		}else {
+			textViewTitle.setText(ParentActivity.langDb.findStrGetString(index, ParentActivity.LanguageIndex));
+		}
+	}
+	
 	/////////////////////////////////////////////////////////////////////
 	abstract public void showServicePasswordNextScreen();
 	abstract public void showUserPasswordNextScreen();

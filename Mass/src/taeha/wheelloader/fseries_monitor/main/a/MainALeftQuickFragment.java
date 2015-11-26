@@ -8,11 +8,13 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.RadioButton;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import taeha.wheelloader.fseries_monitor.main.Home;
 import taeha.wheelloader.fseries_monitor.main.ParentFragment;
 import taeha.wheelloader.fseries_monitor.main.R;
+import taeha.wheelloader.fseries_monitor.main.TextFitTextView;
 
 public class MainALeftQuickFragment extends ParentFragment{
 	//CONSTANT////////////////////////////////////////
@@ -25,8 +27,8 @@ public class MainALeftQuickFragment extends ParentFragment{
 	ImageView imgViewIconUser;
 	ImageView imgViewIconHelp;
 	
-	TextView textViewTitleUser;
-	TextView textViewTitleHelp;
+	TextFitTextView textViewTitleUser;
+	TextFitTextView textViewTitleHelp;
 	//////////////////////////////////////////////////
 	
 	//VALUABLE////////////////////////////////////////
@@ -68,8 +70,11 @@ public class MainALeftQuickFragment extends ParentFragment{
 		imgViewIconUser = (ImageView)mRoot.findViewById(R.id.imageView_leftup_main_a_quick_icon);
 		imgViewIconHelp = (ImageView)mRoot.findViewById(R.id.imageView_leftdown_main_a_quick_icon);
 
-		textViewTitleUser = (TextView)mRoot.findViewById(R.id.textView_leftup_main_a_quick_title);
-		textViewTitleHelp = (TextView)mRoot.findViewById(R.id.textView_leftdown_main_a_quick_title);
+		textViewTitleUser = (TextFitTextView)mRoot.findViewById(R.id.textView_leftup_main_a_quick_title);
+		textViewTitleUser.setText(getString(ParentActivity.getResources().getString(R.string.User_Switching), 116));
+		
+		textViewTitleHelp = (TextFitTextView)mRoot.findViewById(R.id.textView_leftdown_main_a_quick_title);
+		textViewTitleHelp.setText(getString(ParentActivity.getResources().getString(R.string.Help), 117));
 		
 	}
 	

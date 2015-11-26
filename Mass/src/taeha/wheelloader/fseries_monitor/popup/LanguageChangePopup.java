@@ -4,6 +4,7 @@ package taeha.wheelloader.fseries_monitor.popup;
 import taeha.wheelloader.fseries_monitor.main.Home;
 import taeha.wheelloader.fseries_monitor.main.ParentPopup;
 import taeha.wheelloader.fseries_monitor.main.R;
+import taeha.wheelloader.fseries_monitor.main.TextFitTextView;
 import android.content.Context;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
@@ -21,7 +22,7 @@ public class LanguageChangePopup extends ParentPopup{
 	//RESOURCE////////////////////////////////////////
 
 	ImageButton imgbtnOK;
-
+	TextFitTextView textViewOK;
 
 	TextView textViewTitle;
 
@@ -65,7 +66,7 @@ public class LanguageChangePopup extends ParentPopup{
 		CursurIndex = 1;
 		CursurDisplay(CursurIndex);
 		textViewTitle.setTextSize(25);
-		textViewTitle.setText(ParentActivity.getResources().getString(R.string.Language_Warning));
+		textViewTitle.setText(getString(ParentActivity.getResources().getString(R.string.Language_Warning), 429));
 	}
 	@Override
 	public void dismiss() {
@@ -77,7 +78,11 @@ public class LanguageChangePopup extends ParentPopup{
 	protected void InitResource() {
 		// TODO Auto-generated method stub
 		imgbtnOK = (ImageButton)mRoot.findViewById(R.id.imageButton_popup_softwareupdate_error_ok);
+		
+		textViewOK	  = (TextFitTextView)mRoot.findViewById(R.id.textView_popup_softwareupdate_error_ok);
+		textViewOK.setText(getString(ParentActivity.getResources().getString(R.string.OK), 15));
 		textViewTitle = (TextView)mRoot.findViewById(R.id.textView_popup_softwareupdate_error_title);
+		textViewTitle.setText(getString(ParentActivity.getResources().getString(R.string.Language_Warning), 429));
 	}
 
 	@Override

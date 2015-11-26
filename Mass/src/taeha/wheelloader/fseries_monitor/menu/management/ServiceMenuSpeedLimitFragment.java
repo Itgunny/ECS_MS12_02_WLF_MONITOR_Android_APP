@@ -10,6 +10,7 @@ import taeha.wheelloader.fseries_monitor.main.Home;
 import taeha.wheelloader.fseries_monitor.main.ParentFragment;
 import taeha.wheelloader.fseries_monitor.main.R;
 import taeha.wheelloader.fseries_monitor.main.R.string;
+import taeha.wheelloader.fseries_monitor.main.TextFitTextView;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -38,13 +39,15 @@ public class ServiceMenuSpeedLimitFragment extends ParentFragment{
 	//RESOURCE////////////////////////////////////////
 	ImageButton imgbtnOK;
 	ImageButton imgbtnCancel;
+	TextFitTextView		textViewOK;
+	TextFitTextView    	textViewCancel;
 
 	RadioButton radioSetting;
 	RadioButton radioClear;
 	
-	TextView textViewSpeed;
-	TextView textViewSpeedMax;
-	TextView textViewSpeedMin;
+	TextFitTextView textViewSpeed;
+	TextFitTextView textViewSpeedMax;
+	TextFitTextView textViewSpeedMin;
 	
 	SeekBar	seekbarSpeed;
 	
@@ -85,7 +88,7 @@ public class ServiceMenuSpeedLimitFragment extends ParentFragment{
 		InitButtonListener();
 		
 		ParentActivity.ScreenIndex = ParentActivity.SCREEN_STATE_MENU_MANAGEMENT_SERVICE_SPEEDLIMIT_TOP;
-		ParentActivity._MenuBaseFragment._MenuInterTitleFragment.SetTitleText(ParentActivity.getResources().getString(R.string.Speed_Limit_Setting));
+		ParentActivity._MenuBaseFragment._MenuInterTitleFragment.SetTitleText(ParentActivity.getResources().getString(R.string.Speed_Limit_Setting), 360);
 		HandleCursurDisplay = new Handler() {
 			@Override
 			public void handleMessage(Message msg) {
@@ -112,13 +115,22 @@ public class ServiceMenuSpeedLimitFragment extends ParentFragment{
 		// TODO Auto-generated method stub
 		imgbtnOK = (ImageButton)mRoot.findViewById(R.id.ImageButton_menu_body_management_service_speedlimit_low_ok);
 		imgbtnCancel = (ImageButton)mRoot.findViewById(R.id.ImageButton_menu_body_management_service_speedlimit_low_cancel);
+		textViewOK = (TextFitTextView)mRoot.findViewById(R.id.textView_menu_body_management_service_speedlimit_low_ok);
+		textViewOK.setText(getString(ParentActivity.getResources().getString(string.OK), 15));
+		textViewCancel = (TextFitTextView)mRoot.findViewById(R.id.textView_menu_body_management_service_speedlimit_low_cancel);
+		textViewCancel.setText(getString(ParentActivity.getResources().getString(string.Cancel), 16));
+		
 	
 		radioSetting = (RadioButton)mRoot.findViewById(R.id.radioButton_menu_body_management_service_speedlimit_use_setting);
+		radioSetting.setText(getString(ParentActivity.getResources().getString(string.Setting), 35));
+		ParentActivity.setMarqueeRadio(radioSetting);
 		radioClear = (RadioButton)mRoot.findViewById(R.id.radioButton_menu_body_management_service_speedlimit_use_clear);
+		radioClear.setText(getString(ParentActivity.getResources().getString(string.Clear), 36));
+		ParentActivity.setMarqueeRadio(radioClear);
 		
-		textViewSpeed = (TextView)mRoot.findViewById(R.id.textView_menu_body_management_service_speedlimit_time);
-		textViewSpeedMax = (TextView)mRoot.findViewById(R.id.textView_menu_body_management_service_speedlimit_max);
-		textViewSpeedMin = (TextView)mRoot.findViewById(R.id.textView_menu_body_management_service_speedlimit_min);
+		textViewSpeed = (TextFitTextView)mRoot.findViewById(R.id.textView_menu_body_management_service_speedlimit_time);
+		textViewSpeedMax = (TextFitTextView)mRoot.findViewById(R.id.textView_menu_body_management_service_speedlimit_max);
+		textViewSpeedMin = (TextFitTextView)mRoot.findViewById(R.id.textView_menu_body_management_service_speedlimit_min);
 		
 		layoutSpeed = (RelativeLayout)mRoot.findViewById(R.id.RelativeLayout_menu_body_management_service_speedlimit_time);
 
@@ -141,11 +153,11 @@ public class ServiceMenuSpeedLimitFragment extends ParentFragment{
 			nSpeedLimit = MAX_LEVEL;
 		
 		if(ParentActivity.UnitOdo == Home.UNIT_ODO_MILE){
-			textViewSpeedMax.setText(ParentActivity.GetRideControlSpeed(40,ParentActivity.UnitOdo) + ParentActivity.getResources().getString(string.mph));
-			textViewSpeedMin.setText(ParentActivity.GetRideControlSpeed(20,ParentActivity.UnitOdo) + ParentActivity.getResources().getString(string.mph));
+			textViewSpeedMax.setText(ParentActivity.GetRideControlSpeed(40,ParentActivity.UnitOdo) + getString(ParentActivity.getResources().getString(string.mph), 32));
+			textViewSpeedMin.setText(ParentActivity.GetRideControlSpeed(20,ParentActivity.UnitOdo) + getString(ParentActivity.getResources().getString(string.mph), 32));
 		}else{
-			textViewSpeedMax.setText(ParentActivity.GetRideControlSpeed(40,ParentActivity.UnitOdo) + ParentActivity.getResources().getString(string.km_h));
-			textViewSpeedMin.setText(ParentActivity.GetRideControlSpeed(20,ParentActivity.UnitOdo) + ParentActivity.getResources().getString(string.km_h));
+			textViewSpeedMax.setText(ParentActivity.GetRideControlSpeed(40,ParentActivity.UnitOdo) + getString(ParentActivity.getResources().getString(string.km_h), 31));
+			textViewSpeedMin.setText(ParentActivity.GetRideControlSpeed(20,ParentActivity.UnitOdo) + getString(ParentActivity.getResources().getString(string.km_h), 31));
 		}
 		
 		
@@ -327,9 +339,9 @@ public class ServiceMenuSpeedLimitFragment extends ParentFragment{
 		String strSpeed;
 		strSpeed = ParentActivity.GetRideControlSpeed(_data, _unit);
 		if(_unit == Home.UNIT_ODO_MILE){
-			textViewSpeed.setText(strSpeed + " " + ParentActivity.getResources().getString(R.string.mph));
+			textViewSpeed.setText(strSpeed + " " + getString(ParentActivity.getResources().getString(R.string.mph), 32));
 		}else{
-			textViewSpeed.setText(strSpeed + " " + ParentActivity.getResources().getString(R.string.km_h));
+			textViewSpeed.setText(strSpeed + " " + getString(ParentActivity.getResources().getString(R.string.km_h), 31));
 		}
 	}
 	

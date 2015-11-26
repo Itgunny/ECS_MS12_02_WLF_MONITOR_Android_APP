@@ -14,6 +14,7 @@ import taeha.wheelloader.fseries_monitor.main.ParentFragment;
 import taeha.wheelloader.fseries_monitor.main.R;
 import taeha.wheelloader.fseries_monitor.main.R.string;
 import taeha.wheelloader.fseries_monitor.menu.preference.DisplayTypeFragment.EnableButtonTimerClass;
+import taeha.wheelloader.fseries_monitor.main.TextFitTextView;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -43,13 +44,18 @@ public class PressureCalibration extends ParentFragment{
 	//RESOURCE////////////////////////////////////////
 
 	ImageButton imgbtnCancel;
+	TextFitTextView textViewCancel;
 
-	TextView textViewTitle;
-	TextView textViewStart;
+	TextFitTextView textViewTitle;
+	TextFitTextView textViewStart;
 	TextView textViewText1;
 	TextView textViewText2;
 	TextView textViewText3;
-	TextView textViewText4;		// ++, --, 150204 bwk
+	
+	TextFitTextView textViewHYDTitle;
+	TextFitTextView textViewHYDData;		// ++, --, 150204 bwk
+	
+	TextView textViewWarning;
 	
 	ImageView imgViewStep1;
 	ImageView imgViewStep2;
@@ -69,6 +75,7 @@ public class PressureCalibration extends ParentFragment{
 	
 	int Order;	
 	int CursurIndex;
+	
 	Handler HandleCursurDisplay;
 	//////////////////////////////////////////////////
 	
@@ -97,7 +104,7 @@ public class PressureCalibration extends ParentFragment{
 		InitButtonListener();
 		CursurDisplay(CursurIndex);
 		ParentActivity.ScreenIndex = ParentActivity.SCREEN_STATE_MENU_MODE_ETC_CALIBRATION_PRESSURE_TOP;
-		ParentActivity._MenuBaseFragment._MenuInterTitleFragment.SetTitleText(ParentActivity.getResources().getString(R.string.Boom_Pressure_Calibration));
+		ParentActivity._MenuBaseFragment._MenuInterTitleFragment.SetTitleText(ParentActivity.getResources().getString(R.string.Boom_Pressure_Calibration), 172);
 		
 		if(CAN1Comm.Get_ComponentCode_1699_PGN65330_EHCU() == CAN1CommManager.STATE_COMPONENTCODE_EHCU)
 			StartEnableButtonTimer();
@@ -138,14 +145,31 @@ public class PressureCalibration extends ParentFragment{
 		// TODO Auto-generated method stub
 		
 		imgbtnCancel = (ImageButton)mRoot.findViewById(R.id.ImageButton_menu_body_management_calibration_pressure_low_cancel);
+		textViewCancel = (TextFitTextView)mRoot.findViewById(R.id.textView_menu_body_management_calibration_pressure_low_cancel);
+		textViewCancel.setText(getString(ParentActivity.getResources().getString(R.string.Cancel), 16));
 		
-		textViewTitle = (TextView)mRoot.findViewById(R.id.textView_menu_body_management_calibration_pressure_title);
-		textViewStart = (TextView)mRoot.findViewById(R.id.textView_menu_body_management_calibration_pressure_main_start);
+		textViewTitle = (TextFitTextView)mRoot.findViewById(R.id.textView_menu_body_management_calibration_pressure_title);
+		textViewTitle.setText(getString(ParentActivity.getResources().getString(R.string.First_Calibration), 353));
+		
+		textViewStart = (TextFitTextView)mRoot.findViewById(R.id.textView_menu_body_management_calibration_pressure_main_start);
+		textViewStart.setText(getString(ParentActivity.getResources().getString(R.string.Start), 352));
 		
 		textViewText1 = (TextView)mRoot.findViewById(R.id.textView_menu_body_management_calibration_pressure_main_step_1);
+		textViewText1.setText(getString(ParentActivity.getResources().getString(R.string.Roll_in_the_bucket_at_max_range_lower_the_boom_at_min_height), 355));
+		
 		textViewText2 = (TextView)mRoot.findViewById(R.id.textView_menu_body_management_calibration_pressure_main_step_2);
+		textViewText2.setText(getString(ParentActivity.getResources().getString(R.string.Press_Start_button_lift_the_boom_with_the_hydraulic_control_in_detent_position), 356));
+		
 		textViewText3 = (TextView)mRoot.findViewById(R.id.textView_menu_body_management_calibration_pressure_main_step_3);
-		textViewText4 = (TextView)mRoot.findViewById(R.id.textView_menu_body_management_calibration_pressure_main_HYD_Temp_value);	// ++, --, 150204 bwk
+		textViewText3.setText(getString(ParentActivity.getResources().getString(R.string.Boom_lifting_will_be_stopped_automatically_at_a_certain_position_and_calibration_is_completed), 357));
+		
+		textViewHYDTitle = (TextFitTextView)mRoot.findViewById(R.id.textView_menu_body_management_calibration_pressure_main_HYD_Temp);
+		textViewHYDTitle.setText(getString(ParentActivity.getResources().getString(R.string.HYD_Temp), 111));
+		
+		textViewHYDData = (TextFitTextView)mRoot.findViewById(R.id.textView_menu_body_management_calibration_pressure_main_HYD_Temp_value);	// ++, --, 150204 bwk
+		
+		textViewWarning = (TextView)mRoot.findViewById(R.id.textView_menu_body_management_calibration_pressure_main_warning);
+		textViewWarning.setText(getString(ParentActivity.getResources().getString(R.string.Pressure_Calibration_Warning), 384));
 	
 		imgViewStep1 = (ImageView)mRoot.findViewById(R.id.imageView_menu_body_management_calibration_pressure_step_1);
 		imgViewStep2 = (ImageView)mRoot.findViewById(R.id.imageView_menu_body_management_calibration_pressure_step_2);
@@ -195,7 +219,7 @@ public class PressureCalibration extends ParentFragment{
 	@Override
 	protected void UpdateUI() {
 		// TODO Auto-generated method stub
-		HYDDisplay(textViewText4,HYD,ParentActivity.UnitTemp);		// ++, --, 150204 bwk
+		HYDDisplay(textViewHYDData,HYD,ParentActivity.UnitTemp);		// ++, --, 150204 bwk
 		BoomPressureProgressDisplay(StatusCNT);
 	}
 	/////////////////////////////////////////////////////////////////////	
@@ -255,8 +279,9 @@ public class PressureCalibration extends ParentFragment{
 	}
 	/////////////////////////////////////////////////////////////////////
 	public void Order2Display(){
-		textViewTitle.setText(ParentActivity.getResources().getString(string.Second_Calibration));
-		textViewText2.setText(ParentActivity.getResources().getString(string.Set_P_mode_step_on_pedal_max_range_press_Start_button_lift_the_boom_with_the_hydraulic_control_in_detent_position));
+		textViewTitle.setText(getString(ParentActivity.getResources().getString(string.Second_Calibration), 354));
+		textViewText2.setText(getString(
+				ParentActivity.getResources().getString(string.Set_P_mode_step_on_pedal_max_range_press_Start_button_lift_the_boom_with_the_hydraulic_control_in_detent_position), 358));
 		imgViewStep1.setImageResource(R.drawable.menu_management_boom_pressure_step_off);
 		imgViewStep2.setImageResource(R.drawable.menu_management_boom_pressure_step_on);
 		StatusCNT = 0;
@@ -282,9 +307,9 @@ public class PressureCalibration extends ParentFragment{
 	// ++, 150204 bwk
 	public void HYDDisplay(TextView textData, int Data, int Unit){
 		if(Unit == Home.UNIT_TEMP_F){
-			textData.setText(": " + ParentActivity.GetTemp(Data,Unit) + " " + ParentActivity.getResources().getString(string.F));
+			textData.setText(": " + ParentActivity.GetTemp(Data,Unit) + " " + getString(ParentActivity.getResources().getString(string.F), 9));
 		}else{
-			textData.setText(": " + ParentActivity.GetTemp(Data,Unit) + " " + ParentActivity.getResources().getString(string.C));
+			textData.setText(": " + ParentActivity.GetTemp(Data,Unit) + " " + getString(ParentActivity.getResources().getString(string.C), 8));
 		}
 	}
 	// --, 150204 bwk
@@ -319,37 +344,43 @@ public class PressureCalibration extends ParentFragment{
 				case SUCCESS:
 					Order = 1;
 					Order2Display();
-					ParentActivity._PressureCalibrationResultPopup.setTextTitle(ParentActivity.getResources().getString(string.First_boom_pressure_calibration_completed));
+					ParentActivity._PressureCalibrationResultPopup.setTextTitle(
+							getString(ParentActivity.getResources().getString(string.First_boom_pressure_calibration_completed), 362));
 					ParentActivity._PressureCalibrationResultPopup.setExitFlag(false);
 					ParentActivity.showPressureCalibrationResult();
 					Log.d(TAG,"SUCCESS");
 					break;
 				case SUCCESS_CAL2:
-					ParentActivity._PressureCalibrationResultPopup.setTextTitle(ParentActivity.getResources().getString(string.Calibration_completed));
+					ParentActivity._PressureCalibrationResultPopup.setTextTitle(
+							getString(ParentActivity.getResources().getString(string.Calibration_completed), 379));
 					ParentActivity._PressureCalibrationResultPopup.setExitFlag(true);
 					ParentActivity.showPressureCalibrationResult();
 					break;
 				case TIMER_OVERFLOW_ERROR:
-					ParentActivity._PressureCalibrationResultPopup.setTextTitle(ParentActivity.getResources().getString(string.Time_Out));
+					ParentActivity._PressureCalibrationResultPopup.setTextTitle(
+							getString(ParentActivity.getResources().getString(string.Time_Out), 382));
 					ParentActivity._PressureCalibrationResultPopup.setExitFlag(false);
 					ParentActivity.showPressureCalibrationResult();
 					Log.d(TAG,"TIMER_OVERFLOW_ERROR");
 					break;
 				case NOSENSOR_ERROR:
-					ParentActivity._PressureCalibrationResultPopup.setTextTitle(ParentActivity.getResources().getString(string.Sensor_Error));
+					ParentActivity._PressureCalibrationResultPopup.setTextTitle(
+							getString(ParentActivity.getResources().getString(string.Sensor_Error), 381));
 					ParentActivity._PressureCalibrationResultPopup.setExitFlag(false);
 					ParentActivity.showPressureCalibrationResult();
 					Log.d(TAG,"NOSENSOR_ERROR");
 					break;
 				case BOOMUP_SPEED_ERROR:
-					ParentActivity._PressureCalibrationResultPopup.setTextTitle(ParentActivity.getResources().getString(string.Boom_Up_Speed_Error));
+					ParentActivity._PressureCalibrationResultPopup.setTextTitle(
+							getString(ParentActivity.getResources().getString(string.Boom_Up_Speed_Error), 383));
 					ParentActivity._PressureCalibrationResultPopup.setExitFlag(false);
 					ParentActivity.showPressureCalibrationResult();
 					Log.d(TAG,"Boom_Up_Speed_Error");
 					break;
 				// ++, 150204 bwk
 				case LOW_HYDRAULIC_OIL_ERROR:
-					ParentActivity._PressureCalibrationResultPopup.setTextTitle(ParentActivity.getResources().getString(string.Hydraulic_Oil_Temp_Error));
+					ParentActivity._PressureCalibrationResultPopup.setTextTitle(
+							getString(ParentActivity.getResources().getString(string.Hydraulic_Oil_Temp_Error), 385));
 					ParentActivity._PressureCalibrationResultPopup.setExitFlag(false);
 					ParentActivity.showPressureCalibrationResult();
 					Log.d(TAG,"Low_Hydraulic_Oil_Error");
@@ -409,6 +440,7 @@ public class PressureCalibration extends ParentFragment{
 					if(ParentActivity.AnimationRunningFlag == false)
 					{
 						CancelEnableButtonTimer();
+						
 						ParentActivity.showCalibrationEHCUPopup();
 					}
 				}

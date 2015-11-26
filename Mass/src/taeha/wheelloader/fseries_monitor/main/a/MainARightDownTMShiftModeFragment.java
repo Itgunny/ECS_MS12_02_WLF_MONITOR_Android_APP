@@ -18,12 +18,14 @@ import android.widget.TextView;
 import taeha.wheelloader.fseries_monitor.main.CAN1CommManager;
 import taeha.wheelloader.fseries_monitor.main.ParentFragment;
 import taeha.wheelloader.fseries_monitor.main.R;
+import taeha.wheelloader.fseries_monitor.main.TextFitTextView;
 
 public class MainARightDownTMShiftModeFragment extends ParentFragment{
 	//CONSTANT////////////////////////////////////////
 	
 	//////////////////////////////////////////////////
 	//RESOURCE////////////////////////////////////////
+	TextView	textViewTitle;
 	RadioButton radioManual;
 	RadioButton radioAL;
 	RadioButton radioAN;
@@ -87,11 +89,21 @@ public class MainARightDownTMShiftModeFragment extends ParentFragment{
 	@Override
 	protected void InitResource() {
 		// TODO Auto-generated method stub
+		textViewTitle = (TextView)mRoot.findViewById(R.id.textView_rightdown_main_a_tmshiftmode_title);
+		textViewTitle.setText(getString(ParentActivity.getResources().getString(R.string.SHIFT_MODE), 88));
+		ParentActivity.setMarqueeText(textViewTitle);
 		radioManual = (RadioButton)mRoot.findViewById(R.id.radioButton_rightdown_main_a_tmshiftmode_manual);
+		radioManual.setText(getString(ParentActivity.getResources().getString(R.string.MANUAL), 102));
+		ParentActivity.setMarqueeRadio(radioManual);
 		radioAL = (RadioButton)mRoot.findViewById(R.id.radioButton_rightdown_main_a_tmshiftmode_al);
+		radioAL.setText(getString(ParentActivity.getResources().getString(R.string.AL), 103));
+		ParentActivity.setMarqueeRadio(radioAL);
 		radioAN = (RadioButton)mRoot.findViewById(R.id.radioButton_rightdown_main_a_tmshiftmode_an);
+		radioAN.setText(getString(ParentActivity.getResources().getString(R.string.AN), 104));
+		ParentActivity.setMarqueeRadio(radioAN);
 		radioAH = (RadioButton)mRoot.findViewById(R.id.radioButton_rightdown_main_a_tmshiftmode_ah);
-		
+		radioAH.setText(getString(ParentActivity.getResources().getString(R.string.AH), 105));
+		ParentActivity.setMarqueeRadio(radioAH);
 		LayoutBG = (RelativeLayout)mRoot.findViewById(R.id.RelativeLayout_rightdown_main_a_tmshiftmode);
 	}
 	

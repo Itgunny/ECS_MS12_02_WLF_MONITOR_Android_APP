@@ -15,6 +15,7 @@ import taeha.wheelloader.fseries_monitor.main.Home;
 import taeha.wheelloader.fseries_monitor.main.ParentFragment;
 import taeha.wheelloader.fseries_monitor.main.R;
 import taeha.wheelloader.fseries_monitor.main.R.string;
+import taeha.wheelloader.fseries_monitor.main.TextFitTextView;
 import android.R.color;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -72,14 +73,15 @@ public class FaultHistoryLoggedFragment extends ParentFragment{
 	//////////////////////////////////////////////////
 	//RESOURCE////////////////////////////////////////
 	ImageButton imgbtnOK;
+	TextFitTextView	textViewOK;
 	// ListView
 	ListView listView;
 	// ListItem
 	IconTextListAdapterFault adapter;
 	
-	TextView textViewAS;
-	TextView textViewTitle;
-	TextView textViewDetailTitle;
+	TextFitTextView textViewAS;
+	TextFitTextView textViewTitle;
+	TextFitTextView textViewDetailTitle;
 	TextView textViewDetail;
 	
 	RadioButton radioMachine;
@@ -89,7 +91,7 @@ public class FaultHistoryLoggedFragment extends ParentFragment{
 	
 	RelativeLayout layoutDetail;
 	
-	TextView textViewDelete;
+	TextFitTextView textViewDelete;
 	//////////////////////////////////////////////////
 	
 	//VALUABLE////////////////////////////////////////
@@ -148,7 +150,7 @@ public class FaultHistoryLoggedFragment extends ParentFragment{
 		CursurDisplay(CursurIndex);	// ++, --, 150211 bwk
 		ClickMachine();
 		ParentActivity.ScreenIndex = ParentActivity.SCREEN_STATE_MENU_MONITORING_FAULTHISTORY_LOGGED_TOP;
-		ParentActivity._MenuBaseFragment._MenuInterTitleFragment.SetTitleText(ParentActivity.getResources().getString(R.string.Logged_Fault));
+		ParentActivity._MenuBaseFragment._MenuInterTitleFragment.SetTitleText(ParentActivity.getResources().getString(R.string.Logged_Fault), 264);
 		
 		// ++, 150211 bwk
 		HandleCursurDisplay = new Handler() {
@@ -171,20 +173,34 @@ public class FaultHistoryLoggedFragment extends ParentFragment{
 	protected void InitResource() {
 		// TODO Auto-generated method stub
 		imgbtnOK = (ImageButton)mRoot.findViewById(R.id.ImageButton_menu_body_monitoring_fault_logged_low_ok);
+		textViewOK = (TextFitTextView)mRoot.findViewById(R.id.textView_menu_body_monitoring_fault_logged_low_ok);
+		textViewOK.setText(getString(ParentActivity.getResources().getString(R.string.OK), 15));
 		
-		textViewAS = (TextView)mRoot.findViewById(R.id.textView_menu_body_monitoring_fault_logged_low_as);
-		textViewTitle = (TextView)mRoot.findViewById(R.id.textView_menu_body_monitoring_fault_logged_list_title);
-		textViewDetailTitle = (TextView)mRoot.findViewById(R.id.textView_menu_body_monitoring_fault_logged_detail_title);
+		
+		textViewAS = (TextFitTextView)mRoot.findViewById(R.id.textView_menu_body_monitoring_fault_logged_low_as);
+		textViewAS.setText(getString(ParentActivity.getResources().getString(R.string.AS), 67));
+		
+		textViewTitle = (TextFitTextView)mRoot.findViewById(R.id.textView_menu_body_monitoring_fault_logged_list_title);
+		textViewDetailTitle = (TextFitTextView)mRoot.findViewById(R.id.textView_menu_body_monitoring_fault_logged_detail_title);
 		textViewDetail = (TextView)mRoot.findViewById(R.id.textView_menu_body_monitoring_fault_logged_detail_data);
 		
 		radioMachine = (RadioButton)mRoot.findViewById(R.id.radioButton_menu_body_monitoring_fault_machine);
+		radioMachine.setText(getString(ParentActivity.getResources().getString(R.string.Machine), 307));
+		ParentActivity.setMarqueeRadio(radioMachine);
 		radioEngine = (RadioButton)mRoot.findViewById(R.id.radioButton_menu_body_monitoring_fault_engine);
+		radioEngine.setText(getString(ParentActivity.getResources().getString(R.string.Engine), 308));
+		ParentActivity.setMarqueeRadio(radioEngine);
 		radioTransmission = (RadioButton)mRoot.findViewById(R.id.radioButton_menu_body_monitoring_fault_transmission);
+		radioTransmission.setText(getString(ParentActivity.getResources().getString(R.string.Transmission), 309));
+		ParentActivity.setMarqueeRadio(radioTransmission);
 		radioEHCU = (RadioButton)mRoot.findViewById(R.id.radioButton_menu_body_monitoring_fault_ehcu);
+		radioEHCU.setText(getString(ParentActivity.getResources().getString(R.string.EHCU), 272));
+		ParentActivity.setMarqueeRadio(radioEHCU);
 		
 		layoutDetail = (RelativeLayout)mRoot.findViewById(R.id.RelativeLayout_menu_body_monitoring_fault_logged_detail);
 		
-		textViewDelete = (TextView)mRoot.findViewById(R.id.textView_menu_body_monitoring_fault_logged_list_delete);
+		textViewDelete = (TextFitTextView)mRoot.findViewById(R.id.textView_menu_body_monitoring_fault_logged_list_delete);
+		textViewDelete.setText(getString(ParentActivity.getResources().getString(R.string.Delete), 341));
 
 		listView = (ListView)mRoot.findViewById(R.id.listView_menu_body_monitoring_fault_logged_list);
 		adapter = new IconTextListAdapterFault(ParentActivity);
@@ -353,7 +369,7 @@ public class FaultHistoryLoggedFragment extends ParentFragment{
 		ParentActivity._MenuBaseFragment.showFaultHistoryAnimation();
 	}
 	public void ClickMachine(){
-		TitleDisplay(ParentActivity.getResources().getString(string.Machine));
+		TitleDisplay(getString(ParentActivity.getResources().getString(R.string.Machine), 307));
 		radioMachine.setChecked(true);
 		radioEngine.setChecked(false);
 		radioTransmission.setChecked(false);
@@ -362,7 +378,7 @@ public class FaultHistoryLoggedFragment extends ParentFragment{
 		SelectedMode = Home.REQ_ERR_MACHINE_LOGGED;
 	}
 	public void ClickEngine(){
-		TitleDisplay(ParentActivity.getResources().getString(string.Engine));
+		TitleDisplay(getString(ParentActivity.getResources().getString(R.string.Engine), 308));
 		radioMachine.setChecked(false);
 		radioEngine.setChecked(true);
 		radioTransmission.setChecked(false);
@@ -371,7 +387,7 @@ public class FaultHistoryLoggedFragment extends ParentFragment{
 		SelectedMode = Home.REQ_ERR_ENGINE_LOGGED;
 	}
 	public void ClickTransmission(){
-		TitleDisplay(ParentActivity.getResources().getString(string.Transmission));
+		TitleDisplay(getString(ParentActivity.getResources().getString(string.Transmission), 309));
 		radioMachine.setChecked(false);
 		radioEngine.setChecked(false);
 		radioTransmission.setChecked(true);
@@ -380,7 +396,7 @@ public class FaultHistoryLoggedFragment extends ParentFragment{
 		SelectedMode = Home.REQ_ERR_TM_LOGGED;
 	}
 	public void ClickEHCU(){
-		TitleDisplay(ParentActivity.getResources().getString(string.EHCU));
+		TitleDisplay(getString(ParentActivity.getResources().getString(string.EHCU), 272));
 		radioMachine.setChecked(false);
 		radioEngine.setChecked(false);
 		radioTransmission.setChecked(false);
@@ -409,16 +425,16 @@ public class FaultHistoryLoggedFragment extends ParentFragment{
 		}
 	}
 	public void ASDisplay(String str){
-		textViewAS.setText(ParentActivity.getResources().getString(string.AS) + " " + str);
+		textViewAS.setText(getString(ParentActivity.getResources().getString(string.AS), 67) + " " + str);
 	}
 	public void TitleDisplay(String str){
 		textViewTitle.setText(str);
 	}
 	public void ErrorNumberDisplay(){
-		radioMachine.setText(ParentActivity.getResources().getString(string.Machine) + "(" + Integer.toString(DTCTotalMachine) + ")");
-		radioEngine.setText(ParentActivity.getResources().getString(string.Engine) + "(" + Integer.toString(DTCTotalEngine) + ")");
-		radioTransmission.setText(ParentActivity.getResources().getString(string.Transmission) + "(" + Integer.toString(DTCTotalTM) + ")");
-		radioEHCU.setText(ParentActivity.getResources().getString(string.EHCU) + "(" + Integer.toString(DTCTotalEHCU) + ")");
+		radioMachine.setText(getString(ParentActivity.getResources().getString(string.Machine), 307) + "(" + Integer.toString(DTCTotalMachine) + ")");
+		radioEngine.setText(getString(ParentActivity.getResources().getString(string.Engine), 308) + "(" + Integer.toString(DTCTotalEngine) + ")");
+		radioTransmission.setText(getString(ParentActivity.getResources().getString(string.Transmission), 309) + "(" + Integer.toString(DTCTotalTM) + ")");
+		radioEHCU.setText(getString(ParentActivity.getResources().getString(string.EHCU), 272) + "(" + Integer.toString(DTCTotalEHCU) + ")");
 	}
 	public void ErrListDisplay(){
 		switch (SelectedMode) {
@@ -629,13 +645,13 @@ public class FaultHistoryLoggedFragment extends ParentFragment{
 			}
 			else
 			{
-				textViewDetail.setText(ParentActivity.getResources().getString(string.Please_refer_to_machine_manual_for_more_detailed_description));
+				textViewDetail.setText(getString(ParentActivity.getResources().getString(string.Please_refer_to_machine_manual_for_more_detailed_description), 310));
 			}
 		}
 		// --, 150202 bwk
 		else
 		{
-			textViewDetail.setText(ParentActivity.getResources().getString(string.Please_refer_to_machine_manual_for_more_detailed_description));
+			textViewDetail.setText(getString(ParentActivity.getResources().getString(string.Please_refer_to_machine_manual_for_more_detailed_description), 310));
 		}
 
 	}
@@ -2941,5 +2957,13 @@ public class FaultHistoryLoggedFragment extends ParentFragment{
 	};
 	// --, 150202 bwk
 	/////////////////////////////////////////////////////////////////////
-	
+	public String getString(String str, int index){
+		if(ParentActivity.langDb.findStrGetString(index, ParentActivity.LanguageIndex) == null){
+			Log.d(TAG, "Android");
+			return str;
+		}else {
+			Log.d(TAG, "Excel");
+			return ParentActivity.langDb.findStrGetString(index, ParentActivity.LanguageIndex);	
+		}
+	}
 }

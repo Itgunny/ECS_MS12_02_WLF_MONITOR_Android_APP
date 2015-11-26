@@ -9,6 +9,7 @@ import taeha.wheelloader.fseries_monitor.main.CAN1CommManager;
 import taeha.wheelloader.fseries_monitor.main.Home;
 import taeha.wheelloader.fseries_monitor.main.ParentFragment;
 import taeha.wheelloader.fseries_monitor.main.R;
+import taeha.wheelloader.fseries_monitor.main.TextFitTextView;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -33,6 +34,8 @@ public class MachineSecurityESLFragment extends ParentFragment{
 	//RESOURCE////////////////////////////////////////
 	ImageButton imgbtnOK;
 	ImageButton imgbtnCancel;
+	TextFitTextView 	textViewOK;
+	TextFitTextView		textViewCancel;
 
 	RadioButton radioDisable;
 	RadioButton radioOnAlways;
@@ -85,7 +88,7 @@ public class MachineSecurityESLFragment extends ParentFragment{
 		InitButtonListener();
 		
 		ParentActivity.ScreenIndex = ParentActivity.SCREEN_STATE_MENU_MANAGEMENT_MACHINESECURITY_ESL;
-		ParentActivity._MenuBaseFragment._MenuInterTitleFragment.SetTitleText(ParentActivity.getResources().getString(R.string.ESL_System_Setting));
+		ParentActivity._MenuBaseFragment._MenuInterTitleFragment.SetTitleText(ParentActivity.getResources().getString(R.string.ESL_System_Setting), 324);
 		HandleCursurDisplay = new Handler() {
 			@Override
 			public void handleMessage(Message msg) {
@@ -108,20 +111,48 @@ public class MachineSecurityESLFragment extends ParentFragment{
 		// TODO Auto-generated method stub
 		imgbtnOK = (ImageButton)mRoot.findViewById(R.id.ImageButton_menu_body_management_esl_low_ok);
 		imgbtnCancel = (ImageButton)mRoot.findViewById(R.id.ImageButton_menu_body_management_esl_low_cancel);
+		textViewOK = (TextFitTextView)mRoot.findViewById(R.id.textView_menu_body_management_esl_low_ok);
+		textViewOK.setText(getString(ParentActivity.getResources().getString(R.string.OK), 15));
+		textViewCancel = (TextFitTextView)mRoot.findViewById(R.id.textView_menu_body_management_esl_low_cancel);
+		textViewCancel.setText(getString(ParentActivity.getResources().getString(R.string.Cancel), 16));
 	
 		radioDisable = (RadioButton)mRoot.findViewById(R.id.radioButton_menu_body_management_esl_use_on_disalbe);
+		radioDisable.setText(getString(ParentActivity.getResources().getString(R.string.Disable), 21));
+		ParentActivity.setMarqueeRadio(radioDisable);
 		radioOnAlways = (RadioButton)mRoot.findViewById(R.id.radioButton_menu_body_management_esl_use_on_always);
+		radioOnAlways.setText(getString(ParentActivity.getResources().getString(R.string.On_Always), 23));
+		ParentActivity.setMarqueeRadio(radioOnAlways);
 		radioOnAfterTime = (RadioButton)mRoot.findViewById(R.id.radioButton_menu_body_management_esl_use_on_time);
+		radioOnAfterTime.setText(getString(ParentActivity.getResources().getString(R.string.On_After_Specific_Time), 327));
+		ParentActivity.setMarqueeRadio(radioOnAfterTime);
 		
 		radio5Min = (RadioButton)mRoot.findViewById(R.id.radioButton_menu_body_management_esl_time_5min);
+		radio5Min.setText(getString(ParentActivity.getResources().getString(R.string._5Min), 328));
+		ParentActivity.setMarqueeRadio(radio5Min);
 		radio10Min = (RadioButton)mRoot.findViewById(R.id.radioButton_menu_body_management_esl_time_10min);
+		radio10Min.setText(getString(ParentActivity.getResources().getString(R.string._10Min), 329));
+		ParentActivity.setMarqueeRadio(radio10Min);
 		radio20Min = (RadioButton)mRoot.findViewById(R.id.radioButton_menu_body_management_esl_time_20min);
+		radio20Min.setText(getString(ParentActivity.getResources().getString(R.string._20Min), 330));
+		ParentActivity.setMarqueeRadio(radio20Min);
 		radio30Min = (RadioButton)mRoot.findViewById(R.id.radioButton_menu_body_management_esl_time_30min);
+		radio30Min.setText(getString(ParentActivity.getResources().getString(R.string._30Min), 331));
+		ParentActivity.setMarqueeRadio(radio30Min);
 		radio1Hour = (RadioButton)mRoot.findViewById(R.id.radioButton_menu_body_management_esl_time_1hour);
+		radio1Hour.setText(getString(ParentActivity.getResources().getString(R.string._1Hour), 332));
+		ParentActivity.setMarqueeRadio(radio1Hour);
 		radio2Hour = (RadioButton)mRoot.findViewById(R.id.radioButton_menu_body_management_esl_time_2hour);
+		radio2Hour.setText(getString(ParentActivity.getResources().getString(R.string._2Hour), 333));
+		ParentActivity.setMarqueeRadio(radio2Hour);
 		radio4Hour = (RadioButton)mRoot.findViewById(R.id.radioButton_menu_body_management_esl_time_4hour);
+		radio4Hour.setText(getString(ParentActivity.getResources().getString(R.string._4Hour), 334));
+		ParentActivity.setMarqueeRadio(radio4Hour);
 		radio1Day = (RadioButton)mRoot.findViewById(R.id.radioButton_menu_body_management_esl_time_1day);
+		radio1Day.setText(getString(ParentActivity.getResources().getString(R.string._1Day), 335));
+		ParentActivity.setMarqueeRadio(radio1Day);
 		radio2Day = (RadioButton)mRoot.findViewById(R.id.radioButton_menu_body_management_esl_time_2day);
+		radio2Day.setText(getString(ParentActivity.getResources().getString(R.string._2Day), 336));
+		ParentActivity.setMarqueeRadio(radio2Day);
 		
 		layoutTime = (RelativeLayout)mRoot.findViewById(R.id.RelativeLayout_menu_body_management_esl_time);
 	}
@@ -902,5 +933,4 @@ public class MachineSecurityESLFragment extends ParentFragment{
 		}
 	}
 	/////////////////////////////////////////////////////////////////////
-	
 }

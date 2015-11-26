@@ -10,6 +10,7 @@ import taeha.wheelloader.fseries_monitor.main.CAN1CommManager;
 import taeha.wheelloader.fseries_monitor.main.Home;
 import taeha.wheelloader.fseries_monitor.main.ParentFragment;
 import taeha.wheelloader.fseries_monitor.main.R;
+import taeha.wheelloader.fseries_monitor.main.TextFitTextView;
 import android.os.Bundle;
 import android.text.Layout;
 import android.util.Log;
@@ -59,8 +60,12 @@ public class VersionInfoDetailFragment extends ParentFragment{
 	//////////////////////////////////////////////////
 	//RESOURCE////////////////////////////////////////
 	protected ImageButton imgbtnOK;
+	protected TextView textViewOK;
 
+	protected TextView textViewModelTitle;
 	protected TextView textViewModelData;
+	
+	protected TextView textViewDateTitle;
 	protected TextView textViewDateData;
 	
 	// ListView
@@ -124,8 +129,14 @@ public class VersionInfoDetailFragment extends ParentFragment{
 	protected void InitResource() {
 		// TODO Auto-generated method stub
 		imgbtnOK = (ImageButton)mRoot.findViewById(R.id.ImageButton_menu_body_monitoring_version_detail_low_ok);
+		textViewOK = (TextView)mRoot.findViewById(R.id.textView_menu_body_monitoring_version_detail_low_ok);
+		textViewOK.setText(getString(ParentActivity.getResources().getString(R.string.OK), 15));
 
+		textViewModelTitle = (TextView)mRoot.findViewById(R.id.textView_menu_body_monitoring_version_detail_model_title);
+		textViewModelTitle.setText(getString(ParentActivity.getResources().getString(R.string.Model), 265));
 		textViewModelData = (TextView)mRoot.findViewById(R.id.textView_menu_body_monitoring_version_detail_model_data);
+		textViewDateTitle = (TextView)mRoot.findViewById(R.id.textView_menu_body_monitoring_version_detail_date_title);
+		textViewDateTitle.setText(getString(ParentActivity.getResources().getString(R.string.Manufacture_Date), 276));
 		textViewDateData = (TextView)mRoot.findViewById(R.id.textView_menu_body_monitoring_version_detail_date_data);
 		
 		layoutModel = (RelativeLayout)mRoot.findViewById(R.id.Relativelayout_menu_body_monitoring_version_detail_model);
@@ -437,4 +448,5 @@ public class VersionInfoDetailFragment extends ParentFragment{
 	public void ClickEnter(){
 		ClickOK();
 	}
+	
 }

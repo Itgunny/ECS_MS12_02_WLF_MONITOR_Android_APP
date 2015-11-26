@@ -8,6 +8,7 @@ import taeha.wheelloader.fseries_monitor.animation.LeftRightShiftAnimation;
 import taeha.wheelloader.fseries_monitor.main.Home;
 import taeha.wheelloader.fseries_monitor.main.ParentFragment;
 import taeha.wheelloader.fseries_monitor.main.R;
+import taeha.wheelloader.fseries_monitor.main.TextFitTextView;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -29,11 +30,11 @@ public class MaxFlowFragment extends ParentFragment{
 	//////////////////////////////////////////////////
 	//RESOURCE////////////////////////////////////////
 	ImageButton imgbtnOK;
-	
+	TextFitTextView    textViewOK;
 	ImageButton imgbtnPlus;
 	ImageButton imgbtnMinus;
 	
-	TextView	textViewMaxFlow;
+	TextFitTextView	textViewMaxFlow;
 	
 	
 	//////////////////////////////////////////////////
@@ -70,7 +71,7 @@ public class MaxFlowFragment extends ParentFragment{
 		
 		CursurDisplay(CursurIndex);
 		ParentActivity.ScreenIndex = ParentActivity.SCREEN_STATE_MENU_MODE_HYD_MAXFLOW;
-		ParentActivity._MenuBaseFragment._MenuInterTitleFragment.SetTitleText(ParentActivity.getResources().getString(R.string.Auxilliary_Attachment_Max_Flow_Level));
+		ParentActivity._MenuBaseFragment._MenuInterTitleFragment.SetTitleText(ParentActivity.getResources().getString(R.string.Auxilliary_Attachment_Max_Flow_Level), 213);
 		
 		HandleCursurDisplay = new Handler() {
 			@Override
@@ -91,13 +92,14 @@ public class MaxFlowFragment extends ParentFragment{
 	protected void InitResource() {
 		// TODO Auto-generated method stub
 		imgbtnOK = (ImageButton)mRoot.findViewById(R.id.ImageButton_menu_body_mode_maxflow_low_ok);
-
+		textViewOK = (TextFitTextView)mRoot.findViewById(R.id.textView_menu_body_mode_maxflow_low_ok);
+		textViewOK.setText(getString(ParentActivity.getResources().getString(R.string.OK), 15));
 		
 		imgbtnPlus = (ImageButton)mRoot.findViewById(R.id.imageButton_menu_body_mode_maxflow_plus);
 		imgbtnMinus = (ImageButton)mRoot.findViewById(R.id.imageButton_menu_body_mode_maxflow_minus);
 	
 		
-		textViewMaxFlow = (TextView)mRoot.findViewById(R.id.textView_menu_body_mode_maxflow_data);
+		textViewMaxFlow = (TextFitTextView)mRoot.findViewById(R.id.textView_menu_body_mode_maxflow_data);
 
 	}
 
@@ -251,5 +253,4 @@ public class MaxFlowFragment extends ParentFragment{
 		}
 	}
 	/////////////////////////////////////////////////////////////////////
-	
 }

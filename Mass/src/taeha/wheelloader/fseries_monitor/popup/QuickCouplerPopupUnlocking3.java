@@ -15,10 +15,13 @@ import android.view.ViewGroup.LayoutParams;
 import android.widget.CheckBox;
 import android.widget.ImageButton;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 import taeha.wheelloader.fseries_monitor.main.CAN1CommManager;
 import taeha.wheelloader.fseries_monitor.main.Home;
 import taeha.wheelloader.fseries_monitor.main.ParentPopup;
 import taeha.wheelloader.fseries_monitor.main.R;
+import taeha.wheelloader.fseries_monitor.main.TextFitTextView;
+import taeha.wheelloader.fseries_monitor.main.R.string;
 import taeha.wheelloader.fseries_monitor.popup.QuickCouplerPopupLocking2.QuickCouplerSendTimerClass;
 
 public class QuickCouplerPopupUnlocking3 extends ParentPopup{
@@ -28,6 +31,11 @@ public class QuickCouplerPopupUnlocking3 extends ParentPopup{
 	//RESOURCE////////////////////////////////////////
 	ImageButton imgbtnLocking;
 	ImageButton imgbtnOK;
+	
+	TextView	textViewTitle;
+	TextFitTextView	textViewLocking;
+	TextFitTextView	textViewOK;
+	
 	
 	CheckBox checkShow;
 	//////////////////////////////////////////////////
@@ -111,6 +119,17 @@ public class QuickCouplerPopupUnlocking3 extends ParentPopup{
 		imgbtnOK = (ImageButton)mRoot.findViewById(R.id.imageButton_popup_key_quickcoupler_unlocking_3_ok);
 		
 		checkShow = (CheckBox)mRoot.findViewById(R.id.checkBox_popup_key_quickcoupler_unlocking_3);
+		checkShow.setText(getString(ParentActivity.getResources().getString(string.Do_not_show_again), 188));
+		
+		textViewTitle = (TextView)mRoot.findViewById(R.id.textView_popup_key_quickcoupler_unlocking_3_title);
+		textViewTitle.setText(getString(ParentActivity.getResources().getString(string.Attachment_Unlocked_Check_Locking_Status), 185));
+		
+		textViewLocking = (TextFitTextView)mRoot.findViewById(R.id.textView_popup_key_quickcoupler_unlocking_3_lock);
+		textViewLocking.setText(getString(ParentActivity.getResources().getString(string.Locking_Attachment), 166));
+		
+		textViewOK = (TextFitTextView)mRoot.findViewById(R.id.textView_popup_key_quickcoupler_unlocking_3_ok);
+		textViewOK.setText(getString(ParentActivity.getResources().getString(string.OK), 15));
+		
 	}
 
 	@Override

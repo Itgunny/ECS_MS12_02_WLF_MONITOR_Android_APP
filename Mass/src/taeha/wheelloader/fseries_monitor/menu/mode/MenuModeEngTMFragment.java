@@ -81,25 +81,21 @@ public class MenuModeEngTMFragment extends MenuBodyList_ParentFragment{
 		setClickableList3(true);
 		setClickableList4(true);
 		
-		setListTitle1(ParentActivity.getResources().getString(string.Engine_Setting));
-		setListTitle2(ParentActivity.getResources().getString(string.Kick_Down));
+		setListTitle1(ParentActivity.getResources().getString(string.Engine_Setting), 209);
+		setListTitle2(ParentActivity.getResources().getString(string.Kick_Down), 207);
 		
-		//if(ParentActivity._CheckModel.GetMCUVersion(CAN1Comm.Get_ComponentBasicInformation_1698_PGN65330()) == CheckModel.MODEL_980)
 		if(ParentActivity._CheckModel.GetMCUModelNum(CAN1Comm.Get_ComponentBasicInformation_1698_PGN65330()) == 980)
-			setListTitle3(ParentActivity.getResources().getString(string.ICCO_Mode));
+			setListTitle3(ParentActivity.getResources().getString(string.ICCO_Mode), 205);
 		else
-			setListTitle3(ParentActivity.getResources().getString(string.CCO_Mode));
+			setListTitle3(ParentActivity.getResources().getString(string.CCO_Mode), 204);
 		
-		setListTitle4(ParentActivity.getResources().getString(string.Shift_Mode));
+		setListTitle4(ParentActivity.getResources().getString(string.Shift_Mode), 206);
 
-		/*if(ParentActivity._CheckModel.GetMCUVersion(CAN1Comm.Get_ComponentBasicInformation_1698_PGN65330()) == CheckModel.MODEL_940
-			|| ParentActivity._CheckModel.GetMCUVersion(CAN1Comm.Get_ComponentBasicInformation_1698_PGN65330()) == CheckModel.MODEL_935){
-			setClickableList5(false);
-		}else*/ if(ParentActivity._CheckModel.GetTCUModel(CAN1Comm.Get_ComponentBasicInformation_1698_PGN65330_TCU()) == CheckModel.TCU_4SPEED){
+		if(ParentActivity._CheckModel.GetTCUModel(CAN1Comm.Get_ComponentBasicInformation_1698_PGN65330_TCU()) == CheckModel.TCU_4SPEED){
 			setClickableList5(false);
 		}else{
 			setClickableList5(true);
-			setListTitle5(ParentActivity.getResources().getString(string.TC_Lock_Up));
+			setListTitle5(ParentActivity.getResources().getString(string.TC_Lock_Up), 210);
 		}
 		
 		
@@ -154,7 +150,6 @@ public class MenuModeEngTMFragment extends MenuBodyList_ParentFragment{
 	@Override
 	public void ClickList3() {
 		// TODO Auto-generated method stub
-		//if(ParentActivity._CheckModel.GetMCUVersion(CAN1Comm.Get_ComponentBasicInformation_1698_PGN65330()) == CheckModel.MODEL_980)
 		if(ParentActivity._CheckModel.GetMCUModelNum(CAN1Comm.Get_ComponentBasicInformation_1698_PGN65330()) == 980)
 			ParentActivity.showICCoMode();	
 		else
@@ -198,10 +193,7 @@ public class MenuModeEngTMFragment extends MenuBodyList_ParentFragment{
 		case MenuModeFragment.STATE_CURSUR_LIST:
 			switch (CursurIndex) {
 			case 1:
-				/*if(ParentActivity._CheckModel.GetMCUVersion(CAN1Comm.Get_ComponentBasicInformation_1698_PGN65330()) == CheckModel.MODEL_940
-					|| ParentActivity._CheckModel.GetMCUVersion(CAN1Comm.Get_ComponentBasicInformation_1698_PGN65330()) == CheckModel.MODEL_935){
-					CursurIndex = 4;
-				}else*/ if(ParentActivity._CheckModel.GetTCUModel(CAN1Comm.Get_ComponentBasicInformation_1698_PGN65330_TCU()) == CheckModel.TCU_4SPEED){
+				if(ParentActivity._CheckModel.GetTCUModel(CAN1Comm.Get_ComponentBasicInformation_1698_PGN65330_TCU()) == CheckModel.TCU_4SPEED){
 					CursurIndex = 4;
 				}else{
 					CursurIndex = 5;
@@ -259,10 +251,7 @@ public class MenuModeEngTMFragment extends MenuBodyList_ParentFragment{
 				CursurDisplay(CursurIndex);
 				break;
 			case 4:
-				/*if(ParentActivity._CheckModel.GetMCUVersion(CAN1Comm.Get_ComponentBasicInformation_1698_PGN65330()) == CheckModel.MODEL_940
-					|| ParentActivity._CheckModel.GetMCUVersion(CAN1Comm.Get_ComponentBasicInformation_1698_PGN65330()) == CheckModel.MODEL_935){
-					CursurIndex = 1;
-				}else*/ if(ParentActivity._CheckModel.GetTCUModel(CAN1Comm.Get_ComponentBasicInformation_1698_PGN65330_TCU()) == CheckModel.TCU_4SPEED){
+				if(ParentActivity._CheckModel.GetTCUModel(CAN1Comm.Get_ComponentBasicInformation_1698_PGN65330_TCU()) == CheckModel.TCU_4SPEED){
 					CursurIndex = 1;
 				}else{
 					CursurIndex++;
@@ -380,10 +369,10 @@ public class MenuModeEngTMFragment extends MenuBodyList_ParentFragment{
 	public void TCLockUpDisplay(int data){
 		switch (data) {
 		case CAN1CommManager.DATA_STATE_TM_LOCKUPCLUTCH_OFF:
-			setListData5(ParentActivity.getResources().getString(string.Off));
+			setListData5(ParentActivity.getResources().getString(string.Off), 20);
 			break;
 		case CAN1CommManager.DATA_STATE_TM_LOCKUPCLUTCH_ON:
-			setListData5(ParentActivity.getResources().getString(string.On));
+			setListData5(ParentActivity.getResources().getString(string.On), 19);
 			break;
 		default:
 			break;
@@ -393,20 +382,19 @@ public class MenuModeEngTMFragment extends MenuBodyList_ParentFragment{
 	public void CCOModeDisplay(int data){
 		switch (data) {
 		case CAN1CommManager.DATA_STATE_TM_CLUTCHCUTOFF_OFF:
-			setListData3(ParentActivity.getResources().getString(string.Off));
+			setListData3(ParentActivity.getResources().getString(string.Off), 20);
 			break;
 		case CAN1CommManager.DATA_STATE_TM_CLUTCHCUTOFF_L:
-			setListData3(ParentActivity.getResources().getString(string.L));
+			setListData3(ParentActivity.getResources().getString(string.L), 99);
 			break;
 		case CAN1CommManager.DATA_STATE_TM_CLUTCHCUTOFF_M:
-			setListData3(ParentActivity.getResources().getString(string.M));
+			setListData3(ParentActivity.getResources().getString(string.M), 100);
 			break;
 		case CAN1CommManager.DATA_STATE_TM_CLUTCHCUTOFF_H:
-			//if(ParentActivity._CheckModel.GetMCUVersion(CAN1Comm.Get_ComponentBasicInformation_1698_PGN65330()) == CheckModel.MODEL_980)
 			if(ParentActivity._CheckModel.GetMCUModelNum(CAN1Comm.Get_ComponentBasicInformation_1698_PGN65330()) == 980)
-				setListData3(ParentActivity.getResources().getString(string.On));
+				setListData3(ParentActivity.getResources().getString(string.On), 19);
 			else
-				setListData3(ParentActivity.getResources().getString(string.H));
+				setListData3(ParentActivity.getResources().getString(string.H), 101);
 			break;
 		default:
 			break;
@@ -415,16 +403,16 @@ public class MenuModeEngTMFragment extends MenuBodyList_ParentFragment{
 	public void ShiftModeDisplay(int data){
 		switch (data) {
 		case CAN1CommManager.DATA_STATE_TM_SHIFTMODE_MANUAL:
-			setListData4(ParentActivity.getResources().getString(string.Manual));
+			setListData4(ParentActivity.getResources().getString(string.Manual), 26);
 			break;
 		case CAN1CommManager.DATA_STATE_TM_SHIFTMODE_AL:
-			setListData4(ParentActivity.getResources().getString(string.AL));
+			setListData4(ParentActivity.getResources().getString(string.AL), 103);
 			break;
 		case CAN1CommManager.DATA_STATE_TM_SHIFTMODE_AN:
-			setListData4(ParentActivity.getResources().getString(string.AN));
+			setListData4(ParentActivity.getResources().getString(string.AN), 104);
 			break;
 		case CAN1CommManager.DATA_STATE_TM_SHIFTMODE_AH:
-			setListData4(ParentActivity.getResources().getString(string.AH));
+			setListData4(ParentActivity.getResources().getString(string.AH), 105);
 			break;
 		default:
 			break;
@@ -433,12 +421,11 @@ public class MenuModeEngTMFragment extends MenuBodyList_ParentFragment{
 	public void KickDownDisplay(int data){
 		switch (data) {
 		case CAN1CommManager.DATA_STATE_KICKDOWN_UPDOWN:
-			setListData2(ParentActivity.getResources().getString(string.MODE1));
+			setListData2(ParentActivity.getResources().getString(string.MODE1), 219);
 			break;
 		case CAN1CommManager.DATA_STATE_KICKDOWN_DOWNONLY:
-			setListData2(ParentActivity.getResources().getString(string.MODE2));
+			setListData2(ParentActivity.getResources().getString(string.MODE2), 220);
 			break;
-
 		default:
 			break;
 		}

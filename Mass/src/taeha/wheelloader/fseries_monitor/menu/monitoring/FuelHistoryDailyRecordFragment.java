@@ -21,6 +21,7 @@ import taeha.wheelloader.fseries_monitor.main.ParentFragment;
 import taeha.wheelloader.fseries_monitor.main.R;
 import taeha.wheelloader.fseries_monitor.main.R.string;
 import taeha.wheelloader.fseries_monitor.menu.management.MaintenanceDetailFragment.SendCommandTimerClass;
+import taeha.wheelloader.fseries_monitor.main.TextFitTextView;
 
 public class FuelHistoryDailyRecordFragment  extends ParentFragment{
 	//CONSTANT////////////////////////////////////////
@@ -32,8 +33,14 @@ public class FuelHistoryDailyRecordFragment  extends ParentFragment{
 	
 	TextView	textViewUnit;
 	
-	ImageButton imgbtnInital;
+	
+	ImageButton imgbtnInitial;
+	TextFitTextView	textViewInitial;
+	
 	ImageButton	imgbtnOK;
+	TextFitTextView	textViewOK;
+	
+	TextFitTextView	textViewGraphUnit;
 	//////////////////////////////////////////////////
 	
 	//VALUABLE////////////////////////////////////////
@@ -72,8 +79,8 @@ public class FuelHistoryDailyRecordFragment  extends ParentFragment{
 		StartSendCommandTimer();
 		SetUnit();
 		
-		ParentActivity.ScreenIndex = Home.SCREEN_STATE_MENU_MONITORING_FUELHISTORY_DAILYRECORD;
-		ParentActivity._MenuBaseFragment._MenuInterTitleFragment.SetTitleText(ParentActivity.getResources().getString(R.string.Daily_Record));
+		ParentActivity.ScreenIndex = ParentActivity.SCREEN_STATE_MENU_MONITORING_FUELHISTORY_DAILYRECORD;
+		ParentActivity._MenuBaseFragment._MenuInterTitleFragment.SetTitleText(ParentActivity.getResources().getString(R.string.Daily_Record), 316);
 		
 		CursurIndex = 1;
 		CursurDisplay(CursurIndex);
@@ -113,7 +120,16 @@ public class FuelHistoryDailyRecordFragment  extends ParentFragment{
 		textViewDay[6] = (TextView)mRoot.findViewById(R.id.textView_menu_body_monitoring_fuelhistory_dailyrecord_graph_text_7);
 		
 		imgbtnOK = (ImageButton)mRoot.findViewById(R.id.ImageButton_menu_body_monitoring_fuelhistory_dailyrecord_low_ok);
-		imgbtnInital = (ImageButton)mRoot.findViewById(R.id.ImageButton_menu_body_monitoring_fuelhistory_dailyrecord_low_initialization);
+		textViewOK = (TextFitTextView)mRoot.findViewById(R.id.textView_menu_body_monitoring_fuelhistory_dailyrecord_low_ok);
+		textViewOK.setText(getString(ParentActivity.getResources().getString(R.string.OK), 15));
+		
+		imgbtnInitial = (ImageButton)mRoot.findViewById(R.id.ImageButton_menu_body_monitoring_fuelhistory_dailyrecord_low_initialization);
+		textViewInitial = (TextFitTextView)mRoot.findViewById(R.id.textView_menu_body_monitoring_fuelhistory_dailyrecord_low_initialization);
+		textViewInitial.setText(getString(ParentActivity.getResources().getString(R.string.Initialization), 30));
+		
+		textViewGraphUnit = (TextFitTextView)mRoot.findViewById(R.id.textView_menu_body_monitoring_fuelhistory_dailyrecord_graph_unit);
+		textViewGraphUnit.setText(getString(ParentActivity.getResources().getString(R.string.l), 81));
+		
 		
 		textViewUnit = (TextView)mRoot.findViewById(R.id.textView_menu_body_monitoring_fuelhistory_dailyrecord_graph_unit);
 	}
@@ -132,7 +148,7 @@ public class FuelHistoryDailyRecordFragment  extends ParentFragment{
 	@Override
 	protected void InitButtonListener() {
 		// TODO Auto-generated method stub
-		imgbtnInital.setOnClickListener(new View.OnClickListener() {
+		imgbtnInitial.setOnClickListener(new View.OnClickListener() {
 			
 			@Override
 			public void onClick(View v) {
@@ -194,9 +210,9 @@ public class FuelHistoryDailyRecordFragment  extends ParentFragment{
 	/////////////////////////////////////////////////////////////////////
 	public void SetUnit(){
 		if(ParentActivity.UnitFuel == Home.UNIT_FUEL_GAL)
-			textViewUnit.setText(ParentActivity.getResources().getString(string.gal));
+			textViewGraphUnit.setText(ParentActivity.getResources().getString(string.gal));
 		else
-			textViewUnit.setText(ParentActivity.getResources().getString(string.l));
+			textViewGraphUnit.setText(ParentActivity.getResources().getString(string.l));
 			
 	}
 	/////////////////////////////////////////////////////////////////////	
@@ -338,11 +354,11 @@ public class FuelHistoryDailyRecordFragment  extends ParentFragment{
 	}
 	public void CursurDisplay(int Index){
 		bCursurIndex = true;
-		imgbtnInital.setPressed(false);
+		imgbtnInitial.setPressed(false);
 		imgbtnOK.setPressed(false);
 		switch (Index) {
 		case 2:
-			imgbtnInital.setPressed(true);
+			imgbtnInitial.setPressed(true);
 			break;
 		case 3:		
 			imgbtnOK.setPressed(true);
@@ -352,5 +368,4 @@ public class FuelHistoryDailyRecordFragment  extends ParentFragment{
 		}
 	}
 	/////////////////////////////////////////////////////////////////////
-
 }

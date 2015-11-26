@@ -6,7 +6,6 @@
     <string name="Crash_Toast_Text">Crash</string>
     <string name="Error_Report">Error Report</string>
     <string name="Crash_Data">Crash Data</string>
-    <!-- Common Start-->
     <string name="Hr">Hr</string>
     <string name="C">℃</string>
     <string name="F">℉</string>
@@ -82,10 +81,11 @@
     <string name="Initial_Para_Error_Found">Initial Parameter Error Found</string>
     <string name="Please_Reset_Power">Please Reset Power</string>
     <string name="l">l</string>
-    <!-- Common End-->
-    <!-- Main Start-->
+    <string name="Machine_Serial_Number">Machine Serial Number</string>
+    <string name="Serial_No">Serial No :</string>
+    <string name="Re_entering_Serial_No">Re-entering Serial No :</string>
     <string name="ENGINE_MODE">ENGINE MODE</string>
-    <string name="CCO_MODE">C.C.O. MODE</string>
+    <string name="CCO_MODE">C.C.O. Mode</string>
     <string name="ICCO_MODE">I.C.C.O. MODE</string>
     <string name="SHIFT_MODE">SHIFT MODE</string>
     <string name="TC_LOCK_UP">T.C. LOCK UP</string>
@@ -105,7 +105,7 @@
     <string name="AL">AL</string>
     <string name="AN">AN</string>
     <string name="AH">AH</string>
-    <string name="Total_Hourmeter">Total Hourmeter</string>
+    <string name="Total_Hourmeter">Total Hour meter</string>
     <string name="Latest_Hourmeter">Latest Hour meter</string>
     <string name="Average_Fuel_Rate">Average Fuel Rate</string>
     <string name="Total_Odometer">Total Odometer</string>
@@ -141,17 +141,15 @@
     <string name="Bucket_Full_In_Error_Warning">Bucket is not full in, though weigh may be inaccurate. Press the Enter Key to reweigh.</string>
     <string name="Sudden_Change_Error_Warning">Angular speed is a sudden change, though weigh may be inaccurate. Press the Enter Key to reweigh.</string>
     <string name="Hydraulic_Oil_Temp_Low_Warning">Hydraulic oil temperature low.</string>
-    <string name="CloseMulti">Player is running.\nYou want to close a Player?</string>
-    <string name="CloseMira">Smart Terminal is running.\nYou want to close a Miracast?</string>
+    <string name="CloseMulti">"Player is running.\nYou want to close a Player?"</string>
+    <string name="CloseMira">"Smart Terminal is running.\nYou want to close a Miracast?"</string>
     <string name="Front_Axle_Temp">Front Axle Temp.</string>
     <string name="Rear_Axle_Temp">Rear Axle Temp.</string>
     <string name="A_DAYS_FUEL_USED">A DAYS FUEL USED</string>
     <string name="A_Days_Fuel_Used">A Days Fuel Used</string>
-    <string name="Axle_Warning_Popup">"CAUTION!\nOne of axles exceeds allowable oil temperature‼\nStop operating the machine and cool down axle oil\nuntil warning lamp goes off"</string>
+    <string name="Axle_Warning_Popup">"CAUTION!\nOne of axles exceeds allowable oil temperature‼\nStop operating the machine and cool down axle oil\nuntil warning lamp goes off."</string>
     <string name="Boom_Detent_Mode">Boom Detent Mode</string>
     <string name="Bucket_Detent_Mode">Bucket Detent Mode</string>
-    <!-- Main End -->
-    <!-- Key Start-->
     <string name="Main_Light">Main Light</string>
     <string name="Work_Light">Work Light</string>
     <string name="Auto_Grease">Auto Grease</string>
@@ -196,15 +194,11 @@
     <string name="Mirror_Heat_is_NOT_equipped">Mirror Heat is NOT equipped.</string>
     <string name="Quick_Coupler_is_NOT_equipped">Quick Coupler is NOT equipped.</string>
     <string name="Ride_Control_is_NOT_equipped">Ride Control is NOT equipped.</string>
-    <!-- Key End -->
-    <!-- Menu Start -->
     <string name="Mode">Mode</string>
     <string name="Monitoring">Monitoring</string>
     <string name="Management">Management</string>
     <string name="Preference">Preference</string>
     <string name="Multimedia">Multimedia</string>
-    <!-- Menu End -->
-    <!-- Menu Mode Start -->
     <string name="Eng">ENG.</string>
     <string name="TM">TM.</string>
     <string name="HYD">HYD.</string>
@@ -218,7 +212,7 @@
     <string name="TC_Lock_Up">T.C. Lock Up</string>
     <string name="Bucket_Priority">Bucket Priority</string>
     <string name="Boom_Bucket_Detent_Mode">Boom Bucket Detent Mode</string>
-    <string name="Auxilliary_Attachment_Max_Flow_Level">Auxiliary Attachment Max Flow Level</string>
+    <string name="Auxilliary_Attachment_Max_Flow_Level">Auxilliary Attachment Max Flow Level</string>
     <string name="Soft_End_Stop">Soft End Stop</string>
     <string name="Engine_Auto_Shutdown">Engine Auto Shutdown</string>
     <string name="Camera_Setting">Camera Setting</string>
@@ -257,8 +251,7 @@
     <string name="Excute">Execute</string>
     <string name="Push_and_hold_to_reverse_rotation">Push and hold to reverse rotation.</string>
     <string name="rpm_km_h">rpm/km/h</string>
-    <!-- Menu Mode End -->
-    <!-- Menu Monitoring Start -->
+    <string name="You_should_turn_OFF_Soft_end_stop_before_start_calibration">You should turn OFF Soft end stop before start calibration.</string>
     <string name="Machine_Monitoring">Machine Monitoring</string>
     <string name="Operation_History">Operation History</string>
     <string name="Fault_History">Fault History</string>
@@ -325,8 +318,6 @@
     <string name="Daily_Record">Daily Record</string>
     <string name="Mode_Record">Mode Record</string>
     <string name="Machine_Information">Machine Information</string>
-    <!-- Menu Monitoring End -->
-    <!-- Menu Management Start -->
     <string name="Machine_Security">Machine Security</string>
     <string name="Calibration">Calibration</string>
     <string name="Speedometer_Setting">Speedometer Freq. Setting</string>
@@ -363,7 +354,7 @@
     <string name="Start">Start</string>
     <string name="First_Calibration">1st Calibration</string>
     <string name="Second_Calibration">2nd Calibration</string>
-    <string name="Roll_in_the_bucket_at_max_range_lower_the_boom_at_min_height">"Before touch START button,\n- Roll-in the bucket at max range, lower the boom at min height.\n- Check engine mode is Power mode. "</string>
+    <string name="Roll_in_the_bucket_at_max_range_lower_the_boom_at_min_height">"Before touch START button, Roll-in the bucket at max range, lower the boom at min height.\n Check engine mode is Power mode."</string>
     <string name="Press_Start_button_lift_the_boom_with_the_hydraulic_control_in_detent_position">Touch Start button, lift the boom with the hydraulic control in detent position and release the lever without pressing (acceleration) pedal.</string>
     <string name="Boom_lifting_will_be_stopped_automatically_at_a_certain_position_and_calibration_is_completed">Boom lifting will be stopped automatically at a certain position and calibration is completed.</string>
     <string name="Set_P_mode_step_on_pedal_max_range_press_Start_button_lift_the_boom_with_the_hydraulic_control_in_detent_position">Touch Start button, lift the boom with the hydraulic control in detent position and release the lever with pressing (acceleration) pedal to full throttle position.</string>
@@ -401,7 +392,7 @@
     <string name="Pilot_line_filter_element">Pilot line filter element</string>
     <string name="Hydraulic_oil_return_filter">Hydraulic oil return filter</string>
     <string name="Engine_oil_filter">Engine oil filter</string>
-    <string name="Fuel_filter_element">Fuel filter element </string>
+    <string name="Fuel_filter_element">Fuel filter element</string>
     <string name="Fuel_Pre_filter">Fuel Pre-filter</string>
     <string name="Hydraulic_Tank_Air_Breather_Filter">Hydraulic Tank Air Breather Filter</string>
     <string name="Radiator_engine_coolant">Radiator engine coolant</string>
@@ -420,8 +411,6 @@
     <string name="Confirm_Reset_elapsed_time">Confirm: Reset elapsed time</string>
     <string name="Recommend_deleting_unused_tag_for_security_when_you_register_new_tag">Recommend deleting unused tag for security when you register new tag.</string>
     <string name="Software_Update_Warning">Turn the engine off for software update.</string>
-    <!-- Menu Management End -->
-    <!-- Menu Preference Start -->
     <string name="Brightness_Setting">Brightness Setting</string>
     <string name="Clock_Setting">Clock Setting</string>
     <string name="Unit_Setting">Unit Setting</string>
@@ -438,13 +427,10 @@
     <string name="Unit_C">℃</string>
     <string name="Unit_F">℉</string>
     <string name="Check_Radio_mode_is_AUX_mode">(Check Radio mode is AUX mode)</string>
+    <string name="Reverse_camera">(Reverse Camera)</string>
     <string name="Language_Warning">To ensure that the entire system reflects the change, please Restart the machine.</string>
-    <!-- Menu Preference End -->
-    <!-- Menu Multimedia Start -->
     <string name="Media_Palyer">Media Player</string>
     <string name="Smart_Terminal">Smart Terminal</string>
-    <!-- Menu Multimedia End -->
-    <!-- Language Start -->
     <string name="Korean">Korean</string>
     <string name="English">English</string>
     <string name="German">German</string>
@@ -458,8 +444,6 @@
     <string name="Slovakian">Slovakian</string>
     <string name="Estonian">Estonian</string>
     <string name="Finnish">Finnish</string>
-    <!-- Language End -->
-    <!-- ETC Start -->
     <string name="Input_new_phone_number">Input new phone number</string>
     <string name="WARMING_UP">WARMING UP</string>
     <string name="TOTAL_HOURMETER">TOTAL HOURMETER</string>
@@ -476,12 +460,15 @@
     <string name="Boom_Down_Response_Adjust">Boom Down Response Adjust</string>
     <string name="Bucket_Dump_Response_Adjust">Bucket Dump Response Adjust</string>
     <string name="Service_Contact">Service Contact</string>
-    <!-- ETC End -->
-    <!-- 151020 add start -->
-    <string name="METRIC">METRIC</string>
-    <string name="US">US</string>
-    <string name="CUSTOM">CUSTOM</string>
+    <string name="METRIC">Metric Unit</string>
+    <string name="US">US Unit</string>
+    <string name="CUSTOM">User Setting</string>
     <string name="FuelRate">Fuel Rate</string>
     <string name="gal_h">gal/h</string>
-    <!-- 151020 add end -->    
+    <string name="gal">gal</string>
+    <string name="USTon">US ton</string>
+    <string name="Volume">Volume</string>
+    <string name="Volume_L">L</string>
+    <string name="Volume_gallon">gal</string>
+    <string name="Distance">Distance</string>
 </resources>

@@ -17,6 +17,7 @@ import taeha.wheelloader.fseries_monitor.main.Home;
 import taeha.wheelloader.fseries_monitor.main.ParentFragment;
 import taeha.wheelloader.fseries_monitor.main.R;
 import taeha.wheelloader.fseries_monitor.main.R.string;
+import taeha.wheelloader.fseries_monitor.main.TextFitTextView;
 import taeha.wheelloader.fseries_monitor.menu.monitoring.FuelHistoryDailyRecordFragment.SendCommandTimerClass;
 
 public class FuelHistoryGeneralRecordFragment  extends ParentFragment{
@@ -24,15 +25,20 @@ public class FuelHistoryGeneralRecordFragment  extends ParentFragment{
 	
 	//////////////////////////////////////////////////
 	//RESOURCE////////////////////////////////////////
-	TextView	textViewAvgData;
-	TextView	textViewDaysData;
-	TextView	textViewAvgInital;
-	TextView	textViewDaysInital;
+	TextFitTextView	textViewAvgTitle;
+	TextFitTextView	textViewDaysTitle;
 	
-	TextView	textViewAvgUnit;
-	TextView	textViewDayUnit;
+	TextFitTextView	textViewAvgUnit;
+	TextFitTextView	textViewDaysUnit;
+	
+	TextFitTextView	textViewAvgData;
+	TextFitTextView	textViewDaysData;
+	
+	TextFitTextView	textViewAvgInital;
+	TextFitTextView	textViewDaysInital;
 	
 	ImageButton	imgbtnOK;
+	TextFitTextView	textViewOK;
 	//////////////////////////////////////////////////
 	
 	//VALUABLE////////////////////////////////////////
@@ -68,8 +74,8 @@ public class FuelHistoryGeneralRecordFragment  extends ParentFragment{
 		InitButtonListener();
 		SetUnit();
 		
-		ParentActivity.ScreenIndex = Home.SCREEN_STATE_MENU_MONITORING_FUELHISTORY_GENERALRECORD;
-		ParentActivity._MenuBaseFragment._MenuInterTitleFragment.SetTitleText(ParentActivity.getResources().getString(R.string.General_Record));
+		ParentActivity.ScreenIndex = ParentActivity.SCREEN_STATE_MENU_MONITORING_FUELHISTORY_GENERALRECORD;
+		ParentActivity._MenuBaseFragment._MenuInterTitleFragment.SetTitleText(ParentActivity.getResources().getString(R.string.General_Record), 314);
 		
 		CursurIndex = 1;
 		CursurDisplay(CursurIndex);		
@@ -92,15 +98,28 @@ public class FuelHistoryGeneralRecordFragment  extends ParentFragment{
 	@Override
 	protected void InitResource() {
 		// TODO Auto-generated method stub
-		textViewAvgData = (TextView)mRoot.findViewById(R.id.textView_menu_body_monitoring_fuelhistory_generalrecord_average_data);
-		textViewDaysData = (TextView)mRoot.findViewById(R.id.textView_menu_body_monitoring_fuelhistory_generalrecord_a_days_fuel_used_data);
 
-		textViewAvgInital = (TextView)mRoot.findViewById(R.id.textView_menu_body_monitoring_fuelhistory_generalrecord_average_init);
-		textViewDaysInital = (TextView)mRoot.findViewById(R.id.textView_menu_body_monitoring_fuelhistory_generalrecord_a_days_fuel_used_init);
-		imgbtnOK = (ImageButton)mRoot.findViewById(R.id.ImageButton_menu_body_monitoring_fuelhistory_generalrecord_low_ok);
+		textViewAvgTitle = (TextFitTextView)mRoot.findViewById(R.id.textView_menu_body_monitoring_fuelhistory_generalrecord_average);
+		textViewAvgTitle.setText(getString(ParentActivity.getResources().getString(R.string.Average_Fuel_Rate), 108));
+		textViewDaysTitle = (TextFitTextView)mRoot.findViewById(R.id.textView_menu_body_monitoring_fuelhistory_generalrecord_a_days_fuel_used);
+		textViewDaysTitle.setText(getString(ParentActivity.getResources().getString(R.string.A_Days_Fuel_Used), 147));
 		
-		textViewAvgUnit = (TextView)mRoot.findViewById(R.id.textView_menu_body_monitoring_fuelhistory_generalrecord_average_unit);
-		textViewDayUnit = (TextView)mRoot.findViewById(R.id.textView_menu_body_monitoring_fuelhistory_generalrecord_a_days_fuel_used_unit);
+		textViewAvgUnit = (TextFitTextView)mRoot.findViewById(R.id.textView_menu_body_monitoring_fuelhistory_generalrecord_average_unit);
+		textViewAvgUnit.setText(getString(ParentActivity.getResources().getString(R.string.l_h), 33));
+		textViewDaysUnit = (TextFitTextView)mRoot.findViewById(R.id.textView_menu_body_monitoring_fuelhistory_generalrecord_a_days_fuel_used_unit);
+		textViewDaysUnit.setText(getString(ParentActivity.getResources().getString(R.string.l), 81));
+				
+		textViewAvgData = (TextFitTextView)mRoot.findViewById(R.id.textView_menu_body_monitoring_fuelhistory_generalrecord_average_data);
+		textViewDaysData = (TextFitTextView)mRoot.findViewById(R.id.textView_menu_body_monitoring_fuelhistory_generalrecord_a_days_fuel_used_data);
+
+		textViewAvgInital = (TextFitTextView)mRoot.findViewById(R.id.textView_menu_body_monitoring_fuelhistory_generalrecord_average_init);
+		textViewAvgInital.setText(getString(ParentActivity.getResources().getString(R.string.Initialization), 30));
+		textViewDaysInital = (TextFitTextView)mRoot.findViewById(R.id.textView_menu_body_monitoring_fuelhistory_generalrecord_a_days_fuel_used_init);
+		textViewDaysInital.setText(getString(ParentActivity.getResources().getString(R.string.Initialization), 30));
+		
+		imgbtnOK = (ImageButton)mRoot.findViewById(R.id.ImageButton_menu_body_monitoring_fuelhistory_generalrecord_low_ok);
+		textViewOK = (TextFitTextView)mRoot.findViewById(R.id.textView_menu_body_monitoring_fuelhistory_generalrecord_low_ok);
+		textViewOK.setText(getString(ParentActivity.getResources().getString(R.string.OK), 15));
 	}
 
 	@Override
@@ -156,12 +175,12 @@ public class FuelHistoryGeneralRecordFragment  extends ParentFragment{
 	/////////////////////////////////////////////////////////////////////
 	public void SetUnit(){
 		if(ParentActivity.UnitFuel == Home.UNIT_FUEL_GAL){
-			textViewAvgUnit.setText(ParentActivity.getResources().getString(string.gal_h));
-			textViewDayUnit.setText(ParentActivity.getResources().getString(string.gal));
+			textViewAvgUnit.setText(getString(ParentActivity.getResources().getString(string.gal_h), 465));
+			textViewDaysUnit.setText(getString(ParentActivity.getResources().getString(string.gal), 466));
 		}
 		else{
-			textViewAvgUnit.setText(ParentActivity.getResources().getString(string.l_h));
-			textViewDayUnit.setText(ParentActivity.getResources().getString(string.l));
+			textViewAvgUnit.setText(getString(ParentActivity.getResources().getString(string.l_h), 33));
+			textViewDaysUnit.setText(getString(ParentActivity.getResources().getString(string.l), 81));
 		}
 	
 	}
@@ -172,12 +191,12 @@ public class FuelHistoryGeneralRecordFragment  extends ParentFragment{
 	}
 	/////////////////////////////////////////////////////////////////////	
 	public void ClickAverageInitial(){
-		ParentActivity.OldScreenIndex = Home.SCREEN_STATE_MENU_MONITORING_FUELHISTORY_GENERALRECORD;
+		ParentActivity.OldScreenIndex = ParentActivity.SCREEN_STATE_MENU_MONITORING_FUELHISTORY_GENERALRECORD;
 		ParentActivity._FuelInitalPopup.setMode(CAN1CommManager.DATA_STATE_AVERAGE_FUEL_RATE_INFO_CLEAR);
 		ParentActivity.showFuelInitalPopup();
 	}
 	public void ClickDaysInitial(){
-		ParentActivity.OldScreenIndex = Home.SCREEN_STATE_MENU_MONITORING_FUELHISTORY_GENERALRECORD;
+		ParentActivity.OldScreenIndex = ParentActivity.SCREEN_STATE_MENU_MONITORING_FUELHISTORY_GENERALRECORD;
 		ParentActivity._FuelInitalPopup.setMode(CAN1CommManager.DATA_STATE_A_DAYS_FUEL_USED_CLEAR);
 		ParentActivity.showFuelInitalPopup();
 	}
@@ -254,5 +273,4 @@ public class FuelHistoryGeneralRecordFragment  extends ParentFragment{
 		}
 	}
 	/////////////////////////////////////////////////////////////////////
-
 }

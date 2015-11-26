@@ -5,6 +5,7 @@ import taeha.wheelloader.fseries_monitor.main.Home;
 import taeha.wheelloader.fseries_monitor.main.ParentFragment;
 import taeha.wheelloader.fseries_monitor.main.R;
 import taeha.wheelloader.fseries_monitor.main.R.string;
+import taeha.wheelloader.fseries_monitor.main.TextFitTextView;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -35,17 +36,25 @@ public class CoolingFanReverseModeFragment extends ParentFragment{
 	RelativeLayout	layoutManual;
 
 	ImageButton imgbtnOK;
-	TextView textViewExcute;
+	TextFitTextView textViewOK;
+	
+	TextFitTextView textViewExcute;
 	
 	ImageView imgViewCoolingFanIcon;
 	ImageView imgViewExcuteBoader;
 	
-	TextView textViewIntervalData;
-	TextView textViewIntervalMax;
-	TextView textViewIntervalMin;
-	TextView textViewOperationTimeData;
-	TextView textViewOperationTimeMax;
-	TextView textViewOperationTimeMin;
+	
+	TextFitTextView textViewIntervalTitle;
+	TextFitTextView textViewIntervalData;
+	TextFitTextView textViewIntervalMax;
+	TextFitTextView textViewIntervalMin;
+	
+	TextFitTextView textViewOperationTimeTitle;
+	TextFitTextView textViewOperationTimeData;
+	TextFitTextView textViewOperationTimeMax;
+	TextFitTextView textViewOperationTimeMin;
+	
+	TextFitTextView textViewCoolingFanDescription;
 	
 	SeekBar	seekbarInterval;
 	SeekBar seekbarOperationTime;
@@ -96,7 +105,7 @@ public class CoolingFanReverseModeFragment extends ParentFragment{
 			ClickAuto();
 
 		ParentActivity.ScreenIndex = ParentActivity.SCREEN_STATE_MENU_MODE_ETC_COOLINGFAN_TOP;
-		ParentActivity._MenuBaseFragment._MenuInterTitleFragment.SetTitleText(ParentActivity.getResources().getString(R.string.Cooling_Fan_Reverse_Mode));
+		ParentActivity._MenuBaseFragment._MenuInterTitleFragment.SetTitleText(ParentActivity.getResources().getString(R.string.Cooling_Fan_Reverse_Mode), 217);
 		HandleCursurDisplay = new Handler() {
 			@Override
 			public void handleMessage(Message msg) {
@@ -131,24 +140,35 @@ public class CoolingFanReverseModeFragment extends ParentFragment{
 	protected void InitResource() {
 		// TODO Auto-generated method stub
 		radioAuto = (RadioButton)mRoot.findViewById(R.id.radioButton_menu_body_mode_coolingfanreversemode_auto);
+		radioAuto.setText(getString(ParentActivity.getResources().getString(string.Automatic), 27));
+		ParentActivity.setMarqueeRadio(radioAuto);
 		radioManual = (RadioButton)mRoot.findViewById(R.id.radioButton_menu_body_mode_coolingfanreversemode_manual);
+		radioManual.setText(getString(ParentActivity.getResources().getString(string.Manual), 26));
+		ParentActivity.setMarqueeRadio(radioManual);
 		
 		layoutAuto = (RelativeLayout)mRoot.findViewById(R.id.RelativeLayout_menu_body_mode_coolingfan_Auto);
 		layoutManual = (RelativeLayout)mRoot.findViewById(R.id.RelativeLayout_menu_body_mode_coolingfan_manual);
 		
 		imgbtnOK = (ImageButton)mRoot.findViewById(R.id.ImageButton_menu_body_mode_coolingfanreversemode_low_ok);
-		textViewExcute = (TextView)mRoot.findViewById(R.id.textView_menu_body_mode_coolingfan_manual_excute);
+		textViewOK = (TextFitTextView)mRoot.findViewById(R.id.textView_menu_body_mode_coolingfanreversemode_low_ok);
+		textViewOK.setText(getString(ParentActivity.getResources().getString(R.string.OK), 15));
+		textViewExcute = (TextFitTextView)mRoot.findViewById(R.id.textView_menu_body_mode_coolingfan_manual_excute);
+		textViewExcute.setText(getString(ParentActivity.getResources().getString(string.Excute), 249));
 		
 		imgViewExcuteBoader = (ImageView)mRoot.findViewById(R.id.imageView_menu_body_mode_coolingfan_manual_excute_boarder);
 		imgViewCoolingFanIcon = (ImageView)mRoot.findViewById(R.id.imageView_menu_body_mode_coolingfan_manual);
 		
-		textViewIntervalData = (TextView)mRoot.findViewById(R.id.textView_menu_body_mode_coolingfan_auto_interval_time);
-		textViewIntervalMax = (TextView)mRoot.findViewById(R.id.textView_menu_body_mode_coolingfan_auto_interval_max);
-		textViewIntervalMin = (TextView)mRoot.findViewById(R.id.textView_menu_body_mode_coolingfan_auto_interval_min);
+		textViewIntervalTitle = (TextFitTextView)mRoot.findViewById(R.id.textView_menu_body_mode_coolingfan_auto_interval_title);
+		textViewIntervalTitle.setText(getString(ParentActivity.getResources().getString(string.Interval), 234));
+		textViewIntervalData = (TextFitTextView)mRoot.findViewById(R.id.textView_menu_body_mode_coolingfan_auto_interval_time);
+		textViewIntervalMax = (TextFitTextView)mRoot.findViewById(R.id.textView_menu_body_mode_coolingfan_auto_interval_max);
+		textViewIntervalMin = (TextFitTextView)mRoot.findViewById(R.id.textView_menu_body_mode_coolingfan_auto_interval_min);
 		
-		textViewOperationTimeData = (TextView)mRoot.findViewById(R.id.textView_menu_body_mode_coolingfan_auto_time_time);
-		textViewOperationTimeMax = (TextView)mRoot.findViewById(R.id.textView_menu_body_mode_coolingfan_auto_time_max);
-		textViewOperationTimeMin = (TextView)mRoot.findViewById(R.id.textView_menu_body_mode_coolingfan_auto_time_min);
+		textViewOperationTimeTitle = (TextFitTextView)mRoot.findViewById(R.id.textView_menu_body_mode_coolingfan_auto_time_title);
+		textViewOperationTimeTitle.setText(getString(ParentActivity.getResources().getString(string.Time), 235));
+		textViewOperationTimeData = (TextFitTextView)mRoot.findViewById(R.id.textView_menu_body_mode_coolingfan_auto_time_time);
+		textViewOperationTimeMax = (TextFitTextView)mRoot.findViewById(R.id.textView_menu_body_mode_coolingfan_auto_time_max);
+		textViewOperationTimeMin = (TextFitTextView)mRoot.findViewById(R.id.textView_menu_body_mode_coolingfan_auto_time_min);
 		
 		seekbarInterval = (SeekBar)mRoot.findViewById(R.id.seekBar_menu_body_mode_coolingfan_auto_interval);
 		seekbarOperationTime = (SeekBar)mRoot.findViewById(R.id.seekBar_menu_body_mode_coolingfan_auto_time);
@@ -158,6 +178,9 @@ public class CoolingFanReverseModeFragment extends ParentFragment{
 		
 		seekbarOperationTime.setMax(TOTAL_STEP);
 		seekbarOperationTime.incrementProgressBy(1);
+		
+		textViewCoolingFanDescription = (TextFitTextView)mRoot.findViewById(R.id.textView_menu_body_mode_coolingfan_manual_description);
+		textViewCoolingFanDescription.setText(getString(ParentActivity.getResources().getString(string.Push_and_hold_to_reverse_rotation), 250));
 	}
 
 	protected void InitValuables() {
@@ -173,10 +196,14 @@ public class CoolingFanReverseModeFragment extends ParentFragment{
 		else 
 			CursurIndex = 1;
 
-		textViewIntervalMax.setText(ParentActivity.GetSectoMinString(300,ParentActivity.getResources().getString(string.Hour),ParentActivity.getResources().getString(string.Min)));
-		textViewIntervalMin.setText(ParentActivity.GetSectoMinString(30,ParentActivity.getResources().getString(string.Hour),ParentActivity.getResources().getString(string.Min)));
-		textViewOperationTimeMax.setText(ParentActivity.GetSectoMinString(300,ParentActivity.getResources().getString(string.Min),ParentActivity.getResources().getString(string.Sec)));
-		textViewOperationTimeMin.setText(ParentActivity.GetSectoMinString(30,ParentActivity.getResources().getString(string.Min),ParentActivity.getResources().getString(string.Sec)));
+		textViewIntervalMax.setText(ParentActivity.GetSectoMinString(300,getString(ParentActivity.getResources().getString(string.Hour), 47), 
+				getString(ParentActivity.getResources().getString(string.Min), 48)));
+		textViewIntervalMin.setText(ParentActivity.GetSectoMinString(30,getString(ParentActivity.getResources().getString(string.Hour), 47),
+				getString(ParentActivity.getResources().getString(string.Min), 48)));
+		textViewOperationTimeMax.setText(ParentActivity.GetSectoMinString(300,getString(ParentActivity.getResources().getString(string.Min), 48),
+				getString(ParentActivity.getResources().getString(string.Sec), 50)));
+		textViewOperationTimeMin.setText(ParentActivity.GetSectoMinString(30,getString(ParentActivity.getResources().getString(string.Min), 48),
+				getString(ParentActivity.getResources().getString(string.Sec), 50)));
 	}
 	@Override
 	protected void InitButtonListener() {
@@ -447,12 +474,14 @@ public class CoolingFanReverseModeFragment extends ParentFragment{
 	public void IntervalTextDisplay(int _data){
 		int CalData;
 		CalData = _data * 10;
-		textViewIntervalData.setText(ParentActivity.GetSectoMinString(CalData, ParentActivity.getResources().getString(string.Hour),ParentActivity.getResources().getString(string.Min)));
+		textViewIntervalData.setText(ParentActivity.GetSectoMinString(CalData, getString(ParentActivity.getResources().getString(string.Hour), 47),
+				getString(ParentActivity.getResources().getString(string.Min), 48)));
 	}
 	public void OperationTimeTextDisplay(int _data){
 		int CalData;
 		CalData = _data * 10;
-		textViewOperationTimeData.setText(ParentActivity.GetSectoMinString(CalData, ParentActivity.getResources().getString(string.Min),ParentActivity.getResources().getString(string.Sec)));
+		textViewOperationTimeData.setText(ParentActivity.GetSectoMinString(CalData, getString(ParentActivity.getResources().getString(string.Min), 48),
+				getString(ParentActivity.getResources().getString(string.Sec), 50)));
 	}
 	public void SetSeekBarPositionbyData(SeekBar _seekbar, int _data){
 		int Progress;
@@ -735,5 +764,4 @@ public class CoolingFanReverseModeFragment extends ParentFragment{
 	
 	}
 	/////////////////////////////////////////////////////////////////////
-	
 }

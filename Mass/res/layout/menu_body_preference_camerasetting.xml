@@ -28,19 +28,19 @@
             android:layout_marginTop="35dp"
             android:src="@drawable/menu_bluedot" />
         
-        <TextView
+        <taeha.wheelloader.fseries_monitor.main.TextFitTextView
             android:id="@+id/textView_menu_body_preference_camerasetting_cameranumber_title"
-            android:layout_width="wrap_content"
+            android:layout_width="280dp"
             android:layout_height="wrap_content"
             android:layout_alignBottom="@+id/textView_menu_body_preference_camerasetting_cameranumber_data"
             android:layout_alignTop="@+id/textView_menu_body_preference_camerasetting_cameranumber_data"
             android:layout_marginLeft="20dp"
             android:layout_toRightOf="@+id/imageView_menu_body_preference_camerasetting_point1"
-            android:gravity="center"
+            android:gravity="left|center_vertical"
             android:text="@string/Active_Camera"
             android:textAppearance="?android:attr/textAppearanceLarge" />
         
-        <TextView
+        <taeha.wheelloader.fseries_monitor.main.TextFitTextView
             android:id="@+id/textView_menu_body_preference_camerasetting_cameranumber_data"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -87,7 +87,7 @@
             android:layout_marginTop="10dp"
             android:src="@drawable/menu_bluedot" />
         
-        <TextView
+        <taeha.wheelloader.fseries_monitor.main.TextFitTextView
             android:id="@+id/textView_menu_body_preference_camerasetting_dislayorder_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -96,7 +96,7 @@
             android:text="@string/Display_Order"
             android:textAppearance="?android:attr/textAppearanceLarge" />
 
-        <TextView
+        <taeha.wheelloader.fseries_monitor.main.TextFitTextView
             android:id="@+id/textView_menu_body_preference_camerasetting_dislayorder_btn1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -107,7 +107,7 @@
             android:text="@string/CAM_1"
             android:textAppearance="?android:attr/textAppearanceLarge" />
 
-        <TextView
+        <taeha.wheelloader.fseries_monitor.main.TextFitTextView
             android:id="@+id/textView_menu_body_preference_camerasetting_dislayorder_btn2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -119,7 +119,7 @@
             android:text="@string/CAM_2"
             android:textAppearance="?android:attr/textAppearanceLarge" />
 
-        <TextView
+        <taeha.wheelloader.fseries_monitor.main.TextFitTextView
             android:id="@+id/textView_menu_body_preference_camerasetting_dislayorder_btn3"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -131,7 +131,7 @@
             android:text="@string/CAM_3"
             android:textAppearance="?android:attr/textAppearanceLarge" />
 
-        <TextView
+        <taeha.wheelloader.fseries_monitor.main.TextFitTextView
             android:id="@+id/textView_menu_body_preference_camerasetting_dislayorder_btn4"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -143,7 +143,7 @@
             android:text="@string/CAM_4"
             android:textAppearance="?android:attr/textAppearanceLarge" />
         
-        <TextView
+        <taeha.wheelloader.fseries_monitor.main.TextFitTextView
             android:id="@+id/textView_menu_body_preference_camerasetting_dislayorder_txt1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -156,7 +156,7 @@
             android:textAppearance="?android:attr/textAppearanceLarge"
             android:textColor="@color/gray" />
         
-        <TextView
+        <taeha.wheelloader.fseries_monitor.main.TextFitTextView
             android:id="@+id/textView_menu_body_preference_camerasetting_dislayorder_txt1_comment"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -169,7 +169,7 @@
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:textColor="@color/gray" />
         
-       <TextView
+       <taeha.wheelloader.fseries_monitor.main.TextFitTextView
            android:id="@+id/textView_menu_body_preference_camerasetting_dislayorder_txt2"
            android:layout_width="wrap_content"
            android:layout_height="wrap_content"
@@ -182,7 +182,7 @@
            android:textAppearance="?android:attr/textAppearanceLarge"
            android:textColor="@color/gray" />
        
-       <TextView
+       <taeha.wheelloader.fseries_monitor.main.TextFitTextView
            android:id="@+id/textView_menu_body_preference_camerasetting_dislayorder_txt3"
            android:layout_width="wrap_content"
            android:layout_height="wrap_content"
@@ -195,7 +195,7 @@
            android:textAppearance="?android:attr/textAppearanceLarge"
            android:textColor="@color/gray" />
        
-       <TextView
+       <taeha.wheelloader.fseries_monitor.main.TextFitTextView
            android:id="@+id/textView_menu_body_preference_camerasetting_dislayorder_txt4"
            android:layout_width="wrap_content"
            android:layout_height="wrap_content"
@@ -308,7 +308,7 @@
 	                android:layout_alignTop="@+id/ImageButton_menu_body_preference_camerasetting_low_ok"
 	                android:src="@drawable/menu_low_icon_ok" />
 	
-	            <TextView
+	            <taeha.wheelloader.fseries_monitor.main.TextFitTextView
 	                android:id="@+id/textView_menu_body_preference_camerasetting_low_ok"
 	                android:layout_width="wrap_content"
 	                android:layout_height="match_parent"
@@ -347,7 +347,7 @@
 	                android:layout_alignTop="@+id/ImageButton_menu_body_preference_camerasetting_low_cancel"
 	                android:src="@drawable/menu_low_icon_cancel" />
 	
-	            <TextView
+	            <taeha.wheelloader.fseries_monitor.main.TextFitTextView
 	                android:id="@+id/textView_menu_body_preference_camerasetting_low_cancel"
 	                android:layout_width="wrap_content"
 	                android:layout_height="match_parent"

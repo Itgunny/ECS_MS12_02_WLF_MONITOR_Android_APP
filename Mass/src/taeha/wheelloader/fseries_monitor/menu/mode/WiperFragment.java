@@ -9,6 +9,7 @@ import taeha.wheelloader.fseries_monitor.main.CAN1CommManager;
 import taeha.wheelloader.fseries_monitor.main.Home;
 import taeha.wheelloader.fseries_monitor.main.ParentFragment;
 import taeha.wheelloader.fseries_monitor.main.R;
+import taeha.wheelloader.fseries_monitor.main.TextFitTextView;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -32,6 +33,9 @@ public class WiperFragment extends ParentFragment{
 	//RESOURCE////////////////////////////////////////
 	ImageButton imgbtnOK;
 	ImageButton	imgbtnCancel;
+	TextFitTextView 	textViewOK;
+	TextFitTextView 	textViewCancel;
+	
 	
 	RadioButton radioLevel1;
 	RadioButton radioLevel2;
@@ -72,7 +76,7 @@ public class WiperFragment extends ParentFragment{
 		InitButtonListener();
 		
 		ParentActivity.ScreenIndex = ParentActivity.SCREEN_STATE_MENU_MODE_ETC_WIPER_TOP;
-		ParentActivity._MenuBaseFragment._MenuInterTitleFragment.SetTitleText(ParentActivity.getResources().getString(R.string.Wiper_Level_Setting));
+		ParentActivity._MenuBaseFragment._MenuInterTitleFragment.SetTitleText(ParentActivity.getResources().getString(R.string.Wiper_Level_Setting), 218);
 		HandleCursurDisplay = new Handler() {
 			@Override
 			public void handleMessage(Message msg) {
@@ -93,11 +97,23 @@ public class WiperFragment extends ParentFragment{
 		// TODO Auto-generated method stub
 		imgbtnOK = (ImageButton)mRoot.findViewById(R.id.ImageButton_menu_body_mode_wiper_low_ok);
 		imgbtnCancel = (ImageButton)mRoot.findViewById(R.id.ImageButton_menu_body_mode_wiper_low_cancel);
+		textViewOK   = (TextFitTextView)mRoot.findViewById(R.id.textView_menu_body_mode_wiper_low_ok); 
+		textViewOK.setText(getString(ParentActivity.getResources().getString(R.string.OK), 15));
+		textViewCancel   = (TextFitTextView)mRoot.findViewById(R.id.textView_menu_body_mode_wiper_low_cancel); 
+		textViewCancel.setText(getString(ParentActivity.getResources().getString(R.string.Cancel), 16));
 		
 		radioLevel1 = (RadioButton)mRoot.findViewById(R.id.radioButton_menu_body_mode_wiper_level1);
+		radioLevel1.setText(getString(ParentActivity.getResources().getString(R.string.Slow), 245));
+		ParentActivity.setMarqueeRadio(radioLevel1);
 		radioLevel2 = (RadioButton)mRoot.findViewById(R.id.radioButton_menu_body_mode_wiper_level2);
+		radioLevel2.setText(getString(ParentActivity.getResources().getString(R.string.Normal), 246));
+		ParentActivity.setMarqueeRadio(radioLevel2);
 		radioLevel3 = (RadioButton)mRoot.findViewById(R.id.radioButton_menu_body_mode_wiper_level3);
+		radioLevel3.setText(getString(ParentActivity.getResources().getString(R.string.Fast), 247));
+		ParentActivity.setMarqueeRadio(radioLevel3);
 		radioLevel4 = (RadioButton)mRoot.findViewById(R.id.radioButton_menu_body_mode_wiper_level4);
+		radioLevel4.setText(getString(ParentActivity.getResources().getString(R.string.Very_Fast), 248));
+		ParentActivity.setMarqueeRadio(radioLevel4);
 	}
 
 	protected void InitValuables() {

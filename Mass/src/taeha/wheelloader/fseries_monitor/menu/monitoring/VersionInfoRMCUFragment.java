@@ -93,7 +93,7 @@ public class VersionInfoRMCUFragment extends VersionInfoDetailFragment{
 		
 		ParentActivity.ScreenIndex = ParentActivity.SCREEN_STATE_MENU_MONITORING_VERSIONINFO_RMCU;
 		ParentActivity._MenuBaseFragment._MenuInterTitleFragment.SetTitleText(ParentActivity.getResources().getString(R.string.Machine_Information)
-				+ " - " + ParentActivity.getResources().getString(R.string.RMCU));
+				+ " - " + ParentActivity.getResources().getString(R.string.RMCU), 318, 271);
 		return mRoot;
 	}
 	@Override
@@ -142,9 +142,9 @@ public class VersionInfoRMCUFragment extends VersionInfoDetailFragment{
 //		adapter.addItem(new IconTextItemVersion(ParentActivity.getResources().getDrawable(R.drawable.menu_management_machine_monitoring_bg_dark),null,
 //				ParentActivity.getResources().getString(string.Lock_Level),"" , ""));
 		adapter.addItem(new IconTextItemVersion(ParentActivity.getResources().getDrawable(R.drawable.menu_management_machine_monitoring_bg_dark),null,
-				ParentActivity.getResources().getString(string.Program_Version),"" , ""));
+				getString(ParentActivity.getResources().getString(string.Program_Version), 277),"" , ""));
 		adapter.addItem(new IconTextItemVersion(ParentActivity.getResources().getDrawable(R.drawable.menu_management_machine_monitoring_bg_light),null,
-				ParentActivity.getResources().getString(string.Serial_Number),"" , ""));
+				getString(ParentActivity.getResources().getString(string.Serial_Number), 278),"" , ""));
 		
 		
 		listView.setAdapter(adapter);
@@ -153,27 +153,27 @@ public class VersionInfoRMCUFragment extends VersionInfoDetailFragment{
 	@Override
 	public void ShowHiddenPage(){
 		adapter.addItem(new IconTextItemVersion(ParentActivity.getResources().getDrawable(R.drawable.menu_management_machine_monitoring_bg_dark),null,
-				ParentActivity.getResources().getString(string.Manufacturer),"" , ""));
+				getString(ParentActivity.getResources().getString(string.Manufacturer), 279),"" , ""));
 		adapter.addItem(new IconTextItemVersion(ParentActivity.getResources().getDrawable(R.drawable.menu_management_machine_monitoring_bg_light),null,
-				ParentActivity.getResources().getString(string.Network_Type),"" , ""));
+				getString(ParentActivity.getResources().getString(string.Network_Type), 275),"" , ""));
 		adapter.addItem(new IconTextItemVersion(ParentActivity.getResources().getDrawable(R.drawable.menu_management_machine_monitoring_bg_dark),null,
-				ParentActivity.getResources().getString(string.Number_of_Messages_to_Transmit),"" , ""));
+				getString(ParentActivity.getResources().getString(string.Number_of_Messages_to_Transmit), 280),"" , ""));
 		adapter.addItem(new IconTextItemVersion(ParentActivity.getResources().getDrawable(R.drawable.menu_management_machine_monitoring_bg_light),null,
-				ParentActivity.getResources().getString(string.Back_up_Battery_Voltage),"" , ""));
+				getString(ParentActivity.getResources().getString(string.Back_up_Battery_Voltage), 281),"" , ""));
 		adapter.addItem(new IconTextItemVersion(ParentActivity.getResources().getDrawable(R.drawable.menu_management_machine_monitoring_bg_dark),null,
-				ParentActivity.getResources().getString(string.Network_Communication_Status),"" , ""));
+				getString(ParentActivity.getResources().getString(string.Network_Communication_Status), 282),"" , ""));
 		adapter.addItem(new IconTextItemVersion(ParentActivity.getResources().getDrawable(R.drawable.menu_management_machine_monitoring_bg_light),null,
-				ParentActivity.getResources().getString(string.Network_Service),"" , ""));
+				getString(ParentActivity.getResources().getString(string.Network_Service), 283), "" , ""));
 		adapter.addItem(new IconTextItemVersion(ParentActivity.getResources().getDrawable(R.drawable.menu_management_machine_monitoring_bg_dark),null,
-				ParentActivity.getResources().getString(string.Communication_Antenna),"" , ""));
+				getString(ParentActivity.getResources().getString(string.Communication_Antenna), 284),"" , ""));
 		adapter.addItem(new IconTextItemVersion(ParentActivity.getResources().getDrawable(R.drawable.menu_management_machine_monitoring_bg_light),null,
-				ParentActivity.getResources().getString(string.GPS_Antenna),"" , ""));
+				getString(ParentActivity.getResources().getString(string.GPS_Antenna), 285),"" , ""));
 		adapter.addItem(new IconTextItemVersion(ParentActivity.getResources().getDrawable(R.drawable.menu_management_machine_monitoring_bg_dark),null,
-				ParentActivity.getResources().getString(string.Position_Update),"" , ""));
+				getString(ParentActivity.getResources().getString(string.Position_Update), 286),"" , ""));
 		adapter.addItem(new IconTextItemVersion(ParentActivity.getResources().getDrawable(R.drawable.menu_management_machine_monitoring_bg_light),null,
-				ParentActivity.getResources().getString(string.Outside_of_Boundary),"" , ""));
+				getString(ParentActivity.getResources().getString(string.Outside_of_Boundary), 287),"" , ""));
 		adapter.addItem(new IconTextItemVersion(ParentActivity.getResources().getDrawable(R.drawable.menu_management_machine_monitoring_bg_dark),null,
-				ParentActivity.getResources().getString(string.Lock_Level),"" , ""));
+				getString(ParentActivity.getResources().getString(string.Lock_Level),288) ,"" , ""));
 	}
 	@Override
 	protected void GetDataFromNative() {

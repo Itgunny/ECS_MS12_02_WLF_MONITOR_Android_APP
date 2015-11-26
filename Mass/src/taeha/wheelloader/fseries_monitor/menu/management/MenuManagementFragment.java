@@ -65,7 +65,7 @@ public class MenuManagementFragment extends MenuBodyList_ParentFragment{
 		ParentActivity._MenuBaseFragment._MenuListTitleFragment.setBackButtonEnable(false);
 		ParentActivity.OldScreenIndex = Home.SCREEN_STATE_MENU_MANAGEMENT_TOP;
 		ParentActivity.ScreenIndex = Home.SCREEN_STATE_MENU_MANAGEMENT_TOP;
-		ParentActivity._MenuBaseFragment._MenuListTitleFragment.SetTitleText(ParentActivity.getResources().getString(R.string.Management));
+		ParentActivity._MenuBaseFragment._MenuListTitleFragment.SetTitleText(ParentActivity.getResources().getString(R.string.Management), 197);
 		CursurDisplay(CursurIndex);
 		// ++, 150325 bwk
 		CAN1Comm.Set_MaintenanceCommant_1097_PGN61184_12(CAN1CommManager.COMMAND_MAINTENANCE_ITEM_LIST_REQUEST);
@@ -97,12 +97,12 @@ public class MenuManagementFragment extends MenuBodyList_ParentFragment{
 		setClickableList4(true);
 		setClickableList5(true);
 		
-		setListTitle1(ParentActivity.getResources().getString(string.Machine_Security));
-		setListTitle2(ParentActivity.getResources().getString(string.Maintenance));
+		setListTitle1(ParentActivity.getResources().getString(string.Machine_Security), 319);
+		setListTitle2(ParentActivity.getResources().getString(string.Maintenance),408);
 		//setListTitle3(ParentActivity.getResources().getString(string.Calibration));
-		setListTitle3(ParentActivity.getResources().getString(string.Service_Menu));
-		setListTitle4(ParentActivity.getResources().getString(string.Change_AS_Phone_Number));
-		setListTitle5(ParentActivity.getResources().getString(string.Software_Update));		// ++, --, 150323 bwk
+		setListTitle3(ParentActivity.getResources().getString(string.Service_Menu), 323);
+		setListTitle4(ParentActivity.getResources().getString(string.Change_AS_Phone_Number), 322);
+		setListTitle5(ParentActivity.getResources().getString(string.Software_Update), 274);		// ++, --, 150323 bwk
 	}
 
 	//////////////////////////////////////////////////////////////////////

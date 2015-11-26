@@ -20,6 +20,7 @@ import taeha.wheelloader.fseries_monitor.main.ParentPopup;
 import taeha.wheelloader.fseries_monitor.main.R;
 import taeha.wheelloader.fseries_monitor.main.Home.SeatBeltTimerClass;
 import taeha.wheelloader.fseries_monitor.main.R.string;
+import taeha.wheelloader.fseries_monitor.main.TextFitTextView;
 import taeha.wheelloader.fseries_monitor.popup.SpeedometerInitPopup.PopupOffTimerClass;
 
 public class MaintReplacePopup extends ParentPopup{
@@ -31,6 +32,9 @@ public class MaintReplacePopup extends ParentPopup{
 	ImageButton imgbtnOK;
 	ImageButton imgbtnCancel;
 	
+	TextFitTextView	textViewTitle;
+	TextFitTextView	textViewOK;
+	TextFitTextView	textViewCancel;
 	//////////////////////////////////////////////////
 	
 	//VALUABLE////////////////////////////////////////
@@ -90,6 +94,13 @@ public class MaintReplacePopup extends ParentPopup{
 		imgbtnOK = (ImageButton)mRoot.findViewById(R.id.imageButton_popup_maint_replace_ok);
 		imgbtnCancel = (ImageButton)mRoot.findViewById(R.id.imageButton_popup_maint_replace_cancel);
 	
+	
+		textViewTitle = (TextFitTextView)mRoot.findViewById(R.id.textView_popup_maint_replace_title);
+		textViewTitle.setText(getString(ParentActivity.getResources().getString(R.string.Confirm_Reset_elapsed_time), 409));
+		textViewOK = (TextFitTextView)mRoot.findViewById(R.id.textView_popup_maint_replace_ok);
+		textViewOK.setText(getString(ParentActivity.getResources().getString(R.string.OK), 15));
+		textViewCancel = (TextFitTextView)mRoot.findViewById(R.id.textView_popup_maint_replace_cancel);
+		textViewCancel.setText(getString(ParentActivity.getResources().getString(R.string.Cancel), 16));
 	
 	}
 

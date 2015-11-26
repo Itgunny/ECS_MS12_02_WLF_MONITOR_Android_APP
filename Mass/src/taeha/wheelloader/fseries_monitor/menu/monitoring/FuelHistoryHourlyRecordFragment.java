@@ -20,6 +20,7 @@ import taeha.wheelloader.fseries_monitor.main.Home;
 import taeha.wheelloader.fseries_monitor.main.ParentFragment;
 import taeha.wheelloader.fseries_monitor.main.R;
 import taeha.wheelloader.fseries_monitor.main.R.string;
+import taeha.wheelloader.fseries_monitor.main.TextFitTextView;
 import taeha.wheelloader.fseries_monitor.menu.monitoring.FuelHistoryModeRecordFragment.SendCommandTimerClass;
 
 public class FuelHistoryHourlyRecordFragment  extends ParentFragment{
@@ -30,10 +31,14 @@ public class FuelHistoryHourlyRecordFragment  extends ParentFragment{
 	ImageView[]	imgViewHour;
 	TextView[]	textViewHour;
 	
-	TextView	textViewUnit;
-	
 	ImageButton imgbtnInital;
+	TextFitTextView	textViewInital;
+	
 	ImageButton	imgbtnOK;
+	TextFitTextView	textViewOK;
+	
+	TextFitTextView	textViewGraphUnit;
+	TextView	textViewUnit;
 	//////////////////////////////////////////////////
 	
 	//VALUABLE////////////////////////////////////////
@@ -73,8 +78,8 @@ public class FuelHistoryHourlyRecordFragment  extends ParentFragment{
 		
 		StartSendCommandTimer();
 		
-		ParentActivity.ScreenIndex = Home.SCREEN_STATE_MENU_MONITORING_FUELHISTORY_HOURLYRECORD;
-		ParentActivity._MenuBaseFragment._MenuInterTitleFragment.SetTitleText(ParentActivity.getResources().getString(R.string.Hourly_Record));
+		ParentActivity.ScreenIndex = ParentActivity.SCREEN_STATE_MENU_MONITORING_FUELHISTORY_HOURLYRECORD;
+		ParentActivity._MenuBaseFragment._MenuInterTitleFragment.SetTitleText(ParentActivity.getResources().getString(R.string.Hourly_Record), 315);
 		
 		CursurIndex = 1;
 		CursurDisplay(CursurIndex);
@@ -123,7 +128,16 @@ public class FuelHistoryHourlyRecordFragment  extends ParentFragment{
 		textViewHour[11] = (TextView)mRoot.findViewById(R.id.textView_menu_body_monitoring_fuelhistory_hourlyrecord_graph_text_12);
 		
 		imgbtnOK = (ImageButton)mRoot.findViewById(R.id.ImageButton_menu_body_monitoring_fuelhistory_hourlyrecord_low_ok);
+		textViewOK = (TextFitTextView)mRoot.findViewById(R.id.textView_menu_body_monitoring_fuelhistory_hourlyrecord_low_ok);
+		textViewOK.setText(getString(ParentActivity.getResources().getString(R.string.OK), 15));
+		
 		imgbtnInital = (ImageButton)mRoot.findViewById(R.id.ImageButton_menu_body_monitoring_fuelhistory_hourlyrecord_low_initialization);
+		textViewInital = (TextFitTextView)mRoot.findViewById(R.id.textView_menu_body_monitoring_fuelhistory_hourlyrecord_low_initialization);
+		textViewInital.setText(getString(ParentActivity.getResources().getString(R.string.Initialization), 30));
+		
+		textViewGraphUnit = (TextFitTextView)mRoot.findViewById(R.id.textView_menu_body_monitoring_fuelhistory_hourlyrecord_graph_unit);
+		textViewGraphUnit.setText(getString(ParentActivity.getResources().getString(R.string.l_h), 33));
+		
 		
 		textViewUnit = (TextView)mRoot.findViewById(R.id.textView_menu_body_monitoring_fuelhistory_hourlyrecord_graph_unit);
 	}
@@ -209,9 +223,9 @@ public class FuelHistoryHourlyRecordFragment  extends ParentFragment{
 	/////////////////////////////////////////////////////////////////////	
 	public void SetUnit(){
 		if(ParentActivity.UnitFuel == Home.UNIT_FUEL_GAL)
-			textViewUnit.setText(ParentActivity.getResources().getString(string.gal_h));
+			textViewGraphUnit.setText(ParentActivity.getResources().getString(string.gal_h));
 		else
-			textViewUnit.setText(ParentActivity.getResources().getString(string.l_h));
+			textViewGraphUnit.setText(ParentActivity.getResources().getString(string.l_h));
 	}
 	/////////////////////////////////////////////////////////////////////	
 	public class SendCommandTimerClass extends TimerTask{
@@ -297,7 +311,7 @@ public class FuelHistoryHourlyRecordFragment  extends ParentFragment{
 	}	
 	/////////////////////////////////////////////////////////////////////	
 	public void ClickInitial(){
-		ParentActivity.OldScreenIndex = Home.SCREEN_STATE_MENU_MONITORING_FUELHISTORY_HOURLYRECORD;
+		ParentActivity.OldScreenIndex = ParentActivity.SCREEN_STATE_MENU_MONITORING_FUELHISTORY_HOURLYRECORD;
 		ParentActivity._FuelInitalPopup.setMode(CAN1CommManager.DATA_STATE_HOURLY_FUEL_RATE_INFO_CLEAR);
 		ParentActivity.showFuelInitalPopup();
 	}
@@ -368,5 +382,4 @@ public class FuelHistoryHourlyRecordFragment  extends ParentFragment{
 		}
 	}
 	/////////////////////////////////////////////////////////////////////
-
 }

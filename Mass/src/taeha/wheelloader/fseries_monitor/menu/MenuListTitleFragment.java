@@ -8,6 +8,7 @@ import taeha.wheelloader.fseries_monitor.animation.LeftRightShiftAnimation;
 import taeha.wheelloader.fseries_monitor.main.Home;
 import taeha.wheelloader.fseries_monitor.main.ParentFragment;
 import taeha.wheelloader.fseries_monitor.main.R;
+import taeha.wheelloader.fseries_monitor.main.TextFitTextView;
 import android.os.Bundle;
 import android.text.Layout;
 import android.util.Log;
@@ -27,7 +28,7 @@ public class MenuListTitleFragment extends ParentFragment{
 	
 	//////////////////////////////////////////////////
 	//RESOURCE////////////////////////////////////////
-	TextView textViewTitle;
+	TextFitTextView textViewTitle;
 	ImageButton imgbtnBack;
 	ImageButton imgbtnHome;
 	//////////////////////////////////////////////////
@@ -76,7 +77,7 @@ public class MenuListTitleFragment extends ParentFragment{
 	protected void InitResource() {
 		// TODO Auto-generated method stub
 
-		textViewTitle = (TextView)mRoot.findViewById(R.id.textView_menu_list_title_text);
+		textViewTitle = (TextFitTextView)mRoot.findViewById(R.id.textView_menu_list_title_text);
 		
 		imgbtnBack = (ImageButton)mRoot.findViewById(R.id.imageButton_menu_list_title_back);
 		imgbtnHome = (ImageButton)mRoot.findViewById(R.id.imageButton_menu_list_title_home);
@@ -136,6 +137,41 @@ public class MenuListTitleFragment extends ParentFragment{
 			Log.e(TAG,"NullPointerException SetTitleText");
 		}
 	}
+	public void SetTitleText(String str, int index){
+		try {
+			strTitle = str;
+			if(ParentActivity.langDb.findStrGetString(index, ParentActivity.LanguageIndex) == null){
+				textViewTitle.setText(str);
+				Log.d(TAG, "Android");
+			}else {
+				textViewTitle.setText(ParentActivity.langDb.findStrGetString(index, ParentActivity.LanguageIndex));
+				Log.d(TAG, "Excel");
+			}
+			TitleTextShiftAnimation.StartShiftAnimation();
+			TitleTextAppearAnimation.StartAnimation();
+		} catch (NullPointerException e) {
+			// TODO: handle exception
+			Log.e(TAG,"NullPointerException SetTitleText");
+		}
+	}
+	public void SetTitleText(String str, int index, int index2){
+		try {
+			strTitle = str;
+			if((ParentActivity.langDb.findStrGetString(index, ParentActivity.LanguageIndex) == null) || 
+					(ParentActivity.langDb.findStrGetString(index2, ParentActivity.LanguageIndex) == null)){
+				textViewTitle.setText(str);
+				Log.d(TAG, "Android");
+			}else {
+				textViewTitle.setText(ParentActivity.langDb.findStrGetString(index, ParentActivity.LanguageIndex) + " / " + ParentActivity.langDb.findStrGetString(index2, ParentActivity.LanguageIndex));
+				Log.d(TAG, "Excel");
+			}
+			TitleTextShiftAnimation.StartShiftAnimation();
+			TitleTextAppearAnimation.StartAnimation();
+		} catch (NullPointerException e) {
+			// TODO: handle exception
+			Log.e(TAG,"NullPointerException SetTitleText");
+		}
+	}
 	public void setBackButtonEnable(boolean flag){
 		bBackVisibleFlag = flag;
 		if(flag == true){
@@ -157,7 +193,7 @@ public class MenuListTitleFragment extends ParentFragment{
 		switch (ParentActivity.ScreenIndex) {
 			case Home.SCREEN_STATE_MENU_MODE_ENGINETM_ENGINESETTING_TOP:
 				ParentActivity._MenuBaseFragment._MenuModeFragment.showEngTM();
-				SetTitleText(ParentActivity.getResources().getString(R.string.Mode));
+				SetTitleText(ParentActivity.getResources().getString(R.string.Mode), 195);
 				setBackButtonEnable(false);
 				ParentActivity._MenuBaseFragment._MenuModeFragment._MenuModeTabFragment.setFirstScreen(Home.SCREEN_STATE_MENU_MODE_ENGINETM_TOP);
 				ParentActivity._MenuBaseFragment._MenuModeFragment.showTab();
@@ -174,7 +210,7 @@ public class MenuListTitleFragment extends ParentFragment{
 			// ++, 150409 cjg
 			case Home.SCREEN_STATE_MENU_MODE_ETC_CALIBRATION_TOP:
 				ParentActivity._MenuBaseFragment._MenuModeFragment.showETC();
-				SetTitleText(ParentActivity.getResources().getString(R.string.Mode));
+				SetTitleText(ParentActivity.getResources().getString(R.string.Mode), 195);
 				setBackButtonEnable(false);
 				ParentActivity._MenuBaseFragment._MenuModeFragment._MenuModeTabFragment.setFirstScreen(Home.SCREEN_STATE_MENU_MODE_ETC_TOP);
 				ParentActivity._MenuBaseFragment._MenuModeFragment.showTab();

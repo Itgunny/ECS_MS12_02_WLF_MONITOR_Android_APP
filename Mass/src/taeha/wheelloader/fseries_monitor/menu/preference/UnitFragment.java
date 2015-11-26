@@ -1,16 +1,27 @@
 package taeha.wheelloader.fseries_monitor.menu.preference;
 
+import taeha.wheelloader.fseries_monitor.animation.AppearAnimation;
+import taeha.wheelloader.fseries_monitor.animation.ChangeFragmentAnimation;
+import taeha.wheelloader.fseries_monitor.animation.DisappearAnimation;
+import taeha.wheelloader.fseries_monitor.animation.MainBodyShiftAnimation;
+import taeha.wheelloader.fseries_monitor.animation.LeftRightShiftAnimation;
+import taeha.wheelloader.fseries_monitor.main.CAN1CommManager;
 import taeha.wheelloader.fseries_monitor.main.Home;
 import taeha.wheelloader.fseries_monitor.main.ParentFragment;
 import taeha.wheelloader.fseries_monitor.main.R;
+import taeha.wheelloader.fseries_monitor.main.TextFitTextView;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.text.Layout;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.Menu;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AbsoluteLayout;
+import android.widget.FrameLayout;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.RadioButton;
@@ -39,6 +50,8 @@ public class UnitFragment extends ParentFragment{
 	
 	ImageButton imgbtnOK;
 	ImageButton imgbtnCancel;
+	TextFitTextView	textViewOK;
+	TextFitTextView	textViewCancel;
 	
 	RadioButton radioFuelL;
 	RadioButton radioFuelGal;
@@ -57,6 +70,12 @@ public class UnitFragment extends ParentFragment{
 	RadioButton radioPressureMpa;
 	RadioButton radioPressureKgf;
 	RadioButton radioPressurePsi;
+	
+	TextFitTextView textViewFuelRate;
+	TextFitTextView	textViewTemp;
+	TextFitTextView	textViewSpeed;
+	TextFitTextView	textViewWeight;
+	TextFitTextView	textViewPressure;
 	//////////////////////////////////////////////////
 	
 	//VALUABLE////////////////////////////////////////
@@ -96,7 +115,7 @@ public class UnitFragment extends ParentFragment{
 		InitButtonListener();
 		
 		ParentActivity.ScreenIndex = ParentActivity.SCREEN_STATE_MENU_PREFERENCE_UNIT_TOP;
-		ParentActivity._MenuBaseFragment._MenuInterTitleFragment.SetTitleText(ParentActivity.getResources().getString(R.string.Unit_Setting));
+		ParentActivity._MenuBaseFragment._MenuInterTitleFragment.SetTitleText(ParentActivity.getResources().getString(R.string.Unit_Setting), 414);
 		HandleCursurDisplay = new Handler() {
 			@Override
 			public void handleMessage(Message msg) {
@@ -116,8 +135,11 @@ public class UnitFragment extends ParentFragment{
 	protected void InitResource() {
 		// TODO Auto-generated method stub
 		textviewMetric = (TextView)mRoot.findViewById(R.id.textView_menu_body_preference_unit_metric);
+		textviewMetric.setText(getString(ParentActivity.getResources().getString(R.string.METRIC), 461));
 		textviewUS = (TextView)mRoot.findViewById(R.id.textView_menu_body_preference_unit_us);
+		textviewUS.setText(getString(ParentActivity.getResources().getString(R.string.US), 462));
 		textviewCustom = (TextView)mRoot.findViewById(R.id.textView_menu_body_preference_unit_custom);
+		textviewCustom.setText(getString(ParentActivity.getResources().getString(R.string.CUSTOM), 463));
 		
 		imageviewMetric = (ImageView)mRoot.findViewById(R.id.imageView_menu_body_preference_unit_metric);
 		imageviewUS = (ImageView)mRoot.findViewById(R.id.imageView_menu_body_preference_unit_us);
@@ -132,23 +154,68 @@ public class UnitFragment extends ParentFragment{
 		imgbtnOK = (ImageButton)mRoot.findViewById(R.id.ImageButton_menu_body_preference_unit_low_ok);
 		imgbtnCancel = (ImageButton)mRoot.findViewById(R.id.ImageButton_menu_body_preference_unit_low_cancel);
 		
-		radioFuelL = (RadioButton)mRoot.findViewById(R.id.radioButton_menu_body_preference_unit_fuel_l);
-		radioFuelGal = (RadioButton)mRoot.findViewById(R.id.radioButton_menu_body_preference_unit_fuel_gal);
+		textViewOK = (TextFitTextView)mRoot.findViewById(R.id.textView_menu_body_preference_unit_low_ok);
+		textViewOK.setText(getString(ParentActivity.getResources().getString(R.string.OK), 15));
+		textViewCancel = (TextFitTextView)mRoot.findViewById(R.id.textView_menu_body_preference_unit_low_cancel);
+		textViewCancel.setText(getString(ParentActivity.getResources().getString(R.string.Cancel), 16));
 		
 		radioTempC = (RadioButton)mRoot.findViewById(R.id.radioButton_menu_body_preference_unit_temp_c);
+		radioTempC.setText(getString(ParentActivity.getResources().getString(R.string.Unit_C), 8));
+		ParentActivity.setMarqueeRadio(radioTempC);
 		radioTempF = (RadioButton)mRoot.findViewById(R.id.radioButton_menu_body_preference_unit_temp_f);
+		radioTempF.setText(getString(ParentActivity.getResources().getString(R.string.Unit_F), 9));
+		ParentActivity.setMarqueeRadio(radioTempF);
 		
 		radioSpeedKM = (RadioButton)mRoot.findViewById(R.id.radioButton_menu_body_preference_unit_speed_km);
+		radioSpeedKM.setText(getString(ParentActivity.getResources().getString(R.string.km), 37));
+		ParentActivity.setMarqueeRadio(radioSpeedKM);
 		radioSpeedMile = (RadioButton)mRoot.findViewById(R.id.radioButton_menu_body_preference_unit_speed_mph);
+		radioSpeedMile.setText(getString(ParentActivity.getResources().getString(R.string.mile), 38));
+		ParentActivity.setMarqueeRadio(radioSpeedMile);
 		
 		radioWeightTon = (RadioButton)mRoot.findViewById(R.id.radioButton_menu_body_preference_unit_weight_ton);
+		radioWeightTon.setText(getString(ParentActivity.getResources().getString(R.string.ton), 11));
+		ParentActivity.setMarqueeRadio(radioWeightTon);
 		radioWeightLB = (RadioButton)mRoot.findViewById(R.id.radioButton_menu_body_preference_unit_weight_lb);
+		radioWeightLB.setText(getString(ParentActivity.getResources().getString(R.string.lb), 12));
+		ParentActivity.setMarqueeRadio(radioWeightLB);
 		radioWeightUSTon = (RadioButton)mRoot.findViewById(R.id.radioButton_menu_body_preference_unit_weight_uston);
+		radioWeightUSTon.setText(getString(ParentActivity.getResources().getString(R.string.USTon), 467));
+		ParentActivity.setMarqueeRadio(radioWeightUSTon);
 		
 		radioPressureBar = (RadioButton)mRoot.findViewById(R.id.radioButton_menu_body_preference_unit_pressure_bar);
+		radioPressureBar.setText(getString(ParentActivity.getResources().getString(R.string.bar), 43));
+		ParentActivity.setMarqueeRadio(radioPressureBar);
 		radioPressureMpa = (RadioButton)mRoot.findViewById(R.id.radioButton_menu_body_preference_unit_pressure_mpa);
+		radioPressureMpa.setText(getString(ParentActivity.getResources().getString(R.string.Mpa), 44));
+		ParentActivity.setMarqueeRadio(radioPressureMpa);
+		
 		radioPressureKgf = (RadioButton)mRoot.findViewById(R.id.radioButton_menu_body_preference_unit_pressure_kgfcm);
+		radioPressureKgf.setText(getString(ParentActivity.getResources().getString(R.string.kgf_cm), 45));
+		ParentActivity.setMarqueeRadio(radioPressureKgf);
 		radioPressurePsi = (RadioButton)mRoot.findViewById(R.id.radioButton_menu_body_preference_unit_pressure_psi);
+		radioPressurePsi.setText(getString(ParentActivity.getResources().getString(R.string.Psi), 46));
+		ParentActivity.setMarqueeRadio(radioPressurePsi);
+		
+		
+		textViewFuelRate = (TextFitTextView)mRoot.findViewById(R.id.textView_menu_body_preference_unit_fuel_title);
+		textViewFuelRate.setText(getString(ParentActivity.getResources().getString(R.string.Volume), 468));
+		textViewTemp = (TextFitTextView)mRoot.findViewById(R.id.textView_menu_body_preference_unit_temp_title);
+		textViewTemp.setText(getString(ParentActivity.getResources().getString(R.string.Temp), 39));
+		textViewSpeed = (TextFitTextView)mRoot.findViewById(R.id.textView_menu_body_preference_unit_speed_title);
+		textViewSpeed.setText(getString(ParentActivity.getResources().getString(R.string.Distance), 471));
+		textViewWeight = (TextFitTextView)mRoot.findViewById(R.id.textView_menu_body_preference_unit_weight_title);
+		textViewWeight.setText(getString(ParentActivity.getResources().getString(R.string.Weight), 41));
+		textViewPressure = (TextFitTextView)mRoot.findViewById(R.id.textView_menu_body_preference_unit_pressure_title);
+		textViewPressure.setText(getString(ParentActivity.getResources().getString(R.string.Pressure), 42));
+		
+		radioFuelL = (RadioButton)mRoot.findViewById(R.id.radioButton_menu_body_preference_unit_fuel_l);
+		radioFuelL.setText(getString(ParentActivity.getResources().getString(R.string.l), 81));
+		ParentActivity.setMarqueeRadio(radioFuelL);
+		radioFuelGal = (RadioButton)mRoot.findViewById(R.id.radioButton_menu_body_preference_unit_fuel_gal);
+		radioFuelGal.setText(getString(ParentActivity.getResources().getString(R.string.Volume_gallon), 470));
+		ParentActivity.setMarqueeRadio(radioFuelGal);
+
 		
 	}
 
@@ -187,8 +254,8 @@ public class UnitFragment extends ParentFragment{
 		SpeedDisplay(UnitOdo);
 		WeightDisplay(UnitWeight);
 		PressureDisplay(UnitPressure);
-		
 		CursurFirstDisplay(UnitType);
+		
 	}
 	@Override
 	protected void InitButtonListener() {
@@ -540,35 +607,35 @@ public class UnitFragment extends ParentFragment{
 		layoutSpeed.setAlpha(layoutalpha);
 		layoutPressure.setAlpha(layoutalpha);
 				
-		radioFuelL.setEnabled(clickable);
+		radioTempC.setEnabled(clickable);
+		radioTempC.setClickable(clickable);
+		radioTempF.setEnabled(clickable);
+		radioTempF.setClickable(clickable);
+		
+		radioFuelGal.setClickable(clickable);
 		radioFuelGal.setEnabled(clickable);
 		radioFuelL.setClickable(clickable);
-		radioFuelGal.setClickable(clickable);
+		radioFuelL.setEnabled(clickable);
 		
-		radioTempC.setClickable(clickable);
-		radioTempF.setClickable(clickable);
-		radioTempC.setEnabled(clickable);
-		radioTempF.setEnabled(clickable);
-		
-		radioSpeedKM.setClickable(clickable);
-		radioSpeedMile.setClickable(clickable);
-		radioSpeedKM.setEnabled(clickable);
-		radioSpeedMile.setEnabled(clickable);
-		
-		radioWeightTon.setClickable(clickable);
 		radioWeightLB.setClickable(clickable);
-		radioWeightUSTon.setClickable(clickable);
-		radioWeightTon.setEnabled(clickable);
 		radioWeightLB.setEnabled(clickable);
+		radioWeightTon.setClickable(clickable);
+		radioWeightTon.setEnabled(clickable);
+		radioWeightUSTon.setClickable(clickable);
 		radioWeightUSTon.setEnabled(clickable);
 		
+		radioSpeedKM.setClickable(clickable);
+		radioSpeedKM.setEnabled(clickable);
+		radioSpeedMile.setClickable(clickable);
+		radioSpeedMile.setEnabled(clickable);
+		
 		radioPressureBar.setClickable(clickable);
-		radioPressureMpa.setClickable(clickable);
-		radioPressureKgf.setClickable(clickable);
-		radioPressurePsi.setClickable(clickable);		
 		radioPressureBar.setEnabled(clickable);
-		radioPressureMpa.setEnabled(clickable);
+		radioPressureKgf.setClickable(clickable);
 		radioPressureKgf.setEnabled(clickable);
+		radioPressureMpa.setClickable(clickable);
+		radioPressureMpa.setEnabled(clickable);
+		radioPressurePsi.setClickable(clickable);		
 		radioPressurePsi.setEnabled(clickable);		
 	}
 	public void FuelDisplay(int _data){
@@ -831,15 +898,18 @@ public class UnitFragment extends ParentFragment{
 		switch (data) {
 		case Home.UNIT_TYPE_METRIC:
 			CursurIndex = 1;
+			ClickType(Home.UNIT_TYPE_METRIC);
 			CursurDisplay(CursurIndex);
 			break;
 		case Home.UNIT_TYPE_US:
 			CursurIndex = 2;
+			ClickType(Home.UNIT_TYPE_US);
 			CursurDisplay(CursurIndex);
 			break;
 		case Home.UNIT_TYPE_CUSTOM:
 		default:
 			CursurIndex = 3;
+			ClickType(Home.UNIT_TYPE_CUSTOM);
 			CursurDisplay(CursurIndex);
 			break;
 		}
@@ -882,12 +952,15 @@ public class UnitFragment extends ParentFragment{
 		switch (Index) {
 		case 1:
 			imageviewMetric.setVisibility(View.VISIBLE);
+			imageviewMetric.setPressed(true);
 			break;
 		case 2:
 			imageviewUS.setVisibility(View.VISIBLE);
+			imageviewUS.setPressed(true);
 			break;
 		case 3:
 			imageviewCustom.setVisibility(View.VISIBLE);
+			imageviewCustom.setPressed(true);
 			break;
 		case 4:
 			radioFuelL.setPressed(true);
@@ -936,6 +1009,14 @@ public class UnitFragment extends ParentFragment{
 			break;
 		default:
 			break;
+		}
+	}
+	
+	public String getString(String str, int index){
+		if(ParentActivity.langDb.findStrGetString(index, ParentActivity.LanguageIndex) == null){
+			return str;
+		}else {
+			return ParentActivity.langDb.findStrGetString(index, ParentActivity.LanguageIndex);	
 		}
 	}
 }

@@ -14,6 +14,7 @@ import taeha.wheelloader.fseries_monitor.main.CAN1CommManager;
 import taeha.wheelloader.fseries_monitor.main.Home;
 import taeha.wheelloader.fseries_monitor.main.ParentPopup;
 import taeha.wheelloader.fseries_monitor.main.R;
+import taeha.wheelloader.fseries_monitor.main.TextFitTextView;
 import taeha.wheelloader.fseries_monitor.main.R.string;
 
 public class BucketPriorityPopup extends ParentPopup{
@@ -21,8 +22,9 @@ public class BucketPriorityPopup extends ParentPopup{
 
 	//////////////////////////////////////////////////
 	//RESOURCE////////////////////////////////////////
-	TextView textViewOn;
-	TextView textViewOff;
+	TextFitTextView textViewTitle;
+	TextFitTextView textViewOn;
+	TextFitTextView textViewOff;
 	//////////////////////////////////////////////////
 	
 	//VALUABLE////////////////////////////////////////
@@ -73,8 +75,12 @@ public class BucketPriorityPopup extends ParentPopup{
 	@Override
 	protected void InitResource() {
 		// TODO Auto-generated method stub
-		textViewOn = (TextView)mRoot.findViewById(R.id.textView_popup_bucketpriority_on);
-		textViewOff = (TextView)mRoot.findViewById(R.id.textView_popup_bucketpriority_off);
+		textViewTitle = (TextFitTextView)mRoot.findViewById(R.id.textView_popup_bucketpriority_title);
+		textViewTitle.setText(getString(ParentActivity.getResources().getString(string.Bucket_Priority), 211));
+		textViewOn = (TextFitTextView)mRoot.findViewById(R.id.textView_popup_bucketpriority_on);
+		textViewOn.setText(getString(ParentActivity.getResources().getString(string.On), 19));
+		textViewOff = (TextFitTextView)mRoot.findViewById(R.id.textView_popup_bucketpriority_off);
+		textViewOff.setText(getString(ParentActivity.getResources().getString(string.Off), 20));
 	}
 
 	@Override

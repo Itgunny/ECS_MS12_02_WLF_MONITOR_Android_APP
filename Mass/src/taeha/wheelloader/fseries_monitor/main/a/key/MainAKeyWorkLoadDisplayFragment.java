@@ -16,17 +16,22 @@ import taeha.wheelloader.fseries_monitor.main.CAN1CommManager;
 import taeha.wheelloader.fseries_monitor.main.Home;
 import taeha.wheelloader.fseries_monitor.main.ParentFragment;
 import taeha.wheelloader.fseries_monitor.main.R;
+import taeha.wheelloader.fseries_monitor.main.TextFitTextView;
+import taeha.wheelloader.fseries_monitor.main.R.string;
 
 public class MainAKeyWorkLoadDisplayFragment extends ParentFragment{
 	//CONSTANT////////////////////////////////////////
 	
 	//////////////////////////////////////////////////
 	//RESOURCE////////////////////////////////////////
+	TextFitTextView	textViewTitle;
 	RadioButton radioDaily;
 	RadioButton radioTotalA;
 	RadioButton radioTotalB;
 	RadioButton radioTotalC;
 	
+	
+	TextFitTextView	textViewOK;
 	ImageButton imgbtnOK;
 	
 //	TextView textViewInitialization;
@@ -83,13 +88,26 @@ public class MainAKeyWorkLoadDisplayFragment extends ParentFragment{
 	@Override
 	protected void InitResource() {
 		// TODO Auto-generated method stub
-		radioDaily = (RadioButton)mRoot.findViewById(R.id.radioButton_key_main_a_workload_display_daily);
-		radioTotalA = (RadioButton)mRoot.findViewById(R.id.radioButton_key_main_a_workload_display_totala);
-		radioTotalB = (RadioButton)mRoot.findViewById(R.id.radioButton_key_main_a_workload_display_totalb);
-		radioTotalC = (RadioButton)mRoot.findViewById(R.id.radioButton_key_main_a_workload_display_totalc);
-			
+		textViewTitle = (TextFitTextView)mRoot.findViewById(R.id.textView_key_main_a_workload_display_title);
+		textViewTitle.setText(getString(ParentActivity.getResources().getString(string.Weighing_Display), 170));
 		
+		radioDaily = (RadioButton)mRoot.findViewById(R.id.radioButton_key_main_a_workload_display_daily);
+		radioDaily.setText(getString(ParentActivity.getResources().getString(string.Daily), 173));
+		ParentActivity.setMarqueeRadio(radioDaily);
+		radioTotalA = (RadioButton)mRoot.findViewById(R.id.radioButton_key_main_a_workload_display_totala);
+		radioTotalA.setText(getString(ParentActivity.getResources().getString(string.Total_A), 174));
+		ParentActivity.setMarqueeRadio(radioTotalA);
+		radioTotalB = (RadioButton)mRoot.findViewById(R.id.radioButton_key_main_a_workload_display_totalb);
+		radioTotalB.setText(getString(ParentActivity.getResources().getString(string.Total_B), 175));
+		ParentActivity.setMarqueeRadio(radioTotalB);
+		radioTotalC = (RadioButton)mRoot.findViewById(R.id.radioButton_key_main_a_workload_display_totalc);
+		radioTotalC.setText(getString(ParentActivity.getResources().getString(string.Total_C), 176));
+		ParentActivity.setMarqueeRadio(radioTotalC);	
+			
 //		textViewInitialization = (TextView)mRoot.findViewById(R.id.textView_key_main_a_workload_display_init);
+		textViewOK = (TextFitTextView)mRoot.findViewById(R.id.textView_key_main_a_workload_display_low_ok);
+		textViewOK.setText(getString(ParentActivity.getResources().getString(string.OK), 15));
+		
 		imgbtnOK = (ImageButton)mRoot.findViewById(R.id.ImageButton_key_main_a_workload_display_low_ok);
 	}
 	

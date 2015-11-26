@@ -18,7 +18,9 @@ import taeha.wheelloader.fseries_monitor.main.CAN1CommManager;
 import taeha.wheelloader.fseries_monitor.main.Home;
 import taeha.wheelloader.fseries_monitor.main.ParentPopup;
 import taeha.wheelloader.fseries_monitor.main.R;
-
+import android.widget.TextView;
+import taeha.wheelloader.fseries_monitor.main.TextFitTextView;
+import taeha.wheelloader.fseries_monitor.main.R.string;
 public class QuickCouplerPopupLocking2 extends ParentPopup{
 	//CONSTANT////////////////////////////////////////
 	
@@ -26,6 +28,9 @@ public class QuickCouplerPopupLocking2 extends ParentPopup{
 	//RESOURCE////////////////////////////////////////
 	RelativeLayout LayoutBG;
 	ImageButton imgbtnCancel;
+	
+	TextView	textViewTitle;
+	TextFitTextView 	textViewCancel;
 	//////////////////////////////////////////////////
 	
 	//VALUABLE////////////////////////////////////////
@@ -139,6 +144,12 @@ public class QuickCouplerPopupLocking2 extends ParentPopup{
 
 		LayoutBG = (RelativeLayout)mRoot.findViewById(R.id.RelativeLayout_popup_key_quickcoupler_locking_2);
 		imgbtnCancel = (ImageButton)mRoot.findViewById(R.id.imageButton_popup_key_quickcoupler_locking_2_cancel);
+		
+		textViewTitle = (TextView)mRoot.findViewById(R.id.textView_popup_key_quickcoupler_locking_2_title);
+		textViewTitle.setText(getString(ParentActivity.getResources().getString(string.Excuting_Locking_Attachment), 450));
+		
+		textViewCancel = (TextFitTextView)mRoot.findViewById(R.id.textView_popup_key_quickcoupler_locking_2_cancel);
+		textViewCancel.setText(getString(ParentActivity.getResources().getString(string.Cancel), 16));
 	}
 
 	@Override

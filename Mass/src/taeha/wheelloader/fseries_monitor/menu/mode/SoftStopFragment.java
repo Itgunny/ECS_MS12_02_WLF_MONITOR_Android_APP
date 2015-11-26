@@ -10,6 +10,7 @@ import taeha.wheelloader.fseries_monitor.main.CheckModel;
 import taeha.wheelloader.fseries_monitor.main.Home;
 import taeha.wheelloader.fseries_monitor.main.ParentFragment;
 import taeha.wheelloader.fseries_monitor.main.R;
+import taeha.wheelloader.fseries_monitor.main.TextFitTextView;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -34,6 +35,10 @@ public class SoftStopFragment extends ParentFragment{
 	ImageButton imgbtnOK;
 	ImageButton imgbtnCancel;
 	ImageButton imgbtnDefault;
+	TextFitTextView textViewOK;
+	TextFitTextView	textViewCancel;
+	TextFitTextView	textViewDefault;
+	
 	
 	RadioButton radioBoomUpOn;
 	RadioButton radioBoomUpOff;
@@ -44,10 +49,10 @@ public class SoftStopFragment extends ParentFragment{
 	RadioButton radioBucketOutOn;
 	RadioButton radioBucketOutOff;
 	
-	TextView textBoomUpTitle;
-	TextView textBoomDownTitle;
-	TextView textBucketInTitle;
-	TextView textBucketDumpTitle;
+	TextFitTextView textBoomUpTitle;
+	TextFitTextView textBoomDownTitle;
+	TextFitTextView textBucketInTitle;
+	TextFitTextView textBucketDumpTitle;
 	
 	ImageView imgViewLine1;
 	ImageView imgViewLine2;
@@ -67,7 +72,7 @@ public class SoftStopFragment extends ParentFragment{
 	Handler HandleCursurDisplay;
 	int CursurIndex;
 	
-	boolean CheckTM;
+	public static boolean CheckTM;
 	//////////////////////////////////////////////////
 	
 	//Fragment////////////////////////////////////////
@@ -95,7 +100,7 @@ public class SoftStopFragment extends ParentFragment{
 		InitButtonListener();
 		
 		ParentActivity.ScreenIndex = ParentActivity.SCREEN_STATE_MENU_MODE_HYD_SOFTSTOP_TOP;
-		ParentActivity._MenuBaseFragment._MenuInterTitleFragment.SetTitleText(ParentActivity.getResources().getString(R.string.Soft_End_Stop));
+		ParentActivity._MenuBaseFragment._MenuInterTitleFragment.SetTitleText(ParentActivity.getResources().getString(R.string.Soft_End_Stop), 214);
 		HandleCursurDisplay = new Handler() {
 			@Override
 			public void handleMessage(Message msg) {
@@ -118,19 +123,50 @@ public class SoftStopFragment extends ParentFragment{
 		imgbtnCancel = (ImageButton)mRoot.findViewById(R.id.ImageButton_menu_body_mode_softstop_low_cancel);
 		imgbtnDefault = (ImageButton)mRoot.findViewById(R.id.ImageButton_menu_body_mode_softstop_low_default);
 		
-		radioBoomUpOn = (RadioButton)mRoot.findViewById(R.id.radioButton_menu_body_mode_softstop_boomup_on);
-		radioBoomUpOff = (RadioButton)mRoot.findViewById(R.id.radioButton_menu_body_mode_softstop_boomup_off);
-		radioBoomDownOn = (RadioButton)mRoot.findViewById(R.id.radioButton_menu_body_mode_softstop_boomdown_on);
-		radioBoomDownOff = (RadioButton)mRoot.findViewById(R.id.radioButton_menu_body_mode_softstop_boomdown_off);
-		radioBucketInOn = (RadioButton)mRoot.findViewById(R.id.radioButton_menu_body_mode_softstop_bucketin_on);
-		radioBucketInOff = (RadioButton)mRoot.findViewById(R.id.radioButton_menu_body_mode_softstop_bucketin_off);
-		radioBucketOutOn = (RadioButton)mRoot.findViewById(R.id.radioButton_menu_body_mode_softstop_bucketout_on);
-		radioBucketOutOff = (RadioButton)mRoot.findViewById(R.id.radioButton_menu_body_mode_softstop_bucketout_off);
+		textViewOK = (TextFitTextView)mRoot.findViewById(R.id.textView_menu_body_mode_softstop_low_ok);
+		textViewOK.setText(getString(ParentActivity.getResources().getString(R.string.OK), 15));
+		textViewCancel = (TextFitTextView)mRoot.findViewById(R.id.textView_menu_body_mode_softstop_low_cancel);
+		textViewCancel.setText(getString(ParentActivity.getResources().getString(R.string.Cancel), 16));
+		textViewDefault = (TextFitTextView)mRoot.findViewById(R.id.textView_menu_body_mode_softstop_low_default);
+		textViewDefault.setText(getString(ParentActivity.getResources().getString(R.string.Default), 25));
 		
-		textBoomUpTitle = (TextView)mRoot.findViewById(R.id.textView_menu_body_mode_softstop_boomup);
-		textBoomDownTitle = (TextView)mRoot.findViewById(R.id.textView_menu_body_mode_softstop_boomdown);
-		textBucketInTitle = (TextView)mRoot.findViewById(R.id.textView_menu_body_mode_softstop_bucketin);
-		textBucketDumpTitle = (TextView)mRoot.findViewById(R.id.textView_menu_body_mode_softstop_bucketout);
+		radioBoomUpOn = (RadioButton)mRoot.findViewById(R.id.radioButton_menu_body_mode_softstop_boomup_on);
+		radioBoomUpOn.setText(getString(ParentActivity.getResources().getString(R.string.On), 19));
+		ParentActivity.setMarqueeRadio(radioBoomUpOn);
+		radioBoomUpOff = (RadioButton)mRoot.findViewById(R.id.radioButton_menu_body_mode_softstop_boomup_off);
+		radioBoomUpOff.setText(getString(ParentActivity.getResources().getString(R.string.Off), 20));
+		ParentActivity.setMarqueeRadio(radioBoomUpOff);
+		
+		radioBoomDownOn = (RadioButton)mRoot.findViewById(R.id.radioButton_menu_body_mode_softstop_boomdown_on);
+		radioBoomDownOn.setText(getString(ParentActivity.getResources().getString(R.string.On), 19));
+		ParentActivity.setMarqueeRadio(radioBoomDownOn);
+		radioBoomDownOff = (RadioButton)mRoot.findViewById(R.id.radioButton_menu_body_mode_softstop_boomdown_off);
+		radioBoomDownOff.setText(getString(ParentActivity.getResources().getString(R.string.Off), 20));
+		ParentActivity.setMarqueeRadio(radioBoomDownOff);
+		
+		radioBucketInOn = (RadioButton)mRoot.findViewById(R.id.radioButton_menu_body_mode_softstop_bucketin_on);
+		radioBucketInOn.setText(getString(ParentActivity.getResources().getString(R.string.On), 19));
+		ParentActivity.setMarqueeRadio(radioBucketInOn);
+		radioBucketInOff = (RadioButton)mRoot.findViewById(R.id.radioButton_menu_body_mode_softstop_bucketin_off);
+		radioBucketInOff.setText(getString(ParentActivity.getResources().getString(R.string.Off), 20));
+		ParentActivity.setMarqueeRadio(radioBucketInOff);
+		
+		radioBucketOutOn = (RadioButton)mRoot.findViewById(R.id.radioButton_menu_body_mode_softstop_bucketout_on);
+		radioBucketOutOn.setText(getString(ParentActivity.getResources().getString(R.string.On), 19));
+		ParentActivity.setMarqueeRadio(radioBucketOutOn);
+		radioBucketOutOff = (RadioButton)mRoot.findViewById(R.id.radioButton_menu_body_mode_softstop_bucketout_off);
+		radioBucketOutOff.setText(getString(ParentActivity.getResources().getString(R.string.Off), 20));
+		ParentActivity.setMarqueeRadio(radioBucketOutOff);
+		
+		textBoomUpTitle = (TextFitTextView)mRoot.findViewById(R.id.textView_menu_body_mode_softstop_boomup);
+		textBoomUpTitle.setText(getString(ParentActivity.getResources().getString(R.string.Boom_Up), 236));
+		textBoomDownTitle = (TextFitTextView)mRoot.findViewById(R.id.textView_menu_body_mode_softstop_boomdown);
+		textBoomDownTitle.setText(getString(ParentActivity.getResources().getString(R.string.Boom_Down), 237));
+		
+		textBucketInTitle = (TextFitTextView)mRoot.findViewById(R.id.textView_menu_body_mode_softstop_bucketin);
+		textBucketInTitle.setText(getString(ParentActivity.getResources().getString(R.string.Bucket_In), 238));
+		textBucketDumpTitle = (TextFitTextView)mRoot.findViewById(R.id.textView_menu_body_mode_softstop_bucketout);
+		textBucketDumpTitle.setText(getString(ParentActivity.getResources().getString(R.string.Bucket_In), 239));
 		
 		imgViewLine1 = (ImageView)mRoot.findViewById(R.id.imageView_menu_body_mode_softstop_line1);
 		imgViewLine2 = (ImageView)mRoot.findViewById(R.id.imageView_menu_body_mode_softstop_line2);
@@ -156,17 +192,8 @@ public class SoftStopFragment extends ParentFragment{
 		BucketInDisplay(BucketIn);
 		BucketOutDisplay(BucketOut);
 		
-		/*if(ParentActivity._CheckModel.GetMCUVersion(CAN1Comm.Get_ComponentBasicInformation_1698_PGN65330()) == CheckModel.MODEL_935TM
-		|| ParentActivity._CheckModel.GetMCUVersion(CAN1Comm.Get_ComponentBasicInformation_1698_PGN65330()) == CheckModel.MODEL_940TM
-		|| ParentActivity._CheckModel.GetMCUVersion(CAN1Comm.Get_ComponentBasicInformation_1698_PGN65330()) == CheckModel.MODEL_955TM
-		|| ParentActivity._CheckModel.GetMCUVersion(CAN1Comm.Get_ComponentBasicInformation_1698_PGN65330()) == CheckModel.MODEL_960TM
-		|| ParentActivity._CheckModel.GetMCUVersion(CAN1Comm.Get_ComponentBasicInformation_1698_PGN65330()) == CheckModel.MODEL_965TM	// ++, --, 150329 bwk
-		|| ParentActivity._CheckModel.GetMCUVersion(CAN1Comm.Get_ComponentBasicInformation_1698_PGN65330()) == CheckModel.MODEL_970TM
-		|| ParentActivity._CheckModel.GetMCUVersion(CAN1Comm.Get_ComponentBasicInformation_1698_PGN65330()) == CheckModel.MODEL_975TM		
-		|| ParentActivity._CheckModel.GetMCUVersion(CAN1Comm.Get_ComponentBasicInformation_1698_PGN65330()) == CheckModel.MODEL_980TM)*/
 		String strModelOption = ParentActivity._CheckModel.GetMCUModelOption(CAN1Comm.Get_ComponentBasicInformation_1698_PGN65330());
 		if(strModelOption.equals("TM")){
-			
 			CheckTM = true;
 			
 			textBoomDownTitle.setVisibility(View.INVISIBLE);
@@ -345,28 +372,6 @@ public class SoftStopFragment extends ParentFragment{
 		BucketIn = CAN1CommManager.DATA_STATE_SOFTSTOP_BUCKETIN_OFF;
 		BucketOut = CAN1CommManager.DATA_STATE_SOFTSTOP_BUCKETOUT_ON;
 		
-//		CAN1Comm.Set_SoftStopBoomUp_2337_PGN61184_203(BoomUp);
-//		CAN1Comm.Set_SoftStopBoomDown_2338_PGN61184_203(BoomDown);
-//		CAN1Comm.Set_SoftStopBucketIn_2339_PGN61184_203(BucketIn);
-//		CAN1Comm.Set_SoftStopBucketOut_2340_PGN61184_203(BucketOut);
-//		CAN1Comm.TxCANToMCU(203);
-//		CAN1Comm.Set_SoftStopBoomUp_2337_PGN61184_203(3);
-//		CAN1Comm.Set_SoftStopBoomDown_2338_PGN61184_203(3);
-//		CAN1Comm.Set_SoftStopBucketIn_2339_PGN61184_203(3);
-//		CAN1Comm.Set_SoftStopBucketOut_2340_PGN61184_203(3);
-		
-		String strModelOption = ParentActivity._CheckModel.GetMCUModelOption(CAN1Comm.Get_ComponentBasicInformation_1698_PGN65330());
-		if(strModelOption.equals("TM")){
-			CAN1Comm.Set_SoftStopBoomUp_2337_PGN61184_203(BoomUp);
-			CAN1Comm.Set_SoftStopBoomDown_2338_PGN61184_203(3);
-			CAN1Comm.Set_SoftStopBucketIn_2339_PGN61184_203(3);
-			CAN1Comm.Set_SoftStopBucketOut_2340_PGN61184_203(3);
-			CAN1Comm.TxCANToMCU(203);
-			CAN1Comm.Set_SoftStopBoomUp_2337_PGN61184_203(3);
-			CAN1Comm.Set_SoftStopBoomDown_2338_PGN61184_203(3);
-			CAN1Comm.Set_SoftStopBucketIn_2339_PGN61184_203(3);
-			CAN1Comm.Set_SoftStopBucketOut_2340_PGN61184_203(3);
-		}else{
 			CAN1Comm.Set_SoftStopBoomUp_2337_PGN61184_203(BoomUp);
 			CAN1Comm.Set_SoftStopBoomDown_2338_PGN61184_203(BoomDown);
 			CAN1Comm.Set_SoftStopBucketIn_2339_PGN61184_203(BucketIn);
@@ -376,7 +381,6 @@ public class SoftStopFragment extends ParentFragment{
 			CAN1Comm.Set_SoftStopBoomDown_2338_PGN61184_203(3);
 			CAN1Comm.Set_SoftStopBucketIn_2339_PGN61184_203(3);
 			CAN1Comm.Set_SoftStopBucketOut_2340_PGN61184_203(3);
-		}
 		
 		BoomUpDisplay(BoomUp);
 		BoomDownDisplay(BoomDown);
@@ -389,15 +393,6 @@ public class SoftStopFragment extends ParentFragment{
 		else
 			ParentActivity.StartAnimationRunningTimer();
 		
-		/*if(ParentActivity._CheckModel.GetMCUVersion(CAN1Comm.Get_ComponentBasicInformation_1698_PGN65330()) == CheckModel.MODEL_935TM
-				|| ParentActivity._CheckModel.GetMCUVersion(CAN1Comm.Get_ComponentBasicInformation_1698_PGN65330()) == CheckModel.MODEL_940TM
-				|| ParentActivity._CheckModel.GetMCUVersion(CAN1Comm.Get_ComponentBasicInformation_1698_PGN65330()) == CheckModel.MODEL_955TM
-				|| ParentActivity._CheckModel.GetMCUVersion(CAN1Comm.Get_ComponentBasicInformation_1698_PGN65330()) == CheckModel.MODEL_960TM
-				|| ParentActivity._CheckModel.GetMCUVersion(CAN1Comm.Get_ComponentBasicInformation_1698_PGN65330()) == CheckModel.MODEL_965TM	// ++, --, 150329 bwk
-				|| ParentActivity._CheckModel.GetMCUVersion(CAN1Comm.Get_ComponentBasicInformation_1698_PGN65330()) == CheckModel.MODEL_970TM
-				|| ParentActivity._CheckModel.GetMCUVersion(CAN1Comm.Get_ComponentBasicInformation_1698_PGN65330()) == CheckModel.MODEL_975TM				
-				|| ParentActivity._CheckModel.GetMCUVersion(CAN1Comm.Get_ComponentBasicInformation_1698_PGN65330()) == CheckModel.MODEL_980TM){
-				*/
 		String strModelOption = ParentActivity._CheckModel.GetMCUModelOption(CAN1Comm.Get_ComponentBasicInformation_1698_PGN65330());
 		if(strModelOption.equals("TM")){
 			CAN1Comm.Set_SoftStopBoomUp_2337_PGN61184_203(BoomUp);
@@ -810,5 +805,4 @@ public class SoftStopFragment extends ParentFragment{
 		}
 	}
 	/////////////////////////////////////////////////////////////////////
-	
 }

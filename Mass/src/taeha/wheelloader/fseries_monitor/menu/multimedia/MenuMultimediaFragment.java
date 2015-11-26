@@ -7,9 +7,11 @@ import taeha.wheelloader.fseries_monitor.animation.ChangeFragmentAnimation;
 import taeha.wheelloader.fseries_monitor.animation.DisappearAnimation;
 import taeha.wheelloader.fseries_monitor.animation.MainBodyShiftAnimation;
 import taeha.wheelloader.fseries_monitor.animation.LeftRightShiftAnimation;
+import taeha.wheelloader.fseries_monitor.main.CommService;
 import taeha.wheelloader.fseries_monitor.main.Home;
 import taeha.wheelloader.fseries_monitor.main.ParentFragment;
 import taeha.wheelloader.fseries_monitor.main.R;
+import taeha.wheelloader.fseries_monitor.main.TextFitTextView;
 import taeha.wheelloader.fseries_monitor.main.R.string;
 import taeha.wheelloader.fseries_monitor.menu.MenuBodyList_ParentFragment;
 import android.app.ActivityManager;
@@ -35,8 +37,8 @@ public class MenuMultimediaFragment extends ParentFragment{
 	
 	//////////////////////////////////////////////////
 	//RESOURCE////////////////////////////////////////
-	TextView textViewMediaPlayer;
-	TextView textViewSmartTerminal;
+	TextFitTextView textViewMediaPlayer;
+	TextFitTextView textViewSmartTerminal;
 	//////////////////////////////////////////////////
 	
 	//VALUABLE////////////////////////////////////////
@@ -69,7 +71,7 @@ public class MenuMultimediaFragment extends ParentFragment{
 
 		ParentActivity._MenuBaseFragment._MenuListTitleFragment.setBackButtonEnable(false);
 		ParentActivity.ScreenIndex = ParentActivity.SCREEN_STATE_MENU_MULTIMEDIA_TOP;
-		ParentActivity._MenuBaseFragment._MenuListTitleFragment.SetTitleText(ParentActivity.getResources().getString(R.string.Multimedia));
+		ParentActivity._MenuBaseFragment._MenuListTitleFragment.SetTitleText(ParentActivity.getResources().getString(R.string.Multimedia), 199);
 		CursurDisplay(CursurIndex);
 		return mRoot;
 	}
@@ -80,8 +82,10 @@ public class MenuMultimediaFragment extends ParentFragment{
 	protected void InitResource() {
 		// TODO Auto-generated method stub
 		
-		textViewMediaPlayer = (TextView)mRoot.findViewById(R.id.textView_menu_body_multimedia);
-		textViewSmartTerminal = (TextView)mRoot.findViewById(R.id.textView_menu_body_smartterminal);
+		textViewMediaPlayer = (TextFitTextView)mRoot.findViewById(R.id.textView_menu_body_multimedia);
+		textViewMediaPlayer.setText(getString(ParentActivity.getString(R.string.Multimedia), 199));
+		textViewSmartTerminal = (TextFitTextView)mRoot.findViewById(R.id.textView_menu_body_smartterminal);
+		textViewSmartTerminal.setText(getString(ParentActivity.getString(R.string.Smart_Terminal), 431));
 	}
 
 	protected void InitValuables() {
@@ -255,14 +259,16 @@ public class MenuMultimediaFragment extends ParentFragment{
 		}else{
 			String service = Context.WIFI_SERVICE;
 			final WifiManager wifi = (WifiManager)ParentActivity.getSystemService(service);
-			if(wifi.isWifiEnabled()){
-				wifi.setWifiEnabled(false);
-				synchronized (wifi) {
-					try {
-						wifi.wait(500);
-					} catch (InterruptedException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
+			if(!ParentActivity.CheckRunningApp("com.powerone.wfd.sink")){
+				if(wifi.isWifiEnabled()){
+					wifi.setWifiEnabled(false);
+					synchronized (wifi) {
+						try {
+							wifi.wait(500);
+						} catch (InterruptedException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
 					}
 				}
 			}
@@ -272,6 +278,11 @@ public class MenuMultimediaFragment extends ParentFragment{
 				ParentActivity.startActivity(intent);
 				CAN1Comm.SetMultimediaFlag(false);
 				ParentActivity.StartAlwaysOntopService();
+				if(CommService.pi != null){
+					if(CommService.pi.versionName.equals("1.0.6BF")){
+						CAN1Comm.setRunningCheckMiracast(true);
+					}					
+				}
 				ParentActivity.StartCheckSmartTerminalTimer();
 			}
 		}		
@@ -296,5 +307,4 @@ public class MenuMultimediaFragment extends ParentFragment{
 	/////////////////////////////////////////////////////////////////////
 	
 	/////////////////////////////////////////////////////////////////////
-
 }

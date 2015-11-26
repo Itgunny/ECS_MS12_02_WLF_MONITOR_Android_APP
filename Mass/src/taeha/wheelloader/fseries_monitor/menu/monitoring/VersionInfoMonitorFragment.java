@@ -3,6 +3,7 @@ package taeha.wheelloader.fseries_monitor.menu.monitoring;
 import taeha.wheelloader.fseries_monitor.main.Home;
 import taeha.wheelloader.fseries_monitor.main.R;
 import taeha.wheelloader.fseries_monitor.main.R.string;
+import taeha.wheelloader.fseries_monitor.main.TextFitTextView;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
@@ -51,7 +52,7 @@ public class VersionInfoMonitorFragment extends VersionInfoDetailFragment{
 		
 		ParentActivity.ScreenIndex = Home.SCREEN_STATE_MENU_MONITORING_VERSIONINFO_MONITOR;
 		ParentActivity._MenuBaseFragment._MenuInterTitleFragment.SetTitleText(ParentActivity.getResources().getString(R.string.Machine_Information)
-				+ " - " + ParentActivity.getResources().getString(R.string.Monitor));
+				+ " - " + ParentActivity.getResources().getString(R.string.Monitor), 318, 268);
 		return mRoot;
 	}
 	@Override
@@ -86,11 +87,11 @@ public class VersionInfoMonitorFragment extends VersionInfoDetailFragment{
 //		adapter.addItem(new IconTextItemVersion(ParentActivity.getResources().getDrawable(R.drawable.menu_management_machine_monitoring_bg_dark),null,
 //				ParentActivity.getResources().getString(string.Firmware_Version),"" , ""));
 		adapter.addItem(new IconTextItemVersion(ParentActivity.getResources().getDrawable(R.drawable.menu_management_machine_monitoring_bg_light),null,
-				ParentActivity.getResources().getString(string.Program_Version),"" , ""));
+				getString(ParentActivity.getResources().getString(string.Program_Version), 277) ,"" , ""));
 		adapter.addItem(new IconTextItemVersion(ParentActivity.getResources().getDrawable(R.drawable.menu_management_machine_monitoring_bg_dark),null,
-				ParentActivity.getResources().getString(string.Firmware_Version),"" , ""));
+				getString(ParentActivity.getResources().getString(string.Firmware_Version), 289), "" , ""));
 		adapter.addItem(new IconTextItemVersion(ParentActivity.getResources().getDrawable(R.drawable.menu_management_machine_monitoring_bg_light),null,
-				ParentActivity.getResources().getString(string.Serial_Number),"" , ""));
+				getString(ParentActivity.getResources().getString(string.Serial_Number), 278),"" , ""));
 		
 		
 	
@@ -102,7 +103,7 @@ public class VersionInfoMonitorFragment extends VersionInfoDetailFragment{
 	@Override
 	public void ShowHiddenPage(){
 		adapter.addItem(new IconTextItemVersion(ParentActivity.getResources().getDrawable(R.drawable.menu_management_machine_monitoring_bg_dark),null,
-				ParentActivity.getResources().getString(string.Manufacturer),"" , ""));
+				getString(ParentActivity.getResources().getString(string.Manufacturer), 279),"" , ""));
 	}
 	@Override
 	protected void GetDataFromNative() {

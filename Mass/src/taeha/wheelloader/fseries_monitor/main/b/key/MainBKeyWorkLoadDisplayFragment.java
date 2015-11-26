@@ -16,6 +16,7 @@ import taeha.wheelloader.fseries_monitor.main.CAN1CommManager;
 import taeha.wheelloader.fseries_monitor.main.Home;
 import taeha.wheelloader.fseries_monitor.main.ParentFragment;
 import taeha.wheelloader.fseries_monitor.main.R;
+import taeha.wheelloader.fseries_monitor.main.TextFitTextView;
 
 public class MainBKeyWorkLoadDisplayFragment extends ParentFragment{
 	//CONSTANT////////////////////////////////////////
@@ -27,6 +28,8 @@ public class MainBKeyWorkLoadDisplayFragment extends ParentFragment{
 	RadioButton radioTotalB;
 	RadioButton radioTotalC;
 	
+	TextFitTextView	textViewTitle;
+	TextFitTextView	textViewOK;
 	ImageButton imgbtnOK;
 	
 	//TextView textViewInitialization;
@@ -83,12 +86,24 @@ public class MainBKeyWorkLoadDisplayFragment extends ParentFragment{
 	protected void InitResource() {
 		// TODO Auto-generated method stub
 		radioDaily = (RadioButton)mRoot.findViewById(R.id.radioButton_key_main_b_workload_display_daily);
+		radioDaily.setText(getString(ParentActivity.getResources().getString(R.string.Daily), 173));
+		ParentActivity.setMarqueeRadio(radioDaily);
 		radioTotalA = (RadioButton)mRoot.findViewById(R.id.radioButton_key_main_b_workload_display_totala);
+		radioTotalA.setText(getString(ParentActivity.getResources().getString(R.string.Total_A), 174));
+		ParentActivity.setMarqueeRadio(radioTotalA);
 		radioTotalB = (RadioButton)mRoot.findViewById(R.id.radioButton_key_main_b_workload_display_totalb);
+		radioTotalB.setText(getString(ParentActivity.getResources().getString(R.string.Total_B), 175));
+		ParentActivity.setMarqueeRadio(radioTotalB);
 		radioTotalC = (RadioButton)mRoot.findViewById(R.id.radioButton_key_main_b_workload_display_totalc);
+		radioTotalC.setText(getString(ParentActivity.getResources().getString(R.string.Total_C), 176));
+		ParentActivity.setMarqueeRadio(radioTotalC);
 			
 		
 //		textViewInitialization = (TextView)mRoot.findViewById(R.id.textView_key_main_b_workload_display_init);
+		textViewTitle = (TextFitTextView)mRoot.findViewById(R.id.textView_key_main_b_workload_display_title);
+		textViewTitle.setText(getString(ParentActivity.getResources().getString(R.string.Weighing_Display), 170));
+		textViewOK = (TextFitTextView)mRoot.findViewById(R.id.textView_key_main_b_workload_display_low_ok);
+		textViewOK.setText(getString(ParentActivity.getResources().getString(R.string.OK), 15));
 		imgbtnOK = (ImageButton)mRoot.findViewById(R.id.ImageButton_key_main_b_workload_display_low_ok);
 	}
 	

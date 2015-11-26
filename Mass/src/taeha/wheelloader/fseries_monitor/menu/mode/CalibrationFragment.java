@@ -59,7 +59,7 @@ public class CalibrationFragment extends MenuBodyList_ParentFragment{
 		ParentActivity._MenuBaseFragment._MenuListTitleFragment.setBackButtonEnable(true);
 		ParentActivity.OldScreenIndex = Home.SCREEN_STATE_MENU_MODE_ETC_CALIBRATION_TOP;
 		ParentActivity.ScreenIndex = Home.SCREEN_STATE_MENU_MODE_ETC_CALIBRATION_TOP;
-		ParentActivity._MenuBaseFragment._MenuListTitleFragment.SetTitleText(ParentActivity.getResources().getString(R.string.Calibration));
+		ParentActivity._MenuBaseFragment._MenuListTitleFragment.SetTitleText(ParentActivity.getResources().getString(R.string.Calibration), 320);
 		CursurDisplay(CursurIndex);
 
 		return mRoot;
@@ -91,10 +91,10 @@ public class CalibrationFragment extends MenuBodyList_ParentFragment{
 		setClickableList4(true);
 
 		
-		setListTitle1(ParentActivity.getResources().getString(string.Boom_Bucket_Angle_Calibration));
-		setListTitle2(ParentActivity.getResources().getString(string.Boom_Pressure_Calibration));
-		setListTitle3(ParentActivity.getResources().getString(string.Brake_Pedal_Sensor_Calibration));
-		setListTitle4(ParentActivity.getResources().getString(string.AEB));
+		setListTitle1(ParentActivity.getResources().getString(string.Boom_Bucket_Angle_Calibration), 342);
+		setListTitle2(ParentActivity.getResources().getString(string.Boom_Pressure_Calibration), 172);
+		setListTitle3(ParentActivity.getResources().getString(string.Brake_Pedal_Sensor_Calibration), 343);
+		setListTitle4(ParentActivity.getResources().getString(string.AEB), 344);
 	}
 
 	//////////////////////////////////////////////////////////////////////

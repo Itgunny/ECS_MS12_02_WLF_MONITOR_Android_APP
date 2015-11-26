@@ -20,6 +20,7 @@ import taeha.wheelloader.fseries_monitor.main.ParentPopup;
 import taeha.wheelloader.fseries_monitor.main.R;
 import taeha.wheelloader.fseries_monitor.main.Home.SeatBeltTimerClass;
 import taeha.wheelloader.fseries_monitor.main.R.string;
+import taeha.wheelloader.fseries_monitor.main.TextFitTextView;
 import taeha.wheelloader.fseries_monitor.popup.SpeedometerInitPopup.PopupOffTimerClass;
 
 public class FuelInitalPopup extends ParentPopup{
@@ -31,8 +32,8 @@ public class FuelInitalPopup extends ParentPopup{
 	ImageButton imgbtnCancel;
 	
 	TextView textViewTitle;
-	TextView textViewOK;
-	TextView textViewCancel;
+	TextFitTextView textViewOK;
+	TextFitTextView textViewCancel;
 	//////////////////////////////////////////////////
 	
 	//VALUABLE////////////////////////////////////////
@@ -94,24 +95,19 @@ public class FuelInitalPopup extends ParentPopup{
 				// Crash 뜨는 현상으로 flag로 변경
 				switch (SelectMode) {
 				case CAN1CommManager.DATA_STATE_HOURLY_FUEL_RATE_INFO_CLEAR:
-					//ParentActivity._MenuBaseFragment._FuelHistoryHourlyRecordFragment.CursurDisplay(2);
-					ParentActivity._MenuBaseFragment._FuelHistoryHourlyRecordFragment.bCursurIndex = false;
+					ParentActivity._MenuBaseFragment._FuelHistoryHourlyRecordFragment.CursurDisplay(2);
 					break;
 				case CAN1CommManager.DATA_STATE_DAILY_FUEL_RATE_INFO_CLEAR:
-					//ParentActivity._MenuBaseFragment._FuelHistoryDailyRecordFragment.CursurDisplay(2);
-					ParentActivity._MenuBaseFragment._FuelHistoryDailyRecordFragment.bCursurIndex = false;
+					ParentActivity._MenuBaseFragment._FuelHistoryDailyRecordFragment.CursurDisplay(2);
 					break;
 				case CAN1CommManager.DATA_STATE_MODE_FUEL_RATE_INFO_CLEAR:
-					//ParentActivity._MenuBaseFragment._FuelHistoryModeRecordFragment.CursurDisplay(2);
-					ParentActivity._MenuBaseFragment._FuelHistoryModeRecordFragment.bCursurIndex = false;
+					ParentActivity._MenuBaseFragment._FuelHistoryModeRecordFragment.CursurDisplay(2);
 					break;
 				case CAN1CommManager.DATA_STATE_AVERAGE_FUEL_RATE_INFO_CLEAR:
-					//ParentActivity._MenuBaseFragment._FuelHistoryGeneralRecordFragment.CursurDisplay(1);
-					ParentActivity._MenuBaseFragment._FuelHistoryGeneralRecordFragment.bCursurIndex = false;
+					ParentActivity._MenuBaseFragment._FuelHistoryGeneralRecordFragment.CursurDisplay(1);
 					break;
 				case CAN1CommManager.DATA_STATE_A_DAYS_FUEL_USED_CLEAR:
-					//ParentActivity._MenuBaseFragment._FuelHistoryGeneralRecordFragment.CursurDisplay(2);
-					ParentActivity._MenuBaseFragment._FuelHistoryGeneralRecordFragment.bCursurIndex = false;
+					ParentActivity._MenuBaseFragment._FuelHistoryGeneralRecordFragment.CursurDisplay(2);
 					break;
 				default:
 					break;		
@@ -130,9 +126,12 @@ public class FuelInitalPopup extends ParentPopup{
 		imgbtnCancel = (ImageButton)mRoot.findViewById(R.id.imageButton_popup_fuelinfo_inital_cancel);
 	
 		textViewTitle = (TextView)mRoot.findViewById(R.id.textView_popup_fuelinfo_inital_title);
+		textViewTitle.setText(getString(ParentActivity.getResources().getString(R.string.Initialize_), 51));
 
-		textViewOK = (TextView)mRoot.findViewById(R.id.textView_popup_fuelinfo_inital_ok);
-		textViewCancel = (TextView)mRoot.findViewById(R.id.textView_popup_fuelinfo_inital_cancel);
+		textViewOK = (TextFitTextView)mRoot.findViewById(R.id.textView_popup_fuelinfo_inital_ok);
+		textViewOK.setText(getString(ParentActivity.getResources().getString(R.string.OK), 15));
+		textViewCancel = (TextFitTextView)mRoot.findViewById(R.id.textView_popup_fuelinfo_inital_cancel);
+		textViewCancel.setText(getString(ParentActivity.getResources().getString(R.string.Cancel), 16));
 		
 		imgbtnOK.setVisibility(View.VISIBLE);
 		imgbtnCancel.setVisibility(View.VISIBLE);
@@ -182,7 +181,7 @@ public class FuelInitalPopup extends ParentPopup{
 		imgbtnCancel.setVisibility(View.INVISIBLE);
 		textViewOK.setVisibility(View.INVISIBLE);
 		textViewCancel.setVisibility(View.INVISIBLE);
-		textViewTitle.setText(ParentActivity.getResources().getString(string.Waiting_for_initialization));
+		textViewTitle.setText(getString(ParentActivity.getResources().getString(string.Waiting_for_initialization), 52));
 	}	
 	public void ClickCancel(){
 		this.dismiss();
@@ -198,24 +197,24 @@ public class FuelInitalPopup extends ParentPopup{
 		
 		switch (Index) {
 		case CAN1CommManager.DATA_STATE_HOURLY_FUEL_RATE_INFO_CLEAR:
-			textViewTitle.setText(ParentActivity.getResources().getString(string.Initialize_) 
-					+ "\r\n(" +ParentActivity.getResources().getString(string.Hourly_Record) +")");
+			textViewTitle.setText(getString(ParentActivity.getResources().getString(string.Initialize_), 51) 
+					+ "\r\n(" +getString(ParentActivity.getResources().getString(string.Hourly_Record), 315) +")");
 			break;
 		case CAN1CommManager.DATA_STATE_DAILY_FUEL_RATE_INFO_CLEAR:
-			textViewTitle.setText(ParentActivity.getResources().getString(string.Initialize_) 
-					+ "\r\n(" +ParentActivity.getResources().getString(string.Daily_Record) +")");
+			textViewTitle.setText(getString(ParentActivity.getResources().getString(string.Initialize_), 51) 
+					+ "\r\n(" +getString(ParentActivity.getResources().getString(string.Daily_Record), 316) +")");
 			break;
 		case CAN1CommManager.DATA_STATE_MODE_FUEL_RATE_INFO_CLEAR:
-			textViewTitle.setText(ParentActivity.getResources().getString(string.Initialize_) 
-					+ "\r\n(" +ParentActivity.getResources().getString(string.Mode_Record) +")");
+			textViewTitle.setText(getString(ParentActivity.getResources().getString(string.Initialize_), 51)  
+					+ "\r\n(" +getString(ParentActivity.getResources().getString(string.Mode_Record), 317) +")");
 			break;
 		case CAN1CommManager.DATA_STATE_AVERAGE_FUEL_RATE_INFO_CLEAR:
-			textViewTitle.setText(ParentActivity.getResources().getString(string.Initialize_) 
-					+ "\r\n(" +ParentActivity.getResources().getString(string.Average_Fuel_Rate) +")");
+			textViewTitle.setText(getString(ParentActivity.getResources().getString(string.Initialize_), 51) 
+					+ "\r\n(" +getString(ParentActivity.getResources().getString(string.Average_Fuel_Rate), 108) +")");
 			break;
 		case CAN1CommManager.DATA_STATE_A_DAYS_FUEL_USED_CLEAR:
-			textViewTitle.setText(ParentActivity.getResources().getString(string.Initialize_) 
-					+ "\r\n(" +ParentActivity.getResources().getString(string.A_Days_Fuel_Used) +")");
+			textViewTitle.setText(getString(ParentActivity.getResources().getString(string.Initialize_), 51) 
+					+ "\r\n(" +getString(ParentActivity.getResources().getString(string.A_Days_Fuel_Used), 147) +")");
 			break;
 		default:
 			break;

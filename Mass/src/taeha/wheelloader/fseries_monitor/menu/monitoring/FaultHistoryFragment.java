@@ -58,7 +58,7 @@ public class FaultHistoryFragment extends MenuBodyList_ParentFragment{
 		ParentActivity._MenuBaseFragment._MenuListTitleFragment.setBackButtonEnable(true);
 		ParentActivity.OldScreenIndex = ParentActivity.SCREEN_STATE_MENU_MONITORING_FAULTHISTORY_TOP;
 		ParentActivity.ScreenIndex = ParentActivity.SCREEN_STATE_MENU_MONITORING_FAULTHISTORY_TOP;
-		ParentActivity._MenuBaseFragment._MenuListTitleFragment.SetTitleText(ParentActivity.getResources().getString(R.string.Fault_History));
+		ParentActivity._MenuBaseFragment._MenuListTitleFragment.SetTitleText(ParentActivity.getResources().getString(R.string.Fault_History), 255);
 		CursurDisplay(CursurIndex);
 		return mRoot;
 	}
@@ -87,8 +87,8 @@ public class FaultHistoryFragment extends MenuBodyList_ParentFragment{
 		setClickableList2(true);
 
 		
-		setListTitle1(ParentActivity.getResources().getString(string.Active_Fault));
-		setListTitle2(ParentActivity.getResources().getString(string.Logged_Fault));
+		setListTitle1(ParentActivity.getResources().getString(string.Active_Fault), 17);
+		setListTitle2(ParentActivity.getResources().getString(string.Logged_Fault), 264);
 	}
 
 	//////////////////////////////////////////////////////////////////////

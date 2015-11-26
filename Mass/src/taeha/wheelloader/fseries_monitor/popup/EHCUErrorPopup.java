@@ -109,8 +109,10 @@ public class EHCUErrorPopup extends ParentPopup{
 	protected void InitResource() {
 		// TODO Auto-generated method stub
 		textViewTitle = (TextView)mRoot.findViewById(R.id.textView_popup_ehcu_err_title);	// ++, --, 150209 bwk
+		textViewTitle.setText(getString(ParentActivity.getResources().getString(R.string.Check_joystick_steering_enable_fail_condition), 70));
 		textViewData = (TextView)mRoot.findViewById(R.id.textView_popup_ehcu_err_data);
 		textViewOK = (TextView)mRoot.findViewById(R.id.textView_popup_ehcu_err_ok);
+		textViewOK.setText(getString(ParentActivity.getResources().getString(R.string.OK), 15));
 	}
 
 	@Override
@@ -197,8 +199,8 @@ public class EHCUErrorPopup extends ParentPopup{
 		
 		if(((Data & 0x0004)>>2) == 1)
 		{
-			textViewTitle.setText(ParentActivity.getResources().getString(string.Initial_Para_Error_Found));
-			str = "\n" + ParentActivity.getResources().getString(string.Please_Reset_Power);
+			textViewTitle.setText(getString(ParentActivity.getResources().getString(string.Initial_Para_Error_Found), 79));
+			str = "\n" + getString(ParentActivity.getResources().getString(string.Please_Reset_Power), 80);
 			Safety_CPU_Error = 1;
 			textViewOK.setVisibility(View.INVISIBLE);
 			textViewData.setTextColor(ParentActivity.getResources().getColor(color.red));
@@ -206,27 +208,27 @@ public class EHCUErrorPopup extends ParentPopup{
 		}
 		else
 		{
-			textViewTitle.setText(ParentActivity.getResources().getString(string.Check_joystick_steering_enable_fail_condition));
+			textViewTitle.setText(getString(ParentActivity.getResources().getString(string.Check_joystick_steering_enable_fail_condition), 70));
 			if(((Data & 0x000F)) != 0){
-				str += "\n" + ParentActivity.getResources().getString(string.Check_EHCU_Fault_Code);
+				str += "\n" + getString(ParentActivity.getResources().getString(string.Check_EHCU_Fault_Code), 71);
 			}
 			if(((Data & 0x0100) >> 8)== 1){
-				str += "\n" + ParentActivity.getResources().getString(string.Check_Steering_Joystick_Position);
+				str += "\n" + getString(ParentActivity.getResources().getString(string.Check_Steering_Joystick_Position), 72);
 			}
 			if(((Data & 0x0200) >> 9) == 1){
-				str += "\n" + ParentActivity.getResources().getString(string.Check_Seat_Switch_On);
+				str += "\n" + getString(ParentActivity.getResources().getString(string.Check_Seat_Switch_On), 73);
 			}
 			if(((Data & 0x0400) >> 10) == 1){
-				str += "\n" + ParentActivity.getResources().getString(string.Check_Armrest_Swtich_On);
+				str += "\n" + getString(ParentActivity.getResources().getString(string.Check_Armrest_Swtich_On), 74);
 			}
 			if(((Data & 0x0800) >> 11) == 1){
-				str += "\n" + ParentActivity.getResources().getString(string.Check_Engine_Run);
+				str += "\n" + getString(ParentActivity.getResources().getString(string.Check_Engine_Run), 75);
 			}
 			if(((Data & 0x1000) >> 12) == 1){
-				str += "\n" + ParentActivity.getResources().getString(string.Check_Machine_Stop);
+				str += "\n" + getString(ParentActivity.getResources().getString(string.Check_Machine_Stop), 76);
 			}	
 			if(((Data & 0x2000) >> 13) == 1){
-				str += "\n" + ParentActivity.getResources().getString(string.Check_TM_Control_Selection);
+				str += "\n" + getString(ParentActivity.getResources().getString(string.Check_TM_Control_Selection), 77);
 			}
 			textViewOK.setVisibility(View.VISIBLE);
 		}
@@ -256,8 +258,8 @@ public class EHCUErrorPopup extends ParentPopup{
 		
 		if(((Data & 0x0004)>>2) == 1)
 		{
-			textViewTitle.setText(ParentActivity.getResources().getString(string.Initial_Para_Error_Found));
-			str = "\n" + ParentActivity.getResources().getString(string.Please_Reset_Power);
+			textViewTitle.setText(getString(ParentActivity.getResources().getString(string.Initial_Para_Error_Found), 79));
+			str = "\n" + getString(ParentActivity.getResources().getString(string.Please_Reset_Power), 80);
 			Safety_CPU_Error = 1;
 			textViewOK.setVisibility(View.INVISIBLE);
 			textViewData.setTextColor(ParentActivity.getResources().getColor(color.red));
@@ -272,27 +274,27 @@ public class EHCUErrorPopup extends ParentPopup{
 		else
 		// --, 150210 bwk
 		{
-			textViewTitle.setText(ParentActivity.getResources().getString(string.Check_joystick_steering_enable_fail_condition));
+			textViewTitle.setText(getString(ParentActivity.getResources().getString(string.Check_joystick_steering_enable_fail_condition), 70));
 			if(((Data & 0x000F)) != 0){
-				str += "\n" + ParentActivity.getResources().getString(string.Check_EHCU_Fault_Code);
+				str += "\n" + getString(ParentActivity.getResources().getString(string.Check_EHCU_Fault_Code), 71);
 			}
 			if(((Data & 0x0100) >> 8)== 1){
-				str += "\n" + ParentActivity.getResources().getString(string.Check_Steering_Joystick_Position);
+				str += "\n" + getString(ParentActivity.getResources().getString(string.Check_Steering_Joystick_Position), 72);
 			}
 			if(((Data & 0x0200) >> 9) == 1){
-				str += "\n" + ParentActivity.getResources().getString(string.Check_Seat_Switch_On);
+				str += "\n" + getString(ParentActivity.getResources().getString(string.Check_Seat_Switch_On), 73);
 			}
 			if(((Data & 0x0400) >> 10) == 1){
-				str += "\n" + ParentActivity.getResources().getString(string.Check_Armrest_Swtich_On);
+				str += "\n" + getString(ParentActivity.getResources().getString(string.Check_Armrest_Swtich_On), 74);
 			}
 			if(((Data & 0x0800) >> 11) == 1){
-				str += "\n" + ParentActivity.getResources().getString(string.Check_Engine_Run);
+				str += "\n" + getString(ParentActivity.getResources().getString(string.Check_Engine_Run), 75);
 			}
 			if(((Data & 0x1000) >> 12) == 1){
-				str += "\n" + ParentActivity.getResources().getString(string.Check_Machine_Stop);
+				str += "\n" + getString(ParentActivity.getResources().getString(string.Check_Machine_Stop), 76);
 			}	
 			if(((Data & 0x2000) >> 13) == 1){
-				str += "\n" + ParentActivity.getResources().getString(string.Check_TM_Control_Selection);
+				str += "\n" + getString(ParentActivity.getResources().getString(string.Check_TM_Control_Selection), 77);
 			}
 			textViewOK.setVisibility(View.VISIBLE);
 		}

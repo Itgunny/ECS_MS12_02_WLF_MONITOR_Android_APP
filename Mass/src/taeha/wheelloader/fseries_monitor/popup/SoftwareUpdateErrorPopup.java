@@ -4,6 +4,8 @@ package taeha.wheelloader.fseries_monitor.popup;
 import taeha.wheelloader.fseries_monitor.main.Home;
 import taeha.wheelloader.fseries_monitor.main.ParentPopup;
 import taeha.wheelloader.fseries_monitor.main.R;
+import taeha.wheelloader.fseries_monitor.main.R.string;
+import taeha.wheelloader.fseries_monitor.main.TextFitTextView;
 import android.content.Context;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
@@ -21,7 +23,7 @@ public class SoftwareUpdateErrorPopup extends ParentPopup{
 	//RESOURCE////////////////////////////////////////
 
 	ImageButton imgbtnOK;
-
+	TextFitTextView	textViewOK;
 
 	TextView textViewTitle;
 
@@ -75,6 +77,12 @@ public class SoftwareUpdateErrorPopup extends ParentPopup{
 	protected void InitResource() {
 		// TODO Auto-generated method stub
 		imgbtnOK = (ImageButton)mRoot.findViewById(R.id.imageButton_popup_softwareupdate_error_ok);
+		
+		textViewTitle = (TextView)mRoot.findViewById(R.id.textView_popup_softwareupdate_error_title);
+		textViewTitle.setText(getString(ParentActivity.getResources().getString(string.Software_Update_Warning), 411));
+		
+		textViewOK = (TextFitTextView)mRoot.findViewById(R.id.textView_popup_softwareupdate_error_ok);
+		textViewOK.setText(getString(ParentActivity.getResources().getString(string.OK), 15));
 	}
 
 	@Override

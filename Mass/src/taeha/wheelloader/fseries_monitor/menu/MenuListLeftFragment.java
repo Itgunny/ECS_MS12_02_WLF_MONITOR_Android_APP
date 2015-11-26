@@ -8,6 +8,8 @@ import taeha.wheelloader.fseries_monitor.animation.LeftRightShiftAnimation;
 import taeha.wheelloader.fseries_monitor.main.Home;
 import taeha.wheelloader.fseries_monitor.main.ParentFragment;
 import taeha.wheelloader.fseries_monitor.main.R;
+import taeha.wheelloader.fseries_monitor.main.TextFitTextView;
+import taeha.wheelloader.fseries_monitor.main.R.string;
 import taeha.wheelloader.fseries_monitor.menu.mode.MenuModeFragment;
 import android.os.Bundle;
 import android.text.Layout;
@@ -39,11 +41,11 @@ public class MenuListLeftFragment extends ParentFragment{
 	ImageView imgViewPreference;
 	ImageView imgViewMultimedia;
 	
-	TextView textViewMode;
-	TextView textViewMonitoring;
-	TextView textViewManagement;
-	TextView textViewPreference;
-	TextView textViewMultimedia;
+	TextFitTextView textViewMode;
+	TextFitTextView textViewMonitoring;
+	TextFitTextView textViewManagement;
+	TextFitTextView textViewPreference;
+	TextFitTextView textViewMultimedia;
 	//////////////////////////////////////////////////
 	
 	//VALUABLE////////////////////////////////////////
@@ -101,11 +103,19 @@ public class MenuListLeftFragment extends ParentFragment{
 		imgViewPreference = (ImageView)mRoot.findViewById(R.id.imageView_menu_list_left_preference);
 		imgViewMultimedia = (ImageView)mRoot.findViewById(R.id.imageView_menu_list_left_multimedia);
 		
-		textViewMode = (TextView)mRoot.findViewById(R.id.textView_menu_list_left_mode);
-		textViewMonitoring = (TextView)mRoot.findViewById(R.id.textView_menu_list_left_monitoring);
-		textViewManagement = (TextView)mRoot.findViewById(R.id.textView_menu_list_left_management);
-		textViewPreference = (TextView)mRoot.findViewById(R.id.textView_menu_list_left_preference);
-		textViewMultimedia = (TextView)mRoot.findViewById(R.id.textView_menu_list_left_multimedia);
+		textViewMode = (TextFitTextView)mRoot.findViewById(R.id.textView_menu_list_left_mode);
+		SetTitleText(textViewMode, ParentActivity.getResources().getString(string.Mode), 195);
+		
+		textViewMonitoring = (TextFitTextView)mRoot.findViewById(R.id.textView_menu_list_left_monitoring);
+		SetTitleText(textViewMonitoring, ParentActivity.getResources().getString(string.Monitoring), 196);
+		
+		
+		textViewManagement = (TextFitTextView)mRoot.findViewById(R.id.textView_menu_list_left_management);
+		SetTitleText(textViewManagement, ParentActivity.getResources().getString(string.Management), 197);
+		textViewPreference = (TextFitTextView)mRoot.findViewById(R.id.textView_menu_list_left_preference);
+		SetTitleText(textViewPreference, ParentActivity.getResources().getString(string.Preference), 198);
+		textViewMultimedia = (TextFitTextView)mRoot.findViewById(R.id.textView_menu_list_left_multimedia);
+		SetTitleText(textViewMultimedia, ParentActivity.getResources().getString(string.Multimedia), 199);
 
 	}
 	
@@ -340,6 +350,13 @@ public class MenuListLeftFragment extends ParentFragment{
 	public void ClickEnter(){
 	
 		
+	}
+	public void SetTitleText(TextView textView, String str, int index){
+		if(ParentActivity.langDb.findStrGetString(index, ParentActivity.LanguageIndex) == null){
+			textView.setText(str);
+		}else {
+			textView.setText(ParentActivity.langDb.findStrGetString(index, ParentActivity.LanguageIndex));
+		}
 	}
 	/////////////////////////////////////////////////////////////////////
 }

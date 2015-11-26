@@ -9,7 +9,7 @@ import taeha.wheelloader.fseries_monitor.main.CAN1CommManager;
 import taeha.wheelloader.fseries_monitor.main.Home;
 import taeha.wheelloader.fseries_monitor.main.ParentFragment;
 import taeha.wheelloader.fseries_monitor.main.R;
-import taeha.wheelloader.fseries_monitor.menu.PasswordFragment;
+import taeha.wheelloader.fseries_monitor.main.TextFitTextView;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -31,10 +31,12 @@ public class EngineSpeedFragment extends ParentFragment{
 	//////////////////////////////////////////////////
 	//RESOURCE////////////////////////////////////////
 	ImageButton imgbtnOK;
+	TextFitTextView textViewOK;
 	ImageButton imgbtnPlus;
 	ImageButton imgbtnMinus;
 	
-	TextView	textViewRPM;
+	TextFitTextView	textViewRPMUnit;
+	TextFitTextView	textViewRPM;
 	//////////////////////////////////////////////////
 	
 	//VALUABLE////////////////////////////////////////
@@ -69,7 +71,7 @@ public class EngineSpeedFragment extends ParentFragment{
 		
 		CursurDisplay(CursurIndex);
 		ParentActivity.ScreenIndex = ParentActivity.SCREEN_STATE_MENU_MODE_ENGINETM_ENGINESETTING_SPEED;
-		ParentActivity._MenuBaseFragment._MenuInterTitleFragment.SetTitleText(ParentActivity.getResources().getString(R.string.Engine_Speed));
+		ParentActivity._MenuBaseFragment._MenuInterTitleFragment.SetTitleText(ParentActivity.getResources().getString(R.string.Engine_Speed), 208);
 		
 		HandleCursurDisplay = new Handler() {
 			@Override
@@ -93,10 +95,15 @@ public class EngineSpeedFragment extends ParentFragment{
 	protected void InitResource() {
 		// TODO Auto-generated method stub
 		imgbtnOK = (ImageButton)mRoot.findViewById(R.id.ImageButton_menu_body_mode_enginespeed_low_ok);
+		textViewOK = (TextFitTextView)mRoot.findViewById(R.id.textView_menu_body_mode_enginespeed_low_ok);
+		textViewOK.setText(getString(ParentActivity.getResources().getString(R.string.OK), 15)); 
+		
 		imgbtnPlus = (ImageButton)mRoot.findViewById(R.id.imageButton_menu_body_mode_enginespeed_plus);
 		imgbtnMinus = (ImageButton)mRoot.findViewById(R.id.imageButton_menu_body_mode_enginespeed_minus);
 		
-		textViewRPM = (TextView)mRoot.findViewById(R.id.textView_menu_body_mode_enginespeed_data);
+		textViewRPMUnit = (TextFitTextView)mRoot.findViewById(R.id.textView_menu_body_mode_enginespeed_unit);
+		textViewRPMUnit.setText(getString(ParentActivity.getResources().getString(R.string.rpm),34)); 
+		textViewRPM = (TextFitTextView)mRoot.findViewById(R.id.textView_menu_body_mode_enginespeed_data);
 
 	
 	}
@@ -249,5 +256,4 @@ public class EngineSpeedFragment extends ParentFragment{
 		textViewRPM.setText(Integer.toString(Data));
 	}
 	/////////////////////////////////////////////////////////////////////
-	
 }

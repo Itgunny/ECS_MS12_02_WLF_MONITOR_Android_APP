@@ -38,6 +38,8 @@
                 android:layout_width="120dp"
                 android:layout_height="wrap_content"
                 android:button="@drawable/_selector_radio_btn"
+                android:ellipsize="marquee"
+                android:marqueeRepeatLimit="marquee_forever"
                 android:text="@string/Default"
                 android:textColor="@drawable/_selector_radio_txt_white_amber"
                 android:textSize="20sp" />

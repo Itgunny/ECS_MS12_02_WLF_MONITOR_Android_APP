@@ -14,6 +14,8 @@ import taeha.wheelloader.fseries_monitor.main.Home;
 import taeha.wheelloader.fseries_monitor.main.ParentFragment;
 import taeha.wheelloader.fseries_monitor.main.R;
 import taeha.wheelloader.fseries_monitor.main.R.string;
+import taeha.wheelloader.fseries_monitor.main.RadioButtonTextView;
+import taeha.wheelloader.fseries_monitor.main.TextFitTextView;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
@@ -39,12 +41,20 @@ public class MachineSecuritySmartKeyFragment extends ParentFragment{
 	//RESOURCE////////////////////////////////////////
 	ImageButton imgbtnOK;
 	ImageButton imgbtnCancel;
+	TextFitTextView	textViewOK;
+	TextFitTextView	textViewCancel;
 
-	TextView textViewRegistration;
-	TextView textViewDelete;
+	TextFitTextView textViewManageUsage;
+	TextFitTextView textViewManageTag;
+	TextFitTextView textViewManageRegisteredTag;
+	TextFitTextView textViewTagWarnign;
 	
-	RadioButton radioDisable;
-	RadioButton radioEnable;
+	
+	TextFitTextView textViewRegistration;
+	TextFitTextView textViewDelete;
+	
+	RadioButtonTextView radioDisable;
+	RadioButtonTextView radioEnable;
 	
 	TextView textViewTagNum;
 	TextView textViewDetail;
@@ -92,7 +102,7 @@ public class MachineSecuritySmartKeyFragment extends ParentFragment{
 		
 		CursurFirstDisplay(SmartKeyUse);
 		ParentActivity.ScreenIndex = ParentActivity.SCREEN_STATE_MENU_MANAGEMENT_MACHINESECURITY_SMARTKEY;
-		ParentActivity._MenuBaseFragment._MenuInterTitleFragment.SetTitleText(ParentActivity.getResources().getString(R.string.Smart_Key));
+		ParentActivity._MenuBaseFragment._MenuInterTitleFragment.SetTitleText(ParentActivity.getResources().getString(R.string.Smart_Key), 326);
 		HandleCursurDisplay = new Handler() {
 			@Override
 			public void handleMessage(Message msg) {
@@ -119,15 +129,34 @@ public class MachineSecuritySmartKeyFragment extends ParentFragment{
 		// TODO Auto-generated method stub
 		imgbtnOK = (ImageButton)mRoot.findViewById(R.id.ImageButton_menu_body_management_smartkey_low_ok);
 		imgbtnCancel = (ImageButton)mRoot.findViewById(R.id.ImageButton_menu_body_management_smartkey_low_cancel);
+		textViewOK = (TextFitTextView)mRoot.findViewById(R.id.textView_menu_body_management_smartkey_low_ok);
+		textViewOK.setText(getString(ParentActivity.getResources().getString(R.string.OK), 15));
+		textViewCancel = (TextFitTextView)mRoot.findViewById(R.id.textView_menu_body_management_smartkey_low_cancel);
+		textViewCancel.setText(getString(ParentActivity.getResources().getString(R.string.Cancel), 16));
 	
-		textViewRegistration = (TextView)mRoot.findViewById(R.id.textView_menu_body_management_smartkey_tag_registration);
-		textViewDelete = (TextView)mRoot.findViewById(R.id.textView_menu_body_management_smartkey_tag_delete);
+		textViewRegistration = (TextFitTextView)mRoot.findViewById(R.id.textView_menu_body_management_smartkey_tag_registration);
+		textViewRegistration.setText(getString(ParentActivity.getResources().getString(R.string.Registration), 340));
+		textViewDelete = (TextFitTextView)mRoot.findViewById(R.id.textView_menu_body_management_smartkey_tag_delete);
+		textViewDelete.setText(getString(ParentActivity.getResources().getString(R.string.Delete), 341));
 		
-		radioDisable = (RadioButton)mRoot.findViewById(R.id.radioButton_menu_body_management_smartkey_use_diable);
-		radioEnable = (RadioButton)mRoot.findViewById(R.id.radioButton_menu_body_management_smartkey_use_enable);
+		radioDisable = (RadioButtonTextView)mRoot.findViewById(R.id.radioButton_menu_body_management_smartkey_use_diable);
+		radioDisable.setText(getString(ParentActivity.getResources().getString(R.string.Disable), 21));
+		
+		radioEnable = (RadioButtonTextView)mRoot.findViewById(R.id.radioButton_menu_body_management_smartkey_use_enable);
+		radioEnable.setText(getString(ParentActivity.getResources().getString(R.string.Enable), 22));
+		
 		
 		textViewTagNum = (TextView)mRoot.findViewById(R.id.textView_menu_body_management_smartkey_tag_register_num);
 		textViewDetail = (TextView)mRoot.findViewById(R.id.textView_menu_body_management_smartkey_tag_detail);
+		
+		textViewManageUsage = (TextFitTextView)mRoot.findViewById(R.id.textView_menu_body_management_smartkey_use_title);
+		textViewManageUsage.setText(getString(ParentActivity.getResources().getString(R.string.Manage_Usage), 337));
+		textViewManageTag = (TextFitTextView)mRoot.findViewById(R.id.textView_menu_body_management_smartkey_tag_title);
+		textViewManageTag.setText(getString(ParentActivity.getResources().getString(R.string.Manage_Tag), 338));
+		textViewManageRegisteredTag = (TextFitTextView)mRoot.findViewById(R.id.textView_menu_body_management_smartkey_tag_register_title);
+		textViewManageRegisteredTag.setText(getString(ParentActivity.getResources().getString(R.string.Registered_Tag), 339));
+		textViewTagWarnign = (TextFitTextView)mRoot.findViewById(R.id.textView_menu_body_management_smartkey_tag_warning);
+		textViewTagWarnign.setText(getString(ParentActivity.getResources().getString(R.string.Recommend_deleting_unused_tag_for_security_when_you_register_new_tag), 410));
 		
 		layoutContents = (RelativeLayout)mRoot.findViewById(R.id.RelativeLayout_menu_body_management_smartkey_tag_contents);
 	}
@@ -263,14 +292,14 @@ public class MachineSecuritySmartKeyFragment extends ParentFragment{
 		Log.d(TAG,"Smarkt__Registration");
 		ButtonIndex = CAN1CommManager.DATA_INDEX_TAG_REGISTRATION;
 		CAN1Comm.TxCMDToMCU(CAN1CommManager.CMD_SMK, CAN1CommManager.DATA_INDEX_TAG_REGISTRATION);
-		textViewDetail.setText(ParentActivity.getResources().getString(string.Registering));
+		textViewDetail.setText(getString(ParentActivity.getResources().getString(string.Registering), 367));
 		StartManagementDisplayTimer();
 	}
 	public void ClickDelete(){
 		Log.d(TAG,"Smarkt__Delete");
 		ButtonIndex = CAN1CommManager.DATA_INDEX_TAG_ELIMINATION;
 		CAN1Comm.TxCMDToMCU(CAN1CommManager.CMD_SMK, CAN1CommManager.DATA_INDEX_TAG_ELIMINATION);
-		textViewDetail.setText(ParentActivity.getResources().getString(string.Deleting));
+		textViewDetail.setText(getString(ParentActivity.getResources().getString(string.Deleting), 368));
 		StartManagementDisplayTimer();
 	}
 	public void ClickDisable(){
@@ -314,11 +343,11 @@ public class MachineSecuritySmartKeyFragment extends ParentFragment{
 			Log.d(TAG,"Smarkt__ManagementDisplay"+Data);
 			switch (Data) {
 			case CAN1CommManager.DATA_STATE_1ST_TAG_REG_SUCCESS:
-				textViewDetail.setText(ParentActivity.getResources().getString(string._1st_user_tag_registered));
+				textViewDetail.setText(getString(ParentActivity.getResources().getString(string._1st_user_tag_registered), 369));
 				CancelManagementDisplayTimer();
 				break;
 			case CAN1CommManager.DATA_STATE_2ND_TAG_REG_SUCCESS:
-				textViewDetail.setText(ParentActivity.getResources().getString(string._2nd_user_tag_registered));
+				textViewDetail.setText(getString(ParentActivity.getResources().getString(string._2nd_user_tag_registered), 370));
 				CancelManagementDisplayTimer();
 				break;
 
@@ -327,32 +356,32 @@ public class MachineSecuritySmartKeyFragment extends ParentFragment{
 				break;
 			case CAN1CommManager.DATA_STATE_FAIL:
 				if(ButtonIndex == CAN1CommManager.DATA_INDEX_TAG_REGISTRATION){
-					textViewDetail.setText(ParentActivity.getResources().getString(string.Registration_failed));
+					textViewDetail.setText(getString(ParentActivity.getResources().getString(string.Registration_failed), 375));
 					CancelManagementDisplayTimer();
 				}else if(ButtonIndex == CAN1CommManager.DATA_INDEX_TAG_ELIMINATION){
-					textViewDetail.setText(ParentActivity.getResources().getString(string.Delete_failed));
+					textViewDetail.setText(getString(ParentActivity.getResources().getString(string.Delete_failed), 377));
 					CancelManagementDisplayTimer();
 				}
 				break;
 				
 			case CAN1CommManager.DATA_STATE_TAG_ALREADY_REG:
-				textViewDetail.setText(ParentActivity.getResources().getString(string.Tag_already_registered));
+				textViewDetail.setText(getString(ParentActivity.getResources().getString(string.Tag_already_registered), 374));
 				CancelManagementDisplayTimer();
 				break;
 			case CAN1CommManager.DATA_STATE_TAG_ELIMINATION_SUCESS:
-				textViewDetail.setText(ParentActivity.getResources().getString(string.All_user_tags_deleted));
+				textViewDetail.setText(getString(ParentActivity.getResources().getString(string.All_user_tags_deleted), 376));
 				CancelManagementDisplayTimer();
 				break;
 			case CAN1CommManager.DATA_STATE_3RD_TAG_REG_SUCCESS:
-				textViewDetail.setText(ParentActivity.getResources().getString(string._3rd_user_tag_registered));
+				textViewDetail.setText(getString(ParentActivity.getResources().getString(string._3rd_user_tag_registered), 371));
 				CancelManagementDisplayTimer();
 				break;
 			case CAN1CommManager.DATA_STATE_4TH_TAG_REG_SUCCESS:
-				textViewDetail.setText(ParentActivity.getResources().getString(string._4th_user_tag_registered));
+				textViewDetail.setText(getString(ParentActivity.getResources().getString(string._4th_user_tag_registered), 372));
 				CancelManagementDisplayTimer();
 				break;
 			case CAN1CommManager.DATA_STATE_5TH_TAG_REG_SUCCESS:
-				textViewDetail.setText(ParentActivity.getResources().getString(string._5th_user_tag_registered));
+				textViewDetail.setText(getString(ParentActivity.getResources().getString(string._5th_user_tag_registered), 373));
 				CancelManagementDisplayTimer();
 				break;
 			case CAN1CommManager.DATA_STATE_AUTHENTICATION:
@@ -368,7 +397,7 @@ public class MachineSecuritySmartKeyFragment extends ParentFragment{
 		
 	}
 	public void TimeoutDisplay(){
-		textViewDetail.setText(ParentActivity.getResources().getString(string.Time_Out));
+		textViewDetail.setText(getString(ParentActivity.getResources().getString(string.Time_Out), 382));
 	}
 	/////////////////////////////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////////
@@ -587,5 +616,4 @@ public class MachineSecuritySmartKeyFragment extends ParentFragment{
 		}
 	}
 	/////////////////////////////////////////////////////////////////////
-	
 }

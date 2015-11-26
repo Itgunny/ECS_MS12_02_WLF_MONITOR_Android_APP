@@ -29,9 +29,9 @@
             android:layout_centerVertical="true"
             android:src="@drawable/menu_bluedot" />
 
-        <TextView
+        <taeha.wheelloader.fseries_monitor.main.TextFitTextView
             android:id="@+id/textView_menu_body_management_smartkey_use_title"
-            android:layout_width="wrap_content"
+            android:layout_width="220dp"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
             android:layout_marginLeft="20dp"
@@ -48,7 +48,7 @@
             android:orientation="horizontal" 
             android:splitMotionEvents="false">
 	
-	       <RadioButton
+	       <taeha.wheelloader.fseries_monitor.main.RadioButtonTextView
 	           android:id="@+id/radioButton_menu_body_management_smartkey_use_diable"
 	           android:layout_width="220dp"
 	           android:layout_height="wrap_content"
@@ -57,7 +57,7 @@
 	           android:textColor="@drawable/_selector_radio_txt_white_amber"
 	           android:textSize="25sp" />
 	
-	       <RadioButton
+	       <taeha.wheelloader.fseries_monitor.main.RadioButtonTextView
 	           android:id="@+id/radioButton_menu_body_management_smartkey_use_enable"
 	           android:layout_width="220dp"
 	           android:layout_height="wrap_content"
@@ -88,7 +88,7 @@
             android:layout_marginTop="30dp"
             android:src="@drawable/menu_bluedot" />
 
-        <TextView
+        <taeha.wheelloader.fseries_monitor.main.TextFitTextView
             android:id="@+id/textView_menu_body_management_smartkey_tag_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -98,7 +98,7 @@
             android:text="@string/Manage_Tag"
             android:textAppearance="?android:attr/textAppearanceLarge" />
         
-        <TextView
+        <taeha.wheelloader.fseries_monitor.main.TextFitTextView
             android:id="@+id/textView_menu_body_management_smartkey_tag_register_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -119,7 +119,7 @@
             android:text=":"
             android:textAppearance="?android:attr/textAppearanceLarge" />
 
-        <TextView
+        <taeha.wheelloader.fseries_monitor.main.TextFitTextView
             android:id="@+id/textView_menu_body_management_smartkey_tag_register_num"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -129,7 +129,7 @@
             android:layout_toRightOf="@+id/textView_menu_body_management_smartkey_tag_register_colon"
             android:textAppearance="?android:attr/textAppearanceLarge" />
 
-        <TextView
+        <taeha.wheelloader.fseries_monitor.main.TextFitTextView
             android:id="@+id/textView_menu_body_management_smartkey_tag_detail"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -141,7 +141,7 @@
             android:textAppearance="?android:attr/textAppearanceLarge"
             android:textSize="25sp" />
         
-        <TextView
+        <taeha.wheelloader.fseries_monitor.main.TextFitTextView
             android:id="@+id/textView_menu_body_management_smartkey_tag_warning"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -163,9 +163,9 @@
             android:layout_marginBottom="10dp" 
             android:splitMotionEvents="false">
 
-	       <TextView
+	       <taeha.wheelloader.fseries_monitor.main.TextFitTextView
 	            android:id="@+id/textView_menu_body_management_smartkey_tag_registration"
-	            android:layout_width="wrap_content"
+	            android:layout_width="300dp"
 	            android:layout_height="wrap_content"
 	            android:layout_marginLeft="20dp"
 	            android:background="@drawable/_selector_menu_body_management_smartkey_btn1"
@@ -173,9 +173,9 @@
 	            android:text="@string/Registration"
 	            android:textAppearance="?android:attr/textAppearanceLarge" />
 	        
-	        <TextView
+	        <taeha.wheelloader.fseries_monitor.main.TextFitTextView
 	            android:id="@+id/textView_menu_body_management_smartkey_tag_delete"
-	            android:layout_width="wrap_content"
+	            android:layout_width="300dp"
 	            android:layout_height="wrap_content"
 	            android:layout_marginLeft="20dp"
 	            android:background="@drawable/_selector_menu_body_management_smartkey_btn1"
@@ -259,7 +259,7 @@
 	                android:layout_alignTop="@+id/ImageButton_menu_body_management_smartkey_low_ok"
 	                android:src="@drawable/menu_low_icon_ok" />
 	
-	            <TextView
+	            <taeha.wheelloader.fseries_monitor.main.TextFitTextView
 	                android:id="@+id/textView_menu_body_management_smartkey_low_ok"
 	                android:layout_width="wrap_content"
 	                android:layout_height="match_parent"
@@ -298,7 +298,7 @@
 	                android:layout_alignTop="@+id/ImageButton_menu_body_management_smartkey_low_cancel"
 	                android:src="@drawable/menu_low_icon_cancel" />
 	
-	            <TextView
+	            <taeha.wheelloader.fseries_monitor.main.TextFitTextView
 	                android:id="@+id/textView_menu_body_management_smartkey_low_cancel"
 	                android:layout_width="wrap_content"
 	                android:layout_height="match_parent"

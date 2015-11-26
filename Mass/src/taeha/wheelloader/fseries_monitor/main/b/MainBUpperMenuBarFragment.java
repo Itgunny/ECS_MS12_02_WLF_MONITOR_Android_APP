@@ -18,17 +18,18 @@ import taeha.wheelloader.fseries_monitor.main.Home;
 import taeha.wheelloader.fseries_monitor.main.MainBBaseFragment;
 import taeha.wheelloader.fseries_monitor.main.ParentFragment;
 import taeha.wheelloader.fseries_monitor.main.R;
+import taeha.wheelloader.fseries_monitor.main.TextFitTextView;
 
 public class MainBUpperMenuBarFragment extends ParentFragment{
 	//CONSTANT////////////////////////////////////////
 	
 	//////////////////////////////////////////////////
 	//RESOURCE////////////////////////////////////////
-	TextView textViewTimeAM;
-	TextView textViewTimePM;
-	TextView textViewTimeHour;
+	TextFitTextView textViewTimeAM;
+	TextFitTextView textViewTimePM;
+	TextFitTextView textViewTimeHour;
 	TextView textViewTimeColon;
-	TextView textViewTimeMin;
+	TextFitTextView textViewTimeMin;
 	
 	ImageView imgViewBuzzerNormal;
 	ImageView imgViewBuzzer070Left;
@@ -115,11 +116,14 @@ public class MainBUpperMenuBarFragment extends ParentFragment{
 	protected void InitResource() {
 		// TODO Auto-generated method stub
 		
-		textViewTimeAM = (TextView)mRoot.findViewById(R.id.textView_upper_main_b_menubar_time_am);
-		textViewTimePM = (TextView)mRoot.findViewById(R.id.textView_upper_main_b_menubar_time_pm);
-		textViewTimeHour = (TextView)mRoot.findViewById(R.id.textView_upper_main_b_menubar_time_hour);
+		textViewTimeAM = (TextFitTextView)mRoot.findViewById(R.id.textView_upper_main_b_menubar_time_am);
+		textViewTimeAM.setText(getString(ParentActivity.getResources().getString(R.string.AM), 13));
+		textViewTimePM = (TextFitTextView)mRoot.findViewById(R.id.textView_upper_main_b_menubar_time_pm);
+		textViewTimePM.setText(getString(ParentActivity.getResources().getString(R.string.PM), 14));
+		
+		textViewTimeHour = (TextFitTextView)mRoot.findViewById(R.id.textView_upper_main_b_menubar_time_hour);
 		textViewTimeColon = (TextView)mRoot.findViewById(R.id.textView_upper_main_b_menubar_time_colon);
-		textViewTimeMin = (TextView)mRoot.findViewById(R.id.textView_upper_main_b_menubar_time_min);
+		textViewTimeMin = (TextFitTextView)mRoot.findViewById(R.id.textView_upper_main_b_menubar_time_min);
 		
 		
 		imgViewBuzzerNormal = (ImageView)mRoot.findViewById(R.id.imageView_upper_main_b_menubar_buzzer_normal);

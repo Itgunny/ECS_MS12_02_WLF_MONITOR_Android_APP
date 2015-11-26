@@ -12,6 +12,8 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import taeha.wheelloader.fseries_monitor.main.ParentFragment;
 import taeha.wheelloader.fseries_monitor.main.R;
+import taeha.wheelloader.fseries_monitor.main.TextFitTextView;
+import taeha.wheelloader.fseries_monitor.main.R.string;
 
 public class MainAKeyTitleFragment extends ParentFragment{
 	//CONSTANT////////////////////////////////////////
@@ -22,7 +24,7 @@ public class MainAKeyTitleFragment extends ParentFragment{
 	
 	ImageView imgViewIcon;
 	
-	TextView textViewTitle;
+	TextFitTextView textViewTitle;
 	//////////////////////////////////////////////////
 	
 	//VALUABLE////////////////////////////////////////
@@ -65,7 +67,8 @@ public class MainAKeyTitleFragment extends ParentFragment{
 		
 		imgViewIcon = (ImageView)mRoot.findViewById(R.id.imageView_key_main_a_title);
 		
-		textViewTitle = (TextView)mRoot.findViewById(R.id.textView_key_main_a_title);
+		textViewTitle = (TextFitTextView)mRoot.findViewById(R.id.textView_key_main_a_title);
+		textViewTitle.setText(getString(ParentActivity.getResources().getString(string.Main_Light), 151));
 		
 		try {
 			imgViewIcon.setImageDrawable(drawableIcon);

@@ -8,6 +8,7 @@ import taeha.wheelloader.fseries_monitor.animation.LeftRightShiftAnimation;
 import taeha.wheelloader.fseries_monitor.main.Home;
 import taeha.wheelloader.fseries_monitor.main.ParentFragment;
 import taeha.wheelloader.fseries_monitor.main.R;
+import taeha.wheelloader.fseries_monitor.main.TextFitTextView;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
@@ -33,17 +34,25 @@ public class BrightnessAutoFragment extends ParentFragment{
 	//RESOURCE////////////////////////////////////////
 	ImageButton imgbtnOK;
 	ImageButton imgbtnCancel;
+	TextFitTextView	textViewOK;
+	TextFitTextView	textViewCancel;
+	
 	
 	ImageButton imgbtnTimeStartLeft;
 	ImageButton imgbtnTimeStartRight;
 	ImageButton imgbtnTimeEndLeft;
 	ImageButton imgbtnTimeEndRight;
 	
-	TextView textViewTimeStart;
-	TextView textViewTimeEnd;
+	TextFitTextView textViewTimeStart;
+	TextFitTextView textViewTimeEnd;
 	
 	SeekBar seekbarDayLevel;
 	SeekBar seekbarNightLevel;
+	
+	TextFitTextView textViewTimeTitle;
+	TextFitTextView textViewDayTimeTitle;
+	TextFitTextView textViewNightTimeTitle;
+	
 	//////////////////////////////////////////////////
 	
 	//VALUABLE////////////////////////////////////////
@@ -104,13 +113,18 @@ public class BrightnessAutoFragment extends ParentFragment{
 		imgbtnOK = (ImageButton)mRoot.findViewById(R.id.ImageButton_menu_body_preference_brightness_auto_low_ok);
 		imgbtnCancel = (ImageButton)mRoot.findViewById(R.id.ImageButton_menu_body_preference_brightness_auto_low_cancel);
 		
+		textViewOK = (TextFitTextView)mRoot.findViewById(R.id.textView_menu_body_preference_brightness_auto_low_ok);
+		textViewOK.setText(getString(ParentActivity.getResources().getString(R.string.OK), 15));
+		textViewCancel = (TextFitTextView)mRoot.findViewById(R.id.textView_menu_body_preference_brightness_auto_low_cancel);
+		textViewCancel.setText(getString(ParentActivity.getResources().getString(R.string.Cancel), 16));
+		
 		imgbtnTimeStartLeft = (ImageButton)mRoot.findViewById(R.id.imageButton_menu_body_preference_brightness_auto_time_start_minus);
 		imgbtnTimeStartRight = (ImageButton)mRoot.findViewById(R.id.imageButton_menu_body_preference_brightness_auto_time_start_plus);
 		imgbtnTimeEndLeft = (ImageButton)mRoot.findViewById(R.id.imageButton_menu_body_preference_brightness_auto_time_end_minus);
 		imgbtnTimeEndRight = (ImageButton)mRoot.findViewById(R.id.imageButton_menu_body_preference_brightness_auto_time_end_plus);
 		
-		textViewTimeStart = (TextView)mRoot.findViewById(R.id.textView_menu_body_preference_brightness_auto_time_start_time);
-		textViewTimeEnd = (TextView)mRoot.findViewById(R.id.textView_menu_body_preference_brightness_auto_time_end_time);
+		textViewTimeStart = (TextFitTextView)mRoot.findViewById(R.id.textView_menu_body_preference_brightness_auto_time_start_time);
+		textViewTimeEnd = (TextFitTextView)mRoot.findViewById(R.id.textView_menu_body_preference_brightness_auto_time_end_time);
 		
 		seekbarDayLevel = (SeekBar)mRoot.findViewById(R.id.seekBar_menu_body_preference_brightness_auto_day);
 		seekbarNightLevel = (SeekBar)mRoot.findViewById(R.id.seekBar_menu_body_preference_brightness_auto_night);
@@ -120,6 +134,14 @@ public class BrightnessAutoFragment extends ParentFragment{
 		seekbarDayLevel.incrementProgressBy(1);
 		seekbarNightLevel.setMax(Home.BRIGHTNESS_MAX);
 		seekbarNightLevel.incrementProgressBy(1);
+		
+		textViewTimeTitle = (TextFitTextView)mRoot.findViewById(R.id.textView_menu_body_preference_brightness_auto_time_title);
+		textViewTimeTitle.setText(getString(ParentActivity.getResources().getString(R.string.Time_settings_for_daytime), 417));
+		textViewDayTimeTitle = (TextFitTextView)mRoot.findViewById(R.id.textView_menu_body_preference_brightness_auto_day_title);
+		textViewDayTimeTitle.setText(getString(ParentActivity.getResources().getString(R.string.Daytime), 418));
+		textViewNightTimeTitle = (TextFitTextView)mRoot.findViewById(R.id.textView_menu_body_preference_brightness_auto_night_title);
+		textViewNightTimeTitle.setText(getString(ParentActivity.getResources().getString(R.string.Nighttime), 419));
+		
 	}
 
 	protected void InitValuables() {
@@ -548,6 +570,14 @@ public class BrightnessAutoFragment extends ParentFragment{
 	
 	}
 	/////////////////////////////////////////////////////////////////////
-	
+	public String getString(String str, int index){
+		if(ParentActivity.langDb.findStrGetString(index, ParentActivity.LanguageIndex) == null){
+			Log.d(TAG, "Android");
+			return str;
+		}else {
+			Log.d(TAG, "Excel");
+			return ParentActivity.langDb.findStrGetString(index, ParentActivity.LanguageIndex);	
+		}
+	}
 	
 }

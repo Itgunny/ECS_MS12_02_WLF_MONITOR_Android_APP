@@ -53,12 +53,15 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.ServiceConnection;
 import android.content.SharedPreferences;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager.NameNotFoundException;
 import android.graphics.drawable.AnimationDrawable;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.IBinder;
 import android.os.Message;
 import android.os.RemoteException;
+import android.text.TextUtils.TruncateAt;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.Menu;
@@ -66,15 +69,17 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
+import android.widget.RadioButton;
+import android.widget.TextView;
 
 public class Home extends Activity {
 	//CONSTANT//////////////////////////////////////////
 	//Version/////////////////////////////////////////////////////////////////////////////
 	//
 	public static final int VERSION_HIGH 		= 2;
-	public static final int VERSION_LOW 		= 1;
+	public static final int VERSION_LOW 		= 2;
 	public static final int VERSION_SUB_HIGH 	= 0;
-	public static final int VERSION_SUB_LOW 	= 3;
+	public static final int VERSION_SUB_LOW 	= 0;
 	public static final int VERSION_TAEHA		= 0;
 	////1.0.2.3
 	// UI B 안 최초 적용 2014.12.10
@@ -722,6 +727,12 @@ public class Home extends Activity {
 	// 4. US ton 단위 환산 수정(1.012311 -> 1.1.02311)
 	// 5. Userswitching에서 언어 설정 시 팝업에 적용되지 않는 현상 개선
 	// 6. Userswitching에 메인 좌 상단 Axle 설정 시 미표기되는 현상 개선
+	////v2.1.0.40
+	// 1. ACU test용
+	// 2. 관리자 메뉴 -> left + right 누르면 비밀번호 해제됨
+	// 3. 현재고장에 acu 항상 표시
+	////v2.2.0.0
+	// 1. 다국어 엑셀기반 적용
 	//////////////////////////////////////////////////////////////////////////////////////
 	// TAG
 	private  final String TAG = "Home";
@@ -980,6 +991,7 @@ public class Home extends Activity {
 	public  static final int SCREEN_STATE_MENU_PREFERENCE_DISPLAYTYPELANG_TYPE				= 0x24410000;
 	public  static final int SCREEN_STATE_MENU_PREFERENCE_DISPLAYTYPELANG_LANG_TOP			= 0x24420000;
 	public  static final int SCREEN_STATE_MENU_PREFERENCE_DISPLAYTYPELANG_LANG_CHANGE		= 0x24421000;
+	public  static final int SCREEN_STATE_MENU_PREFERENCE_DISPLAYTYPELANG_EXCEL_LANG_CHANGE	= 0x24421100;
 	public  static final int SCREEN_STATE_MENU_PREFERENCE_DISPLAYTYPELANG_LANG_CHANGE_POPUP	= 0x24422000;
 	public  static final int SCREEN_STATE_MENU_PREFERENCE_DISPLAYTYPELANG_LANG_END			= 0x2442FFFF;
 	public  static final int SCREEN_STATE_MENU_PREFERENCE_DISPLAYTYPELANG_END				= 0x244FFFFF;
@@ -1137,21 +1149,25 @@ public class Home extends Activity {
 	public static final int STATE_DISPLAY_LANGUAGE_FRENCH   		= 3;
 	public static final int STATE_DISPLAY_LANGUAGE_SPANISH   		= 4;
 	public static final int STATE_DISPLAY_LANGUAGE_PORTUGUE   		= 5;
-	public static final int STATE_DISPLAY_LANGUAGE_CHINESE   		= 6;
-	public static final int STATE_DISPLAY_LANGUAGE_RUSIAN   		= 7;
-	public static final int STATE_DISPLAY_LANGUAGE_ITALIAN   		= 8;
-	public static final int STATE_DISPLAY_LANGUAGE_NEDERLAND   		= 9;
-	public static final int STATE_DISPLAY_LANGUAGE_SWEDISH   		= 10;
-	public static final int STATE_DISPLAY_LANGUAGE_TURKISH   		= 11;
-	public static final int STATE_DISPLAY_LANGUAGE_SLOVAKIAN   		= 12;
-	public static final int STATE_DISPLAY_LANGUAGE_ESTONIAN   		= 13;
-	public static final int STATE_DISPLAY_LANGUAGE_THAILAND   		= 14;
-	public static final int STATE_DISPLAY_LANGUAGE_HINDI	   		= 15;
-	public static final int STATE_DISPLAY_LANGUAGE_MONGOL   		= 16;
-	public static final int STATE_DISPLAY_LANGUAGE_ARABIC   		= 17;
-	public static final int STATE_DISPLAY_LANGUAGE_FARSI	   		= 18;
-	public static final int STATE_DISPLAY_LANGUAGE_INDONESIAN  		= 19;
-	public static final int STATE_DISPLAY_LANGUAGE_FINNISH  		= 20;	// ++, --, 150225 bwk
+	public static final int STATE_DISPLAY_LANGUAGE_ITALIAN   		= 6;
+	public static final int STATE_DISPLAY_LANGUAGE_NEDERLAND   		= 7;
+	public static final int STATE_DISPLAY_LANGUAGE_SWEDISH   		= 8;
+	public static final int STATE_DISPLAY_LANGUAGE_FINNISH  		= 9;
+	public static final int STATE_DISPLAY_LANGUAGE_SLOVAKIAN   		= 10;
+	public static final int STATE_DISPLAY_LANGUAGE_ESTONIAN   		= 11;
+	public static final int STATE_DISPLAY_LANGUAGE_TURKISH   		= 12;
+	public static final int STATE_DISPLAY_LANGUAGE_HEBREW	 		= 13;
+	
+	// ++, 151005 cjg
+	/*public static final int STATE_DISPLAY_LANGUAGE_CHINESE   		= 13;
+	public static final int STATE_DISPLAY_LANGUAGE_RUSIAN   		= 14;
+	public static final int STATE_DISPLAY_LANGUAGE_THAILAND   		= 15;
+	public static final int STATE_DISPLAY_LANGUAGE_HINDI	   		= 16;
+	public static final int STATE_DISPLAY_LANGUAGE_MONGOL   		= 17;
+	public static final int STATE_DISPLAY_LANGUAGE_ARABIC   		= 18;
+	public static final int STATE_DISPLAY_LANGUAGE_FARSI	   		= 19;
+	public static final int STATE_DISPLAY_LANGUAGE_INDONESIAN  		= 20;*/
+	// --, 151005 cjg
 	// --, 150206 bwk
 		
 	public static final int WARMINGUP 				= 0;
@@ -1192,11 +1208,11 @@ public class Home extends Activity {
 	public int ScreenIndex;
 	public int OldScreenIndex;
 	public int TempScreenIndex;
-	
 	// Display Type
 	public int DisplayType;
 	public int LanguageIndex;	// ++, --, 150206 bwk
 	public LanguageClass LangClass;	// ++, --, 150209 bwk
+	public LanguageDB langDb;
 	
 	// Unit
 	public int UnitType;
@@ -1452,11 +1468,13 @@ public class Home extends Activity {
 	////////////////////////////////////////////////////
 	CrashApplication _CrashApplication;
 	////////////////////////////////////////////////////
+	boolean runningCheckMiracast = false;
 	
 	
 	//Lift Cycle Function///////////////////////////////
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
+
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
 		Log.d(TAG, "onCreateView");
@@ -1468,7 +1486,6 @@ public class Home extends Activity {
 		InitButtonListener();
 		LoadPref();
 		imgViewCameraScreen.setClickable(false);
-		
 		
 		HandleKeyButton = new Handler() {
 			@Override
@@ -1502,6 +1519,7 @@ public class Home extends Activity {
 		if(CommService.GetPowerOffFlag() == true){
 			showEndingFragment();
 		}
+
 		// --, 150403 cjg		
 		try {			
 			StartCommService();
@@ -1509,7 +1527,22 @@ public class Home extends Activity {
 			threadRead = new Thread(new ReadThread(this));
 			threadLoading = new Thread(new LoadingThread(this));
 //			threadLoading.start();
-			CAN1Comm.SetScreenTopFlag(true);
+			if(CommService.pi != null){
+				if(!CommService.pi.versionName.equals("1.0.5BF")){
+					if(CheckRunningApp("com.powerone.wfd.sink") && CAN1Comm.isTopCheckMiracast() == true){
+						CAN1Comm.SetScreenTopFlag(false);
+					}else if(CheckRunningApp("com.powerone.wfd.sink") && CAN1Comm.isTopCheckMiracast() == false){
+						CAN1Comm.SetScreenTopFlag(true);	
+					}else {
+						CAN1Comm.SetScreenTopFlag(true);
+					}
+				}else{
+					CAN1Comm.SetScreenTopFlag(true);
+				}
+			}else{
+				CAN1Comm.SetScreenTopFlag(true);
+			}
+
 		} catch (RuntimeException e) {
 			Log.e(TAG,"CAN1Comm Instance Error");
 		} 
@@ -1539,6 +1572,8 @@ public class Home extends Activity {
 	public void InitValuable(){
 		// ++, 150209 bwk
 		LangClass = new LanguageClass(this);
+		langDb = new LanguageDB(this);
+		langDb.getCountLanguage();
 		//LangClass.setLanugage(LangClass.GetLanguage());
 		SetLanguage();
 		JoystickSteeringEnableFailCondition = 0;
@@ -1638,6 +1673,9 @@ public class Home extends Activity {
 			case Home.STATE_DISPLAY_LANGUAGE_FINNISH:
 				locale = new Locale("fi");
 				break;
+			case Home.STATE_DISPLAY_LANGUAGE_HEBREW:
+				locale = new Locale("iw");
+				break;
 			default:
 				locale = new Locale("en");
 				break;
@@ -1653,7 +1691,6 @@ public class Home extends Activity {
             Log.i("configType", config.getClass().toString());  
             config.getClass().getDeclaredField("locale").set(config, locale);  
             config.getClass().getDeclaredField("userSetLocale").setBoolean(config, true);  
-                  
             am.getClass().getMethod("updateConfiguration",android.content.res.Configuration.class).invoke(am,config);  
           
         }catch (Exception e) {  
@@ -2931,7 +2968,7 @@ public class Home extends Activity {
 							if(CAN1Comm.GetScreenTopFlag() == false)
 							{
 								Log.d(TAG,"GetScreenTopFlag() false CheckBuzzer");
-								CAN1Comm.ClickFN_Home();
+								CAN1Comm.ClickFN_Buzzer();
 							}
 						}
 					}else if(Buzzer == CAN1CommManager.BUZZER_OFF){
@@ -4357,7 +4394,7 @@ public class Home extends Activity {
 				if(CAN1Comm.GetScreenTopFlag() == false)
 				{
 					Log.d(TAG,"GetScreenTopFlag() false CommErrStopTimerClass");
-					CAN1Comm.ClickFN_Home();
+					CAN1Comm.ClickFN_Buzzer();
 				}
 			}
 			if(CommErrCount >= 1000){
@@ -5260,6 +5297,18 @@ public class Home extends Activity {
 		return strAS;
 	}
 	/////////////////////////////////////////////////////
+	public boolean CheckTopApps(String strProcess){
+		ActivityManager am = (ActivityManager)getSystemService(Context.ACTIVITY_SERVICE);
+		List<ActivityManager.RunningTaskInfo> Info = am.getRunningTasks(1);
+		ComponentName topActivity = Info.get(0).topActivity;
+		String topactivityname = topActivity.getPackageName();
+		Log.d(TAG,"Top Activity : " + topactivityname);
+		if(strProcess.equalsIgnoreCase(topactivityname)){
+			return true;
+		}else{
+			return false;
+		}
+	}
 	// ++, 150323 bwk
 	public boolean CheckRunningApp(String strPrcessName){
 		 ActivityManager activity_manager = (ActivityManager)getSystemService(Context.ACTIVITY_SERVICE);
@@ -5321,4 +5370,14 @@ public class Home extends Activity {
 	}
 	// --, 150324 cjg
 	/////////////////////////////////////////////////////
+	public void setMarqueeRadio(RadioButton radioButton){
+		//radioButton.setSingleLine();
+		radioButton.setEllipsize(TruncateAt.MARQUEE);
+		radioButton.setSelected(true);
+	}
+	public void setMarqueeText(TextView textView){
+		textView.setSingleLine();
+		textView.setEllipsize(TruncateAt.MARQUEE);
+		textView.setSelected(true);
+	}
 }

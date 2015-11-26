@@ -84,13 +84,15 @@ public class MenuModeETCFragment extends MenuBodyList_ParentFragment{
 		setClickableList4(true);
 		
 		
-		setListTitle1(ParentActivity.getResources().getString(string.Speedometer_Setting));
-		setListTitle2(ParentActivity.getResources().getString(string.Cooling_Fan_Reverse_Mode));
-		setListTitle3(ParentActivity.getResources().getString(string.Wiper_Level_Setting));
+		setListTitle1(ParentActivity.getResources().getString(string.Speedometer_Setting),321);
+		setListTitle2(ParentActivity.getResources().getString(string.Cooling_Fan_Reverse_Mode), 217);
+		setWidthTitle2(500);
+		setListTitle3(ParentActivity.getResources().getString(string.Wiper_Level_Setting), 218);
+		
 		//setListTitle4(ParentActivity.getResources().getString(string.Camera_Setting));
-		setListTitle4(ParentActivity.getResources().getString(string.Calibration));
+		setListTitle4(ParentActivity.getResources().getString(string.Calibration), 320);
 		if(CAN1Comm.Get_CheckBKCUComm() == 1){
-			setListTitle5(ParentActivity.getResources().getString(string.Engine_Auto_Shutdown));
+			setListTitle5(ParentActivity.getResources().getString(string.Engine_Auto_Shutdown), 215);
 			setClickableList5(true);
 		}else{
 			setClickableList5(false);
@@ -394,13 +396,13 @@ public class MenuModeETCFragment extends MenuBodyList_ParentFragment{
 	public void CoolingFanReverseDisplay(int data){
 		switch (data) {
 		case CAN1CommManager.DATA_STATE_REVERSEFAN_OFF:
-			setListData2(ParentActivity.getResources().getString(string.Off));
+			setListData2(ParentActivity.getResources().getString(string.Off), 20);
 			break;
 		case CAN1CommManager.DATA_STATE_REVERSEFAN_MANUAL:
-			setListData2(ParentActivity.getResources().getString(string.Manual));
+			setListData2(ParentActivity.getResources().getString(string.Manual), 26);
 			break;
 		case CAN1CommManager.DATA_STATE_REVERSEFAN_AUTO:
-			setListData2(ParentActivity.getResources().getString(string.Automatic));
+			setListData2(ParentActivity.getResources().getString(string.Automatic), 27);
 			break;
 
 		default:
@@ -410,7 +412,7 @@ public class MenuModeETCFragment extends MenuBodyList_ParentFragment{
 	public void EngineAutoShutdownDisplay(int status, int time){
 		switch (status) {
 		case CAN1CommManager.DATA_STATE_AUTOSHUTDOWN_OFF:
-			setListData5(ParentActivity.getResources().getString(string.Off));
+			setListData5(ParentActivity.getResources().getString(string.Off), 20);
 			break;
 		case CAN1CommManager.DATA_STATE_AUTOSHUTDOWN_ON:
 			// ++, 150212 bwk
@@ -420,7 +422,12 @@ public class MenuModeETCFragment extends MenuBodyList_ParentFragment{
 			else if(time > 240)
 				time = 240;
 			//setListData5(ParentActivity.GetSectoMinString(time*10) + ParentActivity.getResources().getString(string.Min));
+			if((ParentActivity.langDb.findStrGetString(48, ParentActivity.LanguageIndex) == null) || (ParentActivity.langDb.findStrGetString(50, ParentActivity.LanguageIndex) == null) ){
 			setListData5(ParentActivity.GetSectoMinString(time*10, ParentActivity.getResources().getString(string.Min),ParentActivity.getResources().getString(string.Sec)));
+			}else{
+				setListData5(ParentActivity.GetSectoMinString(time*10, ParentActivity.langDb.findStrGetString(48, ParentActivity.LanguageIndex)
+						,ParentActivity.langDb.findStrGetString(50, ParentActivity.LanguageIndex)));
+			}
 			// --, 150212 bwk			
 			break;
 
@@ -434,16 +441,16 @@ public class MenuModeETCFragment extends MenuBodyList_ParentFragment{
 //		}else if(status == CAN1CommManager.DATA_STATE_WIPER_ON){
 			switch (level) {
 			case CAN1CommManager.DATA_STATE_WIPER_LEVEL1:
-				setListData3(ParentActivity.getResources().getString(string.Slow));
+				setListData3(ParentActivity.getResources().getString(string.Slow), 245);
 				break;
 			case CAN1CommManager.DATA_STATE_WIPER_LEVEL2:
-				setListData3(ParentActivity.getResources().getString(string.Normal));
+				setListData3(ParentActivity.getResources().getString(string.Normal), 246);
 				break;
 			case CAN1CommManager.DATA_STATE_WIPER_LEVEL3:
-				setListData3(ParentActivity.getResources().getString(string.Fast));
+				setListData3(ParentActivity.getResources().getString(string.Fast), 247);
 				break;
 			case CAN1CommManager.DATA_STATE_WIPER_LEVEL4:
-				setListData3(ParentActivity.getResources().getString(string.Very_Fast));
+				setListData3(ParentActivity.getResources().getString(string.Very_Fast), 248);
 				break;
 			default:
 				break;

@@ -17,23 +17,29 @@ import android.widget.TextView;
 import taeha.wheelloader.fseries_monitor.main.CAN1CommManager;
 import taeha.wheelloader.fseries_monitor.main.ParentFragment;
 import taeha.wheelloader.fseries_monitor.main.R;
+import taeha.wheelloader.fseries_monitor.main.R.string;
+import taeha.wheelloader.fseries_monitor.main.TextFitTextView;
 
 public class MainAKeyDetentFragment extends ParentFragment{
 	//CONSTANT////////////////////////////////////////
 	
 	//////////////////////////////////////////////////
 	//RESOURCE////////////////////////////////////////
+	TextFitTextView	textViewBoom;
+	TextFitTextView	textViewBucket;
+	
 	RadioButton radioBoomOff;
 	RadioButton radioBoomOn;
 	RadioButton radioBucketOff;
 	RadioButton radioBucketOn;
 	
-	TextView textViewBoomSavePosition;
-	TextView textViewBucketSavePosition;
+	TextFitTextView textViewBoomSavePosition;
+	TextFitTextView textViewBucketSavePosition;
 	ImageView imageViewBoomSavePositionBoarder;
 	ImageView imageViewBucketSavePositionBoarder;
 	
 	ImageButton imgbtnOK;
+	TextFitTextView	textViewOK;
 	//////////////////////////////////////////////////
 	
 	//VALUABLE////////////////////////////////////////
@@ -97,18 +103,35 @@ public class MainAKeyDetentFragment extends ParentFragment{
 	@Override
 	protected void InitResource() {
 		// TODO Auto-generated method stub
+		textViewBoom = (TextFitTextView)mRoot.findViewById(R.id.textView_key_main_a_detent_boom_title);
+		textViewBoom.setText(getString(ParentActivity.getResources().getString(string.Boom), 28));
+		textViewBucket = (TextFitTextView)mRoot.findViewById(R.id.textView_key_main_a_detent_bucket_title);
+		textViewBucket.setText(getString(ParentActivity.getResources().getString(string.Bucket), 29));
+		
 		radioBoomOff = (RadioButton)mRoot.findViewById(R.id.radioButton_key_main_a_detent_boom_off);
+		radioBoomOff.setText(getString(ParentActivity.getResources().getString(string.Off), 20));
+		ParentActivity.setMarqueeRadio(radioBoomOff);
 		radioBoomOn = (RadioButton)mRoot.findViewById(R.id.radioButton_key_main_a_detent_boom_on);
+		radioBoomOn.setText(getString(ParentActivity.getResources().getString(string.On), 19));
+		ParentActivity.setMarqueeRadio(radioBoomOn);
 		radioBucketOff = (RadioButton)mRoot.findViewById(R.id.radioButton_key_main_a_detent_bucket_off);
+		radioBucketOff.setText(getString(ParentActivity.getResources().getString(string.Off), 20));
+		ParentActivity.setMarqueeRadio(radioBucketOff);
 		radioBucketOn = (RadioButton)mRoot.findViewById(R.id.radioButton_key_main_a_detent_bucket_on);
+		radioBucketOn.setText(getString(ParentActivity.getResources().getString(string.On), 19));
+		ParentActivity.setMarqueeRadio(radioBucketOn);
 
-		textViewBoomSavePosition = (TextView)mRoot.findViewById(R.id.textView_key_main_a_detent_boom_saveposition);
-		textViewBucketSavePosition = (TextView)mRoot.findViewById(R.id.textView_key_main_a_detent_bucket_saveposition);
+		textViewBoomSavePosition = (TextFitTextView)mRoot.findViewById(R.id.textView_key_main_a_detent_boom_saveposition);
+		textViewBoomSavePosition.setText(getString(ParentActivity.getResources().getString(string.Save_Position), 180));
+		textViewBucketSavePosition = (TextFitTextView)mRoot.findViewById(R.id.textView_key_main_a_detent_bucket_saveposition);
+		textViewBucketSavePosition.setText(getString(ParentActivity.getResources().getString(string.Save_Position), 180));
 		
 		imageViewBoomSavePositionBoarder = (ImageView)mRoot.findViewById(R.id.imageView_key_main_a_detent_boom_boarder);
 		imageViewBucketSavePositionBoarder = (ImageView)mRoot.findViewById(R.id.imageView_key_main_a_detent_bucket_boarder);
 		
 		imgbtnOK = (ImageButton)mRoot.findViewById(R.id.ImageButton_key_main_a_detent_low_ok);
+		textViewOK = (TextFitTextView)mRoot.findViewById(R.id.textView_key_main_a_detent_low_ok);
+		textViewOK.setText(getString(ParentActivity.getResources().getString(string.OK), 15));
 	}
 	
 	protected void InitValuables() {

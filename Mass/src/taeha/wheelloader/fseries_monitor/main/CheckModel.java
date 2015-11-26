@@ -1,5 +1,6 @@
 package taeha.wheelloader.fseries_monitor.main;
 
+import android.R.integer;
 import android.util.Log;
 
 

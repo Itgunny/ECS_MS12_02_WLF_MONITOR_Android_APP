@@ -14,12 +14,14 @@ import android.widget.TextView;
 import taeha.wheelloader.fseries_monitor.main.CAN1CommManager;
 import taeha.wheelloader.fseries_monitor.main.ParentFragment;
 import taeha.wheelloader.fseries_monitor.main.R;
+import taeha.wheelloader.fseries_monitor.main.TextFitTextView;
 
 public class MainBKeyWorkLoadAccumulationFragment extends ParentFragment{
 	//CONSTANT////////////////////////////////////////
 	
 	//////////////////////////////////////////////////
 	//RESOURCE////////////////////////////////////////
+	TextFitTextView	textViewTitle;
 	RadioButton radioManual;
 	RadioButton radioAuto;
 	
@@ -68,8 +70,14 @@ public class MainBKeyWorkLoadAccumulationFragment extends ParentFragment{
 	@Override
 	protected void InitResource() {
 		// TODO Auto-generated method stub
+		textViewTitle = (TextFitTextView)mRoot.findViewById(R.id.textView_key_main_b_workload_accumulation_line);
+		textViewTitle.setText(getString(ParentActivity.getResources().getString(R.string.Weighing_System), 114));
 		radioManual = (RadioButton)mRoot.findViewById(R.id.radioButton_key_main_b_workload_accumulation_manual);
+		radioManual.setText(getString(ParentActivity.getResources().getString(R.string.Manual), 26));
+		ParentActivity.setMarqueeRadio(radioManual);
 		radioAuto = (RadioButton)mRoot.findViewById(R.id.radioButton_key_main_b_workload_accumulation_auto);
+		radioAuto.setText(getString(ParentActivity.getResources().getString(R.string.Automatic), 27));
+		ParentActivity.setMarqueeRadio(radioAuto);
 	}
 	
 	protected void InitValuables() {

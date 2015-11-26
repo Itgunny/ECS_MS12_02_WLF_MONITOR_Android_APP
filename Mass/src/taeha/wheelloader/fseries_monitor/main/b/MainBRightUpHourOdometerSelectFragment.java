@@ -92,8 +92,14 @@ public class MainBRightUpHourOdometerSelectFragment extends ParentFragment{
 	protected void InitResource() {
 		// TODO Auto-generated method stub
 		radioLatestHour = (RadioButton)mRoot.findViewById(R.id.radioButton_rightup_main_b_hourodometer_select_latesthourmeter);
+		radioLatestHour.setText(getString(ParentActivity.getResources().getString(R.string.Latest_Hourmeter), 107));
+		ParentActivity.setMarqueeRadio(radioLatestHour);
 		radioTotalOdo = (RadioButton)mRoot.findViewById(R.id.radioButton_rightup_main_b_hourodometer_select_totalodometer);
+		radioTotalOdo.setText(getString(ParentActivity.getResources().getString(R.string.Total_Odometer), 109));
+		ParentActivity.setMarqueeRadio(radioTotalOdo);
 		radioLatestOdo = (RadioButton)mRoot.findViewById(R.id.radioButton_rightup_main_b_hourodometer_select_latestodometer);
+		radioLatestOdo.setText(getString(ParentActivity.getResources().getString(R.string.Latest_Odometer), 110));
+		ParentActivity.setMarqueeRadio(radioLatestOdo);
 		LayoutBG = (RelativeLayout)mRoot.findViewById(R.id.RelativeLayout_rightup_main_b_hourodomterhourodo);
 	}
 	

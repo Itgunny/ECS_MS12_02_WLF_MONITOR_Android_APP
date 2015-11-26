@@ -15,14 +15,18 @@ import android.widget.TextView;
 import taeha.wheelloader.fseries_monitor.main.CAN1CommManager;
 import taeha.wheelloader.fseries_monitor.main.ParentFragment;
 import taeha.wheelloader.fseries_monitor.main.R;
+import taeha.wheelloader.fseries_monitor.main.TextFitTextView;
+import taeha.wheelloader.fseries_monitor.main.R.string;
 
 public class MainAKeyAutoGreaseFragment extends ParentFragment{
 	//CONSTANT////////////////////////////////////////
 	
 	//////////////////////////////////////////////////
 	//RESOURCE////////////////////////////////////////
-	TextView textViewOK;
-	TextView textViewCancel;
+	TextFitTextView textViewTitle;
+	TextFitTextView textViewTitleNotAvailable;
+	TextFitTextView textViewOK;
+	TextFitTextView textViewCancel;
 	
 	RelativeLayout	layoutAvailable;
 	RelativeLayout	layoutNotAvailable;
@@ -74,8 +78,17 @@ public class MainAKeyAutoGreaseFragment extends ParentFragment{
 	@Override
 	protected void InitResource() {
 		// TODO Auto-generated method stub
-		textViewOK = (TextView)mRoot.findViewById(R.id.textView_key_main_a_autogrease_ok);
-		textViewCancel = (TextView)mRoot.findViewById(R.id.textView_key_main_a_autogrease_cancel);
+		textViewTitle = (TextFitTextView)mRoot.findViewById(R.id.textView_key_main_a_autogrease_title);
+		textViewTitle.setText(getString(ParentActivity.getResources().getString(string.Do_you_want_to_turn_on_Auto_Grease), 187));
+		
+		textViewOK = (TextFitTextView)mRoot.findViewById(R.id.textView_key_main_a_autogrease_ok);
+		textViewOK.setText(getString(ParentActivity.getResources().getString(string.OK), 15));
+		
+		textViewCancel = (TextFitTextView)mRoot.findViewById(R.id.textView_key_main_a_autogrease_cancel);
+		textViewCancel.setText(getString(ParentActivity.getResources().getString(string.Cancel), 16));
+		
+		textViewTitleNotAvailable = (TextFitTextView)mRoot.findViewById(R.id.textView_key_main_a_autogrease_notavailable_title);
+		textViewTitleNotAvailable.setText(getString(ParentActivity.getResources().getString(string.Auto_Grease_is_NOT_equipped), 190));
 
 		layoutAvailable = (RelativeLayout)mRoot.findViewById(R.id.RelativeLayout_key_main_a_autogrease_available);
 		layoutNotAvailable = (RelativeLayout)mRoot.findViewById(R.id.RelativeLayout_key_main_a_autogrease_notavailable);

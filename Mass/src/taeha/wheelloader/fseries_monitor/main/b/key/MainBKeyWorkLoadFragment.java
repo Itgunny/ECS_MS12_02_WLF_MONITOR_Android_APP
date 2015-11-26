@@ -15,6 +15,7 @@ import taeha.wheelloader.fseries_monitor.main.CAN1CommManager;
 import taeha.wheelloader.fseries_monitor.main.Home;
 import taeha.wheelloader.fseries_monitor.main.ParentFragment;
 import taeha.wheelloader.fseries_monitor.main.R;
+import taeha.wheelloader.fseries_monitor.main.TextFitTextView;
 
 public class MainBKeyWorkLoadFragment extends ParentFragment{
 	//CONSTANT////////////////////////////////////////
@@ -29,12 +30,20 @@ public class MainBKeyWorkLoadFragment extends ParentFragment{
 	ImageButton imgbtnCancel;
 	ImageButton imgbtnDefault;
 	
-	TextView textviewWeighingSystemModeData;
-	TextView textViewWeighingDisplayData;
-	TextView textViewErrorDetectData;
+	TextFitTextView textViewOK;
+	TextFitTextView textViewCancel;
+	TextFitTextView textViewDefault;
 	
-	TextView textViewPressureCalibration;
-	TextView textViewInitialization;
+	TextFitTextView textviewWeighingSystemModeTitle;
+	TextFitTextView textViewWeighingDisplayTitle;
+	TextFitTextView textViewErrorDetectTitle;
+	
+	TextFitTextView textviewWeighingSystemModeData;
+	TextFitTextView textViewWeighingDisplayData;
+	TextFitTextView textViewErrorDetectData;
+	
+	TextFitTextView textViewPressureCalibration;
+	TextFitTextView textViewInitialization;
 	//////////////////////////////////////////////////
 	
 	//VALUABLE////////////////////////////////////////
@@ -91,12 +100,28 @@ public class MainBKeyWorkLoadFragment extends ParentFragment{
 		imgbtnCancel = (ImageButton)mRoot.findViewById(R.id.ImageButton_key_main_b_workload_low_cancel);
 		imgbtnDefault = (ImageButton)mRoot.findViewById(R.id.ImageButton_key_main_b_workload_low_default);
 		
-		textviewWeighingSystemModeData = (TextView)mRoot.findViewById(R.id.textView_key_main_b_workload_accumulation_data);
-		textViewWeighingDisplayData = (TextView)mRoot.findViewById(R.id.textView_key_main_b_workload_display_data);
-		textViewErrorDetectData = (TextView)mRoot.findViewById(R.id.textView_key_main_b_workload_errordetect_data);
+		textViewOK = (TextFitTextView)mRoot.findViewById(R.id.textView_key_main_b_workload_low_ok);
+		textViewOK.setText(getString(ParentActivity.getResources().getString(R.string.OK), 15));
+		textViewCancel = (TextFitTextView)mRoot.findViewById(R.id.textView_key_main_b_workload_low_cancel);
+		textViewCancel.setText(getString(ParentActivity.getResources().getString(R.string.Cancel), 16));
+		textViewDefault = (TextFitTextView)mRoot.findViewById(R.id.textView_key_main_b_workload_low_default);
+		textViewDefault.setText(getString(ParentActivity.getResources().getString(R.string.Default), 25));
 		
-		textViewPressureCalibration = (TextView)mRoot.findViewById(R.id.textView_key_main_b_workload_calibration);
-		textViewInitialization = (TextView)mRoot.findViewById(R.id.textView_key_main_b_workload_initialization);
+		textviewWeighingSystemModeTitle = (TextFitTextView)mRoot.findViewById(R.id.textView_key_main_b_workload_accumulation_title);
+		textviewWeighingSystemModeTitle.setText(getString(ParentActivity.getResources().getString(R.string.Weighing_System_Mode), 169));
+		textViewWeighingDisplayTitle = (TextFitTextView)mRoot.findViewById(R.id.textView_key_main_b_workload_display_title);
+		textViewWeighingDisplayTitle.setText(getString(ParentActivity.getResources().getString(R.string.Weighing_Display), 170));
+		textViewErrorDetectTitle = (TextFitTextView)mRoot.findViewById(R.id.textView_key_main_b_workload_errordetect_title);
+		textViewErrorDetectTitle.setText(getString(ParentActivity.getResources().getString(R.string.Error_Detection), 171));
+		
+		textviewWeighingSystemModeData = (TextFitTextView)mRoot.findViewById(R.id.textView_key_main_b_workload_accumulation_data);
+		textViewWeighingDisplayData = (TextFitTextView)mRoot.findViewById(R.id.textView_key_main_b_workload_display_data);
+		textViewErrorDetectData = (TextFitTextView)mRoot.findViewById(R.id.textView_key_main_b_workload_errordetect_data);
+		
+		textViewPressureCalibration = (TextFitTextView)mRoot.findViewById(R.id.textView_key_main_b_workload_calibration);
+		textViewPressureCalibration.setText(getString(ParentActivity.getResources().getString(R.string.Boom_Pressure_Calibration), 172));
+		textViewInitialization = (TextFitTextView)mRoot.findViewById(R.id.textView_key_main_b_workload_initialization);
+		textViewInitialization.setText(getString(ParentActivity.getResources().getString(R.string.Initialization), 30));
 		
 		float fontsize;
 		if(ParentActivity.LanguageIndex == Home.STATE_DISPLAY_LANGUAGE_KOREAN)
@@ -238,10 +263,10 @@ public class MainBKeyWorkLoadFragment extends ParentFragment{
 	public void WeighingSystemModeDisplay(int Data){
 		switch (Data) {
 		case CAN1CommManager.DATA_STATE_WEIGHING_ACCUMULATION_MANUAL:
-			textviewWeighingSystemModeData.setText(ParentActivity.getResources().getString(R.string.Manual));
+			textviewWeighingSystemModeData.setText(getString(ParentActivity.getResources().getString(R.string.Manual), 26));
 			break;
 		case CAN1CommManager.DATA_STATE_WEIGHING_ACCUMULATION_AUTO:
-			textviewWeighingSystemModeData.setText(ParentActivity.getResources().getString(R.string.Automatic));
+			textviewWeighingSystemModeData.setText(getString(ParentActivity.getResources().getString(R.string.Automatic), 27));
 			break;
 		default:
 			break;
@@ -250,16 +275,16 @@ public class MainBKeyWorkLoadFragment extends ParentFragment{
 	public void WeighingDisplayDisplay(int Data){
 		switch (Data) {
 		case CAN1CommManager.DATA_STATE_WEIGHINGDISPLAY_DAILY:
-			textViewWeighingDisplayData.setText(ParentActivity.getResources().getString(R.string.Daily));
+			textViewWeighingDisplayData.setText(getString(ParentActivity.getResources().getString(R.string.Daily), 173));
 			break;
 		case CAN1CommManager.DATA_STATE_WEIGHINGDISPLAY_TOTAL_A:
-			textViewWeighingDisplayData.setText(ParentActivity.getResources().getString(R.string.Total_A));
+			textViewWeighingDisplayData.setText(getString(ParentActivity.getResources().getString(R.string.Total_A), 174));
 			break;
 		case CAN1CommManager.DATA_STATE_WEIGHINGDISPLAY_TOTAL_B:
-			textViewWeighingDisplayData.setText(ParentActivity.getResources().getString(R.string.Total_B));
+			textViewWeighingDisplayData.setText(getString(ParentActivity.getResources().getString(R.string.Total_B), 175));
 			break;
 		case CAN1CommManager.DATA_STATE_WEIGHINGDISPLAY_TOTAL_C:
-			textViewWeighingDisplayData.setText(ParentActivity.getResources().getString(R.string.Total_C));
+			textViewWeighingDisplayData.setText(getString(ParentActivity.getResources().getString(R.string.Total_C), 176));
 			break;
 			
 		default:
@@ -269,10 +294,10 @@ public class MainBKeyWorkLoadFragment extends ParentFragment{
 	public void ErrorDetectionDisplay(int Data){
 		switch (Data) {
 		case CAN1CommManager.DATA_STATE_WEIGHING_ERRORDETECT_OFF:
-			textViewErrorDetectData.setText(ParentActivity.getResources().getString(R.string.Off));
+			textViewErrorDetectData.setText(getString(ParentActivity.getResources().getString(R.string.Off), 20));
 			break;
 		case CAN1CommManager.DATA_STATE_WEIGHING_ERRORDETECT_ON:
-			textViewErrorDetectData.setText(ParentActivity.getResources().getString(R.string.On));
+			textViewErrorDetectData.setText(getString(ParentActivity.getResources().getString(R.string.On), 19));
 			break;
 		default:
 			break;

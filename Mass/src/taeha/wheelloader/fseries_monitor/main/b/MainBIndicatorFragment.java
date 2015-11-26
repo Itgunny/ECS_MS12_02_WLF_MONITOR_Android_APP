@@ -130,7 +130,7 @@ public class MainBIndicatorFragment extends ParentFragment{
 		
 
 		popupIndicator = new QuickAction(ParentActivity, QuickAction.VERTICAL);
-		actionitemIndicator = new ActionItem(0, ParentActivity.getResources().getString(R.string.Lamp_SeatBelt), getResources().getDrawable(R.drawable.main_indicator_seatbelt_on));
+		actionitemIndicator = new ActionItem(0, getString(ParentActivity.getResources().getString(R.string.Lamp_SeatBelt), 129), getResources().getDrawable(R.drawable.main_indicator_seatbelt_on));
 		popupIndicator.addActionItem(actionitemIndicator);
 	}
 	@Override
@@ -417,52 +417,52 @@ public class MainBIndicatorFragment extends ParentFragment{
 		popupIndicator.removeAllActionItem();
 		switch (Index) {
 		case Home.RIDECONTROL:
-			actionitemIndicator = new ActionItem(0, ParentActivity.getResources().getString(R.string.Lamp_RideControl), 
+			actionitemIndicator = new ActionItem(0, getString(ParentActivity.getResources().getString(R.string.Lamp_RideControl), 133), 
 					getResources().getDrawable(R.drawable.main_indicator_rideon_on));
 			popupIndicator.addActionItem(actionitemIndicator);
 			break;
 		case Home.FANREVERSE:
-			actionitemIndicator = new ActionItem(0, ParentActivity.getResources().getString(R.string.Lamp_FanReverse),
+			actionitemIndicator = new ActionItem(0, getString(ParentActivity.getResources().getString(R.string.Lamp_FanReverse), 130),
 					getResources().getDrawable(R.drawable.main_indicator_fanreverse_on));
 			popupIndicator.addActionItem(actionitemIndicator);
 			break;
 		case Home.CLUTCHCUTOFF:
-			actionitemIndicator = new ActionItem(0, ParentActivity.getResources().getString(R.string.Lamp_ClutchCutOff),
+			actionitemIndicator = new ActionItem(0, getString(ParentActivity.getResources().getString(R.string.Lamp_ClutchCutOff), 134),
 					getResources().getDrawable(R.drawable.main_indicator_clutchcutoff_on));
 			popupIndicator.addActionItem(actionitemIndicator);
 			break;
 		case Home.LOCKUPCLUTCH:
-			actionitemIndicator = new ActionItem(0, ParentActivity.getResources().getString(R.string.Lamp_LockUpClutch),
+			actionitemIndicator = new ActionItem(0, getString(ParentActivity.getResources().getString(R.string.Lamp_LockUpClutch), 132),
 					getResources().getDrawable(R.drawable.main_indicator_lockupclutch_on));
 			popupIndicator.addActionItem(actionitemIndicator);
 			break;
 		case Home.ENGINEAUTOSHUTDOWN:
-			actionitemIndicator = new ActionItem(0, ParentActivity.getResources().getString(R.string.Lamp_EngineAutoShutdown),
+			actionitemIndicator = new ActionItem(0, getString(ParentActivity.getResources().getString(R.string.Lamp_EngineAutoShutdown), 131),
 					getResources().getDrawable(R.drawable.main_indicator_engineautoshutdown_on));
 			popupIndicator.addActionItem(actionitemIndicator);
 			break;
 		case Home.SEATBELT:
-			actionitemIndicator = new ActionItem(0, ParentActivity.getResources().getString(R.string.Lamp_SeatBelt),
+			actionitemIndicator = new ActionItem(0, getString(ParentActivity.getResources().getString(R.string.Lamp_SeatBelt), 129),
 					getResources().getDrawable(R.drawable.main_indicator_seatbelt_on));
 			popupIndicator.addActionItem(actionitemIndicator);
 			break;
 		case Home.WARMINGUP:
-			actionitemIndicator = new ActionItem(0, ParentActivity.getResources().getString(R.string.Lamp_Warmingup),
+			actionitemIndicator = new ActionItem(0, getString(ParentActivity.getResources().getString(R.string.Lamp_Warmingup), 135),
 					getResources().getDrawable(R.drawable.main_indicator_warmimgup_on));
 			popupIndicator.addActionItem(actionitemIndicator);
 			break;
 		case Home.FUELWARMER:
-			actionitemIndicator = new ActionItem(0, ParentActivity.getResources().getString(R.string.Lamp_FuelWarmer),
+			actionitemIndicator = new ActionItem(0, getString(ParentActivity.getResources().getString(R.string.Lamp_FuelWarmer), 136),
 					getResources().getDrawable(R.drawable.main_indicator_fuelwamer_on));
 			popupIndicator.addActionItem(actionitemIndicator);
 			break;
 		case Home.PREHEAT:
-			actionitemIndicator = new ActionItem(0, ParentActivity.getResources().getString(R.string.Lamp_Preheat),
+			actionitemIndicator = new ActionItem(0, getString(ParentActivity.getResources().getString(R.string.Lamp_Preheat), 137),
 					getResources().getDrawable(R.drawable.main_indicator_preheat_on));
 			popupIndicator.addActionItem(actionitemIndicator);
 			break;
 		case Home.FLOATMODE:
-			actionitemIndicator = new ActionItem(0, ParentActivity.getResources().getString(R.string.Lamp_FloatMode),
+			actionitemIndicator = new ActionItem(0, getString(ParentActivity.getResources().getString(R.string.Lamp_FloatMode), 138),
 					getResources().getDrawable(R.drawable.main_indicator_floatmode_on));
 			popupIndicator.addActionItem(actionitemIndicator);
 			break;

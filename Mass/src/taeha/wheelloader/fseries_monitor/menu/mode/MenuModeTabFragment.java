@@ -10,6 +10,7 @@ import taeha.wheelloader.fseries_monitor.main.Home;
 import taeha.wheelloader.fseries_monitor.main.ParentFragment;
 import taeha.wheelloader.fseries_monitor.main.R;
 import taeha.wheelloader.fseries_monitor.main.R.string;
+import taeha.wheelloader.fseries_monitor.main.TextFitTextView;
 import android.os.Bundle;
 import android.text.Layout;
 import android.util.Log;
@@ -28,9 +29,9 @@ public class MenuModeTabFragment extends ParentFragment{
 
 	//////////////////////////////////////////////////
 	//RESOURCE////////////////////////////////////////
-	TextView textViewLeft;
-	TextView textViewCenter;
-	TextView textViewRight;	
+	TextFitTextView textViewLeft;
+	TextFitTextView textViewCenter;
+	TextFitTextView textViewRight;	
 	//////////////////////////////////////////////////
 	
 	//VALUABLE////////////////////////////////////////
@@ -63,7 +64,7 @@ public class MenuModeTabFragment extends ParentFragment{
 		InitButtonListener();
 
 		ModeBodyDisplay(FirstScreenIndex);
-		setEngineText(ParentActivity.getResources().getString(string.Eng) + " / " + ParentActivity.getResources().getString(string.TM));
+		setEngineText(getString(ParentActivity.getResources().getString(string.Eng), 200) + " / " + getString(ParentActivity.getResources().getString(string.TM), 201));
 		return mRoot;
 	}
 	
@@ -77,9 +78,12 @@ public class MenuModeTabFragment extends ParentFragment{
 	@Override
 	protected void InitResource() {
 		// TODO Auto-generated method stub
-		textViewLeft = (TextView)mRoot.findViewById(R.id.TextView_menu_body_mode_tab_engine);
-		textViewCenter = (TextView)mRoot.findViewById(R.id.TextView_menu_body_mode_tab_hyd);
-		textViewRight = (TextView)mRoot.findViewById(R.id.TextView_menu_body_mode_tab_etc);
+		textViewLeft = (TextFitTextView)mRoot.findViewById(R.id.TextView_menu_body_mode_tab_engine);
+		textViewLeft.setText(getString(ParentActivity.getResources().getString(R.string.Eng), 200));
+		textViewCenter = (TextFitTextView)mRoot.findViewById(R.id.TextView_menu_body_mode_tab_hyd);
+		textViewCenter.setText(getString(ParentActivity.getResources().getString(R.string.HYD), 202));
+		textViewRight = (TextFitTextView)mRoot.findViewById(R.id.TextView_menu_body_mode_tab_etc);
+		textViewRight.setText(getString(ParentActivity.getResources().getString(R.string.ETC), 203));
 	}
 
 	protected void InitValuables() {
@@ -280,5 +284,4 @@ public class MenuModeTabFragment extends ParentFragment{
 		
 	}
 	/////////////////////////////////////////////////////////////////////
-	
 }

@@ -4,10 +4,14 @@ package taeha.wheelloader.fseries_monitor.main.a;
 import java.util.Timer;
 import java.util.TimerTask;
 
+
 import taeha.wheelloader.fseries_monitor.main.CAN1CommManager;
+import taeha.wheelloader.fseries_monitor.main.Home;
 import taeha.wheelloader.fseries_monitor.main.ParentFragment;
 import taeha.wheelloader.fseries_monitor.main.R;
 import taeha.wheelloader.fseries_monitor.main.b.MainBCenterFragment.BuzzerStopTimerClass;
+import taeha.wheelloader.fseries_monitor.main.TextFitTextView;
+import taeha.wheelloader.fseries_monitor.main.R.string;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -25,7 +29,7 @@ public class MainACenterFragment extends ParentFragment{
 	//////////////////////////////////////////////////
 	//RESOURCE////////////////////////////////////////
 	RelativeLayout Layoutcenter;
-	TextView textViewRPMData;
+	TextFitTextView textViewRPMData;
 	ImageButton imgbtnOption;
 	ImageView imgVeiwrpmGuage;
 	ImageView imgViewSmkIcon;      // ++, --, 150326 bwk
@@ -126,7 +130,7 @@ public class MainACenterFragment extends ParentFragment{
 		Layoutcenter = (RelativeLayout)mRoot.findViewById(R.id.RelativeLayout_center_main_a_bg);
 		imgVeiwrpmGuage = (ImageView)mRoot.findViewById(R.id.imageView_center_main_a_gauge);
 
-		textViewRPMData = (TextView)mRoot.findViewById(R.id.textView_center_main_a_rpm);
+		textViewRPMData = (TextFitTextView)mRoot.findViewById(R.id.textView_center_main_a_rpm);
 		//textViewRPMDataUnit = (TextView)mRoot.findViewById(R.id.textView_center_main_a_rpm);
 		//textViewRPMDataUnit.setText(getString(ParentActivity.getResources().getString(string.rpm), 34));
 
@@ -286,7 +290,7 @@ public class MainACenterFragment extends ParentFragment{
 
 	public void StartPointerTimer(){
 		CancelviewrpmPointerTimer();
-		Log.d(TAG,"rpm Animation »ý¼º");
+		
 		viewrpmPointerTimer = new Timer();
 		viewrpmPointerTimer.schedule(new viewrpmPointerTimerClass(),1,PointSpeed);   
 	}

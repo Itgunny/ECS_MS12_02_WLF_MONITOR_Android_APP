@@ -18,12 +18,14 @@ import android.widget.TextView;
 import taeha.wheelloader.fseries_monitor.main.CAN1CommManager;
 import taeha.wheelloader.fseries_monitor.main.ParentFragment;
 import taeha.wheelloader.fseries_monitor.main.R;
+import taeha.wheelloader.fseries_monitor.main.TextFitTextView;
 
 public class MainARightDownTMICCOModeFragment extends ParentFragment{
 	//CONSTANT////////////////////////////////////////
 	
 	//////////////////////////////////////////////////
 	//RESOURCE////////////////////////////////////////
+	TextView	textViewTitle;
 	RadioButton radioOff;
 	RadioButton radioH;
 	
@@ -86,8 +88,15 @@ public class MainARightDownTMICCOModeFragment extends ParentFragment{
 	@Override
 	protected void InitResource() {
 		// TODO Auto-generated method stub
+		textViewTitle = (TextView)mRoot.findViewById(R.id.textView_rightdown_main_a_tmiccomode_title);
+		textViewTitle.setText(getString(ParentActivity.getResources().getString(R.string.ICCO_MODE), 87));
+		ParentActivity.setMarqueeText(textViewTitle);
 		radioOff = (RadioButton)mRoot.findViewById(R.id.radioButton_rightdown_main_a_tmiccomode_off);
+		radioOff.setText(getString(ParentActivity.getResources().getString(R.string.OFF), 98));
+		ParentActivity.setMarqueeRadio(radioOff);
 		radioH = (RadioButton)mRoot.findViewById(R.id.radioButton_rightdown_main_a_tmiccomode_h);
+		radioH.setText(getString(ParentActivity.getResources().getString(R.string.ON), 97));
+		ParentActivity.setMarqueeRadio(radioH);
 		
 		LayoutBG = (RelativeLayout)mRoot.findViewById(R.id.RelativeLayout_rightdown_main_a_tmiccomode);
 	}

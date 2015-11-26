@@ -9,6 +9,7 @@ import taeha.wheelloader.fseries_monitor.main.CAN1CommManager;
 import taeha.wheelloader.fseries_monitor.main.Home;
 import taeha.wheelloader.fseries_monitor.main.ParentFragment;
 import taeha.wheelloader.fseries_monitor.main.R;
+import taeha.wheelloader.fseries_monitor.main.TextFitTextView;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -34,6 +35,9 @@ public class SpeedometerFreqFragment extends ParentFragment{
 	ImageButton imgbtnOK;
 	ImageButton imgbtnCancel;
 	ImageButton imgbtnDefault;
+	TextFitTextView textViewOK;
+	TextFitTextView textViewCancel;
+	TextFitTextView textViewDefault;
 
 	TextView textViewNum1;
 	TextView textViewNum2;
@@ -54,6 +58,9 @@ public class SpeedometerFreqFragment extends ParentFragment{
 	RadioButton radioNumUnder1;
 	RadioButton radioNumUnder01;
 	RadioGroup radioGroupNum;
+	
+	TextFitTextView textViewSpeedUnit; 
+	
 	//////////////////////////////////////////////////
 	
 	//VALUABLE////////////////////////////////////////
@@ -62,6 +69,7 @@ public class SpeedometerFreqFragment extends ParentFragment{
 	int SpeedometerFreq_Num1;
 	int SpeedometerFreq_Num_Under1;
 	int SpeedometerFreq_Num_Under01;
+	
 	
 	Handler HandleCursurDisplay;
 	int CursurIndex;
@@ -94,7 +102,7 @@ public class SpeedometerFreqFragment extends ParentFragment{
 		DisableHalfNumButton();
 		CursurDisplay(CursurIndex);
 		ParentActivity.ScreenIndex = ParentActivity.SCREEN_STATE_MENU_MODE_ETC_FREQ_TOP;
-		ParentActivity._MenuBaseFragment._MenuInterTitleFragment.SetTitleText(ParentActivity.getResources().getString(R.string.Speedometer_Setting));
+		ParentActivity._MenuBaseFragment._MenuInterTitleFragment.SetTitleText(ParentActivity.getResources().getString(R.string.Speedometer_Setting), 321);
 		HandleCursurDisplay = new Handler() {
 			@Override
 			public void handleMessage(Message msg) {
@@ -119,6 +127,12 @@ public class SpeedometerFreqFragment extends ParentFragment{
 		imgbtnOK = (ImageButton)mRoot.findViewById(R.id.ImageButton_menu_body_mode_speedometerfreq_low_ok);
 		imgbtnCancel = (ImageButton)mRoot.findViewById(R.id.ImageButton_menu_body_mode_speedometerfreq_low_cancel);
 		imgbtnDefault = (ImageButton)mRoot.findViewById(R.id.ImageButton_menu_body_mode_speedometerfreq_low_default);
+		textViewOK = (TextFitTextView)mRoot.findViewById(R.id.textView_menu_body_mode_speedometerfreq_low_ok);
+		textViewOK.setText(getString(ParentActivity.getResources().getString(R.string.OK), 15));
+		textViewCancel = (TextFitTextView)mRoot.findViewById(R.id.textView_menu_body_mode_speedometerfreq_low_cancel);
+		textViewCancel.setText(getString(ParentActivity.getResources().getString(R.string.Cancel), 16));
+		textViewDefault = (TextFitTextView)mRoot.findViewById(R.id.textView_menu_body_mode_speedometerfreq_low_default);
+		textViewDefault.setText(getString(ParentActivity.getResources().getString(R.string.Default), 25));
 		
 		textViewNum1 = (TextView)mRoot.findViewById(R.id.textView_menu_body_mode_speedometerfreq_num_1);
 		textViewNum2 = (TextView)mRoot.findViewById(R.id.textView_menu_body_mode_speedometerfreq_num_2);
@@ -140,6 +154,8 @@ public class SpeedometerFreqFragment extends ParentFragment{
 		radioNumUnder01 = (RadioButton)mRoot.findViewById(R.id.radio_menu_body_mode_speedometerfreq_data_under_01);
 		
 		radioGroupNum = (RadioGroup)mRoot.findViewById(R.id.radioGroup_menu_body_mode_speedometerfreq_data);
+		textViewSpeedUnit = (TextFitTextView)mRoot.findViewById(R.id.textView_menu_body_mode_speedometerfreq_data_unit);
+		textViewSpeedUnit.setText(getString(ParentActivity.getResources().getString(R.string.rpm_km_h), 251));
 
 	}
 
@@ -991,7 +1007,6 @@ public class SpeedometerFreqFragment extends ParentFragment{
 			break;
 		}
 	}
-	
 	
 	/////////////////////////////////////////////////////////////////////
 }

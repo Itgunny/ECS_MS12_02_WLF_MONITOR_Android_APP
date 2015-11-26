@@ -16,15 +16,16 @@ import taeha.wheelloader.fseries_monitor.main.Home;
 import taeha.wheelloader.fseries_monitor.main.ParentPopup;
 import taeha.wheelloader.fseries_monitor.main.R;
 import taeha.wheelloader.fseries_monitor.main.R.string;
-
+import taeha.wheelloader.fseries_monitor.main.TextFitTextView;
 public class EngineModePopup extends ParentPopup{
 	//CONSTANT////////////////////////////////////////
 
 	//////////////////////////////////////////////////
 	//RESOURCE////////////////////////////////////////
-	TextView textViewEcono;
-	TextView textViewSTD;
-	TextView textViewPWR;
+	TextFitTextView textViewTitle;
+	TextFitTextView textViewEcono;
+	TextFitTextView textViewSTD;
+	TextFitTextView textViewPWR;
 	//////////////////////////////////////////////////
 	
 	//VALUABLE////////////////////////////////////////
@@ -78,11 +79,14 @@ public class EngineModePopup extends ParentPopup{
 	@Override
 	protected void InitResource() {
 		// TODO Auto-generated method stub
-		textViewEcono = (TextView)mRoot.findViewById(R.id.textView_popup_enginemode_econo);
-		textViewSTD = (TextView)mRoot.findViewById(R.id.textView_popup_enginemode_std);
-		textViewPWR = (TextView)mRoot.findViewById(R.id.textView_popup_enginemode_pwr);
-		
-
+		textViewTitle = (TextFitTextView)mRoot.findViewById(R.id.textView_popup_enginemode_title);
+		textViewTitle.setText(getString(ParentActivity.getResources().getString(R.string.Engine_Mode), 240));
+		textViewEcono = (TextFitTextView)mRoot.findViewById(R.id.textView_popup_enginemode_econo);
+		textViewEcono.setText(getString(ParentActivity.getResources().getString(R.string.Econo), 241));
+		textViewSTD = (TextFitTextView)mRoot.findViewById(R.id.textView_popup_enginemode_std);
+		textViewSTD.setText(getString(ParentActivity.getResources().getString(R.string.Standard), 242));
+		textViewPWR = (TextFitTextView)mRoot.findViewById(R.id.textView_popup_enginemode_pwr);
+		textViewPWR.setText(getString(ParentActivity.getResources().getString(R.string.Power), 243));
 	}
 
 	@Override

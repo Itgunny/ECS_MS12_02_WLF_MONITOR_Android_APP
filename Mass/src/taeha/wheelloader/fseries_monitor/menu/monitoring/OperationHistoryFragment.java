@@ -9,6 +9,7 @@ import taeha.wheelloader.fseries_monitor.main.CAN1CommManager;
 import taeha.wheelloader.fseries_monitor.main.Home;
 import taeha.wheelloader.fseries_monitor.main.ParentFragment;
 import taeha.wheelloader.fseries_monitor.main.R;
+import taeha.wheelloader.fseries_monitor.main.TextFitTextView;
 import taeha.wheelloader.fseries_monitor.main.R.string;
 import android.os.Build;
 import android.os.Bundle;
@@ -33,24 +34,29 @@ public class OperationHistoryFragment extends ParentFragment{
 	//////////////////////////////////////////////////
 	//RESOURCE////////////////////////////////////////
 	ImageButton imgbtnOK;
+	TextFitTextView 	textViewOK;
 
-	TextView textViewWorkDaily;
-	TextView textViewWorkTotalA;
-	TextView textViewWorkTotalB;
-	TextView textViewWorkTotalC;
-	TextView textViewOdoTotal;
-	TextView textViewOdoLatest;
-	TextView textViewHourLatest;
 	
-	TextView textViewWorkDailyUnit;
-	TextView textViewWorkTotalAUnit;
-	TextView textViewWorkTotalBUnit;
-	TextView textViewWorkTotalCUnit;
-	TextView textViewOdoTotalUnit;
-	TextView textViewOdoLatestUnit;
-	TextView textViewHourLatestUnit;
+	TextFitTextView textViewWorkDaily;
+	TextFitTextView textViewWorkTotalA;
+	TextFitTextView textViewWorkTotalB;
+	TextFitTextView textViewWorkTotalC;
+	TextFitTextView textViewOdoTotal;
+	TextFitTextView textViewOdoLatest;
+	TextFitTextView textViewHourLatest;
 	
-	TextView textViewInit;
+	TextFitTextView textViewWorkDailyTitle;
+	TextFitTextView textViewOdoTotalTitle;
+	
+	TextFitTextView textViewWorkDailyUnit;
+	TextFitTextView textViewWorkTotalAUnit;
+	TextFitTextView textViewWorkTotalBUnit;
+	TextFitTextView textViewWorkTotalCUnit;
+	TextFitTextView textViewOdoTotalUnit;
+	TextFitTextView textViewOdoLatestUnit;
+	TextFitTextView textViewHourLatestUnit;
+	
+	TextFitTextView textViewInit;
 	
 	public CheckBox checkWorkTotalA;
 	public CheckBox checkWorkTotalB;
@@ -102,7 +108,7 @@ public class OperationHistoryFragment extends ParentFragment{
 		InitButtonListener();
 		
 		ParentActivity.ScreenIndex = ParentActivity.SCREEN_STATE_MENU_MONITORING_OPERATIONHISTORY_TOP;
-		ParentActivity._MenuBaseFragment._MenuInterTitleFragment.SetTitleText(ParentActivity.getResources().getString(R.string.Operation_History));
+		ParentActivity._MenuBaseFragment._MenuInterTitleFragment.SetTitleText(ParentActivity.getResources().getString(R.string.Operation_History), 254);
 		
 		HandleCursurDisplay = new Handler() {
 			@Override
@@ -123,42 +129,77 @@ public class OperationHistoryFragment extends ParentFragment{
 	protected void InitResource() {
 		// TODO Auto-generated method stub
 		imgbtnOK = (ImageButton)mRoot.findViewById(R.id.ImageButton_menu_body_monitoring_operationhistory_low_ok);
+		textViewOK = (TextFitTextView)mRoot.findViewById(R.id.textView_menu_body_monitoring_operationhistory_low_ok);
+		textViewOK.setText(getString(ParentActivity.getResources().getString(R.string.OK), 15));
 
-		textViewWorkDaily = (TextView)mRoot.findViewById(R.id.textView_menu_body_monitoring_operationhistory_work_daily_data);
-		textViewWorkTotalA = (TextView)mRoot.findViewById(R.id.textView_menu_body_monitoring_operationhistory_work_totala_data);
-		textViewWorkTotalB = (TextView)mRoot.findViewById(R.id.textView_menu_body_monitoring_operationhistory_work_totalb_data);
-		textViewWorkTotalC = (TextView)mRoot.findViewById(R.id.textView_menu_body_monitoring_operationhistory_work_totalc_data);
-		textViewOdoTotal = (TextView)mRoot.findViewById(R.id.textView_menu_body_monitoring_operationhistory_odo_total_data);
-		textViewOdoLatest = (TextView)mRoot.findViewById(R.id.textView_menu_body_monitoring_operationhistory_odo_latest_data);
-		textViewHourLatest = (TextView)mRoot.findViewById(R.id.textView_menu_body_monitoring_operationhistory_hour_latest_data);
+		textViewWorkDailyTitle = (TextFitTextView)mRoot.findViewById(R.id.textView_menu_body_monitoring_operationhistory_work_daily);
+		textViewWorkDailyTitle.setText(getString(ParentActivity.getResources().getString(R.string.Daily), 173));
+		textViewOdoTotalTitle = (TextFitTextView)mRoot.findViewById(R.id.textView_menu_body_monitoring_operationhistory_odo_total);
+		textViewOdoTotalTitle.setText(getString(ParentActivity.getResources().getString(R.string.Total_Odometer), 109));
 		
-		textViewWorkDailyUnit = (TextView)mRoot.findViewById(R.id.textView_menu_body_monitoring_operationhistory_work_daily_unit);
-		textViewWorkTotalAUnit = (TextView)mRoot.findViewById(R.id.textView_menu_body_monitoring_operationhistory_work_totala_unit);
-		textViewWorkTotalBUnit = (TextView)mRoot.findViewById(R.id.textView_menu_body_monitoring_operationhistory_work_totalb_unit);
-		textViewWorkTotalCUnit = (TextView)mRoot.findViewById(R.id.textView_menu_body_monitoring_operationhistory_work_totalc_unit);
-		textViewOdoTotalUnit = (TextView)mRoot.findViewById(R.id.textView_menu_body_monitoring_operationhistory_odo_total_unit);
-		textViewOdoLatestUnit = (TextView)mRoot.findViewById(R.id.textView_menu_body_monitoring_operationhistory_odo_latest_unit);
-		textViewHourLatestUnit = (TextView)mRoot.findViewById(R.id.textView_menu_body_monitoring_operationhistory_hour_latest_unit);
+		textViewWorkDaily = (TextFitTextView)mRoot.findViewById(R.id.textView_menu_body_monitoring_operationhistory_work_daily_data);
+		textViewWorkTotalA = (TextFitTextView)mRoot.findViewById(R.id.textView_menu_body_monitoring_operationhistory_work_totala_data);
+		textViewWorkTotalB = (TextFitTextView)mRoot.findViewById(R.id.textView_menu_body_monitoring_operationhistory_work_totalb_data);
+		textViewWorkTotalC = (TextFitTextView)mRoot.findViewById(R.id.textView_menu_body_monitoring_operationhistory_work_totalc_data);
+		textViewOdoTotal = (TextFitTextView)mRoot.findViewById(R.id.textView_menu_body_monitoring_operationhistory_odo_total_data);
+		textViewOdoLatest = (TextFitTextView)mRoot.findViewById(R.id.textView_menu_body_monitoring_operationhistory_odo_latest_data);
+		textViewHourLatest = (TextFitTextView)mRoot.findViewById(R.id.textView_menu_body_monitoring_operationhistory_hour_latest_data);
 		
-		textViewInit = (TextView)mRoot.findViewById(R.id.textView_menu_body_monitoring_operationhistory_init);
+		textViewWorkDailyUnit = (TextFitTextView)mRoot.findViewById(R.id.textView_menu_body_monitoring_operationhistory_work_daily_unit);
+		textViewWorkDailyUnit.setText(getString(ParentActivity.getResources().getString(R.string.ton), 11));
+		textViewWorkTotalAUnit = (TextFitTextView)mRoot.findViewById(R.id.textView_menu_body_monitoring_operationhistory_work_totala_unit);
+		textViewWorkTotalAUnit.setText(getString(ParentActivity.getResources().getString(R.string.ton), 11));
+		textViewWorkTotalBUnit = (TextFitTextView)mRoot.findViewById(R.id.textView_menu_body_monitoring_operationhistory_work_totalb_unit);
+		textViewWorkTotalBUnit.setText(getString(ParentActivity.getResources().getString(R.string.ton), 11));
+		textViewWorkTotalCUnit = (TextFitTextView)mRoot.findViewById(R.id.textView_menu_body_monitoring_operationhistory_work_totalc_unit);
+		textViewWorkTotalCUnit.setText(getString(ParentActivity.getResources().getString(R.string.ton), 11));
+		textViewOdoTotalUnit = (TextFitTextView)mRoot.findViewById(R.id.textView_menu_body_monitoring_operationhistory_odo_total_unit);
+		textViewOdoTotalUnit.setText(getString(ParentActivity.getResources().getString(R.string.km), 37));
+		textViewOdoLatestUnit = (TextFitTextView)mRoot.findViewById(R.id.textView_menu_body_monitoring_operationhistory_odo_latest_unit);
+		textViewOdoLatestUnit.setText(getString(ParentActivity.getResources().getString(R.string.km), 37));
+		textViewHourLatestUnit = (TextFitTextView)mRoot.findViewById(R.id.textView_menu_body_monitoring_operationhistory_hour_latest_unit);
+		textViewHourLatestUnit.setText(getString(ParentActivity.getResources().getString(R.string.Hr), 7));
+		
+		textViewInit = (TextFitTextView)mRoot.findViewById(R.id.textView_menu_body_monitoring_operationhistory_init);
+		textViewInit.setText(getString(ParentActivity.getResources().getString(R.string.Initialization), 30));
 
 		if(Build.VERSION.SDK_INT <= Build.VERSION_CODES.ICE_CREAM_SANDWICH_MR1){	
 			checkWorkTotalA = (CheckBox)mRoot.findViewById(R.id.checkBox_menu_body_monitoring_operationhistory_work_totala);
 			checkWorkTotalA.setPadding(50, 0, 0, 0);
+			checkWorkTotalA.setText(getString(ParentActivity.getResources().getString(R.string.Total_A), 174));
+			ParentActivity.setMarqueeText(checkWorkTotalA);
 			checkWorkTotalB = (CheckBox)mRoot.findViewById(R.id.checkBox_menu_body_monitoring_operationhistory_work_totalb);
 			checkWorkTotalB.setPadding(50, 0, 0, 0);
+			checkWorkTotalB.setText(getString(ParentActivity.getResources().getString(R.string.Total_B), 175));
+			ParentActivity.setMarqueeText(checkWorkTotalB);
 			checkWorkTotalC = (CheckBox)mRoot.findViewById(R.id.checkBox_menu_body_monitoring_operationhistory_work_totalc);
 			checkWorkTotalC.setPadding(50, 0, 0, 0);
+			checkWorkTotalC.setText(getString(ParentActivity.getResources().getString(R.string.Total_C), 176));
+			ParentActivity.setMarqueeText(checkWorkTotalC);
 			checkOdoLatest = (CheckBox)mRoot.findViewById(R.id.checkBox_menu_body_monitoring_operationhistory_odo_latest);
 			checkOdoLatest.setPadding(50, 0, 0, 0);
+			checkOdoLatest.setText(getString(ParentActivity.getResources().getString(R.string.Latest_Odometer), 110));
+			ParentActivity.setMarqueeText(checkOdoLatest);
 			checkHourLatest = (CheckBox)mRoot.findViewById(R.id.checkBox_menu_body_monitoring_operationhistory_hour_latest);
 			checkHourLatest.setPadding(50, 0, 0, 0);
+			checkHourLatest.setText(getString(ParentActivity.getResources().getString(R.string.Latest_Hourmeter), 107));
+			ParentActivity.setMarqueeText(checkHourLatest);
 		} else {
 			checkWorkTotalA = (CheckBox)mRoot.findViewById(R.id.checkBox_menu_body_monitoring_operationhistory_work_totala);
+			checkWorkTotalA.setText(getString(ParentActivity.getResources().getString(R.string.Total_A), 174));
+			ParentActivity.setMarqueeText(checkWorkTotalA);
 			checkWorkTotalB = (CheckBox)mRoot.findViewById(R.id.checkBox_menu_body_monitoring_operationhistory_work_totalb);
+			checkWorkTotalB.setText(getString(ParentActivity.getResources().getString(R.string.Total_B), 175));
+			ParentActivity.setMarqueeText(checkWorkTotalB);
 			checkWorkTotalC = (CheckBox)mRoot.findViewById(R.id.checkBox_menu_body_monitoring_operationhistory_work_totalc);
+			checkWorkTotalC.setText(getString(ParentActivity.getResources().getString(R.string.Total_C), 176));
+			ParentActivity.setMarqueeText(checkWorkTotalC);
 			checkOdoLatest = (CheckBox)mRoot.findViewById(R.id.checkBox_menu_body_monitoring_operationhistory_odo_latest);
+			checkOdoLatest.setText(getString(ParentActivity.getResources().getString(R.string.Latest_Odometer), 110));
+			ParentActivity.setMarqueeText(checkOdoLatest);
 			checkHourLatest = (CheckBox)mRoot.findViewById(R.id.checkBox_menu_body_monitoring_operationhistory_hour_latest);
+			checkHourLatest.setText(getString(ParentActivity.getResources().getString(R.string.Latest_Hourmeter), 107));
+			ParentActivity.setMarqueeText(checkHourLatest);
 		}
 		
 	}
@@ -284,26 +325,26 @@ public class OperationHistoryFragment extends ParentFragment{
 	/////////////////////////////////////////////////////////////////////
 	public void WorkDisplay(int _data, int _unit, TextView _textviewData, TextView _textviewUnit){
 		_textviewData.setText(ParentActivity.GetWeighit(_data, _unit));
-		if(_unit == Home.UNIT_WEIGHT_LB){
-			_textviewUnit.setText(ParentActivity.getResources().getString(string.lb));
-		}else if(_unit == Home.UNIT_WEIGHT_US_TON){
-			_textviewUnit.setText(ParentActivity.getResources().getString(string.USTon));
+		if(_unit == ParentActivity.UNIT_WEIGHT_LB){
+			_textviewUnit.setText(getString(ParentActivity.getResources().getString(string.lb), 12));
+			_textviewUnit.setText(getString(ParentActivity.getResources().getString(string.lb), 12));
 		}else{
-			_textviewUnit.setText(ParentActivity.getResources().getString(string.ton));
+			_textviewUnit.setText(getString(ParentActivity.getResources().getString(string.ton), 11));
+			_textviewUnit.setText(getString(ParentActivity.getResources().getString(string.ton), 11));
 		}
 	}
 	public void OdometerDislay(int _data, int _unit, TextView _textviewData, TextView _textviewUnit){
 		_textviewData.setText(ParentActivity.GetOdometerStrng(_data,_unit));
-		if(_unit == Home.UNIT_ODO_MILE){
-			_textviewUnit.setText(ParentActivity.getResources().getString(string.mile));
+		if(_unit == ParentActivity.UNIT_ODO_MILE){
+			_textviewUnit.setText(getString(ParentActivity.getResources().getString(string.mile), 38));
 		}else{
-			_textviewUnit.setText(ParentActivity.getResources().getString(string.km));
+			_textviewUnit.setText(getString(ParentActivity.getResources().getString(string.km), 37));
 		}
 	}
 
 	public void LatestHourmeterDislay(int _data){
 		textViewHourLatest.setText(ParentActivity.GetHourmeterString(_data));
-		textViewHourLatestUnit.setText(ParentActivity.getResources().getString(string.Hr));
+		textViewHourLatestUnit.setText(getString(ParentActivity.getResources().getString(string.Hr), 7));
 	}
 	/////////////////////////////////////////////////////////////////////
 	public void ClickLeft(){

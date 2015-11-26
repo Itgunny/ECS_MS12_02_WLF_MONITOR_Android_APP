@@ -20,6 +20,7 @@ import taeha.wheelloader.fseries_monitor.main.CAN1CommManager;
 import taeha.wheelloader.fseries_monitor.main.Home;
 import taeha.wheelloader.fseries_monitor.main.ParentPopup;
 import taeha.wheelloader.fseries_monitor.main.R;
+import taeha.wheelloader.fseries_monitor.main.TextFitTextView;
 import taeha.wheelloader.fseries_monitor.main.Home.SeatBeltTimerClass;
 import taeha.wheelloader.fseries_monitor.main.R.string;
 import taeha.wheelloader.fseries_monitor.popup.SpeedometerInitPopup.PopupOffTimerClass;
@@ -33,9 +34,9 @@ public class WorkLoadInitPopup extends ParentPopup{
 	ImageButton imgbtnOK;
 	ImageButton imgbtnCancel;
 	
-	TextView textViewTitle;
-	TextView textViewOK;
-	TextView textViewCancel;
+	TextFitTextView textViewTitle;
+	TextFitTextView textViewOK;
+	TextFitTextView textViewCancel;
 	//////////////////////////////////////////////////
 	
 	//VALUABLE////////////////////////////////////////
@@ -89,7 +90,7 @@ public class WorkLoadInitPopup extends ParentPopup{
 		imgbtnCancel.setVisibility(View.VISIBLE);
 		textViewOK.setVisibility(View.VISIBLE);
 		textViewCancel.setVisibility(View.VISIBLE);
-		textViewTitle.setText(ParentActivity.getResources().getString(string.Initialize_));
+		textViewTitle.setText(getString(ParentActivity.getResources().getString(string.Initialize_), 51));
 	}
 	@Override
 	public void dismiss() {
@@ -127,10 +128,12 @@ public class WorkLoadInitPopup extends ParentPopup{
 		imgbtnOK = (ImageButton)mRoot.findViewById(R.id.imageButton_popup_operationhistory_init_ok);
 		imgbtnCancel = (ImageButton)mRoot.findViewById(R.id.imageButton_popup_operationhistory_init_cancel);
 	
-		textViewTitle = (TextView)mRoot.findViewById(R.id.textView_popup_operationhistory_init_title);
+		textViewTitle = (TextFitTextView)mRoot.findViewById(R.id.textView_popup_operationhistory_init_title);
 
-		textViewOK = (TextView)mRoot.findViewById(R.id.textView_popup_operationhistory_init_ok);
-		textViewCancel = (TextView)mRoot.findViewById(R.id.textView_popup_operationhistory_init_cancel);
+		textViewOK = (TextFitTextView)mRoot.findViewById(R.id.textView_popup_operationhistory_init_ok);
+		textViewOK.setText(getString(ParentActivity.getResources().getString(string.OK), 15));
+		textViewCancel = (TextFitTextView)mRoot.findViewById(R.id.textView_popup_operationhistory_init_cancel);
+		textViewCancel.setText(getString(ParentActivity.getResources().getString(string.Cancel), 16));
 	}
 
 	@Override

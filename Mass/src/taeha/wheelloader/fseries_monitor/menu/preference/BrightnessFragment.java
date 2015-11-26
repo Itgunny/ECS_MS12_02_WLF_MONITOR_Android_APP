@@ -69,7 +69,7 @@ public class BrightnessFragment extends ParentFragment{
 		InitButtonListener();
 		
 		ParentActivity.ScreenIndex = ParentActivity.SCREEN_STATE_MENU_PREFERENCE_BRIGHTNESS_TOP;
-		ParentActivity._MenuBaseFragment._MenuInterTitleFragment.SetTitleText(ParentActivity.getResources().getString(R.string.Brightness_Setting));
+		ParentActivity._MenuBaseFragment._MenuInterTitleFragment.SetTitleText(ParentActivity.getResources().getString(R.string.Brightness_Setting), 412);
 		CursurFirstDisplay(BrightnessManualAuto);
 		BrightnessDisplay(BrightnessManualAuto);
 		
@@ -91,7 +91,12 @@ public class BrightnessFragment extends ParentFragment{
 	protected void InitResource() {
 		// TODO Auto-generated method stub
 		radioManual = (RadioButton)mRoot.findViewById(R.id.radioButton_menu_body_preference_brightness_manual);
+		radioManual.setText(getString(ParentActivity.getResources().getString(R.string.Manual), 26));
+		ParentActivity.setMarqueeRadio(radioManual);
 		radioAuto = (RadioButton)mRoot.findViewById(R.id.radioButton_menu_body_preference_brightness_auto);
+		radioAuto.setText(getString(ParentActivity.getResources().getString(R.string.Automatic), 27));
+		ParentActivity.setMarqueeRadio(radioAuto);
+		
 	}
 
 	protected void InitValuables() {
@@ -272,5 +277,13 @@ public class BrightnessFragment extends ParentFragment{
 		}
 	}
 	/////////////////////////////////////////////////////////////////////
-	
+	public String getString(String str, int index){
+		if(ParentActivity.langDb.findStrGetString(index, ParentActivity.LanguageIndex) == null){
+			Log.d(TAG, "Android");
+			return str;
+		}else {
+			Log.d(TAG, "Excel");
+			return ParentActivity.langDb.findStrGetString(index, ParentActivity.LanguageIndex);	
+		}
+	}
 }

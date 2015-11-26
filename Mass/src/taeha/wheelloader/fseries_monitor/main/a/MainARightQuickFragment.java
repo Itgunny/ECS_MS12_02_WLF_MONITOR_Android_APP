@@ -14,6 +14,7 @@ import taeha.wheelloader.fseries_monitor.main.CAN1CommManager;
 import taeha.wheelloader.fseries_monitor.main.Home;
 import taeha.wheelloader.fseries_monitor.main.ParentFragment;
 import taeha.wheelloader.fseries_monitor.main.R;
+import taeha.wheelloader.fseries_monitor.main.TextFitTextView;
 
 public class MainARightQuickFragment extends ParentFragment{
 	//CONSTANT////////////////////////////////////////
@@ -25,8 +26,9 @@ public class MainARightQuickFragment extends ParentFragment{
 	
 	ImageView imgViewIconFault;
 	ImageView imgViewIconMaint;
-	TextView textViewTitleFault;
-	TextView textViewTitleMaint;
+	
+	TextFitTextView textViewTitleFault;
+	TextFitTextView textViewTitleMaint;
 	//////////////////////////////////////////////////
 	
 	//VALUABLE////////////////////////////////////////
@@ -69,8 +71,10 @@ public class MainARightQuickFragment extends ParentFragment{
 		imgViewIconFault = (ImageView)mRoot.findViewById(R.id.imageView_rightup_main_a_quick_icon);
 		imgViewIconMaint = (ImageView)mRoot.findViewById(R.id.imageView_rightdown_main_a_quick_icon);
 
-		textViewTitleFault = (TextView)mRoot.findViewById(R.id.textView_rightup_main_a_quick_title);		
-		textViewTitleMaint = (TextView)mRoot.findViewById(R.id.textView_rightdown_main_a_quick_title);
+		textViewTitleFault = (TextFitTextView)mRoot.findViewById(R.id.textView_rightup_main_a_quick_title);	
+		textViewTitleFault.setText(getString(ParentActivity.getResources().getString(R.string.Active_Fault), 17));
+		textViewTitleMaint = (TextFitTextView)mRoot.findViewById(R.id.textView_rightdown_main_a_quick_title);
+		textViewTitleMaint.setText(getString(ParentActivity.getResources().getString(R.string.Maintenance), 18));
 	}
 	
 	protected void InitValuables() {

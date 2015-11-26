@@ -29,6 +29,7 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.TextView;
+import taeha.wheelloader.fseries_monitor.main.TextFitTextView;
 
 public class MaintenanceChangeCycleFragment extends ParentFragment{
 	//CONSTANT////////////////////////////////////////
@@ -37,6 +38,11 @@ public class MaintenanceChangeCycleFragment extends ParentFragment{
 	//RESOURCE////////////////////////////////////////
 	ImageButton imgbtnOK;
 	ImageButton imgbtnCancel;
+	TextFitTextView	textViewOK;
+	TextFitTextView	textViewCancel;
+	
+	TextFitTextView	textViewChangeCycle;
+	TextFitTextView	textViewUnit;
 
 	TextView textViewNum1;
 	TextView textViewNum2;
@@ -112,6 +118,15 @@ public class MaintenanceChangeCycleFragment extends ParentFragment{
 		// TODO Auto-generated method stub
 		imgbtnOK = (ImageButton)mRoot.findViewById(R.id.ImageButton_menu_body_management_maint_changecycle_low_ok);
 		imgbtnCancel = (ImageButton)mRoot.findViewById(R.id.ImageButton_menu_body_management_maint_changecycle_low_cancel);
+		textViewOK = (TextFitTextView)mRoot.findViewById(R.id.textView_menu_body_management_maint_changecycle_low_ok);
+		textViewOK.setText(getString(ParentActivity.getResources().getString(R.string.OK), 15));
+		textViewCancel = (TextFitTextView)mRoot.findViewById(R.id.textView_menu_body_management_maint_changecycle_low_cancel);
+		textViewCancel.setText(getString(ParentActivity.getResources().getString(R.string.Cancel), 16));
+		
+		textViewChangeCycle  = (TextFitTextView)mRoot.findViewById(R.id.textView_menu_body_management_maint_changecycle_text_title);
+		textViewChangeCycle.setText(getString(ParentActivity.getResources().getString(R.string.Change_Cycle), 406));
+		textViewUnit  = (TextFitTextView)mRoot.findViewById(R.id.textView_menu_body_management_maint_changecycle_text_unit);
+		textViewUnit.setText(getString(ParentActivity.getResources().getString(R.string.Hr), 7));
 	
 		textViewNum1 = (TextView)mRoot.findViewById(R.id.textView_menu_body_management_maint_changecycle_num_1);
 		textViewNum2 = (TextView)mRoot.findViewById(R.id.textView_menu_body_management_maint_changecycle_num_2);
@@ -399,7 +414,7 @@ public class MaintenanceChangeCycleFragment extends ParentFragment{
 		switch (_MaintItem) {
 		case	CAN1CommManager.ENGINE_OIL	:	
 			
-			ParentActivity._MenuBaseFragment._MenuInterTitleFragment.SetTitleText(ParentActivity.getResources().getString(string.Engine_oil));
+			ParentActivity._MenuBaseFragment._MenuInterTitleFragment.SetTitleText(ParentActivity.getResources().getString(string.Engine_oil), 388);
 			break;
 		case	CAN1CommManager.TRAVEL_REDUCTION_GEAR_CASE	:	
 			
@@ -409,62 +424,62 @@ public class MaintenanceChangeCycleFragment extends ParentFragment{
 			break;
 		case	CAN1CommManager.HYDRAULIC_OIL	:	
 			
-			ParentActivity._MenuBaseFragment._MenuInterTitleFragment.SetTitleText(ParentActivity.getResources().getString(string.Hydraulic_oil));
+			ParentActivity._MenuBaseFragment._MenuInterTitleFragment.SetTitleText(ParentActivity.getResources().getString(string.Hydraulic_oil), 389);
 			break;
 		case	CAN1CommManager.PILOT_LINE_FILTER_ELEMENT	:	
 			
-			ParentActivity._MenuBaseFragment._MenuInterTitleFragment.SetTitleText(ParentActivity.getResources().getString(string.Pilot_line_filter_element));
+			ParentActivity._MenuBaseFragment._MenuInterTitleFragment.SetTitleText(ParentActivity.getResources().getString(string.Pilot_line_filter_element), 390);
 			break;
 		case	CAN1CommManager.HYDRAULIC_TANK_DRAIN_FILTER_CARTRIDGE	:	
 			
 			break;
 		case	CAN1CommManager.HYDRAULIC_OIL_RETURN_FILTER	:	
 			
-			ParentActivity._MenuBaseFragment._MenuInterTitleFragment.SetTitleText(ParentActivity.getResources().getString(string.Hydraulic_oil_return_filter));
+			ParentActivity._MenuBaseFragment._MenuInterTitleFragment.SetTitleText(ParentActivity.getResources().getString(string.Hydraulic_oil_return_filter), 391);
 			break;
 		case	CAN1CommManager.ENGINE_OIL_FILTER	:	
 			
-			ParentActivity._MenuBaseFragment._MenuInterTitleFragment.SetTitleText(ParentActivity.getResources().getString(string.Engine_oil_filter));
+			ParentActivity._MenuBaseFragment._MenuInterTitleFragment.SetTitleText(ParentActivity.getResources().getString(string.Engine_oil_filter), 392);
 			break;
 		case	CAN1CommManager.FUEL_FILTER_ELEMENT	:	
 			
 			
-			ParentActivity._MenuBaseFragment._MenuInterTitleFragment.SetTitleText(ParentActivity.getResources().getString(string.Fuel_filter_element));
+			ParentActivity._MenuBaseFragment._MenuInterTitleFragment.SetTitleText(ParentActivity.getResources().getString(string.Fuel_filter_element), 393);
 			break;
 		case	CAN1CommManager.PRE_FILTER	:	
 			
-			ParentActivity._MenuBaseFragment._MenuInterTitleFragment.SetTitleText(ParentActivity.getResources().getString(string.Fuel_Pre_filter));
+			ParentActivity._MenuBaseFragment._MenuInterTitleFragment.SetTitleText(ParentActivity.getResources().getString(string.Fuel_Pre_filter), 394);
 			break;
 		case	CAN1CommManager.HYDRAULIC_TANK_AIR_BREATHER_ELEMENT	:	
 						
 //			ParentActivity._MenuBaseFragment._MenuInterTitleFragment.SetTitleText(ParentActivity.getResources().getString(string.Hydraulic_Tank_Drain_Filter));
-			ParentActivity._MenuBaseFragment._MenuInterTitleFragment.SetTitleText(ParentActivity.getResources().getString(string.Hydraulic_Tank_Air_Breather_Filter));
+			ParentActivity._MenuBaseFragment._MenuInterTitleFragment.SetTitleText(ParentActivity.getResources().getString(string.Hydraulic_Tank_Air_Breather_Filter), 395);
 			break;
 		case	CAN1CommManager.AIR_CLEANER_ELEMENT	:	
 		
 			break;
 		case	CAN1CommManager.RADIATOR_COOLANT	:	
 			
-			ParentActivity._MenuBaseFragment._MenuInterTitleFragment.SetTitleText(ParentActivity.getResources().getString(string.Radiator_engine_coolant));
+			ParentActivity._MenuBaseFragment._MenuInterTitleFragment.SetTitleText(ParentActivity.getResources().getString(string.Radiator_engine_coolant), 396);
 			break;
 		case	CAN1CommManager.SWING_BEARING_GEAR_PINION_GREASE	:	
 			
 			break;
 		case	CAN1CommManager.TRANSMISSION_OIL	:	
 			
-			ParentActivity._MenuBaseFragment._MenuInterTitleFragment.SetTitleText(ParentActivity.getResources().getString(string.Transmission_oil));
+			ParentActivity._MenuBaseFragment._MenuInterTitleFragment.SetTitleText(ParentActivity.getResources().getString(string.Transmission_oil), 397);
 			break;
 		case	CAN1CommManager.TRANSMISSION_OIL_FILTER	:	
 			
-			ParentActivity._MenuBaseFragment._MenuInterTitleFragment.SetTitleText(ParentActivity.getResources().getString(string.Transmission_oil_filter));
+			ParentActivity._MenuBaseFragment._MenuInterTitleFragment.SetTitleText(ParentActivity.getResources().getString(string.Transmission_oil_filter), 398);
 			break;
 		case	CAN1CommManager.FRONT_AXLE_DIFFERENTIAL_GEAR_OIL	:	
 			
-			ParentActivity._MenuBaseFragment._MenuInterTitleFragment.SetTitleText(ParentActivity.getResources().getString(string.Front_axle_oil));
+			ParentActivity._MenuBaseFragment._MenuInterTitleFragment.SetTitleText(ParentActivity.getResources().getString(string.Front_axle_oil), 399);
 			break;
 		case	CAN1CommManager.REAR_AXLE_DIFFERENTIAL_GEAR_OIL	:	
 		
-			ParentActivity._MenuBaseFragment._MenuInterTitleFragment.SetTitleText(ParentActivity.getResources().getString(string.Rear_axle_oil));
+			ParentActivity._MenuBaseFragment._MenuInterTitleFragment.SetTitleText(ParentActivity.getResources().getString(string.Rear_axle_oil), 400);
 			break;
 		case	CAN1CommManager.AXLE_PLANETARY_GEAR_OIL	:	
 			
@@ -477,11 +492,11 @@ public class MaintenanceChangeCycleFragment extends ParentFragment{
 			break;
 		case	CAN1CommManager.CRANKCASE_VENTILATION_FILTER	:	
 			
-			ParentActivity._MenuBaseFragment._MenuInterTitleFragment.SetTitleText(ParentActivity.getResources().getString(string.Crankcase_Ventilation_Filter));
+			ParentActivity._MenuBaseFragment._MenuInterTitleFragment.SetTitleText(ParentActivity.getResources().getString(string.Crankcase_Ventilation_Filter), 401);
 			break;
 		case	CAN1CommManager.AIR_CON_HEATER_OUTER_FILTER	:	
 			
-			ParentActivity._MenuBaseFragment._MenuInterTitleFragment.SetTitleText(ParentActivity.getResources().getString(string.Aircon_Heater_Outer_Filter));
+			ParentActivity._MenuBaseFragment._MenuInterTitleFragment.SetTitleText(ParentActivity.getResources().getString(string.Aircon_Heater_Outer_Filter), 402);
 			break;
 		default:
 			break;
@@ -683,6 +698,4 @@ public class MaintenanceChangeCycleFragment extends ParentFragment{
 		}
 	}
 	/////////////////////////////////////////////////////////////////////
-	
-	
 }

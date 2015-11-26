@@ -7,6 +7,8 @@ import taeha.wheelloader.fseries_monitor.main.CAN1CommManager;
 import taeha.wheelloader.fseries_monitor.main.Home;
 import taeha.wheelloader.fseries_monitor.main.ParentFragment;
 import taeha.wheelloader.fseries_monitor.main.R;
+import taeha.wheelloader.fseries_monitor.main.RadioButtonTextView;
+import taeha.wheelloader.fseries_monitor.main.TextFitTextView;
 import taeha.wheelloader.fseries_monitor.main.R.string;
 import android.os.Bundle;
 import android.os.Handler;
@@ -34,21 +36,22 @@ public class ServiceMenuSensorMonitoringHiddenFragment extends ParentFragment{
 	//////////////////////////////////////////////////
 	//RESOURCE////////////////////////////////////////
 	ImageButton imgbtnOK;
+	TextFitTextView	textViewOK;
 	
 	ImageButton imgbtnUp;
 	ImageButton imgbtnDown;
 	
 	ImageView imgViewCoolingFanIcon;
 	
-	RadioButton radioAuto;
-	RadioButton radioManual;
+	RadioButtonTextView radioAuto;
+	RadioButtonTextView radioManual;
 	
 	CheckBox checkMaxControl;
 	
 	// TextView
-	TextView textViewEpprValue;
-	TextView textViewExcute;
-	TextView textViewMaxControl;
+	TextFitTextView textViewEpprValue;
+	TextFitTextView textViewExcute;
+	TextFitTextView textViewMaxControl;
 	
 	// ListView
 	ListView listView;
@@ -111,7 +114,7 @@ public class ServiceMenuSensorMonitoringHiddenFragment extends ParentFragment{
 		SetMaxControlFanSpeed(MaxControlFanSpeed);
 		
 		ParentActivity.ScreenIndex = ParentActivity.SCREEN_STATE_MENU_MANAGEMENT_SERVICE_SENSORMONITORING_HIDDEN;
-		ParentActivity._MenuBaseFragment._MenuInterTitleFragment.SetTitleText(ParentActivity.getResources().getString(R.string.Fan_EPPR_Current_Adjust));
+		ParentActivity._MenuBaseFragment._MenuInterTitleFragment.SetTitleText(ParentActivity.getResources().getString(R.string.Fan_EPPR_Current_Adjust), 386);
 		HandleCursurDisplay = new Handler() {
 			@Override
 			public void handleMessage(Message msg) {
@@ -143,16 +146,24 @@ public class ServiceMenuSensorMonitoringHiddenFragment extends ParentFragment{
 		// TODO Auto-generated method stub
 		
 		imgbtnOK = (ImageButton)mRoot.findViewById(R.id.ImageButton_menu_body_management_service_sensormonitoring_hidden_low_ok);
+		textViewOK = (TextFitTextView)mRoot.findViewById(R.id.textView_menu_body_management_service_sensormonitoring_hidden_low_ok);
+		textViewOK.setText(getString(ParentActivity.getResources().getString(string.OK), 15));
 		
 		imgbtnUp = (ImageButton)mRoot.findViewById(R.id.imageButton_menu_body_management_service_sensormonitoring_hidden_plus);
 		imgbtnDown = (ImageButton)mRoot.findViewById(R.id.imageButton_menu_body_management_service_sensormonitoring_hidden_minus);
-		textViewEpprValue = (TextView)mRoot.findViewById(R.id.textView_menu_body_management_service_sensormonitoring_hidden_data);
 
-		radioAuto = (RadioButton)mRoot.findViewById(R.id.radioButton_menu_body_management_service_sensormonitoring_hidden_auto);
-		radioManual = (RadioButton)mRoot.findViewById(R.id.radioButton_menu_body_management_service_sensormonitoring_hidden_manual);
+		textViewEpprValue = (TextFitTextView)mRoot.findViewById(R.id.textView_menu_body_management_service_sensormonitoring_hidden_data);
+
+		radioAuto = (RadioButtonTextView)mRoot.findViewById(R.id.radioButton_menu_body_management_service_sensormonitoring_hidden_auto);
+		radioAuto.setText(getString(ParentActivity.getResources().getString(string.Automatic), 27));
+		radioManual = (RadioButtonTextView)mRoot.findViewById(R.id.radioButton_menu_body_management_service_sensormonitoring_hidden_manual);
+		radioManual.setText(getString(ParentActivity.getResources().getString(string.Manual), 26));
+		
+		textViewExcute = (TextFitTextView)mRoot.findViewById(R.id.textView_menu_body_management_service_sensormonitoring_hidden_excute);
+		textViewExcute.setText(getString(ParentActivity.getResources().getString(string.Excute), 249));
+		
+		textViewMaxControl = (TextFitTextView)mRoot.findViewById(R.id.textView_menu_body_management_service_sensormonitoring_hidden_low_maxcontrol);
 	
-		textViewExcute = (TextView)mRoot.findViewById(R.id.textView_menu_body_management_service_sensormonitoring_hidden_excute);
-		textViewMaxControl = (TextView)mRoot.findViewById(R.id.textView_menu_body_management_service_sensormonitoring_hidden_low_maxcontrol);
 		
 		imgViewCoolingFanIcon = (ImageView)mRoot.findViewById(R.id.imageView_menu_body_management_service_sensormonitoring_hidden_coolingfan_manual);
 
@@ -383,10 +394,10 @@ public class ServiceMenuSensorMonitoringHiddenFragment extends ParentFragment{
 	public void SetMaxControlFanSpeed(int Data){
 		switch (Data) {
 		case CAN1CommManager.DATA_STATE_OFF:
-			textViewMaxControl.setText(" : " + ParentActivity.getResources().getString(R.string.OFF));
+			textViewMaxControl.setText(" : " + getString(ParentActivity.getResources().getString(R.string.OFF), 98));
 			break;
 		case CAN1CommManager.DATA_STATE_ON:
-			textViewMaxControl.setText(" : " + ParentActivity.getResources().getString(R.string.ON));
+			textViewMaxControl.setText(" : " + getString(ParentActivity.getResources().getString(R.string.ON), 97));
 			break;
 		case CAN1CommManager.DATA_STATE_NOTAVAILABLE:
 			textViewMaxControl.setText(" : Not Available");
@@ -479,7 +490,7 @@ public class ServiceMenuSensorMonitoringHiddenFragment extends ParentFragment{
 			FanRpm = FanRpm - 10000;
 		adapter.clearItem();
 		adapter.addItem(new IconTextItem(ParentActivity.getResources().getDrawable(R.drawable.menu_management_machine_monitoring_bg_light),ParentActivity.getResources().getDrawable(R.drawable.menu_management_machine_monitoring_bg_line)
-				,"Fan rpm", Integer.toString(FanRpm), "rpm"));
+				,"Fan rpm", Integer.toString(FanRpm), getString(ParentActivity.getResources().getString(R.string.rpm), 34)));
 //		adapter.addItem(new IconTextItem(ParentActivity.getResources().getDrawable(R.drawable.menu_management_machine_monitoring_bg_light),ParentActivity.getResources().getDrawable(R.drawable.menu_management_machine_monitoring_bg_line)
 //				, "Engine Cooling Fan Valve Current", Integer.toString(EpprCurrent), "%"));		// ++, --, 150407 bwk HHI 요청으로 전류단위를 mA에서 %로 변경
 		textViewEpprValue.setText(Integer.toString(EpprCurrent));
@@ -543,20 +554,20 @@ public class ServiceMenuSensorMonitoringHiddenFragment extends ParentFragment{
 	
 		switch (Unit) {
 		case 0:
-			Result = ParentActivity.getResources().getString(string.bar);
+			Result = getString(ParentActivity.getResources().getString(string.bar), 43);
 			break;
 		case 1:
-			Result = ParentActivity.getResources().getString(string.Mpa);
+			Result = getString(ParentActivity.getResources().getString(string.Mpa), 44);
 			break;
 		case 2:
-			Result = ParentActivity.getResources().getString(string.kgf_cm);
+			Result = getString(ParentActivity.getResources().getString(string.kgf_cm), 45);
 			break;
 		case 3:
-			Result = ParentActivity.getResources().getString(string.Psi);
+			Result = getString(ParentActivity.getResources().getString(string.Psi), 46);
 			break;
 
 		default:
-			Result = ParentActivity.getResources().getString(string.bar);
+			Result = getString(ParentActivity.getResources().getString(string.bar), 43);
 			break;
 		}
 		return Result;
@@ -758,5 +769,4 @@ public class ServiceMenuSensorMonitoringHiddenFragment extends ParentFragment{
 			break;
 		}
 	}
-	
 }

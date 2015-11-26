@@ -13,6 +13,7 @@ import taeha.wheelloader.fseries_monitor.main.CAN1CommManager;
 import taeha.wheelloader.fseries_monitor.main.Home;
 import taeha.wheelloader.fseries_monitor.main.ParentFragment;
 import taeha.wheelloader.fseries_monitor.main.R;
+import taeha.wheelloader.fseries_monitor.main.TextFitTextView;
 
 public class MainBCenterAEBFragment extends ParentFragment{
 	//CONSTANT////////////////////////////////////////
@@ -24,8 +25,8 @@ public class MainBCenterAEBFragment extends ParentFragment{
 	
 	
 	RelativeLayout layoutBG;
-	
-	TextView textViewRPMData;	// ++, --, 150212 bwk
+	TextFitTextView textViewRPMUnit;
+	TextFitTextView textViewRPMData;	// ++, --, 150212 bwk
 	//////////////////////////////////////////////////
 	
 	//VALUABLE////////////////////////////////////////
@@ -92,8 +93,9 @@ public class MainBCenterAEBFragment extends ParentFragment{
 		imgViewGear = (ImageView)mRoot.findViewById(R.id.imageView_center_main_b_aeb_gear);
 		
 		layoutBG = (RelativeLayout)mRoot.findViewById(R.id.RelativeLayout_center_main_b_aeb);
-		
-		textViewRPMData = (TextView)mRoot.findViewById(R.id.textView_center_main_b_aeb_rpm);	// ++, --, 150212 bwk
+		textViewRPMUnit = (TextFitTextView)mRoot.findViewById(R.id.textView_center_main_b_aeb_rpm_unit);
+		textViewRPMUnit.setText(getString(ParentActivity.getResources().getString(R.string.rpm), 34));
+		textViewRPMData = (TextFitTextView)mRoot.findViewById(R.id.textView_center_main_b_aeb_rpm);	// ++, --, 150212 bwk
 	}
 	
 	protected void InitValuables() {

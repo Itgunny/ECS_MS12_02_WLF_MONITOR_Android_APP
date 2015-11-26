@@ -7,6 +7,7 @@ import taeha.wheelloader.fseries_monitor.main.Home;
 import taeha.wheelloader.fseries_monitor.main.ParentPopup;
 import taeha.wheelloader.fseries_monitor.main.R;
 import taeha.wheelloader.fseries_monitor.main.R.string;
+import taeha.wheelloader.fseries_monitor.main.TextFitTextView;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
@@ -28,9 +29,9 @@ public class MiracastClosePopup extends ParentPopup {
 	ImageButton imgbtnOK;
 	ImageButton imgbtnCancel;
 	
-	public TextView textViewTitle;
-	TextView textViewOK;
-	TextView textViewCancel;
+	TextView textViewTitle;
+	TextFitTextView textViewOK;
+	TextFitTextView textViewCancel;
 	//////////////////////////////////////////////////
 	
 	//VALUABLE////////////////////////////////////////
@@ -96,9 +97,13 @@ public class MiracastClosePopup extends ParentPopup {
 		imgbtnCancel = (ImageButton)mRoot.findViewById(R.id.imageButton_popup_miracast_close_cancel);
 	
 		textViewTitle = (TextView)mRoot.findViewById(R.id.textView_popup_miracast_close_title);
+		textViewTitle.setText(getString(ParentActivity.getResources().getString(R.string.CloseMira), 143));
 
-		textViewOK = (TextView)mRoot.findViewById(R.id.textView_popup_miracast_close_ok);
-		textViewCancel = (TextView)mRoot.findViewById(R.id.textView_popup_miracast_close_cancel);
+		textViewOK = (TextFitTextView)mRoot.findViewById(R.id.textView_popup_miracast_close_ok);
+		textViewOK.setText(getString(ParentActivity.getResources().getString(R.string.OK), 15));
+		
+		textViewCancel = (TextFitTextView)mRoot.findViewById(R.id.textView_popup_miracast_close_cancel);
+		textViewCancel.setText(getString(ParentActivity.getResources().getString(R.string.Cancel), 16));
 	}
 	@Override
 	protected void InitButtonListener() {
@@ -158,6 +163,7 @@ public class MiracastClosePopup extends ParentPopup {
 		if(intent != null){
 			//CAN1Comm.SetMultimediaFlag(true);
 			ParentActivity.startActivity(intent);
+			CAN1Comm.setRunningCheckMiracast(false);
 			ParentActivity.StartAlwaysOntopService();		// ++, --, 150324 cjg
 			ParentActivity.StartCheckMultimediaTimer();
 		}

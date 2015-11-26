@@ -9,6 +9,7 @@ import taeha.wheelloader.fseries_monitor.main.CAN1CommManager;
 import taeha.wheelloader.fseries_monitor.main.Home;
 import taeha.wheelloader.fseries_monitor.main.ParentFragment;
 import taeha.wheelloader.fseries_monitor.main.R;
+import taeha.wheelloader.fseries_monitor.main.TextFitTextView;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -33,6 +34,8 @@ public class ServiceMenuWeighingCompensationFragment extends ParentFragment{
 	//RESOURCE////////////////////////////////////////
 	ImageButton imgbtnOK;
 	ImageButton imgbtnCancel;
+	TextFitTextView	textViewOK;
+	TextFitTextView	textViewCancel;
 
 	TextView textViewNum1;
 	TextView textViewNum2;
@@ -116,7 +119,7 @@ public class ServiceMenuWeighingCompensationFragment extends ParentFragment{
 		CAN1Comm.Set_WeightOffsetSetting_PGN61184_62(15);
 
 		ParentActivity.ScreenIndex = ParentActivity.SCREEN_STATE_MENU_MANAGEMENT_SERVICE_WEIGHINGCOMPENSATION_TOP;
-		ParentActivity._MenuBaseFragment._MenuInterTitleFragment.SetTitleText(ParentActivity.getResources().getString(R.string.Weighing_System_Compensation));
+		ParentActivity._MenuBaseFragment._MenuInterTitleFragment.SetTitleText(ParentActivity.getResources().getString(R.string.Weighing_System_Compensation), 361);
 		HandleCursurDisplay = new Handler() {
 			@Override
 			public void handleMessage(Message msg) {
@@ -136,6 +139,10 @@ public class ServiceMenuWeighingCompensationFragment extends ParentFragment{
 		// TODO Auto-generated method stub
 		imgbtnOK = (ImageButton)mRoot.findViewById(R.id.ImageButton_menu_body_management_service_weighingcompensation_low_ok);
 		imgbtnCancel = (ImageButton)mRoot.findViewById(R.id.ImageButton_menu_body_management_service_weighingcompensation_low_cancel);
+		textViewOK = (TextFitTextView)mRoot.findViewById(R.id.textView_menu_body_management_service_weighingcompensation_low_ok);
+		textViewOK.setText(getString(ParentActivity.getResources().getString(R.string.OK), 15));
+		textViewCancel = (TextFitTextView)mRoot.findViewById(R.id.textView_menu_body_management_service_weighingcompensation_low_cancel);
+		textViewCancel.setText(getString(ParentActivity.getResources().getString(R.string.Cancel), 16));
 	
 		textViewNum1 = (TextView)mRoot.findViewById(R.id.textView_menu_body_management_service_weighingcompensation_num_1);
 		textViewNum2 = (TextView)mRoot.findViewById(R.id.textView_menu_body_management_service_weighingcompensation_num_2);
@@ -149,15 +156,21 @@ public class ServiceMenuWeighingCompensationFragment extends ParentFragment{
 		textViewNum0 = (TextView)mRoot.findViewById(R.id.textView_menu_body_management_service_weighingcompensation_num_0);
 
 		imgbtnBack = (ImageButton)mRoot.findViewById(R.id.imageButton_menu_body_management_service_weighingcompensation_num_back);
-		
 		textViewDot = (TextView)mRoot.findViewById(R.id.textView_menu_body_management_service_weighingcompensation_num_dot);
-		
 		imgbtnPlusMinu = (ImageButton)mRoot.findViewById(R.id.imageButton_menu_body_management_service_weighingcompensation_num_plusminus);
 		
 		radioNoOffset = (RadioButton)mRoot.findViewById(R.id.radioButton_menu_body_management_service_weighingcompensation_nooffset);
+		radioNoOffset.setText(getString(ParentActivity.getResources().getString(R.string.No_Offset), 15));
+		ParentActivity.setMarqueeRadio(radioNoOffset);
 		radioWorkTool1 = (RadioButton)mRoot.findViewById(R.id.radioButton_menu_body_management_service_weighingcompensation_worktool1);
+		radioWorkTool1.setText(getString(ParentActivity.getResources().getString(R.string.Work_Tool_1), 364));
+		ParentActivity.setMarqueeRadio(radioWorkTool1);
 		radioWorkTool2 = (RadioButton)mRoot.findViewById(R.id.radioButton_menu_body_management_service_weighingcompensation_worktool2);
+		radioWorkTool2.setText(getString(ParentActivity.getResources().getString(R.string.Work_Tool_2), 365));
+		ParentActivity.setMarqueeRadio(radioWorkTool2);
 		radioWorkTool3 = (RadioButton)mRoot.findViewById(R.id.radioButton_menu_body_management_service_weighingcompensation_worktool3);
+		radioWorkTool3.setText(getString(ParentActivity.getResources().getString(R.string.Work_Tool_3), 366));
+		ParentActivity.setMarqueeRadio(radioWorkTool3);
 		
 		layoutWorkTool1 = (RelativeLayout)mRoot.findViewById(R.id.RelativeLayout_menu_body_management_service_weighingcompensation_worktool1);
 		layoutWorkTool2 = (RelativeLayout)mRoot.findViewById(R.id.RelativeLayout_menu_body_management_service_weighingcompensation_worktool2);
@@ -168,8 +181,11 @@ public class ServiceMenuWeighingCompensationFragment extends ParentFragment{
 		textViewWorkTool3Data = (TextView)mRoot.findViewById(R.id.textView_menu_body_management_service_weighingcompensation_worktool3_data);
 		
 		textViewWorkTool1Unit = (TextView)mRoot.findViewById(R.id.textView_menu_body_management_service_weighingcompensation_worktool1_unit);
+		textViewWorkTool1Unit.setText(getString(ParentActivity.getResources().getString(R.string.Percent), 68));
 		textViewWorkTool2Unit = (TextView)mRoot.findViewById(R.id.textView_menu_body_management_service_weighingcompensation_worktool2_unit);
+		textViewWorkTool2Unit.setText(getString(ParentActivity.getResources().getString(R.string.Percent), 68));
 		textViewWorkTool3Unit = (TextView)mRoot.findViewById(R.id.textView_menu_body_management_service_weighingcompensation_worktool3_unit);
+		textViewWorkTool3Unit.setText(getString(ParentActivity.getResources().getString(R.string.Percent), 68));
 	}
 
 	protected void InitValuables() {

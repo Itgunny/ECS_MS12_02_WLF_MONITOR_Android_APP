@@ -15,6 +15,7 @@ import taeha.wheelloader.fseries_monitor.main.CAN1CommManager;
 import taeha.wheelloader.fseries_monitor.main.ParentFragment;
 import taeha.wheelloader.fseries_monitor.main.R;
 import taeha.wheelloader.fseries_monitor.main.R.string;
+import taeha.wheelloader.fseries_monitor.main.TextFitTextView;
 
 public class MainBKeyRideControlSpeedFragment extends ParentFragment{
 	//CONSTANT////////////////////////////////////////
@@ -27,13 +28,17 @@ public class MainBKeyRideControlSpeedFragment extends ParentFragment{
 	private  final int STEP			= 1;
 	//////////////////////////////////////////////////
 	//RESOURCE////////////////////////////////////////
-	TextView textViewForwardData;
-	TextView textViewBackwardData;
-	TextView textViewForwardMax;
-	TextView textViewForwardMin;
-	TextView textViewBackwardMax;
-	TextView textViewBackwardMin;
+	TextFitTextView textViewForwardTitle;
+	TextFitTextView textViewBackwardTitle;
+	TextFitTextView textViewForwardData;
+	TextFitTextView textViewBackwardData;
+	TextFitTextView textViewForwardMax;
+	TextFitTextView textViewForwardMin;
+	TextFitTextView textViewBackwardMax;
+	TextFitTextView textViewBackwardMin;
 	
+	TextFitTextView	textViewOK;
+	TextFitTextView	textViewCancel;
 	ImageButton imgbtnOK;
 	ImageButton imgbtnCancel;
 	
@@ -96,13 +101,23 @@ public class MainBKeyRideControlSpeedFragment extends ParentFragment{
 	@Override
 	protected void InitResource() {
 		// TODO Auto-generated method stub
-		textViewForwardData = (TextView)mRoot.findViewById(R.id.textView_key_main_b_ridecontrol_speed_forward_value);
-		textViewBackwardData = (TextView)mRoot.findViewById(R.id.textView_key_main_b_ridecontrol_speed_backward_value);
-		textViewForwardMax = (TextView)mRoot.findViewById(R.id.textView_key_main_b_ridecontrol_speed_forward_max);
-		textViewForwardMin = (TextView)mRoot.findViewById(R.id.textView_key_main_b_ridecontrol_speed_forward_min);
-		textViewBackwardMax = (TextView)mRoot.findViewById(R.id.textView_key_main_b_ridecontrol_speed_backward_max);
-		textViewBackwardMin = (TextView)mRoot.findViewById(R.id.textView_key_main_b_ridecontrol_speed_backward_min);
 		
+		textViewForwardTitle = (TextFitTextView)mRoot.findViewById(R.id.textView_key_main_b_ridecontrol_speed_forward_title);
+		textViewForwardTitle.setText(getString(ParentActivity.getResources().getString(R.string.Forward), 181));
+		textViewBackwardTitle = (TextFitTextView)mRoot.findViewById(R.id.textView_key_main_b_ridecontrol_speed_backward_title);
+		textViewBackwardTitle.setText(getString(ParentActivity.getResources().getString(R.string.Backward), 182));
+		textViewForwardData = (TextFitTextView)mRoot.findViewById(R.id.textView_key_main_b_ridecontrol_speed_forward_value);
+		textViewBackwardData = (TextFitTextView)mRoot.findViewById(R.id.textView_key_main_b_ridecontrol_speed_backward_value);
+		textViewForwardMax = (TextFitTextView)mRoot.findViewById(R.id.textView_key_main_b_ridecontrol_speed_forward_max);
+		textViewForwardMin = (TextFitTextView)mRoot.findViewById(R.id.textView_key_main_b_ridecontrol_speed_forward_min);
+		textViewBackwardMax = (TextFitTextView)mRoot.findViewById(R.id.textView_key_main_b_ridecontrol_speed_backward_max);
+		textViewBackwardMin = (TextFitTextView)mRoot.findViewById(R.id.textView_key_main_b_ridecontrol_speed_backward_min);
+		
+		
+		textViewOK = (TextFitTextView)mRoot.findViewById(R.id.textView_key_main_b_ridecontrol_speed_low_ok);
+		textViewOK.setText(getString(ParentActivity.getResources().getString(R.string.OK), 15));
+		textViewCancel = (TextFitTextView)mRoot.findViewById(R.id.textView_key_main_b_ridecontrol_speed_low_cancel);
+		textViewCancel.setText(getString(ParentActivity.getResources().getString(R.string.Cancel), 16));
 		imgbtnOK = (ImageButton)mRoot.findViewById(R.id.ImageButton_key_main_b_ridecontrol_speed_low_ok);
 		imgbtnCancel = (ImageButton)mRoot.findViewById(R.id.ImageButton_key_main_b_ridecontrol_speed_low_cancel);
 
@@ -231,9 +246,9 @@ public class MainBKeyRideControlSpeedFragment extends ParentFragment{
 		String strSpeed;
 		strSpeed = ParentActivity.GetRideControlSpeed(Data, Unit);
 		if(Unit == ParentActivity.UNIT_ODO_MILE){
-			textview.setText(strSpeed + " " + ParentActivity.getResources().getString(R.string.mph));
+			textview.setText(strSpeed + " " + getString(ParentActivity.getResources().getString(R.string.mph), 32));
 		}else{
-			textview.setText(strSpeed + " " + ParentActivity.getResources().getString(R.string.km_h));
+			textview.setText(strSpeed + " " + getString(ParentActivity.getResources().getString(R.string.km_h), 31));
 		}
 	}
 	public void SetSeekBarPosition(SeekBar _seekbar, int _Speed){

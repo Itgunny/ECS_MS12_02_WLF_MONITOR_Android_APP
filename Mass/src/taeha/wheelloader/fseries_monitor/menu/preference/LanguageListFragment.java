@@ -43,7 +43,7 @@ public class LanguageListFragment extends ParentFragment{
 	RadioButton radioSlovakian;
 	RadioButton radioEstonian;
 	RadioButton radioTurkish;
-	
+	RadioButton	radioHebrew;
 	RelativeLayout	LayoutBG;
 	//////////////////////////////////////////////////
 	
@@ -84,7 +84,7 @@ public class LanguageListFragment extends ParentFragment{
 		EnableRadioButton(false);
 		StartEnableButtonTimer();
 		ParentActivity.ScreenIndex = ParentActivity.SCREEN_STATE_MENU_PREFERENCE_DISPLAYTYPELANG_LANG_CHANGE;
-		ParentActivity._MenuBaseFragment._MenuInterTitleFragment.SetTitleText(ParentActivity.getResources().getString(R.string.Language));
+		ParentActivity._MenuBaseFragment._MenuInterTitleFragment.SetTitleText(ParentActivity.getResources().getString(R.string.Language), 422);
 		HandleCursurDisplay = new Handler() {
 			@Override
 			public void handleMessage(Message msg) {
@@ -130,6 +130,7 @@ public class LanguageListFragment extends ParentFragment{
 		radioSlovakian = (RadioButton)mRoot.findViewById(R.id.radioButton_menu_body_preference_Lang11);
 		radioEstonian = (RadioButton)mRoot.findViewById(R.id.radioButton_menu_body_preference_Lang12);
 		radioTurkish = (RadioButton)mRoot.findViewById(R.id.radioButton_menu_body_preference_Lang13);
+		radioHebrew = (RadioButton)mRoot.findViewById(R.id.radioButton_menu_body_preference_Lang14);
 		// --, 150225 bwk
 		
 		LayoutBG = (RelativeLayout)mRoot.findViewById(R.id.RelativeLayout_menu_body_preference_language);
@@ -268,6 +269,16 @@ public class LanguageListFragment extends ParentFragment{
 				SetLanguage(Home.STATE_DISPLAY_LANGUAGE_TURKISH);
 			}
 		});	
+		radioHebrew.setOnClickListener(new View.OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				CursurIndex = 14;
+				HandleCursurDisplay.sendMessage(HandleCursurDisplay.obtainMessage(CursurIndex));
+				SetLanguage(Home.STATE_DISPLAY_LANGUAGE_HEBREW);
+			}
+		});	
 	}
 
 	@Override
@@ -321,7 +332,7 @@ public class LanguageListFragment extends ParentFragment{
 	public void ClickLeft(){
 		switch (CursurIndex) {
 			case 1:
-				CursurIndex = 13;		
+				CursurIndex = 14;		
 				CursurDisplay(CursurIndex);
 				break;
 			case 2:
@@ -335,7 +346,7 @@ public class LanguageListFragment extends ParentFragment{
 			case 10:
 			case 11:
 			case 12:
-			case 13:
+			case 14:
 				CursurIndex--;
 				CursurDisplay(CursurIndex);
 				break;
@@ -361,14 +372,14 @@ public class LanguageListFragment extends ParentFragment{
 		case 10:
 		case 11:
 		case 12:
+		case 13:
 			CursurIndex++;
 			CursurDisplay(CursurIndex);
 			
 			break;
-		case 13:
+		case 14:
 			CursurIndex = 1;
 			CursurDisplay(CursurIndex);
-		
 			break;
 		
 		default:
@@ -439,6 +450,9 @@ public class LanguageListFragment extends ParentFragment{
 		case 13:
 			SetLanguage(Home.STATE_DISPLAY_LANGUAGE_TURKISH);
 			break;
+		case 14:
+			SetLanguage(Home.STATE_DISPLAY_LANGUAGE_HEBREW);
+			break;
 		// --, 150225 bwk
 		default:
 		
@@ -487,6 +501,9 @@ public class LanguageListFragment extends ParentFragment{
 		case Home.STATE_DISPLAY_LANGUAGE_TURKISH:
 			CursurIndex = 13;
 			break;
+		case Home.STATE_DISPLAY_LANGUAGE_HEBREW:
+			CursurIndex = 14;
+			break;
 		default:
 			CursurIndex = 1;
 			break;
@@ -517,6 +534,7 @@ public class LanguageListFragment extends ParentFragment{
 		radioSlovakian.setClickable(bEnable);
 		radioEstonian.setClickable(bEnable);
 		radioFinnish.setClickable(bEnable);		
+		radioHebrew.setClickable(bEnable);
 	}
 	
 	public void CursurDisplay(int Index){
@@ -534,7 +552,7 @@ public class LanguageListFragment extends ParentFragment{
 		radioSlovakian.setPressed(false);
 		radioEstonian.setPressed(false);
 		radioFinnish.setPressed(false);
-		
+		radioHebrew.setPressed(false);
 		switch (Index) {
 			case 1:
 				radioKorean.setPressed(true);
@@ -575,6 +593,9 @@ public class LanguageListFragment extends ParentFragment{
 			case 13:
 				radioTurkish.setPressed(true);
 				break;
+			case 14:
+				radioHebrew.setPressed(true);
+				break;
 			default:
 				break;
 		}
@@ -595,6 +616,7 @@ public class LanguageListFragment extends ParentFragment{
 		radioSlovakian.setChecked(false);
 		radioEstonian.setChecked(false);
 		radioFinnish.setChecked(false);
+		radioHebrew.setChecked(false);
 		
 		switch (data) {
 			case 1:
@@ -635,6 +657,9 @@ public class LanguageListFragment extends ParentFragment{
 				break;
 			case 13:
 				radioTurkish.setChecked(true);
+				break;
+			case 14:
+				radioHebrew.setChecked(true);
 				break;
 			default:
 				break;

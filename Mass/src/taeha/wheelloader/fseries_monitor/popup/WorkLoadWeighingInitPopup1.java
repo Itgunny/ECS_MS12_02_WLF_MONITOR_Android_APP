@@ -16,16 +16,18 @@ import taeha.wheelloader.fseries_monitor.main.Home;
 import taeha.wheelloader.fseries_monitor.main.ParentPopup;
 import taeha.wheelloader.fseries_monitor.main.R;
 import taeha.wheelloader.fseries_monitor.main.R.string;
+import taeha.wheelloader.fseries_monitor.main.TextFitTextView;
 
 public class WorkLoadWeighingInitPopup1 extends ParentPopup{
 	//CONSTANT////////////////////////////////////////
 
 	//////////////////////////////////////////////////
 	//RESOURCE////////////////////////////////////////
-	TextView textViewCurrent;
-	TextView textViewTotalA;
-	TextView textViewTotalB;
-	TextView textViewTotalC;
+	TextFitTextView textViewTitle;
+	TextFitTextView textViewCurrent;
+	TextFitTextView textViewTotalA;
+	TextFitTextView textViewTotalB;
+	TextFitTextView textViewTotalC;
 	//////////////////////////////////////////////////
 	
 	//VALUABLE////////////////////////////////////////
@@ -67,6 +69,8 @@ public class WorkLoadWeighingInitPopup1 extends ParentPopup{
 			ParentActivity.ScreenIndex = Home.SCREEN_STATE_MAIN_A_KEY_WORKLOAD_WEIGHING_INIT1;
 		else if(ParentActivity.OldScreenIndex == Home.SCREEN_STATE_MAIN_B_KEY_WORKLOAD)
 			ParentActivity.ScreenIndex = Home.SCREEN_STATE_MAIN_B_KEY_WORKLOAD_WEIGHING_INIT1;
+			Log.d(TAG,"WorkLoadInit1 ScreenIndex : "+ Integer.toHexString(ParentActivity.ScreenIndex) +"WorkLoadInit1 OldScreenIndex : "+ Integer.toHexString(ParentActivity.OldScreenIndex));
+		
 	}
 	@Override
 	public void dismiss() {
@@ -109,10 +113,16 @@ public class WorkLoadWeighingInitPopup1 extends ParentPopup{
 	@Override
 	protected void InitResource() {
 		// TODO Auto-generated method stub
-		textViewCurrent = (TextView)mRoot.findViewById(R.id.textView_popup_workload_init_current);
-		textViewTotalA = (TextView)mRoot.findViewById(R.id.textView_popup_workload_init_totala);
-		textViewTotalB = (TextView)mRoot.findViewById(R.id.textView_popup_workload_init_totalb);
-		textViewTotalC = (TextView)mRoot.findViewById(R.id.textView_popup_workload_init_totalc);
+		textViewTitle = (TextFitTextView)mRoot.findViewById(R.id.textView_popup_workload_init_title);
+		textViewTitle.setText(getString(ParentActivity.getResources().getString(string.Initialization), 30));
+		textViewCurrent = (TextFitTextView)mRoot.findViewById(R.id.textView_popup_workload_init_current);
+		textViewCurrent.setText(getString(ParentActivity.getResources().getString(string.Current), 263));
+		textViewTotalA = (TextFitTextView)mRoot.findViewById(R.id.textView_popup_workload_init_totala);
+		textViewTotalA.setText(getString(ParentActivity.getResources().getString(string.Total_A), 174));
+		textViewTotalB = (TextFitTextView)mRoot.findViewById(R.id.textView_popup_workload_init_totalb);
+		textViewTotalB.setText(getString(ParentActivity.getResources().getString(string.Total_B), 175));
+		textViewTotalC = (TextFitTextView)mRoot.findViewById(R.id.textView_popup_workload_init_totalc);
+		textViewTotalC.setText(getString(ParentActivity.getResources().getString(string.Total_C), 176));
 	}
 
 	@Override

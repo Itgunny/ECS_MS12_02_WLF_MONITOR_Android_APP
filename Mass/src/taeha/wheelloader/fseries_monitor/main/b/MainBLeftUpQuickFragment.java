@@ -12,6 +12,7 @@ import android.widget.TextView;
 import taeha.wheelloader.fseries_monitor.main.Home;
 import taeha.wheelloader.fseries_monitor.main.ParentFragment;
 import taeha.wheelloader.fseries_monitor.main.R;
+import taeha.wheelloader.fseries_monitor.main.TextFitTextView;
 
 public class MainBLeftUpQuickFragment extends ParentFragment{
 	//CONSTANT////////////////////////////////////////
@@ -22,7 +23,7 @@ public class MainBLeftUpQuickFragment extends ParentFragment{
 	
 	ImageView imgViewIcon;
 	
-	TextView textViewTitle;
+	TextFitTextView textViewTitle;
 	//////////////////////////////////////////////////
 	
 	//VALUABLE////////////////////////////////////////
@@ -62,8 +63,8 @@ public class MainBLeftUpQuickFragment extends ParentFragment{
 		
 		imgViewIcon = (ImageView)mRoot.findViewById(R.id.imageView_leftup_main_b_quick_icon);
 
-		textViewTitle = (TextView)mRoot.findViewById(R.id.textView_leftup_main_b_quick_title);
-		
+		textViewTitle = (TextFitTextView)mRoot.findViewById(R.id.textView_leftup_main_b_quick_title);
+		textViewTitle.setText(getString(ParentActivity.getResources().getString(R.string.User_Switching), 116));
 	}
 	
 	protected void InitValuables() {

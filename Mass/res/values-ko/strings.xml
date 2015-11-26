@@ -6,7 +6,6 @@
     <string name="Crash_Toast_Text">Crash</string>
     <string name="Error_Report">Error Report</string>
     <string name="Crash_Data">Crash Data</string>
-    <!-- Common Start-->
     <string name="Hr">Hr</string>
     <string name="C">℃</string>
     <string name="F">℉</string>
@@ -85,8 +84,6 @@
     <string name="Machine_Serial_Number">장비 호기 수</string>
     <string name="Serial_No">Serial No :</string>
     <string name="Re_entering_Serial_No">Serial No 재입력 :</string>
-    <!-- Common End-->
-    <!-- Main Start-->
     <string name="ENGINE_MODE">엔진 모드</string>
     <string name="CCO_MODE">C.C.O. 모드</string>
     <string name="ICCO_MODE">I.C.C.O. 모드</string>
@@ -108,6 +105,7 @@
     <string name="AL">AL</string>
     <string name="AN">AN</string>
     <string name="AH">AH</string>
+    <string name="Total_Hourmeter">전체 작업시간</string>
     <string name="Latest_Hourmeter">최근 작업시간</string>
     <string name="Average_Fuel_Rate">평균 연비</string>
     <string name="Total_Odometer">전체 주행거리</string>
@@ -143,7 +141,7 @@
     <string name="Bucket_Full_In_Error_Warning">버켓 롤백을 최대로 하지 않아, 무게 측정이 부정확 할수 있습니다. 재측정을 원하시면 엔터 키를 누르십시오.</string>
     <string name="Sudden_Change_Error_Warning">붐 상승 속도가 일정하지 않아, 무게 측정이 부정확 할 수 있습니다. 재측정을 원하시면 엔터 키를 누르십시오.</string>
     <string name="Hydraulic_Oil_Temp_Low_Warning">작동유 온도 낮음</string>
-    <string name="CloseMulti">미디어 플레이어 기능이 동작중 입니다. 미디어 플레이어를 종료하시겠습니까? </string>
+    <string name="CloseMulti">미디어 플레이어 기능이 동작중 입니다. 미디어 플레이어를 종료하시겠습니까?</string>
     <string name="CloseMira">스마트 터미널 기능이 동작중 입니다. 스마트 터미널을 종료하시겠습니까?</string>
     <string name="Front_Axle_Temp">전방 액슬 오일 온도</string>
     <string name="Rear_Axle_Temp">후방 액슬 오일 온도</string>
@@ -152,8 +150,6 @@
     <string name="Axle_Warning_Popup">"경고!\n하나 이상의 액슬에서 오일 온도가 정상 범위를 초과했습니다!!\n경고 램프가 꺼질 때까지 장비 운행을 멈추시고 액슬 오일을 식히시기 바랍니다."</string>
     <string name="Boom_Detent_Mode">붐 디텐트 모드</string>
     <string name="Bucket_Detent_Mode">버켓 디텐트 모드</string>
-    <!-- Main End -->
-    <!-- Key Start-->
     <string name="Main_Light">메인 라이트</string>
     <string name="Work_Light">작업등</string>
     <string name="Auto_Grease">자동 급지</string>
@@ -198,15 +194,11 @@
     <string name="Mirror_Heat_is_NOT_equipped">Mirror Heat is NOT equipped.</string>
     <string name="Quick_Coupler_is_NOT_equipped">Quick Coupler is NOT equipped.</string>
     <string name="Ride_Control_is_NOT_equipped">Ride Control is NOT equipped.</string>
-    <!-- Key End -->
-    <!-- Menu Start -->
     <string name="Mode">기능설정</string>
     <string name="Monitoring">진단기능</string>
     <string name="Management">관리기능</string>
     <string name="Preference">환경설정</string>
     <string name="Multimedia">멀티미디어</string>
-    <!-- Menu End -->
-    <!-- Menu Mode Start -->
     <string name="Eng">엔진</string>
     <string name="TM">변속기</string>
     <string name="HYD">유압</string>
@@ -260,8 +252,6 @@
     <string name="Push_and_hold_to_reverse_rotation">버튼을 누르고 있는 동안 냉각팬 역회전이 실행됩니다.</string>
     <string name="rpm_km_h">rpm/km/h</string>
     <string name="You_should_turn_OFF_Soft_end_stop_before_start_calibration">보정을 시작하기 전에 소프트 앤드 스탑을 꺼주십시오.</string>
-    <!-- Menu Mode End -->
-    <!-- Menu Monitoring Start -->
     <string name="Machine_Monitoring">장비상태</string>
     <string name="Operation_History">운행 이력</string>
     <string name="Fault_History">고장 이력</string>
@@ -328,8 +318,6 @@
     <string name="Daily_Record">일자 별 연료 소모량</string>
     <string name="Mode_Record">모드 별 연비</string>
     <string name="Machine_Information">장비 정보</string>
-    <!-- Menu Monitoring End -->
-    <!-- Menu Management Start -->
     <string name="Machine_Security">시동제한</string>
     <string name="Calibration">보정</string>
     <string name="Speedometer_Setting">속도계 설정</string>
@@ -351,22 +339,22 @@
     <string name="Manage_Usage">사용관리</string>
     <string name="Manage_Tag">태그관리</string>
     <string name="Registered_Tag">등록된 태그</string>
-    <string name="Registration">등록 </string>
+    <string name="Registration">등록</string>
     <string name="Delete">삭제</string>
     <string name="Boom_Bucket_Angle_Calibration">붐/버켓 각도 보정</string>
     <string name="Brake_Pedal_Sensor_Calibration">브레이크 페달 센서 보정</string>
     <string name="AEB">AEB</string>
     <string name="Lower_the_boom_at_min_height">붐을 최하 높이로 내리십시오.</string>
     <string name="Lift_up_the_boom_at_max_height">붐을 최고 높이로 올리십시오.</string>
-    <string name="Lift_the_boom_to__5_0">붐을 -5.0°로 이동시키십시오. </string>
+    <string name="Lift_the_boom_to__5_0">붐을 -5.0°로 이동시키십시오.</string>
     <string name="Max_retraction_of_bucket_cylinder">버켓 실린더 길이를 최소로 하십시오.</string>
     <string name="Max_extension_of_bucket_cylinder">버켓 실린더 길이를 최대로 하십시오.</string>
     <string name="Next">Next</string>
-    <string name="Complete">완료 </string>
+    <string name="Complete">완료</string>
     <string name="Start">시작</string>
     <string name="First_Calibration">1차 보정</string>
     <string name="Second_Calibration">2차 보정</string>
-    <string name="Roll_in_the_bucket_at_max_range_lower_the_boom_at_min_height">"시작 버튼을 누르기 전에, \n- 버켓과 붐을 최하 높이까지 하강시키고, 버켓을 안쪽으로 끝까지 복귀 합니다. \n- 엔진 모드가 P 모드로 설정 되어있는지 확인 합니다."</string>
+    <string name="Roll_in_the_bucket_at_max_range_lower_the_boom_at_min_height">"시작 버튼을 누르기 전에, 버켓과 붐을 최하 높이까지 하강시키고, 버켓을 안쪽으로 끝까지 복귀 합니다. \n - 엔진 모드가 P 모드로 설정 되어있는지 확인 합니다."</string>
     <string name="Press_Start_button_lift_the_boom_with_the_hydraulic_control_in_detent_position">시작 버튼을 누르고, 엑셀 페달을 밟지 않은 상태에서, 붐 조작 레버를 상승 방향으로 디텐트 위치까지 당겼다 놓습니다.</string>
     <string name="Boom_lifting_will_be_stopped_automatically_at_a_certain_position_and_calibration_is_completed">붐과 조작 레버는 특정 위치에서 자동으로 정지하고, 일정 시간 후 보정기능이 완료 될 것입니다.</string>
     <string name="Set_P_mode_step_on_pedal_max_range_press_Start_button_lift_the_boom_with_the_hydraulic_control_in_detent_position">시작 버튼을 누르고, 엑셀 페달을 최대로 밟은 상태에서, 붐 조작 레버를 상승 방향으로 디텐트 위치까지 당겼다 놓습니다.</string>
@@ -423,8 +411,6 @@
     <string name="Confirm_Reset_elapsed_time">소모품을 교환하였습니까?</string>
     <string name="Recommend_deleting_unused_tag_for_security_when_you_register_new_tag">태그 신규 등록 시 보안을 위해 기 등록된 미사용 태그는 삭제를 권장합니다.</string>
     <string name="Software_Update_Warning">소프트웨어 업데이트를 위해 시동을 꺼주십시오.</string>
-    <!-- Menu Management End -->
-    <!-- Menu Preference Start -->
     <string name="Brightness_Setting">화면밝기 조정</string>
     <string name="Clock_Setting">현재시간 설정</string>
     <string name="Unit_Setting">단위 설정</string>
@@ -443,12 +429,8 @@
     <string name="Check_Radio_mode_is_AUX_mode">(라디오 모드 설정을 AUX 모드로 변경해야 합니다)</string>
     <string name="Reverse_camera">(후진기어연동 전용)</string>
     <string name="Language_Warning">변경 사항을 전 시스템에 적용하기 위해서 장비를 KEY OFF하여 재시작 해주십시오.</string>
-    <!-- Menu Preference End -->
-    <!-- Menu Multimedia Start -->
     <string name="Media_Palyer">미디어 플레이어</string>
     <string name="Smart_Terminal">스마트 터미널</string>
-    <!-- Menu Multimedia End -->
-    <!-- Language Start -->
     <string name="Korean">한국어</string>
     <string name="English">영어</string>
     <string name="German">독일어</string>
@@ -462,8 +444,6 @@
     <string name="Slovakian">슬로바키아어</string>
     <string name="Estonian">에스토니아어</string>
     <string name="Finnish">핀란드어</string>
-    <!-- Language End -->
-    <!-- ETC Start -->
     <string name="Input_new_phone_number">새 번호 입력</string>
     <string name="WARMING_UP">워밍업</string>
     <string name="TOTAL_HOURMETER">전체 작업시간</string>
@@ -480,12 +460,15 @@
     <string name="Boom_Down_Response_Adjust">Boom Down Response Adjust</string>
     <string name="Bucket_Dump_Response_Adjust">Bucket Dump Response Adjust</string>
     <string name="Service_Contact">A/S 연락처</string>
-    <!-- ETC End -->
-    <!-- 151020 add start -->
-    <string name="METRIC">METRIC</string>
-    <string name="US">US</string>
-    <string name="CUSTOM">CUSTOM</string>
+    <string name="METRIC">미터법</string>
+    <string name="US">미국단위</string>
+    <string name="CUSTOM">사용자설정</string>
     <string name="FuelRate">연비</string>
     <string name="gal_h">gal/h</string>
-    <!-- 151020 add end -->    
+    <string name="gal">gal</string>
+    <string name="USTon">US ton</string>
+    <string name="Volume">부피</string>
+    <string name="Volume_L">L</string>
+    <string name="Volume_gallon">gal</string>
+    <string name="Distance">거리</string>
 </resources>

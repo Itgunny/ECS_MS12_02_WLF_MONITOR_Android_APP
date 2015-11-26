@@ -8,10 +8,10 @@
     
     <TextView
         android:id="@+id/textView_rightdown_main_a_tmshiftmode_title"
-        android:layout_width="wrap_content"
+        android:layout_width="160dp"
         android:layout_height="wrap_content"
         android:layout_alignRight="@+id/imageView_rightdown_main_a_tmshiftmode_line"
-        android:layout_marginRight="40dp"
+        android:layout_marginRight="20dp"
         android:layout_marginTop="100dp"
         android:text="@string/SHIFT_MODE"
         android:textAppearance="?android:attr/textAppearanceLarge"
@@ -34,6 +34,7 @@
            android:layout_marginTop="100dp"
            android:button="@drawable/_selector_radio_btn"
            android:text="@string/MANUAL"
+           android:singleLine="true"
            android:textColor="@drawable/_selector_radio_txt_white_amber"
            android:textSize="25sp" />
 
@@ -45,6 +46,7 @@
            android:layout_marginTop="100dp"
            android:button="@drawable/_selector_radio_btn"
            android:text="@string/AL"
+           android:singleLine="true"
            android:textColor="@drawable/_selector_radio_txt_white_amber"
            android:textSize="25sp" />
        
@@ -56,6 +58,7 @@
            android:layout_marginTop="200dp"
            android:button="@drawable/_selector_radio_btn"
            android:text="@string/AN"
+           android:singleLine="true"
            android:textColor="@drawable/_selector_radio_txt_white_amber"
            android:textSize="25sp" />
        
@@ -67,6 +70,7 @@
            android:layout_marginTop="200dp"
            android:button="@drawable/_selector_radio_btn"
            android:text="@string/AH"
+           android:singleLine="true"
            android:textColor="@drawable/_selector_radio_txt_white_amber"
            android:textSize="25sp"
            android:textStyle="normal" />

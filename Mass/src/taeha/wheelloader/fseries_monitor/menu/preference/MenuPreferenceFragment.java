@@ -59,7 +59,7 @@ public class MenuPreferenceFragment extends MenuBodyList_ParentFragment{
 		ParentActivity._MenuBaseFragment._MenuListTitleFragment.setBackButtonEnable(false);
 		ParentActivity.ScreenIndex = Home.SCREEN_STATE_MENU_PREFERENCE_TOP;
 		ParentActivity.OldScreenIndex = Home.SCREEN_STATE_MENU_PREFERENCE_TOP;
-		ParentActivity._MenuBaseFragment._MenuListTitleFragment.SetTitleText(ParentActivity.getResources().getString(R.string.Preference));
+		ParentActivity._MenuBaseFragment._MenuListTitleFragment.SetTitleText(ParentActivity.getResources().getString(R.string.Preference), 198);
 		CursurDisplay(CursurIndex);
 		return mRoot;
 	}
@@ -93,13 +93,12 @@ public class MenuPreferenceFragment extends MenuBodyList_ParentFragment{
 		setClickableList6(true);
 
 		
-		setListTitle1(ParentActivity.getResources().getString(string.Brightness_Setting));
-		setListTitle2(ParentActivity.getResources().getString(string.Clock_Setting));
-		setListTitle3(ParentActivity.getResources().getString(string.Unit_Setting));
-		setListTitle4(ParentActivity.getResources().getString(string.Display_Style) 
-				+ " / " + ParentActivity.getResources().getString(string.Language));
-		setListTitle5(ParentActivity.getResources().getString(string.Sound_Output_Setting));
-		setListTitle6(ParentActivity.getResources().getString(string.Camera_Setting));
+		setListTitle1(ParentActivity.getResources().getString(string.Brightness_Setting), 412);
+		setListTitle2(ParentActivity.getResources().getString(string.Clock_Setting), 413);
+		setListTitle3(ParentActivity.getResources().getString(string.Unit_Setting), 414);
+		setListTitle4((ParentActivity.getResources().getString(string.Display_Style) + " / " + ParentActivity.getResources().getString(string.Language)), 416, 422);
+		setListTitle5(ParentActivity.getResources().getString(string.Sound_Output_Setting), 415);	
+		setListTitle6(ParentActivity.getResources().getString(string.Camera_Setting), 216);
 		
 	}
 
@@ -175,10 +174,10 @@ public class MenuPreferenceFragment extends MenuBodyList_ParentFragment{
 	public void BrightnessDisplay(int _data){
 		switch (_data) {
 		case Home.BRIGHTNESS_MANUAL:
-			setListData1(ParentActivity.getResources().getString(string.Manual));
+			setListData1(ParentActivity.getResources().getString(string.Manual), 26);
 			break;
 		case Home.BRIGHTNESS_AUTO:
-			setListData1(ParentActivity.getResources().getString(string.Automatic));
+			setListData1(ParentActivity.getResources().getString(string.Automatic), 27);
 			break;
 		default:
 			break;
@@ -188,10 +187,10 @@ public class MenuPreferenceFragment extends MenuBodyList_ParentFragment{
 	public void SoundOutputDisplay(int _data){
 		switch (_data) {
 		case Home.STATE_INTERNAL_SPK:
-			setListData5(ParentActivity.getResources().getString(string.Internal_Speaker));
+			setListData5(ParentActivity.getResources().getString(string.Internal_Speaker), 420);
 			break;
 		case Home.STATE_EXTERNAL_AUX:
-			setListData5(ParentActivity.getResources().getString(string.External_Aux));
+			setListData5(ParentActivity.getResources().getString(string.External_Aux), 421);
 			break;
 		default:
 			break;

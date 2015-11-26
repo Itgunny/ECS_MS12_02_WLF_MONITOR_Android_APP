@@ -20,6 +20,7 @@ import taeha.wheelloader.fseries_monitor.main.ParentPopup;
 import taeha.wheelloader.fseries_monitor.main.R;
 import taeha.wheelloader.fseries_monitor.main.Home.SeatBeltTimerClass;
 import taeha.wheelloader.fseries_monitor.main.R.string;
+import taeha.wheelloader.fseries_monitor.main.TextFitTextView;
 import taeha.wheelloader.fseries_monitor.popup.SpeedometerInitPopup.PopupOffTimerClass;
 
 public class WorkLoadWeighingInitPopup2 extends ParentPopup{
@@ -32,8 +33,8 @@ public class WorkLoadWeighingInitPopup2 extends ParentPopup{
 	ImageButton imgbtnCancel;
 	
 	TextView textViewTitle;
-	TextView textViewOK;
-	TextView textViewCancel;
+	TextFitTextView textViewOK;
+	TextFitTextView textViewCancel;
 	//////////////////////////////////////////////////
 	
 	//VALUABLE////////////////////////////////////////
@@ -71,6 +72,7 @@ public class WorkLoadWeighingInitPopup2 extends ParentPopup{
 		
 		setTitle(SelectMode);
 
+		
 		if(ParentActivity.OldScreenIndex == Home.SCREEN_STATE_MENU_MODE_HYD_WORKLOAD_TOP)
 			ParentActivity.ScreenIndex = Home.SCREEN_STATE_MENU_MODE_HYD_WORKLOAD_WEIGHING_INIT2;
 		else if(ParentActivity.OldScreenIndex == Home.SCREEN_STATE_MAIN_A_KEY_WORKLOAD)
@@ -83,6 +85,7 @@ public class WorkLoadWeighingInitPopup2 extends ParentPopup{
 			ParentActivity.ScreenIndex = Home.SCREEN_STATE_MAIN_A_KEY_WORKLOAD_WEIGHING_INIT2;
 		else if(ParentActivity.OldScreenIndex == Home.SCREEN_STATE_MAIN_B_KEY_WORKLOAD_WEIGHING_INIT1)
 			ParentActivity.ScreenIndex = Home.SCREEN_STATE_MAIN_B_KEY_WORKLOAD_WEIGHING_INIT2;
+		
 		
 	}
 	
@@ -131,9 +134,11 @@ public class WorkLoadWeighingInitPopup2 extends ParentPopup{
 		imgbtnCancel = (ImageButton)mRoot.findViewById(R.id.imageButton_popup_loggedfault_delete_cancel);
 	
 		textViewTitle = (TextView)mRoot.findViewById(R.id.textView_popup_loggedfault_delete_title);
-
-		textViewOK = (TextView)mRoot.findViewById(R.id.textView_popup_loggedfault_delete_ok);
-		textViewCancel = (TextView)mRoot.findViewById(R.id.textView_popup_loggedfault_delete_cancel);
+		textViewTitle.setText(getString(ParentActivity.getResources().getString(string.Initialization), 30));
+		textViewOK = (TextFitTextView)mRoot.findViewById(R.id.textView_popup_loggedfault_delete_ok);
+		textViewOK.setText(getString(ParentActivity.getResources().getString(string.OK), 15));
+		textViewCancel = (TextFitTextView)mRoot.findViewById(R.id.textView_popup_loggedfault_delete_cancel);
+		textViewCancel.setText(getString(ParentActivity.getResources().getString(string.Cancel), 16));
 	}
 
 	@Override
@@ -207,20 +212,20 @@ public class WorkLoadWeighingInitPopup2 extends ParentPopup{
 	public void setTitle(int Index){
 		switch (Index) {
 		case CAN1CommManager.DATA_STATE_WEIGHINGDISPLAY_TOTAL_A:
-			textViewTitle.setText(ParentActivity.getResources().getString(string.Initialize_) 
-					+ "(" +ParentActivity.getResources().getString(string.Total_A) +")");
+			textViewTitle.setText(getString(ParentActivity.getResources().getString(string.Initialize_), 51) 
+					+ "(" +getString(ParentActivity.getResources().getString(string.Total_A), 174) +")");
 			break;
 		case CAN1CommManager.DATA_STATE_WEIGHINGDISPLAY_TOTAL_B:
-			textViewTitle.setText(ParentActivity.getResources().getString(string.Initialize_) 
-					+ "(" +ParentActivity.getResources().getString(string.Total_B) +")");
+			textViewTitle.setText(getString(ParentActivity.getResources().getString(string.Initialize_), 51) 
+					+ "(" +getString(ParentActivity.getResources().getString(string.Total_B), 175) +")");
 			break;
 		case CAN1CommManager.DATA_STATE_WEIGHINGDISPLAY_TOTAL_C:
-			textViewTitle.setText(ParentActivity.getResources().getString(string.Initialize_) 
-					+ "(" +ParentActivity.getResources().getString(string.Total_C) +")");
+			textViewTitle.setText(getString(ParentActivity.getResources().getString(string.Initialize_), 51) 
+					+ "(" +getString(ParentActivity.getResources().getString(string.Total_C), 176) +")");
 			break;
 		case 3:
-			textViewTitle.setText(ParentActivity.getResources().getString(string.Initialize_) 
-					+ "(" +ParentActivity.getResources().getString(string.Current) +")");
+			textViewTitle.setText(getString(ParentActivity.getResources().getString(string.Initialize_), 51)  
+					+ "(" +getString(ParentActivity.getResources().getString(string.Current), 263) +")");
 			break;
 		default:
 			break;

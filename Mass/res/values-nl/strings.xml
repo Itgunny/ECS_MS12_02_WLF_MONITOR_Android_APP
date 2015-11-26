@@ -6,8 +6,7 @@
     <string name="Crash_Toast_Text">Crash</string>
     <string name="Error_Report">Error Report</string>
     <string name="Crash_Data">Crash Data</string>
-    <!-- Common Start-->
-    <string name="Hr">Uur</string>
+    <string name="Hr">Hr</string>
     <string name="C">℃</string>
     <string name="F">℉</string>
     <string name="V">V</string>
@@ -37,8 +36,8 @@
     <string name="rpm">rpm</string>
     <string name="Setting">Instelling</string>
     <string name="Clear">Wissen</string>
-    <string name="km">km </string>
-    <string name="mile">mijl</string>
+    <string name="km">km</string>
+    <string name="mile">mile</string>
     <string name="Temp">TEMP</string>
     <string name="Speed">AFSTAND</string>
     <string name="Weight">Gewicht</string>
@@ -64,13 +63,12 @@
     <string name="New_Password">NIEUW PASWOORD</string>
     <string name="Re_entering_New_Password">PROBEER OPNIEUW</string>
     <string name="Access_Denied">Toegang geweigerd</string>
-    <string name="Input_new_phone_number">Voer nieuw telefoonnummer in</string>
     <string name="_5_12_digits">5~12 cijfers</string>
-    <string name="No_Changes_executed">Veranderingen niet doorgevoerd</string>
+    <string name="No_Changes_executed">Veranderingen niet oorgevoerd</string>
     <string name="Skip">Overslaan</string>
     <string name="AS">Aftersales</string>
     <string name="Percent">%</string>
-    <string name="mA">mA </string>
+    <string name="mA">mA</string>
     <string name="Check_joystick_steering_enable_fail_condition">Check joystick enable fail condition.</string>
     <string name="Check_EHCU_Fault_Code">Check EHCU Fault Code</string>
     <string name="Check_Steering_Joystick_Position">Check Steering Joystick Position</string>
@@ -83,18 +81,16 @@
     <string name="Initial_Para_Error_Found">Initial Parameter Error Found</string>
     <string name="Please_Reset_Power">Please Reset Power</string>
     <string name="l">l</string>
-    <!-- Common End-->
-    <!-- Main Start-->
+    <string name="Machine_Serial_Number">Machine Serial Number</string>
+    <string name="Serial_No">Serial No :</string>
+    <string name="Re_entering_Serial_No">Re-entering Serial No :</string>
     <string name="ENGINE_MODE">Motor modus</string>
-    <string name="WARMING_UP">Opwarmen</string>
     <string name="CCO_MODE">C.C.O. modus</string>
     <string name="ICCO_MODE">I.C.C.O modus</string>
     <string name="SHIFT_MODE">Schakel modus</string>
     <string name="TC_LOCK_UP">T.C. Lock up</string>
-    <string name="TOTAL_HOURMETER">Totaal uurmeter</string>
     <string name="LATEST_HOURMETER">Laatste uurmeter</string>
     <string name="AVERAGE_FUEL_RATE">Gemiddeld brandstofverbruik</string>
-    <string name="CURRENT_FUEL_RATE">Huidig brandstofverbruik</string>
     <string name="TOTAL_ODOMETER">Totaal odometer</string>
     <string name="LATEST_ODOMETER">Laatste odometer</string>
     <string name="ECONO">ECONO</string>
@@ -112,7 +108,6 @@
     <string name="Total_Hourmeter">Totaal uurmeter</string>
     <string name="Latest_Hourmeter">Laatste uurmeter</string>
     <string name="Average_Fuel_Rate">Gemiddeld brandstofverbruik</string>
-    <string name="Current_Fuel_Rate">Huidig brandstofverbruik</string>
     <string name="Total_Odometer">Totaal odometer</string>
     <string name="Latest_Odometer">Laatste odometer</string>
     <string name="HYD_Temp">HYD temp.</string>
@@ -124,7 +119,6 @@
     <string name="Help">Help</string>
     <string name="Bucket_Full_In_Error">Bucket Full In Error</string>
     <string name="Sudden_Change_Error">Sudden Change Error</string>
-    <string name="Please_press_Enter_key">Please press Enter key</string>
     <string name="User1">User1</string>
     <string name="User2">User2</string>
     <string name="User3">User3</string>
@@ -144,20 +138,18 @@
     <string name="Lamp_FuelWarmer">Fuel Warmer</string>
     <string name="Lamp_Preheat">Preheat</string>
     <string name="Lamp_FloatMode">Float Mode</string>
-    <string name="SuddenChange_BucketFullIn_Error_Warning">Bucket is not full in and angular speed is a sudden change, though weigh may be inaccurate. Press the Enter Key to reweigh.</string>
     <string name="Bucket_Full_In_Error_Warning">Bucket is not full in, though weigh may be inaccurate. Press the Enter Key to reweigh.</string>
     <string name="Sudden_Change_Error_Warning">Angular speed is a sudden change, though weigh may be inaccurate. Press the Enter Key to reweigh.</string>
     <string name="Hydraulic_Oil_Temp_Low_Warning">Hydraulic oil temperature low.</string>
-    <string name="LATEST_FUEL_CONSUMED">LATEST FUEL CONSUMED</string>
-    <string name="Latest_Fuel_Consumed">Latest Fuel Consumed</string>
-    <string name="CloseMulti">Player is running.\nYou want to close a Player?</string>
-    <string name="CloseMira">Miracast is running.\nYou want to close a Miracast?</string>
+    <string name="CloseMulti">"Player is running.\nYou want to close a Player?"</string>
+    <string name="CloseMira">"Smart Terminal is running.\nYou want to close a Miracast?"</string>
     <string name="Front_Axle_Temp">Front Axle Temp.</string>
     <string name="Rear_Axle_Temp">Rear Axle Temp.</string>
     <string name="A_DAYS_FUEL_USED">A DAYS FUEL USED</string>
     <string name="A_Days_Fuel_Used">A Days Fuel Used</string>
-    <!-- Main End -->
-    <!-- Key Start-->
+    <string name="Axle_Warning_Popup">"CAUTION!\nOne of axles exceeds allowable oil temperature‼\nStop operating the machine and cool down axle oil\nuntil warning lamp goes off."</string>
+    <string name="Boom_Detent_Mode">Boom Detent Mode</string>
+    <string name="Bucket_Detent_Mode">Bucket Detent Mode</string>
     <string name="Main_Light">Hoofdlicht</string>
     <string name="Work_Light">Werk licht</string>
     <string name="Auto_Grease">Centrale smering</string>
@@ -169,11 +161,10 @@
     <string name="Mirror_Heat">Spiegelverwarming</string>
     <string name="Detent_Setting">Detent instelling</string>
     <string name="Fine_Modulation">Fijnregeling</string>
-    <string name="FN">FN</string>
     <string name="Position_Lamp">Positielamp</string>
     <string name="Head_Lamp">Koplamp</string>
     <string name="Front">Voor</string>
-    <string name="Rear">Achter </string>
+    <string name="Rear">Achter</string>
     <string name="Locking_Attachment">Koppeling vergrendelen</string>
     <string name="Unlocking_Attachment">Koppeling ontgrendelen</string>
     <string name="On_Conditional_Speed">Aan, snelheidsgebonden</string>
@@ -191,9 +182,7 @@
     <string name="Save_Position">Bewaar positie</string>
     <string name="Forward">Vooruit</string>
     <string name="Backward">Achteruit</string>
-    <string name="Excute_Locking_Attachment">Voer koppelingsvergrendeling uit</string>
     <string name="Excuting_Locking_Attachment">Koppelingsvergrendeling bezig</string>
-    <string name="Excute_Unlocking_Attachment">Voer koppelingsontgrendeling uit</string>
     <string name="Excuting_Unlocking_Attachment">Koppelingsontgrendeling bezig</string>
     <string name="Attachment_Unlocked_Check_Locking_Status">Attachment Unlocked. Check Locking Status.</string>
     <string name="Do_you_want_to_turn_on_Mirror_Heat">Do you want to turn on Mirror Heat?</string>
@@ -205,15 +194,11 @@
     <string name="Mirror_Heat_is_NOT_equipped">Mirror Heat is NOT equipped.</string>
     <string name="Quick_Coupler_is_NOT_equipped">Quick Coupler is NOT equipped.</string>
     <string name="Ride_Control_is_NOT_equipped">Ride Control is NOT equipped.</string>
-    <!-- Key End -->
-    <!-- Menu Start -->
     <string name="Mode">MODE</string>
     <string name="Monitoring">MONITORING</string>
     <string name="Management">BEHEER</string>
     <string name="Preference">Voorkeur</string>
     <string name="Multimedia">Multimedia</string>
-    <!-- Menu End -->
-    <!-- Menu Mode Start -->
     <string name="Eng">ENG.</string>
     <string name="TM">TM.</string>
     <string name="HYD">HYD.</string>
@@ -224,20 +209,18 @@
     <string name="Kick_Down">Kick down</string>
     <string name="Engine_Speed">TOERENTAL MOTOR</string>
     <string name="Engine_Setting">Motor instelling</string>
-    <string name="Warming_Up">Opwarming</string>
     <string name="TC_Lock_Up">T.C. Lock up</string>
     <string name="Bucket_Priority">Bak prioriteit</string>
     <string name="Boom_Bucket_Detent_Mode">Giek arm detent modus</string>
     <string name="Auxilliary_Attachment_Max_Flow_Level">Aux. Uitrusting max. debiet niveau</string>
     <string name="Soft_End_Stop">Cylinder einde koers demping</string>
     <string name="Engine_Auto_Shutdown">Automatische motorstop</string>
-    <string name="Engine_Delay_Shutdown">Vertraagde motorstop</string>
     <string name="Camera_Setting">Camera instelling</string>
     <string name="Cooling_Fan_Reverse_Mode">Ventillator omkeer modus</string>
     <string name="Wiper_Level_Setting">Ruitenwisser niveau instelling</string>
     <string name="MODE1">Mode 1</string>
     <string name="MODE2">Mode 2</string>
-    <string name="MODE1_DOWN_UP">Mode 1 : AF/OP</string>
+    <string name="MODE1_DOWN_UP">Mode 1 : AF / OP</string>
     <string name="MODE2_DOWN_ONLY">Mode 2 : AF enkel</string>
     <string name="Active_Camera">CAMERA ACTIEF</string>
     <string name="Display_Order">SCHERM VOLGORDE</string>
@@ -268,15 +251,13 @@
     <string name="Excute">Execute</string>
     <string name="Push_and_hold_to_reverse_rotation">Push and hold to reverse rotation.</string>
     <string name="rpm_km_h">rpm/km/h</string>
-    <!-- Menu Mode End -->
-    <!-- Menu Monitoring Start -->
+    <string name="You_should_turn_OFF_Soft_end_stop_before_start_calibration">You should turn OFF Soft end stop before start calibration.</string>
     <string name="Machine_Monitoring">MONITORING</string>
     <string name="Operation_History">Operatie historiek</string>
-    <string name="Weighing_Information">Weeg informatie</string>
     <string name="Fault_History">Fout historiek</string>
     <string name="EHCU_IO_Information">EHCU I/O informatie</string>
     <string name="Version_Information">Versie-informatie</string>
-    <string name="Operation">Operatie  </string>
+    <string name="Operation">Operatie</string>
     <string name="Joystick_Stroke">Joystick beweging</string>
     <string name="EPPR_Current">EPPR stroom</string>
     <string name="Aux_Up">Aux op</string>
@@ -291,10 +272,8 @@
     <string name="Cluster">Cluster</string>
     <string name="RMCU">RMCU</string>
     <string name="EHCU">EHCU</string>
-    <string name="ACU">ACU</string>
     <string name="BKCU">BKCU</string>
     <string name="Software_Update">Software-update</string>
-    <string name="RMCU_Machine_Information">RMCU informatie</string>
     <string name="Network_Type">Netwerk type</string>
     <string name="Manufacture_Date">Productie datum</string>
     <string name="Program_Version">Software versie</string>
@@ -327,33 +306,26 @@
     <string name="ECU_Type">ECU type</string>
     <string name="ECU_Manufacturer_Name">ECU naam producent</string>
     <string name="Calibration_ID">Calibratie ID</string>
-    <string name="Boom_Lever_Floating_Position_Adjust">Aanpassing positie zwevende giek</string>
     <string name="Machine">MACHINE-FOUT</string>
     <string name="Engine">Motor</string>
     <string name="Transmission">Transmissie</string>
     <string name="Please_refer_to_machine_manual_for_more_detailed_description">Raadpleeg de bedieningshandleiding voor een meer gedetailleerde beschrijving.</string>
     <string name="Delete_Logged_Fault">Verwijder  foutcode</string>
-    <string name="Fingertip_Calibration">Fingertip calibratie</string>
-    <string name="Boom_Down_Response_Adjust">Aanpassing respons giek omlaag</string>
-    <string name="Bucket_Dump_Response_Adjust">Aanpassing respons bak uit</string>
     <string name="Hardware">Hardware</string>
     <string name="Fuel_Consumption_History">Fuel Consumption History</string>
     <string name="General_Record">General Record</string>
     <string name="Hourly_Record">Hourly Record</string>
     <string name="Daily_Record">Daily Record</string>
     <string name="Mode_Record">Mode Record</string>
-    <string name="Machine_Information">Machine Information</string>
-    <!-- Menu Monitoring End -->
-    <!-- Menu Management Start -->
+    <string name="Machine_Information">Versie-informatie</string>
     <string name="Machine_Security">OPSTART BEVEILIGING</string>
     <string name="Calibration">Calibratie</string>
     <string name="Speedometer_Setting">Instelling frequentie snelheidsmeter</string>
     <string name="Change_AS_Phone_Number">Wijzig A/S telefoonnummer</string>
-    <string name="Service_Contact">SERVICE CONTACT</string>
     <string name="Service_Menu">SERVICE MENU</string>
     <string name="ESL_System_Setting">OPSTART BEVEILIGING INSTELLEN</string>
     <string name="Change_Password">WACHTWOORD WIJZIGEN</string>
-    <string name="Smart_Key">Smart Key </string>
+    <string name="Smart_Key">Smart Key</string>
     <string name="On_After_Specific_Time">Aan, na ingestelde tijd</string>
     <string name="_5Min">5MIN</string>
     <string name="_10Min">10MIN</string>
@@ -422,8 +394,7 @@
     <string name="Engine_oil_filter">Filter Motorolie</string>
     <string name="Fuel_filter_element">Brandstoffilter</string>
     <string name="Fuel_Pre_filter">Voorfilter brandstof</string>
-    <string name="Breather_Hydraulic_tank">Ontluchter Hydraulische tank</string>
-    <string name="Hydraulic_Tank_Air_Breather_Filter"/>
+    <string name="Hydraulic_Tank_Air_Breather_Filter">Hydraulic Tank Air Breather Filter</string>
     <string name="Radiator_engine_coolant">Radiator koelvloeistof motor</string>
     <string name="Transmission_oil">Transmissie olie</string>
     <string name="Transmission_oil_filter">Filter Transmissie olie</string>
@@ -431,7 +402,6 @@
     <string name="Rear_axle_oil">Olie achteras</string>
     <string name="Crankcase_Ventilation_Filter">Crankcase Ventilation Filter</string>
     <string name="Aircon_Heater_Outer_Filter">Air-con. &amp; Heater Outer Filter</string>
-    <string name="Hydraulic_Tank_Drain_Filter">Hydraulische tank retourfilter</string>
     <string name="Count">AANTAL</string>
     <string name="Elapsed_Time">VERSTREKEN TIJD</string>
     <string name="Cycle">CYCLUS</string>
@@ -440,13 +410,11 @@
     <string name="Maintenance_History">Onderhoudshistoriek</string>
     <string name="Confirm_Reset_elapsed_time">Bevestig: Reset verstreken tijd</string>
     <string name="Recommend_deleting_unused_tag_for_security_when_you_register_new_tag">Recommend deleting unused tag for security when you register new tag.</string>
-    <!-- Menu Management End -->
-    <!-- Menu Preference Start -->
+    <string name="Software_Update_Warning">Turn the engine off for software update.</string>
     <string name="Brightness_Setting">HELDERHEID INSTELLEN</string>
     <string name="Clock_Setting">Klok instelling</string>
     <string name="Unit_Setting">Eénheden instelling</string>
     <string name="Sound_Output_Setting">Klank instellingen</string>
-    <string name="Wireless_Communication_Setting">Wireless communicatie instellingen</string>
     <string name="Display_Style">Display stijl</string>
     <string name="Time_settings_for_daytime">Tijdsinstellingen Dag</string>
     <string name="Daytime">Dagtijd</string>
@@ -458,11 +426,11 @@
     <string name="Type_B">Type B</string>
     <string name="Unit_C">℃</string>
     <string name="Unit_F">℉</string>
-    <!-- Menu Preference End -->
-    <!-- Menu Multimedia Start -->
+    <string name="Check_Radio_mode_is_AUX_mode">(Check Radio mode is AUX mode)</string>
+    <string name="Reverse_camera">(Reverse Camera)</string>
+    <string name="Language_Warning">To ensure that the entire system reflects the change, please Restart the machine.</string>
     <string name="Media_Palyer">Media speler</string>
-    <!-- Menu Multimedia End -->
-    <!-- Language Start -->
+    <string name="Smart_Terminal">Smart Terminal</string>
     <string name="Korean">Korean</string>
     <string name="English">English</string>
     <string name="German">German</string>
@@ -476,5 +444,31 @@
     <string name="Slovakian">Slovakian</string>
     <string name="Estonian">Estonian</string>
     <string name="Finnish">Finnish</string>
-    <!-- Language End -->
+    <string name="Input_new_phone_number">Voer nieuw telefoonnummer in</string>
+    <string name="WARMING_UP">Opwarmen</string>
+    <string name="TOTAL_HOURMETER">Totaal uurmeter</string>
+    <string name="CURRENT_FUEL_RATE">Huidig brandstofverbruik</string>
+    <string name="Current_Fuel_Rate">Huidig brandstofverbruik</string>
+    <string name="Excute_Locking_Attachment">Voer koppelingsvergrendeling uit</string>
+    <string name="Excute_Unlocking_Attachment">Voer koppelingsontgrendeling uit</string>
+    <string name="Warming_Up">Opwarming</string>
+    <string name="Engine_Delay_Shutdown">Vertraagde motorstop</string>
+    <string name="Weighing_Information">Weeg informatie</string>
+    <string name="ACU">ACU</string>
+    <string name="Boom_Lever_Floating_Position_Adjust">Aanpassing positie zwevende giek</string>
+    <string name="Fingertip_Calibration">Fingertip calibratie</string>
+    <string name="Boom_Down_Response_Adjust">Aanpassing respons giek omlaag</string>
+    <string name="Bucket_Dump_Response_Adjust">Aanpassing respons bak uit</string>
+    <string name="Service_Contact">SERVICE CONTACT</string>
+    <string name="METRIC">Metric Unit</string>
+    <string name="US">US Unit</string>
+    <string name="CUSTOM">User Setting</string>
+    <string name="FuelRate">Fuel Rate</string>
+    <string name="gal_h">gal/h</string>
+    <string name="gal">gal</string>
+    <string name="USTon">US ton</string>
+    <string name="Volume">Volume</string>
+    <string name="Volume_L">L</string>
+    <string name="Volume_gallon">gal</string>
+    <string name="Distance">Afstand </string>
 </resources>

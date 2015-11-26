@@ -14,6 +14,7 @@ import taeha.wheelloader.fseries_monitor.main.CAN1CommManager;
 import taeha.wheelloader.fseries_monitor.main.Home;
 import taeha.wheelloader.fseries_monitor.main.ParentPopup;
 import taeha.wheelloader.fseries_monitor.main.R;
+import taeha.wheelloader.fseries_monitor.main.TextFitTextView;
 import taeha.wheelloader.fseries_monitor.main.R.string;
 
 public class ICCOModePopup extends ParentPopup{
@@ -21,8 +22,9 @@ public class ICCOModePopup extends ParentPopup{
 
 	//////////////////////////////////////////////////
 	//RESOURCE////////////////////////////////////////
-	TextView textViewOff;
-	TextView textViewH;
+	TextFitTextView textViewTitle;
+	TextFitTextView textViewOff;
+	TextFitTextView textViewH;
 	//////////////////////////////////////////////////
 	
 	//VALUABLE////////////////////////////////////////
@@ -75,8 +77,12 @@ public class ICCOModePopup extends ParentPopup{
 	@Override
 	protected void InitResource() {
 		// TODO Auto-generated method stub
-		textViewOff = (TextView)mRoot.findViewById(R.id.textView_popup_iccomode_off);
-		textViewH = (TextView)mRoot.findViewById(R.id.textView_popup_iccomode_h);
+		textViewTitle = (TextFitTextView)mRoot.findViewById(R.id.textView_popup_iccomode_title);
+		textViewTitle.setText(getString(ParentActivity.getResources().getString(R.string.ICCO_Mode), 205));
+		textViewOff = (TextFitTextView)mRoot.findViewById(R.id.textView_popup_iccomode_off);
+		textViewOff.setText(getString(ParentActivity.getResources().getString(R.string.Off), 20));
+		textViewH = (TextFitTextView)mRoot.findViewById(R.id.textView_popup_iccomode_h);
+		textViewH.setText(getString(ParentActivity.getResources().getString(R.string.On), 19));
 	}
 
 	@Override

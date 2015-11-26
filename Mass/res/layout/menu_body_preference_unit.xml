@@ -151,7 +151,7 @@
             android:layout_centerVertical="true"
             android:src="@drawable/menu_bluedot" />
 
-        <TextView
+        <taeha.wheelloader.fseries_monitor.main.TextFitTextView
             android:id="@+id/textView_menu_body_preference_unit_fuel_title"
             android:layout_width="300dp"
             android:layout_height="wrap_content"
@@ -208,9 +208,9 @@
             android:layout_centerVertical="true"
             android:src="@drawable/menu_bluedot" />
 
-        <TextView
+        <taeha.wheelloader.fseries_monitor.main.TextFitTextView
             android:id="@+id/textView_menu_body_preference_unit_temp_title"
-            android:layout_width="300dp"
+            android:layout_width="280dp"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
             android:layout_marginLeft="20dp"
@@ -228,21 +228,21 @@
             android:splitMotionEvents="false" >
 
             <RadioButton
-                android:id="@+id/radioButton_menu_body_preference_unit_temp_f"
+                android:id="@+id/radioButton_menu_body_preference_unit_temp_c"
                 android:layout_width="200dp"
                 android:layout_height="wrap_content"
                 android:button="@drawable/_selector_radio_btn"
-                android:text="@string/Unit_F"
+                android:text="@string/Unit_C"
                 android:textColor="@drawable/_selector_radio_txt_white_amber"
                 android:textSize="25sp" />
 
             <RadioButton
-                android:id="@+id/radioButton_menu_body_preference_unit_temp_c"
+                android:id="@+id/radioButton_menu_body_preference_unit_temp_f"
                 android:layout_width="200dp"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="40dp"
                 android:button="@drawable/_selector_radio_btn"
-                android:text="@string/Unit_C"
+                android:text="@string/Unit_F"
                 android:textColor="@drawable/_selector_radio_txt_white_amber"
                 android:textSize="25sp" />
         </RadioGroup>
@@ -265,9 +265,9 @@
             android:layout_centerVertical="true"
             android:src="@drawable/menu_bluedot" />
 
-        <TextView
+        <taeha.wheelloader.fseries_monitor.main.TextFitTextView
             android:id="@+id/textView_menu_body_preference_unit_speed_title"
-            android:layout_width="300dp"
+            android:layout_width="280dp"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
             android:layout_marginLeft="20dp"
@@ -322,9 +322,9 @@
             android:layout_centerVertical="true"
             android:src="@drawable/menu_bluedot" />
 
-        <TextView
+        <taeha.wheelloader.fseries_monitor.main.TextFitTextView
             android:id="@+id/textView_menu_body_preference_unit_weight_title"
-            android:layout_width="300dp"
+            android:layout_width="280dp"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
             android:layout_marginLeft="20dp"
@@ -389,9 +389,9 @@
             android:layout_centerVertical="true"
             android:src="@drawable/menu_bluedot" />
 
-        <TextView
+        <taeha.wheelloader.fseries_monitor.main.TextFitTextView
             android:id="@+id/textView_menu_body_preference_unit_pressure_title"
-            android:layout_width="300dp"
+            android:layout_width="280dp"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
             android:layout_marginLeft="20dp"
@@ -516,7 +516,7 @@
                     android:layout_alignTop="@+id/ImageButton_menu_body_preference_unit_low_ok"
                     android:src="@drawable/menu_low_icon_ok" />
 
-                <TextView
+                <taeha.wheelloader.fseries_monitor.main.TextFitTextView
                     android:id="@+id/textView_menu_body_preference_unit_low_ok"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
@@ -554,7 +554,7 @@
                     android:layout_alignTop="@+id/ImageButton_menu_body_preference_unit_low_cancel"
                     android:src="@drawable/menu_low_icon_cancel" />
 
-                <TextView
+                <taeha.wheelloader.fseries_monitor.main.TextFitTextView
                     android:id="@+id/textView_menu_body_preference_unit_low_cancel"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"

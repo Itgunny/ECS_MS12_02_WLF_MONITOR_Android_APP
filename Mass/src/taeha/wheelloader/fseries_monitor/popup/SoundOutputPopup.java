@@ -15,14 +15,17 @@ import taeha.wheelloader.fseries_monitor.main.CAN1CommManager;
 import taeha.wheelloader.fseries_monitor.main.Home;
 import taeha.wheelloader.fseries_monitor.main.ParentPopup;
 import taeha.wheelloader.fseries_monitor.main.R;
+import taeha.wheelloader.fseries_monitor.main.R.string;
+import taeha.wheelloader.fseries_monitor.main.TextFitTextView;
 
 public class SoundOutputPopup extends ParentPopup{
 	//CONSTANT////////////////////////////////////////
 
 	//////////////////////////////////////////////////
 	//RESOURCE////////////////////////////////////////
-	TextView textViewInternal;
-	TextView textViewExternal;
+	TextFitTextView textViewTitle;
+	TextFitTextView textViewInternal;
+	TextFitTextView textViewExternal;
 	//////////////////////////////////////////////////
 	
 	//VALUABLE////////////////////////////////////////
@@ -73,8 +76,14 @@ public class SoundOutputPopup extends ParentPopup{
 	@Override
 	protected void InitResource() {
 		// TODO Auto-generated method stub
-		textViewInternal = (TextView)mRoot.findViewById(R.id.textView_popup_soundoutput_internal);
-		textViewExternal = (TextView)mRoot.findViewById(R.id.textView_popup_soundoutput_aux);
+		textViewInternal = (TextFitTextView)mRoot.findViewById(R.id.textView_popup_soundoutput_internal);
+		textViewInternal.setText(getString(ParentActivity.getResources().getString(string.Internal_Speaker), 420));
+		
+		textViewExternal = (TextFitTextView)mRoot.findViewById(R.id.textView_popup_soundoutput_aux);
+		textViewExternal.setText(getString(ParentActivity.getResources().getString(string.External_Aux), 421));
+		
+		textViewTitle = (TextFitTextView)mRoot.findViewById(R.id.textView_popup_soundoutput_title);
+		textViewTitle.setText(getString(ParentActivity.getResources().getString(string.Sound_Output_Setting), 415));
 		
 	}
 

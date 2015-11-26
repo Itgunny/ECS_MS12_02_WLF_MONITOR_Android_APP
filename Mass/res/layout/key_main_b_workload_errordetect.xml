@@ -14,7 +14,7 @@
         android:layout_marginTop="112dp"
         android:src="@drawable/main_key_line" />
     
-    <TextView
+    <taeha.wheelloader.fseries_monitor.main.TextFitTextView
         android:id="@+id/textView_key_main_b_workload_errordetect_line"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -40,6 +40,7 @@
            android:button="@drawable/_selector_radio_btn"
            android:text="@string/Off"
            android:textColor="@drawable/_selector_radio_txt_white_amber"
+           android:singleLine="true"
            android:textSize="25sp" />
 
        <RadioButton
@@ -50,6 +51,7 @@
            android:button="@drawable/_selector_radio_btn"
            android:text="@string/On"
            android:textColor="@drawable/_selector_radio_txt_white_amber"
+           android:singleLine="true"
            android:textSize="25sp" />
 
    </RadioGroup>

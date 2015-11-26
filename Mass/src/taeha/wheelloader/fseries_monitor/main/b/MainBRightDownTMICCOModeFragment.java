@@ -25,6 +25,7 @@ public class MainBRightDownTMICCOModeFragment extends ParentFragment{
 	
 	//////////////////////////////////////////////////
 	//RESOURCE////////////////////////////////////////
+	TextView	textViewTitle;
 	RadioButton radioOff;
 	RadioButton radioH;
 	
@@ -86,9 +87,15 @@ public class MainBRightDownTMICCOModeFragment extends ParentFragment{
 	@Override
 	protected void InitResource() {
 		// TODO Auto-generated method stub
+		textViewTitle = (TextView)mRoot.findViewById(R.id.textView_rightdown_main_b_tmiccomode_title);
+		textViewTitle.setText(getString(ParentActivity.getResources().getString(R.string.ICCO_MODE), 87));
+		ParentActivity.setMarqueeText(textViewTitle);
 		radioOff = (RadioButton)mRoot.findViewById(R.id.radioButton_rightdown_main_b_tmiccomode_off);
+		radioOff.setText(getString(ParentActivity.getResources().getString(R.string.OFF), 98));
+		ParentActivity.setMarqueeRadio(radioOff);
 		radioH = (RadioButton)mRoot.findViewById(R.id.radioButton_rightdown_main_b_tmiccomode_h);
-		
+		radioH.setText(getString(ParentActivity.getResources().getString(R.string.ON), 97));
+		ParentActivity.setMarqueeRadio(radioOff);
 		LayoutBG = (RelativeLayout)mRoot.findViewById(R.id.RelativeLayout_rightdown_main_b_tmiccomode);
 	}
 	

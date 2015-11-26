@@ -15,6 +15,8 @@ import taeha.wheelloader.fseries_monitor.main.CAN1CommManager;
 import taeha.wheelloader.fseries_monitor.main.Home;
 import taeha.wheelloader.fseries_monitor.main.ParentFragment;
 import taeha.wheelloader.fseries_monitor.main.R;
+import taeha.wheelloader.fseries_monitor.main.TextFitTextView;
+import taeha.wheelloader.fseries_monitor.main.R.string;
 
 public class MainAKeyWorkLoadAccumulationFragment extends ParentFragment{
 	//CONSTANT////////////////////////////////////////
@@ -23,7 +25,7 @@ public class MainAKeyWorkLoadAccumulationFragment extends ParentFragment{
 	//RESOURCE////////////////////////////////////////
 	RadioButton radioManual;
 	RadioButton radioAuto;
-	
+	TextFitTextView	textViewTitle;
 	//////////////////////////////////////////////////
 	
 	//VALUABLE////////////////////////////////////////
@@ -70,7 +72,14 @@ public class MainAKeyWorkLoadAccumulationFragment extends ParentFragment{
 	protected void InitResource() {
 		// TODO Auto-generated method stub
 		radioManual = (RadioButton)mRoot.findViewById(R.id.radioButton_key_main_a_workload_accumulation_manual);
+		radioManual.setText(getString(ParentActivity.getResources().getString(string.Manual), 26));
+		ParentActivity.setMarqueeRadio(radioManual);
 		radioAuto = (RadioButton)mRoot.findViewById(R.id.radioButton_key_main_a_workload_accumulation_auto);
+		radioAuto.setText(getString(ParentActivity.getResources().getString(string.Automatic), 27));
+		ParentActivity.setMarqueeRadio(radioAuto);
+		
+		textViewTitle = (TextFitTextView)mRoot.findViewById(R.id.textView_key_main_a_workload_accumulation_title);
+		textViewTitle.setText(getString(ParentActivity.getResources().getString(string.Weighing_System), 114));
 	}
 	
 	protected void InitValuables() {

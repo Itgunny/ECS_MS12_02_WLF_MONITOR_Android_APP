@@ -26,6 +26,7 @@ public class MainBRightUpEngineModeFragment extends ParentFragment{
 	
 	//////////////////////////////////////////////////
 	//RESOURCE////////////////////////////////////////
+	TextView	textViewTitle;
 	RadioButton radioPower;
 	RadioButton radioStandard;
 	RadioButton radioEcono;
@@ -87,9 +88,18 @@ public class MainBRightUpEngineModeFragment extends ParentFragment{
 	@Override
 	protected void InitResource() {
 		// TODO Auto-generated method stub
+		textViewTitle = (TextView)mRoot.findViewById(R.id.textView_rightup_main_b_enginemode_title);
+		textViewTitle.setText(getString(ParentActivity.getResources().getString(R.string.ENGINE_MODE), 85));
+		ParentActivity.setMarqueeText(textViewTitle);
 		radioPower = (RadioButton)mRoot.findViewById(R.id.radioButton_rightup_main_b_enginemode_power);
+		radioPower.setText(getString(ParentActivity.getResources().getString(R.string.POWER), 96));
+		ParentActivity.setMarqueeText(radioPower);
 		radioStandard = (RadioButton)mRoot.findViewById(R.id.radioButton_rightup_main_b_enginemode_standard);
+		radioStandard.setText(getString(ParentActivity.getResources().getString(R.string.STANDARD), 95));
+		ParentActivity.setMarqueeText(radioStandard);
 		radioEcono = (RadioButton)mRoot.findViewById(R.id.radioButton_rightup_main_b_enginemode_econo);
+		radioEcono.setText(getString(ParentActivity.getResources().getString(R.string.ECONO), 94));
+		ParentActivity.setMarqueeText(radioEcono);
 		
 		LayoutBG = (RelativeLayout)mRoot.findViewById(R.id.RelativeLayout_rightup_main_b_engine_mode_top);
 	}

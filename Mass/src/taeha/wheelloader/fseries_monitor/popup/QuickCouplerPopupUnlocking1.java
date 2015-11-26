@@ -7,9 +7,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup.LayoutParams;
 import android.widget.ImageButton;
+import android.widget.TextView;
 import taeha.wheelloader.fseries_monitor.main.Home;
 import taeha.wheelloader.fseries_monitor.main.ParentPopup;
 import taeha.wheelloader.fseries_monitor.main.R;
+import taeha.wheelloader.fseries_monitor.main.TextFitTextView;
+import taeha.wheelloader.fseries_monitor.main.R.string;
 
 public class QuickCouplerPopupUnlocking1 extends ParentPopup{
 	//CONSTANT////////////////////////////////////////
@@ -18,6 +21,10 @@ public class QuickCouplerPopupUnlocking1 extends ParentPopup{
 	//RESOURCE////////////////////////////////////////
 	ImageButton imgbtnOK;
 	ImageButton imgbtnCancel;
+	
+	TextView	textViewTitle;
+	TextFitTextView	textViewOK;
+	TextFitTextView 	textViewCancel;
 	//////////////////////////////////////////////////
 	
 	//VALUABLE////////////////////////////////////////
@@ -83,6 +90,16 @@ public class QuickCouplerPopupUnlocking1 extends ParentPopup{
 		// TODO Auto-generated method stub
 		imgbtnOK = (ImageButton)mRoot.findViewById(R.id.imageButton_popup_key_quickcoupler_unlocking_1_ok);
 		imgbtnCancel = (ImageButton)mRoot.findViewById(R.id.imageButton_popup_key_quickcoupler_unlocking_1_cancel);
+		
+		textViewTitle = (TextView)mRoot.findViewById(R.id.textView_popup_key_quickcoupler_unlocking_1_title);
+		textViewTitle.setText(getString(ParentActivity.getResources().getString(string.Excute_Unlocking_Attachment), 451));
+		
+		
+		textViewOK = (TextFitTextView)mRoot.findViewById(R.id.textView_popup_key_quickcoupler_unlocking_1_ok);
+		textViewOK.setText(getString(ParentActivity.getResources().getString(string.OK), 15));
+		
+		textViewCancel = (TextFitTextView)mRoot.findViewById(R.id.textView_popup_key_quickcoupler_unlocking_1_cancel);
+		textViewCancel.setText(getString(ParentActivity.getResources().getString(string.Cancel), 16));
 	}
 
 	@Override

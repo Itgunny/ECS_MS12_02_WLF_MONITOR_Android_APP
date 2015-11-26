@@ -12,6 +12,8 @@ import android.app.Service;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager.NameNotFoundException;
 import android.media.AudioManager;
 import android.media.SoundPool;
 import android.net.wifi.WifiManager;
@@ -19,10 +21,8 @@ import android.os.Build;
 import android.os.Handler;
 import android.os.IBinder;
 import android.os.Message;
-import android.os.SystemClock;
 import android.util.Log;
 import android.view.KeyEvent;
-import android.view.MotionEvent;
 
 public class CommService extends Service{
 
@@ -36,6 +36,7 @@ public class CommService extends Service{
 	private static final int UART3Baudrate = 115200;
 	private static final String UART3ComPort = "/dev/ttySAC3";
 	private FileDescriptor mFdUART3;
+	public boolean topCheckMiracast = false;
 	
 	// SOUND
 	private static SoundPool SoundPoolKeyButton;
@@ -76,6 +77,7 @@ public class CommService extends Service{
 	public static int endingSoundCount = 0;
 	public static int endingKeyIGCount = 0;
 	// --, 150403 cjg
+	public static PackageInfo pi = null;
 	/////////////////////////////////////////////////////////////////////
 	
 	//////////////////LOAD NATIVELIBRARY/////////////////////////////////
@@ -220,7 +222,6 @@ public class CommService extends Service{
 	public native int Get_WeightOffsetSetting_PGN61184_62();
 	public native int Get_WeightOffset_1922_PGN61184_62();
 	public native int Get_WeighingDisplayMode1_1910_PGN61184_62();
-	
 	//////RX_WEIGHT_OFFSET_61184_63///////
 	public native int Get_MessageType_PGN61184_63();
 	public native int Get_WeightOffsetSelectionStatus_PGN61184_63();
@@ -1148,7 +1149,7 @@ public class CommService extends Service{
 		Log.v(TAG,"InitComport");		
 		mFdUART1 = Open_UART1(UART1ComPort,UART1Baudrate,0);
 		mFdUART3 = Open_UART3(UART3ComPort,UART3Baudrate,0);
-		
+
 	}
 	// close Comport
 	public void CloseComport(){
@@ -1216,7 +1217,8 @@ public class CommService extends Service{
 				//CAN1Comm.Callback_KeyButton(Data);
 				//break;
 			case CAN1CommManager.MENU:
-				MenuKeyEvent();
+				HandleKeyButton.sendMessage(HandleKeyButton.obtainMessage(Data));
+				
 				if(GetScreenTopFlag() == true)	// 타 apk에서 소리 2번 울림
 					SoundPoolKeyButton.play(SoundID, fVolume, fVolume, 0, 0, 1);
 				break;
@@ -1246,20 +1248,18 @@ public class CommService extends Service{
 				break;
 			// ++, 150324 bwk
 			case CAN1CommManager.LEFT:
-				//if(GetScreenTopFlag() == true || CAN1Comm.CameraCurrentOnOff == true)
 				if(GetScreenTopFlag() == true || (CAN1Comm.CameraCurrentOnOff == true && CAN1Comm.CameraOnFlag != CAN1CommManager.STATE_CAMERA_REVERSEGEAR))
 				{
 					CAN1Comm.Callback_KeyButton(Data);
 				}else if(CAN1Comm.CameraOnFlag == CAN1CommManager.STATE_CAMERA_REVERSEGEAR){
-				}else
-				{
-					BackKeyEvent();
+				}
+				else{
+					HandleKeyButton.sendMessage(HandleKeyButton.obtainMessage(Data));
 				}
 				SoundPoolKeyButton.play(SoundID, fVolume, fVolume, 0, 0, 1);
 				break;
 			// --, 150324 bwk
 			case CAN1CommManager.RIGHT:
-				//if(GetScreenTopFlag() == true || CAN1Comm.CameraCurrentOnOff == true)
 				if(GetScreenTopFlag() == true || (CAN1Comm.CameraCurrentOnOff == true && CAN1Comm.CameraOnFlag != CAN1CommManager.STATE_CAMERA_REVERSEGEAR))
 				{
 					CAN1Comm.TxCMDToMCU(CAN1CommManager.CMD_BUZ, 0);
@@ -1419,6 +1419,14 @@ public class CommService extends Service{
 	public static boolean GetFNFlag(){
 		return FNFlag;
 	}
+	public boolean isTopCheckMiracast() {
+		return topCheckMiracast;
+	}
+
+	public void setRunningCheckMiracast(boolean _topCheckMiracast) {
+		topCheckMiracast = _topCheckMiracast;
+	}
+
 	/*
 	public static boolean GetrpmFlag(){
 		return rpmFlag;
@@ -1499,39 +1507,135 @@ public class CommService extends Service{
 		Log.v(TAG,"onCreate");
 		InitComport();
 		CAN1Comm = CAN1CommManager.getInstance(this);
-
+		
 		InitSound();
 		super.onCreate();
+		try {
+			pi = getPackageManager().getPackageInfo("com.powerone.wfd.sink", 0);
+		} catch (NameNotFoundException e1) {
+			
+		} catch (NullPointerException e2){
+			
+		} catch (Exception e){
+			
+		}
 		
 		HandleKeyButton = new Handler() {
 			@Override
 			public void handleMessage(Message msg) {
+
 				if(msg.what == CAN1CommManager.POWER_OFF){
 					// ++, 150403 cjg
 					//allKillRunningApps("taeha.wheelloader.fseries_monitor.main");
 					if(GetScreenTopFlag() == true){
 						SetPowerOffFlag(false);
 					}else{
-						if(CheckTopApps("com.mxtech.videoplayer.ad")){
-							ClickFN();
+						if(pi != null){
+							if(pi.versionName.equals("1.0.5BF")){
+								if(CheckTopApps("com.mxtech.videoplayer.ad")){
+									ClickFN();
+								}else{
+									CallHome();
+								}
+								SetPowerOffFlag(true);
+							}else{
+								if(CheckTopApps("com.mxtech.videoplayer.ad")){
+									ClickFN();
+								}else if(CAN1Comm.isTopCheckMiracast() == true){
+									CloseSmartTerminal();
+									CallHome();
+								}
+								else{
+									CallHome();
+								}
+								SetPowerOffFlag(true);
+							}
 						}else{
-							CallHome();
+							if(CheckTopApps("com.mxtech.videoplayer.ad")){
+								ClickFN();
+							}else{
+								CallHome();
+							}
+							SetPowerOffFlag(true);
 						}
-						SetPowerOffFlag(true);
 					}
 					// --, 150403 cjg
-				}else if(msg.what == CAN1CommManager.FN){
+				}else if(msg.what == CAN1CommManager.MENU){
+					if(pi != null){
+						
+						if(pi.versionName.equals("1.0.5BF")){
+							MenuKeyEvent();	
+						}else{
+							if(CAN1Comm.isTopCheckMiracast() == false){
+								MenuKeyEvent();	 
+							}
+						}
+					}else{
+						MenuKeyEvent();
+					}
+					
+				}
+				else if(msg.what == CAN1CommManager.FN){
 					ClickFN();
 				// ++, 150319 cjg
 				}else if(msg.what == CAN1CommManager.ESC){
 					Log.d(TAG, "ESC KEY in CommService");
-					if(CheckTopApps("com.mxtech.videoplayer.ad")){
-						//MenuKeyEvent();
-						CloseMXPlayer();
-					}else if(CheckTopApps("com.powerone.wfd.sink")){
-						CloseSmartTerminal();
-					}else if(CheckTopApps("org.ebookdroid")){
-						ClosePDFViewer();
+					if(pi != null){
+						if(pi.versionName.equals("1.0.5BF")){
+							if(CheckTopApps("com.mxtech.videoplayer.ad")){
+								CloseMXPlayer();
+							}
+							else if(CheckTopApps("com.powerone.wfd.sink")){
+								CloseSmartTerminal();
+							}else if(CheckTopApps("org.ebookdroid")){
+								ClosePDFViewer();
+							}else{
+								BackKeyEvent();
+							}
+						}else{
+							if(CheckTopApps("com.mxtech.videoplayer.ad")){
+								CloseMXPlayer();
+							}
+							else if(CheckRunningApp("com.powerone.wfd.sink")){
+								if(CheckTopApps("org.ebookdroid")){
+									ClosePDFViewer();
+								}else if(CheckTopApps("com.rhmsoft.fm.hd")){
+									BackKeyEvent();
+								}else if(CheckTopApps("com.android.settings")){
+									BackKeyEvent();
+								}
+								else{
+									CloseSmartTerminal();
+								}
+							}else if(CheckTopApps("org.ebookdroid")){
+								ClosePDFViewer();
+							}else{
+								BackKeyEvent();
+							}
+						}
+					}else{
+						if(CheckTopApps("com.mxtech.videoplayer.ad")){
+							CloseMXPlayer();
+						}
+						else if(CheckTopApps("com.powerone.wfd.sink")){
+							CloseSmartTerminal();
+						}else if(CheckTopApps("org.ebookdroid")){
+							ClosePDFViewer();
+						}else{
+							BackKeyEvent();
+						}
+					}
+				}else if(msg.what == CAN1CommManager.LEFT){
+					if(pi != null){
+						if(pi.versionName.equals("1.0.5BF")){
+							BackKeyEvent();
+						}else{
+							if(CAN1Comm.isTopCheckMiracast() == true){
+								ClickBackKeyFromMiracast();
+							}else{
+								BackKeyEvent();
+							}
+						}
 					}else{
 						BackKeyEvent();
 					}
@@ -1602,28 +1706,7 @@ public class CommService extends Service{
 			// --, 150323 bwk
 		}
 	}
-	
-//	public boolean CheckTopApps(String strProcess){
-//		Log.d(TAG,"CheckTopApps");
-//		ActivityManager activityManager = (ActivityManager) getSystemService(ACTIVITY_SERVICE);
-//		List<RunningTaskInfo> taskList = activityManager.getRunningTasks(100);
-//		
-//		if(!taskList.isEmpty()) {
-//			int tasksSize = taskList.size();
-//			Log.d(TAG,"tasksSize : " + Integer.toString(tasksSize));
-//			for(int i = 0; i < tasksSize;  i++) {
-//				RunningTaskInfo taskinfo = taskList.get(i);
-//				if(taskinfo.topActivity.getPackageName().equals(strProcess)) {
-//					 Log.d(TAG,"Top is " + taskinfo.topActivity.getPackageName());
-//					 return true;
-//				}
-//			}
-//		}else{
-//			Log.d(TAG,"taskList is Empty");
-//		}
-//		
-//		return false;
-//	}
+
 	public boolean CheckTopApps(String strProcess){
 		ActivityManager am = (ActivityManager)getSystemService(Context.ACTIVITY_SERVICE);
 		List<ActivityManager.RunningTaskInfo> Info = am.getRunningTasks(1);
@@ -1692,8 +1775,50 @@ public class CommService extends Service{
 	}
 	public void ClickFN(){
 		//if(rpmFlag == false)
-		{
 			//rpmFlag = false;
+		if(pi != null){
+			if(pi.versionName.equals("1.0.5BF")){
+				if(CheckTopApps("com.mxtech.videoplayer.ad") == true){
+					SetMultimediaFlag(false);
+					//multimediaFlag = false; //++, --, 150403 cjg
+					CallHome();
+				}else if(CheckTopApps("com.powerone.wfd.sink") == true){
+					//SetMiracastFlag(false);		// 현재 FN키 누르면 해제됨
+					//miracastFlag = false; //++, --, 150403 cjg
+					CallHome();
+				}else if(CheckRunningApp("com.mxtech.videoplayer.ad") == true){
+					SetMultimediaFlag(true);
+					//multimediaFlag = true; //++, --, 150403 cjg
+					RunMultimedia();
+				}else if(CheckRunningApp("com.powerone.wfd.sink") == true){
+					SetMiracastFlag(true);
+					//miracastFlag = true; //++, --, 150403 cjg
+					RunMirror();
+				}
+			}else{
+				if(CheckTopApps("com.mxtech.videoplayer.ad") == true){
+					SetMultimediaFlag(false);
+					//multimediaFlag = false; //++, --, 150403 cjg
+					CallHome();
+				}else if(CheckRunningApp("com.mxtech.videoplayer.ad") == true){
+					SetMultimediaFlag(true);
+					//multimediaFlag = true; //++, --, 150403 cjg
+					RunMultimedia();
+				}else if(CheckRunningApp("com.powerone.wfd.sink") == true && topCheckMiracast == true){
+					SetMiracastFlag(true);
+					//miracastFlag = true; //++, --, 150403 cjg
+					RunMirror();
+					Log.d(TAG, "Smart Terminal1 FN key : " + topCheckMiracast);
+					topCheckMiracast = false;
+				}else if(CheckRunningApp("com.powerone.wfd.sink") == true && topCheckMiracast == false){
+					SetMiracastFlag(true);
+					//miracastFlag = true; //++, --, 150403 cjg
+					RunMirror();
+					Log.d(TAG, "Smart Terminal2 FN key : " + topCheckMiracast);
+					topCheckMiracast = true;
+				}
+			}
+		}else{
 			if(CheckTopApps("com.mxtech.videoplayer.ad") == true){
 				SetMultimediaFlag(false);
 				//multimediaFlag = false; //++, --, 150403 cjg
@@ -1712,72 +1837,171 @@ public class CommService extends Service{
 				RunMirror();
 			}
 		}
+		
+	}
+	public void ClickBackKeyFromMiracast(){
+			SetMiracastFlag(true);
+			//miracastFlag = true; //++, --, 150403 cjg
+			RunMirror();
+			Log.d(TAG, "Smart Terminal1 LEFT key : " + topCheckMiracast);
+			topCheckMiracast = false;
 	}
 	public void ClickFN_Home(){
-		if(CheckTopApps("taeha.wheelloader.update") == true)
-		{
-			ScreenTopFlag = true;
-		}
-		else if(CheckTopApps("com.google.android.inputmethod.korean") == true)
-		{
-			
-		}
-		else if(CheckTopApps("com.mxtech.videoplayer.ad") == true){
-			SetMultimediaFlag(false);
-			//multimediaFlag = false; //++, --, 150403 cjg
-			CallHome();
-		}else if(CheckTopApps("com.powerone.wfd.sink") == true){
-			//SetMiracastFlag(false);		// 현재 FN키 누르면 해제됨
-			//miracastFlag = false; //++, --, 150403 cjg
-			CallHome();
+		if(pi != null){
+			if(pi.versionName.equals("1.0.5BF")){
+				if(CheckTopApps("taeha.wheelloader.update") == true)
+				{
+					ScreenTopFlag = true;
+				}
+				else if(CheckTopApps("com.google.android.inputmethod.korean") == true)
+				{
+					
+				}
+				else if(CheckTopApps("com.mxtech.videoplayer.ad") == true){
+					SetMultimediaFlag(false);
+					//multimediaFlag = false; //++, --, 150403 cjg
+					CallHome();
+				}else if(CheckTopApps("com.powerone.wfd.sink") == true){
+					//SetMiracastFlag(false);		// 현재 FN키 누르면 해제됨
+					//miracastFlag = false; //++, --, 150403 cjg
+					CallHome();
+				}else{
+					CallHome();
+				}
+			}else{
+				if(CheckTopApps("taeha.wheelloader.update") == true)
+				{
+					ScreenTopFlag = true;
+				}
+				else if(CheckTopApps("com.google.android.inputmethod.korean") == true)
+				{
+					
+				}
+				else if(CheckTopApps("com.mxtech.videoplayer.ad") == true){
+					SetMultimediaFlag(false);
+					//multimediaFlag = false; //++, --, 150403 cjg
+					CallHome();
+				}else if(CheckRunningApp("com.powerone.wfd.sink") && isTopCheckMiracast() == true){
+					//SetMiracastFlag(false);		// 현재 FN키 누르면 해제됨
+					//miracastFlag = false; //++, --, 150403 cjg
+					Runtime runtime = Runtime.getRuntime();
+					Process process;
+					try{
+						//String cmd = "am force-stop com.powerone.wfd.sink";
+						String cmd = "am broadcast -a com.powerone.wfd.sink.SCALING";
+						process = runtime.exec(cmd);
+						Log.d(TAG, "am broadcast -a com.powerone.wfd.sink.SCALING");
+					}catch(Exception e){
+						e.fillInStackTrace();
+					}
+					RunMirror();
+					topCheckMiracast = false;
+					CallHome();
+				}else{
+					CallHome();
+				}
+			}
 		}else{
-			CallHome();
+			if(CheckTopApps("taeha.wheelloader.update") == true)
+			{
+				ScreenTopFlag = true;
+			}
+			else if(CheckTopApps("com.google.android.inputmethod.korean") == true)
+			{
+				
+			}
+			else if(CheckTopApps("com.mxtech.videoplayer.ad") == true){
+				SetMultimediaFlag(false);
+				//multimediaFlag = false; //++, --, 150403 cjg
+				CallHome();
+			}else if(CheckTopApps("com.powerone.wfd.sink") == true){
+				//SetMiracastFlag(false);		// 현재 FN키 누르면 해제됨
+				//miracastFlag = false; //++, --, 150403 cjg
+				CallHome();
+			}else{
+				CallHome();
+			}
 		}
 	}
-	/*
-	public void ChangeMediatoHome(){
-		if(CheckTopApps("com.mxtech.videoplayer.ad") == true){
-			rpmFlag = true;
-			CallHome();
+	public void ClickFN_Buzzer(){
+		if(pi != null){
+			if(pi.versionName.equals("1.0.5BF")){
+				if(CheckTopApps("taeha.wheelloader.update") == true)
+				{
+					ScreenTopFlag = true;
+				}
+				else if(CheckTopApps("com.google.android.inputmethod.korean") == true)
+				{
+					
+				}
+				else if(CheckTopApps("com.mxtech.videoplayer.ad") == true){
+					SetMultimediaFlag(false);
+					//multimediaFlag = false; //++, --, 150403 cjg
+					CallHome();
+				}else if(CheckTopApps("com.powerone.wfd.sink") == true){
+					//SetMiracastFlag(false);		// 현재 FN키 누르면 해제됨
+					//miracastFlag = false; //++, --, 150403 cjg
+					CallHome();
+				}else{
+					CallHome();
+				}
+			}else{
+				if(CheckTopApps("taeha.wheelloader.update") == true)
+				{
+					ScreenTopFlag = true;
+				}
+				else if(CheckTopApps("com.google.android.inputmethod.korean") == true)
+				{
+					
+				}
+				else if(CheckTopApps("com.mxtech.videoplayer.ad") == true){
+					SetMultimediaFlag(false);
+					//multimediaFlag = false; //++, --, 150403 cjg
+					CallHome();
+				}else if(CheckRunningApp("com.powerone.wfd.sink") && isTopCheckMiracast() == true){
+					//SetMiracastFlag(false);		// 현재 FN키 누르면 해제됨
+					//miracastFlag = false; //++, --, 150403 cjg
+					Runtime runtime = Runtime.getRuntime();
+					Process process;
+					try{
+						//String cmd = "am force-stop com.powerone.wfd.sink";
+						String cmd = "am broadcast -a com.powerone.wfd.sink.SCALING";
+						process = runtime.exec(cmd);
+						Log.d(TAG, "am broadcast -a com.powerone.wfd.sink.SCALING");
+					}catch(Exception e){
+						e.fillInStackTrace();
+					}
+					topCheckMiracast = false;
+					CallHome();
+					Log.d(TAG, "Run Mira");
+				}else{
+					CallHome();
+				}
+			}
+		}else{
+			if(CheckTopApps("taeha.wheelloader.update") == true)
+			{
+				ScreenTopFlag = true;
+			}
+			else if(CheckTopApps("com.google.android.inputmethod.korean") == true)
+			{
+				
+			}
+			else if(CheckTopApps("com.mxtech.videoplayer.ad") == true){
+				SetMultimediaFlag(false);
+				//multimediaFlag = false; //++, --, 150403 cjg
+				CallHome();
+			}else if(CheckTopApps("com.powerone.wfd.sink") == true){
+				//SetMiracastFlag(false);		// 현재 FN키 누르면 해제됨
+				//miracastFlag = false; //++, --, 150403 cjg
+				CallHome();
+			}else{
+				CallHome();
+			}
 		}
 	}
-
-	public void ChangeHometoMedia(){
-		if(CheckRunningApp("com.mxtech.videoplayer.ad") == true){
-			rpmFlag = false;
-			RunMultimedia();
-		}
-	}
-	 */
 	// ++, 150320 cjg
 	public void CloseMXPlayer(){
-		/*Thread thread = new Thread(new Runnable()	{
-
-			Instrumentation inst = new Instrumentation();
-			long downTime = SystemClock.uptimeMillis();
-			long eventTime = SystemClock.uptimeMillis() + 100;
-			@Override
-			public void run() {
-				// TODO Auto-generated method stub	
-				try {
-					Thread.sleep(500);
-				} catch (InterruptedException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-				MotionEvent event = MotionEvent.obtain(downTime, eventTime, MotionEvent.ACTION_DOWN, 700, 455, 0);
-				MotionEvent event2 = MotionEvent.obtain(downTime, eventTime, MotionEvent.ACTION_UP, 700, 455, 0);
-				inst.sendPointerSync(event);
-				inst.sendPointerSync(event2);
-
-			}
-		});
-
-		thread.start();
-		//multimediaFlag = false;
-	}*/
-	// --, 150320 cjg
-		//++, 150715 cjg
 		Runtime runtime = Runtime.getRuntime();
 		Process process;
 		try{
@@ -1790,21 +2014,57 @@ public class CommService extends Service{
 		//--, 150715 cjg
 	}
 	public void CloseSmartTerminal(){
-		Runtime runtime = Runtime.getRuntime();
-		Process process;
-		//++, 150910 cjg
-		String service = Context.WIFI_SERVICE;
-		final WifiManager wifi = (WifiManager)getSystemService(service);
-		wifi.setWifiEnabled(false);
-		//--, 150910 cjg
-		try{
-			String cmd = "am force-stop com.powerone.wfd.sink";
-			process = runtime.exec(cmd);
-			Log.d(TAG, "am force-stop com.powerone.wfd.sink");
-		}catch(Exception e){
-			e.fillInStackTrace();
+		if(pi!=null){
+			if(pi.versionName.equals("1.0.5BF")){
+				Runtime runtime = Runtime.getRuntime();
+				Process process;
+				//++, 150910 cjg
+				String service = Context.WIFI_SERVICE;
+				final WifiManager wifi = (WifiManager)getSystemService(service);
+				wifi.setWifiEnabled(false);
+				//--, 150910 cjg
+				try{
+					String cmd = "am force-stop com.powerone.wfd.sink";
+					process = runtime.exec(cmd);
+					Log.d(TAG, "am force-stop com.powerone.wfd.sink");
+				}catch(Exception e){
+					e.fillInStackTrace();
+				}
+			}else{
+				Runtime runtime = Runtime.getRuntime();
+				Process process;
+				//++, 150910 cjg
+				String service = Context.WIFI_SERVICE;
+				final WifiManager wifi = (WifiManager)getSystemService(service);
+				wifi.setWifiEnabled(false);
+				//--, 150910 cjg
+				try{
+					//String cmd = "am force-stop com.powerone.wfd.sink";
+					String cmd = "am broadcast -a com.powerone.wfd.sink.QUIT";
+					process = runtime.exec(cmd);
+					Log.d(TAG, "am broadcast -a com.powerone.wfd.sink.QUIT");
+				}catch(Exception e){
+					e.fillInStackTrace();
+				}
+				setRunningCheckMiracast(false);
+				SetScreenTopFlag(true);
+			}
+		}else{
+			Runtime runtime = Runtime.getRuntime();
+			Process process;
+			//++, 150910 cjg
+			String service = Context.WIFI_SERVICE;
+			final WifiManager wifi = (WifiManager)getSystemService(service);
+			wifi.setWifiEnabled(false);
+			//--, 150910 cjg
+			try{
+				String cmd = "am force-stop com.powerone.wfd.sink";
+				process = runtime.exec(cmd);
+				Log.d(TAG, "am force-stop com.powerone.wfd.sink");
+			}catch(Exception e){
+				e.fillInStackTrace();
+			}
 		}
-		
 	}
 	public void ClosePDFViewer(){
 		Runtime runtime = Runtime.getRuntime();

@@ -16,6 +16,7 @@ import taeha.wheelloader.fseries_monitor.main.CAN1CommManager;
 import taeha.wheelloader.fseries_monitor.main.Home;
 import taeha.wheelloader.fseries_monitor.main.ParentFragment;
 import taeha.wheelloader.fseries_monitor.main.R;
+import taeha.wheelloader.fseries_monitor.main.TextFitTextView;
 import taeha.wheelloader.fseries_monitor.main.R.string;
 import taeha.wheelloader.fseries_monitor.main.b.MainBKeyTitleFragment;
 
@@ -26,7 +27,7 @@ public class MainAKeyWorkLoadErrorDetectionFragment extends ParentFragment{
 	//RESOURCE////////////////////////////////////////
 	RadioButton radioOff;
 	RadioButton radioOn;
-	
+	TextFitTextView	textViewTitle;
 	//////////////////////////////////////////////////
 	
 	//VALUABLE////////////////////////////////////////
@@ -78,8 +79,14 @@ public class MainAKeyWorkLoadErrorDetectionFragment extends ParentFragment{
 	@Override
 	protected void InitResource() {
 		// TODO Auto-generated method stub
+		textViewTitle = (TextFitTextView)mRoot.findViewById(R.id.textView_key_main_a_workload_errordetect_title);
+		textViewTitle.setText(getString(ParentActivity.getResources().getString(string.Error_Detection), 171));
 		radioOff = (RadioButton)mRoot.findViewById(R.id.radioButton_key_main_a_workload_errordetect_off);
+		radioOff.setText(getString(ParentActivity.getResources().getString(string.Off), 20));
+		ParentActivity.setMarqueeRadio(radioOff);
 		radioOn = (RadioButton)mRoot.findViewById(R.id.radioButton_key_main_a_workload_errordetect_on);
+		radioOn.setText(getString(ParentActivity.getResources().getString(string.On), 19));
+		ParentActivity.setMarqueeRadio(radioOn);
 	}
 	
 	protected void InitValuables() {

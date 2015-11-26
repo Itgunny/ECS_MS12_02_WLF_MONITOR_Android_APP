@@ -3,11 +3,12 @@
     package="taeha.wheelloader.fseries_monitor.main"
     android:versionCode="1"
     android:versionName="1.0" 
-    android:sharedUserId="android.uid.system">
-
+    android:sharedUserId="android.uid.system"
+    android:supportsRtl="true">
+	
     <uses-sdk
         android:minSdkVersion="8"
-        android:targetSdkVersion="15" />
+        android:targetSdkVersion="17"/>
     
     <uses-permission android:name="android.permission.READ_LOGS"/>
 	<uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>

@@ -65,7 +65,7 @@ public class ServiceMenuListFragment extends MenuBodyList_ParentFragment{
 		InitList();
 		ParentActivity._MenuBaseFragment._MenuListTitleFragment.setBackButtonEnable(true);
 		ParentActivity.ScreenIndex = ParentActivity.SCREEN_STATE_MENU_MANAGEMENT_SERVICE_TOP;
-		ParentActivity._MenuBaseFragment._MenuListTitleFragment.SetTitleText(ParentActivity.getResources().getString(R.string.Service_Menu));
+		ParentActivity._MenuBaseFragment._MenuListTitleFragment.SetTitleText(ParentActivity.getResources().getString(R.string.Service_Menu), 323);
 		CursurDisplay(CursurIndex);
 //		MachineSerialDisplay();
 		return mRoot;
@@ -102,9 +102,9 @@ public class ServiceMenuListFragment extends MenuBodyList_ParentFragment{
 		setClickableList2(true);
 		setClickableList3(true);
 		
-		setListTitle1(ParentActivity.getResources().getString(string.Sensor_Monitoring));
-		setListTitle2(ParentActivity.getResources().getString(string.Speed_Limit_Setting));
-		setListTitle3(ParentActivity.getResources().getString(string.Weighing_System_Compensation));
+		setListTitle1(ParentActivity.getResources().getString(string.Sensor_Monitoring), 359);
+		setListTitle2(ParentActivity.getResources().getString(string.Speed_Limit_Setting), 360);
+		setListTitle3(ParentActivity.getResources().getString(string.Weighing_System_Compensation),361);
 		
 		if(CAN1Comm.Get_ComponentCode_1699_PGN65330_EHCU() != CAN1CommManager.STATE_COMPONENTCODE_EHCU){
 //			setClickableList4(true);
@@ -115,7 +115,7 @@ public class ServiceMenuListFragment extends MenuBodyList_ParentFragment{
 //				nInputMachineSerial = 1;
 		}else{
 			setClickableList4(true);
-			setListTitle4(ParentActivity.getResources().getString(string.EHCU_IO_Information));
+			setListTitle4(ParentActivity.getResources().getString(string.EHCU_IO_Information), 256);
 
 //			setClickableList5(true);
 //			setListTitle5(ParentActivity.getResources().getString(string.Machine_Serial_Number));	
@@ -229,7 +229,7 @@ public class ServiceMenuListFragment extends MenuBodyList_ParentFragment{
 	public void SpeedLimitDisplay(int _status, int _speed, int _unit){
 		switch (_status) {
 		case CAN1CommManager.DATA_STATE_LAMP_OFF:
-			setListData2(ParentActivity.getResources().getString(string.Off));
+			setListData2(ParentActivity.getResources().getString(string.Off), 98);
 		
 			break;
 		case CAN1CommManager.DATA_STATE_LAMP_ON:
@@ -238,10 +238,9 @@ public class ServiceMenuListFragment extends MenuBodyList_ParentFragment{
 				strSpeed = ParentActivity.GetRideControlSpeed(_speed, _unit);
 				
 				if(_unit == Home.UNIT_ODO_MILE){
-					setListData2(strSpeed + ParentActivity.getResources().getString(R.string.mph));
+					setListData2(strSpeed + getString(ParentActivity.getResources().getString(R.string.mph), 32));
 				}else{
-					
-					setListData2(strSpeed + ParentActivity.getResources().getString(R.string.km_h));
+					setListData2(strSpeed + getString(ParentActivity.getResources().getString(R.string.km_h), 31));
 				}
 			}
 			break;

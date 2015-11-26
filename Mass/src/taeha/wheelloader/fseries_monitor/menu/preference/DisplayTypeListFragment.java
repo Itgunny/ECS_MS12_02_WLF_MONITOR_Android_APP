@@ -59,7 +59,7 @@ public class DisplayTypeListFragment extends MenuBodyList_ParentFragment{
 		ParentActivity._MenuBaseFragment._MenuListTitleFragment.setBackButtonEnable(true);
 		ParentActivity.ScreenIndex = ParentActivity.SCREEN_STATE_MENU_PREFERENCE_DISPLAYTYPELANG_TOP;
 		ParentActivity._MenuBaseFragment._MenuListTitleFragment.SetTitleText(ParentActivity.getResources().getString(string.Display_Style) 
-																		+ " / " + ParentActivity.getResources().getString(string.Language));
+																		+ " / " + ParentActivity.getResources().getString(string.Language), 416, 422);
 		return mRoot;
 	}
 	
@@ -88,8 +88,8 @@ public class DisplayTypeListFragment extends MenuBodyList_ParentFragment{
 
 
 		
-		setListTitle1(ParentActivity.getResources().getString(string.Display_Style));
-		setListTitle2(ParentActivity.getResources().getString(string.Language));
+		setListTitle1(ParentActivity.getResources().getString(string.Display_Style),416);
+		setListTitle2(ParentActivity.getResources().getString(string.Language), 422);
 
 	}
 
@@ -117,7 +117,11 @@ public class DisplayTypeListFragment extends MenuBodyList_ParentFragment{
 			ParentActivity.StartAnimationRunningTimer();
 		// ++, 150206 bwk
 		ParentActivity.OldScreenIndex = ParentActivity.SCREEN_STATE_MENU_PREFERENCE_DISPLAYTYPELANG_TOP;
+		if(ParentActivity.langDb.getOpenState() == true){
+			ParentActivity._MenuBaseFragment.showBodyExcelLanguageAnimation();
+		}else{
 		ParentActivity._MenuBaseFragment.showBodyLanguageAnimation();
+		}
 		// --, 150206 bwk
 		CursurIndex = 2;
 		CursurDisplay(CursurIndex);

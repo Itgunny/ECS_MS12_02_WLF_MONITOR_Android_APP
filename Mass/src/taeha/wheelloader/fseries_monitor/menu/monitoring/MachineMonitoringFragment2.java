@@ -10,6 +10,7 @@ import taeha.wheelloader.fseries_monitor.main.Home;
 import taeha.wheelloader.fseries_monitor.main.ParentFragment;
 import taeha.wheelloader.fseries_monitor.main.R;
 import taeha.wheelloader.fseries_monitor.main.R.string;
+import taeha.wheelloader.fseries_monitor.main.TextFitTextView;
 import android.R.color;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -34,24 +35,25 @@ public class MachineMonitoringFragment2 extends ParentFragment{
 	//////////////////////////////////////////////////
 	//RESOURCE////////////////////////////////////////
 	ImageButton imgbtnOK;
+	TextView 	textViewOK;
 	
-	TextView 	textViewHYDTitle;
-	TextView 	textViewBattTitle;
-	TextView 	textViewCoolantTitle;
-	TextView 	textViewTMOilTitle;
-	TextView	textViewFrontAxleTitle;		
+	TextFitTextView textViewHYDTitle;
+	TextFitTextView textViewBattTitle;
+	TextFitTextView textViewCoolantTitle;
+	TextFitTextView textViewTMOilTitle;
+	TextFitTextView	textViewFrontAxleTitle;		
 
-	TextView 	textViewHYD;
-	TextView 	textViewBatt;
-	TextView 	textViewCoolant;
-	TextView 	textViewTMOil;
-	TextView	textViewFrontAxle;		
+	TextFitTextView textViewHYD;
+	TextFitTextView textViewBatt;
+	TextFitTextView textViewCoolant;
+	TextFitTextView textViewTMOil;
+	TextFitTextView	textViewFrontAxle;		
 	
-	TextView 	textViewHYDUnit;
-	TextView 	textViewBattUnit;
-	TextView 	textViewCoolantUnit;
-	TextView 	textViewTMOilUnit;
-	TextView	textViewFrontAxleUnit;		
+	TextFitTextView textViewHYDUnit;
+	TextFitTextView textViewBattUnit;
+	TextFitTextView textViewCoolantUnit;
+	TextFitTextView textViewTMOilUnit;
+	TextFitTextView	textViewFrontAxleUnit;		
 	
 	RelativeLayout	layoutHYD;
 	RelativeLayout	layoutBatt;
@@ -102,7 +104,7 @@ public class MachineMonitoringFragment2 extends ParentFragment{
 		InitButtonListener();
 		
 		ParentActivity.ScreenIndex = ParentActivity.SCREEN_STATE_MENU_MONITORING_MACHINEMONITORING_2;
-		ParentActivity._MenuBaseFragment._MenuInterTitleFragment.SetTitleText(ParentActivity.getResources().getString(R.string.Machine_Monitoring));
+		ParentActivity._MenuBaseFragment._MenuInterTitleFragment.SetTitleText(ParentActivity.getResources().getString(R.string.Machine_Monitoring), 253);
 		HandleCursurDisplay = new Handler() {
 			@Override
 			public void handleMessage(Message msg) {
@@ -122,24 +124,36 @@ public class MachineMonitoringFragment2 extends ParentFragment{
 	protected void InitResource() {
 		// TODO Auto-generated method stub
 		imgbtnOK = (ImageButton)mRoot.findViewById(R.id.ImageButton_menu_body_monitoring_machinemonitoring_low_ok);
+		textViewOK = (TextView)mRoot.findViewById(R.id.textView_menu_body_monitoring_machinemonitoring_low_ok);
+		textViewOK.setText(getString(ParentActivity.getResources().getString(R.string.OK), 15));
 		
-		textViewHYDTitle = (TextView)mRoot.findViewById(R.id.textView_menu_body_monitoring_machinemonitoring_hyd_title);
-		textViewBattTitle = (TextView)mRoot.findViewById(R.id.textView_menu_body_monitoring_machinemonitoring_battery_title);
-		textViewCoolantTitle = (TextView)mRoot.findViewById(R.id.textView_menu_body_monitoring_machinemonitoring_coolant_title);
-		textViewTMOilTitle = (TextView)mRoot.findViewById(R.id.textView_menu_body_monitoring_machinemonitoring_tmoil_title);
-		textViewFrontAxleTitle = (TextView)mRoot.findViewById(R.id.textView_menu_body_monitoring_machinemonitoring_frontaxle_title);
+		textViewHYDTitle = (TextFitTextView)mRoot.findViewById(R.id.textView_menu_body_monitoring_machinemonitoring_hyd_title);
+		textViewHYDTitle.setText(getString(ParentActivity.getResources().getString(R.string.HYD_Temp), 111));
+		textViewBattTitle = (TextFitTextView)mRoot.findViewById(R.id.textView_menu_body_monitoring_machinemonitoring_battery_title);
+		textViewBattTitle.setText(getString(ParentActivity.getResources().getString(R.string.Battery_Volt), 113));
+		textViewCoolantTitle = (TextFitTextView)mRoot.findViewById(R.id.textView_menu_body_monitoring_machinemonitoring_coolant_title);
+		textViewCoolantTitle.setText(getString(ParentActivity.getResources().getString(R.string.Coolant_Temp), 115));
+		textViewTMOilTitle = (TextFitTextView)mRoot.findViewById(R.id.textView_menu_body_monitoring_machinemonitoring_tmoil_title);
+		textViewTMOilTitle.setText(getString(ParentActivity.getResources().getString(R.string.TM_Oil_Temp), 112));
+		textViewFrontAxleTitle = (TextFitTextView)mRoot.findViewById(R.id.textView_menu_body_monitoring_machinemonitoring_frontaxle_title);
+		textViewFrontAxleTitle.setText(getString(ParentActivity.getResources().getString(R.string.Front_Axle_Temp), 144));
 		
-		textViewHYD = (TextView)mRoot.findViewById(R.id.textView_menu_body_monitoring_machinemonitoring_hyd_data);
-		textViewBatt = (TextView)mRoot.findViewById(R.id.textView_menu_body_monitoring_machinemonitoring_battery_data);
-		textViewCoolant = (TextView)mRoot.findViewById(R.id.textView_menu_body_monitoring_machinemonitoring_coolant_data);
-		textViewTMOil = (TextView)mRoot.findViewById(R.id.textView_menu_body_monitoring_machinemonitoring_tmoil_data);
-		textViewFrontAxle = (TextView)mRoot.findViewById(R.id.textView_menu_body_monitoring_machinemonitoring_frontaxle_data);
+		textViewHYD = (TextFitTextView)mRoot.findViewById(R.id.textView_menu_body_monitoring_machinemonitoring_hyd_data);
+		textViewBatt = (TextFitTextView)mRoot.findViewById(R.id.textView_menu_body_monitoring_machinemonitoring_battery_data);
+		textViewCoolant = (TextFitTextView)mRoot.findViewById(R.id.textView_menu_body_monitoring_machinemonitoring_coolant_data);
+		textViewTMOil = (TextFitTextView)mRoot.findViewById(R.id.textView_menu_body_monitoring_machinemonitoring_tmoil_data);
+		textViewFrontAxle = (TextFitTextView)mRoot.findViewById(R.id.textView_menu_body_monitoring_machinemonitoring_frontaxle_data);
 		
-		textViewHYDUnit = (TextView)mRoot.findViewById(R.id.textView_menu_body_monitoring_machinemonitoring_hyd_unit);
-		textViewBattUnit = (TextView)mRoot.findViewById(R.id.textView_menu_body_monitoring_machinemonitoring_battery_unit);
-		textViewCoolantUnit = (TextView)mRoot.findViewById(R.id.textView_menu_body_monitoring_machinemonitoring_coolant_unit);
-		textViewTMOilUnit = (TextView)mRoot.findViewById(R.id.textView_menu_body_monitoring_machinemonitoring_tmoil_unit);
-		textViewFrontAxleUnit= (TextView)mRoot.findViewById(R.id.textView_menu_body_monitoring_machinemonitoring_frontaxle_unit);
+		textViewHYDUnit = (TextFitTextView)mRoot.findViewById(R.id.textView_menu_body_monitoring_machinemonitoring_hyd_unit);
+		textViewHYDUnit.setText(getString(ParentActivity.getResources().getString(R.string.C), 8));
+		textViewBattUnit = (TextFitTextView)mRoot.findViewById(R.id.textView_menu_body_monitoring_machinemonitoring_battery_unit);
+		textViewBattUnit.setText(getString(ParentActivity.getResources().getString(R.string.V), 10));
+		textViewCoolantUnit = (TextFitTextView)mRoot.findViewById(R.id.textView_menu_body_monitoring_machinemonitoring_coolant_unit);
+		textViewCoolantUnit.setText(getString(ParentActivity.getResources().getString(R.string.C), 8));
+		textViewTMOilUnit = (TextFitTextView)mRoot.findViewById(R.id.textView_menu_body_monitoring_machinemonitoring_tmoil_unit);
+		textViewTMOilUnit.setText(getString(ParentActivity.getResources().getString(R.string.C), 8));
+		textViewFrontAxleUnit= (TextFitTextView)mRoot.findViewById(R.id.textView_menu_body_monitoring_machinemonitoring_frontaxle_unit);
+		textViewFrontAxleUnit.setText(getString(ParentActivity.getResources().getString(R.string.C), 8));
 		
 		layoutHYD = (RelativeLayout)mRoot.findViewById(R.id.RelativeLayout_menu_body_monitoring_machinemonitoring_hyd);
 		layoutBatt = (RelativeLayout)mRoot.findViewById(R.id.RelativeLayout_menu_body_monitoring_machinemonitoring_battery);
@@ -206,9 +220,9 @@ public class MachineMonitoringFragment2 extends ParentFragment{
 	public void HYDDisplay(int _data, int _status, int _unit){
 		textViewHYD.setText(ParentActivity.GetTemp(_data,_unit));
 		if(_unit == ParentActivity.UNIT_TEMP_F){
-			textViewHYDUnit.setText(ParentActivity.getResources().getString(string.F));
+			textViewHYDUnit.setText(getString(ParentActivity.getResources().getString(R.string.F), 9));
 		}else{
-			textViewHYDUnit.setText(ParentActivity.getResources().getString(string.C));
+			textViewHYDUnit.setText(getString(ParentActivity.getResources().getString(R.string.C), 8));
 		}
 		
 		if(_status == CAN1CommManager.DATA_STATE_LAMP_ON){
@@ -223,7 +237,7 @@ public class MachineMonitoringFragment2 extends ParentFragment{
 	}
 	public void BatteryDisplay(int _data, int _status){
 		textViewBatt.setText(ParentActivity.GetBattery(_data));
-		textViewBattUnit.setText(ParentActivity.getResources().getString(string.V));
+		textViewBattUnit.setText(getString(ParentActivity.getResources().getString(R.string.V), 10));
 		
 		if(_status == CAN1CommManager.DATA_STATE_LAMP_ON){
 			textViewBatt.setTextColor(ParentActivity.getResources().getColor(R.color.red));
@@ -238,9 +252,9 @@ public class MachineMonitoringFragment2 extends ParentFragment{
 	public void CoolantDisplay(int _data, int _status, int _unit){
 		textViewCoolant.setText(ParentActivity.GetTemp(_data,_unit));
 		if(_unit == ParentActivity.UNIT_TEMP_F){
-			textViewCoolantUnit.setText(ParentActivity.getResources().getString(string.F));
+			textViewCoolantUnit.setText(getString(ParentActivity.getResources().getString(R.string.F), 9));
 		}else{
-			textViewCoolantUnit.setText(ParentActivity.getResources().getString(string.C));
+			textViewCoolantUnit.setText(getString(ParentActivity.getResources().getString(R.string.C), 8));
 		}
 		
 		if(_status == CAN1CommManager.DATA_STATE_LAMP_ON){
@@ -256,9 +270,9 @@ public class MachineMonitoringFragment2 extends ParentFragment{
 	public void TMOilDisplay(int _data, int _status, int _unit){
 		textViewTMOil.setText(ParentActivity.GetTemp(_data,_unit));
 		if(_unit == ParentActivity.UNIT_TEMP_F){
-			textViewTMOilUnit.setText(ParentActivity.getResources().getString(string.F));
+			textViewTMOilUnit.setText(getString(ParentActivity.getResources().getString(R.string.F), 9));
 		}else{
-			textViewTMOilUnit.setText(ParentActivity.getResources().getString(string.C));
+			textViewTMOilUnit.setText(getString(ParentActivity.getResources().getString(R.string.C), 8));
 		}
 		
 		if(_status == CAN1CommManager.DATA_STATE_LAMP_ON){
@@ -274,9 +288,9 @@ public class MachineMonitoringFragment2 extends ParentFragment{
 	public void FrontAxleDisplay(int _data, int _status, int _unit){
 		textViewFrontAxle.setText(ParentActivity.GetTempAxle(_data,_unit));
 		if(_unit == ParentActivity.UNIT_TEMP_F){
-			textViewFrontAxleUnit.setText(ParentActivity.getResources().getString(string.F));
+			textViewFrontAxleUnit.setText(getString(ParentActivity.getResources().getString(R.string.F), 9));
 		}else{
-			textViewFrontAxleUnit.setText(ParentActivity.getResources().getString(string.C));
+			textViewFrontAxleUnit.setText(getString(ParentActivity.getResources().getString(R.string.C), 8));
 		}
 		
 		if(_status == CAN1CommManager.DATA_STATE_LAMP_ON){

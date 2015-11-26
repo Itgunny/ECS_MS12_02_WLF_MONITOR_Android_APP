@@ -10,6 +10,7 @@ import taeha.wheelloader.fseries_monitor.main.Home;
 import taeha.wheelloader.fseries_monitor.main.ParentFragment;
 import taeha.wheelloader.fseries_monitor.main.R;
 import taeha.wheelloader.fseries_monitor.main.R.string;
+import taeha.wheelloader.fseries_monitor.main.TextFitTextView;
 import android.content.SharedPreferences;
 import android.os.Build;
 import android.os.Bundle;
@@ -36,20 +37,29 @@ public class CameraSettingFragment extends ParentFragment{
 	//RESOURCE////////////////////////////////////////
 	ImageButton imgbtnOK;
 	ImageButton	imgbtnCancel;
+	TextFitTextView	textViewOK;
+	TextFitTextView	textViewCancel;
+	
+	
 	ImageButton imgbtnActiveCameraMinus;
 	ImageButton imgbtnActiveCameraPlus;
 	
-	TextView 	textViewCAM1;
-	TextView 	textViewCAM2;
-	TextView 	textViewCAM3;
-	TextView 	textViewCAM4;
+	TextFitTextView 	textViewCAM1;
+	TextFitTextView 	textViewCAM2;
+	TextFitTextView 	textViewCAM3;
+	TextFitTextView 	textViewCAM4;
 	
-	TextView 	textViewCAM1txt;
-	TextView 	textViewCAM2txt;
-	TextView 	textViewCAM3txt;
-	TextView 	textViewCAM4txt;
+	TextFitTextView 	textViewCAM1txt;
+	TextFitTextView 	textViewCAM2txt;
+	TextFitTextView 	textViewCAM3txt;
+	TextFitTextView 	textViewCAM4txt;
 	
-	TextView 	textViewCameraNum;
+	TextFitTextView 	textViewCameraNum;
+	
+	TextFitTextView	textViewActiveCamera;
+	TextFitTextView	textViewDisplayOrder;
+	TextFitTextView	textViewDisplayComment;
+	
 	
 	CheckBox	checkReverseMode;
 	//////////////////////////////////////////////////
@@ -91,7 +101,7 @@ public class CameraSettingFragment extends ParentFragment{
 		InitButtonListener();
 		
 		ParentActivity.ScreenIndex = ParentActivity.SCREEN_STATE_MENU_PREFERENCE_CAMERASETTING_TOP;
-		ParentActivity._MenuBaseFragment._MenuInterTitleFragment.SetTitleText(ParentActivity.getResources().getString(R.string.Camera_Setting));
+		ParentActivity._MenuBaseFragment._MenuInterTitleFragment.SetTitleText(ParentActivity.getResources().getString(R.string.Camera_Setting), 216);
 		HandleCursurDisplay = new Handler() {
 			@Override
 			public void handleMessage(Message msg) {
@@ -113,26 +123,51 @@ public class CameraSettingFragment extends ParentFragment{
 		imgbtnOK = (ImageButton)mRoot.findViewById(R.id.ImageButton_menu_body_preference_camerasetting_low_ok);
 		imgbtnCancel = (ImageButton)mRoot.findViewById(R.id.ImageButton_menu_body_preference_camerasetting_low_cancel);
 
+		textViewOK = (TextFitTextView)mRoot.findViewById(R.id.textView_menu_body_preference_camerasetting_low_ok);
+		textViewOK.setText(getString(ParentActivity.getResources().getString(R.string.OK), 15));
+		textViewCancel = (TextFitTextView)mRoot.findViewById(R.id.textView_menu_body_preference_camerasetting_low_cancel);;
+		textViewCancel.setText(getString(ParentActivity.getResources().getString(R.string.Cancel), 16));
+		
 		imgbtnActiveCameraMinus = (ImageButton)mRoot.findViewById(R.id.imageButton_menu_body_preference_camerasetting_cameranumber_minus);
 		imgbtnActiveCameraPlus = (ImageButton)mRoot.findViewById(R.id.imageButton_menu_body_preference_camerasetting_cameranumber_plus);
 	
-		textViewCAM1 = (TextView)mRoot.findViewById(R.id.textView_menu_body_preference_camerasetting_dislayorder_btn1);
-		textViewCAM2 = (TextView)mRoot.findViewById(R.id.textView_menu_body_preference_camerasetting_dislayorder_btn2);
-		textViewCAM3 = (TextView)mRoot.findViewById(R.id.textView_menu_body_preference_camerasetting_dislayorder_btn3);
-		textViewCAM4 = (TextView)mRoot.findViewById(R.id.textView_menu_body_preference_camerasetting_dislayorder_btn4);
+		textViewCAM1 = (TextFitTextView)mRoot.findViewById(R.id.textView_menu_body_preference_camerasetting_dislayorder_btn1);
+		textViewCAM1.setText(getString(ParentActivity.getResources().getString(R.string.CAM_1), 225));
+		textViewCAM2 = (TextFitTextView)mRoot.findViewById(R.id.textView_menu_body_preference_camerasetting_dislayorder_btn2);
+		textViewCAM2.setText(getString(ParentActivity.getResources().getString(R.string.CAM_2), 226));
+		textViewCAM3 = (TextFitTextView)mRoot.findViewById(R.id.textView_menu_body_preference_camerasetting_dislayorder_btn3);
+		textViewCAM3.setText(getString(ParentActivity.getResources().getString(R.string.CAM_3), 227));
+		textViewCAM4 = (TextFitTextView)mRoot.findViewById(R.id.textView_menu_body_preference_camerasetting_dislayorder_btn4);
+		textViewCAM4.setText(getString(ParentActivity.getResources().getString(R.string.CAM_4), 228));
 		
-		textViewCAM1txt = (TextView)mRoot.findViewById(R.id.textView_menu_body_preference_camerasetting_dislayorder_txt1);
-		textViewCAM2txt = (TextView)mRoot.findViewById(R.id.textView_menu_body_preference_camerasetting_dislayorder_txt2);
-		textViewCAM3txt = (TextView)mRoot.findViewById(R.id.textView_menu_body_preference_camerasetting_dislayorder_txt3);
-		textViewCAM4txt = (TextView)mRoot.findViewById(R.id.textView_menu_body_preference_camerasetting_dislayorder_txt4);
+		textViewCAM1txt = (TextFitTextView)mRoot.findViewById(R.id.textView_menu_body_preference_camerasetting_dislayorder_txt1);
+		textViewCAM1txt.setText(getString(ParentActivity.getResources().getString(R.string._1st), 229));
+		textViewCAM2txt = (TextFitTextView)mRoot.findViewById(R.id.textView_menu_body_preference_camerasetting_dislayorder_txt2);
+		textViewCAM2txt.setText(getString(ParentActivity.getResources().getString(R.string._2nd), 230));
+		textViewCAM3txt = (TextFitTextView)mRoot.findViewById(R.id.textView_menu_body_preference_camerasetting_dislayorder_txt3);
+		textViewCAM3txt.setText(getString(ParentActivity.getResources().getString(R.string._3rd), 231));
+		textViewCAM4txt = (TextFitTextView)mRoot.findViewById(R.id.textView_menu_body_preference_camerasetting_dislayorder_txt4);
+		textViewCAM4txt.setText(getString(ParentActivity.getResources().getString(R.string._4th), 232));
 		
-		textViewCameraNum = (TextView)mRoot.findViewById(R.id.textView_menu_body_preference_camerasetting_cameranumber_data);
+		textViewDisplayComment = (TextFitTextView)mRoot.findViewById(R.id.textView_menu_body_preference_camerasetting_dislayorder_txt1_comment);
+		textViewDisplayComment.setText(getString(ParentActivity.getResources().getString(R.string.Reverse_camera), 428));
+		
+		textViewCameraNum = (TextFitTextView)mRoot.findViewById(R.id.textView_menu_body_preference_camerasetting_cameranumber_data);
 		if(Build.VERSION.SDK_INT <= Build.VERSION_CODES.ICE_CREAM_SANDWICH_MR1){	
 			checkReverseMode = (CheckBox)mRoot.findViewById(R.id.checkBox_menu_body_preference_camerasetting_gearmode);
+			checkReverseMode.setText(getString(ParentActivity.getResources().getString(R.string.Gear_Linkage_Mode), 233));
 			checkReverseMode.setPadding(50, 0, 0, 0);
 		} else {
 			checkReverseMode = (CheckBox)mRoot.findViewById(R.id.checkBox_menu_body_preference_camerasetting_gearmode);
+			checkReverseMode.setText(getString(ParentActivity.getResources().getString(R.string.Gear_Linkage_Mode), 233));
 		}
+		
+		textViewActiveCamera = (TextFitTextView)mRoot.findViewById(R.id.textView_menu_body_preference_camerasetting_cameranumber_title);
+		textViewActiveCamera.setText(getString(ParentActivity.getResources().getString(R.string.Active_Camera), 223));
+		textViewDisplayOrder = (TextFitTextView)mRoot.findViewById(R.id.textView_menu_body_preference_camerasetting_dislayorder_title);
+		textViewDisplayOrder.setText(getString(ParentActivity.getResources().getString(R.string.Display_Order), 224));
+		
+		
 	}
 
 	protected void InitValuables() {
@@ -707,4 +742,11 @@ public class CameraSettingFragment extends ParentFragment{
 		}
 	}
 	/////////////////////////////////////////////////////////////////////
+	public String getString(String str, int index){
+		if(ParentActivity.langDb.findStrGetString(index, ParentActivity.LanguageIndex) == null){
+			return str;
+		}else {
+			return ParentActivity.langDb.findStrGetString(index, ParentActivity.LanguageIndex);	
+		}
+	}
 }

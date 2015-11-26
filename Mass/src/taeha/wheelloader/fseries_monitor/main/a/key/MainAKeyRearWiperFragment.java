@@ -15,6 +15,8 @@ import android.widget.TextView;
 import taeha.wheelloader.fseries_monitor.main.CAN1CommManager;
 import taeha.wheelloader.fseries_monitor.main.ParentFragment;
 import taeha.wheelloader.fseries_monitor.main.R;
+import taeha.wheelloader.fseries_monitor.main.R.string;
+import taeha.wheelloader.fseries_monitor.main.TextFitTextView;
 
 public class MainAKeyRearWiperFragment extends ParentFragment{
 	//CONSTANT////////////////////////////////////////
@@ -25,7 +27,7 @@ public class MainAKeyRearWiperFragment extends ParentFragment{
 	RadioButton radioIntermittent;
 	RadioButton radioLow;
 	
-	TextView textViewWasher;
+	TextFitTextView textViewWasher;
 	ImageView imageViewWasherBoarder;
 	//////////////////////////////////////////////////
 	
@@ -92,10 +94,19 @@ public class MainAKeyRearWiperFragment extends ParentFragment{
 	protected void InitResource() {
 		// TODO Auto-generated method stub
 		radioOff = (RadioButton)mRoot.findViewById(R.id.radioButton_key_main_a_rearwiper_off);
+		radioOff.setText(getString(ParentActivity.getResources().getString(string.Off), 20));
+		ParentActivity.setMarqueeRadio(radioOff);
 		radioIntermittent = (RadioButton)mRoot.findViewById(R.id.radioButton_key_main_a_rearwiper_intermittent);
+		radioIntermittent.setText(getString(ParentActivity.getResources().getString(string.Intermittent), 177));
+		ParentActivity.setMarqueeRadio(radioIntermittent);
 		radioLow = (RadioButton)mRoot.findViewById(R.id.radioButton_key_main_a_rearwiper_low);
+		radioLow.setText(getString(ParentActivity.getResources().getString(string.Low), 178));
+		ParentActivity.setMarqueeRadio(radioLow);
 		
-		textViewWasher = (TextView)mRoot.findViewById(R.id.textView_key_main_a_rearwiper_washer);
+		
+		textViewWasher = (TextFitTextView)mRoot.findViewById(R.id.textView_key_main_a_rearwiper_washer);
+		textViewWasher.setText(getString(ParentActivity.getResources().getString(string.Washer), 179));
+		
 		imageViewWasherBoarder = (ImageView)mRoot.findViewById(R.id.imageView_key_main_a_rearwiper_washer_boarder);
 	}
 	

@@ -20,6 +20,7 @@ import taeha.wheelloader.fseries_monitor.main.ParentPopup;
 import taeha.wheelloader.fseries_monitor.main.R;
 import taeha.wheelloader.fseries_monitor.main.Home.SeatBeltTimerClass;
 import taeha.wheelloader.fseries_monitor.main.R.string;
+import taeha.wheelloader.fseries_monitor.main.TextFitTextView;
 import taeha.wheelloader.fseries_monitor.popup.SpeedometerInitPopup.PopupOffTimerClass;
 
 public class BrakePedalCalibrationPopup extends ParentPopup{
@@ -29,8 +30,9 @@ public class BrakePedalCalibrationPopup extends ParentPopup{
 	//RESOURCE////////////////////////////////////////
 
 	ImageButton imgbtnOK;
+	TextView	textViewOK;
 
-	
+	TextView	textViewBreakPedal;
 	//////////////////////////////////////////////////
 	
 	//VALUABLE////////////////////////////////////////
@@ -85,8 +87,10 @@ public class BrakePedalCalibrationPopup extends ParentPopup{
 	protected void InitResource() {
 		// TODO Auto-generated method stub
 		imgbtnOK = (ImageButton)mRoot.findViewById(R.id.imageButton_popup_brakepedalcalibration_ok);
-
-	
+		textViewOK = (TextView)mRoot.findViewById(R.id.textView_popup_brakepedalcalibration_ok);
+		textViewOK.setText(getString(ParentActivity.getResources().getString(string.OK), 15));
+		textViewBreakPedal = (TextView)mRoot.findViewById(R.id.textView_popup_brakepedalcalibration_title);
+		textViewBreakPedal.setText(getString(ParentActivity.getResources().getString(string.Turn_the_engine_off_for_sensor_calibration), 387));
 	}
 
 	@Override

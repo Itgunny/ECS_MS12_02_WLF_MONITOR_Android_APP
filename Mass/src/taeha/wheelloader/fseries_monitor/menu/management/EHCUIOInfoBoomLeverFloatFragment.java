@@ -34,6 +34,11 @@ public class EHCUIOInfoBoomLeverFloatFragment extends ParentFragment{
 	//////////////////////////////////////////////////
 	//RESOURCE////////////////////////////////////////
 	ImageButton imgbtnOK;
+	TextView textviewOK;
+	
+	TextView textviewOperation;
+	TextView textviewJoystickStroke;
+	TextView textviewEPPRCurrent;
 	
 	TextView textviewTitleBoomUp;
 	TextView textviewTitleBoomDown;
@@ -106,7 +111,7 @@ public class EHCUIOInfoBoomLeverFloatFragment extends ParentFragment{
 		
 		ClickBoomLever();
 		ParentActivity.ScreenIndex = ParentActivity.SCREEN_STATE_MENU_MANAGEMENT_SERVICE_EHCUINFO_BOOMLEVERFLOAT;
-		ParentActivity._MenuBaseFragment._MenuInterTitleFragment.SetTitleText(ParentActivity.getResources().getString(R.string.Fingertip_Calibration));
+		ParentActivity._MenuBaseFragment._MenuInterTitleFragment.SetTitleText(ParentActivity.getResources().getString(R.string.Fingertip_Calibration), 457);
 		HandleCursurDisplay = new Handler() {
 			@Override
 			public void handleMessage(Message msg) {
@@ -123,11 +128,20 @@ public class EHCUIOInfoBoomLeverFloatFragment extends ParentFragment{
 	protected void InitResource() {
 		// TODO Auto-generated method stub
 		imgbtnOK = (ImageButton)mRoot.findViewById(R.id.ImageButton_menu_body_monitoring_ehcuioinfo_boomleverfloat_low_ok);
+		textviewOK = (TextView)mRoot.findViewById(R.id.textView_menu_body_monitoring_ehcuioinfo_boomleverfloat_low_ok);
+		textviewOK.setText(getString(ParentActivity.getResources().getString(R.string.OK), 15));
 		
-
+		textviewOperation = (TextView)mRoot.findViewById(R.id.textView_menu_body_monitoring_ehcuioinfo_boomleverfloat_operation_title);
+		textviewOperation.setText(getString(ParentActivity.getResources().getString(R.string.Operation), 258));
+		textviewJoystickStroke = (TextView)mRoot.findViewById(R.id.textView_menu_body_monitoring_ehcuioinfo_boomleverfloat_joystickstroke_title);
+		textviewJoystickStroke.setText(getString(ParentActivity.getResources().getString(R.string.Joystick_Stroke), 259));
+		textviewEPPRCurrent = (TextView)mRoot.findViewById(R.id.textView_menu_body_monitoring_ehcuioinfo_boomleverfloat_epprcurrent_title);
+		textviewEPPRCurrent.setText(getString(ParentActivity.getResources().getString(R.string.EPPR_Current), 260));
 		
 		textviewTitleBoomUp = (TextView)mRoot.findViewById(R.id.textView_menu_body_monitoring_ehcuioinfo_boomleverfloat_boomup_operation);
+		textviewTitleBoomUp.setText(getString(ParentActivity.getResources().getString(R.string.Boom_Up), 236));
 		textviewTitleBoomDown = (TextView)mRoot.findViewById(R.id.textView_menu_body_monitoring_ehcuioinfo_boomleverfloat_boomdown_operation);
+		textviewTitleBoomDown.setText(getString(ParentActivity.getResources().getString(R.string.Boom_Down), 237));
 
 		textviewJoystickStrokeBoomUp = (TextView)mRoot.findViewById(R.id.textView_menu_body_monitoring_ehcuioinfo_boomleverfloat_boomup_joystickstroke_data);
 		textviewJoystickStrokeBoomDown = (TextView)mRoot.findViewById(R.id.textView_menu_body_monitoring_ehcuioinfo_boomleverfloat_boomdown_joystickstroke_data);
@@ -138,14 +152,17 @@ public class EHCUIOInfoBoomLeverFloatFragment extends ParentFragment{
 		
 		textViewBoomLeverFloatingPosition = (TextView)mRoot.findViewById(R.id.textView_menu_body_monitoring_ehcuinfo_boomleverfloat_data);
 		textViewBoomLeverFloatingPositionUnit = (TextView)mRoot.findViewById(R.id.textView_menu_body_monitoring_ehcuinfo_boomleverfloat_unit);
-		
+		textViewBoomLeverFloatingPositionUnit.setText(getString(ParentActivity.getResources().getString(R.string.Percent), 68));
 		
 		imgbtnBoomLeverFloatingPositionUp = (ImageButton)mRoot.findViewById(R.id.imageButton_menu_body_monitoring_ehcuinfo_boomleverfloat_plus);
 		imgbtnBoomLeverFloatingPositionDown = (ImageButton)mRoot.findViewById(R.id.imageButton_menu_body_monitoring_ehcuinfo_boomleverfloat_minus);
 		
 		radioBoomLever = (RadioButton)mRoot.findViewById(R.id.radioButton_menu_body_monitoring_ehcuioinfo_boomleverfloat_boomlever);
+		radioBoomLever.setText(getString(ParentActivity.getResources().getString(R.string.Boom_Lever_Floating_Position_Adjust), 456));
 		radioBoomDown = (RadioButton)mRoot.findViewById(R.id.radioButton_menu_body_monitoring_ehcuioinfo_boomleverfloat_boomdown);
+		radioBoomDown.setText(getString(ParentActivity.getResources().getString(R.string.Boom_Down_Response_Adjust), 458));
 		radioBucketDump = (RadioButton)mRoot.findViewById(R.id.radioButton_menu_body_monitoring_ehcuioinfo_boomleverfloat_bucketdump);
+		radioBucketDump.setText(getString(ParentActivity.getResources().getString(R.string.Bucket_Dump_Response_Adjust), 459));
 	}
 
 	protected void InitValuables() {
@@ -362,17 +379,17 @@ public class EHCUIOInfoBoomLeverFloatFragment extends ParentFragment{
 		case STATE_BOOMLEVER:
 			JoystickStrokeUpDisplay(JoystickStrokeBoomPosition,JoystickStrokeBoomStatus,textviewJoystickStrokeBoomUp);
 			EPPRCurrentDisplay(EPPRCurrentBoomUp,textviewEPPRCurrentBoomUp);
-			textviewTitleBoomUp.setText(ParentActivity.getResources().getString(string.Boom_Up));
+			textviewTitleBoomUp.setText(getString(ParentActivity.getResources().getString(string.Boom_Up), 236));
 			break;
 		case STATE_BOOMDOWN:
 			JoystickStrokeUpDisplay(JoystickStrokeBoomPosition,JoystickStrokeBoomStatus,textviewJoystickStrokeBoomUp);
 			EPPRCurrentDisplay(EPPRCurrentBoomUp,textviewEPPRCurrentBoomUp);
-			textviewTitleBoomUp.setText(ParentActivity.getResources().getString(string.Boom_Up));
+			textviewTitleBoomUp.setText(getString(ParentActivity.getResources().getString(string.Boom_Up), 236));
 			break;
 		case STATE_BUCKETDUMP:
 			JoystickStrokeUpDisplay(JoystickStrokeBucketPosition,JoystickStrokeBucketStatus,textviewJoystickStrokeBoomUp);
 			EPPRCurrentDisplay(EPPRCurrentBucketIn,textviewEPPRCurrentBoomUp);
-			textviewTitleBoomUp.setText(ParentActivity.getResources().getString(string.Bucket_In));
+			textviewTitleBoomUp.setText(getString(ParentActivity.getResources().getString(string.Bucket_In), 238));
 			break;
 		default:
 			break;
@@ -383,17 +400,17 @@ public class EHCUIOInfoBoomLeverFloatFragment extends ParentFragment{
 		case STATE_BOOMLEVER:
 			JoystickStrokeDownDisplay(JoystickStrokeBoomPosition,JoystickStrokeBoomStatus,textviewJoystickStrokeBoomDown);
 			EPPRCurrentDisplay(EPPRCurrentBoomDown,textviewEPPRCurrentBoomDown);
-			textviewTitleBoomDown.setText(ParentActivity.getResources().getString(string.Boom_Down));
+			textviewTitleBoomDown.setText(getString(ParentActivity.getResources().getString(string.Boom_Down), 237));
 			break;
 		case STATE_BOOMDOWN:
 			JoystickStrokeDownDisplay(JoystickStrokeBoomPosition,JoystickStrokeBoomStatus,textviewJoystickStrokeBoomDown);
 			EPPRCurrentDisplay(EPPRCurrentBoomDown,textviewEPPRCurrentBoomDown);
-			textviewTitleBoomDown.setText(ParentActivity.getResources().getString(string.Boom_Down));
+			textviewTitleBoomDown.setText(getString(ParentActivity.getResources().getString(string.Boom_Down), 237));
 			break;
 		case STATE_BUCKETDUMP:
 			JoystickStrokeDownDisplay(JoystickStrokeBucketPosition,JoystickStrokeBucketStatus,textviewJoystickStrokeBoomDown);
 			EPPRCurrentDisplay(EPPRCurrentBucketDump,textviewEPPRCurrentBoomDown);
-			textviewTitleBoomDown.setText(ParentActivity.getResources().getString(string.Bucket_Dump));
+			textviewTitleBoomDown.setText(getString(ParentActivity.getResources().getString(string.Bucket_Dump), 239));
 			break;
 		default:
 			break;
@@ -403,15 +420,15 @@ public class EHCUIOInfoBoomLeverFloatFragment extends ParentFragment{
 		switch (Index) {
 		case STATE_BOOMLEVER:
 			BoomLeverFloatingPositionDisplay(BoomLeverFloatingPosition);
-			textViewBoomLeverFloatingPositionUnit.setText(ParentActivity.getResources().getString(string.Percent));
+			textViewBoomLeverFloatingPositionUnit.setText(getString(ParentActivity.getResources().getString(string.Percent), 68));
 			break;
 		case STATE_BOOMDOWN:
 			EPPRCurrentDisplay(BoomDownEPPRValveMaxCurrent,textViewBoomLeverFloatingPosition);
-			textViewBoomLeverFloatingPositionUnit.setText(ParentActivity.getResources().getString(string.mA));
+			textViewBoomLeverFloatingPositionUnit.setText(getString(ParentActivity.getResources().getString(string.mA), 69) );
 			break;
 		case STATE_BUCKETDUMP:
 			EPPRCurrentDisplay(BucketOutEPPRValveMaxCurrent,textViewBoomLeverFloatingPosition);
-			textViewBoomLeverFloatingPositionUnit.setText(ParentActivity.getResources().getString(string.mA));
+			textViewBoomLeverFloatingPositionUnit.setText(getString(ParentActivity.getResources().getString(string.mA), 69));
 			break;
 		default:
 			break;
@@ -579,5 +596,4 @@ public class EHCUIOInfoBoomLeverFloatFragment extends ParentFragment{
 		}
 	}
 	/////////////////////////////////////////////////////////////////////
-	
 }

@@ -15,6 +15,7 @@ import android.widget.TextView;
 import taeha.wheelloader.fseries_monitor.main.CAN1CommManager;
 import taeha.wheelloader.fseries_monitor.main.ParentFragment;
 import taeha.wheelloader.fseries_monitor.main.R;
+import taeha.wheelloader.fseries_monitor.main.TextFitTextView;
 
 public class MainBKeyBeaconLampFragment extends ParentFragment{
 	//CONSTANT////////////////////////////////////////
@@ -23,6 +24,8 @@ public class MainBKeyBeaconLampFragment extends ParentFragment{
 	//RESOURCE////////////////////////////////////////
 	RadioButton radioOff;
 	RadioButton radioOn;
+	
+	TextFitTextView	textViewNotTitle;
 	RelativeLayout	layoutAvailable;
 	RelativeLayout	layoutNotAvailable;
 	//////////////////////////////////////////////////
@@ -75,8 +78,14 @@ public class MainBKeyBeaconLampFragment extends ParentFragment{
 	protected void InitResource() {
 		// TODO Auto-generated method stub
 		radioOff = (RadioButton)mRoot.findViewById(R.id.radioButton_key_main_b_beaconlamp_off);
+		radioOff.setText(getString(ParentActivity.getResources().getString(R.string.Off), 20));
+		ParentActivity.setMarqueeRadio(radioOff);
 		radioOn = (RadioButton)mRoot.findViewById(R.id.radioButton_key_main_b_beaconlamp_on);
+		radioOn.setText(getString(ParentActivity.getResources().getString(R.string.On), 19));
+		ParentActivity.setMarqueeRadio(radioOn);
 
+		textViewNotTitle = (TextFitTextView)mRoot.findViewById(R.id.textView_key_main_b_beaconlamp_notavailable_title);
+		textViewNotTitle.setText(getString(ParentActivity.getResources().getString(R.string.Beacon_Lamp_is_NOT_equipped), 191));
 		layoutAvailable = (RelativeLayout)mRoot.findViewById(R.id.RelativeLayout_key_main_b_beaconlamp_available);
 		layoutNotAvailable = (RelativeLayout)mRoot.findViewById(R.id.RelativeLayout_key_main_b_beaconlamp_notavailable);
 	}

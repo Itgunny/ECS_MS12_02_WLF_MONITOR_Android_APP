@@ -21,13 +21,15 @@ import taeha.wheelloader.fseries_monitor.main.Home;
 import taeha.wheelloader.fseries_monitor.main.ParentFragment;
 import taeha.wheelloader.fseries_monitor.main.R;
 import taeha.wheelloader.fseries_monitor.main.b.MainBUpperMenuBarFragment.BuzzerStopTimerClass;
+import taeha.wheelloader.fseries_monitor.main.TextFitTextView;
 
 public class MainBCenterFragment extends ParentFragment{
 	//CONSTANT////////////////////////////////////////
 	
 	//////////////////////////////////////////////////
 	//RESOURCE////////////////////////////////////////
-	TextView textViewRPMData;
+	TextFitTextView textViewRPMData;
+	TextFitTextView textViewRPMDataUnit;
 	
 	ImageView imgViewEcoIcon;
 	ImageView imgViewEcoBG;
@@ -112,8 +114,9 @@ public class MainBCenterFragment extends ParentFragment{
 	@Override
 	protected void InitResource() {
 		// TODO Auto-generated method stub
-		textViewRPMData = (TextView)mRoot.findViewById(R.id.textView_center_main_b_rpm);
-		
+		textViewRPMData = (TextFitTextView)mRoot.findViewById(R.id.textView_center_main_b_rpm);
+		textViewRPMDataUnit = (TextFitTextView)mRoot.findViewById(R.id.textView_center_main_b_rpm_unit);
+		textViewRPMDataUnit.setText(getString(ParentActivity.getResources().getString(R.string.rpm), 34));
 		imgViewEcoIcon = (ImageView)mRoot.findViewById(R.id.imageView_center_main_b_eco_title);
 		imgViewEcoBG = (ImageView)mRoot.findViewById(R.id.imageView_center_main_b_eco_bg);
 		imgViewEcoBar = (ImageView)mRoot.findViewById(R.id.imageView_center_main_b_eco_bar);

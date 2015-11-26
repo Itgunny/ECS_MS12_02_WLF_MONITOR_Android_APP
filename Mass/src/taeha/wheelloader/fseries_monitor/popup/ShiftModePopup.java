@@ -15,6 +15,7 @@ import taeha.wheelloader.fseries_monitor.main.CAN1CommManager;
 import taeha.wheelloader.fseries_monitor.main.Home;
 import taeha.wheelloader.fseries_monitor.main.ParentPopup;
 import taeha.wheelloader.fseries_monitor.main.R;
+import taeha.wheelloader.fseries_monitor.main.TextFitTextView;
 import taeha.wheelloader.fseries_monitor.main.R.string;
 
 public class ShiftModePopup extends ParentPopup{
@@ -22,10 +23,11 @@ public class ShiftModePopup extends ParentPopup{
 
 	//////////////////////////////////////////////////
 	//RESOURCE////////////////////////////////////////
-	TextView textViewManual;
-	TextView textViewAL;
-	TextView textViewAN;
-	TextView textViewAH;
+	TextFitTextView textViewTitle;
+	TextFitTextView textViewManual;
+	TextFitTextView textViewAL;
+	TextFitTextView textViewAN;
+	TextFitTextView textViewAH;
 	//////////////////////////////////////////////////
 	
 	//VALUABLE////////////////////////////////////////
@@ -79,10 +81,17 @@ public class ShiftModePopup extends ParentPopup{
 	@Override
 	protected void InitResource() {
 		// TODO Auto-generated method stub
-		textViewManual = (TextView)mRoot.findViewById(R.id.textView_popup_shiftmode_Manual);
-		textViewAL = (TextView)mRoot.findViewById(R.id.textView_popup_shiftmode_AL);
-		textViewAN = (TextView)mRoot.findViewById(R.id.textView_popup_shiftmode_AN);
-		textViewAH = (TextView)mRoot.findViewById(R.id.textView_popup_shiftmode_AH);
+		textViewTitle  = (TextFitTextView)mRoot.findViewById(R.id.textView_popup_shiftmode_title);
+		textViewTitle.setText(getString(ParentActivity.getResources().getString(string.Shift_Mode), 206));
+		
+		textViewManual = (TextFitTextView)mRoot.findViewById(R.id.textView_popup_shiftmode_Manual);
+		textViewManual.setText(getString(ParentActivity.getResources().getString(string.Manual), 26));
+		textViewAL = (TextFitTextView)mRoot.findViewById(R.id.textView_popup_shiftmode_AL);
+		textViewAL.setText(getString(ParentActivity.getResources().getString(string.AL), 103));
+		textViewAN = (TextFitTextView)mRoot.findViewById(R.id.textView_popup_shiftmode_AN);
+		textViewAN.setText(getString(ParentActivity.getResources().getString(string.AN), 104));
+		textViewAH = (TextFitTextView)mRoot.findViewById(R.id.textView_popup_shiftmode_AH);
+		textViewAH.setText(getString(ParentActivity.getResources().getString(string.AH), 105));
 	}
 
 	@Override

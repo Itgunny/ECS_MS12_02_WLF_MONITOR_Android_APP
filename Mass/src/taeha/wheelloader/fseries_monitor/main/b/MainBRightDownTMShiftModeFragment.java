@@ -25,6 +25,8 @@ public class MainBRightDownTMShiftModeFragment extends ParentFragment{
 	
 	//////////////////////////////////////////////////
 	//RESOURCE////////////////////////////////////////
+	TextView	textViewTitle;
+	
 	RadioButton radioManual;
 	RadioButton radioAL;
 	RadioButton radioAN;
@@ -87,10 +89,22 @@ public class MainBRightDownTMShiftModeFragment extends ParentFragment{
 	@Override
 	protected void InitResource() {
 		// TODO Auto-generated method stub	
+		textViewTitle = (TextView)mRoot.findViewById(R.id.textView_rightdown_main_b_tmshiftmode_title);
+		textViewTitle.setText(getString(ParentActivity.getResources().getString(R.string.SHIFT_MODE), 88));
+		ParentActivity.setMarqueeText(textViewTitle);
 		radioManual = (RadioButton)mRoot.findViewById(R.id.radioButton_rightdown_main_b_tmshiftmode_manual);
+		radioManual.setText(getString(ParentActivity.getResources().getString(R.string.MANUAL), 102));
+		ParentActivity.setMarqueeText(radioManual);
 		radioAL = (RadioButton)mRoot.findViewById(R.id.radioButton_rightdown_main_b_tmshiftmode_al);
+		radioAL.setText(getString(ParentActivity.getResources().getString(R.string.AL), 103));
+		ParentActivity.setMarqueeText(radioAL);
 		radioAN = (RadioButton)mRoot.findViewById(R.id.radioButton_rightdown_main_b_tmshiftmode_an);
+		radioAN.setText(getString(ParentActivity.getResources().getString(R.string.AN), 104));
+		ParentActivity.setMarqueeText(radioAN);
 		radioAH = (RadioButton)mRoot.findViewById(R.id.radioButton_rightdown_main_b_tmshiftmode_ah);
+		radioAH.setText(getString(ParentActivity.getResources().getString(R.string.AH), 105));
+		ParentActivity.setMarqueeText(radioAH);
+		
 		LayoutBG = (RelativeLayout)mRoot.findViewById(R.id.RelativeLayout_rightdown_main_b_tmshiftmode);
 	}
 	

@@ -21,7 +21,7 @@ public class CalibrationEHCUPopup extends ParentPopup{
 	//RESOURCE////////////////////////////////////////
 
 	ImageButton imgbtnOK;
-
+	TextView	textViewOK;
 	
 	TextView textViewTitle;
 	
@@ -64,6 +64,7 @@ public class CalibrationEHCUPopup extends ParentPopup{
 		}
 		else if(ParentActivity.ScreenIndex == Home.SCREEN_STATE_MENU_MODE_ETC_CALIBRATION_PRESSURE_TOP)
 		{
+			ParentActivity.TempScreenIndex = ParentActivity.OldScreenIndex;
 			ParentActivity.OldScreenIndex = Home.SCREEN_STATE_MENU_MODE_ETC_CALIBRATION_PRESSURE_TOP;
 			ParentActivity.ScreenIndex = Home.SCREEN_STATE_MENU_MODE_ETC_CALIBRATION_PRESSURE_POPUP;
 		}
@@ -92,6 +93,7 @@ public class CalibrationEHCUPopup extends ParentPopup{
 		}else if(ParentActivity.OldScreenIndex == Home.SCREEN_STATE_MENU_MODE_ETC_CALIBRATION_PRESSURE_TOP)
 		{
 			ParentActivity.ScreenIndex = Home.SCREEN_STATE_MENU_MODE_ETC_CALIBRATION_PRESSURE_TOP;
+			ParentActivity.OldScreenIndex = ParentActivity.TempScreenIndex;
 			try {
 				ParentActivity._MenuBaseFragment._PressureCalibration.CursurDisplay(1);
 			} catch (NullPointerException e) {
@@ -105,8 +107,10 @@ public class CalibrationEHCUPopup extends ParentPopup{
 	protected void InitResource() {
 		// TODO Auto-generated method stub
 		imgbtnOK = (ImageButton)mRoot.findViewById(R.id.imageButton_popup_anglecalibration_result_ok);
+		textViewOK = (TextView)mRoot.findViewById(R.id.textView_popup_anglecalibration_result_ok);
+		textViewOK.setText(getString(ParentActivity.getResources().getString(string.OK), 15));
 		textViewTitle = (TextView)mRoot.findViewById(R.id.textView_popup_anglecalibration_result_title);
-		textViewTitle.setText(ParentActivity.getResources().getString(string.You_should_turn_OFF_Soft_end_stop_before_start_calibration));
+		textViewTitle.setText(getString(ParentActivity.getResources().getString(string.You_should_turn_OFF_Soft_end_stop_before_start_calibration), 252));
 	}
 
 	@Override

@@ -7,6 +7,7 @@ import taeha.wheelloader.fseries_monitor.main.CAN1CommManager;
 import taeha.wheelloader.fseries_monitor.main.Home;
 import taeha.wheelloader.fseries_monitor.main.ParentPopup;
 import taeha.wheelloader.fseries_monitor.main.R;
+import taeha.wheelloader.fseries_monitor.main.R.string;
 import android.content.Context;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
@@ -14,12 +15,13 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.ViewGroup.LayoutParams;
+import android.widget.TextView;
 
 public class AxleTempWarningPopup extends ParentPopup{
 	//CONSTANT////////////////////////////////////////
 	//////////////////////////////////////////////////
 	//RESOURCE////////////////////////////////////////
-
+	TextView textViewAxleWarning;
 	//////////////////////////////////////////////////
 	
 	//VALUABLE////////////////////////////////////////
@@ -81,6 +83,8 @@ public class AxleTempWarningPopup extends ParentPopup{
 	@Override
 	protected void InitResource() {
 		// TODO Auto-generated method stub
+		textViewAxleWarning = (TextView)findViewById(R.id.textView_popup_main_axle_warning_title);
+		textViewAxleWarning.setText(getString(ParentActivity.getResources().getString(string.Axle_Warning_Popup), 148));
 	}
 
 	@Override

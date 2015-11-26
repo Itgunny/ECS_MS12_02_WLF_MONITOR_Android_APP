@@ -13,6 +13,7 @@ import taeha.wheelloader.fseries_monitor.main.Home;
 import taeha.wheelloader.fseries_monitor.main.ParentFragment;
 import taeha.wheelloader.fseries_monitor.main.R;
 import taeha.wheelloader.fseries_monitor.main.R.string;
+import taeha.wheelloader.fseries_monitor.main.TextFitTextView;
 import taeha.wheelloader.fseries_monitor.menu.mode.PressureCalibration.EnableButtonTimerClass;
 import android.os.Bundle;
 import android.os.Handler;
@@ -38,11 +39,13 @@ public class AngleCalibration extends ParentFragment{
 
 	ImageButton imgbtnCancel;
 	
-	TextView textViewTitle;
-	TextView textViewAngle;
-	TextView textViewAngleTitle;
+	TextFitTextView textViewTitle;
+	TextFitTextView textViewAngle;
+	TextFitTextView textViewAngleTitle;
 	TextView textViewAngleColon;
-	TextView textViewNext;
+	TextFitTextView textViewNext;
+	
+	TextFitTextView textViewCancel;
 	
 	ImageView imgViewStep1;
 	ImageView imgViewStep2;
@@ -90,7 +93,7 @@ public class AngleCalibration extends ParentFragment{
 		InitButtonListener();
 		CursurDisplay(CursurIndex);
 		ParentActivity.ScreenIndex = ParentActivity.SCREEN_STATE_MENU_MODE_ETC_CALIBRATION_ANGLE_TOP;
-		ParentActivity._MenuBaseFragment._MenuInterTitleFragment.SetTitleText(ParentActivity.getResources().getString(R.string.Boom_Bucket_Angle_Calibration));
+		ParentActivity._MenuBaseFragment._MenuInterTitleFragment.SetTitleText(ParentActivity.getResources().getString(R.string.Boom_Bucket_Angle_Calibration), 342);
 		
 		if(CAN1Comm.Get_ComponentCode_1699_PGN65330_EHCU() == CAN1CommManager.STATE_COMPONENTCODE_EHCU)
 			StartEnableButtonTimer();
@@ -127,12 +130,18 @@ public class AngleCalibration extends ParentFragment{
 		// TODO Auto-generated method stub
 		
 		imgbtnCancel = (ImageButton)mRoot.findViewById(R.id.ImageButton_menu_body_management_calibration_angle_low_cancel);
+		textViewCancel = (TextFitTextView)mRoot.findViewById(R.id.textView_menu_body_management_calibration_angle_low_cancel);
+		textViewCancel.setText(getString(ParentActivity.getResources().getString(string.Cancel), 16));
 		
-		textViewTitle = (TextView)mRoot.findViewById(R.id.textView_menu_body_management_calibration_angle_main_title);
-		textViewAngle = (TextView)mRoot.findViewById(R.id.textView_menu_body_management_calibration_angle_main_boom_data);
-		textViewAngleTitle = (TextView)mRoot.findViewById(R.id.textView_menu_body_management_calibration_angle_main_boom_title);
+		textViewTitle = (TextFitTextView)mRoot.findViewById(R.id.textView_menu_body_management_calibration_angle_main_title);
+		textViewTitle.setText(getString(ParentActivity.getResources().getString(string.Lower_the_boom_at_min_height), 345));
+		textViewAngle = (TextFitTextView)mRoot.findViewById(R.id.textView_menu_body_management_calibration_angle_main_boom_data);
+		textViewAngleTitle = (TextFitTextView)mRoot.findViewById(R.id.textView_menu_body_management_calibration_angle_main_boom_title);
+		textViewAngleTitle.setText(getString(ParentActivity.getResources().getString(string.Boom), 28));
 		textViewAngleColon = (TextView)mRoot.findViewById(R.id.textView_menu_body_management_calibration_angle_main_boom_colon);
-		textViewNext = (TextView)mRoot.findViewById(R.id.textView_menu_body_management_calibration_angle_next);
+		textViewNext = (TextFitTextView)mRoot.findViewById(R.id.textView_menu_body_management_calibration_angle_next);
+		textViewNext.setText(getString(ParentActivity.getResources().getString(string.Next), 350));
+		
 	
 		imgViewStep1 = (ImageView)mRoot.findViewById(R.id.imageView_menu_body_management_calibration_angle_step_1);
 		imgViewStep2 = (ImageView)mRoot.findViewById(R.id.imageView_menu_body_management_calibration_angle_step_2);
@@ -226,7 +235,7 @@ public class AngleCalibration extends ParentFragment{
 		imgViewStep3.setImageResource(R.drawable.menu_management_boom_pressure_step_off);
 		imgViewStep4.setImageResource(R.drawable.menu_management_boom_pressure_step_off);
 		imgViewStep5.setImageResource(R.drawable.menu_management_boom_pressure_step_off);
-		textViewTitle.setText(ParentActivity.getResources().getString(R.string.Lower_the_boom_at_min_height));
+		textViewTitle.setText(getString(ParentActivity.getResources().getString(R.string.Lower_the_boom_at_min_height), 345));
 		
 		textViewAngle.setVisibility(View.VISIBLE);
 		textViewAngleTitle.setVisibility(View.VISIBLE);
@@ -239,7 +248,7 @@ public class AngleCalibration extends ParentFragment{
 		imgViewStep3.setImageResource(R.drawable.menu_management_boom_pressure_step_off);
 		imgViewStep4.setImageResource(R.drawable.menu_management_boom_pressure_step_off);
 		imgViewStep5.setImageResource(R.drawable.menu_management_boom_pressure_step_off);
-		textViewTitle.setText(ParentActivity.getResources().getString(R.string.Lift_up_the_boom_at_max_height));
+		textViewTitle.setText(getString(ParentActivity.getResources().getString(R.string.Lift_up_the_boom_at_max_height), 346));
 		
 		textViewAngle.setVisibility(View.VISIBLE);
 		textViewAngleTitle.setVisibility(View.VISIBLE);
@@ -252,7 +261,7 @@ public class AngleCalibration extends ParentFragment{
 		imgViewStep3.setImageResource(R.drawable.menu_management_boom_pressure_step_on);
 		imgViewStep4.setImageResource(R.drawable.menu_management_boom_pressure_step_off);
 		imgViewStep5.setImageResource(R.drawable.menu_management_boom_pressure_step_off);
-		textViewTitle.setText(ParentActivity.getResources().getString(R.string.Lift_the_boom_to__5_0));
+		textViewTitle.setText(getString(ParentActivity.getResources().getString(R.string.Lift_the_boom_to__5_0), 347));
 		
 		textViewAngle.setVisibility(View.VISIBLE);
 		textViewAngleTitle.setVisibility(View.VISIBLE);
@@ -265,7 +274,7 @@ public class AngleCalibration extends ParentFragment{
 		imgViewStep3.setImageResource(R.drawable.menu_management_boom_pressure_step_off);
 		imgViewStep4.setImageResource(R.drawable.menu_management_boom_pressure_step_on);
 		imgViewStep5.setImageResource(R.drawable.menu_management_boom_pressure_step_off);
-		textViewTitle.setText(ParentActivity.getResources().getString(R.string.Max_retraction_of_bucket_cylinder));
+		textViewTitle.setText(getString(ParentActivity.getResources().getString(R.string.Max_retraction_of_bucket_cylinder), 348));
 		
 		textViewAngle.setVisibility(View.VISIBLE);
 		textViewAngleTitle.setVisibility(View.VISIBLE);
@@ -278,7 +287,7 @@ public class AngleCalibration extends ParentFragment{
 		imgViewStep3.setImageResource(R.drawable.menu_management_boom_pressure_step_off);
 		imgViewStep4.setImageResource(R.drawable.menu_management_boom_pressure_step_off);
 		imgViewStep5.setImageResource(R.drawable.menu_management_boom_pressure_step_on);
-		textViewTitle.setText(ParentActivity.getResources().getString(R.string.Max_extension_of_bucket_cylinder));
+		textViewTitle.setText(getString(ParentActivity.getResources().getString(R.string.Max_extension_of_bucket_cylinder), 349));
 		
 		textViewAngle.setVisibility(View.VISIBLE);
 		textViewAngleTitle.setVisibility(View.VISIBLE);
@@ -438,7 +447,7 @@ public class AngleCalibration extends ParentFragment{
 					CAN1Comm.Set_RequestBoomBucketAngleSensorCalibration_PGN61184_201(15);
 					CAN1Comm.Set_RequestAEB_PGN61184_201(3);
 					CAN1Comm.Set_RequestBrakePedalPositionSensorCalibration_PGN61184_201(3);
-					ParentActivity._AngleCalibrationResultPopup.setTextTitle(ParentActivity.getResources().getString(string.Calibration_failed_Machine_Restart));
+					ParentActivity._AngleCalibrationResultPopup.setTextTitle(getString(ParentActivity.getResources().getString(string.Calibration_failed_Machine_Restart), 378));
 					ParentActivity._AngleCalibrationResultPopup.setExitFlag(false);
 					ParentActivity.showAngleCalibrationResult();
 					PopupFlag = true;
@@ -466,19 +475,19 @@ public class AngleCalibration extends ParentFragment{
 		
 						switch (Reply) {
 						case 5:
-							ParentActivity._AngleCalibrationResultPopup.setTextTitle(ParentActivity.getResources().getString(string.Calibration_completed));
+							ParentActivity._AngleCalibrationResultPopup.setTextTitle(getString(ParentActivity.getResources().getString(string.Calibration_completed), 379));
 							ParentActivity._AngleCalibrationResultPopup.setExitFlag(true);
 							ParentActivity.showAngleCalibrationResult();
 							PopupFlag = true;
 							break;
 						case 11:
-							ParentActivity._AngleCalibrationResultPopup.setTextTitle(ParentActivity.getResources().getString(string.Calibration_failed));
+							ParentActivity._AngleCalibrationResultPopup.setTextTitle(getString(ParentActivity.getResources().getString(string.Calibration_failed), 380));
 							ParentActivity._AngleCalibrationResultPopup.setExitFlag(false);
 							ParentActivity.showAngleCalibrationResult();
 							PopupFlag = true;
 							break;
 						case 12:
-							ParentActivity._AngleCalibrationResultPopup.setTextTitle(ParentActivity.getResources().getString(string.Sensor_Error));
+							ParentActivity._AngleCalibrationResultPopup.setTextTitle(getString(ParentActivity.getResources().getString(string.Sensor_Error), 381));
 							ParentActivity._AngleCalibrationResultPopup.setExitFlag(false);
 							ParentActivity.showAngleCalibrationResult();
 							PopupFlag = true;

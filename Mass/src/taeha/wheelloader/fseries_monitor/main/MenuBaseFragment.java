@@ -74,6 +74,7 @@ import taeha.wheelloader.fseries_monitor.menu.preference.CameraSettingFragment;
 import taeha.wheelloader.fseries_monitor.menu.preference.ClockFragment;
 import taeha.wheelloader.fseries_monitor.menu.preference.DisplayTypeFragment;
 import taeha.wheelloader.fseries_monitor.menu.preference.DisplayTypeListFragment;
+import taeha.wheelloader.fseries_monitor.menu.preference.LanguageExcelListFragment;
 import taeha.wheelloader.fseries_monitor.menu.preference.LanguageListFragment;
 import taeha.wheelloader.fseries_monitor.menu.preference.MenuPreferenceFragment;
 import taeha.wheelloader.fseries_monitor.menu.preference.SoundOutputSettingFragment;
@@ -194,7 +195,7 @@ public class MenuBaseFragment extends ParentFragment{
 	public LanguageListFragment						_LanguageListFragment;	// ++, --, 150206 bwk
 	public DisplayTypeFragment						_DisplayTypeFragment;	// ++, --, 150309 bwk
 	public SoundOutputSettingFragment				_SoundOutputSettingFragment;	// ++, --, 150324 bwk
-
+	public LanguageExcelListFragment				_LanguageExcelListFragment;
 	//UserSwitching
 	public UserSwitching							_UserSwitching;
 	//////////////////////////////////////////////////
@@ -331,6 +332,7 @@ public class MenuBaseFragment extends ParentFragment{
 		_LanguageListFragment = new LanguageListFragment();	// ++, --, 150206 bwk
 		_DisplayTypeFragment = new DisplayTypeFragment();	// ++, --, 150309 bwk
 		_SoundOutputSettingFragment = new SoundOutputSettingFragment();	// ++, --, 150324 bwk
+		_LanguageExcelListFragment = new LanguageExcelListFragment();
 	}
 
 	protected void InitValuables() {
@@ -424,7 +426,7 @@ public class MenuBaseFragment extends ParentFragment{
 		transaction.detach(_LanguageListFragment);	// ++, --, 150206 bwk
 		transaction.detach(_DisplayTypeFragment);	// ++, --, 150309 bwk
 		transaction.detach(_SoundOutputSettingFragment);	// ++, --, 150324 bwk
-
+		transaction.detach(_LanguageExcelListFragment);
 		transaction.commit();	
 
 	}
@@ -489,8 +491,15 @@ public class MenuBaseFragment extends ParentFragment{
 			framelayoutListLeft.setVisibility(View.INVISIBLE);
 			showBodyLanguageAnimation();
 			setFirstScreenIndex(0);
+		}// --, 150210 bwk 
+		else if(Index == Home.SCREEN_STATE_MENU_PREFERENCE_DISPLAYTYPELANG_EXCEL_LANG_CHANGE){
+			framelayoutListTitle.setVisibility(View.INVISIBLE);
+			framelayoutListBody.setVisibility(View.INVISIBLE);
+			framelayoutListLeft.setVisibility(View.INVISIBLE);
+			showBodyExcelLanguageAnimation();
+			setFirstScreenIndex(0);			
 		}
-		// --, 150210 bwk
+		
 		else{
 			ListLeftAnimation.StartAppearAnimation(_MenuListLeftFragment);
 			ListTitleAnimation.StartAppearAnimation(_MenuListTitleFragment);
@@ -1274,6 +1283,12 @@ public class MenuBaseFragment extends ParentFragment{
 		InterBodyAnimation.StartChangeAnimation(_LanguageListFragment);
 	}
 	// --, 150206 bwk
+
+	public void showBodyExcelLanguageAnimation(){
+		showInterAnimation();
+		InterBodyAnimation.StartChangeAnimation(_LanguageExcelListFragment);
+	}
+
 	// ++, 150309 bwk
 	public void showBodyDisplayTypeAnimation(){
 		showInterAnimation();
@@ -1675,6 +1690,9 @@ public class MenuBaseFragment extends ParentFragment{
 		case Home.SCREEN_STATE_MENU_PREFERENCE_DISPLAYTYPELANG_LANG_CHANGE:
 			_LanguageListFragment.ClickLeft();
 			break;
+		case Home.SCREEN_STATE_MENU_PREFERENCE_DISPLAYTYPELANG_EXCEL_LANG_CHANGE:
+			_LanguageExcelListFragment.ClickLeft();
+			break;
 			// --, 150206 bwk;
 		case Home.SCREEN_STATE_MENU_PREFERENCE_SOUNDOUTPUT_TOP:
 			ParentActivity._SoundOutputPopup.ClickLeft();
@@ -1974,6 +1992,9 @@ public class MenuBaseFragment extends ParentFragment{
 			_LanguageListFragment.ClickRight();
 			break;
 			// --, 150206 bwk;			
+		case Home.SCREEN_STATE_MENU_PREFERENCE_DISPLAYTYPELANG_EXCEL_LANG_CHANGE:
+			_LanguageExcelListFragment.ClickRight();
+			break;
 		case Home.SCREEN_STATE_MENU_PREFERENCE_SOUNDOUTPUT_TOP:
 			ParentActivity._SoundOutputPopup.ClickRight();
 			break;
@@ -2271,6 +2292,10 @@ public class MenuBaseFragment extends ParentFragment{
 			break;
 		case Home.SCREEN_STATE_MENU_PREFERENCE_DISPLAYTYPELANG_LANG_CHANGE:
 			_LanguageListFragment.ClickESC();
+			break;
+			
+		case Home.SCREEN_STATE_MENU_PREFERENCE_DISPLAYTYPELANG_EXCEL_LANG_CHANGE:
+			_LanguageExcelListFragment.ClickESC();
 			break;
 		case Home.SCREEN_STATE_MENU_PREFERENCE_DISPLAYTYPELANG_LANG_CHANGE_POPUP:
 			ParentActivity._LanguageChangePopup.ClickOK();
@@ -2572,6 +2597,9 @@ public class MenuBaseFragment extends ParentFragment{
 			break;
 		case Home.SCREEN_STATE_MENU_PREFERENCE_DISPLAYTYPELANG_LANG_CHANGE:
 			_LanguageListFragment.ClickEnter();
+			break;
+		case Home.SCREEN_STATE_MENU_PREFERENCE_DISPLAYTYPELANG_EXCEL_LANG_CHANGE:
+			_LanguageExcelListFragment.ClickEnter();
 			break;
 		case Home.SCREEN_STATE_MENU_PREFERENCE_DISPLAYTYPELANG_LANG_CHANGE_POPUP:
 			ParentActivity._LanguageChangePopup.ClickOK();

@@ -8,25 +8,27 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.TextView;
+import taeha.wheelloader.fseries_monitor.animation.TextFitTextViewAxisFlipAnimation;
 import taeha.wheelloader.fseries_monitor.animation.TextViewXAxisFlipAnimation;
 import taeha.wheelloader.fseries_monitor.main.CAN1CommManager;
 import taeha.wheelloader.fseries_monitor.main.ParentFragment;
 import taeha.wheelloader.fseries_monitor.main.R;
 import taeha.wheelloader.fseries_monitor.main.R.string;
+import taeha.wheelloader.fseries_monitor.main.TextFitTextView;
 
 public class MainBRightUpEngineFragment extends ParentFragment{
 	//CONSTANT////////////////////////////////////////
 	
 	//////////////////////////////////////////////////
 	//RESOURCE////////////////////////////////////////
-	TextView textViewModeTitle;
-	TextView textViewModeData;
+	TextFitTextView textViewModeTitle;
+	TextFitTextView textViewModeData;
 	// ++, 150316 bwk
 	//TextView textViewWarmingUpTitle;
 	//TextView textViewWarmingUpData;
-	TextView textViewHourOdoTitle;
-	TextView textViewHourOdoData;
-	TextView textViewHourOdoUnit;
+	TextFitTextView textViewHourOdoTitle;
+	TextFitTextView textViewHourOdoData;
+	TextFitTextView textViewHourOdoUnit;
 	// --, 150316 bwk
 	
 	ImageButton imgbtnMode;
@@ -48,10 +50,10 @@ public class MainBRightUpEngineFragment extends ParentFragment{
 	//////////////////////////////////////////////////
 	
 	//ANIMATION///////////////////////////////////////
-	TextViewXAxisFlipAnimation EngineModeDataAnimation;
+	TextFitTextViewAxisFlipAnimation EngineModeDataAnimation;
 	// ++, 150316 bwk
 	//TextViewXAxisFlipAnimation EngineWarmingUpDataAnimation;
-	TextViewXAxisFlipAnimation HourOdometerTitleAnimation;
+	TextFitTextViewAxisFlipAnimation HourOdometerTitleAnimation;
 	// --, 150316 bwk
 	///////////////////////////////////////////////////
 	
@@ -87,14 +89,20 @@ public class MainBRightUpEngineFragment extends ParentFragment{
 	@Override
 	protected void InitResource() {
 		// TODO Auto-generated method stub
-		textViewModeTitle = (TextView)mRoot.findViewById(R.id.textView_rightup_main_b_engine_mode_title);
-		textViewModeData = (TextView)mRoot.findViewById(R.id.textView_rightup_main_b_engine_mode_data);
+		textViewModeTitle = (TextFitTextView)mRoot.findViewById(R.id.textView_rightup_main_b_engine_mode_title);
+		textViewModeTitle.setText(getString(ParentActivity.getResources().getString(R.string.ENGINE_MODE), 85) + " ");
+		
+		textViewModeData = (TextFitTextView)mRoot.findViewById(R.id.textView_rightup_main_b_engine_mode_data);
 		// ++, 150316 bwk
 		//textViewWarmingUpTitle = (TextView)mRoot.findViewById(R.id.textView_rightup_main_b_engine_warmingup_title);
 		//textViewWarmingUpData = (TextView)mRoot.findViewById(R.id.textView_rightup_main_b_engine_warmingup_data);
-		textViewHourOdoTitle = (TextView)mRoot.findViewById(R.id.textView_rightup_main_b_hourodometer_title);
-		textViewHourOdoData = (TextView)mRoot.findViewById(R.id.textView_rightup_main_b_hourodometer_data);
-		textViewHourOdoUnit = (TextView)mRoot.findViewById(R.id.textView_rightup_main_b_hourodometer_unit);
+		
+		textViewHourOdoTitle = (TextFitTextView)mRoot.findViewById(R.id.textView_rightup_main_b_hourodometer_title);
+
+		//textViewHourOdoTitle.setText(getString(ParentActivity.getResources().getString(R.string.LATEST_HOURMETER), 90));
+		textViewHourOdoData = (TextFitTextView)mRoot.findViewById(R.id.textView_rightup_main_b_hourodometer_data);
+		textViewHourOdoUnit = (TextFitTextView)mRoot.findViewById(R.id.textView_rightup_main_b_hourodometer_unit);
+		textViewHourOdoUnit.setText(getString(ParentActivity.getResources().getString(R.string.Hr), 7));
 		// --, 150316 bwk
 		
 		imgbtnMode = (ImageButton)mRoot.findViewById(R.id.imageButton_rightup_main_b_engine_mode);
@@ -109,10 +117,10 @@ public class MainBRightUpEngineFragment extends ParentFragment{
 		// TODO Auto-generated method stub
 		super.InitValuables();
 		
-		EngineModeDataAnimation = new TextViewXAxisFlipAnimation(ParentActivity);
+		EngineModeDataAnimation = new TextFitTextViewAxisFlipAnimation(ParentActivity);
 		// ++, 150317 bwk
 		//EngineWarmingUpDataAnimation = new TextViewXAxisFlipAnimation(ParentActivity);
-		HourOdometerTitleAnimation = new TextViewXAxisFlipAnimation(ParentActivity);
+		HourOdometerTitleAnimation = new TextFitTextViewAxisFlipAnimation(ParentActivity);
 		// --, 150317 bwk
 		
 		CursurDisplayDetail(ParentActivity._MainBBaseFragment.CursurIndex);
@@ -183,13 +191,13 @@ public class MainBRightUpEngineFragment extends ParentFragment{
 		try {
 			switch (_EngineMode) {
 			case CAN1CommManager.DATA_STATE_ENGINE_MODE_PWR:
-				EngineModeDataAnimation.FlipAnimation(textViewModeData,getResources().getString(string.POWER));
+				EngineModeDataAnimation.FlipAnimation(textViewModeData,getString(getResources().getString(string.POWER), 96));
 				break;
 			case CAN1CommManager.DATA_STATE_ENGINE_MODE_STD:
-				EngineModeDataAnimation.FlipAnimation(textViewModeData,getResources().getString(string.STANDARD));
+				EngineModeDataAnimation.FlipAnimation(textViewModeData,getString(getResources().getString(string.STANDARD), 95));
 				break;
 			case CAN1CommManager.DATA_STATE_ENGINE_MODE_ECONO:
-				EngineModeDataAnimation.FlipAnimation(textViewModeData,getResources().getString(string.ECONO));
+				EngineModeDataAnimation.FlipAnimation(textViewModeData,getString(getResources().getString(string.ECONO), 94));
 				break;
 			default:
 //				EngineModeDataAnimation.FlipAnimation(textViewModeData,getResources().getString(string.POWER));
@@ -230,13 +238,13 @@ public class MainBRightUpEngineFragment extends ParentFragment{
 //			HourOdometerTitleAnimation.FlipAnimation(textViewHourOdoTitle,"");
 //			break;
 		case CAN1CommManager.DATA_STATE_HOURMETER_LATEST:
-			HourOdometerTitleAnimation.FlipAnimation(textViewHourOdoTitle,getResources().getString(string.LATEST_HOURMETER));
+			HourOdometerTitleAnimation.FlipAnimation(textViewHourOdoTitle,getString(getResources().getString(string.LATEST_HOURMETER), 90) + " ");
 			break;
 		case CAN1CommManager.DATA_STATE_ODOMETER_TOTAL:
-			HourOdometerTitleAnimation.FlipAnimation(textViewHourOdoTitle,getResources().getString(string.TOTAL_ODOMETER));
+			HourOdometerTitleAnimation.FlipAnimation(textViewHourOdoTitle,getString(getResources().getString(string.TOTAL_ODOMETER), 92) + " ");
 			break;
 		case CAN1CommManager.DATA_STATE_ODOMETER_LATEST:
-			HourOdometerTitleAnimation.FlipAnimation(textViewHourOdoTitle,getResources().getString(string.LATEST_ODOMETER));
+			HourOdometerTitleAnimation.FlipAnimation(textViewHourOdoTitle,getString(getResources().getString(string.LATEST_ODOMETER), 93) + " ");
 			break;
 
 		default:
@@ -252,22 +260,22 @@ public class MainBRightUpEngineFragment extends ParentFragment{
 			
 		case CAN1CommManager.DATA_STATE_HOURMETER_LATEST:
 			textViewHourOdoData.setText(ParentActivity.GetHourmeterString(LatestHour));
-			textViewHourOdoUnit.setText(ParentActivity.getResources().getString(string.Hr));
+			textViewHourOdoUnit.setText(getString(ParentActivity.getResources().getString(string.Hr), 7));
 			break;
 		case CAN1CommManager.DATA_STATE_ODOMETER_TOTAL:
 			textViewHourOdoData.setText(ParentActivity.GetOdometerStrng(TotalOdo,ParentActivity.UnitOdo));
 			if(ParentActivity.UnitOdo == ParentActivity.UNIT_ODO_MILE){
-				textViewHourOdoUnit.setText(ParentActivity.getResources().getString(string.mile));
+				textViewHourOdoUnit.setText(getString(ParentActivity.getResources().getString(string.mile), 38));
 			}else{
-				textViewHourOdoUnit.setText(ParentActivity.getResources().getString(string.km));
+				textViewHourOdoUnit.setText(getString(ParentActivity.getResources().getString(string.km), 37));
 			}
 			break;
 		case CAN1CommManager.DATA_STATE_ODOMETER_LATEST:
 			textViewHourOdoData.setText(ParentActivity.GetOdometerStrng(LatestOdo,ParentActivity.UnitOdo));
 			if(ParentActivity.UnitOdo == ParentActivity.UNIT_ODO_MILE){
-				textViewHourOdoUnit.setText(ParentActivity.getResources().getString(string.mile));
+				textViewHourOdoUnit.setText(getString(ParentActivity.getResources().getString(string.mile), 38));
 			}else{
-				textViewHourOdoUnit.setText(ParentActivity.getResources().getString(string.km));
+				textViewHourOdoUnit.setText(getString(ParentActivity.getResources().getString(string.km), 37));
 			}
 			break;
 

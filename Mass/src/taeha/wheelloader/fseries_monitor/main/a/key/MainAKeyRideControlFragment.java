@@ -15,6 +15,8 @@ import android.widget.TextView;
 import taeha.wheelloader.fseries_monitor.main.CAN1CommManager;
 import taeha.wheelloader.fseries_monitor.main.ParentFragment;
 import taeha.wheelloader.fseries_monitor.main.R;
+import taeha.wheelloader.fseries_monitor.main.R.string;
+import taeha.wheelloader.fseries_monitor.main.TextFitTextView;
 
 public class MainAKeyRideControlFragment extends ParentFragment{
 	//CONSTANT////////////////////////////////////////
@@ -25,6 +27,8 @@ public class MainAKeyRideControlFragment extends ParentFragment{
 	RadioButton radioOnAlways;
 	RadioButton radioOnConditional;
 	
+	TextFitTextView textViewTitleNotAvailable;
+	TextFitTextView textViewOK;
 	ImageButton imgbtnOK;
 	
 	RelativeLayout	layoutAvailable;
@@ -74,12 +78,24 @@ public class MainAKeyRideControlFragment extends ParentFragment{
 	@Override
 	protected void InitResource() {
 		// TODO Auto-generated method stub
+		
 		radioOff = (RadioButton)mRoot.findViewById(R.id.radioButton_key_main_a_ridecontrol_off);
+		radioOff.setText(getString(ParentActivity.getResources().getString(string.Off), 20));
+		ParentActivity.setMarqueeRadio(radioOff);
 		radioOnAlways = (RadioButton)mRoot.findViewById(R.id.radioButton_key_main_a_ridecontrol_on_always);
+		radioOnAlways.setText(getString(ParentActivity.getResources().getString(string.On_Always), 23));
+		ParentActivity.setMarqueeRadio(radioOnAlways);
 		radioOnConditional = (RadioButton)mRoot.findViewById(R.id.radioButton_key_main_a_ridecontrol_on_conditional);
+		radioOnConditional.setText(getString(ParentActivity.getResources().getString(string.On_Conditional_Speed), 168));
+		ParentActivity.setMarqueeRadio(radioOnConditional);
 
+		textViewOK = (TextFitTextView)mRoot.findViewById(R.id.textView_key_main_a_ridecontrol_low_ok);
+		textViewOK.setText(getString(ParentActivity.getResources().getString(string.OK), 15));
 		imgbtnOK = (ImageButton)mRoot.findViewById(R.id.ImageButton_key_main_a_ridecontrol_low_ok);
 
+		textViewTitleNotAvailable = (TextFitTextView)mRoot.findViewById(R.id.textView_key_main_a_ridecontrol_notavailable_title);
+		textViewTitleNotAvailable.setText(getString(ParentActivity.getResources().getString(string.Ride_Control_is_NOT_equipped), 194));
+		
 		layoutAvailable = (RelativeLayout)mRoot.findViewById(R.id.RelativeLayout_key_main_a_ridecontrol_available);
 		layoutNotAvailable = (RelativeLayout)mRoot.findViewById(R.id.RelativeLayout_key_main_a_ridecontrol_notavailable);
 	}

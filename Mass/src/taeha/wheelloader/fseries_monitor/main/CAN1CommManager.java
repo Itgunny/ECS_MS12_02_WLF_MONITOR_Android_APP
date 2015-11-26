@@ -1919,4 +1919,15 @@ public class CAN1CommManager extends ICAN1CommManager.Stub{		// ttySAC1(Linux), 
 		
 		callbacks.finishBroadcast();
 	}
+	public void setRunningCheckMiracast(boolean b) {
+		// TODO Auto-generated method stub
+		service.setRunningCheckMiracast(b);
+	}
+	public boolean isTopCheckMiracast() {
+		return service.isTopCheckMiracast();
+	}
+	public void ClickFN_Buzzer() {
+		// TODO Auto-generated method stub
+		service.ClickFN_Buzzer();
+	}
 }

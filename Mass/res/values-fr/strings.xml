@@ -6,12 +6,11 @@
     <string name="Crash_Toast_Text">Crash</string>
     <string name="Error_Report">Error Report</string>
     <string name="Crash_Data">Crash Data</string>
-    <!-- Common Start-->
-    <string name="Hr">heure</string>
+    <string name="Hr">Hr</string>
     <string name="C">℃</string>
     <string name="F">℉</string>
-    <string name="V">volt</string>
-    <string name="ton">tonne</string>
+    <string name="V">V</string>
+    <string name="ton">ton</string>
     <string name="lb">lb</string>
     <string name="AM">AM</string>
     <string name="PM">PM</string>
@@ -19,22 +18,22 @@
     <string name="Cancel">CANCEL</string>
     <string name="Active_Fault">Code erreur actif</string>
     <string name="Maintenance">GESTION</string>
-    <string name="On">Marche </string>
+    <string name="On">Marche</string>
     <string name="Off">Arrêt</string>
     <string name="Disable">INDISPONIBLE</string>
     <string name="Enable">DISPONIBLE</string>
-    <string name="On_Always">Marche,Toujours</string>
+    <string name="On_Always">Marche, Toujours</string>
     <string name="On_Once">Marche, une fois seulement</string>
     <string name="Default">Défaut</string>
     <string name="Manual">MANUEL</string>
     <string name="Automatic">AUTOMATIQUE</string>
     <string name="Boom">Timonerie</string>
     <string name="Bucket">Godet</string>
-    <string name="Initialization">Initialisation </string>
+    <string name="Initialization">Initialisation</string>
     <string name="km_h">km/h</string>
     <string name="mph">mph</string>
     <string name="l_h">l/h</string>
-    <string name="rpm">tr/min</string>
+    <string name="rpm">rpm</string>
     <string name="Setting">Réglage</string>
     <string name="Clear">Effacer</string>
     <string name="km">km</string>
@@ -64,7 +63,6 @@
     <string name="New_Password">NOUVEAU MOT DE PASSE</string>
     <string name="Re_entering_New_Password">NOUVELLE TENTATIVE</string>
     <string name="Access_Denied">Accès refusé</string>
-    <string name="Input_new_phone_number">Entrer le nouveau numéro de téléphone</string>
     <string name="_5_12_digits">5 à 12 chiffres</string>
     <string name="No_Changes_executed">Pas de changements effectué</string>
     <string name="Skip">Passer</string>
@@ -83,21 +81,19 @@
     <string name="Initial_Para_Error_Found">Initial Parameter Error Found</string>
     <string name="Please_Reset_Power">Please Reset Power</string>
     <string name="l">l</string>
-    <!-- Common End-->
-    <!-- Main Start-->
+    <string name="Machine_Serial_Number">Machine Serial Number</string>
+    <string name="Serial_No">Serial No :</string>
+    <string name="Re_entering_Serial_No">Re-entering Serial No :</string>
     <string name="ENGINE_MODE">Mode moteur</string>
-    <string name="WARMING_UP">Pré-chauffage</string>
     <string name="CCO_MODE">Mode C.C.O</string>
     <string name="ICCO_MODE">Mode I.C.C.O</string>
     <string name="SHIFT_MODE">Mode changement de rapports</string>
-    <string name="TC_LOCK_UP">Verrouillage convertisseur</string>
-    <string name="TOTAL_HOURMETER">Total horamètre</string>
+    <string name="TC_LOCK_UP">Verrouillageconvertisseur</string>
     <string name="LATEST_HOURMETER">Dernier horamètre</string>
     <string name="AVERAGE_FUEL_RATE">Consommation moyenne de carburant</string>
-    <string name="CURRENT_FUEL_RATE">Consommation actuelle carburant</string>
     <string name="TOTAL_ODOMETER">Distance totale</string>
     <string name="LATEST_ODOMETER">Dernière distance parcourue</string>
-    <string name="ECONO">Eco </string>
+    <string name="ECONO">Eco</string>
     <string name="STANDARD">Standard</string>
     <string name="POWER">Puissance</string>
     <string name="ON">ACTIONNE</string>
@@ -107,12 +103,11 @@
     <string name="H">H</string>
     <string name="MANUAL">Manuel</string>
     <string name="AL">AL</string>
-    <string name="AN">AN </string>
+    <string name="AN">AN</string>
     <string name="AH">AH</string>
     <string name="Total_Hourmeter">Total horamètre</string>
     <string name="Latest_Hourmeter">Dernier  horamètre</string>
     <string name="Average_Fuel_Rate">Consommation moyenne de carburant</string>
-    <string name="Current_Fuel_Rate">Consommation actuelle de carburant</string>
     <string name="Total_Odometer">distance totale</string>
     <string name="Latest_Odometer">Dernière distance parcourue</string>
     <string name="HYD_Temp">Temp. hydr</string>
@@ -124,7 +119,6 @@
     <string name="Help">Aide</string>
     <string name="Bucket_Full_In_Error">Bucket Full In Error</string>
     <string name="Sudden_Change_Error">Sudden Change Error</string>
-    <string name="Please_press_Enter_key">Please press Enter key</string>
     <string name="User1">User1</string>
     <string name="User2">User2</string>
     <string name="User3">User3</string>
@@ -144,20 +138,18 @@
     <string name="Lamp_FuelWarmer">Fuel Warmer</string>
     <string name="Lamp_Preheat">Preheat</string>
     <string name="Lamp_FloatMode">Float Mode</string>
-    <string name="SuddenChange_BucketFullIn_Error_Warning">Bucket is not full in and angular speed is a sudden change, though weigh may be inaccurate. Press the Enter Key to reweigh.</string>
     <string name="Bucket_Full_In_Error_Warning">Bucket is not full in, though weigh may be inaccurate. Press the Enter Key to reweigh.</string>
     <string name="Sudden_Change_Error_Warning">Angular speed is a sudden change, though weigh may be inaccurate. Press the Enter Key to reweigh.</string>
     <string name="Hydraulic_Oil_Temp_Low_Warning">Hydraulic oil temperature low.</string>
-    <string name="LATEST_FUEL_CONSUMED">LATEST FUEL CONSUMED</string>
-    <string name="Latest_Fuel_Consumed">Latest Fuel Consumed</string>
     <string name="CloseMulti">Player is running.\nYou want to close a Player?</string>
-    <string name="CloseMira">Miracast is running.\nYou want to close a Miracast?</string>
+    <string name="CloseMira">Smart Terminal is running.\nYou want to close a Miracast?</string>
     <string name="Front_Axle_Temp">Front Axle Temp.</string>
     <string name="Rear_Axle_Temp">Rear Axle Temp.</string>
     <string name="A_DAYS_FUEL_USED">A DAYS FUEL USED</string>
     <string name="A_Days_Fuel_Used">A Days Fuel Used</string>
-    <!-- Main End -->
-    <!-- Key Start-->
+    <string name="Axle_Warning_Popup">CAUTION!\nOne of axles exceeds allowable oil temperature‼\nStop operating the machine and cool down axle oil\nuntil warning lamp goes off.</string>
+    <string name="Boom_Detent_Mode">Boom Detent Mode</string>
+    <string name="Bucket_Detent_Mode">Bucket Detent Mode</string>
     <string name="Main_Light">Feux principaux</string>
     <string name="Work_Light">Feux de travail</string>
     <string name="Auto_Grease">Graissage auto</string>
@@ -169,7 +161,6 @@
     <string name="Mirror_Heat">Rétroviseurs chauffants</string>
     <string name="Detent_Setting">Réglage position</string>
     <string name="Fine_Modulation">Modulation précise</string>
-    <string name="FN">FN</string>
     <string name="Position_Lamp">Feux de position</string>
     <string name="Head_Lamp">Feux de route</string>
     <string name="Front">Avant</string>
@@ -191,10 +182,8 @@
     <string name="Save_Position">Sauvegarder la position</string>
     <string name="Forward">Marche avant</string>
     <string name="Backward">Marche arriére</string>
-    <string name="Excute_Locking_Attachment">Exécuter verrouillage équipement </string>
     <string name="Excuting_Locking_Attachment">Verrouillage équipement en cours</string>
-    <string name="Excute_Unlocking_Attachment">Exécuter déverrouillage équipement </string>
-    <string name="Excuting_Unlocking_Attachment">Déverrouillage équipement en cours </string>
+    <string name="Excuting_Unlocking_Attachment">Déverrouillage équipement en cours</string>
     <string name="Attachment_Unlocked_Check_Locking_Status">Attachment Unlocked. Check Locking Status.</string>
     <string name="Do_you_want_to_turn_on_Mirror_Heat">Do you want to turn on Mirror Heat?</string>
     <string name="Do_you_want_to_turn_on_Auto_Grease">Do you want to turn on Auto Grease?</string>
@@ -205,15 +194,11 @@
     <string name="Mirror_Heat_is_NOT_equipped">Mirror Heat is NOT equipped.</string>
     <string name="Quick_Coupler_is_NOT_equipped">Quick Coupler is NOT equipped.</string>
     <string name="Ride_Control_is_NOT_equipped">Ride Control is NOT equipped.</string>
-    <!-- Key End -->
-    <!-- Menu Start -->
     <string name="Mode">MODE</string>
-    <string name="Monitoring"><font size="17">TABLEAU DE BORD</font></string>
+    <string name="Monitoring">TABLEAU DE BORD</string>
     <string name="Management">GESTION</string>
     <string name="Preference">Préférence</string>
     <string name="Multimedia">Multimédia</string>
-    <!-- Menu End -->
-    <!-- Menu Mode Start -->
     <string name="Eng">ENG.</string>
     <string name="TM">TM.</string>
     <string name="HYD">HYD.</string>
@@ -224,20 +209,18 @@
     <string name="Kick_Down">Kick Down</string>
     <string name="Engine_Speed">REGIME MOTEUR</string>
     <string name="Engine_Setting">Réglage moteur</string>
-    <string name="Warming_Up">Pré-chauffage</string>
     <string name="TC_Lock_Up">T.C. verrouillage</string>
     <string name="Bucket_Priority">Priorité du godet</string>
     <string name="Boom_Bucket_Detent_Mode">Mode position Flèche-Godet</string>
     <string name="Auxilliary_Attachment_Max_Flow_Level">Niveau Max débit équipement auxiliaire</string>
     <string name="Soft_End_Stop">Fin de course ralentie et arrêt</string>
     <string name="Engine_Auto_Shutdown">Arrêt Auto Moteur</string>
-    <string name="Engine_Delay_Shutdown">Retarder Arrêt Moteur</string>
     <string name="Camera_Setting">Réglage caméra</string>
     <string name="Cooling_Fan_Reverse_Mode">Mode inversion sens de ventilation</string>
     <string name="Wiper_Level_Setting">Réglage essui-glace</string>
     <string name="MODE1">MODE 1</string>
     <string name="MODE2">MODE 2</string>
-    <string name="MODE1_DOWN_UP">MODE 1 : Descente/Monter</string>
+    <string name="MODE1_DOWN_UP">MODE 1 : Descente / Monter</string>
     <string name="MODE2_DOWN_ONLY">MODE 2 : Descente seulement</string>
     <string name="Active_Camera">CAMERA ACTIVE</string>
     <string name="Display_Order">DISPOSITION CAMERA</string>
@@ -257,7 +240,7 @@
     <string name="Bucket_In">Godet rentrer</string>
     <string name="Bucket_Dump">Godet sorti</string>
     <string name="Engine_Mode">Mode Moteur</string>
-    <string name="Econo">Economique </string>
+    <string name="Econo">Economique</string>
     <string name="Standard">Standard</string>
     <string name="Power">Puissance</string>
     <string name="Hz">Hz</string>
@@ -268,11 +251,9 @@
     <string name="Excute">Execute</string>
     <string name="Push_and_hold_to_reverse_rotation">Push and hold to reverse rotation.</string>
     <string name="rpm_km_h">rpm/km/h</string>
-    <!-- Menu Mode End -->
-    <!-- Menu Monitoring Start -->
+    <string name="You_should_turn_OFF_Soft_end_stop_before_start_calibration">You should turn OFF Soft end stop before start calibration.</string>
     <string name="Machine_Monitoring">TABLEAU DE BORD</string>
     <string name="Operation_History">Historique operation</string>
-    <string name="Weighing_Information">Information Pesage</string>
     <string name="Fault_History">Historique des erreurs</string>
     <string name="EHCU_IO_Information">Information EHCU I/O</string>
     <string name="Version_Information">Informations sur la version</string>
@@ -291,10 +272,8 @@
     <string name="Cluster">Cluster</string>
     <string name="RMCU">RMCU</string>
     <string name="EHCU">EHCU</string>
-    <string name="ACU">ACU</string>
     <string name="BKCU">BKCU</string>
     <string name="Software_Update">Mise à jour du logiciel</string>
-    <string name="RMCU_Machine_Information">Information RMCU</string>
     <string name="Network_Type">Type de réseau</string>
     <string name="Manufacture_Date">Date de Fabrication</string>
     <string name="Program_Version">Version du Programme</string>
@@ -304,7 +283,7 @@
     <string name="Back_up_Battery_Voltage">Tension batterie</string>
     <string name="Network_Communication_Status">Etat du réseau de communication</string>
     <string name="Network_Service">Etat du réseau</string>
-    <string name="Communication_Antenna">Etat de l\' antenne du reseau</string>
+    <string name="Communication_Antenna">Etat de l\'antenne du reseau</string>
     <string name="GPS_Antenna">Etat de la connexion GPS</string>
     <string name="Position_Update">Etat de la mise à Jour de Position</string>
     <string name="Outside_of_Boundary">Etat de la Position Machine</string>
@@ -327,29 +306,22 @@
     <string name="ECU_Type">Type ECU</string>
     <string name="ECU_Manufacturer_Name">Nom Fabriquant ECU</string>
     <string name="Calibration_ID">Identité Calibration</string>
-    <string name="Boom_Lever_Floating_Position_Adjust">Ajuster position Niveau Fléche Flottante</string>
     <string name="Machine">MACHINE EN DEFAUT</string>
     <string name="Engine">Moteur</string>
     <string name="Transmission">Transmission</string>
     <string name="Please_refer_to_machine_manual_for_more_detailed_description">Consulter le manuel operation pour une description plus détaillée.</string>
     <string name="Delete_Logged_Fault">Effacer code anterieur</string>
-    <string name="Fingertip_Calibration">Calibrage manettes</string>
-    <string name="Boom_Down_Response_Adjust">Ajuster temps de response Descente Fléche</string>
-    <string name="Bucket_Dump_Response_Adjust">Ajuster temps de response ouverture godet</string>
     <string name="Hardware">Hardware</string>
     <string name="Fuel_Consumption_History">Fuel Consumption History</string>
     <string name="General_Record">General Record</string>
     <string name="Hourly_Record">Hourly Record</string>
     <string name="Daily_Record">Daily Record</string>
     <string name="Mode_Record">Mode Record</string>
-    <string name="Machine_Information">Machine Information</string>
-    <!-- Menu Monitoring End -->
-    <!-- Menu Management Start -->
+    <string name="Machine_Information">Informations sur la version</string>
     <string name="Machine_Security">DIGICODE ANTI-DEMARRAGE</string>
     <string name="Calibration">Calibration</string>
     <string name="Speedometer_Setting">Ajuster Fréquence vitesse</string>
     <string name="Change_AS_Phone_Number">Changer A/S Numéro de Téléphone</string>
-    <string name="Service_Contact">CONTACT APRES-VENTE</string>
     <string name="Service_Menu">MENU APRES-VENTE</string>
     <string name="ESL_System_Setting">REGLAGE ANTI-DEMARRAGE</string>
     <string name="Change_Password">CHANGEMENT MOT DE PASSE</string>
@@ -372,7 +344,7 @@
     <string name="Boom_Bucket_Angle_Calibration">Calibration de l\'Angle Fléche/Godet</string>
     <string name="Brake_Pedal_Sensor_Calibration">Calibrage du capteur de la pédale de frein</string>
     <string name="AEB">ETALONNAGE TRANSMISSION AEB</string>
-    <string name="Lower_the_boom_at_min_height">Descente de la Fléche à hauteur min. </string>
+    <string name="Lower_the_boom_at_min_height">Descente de la Fléche à hauteur min.</string>
     <string name="Lift_up_the_boom_at_max_height">Monter de la Fléche à hauteur Max.</string>
     <string name="Lift_the_boom_to__5_0">Monter la fléche à -5.0º</string>
     <string name="Max_retraction_of_bucket_cylinder">Fermeture max .du verin de Godet</string>
@@ -382,7 +354,7 @@
     <string name="Start">Démarrage</string>
     <string name="First_Calibration">1er Calibration</string>
     <string name="Second_Calibration">2ième calibration</string>
-    <string name="Roll_in_the_bucket_at_max_range_lower_the_boom_at_min_height">Rentrer le Godet au Maxi.Descendre la Fléche à Hauteur mini. </string>
+    <string name="Roll_in_the_bucket_at_max_range_lower_the_boom_at_min_height">Rentrer le Godet au Maxi.Descendre la Fléche à Hauteur mini.</string>
     <string name="Press_Start_button_lift_the_boom_with_the_hydraulic_control_in_detent_position">Appuyer sur Démarrer, Lever la Fléche avec le levier de commande en position automatique</string>
     <string name="Boom_lifting_will_be_stopped_automatically_at_a_certain_position_and_calibration_is_completed">La levée de Fléche sera arrêtée à une certaine position et la calibration sera terminée</string>
     <string name="Set_P_mode_step_on_pedal_max_range_press_Start_button_lift_the_boom_with_the_hydraulic_control_in_detent_position">Réglager Mode P, Pédale Appuiée en fin de course, Appuier sur le Bouton de Démarrage, Lever la Fléche avec le levier de commande en position automatique</string>
@@ -393,7 +365,7 @@
     <string name="No_Offset">Pas de Déport</string>
     <string name="Work_Tool_1">Outil de Travail 1</string>
     <string name="Work_Tool_2">Outil de Travail 2</string>
-    <string name="Work_Tool_3">Outil de Travail 3 </string>
+    <string name="Work_Tool_3">Outil de Travail 3</string>
     <string name="Registering">Enregistrement</string>
     <string name="Deleting">Effacement</string>
     <string name="_1st_user_tag_registered">Smart key 1er utilisateur enregistré</string>
@@ -414,7 +386,7 @@
     <string name="Pressure_Calibration_Warning">To calibrate it, when the Hydraulic Oil Temp. is above 40ºC(104ºF).</string>
     <string name="Hydraulic_Oil_Temp_Error">Hydraulic Oil Temp. Error</string>
     <string name="Fan_EPPR_Current_Adjust">Ajuster Courant de l\'EPPR Ventilateur</string>
-    <string name="Turn_the_engine_off_for_sensor_calibration">Arrêter le moteur pour Calibration Capteur</string>
+    <string name="Turn_the_engine_off_for_sensor_calibration">Arrêter le moteur pour alibration Capteur</string>
     <string name="Engine_oil">Huile moteur</string>
     <string name="Hydraulic_oil">Huile HYD</string>
     <string name="Pilot_line_filter_element">Filtre de pilotage</string>
@@ -422,8 +394,7 @@
     <string name="Engine_oil_filter">Filtre à huile moteur</string>
     <string name="Fuel_filter_element">Filtre fuel</string>
     <string name="Fuel_Pre_filter">Pre-filtre fuel</string>
-    <string name="Breather_Hydraulic_tank">Reniflar réservoir HYD</string>
-    <string name="Hydraulic_Tank_Air_Breather_Filter"/>
+    <string name="Hydraulic_Tank_Air_Breather_Filter">Hydraulic Tank Air Breather Filter</string>
     <string name="Radiator_engine_coolant">Liquide de refroidissement moteur</string>
     <string name="Transmission_oil">Huile de transmission</string>
     <string name="Transmission_oil_filter">Filtre de transmission</string>
@@ -431,7 +402,6 @@
     <string name="Rear_axle_oil">Huile pont arrière</string>
     <string name="Crankcase_Ventilation_Filter">Crankcase Ventilation Filter</string>
     <string name="Aircon_Heater_Outer_Filter">Air-con. &amp; Heater Outer Filter</string>
-    <string name="Hydraulic_Tank_Drain_Filter">Filtre Cartouche Vidange Réservoir Hydraulique</string>
     <string name="Count">NOMBRE</string>
     <string name="Elapsed_Time">TEMPS DEPASSE</string>
     <string name="Cycle">CYCLE</string>
@@ -440,13 +410,11 @@
     <string name="Maintenance_History">Historique Maintenance</string>
     <string name="Confirm_Reset_elapsed_time">Confirmer: Remettre à zero</string>
     <string name="Recommend_deleting_unused_tag_for_security_when_you_register_new_tag">Recommend deleting unused tag for security when you register new tag.</string>
-    <!-- Menu Management End -->
-    <!-- Menu Preference Start -->
+    <string name="Software_Update_Warning">Turn the engine off for software update.</string>
     <string name="Brightness_Setting">REGLAGE LUMINOSITE</string>
     <string name="Clock_Setting">Réglage Heure</string>
     <string name="Unit_Setting">Réglage de l\'unité</string>
     <string name="Sound_Output_Setting">Réglage sortie Son</string>
-    <string name="Wireless_Communication_Setting">Réglage Communication Sans Fil</string>
     <string name="Display_Style">Type D\'Affichage</string>
     <string name="Time_settings_for_daytime">Réglage  de l\'heure - journée</string>
     <string name="Daytime">Journée</string>
@@ -458,11 +426,11 @@
     <string name="Type_B">Type B</string>
     <string name="Unit_C">℃</string>
     <string name="Unit_F">℉</string>
-    <!-- Menu Preference End -->
-    <!-- Menu Multimedia Start -->
+    <string name="Check_Radio_mode_is_AUX_mode">(Check Radio mode is AUX mode)</string>
+    <string name="Reverse_camera">(Reverse Camera)</string>
+    <string name="Language_Warning">To ensure that the entire system reflects the change, please Restart the machine.</string>
     <string name="Media_Palyer">Lecteur Multimédia</string>
-    <!-- Menu Multimedia End -->
-    <!-- Language Start -->
+    <string name="Smart_Terminal">Smart Terminal</string>
     <string name="Korean">Korean</string>
     <string name="English">English</string>
     <string name="German">German</string>
@@ -476,5 +444,32 @@
     <string name="Slovakian">Slovakian</string>
     <string name="Estonian">Estonian</string>
     <string name="Finnish">Finnish</string>
-    <!-- Language End -->
+    <string name="Input_new_phone_number">Entrer le nouveau numéro de téléphone</string>
+    <string name="WARMING_UP">Pré-chauffage</string>
+    <string name="TOTAL_HOURMETER">Total horamètre</string>
+    <string name="CURRENT_FUEL_RATE">Consommation actuelle carburant</string>
+    <string name="Current_Fuel_Rate">Consommation actuelle de carburant</string>
+    <string name="Excute_Locking_Attachment">Exécuter verrouillage équipement</string>
+    <string name="Excute_Unlocking_Attachment">Exécuter déverrouillage équipement</string>
+    <string name="Warming_Up">Pré-chauffage</string>
+    <string name="Engine_Delay_Shutdown">Retarder Arrêt Moteur</string>
+    <string name="Weighing_Information">Information Pesage</string>
+    <string name="ACU">ACU</string>
+    <string name="Boom_Lever_Floating_Position_Adjust">Ajuster position Niveau Fléche Flottante</string>
+    <string name="Fingertip_Calibration">Calibrage manettes</string>
+    <string name="Boom_Down_Response_Adjust">Ajuster temps de response Descente Fléche</string>
+    <string name="Bucket_Dump_Response_Adjust">Ajuster temps de response ouverture godet</string>
+    <string name="Service_Contact">CONTACT APRES-VENTE</string>
+    <string name="METRIC">Metric Unit</string>
+    <string name="US">US Unit</string>
+    <string name="CUSTOM">User Setting</string>
+    <string name="FuelRate">Fuel Rate</string>
+    <string name="gal_h">gal/h</string>
+    <string name="gal">gal</string>
+    <string name="USTon">US ton</string>
+    <string name="Volume">Volume</string>
+    <string name="Volume_L">L</string>
+    <string name="Volume_gallon">gal</string>
+    <string name="Distance">Distance</string>
 </resources>
+

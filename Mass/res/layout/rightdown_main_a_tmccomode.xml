@@ -8,10 +8,10 @@
     
     <TextView
         android:id="@+id/textView_rightdown_main_a_tmccomode_title"
-        android:layout_width="wrap_content"
+        android:layout_width="150dp"
         android:layout_height="wrap_content"
         android:layout_alignRight="@+id/imageView_rightdown_main_a_tmccomode_line"
-        android:layout_marginRight="40dp"
+        android:layout_marginRight="20dp"
         android:layout_marginTop="100dp"
         android:text="@string/CCO_MODE"
         android:textAppearance="?android:attr/textAppearanceLarge"
@@ -22,7 +22,7 @@
         android:id="@+id/imageView_rightdown_main_a_tmccomode_line"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-         android:layout_marginLeft="360dp"
+        android:layout_marginLeft="360dp"
         android:layout_centerVertical="true"
         android:src="@drawable/main_popup_line" />
     
@@ -35,6 +35,7 @@
 	    android:button="@drawable/_selector_radio_btn"
 	    android:text="@string/OFF"
 	    android:textColor="@drawable/_selector_radio_txt_white_amber"
+	    android:singleLine="true"
 	    android:textSize="25sp" />
 	
 	<RadioButton
@@ -46,6 +47,7 @@
 	    android:button="@drawable/_selector_radio_btn"
 	    android:text="@string/L"
 	    android:textColor="@drawable/_selector_radio_txt_white_amber"
+	    android:singleLine="true"
 	    android:textSize="25sp" />
 	
 	<RadioButton
@@ -57,6 +59,7 @@
 	    android:button="@drawable/_selector_radio_btn"
 	    android:text="@string/M"
 	    android:textColor="@drawable/_selector_radio_txt_white_amber"
+	    android:singleLine="true"
 	    android:textSize="25sp"
 	    android:textStyle="normal" />
 	
@@ -69,6 +72,7 @@
 	    android:button="@drawable/_selector_radio_btn"
 	    android:text="@string/H"
 	    android:textColor="@drawable/_selector_radio_txt_white_amber"
+	    android:singleLine="true"
 	    android:textSize="25sp" />
 
 </RelativeLayout>

@@ -47,7 +47,7 @@ public class FuelHistoryMenuFragment extends MenuBodyList_ParentFragment{
 		InitList();
 		ParentActivity._MenuBaseFragment._MenuListTitleFragment.setBackButtonEnable(true);
 		ParentActivity.ScreenIndex = ParentActivity.SCREEN_STATE_MENU_MONITORING_FUELHISTORY_TOP;
-		ParentActivity._MenuBaseFragment._MenuListTitleFragment.SetTitleText(ParentActivity.getResources().getString(R.string.Fuel_Consumption_History));
+		ParentActivity._MenuBaseFragment._MenuListTitleFragment.SetTitleText(ParentActivity.getResources().getString(R.string.Fuel_Consumption_History), 313);
 		CursurDisplay(CursurIndex);
 		return mRoot;
 	}
@@ -65,10 +65,10 @@ public class FuelHistoryMenuFragment extends MenuBodyList_ParentFragment{
 		setClickableList3(true);
 		setClickableList4(true);	
 		
-		setListTitle1(ParentActivity.getResources().getString(string.General_Record));
-		setListTitle2(ParentActivity.getResources().getString(string.Hourly_Record));
-		setListTitle3(ParentActivity.getResources().getString(string.Daily_Record));
-		setListTitle4(ParentActivity.getResources().getString(string.Mode_Record));
+		setListTitle1(ParentActivity.getResources().getString(string.General_Record), 314);
+		setListTitle2(ParentActivity.getResources().getString(string.Hourly_Record), 315);
+		setListTitle3(ParentActivity.getResources().getString(string.Daily_Record), 316);
+		setListTitle4(ParentActivity.getResources().getString(string.Mode_Record), 317);
 
 	}
 

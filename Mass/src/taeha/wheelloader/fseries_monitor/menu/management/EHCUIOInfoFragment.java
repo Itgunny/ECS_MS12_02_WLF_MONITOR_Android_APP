@@ -9,6 +9,7 @@ import taeha.wheelloader.fseries_monitor.main.CAN1CommManager;
 import taeha.wheelloader.fseries_monitor.main.Home;
 import taeha.wheelloader.fseries_monitor.main.ParentFragment;
 import taeha.wheelloader.fseries_monitor.main.R;
+import taeha.wheelloader.fseries_monitor.main.TextFitTextView;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -30,22 +31,49 @@ public class EHCUIOInfoFragment extends ParentFragment{
 	//////////////////////////////////////////////////
 	//RESOURCE////////////////////////////////////////
 	ImageButton imgbtnOK;
+	TextFitTextView	textViewOK;
 
-	TextView textviewJoystickStrokeBoomUp;
-	TextView textviewJoystickStrokeBoomDown;
-	TextView textviewJoystickStrokeBucketIn;
-	TextView textviewJoystickStrokeBucketDump;
-	TextView textviewJoystickStrokeAuxUp;
-	TextView textviewJoystickStrokeAuxDown;
+	TextFitTextView textviewOperation;
+	TextFitTextView textviewJoystickStroke;
+	TextFitTextView textviewEPPRCurrent;
 	
-	TextView textviewEPPRCurrentBoomUp;
-	TextView textviewEPPRCurrentBoomDown;
-	TextView textviewEPPRCurrentBucketIn;
-	TextView textviewEPPRCurrentBucketDump;
-	TextView textviewEPPRCurrentAuxUp;
-	TextView textviewEPPRCurrentAuxDown;
+	TextFitTextView textviewBoomUpTitle;
+	TextFitTextView textviewBoomDownTitle;
+	TextFitTextView textviewBucketInTitle;
+	TextFitTextView textviewBucketDumpTitle;
+	TextFitTextView textviewAuxUpTitle;
+	TextFitTextView textviewAuxDownTitle;
 	
-	TextView textviewBoomAngle;
+	TextFitTextView textviewJoystickStrokeBoomUp;
+	TextFitTextView textviewJoystickStrokeBoomDown;
+	TextFitTextView textviewJoystickStrokeBucketIn;
+	TextFitTextView textviewJoystickStrokeBucketDump;
+	TextFitTextView textviewJoystickStrokeAuxUp;
+	TextFitTextView textviewJoystickStrokeAuxDown;
+	
+	TextFitTextView textviewJoystickStrokeBoomUpUnit;
+	TextFitTextView textviewJoystickStrokeBoomDownUnit;
+	TextFitTextView textviewJoystickStrokeBucketInUnit;
+	TextFitTextView textviewJoystickStrokeBucketDumpUnit;
+	TextFitTextView textviewJoystickStrokeAuxUpUnit;
+	TextFitTextView textviewJoystickStrokeAuxDownUnit;
+	
+	TextFitTextView textviewEPPRCurrentBoomUp;
+	TextFitTextView textviewEPPRCurrentBoomDown;
+	TextFitTextView textviewEPPRCurrentBucketIn;
+	TextFitTextView textviewEPPRCurrentBucketDump;
+	TextFitTextView textviewEPPRCurrentAuxUp;
+	TextFitTextView textviewEPPRCurrentAuxDown;
+	
+	TextFitTextView textviewEPPRCurrentBoomUpUnit;
+	TextFitTextView textviewEPPRCurrentBoomDownUnit;
+	TextFitTextView textviewEPPRCurrentBucketInUnit;
+	TextFitTextView textviewEPPRCurrentBucketDumpUnit;
+	TextFitTextView textviewEPPRCurrentAuxUpUnit;
+	TextFitTextView textviewEPPRCurrentAuxDownUnit;
+	
+	TextFitTextView textviewBoomAngleTitle;
+	TextFitTextView textviewBoomAngle;
 	//////////////////////////////////////////////////
 	
 	//VALUABLE////////////////////////////////////////
@@ -96,7 +124,7 @@ public class EHCUIOInfoFragment extends ParentFragment{
 		InitButtonListener();
 		
 		ParentActivity.ScreenIndex = ParentActivity.SCREEN_STATE_MENU_MANAGEMENT_SERVICE_EHCUINFO_TOP;
-		ParentActivity._MenuBaseFragment._MenuInterTitleFragment.SetTitleText(ParentActivity.getResources().getString(R.string.EHCU_IO_Information));
+		ParentActivity._MenuBaseFragment._MenuInterTitleFragment.SetTitleText(ParentActivity.getResources().getString(R.string.EHCU_IO_Information), 256);
 		
 		HandleCursurDisplay = new Handler() {
 			@Override
@@ -117,22 +145,72 @@ public class EHCUIOInfoFragment extends ParentFragment{
 	protected void InitResource() {
 		// TODO Auto-generated method stub
 		imgbtnOK = (ImageButton)mRoot.findViewById(R.id.ImageButton_menu_body_monitoring_ehcuioinfo_low_ok);
+		textViewOK = (TextFitTextView)mRoot.findViewById(R.id.textView_menu_body_monitoring_ehcuioinfo_low_ok);
+		textViewOK.setText(getString(ParentActivity.getResources().getString(R.string.OK), 15));
 
-		textviewJoystickStrokeBoomUp = (TextView)mRoot.findViewById(R.id.textView_menu_body_monitoring_ehcuioinfo_boomup_joystickstroke_data);
-		textviewJoystickStrokeBoomDown = (TextView)mRoot.findViewById(R.id.textView_menu_body_monitoring_ehcuioinfo_boomdown_joystickstroke_data);
-		textviewJoystickStrokeBucketIn = (TextView)mRoot.findViewById(R.id.textView_menu_body_monitoring_ehcuioinfo_bucketin_joystickstroke_data);
-		textviewJoystickStrokeBucketDump = (TextView)mRoot.findViewById(R.id.textView_menu_body_monitoring_ehcuioinfo_bucketout_joystickstroke_data);
-		textviewJoystickStrokeAuxUp = (TextView)mRoot.findViewById(R.id.textView_menu_body_monitoring_ehcuioinfo_auxup_joystickstroke_data);
-		textviewJoystickStrokeAuxDown = (TextView)mRoot.findViewById(R.id.textView_menu_body_monitoring_ehcuioinfo_auxdown_joystickstroke_data);
+		textviewOperation = (TextFitTextView)mRoot.findViewById(R.id.textView_menu_body_monitoring_ehcuioinfo_operation_title);
+		textviewOperation.setText(getString(ParentActivity.getResources().getString(R.string.Operation), 258));
+		textviewJoystickStroke = (TextFitTextView)mRoot.findViewById(R.id.textView_menu_body_monitoring_ehcuioinfo_joystickstroke_title);
+		textviewJoystickStroke.setText(getString(ParentActivity.getResources().getString(R.string.Joystick_Stroke), 259));
+		textviewEPPRCurrent  = (TextFitTextView)mRoot.findViewById(R.id.textView_menu_body_monitoring_ehcuioinfo_epprcurrent_title);
+		textviewEPPRCurrent.setText(getString(ParentActivity.getResources().getString(R.string.EPPR_Current), 260));
 		
-		textviewEPPRCurrentBoomUp = (TextView)mRoot.findViewById(R.id.textView_menu_body_monitoring_ehcuioinfo_boomup_epprcurrent_data);
-		textviewEPPRCurrentBoomDown = (TextView)mRoot.findViewById(R.id.textView_menu_body_monitoring_ehcuioinfo_boomdown_epprcurrent_data);
-		textviewEPPRCurrentBucketIn = (TextView)mRoot.findViewById(R.id.textView_menu_body_monitoring_ehcuioinfo_bucketin_epprcurrent_data);
-		textviewEPPRCurrentBucketDump = (TextView)mRoot.findViewById(R.id.textView_menu_body_monitoring_ehcuioinfo_bucketout_epprcurrent_data);
-		textviewEPPRCurrentAuxUp = (TextView)mRoot.findViewById(R.id.textView_menu_body_monitoring_ehcuioinfo_auxup_epprcurrent_data);
-		textviewEPPRCurrentAuxDown = (TextView)mRoot.findViewById(R.id.textView_menu_body_monitoring_ehcuioinfo_auxdown_epprcurrent_data);
+		textviewBoomUpTitle = (TextFitTextView)mRoot.findViewById(R.id.textView_menu_body_monitoring_ehcuioinfo_boomup_operation);
+		textviewBoomUpTitle.setText(getString(ParentActivity.getResources().getString(R.string.Boom_Up), 236));
+		textviewBoomDownTitle = (TextFitTextView)mRoot.findViewById(R.id.textView_menu_body_monitoring_ehcuioinfo_boomdown_operation);
+		textviewBoomDownTitle.setText(getString(ParentActivity.getResources().getString(R.string.Boom_Down), 237));
+		textviewBucketInTitle = (TextFitTextView)mRoot.findViewById(R.id.textView_menu_body_monitoring_ehcuioinfo_bucketin_operation);
+		textviewBucketInTitle.setText(getString(ParentActivity.getResources().getString(R.string.Bucket_In), 238));
+		textviewBucketDumpTitle = (TextFitTextView)mRoot.findViewById(R.id.textView_menu_body_monitoring_ehcuioinfo_bucketout_operation);
+		textviewBucketDumpTitle.setText(getString(ParentActivity.getResources().getString(R.string.Bucket_Dump), 239));
+		textviewAuxUpTitle = (TextFitTextView)mRoot.findViewById(R.id.textView_menu_body_monitoring_ehcuioinfo_auxup_operation);
+		textviewAuxUpTitle.setText(getString(ParentActivity.getResources().getString(R.string.Aux_Up), 261));
+		textviewAuxDownTitle = (TextFitTextView)mRoot.findViewById(R.id.textView_menu_body_monitoring_ehcuioinfo_auxdown_operation);
+		textviewAuxDownTitle.setText(getString(ParentActivity.getResources().getString(R.string.Aux_Down), 262));
 		
-		textviewBoomAngle = (TextView)mRoot.findViewById(R.id.textView_menu_body_monitoring_ehcuioinfo_low_boom_data);
+		textviewJoystickStrokeBoomUp = (TextFitTextView)mRoot.findViewById(R.id.textView_menu_body_monitoring_ehcuioinfo_boomup_joystickstroke_data);
+		textviewJoystickStrokeBoomDown = (TextFitTextView)mRoot.findViewById(R.id.textView_menu_body_monitoring_ehcuioinfo_boomdown_joystickstroke_data);
+		textviewJoystickStrokeBucketIn = (TextFitTextView)mRoot.findViewById(R.id.textView_menu_body_monitoring_ehcuioinfo_bucketin_joystickstroke_data);
+		textviewJoystickStrokeBucketDump = (TextFitTextView)mRoot.findViewById(R.id.textView_menu_body_monitoring_ehcuioinfo_bucketout_joystickstroke_data);
+		textviewJoystickStrokeAuxUp = (TextFitTextView)mRoot.findViewById(R.id.textView_menu_body_monitoring_ehcuioinfo_auxup_joystickstroke_data);
+		textviewJoystickStrokeAuxDown = (TextFitTextView)mRoot.findViewById(R.id.textView_menu_body_monitoring_ehcuioinfo_auxdown_joystickstroke_data);
+		
+		textviewJoystickStrokeBoomUpUnit = (TextFitTextView)mRoot.findViewById(R.id.textView_menu_body_monitoring_ehcuioinfo_boomup_joystickstroke_unit);
+		textviewJoystickStrokeBoomUpUnit.setText(getString(ParentActivity.getResources().getString(R.string.Percent), 68));
+		textviewJoystickStrokeBoomDownUnit = (TextFitTextView)mRoot.findViewById(R.id.textView_menu_body_monitoring_ehcuioinfo_boomdown_joystickstroke_unit);
+		textviewJoystickStrokeBoomDownUnit.setText(getString(ParentActivity.getResources().getString(R.string.Percent), 68));
+		textviewJoystickStrokeBucketInUnit = (TextFitTextView)mRoot.findViewById(R.id.textView_menu_body_monitoring_ehcuioinfo_bucketin_joystickstroke_unit);
+		textviewJoystickStrokeBucketInUnit.setText(getString(ParentActivity.getResources().getString(R.string.Percent), 68));
+		textviewJoystickStrokeBucketDumpUnit = (TextFitTextView)mRoot.findViewById(R.id.textView_menu_body_monitoring_ehcuioinfo_bucketout_joystickstroke_unit);
+		textviewJoystickStrokeBucketDumpUnit.setText(getString(ParentActivity.getResources().getString(R.string.Percent), 68));
+		textviewJoystickStrokeAuxUpUnit = (TextFitTextView)mRoot.findViewById(R.id.textView_menu_body_monitoring_ehcuioinfo_auxup_joystickstroke_unit);
+		textviewJoystickStrokeAuxUpUnit.setText(getString(ParentActivity.getResources().getString(R.string.Percent), 68));
+		textviewJoystickStrokeAuxDownUnit = (TextFitTextView)mRoot.findViewById(R.id.textView_menu_body_monitoring_ehcuioinfo_auxdown_joystickstroke_unit);
+		textviewJoystickStrokeAuxDownUnit.setText(getString(ParentActivity.getResources().getString(R.string.Percent), 68));
+		
+		textviewEPPRCurrentBoomUp = (TextFitTextView)mRoot.findViewById(R.id.textView_menu_body_monitoring_ehcuioinfo_boomup_epprcurrent_data);
+		textviewEPPRCurrentBoomDown = (TextFitTextView)mRoot.findViewById(R.id.textView_menu_body_monitoring_ehcuioinfo_boomdown_epprcurrent_data);
+		textviewEPPRCurrentBucketIn = (TextFitTextView)mRoot.findViewById(R.id.textView_menu_body_monitoring_ehcuioinfo_bucketin_epprcurrent_data);
+		textviewEPPRCurrentBucketDump = (TextFitTextView)mRoot.findViewById(R.id.textView_menu_body_monitoring_ehcuioinfo_bucketout_epprcurrent_data);
+		textviewEPPRCurrentAuxUp = (TextFitTextView)mRoot.findViewById(R.id.textView_menu_body_monitoring_ehcuioinfo_auxup_epprcurrent_data);
+		textviewEPPRCurrentAuxDown = (TextFitTextView)mRoot.findViewById(R.id.textView_menu_body_monitoring_ehcuioinfo_auxdown_epprcurrent_data);
+		
+		textviewEPPRCurrentBoomUpUnit = (TextFitTextView)mRoot.findViewById(R.id.textView_menu_body_monitoring_ehcuioinfo_boomup_epprcurrent_unit);
+		textviewEPPRCurrentBoomUpUnit.setText(getString(ParentActivity.getResources().getString(R.string.mA), 69));
+		textviewEPPRCurrentBoomDownUnit = (TextFitTextView)mRoot.findViewById(R.id.textView_menu_body_monitoring_ehcuioinfo_boomdown_epprcurrent_unit);
+		textviewEPPRCurrentBoomDownUnit.setText(getString(ParentActivity.getResources().getString(R.string.mA), 69));
+		textviewEPPRCurrentBucketInUnit = (TextFitTextView)mRoot.findViewById(R.id.textView_menu_body_monitoring_ehcuioinfo_bucketin_epprcurrent_unit);
+		textviewEPPRCurrentBucketInUnit.setText(getString(ParentActivity.getResources().getString(R.string.mA), 69));
+		textviewEPPRCurrentBucketDumpUnit = (TextFitTextView)mRoot.findViewById(R.id.textView_menu_body_monitoring_ehcuioinfo_bucketout_epprcurrent_unit);
+		textviewEPPRCurrentBucketDumpUnit.setText(getString(ParentActivity.getResources().getString(R.string.mA), 69));
+		textviewEPPRCurrentAuxUpUnit = (TextFitTextView)mRoot.findViewById(R.id.textView_menu_body_monitoring_ehcuioinfo_auxup_epprcurrent_unit);
+		textviewEPPRCurrentAuxUpUnit.setText(getString(ParentActivity.getResources().getString(R.string.mA), 69));
+		textviewEPPRCurrentAuxDownUnit = (TextFitTextView)mRoot.findViewById(R.id.textView_menu_body_monitoring_ehcuioinfo_auxdown_epprcurrent_unit);
+		textviewEPPRCurrentAuxDownUnit.setText(getString(ParentActivity.getResources().getString(R.string.mA), 69));
+		
+		textviewBoomAngleTitle = (TextFitTextView)mRoot.findViewById(R.id.textView_menu_body_monitoring_ehcuioinfo_low_boom_title);
+		textviewBoomAngleTitle.setText(getString(ParentActivity.getResources().getString(R.string.Boom), 28));
+		textviewBoomAngle = (TextFitTextView)mRoot.findViewById(R.id.textView_menu_body_monitoring_ehcuioinfo_low_boom_data);
 	}
 
 	protected void InitValuables() {

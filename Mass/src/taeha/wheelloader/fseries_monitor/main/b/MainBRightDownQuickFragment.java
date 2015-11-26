@@ -14,6 +14,7 @@ import taeha.wheelloader.fseries_monitor.main.CAN1CommManager;
 import taeha.wheelloader.fseries_monitor.main.Home;
 import taeha.wheelloader.fseries_monitor.main.ParentFragment;
 import taeha.wheelloader.fseries_monitor.main.R;
+import taeha.wheelloader.fseries_monitor.main.TextFitTextView;
 
 public class MainBRightDownQuickFragment extends ParentFragment{
 	//CONSTANT////////////////////////////////////////
@@ -24,7 +25,7 @@ public class MainBRightDownQuickFragment extends ParentFragment{
 	
 	ImageView imgViewIcon;
 	
-	TextView textViewTitle;
+	TextFitTextView textViewTitle;
 	
 	ImageButton imgbtnMultimedia;
 	//////////////////////////////////////////////////
@@ -66,8 +67,8 @@ public class MainBRightDownQuickFragment extends ParentFragment{
 		
 		imgViewIcon = (ImageView)mRoot.findViewById(R.id.imageView_rightdown_main_b_quick_icon);
 
-		textViewTitle = (TextView)mRoot.findViewById(R.id.textView_rightdown_main_b_quick_title);
-		
+		textViewTitle = (TextFitTextView)mRoot.findViewById(R.id.textView_rightdown_main_b_quick_title);
+		textViewTitle.setText(getString(ParentActivity.getResources().getString(R.string.Maintenance), 18));
 		imgbtnMultimedia = (ImageButton)mRoot.findViewById(R.id.imageButton_rightdown_main_b_quick_multimedia);
 		
 	}

@@ -14,6 +14,7 @@ import taeha.wheelloader.fseries_monitor.main.CAN1CommManager;
 import taeha.wheelloader.fseries_monitor.main.Home;
 import taeha.wheelloader.fseries_monitor.main.ParentPopup;
 import taeha.wheelloader.fseries_monitor.main.R;
+import taeha.wheelloader.fseries_monitor.main.TextFitTextView;
 import taeha.wheelloader.fseries_monitor.main.R.string;
 
 public class EngineWarmingUpPopup extends ParentPopup{
@@ -21,8 +22,9 @@ public class EngineWarmingUpPopup extends ParentPopup{
 
 	//////////////////////////////////////////////////
 	//RESOURCE////////////////////////////////////////
-	TextView textViewOn;
-	TextView textViewOff;
+	TextFitTextView textViewTitle;
+	TextFitTextView textViewOn;
+	TextFitTextView textViewOff;
 	//////////////////////////////////////////////////
 	
 	//VALUABLE////////////////////////////////////////
@@ -73,8 +75,12 @@ public class EngineWarmingUpPopup extends ParentPopup{
 	@Override
 	protected void InitResource() {
 		// TODO Auto-generated method stub
-		textViewOn = (TextView)mRoot.findViewById(R.id.textView_popup_warmingup_on);
-		textViewOff = (TextView)mRoot.findViewById(R.id.textView_popup_warmingup_off);
+		textViewTitle = (TextFitTextView)mRoot.findViewById(R.id.textView_popup_warmingup_title);
+		textViewTitle.setText(getString(ParentActivity.getResources().getString(R.string.Warming_Up), 452));
+		textViewOn = (TextFitTextView)mRoot.findViewById(R.id.textView_popup_warmingup_on);
+		textViewOn.setText(getString(ParentActivity.getResources().getString(R.string.On), 19));
+		textViewOff = (TextFitTextView)mRoot.findViewById(R.id.textView_popup_warmingup_off);
+		textViewOff.setText(getString(ParentActivity.getResources().getString(R.string.Off), 20));
 	}
 
 	@Override

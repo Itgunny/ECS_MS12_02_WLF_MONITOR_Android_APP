@@ -20,6 +20,7 @@ import taeha.wheelloader.fseries_monitor.main.ParentPopup;
 import taeha.wheelloader.fseries_monitor.main.R;
 import taeha.wheelloader.fseries_monitor.main.Home.SeatBeltTimerClass;
 import taeha.wheelloader.fseries_monitor.main.R.string;
+import taeha.wheelloader.fseries_monitor.main.TextFitTextView;
 import taeha.wheelloader.fseries_monitor.popup.SpeedometerInitPopup.PopupOffTimerClass;
 
 public class LoggedFaultDeletePopup extends ParentPopup{
@@ -31,8 +32,8 @@ public class LoggedFaultDeletePopup extends ParentPopup{
 	ImageButton imgbtnCancel;
 	
 	TextView textViewTitle;
-	TextView textViewOK;
-	TextView textViewCancel;
+	TextFitTextView textViewOK;
+	TextFitTextView textViewCancel;
 	//////////////////////////////////////////////////
 	
 	//VALUABLE////////////////////////////////////////
@@ -94,9 +95,12 @@ public class LoggedFaultDeletePopup extends ParentPopup{
 		imgbtnCancel = (ImageButton)mRoot.findViewById(R.id.imageButton_popup_loggedfault_delete_cancel);
 	
 		textViewTitle = (TextView)mRoot.findViewById(R.id.textView_popup_loggedfault_delete_title);
+		textViewTitle.setText(getString(ParentActivity.getResources().getString(R.string.Initialize_), 51));
 
-		textViewOK = (TextView)mRoot.findViewById(R.id.textView_popup_loggedfault_delete_ok);
-		textViewCancel = (TextView)mRoot.findViewById(R.id.textView_popup_loggedfault_delete_cancel);
+		textViewOK = (TextFitTextView)mRoot.findViewById(R.id.textView_popup_loggedfault_delete_ok);
+		textViewOK.setText(getString(ParentActivity.getResources().getString(R.string.OK), 15));
+		textViewCancel = (TextFitTextView)mRoot.findViewById(R.id.textView_popup_loggedfault_delete_cancel);
+		textViewCancel.setText(getString(ParentActivity.getResources().getString(R.string.Cancel), 16));
 		
 		imgbtnOK.setVisibility(View.VISIBLE);
 		imgbtnCancel.setVisibility(View.VISIBLE);
@@ -149,7 +153,7 @@ public class LoggedFaultDeletePopup extends ParentPopup{
 		imgbtnCancel.setVisibility(View.INVISIBLE);
 		textViewOK.setVisibility(View.INVISIBLE);
 		textViewCancel.setVisibility(View.INVISIBLE);
-		textViewTitle.setText(ParentActivity.getResources().getString(string.Waiting_for_initialization));
+		textViewTitle.setText(getString(ParentActivity.getResources().getString(string.Waiting_for_initialization), 52));
 	}	
 	public void ClickCancel(){
 		this.dismiss();
@@ -163,20 +167,20 @@ public class LoggedFaultDeletePopup extends ParentPopup{
 	public void setTitle(int Index){
 		switch (Index) {
 		case Home.REQ_ERR_MACHINE_LOGGED:
-			textViewTitle.setText(ParentActivity.getResources().getString(string.Delete_Logged_Fault) 
-					+ "\n(" +ParentActivity.getResources().getString(string.Machine) +")");
+			textViewTitle.setText(getString(ParentActivity.getResources().getString(string.Delete_Logged_Fault), 311) 
+					+ "\n(" +getString(ParentActivity.getResources().getString(string.Machine), 307) +")");
 			break;
 		case Home.REQ_ERR_ENGINE_LOGGED:
-			textViewTitle.setText(ParentActivity.getResources().getString(string.Delete_Logged_Fault) 
-					+ "\n(" +ParentActivity.getResources().getString(string.Engine) +")");
+			textViewTitle.setText(getString(ParentActivity.getResources().getString(string.Delete_Logged_Fault), 311) 
+					+ "\n(" +getString(ParentActivity.getResources().getString(string.Engine), 308) +")");
 			break;
 		case Home.REQ_ERR_TM_LOGGED:
-			textViewTitle.setText(ParentActivity.getResources().getString(string.Delete_Logged_Fault) 
-					+ "\n(" +ParentActivity.getResources().getString(string.Transmission) +")");
+			textViewTitle.setText(getString(ParentActivity.getResources().getString(string.Delete_Logged_Fault), 311) 
+					+ "\n(" +getString(ParentActivity.getResources().getString(string.Transmission), 309) +")");
 			break;
 		case Home.REQ_ERR_EHCU_LOGGED:
-			textViewTitle.setText(ParentActivity.getResources().getString(string.Delete_Logged_Fault) 
-					+ "\n(" +ParentActivity.getResources().getString(string.EHCU) +")");
+			textViewTitle.setText(getString(ParentActivity.getResources().getString(string.Delete_Logged_Fault), 311) 
+					+ "\n(" +getString(ParentActivity.getResources().getString(string.EHCU), 272) +")");
 			break;
 		default:
 			break;

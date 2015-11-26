@@ -1,35 +1,30 @@
 package taeha.wheelloader.fseries_monitor.main.a;
 
-import java.util.Timer;
-import java.util.TimerTask;
-
+import taeha.wheelloader.fseries_monitor.animation.BarAnimation;
+import taeha.wheelloader.fseries_monitor.animation.ImageViewYAxisFlipAnimation;
+import taeha.wheelloader.fseries_monitor.animation.TextFitTextViewAxisFlipAnimation;
+import taeha.wheelloader.fseries_monitor.main.CAN1CommManager;
+import taeha.wheelloader.fseries_monitor.main.Home;
+import taeha.wheelloader.fseries_monitor.main.LongPressChecker;
+import taeha.wheelloader.fseries_monitor.main.LongPressChecker.OnLongPressListener;
+import taeha.wheelloader.fseries_monitor.main.ParentFragment;
+import taeha.wheelloader.fseries_monitor.main.R;
+import taeha.wheelloader.fseries_monitor.main.R.color;
+import taeha.wheelloader.fseries_monitor.main.R.string;
+import taeha.wheelloader.fseries_monitor.main.TextFitTextView;
 import actionpopup.ActionItem;
 import actionpopup.QuickAction;
-import android.app.Fragment;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.View.OnTouchListener;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import taeha.wheelloader.fseries_monitor.animation.BarAnimation;
-import taeha.wheelloader.fseries_monitor.animation.ImageViewYAxisFlipAnimation;
-import taeha.wheelloader.fseries_monitor.animation.TextViewXAxisFlipAnimation;
-import taeha.wheelloader.fseries_monitor.main.CAN1CommManager;
-import taeha.wheelloader.fseries_monitor.main.CheckModel;
-import taeha.wheelloader.fseries_monitor.main.Home;
-import taeha.wheelloader.fseries_monitor.main.LongPressChecker;
-import taeha.wheelloader.fseries_monitor.main.ParentFragment;
-import taeha.wheelloader.fseries_monitor.main.R;
-import taeha.wheelloader.fseries_monitor.main.R.color;
-import taeha.wheelloader.fseries_monitor.main.R.string;
-import android.view.View.OnTouchListener;
-import taeha.wheelloader.fseries_monitor.main.LongPressChecker.OnLongPressListener;
-import taeha.wheelloader.fseries_monitor.popup.FuelInitalPopup.PopupOffTimerClass;
 
 public class MainALeftMainFragment extends ParentFragment{
 	//CONSTANT////////////////////////////////////////
@@ -46,17 +41,17 @@ public class MainALeftMainFragment extends ParentFragment{
 	RelativeLayout LayoutWeighingUpper;
 	RelativeLayout LayoutWeighingLower;
 	
-	TextView textViewNormalUpperData;
-	TextView textViewNormalUpperUnit;
-	TextView textViewNormalLowerData;
-	TextView textViewNormalLowerUnit;
-	TextView textViewWeighingUpperData;
-	TextView textViewWeighingUpperUnit;
-	TextView textViewWeighingLowerData;
-	TextView textViewWeighingLowerUnit;
-	TextView textViewFuelTitle;
-	TextView textViewFuelData;
-	TextView textViewFuelUnit;	
+	TextFitTextView textViewNormalUpperData;
+	TextFitTextView textViewNormalUpperUnit;
+	TextFitTextView textViewNormalLowerData;
+	TextFitTextView textViewNormalLowerUnit;
+	TextFitTextView textViewWeighingUpperData;
+	TextFitTextView textViewWeighingUpperUnit;
+	TextFitTextView textViewWeighingLowerData;
+	TextFitTextView textViewWeighingLowerUnit;
+	TextFitTextView textViewFuelTitle;
+	TextFitTextView textViewFuelData;
+	TextFitTextView textViewFuelUnit;	
 	
 	ImageView imgViewNormalUpperIcon;
 	ImageView imgViewNormalLowerIcon;
@@ -122,7 +117,7 @@ public class MainALeftMainFragment extends ParentFragment{
 	ImageViewYAxisFlipAnimation WeighingUpperStatusIconAnimation;
 	ImageViewYAxisFlipAnimation WeighingLowerStatusIconAnimation;
 	
-	TextViewXAxisFlipAnimation	FuelTitleAnimation;
+	TextFitTextViewAxisFlipAnimation	FuelTitleAnimation;
 	
 	public BarAnimation			_EcoGaugeAnimation;
 	public LongPressChecker     mLongPressChecker;	// ++, --, 150406 cjg
@@ -165,17 +160,17 @@ public class MainALeftMainFragment extends ParentFragment{
 		LayoutWeighingUpper = (RelativeLayout)mRoot.findViewById(R.id.RelativeLayout_leftup_main_a_machinestatus_weighing_upper);
 		LayoutWeighingLower = (RelativeLayout)mRoot.findViewById(R.id.RelativeLayout_leftup_main_a_machinestatus_weighing_lower);
 		
-		textViewNormalUpperData = (TextView)mRoot.findViewById(R.id.textView_leftup_machinestatus_normal_upper_data);
-		textViewNormalUpperUnit = (TextView)mRoot.findViewById(R.id.textView_leftup_machinestatus_normal_upper_unit);
-		textViewNormalLowerData = (TextView)mRoot.findViewById(R.id.textView_leftup_machinestatus_normal_lower_data);
-		textViewNormalLowerUnit = (TextView)mRoot.findViewById(R.id.textView_leftup_machinestatus_normal_lower_unit);
-		textViewWeighingUpperData = (TextView)mRoot.findViewById(R.id.textView_leftup_machinestatus_weighing_upper_data);
-		textViewWeighingUpperUnit = (TextView)mRoot.findViewById(R.id.textView_leftup_machinestatus_weighing_upper_unit);
-		textViewWeighingLowerData = (TextView)mRoot.findViewById(R.id.textView_leftup_machinestatus_weighing_lower_data);
-		textViewWeighingLowerUnit = (TextView)mRoot.findViewById(R.id.textView_leftup_machinestatus_weighing_lower_unit);
-		textViewFuelTitle = (TextView)mRoot.findViewById(R.id.textView_leftdown_fuel_title);
-		textViewFuelData = (TextView)mRoot.findViewById(R.id.textView_leftdown_fuel_data);
-		textViewFuelUnit = (TextView)mRoot.findViewById(R.id.textView_leftdown_fuel_unit);		
+		textViewNormalUpperData = (TextFitTextView)mRoot.findViewById(R.id.textView_leftup_machinestatus_normal_upper_data);
+		textViewNormalUpperUnit = (TextFitTextView)mRoot.findViewById(R.id.textView_leftup_machinestatus_normal_upper_unit);
+		textViewNormalLowerData = (TextFitTextView)mRoot.findViewById(R.id.textView_leftup_machinestatus_normal_lower_data);
+		textViewNormalLowerUnit = (TextFitTextView)mRoot.findViewById(R.id.textView_leftup_machinestatus_normal_lower_unit);
+		textViewWeighingUpperData = (TextFitTextView)mRoot.findViewById(R.id.textView_leftup_machinestatus_weighing_upper_data);
+		textViewWeighingUpperUnit = (TextFitTextView)mRoot.findViewById(R.id.textView_leftup_machinestatus_weighing_upper_unit);
+		textViewWeighingLowerData = (TextFitTextView)mRoot.findViewById(R.id.textView_leftup_machinestatus_weighing_lower_data);
+		textViewWeighingLowerUnit = (TextFitTextView)mRoot.findViewById(R.id.textView_leftup_machinestatus_weighing_lower_unit);
+		textViewFuelTitle = (TextFitTextView)mRoot.findViewById(R.id.textView_leftdown_fuel_title);
+		textViewFuelData = (TextFitTextView)mRoot.findViewById(R.id.textView_leftdown_fuel_data);
+		textViewFuelUnit = (TextFitTextView)mRoot.findViewById(R.id.textView_leftdown_fuel_unit);		
 		
 		imgViewNormalUpperIcon = (ImageView)mRoot.findViewById(R.id.imageView_leftup_machinestatus_normal_upper_icon);
 		imgViewNormalLowerIcon = (ImageView)mRoot.findViewById(R.id.imageView_leftup_machinestatus_normal_lower_icon);
@@ -201,10 +196,10 @@ public class MainALeftMainFragment extends ParentFragment{
 		WeighingUpperStatusIconAnimation = new ImageViewYAxisFlipAnimation(ParentActivity);
 		WeighingLowerStatusIconAnimation = new ImageViewYAxisFlipAnimation(ParentActivity);
 		
-		FuelTitleAnimation = new TextViewXAxisFlipAnimation(ParentActivity);
+		FuelTitleAnimation = new TextFitTextViewAxisFlipAnimation(ParentActivity);
 
 		popupIndicator = new QuickAction(ParentActivity, QuickAction.VERTICAL);
-		actionitemIndicator = new ActionItem(0, ParentActivity.getResources().getString(R.string.Bucket_Full_In_Error_Warning), getResources().getDrawable(R.drawable.main_default_monitoring_icon_fullin));
+		actionitemIndicator = new ActionItem(0, getString(ParentActivity.getResources().getString(R.string.Bucket_Full_In_Error_Warning), 139), getResources().getDrawable(R.drawable.main_default_monitoring_icon_fullin));
 		popupIndicator.addActionItem(actionitemIndicator);		
 		
 		EcoGaugeLevel = CAN1Comm.Get_EcoGaugeLevel_1304_PGN65390();
@@ -655,52 +650,49 @@ public class MainALeftMainFragment extends ParentFragment{
 	public void HYDDisplay(TextView textData, TextView textUnit, int Data, int Unit){
 		textData.setText(ParentActivity.GetTemp(Data,Unit));
 		if(Unit == ParentActivity.UNIT_TEMP_F){
-			textUnit.setText(ParentActivity.getResources().getString(string.F));
+			textUnit.setText(getString(ParentActivity.getResources().getString(string.F), 9));
 		}else{
-			textUnit.setText(ParentActivity.getResources().getString(string.C));
+			textUnit.setText(getString(ParentActivity.getResources().getString(string.C), 8));
 		}
 	}
 	public void TMOilDisplay(TextView textData, TextView textUnit, int Data, int Unit){
 		textData.setText(ParentActivity.GetTemp(Data,Unit));
 		if(Unit == ParentActivity.UNIT_TEMP_F){
-			textUnit.setText(ParentActivity.getResources().getString(string.F));
+			textUnit.setText(getString(ParentActivity.getResources().getString(string.F), 9));
 		}else{
-			textUnit.setText(ParentActivity.getResources().getString(string.C));
+			textUnit.setText(getString(ParentActivity.getResources().getString(string.C), 8));
 		}
 	}
 	public void CoolantDisplay(TextView textData, TextView textUnit, int Data, int Unit){
 		textData.setText(ParentActivity.GetTemp(Data,Unit));
 		if(Unit == ParentActivity.UNIT_TEMP_F){
-			textUnit.setText(ParentActivity.getResources().getString(string.F));
+			textUnit.setText(getString(ParentActivity.getResources().getString(string.F), 9));
 		}else{
-			textUnit.setText(ParentActivity.getResources().getString(string.C));
+			textUnit.setText(getString(ParentActivity.getResources().getString(string.C), 8));
 		}
 	}
 	public void BatteryDisplay(TextView textData, TextView textUnit, int Data){
 		textData.setText(ParentActivity.GetBattery(Data));
-		textUnit.setText(ParentActivity.getResources().getString(string.V));
+		textUnit.setText(getString(ParentActivity.getResources().getString(string.V), 10));
 	}
 	// ++, 150329 bwk
 	public void AxleDisplay(TextView textData, TextView textUnit, int Data, int Unit){
 		textData.setText(ParentActivity.GetTempAxle(Data,Unit));
 		if(Unit == Home.UNIT_TEMP_F){
-			textUnit.setText(ParentActivity.getResources().getString(string.F));
+			textUnit.setText(getString(ParentActivity.getResources().getString(string.F), 9));
 		}else{
-			textUnit.setText(ParentActivity.getResources().getString(string.C));
+			textUnit.setText(getString(ParentActivity.getResources().getString(string.C), 8));
 		}
 	}
 	// --, 150329 bwk
 
 	public void WeighingUpperDisplay(int BoomLiftSpeedError, int BucketFullInError, int HydOilTempError, int DisplayIndex, int Current, int Day1, int Today, int TotalA, int TotalB, int TotalC, int Unit){
 		if(ParentActivity.UnitWeight == Home.UNIT_WEIGHT_LB){
-			textViewWeighingUpperUnit.setText(ParentActivity.getResources().getString(string.lb));
-			textViewWeighingLowerUnit.setText(ParentActivity.getResources().getString(string.lb));
-		}else if(ParentActivity.UnitWeight == Home.UNIT_WEIGHT_US_TON){
-			textViewWeighingUpperUnit.setText(ParentActivity.getResources().getString(string.USTon));
-			textViewWeighingLowerUnit.setText(ParentActivity.getResources().getString(string.USTon));
+			textViewWeighingUpperUnit.setText(getString(ParentActivity.getResources().getString(string.lb), 12));
+			textViewWeighingLowerUnit.setText(getString(ParentActivity.getResources().getString(string.lb), 12));
 		}else{
-			textViewWeighingUpperUnit.setText(ParentActivity.getResources().getString(string.ton));
-			textViewWeighingLowerUnit.setText(ParentActivity.getResources().getString(string.ton));
+			textViewWeighingUpperUnit.setText(getString(ParentActivity.getResources().getString(string.ton), 11));
+			textViewWeighingLowerUnit.setText(getString(ParentActivity.getResources().getString(string.ton), 11));
 		}
 
 		if(HydOilTempError == CAN1CommManager.DATA_STATE_WEIGHTING_SYSGEM_ERROR
@@ -756,15 +748,12 @@ public class MainALeftMainFragment extends ParentFragment{
 		}
 	}
 	public void WeighingLowerDisplay(int DisplayIndex, int Current, int Day1, int Today, int TotalA, int TotalB, int TotalC, int Unit){
-		if(ParentActivity.UnitWeight == Home.UNIT_WEIGHT_LB){
-			textViewWeighingUpperUnit.setText(ParentActivity.getResources().getString(string.lb));
-			textViewWeighingLowerUnit.setText(ParentActivity.getResources().getString(string.lb));
-		}else if(ParentActivity.UnitWeight == Home.UNIT_WEIGHT_US_TON){
-			textViewWeighingUpperUnit.setText(ParentActivity.getResources().getString(string.USTon));
-			textViewWeighingLowerUnit.setText(ParentActivity.getResources().getString(string.USTon));
+		if(ParentActivity.UnitWeight == ParentActivity.UNIT_WEIGHT_LB){
+			textViewWeighingUpperUnit.setText(getString(ParentActivity.getResources().getString(string.lb), 12));
+			textViewWeighingLowerUnit.setText(getString(ParentActivity.getResources().getString(string.lb), 12));
 		}else{
-			textViewWeighingUpperUnit.setText(ParentActivity.getResources().getString(string.ton));
-			textViewWeighingLowerUnit.setText(ParentActivity.getResources().getString(string.ton));
+			textViewWeighingUpperUnit.setText(getString(ParentActivity.getResources().getString(string.ton), 11));
+			textViewWeighingLowerUnit.setText(getString(ParentActivity.getResources().getString(string.ton), 11));
 		}
 		
 		switch (DisplayIndex) {
@@ -829,10 +818,10 @@ public class MainALeftMainFragment extends ParentFragment{
 //			FuelTitleAnimation.FlipAnimation(textViewFuelTitle,"");
 //			break;
 		case CAN1CommManager.DATA_STATE_AVERAGE_FUEL_RATE:
-			FuelTitleAnimation.FlipAnimation(textViewFuelTitle,getResources().getString(string.AVERAGE_FUEL_RATE));
+			FuelTitleAnimation.FlipAnimation(textViewFuelTitle,getString(getResources().getString(string.AVERAGE_FUEL_RATE), 91));
 			break;
 		case CAN1CommManager.DATA_STATE_A_DAYS_FUEL_USED:
-			FuelTitleAnimation.FlipAnimation(textViewFuelTitle,getResources().getString(string.A_DAYS_FUEL_USED));
+			FuelTitleAnimation.FlipAnimation(textViewFuelTitle,getString(getResources().getString(string.A_DAYS_FUEL_USED), 146));
 			break;
 		default:
 			break;
@@ -846,17 +835,11 @@ public class MainALeftMainFragment extends ParentFragment{
 //			break;
 		case CAN1CommManager.DATA_STATE_AVERAGE_FUEL_RATE:
 			textViewFuelData.setText(ParentActivity.GetFuelRateString(AverageFuel, ParentActivity.UnitFuel));
-			if(ParentActivity.UnitFuel == Home.UNIT_FUEL_GAL)
-				textViewFuelUnit.setText(ParentActivity.getResources().getString(string.gal_h));
-			else
-				textViewFuelUnit.setText(ParentActivity.getResources().getString(string.l_h));
+			textViewFuelUnit.setText(getString(ParentActivity.getResources().getString(string.l_h), 33));
 			break;
 		case CAN1CommManager.DATA_STATE_A_DAYS_FUEL_USED:
 			textViewFuelData.setText(ParentActivity.GetFuelRateString(LatestConsumed, ParentActivity.UnitFuel));
-			if(ParentActivity.UnitFuel == Home.UNIT_FUEL_GAL)
-				textViewFuelUnit.setText(ParentActivity.getResources().getString(string.gal));
-			else
-				textViewFuelUnit.setText(ParentActivity.getResources().getString(string.l));
+			textViewFuelUnit.setText(getString(ParentActivity.getResources().getString(string.l), 81));
 			break;
 		default:
 			break;
@@ -1010,19 +993,19 @@ public class MainALeftMainFragment extends ParentFragment{
 		popupIndicator.removeAllActionItem();
 		switch (Index) {
 		case DATA_STATE_CURRENT_WEIHGING_RESULT_HYDRAULICOILTEMP:
-			actionitemIndicator = new ActionItem(0, ParentActivity.getResources().getString(R.string.Hydraulic_Oil_Temp_Low_Warning));
+			actionitemIndicator = new ActionItem(0, getString(ParentActivity.getResources().getString(R.string.Hydraulic_Oil_Temp_Low_Warning), 141));
 			popupIndicator.addActionItem(actionitemIndicator);
 			break;
 		case DATA_STATE_CURRENT_WEIHGING_RESULT_BOOMLIFTING_BUCKETFULLIN:
-			actionitemIndicator = new ActionItem(0, ParentActivity.getResources().getString(R.string.Sudden_Change_Error_Warning)+"\n"+ParentActivity.getResources().getString(R.string.Bucket_Full_In_Error_Warning));
+			actionitemIndicator = new ActionItem(0, getString(ParentActivity.getResources().getString(R.string.Sudden_Change_Error_Warning), 140)+"\n"+getString(ParentActivity.getResources().getString(R.string.Bucket_Full_In_Error_Warning), 139));
 			popupIndicator.addActionItem(actionitemIndicator);
 			break;
 		case DATA_STATE_CURRENT_WEIHGING_RESULT_BOOMLIFTING:
-			actionitemIndicator = new ActionItem(0, ParentActivity.getResources().getString(R.string.Sudden_Change_Error_Warning));
+			actionitemIndicator = new ActionItem(0, getString(ParentActivity.getResources().getString(R.string.Sudden_Change_Error_Warning), 140));
 			popupIndicator.addActionItem(actionitemIndicator);
 			break;
 		case DATA_STATE_CURRENT_WEIHGING_RESULT_BUCKETFULLIN:
-			actionitemIndicator = new ActionItem(0, ParentActivity.getResources().getString(R.string.Bucket_Full_In_Error_Warning));
+			actionitemIndicator = new ActionItem(0, getString(ParentActivity.getResources().getString(R.string.Bucket_Full_In_Error_Warning), 139));
 			popupIndicator.addActionItem(actionitemIndicator);
 			break;
 		default:

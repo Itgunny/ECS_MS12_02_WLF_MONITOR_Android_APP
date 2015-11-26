@@ -8,6 +8,7 @@ import taeha.wheelloader.fseries_monitor.animation.LeftRightShiftAnimation;
 import taeha.wheelloader.fseries_monitor.main.Home;
 import taeha.wheelloader.fseries_monitor.main.ParentFragment;
 import taeha.wheelloader.fseries_monitor.main.R;
+import taeha.wheelloader.fseries_monitor.main.TextFitTextView;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
@@ -30,7 +31,9 @@ public class ChangeASPhoneNumberFragment extends ParentFragment{
 	//////////////////////////////////////////////////
 	//RESOURCE////////////////////////////////////////
 	ImageButton imgbtnOK;
+	TextFitTextView textViewOK;
 	ImageButton imgbtnCancel;
+	TextFitTextView	textViewCancel;
 
 	TextView textViewNum1;
 	TextView textViewNum2;
@@ -44,7 +47,7 @@ public class ChangeASPhoneNumberFragment extends ParentFragment{
 	TextView textViewNum0;
 	
 	ImageButton imgbtnBack;
-	TextView textViewNext;
+	TextFitTextView textViewNext;
 	
 	TextView textViewPhoneNum;
 	//////////////////////////////////////////////////
@@ -84,7 +87,7 @@ public class ChangeASPhoneNumberFragment extends ParentFragment{
 		InitButtonListener();
 		CursurDisplay(CursurIndex);
 		ParentActivity.ScreenIndex = ParentActivity.SCREEN_STATE_MENU_MANAGEMENT_ASPHONE_TOP;
-		ParentActivity._MenuBaseFragment._MenuInterTitleFragment.SetTitleText(ParentActivity.getResources().getString(R.string.Change_AS_Phone_Number));
+		ParentActivity._MenuBaseFragment._MenuInterTitleFragment.SetTitleText(ParentActivity.getResources().getString(R.string.Change_AS_Phone_Number), 322);
 		HandleCursurDisplay = new Handler() {
 			@Override
 			public void handleMessage(Message msg) {
@@ -104,7 +107,12 @@ public class ChangeASPhoneNumberFragment extends ParentFragment{
 	protected void InitResource() {
 		// TODO Auto-generated method stub
 		imgbtnOK = (ImageButton)mRoot.findViewById(R.id.ImageButton_menu_body_management_changephone_low_ok);
+		textViewOK = (TextFitTextView)mRoot.findViewById(R.id.textView_menu_body_management_changephone_low_ok);
+		textViewOK.setText(getString(ParentActivity.getResources().getString(R.string.OK), 15));
+		
 		imgbtnCancel = (ImageButton)mRoot.findViewById(R.id.ImageButton_menu_body_management_changephone_low_cancel);
+		textViewCancel = (TextFitTextView)mRoot.findViewById(R.id.textView_menu_body_management_changephone_low_cancel);
+		textViewCancel.setText(getString(ParentActivity.getResources().getString(R.string.Cancel), 16));
 		
 		textViewNum1 = (TextView)mRoot.findViewById(R.id.textView_menu_body_management_changephone_num_1);
 		textViewNum2 = (TextView)mRoot.findViewById(R.id.textView_menu_body_management_changephone_num_2);
@@ -118,7 +126,7 @@ public class ChangeASPhoneNumberFragment extends ParentFragment{
 		textViewNum0 = (TextView)mRoot.findViewById(R.id.textView_menu_body_management_changephone_num_0);
 		
 		imgbtnBack = (ImageButton)mRoot.findViewById(R.id.imageButton_menu_body_management_changephone_num_back);
-		textViewNext = (TextView)mRoot.findViewById(R.id.textView_menu_body_management_changephone_num_next);
+		textViewNext = (TextFitTextView)mRoot.findViewById(R.id.textView_menu_body_management_changephone_num_next);
 		
 		textViewPhoneNum = (TextView)mRoot.findViewById(R.id.textView_menu_body_management_changephone_phonenum);
 	}
@@ -634,5 +642,4 @@ public class ChangeASPhoneNumberFragment extends ParentFragment{
 	}
 	/////////////////////////////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////////
-	
 }

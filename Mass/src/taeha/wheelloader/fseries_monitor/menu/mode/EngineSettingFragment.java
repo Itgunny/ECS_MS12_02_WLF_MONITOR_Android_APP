@@ -62,7 +62,7 @@ public class EngineSettingFragment extends MenuBodyList_ParentFragment{
 		InitList();
 		ParentActivity._MenuBaseFragment._MenuListTitleFragment.setBackButtonEnable(true);
 		ParentActivity.ScreenIndex = ParentActivity.SCREEN_STATE_MENU_MODE_ENGINETM_ENGINESETTING_TOP;
-		ParentActivity._MenuBaseFragment._MenuListTitleFragment.SetTitleText(ParentActivity.getResources().getString(R.string.Engine_Setting));
+		ParentActivity._MenuBaseFragment._MenuListTitleFragment.SetTitleText(ParentActivity.getResources().getString(R.string.Engine_Setting), 209);
 		CursurDisplay(CursurIndex);
 		return mRoot;
 	}
@@ -101,7 +101,7 @@ public class EngineSettingFragment extends MenuBodyList_ParentFragment{
 		//setClickableList2(true);	// ++, --, 150323 bwk
 		
 
-		setListTitle1(ParentActivity.getResources().getString(string.Engine_Mode));
+		setListTitle1(ParentActivity.getResources().getString(string.Engine_Mode), 240);
 		// ++, 150323 bwk
 //		setListTitle2(ParentActivity.getResources().getString(string.Warming_Up));
 //		if(CAN1Comm.Get_ManufacturerCode_1700_PGN65330_ECM() == CheckModel.STATE_MANUFACTURERCODE_SCANIA){
@@ -114,7 +114,7 @@ public class EngineSettingFragment extends MenuBodyList_ParentFragment{
 			setClickableList2(false);
 		}else{
 			setClickableList2(true);
-			setListTitle2(ParentActivity.getResources().getString(string.Engine_Speed));
+			setListTitle2(ParentActivity.getResources().getString(string.Engine_Speed), 208);
 		}
 		// --, 150323 bwk
 	
@@ -183,13 +183,13 @@ public class EngineSettingFragment extends MenuBodyList_ParentFragment{
 	
 		switch (data) {
 		case CAN1CommManager.DATA_STATE_ENGINE_MODE_PWR:
-			setListData1(ParentActivity.getResources().getString(string.Power));
+			setListData1(ParentActivity.getResources().getString(string.Power),243);
 			break;
 		case CAN1CommManager.DATA_STATE_ENGINE_MODE_STD:
-			setListData1(getResources().getString(string.Standard));
+			setListData1(getResources().getString(string.Standard), 242);
 			break;
 		case CAN1CommManager.DATA_STATE_ENGINE_MODE_ECONO:
-			setListData1(getResources().getString(string.Econo));
+			setListData1(getResources().getString(string.Econo), 241);
 			break;
 		default:
 			break;

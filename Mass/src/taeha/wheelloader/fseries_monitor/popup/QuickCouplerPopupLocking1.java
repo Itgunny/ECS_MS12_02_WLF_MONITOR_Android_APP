@@ -1,18 +1,19 @@
 package taeha.wheelloader.fseries_monitor.popup;
 
+import taeha.wheelloader.fseries_monitor.main.Home;
+import taeha.wheelloader.fseries_monitor.main.ParentPopup;
+import taeha.wheelloader.fseries_monitor.main.R;
+import taeha.wheelloader.fseries_monitor.main.R.string;
+import taeha.wheelloader.fseries_monitor.main.TextFitTextView;
 import android.content.Context;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup.LayoutParams;
 import android.widget.ImageButton;
 import android.widget.RelativeLayout;
-import taeha.wheelloader.fseries_monitor.main.Home;
-import taeha.wheelloader.fseries_monitor.main.ParentPopup;
-import taeha.wheelloader.fseries_monitor.main.R;
-
+import android.widget.TextView;
 public class QuickCouplerPopupLocking1 extends ParentPopup{
 	//CONSTANT////////////////////////////////////////
 
@@ -21,6 +22,11 @@ public class QuickCouplerPopupLocking1 extends ParentPopup{
 	RelativeLayout LayoutBG;
 	ImageButton imgbtnOK;
 	ImageButton imgbtnCancel;
+	
+	TextView	textViewTitle;
+	TextFitTextView 	textViewOK;
+	TextFitTextView	textViewCancel;
+	
 	//////////////////////////////////////////////////
 	
 	//VALUABLE////////////////////////////////////////
@@ -90,8 +96,14 @@ public class QuickCouplerPopupLocking1 extends ParentPopup{
 		imgbtnOK = (ImageButton)mRoot.findViewById(R.id.imageButton_popup_key_quickcoupler_locking_1_ok);
 		imgbtnCancel = (ImageButton)mRoot.findViewById(R.id.imageButton_popup_key_quickcoupler_locking_1_cancel);
 		
+		textViewTitle = (TextView)mRoot.findViewById(R.id.textView_popup_key_quickcoupler_locking_1_title);
+		textViewTitle.setText(getString(ParentActivity.getResources().getString(string.Excute_Locking_Attachment), 450));
 		
+		textViewOK = (TextFitTextView)mRoot.findViewById(R.id.textView_popup_key_quickcoupler_locking_1_ok);
+		textViewOK.setText(getString(ParentActivity.getResources().getString(string.OK), 15));
 
+		textViewCancel = (TextFitTextView)mRoot.findViewById(R.id.textView_popup_key_quickcoupler_locking_1_cancel);
+		textViewCancel.setText(getString(ParentActivity.getResources().getString(string.Cancel), 16));
 	}
 
 	@Override

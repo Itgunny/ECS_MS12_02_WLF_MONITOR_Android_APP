@@ -15,6 +15,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import taeha.wheelloader.fseries_monitor.main.ParentFragment;
 import taeha.wheelloader.fseries_monitor.main.R;
+import taeha.wheelloader.fseries_monitor.main.TextFitTextView;
 import taeha.wheelloader.fseries_monitor.menu.preference.LanguageListFragment.EnableButtonTimerClass;
 
 public class DisplayTypeFragment extends ParentFragment{
@@ -22,8 +23,8 @@ public class DisplayTypeFragment extends ParentFragment{
 
 	//////////////////////////////////////////////////
 	//RESOURCE////////////////////////////////////////
-	TextView textViewTypeA;
-	TextView textViewTypeB;
+	TextFitTextView textViewTypeA;
+	TextFitTextView textViewTypeB;
 	
 	RelativeLayout	LayoutBG;
 	//////////////////////////////////////////////////
@@ -60,7 +61,7 @@ public class DisplayTypeFragment extends ParentFragment{
 		InitButtonListener();
 
 		ParentActivity.ScreenIndex = ParentActivity.SCREEN_STATE_MENU_PREFERENCE_DISPLAYTYPELANG_TYPE;
-		ParentActivity._MenuBaseFragment._MenuInterTitleFragment.SetTitleText(ParentActivity.getResources().getString(R.string.Display_Style));
+		ParentActivity._MenuBaseFragment._MenuInterTitleFragment.SetTitleText(ParentActivity.getResources().getString(R.string.Display_Style), 416);
 		
 		CursurDisplay(CursurIndex);
 		EnableRadioButton(false);
@@ -89,8 +90,10 @@ public class DisplayTypeFragment extends ParentFragment{
 	@Override
 	protected void InitResource() {
 		// TODO Auto-generated method stub
-		textViewTypeA = (TextView)mRoot.findViewById(R.id.textView_menu_body_preference_displaytype_a);
-		textViewTypeB = (TextView)mRoot.findViewById(R.id.textView_menu_body_preference_displaytype_b);
+		textViewTypeA = (TextFitTextView)mRoot.findViewById(R.id.textView_menu_body_preference_displaytype_a);
+		textViewTypeA.setText(getString(ParentActivity.getResources().getString(R.string.Type_A), 423));
+		textViewTypeB = (TextFitTextView)mRoot.findViewById(R.id.textView_menu_body_preference_displaytype_b);
+		textViewTypeB.setText(getString(ParentActivity.getResources().getString(R.string.Type_B), 424));
 		LayoutBG = (RelativeLayout)mRoot.findViewById(R.id.RelativeLayout_menu_body_preference_displaytype);
 	}
 	
@@ -256,5 +259,13 @@ public class DisplayTypeFragment extends ParentFragment{
 	}
 	
 	/////////////////////////////////////////////////////////////////////
-
+	public String getString(String str, int index){
+		if(ParentActivity.langDb.findStrGetString(index, ParentActivity.LanguageIndex) == null){
+			Log.d(TAG, "Android");
+			return str;
+		}else {
+			Log.d(TAG, "Excel");
+			return ParentActivity.langDb.findStrGetString(index, ParentActivity.LanguageIndex);	
+		}
+	}
 }

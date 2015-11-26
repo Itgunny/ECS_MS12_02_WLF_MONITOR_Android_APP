@@ -15,14 +15,16 @@ import taeha.wheelloader.fseries_monitor.main.Home;
 import taeha.wheelloader.fseries_monitor.main.ParentPopup;
 import taeha.wheelloader.fseries_monitor.main.R;
 import taeha.wheelloader.fseries_monitor.main.R.string;
+import taeha.wheelloader.fseries_monitor.main.TextFitTextView;
 
 public class TCLockUpPopup extends ParentPopup{
 	//CONSTANT////////////////////////////////////////
 
 	//////////////////////////////////////////////////
 	//RESOURCE////////////////////////////////////////
-	TextView textViewOn;
-	TextView textViewOff;
+	TextFitTextView textViewTitle;
+	TextFitTextView textViewOn;
+	TextFitTextView textViewOff;
 	//////////////////////////////////////////////////
 	
 	//VALUABLE////////////////////////////////////////
@@ -73,8 +75,14 @@ public class TCLockUpPopup extends ParentPopup{
 	@Override
 	protected void InitResource() {
 		// TODO Auto-generated method stub
-		textViewOn = (TextView)mRoot.findViewById(R.id.textView_popup_tclockup_on);
-		textViewOff = (TextView)mRoot.findViewById(R.id.textView_popup_tclockup_off);
+		textViewTitle = (TextFitTextView)mRoot.findViewById(R.id.textView_popup_tclockup_title);
+		textViewTitle.setText(getString(ParentActivity.getResources().getString(string.TC_Lock_Up), 210));
+		
+		textViewOn = (TextFitTextView)mRoot.findViewById(R.id.textView_popup_tclockup_on);
+		textViewOn.setText(getString(ParentActivity.getResources().getString(string.On), 19));
+		
+		textViewOff = (TextFitTextView)mRoot.findViewById(R.id.textView_popup_tclockup_off);
+		textViewOff.setText(getString(ParentActivity.getResources().getString(string.Off), 20));
 	}
 
 	@Override
