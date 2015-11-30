@@ -455,10 +455,10 @@
     <string name="Engine_Delay_Shutdown">Mootori viivitusega seiskamine</string>
     <string name="Weighing_Information">Kaalumise informatsioon</string>
     <string name="ACU">ACU</string>
-    <string name="Boom_Lever_Floating_Position_Adjust">Noole ujuvasendi reguleerimine</string>
+    <string name="Boom_Lever_Floating_Position_Adjust">Boom Lever Floating Position Adjust</string>
     <string name="Fingertip_Calibration">Sõrmvalitsi kalibreerimine</string>
-    <string name="Boom_Down_Response_Adjust">Noole allalaskmise tundlikuse reguleerimine</string>
-    <string name="Bucket_Dump_Response_Adjust">Kopa kallutamise tundlikuse reguleerimine</string>
+    <string name="Boom_Down_Response_Adjust">Boom Down Response Adjust</string>
+    <string name="Bucket_Dump_Response_Adjust">Bucket Dump Response Adjust</string>
     <string name="Service_Contact">Hoolduse kontakt</string>
     <string name="METRIC">Meetermõõdustiku ühikud</string>
     <string name="US">US ühikud</string>

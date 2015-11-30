@@ -74,7 +74,7 @@ public class FuelHistoryGeneralRecordFragment  extends ParentFragment{
 		InitButtonListener();
 		SetUnit();
 		
-		ParentActivity.ScreenIndex = ParentActivity.SCREEN_STATE_MENU_MONITORING_FUELHISTORY_GENERALRECORD;
+		ParentActivity.ScreenIndex = Home.SCREEN_STATE_MENU_MONITORING_FUELHISTORY_GENERALRECORD;
 		ParentActivity._MenuBaseFragment._MenuInterTitleFragment.SetTitleText(ParentActivity.getResources().getString(R.string.General_Record), 314);
 		
 		CursurIndex = 1;
@@ -191,12 +191,12 @@ public class FuelHistoryGeneralRecordFragment  extends ParentFragment{
 	}
 	/////////////////////////////////////////////////////////////////////	
 	public void ClickAverageInitial(){
-		ParentActivity.OldScreenIndex = ParentActivity.SCREEN_STATE_MENU_MONITORING_FUELHISTORY_GENERALRECORD;
+		ParentActivity.OldScreenIndex = Home.SCREEN_STATE_MENU_MONITORING_FUELHISTORY_GENERALRECORD;
 		ParentActivity._FuelInitalPopup.setMode(CAN1CommManager.DATA_STATE_AVERAGE_FUEL_RATE_INFO_CLEAR);
 		ParentActivity.showFuelInitalPopup();
 	}
 	public void ClickDaysInitial(){
-		ParentActivity.OldScreenIndex = ParentActivity.SCREEN_STATE_MENU_MONITORING_FUELHISTORY_GENERALRECORD;
+		ParentActivity.OldScreenIndex = Home.SCREEN_STATE_MENU_MONITORING_FUELHISTORY_GENERALRECORD;
 		ParentActivity._FuelInitalPopup.setMode(CAN1CommManager.DATA_STATE_A_DAYS_FUEL_USED_CLEAR);
 		ParentActivity.showFuelInitalPopup();
 	}

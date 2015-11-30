@@ -211,7 +211,7 @@ public class FaultHistoryLoggedFragment extends ParentFragment{
 		// TODO Auto-generated method stub
 		super.InitValuables();
 		
-		SendDTCIndex = ParentActivity.REQ_ERR_MACHINE_LOGGED;
+		SendDTCIndex = Home.REQ_ERR_MACHINE_LOGGED;
 		SendSeqIndex = 1;
 		
 		Err_Tcu = new int[400];
@@ -715,7 +715,10 @@ public class FaultHistoryLoggedFragment extends ParentFragment{
 			}
 			else if(SendSeqIndex > DTCTotalPacketTM){
 				SendSeqIndex = 1;
-				SendDTCIndex = Home.REQ_ERR_EHCU_LOGGED;
+				if(CAN1Comm.Get_ComponentCode_1699_PGN65330_EHCU() == CAN1CommManager.STATE_COMPONENTCODE_EHCU)
+					SendDTCIndex = Home.REQ_ERR_EHCU_LOGGED;
+				else
+					SendDTCIndex = Home.REQ_ERR_MACHINE_LOGGED;
 				SetThreadSleepTime(1000);
 			}
 			else{
@@ -2957,13 +2960,4 @@ public class FaultHistoryLoggedFragment extends ParentFragment{
 	};
 	// --, 150202 bwk
 	/////////////////////////////////////////////////////////////////////
-	public String getString(String str, int index){
-		if(ParentActivity.langDb.findStrGetString(index, ParentActivity.LanguageIndex) == null){
-			Log.d(TAG, "Android");
-			return str;
-		}else {
-			Log.d(TAG, "Excel");
-			return ParentActivity.langDb.findStrGetString(index, ParentActivity.LanguageIndex);	
-		}
-	}
 }

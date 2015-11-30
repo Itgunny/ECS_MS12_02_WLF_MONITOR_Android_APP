@@ -79,7 +79,7 @@ public class Home extends Activity {
 	public static final int VERSION_HIGH 		= 2;
 	public static final int VERSION_LOW 		= 2;
 	public static final int VERSION_SUB_HIGH 	= 0;
-	public static final int VERSION_SUB_LOW 	= 0;
+	public static final int VERSION_SUB_LOW 	= 1;
 	public static final int VERSION_TAEHA		= 0;
 	////1.0.2.3
 	// UI B 안 최초 적용 2014.12.10
@@ -733,6 +733,18 @@ public class Home extends Activity {
 	// 3. 현재고장에 acu 항상 표시
 	////v2.2.0.0
 	// 1. 다국어 엑셀기반 적용
+	// 2. 붐/버켓 각도보정 Next 옆에 화살표 삭제(HHI 협의 완료)
+	////v2.2.0.1
+	// 1. Display B안 Main US ton 및 gal 단위 미적용건 적용
+	// 2. UserSwitching 변경
+	//	- Display Type : B안 -> A안으로 변경
+	//	- 연비 -> 부피로 명칭 변경
+	//	- 부피 단위 l/h -> l로 변경
+	//	- 속도 -> 거리로 명칭 변경
+	// 3. 현재고장 EHCU : MCU로부터 받도록 변경
+	// 4. EHCU 히든 페이지 3가지 모드 설정하는 부분 영문으로 통합
+	// 5. Smart Terminal 1.05 버전이 아닐경우로 변경(이후에 또 업데이트될 수 있으므로)
+	// 6. 연료 소비량 정보 그래프에서 gal로 변경되었을 때 눈금 안맞는 부분 수정
 	//////////////////////////////////////////////////////////////////////////////////////
 	// TAG
 	private  final String TAG = "Home";
@@ -2166,7 +2178,7 @@ public class Home extends Activity {
 		strASNumDash = SharePref.getString("strASNumDash", "1899-7282");	// ++, --, 150402 bwk A/S 번호 추가 
 		strASNum = SharePref.getString("strASNum", "18997282");	// ++, --, 150402 bwk A/S 번호 추가 
 		
-		DisplayType = SharePref.getInt("DisplayType", DISPLAY_TYPE_B);	// ++, --, 150323 bwk B->A
+		DisplayType = SharePref.getInt("DisplayType", DISPLAY_TYPE_A);	// ++, --, 151130 B->A, 150323 bwk A->B
 //		setScreenIndex();	// ++, --, 150310 bwk
 		
 		LanguageIndex = SharePref.getInt("LanguageIndex", STATE_DISPLAY_LANGUAGE_ENGLISH);		// ++, --, 150206 bwk
@@ -2334,7 +2346,7 @@ public class Home extends Activity {
 		_userdata.BrightnessAutoStartTime = SharePref.getInt(strBrightnessAutoStartTime,8);
 		_userdata.BrightnessAutoEndTime = SharePref.getInt(strBrightnessAutoEndTime,18);
 		// --, 150407 bwk
-		_userdata.DisplayType = SharePref.getInt(strDisplayType,Home.DISPLAY_TYPE_B);
+		_userdata.DisplayType = SharePref.getInt(strDisplayType,Home.DISPLAY_TYPE_A);
 		_userdata.UnitFuel = SharePref.getInt(strUnitFuel, Home.UNIT_FUEL_L);
 		_userdata.UnitTemp = SharePref.getInt(strUnitTemp, Home.UNIT_TEMP_C);
 		_userdata.UnitOdo = SharePref.getInt(strUnitOdo, Home.UNIT_ODO_KM);
@@ -3076,6 +3088,16 @@ public class Home extends Activity {
 		case REQ_ERR_TM_ACTIVE:
 			RequestErrorCode(SendDTCIndex,1,1);
 			SendDTCIndex = REQ_ERR_ENGINE_ACTIVE;
+			try {
+				Thread.sleep(200);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			break;
+		case REQ_ERR_EHCU_ACTIVE:
+			RequestErrorCode(SendDTCIndex,1,1);
+			SendDTCIndex = REQ_ERR_TM_ACTIVE;
 			try {
 				Thread.sleep(200);
 			} catch (InterruptedException e) {
@@ -4358,7 +4380,8 @@ public class Home extends Activity {
 					CAN1Comm.Set_SpeedmeterUnitChange_PGN65327(3);
 				}
 				else if(nSendCommandTimerIndex == 8){
-					SendDTCIndex = REQ_ERR_TM_ACTIVE;
+					//SendDTCIndex = REQ_ERR_TM_ACTIVE;
+					SendDTCIndex = REQ_ERR_EHCU_ACTIVE;
 					CancelSendCommandTimer();
 					StartSendCIDTimer();
 					//SendCID();
@@ -4876,6 +4899,29 @@ public class Home extends Activity {
 		return strFuelRate;
 		
 	}
+	
+	public float GetFuelRateFloat(int _FuelRate, int _unit){
+		long long_Fuel;
+		float nFuel;
+		
+		long_Fuel = _FuelRate & 0xFFFFFFFFL;
+		if(long_Fuel > 0xFB00L){
+			long_Fuel = 0;
+		}
+		
+		long_Fuel *= 500;
+		
+		if(_unit == UNIT_FUEL_GAL){
+			long_Fuel *= 264172;
+			long_Fuel /= 1000000;
+			nFuel = (float)(long_Fuel / 10000);
+		}else{
+			nFuel = (float)(long_Fuel / 10000);
+		}
+		
+		return nFuel;
+		
+	}	
 	public String GetHourmeterString(int _Hourmeter){
 		String strHourmeter;
 		long long_Hour;

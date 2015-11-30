@@ -455,10 +455,10 @@
     <string name="Engine_Delay_Shutdown">gecikmeli motor kapama</string>
     <string name="Weighing_Information">tartı bilgisi</string>
     <string name="ACU">ACU</string>
-    <string name="Boom_Lever_Floating_Position_Adjust">Bom yüzdürme pozisyon ayarı</string>
+    <string name="Boom_Lever_Floating_Position_Adjust">Boom Lever Floating Position Adjust</string>
     <string name="Fingertip_Calibration">Parmaktip kontrol kalibrasyonu</string>
-    <string name="Boom_Down_Response_Adjust">Bom indirme tepki ayarı</string>
-    <string name="Bucket_Dump_Response_Adjust">Kova açma tepki ayarı</string>
+    <string name="Boom_Down_Response_Adjust">Boom Down Response Adjust</string>
+    <string name="Bucket_Dump_Response_Adjust">Bucket Dump Response Adjust</string>
     <string name="Service_Contact">Servis İletişim Bilgisi</string>
     <string name="METRIC">METRIC</string>
     <string name="US">US Unit</string>

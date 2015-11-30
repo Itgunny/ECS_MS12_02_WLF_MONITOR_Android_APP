@@ -455,10 +455,10 @@
     <string name="Engine_Delay_Shutdown">ritardo di spegnimento del motore</string>
     <string name="Weighing_Information">informazioni di pesatura</string>
     <string name="ACU">ACU</string>
-    <string name="Boom_Lever_Floating_Position_Adjust">regolazione della posizione leva del braccio flottante</string>
+    <string name="Boom_Lever_Floating_Position_Adjust">Boom Lever Floating Position Adjust</string>
     <string name="Fingertip_Calibration">taratura  del comando a 3 leve</string>
-    <string name="Boom_Down_Response_Adjust">regolazione della risposta all\'abbassamento del braccio</string>
-    <string name="Bucket_Dump_Response_Adjust">regolazione della risposta al ribaltamento della benna</string>
+    <string name="Boom_Down_Response_Adjust">Boom Down Response Adjust</string>
+    <string name="Bucket_Dump_Response_Adjust">Bucket Dump Response Adjust</string>
     <string name="Service_Contact">CONTATTO PER ASSISTENZA</string>
     <string name="METRIC">Metric Unit</string>
     <string name="US">US Unit</string>

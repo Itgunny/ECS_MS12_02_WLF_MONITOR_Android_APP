@@ -481,7 +481,7 @@ public class UserSwitching extends ParentFragment{
 					, ""));
 			adapter.addItem(new IconTextItemUserSwitching( ParentActivity.getResources().getDrawable(R.drawable.menu_management_machine_monitoring_bg_light),
 					null,
-					getString(ParentActivity.getResources().getString(string.FuelRate), 464)
+					getString(ParentActivity.getResources().getString(string.Volume), 468)
 					, ""
 					, ""));
 			adapter.addItem(new IconTextItemUserSwitching( ParentActivity.getResources().getDrawable(R.drawable.menu_management_machine_monitoring_bg_dark),
@@ -491,7 +491,7 @@ public class UserSwitching extends ParentFragment{
 					, ""));
 			adapter.addItem(new IconTextItemUserSwitching( ParentActivity.getResources().getDrawable(R.drawable.menu_management_machine_monitoring_bg_light),
 					null,
-					getString(ParentActivity.getResources().getString(string.Speed), 40)
+					getString(ParentActivity.getResources().getString(string.Distance), 471)
 					, ""
 					, ""));
 			adapter.addItem(new IconTextItemUserSwitching( ParentActivity.getResources().getDrawable(R.drawable.menu_management_machine_monitoring_bg_dark),
@@ -559,7 +559,7 @@ public class UserSwitching extends ParentFragment{
 					, ""));
 			adapter.addItem(new IconTextItemUserSwitching( ParentActivity.getResources().getDrawable(R.drawable.menu_management_machine_monitoring_bg_dark),
 					null,
-					getString(ParentActivity.getResources().getString(string.FuelRate), 464)
+					getString(ParentActivity.getResources().getString(string.Volume), 468)
 					, ""
 					, ""));
 			adapter.addItem(new IconTextItemUserSwitching( ParentActivity.getResources().getDrawable(R.drawable.menu_management_machine_monitoring_bg_light),
@@ -569,7 +569,7 @@ public class UserSwitching extends ParentFragment{
 					, ""));
 			adapter.addItem(new IconTextItemUserSwitching( ParentActivity.getResources().getDrawable(R.drawable.menu_management_machine_monitoring_bg_dark),
 					null,
-					getString(ParentActivity.getResources().getString(string.Speed), 40)
+					getString(ParentActivity.getResources().getString(string.Distance), 471)
 					, ""
 					, ""));
 			adapter.addItem(new IconTextItemUserSwitching( ParentActivity.getResources().getDrawable(R.drawable.menu_management_machine_monitoring_bg_light),
@@ -1597,20 +1597,20 @@ public class UserSwitching extends ParentFragment{
 	public void UnitFuelDisplay(int SettingData, int LoadingData){
 		switch (SettingData) {
 		case Home.UNIT_FUEL_L:
-			adapter.UpdateSecond(STATE_UNIT_FUEL, getString(ParentActivity.getResources().getString(string.l_h), 33));
+			adapter.UpdateSecond(STATE_UNIT_FUEL, getString(ParentActivity.getResources().getString(string.l), 81));
 			break;
 		case Home.UNIT_FUEL_GAL:
-			adapter.UpdateSecond(STATE_UNIT_FUEL, getString(ParentActivity.getResources().getString(string.gal_h), 465));
+			adapter.UpdateSecond(STATE_UNIT_FUEL, getString(ParentActivity.getResources().getString(string.gal), 466));
 			break;
 		default:
 			break;
 		}
 		switch (LoadingData) {
 		case Home.UNIT_FUEL_L:
-			adapter.UpdateThird(STATE_UNIT_FUEL, getString(ParentActivity.getResources().getString(string.l_h), 33));
+			adapter.UpdateThird(STATE_UNIT_FUEL, getString(ParentActivity.getResources().getString(string.l), 81));
 			break;
 		case Home.UNIT_FUEL_GAL:
-			adapter.UpdateThird(STATE_UNIT_FUEL, getString(ParentActivity.getResources().getString(string.gal_h), 465));
+			adapter.UpdateThird(STATE_UNIT_FUEL, getString(ParentActivity.getResources().getString(string.gal), 466));
 			break;
 		default:
 			break;

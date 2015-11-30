@@ -454,11 +454,11 @@
     <string name="Warming_Up">מתחמם</string>
     <string name="Engine_Delay_Shutdown">דחיית כבוי מנוע</string>
     <string name="Weighing_Information">מידע שקילה</string>
-    <string name="ACU"></string>
-    <string name="Boom_Lever_Floating_Position_Adjust">כוון מצב ציפה בידית BOOM</string>
+    <string name="ACU"/>
+    <string name="Boom_Lever_Floating_Position_Adjust">Boom Lever Floating Position Adjust</string>
     <string name="Fingertip_Calibration">כיול מגע אצבעות</string>
-    <string name="Boom_Down_Response_Adjust">כוון תגובת BOOM DOWN</string>
-    <string name="Bucket_Dump_Response_Adjust">כוון תגובת שפיכת כף</string>
+    <string name="Boom_Down_Response_Adjust">Boom Down Response Adjust</string>
+    <string name="Bucket_Dump_Response_Adjust">Bucket Dump Response Adjust</string>
     <string name="Service_Contact">שרות -יצירת קשר</string>
     <string name="METRIC">METRIC</string>
     <string name="US">US</string>

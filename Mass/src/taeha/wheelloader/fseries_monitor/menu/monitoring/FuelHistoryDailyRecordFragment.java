@@ -210,9 +210,9 @@ public class FuelHistoryDailyRecordFragment  extends ParentFragment{
 	/////////////////////////////////////////////////////////////////////
 	public void SetUnit(){
 		if(ParentActivity.UnitFuel == Home.UNIT_FUEL_GAL)
-			textViewGraphUnit.setText(ParentActivity.getResources().getString(string.gal));
+			textViewGraphUnit.setText(getString(ParentActivity.getResources().getString(R.string.gal), 466));
 		else
-			textViewGraphUnit.setText(ParentActivity.getResources().getString(string.l));
+			textViewGraphUnit.setText(getString(ParentActivity.getResources().getString(R.string.l), 81));
 			
 	}
 	/////////////////////////////////////////////////////////////////////	
@@ -255,14 +255,18 @@ public class FuelHistoryDailyRecordFragment  extends ParentFragment{
 	
 	public void DisplayDailyGraph(int[] _FuelUsed){
 		float Scale = 0;
+		float covFuelUsed;
 		
 		for(int i=0;i<7;i++)
 		{
 			if(_FuelUsed[i] == 0xFFFF || _FuelUsed[i] < 0)
 				_FuelUsed[i] = 0;
-			Scale = (float) ((float) _FuelUsed[i] / 12000.0);
+			//Scale = (float) ((float) _FuelUsed[i] / 12000.0);
+			covFuelUsed = ParentActivity.GetFuelRateFloat(_FuelUsed[i],ParentActivity.UnitFuel);
+			Scale = (float) (covFuelUsed / 600.0);
 
-			if(_FuelUsed[i] >= 12000 && _FuelUsed[i] != 0xFFFF)
+			//if(_FuelUsed[i] >= 12000 && _FuelUsed[i] != 0xFFFF)
+			if(covFuelUsed >= 600 && _FuelUsed[i] != 0xFFFF)
 				imgViewDay[i].setLayoutParams(new RelativeLayout.LayoutParams(ParentActivity.getResources().getDrawable(R.drawable.fuel_graph_power_02).getIntrinsicWidth(), 
 						(ParentActivity.getResources().getDrawable(R.drawable.fuel_graph_power_02).getIntrinsicHeight())));
 			else
@@ -273,14 +277,18 @@ public class FuelHistoryDailyRecordFragment  extends ParentFragment{
 	
 	public void DisplayDailyText(int[] _FuelUsed){
 		float Scale = 0;
+		float covFuelUsed;
 		for(int i=0;i<7;i++)
 		{
 			if(_FuelUsed[i] == 0xFFFF || _FuelUsed[i] < 0)
 				_FuelUsed[i] = 0;
-			Scale = (float) ((float) _FuelUsed[i] / 12000.0);
+			//Scale = (float) ((float) _FuelUsed[i] / 12000.0);
+			covFuelUsed = ParentActivity.GetFuelRateFloat(_FuelUsed[i],ParentActivity.UnitFuel);
+			Scale = (float) (covFuelUsed / 600.0);
 			textViewDay[i].setText(ParentActivity.GetFuelRateString(_FuelUsed[i],ParentActivity.UnitFuel));
 			RelativeLayout.LayoutParams Params = (RelativeLayout.LayoutParams)textViewDay[i].getLayoutParams(); 
-			if(_FuelUsed[i] >= 12000)
+			//if(_FuelUsed[i] >= 12000)
+			if(covFuelUsed >= 600)
 			{
 				Params.topMargin = 13;
 				textViewDay[i].setTextColor(ParentActivity.getResources().getColor(color.black));
@@ -297,7 +305,7 @@ public class FuelHistoryDailyRecordFragment  extends ParentFragment{
 	}
 	/////////////////////////////////////////////////////////////////////	
 	public void ClickInitial(){
-		ParentActivity.OldScreenIndex = ParentActivity.SCREEN_STATE_MENU_MONITORING_FUELHISTORY_DAILYRECORD;
+		ParentActivity.OldScreenIndex = Home.SCREEN_STATE_MENU_MONITORING_FUELHISTORY_DAILYRECORD;
 		ParentActivity._FuelInitalPopup.setMode(CAN1CommManager.DATA_STATE_DAILY_FUEL_RATE_INFO_CLEAR);
 		ParentActivity.showFuelInitalPopup();
 	}

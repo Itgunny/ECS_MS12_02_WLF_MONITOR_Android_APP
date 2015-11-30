@@ -196,7 +196,7 @@ unsigned char		gRecvMulti_ECM[MULTI_BUF_SIZE];
 unsigned char		gRecvMulti_TCU[MULTI_BUF_SIZE];
 unsigned char		gRecvMulti_CID[MULTI_BUF_SIZE];
 unsigned char		gRecvMulti_BKCU[MULTI_BUF_SIZE];
-unsigned char		gErr_EHCU[ERR_BUF_SIZE];
+unsigned int		gErr_EHCU[ERR_BUF_SIZE];
 
 unsigned int	 	gErr_Tcu[ERR_BUF_SIZE];
 unsigned int 		gErr_Ecu[ERR_BUF_SIZE];

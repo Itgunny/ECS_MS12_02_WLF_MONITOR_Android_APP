@@ -65,7 +65,7 @@ public class UserData {
 		BrightnessAutoStartTime = 8;
 		BrightnessAutoEndTime = 18;
 		// --, 150407 bwk		
-		DisplayType = Home.DISPLAY_TYPE_B;
+		DisplayType = Home.DISPLAY_TYPE_A;
 		UnitFuel = Home.UNIT_FUEL_L;
 		UnitTemp = Home.UNIT_TEMP_C;
 		UnitOdo = Home.UNIT_ODO_KM;

@@ -279,7 +279,7 @@ public class MenuMultimediaFragment extends ParentFragment{
 				CAN1Comm.SetMultimediaFlag(false);
 				ParentActivity.StartAlwaysOntopService();
 				if(CommService.pi != null){
-					if(CommService.pi.versionName.equals("1.0.6BF")){
+					if(!CommService.pi.versionName.equals("1.0.5BF")){
 						CAN1Comm.setRunningCheckMiracast(true);
 					}					
 				}
@@ -303,6 +303,9 @@ public class MenuMultimediaFragment extends ParentFragment{
 				"com.android.settings");
 		if(intent != null)
 			startActivity(intent);
+	}
+	public void ExcuteSettingsApplication(){
+		startActivity(new Intent(android.provider.Settings.ACTION_APPLICATION_SETTINGS));
 	}
 	/////////////////////////////////////////////////////////////////////
 	

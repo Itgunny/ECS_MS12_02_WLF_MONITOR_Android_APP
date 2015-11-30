@@ -223,9 +223,9 @@ public class FuelHistoryHourlyRecordFragment  extends ParentFragment{
 	/////////////////////////////////////////////////////////////////////	
 	public void SetUnit(){
 		if(ParentActivity.UnitFuel == Home.UNIT_FUEL_GAL)
-			textViewGraphUnit.setText(ParentActivity.getResources().getString(string.gal_h));
+			textViewGraphUnit.setText(getString(ParentActivity.getResources().getString(string.gal_h), 465));
 		else
-			textViewGraphUnit.setText(ParentActivity.getResources().getString(string.l_h));
+			textViewGraphUnit.setText(getString(ParentActivity.getResources().getString(string.l_h), 33));
 	}
 	/////////////////////////////////////////////////////////////////////	
 	public class SendCommandTimerClass extends TimerTask{
@@ -266,17 +266,19 @@ public class FuelHistoryHourlyRecordFragment  extends ParentFragment{
 	}
 	
 	public void DisplayHourlyGraph(int[] _FuelUsed){
-		float Scale = 0;
+		float Scale = 0, covFuelUsed;
 		
 		for(int i=0;i<12;i++)
 		{
 			if(_FuelUsed[i] == 0xFFFF || _FuelUsed[i] < 0)
 				_FuelUsed[i] = 0;
-			Scale = (float) ((float) _FuelUsed[i] / 1000.0);
-
+			//Scale = (float) ((float) _FuelUsed[i] / 1000.0);
+			covFuelUsed = ParentActivity.GetFuelRateFloat(_FuelUsed[i],ParentActivity.UnitFuel);
+			Scale = (float) (covFuelUsed / 50.0);
 			RelativeLayout.LayoutParams Params = (RelativeLayout.LayoutParams)imgViewHour[i].getLayoutParams();
 
-			if(_FuelUsed[i] > 1000 && _FuelUsed[i] != 0xFFFF)
+			//if(_FuelUsed[i] > 1000 && _FuelUsed[i] != 0xFFFF)
+			if(covFuelUsed > 50.0 && _FuelUsed[i] != 0xFFFF)
 				Params.height = (ParentActivity.getResources().getDrawable(R.drawable.fuel_graph_power).getIntrinsicHeight());
 			else
 				Params.height = (int) ((ParentActivity.getResources().getDrawable(R.drawable.fuel_graph_power).getIntrinsicHeight()) * Scale);
@@ -286,15 +288,18 @@ public class FuelHistoryHourlyRecordFragment  extends ParentFragment{
 	}
 	
 	public void DisplayHourlyText(int[] _FuelUsed){
-		float Scale = 0;
+		float Scale = 0, covFuelUsed;
 		for(int i=0;i<12;i++)
 		{
 			if(_FuelUsed[i] == 0xFFFF || _FuelUsed[i] < 0)
 				_FuelUsed[i] = 0;
-			Scale = (float) ((float) _FuelUsed[i] / 1000.0);
+			//Scale = (float) ((float) _FuelUsed[i] / 1000.0);
+			covFuelUsed = ParentActivity.GetFuelRateFloat(_FuelUsed[i],ParentActivity.UnitFuel);
+			Scale = (float) (covFuelUsed / 50.0);
 			textViewHour[i].setText(ParentActivity.GetFuelRateString(_FuelUsed[i], ParentActivity.UnitFuel));
 			RelativeLayout.LayoutParams Params = (RelativeLayout.LayoutParams)textViewHour[i].getLayoutParams(); 
-			if(_FuelUsed[i] >= 1000)
+			//if(_FuelUsed[i] >= 1000)
+			if(covFuelUsed >= 50.0)
 			{
 				Params.topMargin = 13;
 				textViewHour[i].setTextColor(ParentActivity.getResources().getColor(color.black));

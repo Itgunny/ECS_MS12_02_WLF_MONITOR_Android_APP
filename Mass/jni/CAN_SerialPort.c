@@ -3242,6 +3242,14 @@ jintArray _Get_McuErr(JNIEnv *env, jobject this) {
 	return MCU_Err;
 }
 
+jintArray _Get_EhcuErr(JNIEnv *env, jobject this) {
+	jintArray EHCU_Err = (*env)->NewIntArray(env, ERR_BUF_SIZE);
+
+	(*env)->SetIntArrayRegion(env, EHCU_Err, 0, ERR_BUF_SIZE, gErr_EHCU);
+
+	return EHCU_Err;
+}
+
 jintArray _Get_TcuErrLogged(JNIEnv *env, jobject this) {
 	jintArray TCU_Err_Logged = (*env)->NewIntArray(env, ERR_BUF_SIZE);
 
@@ -3446,6 +3454,10 @@ jint Get_gErr_Tcu_TotalPacket(JNIEnv *env, jobject this) {
 
 	return gErr_Tcu_TotalPacket;
 }
+jint Get_gErr_Ehcu_TotalPacket(JNIEnv *env, jobject this) {
+
+	return gErr_EHCU_TotalPacket;
+}
 jint Get_gErr_Mcu_TotalPacket_Logged(JNIEnv *env, jobject this) {
 
 	return gErr_Mcu_TotalPacket_Logged;
@@ -3474,6 +3486,11 @@ jint Get_gErr_Tcu_Total(JNIEnv *env, jobject this) {
 
 	return gErr_Tcu_Total;
 }
+jint Get_gErr_Ehcu_Total(JNIEnv *env, jobject this) {
+
+	return gErr_EHCU_Total;
+}
+
 jint Get_gErr_Mcu_Total_Logged(JNIEnv *env, jobject this) {
 
 	return gErr_Mcu_Total_Logged;
@@ -3517,6 +3534,7 @@ static JNINativeMethod methods[] =
 				{"Get_TcuErr_FromNative", "()[I", (void*) _Get_TcuErr },
 				{"Get_EcuErr_FromNative", "()[I", (void*) _Get_EcuErr },
 				{ "Get_McuErr_FromNative", "()[I", (void*) _Get_McuErr },
+				{ "Get_EHCUErr_FromNative", "()[I", (void*) _Get_EhcuErr },
 				{"Get_TcuErr_Logged_FromNative", "()[I",(void*) _Get_TcuErrLogged },
 				{"Get_EcuErr_Logged_FromNative", "()[I",(void*) _Get_EcuErrLogged },
 				{"Get_EHCUErr_Logged_FromNative", "()[I",(void*) _Get_EHCUErrLogged },
@@ -5205,6 +5223,7 @@ static JNINativeMethod methods[] =
 				{"Get_gErr_Mcu_TotalPacket", "()I",(void*) Get_gErr_Mcu_TotalPacket},
 				{"Get_gErr_Ecu_TotalPacket", "()I",(void*) Get_gErr_Ecu_TotalPacket},
 				{"Get_gErr_Tcu_TotalPacket", "()I",(void*) Get_gErr_Tcu_TotalPacket},
+				{"Get_gErr_Ehcu_TotalPacket", "()I",(void*) Get_gErr_Ehcu_TotalPacket},
 				{"Get_gErr_Mcu_TotalPacket_Logged", "()I",(void*) Get_gErr_Mcu_TotalPacket_Logged},
 				{"Get_gErr_Ecu_TotalPacket_Logged", "()I",(void*) Get_gErr_Ecu_TotalPacket_Logged},
 				{"Get_gErr_Tcu_TotalPacket_Logged", "()I",(void*) Get_gErr_Tcu_TotalPacket_Logged},
@@ -5212,6 +5231,7 @@ static JNINativeMethod methods[] =
 				{"Get_gErr_Mcu_Total", "()I",(void*) Get_gErr_Mcu_Total},
 				{"Get_gErr_Ecu_Total", "()I",(void*) Get_gErr_Ecu_Total},
 				{"Get_gErr_Tcu_Total", "()I",(void*) Get_gErr_Tcu_Total},
+				{"Get_gErr_Ehcu_Total", "()I",(void*) Get_gErr_Ehcu_Total},
 				{"Get_gErr_Mcu_Total_Logged", "()I",(void*) Get_gErr_Mcu_Total_Logged},
 				{"Get_gErr_Ecu_Total_Logged", "()I",(void*) Get_gErr_Ecu_Total_Logged},
 				{"Get_gErr_Tcu_Total_Logged", "()I",(void*) Get_gErr_Tcu_Total_Logged},

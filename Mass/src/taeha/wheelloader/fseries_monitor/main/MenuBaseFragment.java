@@ -1388,6 +1388,9 @@ public class MenuBaseFragment extends ParentFragment{
 		case CAN1CommManager.LONG_8_0:
 			ClickKeyButtonLong80();
 			break;
+		case CAN1CommManager.LONG_8_9:
+			ClickKeyButtonLong89();
+			break;
 		case CAN1CommManager.LONG_HIDDEN_5KEY:
 			ClickKeyButtonLongHiddenVersion();
 			break;
@@ -2637,6 +2640,7 @@ public class MenuBaseFragment extends ParentFragment{
 				break;
 		}
 	}
+	
 
 	public void ClickKeyButtonLong890(){
 		switch (ParentActivity.ScreenIndex) {
@@ -2646,7 +2650,16 @@ public class MenuBaseFragment extends ParentFragment{
 			default:
 				break;
 		}
-
+	}
+	public void ClickKeyButtonLong89(){
+		switch (ParentActivity.ScreenIndex) {
+		case Home.SCREEN_STATE_MENU_MULTIMEDIA_TOP:
+			_MenuMultimediaFragment.ExcuteSettingsApplication();
+			break;
+		default:
+			break;
+	}
+		
 	}
 	public void ClickKeyButtonLong80(){
 		switch (ParentActivity.ScreenIndex) {

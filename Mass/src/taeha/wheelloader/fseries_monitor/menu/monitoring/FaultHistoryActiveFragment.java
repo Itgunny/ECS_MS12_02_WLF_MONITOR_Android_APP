@@ -364,25 +364,27 @@ public class FaultHistoryActiveFragment extends ParentFragment{
 		DTCTotalPacketMachine = CAN1Comm.Get_gErr_Mcu_TotalPacket();
 		DTCTotalPacketEngine = CAN1Comm.Get_gErr_Ecu_TotalPacket();
 		DTCTotalPacketTM = CAN1Comm.Get_gErr_Tcu_TotalPacket();
-		DTCTotalPacketEHCU = CAN1Comm.Get_EHCUTotalPacket();
-		if(CAN1Comm.Get_EHCUSingleOrMulti() == 1)
-		{
-			if(CAN1Comm.Get_EHCUSingleErrorData() == 0)
-			{
-				DTCTotalEHCU = 0;
-			}
-			else
-			{
-				DTCTotalEHCU = 1;
-			}
-			//Log.d(TAG,"EHCU Single Error : " + Integer.toString(DTC_Total));
-		}
-		else
-		{
-			DTCTotalEHCU = CAN1Comm.Get_EHCUTotalError();
-			//Log.d(TAG,"EHCU Multi Error : " + Integer.toString(DTC_Total));
-		}
-		
+		DTCTotalPacketEHCU = CAN1Comm.Get_gErr_Ehcu_TotalPacket();
+//		DTCTotalPacketEHCU = CAN1Comm.Get_EHCUTotalPacket();
+//		if(CAN1Comm.Get_EHCUSingleOrMulti() == 1)
+//		{
+//			if(CAN1Comm.Get_EHCUSingleErrorData() == 0)
+//			{
+//				DTCTotalEHCU = 0;
+//			}
+//			else
+//			{
+//				DTCTotalEHCU = 1;
+//			}
+//			//Log.d(TAG,"EHCU Single Error : " + Integer.toString(DTC_Total));
+//		}
+//		else
+//		{
+//			DTCTotalEHCU = CAN1Comm.Get_EHCUTotalError();
+//			//Log.d(TAG,"EHCU Multi Error : " + Integer.toString(DTC_Total));
+//		}
+//		
+		DTCTotalEHCU = CAN1Comm.Get_gErr_Ehcu_Total();
 		DTCTotalMachine = CAN1Comm.Get_gErr_Mcu_Total();
 		DTCTotalEngine = CAN1Comm.Get_gErr_Ecu_Total();
 		DTCTotalTM = CAN1Comm.Get_gErr_Tcu_Total();
@@ -714,20 +716,7 @@ public class FaultHistoryActiveFragment extends ParentFragment{
 				}
 				else if(Mode == Home.REQ_ERR_EHCU_ACTIVE)		// EHCU
 				{
-					
-					int EHCU_M_S = CAN1Comm.Get_EHCUSingleOrMulti();
-					//Log.d(TAG,"SetErrList EHCU_M_S : " + Integer.toString(EHCU_M_S));
-					if(EHCU_M_S == 2)
-					{
-						Err_EHCU[i] = CAN1Comm.Get_EHCUErrorData(i);
-						//Log.d(TAG,"SetErrList Err_EHCU[i] : " + Integer.toString(Err_EHCU[i]));
-					}
-					else
-					{
-						//Log.d(TAG,"SetErrList [i] : " + Integer.toString(i));
-						Err_EHCU[i] = CAN1Comm.Get_EHCUSingleErrorData();
-						//Log.d(TAG,"SetErrList Err_EHCU[i] : 0x0" + Integer.toHexString(Err_EHCU[i]));
-					}
+					Err_EHCU = CAN1Comm.Get_EHCUErr();
 					
 					SPN = Err_EHCU[i] & 0x0000FFFF;
 					FMI = ((Err_EHCU[i] & 0x00FF0000) >> 16);
@@ -742,15 +731,52 @@ public class FaultHistoryActiveFragment extends ParentFragment{
 					else
 					{
 						if(CursurIndex == 7 && CursurDetailIndex == i)
-						{
 							adapter.addItem(new IconTextItemFault(null,ParentActivity.getResources().getDrawable(R.drawable.menu_information_fault_down_btn_selected), "SPN : " + Integer.toString(SPN)
 									+ "     " + "FMI : " + Integer.toString(FMI), "", ""));
-						}
 						else
 							adapter.addItem(new IconTextItemFault(null,ParentActivity.getResources().getDrawable(R.drawable.menu_information_fault_down_btn), "SPN : " + Integer.toString(SPN)
 									+ "     " + "FMI : " + Integer.toString(FMI), "", ""));
 					}
 				}
+//				else if(Mode == Home.REQ_ERR_EHCU_ACTIVE)		// EHCU
+//				{
+//					
+//					int EHCU_M_S = CAN1Comm.Get_EHCUSingleOrMulti();
+//					//Log.d(TAG,"SetErrList EHCU_M_S : " + Integer.toString(EHCU_M_S));
+//					if(EHCU_M_S == 2)
+//					{
+//						Err_EHCU[i] = CAN1Comm.Get_EHCUErrorData(i);
+//						//Log.d(TAG,"SetErrList Err_EHCU[i] : " + Integer.toString(Err_EHCU[i]));
+//					}
+//					else
+//					{
+//						//Log.d(TAG,"SetErrList [i] : " + Integer.toString(i));
+//						Err_EHCU[i] = CAN1Comm.Get_EHCUSingleErrorData();
+//						//Log.d(TAG,"SetErrList Err_EHCU[i] : 0x0" + Integer.toHexString(Err_EHCU[i]));
+//					}
+//					
+//					SPN = Err_EHCU[i] & 0x0000FFFF;
+//					FMI = ((Err_EHCU[i] & 0x00FF0000) >> 16);
+//
+//					if((SPN == 0) && (FMI == 0))
+//					{
+//						if(CursurIndex == 7 && CursurDetailIndex == i)
+//							adapter.addItem(new IconTextItemFault(null,ParentActivity.getResources().getDrawable(R.drawable.menu_information_fault_down_btn_selected), "SPN :      FMI :  ", "", ""));
+//						else
+//							adapter.addItem(new IconTextItemFault(null,ParentActivity.getResources().getDrawable(R.drawable.menu_information_fault_down_btn), "SPN :      FMI :  ", "", ""));
+//					}
+//					else
+//					{
+//						if(CursurIndex == 7 && CursurDetailIndex == i)
+//						{
+//							adapter.addItem(new IconTextItemFault(null,ParentActivity.getResources().getDrawable(R.drawable.menu_information_fault_down_btn_selected), "SPN : " + Integer.toString(SPN)
+//									+ "     " + "FMI : " + Integer.toString(FMI), "", ""));
+//						}
+//						else
+//							adapter.addItem(new IconTextItemFault(null,ParentActivity.getResources().getDrawable(R.drawable.menu_information_fault_down_btn), "SPN : " + Integer.toString(SPN)
+//									+ "     " + "FMI : " + Integer.toString(FMI), "", ""));
+//					}
+//				}
 			}
 		}
 		adapter.notifyDataSetChanged();
@@ -909,6 +935,27 @@ public class FaultHistoryActiveFragment extends ParentFragment{
 				SetThreadSleepTime(200);
 			}
 			else if(SendSeqIndex > DTCTotalPacketTM){
+				SendSeqIndex = 1;
+				if(CAN1Comm.Get_ComponentCode_1699_PGN65330_EHCU() == CAN1CommManager.STATE_COMPONENTCODE_EHCU)
+					SendDTCIndex = Home.REQ_ERR_EHCU_ACTIVE;
+				else
+					SendDTCIndex = Home.REQ_ERR_MACHINE_ACTIVE;
+				SetThreadSleepTime(1000);
+			}
+			else{
+				RequestErrorCode(SendDTCIndex,1,SendSeqIndex);
+				SendSeqIndex++;
+			}
+		
+			break;
+			
+		case Home.REQ_ERR_EHCU_ACTIVE:
+			if(SendSeqIndex == 1){
+				RequestErrorCode(SendDTCIndex,1,SendSeqIndex);
+				SendSeqIndex++;
+				SetThreadSleepTime(200);
+			}
+			else if(SendSeqIndex > DTCTotalPacketEHCU){
 				SendSeqIndex = 1;
 				SendDTCIndex = Home.REQ_ERR_MACHINE_ACTIVE;
 				SetThreadSleepTime(1000);

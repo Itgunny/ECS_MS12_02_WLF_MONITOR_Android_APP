@@ -325,9 +325,12 @@ public class OperationHistoryFragment extends ParentFragment{
 	/////////////////////////////////////////////////////////////////////
 	public void WorkDisplay(int _data, int _unit, TextView _textviewData, TextView _textviewUnit){
 		_textviewData.setText(ParentActivity.GetWeighit(_data, _unit));
-		if(_unit == ParentActivity.UNIT_WEIGHT_LB){
+		if(_unit == Home.UNIT_WEIGHT_LB){
 			_textviewUnit.setText(getString(ParentActivity.getResources().getString(string.lb), 12));
 			_textviewUnit.setText(getString(ParentActivity.getResources().getString(string.lb), 12));
+		}else if(ParentActivity.UnitWeight == Home.UNIT_WEIGHT_US_TON){
+			_textviewUnit.setText(getString(ParentActivity.getResources().getString(string.USTon), 467));
+			_textviewUnit.setText(getString(ParentActivity.getResources().getString(string.USTon), 467));
 		}else{
 			_textviewUnit.setText(getString(ParentActivity.getResources().getString(string.ton), 11));
 			_textviewUnit.setText(getString(ParentActivity.getResources().getString(string.ton), 11));
@@ -335,7 +338,7 @@ public class OperationHistoryFragment extends ParentFragment{
 	}
 	public void OdometerDislay(int _data, int _unit, TextView _textviewData, TextView _textviewUnit){
 		_textviewData.setText(ParentActivity.GetOdometerStrng(_data,_unit));
-		if(_unit == ParentActivity.UNIT_ODO_MILE){
+		if(_unit == Home.UNIT_ODO_MILE){
 			_textviewUnit.setText(getString(ParentActivity.getResources().getString(string.mile), 38));
 		}else{
 			_textviewUnit.setText(getString(ParentActivity.getResources().getString(string.km), 37));

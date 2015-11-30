@@ -455,10 +455,10 @@
     <string name="Engine_Delay_Shutdown">Verzögerte Motorabschaltung</string>
     <string name="Weighing_Information">Wäägesystem Information</string>
     <string name="ACU">ACU</string>
-    <string name="Boom_Lever_Floating_Position_Adjust">Hubgerüstschwimmstellung Position Einstellung</string>
+    <string name="Boom_Lever_Floating_Position_Adjust">Boom Lever Floating Position Adjust</string>
     <string name="Fingertip_Calibration">Fingertip Kalibrierung</string>
-    <string name="Boom_Down_Response_Adjust">Hub Senken Reaktion Einstellung</string>
-    <string name="Bucket_Dump_Response_Adjust">Schaufel Auskippen Reaktion Einstellung</string>
+    <string name="Boom_Down_Response_Adjust">Boom Down Response Adjust</string>
+    <string name="Bucket_Dump_Response_Adjust">Bucket Dump Response Adjust</string>
     <string name="Service_Contact">Kontakt Service</string>
     <string name="METRIC">Metric Unit</string>
     <string name="US">US Unit</string>

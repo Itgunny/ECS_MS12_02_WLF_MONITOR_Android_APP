@@ -196,12 +196,10 @@ public class FuelHistoryModeRecordFragment  extends ParentFragment{
 	}
 	/////////////////////////////////////////////////////////////////////
 	public void SetUnit(){
-		if(ParentActivity.UnitFuel == Home.UNIT_FUEL_GAL){
-			textViewUnit.setText(ParentActivity.getResources().getString(string.gal_h));
-		}
-		else{
-			textViewUnit.setText(ParentActivity.getResources().getString(string.l_h));
-		}
+		if(ParentActivity.UnitFuel == Home.UNIT_FUEL_GAL)
+			textViewUnit.setText(getString(ParentActivity.getResources().getString(string.gal_h), 465));
+		else
+			textViewUnit.setText(getString(ParentActivity.getResources().getString(string.l_h), 33));
 	
 	}
 	/////////////////////////////////////////////////////////////////////	
@@ -243,14 +241,17 @@ public class FuelHistoryModeRecordFragment  extends ParentFragment{
 	}
 	
 	public void DisplayModeGraph(int[] _FuelUsed){
-		float Scale = 0;
+		float Scale = 0, covFuelUsed;
 		int graph_id = R.drawable.fuel_graph_power_02;
 		
 		for(int i=0;i<3;i++)
 		{
 			if(_FuelUsed[i] == 0xFFFF || _FuelUsed[i] < 0)
 				_FuelUsed[i] = 0;
-			Scale = (float) ((float) _FuelUsed[i] / 1000.0);
+			//Scale = (float) ((float) _FuelUsed[i] / 1000.0);
+			
+			covFuelUsed = ParentActivity.GetFuelRateFloat(_FuelUsed[i],ParentActivity.UnitFuel);
+			Scale = (float) (covFuelUsed / 50.0);
 			
 			switch(i)
 			{
@@ -259,7 +260,8 @@ public class FuelHistoryModeRecordFragment  extends ParentFragment{
 				case 2: graph_id = R.drawable.fuel_graph_econo_02;		break;
 			}
 
-			if(_FuelUsed[i] > 1000 && _FuelUsed[i] != 0xFFFF)
+			//if(_FuelUsed[i] > 1000 && _FuelUsed[i] != 0xFFFF)
+			if(covFuelUsed > 50.0 && _FuelUsed[i] != 0xFFFF)
 				imgViewMode[i].setLayoutParams(new RelativeLayout.LayoutParams(ParentActivity.getResources().getDrawable(graph_id).getIntrinsicWidth(), 
 						(ParentActivity.getResources().getDrawable(graph_id).getIntrinsicHeight())));
 			else
@@ -270,15 +272,18 @@ public class FuelHistoryModeRecordFragment  extends ParentFragment{
 	}
 	
 	public void DisplayModeText(int[] _FuelUsed){
-		float Scale = 0;
+		float Scale = 0, covFuelUsed;
 		for(int i=0;i<3;i++)
 		{
 			if(_FuelUsed[i] == 0xFFFF || _FuelUsed[i] < 0)
 				_FuelUsed[i] = 0;
-			Scale = (float) ((float) _FuelUsed[i] / 1000.0);
+			//Scale = (float) ((float) _FuelUsed[i] / 1000.0);
+			covFuelUsed = ParentActivity.GetFuelRateFloat(_FuelUsed[i],ParentActivity.UnitFuel);
+			Scale = (float) (covFuelUsed / 50.0);
 			textViewMode[i].setText(ParentActivity.GetFuelRateString(_FuelUsed[i], ParentActivity.UnitFuel));
 			RelativeLayout.LayoutParams Params = (RelativeLayout.LayoutParams)textViewMode[i].getLayoutParams(); 
-			if(_FuelUsed[i] >= 1000)
+			//if(_FuelUsed[i] >= 1000)
+			if(covFuelUsed >= 50.0)
 			{
 				Params.topMargin = 13;
 				textViewMode[i].setTextColor(ParentActivity.getResources().getColor(color.black));
@@ -296,7 +301,7 @@ public class FuelHistoryModeRecordFragment  extends ParentFragment{
 	}	
 	/////////////////////////////////////////////////////////////////////	
 	public void ClickInitial(){
-		ParentActivity.OldScreenIndex = ParentActivity.SCREEN_STATE_MENU_MONITORING_FUELHISTORY_MODERECORD;
+		ParentActivity.OldScreenIndex = Home.SCREEN_STATE_MENU_MONITORING_FUELHISTORY_MODERECORD;
 		ParentActivity._FuelInitalPopup.setMode(CAN1CommManager.DATA_STATE_MODE_FUEL_RATE_INFO_CLEAR);
 		ParentActivity.showFuelInitalPopup();
 	}

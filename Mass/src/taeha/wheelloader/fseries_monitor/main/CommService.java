@@ -102,6 +102,7 @@ public class CommService extends Service{
 	public native int[] Get_TcuErr_FromNative();
 	public native int[] Get_EcuErr_FromNative();
 	public native int[] Get_McuErr_FromNative();
+	public native int[] Get_EHCUErr_FromNative();
 	public native int[] Get_TcuErr_Logged_FromNative();
 	public native int[] Get_EcuErr_Logged_FromNative();
 	public native int[] Get_EHCUErr_Logged_FromNative();
@@ -1127,6 +1128,7 @@ public class CommService extends Service{
 	public native int Get_gErr_Mcu_TotalPacket();
 	public native int Get_gErr_Ecu_TotalPacket();
 	public native int Get_gErr_Tcu_TotalPacket();
+	public native int Get_gErr_Ehcu_TotalPacket();
 	public native int Get_gErr_Mcu_TotalPacket_Logged();
 	public native int Get_gErr_Ecu_TotalPacket_Logged();
 	public native int Get_gErr_Tcu_TotalPacket_Logged();
@@ -1134,6 +1136,7 @@ public class CommService extends Service{
 	public native int Get_gErr_Mcu_Total();
 	public native int Get_gErr_Ecu_Total();
 	public native int Get_gErr_Tcu_Total();
+	public native int Get_gErr_Ehcu_Total();
 	public native int Get_gErr_Mcu_Total_Logged();
 	public native int Get_gErr_Ecu_Total_Logged();
 	public native int Get_gErr_Tcu_Total_Logged();
@@ -1471,9 +1474,20 @@ public class CommService extends Service{
 			SetMultimediaFlag(true);
 		}
 	}
+//	public void CheckMiracast()
+//	{
+//		if(CheckRunningApp("com.powerone.wfd.sink") == false)
+//		{
+//			SetMiracastFlag(false);
+//		}
+//		else
+//		{
+//			SetMiracastFlag(true);
+//		}
+//	}	
 	public void CheckMiracast()
 	{
-		if(CheckRunningApp("com.powerone.wfd.sink") == false)
+		if(CheckRunningApp("com.powerone.wfd.sink") == false )
 		{
 			SetMiracastFlag(false);
 		}
@@ -1481,7 +1495,24 @@ public class CommService extends Service{
 		{
 			SetMiracastFlag(true);
 		}
-	}	
+		if(pi != null){
+			if(!pi.versionName.equals("1.0.5BF")){
+				if(CheckRunningApp("com.powerone.wfd.sink") == false)
+				{
+					setRunningCheckMiracast(false);
+					SetScreenTopFlag(true);   
+				}
+				else if(CheckRunningApp("com.powerone.wfd.sink") == true && isTopCheckMiracast() == false)
+				{
+					setRunningCheckMiracast(false);
+				}
+				else if(CheckRunningApp("com.powerone.wfd.sink") == true && isTopCheckMiracast() == true)
+				{
+					setRunningCheckMiracast(true);
+				}
+			}
+		}
+	}   	
 	////////////////////////////////////////////////////////////////////////
 		
 	/////////////////OVERRIDE METHOD///////////////////////////////////////

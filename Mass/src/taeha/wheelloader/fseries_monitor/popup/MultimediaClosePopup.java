@@ -169,7 +169,7 @@ public class MultimediaClosePopup extends ParentPopup {
 			// --, 150323 bwk				
 			ParentActivity.startActivity(intent);
 			if(CommService.pi != null){
-				if(CommService.pi.versionName.equals("1.0.6BF")){
+				if(!CommService.pi.versionName.equals("1.0.5BF")){
 					CAN1Comm.setRunningCheckMiracast(true);
 				}					
 			}

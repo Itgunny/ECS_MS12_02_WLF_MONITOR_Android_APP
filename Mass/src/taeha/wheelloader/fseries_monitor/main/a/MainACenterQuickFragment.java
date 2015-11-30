@@ -189,7 +189,7 @@ public class MainACenterQuickFragment extends MainACenterFragment{
 				ParentActivity.StartAlwaysOntopService();
 //				CAN1Comm.SetMiracastFlag(true);
 				if(CommService.pi != null){
-					if(CommService.pi.versionName.equals("1.0.6BF")){
+					if(!CommService.pi.versionName.equals("1.0.5BF")){
 						CAN1Comm.setRunningCheckMiracast(true);
 					}					
 				}

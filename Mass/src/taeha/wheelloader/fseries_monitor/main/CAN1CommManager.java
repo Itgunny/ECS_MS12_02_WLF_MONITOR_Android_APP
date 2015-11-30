@@ -91,6 +91,7 @@ public class CAN1CommManager extends ICAN1CommManager.Stub{		// ttySAC1(Linux), 
 	public static final int LONG_LEFT_RIGHT 	= 0X0100000C;
 	public static final int LONG_LEFT_RIGHT_ENTER 		= 0x0100001C;
 	public static final int LONG_8_0	 		= 0x01140000;
+	public static final int LONG_8_9	 		= 0x010C0000;
 	public static final int LONG_8_9_0	 		= 0x011C0000;
 	public static final int LONG_HIDDEN_5KEY	= 0x0100001f;
 
@@ -631,6 +632,9 @@ public class CAN1CommManager extends ICAN1CommManager.Stub{		// ttySAC1(Linux), 
 	}
 	public int[] Get_McuErr(){
 		return service.Get_McuErr_FromNative();
+	}
+	public int[] Get_EHCUErr(){
+		return service.Get_EHCUErr_FromNative();
 	}
 	
 	public int[] Get_TcuErr_Logged(){
@@ -1786,6 +1790,7 @@ public class CAN1CommManager extends ICAN1CommManager.Stub{		// ttySAC1(Linux), 
 	public int Get_gErr_Mcu_TotalPacket(){ return service.Get_gErr_Mcu_TotalPacket();}
 	public int Get_gErr_Ecu_TotalPacket(){ return service.Get_gErr_Ecu_TotalPacket();}
 	public int Get_gErr_Tcu_TotalPacket(){ return service.Get_gErr_Tcu_TotalPacket();}
+	public int Get_gErr_Ehcu_TotalPacket(){ return service.Get_gErr_Ehcu_TotalPacket();}
 	public int Get_gErr_Mcu_TotalPacket_Logged(){ return service.Get_gErr_Mcu_TotalPacket_Logged();}
 	public int Get_gErr_Ecu_TotalPacket_Logged(){ return service.Get_gErr_Ecu_TotalPacket_Logged();}
 	public int Get_gErr_Tcu_TotalPacket_Logged(){ return service.Get_gErr_Tcu_TotalPacket_Logged();}
@@ -1793,6 +1798,7 @@ public class CAN1CommManager extends ICAN1CommManager.Stub{		// ttySAC1(Linux), 
 	public int Get_gErr_Mcu_Total(){ return service.Get_gErr_Mcu_Total();}
 	public int Get_gErr_Ecu_Total(){ return service.Get_gErr_Ecu_Total();}
 	public int Get_gErr_Tcu_Total(){ return service.Get_gErr_Tcu_Total();}
+	public int Get_gErr_Ehcu_Total(){ return service.Get_gErr_Ehcu_Total();}
 	public int Get_gErr_Mcu_Total_Logged(){ return service.Get_gErr_Mcu_Total_Logged();}
 	public int Get_gErr_Ecu_Total_Logged(){ return service.Get_gErr_Ecu_Total_Logged();}
 	public int Get_gErr_Tcu_Total_Logged(){ return service.Get_gErr_Tcu_Total_Logged();}

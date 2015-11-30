@@ -165,7 +165,7 @@ public class MainBLeftDownQuickFragment extends ParentFragment{
 //				CAN1Comm.SetMiracastFlag(true);
 				// --, 150323 bwk
 				if(CommService.pi != null){
-					if(CommService.pi.versionName.equals("1.0.6BF")){
+					if(!CommService.pi.versionName.equals("1.0.5BF")){
 						CAN1Comm.setRunningCheckMiracast(true);
 					}					
 				}
