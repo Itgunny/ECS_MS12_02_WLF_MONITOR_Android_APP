@@ -80,7 +80,7 @@ public class Home extends Activity {
 	public static final int VERSION_LOW 		= 2;
 	public static final int VERSION_SUB_HIGH 	= 0;
 	public static final int VERSION_SUB_LOW 	= 1;
-	public static final int VERSION_TAEHA		= 0;
+	public static final int VERSION_TAEHA		= 1;
 	////1.0.2.3
 	// UI B 안 최초 적용 2014.12.10
 	////1.0.2.4
@@ -745,6 +745,8 @@ public class Home extends Activity {
 	// 4. EHCU 히든 페이지 3가지 모드 설정하는 부분 영문으로 통합
 	// 5. Smart Terminal 1.05 버전이 아닐경우로 변경(이후에 또 업데이트될 수 있으므로)
 	// 6. 연료 소비량 정보 그래프에서 gal로 변경되었을 때 눈금 안맞는 부분 수정
+	////v2.2.0.11
+	// 1. H/W Test CID 공유 누락으로 인해 수정
 	//////////////////////////////////////////////////////////////////////////////////////
 	// TAG
 	private  final String TAG = "Home";
