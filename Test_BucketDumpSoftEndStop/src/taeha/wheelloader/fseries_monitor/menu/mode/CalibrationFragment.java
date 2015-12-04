@@ -89,7 +89,6 @@ public class CalibrationFragment extends MenuBodyList_ParentFragment{
 		setClickableList2(true);
 		setClickableList3(true);
 		setClickableList4(true);
-		setClickableList5(true);
 
 		
 		setListTitle1(ParentActivity.getResources().getString(string.Boom_Bucket_Angle_Calibration), 342);
@@ -126,7 +125,7 @@ public class CalibrationFragment extends MenuBodyList_ParentFragment{
 	public void ClickList3() {
 		// TODO Auto-generated method stub
 		ParentActivity.showBrkaePedalCalibration();
-		CursurIndex = 4;
+		CursurIndex = 3;
 		CursurDisplay(CursurIndex);
 	}
 	@Override
@@ -139,7 +138,7 @@ public class CalibrationFragment extends MenuBodyList_ParentFragment{
 		ParentActivity.showMainScreen();
 		// --, 150309 bwk
 		
-		CursurIndex = 5;
+		CursurIndex = 4;
 		CursurDisplay(CursurIndex);
 	}
 
