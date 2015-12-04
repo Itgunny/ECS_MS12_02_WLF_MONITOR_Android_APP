@@ -79,8 +79,8 @@ public class Home extends Activity {
 	public static final int VERSION_HIGH 		= 2;
 	public static final int VERSION_LOW 		= 2;
 	public static final int VERSION_SUB_HIGH 	= 0;
-	public static final int VERSION_SUB_LOW 	= 1;
-	public static final int VERSION_TAEHA		= 1;
+	public static final int VERSION_SUB_LOW 	= 2;
+	public static final int VERSION_TAEHA		= 0;
 	////1.0.2.3
 	// UI B 안 최초 적용 2014.12.10
 	////1.0.2.4
@@ -747,6 +747,8 @@ public class Home extends Activity {
 	// 6. 연료 소비량 정보 그래프에서 gal로 변경되었을 때 눈금 안맞는 부분 수정
 	////v2.2.0.11
 	// 1. H/W Test CID 공유 누락으로 인해 수정
+	////v2.2.0.2
+	// 1. MainB안 Non TC Lock Up에서 Hourmeter 깜박거리는 현상 개선	
 	//////////////////////////////////////////////////////////////////////////////////////
 	// TAG
 	private  final String TAG = "Home";

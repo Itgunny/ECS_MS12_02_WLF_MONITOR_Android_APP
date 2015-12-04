@@ -115,10 +115,9 @@ public class MainARightMainFragment extends ParentFragment{
 		
 		textViewHourOdoTitle = (TextFitTextView)mRoot.findViewById(R.id.textView_rightup_main_a_hourodometer_title_non_tclockup);
 		//textViewHourOdoTitle.setText(getString(ParentActivity.getResources().getString(R.string.LATEST_HOURMETER), 90));
-	
 		textViewHourOdoData = (TextFitTextView)mRoot.findViewById(R.id.textView_rightup_main_a_hourodometer_data_non_tclockup);
 		textViewHourOdoUnit = (TextFitTextView)mRoot.findViewById(R.id.textView_rightup_main_a_hourodometer_unit_non_tclockup);
-		textViewHourOdoUnit.setText(getString(ParentActivity.getResources().getString(R.string.Hr), 7));
+		//textViewHourOdoUnit.setText(getString(ParentActivity.getResources().getString(R.string.Hr), 7));
 		
 		imgbtnMode = (ImageButton)mRoot.findViewById(R.id.imageButton_rightup_main_a_engine_mode_non_tclockup);
 		imgbtnHourOdo = (ImageButton)mRoot.findViewById(R.id.imageButton_rightup_main_a_hourodometer_non_tclockup);
@@ -142,7 +141,7 @@ public class MainARightMainFragment extends ParentFragment{
 		//textViewHourOdoTitle.setText(getString(ParentActivity.getResources().getString(R.string.LATEST_HOURMETER), 90));
 		textViewHourOdoData = (TextFitTextView)mRoot.findViewById(R.id.textView_rightup_main_a_hourodometer_data);
 		textViewHourOdoUnit = (TextFitTextView)mRoot.findViewById(R.id.textView_rightup_main_a_hourodometer_unit);
-		textViewHourOdoUnit.setText(getString(ParentActivity.getResources().getString(R.string.Hr), 7));
+		//textViewHourOdoUnit.setText(getString(ParentActivity.getResources().getString(R.string.Hr), 7));
 		
 		imgbtnMode = (ImageButton)mRoot.findViewById(R.id.imageButton_rightup_main_a_engine_mode);
 		imgbtnHourOdo = (ImageButton)mRoot.findViewById(R.id.imageButton_rightup_main_a_hourodometer);
