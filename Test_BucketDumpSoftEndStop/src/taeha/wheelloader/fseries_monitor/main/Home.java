@@ -11,6 +11,7 @@ import taeha.wheelloader.fseries_monitor.animation.ChangeFragmentAnimation;
 import taeha.wheelloader.fseries_monitor.popup.AngleCalibrationResultPopup;
 import taeha.wheelloader.fseries_monitor.popup.AxleTempWarningPopup;
 import taeha.wheelloader.fseries_monitor.popup.BrakePedalCalibrationPopup;
+import taeha.wheelloader.fseries_monitor.popup.BucketDumpCalibrationPopup;
 import taeha.wheelloader.fseries_monitor.popup.BucketPriorityPopup;
 import taeha.wheelloader.fseries_monitor.popup.CCOModePopup;
 import taeha.wheelloader.fseries_monitor.popup.CalibrationEHCUPopup;
@@ -888,6 +889,7 @@ public class Home extends Activity {
 	public  static final int SCREEN_STATE_MENU_MODE_ETC_CALIBRATION_END						= 0x2135FFFF;
 	public  static final int SCREEN_STATE_MENU_MODE_ETC_DELAYSHUTDOWN_TOP					= 0x21360000;
 	public  static final int SCREEN_STATE_MENU_MODE_ETC_DELAYSHUTDOWN_END					= 0x2136FFFF;
+
 	public  static final int SCREEN_STATE_MENU_MODE_ETC_END									= 0x213FFFFF;
 	
 	
@@ -977,8 +979,15 @@ public class Home extends Activity {
 	public  static final int SCREEN_STATE_MENU_MANAGEMENT_SERVICE_EHCUINFO_TOP				= 0x23350000;
 	public  static final int SCREEN_STATE_MENU_MANAGEMENT_SERVICE_EHCUINFO_BOOMLEVERFLOAT	= 0x23351000;
 	public  static final int SCREEN_STATE_MENU_MANAGEMENT_SERVICE_EHCUINFO_END				= 0x2335FFFF;
-	public  static final int SCREEN_STATE_MENU_MANAGEMENT_SERVICE_MACHINESERIALNUMBER_TOP	= 0x23360000;
-	public  static final int SCREEN_STATE_MENU_MANAGEMENT_SERVICE_MACHINESERIALNUMBER_END	= 0x2336FFFF;
+	public  static final int SCREEN_STATE_MENU_MANAGEMENT_SERVICE_SOFTANDSTOP_CAL_TOP		= 0x23360000;
+	public 	static final int SCREEN_STATE_MENU_MANAGEMENT_SERVICE_CALIBRATION_BUCKET_TOP 	= 0x21361000;
+	public  static final int SCREEN_STATE_MENU_MANAGEMENT_SERVICE_CALIBRATION_BUCKET_POPUP  = 0x21361100;
+	public  static final int SCREEN_STATE_MENU_MANAGEMENT_SERVICE_CALIBRATION_BUCKET_RESULT = 0x21361200;
+	public  static final int SCREEN_STATE_MENU_MANAGEMENT_SERVICE_CALIBRATION_BUCKET_END	= 0x21361FFF;
+	public  static final int SCREEN_STATE_MENU_MANAGEMENT_SERVICE_SOFTANDSTOP_CAL_END		= 0x2336FFFF;
+	public  static final int SCREEN_STATE_MENU_MANAGEMENT_SERVICE_MACHINESERIALNUMBER_TOP	= 0x23370000;
+	public  static final int SCREEN_STATE_MENU_MANAGEMENT_SERVICE_MACHINESERIALNUMBER_END	= 0x2337FFFF;
+	
 	public  static final int SCREEN_STATE_MENU_MANAGEMENT_SERVICE_END						= 0x233FFFFF;
 	public  static final int SCREEN_STATE_MENU_MANAGEMENT_ASPHONE_TOP						= 0x23400000;
 	public  static final int SCREEN_STATE_MENU_MANAGEMENT_ASPHONE_END						= 0x234FFFFF;
@@ -1334,6 +1343,7 @@ public class Home extends Activity {
 	public OperationHistoryInitPopup		_OperationHistoryInitPopup;
 	public AngleCalibrationResultPopup		_AngleCalibrationResultPopup;
 	public PressureCalibrationResultPopup	_PressureCalibrationResultPopup;
+	public BucketDumpCalibrationPopup		_BucketDumpCalibrationPopup;
 	public SoundOutputPopup					_SoundOutputPopup;
 	public BrakePedalCalibrationPopup		_BrakePedalCalibrationPopup;
 	public EngineAutoShutdownCountPopup		_EngineAutoShutdownCountPopup;
@@ -1738,6 +1748,7 @@ public class Home extends Activity {
 		_OperationHistoryInitPopup = new OperationHistoryInitPopup(this);
 		_AngleCalibrationResultPopup = new AngleCalibrationResultPopup(this);
 		_PressureCalibrationResultPopup = new PressureCalibrationResultPopup(this);
+		_BucketDumpCalibrationPopup = new BucketDumpCalibrationPopup(this);
 		_SoundOutputPopup = new SoundOutputPopup(this);
 		_BrakePedalCalibrationPopup = new BrakePedalCalibrationPopup(this);
 		_EngineAutoShutdownCountPopup = new EngineAutoShutdownCountPopup(this);
@@ -1785,6 +1796,7 @@ public class Home extends Activity {
 		_OperationHistoryInitPopup = new OperationHistoryInitPopup(this);
 		_AngleCalibrationResultPopup = new AngleCalibrationResultPopup(this);
 		_PressureCalibrationResultPopup = new PressureCalibrationResultPopup(this);
+		_BucketDumpCalibrationPopup = new BucketDumpCalibrationPopup(this);
 		_SoundOutputPopup = new SoundOutputPopup(this);
 		_BrakePedalCalibrationPopup = new BrakePedalCalibrationPopup(this);
 		_EngineAutoShutdownCountPopup = new EngineAutoShutdownCountPopup(this);
@@ -3931,6 +3943,20 @@ public class Home extends Activity {
 		}
 
 		HomeDialog = _PressureCalibrationResultPopup;
+		HomeDialog.show();
+	}
+	public void showBuckDumpCalibrationResult(){
+		if(AnimationRunningFlag == true)
+			return;
+		else
+			StartAnimationRunningTimer();
+		
+		if(HomeDialog != null){
+			HomeDialog.dismiss();
+			HomeDialog = null;
+		}
+
+		HomeDialog = _BucketDumpCalibrationPopup;
 		HomeDialog.show();
 	}
 	public void showSoundOutput(){

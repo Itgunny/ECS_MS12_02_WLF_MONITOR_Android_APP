@@ -313,7 +313,7 @@
                 android:layout_alignRight="@+id/imageView_rightup_main_a_engine_line_non_tclockup"
                 android:layout_marginTop="8dp" 
                 android:splitMotionEvents="false">
-
+                
                 <taeha.wheelloader.fseries_monitor.main.TextFitTextView
                     android:id="@+id/textView_rightup_main_a_hourodometer_title_non_tclockup"
                     android:layout_width="240dp"
@@ -321,7 +321,7 @@
                     android:layout_alignParentRight="true"
                     android:layout_alignParentTop="true"
                     android:layout_marginRight="10dp"
-                    android:layout_marginTop="10dp"
+                    android:layout_marginTop="10dp"                    
                     android:gravity="right"
                     android:textAppearance="?android:attr/textAppearanceLarge"
                     android:textColor="@color/main_title_amber_b"
@@ -334,8 +334,8 @@
                     android:layout_alignBaseline="@+id/textView_rightup_main_a_hourodometer_unit_non_tclockup"
                     android:layout_marginRight="10dp"
                     android:layout_toLeftOf="@+id/textView_rightup_main_a_hourodometer_unit_non_tclockup"
-                    android:gravity="right"
                     android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:gravity="right"
                     android:textSize="30sp"
                     android:textStyle="italic" />
 
@@ -344,11 +344,13 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentRight="true"
-                    android:layout_below="@+id/textView_rightup_main_a_hourodometer_title_non_tclockup"
+                    android:layout_marginTop="45dp"
                     android:layout_marginRight="35dp"
                     android:gravity="right"
                     android:alpha="0.5"
                     android:textAppearance="?android:attr/textAppearanceLarge" />
+                
+
             </RelativeLayout>
 
             <RelativeLayout

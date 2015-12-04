@@ -968,6 +968,7 @@ public class CAN1CommManager extends ICAN1CommManager.Stub{		// ttySAC1(Linux), 
 //	public int Get_RequestBoomBucketAngleSensorCalibration_PGN61184_201(){ return service.Get_RequestBoomBucketAngleSensorCalibration_PGN61184_201();}
 	public int Get_RequestAEB_PGN61184_201(){ return service.Get_RequestAEB_PGN61184_201();}
 	public int Get_RequestBrakePedalPositionSensorCalibration_PGN61184_201(){ return service.Get_RequestBrakePedalPositionSensorCalibration_PGN61184_201();}
+	public int Get_RequestBucketDumpCalibration_PGN61184_201(){ return service.Get_RequestBucketDumpCalibration_PGN61184_201();}
 	//////RX_WHEEL_LOADER_SENSOR_CALIBRATION_STATUS_61184_202///////
 	public int Get_MessageType_PGN61184_202(){ return service.Get_MessageType_PGN61184_202();}
 	public int Get_BoomPressureCalibrationStatus_1908_PGN61184_202(){ return service.Get_BoomPressureCalibrationStatus_1908_PGN61184_202();}
@@ -977,6 +978,9 @@ public class CAN1CommManager extends ICAN1CommManager.Stub{		// ttySAC1(Linux), 
 	public int Get_AEBStatusInformation_SubCode_563_PGN61184_202(){ return service.Get_AEBStatusInformation_SubCode_563_PGN61184_202();}
 	public int Get_BrakePedalPositionSensorCalibrationStatus_564_PGN61184_202(){ return service.Get_BrakePedalPositionSensorCalibrationStatus_564_PGN61184_202();}
 	public int Get_BrakePedalPositionSensorCalibration_FaultInformation_565_PGN61184_202(){ return service.Get_BrakePedalPositionSensorCalibration_FaultInformation_565_PGN61184_202();}
+	public int Get_RequestBucketDumpSpeedCalibrationStatus_1945_PGN61184_202(){ return service.Get_RequestBucketDumpSpeedCalibrationStatus_1945_PGN61184_202();}
+	public int Get_BoomPositionCalibrationError_1946_PGN61184_202(){ return service.Get_BoomPositionCalibrationError_1946_PGN61184_202();}
+	public int Get_BucketPositionCalibrationError_1947_PGN61184_202(){ return service.Get_BucketPositionCalibrationError_1947_PGN61184_202();}
 	//////RX_WHEEL_LOADER_EHCU_SETTING_61184_203///////
 //	public int Get_MessageType_PGN61184_203(){ return service.Get_MessageType_PGN61184_203();}
 //	public int Get_BucketPriorityOperation_2301_PGN61184_203(){ return service.Get_BucketPriorityOperation_2301_PGN61184_203();}
@@ -1474,6 +1478,7 @@ public class CAN1CommManager extends ICAN1CommManager.Stub{		// ttySAC1(Linux), 
 	public void Set_RequestBoomBucketAngleSensorCalibration_PGN61184_201(int Data){ service.Set_RequestBoomBucketAngleSensorCalibration_PGN61184_201(Data);}
 	public void Set_RequestAEB_PGN61184_201(int Data){ service.Set_RequestAEB_PGN61184_201(Data);}
 	public void Set_RequestBrakePedalPositionSensorCalibration_PGN61184_201(int Data){ service.Set_RequestBrakePedalPositionSensorCalibration_PGN61184_201(Data);}
+	public void Set_RequestBucketDumpCalibration_PGN61184_201(int Data){ service.Set_RequestBucketDumpCalibration_PGN61184_201(Data);}
 	//////TX_WHEEL_LOADER_SENSOR_CALIBRATION_STATUS_61184_202///////
 //	public void Set_MessageType_PGN61184_202(int Data){ service.Set_MessageType_PGN61184_202(Data);}
 //	public void Set_BoomPressureCalibrationStatus_1908_PGN61184_202(int Data){ service.Set_BoomPressureCalibrationStatus_1908_PGN61184_202(Data);}
@@ -1483,6 +1488,9 @@ public class CAN1CommManager extends ICAN1CommManager.Stub{		// ttySAC1(Linux), 
 //	public void Set_AEBStatusInformation_SubCode_563_PGN61184_202(int Data){ service.Set_AEBStatusInformation_SubCode_563_PGN61184_202(Data);}
 //	public void Set_BrakePedalPositionSensorCalibrationStatus_564_PGN61184_202(int Data){ service.Set_BrakePedalPositionSensorCalibrationStatus_564_PGN61184_202(Data);}
 //	public void Set_BrakePedalPositionSensorCalibration_FaultInformation_565_PGN61184_202(int Data){ service.Set_BrakePedalPositionSensorCalibration_FaultInformation_565_PGN61184_202(Data);}
+	public void Set_RequestBucketDumpSpeedCalibrationStatus_1945_PGN61184_202(int Data){ service.Set_RequestBucketDumpSpeedCalibrationStatus_1945_PGN61184_202(Data);}
+	public void Set_BoomPositionCalibrationError_1946_PGN61184_202(int Data){ service.Set_BoomPositionCalibrationError_1946_PGN61184_202(Data);}
+	public void Set_BucketPositionCalibrationError_1947_PGN61184_202(int Data){ service.Set_BucketPositionCalibrationError_1947_PGN61184_202(Data);}
 	//////TX_WHEEL_LOADER_EHCU_SETTING_61184_203///////
 	public void Set_MessageType_PGN61184_203(int Data){ service.Set_MessageType_PGN61184_203(Data);}
 	public void Set_BucketPriorityOperation_2301_PGN61184_203(int Data){ service.Set_BucketPriorityOperation_2301_PGN61184_203(Data);}

@@ -501,6 +501,10 @@ jint Get_RequestBrakePedalPositionSensorCalibration_PGN61184_201(JNIEnv * env,
 		jobject this) {
 	return TX_WHEEL_LOADER_SENSOR_CALIBRATION_REQUEST_61184_201.RequestBrakePedalPositionSensorCalibration;
 }
+jint Get_RequestBucketDumpCalibration_PGN61184_201(JNIEnv * env,
+		jobject this) {
+	return TX_WHEEL_LOADER_SENSOR_CALIBRATION_REQUEST_61184_201.RequestBucketDumpCalibration;
+}
 //////RX_WHEEL_LOADER_SENSOR_CALIBRATION_STATUS_61184_202///////
 jint Get_MessageType_PGN61184_202(JNIEnv * env, jobject this) {
 	return RX_WHEEL_LOADER_SENSOR_CALIBRATION_STATUS_61184_202.MessageType;
@@ -532,7 +536,18 @@ jint Get_BrakePedalPositionSensorCalibration_FaultInformation_565_PGN61184_202(
 		JNIEnv * env, jobject this) {
 	return RX_WHEEL_LOADER_SENSOR_CALIBRATION_STATUS_61184_202.BrakePedalPositionSensorCalibration_FaultInformation_565;
 }
-
+jint Get_RequestBucketDumpSpeedCalibrationStatus_1945_PGN61184_202(
+		JNIEnv * env, jobject this) {
+	return RX_WHEEL_LOADER_SENSOR_CALIBRATION_STATUS_61184_202.RequestBucketDumpSpeedCalibrationStatus_1945;
+}
+jint Get_BoomPositionCalibrationError_1946_PGN61184_202(
+		JNIEnv * env, jobject this) {
+	return RX_WHEEL_LOADER_SENSOR_CALIBRATION_STATUS_61184_202.BoomPositionCalibrationError_1946;
+}
+jint Get_BucketPositionCalibrationError_1947_PGN61184_202(
+		JNIEnv * env, jobject this) {
+	return RX_WHEEL_LOADER_SENSOR_CALIBRATION_STATUS_61184_202.BucketPositionCalibrationError_1947;
+}
 //////RX_WHEEL_LOADER_EHCU_SETTING_61184_203///////
 jint Get_MessageType_PGN61184_203(JNIEnv * env, jobject this) {
 	return RX_WHEEL_LOADER_EHCU_SETTING_61184_203.MessageType;
@@ -2120,6 +2135,10 @@ void Set_RequestBrakePedalPositionSensorCalibration_PGN61184_201(JNIEnv * env,
 	TX_WHEEL_LOADER_SENSOR_CALIBRATION_REQUEST_61184_201.RequestBrakePedalPositionSensorCalibration =
 			Data;
 }
+void Set_RequestBucketDumpCalibration_PGN61184_201(JNIEnv * env, jobject this,
+		int Data) {
+	TX_WHEEL_LOADER_SENSOR_CALIBRATION_REQUEST_61184_201.RequestBucketDumpCalibration = Data;
+}
 //////TX_WHEEL_LOADER_SENSOR_CALIBRATION_STATUS_61184_202///////
 void Set_MessageType_PGN61184_202(JNIEnv * env, jobject this, int Data) {
 	TX_WHEEL_LOADER_SENSOR_CALIBRATION_STATUS_61184_202.MessageType = Data;
@@ -2156,6 +2175,21 @@ void Set_BrakePedalPositionSensorCalibrationStatus_564_PGN61184_202(
 void Set_BrakePedalPositionSensorCalibration_FaultInformation_565_PGN61184_202(
 		JNIEnv * env, jobject this, int Data) {
 	TX_WHEEL_LOADER_SENSOR_CALIBRATION_STATUS_61184_202.BrakePedalPositionSensorCalibration_FaultInformation_565 =
+			Data;
+}
+void Set_RequestBucketDumpSpeedCalibrationStatus_1945_PGN61184_202(
+		JNIEnv * env, jobject this, int Data) {
+	TX_WHEEL_LOADER_SENSOR_CALIBRATION_STATUS_61184_202.RequestBucketDumpSpeedCalibrationStatus_1945 =
+			Data;
+}
+void Set_BoomPositionCalibrationError_1946_PGN61184_202(
+		JNIEnv * env, jobject this, int Data) {
+	TX_WHEEL_LOADER_SENSOR_CALIBRATION_STATUS_61184_202.BoomPositionCalibrationError_1946 =
+			Data;
+}
+void Set_BucketPositionCalibrationError_1947_PGN61184_202(
+		JNIEnv * env, jobject this, int Data) {
+	TX_WHEEL_LOADER_SENSOR_CALIBRATION_STATUS_61184_202.BucketPositionCalibrationError_1947 =
 			Data;
 }
 //////TX_WHEEL_LOADER_EHCU_SETTING_61184_203///////
@@ -3832,6 +3866,9 @@ static JNINativeMethod methods[] =
 				{ "Get_RequestBrakePedalPositionSensorCalibration_PGN61184_201",
 						"()I",
 						(void*) Get_RequestBrakePedalPositionSensorCalibration_PGN61184_201 },
+				{ "Get_RequestBucketDumpCalibration_PGN61184_201",
+						"()I",
+						(void*) Get_RequestBucketDumpCalibration_PGN61184_201 },
 				//////RX_WHEEL_LOADER_SENSOR_CALIBRATION_STATUS_61184_202///////
 				{ "Get_MessageType_PGN61184_202", "()I",
 						(void*) Get_MessageType_PGN61184_202 },
@@ -3845,11 +3882,21 @@ static JNINativeMethod methods[] =
 						(void*) Get_AEBCycleNumber_540_PGN61184_202 },
 				{ "Get_AEBStatusInformation_SubCode_563_PGN61184_202", "()I",
 						(void*) Get_AEBStatusInformation_SubCode_563_PGN61184_202 },
-				{
-						"Get_BrakePedalPositionSensorCalibrationStatus_564_PGN61184_202",
+				{ "Get_BrakePedalPositionSensorCalibrationStatus_564_PGN61184_202",
 						"()I",
 						(void*) Get_BrakePedalPositionSensorCalibrationStatus_564_PGN61184_202 },
-				{"Get_BrakePedalPositionSensorCalibration_FaultInformation_565_PGN61184_202","()I",(void*) Get_BrakePedalPositionSensorCalibration_FaultInformation_565_PGN61184_202 },
+				{ "Get_BrakePedalPositionSensorCalibration_FaultInformation_565_PGN61184_202",
+						"()I",
+						(void*) Get_BrakePedalPositionSensorCalibration_FaultInformation_565_PGN61184_202 },
+				{ "Get_RequestBucketDumpSpeedCalibrationStatus_1945_PGN61184_202",
+						"()I",
+						(void*) Get_RequestBucketDumpSpeedCalibrationStatus_1945_PGN61184_202 },
+				{ "Get_BoomPositionCalibrationError_1946_PGN61184_202",
+						"()I",
+						(void*) Get_BoomPositionCalibrationError_1946_PGN61184_202 },
+				{ "Get_BucketPositionCalibrationError_1947_PGN61184_202",
+						"()I",
+						(void*) Get_BucketPositionCalibrationError_1947_PGN61184_202 },
 				//////RX_WHEEL_LOADER_EHCU_SETTING_61184_203///////
 				{ "Get_MessageType_PGN61184_203", "()I",
 						(void*) Get_MessageType_PGN61184_203 }, {
@@ -4674,6 +4721,9 @@ static JNINativeMethod methods[] =
 				{ "Set_RequestBrakePedalPositionSensorCalibration_PGN61184_201",
 						"(I)V",
 						(void*) Set_RequestBrakePedalPositionSensorCalibration_PGN61184_201 },
+				{ "Set_RequestBucketDumpCalibration_PGN61184_201",
+						"(I)V",
+						(void*) Set_RequestBucketDumpCalibration_PGN61184_201 },
 				//////TX_WHEEL_LOADER_SENSOR_CALIBRATION_STATUS_61184_202///////
 				{ "Set_MessageType_PGN61184_202", "(I)V",
 						(void*) Set_MessageType_PGN61184_202 },
@@ -4687,14 +4737,21 @@ static JNINativeMethod methods[] =
 						(void*) Set_AEBCycleNumber_540_PGN61184_202 },
 				{ "Set_AEBStatusInformation_SubCode_563_PGN61184_202", "(I)V",
 						(void*) Set_AEBStatusInformation_SubCode_563_PGN61184_202 },
-				{
-						"Set_BrakePedalPositionSensorCalibrationStatus_564_PGN61184_202",
+				{ "Set_BrakePedalPositionSensorCalibrationStatus_564_PGN61184_202",
 						"(I)V",
 						(void*) Set_BrakePedalPositionSensorCalibrationStatus_564_PGN61184_202 },
-				{
-						"Set_BrakePedalPositionSensorCalibration_FaultInformation_565_PGN61184_202",
+				{ "Set_BrakePedalPositionSensorCalibration_FaultInformation_565_PGN61184_202",
 						"(I)V",
 						(void*) Set_BrakePedalPositionSensorCalibration_FaultInformation_565_PGN61184_202 },
+				{ "Set_RequestBucketDumpSpeedCalibrationStatus_1945_PGN61184_202",
+						"(I)V",
+						(void*) Set_RequestBucketDumpSpeedCalibrationStatus_1945_PGN61184_202 },
+				{ "Set_BoomPositionCalibrationError_1946_PGN61184_202",
+						"(I)V",
+						(void*) Set_BoomPositionCalibrationError_1946_PGN61184_202 },
+				{ "Set_BucketPositionCalibrationError_1947_PGN61184_202",
+						"(I)V",
+						(void*) Set_BucketPositionCalibrationError_1947_PGN61184_202 },
 				//////TX_WHEEL_LOADER_EHCU_SETTING_61184_203///////
 				{ "Set_MessageType_PGN61184_203", "(I)V",
 						(void*) Set_MessageType_PGN61184_203 }, {

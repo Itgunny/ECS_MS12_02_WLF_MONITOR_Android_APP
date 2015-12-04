@@ -1959,7 +1959,8 @@ typedef struct
 
 	unsigned char	RequestAEB:2;
 	unsigned char	RequestBrakePedalPositionSensorCalibration:2;
-	unsigned char	Reserved1:4;
+	unsigned char	RequestBucketDumpCalibration:2;
+	unsigned char	Reserved1:2;
 
 	unsigned char	DM0[5];
 
@@ -1971,6 +1972,7 @@ typedef struct
 	unsigned char 	BoomPressureCalibrationStatus_1908:4;
 	unsigned char	AngleSensorCalibrationStatus_1909:4;
 
+
 	unsigned char	AEBStatusInformation_MainCode_562;
 
 	unsigned char 	AEBCycleNumber_540;
@@ -1981,7 +1983,10 @@ typedef struct
 
 	unsigned char	BrakePedalPositionSensorCalibration_FaultInformation_565;
 
-	unsigned char	DM0;
+	unsigned char	RequestBucketDumpSpeedCalibrationStatus_1945:4;
+	unsigned char	BoomPositionCalibrationError_1946:2;
+	unsigned char   BucketPositionCalibrationError_1947:2;
+
 
 }__attribute__((packed))  WHEEL_LOADER_SENSOR_CALIBRATION_STATUS_61184_202;
 typedef struct

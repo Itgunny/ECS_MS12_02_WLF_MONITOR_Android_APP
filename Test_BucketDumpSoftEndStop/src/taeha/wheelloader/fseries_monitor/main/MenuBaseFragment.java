@@ -9,6 +9,7 @@ import taeha.wheelloader.fseries_monitor.menu.MenuInterTitleFragment;
 import taeha.wheelloader.fseries_monitor.menu.MenuListLeftFragment;
 import taeha.wheelloader.fseries_monitor.menu.MenuListTitleFragment;
 import taeha.wheelloader.fseries_monitor.menu.UserSwitching;
+import taeha.wheelloader.fseries_monitor.menu.management.BucketDumpCalibration;
 import taeha.wheelloader.fseries_monitor.menu.management.ChangeASPhoneNumberFragment;
 import taeha.wheelloader.fseries_monitor.menu.management.EHCUIOInfoBoomLeverFloatFragment;
 import taeha.wheelloader.fseries_monitor.menu.management.EHCUIOInfoFragment;
@@ -26,6 +27,7 @@ import taeha.wheelloader.fseries_monitor.menu.management.ServiceMenuListFragment
 import taeha.wheelloader.fseries_monitor.menu.management.ServiceMenuPasswordFragment;
 import taeha.wheelloader.fseries_monitor.menu.management.ServiceMenuSensorMonitoringFragment;
 import taeha.wheelloader.fseries_monitor.menu.management.ServiceMenuSensorMonitoringHiddenFragment;
+import taeha.wheelloader.fseries_monitor.menu.management.ServiceMenuSoftEndStopCalibrationListFragment;
 import taeha.wheelloader.fseries_monitor.menu.management.ServiceMenuSpeedLimitFragment;
 import taeha.wheelloader.fseries_monitor.menu.management.ServiceMenuWeighingCompensationFragment;
 import taeha.wheelloader.fseries_monitor.menu.management.SoftwareUpdatePasswordFragment;
@@ -174,10 +176,12 @@ public class MenuBaseFragment extends ParentFragment{
 	public CalibrationFragment							_CalibrationFragment;
 	public AngleCalibration								_AngleCalibration;
 	public PressureCalibration							_PressureCalibration;
+	public BucketDumpCalibration						_BucketDumpCalibration;
 	public ChangeASPhoneNumberFragment					_ChangeASPhoneNumberFragment;
 	public ServiceMenuPasswordFragment					_ServiceMenuPasswordFragment;
 	public ServiceMenuChangeMachineSerialFragment		_ServiceMenuChangeMachineSerialFragment;
 	public ServiceMenuListFragment						_ServiceMenuListFragment;
+	public ServiceMenuSoftEndStopCalibrationListFragment _ServiceMenuSoftEndStopCalibrationListFragment;
 	public ServiceMenuSpeedLimitFragment				_ServiceMenuSpeedLimitFragment;
 	public ServiceMenuWeighingCompensationFragment		_ServiceMenuWeighingCompensationFragment;
 	public ServiceMenuSensorMonitoringFragment			_ServiceMenuSensorMonitoringFragment;
@@ -313,9 +317,11 @@ public class MenuBaseFragment extends ParentFragment{
 		_CalibrationFragment = new CalibrationFragment();
 		_AngleCalibration = new AngleCalibration();
 		_PressureCalibration = new PressureCalibration();
+		_BucketDumpCalibration = new BucketDumpCalibration();
 		_ChangeASPhoneNumberFragment = new ChangeASPhoneNumberFragment();
 		_ServiceMenuPasswordFragment = new ServiceMenuPasswordFragment();
 		_ServiceMenuListFragment = new ServiceMenuListFragment();
+		_ServiceMenuSoftEndStopCalibrationListFragment = new ServiceMenuSoftEndStopCalibrationListFragment();
 		_ServiceMenuSpeedLimitFragment = new ServiceMenuSpeedLimitFragment();
 		_ServiceMenuWeighingCompensationFragment = new ServiceMenuWeighingCompensationFragment();
 		_ServiceMenuSensorMonitoringFragment = new ServiceMenuSensorMonitoringFragment();
@@ -407,9 +413,11 @@ public class MenuBaseFragment extends ParentFragment{
 		transaction.detach(_CalibrationFragment);
 		transaction.detach(_AngleCalibration);
 		transaction.detach(_PressureCalibration);
+		transaction.detach(_BucketDumpCalibration);
 		transaction.detach(_ChangeASPhoneNumberFragment);
 		transaction.detach(_ServiceMenuPasswordFragment);
 		transaction.detach(_ServiceMenuListFragment);
+		transaction.detach(_ServiceMenuSoftEndStopCalibrationListFragment);
 		transaction.detach(_ServiceMenuSpeedLimitFragment);
 		transaction.detach(_ServiceMenuWeighingCompensationFragment);
 		transaction.detach(_ServiceMenuSensorMonitoringFragment);
@@ -615,6 +623,12 @@ public class MenuBaseFragment extends ParentFragment{
 		android.app.FragmentTransaction transaction = getFragmentManager().beginTransaction();
 		transaction.remove(_ServiceMenuListFragment);
 		transaction.replace(R.id.FrameLayout_menu_list_body, _ServiceMenuListFragment);
+		transaction.commit();
+	}
+	public void showBodyServiceSoftAndStopCalibrationMenuList(){
+		android.app.FragmentTransaction transaction = getFragmentManager().beginTransaction();
+		transaction.remove(_ServiceMenuSoftEndStopCalibrationListFragment);
+		transaction.replace(R.id.FrameLayout_menu_list_body, _ServiceMenuSoftEndStopCalibrationListFragment);
 		transaction.commit();
 	}
 	public void showBodyDisplayTypeLangList(){
@@ -878,6 +892,14 @@ public class MenuBaseFragment extends ParentFragment{
 		transaction.commit();
 
 	}
+	public void showBodyBucketDumpCalibration(){
+		android.app.FragmentTransaction transaction = getFragmentManager().beginTransaction();
+		transaction.remove(_BucketDumpCalibration);
+		transaction.replace(R.id.FrameLayout_menu_inter_body, _BucketDumpCalibration);
+		transaction.commit();
+
+	}
+	
 	public void showBodyChangeASPhoneNumber(){
 		android.app.FragmentTransaction transaction = getFragmentManager().beginTransaction();
 		transaction.remove(_ChangeASPhoneNumberFragment);
@@ -1069,6 +1091,13 @@ public class MenuBaseFragment extends ParentFragment{
 		ListBodyAnimation.StartChangeAnimation(_ServiceMenuListFragment);
 		_MenuListLeftFragment.setFirstScreen(Home.SCREEN_STATE_MENU_MANAGEMENT_TOP);
 	}
+	public void showServiceMenuSoftAndStopCalbrationMenuListAnimation(){
+		DestroyFragment();
+		InitFragment();
+		showListAnimation();
+		ListBodyAnimation.StartChangeAnimation(_ServiceMenuSoftEndStopCalibrationListFragment);
+		_MenuListLeftFragment.setFirstScreen(Home.SCREEN_STATE_MENU_MANAGEMENT_TOP);
+	}
 	public void showDisplayTypeLangAnimation(){
 		DestroyFragment();
 		InitFragment();
@@ -1228,6 +1257,10 @@ public class MenuBaseFragment extends ParentFragment{
 	public void showBodyPressureCalibrationAnimation(){
 		showInterAnimation();
 		InterBodyAnimation.StartChangeAnimation(_PressureCalibration);
+	}
+	public void showBodyBucketDumpCalibrationAnimation(){
+		showInterAnimation();
+		InterBodyAnimation.StartChangeAnimation(_BucketDumpCalibration);
 	}
 	public void showBodyChangeASPhoneNumberAnimation(){
 		showInterAnimation();
@@ -1493,6 +1526,9 @@ public class MenuBaseFragment extends ParentFragment{
 		case Home.SCREEN_STATE_MENU_MODE_ETC_CALIBRATION_PRESSURE_RESULT:
 			ParentActivity._PressureCalibrationResultPopup.ClickLeft();
 			break;
+		case Home.SCREEN_STATE_MENU_MANAGEMENT_SERVICE_CALIBRATION_BUCKET_TOP:
+			_BucketDumpCalibration.ClickLeft();
+			break;
 		case Home.SCREEN_STATE_MENU_MODE_ETC_CALIBRATION_BRAKEPEDAL_TOP:
 			ParentActivity._BrakePedalCalibrationPopup.ClickLeft();
 			break;
@@ -1655,6 +1691,9 @@ public class MenuBaseFragment extends ParentFragment{
 		case Home.SCREEN_STATE_MENU_MANAGEMENT_SERVICE_SPEEDLIMIT_TOP:
 			_ServiceMenuSpeedLimitFragment.ClickLeft();
 			break;
+		case Home.SCREEN_STATE_MENU_MANAGEMENT_SERVICE_SOFTANDSTOP_CAL_TOP:
+			_ServiceMenuSoftEndStopCalibrationListFragment.ClickLeft();
+			break;
 		case Home.SCREEN_STATE_MENU_MANAGEMENT_SERVICE_WEIGHINGCOMPENSATION_TOP:
 			_ServiceMenuWeighingCompensationFragment.ClickLeft();
 			break;
@@ -1792,6 +1831,9 @@ public class MenuBaseFragment extends ParentFragment{
 			break;
 		case Home.SCREEN_STATE_MENU_MODE_ETC_CALIBRATION_PRESSURE_RESULT:
 			ParentActivity._PressureCalibrationResultPopup.ClickRight();
+			break;
+		case Home.SCREEN_STATE_MENU_MANAGEMENT_SERVICE_CALIBRATION_BUCKET_TOP:
+			_BucketDumpCalibration.ClickRight();
 			break;
 		case Home.SCREEN_STATE_MENU_MODE_ETC_CALIBRATION_BRAKEPEDAL_TOP:
 			ParentActivity._BrakePedalCalibrationPopup.ClickRight();
@@ -1959,6 +2001,9 @@ public class MenuBaseFragment extends ParentFragment{
 		case Home.SCREEN_STATE_MENU_MANAGEMENT_SERVICE_WEIGHINGCOMPENSATION_TOP:
 			_ServiceMenuWeighingCompensationFragment.ClickRight();
 			break;
+		case Home.SCREEN_STATE_MENU_MANAGEMENT_SERVICE_SOFTANDSTOP_CAL_TOP:
+			_ServiceMenuSoftEndStopCalibrationListFragment.ClickRight();
+			break;
 		case Home.SCREEN_STATE_MENU_MANAGEMENT_ASPHONE_TOP:
 			_ChangeASPhoneNumberFragment.ClickRight();
 			break;
@@ -2097,6 +2142,9 @@ public class MenuBaseFragment extends ParentFragment{
 			break;
 		case Home.SCREEN_STATE_MENU_MODE_ETC_CALIBRATION_PRESSURE_RESULT:
 			ParentActivity._PressureCalibrationResultPopup.ClickESC();
+			break;
+		case Home.SCREEN_STATE_MENU_MANAGEMENT_SERVICE_CALIBRATION_BUCKET_TOP:
+			_BucketDumpCalibration.ClickESC();
 			break;
 		case Home.SCREEN_STATE_MENU_MODE_ETC_CALIBRATION_BRAKEPEDAL_TOP:
 			ParentActivity._BrakePedalCalibrationPopup.ClickESC();
@@ -2262,6 +2310,9 @@ public class MenuBaseFragment extends ParentFragment{
 			break;
 		case Home.SCREEN_STATE_MENU_MANAGEMENT_SERVICE_WEIGHINGCOMPENSATION_TOP:
 			_ServiceMenuWeighingCompensationFragment.ClickESC();
+			break;
+		case Home.SCREEN_STATE_MENU_MANAGEMENT_SERVICE_SOFTANDSTOP_CAL_TOP:
+			_ServiceMenuSoftEndStopCalibrationListFragment.ClickESC();
 			break;
 		case Home.SCREEN_STATE_MENU_MANAGEMENT_ASPHONE_TOP:
 			_ChangeASPhoneNumberFragment.ClickESC();
@@ -2565,6 +2616,9 @@ public class MenuBaseFragment extends ParentFragment{
 			break;
 		case Home.SCREEN_STATE_MENU_MANAGEMENT_SERVICE_WEIGHINGCOMPENSATION_TOP:
 			_ServiceMenuWeighingCompensationFragment.ClickEnter();
+			break;
+		case Home.SCREEN_STATE_MENU_MANAGEMENT_SERVICE_SOFTANDSTOP_CAL_TOP:
+			_ServiceMenuSoftEndStopCalibrationListFragment.ClickEnter();
 			break;
 		case Home.SCREEN_STATE_MENU_MANAGEMENT_ASPHONE_TOP:
 			_ChangeASPhoneNumberFragment.ClickEnter();

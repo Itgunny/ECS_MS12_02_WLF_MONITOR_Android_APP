@@ -107,6 +107,8 @@ public class ServiceMenuListFragment extends MenuBodyList_ParentFragment{
 		setListTitle3(ParentActivity.getResources().getString(string.Weighing_System_Compensation),361);
 		
 		if(CAN1Comm.Get_ComponentCode_1699_PGN65330_EHCU() != CAN1CommManager.STATE_COMPONENTCODE_EHCU){
+			setClickableList4(true);
+			setListTitle4("소프트 엔드 스탑 보정");
 //			setClickableList4(true);
 //			setListTitle4(ParentActivity.getResources().getString(string.Machine_Serial_Number));
 //			if(Hourmeter < 20)
@@ -116,7 +118,9 @@ public class ServiceMenuListFragment extends MenuBodyList_ParentFragment{
 		}else{
 			setClickableList4(true);
 			setListTitle4(ParentActivity.getResources().getString(string.EHCU_IO_Information), 256);
-
+			setClickableList5(true);
+			setListTitle5("소프트 엔드 스탑 보정");
+			
 //			setClickableList5(true);
 //			setListTitle5(ParentActivity.getResources().getString(string.Machine_Serial_Number));	
 //
@@ -184,10 +188,16 @@ public class ServiceMenuListFragment extends MenuBodyList_ParentFragment{
 //			CursurDisplay(CursurIndex);		
 //		}
 //		else if(nInputMachineSerial != 1)
+
+		if(CAN1Comm.Get_ComponentCode_1699_PGN65330_EHCU() != CAN1CommManager.STATE_COMPONENTCODE_EHCU)
 		{
-			ParentActivity._MenuBaseFragment.showBodyEHCUIOInfoAnimation();
+			ParentActivity._MenuBaseFragment.showBodyServiceSoftAndStopCalibrationMenuList();
 			CursurIndex = 4;
 			CursurDisplay(CursurIndex);		
+		} else {
+			ParentActivity._MenuBaseFragment.showBodyEHCUIOInfoAnimation();
+			CursurIndex = 4;
+			CursurDisplay(CursurIndex);			
 		}
 		// --, 150325 bwk
 		// ++, 150323 bwk
@@ -216,7 +226,9 @@ public class ServiceMenuListFragment extends MenuBodyList_ParentFragment{
 //			CursurIndex = 5;
 //			CursurDisplay(CursurIndex);
 //		}
-		
+			ParentActivity._MenuBaseFragment.showBodyServiceSoftAndStopCalibrationMenuList();
+			CursurIndex = 5;
+			CursurDisplay(CursurIndex);		 
 	}
 
 	@Override
@@ -276,9 +288,9 @@ public class ServiceMenuListFragment extends MenuBodyList_ParentFragment{
 			break;
 		case 1:
 			if(CAN1Comm.Get_ComponentCode_1699_PGN65330_EHCU() != CAN1CommManager.STATE_COMPONENTCODE_EHCU){
-				CursurIndex = 3;
-			}else{
 				CursurIndex = 4;
+			}else{
+				CursurIndex = 5;
 			}
 			CursurDisplay(CursurIndex);
 			break;
@@ -291,6 +303,10 @@ public class ServiceMenuListFragment extends MenuBodyList_ParentFragment{
 			CursurDisplay(CursurIndex);
 			break;
 		case 4:
+			CursurIndex--;
+			CursurDisplay(CursurIndex);
+			break;
+		case 5:
 			CursurIndex--;
 			CursurDisplay(CursurIndex);
 			break;
@@ -312,6 +328,10 @@ public class ServiceMenuListFragment extends MenuBodyList_ParentFragment{
 			CursurDisplay(CursurIndex);
 			break;
 		case 3:
+			CursurIndex++;
+			CursurDisplay(CursurIndex);
+			break;
+		case 4:
 			if(CAN1Comm.Get_ComponentCode_1699_PGN65330_EHCU() != CAN1CommManager.STATE_COMPONENTCODE_EHCU){
 				CursurIndex = 1;
 			}else{
@@ -319,7 +339,7 @@ public class ServiceMenuListFragment extends MenuBodyList_ParentFragment{
 			}
 			CursurDisplay(CursurIndex);
 			break;
-		case 4:
+		case 5:
 			CursurIndex = 1;
 			CursurDisplay(CursurIndex);
 			break;
@@ -343,6 +363,9 @@ public class ServiceMenuListFragment extends MenuBodyList_ParentFragment{
 			break;
 		case 4:
 			imgbtnList[3].callOnClick();
+			break;
+		case 5:
+			imgbtnList[4].callOnClick();
 			break;
 		default:
 			break;

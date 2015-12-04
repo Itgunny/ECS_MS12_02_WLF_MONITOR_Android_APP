@@ -15,7 +15,6 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import taeha.wheelloader.fseries_monitor.animation.BarAnimation;
 import taeha.wheelloader.fseries_monitor.main.CAN1CommManager;
 import taeha.wheelloader.fseries_monitor.main.Home;
 import taeha.wheelloader.fseries_monitor.main.ParentFragment;
@@ -59,7 +58,7 @@ public class MainBCenterFragment extends ParentFragment{
 	//////////////////////////////////////////////////
 	
 	//ANIMATION///////////////////////////////////////
-	public BarAnimation				_EcoGaugeAnimation;
+	//public BarAnimation				_EcoGaugeAnimation;
 	///////////////////////////////////////////////////
 	
 	//TEST////////////////////////////////////////////
