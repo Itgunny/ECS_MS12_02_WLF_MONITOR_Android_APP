@@ -116,11 +116,13 @@ public class AngleCalibration extends ParentFragment{
 		CAN1Comm.Set_RequestBoomBucketAngleSensorCalibration_PGN61184_201(0);
 		CAN1Comm.Set_RequestAEB_PGN61184_201(0);
 		CAN1Comm.Set_RequestBrakePedalPositionSensorCalibration_PGN61184_201(0);
+		CAN1Comm.Set_RequestBucketDumpCalibration_PGN61184_201(0);
 		CAN1Comm.TxCANToMCU(201);
 		CAN1Comm.Set_RequestBoomPressureCalibration_PGN61184_201(3);
 		CAN1Comm.Set_RequestBoomBucketAngleSensorCalibration_PGN61184_201(15);
 		CAN1Comm.Set_RequestAEB_PGN61184_201(3);
 		CAN1Comm.Set_RequestBrakePedalPositionSensorCalibration_PGN61184_201(3);
+		CAN1Comm.Set_RequestBucketDumpCalibration_PGN61184_201(3);
 	}
 	////////////////////////////////////////////////
 
@@ -442,11 +444,13 @@ public class AngleCalibration extends ParentFragment{
 					CAN1Comm.Set_RequestBoomBucketAngleSensorCalibration_PGN61184_201(0);
 					CAN1Comm.Set_RequestAEB_PGN61184_201(0);
 					CAN1Comm.Set_RequestBrakePedalPositionSensorCalibration_PGN61184_201(0);
+					CAN1Comm.Set_RequestBucketDumpCalibration_PGN61184_201(0);
 					CAN1Comm.TxCANToMCU(201);
 					CAN1Comm.Set_RequestBoomPressureCalibration_PGN61184_201(3);
 					CAN1Comm.Set_RequestBoomBucketAngleSensorCalibration_PGN61184_201(15);
 					CAN1Comm.Set_RequestAEB_PGN61184_201(3);
 					CAN1Comm.Set_RequestBrakePedalPositionSensorCalibration_PGN61184_201(3);
+					CAN1Comm.Set_RequestBucketDumpCalibration_PGN61184_201(3);
 					ParentActivity._AngleCalibrationResultPopup.setTextTitle(getString(ParentActivity.getResources().getString(string.Calibration_failed_Machine_Restart), 378));
 					ParentActivity._AngleCalibrationResultPopup.setExitFlag(false);
 					ParentActivity.showAngleCalibrationResult();
@@ -467,12 +471,13 @@ public class AngleCalibration extends ParentFragment{
 						CAN1Comm.Set_RequestBoomBucketAngleSensorCalibration_PGN61184_201(0);
 						CAN1Comm.Set_RequestAEB_PGN61184_201(0);
 						CAN1Comm.Set_RequestBrakePedalPositionSensorCalibration_PGN61184_201(0);
+						CAN1Comm.Set_RequestBucketDumpCalibration_PGN61184_201(0);
 						CAN1Comm.TxCANToMCU(201);
 						CAN1Comm.Set_RequestBoomPressureCalibration_PGN61184_201(3);
 						CAN1Comm.Set_RequestBoomBucketAngleSensorCalibration_PGN61184_201(15);
 						CAN1Comm.Set_RequestAEB_PGN61184_201(3);
 						CAN1Comm.Set_RequestBrakePedalPositionSensorCalibration_PGN61184_201(3);
-		
+						CAN1Comm.Set_RequestBucketDumpCalibration_PGN61184_201(3);
 						switch (Reply) {
 						case 5:
 							ParentActivity._AngleCalibrationResultPopup.setTextTitle(getString(ParentActivity.getResources().getString(string.Calibration_completed), 379));

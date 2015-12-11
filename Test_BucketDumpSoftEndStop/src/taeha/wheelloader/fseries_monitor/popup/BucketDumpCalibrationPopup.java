@@ -110,7 +110,7 @@ public class BucketDumpCalibrationPopup extends ParentPopup{
 		{
 			// ++, 150409 cjg
 //			ParentActivity._MenuBaseFragment.showCalibrationAnimation();
-			ParentActivity._MenuBaseFragment.showBodyModeAnimation();
+			ParentActivity._MenuBaseFragment.showServiceMenuSoftAndStopCalbrationMenuListAnimation();
 			ParentActivity._MenuBaseFragment._MenuModeFragment.setFirstScreen(Home.SCREEN_STATE_MENU_MANAGEMENT_SERVICE_SOFTANDSTOP_CAL_TOP);
 			// --, 150409 cjg
 		}

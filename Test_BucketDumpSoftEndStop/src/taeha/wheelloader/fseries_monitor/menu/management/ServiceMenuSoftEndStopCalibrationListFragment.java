@@ -62,7 +62,7 @@ public class ServiceMenuSoftEndStopCalibrationListFragment extends MenuBodyList_
 		InitList();
 		ParentActivity._MenuBaseFragment._MenuListTitleFragment.setBackButtonEnable(true);
 		ParentActivity.ScreenIndex = ParentActivity.SCREEN_STATE_MENU_MANAGEMENT_SERVICE_SOFTANDSTOP_CAL_TOP;
-		ParentActivity._MenuBaseFragment._MenuListTitleFragment.SetTitleText("¼ÒÇÁÆ® ¾Øµå ½ºÅ¾ º¸Á¤");
+		ParentActivity._MenuBaseFragment._MenuListTitleFragment.SetTitleText(ParentActivity.getString(string.Soft_End_Stop_Calibration), 472);
 		CursurDisplay(CursurIndex);
 		return mRoot;
 	}
@@ -88,8 +88,8 @@ public class ServiceMenuSoftEndStopCalibrationListFragment extends MenuBodyList_
 		setClickableList1(true);
 		setClickableList2(true);
 		
-		setListTitle1("ºÕ ¾÷");
-		setListTitle2("¹öÄÏ ´ýÇÁ");
+		setListTitle1(ParentActivity.getString(string.Boom_Up), 236);
+		setListTitle2(ParentActivity.getString(string.Bucket_Dump), 239);
 		
 	}
 

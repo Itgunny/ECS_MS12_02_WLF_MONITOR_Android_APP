@@ -108,7 +108,7 @@ public class ServiceMenuListFragment extends MenuBodyList_ParentFragment{
 		
 		if(CAN1Comm.Get_ComponentCode_1699_PGN65330_EHCU() != CAN1CommManager.STATE_COMPONENTCODE_EHCU){
 			setClickableList4(true);
-			setListTitle4("소프트 엔드 스탑 보정");
+			setListTitle4(ParentActivity.getResources().getString(string.Soft_End_Stop_Calibration), 472);
 //			setClickableList4(true);
 //			setListTitle4(ParentActivity.getResources().getString(string.Machine_Serial_Number));
 //			if(Hourmeter < 20)
@@ -119,7 +119,7 @@ public class ServiceMenuListFragment extends MenuBodyList_ParentFragment{
 			setClickableList4(true);
 			setListTitle4(ParentActivity.getResources().getString(string.EHCU_IO_Information), 256);
 			setClickableList5(true);
-			setListTitle5("소프트 엔드 스탑 보정");
+			setListTitle5(ParentActivity.getResources().getString(string.Soft_End_Stop_Calibration), 472);
 			
 //			setClickableList5(true);
 //			setListTitle5(ParentActivity.getResources().getString(string.Machine_Serial_Number));	

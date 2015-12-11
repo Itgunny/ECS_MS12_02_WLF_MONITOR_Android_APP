@@ -12,6 +12,7 @@ import taeha.wheelloader.fseries_monitor.popup.AngleCalibrationResultPopup;
 import taeha.wheelloader.fseries_monitor.popup.AxleTempWarningPopup;
 import taeha.wheelloader.fseries_monitor.popup.BrakePedalCalibrationPopup;
 import taeha.wheelloader.fseries_monitor.popup.BucketDumpCalibrationPopup;
+import taeha.wheelloader.fseries_monitor.popup.BucketDumpInitCalibrationPopup;
 import taeha.wheelloader.fseries_monitor.popup.BucketPriorityPopup;
 import taeha.wheelloader.fseries_monitor.popup.CCOModePopup;
 import taeha.wheelloader.fseries_monitor.popup.CalibrationEHCUPopup;
@@ -1361,6 +1362,7 @@ public class Home extends Activity {
 	public FuelInitalPopup					_FuelInitalPopup;			// ++, --, 150406 bwk
 	public AxleTempWarningPopup				_AxleTempWarningPopup;
 	public CalibrationEHCUPopup				_CalibrationEHCUPopup;
+	public BucketDumpInitCalibrationPopup	_BucketDumpInitCalibrationPopup;
 	public SoftwareUpdateErrorPopup			_SoftwareUpdateErrorPopup;
 	public LanguageChangePopup 				_LanguageChangePopup;
 	public FanSelectModePopup				_FanSelectModePopup;
@@ -1766,6 +1768,7 @@ public class Home extends Activity {
 		_FuelInitalPopup = new FuelInitalPopup(this);
 		_AxleTempWarningPopup = new AxleTempWarningPopup(this);
 		_CalibrationEHCUPopup = new CalibrationEHCUPopup(this);
+		_BucketDumpInitCalibrationPopup = new BucketDumpInitCalibrationPopup(this);
 		_SoftwareUpdateErrorPopup = new SoftwareUpdateErrorPopup(this);
 		_LanguageChangePopup = new LanguageChangePopup(this);
 		_FanSelectModePopup = new FanSelectModePopup(this);
@@ -1816,6 +1819,7 @@ public class Home extends Activity {
 		
 		_WeighingErrorToast = new WeighingErrorToast(this);
 		_CalibrationEHCUPopup = new CalibrationEHCUPopup(this);
+		_BucketDumpInitCalibrationPopup = new BucketDumpInitCalibrationPopup(this);
 		_SoftwareUpdateErrorPopup = new SoftwareUpdateErrorPopup(this);
 		_LanguageChangePopup = new LanguageChangePopup(this);
 		_FanSelectModePopup = new FanSelectModePopup(this);
@@ -4177,6 +4181,20 @@ public class Home extends Activity {
 		}
 	
 		HomeDialog = _CalibrationEHCUPopup;
+		HomeDialog.show();
+	}
+	public void showBucketDumpInitCalibrationPopup(){
+		if(AnimationRunningFlag == true)
+			return;
+		else
+			StartAnimationRunningTimer();
+		
+		if(HomeDialog != null){
+			HomeDialog.dismiss();
+			HomeDialog = null;
+		}
+	
+		HomeDialog = _BucketDumpInitCalibrationPopup;
 		HomeDialog.show();
 	}
 	public void showSoftwareUpdateErrorPopup(){

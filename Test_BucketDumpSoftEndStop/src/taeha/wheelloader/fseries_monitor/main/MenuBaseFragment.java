@@ -1529,6 +1529,12 @@ public class MenuBaseFragment extends ParentFragment{
 		case Home.SCREEN_STATE_MENU_MANAGEMENT_SERVICE_CALIBRATION_BUCKET_TOP:
 			_BucketDumpCalibration.ClickLeft();
 			break;
+		case Home.SCREEN_STATE_MENU_MANAGEMENT_SERVICE_CALIBRATION_BUCKET_POPUP:
+			ParentActivity._BucketDumpInitCalibrationPopup.ClickLeft();
+			break;
+		case Home.SCREEN_STATE_MENU_MANAGEMENT_SERVICE_CALIBRATION_BUCKET_RESULT:
+			ParentActivity._BucketDumpCalibrationPopup.ClickLeft();
+			break;	
 		case Home.SCREEN_STATE_MENU_MODE_ETC_CALIBRATION_BRAKEPEDAL_TOP:
 			ParentActivity._BrakePedalCalibrationPopup.ClickLeft();
 			break;
@@ -1835,10 +1841,15 @@ public class MenuBaseFragment extends ParentFragment{
 		case Home.SCREEN_STATE_MENU_MANAGEMENT_SERVICE_CALIBRATION_BUCKET_TOP:
 			_BucketDumpCalibration.ClickRight();
 			break;
+		case Home.SCREEN_STATE_MENU_MANAGEMENT_SERVICE_CALIBRATION_BUCKET_POPUP:
+			ParentActivity._BucketDumpInitCalibrationPopup.ClickRight();
+			break;
+		case Home.SCREEN_STATE_MENU_MANAGEMENT_SERVICE_CALIBRATION_BUCKET_RESULT:
+			ParentActivity._BucketDumpCalibrationPopup.ClickLeft();
+			break;	
 		case Home.SCREEN_STATE_MENU_MODE_ETC_CALIBRATION_BRAKEPEDAL_TOP:
 			ParentActivity._BrakePedalCalibrationPopup.ClickRight();
 			break;
-			
 		case Home.SCREEN_STATE_MENU_MODE_ETC_FREQ_TOP:
 			_SpeedometerFreqFragment.ClickRight();
 			break;
@@ -2146,6 +2157,12 @@ public class MenuBaseFragment extends ParentFragment{
 		case Home.SCREEN_STATE_MENU_MANAGEMENT_SERVICE_CALIBRATION_BUCKET_TOP:
 			_BucketDumpCalibration.ClickESC();
 			break;
+		case Home.SCREEN_STATE_MENU_MANAGEMENT_SERVICE_CALIBRATION_BUCKET_POPUP:
+			ParentActivity._BucketDumpInitCalibrationPopup.ClickESC();
+			break;
+		case Home.SCREEN_STATE_MENU_MANAGEMENT_SERVICE_CALIBRATION_BUCKET_RESULT:
+			ParentActivity._BucketDumpCalibrationPopup.ClickLeft();
+			break;		
 		case Home.SCREEN_STATE_MENU_MODE_ETC_CALIBRATION_BRAKEPEDAL_TOP:
 			ParentActivity._BrakePedalCalibrationPopup.ClickESC();
 			break;
@@ -2566,6 +2583,15 @@ public class MenuBaseFragment extends ParentFragment{
 		case Home.SCREEN_STATE_MENU_MANAGEMENT_SERVICE_MACHINESERIALNUMBER_TOP:
 			_ServiceMenuChangeMachineSerialFragment.ClickEnter();
 			break;			
+		case Home.SCREEN_STATE_MENU_MANAGEMENT_SERVICE_CALIBRATION_BUCKET_TOP:
+			_BucketDumpCalibration.ClickEnter();
+			break;
+		case Home.SCREEN_STATE_MENU_MANAGEMENT_SERVICE_CALIBRATION_BUCKET_POPUP:
+			ParentActivity._BucketDumpInitCalibrationPopup.ClickEnter();
+			break;
+		case Home.SCREEN_STATE_MENU_MANAGEMENT_SERVICE_CALIBRATION_BUCKET_RESULT:
+			ParentActivity._BucketDumpCalibrationPopup.ClickEnter();
+			break;	
 		case Home.SCREEN_STATE_MENU_MANAGEMENT_TOP:
 			_MenuManagementFragment.ClickEnter();
 			break;

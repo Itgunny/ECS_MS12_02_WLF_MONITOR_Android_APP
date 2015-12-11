@@ -471,4 +471,9 @@
     <string name="Volume_L">L</string>
     <string name="Volume_gallon">gal</string>
     <string name="Distance">거리</string>
+    <string name="Soft_End_Stop_Calibration">소프트 엔드 스탑 보정</string>
+    <string name="Bucket_Dump_Speed_Calibration">버켓 덤프 속도 보정</string>
+    <string name="Boom_Position">붐 위치</string>
+    <string name="Bucket_Position">버켓 위치</string>
+    
 </resources>

@@ -94,10 +94,9 @@ public class BucketDumpCalibration extends ParentFragment{
 		CursurDisplay(CursurIndex);
 		
 		ParentActivity.ScreenIndex = ParentActivity.SCREEN_STATE_MENU_MANAGEMENT_SERVICE_CALIBRATION_BUCKET_TOP;
-		ParentActivity._MenuBaseFragment._MenuInterTitleFragment.SetTitleText("¹öÄÏ ´ýÇÁ ¼Óµµ º¸Á¤");
+		ParentActivity._MenuBaseFragment._MenuInterTitleFragment.SetTitleText(ParentActivity.getString(string.Bucket_Dump_Speed_Calibration), 473);
 		
-		if(CAN1Comm.Get_ComponentCode_1699_PGN65330_EHCU() == CAN1CommManager.STATE_COMPONENTCODE_EHCU)
-			StartEnableButtonTimer();
+		StartEnableButtonTimer();
 		
 		HandleCursurDisplay = new Handler(){
 			@Override
@@ -133,10 +132,14 @@ public class BucketDumpCalibration extends ParentFragment{
 		// TODO Auto-generated method stub
 		imgbtnCancel = (ImageButton)mRoot.findViewById(R.id.ImageButton_menu_body_management_calibration_bucket_dump_low_cancel);
 		textViewCancel = (TextView)mRoot.findViewById(R.id.textView_menu_body_management_calibration_bucket_dump_low_cancel);
+		textViewCancel.setText(getString(ParentActivity.getString(string.Cancel), 16));
 		
 		textViewTitle = (TextView)mRoot.findViewById(R.id.textView_menu_body_management_calibration_bucket_dump_title);
+		textViewTitle.setText(getString(ParentActivity.getResources().getString(R.string.First_Calibration), 353));
+		
 		
 		textViewStart = (TextView)mRoot.findViewById(R.id.textView_menu_body_management_calibration_bucket_dump_main_start);
+		textViewStart.setText(getString(ParentActivity.getResources().getString(R.string.Start), 352));
 		
 		textViewDesText1 = (TextView)mRoot.findViewById(R.id.textView_menu_body_management_calibration_bucket_dump_main_step_1);
 		textViewDesText2 = (TextView)mRoot.findViewById(R.id.textView_menu_body_management_calibration_bucket_dump_main_step_2);
@@ -144,8 +147,11 @@ public class BucketDumpCalibration extends ParentFragment{
 		textViewDesText4 = (TextView)mRoot.findViewById(R.id.textView_menu_body_management_calibration_bucket_dump_main_step_4);
 		
 		textViewBoomPositionTitle = (TextView)mRoot.findViewById(R.id.textView_menu_body_management_calibration_bucket_dump_main_boom_position);
+		textViewBoomPositionTitle.setText("* " + getString(ParentActivity.getResources().getString(R.string.Boom_Position), 473) + " : ");
 		textViewBucketPositionTitle = (TextView)mRoot.findViewById(R.id.textView_menu_body_management_calibration_bucket_dump_main_bucket_position);
+		textViewBucketPositionTitle.setText("* " + getString(ParentActivity.getResources().getString(R.string.Bucket_Position), 474) + " : ");
 		textViewHydOilTempTitle = (TextView)mRoot.findViewById(R.id.textView_menu_body_management_calibration_bucket_dump_main_bucket_Oil);
+		textViewHydOilTempTitle.setText("* " + getString(ParentActivity.getResources().getString(R.string.HYD_Temp), 111) + " : ");
 		
 		textViewBoomPositionData = (TextView)mRoot.findViewById(R.id.textView_menu_body_management_calibration_bucket_dump_main_boom_position_value);
 		textViewBucketPositionData = (TextView)mRoot.findViewById(R.id.textView_menu_body_management_calibration_bucket_dump_main_bucket_position_value);
@@ -222,7 +228,6 @@ public class BucketDumpCalibration extends ParentFragment{
 			CAN1Comm.TxCANToMCU(201);
 			CAN1Comm.Set_RequestBucketDumpCalibration_PGN61184_201(3);
 			StatusCNT = 0;
-			
 			CancelCheckTimer();
 			StartCheckTimer();
 		}else if(Order == 1){
@@ -250,16 +255,16 @@ public class BucketDumpCalibration extends ParentFragment{
 	/////////////////////////////////////////////////////////////////////	
 	private void HYDDisplay(TextView textData, int Data, int Unit) {
 		if(Integer.parseInt(GetTemp(Data,Unit)) >= 40){
-			textData.setText("OK");
+			textData.setText(getString(ParentActivity.getResources().getString(string.OK), 15));
 			textData.setTextColor(Color.BLACK);
 			textData.setBackgroundColor(Color.GREEN);
 		}else{
 			if(Unit == Home.UNIT_TEMP_F){
-				textData.setText(ParentActivity.GetTemp(Data,Unit) + " " + "F");
+				textData.setText(ParentActivity.GetTemp(Data,Unit) + " " + getString(ParentActivity.getResources().getString(string.F), 9));
 				textData.setTextColor(Color.BLACK);
 				textData.setBackgroundColor(Color.RED);
 			}else{
-				textData.setText(ParentActivity.GetTemp(Data,Unit) + " " + "C");
+				textData.setText(ParentActivity.GetTemp(Data,Unit) + " " + getString(ParentActivity.getResources().getString(string.C), 8));
 				textData.setTextColor(Color.BLACK);
 				textData.setBackgroundColor(Color.RED);
 			}
@@ -268,11 +273,11 @@ public class BucketDumpCalibration extends ParentFragment{
 	}
 	private void BoomPosition(TextView textData, int Data) {
 		if(Data == 1){
-			textData.setText("ºÕ »ó½Â");
+			textData.setText(getString(ParentActivity.getResources().getString(string.Boom_Up), 236));
 			textData.setTextColor(Color.BLACK);
 			textData.setBackgroundColor(Color.RED);
 		}else if(Data == 0){
-			textData.setText("OK");
+			textData.setText(getString(ParentActivity.getResources().getString(string.OK), 15));
 			textData.setTextColor(Color.BLACK);
 			textData.setBackgroundColor(Color.GREEN);
 		}else{
@@ -287,7 +292,7 @@ public class BucketDumpCalibration extends ParentFragment{
 			textData.setTextColor(Color.BLACK);
 			textData.setBackgroundColor(Color.RED);
 		}else if(Data == 0){
-			textData.setText("OK");
+			textData.setText(getString(ParentActivity.getResources().getString(string.OK), 15));
 			textData.setTextColor(Color.BLACK);
 			textData.setBackgroundColor(Color.GREEN);
 		}else{
@@ -319,6 +324,7 @@ public class BucketDumpCalibration extends ParentFragment{
 		if((StatusCnt >= 25)) // 5 Sec ~ 
 		{
 			if( (Result == CAL1_SUCCESS) ||  (Result == CAL2_SUCCESS) 
+				|| (Result == CAL1_RETRY)|| (Result == CAL2_RETRY)
 				|| (Result == TIMER_OVER_ERROR) || (Result == BOOM_POSITION_ERROR)
 				|| (Result == BUCKET_POSITION_ERROR) || (Result == HYD_OIL_TEMP_ERROR)
 				|| (Result == ENGINE_RPM_ERROR)	|| (Result == LEVEL_POSITION_ERROR)){
@@ -363,7 +369,7 @@ public class BucketDumpCalibration extends ParentFragment{
 					break;
 				case CAL2_SUCCESS:
 					ParentActivity._BucketDumpCalibrationPopup.setTextTitle("2nd Calibration ¿Ï·á");
-					ParentActivity._BucketDumpCalibrationPopup.setExitFlag(false);
+					ParentActivity._BucketDumpCalibrationPopup.setExitFlag(true);
 					ParentActivity.showBuckDumpCalibrationResult();
 					Log.d(TAG,"CAL2_SUCCESS");
 					break;
@@ -458,7 +464,7 @@ public class BucketDumpCalibration extends ParentFragment{
 					{
 						CancelEnableButtonTimer();
 						
-						ParentActivity.showCalibrationEHCUPopup();
+						ParentActivity.showBucketDumpInitCalibrationPopup();
 					}
 				}
 			});

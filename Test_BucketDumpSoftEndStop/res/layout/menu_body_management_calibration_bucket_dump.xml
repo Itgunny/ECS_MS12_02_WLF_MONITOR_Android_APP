@@ -24,7 +24,7 @@
             android:layout_alignParentTop="true"
             android:layout_marginLeft="20dp"
             android:gravity="center"
-            android:text="1차 보정"
+            android:text="@string/First_Calibration"
             android:textAppearance="?android:attr/textAppearanceLarge"
             android:textColor="@color/main_title_amber" />
         
@@ -88,7 +88,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_toRightOf="@+id/textView_menu_body_management_calibration_bucket_dump_main_order_1"
-            android:text="시작 버튼을 누르기전에\n- 버켓을 최대 범위로 롤백하고, 붐을 최대위치로\n  올립니다.\n- 엔진 모드가 P모드로 설정 되어있는지 확인 합니다."
+            android:text="시작 버튼을 누르기전에\n- 버켓을 최대 범위로 롤백하고, 붐을 최대위치로\n  올립니다.\n- 엔진 모드가 P모드로 설정 되어있는지 확인 합니다.\n- 작동유 온도를 40℃ 이상으로 올립니다."
             android:textSize="17px"
             android:textAppearance="?android:attr/textAppearanceLarge" />
 
@@ -112,7 +112,7 @@
             android:background="@drawable/_selector_menu_body_management_maint_detail_btn1"
             android:gravity="center"
             android:paddingTop="15dp"
-            android:text="시작"
+            android:text="@string/Start"
             android:textAppearance="?android:attr/textAppearanceLarge"
             android:textSize="30sp" />
 
@@ -345,7 +345,7 @@
 	                android:layout_height="match_parent"
 	                android:layout_marginLeft="10dp"
 	                android:gravity="center"
-	                android:text="확인"
+	                android:text="@string/OK"
 	                android:textAppearance="?android:attr/textAppearanceLarge"
 	                android:textSize="25sp"
 	                android:textStyle="bold" />
@@ -384,7 +384,7 @@
 	                android:layout_height="match_parent"
 	                android:layout_marginLeft="10dp"
 	                android:gravity="center"
-	                android:text="취소"
+	                android:text="@string/Cancel"
 	                android:textAppearance="?android:attr/textAppearanceLarge"
 	                android:textSize="25sp"
 	                android:textStyle="bold" />

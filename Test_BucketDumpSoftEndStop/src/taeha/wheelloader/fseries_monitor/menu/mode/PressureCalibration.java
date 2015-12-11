@@ -128,11 +128,13 @@ public class PressureCalibration extends ParentFragment{
 		CAN1Comm.Set_RequestBoomBucketAngleSensorCalibration_PGN61184_201(0);
 		CAN1Comm.Set_RequestAEB_PGN61184_201(0);
 		CAN1Comm.Set_RequestBrakePedalPositionSensorCalibration_PGN61184_201(0);
+		CAN1Comm.Set_RequestBucketDumpCalibration_PGN61184_201(0);
 		CAN1Comm.TxCANToMCU(201);
 		CAN1Comm.Set_RequestBoomPressureCalibration_PGN61184_201(3);
 		CAN1Comm.Set_RequestBoomBucketAngleSensorCalibration_PGN61184_201(15);
 		CAN1Comm.Set_RequestAEB_PGN61184_201(3);
 		CAN1Comm.Set_RequestBrakePedalPositionSensorCalibration_PGN61184_201(3);
+		CAN1Comm.Set_RequestBucketDumpCalibration_PGN61184_201(3);
 	}
 	////////////////////////////////////////////////
 	
@@ -327,11 +329,13 @@ public class PressureCalibration extends ParentFragment{
 				CAN1Comm.Set_RequestBoomBucketAngleSensorCalibration_PGN61184_201(0);
 				CAN1Comm.Set_RequestAEB_PGN61184_201(0);
 				CAN1Comm.Set_RequestBrakePedalPositionSensorCalibration_PGN61184_201(0);
+				CAN1Comm.Set_RequestBucketDumpCalibration_PGN61184_201(0);
 				CAN1Comm.TxCANToMCU(201);
 				CAN1Comm.Set_RequestBoomPressureCalibration_PGN61184_201(3);
 				CAN1Comm.Set_RequestBoomBucketAngleSensorCalibration_PGN61184_201(15);
 				CAN1Comm.Set_RequestAEB_PGN61184_201(3);
 				CAN1Comm.Set_RequestBrakePedalPositionSensorCalibration_PGN61184_201(3);
+				CAN1Comm.Set_RequestBucketDumpCalibration_PGN61184_201(3);
 				if(Order == 0){
 					StatusCNT = 115;
 				}else if(Order == 1){

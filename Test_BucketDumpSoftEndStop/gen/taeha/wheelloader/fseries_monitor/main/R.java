@@ -3811,6 +3811,7 @@ public final class R {
         public static final int Boom_Down=0x7f0800ec;
         public static final int Boom_Down_Response_Adjust=0x7f0801c9;
         public static final int Boom_Lever_Floating_Position_Adjust=0x7f0801c7;
+        public static final int Boom_Position=0x7f0801d9;
         public static final int Boom_Pressure_Calibration=0x7f0800ab;
         public static final int Boom_Up=0x7f0800eb;
         public static final int Boom_Up_Speed_Error=0x7f08017e;
@@ -3821,9 +3822,11 @@ public final class R {
         public static final int Bucket_Detent_Mode=0x7f080095;
         public static final int Bucket_Dump=0x7f0800ee;
         public static final int Bucket_Dump_Response_Adjust=0x7f0801ca;
+        public static final int Bucket_Dump_Speed_Calibration=0x7f0801d8;
         public static final int Bucket_Full_In_Error=0x7f080075;
         public static final int Bucket_Full_In_Error_Warning=0x7f08008a;
         public static final int Bucket_In=0x7f0800ed;
+        public static final int Bucket_Position=0x7f0801da;
         public static final int Bucket_Priority=0x7f0800d2;
         public static final int C=0x7f080007;
         public static final int CAM_1=0x7f0800e0;
@@ -4132,6 +4135,7 @@ public final class R {
         public static final int Smart_Key=0x7f080145;
         public static final int Smart_Terminal=0x7f0801ae;
         public static final int Soft_End_Stop=0x7f0800d5;
+        public static final int Soft_End_Stop_Calibration=0x7f0801d7;
         public static final int Software_Data_Date_Stamp=0x7f080128;
         public static final int Software_Update=0x7f080111;
         public static final int Software_Update_Warning=0x7f08019a;
