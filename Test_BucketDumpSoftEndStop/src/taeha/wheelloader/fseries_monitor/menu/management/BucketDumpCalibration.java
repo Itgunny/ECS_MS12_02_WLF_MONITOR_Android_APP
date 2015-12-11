@@ -243,7 +243,7 @@ public class BucketDumpCalibration extends ParentFragment{
 	}
 	/////////////////////////////////////////////////////////////////////
 	public void Order2Display(){
-		textViewTitle.setText("2차 보정");
+		textViewTitle.setText(getString(ParentActivity.getResources().getString(R.string.Second_Calibration), 354));
 		textViewDesText2.setText("시작 버튼을 누르고, 액셀 페달을 최대로 밟은 상태\n에서 버켓 레버를 최대로 조작해 덤프를 실시합니다.");
 		imgViewStep1.setImageResource(R.drawable.menu_management_boom_pressure_step_off);
 		imgViewStep2.setImageResource(R.drawable.menu_management_boom_pressure_step_on);
