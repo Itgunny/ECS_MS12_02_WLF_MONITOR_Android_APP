@@ -95,6 +95,12 @@ public class BucketDumpCalibration extends ParentFragment{
 		
 		ParentActivity.ScreenIndex = ParentActivity.SCREEN_STATE_MENU_MANAGEMENT_SERVICE_CALIBRATION_BUCKET_TOP;
 		ParentActivity._MenuBaseFragment._MenuInterTitleFragment.SetTitleText(ParentActivity.getString(string.Bucket_Dump_Speed_Calibration), 473);
+		CAN1Comm.Set_RequestBoomPressureCalibration_PGN61184_201(0);
+		CAN1Comm.Set_RequestBoomBucketAngleSensorCalibration_PGN61184_201(0);
+		CAN1Comm.Set_RequestAEB_PGN61184_201(0);
+		CAN1Comm.Set_RequestBrakePedalPositionSensorCalibration_PGN61184_201(0);
+		CAN1Comm.Set_RequestBucketDumpCalibration_PGN61184_201(0);
+		CAN1Comm.TxCANToMCU(201);
 		
 		StartEnableButtonTimer();
 		

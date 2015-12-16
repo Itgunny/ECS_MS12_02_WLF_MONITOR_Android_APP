@@ -67,7 +67,7 @@ static int makeTimer( char *name, timer_t *timerID, int sec, int msec )
 
 	return 0;
 }
-
+//TxRingBuff에 메모리 세팅을 한다.
 void SetDatatoRingBuffer(unsigned char* Buf)
 {
 	pthread_mutex_lock(&mutex_UART1_tx);
@@ -79,16 +79,18 @@ void SetDatatoRingBuffer(unsigned char* Buf)
 		TxRingBuffHead++;
 	pthread_mutex_unlock(&mutex_UART1_tx);
 }
-
+//CANData(Single)를 Buf에 저장한 후 값을 저장한다.
 void MakeCANDataSingle(unsigned char Priority, unsigned char PF, unsigned char PS, unsigned char SA, unsigned char *Data)
 {
-	unsigned char Buf[UART1_TXPACKET_SIZE];
+	unsigned char Buf[UART1_TXPACKET_SIZE]; //UART1_TXPACKET_SIZE 17
 	int i;
-	Buf[0] = SERIAL_RX_STX;
+	// ex) 18FF3247
+	Buf[0] = SERIAL_RX_STX; //0x02
 	Buf[1] = Priority;
 	Buf[2] = PF;
 	Buf[3] = PS;
 	Buf[4] = SA;
+	// data
 	for(i = 0; i < 8; i++)
 		Buf[i + 5] = Data[i];
 	Buf[UART1_TXPACKET_SIZE-1] = SERIAL_RX_ETX;
@@ -101,7 +103,7 @@ void MakeCANDataMultiBoradcast(unsigned char Priority, unsigned char PF, unsigne
 	unsigned char Buf[UART1_TXPACKET_SIZE];
 	int PacketNum;
 	int i;
-
+    // MultiPacket Data 부분 PacketNumber
 	if(Length % 7 == 0)
 	{
 		PacketNum = Length / 7;
@@ -113,26 +115,26 @@ void MakeCANDataMultiBoradcast(unsigned char Priority, unsigned char PF, unsigne
 
 
 	//////////////TP.CM_BAM///////////////////////
-	Buf[0] = SERIAL_RX_STX;
-	Buf[1] = Priority;
-	Buf[2] = 0xEC;
-	Buf[3] = DA;
-	Buf[4] = SA;
-	Buf[5] = 0x20;
-	Buf[6] = (Length & 0x00FF);
-	Buf[7] = (Length & 0xFF00) >> 8;
-	Buf[8] = PacketNum;
+	Buf[0] = SERIAL_RX_STX; // 0x02
+	Buf[1] = Priority; // 0x1C
+	Buf[2] = 0xEC; // 0xEC
+	Buf[3] = DA; // Destination Address
+	Buf[4] = SA; // Source Address
+	Buf[5] = 0x20; // Control Bit
+	Buf[6] = (Length & 0x00FF); // Length 1
+	Buf[7] = (Length & 0xFF00) >> 8; //Length 11
+	Buf[8] = PacketNum; //Packet Number
 	Buf[9] = 0xFF;
-	Buf[10] = PS;
-	Buf[11] = PF;
+	Buf[10] = PS;//PGN Specific
+	Buf[11] = PF;//PGN
 	Buf[12] = 0;
-	Buf[UART1_TXPACKET_SIZE-1] = SERIAL_RX_ETX;
+	Buf[UART1_TXPACKET_SIZE-1] = SERIAL_RX_ETX; // 0x03
 
 	SetDatatoRingBuffer(Buf);
 	//////////////////////////////////////////
 
 	////////////////TP.DT/////////////////////
-
+	// Make MultiDataPacket
 	for(i = 0; i < PacketNum; i++){
 		MakeMultiPacketData(Priority,PF,PS,DA,SA,&Data[i*7],Length,i);
 	}
@@ -143,15 +145,15 @@ void MakeCANDataMultiBoradcast(unsigned char Priority, unsigned char PF, unsigne
 
 void MakeMultiPacketData(unsigned char Priority, unsigned char PF, unsigned char PS, unsigned char DA, unsigned char SA, unsigned char* Data, unsigned int Length, unsigned int Index)
 {
-	unsigned char Buf[UART1_TXPACKET_SIZE];
+	unsigned char Buf[UART1_TXPACKET_SIZE]; // 14
 	memset((unsigned char*) &Buf[0], 0xFF,sizeof(Buf));
 	int i;
-	Buf[0] = SERIAL_RX_STX;
-	Buf[1] = Priority;
-	Buf[2] = 0xEB;
-	Buf[3] = DA;
-	Buf[4] = SA;
-	Buf[5] = Index+1;
+	Buf[0] = SERIAL_RX_STX; //0x02
+	Buf[1] = Priority; //0x1C
+	Buf[2] = 0xEB; //0xEB
+	Buf[3] = DA; //Destination Address
+	Buf[4] = SA; //Source Address
+	Buf[5] = Index+1; // Index == 0 이면 0번째 PacketNum -> Packet Data(7) 완료
 
 	for(i = 0; i < 7; i++){
 		if((Index * 7) + i >= Length + 1)
@@ -171,14 +173,16 @@ int SendDataFromRingBuffer()
 	int result = 0;
 
 	pthread_mutex_lock(&mutex_UART1_tx);
-
+	//Ring Buffer의 마지막이 아니면
 	if(TxRingBuffHead != TxRingBuffTail)
 	{
+		// 보내는 패킷을 메모리 할당을 하고
 		memcpy((unsigned char*)&Buf[0],&UART1_TxBuff[TxRingBuffTail][0],UART1_TXPACKET_SIZE);
+		// Tail이 RingBuffSize를 초과하면
 		if(TxRingBuffTail >= RINGBUFF_SIZE - 1)
-			TxRingBuffTail = 0;
+			TxRingBuffTail = 0; // TxRingBuffTail = 0;
 		else
-			TxRingBuffTail++;
+			TxRingBuffTail++; // 아니면 Tail 증가
 		result = write(fd_UART1, Buf, UART1_TXPACKET_SIZE);
 
 
@@ -187,7 +191,7 @@ int SendDataFromRingBuffer()
 	pthread_mutex_unlock(&mutex_UART1_tx);
 	return result;
 }
-
+// ClearToSend Packet
 void Send_CTS(unsigned char Priority,unsigned char DA, unsigned char SA, unsigned char* Data)
 {
 	unsigned char Buf[UART1_TXPACKET_SIZE];
@@ -230,7 +234,7 @@ void Send_ACK(unsigned char Priority, unsigned char DA, unsigned char SA, unsign
 
 	SetDatatoRingBuffer(Buf);
 }
-
+// RequestToSend Packet
 void Send_RTS(unsigned char Priority, unsigned char PF, unsigned char PS, unsigned char DA, unsigned char SA, unsigned short Size)
 {
 	unsigned char _TotalPacketNum;
@@ -286,7 +290,6 @@ void Send_ASPhoneNumber()
 		else
 			Length++;
 	}
-
 	MakeCANDataMultiBoradcast(0x1C,0xFF,0x91,0xFF,SA_MONITOR,&TX_AS_PHONE_NUMBER_65425,Length);
 }
 
@@ -316,7 +319,7 @@ void Send_CID()
 
 
 
-
+// Protocol 등록
 void InitNewProtoclValuable() {
 
 	memset((unsigned char*) &RX_DTC_INFORMATION_REQUEST_61184_11, 0xFF,
@@ -737,6 +740,7 @@ void InitNewProtoclValuable() {
 
 void UART1_SeperateData_NEWCAN2(int Priority, int PF, int PS, int SourceAddress, unsigned char* Data)
 {
+	// Source Address에 따라서 들어온 Data가 나뉜다. -> 기본으로 MCU한테 가게 되어있음.
 	switch (SourceAddress) {
 		case SA_SMK:
 			__android_log_print(ANDROID_LOG_INFO, "SA_SMK","Receive PF[%d] PS[%d]\n",PF,PS);
@@ -779,186 +783,165 @@ void UART1_SeperateData_Default(int Priority, int PF, int PS, unsigned char* Dat
 	CAN_RX_PACKET*		CANPacket;
 
 	CANPacket = (CAN_RX_PACKET*) Data;
-
+	// PDU 포맷에 따른 Data 판단
 	switch (PF) {
 		case 239:	// 0xEF00 61184
 			switch (Data[7]) {	// Message Type
-		case 11	:	memcpy((unsigned char*)&RX_DTC_INFORMATION_REQUEST_61184_11,&Data[7],8);	 break	;
-		case 12	:	memcpy((unsigned char*)&RX_MAINTENANCE_REQUSET_61184_12,&Data[7],8);	 break	;
-		case 13	:	memcpy((unsigned char*)&RX_MAINTENANCE_ITEM_LIST_61184_13,&Data[7],8);	 break	;
-		case 14	:	memcpy((unsigned char*)&RX_MAINTENANCE_INFORMATION_61184_14,&Data[7],8);	 break	;
-		case 15	:	memcpy((unsigned char*)&RX_MAINTENANCE_HISTORY_61184_15,&Data[7],8);		break	;
-		case 16	:	memcpy((unsigned char*)&RX_MAINTENANCE_ALARM_LAMP_ON_ITEM_LIST_61184_16,&Data[7],8);		break	;
-		case 21	:	memcpy((unsigned char*)&RX_HCE_ANTI_THEFT_ENCRYPTION_SEED_REQUEST_61184_21,&Data[7],8);	 break	;
-		case 22	:	memcpy((unsigned char*)&RX_HCE_ANTI_THEFT_ENCRYPTION_SEED_61184_22,&Data[7],8);nRecvSeedFlag = 1;	 break	;
-		case 23	:	memcpy((unsigned char*)&RX_HCE_ANTI_THEFT_REQUEST_61184_23,&Data[7],8);	 break	;
-		case 24	:	memcpy((unsigned char*)&RX_HCE_ANTI_THEFT_PASSWORD_VALID_STATUS_61184_24,&Data[7],8); nRecvPasswordResultFlag = 1;break	;
-		case 25	:	memcpy((unsigned char*)&RX_HCE_ANTI_THEFT_MODIFY_PASSWORD_STATUS_61184_25,&Data[7],8);	 nRecvPasswordChangeResultFlag = 1;break	;
-		case 33 :	memcpy((unsigned char*)&RX_AVERAGE_FUEL_RATE_HISTORY_61184_33,&Data[7],8); break;
-		case 61	:	memcpy((unsigned char*)&RX_COOLING_FAN_SETTING_61184_61,&Data[7],8);	 break	;
-		case 62	:	memcpy((unsigned char*)&RX_WEIGHING_SYSTEM_SETTING_REQUEST_61184_62,&Data[7],8);	 break	;
-		case 63	:	memcpy((unsigned char*)&RX_WEIGHT_OFFSET_61184_63,&Data[7],8);	 break	;
-		case 65	:	memcpy((unsigned char*)&RX_PARALLEL_LIFT_OPERATION_STATUS_61184_65,&Data[7],8);	 break	;
-		case 101	:	memcpy((unsigned char*)&RX_MACHINE_MODE_SETTING_61184_101,&Data[7],8);	 break	;
-		case 104	:	memcpy((unsigned char*)&RX_TRAVEL_MODE_SETTING_61184_104,&Data[7],8);	 break	;
-		case 105	:	memcpy((unsigned char*)&RX_TRAVEL_CONTROL_VALUE_SETTING_61184_105,&Data[7],8);	 break	;
-		case 106	:	memcpy((unsigned char*)&RX_TRAVEL_CONTROL_VALUE_61184_106,&Data[7],8);	 break	;
-		case 109	:	memcpy((unsigned char*)&RX_MACHINE_ACCESSORY_SETTING_REQUEST_61184_109,&Data[7],8);	 break	;
-		case 121	:	memcpy((unsigned char*)&RX_ENGINE_SHUTDOWN_MODE_SETTING_61184_121,&Data[7],8);	 break	;
-		case 122	:	memcpy((unsigned char*)&RX_ENGINE_SHUTDOWN_MODE_STATUS_61184_122,&Data[7],8);	 break	;
-		case 123	:	memcpy((unsigned char*)&RX_DETENT_MODE_SETTING_61184_123,&Data[7],8);	 break	;
-		case 124	:
-			memcpy((unsigned char*)&RX_DETENT_MODE_STATUS_61184_124,&Data[7],8);
-			SetKeypadLamp();
-			break	;
-		case 129	:	memcpy((unsigned char*)&RX_ELECTRIC_CIRCUIT_CONTROL_COMMAND_61184_129,&Data[7],8);	 break	;
-		case 151	:	memcpy((unsigned char*)&RX_AS_PHONE_NUMBER_SETTING_61184_151,&Data[7],8);	 break	;
-		case 201	:	memcpy((unsigned char*)&RX_WHEEL_LOADER_SENSOR_CALIBRATION_REQUEST_61184_201,&Data[7],8);	 break	;
-		case 202	:	memcpy((unsigned char*)&RX_WHEEL_LOADER_SENSOR_CALIBRATION_STATUS_61184_202,&Data[7],8);	break	;
-		case 203	:	memcpy((unsigned char*)&RX_WHEEL_LOADER_EHCU_SETTING_61184_203,&Data[7],8);	 break	;
-
+			case 11	:	memcpy((unsigned char*)&RX_DTC_INFORMATION_REQUEST_61184_11,&Data[7],8);	 break	;
+			case 12	:	memcpy((unsigned char*)&RX_MAINTENANCE_REQUSET_61184_12,&Data[7],8);	 break	;
+			case 13	:	memcpy((unsigned char*)&RX_MAINTENANCE_ITEM_LIST_61184_13,&Data[7],8);	 break	;
+			case 14	:	memcpy((unsigned char*)&RX_MAINTENANCE_INFORMATION_61184_14,&Data[7],8);	 break	;
+			case 15	:	memcpy((unsigned char*)&RX_MAINTENANCE_HISTORY_61184_15,&Data[7],8);		break	;
+			case 16	:	memcpy((unsigned char*)&RX_MAINTENANCE_ALARM_LAMP_ON_ITEM_LIST_61184_16,&Data[7],8);		break	;
+			case 21	:	memcpy((unsigned char*)&RX_HCE_ANTI_THEFT_ENCRYPTION_SEED_REQUEST_61184_21,&Data[7],8);	 break	;
+			case 22	:	memcpy((unsigned char*)&RX_HCE_ANTI_THEFT_ENCRYPTION_SEED_61184_22,&Data[7],8);nRecvSeedFlag = 1;	 break	;
+			case 23	:	memcpy((unsigned char*)&RX_HCE_ANTI_THEFT_REQUEST_61184_23,&Data[7],8);	 break	;
+			case 24	:	memcpy((unsigned char*)&RX_HCE_ANTI_THEFT_PASSWORD_VALID_STATUS_61184_24,&Data[7],8); nRecvPasswordResultFlag = 1;break	;
+			case 25	:	memcpy((unsigned char*)&RX_HCE_ANTI_THEFT_MODIFY_PASSWORD_STATUS_61184_25,&Data[7],8);	 nRecvPasswordChangeResultFlag = 1;break	;
+			case 33 :	memcpy((unsigned char*)&RX_AVERAGE_FUEL_RATE_HISTORY_61184_33,&Data[7],8); break;
+			case 61	:	memcpy((unsigned char*)&RX_COOLING_FAN_SETTING_61184_61,&Data[7],8);	 break	;
+			case 62	:	memcpy((unsigned char*)&RX_WEIGHING_SYSTEM_SETTING_REQUEST_61184_62,&Data[7],8);	 break	;
+			case 63	:	memcpy((unsigned char*)&RX_WEIGHT_OFFSET_61184_63,&Data[7],8);	 break	;
+			case 65	:	memcpy((unsigned char*)&RX_PARALLEL_LIFT_OPERATION_STATUS_61184_65,&Data[7],8);	 break	;
+			case 101	:	memcpy((unsigned char*)&RX_MACHINE_MODE_SETTING_61184_101,&Data[7],8);	 break	;
+			case 104	:	memcpy((unsigned char*)&RX_TRAVEL_MODE_SETTING_61184_104,&Data[7],8);	 break	;
+			case 105	:	memcpy((unsigned char*)&RX_TRAVEL_CONTROL_VALUE_SETTING_61184_105,&Data[7],8);	 break	;
+			case 106	:	memcpy((unsigned char*)&RX_TRAVEL_CONTROL_VALUE_61184_106,&Data[7],8);	 break	;
+			case 109	:	memcpy((unsigned char*)&RX_MACHINE_ACCESSORY_SETTING_REQUEST_61184_109,&Data[7],8);	 break	;
+			case 121	:	memcpy((unsigned char*)&RX_ENGINE_SHUTDOWN_MODE_SETTING_61184_121,&Data[7],8);	 break	;
+			case 122	:	memcpy((unsigned char*)&RX_ENGINE_SHUTDOWN_MODE_STATUS_61184_122,&Data[7],8);	 break	;
+			case 123	:	memcpy((unsigned char*)&RX_DETENT_MODE_SETTING_61184_123,&Data[7],8);	 break	;
+			case 124	:	memcpy((unsigned char*)&RX_DETENT_MODE_STATUS_61184_124,&Data[7],8);	SetKeypadLamp();	break	;
+			case 129	:	memcpy((unsigned char*)&RX_ELECTRIC_CIRCUIT_CONTROL_COMMAND_61184_129,&Data[7],8);	 break	;
+			case 151	:	memcpy((unsigned char*)&RX_AS_PHONE_NUMBER_SETTING_61184_151,&Data[7],8);	 break	;
+			case 201	:	memcpy((unsigned char*)&RX_WHEEL_LOADER_SENSOR_CALIBRATION_REQUEST_61184_201,&Data[7],8);	 break	;
+			case 202	:	memcpy((unsigned char*)&RX_WHEEL_LOADER_SENSOR_CALIBRATION_STATUS_61184_202,&Data[7],8);	break	;
+			case 203	:	memcpy((unsigned char*)&RX_WHEEL_LOADER_EHCU_SETTING_61184_203,&Data[7],8);	 break	;
 			////////////////////////////////////////////Old////////////////////////////////////////////////////////////////////
-		case 102	:	memcpy((unsigned char*) &rx_Machine_Travel_Setting,&Data[7], 8);	break;
+			case 102	:	memcpy((unsigned char*) &rx_Machine_Travel_Setting,&Data[7], 8);	break;
 			///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-		default:
-			break;
+			default:
+				break;
 			}
-			break;
+		break;
 		case 255:	// 0xFF00
 		default:
 			switch (PS) {
-		case 49 : memcpy((unsigned char*)&RX_RMCU_STATUS_65329,&Data[7],8); break;
-		case 50 :memcpy((unsigned char*)&RX_COMPONENT_IDENTIFICATION_65330,&Data[7],8); break;
-		case 64 :memcpy((unsigned char*)&RX_TRIP_TIME_INFORMATION_65344,&Data[7],8); break;
-		case 68 :memcpy((unsigned char*)&RX_MACHINE_SECURITY_STATUS_65348,&Data[7],8); gRecvESL = 1;break;
-		case 70 :
-			memcpy((unsigned char*)&RX_MACHINE_MODE_STATUS_65350,&Data[7],8);
-			SetKeypadLamp();
-			break;
-		case 74 :memcpy((unsigned char*)&RX_HYDRAULIC_PRESSURE4_65354,&Data[7],8); break;
-		case 76 :memcpy((unsigned char*)&RX_HYDRAULIC_PRESSURE6_65356,&Data[7],8); break;
-		case 77 :memcpy((unsigned char*)&RX_HYDRAULIC_PRESSURE7_65357,&Data[7],8); break;
-		case 80 :memcpy((unsigned char*)&RX_ELECTRIC_COMPONENT_SIGNAL_VOLTAGE_65360,&Data[7],8); break;
-		case 84 :memcpy((unsigned char*)&RX_RELAY_BUZZER_STATUS_65364,&Data[7],8); break;
-		case 85 :memcpy((unsigned char*)&RX_SOLENOID_STATUS_65365,&Data[7],8); break;
-		case 88 :memcpy((unsigned char*)&RX_ACCELERATOR_BRAKE_PEDAL_STATUS_65368,&Data[7],8); break;
-		case 89 :memcpy((unsigned char*)&RX_COOLING_FAN_STATUS_65369,&Data[7],8); break;
-		case 90 :memcpy((unsigned char*)&RX_ENGINE_STATUS2_65370,&Data[7],8); break;
-		case 91 :memcpy((unsigned char*)&RX_ENGINE_STATUS1_65371,&Data[7],8); break;
-		case 109 :memcpy((unsigned char*)&RX_VEHICLE_DISTANCE_65389,&Data[7],8); break;
-		case 110 :memcpy((unsigned char*) &RX_FUEL_INFORMATION_ECO_GAUGE_65390, &Data[7],8);	break;
-		case 115 :memcpy((unsigned char*)&RX_CYLINDER_ANGLE_STROKE1_65395,&Data[7],8); break;
-		case 116 :memcpy((unsigned char*)&RX_CYLINDER_ANGLE_STROKE2_65396,&Data[7],8); break;
-		case 145 :memcpy((unsigned char*)&RX_AS_PHONE_NUMBER_65425,&Data[7],8);break;
-		case 147 :memcpy((unsigned char*)&RX_WARNING_LAMP_65427,&Data[7],8); break;
-		case 148 :
-			memcpy((unsigned char*)&RX_INDICATOR_LAMP_65428,&Data[7],8);
-			SetKeypadLamp();
-			break;
-		case 151 :memcpy((unsigned char*)&RX_GAUGE_65431,&Data[7],8); break;
-		case 153 :memcpy((unsigned char*)&RX_HOURMETER_CLOCK_WIPER_65433,&Data[7],8); break;
-		case 154 :memcpy((unsigned char*)&RX_MACHINE_TRAVEL_STATUS_65434,&Data[7],8); break;
-		case 158 :
-			memcpy((unsigned char*)&RX_DTC_INFORMATION_TYPE1_65438,&Data[7],8);
-			SaveErrorCode_NEW_CAN2();
-			break;
-		case 169 :memcpy((unsigned char*)&RX_AXLE_STATUS_65449,&Data[7],8); break;
-		case 170 :
-			memcpy((unsigned char*)&RX_WEIGHING_SYSTEM_STATUS_65450,&Data[7],8);
-			SetKeypadLamp();
-			break;
-		case 171 :memcpy((unsigned char*)&RX_WEIGHING_SYSTEM_DATA1_65451,&Data[7],8); break;
-		case 172 :memcpy((unsigned char*)&RX_WEIGHING_SYSTEM_DATA2_65452,&Data[7],8); break;
-		case 235 :memcpy((unsigned char*)&RX_JOYSTICK_POSITION_STATUS_65515, &Data[7],8);	break;
-		case 247 :
-			memcpy((unsigned char*)&RX_ELECTRICAL_SWITCH_RELAY_OPERATION_STATUS_65527,&Data[7],8);
-			SetKeypadLamp();
-			break;
+				case 49 : memcpy((unsigned char*)&RX_RMCU_STATUS_65329,&Data[7],8); break;
+				case 50 :memcpy((unsigned char*)&RX_COMPONENT_IDENTIFICATION_65330,&Data[7],8); break;
+				case 64 :memcpy((unsigned char*)&RX_TRIP_TIME_INFORMATION_65344,&Data[7],8); break;
+				case 68 :memcpy((unsigned char*)&RX_MACHINE_SECURITY_STATUS_65348,&Data[7],8); gRecvESL = 1;break;
+				case 70 :memcpy((unsigned char*)&RX_MACHINE_MODE_STATUS_65350,&Data[7],8);SetKeypadLamp();break;
+				case 74 :memcpy((unsigned char*)&RX_HYDRAULIC_PRESSURE4_65354,&Data[7],8); break;
+				case 76 :memcpy((unsigned char*)&RX_HYDRAULIC_PRESSURE6_65356,&Data[7],8); break;
+				case 77 :memcpy((unsigned char*)&RX_HYDRAULIC_PRESSURE7_65357,&Data[7],8); break;
+				case 80 :memcpy((unsigned char*)&RX_ELECTRIC_COMPONENT_SIGNAL_VOLTAGE_65360,&Data[7],8); break;
+				case 84 :memcpy((unsigned char*)&RX_RELAY_BUZZER_STATUS_65364,&Data[7],8); break;
+				case 85 :memcpy((unsigned char*)&RX_SOLENOID_STATUS_65365,&Data[7],8); break;
+				case 88 :memcpy((unsigned char*)&RX_ACCELERATOR_BRAKE_PEDAL_STATUS_65368,&Data[7],8); break;
+				case 89 :memcpy((unsigned char*)&RX_COOLING_FAN_STATUS_65369,&Data[7],8); break;
+				case 90 :memcpy((unsigned char*)&RX_ENGINE_STATUS2_65370,&Data[7],8); break;
+				case 91 :memcpy((unsigned char*)&RX_ENGINE_STATUS1_65371,&Data[7],8); break;
+				case 109 :memcpy((unsigned char*)&RX_VEHICLE_DISTANCE_65389,&Data[7],8); break;
+				case 110 :memcpy((unsigned char*) &RX_FUEL_INFORMATION_ECO_GAUGE_65390, &Data[7],8);	break;
+				case 115 :memcpy((unsigned char*)&RX_CYLINDER_ANGLE_STROKE1_65395,&Data[7],8); break;
+				case 116 :memcpy((unsigned char*)&RX_CYLINDER_ANGLE_STROKE2_65396,&Data[7],8); break;
+				case 145 :memcpy((unsigned char*)&RX_AS_PHONE_NUMBER_65425,&Data[7],8);break;
+				case 147 :memcpy((unsigned char*)&RX_WARNING_LAMP_65427,&Data[7],8); break;
+				case 148 :memcpy((unsigned char*)&RX_INDICATOR_LAMP_65428,&Data[7],8);	SetKeypadLamp();break;
+				case 151 :memcpy((unsigned char*)&RX_GAUGE_65431,&Data[7],8); break;
+				case 153 :memcpy((unsigned char*)&RX_HOURMETER_CLOCK_WIPER_65433,&Data[7],8); break;
+				case 154 :memcpy((unsigned char*)&RX_MACHINE_TRAVEL_STATUS_65434,&Data[7],8); break;
+				case 158 :memcpy((unsigned char*)&RX_DTC_INFORMATION_TYPE1_65438,&Data[7],8); SaveErrorCode_NEW_CAN2();	break;
+				case 169 :memcpy((unsigned char*)&RX_AXLE_STATUS_65449,&Data[7],8); break;
+				case 170 :memcpy((unsigned char*)&RX_WEIGHING_SYSTEM_STATUS_65450,&Data[7],8); SetKeypadLamp();	break;
+				case 171 :memcpy((unsigned char*)&RX_WEIGHING_SYSTEM_DATA1_65451,&Data[7],8); break;
+				case 172 :memcpy((unsigned char*)&RX_WEIGHING_SYSTEM_DATA2_65452,&Data[7],8); break;
+				case 235 :memcpy((unsigned char*)&RX_JOYSTICK_POSITION_STATUS_65515, &Data[7],8);	break;
+				case 247 :memcpy((unsigned char*)&RX_ELECTRICAL_SWITCH_RELAY_OPERATION_STATUS_65527,&Data[7],8);SetKeypadLamp();break;
+				////////////////////////////////////////////Old////////////////////////////////////////////////////////////////////
+				//case	224	:	memcpy((unsigned char*) &rx_vehicle_distance, &Data[7], 8);	break;	// 109
+				//case	49	:	memcpy((unsigned char*) &rx_RMCU_Status, &Data[7], 8);	break;
+				//case	68	:	memcpy((unsigned char*) &rx_mach_security_stat_s, &Data[7], 8);	gRecvESL = 1; break;
+				//case	70	:	memcpy((unsigned char*) &rx_Machine_Mode_Status, &Data[7], 8);	break;
+				//case	88	:	memcpy((unsigned char*) &rx_AccBrakepedalStatus, &Data[7], 8);	break;
+				//case	89	:	memcpy((unsigned char*) &rx_Cooling_Fan_Status, &Data[7], 8);	break;
 
-			////////////////////////////////////////////Old////////////////////////////////////////////////////////////////////
-			//case	224	:	memcpy((unsigned char*) &rx_vehicle_distance, &Data[7], 8);	break;	// 109
-			//case	49	:	memcpy((unsigned char*) &rx_RMCU_Status, &Data[7], 8);	break;
-			//case	68	:	memcpy((unsigned char*) &rx_mach_security_stat_s, &Data[7], 8);	gRecvESL = 1; break;
-			//case	70	:	memcpy((unsigned char*) &rx_Machine_Mode_Status, &Data[7], 8);	break;
-			//case	88	:	memcpy((unsigned char*) &rx_AccBrakepedalStatus, &Data[7], 8);	break;
-			//case	89	:	memcpy((unsigned char*) &rx_Cooling_Fan_Status, &Data[7], 8);	break;
-
-			//case	115	:	memcpy((unsigned char*) &rx_cylinder_angle, &Data[7], 8);	break;
-			//case	141	:	memcpy((unsigned char*) &rx_maintenance_info, &Data[7], 8);	break;
-			//case	147	:	memcpy((unsigned char*) &rx_Warning_Lamp, &Data[7], 8);	break;
-			//case	148	:	memcpy((unsigned char*) &rx_indicator_lamp, &Data[7], 8);	break;
-			//case	150	:	memcpy((unsigned char*) &rx_machine_version, &Data[7], 8);	break;
-			//case	151	:	memcpy((unsigned char*) &rx_gauge, &Data[7], 8);	break;
-			//case	153	: 	memcpy((unsigned char*) &rx_hr_wiper, &Data[7], 8);	break;
-			//case	154	: 	memcpy((unsigned char*) &rx_vehi_travel, &Data[7], 8);	break;
-			//case	155	:	memcpy((unsigned char*) &rx_vehicle_status1, &Data[7], 8);	break;
-			//case	156	: 	memcpy((unsigned char*) &rx_vehicle_status2, &Data[7], 8);	break;
-			//case	158	: 	memcpy(&gRecvMulti[0], &Data[7], 8);
-			//				memcpy((unsigned char*) &rx_error_code, &gRecvMulti, 21);
-			//				SaveErrorCode_NEW_CAN2();	break;
-		case	159	:	memcpy((unsigned char*) &rx_aeb_info, &Data[7], 8);	break;		// SPN 539 -> 562,563 Check
-			//case	165	:	memcpy((unsigned char*) &rx_cluster_version, &Data[7], 8);	break;
-			//case	170	:	memcpy((unsigned char*) &rx_weighing_system_status, &Data[7],8);	break;
-			//case	171	:	memcpy((unsigned char*) &rx_weighing_system_data1, &Data[7],8);	break;
-			//case	172	:	memcpy((unsigned char*) &rx_weighing_system_data2, &Data[7],8);	break;
-			//case	173	:	memcpy((unsigned char*) &rx_weighing_system_data3, &Data[7],8);	break;
-		case	174	:	memcpy((unsigned char*) &rx_Weihing_System_Mode, &Data[7], 8);	break;
-		case	175	:	memcpy((unsigned char*) &rx_Weighing_System_Error, &Data[7],8);	break;
-		case	250	:	memcpy((unsigned char*) &gRecvSingle_250, &Data[7], 8);	gRecvPassWord = 1;	break;
-			//case	145	:	if (flag_comm.recv_as_phone_num_once != 1) {
-			//				memcpy((unsigned char*) &rx_single_phone_num, &Data[7], 8);
-			//				flag_comm.recv_as_phone_num_once = 1;
-			//				flag_comm.recv_as_phone_num = 2;
-			//				}	break;
-			//case	236	:	memcpy((unsigned char*) &rx_Machine_Setting_Status, &Data[7],8);	break;
-		case	252	:	if (((Data[9] << 8) | Data[8]) == 65425) {
-			if (Data[7] == 0)	// ACK
-				rx_hcepgn_ack.ControlByte = 0;	// Ack
-			else
-				rx_hcepgn_ack.ControlByte = 0xff;
-						}
-						break;
-						//case	229	:	memcpy((unsigned char*) &rx_scu_error, &Data[7], 8);	RecvScuError = 1;	break;
-		case	31	:	memcpy((unsigned char*) &rx_tcu_err, &Data[7], 8);	break;
-			//case	235	:	memcpy((unsigned char*) &rx_Joystick_Position_Status, &Data[7],8);	break;
-			//case	247	:	memcpy((unsigned char*) &rx_Realy_Control, &Data[7], 8);	break;
-			///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-		default:
-			break;
-			}
-
-			break;
-			///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-		case 236:	// 0xEC Multi Packet TP.CM_BAM
-			__android_log_print(ANDROID_LOG_INFO, "NATIVE","Multi TP.CM_BAM");
-			if(CANPacket->RX_PS == 0xFF || CANPacket->RX_PS == 0x28){
-				if(Data[7] == 0x20){				// Control Byte (Normal)
-					nPF = Data[13];
-					nPS = Data[12];
-					nTotalPacketNum = Data[10];
-				}else if(Data[7] == 0x10){			// Control Byte (RTS)
-					Send_CTS(0x1C,SA_MCU,SA_MONITOR,&CANPacket->RX_DATA[0]);
-					memcpy(&MultiPacket_ACK_MCU[0],(unsigned char*) &UART1_Rx_Data->RX_DATA[0], 8);
-					bAckFlag_MCU = 1;
-					nPF = Data[13];
-					nPS = Data[12];
-					nTotalPacketNum = Data[10];
-					__android_log_print(ANDROID_LOG_INFO, "NATIVE","RTS!!!!");
-				}else if(Data[7] == 0x11){			// Control Byte (CTS)
-					nCTSFlag_MCU = 1;
-					__android_log_print(ANDROID_LOG_INFO, "NATIVE","CTS!!!!");
+				//case	115	:	memcpy((unsigned char*) &rx_cylinder_angle, &Data[7], 8);	break;
+				//case	141	:	memcpy((unsigned char*) &rx_maintenance_info, &Data[7], 8);	break;
+				//case	147	:	memcpy((unsigned char*) &rx_Warning_Lamp, &Data[7], 8);	break;
+				//case	148	:	memcpy((unsigned char*) &rx_indicator_lamp, &Data[7], 8);	break;
+				//case	150	:	memcpy((unsigned char*) &rx_machine_version, &Data[7], 8);	break;
+				//case	151	:	memcpy((unsigned char*) &rx_gauge, &Data[7], 8);	break;
+				//case	153	: 	memcpy((unsigned char*) &rx_hr_wiper, &Data[7], 8);	break;
+				//case	154	: 	memcpy((unsigned char*) &rx_vehi_travel, &Data[7], 8);	break;
+				//case	155	:	memcpy((unsigned char*) &rx_vehicle_status1, &Data[7], 8);	break;
+				//case	156	: 	memcpy((unsigned char*) &rx_vehicle_status2, &Data[7], 8);	break;
+				//case	158	: 	memcpy(&gRecvMulti[0], &Data[7], 8);
+				//				memcpy((unsigned char*) &rx_error_code, &gRecvMulti, 21);
+				//				SaveErrorCode_NEW_CAN2();	break;
+				case	159	:	memcpy((unsigned char*) &rx_aeb_info, &Data[7], 8);	break;		// SPN 539 -> 562,563 Check
+					//case	165	:	memcpy((unsigned char*) &rx_cluster_version, &Data[7], 8);	break;
+					//case	170	:	memcpy((unsigned char*) &rx_weighing_system_status, &Data[7],8);	break;
+					//case	171	:	memcpy((unsigned char*) &rx_weighing_system_data1, &Data[7],8);	break;
+					//case	172	:	memcpy((unsigned char*) &rx_weighing_system_data2, &Data[7],8);	break;
+					//case	173	:	memcpy((unsigned char*) &rx_weighing_system_data3, &Data[7],8);	break;
+				case	174	:	memcpy((unsigned char*) &rx_Weihing_System_Mode, &Data[7], 8);	break;
+				case	175	:	memcpy((unsigned char*) &rx_Weighing_System_Error, &Data[7],8);	break;
+				case	250	:	memcpy((unsigned char*) &gRecvSingle_250, &Data[7], 8);	gRecvPassWord = 1;	break;
+					//case	145	:	if (flag_comm.recv_as_phone_num_once != 1) {
+					//				memcpy((unsigned char*) &rx_single_phone_num, &Data[7], 8);
+					//				flag_comm.recv_as_phone_num_once = 1;
+					//				flag_comm.recv_as_phone_num = 2;
+					//				}	break;
+					//case	236	:	memcpy((unsigned char*) &rx_Machine_Setting_Status, &Data[7],8);	break;
+				case	252	:	if (((Data[9] << 8) | Data[8]) == 65425) {
+					if (Data[7] == 0)	// ACK
+						rx_hcepgn_ack.ControlByte = 0;	// Ack
+					else
+						rx_hcepgn_ack.ControlByte = 0xff;
+								}
+								break;
+								//case	229	:	memcpy((unsigned char*) &rx_scu_error, &Data[7], 8);	RecvScuError = 1;	break;
+				case	31	:	memcpy((unsigned char*) &rx_tcu_err, &Data[7], 8);	break;
+					//case	235	:	memcpy((unsigned char*) &rx_Joystick_Position_Status, &Data[7],8);	break;
+					//case	247	:	memcpy((unsigned char*) &rx_Realy_Control, &Data[7], 8);	break;
+					///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+				default:
+					break;
 				}
-			}
+			break;
+			///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+			case 236:	// 0xEC Multi Packet TP.CM_BAM
+				__android_log_print(ANDROID_LOG_INFO, "NATIVE","Multi TP.CM_BAM");
+				if(CANPacket->RX_PS == 0xFF || CANPacket->RX_PS == 0x28){
+					if(Data[7] == 0x20){				// Control Byte (Normal)
+						nPF = Data[13];
+						nPS = Data[12];
+						nTotalPacketNum = Data[10];
+					}else if(Data[7] == 0x10){			// Control Byte (RTS)
+						Send_CTS(0x1C,SA_MCU,SA_MONITOR,&CANPacket->RX_DATA[0]);
+						memcpy(&MultiPacket_ACK_MCU[0],(unsigned char*) &UART1_Rx_Data->RX_DATA[0], 8);
+						bAckFlag_MCU = 1;
+						nPF = Data[13];
+						nPS = Data[12];
+						nTotalPacketNum = Data[10];
+						__android_log_print(ANDROID_LOG_INFO, "NATIVE","RTS!!!!");
+					}else if(Data[7] == 0x11){			// Control Byte (CTS)
+						nCTSFlag_MCU = 1;
+						__android_log_print(ANDROID_LOG_INFO, "NATIVE","CTS!!!!");
+					}
+				}
 
 
-			break;
-		case 235:	// 0xEB	Multi Packet TP.DT
-			if(nPF != 0 || nPS != 0)
-			{
-				UART1_SeperateData_Default_Multi(Priority,nPF,nPS,Data);
-			}
-			break;
+				break;
+			case 235:	// 0xEB	Multi Packet TP.DT
+				if(nPF != 0 || nPS != 0)
+				{
+					UART1_SeperateData_Default_Multi(Priority,nPF,nPS,Data);
+				}
+				break;
 	}
 }
 
