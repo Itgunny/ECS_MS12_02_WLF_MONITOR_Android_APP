@@ -764,7 +764,7 @@ void UART1_SeperateData_NEWCAN2(int Priority, int PF, int PS, int SourceAddress,
 			UART1_SeperateData_CID(Priority,PF,PS,Data);
 			break;
 		case SA_ACU:
-			UART1_SeperateData_ACU(Priority,PF,PS,Data);
+			//UART1_SeperateData_ACU(Priority,PF,PS,Data);
 			break;
 		case SA_BKCU:
 			UART1_SeperateData_BKCU(Priority,PF,PS,Data);

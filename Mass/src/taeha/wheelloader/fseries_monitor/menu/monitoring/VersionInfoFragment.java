@@ -504,9 +504,9 @@ public class VersionInfoFragment extends ParentFragment{
 	
 	/////////////////////////////////////////////////////////////////////
 	public void ModelDisplay(byte[] _data){
-		//if(ParentActivity.MachineSerialNumber != 0xffffff)
-		//	textViewModel.setText(ParentActivity.GetModelNameString(_data)+" # "+ParentActivity.MachineSerialNumber);
-		//else
+		if(ParentActivity.MachineSerialNumber != 0xffffff)
+			textViewModel.setText(ParentActivity.GetModelNameString(_data)+" # "+ParentActivity.MachineSerialNumber);
+		else
 			textViewModel.setText(ParentActivity.GetModelNameString(_data));
 	}
 	public void MonitorVersionDisplay(int _versionhigh, int _versionlow, int _subhigh, int _sublow){

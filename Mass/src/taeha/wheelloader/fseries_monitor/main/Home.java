@@ -77,9 +77,9 @@ public class Home extends Activity {
 	//Version/////////////////////////////////////////////////////////////////////////////
 	//
 	public static final int VERSION_HIGH 		= 2;
-	public static final int VERSION_LOW 		= 2;
+	public static final int VERSION_LOW 		= 3;
 	public static final int VERSION_SUB_HIGH 	= 0;
-	public static final int VERSION_SUB_LOW 	= 3;
+	public static final int VERSION_SUB_LOW 	= 0;
 	public static final int VERSION_TAEHA		= 0;
 	////1.0.2.3
 	// UI B 안 최초 적용 2014.12.10
@@ -751,6 +751,9 @@ public class Home extends Activity {
 	// 1. MainB안 Non TC Lock Up에서 Hourmeter 깜박거리는 현상 개선	
 	////v2.2.0.3
 	// 1. 에어컨 실차 테스트용
+	////v2.2.0.4 15.12.21(BucketDump 속도 보정) : svn 참조
+	////v2.3.0.0
+	// 1. RMCU 호기수 입력 기능 적용.
 	//////////////////////////////////////////////////////////////////////////////////////
 	// TAG
 	private  final String TAG = "Home";
@@ -1421,8 +1424,8 @@ public class Home extends Activity {
 	
 	// Model
 	public CheckModel _CheckModel;
-	//public int MachineSerialNumber;
-	//public int tempMachineSerialNumber;
+	public int MachineSerialNumber;
+	public int tempMachineSerialNumber;
 	
 	// Time
 	public int Year;
@@ -1624,7 +1627,7 @@ public class Home extends Activity {
 		
 		UserIndex = 1;		// ++, 150212 bwk
 		
-		//tempMachineSerialNumber = 0xffffff;
+		tempMachineSerialNumber = 0xffffff;
 		
 		// ++, 150211 bwk
 //		HighrpmCount = 0;
@@ -1914,31 +1917,36 @@ public class Home extends Activity {
 		CAN1Comm.TxCMDToMCU(CAN1CommManager.CMD_CAM, SelectCameraNum-1);
 	}
 	// --, 150324 bwk
-//	public void SetMachineSerialNumber()
-//	{
-//		SaveMachineSerialNumber();
-//		showMainScreen();
-//		StartSeatBeltTimer();
-//	}
-//	public void SaveMachineSerialNumber(){
-//		String str= Integer.toString(MachineSerialNumber);
-//		int tempNumber = Integer.parseInt(str,16);
-//		
-//		byte[] Temp = new byte[3];
-//		Temp[0] = (byte)( (tempNumber >>> 16) & 0xFF );
-//		Temp[1] = (byte)( (tempNumber >>> 8) & 0xFF );
-//		Temp[2] = (byte)( (tempNumber >>> 0) & 0xFF );
-//		
-//		CAN1Comm.Set_MachineSerialNumber2_962_PGN65327(Temp);
-//		CAN1Comm.TxCANToMCU(47);
-//
-//		SharedPreferences SharePref = getSharedPreferences("Home", 0);
-//		SharedPreferences.Editor edit = SharePref.edit();
-//		edit.putInt("MachineSerialNumber", MachineSerialNumber);
-//		edit.commit();
-//		
-//		Log.d(TAG,"SaveMachineSerialNumber");
-//	}
+	public void SetMachineSerialNumber()
+	{
+		SaveMachineSerialNumber();
+		showMainScreen();
+		StartSeatBeltTimer();
+	}
+	public void SaveMachineSerialNumber(){
+		String str= Integer.toString(MachineSerialNumber);
+		int tempNumber = Integer.parseInt(str,16);
+		byte[] Temp = new byte[3];
+		if(MachineSerialNumber == 0xffffff){
+			Temp[0] = (byte) 0xff;
+			Temp[1] = (byte) 0xff;
+			Temp[2] = (byte) 0xff;
+		}else{
+			Temp[0] = (byte)( (tempNumber >>> 16) & 0xFF );
+			Temp[1] = (byte)( (tempNumber >>> 8) & 0xFF );
+			Temp[2] = (byte)( (tempNumber >>> 0) & 0xFF );
+		}
+		
+		CAN1Comm.Set_MachineSerialNumber2_962_PGN65327(Temp);
+		CAN1Comm.TxCANToMCU(47);
+
+		SharedPreferences SharePref = getSharedPreferences("Home", 0);
+		SharedPreferences.Editor edit = SharePref.edit();
+		edit.putInt("MachineSerialNumber", MachineSerialNumber);
+		edit.commit();
+		
+		Log.d(TAG,"SaveMachineSerialNumber");
+	}
 	public void SaveASPhoneNumber(){
 		byte[] ASNum;
 		int Index = 0;
@@ -1998,8 +2006,8 @@ public class Home extends Activity {
 		Log.d(TAG,"SaveCID");
 		Log.d(TAG,"length : " + Integer.toString(_componentbasicinformation.length));
 		
-//		MachineSerialNumber = 0xffffff;
-//		SaveMachineSerialNumber();
+		MachineSerialNumber = 0xffffff;
+		SaveMachineSerialNumber();
 	}
 	public void CheckCID(){
 		Log.d(TAG,"CheckCID");
@@ -2192,7 +2200,7 @@ public class Home extends Activity {
 		
 		AttachmentStatus = SharePref.getInt("AttachmentStatus", CAN1CommManager.DATA_STATE_KEY_QUICKCOUPLER_OFF);
 		
-//		MachineSerialNumber = SharePref.getInt("MachineSerialNumber", 0xFFFFFF);
+		MachineSerialNumber = SharePref.getInt("MachineSerialNumber", 0xFFFFFF);
 		Log.d(TAG,"LoadPref");
 	}
 	
@@ -2518,16 +2526,16 @@ public class Home extends Activity {
 		}
 	}
 	/////////////////////////////////////////////////////
-//	public void showInputMachineSerial(){
-//		if(MachineSerialNumber == 0xffffff)
-//		{
-//			_MainChangeAnimation.StartChangeAnimation(_InputMachineSerialFragment);
-//		}
-//		else
-//		{
-//			SetMachineSerialNumber();
-//		}
-//	}
+	public void showInputMachineSerial(){
+		if(MachineSerialNumber == 0xffffff)
+		{
+			_MainChangeAnimation.StartChangeAnimation(_InputMachineSerialFragment);
+		}
+		else
+		{
+			SetMachineSerialNumber();
+		}
+	}
 	// ++, 150309 bwk
 	public void showMainScreen(){
 		if(DisplayType == DISPLAY_TYPE_A){

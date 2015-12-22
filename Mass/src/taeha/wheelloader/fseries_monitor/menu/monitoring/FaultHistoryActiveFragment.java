@@ -417,16 +417,32 @@ public class FaultHistoryActiveFragment extends ParentFragment{
 		Err_ACU[3] = CAN1Comm.Get_Incabtemperaturesensorshort_PGN65373();
 		Err_ACU[4] = CAN1Comm.Get_Evaptemperaturesensoropen_PGN65373();
 		Err_ACU[5] = CAN1Comm.Get_Evaptemperaturesensorshort_PGN65373();
-		Err_ACU[6] = CAN1Comm.Get_Mode1actuatoropenshort_PGN65373();
-		Err_ACU[7] = CAN1Comm.Get_Mode1actuatordrivecircuitmalfunction_PGN65373();
-		Err_ACU[8] = CAN1Comm.Get_Intakeactuatoropenshort_PGN65373();
-		Err_ACU[9] = CAN1Comm.Get_Intakeactuatordrivecircuitmalfunction_PGN65373();
-		Err_ACU[10] = CAN1Comm.Get_Temperatureactuatoropenshort_PGN65373();
-		Err_ACU[11] = CAN1Comm.Get_Temperatureactuatordrivecircuitmalfunction_PGN65373();
-		Err_ACU[12] = CAN1Comm.Get_Ducttemperaturesensoropen_PGN65373();
-		Err_ACU[13] = CAN1Comm.Get_Ducttemperaturesensorshort_PGN65373();
-		Err_ACU[14] = CAN1Comm.Get_WaterValveSensorError_PGN65373();
-		Err_ACU[15] = CAN1Comm.Get_GPSCircuitError_PGN65373();
+		
+		//reserved
+		Err_ACU[6] = 0;
+		Err_ACU[7] = 0;
+		/*
+		Err_ACU[8] = CAN1Comm.Get_Mode1actuatoropenshort_PGN65373();
+		Err_ACU[9] = CAN1Comm.Get_Mode1actuatordrivecircuitmalfunction_PGN65373();
+		Err_ACU[10] = CAN1Comm.Get_Intakeactuatoropenshort_PGN65373();
+		Err_ACU[11] = CAN1Comm.Get_Intakeactuatordrivecircuitmalfunction_PGN65373();
+		Err_ACU[12] = CAN1Comm.Get_Temperatureactuatoropenshort_PGN65373();
+		Err_ACU[13] = CAN1Comm.Get_Temperatureactuatordrivecircuitmalfunction_PGN65373();
+		*/
+		Err_ACU[8] = 0;
+		Err_ACU[9] = 0;
+		Err_ACU[10] = 0;
+		Err_ACU[11] = 0;
+		Err_ACU[12] = 0;
+		Err_ACU[13] = 0;
+		//reserved
+		Err_ACU[14] = CAN1Comm.Get_Ducttemperaturesensoropen_PGN65373();;
+		Err_ACU[15] = CAN1Comm.Get_Ducttemperaturesensorshort_PGN65373();
+		
+		Err_ACU[16] = CAN1Comm.Get_WaterValveSensorError_PGN65373();
+		Err_ACU[17] = CAN1Comm.Get_GPSCircuitError_PGN65373();
+		Err_ACU[18] = 0;
+		Err_ACU[19] = 0;
 		
 		DTCTotalACU = CheckACUDTCNumber();
 		
@@ -605,18 +621,18 @@ public class FaultHistoryActiveFragment extends ParentFragment{
 	}
 	public void SetACUErrList(){
 		adapter.clearItem();
-		for(int i = 0; i < 16; i++){
+		for(int i = 0; i < 20; i++){
 			Err_ACU_List[i] = 0;
 		}
 		int Count = 0;
-		for(int i = 0; i < 16; i++){
+		for(int i = 0; i < 20; i++){
 			if(Err_ACU[i] == 1){
 				if(CursurIndex == 7 && CursurDetailIndex == Count)
 					adapter.addItem(new IconTextItemFault(null,ParentActivity.getResources().getDrawable(R.drawable.menu_information_fault_down_btn_selected), 
-							"No : " + Integer.toString(i+1), "", ""));
+							String.format("F%02d", i+1), "", ""));
 				else
 					adapter.addItem(new IconTextItemFault(null,ParentActivity.getResources().getDrawable(R.drawable.menu_information_fault_down_btn), 
-							"No : " + Integer.toString(i+1), "", ""));
+							String.format("F%02d", i+1), "", ""));
 				Err_ACU_List[Count++] = i;
 			}
 		}
@@ -1052,7 +1068,10 @@ public class FaultHistoryActiveFragment extends ParentFragment{
 			_DTCTotal++;
 		if(Err_ACU[17] == 1)
 			_DTCTotal++;
-	
+		if(Err_ACU[18] == 1)
+			_DTCTotal++;
+		if(Err_ACU[19] == 1)
+			_DTCTotal++;
 		return _DTCTotal;
 	
 	}
@@ -1791,6 +1810,8 @@ public class FaultHistoryActiveFragment extends ParentFragment{
 		"In-cab temperature sensor short",
 		"Evap. temperature sensor open",
 		"Evap. temperature sensor short",
+		"reserved",
+		"reserved",
 		"Mode 1 actuator open/short",
 		"Mode 1 actuator drive circuit malfunction",
 		"Intake actuator open/short",
@@ -1800,7 +1821,9 @@ public class FaultHistoryActiveFragment extends ParentFragment{
 		"Duct temperature sensor open",
 		"Duct temperature sensor short",
 		"Water Valve Sensor Error",
-		"G.P.S Circuit Error"
+		"G.P.S Circuit Error",
+		"reserved",
+		"reserved"
 	};
 	
 	// ++, 150202 bwk : 150128 HHI ÀÓÇõÁØ ¿äÃ»

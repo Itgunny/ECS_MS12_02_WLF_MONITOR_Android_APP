@@ -111,8 +111,8 @@ public class FaultHistoryFragment extends MenuBodyList_ParentFragment{
 			return;
 		else
 			ParentActivity.StartAnimationRunningTimer();
-		ParentActivity._MenuBaseFragment.showLoggedFaultPasswordAnimation();
-	//	ParentActivity._MenuBaseFragment.showBodyLoggedFaultAnimation();
+	//	ParentActivity._MenuBaseFragment.showLoggedFaultPasswordAnimation();
+		ParentActivity._MenuBaseFragment.showBodyLoggedFaultAnimation();
 		CursurIndex = 2;
 		CursurDisplay(CursurIndex);
 	}
