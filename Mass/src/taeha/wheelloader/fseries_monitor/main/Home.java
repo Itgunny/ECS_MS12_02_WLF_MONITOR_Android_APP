@@ -754,6 +754,8 @@ public class Home extends Activity {
 	////v2.2.0.4 15.12.21(BucketDump 속도 보정) : svn 참조
 	////v2.3.0.0
 	// 1. RMCU 호기수 입력 기능 적용.
+	// 2. ACU 기능 삭제 및 코드 표시 변경.
+	// 3. Soft End Stop Bucket Dump 오류 표시 수정.(다국어 파일 없을시)
 	//////////////////////////////////////////////////////////////////////////////////////
 	// TAG
 	private  final String TAG = "Home";
