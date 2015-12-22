@@ -751,6 +751,8 @@ public class Home extends Activity {
 	// 1. Bucket Dump Speed Calibration 추가 완료
 	// 2. Init 작업 완료.
 	// 3. 다국어 작업 내용 미완.
+	////v2.2.0.4
+	// 1. Bucket 덤프 속도 보정 추가.
 	//////////////////////////////////////////////////////////////////////////////////////
 	// TAG
 	private  final String TAG = "Home";

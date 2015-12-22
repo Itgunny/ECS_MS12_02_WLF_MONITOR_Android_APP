@@ -957,7 +957,6 @@ void UART1_SeperateData_Default_Multi(int Priority, int PF, int PS, unsigned cha
 			}
 			switch (nMultiPacketMessageType) {	// Message Type
 		case 13:
-
 			if (Data[7] == nTotalPacketNum) {
 				memcpy((unsigned char*) &RX_MAINTENANCE_ITEM_LIST_61184_13, &gRecvMulti,sizeof(RX_MAINTENANCE_ITEM_LIST_61184_13));
 				nPF = nPS = nTotalPacketNum = nMultiPacketMessageType = 0;
@@ -1007,8 +1006,6 @@ void UART1_SeperateData_Default_Multi(int Priority, int PF, int PS, unsigned cha
 			break;
 			/////////////////////////////////////////////////////////Old///////////////////////////////////////
 		case 228:	// 0xEFE4 61412
-
-
 			if (Data[7] == nTotalPacketNum) {
 				memcpy((unsigned char*) &rx_ehcu_status, &gRecvMulti,sizeof(rx_ehcu_status));
 				nPF = nPS = nTotalPacketNum = nMultiPacketMessageType = 0;
@@ -2363,7 +2360,6 @@ void *Thread_Read_UART1(void *data)
 		}
 		else if (UART1ReadFlag == 0)
 		{
-
 			switch (dwUART1ReadCnt) {
 				case 0:
 					if (UART1_SingleBuff == SERIAL_RX_STX)
@@ -3071,27 +3067,27 @@ void SetKeypadLamp()
 	memset(&NewLamp[0], 0xFF, 8);
 	memcpy(&OldLamp[0],(unsigned char*)&TX_CMD_Lamp,8);
 
-
+	//Main Light
 	if(RX_ELECTRICAL_SWITCH_RELAY_OPERATION_STATUS_65527.IlluminationOperationStatus_3438 == 0)
 		TX_CMD_Lamp.MainLight1 = 0;
 	else if(RX_ELECTRICAL_SWITCH_RELAY_OPERATION_STATUS_65527.IlluminationOperationStatus_3438 == 1)
 		TX_CMD_Lamp.MainLight1 = 1;
-
+	//Head Lamp
 	if(RX_ELECTRICAL_SWITCH_RELAY_OPERATION_STATUS_65527.HeadLampOperationStatus_3436 == 0)
 		TX_CMD_Lamp.MainLight2 = 0;
 	else if(RX_ELECTRICAL_SWITCH_RELAY_OPERATION_STATUS_65527.HeadLampOperationStatus_3436 == 1)
 		TX_CMD_Lamp.MainLight2 = 1;
-
+	//WorkLamp
 	if(RX_ELECTRICAL_SWITCH_RELAY_OPERATION_STATUS_65527.WorkLampOperationStatus_3435 == 0)
 		TX_CMD_Lamp.WorkLight1 = 0;
 	else if(RX_ELECTRICAL_SWITCH_RELAY_OPERATION_STATUS_65527.WorkLampOperationStatus_3435 == 1)
 		TX_CMD_Lamp.WorkLight1 = 1;
-
+	//RearWorkLamp
 	if(RX_ELECTRICAL_SWITCH_RELAY_OPERATION_STATUS_65527.RearWorkLampOperationStatus_3446 == 0)
 		TX_CMD_Lamp.WorkLight2 = 0;
 	else if(RX_ELECTRICAL_SWITCH_RELAY_OPERATION_STATUS_65527.RearWorkLampOperationStatus_3446 == 1)
 		TX_CMD_Lamp.WorkLight2 = 1;
-
+	//AutoGrease
 	if(RX_ELECTRICAL_SWITCH_RELAY_OPERATION_STATUS_65527.AutoGreaseOperationStatus_3449 == 3)
 	{
 		TX_CMD_Lamp.AutoGrease1 = 0;
@@ -3109,7 +3105,7 @@ void SetKeypadLamp()
 		else if(RX_INDICATOR_LAMP_65428.AutoGreaseRedLEDStatus_3453 == 1)
 			TX_CMD_Lamp.AutoGrease2 = 1;
 	}
-
+	//QuickCoupler
 	if(RX_ELECTRICAL_SWITCH_RELAY_OPERATION_STATUS_65527.QuickCouplerOperationStatus_3448 == 0){
 		TX_CMD_Lamp.QuickCoupler1 = 0;
 		TX_CMD_Lamp.QuickCoupler2 = 1;
@@ -3123,7 +3119,7 @@ void SetKeypadLamp()
 		TX_CMD_Lamp.QuickCoupler1 = 0;
 		TX_CMD_Lamp.QuickCoupler2 = 0;
 	}
-
+	//RideControl
 	if(RX_ELECTRICAL_SWITCH_RELAY_OPERATION_STATUS_65527.RideControlOperationStatus_3447 == 0){
 		TX_CMD_Lamp.RideControl1 = 0;
 		TX_CMD_Lamp.RideControl2 = 0;
@@ -3141,7 +3137,7 @@ void SetKeypadLamp()
 		TX_CMD_Lamp.RideControl2 = 0;
 	}
 
-
+	//WeighingSystemAccumulation
 	if(RX_WEIGHING_SYSTEM_STATUS_65450.WeighingSystemAccumulationMode_1941 == 0){
 		TX_CMD_Lamp.WorkLoad1 = 0;
 		TX_CMD_Lamp.WorkLoad2 = 1;
@@ -3156,20 +3152,20 @@ void SetKeypadLamp()
 		TX_CMD_Lamp.WorkLoad1 = 0;
 		TX_CMD_Lamp.WorkLoad2 = 1;
 	}
-
+	//BeaconLamp
 	if(RX_ELECTRICAL_SWITCH_RELAY_OPERATION_STATUS_65527.BeaconLampOperationStatus_3444 == 0)
 		TX_CMD_Lamp.BeaconLamp = 0;
 	else if(RX_ELECTRICAL_SWITCH_RELAY_OPERATION_STATUS_65527.BeaconLampOperationStatus_3444 == 1)
 		TX_CMD_Lamp.BeaconLamp = 1;
 	else if(RX_ELECTRICAL_SWITCH_RELAY_OPERATION_STATUS_65527.BeaconLampOperationStatus_3444 == 3)
 		TX_CMD_Lamp.BeaconLamp = 0;
-
+	//RearWiper
 	if(RX_ELECTRICAL_SWITCH_RELAY_OPERATION_STATUS_65527.RearWiperOperationStatus_3451 == 0)
 		TX_CMD_Lamp.RearWiper = 0;
 	else if(RX_ELECTRICAL_SWITCH_RELAY_OPERATION_STATUS_65527.RearWiperOperationStatus_3451 == 1
 		||	RX_ELECTRICAL_SWITCH_RELAY_OPERATION_STATUS_65527.RearWiperOperationStatus_3451 == 2)
 		TX_CMD_Lamp.RearWiper = 1;
-
+	//MirrorHeat
 	if(RX_ELECTRICAL_SWITCH_RELAY_OPERATION_STATUS_65527.MirrorHeatOperationStatus_3450 == 3)
 		TX_CMD_Lamp.MirrorHeat = 0;
 	else
@@ -3179,18 +3175,18 @@ void SetKeypadLamp()
 		else if(RX_INDICATOR_LAMP_65428.MirrorHeaterStatus_724 == 1)
 			TX_CMD_Lamp.MirrorHeat = 1;
 	}
-
+	//BoomDetentMode
 	if(RX_DETENT_MODE_STATUS_61184_124.BoomDetentMode_223 > 0 && RX_DETENT_MODE_STATUS_61184_124.BoomDetentMode_223 < 4)
 		TX_CMD_Lamp.AutoPosition1 = 1;
 	else
 		TX_CMD_Lamp.AutoPosition1 = 0;
 
-
+	//BucketDetentMode
 	if(RX_DETENT_MODE_STATUS_61184_124.BucketDetentMode_224 > 0 && RX_DETENT_MODE_STATUS_61184_124.BucketDetentMode_224 < 4)
 		TX_CMD_Lamp.AutoPosition2 = 1;
 	else
 		TX_CMD_Lamp.AutoPosition2 = 0;
-
+	//FineModulation
 	if(RX_COMPONENT_IDENTIFICATION_EHCU_65330.ComponentCode_1699 != 91)	// STATE_COMPONENTCODE_EHCU = 91
 	{
 		TX_CMD_Lamp.FineModulation = 0;
@@ -3215,7 +3211,7 @@ void SetKeypadLamp()
 
 	memcpy(&NewLamp[0],(unsigned char*)&TX_CMD_Lamp,8);
 
-
+	//이전 램프랑 새로운 Lamp랑 다르면 tx한다.
 	for(i = 0; i < 8; i++){
 		if(NewLamp[i] != OldLamp[i]){
 			nDiffFlag = 1;
@@ -3260,7 +3256,7 @@ void KeyButtonCallback(unsigned int KeyData) {
 	}
 
 	funcKeyCallBack = (*env)->GetStaticMethodID(env, jObject,
-		"KeyButtonCallBack", "(I)V");
+		"KeyButtonCallBack", "(I)V"); //Integer를 넘겨 준다.
 
 	if (funcKeyCallBack == 0) {
 		__android_log_print(ANDROID_LOG_INFO, "NATIVE",

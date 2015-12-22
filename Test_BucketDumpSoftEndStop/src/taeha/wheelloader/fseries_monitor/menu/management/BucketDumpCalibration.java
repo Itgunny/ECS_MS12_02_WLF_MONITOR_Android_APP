@@ -120,18 +120,18 @@ public class BucketDumpCalibration extends ParentFragment{
 		// TODO Auto-generated method stub
 		super.onDestroyView();
 		CancelCheckTimer();
-		CAN1Comm.Set_RequestBoomPressureCalibration_PGN61184_201(0);
-		CAN1Comm.Set_RequestBoomBucketAngleSensorCalibration_PGN61184_201(0);
-		CAN1Comm.Set_RequestAEB_PGN61184_201(0);
-		CAN1Comm.Set_RequestBrakePedalPositionSensorCalibration_PGN61184_201(0);
-		CAN1Comm.Set_RequestBucketDumpCalibration_PGN61184_201(0);
-		
+		CAN1Comm.Set_RequestBoomPressureCalibration_PGN61184_201(3);
+		CAN1Comm.Set_RequestBoomBucketAngleSensorCalibration_PGN61184_201(15);
+		CAN1Comm.Set_RequestAEB_PGN61184_201(3);
+		CAN1Comm.Set_RequestBrakePedalPositionSensorCalibration_PGN61184_201(3);
+		CAN1Comm.Set_RequestBucketDumpCalibration_PGN61184_201(3);
 		CAN1Comm.TxCANToMCU(201);
 		CAN1Comm.Set_RequestBoomPressureCalibration_PGN61184_201(3);
 		CAN1Comm.Set_RequestBoomBucketAngleSensorCalibration_PGN61184_201(15);
 		CAN1Comm.Set_RequestAEB_PGN61184_201(3);
 		CAN1Comm.Set_RequestBrakePedalPositionSensorCalibration_PGN61184_201(3);
 		CAN1Comm.Set_RequestBucketDumpCalibration_PGN61184_201(3);
+		
 	}
 	@Override
 	protected void InitResource() {
@@ -327,7 +327,7 @@ public class BucketDumpCalibration extends ParentFragment{
 		Result = CAN1Comm.Get_RequestBucketDumpSpeedCalibrationStatus_1945_PGN61184_202();
 		Log.d(TAG,"Result : " + Integer.toString(Result)+" StatusCnt:"+Integer.toString(StatusCnt));
 		//if((StatusCnt >= 25) && (StatusCnt <= 90)) // 5 Sec ~ 15 Sec
-		if((StatusCnt >= 25)) // 5 Sec ~ 
+		if((StatusCnt >= 15)) // 5 Sec ~ 
 		{
 			if( (Result == CAL1_SUCCESS) ||  (Result == CAL2_SUCCESS) 
 				|| (Result == CAL1_RETRY)|| (Result == CAL2_RETRY)
@@ -356,6 +356,7 @@ public class BucketDumpCalibration extends ParentFragment{
 				case CAL1_RETRY:
 					ParentActivity._BucketDumpCalibrationPopup.setTextTitle("보정값을 찾기 전입니다.\n1st Calibration을 재시도 해주세요.");
 					ParentActivity._BucketDumpCalibrationPopup.setExitFlag(false);
+					ParentActivity._BucketDumpCalibrationPopup.setRetry(CAL1_RETRY);
 					ParentActivity.showBuckDumpCalibrationResult();
 					Log.d(TAG,"CAL2_SUCCESS");
 					break;
@@ -370,6 +371,7 @@ public class BucketDumpCalibration extends ParentFragment{
 				case CAL2_RETRY:
 					ParentActivity._BucketDumpCalibrationPopup.setTextTitle("보정값을 찾기 전입니다.\n2nd Calibration을 재시도 해주세요.");
 					ParentActivity._BucketDumpCalibrationPopup.setExitFlag(false);
+					ParentActivity._BucketDumpCalibrationPopup.setRetry(CAL2_RETRY);
 					ParentActivity.showBuckDumpCalibrationResult();
 					Log.d(TAG,"CAL2_SUCCESS");
 					break;

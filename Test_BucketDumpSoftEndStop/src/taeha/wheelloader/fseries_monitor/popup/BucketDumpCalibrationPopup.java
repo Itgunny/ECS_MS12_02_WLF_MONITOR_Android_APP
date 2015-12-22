@@ -29,6 +29,7 @@ public class BucketDumpCalibrationPopup extends ParentPopup{
 	//VALUABLE////////////////////////////////////////
 	String strTitle;
 	boolean bExitPage;
+	int Retry;
 	//////////////////////////////////////////////////
 	public BucketDumpCalibrationPopup(Context _context) {
 		super(_context);
@@ -41,6 +42,7 @@ public class BucketDumpCalibrationPopup extends ParentPopup{
 		this.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
 		
 		bExitPage = false;
+		Retry = 0;
 	}
 	@Override
 	public void show() {
@@ -57,6 +59,12 @@ public class BucketDumpCalibrationPopup extends ParentPopup{
 		// TODO Auto-generated method stub
 		super.dismiss();
 		ParentActivity.ScreenIndex = ParentActivity.SCREEN_STATE_MENU_MANAGEMENT_SERVICE_CALIBRATION_BUCKET_TOP;
+		if(Retry == 2 || Retry == 5){
+			CAN1Comm.Set_RequestBucketDumpCalibration_PGN61184_201(0);
+			CAN1Comm.TxCANToMCU(201);
+			CAN1Comm.Set_RequestBucketDumpCalibration_PGN61184_201(3);			
+			Retry = 0;
+		}
 		try {
 			ParentActivity._MenuBaseFragment._BucketDumpCalibration.CursurDisplay(1);
 		} catch (NullPointerException e) {
@@ -117,11 +125,13 @@ public class BucketDumpCalibrationPopup extends ParentPopup{
 		this.dismiss();
 	}	
 	public void setTextTitle(String str){
-		
 		strTitle = str;
 	}
 	public void setExitFlag(boolean flag){
 		bExitPage = flag;
+	}
+	public void setRetry(int retry){
+		Retry = retry;
 	}
 	///////////////////////////////////////////////////
 	public void ClickLeft(){
