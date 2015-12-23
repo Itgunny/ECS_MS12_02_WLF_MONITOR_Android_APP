@@ -2622,9 +2622,9 @@ public class MenuBaseFragment extends ParentFragment{
 	}
 	public void ClickKeyButtonLongLeftRight(){
 		switch (ParentActivity.ScreenIndex) {
-	//		case Home.SCREEN_STATE_MENU_MANAGEMENT_SERVICE_PW:
-	//			_ServiceMenuPasswordFragment.showServicePasswordNextScreen();
-	//			break;
+			case Home.SCREEN_STATE_MENU_MANAGEMENT_SERVICE_PW:
+				_ServiceMenuPasswordFragment.showServicePasswordNextScreen();
+				break;
 			case Home.SCREEN_STATE_MENU_MANAGEMENT_SOFTWAREUPDAT_PW:
 				_SoftwareUpdatePasswordFragment.showServicePasswordNextScreen();
 				break;
@@ -2634,8 +2634,8 @@ public class MenuBaseFragment extends ParentFragment{
 			case Home.SCREEN_STATE_MENU_MANAGEMENT_SERVICE_SENSORMONITORING_TOP:
 				showBodySensorMonitoringHidden();
 				break;
-			case Home.SCREEN_STATE_MENU_MANAGEMENT_SERVICE_PW:
-				_ServiceMenuPasswordFragment.showHWTestScreen();
+			//case Home.SCREEN_STATE_MENU_MANAGEMENT_SERVICE_PW:
+				//_ServiceMenuPasswordFragment.showHWTestScreen();
 			default:
 				break;
 		}

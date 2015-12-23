@@ -421,26 +421,20 @@ public class FaultHistoryActiveFragment extends ParentFragment{
 		//reserved
 		Err_ACU[6] = 0;
 		Err_ACU[7] = 0;
-		/*
+		
 		Err_ACU[8] = CAN1Comm.Get_Mode1actuatoropenshort_PGN65373();
 		Err_ACU[9] = CAN1Comm.Get_Mode1actuatordrivecircuitmalfunction_PGN65373();
 		Err_ACU[10] = CAN1Comm.Get_Intakeactuatoropenshort_PGN65373();
 		Err_ACU[11] = CAN1Comm.Get_Intakeactuatordrivecircuitmalfunction_PGN65373();
 		Err_ACU[12] = CAN1Comm.Get_Temperatureactuatoropenshort_PGN65373();
 		Err_ACU[13] = CAN1Comm.Get_Temperatureactuatordrivecircuitmalfunction_PGN65373();
-		*/
-		Err_ACU[8] = 0;
-		Err_ACU[9] = 0;
-		Err_ACU[10] = 0;
-		Err_ACU[11] = 0;
-		Err_ACU[12] = 0;
-		Err_ACU[13] = 0;
-		//reserved
+		
+		
 		Err_ACU[14] = CAN1Comm.Get_Ducttemperaturesensoropen_PGN65373();;
 		Err_ACU[15] = CAN1Comm.Get_Ducttemperaturesensorshort_PGN65373();
-		
 		Err_ACU[16] = CAN1Comm.Get_WaterValveSensorError_PGN65373();
 		Err_ACU[17] = CAN1Comm.Get_GPSCircuitError_PGN65373();
+		//reserved
 		Err_ACU[18] = 0;
 		Err_ACU[19] = 0;
 		

@@ -79,7 +79,7 @@ public class Home extends Activity {
 	public static final int VERSION_HIGH 		= 2;
 	public static final int VERSION_LOW 		= 3;
 	public static final int VERSION_SUB_HIGH 	= 0;
-	public static final int VERSION_SUB_LOW 	= 0;
+	public static final int VERSION_SUB_LOW 	= 1;
 	public static final int VERSION_TAEHA		= 0;
 	////1.0.2.3
 	// UI B 안 최초 적용 2014.12.10
@@ -756,6 +756,9 @@ public class Home extends Activity {
 	// 1. RMCU 호기수 입력 기능 적용.
 	// 2. ACU 기능 삭제 및 코드 표시 변경.
 	// 3. Soft End Stop Bucket Dump 오류 표시 수정.(다국어 파일 없을시)
+	////v2.3.0.1
+	// 1. 관리자 메뉴 LEFT-RIGHT Long key로 진입가능하게 하는 기능
+	// 2. ACU 기능 추가(현대 요청)
 	//////////////////////////////////////////////////////////////////////////////////////
 	// TAG
 	private  final String TAG = "Home";
