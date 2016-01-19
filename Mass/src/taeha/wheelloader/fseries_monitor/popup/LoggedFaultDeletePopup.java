@@ -142,11 +142,11 @@ public class LoggedFaultDeletePopup extends ParentPopup{
 	}
 	///////////////////////////////////////////////////////////////////////////////
 	public void ClickOK(){
-		CAN1Comm.Set_DTCInformationRequest_1515_PGN61184_11(10);
-		CAN1Comm.Set_DTCType_1510_PGN61184_11(SelectMode);
-		CAN1Comm.TxCANToMCU(11);
-		CAN1Comm.Set_DTCInformationRequest_1515_PGN61184_11(0xF);
-		CAN1Comm.Set_DTCType_1510_PGN61184_11(0xF);
+			CAN1Comm.Set_DTCInformationRequest_1515_PGN61184_11(10);
+			CAN1Comm.Set_DTCType_1510_PGN61184_11(SelectMode);
+			CAN1Comm.TxCANToMCU(11);
+			CAN1Comm.Set_DTCInformationRequest_1515_PGN61184_11(0xF);
+			CAN1Comm.Set_DTCType_1510_PGN61184_11(0xF);		
 		
 		StartPopupOffTimer();
 		imgbtnOK.setVisibility(View.INVISIBLE);
@@ -182,6 +182,9 @@ public class LoggedFaultDeletePopup extends ParentPopup{
 			textViewTitle.setText(getString(ParentActivity.getResources().getString(string.Delete_Logged_Fault), 311) 
 					+ "\n(" +getString(ParentActivity.getResources().getString(string.EHCU), 272) +")");
 			break;
+		case Home.REQ_ERR_ACU_LOGGED:
+			textViewTitle.setText(getString(ParentActivity.getResources().getString(string.Delete_Logged_Fault), 311) 
+					+ "\n(" +getString(ParentActivity.getResources().getString(string.ACU), 458) +")");
 		default:
 			break;
 		}

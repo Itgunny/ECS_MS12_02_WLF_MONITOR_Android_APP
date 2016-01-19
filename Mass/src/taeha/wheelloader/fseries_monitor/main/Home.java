@@ -79,7 +79,7 @@ public class Home extends Activity {
 	public static final int VERSION_HIGH 		= 2;
 	public static final int VERSION_LOW 		= 3;
 	public static final int VERSION_SUB_HIGH 	= 0;
-	public static final int VERSION_SUB_LOW 	= 1;
+	public static final int VERSION_SUB_LOW 	= 2;
 	public static final int VERSION_TAEHA		= 0;
 	////1.0.2.3
 	// UI B 안 최초 적용 2014.12.10
@@ -759,6 +759,8 @@ public class Home extends Activity {
 	////v2.3.0.1
 	// 1. 관리자 메뉴 LEFT-RIGHT Long key로 진입가능하게 하는 기능
 	// 2. ACU 기능 추가(현대 요청)
+	////v2.3.0.2
+	// 1. ACU 현재고장, 과거고장 기능 적용
 	//////////////////////////////////////////////////////////////////////////////////////
 	// TAG
 	private  final String TAG = "Home";
@@ -1219,6 +1221,9 @@ public class Home extends Activity {
 	
 	public static final int REQ_ERR_EHCU_ACTIVE			= 6;
 	public static final int REQ_ERR_EHCU_LOGGED			= 7;
+	
+	public static final int REQ_ERR_ACU_ACTIVE		= 8; // ++, --, 160105 cjg
+	public static final int REQ_ERR_ACU_LOGGED		= 9; // ++, --, 160105 cjg
 	
 	public static final int REQ_ERR_START				= -1;
 	public static final int REQ_ERR_END					= 15;

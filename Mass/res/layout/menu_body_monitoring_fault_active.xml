@@ -193,7 +193,8 @@
                 android:layout_below="@+id/imageView_menu_body_monitoring_fault_active_list_title_line"
                 android:layout_marginLeft="10dp"
                 android:layout_marginRight="10dp"
-                android:divider="@drawable/menu_information_fault_line_horizontal2" >
+                android:listSelector="@drawable/_selector_menu_monitoring_fault_listview_btn"
+                android:divider="@drawable/menu_information_fault_line_horizontal2">
 
             </ListView>
 

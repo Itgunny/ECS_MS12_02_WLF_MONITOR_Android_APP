@@ -2619,7 +2619,7 @@ typedef struct
 {
 	unsigned char	AmbientTemperature_3411;
 	unsigned char	InCabTemperature_3412;
-	unsigned char	DuctTemperature_3413;
+	unsigned char	DuctTemperature_3416;
 
 	unsigned char	Reserved0;
 

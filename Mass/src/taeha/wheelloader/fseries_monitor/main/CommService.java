@@ -103,10 +103,13 @@ public class CommService extends Service{
 	public native int[] Get_EcuErr_FromNative();
 	public native int[] Get_McuErr_FromNative();
 	public native int[] Get_EHCUErr_FromNative();
+	public native int[] Get_AcuErr_FromNative();
+	
 	public native int[] Get_TcuErr_Logged_FromNative();
 	public native int[] Get_EcuErr_Logged_FromNative();
 	public native int[] Get_EHCUErr_Logged_FromNative();
 	public native int[] Get_McuErr_Logged_FromNative();
+	public native int[] Get_AcuErr_Logged_FromNative();
 	
 	public native int Get_EHCUSingleOrMulti_FromNative();
 	public native int Get_EHCUTotalError_FromNative();
@@ -631,7 +634,7 @@ public class CommService extends Service{
 	//////RX_AMBIENT_CONDITIONS_65519///////
 	public native int Get_AmbientTemperature_3411_PGN65519();
 	public native int Get_InCabTemperature_3412_PGN65519();
-	public native int Get_DuctTemperature_3413_PGN65519();
+	public native int Get_DuctTemperature_3416_PGN65519();
 	//////RX_WHEEL_LOADER_EHCU_STATUS2_65524///////
 	public native int Get_SoftStopBoomUp_2337_PGN65524();
 	public native int Get_SoftStopBoomDown_2338_PGN65524();
@@ -1125,23 +1128,30 @@ public class CommService extends Service{
 	public native int Get_RX_RES_KEY_DetentSetting();
 	public native int Get_RX_RES_KEY_FineModulation();
 	public native int Get_RX_RES_KEY_FN();
+	
 	public native int Get_gErr_Mcu_TotalPacket();
 	public native int Get_gErr_Ecu_TotalPacket();
 	public native int Get_gErr_Tcu_TotalPacket();
 	public native int Get_gErr_Ehcu_TotalPacket();
+	public native int Get_gErr_Acu_TotalPacket();
+	
 	public native int Get_gErr_Mcu_TotalPacket_Logged();
 	public native int Get_gErr_Ecu_TotalPacket_Logged();
 	public native int Get_gErr_Tcu_TotalPacket_Logged();
 	public native int Get_gErr_EHCU_TotalPacket_Logged();
+	public native int Get_gErr_Acu_TotalPacket_Logged();
+	
 	public native int Get_gErr_Mcu_Total();
 	public native int Get_gErr_Ecu_Total();
 	public native int Get_gErr_Tcu_Total();
 	public native int Get_gErr_Ehcu_Total();
+	public native int Get_gErr_Acu_Total();
+	
 	public native int Get_gErr_Mcu_Total_Logged();
 	public native int Get_gErr_Ecu_Total_Logged();
 	public native int Get_gErr_Tcu_Total_Logged();
 	public native int Get_gErr_EHCU_Total_Logged();
-	
+	public native int Get_gErr_Acu_Total_Logged();
 	///////////////////////////////////////////////////////////////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////////////
 	

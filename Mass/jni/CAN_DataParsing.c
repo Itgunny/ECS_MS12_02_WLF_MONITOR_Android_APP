@@ -698,19 +698,25 @@ void InitNewProtoclValuable() {
 	gErr_Ecu_TotalPacket = 0;
 	gErr_Tcu_TotalPacket = 0;
 	gErr_EHCU_TotalPacket = 0;
+	gErr_ACU_TotalPacket = 0;
+
 	gErr_Mcu_TotalPacket_Logged = 0;
 	gErr_Ecu_TotalPacket_Logged = 0;
 	gErr_Tcu_TotalPacket_Logged = 0;
 	gErr_EHCU_TotalPacket_Logged = 0;
+	gErr_ACU_TotalPacket_Logged = 0;
 
 	gErr_Mcu_Total = 0;
 	gErr_Ecu_Total = 0;
 	gErr_Tcu_Total = 0;
 	gErr_EHCU_Total = 0;
+	gErr_ACU_Total = 0;
+
 	gErr_Mcu_Total_Logged = 0;
 	gErr_Ecu_Total_Logged = 0;
 	gErr_Tcu_Total_Logged = 0;
 	gErr_EHCU_Total_Logged = 0;
+	gErr_ACU_Total_Logged = 0;
 
 	RX_AIR_CONDITIONER_STATUS_65373.Ambienttemperaturesensoropen = 0;
 	RX_AIR_CONDITIONER_STATUS_65373.Ambienttemperaturesensorshort = 0;
@@ -1715,6 +1721,22 @@ void SaveErrorCode_NEW_CAN2(void) {
 			| (RX_DTC_INFORMATION_TYPE1_65438.DTC_5[1] << 8) | RX_DTC_INFORMATION_TYPE1_65438.DTC_5[0]);
 
 	}
+	else if(RX_DTC_INFORMATION_TYPE1_65438.DTCType_1510 == 8)
+	{
+		gErr_ACU_TotalPacket = RX_DTC_INFORMATION_TYPE1_65438.TotalNumberofDTCInformationPacket_1512;
+		gErr_ACU_Total = RX_DTC_INFORMATION_TYPE1_65438.TotalNumberofDTC;
+		gErr_ACU[0] = RX_DTC_INFORMATION_TYPE1_65438.DTC_1[0];
+		gErr_ACU[1] = RX_DTC_INFORMATION_TYPE1_65438.DTC_1[1];
+		gErr_ACU[2] = RX_DTC_INFORMATION_TYPE1_65438.DTC_1[2];
+	}
+	else if (RX_DTC_INFORMATION_TYPE1_65438.DTCType_1510 == 9)
+	{
+		gErr_ACU_TotalPacket_Logged = RX_DTC_INFORMATION_TYPE1_65438.TotalNumberofDTCInformationPacket_1512;
+		gErr_ACU_Total_Logged = RX_DTC_INFORMATION_TYPE1_65438.TotalNumberofDTC;
+		gErr_ACU_Logged[0] = RX_DTC_INFORMATION_TYPE1_65438.DTC_1[0];
+		gErr_ACU_Logged[1] = RX_DTC_INFORMATION_TYPE1_65438.DTC_1[1];
+		gErr_ACU_Logged[2] = RX_DTC_INFORMATION_TYPE1_65438.DTC_1[2];
+	}
 
 }
 
@@ -2700,7 +2722,7 @@ jobject _Open_UART1(JNIEnv *env, jclass this, jstring path, jint baudrate,jint f
 
 	InitUART1Valuable();
 
-	//makeTimer("First Timer", &firstTimerID, 0, TIMER1_INTERVAL);
+	makeTimer("First Timer", &firstTimerID, 0, TIMER1_INTERVAL);
 	//makeTimer("Second Timer", &SecondTimerID, 2, 0);
 
 	return mFileDescriptor;

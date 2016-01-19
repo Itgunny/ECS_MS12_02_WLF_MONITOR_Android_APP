@@ -48,10 +48,11 @@ public class IconTextViewFault extends LinearLayout {
 		LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);		
 		View mRoot = inflater.inflate(R.layout.list_item_fault, this, true);
 		//GlobalFont.setGlobalFont(context, mRoot);
+		//mRoot.setBackgroundColor(Color.BLUE);
 		
 		// Set Backgound
 		mBackground = (ImageView)findViewById(R.id.imageView_list_background_fault);
-		mBackground.setImageDrawable(aItem.getBackground());
+		//mBackground.setImageDrawable(aItem.getBackground());
 		//mBackground.setImageResource(R.drawable._selector_menu_list_item);
 		
 		

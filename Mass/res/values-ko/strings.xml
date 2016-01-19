@@ -263,7 +263,7 @@
     <string name="Aux_Up">Aux Up</string>
     <string name="Aux_Down">Aux Down</string>
     <string name="Current">현재</string>
-    <string name="Logged_Fault">과거고장</string>
+    <string name="Logged_Fault">과거 고장</string>
     <string name="Model">모델</string>
     <string name="TCU">트랜스미션</string>
     <string name="ECM">엔진</string>

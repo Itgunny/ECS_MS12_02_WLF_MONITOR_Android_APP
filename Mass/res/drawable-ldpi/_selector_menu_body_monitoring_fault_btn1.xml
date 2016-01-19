@@ -14,7 +14,7 @@
     <item 
     	android:state_focused="true"
         android:drawable="@drawable/menu_information_fault_delete_btn_selected"/>
-      <item 
+    <item 
     	android:state_focused="false"
         android:drawable="@drawable/menu_information_fault_delete_btn_normal"/>
     <item

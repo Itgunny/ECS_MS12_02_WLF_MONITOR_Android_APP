@@ -1488,8 +1488,8 @@ jint Get_AmbientTemperature_3411_PGN65519(JNIEnv * env, jobject this) {
 jint Get_InCabTemperature_3412_PGN65519(JNIEnv * env, jobject this) {
 	return RX_AMBIENT_CONDITIONS_65519.InCabTemperature_3412;
 }
-jint Get_DuctTemperature_3413_PGN65519(JNIEnv * env, jobject this) {
-	return RX_AMBIENT_CONDITIONS_65519.DuctTemperature_3413;
+jint Get_DuctTemperature_3416_PGN65519(JNIEnv * env, jobject this) {
+	return RX_AMBIENT_CONDITIONS_65519.DuctTemperature_3416;
 }
 //////RX_WHEEL_LOADER_EHCU_STATUS2_65524///////
 jint Get_SoftStopBoomUp_2337_PGN65524(JNIEnv * env, jobject this) {
@@ -3236,18 +3236,20 @@ jintArray _Get_EcuErr(JNIEnv *env, jobject this) {
 
 jintArray _Get_McuErr(JNIEnv *env, jobject this) {
 	jintArray MCU_Err = (*env)->NewIntArray(env, ERR_BUF_SIZE);
-
 	(*env)->SetIntArrayRegion(env, MCU_Err, 0, ERR_BUF_SIZE, gErr_Mcu);
-
 	return MCU_Err;
 }
 
 jintArray _Get_EhcuErr(JNIEnv *env, jobject this) {
 	jintArray EHCU_Err = (*env)->NewIntArray(env, ERR_BUF_SIZE);
-
 	(*env)->SetIntArrayRegion(env, EHCU_Err, 0, ERR_BUF_SIZE, gErr_EHCU);
-
 	return EHCU_Err;
+}
+
+jintArray _Get_AcuErr(JNIEnv *env, jobject this) {
+	jintArray ACU_Err = (*env)->NewIntArray(env, ERR_BUF_SIZE);
+	(*env)->SetIntArrayRegion(env, ACU_Err, 0, ERR_BUF_SIZE, gErr_ACU);
+	return ACU_Err;
 }
 
 jintArray _Get_TcuErrLogged(JNIEnv *env, jobject this) {
@@ -3280,6 +3282,13 @@ jintArray _Get_McuErrLogged(JNIEnv *env, jobject this) {
 	(*env)->SetIntArrayRegion(env, MCU_Err_Logged, 0, ERR_BUF_SIZE, gErr_Mcu_Logged);
 
 	return MCU_Err_Logged;
+}
+jintArray _Get_AcuErrLogged(JNIEnv *env, jobject this) {
+	jintArray ACU_Err_Logged = (*env)->NewIntArray(env, ERR_BUF_SIZE);
+
+	(*env)->SetIntArrayRegion(env, ACU_Err_Logged, 0, ERR_BUF_SIZE, gErr_ACU_Logged);
+
+	return ACU_Err_Logged;
 }
 
 jint _Get_EHCUSingleOrMulti(JNIEnv *env, jobject this) {
@@ -3442,6 +3451,7 @@ jint Get_RX_RES_KEY_FN(JNIEnv *env, jobject this) {
 
 	return RX_RES_KEY.FN;
 }
+
 jint Get_gErr_Mcu_TotalPacket(JNIEnv *env, jobject this) {
 
 	return gErr_Mcu_TotalPacket;
@@ -3458,6 +3468,11 @@ jint Get_gErr_Ehcu_TotalPacket(JNIEnv *env, jobject this) {
 
 	return gErr_EHCU_TotalPacket;
 }
+jint Get_gErr_Acu_TotalPacket(JNIEnv *env, jobject this) {
+
+	return gErr_ACU_TotalPacket;
+}
+
 jint Get_gErr_Mcu_TotalPacket_Logged(JNIEnv *env, jobject this) {
 
 	return gErr_Mcu_TotalPacket_Logged;
@@ -3474,6 +3489,11 @@ jint Get_gErr_EHCU_TotalPacket_Logged(JNIEnv *env, jobject this) {
 
 	return gErr_EHCU_TotalPacket_Logged;
 }
+jint Get_gErr_Acu_TotalPacket_Logged(JNIEnv *env, jobject this) {
+
+	return gErr_ACU_TotalPacket_Logged;
+}
+
 jint Get_gErr_Mcu_Total(JNIEnv *env, jobject this) {
 
 	return gErr_Mcu_Total;
@@ -3489,6 +3509,10 @@ jint Get_gErr_Tcu_Total(JNIEnv *env, jobject this) {
 jint Get_gErr_Ehcu_Total(JNIEnv *env, jobject this) {
 
 	return gErr_EHCU_Total;
+}
+jint Get_gErr_Acu_Total(JNIEnv *env, jobject this) {
+
+	return gErr_ACU_Total;
 }
 
 jint Get_gErr_Mcu_Total_Logged(JNIEnv *env, jobject this) {
@@ -3508,7 +3532,10 @@ jint Get_gErr_EHCU_Total_Logged(JNIEnv *env, jobject this) {
 
 	return gErr_EHCU_Total_Logged;
 }
+jint Get_gErr_Acu_Total_Logged(JNIEnv *env, jobject this) {
 
+	return gErr_ACU_Total_Logged;
+}
 
 void SetFNKeypadLamp(JNIEnv * env, jobject this,
 		int Data) {
@@ -3533,16 +3560,20 @@ static JNINativeMethod methods[] =
 
 				{"Get_TcuErr_FromNative", "()[I", (void*) _Get_TcuErr },
 				{"Get_EcuErr_FromNative", "()[I", (void*) _Get_EcuErr },
-				{ "Get_McuErr_FromNative", "()[I", (void*) _Get_McuErr },
-				{ "Get_EHCUErr_FromNative", "()[I", (void*) _Get_EhcuErr },
+				{"Get_McuErr_FromNative", "()[I", (void*) _Get_McuErr },
+				{"Get_EHCUErr_FromNative", "()[I", (void*) _Get_EhcuErr },
+				{"Get_AcuErr_FromNative", "()[I",(void*) _Get_AcuErr },
+
 				{"Get_TcuErr_Logged_FromNative", "()[I",(void*) _Get_TcuErrLogged },
 				{"Get_EcuErr_Logged_FromNative", "()[I",(void*) _Get_EcuErrLogged },
-				{"Get_EHCUErr_Logged_FromNative", "()[I",(void*) _Get_EHCUErrLogged },
 				{"Get_McuErr_Logged_FromNative", "()[I",(void*) _Get_McuErrLogged },
-				{"Get_EHCUSingleOrMulti_FromNative", "()I",(void*) _Get_EHCUSingleOrMulti },
-				{"Get_EHCUTotalError_FromNative", "()I",(void*) _Get_EHCUTotalError },
-				{"Get_EHCUTotalPacket_FromNative", "()I",(void*) _Get_EHCUTotalPacket },
-				{"Get_EHCUSingleErrorData_FromNative", "()I",(void*) _Get_EHCUSingleErrorData },
+				{"Get_EHCUErr_Logged_FromNative", "()[I",(void*) _Get_EHCUErrLogged },
+				{"Get_AcuErr_Logged_FromNative", "()[I",(void*) _Get_AcuErrLogged },
+
+				{"Get_EHCUSingleOrMulti_FromNative", "()I",(void*) _Get_EHCUSingleOrMulti},
+				{"Get_EHCUTotalError_FromNative", "()I",(void*) _Get_EHCUTotalError},
+				{"Get_EHCUTotalPacket_FromNative", "()I",(void*) _Get_EHCUTotalPacket},
+				{"Get_EHCUSingleErrorData_FromNative", "()I",(void*) _Get_EHCUSingleErrorData},
 				{"Get_EHCUErrorData_FromNative", "(I)I",(void*) _Get_EHCUErrorData },
 
 				{"Get_RecvESL_Flag_FromNative", "()I",(void*) _Get_RecvESL_Flag },
@@ -4375,7 +4406,7 @@ static JNINativeMethod methods[] =
 				//////RX_AMBIENT_CONDITIONS_65519///////
 				{ "Get_AmbientTemperature_3411_PGN65519", "()I",(void*) Get_AmbientTemperature_3411_PGN65519 },
 				{ "Get_InCabTemperature_3412_PGN65519", "()I",	(void*) Get_InCabTemperature_3412_PGN65519 },
-				{ "Get_DuctTemperature_3413_PGN65519", "()I",	(void*) Get_DuctTemperature_3413_PGN65519 },
+				{ "Get_DuctTemperature_3416_PGN65519", "()I",	(void*) Get_DuctTemperature_3416_PGN65519 },
 
 				//////RX_WHEEL_LOADER_EHCU_STATUS2_65524///////
 				{"Get_SoftStopBoomUp_2337_PGN65524", "()I",(void*) Get_SoftStopBoomUp_2337_PGN65524 },
@@ -5220,23 +5251,30 @@ static JNINativeMethod methods[] =
 				{"Get_RX_RES_KEY_DetentSetting", "()I",(void*) Get_RX_RES_KEY_DetentSetting},
 				{"Get_RX_RES_KEY_FineModulation", "()I",(void*) Get_RX_RES_KEY_FineModulation},
 				{"Get_RX_RES_KEY_FN", "()I",(void*) Get_RX_RES_KEY_FN},
+
 				{"Get_gErr_Mcu_TotalPacket", "()I",(void*) Get_gErr_Mcu_TotalPacket},
 				{"Get_gErr_Ecu_TotalPacket", "()I",(void*) Get_gErr_Ecu_TotalPacket},
 				{"Get_gErr_Tcu_TotalPacket", "()I",(void*) Get_gErr_Tcu_TotalPacket},
 				{"Get_gErr_Ehcu_TotalPacket", "()I",(void*) Get_gErr_Ehcu_TotalPacket},
+				{"Get_gErr_Acu_TotalPacket", "()I",(void*) Get_gErr_Acu_TotalPacket},
+
 				{"Get_gErr_Mcu_TotalPacket_Logged", "()I",(void*) Get_gErr_Mcu_TotalPacket_Logged},
 				{"Get_gErr_Ecu_TotalPacket_Logged", "()I",(void*) Get_gErr_Ecu_TotalPacket_Logged},
 				{"Get_gErr_Tcu_TotalPacket_Logged", "()I",(void*) Get_gErr_Tcu_TotalPacket_Logged},
 				{"Get_gErr_EHCU_TotalPacket_Logged", "()I",(void*) Get_gErr_EHCU_TotalPacket_Logged},
+				{"Get_gErr_Acu_TotalPacket_Logged", "()I",(void*) Get_gErr_Acu_TotalPacket_Logged},
+
 				{"Get_gErr_Mcu_Total", "()I",(void*) Get_gErr_Mcu_Total},
 				{"Get_gErr_Ecu_Total", "()I",(void*) Get_gErr_Ecu_Total},
 				{"Get_gErr_Tcu_Total", "()I",(void*) Get_gErr_Tcu_Total},
 				{"Get_gErr_Ehcu_Total", "()I",(void*) Get_gErr_Ehcu_Total},
+				{"Get_gErr_Acu_Total", "()I",(void*) Get_gErr_Acu_Total},
+
 				{"Get_gErr_Mcu_Total_Logged", "()I",(void*) Get_gErr_Mcu_Total_Logged},
 				{"Get_gErr_Ecu_Total_Logged", "()I",(void*) Get_gErr_Ecu_Total_Logged},
 				{"Get_gErr_Tcu_Total_Logged", "()I",(void*) Get_gErr_Tcu_Total_Logged},
 				{"Get_gErr_EHCU_Total_Logged", "()I",(void*) Get_gErr_EHCU_Total_Logged},
-
+				{"Get_gErr_Acu_Total_Logged", "()I",(void*) Get_gErr_Acu_Total_Logged},
 
 
 

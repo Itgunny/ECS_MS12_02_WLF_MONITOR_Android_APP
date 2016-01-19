@@ -16,7 +16,7 @@ public class IconTextListAdapterFault extends BaseAdapter {
 
 	private Context mContext;
 	int checkableId;
-
+	
 	private List<IconTextItemFault> mItems = new ArrayList<IconTextItemFault>();
 	
 	Animation animation;
