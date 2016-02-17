@@ -147,7 +147,7 @@ public class VersionInfoFragment extends ParentFragment{
 		textViewECM = (TextView)mRoot.findViewById(R.id.textView_menu_body_monitoring_version_ecm);
 		textViewECM.setText(getString(ParentActivity.getResources().getString(R.string.ECM), 267));
 		textViewACU = (TextView)mRoot.findViewById(R.id.textView_menu_body_monitoring_version_acu);
-		textViewACU.setText(getString(ParentActivity.getResources().getString(R.string.ACU), 455));
+		textViewACU.setText(getString(ParentActivity.getResources().getString(R.string.FATC), 455));
 		
 		textViewMonitor = (TextView)mRoot.findViewById(R.id.textView_menu_body_monitoring_version_monitor_title);
 		textViewMonitor.setText(getString(ParentActivity.getResources().getString(R.string.Monitor), 268));

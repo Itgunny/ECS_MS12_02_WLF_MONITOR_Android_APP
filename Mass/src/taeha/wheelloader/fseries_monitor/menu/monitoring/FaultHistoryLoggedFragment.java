@@ -206,7 +206,7 @@ public class FaultHistoryLoggedFragment extends ParentFragment{
 		ParentActivity.setMarqueeRadio(radioEHCU);
 		//++, 160105 cjg
 		radioACU = (RadioButton)mRoot.findViewById(R.id.radioButton_menu_body_monitoring_fault_acu);
-		radioACU.setText(getString(ParentActivity.getResources().getString(R.string.ACU), 455));
+		radioACU.setText(getString(ParentActivity.getResources().getString(R.string.FATC), 455));
 		ParentActivity.setMarqueeRadio(radioACU);
 		//--, 160105 cjg
 		layoutDetail = (RelativeLayout)mRoot.findViewById(R.id.RelativeLayout_menu_body_monitoring_fault_logged_detail);
@@ -488,7 +488,7 @@ public class FaultHistoryLoggedFragment extends ParentFragment{
 	}
 	// ++, 160105 cjg
 	public void ClickACU(){
-		TitleDisplay(getString(ParentActivity.getResources().getString(string.ACU), 455));
+		TitleDisplay(getString(ParentActivity.getResources().getString(string.FATC), 455));
 		radioMachine.setChecked(false);
 		radioEngine.setChecked(false);
 		radioTransmission.setChecked(false);
@@ -536,7 +536,7 @@ public class FaultHistoryLoggedFragment extends ParentFragment{
 		radioEngine.setText(getString(ParentActivity.getResources().getString(string.Engine), 308) + "(" + Integer.toString(DTCTotalEngine) + ")");
 		radioTransmission.setText(getString(ParentActivity.getResources().getString(string.Transmission), 309) + "(" + Integer.toString(DTCTotalTM) + ")");
 		radioEHCU.setText(getString(ParentActivity.getResources().getString(string.EHCU), 272) + "(" + Integer.toString(DTCTotalEHCU) + ")");
-		radioACU.setText(getString(ParentActivity.getResources().getString(string.ACU), 455) + "(" + Integer.toString(DTCTotalACU) + ")");
+		radioACU.setText(getString(ParentActivity.getResources().getString(string.FATC), 455) + "(" + Integer.toString(DTCTotalACU) + ")");
 	}
 	public void ErrListDisplay(){
 		switch (SelectedMode) {

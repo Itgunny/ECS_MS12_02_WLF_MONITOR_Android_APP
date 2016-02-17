@@ -80,7 +80,7 @@ public class Home extends Activity {
 	public static final int VERSION_LOW 		= 3;
 	public static final int VERSION_SUB_HIGH 	= 0;
 	public static final int VERSION_SUB_LOW 	= 2;
-	public static final int VERSION_TAEHA		= 0;
+	public static final int VERSION_TAEHA		= 1;
 	////1.0.2.3
 	// UI B 안 최초 적용 2014.12.10
 	////1.0.2.4
@@ -761,6 +761,8 @@ public class Home extends Activity {
 	// 2. ACU 기능 추가(현대 요청)
 	////v2.3.0.2
 	// 1. ACU 현재고장, 과거고장 기능 적용
+	////v2.3.0.2.1
+	// 1. ACU 기능 다국어 수정 및 다국어 인덱스 수정
 	//////////////////////////////////////////////////////////////////////////////////////
 	// TAG
 	private  final String TAG = "Home";

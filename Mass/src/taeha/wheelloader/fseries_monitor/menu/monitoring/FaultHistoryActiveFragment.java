@@ -4,8 +4,9 @@ import taeha.wheelloader.fseries_monitor.main.CAN1CommManager;
 import taeha.wheelloader.fseries_monitor.main.Home;
 import taeha.wheelloader.fseries_monitor.main.ParentFragment;
 import taeha.wheelloader.fseries_monitor.main.R;
-import taeha.wheelloader.fseries_monitor.main.TextFitTextView;
 import taeha.wheelloader.fseries_monitor.main.R.string;
+import taeha.wheelloader.fseries_monitor.main.RadioButtonTextView;
+import taeha.wheelloader.fseries_monitor.main.TextFitTextView;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -184,19 +185,24 @@ public class FaultHistoryActiveFragment extends ParentFragment{
 		radioMachine = (RadioButton)mRoot.findViewById(R.id.radioButton_menu_body_monitoring_fault_machine);
 		radioMachine.setText(getString(ParentActivity.getResources().getString(R.string.Machine), 307));
 		ParentActivity.setMarqueeRadio(radioMachine);
+		
 		radioEngine = (RadioButton)mRoot.findViewById(R.id.radioButton_menu_body_monitoring_fault_engine);
 		radioEngine.setText(getString(ParentActivity.getResources().getString(R.string.Engine), 308));
 		ParentActivity.setMarqueeRadio(radioEngine);
+		
 		radioTransmission = (RadioButton)mRoot.findViewById(R.id.radioButton_menu_body_monitoring_fault_transmission);
 		radioTransmission.setText(getString(ParentActivity.getResources().getString(R.string.Transmission), 309));
 		ParentActivity.setMarqueeRadio(radioTransmission);
+		
 		radioEHCU = (RadioButton)mRoot.findViewById(R.id.radioButton_menu_body_monitoring_fault_ehcu);
 		radioEHCU.setText(getString(ParentActivity.getResources().getString(R.string.EHCU), 272));
 		ParentActivity.setMarqueeRadio(radioEHCU);
+		
 		//++, 160105 cjg
 		radioACU = (RadioButton)mRoot.findViewById(R.id.radioButton_menu_body_monitoring_fault_acu);
-		radioACU.setText(getString(ParentActivity.getResources().getString(R.string.ACU), 455));
+		radioACU.setText(getString(ParentActivity.getResources().getString(R.string.FATC), 455));
 		ParentActivity.setMarqueeRadio(radioACU);
+		
 		//--, 160105 cjg
 		layoutDetail = (RelativeLayout)mRoot.findViewById(R.id.RelativeLayout_menu_body_monitoring_fault_active_detail);
 
@@ -515,7 +521,7 @@ public class FaultHistoryActiveFragment extends ParentFragment{
 
 	}
 	public void ClickACU(){
-		TitleDisplay(getString(ParentActivity.getResources().getString(string.ACU), 455));
+		TitleDisplay(getString(ParentActivity.getResources().getString(string.FATC), 455));
 		radioMachine.setChecked(false);
 		radioEngine.setChecked(false);
 		radioTransmission.setChecked(false);
@@ -560,7 +566,7 @@ public class FaultHistoryActiveFragment extends ParentFragment{
 		radioEngine.setText(getString(ParentActivity.getResources().getString(string.Engine), 308) + "(" + Integer.toString(DTCTotalEngine) + ")");
 		radioTransmission.setText(getString(ParentActivity.getResources().getString(string.Transmission), 309) + "(" + Integer.toString(DTCTotalTM) + ")");
 		radioEHCU.setText(getString(ParentActivity.getResources().getString(string.EHCU), 272) + "(" + Integer.toString(DTCTotalEHCU) + ")");
-		radioACU.setText(getString(ParentActivity.getResources().getString(string.ACU), 455) + "(" + Integer.toString(DTCTotalACU) + ")");
+		radioACU.setText(getString(ParentActivity.getResources().getString(string.FATC), 455) + "(" + Integer.toString(DTCTotalACU) + ")");
 	}
 	public void ErrListDisplay(){
 		switch (SelectedMode) {

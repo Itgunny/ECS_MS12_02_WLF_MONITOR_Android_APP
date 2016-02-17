@@ -184,7 +184,7 @@ public class LoggedFaultDeletePopup extends ParentPopup{
 			break;
 		case Home.REQ_ERR_ACU_LOGGED:
 			textViewTitle.setText(getString(ParentActivity.getResources().getString(string.Delete_Logged_Fault), 311) 
-					+ "\n(" +getString(ParentActivity.getResources().getString(string.ACU), 458) +")");
+					+ "\n(" +getString(ParentActivity.getResources().getString(string.FATC), 455) +")");
 		default:
 			break;
 		}
