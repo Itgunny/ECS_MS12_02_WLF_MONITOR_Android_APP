@@ -5,12 +5,12 @@
 ///////////////////////////// Timer////////////////////////////////////////////////////////////////
 timer_t firstTimerID;
 timer_t SecondTimerID;
-
+// Timer handler
 static void timer_handler( int sig, siginfo_t *si, void *uc )
 {
 	timer_t *tidp;
 	tidp = si->si_value.sival_ptr;
-
+	// firstTimerID
 	if ( *tidp == firstTimerID )
 	{
 //		__android_log_print(ANDROID_LOG_INFO, "Timer","Timer1\n");
@@ -33,7 +33,7 @@ static void timer_handler( int sig, siginfo_t *si, void *uc )
 		//timer_delete(SecondTimerID);	// Timer Kill
 	}
 }
-
+//makeTimer
 static int makeTimer( char *name, timer_t *timerID, int sec, int msec )
 {
 	struct sigevent         te;
@@ -41,7 +41,7 @@ static int makeTimer( char *name, timer_t *timerID, int sec, int msec )
 	struct sigaction        sa;
 	int                     sigNo = SIGRTMIN;
 
-	/* Set up signal handler. */
+	/* Set up signal handler.*/
 	sa.sa_flags = SA_SIGINFO;
 	sa.sa_sigaction = timer_handler;
 	sigemptyset(&sa.sa_mask);
@@ -73,7 +73,7 @@ void SetDatatoRingBuffer(unsigned char* Buf)
 	pthread_mutex_lock(&mutex_UART1_tx);
 	memcpy((unsigned char*)&UART1_TxBuff[TxRingBuffHead][0],&Buf[0],UART1_TXPACKET_SIZE);
 
-	if(TxRingBuffHead >= RINGBUFF_SIZE - 1 )
+	if(TxRingBuffHead >= RINGBUFF_SIZE - 1)
 		TxRingBuffHead = 0;
 	else
 		TxRingBuffHead++;
@@ -82,7 +82,7 @@ void SetDatatoRingBuffer(unsigned char* Buf)
 //CANData(Single)를 Buf에 저장한 후 값을 저장한다.
 void MakeCANDataSingle(unsigned char Priority, unsigned char PF, unsigned char PS, unsigned char SA, unsigned char *Data)
 {
-	unsigned char Buf[UART1_TXPACKET_SIZE]; //UART1_TXPACKET_SIZE 17
+	unsigned char Buf[UART1_TXPACKET_SIZE]; //UART1_TXPACKET_SIZE 14
 	int i;
 	// ex) 18FF3247
 	Buf[0] = SERIAL_RX_STX; //0x02
@@ -820,7 +820,6 @@ void UART1_SeperateData_Default(int Priority, int PF, int PS, unsigned char* Dat
 			////////////////////////////////////////////Old////////////////////////////////////////////////////////////////////
 			case 102	:	memcpy((unsigned char*) &rx_Machine_Travel_Setting,&Data[7], 8);	break;
 			///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
 			default:
 				break;
 			}

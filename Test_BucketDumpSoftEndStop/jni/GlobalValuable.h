@@ -17,15 +17,18 @@ jclass jObject;
 #define LOGE(fmt, args...) __android_log_print(ANDROID_LOG_ERROR, TAG, fmt, ##args)
 
 ////////////////////Define//////////////////////////
+// Ring Buffer SIZE 4096
 #define		RINGBUFF_SIZE				4096
 
-
+// QBUFF_SIZE 17
 #define		QBUFF_SIZE					17
+// RX : 17, PARSING : 32, TX : 14
 #define 	UART1_RXPACKET_SIZE 		17
 #define		UART1_PARSING_SIZE			32
+#define		UART1_TXPACKET_SIZE			14
+// RX : 11, PARSING : 1, TX : 11
 #define 	UART3_RXPACKET_SIZE 		11
 #define		UART3_PARSING_SIZE			1
-#define		UART1_TXPACKET_SIZE			14
 #define		UART3_TXPACKET_SIZE			11
 
 #define		CMD_RECV_SIZE				17
@@ -66,6 +69,7 @@ jclass jObject;
 //#define		VersionLowValue				0x51
 //#define		VersionSubValue				0x52
 
+//CallBack Valuable
 #define		KeyCMD			0x00
 #define		LCDCMD			0x01
 #define		BuzCMD			0x02
@@ -78,7 +82,6 @@ jclass jObject;
 #define		StartCANCMD		0x09
 #define		EEPROMTESTCMD 	0x0C
 #define		FLASHTESTCMD	0x0D
-
 
 #define		KeyRES			0x80
 #define		LCDRES			0x81
@@ -93,9 +96,11 @@ jclass jObject;
 #define		EEPROMTESTRES 	0x8C
 #define		FLASHTESTRES	0x8D
 
+//Buzzer Status
 #define 	BUZZERDAT_ON          		0x11    	//	Buzz On  Data
-#define 	BUZZERDAT_OFF          		0x10    	//	Buzz Off Data
+#define 	BUZZERDAT_OFF          		0x10    	//	Buzz Off Data\
 
+//Source Address
 #define 	SA_MCU						0x47
 #define		SA_MONITOR					0x28
 #define		SA_CLUSTER					0x17
@@ -108,24 +113,29 @@ jclass jObject;
 #define		SA_BKCU						0x34
 #define		SA_SMK						0x29
 ////////////////////////////////////////////////////
+// ERR_BUF_SIZE, MULTI_BUF_SIZE
 #define		ERR_BUF_SIZE				400
 #define		MULTI_BUF_SIZE				400
 
+// TIMER1_INTERVAL 50
 #define 	TIMER1_INTERVAL				50
+// KEY BUTTON MAX 5
 #define 	KEYBUTTON_CNT_MAX			5
+
 //////////////////Variable//////////////////////////
+//unsigned char UART1_TXBuff[4096][14]
 unsigned char		UART1_TxBuff[RINGBUFF_SIZE][UART1_TXPACKET_SIZE];
 unsigned int		TxRingBuffHead;
 unsigned int		TxRingBuffTail;
-
+//unsigned char UART1_RXBuff[4096][14]
 unsigned char		UART1_RxBuff[RINGBUFF_SIZE][UART1_TXPACKET_SIZE];
 unsigned int		RxRingBuffHead;
 unsigned int		RxRingBuffTail;
 
 pthread_mutex_t mutex_UART1_tx = PTHREAD_MUTEX_INITIALIZER;
+//MCU_RTSFlag, MCU_CTSFlag
 jboolean				MCU_RTSFlag;
 jboolean				MCU_CTSFlag;
-
 
 CAN_RX_PACKET*		UART1_Rx_Data;
 
@@ -347,6 +357,7 @@ DETENT_MODE_SETTING					tx_Detent_Mode_Setting;
 #define NEW_CAN2
 #ifdef NEW_CAN2
 /////////////////////////////////////////////////////
+// PF : PDU Format, PS : PDU Specific, Total Packet Num, Multi MessageType
 unsigned char		nPF;
 unsigned char		nPS;
 unsigned char		nTotalPacketNum;

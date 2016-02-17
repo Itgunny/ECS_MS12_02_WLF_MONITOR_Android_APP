@@ -383,7 +383,7 @@
     <string name="Sensor_Error">센서에러</string>
     <string name="Time_Out">Time Out</string>
     <string name="Boom_Up_Speed_Error">Boom Up Speed Error</string>
-    <string name="Pressure_Calibration_Warning">작동유 온도값 40ºC(104ºF) 이상에서 보정 실행하십시오.</string>
+    <string name="Pressure_Calibration_Warning">충분히 워밍업을 한 이후에 보정을 수행하십시오.\n작업량 계측 값이 정확하지 않을 수 있습니다.</string>
     <string name="Hydraulic_Oil_Temp_Error">Calibration 실패 - 작동유 온도 낮음</string>
     <string name="Fan_EPPR_Current_Adjust">Fan EPPR Current Adjust</string>
     <string name="Turn_the_engine_off_for_sensor_calibration">센서보정을 위해 시동을 꺼주십시오</string>

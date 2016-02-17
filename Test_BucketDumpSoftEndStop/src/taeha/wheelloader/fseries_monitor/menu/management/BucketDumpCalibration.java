@@ -51,6 +51,8 @@ public class BucketDumpCalibration extends ParentFragment{
 	TextView 	textViewDesText2;
 	TextView 	textViewDesText3;
 	TextView 	textViewDesText4;
+	TextView 	textViewOrder5;
+	TextView 	textViewDesText5;
 	
 	TextView	textViewBoomPositionTitle;
 	TextView	textViewBucketPositionTitle;
@@ -67,7 +69,6 @@ public class BucketDumpCalibration extends ParentFragment{
 	//VALUABLE////////////////////////////////////////
 	int BoomPosition;
 	int BucketPosition;
-	int HydOilTemp;
 	int rpmData;
 	
 	// Timer	
@@ -151,17 +152,16 @@ public class BucketDumpCalibration extends ParentFragment{
 		textViewDesText2 = (TextView)mRoot.findViewById(R.id.textView_menu_body_management_calibration_bucket_dump_main_step_2);
 		textViewDesText3 = (TextView)mRoot.findViewById(R.id.textView_menu_body_management_calibration_bucket_dump_main_step_3);
 		textViewDesText4 = (TextView)mRoot.findViewById(R.id.textView_menu_body_management_calibration_bucket_dump_main_step_4);
+		textViewOrder5 = (TextView)mRoot.findViewById(R.id.textView_menu_body_management_calibration_bucket_dump_main_order_5);
+		textViewDesText5 = (TextView)mRoot.findViewById(R.id.textView_menu_body_management_calibration_bucket_dump_main_step_5);
 		
 		textViewBoomPositionTitle = (TextView)mRoot.findViewById(R.id.textView_menu_body_management_calibration_bucket_dump_main_boom_position);
 		textViewBoomPositionTitle.setText("* " + getString(ParentActivity.getResources().getString(R.string.Boom_Position), 473) + " : ");
 		textViewBucketPositionTitle = (TextView)mRoot.findViewById(R.id.textView_menu_body_management_calibration_bucket_dump_main_bucket_position);
 		textViewBucketPositionTitle.setText("* " + getString(ParentActivity.getResources().getString(R.string.Bucket_Position), 474) + " : ");
-		textViewHydOilTempTitle = (TextView)mRoot.findViewById(R.id.textView_menu_body_management_calibration_bucket_dump_main_bucket_Oil);
-		textViewHydOilTempTitle.setText("* " + getString(ParentActivity.getResources().getString(R.string.HYD_Temp), 111) + " : ");
 		
 		textViewBoomPositionData = (TextView)mRoot.findViewById(R.id.textView_menu_body_management_calibration_bucket_dump_main_boom_position_value);
 		textViewBucketPositionData = (TextView)mRoot.findViewById(R.id.textView_menu_body_management_calibration_bucket_dump_main_bucket_position_value);
-		textViewHydOilTempData = (TextView)mRoot.findViewById(R.id.textView_menu_body_management_calibration_bucket_dump_main_bucket_Oil_value); 
 		
 		imgViewStep1 = (ImageView)mRoot.findViewById(R.id.imageView_menu_body_management_calibration_bucket_dump_step_1);
 		imgViewStep2 = (ImageView)mRoot.findViewById(R.id.imageView_menu_body_management_calibration_bucket_dump_step_2);
@@ -203,7 +203,6 @@ public class BucketDumpCalibration extends ParentFragment{
 	@Override
 	protected void GetDataFromNative() {
 		// TODO Auto-generated method stub
-		HydOilTemp = CAN1Comm.Get_HydraulicOilTemperature_101_PGN65431();
 		rpmData = CAN1Comm.Get_EngineSpeed_310_PGN65431();
 		BoomPosition = CAN1Comm.Get_BoomPositionCalibrationError_1946_PGN61184_202();
 		BucketPosition = CAN1Comm.Get_BucketPositionCalibrationError_1947_PGN61184_202();
@@ -212,7 +211,6 @@ public class BucketDumpCalibration extends ParentFragment{
 	@Override
 	protected void UpdateUI() {
 		// TODO Auto-generated method stub
-		HYDDisplay(textViewHydOilTempData,HydOilTemp,ParentActivity.UnitTemp);		// ++, --, 150204 bwk
 		BoomPosition(textViewBoomPositionData, BoomPosition);
 		BucketPosition(textViewBucketPositionData, BucketPosition);
 		BucketDumpProgressDisplay(StatusCNT);
@@ -251,6 +249,8 @@ public class BucketDumpCalibration extends ParentFragment{
 	public void Order2Display(){
 		textViewTitle.setText(getString(ParentActivity.getResources().getString(R.string.Second_Calibration), 354));
 		textViewDesText2.setText("시작 버튼을 누르고, 액셀 페달을 최대로 밟은 상태\n에서 버켓 레버를 최대로 조작해 덤프를 실시합니다.");
+		textViewDesText5.setVisibility(View.VISIBLE);
+		textViewOrder5.setVisibility(View.VISIBLE);
 		imgViewStep1.setImageResource(R.drawable.menu_management_boom_pressure_step_off);
 		imgViewStep2.setImageResource(R.drawable.menu_management_boom_pressure_step_on);
 		StatusCNT = 0;
@@ -259,24 +259,6 @@ public class BucketDumpCalibration extends ParentFragment{
 		progressBucketDump.setProgress(progress);
 	}
 	/////////////////////////////////////////////////////////////////////	
-	private void HYDDisplay(TextView textData, int Data, int Unit) {
-		if(Integer.parseInt(GetTemp(Data,Unit)) >= 40){
-			textData.setText(getString(ParentActivity.getResources().getString(string.OK), 15));
-			textData.setTextColor(Color.BLACK);
-			textData.setBackgroundColor(Color.GREEN);
-		}else{
-			if(Unit == Home.UNIT_TEMP_F){
-				textData.setText(ParentActivity.GetTemp(Data,Unit) + " " + getString(ParentActivity.getResources().getString(string.F), 9));
-				textData.setTextColor(Color.BLACK);
-				textData.setBackgroundColor(Color.RED);
-			}else{
-				textData.setText(ParentActivity.GetTemp(Data,Unit) + " " + getString(ParentActivity.getResources().getString(string.C), 8));
-				textData.setTextColor(Color.BLACK);
-				textData.setBackgroundColor(Color.RED);
-			}
-			
-		}
-	}
 	private void BoomPosition(TextView textData, int Data) {
 		if(Data == 1){
 			textData.setText(getString(ParentActivity.getResources().getString(string.Boom_Up), 236));

@@ -82,13 +82,12 @@
             android:layout_height="wrap_content"
             android:src="@drawable/menu_management_bucket_dump_img_01" />
 
-
         <TextView
             android:id="@+id/textView_menu_body_management_calibration_bucket_dump_main_step_1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_toRightOf="@+id/textView_menu_body_management_calibration_bucket_dump_main_order_1"
-            android:text="시작 버튼을 누르기전에\n- 버켓을 최대 범위로 롤백하고, 붐을 최대위치로\n  올립니다.\n- 엔진 모드가 P모드로 설정 되어있는지 확인 합니다.\n- 작동유 온도를 40℃ 이상으로 올립니다."
+            android:text="시작 버튼을 누르기전에 버켓을 최대 범위로 롤백하고, 붐을 최대위치로 올립니다.\n- 엔진 모드가 P모드로 설정 되어있는지 확인 합니다.\n- 작동유 온도를 40℃ 이상으로 올립니다."
             android:textSize="17px"
             android:textAppearance="?android:attr/textAppearanceLarge" />
 
@@ -219,40 +218,17 @@
 		    android:textColor="@color/white"
 		    android:textSize="17px" />
 
-		<TextView
-		    android:id="@+id/textView_menu_body_management_calibration_bucket_dump_main_bucket_Oil"
-		    android:layout_width="wrap_content"
-		    android:layout_height="wrap_content"
-		    android:layout_alignParentBottom="true"
-		    android:layout_alignParentLeft="true"
-		    android:text="* 작동유 : "
-		    android:textAppearance="?android:attr/textAppearanceLarge"
-		    android:textColor="@color/white"
-		    android:textSize="17px" />
-		
-		<TextView
-		    android:id="@+id/textView_menu_body_management_calibration_bucket_dump_main_bucket_Oil_value"
-		    android:layout_width="wrap_content"
-		    android:layout_height="wrap_content"
-		    android:layout_alignBaseline="@+id/textView_menu_body_management_calibration_bucket_dump_main_bucket_Oil"
-		    android:layout_alignBottom="@+id/textView_menu_body_management_calibration_bucket_dump_main_bucket_Oil"
-		    android:layout_toRightOf="@+id/textView_menu_body_management_calibration_bucket_dump_main_bucket_Oil"
-		    android:textAppearance="?android:attr/textAppearanceLarge"
-		    android:textColor="@color/white"
-		    android:textSize="17px" />
-
-		<TextView
+        <TextView
 		    android:id="@+id/textView_menu_body_management_calibration_bucket_dump_main_bucket_position"
 		    android:layout_width="wrap_content"
 		    android:layout_height="wrap_content"
-		    android:layout_above="@+id/textView_menu_body_management_calibration_bucket_dump_main_bucket_Oil"
-		    android:layout_alignParentLeft="true"
-		    android:layout_marginBottom="5dp"
+		    android:layout_below="@+id/textView_menu_body_management_calibration_bucket_dump_main_boom_position"
 		    android:text="* 버켓위치 : "
+		    android:layout_marginTop="15dp"
 		    android:textAppearance="?android:attr/textAppearanceLarge"
 		    android:textColor="@color/white"
 		    android:textSize="17px" />
-
+        
 		<TextView
 		    android:id="@+id/textView_menu_body_management_calibration_bucket_dump_main_bucket_position_value"
 		    android:layout_width="wrap_content"
@@ -263,6 +239,33 @@
 		    android:textAppearance="?android:attr/textAppearanceLarge"
 		    android:textColor="@color/white"
 		    android:textSize="17px" />
+
+       	<TextView
+            android:id="@+id/textView_menu_body_management_calibration_bucket_dump_main_order_5"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@+id/imageView_menu_body_management_calibration_bucket_dump_img"
+            android:layout_marginLeft="17dp"
+            android:layout_alignBaseline="@+id/textView_menu_body_management_calibration_bucket_dump_main_step_5"
+            android:layout_alignBottom="@+id/textView_menu_body_management_calibration_bucket_dump_main_step_5"
+            android:layout_toLeftOf="@+id/textView_menu_body_management_calibration_bucket_dump_main_step_5"
+            android:text="* "
+            android:textColor="@color/red"
+            android:visibility="gone"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:textSize="17px" />
+
+        <TextView
+            android:id="@+id/textView_menu_body_management_calibration_bucket_dump_main_step_5"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@+id/textView_menu_body_management_calibration_bucket_dump_main_step_4"
+            android:layout_below="@+id/textView_menu_body_management_calibration_bucket_dump_main_step_4"
+            android:text="보정을 위해 엔진 모드가 P 모드로 변경됩니다."
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:textColor="@color/red"
+            android:visibility="gone"
+            android:textSize="17px" />
 
     </RelativeLayout>
     
