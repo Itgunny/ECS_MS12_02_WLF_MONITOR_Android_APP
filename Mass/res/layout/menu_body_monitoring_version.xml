@@ -77,7 +77,7 @@
         android:background="@drawable/_selector_menu_body_monitoring_version_tcu_btn2"
         android:gravity="center"
         android:visibility="invisible"
-        android:text="@string/ACU"
+        android:text="@string/FATC"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:textColor="@drawable/_selector_menu_body_multimedia_txt" />    
     

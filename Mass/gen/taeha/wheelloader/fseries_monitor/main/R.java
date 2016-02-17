@@ -3740,7 +3740,6 @@ public final class R {
         public static final int touch=0x7f050001;
     }
     public static final class string {
-        public static final int ACU=0x7f0801c6;
         public static final int AEB=0x7f080157;
         public static final int AH=0x7f080068;
         public static final int AL=0x7f080066;
@@ -3899,6 +3898,8 @@ public final class R {
         public static final int Excuting_Unlocking_Attachment=0x7f0800b7;
         public static final int External_Aux=0x7f0801a4;
         public static final int F=0x7f080008;
+        public static final int FATC=0x7f0801c6;
+        public static final int FATC_System_Controller=0x7f0801d7;
         public static final int Fan_EPPR_Current_Adjust=0x7f080181;
         public static final int Fast=0x7f0800f6;
         public static final int Fault_History=0x7f0800fe;

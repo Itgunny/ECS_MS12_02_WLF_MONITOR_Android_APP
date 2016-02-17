@@ -454,7 +454,7 @@
     <string name="Warming_Up">Zahrievanie</string>
     <string name="Engine_Delay_Shutdown">Oneskorené Vypnutie Motora</string>
     <string name="Weighing_Information">Informácie o vážení</string>
-    <string name="ACU">ACU</string>
+    <string name="FATC">FATC</string>
     <string name="Boom_Lever_Floating_Position_Adjust">Boom Lever Floating Position Adjust</string>
     <string name="Fingertip_Calibration">Kalibrácia Fingertip</string>
     <string name="Boom_Down_Response_Adjust">Boom Down Response Adjust</string>
@@ -471,4 +471,5 @@
     <string name="Volume_L">L</string>
     <string name="Volume_gallon">gal</string>
     <string name="Distance">Vzdialenosť</string>
+    <string name="FATC_System_Controller">FATC System Controller</string>
 </resources>

@@ -454,7 +454,7 @@
     <string name="Warming_Up">Aquecimento</string>
     <string name="Engine_Delay_Shutdown">Retardo paragem Motor</string>
     <string name="Weighing_Information">Informação Pesagem</string>
-    <string name="ACU">ACU</string>
+    <string name="FATC">FATC</string>
     <string name="Boom_Lever_Floating_Position_Adjust">Boom Lever Floating Position Adjust</string>
     <string name="Fingertip_Calibration">Calibração Joystick Curto</string>
     <string name="Boom_Down_Response_Adjust">Boom Down Response Adjust</string>
@@ -471,4 +471,5 @@
     <string name="Volume_L">L</string>
     <string name="Volume_gallon">gal</string>
     <string name="Distance">Distancia</string>
+    <string name="FATC_System_Controller">FATC System Controller</string>
 </resources>
