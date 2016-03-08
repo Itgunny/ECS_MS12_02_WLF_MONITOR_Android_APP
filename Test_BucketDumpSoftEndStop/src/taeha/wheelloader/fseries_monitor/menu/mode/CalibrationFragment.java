@@ -121,6 +121,7 @@ public class CalibrationFragment extends MenuBodyList_ParentFragment{
 		CursurIndex = 2;
 		CursurDisplay(CursurIndex);
 	}
+
 	@Override
 	public void ClickList3() {
 		// TODO Auto-generated method stub
@@ -128,6 +129,7 @@ public class CalibrationFragment extends MenuBodyList_ParentFragment{
 		CursurIndex = 3;
 		CursurDisplay(CursurIndex);
 	}
+
 	@Override
 	public void ClickList4() {
 		// TODO Auto-generated method stub
@@ -147,8 +149,6 @@ public class CalibrationFragment extends MenuBodyList_ParentFragment{
 		// TODO Auto-generated method stub
 
 	}
-
-	
 
 	@Override
 	public void ClickList6() {

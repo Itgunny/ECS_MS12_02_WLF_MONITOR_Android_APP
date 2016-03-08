@@ -1972,7 +1972,6 @@ typedef struct
 	unsigned char 	BoomPressureCalibrationStatus_1908:4;
 	unsigned char	AngleSensorCalibrationStatus_1909:4;
 
-
 	unsigned char	AEBStatusInformation_MainCode_562;
 
 	unsigned char 	AEBCycleNumber_540;
@@ -2624,7 +2623,7 @@ typedef struct
 {
 	unsigned char	AmbientTemperature_3411;
 	unsigned char	InCabTemperature_3412;
-	unsigned char	DuctTemperature_3413;
+	unsigned char	DuctTemperature_3416;
 
 	unsigned char	Reserved0;
 

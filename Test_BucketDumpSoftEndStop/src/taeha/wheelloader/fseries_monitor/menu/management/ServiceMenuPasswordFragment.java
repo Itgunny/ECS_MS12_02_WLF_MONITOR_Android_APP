@@ -8,6 +8,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import taeha.wheelloader.fseries_monitor.main.DataProvider;
 import taeha.wheelloader.fseries_monitor.main.R;
 import taeha.wheelloader.fseries_monitor.menu.PasswordFragment;
 
@@ -233,6 +234,7 @@ public class ServiceMenuPasswordFragment extends PasswordFragment{
 	protected void GetDataFromNative() {
 		ComponentBasicInformation = ParentActivity.GetMonitorComponentBasicInfo();
 		String serialNumber = getSerialNumber(ComponentBasicInformation);
+		DataProvider.setAuthkey(serialNumber);
 		
 	}
 	

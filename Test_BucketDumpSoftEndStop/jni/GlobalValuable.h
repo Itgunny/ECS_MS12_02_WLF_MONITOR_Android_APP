@@ -206,34 +206,44 @@ unsigned char		gRecvMulti_ECM[MULTI_BUF_SIZE];
 unsigned char		gRecvMulti_TCU[MULTI_BUF_SIZE];
 unsigned char		gRecvMulti_CID[MULTI_BUF_SIZE];
 unsigned char		gRecvMulti_BKCU[MULTI_BUF_SIZE];
-unsigned int		gErr_EHCU[ERR_BUF_SIZE];
+
 
 unsigned int	 	gErr_Tcu[ERR_BUF_SIZE];
 unsigned int 		gErr_Ecu[ERR_BUF_SIZE];
 unsigned int 		gErr_Mcu[ERR_BUF_SIZE];
+unsigned int		gErr_EHCU[ERR_BUF_SIZE];
+unsigned int		gErr_ACU[ERR_BUF_SIZE];
+
 
 unsigned int	 	gErr_Tcu_Logged[ERR_BUF_SIZE];
 unsigned int 		gErr_Ecu_Logged[ERR_BUF_SIZE];
 unsigned int 		gErr_Mcu_Logged[ERR_BUF_SIZE];
 unsigned int 		gErr_EHCU_Logged[ERR_BUF_SIZE];
+unsigned int		gErr_ACU_Logged[ERR_BUF_SIZE];
 
 unsigned int		gErr_Mcu_TotalPacket;
 unsigned int		gErr_Ecu_TotalPacket;
 unsigned int		gErr_Tcu_TotalPacket;
 unsigned int		gErr_EHCU_TotalPacket;
+unsigned int 		gErr_ACU_TotalPacket;
+
 unsigned int		gErr_Mcu_TotalPacket_Logged;
 unsigned int		gErr_Ecu_TotalPacket_Logged;
 unsigned int		gErr_Tcu_TotalPacket_Logged;
 unsigned int		gErr_EHCU_TotalPacket_Logged;
+unsigned int		gErr_ACU_TotalPacket_Logged;
 
 unsigned int		gErr_Mcu_Total;
 unsigned int		gErr_Ecu_Total;
 unsigned int		gErr_Tcu_Total;
 unsigned int		gErr_EHCU_Total;
+unsigned int		gErr_ACU_Total;
+
 unsigned int		gErr_Mcu_Total_Logged;
 unsigned int		gErr_Ecu_Total_Logged;
 unsigned int		gErr_Tcu_Total_Logged;
 unsigned int		gErr_EHCU_Total_Logged;
+unsigned int		gErr_ACU_Total_Logged;
 
 unsigned char		gRecvSingle_250[8];
 unsigned char		gRecvMulti_250[21];

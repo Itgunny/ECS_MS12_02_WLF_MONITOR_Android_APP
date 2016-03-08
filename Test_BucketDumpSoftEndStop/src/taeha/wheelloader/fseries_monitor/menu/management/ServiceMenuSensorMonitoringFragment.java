@@ -30,7 +30,7 @@ import android.widget.TextView;
 
 public class ServiceMenuSensorMonitoringFragment extends ParentFragment{
 	//CONSTANT////////////////////////////////////////
-	private static final int NumofItem = 23;
+	private static final int NumofItem = 24;
 	//////////////////////////////////////////////////
 	//RESOURCE////////////////////////////////////////
 	ImageButton imgbtnOK;
@@ -163,6 +163,7 @@ public class ServiceMenuSensorMonitoringFragment extends ParentFragment{
 		StatusValue[20] = CAN1Comm.Get_FATCSettingTemperatureCelsius_3408_PGN65373();
 		StatusValue[21] = CAN1Comm.Get_AmbientTemperature_3411_PGN65519();
 		StatusValue[22] = CAN1Comm.Get_InCabTemperature_3412_PGN65519();
+		StatusValue[23] = CAN1Comm.Get_DuctTemperature_3416_PGN65519();
 		
 		TotalHourmeter = CAN1Comm.Get_Hourmeter_1601_PGN65433();
 	}
@@ -240,7 +241,6 @@ public class ServiceMenuSensorMonitoringFragment extends ParentFragment{
 		case 3:
 			Result = getString(ParentActivity.getResources().getString(string.Psi), 46);
 			break;
-
 		default:
 			Result = getString(ParentActivity.getResources().getString(string.bar), 43);
 			break;
@@ -271,7 +271,6 @@ public class ServiceMenuSensorMonitoringFragment extends ParentFragment{
 		case Home.UNIT_TEMP_C:
 			Result = getString(ParentActivity.getResources().getString(string.C), 8);
 			break;
-	
 		default:
 			Result = getString(ParentActivity.getResources().getString(string.C), 8);
 			break;
@@ -285,7 +284,7 @@ public class ServiceMenuSensorMonitoringFragment extends ParentFragment{
 		int FanRPM,EngineRPM,AlternatorVolt,BoomPosSensorVolt,BucketPosSensorVolt,EngineModeSelVolt,ClutchModeSelVolt
 		,TMModeSelVolt,BrakeFailureWarningPS,ParkingPS,BoomHeadCylinderPS,BommRodCylinderPS,SteeringPumpPS,EmergencyMotorPumpPS
 		,DifferentialLockPS,BrakePriorityPS,BrakePedalPosVolt,AccPedalPositionVolt,AccPedalPositionPercent
-		,FATCSettingTemperature,AmbientTemperature,InCabTemperature;
+		,FATCSettingTemperature,AmbientTemperature,InCabTemperature,DuctTemperature;
 		int IntegerValue, Point;
 		adapter.clearItem();
 	
@@ -673,6 +672,23 @@ public class ServiceMenuSensorMonitoringFragment extends ParentFragment{
 			}
 		}		
 		
+		// 24. Duct Temperature : C
+		if(StatusValue[23] != 0xff){
+			DuctTemperature = TempConvert(StatusValue[23], ParentActivity.UnitTemp);
+			IntegerValue = DuctTemperature / 10;
+			Point = DuctTemperature % 10;
+			
+			if(BackgroundFlag == true){
+				BackgroundFlag = false;
+				adapter.addItem(new IconTextItem(ParentActivity.getResources().getDrawable(R.drawable.menu_management_machine_monitoring_bg_dark),ParentActivity.getResources().getDrawable(R.drawable.menu_management_machine_monitoring_bg_line), "Duct Temperature", Integer.toString(IntegerValue) + "." 
+						+ Integer.toString(Point), GetTempUnit(ParentActivity.UnitTemp)));
+			}else{
+				BackgroundFlag = true;
+				adapter.addItem(new IconTextItem(ParentActivity.getResources().getDrawable(R.drawable.menu_management_machine_monitoring_bg_light),ParentActivity.getResources().getDrawable(R.drawable.menu_management_machine_monitoring_bg_line), "Duct Temperature", Integer.toString(IntegerValue) + "." 
+						+ Integer.toString(Point), GetTempUnit(ParentActivity.UnitTemp)));
+			}
+		}
+		
 		adapter.notifyDataSetChanged();
 	}
 	/////////////////////////////////////////////////////////////////////
@@ -714,7 +730,6 @@ public class ServiceMenuSensorMonitoringFragment extends ParentFragment{
 		case 1:
 			imgbtnOK.setPressed(true);
 			break;
-		
 		default:
 			break;
 		}

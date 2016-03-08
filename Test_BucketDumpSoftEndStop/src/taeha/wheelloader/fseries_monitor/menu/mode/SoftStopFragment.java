@@ -166,7 +166,7 @@ public class SoftStopFragment extends ParentFragment{
 		textBucketInTitle = (TextFitTextView)mRoot.findViewById(R.id.textView_menu_body_mode_softstop_bucketin);
 		textBucketInTitle.setText(getString(ParentActivity.getResources().getString(R.string.Bucket_In), 238));
 		textBucketDumpTitle = (TextFitTextView)mRoot.findViewById(R.id.textView_menu_body_mode_softstop_bucketout);
-		textBucketDumpTitle.setText(getString(ParentActivity.getResources().getString(R.string.Bucket_In), 239));
+		textBucketDumpTitle.setText(getString(ParentActivity.getResources().getString(R.string.Bucket_Dump), 239));
 		
 		imgViewLine1 = (ImageView)mRoot.findViewById(R.id.imageView_menu_body_mode_softstop_line1);
 		imgViewLine2 = (ImageView)mRoot.findViewById(R.id.imageView_menu_body_mode_softstop_line2);

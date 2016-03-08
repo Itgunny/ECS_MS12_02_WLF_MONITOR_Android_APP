@@ -112,7 +112,6 @@ public class FaultHistoryFragment extends MenuBodyList_ParentFragment{
 		else
 			ParentActivity.StartAnimationRunningTimer();
 		ParentActivity._MenuBaseFragment.showLoggedFaultPasswordAnimation();
-	//	ParentActivity._MenuBaseFragment.showBodyLoggedFaultAnimation();
 		CursurIndex = 2;
 		CursurDisplay(CursurIndex);
 	}

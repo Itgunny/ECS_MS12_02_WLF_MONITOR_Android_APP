@@ -81,8 +81,8 @@ public class Home extends Activity {
 	public static final int VERSION_HIGH 		= 2;
 	public static final int VERSION_LOW 		= 3;
 	public static final int VERSION_SUB_HIGH 	= 0;
-	public static final int VERSION_SUB_LOW 	= 1;
-	public static final int VERSION_TAEHA		= 1;
+	public static final int VERSION_SUB_LOW 	= 3;
+	public static final int VERSION_TAEHA		= 0;
 	////1.0.2.3
 	// UI B 안 최초 적용 2014.12.10
 	////1.0.2.4
@@ -747,14 +747,28 @@ public class Home extends Activity {
 	// 4. EHCU 히든 페이지 3가지 모드 설정하는 부분 영문으로 통합
 	// 5. Smart Terminal 1.05 버전이 아닐경우로 변경(이후에 또 업데이트될 수 있으므로)
 	// 6. 연료 소비량 정보 그래프에서 gal로 변경되었을 때 눈금 안맞는 부분 수정
+	////v2.2.0.11
+	// 1. H/W Test CID 공유 누락으로 인해 수정
+	////v2.2.0.2
+	// 1. MainB안 Non TC Lock Up에서 Hourmeter 깜박거리는 현상 개선	
 	////v2.2.0.3
-	// 1. Bucket Dump Speed Calibration 추가 완료
-	// 2. Init 작업 완료.
-	// 3. 다국어 작업 내용 미완.
-	////v2.2.0.4
-	// 1. Bucket 덤프 속도 보정 추가.
+	// 1. 에어컨 실차 테스트용
+	////v2.2.0.4 15.12.21(BucketDump 속도 보정) : svn 참조
+	////v2.3.0.0
+	// 1. RMCU 호기수 입력 기능 적용.
+	// 2. ACU 기능 삭제 및 코드 표시 변경.
+	// 3. Soft End Stop Bucket Dump 오류 표시 수정.(다국어 파일 없을시)
 	////v2.3.0.1
+	// 1. 관리자 메뉴 LEFT-RIGHT Long key로 진입가능하게 하는 기능
+	////v2.3.0.1.1
 	// 1. Boom Pressure Calibration & Bucket Dump Speed Calibration 문구 수정.
+	// 2. ACU 기능 추가(현대 요청)
+	////v2.3.0.2
+	// 1. ACU 현재고장, 과거고장 기능 적용
+	////v2.3.0.2.1
+	// 1. ACU 기능 다국어 수정 및 다국어 인덱스 수정
+	////v2.3.0.3
+	// 1. ACU 기능과 Bucket Dump Speed Calibration과 RMCU 호기 수 입력 기능 합침
 	//////////////////////////////////////////////////////////////////////////////////////
 	// TAG
 	private  final String TAG = "Home";
@@ -898,7 +912,6 @@ public class Home extends Activity {
 	public  static final int SCREEN_STATE_MENU_MODE_ETC_CALIBRATION_END						= 0x2135FFFF;
 	public  static final int SCREEN_STATE_MENU_MODE_ETC_DELAYSHUTDOWN_TOP					= 0x21360000;
 	public  static final int SCREEN_STATE_MENU_MODE_ETC_DELAYSHUTDOWN_END					= 0x2136FFFF;
-
 	public  static final int SCREEN_STATE_MENU_MODE_ETC_END									= 0x213FFFFF;
 	
 	
@@ -1224,6 +1237,9 @@ public class Home extends Activity {
 	public static final int REQ_ERR_EHCU_ACTIVE			= 6;
 	public static final int REQ_ERR_EHCU_LOGGED			= 7;
 	
+	public static final int REQ_ERR_ACU_ACTIVE		= 8; // ++, --, 160105 cjg
+	public static final int REQ_ERR_ACU_LOGGED		= 9; // ++, --, 160105 cjg
+	
 	public static final int REQ_ERR_START				= -1;
 	public static final int REQ_ERR_END					= 15;
 	// --, 150326 bwk
@@ -1435,8 +1451,8 @@ public class Home extends Activity {
 	
 	// Model
 	public CheckModel _CheckModel;
-	//public int MachineSerialNumber;
-	//public int tempMachineSerialNumber;
+	public int MachineSerialNumber;
+	public int tempMachineSerialNumber;
 	
 	// Time
 	public int Year;
@@ -1638,7 +1654,7 @@ public class Home extends Activity {
 		
 		UserIndex = 1;		// ++, 150212 bwk
 		
-		//tempMachineSerialNumber = 0xffffff;
+		tempMachineSerialNumber = 0xffffff;
 		
 		// ++, 150211 bwk
 //		HighrpmCount = 0;
@@ -1932,31 +1948,36 @@ public class Home extends Activity {
 		CAN1Comm.TxCMDToMCU(CAN1CommManager.CMD_CAM, SelectCameraNum-1);
 	}
 	// --, 150324 bwk
-//	public void SetMachineSerialNumber()
-//	{
-//		SaveMachineSerialNumber();
-//		showMainScreen();
-//		StartSeatBeltTimer();
-//	}
-//	public void SaveMachineSerialNumber(){
-//		String str= Integer.toString(MachineSerialNumber);
-//		int tempNumber = Integer.parseInt(str,16);
-//		
-//		byte[] Temp = new byte[3];
-//		Temp[0] = (byte)( (tempNumber >>> 16) & 0xFF );
-//		Temp[1] = (byte)( (tempNumber >>> 8) & 0xFF );
-//		Temp[2] = (byte)( (tempNumber >>> 0) & 0xFF );
-//		
-//		CAN1Comm.Set_MachineSerialNumber2_962_PGN65327(Temp);
-//		CAN1Comm.TxCANToMCU(47);
-//
-//		SharedPreferences SharePref = getSharedPreferences("Home", 0);
-//		SharedPreferences.Editor edit = SharePref.edit();
-//		edit.putInt("MachineSerialNumber", MachineSerialNumber);
-//		edit.commit();
-//		
-//		Log.d(TAG,"SaveMachineSerialNumber");
-//	}
+	public void SetMachineSerialNumber()
+	{
+		SaveMachineSerialNumber();
+		showMainScreen();
+		StartSeatBeltTimer();
+	}
+	public void SaveMachineSerialNumber(){
+		String str= Integer.toString(MachineSerialNumber);
+		int tempNumber = Integer.parseInt(str,16);
+		byte[] Temp = new byte[3];
+		if(MachineSerialNumber == 0xffffff){
+			Temp[0] = (byte) 0xff;
+			Temp[1] = (byte) 0xff;
+			Temp[2] = (byte) 0xff;
+		}else{
+			Temp[0] = (byte)( (tempNumber >>> 16) & 0xFF );
+			Temp[1] = (byte)( (tempNumber >>> 8) & 0xFF );
+			Temp[2] = (byte)( (tempNumber >>> 0) & 0xFF );
+		}
+		
+		CAN1Comm.Set_MachineSerialNumber2_962_PGN65327(Temp);
+		CAN1Comm.TxCANToMCU(47);
+
+		SharedPreferences SharePref = getSharedPreferences("Home", 0);
+		SharedPreferences.Editor edit = SharePref.edit();
+		edit.putInt("MachineSerialNumber", MachineSerialNumber);
+		edit.commit();
+		
+		Log.d(TAG,"SaveMachineSerialNumber");
+	}
 	public void SaveASPhoneNumber(){
 		byte[] ASNum;
 		int Index = 0;
@@ -2016,8 +2037,8 @@ public class Home extends Activity {
 		Log.d(TAG,"SaveCID");
 		Log.d(TAG,"length : " + Integer.toString(_componentbasicinformation.length));
 		
-//		MachineSerialNumber = 0xffffff;
-//		SaveMachineSerialNumber();
+		MachineSerialNumber = 0xffffff;
+		SaveMachineSerialNumber();
 	}
 	public void CheckCID(){
 		Log.d(TAG,"CheckCID");
@@ -2210,7 +2231,7 @@ public class Home extends Activity {
 		
 		AttachmentStatus = SharePref.getInt("AttachmentStatus", CAN1CommManager.DATA_STATE_KEY_QUICKCOUPLER_OFF);
 		
-//		MachineSerialNumber = SharePref.getInt("MachineSerialNumber", 0xFFFFFF);
+		MachineSerialNumber = SharePref.getInt("MachineSerialNumber", 0xFFFFFF);
 		Log.d(TAG,"LoadPref");
 	}
 	
@@ -2536,16 +2557,16 @@ public class Home extends Activity {
 		}
 	}
 	/////////////////////////////////////////////////////
-//	public void showInputMachineSerial(){
-//		if(MachineSerialNumber == 0xffffff)
-//		{
-//			_MainChangeAnimation.StartChangeAnimation(_InputMachineSerialFragment);
-//		}
-//		else
-//		{
-//			SetMachineSerialNumber();
-//		}
-//	}
+	public void showInputMachineSerial(){
+		if(MachineSerialNumber == 0xffffff)
+		{
+			_MainChangeAnimation.StartChangeAnimation(_InputMachineSerialFragment);
+		}
+		else
+		{
+			SetMachineSerialNumber();
+		}
+	}
 	// ++, 150309 bwk
 	public void showMainScreen(){
 		if(DisplayType == DISPLAY_TYPE_A){

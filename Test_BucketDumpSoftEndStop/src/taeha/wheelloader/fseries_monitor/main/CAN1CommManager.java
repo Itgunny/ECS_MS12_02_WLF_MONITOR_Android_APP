@@ -636,6 +636,9 @@ public class CAN1CommManager extends ICAN1CommManager.Stub{		// ttySAC1(Linux), 
 	public int[] Get_EHCUErr(){
 		return service.Get_EHCUErr_FromNative();
 	}
+	public int[] Get_AcuErr(){
+		return service.Get_AcuErr_FromNative();
+	}
 	
 	public int[] Get_TcuErr_Logged(){
 		return service.Get_TcuErr_Logged_FromNative();
@@ -649,6 +652,10 @@ public class CAN1CommManager extends ICAN1CommManager.Stub{		// ttySAC1(Linux), 
 	public int[] Get_McuErr_Logged(){
 		return service.Get_McuErr_Logged_FromNative();
 	}
+	public int[] Get_AcuErr_Logged(){
+		return service.Get_AcuErr_Logged_FromNative();
+	}
+	
 	
 	public int Get_EHCUSingleOrMulti(){
 		return service.Get_EHCUSingleOrMulti_FromNative();
@@ -1300,7 +1307,7 @@ public class CAN1CommManager extends ICAN1CommManager.Stub{		// ttySAC1(Linux), 
 	//////RX_AMBIENT_CONDITIONS_65519///////
 	public int Get_AmbientTemperature_3411_PGN65519(){ return service.Get_AmbientTemperature_3411_PGN65519();}
 	public int Get_InCabTemperature_3412_PGN65519(){ return service.Get_InCabTemperature_3412_PGN65519();}
-	public int Get_DuctTemperature_3413_PGN65519(){ return service.Get_DuctTemperature_3413_PGN65519();}
+	public int Get_DuctTemperature_3416_PGN65519(){ return service.Get_DuctTemperature_3416_PGN65519();}
 	//////RX_WHEEL_LOADER_EHCU_STATUS2_65524///////
 	public int Get_SoftStopBoomUp_2337_PGN65524(){ return service.Get_SoftStopBoomUp_2337_PGN65524();}
 	public int Get_SoftStopBoomDown_2338_PGN65524(){ return service.Get_SoftStopBoomDown_2338_PGN65524();}
@@ -1799,19 +1806,25 @@ public class CAN1CommManager extends ICAN1CommManager.Stub{		// ttySAC1(Linux), 
 	public int Get_gErr_Ecu_TotalPacket(){ return service.Get_gErr_Ecu_TotalPacket();}
 	public int Get_gErr_Tcu_TotalPacket(){ return service.Get_gErr_Tcu_TotalPacket();}
 	public int Get_gErr_Ehcu_TotalPacket(){ return service.Get_gErr_Ehcu_TotalPacket();}
+	public int Get_gErr_Acu_TotalPacket(){ return service.Get_gErr_Acu_TotalPacket();}
+	
 	public int Get_gErr_Mcu_TotalPacket_Logged(){ return service.Get_gErr_Mcu_TotalPacket_Logged();}
 	public int Get_gErr_Ecu_TotalPacket_Logged(){ return service.Get_gErr_Ecu_TotalPacket_Logged();}
 	public int Get_gErr_Tcu_TotalPacket_Logged(){ return service.Get_gErr_Tcu_TotalPacket_Logged();}
 	public int Get_gErr_EHCU_TotalPacket_Logged(){ return service.Get_gErr_EHCU_TotalPacket_Logged();}
+	public int Get_gErr_Acu_TotalPacket_Logged(){ return service.Get_gErr_Acu_TotalPacket_Logged();}
+	
 	public int Get_gErr_Mcu_Total(){ return service.Get_gErr_Mcu_Total();}
 	public int Get_gErr_Ecu_Total(){ return service.Get_gErr_Ecu_Total();}
 	public int Get_gErr_Tcu_Total(){ return service.Get_gErr_Tcu_Total();}
 	public int Get_gErr_Ehcu_Total(){ return service.Get_gErr_Ehcu_Total();}
+	public int Get_gErr_Acu_Total(){ return service.Get_gErr_Acu_Total();}
+	
 	public int Get_gErr_Mcu_Total_Logged(){ return service.Get_gErr_Mcu_Total_Logged();}
 	public int Get_gErr_Ecu_Total_Logged(){ return service.Get_gErr_Ecu_Total_Logged();}
 	public int Get_gErr_Tcu_Total_Logged(){ return service.Get_gErr_Tcu_Total_Logged();}
 	public int Get_gErr_EHCU_Total_Logged(){ return service.Get_gErr_EHCU_Total_Logged();}
-	
+	public int Get_gErr_Acu_Total_Logged(){ return service.Get_gErr_Acu_Total_Logged();}
 	///////////////////////////////////////////////////////////////////////////////////////////////////////
 	
 	

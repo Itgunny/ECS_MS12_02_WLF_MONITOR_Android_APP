@@ -26,7 +26,6 @@ public class ServiceMenuChangeMachineSerialFragment extends PasswordFragment{
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
-		//super.onCreateView(inflater, container, savedInstanceState);
 		TAG = "ServiceMenuChangeMachineSerialFragment";
 		Log.d(TAG, "onCreateView");		
 		
@@ -34,7 +33,12 @@ public class ServiceMenuChangeMachineSerialFragment extends PasswordFragment{
 		InitResource();
 		InitValuables();
 		InitButtonListener();
-//		setTitleText(ParentActivity.getResources().getString(string.Serial_No)+" "+Integer.toString(ParentActivity.MachineSerialNumber));
+		
+		if(ParentActivity.MachineSerialNumber == 0xffffff){
+			setTitleText(getString(ParentActivity.getResources().getString(string.Serial_No), 83));
+		}else{
+			setTitleText(getString(ParentActivity.getResources().getString(string.Serial_No), 83)+" "+Integer.toString(ParentActivity.MachineSerialNumber));
+		}
 		
 		InitialMachineSerialNumber();
 
@@ -89,6 +93,8 @@ public class ServiceMenuChangeMachineSerialFragment extends PasswordFragment{
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
+				CursurIndex = 13;
+				HandleCursurDisplay.sendMessage(HandleCursurDisplay.obtainMessage(CursurIndex));
 				ClickESC();
 			}
 		});
@@ -116,7 +122,7 @@ public class ServiceMenuChangeMachineSerialFragment extends PasswordFragment{
 	}
 	////////////////////////////////////////////////////////////////////////////////////////
 	public void InitialMachineSerialNumber(){
-//		ParentActivity.tempMachineSerialNumber = 0xffffff;
+		ParentActivity.tempMachineSerialNumber = 0xffffff;
 		checkDisplay.setVisibility(View.GONE);
 	}
 	public int GetMachineSerialNumber(){
@@ -161,32 +167,200 @@ public class ServiceMenuChangeMachineSerialFragment extends PasswordFragment{
 		}
 		else
 		{
-//			if(ParentActivity.tempMachineSerialNumber == 0xffffff)
-//			{
-//				ParentActivity.tempMachineSerialNumber = GetMachineSerialNumber();
-//				SetTextIndicatorTitle(18);
-//				PasswordIndicatorDisplay();
-//				
-//				SetTitleIndex(18);
-//				StartIndicatorTitleTimer(500);
-//			}
-//			else if(GetMachineSerialNumber() != ParentActivity.tempMachineSerialNumber)
-//			{
-//				ParentActivity.tempMachineSerialNumber = 0xffffff;
-//				PasswordIndicatorDisplay();
-//				
-//				setTitleText(ParentActivity.getResources().getString(string.Serial_No)+" "+Integer.toString(ParentActivity.MachineSerialNumber));
-//				StartIndicatorTitleTimer(500);
-//			}
-//			else 
-//			{
-//				ParentActivity.MachineSerialNumber = GetMachineSerialNumber();
-//				ParentActivity.SaveMachineSerialNumber();
-//				showServicePasswordNextScreen();
-//			}
+			if(ParentActivity.tempMachineSerialNumber == 0xffffff)
+			{
+				ParentActivity.tempMachineSerialNumber = GetMachineSerialNumber();
+				SetTextIndicatorTitle(18);
+				PasswordIndicatorDisplay();
+				
+				SetTitleIndex(18);
+				StartIndicatorTitleTimer(500);
+			}
+			else if(GetMachineSerialNumber() != ParentActivity.tempMachineSerialNumber)
+			{
+				ParentActivity.tempMachineSerialNumber = 0xffffff;
+				PasswordIndicatorDisplay();
+				
+				setTitleText(getString(ParentActivity.getResources().getString(string.Serial_No), 83)+" "+Integer.toString(ParentActivity.MachineSerialNumber));
+				StartIndicatorTitleTimer(500);
+			}
+			else 
+			{
+				ParentActivity.MachineSerialNumber = GetMachineSerialNumber();
+				ParentActivity.SaveMachineSerialNumber();
+				showServicePasswordNextScreen();
+			}
 
 		}		
 	}
+	@Override
+	public void ClickLeft() {
+		// TODO Auto-generated method stub
+		switch (CursurIndex) {
+		case 1:
+			CursurIndex = 13;
+			CursurDisplay(CursurIndex);
+			break;
+		case 2:
+		case 3:
+		case 4:
+		case 5:
+		case 6:
+		case 7:
+		case 8:
+		case 9:
+		case 10:
+		case 11:
+		case 12:
+		case 13:
+			CursurIndex--;
+			CursurDisplay(CursurIndex);
+			break;
+
+		default:
+			break;
+		}
+		
+	}
+
+	@Override
+	public void ClickRight() {
+		// TODO Auto-generated method stub
+		switch (CursurIndex) {
+		case 1:
+		case 2:
+		case 3:
+		case 4:
+		case 5:
+		case 6:
+		case 7:
+		case 8:
+		case 9:
+		case 10:
+		case 11:
+		case 12:
+			CursurIndex++;
+			CursurDisplay(CursurIndex);
+			break;
+		case 13:
+			CursurIndex = 1;
+			CursurDisplay(CursurIndex);
+			break;
+		default:
+			break;
+		}
+	}
+
+	@Override
+	public void ClickEnter() {
+		// TODO Auto-generated method stub
+		switch (CursurIndex) {
+		case 1:
+			ClickNum1();
+			break;
+		case 2:
+			ClickNum2();
+			break;
+		case 3:
+			ClickNum3();
+			break;
+		case 4:
+			ClickNum4();
+			break;
+		case 5:
+			ClickNum5();
+			break;
+		case 6:
+			ClickNum6();
+			break;
+		case 7:
+			ClickNum7();
+			break;
+		case 8:
+			ClickNum8();
+			break;
+		case 9:
+			ClickNum9();
+			break;
+		case 10:
+			ClickBack();
+			break;
+		case 11:
+			ClickNum0();
+			break;
+		case 12:
+			ClickEnterButton();
+			break;
+		case 13:
+			ClickESC();
+			break;
+		default:
+			break;
+		}
+	}
+
+	@Override
+	public void CursurDisplay(int Index) {
+		// TODO Auto-generated method stub
+		textViewNum1.setPressed(false);
+		textViewNum2.setPressed(false);
+		textViewNum3.setPressed(false);
+		textViewNum4.setPressed(false);
+		textViewNum5.setPressed(false);
+		textViewNum6.setPressed(false);
+		textViewNum7.setPressed(false);
+		textViewNum8.setPressed(false);
+		textViewNum9.setPressed(false);
+		textViewNum0.setPressed(false);
+		imgbtnBack.setPressed(false);
+		imgbtnEnter.setPressed(false);
+		imgbtnCancel.setPressed(false);
+
+		switch (Index) {
+		case 1:
+			textViewNum1.setPressed(true);
+			break;
+		case 2:
+			textViewNum2.setPressed(true);
+			break;
+		case 3:
+			textViewNum3.setPressed(true);
+			break;
+		case 4:
+			textViewNum4.setPressed(true);
+			break;
+		case 5:
+			textViewNum5.setPressed(true);
+			break;
+		case 6:
+			textViewNum6.setPressed(true);
+			break;
+		case 7:
+			textViewNum7.setPressed(true);
+			break;
+		case 8:
+			textViewNum8.setPressed(true);
+			break;
+		case 9:
+			textViewNum9.setPressed(true);
+			break;
+		case 10:
+			imgbtnBack.setPressed(true);
+			break;
+		case 11:
+			textViewNum0.setPressed(true);
+			break;
+		case 12:
+			imgbtnEnter.setPressed(true);
+			break;
+		case 13:
+			imgbtnCancel.setPressed(true);	
+			break;
+		default:
+			break;
+		}
+	}
+
 	@Override
 	public void ClickESC(){
 		showServicePasswordNextScreen();

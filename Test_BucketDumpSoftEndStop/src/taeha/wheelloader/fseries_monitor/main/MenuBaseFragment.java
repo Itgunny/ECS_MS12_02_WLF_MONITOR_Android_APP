@@ -1850,6 +1850,7 @@ public class MenuBaseFragment extends ParentFragment{
 		case Home.SCREEN_STATE_MENU_MODE_ETC_CALIBRATION_BRAKEPEDAL_TOP:
 			ParentActivity._BrakePedalCalibrationPopup.ClickRight();
 			break;
+			
 		case Home.SCREEN_STATE_MENU_MODE_ETC_FREQ_TOP:
 			_SpeedometerFreqFragment.ClickRight();
 			break;

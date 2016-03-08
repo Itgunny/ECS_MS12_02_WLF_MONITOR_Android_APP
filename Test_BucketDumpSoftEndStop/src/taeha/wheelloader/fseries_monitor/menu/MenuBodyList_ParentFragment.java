@@ -291,10 +291,6 @@ public abstract class MenuBodyList_ParentFragment extends ParentFragment{
 		textViewTitle4.setLayoutParams(plControl);
 		
 	}
-	public void setListTitle1(String str){
-		textViewTitle1.setText(str);
-		textViewTitle1.clearAnimation();
-	}
 	public void setListTitle1(String str, int index){
 		if(ParentActivity.langDb.findStrGetString(index, ParentActivity.LanguageIndex) == null){
 		textViewTitle1.setText(str);
@@ -302,10 +298,6 @@ public abstract class MenuBodyList_ParentFragment extends ParentFragment{
 			textViewTitle1.setText(ParentActivity.langDb.findStrGetString(index, ParentActivity.LanguageIndex));
 		}
 		textViewTitle1.clearAnimation();
-	}
-	public void setListTitle2(String str){
-		textViewTitle2.setText(str);
-		textViewTitle2.clearAnimation();
 	}
 	public void setListTitle2(String str, int index){
 		if(ParentActivity.langDb.findStrGetString(index, ParentActivity.LanguageIndex) == null){
@@ -315,12 +307,6 @@ public abstract class MenuBodyList_ParentFragment extends ParentFragment{
 		}
 		textViewTitle2.clearAnimation();
 	}
-	public void setListTitle3(String str){
-		
-		textViewTitle3.setText(str);
-		
-		textViewTitle3.clearAnimation();
-	}
 	public void setListTitle3(String str, int index){
 		if(ParentActivity.langDb.findStrGetString(index, ParentActivity.LanguageIndex) == null){
 		textViewTitle3.setText(str);
@@ -328,11 +314,6 @@ public abstract class MenuBodyList_ParentFragment extends ParentFragment{
 			textViewTitle3.setText(ParentActivity.langDb.findStrGetString(index, ParentActivity.LanguageIndex));
 		}
 		textViewTitle3.clearAnimation();
-	}
-	public void setListTitle4(String str){
-		
-		textViewTitle4.setText(str);
-		textViewTitle4.clearAnimation();
 	}
 	public void setListTitle4(String str, int index){
 		if(ParentActivity.langDb.findStrGetString(index, ParentActivity.LanguageIndex) == null){
@@ -350,11 +331,6 @@ public abstract class MenuBodyList_ParentFragment extends ParentFragment{
 			textViewTitle4.setText(ParentActivity.langDb.findStrGetString(index, ParentActivity.LanguageIndex) + " / " + ParentActivity.langDb.findStrGetString(index2, ParentActivity.LanguageIndex));
 		}
 		textViewTitle4.clearAnimation();
-	}
-	public void setListTitle5(String str){
-		
-		textViewTitle5.setText(str);
-		textViewTitle5.clearAnimation();
 	}
 	public void setListTitle5(String str, int index){
 		if(ParentActivity.langDb.findStrGetString(index, ParentActivity.LanguageIndex) == null){

@@ -10,7 +10,7 @@
         android:layout_height="wrap_content"
         android:src="@drawable/menu_title_bg" />
 
-    <TextView
+    <taeha.wheelloader.fseries_monitor.main.TextFitTextView
         android:id="@+id/textView_main_input_machineserial_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -209,7 +209,7 @@
                 android:orientation="vertical"
                 android:splitMotionEvents="false" >
 
-                <TextView
+                <taeha.wheelloader.fseries_monitor.main.TextFitTextView
                     android:id="@+id/textView_main_input_machineserial_text_title"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -217,7 +217,7 @@
                     android:text="@string/Serial_No"
                     android:textAppearance="?android:attr/textAppearanceLarge" />
 
-                <TextView
+                <taeha.wheelloader.fseries_monitor.main.TextFitTextView
                     android:id="@+id/textView_main_input_machineserial_text_data"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"

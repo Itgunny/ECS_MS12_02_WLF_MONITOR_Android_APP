@@ -147,7 +147,7 @@ public class VersionInfoFragment extends ParentFragment{
 		textViewECM = (TextView)mRoot.findViewById(R.id.textView_menu_body_monitoring_version_ecm);
 		textViewECM.setText(getString(ParentActivity.getResources().getString(R.string.ECM), 267));
 		textViewACU = (TextView)mRoot.findViewById(R.id.textView_menu_body_monitoring_version_acu);
-		textViewACU.setText(getString(ParentActivity.getResources().getString(R.string.ACU), 455));
+		textViewACU.setText(getString(ParentActivity.getResources().getString(R.string.FATC), 455));
 		
 		textViewMonitor = (TextView)mRoot.findViewById(R.id.textView_menu_body_monitoring_version_monitor_title);
 		textViewMonitor.setText(getString(ParentActivity.getResources().getString(R.string.Monitor), 268));
@@ -504,9 +504,9 @@ public class VersionInfoFragment extends ParentFragment{
 	
 	/////////////////////////////////////////////////////////////////////
 	public void ModelDisplay(byte[] _data){
-		//if(ParentActivity.MachineSerialNumber != 0xffffff)
-		//	textViewModel.setText(ParentActivity.GetModelNameString(_data)+" # "+ParentActivity.MachineSerialNumber);
-		//else
+		if(ParentActivity.MachineSerialNumber != 0xffffff)
+			textViewModel.setText(ParentActivity.GetModelNameString(_data)+" # "+ParentActivity.MachineSerialNumber);
+		else
 			textViewModel.setText(ParentActivity.GetModelNameString(_data));
 	}
 	public void MonitorVersionDisplay(int _versionhigh, int _versionlow, int _subhigh, int _sublow){

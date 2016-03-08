@@ -88,6 +88,7 @@ public class FaultHistoryLoggedFragment extends ParentFragment{
 	RadioButton radioEngine;
 	RadioButton radioTransmission;
 	RadioButton radioEHCU;
+	RadioButton radioACU;  	// ++, 160105 cjg
 	
 	RelativeLayout layoutDetail;
 	
@@ -101,10 +102,13 @@ public class FaultHistoryLoggedFragment extends ParentFragment{
 	int DTCTotalPacketEngine;
 	int DTCTotalPacketTM;
 	int DTCTotalPacketEHCU;
+	int DTCTotalPacketACU; // ++, --, 160105 cjg
+	
 	int DTCTotalMachine;
 	int DTCTotalEngine;
 	int DTCTotalTM;
 	int DTCTotalEHCU;
+	int DTCTotalACU;  	// ++, --, 160105 cjg
 	
 	int SendDTCIndex;
 	int SendSeqIndex;
@@ -113,6 +117,10 @@ public class FaultHistoryLoggedFragment extends ParentFragment{
 	int[] Err_Mcu;
 	int[] Err_Ecu;
 	int[] Err_EHCU;	
+	// ++, 160105 cjg
+	int[] Err_ACU;
+	int[] Err_ACUList;
+	// --, 160105 cjg	
 	
 	// ++, 150211 bwk
 	int CursurIndex;		
@@ -196,7 +204,11 @@ public class FaultHistoryLoggedFragment extends ParentFragment{
 		radioEHCU = (RadioButton)mRoot.findViewById(R.id.radioButton_menu_body_monitoring_fault_ehcu);
 		radioEHCU.setText(getString(ParentActivity.getResources().getString(R.string.EHCU), 272));
 		ParentActivity.setMarqueeRadio(radioEHCU);
-		
+		//++, 160105 cjg
+		radioACU = (RadioButton)mRoot.findViewById(R.id.radioButton_menu_body_monitoring_fault_acu);
+		radioACU.setText(getString(ParentActivity.getResources().getString(R.string.FATC), 455));
+		ParentActivity.setMarqueeRadio(radioACU);
+		//--, 160105 cjg
 		layoutDetail = (RelativeLayout)mRoot.findViewById(R.id.RelativeLayout_menu_body_monitoring_fault_logged_detail);
 		
 		textViewDelete = (TextFitTextView)mRoot.findViewById(R.id.textView_menu_body_monitoring_fault_logged_list_delete);
@@ -205,6 +217,8 @@ public class FaultHistoryLoggedFragment extends ParentFragment{
 		listView = (ListView)mRoot.findViewById(R.id.listView_menu_body_monitoring_fault_logged_list);
 		adapter = new IconTextListAdapterFault(ParentActivity);
 		adapter.clearItem();
+		
+		
 	}
 
 	protected void InitValuables() {
@@ -218,7 +232,19 @@ public class FaultHistoryLoggedFragment extends ParentFragment{
 		Err_Mcu = new int[400];
 		Err_Ecu = new int[400];
 		Err_EHCU = new int[400];
+		Err_ACU = new int[400];
+		Err_ACUList = new int[400];
+		//++, 160105 cjg
 		
+		for(int i = 0; i < 400; i++){
+			Err_Tcu[i] = 0;
+			Err_Mcu[i] = 0;
+			Err_Ecu[i] = 0;
+			Err_EHCU[i] = 0;
+			Err_ACU[i] = 0;
+			Err_ACUList[i] = 0;
+		}
+		//--, 160105 cjg
 		
 		listView.setAdapter(adapter);
 		
@@ -237,7 +263,7 @@ public class FaultHistoryLoggedFragment extends ParentFragment{
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
 				// ++, 150211 bwk
-				CursurIndex = 6;
+				CursurIndex = 7;
 				HandleCursurDisplay.sendMessage(HandleCursurDisplay.obtainMessage(CursurIndex));
 				// --, 150211 bwk
 				ClickOK();
@@ -291,13 +317,25 @@ public class FaultHistoryLoggedFragment extends ParentFragment{
 				ClickEHCU();
 			}
 		});
+		//++, 160105 cjg
+		radioACU.setOnClickListener(new View.OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				CursurIndex = 5;
+				HandleCursurDisplay.sendMessage(HandleCursurDisplay.obtainMessage(CursurIndex));
+				ClickACU();
+			}
+		});
+		//--, 160105 cjg
 		textViewDetailTitle.setOnClickListener(new View.OnClickListener() {
 			
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
 				// ++, 150216 bwk
-				CursurIndex = 7;
+				CursurIndex = 8;
 				CursurDisplay(CursurIndex);
 				// --, 150216 bwk
 				ClickDetailTitle();
@@ -309,7 +347,7 @@ public class FaultHistoryLoggedFragment extends ParentFragment{
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
 				// ++, 150211 bwk
-				CursurIndex = 5;
+				CursurIndex = 6; // ++, 160105 cjg
 				HandleCursurDisplay.sendMessage(HandleCursurDisplay.obtainMessage(CursurIndex));
 				// --, 150211 bwk
 				ClickDelete();
@@ -321,7 +359,7 @@ public class FaultHistoryLoggedFragment extends ParentFragment{
 			public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,long arg3) {
 				// TODO Auto-generated method stub
 				// ++, 150216 bwk
-				CursurIndex = 8;
+				CursurIndex = 9;
 				CursurDisplay(CursurIndex);
 				CursurDetailIndex = arg2;
 				// --, 150216 bwk				
@@ -341,22 +379,61 @@ public class FaultHistoryLoggedFragment extends ParentFragment{
 		DTCTotalPacketEngine = CAN1Comm.Get_gErr_Ecu_TotalPacket_Logged();
 		DTCTotalPacketTM = CAN1Comm.Get_gErr_Tcu_TotalPacket_Logged();
 		DTCTotalPacketEHCU = CAN1Comm.Get_gErr_EHCU_TotalPacket_Logged();
+		DTCTotalPacketACU = CAN1Comm.Get_gErr_Acu_TotalPacket_Logged(); 	// ++, --, 160105 cjg
 		
 		DTCTotalMachine = CAN1Comm.Get_gErr_Mcu_Total_Logged();
 		DTCTotalEngine = CAN1Comm.Get_gErr_Ecu_Total_Logged();
 		DTCTotalTM = CAN1Comm.Get_gErr_Tcu_Total_Logged();
 		DTCTotalEHCU = CAN1Comm.Get_gErr_EHCU_Total_Logged();
+		DTCTotalACU = CAN1Comm.Get_gErr_Acu_Total_Logged();		// ++, --, 160105 cjg
+		//Log.d(TAG, "DTCTotalACU : " + DTCTotalACU);
+		
+		// ++, 160105 cjg
+//		Err_ACU[0] = CAN1Comm.Get_Ambienttemperaturesensoropen_PGN65373();
+//		Err_ACU[1] = CAN1Comm.Get_Ambienttemperaturesensorshort_PGN65373();
+//		Err_ACU[2] = CAN1Comm.Get_Incabtemperaturesensoropen_PGN65373();
+//		Err_ACU[3] = CAN1Comm.Get_Incabtemperaturesensorshort_PGN65373();
+//		Err_ACU[4] = CAN1Comm.Get_Evaptemperaturesensoropen_PGN65373();
+//		Err_ACU[5] = CAN1Comm.Get_Evaptemperaturesensorshort_PGN65373();
+//		
+//		//reserved
+//		Err_ACU[6] = 0;
+//		Err_ACU[7] = 0;
+//		
+//		Err_ACU[8] = CAN1Comm.Get_Mode1actuatoropenshort_PGN65373();
+//		Err_ACU[9] = CAN1Comm.Get_Mode1actuatordrivecircuitmalfunction_PGN65373();
+//		Err_ACU[10] = CAN1Comm.Get_Intakeactuatoropenshort_PGN65373();
+//		Err_ACU[11] = CAN1Comm.Get_Intakeactuatordrivecircuitmalfunction_PGN65373();
+//		Err_ACU[12] = CAN1Comm.Get_Temperatureactuatoropenshort_PGN65373();
+//		Err_ACU[13] = CAN1Comm.Get_Temperatureactuatordrivecircuitmalfunction_PGN65373();
+//		
+//		
+//		Err_ACU[14] = CAN1Comm.Get_Ducttemperaturesensoropen_PGN65373();;
+//		Err_ACU[15] = CAN1Comm.Get_Ducttemperaturesensorshort_PGN65373();
+//		Err_ACU[16] = CAN1Comm.Get_WaterValveSensorError_PGN65373();
+//		Err_ACU[17] = CAN1Comm.Get_GPSCircuitError_PGN65373();
+//		//reserved
+//		Err_ACU[18] = 0;
+//		Err_ACU[19] = 0;		
+		// --, 160105 cjg
 		
 		ManufacturerCode = CAN1Comm.Get_ManufacturerCode_1700_PGN65330_ECM();	// ++, --, 150202 bwk
 	}
-
+	public int CheckACUDTCNumber(){
+		int _DTCTotal = 0;
+		for(int i = 0; i < 24; i++){
+			if(Err_ACU[i] == 1)
+				_DTCTotal++;
+		}
+		return _DTCTotal;
+	}
 	@Override
 	protected void UpdateUI() {
 		// TODO Auto-generated method stub
 		ErrListDisplay();
 		ErrorNumberDisplay();
 		EHCUShow();
-		
+		ACUShow(); // ++, --, 160105 cjg
 		if(bCursurIndex == false && ParentActivity.ScreenIndex == ParentActivity.SCREEN_STATE_MENU_MONITORING_FAULTHISTORY_LOGGED_TOP)
 			CursurDisplay(CursurIndex);
 	}
@@ -374,6 +451,8 @@ public class FaultHistoryLoggedFragment extends ParentFragment{
 		radioEngine.setChecked(false);
 		radioTransmission.setChecked(false);
 		radioEHCU.setChecked(false);
+		radioACU.setChecked(false);// ++, --, 160105 cjg
+		
 		DetailEnable(false);
 		SelectedMode = Home.REQ_ERR_MACHINE_LOGGED;
 	}
@@ -383,6 +462,7 @@ public class FaultHistoryLoggedFragment extends ParentFragment{
 		radioEngine.setChecked(true);
 		radioTransmission.setChecked(false);
 		radioEHCU.setChecked(false);
+		radioACU.setChecked(false);// ++, --, 160105 cjg
 		DetailEnable(false);
 		SelectedMode = Home.REQ_ERR_ENGINE_LOGGED;
 	}
@@ -392,6 +472,7 @@ public class FaultHistoryLoggedFragment extends ParentFragment{
 		radioEngine.setChecked(false);
 		radioTransmission.setChecked(true);
 		radioEHCU.setChecked(false);
+		radioACU.setChecked(false);// ++, --, 160105 cjg
 		DetailEnable(false);
 		SelectedMode = Home.REQ_ERR_TM_LOGGED;
 	}
@@ -401,9 +482,22 @@ public class FaultHistoryLoggedFragment extends ParentFragment{
 		radioEngine.setChecked(false);
 		radioTransmission.setChecked(false);
 		radioEHCU.setChecked(true);
+		radioACU.setChecked(false);// ++, --, 160105 cjg
 		DetailEnable(false);
 		SelectedMode = Home.REQ_ERR_EHCU_LOGGED;
 	}
+	// ++, 160105 cjg
+	public void ClickACU(){
+		TitleDisplay(getString(ParentActivity.getResources().getString(string.FATC), 455));
+		radioMachine.setChecked(false);
+		radioEngine.setChecked(false);
+		radioTransmission.setChecked(false);
+		radioEHCU.setChecked(false);
+		radioACU.setChecked(true);
+		DetailEnable(false);
+		SelectedMode = Home.REQ_ERR_ACU_LOGGED;
+	}
+	// --, 160105 cjg
 	public void ClickDetailTitle(){
 		DetailEnable(false);
 	}
@@ -424,6 +518,13 @@ public class FaultHistoryLoggedFragment extends ParentFragment{
 			radioEHCU.setVisibility(View.VISIBLE);
 		}
 	}
+	public void ACUShow(){
+		if(CAN1Comm.Get_ComponentCode_1699_PGN65330_ACU() != CAN1CommManager.STATE_COMPONENTCODE_AIRCONCONTROLLER){
+			radioACU.setVisibility(View.GONE);
+		}else{
+			radioACU.setVisibility(View.VISIBLE);
+		}
+	}
 	public void ASDisplay(String str){
 		textViewAS.setText(getString(ParentActivity.getResources().getString(string.AS), 67) + " " + str);
 	}
@@ -435,6 +536,7 @@ public class FaultHistoryLoggedFragment extends ParentFragment{
 		radioEngine.setText(getString(ParentActivity.getResources().getString(string.Engine), 308) + "(" + Integer.toString(DTCTotalEngine) + ")");
 		radioTransmission.setText(getString(ParentActivity.getResources().getString(string.Transmission), 309) + "(" + Integer.toString(DTCTotalTM) + ")");
 		radioEHCU.setText(getString(ParentActivity.getResources().getString(string.EHCU), 272) + "(" + Integer.toString(DTCTotalEHCU) + ")");
+		radioACU.setText(getString(ParentActivity.getResources().getString(string.FATC), 455) + "(" + Integer.toString(DTCTotalACU) + ")");
 	}
 	public void ErrListDisplay(){
 		switch (SelectedMode) {
@@ -450,10 +552,43 @@ public class FaultHistoryLoggedFragment extends ParentFragment{
 		case Home.REQ_ERR_EHCU_LOGGED:
 			SetErrList(DTCTotalEHCU, SelectedMode);
 			break;
-			
+			// ++, 160105 cjg
+		case Home.REQ_ERR_ACU_LOGGED:
+			SetACUErrList();
+			// --, 160105 cjg
+			break;
 		default:
 			break;
 		}
+	}
+	public void SetACUErrList(){
+		adapter.clearItem();
+		for(int i = 0; i < 24; i++){
+			Err_ACUList[i] = 0;
+		}
+		int Err_ACU_Data[];
+		Err_ACU_Data = CAN1Comm.Get_AcuErr_Logged();
+		int Count = 0;
+		for(int i = 0; i < 3; i++){
+			for(int j = 0; j < 8; j++){
+				Err_ACU[Count] = (Err_ACU_Data[i] >> j) & 0x01;
+				Count = Count + 1;
+			}
+		}
+		Count = 0;
+		for(int i = 0; i < 24; i++){
+			if(Err_ACU[i] == 1){
+				if(CursurIndex == 8 && CursurDetailIndex == Count)
+					adapter.addItem(new IconTextItemFault(null,ParentActivity.getResources().getDrawable(R.drawable.menu_information_fault_down_btn_selected), 
+							String.format("F%02d", i+1), "", ""));
+				else
+					adapter.addItem(new IconTextItemFault(null,ParentActivity.getResources().getDrawable(R.drawable.menu_information_fault_down_btn), 
+							String.format("F%02d", i+1), "", ""));
+				
+				Err_ACUList[Count++] = i;
+			}
+		}
+		adapter.notifyDataSetChanged();
 	}
 	public void SetErrList(int NumofErr, int Mode){
 		int SPN = 0;
@@ -477,14 +612,14 @@ public class FaultHistoryLoggedFragment extends ParentFragment{
 					FMI = ((Err_Mcu[i] & 0x1f0000) >> 16);
 					if((SPN == 0) && (FMI == 0))
 					{
-						if(CursurIndex == 7 && CursurDetailIndex == i)
+						if(CursurIndex == 8 && CursurDetailIndex == i)
 							adapter.addItem(new IconTextItemFault(null,ParentActivity.getResources().getDrawable(R.drawable.menu_information_fault_down_btn_selected), "HCESPN :      FMI :  ", "", ""));
 						else
 							adapter.addItem(new IconTextItemFault(null,ParentActivity.getResources().getDrawable(R.drawable.menu_information_fault_down_btn), "HCESPN :      FMI :  ", "", ""));
 					}
 					else
 					{
-						if(CursurIndex == 7 && CursurDetailIndex == i)
+						if(CursurIndex == 8 && CursurDetailIndex == i)
 						{
 							adapter.addItem(new IconTextItemFault(null,ParentActivity.getResources().getDrawable(R.drawable.menu_information_fault_down_btn_selected), "HCESPN : " + Integer.toString(SPN)
 									+ "     " + "FMI : " + Integer.toString(FMI), "", ""));
@@ -508,14 +643,14 @@ public class FaultHistoryLoggedFragment extends ParentFragment{
 
 					if((SPN == 0) && (FMI == 0))
 					{
-						if(CursurIndex == 7 && CursurDetailIndex == i)
+						if(CursurIndex == 8 && CursurDetailIndex == i)
 							adapter.addItem(new IconTextItemFault(null,ParentActivity.getResources().getDrawable(R.drawable.menu_information_fault_down_btn_selected), "SPN :      FMI :  ", "", ""));
 						else
 							adapter.addItem(new IconTextItemFault(null,ParentActivity.getResources().getDrawable(R.drawable.menu_information_fault_down_btn), "SPN :      FMI :  ", "", ""));
 					}
 					else
 					{
-						if(CursurIndex == 7 && CursurDetailIndex == i)
+						if(CursurIndex == 8 && CursurDetailIndex == i)
 							adapter.addItem(new IconTextItemFault(null,ParentActivity.getResources().getDrawable(R.drawable.menu_information_fault_down_btn_selected), "SPN : " + Integer.toString(SPN)
 									+ "     " + "FMI : " + Integer.toString(FMI), "", ""));
 						else
@@ -528,14 +663,14 @@ public class FaultHistoryLoggedFragment extends ParentFragment{
 					Err_Tcu = CAN1Comm.Get_TcuErr_Logged();
 					if(Err_Tcu[i] == 0)
 					{
-						if(CursurIndex == 7 && CursurDetailIndex == i)
+						if(CursurIndex == 8 && CursurDetailIndex == i)
 							adapter.addItem(new IconTextItemFault(null,ParentActivity.getResources().getDrawable(R.drawable.menu_information_fault_down_btn_selected), "No :      ", "", ""));
 						else
 							adapter.addItem(new IconTextItemFault(null,ParentActivity.getResources().getDrawable(R.drawable.menu_information_fault_down_btn), "No :      ", "", ""));
 					}
 					else
 					{
-						if(CursurIndex == 7 && CursurDetailIndex == i)
+						if(CursurIndex == 8 && CursurDetailIndex == i)
 							adapter.addItem(new IconTextItemFault(null,ParentActivity.getResources().getDrawable(R.drawable.menu_information_fault_down_btn_selected), "No : " + Integer.toHexString(Err_Tcu[i]), "", ""));
 						else
 							adapter.addItem(new IconTextItemFault(null,ParentActivity.getResources().getDrawable(R.drawable.menu_information_fault_down_btn), "No : " + Integer.toHexString(Err_Tcu[i]), "", ""));
@@ -550,14 +685,14 @@ public class FaultHistoryLoggedFragment extends ParentFragment{
 
 					if((SPN == 0) && (FMI == 0))
 					{
-						if(CursurIndex == 7 && CursurDetailIndex == i)
+						if(CursurIndex == 8 && CursurDetailIndex == i)
 							adapter.addItem(new IconTextItemFault(null,ParentActivity.getResources().getDrawable(R.drawable.menu_information_fault_down_btn_selected), "SPN :      FMI :  ", "", ""));
 						else
 							adapter.addItem(new IconTextItemFault(null,ParentActivity.getResources().getDrawable(R.drawable.menu_information_fault_down_btn), "SPN :      FMI :  ", "", ""));
 					}
 					else
 					{
-						if(CursurIndex == 7 && CursurDetailIndex == i)
+						if(CursurIndex == 8 && CursurDetailIndex == i)
 							adapter.addItem(new IconTextItemFault(null,ParentActivity.getResources().getDrawable(R.drawable.menu_information_fault_down_btn_selected), "SPN : " + Integer.toString(SPN)
 									+ "     " + "FMI : " + Integer.toString(FMI), "", ""));
 						else
@@ -567,9 +702,9 @@ public class FaultHistoryLoggedFragment extends ParentFragment{
 				}
 			}
 		}
-		
 		adapter.notifyDataSetChanged();
 	}
+	
 	public void ErrDetailDisplay(int Index){
 		DetailEnable(true);
 		int SPN = 0;
@@ -607,6 +742,19 @@ public class FaultHistoryLoggedFragment extends ParentFragment{
 					textViewDetail.setText(textEHCUErrCode[EHCU_LENTGH]);
 				}
 			}
+			
+		}
+		else if(SelectedMode == Home.REQ_ERR_ACU_LOGGED)
+		{
+			// ++, 160105 cjg
+			try {
+				textViewDetail.setText(textACUErrCode[Err_ACUList[Index]]);
+				Log.d(TAG, "SetText" + textACUErrCode[Err_ACUList[Index]]);
+			} catch (ArrayIndexOutOfBoundsException e) {
+				// TODO: handle exception
+				Log.e(TAG,"ArrayIndexOutOfBoundsException ErrDetailDisplay");
+			}
+			// --, 160105 cjg
 		}
 		// ++, 150202 bwk
 		else if(SelectedMode == Home.REQ_ERR_TM_LOGGED)
@@ -649,6 +797,7 @@ public class FaultHistoryLoggedFragment extends ParentFragment{
 			}
 		}
 		// --, 150202 bwk
+
 		else
 		{
 			textViewDetail.setText(getString(ParentActivity.getResources().getString(string.Please_refer_to_machine_manual_for_more_detailed_description), 310));
@@ -717,6 +866,8 @@ public class FaultHistoryLoggedFragment extends ParentFragment{
 				SendSeqIndex = 1;
 				if(CAN1Comm.Get_ComponentCode_1699_PGN65330_EHCU() == CAN1CommManager.STATE_COMPONENTCODE_EHCU)
 					SendDTCIndex = Home.REQ_ERR_EHCU_LOGGED;
+				else if(CAN1Comm.Get_ComponentCode_1699_PGN65330_ACU() == CAN1CommManager.STATE_COMPONENTCODE_AIRCONCONTROLLER)
+					SendDTCIndex = Home.REQ_ERR_ACU_LOGGED;
 				else
 					SendDTCIndex = Home.REQ_ERR_MACHINE_LOGGED;
 				SetThreadSleepTime(1000);
@@ -735,6 +886,9 @@ public class FaultHistoryLoggedFragment extends ParentFragment{
 			}
 			else if(SendSeqIndex > DTCTotalPacketEHCU){
 				SendSeqIndex = 1;
+				if(CAN1Comm.Get_ComponentCode_1699_PGN65330_ACU() == CAN1CommManager.STATE_COMPONENTCODE_AIRCONCONTROLLER)
+					SendDTCIndex = Home.REQ_ERR_ACU_LOGGED;
+				else
 				SendDTCIndex = Home.REQ_ERR_MACHINE_LOGGED;
 				SetThreadSleepTime(1000);
 			}
@@ -742,7 +896,14 @@ public class FaultHistoryLoggedFragment extends ParentFragment{
 				RequestErrorCode(SendDTCIndex,1,SendSeqIndex);
 				SendSeqIndex++;
 			}
-			
+			break;
+		case Home.REQ_ERR_ACU_LOGGED:
+			if(SendSeqIndex == 1){
+				RequestErrorCode(SendDTCIndex,1,SendSeqIndex);
+				SendSeqIndex = 1;
+				SendDTCIndex = Home.REQ_ERR_MACHINE_LOGGED;
+				SetThreadSleepTime(200);
+			}
 			break;
 		default:
 			break;
@@ -760,6 +921,8 @@ public class FaultHistoryLoggedFragment extends ParentFragment{
 				return DTCTotalTM;
 			case Home.REQ_ERR_EHCU_LOGGED:
 				return DTCTotalEHCU;
+			case Home.REQ_ERR_ACU_LOGGED:
+				return DTCTotalACU;
 			default:
 				return 0;		
 		}
@@ -770,19 +933,37 @@ public class FaultHistoryLoggedFragment extends ParentFragment{
 		// ++, 150211 bwk
 		switch (CursurIndex) {
 		case 1:
-			CursurIndex = 6;
+			CursurIndex = 7;
 			CursurDisplay(CursurIndex);
 			break;
 		case 2:
 		case 3:
 		case 4:
+			CursurIndex--;
+			CursurDisplay(CursurIndex);
+			break;
 		case 5:
+			if(CAN1Comm.Get_ComponentCode_1699_PGN65330_EHCU() == CAN1CommManager.STATE_COMPONENTCODE_EHCU)
+				CursurIndex--;
+			else
+				CursurIndex = 3;
+			CursurDisplay(CursurIndex);
+			break;
 		case 6:
+			if(CAN1Comm.Get_ComponentCode_1699_PGN65330_ACU() == CAN1CommManager.STATE_COMPONENTCODE_AIRCONCONTROLLER)
+				CursurIndex = 5;
+			else if(CAN1Comm.Get_ComponentCode_1699_PGN65330_EHCU() == CAN1CommManager.STATE_COMPONENTCODE_EHCU)
+				CursurIndex = 4;
+			else
+				CursurIndex = 3;
+			CursurDisplay(CursurIndex);
+			break;
+		case 7:
 			CursurIndex--;
 			CursurDisplay(CursurIndex);
 			break;
 		// ++, 150216 bwk
-		case 7:
+		case 8:
 			if(CursurDetailIndex > 0)
 				CursurDetailIndex--;
 			else
@@ -813,8 +994,6 @@ public class FaultHistoryLoggedFragment extends ParentFragment{
 				listView.setSelectionFromTop(ListCursurIndex,0);
 				//Log.d(TAG,"ClickLeft ListCursurIndex : " + Integer.toString(ListCursurIndex));
 			}
-						
-
 			break;
 		// --, 150216 bwk		
 		default:
@@ -827,18 +1006,39 @@ public class FaultHistoryLoggedFragment extends ParentFragment{
 		switch (CursurIndex) {
 		case 1:
 		case 2:
-		case 3:
-		case 4:
-		case 5:
 			CursurIndex++;
 			CursurDisplay(CursurIndex);
 			break;
+		case 3:
+			if(CAN1Comm.Get_ComponentCode_1699_PGN65330_EHCU() == CAN1CommManager.STATE_COMPONENTCODE_EHCU)
+				CursurIndex = 4;
+			else if(CAN1Comm.Get_ComponentCode_1699_PGN65330_ACU() == CAN1CommManager.STATE_COMPONENTCODE_AIRCONCONTROLLER)
+				CursurIndex = 5;
+			else
+				CursurIndex = 6;
+			CursurDisplay(CursurIndex);
+			break;
+		case 4:
+			if(CAN1Comm.Get_ComponentCode_1699_PGN65330_ACU() == CAN1CommManager.STATE_COMPONENTCODE_AIRCONCONTROLLER)
+				CursurIndex = 5;
+			else
+				CursurIndex = 6;
+			CursurDisplay(CursurIndex);
+			break;
+		case 5:
+			CursurIndex = 6;
+			CursurDisplay(CursurIndex);
+			break;
 		case 6:
+			CursurIndex++;
+			CursurDisplay(CursurIndex);
+			break;
+		case 7:
 			CursurIndex = 1;
 			CursurDisplay(CursurIndex);
 			break;
 		// ++, 150216 bwk
-		case 7:
+		case 8:
 			if(CursurDetailIndex < adapter.getCount()-1)
 				CursurDetailIndex++;
 			else
@@ -869,7 +1069,7 @@ public class FaultHistoryLoggedFragment extends ParentFragment{
 	}
 	public void ClickESC(){
 		// ++, 150216 bwk
-		if(CursurIndex == 7)
+		if(CursurIndex == 8)
 		{
 			switch(SelectedMode)
 			{
@@ -885,14 +1085,17 @@ public class FaultHistoryLoggedFragment extends ParentFragment{
 				case Home.REQ_ERR_EHCU_LOGGED:
 					CursurIndex = 4;
 					break;
+				case Home.REQ_ERR_ACU_LOGGED:
+					CursurIndex = 5;
+					break;
 				default:
 					break;
 			}
 			CursurDisplay(CursurIndex);
 		}
-		else if(CursurIndex == 8)
+		else if(CursurIndex == 9)
 		{
-			CursurIndex =7;
+			CursurIndex=8;
 			CursurDisplay(CursurIndex);
 			ClickDetailTitle();
 		}
@@ -916,19 +1119,22 @@ public class FaultHistoryLoggedFragment extends ParentFragment{
 			ClickEHCU();
 			break;
 		case 5:
-			ClickDelete();
+			ClickACU();
 			break;
 		case 6:
+			ClickDelete();
+			break;
+		case 7:
 			ClickOK();
 			break;
 		// ++, 150216 bwk
-		case 7:
-			CursurIndex = 8;
+		case 8:
+			CursurIndex = 9;
 			if(adapter.getCount() > 0 && CountErrorList() > 0)
 				ErrDetailDisplay(CursurDetailIndex);
 			break;
-		case 8:
-			CursurIndex = 7;
+		case 9:
+			CursurIndex = 8;
 			CursurDisplay(CursurIndex);
 			ClickDetailTitle();
 			break;
@@ -938,11 +1144,11 @@ public class FaultHistoryLoggedFragment extends ParentFragment{
 		}
 		// --, 150211 bwk
 		// ++. 150216 bwk
-		if(CursurIndex < 6)
+		if(CursurIndex < 7)
 		{
 			if(adapter.getCount() > 0 && CountErrorList() > 0)
 			{
-				CursurIndex = 7;
+				CursurIndex = 8;
 				CursurDetailIndex = 0;
 				CursurDisplay(CursurIndex);
 			}
@@ -957,6 +1163,7 @@ public class FaultHistoryLoggedFragment extends ParentFragment{
 		radioEngine.setPressed(false);
 		radioTransmission.setPressed(false);
 		radioEHCU.setPressed(false);
+		radioACU.setPressed(false);
 		textViewDelete.setPressed(false);
 		imgbtnOK.setPressed(false);
 		// ++, 150216 bwk
@@ -981,13 +1188,16 @@ public class FaultHistoryLoggedFragment extends ParentFragment{
 				radioEHCU.setPressed(true);
 				break;
 			case 5:
+				radioACU.setPressed(true);
+				break;	
+			case 6:
 				textViewDelete.setPressed(true);
 				break;
-			case 6:
+			case 7:
 				imgbtnOK.setPressed(true);
 				break;
 			// ++, 150216 bwk
-			case 7:
+			case 8:
 				if(CursurDetailIndex < adapter.getCount())
 					adapter.UpdateIcon(CursurDetailIndex, ParentActivity.getResources().getDrawable(R.drawable.menu_information_fault_down_btn_selected));
 				else if(adapter.getCount() > 0)
@@ -2959,5 +3169,33 @@ public class FaultHistoryLoggedFragment extends ParentFragment{
 		"Not Define."
 	};
 	// --, 150202 bwk
+	// ++, 160115 cjg
+	static final String textACUErrCode[] = {
+		"Ambient temperature sensor open",
+		"Ambient temperature sensor short",
+		"In-cab temperature sensor open",
+		"In-cab temperature sensor short",
+		"Evap. temperature sensor open",
+		"Evap. temperature sensor short",
+		"reserved",
+		"reserved",
+		"Mode 1 actuator open/short",
+		"Mode 1 actuator drive circuit malfunction",
+		"Intake actuator open/short",
+		"Intake actuator drive circuit malfunction",
+		"Temperature actuator open/short",
+		"Temperature actuator drive circuit malfunction",
+		"reserved",
+		"reserved",
+		"Duct temperature sensor open",
+		"Duct temperature sensor short",
+		"Water Valve sensor open",
+		"Water Valve sensor short",
+		"G.P.S Circuit Error",
+		"reserved",
+		"reserved",
+		"reserved"
+	};
+	// --, 160115 cjg
 	/////////////////////////////////////////////////////////////////////
 }

@@ -1,6 +1,7 @@
 package taeha.wheelloader.fseries_monitor.main;
 
 import taeha.wheelloader.fseries_monitor.animation.AppearAnimation;
+import taeha.wheelloader.fseries_monitor.animation.BarAnimation;
 import taeha.wheelloader.fseries_monitor.animation.ChangeFragmentAnimation;
 import taeha.wheelloader.fseries_monitor.animation.DisappearAnimation;
 import taeha.wheelloader.fseries_monitor.animation.MainBodyShiftAnimation;

@@ -1,7 +1,6 @@
 package taeha.wheelloader.fseries_monitor.main.a;
 
-
-
+import taeha.wheelloader.fseries_monitor.animation.BarAnimation;
 import taeha.wheelloader.fseries_monitor.animation.ImageViewYAxisFlipAnimation;
 import taeha.wheelloader.fseries_monitor.animation.TextFitTextViewAxisFlipAnimation;
 import taeha.wheelloader.fseries_monitor.main.CAN1CommManager;
@@ -120,7 +119,7 @@ public class MainALeftMainFragment extends ParentFragment{
 	
 	TextFitTextViewAxisFlipAnimation	FuelTitleAnimation;
 	
-	//public BarAnimation			_EcoGaugeAnimation;
+	public BarAnimation			_EcoGaugeAnimation;
 	public LongPressChecker     mLongPressChecker;	// ++, --, 150406 cjg
 	///////////////////////////////////////////////////
 	

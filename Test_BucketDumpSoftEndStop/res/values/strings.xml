@@ -454,7 +454,7 @@
     <string name="Warming_Up">Warming Up</string>
     <string name="Engine_Delay_Shutdown">Engine Delay Shutdown</string>
     <string name="Weighing_Information">Weighing Information</string>
-    <string name="ACU">ACU</string>
+    <string name="FATC">FATC</string>
     <string name="Boom_Lever_Floating_Position_Adjust">Boom Lever Floating Position Adjust</string>
     <string name="Fingertip_Calibration">Fingertip Calibration</string>
     <string name="Boom_Down_Response_Adjust">Boom Down Response Adjust</string>
@@ -470,8 +470,13 @@
     <string name="Volume">Volume</string>
     <string name="Volume_L">L</string>
     <string name="Volume_gallon">gal</string>
-    <string name="Distance">Distance</string>
-    <string name="Soft_End_Stop_Calibration">Soft End Stop Calibration</string>
+    <string name="Distance">Distance  </string>
+
+<string 
+name="FATC_System_Controller"
+  >
+    FATC System Controller
+</string>    <string name="Soft_End_Stop_Calibration">Soft End Stop Calibration</string>
     <string name="Bucket_Dump_Speed_Calibration">Bucket Dump Speed Calibration</string>
     <string name="Boom_Position">Boom Position</string>
     <string name="Bucket_Position">Bucket Position</string>

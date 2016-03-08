@@ -40,7 +40,7 @@
 	
 		       <RadioButton
 		           android:id="@+id/radioButton_menu_body_monitoring_fault_machine"
-		           android:layout_width="350dp"
+		           android:layout_width="300dp"
 		           android:layout_height="wrap_content"
 		           android:button="@drawable/_selector_radio_btn"
 		           android:text="@string/Machine"
@@ -50,7 +50,7 @@
 		
 		       <RadioButton
 		           android:id="@+id/radioButton_menu_body_monitoring_fault_engine"
-		           android:layout_width="350dp"
+		           android:layout_width="300dp"
 		           android:layout_height="wrap_content"
 		           android:layout_marginTop="40dp"
 		           android:button="@drawable/_selector_radio_btn"
@@ -61,7 +61,7 @@
 		
 		       <RadioButton
 		           android:id="@+id/radioButton_menu_body_monitoring_fault_transmission"
-		           android:layout_width="350dp"
+		           android:layout_width="300dp"
 		           android:layout_height="wrap_content"
 		           android:layout_marginTop="40dp"
 		           android:button="@drawable/_selector_radio_btn"
@@ -72,7 +72,7 @@
 		       
 		       <RadioButton
 		           android:id="@+id/radioButton_menu_body_monitoring_fault_ehcu"
-		           android:layout_width="350dp"
+		           android:layout_width="300dp"
 		           android:layout_height="wrap_content"
 		           android:layout_marginTop="40dp"
 		           android:button="@drawable/_selector_radio_btn"
@@ -80,6 +80,18 @@
 		           android:textColor="@drawable/_selector_radio_txt_white_amber"
 		           android:singleLine="true"
 		           android:textSize="25sp" />
+		       
+		      <RadioButton
+		           android:id="@+id/radioButton_menu_body_monitoring_fault_acu"
+		           android:layout_width="300dp"
+		           android:layout_height="wrap_content"
+		           android:layout_marginTop="40dp"
+		           android:button="@drawable/_selector_radio_btn"
+		           android:text="@string/FATC"
+		           android:textColor="@drawable/_selector_radio_txt_white_amber"
+		           android:singleLine="true"
+		           android:textSize="25sp"
+		           android:visibility="gone" />
 		       
 </RadioGroup>
 		    
@@ -193,6 +205,7 @@
                 android:layout_below="@+id/imageView_menu_body_monitoring_fault_logged_list_title_line"
                 android:layout_marginLeft="10dp"
                 android:layout_marginRight="10dp"
+                android:listSelector="@drawable/_selector_menu_monitoring_fault_listview_btn"
                 android:divider="@drawable/menu_information_fault_line_horizontal2" >
 
             </ListView>

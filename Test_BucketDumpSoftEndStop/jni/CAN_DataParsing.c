@@ -67,7 +67,7 @@ static int makeTimer( char *name, timer_t *timerID, int sec, int msec )
 
 	return 0;
 }
-//TxRingBuff에 메모리 세팅을 한다.
+//TxRingBuff??메모�??�팅???�다.
 void SetDatatoRingBuffer(unsigned char* Buf)
 {
 	pthread_mutex_lock(&mutex_UART1_tx);
@@ -79,7 +79,7 @@ void SetDatatoRingBuffer(unsigned char* Buf)
 		TxRingBuffHead++;
 	pthread_mutex_unlock(&mutex_UART1_tx);
 }
-//CANData(Single)를 Buf에 저장한 후 값을 저장한다.
+//CANData(Single)�?Buf???�?�한 ??값을 ?�?�한??
 void MakeCANDataSingle(unsigned char Priority, unsigned char PF, unsigned char PS, unsigned char SA, unsigned char *Data)
 {
 	unsigned char Buf[UART1_TXPACKET_SIZE]; //UART1_TXPACKET_SIZE 14
@@ -103,7 +103,7 @@ void MakeCANDataMultiBoradcast(unsigned char Priority, unsigned char PF, unsigne
 	unsigned char Buf[UART1_TXPACKET_SIZE];
 	int PacketNum;
 	int i;
-    // MultiPacket Data 부분 PacketNumber
+    // MultiPacket Data 부�?PacketNumber
 	if(Length % 7 == 0)
 	{
 		PacketNum = Length / 7;
@@ -153,7 +153,7 @@ void MakeMultiPacketData(unsigned char Priority, unsigned char PF, unsigned char
 	Buf[2] = 0xEB; //0xEB
 	Buf[3] = DA; //Destination Address
 	Buf[4] = SA; //Source Address
-	Buf[5] = Index+1; // Index == 0 이면 0번째 PacketNum -> Packet Data(7) 완료
+	Buf[5] = Index+1; // Index == 0 ?�면 0번째 PacketNum -> Packet Data(7) ?�료
 
 	for(i = 0; i < 7; i++){
 		if((Index * 7) + i >= Length + 1)
@@ -173,16 +173,16 @@ int SendDataFromRingBuffer()
 	int result = 0;
 
 	pthread_mutex_lock(&mutex_UART1_tx);
-	//Ring Buffer의 마지막이 아니면
+	//Ring Buffer??마�?막이 ?�니�?
 	if(TxRingBuffHead != TxRingBuffTail)
 	{
-		// 보내는 패킷을 메모리 할당을 하고
+		// 보내???�킷??메모�??�당???�고
 		memcpy((unsigned char*)&Buf[0],&UART1_TxBuff[TxRingBuffTail][0],UART1_TXPACKET_SIZE);
-		// Tail이 RingBuffSize를 초과하면
+		// Tail??RingBuffSize�?초과?�면
 		if(TxRingBuffTail >= RINGBUFF_SIZE - 1)
 			TxRingBuffTail = 0; // TxRingBuffTail = 0;
 		else
-			TxRingBuffTail++; // 아니면 Tail 증가
+			TxRingBuffTail++; // ?�니�?Tail 증�?
 		result = write(fd_UART1, Buf, UART1_TXPACKET_SIZE);
 
 
@@ -319,7 +319,7 @@ void Send_CID()
 
 
 
-// Protocol 등록
+// Protocol ?�록
 void InitNewProtoclValuable() {
 
 	memset((unsigned char*) &RX_DTC_INFORMATION_REQUEST_61184_11, 0xFF,
@@ -701,19 +701,25 @@ void InitNewProtoclValuable() {
 	gErr_Ecu_TotalPacket = 0;
 	gErr_Tcu_TotalPacket = 0;
 	gErr_EHCU_TotalPacket = 0;
+	gErr_ACU_TotalPacket = 0;
+
 	gErr_Mcu_TotalPacket_Logged = 0;
 	gErr_Ecu_TotalPacket_Logged = 0;
 	gErr_Tcu_TotalPacket_Logged = 0;
 	gErr_EHCU_TotalPacket_Logged = 0;
+	gErr_ACU_TotalPacket_Logged = 0;
 
 	gErr_Mcu_Total = 0;
 	gErr_Ecu_Total = 0;
 	gErr_Tcu_Total = 0;
 	gErr_EHCU_Total = 0;
+	gErr_ACU_Total = 0;
+
 	gErr_Mcu_Total_Logged = 0;
 	gErr_Ecu_Total_Logged = 0;
 	gErr_Tcu_Total_Logged = 0;
 	gErr_EHCU_Total_Logged = 0;
+	gErr_ACU_Total_Logged = 0;
 
 	RX_AIR_CONDITIONER_STATUS_65373.Ambienttemperaturesensoropen = 0;
 	RX_AIR_CONDITIONER_STATUS_65373.Ambienttemperaturesensorshort = 0;
@@ -740,7 +746,7 @@ void InitNewProtoclValuable() {
 
 void UART1_SeperateData_NEWCAN2(int Priority, int PF, int PS, int SourceAddress, unsigned char* Data)
 {
-	// Source Address에 따라서 들어온 Data가 나뉜다. -> 기본으로 MCU한테 가게 되어있음.
+	// Source Address???�라???�어??Data가 ?�뉜?? -> 기본?�로 MCU?�테 가�??�어?�음.
 	switch (SourceAddress) {
 		case SA_SMK:
 			__android_log_print(ANDROID_LOG_INFO, "SA_SMK","Receive PF[%d] PS[%d]\n",PF,PS);
@@ -768,7 +774,7 @@ void UART1_SeperateData_NEWCAN2(int Priority, int PF, int PS, int SourceAddress,
 			UART1_SeperateData_CID(Priority,PF,PS,Data);
 			break;
 		case SA_ACU:
-			//UART1_SeperateData_ACU(Priority,PF,PS,Data);
+			UART1_SeperateData_ACU(Priority,PF,PS,Data);
 			break;
 		case SA_BKCU:
 			UART1_SeperateData_BKCU(Priority,PF,PS,Data);
@@ -783,7 +789,7 @@ void UART1_SeperateData_Default(int Priority, int PF, int PS, unsigned char* Dat
 	CAN_RX_PACKET*		CANPacket;
 
 	CANPacket = (CAN_RX_PACKET*) Data;
-	// PDU 포맷에 따른 Data 판단
+	// PDU ?�맷???�른 Data ?�단
 	switch (PF) {
 		case 239:	// 0xEF00 61184
 			switch (Data[7]) {	// Message Type
@@ -1694,6 +1700,22 @@ void SaveErrorCode_NEW_CAN2(void) {
 			| (RX_DTC_INFORMATION_TYPE1_65438.DTC_5[1] << 8) | RX_DTC_INFORMATION_TYPE1_65438.DTC_5[0]);
 
 	}
+	else if(RX_DTC_INFORMATION_TYPE1_65438.DTCType_1510 == 8)
+	{
+		gErr_ACU_TotalPacket = RX_DTC_INFORMATION_TYPE1_65438.TotalNumberofDTCInformationPacket_1512;
+		gErr_ACU_Total = RX_DTC_INFORMATION_TYPE1_65438.TotalNumberofDTC;
+		gErr_ACU[0] = RX_DTC_INFORMATION_TYPE1_65438.DTC_1[0];
+		gErr_ACU[1] = RX_DTC_INFORMATION_TYPE1_65438.DTC_1[1];
+		gErr_ACU[2] = RX_DTC_INFORMATION_TYPE1_65438.DTC_1[2];
+	}
+	else if (RX_DTC_INFORMATION_TYPE1_65438.DTCType_1510 == 9)
+	{
+		gErr_ACU_TotalPacket_Logged = RX_DTC_INFORMATION_TYPE1_65438.TotalNumberofDTCInformationPacket_1512;
+		gErr_ACU_Total_Logged = RX_DTC_INFORMATION_TYPE1_65438.TotalNumberofDTC;
+		gErr_ACU_Logged[0] = RX_DTC_INFORMATION_TYPE1_65438.DTC_1[0];
+		gErr_ACU_Logged[1] = RX_DTC_INFORMATION_TYPE1_65438.DTC_1[1];
+		gErr_ACU_Logged[2] = RX_DTC_INFORMATION_TYPE1_65438.DTC_1[2];
+	}
 
 }
 
@@ -1941,8 +1963,7 @@ void ThreadParsing_UART3(void *data) {
 	//			UART3_DataParsing(UART3_DataCurr);
 	//			bParsingFlag_UART3 = 0;
 	//		}
-	//		sleep(0); // 占쌕몌옙 Thread 占쏙옙占쏙옙 占쏙옙占쏙옙占쏙옙 占쏙옙占쏙옙 占쏙옙占�
-	//
+	//		sleep(0); // ?�쌕몌옙 Thread ?�쏙?�占?�옙 ?�쏙?�占?�옙?�쏙???�쏙?�占?�옙 ?�쏙?�占�?	//
 	//	}
 
 }
@@ -2116,7 +2137,7 @@ void *Thread_Read_UART1(void *data)
 	while (bReadRunningFlag_UART1)
 	{
 		dwRead = 0;
-		//	통신 시작 후 1byte씩 읽고, 정상 데이터를 수신한 다음부터는 원래 싸이즈로 받는다.
+		//	?�신 ?�작 ??1byte???�고, ?�상 ?�이?��? ?�신???�음부?�는 ?�래 ?�이즈로 받는??
 		if (UART1ReadFlag == 0 || UART1ReadFlag == 1)
 		{
 			dwRead = read(fd_UART1, UART1_ReadBuff, 1);
@@ -2138,7 +2159,7 @@ void *Thread_Read_UART1(void *data)
 
 		}
 
-		//	CAN PACKET 구조가 아니면 들어온 것을 모두 버린다.
+		//	CAN PACKET 구조가 ?�니�??�어??것을 모두 버린??
 		if (UART1ReadFlag == 2)
 		{
 			if (UART1_ReadBuff[0] != SERIAL_RX_STX || UART1_ReadBuff[UART1_RXPACKET_SIZE - 1] != SERIAL_RX_ETX)
@@ -2188,7 +2209,7 @@ void *Thread_Read_UART1(void *data)
 				}
 			}
 		}
-		sleep(0); // 다른 Thread 들의 점유를 위해 사용
+		sleep(0); // ?�른 Thread ?�의 ?�유�??�해 ?�용
 	}
 	__android_log_print(ANDROID_LOG_INFO, "NATIVE", "Thread_Read1 Finish\n");
 	(*glpVM)->DetachCurrentThread(glpVM);
@@ -2215,7 +2236,7 @@ void *Thread_Read_UART3(void *data) {
 
 	while (bReadRunningFlag_UART3) {
 		dwRead = 0;
-		//	통신 시작 후 1byte씩 읽고, 정상 데이터를 수신한 다음부터는 원래 싸이즈로 받는다.
+		//	?�신 ?�작 ??1byte???�고, ?�상 ?�이?��? ?�신???�음부?�는 ?�래 ?�이즈로 받는??
 		if (UART3ReadFlag == 0 || UART3ReadFlag == 1) {
 			dwRead = read(fd_UART3, UART3_ReadBuff, 1);
 			__android_log_print(ANDROID_LOG_INFO, "UART3_ReadBuff","UART3_ReadBuff UART3_ReadBuff[0x%x]\n",UART3_ReadBuff[0]);
@@ -2228,7 +2249,7 @@ void *Thread_Read_UART3(void *data) {
 			//												  ,UART3_ReadBuff[8],UART3_ReadBuff[9],UART3_ReadBuff[10]);
 		}
 
-		//	CMD PACKET 구조가 아니면 들어온 것을 모두 버린다.
+		//	CMD PACKET 구조가 ?�니�??�어??것을 모두 버린??
 		if (UART3ReadFlag == 2) {
 			if (UART3_ReadBuff[UART3_RXPACKET_SIZE - 1] != SERIAL_RX_ETX) {
 				//if (dwRead == UART3_RXPACKET_SIZE) {
@@ -2279,7 +2300,7 @@ void *Thread_Read_UART3(void *data) {
 				}
 			}
 		}
-		sleep(0); // 다른 Thread 들의 점유를 위해 사용
+		sleep(0); // ?�른 Thread ?�의 ?�유�??�해 ?�용
 	}
 	__android_log_print(ANDROID_LOG_INFO, "NATIVE", "Thread_Read3 Finish\n");
 	(*glpVM)->DetachCurrentThread(glpVM);
@@ -2312,7 +2333,7 @@ void *Thread_Read_UART1(void *data)
 	while (bReadRunningFlag_UART1)
 	{
 		dwRead = 0;
-		//	통신 시작 후 1byte씩 읽고, 정상 데이터를 수신한 다음부터는 원래 싸이즈로 받는다.
+		//	?�신 ?�작 ??1byte???�고, ?�상 ?�이?��? ?�신???�음부?�는 ?�래 ?�이즈로 받는??
 		if (UART1ReadFlag == 0)
 		{
 			dwRead = read(fd_UART1, &UART1_SingleBuff, 1);
@@ -2331,7 +2352,7 @@ void *Thread_Read_UART1(void *data)
 			//					,UART1_ReadBuff[10],UART1_ReadBuff[11],UART1_ReadBuff[12],UART1_ReadBuff[13],UART1_ReadBuff[14]);
 		}
 
-		//	CAN PACKET 구조가 아니면 들어온 것을 모두 버린다.
+		//	CAN PACKET 구조가 ?�니�??�어??것을 모두 버린??
 		if (UART1ReadFlag == 1)
 		{
 			if (UART1_ReadBuff[0] != SERIAL_RX_STX || UART1_ReadBuff[1] != SERIAL_RX_ID || UART1_ReadBuff[UART1_RXPACKET_SIZE - 1] != SERIAL_RX_ETX)
@@ -2401,7 +2422,7 @@ void *Thread_Read_UART1(void *data)
 
 		}
 
-		sleep(0); // 다른 Thread 들의 점유를 위해 사용
+		sleep(0); // ?�른 Thread ?�의 ?�유�??�해 ?�용
 	}
 	__android_log_print(ANDROID_LOG_INFO, "NATIVE", "Thread_Read1 Finish\n");
 	(*glpVM)->DetachCurrentThread(glpVM);
@@ -2435,7 +2456,7 @@ void *Thread_Read_UART3(void *data) {
 	while (bReadRunningFlag_UART3)
 	{
 		dwRead = 0;
-		//	통신 시작 후 1byte씩 읽고, 정상 데이터를 수신한 다음부터는 원래 싸이즈로 받는다.
+		//	?�신 ?�작 ??1byte???�고, ?�상 ?�이?��? ?�신???�음부?�는 ?�래 ?�이즈로 받는??
 		if (UART3ReadFlag == 0)
 		{
 			dwRead = read(fd_UART3, &UART3_SingleBuff, 1);
@@ -2446,7 +2467,7 @@ void *Thread_Read_UART3(void *data) {
 			dwRead = read(fd_UART3, UART3_ReadBuff, UART3_RXPACKET_SIZE);
 		}
 
-		//	CMD PACKET 구조가 아니면 들어온 것을 모두 버린다.
+		//	CMD PACKET 구조가 ?�니�??�어??것을 모두 버린??
 		if (UART3ReadFlag == 1)
 		{
 			if (UART3_ReadBuff[0] != SERIAL_RX_STX || UART3_ReadBuff[UART3_RXPACKET_SIZE - 1] != SERIAL_RX_ETX)
@@ -2506,7 +2527,7 @@ void *Thread_Read_UART3(void *data) {
 
 		}
 
-		sleep(0); // 다른 Thread 들의 점유를 위해 사용
+		sleep(0); // ?�른 Thread ?�의 ?�유�??�해 ?�용
 	}
 	__android_log_print(ANDROID_LOG_INFO, "NATIVE", "Thread_Read1 Finish\n");
 	(*glpVM)->DetachCurrentThread(glpVM);
@@ -2678,7 +2699,7 @@ jobject _Open_UART1(JNIEnv *env, jclass this, jstring path, jint baudrate,jint f
 
 	InitUART1Valuable();
 
-	//makeTimer("First Timer", &firstTimerID, 0, TIMER1_INTERVAL);
+	makeTimer("First Timer", &firstTimerID, 0, TIMER1_INTERVAL);
 	//makeTimer("Second Timer", &SecondTimerID, 2, 0);
 
 	return mFileDescriptor;
@@ -3210,7 +3231,7 @@ void SetKeypadLamp()
 
 	memcpy(&NewLamp[0],(unsigned char*)&TX_CMD_Lamp,8);
 
-	//이전 램프랑 새로운 Lamp랑 다르면 tx한다.
+	//?�전 ?�프???�로??Lamp???�르�?tx?�다.
 	for(i = 0; i < 8; i++){
 		if(NewLamp[i] != OldLamp[i]){
 			nDiffFlag = 1;
@@ -3255,7 +3276,7 @@ void KeyButtonCallback(unsigned int KeyData) {
 	}
 
 	funcKeyCallBack = (*env)->GetStaticMethodID(env, jObject,
-		"KeyButtonCallBack", "(I)V"); //Integer를 넘겨 준다.
+		"KeyButtonCallBack", "(I)V"); //Integer�??�겨 준??
 
 	if (funcKeyCallBack == 0) {
 		__android_log_print(ANDROID_LOG_INFO, "NATIVE",

@@ -90,8 +90,8 @@ public class ESLCheckFragment extends ParentFragment{
 					ParentActivity.SmartIconDisplay = false;	// ++, --, 150326 bwk
 					break;
 				case 2:
-					showMainScreen();
-//					ParentActivity.showInputMachineSerial();
+					//showMainScreen();
+					ParentActivity.showInputMachineSerial();
 					// ++, 150326 bwk
 					if(SmartKeyUse == CAN1CommManager.DATA_STATE_SMARTKEY_USE_ON)
 						ParentActivity.SmartIconDisplay = true;		
