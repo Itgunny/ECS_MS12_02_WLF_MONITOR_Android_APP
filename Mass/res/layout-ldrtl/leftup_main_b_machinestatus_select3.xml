@@ -123,7 +123,7 @@
         android:id="@+id/imageView_leftup_main_b_machinestatus_select_hydtemp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="295dp"
+        android:layout_marginLeft="294dp"
         android:layout_marginTop="25dp"
         android:src="@drawable/main_monitoring_icon_hyd" />
 
@@ -131,7 +131,7 @@
         android:id="@+id/imageView_leftup_main_b_machinestatus_select_tmoiltemp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="585dp"
+        android:layout_marginLeft="590dp"
         android:layout_marginTop="25dp"
         android:src="@drawable/main_monitoring_icon_tm" />
 
@@ -139,7 +139,7 @@
         android:id="@+id/imageView_leftup_main_b_machinestatus_select_battery"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="295dp"
+        android:layout_marginLeft="294dp"
         android:layout_marginTop="90dp"
         android:src="@drawable/main_monitoring_icon_batt" />
 
@@ -147,7 +147,7 @@
         android:id="@+id/imageView_leftup_main_b_machinestatus_select_weighing"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="585dp"
+        android:layout_marginLeft="590dp"
         android:layout_marginTop="90dp"
         android:src="@drawable/main_monitoring_icon_work" />
 
@@ -155,7 +155,7 @@
         android:id="@+id/imageView_leftup_main_b_machinestatus_select_coolanttemp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="295dp"
+        android:layout_marginLeft="294dp"
         android:layout_marginTop="155dp"
         android:src="@drawable/main_monitoring_icon_coolant" />
 
@@ -163,7 +163,7 @@
         android:id="@+id/imageView_leftup_main_b_machinestatus_select_frontaxletemp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="585dp"
+        android:layout_marginLeft="590dp"
         android:layout_marginTop="155dp"
         android:src="@drawable/main_monitoring_icon_front_axl" />    
 
@@ -171,7 +171,7 @@
         android:id="@+id/imageView_leftup_main_b_machinestatus_select_rearaxletemp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="295dp"
+        android:layout_marginLeft="294dp"
         android:layout_marginTop="220dp"
         android:src="@drawable/main_monitoring_icon_rear_axle" />
     
@@ -179,7 +179,7 @@
         android:id="@+id/ImageButton_leftup_main_b_machinestatus_select_ok"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="585dp"
+        android:layout_marginLeft="420dp"
         android:layout_marginTop="221dp"
         android:background="@drawable/_selector_leftup_machinestatusselect_btn2" />
 

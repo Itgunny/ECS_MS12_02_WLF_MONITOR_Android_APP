@@ -77,10 +77,10 @@ public class Home extends Activity {
 	//Version/////////////////////////////////////////////////////////////////////////////
 	//
 	public static final int VERSION_HIGH 		= 2;
-	public static final int VERSION_LOW 		= 3;
+	public static final int VERSION_LOW 		= 4;
 	public static final int VERSION_SUB_HIGH 	= 0;
-	public static final int VERSION_SUB_LOW 	= 2;
-	public static final int VERSION_TAEHA		= 1;
+	public static final int VERSION_SUB_LOW 	= 0;
+	public static final int VERSION_TAEHA		= 0;
 	////1.0.2.3
 	// UI B 안 최초 적용 2014.12.10
 	////1.0.2.4
@@ -763,6 +763,10 @@ public class Home extends Activity {
 	// 1. ACU 현재고장, 과거고장 기능 적용
 	////v2.3.0.2.1
 	// 1. ACU 기능 다국어 수정 및 다국어 인덱스 수정
+	////v2.4.0.0.0
+	// 1. ACU 양산기능 적용
+	// 2. Pressure Calibration UI 수정
+	// 3. 히브리어 반영
 	//////////////////////////////////////////////////////////////////////////////////////
 	// TAG
 	private  final String TAG = "Home";

@@ -37,9 +37,12 @@
 
        <RadioButton
            android:id="@+id/radioButton_rightup_main_b_enginemode_econo"
-           android:layout_width="350dp"
+           android:layout_width="300dp"
            android:layout_height="wrap_content"
-           android:button="@drawable/_selector_radio_btn"
+           android:drawablePadding="20dip"
+           android:button="@null"
+           android:drawableRight="@drawable/_selector_radio_btn"
+           android:gravity="right"
            android:text="@string/ECONO"
            android:textColor="@drawable/_selector_radio_txt_white_amber"
            android:singleLine="true"
@@ -47,10 +50,13 @@
 
        <RadioButton
            android:id="@+id/radioButton_rightup_main_b_enginemode_standard"
-           android:layout_width="350dp"
+           android:layout_width="300dp"
            android:layout_height="wrap_content"
            android:layout_marginTop="40dp"
-           android:button="@drawable/_selector_radio_btn"
+           android:drawablePadding="20dip"
+           android:button="@null"
+           android:drawableRight="@drawable/_selector_radio_btn"
+           android:gravity="right"
            android:text="@string/STANDARD"
            android:textColor="@drawable/_selector_radio_txt_white_amber"
            android:singleLine="true"
@@ -58,10 +64,13 @@
        
        <RadioButton
            android:id="@+id/radioButton_rightup_main_b_enginemode_power"
-           android:layout_width="350dp"
+           android:layout_width="300dp"
            android:layout_height="wrap_content"
            android:layout_marginTop="40dp"
-           android:button="@drawable/_selector_radio_btn"
+           android:drawablePadding="20dip"
+           android:button="@null"
+           android:drawableRight="@drawable/_selector_radio_btn"
+           android:gravity="right"
            android:text="@string/POWER"
            android:textColor="@drawable/_selector_radio_txt_white_amber"
            android:singleLine="true"

@@ -344,7 +344,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentRight="true"
-                    android:layout_below="@+id/textView_rightup_main_a_hourodometer_title_non_tclockup"
+                    android:layout_marginTop="45dp"                   
                     android:layout_marginRight="35dp"
                     android:gravity="right"
                     android:alpha="0.5"

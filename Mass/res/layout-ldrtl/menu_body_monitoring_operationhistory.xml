@@ -24,11 +24,12 @@
             
             <taeha.wheelloader.fseries_monitor.main.TextFitTextView
 		        android:id="@+id/textView_menu_body_monitoring_operationhistory_work_daily"
-		        android:layout_width="wrap_content"
+		        android:layout_width="300dp"
 		        android:layout_height="wrap_content"
-		        android:layout_marginLeft="62dp"
+		        android:layout_marginRight="62dp"
 		        android:layout_marginTop="10dp"
 		        android:text="@string/Daily"
+		        android:gravity="right"
 		        android:textAppearance="?android:attr/textAppearanceLarge"
 		        android:textSize="15sp" />
 
@@ -71,16 +72,16 @@
                 android:id="@+id/checkBox_menu_body_monitoring_operationhistory_work_totala"
                 android:layout_width="342dp"
                 android:layout_height="66dp"
-                android:layout_marginLeft="10dp"
-                android:layout_marginTop="5dp"
                 android:drawablePadding="20dip"
                 android:button="@null"
                 android:drawableRight="@drawable/_selector_check_btn"
-                android:gravity="top"
+               	android:layout_above="@+id/textView_menu_body_monitoring_operationhistory_work_totala_unit"
+                android:gravity="right|center_vertical"
                 android:paddingLeft="25dp"
                 android:paddingTop="5dp"
                 android:text="@string/Total_A"
-                android:textColor="@drawable/_selector_radio_txt_white_amber" />
+                android:textColor="@drawable/_selector_radio_txt_white_amber" 
+                android:textAlignment="gravity"/>
 
             <taeha.wheelloader.fseries_monitor.main.TextFitTextView
                 android:id="@+id/textView_menu_body_monitoring_operationhistory_work_totala_data"
@@ -121,16 +122,16 @@
                 android:id="@+id/checkBox_menu_body_monitoring_operationhistory_work_totalb"
                 android:layout_width="342dp"
                 android:layout_height="66dp"
-                android:layout_marginLeft="10dp"
-                android:layout_marginTop="5dp"
                 android:drawablePadding="20dip"
                 android:button="@null"
                 android:drawableRight="@drawable/_selector_check_btn"
-                android:gravity="top"
+                android:layout_above="@+id/textView_menu_body_monitoring_operationhistory_work_totalb_unit"
+                android:gravity="right|center_vertical"
                 android:paddingLeft="25dp"
                 android:paddingTop="5dp"
                 android:text="@string/Total_B"
-                android:textColor="@drawable/_selector_radio_txt_white_amber" />
+                android:textColor="@drawable/_selector_radio_txt_white_amber"
+                android:textAlignment="gravity" />
 
             <taeha.wheelloader.fseries_monitor.main.TextFitTextView
                 android:id="@+id/textView_menu_body_monitoring_operationhistory_work_totalb_data"
@@ -171,16 +172,16 @@
                 android:id="@+id/checkBox_menu_body_monitoring_operationhistory_work_totalc"
                 android:layout_width="342dp"
                 android:layout_height="66dp"
-                android:layout_marginLeft="10dp"
-                android:layout_marginTop="5dp"
                 android:drawablePadding="20dip"
                 android:button="@null"
                 android:drawableRight="@drawable/_selector_check_btn"
-                android:gravity="top"
+                android:layout_above="@+id/textView_menu_body_monitoring_operationhistory_work_totalc_unit"
+                android:gravity="right|center_vertical"
                 android:paddingLeft="25dp"
                 android:paddingTop="5dp"
                 android:text="@string/Total_C"
-                android:textColor="@drawable/_selector_radio_txt_white_amber" />
+                android:textColor="@drawable/_selector_radio_txt_white_amber"
+                android:textAlignment="gravity" />
 
             <taeha.wheelloader.fseries_monitor.main.TextFitTextView
                 android:id="@+id/textView_menu_body_monitoring_operationhistory_work_totalc_data"
@@ -219,9 +220,9 @@
 
 		    <taeha.wheelloader.fseries_monitor.main.TextFitTextView
 		        android:id="@+id/textView_menu_body_monitoring_operationhistory_odo_total"
-		        android:layout_width="wrap_content"
+		        android:layout_width="300dp"
 		        android:layout_height="wrap_content"
-		        android:layout_marginLeft="62dp"
+		        android:layout_marginRight="62dp"
 		        android:layout_marginTop="10dp"
 		        android:text="@string/Total_Odometer"
 		        android:textAppearance="?android:attr/textAppearanceLarge"
@@ -266,16 +267,16 @@
                 android:id="@+id/checkBox_menu_body_monitoring_operationhistory_odo_latest"
                 android:layout_width="342dp"
                 android:layout_height="66dp"
-                android:layout_marginLeft="10dp"
-                android:layout_marginTop="5dp"
                 android:drawablePadding="20dip"
                 android:button="@null"
                 android:drawableRight="@drawable/_selector_check_btn"
-                android:gravity="top"
+                android:layout_above="@+id/textView_menu_body_monitoring_operationhistory_odo_latest_unit"
+                android:gravity="right|center_vertical"
                 android:paddingLeft="25dp"
                 android:paddingTop="5dp"
                 android:text="@string/Latest_Odometer"
-                android:textColor="@drawable/_selector_radio_txt_white_amber" />
+                android:textColor="@drawable/_selector_radio_txt_white_amber"
+                android:textAlignment="gravity" />
 
             <taeha.wheelloader.fseries_monitor.main.TextFitTextView
                 android:id="@+id/textView_menu_body_monitoring_operationhistory_odo_latest_data"
@@ -316,16 +317,16 @@
                 android:id="@+id/checkBox_menu_body_monitoring_operationhistory_hour_latest"
                 android:layout_width="342dp"
                 android:layout_height="66dp"
-                android:layout_marginLeft="10dp"
-                android:layout_marginTop="5dp"
                 android:drawablePadding="20dip"
                 android:button="@null"
                 android:drawableRight="@drawable/_selector_check_btn"
-                android:gravity="top"
+                android:layout_above="@+id/textView_menu_body_monitoring_operationhistory_hour_latest_unit"
+                android:gravity="right|center_vertical"
                 android:paddingLeft="25dp"
                 android:paddingTop="5dp"
                 android:text="@string/Latest_Hourmeter"
-                android:textColor="@drawable/_selector_radio_txt_white_amber" />
+                android:textColor="@drawable/_selector_radio_txt_white_amber"
+                android:textAlignment="gravity" />
 
             <taeha.wheelloader.fseries_monitor.main.TextFitTextView
                 android:id="@+id/textView_menu_body_monitoring_operationhistory_hour_latest_data"

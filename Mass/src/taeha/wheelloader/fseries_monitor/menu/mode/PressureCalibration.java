@@ -52,6 +52,9 @@ public class PressureCalibration extends ParentFragment{
 	TextView textViewText2;
 	TextView textViewText3;
 	
+	TextView textViewOrder4;
+	TextView textViewText4;
+	
 	TextFitTextView textViewHYDTitle;
 	TextFitTextView textViewHYDData;		// ++, --, 150204 bwk
 	
@@ -162,6 +165,10 @@ public class PressureCalibration extends ParentFragment{
 		
 		textViewText3 = (TextView)mRoot.findViewById(R.id.textView_menu_body_management_calibration_pressure_main_step_3);
 		textViewText3.setText(getString(ParentActivity.getResources().getString(R.string.Boom_lifting_will_be_stopped_automatically_at_a_certain_position_and_calibration_is_completed), 357));
+		
+		textViewOrder4 = (TextView)mRoot.findViewById(R.id.textView_menu_body_management_calibration_pressure_main_order_4);
+		textViewText4 = (TextView)mRoot.findViewById(R.id.textView_menu_body_management_calibration_pressure_main_step_4);
+		textViewText4.setText(getString(ParentActivity.getResources().getString(R.string.Engine_Mode_Set_P_Mode_For_Calibration), 473));
 		
 		textViewHYDTitle = (TextFitTextView)mRoot.findViewById(R.id.textView_menu_body_management_calibration_pressure_main_HYD_Temp);
 		textViewHYDTitle.setText(getString(ParentActivity.getResources().getString(R.string.HYD_Temp), 111));
@@ -282,6 +289,8 @@ public class PressureCalibration extends ParentFragment{
 		textViewTitle.setText(getString(ParentActivity.getResources().getString(string.Second_Calibration), 354));
 		textViewText2.setText(getString(
 				ParentActivity.getResources().getString(string.Set_P_mode_step_on_pedal_max_range_press_Start_button_lift_the_boom_with_the_hydraulic_control_in_detent_position), 358));
+		textViewOrder4.setVisibility(View.VISIBLE);
+		textViewText4.setVisibility(View.VISIBLE);
 		imgViewStep1.setImageResource(R.drawable.menu_management_boom_pressure_step_off);
 		imgViewStep2.setImageResource(R.drawable.menu_management_boom_pressure_step_on);
 		StatusCNT = 0;
@@ -379,10 +388,19 @@ public class PressureCalibration extends ParentFragment{
 					break;
 				// ++, 150204 bwk
 				case LOW_HYDRAULIC_OIL_ERROR:
+					if(Order == 0){
+						Order = 1;
+						Order2Display();
 					ParentActivity._PressureCalibrationResultPopup.setTextTitle(
 							getString(ParentActivity.getResources().getString(string.Hydraulic_Oil_Temp_Error), 385));
 					ParentActivity._PressureCalibrationResultPopup.setExitFlag(false);
 					ParentActivity.showPressureCalibrationResult();
+					}else {
+						ParentActivity._PressureCalibrationResultPopup.setTextTitle(
+								getString(ParentActivity.getResources().getString(string.Calibration_completed), 379));
+						ParentActivity._PressureCalibrationResultPopup.setExitFlag(true);
+						ParentActivity.showPressureCalibrationResult();
+					}
 					Log.d(TAG,"Low_Hydraulic_Oil_Error");
 					break;
 				// --, 150204 bwk

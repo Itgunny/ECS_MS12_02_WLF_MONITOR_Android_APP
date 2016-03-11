@@ -40,7 +40,7 @@
 	
 		       <RadioButton
 		           android:id="@+id/radioButton_menu_body_monitoring_fault_machine"
-		           android:layout_width="350dp"
+		           android:layout_width="300dp"
 		           android:layout_height="wrap_content"
                	   android:drawablePadding="20dip"
                    android:button="@null"
@@ -53,7 +53,7 @@
 		
 		       <RadioButton
 		           android:id="@+id/radioButton_menu_body_monitoring_fault_engine"
-		           android:layout_width="350dp"
+		           android:layout_width="300dp"
 		           android:layout_height="wrap_content"
 		           android:layout_marginTop="40dp"
                	   android:drawablePadding="20dip"
@@ -67,7 +67,7 @@
 		
 		       <RadioButton
 		           android:id="@+id/radioButton_menu_body_monitoring_fault_transmission"
-		           android:layout_width="350dp"
+		           android:layout_width="300dp"
 		           android:layout_height="wrap_content"
 		           android:layout_marginTop="40dp"
                	   android:drawablePadding="20dip"
@@ -81,7 +81,7 @@
 		       
 		       <RadioButton
 		           android:id="@+id/radioButton_menu_body_monitoring_fault_ehcu"
-		           android:layout_width="350dp"
+		           android:layout_width="300dp"
 		           android:layout_height="wrap_content"
 		           android:layout_marginTop="40dp"
                	   android:drawablePadding="20dip"
@@ -98,7 +98,10 @@
 		           android:layout_width="300dp"
 		           android:layout_height="wrap_content"
 		           android:layout_marginTop="40dp"
-		           android:button="@drawable/_selector_radio_btn"
+               	   android:drawablePadding="20dip"
+                   android:button="@null"
+                   android:drawableRight="@drawable/_selector_radio_btn"
+                   android:gravity="right"
 		           android:text="@string/FATC"
 		           android:textColor="@drawable/_selector_radio_txt_white_amber"
 		           android:singleLine="true"

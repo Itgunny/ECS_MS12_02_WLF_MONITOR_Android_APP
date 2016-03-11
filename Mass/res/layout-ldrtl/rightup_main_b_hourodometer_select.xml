@@ -8,11 +8,14 @@
     
     <RadioButton
         android:id="@+id/radioButton_rightup_main_b_hourodometer_select_latesthourmeter"
-        android:layout_width="500dp"
+        android:layout_width="400dp"
         android:layout_height="wrap_content"
         android:layout_marginLeft="135dp"
         android:layout_marginTop="50dp"
-        android:button="@drawable/_selector_radio_btn"
+        android:button="@null"
+        android:drawablePadding="20dip"
+        android:drawableRight="@drawable/_selector_radio_btn"
+        android:gravity="right"
         android:text="@string/Latest_Hourmeter"
         android:textColor="@drawable/_selector_radio_txt_white_amber"
         android:singleLine="true"
@@ -20,11 +23,14 @@
 	
 	<RadioButton
 	    android:id="@+id/radioButton_rightup_main_b_hourodometer_select_totalodometer"
-	    android:layout_width="500dp"
+	    android:layout_width="400dp"
 	    android:layout_height="wrap_content"
 	    android:layout_marginLeft="135dp"
 	    android:layout_marginTop="130dp"
-	    android:button="@drawable/_selector_radio_btn"
+        android:button="@null"
+        android:drawablePadding="20dip"
+        android:drawableRight="@drawable/_selector_radio_btn"
+        android:gravity="right"
 	    android:text="@string/Total_Odometer"
 	    android:textColor="@drawable/_selector_radio_txt_white_amber"
 	    android:singleLine="true"
@@ -32,12 +38,15 @@
 	
 	<RadioButton
 	    android:id="@+id/radioButton_rightup_main_b_hourodometer_select_latestodometer"
-	    android:layout_width="500dp"
+	    android:layout_width="400dp"
 	    android:layout_height="wrap_content"
 	    android:layout_marginLeft="135dp"
 	    android:layout_marginTop="210dp"
 	    android:text="@string/Latest_Odometer"
-	    android:button="@drawable/_selector_radio_btn"
+	    android:button="@null"
+        android:drawablePadding="20dip"
+        android:drawableRight="@drawable/_selector_radio_btn"
+        android:gravity="right"
 	    android:textColor="@drawable/_selector_radio_txt_white_amber"
 	    android:singleLine="true"
 	    android:textSize="25sp" />
