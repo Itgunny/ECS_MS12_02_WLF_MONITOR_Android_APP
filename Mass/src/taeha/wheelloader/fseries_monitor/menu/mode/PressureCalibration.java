@@ -391,8 +391,12 @@ public class PressureCalibration extends ParentFragment{
 					if(Order == 0){
 						Order = 1;
 						Order2Display();
+					// ++, 160317 bwk
+					//ParentActivity._PressureCalibrationResultPopup.setTextTitle(
+					//		getString(ParentActivity.getResources().getString(string.Hydraulic_Oil_Temp_Error), 385));
 					ParentActivity._PressureCalibrationResultPopup.setTextTitle(
-							getString(ParentActivity.getResources().getString(string.Hydraulic_Oil_Temp_Error), 385));
+							getString(ParentActivity.getResources().getString(string.First_boom_pressure_calibration_completed), 362));
+					// --, 160317 bwk
 					ParentActivity._PressureCalibrationResultPopup.setExitFlag(false);
 					ParentActivity.showPressureCalibrationResult();
 					}else {

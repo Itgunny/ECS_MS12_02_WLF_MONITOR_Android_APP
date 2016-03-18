@@ -2722,7 +2722,7 @@ jobject _Open_UART1(JNIEnv *env, jclass this, jstring path, jint baudrate,jint f
 
 	InitUART1Valuable();
 
-	makeTimer("First Timer", &firstTimerID, 0, TIMER1_INTERVAL);
+	//makeTimer("First Timer", &firstTimerID, 0, TIMER1_INTERVAL);
 	//makeTimer("Second Timer", &SecondTimerID, 2, 0);
 
 	return mFileDescriptor;
