@@ -1236,14 +1236,15 @@ public class FaultHistoryLoggedFragment extends ParentFragment{
 	   ,346,503,503,503,503,507,507,507,507,551,551,552,552,558,558,558,558,701,705,705,707,723,723,727,727		
 	   ,728,728,729,729,730,830,840,841,842,843,844,850,869
 	   ,2000,2000,2001,2001,2002,2003,2003,2004,2005	// RMCU 관련 오류 추가
-	   ,861,339,339,343,343,557,557};	// 	DTC List (HL9XX 시리즈, 15년 5월 22일 기준) 적용
+	   ,861,339,339,343,343,557,557			// 	DTC List (HL9XX 시리즈, 15년 5월 22일 기준) 적용
+	   ,831};			// DTC 160323 성현균 대리 요청 추가
 	static final int FMIDATA[] = {3, 4,	5,	6,	4,	6,	4,	6,	4,	6,	4,	6,	4,	6,	4,	6,	0,	1,	2,	4,	
 		0,	1,	2,	4,	0,	1,	2,	4,	0,	1,	2,	4,	3,	4,	3,	4,	8,	8,	4,	6,	4,	6,	4,	6,	3,	
 		4,	0,	1,	2,	4,	0,	1,	2,	4,	3,	4,	3,	4,	0,	1,	2,	4,	4,	0,	1,	1,	3,	4,	4,	6,	
 		3,	4,	3,	4,	19,	12,	2,	2,	2,	2,	2,	2,	2,
 		5,	1,	5,	1,	1, 19,	2,	0,	0,	// RMCU 관련 오류 추가
-		2,	3,	4,	3,	4,	0,	4};		// 	DTC List (HL9XX 시리즈, 15년 5월 22일 기준) 적용
-
+		2,	3,	4,	3,	4,	0,	4,			// 	DTC List (HL9XX 시리즈, 15년 5월 22일 기준) 적용
+		2};		// DTC 160323 성현균 대리 요청 추가
 	
 	// ++, 150202 bwk : 150128 HHI 임혁준 요청
 	static final int TCU_SPN[] = {0x10,0x11,0x12,0x13,0x14,0x15,0x16,0x17,0x18,0x19,0x1A,0x1B,0x1C,0x1D,0x1E,0x1F,
@@ -1463,6 +1464,7 @@ public class FaultHistoryLoggedFragment extends ParentFragment{
 		"Accel Pedal Position 2 Sensor Circuit - Voltage Below Normal, or Shorted to Low Source",	// 15.06.10 수정  
 		"Brake Priority Pressure Sensor Data Above Normal Range (or Open Circuit)",	// 15.06.10 수정  
 		"Brake Priority Pressure Sensor Circuit - Voltage Below Normal, or Shorted to Low Source",	// 15.06.10 수정  
+		"FATC Communication Error",		// 16.03.23 추가
 		"Not define."	
 	};
 

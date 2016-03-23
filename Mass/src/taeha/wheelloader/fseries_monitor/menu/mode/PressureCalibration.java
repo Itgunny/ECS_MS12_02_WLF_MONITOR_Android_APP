@@ -395,6 +395,7 @@ public class PressureCalibration extends ParentFragment{
 					// ++, 160317 bwk
 					//ParentActivity._PressureCalibrationResultPopup.setTextTitle(
 					//		getString(ParentActivity.getResources().getString(string.Hydraulic_Oil_Temp_Error), 385));
+					// ++, --, 160323 bwk 다국어 숫자 잘못되어 있는거 수정함!!!!!
 					ParentActivity._PressureCalibrationResultPopup.setTextTitle(
 							getString(ParentActivity.getResources().getString(string.First_boom_pressure_calibration_completed), 362));
 					// --, 160317 bwk

@@ -82,7 +82,7 @@ public class Home extends Activity {
 	public static final int VERSION_LOW 		= 4;
 	public static final int VERSION_SUB_HIGH 	= 0;
 	public static final int VERSION_SUB_LOW 	= 0;
-	public static final int VERSION_TAEHA		= 0;
+	public static final int VERSION_TAEHA		= 1;
 	// UI B 안 최초 적용 2014.12.10
 	////1.0.2.4
 	// Eco Gauge Pivot 함수 추가(Progress Bar가 가운데서
@@ -770,6 +770,11 @@ public class Home extends Activity {
 	// 2. Pressure Calibration UI 수정
 	// 3. 히브리어 반영
 	// 4. 다국어 문서 반영 완료
+	// 5. ACU Description 변경(GPS -> DPS)
+	// 6. 엔진 자동 정지 프로토콜 3초동안 안오면 팝업 종료
+	// 7. SoftEndStop Calibration - BucketDumpCalibration 추가
+	////v2.4.0.0.1
+	// 1. MCU DTC 추가(831/2 - ACU 통신에러)
 	//////////////////////////////////////////////////////////////////////////////////////
 	// TAG
 	private  final String TAG = "Home";

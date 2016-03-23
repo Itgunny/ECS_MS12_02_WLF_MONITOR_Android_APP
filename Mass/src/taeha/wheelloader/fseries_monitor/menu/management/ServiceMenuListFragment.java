@@ -214,11 +214,20 @@ public class ServiceMenuListFragment extends MenuBodyList_ParentFragment{
 	@Override
 	public void ClickList5() {
 		// TODO Auto-generated method stub
+		// ++, 160323 bwk ¹ö±×ÀÓ!!!!!
+		/*
 		if(CAN1Comm.Get_ComponentCode_1699_PGN65330_EHCU() != CAN1CommManager.STATE_COMPONENTCODE_EHCU){
 			ParentActivity._MenuBaseFragment.showBodyServiceSoftAndStopCalibrationMenuList();
 			CursurIndex = 4;
 			CursurDisplay(CursurIndex);
-		}else {
+		}else*/ // --, 160323 bwk
+		// ++, 160323 bwk
+		if(ParentActivity.AnimationRunningFlag == true)
+			return;
+		else
+			ParentActivity.StartAnimationRunningTimer();
+		// --, 160323 bwk
+		{
 			if(nInputMachineSerial == 5)
 			{
 				ParentActivity._MenuBaseFragment.showBodyChangeMachineSerialAnimation();
@@ -231,6 +240,13 @@ public class ServiceMenuListFragment extends MenuBodyList_ParentFragment{
 	@Override
 	public void ClickList6() {
 		// TODO Auto-generated method stub
+		// ++, 160323 bwk
+		if(ParentActivity.AnimationRunningFlag == true)
+			return;
+		else
+			ParentActivity.StartAnimationRunningTimer();
+		// --, 160323 bwk
+		
 		ParentActivity._MenuBaseFragment.showBodyServiceSoftAndStopCalibrationMenuList();
 		CursurIndex = 6;
 		CursurDisplay(CursurIndex);
