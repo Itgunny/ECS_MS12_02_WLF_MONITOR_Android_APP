@@ -232,6 +232,10 @@ public class MenuListTitleFragment extends ParentFragment{
 				ParentActivity._MenuBaseFragment.showBodyPreference();
 				setBackButtonEnable(false);
 				break;
+			case Home.SCREEN_STATE_MENU_MANAGEMENT_SERVICE_SOFTANDSTOP_CAL_TOP:
+				ParentActivity._MenuBaseFragment.showBodyServiceMenuList();
+				setBackButtonEnable(false);
+				break;
 
 		default:
 			break;

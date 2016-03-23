@@ -383,7 +383,7 @@
     <string name="Sensor_Error">שגיאת חיישן</string>
     <string name="Time_Out">פסק זמן</string>
     <string name="Boom_Up_Speed_Error">שגיאת מהירות BOOM UP</string>
-    <string name="Pressure_Calibration_Warning">충분히 워밍업을 한 이후에 보정을 수행하십시오.\n작업량 계측 값이 정확하지 않을 수 있습니다.</string>
+    <string name="Pressure_Calibration_Warning">Please perform calibration after warming up.\nthe workload measurement value may not be accurate.</string>
     <string name="Hydraulic_Oil_Temp_Error">שגיאה טמפ\' שמן הידראולי</string>
     <string name="Fan_EPPR_Current_Adjust">מאורר EPPR לכיונון נוכחי</string>
     <string name="Turn_the_engine_off_for_sensor_calibration">כבה את המנוע לכיול חיישן</string>
@@ -472,5 +472,25 @@
     <string name="Volume_gallon">gal</string>
     <string name="Distance">Distance</string>
     <string name="FATC_System_Controller">FATC System Controller</string>
-    <string name="Engine_Mode_Set_P_Mode_For_Calibration">보정을 위해 엔진 모드가 P 모드로 변경됩니다.</string>
+    <string name="Soft_End_Stop_Calibration">Soft End Stop Calibration</string>
+    <string name="Bucket_Dump_Speed_Calibration">Bucket Dump Speed Calibration</string>
+    <string name="Boom_Position">Boom Position</string>
+    <string name="Bucket_Position">Bucket Position</string>
+	<string name="Engine_Mode_Set_P_Mode_For_Calibration">Engine mode will be set to Power mode for Calibration.</string>
+	<string name="Bucket_Dump_Calibration_Order1">Before touch Start button, Raise the boom to maximum height, and Roll-in the bucket to maximum range.</string>
+	<string name="Bucket_Dump_Calibration_Order2">Touch Start button. Control lever to maximum range to dump bucket without pressing accelerator pedal.</string>
+	<string name="Bucket_Dump_Calibration_Order3">When you dump the bucket, it can cause shaking impact.</string>
+	<string name="Bucket_Dump_Calibration_Order4">This can be repeated for several times to find a calibration value.</string>
+	<string name="Bucket_Dump_Calibration_Step2_Order2">Touch Start button. Control lever to maximum range to dump bucket with pressing accelerator pedal to maximum level.</string>
+	<string name="Roll_Back">Roll Back</string>
+	<string name="Soft_End_Stop_Bucket_Dump_Init_Popup">Please check the\n[Soft End Stop - Bucket Dump]\nis turned ON.</string>
+	<string name="Bucket_Dump_Calibration_1_Retry">Retry 1st Calibration to find a calibration value.</string>
+	<string name="Bucket_Dump_Calibration_1_Success">1st Calibration Complete</string>
+	<string name="Bucket_Dump_Calibration_2_Retry">Retry 2nd Calibration to find a calibration value.</string>
+	<string name="Bucket_Dump_Calibration_2_Success">2nd Calibration Complete</string>
+	<string name="Calibration_Fail_Time_Over">Calibration Fail\nTime over</string>
+	<string name="Calibration_Fail_Boom_Position_Error">Calibration Fail\nBoom Position error</string>
+	<string name="Calibration_Fail_Bucket_Position_Error">Calibration Fail\nBucket Position error</string>
+	<string name="Calibration_Fail_Engine_Rpm_Error">Calibration Fail\nEngine Rpm error</string>
+	<string name="Calibration_Fail_Lever_Position_Error">Calibration Fail\nLever Position error</string>
 </resources>

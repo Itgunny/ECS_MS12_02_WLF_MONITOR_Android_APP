@@ -354,7 +354,7 @@
     <string name="Start">시작</string>
     <string name="First_Calibration">1차 보정</string>
     <string name="Second_Calibration">2차 보정</string>
-    <string name="Roll_in_the_bucket_at_max_range_lower_the_boom_at_min_height">"시작 버튼을 누르기 전에, 버켓과 붐을 최하 높이까지 하강시키고, 버켓을 안쪽으로 끝까지 복귀 합니다. \n - 엔진 모드가 P 모드로 설정 되어있는지 확인 합니다."</string>
+    <string name="Roll_in_the_bucket_at_max_range_lower_the_boom_at_min_height">"시작 버튼을 누르기 전에, 버켓과 붐을 최하 높이까지 하강시키고, 버켓을 안쪽으로 끝까지 복귀 합니다."</string>
     <string name="Press_Start_button_lift_the_boom_with_the_hydraulic_control_in_detent_position">시작 버튼을 누르고, 엑셀 페달을 밟지 않은 상태에서, 붐 조작 레버를 상승 방향으로 디텐트 위치까지 당겼다 놓습니다.</string>
     <string name="Boom_lifting_will_be_stopped_automatically_at_a_certain_position_and_calibration_is_completed">붐과 조작 레버는 특정 위치에서 자동으로 정지하고, 일정 시간 후 보정기능이 완료 될 것입니다.</string>
     <string name="Set_P_mode_step_on_pedal_max_range_press_Start_button_lift_the_boom_with_the_hydraulic_control_in_detent_position">시작 버튼을 누르고, 엑셀 페달을 최대로 밟은 상태에서, 붐 조작 레버를 상승 방향으로 디텐트 위치까지 당겼다 놓습니다.</string>
@@ -472,5 +472,25 @@
     <string name="Volume_gallon">gal</string>
     <string name="Distance">거리</string>
     <string name="FATC_System_Controller">FATC System Controller</string>
+	<string name="Soft_End_Stop_Calibration">소프트 엔드 스탑 보정</string>
+    <string name="Bucket_Dump_Speed_Calibration">버켓 덤프 속도 보정</string>
+    <string name="Boom_Position">붐 위치</string>
+    <string name="Bucket_Position">버켓 위치</string>
     <string name="Engine_Mode_Set_P_Mode_For_Calibration">보정을 위해 엔진 모드가 P 모드로 변경됩니다.</string>
+    <string name="Bucket_Dump_Calibration_Order1">시작 버튼을 누르기전에 버켓을 최대 범위로 롤백하고, 붐을 최대위치로 올립니다.</string>
+    <string name="Bucket_Dump_Calibration_Order2">시작 버튼을 누르고, 액셀 페달을 밟지 않은 상태에서\n 버켓 레버를 최대로 조작해 덤프를 실시합니다.</string>
+    <string name="Bucket_Dump_Calibration_Order3">"버켓 덤프 시 충격이 발생할 수 있습니다."</string>
+    <string name="Bucket_Dump_Calibration_Order4">"보정값을 찾기 위해 여러번 반복할 수 있습니다."</string>
+	<string name="Bucket_Dump_Calibration_Step2_Order2">시작 버튼을 누르고, 액셀 페달을 최대로 밟은 상태\n에서 버켓 레버를 최대로 조작해 덤프를 실시합니다.</string>
+	<string name="Roll_Back">롤백</string>
+	<string name="Soft_End_Stop_Bucket_Dump_Init_Popup">[Soft End Stop - Bucket Dump]\n기능을 켜주세요.</string>
+	<string name="Bucket_Dump_Calibration_1_Retry">보정값을 찾기 위해\n1st Calibration을 재시도 해주세요.</string>
+	<string name="Bucket_Dump_Calibration_1_Success">1st Calibration 완료</string>
+	<string name="Bucket_Dump_Calibration_2_Retry">보정값을 찾기 위해\n2nd Calibration을 재시도 해주세요.</string>
+	<string name="Bucket_Dump_Calibration_2_Success">2nd Calibration 완료</string>
+	<string name="Calibration_Fail_Time_Over">Calibration을 실패하였습니다.\n경과시간 초과</string>
+	<string name="Calibration_Fail_Boom_Position_Error">Calibration을 실패하였습니다.\n붐 위치 오류</string>
+	<string name="Calibration_Fail_Bucket_Position_Error">Calibration을 실패하였습니다.\n버켓 위치 오류</string>
+	<string name="Calibration_Fail_Engine_Rpm_Error">Calibration을 실패하였습니다.\n엔진 회전수 오류</string>
+	<string name="Calibration_Fail_Lever_Position_Error">Calibration을 실패하였습니다.\n최대 레버 조작 오류</string>
 </resources>

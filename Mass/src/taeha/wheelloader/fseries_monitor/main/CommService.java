@@ -283,6 +283,7 @@ public class CommService extends Service{
 	public native int Get_AutomaticEngineShutdownType_PGN61184_122();
 	public native int Get_SettingTimeforAutomaticEngineShutdown_364_PGN61184_122();
 	public native int Get_RemainingTimeforAutomaticEngineShutdown_PGN61184_122();
+	public native void Set_RX_RemainingTimeforAutomaticEngineShutdown_PGN61184_122(int Data);
 	public native int Get_SettingTimeforDelayedEngineShutdown_366_PGN61184_122();
 	public native int Get_RemainingTimeforDelayedEngineShutdown_PGN61184_122();
 	//////RX_DETENT_MODE_SETTING_61184_123///////
@@ -307,6 +308,7 @@ public class CommService extends Service{
 	public native int Get_RequestBoomBucketAngleSensorCalibration_PGN61184_201();
 	public native int Get_RequestAEB_PGN61184_201();
 	public native int Get_RequestBrakePedalPositionSensorCalibration_PGN61184_201();
+	public native int Get_RequestBucketDumpCalibration_PGN61184_201();
 	//////RX_WHEEL_LOADER_SENSOR_CALIBRATION_STATUS_61184_202///////
 	public native int Get_MessageType_PGN61184_202();
 	public native int Get_BoomPressureCalibrationStatus_1908_PGN61184_202();
@@ -316,6 +318,9 @@ public class CommService extends Service{
 	public native int Get_AEBStatusInformation_SubCode_563_PGN61184_202();
 	public native int Get_BrakePedalPositionSensorCalibrationStatus_564_PGN61184_202();
 	public native int Get_BrakePedalPositionSensorCalibration_FaultInformation_565_PGN61184_202();
+	public native int Get_RequestBucketDumpSpeedCalibrationStatus_1945_PGN61184_202();
+	public native int Get_BoomPositionCalibrationError_1946_PGN61184_202();
+	public native int Get_BucketPositionCalibrationError_1947_PGN61184_202();
 	//////RX_WHEEL_LOADER_EHCU_SETTING_61184_203///////
 	public native int Get_MessageType_PGN61184_203();
 	public native int Get_BucketPriorityOperation_2301_PGN61184_203();
@@ -812,6 +817,7 @@ public class CommService extends Service{
 	public native void Set_RequestBoomBucketAngleSensorCalibration_PGN61184_201(int Data);
 	public native void Set_RequestAEB_PGN61184_201(int Data);
 	public native void Set_RequestBrakePedalPositionSensorCalibration_PGN61184_201(int Data);
+	public native void Set_RequestBucketDumpCalibration_PGN61184_201(int Data);
 	//////TX_WHEEL_LOADER_SENSOR_CALIBRATION_STATUS_61184_202///////
 	public native void Set_MessageType_PGN61184_202(int Data);
 	public native void Set_BoomPressureCalibrationStatus_1908_PGN61184_202(int Data);
@@ -821,6 +827,9 @@ public class CommService extends Service{
 	public native void Set_AEBStatusInformation_SubCode_563_PGN61184_202(int Data);
 	public native void Set_BrakePedalPositionSensorCalibrationStatus_564_PGN61184_202(int Data);
 	public native void Set_BrakePedalPositionSensorCalibration_FaultInformation_565_PGN61184_202(int Data);
+	public native void Set_RequestBucketDumpSpeedCalibrationStatus_1945_PGN61184_202(int Data);
+	public native void Set_BoomPositionCalibrationError_1946_PGN61184_202(int Data);
+	public native void Set_BucketPositionCalibrationError_1947_PGN61184_202(int Data);
 	//////TX_WHEEL_LOADER_EHCU_SETTING_61184_203///////
 	public native void Set_MessageType_PGN61184_203(int Data);
 	public native void Set_BucketPriorityOperation_2301_PGN61184_203(int Data);

@@ -1778,7 +1778,7 @@ public class FaultHistoryActiveFragment extends ParentFragment{
 		"Duct temperature sensor short",
 		"Water Valve sensor open",
 		"Water Valve sensor short",
-		"G.P.S Circuit Error",
+		"D.P.S Circuit Error",
 		"reserved",
 		"reserved",
 		"reserved"

@@ -813,10 +813,7 @@ void UART1_SeperateData_Default(int Priority, int PF, int PS, unsigned char* Dat
 		case 121	:	memcpy((unsigned char*)&RX_ENGINE_SHUTDOWN_MODE_SETTING_61184_121,&Data[7],8);	 break	;
 		case 122	:	memcpy((unsigned char*)&RX_ENGINE_SHUTDOWN_MODE_STATUS_61184_122,&Data[7],8);	 break	;
 		case 123	:	memcpy((unsigned char*)&RX_DETENT_MODE_SETTING_61184_123,&Data[7],8);	 break	;
-		case 124	:
-			memcpy((unsigned char*)&RX_DETENT_MODE_STATUS_61184_124,&Data[7],8);
-			SetKeypadLamp();
-			break	;
+			case 124	:	memcpy((unsigned char*)&RX_DETENT_MODE_STATUS_61184_124,&Data[7],8);	SetKeypadLamp();	break	;
 		case 129	:	memcpy((unsigned char*)&RX_ELECTRIC_CIRCUIT_CONTROL_COMMAND_61184_129,&Data[7],8);	 break	;
 		case 151	:	memcpy((unsigned char*)&RX_AS_PHONE_NUMBER_SETTING_61184_151,&Data[7],8);	 break	;
 		case 201	:	memcpy((unsigned char*)&RX_WHEEL_LOADER_SENSOR_CALIBRATION_REQUEST_61184_201,&Data[7],8);	 break	;
@@ -838,10 +835,7 @@ void UART1_SeperateData_Default(int Priority, int PF, int PS, unsigned char* Dat
 		case 50 :memcpy((unsigned char*)&RX_COMPONENT_IDENTIFICATION_65330,&Data[7],8); break;
 		case 64 :memcpy((unsigned char*)&RX_TRIP_TIME_INFORMATION_65344,&Data[7],8); break;
 		case 68 :memcpy((unsigned char*)&RX_MACHINE_SECURITY_STATUS_65348,&Data[7],8); gRecvESL = 1;break;
-		case 70 :
-			memcpy((unsigned char*)&RX_MACHINE_MODE_STATUS_65350,&Data[7],8);
-			SetKeypadLamp();
-			break;
+				case 70 :memcpy((unsigned char*)&RX_MACHINE_MODE_STATUS_65350,&Data[7],8);SetKeypadLamp();break;
 		case 74 :memcpy((unsigned char*)&RX_HYDRAULIC_PRESSURE4_65354,&Data[7],8); break;
 		case 76 :memcpy((unsigned char*)&RX_HYDRAULIC_PRESSURE6_65356,&Data[7],8); break;
 		case 77 :memcpy((unsigned char*)&RX_HYDRAULIC_PRESSURE7_65357,&Data[7],8); break;
@@ -858,30 +852,17 @@ void UART1_SeperateData_Default(int Priority, int PF, int PS, unsigned char* Dat
 		case 116 :memcpy((unsigned char*)&RX_CYLINDER_ANGLE_STROKE2_65396,&Data[7],8); break;
 		case 145 :memcpy((unsigned char*)&RX_AS_PHONE_NUMBER_65425,&Data[7],8);break;
 		case 147 :memcpy((unsigned char*)&RX_WARNING_LAMP_65427,&Data[7],8); break;
-		case 148 :
-			memcpy((unsigned char*)&RX_INDICATOR_LAMP_65428,&Data[7],8);
-			SetKeypadLamp();
-			break;
+				case 148 :memcpy((unsigned char*)&RX_INDICATOR_LAMP_65428,&Data[7],8);	SetKeypadLamp();break;
 		case 151 :memcpy((unsigned char*)&RX_GAUGE_65431,&Data[7],8); break;
 		case 153 :memcpy((unsigned char*)&RX_HOURMETER_CLOCK_WIPER_65433,&Data[7],8); break;
 		case 154 :memcpy((unsigned char*)&RX_MACHINE_TRAVEL_STATUS_65434,&Data[7],8); break;
-		case 158 :
-			memcpy((unsigned char*)&RX_DTC_INFORMATION_TYPE1_65438,&Data[7],8);
-			SaveErrorCode_NEW_CAN2();
-			break;
+				case 158 :memcpy((unsigned char*)&RX_DTC_INFORMATION_TYPE1_65438,&Data[7],8); SaveErrorCode_NEW_CAN2();	break;
 		case 169 :memcpy((unsigned char*)&RX_AXLE_STATUS_65449,&Data[7],8); break;
-		case 170 :
-			memcpy((unsigned char*)&RX_WEIGHING_SYSTEM_STATUS_65450,&Data[7],8);
-			SetKeypadLamp();
-			break;
+				case 170 :memcpy((unsigned char*)&RX_WEIGHING_SYSTEM_STATUS_65450,&Data[7],8); SetKeypadLamp();	break;
 		case 171 :memcpy((unsigned char*)&RX_WEIGHING_SYSTEM_DATA1_65451,&Data[7],8); break;
 		case 172 :memcpy((unsigned char*)&RX_WEIGHING_SYSTEM_DATA2_65452,&Data[7],8); break;
 		case 235 :memcpy((unsigned char*)&RX_JOYSTICK_POSITION_STATUS_65515, &Data[7],8);	break;
-		case 247 :
-			memcpy((unsigned char*)&RX_ELECTRICAL_SWITCH_RELAY_OPERATION_STATUS_65527,&Data[7],8);
-			SetKeypadLamp();
-			break;
-
+				case 247 :memcpy((unsigned char*)&RX_ELECTRICAL_SWITCH_RELAY_OPERATION_STATUS_65527,&Data[7],8);SetKeypadLamp();break;
 			////////////////////////////////////////////Old////////////////////////////////////////////////////////////////////
 			//case	224	:	memcpy((unsigned char*) &rx_vehicle_distance, &Data[7], 8);	break;	// 109
 			//case	49	:	memcpy((unsigned char*) &rx_RMCU_Status, &Data[7], 8);	break;
@@ -1984,8 +1965,7 @@ void ThreadParsing_UART3(void *data) {
 	//			UART3_DataParsing(UART3_DataCurr);
 	//			bParsingFlag_UART3 = 0;
 	//		}
-	//		sleep(0); // 占쌕몌옙 Thread 占쏙옙占쏙옙 占쏙옙占쏙옙占쏙옙 占쏙옙占쏙옙 占쏙옙占�
-	//
+	//		sleep(0); // ?�쌕몌옙 Thread ?�쏙?�占?�옙 ?�쏙?�占?�옙?�쏙???�쏙?�占?�옙 ?�쏙?�占�?	//
 	//	}
 
 }
@@ -2159,7 +2139,7 @@ void *Thread_Read_UART1(void *data)
 	while (bReadRunningFlag_UART1)
 	{
 		dwRead = 0;
-		//	통신 시작 후 1byte씩 읽고, 정상 데이터를 수신한 다음부터는 원래 싸이즈로 받는다.
+		//	?�신 ?�작 ??1byte???�고, ?�상 ?�이?��? ?�신???�음부?�는 ?�래 ?�이즈로 받는??
 		if (UART1ReadFlag == 0 || UART1ReadFlag == 1)
 		{
 			dwRead = read(fd_UART1, UART1_ReadBuff, 1);
@@ -2181,7 +2161,7 @@ void *Thread_Read_UART1(void *data)
 
 		}
 
-		//	CAN PACKET 구조가 아니면 들어온 것을 모두 버린다.
+		//	CAN PACKET 구조가 ?�니�??�어??것을 모두 버린??
 		if (UART1ReadFlag == 2)
 		{
 			if (UART1_ReadBuff[0] != SERIAL_RX_STX || UART1_ReadBuff[UART1_RXPACKET_SIZE - 1] != SERIAL_RX_ETX)
@@ -2231,7 +2211,7 @@ void *Thread_Read_UART1(void *data)
 				}
 			}
 		}
-		sleep(0); // 다른 Thread 들의 점유를 위해 사용
+		sleep(0); // ?�른 Thread ?�의 ?�유�??�해 ?�용
 	}
 	__android_log_print(ANDROID_LOG_INFO, "NATIVE", "Thread_Read1 Finish\n");
 	(*glpVM)->DetachCurrentThread(glpVM);
@@ -2258,7 +2238,7 @@ void *Thread_Read_UART3(void *data) {
 
 	while (bReadRunningFlag_UART3) {
 		dwRead = 0;
-		//	통신 시작 후 1byte씩 읽고, 정상 데이터를 수신한 다음부터는 원래 싸이즈로 받는다.
+		//	?�신 ?�작 ??1byte???�고, ?�상 ?�이?��? ?�신???�음부?�는 ?�래 ?�이즈로 받는??
 		if (UART3ReadFlag == 0 || UART3ReadFlag == 1) {
 			dwRead = read(fd_UART3, UART3_ReadBuff, 1);
 			__android_log_print(ANDROID_LOG_INFO, "UART3_ReadBuff","UART3_ReadBuff UART3_ReadBuff[0x%x]\n",UART3_ReadBuff[0]);
@@ -2271,7 +2251,7 @@ void *Thread_Read_UART3(void *data) {
 			//												  ,UART3_ReadBuff[8],UART3_ReadBuff[9],UART3_ReadBuff[10]);
 		}
 
-		//	CMD PACKET 구조가 아니면 들어온 것을 모두 버린다.
+		//	CMD PACKET 구조가 ?�니�??�어??것을 모두 버린??
 		if (UART3ReadFlag == 2) {
 			if (UART3_ReadBuff[UART3_RXPACKET_SIZE - 1] != SERIAL_RX_ETX) {
 				//if (dwRead == UART3_RXPACKET_SIZE) {
@@ -2322,7 +2302,7 @@ void *Thread_Read_UART3(void *data) {
 				}
 			}
 		}
-		sleep(0); // 다른 Thread 들의 점유를 위해 사용
+		sleep(0); // ?�른 Thread ?�의 ?�유�??�해 ?�용
 	}
 	__android_log_print(ANDROID_LOG_INFO, "NATIVE", "Thread_Read3 Finish\n");
 	(*glpVM)->DetachCurrentThread(glpVM);
@@ -2355,7 +2335,7 @@ void *Thread_Read_UART1(void *data)
 	while (bReadRunningFlag_UART1)
 	{
 		dwRead = 0;
-		//	통신 시작 후 1byte씩 읽고, 정상 데이터를 수신한 다음부터는 원래 싸이즈로 받는다.
+		//	?�신 ?�작 ??1byte???�고, ?�상 ?�이?��? ?�신???�음부?�는 ?�래 ?�이즈로 받는??
 		if (UART1ReadFlag == 0)
 		{
 			dwRead = read(fd_UART1, &UART1_SingleBuff, 1);
@@ -2374,7 +2354,7 @@ void *Thread_Read_UART1(void *data)
 			//					,UART1_ReadBuff[10],UART1_ReadBuff[11],UART1_ReadBuff[12],UART1_ReadBuff[13],UART1_ReadBuff[14]);
 		}
 
-		//	CAN PACKET 구조가 아니면 들어온 것을 모두 버린다.
+		//	CAN PACKET 구조가 ?�니�??�어??것을 모두 버린??
 		if (UART1ReadFlag == 1)
 		{
 			if (UART1_ReadBuff[0] != SERIAL_RX_STX || UART1_ReadBuff[1] != SERIAL_RX_ID || UART1_ReadBuff[UART1_RXPACKET_SIZE - 1] != SERIAL_RX_ETX)
@@ -2445,7 +2425,7 @@ void *Thread_Read_UART1(void *data)
 
 		}
 
-		sleep(0); // 다른 Thread 들의 점유를 위해 사용
+		sleep(0); // ?�른 Thread ?�의 ?�유�??�해 ?�용
 	}
 	__android_log_print(ANDROID_LOG_INFO, "NATIVE", "Thread_Read1 Finish\n");
 	(*glpVM)->DetachCurrentThread(glpVM);
@@ -2479,7 +2459,7 @@ void *Thread_Read_UART3(void *data) {
 	while (bReadRunningFlag_UART3)
 	{
 		dwRead = 0;
-		//	통신 시작 후 1byte씩 읽고, 정상 데이터를 수신한 다음부터는 원래 싸이즈로 받는다.
+		//	?�신 ?�작 ??1byte???�고, ?�상 ?�이?��? ?�신???�음부?�는 ?�래 ?�이즈로 받는??
 		if (UART3ReadFlag == 0)
 		{
 			dwRead = read(fd_UART3, &UART3_SingleBuff, 1);
@@ -2490,7 +2470,7 @@ void *Thread_Read_UART3(void *data) {
 			dwRead = read(fd_UART3, UART3_ReadBuff, UART3_RXPACKET_SIZE);
 		}
 
-		//	CMD PACKET 구조가 아니면 들어온 것을 모두 버린다.
+		//	CMD PACKET 구조가 ?�니�??�어??것을 모두 버린??
 		if (UART3ReadFlag == 1)
 		{
 			if (UART3_ReadBuff[0] != SERIAL_RX_STX || UART3_ReadBuff[UART3_RXPACKET_SIZE - 1] != SERIAL_RX_ETX)
@@ -2550,7 +2530,7 @@ void *Thread_Read_UART3(void *data) {
 
 		}
 
-		sleep(0); // 다른 Thread 들의 점유를 위해 사용
+		sleep(0); // ?�른 Thread ?�의 ?�유�??�해 ?�용
 	}
 	__android_log_print(ANDROID_LOG_INFO, "NATIVE", "Thread_Read1 Finish\n");
 	(*glpVM)->DetachCurrentThread(glpVM);

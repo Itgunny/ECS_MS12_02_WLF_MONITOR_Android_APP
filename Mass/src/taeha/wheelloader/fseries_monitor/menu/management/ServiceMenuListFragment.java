@@ -109,6 +109,7 @@ public class ServiceMenuListFragment extends MenuBodyList_ParentFragment{
 		if(CAN1Comm.Get_ComponentCode_1699_PGN65330_EHCU() != CAN1CommManager.STATE_COMPONENTCODE_EHCU){
 			setClickableList4(true);
 			setListTitle4(ParentActivity.getResources().getString(string.Machine_Serial_Number), 82);
+			
 			if(Hourmeter <= 20)
 				nInputMachineSerial = 4;
 			else
@@ -120,6 +121,9 @@ public class ServiceMenuListFragment extends MenuBodyList_ParentFragment{
 			setClickableList5(true);
 			setListTitle5(ParentActivity.getResources().getString(string.Machine_Serial_Number), 82);	
 
+			setClickableList6(true);
+			setListTitle6(ParentActivity.getResources().getString(string.Soft_End_Stop_Calibration), 474);
+			
 			if(Hourmeter < 20)
 				nInputMachineSerial = 5;
 			else
@@ -210,19 +214,26 @@ public class ServiceMenuListFragment extends MenuBodyList_ParentFragment{
 	@Override
 	public void ClickList5() {
 		// TODO Auto-generated method stub
-		if(nInputMachineSerial == 5)
-		{
-			ParentActivity._MenuBaseFragment.showBodyChangeMachineSerialAnimation();
-			CursurIndex = 5;
+		if(CAN1Comm.Get_ComponentCode_1699_PGN65330_EHCU() != CAN1CommManager.STATE_COMPONENTCODE_EHCU){
+			ParentActivity._MenuBaseFragment.showBodyServiceSoftAndStopCalibrationMenuList();
+			CursurIndex = 4;
 			CursurDisplay(CursurIndex);
+		}else {
+			if(nInputMachineSerial == 5)
+			{
+				ParentActivity._MenuBaseFragment.showBodyChangeMachineSerialAnimation();
+				CursurIndex = 5;
+				CursurDisplay(CursurIndex);
+			}
 		}
-		
 	}
 
 	@Override
 	public void ClickList6() {
 		// TODO Auto-generated method stub
-		
+		ParentActivity._MenuBaseFragment.showBodyServiceSoftAndStopCalibrationMenuList();
+		CursurIndex = 6;
+		CursurDisplay(CursurIndex);
 	}
 	
 	/////////////////////////////////////////////////////////////////////	
@@ -271,13 +282,12 @@ public class ServiceMenuListFragment extends MenuBodyList_ParentFragment{
 	public void ClickLeft(){
 		switch (CursurIndex) {
 		case 0:
-			
 			break;
 		case 1:
 			if(CAN1Comm.Get_ComponentCode_1699_PGN65330_EHCU() != CAN1CommManager.STATE_COMPONENTCODE_EHCU){
 				CursurIndex = 4;
 			}else{
-				CursurIndex = 5;
+				CursurIndex = 6;
 			}
 			CursurDisplay(CursurIndex);
 			break;
@@ -297,6 +307,10 @@ public class ServiceMenuListFragment extends MenuBodyList_ParentFragment{
 			CursurIndex--;
 			CursurDisplay(CursurIndex);
 			break;
+		case 6:
+			CursurIndex--;
+			CursurDisplay(CursurIndex);
+			break;
 		default:
 			break;
 		}
@@ -304,7 +318,6 @@ public class ServiceMenuListFragment extends MenuBodyList_ParentFragment{
 	public void ClickRight(){
 		switch (CursurIndex) {
 		case 0:
-			
 			break;
 		case 1:
 			CursurIndex++;
@@ -327,6 +340,10 @@ public class ServiceMenuListFragment extends MenuBodyList_ParentFragment{
 			CursurDisplay(CursurIndex);
 			break;
 		case 5:
+			CursurIndex++;
+			CursurDisplay(CursurIndex);
+			break;
+		case 6:
 			CursurIndex = 1;
 			CursurDisplay(CursurIndex);
 			break;
@@ -354,6 +371,9 @@ public class ServiceMenuListFragment extends MenuBodyList_ParentFragment{
 		case 5:
 			imgbtnList[4].callOnClick();
 			break;
+		case 6:
+			imgbtnList[5].callOnClick();
+			break;
 		default:
 			break;
 		}
@@ -378,7 +398,7 @@ public class ServiceMenuListFragment extends MenuBodyList_ParentFragment{
 				setListFocus(5);
 				break;
 			case 6:
-				setListFocus(5);
+				setListFocus(6);
 				break;
 			default:
 				setListFocus(0);

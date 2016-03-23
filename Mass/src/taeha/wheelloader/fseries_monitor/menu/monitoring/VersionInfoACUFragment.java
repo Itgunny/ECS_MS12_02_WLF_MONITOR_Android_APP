@@ -17,7 +17,6 @@ public class VersionInfoACUFragment extends VersionInfoDetailFragment{
 	private static final int STATE_MAKER 					= 0;
 	private static final int STATE_SOFTWARE_VERSION			= 1;
 	
-	
 	/////////////////////////////////////////////////////////////////////
 	/////////////////////VALUABLE////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////////	
@@ -56,7 +55,6 @@ public class VersionInfoACUFragment extends VersionInfoDetailFragment{
 	}
 	@Override
 	public void ShowHiddenPage(){
-
 //		adapter.addItem(new IconTextItemVersion(ParentActivity.getResources().getDrawable(R.drawable.menu_management_machine_monitoring_bg_light),null,
 //				getString(ParentActivity.getResources().getString(string.EST37A_Part_Number), 290),"" , ""));
 //		adapter.addItem(new IconTextItemVersion(ParentActivity.getResources().getDrawable(R.drawable.menu_management_machine_monitoring_bg_dark),null,

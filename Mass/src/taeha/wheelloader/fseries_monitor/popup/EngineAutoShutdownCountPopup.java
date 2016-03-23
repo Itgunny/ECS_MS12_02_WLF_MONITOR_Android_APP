@@ -259,7 +259,10 @@ public class EngineAutoShutdownCountPopup extends ParentPopup{
 		}
 	}	
 	public void CountDisplay(int _data){
-		textViewTime.setText(Integer.toString(_data) + getString(ParentActivity.getResources().getString(string.Sec), 50));
+		if(_data != 0xff){
+			textViewTime.setText(Integer.toString(_data) + getString(ParentActivity.getResources().getString(string.Sec), 50));
+		}
+		
 	}
 	////////////////////////////////////////////////////////////////////////////////
 }

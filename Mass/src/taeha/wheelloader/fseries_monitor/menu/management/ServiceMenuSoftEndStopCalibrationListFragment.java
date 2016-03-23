@@ -1,15 +1,19 @@
-package taeha.wheelloader.fseries_monitor.menu.mode;
+package taeha.wheelloader.fseries_monitor.menu.management;
 
 import taeha.wheelloader.fseries_monitor.animation.AppearAnimation;
 import taeha.wheelloader.fseries_monitor.animation.ChangeFragmentAnimation;
 import taeha.wheelloader.fseries_monitor.animation.DisappearAnimation;
 import taeha.wheelloader.fseries_monitor.animation.MainBodyShiftAnimation;
 import taeha.wheelloader.fseries_monitor.animation.LeftRightShiftAnimation;
+import taeha.wheelloader.fseries_monitor.main.CAN1CommManager;
+import taeha.wheelloader.fseries_monitor.main.CheckModel;
 import taeha.wheelloader.fseries_monitor.main.Home;
 import taeha.wheelloader.fseries_monitor.main.ParentFragment;
 import taeha.wheelloader.fseries_monitor.main.R;
+import taeha.wheelloader.fseries_monitor.main.R.color;
 import taeha.wheelloader.fseries_monitor.main.R.string;
 import taeha.wheelloader.fseries_monitor.menu.MenuBodyList_ParentFragment;
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.Layout;
 import android.util.Log;
@@ -22,7 +26,7 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-public class CalibrationFragment extends MenuBodyList_ParentFragment{
+public class ServiceMenuSoftEndStopCalibrationListFragment extends MenuBodyList_ParentFragment{
 	//CONSTANT////////////////////////////////////////
 	
 	//////////////////////////////////////////////////
@@ -52,16 +56,14 @@ public class CalibrationFragment extends MenuBodyList_ParentFragment{
 			Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
 		super.onCreateView(inflater, container, savedInstanceState);
-		 TAG = "CalibrationFragment";
+		 TAG = "ServiceMenuSoftEndStopCalibrationListFragment";
 		Log.d(TAG, "onCreateView");
 		
 		InitList();
 		ParentActivity._MenuBaseFragment._MenuListTitleFragment.setBackButtonEnable(true);
-		ParentActivity.OldScreenIndex = Home.SCREEN_STATE_MENU_MODE_ETC_CALIBRATION_TOP;
-		ParentActivity.ScreenIndex = Home.SCREEN_STATE_MENU_MODE_ETC_CALIBRATION_TOP;
-		ParentActivity._MenuBaseFragment._MenuListTitleFragment.SetTitleText(ParentActivity.getResources().getString(R.string.Calibration), 320);
+		ParentActivity.ScreenIndex = ParentActivity.SCREEN_STATE_MENU_MANAGEMENT_SERVICE_SOFTANDSTOP_CAL_TOP;
+		ParentActivity._MenuBaseFragment._MenuListTitleFragment.SetTitleText(ParentActivity.getString(string.Soft_End_Stop_Calibration), 474);
 		CursurDisplay(CursurIndex);
-
 		return mRoot;
 	}
 	
@@ -74,27 +76,19 @@ public class CalibrationFragment extends MenuBodyList_ParentFragment{
 	@Override
 	protected void GetDataFromNative() {
 		// TODO Auto-generated method stub
-		
 	}
 
 	@Override
 	protected void UpdateUI() {
 		// TODO Auto-generated method stub
-		
 	}
 	@Override
 	protected void InitList() {
 		// TODO Auto-generated method stub
 		setClickableList1(true);
-		setClickableList2(true);
-		setClickableList3(true);
-		setClickableList4(true);
-
 		
-		setListTitle1(ParentActivity.getResources().getString(string.Boom_Bucket_Angle_Calibration), 342);
-		setListTitle2(ParentActivity.getResources().getString(string.Boom_Pressure_Calibration), 172);
-		setListTitle3(ParentActivity.getResources().getString(string.Brake_Pedal_Sensor_Calibration), 343);
-		setListTitle4(ParentActivity.getResources().getString(string.AEB), 344);
+		setListTitle1(ParentActivity.getString(string.Bucket_Dump), 239);
+		
 	}
 
 	//////////////////////////////////////////////////////////////////////
@@ -105,7 +99,7 @@ public class CalibrationFragment extends MenuBodyList_ParentFragment{
 			return;
 		else
 			ParentActivity.StartAnimationRunningTimer();
-		ParentActivity._MenuBaseFragment.showBodyAngleCalibrationAnimation();
+		ParentActivity._MenuBaseFragment.showBodyBucketDumpCalibrationAnimation();
 		CursurIndex = 1;
 		CursurDisplay(CursurIndex);
 	}
@@ -113,41 +107,22 @@ public class CalibrationFragment extends MenuBodyList_ParentFragment{
 	@Override
 	public void ClickList2() {
 		// TODO Auto-generated method stub
-		if(ParentActivity.AnimationRunningFlag == true)
-			return;
-		else
-			ParentActivity.StartAnimationRunningTimer();
-		ParentActivity._MenuBaseFragment.showBodyPressureCalibrationAnimation();
-		CursurIndex = 2;
-		CursurDisplay(CursurIndex);
+
 	}
 
 	@Override
 	public void ClickList3() {
 		// TODO Auto-generated method stub
-		ParentActivity.showBrkaePedalCalibration();
-		CursurIndex = 3;
-		CursurDisplay(CursurIndex);
 	}
 
 	@Override
 	public void ClickList4() {
 		// TODO Auto-generated method stub
-		CAN1Comm.Set_RequestAEB_PGN61184_201(1);
-		CAN1Comm.TxCANToMCU(201);
-		// ++, 150309 bwk
-		//ParentActivity._MainChangeAnimation.StartChangeAnimation(ParentActivity._MainBBaseFragment);
-		ParentActivity.showMainScreen();
-		// --, 150309 bwk
-		
-		CursurIndex = 4;
-		CursurDisplay(CursurIndex);
 	}
 
 	@Override
 	public void ClickList5() {
 		// TODO Auto-generated method stub
-		
 	}
 
 	@Override
@@ -156,21 +131,13 @@ public class CalibrationFragment extends MenuBodyList_ParentFragment{
 		
 	}
 	
-	/////////////////////////////////////////////////////////////////////	
-	/////////////////////////////////////////////////////////////////////	
 	public void ClickLeft(){
 		switch (CursurIndex) {
 		case 0:
 			
 			break;
 		case 1:
-			CursurIndex = 5;
-			CursurDisplay(CursurIndex);
-			break;
-		case 2:
-		case 3:
-		case 4:
-			CursurIndex--;
+			CursurIndex = 1;
 			CursurDisplay(CursurIndex);
 			break;
 		default:
@@ -183,12 +150,6 @@ public class CalibrationFragment extends MenuBodyList_ParentFragment{
 			
 			break;
 		case 1:
-		case 2:
-		case 3:
-			CursurIndex++;
-			CursurDisplay(CursurIndex);
-			break;
-		case 4:
 			CursurIndex = 1;
 			CursurDisplay(CursurIndex);
 			break;
@@ -197,22 +158,12 @@ public class CalibrationFragment extends MenuBodyList_ParentFragment{
 		}
 	}
 	public void ClickESC(){
-		CursurIndex = 1;
 		ParentActivity._MenuBaseFragment._MenuListTitleFragment.ClickBack();
 	}
 	public void ClickEnter(){
 		switch (CursurIndex) {
 		case 1:
 			imgbtnList[0].callOnClick();
-			break;
-		case 2:
-			imgbtnList[1].callOnClick();
-			break;
-		case 3:
-			imgbtnList[2].callOnClick();
-			break;
-		case 4:
-			imgbtnList[3].callOnClick();
 			break;
 		default:
 			break;
@@ -249,9 +200,6 @@ public class CalibrationFragment extends MenuBodyList_ParentFragment{
 			Log.e(TAG,"NullPointerException CursurDisplay");
 		}
 	}
-	/////////////////////////////////////////////////////////////////////
-	/////////////////////////////////////////////////////////////////////
-	
 	/////////////////////////////////////////////////////////////////////
 	
 }
