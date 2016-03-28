@@ -81,8 +81,8 @@ public class Home extends Activity {
 	public static final int VERSION_HIGH 		= 2;
 	public static final int VERSION_LOW 		= 4;
 	public static final int VERSION_SUB_HIGH 	= 0;
-	public static final int VERSION_SUB_LOW 	= 0;
-	public static final int VERSION_TAEHA		= 1;
+	public static final int VERSION_SUB_LOW 	= 1;
+	public static final int VERSION_TAEHA		= 0;
 	// UI B 안 최초 적용 2014.12.10
 	////1.0.2.4
 	// Eco Gauge Pivot 함수 추가(Progress Bar가 가운데서
@@ -775,6 +775,9 @@ public class Home extends Activity {
 	// 7. SoftEndStop Calibration - BucketDumpCalibration 추가
 	////v2.4.0.0.1
 	// 1. MCU DTC 추가(831/2 - ACU 통신에러)
+	////v2.4.0.1
+	// 1. Bucket Dump Calibration & Pressure Calibration 다국어 문서 추가
+	// 2. 다국어 문서 버전(v.1.2.0) 버전 표기 태하 버전 에서 확인 가능
 	//////////////////////////////////////////////////////////////////////////////////////
 	// TAG
 	private  final String TAG = "Home";

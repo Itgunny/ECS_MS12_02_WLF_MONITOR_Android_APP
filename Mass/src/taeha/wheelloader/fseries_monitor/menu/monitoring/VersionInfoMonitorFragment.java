@@ -1,6 +1,7 @@
 package taeha.wheelloader.fseries_monitor.menu.monitoring;
 
 import taeha.wheelloader.fseries_monitor.main.Home;
+import taeha.wheelloader.fseries_monitor.main.LanguageDB;
 import taeha.wheelloader.fseries_monitor.main.R;
 import taeha.wheelloader.fseries_monitor.main.R.string;
 import taeha.wheelloader.fseries_monitor.main.TextFitTextView;
@@ -212,8 +213,18 @@ public class VersionInfoMonitorFragment extends VersionInfoDetailFragment{
 	}
 	
 	public void ApplicationVersionDisplayTaehaHidden(int VersionHigh, int VersionLow, int VersionSubHigh, int VersionSubLow, int VersionTaeha){
-		adapter.UpdateSecond(STATE_VERSION, Integer.toString(VersionHigh) + "." + Integer.toString(VersionLow)
-				+ "." + Integer.toHexString(VersionSubHigh) + "." + Integer.toHexString(VersionSubLow) + Integer.toHexString(VersionTaeha));
+		if(LanguageDB.LanguageVersion1 == null){
+			adapter.UpdateSecond(STATE_VERSION, Integer.toString(VersionHigh) + "." + Integer.toString(VersionLow)
+					+ "." + Integer.toHexString(VersionSubHigh) + "." + Integer.toHexString(VersionSubLow) + Integer.toHexString(VersionTaeha)
+					+ "(Language Ver : Android)");
+			Log.d(TAG, "Android");
+		}else {
+			adapter.UpdateSecond(STATE_VERSION, Integer.toString(VersionHigh) + "." + Integer.toString(VersionLow)
+					+ "." + Integer.toHexString(VersionSubHigh) + "." + Integer.toHexString(VersionSubLow) + Integer.toHexString(VersionTaeha)
+					+ "(Language Ver : " + LanguageDB.LanguageVersion1 + "." + LanguageDB.LanguageVersion2 + "." + LanguageDB.LanguageVersion3 + ")");
+			Log.d(TAG, "Excel");
+		}
+
 	}	
 	public void FirmwareVersionDisplay(int VersionHigh, int VersionLow, int SubVersionHigh){
 		adapter.UpdateSecond(STATE_FIRMWARE_VERSION, Integer.toString(VersionHigh) + "." + Integer.toString(VersionLow) 

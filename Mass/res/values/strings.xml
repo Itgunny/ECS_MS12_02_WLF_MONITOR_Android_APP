@@ -251,7 +251,7 @@
     <string name="Excute">Execute</string>
     <string name="Push_and_hold_to_reverse_rotation">Push and hold to reverse rotation.</string>
     <string name="rpm_km_h">rpm/km/h</string>
-    <string name="You_should_turn_OFF_Soft_end_stop_before_start_calibration">You should turn OFF Soft end stop before start calibration.</string>
+    <string name="You_should_turn_OFF_Soft_end_stop_before_start_calibration">You should turn OFF\n[Soft End Stop]\nbefore start calibration.</string>
     <string name="Machine_Monitoring">Machine Monitoring</string>
     <string name="Operation_History">Operation History</string>
     <string name="Fault_History">Fault History</string>
@@ -354,7 +354,7 @@
     <string name="Start">Start</string>
     <string name="First_Calibration">1st Calibration</string>
     <string name="Second_Calibration">2nd Calibration</string>
-    <string name="Roll_in_the_bucket_at_max_range_lower_the_boom_at_min_height">"Before touch START button,Roll-in the bucket at max range, lower the boom at min height."</string>
+    <string name="Roll_in_the_bucket_at_max_range_lower_the_boom_at_min_height">"Before touch Start button, Lower the boom to minimum height, and Roll-in the bucket to maximum range."</string>
     <string name="Press_Start_button_lift_the_boom_with_the_hydraulic_control_in_detent_position">Touch Start button. Pull the boom control lever to the detent position (Boom up direction) and release the lever without pressing accelerator pedal.</string>
     <string name="Boom_lifting_will_be_stopped_automatically_at_a_certain_position_and_calibration_is_completed">Boom and the lever will be automatically stopped at a specific position, and the calibration process will be completed after a certain time.</string>
     <string name="Set_P_mode_step_on_pedal_max_range_press_Start_button_lift_the_boom_with_the_hydraulic_control_in_detent_position">Touch Start button. Pull the boom control lever to the detent position (Boom up direction) and release the lever with pressing accelerator pedal to maximum level.</string>

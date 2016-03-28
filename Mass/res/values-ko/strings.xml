@@ -251,7 +251,7 @@
     <string name="Excute">역회전</string>
     <string name="Push_and_hold_to_reverse_rotation">버튼을 누르고 있는 동안 냉각팬 역회전이 실행됩니다.</string>
     <string name="rpm_km_h">rpm/km/h</string>
-    <string name="You_should_turn_OFF_Soft_end_stop_before_start_calibration">보정을 시작하기 전에 소프트 앤드 스탑을 꺼주십시오.</string>
+    <string name="You_should_turn_OFF_Soft_end_stop_before_start_calibration">보정을 시작하기 전에\n[소프트 엔드 스탑]\n기능을 꺼 주십시오.</string>
     <string name="Machine_Monitoring">장비상태</string>
     <string name="Operation_History">운행 이력</string>
     <string name="Fault_History">고장 이력</string>
@@ -477,13 +477,13 @@
     <string name="Boom_Position">붐 위치</string>
     <string name="Bucket_Position">버켓 위치</string>
     <string name="Engine_Mode_Set_P_Mode_For_Calibration">보정을 위해 엔진 모드가 P 모드로 변경됩니다.</string>
-    <string name="Bucket_Dump_Calibration_Order1">시작 버튼을 누르기전에 버켓을 최대 범위로 롤백하고, 붐을 최대위치로 올립니다.</string>
+    <string name="Bucket_Dump_Calibration_Order1">시작 버튼을 누르기 전에 붐을 최대 위치로 올리고, 버켓을 안쪽으로 끝까지 복귀합니다.</string>
     <string name="Bucket_Dump_Calibration_Order2">시작 버튼을 누르고, 액셀 페달을 밟지 않은 상태에서\n 버켓 레버를 최대로 조작해 덤프를 실시합니다.</string>
     <string name="Bucket_Dump_Calibration_Order3">"버켓 덤프 시 충격이 발생할 수 있습니다."</string>
     <string name="Bucket_Dump_Calibration_Order4">"보정값을 찾기 위해 여러번 반복할 수 있습니다."</string>
 	<string name="Bucket_Dump_Calibration_Step2_Order2">시작 버튼을 누르고, 액셀 페달을 최대로 밟은 상태\n에서 버켓 레버를 최대로 조작해 덤프를 실시합니다.</string>
 	<string name="Roll_Back">롤백</string>
-	<string name="Soft_End_Stop_Bucket_Dump_Init_Popup">[Soft End Stop - Bucket Dump]\n기능을 켜주세요.</string>
+	<string name="Soft_End_Stop_Bucket_Dump_Init_Popup">[소프트 엔드 스탑 - 버켓덤프]\n기능을 켜주세요.</string>
 	<string name="Bucket_Dump_Calibration_1_Retry">보정값을 찾기 위해\n1st Calibration을 재시도 해주세요.</string>
 	<string name="Bucket_Dump_Calibration_1_Success">1st Calibration 완료</string>
 	<string name="Bucket_Dump_Calibration_2_Retry">보정값을 찾기 위해\n2nd Calibration을 재시도 해주세요.</string>

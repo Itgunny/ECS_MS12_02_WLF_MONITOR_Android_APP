@@ -253,7 +253,7 @@ public class BucketDumpCalibration extends ParentFragment{
 	/////////////////////////////////////////////////////////////////////
 	public void Order2Display(){
 		textViewTitle.setText(getString(ParentActivity.getResources().getString(R.string.Second_Calibration), 354));
-		textViewDesText2.setText(getString(ParentActivity.getResources().getString(R.string.Bucket_Dump_Calibration_Order2), 482));
+		textViewDesText2.setText(getString(ParentActivity.getResources().getString(R.string.Bucket_Dump_Calibration_Step2_Order2), 482));
 		textViewDesText5.setVisibility(View.VISIBLE);
 		textViewOrder5.setVisibility(View.VISIBLE);
 		imgViewStep1.setImageResource(R.drawable.menu_management_boom_pressure_step_off);

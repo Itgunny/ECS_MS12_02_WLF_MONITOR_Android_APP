@@ -14,6 +14,11 @@ import android.util.Log;
 
 public class LanguageDB {
 	private static final String TAG = "LanguageDB";
+	
+	public static String LanguageVersion1;
+	public static String LanguageVersion2;
+	public static String LanguageVersion3;
+	public static String LanguageVersion4;
 	protected Home ParentActivity;
 	boolean OpenState = false;
 	Workbook workbook = null;
@@ -40,6 +45,10 @@ public class LanguageDB {
 				sheet = workbook.getSheet(0);
 				String str = workbook.getSheet(0).getName();
 				Log.d(TAG, "Sheet Name : "  + str);
+				LanguageVersion1 = sheet.getCell(5, 0).getContents();
+				LanguageVersion2 = sheet.getCell(6, 0).getContents();
+				LanguageVersion3 = sheet.getCell(7, 0).getContents();
+				LanguageVersion4 = sheet.getCell(8, 0).getContents();
 				OpenState = true;
 			}else{
 				OpenState = false;
