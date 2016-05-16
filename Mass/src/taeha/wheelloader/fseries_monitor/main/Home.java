@@ -55,8 +55,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.ServiceConnection;
 import android.content.SharedPreferences;
-import android.content.pm.PackageInfo;
-import android.content.pm.PackageManager.NameNotFoundException;
 import android.graphics.drawable.AnimationDrawable;
 import android.os.Bundle;
 import android.os.Handler;
@@ -82,7 +80,7 @@ public class Home extends Activity {
 	public static final int VERSION_LOW 		= 4;
 	public static final int VERSION_SUB_HIGH 	= 0;
 	public static final int VERSION_SUB_LOW 	= 1;
-	public static final int VERSION_TAEHA		= 0;
+	public static final int VERSION_TAEHA		= 1;
 	// UI B 안 최초 적용 2014.12.10
 	////1.0.2.4
 	// Eco Gauge Pivot 함수 추가(Progress Bar가 가운데서
@@ -778,6 +776,9 @@ public class Home extends Activity {
 	////v2.4.0.1
 	// 1. Bucket Dump Calibration & Pressure Calibration 다국어 문서 추가
 	// 2. 다국어 문서 버전(v.1.2.0) 버전 표기 태하 버전 에서 확인 가능
+	////v2.4.0.11
+	// 1. CID 13일 저장안됨 -> 방식 변경
+	// 2. Revision RevH.01.01 추가
 	//////////////////////////////////////////////////////////////////////////////////////
 	// TAG
 	private  final String TAG = "Home";
@@ -2045,6 +2046,9 @@ public class Home extends Activity {
 
 		edit.putInt("ComponentCode_Monitor", _componentcode);
 		edit.putInt("ManufacturerCode_Monitor", _manufacturecode);
+		edit.putInt("ManufacturerYear_Monitor", _componentbasicinformation[0]);
+		edit.putInt("ManufacturerMonth_Monitor", _componentbasicinformation[1]);
+		edit.putInt("ManufacturerDate_Monitor", _componentbasicinformation[2]);
 		edit.putString("ComponentBasicInformation_Monitor", strBasicInfo);
 		
 		edit.commit();
@@ -2138,9 +2142,7 @@ public class Home extends Activity {
 		_Componentcode = SharePref.getInt("ComponentCode_Monitor", 11);
 		_Manufacturecode = SharePref.getInt("ManufacturerCode_Monitor", 1);
 		_ComponentBasicInformation = GetMonitorComponentBasicInfo();
-		
 		_ComponentBasicInformation[3] = ((VERSION_HIGH & 0x0F) << 4) + (VERSION_LOW & 0x0F);
-
 		//////////////Find Serial Number/////////////
 		for(int i = 4; i < 20; i++){
 			if(_ComponentBasicInformation[i] != 0x2A)
@@ -4808,6 +4810,7 @@ public class Home extends Activity {
 	public byte[] GetMonitorComponentBasicInfo()throws NullPointerException{
 		String str;
 		byte[] componetbasicinfo;
+		int start_address;
 		componetbasicinfo = new byte[CAN1CommManager.LENGTH_COMPONENTBASICINFORMATION];
 		for(int i = 0; i < CAN1CommManager.LENGTH_COMPONENTBASICINFORMATION; i++){
 			componetbasicinfo[i] = (byte) 0xFF;
@@ -4815,15 +4818,27 @@ public class Home extends Activity {
 		SharedPreferences SharePref = getSharedPreferences("CID", 0);
 
 		str = SharePref.getString("ComponentBasicInformation_Monitor", "");
-
+		componetbasicinfo[0] = (byte)SharePref.getInt("ManufacturerYear_Monitor", 1);
+		componetbasicinfo[1] = (byte)SharePref.getInt("ManufacturerMonth_Monitor", 1);
+		componetbasicinfo[2] = (byte)SharePref.getInt("ManufacturerDate_Monitor", 1);
+		
+		Log.d(TAG, "componentBasicInfo : " + str);
+		
 		byte[] Temp;
 		Temp = new byte[str.length()];
 		
 		Temp = str.getBytes();
 		
-		for(int i = 0; i < str.length(); i++){
+		if((componetbasicinfo[0] == 1) && (componetbasicinfo[1] == 1) && (componetbasicinfo[2] == 1))
+			start_address = 0;
+		else 
+			start_address = 3;
+		
+		for(int i = start_address; i < str.length(); i++){
+			
 			componetbasicinfo[i] = Temp[i];
 		}
+
 		return componetbasicinfo; 
 	}
 	public int FindProgramSubInfo(byte[] BasicInfo)throws NullPointerException{
