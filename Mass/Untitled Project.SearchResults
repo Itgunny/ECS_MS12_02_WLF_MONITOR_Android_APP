@@ -1,0 +1,9 @@
+---- AttachmentStatus Matches (8 in 4 files) ----
+Home.java (src\taeha\wheelloader\fseries_monitor\main):	public int AttachmentStatus;
+Home.java (src\taeha\wheelloader\fseries_monitor\main):		edit.putInt("AttachmentStatus", AttachmentStatus);		
+Home.java (src\taeha\wheelloader\fseries_monitor\main):		AttachmentStatus = SharePref.getInt("AttachmentStatus", CAN1CommManager.DATA_STATE_KEY_QUICKCOUPLER_OFF);
+Home.java (src\taeha\wheelloader\fseries_monitor\main):			/*else if(AttachmentStatus == CAN1CommManager.DATA_STATE_KEY_QUICKCOUPLER_UNLOCK){
+QuickCouplerPopupLocking2.java (src\taeha\wheelloader\fseries_monitor\popup):		ParentActivity.AttachmentStatus = CAN1CommManager.DATA_STATE_KEY_QUICKCOUPLER_LOCK;
+QuickCouplerPopupUnlocking2.java (src\taeha\wheelloader\fseries_monitor\popup):		ParentActivity.AttachmentStatus = CAN1CommManager.DATA_STATE_KEY_QUICKCOUPLER_UNLOCK;
+QuickCouplerPopupUnlocking3.java (src\taeha\wheelloader\fseries_monitor\popup):			ParentActivity.AttachmentStatus = CAN1CommManager.DATA_STATE_KEY_QUICKCOUPLER_LOCK;
+QuickCouplerPopupUnlocking3.java (src\taeha\wheelloader\fseries_monitor\popup):			ParentActivity.AttachmentStatus = CAN1CommManager.DATA_STATE_KEY_QUICKCOUPLER_UNLOCK;
