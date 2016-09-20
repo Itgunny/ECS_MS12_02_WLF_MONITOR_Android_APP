@@ -1,9 +1,282 @@
----- AttachmentStatus Matches (8 in 4 files) ----
-Home.java (src\taeha\wheelloader\fseries_monitor\main):	public int AttachmentStatus;
-Home.java (src\taeha\wheelloader\fseries_monitor\main):		edit.putInt("AttachmentStatus", AttachmentStatus);		
-Home.java (src\taeha\wheelloader\fseries_monitor\main):		AttachmentStatus = SharePref.getInt("AttachmentStatus", CAN1CommManager.DATA_STATE_KEY_QUICKCOUPLER_OFF);
-Home.java (src\taeha\wheelloader\fseries_monitor\main):			/*else if(AttachmentStatus == CAN1CommManager.DATA_STATE_KEY_QUICKCOUPLER_UNLOCK){
-QuickCouplerPopupLocking2.java (src\taeha\wheelloader\fseries_monitor\popup):		ParentActivity.AttachmentStatus = CAN1CommManager.DATA_STATE_KEY_QUICKCOUPLER_LOCK;
-QuickCouplerPopupUnlocking2.java (src\taeha\wheelloader\fseries_monitor\popup):		ParentActivity.AttachmentStatus = CAN1CommManager.DATA_STATE_KEY_QUICKCOUPLER_UNLOCK;
-QuickCouplerPopupUnlocking3.java (src\taeha\wheelloader\fseries_monitor\popup):			ParentActivity.AttachmentStatus = CAN1CommManager.DATA_STATE_KEY_QUICKCOUPLER_LOCK;
-QuickCouplerPopupUnlocking3.java (src\taeha\wheelloader\fseries_monitor\popup):			ParentActivity.AttachmentStatus = CAN1CommManager.DATA_STATE_KEY_QUICKCOUPLER_UNLOCK;
+---- ACU Matches (281 in 14 files) ----
+CAN_DataParsing.c (jni):	memset((unsigned char*) &RX_COMPONENT_IDENTIFICATION_ACU_65330, 0xFF,
+CAN_DataParsing.c (jni):			sizeof(RX_COMPONENT_IDENTIFICATION_ACU_65330));
+CAN_DataParsing.c (jni):	gErr_ACU_TotalPacket = 0;
+CAN_DataParsing.c (jni):	gErr_ACU_TotalPacket_Logged = 0;
+CAN_DataParsing.c (jni):	gErr_ACU_Total = 0;
+CAN_DataParsing.c (jni):	gErr_ACU_Total_Logged = 0;
+CAN_DataParsing.c (jni):		case SA_ACU:
+CAN_DataParsing.c (jni):			UART1_SeperateData_ACU(Priority,PF,PS,Data);
+CAN_DataParsing.c (jni):void UART1_SeperateData_ACU(int Priority, int PF, int PS, unsigned char* Data)
+CAN_DataParsing.c (jni):				case 50 :memcpy((unsigned char*)&RX_COMPONENT_IDENTIFICATION_ACU_65330,&Data[7],8); break;
+CAN_DataParsing.c (jni):		gErr_ACU_TotalPacket = RX_DTC_INFORMATION_TYPE1_65438.TotalNumberofDTCInformationPacket_1512;
+CAN_DataParsing.c (jni):		gErr_ACU_Total = RX_DTC_INFORMATION_TYPE1_65438.TotalNumberofDTC;
+CAN_DataParsing.c (jni):		gErr_ACU[0] = RX_DTC_INFORMATION_TYPE1_65438.DTC_1[0];
+CAN_DataParsing.c (jni):		gErr_ACU[1] = RX_DTC_INFORMATION_TYPE1_65438.DTC_1[1];
+CAN_DataParsing.c (jni):		gErr_ACU[2] = RX_DTC_INFORMATION_TYPE1_65438.DTC_1[2];
+CAN_DataParsing.c (jni):		gErr_ACU_TotalPacket_Logged = RX_DTC_INFORMATION_TYPE1_65438.TotalNumberofDTCInformationPacket_1512;
+CAN_DataParsing.c (jni):		gErr_ACU_Total_Logged = RX_DTC_INFORMATION_TYPE1_65438.TotalNumberofDTC;
+CAN_DataParsing.c (jni):		gErr_ACU_Logged[0] = RX_DTC_INFORMATION_TYPE1_65438.DTC_1[0];
+CAN_DataParsing.c (jni):		gErr_ACU_Logged[1] = RX_DTC_INFORMATION_TYPE1_65438.DTC_1[1];
+CAN_DataParsing.c (jni):		gErr_ACU_Logged[2] = RX_DTC_INFORMATION_TYPE1_65438.DTC_1[2];
+CAN_DataParsing.h (jni):void UART1_SeperateData_ACU(int Priority, int PF, int PS, unsigned char* Data);
+CAN_SerialPort.c (jni)://////RX_COMPONENT_IDENTIFICATION_ACU_65330///////
+CAN_SerialPort.c (jni):jint Get_ComponentCode_1699_PGN65330_ACU(JNIEnv * env, jobject this) {
+CAN_SerialPort.c (jni):	return RX_COMPONENT_IDENTIFICATION_ACU_65330.ComponentCode_1699;
+CAN_SerialPort.c (jni):jint Get_ManufacturerCode_1700_PGN65330_ACU(JNIEnv * env, jobject this) {
+CAN_SerialPort.c (jni):	return RX_COMPONENT_IDENTIFICATION_ACU_65330.ManufacturerCode_1700;
+CAN_SerialPort.c (jni):jbyteArray Get_ComponentBasicInformation_1698_PGN65330_ACU(JNIEnv * env,
+CAN_SerialPort.c (jni):	jbyteArray Data = (*env)->NewByteArray(env, sizeof(RX_COMPONENT_IDENTIFICATION_ACU_65330.ComponentBasicInformation_1698));
+CAN_SerialPort.c (jni):	(*env)->SetByteArrayRegion(env, Data, 0, sizeof(RX_COMPONENT_IDENTIFICATION_ACU_65330.ComponentBasicInformation_1698),RX_COMPONENT_IDENTIFICATION_ACU_65330.ComponentBasicInformation_1698);
+CAN_SerialPort.c (jni):	jintArray ACU_Err = (*env)->NewIntArray(env, ERR_BUF_SIZE);
+CAN_SerialPort.c (jni):	(*env)->SetIntArrayRegion(env, ACU_Err, 0, ERR_BUF_SIZE, gErr_ACU);
+CAN_SerialPort.c (jni):	return ACU_Err;
+CAN_SerialPort.c (jni):	jintArray ACU_Err_Logged = (*env)->NewIntArray(env, ERR_BUF_SIZE);
+CAN_SerialPort.c (jni):	(*env)->SetIntArrayRegion(env, ACU_Err_Logged, 0, ERR_BUF_SIZE, gErr_ACU_Logged);
+CAN_SerialPort.c (jni):	return ACU_Err_Logged;
+CAN_SerialPort.c (jni):	return gErr_ACU_TotalPacket;
+CAN_SerialPort.c (jni):	return gErr_ACU_TotalPacket_Logged;
+CAN_SerialPort.c (jni):	return gErr_ACU_Total;
+CAN_SerialPort.c (jni):	return gErr_ACU_Total_Logged;
+CAN_SerialPort.c (jni):				//////RX_COMPONENT_IDENTIFICATION_ACU_65330///////
+CAN_SerialPort.c (jni):				{"Get_ComponentCode_1699_PGN65330_ACU", "()I",(void*) Get_ComponentCode_1699_PGN65330_ACU },
+CAN_SerialPort.c (jni):				{"Get_ManufacturerCode_1700_PGN65330_ACU", "()I",(void*) Get_ManufacturerCode_1700_PGN65330_ACU },
+CAN_SerialPort.c (jni):				{"Get_ComponentBasicInformation_1698_PGN65330_ACU", "()[B",Get_ComponentBasicInformation_1698_PGN65330_ACU },
+CAN_Structure.h (jni):}__attribute__((packed))  COMPONENT_IDENTIFICATION_ACU_65330;
+GlobalValuable.h (jni):#define		SA_ACU						0x19
+GlobalValuable.h (jni):unsigned int		gErr_ACU[ERR_BUF_SIZE];
+GlobalValuable.h (jni):unsigned int		gErr_ACU_Logged[ERR_BUF_SIZE];
+GlobalValuable.h (jni):unsigned int 		gErr_ACU_TotalPacket;
+GlobalValuable.h (jni):unsigned int		gErr_ACU_TotalPacket_Logged;
+GlobalValuable.h (jni):unsigned int		gErr_ACU_Total;
+GlobalValuable.h (jni):unsigned int		gErr_ACU_Total_Logged;
+GlobalValuable.h (jni):COMPONENT_IDENTIFICATION_ACU_65330									RX_COMPONENT_IDENTIFICATION_ACU_65330;
+CAN1CommManager.java (src\taeha\wheelloader\fseries_monitor\main):	public static final int SA_ACU													= 0x19;
+CAN1CommManager.java (src\taeha\wheelloader\fseries_monitor\main):	public static final int LENGTH_SOFTWAREIDENTIFICATION_ACU	= 6;
+CAN1CommManager.java (src\taeha\wheelloader\fseries_monitor\main):	//////RX_COMPONENT_IDENTIFICATION_ACU_65330///////
+CAN1CommManager.java (src\taeha\wheelloader\fseries_monitor\main):	public int Get_ComponentCode_1699_PGN65330_ACU(){ return service.Get_ComponentCode_1699_PGN65330_ACU();}
+CAN1CommManager.java (src\taeha\wheelloader\fseries_monitor\main):	public int Get_ManufacturerCode_1700_PGN65330_ACU(){ return service.Get_ManufacturerCode_1700_PGN65330_ACU();}
+CAN1CommManager.java (src\taeha\wheelloader\fseries_monitor\main):	public byte[] Get_ComponentBasicInformation_1698_PGN65330_ACU(){ return service.Get_ComponentBasicInformation_1698_PGN65330_ACU();}
+CommService.java (src\taeha\wheelloader\fseries_monitor\main):	//////RX_COMPONENT_IDENTIFICATION_ACU_65330///////
+CommService.java (src\taeha\wheelloader\fseries_monitor\main):	public native int Get_ComponentCode_1699_PGN65330_ACU();
+CommService.java (src\taeha\wheelloader\fseries_monitor\main):	public native int Get_ManufacturerCode_1700_PGN65330_ACU();
+CommService.java (src\taeha\wheelloader\fseries_monitor\main):	public native byte[] Get_ComponentBasicInformation_1698_PGN65330_ACU();
+Home.java (src\taeha\wheelloader\fseries_monitor\main):	// 1. ACU test용
+Home.java (src\taeha\wheelloader\fseries_monitor\main):	// 2. ACU 기능 삭제 및 코드 표시 변경.
+Home.java (src\taeha\wheelloader\fseries_monitor\main):	// 2. ACU 기능 추가(현대 요청)
+Home.java (src\taeha\wheelloader\fseries_monitor\main):	// 1. ACU 현재고장, 과거고장 기능 적용
+Home.java (src\taeha\wheelloader\fseries_monitor\main):	// 1. ACU 기능 다국어 수정 및 다국어 인덱스 수정
+Home.java (src\taeha\wheelloader\fseries_monitor\main):	// 1. ACU 양산기능 적용
+Home.java (src\taeha\wheelloader\fseries_monitor\main):	// 5. ACU Description 변경(GPS -> DPS)
+Home.java (src\taeha\wheelloader\fseries_monitor\main):	// 1. MCU DTC 추가(831/2 - ACU 통신에러)
+Home.java (src\taeha\wheelloader\fseries_monitor\main):	public  static final int SCREEN_STATE_MENU_MONITORING_VERSIONINFO_ACU					= 0x22490000;
+Home.java (src\taeha\wheelloader\fseries_monitor\main):	public static final int REQ_ERR_ACU_ACTIVE		= 8; // ++, --, 160105 cjg
+Home.java (src\taeha\wheelloader\fseries_monitor\main):	public static final int REQ_ERR_ACU_LOGGED		= 9; // ++, --, 160105 cjg
+Home.java (src\taeha\wheelloader\fseries_monitor\main)://			if(CAN1Comm.Get_ComponentCode_1699_PGN65330_ACU() != CAN1CommManager.STATE_COMPONENTCODE_AIRCONCONTROLLER)
+Home.java (src\taeha\wheelloader\fseries_monitor\main)://				Log.d(TAG,"ACU CID Request");
+Home.java (src\taeha\wheelloader\fseries_monitor\main)://				CAN1Comm.Set_TargetSourceAddress(CAN1CommManager.SA_ACU);
+MenuBaseFragment.java (src\taeha\wheelloader\fseries_monitor\main):import taeha.wheelloader.fseries_monitor.menu.monitoring.VersionInfoACUFragment;
+MenuBaseFragment.java (src\taeha\wheelloader\fseries_monitor\main):	public VersionInfoACUFragment				_VersionInfoACUFragment;
+MenuBaseFragment.java (src\taeha\wheelloader\fseries_monitor\main):		_VersionInfoACUFragment = new VersionInfoACUFragment();
+MenuBaseFragment.java (src\taeha\wheelloader\fseries_monitor\main):		transaction.detach(_VersionInfoACUFragment);
+MenuBaseFragment.java (src\taeha\wheelloader\fseries_monitor\main):	public void showBodyVersionInfoACU(){
+MenuBaseFragment.java (src\taeha\wheelloader\fseries_monitor\main):		transaction.remove(_VersionInfoACUFragment);
+MenuBaseFragment.java (src\taeha\wheelloader\fseries_monitor\main):		transaction.replace(R.id.FrameLayout_menu_inter_body, _VersionInfoACUFragment);
+MenuBaseFragment.java (src\taeha\wheelloader\fseries_monitor\main):	public void showBodyVersionInfoACUAniamtion(){
+MenuBaseFragment.java (src\taeha\wheelloader\fseries_monitor\main):		InterBodyAnimation.StartChangeAnimation(_VersionInfoACUFragment);
+MenuBaseFragment.java (src\taeha\wheelloader\fseries_monitor\main):		case Home.SCREEN_STATE_MENU_MONITORING_VERSIONINFO_ACU:
+MenuBaseFragment.java (src\taeha\wheelloader\fseries_monitor\main):			_VersionInfoACUFragment.ClickLeft();
+MenuBaseFragment.java (src\taeha\wheelloader\fseries_monitor\main):		case Home.SCREEN_STATE_MENU_MONITORING_VERSIONINFO_ACU:
+MenuBaseFragment.java (src\taeha\wheelloader\fseries_monitor\main):			_VersionInfoACUFragment.ClickRight();
+MenuBaseFragment.java (src\taeha\wheelloader\fseries_monitor\main):		case Home.SCREEN_STATE_MENU_MONITORING_VERSIONINFO_ACU:
+MenuBaseFragment.java (src\taeha\wheelloader\fseries_monitor\main):			_VersionInfoACUFragment.ClickESC();
+MenuBaseFragment.java (src\taeha\wheelloader\fseries_monitor\main):		case Home.SCREEN_STATE_MENU_MONITORING_VERSIONINFO_ACU:
+MenuBaseFragment.java (src\taeha\wheelloader\fseries_monitor\main):			_VersionInfoACUFragment.ClickEnter();
+MenuBaseFragment.java (src\taeha\wheelloader\fseries_monitor\main):			case Home.SCREEN_STATE_MENU_MONITORING_VERSIONINFO_ACU:
+MenuBaseFragment.java (src\taeha\wheelloader\fseries_monitor\main):				_VersionInfoACUFragment.ShowManufactureDay(true);
+FaultHistoryActiveFragment.java (src\taeha\wheelloader\fseries_monitor\menu\monitoring):	RadioButton radioACU;
+FaultHistoryActiveFragment.java (src\taeha\wheelloader\fseries_monitor\menu\monitoring):	int DTCTotalPacketACU;
+FaultHistoryActiveFragment.java (src\taeha\wheelloader\fseries_monitor\menu\monitoring):	int DTCTotalACU;
+FaultHistoryActiveFragment.java (src\taeha\wheelloader\fseries_monitor\menu\monitoring):	int[] Err_ACU;
+FaultHistoryActiveFragment.java (src\taeha\wheelloader\fseries_monitor\menu\monitoring):	int[] Err_ACU_List;
+FaultHistoryActiveFragment.java (src\taeha\wheelloader\fseries_monitor\menu\monitoring):		radioACU = (RadioButton)mRoot.findViewById(R.id.radioButton_menu_body_monitoring_fault_acu);
+FaultHistoryActiveFragment.java (src\taeha\wheelloader\fseries_monitor\menu\monitoring):		radioACU.setText(getString(ParentActivity.getResources().getString(R.string.FATC), 455));
+FaultHistoryActiveFragment.java (src\taeha\wheelloader\fseries_monitor\menu\monitoring):		ParentActivity.setMarqueeRadio(radioACU);
+FaultHistoryActiveFragment.java (src\taeha\wheelloader\fseries_monitor\menu\monitoring):		Err_ACU = new int[400];
+FaultHistoryActiveFragment.java (src\taeha\wheelloader\fseries_monitor\menu\monitoring):		Err_ACU_List = new int[400];
+FaultHistoryActiveFragment.java (src\taeha\wheelloader\fseries_monitor\menu\monitoring):			Err_ACU[i] = 0;
+FaultHistoryActiveFragment.java (src\taeha\wheelloader\fseries_monitor\menu\monitoring):			Err_ACU_List[i] = 0;
+FaultHistoryActiveFragment.java (src\taeha\wheelloader\fseries_monitor\menu\monitoring):		radioACU.setOnClickListener(new View.OnClickListener() {
+FaultHistoryActiveFragment.java (src\taeha\wheelloader\fseries_monitor\menu\monitoring):				ClickACU();
+FaultHistoryActiveFragment.java (src\taeha\wheelloader\fseries_monitor\menu\monitoring):		DTCTotalPacketACU = CAN1Comm.Get_gErr_Acu_TotalPacket();
+FaultHistoryActiveFragment.java (src\taeha\wheelloader\fseries_monitor\menu\monitoring):		DTCTotalACU = CAN1Comm.Get_gErr_Acu_Total();
+FaultHistoryActiveFragment.java (src\taeha\wheelloader\fseries_monitor\menu\monitoring):		//Log.d(TAG, "DTCTotalACU : " + DTCTotalACU);
+FaultHistoryActiveFragment.java (src\taeha\wheelloader\fseries_monitor\menu\monitoring)://		Err_ACU[0] = CAN1Comm.Get_Ambienttemperaturesensoropen_PGN65373();
+FaultHistoryActiveFragment.java (src\taeha\wheelloader\fseries_monitor\menu\monitoring)://		Err_ACU[1] = CAN1Comm.Get_Ambienttemperaturesensorshort_PGN65373();
+FaultHistoryActiveFragment.java (src\taeha\wheelloader\fseries_monitor\menu\monitoring)://		Err_ACU[2] = CAN1Comm.Get_Incabtemperaturesensoropen_PGN65373();
+FaultHistoryActiveFragment.java (src\taeha\wheelloader\fseries_monitor\menu\monitoring)://		Err_ACU[3] = CAN1Comm.Get_Incabtemperaturesensorshort_PGN65373();
+FaultHistoryActiveFragment.java (src\taeha\wheelloader\fseries_monitor\menu\monitoring)://		Err_ACU[4] = CAN1Comm.Get_Evaptemperaturesensoropen_PGN65373();
+FaultHistoryActiveFragment.java (src\taeha\wheelloader\fseries_monitor\menu\monitoring)://		Err_ACU[5] = CAN1Comm.Get_Evaptemperaturesensorshort_PGN65373();
+FaultHistoryActiveFragment.java (src\taeha\wheelloader\fseries_monitor\menu\monitoring)://		Err_ACU[6] = 0;
+FaultHistoryActiveFragment.java (src\taeha\wheelloader\fseries_monitor\menu\monitoring)://		Err_ACU[7] = 0;
+FaultHistoryActiveFragment.java (src\taeha\wheelloader\fseries_monitor\menu\monitoring)://		Err_ACU[8] = CAN1Comm.Get_Mode1actuatoropenshort_PGN65373();
+FaultHistoryActiveFragment.java (src\taeha\wheelloader\fseries_monitor\menu\monitoring)://		Err_ACU[9] = CAN1Comm.Get_Mode1actuatordrivecircuitmalfunction_PGN65373();
+FaultHistoryActiveFragment.java (src\taeha\wheelloader\fseries_monitor\menu\monitoring)://		Err_ACU[10] = CAN1Comm.Get_Intakeactuatoropenshort_PGN65373();
+FaultHistoryActiveFragment.java (src\taeha\wheelloader\fseries_monitor\menu\monitoring)://		Err_ACU[11] = CAN1Comm.Get_Intakeactuatordrivecircuitmalfunction_PGN65373();
+FaultHistoryActiveFragment.java (src\taeha\wheelloader\fseries_monitor\menu\monitoring)://		Err_ACU[12] = CAN1Comm.Get_Temperatureactuatoropenshort_PGN65373();
+FaultHistoryActiveFragment.java (src\taeha\wheelloader\fseries_monitor\menu\monitoring)://		Err_ACU[13] = CAN1Comm.Get_Temperatureactuatordrivecircuitmalfunction_PGN65373();
+FaultHistoryActiveFragment.java (src\taeha\wheelloader\fseries_monitor\menu\monitoring)://		Err_ACU[14] = CAN1Comm.Get_Ducttemperaturesensoropen_PGN65373();;
+FaultHistoryActiveFragment.java (src\taeha\wheelloader\fseries_monitor\menu\monitoring)://		Err_ACU[15] = CAN1Comm.Get_Ducttemperaturesensorshort_PGN65373();
+FaultHistoryActiveFragment.java (src\taeha\wheelloader\fseries_monitor\menu\monitoring)://		Err_ACU[16] = CAN1Comm.Get_WaterValveSensorError_PGN65373();
+FaultHistoryActiveFragment.java (src\taeha\wheelloader\fseries_monitor\menu\monitoring)://		Err_ACU[17] = CAN1Comm.Get_GPSCircuitError_PGN65373();
+FaultHistoryActiveFragment.java (src\taeha\wheelloader\fseries_monitor\menu\monitoring)://		Err_ACU[18] = 0;
+FaultHistoryActiveFragment.java (src\taeha\wheelloader\fseries_monitor\menu\monitoring)://		Err_ACU[19] = 0;
+FaultHistoryActiveFragment.java (src\taeha\wheelloader\fseries_monitor\menu\monitoring):		//DTCTotalACU = CheckACUDTCNumber();
+FaultHistoryActiveFragment.java (src\taeha\wheelloader\fseries_monitor\menu\monitoring):		ACUShow();
+FaultHistoryActiveFragment.java (src\taeha\wheelloader\fseries_monitor\menu\monitoring):		radioACU.setChecked(false);
+FaultHistoryActiveFragment.java (src\taeha\wheelloader\fseries_monitor\menu\monitoring):		radioACU.setChecked(false);
+FaultHistoryActiveFragment.java (src\taeha\wheelloader\fseries_monitor\menu\monitoring):		radioACU.setChecked(false);
+FaultHistoryActiveFragment.java (src\taeha\wheelloader\fseries_monitor\menu\monitoring):		radioACU.setChecked(false);
+FaultHistoryActiveFragment.java (src\taeha\wheelloader\fseries_monitor\menu\monitoring):	public void ClickACU(){
+FaultHistoryActiveFragment.java (src\taeha\wheelloader\fseries_monitor\menu\monitoring):		radioACU.setChecked(true);
+FaultHistoryActiveFragment.java (src\taeha\wheelloader\fseries_monitor\menu\monitoring):		SelectedMode = Home.REQ_ERR_ACU_ACTIVE;
+FaultHistoryActiveFragment.java (src\taeha\wheelloader\fseries_monitor\menu\monitoring):	public void ACUShow(){
+FaultHistoryActiveFragment.java (src\taeha\wheelloader\fseries_monitor\menu\monitoring):		if(CAN1Comm.Get_ComponentCode_1699_PGN65330_ACU() != CAN1CommManager.STATE_COMPONENTCODE_AIRCONCONTROLLER){
+FaultHistoryActiveFragment.java (src\taeha\wheelloader\fseries_monitor\menu\monitoring):			radioACU.setVisibility(View.GONE);
+FaultHistoryActiveFragment.java (src\taeha\wheelloader\fseries_monitor\menu\monitoring):			radioACU.setVisibility(View.VISIBLE);
+FaultHistoryActiveFragment.java (src\taeha\wheelloader\fseries_monitor\menu\monitoring):		radioACU.setText(getString(ParentActivity.getResources().getString(string.FATC), 455) + "(" + Integer.toString(DTCTotalACU) + ")");
+FaultHistoryActiveFragment.java (src\taeha\wheelloader\fseries_monitor\menu\monitoring):		case Home.REQ_ERR_ACU_ACTIVE:
+FaultHistoryActiveFragment.java (src\taeha\wheelloader\fseries_monitor\menu\monitoring):			SetACUErrList();
+FaultHistoryActiveFragment.java (src\taeha\wheelloader\fseries_monitor\menu\monitoring):	public void SetACUErrList(){
+FaultHistoryActiveFragment.java (src\taeha\wheelloader\fseries_monitor\menu\monitoring):			Err_ACU_List[i] = 0;
+FaultHistoryActiveFragment.java (src\taeha\wheelloader\fseries_monitor\menu\monitoring):		int Err_ACU_Data[];
+FaultHistoryActiveFragment.java (src\taeha\wheelloader\fseries_monitor\menu\monitoring):		Err_ACU_Data = CAN1Comm.Get_AcuErr();
+FaultHistoryActiveFragment.java (src\taeha\wheelloader\fseries_monitor\menu\monitoring):				Err_ACU[Count] = (Err_ACU_Data[i] >> j) & 0x01;
+FaultHistoryActiveFragment.java (src\taeha\wheelloader\fseries_monitor\menu\monitoring):			if(Err_ACU[i] == 1){
+FaultHistoryActiveFragment.java (src\taeha\wheelloader\fseries_monitor\menu\monitoring):				Err_ACU_List[Count++] = i;
+FaultHistoryActiveFragment.java (src\taeha\wheelloader\fseries_monitor\menu\monitoring):		}else if(SelectedMode == Home.REQ_ERR_ACU_ACTIVE)
+FaultHistoryActiveFragment.java (src\taeha\wheelloader\fseries_monitor\menu\monitoring):				textViewDetail.setText(textACUErrCode[Err_ACU_List[Index]]);
+FaultHistoryActiveFragment.java (src\taeha\wheelloader\fseries_monitor\menu\monitoring):				else if(CAN1Comm.Get_ComponentCode_1699_PGN65330_ACU() == CAN1CommManager.STATE_COMPONENTCODE_AIRCONCONTROLLER)
+FaultHistoryActiveFragment.java (src\taeha\wheelloader\fseries_monitor\menu\monitoring):					SendDTCIndex = Home.REQ_ERR_ACU_ACTIVE;
+FaultHistoryActiveFragment.java (src\taeha\wheelloader\fseries_monitor\menu\monitoring):				if(CAN1Comm.Get_ComponentCode_1699_PGN65330_ACU() == CAN1CommManager.STATE_COMPONENTCODE_AIRCONCONTROLLER)
+FaultHistoryActiveFragment.java (src\taeha\wheelloader\fseries_monitor\menu\monitoring):					SendDTCIndex = Home.REQ_ERR_ACU_ACTIVE;
+FaultHistoryActiveFragment.java (src\taeha\wheelloader\fseries_monitor\menu\monitoring):		case Home.REQ_ERR_ACU_ACTIVE:
+FaultHistoryActiveFragment.java (src\taeha\wheelloader\fseries_monitor\menu\monitoring)://	public int CheckACUDTCNumber(){
+FaultHistoryActiveFragment.java (src\taeha\wheelloader\fseries_monitor\menu\monitoring):	public int CheckACUDTCNumber(){
+FaultHistoryActiveFragment.java (src\taeha\wheelloader\fseries_monitor\menu\monitoring):			if(Err_ACU[i] == 1)
+FaultHistoryActiveFragment.java (src\taeha\wheelloader\fseries_monitor\menu\monitoring):			case Home.REQ_ERR_ACU_ACTIVE:
+FaultHistoryActiveFragment.java (src\taeha\wheelloader\fseries_monitor\menu\monitoring):				return DTCTotalACU;
+FaultHistoryActiveFragment.java (src\taeha\wheelloader\fseries_monitor\menu\monitoring):			if(CAN1Comm.Get_ComponentCode_1699_PGN65330_ACU() == CAN1CommManager.STATE_COMPONENTCODE_AIRCONCONTROLLER)
+FaultHistoryActiveFragment.java (src\taeha\wheelloader\fseries_monitor\menu\monitoring):			else if(CAN1Comm.Get_ComponentCode_1699_PGN65330_ACU() == CAN1CommManager.STATE_COMPONENTCODE_AIRCONCONTROLLER)
+FaultHistoryActiveFragment.java (src\taeha\wheelloader\fseries_monitor\menu\monitoring):			if(CAN1Comm.Get_ComponentCode_1699_PGN65330_ACU() == CAN1CommManager.STATE_COMPONENTCODE_AIRCONCONTROLLER)
+FaultHistoryActiveFragment.java (src\taeha\wheelloader\fseries_monitor\menu\monitoring):				case Home.REQ_ERR_ACU_ACTIVE:
+FaultHistoryActiveFragment.java (src\taeha\wheelloader\fseries_monitor\menu\monitoring):			ClickACU();
+FaultHistoryActiveFragment.java (src\taeha\wheelloader\fseries_monitor\menu\monitoring):		radioACU.setPressed(false);
+FaultHistoryActiveFragment.java (src\taeha\wheelloader\fseries_monitor\menu\monitoring):				radioACU.setPressed(true);
+FaultHistoryActiveFragment.java (src\taeha\wheelloader\fseries_monitor\menu\monitoring):	static final String textACUErrCode[] = {
+FaultHistoryLoggedFragment.java (src\taeha\wheelloader\fseries_monitor\menu\monitoring):	RadioButton radioACU;  	// ++, 160105 cjg
+FaultHistoryLoggedFragment.java (src\taeha\wheelloader\fseries_monitor\menu\monitoring):	int DTCTotalPacketACU; // ++, --, 160105 cjg
+FaultHistoryLoggedFragment.java (src\taeha\wheelloader\fseries_monitor\menu\monitoring):	int DTCTotalACU;  	// ++, --, 160105 cjg
+FaultHistoryLoggedFragment.java (src\taeha\wheelloader\fseries_monitor\menu\monitoring):	int[] Err_ACU;
+FaultHistoryLoggedFragment.java (src\taeha\wheelloader\fseries_monitor\menu\monitoring):	int[] Err_ACUList;
+FaultHistoryLoggedFragment.java (src\taeha\wheelloader\fseries_monitor\menu\monitoring):		radioACU = (RadioButton)mRoot.findViewById(R.id.radioButton_menu_body_monitoring_fault_acu);
+FaultHistoryLoggedFragment.java (src\taeha\wheelloader\fseries_monitor\menu\monitoring):		radioACU.setText(getString(ParentActivity.getResources().getString(R.string.FATC), 455));
+FaultHistoryLoggedFragment.java (src\taeha\wheelloader\fseries_monitor\menu\monitoring):		ParentActivity.setMarqueeRadio(radioACU);
+FaultHistoryLoggedFragment.java (src\taeha\wheelloader\fseries_monitor\menu\monitoring):		Err_ACU = new int[400];
+FaultHistoryLoggedFragment.java (src\taeha\wheelloader\fseries_monitor\menu\monitoring):		Err_ACUList = new int[400];
+FaultHistoryLoggedFragment.java (src\taeha\wheelloader\fseries_monitor\menu\monitoring):			Err_ACU[i] = 0;
+FaultHistoryLoggedFragment.java (src\taeha\wheelloader\fseries_monitor\menu\monitoring):			Err_ACUList[i] = 0;
+FaultHistoryLoggedFragment.java (src\taeha\wheelloader\fseries_monitor\menu\monitoring):		radioACU.setOnClickListener(new View.OnClickListener() {
+FaultHistoryLoggedFragment.java (src\taeha\wheelloader\fseries_monitor\menu\monitoring):				ClickACU();
+FaultHistoryLoggedFragment.java (src\taeha\wheelloader\fseries_monitor\menu\monitoring):		DTCTotalPacketACU = CAN1Comm.Get_gErr_Acu_TotalPacket_Logged(); 	// ++, --, 160105 cjg
+FaultHistoryLoggedFragment.java (src\taeha\wheelloader\fseries_monitor\menu\monitoring):		DTCTotalACU = CAN1Comm.Get_gErr_Acu_Total_Logged();		// ++, --, 160105 cjg
+FaultHistoryLoggedFragment.java (src\taeha\wheelloader\fseries_monitor\menu\monitoring):		//Log.d(TAG, "DTCTotalACU : " + DTCTotalACU);
+FaultHistoryLoggedFragment.java (src\taeha\wheelloader\fseries_monitor\menu\monitoring)://		Err_ACU[0] = CAN1Comm.Get_Ambienttemperaturesensoropen_PGN65373();
+FaultHistoryLoggedFragment.java (src\taeha\wheelloader\fseries_monitor\menu\monitoring)://		Err_ACU[1] = CAN1Comm.Get_Ambienttemperaturesensorshort_PGN65373();
+FaultHistoryLoggedFragment.java (src\taeha\wheelloader\fseries_monitor\menu\monitoring)://		Err_ACU[2] = CAN1Comm.Get_Incabtemperaturesensoropen_PGN65373();
+FaultHistoryLoggedFragment.java (src\taeha\wheelloader\fseries_monitor\menu\monitoring)://		Err_ACU[3] = CAN1Comm.Get_Incabtemperaturesensorshort_PGN65373();
+FaultHistoryLoggedFragment.java (src\taeha\wheelloader\fseries_monitor\menu\monitoring)://		Err_ACU[4] = CAN1Comm.Get_Evaptemperaturesensoropen_PGN65373();
+FaultHistoryLoggedFragment.java (src\taeha\wheelloader\fseries_monitor\menu\monitoring)://		Err_ACU[5] = CAN1Comm.Get_Evaptemperaturesensorshort_PGN65373();
+FaultHistoryLoggedFragment.java (src\taeha\wheelloader\fseries_monitor\menu\monitoring)://		Err_ACU[6] = 0;
+FaultHistoryLoggedFragment.java (src\taeha\wheelloader\fseries_monitor\menu\monitoring)://		Err_ACU[7] = 0;
+FaultHistoryLoggedFragment.java (src\taeha\wheelloader\fseries_monitor\menu\monitoring)://		Err_ACU[8] = CAN1Comm.Get_Mode1actuatoropenshort_PGN65373();
+FaultHistoryLoggedFragment.java (src\taeha\wheelloader\fseries_monitor\menu\monitoring)://		Err_ACU[9] = CAN1Comm.Get_Mode1actuatordrivecircuitmalfunction_PGN65373();
+FaultHistoryLoggedFragment.java (src\taeha\wheelloader\fseries_monitor\menu\monitoring)://		Err_ACU[10] = CAN1Comm.Get_Intakeactuatoropenshort_PGN65373();
+FaultHistoryLoggedFragment.java (src\taeha\wheelloader\fseries_monitor\menu\monitoring)://		Err_ACU[11] = CAN1Comm.Get_Intakeactuatordrivecircuitmalfunction_PGN65373();
+FaultHistoryLoggedFragment.java (src\taeha\wheelloader\fseries_monitor\menu\monitoring)://		Err_ACU[12] = CAN1Comm.Get_Temperatureactuatoropenshort_PGN65373();
+FaultHistoryLoggedFragment.java (src\taeha\wheelloader\fseries_monitor\menu\monitoring)://		Err_ACU[13] = CAN1Comm.Get_Temperatureactuatordrivecircuitmalfunction_PGN65373();
+FaultHistoryLoggedFragment.java (src\taeha\wheelloader\fseries_monitor\menu\monitoring)://		Err_ACU[14] = CAN1Comm.Get_Ducttemperaturesensoropen_PGN65373();;
+FaultHistoryLoggedFragment.java (src\taeha\wheelloader\fseries_monitor\menu\monitoring)://		Err_ACU[15] = CAN1Comm.Get_Ducttemperaturesensorshort_PGN65373();
+FaultHistoryLoggedFragment.java (src\taeha\wheelloader\fseries_monitor\menu\monitoring)://		Err_ACU[16] = CAN1Comm.Get_WaterValveSensorError_PGN65373();
+FaultHistoryLoggedFragment.java (src\taeha\wheelloader\fseries_monitor\menu\monitoring)://		Err_ACU[17] = CAN1Comm.Get_GPSCircuitError_PGN65373();
+FaultHistoryLoggedFragment.java (src\taeha\wheelloader\fseries_monitor\menu\monitoring)://		Err_ACU[18] = 0;
+FaultHistoryLoggedFragment.java (src\taeha\wheelloader\fseries_monitor\menu\monitoring)://		Err_ACU[19] = 0;		
+FaultHistoryLoggedFragment.java (src\taeha\wheelloader\fseries_monitor\menu\monitoring):	public int CheckACUDTCNumber(){
+FaultHistoryLoggedFragment.java (src\taeha\wheelloader\fseries_monitor\menu\monitoring):			if(Err_ACU[i] == 1)
+FaultHistoryLoggedFragment.java (src\taeha\wheelloader\fseries_monitor\menu\monitoring):		ACUShow(); // ++, --, 160105 cjg
+FaultHistoryLoggedFragment.java (src\taeha\wheelloader\fseries_monitor\menu\monitoring):		radioACU.setChecked(false);// ++, --, 160105 cjg
+FaultHistoryLoggedFragment.java (src\taeha\wheelloader\fseries_monitor\menu\monitoring):		radioACU.setChecked(false);// ++, --, 160105 cjg
+FaultHistoryLoggedFragment.java (src\taeha\wheelloader\fseries_monitor\menu\monitoring):		radioACU.setChecked(false);// ++, --, 160105 cjg
+FaultHistoryLoggedFragment.java (src\taeha\wheelloader\fseries_monitor\menu\monitoring):		radioACU.setChecked(false);// ++, --, 160105 cjg
+FaultHistoryLoggedFragment.java (src\taeha\wheelloader\fseries_monitor\menu\monitoring):	public void ClickACU(){
+FaultHistoryLoggedFragment.java (src\taeha\wheelloader\fseries_monitor\menu\monitoring):		radioACU.setChecked(true);
+FaultHistoryLoggedFragment.java (src\taeha\wheelloader\fseries_monitor\menu\monitoring):		SelectedMode = Home.REQ_ERR_ACU_LOGGED;
+FaultHistoryLoggedFragment.java (src\taeha\wheelloader\fseries_monitor\menu\monitoring):	public void ACUShow(){
+FaultHistoryLoggedFragment.java (src\taeha\wheelloader\fseries_monitor\menu\monitoring):		if(CAN1Comm.Get_ComponentCode_1699_PGN65330_ACU() != CAN1CommManager.STATE_COMPONENTCODE_AIRCONCONTROLLER){
+FaultHistoryLoggedFragment.java (src\taeha\wheelloader\fseries_monitor\menu\monitoring):			radioACU.setVisibility(View.GONE);
+FaultHistoryLoggedFragment.java (src\taeha\wheelloader\fseries_monitor\menu\monitoring):			radioACU.setVisibility(View.VISIBLE);
+FaultHistoryLoggedFragment.java (src\taeha\wheelloader\fseries_monitor\menu\monitoring):		radioACU.setText(getString(ParentActivity.getResources().getString(string.FATC), 455) + "(" + Integer.toString(DTCTotalACU) + ")");
+FaultHistoryLoggedFragment.java (src\taeha\wheelloader\fseries_monitor\menu\monitoring):		case Home.REQ_ERR_ACU_LOGGED:
+FaultHistoryLoggedFragment.java (src\taeha\wheelloader\fseries_monitor\menu\monitoring):			SetACUErrList();
+FaultHistoryLoggedFragment.java (src\taeha\wheelloader\fseries_monitor\menu\monitoring):	public void SetACUErrList(){
+FaultHistoryLoggedFragment.java (src\taeha\wheelloader\fseries_monitor\menu\monitoring):			Err_ACUList[i] = 0;
+FaultHistoryLoggedFragment.java (src\taeha\wheelloader\fseries_monitor\menu\monitoring):		int Err_ACU_Data[];
+FaultHistoryLoggedFragment.java (src\taeha\wheelloader\fseries_monitor\menu\monitoring):		Err_ACU_Data = CAN1Comm.Get_AcuErr_Logged();
+FaultHistoryLoggedFragment.java (src\taeha\wheelloader\fseries_monitor\menu\monitoring):				Err_ACU[Count] = (Err_ACU_Data[i] >> j) & 0x01;
+FaultHistoryLoggedFragment.java (src\taeha\wheelloader\fseries_monitor\menu\monitoring):			if(Err_ACU[i] == 1){
+FaultHistoryLoggedFragment.java (src\taeha\wheelloader\fseries_monitor\menu\monitoring):				Err_ACUList[Count++] = i;
+FaultHistoryLoggedFragment.java (src\taeha\wheelloader\fseries_monitor\menu\monitoring):		else if(SelectedMode == Home.REQ_ERR_ACU_LOGGED)
+FaultHistoryLoggedFragment.java (src\taeha\wheelloader\fseries_monitor\menu\monitoring):				textViewDetail.setText(textACUErrCode[Err_ACUList[Index]]);
+FaultHistoryLoggedFragment.java (src\taeha\wheelloader\fseries_monitor\menu\monitoring):				Log.d(TAG, "SetText" + textACUErrCode[Err_ACUList[Index]]);
+FaultHistoryLoggedFragment.java (src\taeha\wheelloader\fseries_monitor\menu\monitoring):				else if(CAN1Comm.Get_ComponentCode_1699_PGN65330_ACU() == CAN1CommManager.STATE_COMPONENTCODE_AIRCONCONTROLLER)
+FaultHistoryLoggedFragment.java (src\taeha\wheelloader\fseries_monitor\menu\monitoring):					SendDTCIndex = Home.REQ_ERR_ACU_LOGGED;
+FaultHistoryLoggedFragment.java (src\taeha\wheelloader\fseries_monitor\menu\monitoring):				if(CAN1Comm.Get_ComponentCode_1699_PGN65330_ACU() == CAN1CommManager.STATE_COMPONENTCODE_AIRCONCONTROLLER)
+FaultHistoryLoggedFragment.java (src\taeha\wheelloader\fseries_monitor\menu\monitoring):					SendDTCIndex = Home.REQ_ERR_ACU_LOGGED;
+FaultHistoryLoggedFragment.java (src\taeha\wheelloader\fseries_monitor\menu\monitoring):		case Home.REQ_ERR_ACU_LOGGED:
+FaultHistoryLoggedFragment.java (src\taeha\wheelloader\fseries_monitor\menu\monitoring):			case Home.REQ_ERR_ACU_LOGGED:
+FaultHistoryLoggedFragment.java (src\taeha\wheelloader\fseries_monitor\menu\monitoring):				return DTCTotalACU;
+FaultHistoryLoggedFragment.java (src\taeha\wheelloader\fseries_monitor\menu\monitoring):			if(CAN1Comm.Get_ComponentCode_1699_PGN65330_ACU() == CAN1CommManager.STATE_COMPONENTCODE_AIRCONCONTROLLER)
+FaultHistoryLoggedFragment.java (src\taeha\wheelloader\fseries_monitor\menu\monitoring):			else if(CAN1Comm.Get_ComponentCode_1699_PGN65330_ACU() == CAN1CommManager.STATE_COMPONENTCODE_AIRCONCONTROLLER)
+FaultHistoryLoggedFragment.java (src\taeha\wheelloader\fseries_monitor\menu\monitoring):			if(CAN1Comm.Get_ComponentCode_1699_PGN65330_ACU() == CAN1CommManager.STATE_COMPONENTCODE_AIRCONCONTROLLER)
+FaultHistoryLoggedFragment.java (src\taeha\wheelloader\fseries_monitor\menu\monitoring):				case Home.REQ_ERR_ACU_LOGGED:
+FaultHistoryLoggedFragment.java (src\taeha\wheelloader\fseries_monitor\menu\monitoring):			ClickACU();
+FaultHistoryLoggedFragment.java (src\taeha\wheelloader\fseries_monitor\menu\monitoring):		radioACU.setPressed(false);
+FaultHistoryLoggedFragment.java (src\taeha\wheelloader\fseries_monitor\menu\monitoring):				radioACU.setPressed(true);
+FaultHistoryLoggedFragment.java (src\taeha\wheelloader\fseries_monitor\menu\monitoring):	static final String textACUErrCode[] = {
+VersionInfoACUFragment.java (src\taeha\wheelloader\fseries_monitor\menu\monitoring):public class VersionInfoACUFragment extends VersionInfoDetailFragment{
+VersionInfoACUFragment.java (src\taeha\wheelloader\fseries_monitor\menu\monitoring):		TAG = "VersionInfoACUFragment";
+VersionInfoACUFragment.java (src\taeha\wheelloader\fseries_monitor\menu\monitoring):		ParentActivity.ScreenIndex = Home.SCREEN_STATE_MENU_MONITORING_VERSIONINFO_ACU;
+VersionInfoACUFragment.java (src\taeha\wheelloader\fseries_monitor\menu\monitoring):		ComponentCode = CAN1Comm.Get_ComponentCode_1699_PGN65330_ACU();
+VersionInfoACUFragment.java (src\taeha\wheelloader\fseries_monitor\menu\monitoring):		ManufacturerCode = CAN1Comm.Get_ManufacturerCode_1700_PGN65330_ACU();
+VersionInfoACUFragment.java (src\taeha\wheelloader\fseries_monitor\menu\monitoring):		SoftwareIdentification = CAN1Comm.Get_ComponentBasicInformation_1698_PGN65330_ACU();	
+VersionInfoFragment.java (src\taeha\wheelloader\fseries_monitor\menu\monitoring):	TextView textViewACU;
+VersionInfoFragment.java (src\taeha\wheelloader\fseries_monitor\menu\monitoring):		CheckACU();
+VersionInfoFragment.java (src\taeha\wheelloader\fseries_monitor\menu\monitoring):		textViewACU = (TextView)mRoot.findViewById(R.id.textView_menu_body_monitoring_version_acu);
+VersionInfoFragment.java (src\taeha\wheelloader\fseries_monitor\menu\monitoring):		textViewACU.setText(getString(ParentActivity.getResources().getString(R.string.FATC), 455));
+VersionInfoFragment.java (src\taeha\wheelloader\fseries_monitor\menu\monitoring):		textViewACU.setOnClickListener(new View.OnClickListener() {
+VersionInfoFragment.java (src\taeha\wheelloader\fseries_monitor\menu\monitoring):				ClickACU();
+VersionInfoFragment.java (src\taeha\wheelloader\fseries_monitor\menu\monitoring):	public void CheckACU(){
+VersionInfoFragment.java (src\taeha\wheelloader\fseries_monitor\menu\monitoring):		if(CAN1Comm.Get_ComponentCode_1699_PGN65330_ACU() != CAN1CommManager.STATE_COMPONENTCODE_AIRCONCONTROLLER){
+VersionInfoFragment.java (src\taeha\wheelloader\fseries_monitor\menu\monitoring):			setClickableACU(false);
+VersionInfoFragment.java (src\taeha\wheelloader\fseries_monitor\menu\monitoring):			setClickableACU(true);
+VersionInfoFragment.java (src\taeha\wheelloader\fseries_monitor\menu\monitoring):	public void setClickableACU(boolean flag){
+VersionInfoFragment.java (src\taeha\wheelloader\fseries_monitor\menu\monitoring):			textViewACU.setVisibility(View.VISIBLE);
+VersionInfoFragment.java (src\taeha\wheelloader\fseries_monitor\menu\monitoring):			textViewACU.setVisibility(View.INVISIBLE);
+VersionInfoFragment.java (src\taeha\wheelloader\fseries_monitor\menu\monitoring):	public void ClickACU(){
+VersionInfoFragment.java (src\taeha\wheelloader\fseries_monitor\menu\monitoring):		ParentActivity._MenuBaseFragment.showBodyVersionInfoACU();
+VersionInfoFragment.java (src\taeha\wheelloader\fseries_monitor\menu\monitoring):			if(CAN1Comm.Get_ComponentCode_1699_PGN65330_ACU() != CAN1CommManager.STATE_COMPONENTCODE_AIRCONCONTROLLER)
+VersionInfoFragment.java (src\taeha\wheelloader\fseries_monitor\menu\monitoring):			if(CAN1Comm.Get_ComponentCode_1699_PGN65330_ACU() != CAN1CommManager.STATE_COMPONENTCODE_AIRCONCONTROLLER)
+VersionInfoFragment.java (src\taeha\wheelloader\fseries_monitor\menu\monitoring):			ClickACU();
+VersionInfoFragment.java (src\taeha\wheelloader\fseries_monitor\menu\monitoring):		textViewACU.setPressed(false);
+VersionInfoFragment.java (src\taeha\wheelloader\fseries_monitor\menu\monitoring):			textViewACU.setPressed(true);
+LoggedFaultDeletePopup.java (src\taeha\wheelloader\fseries_monitor\popup):		case Home.REQ_ERR_ACU_LOGGED:

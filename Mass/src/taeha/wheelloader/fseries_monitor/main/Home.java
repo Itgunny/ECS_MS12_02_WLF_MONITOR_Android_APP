@@ -2947,6 +2947,7 @@ public class Home extends Activity {
 		EndingAnimation.start();
 	}
 	public void GetDataFromNative(){
+		
 		PreHeat = CAN1Comm.Get_MirrorHeaterStatus_724_PGN65428();
 		//RPM = CAN1Comm.Get_EngineSpeed_310_PGN65431();
 		Buzzer = CAN1Comm.Get_Buzzer_723_PGN65364();

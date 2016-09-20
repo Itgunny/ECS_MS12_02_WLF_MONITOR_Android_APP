@@ -1378,7 +1378,6 @@ void UART1_SeperateData_RMCU_Multi(int Priority, int PF, int PS, unsigned char* 
 				memcpy((unsigned char*) &RX_COMPONENT_IDENTIFICATION_RMCU_65330, &gRecvMulti_RMCU,sizeof(RX_COMPONENT_IDENTIFICATION_RMCU_65330));
 				nRMCUPF = nRMCUPS = nRMCUTotalPacketNum = 0;
 			}
-
 		default:
 			break;
 			}
