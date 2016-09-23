@@ -537,6 +537,11 @@ public class FaultHistoryLoggedFragment extends ParentFragment{
 		radioTransmission.setText(getString(ParentActivity.getResources().getString(string.Transmission), 309) + "(" + Integer.toString(DTCTotalTM) + ")");
 		radioEHCU.setText(getString(ParentActivity.getResources().getString(string.EHCU), 272) + "(" + Integer.toString(DTCTotalEHCU) + ")");
 		radioACU.setText(getString(ParentActivity.getResources().getString(string.FATC), 455) + "(" + Integer.toString(DTCTotalACU) + ")");
+		if(DTCTotalACU == 0xff){
+			radioACU.setText(getString(ParentActivity.getResources().getString(string.FATC), 455) + "(" + "-" + ")");
+		}else {
+			radioACU.setText(getString(ParentActivity.getResources().getString(string.FATC), 455) + "(" + Integer.toString(DTCTotalACU) + ")");
+		}
 	}
 	public void ErrListDisplay(){
 		switch (SelectedMode) {

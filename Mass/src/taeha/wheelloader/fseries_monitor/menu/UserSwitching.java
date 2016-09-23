@@ -516,7 +516,7 @@ public class UserSwitching extends ParentFragment{
 					, ""));
 			adapter.addItem(new IconTextItemUserSwitching( ParentActivity.getResources().getDrawable(R.drawable.menu_management_machine_monitoring_bg_dark),
 					null,
-					getString(ParentActivity.getResources().getString(string.Language), 423)
+					getString(ParentActivity.getResources().getString(string.Language), 422)
 					, ""
 					, ""));
 			adapter.addItem(new IconTextItemUserSwitching( ParentActivity.getResources().getDrawable(R.drawable.menu_management_machine_monitoring_bg_light),

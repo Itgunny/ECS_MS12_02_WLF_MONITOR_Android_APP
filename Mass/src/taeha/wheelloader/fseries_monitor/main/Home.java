@@ -80,7 +80,7 @@ public class Home extends Activity {
 	public static final int VERSION_LOW 		= 4;
 	public static final int VERSION_SUB_HIGH 	= 0;
 	public static final int VERSION_SUB_LOW 	= 1;
-	public static final int VERSION_TAEHA		= 1;
+	public static final int VERSION_TAEHA		= 2;
 	// UI B 안 최초 적용 2014.12.10
 	////1.0.2.4
 	// Eco Gauge Pivot 함수 추가(Progress Bar가 가운데서
@@ -779,6 +779,9 @@ public class Home extends Activity {
 	////v2.4.0.11
 	// 1. CID 13일 저장안됨 -> 방식 변경
 	// 2. Revision RevH.01.01 추가
+	////v2.4.0.12
+	// 1. Userswitching Language -> Type A 오표기 수정
+	// 2. FATC FF 일경우 '-'으로 표시 
 	//////////////////////////////////////////////////////////////////////////////////////
 	// TAG
 	private  final String TAG = "Home";
