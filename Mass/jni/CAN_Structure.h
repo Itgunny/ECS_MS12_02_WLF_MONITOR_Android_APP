@@ -1724,7 +1724,11 @@ typedef struct
 	unsigned char	CoolingFanReverseOperatingTime_212;
 
 	unsigned char	FanSpeedMaxControlMode_210:2;
-	unsigned char	DM0:6;
+
+
+	unsigned char	CoolingFanMaxSpeedCurrentAdjust:2; //++ --, 160523 cjg
+	unsigned char 	DM0:4;
+
 	unsigned char	DM1[2];
 
 }__attribute__((packed))  COOLING_FAN_SETTING_61184_61;

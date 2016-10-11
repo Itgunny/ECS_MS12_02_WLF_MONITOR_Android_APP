@@ -77,8 +77,8 @@ public class QuickCouplerPopupLocking2 extends ParentPopup{
 			ParentActivity.ScreenIndex = ParentActivity.SCREEN_STATE_MAIN_A_KEY_QUICKCOUPLER_POPUP_LOCKING2;
 		}
 		// --, 150314 bwk		
-		ParentActivity.AttachmentStatus = CAN1CommManager.DATA_STATE_KEY_QUICKCOUPLER_LOCK;
-		ParentActivity.SavePref();
+		//ParentActivity.AttachmentStatus = CAN1CommManager.DATA_STATE_KEY_QUICKCOUPLER_LOCK;
+		//ParentActivity.SavePref();
 		
 		CAN1Comm.SetFNFlag(false);
 	}
@@ -149,7 +149,7 @@ public class QuickCouplerPopupLocking2 extends ParentPopup{
 		textViewTitle.setText(getString(ParentActivity.getResources().getString(string.Excuting_Locking_Attachment), 450));
 		
 		textViewCancel = (TextFitTextView)mRoot.findViewById(R.id.textView_popup_key_quickcoupler_locking_2_cancel);
-		textViewCancel.setText(getString(ParentActivity.getResources().getString(string.Cancel), 16));
+		textViewCancel.setText(getString(ParentActivity.getResources().getString(string.Complete), 16));
 	}
 
 	@Override

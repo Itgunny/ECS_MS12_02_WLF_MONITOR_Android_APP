@@ -78,9 +78,9 @@ public class Home extends Activity {
 	//
 	public static final int VERSION_HIGH 		= 2;
 	public static final int VERSION_LOW 		= 4;
-	public static final int VERSION_SUB_HIGH 	= 0;
-	public static final int VERSION_SUB_LOW 	= 1;
-	public static final int VERSION_TAEHA		= 2;
+	public static final int VERSION_SUB_HIGH 	= 1;
+	public static final int VERSION_SUB_LOW 	= 0;
+	public static final int VERSION_TAEHA		= 1;
 	// UI B 안 최초 적용 2014.12.10
 	////1.0.2.4
 	// Eco Gauge Pivot 함수 추가(Progress Bar가 가운데서
@@ -782,6 +782,9 @@ public class Home extends Activity {
 	////v2.4.0.12
 	// 1. Userswitching Language -> Type A 오표기 수정
 	// 2. FATC FF 일경우 '-'으로 표시 
+	////v2.4.2.00
+	// 1. Quick Coupler 기능 UI 수정 
+	// 2. Cooling Fan Max RPM Adjust 기능 추가
 	//////////////////////////////////////////////////////////////////////////////////////
 	// TAG
 	private  final String TAG = "Home";
@@ -2950,7 +2953,6 @@ public class Home extends Activity {
 		EndingAnimation.start();
 	}
 	public void GetDataFromNative(){
-		
 		PreHeat = CAN1Comm.Get_MirrorHeaterStatus_724_PGN65428();
 		//RPM = CAN1Comm.Get_EngineSpeed_310_PGN65431();
 		Buzzer = CAN1Comm.Get_Buzzer_723_PGN65364();
@@ -3298,10 +3300,10 @@ public class Home extends Activity {
 			{
 				// AxleTempWarning일 경우 이거 뜨고 바로 경고창 뜨므로, PASS
 			}
-			else if(AttachmentStatus == CAN1CommManager.DATA_STATE_KEY_QUICKCOUPLER_UNLOCK){
+			/*else if(AttachmentStatus == CAN1CommManager.DATA_STATE_KEY_QUICKCOUPLER_UNLOCK){
 				OldScreenIndex = ScreenIndex;
 				showQuickCouplerPopupUnlocking3();
-			}
+			}*/
 		}else if(ScreenIndex == SCREEN_STATE_MAIN_ENDING){
 			if(HomeDialog != null){
 				HomeDialog.dismiss();

@@ -24,9 +24,8 @@ public class MainBKeyQuickCouplerFragment extends ParentFragment{
 	TextFitTextView textViewLock;
 	TextFitTextView textViewUnlock;
 	
-	ImageButton imgbtnOK;
-	
-	TextFitTextView	textViewOK;
+	//ImageButton imgbtnOK;
+	//TextFitTextView	textViewOK;
 	
 	TextFitTextView	textViewNotTitle;
 	RelativeLayout	layoutAvailable;
@@ -77,13 +76,13 @@ public class MainBKeyQuickCouplerFragment extends ParentFragment{
 	protected void InitResource() {
 		// TODO Auto-generated method stub
 		textViewLock = (TextFitTextView)mRoot.findViewById(R.id.textView_key_main_b_quickcoupler_lock);
-		textViewLock.setText(getString(ParentActivity.getResources().getString(R.string.Locking_Attachment), 166));
+		textViewLock.setText(getString(ParentActivity.getResources().getString(R.string.Unlocking_Attachment), 167));
 		textViewUnlock = (TextFitTextView)mRoot.findViewById(R.id.textView_key_main_b_quickcoupler_unlock);
-		textViewUnlock.setText(getString(ParentActivity.getResources().getString(R.string.Unlocking_Attachment), 167));
+		textViewUnlock.setText(getString(ParentActivity.getResources().getString(R.string.Cancel), 16));
 		
-		imgbtnOK = (ImageButton)mRoot.findViewById(R.id.ImageButton_key_main_b_quickcoupler_low_ok);
-		textViewOK = (TextFitTextView)mRoot.findViewById(R.id.textView_key_main_b_quickcoupler_low_ok);
-		textViewOK.setText(getString(ParentActivity.getResources().getString(R.string.OK), 15));
+		//imgbtnOK = (ImageButton)mRoot.findViewById(R.id.ImageButton_key_main_b_quickcoupler_low_ok);
+		//textViewOK = (TextFitTextView)mRoot.findViewById(R.id.textView_key_main_b_quickcoupler_low_ok);
+		//textViewOK.setText(getString(ParentActivity.getResources().getString(R.string.OK), 15));
 		
 		textViewNotTitle = (TextFitTextView)mRoot.findViewById(R.id.textView_key_main_b_quickcoupler_notavailable_title);
 		textViewNotTitle.setText(getString(ParentActivity.getResources().getString(R.string.Quick_Coupler_is_NOT_equipped), 193));
@@ -111,7 +110,7 @@ public class MainBKeyQuickCouplerFragment extends ParentFragment{
 				// TODO Auto-generated method stub
 				CursurIndex = 1;
 				HandleCursurDisplay.sendMessage(HandleCursurDisplay.obtainMessage(CursurIndex));
-				ClickLock();
+				ClickUnlock();
 			}
 		});
 		textViewUnlock.setOnClickListener(new View.OnClickListener() {
@@ -121,10 +120,10 @@ public class MainBKeyQuickCouplerFragment extends ParentFragment{
 				// TODO Auto-generated method stub
 				CursurIndex = 2;
 				HandleCursurDisplay.sendMessage(HandleCursurDisplay.obtainMessage(CursurIndex));
-				ClickUnlock();
+				ClickOK();
 			}
 		});
-		imgbtnOK.setOnClickListener(new View.OnClickListener() {
+		/*imgbtnOK.setOnClickListener(new View.OnClickListener() {
 			
 			@Override
 			public void onClick(View v) {
@@ -133,7 +132,7 @@ public class MainBKeyQuickCouplerFragment extends ParentFragment{
 				HandleCursurDisplay.sendMessage(HandleCursurDisplay.obtainMessage(CursurIndex));
 				ClickOK();
 			}
-		});
+		});*/
 		
 	}
 
@@ -182,11 +181,10 @@ public class MainBKeyQuickCouplerFragment extends ParentFragment{
 	public void ClickLeft(){
 		switch (CursurIndex) {
 		case 1:
-			CursurIndex = 3;
+			CursurIndex = 2;
 			CursurDisplay(CursurIndex);
 			break;
 		case 2:
-		case 3:
 			CursurIndex--;
 			CursurDisplay(CursurIndex);
 			break;
@@ -199,11 +197,10 @@ public class MainBKeyQuickCouplerFragment extends ParentFragment{
 	public void ClickRight(){
 		switch (CursurIndex) {
 		case 1:
-		case 2:
 			CursurIndex++;
 			CursurDisplay(CursurIndex);
 			break;
-		case 3:
+		case 2:
 		default:
 			CursurIndex = 1;
 			CursurDisplay(CursurIndex);
@@ -213,14 +210,14 @@ public class MainBKeyQuickCouplerFragment extends ParentFragment{
 	public void ClickEnter(){
 		switch (CursurIndex) {
 		case 1:
-			ClickLock();
-			break;
-		case 2:
 			ClickUnlock();
 			break;
-		case 3:
+		case 2:
 			ClickOK();
 			break;
+		//case 3:	
+			//ClickOk();
+			//break;
 		default:
 			break;
 		}
@@ -229,7 +226,7 @@ public class MainBKeyQuickCouplerFragment extends ParentFragment{
 	public void CursurDisplay(int Index){
 		textViewLock.setPressed(false);
 		textViewUnlock.setPressed(false);
-		imgbtnOK.setPressed(false);
+		//imgbtnOK.setPressed(false);
 		switch (CursurIndex) {
 		case 1:
 			textViewLock.setPressed(true);
@@ -237,9 +234,9 @@ public class MainBKeyQuickCouplerFragment extends ParentFragment{
 		case 2:
 			textViewUnlock.setPressed(true);
 			break;
-		case 3:
-			imgbtnOK.setPressed(true);
-			break;
+		//case 3:
+			//imgbtnOK.setPressed(true);
+			//break;
 		default:
 			break;
 		}

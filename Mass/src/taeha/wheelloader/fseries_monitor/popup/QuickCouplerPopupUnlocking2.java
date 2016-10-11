@@ -76,8 +76,8 @@ public class QuickCouplerPopupUnlocking2 extends ParentPopup{
 			ParentActivity.ScreenIndex = ParentActivity.SCREEN_STATE_MAIN_A_KEY_QUICKCOUPLER_POPUP_UNLOCKING2;
 		}
 		// --, 150314 bwk			
-		ParentActivity.AttachmentStatus = CAN1CommManager.DATA_STATE_KEY_QUICKCOUPLER_UNLOCK;
-		ParentActivity.SavePref();
+		//ParentActivity.AttachmentStatus = CAN1CommManager.DATA_STATE_KEY_QUICKCOUPLER_UNLOCK;
+		//ParentActivity.SavePref();
 		
 		CAN1Comm.SetFNFlag(false);
 	}
@@ -115,11 +115,11 @@ public class QuickCouplerPopupUnlocking2 extends ParentPopup{
 		// --, 150314 bwk
 		try {
 			if(ParentActivity.DisplayType == ParentActivity.DISPLAY_TYPE_A){
-				ParentActivity.ScreenIndex = ParentActivity.SCREEN_STATE_MAIN_B_KEY_QUICKCOUPLER;
-				ParentActivity._MainBBaseFragment._MainBKeyQuickCouplerFragment.CursurDisplay(2);
+				ParentActivity.ScreenIndex = ParentActivity.SCREEN_STATE_MAIN_A_KEY_QUICKCOUPLER_POPUP_LOCKING2;
+				//ParentActivity._MainBBaseFragment._MainBKeyQuickCouplerFragment.CursurDisplay(2);
 			}else{
-				ParentActivity.ScreenIndex = ParentActivity.SCREEN_STATE_MAIN_A_KEY_QUICKCOUPLER;
-				ParentActivity._MainABaseFragment._MainAKeyQuickCouplerFragment.CursurDisplay(2);
+				ParentActivity.ScreenIndex = ParentActivity.SCREEN_STATE_MAIN_A_KEY_QUICKCOUPLER_POPUP_LOCKING2;
+				//ParentActivity._MainABaseFragment._MainAKeyQuickCouplerFragment.CursurDisplay(2);
 			}
 		} catch (NullPointerException e) {
 			// TODO: handle exception
@@ -129,7 +129,6 @@ public class QuickCouplerPopupUnlocking2 extends ParentPopup{
 		
 		CAN1Comm.Set_QuickCouplerOperationStatus_3448_PGN65527(CAN1CommManager.DATA_STATE_KEY_QUICKCOUPLER_OFF);
 		CAN1Comm.TxCANToMCU(247);
-		
 	}
 
 	@Override
@@ -142,7 +141,7 @@ public class QuickCouplerPopupUnlocking2 extends ParentPopup{
 		textViewTitle.setText(getString(ParentActivity.getResources().getString(string.Excute_Unlocking_Attachment), 451));
 		
 		textViewCancel = (TextFitTextView)mRoot.findViewById(R.id.textView_popup_key_quickcoupler_unlocking_2_cancel);
-		textViewCancel.setText(getString(ParentActivity.getResources().getString(string.Cancel), 16));
+		textViewCancel.setText(getString(ParentActivity.getResources().getString(string.Locking_Attachment), 166));
 	}
 
 	@Override
@@ -153,7 +152,7 @@ public class QuickCouplerPopupUnlocking2 extends ParentPopup{
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
-				ClickCancel();
+				ClickLock();
 			}
 		});
 	}
@@ -219,8 +218,15 @@ public class QuickCouplerPopupUnlocking2 extends ParentPopup{
 		}
 		
 	}
-	///////////////////////////////////////////////////////////////////////////////
 
+
+	///////////////////////////////////////////////////////////////////////////////
+	public void ClickLock(){
+		ParentActivity.showQuickCouplerPopupLocking2();
+		CAN1Comm.TxCMDToMCU(CAN1Comm.CMD_BUZ, CAN1Comm.BUZZER_OFF);	// Buzzer Off
+		CAN1Comm.SetFNFlag(true);
+		this.dismiss();
+	}
 	public void ClickCancel(){
 		Log.d(TAG,"ClickCancel");
 		CAN1Comm.TxCMDToMCU(CAN1Comm.CMD_BUZ, CAN1Comm.BUZZER_OFF);	// Buzzer Off

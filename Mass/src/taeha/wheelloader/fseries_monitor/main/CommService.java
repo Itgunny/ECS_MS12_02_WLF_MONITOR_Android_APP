@@ -217,6 +217,7 @@ public class CommService extends Service{
 	public native int Get_CoolingFanValveCurrent_146_PGN61184_61();
 	public native int Get_CoolingFanReverseIntervalTime_211_PGN61184_61();
 	public native int Get_CoolingFanReverseOperatingTime_212_PGN61184_61();
+	public native int Get_CoolingFanMaxSpeedCurrentAdjust_PGN61184_61();
 	//////RX_WEIGHING_SYSTEM_SETTING_REQUEST_61184_62///////
 	public native int Get_MessageType_PGN61184_62();
 	public native int Get_WeighingSystemAccumulationMode_1941_PGN61184_62();
@@ -735,6 +736,7 @@ public class CommService extends Service{
 	public native void Set_CoolingFanReverseIntervalTime_211_PGN61184_61(int Data);
 	public native void Set_CoolingFanReverseOperatingTime_212_PGN61184_61(int Data);
 	public native void Set_FanSpeedMaxControlMode_210_PGN61184_61(int Data);	
+	public native void Set_CoolingFanMaxSpeedCurrentAdjust_PGN61184_61(int Data);
 	//////TX_WEIGHING_SYSTEM_SETTING_REQUEST_61184_62///////
 	public native void Set_MessageType_PGN61184_62(int Data);
 	public native void Set_WeighingSystemAccumulationMode_1941_PGN61184_62(int Data);

@@ -449,8 +449,8 @@
     <string name="TOTAL_HOURMETER">전체 작업시간</string>
     <string name="CURRENT_FUEL_RATE">순간 연비</string>
     <string name="Current_Fuel_Rate">순간 연비</string>
-    <string name="Excute_Locking_Attachment">Locking Attachment를 진행하시겠습니까?</string>
-    <string name="Excute_Unlocking_Attachment">Unlocking Attachment를 진행하시겠습니까?</string>
+    <string name="Excute_Locking_Attachment">작업장치 잠금 중입니다.</string>
+    <string name="Excute_Unlocking_Attachment">작업장치 잠금 해제 중입니다.</string>
     <string name="Warming_Up">워밍업</string>
     <string name="Engine_Delay_Shutdown">엔진 지연 정지</string>
     <string name="Weighing_Information">작업량 정보</string>
@@ -493,4 +493,7 @@
 	<string name="Calibration_Fail_Bucket_Position_Error">Calibration을 실패하였습니다.\n버켓 위치 오류</string>
 	<string name="Calibration_Fail_Engine_Rpm_Error">Calibration을 실패하였습니다.\n엔진 회전수 오류</string>
 	<string name="Calibration_Fail_Lever_Position_Error">Calibration을 실패하였습니다.\n최대 레버 조작 오류</string>
+	<string name="Max_Control_Fan_Speed">Max Control Fan Speed</string>
+	<string name="Max_Mode">Max Mode</string>
+	<string name="Not_Available">Not Available</string>
 </resources>

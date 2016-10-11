@@ -1404,6 +1404,7 @@ public class CAN1CommManager extends ICAN1CommManager.Stub{		// ttySAC1(Linux), 
 	public void Set_CoolingFanReverseIntervalTime_211_PGN61184_61(int Data){ service.Set_CoolingFanReverseIntervalTime_211_PGN61184_61(Data);}
 	public void Set_CoolingFanReverseOperatingTime_212_PGN61184_61(int Data){ service.Set_CoolingFanReverseOperatingTime_212_PGN61184_61(Data);}
 	public void Set_FanSpeedMaxControlMode_210_PGN61184_61(int Data){ service.Set_FanSpeedMaxControlMode_210_PGN61184_61(Data);}
+	public void Set_CoolingFanMaxSpeedCurrentAdjust_PGN61184_61(int Data) {service.Set_CoolingFanMaxSpeedCurrentAdjust_PGN61184_61(Data);}
 	//////TX_WEIGHING_SYSTEM_SETTING_REQUEST_61184_62///////
 	public void Set_MessageType_PGN61184_62(int Data){ service.Set_MessageType_PGN61184_62(Data);}
 	public void Set_WeighingSystemAccumulationMode_1941_PGN61184_62(int Data){ service.Set_WeighingSystemAccumulationMode_1941_PGN61184_62(Data);}

@@ -245,7 +245,10 @@ jint Get_FanSpeedMaxControlMode_210_PGN61184_61(JNIEnv * env,
 		jobject this) {
 	return RX_COOLING_FAN_SETTING_61184_61.FanSpeedMaxControlMode_210;
 }
-
+jint Get_CoolingFanMaxSpeedCurrentAdjust_PGN61184_61(JNIEnv * env,
+		jobject this) {
+	return RX_COOLING_FAN_SETTING_61184_61.CoolingFanMaxSpeedCurrentAdjust;
+}
 //////RX_WEIGHING_SYSTEM_SETTING_REQUEST_61184_62///////
 jint Get_MessageType_PGN61184_62(JNIEnv * env, jobject this) {
 	return RX_WEIGHING_SYSTEM_SETTING_REQUEST_61184_62.MessageType;
@@ -1863,6 +1866,10 @@ void Set_CoolingFanReverseOperatingTime_212_PGN61184_61(JNIEnv * env,
 void Set_FanSpeedMaxControlMode_210_PGN61184_61(JNIEnv * env,
 		jobject this, int Data) {
 	TX_COOLING_FAN_SETTING_61184_61.FanSpeedMaxControlMode_210= Data;
+}
+void Set_CoolingFanMaxSpeedCurrentAdjust_PGN61184_61(JNIEnv * env,
+		jobject this, int Data) {
+	TX_COOLING_FAN_SETTING_61184_61.CoolingFanMaxSpeedCurrentAdjust = Data;
 }
 //////TX_WEIGHING_SYSTEM_SETTING_REQUEST_61184_62///////
 void Set_MessageType_PGN61184_62(JNIEnv * env, jobject this, int Data) {
@@ -3759,6 +3766,7 @@ static JNINativeMethod methods[] =
 				{"Get_CoolingFanValveCurrent_146_PGN61184_61", "()I",(void*) Get_CoolingFanValveCurrent_146_PGN61184_61 },
 				{ "Get_CoolingFanReverseIntervalTime_211_PGN61184_61", "()I",(void*) Get_CoolingFanReverseIntervalTime_211_PGN61184_61 },
 				{ "Get_CoolingFanReverseOperatingTime_212_PGN61184_61", "()I",(void*) Get_CoolingFanReverseOperatingTime_212_PGN61184_61 },
+				{ "Get_CoolingFanMaxSpeedCurrentAdjust_PGN61184_61", "()I",(void*) Get_CoolingFanMaxSpeedCurrentAdjust_PGN61184_61 },
 				//////RX_WEIGHING_SYSTEM_SETTING_REQUEST_61184_62///////
 				{ "Get_MessageType_PGN61184_62", "()I",
 						(void*) Get_MessageType_PGN61184_62 },
@@ -4623,6 +4631,7 @@ static JNINativeMethod methods[] =
 				{ "Set_CoolingFanReverseIntervalTime_211_PGN61184_61", "(I)V",(void*) Set_CoolingFanReverseIntervalTime_211_PGN61184_61 },
 				{ "Set_CoolingFanReverseOperatingTime_212_PGN61184_61", "(I)V",(void*) Set_CoolingFanReverseOperatingTime_212_PGN61184_61 },
 				{ "Set_FanSpeedMaxControlMode_210_PGN61184_61", "(I)V",(void*) Set_FanSpeedMaxControlMode_210_PGN61184_61 },
+				{ "Set_CoolingFanMaxSpeedCurrentAdjust_PGN61184_61", "(I)V",(void*) Set_CoolingFanMaxSpeedCurrentAdjust_PGN61184_61 },
 				//////TX_WEIGHING_SYSTEM_SETTING_REQUEST_61184_62///////
 				{ "Set_MessageType_PGN61184_62", "(I)V",
 						(void*) Set_MessageType_PGN61184_62 },

@@ -40,6 +40,8 @@ public class ServiceMenuSensorMonitoringHiddenFragment extends ParentFragment{
 	
 	ImageButton imgbtnUp;
 	ImageButton imgbtnDown;
+	ImageButton imgBtnControlUp;
+	ImageButton imgBtnControlDown;
 	
 	ImageView imgViewCoolingFanIcon;
 	
@@ -52,6 +54,10 @@ public class ServiceMenuSensorMonitoringHiddenFragment extends ParentFragment{
 	TextFitTextView textViewEpprValue;
 	TextFitTextView textViewExcute;
 	TextFitTextView textViewMaxControl;
+	
+	// TextView
+	TextFitTextView textViewControlEpprTitle;
+	TextFitTextView textViewControlEpprData;
 	
 	// ListView
 	ListView listView;
@@ -106,8 +112,10 @@ public class ServiceMenuSensorMonitoringHiddenFragment extends ParentFragment{
 		StartEnableButtonTimer();
 		
 		CAN1Comm.Set_TestMode_PGN61184_61(0);
+		CAN1Comm.Set_CoolingFanReverseManual_PGN61184_61(0);
 		CAN1Comm.Set_FanSpeedMaxControlMode_210_PGN61184_61(CAN1CommManager.DATA_STATE_OFF);
 		CAN1Comm.TxCANToMCU(61);
+		CAN1Comm.Set_CoolingFanReverseManual_PGN61184_61(3);
 		CAN1Comm.Set_FanSpeedMaxControlMode_210_PGN61184_61(3);
 		
 		setCoolingFanReverseRadio(CoolingFanReverse);
@@ -133,6 +141,7 @@ public class ServiceMenuSensorMonitoringHiddenFragment extends ParentFragment{
 		CAN1Comm.Set_CoolingFanReverseManual_PGN61184_61(0);
 		CAN1Comm.Set_FanSpeedMaxControlMode_210_PGN61184_61(CAN1CommManager.DATA_STATE_OFF);
 		CAN1Comm.TxCANToMCU(61);
+		CAN1Comm.Set_TestMode_PGN61184_61(3);
 		CAN1Comm.Set_CoolingFanReverseManual_PGN61184_61(3);
 		CAN1Comm.Set_FanSpeedMaxControlMode_210_PGN61184_61(3);
 	}
@@ -152,6 +161,9 @@ public class ServiceMenuSensorMonitoringHiddenFragment extends ParentFragment{
 		imgbtnUp = (ImageButton)mRoot.findViewById(R.id.imageButton_menu_body_management_service_sensormonitoring_hidden_plus);
 		imgbtnDown = (ImageButton)mRoot.findViewById(R.id.imageButton_menu_body_management_service_sensormonitoring_hidden_minus);
 
+		imgBtnControlUp = (ImageButton)mRoot.findViewById(R.id.imageButton_menu_body_management_service_sensormonitoring_hidden_maxcontrol_plus);
+		imgBtnControlDown = (ImageButton)mRoot.findViewById(R.id.imageButton_menu_body_management_service_sensormonitoring_hidden_maxcontrol_minus);
+		
 		textViewEpprValue = (TextFitTextView)mRoot.findViewById(R.id.textView_menu_body_management_service_sensormonitoring_hidden_data);
 
 		radioAuto = (RadioButtonTextView)mRoot.findViewById(R.id.radioButton_menu_body_management_service_sensormonitoring_hidden_auto);
@@ -164,10 +176,16 @@ public class ServiceMenuSensorMonitoringHiddenFragment extends ParentFragment{
 		
 		textViewMaxControl = (TextFitTextView)mRoot.findViewById(R.id.textView_menu_body_management_service_sensormonitoring_hidden_low_maxcontrol);
 	
+		// TextView
+		textViewControlEpprTitle = (TextFitTextView)mRoot.findViewById(R.id.textView_menu_body_management_service_sensormonitoring_hidden_maxcontrol);
+		textViewControlEpprTitle.setText(getString(ParentActivity.getResources().getString(string.Max_Control_Fan_Speed), 494));
+		textViewControlEpprData = (TextFitTextView)mRoot.findViewById(R.id.textView_menu_body_management_service_sensormonitoring_hidden_maxcontrol_mode);
+		textViewControlEpprData.setText(getString(ParentActivity.getResources().getString(string.Max_Mode), 495));
+		
 		
 		imgViewCoolingFanIcon = (ImageView)mRoot.findViewById(R.id.imageView_menu_body_management_service_sensormonitoring_hidden_coolingfan_manual);
 
-		checkMaxControl = (CheckBox)mRoot.findViewById(R.id.checkBox_menu_body_management_service_sensormonitoring_hidden_low_maxcontrol);
+		checkMaxControl = (CheckBox)mRoot.findViewById(R.id.checkBox_menu_body_management_service_sensormonitoring_hidden_maxcontrol_check);
 		
 		listView = (ListView)mRoot.findViewById(R.id.listView_menu_body_management_service_sensormonitoring_hidden);
 		adapter = new IconTextListAdapter(ParentActivity);
@@ -196,7 +214,7 @@ public class ServiceMenuSensorMonitoringHiddenFragment extends ParentFragment{
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
-				CursurIndex = 6;
+				CursurIndex = 8;
 				HandleCursurDisplay.sendMessage(HandleCursurDisplay.obtainMessage(CursurIndex));
 				ClickOK();
 			}
@@ -260,9 +278,30 @@ public class ServiceMenuSensorMonitoringHiddenFragment extends ParentFragment{
 				// TODO Auto-generated method stub
 				CursurIndex = 5;
 				HandleCursurDisplay.sendMessage(HandleCursurDisplay.obtainMessage(CursurIndex));
+				SetMaxControlFanSpeed(MaxControlFanSpeed);
 				ClickMaxControl();
 			}
 		});		
+		imgBtnControlDown.setOnClickListener(new View.OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				CursurIndex = 6;
+				HandleCursurDisplay.sendMessage(HandleCursurDisplay.obtainMessage(CursurIndex));
+				clickControlMinus();
+			}
+		});
+		imgBtnControlUp.setOnClickListener(new View.OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				CursurIndex = 7;
+				HandleCursurDisplay.sendMessage(HandleCursurDisplay.obtainMessage(CursurIndex));
+				clickControlPlus();
+			}
+		});
 	}
 
 	@Override
@@ -296,6 +335,10 @@ public class ServiceMenuSensorMonitoringHiddenFragment extends ParentFragment{
 		textViewExcute.setClickable(false);
 		checkMaxControl.setClickable(false);
 		textViewMaxControl.setClickable(false);
+		textViewControlEpprTitle.setClickable(false);
+		textViewControlEpprData.setClickable(false);
+		imgBtnControlUp.setClickable(false);
+		imgBtnControlDown.setClickable(false);
 
 		imgbtnDown.setAlpha((float)0.5);
 		imgbtnUp.setAlpha((float)0.5);
@@ -304,6 +347,10 @@ public class ServiceMenuSensorMonitoringHiddenFragment extends ParentFragment{
 		textViewExcute.setAlpha((float)0.5);
 		checkMaxControl.setAlpha((float)0.5);
 		textViewMaxControl.setAlpha((float)0.5);		
+		textViewControlEpprTitle.setAlpha((float)0.5);
+		textViewControlEpprData.setAlpha((float)0.5);
+		imgBtnControlUp.setAlpha((float)0.5);
+		imgBtnControlDown.setAlpha((float)0.5);	
 		switch(index){
 			case ADJUST_MODE:
 			default:
@@ -314,10 +361,30 @@ public class ServiceMenuSensorMonitoringHiddenFragment extends ParentFragment{
 				CursurIndex = 1;
 				break;
 			case FAN_SPEED_MAX_MODE:
+				
+				if(checkMaxControl.isChecked() == true){
+					textViewControlEpprTitle.setClickable(true);
+					textViewControlEpprData.setClickable(true);
+					imgBtnControlUp.setClickable(true);
+					imgBtnControlDown.setClickable(true);
 				checkMaxControl.setClickable(true);
-				textViewMaxControl.setClickable(true);
+					textViewControlEpprTitle.setAlpha((float)1);
+					textViewControlEpprData.setAlpha((float)1);
+					imgBtnControlUp.setAlpha((float)1);
+					imgBtnControlDown.setAlpha((float)1);
 				checkMaxControl.setAlpha((float)1);
-				textViewMaxControl.setAlpha((float)1);
+				}else {
+					textViewControlEpprTitle.setClickable(true);
+					textViewControlEpprData.setClickable(true);
+					imgBtnControlUp.setClickable(false);
+					imgBtnControlDown.setClickable(false);
+					checkMaxControl.setClickable(true);
+					textViewControlEpprTitle.setAlpha((float)1);
+					textViewControlEpprData.setAlpha((float)1);
+					imgBtnControlUp.setAlpha((float)0.5);
+					imgBtnControlDown.setAlpha((float)0.5);
+					checkMaxControl.setAlpha((float)1);
+				}
 				CursurIndex = 5;
 				break;
 			case FAN_REVERSE_MODE:
@@ -332,8 +399,12 @@ public class ServiceMenuSensorMonitoringHiddenFragment extends ParentFragment{
 		}
 		CursurDisplay(CursurIndex);
 		
-		if(checkMaxControl.isChecked() == true)
+		if(checkMaxControl.isChecked() == true){
 			checkMaxControl.setChecked(false);
+			CAN1Comm.Set_FanSpeedMaxControlMode_210_PGN61184_61(CAN1CommManager.DATA_STATE_OFF);
+			CAN1Comm.TxCANToMCU(61);
+			CAN1Comm.Set_FanSpeedMaxControlMode_210_PGN61184_61(3);
+		}
 	}
 	public void CheckCoolingFanManualButton(){
 		if(textViewExcute.isPressed() == true){
@@ -350,7 +421,6 @@ public class ServiceMenuSensorMonitoringHiddenFragment extends ParentFragment{
 			CAN1Comm.Set_CoolingFanReverseManual_PGN61184_61(0);
 			CAN1Comm.TxCANToMCU(61);
 			CAN1Comm.Set_CoolingFanReverseManual_PGN61184_61(3);
-			
 			ManualPress = false;
 		}
 	}
@@ -394,19 +464,45 @@ public class ServiceMenuSensorMonitoringHiddenFragment extends ParentFragment{
 	public void SetMaxControlFanSpeed(int Data){
 		switch (Data) {
 		case CAN1CommManager.DATA_STATE_OFF:
-			textViewMaxControl.setText(" : " + getString(ParentActivity.getResources().getString(R.string.OFF), 98));
+			textViewControlEpprData.setText(" " + getString(ParentActivity.getResources().getString(string.Max_Mode), 495) + " : " + getString(ParentActivity.getResources().getString(R.string.OFF), 98));
+			imgBtnControlUp.setClickable(false);
+			imgBtnControlDown.setClickable(false);
+			imgBtnControlUp.setAlpha((float)0.5);
+			imgBtnControlDown.setAlpha((float)0.5);
 			break;
 		case CAN1CommManager.DATA_STATE_ON:
-			textViewMaxControl.setText(" : " + getString(ParentActivity.getResources().getString(R.string.ON), 97));
+			textViewControlEpprData.setText(" " + getString(ParentActivity.getResources().getString(string.Max_Mode), 495) + " : " + getString(ParentActivity.getResources().getString(R.string.ON), 97));
+			imgBtnControlUp.setClickable(true);
+			imgBtnControlDown.setClickable(true);
+			imgBtnControlUp.setAlpha((float)1);
+			imgBtnControlDown.setAlpha((float)1);
 			break;
 		case CAN1CommManager.DATA_STATE_NOTAVAILABLE:
-			textViewMaxControl.setText(" : Not Available");
+			textViewControlEpprData.setText(" " + getString(ParentActivity.getResources().getString(string.Not_Available), 496));
 			break;
 		default:
 			break;
 		}		
 	}
 	/////////////////////////////////////////////////////////////////////	
+	public void clickControlPlus(){
+		if(checkMaxControl.isChecked() == true)
+		{
+			CAN1Comm.Set_CoolingFanMaxSpeedCurrentAdjust_PGN61184_61(1);
+			CAN1Comm.TxCANToMCU(61);
+			CAN1Comm.Set_CoolingFanMaxSpeedCurrentAdjust_PGN61184_61(3);
+			Log.d(TAG, "increase");
+		}
+	}
+	public void clickControlMinus(){
+		if(checkMaxControl.isChecked() == true)
+		{
+			CAN1Comm.Set_CoolingFanMaxSpeedCurrentAdjust_PGN61184_61(0);
+			CAN1Comm.TxCANToMCU(61);
+			CAN1Comm.Set_CoolingFanMaxSpeedCurrentAdjust_PGN61184_61(3);
+			Log.d(TAG, "decrease");
+		}
+	}
 	public void ClickOK(){
 		if(ParentActivity.AnimationRunningFlag == true)
 			return;
@@ -586,7 +682,15 @@ public class ServiceMenuSensorMonitoringHiddenFragment extends ParentFragment{
 					if(ParentActivity.AnimationRunningFlag == false)
 					{
 						CancelEnableButtonTimer();
+						CAN1Comm.Set_TestMode_PGN61184_61(0);
+						CAN1Comm.Set_CoolingFanReverseManual_PGN61184_61(0);
+						CAN1Comm.Set_FanSpeedMaxControlMode_210_PGN61184_61(CAN1CommManager.DATA_STATE_OFF);
+						CAN1Comm.TxCANToMCU(61);
+						CAN1Comm.Set_TestMode_PGN61184_61(3);
+						CAN1Comm.Set_CoolingFanReverseManual_PGN61184_61(3);
+						CAN1Comm.Set_FanSpeedMaxControlMode_210_PGN61184_61(3);
 						ParentActivity.showFanSelectModePopup();
+						
 					}
 				}
 			});
@@ -615,13 +719,13 @@ public class ServiceMenuSensorMonitoringHiddenFragment extends ParentFragment{
 			case ADJUST_MODE:
 				switch (CursurIndex) {
 				case 1:
-					CursurIndex = 6;
+					CursurIndex = 8;
 					break;
 				case 2:
 				default:
 					CursurIndex = 1;
 					break;
-				case 6:
+				case 8:
 					CursurIndex = 2;
 					break;
 				}
@@ -630,11 +734,21 @@ public class ServiceMenuSensorMonitoringHiddenFragment extends ParentFragment{
 			case FAN_SPEED_MAX_MODE:
 				switch (CursurIndex) {
 				case 5:
-					CursurIndex = 6;
+				default:
+					CursurIndex = 8;
 					break;
 				case 6:
-				default:
 					CursurIndex = 5;
+					break;
+				case 7:
+					CursurIndex = 6;
+					break;
+				case 8:
+					if(checkMaxControl.isChecked() == true){
+						CursurIndex = 7;
+					}else {
+						CursurIndex = 5;
+					}
 					break;
 				}
 				CursurDisplay(CursurIndex);
@@ -642,13 +756,13 @@ public class ServiceMenuSensorMonitoringHiddenFragment extends ParentFragment{
 			case FAN_REVERSE_MODE:
 				switch (CursurIndex) {
 				case 3:
-					CursurIndex = 6;
+					CursurIndex = 8;
 					break;
 				case 4:
 				default:
 					CursurIndex = 3;
 					break;
-				case 6:
+				case 8:
 					CursurIndex = 4;
 					break;
 				}
@@ -664,9 +778,9 @@ public class ServiceMenuSensorMonitoringHiddenFragment extends ParentFragment{
 				CursurIndex = 2;
 				break;
 			case 2:
-				CursurIndex = 6;
+				CursurIndex = 8;
 				break;
-			case 6:
+			case 8:
 			default:
 				CursurIndex = 1;
 				break;
@@ -676,9 +790,18 @@ public class ServiceMenuSensorMonitoringHiddenFragment extends ParentFragment{
 		case FAN_SPEED_MAX_MODE:
 			switch (CursurIndex) {
 			case 5:
+				if(checkMaxControl.isChecked() == true){
 				CursurIndex = 6;
+				}else {
+					CursurIndex = 8;
+				}
 				break;
 			case 6:
+				CursurIndex = 7;
+				break;
+			case 7:
+				CursurIndex = 8;
+				break;
 			default:
 				CursurIndex = 5;
 				break;
@@ -691,9 +814,9 @@ public class ServiceMenuSensorMonitoringHiddenFragment extends ParentFragment{
 				CursurIndex = 4;
 				break;
 			case 4:
-				CursurIndex = 6;
+				CursurIndex = 8;
 				break;
-			case 6:
+			case 8:
 			default:
 				CursurIndex = 3;
 				break;
@@ -703,7 +826,7 @@ public class ServiceMenuSensorMonitoringHiddenFragment extends ParentFragment{
 		}
 	}
 	public void ClickESC(){
-		ClickOK();
+		StartEnableButtonTimer();
 	}
 	public void ClickEnter(){
 		switch (CursurIndex) {
@@ -732,6 +855,16 @@ public class ServiceMenuSensorMonitoringHiddenFragment extends ParentFragment{
 			ClickMaxControl();
 			break;
 		case 6:
+			if(checkMaxControl.isChecked() == true){
+				clickControlMinus();
+			}
+			break;
+		case 7:
+			if(checkMaxControl.isChecked() == true){
+				clickControlPlus();
+			}
+			break;
+		case 8:
 			ClickOK();
 			break;
 		default:
@@ -745,6 +878,8 @@ public class ServiceMenuSensorMonitoringHiddenFragment extends ParentFragment{
 		radioAuto.setPressed(false);
 		radioManual.setPressed(false);
 		checkMaxControl.setPressed(false);
+		imgBtnControlUp.setPressed(false);
+		imgBtnControlDown.setPressed(false);
 		
 		switch (Index) {
 		case 1:
@@ -763,6 +898,12 @@ public class ServiceMenuSensorMonitoringHiddenFragment extends ParentFragment{
 			checkMaxControl.setPressed(true);
 			break;
 		case 6:
+			imgBtnControlDown.setPressed(true);
+			break;
+		case 7:
+			imgBtnControlUp.setPressed(true);
+			break;
+		case 8:
 			imgbtnOK.setPressed(true);
 			break;
 		default:

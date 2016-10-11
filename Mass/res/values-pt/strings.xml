@@ -492,4 +492,7 @@
 	<string name="Calibration_Fail_Bucket_Position_Error">Calibration Fail\nBucket Position error</string>
 	<string name="Calibration_Fail_Engine_Rpm_Error">Calibration Fail\nEngine Rpm error</string>
 	<string name="Calibration_Fail_Lever_Position_Error">Calibration Fail\nLever Position error</string>
+	<string name="Max_Control_Fan_Speed">Max Control Fan Speed</string>
+	<string name="Max_Mode">Max Mode</string>
+	<string name="Not_Available">Not Available</string>
 </resources>
