@@ -149,7 +149,7 @@ public class QuickCouplerPopupLocking2 extends ParentPopup{
 		textViewTitle.setText(getString(ParentActivity.getResources().getString(string.Excuting_Locking_Attachment), 450));
 		
 		textViewCancel = (TextFitTextView)mRoot.findViewById(R.id.textView_popup_key_quickcoupler_locking_2_cancel);
-		textViewCancel.setText(getString(ParentActivity.getResources().getString(string.Complete), 16));
+		textViewCancel.setText(getString(ParentActivity.getResources().getString(string.Complete), 351));
 	}
 
 	@Override

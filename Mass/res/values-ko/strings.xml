@@ -182,7 +182,7 @@
     <string name="Save_Position">위치 저장</string>
     <string name="Forward">전진</string>
     <string name="Backward">후진</string>
-    <string name="Excuting_Locking_Attachment">작업장치 잠금 실행 중입니다.</string>
+    <string name="Excuting_Locking_Attachment">작업장치 잠금 중입니다.</string>
     <string name="Excuting_Unlocking_Attachment">작업장치 잠금 해제 진행 중입니다.</string>
     <string name="Attachment_Unlocked_Check_Locking_Status">작업장치 잠금을 해제하였습니다. 잠김 상태를 확인하세요.</string>
     <string name="Do_you_want_to_turn_on_Mirror_Heat">미러히트를 실행하시겠습니까?</string>

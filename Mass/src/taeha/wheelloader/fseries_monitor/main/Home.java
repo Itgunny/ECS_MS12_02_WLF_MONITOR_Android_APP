@@ -80,7 +80,7 @@ public class Home extends Activity {
 	public static final int VERSION_LOW 		= 4;
 	public static final int VERSION_SUB_HIGH 	= 1;
 	public static final int VERSION_SUB_LOW 	= 0;
-	public static final int VERSION_TAEHA		= 1;
+	public static final int VERSION_TAEHA		= 2;
 	// UI B 안 최초 적용 2014.12.10
 	////1.0.2.4
 	// Eco Gauge Pivot 함수 추가(Progress Bar가 가운데서
@@ -785,6 +785,8 @@ public class Home extends Activity {
 	////v2.4.2.00
 	// 1. Quick Coupler 기능 UI 수정 
 	// 2. Cooling Fan Max RPM Adjust 기능 추가
+	////v2.4.1.02
+	// 1. Quick Coupler 문구 변경
 	//////////////////////////////////////////////////////////////////////////////////////
 	// TAG
 	private  final String TAG = "Home";
