@@ -93,7 +93,6 @@
     
 
     <RelativeLayout
-        android:id="@+id/relativeLayout_menu_body_management_service_hidden_fanreverse_auto_manual"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_above="@+id/Relativelayout_menu_body_management_service_sensormonitoring_hidden_low"
@@ -103,16 +102,17 @@
 			<RadioGroup
 			    android:id="@+id/radioGroup_menu_body_mode_coolingfanreversemode_mode"
 			    android:layout_width="wrap_content"
-			    android:layout_height="match_parent"
-			    android:layout_marginTop ="20dp"
-			    android:layout_marginLeft="155dp"
-			    android:orientation="vertical"
+			    android:layout_height="wrap_content"
+			    android:layout_toRightOf="@+id/imageView_menu_body_management_service_sensormonitoring_hidden_coolingfan_manual"
+			    android:layout_marginLeft="20dp"
+			    android:layout_centerVertical="true"
+			    android:orientation="horizontal"
 			    android:splitMotionEvents="false" >
 			
 			    <taeha.wheelloader.fseries_monitor.main.RadioButtonTextView
 			        android:id="@+id/radioButton_menu_body_management_service_sensormonitoring_hidden_auto"
-			        android:layout_width="150dp"
-			        android:layout_height="50dp"
+			        android:layout_width="200dp"
+			        android:layout_height="wrap_content"
 			        android:button="@drawable/_selector_radio_btn"
 			        android:text="@string/Automatic"
 			        android:textColor="@drawable/_selector_radio_txt_white_amber"
@@ -120,9 +120,9 @@
 			
 			    <taeha.wheelloader.fseries_monitor.main.RadioButtonTextView
 			        android:id="@+id/radioButton_menu_body_management_service_sensormonitoring_hidden_manual"
-			        android:layout_width="150dp"
-			        android:layout_height="50dp"
-			        android:layout_below="@+id/radioButton_menu_body_management_service_sensormonitoring_hidden_auto"
+			        android:layout_width="200dp"
+			        android:layout_height="wrap_content"
+			        android:layout_marginLeft="10dp"
 			        android:button="@drawable/_selector_radio_btn"
 			        android:text="@string/Manual"
 			        android:textColor="@drawable/_selector_radio_txt_white_amber"
@@ -133,98 +133,59 @@
                 android:id="@+id/imageView_menu_body_management_service_sensormonitoring_hidden_coolingfan_manual"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
                 android:layout_alignParentLeft="true"
-                android:layout_marginTop ="20dp"
-                android:layout_marginLeft="40dp"
+                android:layout_marginLeft="20dp"
                 android:layout_marginRight="40dp"
                 android:background="@drawable/menu_mode_fan_manual_icon_gray_popup" />
 	        
 	         <taeha.wheelloader.fseries_monitor.main.TextFitTextView
                 android:id="@+id/textView_menu_body_management_service_sensormonitoring_hidden_excute"
-                android:layout_width="150dp"
+                android:layout_width="170dp"
                 android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="20dp"
                 android:layout_centerVertical="true"
-                android:layout_marginLeft="310dp"
             	android:background="@drawable/_selector_menu_body_monitoring_fault_btn1"
                 android:gravity="center"
                 android:text="@string/Excute"
                 android:textAppearance="?android:attr/textAppearanceLarge" />
 	        
 	    
-<taeha.wheelloader.fseries_monitor.main.TextFitTextView
-	android:id="@+id/textView_menu_body_management_service_sensormonitoring_hidden_maxcontrol"
-
-android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-            android:layout_marginLeft="480dp"
-            android:gravity="center"
-            android:text="Max Control Fan Speed"
-            android:textAppearance="?android:attr/textAppearanceLarge"
-            android:textColor="#FFB400"
-            android:textSize="25sp" />
+            </RelativeLayout>    
         
-        <CheckBox
-            android:id="@+id/checkBox_menu_body_management_service_sensormonitoring_hidden_maxcontrol_check"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_toRightOf="@+id/textView_menu_body_management_service_sensormonitoring_hidden_maxcontrol"
-            android:layout_marginLeft="10dp"
-
-android:button="@drawable/_selector_check_btn"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-            android:textColor="@drawable/_selector_radio_txt_white_amber" />
-        
-        <taeha.wheelloader.fseries_monitor.main.TextFitTextView
-            android:id="@+id/textView_menu_body_management_service_sensormonitoring_hidden_maxcontrol_mode"
-            android:layout_width="130dp"
-            android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:layout_toRightOf="@+id/imageButton_menu_body_management_service_sensormonitoring_hidden_maxcontrol_minus"
-            android:text="Max Mode : "
-            android:layout_marginLeft="20dp"
-            android:textAppearance="?android:attr/textAppearanceLarge"
-            android:textColor="@color/white"
-            android:textSize="20sp" />
-        
-        <ImageButton
-            android:id="@+id/imageButton_menu_body_management_service_sensormonitoring_hidden_maxcontrol_plus"
+        <RelativeLayout
+            android:id="@+id/Relativelayout_menu_body_management_service_sensormonitoring_hidden_low"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="20dp"
-            android:layout_centerVertical="true"
-            android:layout_toRightOf="@+id/textView_menu_body_management_service_sensormonitoring_hidden_maxcontrol_mode"
-            android:background="@drawable/_selector_menu_body_management_service_plus_btn1" />
-                        <ImageButton
-            android:id="@+id/imageButton_menu_body_management_service_sensormonitoring_hidden_maxcontrol_minus"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-			android:layout_centerVertical="true"
-			android:layout_alignLeft="@+id/textView_menu_body_management_service_sensormonitoring_hidden_maxcontrol"
-            android:background="@drawable/_selector_menu_body_management_service_minus_btn1" />
-
-
-
-	</RelativeLayout>    
-
-    <RelativeLayout
-        android:id="@+id/Relativelayout_menu_body_management_service_sensormonitoring_hidden_low"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:splitMotionEvents="false" >
-
-        <ImageView
+            android:layout_alignParentBottom="true"
+            android:splitMotionEvents="false" >
+                                    <ImageView
             android:id="@+id/imageView_menu_body_management_service_sensormonitoring_hidden_low_bg"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/menu_low_bg" />
+			android:src="@drawable/menu_low_bg" />
+
+
+<CheckBox
+
+android:id="@+id/checkBox_menu_body_management_service_sensormonitoring_hidden_low_maxcontrol"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="50dp"
+
+android:layout_centerVertical="true"
+        android:button="@drawable/_selector_check_btn"
+            android:paddingLeft="25dp"
+            android:text="Max Control Fan Speed"
+            android:textColor="@drawable/_selector_radio_txt_white_amber"
+            android:textAppearance="?android:attr/textAppearanceLarge" />
 
         <taeha.wheelloader.fseries_monitor.main.TextFitTextView
             android:id="@+id/textView_menu_body_management_service_sensormonitoring_hidden_low_maxcontrol"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_toRightOf="@+id/checkBox_menu_body_management_service_sensormonitoring_hidden_low_maxcontrol"
             android:layout_centerVertical="true"
             android:text="0"
             android:textAppearance="?android:attr/textAppearanceLarge" />

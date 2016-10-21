@@ -5,6 +5,7 @@ import taeha.wheelloader.fseries_monitor.main.Home;
 import taeha.wheelloader.fseries_monitor.main.ParentPopup;
 import taeha.wheelloader.fseries_monitor.main.R;
 import taeha.wheelloader.fseries_monitor.main.TextFitTextView;
+import taeha.wheelloader.fseries_monitor.main.R.string;
 import android.content.Context;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
@@ -79,13 +80,13 @@ public class FanSelectModePopup extends ParentPopup{
 	protected void InitResource() {
 		// TODO Auto-generated method stub
 		textViewTitle = (TextFitTextView)mRoot.findViewById(R.id.textView_popup_fanmode_title);
-		textViewTitle.setText("Select Mode");
+		textViewTitle.setText(getString(ParentActivity.getResources().getString(string.Select_Mode), 494));
 		textViewMode1 = (TextFitTextView)mRoot.findViewById(R.id.textView_popup_fanmode_1);
-		textViewMode1.setText("Adjust Mode");
+		textViewMode1.setText(getString(ParentActivity.getResources().getString(string.Adjust_Mode), 495));
 		textViewMode2 = (TextFitTextView)mRoot.findViewById(R.id.textView_popup_fanmode_2);
-		textViewMode2.setText("Fan Speed Max Mode");
+		textViewMode2.setText(getString(ParentActivity.getResources().getString(string.Fan_Speed_Max_Mode), 496));
 		textViewMode3 = (TextFitTextView)mRoot.findViewById(R.id.textView_popup_fanmode_3);
-		textViewMode3.setText("Fan Reverse Mode");
+		textViewMode3.setText(getString(ParentActivity.getResources().getString(string.Fan_Reverse_Mode), 497));
 	}
 
 	@Override

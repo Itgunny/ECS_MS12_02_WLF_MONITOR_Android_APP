@@ -56,7 +56,7 @@ public class ServiceMenuSensorMonitoringHiddenFragment extends ParentFragment{
 	TextFitTextView textViewMaxControl;
 	
 	// TextView
-	TextFitTextView textViewControlEpprTitle;
+	//TextFitTextView textViewControlEpprTitle;
 	TextFitTextView textViewControlEpprData;
 	
 	// ListView
@@ -177,8 +177,6 @@ public class ServiceMenuSensorMonitoringHiddenFragment extends ParentFragment{
 		textViewMaxControl = (TextFitTextView)mRoot.findViewById(R.id.textView_menu_body_management_service_sensormonitoring_hidden_low_maxcontrol);
 	
 		// TextView
-		textViewControlEpprTitle = (TextFitTextView)mRoot.findViewById(R.id.textView_menu_body_management_service_sensormonitoring_hidden_maxcontrol);
-		textViewControlEpprTitle.setText("Max Control Fan Speed");
 		textViewControlEpprData = (TextFitTextView)mRoot.findViewById(R.id.textView_menu_body_management_service_sensormonitoring_hidden_maxcontrol_mode);
 		textViewControlEpprData.setText("Max Mode : ");
 		
@@ -327,6 +325,8 @@ public class ServiceMenuSensorMonitoringHiddenFragment extends ParentFragment{
 	/////////////////////////////////////////////////////////////////////
 	public void SetSelectMode(int index){
 		SelectMode = index;
+		int rpm = CAN1Comm.Get_EngineSpeed_310_PGN65431();
+		int AlternatorVoltage = CAN1Comm.Get_AlternatorVoltage_707_PGN65360();
 		
 		imgbtnDown.setClickable(false);
 		imgbtnUp.setClickable(false);
@@ -335,7 +335,7 @@ public class ServiceMenuSensorMonitoringHiddenFragment extends ParentFragment{
 		textViewExcute.setClickable(false);
 		checkMaxControl.setClickable(false);
 		textViewMaxControl.setClickable(false);
-		textViewControlEpprTitle.setClickable(false);
+		//textViewControlEpprTitle.setClickable(false);
 		textViewControlEpprData.setClickable(false);
 		imgBtnControlUp.setClickable(false);
 		imgBtnControlDown.setClickable(false);
@@ -347,7 +347,7 @@ public class ServiceMenuSensorMonitoringHiddenFragment extends ParentFragment{
 		textViewExcute.setAlpha((float)0.5);
 		checkMaxControl.setAlpha((float)0.5);
 		textViewMaxControl.setAlpha((float)0.5);	
-		textViewControlEpprTitle.setAlpha((float)0.5);
+		//textViewControlEpprTitle.setAlpha((float)0.5);
 		textViewControlEpprData.setAlpha((float)0.5);
 		imgBtnControlUp.setAlpha((float)0.5);
 		imgBtnControlDown.setAlpha((float)0.5);	
@@ -361,31 +361,47 @@ public class ServiceMenuSensorMonitoringHiddenFragment extends ParentFragment{
 				CursurIndex = 1;
 				break;
 			case FAN_SPEED_MAX_MODE:
-				
-				if(checkMaxControl.isChecked() == true){
-					textViewControlEpprTitle.setClickable(true);
-					textViewControlEpprData.setClickable(true);
-					imgBtnControlUp.setClickable(true);
-					imgBtnControlDown.setClickable(true);
-					checkMaxControl.setClickable(true);
-					textViewControlEpprTitle.setAlpha((float)1);
-					textViewControlEpprData.setAlpha((float)1);
-					imgBtnControlUp.setAlpha((float)1);
-					imgBtnControlDown.setAlpha((float)1);
-					checkMaxControl.setAlpha((float)1);
-				}else {
-					textViewControlEpprTitle.setClickable(true);
-					textViewControlEpprData.setClickable(true);
+				if((rpm >= 500 && rpm < 8031) && (AlternatorVoltage > 255 && AlternatorVoltage <= 360))
+				{
+					if(checkMaxControl.isChecked() == true){
+						//textViewControlEpprTitle.setClickable(true);
+						textViewControlEpprData.setClickable(true);
+						imgBtnControlUp.setClickable(true);
+						imgBtnControlDown.setClickable(true);
+						checkMaxControl.setClickable(true);
+						//textViewControlEpprTitle.setAlpha((float)1);
+						textViewControlEpprData.setAlpha((float)1);
+						imgBtnControlUp.setAlpha((float)1);
+						imgBtnControlDown.setAlpha((float)1);
+						checkMaxControl.setAlpha((float)1);
+					}else {
+						//textViewControlEpprTitle.setClickable(true);
+						textViewControlEpprData.setClickable(true);
+						imgBtnControlUp.setClickable(false);
+						imgBtnControlDown.setClickable(false);
+						checkMaxControl.setClickable(true);
+					//	textViewControlEpprTitle.setAlpha((float)1);
+						textViewControlEpprData.setAlpha((float)1);
+						imgBtnControlUp.setAlpha((float)0.5);
+						imgBtnControlDown.setAlpha((float)0.5);
+						checkMaxControl.setAlpha((float)1);
+						
+					}
+					CursurIndex = 5;
+				} else {
+					checkMaxControl.setClickable(false);
+					textViewMaxControl.setClickable(false);
+					textViewControlEpprData.setClickable(false);
 					imgBtnControlUp.setClickable(false);
 					imgBtnControlDown.setClickable(false);
-					checkMaxControl.setClickable(true);
-					textViewControlEpprTitle.setAlpha((float)1);
-					textViewControlEpprData.setAlpha((float)1);
+		
+					checkMaxControl.setAlpha((float)0.5);
+					textViewMaxControl.setAlpha((float)0.5);	
+					textViewControlEpprData.setAlpha((float)0.5);
 					imgBtnControlUp.setAlpha((float)0.5);
 					imgBtnControlDown.setAlpha((float)0.5);
-					checkMaxControl.setAlpha((float)1);
 				}
-				CursurIndex = 5;
+				
 				break;
 			case FAN_REVERSE_MODE:
 				radioAuto.setClickable(true);
@@ -829,6 +845,12 @@ public class ServiceMenuSensorMonitoringHiddenFragment extends ParentFragment{
 		StartEnableButtonTimer();
 	}
 	public void ClickEnter(){
+		int rpm = CAN1Comm.Get_EngineSpeed_310_PGN65431();
+		int AlternatorVoltage = CAN1Comm.Get_AlternatorVoltage_707_PGN65360();
+		
+		Log.d(TAG, "rpm="+rpm+"AlternatorVoltage"+AlternatorVoltage);
+
+		
 		switch (CursurIndex) {
 		case 1:
 			ClickMinus();
@@ -846,22 +868,32 @@ public class ServiceMenuSensorMonitoringHiddenFragment extends ParentFragment{
 			setCoolingFanReverseRadio(CoolingFanReverse);
 			ClickManual();
 			break;			
+		
 		case 5:
-			if(checkMaxControl.isChecked() == true){
-				checkMaxControl.setChecked(false);
-			}else{
-				checkMaxControl.setChecked(true);
-			}
-			ClickMaxControl();
+			if((rpm >= 500 && rpm < 8031) && (AlternatorVoltage > 255 && AlternatorVoltage <= 360))
+			{
+				if(checkMaxControl.isChecked() == true){
+					checkMaxControl.setChecked(false);
+				}else{
+					checkMaxControl.setChecked(true);
+				}
+				ClickMaxControl();
+			} 
 			break;
 		case 6:
-			if(checkMaxControl.isChecked() == true){
-				clickControlMinus();
+			if((rpm >= 500 && rpm < 8031) && (AlternatorVoltage > 255 && AlternatorVoltage <= 360))
+			{
+				if(checkMaxControl.isChecked() == true){
+					clickControlMinus();
+				}
 			}
 			break;
 		case 7:
-			if(checkMaxControl.isChecked() == true){
-				clickControlPlus();
+			if((rpm >= 500 && rpm < 8031) && (AlternatorVoltage > 255 && AlternatorVoltage <= 360))
+			{
+				if(checkMaxControl.isChecked() == true){
+					clickControlPlus();
+				}
 			}
 			break;
 		case 8:
