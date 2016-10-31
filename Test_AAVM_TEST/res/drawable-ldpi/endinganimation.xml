@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<animation-list xmlns:android="http://schemas.android.com/apk/res/android"
+    android:oneshot="true" >
+    <item android:drawable="@drawable/outro_01" android:duration="27" />
+	<item android:drawable="@drawable/outro_02" android:duration="27" />
+	<item android:drawable="@drawable/outro_03" android:duration="27" />
+	<item android:drawable="@drawable/outro_04" android:duration="27" />
+	<item android:drawable="@drawable/outro_05" android:duration="27" />
+	<item android:drawable="@drawable/outro_06" android:duration="27" />
+	<item android:drawable="@drawable/outro_07" android:duration="27" />
+	<item android:drawable="@drawable/outro_08" android:duration="27" />
+	<item android:drawable="@drawable/outro_09" android:duration="27" />
+	<item android:drawable="@drawable/outro_10" android:duration="27" />
+	<item android:drawable="@drawable/outro_11" android:duration="27" />
+	<item android:drawable="@drawable/outro_12" android:duration="27" />
+	<item android:drawable="@drawable/outro_13" android:duration="27" />
+	<item android:drawable="@drawable/outro_14" android:duration="27" />
+	<item android:drawable="@drawable/outro_15" android:duration="27" />
+	<item android:drawable="@drawable/outro_16" android:duration="27" />
+	<item android:drawable="@drawable/outro_17" android:duration="27" />
+	<item android:drawable="@drawable/outro_18" android:duration="27" />
+	<item android:drawable="@drawable/outro_19" android:duration="27" />
+	<item android:drawable="@drawable/outro_20" android:duration="27" />
+	<item android:drawable="@drawable/outro_21" android:duration="27" />
+	<item android:drawable="@drawable/outro_22" android:duration="27" />
+	<item android:drawable="@drawable/outro_23" android:duration="27" />
+	<item android:drawable="@drawable/outro_24" android:duration="27" />
+	<item android:drawable="@drawable/outro_25" android:duration="27" />
+	<item android:drawable="@drawable/outro_26" android:duration="27" />
+	<item android:drawable="@drawable/outro_27" android:duration="27" />
+	<item android:drawable="@drawable/outro_28" android:duration="27" />
+	<item android:drawable="@drawable/outro_29" android:duration="27" />
+	<item android:drawable="@drawable/outro_30" android:duration="27" />
+	<item android:drawable="@drawable/outro_31" android:duration="27" />
+	<item android:drawable="@drawable/outro_32" android:duration="27" />
+	<item android:drawable="@drawable/outro_33" android:duration="27" />
+	<item android:drawable="@drawable/outro_34" android:duration="27" />
+	<item android:drawable="@drawable/outro_35" android:duration="27" />
+	<item android:drawable="@drawable/outro_36" android:duration="27" />
+	<item android:drawable="@drawable/outro_37" android:duration="27" />
+	<item android:drawable="@drawable/outro_38" android:duration="27" />
+	<item android:drawable="@drawable/outro_39" android:duration="27" />
+	<item android:drawable="@drawable/outro_40" android:duration="27" />
+	<item android:drawable="@drawable/outro_41" android:duration="27" />
+	<item android:drawable="@drawable/outro_42" android:duration="27" />
+	<item android:drawable="@drawable/outro_43" android:duration="27" />
+	<item android:drawable="@drawable/outro_44" android:duration="27" />
+	<item android:drawable="@drawable/outro_45" android:duration="27" />
+	<item android:drawable="@drawable/outro_46" android:duration="27" />
+	<item android:drawable="@drawable/outro_47" android:duration="27" />
+	<item android:drawable="@drawable/outro_48" android:duration="27" />
+	<item android:drawable="@drawable/outro_49" android:duration="27" />
+	<item android:drawable="@drawable/outro_50" android:duration="27" />
+	<item android:drawable="@drawable/outro_51" android:duration="27" />
+	<item android:drawable="@drawable/outro_52" android:duration="27" />
+	<item android:drawable="@drawable/outro_53" android:duration="27" />
+	<item android:drawable="@drawable/outro_54" android:duration="27" />
+	<item android:drawable="@drawable/outro_55" android:duration="27" />
+	<item android:drawable="@drawable/outro_56" android:duration="27" />
+	<item android:drawable="@drawable/outro_57" android:duration="27" />
+	<item android:drawable="@drawable/outro_58" android:duration="27" />
+	<item android:drawable="@drawable/outro_59" android:duration="27" />
+	<item android:drawable="@drawable/outro_60" android:duration="27" />
+
+
+
+	
+
+</animation-list>

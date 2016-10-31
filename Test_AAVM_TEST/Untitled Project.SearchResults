@@ -1,0 +1,13 @@
+---- checkAAVM Matches (12 in 3 files) ----
+CommService.java (src\taeha\wheelloader\fseries_monitor\main):					if(Home.checkAAVM()) {
+Home.java (src\taeha\wheelloader\fseries_monitor\main):					if (!checkAAVM()) {
+Home.java (src\taeha\wheelloader\fseries_monitor\main):		if (checkAAVM()) {
+Home.java (src\taeha\wheelloader\fseries_monitor\main):				if (checkAAVM() == true) {
+Home.java (src\taeha\wheelloader\fseries_monitor\main):		if (checkAAVM()) {
+Home.java (src\taeha\wheelloader\fseries_monitor\main):	public static boolean checkAAVM() {
+Home.java (src\taeha\wheelloader\fseries_monitor\main):			if (checkAAVM()) {
+Home.java (src\taeha\wheelloader\fseries_monitor\main):						if (checkAAVM()) {
+Home.java (src\taeha\wheelloader\fseries_monitor\main):						if (checkAAVM()) {
+Home.java (src\taeha\wheelloader\fseries_monitor\main):				if(checkAAVM()){
+MenuPreferenceFragment.java (src\taeha\wheelloader\fseries_monitor\menu\preference):		if(Home.checkAAVM()){
+MenuPreferenceFragment.java (src\taeha\wheelloader\fseries_monitor\menu\preference):		if(Home.checkAAVM()){

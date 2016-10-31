@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/RelativeLayout_key_main_a_rearwiper"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/main_a_bg_right" 
+    android:splitMotionEvents="false">
+    
+    <RadioGroup
+        android:id="@+id/radioGroup_key_main_a_rearwiper"
+        android:layout_width="280dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="205dp"
+        android:layout_centerVertical="true" 
+        android:splitMotionEvents="false">
+
+       <RadioButton
+           android:id="@+id/radioButton_key_main_a_rearwiper_off"
+           android:layout_width="250dp"
+           android:layout_height="wrap_content"
+           android:drawablePadding="20dip"
+           android:button="@null"
+           android:drawableRight="@drawable/_selector_radio_btn"
+           android:gravity="right"
+           android:text="@string/Off"
+           android:textColor="@drawable/_selector_radio_txt_white_amber"
+           android:singleLine="true"
+           android:textSize="25sp" />
+
+       <RadioButton
+           android:id="@+id/radioButton_key_main_a_rearwiper_intermittent"
+           android:layout_width="250dp"
+           android:layout_height="wrap_content"
+           android:layout_marginTop="40dp"
+           android:drawablePadding="20dip"
+           android:button="@null"
+           android:drawableRight="@drawable/_selector_radio_btn"
+           android:gravity="right"
+           android:text="@string/Intermittent"
+           android:textColor="@drawable/_selector_radio_txt_white_amber"
+           android:singleLine="true"
+           android:textSize="25sp" />
+       
+       <RadioButton
+           android:id="@+id/radioButton_key_main_a_rearwiper_low"
+           android:layout_width="250dp"
+           android:layout_height="wrap_content"
+           android:layout_marginTop="40dp"
+           android:drawablePadding="20dip"
+           android:button="@null"
+           android:drawableRight="@drawable/_selector_radio_btn"
+           android:gravity="right"
+           android:text="@string/Low"
+           android:textColor="@drawable/_selector_radio_txt_white_amber"
+           android:singleLine="true"
+           android:textSize="25sp" />
+
+   </RadioGroup>
+
+    <taeha.wheelloader.fseries_monitor.main.TextFitTextView
+        android:id="@+id/textView_key_main_a_rearwiper_washer"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="500dp"
+       	android:layout_centerVertical="true"
+        android:background="@drawable/_selector_key_rearwiper_washer_btn1"
+        android:gravity="center"
+        android:text="@string/Washer"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
+
+    <ImageView
+        android:id="@+id/imageView_key_main_a_rearwiper_washer_boarder"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="500dp"
+       	android:layout_centerVertical="true"
+        android:gravity="center"
+        android:src="@drawable/main_key_washer_btn_s02" />
+    
+</RelativeLayout>

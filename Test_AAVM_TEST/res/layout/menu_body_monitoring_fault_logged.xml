@@ -1,0 +1,312 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" 
+    android:splitMotionEvents="false">
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/Relativelayout_menu_body_monitoring_fault_logged_low"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true" 
+        android:splitMotionEvents="false">
+        
+        <ImageView
+            android:id="@+id/imageView_menu_body_monitoring_fault_logged_centerline"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:src="@drawable/menu_information_fault_line_vertical" />
+        
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentTop="true"
+            android:layout_toLeftOf="@+id/imageView_menu_body_monitoring_fault_logged_centerline" 
+            android:splitMotionEvents="false">
+	
+	        <RadioGroup
+	            android:id="@+id/radioGroup_menu_body_monitoring_fault"
+	            android:layout_width="wrap_content"
+	            android:layout_height="wrap_content"
+	            android:layout_centerVertical="true"
+	            android:layout_marginLeft="40dp" 
+	            android:splitMotionEvents="false">
+	
+		       <RadioButton
+		           android:id="@+id/radioButton_menu_body_monitoring_fault_machine"
+		           android:layout_width="300dp"
+		           android:layout_height="wrap_content"
+		           android:button="@drawable/_selector_radio_btn"
+		           android:text="@string/Machine"
+		           android:textColor="@drawable/_selector_radio_txt_white_amber"
+		           android:singleLine="true"
+		           android:textSize="25sp" />
+		
+		       <RadioButton
+		           android:id="@+id/radioButton_menu_body_monitoring_fault_engine"
+		           android:layout_width="300dp"
+		           android:layout_height="wrap_content"
+		           android:layout_marginTop="25dp"
+		           android:button="@drawable/_selector_radio_btn"
+		           android:text="@string/Engine"
+		           android:textColor="@drawable/_selector_radio_txt_white_amber"
+		           android:singleLine="true"
+		           android:textSize="25sp" />
+		
+		       <RadioButton
+		           android:id="@+id/radioButton_menu_body_monitoring_fault_transmission"
+		           android:layout_width="300dp"
+		           android:layout_height="wrap_content"
+		           android:layout_marginTop="25dp"
+		           android:button="@drawable/_selector_radio_btn"
+		           android:text="@string/Transmission"
+		           android:textColor="@drawable/_selector_radio_txt_white_amber"
+		           android:singleLine="true"
+		           android:textSize="25sp" />
+		       
+		       <RadioButton
+		           android:id="@+id/radioButton_menu_body_monitoring_fault_ehcu"
+		           android:layout_width="300dp"
+		           android:layout_height="wrap_content"
+		           android:layout_marginTop="25dp"
+		           android:button="@drawable/_selector_radio_btn"
+		           android:text="@string/EHCU"
+		           android:textColor="@drawable/_selector_radio_txt_white_amber"
+		           android:singleLine="true"
+		           android:textSize="25sp" />
+		       
+		      <RadioButton
+		           android:id="@+id/radioButton_menu_body_monitoring_fault_acu"
+		           android:layout_width="300dp"
+		           android:layout_height="wrap_content"
+		           android:layout_marginTop="25dp"
+		           android:button="@drawable/_selector_radio_btn"
+		           android:text="@string/FATC"
+		           android:textColor="@drawable/_selector_radio_txt_white_amber"
+		           android:singleLine="true"
+		           android:textSize="25sp"
+		           android:visibility="gone" />
+		      <RadioButton
+		           android:id="@+id/radioButton_menu_body_monitoring_fault_aavm"
+		           android:layout_width="300dp"
+		           android:layout_height="wrap_content"
+		           android:layout_marginTop="25dp"
+		           android:button="@drawable/_selector_radio_btn"
+		           android:text="@string/AAVM"
+		           android:textColor="@drawable/_selector_radio_txt_white_amber"
+		           android:singleLine="true"
+		           android:textSize="25sp"
+		           android:visibility="gone" />	
+		       
+</RadioGroup>
+		    
+	    </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentTop="true"
+            android:layout_toRightOf="@+id/imageView_menu_body_monitoring_fault_logged_centerline" 
+            android:splitMotionEvents="false">
+	        
+            <ImageView
+                android:id="@+id/imageView_menu_body_monitoring_fault_logged_list_title_line"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_centerVertical="false"
+                android:layout_marginTop="60dp"
+                android:src="@drawable/menu_information_fault_line_horizontal1" />
+
+            <taeha.wheelloader.fseries_monitor.main.TextFitTextView
+                android:id="@+id/textView_menu_body_monitoring_fault_logged_list_title"
+                android:layout_width="180dp"
+                android:layout_height="wrap_content"
+                android:layout_alignBottom="@+id/imageView_menu_body_monitoring_fault_logged_list_title_line"
+                android:layout_alignParentTop="true"
+                android:layout_marginLeft="10dp"
+                android:gravity="left|center_vertical"
+                android:text="Large Text"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:textColor="@color/menu_left_amber" />
+            
+            <taeha.wheelloader.fseries_monitor.main.TextFitTextView
+                android:id="@+id/textView_menu_body_monitoring_fault_logged_list_delete"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="10dp"
+                android:layout_marginTop="5dp"
+                android:background="@drawable/_selector_menu_body_monitoring_fault_btn1"
+                android:gravity="center"
+                android:text="@string/Delete"
+                android:textAppearance="?android:attr/textAppearanceLarge" />
+
+            <RelativeLayout
+                android:id="@+id/RelativeLayout_menu_body_monitoring_fault_logged_detail"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentRight="true"
+                android:layout_below="@+id/imageView_menu_body_monitoring_fault_logged_list_title_line"
+                android:visibility="invisible" 
+                android:splitMotionEvents="false">
+
+                <taeha.wheelloader.fseries_monitor.main.TextFitTextView
+                    android:id="@+id/textView_menu_body_monitoring_fault_logged_detail_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignBottom="@+id/imageView_menu_body_monitoring_fault_logged_detail_title_icon"
+                    android:layout_alignLeft="@+id/imageView_menu_body_monitoring_fault_logged_detail_title_line"
+                    android:layout_alignRight="@+id/imageView_menu_body_monitoring_fault_logged_detail_title_line"
+                    android:layout_alignTop="@+id/imageView_menu_body_monitoring_fault_logged_detail_title_icon"
+                    android:layout_marginLeft="20dp"
+                    android:gravity="center_vertical"
+                    android:text="Large Text"
+                    android:textColor="@drawable/_selector_menu_body_monitoring_fault_txt"
+                    android:textSize="25sp" />
+		       
+                <ImageView
+                    android:id="@+id/imageView_menu_body_monitoring_fault_logged_detail_title_line"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:layout_centerVertical="false"
+                    android:layout_marginTop="46dp"
+                    android:src="@drawable/menu_information_fault_line_horizontal2" />
+                
+                <ImageView
+                    android:id="@+id/imageView_menu_body_monitoring_fault_logged_detail_title_icon"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentTop="true"
+                    android:layout_centerHorizontal="true"
+                    android:layout_alignBottom="@+id/imageView_menu_body_monitoring_fault_logged_detail_title_line"
+                    android:layout_alignRight="@+id/imageView_menu_body_monitoring_fault_logged_detail_title_line"
+                    android:src="@drawable/menu_information_fault_up_btn_selected"/>
+                
+                <TextView
+                    android:id="@+id/textView_menu_body_monitoring_fault_logged_detail_data"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignLeft="@+id/imageView_menu_body_monitoring_fault_logged_detail_title_line"
+                    android:layout_alignParentBottom="true"
+                    android:layout_alignRight="@+id/imageView_menu_body_monitoring_fault_logged_detail_title_line"
+                    android:layout_below="@+id/imageView_menu_body_monitoring_fault_logged_detail_title_line"
+                    android:layout_marginLeft="10dp"
+                    android:gravity="center"
+                    android:text="Large Text"
+                    android:textAppearance="?android:attr/textAppearanceLarge" />
+
+            </RelativeLayout>
+
+            <ListView
+                android:id="@+id/listView_menu_body_monitoring_fault_logged_list"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/imageView_menu_body_monitoring_fault_logged_list_title_line"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:listSelector="@drawable/_selector_menu_monitoring_fault_listview_btn"
+                android:divider="@drawable/menu_information_fault_line_horizontal2" >
+
+            </ListView>
+
+        </RelativeLayout>
+
+    </RelativeLayout>
+    
+    <RelativeLayout
+        android:id="@+id/Relativelayout_menu_body_monitoring_fault_logged_low"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true" 
+        android:splitMotionEvents="false">
+       
+        <ImageView
+            android:id="@+id/imageView_menu_body_monitoring_fault_logged_low_bg"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/menu_low_bg" />
+	   
+	    <ImageButton
+	        android:id="@+id/ImageButton_menu_body_monitoring_fault_logged_low_ok"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:layout_alignBottom="@+id/imageView_menu_body_monitoring_fault_logged_low_bg"
+	        android:layout_alignRight="@+id/imageView_menu_body_monitoring_fault_logged_low_bg"
+	        android:background="@drawable/_selector_menu_low_right_btn" />
+	
+	    <ImageView
+	        android:id="@+id/imageView_menu_body_monitoring_fault_logged_low_line"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:layout_alignBottom="@+id/ImageButton_menu_body_monitoring_fault_logged_low_ok"
+	        android:layout_alignLeft="@+id/ImageButton_menu_body_monitoring_fault_logged_low_ok"
+	        android:src="@drawable/main_key_low_line" />
+	    
+	    <RelativeLayout
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:layout_alignBottom="@+id/ImageButton_menu_body_monitoring_fault_logged_low_ok"
+	        android:layout_alignLeft="@+id/ImageButton_menu_body_monitoring_fault_logged_low_ok"
+	        android:layout_alignRight="@+id/ImageButton_menu_body_monitoring_fault_logged_low_ok"
+	        android:layout_alignTop="@+id/ImageButton_menu_body_monitoring_fault_logged_low_ok" 
+	        android:splitMotionEvents="false">
+	
+	        <LinearLayout
+	            android:layout_width="wrap_content"
+	            android:layout_height="wrap_content"
+	            android:layout_centerHorizontal="true"
+	            android:layout_centerVertical="true" 
+	            android:splitMotionEvents="false">
+	
+	            <ImageView
+	                android:id="@+id/imageView_menu_body_monitoring_fault_logged_low_ok_icon"
+	                android:layout_width="wrap_content"
+	                android:layout_height="wrap_content"
+	                android:layout_alignBottom="@+id/ImageButton_menu_body_monitoring_fault_logged_low_ok"
+	                android:layout_alignLeft="@+id/ImageButton_menu_body_monitoring_fault_logged_low_ok"
+	                android:layout_alignTop="@+id/ImageButton_menu_body_monitoring_fault_logged_low_ok"
+	                android:src="@drawable/menu_low_icon_ok" />
+	
+	            <taeha.wheelloader.fseries_monitor.main.TextFitTextView
+	                android:id="@+id/textView_menu_body_monitoring_fault_logged_low_ok"
+	                android:layout_width="wrap_content"
+	                android:layout_height="match_parent"
+	                android:layout_marginLeft="10dp"
+	                android:gravity="center"
+	                android:text="@string/OK"
+	                android:textAppearance="?android:attr/textAppearanceLarge"
+	                android:textSize="25sp"
+	                android:textStyle="bold" />
+
+	        </LinearLayout>
+	    </RelativeLayout>
+
+	    <taeha.wheelloader.fseries_monitor.main.TextFitTextView
+	        android:id="@+id/textView_menu_body_monitoring_fault_logged_low_as"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:layout_alignBottom="@+id/ImageButton_menu_body_monitoring_fault_logged_low_ok"
+	        android:layout_alignParentLeft="true"
+	        android:layout_alignParentTop="true"
+	        android:layout_toLeftOf="@+id/imageView_menu_body_monitoring_fault_logged_low_line"
+	        android:gravity="center"
+	        android:text="@string/AS"
+	        android:textAppearance="?android:attr/textAppearanceLarge" />
+
+    </RelativeLayout>
+
+    
+
+</RelativeLayout>
