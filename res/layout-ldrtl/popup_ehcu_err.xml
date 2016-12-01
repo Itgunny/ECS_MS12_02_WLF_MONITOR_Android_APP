@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/menu_popup02_bg" 
+    android:splitMotionEvents="false">
+
+    <ImageView
+        android:id="@+id/imageView_popup_ehcu_err_line"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="68dp"
+        android:src="@drawable/menu_popup01_line" />
+
+    <TextView
+        android:id="@+id/textView_popup_ehcu_err_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="25dp"
+        android:text="@string/Check_joystick_steering_enable_fail_condition"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textColor="@color/black"
+        android:textSize="25sp" />
+    
+    <TextView
+        android:id="@+id/textView_popup_ehcu_err_ok"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="250dp"
+        android:background="@drawable/_selector_popup01_long_btn1"
+        android:gravity="center"
+        android:text="@string/OK"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textColor="@color/black" />
+
+    <ScrollView
+        android:id="@+id/scrollView1"
+        android:layout_width="wrap_content"
+        android:layout_height="150dp"
+        android:layout_alignLeft="@+id/textView_popup_ehcu_err_ok"
+        android:layout_alignRight="@+id/textView_popup_ehcu_err_ok"
+        android:layout_below="@+id/imageView_popup_ehcu_err_line" >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical" 
+            android:splitMotionEvents="false">
+
+            <TextView
+                android:id="@+id/textView_popup_ehcu_err_data"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:textColor="@color/black" />
+
+        </LinearLayout>
+    </ScrollView>
+
+</RelativeLayout>

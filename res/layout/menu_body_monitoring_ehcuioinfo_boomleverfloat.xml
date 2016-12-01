@@ -1,0 +1,405 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" 
+    android:splitMotionEvents="false">
+    
+    <ImageView
+        android:id="@+id/imageView_menu_body_monitoring_ehcuioinfo_boomleverfloat_line"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="29dp"
+        android:layout_marginTop="69dp"
+        android:src="@drawable/line_menu_step1" />
+    
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/imageView_menu_body_monitoring_ehcuioinfo_boomleverfloat_line"
+        android:layout_alignLeft="@+id/imageView_menu_body_monitoring_ehcuioinfo_boomleverfloat_line"
+        android:layout_alignParentTop="true"
+        android:layout_alignRight="@+id/imageView_menu_body_monitoring_ehcuioinfo_boomleverfloat_line" 
+        android:splitMotionEvents="false">
+
+        <RadioGroup
+            android:id="@+id/radioGroup_menu_body_monitoring_ehcuioinfo_boomleverfloat"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="20dp"
+            android:orientation="horizontal" 
+            android:splitMotionEvents="false">
+
+            <RadioButton
+                android:id="@+id/radioButton_menu_body_monitoring_ehcuioinfo_boomleverfloat_boomlever"
+                android:layout_width="200dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:button="@drawable/_selector_radio_btn"
+                android:text="@string/Boom_Lever_Floating_Position_Adjust"
+                android:textColor="@drawable/_selector_radio_txt_white_amber"
+                android:textSize="18sp" />
+
+            <RadioButton
+                android:id="@+id/radioButton_menu_body_monitoring_ehcuioinfo_boomleverfloat_boomdown"
+                android:layout_width="200dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="40dp"
+                android:button="@drawable/_selector_radio_btn"
+                android:text="@string/Boom_Down_Response_Adjust"
+                android:textColor="@drawable/_selector_radio_txt_white_amber"
+                android:textSize="18sp" />
+            
+            <RadioButton
+                android:id="@+id/radioButton_menu_body_monitoring_ehcuioinfo_boomleverfloat_bucketdump"
+                android:layout_width="200dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="40dp"
+                android:button="@drawable/_selector_radio_btn"
+                android:text="@string/Bucket_Dump_Response_Adjust"
+                android:textColor="@drawable/_selector_radio_txt_white_amber"
+                android:textSize="18sp" />
+
+        </RadioGroup>
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/Relativelayout_menu_body_monitoring_ehcuioinfo_boomleverfloat_low"
+        android:layout_alignParentTop="false"
+        android:layout_below="@+id/imageView_menu_body_monitoring_ehcuioinfo_boomleverfloat_line" 
+        android:splitMotionEvents="false">
+
+        <TextView
+            android:id="@+id/textView_menu_body_monitoring_ehcuioinfo_boomleverfloat_operation_title"
+            android:layout_width="320dp"
+            android:layout_height="50dp"
+            android:layout_alignLeft="@+id/RelativeLayout_menu_body_monitoring_ehcuioinfo_boomleverfloat_boomup"
+            android:gravity="center"
+            android:text="@string/Operation"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:textColor="@color/menu_body_mode_tab_gray" />
+        
+        <TextView
+            android:id="@+id/textView_menu_body_monitoring_ehcuioinfo_boomleverfloat_joystickstroke_title"
+            android:layout_width="200dp"
+            android:layout_height="50dp"
+            android:layout_toRightOf="@+id/textView_menu_body_monitoring_ehcuioinfo_boomleverfloat_operation_title"
+            android:gravity="center"
+            android:text="@string/Joystick_Stroke"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:textColor="@color/menu_body_mode_tab_gray" />
+        
+        <TextView
+            android:id="@+id/textView_menu_body_monitoring_ehcuioinfo_boomleverfloat_epprcurrent_title"
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"
+            android:layout_alignRight="@+id/RelativeLayout_menu_body_monitoring_ehcuioinfo_boomleverfloat_boomup"
+            android:layout_toRightOf="@+id/textView_menu_body_monitoring_ehcuioinfo_boomleverfloat_joystickstroke_title"
+            android:gravity="center"
+            android:text="@string/EPPR_Current"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:textColor="@color/menu_body_mode_tab_gray" />
+        
+        <RelativeLayout
+            android:id="@+id/RelativeLayout_menu_body_monitoring_ehcuioinfo_boomleverfloat_boomup"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="54dp"
+            android:background="@drawable/menu_information_ehcu_bg_dark" 
+            android:splitMotionEvents="false">
+
+            <TextView
+                android:id="@+id/textView_menu_body_monitoring_ehcuioinfo_boomleverfloat_boomup_operation"
+                android:layout_width="350dp"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:gravity="center"
+                android:text="@string/Boom_Up"
+                android:textAppearance="?android:attr/textAppearanceLarge" />
+
+            <ImageView
+                android:id="@+id/imageView_menu_body_monitoring_ehcuioinfo_boomleverfloat_boomup_joystickstroke"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="320dp"
+                android:src="@drawable/menu_information_ehcu_bg01" />
+
+            <ImageView
+                android:id="@+id/imageView_menu_body_monitoring_ehcuioinfo_boomleverfloat_boomup_epprcurrent"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="520dp"
+                android:src="@drawable/menu_information_ehcu_bg01" />
+
+            <TextView
+                android:id="@+id/textView_menu_body_monitoring_ehcuioinfo_boomleverfloat_boomup_joystickstroke_data"
+                android:layout_width="150dp"
+                android:layout_height="wrap_content"
+                android:layout_alignBottom="@+id/imageView_menu_body_monitoring_ehcuioinfo_boomleverfloat_boomup_joystickstroke"
+                android:layout_alignLeft="@+id/imageView_menu_body_monitoring_ehcuioinfo_boomleverfloat_boomup_joystickstroke"
+                android:layout_alignTop="@+id/imageView_menu_body_monitoring_ehcuioinfo_boomleverfloat_boomup_joystickstroke"
+                android:gravity="right|center_vertical"
+                android:paddingLeft="10dp"
+                android:text="0"
+                android:textAppearance="?android:attr/textAppearanceLarge" />
+
+            <TextView
+                android:id="@+id/textView_menu_body_monitoring_ehcuioinfo_boomleverfloat_boomup_joystickstroke_unit"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignBottom="@+id/imageView_menu_body_monitoring_ehcuioinfo_boomleverfloat_boomup_joystickstroke"
+                android:layout_alignRight="@+id/imageView_menu_body_monitoring_ehcuioinfo_boomleverfloat_boomup_joystickstroke"
+                android:layout_alignTop="@+id/imageView_menu_body_monitoring_ehcuioinfo_boomleverfloat_boomup_joystickstroke"
+                android:layout_toRightOf="@+id/textView_menu_body_monitoring_ehcuioinfo_boomleverfloat_boomup_joystickstroke_data"
+                android:gravity="center"
+                android:text="%"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:textColor="@color/menu_body_monitoring_version_data_gray" />
+
+            <TextView
+                android:id="@+id/textView_menu_body_monitoring_ehcuioinfo_boomleverfloat_boomup_epprcurrent_data"
+                android:layout_width="150dp"
+                android:layout_height="wrap_content"
+                android:layout_alignBottom="@+id/imageView_menu_body_monitoring_ehcuioinfo_boomleverfloat_boomup_epprcurrent"
+                android:layout_alignLeft="@+id/imageView_menu_body_monitoring_ehcuioinfo_boomleverfloat_boomup_epprcurrent"
+                android:layout_alignTop="@+id/imageView_menu_body_monitoring_ehcuioinfo_boomleverfloat_boomup_epprcurrent"
+                android:gravity="right|center_vertical"
+                android:paddingLeft="10dp"
+                android:text="0"
+                android:textAppearance="?android:attr/textAppearanceLarge" />
+
+            <TextView
+                android:id="@+id/textView_menu_body_monitoring_ehcuioinfo_boomleverfloat_boomup_epprcurrent_unit"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignBottom="@+id/imageView_menu_body_monitoring_ehcuioinfo_boomleverfloat_boomup_epprcurrent"
+                android:layout_alignRight="@+id/imageView_menu_body_monitoring_ehcuioinfo_boomleverfloat_boomup_epprcurrent"
+                android:layout_alignTop="@+id/imageView_menu_body_monitoring_ehcuioinfo_boomleverfloat_boomup_epprcurrent"
+                android:layout_toRightOf="@+id/textView_menu_body_monitoring_ehcuioinfo_boomleverfloat_boomup_epprcurrent_data"
+                android:gravity="center"
+                android:text="mA"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:textColor="@color/menu_body_monitoring_version_data_gray" />
+    
+    	</RelativeLayout>
+    
+	    <RelativeLayout
+	        android:id="@+id/RelativeLayout_menu_body_monitoring_ehcuioinfo_boomleverfloat_boomdown"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:layout_below="@+id/RelativeLayout_menu_body_monitoring_ehcuioinfo_boomleverfloat_boomup"
+	        android:layout_centerHorizontal="true"
+	        android:layout_marginTop="3dp"
+	        android:background="@drawable/menu_information_ehcu_bg_light" 
+	        android:splitMotionEvents="false">
+
+            <TextView
+                android:id="@+id/textView_menu_body_monitoring_ehcuioinfo_boomleverfloat_boomdown_operation"
+                android:layout_width="350dp"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:gravity="center"
+                android:text="@string/Boom_Down"
+                android:textAppearance="?android:attr/textAppearanceLarge" />
+
+            <ImageView
+                android:id="@+id/imageView_menu_body_monitoring_ehcuioinfo_boomleverfloat_boomdown_joystickstroke"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="320dp"
+                android:src="@drawable/menu_information_ehcu_bg01" />
+
+            <ImageView
+                android:id="@+id/imageView_menu_body_monitoring_ehcuioinfo_boomleverfloat_boomdown_epprcurrent"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="520dp"
+                android:src="@drawable/menu_information_ehcu_bg01" />
+
+            <TextView
+                android:id="@+id/textView_menu_body_monitoring_ehcuioinfo_boomleverfloat_boomdown_joystickstroke_data"
+                android:layout_width="150dp"
+                android:layout_height="wrap_content"
+                android:layout_alignBottom="@+id/imageView_menu_body_monitoring_ehcuioinfo_boomleverfloat_boomdown_joystickstroke"
+                android:layout_alignLeft="@+id/imageView_menu_body_monitoring_ehcuioinfo_boomleverfloat_boomdown_joystickstroke"
+                android:layout_alignTop="@+id/imageView_menu_body_monitoring_ehcuioinfo_boomleverfloat_boomdown_joystickstroke"
+                android:gravity="right|center_vertical"
+                android:paddingLeft="10dp"
+                android:text="0"
+                android:textAppearance="?android:attr/textAppearanceLarge" />
+
+            <TextView
+                android:id="@+id/textView_menu_body_monitoring_ehcuioinfo_boomleverfloat_boomdown_joystickstroke_unit"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignBottom="@+id/imageView_menu_body_monitoring_ehcuioinfo_boomleverfloat_boomdown_joystickstroke"
+                android:layout_alignRight="@+id/imageView_menu_body_monitoring_ehcuioinfo_boomleverfloat_boomdown_joystickstroke"
+                android:layout_alignTop="@+id/imageView_menu_body_monitoring_ehcuioinfo_boomleverfloat_boomdown_joystickstroke"
+                android:layout_toRightOf="@+id/textView_menu_body_monitoring_ehcuioinfo_boomleverfloat_boomdown_joystickstroke_data"
+                android:gravity="center"
+                android:text="%"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:textColor="@color/menu_body_monitoring_version_data_gray" />
+
+            <TextView
+                android:id="@+id/textView_menu_body_monitoring_ehcuioinfo_boomleverfloat_boomdown_epprcurrent_data"
+                android:layout_width="150dp"
+                android:layout_height="wrap_content"
+                android:layout_alignBottom="@+id/imageView_menu_body_monitoring_ehcuioinfo_boomleverfloat_boomdown_epprcurrent"
+                android:layout_alignLeft="@+id/imageView_menu_body_monitoring_ehcuioinfo_boomleverfloat_boomdown_epprcurrent"
+                android:layout_alignTop="@+id/imageView_menu_body_monitoring_ehcuioinfo_boomleverfloat_boomdown_epprcurrent"
+                android:gravity="right|center_vertical"
+                android:paddingLeft="10dp"
+                android:text="0"
+                android:textAppearance="?android:attr/textAppearanceLarge" />
+
+            <TextView
+                android:id="@+id/textView_menu_body_monitoring_ehcuioinfo_boomleverfloat_boomdown_epprcurrent_unit"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignBottom="@+id/imageView_menu_body_monitoring_ehcuioinfo_boomleverfloat_boomdown_epprcurrent"
+                android:layout_alignRight="@+id/imageView_menu_body_monitoring_ehcuioinfo_boomleverfloat_boomdown_epprcurrent"
+                android:layout_alignTop="@+id/imageView_menu_body_monitoring_ehcuioinfo_boomleverfloat_boomdown_epprcurrent"
+                android:layout_toRightOf="@+id/textView_menu_body_monitoring_ehcuioinfo_boomleverfloat_boomdown_epprcurrent_data"
+                android:gravity="center"
+                android:text="mA"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:textColor="@color/menu_body_monitoring_version_data_gray" />
+	
+	    </RelativeLayout>
+	    
+	    <RelativeLayout
+	        android:layout_width="match_parent"
+	        android:layout_height="wrap_content"
+	        android:layout_above="@+id/Relativelayout_menu_body_monitoring_ehcuinfo_boomleverfloat_low"
+	        android:layout_alignParentBottom="true"
+	        android:layout_below="@+id/RelativeLayout_menu_body_monitoring_ehcuioinfo_boomleverfloat_boomdown" 
+	        android:splitMotionEvents="false">
+		    
+	        <ImageButton
+	            android:id="@+id/imageButton_menu_body_monitoring_ehcuinfo_boomleverfloat_minus"
+	            android:layout_width="wrap_content"
+	            android:layout_height="wrap_content"
+	            android:layout_centerVertical="true"
+	            android:layout_marginLeft="80dp"
+	            android:background="@drawable/_selector_menu_mode_enginerpm_minus_btn1" />
+		    
+		    <ImageButton
+		        android:id="@+id/imageButton_menu_body_monitoring_ehcuinfo_boomleverfloat_plus"
+		        android:layout_width="wrap_content"
+		        android:layout_height="wrap_content"
+		        android:layout_centerVertical="true"
+		        android:layout_marginLeft="592dp"
+		        android:background="@drawable/_selector_menu_mode_enginerpm_plus_btn1" />
+		    
+		    <TextView
+		        android:id="@+id/textView_menu_body_monitoring_ehcuinfo_boomleverfloat_data"
+		        android:layout_width="250dp"
+		        android:layout_height="wrap_content"
+		        android:layout_alignBottom="@+id/imageButton_menu_body_monitoring_ehcuinfo_boomleverfloat_minus"
+		        android:layout_alignTop="@+id/imageButton_menu_body_monitoring_ehcuinfo_boomleverfloat_minus"
+		        android:layout_centerVertical="true"
+		        android:layout_toRightOf="@+id/imageButton_menu_body_monitoring_ehcuinfo_boomleverfloat_minus"
+		        android:gravity="bottom|right"
+		        android:text="0"
+		        android:textAppearance="?android:attr/textAppearanceLarge"
+		        android:textSize="70sp" />
+		
+		    <TextView
+		        android:id="@+id/textView_menu_body_monitoring_ehcuinfo_boomleverfloat_unit"
+		        android:layout_width="wrap_content"
+		        android:layout_height="wrap_content"
+		        android:layout_alignBottom="@+id/imageButton_menu_body_monitoring_ehcuinfo_boomleverfloat_minus"
+		        android:layout_alignTop="@+id/imageButton_menu_body_monitoring_ehcuinfo_boomleverfloat_minus"
+		        android:layout_centerVertical="true"
+		        android:layout_marginLeft="500dp"
+		        android:gravity="center"
+		        android:text="@string/Percent"
+		        android:textAppearance="?android:attr/textAppearanceLarge"
+		        android:textColor="@color/gray"
+		        android:textSize="40sp" />
+	    
+	    </RelativeLayout>
+	    
+    </RelativeLayout>
+    
+    
+    <RelativeLayout
+        android:id="@+id/Relativelayout_menu_body_monitoring_ehcuioinfo_boomleverfloat_low"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true" 
+        android:splitMotionEvents="false">
+       
+        <ImageView
+            android:id="@+id/imageView_menu_body_monitoring_ehcuioinfo_boomleverfloat_low_bg"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/menu_low_bg" />
+	   
+	    <ImageButton
+	        android:id="@+id/ImageButton_menu_body_monitoring_ehcuioinfo_boomleverfloat_low_ok"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:layout_alignBottom="@+id/imageView_menu_body_monitoring_ehcuioinfo_boomleverfloat_low_bg"
+	        android:layout_alignRight="@+id/imageView_menu_body_monitoring_ehcuioinfo_boomleverfloat_low_bg"
+	        android:background="@drawable/_selector_menu_low_right_btn" />
+	    
+	    <ImageView
+	        android:id="@+id/imageView_menu_body_monitoring_ehcuioinfo_boomleverfloat_low_line"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:layout_alignBottom="@+id/ImageButton_menu_body_monitoring_ehcuioinfo_boomleverfloat_low_ok"
+	        android:layout_alignLeft="@+id/ImageButton_menu_body_monitoring_ehcuioinfo_boomleverfloat_low_ok"
+	        android:src="@drawable/main_key_low_line" />
+	
+	    <RelativeLayout
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:layout_alignBottom="@+id/ImageButton_menu_body_monitoring_ehcuioinfo_boomleverfloat_low_ok"
+	        android:layout_alignLeft="@+id/ImageButton_menu_body_monitoring_ehcuioinfo_boomleverfloat_low_ok"
+	        android:layout_alignRight="@+id/ImageButton_menu_body_monitoring_ehcuioinfo_boomleverfloat_low_ok"
+	        android:layout_alignTop="@+id/ImageButton_menu_body_monitoring_ehcuioinfo_boomleverfloat_low_ok" 
+	        android:splitMotionEvents="false">
+	
+	        <LinearLayout
+	            android:layout_width="wrap_content"
+	            android:layout_height="wrap_content"
+	            android:layout_centerHorizontal="true"
+	            android:layout_centerVertical="true" 
+	            android:splitMotionEvents="false">
+	
+	            <ImageView
+	                android:id="@+id/imageView_menu_body_monitoring_ehcuioinfo_boomleverfloat_low_ok_icon"
+	                android:layout_width="wrap_content"
+	                android:layout_height="wrap_content"
+	                android:layout_alignBottom="@+id/ImageButton_menu_body_monitoring_ehcuioinfo_boomleverfloat_low_ok"
+	                android:layout_alignLeft="@+id/ImageButton_menu_body_monitoring_ehcuioinfo_boomleverfloat_low_ok"
+	                android:layout_alignTop="@+id/ImageButton_menu_body_monitoring_ehcuioinfo_boomleverfloat_low_ok"
+	                android:src="@drawable/menu_low_icon_ok" />
+	
+	            <TextView
+	                android:id="@+id/textView_menu_body_monitoring_ehcuioinfo_boomleverfloat_low_ok"
+	                android:layout_width="wrap_content"
+	                android:layout_height="match_parent"
+	                android:layout_marginLeft="10dp"
+	                android:gravity="center"
+	                android:text="@string/OK"
+	                android:textAppearance="?android:attr/textAppearanceLarge"
+	                android:textSize="25sp"
+	                android:textStyle="bold" />
+
+	        </LinearLayout>
+	    </RelativeLayout>
+
+    </RelativeLayout>
+</RelativeLayout>
