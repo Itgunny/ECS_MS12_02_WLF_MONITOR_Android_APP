@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/RelativeLayout_rightdown_main_a_tmiccomode"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/main_a_bg_right" 
+    android:splitMotionEvents="false">
+    
+    <TextView
+        android:id="@+id/textView_rightdown_main_a_tmiccomode_title"
+        android:layout_width="170dp"
+        android:layout_height="wrap_content"
+        android:layout_alignRight="@+id/imageView_rightdown_main_a_tmiccomode_line"
+        android:layout_marginRight="20dp"
+        android:layout_marginTop="100dp"
+        android:text="@string/ICCO_MODE"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textColor="@color/main_title_amber"
+        android:textSize="25sp" />
+
+    <ImageView
+        android:id="@+id/imageView_rightdown_main_a_tmiccomode_line"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="410dp"
+        android:layout_centerVertical="true"
+        android:src="@drawable/main_popup_line" />
+    
+    <RadioGroup
+        android:id="@+id/radioGroup_rightdown_main_a_tmiccomode"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="450dp" 
+        android:splitMotionEvents="false">
+
+       <RadioButton
+           android:id="@+id/radioButton_rightdown_main_a_tmiccomode_off"
+           android:layout_width="350dp"
+           android:layout_height="wrap_content"
+           android:button="@drawable/_selector_radio_btn"
+           android:text="@string/OFF"
+           android:textColor="@drawable/_selector_radio_txt_white_amber"
+           android:singleLine="true"
+           android:textSize="25sp" />
+
+       <RadioButton
+           android:id="@+id/radioButton_rightdown_main_a_tmiccomode_h"
+           android:layout_width="350dp"
+           android:layout_height="wrap_content"
+           android:layout_marginTop="80dp"
+           android:button="@drawable/_selector_radio_btn"
+           android:text="@string/ON"
+           android:textColor="@drawable/_selector_radio_txt_white_amber"
+           android:singleLine="true"
+           android:textSize="25sp" />
+
+   </RadioGroup>    
+    
+</RelativeLayout>
