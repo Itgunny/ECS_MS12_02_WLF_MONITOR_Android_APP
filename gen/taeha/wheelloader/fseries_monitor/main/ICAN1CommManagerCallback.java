@@ -1,6 +1,6 @@
 /*
  * This file is auto-generated.  DO NOT MODIFY.
- * Original file: D:\\Project\\[SVN] ECS-RD12-16 - WL9F Monitor - Android_APP - UI_B\\Mass\\src\\taeha\\wheelloader\\fseries_monitor\\main\\ICAN1CommManagerCallback.aidl
+ * Original file: D:\\GIT\\WLF_MONITOR\\ECS_MS12_02_WLF_MONITOR_Android_APP\\src\\taeha\\wheelloader\\fseries_monitor\\main\\ICAN1CommManagerCallback.aidl
  */
 package taeha.wheelloader.fseries_monitor.main;
 public interface ICAN1CommManagerCallback extends android.os.IInterface
