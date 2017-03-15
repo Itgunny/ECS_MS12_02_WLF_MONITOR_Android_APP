@@ -1,12 +1,10 @@
-﻿// ++, 150320 cjg
+// ++, 150320 cjg
 package taeha.wheelloader.fseries_monitor.popup;
 
-import taeha.wheelloader.fseries_monitor.main.CAN1CommManager;
 import taeha.wheelloader.fseries_monitor.main.CommService;
 import taeha.wheelloader.fseries_monitor.main.Home;
 import taeha.wheelloader.fseries_monitor.main.ParentPopup;
 import taeha.wheelloader.fseries_monitor.main.R;
-import taeha.wheelloader.fseries_monitor.main.R.string;
 import taeha.wheelloader.fseries_monitor.main.TextFitTextView;
 import android.content.Context;
 import android.content.Intent;
@@ -20,18 +18,17 @@ import android.view.ViewGroup.LayoutParams;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
-public class MiracastClosePopup extends ParentPopup {
+public class MultimediaWarningPopup extends ParentPopup {
 	//CONSTANT////////////////////////////////////////
 
 	//////////////////////////////////////////////////
 	//RESOURCE////////////////////////////////////////
 
+
 	ImageButton imgbtnOK;
-	ImageButton imgbtnCancel;
 	
 	TextView textViewTitle;
 	TextFitTextView textViewOK;
-	TextFitTextView textViewCancel;
 	//////////////////////////////////////////////////
 	
 	//VALUABLE////////////////////////////////////////
@@ -45,17 +42,16 @@ public class MiracastClosePopup extends ParentPopup {
 	//TEST////////////////////////////////////////////
 	
 	//////////////////////////////////////////////////
-	public MiracastClosePopup(Context _context) {
+	
+	public MultimediaWarningPopup(Context _context) {
 		super(_context);
 		// TODO Auto-generated constructor stub
-		TAG = "MiracastClosePopup";
+		TAG = "MultimediaWarningPopup";
 		ParentActivity = (Home)_context;
 		inflater = (LayoutInflater)_context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-		mRoot = inflater.inflate(R.layout.popup_miracast_close, null);
+		mRoot = inflater.inflate(R.layout.popup_multimedia_warning, null);
 		this.addContentView(mRoot,  new LayoutParams(448,288));
 		this.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-		
-		
 	}
 	@Override
 	public void show() {
@@ -64,11 +60,12 @@ public class MiracastClosePopup extends ParentPopup {
 		InitButtonListener();
 		InitValuable();
 		super.show();
-		
+
 		if(ParentActivity.DisplayType == Home.DISPLAY_TYPE_A)
-			ParentActivity.ScreenIndex = ParentActivity.SCREEN_STATE_MAIN_B_QUICK_MIRACLOSE;
+			ParentActivity.ScreenIndex = ParentActivity.SCREEN_STATE_MAIN_B_QUICK_MULTI_WARNING;
 		else if(ParentActivity.DisplayType == Home.DISPLAY_TYPE_B)
-			ParentActivity.ScreenIndex = ParentActivity.SCREEN_STATE_MAIN_A_QUICK_MIRACLOSE;
+			ParentActivity.ScreenIndex = ParentActivity.SCREEN_STATE_MAIN_A_QUICK_MULTI_WARNING;
+
 	}
 
 	@Override
@@ -93,17 +90,13 @@ public class MiracastClosePopup extends ParentPopup {
 	@Override
 	protected void InitResource() {
 		// TODO Auto-generated method stub
-		imgbtnOK = (ImageButton)mRoot.findViewById(R.id.imageButton_popup_miracast_close_ok);
-		imgbtnCancel = (ImageButton)mRoot.findViewById(R.id.imageButton_popup_miracast_close_cancel);
+		imgbtnOK = (ImageButton)mRoot.findViewById(R.id.imageButton_popup_multimedia_warning_ok);
 	
-		textViewTitle = (TextView)mRoot.findViewById(R.id.textView_popup_miracast_close_title);
-		textViewTitle.setText(getString(ParentActivity.getResources().getString(R.string.CloseMira), 143));
+		textViewTitle = (TextView)mRoot.findViewById(R.id.textView_popup_multimedia_warning_title);
+		textViewTitle.setText(getString(ParentActivity.getResources().getString(R.string.Multimedia_Warning_Text), 498));
 
-		textViewOK = (TextFitTextView)mRoot.findViewById(R.id.textView_popup_miracast_close_ok);
+		textViewOK = (TextFitTextView)mRoot.findViewById(R.id.textView_popup_multimedia_warning_ok);
 		textViewOK.setText(getString(ParentActivity.getResources().getString(R.string.OK), 15));
-		
-		textViewCancel = (TextFitTextView)mRoot.findViewById(R.id.textView_popup_miracast_close_cancel);
-		textViewCancel.setText(getString(ParentActivity.getResources().getString(R.string.Cancel), 16));
 	}
 	@Override
 	protected void InitButtonListener() {
@@ -114,14 +107,6 @@ public class MiracastClosePopup extends ParentPopup {
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
 				ClickOK();
-			}
-		});
-		imgbtnCancel.setOnClickListener(new View.OnClickListener() {
-			
-			@Override
-			public void onClick(View v) {
-				// TODO Auto-generated method stub
-				ClickCancel();
 			}
 		});
 	}
@@ -140,24 +125,57 @@ public class MiracastClosePopup extends ParentPopup {
 	///////////////////////////////////////////////////////////////////////////////
 	public void ClickOK(){
 		this.dismiss();
-//		ParentActivity.KillApps("com.powerone.wfd.sink");
 		//++, 150715 cjg
-		Runtime runtime = Runtime.getRuntime();
-		//++, 150910 cjg
-		String service = Context.WIFI_SERVICE;
-		final WifiManager wifi = (WifiManager)ParentActivity.getSystemService(service);
-		wifi.setWifiEnabled(false);
-		//--, 150910 cjg
+		
+		CAN1Comm.SetMiracastFlag(false);
+		Intent intent;
+		intent = ParentActivity.getPackageManager().getLaunchIntentForPackage("com.mxtech.videoplayer.ad");
+		if(intent != null){
+			//CAN1Comm.SetMultimediaFlag(true);
+			ParentActivity.startActivity(intent);
+			CAN1Comm.setRunningCheckMiracast(false);
+			ParentActivity.StartAlwaysOntopService();		// ++, --, 150324 cjg
+			ParentActivity.StartCheckMultimediaTimer();
+		}
+		/*Runtime runtime = Runtime.getRuntime();
 		Process process;
 		try{
-			String cmd = "am force-stop com.powerone.wfd.sink";
+			String cmd = "am force-stop com.mxtech.videoplayer.ad";
 			process = runtime.exec(cmd);
-			Log.d(TAG, "am force-stop com.powerone.wfd.sink");
+			Log.d(TAG, "am force-stop com.mxtech.videoplayer.ad");
 		}catch(Exception e){
 			e.fillInStackTrace();
 		}
 		//--, 150715 cjg
-		ParentActivity.showMultiWarning();
+		CAN1Comm.SetMultimediaFlag(false);
+		String service = Context.WIFI_SERVICE;
+		final WifiManager wifi = (WifiManager)ParentActivity.getSystemService(service);
+		if(wifi.isWifiEnabled()){
+			wifi.setWifiEnabled(false);
+			synchronized (wifi) {
+				try {
+					wifi.wait(500);
+				} catch (InterruptedException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+		}
+		Intent intent;
+		intent = ParentActivity.getPackageManager().getLaunchIntentForPackage("com.powerone.wfd.sink");
+		if(intent != null){
+			// ++, 150323 bwk
+			//CAN1Comm.SetMiracastFlag(true);
+			// --, 150323 bwk				
+			ParentActivity.startActivity(intent);
+			if(CommService.pi != null){
+				if(!CommService.pi.versionName.equals("1.0.5BF")){
+					CAN1Comm.setRunningCheckMiracast(true);
+				}					
+			}
+			ParentActivity.StartCheckSmartTerminalTimer();
+		}*/
+		
 	}	
 	public void ClickCancel(){
 		this.dismiss();
@@ -202,10 +220,8 @@ public class MiracastClosePopup extends ParentPopup {
 		switch (CursurIndex) {
 		case 1:
 			ClickOK();
-			
 			break;
 		case 2:
-			ClickCancel();
 			break;
 		default:
 			
@@ -217,11 +233,9 @@ public class MiracastClosePopup extends ParentPopup {
 		switch (Index) {
 		case 1:
 			imgbtnOK.setPressed(true);
-			imgbtnCancel.setPressed(false);
 			break;
 		case 2:
 			imgbtnOK.setPressed(false);
-			imgbtnCancel.setPressed(true);
 			break;
 		default:
 			break;

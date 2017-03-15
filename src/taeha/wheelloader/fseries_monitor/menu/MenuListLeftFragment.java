@@ -1,4 +1,4 @@
-package taeha.wheelloader.fseries_monitor.menu;
+﻿package taeha.wheelloader.fseries_monitor.menu;
 
 import taeha.wheelloader.fseries_monitor.animation.AppearAnimation;
 import taeha.wheelloader.fseries_monitor.animation.ChangeFragmentAnimation;
@@ -126,7 +126,7 @@ public class MenuListLeftFragment extends ParentFragment{
 	protected void InitValuables() {
 		// TODO Auto-generated method stub
 		super.InitValuables();
-		
+		MultiMediaMenuDisplay(ParentActivity.LockMultiMedia & ParentActivity.LockSmartTerminal);
 	
 		
 	}
@@ -176,6 +176,7 @@ public class MenuListLeftFragment extends ParentFragment{
 				// TODO Auto-generated method stub
 				ClickMultimedia();
 				ParentActivity._MenuBaseFragment._MenuMultimediaFragment.CursurIndex = 1;
+				
 			}
 		});
 	}
@@ -359,4 +360,22 @@ public class MenuListLeftFragment extends ParentFragment{
 		}
 	}
 	/////////////////////////////////////////////////////////////////////
+	
+	public void MultiMediaMenuDisplay(int data){
+		switch(data){
+		case Home.STATE_ENTERTAINMENT_MULTIMEDIA_LOCK & Home.STATE_ENTERTAINMENT_MULTIMEDIA_LOCK:
+			textViewMultimedia.setVisibility(View.INVISIBLE);
+			imgViewMultimedia.setVisibility(View.INVISIBLE);
+			imgbtnMultimedia.setClickable(false);
+			imgbtnMultimedia.setEnabled(false);
+			break;
+		case 0:
+			textViewMultimedia.setVisibility(View.VISIBLE);
+			imgViewMultimedia.setVisibility(View.VISIBLE);
+			imgbtnMultimedia.setClickable(true);
+			imgbtnMultimedia.setEnabled(true);
+			break;
+		}
+	}
+
 }

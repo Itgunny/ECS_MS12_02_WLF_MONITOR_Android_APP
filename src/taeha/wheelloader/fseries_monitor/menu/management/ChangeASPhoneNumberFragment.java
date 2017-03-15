@@ -1,4 +1,4 @@
-package taeha.wheelloader.fseries_monitor.menu.management;
+ï»¿package taeha.wheelloader.fseries_monitor.menu.management;
 
 import taeha.wheelloader.fseries_monitor.animation.AppearAnimation;
 import taeha.wheelloader.fseries_monitor.animation.ChangeFragmentAnimation;
@@ -300,17 +300,19 @@ public class ChangeASPhoneNumberFragment extends ParentFragment{
 	}
 	/////////////////////////////////////////////////////////////////////	
 	public void ClickOK(){
+		if(strASNum.equals("65871126")){
+			ParentActivity.showEntertainmentLockPopup();
+		}else {
 		if(ParentActivity.AnimationRunningFlag == true)
 			return;
 		else
 			ParentActivity.StartAnimationRunningTimer();
 		ParentActivity._MenuBaseFragment.showBodyManagementAnimation();
 		ParentActivity._MenuBaseFragment._MenuModeFragment.setFirstScreen(Home.SCREEN_STATE_MENU_MANAGEMENT_TOP);
-
 		ParentActivity.strASNumDash = strASNumDash;
-		
 		SetChangeASNum(ASPhoneNumber,DataBufIndex);
 		SavePrefAS();
+	}
 	}
 	public void ClickCancel(){
 		if(ParentActivity.AnimationRunningFlag == true)
@@ -465,8 +467,8 @@ public class ChangeASPhoneNumberFragment extends ParentFragment{
 	public void LoadPrefAS(){
 		SharedPreferences SharePref = ParentActivity.getSharedPreferences("Home", 0);
 		
-		strASNum = SharePref.getString("strASNum", "18997282");	// ++, --, 150402 bwk A/S ¹øÈ£ Ãß°¡ 		
-		strASNumDash = SharePref.getString("strASNumDash", "1899-7282");	// ++, --, 150402 bwk A/S ¹øÈ£ Ãß°¡ 
+		strASNum = SharePref.getString("strASNum", "18997282");	// ++, --, 150402 bwk A/S ï¿½ï¿½È£ ï¿½ß°ï¿½ 		
+		strASNumDash = SharePref.getString("strASNumDash", "1899-7282");	// ++, --, 150402 bwk A/S ï¿½ï¿½È£ ï¿½ß°ï¿½ 
 
 		Log.d(TAG,"LoadPrefAS : " + strASNum);
 	}

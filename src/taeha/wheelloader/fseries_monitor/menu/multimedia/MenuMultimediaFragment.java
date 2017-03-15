@@ -1,4 +1,4 @@
-package taeha.wheelloader.fseries_monitor.menu.multimedia;
+ï»¿package taeha.wheelloader.fseries_monitor.menu.multimedia;
 
 import java.util.List;
 
@@ -81,7 +81,6 @@ public class MenuMultimediaFragment extends ParentFragment{
 	@Override
 	protected void InitResource() {
 		// TODO Auto-generated method stub
-		
 		textViewMediaPlayer = (TextFitTextView)mRoot.findViewById(R.id.textView_menu_body_multimedia);
 		textViewMediaPlayer.setText(getString(ParentActivity.getString(R.string.Multimedia), 199));
 		textViewSmartTerminal = (TextFitTextView)mRoot.findViewById(R.id.textView_menu_body_smartterminal);
@@ -91,6 +90,8 @@ public class MenuMultimediaFragment extends ParentFragment{
 	protected void InitValuables() {
 		// TODO Auto-generated method stub
 		super.InitValuables();
+		MultiMediaDisplay(ParentActivity.LockMultiMedia);
+		SmartTerminalDisplay(ParentActivity.LockSmartTerminal);
 	}
 	
 	@Override
@@ -101,7 +102,11 @@ public class MenuMultimediaFragment extends ParentFragment{
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
+				if(Home.STATE_ENTERTAINMENT_MULTIMEDIA_LOCK == ParentActivity.LockMultiMedia){
+					ClickSmartTerminal();	
+				} else {
 				ClickMediaPlayer();
+			}
 			}
 		});
 		textViewSmartTerminal.setOnClickListener(new View.OnClickListener(	) {
@@ -124,9 +129,9 @@ public class MenuMultimediaFragment extends ParentFragment{
 		// TODO Auto-generated method stub
 		/*
 		// ++, 150325 bwk
-		// ¸ÖÆ¼¹Ìµð¾î ½ÇÇà ÈÄ µ¹¾Æ¿ÔÀ» ¶§ Æ÷Ä¿½º ÀÒ´Â ¹®Á¦°¡ ÀÖ¾î OnResume¿¡ CursurIndex = 1À» ³Ö¾úÀ¸³ª,
-		// »ó´Ü¸Þ´º¿¡¼­ Left, Right Å°¸¦ ´©¸¦ °æ¿ì ¹Ù·Î ¸ÖÆ¼¹Ìµð¾î¿¡ Æ÷Ä¿½º°¡ °¡´Â ¹®Á¦°¡ ¹ß»ýÇÏ¿©
-		// ¾Æ·¡Ã³·³ º¯°æ
+		// ï¿½ï¿½Æ¼ï¿½Ìµï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½Æ¿ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½Ä¿ï¿½ï¿½ ï¿½Ò´ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ö¾ï¿½ OnResumeï¿½ï¿½ CursurIndex = 1ï¿½ï¿½ ï¿½Ö¾ï¿½ï¿½ï¿½ï¿½ï¿½,
+		// ï¿½ï¿½Ü¸Þ´ï¿½ï¿½ï¿½ï¿½ï¿½ Left, Right Å°ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½Ù·ï¿½ ï¿½ï¿½Æ¼ï¿½Ìµï¿½î¿¡ ï¿½ï¿½Ä¿ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ß»ï¿½ï¿½Ï¿ï¿½
+		// ï¿½Æ·ï¿½Ã³ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 		try{
 			CursurDisplay(CursurIndex);
 		} catch (NullPointerException e) {
@@ -152,8 +157,13 @@ public class MenuMultimediaFragment extends ParentFragment{
 			ParentActivity._MenuBaseFragment._MenuListLeftFragment.ClickPreference();
 			break;
 		case 1:
+			if(Home.STATE_ENTERTAINMENT_MULTIMEDIA_LOCK == ParentActivity.LockMultiMedia || Home.STATE_ENTERTAINMENT_SMARTTERMINAL_LOCK == ParentActivity.LockSmartTerminal){
+				CursurIndex = 1;
+				CursurDisplay(CursurIndex);
+			}else {
 			CursurIndex = 2;
 			CursurDisplay(CursurIndex);
+			}
 			break;
 		case 2:
 			CursurIndex--;
@@ -170,8 +180,13 @@ public class MenuMultimediaFragment extends ParentFragment{
 			ParentActivity._MenuBaseFragment._MenuListLeftFragment.ClickMode();			
 			break;
 		case 1:
+			if(Home.STATE_ENTERTAINMENT_MULTIMEDIA_LOCK == ParentActivity.LockMultiMedia || Home.STATE_ENTERTAINMENT_SMARTTERMINAL_LOCK == ParentActivity.LockSmartTerminal){
+				CursurIndex = 1;
+				CursurDisplay(CursurIndex);
+			}else {
 			CursurIndex++;
 			CursurDisplay(CursurIndex);
+			}
 			break;
 		case 2:
 			CursurIndex = 1;
@@ -199,10 +214,18 @@ public class MenuMultimediaFragment extends ParentFragment{
 			CursurDisplay(CursurIndex);
 			break;
 		case 1:
+			if(ParentActivity.LockMultiMedia != Home.STATE_ENTERTAINMENT_MULTIMEDIA_LOCK){
 			ClickMediaPlayer();
+			} else {
+				ClickSmartTerminal();
+			}
 			break;
 		case 2:
+			if(ParentActivity.LockSmartTerminal != Home.STATE_ENTERTAINMENT_SMARTTERMINAL_LOCK){
+				if(ParentActivity.LockMultiMedia != Home.STATE_ENTERTAINMENT_MULTIMEDIA_LOCK){
 			ClickSmartTerminal();
+				}
+			}
 			break;
 		default:
 			break;
@@ -237,8 +260,10 @@ public class MenuMultimediaFragment extends ParentFragment{
 				ParentActivity.OldScreenIndex = ParentActivity.SCREEN_STATE_MENU_MULTIMEDIA_TOP;
 				ParentActivity._MiracastClosePopup.show();
 			}else{
+				ParentActivity.OldScreenIndex = ParentActivity.SCREEN_STATE_MENU_MULTIMEDIA_TOP;
+				ParentActivity._MultimediaWarningPopup.show();
 			// --, 150323 bwk
-				Intent intent;
+/*				Intent intent;
 				intent = ParentActivity.getPackageManager().getLaunchIntentForPackage("com.mxtech.videoplayer.ad");
 				if(intent != null){
 					CAN1Comm.SetMiracastFlag(false);
@@ -246,9 +271,10 @@ public class MenuMultimediaFragment extends ParentFragment{
 					ParentActivity.startActivity(intent);
 					ParentActivity.StartAlwaysOntopService();		// ++, --, 150324 cjg
 					ParentActivity.StartCheckMultimediaTimer();
-				}
+				}*/
 			}	// ++, --, 150323 bwk
 		}	// ++, --, 150319 bwk
+		
 		CursurIndex = 1;
 		CursurDisplay(CursurIndex);
 	}
@@ -272,6 +298,7 @@ public class MenuMultimediaFragment extends ParentFragment{
 					}
 				}
 			}
+			
 			Intent intent;
 			intent = ParentActivity.getPackageManager().getLaunchIntentForPackage("com.powerone.wfd.sink");
 			if(intent != null){
@@ -286,9 +313,14 @@ public class MenuMultimediaFragment extends ParentFragment{
 				ParentActivity.StartCheckSmartTerminalTimer();
 			}
 		}		
-
+		if(Home.STATE_ENTERTAINMENT_MULTIMEDIA_LOCK == ParentActivity.LockMultiMedia || Home.STATE_ENTERTAINMENT_SMARTTERMINAL_LOCK == ParentActivity.LockSmartTerminal){
+			CursurIndex = 1;
+			CursurDisplay(CursurIndex);
+		}else {
 		CursurIndex = 2;
 		CursurDisplay(CursurIndex);
+	}
+
 	}
 	public void ExcuteFileManaget(){
 		Intent intent;
@@ -308,6 +340,38 @@ public class MenuMultimediaFragment extends ParentFragment{
 		startActivity(new Intent(android.provider.Settings.ACTION_APPLICATION_SETTINGS));
 	}
 	/////////////////////////////////////////////////////////////////////
-	
+	public void MultiMediaDisplay(int data){
+		switch(data){
+		case Home.STATE_ENTERTAINMENT_MULTIMEDIA_LOCK:
+			textViewMediaPlayer.setEnabled(false);
+			textViewMediaPlayer.setVisibility(View.INVISIBLE);
+			break;
+		case Home.STATE_ENTERTAINMENT_MULTIMEDIA_UNLOCK:
+			textViewMediaPlayer.setEnabled(true);
+			textViewMediaPlayer.setVisibility(View.VISIBLE);
+			break;
+		}
+	}
+	public void SmartTerminalDisplay(int data){
+		switch(data){
+		case Home.STATE_ENTERTAINMENT_SMARTTERMINAL_LOCK:
+			textViewSmartTerminal.setEnabled(false);
+			textViewSmartTerminal.setVisibility(View.INVISIBLE);
+			break;
+		case Home.STATE_ENTERTAINMENT_SMARTTERMINAL_UNLOCK:
+			if(Home.STATE_ENTERTAINMENT_MULTIMEDIA_LOCK == ParentActivity.LockMultiMedia){
+				textViewSmartTerminal.setEnabled(false);
+				textViewSmartTerminal.setVisibility(View.INVISIBLE);
+				textViewMediaPlayer.setEnabled(true);
+				textViewMediaPlayer.setVisibility(View.VISIBLE);
+				textViewMediaPlayer.setText(getString(ParentActivity.getString(R.string.Smart_Terminal), 431));
+				textViewMediaPlayer.setBackgroundResource(R.drawable._selector_menu_body_multimedia_btn2);
+			}else {
+				textViewSmartTerminal.setEnabled(true);
+				textViewSmartTerminal.setVisibility(View.VISIBLE);
+			}
+			break;
+		}
+	}
 	/////////////////////////////////////////////////////////////////////
 }

@@ -1,4 +1,4 @@
-package taeha.wheelloader.fseries_monitor.menu.preference;
+﻿package taeha.wheelloader.fseries_monitor.menu.preference;
 
 import taeha.wheelloader.fseries_monitor.animation.AppearAnimation;
 import taeha.wheelloader.fseries_monitor.animation.ChangeFragmentAnimation;
@@ -969,10 +969,10 @@ public class UnitFragment extends ParentFragment{
 			radioFuelGal.setPressed(true);
 			break;
 		case 6:
-			radioTempF.setPressed(true);
+			radioTempC.setPressed(true);
 			break;
 		case 7:
-			radioTempC.setPressed(true);
+			radioTempF.setPressed(true);
 			break;
 		case 8:
 			radioSpeedKM.setPressed(true);

@@ -1,4 +1,4 @@
-package taeha.wheelloader.fseries_monitor.main;
+ï»¿package taeha.wheelloader.fseries_monitor.main;
 
 import java.lang.ref.WeakReference;
 import java.text.NumberFormat;
@@ -20,6 +20,7 @@ import taeha.wheelloader.fseries_monitor.popup.EHCUErrorPopup;
 import taeha.wheelloader.fseries_monitor.popup.EngineAutoShutdownCountPopup;
 import taeha.wheelloader.fseries_monitor.popup.EngineModePopup;
 import taeha.wheelloader.fseries_monitor.popup.EngineWarmingUpPopup;
+import taeha.wheelloader.fseries_monitor.popup.EntertainmentLockPopup;
 import taeha.wheelloader.fseries_monitor.popup.FanSelectModePopup;
 import taeha.wheelloader.fseries_monitor.popup.FuelInitalPopup;
 import taeha.wheelloader.fseries_monitor.popup.ICCOModePopup;
@@ -29,6 +30,7 @@ import taeha.wheelloader.fseries_monitor.popup.LoggedFaultDeletePopup;
 import taeha.wheelloader.fseries_monitor.popup.MaintReplacePopup;
 import taeha.wheelloader.fseries_monitor.popup.MiracastClosePopup;
 import taeha.wheelloader.fseries_monitor.popup.MultimediaClosePopup;
+import taeha.wheelloader.fseries_monitor.popup.MultimediaWarningPopup;
 import taeha.wheelloader.fseries_monitor.popup.OperationHistoryInitPopup;
 import taeha.wheelloader.fseries_monitor.popup.PressureCalibrationResultPopup;
 import taeha.wheelloader.fseries_monitor.popup.QuickCouplerPopupLocking1;
@@ -81,721 +83,722 @@ public class Home extends Activity {
 	public static final int VERSION_SUB_HIGH 	= 3;
 	public static final int VERSION_SUB_LOW 	= 0;
 	public static final int VERSION_TAEHA		= 0;
-	// UI B ¾È ÃÖÃÊ Àû¿ë 2014.12.10
+	// UI B ì•ˆ ìµœì´ˆ ì ìš© 2014.12.10
 	////1.0.2.4
-	// Eco Gauge Pivot ÇÔ¼ö Ãß°¡(Progress Bar°¡ °¡¿îµ¥¼­
-	////1.0.2.3¿òÁ÷ÀÌ´Â Çö»ó ¼öÁ¤) 2014.12.11
-	// Current Fuel Rate À§Ä¡ ¼öÁ¤(NDK ±¸Á¶Ã¼ À§Ä¡ ¼öÁ¤) 2014.12.11
-	// 61184/62ÀÇ 8¹øÂ° ¹ÙÀÌÆ® 0À¸·Î ³ª¿À´Â ¹®Á¦ ¼öÁ¤(±¸Á¶Ã¼ ±æÀÌ¹®Á¦) 2014.12.12
+	// Eco Gauge Pivot í•¨ìˆ˜ ì¶”ê°€(Progress Barê°€ ê°€ìš´ë°ì„œ
+	////1.0.2.3ì›€ì§ì´ëŠ” í˜„ìƒ ìˆ˜ì •) 2014.12.11
+	// Current Fuel Rate ìœ„ì¹˜ ìˆ˜ì •(NDK êµ¬ì¡°ì²´ ìœ„ì¹˜ ìˆ˜ì •) 2014.12.11
+	// 61184/62ì˜ 8ë²ˆì§¸ ë°”ì´íŠ¸ 0ìœ¼ë¡œ ë‚˜ì˜¤ëŠ” ë¬¸ì œ ìˆ˜ì •(êµ¬ì¡°ì²´ ê¸¸ì´ë¬¸ì œ) 2014.12.12
 	//// 1.0.2.5
-	// Error Report Ãß°¡ (°æ·Î : mnt/sdcard/alarams/WheelLoader_Logxxx.txt) 2014.12.12
-	// 1.0.2.6		UI A ¾È¿¡¼­ ¼öÁ¤ 2014.12.16
+	// Error Report ì¶”ê°€ (ê²½ë¡œ : mnt/sdcard/alarams/WheelLoader_Logxxx.txt) 2014.12.12
+	// 1.0.2.6		UI A ì•ˆì—ì„œ ìˆ˜ì • 2014.12.16
 	//// 1.0.2.7 2014.12.17
-	// Hardware Version Ç¥½Ã Ãß°¡ 2014.12.12
-	// Error Report ÆÄÀÏ ÀÌ¸§ º¯°æ (Year + Month + Date + Hour + Min + Sec) 214.12.16
-	// Hardware Revision Ç¥½Ã Ãß°¡(RevD.03.01 6.8K) 2014.12.17
+	// Hardware Version í‘œì‹œ ì¶”ê°€ 2014.12.12
+	// Error Report íŒŒì¼ ì´ë¦„ ë³€ê²½ (Year + Month + Date + Hour + Min + Sec) 214.12.16
+	// Hardware Revision í‘œì‹œ ì¶”ê°€(RevD.03.01 6.8K) 2014.12.17
 	//// 1.0.2.8 2014.12.18
-	// AutoGrease, MirrorHeat, PreHeat Å¸ÀÌ¸Ó »èÁ¦ 2014.12.17
-	// AutoGrease È­¸é¿¡¼­ ÅÍÄ¡ °¡´ÉÇÏ°Ô ¼öÁ¤ 2014.12.17
-	// Ending Animation Ãß°¡ 2014.12.17
+	// AutoGrease, MirrorHeat, PreHeat íƒ€ì´ë¨¸ ì‚­ì œ 2014.12.17
+	// AutoGrease í™”ë©´ì—ì„œ í„°ì¹˜ ê°€ëŠ¥í•˜ê²Œ ìˆ˜ì • 2014.12.17
+	// Ending Animation ì¶”ê°€ 2014.12.17
 	//// 1.0.2.8 2015.01.12
-	// Version Info Detail TCU,ECM Index ¸ÂÁö ¾Ê´Â °Í ¼öÁ¤ 2014.12.19
-	// Error Report ÃÖ´ë °¹¼ö 100°³·Î ¼öÁ¤(100°³ ÃÊ°ú ½Ã °¡Àå ¿À·¡µÈ ³¯Â¥ÀÇ ·Î±× »èÁ¦) 2014.12.19
-	// Service Menu¿¡ focus ½Ã escÅ° ¸ÔÁö ¾Ê´Â ¹®Á¦ ¼öÁ¤ 2014.12.19
-	// Start Can Command »èÁ¦ 2014.12.22
-	// ºñ¹Ğ¹øÈ£ ÀÔ·Â ½Ã backÅ° Á÷ÈÄ enter ´©¸£¸é ÁøÀÔµÇÁö ¾Ê´Â ¹®Á¦ ¼öÁ¤ 2014.12.22
-	// Engine Auto Shutdown ¼³Á¤ °ª ¹Ş´Â ºÎºĞ 65428 -> 61184_122·Î ¼öÁ¤ 2014.12.26
-	// ÈÄÁø ±â¾î ¿¬µ¿ ´©¶ô ¼öÁ¤ 2014.12.29
-	// Firmware Version ¹®±¸ ¿À·ù ¼öÁ¤ 2014.12.30
-	// Boom Bucket Detent Mode È­¸éÀÇ Boom Off/On ¼±ÅÃ½Ã ¹İ´ë·Î ´­¸®´Â Çö»ó ¼öÁ¤ 2014.12.30
-	// Boom Pressure Calibration ¿Ï·á ÆË¾÷ ÈÄ List È­¸éÀ¸·Î ³ª°¡µµ·Ï ¼öÁ¤ 2014.12.30
-	// FAN EPPR V/V Current ´ÜÀ§ ¿À·ù ¼öÁ¤ 2014.12.30
-	// ¼Ò¸ğÇ° °ü¸® Hyd. Tank Air Breatehr Filter Cartridge ¿¡¼­ Cartridge ´Ü¾î »èÁ¦ 2014.12.30
-	// ¶óµğ¿À ¹öÆ° ¼±ÅÃ ¿µ¿ª °íÁ¤ 2014.12.30
-	// ¸ŞÀÎÈ­¸éÀÇ ÀåºñÁ¤º¸, Hourmeter ¾ÆÀÌÄÜ ¾Ö´Ï¸ŞÀÌ¼Ç ½Ã ¹è°æ¿¡ ±âÁ¸ ¾ÆÀÌÄÜÀÌ ³ª¿À´Â °Í »èÁ¦ 2014.12.30
-	// ¸ŞÀÎÈ­¸éÀÇ Äü¸Ş´º¿¡¼­ Wifi, Bluetooth »èÁ¦ ¹× ¸ÖÆ¼¹Ìµğ¾î ¹öÆ° ÀÌµ¿ 214.12.30
-	// Ä«¸Ş¶ó ÁøÀÔ ÈÄ ´Ù¸¥ Å° ¹öÆ° ÀÔ·ÂµÇÁö ¾Êµµ·Ï ¼öÁ¤ 2014.12.31
-	// Engine Auto Shutdown Countdown Áß Cancel ¹öÆ° Å¬¸¯ ½Ã 61184_121(SPN363) Off·Î ¼³Á¤ÇØ¼­ TxÇÏ°Ô ¼öÁ¤ 2014.12.31
-	// Eco Gauge »ö»ó º¯°æ, Yellow, Red »èÁ¦ 2015.01.05
-	// Cooling Fan Manual ¹öÆ° ´©¸¥ ÈÄ Off·Î µ¹¾Æ°¡±â -> Manual ÁøÀÔ ÈÄ ³ª°¥ ¶§, Auto·Î µ¹¾Æ°¡´Â °ÍÀ¸·Î ¼öÁ¤ 2015.01.05
-	// Cooling Fan Manual ÇÁ·ÎÅäÄİ Ãß°¡ 2015.01.07
-	// Auto Shutdown ±â´É BKCU¿Í Åë½Å ½Ã¿¡¸¸ È°¼ºÈ­ 2015.01.07
+	// Version Info Detail TCU,ECM Index ë§ì§€ ì•ŠëŠ” ê²ƒ ìˆ˜ì • 2014.12.19
+	// Error Report ìµœëŒ€ ê°¯ìˆ˜ 100ê°œë¡œ ìˆ˜ì •(100ê°œ ì´ˆê³¼ ì‹œ ê°€ì¥ ì˜¤ë˜ëœ ë‚ ì§œì˜ ë¡œê·¸ ì‚­ì œ) 2014.12.19
+	// Service Menuì— focus ì‹œ escí‚¤ ë¨¹ì§€ ì•ŠëŠ” ë¬¸ì œ ìˆ˜ì • 2014.12.19
+	// Start Can Command ì‚­ì œ 2014.12.22
+	// ë¹„ë°€ë²ˆí˜¸ ì…ë ¥ ì‹œ backí‚¤ ì§í›„ enter ëˆ„ë¥´ë©´ ì§„ì…ë˜ì§€ ì•ŠëŠ” ë¬¸ì œ ìˆ˜ì • 2014.12.22
+	// Engine Auto Shutdown ì„¤ì • ê°’ ë°›ëŠ” ë¶€ë¶„ 65428 -> 61184_122ë¡œ ìˆ˜ì • 2014.12.26
+	// í›„ì§„ ê¸°ì–´ ì—°ë™ ëˆ„ë½ ìˆ˜ì • 2014.12.29
+	// Firmware Version ë¬¸êµ¬ ì˜¤ë¥˜ ìˆ˜ì • 2014.12.30
+	// Boom Bucket Detent Mode í™”ë©´ì˜ Boom Off/On ì„ íƒì‹œ ë°˜ëŒ€ë¡œ ëˆŒë¦¬ëŠ” í˜„ìƒ ìˆ˜ì • 2014.12.30
+	// Boom Pressure Calibration ì™„ë£Œ íŒì—… í›„ List í™”ë©´ìœ¼ë¡œ ë‚˜ê°€ë„ë¡ ìˆ˜ì • 2014.12.30
+	// FAN EPPR V/V Current ë‹¨ìœ„ ì˜¤ë¥˜ ìˆ˜ì • 2014.12.30
+	// ì†Œëª¨í’ˆ ê´€ë¦¬ Hyd. Tank Air Breatehr Filter Cartridge ì—ì„œ Cartridge ë‹¨ì–´ ì‚­ì œ 2014.12.30
+	// ë¼ë””ì˜¤ ë²„íŠ¼ ì„ íƒ ì˜ì—­ ê³ ì • 2014.12.30
+	// ë©”ì¸í™”ë©´ì˜ ì¥ë¹„ì •ë³´, Hourmeter ì•„ì´ì½˜ ì• ë‹ˆë©”ì´ì…˜ ì‹œ ë°°ê²½ì— ê¸°ì¡´ ì•„ì´ì½˜ì´ ë‚˜ì˜¤ëŠ” ê²ƒ ì‚­ì œ 2014.12.30
+	// ë©”ì¸í™”ë©´ì˜ í€µë©”ë‰´ì—ì„œ Wifi, Bluetooth ì‚­ì œ ë° ë©€í‹°ë¯¸ë””ì–´ ë²„íŠ¼ ì´ë™ 214.12.30
+	// ì¹´ë©”ë¼ ì§„ì… í›„ ë‹¤ë¥¸ í‚¤ ë²„íŠ¼ ì…ë ¥ë˜ì§€ ì•Šë„ë¡ ìˆ˜ì • 2014.12.31
+	// Engine Auto Shutdown Countdown ì¤‘ Cancel ë²„íŠ¼ í´ë¦­ ì‹œ 61184_121(SPN363) Offë¡œ ì„¤ì •í•´ì„œ Txí•˜ê²Œ ìˆ˜ì • 2014.12.31
+	// Eco Gauge ìƒ‰ìƒ ë³€ê²½, Yellow, Red ì‚­ì œ 2015.01.05
+	// Cooling Fan Manual ë²„íŠ¼ ëˆ„ë¥¸ í›„ Offë¡œ ëŒì•„ê°€ê¸° -> Manual ì§„ì… í›„ ë‚˜ê°ˆ ë•Œ, Autoë¡œ ëŒì•„ê°€ëŠ” ê²ƒìœ¼ë¡œ ìˆ˜ì • 2015.01.05
+	// Cooling Fan Manual í”„ë¡œí† ì½œ ì¶”ê°€ 2015.01.07
+	// Auto Shutdown ê¸°ëŠ¥ BKCUì™€ í†µì‹  ì‹œì—ë§Œ í™œì„±í™” 2015.01.07
 	////1.0.2.9 2015.01.15
-	// SmartKey °æ°í ¹®±¸ ÁÖÈ²»öÀ¸·Î º¯°æ 2015.01.14
-	// ³Ã°¢ÆÒ ¿ªÈ¸Àü Manual ½ÇÇà ÈÄ ÀÌÀü »óÅÂ·Î µ¹¾Æ°¡µµ·Ï ¼öÁ¤(Auto Setting »èÁ¦) 2015.01.14
-	// Hydraulic Tank Air Breather ¹®±¸ ¼öÁ¤ 2015.01.14
-	// Fine Modulation Å°¹öÆ° Å¬¸¯ ½Ã ÃÖÃÊ 1È¸ µ¥ÀÌÅÍ º¯°æ ¾ÈµÇ´Â ¹®Á¦ ¼öÁ¤ 2015.01.14
-	// Ä«¸Ş¶ó ÈÄÁø ±â¾î ¿¬µ¿ ÈÄ Å° ¹öÆ° ÀÔ·Â ¾ÈµÇ´Â ¹®Á¦ ¼öÁ¤ 2015.01.14
-	// Ä«¸Ş¶ó ÈÄÁø ±â¾î ¿¬µ¿ ½Ã ÈÄÁø ±â¾î Check ½Ã°£ º¯°æ (1000ms -> 400ms) 2015.01.14
-	// ECM Version Á¤º¸ Ç¥½Ã È­¸é Crash ¹ö±× ¼öÁ¤ 2015.01.14
-	// Latest Odometer Reset ¾ÈµÇ´Â ¹®Á¦ ¼öÁ¤ 2015.01.14
+	// SmartKey ê²½ê³  ë¬¸êµ¬ ì£¼í™©ìƒ‰ìœ¼ë¡œ ë³€ê²½ 2015.01.14
+	// ëƒ‰ê°íŒ¬ ì—­íšŒì „ Manual ì‹¤í–‰ í›„ ì´ì „ ìƒíƒœë¡œ ëŒì•„ê°€ë„ë¡ ìˆ˜ì •(Auto Setting ì‚­ì œ) 2015.01.14
+	// Hydraulic Tank Air Breather ë¬¸êµ¬ ìˆ˜ì • 2015.01.14
+	// Fine Modulation í‚¤ë²„íŠ¼ í´ë¦­ ì‹œ ìµœì´ˆ 1íšŒ ë°ì´í„° ë³€ê²½ ì•ˆë˜ëŠ” ë¬¸ì œ ìˆ˜ì • 2015.01.14
+	// ì¹´ë©”ë¼ í›„ì§„ ê¸°ì–´ ì—°ë™ í›„ í‚¤ ë²„íŠ¼ ì…ë ¥ ì•ˆë˜ëŠ” ë¬¸ì œ ìˆ˜ì • 2015.01.14
+	// ì¹´ë©”ë¼ í›„ì§„ ê¸°ì–´ ì—°ë™ ì‹œ í›„ì§„ ê¸°ì–´ Check ì‹œê°„ ë³€ê²½ (1000ms -> 400ms) 2015.01.14
+	// ECM Version ì •ë³´ í‘œì‹œ í™”ë©´ Crash ë²„ê·¸ ìˆ˜ì • 2015.01.14
+	// Latest Odometer Reset ì•ˆë˜ëŠ” ë¬¸ì œ ìˆ˜ì • 2015.01.14
 	////1.0.3.0 2015.01.27
-	// ¶óµğ¿À ¹öÆ° µğÀÚÀÎ º¯°æ
-	// Ä«¸Ş¶ó È­¸é¿¡¼­ Off ¹öÆ° Àû¿ë
-	// ½ºÇÇÄ¿ ¾ÆÀÌÄÜ 2°¡Áö·Î º¯°æ (Off / On)
-	// ½º¸¶Æ®Å° Timeout ¿¡·¯ Ãß°¡
-	// Ä«¸Ş¶óÈ­¸é ÁøÀÔ ÈÄ ¿ÍÀÌÆÛ ÁøÀÔ ½Ã ¸ŞÀÎÈ­¸éÀ¸·Î ³ª¿À´Â ¹®Á¦ ¼öÁ¤
-	// WorkLoad Cancel ¹öÆ° »èÁ¦
-	// QuickCoupler ÆË¾÷ UI Ãß°¡
-	// User Switching ±â´É Ãß°¡
-	// BKCU ¹öÀüÁ¤º¸ Ãß°¡
-	// Battery Voltage ¹üÀ§ ¹ÛÀÏ °æ¿ì - ·Î Ç¥½Ã
-	// Soft End Stop Default Popup Ãß°¡
-	// ¸ŞÀÎÀÇ ÀåºñÁ¤º¸ ¼±ÅÃ È­¸é¿¡¼­ ¶óµğ¿À ¹öÆ° ºü¸£°Ô ¼±ÅÃ ½Ã ¼±ÅÃÀÌ Àß ¾ÈµÇ´Â ¹®Á¦ ¼öÁ¤
-	// °¡»ó Å°ÆĞµå µŞ ¿µ¿ª ÅÍÄ¡µÇ´Â ¹®Á¦ ¼öÁ¤
-	// Main Buzzer Stop ÈÄ Àá±ñµ¿¾È Buzzer ÄÑÁö´Â ¹®Á¦ ¼öÁ¤
-	// ½Ã°£ ¼³Á¤ Ä¿¼­ ÀÌ¹ÌÁö º¯°æ 
-	// AS Phone Number RMCU¿Í ¿¬µ¿ 
+	// ë¼ë””ì˜¤ ë²„íŠ¼ ë””ìì¸ ë³€ê²½
+	// ì¹´ë©”ë¼ í™”ë©´ì—ì„œ Off ë²„íŠ¼ ì ìš©
+	// ìŠ¤í”¼ì»¤ ì•„ì´ì½˜ 2ê°€ì§€ë¡œ ë³€ê²½ (Off / On)
+	// ìŠ¤ë§ˆíŠ¸í‚¤ Timeout ì—ëŸ¬ ì¶”ê°€
+	// ì¹´ë©”ë¼í™”ë©´ ì§„ì… í›„ ì™€ì´í¼ ì§„ì… ì‹œ ë©”ì¸í™”ë©´ìœ¼ë¡œ ë‚˜ì˜¤ëŠ” ë¬¸ì œ ìˆ˜ì •
+	// WorkLoad Cancel ë²„íŠ¼ ì‚­ì œ
+	// QuickCoupler íŒì—… UI ì¶”ê°€
+	// User Switching ê¸°ëŠ¥ ì¶”ê°€
+	// BKCU ë²„ì „ì •ë³´ ì¶”ê°€
+	// Battery Voltage ë²”ìœ„ ë°–ì¼ ê²½ìš° - ë¡œ í‘œì‹œ
+	// Soft End Stop Default Popup ì¶”ê°€
+	// ë©”ì¸ì˜ ì¥ë¹„ì •ë³´ ì„ íƒ í™”ë©´ì—ì„œ ë¼ë””ì˜¤ ë²„íŠ¼ ë¹ ë¥´ê²Œ ì„ íƒ ì‹œ ì„ íƒì´ ì˜ ì•ˆë˜ëŠ” ë¬¸ì œ ìˆ˜ì •
+	// ê°€ìƒ í‚¤íŒ¨ë“œ ë’· ì˜ì—­ í„°ì¹˜ë˜ëŠ” ë¬¸ì œ ìˆ˜ì •
+	// Main Buzzer Stop í›„ ì ê¹ë™ì•ˆ Buzzer ì¼œì§€ëŠ” ë¬¸ì œ ìˆ˜ì •
+	// ì‹œê°„ ì„¤ì • ì»¤ì„œ ì´ë¯¸ì§€ ë³€ê²½ 
+	// AS Phone Number RMCUì™€ ì—°ë™ 
 	////1.0.3.1 2015.01.29
-	// ¼ıÀÚ Å°ÆĞµå Àû¿ë
-	// ¹öÆ°À¸·Î Ä«¸Ş¶ó ÁøÀÔ ½Ã È­¸é ÅÍÄ¡·Î ³ª°¡´Â ±â´É ´©¶ôµÈ ºÎºĞ Ãß°¡
-	// ½Ã°£ ¼³Á¤ 10½ÃÀÏ °æ¿ì ½Ã°£À§Ä¡¿¡ 0 ÀÔ·Â ½Ã 12½Ã·Î ¹Ù²î´Â ¹®Á¦ ¼öÁ¤
-	// Ä«¸Ş¶ó ÈÄÁø±â¾î ¿¬µ¿ ½Ã Å°¹öÆ° ÀÎ½ÄÇÏ´Â ¹®Á¦ ¼öÁ¤
-	// Sensor Monitoring, Version Info ½ºÅ©·Ñ¿¡ ÁÂ¿ìÅ°·Î ½ºÅ©·Ñ Á¶ÀıÇÏ´Â ±â´É Ãß°¡
-	// Quick Coupler ÆË¾÷ Áß Camera ÁøÀÔµÇ´Â ¹®Á¦ ¼öÁ¤
+	// ìˆ«ì í‚¤íŒ¨ë“œ ì ìš©
+	// ë²„íŠ¼ìœ¼ë¡œ ì¹´ë©”ë¼ ì§„ì… ì‹œ í™”ë©´ í„°ì¹˜ë¡œ ë‚˜ê°€ëŠ” ê¸°ëŠ¥ ëˆ„ë½ëœ ë¶€ë¶„ ì¶”ê°€
+	// ì‹œê°„ ì„¤ì • 10ì‹œì¼ ê²½ìš° ì‹œê°„ìœ„ì¹˜ì— 0 ì…ë ¥ ì‹œ 12ì‹œë¡œ ë°”ë€ŒëŠ” ë¬¸ì œ ìˆ˜ì •
+	// ì¹´ë©”ë¼ í›„ì§„ê¸°ì–´ ì—°ë™ ì‹œ í‚¤ë²„íŠ¼ ì¸ì‹í•˜ëŠ” ë¬¸ì œ ìˆ˜ì •
+	// Sensor Monitoring, Version Info ìŠ¤í¬ë¡¤ì— ì¢Œìš°í‚¤ë¡œ ìŠ¤í¬ë¡¤ ì¡°ì ˆí•˜ëŠ” ê¸°ëŠ¥ ì¶”ê°€
+	// Quick Coupler íŒì—… ì¤‘ Camera ì§„ì…ë˜ëŠ” ë¬¸ì œ ìˆ˜ì •
 	////1.0.3.2 2015.01.29
-	// Quick Coupler ÆË¾÷ Áß Camera ÁøÀÔµÇ°Ô ¼öÁ¤
-	// ½Ã°£ ¼³Á¤ 10½ÃÀÏ °æ¿ì ½Ã°£À§Ä¡¿¡ 0 ÀÔ·Â ½Ã 12½Ã·Î ¹Ù²î°Ô ´Ù½Ã ¼öÁ¤ 
+	// Quick Coupler íŒì—… ì¤‘ Camera ì§„ì…ë˜ê²Œ ìˆ˜ì •
+	// ì‹œê°„ ì„¤ì • 10ì‹œì¼ ê²½ìš° ì‹œê°„ìœ„ì¹˜ì— 0 ì…ë ¥ ì‹œ 12ì‹œë¡œ ë°”ë€Œê²Œ ë‹¤ì‹œ ìˆ˜ì • 
 	////-----bwk
 	////1.0.3.3 2015.02.12
-	// weighting system compensation ÀÔ·Â ¹æ½Ä ¼öÁ¤ ¹× ±âÅ¸ ¹ö±× °³¼±
-	// ECM/TCU/EHCU fault code description Ãß°¡ 
-	// Boom pressure Calibration : HCESPN1908 = 14 Ãß°¡ ¹× UI º¯°æ(ÀÛµ¿À¯ ¿Âµµ Ç¥½Ã ¹× °æ°í¹®±¸ Ãß°¡)
-	// F½Ã¸®Áî Åë½Å°³Åë ÀÚµ¿È­(Àåºñ°íÀå ÆäÀÌÁö¿¡¼­ Screen Number Àü¼Û, ±×¿Ü 0xff) + Å°°ªÀü¼Û(ST 1.0.1.9), ÇöÀç°íÀå ÆäÀÌÁö¿¡¼­ HomeÅ° ¸·À½
-	// ¸ŞÀÎ È­¸éÀÇ ÀÛ¾÷·® °èÃø°ª Ç¥½ÃºÎ : Åë½Å»ç¾çº¯°æ, IconÃß°¡, °¡ÀÌ´ø½º Ãß°¡, Enter·Î reweighÇÏµµ·Ï ·ÎÁ÷ º¯°æ
-	// Å°ÆĞµå È÷µç ±â´É °ü·Ã : < + > + Enter -> ´Ù±¹¾î
-	// EHCU POP UP °ü·Ã ¹İ¿µ : Safety CPU Error ÆË¾÷ÀÏ °æ¿ì KeyoffÀü¿¡ ²¨ÁöÁö ¾ÊÀ½. 0000ÀÏ °æ¿ì ÆË¾÷ Á¾·á
-	// ´Ù±¹¾î Àû¿ë : ÇÑ±¹¾î¸¸ Àû¿ë, ´Ù±¹¾î ÆäÀÌÁö Ãß°¡
-	// speedometer freq. setting : <- Å° ¿À·ù ¼öÁ¤
-	// Work Load : Å°ÆĞµå ¹öÆ° UIÀÏ ¶§ Default ÆË¾÷Ã¢ Ãß°¡, ºÕ¾Ğ·Â º¸Á¤Ç×¸ñ ¼±ÅÃÈÄ ÀÌÀü È­¸éÀ¸·Î ÀÌµ¿(MainÀº ÇØ´çÆäÀÌÁö°¡ ¾Æ´Ñ mainÀ¸·Î ÀÌµ¿)
-	// Main->½Ã°è¼³Á¤, ¿ÍÀÌÆÛ¼³Á¤,´Ù±¹¾î¼³Á¤ ÆäÀÌÁö ÀÌµ¿ ÈÄ HomeÅ° ´©¸¦ °æ¿ì Crash¶ß´Â ¹ö±× ¼öÁ¤
-	// Operation History : ÅÍÄ¡ ¿µ¿ª ¸®½ºÆ® ÀüÃ¼°¡ µÇµµ·Ï ¼öÁ¤
-	// Å°ÆĞµå ¹öÆ° UI : Main Light : 3´Ü°è Position + Head Lamp
-	// Å°ÆĞµå ¹öÆ° UI : Work Light : 3´Ü°è Front + Rear Lamp
-	// Å°ÆĞµå ¹öÆ° UI : Mirror Heat : cancelÀ» off·Î
-	// Å°ÆĞµå ¹öÆ° UI : rear wiper : keypad longkey ÀÔ·Â ½Ã washer µ¿ÀÛ intermittant, ÀÌ ÈÄ ÀÌÀü°ªÀ¸·Î ÀÌµ¿µÇµµ·Ï ¼öÁ¤
-	// Intro/Outro Àû¿ë (Intro : OS 1.0.6)
-	// ³Ã°¢ÆÒ ¼³Á¤ : ManualÀÇ Execute ¹öÆ°¿¡ ´ëÇÑ ¼³¸í ¹®±¸ Àû¿ë (¡®push and hold to reverse rotation¡¯)
-	// Version Á¤º¸ : EHCU À¯¹« ÆÇ´ÜÇÏ¿© Ç¥½Ã
-	// ¸ÖÆ¼¹Ìµğ¾î ½ÇÇà ½Ã rpm 1500 ÀÌ»óÀÏ °æ¿ì(3ÃÊÀ¯Áö) HomeÀ¸·Î, 1500 ÀÌÇÏÀÏ °æ¿ì ´Ù½Ã ¸ÖÆ¼¹Ìµğ¾î·Î
-	// °íÀåÀÌ·Â : ÇöÀç°íÀå, °ú°Å°íÀå Å°ÆĞµå ¿¬µ¿(detail list Á¦¿Ü)
-	// °ú°Å°íÀå - Æ®·£½º¹Ì¼Ç - Detail Error Å¬¸¯ ½Ã Crash ¼öÁ¤(150212)
-	// AEB ÀüÈ¯ ½Ã TM Ãß°¡ ¹× ±âÁ¸À¸·Î µ¹¾Æ°¥ °æ¿ì ±âÁ¸ Ç¥½ÃÇÏ´ø Àåºñ»óÅÂ·Î º¹±¸(150212)
-	// Auto Grease : ¹®±¸ ¸Ç µÚ¿¡ for once Ãß°¡(150212)
-	// Weighing ÇÁ·ÎÅäÄİ(PGN 65450) MCU ¹ÌÀû¿ëÀ¸·Î ¿øº¹(150212)
+	// weighting system compensation ì…ë ¥ ë°©ì‹ ìˆ˜ì • ë° ê¸°íƒ€ ë²„ê·¸ ê°œì„ 
+	// ECM/TCU/EHCU fault code description ì¶”ê°€ 
+	// Boom pressure Calibration : HCESPN1908 = 14 ì¶”ê°€ ë° UI ë³€ê²½(ì‘ë™ìœ  ì˜¨ë„ í‘œì‹œ ë° ê²½ê³ ë¬¸êµ¬ ì¶”ê°€)
+	// Fì‹œë¦¬ì¦ˆ í†µì‹ ê°œí†µ ìë™í™”(ì¥ë¹„ê³ ì¥ í˜ì´ì§€ì—ì„œ Screen Number ì „ì†¡, ê·¸ì™¸ 0xff) + í‚¤ê°’ì „ì†¡(ST 1.0.1.9), í˜„ì¬ê³ ì¥ í˜ì´ì§€ì—ì„œ Homeí‚¤ ë§‰ìŒ
+	// ë©”ì¸ í™”ë©´ì˜ ì‘ì—…ëŸ‰ ê³„ì¸¡ê°’ í‘œì‹œë¶€ : í†µì‹ ì‚¬ì–‘ë³€ê²½, Iconì¶”ê°€, ê°€ì´ë˜ìŠ¤ ì¶”ê°€, Enterë¡œ reweighí•˜ë„ë¡ ë¡œì§ ë³€ê²½
+	// í‚¤íŒ¨ë“œ íˆë“  ê¸°ëŠ¥ ê´€ë ¨ : < + > + Enter -> ë‹¤êµ­ì–´
+	// EHCU POP UP ê´€ë ¨ ë°˜ì˜ : Safety CPU Error íŒì—…ì¼ ê²½ìš° Keyoffì „ì— êº¼ì§€ì§€ ì•ŠìŒ. 0000ì¼ ê²½ìš° íŒì—… ì¢…ë£Œ
+	// ë‹¤êµ­ì–´ ì ìš© : í•œêµ­ì–´ë§Œ ì ìš©, ë‹¤êµ­ì–´ í˜ì´ì§€ ì¶”ê°€
+	// speedometer freq. setting : <- í‚¤ ì˜¤ë¥˜ ìˆ˜ì •
+	// Work Load : í‚¤íŒ¨ë“œ ë²„íŠ¼ UIì¼ ë•Œ Default íŒì—…ì°½ ì¶”ê°€, ë¶ì••ë ¥ ë³´ì •í•­ëª© ì„ íƒí›„ ì´ì „ í™”ë©´ìœ¼ë¡œ ì´ë™(Mainì€ í•´ë‹¹í˜ì´ì§€ê°€ ì•„ë‹Œ mainìœ¼ë¡œ ì´ë™)
+	// Main->ì‹œê³„ì„¤ì •, ì™€ì´í¼ì„¤ì •,ë‹¤êµ­ì–´ì„¤ì • í˜ì´ì§€ ì´ë™ í›„ Homeí‚¤ ëˆ„ë¥¼ ê²½ìš° Crashëœ¨ëŠ” ë²„ê·¸ ìˆ˜ì •
+	// Operation History : í„°ì¹˜ ì˜ì—­ ë¦¬ìŠ¤íŠ¸ ì „ì²´ê°€ ë˜ë„ë¡ ìˆ˜ì •
+	// í‚¤íŒ¨ë“œ ë²„íŠ¼ UI : Main Light : 3ë‹¨ê³„ Position + Head Lamp
+	// í‚¤íŒ¨ë“œ ë²„íŠ¼ UI : Work Light : 3ë‹¨ê³„ Front + Rear Lamp
+	// í‚¤íŒ¨ë“œ ë²„íŠ¼ UI : Mirror Heat : cancelì„ offë¡œ
+	// í‚¤íŒ¨ë“œ ë²„íŠ¼ UI : rear wiper : keypad longkey ì…ë ¥ ì‹œ washer ë™ì‘ intermittant, ì´ í›„ ì´ì „ê°’ìœ¼ë¡œ ì´ë™ë˜ë„ë¡ ìˆ˜ì •
+	// Intro/Outro ì ìš© (Intro : OS 1.0.6)
+	// ëƒ‰ê°íŒ¬ ì„¤ì • : Manualì˜ Execute ë²„íŠ¼ì— ëŒ€í•œ ì„¤ëª… ë¬¸êµ¬ ì ìš© (â€˜push and hold to reverse rotationâ€™)
+	// Version ì •ë³´ : EHCU ìœ ë¬´ íŒë‹¨í•˜ì—¬ í‘œì‹œ
+	// ë©€í‹°ë¯¸ë””ì–´ ì‹¤í–‰ ì‹œ rpm 1500 ì´ìƒì¼ ê²½ìš°(3ì´ˆìœ ì§€) Homeìœ¼ë¡œ, 1500 ì´í•˜ì¼ ê²½ìš° ë‹¤ì‹œ ë©€í‹°ë¯¸ë””ì–´ë¡œ
+	// ê³ ì¥ì´ë ¥ : í˜„ì¬ê³ ì¥, ê³¼ê±°ê³ ì¥ í‚¤íŒ¨ë“œ ì—°ë™(detail list ì œì™¸)
+	// ê³¼ê±°ê³ ì¥ - íŠ¸ëœìŠ¤ë¯¸ì…˜ - Detail Error í´ë¦­ ì‹œ Crash ìˆ˜ì •(150212)
+	// AEB ì „í™˜ ì‹œ TM ì¶”ê°€ ë° ê¸°ì¡´ìœ¼ë¡œ ëŒì•„ê°ˆ ê²½ìš° ê¸°ì¡´ í‘œì‹œí•˜ë˜ ì¥ë¹„ìƒíƒœë¡œ ë³µêµ¬(150212)
+	// Auto Grease : ë¬¸êµ¬ ë§¨ ë’¤ì— for once ì¶”ê°€(150212)
+	// Weighing í”„ë¡œí† ì½œ(PGN 65450) MCU ë¯¸ì ìš©ìœ¼ë¡œ ì›ë³µ(150212)
 	////1.0.3.4 2015.02.13
-	// Engine Auto Shutdown ¹ö±× ¼öÁ¤
-	//  - Left, Right Å° ÃÖ¼Ò/ÃÖ´ë ¹ö±× ¼öÁ¤
-	//  - ¸Ş´º ¿·¿¡ ½Ã°£ Ç¥½ÃºÎºĞ ¼Ò¼ıÁ¡ »èÁ¦
-	//  - MCU·ÎºÎÅÍ ¹ŞÀº °ªÀÌ 2ºĞ ÀÌÇÏ¸é 2ºĞ, 40ºĞ ÀÌ»óÀÌ¸é 40ºĞÀ¸·Î Ç¥½Ã
-	// User Switching : ¸¶Áö¸·¿¡ ¼±ÅÃÇÑ Index·Î º¸¿©ÁÜ, ´Ù±¹¾î Ç¥½Ã
-	// AEB : center¿¡ rpm Ç¥½Ã Ãß°¡
-	// Weighing ÇÁ·ÎÅäÄİ º¯°æµÈ °ÍÀ¸·Î Àû¿ë(PGN 65450)
+	// Engine Auto Shutdown ë²„ê·¸ ìˆ˜ì •
+	//  - Left, Right í‚¤ ìµœì†Œ/ìµœëŒ€ ë²„ê·¸ ìˆ˜ì •
+	//  - ë©”ë‰´ ì˜†ì— ì‹œê°„ í‘œì‹œë¶€ë¶„ ì†Œìˆ«ì  ì‚­ì œ
+	//  - MCUë¡œë¶€í„° ë°›ì€ ê°’ì´ 2ë¶„ ì´í•˜ë©´ 2ë¶„, 40ë¶„ ì´ìƒì´ë©´ 40ë¶„ìœ¼ë¡œ í‘œì‹œ
+	// User Switching : ë§ˆì§€ë§‰ì— ì„ íƒí•œ Indexë¡œ ë³´ì—¬ì¤Œ, ë‹¤êµ­ì–´ í‘œì‹œ
+	// AEB : centerì— rpm í‘œì‹œ ì¶”ê°€
+	// Weighing í”„ë¡œí† ì½œ ë³€ê²½ëœ ê²ƒìœ¼ë¡œ ì ìš©(PGN 65450)
 	////1.0.3.5
-	//1. User Switching : Ä«Å×°í¸® Language Àû¿ë
-	//2. Speedometer Freq. Setting : ¹®±¸¿¡¼­ ¡®ÁÖÆÄ¼ö¡¯ »èÁ¦ ¹× ´ÜÀ§¼öÁ¤(Hz -> rpm/km/h)
-	//3. ¼­ºñ½º ºñ¹Ğ¹øÈ£
-	// - »ç¿ëÀÚ ºñ¹Ğ¹øÈ£ ÀÔ·Â ½Ã ºñ¹Ğ¹øÈ£ ¿À·ù Ä«¿îÆ® ¾ÈµÇ´Â ¹ö±× ¼öÁ¤(°ú°Å°íÀå, °ü¸®ÀÚ ¸Ş´º)
-	// - ¼­ºñ½º ºñ¹Ğ¹øÈ£ ÀÔ·Â ¿À·ù ½Ã ¡®¼­ºñ½º ºñ¹Ğ¹øÈ£¡¯·Î ¶°¾ß ÇÏ´Âµ¥ ¡®»ç¿ëÀÚ ºñ¹Ğ¹øÈ£¡¯¶ó°í ¶ß´Â ¹ö±× ¼öÁ¤
-	//4. °íÀåÀÌ·Â : ÇöÀç°íÀå, °ú°Å°íÀå Å°ÆĞµå ¿¬µ¿(detail list Æ÷ÇÔ)
-	//5. ´Ù±¹¾î Àû¿ë(ÃÑ 21°³ ¾ğ¾î)
-	// - ¾Æ¶ø¾î List ºÎºĞ ¿À¸¥ÂÊ Á¤·ÄµÇ´Â ºÎºĞ ¸ğµÎ ¿ŞÂÊ Á¤·Ä·Î º¯°æ(List, ´ÜÀ§º¯È¯, Workload, Soft End Stop)
-	// - ´Ù±¹¾î Àû¿ë ½Ã ÆË¾÷Àº Àû¿ëµÇÁö ¾Ê´Â ¹ö±× ¼öÁ¤
-	// - ¸Ş´º ÁÂÃø ¹Ù ¾ÆÀÌÄÜ ¾Æ·¡ ¹®±¸ Å©±â ÁöÁ¤
-	// - È­¸é Å¸ÀÔ ¼³Á¤ / ´Ù±¹¾î ¼³Á¤ ¹®±¸¿¡¼­ ¡®´Ù±¹¾î ¼³Á¤¡¯ -> ¡®´Ù±¹¾î¡¯·Î º¯°æ(ÇÑ±¹¾î Á¦¿Ü)
-	//   (³Ê¹« ±æ¾î¼­ µÎÁÙ·Î Ç¥½ÃµÇ¾î º¯°æÇÔ)
-	// - ¸Ş´º ¸®½ºÆ®¿¡¼­ ´Ù±¹¾î°¡ ±æ °æ¿ì 2ÁÙ·Î Ç¥½ÃµÇ¾î TextView »çÀÌÁî ´Ã¸²
-	//   (ÃßÈÄ ¿À¸¥ÂÊ¿¡ Ç¥½ÃµÇ´Â Data¿Í °ãÄ¡Áö ¾Ê´ÂÁö È®ÀÎ ÇÊ¿ä)
-	// - ¹öÀüÁ¤º¸¿¡¼­ 'EHCU', 'TCU', 'Machine', 'Transmission', 'Engine' ´Ù±¹¾î Àû¿ë ½Ã ¹®±¸°¡ Â©¸®´Â °æ¿ì°¡ ¹ß»ıÇÏ¿© 
-	//   "EHCU", "TCU", "Machine", "Transmission", "Engine" Ç¥±â·Î º¯°æ
-	//   (ÃßÈÄ ÇùÀÇ È¤Àº UI º¯°æ ÇÊ¿ä)
-	// - ÇöÀç µÎÁÙ·Î Ç¥½ÃµÇ´Â ºÎºĞÀÌ ÀÖÀ¸³ª, Çö´ë¿¡¼­ ´Ù±¹¾î ¹ø¿ªº»ÀÌ ¸ğµÎ ¿Â ÈÄ ¸ÂÃâ ¿¹Á¤(ex : ÀÚµ¿)
-	//6. Media Player ¿ÀÅ¸ ¼öÁ¤(Palyer·Î µÇ¾îÀÖ¾úÀ½)
-	//7. AM 10:20 -> 0À» ´©¸£¸é 12½Ã·Î º¯°æµÇ´Â ¹ö±× ¼öÁ¤
+	//1. User Switching : ì¹´í…Œê³ ë¦¬ Language ì ìš©
+	//2. Speedometer Freq. Setting : ë¬¸êµ¬ì—ì„œ â€˜ì£¼íŒŒìˆ˜â€™ ì‚­ì œ ë° ë‹¨ìœ„ìˆ˜ì •(Hz -> rpm/km/h)
+	//3. ì„œë¹„ìŠ¤ ë¹„ë°€ë²ˆí˜¸
+	// - ì‚¬ìš©ì ë¹„ë°€ë²ˆí˜¸ ì…ë ¥ ì‹œ ë¹„ë°€ë²ˆí˜¸ ì˜¤ë¥˜ ì¹´ìš´íŠ¸ ì•ˆë˜ëŠ” ë²„ê·¸ ìˆ˜ì •(ê³¼ê±°ê³ ì¥, ê´€ë¦¬ì ë©”ë‰´)
+	// - ì„œë¹„ìŠ¤ ë¹„ë°€ë²ˆí˜¸ ì…ë ¥ ì˜¤ë¥˜ ì‹œ â€˜ì„œë¹„ìŠ¤ ë¹„ë°€ë²ˆí˜¸â€™ë¡œ ë– ì•¼ í•˜ëŠ”ë° â€˜ì‚¬ìš©ì ë¹„ë°€ë²ˆí˜¸â€™ë¼ê³  ëœ¨ëŠ” ë²„ê·¸ ìˆ˜ì •
+	//4. ê³ ì¥ì´ë ¥ : í˜„ì¬ê³ ì¥, ê³¼ê±°ê³ ì¥ í‚¤íŒ¨ë“œ ì—°ë™(detail list í¬í•¨)
+	//5. ë‹¤êµ­ì–´ ì ìš©(ì´ 21ê°œ ì–¸ì–´)
+	// - ì•„ëì–´ List ë¶€ë¶„ ì˜¤ë¥¸ìª½ ì •ë ¬ë˜ëŠ” ë¶€ë¶„ ëª¨ë‘ ì™¼ìª½ ì •ë ¬ë¡œ ë³€ê²½(List, ë‹¨ìœ„ë³€í™˜, Workload, Soft End Stop)
+	// - ë‹¤êµ­ì–´ ì ìš© ì‹œ íŒì—…ì€ ì ìš©ë˜ì§€ ì•ŠëŠ” ë²„ê·¸ ìˆ˜ì •
+	// - ë©”ë‰´ ì¢Œì¸¡ ë°” ì•„ì´ì½˜ ì•„ë˜ ë¬¸êµ¬ í¬ê¸° ì§€ì •
+	// - í™”ë©´ íƒ€ì… ì„¤ì • / ë‹¤êµ­ì–´ ì„¤ì • ë¬¸êµ¬ì—ì„œ â€˜ë‹¤êµ­ì–´ ì„¤ì •â€™ -> â€˜ë‹¤êµ­ì–´â€™ë¡œ ë³€ê²½(í•œêµ­ì–´ ì œì™¸)
+	//   (ë„ˆë¬´ ê¸¸ì–´ì„œ ë‘ì¤„ë¡œ í‘œì‹œë˜ì–´ ë³€ê²½í•¨)
+	// - ë©”ë‰´ ë¦¬ìŠ¤íŠ¸ì—ì„œ ë‹¤êµ­ì–´ê°€ ê¸¸ ê²½ìš° 2ì¤„ë¡œ í‘œì‹œë˜ì–´ TextView ì‚¬ì´ì¦ˆ ëŠ˜ë¦¼
+	//   (ì¶”í›„ ì˜¤ë¥¸ìª½ì— í‘œì‹œë˜ëŠ” Dataì™€ ê²¹ì¹˜ì§€ ì•ŠëŠ”ì§€ í™•ì¸ í•„ìš”)
+	// - ë²„ì „ì •ë³´ì—ì„œ 'EHCU', 'TCU', 'Machine', 'Transmission', 'Engine' ë‹¤êµ­ì–´ ì ìš© ì‹œ ë¬¸êµ¬ê°€ ì§¤ë¦¬ëŠ” ê²½ìš°ê°€ ë°œìƒí•˜ì—¬ 
+	//   "EHCU", "TCU", "Machine", "Transmission", "Engine" í‘œê¸°ë¡œ ë³€ê²½
+	//   (ì¶”í›„ í˜‘ì˜ í˜¹ì€ UI ë³€ê²½ í•„ìš”)
+	// - í˜„ì¬ ë‘ì¤„ë¡œ í‘œì‹œë˜ëŠ” ë¶€ë¶„ì´ ìˆìœ¼ë‚˜, í˜„ëŒ€ì—ì„œ ë‹¤êµ­ì–´ ë²ˆì—­ë³¸ì´ ëª¨ë‘ ì˜¨ í›„ ë§ì¶œ ì˜ˆì •(ex : ìë™)
+	//6. Media Player ì˜¤íƒ€ ìˆ˜ì •(Palyerë¡œ ë˜ì–´ìˆì—ˆìŒ)
+	//7. AM 10:20 -> 0ì„ ëˆ„ë¥´ë©´ 12ì‹œë¡œ ë³€ê²½ë˜ëŠ” ë²„ê·¸ ìˆ˜ì •
 	////1.0.3.6(15.03.06)
-	//1. MIAN-WARMING UP ¾Æ·¡ '(MANUAL)' ¹®±¸ Ãß°¡
-	//2. ½º¸¶Æ®Å° »ç¿ëÇÔ + ½º¸¶Æ®Å° ¼º°øÀÏ °æ¿ì °£ÇæÀûÀ¸·Î Service°¡ Á×¾î¼­ ½º¸¶Æ®Å° È­¸éÀÌ °è¼Ó ³ª¿È
-	//   -> ½º¸¶Æ®Å° ¼º°ø ÀÌ¹ÌÁö º¸¿©ÁÖ´Â ºÎºĞ »èÁ¦, Å¸ÀÌ¸Ó 2¹øÁ×ÀÌ´Â °Í 1¹ø¸¸ Á×ÀÌµµ·Ï ÇÔ
-	//3. º¸Á¤ ÈÄ °á°ú ÆË¾÷ ±ÛÀÚ ¶ßÁö ¾Ê´Â ¹ö±× ¼öÁ¤(´Ù±¹¾î Àû¿ë ½Ã ÆË¾÷ ¸®¼Â)
-	//  - ±âÁ¸ ´Ù±¹¾î Àû¿ëÇÒ ¶§ ÆË¾÷¸¶´Ù new ÇÏ¿´´ø ºÎºĞ ¿ø»óº¹±¸
-	//4. º¸Á¤ ÈÄ °á°ú ÆË¾÷ : ¹®ÀÚ Â©¸®´Â °æ¿ì ¹ß»ı -> ¼öÁ¤(margin ÁÜ)
-	//5. ¸ŞÀÎÈ­¸é¿¡¼­ CCO, ICCO Å¸ÀÌÆ²¹Ù ¾Ö´Ï¸ŞÀÌ¼Ç Á¦°Å(HHI ÀÓÇõÁØ ¿äÃ»)
-	//6. ½º¸¶Æ®Å° »ç¿ë¾ÈÇÔ + ½Ãµ¿Á¦ÇÑ ÀÏ °æ¿ì ºÎÆÃ ½Ã ½Ãµ¿Á¦ÇÑ ºñ¹Ğ¹øÈ£ ¾È¶ß´Â ¹ö±× ¼öÁ¤(»ç¿ë¾ÈÇÔÀÏ °æ¿ì ST·Î º¸³»´Â ºÎºĞÀÌ ÁÖ¼®µÇ¾îÀÖ¾úÀ½)
+	//1. MIAN-WARMING UP ì•„ë˜ '(MANUAL)' ë¬¸êµ¬ ì¶”ê°€
+	//2. ìŠ¤ë§ˆíŠ¸í‚¤ ì‚¬ìš©í•¨ + ìŠ¤ë§ˆíŠ¸í‚¤ ì„±ê³µì¼ ê²½ìš° ê°„í—ì ìœ¼ë¡œ Serviceê°€ ì£½ì–´ì„œ ìŠ¤ë§ˆíŠ¸í‚¤ í™”ë©´ì´ ê³„ì† ë‚˜ì˜´
+	//   -> ìŠ¤ë§ˆíŠ¸í‚¤ ì„±ê³µ ì´ë¯¸ì§€ ë³´ì—¬ì£¼ëŠ” ë¶€ë¶„ ì‚­ì œ, íƒ€ì´ë¨¸ 2ë²ˆì£½ì´ëŠ” ê²ƒ 1ë²ˆë§Œ ì£½ì´ë„ë¡ í•¨
+	//3. ë³´ì • í›„ ê²°ê³¼ íŒì—… ê¸€ì ëœ¨ì§€ ì•ŠëŠ” ë²„ê·¸ ìˆ˜ì •(ë‹¤êµ­ì–´ ì ìš© ì‹œ íŒì—… ë¦¬ì…‹)
+	//  - ê¸°ì¡´ ë‹¤êµ­ì–´ ì ìš©í•  ë•Œ íŒì—…ë§ˆë‹¤ new í•˜ì˜€ë˜ ë¶€ë¶„ ì›ìƒë³µêµ¬
+	//4. ë³´ì • í›„ ê²°ê³¼ íŒì—… : ë¬¸ì ì§¤ë¦¬ëŠ” ê²½ìš° ë°œìƒ -> ìˆ˜ì •(margin ì¤Œ)
+	//5. ë©”ì¸í™”ë©´ì—ì„œ CCO, ICCO íƒ€ì´í‹€ë°” ì• ë‹ˆë©”ì´ì…˜ ì œê±°(HHI ì„í˜ì¤€ ìš”ì²­)
+	//6. ìŠ¤ë§ˆíŠ¸í‚¤ ì‚¬ìš©ì•ˆí•¨ + ì‹œë™ì œí•œ ì¼ ê²½ìš° ë¶€íŒ… ì‹œ ì‹œë™ì œí•œ ë¹„ë°€ë²ˆí˜¸ ì•ˆëœ¨ëŠ” ë²„ê·¸ ìˆ˜ì •(ì‚¬ìš©ì•ˆí•¨ì¼ ê²½ìš° STë¡œ ë³´ë‚´ëŠ” ë¶€ë¶„ì´ ì£¼ì„ë˜ì–´ìˆì—ˆìŒ)
 	////1.0.3.6(15.03.07)
-	//1. RevD.04.01 Revision ´ëÀÀ
+	//1. RevD.04.01 Revision ëŒ€ì‘
 	////1.0.4.0
-	//1. È­¸éÅ¸ÀÔ¼³Á¤ Ãß°¡
-	//2. B¾È ÁøÇà
+	//1. í™”ë©´íƒ€ì…ì„¤ì • ì¶”ê°€
+	//2. Bì•ˆ ì§„í–‰
 	//3. Main : Right Up  
-	//	- WarmingUp Á¦°Å
-	//	- Odometer, Hourmeter À§Ä¡¸¦ Engine ModeÀ§Ä¡·Î ÀÌµ¿ 
-	//	- Engine Mode¸¦ ±âÁ¸ Warming Up À§Ä¡·Î ÀÌµ¿
-	//	- Enigne Mode Ç¥½Ã ½Ã¿¡¸¸ Engine Icon Ç¥½Ã, Fuel, OdoHourmeter ¾ÆÀÌÄÜ Ãß°¡
-	//4. Main : Left Down => Average Fuel, Lastest Fuel Consumed Ãß°¡, Hourmenter, Odometer Á¦°Å
-	//5. µµ¿ò¸» ±Û¾¾ ÇÏ´Ã»öÀ¸·Î º¯°æ
-	//6. Quick ¸Ş´º Maintenance ¾ÆÀÌÄÜ º¯°æ
-	//7. °¢ ¸Ş´º¿¡¼­ ¸ŞÀÎÀ¸·Î µ¹¾Æ¿Ã ¶§, A¾ÈÀÎÁö BÅ¸ÀÔÀÎÁö È®ÀÎÇÏ°í µ¹¾Æ¿È
-	//8. ¸Ş´º-¸ÖÆ¼¹Ìµğ¾î-¹Ìµğ¾îÇÃ·¹ÀÌ¾î 
-	//	- ½ÇÇà ÈÄ µ¹¾Æ¿ÔÀ» ¶§ Æ÷Ä¿½º ÀÒÀº ¹ö±× ¼öÁ¤
-	//	- rpm È®ÀÎ ÈÄ ½ÇÇà
-	//9. °¡»óÅ° FN ±â´É ±¸Çö
-	//10. ¸ŞÀÎ KEY UI¿¡¼­ ·¥ÇÁ Å¬¸¯ ½Ã ¶óµğ¿À ¹öÆ° ¸ğµÎ ¹Ì¼±ÅÃÀ¸·Î µÇ´Â ¹ö±× ¼öÁ¤
-	//11. ÀÏºÎ UI À§Ä¡ ÀÌµ¿
-	//	- Software Update UI À§Ä¡ ÀÌµ¿ : ¸Å´º - ¸Å´ÏÁö¸ÕÆ® - ºñ¹Ğ¹øÈ£ÀÔ·Â ÈÄ ÁøÀÔ
-	//	- Mode - Engine Setting - Warming Up »èÁ¦
-	//12. °ü¸®ÀÚ ¸Ş´º¿¡¼­ '1234567890' ´©¸£¸é H/W Test·Î ÀÌµ¿
-	//13. Ä«¸Ş¶ó Ã¤³Î 1¸¸ Ç¥½Ã -> È°¼ºÈ­ »óÅÂ¿¡ µû¶ó Ã¤³Î º¯°æ°¡´É(Left, Right Å°¿¡ µû¸§)
+	//	- WarmingUp ì œê±°
+	//	- Odometer, Hourmeter ìœ„ì¹˜ë¥¼ Engine Modeìœ„ì¹˜ë¡œ ì´ë™ 
+	//	- Engine Modeë¥¼ ê¸°ì¡´ Warming Up ìœ„ì¹˜ë¡œ ì´ë™
+	//	- Enigne Mode í‘œì‹œ ì‹œì—ë§Œ Engine Icon í‘œì‹œ, Fuel, OdoHourmeter ì•„ì´ì½˜ ì¶”ê°€
+	//4. Main : Left Down => Average Fuel, Lastest Fuel Consumed ì¶”ê°€, Hourmenter, Odometer ì œê±°
+	//5. ë„ì›€ë§ ê¸€ì”¨ í•˜ëŠ˜ìƒ‰ìœ¼ë¡œ ë³€ê²½
+	//6. Quick ë©”ë‰´ Maintenance ì•„ì´ì½˜ ë³€ê²½
+	//7. ê° ë©”ë‰´ì—ì„œ ë©”ì¸ìœ¼ë¡œ ëŒì•„ì˜¬ ë•Œ, Aì•ˆì¸ì§€ Bíƒ€ì…ì¸ì§€ í™•ì¸í•˜ê³  ëŒì•„ì˜´
+	//8. ë©”ë‰´-ë©€í‹°ë¯¸ë””ì–´-ë¯¸ë””ì–´í”Œë ˆì´ì–´ 
+	//	- ì‹¤í–‰ í›„ ëŒì•„ì™”ì„ ë•Œ í¬ì»¤ìŠ¤ ìƒì€ ë²„ê·¸ ìˆ˜ì •
+	//	- rpm í™•ì¸ í›„ ì‹¤í–‰
+	//9. ê°€ìƒí‚¤ FN ê¸°ëŠ¥ êµ¬í˜„
+	//10. ë©”ì¸ KEY UIì—ì„œ ë¨í”„ í´ë¦­ ì‹œ ë¼ë””ì˜¤ ë²„íŠ¼ ëª¨ë‘ ë¯¸ì„ íƒìœ¼ë¡œ ë˜ëŠ” ë²„ê·¸ ìˆ˜ì •
+	//11. ì¼ë¶€ UI ìœ„ì¹˜ ì´ë™
+	//	- Software Update UI ìœ„ì¹˜ ì´ë™ : ë§¤ë‰´ - ë§¤ë‹ˆì§€ë¨¼íŠ¸ - ë¹„ë°€ë²ˆí˜¸ì…ë ¥ í›„ ì§„ì…
+	//	- Mode - Engine Setting - Warming Up ì‚­ì œ
+	//12. ê´€ë¦¬ì ë©”ë‰´ì—ì„œ '1234567890' ëˆ„ë¥´ë©´ H/W Testë¡œ ì´ë™
+	//13. ì¹´ë©”ë¼ ì±„ë„ 1ë§Œ í‘œì‹œ -> í™œì„±í™” ìƒíƒœì— ë”°ë¼ ì±„ë„ ë³€ê²½ê°€ëŠ¥(Left, Right í‚¤ì— ë”°ë¦„)
 	// ## by cjg
-	// 1. ¿¡·¯¸®Æ÷Æ® USB º¹»ç ±â´É : LEFT - RIGHT µ¿½Ã¿¡ ´©¸¦ °æ¿ì USBÀÇ ALARM Æú´õ·Î ÀÚµ¿ º¹»çµÊ!!!
-	// 2. ¹Ì·¯¸µ È¤Àº MxPlayer¸¦ ½ÇÇàÇÒ ¶§ µÑÁß ÇÑ°¡Áö ÇÁ·Î±×·¥ÀÌ ½ÇÇàµÇ¾î ÀÖÀ» °æ¿ì Á¾·á ¿äÃ» ÆË¾÷ ¶ç¿ò
-	// 3. ¹Ì·¯¸µ È¤Àº MxPlayer ÇÊ¿ä ½Ã °­Á¦Á¾·á
-	// 4. Mxplayer¿¡¼­ ESC ¹öÆ° ´­·¶À» °æ¿ì ¾îÇÃÁ¾·á
-	// 5. H/W Test ÇÁ·Î±×·¥(°ü¸®ÀÚ ¸Ş´º¿¡¼­ Æ¯Á¤ ¼ıÀÚ ÀÔ·Â ½Ã H/W Test ÇÁ·Î±×·¥ ½ÇÇà)
-	// 6. Help, Multimedia¿¡¼­ Å°ÆĞµå ¾ÈµÉ °æ¿ì ¸ÇÀ§ Áß¾ÓÀ» ´©¸£¸é Á¾·áÇÒ ¼ö ÀÖµµ·Ï ÇÔ
-    //	- Help : Áß¾Ó ´©¸£¸é ¹Ù·Î Á¾·á
-    //	- Multimedia : Áß¾Ó ´©¸£¸é ¸Ş´º È£Ãâ
-	// 7. Mediaplayer¿¡¼­ Ending ³ª¿ÀÁö ¾ÊÀº Çö»ó °³¼±
+	// 1. ì—ëŸ¬ë¦¬í¬íŠ¸ USB ë³µì‚¬ ê¸°ëŠ¥ : LEFT - RIGHT ë™ì‹œì— ëˆ„ë¥¼ ê²½ìš° USBì˜ ALARM í´ë”ë¡œ ìë™ ë³µì‚¬ë¨!!!
+	// 2. ë¯¸ëŸ¬ë§ í˜¹ì€ MxPlayerë¥¼ ì‹¤í–‰í•  ë•Œ ë‘˜ì¤‘ í•œê°€ì§€ í”„ë¡œê·¸ë¨ì´ ì‹¤í–‰ë˜ì–´ ìˆì„ ê²½ìš° ì¢…ë£Œ ìš”ì²­ íŒì—… ë„ì›€
+	// 3. ë¯¸ëŸ¬ë§ í˜¹ì€ MxPlayer í•„ìš” ì‹œ ê°•ì œì¢…ë£Œ
+	// 4. Mxplayerì—ì„œ ESC ë²„íŠ¼ ëˆŒë €ì„ ê²½ìš° ì–´í”Œì¢…ë£Œ
+	// 5. H/W Test í”„ë¡œê·¸ë¨(ê´€ë¦¬ì ë©”ë‰´ì—ì„œ íŠ¹ì • ìˆ«ì ì…ë ¥ ì‹œ H/W Test í”„ë¡œê·¸ë¨ ì‹¤í–‰)
+	// 6. Help, Multimediaì—ì„œ í‚¤íŒ¨ë“œ ì•ˆë  ê²½ìš° ë§¨ìœ„ ì¤‘ì•™ì„ ëˆ„ë¥´ë©´ ì¢…ë£Œí•  ìˆ˜ ìˆë„ë¡ í•¨
+    //	- Help : ì¤‘ì•™ ëˆ„ë¥´ë©´ ë°”ë¡œ ì¢…ë£Œ
+    //	- Multimedia : ì¤‘ì•™ ëˆ„ë¥´ë©´ ë©”ë‰´ í˜¸ì¶œ
+	// 7. Mediaplayerì—ì„œ Ending ë‚˜ì˜¤ì§€ ì•Šì€ í˜„ìƒ ê°œì„ 
 	// 20150325 HHI
-	// 1. menu »ó´Ü¿¡¼­ Å°ÆĞµå·Î ¸Ş´º ¿òÁ÷ÀÏ °æ¿ì ¸ÖÆ¼¹Ìµğ¾î·Î °¡¸é ¹Ù·Î ¹Ìµğ¾î ÇÃ·¹ÀÌ¾î°¡ ¼±ÅÃµÊ
-	// 2. ¸ÖÆ¼¹Ìµğ¾î ½ÇÇà -> FNÅ° -> Ä«¸Ş¶ó Å° -> FNÅ° -> ESC -> ÀÌÈÄ ESC Å° ¾È¸Ô´Â Çö»ó °³¼±
-	// 3. ÀÏºÎ UI À§Ä¡ ÀÌµ¿
-    //	- EHCU I/O Information : ¸Å´ÏÁö¸ÕÆ® - ¼­ºñ½º ¸Ş´º ³»·Î ÀÌµ¿
-	// 4. ¸ÖÆ¼¹Ìµğ¾î -> Å°·Î °¥¶§ ÇÏÀÌ¶óÀÌÆ® ¾ø¾Ú
-	// 5. ¼Ò¸ğÇ° °ü¸®
-	//	- ½ÇÁ¦ Ç×¸ñº° ÁÖ±âµ¥ÀÌÅÍ Ç¥½Ã¿Í Ç×¸ñº° °æ°íµî onÇ¥½Ã, ÀüÃ¼ °æ°íµî onÇ¥½ÃÀÇ ½Ã°£ Â÷ÀÌ°¡ Å­
-	//	- °¢ Ç×¸ñ º° History Ç¥½Ã UI : Á÷°üÀûÀ¸·Î º¸ÀÌµµ·Ï Àç°ËÅä ÇÊ¿ä
-	//	- MCU - ¼Ò¸ğÇ° °ü¸® ±â´É : ¼Ò¸ğÇ° Ç×¸ñº° °æ°í ·¥ÇÁ Á¡µî / ¼Ò¸ğÇ°°ü¸® °æ°í ·¥ÇÁ Á¡µî °¢°¢ÀÇ °»½Å Å¸ÀÌ¹ÖÀ» µ¿ÀÏÇÏ°Ô °¡Á®°¡°íÀÚ ÇÔ
-	//	- maintenance ¾Ë¶÷
-	//	  => key on Á÷ÈÄ, ¹Ù·Î ¸Ş´º ÀÌµ¿ ½Ã, ¾Ë¶÷ Á¤º¸ Ç¥½Ã ½Ã°£ ´Ù¸§
-	//	  => History ui Á÷°üÀûÀ¸·Î ±¸¼º
-	//	  => Ã³À½ ±³Ã¼ ½Ã, history ¿¡ 0À¸·Î Ç¥½Ã µÇ´Â °Í È®ÀÎ
-	//	  => ¾Ë¶÷ ÁÖ±â ½Ã°£ ÀçÈ®ÀÎ ¿ä¸Á
-	// 6. Key on ½Ã ½º¸¶Æ® ÅÂ±× ÀÎ½Ä ¼º°ø/½ÇÆĞ ¿©ºÎ message Ã³¸® (±âÁ¸ graphic Ç¥½Ã ¹æ¾È ´ëÃ¼)
-	//	- ½º¸¶Æ®Å° ÃÊ±â ÀÌ¹ÌÁö »èÁ¦
-	//	- ¸ŞÀÎÈ­¸é¿¡¼­ ¾ÈÀüº§Æ® ¾ÆÀÌÄÜ º¸¿©ÁÙ¶§ °°ÀÌ ½º¸¶Æ®Å° ÀÎÁõ ÀÌ¹ÌÁö º¸¿©ÁÜ
-	//	- ½ÇÆĞ½Ã¿¡´Â ½Ãµ¿Á¦ÇÑ ºñ¹Ğ¹øÈ£ ÀÔ·ÂÃ¢¿¡ »¡°£»ö º¸¿©Áö°Ô ¼öÁ¤
-	// 7. ¸ÖÆ¼¹Ìµğ¾î/µµ¿ò¸» ÅÍÄ¡ °ü·Ã ¹ö±× ¼öÁ¤
-	//	- ¸ÖÆ¼¹Ìµğ¾î ½ÇÇà -> Áß¾Ó ÅÍÄ¡ -> ESC Å° ´©¸£¸é Á¾·á ¾ÈµÊ
-	//		==> Áß¾ÓÅÍÄ¡½Ã Á¾·á·Î º¯°æ
-	//	- ¸ÖÆ¼¹Ìµğ¾î ½ÇÇà -> MENU Å° -> LEFt Å° -> µµ¿ò¸» ½ÇÇà -> Áß¾Ó ÅÍÄ¡ ½Ã Á¾·áµÇÁö ¾Ê°í ¸Ş´º¹Ù ¶ä
-	//		==> µµ¿ò¸» ½ÇÇà ½Ã  Multimediaflag false·Î º¯°æ!
+	// 1. menu ìƒë‹¨ì—ì„œ í‚¤íŒ¨ë“œë¡œ ë©”ë‰´ ì›€ì§ì¼ ê²½ìš° ë©€í‹°ë¯¸ë””ì–´ë¡œ ê°€ë©´ ë°”ë¡œ ë¯¸ë””ì–´ í”Œë ˆì´ì–´ê°€ ì„ íƒë¨
+	// 2. ë©€í‹°ë¯¸ë””ì–´ ì‹¤í–‰ -> FNí‚¤ -> ì¹´ë©”ë¼ í‚¤ -> FNí‚¤ -> ESC -> ì´í›„ ESC í‚¤ ì•ˆë¨¹ëŠ” í˜„ìƒ ê°œì„ 
+	// 3. ì¼ë¶€ UI ìœ„ì¹˜ ì´ë™
+    //	- EHCU I/O Information : ë§¤ë‹ˆì§€ë¨¼íŠ¸ - ì„œë¹„ìŠ¤ ë©”ë‰´ ë‚´ë¡œ ì´ë™
+	// 4. ë©€í‹°ë¯¸ë””ì–´ -> í‚¤ë¡œ ê°ˆë•Œ í•˜ì´ë¼ì´íŠ¸ ì—†ì•°
+	// 5. ì†Œëª¨í’ˆ ê´€ë¦¬
+	//	- ì‹¤ì œ í•­ëª©ë³„ ì£¼ê¸°ë°ì´í„° í‘œì‹œì™€ í•­ëª©ë³„ ê²½ê³ ë“± oní‘œì‹œ, ì „ì²´ ê²½ê³ ë“± oní‘œì‹œì˜ ì‹œê°„ ì°¨ì´ê°€ í¼
+	//	- ê° í•­ëª© ë³„ History í‘œì‹œ UI : ì§ê´€ì ìœ¼ë¡œ ë³´ì´ë„ë¡ ì¬ê²€í†  í•„ìš”
+	//	- MCU - ì†Œëª¨í’ˆ ê´€ë¦¬ ê¸°ëŠ¥ : ì†Œëª¨í’ˆ í•­ëª©ë³„ ê²½ê³  ë¨í”„ ì ë“± / ì†Œëª¨í’ˆê´€ë¦¬ ê²½ê³  ë¨í”„ ì ë“± ê°ê°ì˜ ê°±ì‹  íƒ€ì´ë°ì„ ë™ì¼í•˜ê²Œ ê°€ì ¸ê°€ê³ ì í•¨
+	//	- maintenance ì•ŒëŒ
+	//	  => key on ì§í›„, ë°”ë¡œ ë©”ë‰´ ì´ë™ ì‹œ, ì•ŒëŒ ì •ë³´ í‘œì‹œ ì‹œê°„ ë‹¤ë¦„
+	//	  => History ui ì§ê´€ì ìœ¼ë¡œ êµ¬ì„±
+	//	  => ì²˜ìŒ êµì²´ ì‹œ, history ì— 0ìœ¼ë¡œ í‘œì‹œ ë˜ëŠ” ê²ƒ í™•ì¸
+	//	  => ì•ŒëŒ ì£¼ê¸° ì‹œê°„ ì¬í™•ì¸ ìš”ë§
+	// 6. Key on ì‹œ ìŠ¤ë§ˆíŠ¸ íƒœê·¸ ì¸ì‹ ì„±ê³µ/ì‹¤íŒ¨ ì—¬ë¶€ message ì²˜ë¦¬ (ê¸°ì¡´ graphic í‘œì‹œ ë°©ì•ˆ ëŒ€ì²´)
+	//	- ìŠ¤ë§ˆíŠ¸í‚¤ ì´ˆê¸° ì´ë¯¸ì§€ ì‚­ì œ
+	//	- ë©”ì¸í™”ë©´ì—ì„œ ì•ˆì „ë²¨íŠ¸ ì•„ì´ì½˜ ë³´ì—¬ì¤„ë•Œ ê°™ì´ ìŠ¤ë§ˆíŠ¸í‚¤ ì¸ì¦ ì´ë¯¸ì§€ ë³´ì—¬ì¤Œ
+	//	- ì‹¤íŒ¨ì‹œì—ëŠ” ì‹œë™ì œí•œ ë¹„ë°€ë²ˆí˜¸ ì…ë ¥ì°½ì— ë¹¨ê°„ìƒ‰ ë³´ì—¬ì§€ê²Œ ìˆ˜ì •
+	// 7. ë©€í‹°ë¯¸ë””ì–´/ë„ì›€ë§ í„°ì¹˜ ê´€ë ¨ ë²„ê·¸ ìˆ˜ì •
+	//	- ë©€í‹°ë¯¸ë””ì–´ ì‹¤í–‰ -> ì¤‘ì•™ í„°ì¹˜ -> ESC í‚¤ ëˆ„ë¥´ë©´ ì¢…ë£Œ ì•ˆë¨
+	//		==> ì¤‘ì•™í„°ì¹˜ì‹œ ì¢…ë£Œë¡œ ë³€ê²½
+	//	- ë©€í‹°ë¯¸ë””ì–´ ì‹¤í–‰ -> MENU í‚¤ -> LEFt í‚¤ -> ë„ì›€ë§ ì‹¤í–‰ -> ì¤‘ì•™ í„°ì¹˜ ì‹œ ì¢…ë£Œë˜ì§€ ì•Šê³  ë©”ë‰´ë°” ëœ¸
+	//		==> ë„ì›€ë§ ì‹¤í–‰ ì‹œ  Multimediaflag falseë¡œ ë³€ê²½!
 	//// v1.0.4.1
-	// 1. Àåºñ»óÅÂ -> ¿À¸¥ÂÊ¿¡ ÇöÀç »óÅÂ¿¡ ´ëÇØ 2°³ Ç¥½Ã
-	// 2. Fault History -> ¸ğ´ÏÅÍ È­¸é¿¡ °á°ú ¹İ¿µÀÌ ´À¸². °»½Å ÁÖ±â µî ¼öÁ¤¿Ï·á
-	// 3. Model Ãß°¡ : 965, 975
-	// 4. ¾×½½ ¿Âµµ ¸ğ´ÏÅÍ¸µ
-	//	- ¸ŞÀÎ È­¸é ¾×½½ ¿Âµµ ¸ğ´ÏÅÍ¸µ Ç¥½Ã Ãß°¡ (¿É¼Ç ¹ÌÀåÂø ½Ã °¨Ãã)
-	//	- ¸Ş´º ³» Àåºñ »óÅÂ(Machine monitoring) Ç¥½Ã ±â´É(¿Âµµ, ¹èÅÍ¸® ·¹º§ µî)¿¡ ¾×½½ ¿Âµµ Ç×¸ñ Ãß°¡ (¿É¼Ç ¹ÌÀåÂø ½Ã °¨Ãã)
-	//	- ÇÁ·ÎÅäÄİ ½Å±Ô Ãß°¡
-	//	- ¾×½Â ¿ÀÀÏ °æ°í ÇÁ·ÎÅäÄİ Ãß°¡
-	//	- ·¥ÇÁ ½Éº¼ º¯°æ(±âÁ¸ Front ½Éº¼·Î ÇÏ°í, Front/Rear ±¸ºĞÀ» À§ÇØ F ¹× R ½Éº¼À» ±×¸²¿¡ Ãß°¡)
-	// 5. Left Down : Current Fuel Rate Ç¥½Ã »èÁ¦
-	// 6. ¸ŞÀÎ -> ¸Ş´ºµé¾î°¡¸é Æ÷Ä¿½º¸¦ ±â´É¼³Á¤ »ó´Ü ÅÇÀ¸·Î
-	// 7. KEYPAD Áß ÀÏºÎ(º°µµ ÅÍÄ¡ ÀÔ·Â ¾øÀÌ ¹öÆ° ÀÔ·Â¸¸À¸·Î ÀÛµ¿ °¡´ÉÇÑ ±â´É)¿¡ ´ëÇØ¼­¸¸ ¸Ş´º Á¶ÀÛ Áß¿¡µµ µ¿ÀÛÇÏµµ·Ï Àû¿ë
-	//	- ´ë»ó KEY : Main lamp, Work lamp, Beacon lamp, Rear wiper
-	//	- Àû¿ë ¹æ½Ä : ¸Ş´º Á¶ÀÛ Áß ´ë»ó KEY ÀÔ·Â ½Ã UI È­¸é ÀüÈ¯ ¾øÀÌ ´Ü¼ø CAN Message ¼Û/¼ö½Å
-	// 8. ½Ã°è PM 10:34 -> 0À» ´©¸£¸é 12½Ã·Î º¯°æµÇ´Â Çö»ó °³¼± ¿Ï·á
-	//	- ¸ğ´ÏÅÍ ½Ã°£ ¼³Á¤ È­¸é¿¡¼­ Å°ÆĞµå ¼ıÀÚ¹öÆ° »ç¿ë Àû¿ë
-	// 9. Rear Wiper ¹öÆ° ´©¸¦ ¶§¸¶´Ù »óÅÂ°¡ º¯°æµÇ¾î¾ß ÇÏ´ÂÁö(ÇöÀç ¾î´À »óÅÂÀÌµç ´©¸£¸é Intermittent·Î º¯°æµÊ) -> ¹ö±× ¼öÁ¤
-	// 10. Work Load : ³»ºÎ Boom PS calibraion Ç×¸ñ ¼±ÅÃ ÈÄ, ESC ´©¸£¸é HomeÀ¸·Î ÀÌµ¿µÊ ( ÀÌÀü Ç×¸ñÀ¸·Î ÀÌµ¿µÇµµ·Ï º¯°æ)
-	// 11. A/S ¹øÈ£ Àû¿ë : 1899-7282
-	// 12. ECO °ÔÀÌÁö ±×·¡ÇÈ UI º¯°æ, Status¿¡ »ó°ü¾øÀÌ º¯°æµÈ UI·Î Ç¥½Ã
-	// 13. ¸ŞÀÎÈ­¸é ÁÂ»ó´Ü ÀÛ¾÷·® °èÃø Ç¥½Ã
-	//	- Æ®·° A, B, C ½Éº¼¿¡¼­ ¾ËÆÄºªÀÌ Àß ¾Èº¸ÀÎ´Ù´Â ÀÇ°ß -> ½Éº¼ Å©±â ¹× ¾ËÆÄºª »ö ¼öÁ¤ °ËÅä
-	// 14. ´Ù±¹¾î - ¾ç»ê »ç¾ç È®Á¤(13°³±¹ ¾ğ¾î)
-	//	- ´Ù±¹¾î ÆÄÀÏ Àû¿ë
-	// 15. SoftEndStop ÃÊ±â ÆäÀÌÁö µé¾î°¬À» ¶§ Ä¿¼­ ¾ø´Â ¹ö±× ¼öÁ¤
-	// 16. User Switching Default Àû¿ë
-	//	- »ç¿ëÀÚ ÀüÈ¯ ±â´É : ±âº»°ª ÅÇ ¼±ÅÃ ½Ã save ¹öÆ° ¹Ì¼±ÅÃ µÇµµ·Ï ÇÒ °Í (È¸»öÀ¸·Î Ç¥½Ã)
-	// 17. Fuel Consumption History ¸Ş´º Àû¿ë
-	// 18. ³Ã°¢ÆÒ EPPR Àü·ù Á¦¾î È­¸é - Àü·ù ´ÜÀ§¸¦ mA¿¡¼­ %·Î º¯°æ
-	// 19. Å°ÆĞµå, Äü Ä¿ÇÃ·¯ ¹öÆ°
-	//	- UNLOCK - FINISH - È®ÀÎ - 'ÆË¾÷Ã¢ »ı¼º' - LOCKING ATTACHMENT ¼±ÅÃ - FINISH
-	//	- À§ ¼ø¼­´ë·Î µ¿ÀÛ½Ã Å°ÆĞµå ÀÛµ¿ ºÒ°¡ »óÅÂ°¡ µÊ
-	//	-> ¼öÁ¤¿Ï·á
-	// 20. Fine Modulation Å°ÆĞµå ¹öÆ°
-	//	1) EHCU ÀÎ½ÄÇÏ¿© EHCU ¹ÌÀû¿ë½Ã ´ÙÀ½ ¸Ş½ÃÁö Ãâ·Â : ¡°EH SYSTEM is NOT equiped.¡± : ¿µ¾î·Î¸¸ Ç¥½Ã ÇÕ´Ï´Ù.
-	//	2) Fine Modulation ¿É¼Ç ¹ÌÀû¿ë ½Ã Ãâ·Â ¹®±¸ º¯°æ
-	//		A. ±âÁ¸ : EH SYSTEM is not equipped
-	//		B. º¯°æ : This machine does not support this feature.
-	// 21. ¸ŞÀÎ È­¸é Default Ç¥½Ã »ç¾ç
-	//		A. ÁÂ »ó´Ü : 9A µ¿ÀÏ -> ÀÛµ¿À¯ ¿Âµµ / ³Ã°¢¼ö ¿Âµµ
-	//		B. ÁÂ ÇÏ´Ü : Æò±Õ ¿¬ºñ
-	//		C. ¿ì »ó´Ü : 9A µ¿ÀÏ -> Total Hourmeter => ¾øÀ¸¹Ç·Î Latest Hourmeter·Î º¯°æ ¿äÃ»
-	// 22. Main Å°ÆĞµå ÀÓ½Ã Àû¿ë
-	//	- Àåºñ»óÅÂ
+	// 1. ì¥ë¹„ìƒíƒœ -> ì˜¤ë¥¸ìª½ì— í˜„ì¬ ìƒíƒœì— ëŒ€í•´ 2ê°œ í‘œì‹œ
+	// 2. Fault History -> ëª¨ë‹ˆí„° í™”ë©´ì— ê²°ê³¼ ë°˜ì˜ì´ ëŠë¦¼. ê°±ì‹  ì£¼ê¸° ë“± ìˆ˜ì •ì™„ë£Œ
+	// 3. Model ì¶”ê°€ : 965, 975
+	// 4. ì•¡ìŠ¬ ì˜¨ë„ ëª¨ë‹ˆí„°ë§
+	//	- ë©”ì¸ í™”ë©´ ì•¡ìŠ¬ ì˜¨ë„ ëª¨ë‹ˆí„°ë§ í‘œì‹œ ì¶”ê°€ (ì˜µì…˜ ë¯¸ì¥ì°© ì‹œ ê°ì¶¤)
+	//	- ë©”ë‰´ ë‚´ ì¥ë¹„ ìƒíƒœ(Machine monitoring) í‘œì‹œ ê¸°ëŠ¥(ì˜¨ë„, ë°°í„°ë¦¬ ë ˆë²¨ ë“±)ì— ì•¡ìŠ¬ ì˜¨ë„ í•­ëª© ì¶”ê°€ (ì˜µì…˜ ë¯¸ì¥ì°© ì‹œ ê°ì¶¤)
+	//	- í”„ë¡œí† ì½œ ì‹ ê·œ ì¶”ê°€
+	//	- ì•¡ìŠ¹ ì˜¤ì¼ ê²½ê³  í”„ë¡œí† ì½œ ì¶”ê°€
+	//	- ë¨í”„ ì‹¬ë³¼ ë³€ê²½(ê¸°ì¡´ Front ì‹¬ë³¼ë¡œ í•˜ê³ , Front/Rear êµ¬ë¶„ì„ ìœ„í•´ F ë° R ì‹¬ë³¼ì„ ê·¸ë¦¼ì— ì¶”ê°€)
+	// 5. Left Down : Current Fuel Rate í‘œì‹œ ì‚­ì œ
+	// 6. ë©”ì¸ -> ë©”ë‰´ë“¤ì–´ê°€ë©´ í¬ì»¤ìŠ¤ë¥¼ ê¸°ëŠ¥ì„¤ì • ìƒë‹¨ íƒ­ìœ¼ë¡œ
+	// 7. KEYPAD ì¤‘ ì¼ë¶€(ë³„ë„ í„°ì¹˜ ì…ë ¥ ì—†ì´ ë²„íŠ¼ ì…ë ¥ë§Œìœ¼ë¡œ ì‘ë™ ê°€ëŠ¥í•œ ê¸°ëŠ¥)ì— ëŒ€í•´ì„œë§Œ ë©”ë‰´ ì¡°ì‘ ì¤‘ì—ë„ ë™ì‘í•˜ë„ë¡ ì ìš©
+	//	- ëŒ€ìƒ KEY : Main lamp, Work lamp, Beacon lamp, Rear wiper
+	//	- ì ìš© ë°©ì‹ : ë©”ë‰´ ì¡°ì‘ ì¤‘ ëŒ€ìƒ KEY ì…ë ¥ ì‹œ UI í™”ë©´ ì „í™˜ ì—†ì´ ë‹¨ìˆœ CAN Message ì†¡/ìˆ˜ì‹ 
+	// 8. ì‹œê³„ PM 10:34 -> 0ì„ ëˆ„ë¥´ë©´ 12ì‹œë¡œ ë³€ê²½ë˜ëŠ” í˜„ìƒ ê°œì„  ì™„ë£Œ
+	//	- ëª¨ë‹ˆí„° ì‹œê°„ ì„¤ì • í™”ë©´ì—ì„œ í‚¤íŒ¨ë“œ ìˆ«ìë²„íŠ¼ ì‚¬ìš© ì ìš©
+	// 9. Rear Wiper ë²„íŠ¼ ëˆ„ë¥¼ ë•Œë§ˆë‹¤ ìƒíƒœê°€ ë³€ê²½ë˜ì–´ì•¼ í•˜ëŠ”ì§€(í˜„ì¬ ì–´ëŠ ìƒíƒœì´ë“  ëˆ„ë¥´ë©´ Intermittentë¡œ ë³€ê²½ë¨) -> ë²„ê·¸ ìˆ˜ì •
+	// 10. Work Load : ë‚´ë¶€ Boom PS calibraion í•­ëª© ì„ íƒ í›„, ESC ëˆ„ë¥´ë©´ Homeìœ¼ë¡œ ì´ë™ë¨ ( ì´ì „ í•­ëª©ìœ¼ë¡œ ì´ë™ë˜ë„ë¡ ë³€ê²½)
+	// 11. A/S ë²ˆí˜¸ ì ìš© : 1899-7282
+	// 12. ECO ê²Œì´ì§€ ê·¸ë˜í”½ UI ë³€ê²½, Statusì— ìƒê´€ì—†ì´ ë³€ê²½ëœ UIë¡œ í‘œì‹œ
+	// 13. ë©”ì¸í™”ë©´ ì¢Œìƒë‹¨ ì‘ì—…ëŸ‰ ê³„ì¸¡ í‘œì‹œ
+	//	- íŠ¸ëŸ­ A, B, C ì‹¬ë³¼ì—ì„œ ì•ŒíŒŒë²³ì´ ì˜ ì•ˆë³´ì¸ë‹¤ëŠ” ì˜ê²¬ -> ì‹¬ë³¼ í¬ê¸° ë° ì•ŒíŒŒë²³ ìƒ‰ ìˆ˜ì • ê²€í† 
+	// 14. ë‹¤êµ­ì–´ - ì–‘ì‚° ì‚¬ì–‘ í™•ì •(13ê°œêµ­ ì–¸ì–´)
+	//	- ë‹¤êµ­ì–´ íŒŒì¼ ì ìš©
+	// 15. SoftEndStop ì´ˆê¸° í˜ì´ì§€ ë“¤ì–´ê°”ì„ ë•Œ ì»¤ì„œ ì—†ëŠ” ë²„ê·¸ ìˆ˜ì •
+	// 16. User Switching Default ì ìš©
+	//	- ì‚¬ìš©ì ì „í™˜ ê¸°ëŠ¥ : ê¸°ë³¸ê°’ íƒ­ ì„ íƒ ì‹œ save ë²„íŠ¼ ë¯¸ì„ íƒ ë˜ë„ë¡ í•  ê²ƒ (íšŒìƒ‰ìœ¼ë¡œ í‘œì‹œ)
+	// 17. Fuel Consumption History ë©”ë‰´ ì ìš©
+	// 18. ëƒ‰ê°íŒ¬ EPPR ì „ë¥˜ ì œì–´ í™”ë©´ - ì „ë¥˜ ë‹¨ìœ„ë¥¼ mAì—ì„œ %ë¡œ ë³€ê²½
+	// 19. í‚¤íŒ¨ë“œ, í€µ ì»¤í”ŒëŸ¬ ë²„íŠ¼
+	//	- UNLOCK - FINISH - í™•ì¸ - 'íŒì—…ì°½ ìƒì„±' - LOCKING ATTACHMENT ì„ íƒ - FINISH
+	//	- ìœ„ ìˆœì„œëŒ€ë¡œ ë™ì‘ì‹œ í‚¤íŒ¨ë“œ ì‘ë™ ë¶ˆê°€ ìƒíƒœê°€ ë¨
+	//	-> ìˆ˜ì •ì™„ë£Œ
+	// 20. Fine Modulation í‚¤íŒ¨ë“œ ë²„íŠ¼
+	//	1) EHCU ì¸ì‹í•˜ì—¬ EHCU ë¯¸ì ìš©ì‹œ ë‹¤ìŒ ë©”ì‹œì§€ ì¶œë ¥ : â€œEH SYSTEM is NOT equiped.â€ : ì˜ì–´ë¡œë§Œ í‘œì‹œ í•©ë‹ˆë‹¤.
+	//	2) Fine Modulation ì˜µì…˜ ë¯¸ì ìš© ì‹œ ì¶œë ¥ ë¬¸êµ¬ ë³€ê²½
+	//		A. ê¸°ì¡´ : EH SYSTEM is not equipped
+	//		B. ë³€ê²½ : This machine does not support this feature.
+	// 21. ë©”ì¸ í™”ë©´ Default í‘œì‹œ ì‚¬ì–‘
+	//		A. ì¢Œ ìƒë‹¨ : 9A ë™ì¼ -> ì‘ë™ìœ  ì˜¨ë„ / ëƒ‰ê°ìˆ˜ ì˜¨ë„
+	//		B. ì¢Œ í•˜ë‹¨ : í‰ê·  ì—°ë¹„
+	//		C. ìš° ìƒë‹¨ : 9A ë™ì¼ -> Total Hourmeter => ì—†ìœ¼ë¯€ë¡œ Latest Hourmeterë¡œ ë³€ê²½ ìš”ì²­
+	// 22. Main í‚¤íŒ¨ë“œ ì„ì‹œ ì ìš©
+	//	- ì¥ë¹„ìƒíƒœ
 	//	- Fuel Info
 	//	- OdoHourmeter
 	// ## by cjg
-	// 1. Mediaplayer¿¡¼­ Ending ³ª¿ÀÁö ¾ÊÀº Çö»ó °³¼±(Firmware Update ÇÊ¿ä)
-	// 2. UpdateÇÁ·Î±×·¥ -> BKCU¿©ºÎ Àü¼Û
-	// 3. H/W TestÇÁ·Î±×·¥À¸·Î S/N Àü¼Û
+	// 1. Mediaplayerì—ì„œ Ending ë‚˜ì˜¤ì§€ ì•Šì€ í˜„ìƒ ê°œì„ (Firmware Update í•„ìš”)
+	// 2. Updateí”„ë¡œê·¸ë¨ -> BKCUì—¬ë¶€ ì „ì†¡
+	// 3. H/W Testí”„ë¡œê·¸ë¨ìœ¼ë¡œ S/N ì „ì†¡
 	// 2015.04.08 HHI
-	// 1. Latest Fuel Consumed -> A Days Fuel Used·Î ¸íÄª º¯°æ(HHI ¿äÃ»)
-	// 2. EHCU À¯¹« ÆÇº°¹æ¹ı º¯°æ
-	//	- º¯°æ Àü : MCU Model = 940, 935
+	// 1. Latest Fuel Consumed -> A Days Fuel Usedë¡œ ëª…ì¹­ ë³€ê²½(HHI ìš”ì²­)
+	// 2. EHCU ìœ ë¬´ íŒë³„ë°©ë²• ë³€ê²½
+	//	- ë³€ê²½ ì „ : MCU Model = 940, 935
 	//		if(ParentActivity._CheckModel.GetMCUVersion(CAN1Comm.Get_ComponentBasicInformation_1698_PGN65330()) == CheckModel.MODEL_940
 	//			|| ParentActivity._CheckModel.GetMCUVersion(CAN1Comm.Get_ComponentBasicInformation_1698_PGN65330()) == CheckModel.MODEL_935)
-	//	- º¯°æ ÈÄ : EHCU CID ÆÇº°
+	//	- ë³€ê²½ í›„ : EHCU CID íŒë³„
 	//		if(CAN1Comm.Get_ComponentCode_1699_PGN65330_EHCU() != CAN1CommManager.STATE_COMPONENTCODE_EHCU)
-	// 3. Axle Temp ÀÓ½Ã »èÁ¦(HHI ÀÓÇõÁØ ¿äÃ»)
-	// 4. ¸ŞÀÎ ¿£ÁøÀÚµ¿Á¤Áö ·¥ÇÁ °¡ÀÌ´ø½º ÇÑ±¹¾î -> ¿µ¾î·Î º¯°æ
-	// 5. »ç¿ëÀÚ ÀüÈ¯ Default °ª -> ÃâÇÏ Default°ª°ú µ¿ÀÏÇÏ°Ô º¯°æ
+	// 3. Axle Temp ì„ì‹œ ì‚­ì œ(HHI ì„í˜ì¤€ ìš”ì²­)
+	// 4. ë©”ì¸ ì—”ì§„ìë™ì •ì§€ ë¨í”„ ê°€ì´ë˜ìŠ¤ í•œêµ­ì–´ -> ì˜ì–´ë¡œ ë³€ê²½
+	// 5. ì‚¬ìš©ì ì „í™˜ Default ê°’ -> ì¶œí•˜ Defaultê°’ê³¼ ë™ì¼í•˜ê²Œ ë³€ê²½
 	// 2015.04.09 HHI
-	// 1. ¹à±âÁ¶Àı±â´É : ÀÚµ¿ ÅÇÀÇ ¾ß°£ ¹à±â ·¹º§ default °ªÀ» 60%·Î ³·Ãâ°Í(4)
-	// 2. AÅ¸ÀÔ ¸ŞÀÎÈ­¸éÀ¸·Î ³ª¿Ã ¶§ °¡»ó Å°ÆĞµå ¹öÆ°ÀÌ Àá±ñ ³ªÅ¸³ª´Â ¹ö±× ¼öÁ¤
-	// 3. ÇÑ±¹¾î ¹ø¿ª Ãß°¡(¿¬ºñ°ü·Ã, ¸ŞÀÎ, ±â´É¼³Á¤ °ü·Ã)
-	// 4. Key on ½Ã ´ÙÀ½ ±â´ÉµéÀÇ can »óÅÂ °ªÀÌ Not available·Î µé¾î¿Ã °æ¿ì ¿É¼Ç ¹ÌÀåÂø Ç¥½Ã Ãß°¡
+	// 1. ë°ê¸°ì¡°ì ˆê¸°ëŠ¥ : ìë™ íƒ­ì˜ ì•¼ê°„ ë°ê¸° ë ˆë²¨ default ê°’ì„ 60%ë¡œ ë‚®ì¶œê²ƒ(4)
+	// 2. Aíƒ€ì… ë©”ì¸í™”ë©´ìœ¼ë¡œ ë‚˜ì˜¬ ë•Œ ê°€ìƒ í‚¤íŒ¨ë“œ ë²„íŠ¼ì´ ì ê¹ ë‚˜íƒ€ë‚˜ëŠ” ë²„ê·¸ ìˆ˜ì •
+	// 3. í•œêµ­ì–´ ë²ˆì—­ ì¶”ê°€(ì—°ë¹„ê´€ë ¨, ë©”ì¸, ê¸°ëŠ¥ì„¤ì • ê´€ë ¨)
+	// 4. Key on ì‹œ ë‹¤ìŒ ê¸°ëŠ¥ë“¤ì˜ can ìƒíƒœ ê°’ì´ Not availableë¡œ ë“¤ì–´ì˜¬ ê²½ìš° ì˜µì…˜ ë¯¸ì¥ì°© í‘œì‹œ ì¶”ê°€
 	//	- Auto Grease, Wuick coupler, Ride control, Beacon lamp, Mirror heat, Fine Modulation
-	//	- Fine Modulation : ÆË¾÷ -> Å°ÆĞµå Ã¢À¸·Î Ç¥½Ã ¹æ¹ı º¯°æ
-	//	- LEDÀÇ °æ¿ì status °ªÀ» ¿ì¼±¼øÀ§·Î º¸°í, Fine ModulationÀº ¹ÌÈ®Á¤(ÃßÈÄ ÇùÀÇ ¿¹Á¤)
-	//	- ¹®±¸ ´Ù±¹¾î Ãß°¡
-	// 5. A¾È ÁÂÇÏ´Ü title ±æÀÌ 240dp·Î ÁöÁ¤
-	// 6. ¸ŞÀÎÈ­¸é Ä¿¼­ Ã¹¹øÂ° ¶óµğ¿À ¹öÆ° À§Ä¡¿¡¼­ ¼±ÅÃµÈ °ÍÀ» ±âÁØÀ¸·Î º¯°æ
-	// 7. ÀÏºÎ UI À§Ä¡ ÀÌµ¿
-	//	- Ä«¸Ş¶ó ¼³Á¤ -> È¯°æ¼³Á¤À¸·Î ÀÌµ¿
-	//	- º¸Á¤ -> ±â´É¼³Á¤ - ±âÅ¸ÅÇÀ¸·Î ÀÌµ¿
-	// 8. TCU 4SPEED ¸ğµ¨ Ãß°¡
+	//	- Fine Modulation : íŒì—… -> í‚¤íŒ¨ë“œ ì°½ìœ¼ë¡œ í‘œì‹œ ë°©ë²• ë³€ê²½
+	//	- LEDì˜ ê²½ìš° status ê°’ì„ ìš°ì„ ìˆœìœ„ë¡œ ë³´ê³ , Fine Modulationì€ ë¯¸í™•ì •(ì¶”í›„ í˜‘ì˜ ì˜ˆì •)
+	//	- ë¬¸êµ¬ ë‹¤êµ­ì–´ ì¶”ê°€
+	// 5. Aì•ˆ ì¢Œí•˜ë‹¨ title ê¸¸ì´ 240dpë¡œ ì§€ì •
+	// 6. ë©”ì¸í™”ë©´ ì»¤ì„œ ì²«ë²ˆì§¸ ë¼ë””ì˜¤ ë²„íŠ¼ ìœ„ì¹˜ì—ì„œ ì„ íƒëœ ê²ƒì„ ê¸°ì¤€ìœ¼ë¡œ ë³€ê²½
+	// 7. ì¼ë¶€ UI ìœ„ì¹˜ ì´ë™
+	//	- ì¹´ë©”ë¼ ì„¤ì • -> í™˜ê²½ì„¤ì •ìœ¼ë¡œ ì´ë™
+	//	- ë³´ì • -> ê¸°ëŠ¥ì„¤ì • - ê¸°íƒ€íƒ­ìœ¼ë¡œ ì´ë™
+	// 8. TCU 4SPEED ëª¨ë¸ ì¶”ê°€
 	//	- 6057018809
-	// 9. T.C Lock UP ¸Ş´º´Â EHCU¿Í °ü·Ã¾øÀÌ ¸ğµ¨À» º¸´Â °ÍÀÌ¹Ç·Î ¿ø·¡´ë·Î º¹±¸(940,935ÀÏ °æ¿ì »èÁ¦)
-	// 10. ±â´É¼³Á¤ »ó´ÜÅÇ ÀÌµ¿ ¿ø»óº¹±¸(Ä¿¼­ ÀÒ´Â ¹ö±×·Î ÀÎÇÔ)
-	// 11. SoftEndStop Default °ª UserSwitch°ú µ¿ÀÏÇÏ°Ô º¯°æ
-	// 12. Fuel Info ¸Ş´º Å°ÆĞµå Enter °ª ¹ö±× ¼öÁ¤
-	// 13. UserSwitch ¹à±â °ü·Ã ¼öµ¿/ÀÚµ¿ »ó°ü¾øÀÌ °ª ÀúÀå
-	// 14. Popup ESC Ãß°¡
+	// 9. T.C Lock UP ë©”ë‰´ëŠ” EHCUì™€ ê´€ë ¨ì—†ì´ ëª¨ë¸ì„ ë³´ëŠ” ê²ƒì´ë¯€ë¡œ ì›ë˜ëŒ€ë¡œ ë³µêµ¬(940,935ì¼ ê²½ìš° ì‚­ì œ)
+	// 10. ê¸°ëŠ¥ì„¤ì • ìƒë‹¨íƒ­ ì´ë™ ì›ìƒë³µêµ¬(ì»¤ì„œ ìƒëŠ” ë²„ê·¸ë¡œ ì¸í•¨)
+	// 11. SoftEndStop Default ê°’ UserSwitchê³¼ ë™ì¼í•˜ê²Œ ë³€ê²½
+	// 12. Fuel Info ë©”ë‰´ í‚¤íŒ¨ë“œ Enter ê°’ ë²„ê·¸ ìˆ˜ì •
+	// 13. UserSwitch ë°ê¸° ê´€ë ¨ ìˆ˜ë™/ìë™ ìƒê´€ì—†ì´ ê°’ ì €ì¥
+	// 14. Popup ESC ì¶”ê°€
 	//	- BucketPriority, CCOMode, EngineMode, WarmingUp, ICCO, KickDown,
 	//	  MiracastClose, MultimediaClose, ShiftMode, SoundOutput, T.C.Lock Up
 	//	  WorkLoadWeighingInitPopup1
-	// 15. FuelInfoPopup¿¡¼­ ESC¸¦ ´­·¶À» °æ¿ì °¢ ÆäÀÌÁöÀÇ ÃÊ±âÈ­ ¹öÆ°À¸·Î Ä¿¼­ ÀÌµ¿
+	// 15. FuelInfoPopupì—ì„œ ESCë¥¼ ëˆŒë €ì„ ê²½ìš° ê° í˜ì´ì§€ì˜ ì´ˆê¸°í™” ë²„íŠ¼ìœ¼ë¡œ ì»¤ì„œ ì´ë™
 	//// v1.0.4.2
-	// 1. º¸Á¤ List »ó¿¡¼­ Å°ÆĞµå ¾ÈµÇ´Â ¹ö±× ¼öÁ¤
-	// 2. Cooling fan reverse mode Ui ¼öÁ¤
-	// 3. °ú°Å °íÀå »èÁ¦ ÆË¾÷¿¡¼­ ESC ´­·¶À» °æ¿ì °ú°Å°íÀå ÆäÀÌÁö¿¡¼­ Ä¿¼­ ÀÒ´Â ¹ö±× ¼öÁ¤(Crash -> UpdateUI»ç¿ëÀ¸·Î º¯°æ)
-	// 4. Version Á¤º¸¿¡¼­ EHCU ¾øÀ» ¶§ LEFT/RIGHT Ä¿¼­ ¹ö±× ¼öÁ¤
-	// 5. MainAKeyWorkLoadDisplayFragment¿¡¼­ ÆË¾÷ ¶ç¿ì°í ESC ´©¸£¸é Crash¶ß´Â ¹ö±× ¼öÁ¤
-	// 6. WorkLoadWeighingInitPopup1, 2 ÆË¾÷ ESC ´©¸£¸é Æ÷Ä¿½º ÀÒ´Â ¹ö±× ¼öÁ¤
-	// 7. QuickCouple, ECHU Error, ¿£ÁøÀÚµ¿Á¤Áö Popup »©°í ¸ğµÎ Keypad È£È¯ ¿Ï·á 
-	// 8. ½º¸¶Æ®Å° ÀÎÁõ È­¸é B¾È ÀÌ¹ÌÁö Ãà¼Ò(HHI ¿äÃ»)
-	// 9. ¹Ì¶óÄ³½ºÆ® ÆĞÅ°Áö¸í ¼öÁ¤
-	// 10. º¸Á¤, ¿£Áø¼³Á¤, ¿¬·á Á¤º¸ Æ÷Ä¿½º ÃÊ±âÈ­µÇ´Â ¹ö±× ¼öÁ¤
-	// 11. °ú°Å°íÀå»èÁ¦ ÆË¾÷ : ¹®±¸ /n Ãß°¡
-	// 12. °ü¸®±â´É - °ü¸®ÀÚ¸Ş´º - ºñ¹Ğ¹øÈ£ ÀÔ·ÂÃ¢ : ·ÕÅ°·Î ºñ¹Ğ¹øÈ£ ÇØÁ¦ ±â´É »èÁ¦
-	// 13. °ü¸®±â´É - °ü¸®ÀÚ¸Ş´º - ¼ÒÇÁÆ®¿ş¾î ¾÷µ¥ÀÌÆ® : ·ÕÅ° ºñ¹Ğ¹øÈ£ ÇØÁ¦ ±â´É Ãß°¡ - CAN ¾øÀÌ ¾÷µ¥ÀÌÆ® °¡´É
-	// 14. ¸Ş´º ¿ŞÂÊ ¹Ù ¹× ¸®½ºÆ® ¸ÖÆ¼ÅÍÄ¡ Â÷´Ü
-	// 15. Fine Modulation °ü·ÃÇÏ¿© EHCU CID ¹Ì¼ö½Å ½Ã LED Off
-	// 16. ¹Ìµğ¾î ÇÃ·¹ÀÌ¾î : RPM ¿¬µ¿ÇÏ¿© RPM »ó½Â½Ã ¹é±×¶ó¿îµå·Î µ¿ÀÛ(flag º¯¼ö ÅëÇÕ ¹× µ¿ÀÛ Áß LED Ç¥½Ã)
-	// 17. HW Test ÇÁ·Î±×·¥ CAN ¾øÀÌ °¡´ÉÇÏ°Ô ¼öÁ¤ ¹× ºñ¹Ğ¹øÈ£ º¯°æ(0314451227)
-	// 18. ¹öÀü Á¤º¸ Ç¥½ÃÈ­¸é º¯°æ
-	//	- ¹öÀüÁ¤º¸ -> ÀåºñÁ¤º¸ ÀÌ¸§ º¯°æ(ÇÑ±¹¾î)
-	//	- ECM Ç¥½Ã³»¿ë : Á¦Á¶»ç, ECM Identifier(¼ºÇö±Õ ´ë¸®)->Calibration_Version_Number(ÀÓÇõÁØ¾¾)
-	//	- TCM Ç¥½Ã ³»¿ë : Á¦Á¶»ç, HW Serial Number(¼ºÇö±Õ ´ë¸®)->Software Version(ÀÓÇõÁØ¾¾)
-	//	- ±×¿Ü Ç×¸ñ Ç¥½Ã³»¿ë : ÇÁ·Î±×·¥ ¹öÀü, ½Ã¸®¾ó ¹øÈ£(RMCU ºÒÇÊ¿äÇÑ »ó¼¼Á¤º¸ ¸ğµÎ °¨Ãã)
-	// 19. User switching ±âº»°ª º¯°æ(HHI 150421 ¿äÃ»)
+	// 1. ë³´ì • List ìƒì—ì„œ í‚¤íŒ¨ë“œ ì•ˆë˜ëŠ” ë²„ê·¸ ìˆ˜ì •
+	// 2. Cooling fan reverse mode Ui ìˆ˜ì •
+	// 3. ê³¼ê±° ê³ ì¥ ì‚­ì œ íŒì—…ì—ì„œ ESC ëˆŒë €ì„ ê²½ìš° ê³¼ê±°ê³ ì¥ í˜ì´ì§€ì—ì„œ ì»¤ì„œ ìƒëŠ” ë²„ê·¸ ìˆ˜ì •(Crash -> UpdateUIì‚¬ìš©ìœ¼ë¡œ ë³€ê²½)
+	// 4. Version ì •ë³´ì—ì„œ EHCU ì—†ì„ ë•Œ LEFT/RIGHT ì»¤ì„œ ë²„ê·¸ ìˆ˜ì •
+	// 5. MainAKeyWorkLoadDisplayFragmentì—ì„œ íŒì—… ë„ìš°ê³  ESC ëˆ„ë¥´ë©´ Crashëœ¨ëŠ” ë²„ê·¸ ìˆ˜ì •
+	// 6. WorkLoadWeighingInitPopup1, 2 íŒì—… ESC ëˆ„ë¥´ë©´ í¬ì»¤ìŠ¤ ìƒëŠ” ë²„ê·¸ ìˆ˜ì •
+	// 7. QuickCouple, ECHU Error, ì—”ì§„ìë™ì •ì§€ Popup ë¹¼ê³  ëª¨ë‘ Keypad í˜¸í™˜ ì™„ë£Œ 
+	// 8. ìŠ¤ë§ˆíŠ¸í‚¤ ì¸ì¦ í™”ë©´ Bì•ˆ ì´ë¯¸ì§€ ì¶•ì†Œ(HHI ìš”ì²­)
+	// 9. ë¯¸ë¼ìºìŠ¤íŠ¸ íŒ¨í‚¤ì§€ëª… ìˆ˜ì •
+	// 10. ë³´ì •, ì—”ì§„ì„¤ì •, ì—°ë£Œ ì •ë³´ í¬ì»¤ìŠ¤ ì´ˆê¸°í™”ë˜ëŠ” ë²„ê·¸ ìˆ˜ì •
+	// 11. ê³¼ê±°ê³ ì¥ì‚­ì œ íŒì—… : ë¬¸êµ¬ /n ì¶”ê°€
+	// 12. ê´€ë¦¬ê¸°ëŠ¥ - ê´€ë¦¬ìë©”ë‰´ - ë¹„ë°€ë²ˆí˜¸ ì…ë ¥ì°½ : ë¡±í‚¤ë¡œ ë¹„ë°€ë²ˆí˜¸ í•´ì œ ê¸°ëŠ¥ ì‚­ì œ
+	// 13. ê´€ë¦¬ê¸°ëŠ¥ - ê´€ë¦¬ìë©”ë‰´ - ì†Œí”„íŠ¸ì›¨ì–´ ì—…ë°ì´íŠ¸ : ë¡±í‚¤ ë¹„ë°€ë²ˆí˜¸ í•´ì œ ê¸°ëŠ¥ ì¶”ê°€ - CAN ì—†ì´ ì—…ë°ì´íŠ¸ ê°€ëŠ¥
+	// 14. ë©”ë‰´ ì™¼ìª½ ë°” ë° ë¦¬ìŠ¤íŠ¸ ë©€í‹°í„°ì¹˜ ì°¨ë‹¨
+	// 15. Fine Modulation ê´€ë ¨í•˜ì—¬ EHCU CID ë¯¸ìˆ˜ì‹  ì‹œ LED Off
+	// 16. ë¯¸ë””ì–´ í”Œë ˆì´ì–´ : RPM ì—°ë™í•˜ì—¬ RPM ìƒìŠ¹ì‹œ ë°±ê·¸ë¼ìš´ë“œë¡œ ë™ì‘(flag ë³€ìˆ˜ í†µí•© ë° ë™ì‘ ì¤‘ LED í‘œì‹œ)
+	// 17. HW Test í”„ë¡œê·¸ë¨ CAN ì—†ì´ ê°€ëŠ¥í•˜ê²Œ ìˆ˜ì • ë° ë¹„ë°€ë²ˆí˜¸ ë³€ê²½(0314451227)
+	// 18. ë²„ì „ ì •ë³´ í‘œì‹œí™”ë©´ ë³€ê²½
+	//	- ë²„ì „ì •ë³´ -> ì¥ë¹„ì •ë³´ ì´ë¦„ ë³€ê²½(í•œêµ­ì–´)
+	//	- ECM í‘œì‹œë‚´ìš© : ì œì¡°ì‚¬, ECM Identifier(ì„±í˜„ê·  ëŒ€ë¦¬)->Calibration_Version_Number(ì„í˜ì¤€ì”¨)
+	//	- TCM í‘œì‹œ ë‚´ìš© : ì œì¡°ì‚¬, HW Serial Number(ì„±í˜„ê·  ëŒ€ë¦¬)->Software Version(ì„í˜ì¤€ì”¨)
+	//	- ê·¸ì™¸ í•­ëª© í‘œì‹œë‚´ìš© : í”„ë¡œê·¸ë¨ ë²„ì „, ì‹œë¦¬ì–¼ ë²ˆí˜¸(RMCU ë¶ˆí•„ìš”í•œ ìƒì„¸ì •ë³´ ëª¨ë‘ ê°ì¶¤)
+	// 19. User switching ê¸°ë³¸ê°’ ë³€ê²½(HHI 150421 ìš”ì²­)
 	//	- ENIGNE MODE : STANDARD -> POWER
 	//	- TC LOCK UP : OFF -> ON
-	//	- ÀåºñÁ¤º¸ : HYD/COOLANT -> COOLANT/BATTERY
-	// 20. ÃÊ±â ¸ÖÆ¼ÆĞÅ¶ Àü¼Û ÈÄ 10ÃÊ°£ CID ¼Û½Å
-	// 21. ¸ŞÀÎ - Fuel Init(·Õ ÅÍÄ¡) -> ÆË¾÷¶ç¿ì´Â ÇüÅÂ·Î º¯°æ
+	//	- ì¥ë¹„ì •ë³´ : HYD/COOLANT -> COOLANT/BATTERY
+	// 20. ì´ˆê¸° ë©€í‹°íŒ¨í‚· ì „ì†¡ í›„ 10ì´ˆê°„ CID ì†¡ì‹ 
+	// 21. ë©”ì¸ - Fuel Init(ë¡± í„°ì¹˜) -> íŒì—…ë„ìš°ëŠ” í˜•íƒœë¡œ ë³€ê²½
 	////v1.0.4.3
-	// 1. °¡»óÅ° FN, Fine Modulation ÀÌ¹ÌÁö º¯°æ
-	// 2. EHCU POUUP 0xFFFFÀÏ °æ¿ì ¸·À½
-	// 3. °¡»óÅ° Not availableÀÏ °æ¿ì È¸»ö À½¿µ Ã³¸®(Auto grease, Quick coupler, Ride control, Beacon lamp, Mirror heat)
-	// 4. ÀåºñÁ¤º¸ »èÁ¦ÇÑ Ç×¸ñ -> Hidden Page¿¡¼­ º¸¿©ÁÜ
+	// 1. ê°€ìƒí‚¤ FN, Fine Modulation ì´ë¯¸ì§€ ë³€ê²½
+	// 2. EHCU POUUP 0xFFFFì¼ ê²½ìš° ë§‰ìŒ
+	// 3. ê°€ìƒí‚¤ Not availableì¼ ê²½ìš° íšŒìƒ‰ ìŒì˜ ì²˜ë¦¬(Auto grease, Quick coupler, Ride control, Beacon lamp, Mirror heat)
+	// 4. ì¥ë¹„ì •ë³´ ì‚­ì œí•œ í•­ëª© -> Hidden Pageì—ì„œ ë³´ì—¬ì¤Œ
 	////v1.0.4.4
 	// 1. User Switching / Default -> Display Type : A -> B
 	// 2. User Switching / Default -> CCO MODE : OFF -> H
-	// 3. CID ¾øÀ» °æ¿ì ÃÊ±â SendCommandTimer ¹«ÇÑÀ¸·Î µµ´Â Çö»ó °³¼±
-	// 4. ºÎÆÃ ½Ã Main ¾Ö´Ï¸ŞÀÌ¼Ç Àü Å° ¹«ÀÛÀ§·Î ´©¸¦ °æ¿ì CrashÀÏ¾î³ª´Â Çö»ó ¸·À½(setScreenIndex ÁÖ¼®Ã³¸®)
-	// 5. ÆäÀÌÁö ÀÌµ¿ ÈÄ ¶óÀÌ¿À¹öÆ° Å¬¸¯À¸·Î ³ª¿À´Â ÆäÀÌÁöÀÏ °æ¿ì ÃÊ±â ¾Ö´Ï¸ŞÀÌ¼Ç Áß ºü¸£°Ô ´Ù¸¥ Ç×¸ñ ´©¸¦ °æ¿ì ÀÌÁß ¼±ÅÃ È¤Àº ÆäÀÌÁö¿¡¼­ ³ª¿ÀÁö ¸øÇÏ´Â Çö»ó ¹ß»ı 
-	//	-> ¾Ö´Ï¸ŞÀÌ¼ÇÀÌ ¿Ï·áµÇ¸é È­¸éÀ» È°¼ºÈ­
-	//		- ´Ù±¹¾î ¼³Á¤
-	//		- ¸ŞÀÎ(Fuel Select, ODO/HOURMETER Select, Engine Mode, CCO/ICCO Mode, Shift Mode, T.C.Lock Up)
-	// 6. ´Ù±¹¾î - ÇÑ±¹¾î, ¿µ¾î ÃÖÁ¾º» Àû¿ë
-	// 7. ´Ù±¹¾î - ÇÑ±¹¾î Àû¿ë¿¡ µû¶ó º¸Á¤ - ºÕ¾Ğ·Â º¸Á¤ ¹®±¸°¡ ±æ¾îÁø °ü°è·Î UI ¹è¿­ º¯°æ
-	// 8. MAIN-KEY-WORKLOAD -> ºÕ¾Ğ·Âº¸Á¤ ¹öÆ° ¿·¿¡ ÃÊ±âÈ­ ¹öÆ° Ãß°¡
-	// 9. °ü¸®±â´É - °ü¸®ÀÚ¸Ş´º - ÀÛ¾÷·® º¸Á¤ : CAN ¾øÀ» °æ¿ì ESC ¾È¸Ô´Â Çö»ó °³¼±
-	// 10. Äü ¸ŞÀÎ -> È¨È­¸é °¥ °æ¿ì ¾ÆÀÌÄÜ HOME ¾ÆÀÌÄÜÀ¸·Î º¯°æ
-	// 11. 980 Àåºñ Main -> ICCO Mode Change ÀÏ¶§ ¹ö±× ¼öÁ¤
-	// 12. ¼Óµµ°è¼³Á¤ : ÃÊ±â °ªÀÌ 0xffffÀÎ °æ¿ì 0À¸·Î Ç¥½Ã
-	// 13. ¸ŞÀÎ - Àåºñ»óÅÂ - ÀÛ¾÷·®ÀÏ °æ¿ì LongÅ°·Î ÃÊ±âÈ­ ÆË¾÷ Ãß°¡
-	//	- Àåºñ»óÅÂ À§/¾Æ·¡ ¹öÆ° È°¼ºÈ­ ÀÌ¹ÌÁö º¯°æ
-	// 14. ¸ŞÀÎ Å°ÆĞµå ¿¬µ¿(Engine Mode, CCO Mode, ICCO Mode, Shift Mode, TC Lock Up)
-	// 15. RMCU°ü·Ã MCU Error Description Ãß°¡
+	// 3. CID ì—†ì„ ê²½ìš° ì´ˆê¸° SendCommandTimer ë¬´í•œìœ¼ë¡œ ë„ëŠ” í˜„ìƒ ê°œì„ 
+	// 4. ë¶€íŒ… ì‹œ Main ì• ë‹ˆë©”ì´ì…˜ ì „ í‚¤ ë¬´ì‘ìœ„ë¡œ ëˆ„ë¥¼ ê²½ìš° Crashì¼ì–´ë‚˜ëŠ” í˜„ìƒ ë§‰ìŒ(setScreenIndex ì£¼ì„ì²˜ë¦¬)
+	// 5. í˜ì´ì§€ ì´ë™ í›„ ë¼ì´ì˜¤ë²„íŠ¼ í´ë¦­ìœ¼ë¡œ ë‚˜ì˜¤ëŠ” í˜ì´ì§€ì¼ ê²½ìš° ì´ˆê¸° ì• ë‹ˆë©”ì´ì…˜ ì¤‘ ë¹ ë¥´ê²Œ ë‹¤ë¥¸ í•­ëª© ëˆ„ë¥¼ ê²½ìš° ì´ì¤‘ ì„ íƒ í˜¹ì€ í˜ì´ì§€ì—ì„œ ë‚˜ì˜¤ì§€ ëª»í•˜ëŠ” í˜„ìƒ ë°œìƒ 
+	//	-> ì• ë‹ˆë©”ì´ì…˜ì´ ì™„ë£Œë˜ë©´ í™”ë©´ì„ í™œì„±í™”
+	//		- ë‹¤êµ­ì–´ ì„¤ì •
+	//		- ë©”ì¸(Fuel Select, ODO/HOURMETER Select, Engine Mode, CCO/ICCO Mode, Shift Mode, T.C.Lock Up)
+	// 6. ë‹¤êµ­ì–´ - í•œêµ­ì–´, ì˜ì–´ ìµœì¢…ë³¸ ì ìš©
+	// 7. ë‹¤êµ­ì–´ - í•œêµ­ì–´ ì ìš©ì— ë”°ë¼ ë³´ì • - ë¶ì••ë ¥ ë³´ì • ë¬¸êµ¬ê°€ ê¸¸ì–´ì§„ ê´€ê³„ë¡œ UI ë°°ì—´ ë³€ê²½
+	// 8. MAIN-KEY-WORKLOAD -> ë¶ì••ë ¥ë³´ì • ë²„íŠ¼ ì˜†ì— ì´ˆê¸°í™” ë²„íŠ¼ ì¶”ê°€
+	// 9. ê´€ë¦¬ê¸°ëŠ¥ - ê´€ë¦¬ìë©”ë‰´ - ì‘ì—…ëŸ‰ ë³´ì • : CAN ì—†ì„ ê²½ìš° ESC ì•ˆë¨¹ëŠ” í˜„ìƒ ê°œì„ 
+	// 10. í€µ ë©”ì¸ -> í™ˆí™”ë©´ ê°ˆ ê²½ìš° ì•„ì´ì½˜ HOME ì•„ì´ì½˜ìœ¼ë¡œ ë³€ê²½
+	// 11. 980 ì¥ë¹„ Main -> ICCO Mode Change ì¼ë•Œ ë²„ê·¸ ìˆ˜ì •
+	// 12. ì†ë„ê³„ì„¤ì • : ì´ˆê¸° ê°’ì´ 0xffffì¸ ê²½ìš° 0ìœ¼ë¡œ í‘œì‹œ
+	// 13. ë©”ì¸ - ì¥ë¹„ìƒíƒœ - ì‘ì—…ëŸ‰ì¼ ê²½ìš° Longí‚¤ë¡œ ì´ˆê¸°í™” íŒì—… ì¶”ê°€
+	//	- ì¥ë¹„ìƒíƒœ ìœ„/ì•„ë˜ ë²„íŠ¼ í™œì„±í™” ì´ë¯¸ì§€ ë³€ê²½
+	// 14. ë©”ì¸ í‚¤íŒ¨ë“œ ì—°ë™(Engine Mode, CCO Mode, ICCO Mode, Shift Mode, TC Lock Up)
+	// 15. RMCUê´€ë ¨ MCU Error Description ì¶”ê°€
 	////v1.0.4.5(20150507)
-	// 1. Äü ScreenIndex ¾È¸Â´Â Çö»ó °³¼±
-	// 2. ¸ŞÀÎ Å°ÆĞµå ¿¬µ¿
-	// 3. È¨¿¡¼­ »ç¿ëÀÚ ÀüÈ¯, °íÀåÁø´Ü, ¼Ò¸ğÇ° °ü¸® ESC ´­·¶À» ¶§ ÄüÀ¸·Î µ¹¾Æ°¡°Ô º¯°æ 
-	// 4. ECO Gauge »ç¾çº¯°æ(WhiteÀÎ °æ¿ì¿Í ±× ¿ÜÀÇ °æ¿ì·Î ³ª´²¼­ ÀÌ¹ÌÁö ´Ù¸£°Ô Display)
-	// 5. TC LOCK UP ¹ÌÀåÂø½Ã TYPE B ¸ŞÀÎ È­¸é ¼öÁ¤
-	// 6. Preference - Sound Output Setting - External AUX ¾Æ·¡ °æ°í ¹®±¸ Ãß°¡
-	// 7. Preference - DisplayStyle/Language - DisplayStyle : ¾Ö´Ï¸ŞÀÌ¼Ç ÈÄ Display Àû¿ë
-	// 8. Display type B¿¡¼­ rpmºÎºĞ Å¬¸¯ ½Ã rpm ¼ıÀÚ ±ô¹ÛÀÌ´Â Çö»ó(Á©¸®ºó) - °³¼±(Touch OFF)
-	// 9. ³Ã°¢ÆÒ ¼öµ¿ ÀÛÀº ¾ÆÀÌÄÜ ¹è°æ Åõ¸íÇÏ°Ô º¯°æ
-	// 10. ¸ŞÀÎ Å° Å°ÆĞµå ¿¬µ¿(A/B¾È)
-	// 11. ICCO ModeÀÏ °æ¿ì 'H'°¡ ¾Æ´Ñ 'ON'À¸·Î Ç¥½Ã
-	// 12. Weight ¿¡·¯ 2°³ ¶¹À» °æ¿ì °¡ÀÌ´ø½º ´©¸£¸é Crash¶ß´Â Çö»ó °³¼±
-	// 13. ¹Ìµğ¾î ÇÃ·¹ÀÌ¾î¿¡¼­ °¡¿îµ¥ ÅÍÄ¡ÇÏ¿© Á¾·áÇÏ¿´À» °æ¿ì FN LED ²¨ÁöÁö ¾Ê´Â Çö»ó °³¼±
-	// 14. Quick Coupler LED ²¨ÁöÁö ¾Ê´Â Çö»ó È®ÀÎ ÈÄ ÇÁ·ÎÅäÄİ Ãß°¡(2¿¡ ´ëÇÑ »ç¾çÀÌ ¾ø¾úÀ½ -> MCU LED OFF »ç¾çÀ¸·Î È®ÀÎ µÊ)
-	// 15. ¸ÖÆ¼¹Ìµğ¾î ¸®½ºÆ®·Î º¯°æ(½º¸¶Æ® ÅÍ¹Ì³Î ¹®±¸ Ãß°¡)
-	// 16. ½º¸¶Æ® ÅÍ¹Ì³Î ON/OFF¿¡ ´ëÇÑ FN LED Á¦¾î Ãß°¡
-	// 17. AUX °æ°í¹®±¸ »çÀÌÁî ÀÛ°Ô º¯°æ
+	// 1. í€µ ScreenIndex ì•ˆë§ëŠ” í˜„ìƒ ê°œì„ 
+	// 2. ë©”ì¸ í‚¤íŒ¨ë“œ ì—°ë™
+	// 3. í™ˆì—ì„œ ì‚¬ìš©ì ì „í™˜, ê³ ì¥ì§„ë‹¨, ì†Œëª¨í’ˆ ê´€ë¦¬ ESC ëˆŒë €ì„ ë•Œ í€µìœ¼ë¡œ ëŒì•„ê°€ê²Œ ë³€ê²½ 
+	// 4. ECO Gauge ì‚¬ì–‘ë³€ê²½(Whiteì¸ ê²½ìš°ì™€ ê·¸ ì™¸ì˜ ê²½ìš°ë¡œ ë‚˜ëˆ ì„œ ì´ë¯¸ì§€ ë‹¤ë¥´ê²Œ Display)
+	// 5. TC LOCK UP ë¯¸ì¥ì°©ì‹œ TYPE B ë©”ì¸ í™”ë©´ ìˆ˜ì •
+	// 6. Preference - Sound Output Setting - External AUX ì•„ë˜ ê²½ê³  ë¬¸êµ¬ ì¶”ê°€
+	// 7. Preference - DisplayStyle/Language - DisplayStyle : ì• ë‹ˆë©”ì´ì…˜ í›„ Display ì ìš©
+	// 8. Display type Bì—ì„œ rpmë¶€ë¶„ í´ë¦­ ì‹œ rpm ìˆ«ì ê¹œë°–ì´ëŠ” í˜„ìƒ(ì ¤ë¦¬ë¹ˆ) - ê°œì„ (Touch OFF)
+	// 9. ëƒ‰ê°íŒ¬ ìˆ˜ë™ ì‘ì€ ì•„ì´ì½˜ ë°°ê²½ íˆ¬ëª…í•˜ê²Œ ë³€ê²½
+	// 10. ë©”ì¸ í‚¤ í‚¤íŒ¨ë“œ ì—°ë™(A/Bì•ˆ)
+	// 11. ICCO Modeì¼ ê²½ìš° 'H'ê°€ ì•„ë‹Œ 'ON'ìœ¼ë¡œ í‘œì‹œ
+	// 12. Weight ì—ëŸ¬ 2ê°œ ë–´ì„ ê²½ìš° ê°€ì´ë˜ìŠ¤ ëˆ„ë¥´ë©´ Crashëœ¨ëŠ” í˜„ìƒ ê°œì„ 
+	// 13. ë¯¸ë””ì–´ í”Œë ˆì´ì–´ì—ì„œ ê°€ìš´ë° í„°ì¹˜í•˜ì—¬ ì¢…ë£Œí•˜ì˜€ì„ ê²½ìš° FN LED êº¼ì§€ì§€ ì•ŠëŠ” í˜„ìƒ ê°œì„ 
+	// 14. Quick Coupler LED êº¼ì§€ì§€ ì•ŠëŠ” í˜„ìƒ í™•ì¸ í›„ í”„ë¡œí† ì½œ ì¶”ê°€(2ì— ëŒ€í•œ ì‚¬ì–‘ì´ ì—†ì—ˆìŒ -> MCU LED OFF ì‚¬ì–‘ìœ¼ë¡œ í™•ì¸ ë¨)
+	// 15. ë©€í‹°ë¯¸ë””ì–´ ë¦¬ìŠ¤íŠ¸ë¡œ ë³€ê²½(ìŠ¤ë§ˆíŠ¸ í„°ë¯¸ë„ ë¬¸êµ¬ ì¶”ê°€)
+	// 16. ìŠ¤ë§ˆíŠ¸ í„°ë¯¸ë„ ON/OFFì— ëŒ€í•œ FN LED ì œì–´ ì¶”ê°€
+	// 17. AUX ê²½ê³ ë¬¸êµ¬ ì‚¬ì´ì¦ˆ ì‘ê²Œ ë³€ê²½
 	////v1.0.4.5(20150508)
-	// 1. RevD.05.01 Àû¿ë
+	// 1. RevD.05.01 ì ìš©
 	////v1.0.4.6(20150511)
-	// 1. JB ¾÷µ¥ÀÌÆ®°£ UI ¹öÀüº°·Î Àû¿ë
-	// 2. JB ¾÷µ¥ÀÌÆ®°£ Å°ÆĞµå ¼Ò¸®¾È³ª´Â Çö»ó ¼öÁ¤
-	// 3. RevD.05.01 -> RevF.01.01·Î º¯°æ
+	// 1. JB ì—…ë°ì´íŠ¸ê°„ UI ë²„ì „ë³„ë¡œ ì ìš©
+	// 2. JB ì—…ë°ì´íŠ¸ê°„ í‚¤íŒ¨ë“œ ì†Œë¦¬ì•ˆë‚˜ëŠ” í˜„ìƒ ìˆ˜ì •
+	// 3. RevD.05.01 -> RevF.01.01ë¡œ ë³€ê²½
 	////v1.0.4.7
-	// EHCU Error Popup º¯°æ°Ç
+	// EHCU Error Popup ë³€ê²½ê±´
 	// HCEPGN 65524 (4~5) : 0x0000 - Joystick Steering Enable OK -> 0x0000 - Not Available
-	// HCEPGN 65517 (2.5) : OK -> ÆË¾÷ Á¾·á ¹× ÆË¾÷ ¶ç¿ìÁö ¾ÊÀ½
+	// HCEPGN 65517 (2.5) : OK -> íŒì—… ì¢…ë£Œ ë° íŒì—… ë„ìš°ì§€ ì•ŠìŒ
 	////v1.0.4.8
-	// 1. Display Type B : Center ¾Æ¹« °÷ÀÌ³ª ºü¸£°Ô Å¬¸¯ÇÒ °æ¿ì Crash¶ß´Â Çö»ó °³¼±
-	// 2. Mediaplay rpm¿¬µ¿  ±â´ÉÁ¦°Å(HHI¿äÃ»)
-	// 3. Å¸ apk¿¡¼­ ¸Ş´º/ESC/ÁÂÃø Å° ´©¸¦ °æ¿ì ¼Ò¸® µÎ¹øµé¸®´Â Çö»ó °³¼±
-	// 4. ¸ÖÆ¼¹Ìµğ¾î UI º¯°æ : ¹Ìµğ¾î ÇÃ·¹ÀÌ¾î, ½º¸¶Æ® ÅÍ¹Ì³Î µÎ°³ ±â´É ÀÌ¹ÌÁö ¾ÆÀÌÄÜÀ¸·Î Ç¥½Ã
-	// 5. ¿ö¼Å ·ÕÅ° ¿øº¹(»óÅÂ º¹±¸½ÃÅ°´Â ºÎºĞ ¹ö±× ÀÖ¾î¼­ ·ÕÅ°ÀÏ¶§ »óÅÂº¯ÇÏ°í ¿ö¼ÅÇÏ´Â °ÍÀ¸·Î µÒ -> ¼öÁ¤ÇÊ¿ä)
-	// 6. ºñÈ°¼ºÈ­ µÈ Å°ÀÇ ¹à±â°¡ ³Ê¹« ¾îµÎ¿î °Í °°À½ (¾Æ¹«°Íµµ ¾ø´Â ºó °ø°£ ´©¸£´Ï ÇØ´ç ¹öÆ° È­¸éÀÌ ¶ß´Â ´À³¦)
-	// 7. Axle °ü·Ã »ç¾ç Àû¿ë(svnÂüÁ¶)
+	// 1. Display Type B : Center ì•„ë¬´ ê³³ì´ë‚˜ ë¹ ë¥´ê²Œ í´ë¦­í•  ê²½ìš° Crashëœ¨ëŠ” í˜„ìƒ ê°œì„ 
+	// 2. Mediaplay rpmì—°ë™  ê¸°ëŠ¥ì œê±°(HHIìš”ì²­)
+	// 3. íƒ€ apkì—ì„œ ë©”ë‰´/ESC/ì¢Œì¸¡ í‚¤ ëˆ„ë¥¼ ê²½ìš° ì†Œë¦¬ ë‘ë²ˆë“¤ë¦¬ëŠ” í˜„ìƒ ê°œì„ 
+	// 4. ë©€í‹°ë¯¸ë””ì–´ UI ë³€ê²½ : ë¯¸ë””ì–´ í”Œë ˆì´ì–´, ìŠ¤ë§ˆíŠ¸ í„°ë¯¸ë„ ë‘ê°œ ê¸°ëŠ¥ ì´ë¯¸ì§€ ì•„ì´ì½˜ìœ¼ë¡œ í‘œì‹œ
+	// 5. ì›Œì…” ë¡±í‚¤ ì›ë³µ(ìƒíƒœ ë³µêµ¬ì‹œí‚¤ëŠ” ë¶€ë¶„ ë²„ê·¸ ìˆì–´ì„œ ë¡±í‚¤ì¼ë•Œ ìƒíƒœë³€í•˜ê³  ì›Œì…”í•˜ëŠ” ê²ƒìœ¼ë¡œ ë‘  -> ìˆ˜ì •í•„ìš”)
+	// 6. ë¹„í™œì„±í™” ëœ í‚¤ì˜ ë°ê¸°ê°€ ë„ˆë¬´ ì–´ë‘ìš´ ê²ƒ ê°™ìŒ (ì•„ë¬´ê²ƒë„ ì—†ëŠ” ë¹ˆ ê³µê°„ ëˆ„ë¥´ë‹ˆ í•´ë‹¹ ë²„íŠ¼ í™”ë©´ì´ ëœ¨ëŠ” ëŠë‚Œ)
+	// 7. Axle ê´€ë ¨ ì‚¬ì–‘ ì ìš©(svnì°¸ì¡°)
 	////v.2.0.0.0
-	// 1.ºÕ/¹öÄÏ °¢µµº¸Á¤ ±â´É
-	//	- Step 1 : ±×¸² ¼öÁ¤ (bucket full in »óÅÂ·Î)
-	//  - Step 4, 5 : ºÕ °¢µµ »óÅÂ Ç¥½Ã step 3 ÀÌÈÄ·Î À¯Áö
-	//	- Boom °¢µµ µÎÁÙ·Î Ç¥½Ã
-	// 2. ·ÕÅ° µ¿ÀÛ ±â´É Å°ÆĞµå ±¸Çö ¹æ¾È
-	//	A. ·ÕÅ° µ¿ÀÛ ±â´É :³Ã°¢ÆÒ ¼öµ¿ ½ÇÇà, Detent - Save position, Rear Wiper ? Washer
-	//	B. Å°ÆĞµå ±¸Çö
-	//		- ¿£ÅÍ 1È¸ ÀÔ·Â : (Ä¿¼­ »ç¶óÁö¸é¼­) ÅÍÄ¡ ½ÃÀÛ
-	//		- ¿£ÅÍ 1È¸ Ãß°¡ ÀÔ·Â ¶Ç´Â ESC ÀÔ·Â ¶Ç´Â È­¸é ÅÍÄ¡ ÀÔ·Â : (Ä¿¼­ ³ªÅ¸³ª¸é¼­) ÅÍÄ¡ ³¡
-	//		- ÅÍÄ¡ ½ÃÀÛ°ú ³¡ »çÀÌ¿¡´Â ´Ù¸¥ Å°ÆĞµå µ¿ÀÛ(ex. Ä¿¼­ÀÌµ¿) ¾ÈµÇµµ·Ï
+	// 1.ë¶/ë²„ì¼“ ê°ë„ë³´ì • ê¸°ëŠ¥
+	//	- Step 1 : ê·¸ë¦¼ ìˆ˜ì • (bucket full in ìƒíƒœë¡œ)
+	//  - Step 4, 5 : ë¶ ê°ë„ ìƒíƒœ í‘œì‹œ step 3 ì´í›„ë¡œ ìœ ì§€
+	//	- Boom ê°ë„ ë‘ì¤„ë¡œ í‘œì‹œ
+	// 2. ë¡±í‚¤ ë™ì‘ ê¸°ëŠ¥ í‚¤íŒ¨ë“œ êµ¬í˜„ ë°©ì•ˆ
+	//	A. ë¡±í‚¤ ë™ì‘ ê¸°ëŠ¥ :ëƒ‰ê°íŒ¬ ìˆ˜ë™ ì‹¤í–‰, Detent - Save position, Rear Wiper ? Washer
+	//	B. í‚¤íŒ¨ë“œ êµ¬í˜„
+	//		- ì—”í„° 1íšŒ ì…ë ¥ : (ì»¤ì„œ ì‚¬ë¼ì§€ë©´ì„œ) í„°ì¹˜ ì‹œì‘
+	//		- ì—”í„° 1íšŒ ì¶”ê°€ ì…ë ¥ ë˜ëŠ” ESC ì…ë ¥ ë˜ëŠ” í™”ë©´ í„°ì¹˜ ì…ë ¥ : (ì»¤ì„œ ë‚˜íƒ€ë‚˜ë©´ì„œ) í„°ì¹˜ ë
+	//		- í„°ì¹˜ ì‹œì‘ê³¼ ë ì‚¬ì´ì—ëŠ” ë‹¤ë¥¸ í‚¤íŒ¨ë“œ ë™ì‘(ex. ì»¤ì„œì´ë™) ì•ˆë˜ë„ë¡
 	// 3. UserSwitching
-	//	- Boom Detent Mode Ãß°¡
-	//	- Bucket Detent Mode Ãß°¡
-	//	- Display Type Àû¿ë¾ÈµÇ´Â ºÎºĞ ¼öÁ¤
-	//	- Fuel ¶óÀÎ  Drak gray ¹ö±× ¼öÁ¤
-	// 4. ¸Ş´º¿¡¼­ CAM ¹öÆ°, ÈÄÁø±â¾î ¿¬µ¿ : home ¹öÆ° + cam È­¸é Ç¥½Ã 
-	// 5. ¹Ìµğ¾î ÇÃ·¹ÀÌ¾î / ½º¸¶Æ® ÅÍ¹Ì³Î / PDF ¸®´õ
-	//	- CAM ¹öÆ°, ÈÄÁø±â¾î ¿¬µ¿ : È­¸éÀüÈ¯ ¹öÆ° + cam È­¸é Ç¥½Ã (º¹±Í : ¸ŞÀÎ È­¸é)
-	//	- ·¥ÇÁ·ù/ÈÄ¹æ¿ÍÀÌÆÛ ¹öÆ° : ¹é±×¶ó¿îµå¿¡¼­ ÇÁ·ÎÅäÄİ¸¸ ¼ÛºÎÇÒ °Í. (¸Ş´º È­¸é¿¡¼­ÀÇ »ç¾ç°ú µ¿ÀÏ)
-	// 6. ¿ö¼Å ·ÕÅ° ¹ö±× ¼öÁ¤
-	//	- ST ¼öÁ¤ÇÊ¿ä(1.0.2.3)
-	// 7. auxilliary -> auxiliary ¿ÀÅ¸¼öÁ¤ 
-	// 8. ¸ÖÆ¼¹Ìµğ¾î UI ¼öÁ¤(¹Ìµğ¾îÇÃ·¹ÀÌ¾î È¸»öÀÌ¹ÌÁö Å×µÎ¸® ÇÏ¾á»ö ¼öÁ¤)
-	// 9. ¸ŞÀÎ - LeftUp
-	//	- Weight ¿¡·¯ µÎ°³ ¶¹À» °æ¿ì ¾ÆÀÌÄÜ ³ª´©¾î¼­ Å¬¸¯µÈ °ÍÀ¸·Î¸¸ °¡ÀÌ´ø½º Ç¥½Ã·Î º¯°æ
-	//	- UI Ton ÁÂÇ¥ ¸ÂÃã
-	// 10. Å¬·¯½ºÅÍ H/W Version Ç¥½Ã Ãß°¡
-	// 11. F.01.01 ÀúÇ×°ª ¹üÀ§ º¯°æ : 708~728 -> 688~738
+	//	- Boom Detent Mode ì¶”ê°€
+	//	- Bucket Detent Mode ì¶”ê°€
+	//	- Display Type ì ìš©ì•ˆë˜ëŠ” ë¶€ë¶„ ìˆ˜ì •
+	//	- Fuel ë¼ì¸  Drak gray ë²„ê·¸ ìˆ˜ì •
+	// 4. ë©”ë‰´ì—ì„œ CAM ë²„íŠ¼, í›„ì§„ê¸°ì–´ ì—°ë™ : home ë²„íŠ¼ + cam í™”ë©´ í‘œì‹œ 
+	// 5. ë¯¸ë””ì–´ í”Œë ˆì´ì–´ / ìŠ¤ë§ˆíŠ¸ í„°ë¯¸ë„ / PDF ë¦¬ë”
+	//	- CAM ë²„íŠ¼, í›„ì§„ê¸°ì–´ ì—°ë™ : í™”ë©´ì „í™˜ ë²„íŠ¼ + cam í™”ë©´ í‘œì‹œ (ë³µê·€ : ë©”ì¸ í™”ë©´)
+	//	- ë¨í”„ë¥˜/í›„ë°©ì™€ì´í¼ ë²„íŠ¼ : ë°±ê·¸ë¼ìš´ë“œì—ì„œ í”„ë¡œí† ì½œë§Œ ì†¡ë¶€í•  ê²ƒ. (ë©”ë‰´ í™”ë©´ì—ì„œì˜ ì‚¬ì–‘ê³¼ ë™ì¼)
+	// 6. ì›Œì…” ë¡±í‚¤ ë²„ê·¸ ìˆ˜ì •
+	//	- ST ìˆ˜ì •í•„ìš”(1.0.2.3)
+	// 7. auxilliary -> auxiliary ì˜¤íƒ€ìˆ˜ì • 
+	// 8. ë©€í‹°ë¯¸ë””ì–´ UI ìˆ˜ì •(ë¯¸ë””ì–´í”Œë ˆì´ì–´ íšŒìƒ‰ì´ë¯¸ì§€ í…Œë‘ë¦¬ í•˜ì–€ìƒ‰ ìˆ˜ì •)
+	// 9. ë©”ì¸ - LeftUp
+	//	- Weight ì—ëŸ¬ ë‘ê°œ ë–´ì„ ê²½ìš° ì•„ì´ì½˜ ë‚˜ëˆ„ì–´ì„œ í´ë¦­ëœ ê²ƒìœ¼ë¡œë§Œ ê°€ì´ë˜ìŠ¤ í‘œì‹œë¡œ ë³€ê²½
+	//	- UI Ton ì¢Œí‘œ ë§ì¶¤
+	// 10. í´ëŸ¬ìŠ¤í„° H/W Version í‘œì‹œ ì¶”ê°€
+	// 11. F.01.01 ì €í•­ê°’ ë²”ìœ„ ë³€ê²½ : 708~728 -> 688~738
 	//// v2.0.0.1
-	// 1. Maintance : draulic Tank Air Breather Filter¿¡¼­ ÁÖ±âº¯°æ ´©¸£¸é Crash ¶ß´Â Çö»ó
-	//	- ´Ù±¹¾î Àû¿ëÇÏ¸é¼­ ¹®±¸°¡ »èÁ¦µÇ¾î ¹ß»ı -> º¯°æµÈ ¹®±¸·Î Ç¥½Ã
-	// 2. Main - Detent : À§Ä¡ÀúÀå ¾ÈµÇ´Â Çö»ó ÇØ°á
-	// 3. CCO, Display Mode : ÃÊ±â°ª°ú UserSwitch Default °ª ÅëÀÏ
-	// 4. Main A Quick¿¡¼­ ¼Ò¸ğÇ°°ü¸®/UserSwitch/ÇöÀç°íÀå ÆäÀÌÁö ÀÌµ¿ÇÏ¿´´Ù°¡ BackÇÏ¿´À» °æ¿ì °¡»óÅ°ÆĞµå ¾ÈµÇ´Â Çö»ó ÇØ°á
+	// 1. Maintance : draulic Tank Air Breather Filterì—ì„œ ì£¼ê¸°ë³€ê²½ ëˆ„ë¥´ë©´ Crash ëœ¨ëŠ” í˜„ìƒ
+	//	- ë‹¤êµ­ì–´ ì ìš©í•˜ë©´ì„œ ë¬¸êµ¬ê°€ ì‚­ì œë˜ì–´ ë°œìƒ -> ë³€ê²½ëœ ë¬¸êµ¬ë¡œ í‘œì‹œ
+	// 2. Main - Detent : ìœ„ì¹˜ì €ì¥ ì•ˆë˜ëŠ” í˜„ìƒ í•´ê²°
+	// 3. CCO, Display Mode : ì´ˆê¸°ê°’ê³¼ UserSwitch Default ê°’ í†µì¼
+	// 4. Main A Quickì—ì„œ ì†Œëª¨í’ˆê´€ë¦¬/UserSwitch/í˜„ì¬ê³ ì¥ í˜ì´ì§€ ì´ë™í•˜ì˜€ë‹¤ê°€ Backí•˜ì˜€ì„ ê²½ìš° ê°€ìƒí‚¤íŒ¨ë“œ ì•ˆë˜ëŠ” í˜„ìƒ í•´ê²°
 	// 5. UserSwitching
-	//	- ÃÊ±â Ä¿¼­ À§Ä¡¸¦ ¸¶Áö¸· ¼±ÅÃÇÑ User¿¡¼­ ±âº»°ª È¤Àº Àû¿ëµÈ »ç¿ëÀÚÀüÈ¯ À¸·Î Ç¥½Ã
-	//	- »ç¿îµå Àû¿ë¾ÈµÇ´Â Çö»ó °³¼±
+	//	- ì´ˆê¸° ì»¤ì„œ ìœ„ì¹˜ë¥¼ ë§ˆì§€ë§‰ ì„ íƒí•œ Userì—ì„œ ê¸°ë³¸ê°’ í˜¹ì€ ì ìš©ëœ ì‚¬ìš©ìì „í™˜ ìœ¼ë¡œ í‘œì‹œ
+	//	- ì‚¬ìš´ë“œ ì ìš©ì•ˆë˜ëŠ” í˜„ìƒ ê°œì„ 
 	//// v2.0.0.2
-	// 1. MultiTouch ¸·À½
-	// 2. rpm gauge ¸ÂÃã
-	// 3. ÀåºñÁ¤º¸ Ç¥½Ã±â´É - BKCU ¹öÀü Ç×¸ñ CID ÀÎ½Ä ¿©ºÎ¿¡ µû¶ó °¨Ãã
-	// 4. Quick coupler ±â´É
-	//	- unlock ÈÄ lock ½Ã¿¡ ºÎÀú¼Ò¸® ÀÌ»ó °³¼± 
-	//	- Åë½Å¿¡·¯ °ü·ÃÇÏ¿© Å¸ÀÌ¸Ó ºñÁ¾·á Çö»ó °³¼±
-	// 5. ´Ù±¹¾î ¼³Á¤ - ÇÑ±¹¾î ¼³Á¤ ÈÄ KEY OFF ½Ã ¿µ¾î·Î ¹Ù²ñ(Å¸ ¾ğ¾îµµ µ¿ÀÏ Çö»óÀ¸·Î ÃßÁ¤) -> °³¼±
-	// 6. CID S/N ¾ø´Â °æ¿ì '-'·Î Ç¥½Ã
+	// 1. MultiTouch ë§‰ìŒ
+	// 2. rpm gauge ë§ì¶¤
+	// 3. ì¥ë¹„ì •ë³´ í‘œì‹œê¸°ëŠ¥ - BKCU ë²„ì „ í•­ëª© CID ì¸ì‹ ì—¬ë¶€ì— ë”°ë¼ ê°ì¶¤
+	// 4. Quick coupler ê¸°ëŠ¥
+	//	- unlock í›„ lock ì‹œì— ë¶€ì €ì†Œë¦¬ ì´ìƒ ê°œì„  
+	//	- í†µì‹ ì—ëŸ¬ ê´€ë ¨í•˜ì—¬ íƒ€ì´ë¨¸ ë¹„ì¢…ë£Œ í˜„ìƒ ê°œì„ 
+	// 5. ë‹¤êµ­ì–´ ì„¤ì • - í•œêµ­ì–´ ì„¤ì • í›„ KEY OFF ì‹œ ì˜ì–´ë¡œ ë°”ë€œ(íƒ€ ì–¸ì–´ë„ ë™ì¼ í˜„ìƒìœ¼ë¡œ ì¶”ì •) -> ê°œì„ 
+	// 6. CID S/N ì—†ëŠ” ê²½ìš° '-'ë¡œ í‘œì‹œ
 	//// v2.0.0.3
-	// 1. SmartKey SA ¹«½Ã(MCUÀÇ CID¿Í °ãÃÄº¸ÀÓ)
-	// 2. È÷µç Å° º¯°æ
-	//	- Áø´Ü±â´É-ÀåºñÁ¤º¸-°¢ ÀåºñÈ­¸é / 8+0 / Hidden Á¤º¸ Ç¥½Ã
-	//	- ¸ÖÆ¼¹Ìµğ¾î / 8+0 / File manager
-	//	- ¸ÖÆ¼¹Ìµğ¾î / 8+9+0 / ½Ã½ºÅÛ ¼³Á¤ ½ÇÇà
-	// 3. ºÕ/¹öÄÏ °¢µµº¸Á¤, ºÕ ¾Ğ·Âº¸Á¤ ±â´É - EHCU CID ÀÎ½ÄÇÏ¿© EHCU ÀåÂø Àåºñ¿¡¼­´Â ÃÖÃÊ È­¸é¿¡ Ãß°¡ ¹®±¸ or ÆË¾÷ Ç¥½Ã 
+	// 1. SmartKey SA ë¬´ì‹œ(MCUì˜ CIDì™€ ê²¹ì³ë³´ì„)
+	// 2. íˆë“  í‚¤ ë³€ê²½
+	//	- ì§„ë‹¨ê¸°ëŠ¥-ì¥ë¹„ì •ë³´-ê° ì¥ë¹„í™”ë©´ / 8+0 / Hidden ì •ë³´ í‘œì‹œ
+	//	- ë©€í‹°ë¯¸ë””ì–´ / 8+0 / File manager
+	//	- ë©€í‹°ë¯¸ë””ì–´ / 8+9+0 / ì‹œìŠ¤í…œ ì„¤ì • ì‹¤í–‰
+	// 3. ë¶/ë²„ì¼“ ê°ë„ë³´ì •, ë¶ ì••ë ¥ë³´ì • ê¸°ëŠ¥ - EHCU CID ì¸ì‹í•˜ì—¬ EHCU ì¥ì°© ì¥ë¹„ì—ì„œëŠ” ìµœì´ˆ í™”ë©´ì— ì¶”ê°€ ë¬¸êµ¬ or íŒì—… í‘œì‹œ 
 	//	- "You should turn OFF Soft end stop before start calibration."
-	// 4. Main lamp·ù ¿À·ù Å¬¸¯ ÈÄ ÆË¾÷ Á¾·á ½Ã crash ÇØ°á
+	// 4. Main lampë¥˜ ì˜¤ë¥˜ í´ë¦­ í›„ íŒì—… ì¢…ë£Œ ì‹œ crash í•´ê²°
 	//// v2.0.0.4
-	// 1. Axle Popup 3ÃÊ -> 5ÃÊ·Î º¯°æ
-	// 2. DTC List (HL9XX ½Ã¸®Áî, 15³â 5¿ù 22ÀÏ ±âÁØ) Àû¿ë
-	// 3. TCU 4SPEED ¸ğµ¨ Ãß°¡
+	// 1. Axle Popup 3ì´ˆ -> 5ì´ˆë¡œ ë³€ê²½
+	// 2. DTC List (HL9XX ì‹œë¦¬ì¦ˆ, 15ë…„ 5ì›” 22ì¼ ê¸°ì¤€) ì ìš©
+	// 3. TCU 4SPEED ëª¨ë¸ ì¶”ê°€
 	//	- 6057018709 
-	// 4. ÈÄ¹æÄ«¸Ş¶ó ¿¬µ¿ ½Ã ÈÄÁø±â¾îÀÏ °æ¿ì ºÎÀú ¿ï¸®Áö ¾Ê´Â Çö»ó °³¼±
-	//	- ÄüÄ¿ÇÃ·¯¿Í Ãæµ¹·Î ÀÎÇÔ
+	// 4. í›„ë°©ì¹´ë©”ë¼ ì—°ë™ ì‹œ í›„ì§„ê¸°ì–´ì¼ ê²½ìš° ë¶€ì € ìš¸ë¦¬ì§€ ì•ŠëŠ” í˜„ìƒ ê°œì„ 
+	//	- í€µì»¤í”ŒëŸ¬ì™€ ì¶©ëŒë¡œ ì¸í•¨
 	//// v2.0.0.5 15.06.12
-	// 1. PDF¿¡¼­ ESCÅ° ´­·¶À» °æ¿ì ¼Ò¸®¾È³ª´Â Çö»ó °³¼±
-	// 2. ÆË¾÷À» ÄÒ Ã¤·Î Ä«¸Ş¶ó ¸ğµå·Î µé¾î°¡¸é ÆË¾÷ÀÌ ²¨Áö°Å³ª Å¬¸¯µÇ´Â Çö»ó °³¼±
-	//	- ParentPopup¿¡¼­ Ä«¸Ş¶óÀÇ »óÅÂ¸¦ º¸°í ¸·À½
-	// 3. ÈÄ¹æÄ«¸Ş¶óÀÏ °æ¿ì È­¸é ÅÍÄ¡ÇÏ¸é Å°/ÅÍÄ¡ ºÒ´ÉÇö»ó °³¼±
-	//	- Home¿¡¼­ imgViewCameraScreen¸¦ Click ÀÌº¥Æ®¿¡¼­ Touch ÀÌº¥Æ®·Î º¯°æ
-	//	- Å¸ apk ½ÇÇà ½Ã Ä«¸Ş¶ó ¹öÆ° ¸·À½
-	// 4. ¸Ş´º - ¸ÖÆ¼¹Ìµğ¾î - ¹Ìµğ¾î ÇÃ·¹ÀÌ¾î ¼±ÅÃ ½Ã °­Á¦·Î ½º¸¶Æ®ÅÍ¹Ì³ÎÀ» OffÇÏ´Â ºÎºĞ »èÁ¦
-	// 5. ¸ÖÆ¼¹Ìµğ¾î ½ÇÇà Áß ½º¸¶Æ® ÅÍ¹Ì³Î ½ÇÇà ½Ã LED Off µÇ´Â Çö»ó °³¼±
-	// 6. ½º¸¶Æ® ÅÍ¹Ì³Î ½ÇÇà Áß FNÅ° ´©¸£¸é LED ²¨ÁöÁö ¾Ê´Â Çö»ó °³¼±
-	// 7. H/W Revision ÀúÇ× F.01.01 738 ÀÎ½Ä º¸µå ¹ß»ı -> max¸¦ 740À¸·Î º¯°æ
-	// 8. MainKeyRearWiper ClickRight,ClickLeft ½Ã textview ¾øÀ» °æ¿ì NullPointÇö»ó º¸¿Ï
+	// 1. PDFì—ì„œ ESCí‚¤ ëˆŒë €ì„ ê²½ìš° ì†Œë¦¬ì•ˆë‚˜ëŠ” í˜„ìƒ ê°œì„ 
+	// 2. íŒì—…ì„ ì¼  ì±„ë¡œ ì¹´ë©”ë¼ ëª¨ë“œë¡œ ë“¤ì–´ê°€ë©´ íŒì—…ì´ êº¼ì§€ê±°ë‚˜ í´ë¦­ë˜ëŠ” í˜„ìƒ ê°œì„ 
+	//	- ParentPopupì—ì„œ ì¹´ë©”ë¼ì˜ ìƒíƒœë¥¼ ë³´ê³  ë§‰ìŒ
+	// 3. í›„ë°©ì¹´ë©”ë¼ì¼ ê²½ìš° í™”ë©´ í„°ì¹˜í•˜ë©´ í‚¤/í„°ì¹˜ ë¶ˆëŠ¥í˜„ìƒ ê°œì„ 
+	//	- Homeì—ì„œ imgViewCameraScreenë¥¼ Click ì´ë²¤íŠ¸ì—ì„œ Touch ì´ë²¤íŠ¸ë¡œ ë³€ê²½
+	//	- íƒ€ apk ì‹¤í–‰ ì‹œ ì¹´ë©”ë¼ ë²„íŠ¼ ë§‰ìŒ
+	// 4. ë©”ë‰´ - ë©€í‹°ë¯¸ë””ì–´ - ë¯¸ë””ì–´ í”Œë ˆì´ì–´ ì„ íƒ ì‹œ ê°•ì œë¡œ ìŠ¤ë§ˆíŠ¸í„°ë¯¸ë„ì„ Offí•˜ëŠ” ë¶€ë¶„ ì‚­ì œ
+	// 5. ë©€í‹°ë¯¸ë””ì–´ ì‹¤í–‰ ì¤‘ ìŠ¤ë§ˆíŠ¸ í„°ë¯¸ë„ ì‹¤í–‰ ì‹œ LED Off ë˜ëŠ” í˜„ìƒ ê°œì„ 
+	// 6. ìŠ¤ë§ˆíŠ¸ í„°ë¯¸ë„ ì‹¤í–‰ ì¤‘ FNí‚¤ ëˆ„ë¥´ë©´ LED êº¼ì§€ì§€ ì•ŠëŠ” í˜„ìƒ ê°œì„ 
+	// 7. H/W Revision ì €í•­ F.01.01 738 ì¸ì‹ ë³´ë“œ ë°œìƒ -> maxë¥¼ 740ìœ¼ë¡œ ë³€ê²½
+	// 8. MainKeyRearWiper ClickRight,ClickLeft ì‹œ textview ì—†ì„ ê²½ìš° NullPointí˜„ìƒ ë³´ì™„
 	//// v2.0.0.5 15.06.15
-	// 1. [Ä«¸Ş¶ó ¼³Á¤ ±â´É]ÀÇ Ã¹¹øÂ° Ä«¸Ş¶ó¿¡ ÈÄÁø±â¾î¿¬µ¿ Àü¿ë Ç¥½Ã
-	// 2. ¶ô¾÷Å¬·¯Ä¡ ±â´É ÄÑÁü/²¨Áü À§¾Æ·¡ À§Ä¡ ¹Ù²Ş (ICCO ¸ğµå ±â´É°ú ºñ±³ÇßÀ» ¶§) : ¸ŞÀÎÈ­¸é, ¸Ş´º ³» ÀüºÎ
-	// 3. ¿£Áø ÀÚµ¿Á¤Áö ±â´É ÆË¾÷ ¶ß°í Ãë¼Ò ¹öÆ° ´©¸£¸é Á÷ÈÄ Å°ÆĞµå ÀÔ·Â ½Ã CRASH °³¼±
-	// 4. ¿Âµµ °ªÀÌ 0xffÀÌ»óÀÏ °æ¿ì '-'·Î Ç¥½Ã
-	// 5. A¾È Finemodulation È­¸é Touch ½Ã crash °³¼±
-	// 6. Sync Àû¿ë
-	// 7. KeyButton Filter ¼öÁ¤
+	// 1. [ì¹´ë©”ë¼ ì„¤ì • ê¸°ëŠ¥]ì˜ ì²«ë²ˆì§¸ ì¹´ë©”ë¼ì— í›„ì§„ê¸°ì–´ì—°ë™ ì „ìš© í‘œì‹œ
+	// 2. ë½ì—…í´ëŸ¬ì¹˜ ê¸°ëŠ¥ ì¼œì§/êº¼ì§ ìœ„ì•„ë˜ ìœ„ì¹˜ ë°”ê¿ˆ (ICCO ëª¨ë“œ ê¸°ëŠ¥ê³¼ ë¹„êµí–ˆì„ ë•Œ) : ë©”ì¸í™”ë©´, ë©”ë‰´ ë‚´ ì „ë¶€
+	// 3. ì—”ì§„ ìë™ì •ì§€ ê¸°ëŠ¥ íŒì—… ëœ¨ê³  ì·¨ì†Œ ë²„íŠ¼ ëˆ„ë¥´ë©´ ì§í›„ í‚¤íŒ¨ë“œ ì…ë ¥ ì‹œ CRASH ê°œì„ 
+	// 4. ì˜¨ë„ ê°’ì´ 0xffì´ìƒì¼ ê²½ìš° '-'ë¡œ í‘œì‹œ
+	// 5. Aì•ˆ Finemodulation í™”ë©´ Touch ì‹œ crash ê°œì„ 
+	// 6. Sync ì ìš©
+	// 7. KeyButton Filter ìˆ˜ì •
 	//// v2.0.0.5 15.06.16
-	// 1. ¿£ÁøÀÚµ¿Á¤Áö 60ÃÊ ÀÌÇÏµ¥ÀÌÅÍ ³ª¿À°í 60ÃÊ ÀÌ»ó µ¥ÀÌÅÍ ¿Ã °æ¿ì ÆË¾÷ÀÌ ¾È¶ß´Â Çö»ó ÇØ°á
-	//// v2.0.0.a 15.06.22(Axle Test) : svn ÂüÁ¶
-	//// v2.0.0.6 15.06.23(Axle Test) : svn ÂüÁ¶
+	// 1. ì—”ì§„ìë™ì •ì§€ 60ì´ˆ ì´í•˜ë°ì´í„° ë‚˜ì˜¤ê³  60ì´ˆ ì´ìƒ ë°ì´í„° ì˜¬ ê²½ìš° íŒì—…ì´ ì•ˆëœ¨ëŠ” í˜„ìƒ í•´ê²°
+	//// v2.0.0.a 15.06.22(Axle Test) : svn ì°¸ì¡°
+	//// v2.0.0.6 15.06.23(Axle Test) : svn ì°¸ì¡°
 	//// v2.0.0.51 
-	// 1. Main B ¶óÀÌµå ÄÁÆ®·Ñ UI ÀÌ¹ÌÁö ±úÁü Çö»ó °³¼±
-	// 2. Software Update °³¼±¹æ¾È ÁØºñÁß(½Ãµ¿ ÁßÀÏ °æ¿ì Software Update¸¦ ÇÏÁö ¾Ê°í °æ°í ÆË¾÷¸¸ ¶ç¿ò(Key on½Ã¿¡¸¸ ¾÷µ¥ÀÌÆ® µÇµµ·Ï))
-	// 3. ½Ã°è -> RTC °ªÀÌ 24ÀÌ»óÀÏ °æ¿ì 12·Î °íÁ¤
-	// 4. Icon Àû¿ë 
-	// 5. Hidden version Ãß°¡(¸ğ´ÏÅÍ Á¤º¸¿¡¼­ MENU+ESC+LEFT+RIGHT+ENTER)
-	// 6. Sync °ü·Ã º¸¿Ï(native_system_updates_native Ãß°¡)
-	// 5. 2.0.0.a + 2.0.0.6¿¡ Àû¿ëµÊ
-	//	- main Àåºñ »óÅÂ ¼±ÅÃ ÆäÀÌÁö UI ¸ÂÃã(ÇÑ±¹¾î µÎÁÙÇ¥½Ã º¯°æ)
-	//	- main Àåºñ»óÅÂ º¸¿©ÁÖ´Â ºÎºĞ Axle °ü·Ã ÆË¾÷ Ç¥½Ã »èÁ¦ -> HomeÀ¸·Î ÀÌµ¿¿¹Á¤(¿ì¼±¼øÀ§´Â ÄüÄ¿ÇÃ·¯°¡ ³ôÀ½)
-	//	- Main CurserDisplay Null Point ¿¡·¯ try catch¹® Àû¿ë(Ç°Áú ±èÅÂÈÆ °úÀå)
-	//	- Axle ÆË¾÷ÀÌ ¶¸À» °æ¿ì Å° ÇÏ³ªµµ µ¿ÀÛ¾ÈÇÔ(ÅÍÄ¡·Î ²¨Áö´Â °Í¸¸ °¡´É)
-	//	- Axle, Quick coupler ÆË¾÷ OFF ÈÄ ºü¸£°Ô Å° È¤Àº ÅÍÄ¡´©¸¦ °æ¿ì ScreenIndex°¡ ²¿ÀÌ´Â Çö»ó °³¼±
-	//	- Ä«¸Ş¶ó¹öÆ° ´©¸£°í ºü¸£°Ô ¸Ş´º ´©¸£¸é ScreenIndex ¹Ù²î´Â Çö»ó °³¼±(Ç°Áú ±èÅÂÈÆ °úÀå)
-	//	- GetVersionString Hex·Î Ç¥½Ã
+	// 1. Main B ë¼ì´ë“œ ì»¨íŠ¸ë¡¤ UI ì´ë¯¸ì§€ ê¹¨ì§ í˜„ìƒ ê°œì„ 
+	// 2. Software Update ê°œì„ ë°©ì•ˆ ì¤€ë¹„ì¤‘(ì‹œë™ ì¤‘ì¼ ê²½ìš° Software Updateë¥¼ í•˜ì§€ ì•Šê³  ê²½ê³  íŒì—…ë§Œ ë„ì›€(Key onì‹œì—ë§Œ ì—…ë°ì´íŠ¸ ë˜ë„ë¡))
+	// 3. ì‹œê³„ -> RTC ê°’ì´ 24ì´ìƒì¼ ê²½ìš° 12ë¡œ ê³ ì •
+	// 4. Icon ì ìš© 
+	// 5. Hidden version ì¶”ê°€(ëª¨ë‹ˆí„° ì •ë³´ì—ì„œ MENU+ESC+LEFT+RIGHT+ENTER)
+	// 6. Sync ê´€ë ¨ ë³´ì™„(native_system_updates_native ì¶”ê°€)
+	// 5. 2.0.0.a + 2.0.0.6ì— ì ìš©ë¨
+	//	- main ì¥ë¹„ ìƒíƒœ ì„ íƒ í˜ì´ì§€ UI ë§ì¶¤(í•œêµ­ì–´ ë‘ì¤„í‘œì‹œ ë³€ê²½)
+	//	- main ì¥ë¹„ìƒíƒœ ë³´ì—¬ì£¼ëŠ” ë¶€ë¶„ Axle ê´€ë ¨ íŒì—… í‘œì‹œ ì‚­ì œ -> Homeìœ¼ë¡œ ì´ë™ì˜ˆì •(ìš°ì„ ìˆœìœ„ëŠ” í€µì»¤í”ŒëŸ¬ê°€ ë†’ìŒ)
+	//	- Main CurserDisplay Null Point ì—ëŸ¬ try catchë¬¸ ì ìš©(í’ˆì§ˆ ê¹€íƒœí›ˆ ê³¼ì¥)
+	//	- Axle íŒì—…ì´ ë–³ì„ ê²½ìš° í‚¤ í•˜ë‚˜ë„ ë™ì‘ì•ˆí•¨(í„°ì¹˜ë¡œ êº¼ì§€ëŠ” ê²ƒë§Œ ê°€ëŠ¥)
+	//	- Axle, Quick coupler íŒì—… OFF í›„ ë¹ ë¥´ê²Œ í‚¤ í˜¹ì€ í„°ì¹˜ëˆ„ë¥¼ ê²½ìš° ScreenIndexê°€ ê¼¬ì´ëŠ” í˜„ìƒ ê°œì„ 
+	//	- ì¹´ë©”ë¼ë²„íŠ¼ ëˆ„ë¥´ê³  ë¹ ë¥´ê²Œ ë©”ë‰´ ëˆ„ë¥´ë©´ ScreenIndex ë°”ë€ŒëŠ” í˜„ìƒ ê°œì„ (í’ˆì§ˆ ê¹€íƒœí›ˆ ê³¼ì¥)
+	//	- GetVersionString Hexë¡œ í‘œì‹œ
 	//// v2.0.0.52 
-	// 1. SmartKey ÆĞÅ¶ ¹ŞÀ» °æ¿ì Timeout Timer Á¾·á
-	// 2. F/W Hidden ¹öÀü Ãß°¡
-	// 3. EHCU °ú°Å°íÀå Ç¥½Ã ¿À·ù °³¼±
-	// 4. RMCU ¿É¼Ç ¹ÌÀÛ¿ë ¹öÀü Ç¥½Ã Ç×¸ñ »èÁ¦->ÃßÈÄ Àû¿ë
-	// 5. ½Ãµ¿Á¶°Ç ¾÷µ¥ÀÌÆ® ¹æÁö -> ÃßÈÄ Àû¿ë
+	// 1. SmartKey íŒ¨í‚· ë°›ì„ ê²½ìš° Timeout Timer ì¢…ë£Œ
+	// 2. F/W Hidden ë²„ì „ ì¶”ê°€
+	// 3. EHCU ê³¼ê±°ê³ ì¥ í‘œì‹œ ì˜¤ë¥˜ ê°œì„ 
+	// 4. RMCU ì˜µì…˜ ë¯¸ì‘ìš© ë²„ì „ í‘œì‹œ í•­ëª© ì‚­ì œ->ì¶”í›„ ì ìš©
+	// 5. ì‹œë™ì¡°ê±´ ì—…ë°ì´íŠ¸ ë°©ì§€ -> ì¶”í›„ ì ìš©
 	//// v2.0.0.61
-	// 1. ½Ãµ¿Á¶°Ç ¾÷µ¥ÀÌÆ® ¹æÁö
-	// 2. RMCU ¿É¼Ç ¹ÌÀÛ¿ë ¹öÀü Ç¥½Ã Ç×¸ñ »èÁ¦
-	// 3. EHCU Á¤º¸ Ç¥½Ã¿¡ ºÕ °¢µµ Ç¥½Ã Ãß°¡
-	// 4. ÇöÀç°íÀå/°ú°Å°íÀå Ç¥½Ã °³¼±(SPN 0 / FMI 0 -> °ø¹éÀ¸·Î Ç¥½Ã)
-	// 5. ºÕ ¾Ğ·Â º¸Á¤ 1Â÷ ÈÄ ÆÛ¼¾Æ® °ÔÀÌÁö 0 °ªÀ¸·Î ÀÌµ¿(ÃÊ±âÈ­ µÇÁö ¾Ê°í 100%·Î µÇ¾î ÀÖ¾úÀ½)
-	// 6. Axle Àû¿ë
-	// 7. SMK ÀÎÁõ  ÇÁ·ÎÅäÄİ Ãß°¡(½ÇÂ÷ Å×½ºÆ® ÇÊ¿ä) 
-	// 8. ¹öÆ°Å° ÀÔ·Â ÀÏÁ¤ ½Ã°£(10ÃÊ) ÈÄ ¸ŞÀÎÈ­¸éÀ¸·Î º¹±Í
-	// 9. ´Ù±¹¾î º¯°æ ½Ã ÆË¾÷ Ãß°¡ (½Ã½ºÅÛ Àû¿ëÀº KEY OFF/ONÇÏ¶ó´Â ¹®±¸)
-	// 10. °¢µµº¸Á¤ 3¹øÂ° ÀÌ¹ÌÁö º¯°æ(¾Æ·¡·Î ÇâÇÏµµ·Ï)
+	// 1. ì‹œë™ì¡°ê±´ ì—…ë°ì´íŠ¸ ë°©ì§€
+	// 2. RMCU ì˜µì…˜ ë¯¸ì‘ìš© ë²„ì „ í‘œì‹œ í•­ëª© ì‚­ì œ
+	// 3. EHCU ì •ë³´ í‘œì‹œì— ë¶ ê°ë„ í‘œì‹œ ì¶”ê°€
+	// 4. í˜„ì¬ê³ ì¥/ê³¼ê±°ê³ ì¥ í‘œì‹œ ê°œì„ (SPN 0 / FMI 0 -> ê³µë°±ìœ¼ë¡œ í‘œì‹œ)
+	// 5. ë¶ ì••ë ¥ ë³´ì • 1ì°¨ í›„ í¼ì„¼íŠ¸ ê²Œì´ì§€ 0 ê°’ìœ¼ë¡œ ì´ë™(ì´ˆê¸°í™” ë˜ì§€ ì•Šê³  100%ë¡œ ë˜ì–´ ìˆì—ˆìŒ)
+	// 6. Axle ì ìš©
+	// 7. SMK ì¸ì¦  í”„ë¡œí† ì½œ ì¶”ê°€(ì‹¤ì°¨ í…ŒìŠ¤íŠ¸ í•„ìš”) 
+	// 8. ë²„íŠ¼í‚¤ ì…ë ¥ ì¼ì • ì‹œê°„(10ì´ˆ) í›„ ë©”ì¸í™”ë©´ìœ¼ë¡œ ë³µê·€
+	// 9. ë‹¤êµ­ì–´ ë³€ê²½ ì‹œ íŒì—… ì¶”ê°€ (ì‹œìŠ¤í…œ ì ìš©ì€ KEY OFF/ONí•˜ë¼ëŠ” ë¬¸êµ¬)
+	// 10. ê°ë„ë³´ì • 3ë²ˆì§¸ ì´ë¯¸ì§€ ë³€ê²½(ì•„ë˜ë¡œ í–¥í•˜ë„ë¡)
 	//// v2.0.0.7
-	// 1. ´Ù±¹¾î º¯°æ½Ã popup ³»¿ë HHI »ç¾ç Àû¿ë
-	// 2. Axle °æ°í·Î ÀÎÇØ Àåºñ»óÅÂ°¡ º¯°æµÇ¾úÀ» ¶§ ÀÛ¾÷·®ÀÎ °æ¿ì ¾Æ·¡ ¹ÌÇ¥±â·Î º¯°æ
-	// 3. Axle °æ°í popup ³»¿ë /n -> \n ¿ÀÅ¸ ¼öÁ¤
-	// 4. ¿ªÈ¸Àü popup Á¾·á ½Ã ¿ªÈ¸Àü ²¨Áü ÆĞÅ¶ Àü¼Û
-	// 5. ½º¸¶Æ®Å° Åë½Å ÀÎÁõ ½Ã ÅÂ±× °³¼ö ¹ŞÀ» ¼ö ÀÖ°Ô º¯°æ
-	// 6. ¹öÆ°Å° ÀÔ·Â ÀÏÁ¤ ½Ã°£(10ÃÊ) ÈÄ ¸ŞÀÎÈ­¸éÀ¸·Î º¹±Í »ç¾ç Àû¿ëµÈ ÆäÀÌÁö ÀÔ·Â°ª ¾ø¾îµµ 10ÃÊ ÈÄ º¹±Í
+	// 1. ë‹¤êµ­ì–´ ë³€ê²½ì‹œ popup ë‚´ìš© HHI ì‚¬ì–‘ ì ìš©
+	// 2. Axle ê²½ê³ ë¡œ ì¸í•´ ì¥ë¹„ìƒíƒœê°€ ë³€ê²½ë˜ì—ˆì„ ë•Œ ì‘ì—…ëŸ‰ì¸ ê²½ìš° ì•„ë˜ ë¯¸í‘œê¸°ë¡œ ë³€ê²½
+	// 3. Axle ê²½ê³  popup ë‚´ìš© /n -> \n ì˜¤íƒ€ ìˆ˜ì •
+	// 4. ì—­íšŒì „ popup ì¢…ë£Œ ì‹œ ì—­íšŒì „ êº¼ì§ íŒ¨í‚· ì „ì†¡
+	// 5. ìŠ¤ë§ˆíŠ¸í‚¤ í†µì‹  ì¸ì¦ ì‹œ íƒœê·¸ ê°œìˆ˜ ë°›ì„ ìˆ˜ ìˆê²Œ ë³€ê²½
+	// 6. ë²„íŠ¼í‚¤ ì…ë ¥ ì¼ì • ì‹œê°„(10ì´ˆ) í›„ ë©”ì¸í™”ë©´ìœ¼ë¡œ ë³µê·€ ì‚¬ì–‘ ì ìš©ëœ í˜ì´ì§€ ì…ë ¥ê°’ ì—†ì–´ë„ 10ì´ˆ í›„ ë³µê·€
 	//	- KEY : AutoGrease, MirrorHeat
 	//	- Main : FuelSelect, MachineStatusSelect, TMCCOMode/ICCOMode/ShiftMode/TCLockUp, EngineMode, HourOdometerSelect
-	// 7. 10ÃÊ º¹±Í ÁßÀÏ ¶§ ¹ÌÀû¿ëµÈ ÆäÀÌÁö ¹öÆ° ´©¸¦ °æ¿ì¿¡µµ º¹±ÍµÇ´Â ¹ö±× ¼öÁ¤
-	// 8. ¿ªÈ¸Àü °ü·Ã ¹ö±× °³¼±
-	//	- [½ÇÇà] Ä¿¼­ ¼±ÅÃ ÈÄ ENTER Å° ÀÔ·Â -> ÀÌ¶§ ¿ªÈ¸Àü ÅÍÄ¡½Ã ¹æÇâÅ° ÀÛµ¿ ¾ÈµÊ -> CurserIndex Ãß°¡
-	//	- [½ÇÇà] Ä¿¼­ ¼±ÅÃ ÈÄ ENTER Å° ÀÔ·Â -> ÀÌ¶§ ESC Å° ÀÔ·Â ½Ã ¼öµ¿ ¿ªÈ¸Àü ²¨ÁöÁö ¾Ê°í °è¼Ó µ¿ÀÛ -> ÆË¾÷²¨Áú °æ¿ì OFF ÇÁ·ÎÅäÄİ ¼ÛºÎ
+	// 7. 10ì´ˆ ë³µê·€ ì¤‘ì¼ ë•Œ ë¯¸ì ìš©ëœ í˜ì´ì§€ ë²„íŠ¼ ëˆ„ë¥¼ ê²½ìš°ì—ë„ ë³µê·€ë˜ëŠ” ë²„ê·¸ ìˆ˜ì •
+	// 8. ì—­íšŒì „ ê´€ë ¨ ë²„ê·¸ ê°œì„ 
+	//	- [ì‹¤í–‰] ì»¤ì„œ ì„ íƒ í›„ ENTER í‚¤ ì…ë ¥ -> ì´ë•Œ ì—­íšŒì „ í„°ì¹˜ì‹œ ë°©í–¥í‚¤ ì‘ë™ ì•ˆë¨ -> CurserIndex ì¶”ê°€
+	//	- [ì‹¤í–‰] ì»¤ì„œ ì„ íƒ í›„ ENTER í‚¤ ì…ë ¥ -> ì´ë•Œ ESC í‚¤ ì…ë ¥ ì‹œ ìˆ˜ë™ ì—­íšŒì „ êº¼ì§€ì§€ ì•Šê³  ê³„ì† ë™ì‘ -> íŒì—…êº¼ì§ˆ ê²½ìš° OFF í”„ë¡œí† ì½œ ì†¡ë¶€
 	//// v2.0.0.8
-	// 1. ³Ã°¢ÆÒ UI º¯°æ ¹× ·ÎÁ÷ º¯°æ
-	//	- ÀÚµ¿ÀÏ °æ¿ì ok¹öÆ° ´©¸¦ °æ¿ì¿¡¸¸ ÇÁ·ÎÅäÄİ Àü¼Û
-	//	- ¼öµ¿ÀÏ °æ¿ì ¶óµğ¿À¹öÆ° ¼öµ¿´©¸¦ °æ¿ì ÀÚµ¿ OFF ÇÁ·ÎÅäÄİ Àü¼Û
-	//	- ÇÑ ÆäÀÌÁö¿¡¼­ ¼±ÅÃµÈ °Í¿¡ µû¶ó UI Ç¥½Ã(ÆË¾÷»ç¶óÁü)
-	// 2. ºÕ °¢µµº¸Á¤ ÀÌ¹ÌÁö 1,2,3´Ü°è F½Ã¸®Áî ¹öÄÏ¸ğ¾çÀ¸·Î º¯°æ
-	// 3. Fan EPPR Current Adjust ½Ã¾È º¯°æ
-	//	- ³Ã°¢ÆÒ ÀÚµ¿/¼öµ¿ ¼±ÅÃ Ãß°¡
-	//	- ³Ã°¢ÆÒ ¼öµ¿ Excute Ãß°¡
-	//	- MaxFanControl ÇÁ·ÎÅäÄİ ¹× UI Ãß°¡
-	//	- SelectMode¿¡ µû¶ó ÇØ´ç ÆäÀÌÁö Á¦¾î(ÆË¾÷Ãß°¡)
-	// 4. Ä«¸Ş¶ó Left/Right ¹ö±× ¼öÁ¤
-	//	- ¸¶Áö¸·¿¡ 3Ã¤³Î·Î ÇØ³õ°í Ä«¸Ş¶ó¸¦ OFF ÇßÀ» °æ¿ì ÃÊ±â 1 -> Right Å°¸¦ ´©¸£¸é CH4·Î º¯°æµÇ´Â ¹ö±× ¼öÁ¤(Ç×»ó Ã¹¹øÂ° Ä«¸Ş¶ó¸¦ º¸¿©ÁÜ)
-	// 5. Excute -> Exectue·Î ¿ÀÅ¸ º¯°æ
-	// 6. ¸ÖÆ¼¹Ìµğ¾î(MediaPlayer, ½º¸¶Æ® ÅÍ¹Ì³Î) Á¾·á ¹æ¹ı º¯°æ
-	// 7. '¹åµ¥¸®' -> '¹èÅÍ¸®' Ç¥ÁØ¾î ¸ÂÃã 
-	// 8. Wiper »ç¾çº¯°æ
-	//	- ½ºÀ§Ä¡¿¡ µû¶ó Ç¥½ÃµÈ´Â °ÍÀÌ ¾Æ´Ï¶ó Level ¿¡ µû¶ó Ç¥½Ã
-	//	- ¿ÍÀÌÆÛ »ö±ò ¸Ş´º¿Í ºÎÀú¿Í µ¿ÀÏÇÏ°Ô º¯°æ
-	// 9. ½º¸¶Æ® ÅÍ¹Ì³Î °¡¿îµ¥ À§¿¡ ÅÍÄ¡·Î Á¾·á ±â´É Ãß°¡
+	// 1. ëƒ‰ê°íŒ¬ UI ë³€ê²½ ë° ë¡œì§ ë³€ê²½
+	//	- ìë™ì¼ ê²½ìš° okë²„íŠ¼ ëˆ„ë¥¼ ê²½ìš°ì—ë§Œ í”„ë¡œí† ì½œ ì „ì†¡
+	//	- ìˆ˜ë™ì¼ ê²½ìš° ë¼ë””ì˜¤ë²„íŠ¼ ìˆ˜ë™ëˆ„ë¥¼ ê²½ìš° ìë™ OFF í”„ë¡œí† ì½œ ì „ì†¡
+	//	- í•œ í˜ì´ì§€ì—ì„œ ì„ íƒëœ ê²ƒì— ë”°ë¼ UI í‘œì‹œ(íŒì—…ì‚¬ë¼ì§)
+	// 2. ë¶ ê°ë„ë³´ì • ì´ë¯¸ì§€ 1,2,3ë‹¨ê³„ Fì‹œë¦¬ì¦ˆ ë²„ì¼“ëª¨ì–‘ìœ¼ë¡œ ë³€ê²½
+	// 3. Fan EPPR Current Adjust ì‹œì•ˆ ë³€ê²½
+	//	- ëƒ‰ê°íŒ¬ ìë™/ìˆ˜ë™ ì„ íƒ ì¶”ê°€
+	//	- ëƒ‰ê°íŒ¬ ìˆ˜ë™ Excute ì¶”ê°€
+	//	- MaxFanControl í”„ë¡œí† ì½œ ë° UI ì¶”ê°€
+	//	- SelectModeì— ë”°ë¼ í•´ë‹¹ í˜ì´ì§€ ì œì–´(íŒì—…ì¶”ê°€)
+	// 4. ì¹´ë©”ë¼ Left/Right ë²„ê·¸ ìˆ˜ì •
+	//	- ë§ˆì§€ë§‰ì— 3ì±„ë„ë¡œ í•´ë†“ê³  ì¹´ë©”ë¼ë¥¼ OFF í–ˆì„ ê²½ìš° ì´ˆê¸° 1 -> Right í‚¤ë¥¼ ëˆ„ë¥´ë©´ CH4ë¡œ ë³€ê²½ë˜ëŠ” ë²„ê·¸ ìˆ˜ì •(í•­ìƒ ì²«ë²ˆì§¸ ì¹´ë©”ë¼ë¥¼ ë³´ì—¬ì¤Œ)
+	// 5. Excute -> Exectueë¡œ ì˜¤íƒ€ ë³€ê²½
+	// 6. ë©€í‹°ë¯¸ë””ì–´(MediaPlayer, ìŠ¤ë§ˆíŠ¸ í„°ë¯¸ë„) ì¢…ë£Œ ë°©ë²• ë³€ê²½
+	// 7. 'ë°§ë°ë¦¬' -> 'ë°°í„°ë¦¬' í‘œì¤€ì–´ ë§ì¶¤ 
+	// 8. Wiper ì‚¬ì–‘ë³€ê²½
+	//	- ìŠ¤ìœ„ì¹˜ì— ë”°ë¼ í‘œì‹œëœëŠ” ê²ƒì´ ì•„ë‹ˆë¼ Level ì— ë”°ë¼ í‘œì‹œ
+	//	- ì™€ì´í¼ ìƒ‰ê¹” ë©”ë‰´ì™€ ë¶€ì €ì™€ ë™ì¼í•˜ê²Œ ë³€ê²½
+	// 9. ìŠ¤ë§ˆíŠ¸ í„°ë¯¸ë„ ê°€ìš´ë° ìœ„ì— í„°ì¹˜ë¡œ ì¢…ë£Œ ê¸°ëŠ¥ ì¶”ê°€
 	//// v2.0.0.81
-	// 1. PDF Viewr ESC ´©¸¦ °æ¿ì Á¾·á
-	// 2. popup dismiss µÉ ¶§ Homedialog = null·Î º¯°æ
-	// 3. °ú°Å°íÀåÀÏ °æ¿ì detail view°¡ ÄÑÁ®ÀÖÀ» ¶§ »èÁ¦ÇÏ´Â °æ¿ì detail view°¡ °è¼Ó ³²¾ÆÀÖ´Â Çö»ó °³¼±
-	// 4. ÇöÀç°íÀå/°ú°Å°íÀå UI ¸ÂÃã
+	// 1. PDF Viewr ESC ëˆ„ë¥¼ ê²½ìš° ì¢…ë£Œ
+	// 2. popup dismiss ë  ë•Œ Homedialog = nullë¡œ ë³€ê²½
+	// 3. ê³¼ê±°ê³ ì¥ì¼ ê²½ìš° detail viewê°€ ì¼œì ¸ìˆì„ ë•Œ ì‚­ì œí•˜ëŠ” ê²½ìš° detail viewê°€ ê³„ì† ë‚¨ì•„ìˆëŠ” í˜„ìƒ ê°œì„ 
+	// 4. í˜„ì¬ê³ ì¥/ê³¼ê±°ê³ ì¥ UI ë§ì¶¤
 	//// v2.0.0.82
-	// 1. Revision ÀúÇ× 3.9K Àû¿ë
-	// 2. cluster hidden version Ãß°¡
-	// 3. FN Å°·Î ¸ÖÆ¼¹Ìµğ¾î ÁøÀÔÇÒ °æ¿ì °¡¿îµ¥ ÅÍÄ¡·Î Á¾·áµÇÁö ¾Ê´Â Çö»ó °³¼±
-	// 4. PDF, ¸ÖÆ¼¹Ìµğ¾î, ½º¸¶Æ®ÅÍ¹Ì³Î ¿Ü ´Ù¸¥ ¾îÇÃ ESC·Î Á¾·áµÇÁö ¾Ê´Â Çö»ó °³¼±(È¯°æ¼³Á¤, File Viewer µî)
+	// 1. Revision ì €í•­ 3.9K ì ìš©
+	// 2. cluster hidden version ì¶”ê°€
+	// 3. FN í‚¤ë¡œ ë©€í‹°ë¯¸ë””ì–´ ì§„ì…í•  ê²½ìš° ê°€ìš´ë° í„°ì¹˜ë¡œ ì¢…ë£Œë˜ì§€ ì•ŠëŠ” í˜„ìƒ ê°œì„ 
+	// 4. PDF, ë©€í‹°ë¯¸ë””ì–´, ìŠ¤ë§ˆíŠ¸í„°ë¯¸ë„ ì™¸ ë‹¤ë¥¸ ì–´í”Œ ESCë¡œ ì¢…ë£Œë˜ì§€ ì•ŠëŠ” í˜„ìƒ ê°œì„ (í™˜ê²½ì„¤ì •, File Viewer ë“±)
 	//// v2.0.0.90
-	// 1. ºÕ °¢µµ º¸Á¤ ÀÌ¹ÌÁö º¯°æ(°ãÄ¡´Â Çö»óÀ¸·Î ÀÎÇØ ¿·À¸·Î ÀÌµ¿)
-	// 2. Àåºñ Á¤º¸¿¡¼­ Ç¥½ÃµÇ´Â ÇÁ·Î±×·¥ ¹öÀüÀ» 3ÀÚ¸®±îÁö¸¸ Ç¥½Ã, »ó¼¼È­¸é(hidden)¿¡¼­´Â ÀüÃ¼ÀÚ¸® ¼ö Ãâ·Â
-	// 3. ÆĞ½º¿öµå ÀÔ·ÂÃ¢ Ç¥½Ã * ¶Ç´Â ¼ıÀÚ Áß ÅÃ 1 ÇÒ ¼ö ÀÖµµ·Ï °³¼±
-	// 4. Soft End Stop ±âº» °ª º¯°æ 
-	//	- Bucket In OFF ±× ¿Ü ¸ğµÎ ON
-	// 5. WeighingErrorDetect ÃÊ±â°ª ONÀ¸·Î º¯°æ
-	// 6. RMCU È£±â¼ö ÀÔ·Â ±â´É
-	// 7. ½Ãµ¿Á¦ÇÑ °É·ÈÀ» °æ¿ì È¤Àº ½º¸¶Æ®Å° ÀÎÁõ ½ÇÆĞÀÏ °æ¿ì Å°ÆĞµå È£È¯(±âÁ¸¿¡ Å°ÆĞµå ¾ÈµÊ)
-	// 8. °ü¸®ÀÚ ¸Ş´º ºñ¹Ğ¹øÈ£¿¡¼­ LEFT+RIGHT ´©¸¦ °æ¿ì H/W Test ½ÇÇà
-	// 9. UI Ãæµ¹/FW ¾÷µ¥ÀÌÆ®/OS ¾÷µ¥ÀÌÆ® ÀÌÈÄ ¹öÀü Á¤º¸ ¼Ò½Ç Çö»ó °³¼±
-	//	- MONITOR CID Àü¼Û ÈÄ CID Á¤º¸°¡ ¾øÀ» °æ¿ì 1È¸ ¿äÃ»
-	// 10. pdf reader, media player, ½º¸¶Æ® ÅÍ¹Ì³Î µî ±â´É¿¡¼­ Axle °æ°í(pop up ¶Ç´Â lamp)°¡ ¹ß»ıÇÒ ½Ã ¹Ù·Î Á¾·á µÇ°í ¸ŞÀÎÈ­¸éÀ¸·Î ÀüÈ¯
+	// 1. ë¶ ê°ë„ ë³´ì • ì´ë¯¸ì§€ ë³€ê²½(ê²¹ì¹˜ëŠ” í˜„ìƒìœ¼ë¡œ ì¸í•´ ì˜†ìœ¼ë¡œ ì´ë™)
+	// 2. ì¥ë¹„ ì •ë³´ì—ì„œ í‘œì‹œë˜ëŠ” í”„ë¡œê·¸ë¨ ë²„ì „ì„ 3ìë¦¬ê¹Œì§€ë§Œ í‘œì‹œ, ìƒì„¸í™”ë©´(hidden)ì—ì„œëŠ” ì „ì²´ìë¦¬ ìˆ˜ ì¶œë ¥
+	// 3. íŒ¨ìŠ¤ì›Œë“œ ì…ë ¥ì°½ í‘œì‹œ * ë˜ëŠ” ìˆ«ì ì¤‘ íƒ 1 í•  ìˆ˜ ìˆë„ë¡ ê°œì„ 
+	// 4. Soft End Stop ê¸°ë³¸ ê°’ ë³€ê²½ 
+	//	- Bucket In OFF ê·¸ ì™¸ ëª¨ë‘ ON
+	// 5. WeighingErrorDetect ì´ˆê¸°ê°’ ONìœ¼ë¡œ ë³€ê²½
+	// 6. RMCU í˜¸ê¸°ìˆ˜ ì…ë ¥ ê¸°ëŠ¥
+	// 7. ì‹œë™ì œí•œ ê±¸ë ¸ì„ ê²½ìš° í˜¹ì€ ìŠ¤ë§ˆíŠ¸í‚¤ ì¸ì¦ ì‹¤íŒ¨ì¼ ê²½ìš° í‚¤íŒ¨ë“œ í˜¸í™˜(ê¸°ì¡´ì— í‚¤íŒ¨ë“œ ì•ˆë¨)
+	// 8. ê´€ë¦¬ì ë©”ë‰´ ë¹„ë°€ë²ˆí˜¸ì—ì„œ LEFT+RIGHT ëˆ„ë¥¼ ê²½ìš° H/W Test ì‹¤í–‰
+	// 9. UI ì¶©ëŒ/FW ì—…ë°ì´íŠ¸/OS ì—…ë°ì´íŠ¸ ì´í›„ ë²„ì „ ì •ë³´ ì†Œì‹¤ í˜„ìƒ ê°œì„ 
+	//	- MONITOR CID ì „ì†¡ í›„ CID ì •ë³´ê°€ ì—†ì„ ê²½ìš° 1íšŒ ìš”ì²­
+	// 10. pdf reader, media player, ìŠ¤ë§ˆíŠ¸ í„°ë¯¸ë„ ë“± ê¸°ëŠ¥ì—ì„œ Axle ê²½ê³ (pop up ë˜ëŠ” lamp)ê°€ ë°œìƒí•  ì‹œ ë°”ë¡œ ì¢…ë£Œ ë˜ê³  ë©”ì¸í™”ë©´ìœ¼ë¡œ ì „í™˜
 	//// v2.0.0.91
-	// 1. HCEPGN 65330 CID : Àåºñ Á¤º¸¿¡ ¹öÀüÁ¤º¸ Ç¥½Ã Ç×¸ñ(FATC) Ãß°¡ 
-	// 2. HCEPGN 65373 Air Conditioner Status : °íÀå ÀÌ·Â - ÇöÀç °íÀå¿¡ Ç¥½ÃÇ×¸ñ(FATC) Ãß°¡
-	//  - °ú°Å °íÀå : MCU´ã´ç°ú ÇùÀÇ ÈÄ ÃßÈÄ ±¸Çö
-	// 3. HCEPGN 65373 Air Conditioner Status : °ü¸®ÀÚ ¸Ş´º - Àåºñ ¸ğ´ÏÅÍ¸µ¿¡ Ç¥½Ã Ç×¸ñ(FATC Setting Temperature (Celsius)) Ãß°¡
-	// 4. HCEPGN 65519 Ambient Conditions : °ü¸®ÀÚ ¸Ş´º - Àåºñ ¸ğ´ÏÅÍ¸µ¿¡ Ç¥½Ã Ç×¸ñ(Ambient Temperature, In-cab Temperature) Ãß°¡
-	//// v2.0.0.83(1¹øÇ×¸ñ¶§¹®¿¡ v2.0.0.82¿¡¼­ ÀÓ½Ã ¼öÁ¤)
-	// 1. TextViewXAxisFlipAnimation ±â¿ï¾îÁø ¹®ÀÚÀÏ °æ¿ì ¶³¸² Çö»ó ÀÓ½Ã °³¼±
-	// 2. H/W Test LEFT+RIGHT Å°·Î ÀÌµ¿
-	// 3. H/W Test µé¾î°¥ ¶§ Àß µé¾î°¡ÁöÁö ¾Ê´Â Çö»ó °³¼±
-	// 4. WeighingErrorDetect ÃÊ±â°ª ONÀ¸·Î º¯°æ
-	// 5. RevF.04.01 Àû¿ë
+	// 1. HCEPGN 65330 CID : ì¥ë¹„ ì •ë³´ì— ë²„ì „ì •ë³´ í‘œì‹œ í•­ëª©(FATC) ì¶”ê°€ 
+	// 2. HCEPGN 65373 Air Conditioner Status : ê³ ì¥ ì´ë ¥ - í˜„ì¬ ê³ ì¥ì— í‘œì‹œí•­ëª©(FATC) ì¶”ê°€
+	//  - ê³¼ê±° ê³ ì¥ : MCUë‹´ë‹¹ê³¼ í˜‘ì˜ í›„ ì¶”í›„ êµ¬í˜„
+	// 3. HCEPGN 65373 Air Conditioner Status : ê´€ë¦¬ì ë©”ë‰´ - ì¥ë¹„ ëª¨ë‹ˆí„°ë§ì— í‘œì‹œ í•­ëª©(FATC Setting Temperature (Celsius)) ì¶”ê°€
+	// 4. HCEPGN 65519 Ambient Conditions : ê´€ë¦¬ì ë©”ë‰´ - ì¥ë¹„ ëª¨ë‹ˆí„°ë§ì— í‘œì‹œ í•­ëª©(Ambient Temperature, In-cab Temperature) ì¶”ê°€
+	//// v2.0.0.83(1ë²ˆí•­ëª©ë•Œë¬¸ì— v2.0.0.82ì—ì„œ ì„ì‹œ ìˆ˜ì •)
+	// 1. TextViewXAxisFlipAnimation ê¸°ìš¸ì–´ì§„ ë¬¸ìì¼ ê²½ìš° ë–¨ë¦¼ í˜„ìƒ ì„ì‹œ ê°œì„ 
+	// 2. H/W Test LEFT+RIGHT í‚¤ë¡œ ì´ë™
+	// 3. H/W Test ë“¤ì–´ê°ˆ ë•Œ ì˜ ë“¤ì–´ê°€ì§€ì§€ ì•ŠëŠ” í˜„ìƒ ê°œì„ 
+	// 4. WeighingErrorDetect ì´ˆê¸°ê°’ ONìœ¼ë¡œ ë³€ê²½
+	// 5. RevF.04.01 ì ìš©
 	//// v2.0.0.92
-	// 1. TextViewXAxisFlipAnimation ±â¿ï¾îÁø ¹®ÀÚÀÏ °æ¿ì ¶³¸² Çö»ó °³¼±
-	// 2. RPM °ÔÀÌÁö ¾Ö´Ï¸ŞÀÌ¼Ç (¹Ù´Ã ¿òÁ÷ÀÓ)
-	//	- º¯°æ Àü : ÃÖÃÊ ºÎÆÃ½Ã + Å¸ È­¸é¿¡¼­ ¸ŞÀÎÈ­¸é ÁıÀÔ ½Ã
-	//	- º¯°æ ÈÄ : ÃÖÃÊ ºÎÆÃ½Ã
-	// 3. RevF.04.01 Àû¿ë
-	// 4. MenuList textView Title, Data clearAnimation Ãß°¡
-	// 5. TCU, ECMÀº Model ¹× Manufacture Date°¡ ¾øÀ½!! HiddenÆäÀÌÁö¿¡¼­ »èÁ¦(½ÇÂ÷ÀåºñÈ®ÀÎ¿ä¸Á)
-	// 6. ÀåºñÁ¤º¸ ºóÄ­Ç¥½Ã´Â ¸ğµÎ '-'·Î ÅëÀÏ.
-	// 7. Loading ÀÌ¹ÌÁö Ãß°¡(½ÇÂ÷¿¡¼­´Â ¾Èº¸ÀÏµí)
-	// 8. ¹Ì¶óÄ³½ºÆ® ½ÇÇà ¹× Á¾·á ½Ã WiFi OFF
-	// 9. Boom -0.1~-0.9 Ç¥½Ã ¾ÈµÇ´Â ¹ö±× ¼öÁ¤
-	// 10. BKCU Component Ãß°¡ 
+	// 1. TextViewXAxisFlipAnimation ê¸°ìš¸ì–´ì§„ ë¬¸ìì¼ ê²½ìš° ë–¨ë¦¼ í˜„ìƒ ê°œì„ 
+	// 2. RPM ê²Œì´ì§€ ì• ë‹ˆë©”ì´ì…˜ (ë°”ëŠ˜ ì›€ì§ì„)
+	//	- ë³€ê²½ ì „ : ìµœì´ˆ ë¶€íŒ…ì‹œ + íƒ€ í™”ë©´ì—ì„œ ë©”ì¸í™”ë©´ ì§‘ì… ì‹œ
+	//	- ë³€ê²½ í›„ : ìµœì´ˆ ë¶€íŒ…ì‹œ
+	// 3. RevF.04.01 ì ìš©
+	// 4. MenuList textView Title, Data clearAnimation ì¶”ê°€
+	// 5. TCU, ECMì€ Model ë° Manufacture Dateê°€ ì—†ìŒ!! Hiddení˜ì´ì§€ì—ì„œ ì‚­ì œ(ì‹¤ì°¨ì¥ë¹„í™•ì¸ìš”ë§)
+	// 6. ì¥ë¹„ì •ë³´ ë¹ˆì¹¸í‘œì‹œëŠ” ëª¨ë‘ '-'ë¡œ í†µì¼.
+	// 7. Loading ì´ë¯¸ì§€ ì¶”ê°€(ì‹¤ì°¨ì—ì„œëŠ” ì•ˆë³´ì¼ë“¯)
+	// 8. ë¯¸ë¼ìºìŠ¤íŠ¸ ì‹¤í–‰ ë° ì¢…ë£Œ ì‹œ WiFi OFF
+	// 9. Boom -0.1~-0.9 í‘œì‹œ ì•ˆë˜ëŠ” ë²„ê·¸ ìˆ˜ì •
+	// 10. BKCU Component ì¶”ê°€ 
 	//// v2.0.0.93
-	// 1. ¿¡¾îÄÁ °ü·Ã ³»¿ë Ç¥½Ã ±â´É Á¦°Å
-	// 2. RMCU È£±â¼ö ÀÔ·Â Á¦°Å
-	// 3. HOUR METER Ç¥±â ¶ç¾î¾²±â Àû¿ë
-	// 4. UserSwitching ±â´É¿¡¼­ ¿É¼Ç ¹ÌÀû¿ë Ç×¸ñÀº Ç¥½Ã °¨Ãã
-	// 5. Popup ¿ì¼±¼øÀ§ ¹èÁ¤
-	//	- ¿ì¼± ¼øÀ§ ³ôÀ½ 
-	//		a. ¿£Áø ÀÚµ¿Á¤Áö, Locking, UnLocking : ÀÛµ¿ Áß ´Ù¸¥ ÆË¾÷ ¹ß»ı x
-	//		b. Q coupler Á¶ÀÛ Áß ÀÚµ¿Á¤Áö ¹ß»ı ½Ã ÀÚµ¿Á¤Áö Ä«¿îÆ® ÆË¾÷ ¿ì¼±
-	//	- ¿ì¼± ¼øÀ§ Áß°£
+	// 1. ì—ì–´ì»¨ ê´€ë ¨ ë‚´ìš© í‘œì‹œ ê¸°ëŠ¥ ì œê±°
+	// 2. RMCU í˜¸ê¸°ìˆ˜ ì…ë ¥ ì œê±°
+	// 3. HOUR METER í‘œê¸° ë„ì–´ì“°ê¸° ì ìš©
+	// 4. UserSwitching ê¸°ëŠ¥ì—ì„œ ì˜µì…˜ ë¯¸ì ìš© í•­ëª©ì€ í‘œì‹œ ê°ì¶¤
+	// 5. Popup ìš°ì„ ìˆœìœ„ ë°°ì •
+	//	- ìš°ì„  ìˆœìœ„ ë†’ìŒ 
+	//		a. ì—”ì§„ ìë™ì •ì§€, Locking, UnLocking : ì‘ë™ ì¤‘ ë‹¤ë¥¸ íŒì—… ë°œìƒ x
+	//		b. Q coupler ì¡°ì‘ ì¤‘ ìë™ì •ì§€ ë°œìƒ ì‹œ ìë™ì •ì§€ ì¹´ìš´íŠ¸ íŒì—… ìš°ì„ 
+	//	- ìš°ì„  ìˆœìœ„ ì¤‘ê°„
 	//		a. Engine SCR Temp High, Axle Temp, Joystick EHCU > Quickcoupler Unlock Alarm
-	//		b. ½Ã°£¿¡ µû¶ó °¡Àå ÃÖ±Ù¿¡ ¹ß»ıÇÑ ÆË¾÷ ¿ì¼± Ç¥½Ã
-	// 6. ±âÅ¸ ¹ö±× °³¼±
-	//	- ´Ù¸¥ ÆË¾÷¿¡ ÀÇÇØ OldScreenIndex°¡ ¸ŞÀÎÀ¸·Î µÇ¾úÀ» °æ¿ì ÀÌÀü ¸Ş´º·Î ÀÌµ¿¾ÈÇÏ´Â ¹ö±×
-	//		a. Mode-ETC-Calibration-ºÕ¾Ğ·Âº¸Á¤
+	//		b. ì‹œê°„ì— ë”°ë¼ ê°€ì¥ ìµœê·¼ì— ë°œìƒí•œ íŒì—… ìš°ì„  í‘œì‹œ
+	// 6. ê¸°íƒ€ ë²„ê·¸ ê°œì„ 
+	//	- ë‹¤ë¥¸ íŒì—…ì— ì˜í•´ OldScreenIndexê°€ ë©”ì¸ìœ¼ë¡œ ë˜ì—ˆì„ ê²½ìš° ì´ì „ ë©”ë‰´ë¡œ ì´ë™ì•ˆí•˜ëŠ” ë²„ê·¸
+	//		a. Mode-ETC-Calibration-ë¶ì••ë ¥ë³´ì •
 	//		b. Preference-Clock Setting
 	//		c. Monitoring-Fault History-Active Fault
 	//		d. Management-Maintenance
-	// 7. B¾È ¾Ö´Ï¸ŞÀÌ¼Ç ¹ö±× ¼öÁ¤
+	// 7. Bì•ˆ ì• ë‹ˆë©”ì´ì…˜ ë²„ê·¸ ìˆ˜ì •
 	////v2.1.0.00
-	// 1. EHCU error Ç¥½Ã
-	//		A.     ¡°Please reset power¡± ÆË¾÷°ú ¿£Áø ÀÚµ¿Á¤Áö countdown ÆË¾÷ µ¿½Ã ¹ß»ı ½Ã Ã³¸®¹æ¾È Àû¿ë
-	//	  		- ÀÚµ¿Á¤Áö ÆË¾÷À» ¿ì¼± Ã³¸®ÇÏ°í, EHCU error ÆË¾÷ °ü·Ã ÇÃ·¡±× ¸®¼Â.(¡°Please reset power¡± ÆË¾÷ÀÌ ´Ù½Ã ³ªÅ¸³ªµµ·Ï)
-	//		B.     ±× ¿Ü Joystick Steering °ü·Ã ÆË¾÷ ½Ã¿¡µµ ¸¶Âù°¡Áö·Î ÀÚµ¿Á¤Áö ÆË¾÷À» ¿ì¼± Ã³¸®.
-	// 2. ÆíÀÇ¿ë App(PDF Viewer, Media Player, Smart Terminal) ±¸µ¿ Áß °æ°í Ç¥½Ã
-	//		A.     ´ÙÀ½ °æ°í Ç¥½Ã ¹ß»ı ½Ã ¸ğ´ÏÅÍ ¸ŞÀÎÈ­¸éÀ¸·Î º¹±ÍÇÒ °Í (±¸µ¿ÁßÀÌ´ø AppÀº ¹é±×¶ó¿îµå µ¿ÀÛ, ´Ü PDF Viewer´Â Á¾·á µÊ)
-	//			i.     ¿£Áø ÀÚµ¿Á¤Áö countdown ÆË¾÷
-	//			ii.     Axle Temperature Warning ÆË¾÷
-	//			iii.     EHCU error ÆË¾÷
-	//			iv.     Buzzer ¹ß»ı (MCU ¶Ç´Â ¸ğ´ÏÅÍ 070 ¿¡·¯ ¹ß»ı ½Ã)
-	// 3. ÇÑ±¹¾î Å°ÆĞµå Àû¿ë(Å°ÆĞµå ¾îÇÃ¸®ÄÉÀÌ¼Ç ¼³Ä¡ÇØ¾ß ÇÔ)
+	// 1. EHCU error í‘œì‹œ
+	//		A.     â€œPlease reset powerâ€ íŒì—…ê³¼ ì—”ì§„ ìë™ì •ì§€ countdown íŒì—… ë™ì‹œ ë°œìƒ ì‹œ ì²˜ë¦¬ë°©ì•ˆ ì ìš©
+	//	  		- ìë™ì •ì§€ íŒì—…ì„ ìš°ì„  ì²˜ë¦¬í•˜ê³ , EHCU error íŒì—… ê´€ë ¨ í”Œë˜ê·¸ ë¦¬ì…‹.(â€œPlease reset powerâ€ íŒì—…ì´ ë‹¤ì‹œ ë‚˜íƒ€ë‚˜ë„ë¡)
+	//		B.     ê·¸ ì™¸ Joystick Steering ê´€ë ¨ íŒì—… ì‹œì—ë„ ë§ˆì°¬ê°€ì§€ë¡œ ìë™ì •ì§€ íŒì—…ì„ ìš°ì„  ì²˜ë¦¬.
+	// 2. í¸ì˜ìš© App(PDF Viewer, Media Player, Smart Terminal) êµ¬ë™ ì¤‘ ê²½ê³  í‘œì‹œ
+	//		A.     ë‹¤ìŒ ê²½ê³  í‘œì‹œ ë°œìƒ ì‹œ ëª¨ë‹ˆí„° ë©”ì¸í™”ë©´ìœ¼ë¡œ ë³µê·€í•  ê²ƒ (êµ¬ë™ì¤‘ì´ë˜ Appì€ ë°±ê·¸ë¼ìš´ë“œ ë™ì‘, ë‹¨ PDF ViewerëŠ” ì¢…ë£Œ ë¨)
+	//			i.     ì—”ì§„ ìë™ì •ì§€ countdown íŒì—…
+	//			ii.     Axle Temperature Warning íŒì—…
+	//			iii.     EHCU error íŒì—…
+	//			iv.     Buzzer ë°œìƒ (MCU ë˜ëŠ” ëª¨ë‹ˆí„° 070 ì—ëŸ¬ ë°œìƒ ì‹œ)
+	// 3. í•œêµ­ì–´ í‚¤íŒ¨ë“œ ì ìš©(í‚¤íŒ¨ë“œ ì–´í”Œë¦¬ì¼€ì´ì…˜ ì„¤ì¹˜í•´ì•¼ í•¨)
 	////v2.1.0.01
-	// 1. H/W Test ÇÁ·Î±×·¥ ¶ç¿ì¸é 070 ¿¡·¯¶ß¹Ç·Î UI·Î º¹±ÍÇÏ´Â ¹®Á¦ ÇØ°á
-	// 2. Update ÇÁ·Î±×·¥¿¡¼­ 10ÃÊÀÌ³» App ¼³Ä¡½Ã 070 ¿¡·¯¶ß¹Ç·Î UI·Î º¹±ÍÇÏ´Â ¹®Á¦ ÇØ°á
-	// 3. SoftEndStop BucketOut OFF -> ON(¸Ş´º¿¡¼­ DefaultÇÒ ¶§)
+	// 1. H/W Test í”„ë¡œê·¸ë¨ ë„ìš°ë©´ 070 ì—ëŸ¬ëœ¨ë¯€ë¡œ UIë¡œ ë³µê·€í•˜ëŠ” ë¬¸ì œ í•´ê²°
+	// 2. Update í”„ë¡œê·¸ë¨ì—ì„œ 10ì´ˆì´ë‚´ App ì„¤ì¹˜ì‹œ 070 ì—ëŸ¬ëœ¨ë¯€ë¡œ UIë¡œ ë³µê·€í•˜ëŠ” ë¬¸ì œ í•´ê²°
+	// 3. SoftEndStop BucketOut OFF -> ON(ë©”ë‰´ì—ì„œ Defaultí•  ë•Œ)
 	////v2.1.0.10
-	// 1. ÃßÈÄ È£±â¼ö ÀÔ·Â ½Ã ÀåºñÁ¤º¸¿¡¼­ È®ÀÎÇÒ ¼ö ÀÖµµ·Ï ÁÖ¼®Ã³¸®ÇØ³õÀ½!
-	// 2. ¸ğ´ÏÅÍ ´ÜÀ§¼³Á¤ ±â´É º¯°æ(METRIC, US, CUSTOM)
-	// 3. ´ÜÀ§¼³Á¤ ¿¬ºñ Ãß°¡(l/h, gal/h)
-	// 4. ¹«°Ô¼³Á¤ ´ÜÀ§ US ton Ãß°¡
-	// 5. ´Ù±¹¾î ¸íÄª º¯°æ(Á¤È®ÇÑ ¸íÄªÀº ´Ù±¹¾î ÆäÀÌÁö¿¡¼­ È®ÀÎ!!!! ¾Æ·¡´Â ¿µ¾î·Î Ç¥±â)
+	// 1. ì¶”í›„ í˜¸ê¸°ìˆ˜ ì…ë ¥ ì‹œ ì¥ë¹„ì •ë³´ì—ì„œ í™•ì¸í•  ìˆ˜ ìˆë„ë¡ ì£¼ì„ì²˜ë¦¬í•´ë†“ìŒ!
+	// 2. ëª¨ë‹ˆí„° ë‹¨ìœ„ì„¤ì • ê¸°ëŠ¥ ë³€ê²½(METRIC, US, CUSTOM)
+	// 3. ë‹¨ìœ„ì„¤ì • ì—°ë¹„ ì¶”ê°€(l/h, gal/h)
+	// 4. ë¬´ê²Œì„¤ì • ë‹¨ìœ„ US ton ì¶”ê°€
+	// 5. ë‹¤êµ­ì–´ ëª…ì¹­ ë³€ê²½(ì •í™•í•œ ëª…ì¹­ì€ ë‹¤êµ­ì–´ í˜ì´ì§€ì—ì„œ í™•ì¸!!!! ì•„ë˜ëŠ” ì˜ì–´ë¡œ í‘œê¸°)
 	//	- Porutukaleo -> Portugues
 	//	- Swedish -> Svenska
 	//	- Slovakian -> Slovensky
 	//	- Estonian -> Eesti
-	////v2.1.0.11(¹èÆ÷¾ÈÇÔ)
-	// 1. A¾ÈÀÏ °æ¿ì Axle ÈÄ Quick->HomeÀ¸·Î ¿Ã ¶§ Keypad ¼û°ÜÁöÁö ¾Ê´Â ¹ö±× ¼öÁ¤
-	// 2. ESL ÁöÁ¤½Ã°£ ÈÄ µ¿ÀÛ Enter ÀÔ·Â ½Ã Ä¿¼­ ¾È¿òÁ÷ÀÌ´Â Çö»ó °³¼±(È®ÀÎÇÊ¿ä)
+	////v2.1.0.11(ë°°í¬ì•ˆí•¨)
+	// 1. Aì•ˆì¼ ê²½ìš° Axle í›„ Quick->Homeìœ¼ë¡œ ì˜¬ ë•Œ Keypad ìˆ¨ê²¨ì§€ì§€ ì•ŠëŠ” ë²„ê·¸ ìˆ˜ì •
+	// 2. ESL ì§€ì •ì‹œê°„ í›„ ë™ì‘ Enter ì…ë ¥ ì‹œ ì»¤ì„œ ì•ˆì›€ì§ì´ëŠ” í˜„ìƒ ê°œì„ (í™•ì¸í•„ìš”)
 	////v2.1.0.20
-	// 1. T.C Lock Up »ç¾ç º¯°æ(¸ğµ¨Á¤º¸´Â ºñ±³ÇÏÁö ¾Ê°í, TCU Á¤º¸·Î¸¸ ÆÇº°(0x20, ¼ıÀÚ¸¸ À¯È¿µ¥ÀÌÅÍ·Î ÇÔ). Default°ªÀº 5Speed)
-	// 2. ESL ÁöÁ¤½Ã°£ ÈÄ µ¿ÀÛ Enter ÀÔ·Â ½Ã Ä¿¼­ ¾È¿òÁ÷ÀÌ´Â Çö»ó °³¼±(È®ÀÎ¿Ï·á)
-	// 3. MCU Model Num Check »ç¾ç º¯°æ(HL980, HL980XT, HL980TM ¸ğµÎ µ¿ÀÏÇÑ HL980À¸·Î Ã³¸®)
-	// 4. MCU Model Option Check »ç¾ç º¯°æ(5±ÛÀÚ ÀÌÈÄ¸¦ ¸ğµÎ ¿É¼ÇÀ¸·Î º½)
-	// 5. Àåºñ¸ğ´ÏÅÍ¸µ Hidden ÆäÀÌÁö ListVeiw Å¬¸¯ ½Ã crash ³ª´Â Çö»ó °³¼±
-	// 6. ¸ğ´ÏÅÍ ´ÜÀ§¼³Á¤±â´É, ¹«°Ô¼³Á¤ ´ÜÀ§ USton, ´ÜÀ§ ¼³Á¤ ¿¬ºñÃß°¡ °ü·ÃÇÏ¿© ¿ø·¡±â´ÉÀ¸·Î ¿øº¹
-	// 7. Fuel ÆË¾÷ ÃÊ±âÈ­ Áß ÆË¾÷ÀÌ¿Ü Å¬¸¯ ½Ã crash ¶ß´Â Çö»ó ¹× ÃÊ±âÈ­¿Í OK ¹öÆ° »çÀÌ Å¬¸¯ ½Ã UI »ö»ó ¹Ù²î´Â Çö»ó °³¼±
-	// 8. UserSwitching SoftEndStop TM ¿É¼Ç Àû¿ë 
-	// 9. Workload Init ÆË¾÷ ÈÄÁø±â¾î¿¬µ¿, Ä«¸Ş¶ó¹öÆ° µÇµµ·Ï º¯°æ
+	// 1. T.C Lock Up ì‚¬ì–‘ ë³€ê²½(ëª¨ë¸ì •ë³´ëŠ” ë¹„êµí•˜ì§€ ì•Šê³ , TCU ì •ë³´ë¡œë§Œ íŒë³„(0x20, ìˆ«ìë§Œ ìœ íš¨ë°ì´í„°ë¡œ í•¨). Defaultê°’ì€ 5Speed)
+	// 2. ESL ì§€ì •ì‹œê°„ í›„ ë™ì‘ Enter ì…ë ¥ ì‹œ ì»¤ì„œ ì•ˆì›€ì§ì´ëŠ” í˜„ìƒ ê°œì„ (í™•ì¸ì™„ë£Œ)
+	// 3. MCU Model Num Check ì‚¬ì–‘ ë³€ê²½(HL980, HL980XT, HL980TM ëª¨ë‘ ë™ì¼í•œ HL980ìœ¼ë¡œ ì²˜ë¦¬)
+	// 4. MCU Model Option Check ì‚¬ì–‘ ë³€ê²½(5ê¸€ì ì´í›„ë¥¼ ëª¨ë‘ ì˜µì…˜ìœ¼ë¡œ ë´„)
+	// 5. ì¥ë¹„ëª¨ë‹ˆí„°ë§ Hidden í˜ì´ì§€ ListVeiw í´ë¦­ ì‹œ crash ë‚˜ëŠ” í˜„ìƒ ê°œì„ 
+	// 6. ëª¨ë‹ˆí„° ë‹¨ìœ„ì„¤ì •ê¸°ëŠ¥, ë¬´ê²Œì„¤ì • ë‹¨ìœ„ USton, ë‹¨ìœ„ ì„¤ì • ì—°ë¹„ì¶”ê°€ ê´€ë ¨í•˜ì—¬ ì›ë˜ê¸°ëŠ¥ìœ¼ë¡œ ì›ë³µ
+	// 7. Fuel íŒì—… ì´ˆê¸°í™” ì¤‘ íŒì—…ì´ì™¸ í´ë¦­ ì‹œ crash ëœ¨ëŠ” í˜„ìƒ ë° ì´ˆê¸°í™”ì™€ OK ë²„íŠ¼ ì‚¬ì´ í´ë¦­ ì‹œ UI ìƒ‰ìƒ ë°”ë€ŒëŠ” í˜„ìƒ ê°œì„ 
+	// 8. UserSwitching SoftEndStop TM ì˜µì…˜ ì ìš© 
+	// 9. Workload Init íŒì—… í›„ì§„ê¸°ì–´ì—°ë™, ì¹´ë©”ë¼ë²„íŠ¼ ë˜ë„ë¡ ë³€ê²½
 	////v2.1.0.21
-	// 1. Gauge Animation ¼öÁ¤ : TimerTask Á¾·áµÇÁö ¾Ê´Â Çö»ó ¼öÁ¤
-	// 2. SoftEndStop Default Àû¿ë ½Ã TM ¿É¼Ç »ó°ü¾øÀÌ ¸ğµç µ¥ÀÌÅÍ Àü¼ÛÇÏ´Â ¹ö±× ¼öÁ¤
-	// 3. UserSwitching¿¡¼­ ¿É¼ÇÀ¯¹« Àû¿ëÇÏ¿© CAN µ¥ÀÌÅÍ Àü¼Û(¿É¼Ç¿¡ ÀÇÇØ °¨ÃçÁö´õ¶óµµ CAN µ¥ÀÌÅÍÀü¼ÛµÇ¾úÀ½)
+	// 1. Gauge Animation ìˆ˜ì • : TimerTask ì¢…ë£Œë˜ì§€ ì•ŠëŠ” í˜„ìƒ ìˆ˜ì •
+	// 2. SoftEndStop Default ì ìš© ì‹œ TM ì˜µì…˜ ìƒê´€ì—†ì´ ëª¨ë“  ë°ì´í„° ì „ì†¡í•˜ëŠ” ë²„ê·¸ ìˆ˜ì •
+	// 3. UserSwitchingì—ì„œ ì˜µì…˜ìœ ë¬´ ì ìš©í•˜ì—¬ CAN ë°ì´í„° ì „ì†¡(ì˜µì…˜ì— ì˜í•´ ê°ì¶°ì§€ë”ë¼ë„ CAN ë°ì´í„°ì „ì†¡ë˜ì—ˆìŒ)
 	////v2.1.0.30
-	// 1. ¸ğ´ÏÅÍ ´ÜÀ§¼³Á¤±â´É, ¹«°Ô¼³Á¤ ´ÜÀ§ USton, ´ÜÀ§ ¼³Á¤ ¿¬ºñÃß°¡
-	// 2. ºÎÀú ONÀÏ ¶§ ¸ŞÀÎ °¡¿îµ¥ÀÇ Fault code ¹ß»ı °æ°íµî ÅÍÄ¡ ½Ã ºÎÀú OFF±â´É Ãß°¡
-	// 3. UserSwitching Fuel Ãß°¡
-	//----ÃâÀå Áß º¯°æ
-	// 4. US ton ´ÜÀ§ È¯»ê ¼öÁ¤(1.012311 -> 1.1.02311)
-	// 5. Userswitching¿¡¼­ ¾ğ¾î ¼³Á¤ ½Ã ÆË¾÷¿¡ Àû¿ëµÇÁö ¾Ê´Â Çö»ó °³¼±
-	// 6. Userswitching¿¡ ¸ŞÀÎ ÁÂ »ó´Ü Axle ¼³Á¤ ½Ã ¹ÌÇ¥±âµÇ´Â Çö»ó °³¼±
+	// 1. ëª¨ë‹ˆí„° ë‹¨ìœ„ì„¤ì •ê¸°ëŠ¥, ë¬´ê²Œì„¤ì • ë‹¨ìœ„ USton, ë‹¨ìœ„ ì„¤ì • ì—°ë¹„ì¶”ê°€
+	// 2. ë¶€ì € ONì¼ ë•Œ ë©”ì¸ ê°€ìš´ë°ì˜ Fault code ë°œìƒ ê²½ê³ ë“± í„°ì¹˜ ì‹œ ë¶€ì € OFFê¸°ëŠ¥ ì¶”ê°€
+	// 3. UserSwitching Fuel ì¶”ê°€
+	//----ì¶œì¥ ì¤‘ ë³€ê²½
+	// 4. US ton ë‹¨ìœ„ í™˜ì‚° ìˆ˜ì •(1.012311 -> 1.1.02311)
+	// 5. Userswitchingì—ì„œ ì–¸ì–´ ì„¤ì • ì‹œ íŒì—…ì— ì ìš©ë˜ì§€ ì•ŠëŠ” í˜„ìƒ ê°œì„ 
+	// 6. Userswitchingì— ë©”ì¸ ì¢Œ ìƒë‹¨ Axle ì„¤ì • ì‹œ ë¯¸í‘œê¸°ë˜ëŠ” í˜„ìƒ ê°œì„ 
 	////v2.1.0.40
-	// 1. ACU test¿ë
-	// 2. °ü¸®ÀÚ ¸Ş´º -> left + right ´©¸£¸é ºñ¹Ğ¹øÈ£ ÇØÁ¦µÊ
-	// 3. ÇöÀç°íÀå¿¡ acu Ç×»ó Ç¥½Ã
+	// 1. ACU testìš©
+	// 2. ê´€ë¦¬ì ë©”ë‰´ -> left + right ëˆ„ë¥´ë©´ ë¹„ë°€ë²ˆí˜¸ í•´ì œë¨
+	// 3. í˜„ì¬ê³ ì¥ì— acu í•­ìƒ í‘œì‹œ
 	////v2.2.0.0
-	// 1. ´Ù±¹¾î ¿¢¼¿±â¹İ Àû¿ë
-	// 2. ºÕ/¹öÄÏ °¢µµº¸Á¤ Next ¿·¿¡ È­»ìÇ¥ »èÁ¦(HHI ÇùÀÇ ¿Ï·á)
+	// 1. ë‹¤êµ­ì–´ ì—‘ì…€ê¸°ë°˜ ì ìš©
+	// 2. ë¶/ë²„ì¼“ ê°ë„ë³´ì • Next ì˜†ì— í™”ì‚´í‘œ ì‚­ì œ(HHI í˜‘ì˜ ì™„ë£Œ)
 	////v2.2.0.1
-	// 1. Display B¾È Main US ton ¹× gal ´ÜÀ§ ¹ÌÀû¿ë°Ç Àû¿ë
-	// 2. UserSwitching º¯°æ
-	//	- Display Type : B¾È -> A¾ÈÀ¸·Î º¯°æ
-	//	- ¿¬ºñ -> ºÎÇÇ·Î ¸íÄª º¯°æ
-	//	- ºÎÇÇ ´ÜÀ§ l/h -> l·Î º¯°æ
-	//	- ¼Óµµ -> °Å¸®·Î ¸íÄª º¯°æ
-	// 3. ÇöÀç°íÀå EHCU : MCU·ÎºÎÅÍ ¹Şµµ·Ï º¯°æ
-	// 4. EHCU È÷µç ÆäÀÌÁö 3°¡Áö ¸ğµå ¼³Á¤ÇÏ´Â ºÎºĞ ¿µ¹®À¸·Î ÅëÇÕ
-	// 5. Smart Terminal 1.05 ¹öÀüÀÌ ¾Æ´Ò°æ¿ì·Î º¯°æ(ÀÌÈÄ¿¡ ¶Ç ¾÷µ¥ÀÌÆ®µÉ ¼ö ÀÖÀ¸¹Ç·Î)
-	// 6. ¿¬·á ¼Òºñ·® Á¤º¸ ±×·¡ÇÁ¿¡¼­ gal·Î º¯°æµÇ¾úÀ» ¶§ ´«±İ ¾È¸Â´Â ºÎºĞ ¼öÁ¤
+	// 1. Display Bì•ˆ Main US ton ë° gal ë‹¨ìœ„ ë¯¸ì ìš©ê±´ ì ìš©
+	// 2. UserSwitching ë³€ê²½
+	//	- Display Type : Bì•ˆ -> Aì•ˆìœ¼ë¡œ ë³€ê²½
+	//	- ì—°ë¹„ -> ë¶€í”¼ë¡œ ëª…ì¹­ ë³€ê²½
+	//	- ë¶€í”¼ ë‹¨ìœ„ l/h -> lë¡œ ë³€ê²½
+	//	- ì†ë„ -> ê±°ë¦¬ë¡œ ëª…ì¹­ ë³€ê²½
+	// 3. í˜„ì¬ê³ ì¥ EHCU : MCUë¡œë¶€í„° ë°›ë„ë¡ ë³€ê²½
+	// 4. EHCU íˆë“  í˜ì´ì§€ 3ê°€ì§€ ëª¨ë“œ ì„¤ì •í•˜ëŠ” ë¶€ë¶„ ì˜ë¬¸ìœ¼ë¡œ í†µí•©
+	// 5. Smart Terminal 1.05 ë²„ì „ì´ ì•„ë‹ê²½ìš°ë¡œ ë³€ê²½(ì´í›„ì— ë˜ ì—…ë°ì´íŠ¸ë  ìˆ˜ ìˆìœ¼ë¯€ë¡œ)
+	// 6. ì—°ë£Œ ì†Œë¹„ëŸ‰ ì •ë³´ ê·¸ë˜í”„ì—ì„œ galë¡œ ë³€ê²½ë˜ì—ˆì„ ë•Œ ëˆˆê¸ˆ ì•ˆë§ëŠ” ë¶€ë¶„ ìˆ˜ì •
 	////v2.2.0.11
-	// 1. H/W Test CID °øÀ¯ ´©¶ôÀ¸·Î ÀÎÇØ ¼öÁ¤
+	// 1. H/W Test CID ê³µìœ  ëˆ„ë½ìœ¼ë¡œ ì¸í•´ ìˆ˜ì •
 	////v2.2.0.2
-	// 1. MainB¾È Non TC Lock Up¿¡¼­ Hourmeter ±ô¹Ú°Å¸®´Â Çö»ó °³¼±	
+	// 1. MainBì•ˆ Non TC Lock Upì—ì„œ Hourmeter ê¹œë°•ê±°ë¦¬ëŠ” í˜„ìƒ ê°œì„ 	
 	////v2.2.0.3
-	// 1. ¿¡¾îÄÁ ½ÇÂ÷ Å×½ºÆ®¿ë
-	////v2.2.0.4 15.12.21(BucketDump ¼Óµµ º¸Á¤) : svn ÂüÁ¶
+	// 1. ì—ì–´ì»¨ ì‹¤ì°¨ í…ŒìŠ¤íŠ¸ìš©
+	////v2.2.0.4 15.12.21(BucketDump ì†ë„ ë³´ì •) : svn ì°¸ì¡°
 	////v2.3.0.0
-	// 1. RMCU È£±â¼ö ÀÔ·Â ±â´É Àû¿ë.
-	// 2. ACU ±â´É »èÁ¦ ¹× ÄÚµå Ç¥½Ã º¯°æ.
-	// 3. Soft End Stop Bucket Dump ¿À·ù Ç¥½Ã ¼öÁ¤.(´Ù±¹¾î ÆÄÀÏ ¾øÀ»½Ã)
+	// 1. RMCU í˜¸ê¸°ìˆ˜ ì…ë ¥ ê¸°ëŠ¥ ì ìš©.
+	// 2. ACU ê¸°ëŠ¥ ì‚­ì œ ë° ì½”ë“œ í‘œì‹œ ë³€ê²½.
+	// 3. Soft End Stop Bucket Dump ì˜¤ë¥˜ í‘œì‹œ ìˆ˜ì •.(ë‹¤êµ­ì–´ íŒŒì¼ ì—†ì„ì‹œ)
 	////v2.3.0.1
-	// 1. °ü¸®ÀÚ ¸Ş´º LEFT-RIGHT Long key·Î ÁøÀÔ°¡´ÉÇÏ°Ô ÇÏ´Â ±â´É
-	// 2. ACU ±â´É Ãß°¡(Çö´ë ¿äÃ»)
+	// 1. ê´€ë¦¬ì ë©”ë‰´ LEFT-RIGHT Long keyë¡œ ì§„ì…ê°€ëŠ¥í•˜ê²Œ í•˜ëŠ” ê¸°ëŠ¥
+	// 2. ACU ê¸°ëŠ¥ ì¶”ê°€(í˜„ëŒ€ ìš”ì²­)
 	////v2.3.0.2
-	// 1. ACU ÇöÀç°íÀå, °ú°Å°íÀå ±â´É Àû¿ë
+	// 1. ACU í˜„ì¬ê³ ì¥, ê³¼ê±°ê³ ì¥ ê¸°ëŠ¥ ì ìš©
 	////v2.3.0.2.1
-	// 1. ACU ±â´É ´Ù±¹¾î ¼öÁ¤ ¹× ´Ù±¹¾î ÀÎµ¦½º ¼öÁ¤
+	// 1. ACU ê¸°ëŠ¥ ë‹¤êµ­ì–´ ìˆ˜ì • ë° ë‹¤êµ­ì–´ ì¸ë±ìŠ¤ ìˆ˜ì •
 	////v2.4.0.0.0
-	// 1. ACU ¾ç»ê±â´É Àû¿ë
-	// 2. Pressure Calibration UI ¼öÁ¤
-	// 3. È÷ºê¸®¾î ¹İ¿µ
-	// 4. ´Ù±¹¾î ¹®¼­ ¹İ¿µ ¿Ï·á
-	// 5. ACU Description º¯°æ(GPS -> DPS)
-	// 6. ¿£Áø ÀÚµ¿ Á¤Áö ÇÁ·ÎÅäÄİ 3ÃÊµ¿¾È ¾È¿À¸é ÆË¾÷ Á¾·á
-	// 7. SoftEndStop Calibration - BucketDumpCalibration Ãß°¡
+	// 1. ACU ì–‘ì‚°ê¸°ëŠ¥ ì ìš©
+	// 2. Pressure Calibration UI ìˆ˜ì •
+	// 3. íˆë¸Œë¦¬ì–´ ë°˜ì˜
+	// 4. ë‹¤êµ­ì–´ ë¬¸ì„œ ë°˜ì˜ ì™„ë£Œ
+	// 5. ACU Description ë³€ê²½(GPS -> DPS)
+	// 6. ì—”ì§„ ìë™ ì •ì§€ í”„ë¡œí† ì½œ 3ì´ˆë™ì•ˆ ì•ˆì˜¤ë©´ íŒì—… ì¢…ë£Œ
+	// 7. SoftEndStop Calibration - BucketDumpCalibration ì¶”ê°€
 	////v2.4.0.0.1
-	// 1. MCU DTC Ãß°¡(831/2 - ACU Åë½Å¿¡·¯)
+	// 1. MCU DTC ì¶”ê°€(831/2 - ACU í†µì‹ ì—ëŸ¬)
 	////v2.4.0.1
-	// 1. Bucket Dump Calibration & Pressure Calibration ´Ù±¹¾î ¹®¼­ Ãß°¡
-	// 2. ´Ù±¹¾î ¹®¼­ ¹öÀü(v.1.2.0) ¹öÀü Ç¥±â ÅÂÇÏ ¹öÀü ¿¡¼­ È®ÀÎ °¡´É
+	// 1. Bucket Dump Calibration & Pressure Calibration ë‹¤êµ­ì–´ ë¬¸ì„œ ì¶”ê°€
+	// 2. ë‹¤êµ­ì–´ ë¬¸ì„œ ë²„ì „(v.1.2.0) ë²„ì „ í‘œê¸° íƒœí•˜ ë²„ì „ ì—ì„œ í™•ì¸ ê°€ëŠ¥
 	////v2.4.0.11
-	// 1. CID 13ÀÏ ÀúÀå¾ÈµÊ -> ¹æ½Ä º¯°æ
-	// 2. Revision RevH.01.01 Ãß°¡
+	// 1. CID 13ì¼ ì €ì¥ì•ˆë¨ -> ë°©ì‹ ë³€ê²½
+	// 2. Revision RevH.01.01 ì¶”ê°€
 	////v2.4.0.12
-	// 1. Userswitching Language -> Type A ¿ÀÇ¥±â ¼öÁ¤
-	// 2. FATC FF ÀÏ°æ¿ì '-'À¸·Î Ç¥½Ã 
+	// 1. Userswitching Language -> Type A ì˜¤í‘œê¸° ìˆ˜ì •
+	// 2. FATC FF ì¼ê²½ìš° '-'ìœ¼ë¡œ í‘œì‹œ 
 	////v2.4.1.00
-	// 1. Quick Coupler ±â´É UI ¼öÁ¤ 
-	// 2. Cooling Fan Max RPM Adjust ±â´É Ãß°¡
+	// 1. Quick Coupler ê¸°ëŠ¥ UI ìˆ˜ì • 
+	// 2. Cooling Fan Max RPM Adjust ê¸°ëŠ¥ ì¶”ê°€
 	////v2.4.1.02
-	// 1. Quick Coupler ¹®±¸ º¯°æ
+	// 1. Quick Coupler ë¬¸êµ¬ ë³€ê²½
 	////v2.4.1.03
-	// 1. MaxControl ºÎºĞ Á¦°Å
+	// 1. MaxControl ë¶€ë¶„ ì œê±°
 	////v2.4.2.00
-	// 1. ÇÁ·Î±×·¥ ¹öÀü ¼öÁ¤(H03 º¸µå ÃâÇÏºĞ Àû¿ë)
+	// 1. í”„ë¡œê·¸ë¨ ë²„ì „ ìˆ˜ì •(H03 ë³´ë“œ ì¶œí•˜ë¶„ ì ìš©)
 	////v2.4.3.00
-	// 1. ¸ÖÆ¼¹Ìµğ¾î Á¦ÇÑ ±â´É Ãß°¡
-	// 2. Cooling Fan Max Adjust ±â´É Ãß°¡
+	// 1. ë©€í‹°ë¯¸ë””ì–´ ì œí•œ ê¸°ëŠ¥ ì¶”ê°€
+	// 2. Cooling Fan Max Adjust ê¸°ëŠ¥ ì¶”ê°€
 	
 	//////////////////////////////////////////////////////////////////////////////////////
+	// TAG
 	// TAG
 	private  final String TAG = "Home";
 	
@@ -840,6 +843,7 @@ public class Home extends Activity {
 	// ++, 150323 bwk
 	public  static final int SCREEN_STATE_MAIN_B_QUICK_MULTICLOSE							= 0x15100000;
 	public	static final int SCREEN_STATE_MAIN_B_QUICK_MIRACLOSE							= 0x15200000;
+	public static final int SCREEN_STATE_MAIN_B_QUICK_MULTI_WARNING = 0x15300000;
 	// --, 150323 bwk
 	public  static final int SCREEN_STATE_MAIN_B_QUICK_END									= 0x15FFFFFF;
 	
@@ -1038,6 +1042,7 @@ public class Home extends Activity {
 	
 	public  static final int SCREEN_STATE_MENU_MANAGEMENT_SERVICE_END						= 0x233FFFFF;
 	public  static final int SCREEN_STATE_MENU_MANAGEMENT_ASPHONE_TOP						= 0x23400000;
+	public static final int SCREEN_STATE_MENU_MANAGEMENT_ASPHONE_ENTERTAINMENT_LOCK_POPUP = 0x23410000;
 	public  static final int SCREEN_STATE_MENU_MANAGEMENT_ASPHONE_END						= 0x234FFFFF;
 	public  static final int SCREEN_STATE_MENU_MANAGEMENT_SOFTWAREUPDAT_TOP					= 0x23500000;
 	public  static final int SCREEN_STATE_MENU_MANAGEMENT_SOFTWAREUPDAT_PW					= 0x2351FFFF;
@@ -1123,6 +1128,7 @@ public class Home extends Activity {
 	// ++, 150323 bwk
 	public  static final int SCREEN_STATE_MAIN_A_QUICK_MULTICLOSE							= 0x75100000;
 	public	static final int SCREEN_STATE_MAIN_A_QUICK_MIRACLOSE							= 0x75200000;
+	public static final int SCREEN_STATE_MAIN_A_QUICK_MULTI_WARNING = 0x75300000;
 	// --, 150323 bwk
 	public  static final int SCREEN_STATE_MAIN_A_QUICK_END									= 0x75FFFFFF;
 	
@@ -1206,6 +1212,12 @@ public class Home extends Activity {
 	public static final int STATE_INTERNAL_SPK		= 0;
 	public static final int STATE_EXTERNAL_AUX	 	= 1;
 	
+	public static final int STATE_ENTERTAINMENT_SMARTTERMINAL_UNLOCK = 0;
+	public static final int STATE_ENTERTAINMENT_SMARTTERMINAL_LOCK = 1;
+
+	public static final int STATE_ENTERTAINMENT_MULTIMEDIA_UNLOCK = 0;
+	public static final int STATE_ENTERTAINMENT_MULTIMEDIA_LOCK = 1;
+
 	public static final int MAX_AS_LENGTH 			= 21;
 	
 	public static final int	DISPLAY_TYPE_A			= 0;
@@ -1317,9 +1329,9 @@ public class Home extends Activity {
 	public int CameraReverseMode;	//GEAE Reverse Mode
 	int SelectCameraNum;			// ++, --, 150324 bwk
 	int SelectGear;					//Select GEAR
-	int SelectGearRange;			//Select GEAR ¹üÀ§
-	int SelectGearDirection;		//Select GEAR ¹æÇâ
-	int GearIndex;					//GEAR À§Ä¡
+	int SelectGearRange;			//Select GEAR ï¿½ï¿½ï¿½ï¿½
+	int SelectGearDirection;		//Select GEAR ï¿½ï¿½ï¿½ï¿½
+	int GearIndex;					//GEAR ï¿½ï¿½Ä¡
 	int CameraReverseOnCount;		// CAMERA REVERSE ON COUNTER
 	int CameraReverseOffCount;		// CAMERA REVERSE OFF COUNTER
 	
@@ -1340,6 +1352,10 @@ public class Home extends Activity {
 	public int SoundState;
 	public int InternalSoundLevel;
 	
+	// Entertain Lock
+	public int LockSmartTerminal;
+	public int LockMultiMedia;
+
 	// SeatBelt
 	public int SeatBelt;
 	
@@ -1408,6 +1424,8 @@ public class Home extends Activity {
 	// ++, 150313 cjg
 	public MultimediaClosePopup				_MultimediaClosePopup;
 	public MiracastClosePopup				_MiracastClosePopup;
+	public MultimediaWarningPopup 			_MultimediaWarningPopup;
+
 	// --, 150313 cjg
 	public FuelInitalPopup					_FuelInitalPopup;			// ++, --, 150406 bwk
 	public AxleTempWarningPopup				_AxleTempWarningPopup;
@@ -1416,7 +1434,7 @@ public class Home extends Activity {
 	public SoftwareUpdateErrorPopup			_SoftwareUpdateErrorPopup;
 	public LanguageChangePopup 				_LanguageChangePopup;
 	public FanSelectModePopup				_FanSelectModePopup;
-	
+	public EntertainmentLockPopup 			_EntertainmentLockPopup;
 	//Toast
 	public WeighingErrorToast				_WeighingErrorToast;
 	
@@ -1547,6 +1565,9 @@ public class Home extends Activity {
 	boolean runningCheckMiracast = false;
 	
 	
+	
+	boolean currentMiracastValue = false;
+	boolean currentMultimediaValue = false;
 	//Lift Cycle Function///////////////////////////////
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -1555,7 +1576,7 @@ public class Home extends Activity {
 		setContentView(R.layout.activity_main);
 		Log.d(TAG, "onCreateView");
 		InitResource();
-		InitValuable();		// ++, --, 150212 bwk InitPopup ¾Æ·¡¿¡¼­ À§·Î ÀÌµ¿
+		InitValuable();		// ++, --, 150212 bwk InitPopup ï¿½Æ·ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ìµï¿½
 		InitFragment();
 		InitPopup();
 		InitAnimation();
@@ -1819,6 +1840,8 @@ public class Home extends Activity {
 		// ++, 150313 cjg
 		_MultimediaClosePopup = new MultimediaClosePopup(this);
 		_MiracastClosePopup = new MiracastClosePopup(this);
+		_MultimediaWarningPopup = new MultimediaWarningPopup(this);
+
 		// --, 150313 cjg
 		_FuelInitalPopup = new FuelInitalPopup(this);
 		_AxleTempWarningPopup = new AxleTempWarningPopup(this);
@@ -1827,7 +1850,7 @@ public class Home extends Activity {
 		_SoftwareUpdateErrorPopup = new SoftwareUpdateErrorPopup(this);
 		_LanguageChangePopup = new LanguageChangePopup(this);
 		_FanSelectModePopup = new FanSelectModePopup(this);
-		
+		_EntertainmentLockPopup = new EntertainmentLockPopup(this);
 		_WeighingErrorToast = new WeighingErrorToast(this);
 	}
 
@@ -1868,6 +1891,7 @@ public class Home extends Activity {
 		// ++, 150323 bwk
 		_MultimediaClosePopup = new MultimediaClosePopup(this);
 		_MiracastClosePopup = new MiracastClosePopup(this);
+		_MultimediaWarningPopup = new MultimediaWarningPopup(this);
 		// --, 150323 bwk
 		_FuelInitalPopup = new FuelInitalPopup(this);
 		_AxleTempWarningPopup = new AxleTempWarningPopup(this);
@@ -1878,6 +1902,7 @@ public class Home extends Activity {
 		_SoftwareUpdateErrorPopup = new SoftwareUpdateErrorPopup(this);
 		_LanguageChangePopup = new LanguageChangePopup(this);
 		_FanSelectModePopup = new FanSelectModePopup(this);
+		_EntertainmentLockPopup = new EntertainmentLockPopup(this);
 	}
 	// --, 150306 bwk
 	
@@ -1922,7 +1947,7 @@ public class Home extends Activity {
 		SelectCameraNum = CameraOrder1+1;
 		CAN1Comm.TxCMDToMCU(CAN1CommManager.CMD_CAM, CameraOrder1);
 	}
-	// ¾Æ·¡ ÇÔ¼ö »ç¿ë¾ÈÇÔÀ¸·Î Áö¿ò (++, --, 151110 cjg)
+	// ï¿½Æ·ï¿½ ï¿½Ô¼ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ (++, --, 151110 cjg)
 //	public void ExcuteCamActivitybyReverseGear(){
 //		CAN1Comm.CameraOnFlag = CAN1CommManager.STATE_CAMERA_REVERSEGEAR;
 //		CAN1Comm.CameraCurrentOnOff = true;	// ++, --, 150326 cjg
@@ -2216,7 +2241,9 @@ public class Home extends Activity {
 		edit.putInt("BrightnessManualAuto", BrightnessManualAuto);
 		edit.putInt("SoundState", SoundState);
 		edit.putInt("LanguageIndex", LanguageIndex);		// ++, --, 150206 bwk
-		edit.putInt("InternalSoundLevel", InternalSoundLevel);		// ++, --, 150324 bwk
+		edit.putInt("InternalSoundLevel", InternalSoundLevel); // ++, --, 150324
+		edit.putInt("LockSmartTerminal", LockSmartTerminal);
+		edit.putInt("LockMultiMedia", LockMultiMedia);
 		edit.commit();
 		Log.d(TAG,"SavePref");
 	}
@@ -2229,9 +2256,9 @@ public class Home extends Activity {
 		UnitWeight = SharePref.getInt("UnitWeight", UNIT_WEIGHT_TON);
 		UnitPressure = SharePref.getInt("UnitPressure", UNIT_PRESSURE_BAR);
 		HourOdometerIndex = SharePref.getInt("HourOdometerIndex", CAN1CommManager.DATA_STATE_HOURMETER_LATEST);
-		FuelIndex = SharePref.getInt("FuelIndex", CAN1CommManager.DATA_STATE_AVERAGE_FUEL_RATE);	// ++, --, 150331 bwk			// ++, --, 150407 bwk ÃÊ±â°ª Æò±Õ¿¬ºñ
-		MachineStatusUpperIndex = SharePref.getInt("MachineStatusUpperIndex", CAN1CommManager.DATA_STATE_MACHINESTATUS_COOLANT);		// ++, --, 150407 bwk 9A µ¿ÀÏÇÏ°Ô(NoSelect -> ÀÛµ¿À¯)
-		MachineStatusLowerIndex = SharePref.getInt("MachineStatusLowerIndex", CAN1CommManager.DATA_STATE_MACHINESTATUS_BATTERY);	// ++, --, 150407 bwk 9A µ¿ÀÏÇÏ°Ô(NoSelect -> ³Ã°¢¼ö)
+		FuelIndex = SharePref.getInt("FuelIndex", CAN1CommManager.DATA_STATE_AVERAGE_FUEL_RATE);	// ++, --, 150331 bwk			// ++, --, 150407 bwk ï¿½Ê±â°ª ï¿½ï¿½Õ¿ï¿½ï¿½ï¿½
+		MachineStatusUpperIndex = SharePref.getInt("MachineStatusUpperIndex", CAN1CommManager.DATA_STATE_MACHINESTATUS_COOLANT);		// ++, --, 150407 bwk 9A ï¿½ï¿½ï¿½ï¿½ï¿½Ï°ï¿½(NoSelect -> ï¿½Ûµï¿½ï¿½ï¿½)
+		MachineStatusLowerIndex = SharePref.getInt("MachineStatusLowerIndex", CAN1CommManager.DATA_STATE_MACHINESTATUS_BATTERY);	// ++, --, 150407 bwk 9A ï¿½ï¿½ï¿½ï¿½ï¿½Ï°ï¿½(NoSelect -> ï¿½Ã°ï¿½ï¿½ï¿½)
 		WeighingErrorDetect = SharePref.getInt("WeighingErrorDetect", CAN1CommManager.DATA_STATE_WEIGHING_ERRORDETECT_ON);
 		
 		ActiveCameraNum = SharePref.getInt("ActiveCameraNum", 4);
@@ -2252,8 +2279,8 @@ public class Home extends Activity {
 		
 		SmartKeyUse = SharePref.getInt("SmartKeyUse", CAN1CommManager.DATA_STATE_SMARTKEY_USE_OFF);
 		
-		strASNumDash = SharePref.getString("strASNumDash", "1899-7282");	// ++, --, 150402 bwk A/S ¹øÈ£ Ãß°¡ 
-		strASNum = SharePref.getString("strASNum", "18997282");	// ++, --, 150402 bwk A/S ¹øÈ£ Ãß°¡ 
+		strASNumDash = SharePref.getString("strASNumDash", "1899-7282");	// ++, --, 150402 bwk A/S ï¿½ï¿½È£ ï¿½ß°ï¿½ 
+		strASNum = SharePref.getString("strASNum", "18997282");	// ++, --, 150402 bwk A/S ï¿½ï¿½È£ ï¿½ß°ï¿½ 
 		
 		DisplayType = SharePref.getInt("DisplayType", DISPLAY_TYPE_A);	// ++, --, 151130 B->A, 150323 bwk A->B
 //		setScreenIndex();	// ++, --, 150310 bwk
@@ -2264,6 +2291,8 @@ public class Home extends Activity {
 		AttachmentStatus = SharePref.getInt("AttachmentStatus", CAN1CommManager.DATA_STATE_KEY_QUICKCOUPLER_OFF);
 		
 		MachineSerialNumber = SharePref.getInt("MachineSerialNumber", 0xFFFFFF);
+		LockSmartTerminal = SharePref.getInt("LockSmartTerminal", STATE_ENTERTAINMENT_SMARTTERMINAL_UNLOCK);
+		LockMultiMedia = SharePref.getInt("LockMultiMedia", STATE_ENTERTAINMENT_MULTIMEDIA_UNLOCK);
 		Log.d(TAG,"LoadPref");
 	}
 	
@@ -2794,7 +2823,7 @@ public class Home extends Activity {
 			// --, 150323 cjg
 			else if(Data == CAN1CommManager.POWER_OFF){
 				showEndingFragment();
-				//allKillRunningApps("taeha.wheelloader.fseries_monitor.main");	// ++, --, 150326 cjg multimedia ending °³¼± 
+				//allKillRunningApps("taeha.wheelloader.fseries_monitor.main");	// ++, --, 150326 cjg multimedia ending ï¿½ï¿½ï¿½ï¿½ 
 				// ++, 150615 cjg
 				try {
 					CAN1Comm.native_system_sync_Native();
@@ -3308,7 +3337,7 @@ public class Home extends Activity {
 					|| (RearAxleTempWarning  == CAN1CommManager.DATA_STATE_LAMP_ON)
 					|| AxleWarningFlag == true)
 			{
-				// AxleTempWarningÀÏ °æ¿ì ÀÌ°Å ¶ß°í ¹Ù·Î °æ°íÃ¢ ¶ß¹Ç·Î, PASS
+				// AxleTempWarningï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½Ì°ï¿½ ï¿½ß°ï¿½ ï¿½Ù·ï¿½ ï¿½ï¿½ï¿½Ã¢ ï¿½ß¹Ç·ï¿½, PASS
 			}
 			/*else if(AttachmentStatus == CAN1CommManager.DATA_STATE_KEY_QUICKCOUPLER_UNLOCK){
 				OldScreenIndex = ScreenIndex;
@@ -3761,7 +3790,7 @@ public class Home extends Activity {
 				ExcuteCamActivitybyKey();
 			}
 			Log.d(TAG,"Click QuickCoupler Key");
-		// ++, 151110 cjg Menu ¾ÈÀ¸·Î ÀÌµ¿
+		// ++, 151110 cjg Menu ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ìµï¿½
 //		}else if(ScreenIndex == SCREEN_STATE_MENU_MODE_HYD_WORKLOAD_WEIGHING_INIT1){
 //			Log.d(TAG,"Click WeighingInit1 Key");
 //			_WorkLoadWeighingInitPopup1.KeyButtonClick(Data);
@@ -4208,6 +4237,23 @@ public class Home extends Activity {
 		HomeDialog = _MiracastClosePopup;
 		HomeDialog.show();
 	}
+
+	public void showMultiWarning() {
+		if (AnimationRunningFlag == true) {
+			return;
+		} else {
+			StartAnimationRunningTimer();
+		}
+		if (HomeDialog != null) {
+			HomeDialog.dismiss();
+			HomeDialog = null;
+		}
+
+		_MultimediaWarningPopup = new MultimediaWarningPopup(this);
+		HomeDialog = _MultimediaWarningPopup;
+		HomeDialog.show();
+	}
+
 	// --, 150313 cjg	 
 	public void showFuelInitalPopup(){
 		if(AnimationRunningFlag == true)
@@ -4312,6 +4358,21 @@ public class Home extends Activity {
 		HomeDialog.show();
 	}
 
+	public void showEntertainmentLockPopup() {
+		if (AnimationRunningFlag == true) {
+			return;
+		} else {
+			StartAnimationRunningTimer();
+		}
+
+		if (HomeDialog != null) {
+			HomeDialog.dismiss();
+			HomeDialog = null;
+		}
+
+		HomeDialog = _EntertainmentLockPopup;
+		HomeDialog.show();
+	}
 	
 	/////////////////////////////////////////////////////
 
@@ -4685,10 +4746,15 @@ public class Home extends Activity {
 				@Override
 				public void run() {
 					// TODO Auto-generated method stub
+					
+					if (currentMiracastValue != CAN1Comm.isTopCheckMiracast()) {
+						currentMiracastValue = CAN1Comm.isTopCheckMiracast();
 					CAN1Comm.CheckMiracast();
+						Log.d(TAG, "Different");
 					if(CAN1Comm.GetMiracastFlag() == true){
 						CancelCheckSmartTerminalTimer();
 					}
+				}
 				}
 			});
 			

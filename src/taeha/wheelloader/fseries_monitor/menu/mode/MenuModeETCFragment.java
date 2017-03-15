@@ -1,4 +1,4 @@
-package taeha.wheelloader.fseries_monitor.menu.mode;
+ï»¿package taeha.wheelloader.fseries_monitor.menu.mode;
 
 import taeha.wheelloader.fseries_monitor.animation.AppearAnimation;
 import taeha.wheelloader.fseries_monitor.animation.ChangeFragmentAnimation;
@@ -256,7 +256,11 @@ public class MenuModeETCFragment extends MenuBodyList_ParentFragment{
 			ParentActivity._MenuBaseFragment._MenuModeFragment._MenuModeTabFragment.setClickImageHYD();
 			break;
 		case MenuModeFragment.STATE_CURSUR_LEFT:
+			if(ParentActivity.LockSmartTerminal == Home.STATE_ENTERTAINMENT_SMARTTERMINAL_LOCK & ParentActivity.LockMultiMedia == Home.STATE_ENTERTAINMENT_MULTIMEDIA_LOCK){
+				ParentActivity._MenuBaseFragment._MenuListLeftFragment.ClickPreference();
+			} else {
 			ParentActivity._MenuBaseFragment._MenuListLeftFragment.ClickMultimedia();
+			}
 			break;
 		default:
 			break;
@@ -416,7 +420,7 @@ public class MenuModeETCFragment extends MenuBodyList_ParentFragment{
 			break;
 		case CAN1CommManager.DATA_STATE_AUTOSHUTDOWN_ON:
 			// ++, 150212 bwk
-			// ¹ÞÀº °ªÀÌ 2ºÐ ÀÌÇÏ ÀÌ°Å³ª 40ºÐ ÀÌ»óÀÏ °æ¿ì °­Á¦·Î ¸ÂÃã
+			// ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ 2ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ì°Å³ï¿½ 40ï¿½ï¿½ ï¿½Ì»ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 			if(time < 12)
 				time = 12;
 			else if(time > 240)

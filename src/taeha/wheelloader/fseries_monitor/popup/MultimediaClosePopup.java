@@ -1,4 +1,4 @@
-// ++, 150320 cjg
+﻿// ++, 150320 cjg
 package taeha.wheelloader.fseries_monitor.popup;
 
 import taeha.wheelloader.fseries_monitor.main.CAN1CommManager;
@@ -136,6 +136,7 @@ public class MultimediaClosePopup extends ParentPopup {
 	///////////////////////////////////////////////////////////////////////////////
 	public void ClickOK(){
 		this.dismiss();
+		ParentActivity.OldScreenIndex = ParentActivity.SCREEN_STATE_MAIN_A_QUICK_TOP;
 		//++, 150715 cjg
 		Runtime runtime = Runtime.getRuntime();
 		Process process;
@@ -167,19 +168,25 @@ public class MultimediaClosePopup extends ParentPopup {
 			// ++, 150323 bwk
 			//CAN1Comm.SetMiracastFlag(true);
 			// --, 150323 bwk				
+			ParentActivity.StartAlwaysOntopService();
 			ParentActivity.startActivity(intent);
 			if(CommService.pi != null){
 				if(!CommService.pi.versionName.equals("1.0.5BF")){
+					
 					CAN1Comm.setRunningCheckMiracast(true);
+					
 				}					
 			}
 			ParentActivity.StartCheckSmartTerminalTimer();
+			
+			
 		}
 		
 	}	
 	public void ClickCancel(){
 		
 		this.dismiss();
+		
 	}
 	//////////////////////////////////////////////////////////////////////
 	public void ClickLeft(){

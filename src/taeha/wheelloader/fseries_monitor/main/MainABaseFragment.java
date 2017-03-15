@@ -1,4 +1,4 @@
-package taeha.wheelloader.fseries_monitor.main;
+﻿package taeha.wheelloader.fseries_monitor.main;
 
 import taeha.wheelloader.fseries_monitor.animation.AppearAnimation;
 import taeha.wheelloader.fseries_monitor.animation.ChangeFragmentAnimation;
@@ -1468,7 +1468,9 @@ public class MainABaseFragment extends ParentFragment{
 		case Home.SCREEN_STATE_MAIN_A_QUICK_MIRACLOSE:
 			ParentActivity._MiracastClosePopup.ClickLeft();
 			break;
-			
+		case  Home.SCREEN_STATE_MAIN_A_QUICK_MULTI_WARNING:
+			ParentActivity._MultimediaWarningPopup.ClickLeft();
+			break;
 		case Home.SCREEN_STATE_MAIN_A_KEY_MAINLIGHT:
 			_MainAKeyMainLightFragment.ClickLeft();
 			break;
@@ -1537,10 +1539,25 @@ public class MainABaseFragment extends ParentFragment{
 			CursurDisplay(CursurIndex);
 			break;
 		case Home.SCREEN_STATE_MAIN_A_QUICK_TOP:
-			if(CursurIndex > 0)
+			if(CursurIndex > 0){
+				if(CursurIndex == 4){
+					if(ParentActivity.LockSmartTerminal == Home.STATE_ENTERTAINMENT_SMARTTERMINAL_LOCK)
+						CursurIndex = 2;
+					else 
 				CursurIndex--;
+				} else if(CursurIndex == 6){
+					if(ParentActivity.LockMultiMedia == Home.STATE_ENTERTAINMENT_MULTIMEDIA_LOCK)
+						CursurIndex = 4;
 			else
+						CursurIndex--;
+				} else {
+					CursurIndex--;	
+				}
+			}
+			else {
 				CursurIndex = 7;
+			}
+				
 			CursurDisplay(CursurIndex);
 			break;
 		}
@@ -1584,6 +1601,9 @@ public class MainABaseFragment extends ParentFragment{
 		case Home.SCREEN_STATE_MAIN_A_QUICK_MIRACLOSE:
 			ParentActivity._MiracastClosePopup.ClickRight();
 			break;
+		case  Home.SCREEN_STATE_MAIN_A_QUICK_MULTI_WARNING:
+			ParentActivity._MultimediaWarningPopup.ClickRight();
+			break;	
 			
 		case Home.SCREEN_STATE_MAIN_A_KEY_MAINLIGHT:
 			_MainAKeyMainLightFragment.ClickRight();
@@ -1655,8 +1675,22 @@ public class MainABaseFragment extends ParentFragment{
 			CursurDisplay(CursurIndex);
 			break;
 		case Home.SCREEN_STATE_MAIN_A_QUICK_TOP:
-			if(CursurIndex < 7)
+			if(CursurIndex < 7){
+				if(CursurIndex == 2){
+					if(ParentActivity.LockSmartTerminal == Home.STATE_ENTERTAINMENT_SMARTTERMINAL_LOCK)
+						CursurIndex = 4;
+					else 
+						CursurIndex++;
+				}
+				else if(CursurIndex == 4){
+					if(ParentActivity.LockMultiMedia == Home.STATE_ENTERTAINMENT_MULTIMEDIA_LOCK)
+						CursurIndex = 6;
+					else 
+						CursurIndex++;
+				} else {
 				CursurIndex++;
+				}
+			}
 			else
 				CursurIndex = 0;
 			CursurDisplay(CursurIndex);
@@ -1733,6 +1767,9 @@ public class MainABaseFragment extends ParentFragment{
 		case Home.SCREEN_STATE_MAIN_A_QUICK_MIRACLOSE:
 			ParentActivity._MiracastClosePopup.ClickESC();
 			break;
+		case  Home.SCREEN_STATE_MAIN_A_QUICK_MULTI_WARNING:
+			ParentActivity._MultimediaWarningPopup.ClickESC();
+			break;
 		case Home.SCREEN_STATE_MAIN_A_LEFTUP_MACHINESTATUS_POPUP:
 			ParentActivity._AxleTempWarningPopup.ClickESC();
 			break;
@@ -1784,7 +1821,9 @@ public class MainABaseFragment extends ParentFragment{
 			case Home.SCREEN_STATE_MAIN_A_QUICK_MIRACLOSE:
 				ParentActivity._MiracastClosePopup.ClickEnter();
 				break;
-				
+			case  Home.SCREEN_STATE_MAIN_A_QUICK_MULTI_WARNING:
+				ParentActivity._MultimediaWarningPopup.ClickEnter();
+				break;
 			case Home.SCREEN_STATE_MAIN_A_KEY_MAINLIGHT:
 				_MainAKeyMainLightFragment.ClickEnter();
 				break;

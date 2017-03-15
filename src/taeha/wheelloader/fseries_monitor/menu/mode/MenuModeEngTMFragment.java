@@ -1,4 +1,4 @@
-package taeha.wheelloader.fseries_monitor.menu.mode;
+﻿package taeha.wheelloader.fseries_monitor.menu.mode;
 
 import taeha.wheelloader.fseries_monitor.animation.AppearAnimation;
 import taeha.wheelloader.fseries_monitor.animation.ChangeFragmentAnimation;
@@ -227,7 +227,11 @@ public class MenuModeEngTMFragment extends MenuBodyList_ParentFragment{
 			ParentActivity._MenuBaseFragment._MenuModeFragment._MenuModeTabFragment.setClickImageETC();
 			break;
 		case MenuModeFragment.STATE_CURSUR_LEFT:
+			if(ParentActivity.LockSmartTerminal == Home.STATE_ENTERTAINMENT_SMARTTERMINAL_LOCK & ParentActivity.LockMultiMedia == Home.STATE_ENTERTAINMENT_MULTIMEDIA_LOCK){
+				ParentActivity._MenuBaseFragment._MenuListLeftFragment.ClickPreference();
+			} else {
 			ParentActivity._MenuBaseFragment._MenuListLeftFragment.ClickMultimedia();
+			}
 			break;
 		default:
 			break;

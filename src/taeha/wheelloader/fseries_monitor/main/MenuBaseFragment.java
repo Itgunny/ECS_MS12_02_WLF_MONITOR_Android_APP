@@ -1,4 +1,4 @@
-package taeha.wheelloader.fseries_monitor.main;
+﻿package taeha.wheelloader.fseries_monitor.main;
 
 import taeha.wheelloader.fseries_monitor.animation.AppearAnimation;
 import taeha.wheelloader.fseries_monitor.animation.ChangeFragmentAnimation;
@@ -1751,7 +1751,9 @@ public class MenuBaseFragment extends ParentFragment{
 		case Home.SCREEN_STATE_MENU_USERSWITCHING_TOP:
 			_UserSwitching.ClickLeft();
 			break;
-
+		case Home.SCREEN_STATE_MENU_MANAGEMENT_ASPHONE_ENTERTAINMENT_LOCK_POPUP:
+			ParentActivity._EntertainmentLockPopup.ClickLeft();
+			break;
 		default:
 			break;
 		}
@@ -2063,6 +2065,9 @@ public class MenuBaseFragment extends ParentFragment{
 			break;
 		case Home.SCREEN_STATE_MENU_USERSWITCHING_TOP:
 			_UserSwitching.ClickRight();
+			break;
+		case Home.SCREEN_STATE_MENU_MANAGEMENT_ASPHONE_ENTERTAINMENT_LOCK_POPUP:
+			ParentActivity._EntertainmentLockPopup.ClickRight();
 			break;
 		default:
 			break;
@@ -2381,6 +2386,9 @@ public class MenuBaseFragment extends ParentFragment{
 		case Home.SCREEN_STATE_MENU_USERSWITCHING_TOP:
 			_UserSwitching.ClickESC();
 			break;
+		case Home.SCREEN_STATE_MENU_MANAGEMENT_ASPHONE_ENTERTAINMENT_LOCK_POPUP:
+			ParentActivity._EntertainmentLockPopup.ClickESC();
+			break;	
 		default:
 			break;
 		}
@@ -2696,6 +2704,9 @@ public class MenuBaseFragment extends ParentFragment{
 			break;
 		case Home.SCREEN_STATE_MENU_USERSWITCHING_TOP:
 			_UserSwitching.ClickEnter();
+			break;
+		case Home.SCREEN_STATE_MENU_MANAGEMENT_ASPHONE_ENTERTAINMENT_LOCK_POPUP:
+			ParentActivity._EntertainmentLockPopup.ClickEnter();
 			break;
 		default:
 			break;

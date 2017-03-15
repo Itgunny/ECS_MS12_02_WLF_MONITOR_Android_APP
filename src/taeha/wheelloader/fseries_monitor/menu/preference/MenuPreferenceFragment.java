@@ -1,4 +1,4 @@
-package taeha.wheelloader.fseries_monitor.menu.preference;
+﻿package taeha.wheelloader.fseries_monitor.menu.preference;
 
 import taeha.wheelloader.fseries_monitor.animation.AppearAnimation;
 import taeha.wheelloader.fseries_monitor.animation.ChangeFragmentAnimation;
@@ -235,7 +235,12 @@ public class MenuPreferenceFragment extends MenuBodyList_ParentFragment{
 		Log.d(TAG,"ClickRight");
 		switch (CursurIndex) {
 		case 0:
+			if(ParentActivity.LockSmartTerminal == Home.STATE_ENTERTAINMENT_SMARTTERMINAL_LOCK & ParentActivity.LockMultiMedia == Home.STATE_ENTERTAINMENT_MULTIMEDIA_LOCK){
+				ParentActivity._MenuBaseFragment._MenuModeFragment.setFirstScreen(Home.SCREEN_STATE_MENU_MODE_TOP);
+				ParentActivity._MenuBaseFragment._MenuListLeftFragment.ClickMode();
+			}else {
 			ParentActivity._MenuBaseFragment._MenuListLeftFragment.ClickMultimedia();
+			}
 			break;
 		case 1:
 			CursurIndex++;
