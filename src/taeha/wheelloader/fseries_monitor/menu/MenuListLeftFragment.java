@@ -359,6 +359,18 @@ public class MenuListLeftFragment extends ParentFragment{
 			textView.setText(ParentActivity.langDb.findStrGetString(index, ParentActivity.LanguageIndex));
 		}
 	}
+	
+	public void setClickable(boolean clickable) {
+		imgbtnMode.setClickable(clickable);
+		
+		imgbtnMonitoring.setClickable(clickable);
+
+		imgbtnManagement.setClickable(clickable);
+		
+		imgbtnPreference.setClickable(clickable);
+		
+		imgbtnMultimedia.setClickable(clickable);
+	}
 	/////////////////////////////////////////////////////////////////////
 	
 	public void MultiMediaMenuDisplay(int data){
@@ -377,5 +389,6 @@ public class MenuListLeftFragment extends ParentFragment{
 			break;
 		}
 	}
+	
 
 }

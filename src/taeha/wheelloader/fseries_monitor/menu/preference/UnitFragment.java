@@ -197,6 +197,14 @@ public class UnitFragment extends ParentFragment{
 		radioPressurePsi.setText(getString(ParentActivity.getResources().getString(R.string.Psi), 46));
 		ParentActivity.setMarqueeRadio(radioPressurePsi);
 		
+		radioFuelL = (RadioButton)mRoot.findViewById(R.id.radioButton_menu_body_preference_unit_fuel_l);
+		radioFuelL.setText(getString(ParentActivity.getResources().getString(R.string.l), 81));
+		ParentActivity.setMarqueeRadio(radioFuelL);
+		radioFuelGal = (RadioButton)mRoot.findViewById(R.id.radioButton_menu_body_preference_unit_fuel_gal);
+		radioFuelGal.setText(getString(ParentActivity.getResources().getString(R.string.Volume_gallon), 470));
+		ParentActivity.setMarqueeRadio(radioFuelGal);
+		
+
 		
 		textViewFuelRate = (TextFitTextView)mRoot.findViewById(R.id.textView_menu_body_preference_unit_fuel_title);
 		textViewFuelRate.setText(getString(ParentActivity.getResources().getString(R.string.Volume), 468));
@@ -209,12 +217,7 @@ public class UnitFragment extends ParentFragment{
 		textViewPressure = (TextFitTextView)mRoot.findViewById(R.id.textView_menu_body_preference_unit_pressure_title);
 		textViewPressure.setText(getString(ParentActivity.getResources().getString(R.string.Pressure), 42));
 		
-		radioFuelL = (RadioButton)mRoot.findViewById(R.id.radioButton_menu_body_preference_unit_fuel_l);
-		radioFuelL.setText(getString(ParentActivity.getResources().getString(R.string.l), 81));
-		ParentActivity.setMarqueeRadio(radioFuelL);
-		radioFuelGal = (RadioButton)mRoot.findViewById(R.id.radioButton_menu_body_preference_unit_fuel_gal);
-		radioFuelGal.setText(getString(ParentActivity.getResources().getString(R.string.Volume_gallon), 470));
-		ParentActivity.setMarqueeRadio(radioFuelGal);
+
 
 		
 	}
@@ -486,6 +489,10 @@ public class UnitFragment extends ParentFragment{
 		ParentActivity._MenuBaseFragment._MenuModeFragment.setFirstScreen(Home.SCREEN_STATE_MENU_PREFERENCE_TOP);
 	}
 	public void ClickType(int _index){
+		if((Home.LOCK_STATE_UNIT_TYPE == false && Home.LOCK_STATE_UNIT_FUEL == false && 
+				Home.LOCK_STATE_UNIT_ODO == false && Home.LOCK_STATE_UNIT_PRESSURE == false && Home.LOCK_STATE_UNIT_WEIGHT == false
+				&& Home.LOCK_STATE_UNIT_TEMP == false)
+				|| ParentActivity.LockUserSwitching == Home.STATE_USERSWITCHING_UNLOCK){
 		switch(_index){
 		case Home.UNIT_TYPE_METRIC:
 			UnitFuel = Home.UNIT_FUEL_L;
@@ -517,57 +524,84 @@ public class UnitFragment extends ParentFragment{
 		WeightDisplay(UnitWeight);
 		PressureDisplay(UnitPressure);		
 	}
+	}
 	public void ClickFuelL(){
+		if(Home.LOCK_STATE_UNIT_FUEL == false || ParentActivity.LockUserSwitching == Home.STATE_USERSWITCHING_UNLOCK){
 		UnitFuel = Home.UNIT_FUEL_L;
 		FuelDisplay(UnitFuel);
 	}
+	}
 	public void ClickFuelGal(){
+		if(Home.LOCK_STATE_UNIT_FUEL == false || ParentActivity.LockUserSwitching == Home.STATE_USERSWITCHING_UNLOCK){
 		UnitFuel = Home.UNIT_FUEL_GAL;
 		FuelDisplay(UnitFuel);
 	}
+	}
 	public void ClickTempC(){
+		if(Home.LOCK_STATE_UNIT_TEMP == false || ParentActivity.LockUserSwitching == Home.STATE_USERSWITCHING_UNLOCK){
 		UnitTemp = Home.UNIT_TEMP_C;
 		TempDisplay(UnitTemp);
 	}
+	}
 	public void ClickTempF(){
+		if(Home.LOCK_STATE_UNIT_TEMP == false || ParentActivity.LockUserSwitching == Home.STATE_USERSWITCHING_UNLOCK){
 		UnitTemp = Home.UNIT_TEMP_F;
 		TempDisplay(UnitTemp);
 	}
+	}
 	public void ClickSpeedKM(){
+		if(Home.LOCK_STATE_UNIT_ODO == false || ParentActivity.LockUserSwitching == Home.STATE_USERSWITCHING_UNLOCK){
 		UnitOdo = Home.UNIT_ODO_KM;
 		SpeedDisplay(UnitOdo);
 	}
+	}
 	public void ClickSpeedMile(){
+		if(Home.LOCK_STATE_UNIT_ODO == false || ParentActivity.LockUserSwitching == Home.STATE_USERSWITCHING_UNLOCK){
 		UnitOdo = Home.UNIT_ODO_MILE;
 		SpeedDisplay(UnitOdo);
 	}
+	}
 	public void ClickWeightTon(){
+		if(Home.LOCK_STATE_UNIT_WEIGHT == false || ParentActivity.LockUserSwitching == Home.STATE_USERSWITCHING_UNLOCK){
 		UnitWeight = Home.UNIT_WEIGHT_TON;
 		WeightDisplay(UnitWeight);
 	}
+	}
 	public void ClickWeightLB(){
+		if(Home.LOCK_STATE_UNIT_WEIGHT == false || ParentActivity.LockUserSwitching == Home.STATE_USERSWITCHING_UNLOCK){
 		UnitWeight = Home.UNIT_WEIGHT_LB;
 		WeightDisplay(UnitWeight);
 	}
+	}
 	public void ClickWeightUSTon(){
+		if(Home.LOCK_STATE_UNIT_WEIGHT == false || ParentActivity.LockUserSwitching == Home.STATE_USERSWITCHING_UNLOCK){
 		UnitWeight = Home.UNIT_WEIGHT_US_TON;
 		WeightDisplay(UnitWeight);
 	}
+	}
 	public void ClickPressureBar(){
+		if(Home.LOCK_STATE_UNIT_PRESSURE == false || ParentActivity.LockUserSwitching == Home.STATE_USERSWITCHING_UNLOCK){
 		UnitPressure = Home.UNIT_PRESSURE_BAR;
 		PressureDisplay(UnitPressure);
 	}
+	}
 	public void ClickPressureMpa(){
+		if(Home.LOCK_STATE_UNIT_PRESSURE == false || ParentActivity.LockUserSwitching == Home.STATE_USERSWITCHING_UNLOCK){
 		UnitPressure = Home.UNIT_PRESSURE_MPA;
 		PressureDisplay(UnitPressure);
 	}
+	}
 	public void ClickPressureKgf(){
+		if(Home.LOCK_STATE_UNIT_PRESSURE == false || ParentActivity.LockUserSwitching == Home.STATE_USERSWITCHING_UNLOCK){
 		UnitPressure = Home.UNIT_PRESSURE_KGF;
 		PressureDisplay(UnitPressure);
 	}
+	}
 	public void ClickPressurePsi(){
+		if(Home.LOCK_STATE_UNIT_PRESSURE == false || ParentActivity.LockUserSwitching == Home.STATE_USERSWITCHING_UNLOCK){
 		UnitPressure = Home.UNIT_PRESSURE_PSI;
 		PressureDisplay(UnitPressure);
+	}
 	}
 	/////////////////////////////////////////////////////////////////////
 	public void TypeDisplay(int _data){
@@ -590,7 +624,15 @@ public class UnitFragment extends ParentFragment{
 		default:
 			break;
 		}
-		
+		if(Home.LOCK_STATE_UNIT_TYPE == false || ParentActivity.LockUserSwitching == Home.STATE_USERSWITCHING_UNLOCK){
+			textviewMetric.setEnabled(true);
+			textviewUS.setEnabled(true);
+			textviewCustom.setEnabled(true);
+		} else {
+			textviewMetric.setEnabled(false);
+			textviewUS.setEnabled(false);
+			textviewCustom.setEnabled(false);
+		}
 		float layoutalpha;
 		boolean clickable;
 		
@@ -601,33 +643,88 @@ public class UnitFragment extends ParentFragment{
 			layoutalpha = 1;
 			clickable = true;
 		}
-		layoutTemp.setAlpha(layoutalpha);
+		
+		
+		if(Home.LOCK_STATE_UNIT_ODO == false || ParentActivity.LockUserSwitching == Home.STATE_USERSWITCHING_UNLOCK){
+			radioSpeedKM.setEnabled(true);
+			radioSpeedMile.setEnabled(true);
+		} else {
+			radioSpeedKM.setEnabled(false);
+			radioSpeedMile.setEnabled(false);
+		}
+		
+		if(Home.LOCK_STATE_UNIT_PRESSURE == false || ParentActivity.LockUserSwitching == Home.STATE_USERSWITCHING_UNLOCK){
+			radioWeightTon.setEnabled(true);
+			radioWeightLB.setEnabled(true);
+			radioWeightUSTon.setEnabled(true);
+		} else {
+			radioWeightTon.setEnabled(false);
+			radioWeightLB.setEnabled(false);
+			radioWeightUSTon.setEnabled(false);
+		}
+		
+		if(Home.LOCK_STATE_UNIT_WEIGHT == false || ParentActivity.LockUserSwitching == Home.STATE_USERSWITCHING_UNLOCK){
+			radioPressureBar.setEnabled(true);
+			radioPressureMpa.setEnabled(true);
+			radioPressureKgf.setEnabled(true);
+			radioPressurePsi.setEnabled(true);
+		} else {
+			radioPressureBar.setEnabled(false);
+			radioPressureMpa.setEnabled(false);
+			radioPressureKgf.setEnabled(false);
+			radioPressurePsi.setEnabled(false);
+		}
+		
+		if(Home.LOCK_STATE_UNIT_FUEL == false || ParentActivity.LockUserSwitching == Home.STATE_USERSWITCHING_UNLOCK){
 		layoutFuel.setAlpha(layoutalpha);
-		layoutWeight.setAlpha(layoutalpha);
-		layoutSpeed.setAlpha(layoutalpha);
-		layoutPressure.setAlpha(layoutalpha);
+			
+			radioFuelGal.setClickable(clickable);
+			radioFuelGal.setEnabled(clickable);
+			radioFuelL.setClickable(clickable);
+			radioFuelL.setEnabled(clickable);
+		}else {
+			layoutFuel.setAlpha(layoutalpha);
+			
+			radioFuelGal.setClickable(false);
+			radioFuelGal.setEnabled(false);
+			radioFuelL.setClickable(false);
+			radioFuelL.setEnabled(false);
+		}
+		
+		if(Home.LOCK_STATE_UNIT_TEMP == false || ParentActivity.LockUserSwitching == Home.STATE_USERSWITCHING_UNLOCK){
+			layoutTemp.setAlpha(layoutalpha);
 				
 		radioTempC.setEnabled(clickable);
 		radioTempC.setClickable(clickable);
 		radioTempF.setEnabled(clickable);
 		radioTempF.setClickable(clickable);
+		}else {
+			layoutTemp.setAlpha(layoutalpha);
 		
-		radioFuelGal.setClickable(clickable);
-		radioFuelGal.setEnabled(clickable);
-		radioFuelL.setClickable(clickable);
-		radioFuelL.setEnabled(clickable);
+			radioTempC.setEnabled(false);
+			radioTempC.setClickable(false);
+			radioTempF.setEnabled(false);
+			radioTempF.setClickable(false);
+		}
 		
-		radioWeightLB.setClickable(clickable);
-		radioWeightLB.setEnabled(clickable);
-		radioWeightTon.setClickable(clickable);
-		radioWeightTon.setEnabled(clickable);
-		radioWeightUSTon.setClickable(clickable);
-		radioWeightUSTon.setEnabled(clickable);
+		if(Home.LOCK_STATE_UNIT_ODO == false || ParentActivity.LockUserSwitching == Home.STATE_USERSWITCHING_UNLOCK){
+			layoutSpeed.setAlpha(layoutalpha);
 		
 		radioSpeedKM.setClickable(clickable);
 		radioSpeedKM.setEnabled(clickable);
 		radioSpeedMile.setClickable(clickable);
 		radioSpeedMile.setEnabled(clickable);
+		}else {
+			layoutSpeed.setAlpha(layoutalpha);
+			
+			radioSpeedKM.setClickable(false);
+			radioSpeedKM.setEnabled(false);
+			radioSpeedMile.setClickable(false);
+			radioSpeedMile.setEnabled(false);
+		}
+		
+		if(Home.LOCK_STATE_UNIT_PRESSURE == false || ParentActivity.LockUserSwitching == Home.STATE_USERSWITCHING_UNLOCK){
+			layoutPressure.setAlpha(layoutalpha);
 		
 		radioPressureBar.setClickable(clickable);
 		radioPressureBar.setEnabled(clickable);
@@ -637,6 +734,40 @@ public class UnitFragment extends ParentFragment{
 		radioPressureMpa.setEnabled(clickable);
 		radioPressurePsi.setClickable(clickable);		
 		radioPressurePsi.setEnabled(clickable);		
+			
+		}else {
+			layoutPressure.setAlpha(layoutalpha);
+			
+			radioPressureBar.setClickable(false);
+			radioPressureBar.setEnabled(false);
+			radioPressureKgf.setClickable(false);
+			radioPressureKgf.setEnabled(false);
+			radioPressureMpa.setClickable(false);
+			radioPressureMpa.setEnabled(false);
+			radioPressurePsi.setClickable(false);		
+			radioPressurePsi.setEnabled(false);
+		}
+		
+		if(Home.LOCK_STATE_UNIT_WEIGHT == false || ParentActivity.LockUserSwitching == Home.STATE_USERSWITCHING_UNLOCK){
+			layoutWeight.setAlpha(layoutalpha);
+			
+			radioWeightLB.setClickable(clickable);
+			radioWeightLB.setEnabled(clickable);
+			radioWeightTon.setClickable(clickable);
+			radioWeightTon.setEnabled(clickable);
+			radioWeightUSTon.setClickable(clickable);
+			radioWeightUSTon.setEnabled(clickable);
+		}else {
+			layoutWeight.setAlpha(layoutalpha);
+			
+			radioWeightLB.setClickable(false);
+			radioWeightLB.setEnabled(false);
+			radioWeightTon.setClickable(false);
+			radioWeightTon.setEnabled(false);
+			radioWeightUSTon.setClickable(false);
+			radioWeightUSTon.setEnabled(false);
+		}
+	
 	}
 	public void FuelDisplay(int _data){
 		switch (_data) {

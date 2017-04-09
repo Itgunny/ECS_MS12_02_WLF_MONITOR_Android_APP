@@ -1,4 +1,4 @@
-package taeha.wheelloader.fseries_monitor.menu.mode;
+﻿package taeha.wheelloader.fseries_monitor.menu.mode;
 
 import taeha.wheelloader.fseries_monitor.animation.AppearAnimation;
 import taeha.wheelloader.fseries_monitor.animation.ChangeFragmentAnimation;
@@ -157,6 +157,39 @@ public class SoftStopFragment extends ParentFragment{
 		radioBucketOutOff = (RadioButton)mRoot.findViewById(R.id.radioButton_menu_body_mode_softstop_bucketout_off);
 		radioBucketOutOff.setText(getString(ParentActivity.getResources().getString(R.string.Off), 20));
 		ParentActivity.setMarqueeRadio(radioBucketOutOff);
+		
+		
+		if(Home.LOCK_STATE_SOFTENDSTOP_BOOMUP == false || ParentActivity.LockUserSwitching == Home.STATE_USERSWITCHING_UNLOCK){
+			radioBoomUpOn.setEnabled(true);
+			radioBoomUpOff.setEnabled(true);
+		}else {
+			radioBoomUpOn.setEnabled(false);
+			radioBoomUpOff.setEnabled(false);
+		}
+		
+		if(Home.LOCK_STATE_SOFTENDSTOP_BOOMDOWN == false || ParentActivity.LockUserSwitching == Home.STATE_USERSWITCHING_UNLOCK){
+			radioBoomDownOn.setEnabled(true);
+			radioBoomDownOff.setEnabled(true);
+		}else {
+			radioBoomDownOn.setEnabled(false);
+			radioBoomDownOff.setEnabled(false);
+		}
+		
+		if(Home.LOCK_STATE_SOFTENDSTOP_BUCKETIN == false || ParentActivity.LockUserSwitching == Home.STATE_USERSWITCHING_UNLOCK){
+			radioBucketInOn.setEnabled(true);
+			radioBucketInOff.setEnabled(true);
+		}else {
+			radioBucketInOn.setEnabled(false);
+			radioBucketInOff.setEnabled(false);
+		}
+		
+		if(Home.LOCK_STATE_SOFTENDSTOP_BUCKETDUMP == false || ParentActivity.LockUserSwitching == Home.STATE_USERSWITCHING_UNLOCK){
+			radioBucketOutOn.setEnabled(true);
+			radioBucketOutOff.setEnabled(true);
+		}else {
+			radioBucketOutOn.setEnabled(false);
+			radioBucketOutOff.setEnabled(false);
+		}
 		
 		textBoomUpTitle = (TextFitTextView)mRoot.findViewById(R.id.textView_menu_body_mode_softstop_boomup);
 		textBoomUpTitle.setText(getString(ParentActivity.getResources().getString(R.string.Boom_Up), 236));
@@ -388,6 +421,7 @@ public class SoftStopFragment extends ParentFragment{
 		BucketOutDisplay(BucketOut);
 	}
 	public void ClickOK(){
+		
 		if(ParentActivity.AnimationRunningFlag == true)
 			return;
 		else
@@ -434,44 +468,60 @@ public class SoftStopFragment extends ParentFragment{
 		
 	}
 	public void ClickBoomUpOn(){
+		if(Home.LOCK_STATE_SOFTENDSTOP_BOOMUP == false || ParentActivity.LockUserSwitching == Home.STATE_USERSWITCHING_UNLOCK){
 		radioBoomUpOn.setChecked(true);
 		radioBoomUpOff.setChecked(false);
 		BoomUp = CAN1CommManager.DATA_STATE_SOFTSTOP_BOOMUP_ON;
 	}
+	}
 	public void ClickBoomUpOff(){
+		if(Home.LOCK_STATE_SOFTENDSTOP_BOOMUP == false || ParentActivity.LockUserSwitching == Home.STATE_USERSWITCHING_UNLOCK){
 		radioBoomUpOn.setChecked(false);
 		radioBoomUpOff.setChecked(true);
 		BoomUp = CAN1CommManager.DATA_STATE_SOFTSTOP_BOOMUP_OFF;
 	}
+	}
 	public void ClickBoomDownOn(){
+		if(Home.LOCK_STATE_SOFTENDSTOP_BOOMDOWN == false || ParentActivity.LockUserSwitching == Home.STATE_USERSWITCHING_UNLOCK){
 		radioBoomDownOn.setChecked(true);
 		radioBoomDownOff.setChecked(false);
 		BoomDown = CAN1CommManager.DATA_STATE_SOFTSTOP_BOOMDOWN_ON;
 	}
+	}
 	public void ClickBoomDownOff(){
+		if(Home.LOCK_STATE_SOFTENDSTOP_BOOMDOWN == false || ParentActivity.LockUserSwitching == Home.STATE_USERSWITCHING_UNLOCK){
 		radioBoomDownOn.setChecked(false);
 		radioBoomDownOff.setChecked(true);
 		BoomDown = CAN1CommManager.DATA_STATE_SOFTSTOP_BOOMDOWN_OFF;
 	}
+	}
 	public void ClickBucketInOn(){
+		if(Home.LOCK_STATE_SOFTENDSTOP_BUCKETIN == false || ParentActivity.LockUserSwitching == Home.STATE_USERSWITCHING_UNLOCK){
 		radioBucketInOn.setChecked(true);
 		radioBucketInOff.setChecked(false);
 		BucketIn = CAN1CommManager.DATA_STATE_SOFTSTOP_BUCKETIN_ON;
 	}
+	}
 	public void ClickBucketInOff(){
+		if(Home.LOCK_STATE_SOFTENDSTOP_BUCKETIN == false || ParentActivity.LockUserSwitching == Home.STATE_USERSWITCHING_UNLOCK){
 		radioBucketInOn.setChecked(false);
 		radioBucketInOff.setChecked(true);
 		BucketIn = CAN1CommManager.DATA_STATE_SOFTSTOP_BUCKETIN_OFF;
 	}
+	}
 	public void ClickBucketOutOn(){
+		if(Home.LOCK_STATE_SOFTENDSTOP_BUCKETDUMP == false || ParentActivity.LockUserSwitching == Home.STATE_USERSWITCHING_UNLOCK){
 		radioBucketOutOn.setChecked(true);
 		radioBucketOutOff.setChecked(false);
 		BucketOut = CAN1CommManager.DATA_STATE_SOFTSTOP_BUCKETOUT_ON;
 	}
+	}
 	public void ClickBucketOutOff(){
+		if(Home.LOCK_STATE_SOFTENDSTOP_BUCKETDUMP == false || ParentActivity.LockUserSwitching == Home.STATE_USERSWITCHING_UNLOCK){
 		radioBucketOutOn.setChecked(false);
 		radioBucketOutOff.setChecked(true);
 		BucketOut = CAN1CommManager.DATA_STATE_SOFTSTOP_BUCKETOUT_OFF;
+	}
 	}
 	/////////////////////////////////////////////////////////////////////
 	public void BoomUpDisplay(int data){

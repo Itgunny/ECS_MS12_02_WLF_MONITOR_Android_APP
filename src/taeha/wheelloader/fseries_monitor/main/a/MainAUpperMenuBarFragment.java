@@ -1,4 +1,4 @@
-package taeha.wheelloader.fseries_monitor.main.a;
+﻿package taeha.wheelloader.fseries_monitor.main.a;
 
 import java.util.Timer;
 import java.util.TimerTask;
@@ -325,6 +325,7 @@ public class MainAUpperMenuBarFragment extends ParentFragment{
 	}
 
 	public void ClickTime(){
+		if(Home.LOCK_STATE_SET_CLOCK == false || ParentActivity.LockUserSwitching == Home.STATE_USERSWITCHING_UNLOCK){
 		if(ParentActivity.AnimationRunningFlag == true)
 			return;
 		else
@@ -333,6 +334,7 @@ public class MainAUpperMenuBarFragment extends ParentFragment{
 		ParentActivity._MainChangeAnimation.StartChangeAnimation(ParentActivity._MenuBaseFragment);
 		ParentActivity.OldScreenIndex = Home.SCREEN_STATE_MAIN_A_TOP;
 		ParentActivity._MenuBaseFragment.setFirstScreenIndex(Home.SCREEN_STATE_MENU_PREFERENCE_CLOCK_TOP);
+	}
 	}
 
 	public void WarningDisplay(int Data, int CommErr){

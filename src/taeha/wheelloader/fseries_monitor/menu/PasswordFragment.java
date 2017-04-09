@@ -611,7 +611,7 @@ public abstract class PasswordFragment extends ParentFragment{
 	public void SetTitleIndex(int Index){
 		TitleIndex = Index;
 	}
-	public void PasswordIndicatorDisplay(){			// Password number Ç¥½Ã
+	public void PasswordIndicatorDisplay(){			// Password number ï¿½ï¿½ï¿½ï¿½
 		ParentActivity.runOnUiThread(new Runnable(){
 
 			@Override

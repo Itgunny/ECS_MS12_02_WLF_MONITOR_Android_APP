@@ -80,7 +80,7 @@ public class MenuPreferenceFragment extends MenuBodyList_ParentFragment{
 	protected void UpdateUI() {
 		// TODO Auto-generated method stub
 		BrightnessDisplay(ParentActivity.BrightnessManualAuto);
-		SoundOutputDisplay(ParentActivity.SoundState);
+		//SoundOutputDisplay(ParentActivity.SoundState);
 	}
 	@Override
 	protected void InitList() {
@@ -90,15 +90,15 @@ public class MenuPreferenceFragment extends MenuBodyList_ParentFragment{
 		setClickableList3(true);
 		setClickableList4(true);
 		setClickableList5(true);
-		setClickableList6(true);
+		//setClickableList6(true);
 
 		
 		setListTitle1(ParentActivity.getResources().getString(string.Brightness_Setting), 412);
 		setListTitle2(ParentActivity.getResources().getString(string.Clock_Setting), 413);
 		setListTitle3(ParentActivity.getResources().getString(string.Unit_Setting), 414);
 		setListTitle4((ParentActivity.getResources().getString(string.Display_Style) + " / " + ParentActivity.getResources().getString(string.Language)), 416, 422);
-		setListTitle5(ParentActivity.getResources().getString(string.Sound_Output_Setting), 415);	
-		setListTitle6(ParentActivity.getResources().getString(string.Camera_Setting), 216);
+		//setListTitle5(ParentActivity.getResources().getString(string.Sound_Output_Setting), 415);	
+		setListTitle5(ParentActivity.getResources().getString(string.Camera_Setting), 216);
 		
 	}
 
@@ -112,6 +112,7 @@ public class MenuPreferenceFragment extends MenuBodyList_ParentFragment{
 			ParentActivity.StartAnimationRunningTimer();
 		
 		ParentActivity._MenuBaseFragment.showBodyBrightnessAnimation();
+		
 		CursurIndex = 1;
 		CursurDisplay(CursurIndex);
 	}
@@ -153,10 +154,15 @@ public class MenuPreferenceFragment extends MenuBodyList_ParentFragment{
 	@Override
 	public void ClickList5() {
 		// TODO Auto-generated method stub
+		/* ++, -- 170321 cjg
 		// ++, 150324 bwk
 		ParentActivity.showSoundOutput();
 		//ParentActivity._MenuBaseFragment.showBodySoundOutputSettingAnimation();
 		// --, 150324 bwk
+		CursurIndex = 5;
+		CursurDisplay(CursurIndex);
+		*/
+		ParentActivity._MenuBaseFragment.showBodyCameraSettingAnimation();
 		CursurIndex = 5;
 		CursurDisplay(CursurIndex);
 	}
@@ -164,9 +170,9 @@ public class MenuPreferenceFragment extends MenuBodyList_ParentFragment{
 	@Override
 	public void ClickList6() {
 		// TODO Auto-generated method stub
-		ParentActivity._MenuBaseFragment.showBodyCameraSettingAnimation();
-		CursurIndex = 6;
-		CursurDisplay(CursurIndex);
+//		ParentActivity._MenuBaseFragment.showBodyCameraSettingAnimation();
+//		CursurIndex = 6;
+//		CursurDisplay(CursurIndex);
 		
 	}
 	
@@ -223,10 +229,6 @@ public class MenuPreferenceFragment extends MenuBodyList_ParentFragment{
 			CursurIndex--;
 			CursurDisplay(CursurIndex);
 			break;
-		case 6:
-			CursurIndex--;
-			CursurDisplay(CursurIndex);
-			break;
 		default:
 			break;
 		}
@@ -259,10 +261,6 @@ public class MenuPreferenceFragment extends MenuBodyList_ParentFragment{
 			CursurDisplay(CursurIndex);
 			break;
 		case 5:
-			CursurIndex++;
-			CursurDisplay(CursurIndex);
-			break;
-		case 6:
 			CursurIndex = 1;
 			CursurDisplay(CursurIndex);
 			
@@ -296,10 +294,6 @@ public class MenuPreferenceFragment extends MenuBodyList_ParentFragment{
 			CursurIndex = 0;
 			CursurDisplay(CursurIndex);
 			break;
-		case 6:
-			CursurIndex = 0;
-			CursurDisplay(CursurIndex);
-			break;
 		default:
 			break;
 		}
@@ -325,9 +319,6 @@ public class MenuPreferenceFragment extends MenuBodyList_ParentFragment{
 		case 5:
 			imgbtnList[4].callOnClick();
 			break;
-		case 6:
-			imgbtnList[5].callOnClick();
-			break;
 		default:
 			break;
 		}
@@ -350,9 +341,6 @@ public class MenuPreferenceFragment extends MenuBodyList_ParentFragment{
 				break;
 			case 5:
 				setListFocus(5);
-				break;
-			case 6:
-				setListFocus(6);
 				break;
 			default:
 				setListFocus(0);

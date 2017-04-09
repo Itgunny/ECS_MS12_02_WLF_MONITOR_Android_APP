@@ -1,4 +1,4 @@
-package taeha.wheelloader.fseries_monitor.menu.mode;
+﻿package taeha.wheelloader.fseries_monitor.menu.mode;
 
 import taeha.wheelloader.fseries_monitor.animation.AppearAnimation;
 import taeha.wheelloader.fseries_monitor.animation.ChangeFragmentAnimation;
@@ -171,6 +171,34 @@ public class WorkLoadFragment extends ParentFragment{
 		textViewErrorDetectionTitle  = (TextFitTextView)mRoot.findViewById(R.id.textView_menu_body_mode_workload_errordetect_title);
 		textViewErrorDetectionTitle.setText(getString(ParentActivity.getResources().getString(R.string.Error_Detection), 171));
 		
+		
+		
+		if(Home.LOCK_STATE_WEIGHINGSYSTEM == false || ParentActivity.LockUserSwitching == Home.STATE_USERSWITCHING_UNLOCK){
+			radioWeighingModeManual.setEnabled(true);
+			radioWeighingModeAuto.setEnabled(true);
+		} else {
+			radioWeighingModeManual.setEnabled(false);
+			radioWeighingModeAuto.setEnabled(false);
+		}
+		
+		if(Home.LOCK_STATE_WEIGHINGDISPLAY == false || ParentActivity.LockUserSwitching == Home.STATE_USERSWITCHING_UNLOCK){
+			radioWeighingDaily.setEnabled(true);
+			radioWeighingTotalA.setEnabled(true);
+			radioWeighingTotalB.setEnabled(true);
+			radioWeighingTotalC.setEnabled(true);
+		} else {
+			radioWeighingDaily.setEnabled(false);
+			radioWeighingTotalA.setEnabled(false);
+			radioWeighingTotalB.setEnabled(false);
+			radioWeighingTotalC.setEnabled(false);
+		}
+		if(Home.LOCK_STATE_ERRORDETECTION == false || ParentActivity.LockUserSwitching == Home.STATE_USERSWITCHING_UNLOCK){
+			radioErrorDetectionOn.setEnabled(true);
+			radioErrorDetectionOff.setEnabled(true);
+		} else {
+			radioErrorDetectionOn.setEnabled(false);
+			radioErrorDetectionOff.setEnabled(false);			
+		}
 	}
 
 	protected void InitValuables() {
@@ -406,58 +434,74 @@ public class WorkLoadFragment extends ParentFragment{
 	}
 	
 	public void ClickWeighingSystemModeManual(){
+		if(Home.LOCK_STATE_WEIGHINGSYSTEM == false || ParentActivity.LockUserSwitching == Home.STATE_USERSWITCHING_UNLOCK){
 		radioWeighingModeManual.setChecked(true);
 		radioWeighingModeAuto.setChecked(false);
 		WeighingSystemModeIndex = CAN1CommManager.DATA_STATE_WEIGHING_ACCUMULATION_MANUAL;
 	}
+	}
 	public void ClickWeighingSystemModeAuto(){
+		if(Home.LOCK_STATE_WEIGHINGSYSTEM == false || ParentActivity.LockUserSwitching == Home.STATE_USERSWITCHING_UNLOCK){
 		radioWeighingModeManual.setChecked(false);
 		radioWeighingModeAuto.setChecked(true);
 		WeighingSystemModeIndex = CAN1CommManager.DATA_STATE_WEIGHING_ACCUMULATION_AUTO;
 	}
+	}
 	
 	public void ClickWeighingSystemDisplayDaily(){
+		if(Home.LOCK_STATE_WEIGHINGDISPLAY == false || ParentActivity.LockUserSwitching == Home.STATE_USERSWITCHING_UNLOCK){
 		radioWeighingDaily.setChecked(true);
 		radioWeighingTotalA.setChecked(false);
 		radioWeighingTotalB.setChecked(false);
 		radioWeighingTotalC.setChecked(false);
 		WeighingDisplayMode = CAN1CommManager.DATA_STATE_WEIGHINGDISPLAY_DAILY;
+		}
 	//	InitButtonDisplay(WeighingDisplayMode);
 	}
 	public void ClickWeighingSystemDisplayTotalA(){
+		if(Home.LOCK_STATE_WEIGHINGDISPLAY == false || ParentActivity.LockUserSwitching == Home.STATE_USERSWITCHING_UNLOCK){
 		radioWeighingDaily.setChecked(false);
 		radioWeighingTotalA.setChecked(true);
 		radioWeighingTotalB.setChecked(false);
 		radioWeighingTotalC.setChecked(false);
 		WeighingDisplayMode = CAN1CommManager.DATA_STATE_WEIGHINGDISPLAY_TOTAL_A;
+		}
 	//	InitButtonDisplay(WeighingDisplayMode);
 	}
 	public void ClickWeighingSystemDisplayTotalB(){
+		if(Home.LOCK_STATE_WEIGHINGDISPLAY == false || ParentActivity.LockUserSwitching == Home.STATE_USERSWITCHING_UNLOCK){
 		radioWeighingDaily.setChecked(false);
 		radioWeighingTotalA.setChecked(false);
 		radioWeighingTotalB.setChecked(true);
 		radioWeighingTotalC.setChecked(false);
 		WeighingDisplayMode = CAN1CommManager.DATA_STATE_WEIGHINGDISPLAY_TOTAL_B;
+		}
 	//	InitButtonDisplay(WeighingDisplayMode);
 	}
 	public void ClickWeighingSystemDisplayTotalC(){
+		if(Home.LOCK_STATE_WEIGHINGDISPLAY == false || ParentActivity.LockUserSwitching == Home.STATE_USERSWITCHING_UNLOCK){
 		radioWeighingDaily.setChecked(false);
 		radioWeighingTotalA.setChecked(false);
 		radioWeighingTotalB.setChecked(false);
 		radioWeighingTotalC.setChecked(true);
 		WeighingDisplayMode = CAN1CommManager.DATA_STATE_WEIGHINGDISPLAY_TOTAL_C;
+		}
 	//	InitButtonDisplay(WeighingDisplayMode);
 	}
 	
 	public void ClickErrorDetectionOn(){
+		if(Home.LOCK_STATE_ERRORDETECTION == false || ParentActivity.LockUserSwitching == Home.STATE_USERSWITCHING_UNLOCK){
 		radioErrorDetectionOn.setChecked(true);
 		radioErrorDetectionOff.setChecked(false);
 		WeighingErrorDetect = CAN1CommManager.DATA_STATE_WEIGHING_ERRORDETECT_ON;
 	}
+	}
 	public void ClickErrorDetectionOff(){
+		if(Home.LOCK_STATE_ERRORDETECTION == false || ParentActivity.LockUserSwitching == Home.STATE_USERSWITCHING_UNLOCK){
 		radioErrorDetectionOn.setChecked(false);
 		radioErrorDetectionOff.setChecked(true);
 		WeighingErrorDetect = CAN1CommManager.DATA_STATE_WEIGHING_ERRORDETECT_OFF;
+	}
 	}
 	/////////////////////////////////////////////////////////////////////
 	public void WeighingSystemModeDisplay(int data){

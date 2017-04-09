@@ -1,8 +1,8 @@
-package taeha.wheelloader.fseries_monitor.main;
+ï»¿package taeha.wheelloader.fseries_monitor.main;
 
 public class UserData {
 	public int EngineMode;
-	//public int WarmingUp;	// ++, --, 150403 bwk »èÁ¦
+	//public int WarmingUp;	// ++, --, 150403 bwk ï¿½ï¿½ï¿½ï¿½
 	public int CCOMode;
 	public int ShiftMode;
 	public int TCLockUp;
@@ -26,6 +26,7 @@ public class UserData {
 	public int BrightnessAutoEndTime;
 	// --, 150407 bwk
 	public int DisplayType;
+	public int UnitType;
 	public int UnitFuel;
 	public int UnitTemp;
 	public int UnitOdo;
@@ -36,13 +37,17 @@ public class UserData {
 	public int Language;
 	public int SoundOutput;
 	public int HourmeterDisplay;
-	public int FuelDisplay;		// ++, --, 150403 bwk Ãß°¡
+	public int FuelDisplay;		// ++, --, 150403 bwk ï¿½ß°ï¿½
 	public int BoomDetentMode;
 	public int BucketDetentMode;
+	public int ReverseFanMode;
+	public int ReverseCameraMode;
+	public int SetClock;
+	public int EngineAutoShutdown;
 	
 	public UserData(){
 		EngineMode = CAN1CommManager.DATA_STATE_ENGINE_MODE_PWR;
-		//WarmingUp = CAN1CommManager.DATA_STATE_ENGINE_WARMINGUP_OFF;	// ++, --, 150403 bwk »èÁ¦
+		//WarmingUp = CAN1CommManager.DATA_STATE_ENGINE_WARMINGUP_OFF;	// ++, --, 150403 bwk ï¿½ï¿½ï¿½ï¿½
 		CCOMode = CAN1CommManager.DATA_STATE_TM_CLUTCHCUTOFF_H;
 		ShiftMode = CAN1CommManager.DATA_STATE_TM_SHIFTMODE_MANUAL;
 		TCLockUp = CAN1CommManager.DATA_STATE_TM_LOCKUPCLUTCH_ON;
@@ -66,6 +71,7 @@ public class UserData {
 		BrightnessAutoEndTime = 18;
 		// --, 150407 bwk		
 		DisplayType = Home.DISPLAY_TYPE_A;
+		UnitType = Home.UNIT_TYPE_CUSTOM;
 		UnitFuel = Home.UNIT_FUEL_L;
 		UnitTemp = Home.UNIT_TEMP_C;
 		UnitOdo = Home.UNIT_ODO_KM;
@@ -76,8 +82,14 @@ public class UserData {
 		Language = Home.STATE_DISPLAY_LANGUAGE_ENGLISH;
 		SoundOutput = Home.STATE_INTERNAL_SPK;
 		HourmeterDisplay = CAN1CommManager.DATA_STATE_HOURMETER_LATEST;
-		FuelDisplay = CAN1CommManager.DATA_STATE_AVERAGE_FUEL_RATE;			// ++, --, 150403 bwk Ãß°¡
+		FuelDisplay = CAN1CommManager.DATA_STATE_AVERAGE_FUEL_RATE;			// ++, --, 150403 bwk ï¿½ß°ï¿½
 		BoomDetentMode = CAN1CommManager.DATA_STATE_KEY_DETENT_BOOM_UPDOWN;
 		BucketDetentMode = CAN1CommManager.DATA_STATE_KEY_DETENT_BUCKET_IN;
+		
+		ReverseFanMode = CAN1CommManager.DATA_STATE_REVERSEFAN_OFF;
+		ReverseCameraMode = CAN1CommManager.DATA_STATE_CAMERA_REVERSE_OFF;
+		
+		SetClock = 0;
+		EngineAutoShutdown = CAN1CommManager.DATA_STATE_AUTOSHUTDOWN_OFF;
 	}
 }

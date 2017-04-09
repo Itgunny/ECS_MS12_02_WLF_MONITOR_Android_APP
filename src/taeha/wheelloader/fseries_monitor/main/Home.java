@@ -7,6 +7,7 @@ import java.util.Locale;
 import java.util.Timer;
 import java.util.TimerTask;
 
+import customlist.userswitching.IconTextItemUserSwitching;
 import taeha.wheelloader.fseries_monitor.animation.ChangeFragmentAnimation;
 import taeha.wheelloader.fseries_monitor.popup.AngleCalibrationResultPopup;
 import taeha.wheelloader.fseries_monitor.popup.AxleTempWarningPopup;
@@ -44,6 +45,7 @@ import taeha.wheelloader.fseries_monitor.popup.SoftwareUpdateErrorPopup;
 import taeha.wheelloader.fseries_monitor.popup.SoundOutputPopup;
 import taeha.wheelloader.fseries_monitor.popup.SpeedometerInitPopup;
 import taeha.wheelloader.fseries_monitor.popup.TCLockUpPopup;
+import taeha.wheelloader.fseries_monitor.popup.UserSwitchingLockingPopup;
 import taeha.wheelloader.fseries_monitor.popup.WeighingErrorToast;
 import taeha.wheelloader.fseries_monitor.popup.WorkLoadInitPopup;
 import taeha.wheelloader.fseries_monitor.popup.WorkLoadWeighingInitPopup1;
@@ -57,7 +59,12 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.ServiceConnection;
 import android.content.SharedPreferences;
+import android.graphics.Rect;
 import android.graphics.drawable.AnimationDrawable;
+import android.inputmethodservice.Keyboard.Key;
+import android.media.AudioManager;
+import android.media.SoundPool;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.IBinder;
@@ -794,12 +801,12 @@ public class Home extends Activity {
 	////v2.4.2.00
 	// 1. 프로그램 버전 수정(H03 보드 출하분 적용)
 	////v2.4.3.00
-	// 1. 멀티미디어 제한 기능 추가
+	// 1. 멀티미디어 및 유저스위칭 제한 기능 추가
 	// 2. Cooling Fan Max Adjust 기능 추가
-	
+	// 3. AUX 제거
 	//////////////////////////////////////////////////////////////////////////////////////
 	// TAG
-	// TAG
+
 	private  final String TAG = "Home";
 	
 	public  static final int SCREEN_STATE_FILTER 											= 0xF0000000;
@@ -944,7 +951,6 @@ public class Home extends Activity {
 	public  static final int SCREEN_STATE_MENU_MODE_ETC_DELAYSHUTDOWN_END					= 0x2136FFFF;
 	public  static final int SCREEN_STATE_MENU_MODE_ETC_END									= 0x213FFFFF;
 	
-	
 	public  static final int SCREEN_STATE_MENU_MODE_END										= 0x21FFFFFF;
 	public  static final int SCREEN_STATE_MENU_MONITORING_TOP								= 0x22000000;
 	// ++, 150329 bwk
@@ -1082,6 +1088,8 @@ public class Home extends Activity {
 	public  static final int SCREEN_STATE_MENU_MULTIMEDIA_END								= 0x25FFFFFF;
 	
 	public  static final int SCREEN_STATE_MENU_USERSWITCHING_TOP							= 0x26000000;
+	public static final int SCREEN_STATE_MENU_USERSWITCHING_POPUP = 0x26100000;
+	public static final int SCREEN_STATE_MENU_USERSWITCHING_LOCKING = 0x26200000;
 	public  static final int SCREEN_STATE_MENU_USERSWITCHING_END							= 0x26FFFFFF;
 	
 	public  static final int SCREEN_STATE_MENU_END 											= 0x2FFFFFFF;
@@ -1097,7 +1105,6 @@ public class Home extends Activity {
 	public  static final int SCREEN_STATE_MAIN_CAMERA_GEAR									= 0x52000000;
 	public  static final int SCREEN_STATE_MAIN_CAMERA_END									= 0x5FFFFFFF;
 
-	
 	public  static final int SCREEN_STATE_MAIN_ENDING										= 0x60000000;
 	
 	public  static final int SCREEN_STATE_MAIN_A_TOP 										= 0x70000000;
@@ -1217,6 +1224,9 @@ public class Home extends Activity {
 
 	public static final int STATE_ENTERTAINMENT_MULTIMEDIA_UNLOCK = 0;
 	public static final int STATE_ENTERTAINMENT_MULTIMEDIA_LOCK = 1;
+
+	public static final int STATE_USERSWITCHING_UNLOCK = 0;
+	public static final int STATE_USERSWITCHING_LOCK = 1;
 
 	public static final int MAX_AS_LENGTH 			= 21;
 	
@@ -1356,6 +1366,9 @@ public class Home extends Activity {
 	public int LockSmartTerminal;
 	public int LockMultiMedia;
 
+	// Userswitching Lock
+	public int LockUserSwitching;
+
 	// SeatBelt
 	public int SeatBelt;
 	
@@ -1435,6 +1448,8 @@ public class Home extends Activity {
 	public LanguageChangePopup 				_LanguageChangePopup;
 	public FanSelectModePopup				_FanSelectModePopup;
 	public EntertainmentLockPopup 			_EntertainmentLockPopup;
+	public UserSwitchingLockingPopup 		_UserSwitchingLockingPopup;
+
 	//Toast
 	public WeighingErrorToast				_WeighingErrorToast;
 	
@@ -1486,6 +1501,9 @@ public class Home extends Activity {
 	public boolean EngineAutoShutdownESLSetFlag;
 	public static int ESLCountThreeSecond;
 	
+	// CoolingFan
+	public int CoolingReverseFanStatus;
+
 	// Engine Auto Shutdown
 	int EngineAutoShutdownRemainingTime;
 	int OldEngineAutoShutdownRemainingTime;
@@ -1564,6 +1582,85 @@ public class Home extends Activity {
 	////////////////////////////////////////////////////
 	boolean runningCheckMiracast = false;
 	
+
+	public static int STATE_ENGINEMODE = 0;
+	public static int STATE_CCOMODE = 1;
+	public static int STATE_SHIFTMODE = 2;
+	public static int STATE_TCLOCKUP = 3;
+	public static int STATE_RIDECONTROL = 4;
+	public static int STATE_WEIGHINGSYSTEM = 5;
+	public static int STATE_WEIGHINGDISPLAY = 6;
+	public static int STATE_ERRORDETECTION = 7;
+	public static int STATE_KICKDOWN = 8;
+	public static int STATE_BUCKETPRIORITY = 9;
+	public static int STATE_SOFTENDSTOP_BOOMUP = 10;
+	public static int STATE_SOFTENDSTOP_BOOMDOWN = 11;
+	public static int STATE_SOFTENDSTOP_BUCKETIN = 12;
+	public static int STATE_SOFTENDSTOP_BUCKETDUMP = 13;
+	public static int STATE_BRIGHTNESS_MANUALAUTO = 14; // ++, --, 150407 bwk ����
+	// ��� -> ����/�ڵ����� ����
+	public static int STATE_DISPLAYTYPE = 15;
+	public static int STATE_UNIT_TYPE = 16;
+	public static int STATE_UNIT_FUEL = 17;
+	public static int STATE_UNIT_TEMP = 18;
+	public static int STATE_UNIT_ODO = 19;
+	public static int STATE_UNIT_WEIGHT = 20;
+	public static int STATE_UNIT_PRESSURE = 21;
+	public static int STATE_MACHINESTATUS_UPPER = 22;
+	public static int STATE_MACHINESTATUS_LOWER = 23;
+	public static int STATE_LANGUAGE = 24;
+	public static int STATE_SOUNDOUTPUT = 25;
+	public static int STATE_OPERATION_HISTORY = 26; // ++, --, 150403 bwk ��Ī ����
+	// STATE_HOURMETER ->
+	// STATE_OPERATION_HISTORY
+	public static int STATE_FUEL_INFO = 27; // ++, --, 150403 bwk �׸� �߰�
+	public static int STATE_BOOM_DETENT_MODE = 28;
+	public static int STATE_BUCKET_DETENT_MODE = 29;
+	public static int STATE_REVERSE_FAN_MODE = 30;
+	public static int STATE_REVERSE_CAMERA = 31;
+	public static int STATE_SET_CLOCK = 32;
+	public static int STATE_ENGINE_AUTO_SHUTDOWN = 33;
+
+	public static boolean LOCK_STATE_ENGINEMODE = false;
+	public static boolean LOCK_STATE_CCOMODE = false;
+	public static boolean LOCK_STATE_SHIFTMODE = false;
+	public static boolean LOCK_STATE_TCLOCKUP = false;
+	public static boolean LOCK_STATE_RIDECONTROL = false;
+	public static boolean LOCK_STATE_WEIGHINGSYSTEM = false;
+	public static boolean LOCK_STATE_WEIGHINGDISPLAY = false;
+	public static boolean LOCK_STATE_ERRORDETECTION = false;
+	public static boolean LOCK_STATE_KICKDOWN = false;
+	public static boolean LOCK_STATE_BUCKETPRIORITY = false;
+	public static boolean LOCK_STATE_SOFTENDSTOP_BOOMUP = false;
+	public static boolean LOCK_STATE_SOFTENDSTOP_BOOMDOWN = false;
+	public static boolean LOCK_STATE_SOFTENDSTOP_BUCKETIN = false;
+	public static boolean LOCK_STATE_SOFTENDSTOP_BUCKETDUMP = false;
+	public static boolean LOCK_STATE_BRIGHTNESS_MANUALAUTO = false;
+	public static boolean LOCK_STATE_DISPLAYTYPE = false;
+	public static boolean LOCK_STATE_UNIT_TYPE = false;
+	public static boolean LOCK_STATE_UNIT_FUEL = false;
+	public static boolean LOCK_STATE_UNIT_TEMP = false;
+	public static boolean LOCK_STATE_UNIT_ODO = false;
+	public static boolean LOCK_STATE_UNIT_WEIGHT = false;
+	public static boolean LOCK_STATE_UNIT_PRESSURE = false;
+	public static boolean LOCK_STATE_MACHINESTATUS_UPPER = false;
+	public static boolean LOCK_STATE_MACHINESTATUS_LOWER = false;
+	public static boolean LOCK_STATE_LANGUAGE = false;
+	public static boolean LOCK_STATE_SOUNDOUTPUT = false;
+	public static boolean LOCK_STATE_OPERATION_HISTORY = false;
+	public static boolean LOCK_STATE_FUEL_INFO = false;
+	public static boolean LOCK_STATE_BOOM_DETENT_MODE = false;
+	public static boolean LOCK_STATE_BUCKET_DETENT_MODE = false;
+	public static boolean LOCK_STATE_REVERSE_FAN_MODE = false;
+	public static boolean LOCK_STATE_REVERSE_CAMERA = false;
+	public static boolean LOCK_STATE_SET_CLOCK = false;
+	public static boolean LOCK_STATE_ENGINE_AUTO_SHUTDOWN = false;
+
+	boolean CheckTCLockUp = false;
+	boolean CheckEHCU = false;
+	boolean CheckTM = false;
+	boolean CheckBKCU = false;
+
 	
 	
 	boolean currentMiracastValue = false;
@@ -1576,24 +1673,26 @@ public class Home extends Activity {
 		setContentView(R.layout.activity_main);
 		Log.d(TAG, "onCreateView");
 		InitResource();
+
 		InitValuable();		// ++, --, 150212 bwk InitPopup �Ʒ����� ���� �̵�
 		InitFragment();
 		InitPopup();
 		InitAnimation();
 		InitButtonListener();
 		LoadPref();
+		LoadLockStatePref();
+
 		imgViewCameraScreen.setClickable(false);
 		
 		HandleKeyButton = new Handler() {
 			@Override
 			public void handleMessage(Message msg) {
 				KeyButtonClick(msg.what);
-				if (msg.what != 0x00)
+				if (msg.what != 0x00) {
 					Log.d(TAG, "Key : 0x" + Integer.toHexString(msg.what));
+			        }
 			}
 		};
-		
-		//StartSeatBeltTimer();
 		
 	}
 
@@ -1605,7 +1704,6 @@ public class Home extends Activity {
 	}
 	
 	/////////////////////////////////////////////////////
-
 
 	@Override
 	protected void onResume() {
@@ -1659,14 +1757,18 @@ public class Home extends Activity {
 		}
 		
 	}
+
 	//Initialization/////////////////////////////////////
 	public void InitResource(){
 		framelayoutMain = (FrameLayout) findViewById(R.id.FrameLayout_main);
 		imgViewCameraScreen = (ImageView)findViewById(R.id.imageView_main_camerascreen);
 		imgViewEnding = (ImageView)findViewById(R.id.imageView_main_ending);
 		imgViewCameraScreen.setClickable(false);
+
 	}
+
 	public void InitValuable(){
+
 		// ++, 150209 bwk
 		LangClass = new LanguageClass(this);
 		langDb = new LanguageDB(this);
@@ -1798,6 +1900,7 @@ public class Home extends Activity {
         }  
 			
 	}
+
 	public void InitFragment(){
 		_MainBBaseFragment = new MainBBaseFragment();
 		_MenuBaseFragment = new MenuBaseFragment();
@@ -1807,6 +1910,7 @@ public class Home extends Activity {
 		_EndingFragment = new EndingFragment();
 		_MainABaseFragment = new MainABaseFragment();
 	}
+
 	public void InitPopup(){
 		HomeDialog = null;
 		_QuickCouplerPopupLocking1 = new QuickCouplerPopupLocking1(this);
@@ -1851,6 +1955,7 @@ public class Home extends Activity {
 		_LanguageChangePopup = new LanguageChangePopup(this);
 		_FanSelectModePopup = new FanSelectModePopup(this);
 		_EntertainmentLockPopup = new EntertainmentLockPopup(this);
+		_UserSwitchingLockingPopup = new UserSwitchingLockingPopup(this);
 		_WeighingErrorToast = new WeighingErrorToast(this);
 	}
 
@@ -1903,7 +2008,9 @@ public class Home extends Activity {
 		_LanguageChangePopup = new LanguageChangePopup(this);
 		_FanSelectModePopup = new FanSelectModePopup(this);
 		_EntertainmentLockPopup = new EntertainmentLockPopup(this);
+		_UserSwitchingLockingPopup = new UserSwitchingLockingPopup(this);
 	}
+
 	// --, 150306 bwk
 	
 	public void InitAnimation(){
@@ -1936,8 +2043,9 @@ public class Home extends Activity {
 		});
 		
 	}
+
 	public void ExcuteCamActivitybyKey(){
-		//Log.d(TAG,"ExcuteCamActivitybyKey" + CAN1Comm.GetScreenTopFlag());
+		Log.d(TAG, "ExcuteCamActivitybyKey" + CAN1Comm.GetScreenTopFlag());
 		imgViewCameraScreen.setClickable(true);
 		CAN1Comm.CameraCurrentOnOff = true;	// ++, --, 150326 cjg
 		TempScreenIndex = OldScreenIndex;	// ++, --, 151110 cjg
@@ -2009,7 +2117,9 @@ public class Home extends Activity {
 		SaveMachineSerialNumber();
 		showMainScreen();
 		StartSeatBeltTimer();
+		SettingUserLockingIndex();
 	}
+
 	public void SaveMachineSerialNumber(){
 		String str= Integer.toString(MachineSerialNumber);
 		int tempNumber = Integer.parseInt(str,16);
@@ -2034,6 +2144,7 @@ public class Home extends Activity {
 		
 		Log.d(TAG,"SaveMachineSerialNumber");
 	}
+
 	public void SaveASPhoneNumber(){
 		byte[] ASNum;
 		int Index = 0;
@@ -2244,6 +2355,8 @@ public class Home extends Activity {
 		edit.putInt("InternalSoundLevel", InternalSoundLevel); // ++, --, 150324
 		edit.putInt("LockSmartTerminal", LockSmartTerminal);
 		edit.putInt("LockMultiMedia", LockMultiMedia);
+		edit.putInt("LockUserSwitching", LockUserSwitching);// bwk
+		edit.putInt("CameraReverseMode", CameraReverseMode);
 		edit.commit();
 		Log.d(TAG,"SavePref");
 	}
@@ -2293,6 +2406,7 @@ public class Home extends Activity {
 		MachineSerialNumber = SharePref.getInt("MachineSerialNumber", 0xFFFFFF);
 		LockSmartTerminal = SharePref.getInt("LockSmartTerminal", STATE_ENTERTAINMENT_SMARTTERMINAL_UNLOCK);
 		LockMultiMedia = SharePref.getInt("LockMultiMedia", STATE_ENTERTAINMENT_MULTIMEDIA_UNLOCK);
+		LockUserSwitching = SharePref.getInt("LockUserSwitching", STATE_USERSWITCHING_UNLOCK);
 		Log.d(TAG,"LoadPref");
 	}
 	
@@ -2322,6 +2436,7 @@ public class Home extends Activity {
 		String strBrightnessAutoStartTime = "BrightnessAutoStartTime" + Integer.toString(Index);
 		String strBrightnessAutoEndTime = "BrightnessAutoEndTime" + Integer.toString(Index);
 		// --, 150407 bwk
+		String strUnitType = "UnitType" + Integer.toString(Index);
 		String strUnitFuel = "UnitFuel" + Integer.toString(Index);
 		String strUnitTemp = "UnitTemp" + Integer.toString(Index);
 		String strUnitOdo = "UnitOdo" + Integer.toString(Index);
@@ -2335,6 +2450,9 @@ public class Home extends Activity {
 		String strFuelDisplay = "FuelDisplay" + Integer.toString(Index);
 		String strBoomDetentMode = "BoomDetentMode" + Integer.toString(Index);
 		String strBucketDetentMode = "BucketDetentMode" + Integer.toString(Index);
+
+		String strReverseFanMode = "ReverseFanMode" + Integer.toString(Index);
+		String strReverseCameraMode = "ReverseCameraMode" + Integer.toString(Index);
 
 		SharedPreferences SharePref = getSharedPreferences("Home", 0);
 		SharedPreferences.Editor edit = SharePref.edit();
@@ -2363,6 +2481,7 @@ public class Home extends Activity {
 		edit.putInt(strBrightnessAutoEndTime, _userdata.BrightnessAutoEndTime);
 		// --, 150407 bwk		
 		edit.putInt(strDisplayType, _userdata.DisplayType);
+		edit.putInt(strUnitType, _userdata.UnitType);
 		edit.putInt(strUnitFuel, _userdata.UnitFuel);
 		edit.putInt(strUnitTemp, _userdata.UnitTemp);
 		edit.putInt(strUnitOdo, _userdata.UnitOdo);
@@ -2378,10 +2497,14 @@ public class Home extends Activity {
 		edit.putInt(strBoomDetentMode, _userdata.BoomDetentMode);
 		edit.putInt(strBucketDetentMode, _userdata.BucketDetentMode);
 		
+		edit.putInt(strReverseFanMode, _userdata.ReverseFanMode);
+		edit.putInt(strReverseCameraMode, _userdata.ReverseCameraMode);
+
 		edit.commit();
 		Log.d(TAG,"SaveUserData" + Integer.toString(Index));
 		
 	}
+
 	public UserData LoadUserData(int Index){
 		String strEngineMode = "EngineMode" + Integer.toString(Index);
 		//String strWarmingUp = "WarmingUp" + Integer.toString(Index);
@@ -2409,6 +2532,7 @@ public class Home extends Activity {
 		String strBrightnessAutoEndTime = "BrightnessAutoEndTime" + Integer.toString(Index);
 		// --, 150407 bwk		
 		String strDisplayType = "DisplayType" + Integer.toString(Index);
+		String strUnitType = "UnitType" + Integer.toString(Index);
 		String strUnitFuel = "UnitFuel" + Integer.toString(Index);
 		String strUnitTemp = "UnitTemp" + Integer.toString(Index);
 		String strUnitOdo = "UnitOdo" + Integer.toString(Index);
@@ -2422,6 +2546,8 @@ public class Home extends Activity {
 		String strFuelDisplay = "FuelDisplay" + Integer.toString(Index);
 		String strBoomDetentMode = "BoomDetentMode" + Integer.toString(Index);
 		String strBucketDetentMode = "BucketDetentMode" + Integer.toString(Index);
+		String strReverseFanMode = "ReverseFanMode" + Integer.toString(Index);
+		String strReverseCameraMode = "ReverseCameraMode" + Integer.toString(Index);
 		
 		UserData _userdata;
 		_userdata = new UserData();
@@ -2453,6 +2579,7 @@ public class Home extends Activity {
 		_userdata.BrightnessAutoEndTime = SharePref.getInt(strBrightnessAutoEndTime,18);
 		// --, 150407 bwk
 		_userdata.DisplayType = SharePref.getInt(strDisplayType,Home.DISPLAY_TYPE_A);
+		_userdata.UnitType = SharePref.getInt(strUnitType, Home.UNIT_TYPE_CUSTOM);
 		_userdata.UnitFuel = SharePref.getInt(strUnitFuel, Home.UNIT_FUEL_L);
 		_userdata.UnitTemp = SharePref.getInt(strUnitTemp, Home.UNIT_TEMP_C);
 		_userdata.UnitOdo = SharePref.getInt(strUnitOdo, Home.UNIT_ODO_KM);
@@ -2468,9 +2595,12 @@ public class Home extends Activity {
 		_userdata.BoomDetentMode = SharePref.getInt(strBoomDetentMode, CAN1CommManager.DATA_STATE_KEY_DETENT_BOOM_UPDOWN);
 		_userdata.BucketDetentMode = SharePref.getInt(strBucketDetentMode, CAN1CommManager.DATA_STATE_KEY_DETENT_BUCKET_IN);
 
+		_userdata.ReverseFanMode = SharePref.getInt(strReverseFanMode, CAN1CommManager.DATA_STATE_REVERSEFAN_OFF);
+		_userdata.ReverseCameraMode = SharePref.getInt(strReverseCameraMode, CAN1CommManager.DATA_STATE_CAMERA_REVERSE_OFF);
 		Log.d(TAG,"LoadUserData" + Integer.toString(Index));
 		return _userdata;
 	}
+
 	public void setSoundOutput(int _soundstate) {
 		try {
 			CAN1Comm.LineOutfromJNI(_soundstate);
@@ -2482,6 +2612,7 @@ public class Home extends Activity {
 			Log.e(TAG, "Load Library Error");
 		}
 	}
+
 	// ++, 150213 bwk
 	public void setLanguage(){
 		try {
@@ -2494,6 +2625,7 @@ public class Home extends Activity {
 			Log.e(TAG, "Load Library Error");
 		}
 	}
+
 	// --, 150213 bwk
 /////////////////////////////////////////////////////
 	public void MainLightLampStatus(int _headlamp, int _illumination){
@@ -2520,7 +2652,6 @@ public class Home extends Activity {
 			SelectWorkLampStatus = CAN1CommManager.DATA_STATE_KEY_WORKLIGHT_OFF;
 		}
 	}
-	
 	
 	public void ClickMainLightHardKey(){
 		switch (SelectMainLampStatus) {
@@ -2617,17 +2748,16 @@ public class Home extends Activity {
 			break;
 		}
 	}
+
 	/////////////////////////////////////////////////////
 	public void showInputMachineSerial(){
-		if(MachineSerialNumber == 0xffffff)
-		{
+		if (MachineSerialNumber == 0xffffff) {
 			_MainChangeAnimation.StartChangeAnimation(_InputMachineSerialFragment);
-		}
-		else
-		{
+		} else {
 			SetMachineSerialNumber();
 		}
 	}
+
 	// ++, 150309 bwk
 	public void showMainScreen(){
 		if(DisplayType == DISPLAY_TYPE_A){
@@ -2636,6 +2766,7 @@ public class Home extends Activity {
 			_MainChangeAnimation.StartChangeAnimation(_MainABaseFragment);
 		}
 	}	
+
 	public void setScreenIndex(){
 //		Log.d(TAG,"ScreenIndex="+Integer.toHexString(ScreenIndex));
 		if(DisplayType == DISPLAY_TYPE_A){
@@ -2645,6 +2776,7 @@ public class Home extends Activity {
 		}
 //		Log.d(TAG,"ScreenIndex="+Integer.toHexString(ScreenIndex));
 	}	
+
 	// --, 150309 bwk
 	// ++, 150331 bwk
 	public void showMaintoKey(int Key){
@@ -2664,6 +2796,7 @@ public class Home extends Activity {
 			}
 		}
 	}	
+
 	// --, 150331 bwk
 	//Main Screen Fragment///////////////////////////////
 	public void showMainBFragment(){
@@ -2673,6 +2806,7 @@ public class Home extends Activity {
 		transaction.commit();
 		
 	}
+
 	public void showMainAFragment(){
 		_MainABaseFragment = new MainABaseFragment();
 		android.app.FragmentTransaction transaction = getFragmentManager().beginTransaction();
@@ -2680,6 +2814,7 @@ public class Home extends Activity {
 		transaction.commit();
 		
 	}
+
 	//Menu Screen Fragment
 	public void showMenuFragment(){
 		_MenuBaseFragment = new MenuBaseFragment();
@@ -2687,6 +2822,7 @@ public class Home extends Activity {
 		transaction.replace(R.id.FrameLayout_main, _MenuBaseFragment);
 		transaction.commit();
 	}
+
 	//ESL Check Screen Fragment
 	public void showESLCheckFragment(){
 		_ESLCheckFragment = new ESLCheckFragment();
@@ -2694,6 +2830,7 @@ public class Home extends Activity {
 		transaction.replace(R.id.FrameLayout_main, _ESLCheckFragment);
 		transaction.commit();
 	}
+
 	//ESL Check Screen Fragment
 	public void showESLPasswordFragment(){
 		_ESLPasswordFragment = new ESLPasswordFragment();
@@ -2701,6 +2838,7 @@ public class Home extends Activity {
 		transaction.replace(R.id.FrameLayout_main, _ESLPasswordFragment);
 		transaction.commit();
 	}
+
 	// Input Machine Serial Fragment
 	public void showInputMachineSerialFragment(){
 		_InputMachineSerialFragment = new InputMachineSerialFragment();
@@ -2708,6 +2846,7 @@ public class Home extends Activity {
 		transaction.replace(R.id.FrameLayout_main, _InputMachineSerialFragment);
 		transaction.commit();
 	}
+
 	//Ending Screen Fragment
 	public void showEndingFragment(){
 		_EndingFragment = new EndingFragment();
@@ -2715,7 +2854,6 @@ public class Home extends Activity {
 		transaction.replace(R.id.FrameLayout_main, _EndingFragment);
 		transaction.commit();
 	}
-	
 	
 	/////////////////////////////////////////////////////
 	//Communication//////////////////////////////////////
@@ -2735,8 +2873,7 @@ public class Home extends Activity {
 		unbindService(serConn);
 		if(stopService(new Intent(Home.this,CommService.class))){
 			Log.v(TAG,"stopService was successful");
-		}
-		else{
+		} else {
 			Log.v(TAG,"stopService was unsuccessful");
 		}
 		try {
@@ -2774,10 +2911,8 @@ public class Home extends Activity {
 				e.printStackTrace();
 			}
 		
-			
 			threadRead.start();
 			CAN1Comm.SetScreenTopFlag(true);
-			
 			
 			//CAN1Comm.TxCMDToMCU(CAN1CommManager.CMD_STARTCAN);
 			
@@ -2790,7 +2925,6 @@ public class Home extends Activity {
 			StartCommErrStopTimer();
 		}
 	};
-	
 	
 	// Service Callback
 	ICAN1CommManagerCallback mCallback = new ICAN1CommManagerCallback.Stub() {
@@ -2831,14 +2965,12 @@ public class Home extends Activity {
 				} catch (NullPointerException e) {
 					// TODO: handle exception
 					Log.e(TAG,"NullPointerException");
-				}
-				catch (Throwable t) {
+				} catch (Throwable t) {
 					// TODO: handle exception
 					Log.e(TAG,"Load Library Error");
 				}	
 				// --, 150615 cjg
-			}
-			else if(CAN1Comm.GetScreenTopFlag() == true){
+			} else if (CAN1Comm.GetScreenTopFlag() == true) {
 				try {
 					HandleKeyButton.sendMessage(HandleKeyButton.obtainMessage(Data));
 				} catch (NullPointerException e) {
@@ -2923,21 +3055,21 @@ public class Home extends Activity {
 		}
 
 	};
+
 	// Thread Class
 	public  class ReadThread implements Runnable {
 		private WeakReference<Home> activityRef = null;
 		public Message msg = null;
+
 		public ReadThread(Home activity){
 			this.activityRef = new WeakReference<Home>(activity);
 			msg = new Message();
 		}
 
-		
 		@Override
 		public void run() {
 			try{
-				while(!activityRef.get().threadRead.currentThread().isInterrupted())
-				{
+				while (!activityRef.get().threadRead.currentThread().isInterrupted()) {
 					if(activityRef.get().ScreenIndex == Home.SCREEN_STATE_MAIN_ESL_CHECK_TOP
 					||	activityRef.get().ScreenIndex == Home.SCREEN_STATE_MAIN_ESL_PASSWORD){
 						
@@ -2947,11 +3079,9 @@ public class Home extends Activity {
 					}
 					Thread.sleep(200);
 				}
-			}
-			catch(InterruptedException ie){
+			} catch (InterruptedException ie) {
 				Log.e(TAG,"InterruptedException");
-			}		
-			catch(RuntimeException ee){
+			} catch (RuntimeException ee) {
 				Log.e(TAG,"RuntimeException");
 			}
 		}
@@ -2960,20 +3090,19 @@ public class Home extends Activity {
 	public  class LoadingThread implements Runnable {
 		private WeakReference<Home> activityRef = null;
 		public Message msg = null;
+
 		public LoadingThread(Home activity){
 			this.activityRef = new WeakReference<Home>(activity);
 			msg = new Message();
 		}
 
-		
 		@Override
 		public void run() {
 			try{
 				Log.d(TAG,"LoadingThread Start");
 				LoadingEndingAnimation();
 				Log.d(TAG,"LoadingThread End");
-			}	
-			catch(RuntimeException ee){
+			} catch (RuntimeException ee) {
 				Log.e(TAG,"RuntimeException");
 			}
 		}
@@ -2983,6 +3112,7 @@ public class Home extends Activity {
 		imgViewEnding.setBackgroundResource(R.drawable.endinganimation);         
 		EndingAnimation = (AnimationDrawable) imgViewEnding.getBackground();
 	}
+
 	public void StartEndingAnimation(){
 		android.app.FragmentTransaction transaction = getFragmentManager().beginTransaction();
 		transaction.replace(R.id.FrameLayout_main, null);
@@ -2991,6 +3121,7 @@ public class Home extends Activity {
 		imgViewEnding.setVisibility(View.VISIBLE);
 		EndingAnimation.start();
 	}
+
 	public void GetDataFromNative(){
 		PreHeat = CAN1Comm.Get_MirrorHeaterStatus_724_PGN65428();
 		//RPM = CAN1Comm.Get_EngineSpeed_310_PGN65431();
@@ -3026,8 +3157,7 @@ public class Home extends Activity {
 		SetBackLight();
 		
 		// ++, 150326 bwk
-		if(SendDTCIndex > REQ_ERR_START && SendDTCIndex < Home.REQ_ERR_END)
-		{
+		if (SendDTCIndex > REQ_ERR_START && SendDTCIndex < Home.REQ_ERR_END) {
 			ReqestErrorCode();
 		}
 		// --, 150326 bwk
@@ -3043,6 +3173,7 @@ public class Home extends Activity {
 		WorkLightLampDisplay(WorkLamp,RearWorkLamp);
 		
 	}
+
 	public void UpdateUI() {
 		// TODO Auto-generated method stub
 		runOnUiThread(new Runnable() {
@@ -3818,13 +3949,15 @@ public class Home extends Activity {
 			_InputMachineSerialFragment.KeyButtonClick(Data);
 		}
 	}
+
 	/////////////////////////////////////////////////////
 	//Popup//////////////////////////////////////////////
 	public void showQuickCouplerPopupLocking1(){
-		if(AnimationRunningFlag == true)
+		if (AnimationRunningFlag == true) {
 			return;
-		else
+		} else {
 			StartAnimationRunningTimer();
+		}
 		
 		if(HomeDialog != null){
 			HomeDialog.dismiss();
@@ -3834,11 +3967,13 @@ public class Home extends Activity {
 		HomeDialog = _QuickCouplerPopupLocking1;
 		HomeDialog.show();
 	}
+
 	public void showQuickCouplerPopupUnlocking1(){
-		if(AnimationRunningFlag == true)
+		if (AnimationRunningFlag == true) {
 			return;
-		else
+		} else {
 			StartAnimationRunningTimer();
+		}
 		if(HomeDialog != null){
 			HomeDialog.dismiss();
 			HomeDialog = null;
@@ -3847,11 +3982,13 @@ public class Home extends Activity {
 		HomeDialog = _QuickCouplerPopupUnlocking1;
 		HomeDialog.show();
 	}
+
 	public void showQuickCouplerPopupLocking2(){
-		if(AnimationRunningFlag == true)
+		if (AnimationRunningFlag == true) {
 			return;
-		else
+		} else {
 			StartAnimationRunningTimer();
+		}
 		if(HomeDialog != null){
 			HomeDialog.dismiss();
 			HomeDialog = null;
@@ -3860,11 +3997,13 @@ public class Home extends Activity {
 		HomeDialog = _QuickCouplerPopupLocking2;
 		HomeDialog.show();
 	}
+
 	public void showQuickCouplerPopupUnlocking2(){
-		if(AnimationRunningFlag == true)
+		if (AnimationRunningFlag == true) {
 			return;
-		else
+		} else {
 			StartAnimationRunningTimer();
+		}
 		if(HomeDialog != null){
 			HomeDialog.dismiss();
 			HomeDialog = null;
@@ -3873,6 +4012,7 @@ public class Home extends Activity {
 		HomeDialog = _QuickCouplerPopupUnlocking2;
 		HomeDialog.show();
 	}
+
 	public void showQuickCouplerPopupUnlocking3(){
 //		if(AnimationRunningFlag == true)
 //			return;
@@ -3889,10 +4029,12 @@ public class Home extends Activity {
 	}
 	
 	public void showCCoMode(){
-		if(AnimationRunningFlag == true)
+		if (LOCK_STATE_CCOMODE == false || LockUserSwitching == Home.STATE_USERSWITCHING_UNLOCK) {
+			if (AnimationRunningFlag == true) {
 			return;
-		else
+			} else {
 			StartAnimationRunningTimer();
+			}
 		if(HomeDialog != null){
 			HomeDialog.dismiss();
 			HomeDialog = null;
@@ -3901,11 +4043,15 @@ public class Home extends Activity {
 		HomeDialog = _CCoModePopup;
 		HomeDialog.show();
 	}
+	}
+
 	public void showICCoMode(){
-		if(AnimationRunningFlag == true)
+		if (LOCK_STATE_CCOMODE == false || LockUserSwitching == Home.STATE_USERSWITCHING_UNLOCK) {
+			if (AnimationRunningFlag == true) {
 			return;
-		else
+			} else {
 			StartAnimationRunningTimer();
+			}
 		if(HomeDialog != null){
 			HomeDialog.dismiss();
 			HomeDialog = null;
@@ -3914,11 +4060,15 @@ public class Home extends Activity {
 		HomeDialog = _ICCOModePopup;
 		HomeDialog.show();
 	}
+	}
+
 	public void showShiftMode(){
-		if(AnimationRunningFlag == true)
+		if (LOCK_STATE_SHIFTMODE == false || LockUserSwitching == Home.STATE_USERSWITCHING_UNLOCK) {
+			if (AnimationRunningFlag == true) {
 			return;
-		else
+			} else {
 			StartAnimationRunningTimer();
+			}
 		if(HomeDialog != null){
 			HomeDialog.dismiss();
 			HomeDialog = null;
@@ -3927,25 +4077,32 @@ public class Home extends Activity {
 		HomeDialog = _ShiftModePopup;
 		HomeDialog.show();
 	}
+	}
+
 	public void showKickDown(){
-		if(AnimationRunningFlag == true)
+		if (LOCK_STATE_KICKDOWN == false || LockUserSwitching == Home.STATE_USERSWITCHING_UNLOCK) {
+			if (AnimationRunningFlag == true) {
 			return;
-		else
+			} else {
 			StartAnimationRunningTimer();
+			}
 		if(HomeDialog != null){
 			HomeDialog.dismiss();
 			HomeDialog = null;
 		}
 
-
 		HomeDialog = _KickDownPopup;
 		HomeDialog.show();
 	}
+	}
+
 	public void showTCLockUp(){
-		if(AnimationRunningFlag == true)
+		if (LOCK_STATE_TCLOCKUP == false || LockUserSwitching == Home.STATE_USERSWITCHING_UNLOCK) {
+			if (AnimationRunningFlag == true) {
 			return;
-		else
+			} else {
 			StartAnimationRunningTimer();
+			}
 		if(HomeDialog != null){
 			HomeDialog.dismiss();
 			HomeDialog = null;
@@ -3954,11 +4111,15 @@ public class Home extends Activity {
 		HomeDialog = _TCLockUpPopup;
 		HomeDialog.show();
 	}
+	}
+
 	public void showBucketPriority(){
-		if(AnimationRunningFlag == true)
+		if (LOCK_STATE_BUCKETPRIORITY == false || LockUserSwitching == Home.STATE_USERSWITCHING_UNLOCK) {
+			if (AnimationRunningFlag == true) {
 			return;
-		else
+			} else {
 			StartAnimationRunningTimer();
+			}
 		if(HomeDialog != null){
 			HomeDialog.dismiss();
 			HomeDialog = null;
@@ -3967,11 +4128,15 @@ public class Home extends Activity {
 		HomeDialog = _BucketPriorityPopup;
 		HomeDialog.show();
 	}
+	}
+
 	public void showEngineMode(){
-		if(AnimationRunningFlag == true)
+		if (LOCK_STATE_ENGINEMODE == false || LockUserSwitching == Home.STATE_USERSWITCHING_UNLOCK) {
+			if (AnimationRunningFlag == true) {
 			return;
-		else
+			} else {
 			StartAnimationRunningTimer();
+			}
 		if(HomeDialog != null){
 			HomeDialog.dismiss();
 			HomeDialog = null;
@@ -3980,11 +4145,14 @@ public class Home extends Activity {
 		HomeDialog = _EngineModePopup;
 		HomeDialog.show();
 	}
+	}
+
 	public void showEngineWarmingUp(){
-		if(AnimationRunningFlag == true)
+		if (AnimationRunningFlag == true) {
 			return;
-		else
+		} else {
 			StartAnimationRunningTimer();
+		}
 		if(HomeDialog != null){
 			HomeDialog.dismiss();
 			HomeDialog = null;
@@ -3993,11 +4161,13 @@ public class Home extends Activity {
 		HomeDialog = _EngineWarmingUpPopup;
 		HomeDialog.show();
 	}
+
 	public void showSpeedometerInit(){
-		if(AnimationRunningFlag == true)
+		if (AnimationRunningFlag == true) {
 			return;
-		else
+		} else {
 			StartAnimationRunningTimer();
+		}
 		//_SpeedometerInitPopup = new SpeedometerInitPopup(this);
 		if(HomeDialog != null){
 			HomeDialog.dismiss();
@@ -4007,11 +4177,13 @@ public class Home extends Activity {
 		HomeDialog = _SpeedometerInitPopup;
 		HomeDialog.show();
 	}
+
 	public void showOperationHistoryInit(){
-		if(AnimationRunningFlag == true)
+		if (AnimationRunningFlag == true) {
 			return;
-		else
+		} else {
 			StartAnimationRunningTimer();
+		}
 		//_OperationHistoryInitPopup = new OperationHistoryInitPopup(this);
 		if(HomeDialog != null){
 			HomeDialog.dismiss();
@@ -4021,11 +4193,13 @@ public class Home extends Activity {
 		HomeDialog = _OperationHistoryInitPopup;
 		HomeDialog.show();
 	}
+
 	public void showAngleCalibrationResult(){
-		if(AnimationRunningFlag == true)
+		if (AnimationRunningFlag == true) {
 			return;
-		else
+		} else {
 			StartAnimationRunningTimer();
+		}
 		
 		if(HomeDialog != null){
 			HomeDialog.dismiss();
@@ -4035,11 +4209,13 @@ public class Home extends Activity {
 		HomeDialog = _AngleCalibrationResultPopup;
 		HomeDialog.show();
 	}
+
 	public void showPressureCalibrationResult(){
-		if(AnimationRunningFlag == true)
+		if (AnimationRunningFlag == true) {
 			return;
-		else
+		} else {
 			StartAnimationRunningTimer();
+		}
 		
 		if(HomeDialog != null){
 			HomeDialog.dismiss();
@@ -4049,11 +4225,13 @@ public class Home extends Activity {
 		HomeDialog = _PressureCalibrationResultPopup;
 		HomeDialog.show();
 	}
+
 	public void showBuckDumpCalibrationResult(){
-		if(AnimationRunningFlag == true)
+		if (AnimationRunningFlag == true) {
 			return;
-		else
+		} else {
 			StartAnimationRunningTimer();
+		}
 		
 		if(HomeDialog != null){
 			HomeDialog.dismiss();
@@ -4063,11 +4241,14 @@ public class Home extends Activity {
 		HomeDialog = _BucketDumpCalibrationPopup;
 		HomeDialog.show();
 	}
+
 	public void showSoundOutput(){
-		if(AnimationRunningFlag == true)
+		if (LOCK_STATE_SOUNDOUTPUT == false || LockUserSwitching == Home.STATE_USERSWITCHING_UNLOCK) {
+			if (AnimationRunningFlag == true) {
 			return;
-		else
+			} else {
 			StartAnimationRunningTimer();
+			}
 		
 		if(HomeDialog != null){
 			HomeDialog.dismiss();
@@ -4077,11 +4258,14 @@ public class Home extends Activity {
 		HomeDialog = _SoundOutputPopup;
 		HomeDialog.show();
 	}
+	}
+
 	public void showBrkaePedalCalibration(){
-		if(AnimationRunningFlag == true)
+		if (AnimationRunningFlag == true) {
 			return;
-		else
+		} else {
 			StartAnimationRunningTimer();
+		}
 		
 		if(HomeDialog != null){
 			HomeDialog.dismiss();
@@ -4091,6 +4275,7 @@ public class Home extends Activity {
 		HomeDialog = _BrakePedalCalibrationPopup;
 		HomeDialog.show();
 	}
+
 	public void showEngineAutoShutdownCount(){
 //		if(AnimationRunningFlag == true)
 //			return;
@@ -4103,16 +4288,19 @@ public class Home extends Activity {
 		}
 		
 		OldScreenIndex = ScreenIndex;
-	//	Log.d(TAG, "showEngineAutoShutdownCount:OldScreenIndex"+Integer.toHexString(OldScreenIndex));
+		// Log.d(TAG,
+		// "showEngineAutoShutdownCount:OldScreenIndex"+Integer.toHexString(OldScreenIndex));
 
 		HomeDialog = _EngineAutoShutdownCountPopup;
 		HomeDialog.show();
 	}
+
 	public void showMaintReplace(){
-		if(AnimationRunningFlag == true)
+		if (AnimationRunningFlag == true) {
 			return;
-		else
+		} else {
 			StartAnimationRunningTimer();
+		}
 		
 		if(HomeDialog != null){
 			HomeDialog.dismiss();
@@ -4122,11 +4310,13 @@ public class Home extends Activity {
 		HomeDialog = _MaintReplacePopup;
 		HomeDialog.show();
 	}
+
 	public void showLoggedFaultDelete(){
-		if(AnimationRunningFlag == true)
+		if (AnimationRunningFlag == true) {
 			return;
-		else
+		} else {
 			StartAnimationRunningTimer();
+		}
 		
 		if(HomeDialog != null){
 			HomeDialog.dismiss();
@@ -4136,11 +4326,13 @@ public class Home extends Activity {
 		HomeDialog = _LoggedFaultDeletePopup;
 		HomeDialog.show();
 	}
+
 	public void showWorkLoadInit(){
-		if(AnimationRunningFlag == true)
+		if (AnimationRunningFlag == true) {
 			return;
-		else
+		} else {
 			StartAnimationRunningTimer();
+		}
 		
 		if(HomeDialog != null){
 			HomeDialog.dismiss();
@@ -4150,11 +4342,13 @@ public class Home extends Activity {
 		HomeDialog = _WorkLoadInitPopup;
 		HomeDialog.show();
 	}
+
 	public void showWorkLoadWeighingInit1(){
-		if(AnimationRunningFlag == true)
+		if (AnimationRunningFlag == true) {
 			return;
-		else
+		} else {
 			StartAnimationRunningTimer();
+		}
 		
 		if(HomeDialog != null){
 			HomeDialog.dismiss();
@@ -4164,11 +4358,13 @@ public class Home extends Activity {
 		HomeDialog = _WorkLoadWeighingInitPopup1;
 		HomeDialog.show();
 	}
+
 	public void showWorkLoadWeighingInit2(){
-		if(AnimationRunningFlag == true)
+		if (AnimationRunningFlag == true) {
 			return;
-		else
+		} else {
 			StartAnimationRunningTimer();
+		}
 		
 		if(HomeDialog != null){
 			HomeDialog.dismiss();
@@ -4178,6 +4374,7 @@ public class Home extends Activity {
 		HomeDialog = _WorkLoadWeighingInitPopup2;
 		HomeDialog.show();
 	}
+
 	public void showEHCUErr(){
 //		if(AnimationRunningFlag == true)
 //			return;
@@ -4194,11 +4391,13 @@ public class Home extends Activity {
 		HomeDialog = _EHCUErrorPopup;
 		HomeDialog.show();
 	}
+
 	public void showSoftStopInit(){
-		if(AnimationRunningFlag == true)
+		if (AnimationRunningFlag == true) {
 			return;
-		else
+		} else {
 			StartAnimationRunningTimer();
+		}
 		
 		if(HomeDialog != null){
 			HomeDialog.dismiss();
@@ -4208,12 +4407,14 @@ public class Home extends Activity {
 		HomeDialog = _SoftStopInitPopup;
 		HomeDialog.show();
 	}
+
 	// ++, 150313 cjg
 	public void showMultiClose(){
-		if(AnimationRunningFlag == true)
+		if (AnimationRunningFlag == true) {
 			return;
-		else
+		} else {
 			StartAnimationRunningTimer();
+		}
 		if(HomeDialog != null){
 			HomeDialog.dismiss();
 			HomeDialog = null;
@@ -4223,11 +4424,13 @@ public class Home extends Activity {
 		HomeDialog = _MultimediaClosePopup;
 		HomeDialog.show();
 	}
+
 	public void showMiraClose(){
-		if(AnimationRunningFlag == true)
+		if (AnimationRunningFlag == true) {
 			return;
-		else
+		} else {
 			StartAnimationRunningTimer();
+		}
 		if(HomeDialog != null){
 			HomeDialog.dismiss();
 			HomeDialog = null;
@@ -4256,10 +4459,11 @@ public class Home extends Activity {
 
 	// --, 150313 cjg	 
 	public void showFuelInitalPopup(){
-		if(AnimationRunningFlag == true)
+		if (AnimationRunningFlag == true) {
 			return;
-		else
+		} else {
 			StartAnimationRunningTimer();
+		}
 		
 		if(HomeDialog != null){
 			HomeDialog.dismiss();
@@ -4269,6 +4473,7 @@ public class Home extends Activity {
 		HomeDialog = _FuelInitalPopup;
 		HomeDialog.show();
 	}
+
 	public void showAxleTempWarningPopup(){
 //		if(AnimationRunningFlag == true)
 //			return;
@@ -4281,16 +4486,19 @@ public class Home extends Activity {
 			HomeDialog = null;
 		}
 		OldScreenIndex = ScreenIndex;
-		//Log.d(TAG, "showAxleTempWarningPopup:OldScreenIndex"+Integer.toHexString(OldScreenIndex));
+		// Log.d(TAG,
+		// "showAxleTempWarningPopup:OldScreenIndex"+Integer.toHexString(OldScreenIndex));
 
 		HomeDialog = _AxleTempWarningPopup;
 		HomeDialog.show();
 	}
+
 	public void showCalibrationEHCUPopup(){
-		if(AnimationRunningFlag == true)
+		if (AnimationRunningFlag == true) {
 			return;
-		else
+		} else {
 			StartAnimationRunningTimer();
+		}
 		
 		if(HomeDialog != null){
 			HomeDialog.dismiss();
@@ -4300,11 +4508,13 @@ public class Home extends Activity {
 		HomeDialog = _CalibrationEHCUPopup;
 		HomeDialog.show();
 	}
+
 	public void showBucketDumpInitCalibrationPopup(){
-		if(AnimationRunningFlag == true)
+		if (AnimationRunningFlag == true) {
 			return;
-		else
+		} else {
 			StartAnimationRunningTimer();
+		}
 		
 		if(HomeDialog != null){
 			HomeDialog.dismiss();
@@ -4314,11 +4524,13 @@ public class Home extends Activity {
 		HomeDialog = _BucketDumpInitCalibrationPopup;
 		HomeDialog.show();
 	}
+
 	public void showSoftwareUpdateErrorPopup(){
-		if(AnimationRunningFlag == true)
+		if (AnimationRunningFlag == true) {
 			return;
-		else
+		} else {
 			StartAnimationRunningTimer();
+		}
 		
 		if(HomeDialog != null){
 			HomeDialog.dismiss();
@@ -4330,10 +4542,11 @@ public class Home extends Activity {
 	}
 	
 	public void showLanguageChangePopup() {
-		if (AnimationRunningFlag == true)
+		if (AnimationRunningFlag == true) {
 			return;
-		else
+		} else {
 			StartAnimationRunningTimer();
+		}
 
 		if (HomeDialog != null) {
 			HomeDialog.dismiss();
@@ -4343,11 +4556,13 @@ public class Home extends Activity {
 		HomeDialog = _LanguageChangePopup;
 		HomeDialog.show();
 	}
+
 	public void showFanSelectModePopup() {
-		if (AnimationRunningFlag == true)
+		if (AnimationRunningFlag == true) {
 			return;
-		else
+		} else {
 			StartAnimationRunningTimer();
+		}
 
 		if (HomeDialog != null) {
 			HomeDialog.dismiss();
@@ -4374,6 +4589,22 @@ public class Home extends Activity {
 		HomeDialog.show();
 	}
 	
+	public void showUserSwitchingLockingPopup() {
+		if (AnimationRunningFlag == true) {
+			return;
+		} else {
+			StartAnimationRunningTimer();
+		}
+
+		if (HomeDialog != null) {
+			HomeDialog.dismiss();
+			HomeDialog = null;
+		}
+
+		HomeDialog = _UserSwitchingLockingPopup;
+		HomeDialog.show();
+	}
+
 	/////////////////////////////////////////////////////
 
 	//Timer//////////////////////////////////////////////
@@ -4437,6 +4668,7 @@ public class Home extends Activity {
 		mAnimationRunningTimer = new Timer();
 		mAnimationRunningTimer.schedule(new AnimationRunningTimerClass(),500);	
 	}
+
 	public void StartAnimationRunningTimer(int Time){
 		Log.d(TAG,"Animation Timer Start");
 		AnimationRunningFlag = true;
@@ -4444,6 +4676,7 @@ public class Home extends Activity {
 		mAnimationRunningTimer = new Timer();
 		mAnimationRunningTimer.schedule(new AnimationRunningTimerClass(),Time);	
 	}
+
 	public void CancelAnimationRunningTimer(){
 		if(mAnimationRunningTimer != null){
 			mAnimationRunningTimer.cancel();
@@ -5356,7 +5589,6 @@ public class Home extends Activity {
 		long long_Speed;
 		long nSpeed;
 		
-		
 		long_Speed = (_Speed  & 0xFFFFFFFFL);
 		if(long_Speed == 0xFFFFFFFFL){
 			long_Speed = 0;
@@ -5406,8 +5638,7 @@ public class Home extends Activity {
 			strMin = Integer.toString(Sec) + Unit2;
 		}else if(Min != 0 && Sec == 0){
 			strMin = GetNumberString(Min) + Unit1;
-		}
-		else{
+		} else {
 			strMin = GetNumberString(Min) + Unit1 +  " " + Integer.toString(Sec) + Unit2;
 		}
 		
@@ -5418,7 +5649,6 @@ public class Home extends Activity {
 		String strCurrent;
 		long long_Current;
 
-		
 		long_Current = current & 0xFFFFFFFFL;
 		if(long_Current == 0xFFFFFFFFL){
 			long_Current = 0;
@@ -5426,8 +5656,9 @@ public class Home extends Activity {
 		
 		long_Current *= 5;
 		
-		if(long_Current > CAN1CommManager.DATA_STATE_EPPRCURRENT_MAX)
+		if (long_Current > CAN1CommManager.DATA_STATE_EPPRCURRENT_MAX) {
 			long_Current = 0;
+		}
 		
 		strCurrent = Long.toString(long_Current);
 		
@@ -5467,14 +5698,12 @@ public class Home extends Activity {
 		String strAS = "";
 		if(as.length == 0){
 	
-		}
-		else if(as.length <= 4){
+		} else if (as.length <= 4) {
 			for(int i = 0; i < as.length; i++){
 				strAS += Integer.toString(as[i]);
 			}
 			
-		}
-		else if(as.length <= 8){
+		} else if (as.length <= 8) {
 			for(int i = 0; i < 4; i++){
 				strAS += Integer.toString(as[i]);
 			}
@@ -5620,4 +5849,279 @@ public class Home extends Activity {
 		textView.setEllipsize(TruncateAt.MARQUEE);
 		textView.setSelected(true);
 	}
+
+	public void SaveLockStatePref() {
+		SharedPreferences SharePref = getSharedPreferences("LockingUserSwitching", 0);
+		SharedPreferences.Editor edit = SharePref.edit();
+
+		edit.putBoolean("LOCK_STATE_ENGINEMODE", LOCK_STATE_ENGINEMODE);
+		edit.putBoolean("LOCK_STATE_CCOMODE", LOCK_STATE_CCOMODE);
+		edit.putBoolean("LOCK_STATE_SHIFTMODE", LOCK_STATE_SHIFTMODE);
+		edit.putBoolean("LOCK_STATE_TCLOCKUP", LOCK_STATE_TCLOCKUP);
+		edit.putBoolean("LOCK_STATE_RIDECONTROL", LOCK_STATE_RIDECONTROL);
+		edit.putBoolean("LOCK_STATE_WEIGHINGSYSTEM", LOCK_STATE_WEIGHINGSYSTEM);
+		edit.putBoolean("LOCK_STATE_WEIGHINGDISPLAY", LOCK_STATE_WEIGHINGDISPLAY);
+		edit.putBoolean("LOCK_STATE_ERRORDETECTION", LOCK_STATE_ERRORDETECTION);
+		edit.putBoolean("LOCK_STATE_KICKDOWN", LOCK_STATE_KICKDOWN);
+		edit.putBoolean("LOCK_STATE_BUCKETPRIORITY", LOCK_STATE_BUCKETPRIORITY);
+		edit.putBoolean("LOCK_STATE_SOFTENDSTOP_BOOMUP", LOCK_STATE_SOFTENDSTOP_BOOMUP);
+		edit.putBoolean("LOCK_STATE_SOFTENDSTOP_BOOMDOWN", LOCK_STATE_SOFTENDSTOP_BOOMDOWN);
+		edit.putBoolean("LOCK_STATE_SOFTENDSTOP_BUCKETIN", LOCK_STATE_SOFTENDSTOP_BUCKETIN);
+		edit.putBoolean("LOCK_STATE_SOFTENDSTOP_BUCKETDUMP", LOCK_STATE_SOFTENDSTOP_BUCKETDUMP);
+		edit.putBoolean("LOCK_STATE_BRIGHTNESS_MANUALAUTO", LOCK_STATE_BRIGHTNESS_MANUALAUTO);
+		edit.putBoolean("LOCK_STATE_DISPLAYTYPE", LOCK_STATE_DISPLAYTYPE);
+		edit.putBoolean("LOCK_STATE_UNIT_TYPE", LOCK_STATE_UNIT_TYPE);
+		edit.putBoolean("LOCK_STATE_UNIT_FUEL", LOCK_STATE_UNIT_FUEL);
+		edit.putBoolean("LOCK_STATE_UNIT_TEMP", LOCK_STATE_UNIT_TEMP);
+		edit.putBoolean("LOCK_STATE_UNIT_ODO", LOCK_STATE_UNIT_ODO);
+		edit.putBoolean("LOCK_STATE_UNIT_WEIGHT", LOCK_STATE_UNIT_WEIGHT);
+		edit.putBoolean("LOCK_STATE_UNIT_PRESSURE", LOCK_STATE_UNIT_PRESSURE);
+		edit.putBoolean("LOCK_STATE_MACHINESTATUS_UPPER", LOCK_STATE_MACHINESTATUS_UPPER);
+		edit.putBoolean("LOCK_STATE_MACHINESTATUS_LOWER", LOCK_STATE_MACHINESTATUS_LOWER);
+		edit.putBoolean("LOCK_STATE_LANGUAGE", LOCK_STATE_LANGUAGE);
+		edit.putBoolean("LOCK_STATE_SOUNDOUTPUT", LOCK_STATE_SOUNDOUTPUT);
+		edit.putBoolean("LOCK_STATE_OPERATION_HISTORY", LOCK_STATE_OPERATION_HISTORY);
+		edit.putBoolean("LOCK_STATE_FUEL_INFO", LOCK_STATE_FUEL_INFO);
+		edit.putBoolean("LOCK_STATE_BOOM_DETENT_MODE", LOCK_STATE_BOOM_DETENT_MODE);
+		edit.putBoolean("LOCK_STATE_BUCKET_DETENT_MODE", LOCK_STATE_BUCKET_DETENT_MODE);
+		edit.putBoolean("LOCK_STATE_REVERSE_FAN_MODE", LOCK_STATE_REVERSE_FAN_MODE);
+		edit.putBoolean("LOCK_STATE_REVERSE_CAMERA", LOCK_STATE_REVERSE_CAMERA);
+		edit.putBoolean("LOCK_STATE_SET_CLOCK", LOCK_STATE_SET_CLOCK);
+		edit.putBoolean("LOCK_STATE_ENGINE_AUTO_SHUTDOWN", LOCK_STATE_ENGINE_AUTO_SHUTDOWN);
+
+		edit.commit();
+	}
+
+	public void LoadLockStatePref() {
+		SharedPreferences SharePref = getSharedPreferences("LockingUserSwitching", 0);
+
+		LOCK_STATE_ENGINEMODE = SharePref.getBoolean("LOCK_STATE_ENGINEMODE", false);
+		LOCK_STATE_CCOMODE = SharePref.getBoolean("LOCK_STATE_CCOMODE", false);
+		LOCK_STATE_SHIFTMODE = SharePref.getBoolean("LOCK_STATE_SHIFTMODE", false);
+		LOCK_STATE_TCLOCKUP = SharePref.getBoolean("LOCK_STATE_TCLOCKUP", false);
+		LOCK_STATE_RIDECONTROL = SharePref.getBoolean("LOCK_STATE_RIDECONTROL", false);
+		LOCK_STATE_WEIGHINGSYSTEM = SharePref.getBoolean("LOCK_STATE_WEIGHINGSYSTEM", false);
+		LOCK_STATE_WEIGHINGDISPLAY = SharePref.getBoolean("LOCK_STATE_WEIGHINGDISPLAY", false);
+		LOCK_STATE_ERRORDETECTION = SharePref.getBoolean("LOCK_STATE_ERRORDETECTION", false);
+		LOCK_STATE_KICKDOWN = SharePref.getBoolean("LOCK_STATE_KICKDOWN", false);
+		LOCK_STATE_BUCKETPRIORITY = SharePref.getBoolean("LOCK_STATE_BUCKETPRIORITY", false);
+		LOCK_STATE_SOFTENDSTOP_BOOMUP = SharePref.getBoolean("LOCK_STATE_SOFTENDSTOP_BOOMUP", false);
+		LOCK_STATE_SOFTENDSTOP_BOOMDOWN = SharePref.getBoolean("LOCK_STATE_SOFTENDSTOP_BOOMDOWN", false);
+		LOCK_STATE_SOFTENDSTOP_BUCKETIN = SharePref.getBoolean("LOCK_STATE_SOFTENDSTOP_BUCKETIN", false);
+		LOCK_STATE_SOFTENDSTOP_BUCKETDUMP = SharePref.getBoolean("LOCK_STATE_SOFTENDSTOP_BUCKETDUMP", false);
+		LOCK_STATE_BRIGHTNESS_MANUALAUTO = SharePref.getBoolean("LOCK_STATE_BRIGHTNESS_MANUALAUTO", false);
+		LOCK_STATE_DISPLAYTYPE = SharePref.getBoolean("LOCK_STATE_DISPLAYTYPE", false);
+		LOCK_STATE_UNIT_TYPE = SharePref.getBoolean("LOCK_STATE_UNIT_TYPE", false);
+		LOCK_STATE_UNIT_FUEL = SharePref.getBoolean("LOCK_STATE_UNIT_FUEL", false);
+		LOCK_STATE_UNIT_TEMP = SharePref.getBoolean("LOCK_STATE_UNIT_TEMP", false);
+		LOCK_STATE_UNIT_ODO = SharePref.getBoolean("LOCK_STATE_UNIT_ODO", false);
+		LOCK_STATE_UNIT_WEIGHT = SharePref.getBoolean("LOCK_STATE_UNIT_WEIGHT", false);
+		LOCK_STATE_UNIT_PRESSURE = SharePref.getBoolean("LOCK_STATE_UNIT_PRESSURE", false);
+		LOCK_STATE_MACHINESTATUS_UPPER = SharePref.getBoolean("LOCK_STATE_MACHINESTATUS_UPPER", false);
+		LOCK_STATE_MACHINESTATUS_LOWER = SharePref.getBoolean("LOCK_STATE_MACHINESTATUS_LOWER", false);
+		LOCK_STATE_LANGUAGE = SharePref.getBoolean("LOCK_STATE_LANGUAGE", false);
+		LOCK_STATE_SOUNDOUTPUT = SharePref.getBoolean("LOCK_STATE_SOUNDOUTPUT", false);
+		LOCK_STATE_OPERATION_HISTORY = SharePref.getBoolean("LOCK_STATE_OPERATION_HISTORY", false);
+		LOCK_STATE_FUEL_INFO = SharePref.getBoolean("LOCK_STATE_FUEL_INFO", false);
+		LOCK_STATE_BOOM_DETENT_MODE = SharePref.getBoolean("LOCK_STATE_BOOM_DETENT_MODE", false);
+		LOCK_STATE_BUCKET_DETENT_MODE = SharePref.getBoolean("LOCK_STATE_BUCKET_DETENT_MODE", false);
+		LOCK_STATE_REVERSE_FAN_MODE = SharePref.getBoolean("LOCK_STATE_REVERSE_FAN_MODE", false);
+		LOCK_STATE_REVERSE_CAMERA = SharePref.getBoolean("LOCK_STATE_REVERSE_CAMERA", false);
+		LOCK_STATE_SET_CLOCK = SharePref.getBoolean("LOCK_STATE_SET_CLOCK", false);
+		LOCK_STATE_ENGINE_AUTO_SHUTDOWN = SharePref.getBoolean("LOCK_STATE_ENGINE_AUTO_SHUTDOWN", false);
+	}
+
+	public void SettingUserLockingIndex() {
+		Log.d(TAG, "SettingUserLockingIndex");
+		if (_CheckModel.GetTCUModel(CAN1Comm.Get_ComponentBasicInformation_1698_PGN65330_TCU()) == CheckModel.TCU_4SPEED) {
+			CheckTCLockUp = false;
+		} else {
+			CheckTCLockUp = true;
+		}
+		if (CAN1Comm.Get_ComponentCode_1699_PGN65330_EHCU() == CAN1CommManager.STATE_COMPONENTCODE_EHCU) {
+			CheckEHCU = true;
+			String strModelOption = _CheckModel.GetMCUModelOption(CAN1Comm.Get_ComponentBasicInformation_1698_PGN65330());
+			if (strModelOption.equals("TM")) {
+				CheckTM = true;
+			} else {
+				CheckTM = false;
+			}
+		} else {
+			CheckEHCU = false;
+			CheckTM = false;
 }
+
+		if (CAN1Comm.Get_CheckBKCUComm() == 1) {
+			CheckBKCU = true;
+		} else {
+			CheckBKCU = false;
+		}
+
+		int nIndex = 0;
+		STATE_ENGINEMODE = nIndex++;
+		STATE_CCOMODE = nIndex++;
+		STATE_SHIFTMODE = nIndex++;
+		if (CheckTCLockUp && CheckEHCU) {
+			STATE_TCLOCKUP = nIndex++;
+			STATE_RIDECONTROL = nIndex++;
+			STATE_WEIGHINGSYSTEM = nIndex++;
+			STATE_WEIGHINGDISPLAY = nIndex++;
+			STATE_ERRORDETECTION = nIndex++;
+			STATE_KICKDOWN = nIndex++;
+			STATE_BUCKETPRIORITY = nIndex++;
+			STATE_SOFTENDSTOP_BOOMUP = nIndex++;
+			if (CheckTM == false) {
+				STATE_SOFTENDSTOP_BOOMDOWN = nIndex++;
+				STATE_SOFTENDSTOP_BUCKETIN = nIndex++;
+				STATE_SOFTENDSTOP_BUCKETDUMP = nIndex++;
+				STATE_BRIGHTNESS_MANUALAUTO = nIndex++;
+				STATE_DISPLAYTYPE = nIndex++;
+				STATE_UNIT_TYPE = nIndex++;
+				STATE_UNIT_FUEL = nIndex++;
+				STATE_UNIT_TEMP = nIndex++;
+				STATE_UNIT_ODO = nIndex++;
+				STATE_UNIT_WEIGHT = nIndex++;
+				STATE_UNIT_PRESSURE = nIndex++;
+				STATE_MACHINESTATUS_UPPER = nIndex++;
+				STATE_MACHINESTATUS_LOWER = nIndex++;
+				STATE_LANGUAGE = nIndex++;
+				STATE_SOUNDOUTPUT = nIndex++;
+				STATE_OPERATION_HISTORY = nIndex++;
+				STATE_FUEL_INFO = nIndex++;
+				STATE_BOOM_DETENT_MODE = nIndex++;
+				STATE_BUCKET_DETENT_MODE = nIndex++;
+				STATE_REVERSE_FAN_MODE = nIndex++;
+				STATE_REVERSE_CAMERA = nIndex++;
+				STATE_SET_CLOCK = nIndex++;
+			} else {
+				STATE_BRIGHTNESS_MANUALAUTO = nIndex++;
+				STATE_DISPLAYTYPE = nIndex++;
+				STATE_UNIT_TYPE = nIndex++;
+				STATE_UNIT_FUEL = nIndex++;
+				STATE_UNIT_TEMP = nIndex++;
+				STATE_UNIT_ODO = nIndex++;
+				STATE_UNIT_WEIGHT = nIndex++;
+				STATE_UNIT_PRESSURE = nIndex++;
+				STATE_MACHINESTATUS_UPPER = nIndex++;
+				STATE_MACHINESTATUS_LOWER = nIndex++;
+				STATE_LANGUAGE = nIndex++;
+				STATE_SOUNDOUTPUT = nIndex++;
+				STATE_OPERATION_HISTORY = nIndex++;
+				STATE_FUEL_INFO = nIndex++;
+				STATE_BOOM_DETENT_MODE = nIndex++;
+				STATE_BUCKET_DETENT_MODE = nIndex++;
+				STATE_REVERSE_FAN_MODE = nIndex++;
+				STATE_REVERSE_CAMERA = nIndex++;
+				STATE_SET_CLOCK = nIndex++;
+			}
+		} else if (CheckTCLockUp) {
+			STATE_TCLOCKUP = nIndex++;
+			STATE_RIDECONTROL = nIndex++;
+			STATE_WEIGHINGSYSTEM = nIndex++;
+			STATE_WEIGHINGDISPLAY = nIndex++;
+			STATE_ERRORDETECTION = nIndex++;
+			STATE_KICKDOWN = nIndex++;
+			STATE_BRIGHTNESS_MANUALAUTO = nIndex++;
+			STATE_DISPLAYTYPE = nIndex++;
+			STATE_UNIT_TYPE = nIndex++;
+			STATE_UNIT_FUEL = nIndex++;
+			STATE_UNIT_TEMP = nIndex++;
+			STATE_UNIT_ODO = nIndex++;
+			STATE_UNIT_WEIGHT = nIndex++;
+			STATE_UNIT_PRESSURE = nIndex++;
+			STATE_MACHINESTATUS_UPPER = nIndex++;
+			STATE_MACHINESTATUS_LOWER = nIndex++;
+			STATE_LANGUAGE = nIndex++;
+			STATE_SOUNDOUTPUT = nIndex++;
+			STATE_OPERATION_HISTORY = nIndex++;
+			STATE_FUEL_INFO = nIndex++;
+			STATE_BOOM_DETENT_MODE = nIndex++;
+			STATE_BUCKET_DETENT_MODE = nIndex++;
+			STATE_REVERSE_FAN_MODE = nIndex++;
+			STATE_REVERSE_CAMERA = nIndex++;
+			STATE_SET_CLOCK = nIndex++;
+		} else if (CheckEHCU) {
+			STATE_RIDECONTROL = nIndex++;
+			STATE_WEIGHINGSYSTEM = nIndex++;
+			STATE_WEIGHINGDISPLAY = nIndex++;
+			STATE_ERRORDETECTION = nIndex++;
+			STATE_KICKDOWN = nIndex++;
+			STATE_BUCKETPRIORITY = nIndex++;
+			STATE_SOFTENDSTOP_BOOMUP = nIndex++;
+			if (CheckTM == false) {
+				STATE_SOFTENDSTOP_BOOMDOWN = nIndex++;
+				STATE_SOFTENDSTOP_BUCKETIN = nIndex++;
+				STATE_SOFTENDSTOP_BUCKETDUMP = nIndex++;
+				STATE_BRIGHTNESS_MANUALAUTO = nIndex++;
+				STATE_DISPLAYTYPE = nIndex++;
+				STATE_UNIT_TYPE = nIndex++;
+				STATE_UNIT_FUEL = nIndex++;
+				STATE_UNIT_TEMP = nIndex++;
+				STATE_UNIT_ODO = nIndex++;
+				STATE_UNIT_WEIGHT = nIndex++;
+				STATE_UNIT_PRESSURE = nIndex++;
+				STATE_MACHINESTATUS_UPPER = nIndex++;
+				STATE_MACHINESTATUS_LOWER = nIndex++;
+				STATE_LANGUAGE = nIndex++;
+				STATE_SOUNDOUTPUT = nIndex++;
+				STATE_OPERATION_HISTORY = nIndex++;
+				STATE_FUEL_INFO = nIndex++;
+				STATE_BOOM_DETENT_MODE = nIndex++;
+				STATE_BUCKET_DETENT_MODE = nIndex++;
+				STATE_REVERSE_FAN_MODE = nIndex++;
+				STATE_REVERSE_CAMERA = nIndex++;
+				STATE_SET_CLOCK = nIndex++;
+			} else {
+				STATE_BRIGHTNESS_MANUALAUTO = nIndex++;
+				STATE_DISPLAYTYPE = nIndex++;
+				STATE_UNIT_TYPE = nIndex++;
+				STATE_UNIT_FUEL = nIndex++;
+				STATE_UNIT_TEMP = nIndex++;
+				STATE_UNIT_ODO = nIndex++;
+				STATE_UNIT_WEIGHT = nIndex++;
+				STATE_UNIT_PRESSURE = nIndex++;
+				STATE_MACHINESTATUS_UPPER = nIndex++;
+				STATE_MACHINESTATUS_LOWER = nIndex++;
+				STATE_LANGUAGE = nIndex++;
+				STATE_SOUNDOUTPUT = nIndex++;
+				STATE_OPERATION_HISTORY = nIndex++;
+				STATE_FUEL_INFO = nIndex++;
+				STATE_BOOM_DETENT_MODE = nIndex++;
+				STATE_BUCKET_DETENT_MODE = nIndex++;
+				STATE_REVERSE_FAN_MODE = nIndex++;
+				STATE_REVERSE_CAMERA = nIndex++;
+				STATE_SET_CLOCK = nIndex++;
+			}
+		} else {
+			STATE_RIDECONTROL = nIndex++;
+			STATE_WEIGHINGSYSTEM = nIndex++;
+			STATE_WEIGHINGDISPLAY = nIndex++;
+			STATE_ERRORDETECTION = nIndex++;
+			STATE_KICKDOWN = nIndex++;
+			STATE_BRIGHTNESS_MANUALAUTO = nIndex++;
+			STATE_DISPLAYTYPE = nIndex++;
+			STATE_UNIT_TYPE = nIndex++;
+			STATE_UNIT_FUEL = nIndex++;
+			STATE_UNIT_TEMP = nIndex++;
+			STATE_UNIT_ODO = nIndex++;
+			STATE_UNIT_WEIGHT = nIndex++;
+			STATE_UNIT_PRESSURE = nIndex++;
+			STATE_MACHINESTATUS_UPPER = nIndex++;
+			STATE_MACHINESTATUS_LOWER = nIndex++;
+			STATE_LANGUAGE = nIndex++;
+			STATE_SOUNDOUTPUT = nIndex++;
+			STATE_OPERATION_HISTORY = nIndex++;
+			STATE_FUEL_INFO = nIndex++;
+			STATE_BOOM_DETENT_MODE = nIndex++;
+			STATE_BUCKET_DETENT_MODE = nIndex++;
+			STATE_REVERSE_FAN_MODE = nIndex++;
+			STATE_REVERSE_CAMERA = nIndex++;
+			STATE_SET_CLOCK = nIndex++;
+		}
+		if (CheckBKCU == true) {
+			STATE_ENGINE_AUTO_SHUTDOWN = nIndex++;
+		}
+	}
+
+}
+

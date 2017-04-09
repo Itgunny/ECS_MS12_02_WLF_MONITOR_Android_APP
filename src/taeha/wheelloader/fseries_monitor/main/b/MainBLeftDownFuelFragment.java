@@ -1,4 +1,4 @@
-package taeha.wheelloader.fseries_monitor.main.b;
+﻿package taeha.wheelloader.fseries_monitor.main.b;
 
 import android.os.Bundle;
 import android.util.Log;
@@ -202,6 +202,7 @@ public class MainBLeftDownFuelFragment extends ParentFragment{
 		
 	}
 	public void ClickFuel(){
+		if(Home.LOCK_STATE_FUEL_INFO == false || ParentActivity.LockUserSwitching == Home.STATE_USERSWITCHING_UNLOCK){
 		if(ParentActivity.AnimationRunningFlag == true)
 			return;
 		else
@@ -223,8 +224,7 @@ public class MainBLeftDownFuelFragment extends ParentFragment{
 		
 		ParentActivity._MainBBaseFragment._KeyTitleDisappearAnimation.StartAnimation();
 		ParentActivity._MainBBaseFragment._KeyBodyDisappearAnimation.StartAnimation();
-		
-		
+		}
 	}
 	public void setClickEnable(boolean flag){
 		ClickFlag = flag;

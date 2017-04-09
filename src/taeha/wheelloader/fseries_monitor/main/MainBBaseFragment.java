@@ -905,10 +905,12 @@ public class MainBBaseFragment extends ParentFragment{
 		transaction.commit();
 	}
 	public void showKeyRideControl(){
+		if(Home.LOCK_STATE_RIDECONTROL == false || ParentActivity.LockUserSwitching == Home.STATE_USERSWITCHING_UNLOCK){
 		android.app.FragmentTransaction transaction = getFragmentManager().beginTransaction();
 		transaction.replace(R.id.FrameLayout_screen_main_b_key_body, _MainBKeyRideControlFragment);
 		//transaction.addToBackStack("Main_Left");
 		transaction.commit();
+	}
 	}
 	public void showKeyWorkLoad(){
 		android.app.FragmentTransaction transaction = getFragmentManager().beginTransaction();
@@ -1272,9 +1274,6 @@ public class MainBBaseFragment extends ParentFragment{
 				ParentActivity._WorkLoadWeighingInitPopup2.ClickESC();
 
 		}
-		
-		
-		
 		Log.d(TAG,"showKeyScreenAnimation");
 		
 	}
@@ -1324,6 +1323,7 @@ public class MainBBaseFragment extends ParentFragment{
 		KeyBodyChangeAnimation.StartChangeAnimation(_MainBKeyQuickCouplerFragment);
 	}
 	public void showRideControlAnimation(){
+		if(Home.LOCK_STATE_RIDECONTROL == false || ParentActivity.LockUserSwitching == Home.STATE_USERSWITCHING_UNLOCK){
 		ParentActivity.StartAnimationRunningTimer();
 		showKeyScreenAnimation();
 		ParentActivity.ScreenIndex = ParentActivity.SCREEN_STATE_MAIN_B_KEY_RIDECONTROL;
@@ -1333,6 +1333,7 @@ public class MainBBaseFragment extends ParentFragment{
 		_MainBKeyTitleFragment.setTitleText(getString(ParentActivity.getResources().getString(string.Ride_Control), 155));
 		KeyTitleChangeAnimation.StartChangeAnimation(_MainBKeyTitleFragment);
 		KeyBodyChangeAnimation.StartChangeAnimation(_MainBKeyRideControlFragment);
+	}
 	}
 	public void showWorkLoadAnimation(){
 		ParentActivity.StartAnimationRunningTimer();
@@ -1609,7 +1610,7 @@ public class MainBBaseFragment extends ParentFragment{
 				return;
 			if(CAN1Comm.CameraOnFlag ==  CAN1CommManager.STATE_CAMERA_OFF){
 				ParentActivity.ExcuteCamActivitybyKey();
-			}else{
+			} else{
 				ParentActivity.ExitCam();
 			}
 			ParentActivity.StartBackHomeTimer();
@@ -1653,6 +1654,7 @@ public class MainBBaseFragment extends ParentFragment{
 	
 	// ++, 150210 bwk
 	public void ClickKeyButtonLongLeftRightEnter(){
+		if(Home.LOCK_STATE_LANGUAGE == false || ParentActivity.LockUserSwitching == Home.STATE_USERSWITCHING_UNLOCK){
 		if(ParentActivity.AnimationRunningFlag == true)
 			return;
 		else
@@ -1664,6 +1666,7 @@ public class MainBBaseFragment extends ParentFragment{
 			ParentActivity._MenuBaseFragment.setFirstScreenIndex(Home.SCREEN_STATE_MENU_PREFERENCE_DISPLAYTYPELANG_EXCEL_LANG_CHANGE);
 		}else {
 		ParentActivity._MenuBaseFragment.setFirstScreenIndex(Home.SCREEN_STATE_MENU_PREFERENCE_DISPLAYTYPELANG_LANG_CHANGE);
+	}
 	}
 	}
 	// --, 150210 bwk

@@ -1,4 +1,4 @@
-package taeha.wheelloader.fseries_monitor.main.b.key;
+﻿package taeha.wheelloader.fseries_monitor.main.b.key;
 
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -306,13 +306,19 @@ public class MainBKeyWorkLoadFragment extends ParentFragment{
 	
 	
 	public void ClickAccumulation(){
+		if(Home.LOCK_STATE_WEIGHINGSYSTEM == false || ParentActivity.LockUserSwitching == Home.STATE_USERSWITCHING_UNLOCK){
 		ParentActivity._MainBBaseFragment.showWorkLoadAccumulationAnimation();
 	}
+	}
 	public void ClickDisplay(){
+		if(Home.LOCK_STATE_WEIGHINGDISPLAY== false  || ParentActivity.LockUserSwitching == Home.STATE_USERSWITCHING_UNLOCK){
 		ParentActivity._MainBBaseFragment.showWorkLoadDisplayAnimation();
 	}
+	}
 	public void ClickErrorDetect(){
+		if(Home.LOCK_STATE_ERRORDETECTION == false || ParentActivity.LockUserSwitching == Home.STATE_USERSWITCHING_UNLOCK){
 		ParentActivity._MainBBaseFragment.showWorkLoadErrorDetectionAnimation();
+	}
 	}
 	public void ClickOK(){
 		ParentActivity._MainBBaseFragment.showKeytoDefaultScreenAnimation();

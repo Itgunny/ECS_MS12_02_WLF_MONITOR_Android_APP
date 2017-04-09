@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/menu_popup01_bg" 
+    android:splitMotionEvents="false">
+
+    <ImageView
+        android:id="@+id/imageView_popup_lock_userswitching_line"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="68dp"
+        android:src="@drawable/menu_popup01_line" />
+    
+    <RadioGroup
+        android:id="@+id/radioGroup_popup_lock_userswitching"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="85dp"
+        android:splitMotionEvents="false">
+        
+       <RadioButton
+           android:id="@+id/radioButton_popup_lock_userswitching_on"
+           android:layout_width="wrap_content"
+           android:layout_height="wrap_content"
+           android:button="@drawable/_selector_radio_btn"
+           android:text="@string/ON"
+           android:textColor="@color/black"
+           android:singleLine="true"
+           android:textSize="25sp" />
+
+       <RadioButton
+           android:id="@+id/radioButton_popup_lock_userswitching_off"
+           android:layout_width="wrap_content"
+           android:layout_height="wrap_content"
+           android:button="@drawable/_selector_radio_btn"
+           android:layout_marginLeft="50dp"
+           android:text="@string/OFF"
+           android:textColor="@color/black"
+           android:singleLine="true"
+           android:textSize="25sp" />
+       
+   </RadioGroup>
+   
+    <taeha.wheelloader.fseries_monitor.main.TextFitTextView
+        android:id="@+id/textView_popup_lock_userswitching_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="25dp"
+        android:text="사용자 설정 잠금"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textColor="@color/black"
+        android:textSize="25sp" />
+    
+    <taeha.wheelloader.fseries_monitor.main.TextFitTextView
+        android:id="@+id/textView_popup_lock_userswitching_setting_locking_state"
+        android:layout_width="360dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="44dp"
+        android:layout_marginTop="130dp"
+        android:background="@drawable/_selector_popup01_long_btn1"
+        android:gravity="center"
+        android:text="잠금 항목 설정"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textColor="@color/black" />
+
+    <taeha.wheelloader.fseries_monitor.main.TextFitTextView
+        android:id="@+id/textView_popup_lock_userswitching_apply"
+        android:layout_width="360dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="44dp"
+        android:layout_marginTop="210dp"
+        android:background="@drawable/_selector_popup01_long_btn1"
+        android:gravity="center"
+        android:text="@string/Apply"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textColor="@color/black" />
+   
+</RelativeLayout>

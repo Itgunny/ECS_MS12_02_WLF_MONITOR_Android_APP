@@ -1,4 +1,4 @@
-package customlist.userswitching;
+﻿package customlist.userswitching;
 
 
 import android.content.Context;
@@ -23,7 +23,7 @@ public class IconTextViewUserSwitching extends LinearLayout {
 	 * Icon
 	 */
 	private ImageView mIcon;
-	
+	private ImageView mIcon2;
 	/**
 	 * TextView 01
 	 */
@@ -58,6 +58,9 @@ public class IconTextViewUserSwitching extends LinearLayout {
 		// Set Icon
 		mIcon = (ImageView) findViewById(R.id.imageViewInfoIcon_userswitching);
 		mIcon.setImageDrawable(aItem.getIcon());
+		
+		mIcon2 = (ImageView)findViewById(R.id.imageViewInfoIcon_userswitching_locking);
+		mIcon2.setImageDrawable(aItem.getIcon2());
 		
 		
 		// Set Text 01
@@ -120,7 +123,9 @@ public class IconTextViewUserSwitching extends LinearLayout {
 	public void setIcon(Drawable icon) {
 		mIcon.setImageDrawable(icon);
 	}
-	
+	public void setIcon2(Drawable icon) {
+		mIcon2.setImageDrawable(icon);
+	}
 	/*
 	 * set Backgound
 	 */

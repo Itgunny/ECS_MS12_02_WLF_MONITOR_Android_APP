@@ -1,4 +1,4 @@
-package taeha.wheelloader.fseries_monitor.main.a;
+﻿package taeha.wheelloader.fseries_monitor.main.a;
 
 import taeha.wheelloader.fseries_monitor.main.CAN1CommManager;
 import taeha.wheelloader.fseries_monitor.main.CommService;
@@ -75,7 +75,6 @@ public class MainACenterQuickFragment extends MainACenterFragment{
 	protected void InitResource() {
 		// TODO Auto-generated method stub
 		//super.InitResource();
-		
 		imgbtnSmartTerminal = (ImageButton)mRoot.findViewById(R.id.imageButton_center_main_a_quick_mirror);
 		imgbtnMedia = (ImageButton)mRoot.findViewById(R.id.imageButton_center_main_a_quick_mediaplayer);
 		imgbtnKeypad = (ImageButton)mRoot.findViewById(R.id.imageButton_center_main_a_quick_keypad);
@@ -84,13 +83,14 @@ public class MainACenterQuickFragment extends MainACenterFragment{
 		imgViewOptionSelect = (ImageView)mRoot.findViewById(R.id.imageView_center_main_a_quick_option_select);
 		imgViewSmartTerminalSelect = (ImageView)mRoot.findViewById(R.id.imageView_center_main_a_quick_mirror_select);
 		imgViewMediaSelect = (ImageView)mRoot.findViewById(R.id.imageView_center_main_a_quick_mediaplayer_select);
-	
 	}
 	
 	protected void InitValuables() {
 		// TODO Auto-generated method stub
 		super.InitValuables();
 		CursurDisplayDetail(ParentActivity._MainABaseFragment.CursurIndex);
+		MultiMediaDisplay(ParentActivity.LockMultiMedia);
+		SmartTerminalDisplay(ParentActivity.LockSmartTerminal);
 	}
 	@Override
 	protected void InitButtonListener() {
@@ -165,6 +165,7 @@ public class MainACenterQuickFragment extends MainACenterFragment{
 			ParentActivity.OldScreenIndex = ParentActivity.SCREEN_STATE_MAIN_A_QUICK_TOP;
 			ParentActivity._MultimediaClosePopup.show();
 		}else{
+			ParentActivity.OldScreenIndex = ParentActivity.SCREEN_STATE_MAIN_A_QUICK_TOP;
 			String service = Context.WIFI_SERVICE;
 			final WifiManager wifi = (WifiManager)ParentActivity.getSystemService(service);
 			if(!ParentActivity.CheckRunningApp("com.powerone.wfd.sink")){
@@ -204,16 +205,10 @@ public class MainACenterQuickFragment extends MainACenterFragment{
 				ParentActivity.OldScreenIndex = ParentActivity.SCREEN_STATE_MAIN_A_QUICK_TOP;
 				ParentActivity._MiracastClosePopup.show();
 			}else{
-				Intent intent;
-				intent = ParentActivity.getPackageManager().getLaunchIntentForPackage("com.mxtech.videoplayer.ad");
-				if(intent != null){
-					ParentActivity.startActivity(intent);
-					CAN1Comm.SetMiracastFlag(false);
-					Clickable(false);	// ++, --, 150511 cjg
-					ParentActivity.StartAlwaysOntopService(); // ++, --, 150324 cjg
-					//CAN1Comm.SetMultimediaFlag(true);
-					ParentActivity.StartCheckMultimediaTimer();
-				}
+				
+				ParentActivity.OldScreenIndex = ParentActivity.SCREEN_STATE_MAIN_A_QUICK_TOP;
+				ParentActivity._MultimediaWarningPopup.show();
+
 			}
 		}
 	}	
@@ -270,6 +265,34 @@ public class MainACenterQuickFragment extends MainACenterFragment{
 			case 5:
 				imgViewMediaSelect.setVisibility(View.VISIBLE);
 				break;
+		}
+	}
+	
+	public void MultiMediaDisplay(int data){
+		switch(data){
+		case Home.STATE_ENTERTAINMENT_MULTIMEDIA_UNLOCK:
+			imgbtnMedia.setEnabled(true);
+			imgbtnMedia.setVisibility(View.VISIBLE);
+			imgViewMediaSelect.setEnabled(true);
+			break;
+		case Home.STATE_ENTERTAINMENT_MULTIMEDIA_LOCK:
+			imgbtnMedia.setEnabled(false);
+			imgbtnMedia.setVisibility(View.INVISIBLE);
+			imgViewMediaSelect.setEnabled(false);
+			break;
+		}
+	}
+	
+	public void SmartTerminalDisplay(int data){
+		switch(data){
+		case Home.STATE_ENTERTAINMENT_SMARTTERMINAL_LOCK:
+			imgbtnSmartTerminal.setEnabled(false);
+			imgbtnSmartTerminal.setVisibility(View.INVISIBLE);
+			break;
+		case Home.STATE_ENTERTAINMENT_SMARTTERMINAL_UNLOCK:
+			imgbtnSmartTerminal.setEnabled(true);
+			imgbtnSmartTerminal.setVisibility(View.VISIBLE);
+			break;
 		}
 	}
 }

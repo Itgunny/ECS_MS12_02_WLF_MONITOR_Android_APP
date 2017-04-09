@@ -140,6 +140,7 @@ public class MenuModeEngTMFragment extends MenuBodyList_ParentFragment{
 	@Override
 	public void ClickList2() {
 		// TODO Auto-generated method stub
+		
 		ParentActivity.showKickDown();
 		CursurIndex = 2;
 		CursurDisplay(CursurIndex);
@@ -150,10 +151,12 @@ public class MenuModeEngTMFragment extends MenuBodyList_ParentFragment{
 	@Override
 	public void ClickList3() {
 		// TODO Auto-generated method stub
+		
 		if(ParentActivity._CheckModel.GetMCUModelNum(CAN1Comm.Get_ComponentBasicInformation_1698_PGN65330()) == 980)
 			ParentActivity.showICCoMode();	
 		else
 			ParentActivity.showCCoMode();	
+		
 		
 		CursurIndex = 3;
 		CursurDisplay(CursurIndex);
@@ -164,7 +167,9 @@ public class MenuModeEngTMFragment extends MenuBodyList_ParentFragment{
 	@Override
 	public void ClickList4() {
 		// TODO Auto-generated method stub
+		
 		ParentActivity.showShiftMode();
+		
 		CursurIndex = 4;
 		CursurDisplay(CursurIndex);
 		ParentActivity._MenuBaseFragment._MenuModeFragment.SetModeFocusIndex(MenuModeFragment.STATE_CURSUR_LIST);
@@ -174,7 +179,9 @@ public class MenuModeEngTMFragment extends MenuBodyList_ParentFragment{
 	@Override
 	public void ClickList5() {
 		// TODO Auto-generated method stub
+		
 		ParentActivity.showTCLockUp();
+		
 		CursurIndex = 5;
 		CursurDisplay(CursurIndex);
 		ParentActivity._MenuBaseFragment._MenuModeFragment.SetModeFocusIndex(MenuModeFragment.STATE_CURSUR_LIST);

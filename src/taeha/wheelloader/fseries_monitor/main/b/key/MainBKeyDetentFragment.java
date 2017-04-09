@@ -1,4 +1,4 @@
-package taeha.wheelloader.fseries_monitor.main.b.key;
+﻿package taeha.wheelloader.fseries_monitor.main.b.key;
 
 import java.util.Timer;
 import java.util.TimerTask;
@@ -15,6 +15,7 @@ import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.TextView;
 import taeha.wheelloader.fseries_monitor.main.CAN1CommManager;
+import taeha.wheelloader.fseries_monitor.main.Home;
 import taeha.wheelloader.fseries_monitor.main.ParentFragment;
 import taeha.wheelloader.fseries_monitor.main.R;
 import taeha.wheelloader.fseries_monitor.main.TextFitTextView;
@@ -130,6 +131,26 @@ public class MainBKeyDetentFragment extends ParentFragment{
 		textViewOK = (TextFitTextView)mRoot.findViewById(R.id.textView_key_main_b_detent_low_ok);
 		textViewOK.setText(getString(ParentActivity.getResources().getString(R.string.OK), 15));
 		imgbtnOK = (ImageButton)mRoot.findViewById(R.id.ImageButton_key_main_b_detent_low_ok);
+		
+		if(Home.LOCK_STATE_BOOM_DETENT_MODE == false || ParentActivity.LockUserSwitching == Home.STATE_USERSWITCHING_UNLOCK){
+			radioBoomOff.setEnabled(true);
+			radioBoomOn.setEnabled(true);
+			textViewBoomSavePosition.setEnabled(true);
+		} else {
+			radioBoomOff.setEnabled(false);
+			radioBoomOn.setEnabled(false);
+			textViewBoomSavePosition.setEnabled(false);
+		}
+		
+		if(Home.LOCK_STATE_BUCKET_DETENT_MODE == false || ParentActivity.LockUserSwitching == Home.STATE_USERSWITCHING_UNLOCK){
+			radioBucketOff.setEnabled(true);
+			radioBucketOn.setEnabled(true);
+			textViewBucketSavePosition.setEnabled(true);
+		} else {
+			radioBucketOff.setEnabled(false);
+			radioBucketOn.setEnabled(false);
+			textViewBucketSavePosition.setEnabled(false);
+		}
 	}
 	
 	protected void InitValuables() {
@@ -300,36 +321,48 @@ public class MainBKeyDetentFragment extends ParentFragment{
 	
 	}
 	public void ClickBoomOff(){
+		if(Home.LOCK_STATE_BOOM_DETENT_MODE == false || ParentActivity.LockUserSwitching == Home.STATE_USERSWITCHING_UNLOCK){
 		CAN1Comm.Set_BoomDetentMode_223_PGN61184_123(CAN1CommManager.DATA_STATE_KEY_DETENT_BOOM_OFF);
 		CAN1Comm.TxCANToMCU(123);
 		CAN1Comm.Set_BoomDetentMode_223_PGN61184_123(7);
 		DetentBoomDisplay(CAN1CommManager.DATA_STATE_KEY_DETENT_BOOM_OFF);
 	}
+	}
 	public void ClickBoomOn(){
+		if(Home.LOCK_STATE_BOOM_DETENT_MODE == false || ParentActivity.LockUserSwitching == Home.STATE_USERSWITCHING_UNLOCK){
 		CAN1Comm.Set_BoomDetentMode_223_PGN61184_123(CAN1CommManager.DATA_STATE_KEY_DETENT_BOOM_UPDOWN);
 		CAN1Comm.TxCANToMCU(123);
 		CAN1Comm.Set_BoomDetentMode_223_PGN61184_123(7);
 		DetentBoomDisplay(CAN1CommManager.DATA_STATE_KEY_DETENT_BOOM_UPDOWN);
 	}
+	}
 	public void ClickBucketOff(){
+		if(Home.LOCK_STATE_BUCKET_DETENT_MODE == false || ParentActivity.LockUserSwitching == Home.STATE_USERSWITCHING_UNLOCK){
 		CAN1Comm.Set_BucketDetentMode_224_PGN61184_123(CAN1CommManager.DATA_STATE_KEY_DETENT_BUCKET_OFF);
 		CAN1Comm.TxCANToMCU(123);
 		CAN1Comm.Set_BucketDetentMode_224_PGN61184_123(7);
 		DetentBucketDisplay(CAN1CommManager.DATA_STATE_KEY_DETENT_BUCKET_OFF);
 	}
+	}
 	public void ClickBucketOn(){
+		if(Home.LOCK_STATE_BUCKET_DETENT_MODE == false || ParentActivity.LockUserSwitching == Home.STATE_USERSWITCHING_UNLOCK){
 		CAN1Comm.Set_BucketDetentMode_224_PGN61184_123(CAN1CommManager.DATA_STATE_KEY_DETENT_BUCKET_IN);
 		CAN1Comm.TxCANToMCU(123);
 		CAN1Comm.Set_BucketDetentMode_224_PGN61184_123(7);
 		DetentBucketDisplay(CAN1CommManager.DATA_STATE_KEY_DETENT_BUCKET_IN);
 	}
+	}
 	public void ClickBoomSavePosition(){
+		if(Home.LOCK_STATE_BOOM_DETENT_MODE == false || ParentActivity.LockUserSwitching == Home.STATE_USERSWITCHING_UNLOCK){
 		CAN1Comm.Set_RequestDetentReleasePositionSetting_PGN61184_123(15);
 		CAN1Comm.TxCANToMCU(123);
 	}
+	}
 	public void ClickBucketSavePosition(){
+		if(Home.LOCK_STATE_BUCKET_DETENT_MODE == false || ParentActivity.LockUserSwitching == Home.STATE_USERSWITCHING_UNLOCK){
 		CAN1Comm.Set_RequestDetentReleasePositionSetting_PGN61184_123(15);
 		CAN1Comm.TxCANToMCU(123);
+	}
 	}
 	public void ClickOK(){
 		ParentActivity._MainBBaseFragment.showKeytoDefaultScreenAnimation();
@@ -386,9 +419,11 @@ public class MainBKeyDetentFragment extends ParentFragment{
 			ClickBoomOn();
 			break;
 		case 3:
+			if(Home.LOCK_STATE_BOOM_DETENT_MODE == false || ParentActivity.LockUserSwitching == Home.STATE_USERSWITCHING_UNLOCK){
 			OldCursurIndex = 3;
 			CursurIndex = 8;
 			CursurDisplay(CursurIndex);
+			}
 			break;
 		case 4:			
 			ClickBucketOff();
@@ -397,9 +432,11 @@ public class MainBKeyDetentFragment extends ParentFragment{
 			ClickBucketOn();
 			break;
 		case 6:
+			if(Home.LOCK_STATE_BUCKET_DETENT_MODE == false || ParentActivity.LockUserSwitching == Home.STATE_USERSWITCHING_UNLOCK){
 			OldCursurIndex = 6;
 			CursurIndex = 8;
 			CursurDisplay(CursurIndex);
+			}
 			break;			
 		case 7:
 			ClickOK();

@@ -1,7 +1,2 @@
----- Get_WeighingSystemError_BucketFullIn_1943_PGN65450 Matches (6 in 5 files) ----
-CAN1CommManager.java (src\taeha\wheelloader\fseries_monitor\main):	public int Get_WeighingSystemError_BucketFullIn_1943_PGN65450(){ return service.Get_WeighingSystemError_BucketFullIn_1943_PGN65450();}
-CAN_SerialPort.c (jni):jint Get_WeighingSystemError_BucketFullIn_1943_PGN65450(JNIEnv * env, jobject this) {
-CAN_SerialPort.c (jni):				{"Get_WeighingSystemError_BucketFullIn_1943_PGN65450", "()I",(void*) Get_WeighingSystemError_BucketFullIn_1943_PGN65450 },
-CommService.java (src\taeha\wheelloader\fseries_monitor\main):	public native int Get_WeighingSystemError_BucketFullIn_1943_PGN65450();
-MainALeftMainFragment.java (src\taeha\wheelloader\fseries_monitor\main\a):		WeighingSystemError_BucketFullIn = CAN1Comm.Get_WeighingSystemError_BucketFullIn_1943_PGN65450();
-MainBLeftUpMachineStatusFragment.java (src\taeha\wheelloader\fseries_monitor\main\b):		WeighingSystemError_BucketFullIn = CAN1Comm.Get_WeighingSystemError_BucketFullIn_1943_PGN65450();
+---- CMD_EEPROMTEST Matches (1 in 1 files) ----
+CAN1CommManager.java (src\taeha\wheelloader\fseries_monitor\main):	public static int CMD_EEPROMTEST	= 0x0C;

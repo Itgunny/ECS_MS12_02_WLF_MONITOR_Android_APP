@@ -1,4 +1,4 @@
-package taeha.wheelloader.fseries_monitor.main.b;
+﻿package taeha.wheelloader.fseries_monitor.main.b;
 
 
 import java.util.Timer;
@@ -16,6 +16,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import taeha.wheelloader.fseries_monitor.main.CAN1CommManager;
 import taeha.wheelloader.fseries_monitor.main.CheckModel;
+import taeha.wheelloader.fseries_monitor.main.Home;
 import taeha.wheelloader.fseries_monitor.main.ParentFragment;
 import taeha.wheelloader.fseries_monitor.main.R;
 
@@ -265,6 +266,7 @@ public class MainBVirtualKeyFragment extends ParentFragment{
 		RideControlDisplay(RideControl);
 		BeaconLampDisplay(BeaconLamp);
 		MirrorHeatDisplay(MirrorHeat);
+//		FNKeyDisplay(ParentActivity.LockEntertainment);
 	}
 	/////////////////////////////////////////////////////////////////////	
 	public void FineModulationDisplay(int Data){
@@ -324,6 +326,17 @@ public class MainBVirtualKeyFragment extends ParentFragment{
 			break;
 		}
 	}
+	
+	public void FNKeyDisplay(int Data){
+		switch (Data){
+		case Home.STATE_ENTERTAINMENT_MULTIMEDIA_LOCK & Home.STATE_ENTERTAINMENT_SMARTTERMINAL_LOCK:
+			imgbtnFN.setAlpha((float)0.5);
+			break;
+		default:
+			imgbtnFN.setAlpha((float)1);
+			break;
+		}
+	} 
 	/////////////////////////////////////////////////////////////////////
 	public void ClickKeyPad(){
 		if(ParentActivity.AnimationRunningFlag == true)

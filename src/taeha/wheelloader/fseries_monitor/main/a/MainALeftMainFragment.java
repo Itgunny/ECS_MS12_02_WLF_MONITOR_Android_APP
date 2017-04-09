@@ -1,4 +1,4 @@
-package taeha.wheelloader.fseries_monitor.main.a;
+﻿package taeha.wheelloader.fseries_monitor.main.a;
 
 import taeha.wheelloader.fseries_monitor.animation.BarAnimation;
 import taeha.wheelloader.fseries_monitor.animation.ImageViewYAxisFlipAnimation;
@@ -185,6 +185,9 @@ public class MainALeftMainFragment extends ParentFragment{
 		imgbtnMachineStatus2 = (ImageButton)mRoot.findViewById(R.id.imageButton_leftup_main_a_machinestatus2);
 		imgbtnFuel = (ImageButton)mRoot.findViewById(R.id.imageButton_leftdown_main_a_fuel);		
 
+
+
+
 	}
 	
 	protected void InitValuables() {
@@ -257,9 +260,10 @@ public class MainALeftMainFragment extends ParentFragment{
 				// TODO Auto-generated method stub
 				ParentActivity._MainABaseFragment.CursurIndex = 1;
 				if(mLongPressChecker.getLongPressed() == false){
-					if(ClickFlag == true)
+					if(ClickFlag == true){
 						ClickMachineStatus();
 				}
+			}
 			}
 		});
 		imgbtnMachineStatus1.setOnTouchListener( new OnTouchListener() {
@@ -278,9 +282,10 @@ public class MainALeftMainFragment extends ParentFragment{
 				// TODO Auto-generated method stub
 				ParentActivity._MainABaseFragment.CursurIndex = 2;
 				if(mLongPressChecker.getLongPressed() == false){
-					if(ClickFlag == true)
+					if(ClickFlag == true){
 						ClickMachineStatus();
 				}
+			}
 			}
 		});		
 		imgbtnMachineStatus2.setOnTouchListener( new OnTouchListener() {
@@ -900,7 +905,10 @@ public class MainALeftMainFragment extends ParentFragment{
 	}
 	
 	public void ClickMachineStatus(){
+		if((Home.LOCK_STATE_MACHINESTATUS_UPPER == false && Home.LOCK_STATE_MACHINESTATUS_LOWER == false)
+				|| ParentActivity.LockUserSwitching == Home.STATE_USERSWITCHING_UNLOCK){
 		ShowSelectAnimation(0);
+	}
 	}
 
 	public void ClickWeighingError(View v, float X){
@@ -949,10 +957,13 @@ public class MainALeftMainFragment extends ParentFragment{
 		}
 	}
 	public void ClickFuel(){
+		if(Home.LOCK_STATE_FUEL_INFO == false || ParentActivity.LockUserSwitching == Home.STATE_USERSWITCHING_UNLOCK){
 		ShowSelectAnimation(1);
+	}
 	}
 
 	public void ShowSelectAnimation(int index){
+
 		if(ParentActivity.AnimationRunningFlag == true)
 			return;
 		else

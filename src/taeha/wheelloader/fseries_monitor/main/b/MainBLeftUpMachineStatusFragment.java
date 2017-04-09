@@ -1,4 +1,4 @@
-package taeha.wheelloader.fseries_monitor.main.b;
+﻿package taeha.wheelloader.fseries_monitor.main.b;
 
 import actionpopup.ActionItem;
 import actionpopup.QuickAction;
@@ -759,6 +759,8 @@ public class MainBLeftUpMachineStatusFragment extends ParentFragment{
 
 	///////////////////////////////////////////////////////////////////////////////////////////////////////////
 	public void ClickMachineStatus(){
+		if((Home.LOCK_STATE_MACHINESTATUS_UPPER == false && Home.LOCK_STATE_MACHINESTATUS_LOWER == false)
+				|| ParentActivity.LockUserSwitching == Home.STATE_USERSWITCHING_UNLOCK){
 		if(ParentActivity.AnimationRunningFlag == true)
 			return;
 		else
@@ -787,6 +789,7 @@ public class MainBLeftUpMachineStatusFragment extends ParentFragment{
 		{
 			showMachineStatusFragment();
 		}
+	}
 	}
 
 	// ++, 150212 bwk

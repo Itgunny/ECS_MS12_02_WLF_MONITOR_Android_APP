@@ -8,6 +8,7 @@ import taeha.wheelloader.fseries_monitor.main.R.string;
 import taeha.wheelloader.fseries_monitor.menu.MenuInterTitleFragment;
 import taeha.wheelloader.fseries_monitor.menu.MenuListLeftFragment;
 import taeha.wheelloader.fseries_monitor.menu.MenuListTitleFragment;
+import taeha.wheelloader.fseries_monitor.menu.SettingLockUserSwitchingFragment;
 import taeha.wheelloader.fseries_monitor.menu.UserSwitching;
 import taeha.wheelloader.fseries_monitor.menu.management.BucketDumpCalibration;
 import taeha.wheelloader.fseries_monitor.menu.management.ChangeASPhoneNumberFragment;
@@ -202,6 +203,7 @@ public class MenuBaseFragment extends ParentFragment{
 	public LanguageExcelListFragment				_LanguageExcelListFragment;
 	//UserSwitching
 	public UserSwitching							_UserSwitching;
+	public SettingLockUserSwitchingFragment 		_SettingLockUserSwitchingFragment;
 	//////////////////////////////////////////////////
 
 	//ANIMATION///////////////////////////////////////
@@ -335,6 +337,7 @@ public class MenuBaseFragment extends ParentFragment{
 		_UnitFragment = new UnitFragment();
 		_DisplayTypeListFragment = new DisplayTypeListFragment();
 		_UserSwitching = new UserSwitching();
+		_SettingLockUserSwitchingFragment = new SettingLockUserSwitchingFragment();
 		_LanguageListFragment = new LanguageListFragment();	// ++, --, 150206 bwk
 		_DisplayTypeFragment = new DisplayTypeFragment();	// ++, --, 150309 bwk
 		_SoundOutputSettingFragment = new SoundOutputSettingFragment();	// ++, --, 150324 bwk
@@ -431,6 +434,7 @@ public class MenuBaseFragment extends ParentFragment{
 		transaction.detach(_UnitFragment);
 		transaction.detach(_DisplayTypeListFragment);
 		transaction.detach(_UserSwitching);
+		transaction.detach(_SettingLockUserSwitchingFragment);
 		transaction.detach(_LanguageListFragment);	// ++, --, 150206 bwk
 		transaction.detach(_DisplayTypeFragment);	// ++, --, 150309 bwk
 		transaction.detach(_SoundOutputSettingFragment);	// ++, --, 150324 bwk
@@ -507,7 +511,6 @@ public class MenuBaseFragment extends ParentFragment{
 			showBodyExcelLanguageAnimation();
 			setFirstScreenIndex(0);			
 		}
-		
 		else{
 			ListLeftAnimation.StartAppearAnimation(_MenuListLeftFragment);
 			ListTitleAnimation.StartAppearAnimation(_MenuListTitleFragment);
@@ -984,6 +987,13 @@ public class MenuBaseFragment extends ParentFragment{
 		transaction.commit();
 
 	}
+	public void showLockingUserSwitching(){
+		android.app.FragmentTransaction transaction = getFragmentManager().beginTransaction();
+		transaction.remove(_SettingLockUserSwitchingFragment);
+		transaction.replace(R.id.FrameLayout_menu_inter_body, _SettingLockUserSwitchingFragment);
+		transaction.commit();
+
+	}	
 	public void showBodyFuelHistoryGeneralRecord(){
 		android.app.FragmentTransaction transaction = getFragmentManager().beginTransaction();
 		transaction.remove(_FuelHistoryGeneralRecordFragment);
@@ -1135,20 +1145,26 @@ public class MenuBaseFragment extends ParentFragment{
 		InterBodyAnimation.StartChangeAnimation(_SoftStopFragment);
 	}
 	public void showBodyEngineAutoShutdownAnimation(){
+		if(Home.LOCK_STATE_ENGINE_AUTO_SHUTDOWN == false || ParentActivity.LockUserSwitching == Home.STATE_USERSWITCHING_UNLOCK){
 		showInterAnimation();
 		InterBodyAnimation.StartChangeAnimation(_EngineAutoShutdownFragment);
+	}
 	}
 	public void showBodyEngineDelayShutdownAnimation(){
 		showInterAnimation();
 		InterBodyAnimation.StartChangeAnimation(_EngineDelayShutdownFragment);
 	}
 	public void showBodyCameraSettingAnimation(){
-		showInterAnimation();
-		InterBodyAnimation.StartChangeAnimation(_CameraSettingFragment);
+		if(Home.LOCK_STATE_REVERSE_CAMERA == false || ParentActivity.LockUserSwitching == Home.STATE_USERSWITCHING_UNLOCK){
+			showInterAnimation();
+			InterBodyAnimation.StartChangeAnimation(_CameraSettingFragment);
+		}
 	}
 	public void showBodyCoolingFanReverseModeAnimation(){
-		showInterAnimation();
-		InterBodyAnimation.StartChangeAnimation(_CoolingFanReverseModeFragment);
+		if(Home.LOCK_STATE_REVERSE_FAN_MODE == false || ParentActivity.LockUserSwitching == Home.STATE_USERSWITCHING_UNLOCK){
+			showInterAnimation();
+			InterBodyAnimation.StartChangeAnimation(_CoolingFanReverseModeFragment);
+		}
 	}
 	public void showBodySpeedometerFreqAnimation(){
 		showInterAnimation();
@@ -1295,12 +1311,16 @@ public class MenuBaseFragment extends ParentFragment{
 		InterBodyAnimation.StartChangeAnimation(_MaintenanceChangeCycleFragment);
 	}
 	public void showBodyBrightnessAnimation(){
+		if(Home.LOCK_STATE_BRIGHTNESS_MANUALAUTO == false || ParentActivity.LockUserSwitching == Home.STATE_USERSWITCHING_UNLOCK){
 		showInterAnimation();
 		InterBodyAnimation.StartChangeAnimation(_BrightnessFragment);
 	}
+	}
 	public void showBodyClockAnimation(){
+		if(Home.LOCK_STATE_SET_CLOCK == false || ParentActivity.LockUserSwitching == Home.STATE_USERSWITCHING_UNLOCK){
 		showInterAnimation();
 		InterBodyAnimation.StartChangeAnimation(_ClockFragment);
+	}
 	}
 	public void showBodyUnitAnimation(){
 		showInterAnimation();
@@ -1310,22 +1330,32 @@ public class MenuBaseFragment extends ParentFragment{
 		showInterAnimation();
 		InterBodyAnimation.StartChangeAnimation(_UserSwitching);
 	}
+	public void showBodySettingLockUserSwitchingAnimation(){
+		showInterAnimation();
+		InterBodyAnimation.StartChangeAnimation(_SettingLockUserSwitchingFragment);
+	}
 	// ++, 150206 bwk
 	public void showBodyLanguageAnimation(){
+		if(Home.LOCK_STATE_LANGUAGE == false || ParentActivity.LockUserSwitching == Home.STATE_USERSWITCHING_UNLOCK){
 		showInterAnimation();
 		InterBodyAnimation.StartChangeAnimation(_LanguageListFragment);
+	}
 	}
 	// --, 150206 bwk
 
 	public void showBodyExcelLanguageAnimation(){
+		if(Home.LOCK_STATE_LANGUAGE == false || ParentActivity.LockUserSwitching == Home.STATE_USERSWITCHING_UNLOCK){
 		showInterAnimation();
 		InterBodyAnimation.StartChangeAnimation(_LanguageExcelListFragment);
+	}
 	}
 
 	// ++, 150309 bwk
 	public void showBodyDisplayTypeAnimation(){
+		if(Home.LOCK_STATE_DISPLAYTYPE == false || ParentActivity.LockUserSwitching == Home.STATE_USERSWITCHING_UNLOCK){
 		showInterAnimation();
 		InterBodyAnimation.StartChangeAnimation(_DisplayTypeFragment);
+	}
 	}
 	// --, 150309 bwk
 	// ++, 150324 bwk
@@ -1751,8 +1781,14 @@ public class MenuBaseFragment extends ParentFragment{
 		case Home.SCREEN_STATE_MENU_USERSWITCHING_TOP:
 			_UserSwitching.ClickLeft();
 			break;
+		case Home.SCREEN_STATE_MENU_USERSWITCHING_LOCKING:
+			_SettingLockUserSwitchingFragment.ClickLeft();
+			break;
 		case Home.SCREEN_STATE_MENU_MANAGEMENT_ASPHONE_ENTERTAINMENT_LOCK_POPUP:
 			ParentActivity._EntertainmentLockPopup.ClickLeft();
+			break;
+		case Home.SCREEN_STATE_MENU_USERSWITCHING_POPUP:
+			ParentActivity._UserSwitchingLockingPopup.ClickLeft();
 			break;
 		default:
 			break;
@@ -2066,8 +2102,14 @@ public class MenuBaseFragment extends ParentFragment{
 		case Home.SCREEN_STATE_MENU_USERSWITCHING_TOP:
 			_UserSwitching.ClickRight();
 			break;
+		case Home.SCREEN_STATE_MENU_USERSWITCHING_LOCKING:
+			_SettingLockUserSwitchingFragment.ClickRight();
+			break;
 		case Home.SCREEN_STATE_MENU_MANAGEMENT_ASPHONE_ENTERTAINMENT_LOCK_POPUP:
 			ParentActivity._EntertainmentLockPopup.ClickRight();
+			break;
+		case Home.SCREEN_STATE_MENU_USERSWITCHING_POPUP:
+			ParentActivity._UserSwitchingLockingPopup.ClickRight();
 			break;
 		default:
 			break;
@@ -2386,9 +2428,15 @@ public class MenuBaseFragment extends ParentFragment{
 		case Home.SCREEN_STATE_MENU_USERSWITCHING_TOP:
 			_UserSwitching.ClickESC();
 			break;
+		case Home.SCREEN_STATE_MENU_USERSWITCHING_LOCKING:
+			_SettingLockUserSwitchingFragment.ClickESC();
+			break;
 		case Home.SCREEN_STATE_MENU_MANAGEMENT_ASPHONE_ENTERTAINMENT_LOCK_POPUP:
 			ParentActivity._EntertainmentLockPopup.ClickESC();
 			break;	
+		case Home.SCREEN_STATE_MENU_USERSWITCHING_POPUP:
+			ParentActivity._UserSwitchingLockingPopup.ClickESC();
+			break;
 		default:
 			break;
 		}
@@ -2705,8 +2753,14 @@ public class MenuBaseFragment extends ParentFragment{
 		case Home.SCREEN_STATE_MENU_USERSWITCHING_TOP:
 			_UserSwitching.ClickEnter();
 			break;
+		case Home.SCREEN_STATE_MENU_USERSWITCHING_LOCKING:
+			_SettingLockUserSwitchingFragment.ClickEnter();
+			break;
 		case Home.SCREEN_STATE_MENU_MANAGEMENT_ASPHONE_ENTERTAINMENT_LOCK_POPUP:
 			ParentActivity._EntertainmentLockPopup.ClickEnter();
+			break;
+		case Home.SCREEN_STATE_MENU_USERSWITCHING_POPUP:
+			ParentActivity._UserSwitchingLockingPopup.ClickEnter();
 			break;
 		default:
 			break;
@@ -2784,6 +2838,9 @@ public class MenuBaseFragment extends ParentFragment{
 				break;
 			case Home.SCREEN_STATE_MENU_MULTIMEDIA_TOP:
 				_MenuMultimediaFragment.ExcuteFileManaget();
+				break;
+			case Home.SCREEN_STATE_MENU_USERSWITCHING_TOP:
+				ParentActivity.showUserSwitchingLockingPopup();
 				break;
 			default:
 				break;

@@ -1,4 +1,4 @@
-package taeha.wheelloader.fseries_monitor.main;
+﻿package taeha.wheelloader.fseries_monitor.main;
 
 import java.io.FileDescriptor;
 
@@ -312,7 +312,6 @@ public class CAN1CommManager extends ICAN1CommManager.Stub{		// ttySAC1(Linux), 
 	public static final int DATA_STATE_4TH_TAG_REG_SUCCESS 			= 0x08;
 	public static final int DATA_STATE_5TH_TAG_REG_SUCCESS 			= 0x09;
 	public static final int DATA_STATE_AUTHENTICATION			 	= 0x0A;
-	
 	
 	public static final int DATA_INDEX_TAG_REQ_SUCCESS	 			= 0x00;
 	public static final int DATA_INDEX_TAG_REGISTRATION			 	= 0x01;

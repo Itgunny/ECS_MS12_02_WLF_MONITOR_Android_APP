@@ -1,4 +1,4 @@
-package taeha.wheelloader.fseries_monitor.main.b;
+﻿package taeha.wheelloader.fseries_monitor.main.b;
 
 import android.content.Context;
 import android.content.Intent;
@@ -13,6 +13,7 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import taeha.wheelloader.fseries_monitor.main.CommService;
+import taeha.wheelloader.fseries_monitor.main.Home;
 import taeha.wheelloader.fseries_monitor.main.ParentFragment;
 import taeha.wheelloader.fseries_monitor.main.R;
 import taeha.wheelloader.fseries_monitor.main.TextFitTextView;
@@ -72,12 +73,14 @@ public class MainBLeftDownQuickFragment extends ParentFragment{
 		textViewTitle.setText(getString(ParentActivity.getResources().getString(R.string.Help), 117));
 		
 		imgbtnMirror = (ImageButton)mRoot.findViewById(R.id.imageButton_leftdown_main_b_quick_mirror);
+		
 	}
 	
 	protected void InitValuables() {
 		// TODO Auto-generated method stub
 		super.InitValuables();
 		CursurDisplayDetail(ParentActivity._MainBBaseFragment.CursurIndex);
+		SmartTerminalDisplay(ParentActivity.LockSmartTerminal);
 	}
 	@Override
 	protected void InitButtonListener() {
@@ -193,6 +196,19 @@ public class MainBLeftDownQuickFragment extends ParentFragment{
 			case 3:
 				imgbtnMirror.setBackgroundResource(R.drawable.main_quick_btn_screen_mirroring_s);
 				break;
+		}
+	}
+	
+	public void SmartTerminalDisplay(int data){
+		switch(data){
+		case Home.STATE_ENTERTAINMENT_SMARTTERMINAL_LOCK:
+			imgbtnMirror.setEnabled(false);
+			imgbtnMirror.setVisibility(View.INVISIBLE);
+			break;
+		case Home.STATE_ENTERTAINMENT_SMARTTERMINAL_UNLOCK:
+			imgbtnMirror.setEnabled(true);
+			imgbtnMirror.setVisibility(View.VISIBLE);
+			break;
 		}
 	}
 }

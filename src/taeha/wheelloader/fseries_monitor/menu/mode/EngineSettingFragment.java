@@ -1,4 +1,4 @@
-package taeha.wheelloader.fseries_monitor.menu.mode;
+﻿package taeha.wheelloader.fseries_monitor.menu.mode;
 
 import taeha.wheelloader.fseries_monitor.animation.AppearAnimation;
 import taeha.wheelloader.fseries_monitor.animation.ChangeFragmentAnimation;
@@ -124,6 +124,7 @@ public class EngineSettingFragment extends MenuBodyList_ParentFragment{
 	@Override
 	public void ClickList1() {
 		// TODO Auto-generated method stub
+		
 		ParentActivity.showEngineMode();
 		CursurIndex = 1;
 		CursurDisplay(CursurIndex);
@@ -183,7 +184,7 @@ public class EngineSettingFragment extends MenuBodyList_ParentFragment{
 	
 		switch (data) {
 		case CAN1CommManager.DATA_STATE_ENGINE_MODE_PWR:
-			setListData1(ParentActivity.getResources().getString(string.Power),243);
+			setListData1(getResources().getString(string.Power),243);
 			break;
 		case CAN1CommManager.DATA_STATE_ENGINE_MODE_STD:
 			setListData1(getResources().getString(string.Standard), 242);

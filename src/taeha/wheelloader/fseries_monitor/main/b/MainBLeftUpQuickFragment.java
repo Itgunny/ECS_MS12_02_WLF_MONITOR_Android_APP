@@ -1,4 +1,4 @@
-package taeha.wheelloader.fseries_monitor.main.b;
+﻿package taeha.wheelloader.fseries_monitor.main.b;
 
 import android.os.Bundle;
 import android.util.Log;
@@ -121,4 +121,6 @@ public class MainBLeftUpQuickFragment extends ParentFragment{
 				break;
 		}
 	}
+	
+	
 }

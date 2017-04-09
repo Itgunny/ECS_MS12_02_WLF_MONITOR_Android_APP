@@ -1,4 +1,4 @@
-package taeha.wheelloader.fseries_monitor.main.b;
+﻿package taeha.wheelloader.fseries_monitor.main.b;
 
 import java.util.Timer;
 import java.util.TimerTask;
@@ -393,6 +393,7 @@ public class MainBUpperMenuBarFragment extends ParentFragment{
 	}
 	
 	public void ClickTime(){
+		if(Home.LOCK_STATE_SET_CLOCK == false || ParentActivity.LockUserSwitching == Home.STATE_USERSWITCHING_UNLOCK){
 		if(ParentActivity.AnimationRunningFlag == true)
 			return;
 		else
@@ -401,6 +402,7 @@ public class MainBUpperMenuBarFragment extends ParentFragment{
 		ParentActivity._MainChangeAnimation.StartChangeAnimation(ParentActivity._MenuBaseFragment);
 		ParentActivity.OldScreenIndex = Home.SCREEN_STATE_MAIN_B_TOP;
 		ParentActivity._MenuBaseFragment.setFirstScreenIndex(Home.SCREEN_STATE_MENU_PREFERENCE_CLOCK_TOP);
+	}
 	}
 	public void ClickBuzzer(){
 		if(CAN1Comm.BuzzerStatus == CAN1Comm.BUZZER_ON){

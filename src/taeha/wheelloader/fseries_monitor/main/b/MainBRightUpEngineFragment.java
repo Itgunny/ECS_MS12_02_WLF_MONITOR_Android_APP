@@ -1,4 +1,4 @@
-package taeha.wheelloader.fseries_monitor.main.b;
+﻿package taeha.wheelloader.fseries_monitor.main.b;
 
 
 import android.os.Bundle;
@@ -11,6 +11,7 @@ import android.widget.TextView;
 import taeha.wheelloader.fseries_monitor.animation.TextFitTextViewAxisFlipAnimation;
 import taeha.wheelloader.fseries_monitor.animation.TextViewXAxisFlipAnimation;
 import taeha.wheelloader.fseries_monitor.main.CAN1CommManager;
+import taeha.wheelloader.fseries_monitor.main.Home;
 import taeha.wheelloader.fseries_monitor.main.ParentFragment;
 import taeha.wheelloader.fseries_monitor.main.R;
 import taeha.wheelloader.fseries_monitor.main.R.string;
@@ -287,6 +288,7 @@ public class MainBRightUpEngineFragment extends ParentFragment{
 	// --, 150317 bwk
 	
 	public void ClickMode(){
+		if(Home.LOCK_STATE_ENGINEMODE == false || ParentActivity.LockUserSwitching == Home.STATE_USERSWITCHING_UNLOCK){
 		if(ParentActivity.AnimationRunningFlag == true)
 			return;
 		else
@@ -312,7 +314,7 @@ public class MainBRightUpEngineFragment extends ParentFragment{
 		ParentActivity._MainBBaseFragment._KeyBodyDisappearAnimation.StartAnimation();
 		
 
-		
+		}
 	}
 	
 	// ++, 150317 bwk
@@ -344,6 +346,7 @@ public class MainBRightUpEngineFragment extends ParentFragment{
 	}
 	*/
 	public void ClickHourOdo(){
+		if(Home.LOCK_STATE_OPERATION_HISTORY == false || ParentActivity.LockUserSwitching == Home.STATE_USERSWITCHING_UNLOCK){
 		if(ParentActivity.AnimationRunningFlag == true)
 			return;
 		else
@@ -365,6 +368,7 @@ public class MainBRightUpEngineFragment extends ParentFragment{
 		
 		ParentActivity._MainBBaseFragment._KeyTitleDisappearAnimation.StartAnimation();
 		ParentActivity._MainBBaseFragment._KeyBodyDisappearAnimation.StartAnimation();
+	}
 	}
 	// --, 150317 bwk
 	

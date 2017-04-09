@@ -1,4 +1,4 @@
-package taeha.wheelloader.fseries_monitor.main.b;
+﻿package taeha.wheelloader.fseries_monitor.main.b;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -70,13 +70,13 @@ public class MainBRightDownQuickFragment extends ParentFragment{
 		textViewTitle = (TextFitTextView)mRoot.findViewById(R.id.textView_rightdown_main_b_quick_title);
 		textViewTitle.setText(getString(ParentActivity.getResources().getString(R.string.Maintenance), 18));
 		imgbtnMultimedia = (ImageButton)mRoot.findViewById(R.id.imageButton_rightdown_main_b_quick_multimedia);
-		
 	}
 	
 	protected void InitValuables() {
 		// TODO Auto-generated method stub
 		super.InitValuables();
 		CursurDisplayDetail(ParentActivity._MainBBaseFragment.CursurIndex);
+		MultiMediaDisplay(ParentActivity.LockMultiMedia);
 	}
 	@Override
 	protected void InitButtonListener() {
@@ -132,17 +132,8 @@ public class MainBRightDownQuickFragment extends ParentFragment{
 				ParentActivity.OldScreenIndex = ParentActivity.SCREEN_STATE_MAIN_B_QUICK_TOP;
 				ParentActivity._MiracastClosePopup.show();
 			}else{
-				Intent intent;
-				intent = ParentActivity.getPackageManager().getLaunchIntentForPackage("com.mxtech.videoplayer.ad");
-				if(intent != null){
-					// ++, 150323 bwk
-					//CAN1Comm.SetMultimediaFlag(true);
-					CAN1Comm.SetMiracastFlag(false);
-					// --, 150323 bwk
-					ParentActivity.startActivity(intent);
-					ParentActivity.StartAlwaysOntopService(); // ++, --, 150324 cjg
-					ParentActivity.StartCheckMultimediaTimer();
-				}
+				ParentActivity.OldScreenIndex = ParentActivity.SCREEN_STATE_MAIN_B_QUICK_TOP;
+				ParentActivity._MultimediaWarningPopup.show();
 			}
 		}
 	}
@@ -167,6 +158,19 @@ public class MainBRightDownQuickFragment extends ParentFragment{
 			case 7:
 				imgbtnMultimedia.setBackgroundResource(R.drawable.main_virtual_key_btn_media_player_on);
 				break;
+		}
+	}
+	
+	public void MultiMediaDisplay(int data){
+		switch(data){
+		case Home.STATE_ENTERTAINMENT_MULTIMEDIA_LOCK:
+			imgbtnMultimedia.setEnabled(false);
+			imgbtnMultimedia.setVisibility(View.INVISIBLE);
+			break;
+		case Home.STATE_ENTERTAINMENT_MULTIMEDIA_UNLOCK:
+			imgbtnMultimedia.setEnabled(true);
+			imgbtnMultimedia.setVisibility(View.VISIBLE);
+			break;
 		}
 	}
 }

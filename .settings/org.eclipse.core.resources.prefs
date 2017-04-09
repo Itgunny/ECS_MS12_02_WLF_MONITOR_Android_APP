@@ -1,4 +1,6 @@
 eclipse.preferences.version=1
 encoding//jni/CAN_DataParsing.c=UTF-8
+encoding//src/taeha/wheelloader/fseries_monitor/menu/PasswordFragment.java=UTF-8
+encoding//src/taeha/wheelloader/fseries_monitor/menu/management/SoftwareUpdatePasswordFragment.java=UTF-8
 encoding/<project>=US-ASCII
 separateDerivedEncodings=true

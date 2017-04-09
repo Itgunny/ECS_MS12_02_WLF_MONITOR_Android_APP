@@ -1,4 +1,4 @@
-package customlist.userswitching;
+ï»¿package customlist.userswitching;
 
 import android.R.drawable;
 import android.graphics.Color;
@@ -15,6 +15,7 @@ public class IconTextItemUserSwitching {
 	 * Icon
 	 */
 	private Drawable mIcon;
+	private Drawable mIcon2;
 	
 	/**
 	 * Data array
@@ -37,8 +38,9 @@ public class IconTextItemUserSwitching {
 	 * @param icon
 	 * @param obj
 	 */
-	public IconTextItemUserSwitching(Drawable icon, String[] obj) {
+	public IconTextItemUserSwitching(Drawable icon, Drawable icon2, String[] obj) {
 		mIcon = icon;
+		mIcon2 = icon2;
 		mData = obj;
 	}
 
@@ -51,13 +53,13 @@ public class IconTextItemUserSwitching {
 	 * @param obj03
 	 */
 	
-	//ÀÏ¹Ý ±¸°£ 
-	public IconTextItemUserSwitching(Drawable background, Drawable icon, String obj01, String obj02, String obj03) {
+	//ï¿½Ï¹ï¿½ ï¿½ï¿½ï¿½ï¿½ 
+	public IconTextItemUserSwitching(Drawable background, Drawable icon, Drawable icon2, String obj01, String obj02, String obj03) {
 
 		mFirstTextColor = Color.rgb(0xff, 0xff, 0xff);
 		mBackground = background;
 		mIcon = icon;
-		
+		mIcon2 = icon2;
 		mData = new String[3];
 		mData[0] = obj01;
 		mData[1] = obj02;
@@ -65,10 +67,10 @@ public class IconTextItemUserSwitching {
 				
 	}
 	
-	//ÀÏ¹Ý ±¸°£ 
-	public IconTextItemUserSwitching(Drawable icon, String obj01, String obj02, String obj03) {
+	//ï¿½Ï¹ï¿½ ï¿½ï¿½ï¿½ï¿½ 
+	public IconTextItemUserSwitching(Drawable icon, Drawable icon2, String obj01, String obj02, String obj03) {
 		mIcon = icon;
-		
+		mIcon2 = icon2;
 		mData = new String[3];
 		mData[0] = obj01;
 		mData[1] = obj02;
@@ -84,7 +86,7 @@ public class IconTextItemUserSwitching {
 		mData[2] = obj03;
 				
 	}
-	//Á¶º° ±¸°£À» ³ª´©±â À§ÇÑ »ý¼ºÀÚ Á¶°Ç
+	//ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 	public IconTextItemUserSwitching(String string) {
 		// TODO Auto-generated constructor stub
 		mIcon = null;
@@ -192,6 +194,13 @@ public class IconTextItemUserSwitching {
 		return mIcon;
 	}
 	
+	public void setIcon2(Drawable icon2){
+		mIcon2 = icon2;
+	}
+	
+	public Drawable getIcon2(){
+		return mIcon2;
+	}
 
 	/**
 	 * Compare with the input object

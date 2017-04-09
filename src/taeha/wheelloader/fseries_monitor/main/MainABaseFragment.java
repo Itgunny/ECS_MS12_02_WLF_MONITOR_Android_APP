@@ -777,10 +777,12 @@ public class MainABaseFragment extends ParentFragment{
 		transaction.commit();
 	}
 	public void showKeyRideControl(){
+		if(Home.LOCK_STATE_RIDECONTROL == false || ParentActivity.LockUserSwitching == Home.STATE_USERSWITCHING_UNLOCK){
 		android.app.FragmentTransaction transaction = getFragmentManager().beginTransaction();
 		transaction.replace(R.id.FrameLayout_screen_main_a_key_body, _MainAKeyRideControlFragment);
 		//transaction.addToBackStack("Main_Left");
 		transaction.commit();
+	}
 	}
 	public void showKeyWorkLoad(){
 		android.app.FragmentTransaction transaction = getFragmentManager().beginTransaction();
@@ -1098,6 +1100,7 @@ public class MainABaseFragment extends ParentFragment{
 		KeyBodyChangeAnimation.StartChangeAnimation(_MainAKeyQuickCouplerFragment);
 	}
 	public void showRideControlAnimation(){
+		if(Home.LOCK_STATE_RIDECONTROL == false || ParentActivity.LockUserSwitching == Home.STATE_USERSWITCHING_UNLOCK){
 		ParentActivity.StartAnimationRunningTimer();
 		showKeyScreenAnimation();
 		ParentActivity.ScreenIndex = ParentActivity.SCREEN_STATE_MAIN_A_KEY_RIDECONTROL;
@@ -1107,6 +1110,7 @@ public class MainABaseFragment extends ParentFragment{
 		_MainAKeyTitleFragment.setTitleText(getString(ParentActivity.getResources().getString(string.Ride_Control), 155));
 		KeyTitleChangeAnimation.StartChangeAnimation(_MainAKeyTitleFragment);
 		KeyBodyChangeAnimation.StartChangeAnimation(_MainAKeyRideControlFragment);
+	}
 	}
 	public void showWorkLoadAnimation(){
 		ParentActivity.StartAnimationRunningTimer();
@@ -1416,6 +1420,7 @@ public class MainABaseFragment extends ParentFragment{
 	}
 	
 	public void ClickKeyButtonLongLeftRightEnter(){
+		if(Home.LOCK_STATE_LANGUAGE == false || ParentActivity.LockUserSwitching == Home.STATE_USERSWITCHING_UNLOCK){
 		if(ParentActivity.AnimationRunningFlag == true)
 			return;
 		else
@@ -1427,6 +1432,7 @@ public class MainABaseFragment extends ParentFragment{
 			ParentActivity._MenuBaseFragment.setFirstScreenIndex(Home.SCREEN_STATE_MENU_PREFERENCE_DISPLAYTYPELANG_EXCEL_LANG_CHANGE);
 		}else {
 		ParentActivity._MenuBaseFragment.setFirstScreenIndex(Home.SCREEN_STATE_MENU_PREFERENCE_DISPLAYTYPELANG_LANG_CHANGE);
+	}
 	}
 	}
 	

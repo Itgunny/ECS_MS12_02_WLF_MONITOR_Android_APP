@@ -1,4 +1,4 @@
-package customlist.userswitching;
+ï»¿package customlist.userswitching;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -64,7 +64,7 @@ public class IconTextListAdapterUserSwitching extends BaseAdapter {
 	public View getView(int position, View convertView, ViewGroup parent) {
 		IconTextViewUserSwitching itemView;
 		
-		//convertView°¡ ÇÑ¹ø¸¸ »ý¼ºµÊÀ¸·Î ¼º´É»óÀ¸·Î ÁÁÀº ¼Ò½º ~
+		//convertViewï¿½ï¿½ ï¿½Ñ¹ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½É»ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ò½ï¿½ ~
 		if (convertView == null) 
 		{
 			itemView = new IconTextViewUserSwitching(mContext, mItems.get(position));
@@ -74,12 +74,12 @@ public class IconTextListAdapterUserSwitching extends BaseAdapter {
 			itemView = (IconTextViewUserSwitching) convertView;
 			
 			itemView.setIcon(mItems.get(position).getIcon());
+			itemView.setIcon2(mItems.get(position).getIcon2());
 			itemView.setText(0, mItems.get(position).getData(0));
 			itemView.setText(1, mItems.get(position).getData(1));
 			itemView.setText(2, mItems.get(position).getData(2));	
 			itemView.setBackground(mItems.get(position).getBackground());
 			itemView.setFirstTextColor(mItems.get(position).getFirstTextColor());
-			
 		}
 
 		return itemView;
@@ -107,6 +107,10 @@ public class IconTextListAdapterUserSwitching extends BaseAdapter {
 	
 	public void UpdateFirstColor(int position, int color){
 		mItems.get(position).setFirstTextColor(color);
+	}
+ 
+	public void UpdateLockIcon(int position, Drawable icon){
+		mItems.get(position).setIcon2(icon);
 	}
  
 }

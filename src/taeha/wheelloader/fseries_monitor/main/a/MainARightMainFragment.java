@@ -1,4 +1,4 @@
-package taeha.wheelloader.fseries_monitor.main.a;
+ï»¿package taeha.wheelloader.fseries_monitor.main.a;
 
 import android.app.Fragment;
 import android.os.Bundle;
@@ -13,6 +13,7 @@ import taeha.wheelloader.fseries_monitor.animation.TextFitTextViewAxisFlipAnimat
 import taeha.wheelloader.fseries_monitor.animation.TextViewXAxisFlipAnimation;
 import taeha.wheelloader.fseries_monitor.main.CAN1CommManager;
 import taeha.wheelloader.fseries_monitor.main.CheckModel;
+import taeha.wheelloader.fseries_monitor.main.Home;
 import taeha.wheelloader.fseries_monitor.main.ParentFragment;
 import taeha.wheelloader.fseries_monitor.main.R;
 import taeha.wheelloader.fseries_monitor.main.TextFitTextView;
@@ -65,7 +66,7 @@ public class MainARightMainFragment extends ParentFragment{
 	//ANIMATION///////////////////////////////////////
 	TextFitTextViewAxisFlipAnimation EngineModeDataAnimation;
 	TextFitTextViewAxisFlipAnimation HourOdometerTitleAnimation;	
-	//TextViewXAxisFlipAnimation TMCCOModeTitleDataAnimation;	// ++, --, 150305 HHI º¯°æ ¿äÃ»
+	//TextViewXAxisFlipAnimation TMCCOModeTitleDataAnimation;	// ++, --, 150305 HHI ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Ã»
 	TextFitTextViewAxisFlipAnimation TMCCOModeDataAnimation;
 	TextFitTextViewAxisFlipAnimation TMShiftModeDataAnimation;
 	TextFitTextViewAxisFlipAnimation TMTCLockUpDataAnimation;
@@ -170,7 +171,7 @@ public class MainARightMainFragment extends ParentFragment{
 		super.InitValuables();
 //		EngineModeDataAnimation = new TextViewXAxisFlipAnimation(ParentActivity);
 //		HourOdometerTitleAnimation = new TextViewXAxisFlipAnimation(ParentActivity);
-//		//TMCCOModeTitleDataAnimation = new TextViewXAxisFlipAnimation(ParentActivity);	// ++, --, 150305 HHI º¯°æ ¿äÃ»
+//		//TMCCOModeTitleDataAnimation = new TextViewXAxisFlipAnimation(ParentActivity);	// ++, --, 150305 HHI ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Ã»
 //		TMCCOModeDataAnimation = new TextViewXAxisFlipAnimation(ParentActivity);
 //		TMShiftModeDataAnimation = new TextViewXAxisFlipAnimation(ParentActivity);
 //		TMTCLockUpDataAnimation = new TextViewXAxisFlipAnimation(ParentActivity);		
@@ -182,7 +183,7 @@ public class MainARightMainFragment extends ParentFragment{
 	public void InitAnimation(){
 		EngineModeDataAnimation = new TextFitTextViewAxisFlipAnimation(ParentActivity);
 		HourOdometerTitleAnimation = new TextFitTextViewAxisFlipAnimation(ParentActivity);
-		//TMCCOModeTitleDataAnimation = new TextViewXAxisFlipAnimation(ParentActivity);	// ++, --, 150305 HHI º¯°æ ¿äÃ»
+		//TMCCOModeTitleDataAnimation = new TextViewXAxisFlipAnimation(ParentActivity);	// ++, --, 150305 HHI ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Ã»
 		TMCCOModeDataAnimation = new TextFitTextViewAxisFlipAnimation(ParentActivity);
 		TMShiftModeDataAnimation = new TextFitTextViewAxisFlipAnimation(ParentActivity);
 		TMTCLockUpDataAnimation = new TextFitTextViewAxisFlipAnimation(ParentActivity);		
@@ -472,20 +473,30 @@ public class MainARightMainFragment extends ParentFragment{
 	}
 	
 	public void ClickHourOdo(){
+		if(Home.LOCK_STATE_OPERATION_HISTORY == false || ParentActivity.LockUserSwitching == Home.STATE_USERSWITCHING_UNLOCK){
 		ShowSelectAnimation(0);
 	}
+	}
 	public void ClickMode(){
+		if(Home.LOCK_STATE_ENGINEMODE == false || ParentActivity.LockUserSwitching == Home.STATE_USERSWITCHING_UNLOCK){
 		ShowSelectAnimation(1);
+	}
 	}
 	
 	public void ClickCCOMode(){
+		if(Home.LOCK_STATE_CCOMODE == false || ParentActivity.LockUserSwitching == Home.STATE_USERSWITCHING_UNLOCK){
 		ShowSelectAnimation(2);
 	}
+	}
 	public void ClickShiftMode(){
+		if(Home.LOCK_STATE_SHIFTMODE == false || ParentActivity.LockUserSwitching == Home.STATE_USERSWITCHING_UNLOCK){
 		ShowSelectAnimation(3);
 	}
+	}
 	public void ClickTCLockUp(){
+		if(Home.LOCK_STATE_TCLOCKUP == false || ParentActivity.LockUserSwitching == Home.STATE_USERSWITCHING_UNLOCK){
 		ShowSelectAnimation(4);
+	}
 	}
 	
 	public void ShowSelectAnimation(int index){

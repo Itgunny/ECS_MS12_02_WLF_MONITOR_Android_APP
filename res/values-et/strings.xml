@@ -497,4 +497,8 @@
 	<string name="Adjust_Mode">Adjust Mode</string>
 	<string name="Fan_Speed_Max_Mode">Fan Speed Max Mode</string>
 	<string name="Fan_Reverse_Mode">Fan Reverse Mode</string>
+	<string name="Multimedia_Warning_Text">주행 및 작업 중 엔터테인먼트 기능 실행은 위험하오니 주의하십시오.</string>
+	<string name="Lock_User_Setting">Lock User Setting</string>
+	<string name="Setting_Lock_List">Setting Lock List</string>
+	<string name="Entertainment_limit">Entertainment limit</string>
 </resources>

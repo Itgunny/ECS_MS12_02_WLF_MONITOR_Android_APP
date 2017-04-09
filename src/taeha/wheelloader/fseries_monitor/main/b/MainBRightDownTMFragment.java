@@ -1,4 +1,4 @@
-package taeha.wheelloader.fseries_monitor.main.b;
+ï»¿package taeha.wheelloader.fseries_monitor.main.b;
 
 import android.os.Bundle;
 import android.util.Log;
@@ -11,6 +11,7 @@ import android.widget.TextView;
 import taeha.wheelloader.fseries_monitor.animation.TextViewXAxisFlipAnimation;
 import taeha.wheelloader.fseries_monitor.main.CAN1CommManager;
 import taeha.wheelloader.fseries_monitor.main.CheckModel;
+import taeha.wheelloader.fseries_monitor.main.Home;
 import taeha.wheelloader.fseries_monitor.main.ParentFragment;
 import taeha.wheelloader.fseries_monitor.main.R;
 import taeha.wheelloader.fseries_monitor.main.R.string;
@@ -44,7 +45,7 @@ public class MainBRightDownTMFragment extends ParentFragment{
 	//////////////////////////////////////////////////
 	
 	//ANIMATION///////////////////////////////////////
-	//TextViewXAxisFlipAnimation TMCCOModeTitleDataAnimation;	// ++, --, 150305 HHI º¯°æ ¿äÃ»
+	//TextViewXAxisFlipAnimation TMCCOModeTitleDataAnimation;	// ++, --, 150305 HHI ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Ã»
 	TextViewXAxisFlipAnimation TMCCOModeDataAnimation;
 	TextViewXAxisFlipAnimation TMShiftModeDataAnimation;
 	TextViewXAxisFlipAnimation TMTCLockUpDataAnimation;
@@ -106,7 +107,7 @@ public class MainBRightDownTMFragment extends ParentFragment{
 	protected void InitValuables() {
 		// TODO Auto-generated method stub
 		super.InitValuables();
-		//TMCCOModeTitleDataAnimation = new TextViewXAxisFlipAnimation(ParentActivity);	// ++, --, 150305 HHI º¯°æ ¿äÃ»
+		//TMCCOModeTitleDataAnimation = new TextViewXAxisFlipAnimation(ParentActivity);	// ++, --, 150305 HHI ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Ã»
 		TMCCOModeDataAnimation = new TextViewXAxisFlipAnimation(ParentActivity);
 		TMShiftModeDataAnimation = new TextViewXAxisFlipAnimation(ParentActivity);
 		TMTCLockUpDataAnimation = new TextViewXAxisFlipAnimation(ParentActivity);		
@@ -265,6 +266,7 @@ public class MainBRightDownTMFragment extends ParentFragment{
 		}
 	}
 	public void ClickCCOMode(){
+		if(Home.LOCK_STATE_CCOMODE == false || ParentActivity.LockUserSwitching == Home.STATE_USERSWITCHING_UNLOCK){
 		if(ParentActivity.AnimationRunningFlag == true)
 			return;
 		else
@@ -295,10 +297,12 @@ public class MainBRightDownTMFragment extends ParentFragment{
 		
 		ParentActivity._MainBBaseFragment._KeyTitleDisappearAnimation.StartAnimation();
 		ParentActivity._MainBBaseFragment._KeyBodyDisappearAnimation.StartAnimation();
+		}
 		
 	
 	}
 	public void ClickShiftMode(){
+		if(Home.LOCK_STATE_SHIFTMODE == false || ParentActivity.LockUserSwitching == Home.STATE_USERSWITCHING_UNLOCK){
 		if(ParentActivity.AnimationRunningFlag == true)
 			return;
 		else
@@ -319,10 +323,12 @@ public class MainBRightDownTMFragment extends ParentFragment{
 		
 		ParentActivity._MainBBaseFragment._KeyTitleDisappearAnimation.StartAnimation();
 		ParentActivity._MainBBaseFragment._KeyBodyDisappearAnimation.StartAnimation();
+		}
 		
 		
 	}
 	public void ClickTCLockUp(){
+		if(Home.LOCK_STATE_TCLOCKUP == false || ParentActivity.LockUserSwitching == Home.STATE_USERSWITCHING_UNLOCK){
 		if(ParentActivity.AnimationRunningFlag == true)
 			return;
 		else
@@ -343,8 +349,7 @@ public class MainBRightDownTMFragment extends ParentFragment{
 		
 		ParentActivity._MainBBaseFragment._KeyTitleDisappearAnimation.StartAnimation();
 		ParentActivity._MainBBaseFragment._KeyBodyDisappearAnimation.StartAnimation();
-		
-
+		}
 	}
 	public void setClickEnable(boolean flag){
 		ClickFlag = flag;

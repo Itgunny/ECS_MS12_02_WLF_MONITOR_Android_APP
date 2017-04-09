@@ -25,6 +25,7 @@ public class SoftwareUpdatePasswordFragment extends PasswordFragment{
 		ParentActivity.ScreenIndex = ParentActivity.SCREEN_STATE_MENU_MANAGEMENT_SOFTWAREUPDAT_PW;
 		ParentActivity._MenuBaseFragment._MenuListTitleFragment.SetTitleText(ParentActivity.getResources().getString(R.string.Software_Update), 274);
 		SetTextIndicatorTitle(1);
+		
 		HandleCursurDisplay = new Handler() {
 			@Override
 			public void handleMessage(Message msg) {
@@ -72,6 +73,7 @@ public class SoftwareUpdatePasswordFragment extends PasswordFragment{
 				"taeha.wheelloader.update");
 		
 		if(intent != null){
+			
 			ParentActivity.CancelCommErrStopTimer();
 			CAN1Comm.Callback_StopCommService();
 			CAN1Comm.CloseComport();
@@ -84,7 +86,7 @@ public class SoftwareUpdatePasswordFragment extends PasswordFragment{
 		int Result;
 		Result = CAN1Comm.Get_PasswordCertificationResult_956_PGN61184_24();
 		Log.d(TAG,"CheckPassword Result : " + Integer.toString(Result));
-
+		
 		//if(Result == 1)	// UserPassword
 		//	Result = 0;
 		int getBKCUComponentCode = CAN1Comm.Get_ComponentCode_1699_PGN65330_BKCU();
@@ -112,21 +114,24 @@ public class SoftwareUpdatePasswordFragment extends PasswordFragment{
 			}
 			CancelPasswordCheckTimer();
 			CancelTimeOutTimer();
-			SetTextIndicatorTitle(1);		// ++, --, 150216 bwk 1(»ç¿ëÀÚ ºñ¹Ð¹øÈ£ )-> 2(¼­ºñ½º ºñ¹Ð¹øÈ£ )
+			SetTextIndicatorTitle(1);		// ++, --, 150216 bwk 1(ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ )-> 2(ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ )
 
 			break;
 		case 1:			// UserPassword	OK		
 		case 2:	// Service Password OK
 		
+			
 			CancelPasswordCheckTimer();
 			CancelTimeOutTimer();
 			
-			if(Result == 2)
-			{
+			if(Result == 2) {
+				ParentActivity._MenuBaseFragment._MenuListLeftFragment.setClickable(false);
+				ParentActivity._MenuBaseFragment._MenuListTitleFragment.setClickable(false);
 				showServicePasswordNextScreen();
 			}
-			else if(Result == 1)
-			{
+			else if(Result == 1) {
+				ParentActivity._MenuBaseFragment._MenuListLeftFragment.setClickable(false);
+				ParentActivity._MenuBaseFragment._MenuListTitleFragment.setClickable(false);
 				showUserPasswordNextScreen();
 			}
 			Log.d(TAG,"Password OK : " + Integer.toString(Result));

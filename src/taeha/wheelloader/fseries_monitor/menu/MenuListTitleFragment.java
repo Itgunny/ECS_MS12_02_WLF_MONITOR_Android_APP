@@ -252,6 +252,10 @@ public class MenuListTitleFragment extends ParentFragment{
 		// --, 150309 bwk
 	//	ParentActivity.showMainBFragment();
 	}
+	public void setClickable(boolean clickable){
+		imgbtnBack.setClickable(clickable);
+		imgbtnHome.setClickable(clickable);
+	}
 	/////////////////////////////////////////////////////////////////////
 	
 }

@@ -1,4 +1,4 @@
-package taeha.wheelloader.fseries_monitor.menu.mode;
+﻿package taeha.wheelloader.fseries_monitor.menu.mode;
 
 import java.util.Timer;
 import java.util.TimerTask;
@@ -154,12 +154,31 @@ public class DetentFragment extends ParentFragment{
 		radioBucketOn = (RadioButton)mRoot.findViewById(R.id.radioButton_menu_body_mode_detent_bucket_on);
 		radioBucketOn.setText(getString(ParentActivity.getResources().getString(string.On), 19));
 		ParentActivity.setMarqueeRadio(radioBucketOn);
+		
+		if(Home.LOCK_STATE_BOOM_DETENT_MODE == false || ParentActivity.LockUserSwitching == Home.STATE_USERSWITCHING_UNLOCK){
+			radioBoomOff.setEnabled(true);
+			radioBoomOn.setEnabled(true);
+			textViewBoomSavePosition.setEnabled(true);
+		} else {
+			radioBoomOff.setEnabled(false);
+			radioBoomOn.setEnabled(false);
+			textViewBoomSavePosition.setEnabled(false);
+		}
+		
+		if(Home.LOCK_STATE_BUCKET_DETENT_MODE == false || ParentActivity.LockUserSwitching == Home.STATE_USERSWITCHING_UNLOCK){
+			radioBucketOff.setEnabled(true);
+			radioBucketOn.setEnabled(true);
+			textViewBucketSavePosition.setEnabled(true);
+		} else {
+			radioBucketOff.setEnabled(false);
+			radioBucketOn.setEnabled(false);
+			textViewBucketSavePosition.setEnabled(false);
+		}
 	}
 
 	protected void InitValuables() {
 		// TODO Auto-generated method stub
 		super.InitValuables();
-		
 		BoomDetentMode = CAN1Comm.Get_BoomDetentMode_223_PGN61184_124();
 		BucketDetentMode = CAN1Comm.Get_BucketDetentMode_224_PGN61184_124();
 		DetentBoomDisplay(BoomDetentMode);
@@ -265,36 +284,48 @@ public class DetentFragment extends ParentFragment{
 		ParentActivity._MenuBaseFragment._MenuModeFragment.setFirstScreen(Home.SCREEN_STATE_MENU_MODE_HYD_TOP);
 	}
 	public void ClickBoomOff(){
+		if(Home.LOCK_STATE_BOOM_DETENT_MODE  == false || ParentActivity.LockUserSwitching == Home.STATE_USERSWITCHING_UNLOCK){
 		CAN1Comm.Set_BoomDetentMode_223_PGN61184_123(CAN1CommManager.DATA_STATE_KEY_DETENT_BOOM_OFF);
 		CAN1Comm.TxCANToMCU(123);
 		CAN1Comm.Set_BoomDetentMode_223_PGN61184_123(7);
 		DetentBoomDisplay(CAN1CommManager.DATA_STATE_KEY_DETENT_BOOM_OFF);
 	}
+	}
 	public void ClickBoomOn(){
+		if(Home.LOCK_STATE_BOOM_DETENT_MODE == false || ParentActivity.LockUserSwitching == Home.STATE_USERSWITCHING_UNLOCK){
 		CAN1Comm.Set_BoomDetentMode_223_PGN61184_123(CAN1CommManager.DATA_STATE_KEY_DETENT_BOOM_UPDOWN);
 		CAN1Comm.TxCANToMCU(123);
 		CAN1Comm.Set_BoomDetentMode_223_PGN61184_123(7);
 		DetentBoomDisplay(CAN1CommManager.DATA_STATE_KEY_DETENT_BOOM_UPDOWN);
 	}
+	}
 	public void ClickBucketOff(){
+		if(Home.LOCK_STATE_BUCKET_DETENT_MODE == false || ParentActivity.LockUserSwitching == Home.STATE_USERSWITCHING_UNLOCK){
 		CAN1Comm.Set_BucketDetentMode_224_PGN61184_123(CAN1CommManager.DATA_STATE_KEY_DETENT_BUCKET_OFF);
 		CAN1Comm.TxCANToMCU(123);
 		CAN1Comm.Set_BucketDetentMode_224_PGN61184_123(7);
 		DetentBucketDisplay(CAN1CommManager.DATA_STATE_KEY_DETENT_BUCKET_OFF);
 	}
+	}
 	public void ClickBucketOn(){
+		if(Home.LOCK_STATE_BUCKET_DETENT_MODE == false || ParentActivity.LockUserSwitching == Home.STATE_USERSWITCHING_UNLOCK){
 		CAN1Comm.Set_BucketDetentMode_224_PGN61184_123(CAN1CommManager.DATA_STATE_KEY_DETENT_BUCKET_IN);
 		CAN1Comm.TxCANToMCU(123);
 		CAN1Comm.Set_BucketDetentMode_224_PGN61184_123(7);
 		DetentBucketDisplay(CAN1CommManager.DATA_STATE_KEY_DETENT_BUCKET_IN);
 	}
+	}
 	public void ClickBoomSavePosition(){
+		if(Home.LOCK_STATE_BOOM_DETENT_MODE == false || ParentActivity.LockUserSwitching == Home.STATE_USERSWITCHING_UNLOCK){
 		CAN1Comm.Set_RequestDetentReleasePositionSetting_PGN61184_123(15);
 		CAN1Comm.TxCANToMCU(123);
 	}
+	}
 	public void ClickBucketSavePosition(){
+		if(Home.LOCK_STATE_BUCKET_DETENT_MODE == false || ParentActivity.LockUserSwitching == Home.STATE_USERSWITCHING_UNLOCK){
 		CAN1Comm.Set_RequestDetentReleasePositionSetting_PGN61184_123(15);
 		CAN1Comm.TxCANToMCU(123);
+	}
 	}
 	/////////////////////////////////////////////////////////////////////
 	public void DetentBoomDisplay(int Data){
@@ -400,9 +431,11 @@ public class DetentFragment extends ParentFragment{
 			ClickBoomOn();
 			break;
 		case 3:
+			if(Home.LOCK_STATE_BOOM_DETENT_MODE == false || ParentActivity.LockUserSwitching == Home.STATE_USERSWITCHING_UNLOCK){
 			OldCursurIndex = 3;
 			CursurIndex = 8;
 			CursurDisplay(CursurIndex);
+			}
 			break;
 		case 4:
 			ClickBucketOff();
@@ -411,9 +444,11 @@ public class DetentFragment extends ParentFragment{
 			ClickBucketOn();
 			break;
 		case 6:
+			if(Home.LOCK_STATE_BUCKET_DETENT_MODE == false || ParentActivity.LockUserSwitching == Home.STATE_USERSWITCHING_UNLOCK){
 			OldCursurIndex = 6;
 			CursurIndex = 8;
 			CursurDisplay(CursurIndex);
+			}
 			break;
 		case 7:
 			ClickOK();

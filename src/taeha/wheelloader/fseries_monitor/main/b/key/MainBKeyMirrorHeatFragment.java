@@ -1,4 +1,4 @@
-package taeha.wheelloader.fseries_monitor.main.b.key;
+﻿package taeha.wheelloader.fseries_monitor.main.b.key;
 
 import taeha.wheelloader.fseries_monitor.main.CAN1CommManager;
 import taeha.wheelloader.fseries_monitor.main.ParentFragment;
@@ -12,6 +12,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 
 public class MainBKeyMirrorHeatFragment extends ParentFragment{
 	//CONSTANT////////////////////////////////////////
