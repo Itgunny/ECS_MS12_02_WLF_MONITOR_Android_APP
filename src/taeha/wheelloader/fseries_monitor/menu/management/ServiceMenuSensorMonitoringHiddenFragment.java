@@ -351,6 +351,7 @@ public class ServiceMenuSensorMonitoringHiddenFragment extends ParentFragment{
 		textViewControlEpprData.setAlpha((float)0.5);
 		imgBtnControlUp.setAlpha((float)0.5);
 		imgBtnControlDown.setAlpha((float)0.5);	
+		
 		switch(index){
 			case ADJUST_MODE:
 			default:

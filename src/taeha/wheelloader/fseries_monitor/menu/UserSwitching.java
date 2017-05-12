@@ -582,12 +582,12 @@ public class UserSwitching extends ParentFragment{
 					getString(ParentActivity.getResources().getString(string.Language), 422)
 					, ""
 					, ""));
-			adapter.addItem(new IconTextItemUserSwitching( ParentActivity.getResources().getDrawable(R.drawable.menu_management_machine_monitoring_bg_dark),
+			/* adapter.addItem(new IconTextItemUserSwitching( ParentActivity.getResources().getDrawable(R.drawable.menu_management_machine_monitoring_bg_dark),
 					null,
 					null,
 					getString(ParentActivity.getResources().getString(string.Sound_Output_Setting), 415)
 					, ""
-					, ""));
+					, "")); */
 			adapter.addItem(new IconTextItemUserSwitching( ParentActivity.getResources().getDrawable(R.drawable.menu_management_machine_monitoring_bg_light),
 					null,
 					null,
@@ -699,12 +699,12 @@ public class UserSwitching extends ParentFragment{
 					getString(ParentActivity.getResources().getString(string.Language), 422)
 					, ""
 					, ""));
-			adapter.addItem(new IconTextItemUserSwitching( ParentActivity.getResources().getDrawable(R.drawable.menu_management_machine_monitoring_bg_light),
+			/*(adapter.addItem(new IconTextItemUserSwitching( ParentActivity.getResources().getDrawable(R.drawable.menu_management_machine_monitoring_bg_light),
 					null,
 					null,
 					getString(ParentActivity.getResources().getString(string.Sound_Output_Setting), 415)
 					, ""
-					, ""));
+					, ""));*/
 			adapter.addItem(new IconTextItemUserSwitching( ParentActivity.getResources().getDrawable(R.drawable.menu_management_machine_monitoring_bg_dark),
 					null,
 					null,
@@ -804,7 +804,7 @@ public class UserSwitching extends ParentFragment{
 				Home.STATE_MACHINESTATUS_UPPER		  	= nIndex++;
 				Home.STATE_MACHINESTATUS_LOWER		  	= nIndex++;
 				Home.STATE_LANGUAGE					    = nIndex++;
-				Home.STATE_SOUNDOUTPUT				    = nIndex++;
+				//Home.STATE_SOUNDOUTPUT				    = nIndex++;
 				Home.STATE_OPERATION_HISTORY		    	= nIndex++;
 				Home.STATE_FUEL_INFO				        = nIndex++;
 				Home.STATE_BOOM_DETENT_MODE			  	= nIndex++;
@@ -826,7 +826,7 @@ public class UserSwitching extends ParentFragment{
 				Home.STATE_MACHINESTATUS_UPPER		  	= nIndex++;
 				Home.STATE_MACHINESTATUS_LOWER		  	= nIndex++;
 				Home.STATE_LANGUAGE					    = nIndex++;
-				Home.STATE_SOUNDOUTPUT				    = nIndex++;
+				//Home.STATE_SOUNDOUTPUT				    = nIndex++;
 				Home.STATE_OPERATION_HISTORY		    	= nIndex++;
 				Home.STATE_FUEL_INFO				        = nIndex++;
 				Home.STATE_BOOM_DETENT_MODE			  	= nIndex++;
@@ -853,7 +853,7 @@ public class UserSwitching extends ParentFragment{
 			Home.STATE_MACHINESTATUS_UPPER		  	= nIndex++;
 			Home.STATE_MACHINESTATUS_LOWER		  	= nIndex++;
 			Home.STATE_LANGUAGE					    = nIndex++;
-			Home.STATE_SOUNDOUTPUT				    = nIndex++;
+			//Home.STATE_SOUNDOUTPUT				    = nIndex++;
 			Home.STATE_OPERATION_HISTORY		    	= nIndex++;
 			Home.STATE_FUEL_INFO				        = nIndex++;
 			Home.STATE_BOOM_DETENT_MODE			  	= nIndex++;
@@ -887,7 +887,7 @@ public class UserSwitching extends ParentFragment{
 				Home.STATE_MACHINESTATUS_UPPER		  	= nIndex++;
 				Home.STATE_MACHINESTATUS_LOWER		  	= nIndex++;
 				Home.STATE_LANGUAGE					    = nIndex++;
-				Home.STATE_SOUNDOUTPUT				    = nIndex++;
+				//Home.STATE_SOUNDOUTPUT				    = nIndex++;
 				Home.STATE_OPERATION_HISTORY		    	= nIndex++;
 				Home.STATE_FUEL_INFO				        = nIndex++;
 				Home.STATE_BOOM_DETENT_MODE			  	= nIndex++;
@@ -909,7 +909,7 @@ public class UserSwitching extends ParentFragment{
 				Home.STATE_MACHINESTATUS_UPPER		  	= nIndex++;
 				Home.STATE_MACHINESTATUS_LOWER		  	= nIndex++;
 				Home.STATE_LANGUAGE					    = nIndex++;
-				Home.STATE_SOUNDOUTPUT				    = nIndex++;
+				//Home.STATE_SOUNDOUTPUT				    = nIndex++;
 				Home.STATE_OPERATION_HISTORY		    	= nIndex++;
 				Home.STATE_FUEL_INFO				        = nIndex++;
 				Home.STATE_BOOM_DETENT_MODE			  	= nIndex++;
@@ -936,7 +936,7 @@ public class UserSwitching extends ParentFragment{
 			Home.STATE_MACHINESTATUS_UPPER		  	= nIndex++;
 			Home.STATE_MACHINESTATUS_LOWER		  	= nIndex++;
 			Home.STATE_LANGUAGE					    = nIndex++;
-			Home.STATE_SOUNDOUTPUT				    = nIndex++;
+			//Home.STATE_SOUNDOUTPUT				    = nIndex++;
 			Home.STATE_OPERATION_HISTORY		    	= nIndex++;
 			Home.STATE_FUEL_INFO				        = nIndex++;
 			Home.STATE_BOOM_DETENT_MODE			  	= nIndex++;
@@ -1079,7 +1079,7 @@ public class UserSwitching extends ParentFragment{
 		MachineStatusUpper = ParentActivity.MachineStatusUpperIndex;
 		MachineStatusLower = ParentActivity.MachineStatusLowerIndex;
 		Language = ParentActivity.LanguageIndex;		// ++, --, 150212 bwk
-		SoundOutput = ParentActivity.SoundState;
+		//SoundOutput = ParentActivity.SoundState;
 		HourmeterDisplay = ParentActivity.HourOdometerIndex;
 		FuelDisplay = ParentActivity.FuelIndex;
 		
@@ -1220,7 +1220,7 @@ public class UserSwitching extends ParentFragment{
 		MachineStatusUpperDisplay(MachineStatusUpper,_userdata.MachineStatusUpper);
 		MachineStatusLowerDisplay(MachineStatusLower,_userdata.MachineStatusLower);
 		LanguageDisplay(Language, _userdata.Language);	// ++, --, 150213 bwk
-		SoundOutputDisplay(SoundOutput,_userdata.SoundOutput);
+		//SoundOutputDisplay(SoundOutput,_userdata.SoundOutput);
 		HourmeterDisplay(HourmeterDisplay,_userdata.HourmeterDisplay);
 		FuelDisplay(FuelDisplay,_userdata.FuelDisplay);		// ++, --, 150403 bwk
 		BoomDetentModeDisplay(BoomDetentMode, _userdata.BoomDetentMode);
@@ -2007,7 +2007,7 @@ public class UserSwitching extends ParentFragment{
 		}
 		
 		if(ParentActivity.LockUserSwitching == Home.STATE_USERSWITCHING_LOCK){
-			if(Home.LOCK_STATE_UNIT_FUEL == true){
+			if(Home.LOCK_STATE_UNIT_TYPE == true){
 				adapter.UpdateLockIcon(Home.STATE_UNIT_FUEL, ParentActivity.getResources().getDrawable(R.drawable.locking_userswitching));
 			}else {
 				adapter.UpdateLockIcon(Home.STATE_UNIT_FUEL, null);
@@ -2046,7 +2046,7 @@ public class UserSwitching extends ParentFragment{
 		}
 		
 		if(ParentActivity.LockUserSwitching == Home.STATE_USERSWITCHING_LOCK){
-			if(Home.LOCK_STATE_UNIT_TEMP == true){
+			if(Home.LOCK_STATE_UNIT_TYPE == true){
 				adapter.UpdateLockIcon(Home.STATE_UNIT_TEMP, ParentActivity.getResources().getDrawable(R.drawable.locking_userswitching));
 			}else {
 				adapter.UpdateLockIcon(Home.STATE_UNIT_TEMP, null);
@@ -2085,7 +2085,7 @@ public class UserSwitching extends ParentFragment{
 		}
 		
 		if(ParentActivity.LockUserSwitching == Home.STATE_USERSWITCHING_LOCK){
-			if(Home.LOCK_STATE_UNIT_ODO == true){
+			if(Home.LOCK_STATE_UNIT_TYPE == true){
 				adapter.UpdateLockIcon(Home.STATE_UNIT_ODO, ParentActivity.getResources().getDrawable(R.drawable.locking_userswitching));
 			}else {
 				adapter.UpdateLockIcon(Home.STATE_UNIT_ODO, null);
@@ -2129,7 +2129,7 @@ public class UserSwitching extends ParentFragment{
 			adapter.UpdateIcon(Home.STATE_UNIT_WEIGHT, null);
 		}
 		if(ParentActivity.LockUserSwitching == Home.STATE_USERSWITCHING_LOCK){
-			if(Home.LOCK_STATE_UNIT_WEIGHT == true){
+			if(Home.LOCK_STATE_UNIT_TYPE == true){
 				adapter.UpdateLockIcon(Home.STATE_UNIT_WEIGHT, ParentActivity.getResources().getDrawable(R.drawable.locking_userswitching));
 			}else {
 				adapter.UpdateLockIcon(Home.STATE_UNIT_WEIGHT, null);
@@ -2180,7 +2180,7 @@ public class UserSwitching extends ParentFragment{
 		}
 		
 		if(ParentActivity.LockUserSwitching == Home.STATE_USERSWITCHING_LOCK){
-			if(Home.LOCK_STATE_UNIT_PRESSURE == true){
+			if(Home.LOCK_STATE_UNIT_TYPE == true){
 				adapter.UpdateLockIcon(Home.STATE_UNIT_PRESSURE, ParentActivity.getResources().getDrawable(R.drawable.locking_userswitching));
 			}else {
 				adapter.UpdateLockIcon(Home.STATE_UNIT_PRESSURE, null);
@@ -2475,7 +2475,7 @@ public class UserSwitching extends ParentFragment{
 		// --, 150213 bwk
 	}
 	
-	public void SoundOutputDisplay(int SettingData, int LoadingData){
+	/*public void SoundOutputDisplay(int SettingData, int LoadingData){
 		switch (SettingData) {
 		case Home.STATE_INTERNAL_SPK:
 			adapter.UpdateSecond(Home.STATE_SOUNDOUTPUT, getString(ParentActivity.getResources().getString(string.Internal_Speaker), 420));
@@ -2513,7 +2513,7 @@ public class UserSwitching extends ParentFragment{
 			adapter.UpdateLockIcon(Home.STATE_SOUNDOUTPUT, null);
 		}
 		adapter.notifyDataSetChanged();
-	}	
+	}	*/
 	public void HourmeterDisplay(int SettingData, int LoadingData){
 		switch (SettingData) {
 		case CAN1CommManager.DATA_STATE_OPERATION_NOSELECT:
@@ -2743,36 +2743,6 @@ public class UserSwitching extends ParentFragment{
 		adapter.notifyDataSetChanged();		
 	}
 	void ReverseCameraModeDisplay(int SettingData, int LoadingData){
-		
-		
-		
-		switch (SettingData) {
-		case CAN1CommManager.DATA_STATE_CAMERA_REVERSE_OFF:
-			adapter.UpdateSecond(Home.STATE_REVERSE_CAMERA, getString(ParentActivity.getResources().getString(string.Off), 20));
-			break;
-		case CAN1CommManager.DATA_STATE_CAMERA_REVERSE_ON:
-			adapter.UpdateSecond(Home.STATE_REVERSE_CAMERA, getString(ParentActivity.getResources().getString(string.On), 19));
-			break;
-		default:
-			break;
-		}
-		switch (LoadingData) {
-		case CAN1CommManager.DATA_STATE_CAMERA_REVERSE_OFF:
-			adapter.UpdateThird(Home.STATE_REVERSE_CAMERA, getString(ParentActivity.getResources().getString(string.Off), 20));
-			break;
-		case CAN1CommManager.DATA_STATE_CAMERA_REVERSE_ON:
-			adapter.UpdateThird(Home.STATE_REVERSE_CAMERA, getString(ParentActivity.getResources().getString(string.On), 19));
-			break;
-		default:
-			break;
-		}
-		
-		if(SettingData != LoadingData){
-			adapter.UpdateIcon(Home.STATE_REVERSE_CAMERA, ParentActivity.getResources().getDrawable(R.drawable.main_quick_user_x));
-		}else{
-			adapter.UpdateIcon(Home.STATE_REVERSE_CAMERA, null);
-		}
-		
 		if(ParentActivity.LockUserSwitching == Home.STATE_USERSWITCHING_LOCK){
 			if(Home.LOCK_STATE_REVERSE_CAMERA == true){
 				adapter.UpdateLockIcon(Home.STATE_REVERSE_CAMERA, ParentActivity.getResources().getDrawable(R.drawable.locking_userswitching));
@@ -2896,7 +2866,7 @@ public class UserSwitching extends ParentFragment{
 		_userdata.MachineStatusUpper = MachineStatusUpper;
 		_userdata.MachineStatusLower = MachineStatusLower;
 		_userdata.Language = Language;
-		_userdata.SoundOutput = SoundOutput;
+		//_userdata.SoundOutput = SoundOutput;
 		_userdata.HourmeterDisplay = HourmeterDisplay;
 		_userdata.FuelDisplay = FuelDisplay;
 		_userdata.BoomDetentMode = BoomDetentMode;
@@ -3099,19 +3069,19 @@ public class UserSwitching extends ParentFragment{
 		ParentActivity.UnitType = Home.UNIT_TYPE_CUSTOM;
 		}
 		
-		if(Home.LOCK_STATE_UNIT_FUEL == false || ParentActivity.LockUserSwitching == Home.STATE_USERSWITCHING_UNLOCK){
+		if(Home.LOCK_STATE_UNIT_TYPE == false || ParentActivity.LockUserSwitching == Home.STATE_USERSWITCHING_UNLOCK){
 		ParentActivity.UnitFuel = _userdata.UnitFuel;
 		}
-		if(Home.LOCK_STATE_UNIT_ODO == false || ParentActivity.LockUserSwitching == Home.STATE_USERSWITCHING_UNLOCK){
+		if(Home.LOCK_STATE_UNIT_TYPE == false || ParentActivity.LockUserSwitching == Home.STATE_USERSWITCHING_UNLOCK){
 		ParentActivity.UnitOdo = _userdata.UnitOdo;
 		}
-		if(Home.LOCK_STATE_UNIT_TEMP == false || ParentActivity.LockUserSwitching == Home.STATE_USERSWITCHING_UNLOCK){
+		if(Home.LOCK_STATE_UNIT_TYPE == false || ParentActivity.LockUserSwitching == Home.STATE_USERSWITCHING_UNLOCK){
 		ParentActivity.UnitTemp = _userdata.UnitTemp;
 		}
-		if(Home.LOCK_STATE_UNIT_WEIGHT == false || ParentActivity.LockUserSwitching == Home.STATE_USERSWITCHING_UNLOCK){
+		if(Home.LOCK_STATE_UNIT_TYPE == false || ParentActivity.LockUserSwitching == Home.STATE_USERSWITCHING_UNLOCK){
 		ParentActivity.UnitWeight = _userdata.UnitWeight;
 		}
-		if(Home.LOCK_STATE_UNIT_PRESSURE == false || ParentActivity.LockUserSwitching == Home.STATE_USERSWITCHING_UNLOCK){
+		if(Home.LOCK_STATE_UNIT_TYPE == false || ParentActivity.LockUserSwitching == Home.STATE_USERSWITCHING_UNLOCK){
 		ParentActivity.UnitPressure = _userdata.UnitPressure;
 		}
 		if(Home.LOCK_STATE_MACHINESTATUS_UPPER == false || ParentActivity.LockUserSwitching == Home.STATE_USERSWITCHING_UNLOCK){
@@ -3140,7 +3110,7 @@ public class UserSwitching extends ParentFragment{
 		ParentActivity.DisplayType = _userdata.DisplayType;
 		}
 		
-		if(Home.LOCK_STATE_SOUNDOUTPUT == false || ParentActivity.LockUserSwitching == Home.STATE_USERSWITCHING_UNLOCK){
+		/*if(Home.LOCK_STATE_SOUNDOUTPUT == false || ParentActivity.LockUserSwitching == Home.STATE_USERSWITCHING_UNLOCK){
 		ParentActivity.SoundState = _userdata.SoundOutput;
 		try {
 			CAN1Comm.LineOutfromJNI(_userdata.SoundOutput);
@@ -3152,7 +3122,7 @@ public class UserSwitching extends ParentFragment{
 			// TODO: handle exception
 			Log.e(TAG,"Load Library Error");
 		}			
-		}
+		}*/
 		
 		if(Home.LOCK_STATE_REVERSE_FAN_MODE == false || ParentActivity.LockUserSwitching == Home.STATE_USERSWITCHING_UNLOCK){
 			ParentActivity.CoolingReverseFanStatus = _userdata.ReverseFanMode;

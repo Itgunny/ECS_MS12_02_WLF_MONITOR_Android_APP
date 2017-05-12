@@ -252,7 +252,7 @@ public class VersionInfoMonitorFragment extends VersionInfoDetailFragment{
 			textViewHardwareData.setText("RevF.03.01");
 		}else if(_data > 865 && _data < 920){	// 3.6k	890
 			textViewHardwareData.setText("RevF.04.01");
-		}else if(_data > 1082 && _data < 1132){ // 2.7K 1107
+		}else if(_data > 1050 && _data < 1132){ // 2.7K 1107
 			textViewHardwareData.setText("RevH.03.01");
 		}
 		else{

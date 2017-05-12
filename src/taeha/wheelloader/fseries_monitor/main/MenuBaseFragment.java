@@ -2434,9 +2434,6 @@ public class MenuBaseFragment extends ParentFragment{
 		case Home.SCREEN_STATE_MENU_MANAGEMENT_ASPHONE_ENTERTAINMENT_LOCK_POPUP:
 			ParentActivity._EntertainmentLockPopup.ClickESC();
 			break;	
-		case Home.SCREEN_STATE_MENU_USERSWITCHING_POPUP:
-			ParentActivity._UserSwitchingLockingPopup.ClickESC();
-			break;
 		default:
 			break;
 		}
@@ -2782,6 +2779,10 @@ public class MenuBaseFragment extends ParentFragment{
 				break;
 			case Home.SCREEN_STATE_MENU_MANAGEMENT_SERVICE_PW:
 				_ServiceMenuPasswordFragment.showHWTestScreen();
+				break;
+			case Home.SCREEN_STATE_MENU_USERSWITCHING_TOP:
+				ParentActivity.showUserSwitchingLockingPopup();
+				break;
 			default:
 				break;
 		}
@@ -2839,9 +2840,7 @@ public class MenuBaseFragment extends ParentFragment{
 			case Home.SCREEN_STATE_MENU_MULTIMEDIA_TOP:
 				_MenuMultimediaFragment.ExcuteFileManaget();
 				break;
-			case Home.SCREEN_STATE_MENU_USERSWITCHING_TOP:
-				ParentActivity.showUserSwitchingLockingPopup();
-				break;
+
 			default:
 				break;
 		}

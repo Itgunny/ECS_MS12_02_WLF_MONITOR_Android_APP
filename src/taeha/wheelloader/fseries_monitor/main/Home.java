@@ -88,7 +88,7 @@ public class Home extends Activity {
 	public static final int VERSION_HIGH 		= 2;
 	public static final int VERSION_LOW 		= 4;
 	public static final int VERSION_SUB_HIGH 	= 3;
-	public static final int VERSION_SUB_LOW 	= 0;
+	public static final int VERSION_SUB_LOW 	= 1;
 	public static final int VERSION_TAEHA		= 0;
 	// UI B 안 최초 적용 2014.12.10
 	////1.0.2.4
@@ -804,6 +804,9 @@ public class Home extends Activity {
 	// 1. 멀티미디어 및 유저스위칭 제한 기능 추가
 	// 2. Cooling Fan Max Adjust 기능 추가
 	// 3. AUX 제거
+	////v2.4.3.10
+	// 1. 
+	// 2. 
 	//////////////////////////////////////////////////////////////////////////////////////
 	// TAG
 
@@ -4709,7 +4712,7 @@ public class Home extends Activity {
 			// TODO Auto-generated method stub
 			Log.d(TAG, "CIDTimerCount"+CIDTimerCount);
 			if(++CIDTimerCount > 10){
-				CheckCID();
+				CheckCID(); 
 				CancelSendCIDTimer();
 			}else{
 				SendCID();
@@ -5136,8 +5139,6 @@ public class Home extends Activity {
 		componetbasicinfo[0] = (byte)SharePref.getInt("ManufacturerYear_Monitor", 1);
 		componetbasicinfo[1] = (byte)SharePref.getInt("ManufacturerMonth_Monitor", 1);
 		componetbasicinfo[2] = (byte)SharePref.getInt("ManufacturerDate_Monitor", 1);
-		
-		Log.d(TAG, "componentBasicInfo : " + str);
 		
 		byte[] Temp;
 		Temp = new byte[str.length()];
@@ -5871,11 +5872,11 @@ public class Home extends Activity {
 		edit.putBoolean("LOCK_STATE_BRIGHTNESS_MANUALAUTO", LOCK_STATE_BRIGHTNESS_MANUALAUTO);
 		edit.putBoolean("LOCK_STATE_DISPLAYTYPE", LOCK_STATE_DISPLAYTYPE);
 		edit.putBoolean("LOCK_STATE_UNIT_TYPE", LOCK_STATE_UNIT_TYPE);
-		edit.putBoolean("LOCK_STATE_UNIT_FUEL", LOCK_STATE_UNIT_FUEL);
-		edit.putBoolean("LOCK_STATE_UNIT_TEMP", LOCK_STATE_UNIT_TEMP);
-		edit.putBoolean("LOCK_STATE_UNIT_ODO", LOCK_STATE_UNIT_ODO);
-		edit.putBoolean("LOCK_STATE_UNIT_WEIGHT", LOCK_STATE_UNIT_WEIGHT);
-		edit.putBoolean("LOCK_STATE_UNIT_PRESSURE", LOCK_STATE_UNIT_PRESSURE);
+		//edit.putBoolean("LOCK_STATE_UNIT_FUEL", LOCK_STATE_UNIT_FUEL);
+		//edit.putBoolean("LOCK_STATE_UNIT_TEMP", LOCK_STATE_UNIT_TEMP);
+		//edit.putBoolean("LOCK_STATE_UNIT_ODO", LOCK_STATE_UNIT_ODO);
+		//edit.putBoolean("LOCK_STATE_UNIT_WEIGHT", LOCK_STATE_UNIT_WEIGHT);
+		//edit.putBoolean("LOCK_STATE_UNIT_PRESSURE", LOCK_STATE_UNIT_PRESSURE);
 		edit.putBoolean("LOCK_STATE_MACHINESTATUS_UPPER", LOCK_STATE_MACHINESTATUS_UPPER);
 		edit.putBoolean("LOCK_STATE_MACHINESTATUS_LOWER", LOCK_STATE_MACHINESTATUS_LOWER);
 		edit.putBoolean("LOCK_STATE_LANGUAGE", LOCK_STATE_LANGUAGE);
@@ -5912,11 +5913,11 @@ public class Home extends Activity {
 		LOCK_STATE_BRIGHTNESS_MANUALAUTO = SharePref.getBoolean("LOCK_STATE_BRIGHTNESS_MANUALAUTO", false);
 		LOCK_STATE_DISPLAYTYPE = SharePref.getBoolean("LOCK_STATE_DISPLAYTYPE", false);
 		LOCK_STATE_UNIT_TYPE = SharePref.getBoolean("LOCK_STATE_UNIT_TYPE", false);
-		LOCK_STATE_UNIT_FUEL = SharePref.getBoolean("LOCK_STATE_UNIT_FUEL", false);
-		LOCK_STATE_UNIT_TEMP = SharePref.getBoolean("LOCK_STATE_UNIT_TEMP", false);
-		LOCK_STATE_UNIT_ODO = SharePref.getBoolean("LOCK_STATE_UNIT_ODO", false);
-		LOCK_STATE_UNIT_WEIGHT = SharePref.getBoolean("LOCK_STATE_UNIT_WEIGHT", false);
-		LOCK_STATE_UNIT_PRESSURE = SharePref.getBoolean("LOCK_STATE_UNIT_PRESSURE", false);
+		//LOCK_STATE_UNIT_FUEL = SharePref.getBoolean("LOCK_STATE_UNIT_FUEL", false);
+		//LOCK_STATE_UNIT_TEMP = SharePref.getBoolean("LOCK_STATE_UNIT_TEMP", false);
+		//LOCK_STATE_UNIT_ODO = SharePref.getBoolean("LOCK_STATE_UNIT_ODO", false);
+		//LOCK_STATE_UNIT_WEIGHT = SharePref.getBoolean("LOCK_STATE_UNIT_WEIGHT", false);
+		//LOCK_STATE_UNIT_PRESSURE = SharePref.getBoolean("LOCK_STATE_UNIT_PRESSURE", false);
 		LOCK_STATE_MACHINESTATUS_UPPER = SharePref.getBoolean("LOCK_STATE_MACHINESTATUS_UPPER", false);
 		LOCK_STATE_MACHINESTATUS_LOWER = SharePref.getBoolean("LOCK_STATE_MACHINESTATUS_LOWER", false);
 		LOCK_STATE_LANGUAGE = SharePref.getBoolean("LOCK_STATE_LANGUAGE", false);
@@ -5977,15 +5978,15 @@ public class Home extends Activity {
 				STATE_BRIGHTNESS_MANUALAUTO = nIndex++;
 				STATE_DISPLAYTYPE = nIndex++;
 				STATE_UNIT_TYPE = nIndex++;
-				STATE_UNIT_FUEL = nIndex++;
-				STATE_UNIT_TEMP = nIndex++;
-				STATE_UNIT_ODO = nIndex++;
-				STATE_UNIT_WEIGHT = nIndex++;
-				STATE_UNIT_PRESSURE = nIndex++;
+				//STATE_UNIT_FUEL = nIndex++;
+				//STATE_UNIT_TEMP = nIndex++;
+				//STATE_UNIT_ODO = nIndex++;
+				//STATE_UNIT_WEIGHT = nIndex++;
+				//STATE_UNIT_PRESSURE = nIndex++;
 				STATE_MACHINESTATUS_UPPER = nIndex++;
 				STATE_MACHINESTATUS_LOWER = nIndex++;
 				STATE_LANGUAGE = nIndex++;
-				STATE_SOUNDOUTPUT = nIndex++;
+				//STATE_SOUNDOUTPUT = nIndex++;
 				STATE_OPERATION_HISTORY = nIndex++;
 				STATE_FUEL_INFO = nIndex++;
 				STATE_BOOM_DETENT_MODE = nIndex++;
@@ -5997,15 +5998,15 @@ public class Home extends Activity {
 				STATE_BRIGHTNESS_MANUALAUTO = nIndex++;
 				STATE_DISPLAYTYPE = nIndex++;
 				STATE_UNIT_TYPE = nIndex++;
-				STATE_UNIT_FUEL = nIndex++;
-				STATE_UNIT_TEMP = nIndex++;
-				STATE_UNIT_ODO = nIndex++;
-				STATE_UNIT_WEIGHT = nIndex++;
-				STATE_UNIT_PRESSURE = nIndex++;
+				//STATE_UNIT_FUEL = nIndex++;
+				//STATE_UNIT_TEMP = nIndex++;
+				//STATE_UNIT_ODO = nIndex++;
+				//STATE_UNIT_WEIGHT = nIndex++;
+				//STATE_UNIT_PRESSURE = nIndex++;
 				STATE_MACHINESTATUS_UPPER = nIndex++;
 				STATE_MACHINESTATUS_LOWER = nIndex++;
 				STATE_LANGUAGE = nIndex++;
-				STATE_SOUNDOUTPUT = nIndex++;
+				//STATE_SOUNDOUTPUT = nIndex++;
 				STATE_OPERATION_HISTORY = nIndex++;
 				STATE_FUEL_INFO = nIndex++;
 				STATE_BOOM_DETENT_MODE = nIndex++;
@@ -6024,15 +6025,15 @@ public class Home extends Activity {
 			STATE_BRIGHTNESS_MANUALAUTO = nIndex++;
 			STATE_DISPLAYTYPE = nIndex++;
 			STATE_UNIT_TYPE = nIndex++;
-			STATE_UNIT_FUEL = nIndex++;
-			STATE_UNIT_TEMP = nIndex++;
-			STATE_UNIT_ODO = nIndex++;
-			STATE_UNIT_WEIGHT = nIndex++;
-			STATE_UNIT_PRESSURE = nIndex++;
+			//STATE_UNIT_FUEL = nIndex++;
+			//STATE_UNIT_TEMP = nIndex++;
+			//STATE_UNIT_ODO = nIndex++;
+			//STATE_UNIT_WEIGHT = nIndex++;
+			//STATE_UNIT_PRESSURE = nIndex++;
 			STATE_MACHINESTATUS_UPPER = nIndex++;
 			STATE_MACHINESTATUS_LOWER = nIndex++;
 			STATE_LANGUAGE = nIndex++;
-			STATE_SOUNDOUTPUT = nIndex++;
+			//STATE_SOUNDOUTPUT = nIndex++;
 			STATE_OPERATION_HISTORY = nIndex++;
 			STATE_FUEL_INFO = nIndex++;
 			STATE_BOOM_DETENT_MODE = nIndex++;
@@ -6055,15 +6056,15 @@ public class Home extends Activity {
 				STATE_BRIGHTNESS_MANUALAUTO = nIndex++;
 				STATE_DISPLAYTYPE = nIndex++;
 				STATE_UNIT_TYPE = nIndex++;
-				STATE_UNIT_FUEL = nIndex++;
-				STATE_UNIT_TEMP = nIndex++;
-				STATE_UNIT_ODO = nIndex++;
-				STATE_UNIT_WEIGHT = nIndex++;
-				STATE_UNIT_PRESSURE = nIndex++;
+				//STATE_UNIT_FUEL = nIndex++;
+				//STATE_UNIT_TEMP = nIndex++;
+				//STATE_UNIT_ODO = nIndex++;
+				//STATE_UNIT_WEIGHT = nIndex++;
+				//STATE_UNIT_PRESSURE = nIndex++;
 				STATE_MACHINESTATUS_UPPER = nIndex++;
 				STATE_MACHINESTATUS_LOWER = nIndex++;
 				STATE_LANGUAGE = nIndex++;
-				STATE_SOUNDOUTPUT = nIndex++;
+				//STATE_SOUNDOUTPUT = nIndex++;
 				STATE_OPERATION_HISTORY = nIndex++;
 				STATE_FUEL_INFO = nIndex++;
 				STATE_BOOM_DETENT_MODE = nIndex++;
@@ -6075,15 +6076,15 @@ public class Home extends Activity {
 				STATE_BRIGHTNESS_MANUALAUTO = nIndex++;
 				STATE_DISPLAYTYPE = nIndex++;
 				STATE_UNIT_TYPE = nIndex++;
-				STATE_UNIT_FUEL = nIndex++;
-				STATE_UNIT_TEMP = nIndex++;
-				STATE_UNIT_ODO = nIndex++;
-				STATE_UNIT_WEIGHT = nIndex++;
-				STATE_UNIT_PRESSURE = nIndex++;
+				//STATE_UNIT_FUEL = nIndex++;
+				//STATE_UNIT_TEMP = nIndex++;
+				//STATE_UNIT_ODO = nIndex++;
+				//STATE_UNIT_WEIGHT = nIndex++;
+				//STATE_UNIT_PRESSURE = nIndex++;
 				STATE_MACHINESTATUS_UPPER = nIndex++;
 				STATE_MACHINESTATUS_LOWER = nIndex++;
 				STATE_LANGUAGE = nIndex++;
-				STATE_SOUNDOUTPUT = nIndex++;
+				//STATE_SOUNDOUTPUT = nIndex++;
 				STATE_OPERATION_HISTORY = nIndex++;
 				STATE_FUEL_INFO = nIndex++;
 				STATE_BOOM_DETENT_MODE = nIndex++;
@@ -6101,15 +6102,15 @@ public class Home extends Activity {
 			STATE_BRIGHTNESS_MANUALAUTO = nIndex++;
 			STATE_DISPLAYTYPE = nIndex++;
 			STATE_UNIT_TYPE = nIndex++;
-			STATE_UNIT_FUEL = nIndex++;
-			STATE_UNIT_TEMP = nIndex++;
-			STATE_UNIT_ODO = nIndex++;
-			STATE_UNIT_WEIGHT = nIndex++;
-			STATE_UNIT_PRESSURE = nIndex++;
+			//STATE_UNIT_FUEL = nIndex++;
+			//STATE_UNIT_TEMP = nIndex++;
+			//STATE_UNIT_ODO = nIndex++;
+			//STATE_UNIT_WEIGHT = nIndex++;
+			//STATE_UNIT_PRESSURE = nIndex++;
 			STATE_MACHINESTATUS_UPPER = nIndex++;
 			STATE_MACHINESTATUS_LOWER = nIndex++;
 			STATE_LANGUAGE = nIndex++;
-			STATE_SOUNDOUTPUT = nIndex++;
+			//STATE_SOUNDOUTPUT = nIndex++;
 			STATE_OPERATION_HISTORY = nIndex++;
 			STATE_FUEL_INFO = nIndex++;
 			STATE_BOOM_DETENT_MODE = nIndex++;

@@ -378,7 +378,7 @@ public class SettingLockUserSwitchingFragment extends ParentFragment{
 					null,
 					getString(ParentActivity.getResources().getString(string.Unit_Setting), 413)
 					, ""));
-			adapter.addItem(new IconTextItemUserSwitchingLock( ParentActivity.getResources().getDrawable(R.drawable.menu_management_machine_monitoring_bg_dark),
+			/*adapter.addItem(new IconTextItemUserSwitchingLock( ParentActivity.getResources().getDrawable(R.drawable.menu_management_machine_monitoring_bg_dark),
 					null,
 					getString(ParentActivity.getResources().getString(string.Volume), 468)
 					, ""));
@@ -397,7 +397,7 @@ public class SettingLockUserSwitchingFragment extends ParentFragment{
 			adapter.addItem(new IconTextItemUserSwitchingLock( ParentActivity.getResources().getDrawable(R.drawable.menu_management_machine_monitoring_bg_dark),
 					null,
 					getString(ParentActivity.getResources().getString(string.Pressure), 42)
-					, ""));
+					, ""));*/
 			adapter.addItem(new IconTextItemUserSwitchingLock( ParentActivity.getResources().getDrawable(R.drawable.menu_management_machine_monitoring_bg_light),
 					null,
 					getString(ParentActivity.getResources().getString(string.Machine_Monitoring), 253)
@@ -409,10 +409,6 @@ public class SettingLockUserSwitchingFragment extends ParentFragment{
 			adapter.addItem(new IconTextItemUserSwitchingLock( ParentActivity.getResources().getDrawable(R.drawable.menu_management_machine_monitoring_bg_light),
 					null,
 					getString(ParentActivity.getResources().getString(string.Language), 422)
-					, ""));
-			adapter.addItem(new IconTextItemUserSwitchingLock( ParentActivity.getResources().getDrawable(R.drawable.menu_management_machine_monitoring_bg_dark),
-					null,
-					getString(ParentActivity.getResources().getString(string.Sound_Output_Setting), 415)
 					, ""));
 			adapter.addItem(new IconTextItemUserSwitchingLock( ParentActivity.getResources().getDrawable(R.drawable.menu_management_machine_monitoring_bg_light),
 					null,
@@ -455,7 +451,7 @@ public class SettingLockUserSwitchingFragment extends ParentFragment{
 					null,
 					getString(ParentActivity.getResources().getString(string.Unit_Setting), 414)
 					, ""));
-			adapter.addItem(new IconTextItemUserSwitchingLock( ParentActivity.getResources().getDrawable(R.drawable.menu_management_machine_monitoring_bg_light),
+			/*adapter.addItem(new IconTextItemUserSwitchingLock( ParentActivity.getResources().getDrawable(R.drawable.menu_management_machine_monitoring_bg_light),
 					null,
 					getString(ParentActivity.getResources().getString(string.Volume), 468)
 					, ""));
@@ -474,7 +470,7 @@ public class SettingLockUserSwitchingFragment extends ParentFragment{
 			adapter.addItem(new IconTextItemUserSwitchingLock( ParentActivity.getResources().getDrawable(R.drawable.menu_management_machine_monitoring_bg_light),
 					null,
 					getString(ParentActivity.getResources().getString(string.Pressure), 42)
-					, ""));
+					, ""));*/
 			adapter.addItem(new IconTextItemUserSwitchingLock( ParentActivity.getResources().getDrawable(R.drawable.menu_management_machine_monitoring_bg_dark),
 					null,
 					getString(ParentActivity.getResources().getString(string.Machine_Monitoring), 253)
@@ -486,10 +482,6 @@ public class SettingLockUserSwitchingFragment extends ParentFragment{
 			adapter.addItem(new IconTextItemUserSwitchingLock( ParentActivity.getResources().getDrawable(R.drawable.menu_management_machine_monitoring_bg_dark),
 					null,
 					getString(ParentActivity.getResources().getString(string.Language), 422)
-					, ""));
-			adapter.addItem(new IconTextItemUserSwitchingLock( ParentActivity.getResources().getDrawable(R.drawable.menu_management_machine_monitoring_bg_light),
-					null,
-					getString(ParentActivity.getResources().getString(string.Sound_Output_Setting), 415)
 					, ""));
 			adapter.addItem(new IconTextItemUserSwitchingLock( ParentActivity.getResources().getDrawable(R.drawable.menu_management_machine_monitoring_bg_dark),
 					null,
@@ -559,15 +551,15 @@ public class SettingLockUserSwitchingFragment extends ParentFragment{
 				Home.STATE_BRIGHTNESS_MANUALAUTO	  		= nIndex++;	
 				Home.STATE_DISPLAYTYPE				    = nIndex++;
 				Home.STATE_UNIT_TYPE						= nIndex++;
-				Home.STATE_UNIT_FUEL				        = nIndex++;
-				Home.STATE_UNIT_TEMP				        = nIndex++;
-				Home.STATE_UNIT_ODO					    = nIndex++;
-				Home.STATE_UNIT_WEIGHT				    = nIndex++;
-				Home.STATE_UNIT_PRESSURE			      	= nIndex++;
+				//Home.STATE_UNIT_FUEL				        = nIndex++;
+				//Home.STATE_UNIT_TEMP				        = nIndex++;
+				//Home.STATE_UNIT_ODO					    = nIndex++;
+				//Home.STATE_UNIT_WEIGHT				    = nIndex++;
+				//Home.STATE_UNIT_PRESSURE			      	= nIndex++;
 				Home.STATE_MACHINESTATUS_UPPER		  	= nIndex++;
 				Home.STATE_MACHINESTATUS_LOWER		  	= nIndex++;
 				Home.STATE_LANGUAGE					    = nIndex++;
-				Home.STATE_SOUNDOUTPUT				    = nIndex++;
+				//Home.STATE_SOUNDOUTPUT				    = nIndex++;
 				Home.STATE_OPERATION_HISTORY		    	= nIndex++;
 				Home.STATE_FUEL_INFO				        = nIndex++;
 				Home.STATE_BOOM_DETENT_MODE			  	= nIndex++;
@@ -581,15 +573,15 @@ public class SettingLockUserSwitchingFragment extends ParentFragment{
 				Home.STATE_BRIGHTNESS_MANUALAUTO	  		= nIndex++;	
 				Home.STATE_DISPLAYTYPE				    = nIndex++;
 				Home.STATE_UNIT_TYPE						= nIndex++;
-				Home.STATE_UNIT_FUEL				        = nIndex++;
-				Home.STATE_UNIT_TEMP				        = nIndex++;
-				Home.STATE_UNIT_ODO					    = nIndex++;
-				Home.STATE_UNIT_WEIGHT				    = nIndex++;
-				Home.STATE_UNIT_PRESSURE			      	= nIndex++;
+				//Home.STATE_UNIT_FUEL				        = nIndex++;
+				//Home.STATE_UNIT_TEMP				        = nIndex++;
+				//Home.STATE_UNIT_ODO					    = nIndex++;
+				//Home.STATE_UNIT_WEIGHT				    = nIndex++;
+				//Home.STATE_UNIT_PRESSURE			      	= nIndex++;
 				Home.STATE_MACHINESTATUS_UPPER		  	= nIndex++;
 				Home.STATE_MACHINESTATUS_LOWER		  	= nIndex++;
 				Home.STATE_LANGUAGE					    = nIndex++;
-				Home.STATE_SOUNDOUTPUT				    = nIndex++;
+				//Home.STATE_SOUNDOUTPUT				    = nIndex++;
 				Home.STATE_OPERATION_HISTORY		    	= nIndex++;
 				Home.STATE_FUEL_INFO				        = nIndex++;
 				Home.STATE_BOOM_DETENT_MODE			  	= nIndex++;
@@ -608,15 +600,15 @@ public class SettingLockUserSwitchingFragment extends ParentFragment{
 			Home.STATE_BRIGHTNESS_MANUALAUTO	  		= nIndex++;
 			Home.STATE_DISPLAYTYPE				    = nIndex++;
 			Home.STATE_UNIT_TYPE						= nIndex++;
-			Home.STATE_UNIT_FUEL				        = nIndex++;
-			Home.STATE_UNIT_TEMP				        = nIndex++;
-			Home.STATE_UNIT_ODO					    = nIndex++;
-			Home.STATE_UNIT_WEIGHT				    = nIndex++;
-			Home.STATE_UNIT_PRESSURE			      	= nIndex++;
-			Home.STATE_MACHINESTATUS_UPPER		  	= nIndex++;
+			//Home.STATE_UNIT_FUEL				        = nIndex++;
+			//Home.STATE_UNIT_TEMP				        = nIndex++;
+			//Home.STATE_UNIT_ODO					    = nIndex++;
+			//Home.STATE_UNIT_WEIGHT				    = nIndex++;
+			//Home.STATE_UNIT_PRESSURE			      	= nIndex++;
+			Home.STATE_MACHINESTATUS_UPPER		  	= nIndex++;;
 			Home.STATE_MACHINESTATUS_LOWER		  	= nIndex++;
 			Home.STATE_LANGUAGE					    = nIndex++;
-			Home.STATE_SOUNDOUTPUT				    = nIndex++;
+			//Home.STATE_SOUNDOUTPUT				    = nIndex++;
 			Home.STATE_OPERATION_HISTORY		    	= nIndex++;
 			Home.STATE_FUEL_INFO				        = nIndex++;
 			Home.STATE_BOOM_DETENT_MODE			  	= nIndex++;
@@ -642,15 +634,15 @@ public class SettingLockUserSwitchingFragment extends ParentFragment{
 				Home.STATE_BRIGHTNESS_MANUALAUTO	  		= nIndex++;	
 				Home.STATE_DISPLAYTYPE				    = nIndex++;
 				Home.STATE_UNIT_TYPE						= nIndex++;
-				Home.STATE_UNIT_FUEL				        = nIndex++;
-				Home.STATE_UNIT_TEMP				        = nIndex++;
-				Home.STATE_UNIT_ODO					    = nIndex++;
-				Home.STATE_UNIT_WEIGHT				    = nIndex++;
-				Home.STATE_UNIT_PRESSURE			      	= nIndex++;
+				//Home.STATE_UNIT_FUEL				        = nIndex++;
+				//Home.STATE_UNIT_TEMP				        = nIndex++;
+				//Home.STATE_UNIT_ODO					    = nIndex++;
+				//Home.STATE_UNIT_WEIGHT				    = nIndex++;
+				//Home.STATE_UNIT_PRESSURE			      	= nIndex++;
 				Home.STATE_MACHINESTATUS_UPPER		  	= nIndex++;
 				Home.STATE_MACHINESTATUS_LOWER		  	= nIndex++;
 				Home.STATE_LANGUAGE					    = nIndex++;
-				Home.STATE_SOUNDOUTPUT				    = nIndex++;
+				//Home.STATE_SOUNDOUTPUT				    = nIndex++;
 				Home.STATE_OPERATION_HISTORY		    	= nIndex++;
 				Home.STATE_FUEL_INFO				        = nIndex++;
 				Home.STATE_BOOM_DETENT_MODE			  	= nIndex++;
@@ -664,15 +656,15 @@ public class SettingLockUserSwitchingFragment extends ParentFragment{
 				Home.STATE_BRIGHTNESS_MANUALAUTO	  		= nIndex++;	
 				Home.STATE_DISPLAYTYPE				    = nIndex++;
 				Home.STATE_UNIT_TYPE						= nIndex++;
-				Home.STATE_UNIT_FUEL				        = nIndex++;
-				Home.STATE_UNIT_TEMP				        = nIndex++;
-				Home.STATE_UNIT_ODO					    = nIndex++;
-				Home.STATE_UNIT_WEIGHT				    = nIndex++;
-				Home.STATE_UNIT_PRESSURE			      	= nIndex++;
+				//Home.STATE_UNIT_FUEL				        = nIndex++;
+				//Home.STATE_UNIT_TEMP				        = nIndex++;
+				//Home.STATE_UNIT_ODO					    = nIndex++;
+				//Home.STATE_UNIT_WEIGHT				    = nIndex++;
+				//Home.STATE_UNIT_PRESSURE			      	= nIndex++;
 				Home.STATE_MACHINESTATUS_UPPER		  	= nIndex++;
 				Home.STATE_MACHINESTATUS_LOWER		  	= nIndex++;
 				Home.STATE_LANGUAGE					    = nIndex++;
-				Home.STATE_SOUNDOUTPUT				    = nIndex++;
+				//Home.STATE_SOUNDOUTPUT				    = nIndex++;
 				Home.STATE_OPERATION_HISTORY		    	= nIndex++;
 				Home.STATE_FUEL_INFO				        = nIndex++;
 				Home.STATE_BOOM_DETENT_MODE			  	= nIndex++;
@@ -691,15 +683,15 @@ public class SettingLockUserSwitchingFragment extends ParentFragment{
 			Home.STATE_BRIGHTNESS_MANUALAUTO	  		= nIndex++;
 			Home.STATE_DISPLAYTYPE				    = nIndex++;
 			Home.STATE_UNIT_TYPE						= nIndex++;
-			Home.STATE_UNIT_FUEL				        = nIndex++;
-			Home.STATE_UNIT_TEMP				        = nIndex++;
-			Home.STATE_UNIT_ODO					    = nIndex++;
-			Home.STATE_UNIT_WEIGHT				    = nIndex++;
-			Home.STATE_UNIT_PRESSURE			      	= nIndex++;
+			//Home.STATE_UNIT_FUEL				        = nIndex++;
+			//Home.STATE_UNIT_TEMP				        = nIndex++;
+			//Home.STATE_UNIT_ODO					    = nIndex++;
+			//Home.STATE_UNIT_WEIGHT				    = nIndex++;
+			//Home.STATE_UNIT_PRESSURE			      	= nIndex++;
 			Home.STATE_MACHINESTATUS_UPPER		  	= nIndex++;
 			Home.STATE_MACHINESTATUS_LOWER		  	= nIndex++;
 			Home.STATE_LANGUAGE					    = nIndex++;
-			Home.STATE_SOUNDOUTPUT				    = nIndex++;
+			//Home.STATE_SOUNDOUTPUT				    = nIndex++;
 			Home.STATE_OPERATION_HISTORY		    	= nIndex++;
 			Home.STATE_FUEL_INFO				        = nIndex++;
 			Home.STATE_BOOM_DETENT_MODE			  	= nIndex++;
@@ -764,15 +756,15 @@ public class SettingLockUserSwitchingFragment extends ParentFragment{
 		// --, 150407 bwk
 		DisplayType = ParentActivity.DisplayType;
 		UnitType = ParentActivity.UnitType;
-		UnitFuel = ParentActivity.UnitFuel;
-		UnitTemp = ParentActivity.UnitTemp;
-		UnitOdo = ParentActivity.UnitOdo;
-		UnitWeight = ParentActivity.UnitWeight;
-		UnitPressure = ParentActivity.UnitPressure;
+		//UnitFuel = ParentActivity.UnitFuel;
+		//UnitTemp = ParentActivity.UnitTemp;
+		//UnitOdo = ParentActivity.UnitOdo;
+		//UnitWeight = ParentActivity.UnitWeight;
+		//UnitPressure = ParentActivity.UnitPressure;
 		MachineStatusUpper = ParentActivity.MachineStatusUpperIndex;
 		MachineStatusLower = ParentActivity.MachineStatusLowerIndex;
 		Language = ParentActivity.LanguageIndex;		// ++, --, 150212 bwk
-		SoundOutput = ParentActivity.SoundState;
+		//SoundOutput = ParentActivity.SoundState;
 		HourmeterDisplay = ParentActivity.HourOdometerIndex;
 		FuelDisplay = ParentActivity.FuelIndex;
 		
@@ -803,15 +795,15 @@ public class SettingLockUserSwitchingFragment extends ParentFragment{
 				LOCK_STATE_BRIGHTNESS_MANUALAUTO 	= adapter.isChecked(Home.STATE_BRIGHTNESS_MANUALAUTO);
 				LOCK_STATE_DISPLAYTYPE 	= adapter.isChecked(Home.STATE_DISPLAYTYPE);
 				LOCK_STATE_UNIT_TYPE 	= adapter.isChecked(Home.STATE_UNIT_TYPE);
-				LOCK_STATE_UNIT_FUEL 	= adapter.isChecked(Home.STATE_UNIT_FUEL);
-				LOCK_STATE_UNIT_TEMP 	= adapter.isChecked(Home.STATE_UNIT_TEMP);
-				LOCK_STATE_UNIT_ODO 	= adapter.isChecked(Home.STATE_UNIT_ODO);
-				LOCK_STATE_UNIT_WEIGHT 	= adapter.isChecked(Home.STATE_UNIT_WEIGHT);
-				LOCK_STATE_UNIT_PRESSURE 	= adapter.isChecked(Home.STATE_UNIT_PRESSURE);
+				//LOCK_STATE_UNIT_FUEL 	= adapter.isChecked(Home.STATE_UNIT_FUEL);
+				//LOCK_STATE_UNIT_TEMP 	= adapter.isChecked(Home.STATE_UNIT_TEMP);
+				//LOCK_STATE_UNIT_ODO 	= adapter.isChecked(Home.STATE_UNIT_ODO);
+				//LOCK_STATE_UNIT_WEIGHT 	= adapter.isChecked(Home.STATE_UNIT_WEIGHT);
+				//LOCK_STATE_UNIT_PRESSURE 	= adapter.isChecked(Home.STATE_UNIT_PRESSURE);
 				LOCK_STATE_MACHINESTATUS_UPPER 	= adapter.isChecked(Home.STATE_MACHINESTATUS_UPPER);
 				LOCK_STATE_MACHINESTATUS_LOWER 	= adapter.isChecked(Home.STATE_MACHINESTATUS_LOWER);
 				LOCK_STATE_LANGUAGE 	= adapter.isChecked(Home.STATE_LANGUAGE);
-				LOCK_STATE_SOUNDOUTPUT 	= adapter.isChecked(Home.STATE_SOUNDOUTPUT);
+				//LOCK_STATE_SOUNDOUTPUT 	= adapter.isChecked(Home.STATE_SOUNDOUTPUT);
 				LOCK_STATE_OPERATION_HISTORY 	= adapter.isChecked(Home.STATE_OPERATION_HISTORY);
 				LOCK_STATE_FUEL_INFO 	= adapter.isChecked(Home.STATE_FUEL_INFO);
 				LOCK_STATE_BOOM_DETENT_MODE 	= adapter.isChecked(Home.STATE_BOOM_DETENT_MODE);
@@ -823,15 +815,15 @@ public class SettingLockUserSwitchingFragment extends ParentFragment{
 				LOCK_STATE_BRIGHTNESS_MANUALAUTO 	= adapter.isChecked(Home.STATE_BRIGHTNESS_MANUALAUTO);
 				LOCK_STATE_DISPLAYTYPE 	= adapter.isChecked(Home.STATE_DISPLAYTYPE);
 				LOCK_STATE_UNIT_TYPE 	= adapter.isChecked(Home.STATE_UNIT_TYPE);
-				LOCK_STATE_UNIT_FUEL 	= adapter.isChecked(Home.STATE_UNIT_FUEL);
-				LOCK_STATE_UNIT_TEMP 	= adapter.isChecked(Home.STATE_UNIT_TEMP);
-				LOCK_STATE_UNIT_ODO 	= adapter.isChecked(Home.STATE_UNIT_ODO);
-				LOCK_STATE_UNIT_WEIGHT 	= adapter.isChecked(Home.STATE_UNIT_WEIGHT);
-				LOCK_STATE_UNIT_PRESSURE 	= adapter.isChecked(Home.STATE_UNIT_PRESSURE);
+				//LOCK_STATE_UNIT_FUEL 	= adapter.isChecked(Home.STATE_UNIT_FUEL);
+				//LOCK_STATE_UNIT_TEMP 	= adapter.isChecked(Home.STATE_UNIT_TEMP);
+				//LOCK_STATE_UNIT_ODO 	= adapter.isChecked(Home.STATE_UNIT_ODO);
+				//LOCK_STATE_UNIT_WEIGHT 	= adapter.isChecked(Home.STATE_UNIT_WEIGHT);
+				//LOCK_STATE_UNIT_PRESSURE 	= adapter.isChecked(Home.STATE_UNIT_PRESSURE);
 				LOCK_STATE_MACHINESTATUS_UPPER 	= adapter.isChecked(Home.STATE_MACHINESTATUS_UPPER);
 				LOCK_STATE_MACHINESTATUS_LOWER 	= adapter.isChecked(Home.STATE_MACHINESTATUS_LOWER);
 				LOCK_STATE_LANGUAGE 	= adapter.isChecked(Home.STATE_LANGUAGE);
-				LOCK_STATE_SOUNDOUTPUT 	= adapter.isChecked(Home.STATE_SOUNDOUTPUT);
+				//LOCK_STATE_SOUNDOUTPUT 	= adapter.isChecked(Home.STATE_SOUNDOUTPUT);
 				LOCK_STATE_OPERATION_HISTORY 	= adapter.isChecked(Home.STATE_OPERATION_HISTORY);
 				LOCK_STATE_FUEL_INFO 	= adapter.isChecked(Home.STATE_FUEL_INFO);
 				LOCK_STATE_BOOM_DETENT_MODE 	= adapter.isChecked(Home.STATE_BOOM_DETENT_MODE);
@@ -850,15 +842,15 @@ public class SettingLockUserSwitchingFragment extends ParentFragment{
 			LOCK_STATE_BRIGHTNESS_MANUALAUTO 	= adapter.isChecked(Home.STATE_BRIGHTNESS_MANUALAUTO);
 			LOCK_STATE_DISPLAYTYPE 	= adapter.isChecked(Home.STATE_DISPLAYTYPE);
 			LOCK_STATE_UNIT_TYPE 	= adapter.isChecked(Home.STATE_UNIT_TYPE);
-			LOCK_STATE_UNIT_FUEL 	= adapter.isChecked(Home.STATE_UNIT_FUEL);
-			LOCK_STATE_UNIT_TEMP 	= adapter.isChecked(Home.STATE_UNIT_TEMP);
-			LOCK_STATE_UNIT_ODO 	= adapter.isChecked(Home.STATE_UNIT_ODO);
-			LOCK_STATE_UNIT_WEIGHT 	= adapter.isChecked(Home.STATE_UNIT_WEIGHT);
-			LOCK_STATE_UNIT_PRESSURE 	= adapter.isChecked(Home.STATE_UNIT_PRESSURE);
+			//LOCK_STATE_UNIT_FUEL 	= adapter.isChecked(Home.STATE_UNIT_FUEL);
+			//LOCK_STATE_UNIT_TEMP 	= adapter.isChecked(Home.STATE_UNIT_TEMP);
+			//LOCK_STATE_UNIT_ODO 	= adapter.isChecked(Home.STATE_UNIT_ODO);
+			//LOCK_STATE_UNIT_WEIGHT 	= adapter.isChecked(Home.STATE_UNIT_WEIGHT);
+			//LOCK_STATE_UNIT_PRESSURE 	= adapter.isChecked(Home.STATE_UNIT_PRESSURE);
 			LOCK_STATE_MACHINESTATUS_UPPER 	= adapter.isChecked(Home.STATE_MACHINESTATUS_UPPER);
 			LOCK_STATE_MACHINESTATUS_LOWER 	= adapter.isChecked(Home.STATE_MACHINESTATUS_LOWER);
 			LOCK_STATE_LANGUAGE 	= adapter.isChecked(Home.STATE_LANGUAGE);
-			LOCK_STATE_SOUNDOUTPUT 	= adapter.isChecked(Home.STATE_SOUNDOUTPUT);
+			//LOCK_STATE_SOUNDOUTPUT 	= adapter.isChecked(Home.STATE_SOUNDOUTPUT);
 			LOCK_STATE_OPERATION_HISTORY 	= adapter.isChecked(Home.STATE_OPERATION_HISTORY);
 			LOCK_STATE_FUEL_INFO 	= adapter.isChecked(Home.STATE_FUEL_INFO);
 			LOCK_STATE_BOOM_DETENT_MODE 	= adapter.isChecked(Home.STATE_BOOM_DETENT_MODE);
@@ -881,15 +873,15 @@ public class SettingLockUserSwitchingFragment extends ParentFragment{
 				LOCK_STATE_BRIGHTNESS_MANUALAUTO 	= adapter.isChecked(Home.STATE_BRIGHTNESS_MANUALAUTO);
 				LOCK_STATE_DISPLAYTYPE 	= adapter.isChecked(Home.STATE_DISPLAYTYPE);
 				LOCK_STATE_UNIT_TYPE 	= adapter.isChecked(Home.STATE_UNIT_TYPE);
-				LOCK_STATE_UNIT_FUEL 	= adapter.isChecked(Home.STATE_UNIT_FUEL);
-				LOCK_STATE_UNIT_TEMP 	= adapter.isChecked(Home.STATE_UNIT_TEMP);
-				LOCK_STATE_UNIT_ODO 	= adapter.isChecked(Home.STATE_UNIT_ODO);
-				LOCK_STATE_UNIT_WEIGHT 	= adapter.isChecked(Home.STATE_UNIT_WEIGHT);
-				LOCK_STATE_UNIT_PRESSURE 	= adapter.isChecked(Home.STATE_UNIT_PRESSURE);
+				//LOCK_STATE_UNIT_FUEL 	= adapter.isChecked(Home.STATE_UNIT_FUEL);
+				//LOCK_STATE_UNIT_TEMP 	= adapter.isChecked(Home.STATE_UNIT_TEMP);
+				//LOCK_STATE_UNIT_ODO 	= adapter.isChecked(Home.STATE_UNIT_ODO);
+				//LOCK_STATE_UNIT_WEIGHT 	= adapter.isChecked(Home.STATE_UNIT_WEIGHT);
+				//LOCK_STATE_UNIT_PRESSURE 	= adapter.isChecked(Home.STATE_UNIT_PRESSURE);
 				LOCK_STATE_MACHINESTATUS_UPPER 	= adapter.isChecked(Home.STATE_MACHINESTATUS_UPPER);
 				LOCK_STATE_MACHINESTATUS_LOWER 	= adapter.isChecked(Home.STATE_MACHINESTATUS_LOWER);
 				LOCK_STATE_LANGUAGE 	= adapter.isChecked(Home.STATE_LANGUAGE);
-				LOCK_STATE_SOUNDOUTPUT 	= adapter.isChecked(Home.STATE_SOUNDOUTPUT);
+				//LOCK_STATE_SOUNDOUTPUT 	= adapter.isChecked(Home.STATE_SOUNDOUTPUT);
 				LOCK_STATE_OPERATION_HISTORY 	= adapter.isChecked(Home.STATE_OPERATION_HISTORY);
 				LOCK_STATE_FUEL_INFO 	= adapter.isChecked(Home.STATE_FUEL_INFO);
 				LOCK_STATE_BOOM_DETENT_MODE 	= adapter.isChecked(Home.STATE_BOOM_DETENT_MODE);
@@ -901,15 +893,15 @@ public class SettingLockUserSwitchingFragment extends ParentFragment{
 				LOCK_STATE_BRIGHTNESS_MANUALAUTO 	= adapter.isChecked(Home.STATE_BRIGHTNESS_MANUALAUTO);
 				LOCK_STATE_DISPLAYTYPE 	= adapter.isChecked(Home.STATE_DISPLAYTYPE);
 				LOCK_STATE_UNIT_TYPE 	= adapter.isChecked(Home.STATE_UNIT_TYPE);
-				LOCK_STATE_UNIT_FUEL 	= adapter.isChecked(Home.STATE_UNIT_FUEL);
-				LOCK_STATE_UNIT_TEMP 	= adapter.isChecked(Home.STATE_UNIT_TEMP);
-				LOCK_STATE_UNIT_ODO 	= adapter.isChecked(Home.STATE_UNIT_ODO);
-				LOCK_STATE_UNIT_WEIGHT 	= adapter.isChecked(Home.STATE_UNIT_WEIGHT);
-				LOCK_STATE_UNIT_PRESSURE 	= adapter.isChecked(Home.STATE_UNIT_PRESSURE);
+				//LOCK_STATE_UNIT_FUEL 	= adapter.isChecked(Home.STATE_UNIT_FUEL);
+				//LOCK_STATE_UNIT_TEMP 	= adapter.isChecked(Home.STATE_UNIT_TEMP);
+				//LOCK_STATE_UNIT_ODO 	= adapter.isChecked(Home.STATE_UNIT_ODO);
+				//LOCK_STATE_UNIT_WEIGHT 	= adapter.isChecked(Home.STATE_UNIT_WEIGHT);
+				//LOCK_STATE_UNIT_PRESSURE 	= adapter.isChecked(Home.STATE_UNIT_PRESSURE);
 				LOCK_STATE_MACHINESTATUS_UPPER 	= adapter.isChecked(Home.STATE_MACHINESTATUS_UPPER);
 				LOCK_STATE_MACHINESTATUS_LOWER 	= adapter.isChecked(Home.STATE_MACHINESTATUS_LOWER);
 				LOCK_STATE_LANGUAGE 	= adapter.isChecked(Home.STATE_LANGUAGE);
-				LOCK_STATE_SOUNDOUTPUT 	= adapter.isChecked(Home.STATE_SOUNDOUTPUT);
+				//LOCK_STATE_SOUNDOUTPUT 	= adapter.isChecked(Home.STATE_SOUNDOUTPUT);
 				LOCK_STATE_OPERATION_HISTORY 	= adapter.isChecked(Home.STATE_OPERATION_HISTORY);
 				LOCK_STATE_FUEL_INFO 	= adapter.isChecked(Home.STATE_FUEL_INFO);
 				LOCK_STATE_BOOM_DETENT_MODE 	= adapter.isChecked(Home.STATE_BOOM_DETENT_MODE);
@@ -927,15 +919,15 @@ public class SettingLockUserSwitchingFragment extends ParentFragment{
 			LOCK_STATE_BRIGHTNESS_MANUALAUTO 	= adapter.isChecked(Home.STATE_BRIGHTNESS_MANUALAUTO);
 			LOCK_STATE_DISPLAYTYPE 	= adapter.isChecked(Home.STATE_DISPLAYTYPE);
 			LOCK_STATE_UNIT_TYPE 	= adapter.isChecked(Home.STATE_UNIT_TYPE);
-			LOCK_STATE_UNIT_FUEL 	= adapter.isChecked(Home.STATE_UNIT_FUEL);
-			LOCK_STATE_UNIT_TEMP 	= adapter.isChecked(Home.STATE_UNIT_TEMP);
-			LOCK_STATE_UNIT_ODO 	= adapter.isChecked(Home.STATE_UNIT_ODO);
-			LOCK_STATE_UNIT_WEIGHT 	= adapter.isChecked(Home.STATE_UNIT_WEIGHT);
-			LOCK_STATE_UNIT_PRESSURE 	= adapter.isChecked(Home.STATE_UNIT_PRESSURE);
+			//LOCK_STATE_UNIT_FUEL 	= adapter.isChecked(Home.STATE_UNIT_FUEL);
+			//LOCK_STATE_UNIT_TEMP 	= adapter.isChecked(Home.STATE_UNIT_TEMP);
+			//LOCK_STATE_UNIT_ODO 	= adapter.isChecked(Home.STATE_UNIT_ODO);
+			//LOCK_STATE_UNIT_WEIGHT 	= adapter.isChecked(Home.STATE_UNIT_WEIGHT);
+			//LOCK_STATE_UNIT_PRESSURE 	= adapter.isChecked(Home.STATE_UNIT_PRESSURE);
 			LOCK_STATE_MACHINESTATUS_UPPER 	= adapter.isChecked(Home.STATE_MACHINESTATUS_UPPER);
 			LOCK_STATE_MACHINESTATUS_LOWER 	= adapter.isChecked(Home.STATE_MACHINESTATUS_LOWER);
 			LOCK_STATE_LANGUAGE 	= adapter.isChecked(Home.STATE_LANGUAGE);
-			LOCK_STATE_SOUNDOUTPUT 	= adapter.isChecked(Home.STATE_SOUNDOUTPUT);
+			//LOCK_STATE_SOUNDOUTPUT 	= adapter.isChecked(Home.STATE_SOUNDOUTPUT);
 			LOCK_STATE_OPERATION_HISTORY 	= adapter.isChecked(Home.STATE_OPERATION_HISTORY);
 			LOCK_STATE_FUEL_INFO 	= adapter.isChecked(Home.STATE_FUEL_INFO);
 			LOCK_STATE_BOOM_DETENT_MODE 	= adapter.isChecked(Home.STATE_BOOM_DETENT_MODE);
@@ -979,16 +971,16 @@ public class SettingLockUserSwitchingFragment extends ParentFragment{
 		}
 		BrightnessDisplay(BrightnessManualAuto);
 		UnitTypeDisplay(UnitType);
-		UnitFuelDisplay(UnitFuel);
-		UnitTempDisplay(UnitTemp);
-		UnitOdoDisplay(UnitOdo);
-		UnitWeightDisplay(UnitWeight);
-		UnitPressureDisplay(UnitPressure);
+		//UnitFuelDisplay(UnitFuel);
+		//UnitTempDisplay(UnitTemp);
+		//UnitOdoDisplay(UnitOdo);
+		//UnitWeightDisplay(UnitWeight);
+		//UnitPressureDisplay(UnitPressure);
 		DisplayTypeDisplay(DisplayType);
 		MachineStatusUpperDisplay(MachineStatusUpper);
 		MachineStatusLowerDisplay(MachineStatusLower);
 		LanguageDisplay(Language);
-		SoundOutputDisplay(SoundOutput);
+		//SoundOutputDisplay(SoundOutput);
 		HourmeterDisplay(HourmeterDisplay);
 		FuelDisplay(FuelDisplay);
 		BoomDetentModeDisplay(BoomDetentMode);
@@ -1596,7 +1588,7 @@ public class SettingLockUserSwitchingFragment extends ParentFragment{
 		adapter.notifyDataSetChanged();
 		// --, 150213 bwk
 	}
-	
+	/*
 	public void SoundOutputDisplay(int SettingData){
 		switch (SettingData) {
 		case Home.STATE_INTERNAL_SPK:
@@ -1614,7 +1606,7 @@ public class SettingLockUserSwitchingFragment extends ParentFragment{
 			adapter.UpdateCheckBox(Home.STATE_SOUNDOUTPUT, false);
 		}
 		adapter.notifyDataSetChanged();
-	}
+	}*/
 	public void HourmeterDisplay(int SettingData){
 		switch (SettingData) {
 		case CAN1CommManager.DATA_STATE_OPERATION_NOSELECT:
@@ -1728,17 +1720,6 @@ public class SettingLockUserSwitchingFragment extends ParentFragment{
 		adapter.notifyDataSetChanged();		
 	}
 	void ReverseCameraModeDisplay(int SettingData){
-		
-		switch (SettingData) {
-		case CAN1CommManager.DATA_STATE_CAMERA_REVERSE_OFF:
-			adapter.UpdateSecond(Home.STATE_REVERSE_CAMERA, getString(ParentActivity.getResources().getString(string.Off), 20));
-			break;
-		case CAN1CommManager.DATA_STATE_CAMERA_REVERSE_ON:
-			adapter.UpdateSecond(Home.STATE_REVERSE_CAMERA, getString(ParentActivity.getResources().getString(string.On), 19));
-			break;
-		default:
-			break;
-		}
 		if(Home.LOCK_STATE_REVERSE_CAMERA == true){
 			adapter.UpdateCheckBox(Home.STATE_REVERSE_CAMERA, true);
 		}else {
@@ -1755,10 +1736,7 @@ public class SettingLockUserSwitchingFragment extends ParentFragment{
 		}
 		adapter.notifyDataSetChanged();		
 	}
-	
 	void EngineAutoShutdownDisplay(int SettingData){
-		
-		
 		switch (SettingData) {
 		case CAN1CommManager.DATA_STATE_AUTOSHUTDOWN_OFF:
 			adapter.UpdateSecond(Home.STATE_ENGINE_AUTO_SHUTDOWN, getString(ParentActivity.getResources().getString(string.Off), 20));
@@ -1805,15 +1783,15 @@ public class SettingLockUserSwitchingFragment extends ParentFragment{
 		Home.LOCK_STATE_BRIGHTNESS_MANUALAUTO 	= LOCK_STATE_BRIGHTNESS_MANUALAUTO;
 		Home.LOCK_STATE_DISPLAYTYPE 	= LOCK_STATE_DISPLAYTYPE;
 		Home.LOCK_STATE_UNIT_TYPE 	= LOCK_STATE_UNIT_TYPE;
-		Home.LOCK_STATE_UNIT_FUEL 	= LOCK_STATE_UNIT_FUEL;
-		Home.LOCK_STATE_UNIT_TEMP 	= LOCK_STATE_UNIT_TEMP;
-		Home.LOCK_STATE_UNIT_ODO 	= LOCK_STATE_UNIT_ODO;
-		Home.LOCK_STATE_UNIT_WEIGHT 	= LOCK_STATE_UNIT_WEIGHT;
-		Home.LOCK_STATE_UNIT_PRESSURE 	= LOCK_STATE_UNIT_PRESSURE;
+		//Home.LOCK_STATE_UNIT_FUEL 	= LOCK_STATE_UNIT_FUEL;
+		//Home.LOCK_STATE_UNIT_TEMP 	= LOCK_STATE_UNIT_TEMP;
+		//Home.LOCK_STATE_UNIT_ODO 	= LOCK_STATE_UNIT_ODO;
+		//Home.LOCK_STATE_UNIT_WEIGHT 	= LOCK_STATE_UNIT_WEIGHT;
+		//Home.LOCK_STATE_UNIT_PRESSURE 	= LOCK_STATE_UNIT_PRESSURE;
 		Home.LOCK_STATE_MACHINESTATUS_UPPER 	= LOCK_STATE_MACHINESTATUS_UPPER;
 		Home.LOCK_STATE_MACHINESTATUS_LOWER 	= LOCK_STATE_MACHINESTATUS_LOWER;
 		Home.LOCK_STATE_LANGUAGE 	= LOCK_STATE_LANGUAGE;
-		Home.LOCK_STATE_SOUNDOUTPUT 	= LOCK_STATE_SOUNDOUTPUT;
+		//Home.LOCK_STATE_SOUNDOUTPUT 	= LOCK_STATE_SOUNDOUTPUT;
 		Home.LOCK_STATE_OPERATION_HISTORY 	= LOCK_STATE_OPERATION_HISTORY;
 		Home.LOCK_STATE_FUEL_INFO 	= LOCK_STATE_FUEL_INFO;
 		Home.LOCK_STATE_BOOM_DETENT_MODE 	= LOCK_STATE_BOOM_DETENT_MODE;

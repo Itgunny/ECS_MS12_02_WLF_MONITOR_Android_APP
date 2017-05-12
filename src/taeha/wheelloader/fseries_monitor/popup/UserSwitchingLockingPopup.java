@@ -6,6 +6,7 @@ import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup.LayoutParams;
 import android.widget.ImageButton;
@@ -26,7 +27,7 @@ public class UserSwitchingLockingPopup extends ParentPopup{
 	//RESOURCE////////////////////////////////////////
 	TextFitTextView textViewTitle;
 	TextFitTextView textViewSettingLocking;
-	TextFitTextView textViewApply;
+	//TextFitTextView textViewApply;
 	
 	RadioButton radioBtnOn;
 	RadioButton radioBtnOff;
@@ -50,7 +51,7 @@ public class UserSwitchingLockingPopup extends ParentPopup{
 		ParentActivity = (Home)_context;
 		inflater = (LayoutInflater)_context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 		mRoot = inflater.inflate(R.layout.popup_lockinguserswitching, null);
-		this.addContentView(mRoot,  new LayoutParams(448,310));
+		this.addContentView(mRoot,  new LayoutParams(448,240));
 		this.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
 	}
 	
@@ -84,8 +85,8 @@ public class UserSwitchingLockingPopup extends ParentPopup{
 		textViewSettingLocking = (TextFitTextView)mRoot.findViewById(R.id.textView_popup_lock_userswitching_setting_locking_state);
 		textViewSettingLocking.setText(getString(ParentActivity.getResources().getString(string.Setting_Lock_List), 500));
 		
-		textViewApply = (TextFitTextView)mRoot.findViewById(R.id.textView_popup_lock_userswitching_apply);
-		textViewApply.setText(getString(ParentActivity.getResources().getString(string.Apply), 125));
+		//textViewApply = (TextFitTextView)mRoot.findViewById(R.id.textView_popup_lock_userswitching_apply);
+		//textViewApply.setText(getString(ParentActivity.getResources().getString(string.Apply), 125));
 		
 		textViewTitle = (TextFitTextView)mRoot.findViewById(R.id.textView_popup_lock_userswitching_title);
 		textViewTitle.setText(getString(ParentActivity.getResources().getString(string.Lock_User_Setting), 499));
@@ -106,25 +107,17 @@ public class UserSwitchingLockingPopup extends ParentPopup{
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
-				CursurIndex = 3;
+				CursurIndex = 1;
 				ClickLockingSetting();
 				
 			}
 		});
-		textViewApply.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				// TODO Auto-generated method stub
-				CursurIndex = 4;
-				ClickApply();
-			}
-		});
-		
+				
 		radioBtnOn.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
-				CursurIndex = 1;
+				CursurIndex = 2;
 				ClickRadioBtnOn();
 			}
 		});
@@ -133,7 +126,7 @@ public class UserSwitchingLockingPopup extends ParentPopup{
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
-				CursurIndex = 2;
+				CursurIndex = 3;
 				ClickRadioBtnOff();
 			}
 		});
@@ -160,27 +153,26 @@ public class UserSwitchingLockingPopup extends ParentPopup{
 		
 		ParentActivity._MenuBaseFragment.showLockingUserSwitching();
 	}	
-	public void ClickApply(){
-		ParentActivity.LockUserSwitching = LockingState;
-		ParentActivity.SavePref();
-		this.dismiss();
-		ParentActivity.ScreenIndex = ParentActivity.SCREEN_STATE_MENU_USERSWITCHING_TOP;
-		
-		Log.d(TAG, "Apply LockingState : " + ParentActivity.LockUserSwitching);
-
-	}	
 	public void ClickRadioBtnOn(){
-		LockingState = Home.STATE_USERSWITCHING_LOCK;
 		UserSwitchingLockingDisplay(LockingState);
 		textViewSettingLocking.setClickable(true);
 		textViewSettingLocking.setAlpha((float) 1);
+		ParentActivity.LockUserSwitching = Home.STATE_USERSWITCHING_LOCK;
+		ParentActivity.SavePref();
+		this.dismiss();
+		ParentActivity.ScreenIndex = ParentActivity.SCREEN_STATE_MENU_USERSWITCHING_TOP;
+		Log.d(TAG, "Apply LockingState : " + ParentActivity.LockUserSwitching);
 	}
 	
 	public void ClickRadioBtnOff() {
-		LockingState = Home.STATE_USERSWITCHING_UNLOCK;
 		UserSwitchingLockingDisplay(LockingState);
 		textViewSettingLocking.setClickable(false);
 		textViewSettingLocking.setAlpha((float) 0.5);
+		ParentActivity.LockUserSwitching = Home.STATE_USERSWITCHING_UNLOCK;
+		ParentActivity.SavePref();
+		this.dismiss();
+		ParentActivity.ScreenIndex = ParentActivity.SCREEN_STATE_MENU_USERSWITCHING_TOP;
+		Log.d(TAG, "Apply LockingState : " + ParentActivity.LockUserSwitching);
 		
 	}
 	////////////////////////////////////////////////////////////////////////////////
@@ -188,7 +180,7 @@ public class UserSwitchingLockingPopup extends ParentPopup{
 	public void ClickLeft(){
 		switch (CursurIndex) {
 		case 1:
-			CursurIndex = 4;
+			CursurIndex = 3;
 			CursurDisplay(CursurIndex);
 			break;
 		case 2:
@@ -198,15 +190,6 @@ public class UserSwitchingLockingPopup extends ParentPopup{
 		case 3:
 			CursurIndex--;
 			CursurDisplay(CursurIndex);
-			break;
-		case 4:
-			if(LockingState == Home.STATE_USERSWITCHING_LOCK){
-				CursurIndex--;
-				CursurDisplay(CursurIndex);
-			} else {
-				CursurIndex = 2;
-				CursurDisplay(CursurIndex);
-			}
 			break;
 		default:
 			CursurIndex = 1;
@@ -221,19 +204,10 @@ public class UserSwitchingLockingPopup extends ParentPopup{
 			CursurDisplay(CursurIndex);
 			break;
 		case 2:
-			if(LockingState == Home.STATE_USERSWITCHING_LOCK){
-				CursurIndex++;
-				CursurDisplay(CursurIndex);
-			} else {
-				CursurIndex = 4;
-				CursurDisplay(CursurIndex);
-			}
-			break;
-		case 3:
 			CursurIndex++;
 			CursurDisplay(CursurIndex);
 			break;
-		case 4:
+		case 3:
 			CursurIndex = 1;
 			CursurDisplay(CursurIndex);
 			break;
@@ -243,23 +217,16 @@ public class UserSwitchingLockingPopup extends ParentPopup{
 			break;
 		}
 	}
-	public void ClickESC(){
-		this.dismiss();
-		ParentActivity.ScreenIndex = ParentActivity.SCREEN_STATE_MENU_USERSWITCHING_TOP;
-	}
 	public void ClickEnter(){
 		switch (CursurIndex) {
 		case 1:
-			ClickRadioBtnOn();
-			break;
-		case 2:
-			ClickRadioBtnOff();
-			break;
-		case 3:
 			ClickLockingSetting();
 			break;
-		case 4:
-			ClickApply();
+		case 2:
+			ClickRadioBtnOn();
+			break;
+		case 3:
+			ClickRadioBtnOff();
 			break;
 		default:
 			break;
@@ -269,28 +236,19 @@ public class UserSwitchingLockingPopup extends ParentPopup{
 	public void CursurDisplay(int Index){
 		switch (Index) {
 		case 1:
-			radioBtnOn.setPressed(true);
-			radioBtnOff.setPressed(false);
-			textViewSettingLocking.setPressed(false);
-			textViewApply.setPressed(false);
-			break;
-		case 2:
-			radioBtnOn.setPressed(false);
-			radioBtnOff.setPressed(true);
-			textViewSettingLocking.setPressed(false);
-			textViewApply.setPressed(false);
-			break;
-		case 3:
 			radioBtnOn.setPressed(false);
 			radioBtnOff.setPressed(false);
 			textViewSettingLocking.setPressed(true);
-			textViewApply.setPressed(false);
 			break;
-		case 4:
-			radioBtnOn.setPressed(false);
+		case 2:
+			radioBtnOn.setPressed(true);
 			radioBtnOff.setPressed(false);
 			textViewSettingLocking.setPressed(false);
-			textViewApply.setPressed(true);
+			break;
+		case 3:
+			radioBtnOn.setPressed(false);
+			radioBtnOff.setPressed(true);
+			textViewSettingLocking.setPressed(false);
 			break;
 		default:
 			break;
@@ -301,21 +259,23 @@ public class UserSwitchingLockingPopup extends ParentPopup{
 		case Home.STATE_USERSWITCHING_LOCK:
 			radioBtnOn.setChecked(true);
 			radioBtnOff.setChecked(false);
-			textViewSettingLocking.setClickable(true);
-			textViewSettingLocking.setAlpha((float) 1);
-			CursurIndex = 1;
+			CursurIndex = 2;
 			CursurDisplay(CursurIndex);
 			break;
-		case Home.STATE_USERSWITCHING_UNLOCK:
+			case Home.STATE_USERSWITCHING_UNLOCK:
 			radioBtnOn.setChecked(false);
 			radioBtnOff.setChecked(true);
-			textViewSettingLocking.setClickable(false);
-			textViewSettingLocking.setAlpha((float) 0.5);
-			CursurIndex = 2;
+			CursurIndex = 3;
 			CursurDisplay(CursurIndex);
 			break;
 		default:
 			break;
 		}
 	}
+	
+	@Override
+	public boolean onTouchEvent(MotionEvent event) {
+		// TODO Auto-generated method stub
+		return false;
+	}	
 }
