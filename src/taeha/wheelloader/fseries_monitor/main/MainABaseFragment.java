@@ -1377,7 +1377,11 @@ public class MainABaseFragment extends ParentFragment{
 			if(ParentActivity.AnimationRunningFlag == true)
 				return;
 			if(CAN1Comm.CameraOnFlag ==  CAN1CommManager.STATE_CAMERA_OFF){
-				ParentActivity.ExcuteCamActivitybyKey();
+				if(ParentActivity.LockAAVMWarningPopup == Home.STATE_AAVM_POPUP_LOCK){
+					ParentActivity.ExcuteCamActivitybyKey();
+				}else{
+					ParentActivity.showAAVMWarning();
+				}
 			}else{
 				ParentActivity.ExitCam();
 			}

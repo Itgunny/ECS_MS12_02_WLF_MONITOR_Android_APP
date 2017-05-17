@@ -32,7 +32,7 @@ public abstract class ParentPopup extends Dialog{
 	
 	protected View mRoot;
 	
-	protected int CursurIndex;
+	public int CursurIndex;
 	
 	abstract protected void InitResource();
 	abstract protected void InitButtonListener();

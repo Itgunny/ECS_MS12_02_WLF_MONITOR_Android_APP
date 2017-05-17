@@ -18,7 +18,7 @@
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="25dp"
-        android:text="사용자 설정 잠금"
+        android:text="@string/Lock_User_Setting"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:textColor="@color/black"
         android:textSize="25sp" />
@@ -31,7 +31,7 @@
         android:layout_marginTop="85dp"
         android:background="@drawable/_selector_popup01_long_btn1"
         android:gravity="center"
-        android:text="잠금 항목 설정"
+        android:text="@string/Setting_Lock_List"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:textColor="@color/black" />  
           

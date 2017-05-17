@@ -9,6 +9,8 @@ import java.util.TimerTask;
 
 import customlist.userswitching.IconTextItemUserSwitching;
 import taeha.wheelloader.fseries_monitor.animation.ChangeFragmentAnimation;
+import taeha.wheelloader.fseries_monitor.main.R.string;
+import taeha.wheelloader.fseries_monitor.popup.AAVMWarningPopup;
 import taeha.wheelloader.fseries_monitor.popup.AngleCalibrationResultPopup;
 import taeha.wheelloader.fseries_monitor.popup.AxleTempWarningPopup;
 import taeha.wheelloader.fseries_monitor.popup.BrakePedalCalibrationPopup;
@@ -1180,6 +1182,7 @@ public class Home extends Activity {
 	public  static final int SCREEN_STATE_POPUP												= 0x80000000;
 	public  static final int SCREEN_STATE_EHCUERR_POPUP										= 0x81000000;
 	public  static final int SCREEN_STATE_AXLE_POPUP										= 0x82000000;
+	public static final int SCREEN_STATE_AAVM_POPUP = 0x83000000;
 
 	public  static final int SCREEN_STATE_MAIN_CHECK_MACHINE_SERIAL							= 0x90000000;
 	
@@ -1228,6 +1231,9 @@ public class Home extends Activity {
 	public static final int STATE_ENTERTAINMENT_MULTIMEDIA_UNLOCK = 0;
 	public static final int STATE_ENTERTAINMENT_MULTIMEDIA_LOCK = 1;
 
+	public static final int STATE_AAVM_POPUP_UNLOCK = 0;
+	public static final int STATE_AAVM_POPUP_LOCK = 1;
+	
 	public static final int STATE_USERSWITCHING_UNLOCK = 0;
 	public static final int STATE_USERSWITCHING_LOCK = 1;
 
@@ -1371,6 +1377,8 @@ public class Home extends Activity {
 
 	// Userswitching Lock
 	public int LockUserSwitching;
+	// AAVM Warning Popup Lock
+	public int LockAAVMWarningPopup;
 
 	// SeatBelt
 	public int SeatBelt;
@@ -1452,6 +1460,7 @@ public class Home extends Activity {
 	public FanSelectModePopup				_FanSelectModePopup;
 	public EntertainmentLockPopup 			_EntertainmentLockPopup;
 	public UserSwitchingLockingPopup 		_UserSwitchingLockingPopup;
+	public AAVMWarningPopup _AavmWarningPopup;
 
 	//Toast
 	public WeighingErrorToast				_WeighingErrorToast;
@@ -1960,6 +1969,8 @@ public class Home extends Activity {
 		_EntertainmentLockPopup = new EntertainmentLockPopup(this);
 		_UserSwitchingLockingPopup = new UserSwitchingLockingPopup(this);
 		_WeighingErrorToast = new WeighingErrorToast(this);
+
+		_AavmWarningPopup = new AAVMWarningPopup(this);
 	}
 
 	// ++, 150306 bwk
@@ -2012,6 +2023,7 @@ public class Home extends Activity {
 		_FanSelectModePopup = new FanSelectModePopup(this);
 		_EntertainmentLockPopup = new EntertainmentLockPopup(this);
 		_UserSwitchingLockingPopup = new UserSwitchingLockingPopup(this);
+		_AavmWarningPopup = new AAVMWarningPopup(this);
 	}
 
 	// --, 150306 bwk
@@ -3911,6 +3923,8 @@ public class Home extends Activity {
 		} else if (ScreenIndex == SCREEN_STATE_AXLE_POPUP || AxleWarningFlag == true) {
 			Log.d(TAG, "Click Key - AxleWarning");
 			 _AxleTempWarningPopup.KeyButtonClick(Data);
+		} else if (ScreenIndex == SCREEN_STATE_AAVM_POPUP) {
+			_AavmWarningPopup.KeyButtonClick(Data);
 		} else if((ScreenIndex & SCREEN_STATE_FILTER) == SCREEN_STATE_MAIN_A_TOP){
 			Log.d(TAG,"Click Main A Key");
 			_MainABaseFragment.KeyButtonClick(Data);
@@ -4457,6 +4471,22 @@ public class Home extends Activity {
 
 		_MultimediaWarningPopup = new MultimediaWarningPopup(this);
 		HomeDialog = _MultimediaWarningPopup;
+		HomeDialog.show();
+	}
+
+	public void showAAVMWarning() {
+		if (AnimationRunningFlag == true) {
+			return;
+		} else {
+			StartAnimationRunningTimer();
+		}
+		if (HomeDialog != null) {
+			HomeDialog.dismiss();
+			HomeDialog = null;
+		}
+
+		_AavmWarningPopup = new AAVMWarningPopup(this);
+		HomeDialog = _AavmWarningPopup;
 		HomeDialog.show();
 	}
 

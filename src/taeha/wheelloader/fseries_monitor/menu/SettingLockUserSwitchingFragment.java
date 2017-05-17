@@ -1758,11 +1758,12 @@ public class SettingLockUserSwitchingFragment extends ParentFragment{
 	public void ClickOK(){
 		ParentActivity.OldScreenIndex = Home.SCREEN_STATE_MENU_USERSWITCHING_LOCKING;
 		
+		ParentActivity.LockUserSwitching = Home.STATE_USERSWITCHING_LOCK;
 		if(ParentActivity.AnimationRunningFlag == true)
 			return;
 		else
 			ParentActivity.StartAnimationRunningTimer();
-		
+
 		ParentActivity._MenuBaseFragment.showUserSwitching();
 		ParentActivity._MenuBaseFragment._MenuModeFragment.setFirstScreen(Home.SCREEN_STATE_MENU_USERSWITCHING_TOP);
 		

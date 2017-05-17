@@ -425,7 +425,11 @@ public class MainBUpperMenuBarFragment extends ParentFragment{
 		ParentActivity._MenuBaseFragment.setFirstScreenIndex(Home.SCREEN_STATE_MENU_MODE_ETC_WIPER_TOP);
 	}
 	public void ClickCamera(){
+		if(ParentActivity.LockAAVMWarningPopup == Home.STATE_AAVM_POPUP_LOCK){
 		ParentActivity.ExcuteCamActivitybyKey();
+		} else {
+			ParentActivity.showAAVMWarning();
+		}
 	}
 	public void ClickMenu(){
 		if(ParentActivity.AnimationRunningFlag == true)

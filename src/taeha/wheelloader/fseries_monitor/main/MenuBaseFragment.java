@@ -1468,7 +1468,11 @@ public class MenuBaseFragment extends ParentFragment{
 			break;
 		case CAN1CommManager.CAMERA:
 			Log.d(TAG, "Click CAMERA");
+			if(ParentActivity.LockAAVMWarningPopup == Home.STATE_AAVM_POPUP_LOCK){
 			ParentActivity.ExcuteCamActivitybyKey();
+			} else {
+				ParentActivity.showAAVMWarning();
+			}
 			break;
 		default:
 			break;

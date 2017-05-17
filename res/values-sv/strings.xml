@@ -500,4 +500,5 @@
 	<string name="Lock_User_Setting">Lock User Setting</string>
 	<string name="Setting_Lock_List">Setting Lock List</string>
 	<string name="Entertainment_limit">Entertainment limit</string>
+	<string name="AAVM_Warning_Popup">This feature is an additional safety device designed to assist the operator. Images displayed on the monitor may differ from the actual environment and may not reflect changes in weather or outdoor lighting conditions at night.</string>
 </resources>

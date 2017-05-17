@@ -34,7 +34,7 @@ public class UserSwitchingLockingPopup extends ParentPopup{
 	//////////////////////////////////////////////////
 	
 	//VALUABLE////////////////////////////////////////
-	int LockingState;
+	public int LockingState;
 	//////////////////////////////////////////////////
 	
 	//ANIMATION///////////////////////////////////////
@@ -150,26 +150,21 @@ public class UserSwitchingLockingPopup extends ParentPopup{
 			return;
 		else
 			ParentActivity.StartAnimationRunningTimer();
-		
 		ParentActivity._MenuBaseFragment.showLockingUserSwitching();
 	}	
 	public void ClickRadioBtnOn(){
-		UserSwitchingLockingDisplay(LockingState);
-		textViewSettingLocking.setClickable(true);
-		textViewSettingLocking.setAlpha((float) 1);
 		ParentActivity.LockUserSwitching = Home.STATE_USERSWITCHING_LOCK;
 		ParentActivity.SavePref();
+		UserSwitchingLockingDisplay(ParentActivity.LockUserSwitching);
 		this.dismiss();
 		ParentActivity.ScreenIndex = ParentActivity.SCREEN_STATE_MENU_USERSWITCHING_TOP;
 		Log.d(TAG, "Apply LockingState : " + ParentActivity.LockUserSwitching);
 	}
 	
 	public void ClickRadioBtnOff() {
-		UserSwitchingLockingDisplay(LockingState);
-		textViewSettingLocking.setClickable(false);
-		textViewSettingLocking.setAlpha((float) 0.5);
 		ParentActivity.LockUserSwitching = Home.STATE_USERSWITCHING_UNLOCK;
 		ParentActivity.SavePref();
+		UserSwitchingLockingDisplay(ParentActivity.LockUserSwitching);
 		this.dismiss();
 		ParentActivity.ScreenIndex = ParentActivity.SCREEN_STATE_MENU_USERSWITCHING_TOP;
 		Log.d(TAG, "Apply LockingState : " + ParentActivity.LockUserSwitching);
