@@ -41,6 +41,7 @@ import taeha.wheelloader.fseries_monitor.popup.QuickCouplerPopupLocking2;
 import taeha.wheelloader.fseries_monitor.popup.QuickCouplerPopupUnlocking1;
 import taeha.wheelloader.fseries_monitor.popup.QuickCouplerPopupUnlocking2;
 import taeha.wheelloader.fseries_monitor.popup.QuickCouplerPopupUnlocking3;
+import taeha.wheelloader.fseries_monitor.popup.RideControlWarningPopup;
 import taeha.wheelloader.fseries_monitor.popup.ShiftModePopup;
 import taeha.wheelloader.fseries_monitor.popup.SoftStopInitPopup;
 import taeha.wheelloader.fseries_monitor.popup.SoftwareUpdateErrorPopup;
@@ -1156,6 +1157,7 @@ public class Home extends Activity {
 	public  static final int SCREEN_STATE_MAIN_A_KEY_QUICKCOUPLER_POPUP_UNLOCKING3			= 0x76450000;
 	public  static final int SCREEN_STATE_MAIN_A_KEY_RIDECONTROL							= 0x76500000;
 	public  static final int SCREEN_STATE_MAIN_A_KEY_RIDECONTROL_SPEED						= 0x76510000;
+	
 	public  static final int SCREEN_STATE_MAIN_A_KEY_WORKLOAD								= 0x76600000;
 	public  static final int SCREEN_STATE_MAIN_A_KEY_WORKLOAD_ACCUMULATION					= 0x76610000;
 	public  static final int SCREEN_STATE_MAIN_A_KEY_WORKLOAD_DISPLAY						= 0x76620000;
@@ -1182,7 +1184,8 @@ public class Home extends Activity {
 	public  static final int SCREEN_STATE_POPUP												= 0x80000000;
 	public  static final int SCREEN_STATE_EHCUERR_POPUP										= 0x81000000;
 	public  static final int SCREEN_STATE_AXLE_POPUP										= 0x82000000;
-	public static final int SCREEN_STATE_AAVM_POPUP = 0x83000000;
+	public static  final int SCREEN_STATE_AAVM_POPUP 										= 0x83000000;
+	public static  final int SCREEN_STATE_MAIN_KEY_RIDECONTROL_POPUP						= 0x76520000;
 
 	public  static final int SCREEN_STATE_MAIN_CHECK_MACHINE_SERIAL							= 0x90000000;
 	
@@ -1460,7 +1463,8 @@ public class Home extends Activity {
 	public FanSelectModePopup				_FanSelectModePopup;
 	public EntertainmentLockPopup 			_EntertainmentLockPopup;
 	public UserSwitchingLockingPopup 		_UserSwitchingLockingPopup;
-	public AAVMWarningPopup _AavmWarningPopup;
+	public AAVMWarningPopup					_AavmWarningPopup;
+	public RideControlWarningPopup			_RideControlWarningPopup;
 
 	//Toast
 	public WeighingErrorToast				_WeighingErrorToast;
@@ -1971,6 +1975,7 @@ public class Home extends Activity {
 		_WeighingErrorToast = new WeighingErrorToast(this);
 
 		_AavmWarningPopup = new AAVMWarningPopup(this);
+		_RideControlWarningPopup = new RideControlWarningPopup(this);
 	}
 
 	// ++, 150306 bwk
@@ -2024,6 +2029,7 @@ public class Home extends Activity {
 		_EntertainmentLockPopup = new EntertainmentLockPopup(this);
 		_UserSwitchingLockingPopup = new UserSwitchingLockingPopup(this);
 		_AavmWarningPopup = new AAVMWarningPopup(this);
+		_RideControlWarningPopup = new RideControlWarningPopup(this);
 	}
 
 	// --, 150306 bwk
@@ -3925,6 +3931,8 @@ public class Home extends Activity {
 			 _AxleTempWarningPopup.KeyButtonClick(Data);
 		} else if (ScreenIndex == SCREEN_STATE_AAVM_POPUP) {
 			_AavmWarningPopup.KeyButtonClick(Data);
+		} else if (ScreenIndex == SCREEN_STATE_MAIN_KEY_RIDECONTROL_POPUP) {
+			_RideControlWarningPopup.KeyButtonClick(Data);
 		} else if((ScreenIndex & SCREEN_STATE_FILTER) == SCREEN_STATE_MAIN_A_TOP){
 			Log.d(TAG,"Click Main A Key");
 			_MainABaseFragment.KeyButtonClick(Data);
@@ -4487,6 +4495,21 @@ public class Home extends Activity {
 
 		_AavmWarningPopup = new AAVMWarningPopup(this);
 		HomeDialog = _AavmWarningPopup;
+		HomeDialog.show();
+	}
+	public void showRideControlPopup() {
+		if (AnimationRunningFlag == true) {
+			return;
+		} else {
+			StartAnimationRunningTimer();
+		}
+		if (HomeDialog != null) {
+			HomeDialog.dismiss();
+			HomeDialog = null;
+		}
+
+		_RideControlWarningPopup = new RideControlWarningPopup(this);
+		HomeDialog = _RideControlWarningPopup;
 		HomeDialog.show();
 	}
 

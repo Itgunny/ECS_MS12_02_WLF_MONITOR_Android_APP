@@ -1,2 +1,6 @@
----- CMD_EEPROMTEST Matches (1 in 1 files) ----
-CAN1CommManager.java (src\taeha\wheelloader\fseries_monitor\main):	public static int CMD_EEPROMTEST	= 0x0C;
+---- EngineAutoShutdownMode Matches (5 in 1 files) ----
+Home.java (src\taeha\wheelloader\fseries_monitor\main):	int EngineAutoShutdownMode;
+Home.java (src\taeha\wheelloader\fseries_monitor\main):		EngineAutoShutdownMode = CAN1Comm.Get_AutomaticEngineShutdown_363_PGN61184_122();
+Home.java (src\taeha\wheelloader\fseries_monitor\main):			if(EngineAutoShutdownMode == 1 && EngineAutoShutdownRemainingTime <= 60)
+Home.java (src\taeha\wheelloader\fseries_monitor\main):			&& EngineAutoShutdownMode == 1
+Home.java (src\taeha\wheelloader\fseries_monitor\main):			if( EngineAutoShutdownMode == 0

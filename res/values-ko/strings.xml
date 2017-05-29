@@ -22,7 +22,7 @@
     <string name="Off">꺼짐</string>
     <string name="Disable">사용안함</string>
     <string name="Enable">사용함</string>
-    <string name="On_Always">계속 동작</string>
+    <string name="On_Always">항상 동작</string>
     <string name="On_Once">1회 동작</string>
     <string name="Default">기본값</string>
     <string name="Manual">수동</string>
@@ -502,4 +502,5 @@
 	<string name="Setting_Lock_List">잠금 항목 설정</string>
 	<string name="Entertainment_limit">엔터테인먼트 제한</string>
 	<string name="AAVM_Warning_Popup">본 기능은 운행 및 동작 시 운전자의 안전을 돕기 위한 보조 시스템 입니다. 모니터를 통해 보이는 영상이 실제와 차이가 날 수 있으며, 날씨 및 야간의 환경에 따라 정상적인 동작이 되지 않을 수 있습니다.</string>
+	<string name="Ride_Control_Warning">경고!\n라이드 컨트롤 항상 동작 중에는 잭업 동작이 불가능 합니다.\n잭업 동작 실행 시 항상 동작 체크를 해제 해주시기 바랍니다.\n* 잭업 동작 : 버켓을 지면에 세워 앞 바퀴를 들어올리는 동작</string>
 </resources>

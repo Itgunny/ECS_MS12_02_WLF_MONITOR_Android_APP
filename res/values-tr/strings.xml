@@ -498,7 +498,9 @@
 	<string name="Fan_Reverse_Mode">Fan Reverse Mode</string>
 	<string name="Multimedia_Warning_Text">Always be aware that using multi-media functions on the machine while driving can be dangerous.</string>
 	<string name="Lock_User_Setting">Lock User Setting</string>
+	<string name="Entertainment_limit">Entertainment limit</string>
 	<string name="Setting_Lock_List">Setting Lock List</string>
 	<string name="AAVM_Warning_Popup">This feature is an additional safety device designed to assist the operator. Images displayed on the monitor may differ from the actual environment and may not reflect changes in weather or outdoor lighting conditions at night.</string>
-	<string name="Entertainment_limit">Entertainment limit</string>
+	<string name="Ride_Control_Warning">Warning!\nIf ride control is turned on always, machine cannot assume a jack-up posture. Ride control should be turned off to jack-up the machine.\n* Jack-up posture : Lifting machine front end itself by rolling out the bucket to the ground.</string>
+	
 </resources>

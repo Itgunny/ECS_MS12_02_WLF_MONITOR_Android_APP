@@ -7,6 +7,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.CheckBox;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.SeekBar;
@@ -38,15 +39,16 @@ public class MainBKeyRideControlSpeedFragment extends ParentFragment{
 	TextFitTextView textViewBackwardMin;
 	
 	TextFitTextView	textViewOK;
-	TextFitTextView	textViewCancel;
+	CheckBox checkBoxOnAlways;
 	ImageButton imgbtnOK;
-	ImageButton imgbtnCancel;
+	ImageButton imgbtnOnAlways;
 	
 	SeekBar seekBarForward;
 	SeekBar seekBarBackward;
 	//////////////////////////////////////////////////
 	
 	//VALUABLE////////////////////////////////////////
+	int RideControl;
 	int SpeedForward;
 	int SpeedBackward;
 
@@ -84,6 +86,8 @@ public class MainBKeyRideControlSpeedFragment extends ParentFragment{
 		SpeedDisplay(textViewBackwardData,SpeedBackward,ParentActivity.UnitOdo);
 		SetSeekBarPosition(seekBarForward,SpeedForward-1);
 		SetSeekBarPosition(seekBarBackward,SpeedBackward-1);
+		checkRideControlManual(RideControl);
+		
 		CursurIndex = 1;
 		CursurDisplay(CursurIndex);
 		HandleCursurDisplay = new Handler() {
@@ -116,11 +120,13 @@ public class MainBKeyRideControlSpeedFragment extends ParentFragment{
 		
 		textViewOK = (TextFitTextView)mRoot.findViewById(R.id.textView_key_main_b_ridecontrol_speed_low_ok);
 		textViewOK.setText(getString(ParentActivity.getResources().getString(R.string.OK), 15));
-		textViewCancel = (TextFitTextView)mRoot.findViewById(R.id.textView_key_main_b_ridecontrol_speed_low_cancel);
-		textViewCancel.setText(getString(ParentActivity.getResources().getString(R.string.Cancel), 16));
+		checkBoxOnAlways = (CheckBox)mRoot.findViewById(R.id.checkBox_key_main_b_ridecontrol_speed_low_onalway);
+		checkBoxOnAlways.setText(getString(ParentActivity.getResources().getString(R.string.On_Always), 23));
+		
+		
 		imgbtnOK = (ImageButton)mRoot.findViewById(R.id.ImageButton_key_main_b_ridecontrol_speed_low_ok);
-		imgbtnCancel = (ImageButton)mRoot.findViewById(R.id.ImageButton_key_main_b_ridecontrol_speed_low_cancel);
-
+		imgbtnOnAlways = (ImageButton)mRoot.findViewById(R.id.ImageButton_key_main_b_ridecontrol_speed_low_onalways);
+		
 		seekBarForward = (SeekBar)mRoot.findViewById(R.id.seekBar_key_main_b_ridecontrol_speed_forward);
 		seekBarBackward = (SeekBar)mRoot.findViewById(R.id.seekBar_key_main_b_ridecontrol_speed_backward);
 		
@@ -135,6 +141,7 @@ public class MainBKeyRideControlSpeedFragment extends ParentFragment{
 	protected void InitValuables() {
 		// TODO Auto-generated method stub
 		super.InitValuables();		
+		RideControl = CAN1Comm.Get_RideControlOperationStatus_3447_PGN65527();
 		SpeedForward = CAN1Comm.Get_AutoRideControlOperationSpeedForward_574_PGN61184_106();
 		SpeedBackward = CAN1Comm.Get_AutoRideControlOperationSpeedBackward_576_PGN61184_106();
 		
@@ -162,14 +169,14 @@ public class MainBKeyRideControlSpeedFragment extends ParentFragment{
 				ClickOK();
 			}
 		});
-		imgbtnCancel.setOnClickListener(new View.OnClickListener() {
+		checkBoxOnAlways.setOnClickListener(new View.OnClickListener() {
 			
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
 				CursurIndex = 3;
 				HandleCursurDisplay.sendMessage(HandleCursurDisplay.obtainMessage(CursurIndex));
-				ClickCancel();
+				ClickOnAlways();
 			}
 		});
 		seekBarForward.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
@@ -242,6 +249,25 @@ public class MainBKeyRideControlSpeedFragment extends ParentFragment{
 		
 	}
 	/////////////////////////////////////////////////////////////////////	
+	
+	public void checkRideControlManual(int data) {
+		if(data == CAN1CommManager.DATA_STATE_KEY_RIDECONTROL_MANUAL) {
+			checkBoxOnAlways.setChecked(true);
+			seekBarForward.setAlpha((float)0.2);
+			seekBarForward.setClickable(false);
+			seekBarForward.setEnabled(false);
+			seekBarBackward.setAlpha((float)0.2);
+			seekBarBackward.setClickable(false);
+			seekBarBackward.setEnabled(false);
+		} else {
+			seekBarForward.setAlpha((float)1.0);
+			seekBarForward.setClickable(true);
+			seekBarForward.setEnabled(true);
+			seekBarBackward.setAlpha((float)1.0);
+			seekBarBackward.setClickable(true);
+			seekBarBackward.setEnabled(true);
+		}
+	}
 	public void SpeedDisplay(TextView textview, int Data, int Unit){
 		String strSpeed;
 		strSpeed = ParentActivity.GetRideControlSpeed(Data, Unit);
@@ -253,35 +279,47 @@ public class MainBKeyRideControlSpeedFragment extends ParentFragment{
 	}
 	public void SetSeekBarPosition(SeekBar _seekbar, int _Speed){
 		int Progress = _Speed;
-		
-//		if(_Speed < 7){
-//			Progress = 0;
-//		}else if(_Speed < 12){
-//			Progress = 33;
-//		}else if(_Speed < 17){
-//			Progress = 66;
-//		}else{
-//			Progress = 100;
-//		}
-		
 		_seekbar.setProgress(Progress);
 	}
 	
 	public void ClickOK(){
-		CAN1Comm.Set_RideControlOperationStatus_3447_PGN65527(CAN1CommManager.DATA_STATE_RIDECONTROL_AUTO);
-		CAN1Comm.TxCANToMCU(247);
-		
-		CAN1Comm.Set_SettingSelection_PGN61184_105(2);
-		CAN1Comm.Set_AutoRideControlOperationSpeedForward_574_PGN61184_105(SpeedForward);
-		CAN1Comm.Set_AutoRideControlOperationSpeedBackward_576_PGN61184_105(SpeedBackward);
-		CAN1Comm.TxCANToMCU(105);
-		CAN1Comm.Set_SettingSelection_PGN61184_105(15);
-		CAN1Comm.Set_AutoRideControlOperationSpeedForward_574_PGN61184_105(0xF);
-		CAN1Comm.Set_AutoRideControlOperationSpeedBackward_576_PGN61184_105(0xF);
-		showRideControlAnimation();
+		if(checkBoxOnAlways.isChecked()) {
+			CAN1Comm.Set_RideControlOperationStatus_3447_PGN65527(CAN1CommManager.DATA_STATE_KEY_RIDECONTROL_MANUAL);	// Off
+			CAN1Comm.TxCANToMCU(247);
+			showRideControlAnimation();
+		} else {
+			CAN1Comm.Set_RideControlOperationStatus_3447_PGN65527(CAN1CommManager.DATA_STATE_RIDECONTROL_AUTO);
+			CAN1Comm.TxCANToMCU(247);
+			CAN1Comm.Set_SettingSelection_PGN61184_105(2);
+			CAN1Comm.Set_AutoRideControlOperationSpeedForward_574_PGN61184_105(SpeedForward);
+			CAN1Comm.Set_AutoRideControlOperationSpeedBackward_576_PGN61184_105(SpeedBackward);
+			CAN1Comm.TxCANToMCU(105);
+			CAN1Comm.Set_SettingSelection_PGN61184_105(15);
+			CAN1Comm.Set_AutoRideControlOperationSpeedForward_574_PGN61184_105(0xF);
+			CAN1Comm.Set_AutoRideControlOperationSpeedBackward_576_PGN61184_105(0xF);
+			showRideControlAnimation();
+		}
 	}
 	public void ClickCancel(){
 		showRideControlAnimation();
+	}
+	public void ClickOnAlways(){
+		if(checkBoxOnAlways.isChecked() == false) {
+			seekBarForward.setAlpha((float)1.0);
+			seekBarForward.setClickable(true);
+			seekBarForward.setEnabled(true);
+			seekBarBackward.setAlpha((float)1.0);
+			seekBarBackward.setClickable(true);
+			seekBarBackward.setEnabled(true);
+		} else {
+			seekBarForward.setAlpha((float)0.2);
+			seekBarForward.setClickable(false);
+			seekBarForward.setEnabled(false);
+			seekBarBackward.setAlpha((float)0.2);
+			seekBarBackward.setClickable(false);
+			seekBarBackward.setEnabled(false);
+			ParentActivity.showRideControlPopup();
+		}
 	}
 	//Progress////////////////////////////////////////////////////////////
 	
@@ -300,18 +338,22 @@ public class MainBKeyRideControlSpeedFragment extends ParentFragment{
 	public void ClickLeft(){
 		switch (CursurIndex) {
 		case 1:
-			SpeedForward -= 1;
-			if(SpeedForward < MIN_LEVEL){
-				SpeedForward = MIN_LEVEL;
+			if(seekBarForward.isEnabled()) {
+				SpeedForward -= 1;
+				if(SpeedForward < MIN_LEVEL){
+					SpeedForward = MIN_LEVEL;
+				}
+				seekBarForward.setProgress(SpeedForward-1);
 			}
-			seekBarForward.setProgress(SpeedForward-1);	
 			break;
 		case 2:
-			SpeedBackward -= 1;
-			if(SpeedBackward < MIN_LEVEL){
-				SpeedBackward = MIN_LEVEL;
+			if(seekBarBackward.isEnabled()) {
+				SpeedBackward -= 1;
+				if(SpeedBackward < MIN_LEVEL){
+					SpeedBackward = MIN_LEVEL;
+				}
+				seekBarBackward.setProgress(SpeedBackward-1);
 			}
-			seekBarBackward.setProgress(SpeedBackward-1);	
 			break;
 		case 3:
 		case 4:
@@ -326,24 +368,28 @@ public class MainBKeyRideControlSpeedFragment extends ParentFragment{
 	}
 	public void ClickRight(){
 		switch (CursurIndex) {
+		case 1:
+			if(seekBarForward.isEnabled()) {
+				SpeedForward += 1;
+				if(SpeedForward > MAX_LEVEL){
+					SpeedForward = MAX_LEVEL;
+				}
+				seekBarForward.setProgress(SpeedForward-1);
+			}
+			break;
+		case 2:
+			if(seekBarBackward.isEnabled()) {
+				SpeedBackward += 1;
+				if(SpeedBackward > MAX_LEVEL){
+					SpeedBackward = MAX_LEVEL;
+				}
+				seekBarBackward.setProgress(SpeedBackward-1);
+			}
+			break;	
 		case 3:
 			CursurIndex++;
 			CursurDisplay(CursurIndex);
 			break;
-		case 1:
-			SpeedForward += 1;
-			if(SpeedForward > MAX_LEVEL){
-				SpeedForward = MAX_LEVEL;
-			}
-			seekBarForward.setProgress(SpeedForward-1);	
-			break;
-		case 2:
-			SpeedBackward += 1;
-			if(SpeedBackward > MAX_LEVEL){
-				SpeedBackward = MAX_LEVEL;
-			}
-			seekBarBackward.setProgress(SpeedBackward-1);	
-			break;			
 		case 4:
 		default:
 			CursurIndex = 1;
@@ -359,7 +405,24 @@ public class MainBKeyRideControlSpeedFragment extends ParentFragment{
 			CursurDisplay(CursurIndex);
 			break;
 		case 3:
-			ClickCancel();
+			if(checkBoxOnAlways.isChecked() == true){
+				checkBoxOnAlways.setChecked(false);
+				seekBarForward.setAlpha((float)1.0);
+				seekBarForward.setClickable(true);
+				seekBarForward.setEnabled(true);
+				seekBarBackward.setAlpha((float)1.0);
+				seekBarBackward.setClickable(true);
+				seekBarBackward.setEnabled(true);
+			}else{
+				checkBoxOnAlways.setChecked(true);
+				seekBarForward.setAlpha((float)0.2);
+				seekBarForward.setClickable(false);
+				seekBarForward.setEnabled(false);
+				seekBarBackward.setAlpha((float)0.2);
+				seekBarBackward.setClickable(false);
+				seekBarBackward.setEnabled(false);
+				ParentActivity.showRideControlPopup();
+			}
 			break;
 		case 4:
 			ClickOK();
@@ -372,8 +435,8 @@ public class MainBKeyRideControlSpeedFragment extends ParentFragment{
 	public void CursurDisplay(int Index){
 		seekBarForward.setPressed(false);
 		seekBarBackward.setPressed(false);
-		imgbtnCancel.setPressed(false);
 		imgbtnOK.setPressed(false);
+		checkBoxOnAlways.setPressed(false);
 		switch (CursurIndex) {
 		case 1:
 			seekBarForward.setPressed(true);
@@ -382,7 +445,7 @@ public class MainBKeyRideControlSpeedFragment extends ParentFragment{
 			seekBarBackward.setPressed(true);
 			break;
 		case 3:
-			imgbtnCancel.setPressed(true);
+			checkBoxOnAlways.setPressed(true);	
 			break;
 		case 4:
 			imgbtnOK.setPressed(true);

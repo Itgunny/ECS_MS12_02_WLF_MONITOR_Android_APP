@@ -81,11 +81,11 @@ public class MainBKeyRideControlFragment extends ParentFragment{
 		radioOff = (RadioButton)mRoot.findViewById(R.id.radioButton_key_main_b_ridecontrol_off);
 		radioOff.setText(getString(ParentActivity.getResources().getString(R.string.Off), 20));
 		ParentActivity.setMarqueeRadio(radioOff);
-		radioOnAlways = (RadioButton)mRoot.findViewById(R.id.radioButton_key_main_b_ridecontrol_on_always);
+		/*radioOnAlways = (RadioButton)mRoot.findViewById(R.id.radioButton_key_main_b_ridecontrol_on_always);
 		radioOnAlways.setText(getString(ParentActivity.getResources().getString(R.string.On_Always), 23));
-		ParentActivity.setMarqueeRadio(radioOnAlways);
+		ParentActivity.setMarqueeRadio(radioOnAlways);*/
 		radioOnConditional = (RadioButton)mRoot.findViewById(R.id.radioButton_key_main_b_ridecontrol_on_conditional);
-		radioOnConditional.setText(getString(ParentActivity.getResources().getString(R.string.On_Conditional_Speed), 168));
+		radioOnConditional.setText(getString(ParentActivity.getResources().getString(R.string.On), 19));
 		ParentActivity.setMarqueeRadio(radioOnConditional);
 
 		imgbtnOK = (ImageButton)mRoot.findViewById(R.id.ImageButton_key_main_b_ridecontrol_low_ok);
@@ -118,22 +118,12 @@ public class MainBKeyRideControlFragment extends ParentFragment{
 				ClickOff();
 			}
 		});
-		radioOnAlways.setOnClickListener(new View.OnClickListener() {
-			
-			@Override
-			public void onClick(View v) {
-				// TODO Auto-generated method stub
-				CursurIndex = 2;
-				HandleCursurDisplay.sendMessage(HandleCursurDisplay.obtainMessage(CursurIndex));
-				ClickOnAlways();
-			}
-		});
 		radioOnConditional.setOnClickListener(new View.OnClickListener() {
 			
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
-				CursurIndex = 3;
+				CursurIndex = 2;
 				HandleCursurDisplay.sendMessage(HandleCursurDisplay.obtainMessage(CursurIndex));
 				ClickOnConditional();
 			}
@@ -143,7 +133,7 @@ public class MainBKeyRideControlFragment extends ParentFragment{
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
-				CursurIndex = 4;
+				CursurIndex = 3;
 				HandleCursurDisplay.sendMessage(HandleCursurDisplay.obtainMessage(CursurIndex));
 				ClickOK();
 			}
@@ -181,17 +171,17 @@ public class MainBKeyRideControlFragment extends ParentFragment{
 		switch (Data) {
 		case CAN1CommManager.DATA_STATE_KEY_RIDECONTROL_OFF:
 			radioOff.setChecked(true);
-			radioOnAlways.setChecked(false);
+			//radioOnAlways.setChecked(false);
 			radioOnConditional.setChecked(false);
 			break;
 		case CAN1CommManager.DATA_STATE_KEY_RIDECONTROL_MANUAL:
 			radioOff.setChecked(false);
-			radioOnAlways.setChecked(true);
-			radioOnConditional.setChecked(false);
+			//radioOnAlways.setChecked(true);
+			radioOnConditional.setChecked(true);
 			break;
 		case CAN1CommManager.DATA_STATE_KEY_RIDECONTROL_AUTO:
 			radioOff.setChecked(false);
-			radioOnAlways.setChecked(false);
+			//radioOnAlways.setChecked(false);
 			radioOnConditional.setChecked(true);
 			break;
 		default:
@@ -204,7 +194,7 @@ public class MainBKeyRideControlFragment extends ParentFragment{
 		ParentActivity._MainBBaseFragment.showKeytoDefaultScreenAnimation();
 	}
 	public void ClickOnAlways(){
-		CAN1Comm.Set_RideControlOperationStatus_3447_PGN65527(CAN1CommManager.DATA_STATE_KEY_RIDECONTROL_MANUAL);	// Off
+		CAN1Comm.Set_RideControlOperationStatus_3447_PGN65527(CAN1CommManager.DATA_STATE_KEY_RIDECONTROL_MANUAL);
 		CAN1Comm.TxCANToMCU(247);
 		ParentActivity._MainBBaseFragment.showKeytoDefaultScreenAnimation();	
 	}
@@ -218,12 +208,11 @@ public class MainBKeyRideControlFragment extends ParentFragment{
 	public void ClickLeft(){
 		switch (CursurIndex) {
 		case 1:
-			CursurIndex = 4;
+			CursurIndex = 3;
 			CursurDisplay(CursurIndex);
 			break;
 		case 2:
 		case 3:
-		case 4:
 			CursurIndex--;
 			CursurDisplay(CursurIndex);
 			break;
@@ -237,11 +226,10 @@ public class MainBKeyRideControlFragment extends ParentFragment{
 		switch (CursurIndex) {
 		case 1:
 		case 2:
-		case 3:
 			CursurIndex++;
 			CursurDisplay(CursurIndex);
 			break;
-		case 4:
+		case 3:
 		default:
 			CursurIndex = 1;
 			CursurDisplay(CursurIndex);
@@ -254,12 +242,9 @@ public class MainBKeyRideControlFragment extends ParentFragment{
 			ClickOff();
 			break;
 		case 2:
-			ClickOnAlways();
-			break;
-		case 3:
 			ClickOnConditional();
 			break;
-		case 4:
+		case 3:
 			ClickOK();
 			break;
 		default:
@@ -269,7 +254,6 @@ public class MainBKeyRideControlFragment extends ParentFragment{
 	
 	public void CursurDisplay(int Index){
 		radioOff.setPressed(false);
-		radioOnAlways.setPressed(false);
 		radioOnConditional.setPressed(false);
 		imgbtnOK.setPressed(false);
 		switch (CursurIndex) {
@@ -277,12 +261,9 @@ public class MainBKeyRideControlFragment extends ParentFragment{
 			radioOff.setPressed(true);
 			break;
 		case 2:
-			radioOnAlways.setPressed(true);
-			break;
-		case 3:
 			radioOnConditional.setPressed(true);
 			break;
-		case 4:
+		case 3:
 			imgbtnOK.setPressed(true);
 			break;
 		default:
