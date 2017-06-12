@@ -296,13 +296,13 @@ public class AngleCalibration extends ParentFragment{
 		textViewAngleColon.setVisibility(View.VISIBLE);
 	}
 //	public void AngleDisplay(int Angle, int AngleDot){
-//		textViewAngle.setText(Integer.toString(Angle) + "." + Integer.toString(AngleDot) + "¨¬");
+//		textViewAngle.setText(Integer.toString(Angle) + "." + Integer.toString(AngleDot) + "ï¿½ï¿½");
 //	}
 	public void AngleDisplay(int Sign, int Angle, int AngleDot){
 		if(Sign == 1)
-			textViewAngle.setText("-" + Integer.toString(Angle) + "." + Integer.toString(AngleDot) + "¨¬");
+			textViewAngle.setText("-" + Integer.toString(Angle) + "." + Integer.toString(AngleDot) + "Âº");
 		else
-			textViewAngle.setText(Integer.toString(Angle) + "." + Integer.toString(AngleDot) + "¨¬");
+			textViewAngle.setText(Integer.toString(Angle) + "." + Integer.toString(AngleDot) + "Âº");
 	}
 	public void CalStepDisplay(final int Step){
 			
