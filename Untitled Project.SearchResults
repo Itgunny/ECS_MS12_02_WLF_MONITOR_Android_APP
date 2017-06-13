@@ -1,6 +1,313 @@
----- EngineAutoShutdownMode Matches (5 in 1 files) ----
-Home.java (src\taeha\wheelloader\fseries_monitor\main):	int EngineAutoShutdownMode;
-Home.java (src\taeha\wheelloader\fseries_monitor\main):		EngineAutoShutdownMode = CAN1Comm.Get_AutomaticEngineShutdown_363_PGN61184_122();
-Home.java (src\taeha\wheelloader\fseries_monitor\main):			if(EngineAutoShutdownMode == 1 && EngineAutoShutdownRemainingTime <= 60)
-Home.java (src\taeha\wheelloader\fseries_monitor\main):			&& EngineAutoShutdownMode == 1
-Home.java (src\taeha\wheelloader\fseries_monitor\main):			if( EngineAutoShutdownMode == 0
+---- Angle Matches (340 in 36 files) ----
+AngleCalibration.java (src\taeha\wheelloader\fseries_monitor\menu\mode):public class AngleCalibration extends ParentFragment{
+AngleCalibration.java (src\taeha\wheelloader\fseries_monitor\menu\mode):	TextFitTextView textViewAngle;
+AngleCalibration.java (src\taeha\wheelloader\fseries_monitor\menu\mode):	TextFitTextView textViewAngleTitle;
+AngleCalibration.java (src\taeha\wheelloader\fseries_monitor\menu\mode):	TextView textViewAngleColon;
+AngleCalibration.java (src\taeha\wheelloader\fseries_monitor\menu\mode):	int AngleError_Flag;
+AngleCalibration.java (src\taeha\wheelloader\fseries_monitor\menu\mode):	int AngleError_Flag1;
+AngleCalibration.java (src\taeha\wheelloader\fseries_monitor\menu\mode):	int m_BoomAngleCaliStep;
+AngleCalibration.java (src\taeha\wheelloader\fseries_monitor\menu\mode):		 TAG = "AngleCalibration";
+AngleCalibration.java (src\taeha\wheelloader\fseries_monitor\menu\mode):		ParentActivity._MenuBaseFragment._MenuInterTitleFragment.SetTitleText(ParentActivity.getResources().getString(R.string.Boom_Bucket_Angle_Calibration), 342);
+AngleCalibration.java (src\taeha\wheelloader\fseries_monitor\menu\mode):		CAN1Comm.Set_RequestBoomBucketAngleSensorCalibration_PGN61184_201(0);
+AngleCalibration.java (src\taeha\wheelloader\fseries_monitor\menu\mode):		CAN1Comm.Set_RequestBoomBucketAngleSensorCalibration_PGN61184_201(15);
+AngleCalibration.java (src\taeha\wheelloader\fseries_monitor\menu\mode):		textViewAngle = (TextFitTextView)mRoot.findViewById(R.id.textView_menu_body_management_calibration_angle_main_boom_data);
+AngleCalibration.java (src\taeha\wheelloader\fseries_monitor\menu\mode):		textViewAngleTitle = (TextFitTextView)mRoot.findViewById(R.id.textView_menu_body_management_calibration_angle_main_boom_title);
+AngleCalibration.java (src\taeha\wheelloader\fseries_monitor\menu\mode):		textViewAngleTitle.setText(getString(ParentActivity.getResources().getString(string.Boom), 28));
+AngleCalibration.java (src\taeha\wheelloader\fseries_monitor\menu\mode):		textViewAngleColon = (TextView)mRoot.findViewById(R.id.textView_menu_body_management_calibration_angle_main_boom_colon);
+AngleCalibration.java (src\taeha\wheelloader\fseries_monitor\menu\mode):		AngleError_Flag = 0;
+AngleCalibration.java (src\taeha\wheelloader\fseries_monitor\menu\mode):		AngleError_Flag1 = 0;
+AngleCalibration.java (src\taeha\wheelloader\fseries_monitor\menu\mode):		m_BoomAngleCaliStep = 1;
+AngleCalibration.java (src\taeha\wheelloader\fseries_monitor\menu\mode):		BoomBucketAngleCurrAngle();
+AngleCalibration.java (src\taeha\wheelloader\fseries_monitor\menu\mode):			ReplyBoomAngleCali();
+AngleCalibration.java (src\taeha\wheelloader\fseries_monitor\menu\mode):		CAN1Comm.Set_RequestBoomBucketAngleSensorCalibration_PGN61184_201(m_BoomAngleCaliStep);
+AngleCalibration.java (src\taeha\wheelloader\fseries_monitor\menu\mode):		CAN1Comm.Set_RequestBoomBucketAngleSensorCalibration_PGN61184_201(15);
+AngleCalibration.java (src\taeha\wheelloader\fseries_monitor\menu\mode):		if(m_BoomAngleCaliStep == 1)
+AngleCalibration.java (src\taeha\wheelloader\fseries_monitor\menu\mode):			BoomPos_volt = CAN1Comm.Get_BoomLinkAngleSensorSignalVoltage_728_PGN65395();
+AngleCalibration.java (src\taeha\wheelloader\fseries_monitor\menu\mode):		textViewAngle.setVisibility(View.VISIBLE);
+AngleCalibration.java (src\taeha\wheelloader\fseries_monitor\menu\mode):		textViewAngleTitle.setVisibility(View.VISIBLE);
+AngleCalibration.java (src\taeha\wheelloader\fseries_monitor\menu\mode):		textViewAngleColon.setVisibility(View.VISIBLE);
+AngleCalibration.java (src\taeha\wheelloader\fseries_monitor\menu\mode):		textViewAngle.setVisibility(View.VISIBLE);
+AngleCalibration.java (src\taeha\wheelloader\fseries_monitor\menu\mode):		textViewAngleTitle.setVisibility(View.VISIBLE);
+AngleCalibration.java (src\taeha\wheelloader\fseries_monitor\menu\mode):		textViewAngleColon.setVisibility(View.VISIBLE);
+AngleCalibration.java (src\taeha\wheelloader\fseries_monitor\menu\mode):		textViewAngle.setVisibility(View.VISIBLE);
+AngleCalibration.java (src\taeha\wheelloader\fseries_monitor\menu\mode):		textViewAngleTitle.setVisibility(View.VISIBLE);
+AngleCalibration.java (src\taeha\wheelloader\fseries_monitor\menu\mode):		textViewAngleColon.setVisibility(View.VISIBLE);
+AngleCalibration.java (src\taeha\wheelloader\fseries_monitor\menu\mode):		textViewAngle.setVisibility(View.VISIBLE);
+AngleCalibration.java (src\taeha\wheelloader\fseries_monitor\menu\mode):		textViewAngleTitle.setVisibility(View.VISIBLE);
+AngleCalibration.java (src\taeha\wheelloader\fseries_monitor\menu\mode):		textViewAngleColon.setVisibility(View.VISIBLE);
+AngleCalibration.java (src\taeha\wheelloader\fseries_monitor\menu\mode):		textViewAngle.setVisibility(View.VISIBLE);
+AngleCalibration.java (src\taeha\wheelloader\fseries_monitor\menu\mode):		textViewAngleTitle.setVisibility(View.VISIBLE);
+AngleCalibration.java (src\taeha\wheelloader\fseries_monitor\menu\mode):		textViewAngleColon.setVisibility(View.VISIBLE);
+AngleCalibration.java (src\taeha\wheelloader\fseries_monitor\menu\mode)://	public void AngleDisplay(int Angle, int AngleDot){
+AngleCalibration.java (src\taeha\wheelloader\fseries_monitor\menu\mode)://		textViewAngle.setText(Integer.toString(Angle) + "." + Integer.toString(AngleDot) + "ÔøΩÔøΩ");
+AngleCalibration.java (src\taeha\wheelloader\fseries_monitor\menu\mode):	public void AngleDisplay(int Sign, int Angle, int AngleDot){
+AngleCalibration.java (src\taeha\wheelloader\fseries_monitor\menu\mode):			textViewAngle.setText("-" + Integer.toString(Angle) + "." + Integer.toString(AngleDot) + "¬∫");
+AngleCalibration.java (src\taeha\wheelloader\fseries_monitor\menu\mode):			textViewAngle.setText(Integer.toString(Angle) + "." + Integer.toString(AngleDot) + "¬∫");
+AngleCalibration.java (src\taeha\wheelloader\fseries_monitor\menu\mode):	public void BoomBucketAngleCurrAngle(){
+AngleCalibration.java (src\taeha\wheelloader\fseries_monitor\menu\mode):		int	 BoomAngle = CAN1Comm.Get_BoomLinkAngle_1920_PGN65395();
+AngleCalibration.java (src\taeha\wheelloader\fseries_monitor\menu\mode):		int	 BoomAngleDot;
+AngleCalibration.java (src\taeha\wheelloader\fseries_monitor\menu\mode):		int	 BoomAngleVolt = CAN1Comm.Get_BoomLinkAngleSensorSignalVoltage_728_PGN65395();
+AngleCalibration.java (src\taeha\wheelloader\fseries_monitor\menu\mode):		int  BoomVolt_to_Angle;
+AngleCalibration.java (src\taeha\wheelloader\fseries_monitor\menu\mode):		if( BoomAngle == 0xffff )
+AngleCalibration.java (src\taeha\wheelloader\fseries_monitor\menu\mode):			BoomAngle = 1800;
+AngleCalibration.java (src\taeha\wheelloader\fseries_monitor\menu\mode):		if(AngleError_Flag1 == 1)
+AngleCalibration.java (src\taeha\wheelloader\fseries_monitor\menu\mode):			if(m_BoomAngleCaliStep<3)
+AngleCalibration.java (src\taeha\wheelloader\fseries_monitor\menu\mode):				BoomVolt_to_Angle = (int)(38.298 * (BoomAngleVolt-BoomPos_volt) ) + 1350;
+AngleCalibration.java (src\taeha\wheelloader\fseries_monitor\menu\mode):				BoomAngle = BoomVolt_to_Angle;
+AngleCalibration.java (src\taeha\wheelloader\fseries_monitor\menu\mode):				AngleError_Flag1=0;
+AngleCalibration.java (src\taeha\wheelloader\fseries_monitor\menu\mode):			if( BoomAngle == 1800 )		// 0
+AngleCalibration.java (src\taeha\wheelloader\fseries_monitor\menu\mode):				BoomAngle = 0;
+AngleCalibration.java (src\taeha\wheelloader\fseries_monitor\menu\mode):				BoomAngleDot = 0;
+AngleCalibration.java (src\taeha\wheelloader\fseries_monitor\menu\mode):			else if( BoomAngle > 1800 )	// +
+AngleCalibration.java (src\taeha\wheelloader\fseries_monitor\menu\mode):				BoomAngle -= 1800;
+AngleCalibration.java (src\taeha\wheelloader\fseries_monitor\menu\mode):				BoomAngleDot = BoomAngle % 10;
+AngleCalibration.java (src\taeha\wheelloader\fseries_monitor\menu\mode):				BoomAngle /= 10;	
+AngleCalibration.java (src\taeha\wheelloader\fseries_monitor\menu\mode):				BoomAngle = 1800 - BoomAngle;
+AngleCalibration.java (src\taeha\wheelloader\fseries_monitor\menu\mode):				BoomAngleDot = BoomAngle % 10;
+AngleCalibration.java (src\taeha\wheelloader\fseries_monitor\menu\mode):				BoomAngle /= 10;
+AngleCalibration.java (src\taeha\wheelloader\fseries_monitor\menu\mode):				//BoomAngle *= -1;
+AngleCalibration.java (src\taeha\wheelloader\fseries_monitor\menu\mode):			if( BoomAngle == 1800 )		// 0
+AngleCalibration.java (src\taeha\wheelloader\fseries_monitor\menu\mode):				BoomAngle = 0;
+AngleCalibration.java (src\taeha\wheelloader\fseries_monitor\menu\mode):				BoomAngleDot = 0;
+AngleCalibration.java (src\taeha\wheelloader\fseries_monitor\menu\mode):				AngleError_Flag = 0;
+AngleCalibration.java (src\taeha\wheelloader\fseries_monitor\menu\mode):			else if( BoomAngle > 1800 )	// +
+AngleCalibration.java (src\taeha\wheelloader\fseries_monitor\menu\mode):				BoomAngle -= 1800;
+AngleCalibration.java (src\taeha\wheelloader\fseries_monitor\menu\mode):				if (BoomAngle > 900)
+AngleCalibration.java (src\taeha\wheelloader\fseries_monitor\menu\mode):					AngleError_Flag = 1;
+AngleCalibration.java (src\taeha\wheelloader\fseries_monitor\menu\mode):					AngleError_Flag1 =1;
+AngleCalibration.java (src\taeha\wheelloader\fseries_monitor\menu\mode):					AngleError_Flag = 0;
+AngleCalibration.java (src\taeha\wheelloader\fseries_monitor\menu\mode):					BoomAngleDot = BoomAngle % 10;
+AngleCalibration.java (src\taeha\wheelloader\fseries_monitor\menu\mode):					BoomAngle /= 10;
+AngleCalibration.java (src\taeha\wheelloader\fseries_monitor\menu\mode):				BoomAngle = 1800 - BoomAngle;
+AngleCalibration.java (src\taeha\wheelloader\fseries_monitor\menu\mode):				if (BoomAngle > 900)
+AngleCalibration.java (src\taeha\wheelloader\fseries_monitor\menu\mode):					AngleError_Flag = 1;
+AngleCalibration.java (src\taeha\wheelloader\fseries_monitor\menu\mode):					AngleError_Flag1=1;
+AngleCalibration.java (src\taeha\wheelloader\fseries_monitor\menu\mode):					AngleError_Flag = 0;
+AngleCalibration.java (src\taeha\wheelloader\fseries_monitor\menu\mode):					BoomAngleDot = BoomAngle % 10;
+AngleCalibration.java (src\taeha\wheelloader\fseries_monitor\menu\mode):					BoomAngle /= 10;
+AngleCalibration.java (src\taeha\wheelloader\fseries_monitor\menu\mode):					//BoomAngle *= -1;
+AngleCalibration.java (src\taeha\wheelloader\fseries_monitor\menu\mode):		AngleDisplay(BoomSign,BoomAngle,BoomAngleDot);
+AngleCalibration.java (src\taeha\wheelloader\fseries_monitor\menu\mode):	public void ReplyBoomAngleCali(){
+AngleCalibration.java (src\taeha\wheelloader\fseries_monitor\menu\mode):				int Reply = CAN1Comm.Get_AngleSensorCalibrationStatus_1909_PGN61184_202();
+AngleCalibration.java (src\taeha\wheelloader\fseries_monitor\menu\mode):				if(AngleError_Flag == 1)		// Error Popup
+AngleCalibration.java (src\taeha\wheelloader\fseries_monitor\menu\mode):					CAN1Comm.Set_RequestBoomBucketAngleSensorCalibration_PGN61184_201(0);
+AngleCalibration.java (src\taeha\wheelloader\fseries_monitor\menu\mode):					CAN1Comm.Set_RequestBoomBucketAngleSensorCalibration_PGN61184_201(15);
+AngleCalibration.java (src\taeha\wheelloader\fseries_monitor\menu\mode):					ParentActivity._AngleCalibrationResultPopup.setTextTitle(getString(ParentActivity.getResources().getString(string.Calibration_failed_Machine_Restart), 378));
+AngleCalibration.java (src\taeha\wheelloader\fseries_monitor\menu\mode):					ParentActivity._AngleCalibrationResultPopup.setExitFlag(false);
+AngleCalibration.java (src\taeha\wheelloader\fseries_monitor\menu\mode):					ParentActivity.showAngleCalibrationResult();
+AngleCalibration.java (src\taeha\wheelloader\fseries_monitor\menu\mode):					if(Reply == m_BoomAngleCaliStep)
+AngleCalibration.java (src\taeha\wheelloader\fseries_monitor\menu\mode):						m_BoomAngleCaliStep++;
+AngleCalibration.java (src\taeha\wheelloader\fseries_monitor\menu\mode):						CalStepDisplay(m_BoomAngleCaliStep);
+AngleCalibration.java (src\taeha\wheelloader\fseries_monitor\menu\mode):						Log.d(TAG,"ReplyBoomAngleCali Reply : " + Integer.toString(Reply));
+AngleCalibration.java (src\taeha\wheelloader\fseries_monitor\menu\mode):						CAN1Comm.Set_RequestBoomBucketAngleSensorCalibration_PGN61184_201(0);
+AngleCalibration.java (src\taeha\wheelloader\fseries_monitor\menu\mode):						CAN1Comm.Set_RequestBoomBucketAngleSensorCalibration_PGN61184_201(15);
+AngleCalibration.java (src\taeha\wheelloader\fseries_monitor\menu\mode):							ParentActivity._AngleCalibrationResultPopup.setTextTitle(getString(ParentActivity.getResources().getString(string.Calibration_completed), 379));
+AngleCalibration.java (src\taeha\wheelloader\fseries_monitor\menu\mode):							ParentActivity._AngleCalibrationResultPopup.setExitFlag(true);
+AngleCalibration.java (src\taeha\wheelloader\fseries_monitor\menu\mode):							ParentActivity.showAngleCalibrationResult();
+AngleCalibration.java (src\taeha\wheelloader\fseries_monitor\menu\mode):							ParentActivity._AngleCalibrationResultPopup.setTextTitle(getString(ParentActivity.getResources().getString(string.Calibration_failed), 380));
+AngleCalibration.java (src\taeha\wheelloader\fseries_monitor\menu\mode):							ParentActivity._AngleCalibrationResultPopup.setExitFlag(false);
+AngleCalibration.java (src\taeha\wheelloader\fseries_monitor\menu\mode):							ParentActivity.showAngleCalibrationResult();
+AngleCalibration.java (src\taeha\wheelloader\fseries_monitor\menu\mode):							ParentActivity._AngleCalibrationResultPopup.setTextTitle(getString(ParentActivity.getResources().getString(string.Sensor_Error), 381));
+AngleCalibration.java (src\taeha\wheelloader\fseries_monitor\menu\mode):							ParentActivity._AngleCalibrationResultPopup.setExitFlag(false);
+AngleCalibration.java (src\taeha\wheelloader\fseries_monitor\menu\mode):							ParentActivity.showAngleCalibrationResult();
+AngleCalibrationResultPopup.java (src\taeha\wheelloader\fseries_monitor\popup):public class AngleCalibrationResultPopup extends ParentPopup{
+AngleCalibrationResultPopup.java (src\taeha\wheelloader\fseries_monitor\popup):	public AngleCalibrationResultPopup(Context _context) {
+AngleCalibrationResultPopup.java (src\taeha\wheelloader\fseries_monitor\popup):		TAG = "AngleCalibrationResultPopup";
+AngleCalibrationResultPopup.java (src\taeha\wheelloader\fseries_monitor\popup):			ParentActivity._MenuBaseFragment._AngleCalibration.CursurDisplay(1);
+BucketDumpCalibration.java (src\taeha\wheelloader\fseries_monitor\menu\management):		CAN1Comm.Set_RequestBoomBucketAngleSensorCalibration_PGN61184_201(0);
+BucketDumpCalibration.java (src\taeha\wheelloader\fseries_monitor\menu\management):		CAN1Comm.Set_RequestBoomBucketAngleSensorCalibration_PGN61184_201(15);
+BucketDumpCalibration.java (src\taeha\wheelloader\fseries_monitor\menu\management):		CAN1Comm.Set_RequestBoomBucketAngleSensorCalibration_PGN61184_201(15);
+BucketDumpCalibration.java (src\taeha\wheelloader\fseries_monitor\menu\management):				CAN1Comm.Set_RequestBoomBucketAngleSensorCalibration_PGN61184_201(0);
+BucketDumpCalibration.java (src\taeha\wheelloader\fseries_monitor\menu\management):				CAN1Comm.Set_RequestBoomBucketAngleSensorCalibration_PGN61184_201(15);
+CalibrationEHCUPopup.java (src\taeha\wheelloader\fseries_monitor\popup):				ParentActivity._MenuBaseFragment._AngleCalibration.CursurDisplay(1);
+CalibrationFragment.java (src\taeha\wheelloader\fseries_monitor\menu\mode):		setListTitle1(ParentActivity.getResources().getString(string.Boom_Bucket_Angle_Calibration), 342);
+CalibrationFragment.java (src\taeha\wheelloader\fseries_monitor\menu\mode):		ParentActivity._MenuBaseFragment.showBodyAngleCalibrationAnimation();
+CAN1CommManager.java (src\taeha\wheelloader\fseries_monitor\main):	public int Get_ParallelLiftTargetAngleSettingErrorStatus_1924_PGN61184_65(){ return service.Get_ParallelLiftTargetAngleSettingErrorStatus_1924_PGN61184_65();}
+CAN1CommManager.java (src\taeha\wheelloader\fseries_monitor\main)://	public int Get_RequestBoomBucketAngleSensorCalibration_PGN61184_201(){ return service.Get_RequestBoomBucketAngleSensorCalibration_PGN61184_201();}
+CAN1CommManager.java (src\taeha\wheelloader\fseries_monitor\main):	public int Get_AngleSensorCalibrationStatus_1909_PGN61184_202(){ return service.Get_AngleSensorCalibrationStatus_1909_PGN61184_202();}
+CAN1CommManager.java (src\taeha\wheelloader\fseries_monitor\main):	public int Get_BoomLinkAngle_1920_PGN65395(){ return service.Get_BoomLinkAngle_1920_PGN65395();}
+CAN1CommManager.java (src\taeha\wheelloader\fseries_monitor\main):	public int Get_BellCrankAngle_1921_PGN65395(){ return service.Get_BellCrankAngle_1921_PGN65395();}
+CAN1CommManager.java (src\taeha\wheelloader\fseries_monitor\main):	public int Get_BoomLinkAngleSensorSignalVoltage_728_PGN65395(){ return service.Get_BoomLinkAngleSensorSignalVoltage_728_PGN65395();}
+CAN1CommManager.java (src\taeha\wheelloader\fseries_monitor\main):	public int Get_BellCrankAngleSensorSignalVoltage_729_PGN65395(){ return service.Get_BellCrankAngleSensorSignalVoltage_729_PGN65395();}
+CAN1CommManager.java (src\taeha\wheelloader\fseries_monitor\main):	public int Get_BucketAngle_1931_PGN65396(){ return service.Get_BucketAngle_1931_PGN65396();}
+CAN1CommManager.java (src\taeha\wheelloader\fseries_monitor\main):	public void Set_RequestBoomBucketAngleSensorCalibration_PGN61184_201(int Data){ service.Set_RequestBoomBucketAngleSensorCalibration_PGN61184_201(Data);}
+CAN1CommManager.java (src\taeha\wheelloader\fseries_monitor\main)://	public void Set_AngleSensorCalibrationStatus_1909_PGN61184_202(int Data){ service.Set_AngleSensorCalibrationStatus_1909_PGN61184_202(Data);}
+CAN1CommManager.java (src\taeha\wheelloader\fseries_monitor\main)://	public void Set_BoomLinkAngle_1920_PGN65395(int Data){ service.Set_BoomLinkAngle_1920_PGN65395(Data);}
+CAN1CommManager.java (src\taeha\wheelloader\fseries_monitor\main)://	public void Set_BellCrankAngle_1921_PGN65395(int Data){ service.Set_BellCrankAngle_1921_PGN65395(Data);}
+CAN1CommManager.java (src\taeha\wheelloader\fseries_monitor\main)://	public void Set_BoomLinkAngleSensorSignalVoltage_728_PGN65395(int Data){ service.Set_BoomLinkAngleSensorSignalVoltage_728_PGN65395(Data);}
+CAN1CommManager.java (src\taeha\wheelloader\fseries_monitor\main)://	public void Set_BellCrankAngleSensorSignalVoltage_729_PGN65395(int Data){ service.Set_BellCrankAngleSensorSignalVoltage_729_PGN65395(Data);}
+CAN_SerialPort.c (jni):jint Get_ParallelLiftTargetAngleSettingErrorStatus_1924_PGN61184_65(JNIEnv * env, jobject this) {
+CAN_SerialPort.c (jni):	return RX_PARALLEL_LIFT_OPERATION_STATUS_61184_65.ParallelLiftTargetAngleSettingErrorStatus_1924;
+CAN_SerialPort.c (jni):jint Get_RequestBoomBucketAngleSensorCalibration_PGN61184_201(JNIEnv * env,
+CAN_SerialPort.c (jni):	return RX_WHEEL_LOADER_SENSOR_CALIBRATION_REQUEST_61184_201.RequestBoomBucketAngleSensorCalibration;
+CAN_SerialPort.c (jni):jint Get_AngleSensorCalibrationStatus_1909_PGN61184_202(JNIEnv * env,
+CAN_SerialPort.c (jni):	return RX_WHEEL_LOADER_SENSOR_CALIBRATION_STATUS_61184_202.AngleSensorCalibrationStatus_1909;
+CAN_SerialPort.c (jni):jint Get_BoomLinkAngle_1920_PGN65395(JNIEnv * env, jobject this) {
+CAN_SerialPort.c (jni):	return RX_CYLINDER_ANGLE_STROKE1_65395.BoomLinkAngle_1920;
+CAN_SerialPort.c (jni):jint Get_BellCrankAngle_1921_PGN65395(JNIEnv * env, jobject this) {
+CAN_SerialPort.c (jni):	return RX_CYLINDER_ANGLE_STROKE1_65395.BellCrankAngle_1921;
+CAN_SerialPort.c (jni):jint Get_BoomLinkAngleSensorSignalVoltage_728_PGN65395(JNIEnv * env,
+CAN_SerialPort.c (jni):	return RX_CYLINDER_ANGLE_STROKE1_65395.BoomLinkAngleSensorSignalVoltage_728;
+CAN_SerialPort.c (jni):jint Get_BellCrankAngleSensorSignalVoltage_729_PGN65395(JNIEnv * env,
+CAN_SerialPort.c (jni):	return RX_CYLINDER_ANGLE_STROKE1_65395.BellCrankAngleSensorSignalVoltage_729;
+CAN_SerialPort.c (jni):jint Get_BucketAngle_1931_PGN65396(JNIEnv * env, jobject this) {
+CAN_SerialPort.c (jni):	return RX_CYLINDER_ANGLE_STROKE2_65396.BucketAngle_1931;
+CAN_SerialPort.c (jni):void Set_RequestBoomBucketAngleSensorCalibration_PGN61184_201(JNIEnv * env,
+CAN_SerialPort.c (jni):	TX_WHEEL_LOADER_SENSOR_CALIBRATION_REQUEST_61184_201.RequestBoomBucketAngleSensorCalibration =
+CAN_SerialPort.c (jni):void Set_AngleSensorCalibrationStatus_1909_PGN61184_202(JNIEnv * env,
+CAN_SerialPort.c (jni):	TX_WHEEL_LOADER_SENSOR_CALIBRATION_STATUS_61184_202.AngleSensorCalibrationStatus_1909 =
+CAN_SerialPort.c (jni):void Set_BoomLinkAngle_1920_PGN65395(JNIEnv * env, jobject this, int Data) {
+CAN_SerialPort.c (jni):	TX_CYLINDER_ANGLE_STROKE1_65395.BoomLinkAngle_1920 = Data;
+CAN_SerialPort.c (jni):void Set_BellCrankAngle_1921_PGN65395(JNIEnv * env, jobject this, int Data) {
+CAN_SerialPort.c (jni):	TX_CYLINDER_ANGLE_STROKE1_65395.BellCrankAngle_1921 = Data;
+CAN_SerialPort.c (jni):void Set_BoomLinkAngleSensorSignalVoltage_728_PGN65395(JNIEnv * env,
+CAN_SerialPort.c (jni):	TX_CYLINDER_ANGLE_STROKE1_65395.BoomLinkAngleSensorSignalVoltage_728 = Data;
+CAN_SerialPort.c (jni):void Set_BellCrankAngleSensorSignalVoltage_729_PGN65395(JNIEnv * env,
+CAN_SerialPort.c (jni):	TX_CYLINDER_ANGLE_STROKE1_65395.BellCrankAngleSensorSignalVoltage_729 =
+CAN_SerialPort.c (jni):				{"Get_ParallelLiftTargetAngleSettingErrorStatus_1924_PGN61184_65", "()I",(void*) Get_ParallelLiftTargetAngleSettingErrorStatus_1924_PGN61184_65 },
+CAN_SerialPort.c (jni):				{ "Get_RequestBoomBucketAngleSensorCalibration_PGN61184_201",
+CAN_SerialPort.c (jni):						(void*) Get_RequestBoomBucketAngleSensorCalibration_PGN61184_201 },
+CAN_SerialPort.c (jni):				{ "Get_AngleSensorCalibrationStatus_1909_PGN61184_202", "()I",
+CAN_SerialPort.c (jni):						(void*) Get_AngleSensorCalibrationStatus_1909_PGN61184_202 },
+CAN_SerialPort.c (jni):				{ "Get_BoomLinkAngle_1920_PGN65395", "()I",
+CAN_SerialPort.c (jni):						(void*) Get_BoomLinkAngle_1920_PGN65395 }, {
+CAN_SerialPort.c (jni):						"Get_BellCrankAngle_1921_PGN65395", "()I",
+CAN_SerialPort.c (jni):						(void*) Get_BellCrankAngle_1921_PGN65395 },
+CAN_SerialPort.c (jni):				{ "Get_BoomLinkAngleSensorSignalVoltage_728_PGN65395", "()I",
+CAN_SerialPort.c (jni):						(void*) Get_BoomLinkAngleSensorSignalVoltage_728_PGN65395 },
+CAN_SerialPort.c (jni):				{ "Get_BellCrankAngleSensorSignalVoltage_729_PGN65395", "()I",
+CAN_SerialPort.c (jni):						(void*) Get_BellCrankAngleSensorSignalVoltage_729_PGN65395 },
+CAN_SerialPort.c (jni):				{ "Get_BucketAngle_1931_PGN65396", "()I",(void*) Get_BucketAngle_1931_PGN65396 },
+CAN_SerialPort.c (jni):				{ "Set_RequestBoomBucketAngleSensorCalibration_PGN61184_201",
+CAN_SerialPort.c (jni):						(void*) Set_RequestBoomBucketAngleSensorCalibration_PGN61184_201 },
+CAN_SerialPort.c (jni):				{ "Set_AngleSensorCalibrationStatus_1909_PGN61184_202", "(I)V",
+CAN_SerialPort.c (jni):						(void*) Set_AngleSensorCalibrationStatus_1909_PGN61184_202 },
+CAN_SerialPort.c (jni):				{ "Set_BoomLinkAngle_1920_PGN65395", "(I)V",
+CAN_SerialPort.c (jni):						(void*) Set_BoomLinkAngle_1920_PGN65395 }, {
+CAN_SerialPort.c (jni):						"Set_BellCrankAngle_1921_PGN65395", "(I)V",
+CAN_SerialPort.c (jni):						(void*) Set_BellCrankAngle_1921_PGN65395 },
+CAN_SerialPort.c (jni):				{ "Set_BoomLinkAngleSensorSignalVoltage_728_PGN65395", "(I)V",
+CAN_SerialPort.c (jni):						(void*) Set_BoomLinkAngleSensorSignalVoltage_728_PGN65395 },
+CAN_SerialPort.c (jni):				{ "Set_BellCrankAngleSensorSignalVoltage_729_PGN65395", "(I)V",
+CAN_SerialPort.c (jni):						(void*) Set_BellCrankAngleSensorSignalVoltage_729_PGN65395 },
+CAN_Structure.h (jni):	unsigned char		AngleSenCaliStatus:4;
+CAN_Structure.h (jni):	unsigned short		BoomAngle;
+CAN_Structure.h (jni):	unsigned char 	ReqAngleSensorCali:4;
+CAN_Structure.h (jni):	unsigned short	BoomAngle;
+CAN_Structure.h (jni):	unsigned short	BellCrankAngle;
+CAN_Structure.h (jni):	unsigned char 	ParallelLiftTargetAngleSettingErrorStatus_1924:2;
+CAN_Structure.h (jni):	unsigned char	RequestBoomBucketAngleSensorCalibration:4;
+CAN_Structure.h (jni):	unsigned char	AngleSensorCalibrationStatus_1909:4;
+CAN_Structure.h (jni):	unsigned short	BoomLinkAngle_1920;
+CAN_Structure.h (jni):	unsigned short	BellCrankAngle_1921;
+CAN_Structure.h (jni):	unsigned char	BoomLinkAngleSensorSignalVoltage_728;
+CAN_Structure.h (jni):	unsigned char	BellCrankAngleSensorSignalVoltage_729;
+CAN_Structure.h (jni):	unsigned short	BucketAngle_1931;
+CommService.java (src\taeha\wheelloader\fseries_monitor\main):	public native int Get_ParallelLiftTargetAngleSettingErrorStatus_1924_PGN61184_65();
+CommService.java (src\taeha\wheelloader\fseries_monitor\main):	public native int Get_RequestBoomBucketAngleSensorCalibration_PGN61184_201();
+CommService.java (src\taeha\wheelloader\fseries_monitor\main):	public native int Get_AngleSensorCalibrationStatus_1909_PGN61184_202();
+CommService.java (src\taeha\wheelloader\fseries_monitor\main):	public native int Get_BoomLinkAngle_1920_PGN65395();
+CommService.java (src\taeha\wheelloader\fseries_monitor\main):	public native int Get_BellCrankAngle_1921_PGN65395();
+CommService.java (src\taeha\wheelloader\fseries_monitor\main):	public native int Get_BoomLinkAngleSensorSignalVoltage_728_PGN65395();
+CommService.java (src\taeha\wheelloader\fseries_monitor\main):	public native int Get_BellCrankAngleSensorSignalVoltage_729_PGN65395();
+CommService.java (src\taeha\wheelloader\fseries_monitor\main):	public native int Get_BucketAngle_1931_PGN65396();
+CommService.java (src\taeha\wheelloader\fseries_monitor\main):	public native void Set_RequestBoomBucketAngleSensorCalibration_PGN61184_201(int Data);
+CommService.java (src\taeha\wheelloader\fseries_monitor\main):	public native void Set_AngleSensorCalibrationStatus_1909_PGN61184_202(int Data);
+CommService.java (src\taeha\wheelloader\fseries_monitor\main):	public native void Set_BoomLinkAngle_1920_PGN65395(int Data);
+CommService.java (src\taeha\wheelloader\fseries_monitor\main):	public native void Set_BellCrankAngle_1921_PGN65395(int Data);
+CommService.java (src\taeha\wheelloader\fseries_monitor\main):	public native void Set_BoomLinkAngleSensorSignalVoltage_728_PGN65395(int Data);
+CommService.java (src\taeha\wheelloader\fseries_monitor\main):	public native void Set_BellCrankAngleSensorSignalVoltage_729_PGN65395(int Data);
+EHCUIOInfoFragment.java (src\taeha\wheelloader\fseries_monitor\menu\management):	TextFitTextView textviewBoomAngleTitle;
+EHCUIOInfoFragment.java (src\taeha\wheelloader\fseries_monitor\menu\management):	TextFitTextView textviewBoomAngle;
+EHCUIOInfoFragment.java (src\taeha\wheelloader\fseries_monitor\menu\management):	int BoomAngle;
+EHCUIOInfoFragment.java (src\taeha\wheelloader\fseries_monitor\menu\management):		textviewBoomAngleTitle = (TextFitTextView)mRoot.findViewById(R.id.textView_menu_body_monitoring_ehcuioinfo_low_boom_title);
+EHCUIOInfoFragment.java (src\taeha\wheelloader\fseries_monitor\menu\management):		textviewBoomAngleTitle.setText(getString(ParentActivity.getResources().getString(R.string.Boom), 28));
+EHCUIOInfoFragment.java (src\taeha\wheelloader\fseries_monitor\menu\management):		textviewBoomAngle = (TextFitTextView)mRoot.findViewById(R.id.textView_menu_body_monitoring_ehcuioinfo_low_boom_data);
+EHCUIOInfoFragment.java (src\taeha\wheelloader\fseries_monitor\menu\management):		 BoomAngle = CAN1Comm.Get_BoomLinkAngle_1920_PGN65395();
+EHCUIOInfoFragment.java (src\taeha\wheelloader\fseries_monitor\menu\management):		BoomBucketAngleCurrAngle(BoomAngle);
+EHCUIOInfoFragment.java (src\taeha\wheelloader\fseries_monitor\menu\management)://	public void AngleDisplay(int Angle, int AngleDot){
+EHCUIOInfoFragment.java (src\taeha\wheelloader\fseries_monitor\menu\management)://		textviewBoomAngle.setText(Integer.toString(Angle) + "." + Integer.toString(AngleDot) + "®¨");
+EHCUIOInfoFragment.java (src\taeha\wheelloader\fseries_monitor\menu\management):	public void AngleDisplay(int Sign, int Angle, int AngleDot){
+EHCUIOInfoFragment.java (src\taeha\wheelloader\fseries_monitor\menu\management):			textviewBoomAngle.setText("-" + Integer.toString(Angle) + "." + Integer.toString(AngleDot) + "®¨");
+EHCUIOInfoFragment.java (src\taeha\wheelloader\fseries_monitor\menu\management):			textviewBoomAngle.setText(Integer.toString(Angle) + "." + Integer.toString(AngleDot) + "®¨");
+EHCUIOInfoFragment.java (src\taeha\wheelloader\fseries_monitor\menu\management):	public void BoomBucketAngleCurrAngle(int _BoomAngle){
+EHCUIOInfoFragment.java (src\taeha\wheelloader\fseries_monitor\menu\management):		int BoomAngleDot = 0;
+EHCUIOInfoFragment.java (src\taeha\wheelloader\fseries_monitor\menu\management):		if( _BoomAngle == 0xffff )
+EHCUIOInfoFragment.java (src\taeha\wheelloader\fseries_monitor\menu\management):			_BoomAngle = 1800;
+EHCUIOInfoFragment.java (src\taeha\wheelloader\fseries_monitor\menu\management):		if( _BoomAngle == 1800 )		// 0
+EHCUIOInfoFragment.java (src\taeha\wheelloader\fseries_monitor\menu\management):			_BoomAngle = 0;
+EHCUIOInfoFragment.java (src\taeha\wheelloader\fseries_monitor\menu\management):			BoomAngleDot = 0;
+EHCUIOInfoFragment.java (src\taeha\wheelloader\fseries_monitor\menu\management):		else if( _BoomAngle > 1800 )	// +
+EHCUIOInfoFragment.java (src\taeha\wheelloader\fseries_monitor\menu\management):			_BoomAngle -= 1800;
+EHCUIOInfoFragment.java (src\taeha\wheelloader\fseries_monitor\menu\management):			BoomAngleDot = _BoomAngle % 10;
+EHCUIOInfoFragment.java (src\taeha\wheelloader\fseries_monitor\menu\management):			_BoomAngle /= 10;	
+EHCUIOInfoFragment.java (src\taeha\wheelloader\fseries_monitor\menu\management):			_BoomAngle = 1800 - _BoomAngle;
+EHCUIOInfoFragment.java (src\taeha\wheelloader\fseries_monitor\menu\management):			BoomAngleDot = _BoomAngle % 10;
+EHCUIOInfoFragment.java (src\taeha\wheelloader\fseries_monitor\menu\management):			_BoomAngle /= 10;
+EHCUIOInfoFragment.java (src\taeha\wheelloader\fseries_monitor\menu\management):			//_BoomAngle *= -1;
+EHCUIOInfoFragment.java (src\taeha\wheelloader\fseries_monitor\menu\management):		AngleDisplay(BoomSign,_BoomAngle,BoomAngleDot);
+FaultHistoryActiveFragment.java (src\taeha\wheelloader\fseries_monitor\menu\monitoring):		"Boom Link Angle Sensor Circuit - Voltage Above Normal, or Shorted to High Source (or Open Circuit)",	// 15.06.10 ºˆ¡§  
+FaultHistoryActiveFragment.java (src\taeha\wheelloader\fseries_monitor\menu\monitoring):		"Boom Link Angle Sensor Circuit - Voltage Below Normal, or Shorted to Low Source",	// 15.06.10 ºˆ¡§  
+FaultHistoryActiveFragment.java (src\taeha\wheelloader\fseries_monitor\menu\monitoring):		"Bell Crank Angle Sensor Circuit - Voltage Above Normal, or Shorted to High Source (or Open Circuit)",	// 15.06.10 ºˆ¡§  
+FaultHistoryActiveFragment.java (src\taeha\wheelloader\fseries_monitor\menu\monitoring):		"Bell Crank Angle Sensor Circuit - Voltage Below Normal, or Shorted to Low Source",	// 15.06.10 ºˆ¡§  
+FaultHistoryActiveFragment.java (src\taeha\wheelloader\fseries_monitor\menu\monitoring):		"S.C. To Battery Voltage Or O.C. At Dlm Steering Angle Sensor Input",
+FaultHistoryActiveFragment.java (src\taeha\wheelloader\fseries_monitor\menu\monitoring):		"S.C. To Ground Dlm Steering Angle Sensor Input",
+FaultHistoryLoggedFragment.java (src\taeha\wheelloader\fseries_monitor\menu\monitoring):		"Boom Link Angle Sensor Circuit - Voltage Above Normal, or Shorted to High Source (or Open Circuit)",	// 15.06.10 ºˆ¡§  
+FaultHistoryLoggedFragment.java (src\taeha\wheelloader\fseries_monitor\menu\monitoring):		"Boom Link Angle Sensor Circuit - Voltage Below Normal, or Shorted to Low Source",	// 15.06.10 ºˆ¡§  
+FaultHistoryLoggedFragment.java (src\taeha\wheelloader\fseries_monitor\menu\monitoring):		"Bell Crank Angle Sensor Circuit - Voltage Above Normal, or Shorted to High Source (or Open Circuit)",	// 15.06.10 ºˆ¡§  
+FaultHistoryLoggedFragment.java (src\taeha\wheelloader\fseries_monitor\menu\monitoring):		"Bell Crank Angle Sensor Circuit - Voltage Below Normal, or Shorted to Low Source",	// 15.06.10 ºˆ¡§  
+FaultHistoryLoggedFragment.java (src\taeha\wheelloader\fseries_monitor\menu\monitoring):		"S.C. To Battery Voltage Or O.C. At Dlm Steering Angle Sensor Input",
+FaultHistoryLoggedFragment.java (src\taeha\wheelloader\fseries_monitor\menu\monitoring):		"S.C. To Ground Dlm Steering Angle Sensor Input",
+Home.java (src\taeha\wheelloader\fseries_monitor\main):import taeha.wheelloader.fseries_monitor.popup.AngleCalibrationResultPopup;
+Home.java (src\taeha\wheelloader\fseries_monitor\main):	public AngleCalibrationResultPopup		_AngleCalibrationResultPopup;
+Home.java (src\taeha\wheelloader\fseries_monitor\main):		_AngleCalibrationResultPopup = new AngleCalibrationResultPopup(this);
+Home.java (src\taeha\wheelloader\fseries_monitor\main):		_AngleCalibrationResultPopup = new AngleCalibrationResultPopup(this);
+Home.java (src\taeha\wheelloader\fseries_monitor\main):	public void showAngleCalibrationResult(){
+Home.java (src\taeha\wheelloader\fseries_monitor\main):		HomeDialog = _AngleCalibrationResultPopup;
+MainACenterAEBFragment.java (src\taeha\wheelloader\fseries_monitor\main\a):		CAN1Comm.Set_RequestBoomBucketAngleSensorCalibration_PGN61184_201(0);
+MainACenterAEBFragment.java (src\taeha\wheelloader\fseries_monitor\main\a):		CAN1Comm.Set_RequestBoomBucketAngleSensorCalibration_PGN61184_201(15);
+MainACenterBrakePedalCalibrationFragment.java (src\taeha\wheelloader\fseries_monitor\main\a):		CAN1Comm.Set_RequestBoomBucketAngleSensorCalibration_PGN61184_201(0);
+MainACenterBrakePedalCalibrationFragment.java (src\taeha\wheelloader\fseries_monitor\main\a):		CAN1Comm.Set_RequestBoomBucketAngleSensorCalibration_PGN61184_201(15);
+MainBCenterAEBFragment.java (src\taeha\wheelloader\fseries_monitor\main\b):		CAN1Comm.Set_RequestBoomBucketAngleSensorCalibration_PGN61184_201(0);
+MainBCenterAEBFragment.java (src\taeha\wheelloader\fseries_monitor\main\b):		CAN1Comm.Set_RequestBoomBucketAngleSensorCalibration_PGN61184_201(15);
+MainBCenterBrakePedalCalibrationFragment.java (src\taeha\wheelloader\fseries_monitor\main\b):		CAN1Comm.Set_RequestBoomBucketAngleSensorCalibration_PGN61184_201(0);
+MainBCenterBrakePedalCalibrationFragment.java (src\taeha\wheelloader\fseries_monitor\main\b):		CAN1Comm.Set_RequestBoomBucketAngleSensorCalibration_PGN61184_201(15);
+MenuBaseFragment.java (src\taeha\wheelloader\fseries_monitor\main):import taeha.wheelloader.fseries_monitor.menu.mode.AngleCalibration;
+MenuBaseFragment.java (src\taeha\wheelloader\fseries_monitor\main):	public AngleCalibration								_AngleCalibration;
+MenuBaseFragment.java (src\taeha\wheelloader\fseries_monitor\main):		_AngleCalibration = new AngleCalibration();
+MenuBaseFragment.java (src\taeha\wheelloader\fseries_monitor\main):		transaction.detach(_AngleCalibration);
+MenuBaseFragment.java (src\taeha\wheelloader\fseries_monitor\main):	public void showBodyAngleCalibration(){
+MenuBaseFragment.java (src\taeha\wheelloader\fseries_monitor\main):		transaction.remove(_AngleCalibration);
+MenuBaseFragment.java (src\taeha\wheelloader\fseries_monitor\main):		transaction.replace(R.id.FrameLayout_menu_inter_body, _AngleCalibration);
+MenuBaseFragment.java (src\taeha\wheelloader\fseries_monitor\main):	public void showBodyAngleCalibrationAnimation(){
+MenuBaseFragment.java (src\taeha\wheelloader\fseries_monitor\main):		InterBodyAnimation.StartChangeAnimation(_AngleCalibration);
+MenuBaseFragment.java (src\taeha\wheelloader\fseries_monitor\main):			_AngleCalibration.ClickLeft();
+MenuBaseFragment.java (src\taeha\wheelloader\fseries_monitor\main):			ParentActivity._AngleCalibrationResultPopup.ClickLeft();
+MenuBaseFragment.java (src\taeha\wheelloader\fseries_monitor\main):			_AngleCalibration.ClickRight();
+MenuBaseFragment.java (src\taeha\wheelloader\fseries_monitor\main):			ParentActivity._AngleCalibrationResultPopup.ClickRight();
+MenuBaseFragment.java (src\taeha\wheelloader\fseries_monitor\main):			_AngleCalibration.ClickESC();
+MenuBaseFragment.java (src\taeha\wheelloader\fseries_monitor\main):			ParentActivity._AngleCalibrationResultPopup.ClickESC();
+MenuBaseFragment.java (src\taeha\wheelloader\fseries_monitor\main):			_AngleCalibration.ClickEnter();
+MenuBaseFragment.java (src\taeha\wheelloader\fseries_monitor\main):			ParentActivity._AngleCalibrationResultPopup.ClickEnter();
+PressureCalibration.java (src\taeha\wheelloader\fseries_monitor\menu\mode):		CAN1Comm.Set_RequestBoomBucketAngleSensorCalibration_PGN61184_201(0);
+PressureCalibration.java (src\taeha\wheelloader\fseries_monitor\menu\mode):		CAN1Comm.Set_RequestBoomBucketAngleSensorCalibration_PGN61184_201(15);
+PressureCalibration.java (src\taeha\wheelloader\fseries_monitor\menu\mode):				CAN1Comm.Set_RequestBoomBucketAngleSensorCalibration_PGN61184_201(0);
+PressureCalibration.java (src\taeha\wheelloader\fseries_monitor\menu\mode):				CAN1Comm.Set_RequestBoomBucketAngleSensorCalibration_PGN61184_201(15);
+R.java (gen\taeha\wheelloader\fseries_monitor\main):        public static final int Boom_Bucket_Angle_Calibration=0x7f080155;
+ServiceMenuSensorMonitoringFragment.java (src\taeha\wheelloader\fseries_monitor\menu\management):		StatusValue[3] = CAN1Comm.Get_BoomLinkAngleSensorSignalVoltage_728_PGN65395();
+ServiceMenuSensorMonitoringFragment.java (src\taeha\wheelloader\fseries_monitor\menu\management):		StatusValue[4] = CAN1Comm.Get_BellCrankAngleSensorSignalVoltage_729_PGN65395();
+Strings.xml (res\values):    <string name="Boom_Bucket_Angle_Calibration">Boom/Bucket Angle Calibration</string>
+Strings.xml (res\values-de):    <string name="Boom_Bucket_Angle_Calibration">Hub/ Schaufel Winkel Kalibrierung</string>
+Strings.xml (res\values-en):    <string name="Boom_Bucket_Angle_Calibration">Boom/Bucket Angle Calibration</string>
+Strings.xml (res\values-es):    <string name="Boom_Bucket_Angle_Calibration">Calibraci√≥n de √°ngulo de brazo/ cuchara</string>
+Strings.xml (res\values-et):    <string name="Boom_Bucket_Angle_Calibration">Noole/Kopa nurga kalibreerimine</string>
+Strings.xml (res\values-fi):    <string name="Boom_Bucket_Angle_Calibration">Puomi/Kauha Kulmakalibrointi</string>
+Strings.xml (res\values-fr):    <string name="Boom_Bucket_Angle_Calibration">Calibration de l\'Angle Fl√©che/Godet</string>
+Strings.xml (res\values-it):    <string name="Boom_Bucket_Angle_Calibration">calibrazione dell\'angolo del sensore braccio / benna</string>
+Strings.xml (res\values-iw):    <string name="Boom_Bucket_Angle_Calibration">◊õ◊£/BOOM ◊õ◊ô◊ï◊ú ◊ñ◊ï◊ô◊™ </string>
+Strings.xml (res\values-ko):    <string name="Boom_Bucket_Angle_Calibration">Î∂ê/Î≤ÑÏºì Í∞ÅÎèÑ Î≥¥Ï†ï</string>
+Strings.xml (res\values-nl):    <string name="Boom_Bucket_Angle_Calibration">Giek/bak hoek calibratie</string>
+Strings.xml (res\values-pt):    <string name="Boom_Bucket_Angle_Calibration">Angulo Calibra√ß√£o Lan√ßa / balde</string>
+Strings.xml (res\values-sk):    <string name="Boom_Bucket_Angle_Calibration">V√Ωlo≈æn√≠k/Lopata Kalibr√°cia √öhlu</string>
+Strings.xml (res\values-sv):    <string name="Boom_Bucket_Angle_Calibration">Bom/ Skopa vinkel kalibrering</string>
+Strings.xml (res\values-tr):    <string name="Boom_Bucket_Angle_Calibration">Bom/kova A√ßƒ± Kalibrasyonu</string>
