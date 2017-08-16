@@ -1,4 +1,4 @@
-
+ï»¿
 #define NEW_CAN2
 
 //////////////// CMD Structure////////////////////
@@ -840,8 +840,8 @@ typedef struct
 #if 0
 typedef struct
 {
-	unsigned char WeighingSystem:2;		// ¾ç»ê   ²¨Áü / ÄÑÁü   0, 1
-	unsigned char testWorkLoad:2;			// Å×½ºÆ® ²¨Áü / ÄÑÁü   0, 1
+	unsigned char WeighingSystem:2;		// ï¿½ï¿½ï¿½   ï¿½ï¿½ï¿½ï¿½ / ï¿½ï¿½ï¿½ï¿½   0, 1
+	unsigned char testWorkLoad:2;			// ï¿½×½ï¿½Æ® ï¿½ï¿½ï¿½ï¿½ / ï¿½ï¿½ï¿½ï¿½   0, 1
 	unsigned char Unit:4;
 	unsigned char DispType:2;
 	unsigned char InfoViewPriority:2;
@@ -864,8 +864,8 @@ typedef struct
 #else
 typedef struct
 {
-	unsigned char WeighingSystem:2;		// ¾ç»ê   ²¨Áü / ÄÑÁü   0, 1
-	unsigned char testWorkLoad:2;			// Å×½ºÆ® ²¨Áü / ÄÑÁü   0, 1
+	unsigned char WeighingSystem:2;		// ï¿½ï¿½ï¿½   ï¿½ï¿½ï¿½ï¿½ / ï¿½ï¿½ï¿½ï¿½   0, 1
+	unsigned char testWorkLoad:2;			// ï¿½×½ï¿½Æ® ï¿½ï¿½ï¿½ï¿½ / ï¿½ï¿½ï¿½ï¿½   0, 1
 	unsigned char Unit:4;
 
 	unsigned char DispType:2;
@@ -2385,7 +2385,9 @@ typedef struct
 	unsigned char	Reserved0:4;
 
 	unsigned char	EmissionSystemFailLamp_357:3;
-	unsigned char	Reserved1:5;
+	unsigned char	SeatBeltSwitchLamp_749:2;
+	unsigned char	SeatBeltRemindAlarm_750:2;
+	unsigned char	Reserved1:1;
 
 
 }__attribute__((packed))  WARNING_LAMP_65427;
@@ -2683,4 +2685,125 @@ typedef struct
 
 
 }__attribute__((packed))  ELECTRICAL_SWITCH_RELAY_OPERATION_STATUS_65527;
+
+// AAVM
+// 1. HCEPGN65528 All-Around View Operation AAVO
+typedef struct
+{
+	unsigned char	AAVMViewModeStatus_3461:4;
+	unsigned char	IMODOperationStatus_3463:2;
+	unsigned char	reserved:2;
+
+	unsigned char	AAVMWarningFront_3462:2;
+	unsigned char	AAVMWarningRear_3462:2;
+	unsigned char 	AAVMWarningLeft_3462:2;
+	unsigned char	AAVMWarningRight_3462:2;
+
+	unsigned char 	reserved1[3];
+
+	unsigned char 	AAVMDTCInformation_3427[3];
+
+}__attribute__((packed)) ALL_AROUND_VIEW_OPERATION_65528;
+
+// 2. HCEPGN65330 Component Identification CID
+typedef struct
+{
+	unsigned char	ComponentCode_1699;
+	unsigned char	ManufacturerCode_1700;
+	unsigned char	ComponentBasicInformation_1698[9];
+
+}__attribute__((packed))  COMPONENT_IDENTIFICATION_AAVO_65330;
+
+
+// 3. CID
+// 4. Machine Mode Status
+
+// 7. All-Around View Control Setting AAVCS
+typedef struct {
+	unsigned char 	MessageType;
+
+	unsigned char 	AAVMViewMode_3461:4;
+	unsigned char	IMODESwitch_3464:2;
+	unsigned char 	reserved0:2;
+
+	unsigned char 	AAVMSubCommand_3465;
+
+	unsigned char 	AAVMModelNo_3466;
+}__attribute__((packed)) ALL_AROUND_VIEW_CONTROL_SETTING_61184;
+
+// 8. Request DIT1: DTCInfomation TYPE1
+// 9. Request CID: Component Identification CID
+
+// 10. Request to Read AAVM Version1
+typedef struct {
+	unsigned char 	HWVersion_3468[2];
+
+	unsigned char	MotionDetectDeviceSWVersion_3468[2];
+
+	unsigned char 	ImageInOutDeviceSWVersion_3468[2];
+
+	unsigned char	ImageCompositeDataVersion[2];
+}__attribute__((packed)) AAVMVersion1_65504;
+
+// 11. Request to Read AAVM Version2
+typedef struct {
+	unsigned char 	HWVersion_3468[2];
+
+	unsigned char	MotionDetectDeviceSWVersion_3468[2];
+
+	unsigned char 	ImageInOutDeviceSWVersion_3468[2];
+
+	unsigned char	ImageCompositeDataVersion[2];
+}__attribute__((packed)) AAVMVersion2_65505;
+
+// 12. Request to Read AAVM Detecting Operation Modes
+typedef struct {
+	unsigned char	AAVMDetectingOperationDayMode_6000;
+	unsigned char 	AAVMDetectingOperationDrivingMode_6001;
+	unsigned char 	AAVMDetectingOperationSwingMode_6002;
+	unsigned char 	AAVMDetectingOperationWorkingMode_6003;
+	unsigned char 	AAVMDetectingOperationWiperOnMode_6004;
+	unsigned char 	AAVMDetectingOperationIntWiperOnMode_6005;
+	unsigned char 	AAVMDetectingOperationManualOffMode_6006;
+}__attribute__((packed)) AAVMDetectingOperationMode_65506;
+
+// 13. Request to Read AAVM Status
+typedef struct {
+	unsigned char 	StatusOfFrontCamera_6007:2;
+	unsigned char	StatusOfRearCamera_6007:2;
+	unsigned char 	StatusOfLeftCamera_6007:2;
+	unsigned char 	StatusOfRightCamera_6007:2;
+	//1byte
+
+	unsigned char	LumaOfFrontCamera_6008; // 2byte
+
+	unsigned char 	LumaOfRearCamera_6008; // 3byte
+
+	unsigned char 	LumaOfLeftCamera_6008; // 4byte
+
+	unsigned char 	LumaOfRightCamera_6008; // 5byte
+
+	unsigned char	StatusOfImageInOutDevice_6009; // 6byte
+
+	//7byte
+	unsigned char	StatusOfMotionDetectDevicesReceivingCameraImage_6010:1;
+	unsigned char	StatusOfBF609sReadingEmeraldLsStatus_6011:1;
+	unsigned char 	StatusOFBF609sReadingEmeraldLsVersion_6012:1;
+	unsigned char	reserved0:5;
+	// 8byte
+	unsigned char	reserved1;
+}__attribute__((packed)) AAVMDetectingOperationMode_65511;
+
+// 14. Request to Read MLST
+typedef struct {
+	unsigned char	Composite1stDataNo_6019;
+	unsigned char	Composite2ndDataNo_6019;
+	unsigned char	Composite3rdDataNo_6019;
+	unsigned char	Composite4thDataNo_6019;
+	unsigned char	Composite5thDataNo_6019;
+	unsigned char	Composite6thDataNo_6019;
+	unsigned char	Composite7thDataNo_6019;
+	unsigned char	Composite8thDataNo_6019;
+}__attribute__((packed)) AAVMModelList_65507;
+
 #endif

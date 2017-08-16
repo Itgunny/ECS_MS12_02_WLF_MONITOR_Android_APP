@@ -61,6 +61,7 @@ import taeha.wheelloader.fseries_monitor.menu.monitoring.MachineMonitoringFragme
 import taeha.wheelloader.fseries_monitor.menu.monitoring.MachineMonitoringFragment3;
 import taeha.wheelloader.fseries_monitor.menu.monitoring.MenuMonitoringFragment;
 import taeha.wheelloader.fseries_monitor.menu.monitoring.OperationHistoryFragment;
+import taeha.wheelloader.fseries_monitor.menu.monitoring.VersionInfoAAVMFragment;
 import taeha.wheelloader.fseries_monitor.menu.monitoring.VersionInfoACUFragment;
 import taeha.wheelloader.fseries_monitor.menu.monitoring.VersionInfoBKCUFragment;
 import taeha.wheelloader.fseries_monitor.menu.monitoring.VersionInfoClusterFragment;
@@ -72,6 +73,7 @@ import taeha.wheelloader.fseries_monitor.menu.monitoring.VersionInfoMonitorFragm
 import taeha.wheelloader.fseries_monitor.menu.monitoring.VersionInfoRMCUFragment;
 import taeha.wheelloader.fseries_monitor.menu.monitoring.VersionInfoTCUFragment;
 import taeha.wheelloader.fseries_monitor.menu.multimedia.MenuMultimediaFragment;
+import taeha.wheelloader.fseries_monitor.menu.preference.AAVMSettingFragment;
 import taeha.wheelloader.fseries_monitor.menu.preference.BrightnessFragment;
 import taeha.wheelloader.fseries_monitor.menu.preference.CameraSettingFragment;
 import taeha.wheelloader.fseries_monitor.menu.preference.ClockFragment;
@@ -135,6 +137,7 @@ public class MenuBaseFragment extends ParentFragment{
 	public EngineAutoShutdownFragment		_EngineAutoShutdownFragment;
 	public EngineDelayShutdownFragment		_EngineDelayShutdownFragment;
 	public CameraSettingFragment 			_CameraSettingFragment;
+	public AAVMSettingFragment				_AAVMSettingFragment;
 	public CoolingFanReverseModeFragment	_CoolingFanReverseModeFragment;
 	public SpeedometerFreqFragment			_SpeedometerFreqFragment;
 	public WiperFragment					_WiperFragment;
@@ -157,6 +160,7 @@ public class MenuBaseFragment extends ParentFragment{
 	public VersionInfoTCUFragment				_VersionInfoTCUFragment;
 	public VersionInfoECMFragment				_VersionInfoECMFragment;
 	public VersionInfoACUFragment				_VersionInfoACUFragment;
+	public VersionInfoAAVMFragment				_VersionInfoAAVMFragment;
 	public FaultHistoryActiveFragment			_FaultHistoryActiveFragment;
 	public FaultHistoryLoggedFragment			_FaultHistoryLoggedFragment;
 	public FaultHistoryLoggedPasswordFragment	_FaultHistoryLoggedPasswordFragment;
@@ -280,6 +284,7 @@ public class MenuBaseFragment extends ParentFragment{
 		_EngineAutoShutdownFragment = new EngineAutoShutdownFragment();
 		_EngineDelayShutdownFragment = new EngineDelayShutdownFragment();
 		_CameraSettingFragment = new CameraSettingFragment();
+		_AAVMSettingFragment = new AAVMSettingFragment();
 		_CoolingFanReverseModeFragment = new CoolingFanReverseModeFragment();
 		_SpeedometerFreqFragment = new SpeedometerFreqFragment();
 		_WiperFragment = new WiperFragment();
@@ -303,6 +308,7 @@ public class MenuBaseFragment extends ParentFragment{
 		_VersionInfoTCUFragment = new VersionInfoTCUFragment();
 		_VersionInfoECMFragment = new VersionInfoECMFragment();
 		_VersionInfoACUFragment = new VersionInfoACUFragment();
+		_VersionInfoAAVMFragment = new VersionInfoAAVMFragment();
 		_FaultHistoryActiveFragment = new FaultHistoryActiveFragment();
 		_FaultHistoryLoggedFragment = new FaultHistoryLoggedFragment();
 		_FaultHistoryLoggedPasswordFragment = new FaultHistoryLoggedPasswordFragment();
@@ -378,6 +384,7 @@ public class MenuBaseFragment extends ParentFragment{
 		transaction.detach(_EngineAutoShutdownFragment);
 		transaction.detach(_EngineDelayShutdownFragment);
 		transaction.detach(_CameraSettingFragment);
+		transaction.detach(_AAVMSettingFragment);
 		transaction.detach(_CoolingFanReverseModeFragment);
 		transaction.detach(_SpeedometerFreqFragment);
 		transaction.detach(_WiperFragment);
@@ -400,6 +407,7 @@ public class MenuBaseFragment extends ParentFragment{
 		transaction.detach(_VersionInfoTCUFragment);
 		transaction.detach(_VersionInfoECMFragment);
 		transaction.detach(_VersionInfoACUFragment);
+		transaction.detach(_VersionInfoAAVMFragment);
 		transaction.detach(_FaultHistoryActiveFragment);
 		transaction.detach(_FaultHistoryLoggedFragment);
 		transaction.detach(_FaultHistoryLoggedPasswordFragment);
@@ -704,6 +712,13 @@ public class MenuBaseFragment extends ParentFragment{
 		transaction.commit();
 
 	}
+	public void showBodyAAVMSetting(){
+		android.app.FragmentTransaction transaction = getFragmentManager().beginTransaction();
+		transaction.remove(_AAVMSettingFragment);
+		transaction.replace(R.id.FrameLayout_menu_inter_body, _AAVMSettingFragment);
+		transaction.commit();
+
+	}
 	public void showBodyCoolingFanReverse(){
 		android.app.FragmentTransaction transaction = getFragmentManager().beginTransaction();
 		transaction.remove(_CoolingFanReverseModeFragment);
@@ -844,6 +859,14 @@ public class MenuBaseFragment extends ParentFragment{
 		android.app.FragmentTransaction transaction = getFragmentManager().beginTransaction();
 		transaction.remove(_VersionInfoACUFragment);
 		transaction.replace(R.id.FrameLayout_menu_inter_body, _VersionInfoACUFragment);
+		transaction.commit();
+
+	}
+	
+	public void showBodyVersionInfoAAVM(){
+		android.app.FragmentTransaction transaction = getFragmentManager().beginTransaction();
+		transaction.remove(_VersionInfoAAVMFragment);
+		transaction.replace(R.id.FrameLayout_menu_inter_body, _VersionInfoAAVMFragment);
 		transaction.commit();
 
 	}
@@ -1160,6 +1183,10 @@ public class MenuBaseFragment extends ParentFragment{
 			InterBodyAnimation.StartChangeAnimation(_CameraSettingFragment);
 		}
 	}
+	public void showBodyAAVMSettingAnimation(){
+		showInterAnimation();
+		InterBodyAnimation.StartChangeAnimation(_AAVMSettingFragment);
+	}
 	public void showBodyCoolingFanReverseModeAnimation(){
 		if(Home.LOCK_STATE_REVERSE_FAN_MODE == false || ParentActivity.LockUserSwitching == Home.STATE_USERSWITCHING_UNLOCK){
 			showInterAnimation();
@@ -1245,6 +1272,10 @@ public class MenuBaseFragment extends ParentFragment{
 	public void showBodyVersionInfoACUAniamtion(){
 		showInterAnimation();
 		InterBodyAnimation.StartChangeAnimation(_VersionInfoACUFragment);
+	}
+	public void showBodyVersionInfoAAVMAnimation(){
+		showInterAnimation();
+		InterBodyAnimation.StartChangeAnimation(_VersionInfoAAVMFragment);
 	}
 	public void showBodyActiveFaultAnimation(){
 		showInterAnimation();
@@ -1593,6 +1624,9 @@ public class MenuBaseFragment extends ParentFragment{
 		case Home.SCREEN_STATE_MENU_PREFERENCE_CAMERASETTING_TOP:
 			_CameraSettingFragment.ClickLeft();
 			break;
+		case Home.SCREEN_STATE_MENU_PREFERENCE_AAVMSETTING_TOP:
+			_AAVMSettingFragment.ClickLeft();
+			break;
 		case Home.SCREEN_STATE_MENU_MONITORING_TOP:
 			_MenuMonitoringFragment.ClickLeft();
 			break;
@@ -1637,6 +1671,9 @@ public class MenuBaseFragment extends ParentFragment{
 			break;
 		case Home.SCREEN_STATE_MENU_MONITORING_VERSIONINFO_ACU:
 			_VersionInfoACUFragment.ClickLeft();
+			break;
+		case Home.SCREEN_STATE_MENU_MONITORING_VERSIONINFO_AAVM:
+			_VersionInfoAAVMFragment.ClickLeft();
 			break;
 		case Home.SCREEN_STATE_MENU_MONITORING_VERSIONINFO_MONITOR:
 			_VersionInfoMonitorFragment.ClickLeft();
@@ -1914,6 +1951,9 @@ public class MenuBaseFragment extends ParentFragment{
 		case Home.SCREEN_STATE_MENU_PREFERENCE_CAMERASETTING_TOP:
 			_CameraSettingFragment.ClickRight();
 			break;
+		case Home.SCREEN_STATE_MENU_PREFERENCE_AAVMSETTING_TOP:
+			_AAVMSettingFragment.ClickRight();
+			break;
 		case Home.SCREEN_STATE_MENU_MONITORING_TOP:
 			_MenuMonitoringFragment.ClickRight();
 			break;
@@ -1958,6 +1998,9 @@ public class MenuBaseFragment extends ParentFragment{
 			break;
 		case Home.SCREEN_STATE_MENU_MONITORING_VERSIONINFO_ACU:
 			_VersionInfoACUFragment.ClickRight();
+			break;
+		case Home.SCREEN_STATE_MENU_MONITORING_VERSIONINFO_AAVM:
+			_VersionInfoAAVMFragment.ClickRight();			
 			break;
 		case Home.SCREEN_STATE_MENU_MONITORING_VERSIONINFO_MONITOR:
 			_VersionInfoMonitorFragment.ClickRight();
@@ -2239,6 +2282,9 @@ public class MenuBaseFragment extends ParentFragment{
 		case Home.SCREEN_STATE_MENU_PREFERENCE_CAMERASETTING_TOP:
 			_CameraSettingFragment.ClickESC();
 			break;
+		case Home.SCREEN_STATE_MENU_PREFERENCE_AAVMSETTING_TOP:
+			_AAVMSettingFragment.ClickESC();
+			break;
 		case Home.SCREEN_STATE_MENU_MONITORING_TOP:
 			_MenuMonitoringFragment.ClickESC();
 			break;
@@ -2283,6 +2329,9 @@ public class MenuBaseFragment extends ParentFragment{
 			break;
 		case Home.SCREEN_STATE_MENU_MONITORING_VERSIONINFO_ACU:
 			_VersionInfoACUFragment.ClickESC();
+			break;
+		case Home.SCREEN_STATE_MENU_MONITORING_VERSIONINFO_AAVM:
+			_VersionInfoAAVMFragment.ClickESC();			
 			break;
 		case Home.SCREEN_STATE_MENU_MONITORING_VERSIONINFO_MONITOR:
 			_VersionInfoMonitorFragment.ClickESC();
@@ -2551,6 +2600,9 @@ public class MenuBaseFragment extends ParentFragment{
 		case Home.SCREEN_STATE_MENU_PREFERENCE_CAMERASETTING_TOP:
 			_CameraSettingFragment.ClickEnter();
 			break;
+		case Home.SCREEN_STATE_MENU_PREFERENCE_AAVMSETTING_TOP:
+			_AAVMSettingFragment.ClickEnter();
+			break;
 		case Home.SCREEN_STATE_MENU_MONITORING_TOP:
 			_MenuMonitoringFragment.ClickEnter();
 			break;
@@ -2595,6 +2647,9 @@ public class MenuBaseFragment extends ParentFragment{
 			break;
 		case Home.SCREEN_STATE_MENU_MONITORING_VERSIONINFO_ACU:
 			_VersionInfoACUFragment.ClickEnter();
+			break;
+		case Home.SCREEN_STATE_MENU_MONITORING_VERSIONINFO_AAVM:
+			_VersionInfoAAVMFragment.ClickEnter();			
 			break;
 		case Home.SCREEN_STATE_MENU_MONITORING_VERSIONINFO_MONITOR:
 			_VersionInfoMonitorFragment.ClickEnter();
@@ -2822,6 +2877,9 @@ public class MenuBaseFragment extends ParentFragment{
 				break;
 			case Home.SCREEN_STATE_MENU_MONITORING_VERSIONINFO_ACU:
 				_VersionInfoACUFragment.ShowManufactureDay(true);
+				break;
+			case Home.SCREEN_STATE_MENU_MONITORING_VERSIONINFO_AAVM:
+				_VersionInfoAAVMFragment.ShowManufactureDay(true);			
 				break;
 			case Home.SCREEN_STATE_MENU_MONITORING_VERSIONINFO_MONITOR:
 				_VersionInfoMonitorFragment.ShowManufactureDay(true);

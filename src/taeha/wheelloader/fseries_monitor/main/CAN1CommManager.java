@@ -33,7 +33,7 @@ public class CAN1CommManager extends ICAN1CommManager.Stub{		// ttySAC1(Linux), 
 	public static int CMD_STARTCAN	= 0x09;
 	public static int CMD_EEPROMTEST	= 0x0C;
 	public static int CMD_FLASHTEST		= 0x0D;
-	
+	public static int CMD_AAVM = 0x0E;
 	
 	public static int RES_KEY		= 0x80;
 	public static int RES_LCD		= 0x81;
@@ -95,7 +95,6 @@ public class CAN1CommManager extends ICAN1CommManager.Stub{		// ttySAC1(Linux), 
 	public static final int LONG_8_9_0	 		= 0x011C0000;
 	public static final int LONG_HIDDEN_5KEY	= 0x0100001f;
 
-	
 	public static final int POWER_OFF 			= 0x000000F5;
 	///////////////////////////////////////////////////////////////
 	
@@ -159,7 +158,6 @@ public class CAN1CommManager extends ICAN1CommManager.Stub{		// ttySAC1(Linux), 
 	public static final int DATA_STATE_MACHINESTATUS_FRONTAXLE	= 6;
 	public static final int DATA_STATE_MACHINESTATUS_REARAXLE	= 7;
 	// --, 150326 bwk
-	
 	
 	public static final int DATA_STATE_WEIGHINGDISPLAY_TOTAL_A	= 0;
 	public static final int DATA_STATE_WEIGHINGDISPLAY_TOTAL_B	= 1;
@@ -258,6 +256,9 @@ public class CAN1CommManager extends ICAN1CommManager.Stub{		// ttySAC1(Linux), 
 	public static final int DATA_STATE_CAMERA_REVERSE_OFF			= 0;
 	public static final int DATA_STATE_CAMERA_REVERSE_ON			= 1;
 	
+	public static final int DATA_STATE_REVERSE_GEAR_USE_AAVM = 0;
+	public static final int DATA_STATE_REVERSE_GEAR_NOT_USE_AAVM = 1;
+
 	public static final int DATA_STATE_JOYSTICKPOSITION_NEUTRAL		= 0;
 	public static final int DATA_STATE_JOYSTICKPOSITION_UP			= 1;
 	public static final int DATA_STATE_JOYSTICKPOSITION_DOWN		= 2;
@@ -403,6 +404,7 @@ public class CAN1CommManager extends ICAN1CommManager.Stub{		// ttySAC1(Linux), 
 	public static final int SA_ACU													= 0x19;
 	public static final int SA_BKCU													= 0x34;
 	public static final int SA_SMK													= 0x29;
+	public static final int SA_AAVM = 0xDE;
 	
 	public static final int COMMAND_MAINTENANCE_ITEM_LIST_REQUEST						= 0;
 	public static final int MAINTETNANCE_INFORMATION_REQUEST							= 1;
@@ -1827,7 +1829,97 @@ public class CAN1CommManager extends ICAN1CommManager.Stub{		// ttySAC1(Linux), 
 	public int Get_gErr_EHCU_Total_Logged(){ return service.Get_gErr_EHCU_Total_Logged();}
 	public int Get_gErr_Acu_Total_Logged(){ return service.Get_gErr_Acu_Total_Logged();}
 	///////////////////////////////////////////////////////////////////////////////////////////////////////
+	public int Get_AAVMViewModeStatus_3461_PGN65528() {
+		return service.Get_AAVMViewModeStatus_3461_PGN65528();
+	};
+
+	public int Get_IMODOperationStatus_3463_PGN65528() {
+		return service.Get_IMODOperationStatus_3463_PGN65528();
+	};
+
+	public int Get_AAVMWarningFront_3462_PGN65528() {
+		return service.Get_AAVMWarningFront_3462_PGN65528();
+	};
+
+	public int Get_AAVMWarningRear_3462_PGN65528() {
+		return service.Get_AAVMWarningRear_3462_PGN65528();
+	};
+
+	public int Get_AAVMWarningLeft_3462_PGN65528() {
+		return service.Get_AAVMWarningLeft_3462_PGN65528();
+	};
+
+	public int Get_AAVMWarningRight_3462_PGN65528() {
+		return service.Get_AAVMWarningRight_3462_PGN65528();
+	};
+
+	public byte[] Get_AAVMDTCInformation_3427_PGN65528() {
+		return service.Get_AAVMDTCInformation_3427_PGN65528();
+	};
 	
+	public int Get_ComponentCode_1699_PGN65330_AAVO() {
+		return service.Get_ComponentCode_1699_PGN65330_AAVO();
+	};
+
+	public int Get_ManufacturerCode_1700_PGN65330_AAVO() {
+		return service.Get_ManufacturerCode_1700_PGN65330_AAVO();
+	};
+
+	public byte[] Get_ComponentBasicInformation_1698_PGN65330_AAVO() {
+		return service.Get_ComponentBasicInformation_1698_PGN65330_AAVO();
+	};
+
+	public void Set_ComponentCode_1699_PGN65330_AAVO(int Data) {
+		service.Set_ComponentCode_1699_PGN65330_AAVO(Data);
+	};
+
+	public void Set_ManufacturerCode_1700_PGN65330_AAVO(int Data) {
+		service.Set_ManufacturerCode_1700_PGN65330_AAVO(Data);
+	};
+
+	public void Set_ComponentBasicInformation_1698_PGN65330_AAVO(byte[] Data) {
+		service.Set_ComponentBasicInformation_1698_PGN65330_AAVO(Data);
+	};
+
+	public void Set_AAVMViewMode_3461_PGN61184(int Data) {
+		service.Set_AAVMViewMode_3461_PGN61184(Data);
+	};
+
+	public void Set_IMODESwitch_3464_PGN61184(int Data) {
+		service.Set_IMODESwitch_3464_PGN61184(Data);
+	};
+
+	public void Set_AAVMSubCommand_3465_PGN61184(int Data) {
+		service.Set_AAVMSubCommand_3465_PGN61184(Data);
+	};
+
+	public void Set_AAVMModelNo_3466_PGN61184(int Data) {
+		service.Set_AAVMModelNo_3466_PGN61184(Data);
+	};
+
+	public int[] Get_AAVMErr_FromNative() {
+		return service.Get_AAVMErr_FromNative();
+	};
+
+	public int[] Get_AAVMErr_Logged_FromNative() {
+		return service.Get_AAVMErr_Logged_FromNative();
+	};
+
+	public int Get_gErr_AAVM_TotalPacket() {
+		return service.Get_gErr_AAVM_TotalPacket();
+	};
+
+	public int Get_gErr_AAVM_TotalPacket_Logged() {
+		return service.Get_gErr_AAVM_TotalPacket_Logged();
+	};
+
+	public int Get_gErr_AAVM_Total() {
+		return service.Get_gErr_AAVM_Total();
+	};
+
+	public int Get_gErr_AAVM_Total_Logged() {
+		return service.Get_gErr_AAVM_Total_Logged();
+	};
 	
 	////////////////////////////////////////////////////////////////////
 	// CALLBACK METHOD

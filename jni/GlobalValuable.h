@@ -1,4 +1,4 @@
-
+﻿
 static const char *TAG = "serial_port";
 //#define DEBUG_READ
 
@@ -79,7 +79,6 @@ jclass jObject;
 #define		EEPROMTESTCMD 	0x0C
 #define		FLASHTESTCMD	0x0D
 
-
 #define		KeyRES			0x80
 #define		LCDRES			0x81
 #define		BuzRES			0x82
@@ -107,6 +106,8 @@ jclass jObject;
 #define		SA_ACU						0x19
 #define		SA_BKCU						0x34
 #define		SA_SMK						0x29
+#define		SA_AAVM						0xDE
+
 ////////////////////////////////////////////////////
 #define		ERR_BUF_SIZE				400
 #define		MULTI_BUF_SIZE				400
@@ -196,6 +197,7 @@ unsigned char		gRecvMulti_ECM[MULTI_BUF_SIZE];
 unsigned char		gRecvMulti_TCU[MULTI_BUF_SIZE];
 unsigned char		gRecvMulti_CID[MULTI_BUF_SIZE];
 unsigned char		gRecvMulti_BKCU[MULTI_BUF_SIZE];
+unsigned char		gRecvMulti_AAVM[MULTI_BUF_SIZE];
 
 
 unsigned int	 	gErr_Tcu[ERR_BUF_SIZE];
@@ -203,6 +205,7 @@ unsigned int 		gErr_Ecu[ERR_BUF_SIZE];
 unsigned int 		gErr_Mcu[ERR_BUF_SIZE];
 unsigned int		gErr_EHCU[ERR_BUF_SIZE];
 unsigned int		gErr_ACU[ERR_BUF_SIZE];
+unsigned int		gErr_AAVM[ERR_BUF_SIZE];
 
 
 unsigned int	 	gErr_Tcu_Logged[ERR_BUF_SIZE];
@@ -210,30 +213,37 @@ unsigned int 		gErr_Ecu_Logged[ERR_BUF_SIZE];
 unsigned int 		gErr_Mcu_Logged[ERR_BUF_SIZE];
 unsigned int 		gErr_EHCU_Logged[ERR_BUF_SIZE];
 unsigned int		gErr_ACU_Logged[ERR_BUF_SIZE];
+unsigned int		gErr_AAVM_Logged[ERR_BUF_SIZE];
+
 
 unsigned int		gErr_Mcu_TotalPacket;
 unsigned int		gErr_Ecu_TotalPacket;
 unsigned int		gErr_Tcu_TotalPacket;
 unsigned int		gErr_EHCU_TotalPacket;
 unsigned int 		gErr_ACU_TotalPacket;
+unsigned int		gErr_AAVM_TotalPacket;
+
 
 unsigned int		gErr_Mcu_TotalPacket_Logged;
 unsigned int		gErr_Ecu_TotalPacket_Logged;
 unsigned int		gErr_Tcu_TotalPacket_Logged;
 unsigned int		gErr_EHCU_TotalPacket_Logged;
 unsigned int		gErr_ACU_TotalPacket_Logged;
+unsigned int		gErr_AAVM_TotalPacket_Logged;
 
 unsigned int		gErr_Mcu_Total;
 unsigned int		gErr_Ecu_Total;
 unsigned int		gErr_Tcu_Total;
 unsigned int		gErr_EHCU_Total;
 unsigned int		gErr_ACU_Total;
+unsigned int		gErr_AAVM_Total;
 
 unsigned int		gErr_Mcu_Total_Logged;
 unsigned int		gErr_Ecu_Total_Logged;
 unsigned int		gErr_Tcu_Total_Logged;
 unsigned int		gErr_EHCU_Total_Logged;
 unsigned int		gErr_ACU_Total_Logged;
+unsigned int		gErr_AAVM_Total_Logged;
 
 unsigned char		gRecvSingle_250[8];
 unsigned char		gRecvMulti_250[21];
@@ -394,6 +404,10 @@ unsigned char		nBKCUPF;
 unsigned char		nBKCUPS;
 unsigned char		nBKCUTotalPacketNum;
 
+unsigned char		nAAVMPF;
+unsigned char		nAAVMPS;
+unsigned char		nAAVMTotalPacketNum;
+
 unsigned int		nRecvSeedFlag;
 unsigned int		nRecvPasswordResultFlag;
 unsigned int		nRecvPasswordChangeResultFlag;
@@ -492,6 +506,8 @@ COMPONENT_IDENTIFICATION_65330										RX_COMPONENT_IDENTIFICATION_RMCU_65330;
 COMPONENT_IDENTIFICATION_65330										RX_COMPONENT_IDENTIFICATION_EHCU_65330;
 COMPONENT_IDENTIFICATION_65330										RX_COMPONENT_IDENTIFICATION_BKCU_65330;
 
+
+
 ////////////////////////////////////////////////////
 ///////////////CAN TX DATA//////////////////////////
 
@@ -559,6 +575,13 @@ WHEEL_LOADER_EHCU_STATUS_65517										TX_WHEEL_LOADER_EHCU_STATUS_65517;
 ELECTRICAL_SWITCH_RELAY_OPERATION_STATUS_65527						TX_ELECTRICAL_SWITCH_RELAY_OPERATION_STATUS_65527;
 
 COMPONENT_IDENTIFICATION_65330										TX_COMPONENT_IDENTIFICATION_MONITOR_65330;
+
+
+////AAVM
+ALL_AROUND_VIEW_OPERATION_65528										RX_ALL_AROUND_VIEW_OPERATION_65528;
+ALL_AROUND_VIEW_CONTROL_SETTING_61184								TX_ALL_AROUND_VIEW_CONTROL_SETTING_61184;
+COMPONENT_IDENTIFICATION_65330										RX_COMPONENT_IDENTIFICATION_AAVO_65330;
+COMPONENT_IDENTIFICATION_65330										TX_COMPONENT_IDENTIFICATION_AAVO_65330;
 ////////////////////////////////////////////////////
 
 

@@ -1,4 +1,4 @@
-package taeha.wheelloader.fseries_monitor.menu.monitoring;
+ï»¿package taeha.wheelloader.fseries_monitor.menu.monitoring;
 
 import taeha.wheelloader.fseries_monitor.main.CAN1CommManager;
 import taeha.wheelloader.fseries_monitor.main.Home;
@@ -38,12 +38,11 @@ public class FaultHistoryActiveFragment extends ParentFragment{
 //	private static final int REQ_ERR_EHCU_ACTIVE		= 6;
 ////	private static final int REQ_ERR_EHCU_LOGGED		= 7;
 	// --, 150326 bwk
-	
 	private static final int EHCU_SPN = 0;
 	private static final int EHCU_FMI = 1;
 	private static final int EHCU_LENTGH = 168;		// ++, --, 150202 bwk : 84 -> 168
 	
-	// ++, 150202 bwk : 150128 HHI ÀÓÇõÁØ ¿äÃ»
+	// ++, 150202 bwk : 150128 HHI ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Ã»
 	private static final int TCU_LENTGH = 173;
 	
 	private static final int ECU_SPN = 0;
@@ -76,6 +75,7 @@ public class FaultHistoryActiveFragment extends ParentFragment{
 	RadioButton radioTransmission;
 	RadioButton radioEHCU;
 	RadioButton radioACU;
+	RadioButton radioAAVM;
 	
 	RelativeLayout layoutDetail;
 	//////////////////////////////////////////////////
@@ -88,12 +88,14 @@ public class FaultHistoryActiveFragment extends ParentFragment{
 	int DTCTotalPacketTM;
 	int DTCTotalPacketEHCU;
 	int DTCTotalPacketACU;
+	int DTCTotalPacketAAVM;
 	
 	int DTCTotalMachine;
 	int DTCTotalEngine;
 	int DTCTotalTM;
 	int DTCTotalEHCU;
 	int DTCTotalACU;
+	int DTCTotalAAVM;
 	
 	int SendDTCIndex;
 	int SendSeqIndex;
@@ -105,6 +107,8 @@ public class FaultHistoryActiveFragment extends ParentFragment{
 	// ++, 160105 cjg
 	int[] Err_ACU;
 	int[] Err_ACU_List;
+	int[] Err_AAVM;
+	int[] Err_AAVM_List;
 	// --, 160105 cjg
 	
 	// ++, 150211 bwk
@@ -204,6 +208,10 @@ public class FaultHistoryActiveFragment extends ParentFragment{
 		ParentActivity.setMarqueeRadio(radioACU);
 		
 		//--, 160105 cjg
+		radioAAVM = (RadioButton)mRoot.findViewById(R.id.radioButton_menu_body_monitoring_fault_aavm);
+		radioAAVM.setText(getString(ParentActivity.getResources().getString(R.string.AAVM), 505));
+		ParentActivity.setMarqueeRadio(radioAAVM);
+		
 		layoutDetail = (RelativeLayout)mRoot.findViewById(R.id.RelativeLayout_menu_body_monitoring_fault_active_detail);
 
 		listView = (ListView)mRoot.findViewById(R.id.listView_menu_body_monitoring_fault_active_list);
@@ -226,6 +234,8 @@ public class FaultHistoryActiveFragment extends ParentFragment{
 		Err_EHCU = new int[400];
 		Err_ACU = new int[400];
 		Err_ACU_List = new int[400];
+		Err_AAVM = new int[400];
+		Err_AAVM_List = new int[400];
 		for(int i = 0; i < 400; i++){
 			Err_Tcu[i] = 0;
 			Err_Mcu[i] = 0;
@@ -233,6 +243,8 @@ public class FaultHistoryActiveFragment extends ParentFragment{
 			Err_EHCU[i] = 0;
 			Err_ACU[i] = 0;
 			Err_ACU_List[i] = 0;
+			Err_AAVM[i] = 0;
+			Err_AAVM_List[i] = 0;
 		}
 		
 		listView.setAdapter(adapter);
@@ -250,7 +262,7 @@ public class FaultHistoryActiveFragment extends ParentFragment{
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
 				// ++, 150211 bwk
-				CursurIndex = 6;
+				CursurIndex = 7;
 				HandleCursurDisplay.sendMessage(HandleCursurDisplay.obtainMessage(CursurIndex));
 				// --, 150211 bwk
 				ClickOK();
@@ -316,6 +328,18 @@ public class FaultHistoryActiveFragment extends ParentFragment{
 				ClickACU();
 			}
 		});
+		radioAAVM.setOnClickListener(new View.OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				// ++, 150211 bwk
+				CursurIndex = 6;
+				HandleCursurDisplay.sendMessage(HandleCursurDisplay.obtainMessage(CursurIndex));
+				// --, 150211 bwk
+				ClickAAVM();
+			}
+		});
 		
 		textViewDetailTitle.setOnClickListener(new View.OnClickListener() {
 			
@@ -323,7 +347,7 @@ public class FaultHistoryActiveFragment extends ParentFragment{
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
 				// ++, 150213 bwk
-				CursurIndex = 7;
+				CursurIndex = 8;
 				CursurDisplay(CursurIndex);
 				// --, 150213 bwk
 				ClickDetailTitle();
@@ -335,7 +359,7 @@ public class FaultHistoryActiveFragment extends ParentFragment{
 			public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,long arg3) {
 				// TODO Auto-generated method stub
 				// ++, 150213 bwk
-				CursurIndex = 8;
+				CursurIndex = 9;
 				CursurDisplay(CursurIndex);
 				CursurDetailIndex = arg2;
 				// --, 150213 bwk
@@ -357,6 +381,7 @@ public class FaultHistoryActiveFragment extends ParentFragment{
 		DTCTotalPacketTM = CAN1Comm.Get_gErr_Tcu_TotalPacket();
 		DTCTotalPacketEHCU = CAN1Comm.Get_gErr_Ehcu_TotalPacket();
 		DTCTotalPacketACU = CAN1Comm.Get_gErr_Acu_TotalPacket();
+		DTCTotalPacketAAVM = CAN1Comm.Get_gErr_AAVM_TotalPacket();
 //		DTCTotalPacketEHCU = CAN1Comm.Get_EHCUTotalPacket();
 //		if(CAN1Comm.Get_EHCUSingleOrMulti() == 1)
 //		{
@@ -381,6 +406,7 @@ public class FaultHistoryActiveFragment extends ParentFragment{
 		DTCTotalEngine = CAN1Comm.Get_gErr_Ecu_Total();
 		DTCTotalTM = CAN1Comm.Get_gErr_Tcu_Total();
 		DTCTotalACU = CAN1Comm.Get_gErr_Acu_Total();
+		DTCTotalAAVM = CAN1Comm.Get_gErr_AAVM_Total();
 		//Log.d(TAG, "DTCTotalACU : " + DTCTotalACU);
 		//TEMP
 //		FATCSettingTemperatureCelsius = CAN1Comm.Get_FATCSettingTemperatureCelsius_3408_PGN65373();
@@ -426,6 +452,7 @@ public class FaultHistoryActiveFragment extends ParentFragment{
 		ErrorNumberDisplay();
 		EHCUShow();
 		ACUShow();
+		AAVMShow();
 	}
 	/////////////////////////////////////////////////////////////////////	
 	public void ClickOK(){
@@ -463,6 +490,7 @@ public class FaultHistoryActiveFragment extends ParentFragment{
 		radioTransmission.setChecked(false);
 		radioEHCU.setChecked(false);
 		radioACU.setChecked(false);
+		radioAAVM.setChecked(false);
 		DetailEnable(false);
 		SelectedMode = Home.REQ_ERR_MACHINE_ACTIVE;
 		
@@ -479,6 +507,7 @@ public class FaultHistoryActiveFragment extends ParentFragment{
 		radioTransmission.setChecked(false);
 		radioEHCU.setChecked(false);
 		radioACU.setChecked(false);
+		radioAAVM.setChecked(false);
 		DetailEnable(false);
 		SelectedMode = Home.REQ_ERR_ENGINE_ACTIVE;
 		
@@ -495,6 +524,7 @@ public class FaultHistoryActiveFragment extends ParentFragment{
 		radioTransmission.setChecked(true);
 		radioEHCU.setChecked(false);
 		radioACU.setChecked(false);
+		radioAAVM.setChecked(false);
 		DetailEnable(false);
 		SelectedMode = Home.REQ_ERR_TM_ACTIVE;
 		
@@ -511,6 +541,7 @@ public class FaultHistoryActiveFragment extends ParentFragment{
 		radioTransmission.setChecked(false);
 		radioEHCU.setChecked(true);
 		radioACU.setChecked(false);
+		radioAAVM.setChecked(false);
 		DetailEnable(false);
 		SelectedMode = Home.REQ_ERR_EHCU_ACTIVE;
 
@@ -527,6 +558,7 @@ public class FaultHistoryActiveFragment extends ParentFragment{
 		radioTransmission.setChecked(false);
 		radioEHCU.setChecked(false);
 		radioACU.setChecked(true);
+		radioAAVM.setChecked(false);
 		DetailEnable(false);
 		SelectedMode = Home.REQ_ERR_ACU_ACTIVE;
 		
@@ -536,7 +568,22 @@ public class FaultHistoryActiveFragment extends ParentFragment{
 		// --, 150205 bwk
 		
 	}
+	public void ClickAAVM(){
+		TitleDisplay(getString(ParentActivity.getResources().getString(string.AAVM), 497));
+		radioMachine.setChecked(false);
+		radioEngine.setChecked(false);
+		radioTransmission.setChecked(false);
+		radioEHCU.setChecked(false);
+		radioACU.setChecked(false);
+		radioAAVM.setChecked(true);
+		DetailEnable(false);
+		SelectedMode = Home.REQ_ERR_AAVM_ACTIVE;
 	
+		// ++, 150205 bwk
+		CAN1Comm.Set_MonitorScreenNumber_836_PGN65327(0xFF);
+		CAN1Comm.TxCANToMCU(47);
+		// --, 150205 bwk
+	}
 	public void ClickDetailTitle(){
 		DetailEnable(false);
 	}
@@ -555,6 +602,13 @@ public class FaultHistoryActiveFragment extends ParentFragment{
 			radioACU.setVisibility(View.VISIBLE);
 		}
 	}
+	public void AAVMShow(){
+		if(CAN1Comm.Get_ComponentCode_1699_PGN65330_AAVO() != CAN1CommManager.STATE_COMPONENTCODE_ALLAROUNDVIEWCONTROLLER){
+			radioAAVM.setVisibility(View.GONE);
+		}else{
+			radioAAVM.setVisibility(View.VISIBLE);
+		}		
+	}
 	public void ASDisplay(String str){
 		textViewAS.setText(getString(ParentActivity.getResources().getString(string.AS), 67) + " " + str);
 	}
@@ -571,6 +625,12 @@ public class FaultHistoryActiveFragment extends ParentFragment{
 		}else {
 			radioACU.setText(getString(ParentActivity.getResources().getString(string.FATC), 455) + "(" + Integer.toString(DTCTotalACU) + ")");
 		}
+		if(DTCTotalAAVM == 0xff){
+			radioAAVM.setText(getString(ParentActivity.getResources().getString(string.AAVM), 497) + "(" + "-" + ")");
+		} else {
+			radioAAVM.setText(getString(ParentActivity.getResources().getString(string.AAVM), 497) + "(" + Integer.toString(DTCTotalAAVM) + ")");
+		}
+		
 	}
 	public void ErrListDisplay(){
 		switch (SelectedMode) {
@@ -588,6 +648,9 @@ public class FaultHistoryActiveFragment extends ParentFragment{
 			break;
 		case Home.REQ_ERR_ACU_ACTIVE:
 			SetACUErrList();
+			break;
+		case Home.REQ_ERR_AAVM_ACTIVE:
+			SetAAVMErrList();
 			break;
 		default:
 			break;
@@ -610,7 +673,7 @@ public class FaultHistoryActiveFragment extends ParentFragment{
 		Count = 0;
 		for(int i = 0; i < 24; i++){
 			if(Err_ACU[i] == 1){
-				if(CursurIndex == 7 && CursurDetailIndex == Count)
+				if(CursurIndex == 8 && CursurDetailIndex == Count)
 					adapter.addItem(new IconTextItemFault(null,ParentActivity.getResources().getDrawable(R.drawable.menu_information_fault_down_btn_selected), 
 							String.format("F%02d", i+1), "", ""));
 				else
@@ -618,6 +681,67 @@ public class FaultHistoryActiveFragment extends ParentFragment{
 							String.format("F%02d", i+1), "", ""));
 				
 				Err_ACU_List[Count++] = i;
+			}
+		}
+		adapter.notifyDataSetChanged();
+	}
+	public void SetAAVMErrList(){
+		adapter.clearItem();
+		for(int i = 0; i < 24; i++){
+			Err_AAVM_List[i] = 0;
+		}
+		int Err_AAVM_Data[];
+		Err_AAVM_Data = CAN1Comm.Get_AAVMErr_FromNative();
+		int Count = 0;
+		int ModeSelectionStatus = 0;
+		
+		Err_AAVM[0] = (Err_AAVM_Data[0] >> 0) & 0x01;
+		Err_AAVM[1] = (Err_AAVM_Data[0] >> 1) & 0x01;
+		Err_AAVM[2] = (Err_AAVM_Data[0] >> 2) & 0x01;
+		Err_AAVM[3] = (Err_AAVM_Data[0] >> 3) & 0x01;
+		Err_AAVM[4] = (Err_AAVM_Data[0] >> 4) & 0x01;
+		
+		ModeSelectionStatus = (Err_AAVM_Data[0] >> 5) & 0x07;
+		
+		switch(ModeSelectionStatus){
+		case 2:
+			Err_AAVM[5] = ModeSelectionStatus;
+			break;
+		case 3:
+			Err_AAVM[6] = ModeSelectionStatus;
+			break;
+		case 4:
+			Err_AAVM[7] = ModeSelectionStatus;
+			break;
+		case 5:
+			Err_AAVM[13] = ModeSelectionStatus;
+			break;
+		case 6:
+			Err_AAVM[14] = ModeSelectionStatus;
+			break;
+		default:
+			break;
+		}
+		
+		Err_AAVM[8] = (Err_AAVM_Data[1] >> 0) & 0x01;
+		Err_AAVM[9] = (Err_AAVM_Data[1] >> 1) & 0x01;
+		Err_AAVM[10] = (Err_AAVM_Data[1] >> 2) & 0x01;
+		Err_AAVM[11] = (Err_AAVM_Data[1] >> 3) & 0x01;
+		Err_AAVM[12] = (Err_AAVM_Data[1] >> 4) & 0x01;
+		Err_AAVM[15] = (Err_AAVM_Data[1] >> 5) & 0x01;
+		
+		for(int i = 0; i < 24; i++){
+			if(Err_AAVM[i] >= 1){
+				
+				if(CursurIndex == 8 && CursurDetailIndex == Count)
+					adapter.addItem(new IconTextItemFault(null,ParentActivity.getResources().getDrawable(R.drawable.menu_information_fault_down_btn_selected), 
+							String.format("A%02d", i+1), "", ""));
+				else
+					adapter.addItem(new IconTextItemFault(null,ParentActivity.getResources().getDrawable(R.drawable.menu_information_fault_down_btn), 
+							String.format("A%02d", i+1), "", ""));
+				
+
+				Err_AAVM_List[Count++] = i;
 			}
 		}
 		adapter.notifyDataSetChanged();
@@ -645,14 +769,14 @@ public class FaultHistoryActiveFragment extends ParentFragment{
 
 					if((SPN == 0) && (FMI == 0))
 					{
-						if(CursurIndex == 7 && CursurDetailIndex == i)
+						if(CursurIndex == 8 && CursurDetailIndex == i)
 							adapter.addItem(new IconTextItemFault(null,ParentActivity.getResources().getDrawable(R.drawable.menu_information_fault_down_btn_selected), "HCESPN :      FMI :  ", "", ""));
 						else
 							adapter.addItem(new IconTextItemFault(null,ParentActivity.getResources().getDrawable(R.drawable.menu_information_fault_down_btn), "HCESPN :      FMI :  ", "", ""));
 					}
 					else
 					{
-						if(CursurIndex == 7 && CursurDetailIndex == i)
+						if(CursurIndex == 8 && CursurDetailIndex == i)
 						{
 							adapter.addItem(new IconTextItemFault(null,ParentActivity.getResources().getDrawable(R.drawable.menu_information_fault_down_btn_selected), "HCESPN : " + Integer.toString(SPN)
 									+ "     " + "FMI : " + Integer.toString(FMI), "", ""));
@@ -675,14 +799,14 @@ public class FaultHistoryActiveFragment extends ParentFragment{
 					// ++, 150213 bwk
 					if((SPN == 0) && (FMI == 0))
 					{
-						if(CursurIndex == 7 && CursurDetailIndex == i)
+						if(CursurIndex == 8 && CursurDetailIndex == i)
 							adapter.addItem(new IconTextItemFault(null,ParentActivity.getResources().getDrawable(R.drawable.menu_information_fault_down_btn_selected), "SPN :      FMI :  ", "", ""));
 						else
 							adapter.addItem(new IconTextItemFault(null,ParentActivity.getResources().getDrawable(R.drawable.menu_information_fault_down_btn), "SPN :      FMI :  ", "", ""));
 					}
 					else
 					{
-						if(CursurIndex == 7 && CursurDetailIndex == i)
+						if(CursurIndex == 8 && CursurDetailIndex == i)
 						{
 							adapter.addItem(new IconTextItemFault(null,ParentActivity.getResources().getDrawable(R.drawable.menu_information_fault_down_btn_selected), "SPN : " + Integer.toString(SPN)
 									+ "     " + "FMI : " + Integer.toString(FMI), "", ""));
@@ -698,14 +822,14 @@ public class FaultHistoryActiveFragment extends ParentFragment{
 					Err_Tcu = CAN1Comm.Get_TcuErr();
 					if(Err_Tcu[i] == 0)
 					{
-						if(CursurIndex == 7 && CursurDetailIndex == i)
+						if(CursurIndex == 8 && CursurDetailIndex == i)
 							adapter.addItem(new IconTextItemFault(null,ParentActivity.getResources().getDrawable(R.drawable.menu_information_fault_down_btn_selected), "No :      ", "", ""));
 						else
 							adapter.addItem(new IconTextItemFault(null,ParentActivity.getResources().getDrawable(R.drawable.menu_information_fault_down_btn), "No :      ", "", ""));
 					}
 					else
 					{
-						if(CursurIndex == 7 && CursurDetailIndex == i)
+						if(CursurIndex == 8 && CursurDetailIndex == i)
 						{
 							adapter.addItem(new IconTextItemFault(null,ParentActivity.getResources().getDrawable(R.drawable.menu_information_fault_down_btn_selected), "No : " + Integer.toHexString(Err_Tcu[i]), "", ""));
 						}
@@ -722,14 +846,14 @@ public class FaultHistoryActiveFragment extends ParentFragment{
 
 					if((SPN == 0) && (FMI == 0))
 					{
-						if(CursurIndex == 7 && CursurDetailIndex == i)
+						if(CursurIndex == 8 && CursurDetailIndex == i)
 							adapter.addItem(new IconTextItemFault(null,ParentActivity.getResources().getDrawable(R.drawable.menu_information_fault_down_btn_selected), "SPN :      FMI :  ", "", ""));
 						else
 							adapter.addItem(new IconTextItemFault(null,ParentActivity.getResources().getDrawable(R.drawable.menu_information_fault_down_btn), "SPN :      FMI :  ", "", ""));
 					}
 					else
 					{
-						if(CursurIndex == 7 && CursurDetailIndex == i)
+						if(CursurIndex == 8 && CursurDetailIndex == i)
 							adapter.addItem(new IconTextItemFault(null,ParentActivity.getResources().getDrawable(R.drawable.menu_information_fault_down_btn_selected), "SPN : " + Integer.toString(SPN)
 									+ "     " + "FMI : " + Integer.toString(FMI), "", ""));
 						else
@@ -826,8 +950,14 @@ public class FaultHistoryActiveFragment extends ParentFragment{
 				Log.e(TAG,"ArrayIndexOutOfBoundsException ErrDetailDisplay");
 			}
 			
+		}else if(SelectedMode == Home.REQ_ERR_AAVM_ACTIVE){
+			try {
+				textViewDetail.setText(textAAVMErrCode[Err_AAVM_List[Index]]);
+			} catch (ArrayIndexOutOfBoundsException e) {
+				// TODO: handle exception
+				Log.e(TAG,"ArrayIndexOutOfBoundsException ErrDetailDisplay");
+			}
 		}
-		
 		// ++, 150202 bwk
 		else if(SelectedMode == Home.REQ_ERR_TM_ACTIVE)
 		{
@@ -939,6 +1069,8 @@ public class FaultHistoryActiveFragment extends ParentFragment{
 					SendDTCIndex = Home.REQ_ERR_EHCU_ACTIVE;
 				else if(CAN1Comm.Get_ComponentCode_1699_PGN65330_ACU() == CAN1CommManager.STATE_COMPONENTCODE_AIRCONCONTROLLER)
 					SendDTCIndex = Home.REQ_ERR_ACU_ACTIVE;
+				else if(CAN1Comm.Get_ComponentCode_1699_PGN65330_AAVO() == CAN1CommManager.STATE_COMPONENTCODE_ALLAROUNDVIEWCONTROLLER)
+					SendDTCIndex = Home.REQ_ERR_AAVM_ACTIVE;
 				else
 					SendDTCIndex = Home.REQ_ERR_MACHINE_ACTIVE;
 				SetThreadSleepTime(1000);
@@ -960,6 +1092,8 @@ public class FaultHistoryActiveFragment extends ParentFragment{
 				SendSeqIndex = 1;
 				if(CAN1Comm.Get_ComponentCode_1699_PGN65330_ACU() == CAN1CommManager.STATE_COMPONENTCODE_AIRCONCONTROLLER)
 					SendDTCIndex = Home.REQ_ERR_ACU_ACTIVE;
+				else if(CAN1Comm.Get_ComponentCode_1699_PGN65330_AAVO() == CAN1CommManager.STATE_COMPONENTCODE_ALLAROUNDVIEWCONTROLLER)
+					SendDTCIndex = Home.REQ_ERR_AAVM_ACTIVE;
 				else
 					SendDTCIndex = Home.REQ_ERR_MACHINE_ACTIVE;
 				SetThreadSleepTime(1000);
@@ -971,6 +1105,20 @@ public class FaultHistoryActiveFragment extends ParentFragment{
 		
 			break;
 		case Home.REQ_ERR_ACU_ACTIVE:
+			if(SendSeqIndex == 1){
+				RequestErrorCode(SendDTCIndex,1,SendSeqIndex);
+				SendSeqIndex = 1;
+				if(CAN1Comm.Get_ComponentCode_1699_PGN65330_AAVO() == CAN1CommManager.STATE_COMPONENTCODE_ALLAROUNDVIEWCONTROLLER)
+					SendDTCIndex = Home.REQ_ERR_AAVM_ACTIVE;
+				else
+					SendDTCIndex = Home.REQ_ERR_MACHINE_ACTIVE;
+				SetThreadSleepTime(1000);
+			}else{
+				RequestErrorCode(SendDTCIndex,1,SendSeqIndex);
+				SendSeqIndex++;
+			}
+			break;
+		case Home.REQ_ERR_AAVM_ACTIVE:
 			if(SendSeqIndex == 1){
 				RequestErrorCode(SendDTCIndex,1,SendSeqIndex);
 				SendSeqIndex = 1;
@@ -1034,6 +1182,7 @@ public class FaultHistoryActiveFragment extends ParentFragment{
 		return _DTCTotal;
 	}
 	
+	
 	// ++, 150213 bwk
 	public int CountErrorList(){
 		switch (SelectedMode) {
@@ -1047,6 +1196,8 @@ public class FaultHistoryActiveFragment extends ParentFragment{
 				return DTCTotalEHCU;
 			case Home.REQ_ERR_ACU_ACTIVE:
 				return DTCTotalACU;
+			case Home.REQ_ERR_AAVM_ACTIVE:
+				return DTCTotalAAVM;
 			default:
 				return 0;		
 		}
@@ -1057,7 +1208,7 @@ public class FaultHistoryActiveFragment extends ParentFragment{
 		// ++, 150211 bwk
 		switch (CursurIndex) {
 		case 1:
-			CursurIndex = 6;
+			CursurIndex = 7;
 			CursurDisplay(CursurIndex);
 			break;
 		case 2:
@@ -1068,7 +1219,7 @@ public class FaultHistoryActiveFragment extends ParentFragment{
 			break;
 		case 5:
 			if(CAN1Comm.Get_ComponentCode_1699_PGN65330_EHCU() == CAN1CommManager.STATE_COMPONENTCODE_EHCU)
-				CursurIndex--;
+				CursurIndex = 4;
 			else
 				CursurIndex = 3;
 			CursurDisplay(CursurIndex);
@@ -1080,11 +1231,21 @@ public class FaultHistoryActiveFragment extends ParentFragment{
 				CursurIndex = 4;
 			else
 				CursurIndex = 3;
-			
+			CursurDisplay(CursurIndex);
+			break;
+		case 7:
+			if(CAN1Comm.Get_ComponentCode_1699_PGN65330_AAVO() == CAN1CommManager.STATE_COMPONENTCODE_ALLAROUNDVIEWCONTROLLER)
+				CursurIndex = 6;
+			else if(CAN1Comm.Get_ComponentCode_1699_PGN65330_ACU() == CAN1CommManager.STATE_COMPONENTCODE_AIRCONCONTROLLER)
+				CursurIndex = 5;
+			else if(CAN1Comm.Get_ComponentCode_1699_PGN65330_EHCU() == CAN1CommManager.STATE_COMPONENTCODE_EHCU)
+				CursurIndex = 4;
+			else 
+				CursurIndex = 3;
 			CursurDisplay(CursurIndex);
 			break;
 		// ++, 150216 bwk
-		case 7:
+		case 8:
 			if(CursurDetailIndex > 0)
 				CursurDetailIndex--;
 			else
@@ -1133,27 +1294,38 @@ public class FaultHistoryActiveFragment extends ParentFragment{
 				CursurIndex = 4;
 			else if(CAN1Comm.Get_ComponentCode_1699_PGN65330_ACU() == CAN1CommManager.STATE_COMPONENTCODE_AIRCONCONTROLLER)
 				CursurIndex = 5;
-			else
+			else if(CAN1Comm.Get_ComponentCode_1699_PGN65330_AAVO() == CAN1CommManager.STATE_COMPONENTCODE_ALLAROUNDVIEWCONTROLLER)
 				CursurIndex = 6;
+			else
+				CursurIndex = 7;
 			CursurDisplay(CursurIndex);
 			break;
 		case 4:
 			if(CAN1Comm.Get_ComponentCode_1699_PGN65330_ACU() == CAN1CommManager.STATE_COMPONENTCODE_AIRCONCONTROLLER)
 				CursurIndex = 5;
-			else
+			else if(CAN1Comm.Get_ComponentCode_1699_PGN65330_AAVO() == CAN1CommManager.STATE_COMPONENTCODE_ALLAROUNDVIEWCONTROLLER)
 				CursurIndex = 6;
+			else
+				CursurIndex = 7;
 			CursurDisplay(CursurIndex);
 			break;
 		case 5:
+			if(CAN1Comm.Get_ComponentCode_1699_PGN65330_AAVO() == CAN1CommManager.STATE_COMPONENTCODE_ALLAROUNDVIEWCONTROLLER)
 			CursurIndex = 6;
+			else 
+				CursurIndex = 7;
 			CursurDisplay(CursurIndex);
 			break;
 		case 6:
+			CursurIndex = 7;
+			CursurDisplay(CursurIndex);
+			break;
+		case 7:
 			CursurIndex = 1;
 			CursurDisplay(CursurIndex);
 			break;
 		// ++, 150213 bwk
-		case 7:
+		case 8:
 			if(CursurDetailIndex < adapter.getCount()-1)
 				CursurDetailIndex++;
 			else
@@ -1184,7 +1356,7 @@ public class FaultHistoryActiveFragment extends ParentFragment{
 	}
 	public void ClickESC(){
 		// ++, 150213 bwk
-		if(CursurIndex == 7)
+		if(CursurIndex == 8)
 		{
 			switch(SelectedMode)
 			{
@@ -1203,14 +1375,17 @@ public class FaultHistoryActiveFragment extends ParentFragment{
 				case Home.REQ_ERR_ACU_ACTIVE:
 					CursurIndex = 5;
 					break;
+				case Home.REQ_ERR_AAVM_ACTIVE:
+					CursurIndex = 6;
+					break;
 				default:
 					break;
 			}
 			CursurDisplay(CursurIndex);
 		}
-		else if(CursurIndex == 8)
+		else if(CursurIndex == 9)
 		{
-			CursurIndex = 7;
+			CursurIndex = 8;
 			CursurDisplay(CursurIndex);
 			ClickDetailTitle();
 		}
@@ -1237,16 +1412,19 @@ public class FaultHistoryActiveFragment extends ParentFragment{
 			ClickACU();
 			break;
 		case 6:
+			ClickAAVM();
+			break;
+		case 7:
 			ClickOK();
 			break;
 		// ++, 150213 bwk
-		case 7:
-			CursurIndex = 8;
+		case 8:
+			CursurIndex = 9;
 			if(adapter.getCount() > 0 && CountErrorList() > 0)
 				ErrDetailDisplay(CursurDetailIndex);
 			break;
-		case 8:
-			CursurIndex = 7;
+		case 9:
+			CursurIndex = 8;
 			CursurDisplay(CursurIndex);
 			ClickDetailTitle();
 			break;
@@ -1257,11 +1435,11 @@ public class FaultHistoryActiveFragment extends ParentFragment{
 		// --, 150211 bwk
 		
 		// ++. 150213 bwk
-		if(CursurIndex < 6)
+		if(CursurIndex < 8)
 		{
 			if(adapter.getCount() > 0 && CountErrorList() > 0)
 			{
-				CursurIndex = 7;
+				CursurIndex = 9;
 				CursurDetailIndex = 0;
 				CursurDisplay(CursurIndex);
 			}
@@ -1292,6 +1470,7 @@ public class FaultHistoryActiveFragment extends ParentFragment{
 		radioTransmission.setPressed(false);
 		radioEHCU.setPressed(false);
 		radioACU.setPressed(false);
+		radioAAVM.setPressed(false);
 		imgbtnOK.setPressed(false);
 		// ++, 150213 bwk
 		if(adapter.getCount() > 0)
@@ -1319,10 +1498,13 @@ public class FaultHistoryActiveFragment extends ParentFragment{
 				radioACU.setPressed(true);
 				break;
 			case 6:
+				radioAAVM.setPressed(true);
+				break;
+			case 7:
 				imgbtnOK.setPressed(true);
 				break;
 			// ++, 150213 bwk
-			case 7:
+			case 8:
 				if(CursurDetailIndex < adapter.getCount())
 					adapter.UpdateIcon(CursurDetailIndex, ParentActivity.getResources().getDrawable(R.drawable.menu_information_fault_down_btn_selected));
 				else if(adapter.getCount() > 0)
@@ -1344,7 +1526,7 @@ public class FaultHistoryActiveFragment extends ParentFragment{
 		{2305,14},{2306,0},{2306,1},{2306,5},{2306,6},{2306,14},{2307,0},{2307,1},{2307,5},{2307,6},{2307,14},{2308,0},{2308,1},{2308,5},
 		{2308,6},{2308,14},{2309,0},{2309,1},{2309,5},{2309,6},{2309,14},{2328,0},{2328,1},{2328,3},{2328,4},{2329,0},{2329,1},
 		{738,2},{751,2},{2330,2},{172,2},{174,2},
-		// ++, 150202 bwk : 150128 HHI ÀÓÇõÁØ ¿äÃ»
+		// ++, 150202 bwk : 150128 HHI ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Ã»
 		{2333, 9}, {2331, 9}, {2332, 9}, {2317, 9}, {2319, 2}, {2320, 2}, {2321, 2}, {2322, 2}, {2323, 2}, {2324, 2}, {2325, 2}, 
 		{2326, 5}, {2326, 6}, {2327, 0}, {2327, 1}, {2327, 5}, {2327, 6}, {2327, 14}, {2311, 2}, {2311, 0}, {2311, 1}, {2311, 3}, 
 		{2311, 4}, {2311, 13}, {2311, 14}, {2311, 31}, {2313, 2}, {2313, 0}, {2313, 1}, {2313, 3}, {2313, 4}, {2313, 13}, {2313, 14}, 
@@ -1358,17 +1540,17 @@ public class FaultHistoryActiveFragment extends ParentFragment{
 		   ,203,203,203,203,204,204,204,204,205,205,205,205,301,301,304,304,310,318,322,322,325,325,327,327,346		
 		   ,346,503,503,503,503,507,507,507,507,551,551,552,552,558,558,558,558,701,705,705,707,723,723,727,727		
 		   ,728,728,729,729,730,830,840,841,842,843,844,850,869
-		   ,2000,2000,2001,2001,2002,2003,2003,2004,2005	// RMCU °ü·Ã ¿À·ù Ãß°¡
-		   ,861,339,339,343,343,557,557			// 	DTC List (HL9XX ½Ã¸®Áî, 15³â 5¿ù 22ÀÏ ±âÁØ) Àû¿ë
-		   ,831};			// DTC 160323 ¼ºÇö±Õ ´ë¸® ¿äÃ» Ãß°¡
+		   ,2000,2000,2001,2001,2002,2003,2003,2004,2005	// RMCU ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ß°ï¿½
+		   ,861,339,339,343,343,557,557			// 	DTC List (HL9XX ï¿½Ã¸ï¿½ï¿½ï¿½, 15ï¿½ï¿½ 5ï¿½ï¿½ 22ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½) ï¿½ï¿½ï¿½ï¿½
+		   ,831};			// DTC 160323 ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ë¸® ï¿½ï¿½Ã» ï¿½ß°ï¿½
 	static final int FMIDATA[] = {3, 4,	5,	6,	4,	6,	4,	6,	4,	6,	4,	6,	4,	6,	4,	6,	0,	1,	2,	4,	
 		0,	1,	2,	4,	0,	1,	2,	4,	0,	1,	2,	4,	3,	4,	3,	4,	8,	8,	4,	6,	4,	6,	4,	6,	3,	
 		4,	0,	1,	2,	4,	0,	1,	2,	4,	3,	4,	3,	4,	0,	1,	2,	4,	4,	0,	1,	1,	3,	4,	4,	6,	
 		3,	4,	3,	4,	19,	12,	2,	2,	2,	2,	2,	2,	2,
-		5,	1,	5,	1,	1, 19,	2,	0,	0,	// RMCU °ü·Ã ¿À·ù Ãß°¡
-		2,	3,	4,	3,	4,	0,	4,			// 	DTC List (HL9XX ½Ã¸®Áî, 15³â 5¿ù 22ÀÏ ±âÁØ) Àû¿ë
-		2};		// DTC 160323 ¼ºÇö±Õ ´ë¸® ¿äÃ» Ãß°¡
-	// ++, 150202 bwk : 150128 HHI ÀÓÇõÁØ ¿äÃ»
+		5,	1,	5,	1,	1, 19,	2,	0,	0,	// RMCU ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ß°ï¿½
+		2,	3,	4,	3,	4,	0,	4,			// 	DTC List (HL9XX ï¿½Ã¸ï¿½ï¿½ï¿½, 15ï¿½ï¿½ 5ï¿½ï¿½ 22ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½) ï¿½ï¿½ï¿½ï¿½
+		2};		// DTC 160323 ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ë¸® ï¿½ï¿½Ã» ï¿½ß°ï¿½
+	// ++, 150202 bwk : 150128 HHI ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Ã»
 	static final int TCU_SPN[] = {0x10,0x11,0x12,0x13,0x14,0x15,0x16,0x17,0x18,0x19,0x1A,0x1B,0x1C,0x1D,0x1E,0x1F,
 		0x21,0x22,0x23,0x24,0x25,0x26,0x27,0x28,0x29,0x2A,0x2B,0x2C,0x2D,0x2E,0x2F,
 		0x31,0x32,0x33,0x34,0x35,0x36,0x37,0x38,0x39,0x3A,0x3B,0x3C,0x3D,0x3E,
@@ -1486,8 +1668,8 @@ public class FaultHistoryActiveFragment extends ParentFragment{
 
 	static final String	textErrorCode[] = 
 		{
-		"Hydraulic Oil Temperature Sensor Circuit - Voltage Above Normal, or Shorted to High Source (or Open Circuit)",	// 15.06.10 ¼öÁ¤ 
-		"Hydraulic Oil Temperature Sensor Circuit - Voltage Below Normal, or Shorted to Low Source",	// 15.06.10 ¼öÁ¤ 
+		"Hydraulic Oil Temperature Sensor Circuit - Voltage Above Normal, or Shorted to High Source (or Open Circuit)",	// 15.06.10 ï¿½ï¿½ï¿½ï¿½ 
+		"Hydraulic Oil Temperature Sensor Circuit - Voltage Below Normal, or Shorted to Low Source",	// 15.06.10 ï¿½ï¿½ï¿½ï¿½ 
 		"Engine Cooling Fan EPPR Valve Circuit Current Below Normal, or Open Circuit ",
 		"Engine Cooling Fan EPPR Valve Circuit Current Above Norma", 
 		"Boom Up Lever Detent Solenoid Circuit Voltage Below Normal, or Shorted to Low Source(or Open Circuit)", 
@@ -1502,28 +1684,28 @@ public class FaultHistoryActiveFragment extends ParentFragment{
 		"Engine Cooling Fan Reverse Driving Status Signal Circuit - Current Above Norma", 
 		"Emergency Steering Pump Relay Circuit Voltage Below Normal, or Shorted to Low Source(or Open Circuit)",
 		"Emergency Steering Pump Relay Circuit Current Above Norma",
-		"Steering Main Pump Pressure Sensor Data Above Normal Range (or Open Circuit)",	// 15.06.10 ¼öÁ¤ 
+		"Steering Main Pump Pressure Sensor Data Above Normal Range (or Open Circuit)",	// 15.06.10 ï¿½ï¿½ï¿½ï¿½ 
 		"Steering Main Pump Pressure Sensor Data Below Normal Range", 
 		"Steering Main Pump Pressure Sensor Data Error",  
-		"Steering Main Pump Pressure Sensor Circuit - Voltage Below Normal, or Shorted to Low Source",	// 15.06.10 ¼öÁ¤  //20 
+		"Steering Main Pump Pressure Sensor Circuit - Voltage Below Normal, or Shorted to Low Source",	// 15.06.10 ï¿½ï¿½ï¿½ï¿½  //20 
 		"Emergency Steering Pump Pressure Sensor Data Above Normal Range (or Open Circuit)", 
 		"Emergency Steering Pump Pressure Sensor Data Below Normal Range",
 		"Emergency Steering Pump Pressure Sensor Data Error", 
 		"Emergency Steering Pump Pressure Sensor Circuit - Voltage Below Normal, or Shorted to Low Source", 
-		"Boom Cylinder Head Pressure Sensor Data Above Normal Range (or Open Circuit)",		// 15.06.10 ¼öÁ¤  
+		"Boom Cylinder Head Pressure Sensor Data Above Normal Range (or Open Circuit)",		// 15.06.10 ï¿½ï¿½ï¿½ï¿½  
 		"Boom Cylinder Pressure Sensor Data Below Normal Range", 
 		"Boom Cylinder Pressure Sensor Data Error",
-		"Boom Cylinder Head Pressure Sensor Circuit - Voltage Below Normal, or Shorted to Low Source", 		// 15.06.10 ¼öÁ¤
-		"Boom Cylinder Rod Pressure Sensor Data Above Normal Range (or Open Circuit)", 		// 15.06.10 ¼öÁ¤
+		"Boom Cylinder Head Pressure Sensor Circuit - Voltage Below Normal, or Shorted to Low Source", 		// 15.06.10 ï¿½ï¿½ï¿½ï¿½
+		"Boom Cylinder Rod Pressure Sensor Data Above Normal Range (or Open Circuit)", 		// 15.06.10 ï¿½ï¿½ï¿½ï¿½
 		"Bucket Cylinder Pressure Sensor Data Below Normal Range", //30
 		"Bucket Cylinder Pressure Sensor Data Error", 
-		"Boom Cylinder Rod Pressure Sensor Circuit - Voltage Below Normal, or Shorted to Low Source", 	// 15.06.10 ¼öÁ¤
-		"Fuel Level Sensor Circuit - Voltage Above Normal, or Shorted to High Source (or Open Circuit)", 	// 15.06.10 ¼öÁ¤
-		"Fuel Level Sensor Circuit - Voltage Below Normal, or Shorted to Low Source", 	// 15.06.10 ¼öÁ¤
+		"Boom Cylinder Rod Pressure Sensor Circuit - Voltage Below Normal, or Shorted to Low Source", 	// 15.06.10 ï¿½ï¿½ï¿½ï¿½
+		"Fuel Level Sensor Circuit - Voltage Above Normal, or Shorted to High Source (or Open Circuit)", 	// 15.06.10 ï¿½ï¿½ï¿½ï¿½
+		"Fuel Level Sensor Circuit - Voltage Below Normal, or Shorted to Low Source", 	// 15.06.10 ï¿½ï¿½ï¿½ï¿½
 		"Engine Coolant Temperature Sensor Circuit - Voltage Above Normal, or Shorted to High Source(or Open Circuit)",
 		"Engine Coolant Temperature Sensor Circuit - Voltage Below Normal, or Shorted to Low Source", 
 		"Engine Speed Signal Error Abnormal Frequency or Pulse Width", 
-		"Cooling Fan Speed Signal Error - Abnormal Frequency or Pulse Width",	// 15.06.10 ¼öÁ¤
+		"Cooling Fan Speed Signal Error - Abnormal Frequency or Pulse Width",	// 15.06.10 ï¿½ï¿½ï¿½ï¿½
 		"Engine Preheat Relay Circuit Voltage Below Normal, or Shorted to Low Source(or Open Circuit)",
 		"Engine Preheat Relay Circuit Current Above Norma",	// 40 
 		"Fuel Warmer Relay Circuit Voltage Below Normal, or Shorted to Low Source(or Open Circuit)",
@@ -1532,34 +1714,34 @@ public class FaultHistoryActiveFragment extends ParentFragment{
 		"Anti-Restart Relay Circuit Current Above Norma", 
 		"Engine Power Mode Selector Circuit Voltage Above Normal, or Shorted to Low Source(or Open Circuit)", 
 		"Engine Power Mode Selector Circuit Voltage Below Normal, or Shorted to Low Source", 
-		"Brake Pressure Sensor Data Above Normal Range (or Open Circuit)",		// 15.06.10 ¼öÁ¤
+		"Brake Pressure Sensor Data Above Normal Range (or Open Circuit)",		// 15.06.10 ï¿½ï¿½ï¿½ï¿½
 		"Brake Oil Pressure Sensor Data Below Normal Range", 
 		"Brake Oil Pressure Sensor Data Error", 
-		"Brake Pressure Sensor Circuit - Voltage Below Normal, or Shorted to Low Source",	// 15.06.10 ¼öÁ¤	// 50
-		"Parking Oil Pressure Sensor Data Above Normal Range (or Open Circuit)",		// 15.06.10 ¼öÁ¤
+		"Brake Pressure Sensor Circuit - Voltage Below Normal, or Shorted to Low Source",	// 15.06.10 ï¿½ï¿½ï¿½ï¿½	// 50
+		"Parking Oil Pressure Sensor Data Above Normal Range (or Open Circuit)",		// 15.06.10 ï¿½ï¿½ï¿½ï¿½
 		"Parking Oil Pressure Sensor Data Below Normal Range", 
 		"Parking Oil Pressure Sensor Data Error", 
-		"Parking Oil Pressure Sensor Circuit - Voltage Below Normal, or Shorted to Low Source",	// 15.06.10 ¼öÁ¤ 
+		"Parking Oil Pressure Sensor Circuit - Voltage Below Normal, or Shorted to Low Source",	// 15.06.10 ï¿½ï¿½ï¿½ï¿½ 
 		"Clutch Cutoff Mode Selector Circuit Voltage Above Normal, or Shorted to High Source(or Open Circuit)",
 		"Clutch Cutoff Mode Selector Circuit Voltage Below Normal, or Shorted to Low Source", 
 		"Transmission Shift Mode Selector Circuit Voltage Above Normal, or Shorted to High Source(or Open Circuit)", 
 		"Transmission Shift Mode Selector Circuit Voltage Below Normal, or Shorted to Low Source",
-		"Differential Lock Pressure Sensor Data Above Normal Range (or Open Circuit)",	// 15.06.10 ¼öÁ¤
+		"Differential Lock Pressure Sensor Data Above Normal Range (or Open Circuit)",	// 15.06.10 ï¿½ï¿½ï¿½ï¿½
 		"Differential Lock Pressure Sensor Data Below Normal Range", 	// 60
 		"Differential Lock Pressure Sensor Data Error", 
-		"Differential Lock Pressure Sensor Circuit - Voltage Below Normal, or Shorted to Low Source",	// 15.06.10 ¼öÁ¤
+		"Differential Lock Pressure Sensor Circuit - Voltage Below Normal, or Shorted to Low Source",	// 15.06.10 ï¿½ï¿½ï¿½ï¿½
 		"Hourmeter Circuit - Voltage Below Normal, or Shorted to Low Source", 
-		"MCU Input Voltage High",	// 15.06.10 ¼öÁ¤ 
-		"MCU Input Voltage Low",	// 15.06.10 ¼öÁ¤
-		"Alternator Node I Voltage Low (or Open Circuit)",	// 15.06.10 ¼öÁ¤
+		"MCU Input Voltage High",	// 15.06.10 ï¿½ï¿½ï¿½ï¿½ 
+		"MCU Input Voltage Low",	// 15.06.10 ï¿½ï¿½ï¿½ï¿½
+		"Alternator Node I Voltage Low (or Open Circuit)",	// 15.06.10 ï¿½ï¿½ï¿½ï¿½
 		"Buzzer Circuit - Voltage Above Normal, or Shorted to High Source", 
 		"Buzzer Circuit - Voltage Below Normal, or Shorted to Low Source (or Open Circuit)", 
 		"Wiper Relay Circuit - Voltage Below Normal, or Shorted to Low Source (or Open Circuit)",
 		"Wiper Relay Circuit - Current Above Norma",	// 70 
-		"Boom Link Angle Sensor Circuit - Voltage Above Normal, or Shorted to High Source (or Open Circuit)",	// 15.06.10 ¼öÁ¤  
-		"Boom Link Angle Sensor Circuit - Voltage Below Normal, or Shorted to Low Source",	// 15.06.10 ¼öÁ¤  
-		"Bell Crank Angle Sensor Circuit - Voltage Above Normal, or Shorted to High Source (or Open Circuit)",	// 15.06.10 ¼öÁ¤  
-		"Bell Crank Angle Sensor Circuit - Voltage Below Normal, or Shorted to Low Source",	// 15.06.10 ¼öÁ¤  
+		"Boom Link Angle Sensor Circuit - Voltage Above Normal, or Shorted to High Source (or Open Circuit)",	// 15.06.10 ï¿½ï¿½ï¿½ï¿½  
+		"Boom Link Angle Sensor Circuit - Voltage Below Normal, or Shorted to Low Source",	// 15.06.10 ï¿½ï¿½ï¿½ï¿½  
+		"Bell Crank Angle Sensor Circuit - Voltage Above Normal, or Shorted to High Source (or Open Circuit)",	// 15.06.10 ï¿½ï¿½ï¿½ï¿½  
+		"Bell Crank Angle Sensor Circuit - Voltage Below Normal, or Shorted to Low Source",	// 15.06.10 ï¿½ï¿½ï¿½ï¿½  
 		"ATPC Heater PWM Output Duty Operation Error", 
 		"MCU Internal Memory Error",
 		"Cluster Communication Error", 
@@ -1569,7 +1751,7 @@ public class FaultHistoryActiveFragment extends ParentFragment{
 		"Monitor Communication Data Error", 
 		"RMCU Communication Data Error", 
 		"BKCU Communication Data error",
-		// RMCU ¿À·ù Ãß°¡
+		// RMCU ï¿½ï¿½ï¿½ï¿½ ï¿½ß°ï¿½
 		"Satellite/Mobile antenna connection is not OK.",
 		"Satellite/Mobile is not linked.",
 		"GPS antenna connection is not OK.",
@@ -1580,13 +1762,13 @@ public class FaultHistoryActiveFragment extends ParentFragment{
 		"Step 4",
 		"Step 5",
 		"EHCU Communication Data error",
-		"Accel Pedal Position 1 Sensor Circuit - Voltage Above Normal, or Shorted to High Source (or Open Circuit)",	// 15.06.10 ¼öÁ¤  
-		"Accel Pedal Position 1 Sensor Circuit - Voltage Below Normal, or Shorted to Low Source",	// 15.06.10 ¼öÁ¤  
-		"Accel Pedal Position 2 Sensor Circuit - Voltage Above Normal, or Shorted to High Source (or Open Circuit)",	// 15.06.10 ¼öÁ¤  
-		"Accel Pedal Position 2 Sensor Circuit - Voltage Below Normal, or Shorted to Low Source",	// 15.06.10 ¼öÁ¤  
-		"Brake Priority Pressure Sensor Data Above Normal Range (or Open Circuit)",	// 15.06.10 ¼öÁ¤  
-		"Brake Priority Pressure Sensor Circuit - Voltage Below Normal, or Shorted to Low Source",	// 15.06.10 ¼öÁ¤  
-		"FATC Communication Error",		// 16.03.23 Ãß°¡
+		"Accel Pedal Position 1 Sensor Circuit - Voltage Above Normal, or Shorted to High Source (or Open Circuit)",	// 15.06.10 ï¿½ï¿½ï¿½ï¿½  
+		"Accel Pedal Position 1 Sensor Circuit - Voltage Below Normal, or Shorted to Low Source",	// 15.06.10 ï¿½ï¿½ï¿½ï¿½  
+		"Accel Pedal Position 2 Sensor Circuit - Voltage Above Normal, or Shorted to High Source (or Open Circuit)",	// 15.06.10 ï¿½ï¿½ï¿½ï¿½  
+		"Accel Pedal Position 2 Sensor Circuit - Voltage Below Normal, or Shorted to Low Source",	// 15.06.10 ï¿½ï¿½ï¿½ï¿½  
+		"Brake Priority Pressure Sensor Data Above Normal Range (or Open Circuit)",	// 15.06.10 ï¿½ï¿½ï¿½ï¿½  
+		"Brake Priority Pressure Sensor Circuit - Voltage Below Normal, or Shorted to Low Source",	// 15.06.10 ï¿½ï¿½ï¿½ï¿½  
+		"FATC Communication Error",		// 16.03.23 ï¿½ß°ï¿½
 		"Not define."	
 	};
 
@@ -1676,7 +1858,7 @@ public class FaultHistoryActiveFragment extends ParentFragment{
 		"Working Joystick Type Select Switch Error",
 		"Boom Detent Solenoid Signal Error",
 		"Bucket Detent Solenoid Signal Error",
-		// ++, 150202 bwk : 150128 HHI ÀÓÇõÁØ ¿äÃ»
+		// ++, 150202 bwk : 150128 HHI ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Ã»
 		"Communication Timeout between EHCU and TCU",
 		"Communication Timeout between EHCU and MCU",
 		"Communication Timeout between EHCU and Working Joystick",
@@ -1791,7 +1973,27 @@ public class FaultHistoryActiveFragment extends ParentFragment{
 		"reserved"
 	};
 	
-	// ++, 150202 bwk : 150128 HHI ÀÓÇõÁØ ¿äÃ»
+	static final String textAAVMErrCode[] = {
+		"AAVM Communication Error - AAVM",
+		"AAVM Communication Error - Front Camera",
+		"AAVM Communication Error - Rear Camera",
+		"AAVM Communication Error - Left Camera",
+		"AAVM Communication Error - Right Camera",
+		"Manual Setting Fail",
+		"No MCU CID",
+		"MCU CID Format Error",
+		
+		"AAVM Hardware Error - AAVM",
+		"AAVM Hardware Error - Front Camera",
+		"AAVM Hardware Error - Rear Camera",
+		"AAVM Hardware Error - Left Camera",
+		"AAVM Hardware Error - Right Camera",
+		"MCU Model is not registered",
+		"MCU CID Model can't be applied",
+		"reserved"
+	};
+	
+	// ++, 150202 bwk : 150128 HHI ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Ã»
 	static final String textTCUErrCode[] = 
 	{
 		"Logical Error At Direction Select Signal 3Rd Shift Lever ",
@@ -1837,8 +2039,8 @@ public class FaultHistoryActiveFragment extends ParentFragment{
 		"S.C. To Battery Voltage Or O.C. At Output Speed Input",
 		"S.C. To Ground At Output Speed Input",
 		"Logical Error At Output Speed Input",
-		"Turbine Speed Zero Doesn¡¯T Fit To Other Speed Signals",
-		"Output Speed Zero Doesn¡¯T Fit To Other Speed Signals",
+		"Turbine Speed Zero Doesnï¿½ï¿½T Fit To Other Speed Signals",
+		"Output Speed Zero Doesnï¿½ï¿½T Fit To Other Speed Signals",
 		"Gear Range Restriction Signal",
 		"Declutch Modulation Selection Signal",
 		"Fmr1 Timeout",

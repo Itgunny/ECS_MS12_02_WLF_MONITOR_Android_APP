@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent" 
@@ -47,7 +47,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="43dp"
-        android:layout_marginTop="61dp"
+        android:layout_marginTop="55dp"
         android:background="@drawable/_selector_menu_body_monitoring_version_tcu_btn1"
         android:gravity="center"
         android:text="@string/TCU"
@@ -60,7 +60,7 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="9dp"
         android:layout_toRightOf="@+id/textView_menu_body_monitoring_version_tcu"
-        android:layout_marginTop="61dp"
+        android:layout_marginTop="55dp"
         android:background="@drawable/_selector_menu_body_monitoring_version_tcu_btn1"
         android:gravity="center"
         android:text="@string/ECM"
@@ -86,7 +86,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="43dp"
-        android:layout_marginTop="150dp" 
+        android:layout_marginTop="130dp" 
         android:splitMotionEvents="false">
 
         <TextView
@@ -118,7 +118,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="294dp"
-        android:layout_marginTop="150dp" 
+        android:layout_marginTop="130dp" 
         android:splitMotionEvents="false">
 
         <TextView
@@ -150,7 +150,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="545dp"
-        android:layout_marginTop="150dp" 
+        android:layout_marginTop="130dp" 
         android:splitMotionEvents="false">
 
         <TextView
@@ -182,7 +182,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="43dp"
-        android:layout_marginTop="240dp" 
+        android:layout_marginTop="200dp" 
         android:splitMotionEvents="false">
 
         <TextView
@@ -214,7 +214,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="294dp"
-        android:layout_marginTop="240dp" 
+        android:layout_marginTop="200dp" 
         android:splitMotionEvents="false">
 
         <TextView
@@ -246,7 +246,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="545dp"
-        android:layout_marginTop="240dp"
+        android:layout_marginTop="200dp"
         android:splitMotionEvents="false">
 
         <TextView
@@ -273,6 +273,70 @@
 
     </RelativeLayout>
     
+    <RelativeLayout
+        android:id="@+id/RelativeLayout_menu_body_monitoring_version_fatc"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="43dp"
+        android:layout_marginTop="270dp"
+        android:splitMotionEvents="false">
+
+        <TextView
+	        android:id="@+id/textView_menu_body_monitoring_version_fatc_title"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:background="@drawable/_selector_menu_body_monitoring_version_monitor_btn1"
+	        android:gravity="center"
+	        android:paddingRight="120dp"
+	        android:text="@string/FATC"
+	        android:textAppearance="?android:attr/textAppearanceLarge"
+	        android:textColor="@drawable/_selector_menu_body_multimedia_txt" />
+
+        <TextView
+            android:id="@+id/textView_menu_body_monitoring_version_fatc_data"
+            android:layout_width="120dp"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@+id/textView_menu_body_monitoring_version_fatc_title"
+            android:layout_alignRight="@+id/textView_menu_body_monitoring_version_fatc_title"
+            android:layout_alignTop="@+id/textView_menu_body_monitoring_version_fatc_title"
+            android:gravity="center"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:textColor="@color/menu_body_monitoring_version_data_gray" />
+
+    </RelativeLayout>
+    
+    <RelativeLayout
+        android:id="@+id/RelativeLayout_menu_body_monitoring_version_aavm"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="294dp"
+        android:layout_marginTop="270dp"
+        android:splitMotionEvents="false">
+
+        <TextView
+	        android:id="@+id/textView_menu_body_monitoring_version_aavm_title"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:background="@drawable/_selector_menu_body_monitoring_version_monitor_btn1"
+	        android:gravity="center"
+	        android:paddingRight="120dp"
+	        android:text="@string/AAVM"
+	        android:textAppearance="?android:attr/textAppearanceLarge"
+	        android:textColor="@drawable/_selector_menu_body_multimedia_txt" />
+
+        <TextView
+            android:id="@+id/textView_menu_body_monitoring_version_aavm_data"
+            android:layout_width="120dp"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@+id/textView_menu_body_monitoring_version_aavm_title"
+            android:layout_alignRight="@+id/textView_menu_body_monitoring_version_aavm_title"
+            android:layout_alignTop="@+id/textView_menu_body_monitoring_version_aavm_title"
+            android:gravity="center"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:textColor="@color/menu_body_monitoring_version_data_gray" />
+
+    </RelativeLayout>
+        
     <RelativeLayout
         android:id="@+id/Relativelayout_menu_body_monitoring_version_low"
         android:layout_width="wrap_content"

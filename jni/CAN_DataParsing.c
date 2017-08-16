@@ -1,4 +1,4 @@
-#include "CAN_DataParsing.h"
+﻿#include "CAN_DataParsing.h"
 
 #define NEW_CAN2
 
@@ -613,6 +613,11 @@ void InitNewProtoclValuable() {
 	memset((unsigned char*) &TX_CMD_Lamp, 0x0, sizeof(TX_CMD_Lamp));
 	memset((unsigned char*) &RX_RES_KEY, 0x0, sizeof(RX_RES_KEY));
 
+	//AAVM
+	memset((unsigned char*) &RX_ALL_AROUND_VIEW_OPERATION_65528, 0xFF, sizeof(RX_ALL_AROUND_VIEW_OPERATION_65528));
+	memset((unsigned char*) &RX_COMPONENT_IDENTIFICATION_AAVO_65330, 0xFF, sizeof(RX_COMPONENT_IDENTIFICATION_AAVO_65330));
+	memset((unsigned char*) &TX_COMPONENT_IDENTIFICATION_AAVO_65330, 0xFF, sizeof(TX_COMPONENT_IDENTIFICATION_AAVO_65330));
+	memset((unsigned char*) &TX_ALL_AROUND_VIEW_CONTROL_SETTING_61184, 0xFF, sizeof(TX_ALL_AROUND_VIEW_CONTROL_SETTING_61184));
 
 
 	TX_DTC_INFORMATION_REQUEST_61184_11.MessageType = 11;
@@ -644,6 +649,7 @@ void InitNewProtoclValuable() {
 	TX_WHEEL_LOADER_SENSOR_CALIBRATION_REQUEST_61184_201.MessageType = 201;
 	TX_WHEEL_LOADER_SENSOR_CALIBRATION_STATUS_61184_202.MessageType = 202;
 	TX_WHEEL_LOADER_EHCU_SETTING_61184_203.MessageType = 203;
+	TX_ALL_AROUND_VIEW_CONTROL_SETTING_61184.MessageType = 232;
 
 	//TX_AS_PHONE_NUMBER_65425.ASPhoneNum_D8 = 0xD8;
 
@@ -677,6 +683,9 @@ void InitNewProtoclValuable() {
 	nBKCUPF	=0;
 	nBKCUPS	=0;
 	nBKCUTotalPacketNum	=0;
+	nAAVMPF =0;
+	nAAVMPS =0;
+	nAAVMTotalPacketNum =0;
 
 
 	nRecvSeedFlag = 0;
@@ -699,24 +708,28 @@ void InitNewProtoclValuable() {
 	gErr_Tcu_TotalPacket = 0;
 	gErr_EHCU_TotalPacket = 0;
 	gErr_ACU_TotalPacket = 0;
+	gErr_AAVM_TotalPacket = 0;
 
 	gErr_Mcu_TotalPacket_Logged = 0;
 	gErr_Ecu_TotalPacket_Logged = 0;
 	gErr_Tcu_TotalPacket_Logged = 0;
 	gErr_EHCU_TotalPacket_Logged = 0;
 	gErr_ACU_TotalPacket_Logged = 0;
+	gErr_AAVM_TotalPacket_Logged = 0;
 
 	gErr_Mcu_Total = 0;
 	gErr_Ecu_Total = 0;
 	gErr_Tcu_Total = 0;
 	gErr_EHCU_Total = 0;
 	gErr_ACU_Total = 0;
+	gErr_AAVM_Total = 0;
 
 	gErr_Mcu_Total_Logged = 0;
 	gErr_Ecu_Total_Logged = 0;
 	gErr_Tcu_Total_Logged = 0;
 	gErr_EHCU_Total_Logged = 0;
 	gErr_ACU_Total_Logged = 0;
+	gErr_AAVM_Total_Logged = 0;
 
 	RX_AIR_CONDITIONER_STATUS_65373.Ambienttemperaturesensoropen = 0;
 	RX_AIR_CONDITIONER_STATUS_65373.Ambienttemperaturesensorshort = 0;
@@ -774,6 +787,9 @@ void UART1_SeperateData_NEWCAN2(int Priority, int PF, int PS, int SourceAddress,
 			break;
 		case SA_BKCU:
 			UART1_SeperateData_BKCU(Priority,PF,PS,Data);
+			break;
+		case SA_AAVM:
+			UART1_SeperateData_AAVM(Priority,PF,PS,Data);
 			break;
 
 	}
@@ -1529,6 +1545,53 @@ void UART1_SeperateData_ACU(int Priority, int PF, int PS, unsigned char* Data)
 	}
 }
 
+void UART1_SeperateData_AAVM(int Priority, int PF, int PS, unsigned char* Data)
+{
+	switch (PF) {
+		case 255:	// 0xFF00
+		default:
+			switch (PS) {
+				case 50: memcpy((unsigned char*)&RX_COMPONENT_IDENTIFICATION_AAVO_65330,&Data[7],8); break;
+				case 248: memcpy((unsigned char*)&RX_ALL_AROUND_VIEW_OPERATION_65528,&Data[7],8); break;
+				default:
+					break;
+			}
+		break;
+		case 236:	// 0xEC Multi Packet TP.CM_BAM
+			nAAVMPF = Data[13];
+			nAAVMPS = Data[12];
+			nAAVMTotalPacketNum = Data[10];
+			break;
+		case 235:	// 0xEB	Multi Packet TP.DT
+			if(nAAVMPF != 0 || nAAVMPS != 0)
+			{
+				UART1_SeperateData_AAVM_Multi(Priority,nAAVMPF,nAAVMPS,Data);
+			}
+			break;
+	}
+}
+
+void UART1_SeperateData_AAVM_Multi(int Priority, int PF, int PS, unsigned char* Data)
+{
+	switch (PF) {
+		case 255:
+		default:
+			switch (PS) {
+				case 50:
+					memcpy((unsigned char*) &gRecvMulti_AAVM[(Data[7] - 1) * 7],&Data[8], 7);
+					if (Data[7] == nAAVMTotalPacketNum) {
+						memcpy((unsigned char*) &RX_COMPONENT_IDENTIFICATION_AAVO_65330, &gRecvMulti_AAVM,sizeof(RX_COMPONENT_IDENTIFICATION_AAVO_65330));
+						nAAVMPF = nAAVMPS = nAAVMTotalPacketNum = 0;
+					}
+
+				default:
+					break;
+			}
+			break;
+	}
+}
+
+
 void UART1_SeperateData_BKCU(int Priority, int PF, int PS, unsigned char* Data)
 {
 	CheckBKCUComm = 1;
@@ -1702,7 +1765,7 @@ void SaveErrorCode_NEW_CAN2(void) {
 			| (RX_DTC_INFORMATION_TYPE1_65438.DTC_5[1] << 8) | RX_DTC_INFORMATION_TYPE1_65438.DTC_5[0]);
 
 	}
-	else if(RX_DTC_INFORMATION_TYPE1_65438.DTCType_1510 == 8)
+	else if(RX_DTC_INFORMATION_TYPE1_65438.DTCType_1510 == 8)  // ACU
 	{
 		gErr_ACU_TotalPacket = RX_DTC_INFORMATION_TYPE1_65438.TotalNumberofDTCInformationPacket_1512;
 		gErr_ACU_Total = RX_DTC_INFORMATION_TYPE1_65438.TotalNumberofDTC;
@@ -1710,13 +1773,28 @@ void SaveErrorCode_NEW_CAN2(void) {
 		gErr_ACU[1] = RX_DTC_INFORMATION_TYPE1_65438.DTC_1[1];
 		gErr_ACU[2] = RX_DTC_INFORMATION_TYPE1_65438.DTC_1[2];
 	}
-	else if (RX_DTC_INFORMATION_TYPE1_65438.DTCType_1510 == 9)
+	else if (RX_DTC_INFORMATION_TYPE1_65438.DTCType_1510 == 9) // Logged ACU
 	{
 		gErr_ACU_TotalPacket_Logged = RX_DTC_INFORMATION_TYPE1_65438.TotalNumberofDTCInformationPacket_1512;
 		gErr_ACU_Total_Logged = RX_DTC_INFORMATION_TYPE1_65438.TotalNumberofDTC;
 		gErr_ACU_Logged[0] = RX_DTC_INFORMATION_TYPE1_65438.DTC_1[0];
 		gErr_ACU_Logged[1] = RX_DTC_INFORMATION_TYPE1_65438.DTC_1[1];
 		gErr_ACU_Logged[2] = RX_DTC_INFORMATION_TYPE1_65438.DTC_1[2];
+	}
+	else if (RX_DTC_INFORMATION_TYPE1_65438.DTCType_1510 == 10){
+
+		gErr_AAVM_TotalPacket = RX_DTC_INFORMATION_TYPE1_65438.TotalNumberofDTCInformationPacket_1512;
+		gErr_AAVM_Total = RX_DTC_INFORMATION_TYPE1_65438.TotalNumberofDTC;
+		gErr_AAVM[0] = RX_DTC_INFORMATION_TYPE1_65438.DTC_1[0];
+		gErr_AAVM[1] = RX_DTC_INFORMATION_TYPE1_65438.DTC_1[1];
+		gErr_AAVM[2] = RX_DTC_INFORMATION_TYPE1_65438.DTC_1[2];
+	}
+	else if (RX_DTC_INFORMATION_TYPE1_65438.DTCType_1510 == 11){
+		gErr_AAVM_TotalPacket_Logged = RX_DTC_INFORMATION_TYPE1_65438.TotalNumberofDTCInformationPacket_1512;
+		gErr_AAVM_Total_Logged = RX_DTC_INFORMATION_TYPE1_65438.TotalNumberofDTC;
+		gErr_AAVM_Logged[0] = RX_DTC_INFORMATION_TYPE1_65438.DTC_1[0];
+		gErr_AAVM_Logged[1] = RX_DTC_INFORMATION_TYPE1_65438.DTC_1[1];
+		gErr_AAVM_Logged[2] = RX_DTC_INFORMATION_TYPE1_65438.DTC_1[2];
 	}
 
 }
@@ -1780,6 +1858,9 @@ jint UART1_Tx(JNIEnv *env, jobject this, jint PF, jint PS, jint Flag) {
 		case 203	:
 			MakeCANDataSingle(0x18,0xEF,SA_EHCU,SA_MONITOR,(unsigned char*)&TX_WHEEL_LOADER_EHCU_SETTING_61184_203);
 			__android_log_print(ANDROID_LOG_INFO, "NATIVE", "UART1_Tx EHCU\n");
+			break;
+		case 232:
+			MakeCANDataSingle(0x18,0xEF,SA_AAVM,SA_MONITOR,(unsigned char*)&TX_ALL_AROUND_VIEW_CONTROL_SETTING_61184);
 			break;
 			///////////////////////////////////
 			/////////////0xEAxx////////////////
@@ -1965,7 +2046,7 @@ void ThreadParsing_UART3(void *data) {
 	//			UART3_DataParsing(UART3_DataCurr);
 	//			bParsingFlag_UART3 = 0;
 	//		}
-	//		sleep(0); // ?�쌕몌옙 Thread ?�쏙?�占?�옙 ?�쏙?�占?�옙?�쏙???�쏙?�占?�옙 ?�쏙?�占�?	//
+	//		sleep(0); // ?�쌕몌옙 Thread ?�쏙?�占?�옙 ?�쏙?�占?�옙?�쏙???�쏙?�占?�옙 ?�쏙?�占�?	//
 	//	}
 
 }
@@ -2139,7 +2220,7 @@ void *Thread_Read_UART1(void *data)
 	while (bReadRunningFlag_UART1)
 	{
 		dwRead = 0;
-		//	?�신 ?�작 ??1byte???�고, ?�상 ?�이?��? ?�신???�음부?�는 ?�래 ?�이즈로 받는??
+		//	?�신 ?�작 ??1byte???�고, ?�상 ?�이?��? ?�신???�음부?�는 ?�래 ?�이즈로 받는??
 		if (UART1ReadFlag == 0 || UART1ReadFlag == 1)
 		{
 			dwRead = read(fd_UART1, UART1_ReadBuff, 1);
@@ -2161,7 +2242,7 @@ void *Thread_Read_UART1(void *data)
 
 		}
 
-		//	CAN PACKET 구조가 ?�니�??�어??것을 모두 버린??
+		//	CAN PACKET 구조가 ?�니�??�어??것을 모두 버린??
 		if (UART1ReadFlag == 2)
 		{
 			if (UART1_ReadBuff[0] != SERIAL_RX_STX || UART1_ReadBuff[UART1_RXPACKET_SIZE - 1] != SERIAL_RX_ETX)
@@ -2211,7 +2292,7 @@ void *Thread_Read_UART1(void *data)
 				}
 			}
 		}
-		sleep(0); // ?�른 Thread ?�의 ?�유�??�해 ?�용
+		sleep(0); // ?�른 Thread ?�의 ?�유�??�해 ?�용
 	}
 	__android_log_print(ANDROID_LOG_INFO, "NATIVE", "Thread_Read1 Finish\n");
 	(*glpVM)->DetachCurrentThread(glpVM);
@@ -2238,7 +2319,7 @@ void *Thread_Read_UART3(void *data) {
 
 	while (bReadRunningFlag_UART3) {
 		dwRead = 0;
-		//	?�신 ?�작 ??1byte???�고, ?�상 ?�이?��? ?�신???�음부?�는 ?�래 ?�이즈로 받는??
+		//	?�신 ?�작 ??1byte???�고, ?�상 ?�이?��? ?�신???�음부?�는 ?�래 ?�이즈로 받는??
 		if (UART3ReadFlag == 0 || UART3ReadFlag == 1) {
 			dwRead = read(fd_UART3, UART3_ReadBuff, 1);
 			__android_log_print(ANDROID_LOG_INFO, "UART3_ReadBuff","UART3_ReadBuff UART3_ReadBuff[0x%x]\n",UART3_ReadBuff[0]);
@@ -2251,7 +2332,7 @@ void *Thread_Read_UART3(void *data) {
 			//												  ,UART3_ReadBuff[8],UART3_ReadBuff[9],UART3_ReadBuff[10]);
 		}
 
-		//	CMD PACKET 구조가 ?�니�??�어??것을 모두 버린??
+		//	CMD PACKET 구조가 ?�니�??�어??것을 모두 버린??
 		if (UART3ReadFlag == 2) {
 			if (UART3_ReadBuff[UART3_RXPACKET_SIZE - 1] != SERIAL_RX_ETX) {
 				//if (dwRead == UART3_RXPACKET_SIZE) {
@@ -2302,7 +2383,7 @@ void *Thread_Read_UART3(void *data) {
 				}
 			}
 		}
-		sleep(0); // ?�른 Thread ?�의 ?�유�??�해 ?�용
+		sleep(0); // ?�른 Thread ?�의 ?�유�??�해 ?�용
 	}
 	__android_log_print(ANDROID_LOG_INFO, "NATIVE", "Thread_Read3 Finish\n");
 	(*glpVM)->DetachCurrentThread(glpVM);
@@ -2335,7 +2416,7 @@ void *Thread_Read_UART1(void *data)
 	while (bReadRunningFlag_UART1)
 	{
 		dwRead = 0;
-		//	?�신 ?�작 ??1byte???�고, ?�상 ?�이?��? ?�신???�음부?�는 ?�래 ?�이즈로 받는??
+		//	?�신 ?�작 ??1byte???�고, ?�상 ?�이?��? ?�신???�음부?�는 ?�래 ?�이즈로 받는??
 		if (UART1ReadFlag == 0)
 		{
 			dwRead = read(fd_UART1, &UART1_SingleBuff, 1);
@@ -2354,7 +2435,7 @@ void *Thread_Read_UART1(void *data)
 			//					,UART1_ReadBuff[10],UART1_ReadBuff[11],UART1_ReadBuff[12],UART1_ReadBuff[13],UART1_ReadBuff[14]);
 		}
 
-		//	CAN PACKET 구조가 ?�니�??�어??것을 모두 버린??
+		//	CAN PACKET 구조가 ?�니�??�어??것을 모두 버린??
 		if (UART1ReadFlag == 1)
 		{
 			if (UART1_ReadBuff[0] != SERIAL_RX_STX || UART1_ReadBuff[1] != SERIAL_RX_ID || UART1_ReadBuff[UART1_RXPACKET_SIZE - 1] != SERIAL_RX_ETX)
@@ -2425,7 +2506,7 @@ void *Thread_Read_UART1(void *data)
 
 		}
 
-		sleep(0); // ?�른 Thread ?�의 ?�유�??�해 ?�용
+		sleep(0); // ?�른 Thread ?�의 ?�유�??�해 ?�용
 	}
 	__android_log_print(ANDROID_LOG_INFO, "NATIVE", "Thread_Read1 Finish\n");
 	(*glpVM)->DetachCurrentThread(glpVM);
@@ -2459,7 +2540,7 @@ void *Thread_Read_UART3(void *data) {
 	while (bReadRunningFlag_UART3)
 	{
 		dwRead = 0;
-		//	?�신 ?�작 ??1byte???�고, ?�상 ?�이?��? ?�신???�음부?�는 ?�래 ?�이즈로 받는??
+		//	?�신 ?�작 ??1byte???�고, ?�상 ?�이?��? ?�신???�음부?�는 ?�래 ?�이즈로 받는??
 		if (UART3ReadFlag == 0)
 		{
 			dwRead = read(fd_UART3, &UART3_SingleBuff, 1);
@@ -2470,7 +2551,7 @@ void *Thread_Read_UART3(void *data) {
 			dwRead = read(fd_UART3, UART3_ReadBuff, UART3_RXPACKET_SIZE);
 		}
 
-		//	CMD PACKET 구조가 ?�니�??�어??것을 모두 버린??
+		//	CMD PACKET 구조가 ?�니�??�어??것을 모두 버린??
 		if (UART3ReadFlag == 1)
 		{
 			if (UART3_ReadBuff[0] != SERIAL_RX_STX || UART3_ReadBuff[UART3_RXPACKET_SIZE - 1] != SERIAL_RX_ETX)
@@ -2530,7 +2611,7 @@ void *Thread_Read_UART3(void *data) {
 
 		}
 
-		sleep(0); // ?�른 Thread ?�의 ?�유�??�해 ?�용
+		sleep(0); // ?�른 Thread ?�의 ?�유�??�해 ?�용
 	}
 	__android_log_print(ANDROID_LOG_INFO, "NATIVE", "Thread_Read1 Finish\n");
 	(*glpVM)->DetachCurrentThread(glpVM);
@@ -3046,6 +3127,9 @@ jint _UART1_TxComm(JNIEnv *env, jobject this, jint PS) {
 		case 145	:
 			Send_ASPhoneNumber();
 			break;
+		case 232:
+			MakeCANDataSingle(0x18,0xFF,SA_AAVM,SA_MONITOR,(unsigned char*)&TX_ALL_AROUND_VIEW_CONTROL_SETTING_61184);
+			break;
 		case 247	:
 			MakeCANDataSingle(0x18,0xFF,PS,SA_MONITOR,(unsigned char*)&TX_ELECTRICAL_SWITCH_RELAY_OPERATION_STATUS_65527);
 			break;
@@ -3074,7 +3158,6 @@ jint _UART3_TxComm(JNIEnv *env, jobject this, jint CMD, jint DAT1, jint DAT2,
 					   tx_buf[8] = DAT7;
 					   tx_buf[9] = DAT8;
 					   tx_buf[UART3_TXPACKET_SIZE-1] = 0x03;	// ETX
-
 
 					   result = write(fd_UART3, tx_buf, UART3_TXPACKET_SIZE);
 

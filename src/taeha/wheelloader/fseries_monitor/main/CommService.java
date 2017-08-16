@@ -1,4 +1,4 @@
-package taeha.wheelloader.fseries_monitor.main;
+ï»¿package taeha.wheelloader.fseries_monitor.main;
 
 import java.io.FileDescriptor;
 import java.util.List;
@@ -135,7 +135,7 @@ public class CommService extends Service{
 	public native int Write_UART1(byte[] Data, int size);
 	public native int UART1_TxComm(int PS);
 	public native FileDescriptor Open_UART3(String path, int baudrate, int flag);
-	public native void Close_UART3();				// UART 1¸¸ close µÊ
+	public native void Close_UART3();				// UART 1ï¿½ï¿½ close ï¿½ï¿½
 	public native int Write_UART3(byte[] Data, int size);
 	public native int UART3_TxComm(int CMD, int DAT1, int DAT2, int DAT3, int DAT4, int DAT5, int DAT6, int DAT7, int DAT8);
 	
@@ -1164,6 +1164,35 @@ public class CommService extends Service{
 	public native int Get_gErr_EHCU_Total_Logged();
 	public native int Get_gErr_Acu_Total_Logged();
 	///////////////////////////////////////////////////////////////////////////////////////////////////////
+	
+	
+	public native int Get_AAVMViewModeStatus_3461_PGN65528();
+	public native int Get_IMODOperationStatus_3463_PGN65528();
+	public native int Get_AAVMWarningFront_3462_PGN65528();
+	public native int Get_AAVMWarningRear_3462_PGN65528();
+	public native int Get_AAVMWarningLeft_3462_PGN65528();
+	public native int Get_AAVMWarningRight_3462_PGN65528();
+	public native byte[] Get_AAVMDTCInformation_3427_PGN65528();
+	
+	
+	public native int Get_ComponentCode_1699_PGN65330_AAVO();
+	public native int Get_ManufacturerCode_1700_PGN65330_AAVO();
+	public native byte[] Get_ComponentBasicInformation_1698_PGN65330_AAVO();
+	public native void Set_ComponentCode_1699_PGN65330_AAVO(int Data);
+	public native void Set_ManufacturerCode_1700_PGN65330_AAVO(int Data);
+	public native void Set_ComponentBasicInformation_1698_PGN65330_AAVO(byte[] Data);
+	
+	public native void Set_AAVMViewMode_3461_PGN61184(int Data);
+	public native void Set_IMODESwitch_3464_PGN61184(int Data);
+	public native void Set_AAVMSubCommand_3465_PGN61184(int Data);
+	public native void Set_AAVMModelNo_3466_PGN61184(int Data);
+	
+	public native int[] Get_AAVMErr_FromNative();
+	public native int[] Get_AAVMErr_Logged_FromNative();
+	public native int Get_gErr_AAVM_TotalPacket();
+	public native int Get_gErr_AAVM_TotalPacket_Logged();
+	public native int Get_gErr_AAVM_Total();
+	public native int Get_gErr_AAVM_Total_Logged();
 	/////////////////////////////////////////////////////////////////////////
 	
 	
@@ -1243,19 +1272,19 @@ public class CommService extends Service{
 			case CAN1CommManager.MENU:
 				HandleKeyButton.sendMessage(HandleKeyButton.obtainMessage(Data));
 				
-				if(GetScreenTopFlag() == true)	// Å¸ apk¿¡¼­ ¼Ò¸® 2¹ø ¿ï¸²
+				if(GetScreenTopFlag() == true)	// Å¸ apkï¿½ï¿½ï¿½ï¿½ ï¿½Ò¸ï¿½ 2ï¿½ï¿½ ï¿½ï¸²
 					SoundPoolKeyButton.play(SoundID, fVolume, fVolume, 0, 0, 1);
 				break;
 			case CAN1CommManager.ESC:
-				// ++, 150324 bwk ÇÏ±â ÁÖ¼® Ç°
+				// ++, 150324 bwk ï¿½Ï±ï¿½ ï¿½Ö¼ï¿½ Ç°
 				//if(GetScreenTopFlag() == true || CAN1Comm.CameraCurrentOnOff == true)
 				if(GetScreenTopFlag() == true || (CAN1Comm.CameraCurrentOnOff == true && CAN1Comm.CameraOnFlag != CAN1CommManager.STATE_CAMERA_REVERSEGEAR))
 				{
 					CAN1Comm.Callback_KeyButton(Data);
-					SoundPoolKeyButton.play(SoundID, fVolume, fVolume, 0, 0, 1);		// Å¸ apk¿¡¼­ ¼Ò¸® 2¹ø ¿ï¸²
+					SoundPoolKeyButton.play(SoundID, fVolume, fVolume, 0, 0, 1);		// Å¸ apkï¿½ï¿½ï¿½ï¿½ ï¿½Ò¸ï¿½ 2ï¿½ï¿½ ï¿½ï¸²
 				}else if(CAN1Comm.CameraOnFlag == CAN1CommManager.STATE_CAMERA_REVERSEGEAR){
 				}else
-				// --, 150324 bwk ÇÏ±â ÁÖ¼® Ç°
+				// --, 150324 bwk ï¿½Ï±ï¿½ ï¿½Ö¼ï¿½ Ç°
 				{
 					// ++, 150320 cjg
 					//BackKeyEvent();
@@ -1291,8 +1320,8 @@ public class CommService extends Service{
 					CAN1Comm.TxCANToMCU(47);
 					CAN1Comm.Callback_KeyButton(Data);
 					StartBuzzerStopTimer();
+					Log.d(TAG, "AD");
 				}
-				
 				SoundPoolKeyButton.play(SoundID, fVolume, fVolume, 0, 0, 1);
 				break;
 				
@@ -1835,7 +1864,7 @@ public class CommService extends Service{
 					//multimediaFlag = false; //++, --, 150403 cjg
 					CallHome();
 				}else if(CheckTopApps("com.powerone.wfd.sink") == true){
-					//SetMiracastFlag(false);		// ÇöÀç FNÅ° ´©¸£¸é ÇØÁ¦µÊ
+					//SetMiracastFlag(false);		// ï¿½ï¿½ï¿½ï¿½ FNÅ° ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 					//miracastFlag = false; //++, --, 150403 cjg
 					CallHome();
 				}else if(CheckRunningApp("com.mxtech.videoplayer.ad") == true){
@@ -1876,7 +1905,7 @@ public class CommService extends Service{
 				//multimediaFlag = false; //++, --, 150403 cjg
 				CallHome();
 			}else if(CheckTopApps("com.powerone.wfd.sink") == true){
-				//SetMiracastFlag(false);		// ÇöÀç FNÅ° ´©¸£¸é ÇØÁ¦µÊ
+				//SetMiracastFlag(false);		// ï¿½ï¿½ï¿½ï¿½ FNÅ° ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 				//miracastFlag = false; //++, --, 150403 cjg
 				CallHome();
 			}else if(CheckRunningApp("com.mxtech.videoplayer.ad") == true){
@@ -1914,7 +1943,7 @@ public class CommService extends Service{
 					//multimediaFlag = false; //++, --, 150403 cjg
 					CallHome();
 				}else if(CheckTopApps("com.powerone.wfd.sink") == true){
-					//SetMiracastFlag(false);		// ÇöÀç FNÅ° ´©¸£¸é ÇØÁ¦µÊ
+					//SetMiracastFlag(false);		// ï¿½ï¿½ï¿½ï¿½ FNÅ° ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 					//miracastFlag = false; //++, --, 150403 cjg
 					CallHome();
 				}else{
@@ -1934,7 +1963,7 @@ public class CommService extends Service{
 					//multimediaFlag = false; //++, --, 150403 cjg
 					CallHome();
 				}else if(CheckRunningApp("com.powerone.wfd.sink") && isTopCheckMiracast() == true){
-					//SetMiracastFlag(false);		// ÇöÀç FNÅ° ´©¸£¸é ÇØÁ¦µÊ
+					//SetMiracastFlag(false);		// ï¿½ï¿½ï¿½ï¿½ FNÅ° ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 					//miracastFlag = false; //++, --, 150403 cjg
 					Runtime runtime = Runtime.getRuntime();
 					Process process;
@@ -1967,7 +1996,7 @@ public class CommService extends Service{
 				//multimediaFlag = false; //++, --, 150403 cjg
 				CallHome();
 			}else if(CheckTopApps("com.powerone.wfd.sink") == true){
-				//SetMiracastFlag(false);		// ÇöÀç FNÅ° ´©¸£¸é ÇØÁ¦µÊ
+				//SetMiracastFlag(false);		// ï¿½ï¿½ï¿½ï¿½ FNÅ° ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 				//miracastFlag = false; //++, --, 150403 cjg
 				CallHome();
 			}else{
@@ -1991,7 +2020,7 @@ public class CommService extends Service{
 					//multimediaFlag = false; //++, --, 150403 cjg
 					CallHome();
 				}else if(CheckTopApps("com.powerone.wfd.sink") == true){
-					//SetMiracastFlag(false);		// ÇöÀç FNÅ° ´©¸£¸é ÇØÁ¦µÊ
+					//SetMiracastFlag(false);		// ï¿½ï¿½ï¿½ï¿½ FNÅ° ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 					//miracastFlag = false; //++, --, 150403 cjg
 					CallHome();
 				}else{
@@ -2011,7 +2040,7 @@ public class CommService extends Service{
 					//multimediaFlag = false; //++, --, 150403 cjg
 					CallHome();
 				}else if(CheckRunningApp("com.powerone.wfd.sink") && isTopCheckMiracast() == true){
-					//SetMiracastFlag(false);		// ÇöÀç FNÅ° ´©¸£¸é ÇØÁ¦µÊ
+					//SetMiracastFlag(false);		// ï¿½ï¿½ï¿½ï¿½ FNÅ° ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 					//miracastFlag = false; //++, --, 150403 cjg
 					Runtime runtime = Runtime.getRuntime();
 					Process process;
@@ -2044,7 +2073,7 @@ public class CommService extends Service{
 				//multimediaFlag = false; //++, --, 150403 cjg
 				CallHome();
 			}else if(CheckTopApps("com.powerone.wfd.sink") == true){
-				//SetMiracastFlag(false);		// ÇöÀç FNÅ° ´©¸£¸é ÇØÁ¦µÊ
+				//SetMiracastFlag(false);		// ï¿½ï¿½ï¿½ï¿½ FNÅ° ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 				//miracastFlag = false; //++, --, 150403 cjg
 				CallHome();
 			}else{

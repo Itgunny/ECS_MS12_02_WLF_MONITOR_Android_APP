@@ -1,4 +1,4 @@
-package taeha.wheelloader.fseries_monitor.popup;
+﻿package taeha.wheelloader.fseries_monitor.popup;
 
 import java.util.Timer;
 import java.util.TimerTask;
@@ -185,6 +185,11 @@ public class LoggedFaultDeletePopup extends ParentPopup{
 		case Home.REQ_ERR_ACU_LOGGED:
 			textViewTitle.setText(getString(ParentActivity.getResources().getString(string.Delete_Logged_Fault), 311) 
 					+ "\n(" +getString(ParentActivity.getResources().getString(string.FATC), 455) +")");
+			break;
+		case Home.REQ_ERR_AAVM_LOGGED:
+			textViewTitle.setText(getString(ParentActivity.getResources().getString(string.Delete_Logged_Fault), 311) 
+					+ "\n(" +getString(ParentActivity.getResources().getString(string.AAVM), 505) +")");
+			break;
 		default:
 			break;
 		}

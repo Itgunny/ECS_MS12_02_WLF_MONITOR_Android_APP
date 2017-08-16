@@ -1,4 +1,4 @@
-#include "CAN_DataParsing.c"
+﻿#include "CAN_DataParsing.c"
 
 //////RX_DTC_INFORMATION_REQUEST_61184_11///////
 jint Get_MessageType_PGN61184_11(JNIEnv * env, jobject this) {
@@ -1135,6 +1135,12 @@ jint Get_BrakeOilTemperatureHigh_567_PGN65427(JNIEnv * env, jobject this) {
 }
 jint Get_EmissionSystemFailLamp_357_PGN65427(JNIEnv * env, jobject this) {
 	return RX_WARNING_LAMP_65427.EmissionSystemFailLamp_357;
+}
+jint Get_SeatBeltSwitchLamp_749_PGN65427(JNIEnv * env, jobject this) {
+	return RX_WARNING_LAMP_65427.SeatBeltSwitchLamp_749;
+}
+jint Get_SeatBeltRemindAlarm_750_PGN65427(JNIEnv * env, jobject this) {
+	return RX_WARNING_LAMP_65427.SeatBeltRemindAlarm_750;
 }
 //////RX_INDICATOR_LAMP_65428///////
 jint Get_PowerMaxStatus_802_PGN65428(JNIEnv * env, jobject this) {
@@ -2732,6 +2738,14 @@ void Set_EmissionSystemFailLamp_357_PGN65427(JNIEnv * env, jobject this,
 		int Data) {
 	TX_WARNING_LAMP_65427.EmissionSystemFailLamp_357 = Data;
 }
+void Set_SeatBeltSwitchLamp_749_PGN65427(JNIEnv * env, jobject this,
+		int Data) {
+	TX_WARNING_LAMP_65427.SeatBeltSwitchLamp_749 = Data;
+}
+void Set_SeatBeltRemindAlarm_750_PGN65427(JNIEnv * env, jobject this,
+		int Data) {
+	TX_WARNING_LAMP_65427.SeatBeltRemindAlarm_750 = Data;
+}
 //////TX_INDICATOR_LAMP_65428///////
 void Set_PowerMaxStatus_802_PGN65428(JNIEnv * env, jobject this, int Data) {
 	TX_INDICATOR_LAMP_65428.PowerMaxStatus_802 = Data;
@@ -3589,6 +3603,131 @@ void SetFNKeypadLamp(JNIEnv * env, jobject this,
 	SetKeypadLamp();
 }
 
+
+//////////AAVM
+// 1. HCEPGN65528 All-Around View Operation AAVO
+jint Get_AAVMViewModeStatus_3461_PGN65528(JNIEnv * env, jobject this) {
+	return RX_ALL_AROUND_VIEW_OPERATION_65528.AAVMViewModeStatus_3461;
+}
+
+jint Get_IMODOperationStatus_3463_PGN65528(JNIEnv * env, jobject this) {
+	return RX_ALL_AROUND_VIEW_OPERATION_65528.IMODOperationStatus_3463;
+}
+
+jint Get_AAVMWarningFront_3462_PGN65528(JNIEnv * env, jobject this) {
+	return RX_ALL_AROUND_VIEW_OPERATION_65528.AAVMWarningFront_3462;
+}
+
+jint Get_AAVMWarningRear_3462_PGN65528(JNIEnv * env, jobject this) {
+	return RX_ALL_AROUND_VIEW_OPERATION_65528.AAVMWarningRear_3462;
+}
+
+jint Get_AAVMWarningLeft_3462_PGN65528(JNIEnv * env, jobject this) {
+	return RX_ALL_AROUND_VIEW_OPERATION_65528.AAVMWarningLeft_3462;
+}
+
+jint Get_AAVMWarningRight_3462_PGN65528(JNIEnv * env, jobject this) {
+	return RX_ALL_AROUND_VIEW_OPERATION_65528.AAVMWarningRight_3462;
+}
+
+jbyteArray Get_AAVMDTCInformation_3427_PGN65528(JNIEnv * env,
+		jobject this) {
+	jbyteArray Data = (*env)->NewByteArray(env, sizeof(RX_ALL_AROUND_VIEW_OPERATION_65528.AAVMDTCInformation_3427));
+
+	(*env)->SetByteArrayRegion(env, Data, 0, sizeof(RX_ALL_AROUND_VIEW_OPERATION_65528.AAVMDTCInformation_3427),RX_ALL_AROUND_VIEW_OPERATION_65528.AAVMDTCInformation_3427);
+
+	return Data;
+}
+// 2. HCEPGN65330 Component Identification CID
+void Set_ComponentCode_1699_PGN65330_AAVO(JNIEnv * env, jobject this, int Data) {
+	TX_COMPONENT_IDENTIFICATION_AAVO_65330.ComponentCode_1699 = Data;
+}
+void Set_ManufacturerCode_1700_PGN65330_AAVO(JNIEnv * env, jobject this,
+		int Data) {
+	TX_COMPONENT_IDENTIFICATION_AAVO_65330.ManufacturerCode_1700 = Data;
+}
+void Set_ComponentBasicInformation_1698_PGN65330_AAVO(JNIEnv * env, jobject this,
+		jbyteArray Data) {
+	Data;
+	jbyte *pArr;
+	int i;
+	int size = sizeof(TX_COMPONENT_IDENTIFICATION_AAVO_65330.ComponentBasicInformation_1698);
+
+	pArr = (*env)->GetByteArrayElements(env, Data, NULL);
+
+	for (i = 0; i < size; i++)
+		TX_COMPONENT_IDENTIFICATION_AAVO_65330.ComponentBasicInformation_1698[i] =
+				pArr[i];
+
+	(*env)->ReleaseByteArrayElements(env, Data, pArr, 0);
+}
+
+jint Get_ComponentCode_1699_PGN65330_AAVO(JNIEnv * env, jobject this) {
+	return RX_COMPONENT_IDENTIFICATION_AAVO_65330.ComponentCode_1699;
+}
+jint Get_ManufacturerCode_1700_PGN65330_AAVO(JNIEnv * env, jobject this) {
+	return RX_COMPONENT_IDENTIFICATION_AAVO_65330.ManufacturerCode_1700;
+}
+jbyteArray Get_ComponentBasicInformation_1698_PGN65330_AAVO(JNIEnv * env,
+		jobject this) {
+
+	jbyteArray Data = (*env)->NewByteArray(env, sizeof(RX_COMPONENT_IDENTIFICATION_AAVO_65330.ComponentBasicInformation_1698));
+
+	(*env)->SetByteArrayRegion(env, Data, 0, sizeof(RX_COMPONENT_IDENTIFICATION_AAVO_65330.ComponentBasicInformation_1698),RX_COMPONENT_IDENTIFICATION_AAVO_65330.ComponentBasicInformation_1698);
+
+	return Data;
+}
+// 7. All-Around View Control Setting AAVCS
+void Set_AAVMViewMode_3461_PGN61184(JNIEnv * env, jobject this, int Data) {
+	TX_ALL_AROUND_VIEW_CONTROL_SETTING_61184.AAVMViewMode_3461 = Data;
+}
+void Set_IMODESwitch_3464_PGN61184(JNIEnv * env, jobject this,
+		int Data) {
+	TX_ALL_AROUND_VIEW_CONTROL_SETTING_61184.IMODESwitch_3464 = Data;
+}
+void Set_AAVMSubCommand_3465_PGN61184(JNIEnv * env, jobject this,
+		int Data) {
+	TX_ALL_AROUND_VIEW_CONTROL_SETTING_61184.AAVMSubCommand_3465 = Data;
+}
+void Set_AAVMModelNo_3466_PGN61184(JNIEnv * env, jobject this,
+		int Data) {
+	TX_ALL_AROUND_VIEW_CONTROL_SETTING_61184.AAVMModelNo_3466 = Data;
+}
+//8. DTC
+jintArray _Get_AavmErr(JNIEnv *env, jobject this) {
+	jintArray AAVM_Err = (*env)->NewIntArray(env, ERR_BUF_SIZE);
+	(*env)->SetIntArrayRegion(env, AAVM_Err, 0, ERR_BUF_SIZE, gErr_AAVM);
+	return AAVM_Err;
+}
+
+jintArray _Get_AavmErrLogged(JNIEnv *env, jobject this) {
+	jintArray AAVM_Err_Logged = (*env)->NewIntArray(env, ERR_BUF_SIZE);
+
+	(*env)->SetIntArrayRegion(env, AAVM_Err_Logged, 0, ERR_BUF_SIZE, gErr_AAVM_Logged);
+
+	return AAVM_Err_Logged;
+}
+
+jint Get_gErr_AAVM_TotalPacket(JNIEnv *env, jobject this) {
+
+	return gErr_AAVM_TotalPacket;
+}
+
+jint Get_gErr_AAVM_TotalPacket_Logged(JNIEnv *env, jobject this) {
+
+	return gErr_AAVM_TotalPacket_Logged;
+}
+
+jint Get_gErr_AAVM_Total(JNIEnv *env, jobject this) {
+
+	return gErr_AAVM_Total;
+}
+
+jint Get_gErr_AAVM_Total_Logged(JNIEnv *env, jobject this) {
+
+	return gErr_AAVM_Total_Logged;
+}
+//////////AAVM
 static JNINativeMethod methods[] =
 		{
 				{ "Open_UART1", "(Ljava/lang/String;II)Ljava/io/FileDescriptor;",(void*) _Open_UART1 },
@@ -4244,7 +4383,11 @@ static JNINativeMethod methods[] =
 						"Get_BrakeOilTemperatureHigh_567_PGN65427", "()I",
 						(void*) Get_BrakeOilTemperatureHigh_567_PGN65427 }, {
 						"Get_EmissionSystemFailLamp_357_PGN65427", "()I",
-						(void*) Get_EmissionSystemFailLamp_357_PGN65427 },
+						(void*) Get_EmissionSystemFailLamp_357_PGN65427 }, {
+						"Get_SeatBeltSwitchLamp_749_PGN65427", "()I",
+						(void*) Get_SeatBeltSwitchLamp_749_PGN65427 }, {
+						"Get_SeatBeltRemindAlarm_750_PGN65427", "()I",
+						(void*) Get_SeatBeltRemindAlarm_750_PGN65427 },
 				//////RX_INDICATOR_LAMP_65428///////
 				{ "Get_PowerMaxStatus_802_PGN65428", "()I",
 						(void*) Get_PowerMaxStatus_802_PGN65428 }, {
@@ -5055,7 +5198,12 @@ static JNINativeMethod methods[] =
 						"Set_BrakeOilTemperatureHigh_567_PGN65427", "(I)V",
 						(void*) Set_BrakeOilTemperatureHigh_567_PGN65427 }, {
 						"Set_EmissionSystemFailLamp_357_PGN65427", "(I)V",
-						(void*) Set_EmissionSystemFailLamp_357_PGN65427 },
+						(void*) Set_EmissionSystemFailLamp_357_PGN65427 },  {
+						"Set_SeatBeltSwitchLamp_749_PGN65427", "(I)V",
+						(void*) Set_SeatBeltSwitchLamp_749_PGN65427 },  {
+						"Set_SeatBeltRemindAlarm_750_PGN65427", "(I)V",
+						(void*) Set_SeatBeltRemindAlarm_750_PGN65427 },
+
 				//////TX_INDICATOR_LAMP_65428///////
 				{ "Set_PowerMaxStatus_802_PGN65428", "(I)V",
 						(void*) Set_PowerMaxStatus_802_PGN65428 }, {
@@ -5349,8 +5497,34 @@ static JNINativeMethod methods[] =
 				{"Get_gErr_Acu_Total_Logged", "()I",(void*) Get_gErr_Acu_Total_Logged},
 
 
-
 				///////////////////////////////////////////////////////////////////////////////////////////////////////
+				//AAVM
+				{ "Get_AAVMViewModeStatus_3461_PGN65528", "()I", (void*) Get_AAVMViewModeStatus_3461_PGN65528 },
+				{ "Get_IMODOperationStatus_3463_PGN65528", "()I", (void*) Get_IMODOperationStatus_3463_PGN65528 },
+				{ "Get_AAVMWarningFront_3462_PGN65528", "()I", (void*) Get_AAVMWarningFront_3462_PGN65528 },
+				{ "Get_AAVMWarningRear_3462_PGN65528", "()I", (void*) Get_AAVMWarningRear_3462_PGN65528 },
+				{ "Get_AAVMWarningLeft_3462_PGN65528", "()I", (void*) Get_AAVMWarningLeft_3462_PGN65528 },
+				{ "Get_AAVMWarningRight_3462_PGN65528", "()I", (void*) Get_AAVMWarningRight_3462_PGN65528 },
+				{ "Get_AAVMDTCInformation_3427_PGN65528", "()[B", Get_AAVMDTCInformation_3427_PGN65528 },
+
+				{ "Get_ComponentCode_1699_PGN65330_AAVO", "()I", (void*) Get_ComponentCode_1699_PGN65330_AAVO },
+				{ "Get_ManufacturerCode_1700_PGN65330_AAVO", "()I", (void*) Get_ManufacturerCode_1700_PGN65330_AAVO },
+				{ "Get_ComponentBasicInformation_1698_PGN65330_AAVO", "()[B", Get_ComponentBasicInformation_1698_PGN65330_AAVO },
+				{ "Set_ComponentCode_1699_PGN65330_AAVO",	"(I)V",	(void*) Set_ComponentCode_1699_PGN65330_AAVO },
+				{ "Set_ManufacturerCode_1700_PGN65330_AAVO",	"(I)V",	(void*) Set_ManufacturerCode_1700_PGN65330_AAVO },
+				{ "Set_ComponentBasicInformation_1698_PGN65330_AAVO", "([B)V", Set_ComponentBasicInformation_1698_PGN65330_AAVO },
+
+				{ "Set_AAVMViewMode_3461_PGN61184",	"(I)V",	(void*) Set_AAVMViewMode_3461_PGN61184 },
+				{ "Set_IMODESwitch_3464_PGN61184",	"(I)V",	(void*) Set_IMODESwitch_3464_PGN61184 },
+				{ "Set_AAVMSubCommand_3465_PGN61184",	"(I)V",	(void*) Set_AAVMSubCommand_3465_PGN61184 },
+				{ "Set_AAVMModelNo_3466_PGN61184",	"(I)V",	(void*) Set_AAVMModelNo_3466_PGN61184 },
+
+				{ "Get_AAVMErr_FromNative", "()[I",(void*) _Get_AavmErr },
+				{ "Get_AAVMErr_Logged_FromNative", "()[I", (void*) _Get_AavmErrLogged },
+				{ "Get_gErr_AAVM_TotalPacket", "()I", (void*) Get_gErr_AAVM_TotalPacket },
+				{ "Get_gErr_AAVM_TotalPacket_Logged", "()I", (void*) Get_gErr_AAVM_TotalPacket_Logged },
+				{ "Get_gErr_AAVM_Total", "()I", (void*) Get_gErr_AAVM_Total },
+				{ "Get_gErr_AAVM_Total_Logged", "()I", (void*) Get_gErr_AAVM_Total_Logged },
 
 		};
 

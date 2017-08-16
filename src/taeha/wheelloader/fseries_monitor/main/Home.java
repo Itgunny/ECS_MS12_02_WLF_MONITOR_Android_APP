@@ -89,8 +89,8 @@ public class Home extends Activity {
 	//Version/////////////////////////////////////////////////////////////////////////////
 	//
 	public static final int VERSION_HIGH 		= 2;
-	public static final int VERSION_LOW 		= 4;
-	public static final int VERSION_SUB_HIGH 	= 4;
+	public static final int VERSION_LOW 		= 5;
+	public static final int VERSION_SUB_HIGH 	= 0;
 	public static final int VERSION_SUB_LOW 	= 0;
 	public static final int VERSION_TAEHA		= 0;
 	// UI B 안 최초 적용 2014.12.10
@@ -988,6 +988,7 @@ public class Home extends Activity {
 	public  static final int SCREEN_STATE_MENU_MONITORING_VERSIONINFO_EHCU					= 0x22470000;
 	public  static final int SCREEN_STATE_MENU_MONITORING_VERSIONINFO_BKCU					= 0x22480000;
 	public  static final int SCREEN_STATE_MENU_MONITORING_VERSIONINFO_ACU					= 0x22490000;
+	public static final int SCREEN_STATE_MENU_MONITORING_VERSIONINFO_AAVM = 0x224A0000;
 	public  static final int SCREEN_STATE_MENU_MONITORING_VERSIONINFO_END					= 0x224FFFFF;
 	// ++, 150329 bwk
 //	public  static final int SCREEN_STATE_MENU_MONITORING_EHCUINFO_TOP						= 0x22500000;
@@ -1088,6 +1089,8 @@ public class Home extends Activity {
 	public  static final int SCREEN_STATE_MENU_PREFERENCE_CAMERASETTING_END					= 0x246FFFFF;
 	public  static final int SCREEN_STATE_MENU_PREFERENCE_WIRELESS_TOP						= 0x24700000;
 	public  static final int SCREEN_STATE_MENU_PREFERENCE_WIRELESS_END						= 0x247FFFFF;
+	public static final int SCREEN_STATE_MENU_PREFERENCE_AAVMSETTING_TOP = 0x24800000;
+	public static final int SCREEN_STATE_MENU_PREFERENCE_AAVMSETTING_END = 0x248FFFFF;
 	public  static final int SCREEN_STATE_MENU_PREFERENCE_END								= 0x24FFFFFF;
 	
 	public  static final int SCREEN_STATE_MENU_MULTIMEDIA_TOP								= 0x25000000;
@@ -1157,7 +1160,6 @@ public class Home extends Activity {
 	public  static final int SCREEN_STATE_MAIN_A_KEY_QUICKCOUPLER_POPUP_UNLOCKING3			= 0x76450000;
 	public  static final int SCREEN_STATE_MAIN_A_KEY_RIDECONTROL							= 0x76500000;
 	public  static final int SCREEN_STATE_MAIN_A_KEY_RIDECONTROL_SPEED						= 0x76510000;
-	
 	public  static final int SCREEN_STATE_MAIN_A_KEY_WORKLOAD								= 0x76600000;
 	public  static final int SCREEN_STATE_MAIN_A_KEY_WORKLOAD_ACCUMULATION					= 0x76610000;
 	public  static final int SCREEN_STATE_MAIN_A_KEY_WORKLOAD_DISPLAY						= 0x76620000;
@@ -1300,8 +1302,25 @@ public class Home extends Activity {
 	public static final int REQ_ERR_ACU_ACTIVE		= 8; // ++, --, 160105 cjg
 	public static final int REQ_ERR_ACU_LOGGED		= 9; // ++, --, 160105 cjg
 	
+	public static final int REQ_ERR_AAVM_ACTIVE = 10; // ++, --, 160105 cjg
+	public static final int REQ_ERR_AAVM_LOGGED = 11; // ++, --, 160105 cjg
+
 	public static final int REQ_ERR_START				= -1;
 	public static final int REQ_ERR_END					= 15;
+
+	public static final int AAVM_OMNI_VIEW_3D = 0x0;
+	public static final int AAVM_OMNI_REAR_VIEW_3D = 0x1;
+	public static final int AAVM_BIRD_VIEW_2D = 0x2;
+	public static final int AAVM_4CHANNEL_MULTIVIEW_2D = 0x3;
+	public static final int AAVM_FRONT_VIEW_2D = 0x4;
+	public static final int AAVM_REAR_VIEW_2D = 0x5;
+	public static final int AAVM_LEFT_VIEW_2D = 0x6;
+	public static final int AAVM_RIGHT_VIEW_2D = 0x7;
+	public static final int AAVM_OMNI_LEFT_VIEW_3D = 0x8;
+	public static final int AAVM_OMNI_RIGHT_VIEW_3D = 0x9;
+	
+	public static final int AAVM_NOT_WARNING = 0x0;
+	public static final int AAVM_WARNING = 0x1;
 	// --, 150326 bwk
 	////////////////////////////////////////////////////
 
@@ -1356,6 +1375,7 @@ public class Home extends Activity {
 	int GearIndex;					//GEAR ��ġ
 	int CameraReverseOnCount;		// CAMERA REVERSE ON COUNTER
 	int CameraReverseOffCount;		// CAMERA REVERSE OFF COUNTER
+	public int ReverseGearUseAAVM;
 	
 	// Brightness
 	public int BrightnessManualAuto;
@@ -1412,7 +1432,7 @@ public class Home extends Activity {
 	public int UserIndex;	// ++, 150212 bwk;
 	
 	// CAN1CommManager
-	private CAN1CommManager CAN1Comm = null;	
+	private static CAN1CommManager CAN1Comm = null;	
 	
 	// Thread
 	private Thread threadRead = null;
@@ -1469,7 +1489,6 @@ public class Home extends Activity {
 	//Toast
 	public WeighingErrorToast				_WeighingErrorToast;
 	
-	
 	// Timer
 	private Timer mSeatBeltTimer = null;
 	private Timer mAnimationRunningTimer = null;
@@ -1481,6 +1500,7 @@ public class Home extends Activity {
 	private Timer mCheckSmartTerminalTimer = null;
 	private Timer mSendCIDTimer = null;
 	private Timer mBackHomeTimer = null;
+	private Timer mAAVMMenuTimer = null;
 	
 	// Count
 	int MirrorHeatTimerCount;
@@ -1598,6 +1618,13 @@ public class Home extends Activity {
 	////////////////////////////////////////////////////
 	boolean runningCheckMiracast = false;
 	
+	private static SoundPool SoundPoolKeyButton;
+	private static AudioManager audioManager;
+
+	static int SoundID;
+	static float fVolume;
+
+	static boolean mutate = false;
 
 	public static int STATE_ENGINEMODE = 0;
 	public static int STATE_CCOMODE = 1;
@@ -1676,7 +1703,41 @@ public class Home extends Activity {
 	boolean CheckEHCU = false;
 	boolean CheckTM = false;
 	boolean CheckBKCU = false;
+	public static boolean CheckAAVM = false;
 
+	public static final Rect EXIT_AAVM = new Rect(20, 0, 90, 70);
+	public static final Rect SPEAKER_AAVM = new Rect(95, 0, 165, 70);
+
+	public static final Rect FRONT_2D_AAVM = new Rect(720, 0, 800, 80);
+	public static final Rect LEFT_2D_AAVM = new Rect(720, 220, 800, 310);
+	public static final Rect REAR_2D_AAVM = new Rect(720, 120, 800, 210);
+	public static final Rect RIGHT_2D_AAVM = new Rect(720, 320, 800, 410);
+	public static final Rect CAMERA_4CH_AAVM = new Rect(720, 390, 800, 480);
+
+	public static final Rect BIRD_3D_VIEW_AAVM = new Rect(0, 400, 80, 480);
+	public static final Rect REAR_3D_VIEW_AAVM = new Rect(140, 400, 220, 480);
+	public static final Rect BIRD_2D_VIEW_AAVM = new Rect(290, 400, 370, 480);
+	public static final Rect LEFT_3D_VIEW_AAVM = new Rect(440, 400, 520, 480);
+	public static final Rect RIGHT_3D_VIEW_AAVM = new Rect(590, 400, 670, 480);
+
+	public static int AAVM_Camera_Status = 0;
+	public static int AAVM_Speaker_Status = 0;
+	public static int AAVM_Menu_Status = 0;
+	public static int AAVM_On = 0;
+	public static int AAVM_Off = 0xff;
+	public static int AAVM_Buzzer_Count = 0;
+	public static int AAVM_Icon_Count = 0;
+	public static int AAVM_Reverse_Camera_Status = 5;
+	
+
+	public static int AAVM_Warning_Front = 0;
+	public static int AAVM_Warning_Front_Value = 0;
+	public static int AAVM_Warning_Rear = 0;
+	public static int AAVM_Warning_Rear_Value = 0;
+	public static int AAVM_Warning_Left = 0;
+	public static int AAVM_Warning_Left_Value = 0;
+	public static int AAVM_Warning_Right = 0;
+	public static int AAVM_Warning_Right_Value = 0;
 	
 	
 	boolean currentMiracastValue = false;
@@ -1845,6 +1906,18 @@ public class Home extends Activity {
 		 
 		ESLCountThreeSecond = 0;
 		OldEngineAutoShutdownRemainingTime = 0xff;
+
+		if (Build.VERSION.SDK_INT <= Build.VERSION_CODES.ICE_CREAM_SANDWICH_MR1) {
+			SoundPoolKeyButton = new SoundPool(1, AudioManager.USE_DEFAULT_STREAM_TYPE, 0);
+		} else {
+			SoundPoolKeyButton = new SoundPool(1, AudioManager.STREAM_MUSIC, 0);
+		}
+		// --, 150510 cjg
+		SoundID = SoundPoolKeyButton.load(this, R.raw.touch, 1);
+		fVolume = (float) 0.4;
+
+		audioManager = (AudioManager) getBaseContext().getSystemService(Context.AUDIO_SERVICE);
+
 	}
 	
 	public void SetLanguage(){
@@ -2037,27 +2110,168 @@ public class Home extends Activity {
 	public void InitAnimation(){
 		
 	}
+
 	public void InitButtonListener(){	
-//		imgViewCameraScreen.setOnClickListener(new View.OnClickListener() {
-//			
-//			@Override
-//			public void onClick(View v) {
-//				// TODO Auto-generated method stub
-//				ExitCam();
-//			}
-//		});
-		imgViewCameraScreen.setOnTouchListener(new View.OnTouchListener() {
 			
+		imgViewCameraScreen.setOnTouchListener(new View.OnTouchListener() {
 			@Override
 			public boolean onTouch(View v, MotionEvent event) {
+
 				switch(event.getAction()){
 					case MotionEvent.ACTION_UP:
-						//Log.d(TAG, "imgViewCameraScreen.ScreenIndex"+Integer.toHexString(ScreenIndex));
-						if(CAN1Comm.CameraOnFlag == CAN1CommManager.STATE_CAMERA_MANUAL)
+					if (!checkAAVM()) {
+						if (CAN1Comm.CameraOnFlag == CAN1CommManager.STATE_CAMERA_MANUAL) {
 							ExitCam();
-						else
+						} else {
 							Log.d(TAG, "imgViewCameraScreen.setOnClickListener"+CAN1Comm.CameraOnFlag);
-						
+						}
+					} else {
+						Log.d(TAG, "x : " + event.getX() + "y : " + event.getY());
+						if (CAN1Comm.CameraOnFlag == CAN1CommManager.STATE_CAMERA_MANUAL || 
+								(CAN1Comm.CameraOnFlag == CAN1CommManager.STATE_CAMERA_REVERSEGEAR)) {
+							if (AAVM_Menu_Status == 0) {
+								if (EXIT_AAVM.contains((int) event.getX(), (int) event.getY())) {
+									Log.d(TAG, "EXIT_AAVM");
+									if (CAN1Comm.CameraOnFlag == CAN1CommManager.STATE_CAMERA_MANUAL) {
+										ExitCam();
+										SoundPoolKeyButton.play(SoundID, fVolume, fVolume, 0, 0, 1);
+									} else {
+										Log.d(TAG, "imgViewCameraScreen.setOnClickListener" + CAN1Comm.CameraOnFlag);
+									}
+								} else if (SPEAKER_AAVM.contains((int) event.getX(), (int) event.getY())) {
+									Log.d(TAG, "Touch SPEAKER");
+									if (mutate == false) {
+										AAVM_Speaker_Status = 0x00;
+										SoundPoolKeyButton.play(SoundID, fVolume, fVolume, 0, 0, 1);
+										CAN1Comm.TxCMDToMCU(CAN1Comm.CMD_AAVM, AAVM_On, AAVM_Speaker_Status, AAVM_Camera_Status, AAVM_Menu_Status, AAVM_Warning_Front_Value, AAVM_Warning_Rear_Value,
+												AAVM_Warning_Left_Value, AAVM_Warning_Right_Value);
+										mutate = true;
+									} else {
+										AAVM_Speaker_Status = 0x01;
+										SoundPoolKeyButton.play(SoundID, fVolume, fVolume, 0, 0, 1);
+										CAN1Comm.TxCMDToMCU(CAN1Comm.CMD_AAVM, AAVM_On, AAVM_Speaker_Status, AAVM_Camera_Status, AAVM_Menu_Status, AAVM_Warning_Front_Value, AAVM_Warning_Rear_Value,
+												AAVM_Warning_Left_Value, AAVM_Warning_Right_Value);
+										mutate = false;
+									}
+								} else if (FRONT_2D_AAVM.contains((int) event.getX(), (int) event.getY())) {
+									Log.d(TAG, "FRONT_2D_AAVM");
+									AAVM_Camera_Status = AAVM_FRONT_VIEW_2D;
+									SoundPoolKeyButton.play(SoundID, fVolume, fVolume, 0, 0, 1);
+									CAN1Comm.TxCMDToMCU(CAN1Comm.CMD_AAVM, AAVM_On, AAVM_Speaker_Status, AAVM_Camera_Status, AAVM_Menu_Status, AAVM_Warning_Front_Value, AAVM_Warning_Rear_Value,
+											AAVM_Warning_Left_Value, AAVM_Warning_Right_Value);
+									CAN1Comm.Set_AAVMViewMode_3461_PGN61184(AAVM_FRONT_VIEW_2D);
+									CAN1Comm.Set_TargetSourceAddress(0xDE);
+									CAN1Comm.TxCANToMCU(0xE8);
+								} else if (REAR_2D_AAVM.contains((int) event.getX(), (int) event.getY())) {
+									AAVM_Camera_Status = AAVM_REAR_VIEW_2D;
+									Log.d(TAG, "REAR_2D_AAVM");
+									SoundPoolKeyButton.play(SoundID, fVolume, fVolume, 0, 0, 1);
+									CAN1Comm.TxCMDToMCU(CAN1Comm.CMD_AAVM, AAVM_On, AAVM_Speaker_Status, AAVM_Camera_Status, AAVM_Menu_Status, AAVM_Warning_Front_Value, AAVM_Warning_Rear_Value,
+											AAVM_Warning_Left_Value, AAVM_Warning_Right_Value);
+									CAN1Comm.Set_AAVMViewMode_3461_PGN61184(AAVM_REAR_VIEW_2D);
+									CAN1Comm.Set_TargetSourceAddress(0xDE);
+									CAN1Comm.TxCANToMCU(0xE8);
+								} else if (LEFT_2D_AAVM.contains((int) event.getX(), (int) event.getY())) {
+									AAVM_Camera_Status = AAVM_LEFT_VIEW_2D;
+									Log.d(TAG, "LEFT_2D_AAVM");
+									SoundPoolKeyButton.play(SoundID, fVolume, fVolume, 0, 0, 1);
+									CAN1Comm.TxCMDToMCU(CAN1Comm.CMD_AAVM, AAVM_On, AAVM_Speaker_Status, AAVM_Camera_Status, AAVM_Menu_Status, AAVM_Warning_Front_Value, AAVM_Warning_Rear_Value,
+											AAVM_Warning_Left_Value, AAVM_Warning_Right_Value);
+									CAN1Comm.Set_AAVMViewMode_3461_PGN61184(AAVM_LEFT_VIEW_2D);
+									CAN1Comm.Set_TargetSourceAddress(0xDE);
+									CAN1Comm.TxCANToMCU(0xE8);
+								} else if (RIGHT_2D_AAVM.contains((int) event.getX(), (int) event.getY())) {
+									AAVM_Camera_Status = AAVM_RIGHT_VIEW_2D;
+									Log.d(TAG, "RIGHT_2D_AAVM");
+									SoundPoolKeyButton.play(SoundID, fVolume, fVolume, 0, 0, 1);
+									CAN1Comm.TxCMDToMCU(CAN1Comm.CMD_AAVM, AAVM_On, AAVM_Speaker_Status, AAVM_Camera_Status, AAVM_Menu_Status, AAVM_Warning_Front_Value, AAVM_Warning_Rear_Value,
+											AAVM_Warning_Left_Value, AAVM_Warning_Right_Value);
+									CAN1Comm.Set_AAVMViewMode_3461_PGN61184(AAVM_RIGHT_VIEW_2D);
+									CAN1Comm.Set_TargetSourceAddress(0xDE);
+									CAN1Comm.TxCANToMCU(0xE8);
+								} else if (CAMERA_4CH_AAVM.contains((int) event.getX(), (int) event.getY())) {
+									AAVM_Camera_Status = AAVM_4CHANNEL_MULTIVIEW_2D;
+									Log.d(TAG, "Touch 4CHANNEL");
+									SoundPoolKeyButton.play(SoundID, fVolume, fVolume, 0, 0, 1);
+									CAN1Comm.TxCMDToMCU(CAN1Comm.CMD_AAVM, AAVM_On, AAVM_Speaker_Status, AAVM_Camera_Status, AAVM_Menu_Status, AAVM_Warning_Front_Value, AAVM_Warning_Rear_Value,
+											AAVM_Warning_Left_Value, AAVM_Warning_Right_Value);
+									CAN1Comm.Set_AAVMViewMode_3461_PGN61184(AAVM_4CHANNEL_MULTIVIEW_2D);
+									CAN1Comm.Set_TargetSourceAddress(0xDE);
+									CAN1Comm.TxCANToMCU(0xE8);
+								} else if (BIRD_3D_VIEW_AAVM.contains((int) event.getX(), (int) event.getY())) {
+									AAVM_Camera_Status = AAVM_OMNI_VIEW_3D;
+									Log.d(TAG, "Bird_3D_VIEW_AAVM");
+									SoundPoolKeyButton.play(SoundID, fVolume, fVolume, 0, 0, 1);
+									CAN1Comm.TxCMDToMCU(CAN1Comm.CMD_AAVM, AAVM_On, AAVM_Speaker_Status, AAVM_Camera_Status, AAVM_Menu_Status, AAVM_Warning_Front_Value, AAVM_Warning_Rear_Value,
+											AAVM_Warning_Left_Value, AAVM_Warning_Right_Value);
+									CAN1Comm.Set_AAVMViewMode_3461_PGN61184(AAVM_OMNI_VIEW_3D);
+									CAN1Comm.Set_TargetSourceAddress(0xDE);
+									CAN1Comm.TxCANToMCU(0xE8);
+								} else if (REAR_3D_VIEW_AAVM.contains((int) event.getX(), (int) event.getY())) {
+									AAVM_Camera_Status = AAVM_OMNI_REAR_VIEW_3D;
+									Log.d(TAG, "Rear_3D_VIEW_AAVM");
+									SoundPoolKeyButton.play(SoundID, fVolume, fVolume, 0, 0, 1);
+									CAN1Comm.TxCMDToMCU(CAN1Comm.CMD_AAVM, AAVM_On, AAVM_Speaker_Status, AAVM_Camera_Status, AAVM_Menu_Status, AAVM_Warning_Front_Value, AAVM_Warning_Rear_Value,
+											AAVM_Warning_Left_Value, AAVM_Warning_Right_Value);
+									CAN1Comm.Set_AAVMViewMode_3461_PGN61184(AAVM_OMNI_REAR_VIEW_3D);
+									CAN1Comm.Set_TargetSourceAddress(0xDE);
+									CAN1Comm.TxCANToMCU(0xE8);
+								} else if (BIRD_2D_VIEW_AAVM.contains((int) event.getX(), (int) event.getY())) {
+									AAVM_Camera_Status = AAVM_BIRD_VIEW_2D;
+									Log.d(TAG, "Bird_2D_VIEW_AAVM");
+									SoundPoolKeyButton.play(SoundID, fVolume, fVolume, 0, 0, 1);
+									CAN1Comm.TxCMDToMCU(CAN1Comm.CMD_AAVM, AAVM_On, AAVM_Speaker_Status, AAVM_Camera_Status, AAVM_Menu_Status, AAVM_Warning_Front_Value, AAVM_Warning_Rear_Value,
+											AAVM_Warning_Left_Value, AAVM_Warning_Right_Value);
+									CAN1Comm.Set_AAVMViewMode_3461_PGN61184(AAVM_BIRD_VIEW_2D);
+									CAN1Comm.Set_TargetSourceAddress(0xDE);
+									CAN1Comm.TxCANToMCU(0xE8);
+								} else if (LEFT_3D_VIEW_AAVM.contains((int) event.getX(), (int) event.getY())) {
+									AAVM_Camera_Status = AAVM_OMNI_LEFT_VIEW_3D;
+									Log.d(TAG, "Left_3D_VIEW_AAVM");
+									SoundPoolKeyButton.play(SoundID, fVolume, fVolume, 0, 0, 1);
+									CAN1Comm.TxCMDToMCU(CAN1Comm.CMD_AAVM, AAVM_On, AAVM_Speaker_Status, AAVM_Camera_Status, AAVM_Menu_Status, AAVM_Warning_Front_Value, AAVM_Warning_Rear_Value,
+											AAVM_Warning_Left_Value, AAVM_Warning_Right_Value);
+									CAN1Comm.Set_AAVMViewMode_3461_PGN61184(AAVM_OMNI_LEFT_VIEW_3D);
+									CAN1Comm.Set_TargetSourceAddress(0xDE);
+									CAN1Comm.TxCANToMCU(0xE8);
+								} else if (RIGHT_3D_VIEW_AAVM.contains((int) event.getX(), (int) event.getY())) {
+									AAVM_Camera_Status = AAVM_OMNI_RIGHT_VIEW_3D;
+									Log.d(TAG, "Right_3D_VIEW_AAVM");
+									SoundPoolKeyButton.play(SoundID, fVolume, fVolume, 0, 0, 1);
+									CAN1Comm.TxCMDToMCU(CAN1Comm.CMD_AAVM, AAVM_On, AAVM_Speaker_Status, AAVM_Camera_Status, AAVM_Menu_Status, AAVM_Warning_Front_Value, AAVM_Warning_Rear_Value,
+											AAVM_Warning_Left_Value, AAVM_Warning_Right_Value);
+									CAN1Comm.Set_AAVMViewMode_3461_PGN61184(AAVM_OMNI_RIGHT_VIEW_3D);
+									CAN1Comm.Set_TargetSourceAddress(0xDE);
+									CAN1Comm.TxCANToMCU(0xE8);
+								} else {
+									Log.d(TAG, "TOUCH EXCEPT BUTTON");
+									AAVM_Menu_Status = 1;
+									SoundPoolKeyButton.play(SoundID, fVolume, fVolume, 0, 0, 1);
+									// StartAAVMRunningTimer();
+									CAN1Comm.TxCMDToMCU(CAN1Comm.CMD_AAVM, AAVM_On, AAVM_Speaker_Status, AAVM_Camera_Status, AAVM_Menu_Status, AAVM_Warning_Front_Value, AAVM_Warning_Rear_Value,
+											AAVM_Warning_Left_Value, AAVM_Warning_Right_Value);
+								}
+							} else {
+								if (EXIT_AAVM.contains((int) event.getX(), (int) event.getY())) {
+									Log.d(TAG, "EXIT_AAVM");
+									if (CAN1Comm.CameraOnFlag == CAN1CommManager.STATE_CAMERA_MANUAL) {
+										ExitCam();
+										SoundPoolKeyButton.play(SoundID, fVolume, fVolume, 0, 0, 1);
+									} else {
+										Log.d(TAG, "imgViewCameraScreen.setOnClickListener" + CAN1Comm.CameraOnFlag);
+									}
+								} else {
+									AAVM_Menu_Status = 0;
+									SoundPoolKeyButton.play(SoundID, fVolume, fVolume, 0, 0, 1);
+									StartAAVMRunningTimer();
+									CAN1Comm.TxCMDToMCU(CAN1Comm.CMD_AAVM, AAVM_On, AAVM_Speaker_Status, AAVM_Camera_Status, AAVM_Menu_Status, AAVM_Warning_Front_Value, AAVM_Warning_Rear_Value,
+											AAVM_Warning_Left_Value, AAVM_Warning_Right_Value);
+								}
+							}
+						}
+					}
+				default:
+					break;
 				}
 				return false;
 			}
@@ -2074,8 +2288,25 @@ public class Home extends Activity {
 		ScreenIndex = SCREEN_STATE_MAIN_CAMERA_KEY;
 		CAN1Comm.CameraOnFlag = CAN1CommManager.STATE_CAMERA_MANUAL;
 		SelectCameraNum = CameraOrder1+1;
+		if (checkAAVM()) {
+			AAVM_Menu_Status = 0;
+			AAVM_Camera_Status = CAN1Comm.Get_AAVMViewModeStatus_3461_PGN65528();
+			Log.d(TAG, "AAVM_CAMERA_STATUS : " + AAVM_Camera_Status);
+			if (AAVM_Camera_Status != 0xf) {
+				CAN1Comm.TxCMDToMCU(CAN1Comm.CMD_AAVM, AAVM_On, AAVM_Speaker_Status, AAVM_Camera_Status, AAVM_Menu_Status, AAVM_Warning_Front_Value, AAVM_Warning_Rear_Value,
+						AAVM_Warning_Left_Value, AAVM_Warning_Right_Value);
+			} else {
+				AAVM_Camera_Status = 0;
+				CAN1Comm.TxCMDToMCU(CAN1Comm.CMD_AAVM, AAVM_On, AAVM_Speaker_Status, AAVM_Camera_Status, AAVM_Menu_Status, AAVM_Warning_Front_Value, AAVM_Warning_Rear_Value,
+						AAVM_Warning_Left_Value, AAVM_Warning_Right_Value);
+			}
+			StartAAVMRunningTimer();
+		} else {
 		CAN1Comm.TxCMDToMCU(CAN1CommManager.CMD_CAM, CameraOrder1);
 	}
+
+	}
+
 	// �Ʒ� �Լ� ���������� ���� (++, --, 151110 cjg)
 //	public void ExcuteCamActivitybyReverseGear(){
 //		CAN1Comm.CameraOnFlag = CAN1CommManager.STATE_CAMERA_REVERSEGEAR;
@@ -2094,7 +2325,13 @@ public class Home extends Activity {
 			CAN1Comm.CameraCurrentOnOff = false;	// ++, --, 150326 cjg
 			if(CAN1Comm.CameraOnFlag == CAN1CommManager.STATE_CAMERA_MANUAL){
 				CAN1Comm.CameraOnFlag = CAN1CommManager.STATE_CAMERA_OFF;
+				if (checkAAVM() == true) {
+					CAN1Comm.TxCMDToMCU(CAN1Comm.CMD_AAVM, AAVM_Off, AAVM_Speaker_Status, AAVM_Camera_Status, AAVM_Menu_Status, AAVM_Warning_Front_Value, AAVM_Warning_Rear_Value,
+							AAVM_Warning_Left_Value, AAVM_Warning_Right_Value);
+					CancelAAVMRunningTimer();
+				} else {
 				CAN1Comm.TxCMDToMCU(CAN1CommManager.CMD_CAM, 0xFF);
+				}
 				imgViewCameraScreen.setClickable(false);
 				
 				if (ScreenIndex == SCREEN_STATE_MAIN_B_TOP	|| ScreenIndex == SCREEN_STATE_MAIN_A_TOP) {
@@ -2103,10 +2340,11 @@ public class Home extends Activity {
 				}
 				
 				return true;
-			}else if(CAN1Comm.CameraOnFlag == CAN1CommManager.STATE_CAMERA_REVERSEGEAR)
+			} else if (CAN1Comm.CameraOnFlag == CAN1CommManager.STATE_CAMERA_REVERSEGEAR) {
 				return false;
-			else 
+			} else {
 				return true;
+			}
 			
 		} catch (NullPointerException e) {
 			// TODO: handle exception
@@ -2116,25 +2354,221 @@ public class Home extends Activity {
 		return true;
 		
 	}
+
 	// ++, 150324 bwk
 	public void ChangeCam(int Key){
+		if (checkAAVM()) {
+			if (AAVM_Menu_Status == 0) {
+				AAVMKeyLeftRight(AAVM_Camera_Status, Key);
+			} else {
+				AAVM_Menu_Status = 0;
+			}
+			StartAAVMRunningTimer();
+			CAN1Comm.TxCMDToMCU(CAN1Comm.CMD_AAVM, AAVM_On, AAVM_Speaker_Status, AAVM_Camera_Status, AAVM_Menu_Status, AAVM_Warning_Front_Value, AAVM_Warning_Rear_Value,
+					AAVM_Warning_Left_Value, AAVM_Warning_Right_Value);
+		} else {
 		if(Key == CAN1CommManager.LEFT){
-			if(SelectCameraNum > 1)
+				if (SelectCameraNum > 1) {
 				SelectCameraNum--;
-			else
+				} else {
 				SelectCameraNum = ActiveCameraNum;
+				}
 		}else if(Key == CAN1CommManager.RIGHT){
-			if(SelectCameraNum < ActiveCameraNum)
+				if (SelectCameraNum < ActiveCameraNum) {
 				SelectCameraNum++;
-			else
+				} else {
 				SelectCameraNum = 1;
 		}
-		
+			}
 		CAN1Comm.TxCMDToMCU(CAN1CommManager.CMD_CAM, SelectCameraNum-1);
+	        }
 	}
+
+	public void AAVMKeyLeftRight(int index, int keyValue) {
+		if (keyValue == CAN1CommManager.LEFT) {
+			switch (index) {
+			case AAVM_FRONT_VIEW_2D:
+				AAVM_Camera_Status = AAVM_OMNI_RIGHT_VIEW_3D;
+				CAN1Comm.TxCMDToMCU(CAN1Comm.CMD_AAVM, AAVM_On, AAVM_Speaker_Status, AAVM_Camera_Status, AAVM_Menu_Status, AAVM_Warning_Front_Value, AAVM_Warning_Rear_Value,
+						AAVM_Warning_Left_Value, AAVM_Warning_Right_Value);
+				CAN1Comm.Set_AAVMViewMode_3461_PGN61184(AAVM_OMNI_RIGHT_VIEW_3D);
+				CAN1Comm.Set_TargetSourceAddress(0xDE);
+				CAN1Comm.TxCANToMCU(0xE8);
+				break;
+			case AAVM_REAR_VIEW_2D:
+				AAVM_Camera_Status = AAVM_FRONT_VIEW_2D;
+				CAN1Comm.TxCMDToMCU(CAN1Comm.CMD_AAVM, AAVM_On, AAVM_Speaker_Status, AAVM_Camera_Status, AAVM_Menu_Status, AAVM_Warning_Front_Value, AAVM_Warning_Rear_Value,
+						AAVM_Warning_Left_Value, AAVM_Warning_Right_Value);
+				CAN1Comm.Set_AAVMViewMode_3461_PGN61184(AAVM_FRONT_VIEW_2D);
+				CAN1Comm.Set_TargetSourceAddress(0xDE);
+				CAN1Comm.TxCANToMCU(0xE8);
+				break;
+			case AAVM_LEFT_VIEW_2D:
+				AAVM_Camera_Status = AAVM_REAR_VIEW_2D;
+				CAN1Comm.TxCMDToMCU(CAN1Comm.CMD_AAVM, AAVM_On, AAVM_Speaker_Status, AAVM_Camera_Status, AAVM_Menu_Status, AAVM_Warning_Front_Value, AAVM_Warning_Rear_Value,
+						AAVM_Warning_Left_Value, AAVM_Warning_Right_Value);
+				CAN1Comm.Set_AAVMViewMode_3461_PGN61184(AAVM_REAR_VIEW_2D);
+				CAN1Comm.Set_TargetSourceAddress(0xDE);
+				CAN1Comm.TxCANToMCU(0xE8);
+				break;
+			case AAVM_RIGHT_VIEW_2D:
+				AAVM_Camera_Status = AAVM_LEFT_VIEW_2D;
+				CAN1Comm.TxCMDToMCU(CAN1Comm.CMD_AAVM, AAVM_On, AAVM_Speaker_Status, AAVM_Camera_Status, AAVM_Menu_Status, AAVM_Warning_Front_Value, AAVM_Warning_Rear_Value,
+						AAVM_Warning_Left_Value, AAVM_Warning_Right_Value);
+				CAN1Comm.Set_AAVMViewMode_3461_PGN61184(AAVM_LEFT_VIEW_2D);
+				CAN1Comm.Set_TargetSourceAddress(0xDE);
+				CAN1Comm.TxCANToMCU(0xE8);
+				break;
+			case AAVM_4CHANNEL_MULTIVIEW_2D:
+				AAVM_Camera_Status = AAVM_RIGHT_VIEW_2D;
+				CAN1Comm.TxCMDToMCU(CAN1Comm.CMD_AAVM, AAVM_On, AAVM_Speaker_Status, AAVM_Camera_Status, AAVM_Menu_Status, AAVM_Warning_Front_Value, AAVM_Warning_Rear_Value,
+						AAVM_Warning_Left_Value, AAVM_Warning_Right_Value);
+				CAN1Comm.Set_AAVMViewMode_3461_PGN61184(AAVM_RIGHT_VIEW_2D);
+				CAN1Comm.Set_TargetSourceAddress(0xDE);
+				CAN1Comm.TxCANToMCU(0xE8);
+				break;
+			case AAVM_OMNI_VIEW_3D:
+				AAVM_Camera_Status = AAVM_4CHANNEL_MULTIVIEW_2D;
+				CAN1Comm.TxCMDToMCU(CAN1Comm.CMD_AAVM, AAVM_On, AAVM_Speaker_Status, AAVM_Camera_Status, AAVM_Menu_Status, AAVM_Warning_Front_Value, AAVM_Warning_Rear_Value,
+						AAVM_Warning_Left_Value, AAVM_Warning_Right_Value);
+				CAN1Comm.Set_AAVMViewMode_3461_PGN61184(AAVM_4CHANNEL_MULTIVIEW_2D);
+				CAN1Comm.Set_TargetSourceAddress(0xDE);
+				CAN1Comm.TxCANToMCU(0xE8);
+				break;
+			case AAVM_OMNI_REAR_VIEW_3D:
+				AAVM_Camera_Status = AAVM_OMNI_VIEW_3D;
+				CAN1Comm.TxCMDToMCU(CAN1Comm.CMD_AAVM, AAVM_On, AAVM_Speaker_Status, AAVM_Camera_Status, AAVM_Menu_Status, AAVM_Warning_Front_Value, AAVM_Warning_Rear_Value,
+						AAVM_Warning_Left_Value, AAVM_Warning_Right_Value);
+				CAN1Comm.Set_AAVMViewMode_3461_PGN61184(AAVM_OMNI_VIEW_3D);
+				CAN1Comm.Set_TargetSourceAddress(0xDE);
+				CAN1Comm.TxCANToMCU(0xE8);
+				break;
+			case AAVM_BIRD_VIEW_2D:
+				AAVM_Camera_Status = AAVM_OMNI_REAR_VIEW_3D;
+				CAN1Comm.TxCMDToMCU(CAN1Comm.CMD_AAVM, AAVM_On, AAVM_Speaker_Status, AAVM_Camera_Status, AAVM_Menu_Status, AAVM_Warning_Front_Value, AAVM_Warning_Rear_Value,
+						AAVM_Warning_Left_Value, AAVM_Warning_Right_Value);
+				CAN1Comm.Set_AAVMViewMode_3461_PGN61184(AAVM_OMNI_REAR_VIEW_3D);
+				CAN1Comm.Set_TargetSourceAddress(0xDE);
+				CAN1Comm.TxCANToMCU(0xE8);
+				break;
+			case AAVM_OMNI_LEFT_VIEW_3D:
+				AAVM_Camera_Status = AAVM_BIRD_VIEW_2D;
+				CAN1Comm.TxCMDToMCU(CAN1Comm.CMD_AAVM, AAVM_On, AAVM_Speaker_Status, AAVM_Camera_Status, AAVM_Menu_Status, AAVM_Warning_Front_Value, AAVM_Warning_Rear_Value,
+						AAVM_Warning_Left_Value, AAVM_Warning_Right_Value);
+				CAN1Comm.Set_AAVMViewMode_3461_PGN61184(AAVM_BIRD_VIEW_2D);
+				CAN1Comm.Set_TargetSourceAddress(0xDE);
+				CAN1Comm.TxCANToMCU(0xE8);
+				break;
+			case AAVM_OMNI_RIGHT_VIEW_3D:
+				AAVM_Camera_Status = AAVM_OMNI_LEFT_VIEW_3D;
+				CAN1Comm.TxCMDToMCU(CAN1Comm.CMD_AAVM, AAVM_On, AAVM_Speaker_Status, AAVM_Camera_Status, AAVM_Menu_Status, AAVM_Warning_Front_Value, AAVM_Warning_Rear_Value,
+						AAVM_Warning_Left_Value, AAVM_Warning_Right_Value);
+				CAN1Comm.Set_AAVMViewMode_3461_PGN61184(AAVM_OMNI_LEFT_VIEW_3D);
+				CAN1Comm.Set_TargetSourceAddress(0xDE);
+				CAN1Comm.TxCANToMCU(0xE8);
+				break;
+			default:
+
+				break;
+			}
+		} else if (keyValue == CAN1CommManager.RIGHT) {
+			switch (index) {
+			case AAVM_FRONT_VIEW_2D:
+				AAVM_Camera_Status = AAVM_REAR_VIEW_2D;
+				CAN1Comm.TxCMDToMCU(CAN1Comm.CMD_AAVM, AAVM_On, AAVM_Speaker_Status, AAVM_Camera_Status, AAVM_Menu_Status, AAVM_Warning_Front_Value, AAVM_Warning_Rear_Value,
+						AAVM_Warning_Left_Value, AAVM_Warning_Right_Value);
+				CAN1Comm.Set_AAVMViewMode_3461_PGN61184(AAVM_REAR_VIEW_2D);
+				CAN1Comm.Set_TargetSourceAddress(0xDE);
+				CAN1Comm.TxCANToMCU(0xE8);
+				break;
+			case AAVM_REAR_VIEW_2D:
+				AAVM_Camera_Status = AAVM_LEFT_VIEW_2D;
+				CAN1Comm.TxCMDToMCU(CAN1Comm.CMD_AAVM, AAVM_On, AAVM_Speaker_Status, AAVM_Camera_Status, AAVM_Menu_Status, AAVM_Warning_Front_Value, AAVM_Warning_Rear_Value,
+						AAVM_Warning_Left_Value, AAVM_Warning_Right_Value);
+				CAN1Comm.Set_AAVMViewMode_3461_PGN61184(AAVM_LEFT_VIEW_2D);
+				CAN1Comm.Set_TargetSourceAddress(0xDE);
+				CAN1Comm.TxCANToMCU(0xE8);
+				break;
+			case AAVM_LEFT_VIEW_2D:
+				AAVM_Camera_Status = AAVM_RIGHT_VIEW_2D;
+				CAN1Comm.TxCMDToMCU(CAN1Comm.CMD_AAVM, AAVM_On, AAVM_Speaker_Status, AAVM_Camera_Status, AAVM_Menu_Status, AAVM_Warning_Front_Value, AAVM_Warning_Rear_Value,
+						AAVM_Warning_Left_Value, AAVM_Warning_Right_Value);
+				CAN1Comm.Set_AAVMViewMode_3461_PGN61184(AAVM_RIGHT_VIEW_2D);
+				CAN1Comm.Set_TargetSourceAddress(0xDE);
+				CAN1Comm.TxCANToMCU(0xE8);
+				break;
+			case AAVM_RIGHT_VIEW_2D:
+				AAVM_Camera_Status = AAVM_4CHANNEL_MULTIVIEW_2D;
+				CAN1Comm.TxCMDToMCU(CAN1Comm.CMD_AAVM, AAVM_On, AAVM_Speaker_Status, AAVM_Camera_Status, AAVM_Menu_Status, AAVM_Warning_Front_Value, AAVM_Warning_Rear_Value,
+						AAVM_Warning_Left_Value, AAVM_Warning_Right_Value);
+				CAN1Comm.Set_AAVMViewMode_3461_PGN61184(AAVM_4CHANNEL_MULTIVIEW_2D);
+				CAN1Comm.Set_TargetSourceAddress(0xDE);
+				CAN1Comm.TxCANToMCU(0xE8);
+				break;
+			case AAVM_4CHANNEL_MULTIVIEW_2D:
+				AAVM_Camera_Status = AAVM_OMNI_VIEW_3D;
+				CAN1Comm.TxCMDToMCU(CAN1Comm.CMD_AAVM, AAVM_On, AAVM_Speaker_Status, AAVM_Camera_Status, AAVM_Menu_Status, AAVM_Warning_Front_Value, AAVM_Warning_Rear_Value,
+						AAVM_Warning_Left_Value, AAVM_Warning_Right_Value);
+				CAN1Comm.Set_AAVMViewMode_3461_PGN61184(AAVM_OMNI_VIEW_3D);
+				CAN1Comm.Set_TargetSourceAddress(0xDE);
+				CAN1Comm.TxCANToMCU(0xE8);
+				break;
+			case AAVM_OMNI_VIEW_3D:
+				AAVM_Camera_Status = AAVM_OMNI_REAR_VIEW_3D;
+				CAN1Comm.TxCMDToMCU(CAN1Comm.CMD_AAVM, AAVM_On, AAVM_Speaker_Status, AAVM_Camera_Status, AAVM_Menu_Status, AAVM_Warning_Front_Value, AAVM_Warning_Rear_Value,
+						AAVM_Warning_Left_Value, AAVM_Warning_Right_Value);
+				CAN1Comm.Set_AAVMViewMode_3461_PGN61184(AAVM_OMNI_REAR_VIEW_3D);
+				CAN1Comm.Set_TargetSourceAddress(0xDE);
+				CAN1Comm.TxCANToMCU(0xE8);
+				break;
+			case AAVM_OMNI_REAR_VIEW_3D:
+				AAVM_Camera_Status = AAVM_BIRD_VIEW_2D;
+				CAN1Comm.TxCMDToMCU(CAN1Comm.CMD_AAVM, AAVM_On, AAVM_Speaker_Status, AAVM_Camera_Status, AAVM_Menu_Status, AAVM_Warning_Front_Value, AAVM_Warning_Rear_Value,
+						AAVM_Warning_Left_Value, AAVM_Warning_Right_Value);
+				CAN1Comm.Set_AAVMViewMode_3461_PGN61184(AAVM_BIRD_VIEW_2D);
+				CAN1Comm.Set_TargetSourceAddress(0xDE);
+				CAN1Comm.TxCANToMCU(0xE8);
+				break;
+			case AAVM_BIRD_VIEW_2D:
+				AAVM_Camera_Status = AAVM_OMNI_LEFT_VIEW_3D;
+				CAN1Comm.TxCMDToMCU(CAN1Comm.CMD_AAVM, AAVM_On, AAVM_Speaker_Status, AAVM_Camera_Status, AAVM_Menu_Status, AAVM_Warning_Front_Value, AAVM_Warning_Rear_Value,
+						AAVM_Warning_Left_Value, AAVM_Warning_Right_Value);
+				CAN1Comm.Set_AAVMViewMode_3461_PGN61184(AAVM_OMNI_LEFT_VIEW_3D);
+				CAN1Comm.Set_TargetSourceAddress(0xDE);
+				CAN1Comm.TxCANToMCU(0xE8);
+				break;
+			case AAVM_OMNI_LEFT_VIEW_3D:
+				AAVM_Camera_Status = AAVM_OMNI_RIGHT_VIEW_3D;
+				CAN1Comm.TxCMDToMCU(CAN1Comm.CMD_AAVM, AAVM_On, AAVM_Speaker_Status, AAVM_Camera_Status, AAVM_Menu_Status, AAVM_Warning_Front_Value, AAVM_Warning_Rear_Value,
+						AAVM_Warning_Left_Value, AAVM_Warning_Right_Value);
+				CAN1Comm.Set_AAVMViewMode_3461_PGN61184(AAVM_OMNI_RIGHT_VIEW_3D);
+				CAN1Comm.Set_TargetSourceAddress(0xDE);
+				CAN1Comm.TxCANToMCU(0xE8);
+				break;
+			default:
+				break;
+			case AAVM_OMNI_RIGHT_VIEW_3D:
+				AAVM_Camera_Status = AAVM_FRONT_VIEW_2D;
+				CAN1Comm.TxCMDToMCU(CAN1Comm.CMD_AAVM, AAVM_On, AAVM_Speaker_Status, AAVM_Camera_Status, AAVM_Menu_Status, AAVM_Warning_Front_Value, AAVM_Warning_Rear_Value,
+						AAVM_Warning_Left_Value, AAVM_Warning_Right_Value);
+				CAN1Comm.Set_AAVMViewMode_3461_PGN61184(AAVM_FRONT_VIEW_2D);
+				CAN1Comm.Set_TargetSourceAddress(0xDE);
+				CAN1Comm.TxCANToMCU(0xE8);
+				break;
+			}
+		} else if(keyValue == CAN1CommManager.ENTER){
+			Log.d(TAG, "ENTER + CAMERA : "+ AAVM_Camera_Status);
+			CAN1Comm.TxCMDToMCU(CAN1Comm.CMD_AAVM, AAVM_On, AAVM_Speaker_Status, AAVM_Camera_Status, AAVM_Menu_Status, AAVM_Warning_Front_Value, AAVM_Warning_Rear_Value,
+					AAVM_Warning_Left_Value, AAVM_Warning_Right_Value);
+			CAN1Comm.Set_AAVMViewMode_3461_PGN61184(AAVM_Camera_Status);
+			CAN1Comm.Set_TargetSourceAddress(0xDE);
+			CAN1Comm.TxCANToMCU(0xE8);
+		}
+
+	};
+
 	// --, 150324 bwk
-	public void SetMachineSerialNumber()
-	{
+	public void SetMachineSerialNumber() {
 		SaveMachineSerialNumber();
 		showMainScreen();
 		StartSeatBeltTimer();
@@ -2234,24 +2668,18 @@ public class Home extends Activity {
 	public void CheckCID(){
 		Log.d(TAG,"CheckCID");
 		CAN1Comm.Set_HCEPGN_PGN59904(65330);
-		
 		if((CAN1Comm.Get_ComponentCode_1699_PGN65330() != CAN1CommManager.STATE_COMPONENTCODE_MCU)
 			|| (CAN1Comm.Get_ComponentCode_1699_PGN65330_CLUSTER() != CAN1CommManager.STATE_COMPONENTCODE_CLUSTER)
 			|| (CAN1Comm.Get_ComponentCode_1699_PGN65330_TCU() != CAN1CommManager.STATE_COMPONENTCODE_TCU)
-			|| (CAN1Comm.Get_ComponentCode_1699_PGN65330_ECM() != CAN1CommManager.STATE_COMPONENTCODE_ECM))
-		{
+				|| (CAN1Comm.Get_ComponentCode_1699_PGN65330_ECM() != CAN1CommManager.STATE_COMPONENTCODE_ECM)) {
 			Log.d(TAG,"All CID Request");
 			CAN1Comm.Set_TargetSourceAddress(0xFF);
 			CAN1Comm.TxCANToMCU(0xEA);
-		}
-		else
-		{
-			if(CAN1Comm.Get_ComponentCode_1699_PGN65330_BKCU() != CAN1CommManager.STATE_COMPONENTCODE_BKCU)
-			{
+		} else {
+			if (CAN1Comm.Get_ComponentCode_1699_PGN65330_BKCU() != CAN1CommManager.STATE_COMPONENTCODE_BKCU) {
 				Log.d(TAG,"BKCU CID Request");
 				CAN1Comm.Set_TargetSourceAddress(CAN1CommManager.SA_BKCU);
 				CAN1Comm.TxCANToMCU(0xEA);
-				
 				try {
 					Thread.sleep(200);
 				} catch (InterruptedException e) {
@@ -2259,8 +2687,7 @@ public class Home extends Activity {
 					e.printStackTrace();
 				}
 			}
-			if(CAN1Comm.Get_ComponentCode_1699_PGN65330_EHCU() != CAN1CommManager.STATE_COMPONENTCODE_EHCU)
-			{
+			if (CAN1Comm.Get_ComponentCode_1699_PGN65330_EHCU() != CAN1CommManager.STATE_COMPONENTCODE_EHCU) {
 				Log.d(TAG,"EHCU CID Request");
 				CAN1Comm.Set_TargetSourceAddress(CAN1CommManager.SA_EHCU);
 				CAN1Comm.TxCANToMCU(0xEA);
@@ -2272,8 +2699,7 @@ public class Home extends Activity {
 					e.printStackTrace();
 				}
 			}
-			if(CAN1Comm.Get_ComponentCode_1699_PGN65330_RMCU() != CAN1CommManager.STATE_COMPONENTCODE_RMCU)
-			{
+			if (CAN1Comm.Get_ComponentCode_1699_PGN65330_RMCU() != CAN1CommManager.STATE_COMPONENTCODE_RMCU) {
 				Log.d(TAG,"RMCU CID Request");
 				CAN1Comm.Set_TargetSourceAddress(CAN1CommManager.SA_RMCU);
 				CAN1Comm.TxCANToMCU(0xEA);
@@ -2285,21 +2711,42 @@ public class Home extends Activity {
 					e.printStackTrace();
 				}
 			}
-//			if(CAN1Comm.Get_ComponentCode_1699_PGN65330_ACU() != CAN1CommManager.STATE_COMPONENTCODE_AIRCONCONTROLLER)
-//			{
-//				Log.d(TAG,"ACU CID Request");
-//				CAN1Comm.Set_TargetSourceAddress(CAN1CommManager.SA_ACU);
-//				CAN1Comm.TxCANToMCU(0xEA);
-//				
-//				try {
-//					Thread.sleep(200);
-//				} catch (InterruptedException e) {
-//					// TODO Auto-generated catch block
-//					e.printStackTrace();
-//				}
-//			}
+			if(CAN1Comm.Get_ComponentCode_1699_PGN65330_ACU() != CAN1CommManager.STATE_COMPONENTCODE_AIRCONCONTROLLER)
+			{
+				Log.d(TAG,"ACU CID Request");
+				CAN1Comm.Set_TargetSourceAddress(CAN1CommManager.SA_ACU);
+				CAN1Comm.TxCANToMCU(0xEA);
+				
+				try {
+					Thread.sleep(200);
+				} catch (InterruptedException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
 		}
 	}
+			if (CAN1Comm.Get_ComponentCode_1699_PGN65330_AAVO() != CAN1CommManager.STATE_COMPONENTCODE_ALLAROUNDVIEWCONTROLLER) {
+				Log.d(TAG, "AAVM CID Request");
+				CAN1Comm.Set_TargetSourceAddress(CAN1CommManager.SA_AAVM);
+				CAN1Comm.TxCANToMCU(0xEA);
+				try {
+					Thread.sleep(200);
+				} catch (InterruptedException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			} 
+		}
+	}
+
+	public static boolean checkAAVM() {
+		if (CAN1Comm.Get_ComponentCode_1699_PGN65330_AAVO() != CAN1CommManager.STATE_COMPONENTCODE_ALLAROUNDVIEWCONTROLLER) {
+			CheckAAVM = false;
+		} else {
+			CheckAAVM = true;
+		}
+		return CheckAAVM;
+	}
+
 	public void SendCID(){
 		int _Componentcode;
 		int _Manufacturecode;
@@ -2318,12 +2765,10 @@ public class Home extends Activity {
 		_ComponentBasicInformation[3] = ((VERSION_HIGH & 0x0F) << 4) + (VERSION_LOW & 0x0F);
 		//////////////Find Serial Number/////////////
 		for(int i = 4; i < 20; i++){
-			if(_ComponentBasicInformation[i] != 0x2A)
-			{
+			if (_ComponentBasicInformation[i] != 0x2A) {
 				Index++;
 				bAsterisk = false;
-			}
-			else{
+			} else {
 				bAsterisk = true;
 				break;
 			}
@@ -2332,12 +2777,10 @@ public class Home extends Activity {
 
 		//////////// Find Model Name/////////////////
 		for(int i = Index + 1; i < CAN1CommManager.LENGTH_COMPONENTBASICINFORMATION; i++){
-			if(_ComponentBasicInformation[i] != 0x2A)
-			{
+			if (_ComponentBasicInformation[i] != 0x2A) {
 				Index2++;
 				bAsterisk = false;
-			}
-			else{
+			} else {
 				bAsterisk = true;
 				break;
 			}
@@ -2353,6 +2796,7 @@ public class Home extends Activity {
 		
 		CAN1Comm.TxCANToMCU(50);
 	}
+
 	public void SavePref(){
 		SharedPreferences SharePref = getSharedPreferences("Home", 0);
 		SharedPreferences.Editor edit = SharePref.edit();
@@ -2378,9 +2822,13 @@ public class Home extends Activity {
 		edit.putInt("LockMultiMedia", LockMultiMedia);
 		edit.putInt("LockUserSwitching", LockUserSwitching);// bwk
 		edit.putInt("CameraReverseMode", CameraReverseMode);
+		//edit.putInt("LockAAVMWarningPopup", LockAAVMWarningPopup);
+		edit.putInt("ReverseGearUseAAVM", ReverseGearUseAAVM);
+		edit.putInt("AAVMReverseCameraStatus", AAVM_Reverse_Camera_Status);
 		edit.commit();
 		Log.d(TAG,"SavePref");
 	}
+
 	public void LoadPref(){
 		SharedPreferences SharePref = getSharedPreferences("Home", 0);
 		UnitType = SharePref.getInt("UnitType", UNIT_TYPE_CUSTOM);
@@ -2428,6 +2876,9 @@ public class Home extends Activity {
 		LockSmartTerminal = SharePref.getInt("LockSmartTerminal", STATE_ENTERTAINMENT_SMARTTERMINAL_UNLOCK);
 		LockMultiMedia = SharePref.getInt("LockMultiMedia", STATE_ENTERTAINMENT_MULTIMEDIA_UNLOCK);
 		LockUserSwitching = SharePref.getInt("LockUserSwitching", STATE_USERSWITCHING_UNLOCK);
+		//LockAAVMWarningPopup = SharePref.getInt("LockAAVMWarningPopup", STATE_AAVM_POPUP_UNLOCK);
+		ReverseGearUseAAVM = SharePref.getInt("ReverseGearUseAAVM", CAN1CommManager.DATA_STATE_REVERSE_GEAR_USE_AAVM);
+		AAVM_Reverse_Camera_Status = SharePref.getInt("AAVMReverseCameraStatus", AAVM_REAR_VIEW_2D);
 		Log.d(TAG,"LoadPref");
 	}
 	
@@ -3006,10 +3457,11 @@ public class Home extends Activity {
 				ClickBeaconLampHardKey();
 			}else if(Data == CAN1CommManager.REAR_WIPER){
 				ClickRearWiperHardKey();
-			}else if(Data == CAN1CommManager.LEFT || Data == CAN1CommManager.RIGHT){
+			} else if (Data == CAN1CommManager.LEFT || Data == CAN1CommManager.RIGHT || Data == CAN1CommManager.ENTER) {
 				if(ScreenIndex == SCREEN_STATE_MAIN_CAMERA_KEY){
 					ChangeCam(Data);
 				}
+
 			}else if(Data == CAN1CommManager.ESC){
 				if(ScreenIndex == SCREEN_STATE_MAIN_CAMERA_KEY){
 					ExitCam();
@@ -3017,6 +3469,7 @@ public class Home extends Activity {
 			}else if(Data == CAN1CommManager.CAMERA){
 				if(CAN1Comm.CameraOnFlag ==  CAN1CommManager.STATE_CAMERA_OFF){
 					ExcuteCamActivitybyKey();
+
 				}else if(CAN1Comm.CameraOnFlag != CAN1CommManager.STATE_CAMERA_REVERSEGEAR){
 					ExitCam();
 				}
@@ -3193,6 +3646,11 @@ public class Home extends Activity {
 		MainLightLampStatus(HeadLamp,Illumination);
 		WorkLightLampDisplay(WorkLamp,RearWorkLamp);
 		
+		AAVM_Warning_Front = CAN1Comm.Get_AAVMWarningFront_3462_PGN65528();
+		AAVM_Warning_Rear = CAN1Comm.Get_AAVMWarningRear_3462_PGN65528();
+		AAVM_Warning_Left = CAN1Comm.Get_AAVMWarningLeft_3462_PGN65528();
+		AAVM_Warning_Right = CAN1Comm.Get_AAVMWarningRight_3462_PGN65528();
+
 	}
 
 	public void UpdateUI() {
@@ -3209,42 +3667,79 @@ public class Home extends Activity {
 				//Checkrpm(RPM);		// ++, --, 150211 bwk
 				CheckFNLed();
 				CheckAxleTempWarning(FrontAxleTempWarning, RearAxleTempWarning);
+				CheckAAVMIcon();
 			}
 		});
 	}
 
-	
 	public void CheckBuzzer(){
-		if(ScreenIndex == SCREEN_STATE_MAIN_B_KEY_QUICKCOUPLER_POPUP_LOCKING2
-		|| ScreenIndex == SCREEN_STATE_MAIN_B_KEY_QUICKCOUPLER_POPUP_UNLOCKING2
+		
+		if (ScreenIndex == SCREEN_STATE_MAIN_B_KEY_QUICKCOUPLER_POPUP_LOCKING2 || ScreenIndex == SCREEN_STATE_MAIN_B_KEY_QUICKCOUPLER_POPUP_UNLOCKING2
 		// ++, 150313 bwk
-		|| ScreenIndex == SCREEN_STATE_MAIN_A_KEY_QUICKCOUPLER_POPUP_LOCKING2
-		|| ScreenIndex == SCREEN_STATE_MAIN_A_KEY_QUICKCOUPLER_POPUP_UNLOCKING2){
+				|| ScreenIndex == SCREEN_STATE_MAIN_A_KEY_QUICKCOUPLER_POPUP_LOCKING2 || ScreenIndex == SCREEN_STATE_MAIN_A_KEY_QUICKCOUPLER_POPUP_UNLOCKING2) {
 		// --, 150313 bwk
 			
 		}else if((ScreenIndex >= SCREEN_STATE_MAIN_CAMERA_TOP && ScreenIndex <= SCREEN_STATE_MAIN_CAMERA_END)
 			&&(OldScreenIndex == SCREEN_STATE_MAIN_B_KEY_QUICKCOUPLER_POPUP_LOCKING2
 					|| OldScreenIndex == SCREEN_STATE_MAIN_B_KEY_QUICKCOUPLER_POPUP_UNLOCKING2
-					|| OldScreenIndex == SCREEN_STATE_MAIN_A_KEY_QUICKCOUPLER_POPUP_LOCKING2
-					|| OldScreenIndex == SCREEN_STATE_MAIN_A_KEY_QUICKCOUPLER_POPUP_UNLOCKING2)){
+						|| OldScreenIndex == SCREEN_STATE_MAIN_A_KEY_QUICKCOUPLER_POPUP_LOCKING2 || OldScreenIndex == SCREEN_STATE_MAIN_A_KEY_QUICKCOUPLER_POPUP_UNLOCKING2)) {
 			
+		} else if ((ScreenIndex >= SCREEN_STATE_MAIN_CAMERA_TOP && ScreenIndex <= SCREEN_STATE_MAIN_CAMERA_END)) {
+			if (checkAAVM()) {
+				if (CAN1Comm.Get_AAVMWarningFront_3462_PGN65528() == 2 || CAN1Comm.Get_AAVMWarningLeft_3462_PGN65528() == 2
+						|| CAN1Comm.Get_AAVMWarningRear_3462_PGN65528() == 2 || CAN1Comm.Get_AAVMWarningRight_3462_PGN65528() == 2) {
+					if (Buzzer == CAN1CommManager.BUZZER_OFF || CAN1Comm.BuzzerStatus == CAN1CommManager.BUZZER_STOP) {
+						Log.d(TAG, "Warning");
+						if (AAVM_Speaker_Status == 0x01) {
+							CAN1Comm.TxCMDToMCU(CAN1Comm.CMD_BUZ, CAN1CommManager.BUZZER_ON);
+							CAN1Comm.BuzzerStatus = CAN1CommManager.BUZZER_ON;
+						} else if (AAVM_Speaker_Status == 0x00) {
+							CAN1Comm.TxCMDToMCU(CAN1Comm.CMD_BUZ, CAN1CommManager.BUZZER_OFF);
+							CAN1Comm.BuzzerStatus = CAN1CommManager.BUZZER_STOP;
+						}
+					}
+				} else if(CAN1Comm.Get_AAVMWarningFront_3462_PGN65528() == 1 || CAN1Comm.Get_AAVMWarningLeft_3462_PGN65528() == 1
+						|| CAN1Comm.Get_AAVMWarningRear_3462_PGN65528() == 1 || CAN1Comm.Get_AAVMWarningRight_3462_PGN65528() == 1){
+					if (Buzzer == CAN1CommManager.BUZZER_OFF || CAN1Comm.BuzzerStatus == CAN1CommManager.BUZZER_STOP) {
+						Log.d(TAG, "Detecting");
+						if (AAVM_Speaker_Status == 0x01) {
+							AAVM_Buzzer_Count++;
+							if(AAVM_Buzzer_Count % 10 < 5){
+								CAN1Comm.TxCMDToMCU(CAN1Comm.CMD_BUZ, CAN1CommManager.BUZZER_ON);
+							} else {
+								CAN1Comm.TxCMDToMCU(CAN1Comm.CMD_BUZ, CAN1CommManager.BUZZER_OFF);	
+							}
+							CAN1Comm.BuzzerStatus = CAN1CommManager.BUZZER_ON;
+						} else if (AAVM_Speaker_Status == 0x00) {
+							CAN1Comm.TxCMDToMCU(CAN1Comm.CMD_BUZ, CAN1CommManager.BUZZER_OFF);
+							CAN1Comm.BuzzerStatus = CAN1CommManager.BUZZER_STOP;
+						}
+					}
+				}
+				else {
+					if(CAN1Comm.BuzzerStatus == CAN1CommManager.BUZZER_ON){
+						CAN1Comm.TxCMDToMCU(CAN1CommManager.CMD_BUZ, CAN1CommManager.BUZZER_OFF); // Buzzer
+						CAN1Comm.BuzzerStatus = CAN1CommManager.BUZZER_STOP;
+					}
+				}
+			}
 		}else{
 			if(BuzzerStopCount > 5){
 				if(CAN1Comm.Get_CommErrCnt() < 1000){
 					if(Buzzer == CAN1CommManager.BUZZER_ON){
 						BuzzerOnFlag = true;
-						
 						if(CAN1Comm.BuzzerStatus == CAN1CommManager.BUZZER_OFF || CAN1Comm.BuzzerStatus == CAN1CommManager.BUZZER_STOP){
-							CAN1Comm.TxCMDToMCU(CAN1CommManager.CMD_BUZ, CAN1CommManager.BUZZER_ON);	// Buzzer On
-							if(CAN1Comm.GetScreenTopFlag() == false)
-							{
+							CAN1Comm.TxCMDToMCU(CAN1CommManager.CMD_BUZ, CAN1CommManager.BUZZER_ON); // Buzzer
+																										// On
+							if (CAN1Comm.GetScreenTopFlag() == false) {
 								Log.d(TAG,"GetScreenTopFlag() false CheckBuzzer");
 								CAN1Comm.ClickFN_Buzzer();
 							}
 						}
 					}else if(Buzzer == CAN1CommManager.BUZZER_OFF){
 						if(CAN1Comm.BuzzerStatus == CAN1CommManager.BUZZER_ON){
-							CAN1Comm.TxCMDToMCU(CAN1CommManager.CMD_BUZ, CAN1CommManager.BUZZER_OFF);	// Buzzer Off
+							CAN1Comm.TxCMDToMCU(CAN1CommManager.CMD_BUZ, CAN1CommManager.BUZZER_OFF); // Buzzer
+																										// Off
 							CAN1Comm.BuzzerStatus = CAN1CommManager.BUZZER_STOP;
 						}
 					}			
@@ -3253,8 +3748,64 @@ public class Home extends Activity {
 				BuzzerStopCount++;
 			}
 		}
+	}
 		
-		
+	public void CheckAAVMIcon(){
+		if(checkAAVM()){
+			if ((ScreenIndex >= SCREEN_STATE_MAIN_CAMERA_TOP && ScreenIndex <= SCREEN_STATE_MAIN_CAMERA_END)) {
+				AAVM_Icon_Count++;
+				if(AAVM_Warning_Front == 2 || AAVM_Warning_Rear == 2 || AAVM_Warning_Left == 2 || AAVM_Warning_Right == 2){
+					if(AAVM_Icon_Count % 10 == 5){
+						if(AAVM_Warning_Front == 2){
+							AAVM_Warning_Front_Value = AAVM_WARNING;
+						}
+						if(AAVM_Warning_Rear == 2){
+							AAVM_Warning_Rear_Value = AAVM_WARNING;
+						}
+						if(AAVM_Warning_Left == 2){
+							AAVM_Warning_Left_Value = AAVM_WARNING;
+						}
+						if(AAVM_Warning_Right == 2){
+							AAVM_Warning_Right_Value = AAVM_WARNING;
+						}
+						CAN1Comm.TxCMDToMCU(CAN1Comm.CMD_AAVM, AAVM_On, AAVM_Speaker_Status, AAVM_Camera_Status, AAVM_Menu_Status, AAVM_Warning_Front_Value, AAVM_Warning_Rear_Value,
+								AAVM_Warning_Left_Value, AAVM_Warning_Right_Value);
+					}else if(AAVM_Icon_Count % 10 == 0){
+						if(AAVM_Warning_Front == 2){
+							AAVM_Warning_Front_Value = AAVM_NOT_WARNING;
+						}
+						if(AAVM_Warning_Rear == 2){
+							AAVM_Warning_Rear_Value = AAVM_NOT_WARNING;
+						}
+						if(AAVM_Warning_Left == 2){
+							AAVM_Warning_Left_Value = AAVM_NOT_WARNING;
+						}
+						if(AAVM_Warning_Right == 2){
+							AAVM_Warning_Right_Value = AAVM_NOT_WARNING;
+						}
+						CAN1Comm.TxCMDToMCU(CAN1Comm.CMD_AAVM, AAVM_On, AAVM_Speaker_Status, AAVM_Camera_Status, AAVM_Menu_Status, AAVM_Warning_Front_Value, AAVM_Warning_Rear_Value,
+								AAVM_Warning_Left_Value, AAVM_Warning_Right_Value);
+					}
+				} else {
+					if(AAVM_Warning_Front_Value == AAVM_WARNING || AAVM_Warning_Rear_Value == AAVM_WARNING || AAVM_Warning_Left_Value == AAVM_WARNING || AAVM_Warning_Right_Value == AAVM_WARNING){
+						if(AAVM_Warning_Front_Value == AAVM_WARNING){
+							AAVM_Warning_Front_Value = AAVM_NOT_WARNING;
+						}
+						if(AAVM_Warning_Rear_Value == AAVM_WARNING){
+							AAVM_Warning_Rear_Value = AAVM_NOT_WARNING;
+						}
+						if(AAVM_Warning_Left_Value == AAVM_WARNING){
+							AAVM_Warning_Left_Value = AAVM_NOT_WARNING;
+						}
+						if(AAVM_Warning_Right_Value == AAVM_WARNING){
+							AAVM_Warning_Right_Value = AAVM_NOT_WARNING;
+						}
+						CAN1Comm.TxCMDToMCU(CAN1Comm.CMD_AAVM, AAVM_On, AAVM_Speaker_Status, AAVM_Camera_Status, AAVM_Menu_Status, AAVM_Warning_Front_Value, AAVM_Warning_Rear_Value,
+								AAVM_Warning_Left_Value, AAVM_Warning_Right_Value);
+					}
+				}
+			}
+		}
 	}
 	public void CameraDisplay(){
 		if((ScreenIndex >= SCREEN_STATE_MAIN_B_TOP && ScreenIndex <= SCREEN_STATE_MAIN_B_END)
@@ -3264,12 +3815,9 @@ public class Home extends Activity {
 			if(CameraReverseMode == CAN1CommManager.DATA_STATE_CAMERA_REVERSE_ON){
 				if(SelectGearDirection == CAN1CommManager.DATA_INDEX_SELECTGEAR_DIR_R){	
 					CameraReverseOffCount = 0; 
-					if(CAN1Comm.CameraOnFlag == CAN1CommManager.STATE_CAMERA_OFF
-					|| CAN1Comm.CameraOnFlag == CAN1CommManager.STATE_CAMERA_MANUAL){
+					if (CAN1Comm.CameraOnFlag == CAN1CommManager.STATE_CAMERA_OFF || CAN1Comm.CameraOnFlag == CAN1CommManager.STATE_CAMERA_MANUAL) {
 						CameraReverseOnCount++;
-						
-					}
-					else{
+					} else {
 						CameraReverseOnCount = 0;
 					}
 					if(CameraReverseOnCount >= 2){
@@ -3277,7 +3825,17 @@ public class Home extends Activity {
 						OldScreenIndex = ScreenIndex;
 						ScreenIndex = SCREEN_STATE_MAIN_CAMERA_GEAR;
 						CAN1Comm.CameraOnFlag = CAN1CommManager.STATE_CAMERA_REVERSEGEAR;
+						if (checkAAVM()) {
+							AAVM_Camera_Status = AAVM_Reverse_Camera_Status;
+							CAN1Comm.TxCMDToMCU(CAN1Comm.CMD_AAVM, AAVM_On, AAVM_Speaker_Status, AAVM_Camera_Status, AAVM_Menu_Status, AAVM_Warning_Front_Value, AAVM_Warning_Rear_Value,
+									AAVM_Warning_Left_Value, AAVM_Warning_Right_Value);
+							CAN1Comm.Set_AAVMViewMode_3461_PGN61184(AAVM_REAR_VIEW_2D);
+							CAN1Comm.Set_TargetSourceAddress(0xDE);
+							CAN1Comm.TxCANToMCU(0xE8);
+							StartAAVMRunningTimer();
+						} else {
 						CAN1Comm.TxCMDToMCU(CAN1Comm.CMD_CAM, CameraOrder1);
+						}
 						CAN1Comm.CameraCurrentOnOff = true;
 						imgViewCameraScreen.setClickable(false);
 						CameraReverseOnCount = 0;
@@ -3296,15 +3854,20 @@ public class Home extends Activity {
 						CAN1Comm.CameraOnFlag = CAN1CommManager.STATE_CAMERA_OFF;
 						ScreenIndex = OldScreenIndex;
 						OldScreenIndex = TempScreenIndex;
+						if (checkAAVM()) {
+							CAN1Comm.TxCMDToMCU(CAN1Comm.CMD_AAVM, AAVM_Off, AAVM_Speaker_Status, AAVM_Camera_Status, AAVM_Menu_Status, AAVM_Warning_Front_Value, AAVM_Warning_Rear_Value,
+									AAVM_Warning_Left_Value, AAVM_Warning_Right_Value);
+							CancelAAVMRunningTimer();
+						} else {
 						CAN1Comm.TxCMDToMCU(CAN1Comm.CMD_CAM, 0xFF);
+						}
 						CAN1Comm.CameraCurrentOnOff = false;
 						imgViewCameraScreen.setClickable(false);
 					}
 				}
 			}
 			
-			if(CAN1Comm.CameraOnFlag == CAN1CommManager.STATE_CAMERA_REVERSEGEAR
-			|| CAN1Comm.CameraOnFlag == CAN1CommManager.STATE_CAMERA_MANUAL){
+			if (CAN1Comm.CameraOnFlag == CAN1CommManager.STATE_CAMERA_REVERSEGEAR || CAN1Comm.CameraOnFlag == CAN1CommManager.STATE_CAMERA_MANUAL) {
 				imgViewCameraScreen.setClickable(true);
 			}else{
 				imgViewCameraScreen.setClickable(false);
@@ -3312,6 +3875,7 @@ public class Home extends Activity {
 		}
 		
 	}
+
 	/////////////////////////////////////////////////////
 	//FAULT CODE//////////////////////////////////////////
 	// ++, 150326 bwk
@@ -3321,6 +3885,7 @@ public class Home extends Activity {
 		CAN1Comm.Set_SeqenceNumberofDTCInformationPacket_1513_PGN61184_11(SeqNo);
 		CAN1Comm.TxCANToMCU(11);
 	}
+
 	public void ReqestErrorCode(){
 		switch (SendDTCIndex) {
 		case REQ_ERR_MACHINE_ACTIVE:
@@ -3368,20 +3933,19 @@ public class Home extends Activity {
 			break;
 		}
 	}
+
 	// --, 150326 bwk	
 	/////////////////////////////////////////////////////
 	//Backlight//////////////////////////////////////////
 	public void SetBackLight(){
-		if(ScreenIndex >= SCREEN_STATE_MENU_PREFERENCE_BRIGHTNESS_TOP && ScreenIndex <= SCREEN_STATE_MENU_PREFERENCE_BRIGHTNESS_END)
+		if (ScreenIndex >= SCREEN_STATE_MENU_PREFERENCE_BRIGHTNESS_TOP && ScreenIndex <= SCREEN_STATE_MENU_PREFERENCE_BRIGHTNESS_END) {
 			return;
+		}
 		
 		int BackLight;
-		if(BrightnessManualAuto == BRIGHTNESS_AUTO)
-		{
+		if (BrightnessManualAuto == BRIGHTNESS_AUTO) {
 			BackLight = CheckAutoBacklight();
-		}
-		else
-		{
+		} else {
 			BackLight = BrightnessManualLevel + 1;
 		}
 		if(BackLight != BrihgtnessCurrent){
@@ -3401,12 +3965,9 @@ public class Home extends Activity {
 
 		CurrHour = CAN1Comm.Get_RTColock_Hour();
 				
-		if((BrightnessAutoStartTime <= CurrHour) && (CurrHour <= BrightnessAutoEndTime))
-		{
+		if ((BrightnessAutoStartTime <= CurrHour) && (CurrHour <= BrightnessAutoEndTime)) {
 			BackLight = BrightnessAutoDayLevel + 1;
-		}
-		else
-		{
+		} else {
 			BackLight = BrightnessAutoNightLevel + 1;
 		}
 		
@@ -3414,26 +3975,20 @@ public class Home extends Activity {
 	}
 	
 	public void CheckEngineAutoShutdown(){
-		if(CAN1Comm.GetScreenTopFlag() == false)
-		{
-			if(EngineAutoShutdownMode == 1 && EngineAutoShutdownRemainingTime <= 60)
-			{
+		if (CAN1Comm.GetScreenTopFlag() == false) {
+			if (EngineAutoShutdownMode == 1 && EngineAutoShutdownRemainingTime <= 60) {
 				Log.d(TAG,"GetScreenTopFlag() false CheckEngineAutoShutdown");
 				CAN1Comm.ClickFN_Home();
 			}
-		}
-		else if(ScreenIndex != SCREEN_STATE_ENGINEAUTOSHUTDOWNCOUNT_TOP
-			&& ScreenIndex != SCREEN_STATE_MAIN_ENDING
-			&& EngineAutoShutdownMode == 1
+		} else if (ScreenIndex != SCREEN_STATE_ENGINEAUTOSHUTDOWNCOUNT_TOP && ScreenIndex != SCREEN_STATE_MAIN_ENDING && EngineAutoShutdownMode == 1
 			&& EngineAutoShutdownRemainingTime <= 60){
 			
-			if(ScreenIndex == SCREEN_STATE_AXLE_POPUP)
+			if (ScreenIndex == SCREEN_STATE_AXLE_POPUP) {
 				_AxleTempWarningPopup.ClickCancel();
-			else if(ScreenIndex == SCREEN_STATE_MAIN_A_KEY_QUICKCOUPLER_POPUP_UNLOCKING3
-					|| ScreenIndex == SCREEN_STATE_MAIN_B_KEY_QUICKCOUPLER_POPUP_UNLOCKING3)
+			} else if (ScreenIndex == SCREEN_STATE_MAIN_A_KEY_QUICKCOUPLER_POPUP_UNLOCKING3
+					|| ScreenIndex == SCREEN_STATE_MAIN_B_KEY_QUICKCOUPLER_POPUP_UNLOCKING3) {
 				_QuickCouplerPopupUnlocking3.ClickOK();
-			else if(ScreenIndex == SCREEN_STATE_EHCUERR_POPUP)
-			{
+			} else if (ScreenIndex == SCREEN_STATE_EHCUERR_POPUP) {
 				Log.d(TAG, "CheckEngineAutoShutdown _EHCUErrorPopup.dismiss()");
 				_EHCUErrorPopup.dismiss();
 			}
@@ -3449,8 +4004,7 @@ public class Home extends Activity {
 			
 		}else if(ScreenIndex == SCREEN_STATE_ENGINEAUTOSHUTDOWNCOUNT_TOP){
 			
-			if( EngineAutoShutdownMode == 0
-					|| EngineAutoShutdownRemainingTime > 60){
+			if (EngineAutoShutdownMode == 0 || EngineAutoShutdownRemainingTime > 60) {
 				
 				if(HomeDialog != null){
 					HomeDialog.dismiss();
@@ -3474,21 +4028,18 @@ public class Home extends Activity {
 			}
 		}
 	}
+
 	public void CheckAttachmentUnlock(){
 		// ++, 150310 bwk
 		//if(ScreenIndex == SCREEN_STATE_MAIN_B_TOP){
 		if(ScreenIndex == SCREEN_STATE_ENGINEAUTOSHUTDOWNCOUNT_TOP || ScreenIndex == SCREEN_STATE_MAIN_B_KEY_QUICKCOUPLER_POPUP_UNLOCKING3
 				|| ScreenIndex == SCREEN_STATE_MAIN_A_KEY_QUICKCOUPLER_POPUP_UNLOCKING3 || ScreenIndex == SCREEN_STATE_MAIN_B_KEY_QUICKCOUPLER_POPUP_UNLOCKING2
 				|| ScreenIndex == SCREEN_STATE_MAIN_A_KEY_QUICKCOUPLER_POPUP_UNLOCKING2 || ScreenIndex == SCREEN_STATE_MAIN_B_KEY_QUICKCOUPLER_POPUP_LOCKING2
-				|| ScreenIndex == SCREEN_STATE_MAIN_A_KEY_QUICKCOUPLER_POPUP_LOCKING2)
-			{
-			}
-		else if(ScreenIndex == SCREEN_STATE_MAIN_B_TOP || ScreenIndex == SCREEN_STATE_MAIN_A_TOP){
+				|| ScreenIndex == SCREEN_STATE_MAIN_A_KEY_QUICKCOUPLER_POPUP_LOCKING2) {
+		} else if (ScreenIndex == SCREEN_STATE_MAIN_B_TOP || ScreenIndex == SCREEN_STATE_MAIN_A_TOP) {
 		// --, 150310 bwk
-			if((FrontAxleTempWarning  == CAN1CommManager.DATA_STATE_LAMP_ON)
-					|| (RearAxleTempWarning  == CAN1CommManager.DATA_STATE_LAMP_ON)
-					|| AxleWarningFlag == true)
-			{
+			if ((FrontAxleTempWarning == CAN1CommManager.DATA_STATE_LAMP_ON) || (RearAxleTempWarning == CAN1CommManager.DATA_STATE_LAMP_ON)
+					|| AxleWarningFlag == true) {
 				// AxleTempWarning�� ��� �̰� �߰� �ٷ� ���â �߹Ƿ�, PASS
 			}
 			/*else if(AttachmentStatus == CAN1CommManager.DATA_STATE_KEY_QUICKCOUPLER_UNLOCK){
@@ -3502,6 +4053,7 @@ public class Home extends Activity {
 			}
 		}
 	}
+
 	public void CheckEHCUErr(int Data, int PopupOff){
 		// ++, 150209 bwk
 		/*
@@ -3878,10 +4430,8 @@ public class Home extends Activity {
 	public boolean dispatchKeyEvent(KeyEvent event) {
 		// TODO Auto-generated method stub
 		//Log.d(TAG,"dispatchKeyEvent");
-		if(event.getAction() == KeyEvent.ACTION_DOWN)
-		{
-			if(event.getKeyCode() == KeyEvent.KEYCODE_BACK)
-			{
+		if (event.getAction() == KeyEvent.ACTION_DOWN) {
+			if (event.getKeyCode() == KeyEvent.KEYCODE_BACK) {
 				Log.d(TAG,"KEYCODE_BACK");
 //				if(HomeDialog != null){
 //					Log.d(TAG,"Dialog Kill");
@@ -3892,8 +4442,7 @@ public class Home extends Activity {
 //				}
 				HandleKeyButton.sendMessage(HandleKeyButton.obtainMessage(CAN1CommManager.ESC));
 			}
-			if(event.getKeyCode() == KeyEvent.KEYCODE_MENU)
-			{			
+			if (event.getKeyCode() == KeyEvent.KEYCODE_MENU) {
 				Log.d(TAG,"KEYCODE_MENU");
 				HandleKeyButton.sendMessage(HandleKeyButton.obtainMessage(CAN1CommManager.MENU));
 			}
@@ -3914,8 +4463,17 @@ public class Home extends Activity {
 				ExitCam();
 			}
 			// ++, 150324 bwk
-			else if(Data == CAN1CommManager.LEFT || Data == CAN1CommManager.RIGHT){
+			else if (Data == CAN1CommManager.LEFT || Data == CAN1CommManager.RIGHT || Data == CAN1CommManager.ENTER) {
+
 				ChangeCam(Data);
+				if(Data == CAN1CommManager.RIGHT){
+					if(checkAAVM()){
+						Log.d(TAG, "RIGHT KEY");
+						AAVM_Speaker_Status = 0x00;
+						CAN1Comm.TxCMDToMCU(CAN1Comm.CMD_AAVM, AAVM_On, AAVM_Speaker_Status, AAVM_Camera_Status, AAVM_Menu_Status, AAVM_Warning_Front_Value, AAVM_Warning_Rear_Value,
+							AAVM_Warning_Left_Value, AAVM_Warning_Right_Value);
+					}
+				}
 			}
 			// --, 150324 bwk
 		// ++, 150310 bwk
@@ -3938,9 +4496,20 @@ public class Home extends Activity {
 			_MainABaseFragment.KeyButtonClick(Data);
 		// --, 150310 bwk
 		}else if(ScreenIndex == SCREEN_STATE_MAIN_CAMERA_GEAR){
-			
-		}else if(ScreenIndex == SCREEN_STATE_MAIN_B_KEY_QUICKCOUPLER_POPUP_LOCKING2
-			||	 ScreenIndex == SCREEN_STATE_MAIN_B_KEY_QUICKCOUPLER_POPUP_UNLOCKING2
+			if (Data == CAN1CommManager.LEFT || Data == CAN1CommManager.RIGHT) {
+				if(checkAAVM()){
+					ChangeCam(Data);
+				}
+				if(Data == CAN1CommManager.RIGHT){
+					if(checkAAVM()){
+						Log.d(TAG, "RIGHT KEY");
+						AAVM_Speaker_Status = 0x00;
+						CAN1Comm.TxCMDToMCU(CAN1Comm.CMD_AAVM, AAVM_On, AAVM_Speaker_Status, AAVM_Camera_Status, AAVM_Menu_Status, AAVM_Warning_Front_Value, AAVM_Warning_Rear_Value,
+							AAVM_Warning_Left_Value, AAVM_Warning_Right_Value);
+					}
+				}
+			}
+		} else if (ScreenIndex == SCREEN_STATE_MAIN_B_KEY_QUICKCOUPLER_POPUP_LOCKING2 || ScreenIndex == SCREEN_STATE_MAIN_B_KEY_QUICKCOUPLER_POPUP_UNLOCKING2
 			||	 ScreenIndex	== SCREEN_STATE_MAIN_B_KEY_QUICKCOUPLER_POPUP_UNLOCKING3){
 			if(Data == CAN1CommManager.CAMERA){
 				ExcuteCamActivitybyKey();
@@ -4742,18 +5311,40 @@ public class Home extends Activity {
 		
 	}
 	
-	public void StartSendCIDTimer(){
-		CIDTimerCount = 0;
-		CancelSendCIDTimer();
-		mSendCIDTimer = new Timer();
-		mSendCIDTimer.schedule(new SendCIDTimerClass(),1,1000);
+	public class AAVMRunningTimer extends TimerTask {
+
+		@Override
+		public void run() {
+			// TODO Auto-generated method stub
+			runOnUiThread(new Runnable() {
+
+				@Override
+				public void run() {
+					// TODO Auto-generated method stub
+					AAVM_Menu_Status = 1;
+					CAN1Comm.TxCMDToMCU(CAN1Comm.CMD_AAVM, AAVM_On, AAVM_Speaker_Status, AAVM_Camera_Status, AAVM_Menu_Status, AAVM_Warning_Front_Value, AAVM_Warning_Rear_Value,
+							AAVM_Warning_Left_Value, AAVM_Warning_Right_Value);
+					Log.d(TAG, "AAVM_MENU_STATUS : " + AAVM_Menu_Status);
 	}
+			});
 	
-	public void CancelSendCIDTimer(){
-		if(mSendCIDTimer != null){
-			mSendCIDTimer.cancel();
-			mSendCIDTimer.purge();
-			mSendCIDTimer = null;
+		}
+
+	}
+
+	public void StartAAVMRunningTimer() {
+		Log.d(TAG, "Animation Timer Start");
+		AAVM_Menu_Status = 0;
+		CancelAAVMRunningTimer();
+		mAAVMMenuTimer = new Timer();
+		mAAVMMenuTimer.schedule(new AAVMRunningTimer(), 5000);
+	}
+
+	public void CancelAAVMRunningTimer() {
+		if (mAAVMMenuTimer != null) {
+			mAAVMMenuTimer.cancel();
+			mAAVMMenuTimer.purge();
+			mAAVMMenuTimer = null;
 		}
 		
 	}
@@ -4780,6 +5371,22 @@ public class Home extends Activity {
 		
 	}	
 	
+	public void StartSendCIDTimer() {
+		CIDTimerCount = 0;
+		CancelSendCIDTimer();
+		mSendCIDTimer = new Timer();
+		mSendCIDTimer.schedule(new SendCIDTimerClass(), 1, 1000);
+	}
+
+	public void CancelSendCIDTimer() {
+		if (mSendCIDTimer != null) {
+			mSendCIDTimer.cancel();
+			mSendCIDTimer.purge();
+			mSendCIDTimer = null;
+		}
+
+	}
+
 	public void StartSendCommandTimer(){
 		CancelSendCommandTimer();
 		mSendCommandTimer = new Timer();
@@ -4867,7 +5474,6 @@ public class Home extends Activity {
 		
 	}
 	
-	
 	public class CommErrStopTimerClass extends TimerTask{
 
 		@Override
@@ -4907,7 +5513,6 @@ public class Home extends Activity {
 			mCommErrStopTimer = null;
 		}
 	}
-	
 	
 	public class MirrorHeatTimerClass extends TimerTask{
 
