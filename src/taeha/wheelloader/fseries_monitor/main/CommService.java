@@ -515,6 +515,8 @@ public class CommService extends Service{
 	public native int Get_BrakeOilLevelLow_566_PGN65427();
 	public native int Get_BrakeOilTemperatureHigh_567_PGN65427();
 	public native int Get_EmissionSystemFailLamp_357_PGN65427();
+	public native int Get_SeatBeltSwitchLamp_749_PGN65427();
+	public native int Get_SeatBeltRemindAlarm_750_PGN65427();
 	//////RX_INDICATOR_LAMP_65428///////
 	public native int Get_PowerMaxStatus_802_PGN65428();
 	public native int Get_DecelerationStatus_803_PGN65428();
@@ -977,6 +979,8 @@ public class CommService extends Service{
 	public native void Set_BrakeOilLevelLow_566_PGN65427(int Data);
 	public native void Set_BrakeOilTemperatureHigh_567_PGN65427(int Data);
 	public native void Set_EmissionSystemFailLamp_357_PGN65427(int Data);
+	public native void Set_SeatBeltSwitchLamp_749_PGN65427(int Data);
+	public native void Set_SeatBeltRemindAlarm_750_PGN65427(int Data);
 	//////TX_INDICATOR_LAMP_65428///////
 	public native void Set_PowerMaxStatus_802_PGN65428(int Data);
 	public native void Set_DecelerationStatus_803_PGN65428(int Data);

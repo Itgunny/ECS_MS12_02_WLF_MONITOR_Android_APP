@@ -1,5 +1,10 @@
 package taeha.wheelloader.fseries_monitor.main.a;
 
+import taeha.wheelloader.fseries_monitor.animation.ImageViewYAxisFlipAnimation;
+import taeha.wheelloader.fseries_monitor.main.CAN1CommManager;
+import taeha.wheelloader.fseries_monitor.main.Home;
+import taeha.wheelloader.fseries_monitor.main.ParentFragment;
+import taeha.wheelloader.fseries_monitor.main.R;
 import actionpopup.ActionItem;
 import actionpopup.QuickAction;
 import android.os.Bundle;
@@ -7,12 +12,11 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.AlphaAnimation;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
+import android.view.animation.LinearInterpolator;
 import android.widget.ImageView;
-import taeha.wheelloader.fseries_monitor.animation.ImageViewYAxisFlipAnimation;
-import taeha.wheelloader.fseries_monitor.main.CAN1CommManager;
-import taeha.wheelloader.fseries_monitor.main.Home;
-import taeha.wheelloader.fseries_monitor.main.ParentFragment;
-import taeha.wheelloader.fseries_monitor.main.R;
 
 public class MainAIndicatorFragment extends ParentFragment{
 	//CONSTANT////////////////////////////////////////
@@ -62,6 +66,8 @@ public class MainAIndicatorFragment extends ParentFragment{
 	ImageViewYAxisFlipAnimation SeatBeltAnimation;
 	ImageViewYAxisFlipAnimation EngineAutoShutdownAnimation;
 	ImageViewYAxisFlipAnimation EngineDelayShutdownAnimation;
+	
+	Animation blinkAnim;
 	///////////////////////////////////////////////////
 	
 	//TEST////////////////////////////////////////////
@@ -110,6 +116,12 @@ public class MainAIndicatorFragment extends ParentFragment{
 		imgViewLockUpClutch.setAlpha(DARK);
 		imgViewSeatBelt.setAlpha(DARK);
 		imgViewEngineAutoShutdown.setAlpha(DARK);
+		
+		blinkAnim = new AlphaAnimation(1,  (float) 0.15);
+		blinkAnim.setDuration(1000);
+		blinkAnim.setInterpolator(new LinearInterpolator());
+		blinkAnim.setRepeatCount(30);
+		blinkAnim.setRepeatMode(Animation.REVERSE);
 		
 	}
 	
@@ -241,7 +253,7 @@ public class MainAIndicatorFragment extends ParentFragment{
 		ReverseFan = CAN1Comm.Get_CoolingFandrivingStatus_180_PGN65428();
 		ClutchCutOff = CAN1Comm.Get_ClutchCutoffStatus_545_PGN65428();
 		LockUpClutch = CAN1Comm.Get_TransmissionTCLockupEngaged_556_PGN65428();
-		//SeatBelt;
+		SeatBelt = CAN1Comm.Get_SeatBeltSwitchLamp_749_PGN65427();
 		EngineAutoShutdown = CAN1Comm.Get_AutomaticEngineShutdown_363_PGN65428();
 
 	}
@@ -257,7 +269,7 @@ public class MainAIndicatorFragment extends ParentFragment{
 		ReverseFanDisplay(ReverseFan);
 		ClutchCutOffDisplay(ClutchCutOff);
 		LockUpClutchDisplay(LockUpClutch);
-		SeatBeltDisplay(ParentActivity.SeatBelt);
+		SeatBeltDisplay(SeatBelt);
 		EngineAutoShutdownDisplay(EngineAutoShutdown);
 		
 	}
@@ -385,12 +397,14 @@ public class MainAIndicatorFragment extends ParentFragment{
 	public void SeatBeltDisplay(int Data){
 		switch (Data) {
 		case CAN1CommManager.DATA_STATE_LAMP_OFF:
+			imgViewSeatBelt.clearAnimation();
 			SeatBeltAnimation.FlipAnimation(imgViewSeatBelt, R.drawable.main_indicator_seatbelt);
 			imgViewSeatBelt.setAlpha(DARK);
 			break;
 		case CAN1CommManager.DATA_STATE_LAMP_ON:
 			SeatBeltAnimation.FlipAnimation(imgViewSeatBelt, R.drawable.main_indicator_seatbelt_on);
 			imgViewSeatBelt.setAlpha(LIGHT);
+			imgViewSeatBelt.setAnimation(blinkAnim);
 			break;
 		default:
 			break;

@@ -7,6 +7,10 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.AlphaAnimation;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
+import android.view.animation.LinearInterpolator;
 import android.widget.ImageView;
 import taeha.wheelloader.fseries_monitor.animation.ImageViewYAxisFlipAnimation;
 import taeha.wheelloader.fseries_monitor.main.CAN1CommManager;
@@ -62,6 +66,8 @@ public class MainBIndicatorFragment extends ParentFragment{
 	ImageViewYAxisFlipAnimation SeatBeltAnimation;
 	ImageViewYAxisFlipAnimation EngineAutoShutdownAnimation;
 	ImageViewYAxisFlipAnimation EngineDelayShutdownAnimation;
+	
+	Animation blinkAnim;
 	///////////////////////////////////////////////////
 	
 	//TEST////////////////////////////////////////////
@@ -111,6 +117,11 @@ public class MainBIndicatorFragment extends ParentFragment{
 		imgViewSeatBelt.setAlpha(DARK);
 		imgViewEngineAutoShutdown.setAlpha(DARK);
 		
+		blinkAnim = new AlphaAnimation((float) 1,  (float) 0.15);
+		blinkAnim.setDuration(1000);
+		blinkAnim.setInterpolator(new LinearInterpolator());
+		blinkAnim.setRepeatCount(1);
+		blinkAnim.setRepeatMode(Animation.REVERSE);
 	}
 	
 	protected void InitValuables() {
@@ -232,7 +243,6 @@ public class MainBIndicatorFragment extends ParentFragment{
 	@Override
 	protected void GetDataFromNative() {
 		// TODO Auto-generated method stub
-		
 		WarmingUp = CAN1Comm.Get_WarmingUpStatus_804_PGN65428();
 		FuelWarmer = CAN1Comm.Get_FuelWarmerActiveStatus_326_PGN65428();
 		PreHeat = CAN1Comm.Get_EnginePreheatStatus_323_PGN65428();
@@ -241,9 +251,8 @@ public class MainBIndicatorFragment extends ParentFragment{
 		ReverseFan = CAN1Comm.Get_CoolingFandrivingStatus_180_PGN65428();
 		ClutchCutOff = CAN1Comm.Get_ClutchCutoffStatus_545_PGN65428();
 		LockUpClutch = CAN1Comm.Get_TransmissionTCLockupEngaged_556_PGN65428();
-		//SeatBelt;
+		SeatBelt = CAN1Comm.Get_SeatBeltSwitchLamp_749_PGN65427();
 		EngineAutoShutdown = CAN1Comm.Get_AutomaticEngineShutdown_363_PGN65428();
-
 	}
 
 	@Override
@@ -257,7 +266,7 @@ public class MainBIndicatorFragment extends ParentFragment{
 		ReverseFanDisplay(ReverseFan);
 		ClutchCutOffDisplay(ClutchCutOff);
 		LockUpClutchDisplay(LockUpClutch);
-		SeatBeltDisplay(ParentActivity.SeatBelt);
+		SeatBeltDisplay(SeatBelt);
 		EngineAutoShutdownDisplay(EngineAutoShutdown);
 		
 	}
@@ -385,12 +394,14 @@ public class MainBIndicatorFragment extends ParentFragment{
 	public void SeatBeltDisplay(int Data){
 		switch (Data) {
 		case CAN1CommManager.DATA_STATE_LAMP_OFF:
+			imgViewSeatBelt.clearAnimation();
 			SeatBeltAnimation.FlipAnimation(imgViewSeatBelt, R.drawable.main_indicator_seatbelt);
 			imgViewSeatBelt.setAlpha(DARK);
 			break;
 		case CAN1CommManager.DATA_STATE_LAMP_ON:
 			SeatBeltAnimation.FlipAnimation(imgViewSeatBelt, R.drawable.main_indicator_seatbelt_on);
 			imgViewSeatBelt.setAlpha(LIGHT);
+			imgViewSeatBelt.setAnimation(blinkAnim);
 			break;
 		default:
 			break;

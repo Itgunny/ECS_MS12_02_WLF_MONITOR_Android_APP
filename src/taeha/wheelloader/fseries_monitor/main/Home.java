@@ -1856,7 +1856,7 @@ public class Home extends Activity {
 		JoystickSteeringActiveStatus = 0;
 		// --, 150209 bwk
 		ScreenIndex = 0;
-		SeatBelt = CAN1CommManager.DATA_STATE_LAMP_ON;
+		SeatBelt = 0;
 		AnimationRunningFlag = false;
 		MirrorHeatPreHeatFlag = false;
 		MirrorHeatCount = 0;
@@ -3650,6 +3650,8 @@ public class Home extends Activity {
 		AAVM_Warning_Rear = CAN1Comm.Get_AAVMWarningRear_3462_PGN65528();
 		AAVM_Warning_Left = CAN1Comm.Get_AAVMWarningLeft_3462_PGN65528();
 		AAVM_Warning_Right = CAN1Comm.Get_AAVMWarningRight_3462_PGN65528();
+		
+		SeatBelt = CAN1Comm.Get_SeatBeltRemindAlarm_750_PGN65427();
 
 	}
 
@@ -3673,17 +3675,14 @@ public class Home extends Activity {
 	}
 
 	public void CheckBuzzer(){
-		
 		if (ScreenIndex == SCREEN_STATE_MAIN_B_KEY_QUICKCOUPLER_POPUP_LOCKING2 || ScreenIndex == SCREEN_STATE_MAIN_B_KEY_QUICKCOUPLER_POPUP_UNLOCKING2
 		// ++, 150313 bwk
 				|| ScreenIndex == SCREEN_STATE_MAIN_A_KEY_QUICKCOUPLER_POPUP_LOCKING2 || ScreenIndex == SCREEN_STATE_MAIN_A_KEY_QUICKCOUPLER_POPUP_UNLOCKING2) {
 		// --, 150313 bwk
-			
 		}else if((ScreenIndex >= SCREEN_STATE_MAIN_CAMERA_TOP && ScreenIndex <= SCREEN_STATE_MAIN_CAMERA_END)
 			&&(OldScreenIndex == SCREEN_STATE_MAIN_B_KEY_QUICKCOUPLER_POPUP_LOCKING2
 					|| OldScreenIndex == SCREEN_STATE_MAIN_B_KEY_QUICKCOUPLER_POPUP_UNLOCKING2
 						|| OldScreenIndex == SCREEN_STATE_MAIN_A_KEY_QUICKCOUPLER_POPUP_LOCKING2 || OldScreenIndex == SCREEN_STATE_MAIN_A_KEY_QUICKCOUPLER_POPUP_UNLOCKING2)) {
-			
 		} else if ((ScreenIndex >= SCREEN_STATE_MAIN_CAMERA_TOP && ScreenIndex <= SCREEN_STATE_MAIN_CAMERA_END)) {
 			if (checkAAVM()) {
 				if (CAN1Comm.Get_AAVMWarningFront_3462_PGN65528() == 2 || CAN1Comm.Get_AAVMWarningLeft_3462_PGN65528() == 2
@@ -3743,6 +3742,11 @@ public class Home extends Activity {
 							CAN1Comm.BuzzerStatus = CAN1CommManager.BUZZER_STOP;
 						}
 					}			
+				} 
+				if(SeatBelt == 1) {
+					CAN1Comm.TxCMDToMCU(CAN1CommManager.CMD_BUZ, CAN1CommManager.BUZZER_ON);
+				} else {
+					CAN1Comm.TxCMDToMCU(CAN1CommManager.CMD_BUZ, CAN1CommManager.BUZZER_OFF);
 				}
 			}else{
 				BuzzerStopCount++;
