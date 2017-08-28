@@ -279,7 +279,7 @@ public class MainBBaseFragment extends ParentFragment{
 		ParentActivity.ScreenIndex = ParentActivity.SCREEN_STATE_MAIN_B_TOP;
 //		Log.d(TAG,"1ScreenIndex="+Integer.toHexString(ParentActivity.ScreenIndex));
 		
-		ParentActivity.StartSeatBeltTimer();
+		ParentActivity.StartSmartIconTimer();
 		
 
 		return mRoot;

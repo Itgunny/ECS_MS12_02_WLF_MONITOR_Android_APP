@@ -506,4 +506,5 @@
 	<string name="AAVM">AAVM</string>
 	<string name="AAVM_Setting">AAVM 설정</string>
 	<string name="AAVM_Type_In_Reverse_Mode">후진 기어시 AAVM 화면타입 설정</string>
+	<string name="Seatbelt_Warning_Popup">"안전벨트 미착용 상태입니다.\n장비 사용 시에는 안전벨트를 착용해주시기 바랍니다."</string>
 </resources>

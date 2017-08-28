@@ -42,6 +42,7 @@ import taeha.wheelloader.fseries_monitor.popup.QuickCouplerPopupUnlocking1;
 import taeha.wheelloader.fseries_monitor.popup.QuickCouplerPopupUnlocking2;
 import taeha.wheelloader.fseries_monitor.popup.QuickCouplerPopupUnlocking3;
 import taeha.wheelloader.fseries_monitor.popup.RideControlWarningPopup;
+import taeha.wheelloader.fseries_monitor.popup.SeatBeltWarningPopup;
 import taeha.wheelloader.fseries_monitor.popup.ShiftModePopup;
 import taeha.wheelloader.fseries_monitor.popup.SoftStopInitPopup;
 import taeha.wheelloader.fseries_monitor.popup.SoftwareUpdateErrorPopup;
@@ -1183,12 +1184,15 @@ public class Home extends Activity {
 		
 	public  static final int SCREEN_STATE_MAIN_A_END 										= 0x7FFFFFFF;
 	
+	
+	public static  final int SCREEN_STATE_MAIN_KEY_RIDECONTROL_POPUP						= 0x76520000;
+	
 	public  static final int SCREEN_STATE_POPUP												= 0x80000000;
 	public  static final int SCREEN_STATE_EHCUERR_POPUP										= 0x81000000;
 	public  static final int SCREEN_STATE_AXLE_POPUP										= 0x82000000;
 	public static  final int SCREEN_STATE_AAVM_POPUP 										= 0x83000000;
-	public static  final int SCREEN_STATE_MAIN_KEY_RIDECONTROL_POPUP						= 0x76520000;
-
+	public static  final int SCREEN_STATE_SEATBELT_POPUP 									= 0x84000000;
+	
 	public  static final int SCREEN_STATE_MAIN_CHECK_MACHINE_SERIAL							= 0x90000000;
 	
 	public	static final int UNIT_TYPE_METRIC		= 0;
@@ -1405,6 +1409,8 @@ public class Home extends Activity {
 
 	// SeatBelt
 	public int SeatBelt;
+	public boolean SeatBeltFlag;
+	public int SeatBeltBuzzerTime;
 	
 	// Weighing
 	public int WeighingErrorDetect;
@@ -1476,6 +1482,7 @@ public class Home extends Activity {
 	// --, 150313 cjg
 	public FuelInitalPopup					_FuelInitalPopup;			// ++, --, 150406 bwk
 	public AxleTempWarningPopup				_AxleTempWarningPopup;
+	public SeatBeltWarningPopup				_SeatBeltWarningPopup;
 	public CalibrationEHCUPopup				_CalibrationEHCUPopup;
 	public BucketDumpInitCalibrationPopup	_BucketDumpInitCalibrationPopup;
 	public SoftwareUpdateErrorPopup			_SoftwareUpdateErrorPopup;
@@ -1491,6 +1498,7 @@ public class Home extends Activity {
 	
 	// Timer
 	private Timer mSeatBeltTimer = null;
+	private Timer mSmartIconTimer = null;
 	private Timer mAnimationRunningTimer = null;
 	private Timer mSendCommandTimer = null;
 	private Timer mCommErrStopTimer = null;
@@ -1504,6 +1512,7 @@ public class Home extends Activity {
 	
 	// Count
 	int MirrorHeatTimerCount;
+	int SeatBeltTimerCount;
 	int AutoGreaseTimerCount;
 	public int BuzzerStopCount;
 	int CIDTimerCount;
@@ -1857,6 +1866,7 @@ public class Home extends Activity {
 		// --, 150209 bwk
 		ScreenIndex = 0;
 		SeatBelt = 0;
+		SeatBeltFlag = false;
 		AnimationRunningFlag = false;
 		MirrorHeatPreHeatFlag = false;
 		MirrorHeatCount = 0;
@@ -2038,6 +2048,7 @@ public class Home extends Activity {
 		// --, 150313 cjg
 		_FuelInitalPopup = new FuelInitalPopup(this);
 		_AxleTempWarningPopup = new AxleTempWarningPopup(this);
+		_SeatBeltWarningPopup = new SeatBeltWarningPopup(this);
 		_CalibrationEHCUPopup = new CalibrationEHCUPopup(this);
 		_BucketDumpInitCalibrationPopup = new BucketDumpInitCalibrationPopup(this);
 		_SoftwareUpdateErrorPopup = new SoftwareUpdateErrorPopup(this);
@@ -2092,7 +2103,7 @@ public class Home extends Activity {
 		// --, 150323 bwk
 		_FuelInitalPopup = new FuelInitalPopup(this);
 		_AxleTempWarningPopup = new AxleTempWarningPopup(this);
-		
+		_SeatBeltWarningPopup = new SeatBeltWarningPopup(this);
 		_WeighingErrorToast = new WeighingErrorToast(this);
 		_CalibrationEHCUPopup = new CalibrationEHCUPopup(this);
 		_BucketDumpInitCalibrationPopup = new BucketDumpInitCalibrationPopup(this);
@@ -2571,7 +2582,7 @@ public class Home extends Activity {
 	public void SetMachineSerialNumber() {
 		SaveMachineSerialNumber();
 		showMainScreen();
-		StartSeatBeltTimer();
+		StartSmartIconTimer();
 		SettingUserLockingIndex();
 	}
 
@@ -3652,7 +3663,7 @@ public class Home extends Activity {
 		AAVM_Warning_Right = CAN1Comm.Get_AAVMWarningRight_3462_PGN65528();
 		
 		SeatBelt = CAN1Comm.Get_SeatBeltRemindAlarm_750_PGN65427();
-
+		//Log.d(TAG, "Seatbelt" + SeatBelt);
 	}
 
 	public void UpdateUI() {
@@ -3741,13 +3752,18 @@ public class Home extends Activity {
 																										// Off
 							CAN1Comm.BuzzerStatus = CAN1CommManager.BUZZER_STOP;
 						}
-					}			
+					}
+					
+					if(SeatBelt == 1 && SeatBeltFlag == false) {
+						Log.d(TAG, "Seatbelt UnAttached");
+						SeatBeltFlag = true;
+						showSeatBeltWarningPopup();
+						StartSeatBeltTimer();
+					} else if(SeatBelt == 0){
+						Log.d(TAG, "Seatbelt Attached");
+						SeatBeltFlag = false;
+					}
 				} 
-				if(SeatBelt == 1) {
-					CAN1Comm.TxCMDToMCU(CAN1CommManager.CMD_BUZ, CAN1CommManager.BUZZER_ON);
-				} else {
-					CAN1Comm.TxCMDToMCU(CAN1CommManager.CMD_BUZ, CAN1CommManager.BUZZER_OFF);
-				}
 			}else{
 				BuzzerStopCount++;
 			}
@@ -3989,6 +4005,8 @@ public class Home extends Activity {
 			
 			if (ScreenIndex == SCREEN_STATE_AXLE_POPUP) {
 				_AxleTempWarningPopup.ClickCancel();
+			} else if(ScreenIndex == SCREEN_STATE_SEATBELT_POPUP){
+				_SeatBeltWarningPopup.ClickCancel();
 			} else if (ScreenIndex == SCREEN_STATE_MAIN_A_KEY_QUICKCOUPLER_POPUP_UNLOCKING3
 					|| ScreenIndex == SCREEN_STATE_MAIN_B_KEY_QUICKCOUPLER_POPUP_UNLOCKING3) {
 				_QuickCouplerPopupUnlocking3.ClickOK();
@@ -4122,6 +4140,8 @@ public class Home extends Activity {
 							OldJoystickSteeringEnableFailCondition = Data;
 							if(ScreenIndex == SCREEN_STATE_AXLE_POPUP)
 								_AxleTempWarningPopup.ClickCancel();
+							else if(ScreenIndex == SCREEN_STATE_SEATBELT_POPUP)
+								_SeatBeltWarningPopup.ClickCancel();
 							else if(ScreenIndex == SCREEN_STATE_MAIN_A_KEY_QUICKCOUPLER_POPUP_UNLOCKING3
 									|| ScreenIndex == SCREEN_STATE_MAIN_B_KEY_QUICKCOUPLER_POPUP_UNLOCKING3)
 								_QuickCouplerPopupUnlocking3.ClickOK();
@@ -4437,13 +4457,6 @@ public class Home extends Activity {
 		if (event.getAction() == KeyEvent.ACTION_DOWN) {
 			if (event.getKeyCode() == KeyEvent.KEYCODE_BACK) {
 				Log.d(TAG,"KEYCODE_BACK");
-//				if(HomeDialog != null){
-//					Log.d(TAG,"Dialog Kill");
-//					HomeDialog.dismiss();
-//					HomeDialog = null;
-//				}else{
-//					HandleKeyButton.sendMessage(HandleKeyButton.obtainMessage(CAN1CommManager.ESC));
-//				}
 				HandleKeyButton.sendMessage(HandleKeyButton.obtainMessage(CAN1CommManager.ESC));
 			}
 			if (event.getKeyCode() == KeyEvent.KEYCODE_MENU) {
@@ -4491,6 +4504,8 @@ public class Home extends Activity {
 		} else if (ScreenIndex == SCREEN_STATE_AXLE_POPUP || AxleWarningFlag == true) {
 			Log.d(TAG, "Click Key - AxleWarning");
 			 _AxleTempWarningPopup.KeyButtonClick(Data);
+		} else if(ScreenIndex == SCREEN_STATE_SEATBELT_POPUP) {
+			_SeatBeltWarningPopup.KeyButtonClick(Data);
 		} else if (ScreenIndex == SCREEN_STATE_AAVM_POPUP) {
 			_AavmWarningPopup.KeyButtonClick(Data);
 		} else if (ScreenIndex == SCREEN_STATE_MAIN_KEY_RIDECONTROL_POPUP) {
@@ -5122,6 +5137,18 @@ public class Home extends Activity {
 		HomeDialog.show();
 	}
 
+	public void showSeatBeltWarningPopup(){
+		if(HomeDialog != null){
+
+			HomeDialog.dismiss();
+			HomeDialog = null;
+		}
+		OldScreenIndex = ScreenIndex;
+
+		HomeDialog = _SeatBeltWarningPopup;
+		HomeDialog.show();
+	}
+	
 	public void showCalibrationEHCUPopup(){
 		if (AnimationRunningFlag == true) {
 			return;
@@ -5237,17 +5264,15 @@ public class Home extends Activity {
 	/////////////////////////////////////////////////////
 
 	//Timer//////////////////////////////////////////////
-	public class SeatBeltTimerClass extends TimerTask{
+	public class SmartIconTimer extends TimerTask{
 
 		@Override
 		public void run() {
 			// TODO Auto-generated method stub
 			runOnUiThread(new Runnable() {
-				
 				@Override
 				public void run() {
 					// TODO Auto-generated method stub
-					SeatBelt = CAN1CommManager.DATA_STATE_LAMP_OFF;
 					SmartIconDisplay = false;	// ++, 150326 bwk
 				}
 			});
@@ -5256,10 +5281,60 @@ public class Home extends Activity {
 		
 	}
 	
+	public void StartSmartIconTimer(){
+		CancelSmartIconTimer();
+		mSmartIconTimer = new Timer();
+		mSmartIconTimer.schedule(new SmartIconTimer(), 5000);	
+	}
+	
+	public void CancelSmartIconTimer(){
+		if(mSmartIconTimer != null){
+			mSmartIconTimer.cancel();
+			mSmartIconTimer.purge();
+			mSmartIconTimer = null;
+		}
+		
+	}
+	
+	//Timer//////////////////////////////////////////////
+	public class SeatBeltTimerClass extends TimerTask{
+
+		@Override
+		public void run() {
+			// TODO Auto-generated method stub
+			runOnUiThread(new Runnable() {
+				@Override
+				public void run() {
+					// TODO Auto-generated method stub
+					SeatBeltTimerCount++;
+					if(SeatBeltTimerCount >= 30){
+						CAN1Comm.TxCMDToMCU(CAN1CommManager.CMD_BUZ, CAN1CommManager.BUZZER_OFF);
+						CancelSeatBeltTimer();
+					} else if(SeatBeltTimerCount < 30){
+						if(SeatBelt == 1){
+							if(SeatBeltTimerCount % 2 == 0) {
+								CAN1Comm.TxCMDToMCU(CAN1CommManager.CMD_BUZ, CAN1CommManager.BUZZER_ON);
+							} else {
+								CAN1Comm.TxCMDToMCU(CAN1CommManager.CMD_BUZ, CAN1CommManager.BUZZER_OFF);
+							}
+						} else {
+							CAN1Comm.TxCMDToMCU(CAN1CommManager.CMD_BUZ, CAN1CommManager.BUZZER_OFF);
+							Log.d(TAG, "BuzzerOFF");
+							CancelSeatBeltTimer();
+						}
+					}
+				}
+			});
+			
+		}
+		
+	}
+	
 	public void StartSeatBeltTimer(){
+		SeatBeltTimerCount = 0;
 		CancelSeatBeltTimer();
 		mSeatBeltTimer = new Timer();
-		mSeatBeltTimer.schedule(new SeatBeltTimerClass(),5000);	
+		mSeatBeltTimer.schedule(new SeatBeltTimerClass(), 1, 1000);	
 	}
 	
 	public void CancelSeatBeltTimer(){
@@ -5270,7 +5345,6 @@ public class Home extends Activity {
 		}
 		
 	}
-	
 	public class AnimationRunningTimerClass extends TimerTask{
 
 		@Override

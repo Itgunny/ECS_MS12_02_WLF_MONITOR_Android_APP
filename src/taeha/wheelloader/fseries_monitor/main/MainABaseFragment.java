@@ -239,7 +239,7 @@ public class MainABaseFragment extends ParentFragment{
 		ParentActivity.ScreenIndex = ParentActivity.SCREEN_STATE_MAIN_A_TOP;
 		
 		Log.d(TAG, "StartSeatBeltTimer");
-		ParentActivity.StartSeatBeltTimer();
+		ParentActivity.StartSmartIconTimer();
 		Log.d(TAG, "onCreateView OK");
 		return mRoot;
 	}
