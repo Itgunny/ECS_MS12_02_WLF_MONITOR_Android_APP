@@ -121,6 +121,8 @@ public class SeatBeltWarningPopup extends ParentPopup{
 		if(ParentActivity.ScreenIndex != Home.SCREEN_STATE_SEATBELT_POPUP)
 		{
 			Log.d(TAG,"Crash!!!AxleClickCancel:ScreenIndex="+Integer.toHexString(ParentActivity.ScreenIndex)+"OldScreenIndex="+Integer.toHexString(ParentActivity.OldScreenIndex));
+		}else if(ParentActivity.OldScreenIndex == Home.SCREEN_STATE_MAIN_CHECK_MACHINE_SERIAL) {
+			ParentActivity.ScreenIndex = Home.SCREEN_STATE_MAIN_CHECK_MACHINE_SERIAL;
 		}
 		else
 		{

@@ -5119,27 +5119,19 @@ public class Home extends Activity {
 	}
 
 	public void showAxleTempWarningPopup(){
-//		if(AnimationRunningFlag == true)
-//			return;
-//		else
-//			StartAnimationRunningTimer();
-		
 		if(HomeDialog != null){
-			//Log.d(TAG, "Dismiss()"+Integer.toHexString(ScreenIndex));
+
 			HomeDialog.dismiss();
 			HomeDialog = null;
 		}
 		OldScreenIndex = ScreenIndex;
-		// Log.d(TAG,
-		// "showAxleTempWarningPopup:OldScreenIndex"+Integer.toHexString(OldScreenIndex));
-
+		
 		HomeDialog = _AxleTempWarningPopup;
 		HomeDialog.show();
 	}
 
 	public void showSeatBeltWarningPopup(){
 		if(HomeDialog != null){
-
 			HomeDialog.dismiss();
 			HomeDialog = null;
 		}
@@ -5319,7 +5311,6 @@ public class Home extends Activity {
 							}
 						} else {
 							CAN1Comm.TxCMDToMCU(CAN1CommManager.CMD_BUZ, CAN1CommManager.BUZZER_OFF);
-							Log.d(TAG, "BuzzerOFF");
 							CancelSeatBeltTimer();
 						}
 					}
