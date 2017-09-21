@@ -91,7 +91,7 @@ public class Home extends Activity {
 	//
 	public static final int VERSION_HIGH 		= 2;
 	public static final int VERSION_LOW 		= 5;
-	public static final int VERSION_SUB_HIGH 	= 0;
+	public static final int VERSION_SUB_HIGH 	= 2;
 	public static final int VERSION_SUB_LOW 	= 0;
 	public static final int VERSION_TAEHA		= 0;
 	// UI B 안 최초 적용 2014.12.10
@@ -807,10 +807,7 @@ public class Home extends Activity {
 	////v2.4.3.00
 	// 1. 멀티미디어 및 유저스위칭 제한 기능 추가
 	// 2. Cooling Fan Max Adjust 기능 추가
-	// 3. AUX 제거
-	////v2.4.3.10
-	// 1. 
-	// 2. 
+	// 3. AU
 	//////////////////////////////////////////////////////////////////////////////////////
 	// TAG
 
@@ -1409,7 +1406,8 @@ public class Home extends Activity {
 
 	// SeatBelt
 	public int SeatBelt;
-	public boolean SeatBeltFlag;
+	public static boolean SeatBeltFlag;
+	public static boolean SeatBelt30SecFlag;
 	public int SeatBeltBuzzerTime;
 	
 	// Weighing
@@ -1867,6 +1865,7 @@ public class Home extends Activity {
 		ScreenIndex = 0;
 		SeatBelt = 0;
 		SeatBeltFlag = false;
+		SeatBelt30SecFlag = false;
 		AnimationRunningFlag = false;
 		MirrorHeatPreHeatFlag = false;
 		MirrorHeatCount = 0;
@@ -3755,13 +3754,12 @@ public class Home extends Activity {
 					}
 					
 					if(SeatBelt == 1 && SeatBeltFlag == false) {
-						Log.d(TAG, "Seatbelt UnAttached");
 						SeatBeltFlag = true;
 						showSeatBeltWarningPopup();
 						StartSeatBeltTimer();
-					} else if(SeatBelt == 0){
-						Log.d(TAG, "Seatbelt Attached");
+					} else if(SeatBelt == 0 || SeatBelt == 0xff){
 						SeatBeltFlag = false;
+						SeatBelt30SecFlag = false;
 					}
 				} 
 			}else{
@@ -5301,6 +5299,7 @@ public class Home extends Activity {
 					SeatBeltTimerCount++;
 					if(SeatBeltTimerCount >= 30){
 						CAN1Comm.TxCMDToMCU(CAN1CommManager.CMD_BUZ, CAN1CommManager.BUZZER_OFF);
+						SeatBelt30SecFlag = true;
 						CancelSeatBeltTimer();
 					} else if(SeatBeltTimerCount < 30){
 						if(SeatBelt == 1){

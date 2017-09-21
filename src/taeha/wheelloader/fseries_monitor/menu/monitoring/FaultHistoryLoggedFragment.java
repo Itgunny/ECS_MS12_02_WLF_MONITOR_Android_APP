@@ -532,7 +532,7 @@ public class FaultHistoryLoggedFragment extends ParentFragment{
 	// --, 160105 cjg
 	
 	public void ClickAAVM(){
-		TitleDisplay(getString(ParentActivity.getResources().getString(string.AAVM), 497));
+		TitleDisplay(getString(ParentActivity.getResources().getString(string.AAVM), 505));
 		radioMachine.setChecked(false);
 		radioEngine.setChecked(false);
 		radioTransmission.setChecked(false);

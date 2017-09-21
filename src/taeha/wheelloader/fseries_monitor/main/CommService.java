@@ -1319,12 +1319,15 @@ public class CommService extends Service{
 			case CAN1CommManager.RIGHT:
 				if(GetScreenTopFlag() == true || (CAN1Comm.CameraCurrentOnOff == true && CAN1Comm.CameraOnFlag != CAN1CommManager.STATE_CAMERA_REVERSEGEAR))
 				{
-					CAN1Comm.TxCMDToMCU(CAN1CommManager.CMD_BUZ, 0);
-					CAN1Comm.Set_RequestBuzzerStop_PGN65327(1);
-					CAN1Comm.TxCANToMCU(47);
+					if(Home.SeatBeltFlag == false || Home.SeatBelt30SecFlag == true) {
+						CAN1Comm.TxCMDToMCU(CAN1CommManager.CMD_BUZ, 0);
+						CAN1Comm.Set_RequestBuzzerStop_PGN65327(1);
+						CAN1Comm.TxCANToMCU(47);
+						StartBuzzerStopTimer();
+					}
 					CAN1Comm.Callback_KeyButton(Data);
-					StartBuzzerStopTimer();
 					Log.d(TAG, "AD");
+					
 				}
 				SoundPoolKeyButton.play(SoundID, fVolume, fVolume, 0, 0, 1);
 				break;

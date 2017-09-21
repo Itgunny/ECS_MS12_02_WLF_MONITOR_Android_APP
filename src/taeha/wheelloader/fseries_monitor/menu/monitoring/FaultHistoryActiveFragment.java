@@ -569,7 +569,7 @@ public class FaultHistoryActiveFragment extends ParentFragment{
 		
 	}
 	public void ClickAAVM(){
-		TitleDisplay(getString(ParentActivity.getResources().getString(string.AAVM), 497));
+		TitleDisplay(getString(ParentActivity.getResources().getString(string.AAVM), 505));
 		radioMachine.setChecked(false);
 		radioEngine.setChecked(false);
 		radioTransmission.setChecked(false);
@@ -2039,8 +2039,8 @@ public class FaultHistoryActiveFragment extends ParentFragment{
 		"S.C. To Battery Voltage Or O.C. At Output Speed Input",
 		"S.C. To Ground At Output Speed Input",
 		"Logical Error At Output Speed Input",
-		"Turbine Speed Zero Doesn��T Fit To Other Speed Signals",
-		"Output Speed Zero Doesn��T Fit To Other Speed Signals",
+		"Turbine Speed Zero DoesnT Fit To Other Speed Signals",
+		"Output Speed Zero DoesnT Fit To Other Speed Signals",
 		"Gear Range Restriction Signal",
 		"Declutch Modulation Selection Signal",
 		"Fmr1 Timeout",

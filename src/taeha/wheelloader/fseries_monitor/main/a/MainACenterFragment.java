@@ -133,7 +133,7 @@ public class MainACenterFragment extends ParentFragment{
 		textViewRPMData = (TextFitTextView)mRoot.findViewById(R.id.textView_center_main_a_rpm);
 		//textViewRPMDataUnit = (TextView)mRoot.findViewById(R.id.textView_center_main_a_rpm);
 		//textViewRPMDataUnit.setText(getString(ParentActivity.getResources().getString(string.rpm), 34));
-
+		
 		imgbtnOption = (ImageButton)mRoot.findViewById(R.id.imageButton_center_main_a_option);
 
 		imgViewSmkIcon = (ImageView)mRoot.findViewById(R.id.imageView_center_main_a_smkicon);   // ++, --, 150326 bwk

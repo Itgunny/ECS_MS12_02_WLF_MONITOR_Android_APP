@@ -3128,7 +3128,7 @@ jint _UART1_TxComm(JNIEnv *env, jobject this, jint PS) {
 			Send_ASPhoneNumber();
 			break;
 		case 232:
-			MakeCANDataSingle(0x18,0xFF,SA_AAVM,SA_MONITOR,(unsigned char*)&TX_ALL_AROUND_VIEW_CONTROL_SETTING_61184);
+			MakeCANDataSingle(0x18,0xEF,SA_AAVM,SA_MONITOR,(unsigned char*)&TX_ALL_AROUND_VIEW_CONTROL_SETTING_61184);
 			break;
 		case 247	:
 			MakeCANDataSingle(0x18,0xFF,PS,SA_MONITOR,(unsigned char*)&TX_ELECTRICAL_SWITCH_RELAY_OPERATION_STATUS_65527);

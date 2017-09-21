@@ -84,7 +84,7 @@ public class SeatBeltWarningPopup extends ParentPopup{
 	protected void InitResource() {
 		// TODO Auto-generated method stub
 		textViewSeatBeltWarning = (TextView)findViewById(R.id.textView_popup_main_seatbelt_warning_title);
-		textViewSeatBeltWarning.setText(getString(ParentActivity.getResources().getString(string.Seatbelt_Warning_Popup), 148));
+		textViewSeatBeltWarning.setText(getString(ParentActivity.getResources().getString(string.Seatbelt_Warning_Popup), 508));
 		
 		imgbtnOK = (ImageButton)mRoot.findViewById(R.id.imageButton_popup_main_seatbelt_warning_ok);
 
