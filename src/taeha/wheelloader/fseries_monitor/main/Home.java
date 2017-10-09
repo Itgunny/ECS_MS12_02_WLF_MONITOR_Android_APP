@@ -91,7 +91,7 @@ public class Home extends Activity {
 	//
 	public static final int VERSION_HIGH 		= 2;
 	public static final int VERSION_LOW 		= 5;
-	public static final int VERSION_SUB_HIGH 	= 2;
+	public static final int VERSION_SUB_HIGH 	= 0;
 	public static final int VERSION_SUB_LOW 	= 0;
 	public static final int VERSION_TAEHA		= 0;
 	// UI B 안 최초 적용 2014.12.10
@@ -807,7 +807,10 @@ public class Home extends Activity {
 	////v2.4.3.00
 	// 1. 멀티미디어 및 유저스위칭 제한 기능 추가
 	// 2. Cooling Fan Max Adjust 기능 추가
-	// 3. AU
+	////v2.5.3.00
+	// 1. AAVM 기능 추가
+	// 2. 일반 카메라 가이드라인 기능 추가.
+	// 3. 일반 카메라 가이드라인 버튼 추가.
 	//////////////////////////////////////////////////////////////////////////////////////
 	// TAG
 
@@ -1322,6 +1325,14 @@ public class Home extends Activity {
 	
 	public static final int AAVM_NOT_WARNING = 0x0;
 	public static final int AAVM_WARNING = 0x1;
+	
+	
+	public static final int CAMERA_GREEN_LINE_ON = 0x0;
+	public static final int CAMERA_GREEN_LINE_OFF = 0x1;
+	
+	public static final int CAMERA_RED_LINE_OFF = 0x0;
+	public static final int CAMERA_RED_LINE_ON = 0x1;
+	
 	// --, 150326 bwk
 	////////////////////////////////////////////////////
 
@@ -1369,6 +1380,10 @@ public class Home extends Activity {
 	public int CameraOrder3;		//CH3
 	public int CameraOrder4;		//CH4
 	public int CameraReverseMode;	//GEAE Reverse Mode
+	// ++, 170922 cjg
+	public int CameraGreenLine = 0;
+	public int CameraRedLine = 0;
+	// --, 170922 cjg
 	int SelectCameraNum;			// ++, --, 150324 bwk
 	int SelectGear;					//Select GEAR
 	int SelectGearRange;			//Select GEAR ����
@@ -1714,6 +1729,9 @@ public class Home extends Activity {
 
 	public static final Rect EXIT_AAVM = new Rect(20, 0, 90, 70);
 	public static final Rect SPEAKER_AAVM = new Rect(95, 0, 165, 70);
+	
+	public static final Rect CAM_GREEN_LINE = new Rect(20, 0, 90, 70);
+	public static final Rect CAM_RED_LINE = new Rect(95, 0, 165, 70);
 
 	public static final Rect FRONT_2D_AAVM = new Rect(720, 0, 800, 80);
 	public static final Rect LEFT_2D_AAVM = new Rect(720, 220, 800, 310);
@@ -1863,7 +1881,7 @@ public class Home extends Activity {
 		JoystickSteeringActiveStatus = 0;
 		// --, 150209 bwk
 		ScreenIndex = 0;
-		SeatBelt = 0;
+		SeatBelt = CAN1CommManager.DATA_STATE_LAMP_ON;
 		SeatBeltFlag = false;
 		SeatBelt30SecFlag = false;
 		AnimationRunningFlag = false;
@@ -2131,7 +2149,18 @@ public class Home extends Activity {
 					case MotionEvent.ACTION_UP:
 					if (!checkAAVM()) {
 						if (CAN1Comm.CameraOnFlag == CAN1CommManager.STATE_CAMERA_MANUAL) {
-							ExitCam();
+							if(CAM_GREEN_LINE.contains((int) event.getX(), (int) event.getY())) {
+								if(CameraGreenLine == CAMERA_GREEN_LINE_ON) {
+									CameraGreenLine = CAMERA_GREEN_LINE_OFF;
+								} else {
+									CameraGreenLine = CAMERA_GREEN_LINE_ON;
+								}											
+								CAN1Comm.TxCMDToMCU(CAN1Comm.CMD_CAMLINE, CameraGreenLine, CameraRedLine);
+								SoundPoolKeyButton.play(SoundID, fVolume, fVolume, 0, 0, 1);
+							} else {
+								ExitCam();
+								SoundPoolKeyButton.play(SoundID, fVolume, fVolume, 0, 0, 1);
+							}
 						} else {
 							Log.d(TAG, "imgViewCameraScreen.setOnClickListener"+CAN1Comm.CameraOnFlag);
 						}
@@ -2312,9 +2341,8 @@ public class Home extends Activity {
 			}
 			StartAAVMRunningTimer();
 		} else {
-		CAN1Comm.TxCMDToMCU(CAN1CommManager.CMD_CAM, CameraOrder1);
-	}
-
+			CAN1Comm.TxCMDToMCU(CAN1CommManager.CMD_CAM, CameraOrder1);
+		}
 	}
 
 	// �Ʒ� �Լ� ���������� ���� (++, --, 151110 cjg)
@@ -2377,21 +2405,21 @@ public class Home extends Activity {
 			CAN1Comm.TxCMDToMCU(CAN1Comm.CMD_AAVM, AAVM_On, AAVM_Speaker_Status, AAVM_Camera_Status, AAVM_Menu_Status, AAVM_Warning_Front_Value, AAVM_Warning_Rear_Value,
 					AAVM_Warning_Left_Value, AAVM_Warning_Right_Value);
 		} else {
-		if(Key == CAN1CommManager.LEFT){
+			if(Key == CAN1CommManager.LEFT){
 				if (SelectCameraNum > 1) {
-				SelectCameraNum--;
+					SelectCameraNum--;
 				} else {
-				SelectCameraNum = ActiveCameraNum;
+					SelectCameraNum = ActiveCameraNum;
 				}
-		}else if(Key == CAN1CommManager.RIGHT){
+			}else if(Key == CAN1CommManager.RIGHT){
 				if (SelectCameraNum < ActiveCameraNum) {
-				SelectCameraNum++;
+					SelectCameraNum++;
 				} else {
-				SelectCameraNum = 1;
-		}
+					SelectCameraNum = 1;
+				}
 			}
-		CAN1Comm.TxCMDToMCU(CAN1CommManager.CMD_CAM, SelectCameraNum-1);
-	        }
+			CAN1Comm.TxCMDToMCU(CAN1CommManager.CMD_CAM, SelectCameraNum-1);
+		}
 	}
 
 	public void AAVMKeyLeftRight(int index, int keyValue) {
@@ -3661,7 +3689,7 @@ public class Home extends Activity {
 		AAVM_Warning_Left = CAN1Comm.Get_AAVMWarningLeft_3462_PGN65528();
 		AAVM_Warning_Right = CAN1Comm.Get_AAVMWarningRight_3462_PGN65528();
 		
-		SeatBelt = CAN1Comm.Get_SeatBeltRemindAlarm_750_PGN65427();
+		//SeatBelt = CAN1Comm.Get_SeatBeltRemindAlarm_750_PGN65427();
 		//Log.d(TAG, "Seatbelt" + SeatBelt);
 	}
 
@@ -3753,14 +3781,14 @@ public class Home extends Activity {
 						}
 					}
 					
-					if(SeatBelt == 1 && SeatBeltFlag == false) {
+					/*if(SeatBelt == 1 && SeatBeltFlag == false) {
 						SeatBeltFlag = true;
 						showSeatBeltWarningPopup();
 						StartSeatBeltTimer();
 					} else if(SeatBelt == 0 || SeatBelt == 0xff){
 						SeatBeltFlag = false;
 						SeatBelt30SecFlag = false;
-					}
+					}*/
 				} 
 			}else{
 				BuzzerStopCount++;
@@ -5264,6 +5292,7 @@ public class Home extends Activity {
 				public void run() {
 					// TODO Auto-generated method stub
 					SmartIconDisplay = false;	// ++, 150326 bwk
+					SeatBelt = CAN1CommManager.DATA_STATE_LAMP_OFF;
 				}
 			});
 			

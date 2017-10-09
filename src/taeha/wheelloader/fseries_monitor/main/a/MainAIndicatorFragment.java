@@ -253,7 +253,7 @@ public class MainAIndicatorFragment extends ParentFragment{
 		ReverseFan = CAN1Comm.Get_CoolingFandrivingStatus_180_PGN65428();
 		ClutchCutOff = CAN1Comm.Get_ClutchCutoffStatus_545_PGN65428();
 		LockUpClutch = CAN1Comm.Get_TransmissionTCLockupEngaged_556_PGN65428();
-		SeatBelt = CAN1Comm.Get_SeatBeltSwitchLamp_749_PGN65427();
+		//SeatBelt = CAN1Comm.Get_SeatBeltSwitchLamp_749_PGN65427();
 		EngineAutoShutdown = CAN1Comm.Get_AutomaticEngineShutdown_363_PGN65428();
 
 	}
@@ -269,7 +269,7 @@ public class MainAIndicatorFragment extends ParentFragment{
 		ReverseFanDisplay(ReverseFan);
 		ClutchCutOffDisplay(ClutchCutOff);
 		LockUpClutchDisplay(LockUpClutch);
-		SeatBeltDisplay(SeatBelt);
+		SeatBeltDisplay(ParentActivity.SeatBelt);
 		EngineAutoShutdownDisplay(EngineAutoShutdown);
 		
 	}
@@ -397,14 +397,14 @@ public class MainAIndicatorFragment extends ParentFragment{
 	public void SeatBeltDisplay(int Data){
 		switch (Data) {
 		case CAN1CommManager.DATA_STATE_LAMP_OFF:
-			imgViewSeatBelt.clearAnimation();
+			//imgViewSeatBelt.clearAnimation();
 			SeatBeltAnimation.FlipAnimation(imgViewSeatBelt, R.drawable.main_indicator_seatbelt);
 			imgViewSeatBelt.setAlpha(DARK);
 			break;
 		case CAN1CommManager.DATA_STATE_LAMP_ON:
 			SeatBeltAnimation.FlipAnimation(imgViewSeatBelt, R.drawable.main_indicator_seatbelt_on);
 			imgViewSeatBelt.setAlpha(LIGHT);
-			imgViewSeatBelt.setAnimation(blinkAnim);
+			//imgViewSeatBelt.setAnimation(blinkAnim);
 			break;
 		default:
 			break;

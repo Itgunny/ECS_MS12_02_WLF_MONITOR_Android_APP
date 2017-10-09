@@ -34,6 +34,7 @@ public class CAN1CommManager extends ICAN1CommManager.Stub{		// ttySAC1(Linux), 
 	public static int CMD_EEPROMTEST	= 0x0C;
 	public static int CMD_FLASHTEST		= 0x0D;
 	public static int CMD_AAVM = 0x0E;
+	public static int CMD_CAMLINE = 0x0F;
 	
 	public static int RES_KEY		= 0x80;
 	public static int RES_LCD		= 0x81;
