@@ -215,7 +215,7 @@ public class FaultHistoryLoggedFragment extends ParentFragment{
 		//--, 160105 cjg
 		
 		radioAAVM = (RadioButton)mRoot.findViewById(R.id.radioButton_menu_body_monitoring_fault_aavm);
-		radioAAVM.setText(getString(ParentActivity.getResources().getString(R.string.AAVM), 497));
+		radioAAVM.setText(getString(ParentActivity.getResources().getString(R.string.AAVM), 505));
 		ParentActivity.setMarqueeText(radioAAVM);
 		
 		layoutDetail = (RelativeLayout)mRoot.findViewById(R.id.RelativeLayout_menu_body_monitoring_fault_logged_detail);
@@ -593,9 +593,9 @@ public class FaultHistoryLoggedFragment extends ParentFragment{
 			radioACU.setText(getString(ParentActivity.getResources().getString(string.FATC), 455) + "(" + Integer.toString(DTCTotalACU) + ")");
 		}
 		if(DTCTotalAAVM == 0xff){
-			radioAAVM.setText(getString(ParentActivity.getResources().getString(string.AAVM), 497) + "(" + "-" + ")");
+			radioAAVM.setText(getString(ParentActivity.getResources().getString(string.AAVM), 505) + "(" + "-" + ")");
 		} else {
-			radioAAVM.setText(getString(ParentActivity.getResources().getString(string.AAVM), 497) + "(" + Integer.toString(DTCTotalAAVM) + ")");
+			radioAAVM.setText(getString(ParentActivity.getResources().getString(string.AAVM), 505) + "(" + Integer.toString(DTCTotalAAVM) + ")");
 		}
 	}
 	public void ErrListDisplay(){
@@ -1418,14 +1418,14 @@ public class FaultHistoryLoggedFragment extends ParentFragment{
 	   ,728,728,729,729,730,830,840,841,842,843,844,850,869
 	   ,2000,2000,2001,2001,2002,2003,2003,2004,2005	// RMCU ���� ���� �߰�
 	   ,861,339,339,343,343,557,557			// 	DTC List (HL9XX �ø���, 15�� 5�� 22�� ����) ����
-	   ,831};			// DTC 160323 ������ �븮 ��û �߰�
+	   ,831, 866};			// DTC 160323 ������ �븮 ��û �߰�
 	static final int FMIDATA[] = {3, 4,	5,	6,	4,	6,	4,	6,	4,	6,	4,	6,	4,	6,	4,	6,	0,	1,	2,	4,	
 		0,	1,	2,	4,	0,	1,	2,	4,	0,	1,	2,	4,	3,	4,	3,	4,	8,	8,	4,	6,	4,	6,	4,	6,	3,	
 		4,	0,	1,	2,	4,	0,	1,	2,	4,	3,	4,	3,	4,	0,	1,	2,	4,	4,	0,	1,	1,	3,	4,	4,	6,	
 		3,	4,	3,	4,	19,	12,	2,	2,	2,	2,	2,	2,	2,
 		5,	1,	5,	1,	1, 19,	2,	0,	0,	// RMCU ���� ���� �߰�
 		2,	3,	4,	3,	4,	0,	4,			// 	DTC List (HL9XX �ø���, 15�� 5�� 22�� ����) ����
-		2};		// DTC 160323 ������ �븮 ��û �߰�
+		2, 2};		// DTC 160323 ������ �븮 ��û �߰�
 	
 	// ++, 150202 bwk : 150128 HHI ������ ��û
 	static final int TCU_SPN[] = {0x10,0x11,0x12,0x13,0x14,0x15,0x16,0x17,0x18,0x19,0x1A,0x1B,0x1C,0x1D,0x1E,0x1F,
@@ -1646,6 +1646,7 @@ public class FaultHistoryLoggedFragment extends ParentFragment{
 		"Brake Priority Pressure Sensor Data Above Normal Range (or Open Circuit)",	// 15.06.10 ����  
 		"Brake Priority Pressure Sensor Circuit - Voltage Below Normal, or Shorted to Low Source",	// 15.06.10 ����  
 		"FATC Communication Error",		// 16.03.23 �߰�
+		"AAVM Communication Error",		// 17.10.10
 		"Not define."	
 	};
 
