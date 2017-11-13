@@ -10,6 +10,7 @@ import java.util.TimerTask;
 import customlist.userswitching.IconTextItemUserSwitching;
 import taeha.wheelloader.fseries_monitor.animation.ChangeFragmentAnimation;
 import taeha.wheelloader.fseries_monitor.main.R.string;
+import taeha.wheelloader.fseries_monitor.popup.AAVMReverseGearModePopup;
 import taeha.wheelloader.fseries_monitor.popup.AAVMWarningPopup;
 import taeha.wheelloader.fseries_monitor.popup.AngleCalibrationResultPopup;
 import taeha.wheelloader.fseries_monitor.popup.AxleTempWarningPopup;
@@ -92,7 +93,7 @@ public class Home extends Activity {
 	public static final int VERSION_HIGH 		= 2;
 	public static final int VERSION_LOW 		= 5;
 	public static final int VERSION_SUB_HIGH 	= 0;
-	public static final int VERSION_SUB_LOW 	= 0;
+	public static final int VERSION_SUB_LOW 	= 1;
 	public static final int VERSION_TAEHA		= 0;
 	// UI B 안 최초 적용 2014.12.10
 	////1.0.2.4
@@ -807,10 +808,12 @@ public class Home extends Activity {
 	////v2.4.3.00
 	// 1. 멀티미디어 및 유저스위칭 제한 기능 추가
 	// 2. Cooling Fan Max Adjust 기능 추가
-	////v2.5.3.00
+	////v2.5.0.00
 	// 1. AAVM 기능 추가
 	// 2. 일반 카메라 가이드라인 기능 추가.
 	// 3. 일반 카메라 가이드라인 버튼 추가.
+	////v2.5.0.10
+	// 1. 환경설정-AAVM 설정 터치시, 팝업창으로 후진기어 연동 여부만 설정.
 	//////////////////////////////////////////////////////////////////////////////////////
 	// TAG
 
@@ -1090,7 +1093,7 @@ public class Home extends Activity {
 	public  static final int SCREEN_STATE_MENU_PREFERENCE_CAMERASETTING_END					= 0x246FFFFF;
 	public  static final int SCREEN_STATE_MENU_PREFERENCE_WIRELESS_TOP						= 0x24700000;
 	public  static final int SCREEN_STATE_MENU_PREFERENCE_WIRELESS_END						= 0x247FFFFF;
-	public static final int SCREEN_STATE_MENU_PREFERENCE_AAVMSETTING_TOP = 0x24800000;
+	public  static  final int SCREEN_STATE_MENU_PREFERENCE_AAVMSETTING_TOP = 0x24800000;
 	public static final int SCREEN_STATE_MENU_PREFERENCE_AAVMSETTING_END = 0x248FFFFF;
 	public  static final int SCREEN_STATE_MENU_PREFERENCE_END								= 0x24FFFFFF;
 	
@@ -1505,6 +1508,7 @@ public class Home extends Activity {
 	public UserSwitchingLockingPopup 		_UserSwitchingLockingPopup;
 	public AAVMWarningPopup					_AavmWarningPopup;
 	public RideControlWarningPopup			_RideControlWarningPopup;
+	public AAVMReverseGearModePopup			_AAVMReverseGearModePopup;
 
 	//Toast
 	public WeighingErrorToast				_WeighingErrorToast;
@@ -2077,6 +2081,7 @@ public class Home extends Activity {
 
 		_AavmWarningPopup = new AAVMWarningPopup(this);
 		_RideControlWarningPopup = new RideControlWarningPopup(this);
+		_AAVMReverseGearModePopup = new AAVMReverseGearModePopup(this);
 	}
 
 	// ++, 150306 bwk
@@ -3872,10 +3877,9 @@ public class Home extends Activity {
 						ScreenIndex = SCREEN_STATE_MAIN_CAMERA_GEAR;
 						CAN1Comm.CameraOnFlag = CAN1CommManager.STATE_CAMERA_REVERSEGEAR;
 						if (checkAAVM()) {
-							AAVM_Camera_Status = AAVM_Reverse_Camera_Status;
 							CAN1Comm.TxCMDToMCU(CAN1Comm.CMD_AAVM, AAVM_On, AAVM_Speaker_Status, AAVM_Camera_Status, AAVM_Menu_Status, AAVM_Warning_Front_Value, AAVM_Warning_Rear_Value,
 									AAVM_Warning_Left_Value, AAVM_Warning_Right_Value);
-							CAN1Comm.Set_AAVMViewMode_3461_PGN61184(AAVM_REAR_VIEW_2D);
+							CAN1Comm.Set_AAVMViewMode_3461_PGN61184(AAVM_Camera_Status);
 							CAN1Comm.Set_TargetSourceAddress(0xDE);
 							CAN1Comm.TxCANToMCU(0xE8);
 							StartAAVMRunningTimer();
@@ -5279,6 +5283,22 @@ public class Home extends Activity {
 		HomeDialog.show();
 	}
 
+	
+	public void showAAVMReversePopup(){
+		
+		if (AnimationRunningFlag == true) {
+			return;
+		} else {
+			StartAnimationRunningTimer();
+		}
+		if(HomeDialog != null){
+			HomeDialog.dismiss();
+			HomeDialog = null;
+		}
+
+		HomeDialog = _AAVMReverseGearModePopup;
+		HomeDialog.show();
+	}
 	/////////////////////////////////////////////////////
 
 	//Timer//////////////////////////////////////////////

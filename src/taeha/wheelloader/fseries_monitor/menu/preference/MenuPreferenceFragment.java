@@ -167,7 +167,7 @@ public class MenuPreferenceFragment extends MenuBodyList_ParentFragment{
 		CursurDisplay(CursurIndex);
 		*/
 		if(Home.checkAAVM()){
-			ParentActivity._MenuBaseFragment.showBodyAAVMSettingAnimation();
+			ParentActivity.showAAVMReversePopup();
 		}else {
 			ParentActivity._MenuBaseFragment.showBodyCameraSettingAnimation();
 		}

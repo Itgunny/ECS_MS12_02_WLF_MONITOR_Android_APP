@@ -545,7 +545,7 @@ public class ServiceMenuSensorMonitoringHiddenFragment extends ParentFragment{
 		int EpprCurrent = CAN1Comm.Get_CoolingFanValveCurrent_146_PGN65369();
 		EpprActive = true;
 		if(EpprCurrent >= 5){
-			EpprCurrent -= 5;
+			EpprCurrent -= 4;
 		}
 		else{
 			EpprCurrent = 0;

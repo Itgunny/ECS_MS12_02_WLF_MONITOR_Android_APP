@@ -1625,7 +1625,7 @@ public class MenuBaseFragment extends ParentFragment{
 			_CameraSettingFragment.ClickLeft();
 			break;
 		case Home.SCREEN_STATE_MENU_PREFERENCE_AAVMSETTING_TOP:
-			_AAVMSettingFragment.ClickLeft();
+			ParentActivity._AAVMReverseGearModePopup.ClickLeft();
 			break;
 		case Home.SCREEN_STATE_MENU_MONITORING_TOP:
 			_MenuMonitoringFragment.ClickLeft();
@@ -1952,7 +1952,7 @@ public class MenuBaseFragment extends ParentFragment{
 			_CameraSettingFragment.ClickRight();
 			break;
 		case Home.SCREEN_STATE_MENU_PREFERENCE_AAVMSETTING_TOP:
-			_AAVMSettingFragment.ClickRight();
+			ParentActivity._AAVMReverseGearModePopup.ClickRight();
 			break;
 		case Home.SCREEN_STATE_MENU_MONITORING_TOP:
 			_MenuMonitoringFragment.ClickRight();
@@ -2283,7 +2283,7 @@ public class MenuBaseFragment extends ParentFragment{
 			_CameraSettingFragment.ClickESC();
 			break;
 		case Home.SCREEN_STATE_MENU_PREFERENCE_AAVMSETTING_TOP:
-			_AAVMSettingFragment.ClickESC();
+			ParentActivity._AAVMReverseGearModePopup.ClickESC();
 			break;
 		case Home.SCREEN_STATE_MENU_MONITORING_TOP:
 			_MenuMonitoringFragment.ClickESC();
@@ -2601,7 +2601,7 @@ public class MenuBaseFragment extends ParentFragment{
 			_CameraSettingFragment.ClickEnter();
 			break;
 		case Home.SCREEN_STATE_MENU_PREFERENCE_AAVMSETTING_TOP:
-			_AAVMSettingFragment.ClickEnter();
+			ParentActivity._AAVMReverseGearModePopup.ClickEnter();
 			break;
 		case Home.SCREEN_STATE_MENU_MONITORING_TOP:
 			_MenuMonitoringFragment.ClickEnter();

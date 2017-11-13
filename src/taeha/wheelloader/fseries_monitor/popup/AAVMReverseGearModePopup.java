@@ -13,18 +13,18 @@ import android.view.View;
 import android.view.ViewGroup.LayoutParams;
 import android.widget.TextView;
 
-public class KickDownPopup extends ParentPopup{
+public class AAVMReverseGearModePopup extends ParentPopup{
 	//CONSTANT////////////////////////////////////////
 
 	//////////////////////////////////////////////////
 	//RESOURCE////////////////////////////////////////
 	TextFitTextView textViewTitle;
-	TextFitTextView textViewMode1;
-	TextFitTextView textViewMode2;
+	TextFitTextView textViewOn;
+	TextFitTextView textViewOff;
 	//////////////////////////////////////////////////
 	
 	//VALUABLE////////////////////////////////////////
-	int KickDown;
+	int reverseGearUseAAVM;
 	//////////////////////////////////////////////////
 	
 	//ANIMATION///////////////////////////////////////
@@ -34,13 +34,13 @@ public class KickDownPopup extends ParentPopup{
 	//TEST////////////////////////////////////////////
 	
 	//////////////////////////////////////////////////
-	public KickDownPopup(Context _context) {
+	public AAVMReverseGearModePopup(Context _context) {
 		super(_context);
 		// TODO Auto-generated constructor stub
-		TAG = "KickDownPopup";
+		TAG = "AAVMReverseGearModePopup";
 		ParentActivity = (Home)_context;
 		inflater = (LayoutInflater)_context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-		mRoot = inflater.inflate(R.layout.popup_kickdown, null);
+		mRoot = inflater.inflate(R.layout.popup_aavmreversegearmode, null);
 		this.addContentView(mRoot,  new LayoutParams(448,288));
 		this.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
 	}
@@ -59,42 +59,42 @@ public class KickDownPopup extends ParentPopup{
 	public void dismiss() {
 		// TODO Auto-generated method stub
 		super.dismiss();
-		ParentActivity.ScreenIndex = Home.SCREEN_STATE_MENU_MODE_ENGINETM_TOP;
+		ParentActivity.ScreenIndex = Home.SCREEN_STATE_MENU_PREFERENCE_TOP;
 	}
 	@Override
 	public void InitValuable(){
 		super.InitValuable();
-		KickDown = CAN1Comm.Get_KickDownShiftMode_547_PGN65434();
-		KickDownDisplay(KickDown);
+		reverseGearUseAAVM = ParentActivity.CameraReverseMode;
+		AAVMReverseDisplay(reverseGearUseAAVM);
 	}
 	@Override
 	protected void InitResource() {
 		// TODO Auto-generated method stub
-		textViewTitle = (TextFitTextView)mRoot.findViewById(R.id.textView_popup_kickdown_title);
-		textViewTitle.setText(getString(ParentActivity.getResources().getString(R.string.Kick_Down), 207));
-		textViewMode1 = (TextFitTextView)mRoot.findViewById(R.id.textView_popup_kickdown_mode1);
-		textViewMode1.setText(getString(ParentActivity.getResources().getString(R.string.MODE1_DOWN_UP), 221));
-		textViewMode2 = (TextFitTextView)mRoot.findViewById(R.id.textView_popup_kickdown_mode2);
-		textViewMode2.setText(getString(ParentActivity.getResources().getString(R.string.MODE2_DOWN_ONLY), 222));
+		textViewTitle = (TextFitTextView)mRoot.findViewById(R.id.textView_popup_aavmreverse_title);
+		textViewTitle.setText(getString(ParentActivity.getResources().getString(R.string.AAVM_Reverse_mode), 508));
+		textViewOn = (TextFitTextView)mRoot.findViewById(R.id.textView_popup_aavmreverse_on);
+		textViewOn.setText(getString(ParentActivity.getResources().getString(R.string.On), 19));
+		textViewOff = (TextFitTextView)mRoot.findViewById(R.id.textView_popup_aavmreverse_off);
+		textViewOff.setText(getString(ParentActivity.getResources().getString(R.string.Off), 20));
 	}
 
 	@Override
 	protected void InitButtonListener() {
 		// TODO Auto-generated method stub
-		textViewMode1.setOnClickListener(new View.OnClickListener() {
+		textViewOn.setOnClickListener(new View.OnClickListener() {
 			
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
-				ClickMode1();
+				ClickOn();
 			}
 		});
-		textViewMode2.setOnClickListener(new View.OnClickListener() {
+		textViewOff.setOnClickListener(new View.OnClickListener() {
 			
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
-				ClickMode2();
+				ClickOff();
 			}
 		});
 	}
@@ -111,14 +111,12 @@ public class KickDownPopup extends ParentPopup{
 		
 	}
 	///////////////////////////////////////////////////////////////////////////////
-	public void ClickMode1(){
-		CAN1Comm.Set_KickDownShiftMode_547_PGN61184_104(CAN1CommManager.DATA_STATE_KICKDOWN_UPDOWN);
-		CAN1Comm.TxCANToMCU(104);
+	public void ClickOn(){
+		ParentActivity.CameraReverseMode = CAN1CommManager.DATA_STATE_CAMERA_REVERSE_ON;
 		this.dismiss();
 	}	
-	public void ClickMode2(){
-		CAN1Comm.Set_KickDownShiftMode_547_PGN61184_104(CAN1CommManager.DATA_STATE_KICKDOWN_DOWNONLY);
-		CAN1Comm.TxCANToMCU(104);
+	public void ClickOff(){
+		ParentActivity.CameraReverseMode = CAN1CommManager.DATA_STATE_CAMERA_REVERSE_OFF;
 		this.dismiss();
 	}	
 	public void ClickLeft(){
@@ -159,13 +157,12 @@ public class KickDownPopup extends ParentPopup{
 	public void ClickEnter(){
 		switch (CursurIndex) {
 		case 1:
-			ClickMode1();
+			ClickOn();
 			break;
 		case 2:
-			ClickMode2();
+			ClickOff();
 			break;
 		default:
-			
 			break;
 		}
 	}
@@ -173,24 +170,24 @@ public class KickDownPopup extends ParentPopup{
 	public void CursurDisplay(int Index){
 		switch (Index) {
 		case 1:
-			textViewMode1.setPressed(true);
-			textViewMode2.setPressed(false);
+			textViewOn.setPressed(true);
+			textViewOff.setPressed(false);
 			break;
 		case 2:
-			textViewMode1.setPressed(false);
-			textViewMode2.setPressed(true);
+			textViewOn.setPressed(false);
+			textViewOff.setPressed(true);
 			break;
 		default:
 			break;
 		}
 	}
-	public void KickDownDisplay(int data){
+	public void AAVMReverseDisplay(int data){
 		switch (data) {
-		case CAN1CommManager.DATA_STATE_KICKDOWN_UPDOWN:
+		case CAN1CommManager.DATA_STATE_CAMERA_REVERSE_ON:
 			CursurIndex = 1;
 			CursurDisplay(CursurIndex);
 			break;
-		case CAN1CommManager.DATA_STATE_KICKDOWN_DOWNONLY:
+		case CAN1CommManager.DATA_STATE_CAMERA_REVERSE_OFF:
 			CursurIndex = 2;
 			CursurDisplay(CursurIndex);
 			break;

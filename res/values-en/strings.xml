@@ -507,4 +507,5 @@
 	<string name="AAVM_Setting">AAVM Setting</string>
 	<string name="AAVM_Type_In_Reverse_Mode">AAVM Type In Reverse Mode</string>
 	<string name="Seatbelt_Warning_Popup">Please make sure that your seat belt is fastened.\nAlways use your seat belt when operating the machine.</string>
+	<string name="AAVM_Reverse_mode">"AAVM Camera Reverse Mode"</string>
 </resources>
