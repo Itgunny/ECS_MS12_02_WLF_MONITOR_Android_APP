@@ -113,10 +113,12 @@ public class AAVMReverseGearModePopup extends ParentPopup{
 	///////////////////////////////////////////////////////////////////////////////
 	public void ClickOn(){
 		ParentActivity.CameraReverseMode = CAN1CommManager.DATA_STATE_CAMERA_REVERSE_ON;
+		ParentActivity.SavePref();
 		this.dismiss();
 	}	
 	public void ClickOff(){
 		ParentActivity.CameraReverseMode = CAN1CommManager.DATA_STATE_CAMERA_REVERSE_OFF;
+		ParentActivity.SavePref();
 		this.dismiss();
 	}	
 	public void ClickLeft(){

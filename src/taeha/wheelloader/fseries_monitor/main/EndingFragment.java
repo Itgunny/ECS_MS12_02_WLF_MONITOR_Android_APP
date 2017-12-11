@@ -87,6 +87,8 @@ public class EndingFragment extends ParentFragment{
 //		}
 		refreshHandler.sendEmptyMessage(1000);
 		// --, 150403 cjg
+		
+		ParentActivity.SavePref();
 		return mRoot;
 	}
 	@Override

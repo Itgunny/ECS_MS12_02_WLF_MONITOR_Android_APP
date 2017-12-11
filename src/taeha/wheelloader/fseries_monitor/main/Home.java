@@ -93,7 +93,7 @@ public class Home extends Activity {
 	public static final int VERSION_HIGH 		= 2;
 	public static final int VERSION_LOW 		= 5;
 	public static final int VERSION_SUB_HIGH 	= 0;
-	public static final int VERSION_SUB_LOW 	= 1;
+	public static final int VERSION_SUB_LOW 	= 2;
 	public static final int VERSION_TAEHA		= 0;
 	// UI B 안 최초 적용 2014.12.10
 	////1.0.2.4
@@ -814,6 +814,8 @@ public class Home extends Activity {
 	// 3. 일반 카메라 가이드라인 버튼 추가.
 	////v2.5.0.10
 	// 1. 환경설정-AAVM 설정 터치시, 팝업창으로 후진기어 연동 여부만 설정.
+	////v2.5.0.20
+	// 1. AAVM 후진기어 연동모드 저장안되는 현상 개선.
 	//////////////////////////////////////////////////////////////////////////////////////
 	// TAG
 
@@ -1749,7 +1751,7 @@ public class Home extends Activity {
 	public static final Rect LEFT_3D_VIEW_AAVM = new Rect(440, 400, 520, 480);
 	public static final Rect RIGHT_3D_VIEW_AAVM = new Rect(590, 400, 670, 480);
 
-	public static int AAVM_Camera_Status = 0;
+	public static int AAVM_Camera_Status;
 	public static int AAVM_Speaker_Status = 0;
 	public static int AAVM_Menu_Status = 0;
 	public static int AAVM_On = 0;
@@ -2337,10 +2339,11 @@ public class Home extends Activity {
 			AAVM_Camera_Status = CAN1Comm.Get_AAVMViewModeStatus_3461_PGN65528();
 			Log.d(TAG, "AAVM_CAMERA_STATUS : " + AAVM_Camera_Status);
 			if (AAVM_Camera_Status != 0xf) {
+				//AAVM_Camera_Status = 0;
 				CAN1Comm.TxCMDToMCU(CAN1Comm.CMD_AAVM, AAVM_On, AAVM_Speaker_Status, AAVM_Camera_Status, AAVM_Menu_Status, AAVM_Warning_Front_Value, AAVM_Warning_Rear_Value,
 						AAVM_Warning_Left_Value, AAVM_Warning_Right_Value);
 			} else {
-				AAVM_Camera_Status = 0;
+				//AAVM_Camera_Status = 0;
 				CAN1Comm.TxCMDToMCU(CAN1Comm.CMD_AAVM, AAVM_On, AAVM_Speaker_Status, AAVM_Camera_Status, AAVM_Menu_Status, AAVM_Warning_Front_Value, AAVM_Warning_Rear_Value,
 						AAVM_Warning_Left_Value, AAVM_Warning_Right_Value);
 			}
@@ -2868,6 +2871,7 @@ public class Home extends Activity {
 		//edit.putInt("LockAAVMWarningPopup", LockAAVMWarningPopup);
 		edit.putInt("ReverseGearUseAAVM", ReverseGearUseAAVM);
 		edit.putInt("AAVMReverseCameraStatus", AAVM_Reverse_Camera_Status);
+		edit.putInt("AAVMCameraStatus", AAVM_Camera_Status);
 		edit.commit();
 		Log.d(TAG,"SavePref");
 	}
@@ -2922,6 +2926,7 @@ public class Home extends Activity {
 		//LockAAVMWarningPopup = SharePref.getInt("LockAAVMWarningPopup", STATE_AAVM_POPUP_UNLOCK);
 		ReverseGearUseAAVM = SharePref.getInt("ReverseGearUseAAVM", CAN1CommManager.DATA_STATE_REVERSE_GEAR_USE_AAVM);
 		AAVM_Reverse_Camera_Status = SharePref.getInt("AAVMReverseCameraStatus", AAVM_REAR_VIEW_2D);
+		AAVM_Camera_Status = SharePref.getInt("AAVMCameraStatus", AAVM_Camera_Status);		
 		Log.d(TAG,"LoadPref");
 	}
 	
@@ -3882,6 +3887,7 @@ public class Home extends Activity {
 							CAN1Comm.Set_AAVMViewMode_3461_PGN61184(AAVM_Camera_Status);
 							CAN1Comm.Set_TargetSourceAddress(0xDE);
 							CAN1Comm.TxCANToMCU(0xE8);
+							SavePref();
 							StartAAVMRunningTimer();
 						} else {
 						CAN1Comm.TxCMDToMCU(CAN1Comm.CMD_CAM, CameraOrder1);
