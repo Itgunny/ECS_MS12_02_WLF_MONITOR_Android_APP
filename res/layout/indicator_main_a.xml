@@ -62,7 +62,7 @@
         android:layout_height="wrap_content"
        	android:layout_alignParentBottom="true"
         android:layout_marginBottom="5dp"
-        android:src="@drawable/main_indicator_seatbelt" />
+        android:src="@drawable/main_indicator_seatbelt_off_new" />
         
     <ImageView
         android:id="@+id/imageView_indicator_main_a_RideControl"

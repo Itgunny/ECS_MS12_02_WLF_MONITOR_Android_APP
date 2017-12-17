@@ -507,5 +507,8 @@
 	<string name="AAVM_Setting">AAVM 설정</string>
 	<string name="AAVM_Type_In_Reverse_Mode">후진 기어시 AAVM 화면타입 설정</string>
 	<string name="Seatbelt_Warning_Popup">안전벨트 미착용 상태입니다.\n장비 사용 시에는 안전벨트를 착용해주시기 바랍니다.</string>
-	<string name="AAVM_Reverse_mode">"AAVM 후진기어 연동모드"</string>
+	<string name="AAVM_Reverse_mode">AAVM 후진기어 연동모드</string>
+	<string name="Select_Menu">메뉴 선택</string>
+	<string name="SBR_Alarm">SBR Alarm</string>
+	<string name="Seatbelt_Alarm_Warning">* 주 의\n Seat Belt Alarm 기능은 안전과 직결된 기능으로, 본 기능 해제 시 안전관련 문제가 발생할 수 있으니 주의 바랍니다.</string>
 </resources>

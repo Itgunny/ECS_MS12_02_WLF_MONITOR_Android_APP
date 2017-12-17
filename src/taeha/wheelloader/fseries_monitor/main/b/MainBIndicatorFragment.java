@@ -3,6 +3,7 @@ package taeha.wheelloader.fseries_monitor.main.b;
 import actionpopup.ActionItem;
 import actionpopup.QuickAction;
 import android.os.Bundle;
+import android.text.AndroidCharacter;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -117,10 +118,9 @@ public class MainBIndicatorFragment extends ParentFragment{
 		imgViewSeatBelt.setAlpha(DARK);
 		imgViewEngineAutoShutdown.setAlpha(DARK);
 		
-		blinkAnim = new AlphaAnimation((float) 1,  (float) 0.15);
-		blinkAnim.setDuration(1000);
-		blinkAnim.setInterpolator(new LinearInterpolator());
-		blinkAnim.setRepeatCount(1);
+		blinkAnim = new AlphaAnimation((float) 1,  (float) 0);
+		blinkAnim.setDuration(500);
+		blinkAnim.setRepeatCount(Animation.INFINITE);
 		blinkAnim.setRepeatMode(Animation.REVERSE);
 	}
 	
@@ -251,7 +251,7 @@ public class MainBIndicatorFragment extends ParentFragment{
 		ReverseFan = CAN1Comm.Get_CoolingFandrivingStatus_180_PGN65428();
 		ClutchCutOff = CAN1Comm.Get_ClutchCutoffStatus_545_PGN65428();
 		LockUpClutch = CAN1Comm.Get_TransmissionTCLockupEngaged_556_PGN65428();
-		//SeatBelt = CAN1Comm.Get_SeatBeltSwitchLamp_749_PGN65427();
+		SeatBelt = CAN1Comm.Get_SeatBeltSwitchLamp_749_PGN65427();
 		EngineAutoShutdown = CAN1Comm.Get_AutomaticEngineShutdown_363_PGN65428();
 	}
 
@@ -266,7 +266,7 @@ public class MainBIndicatorFragment extends ParentFragment{
 		ReverseFanDisplay(ReverseFan);
 		ClutchCutOffDisplay(ClutchCutOff);
 		LockUpClutchDisplay(LockUpClutch);
-		SeatBeltDisplay(ParentActivity.SeatBelt);
+		SeatBeltDisplay(SeatBelt);
 		EngineAutoShutdownDisplay(EngineAutoShutdown);
 		
 	}
@@ -394,14 +394,28 @@ public class MainBIndicatorFragment extends ParentFragment{
 	public void SeatBeltDisplay(int Data){
 		switch (Data) {
 		case CAN1CommManager.DATA_STATE_LAMP_OFF:
-			//imgViewSeatBelt.clearAnimation();
-			SeatBeltAnimation.FlipAnimation(imgViewSeatBelt, R.drawable.main_indicator_seatbelt);
+			imgViewSeatBelt.clearAnimation();
+			SeatBeltAnimation.FlipAnimation(imgViewSeatBelt, R.drawable.main_indicator_seatbelt_off_new);
 			imgViewSeatBelt.setAlpha(DARK);
+			/*
+			if(ParentActivity.SeatBeltBeaconConnect == CAN1CommManager.DATA_STATE_CONNECT_SEATBELT_BEACON_CONNECTED_ON) {
+				CAN1Comm.Set_BeaconLampOperationStatus_3444_PGN65527(CAN1CommManager.DATA_STATE_OFF);
+				CAN1Comm.TxCANToMCU(247);
+				CAN1Comm.Set_BeaconLampOperationStatus_3444_PGN65527(3);
+			}*/
 			break;
 		case CAN1CommManager.DATA_STATE_LAMP_ON:
-			SeatBeltAnimation.FlipAnimation(imgViewSeatBelt, R.drawable.main_indicator_seatbelt_on);
+			if(ParentActivity.SeatBeltAlarm == Home.STATE_SBR_ALARM_ON) {
+				SeatBeltAnimation.FlipAnimation(imgViewSeatBelt, R.drawable.main_indicator_seatbelt_on_new);
 			imgViewSeatBelt.setAlpha(LIGHT);
-			//imgViewSeatBelt.setAnimation(blinkAnim);
+				imgViewSeatBelt.setAnimation(blinkAnim);
+			}
+			/*
+			if(ParentActivity.SeatBeltBeaconConnect == CAN1CommManager.DATA_STATE_CONNECT_SEATBELT_BEACON_CONNECTED_ON) {
+				CAN1Comm.Set_BeaconLampOperationStatus_3444_PGN65527(CAN1CommManager.DATA_STATE_ON);
+				CAN1Comm.TxCANToMCU(247);
+				CAN1Comm.Set_BeaconLampOperationStatus_3444_PGN65527(3);
+			}*/
 			break;
 		default:
 			break;
@@ -454,7 +468,7 @@ public class MainBIndicatorFragment extends ParentFragment{
 			break;
 		case Home.SEATBELT:
 			actionitemIndicator = new ActionItem(0, getString(ParentActivity.getResources().getString(R.string.Lamp_SeatBelt), 129),
-					getResources().getDrawable(R.drawable.main_indicator_seatbelt_on));
+					getResources().getDrawable(R.drawable.main_indicator_seatbelt_on_new));
 			popupIndicator.addActionItem(actionitemIndicator);
 			break;
 		case Home.WARMINGUP:

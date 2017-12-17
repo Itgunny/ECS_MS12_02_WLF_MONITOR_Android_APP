@@ -515,8 +515,7 @@ public class CommService extends Service{
 	public native int Get_BrakeOilLevelLow_566_PGN65427();
 	public native int Get_BrakeOilTemperatureHigh_567_PGN65427();
 	public native int Get_EmissionSystemFailLamp_357_PGN65427();
-	public native int Get_SeatBeltSwitchLamp_749_PGN65427();
-	public native int Get_SeatBeltRemindAlarm_750_PGN65427();
+	public native int Get_SeatBeltSwitchLamp_749_PGN65427(); //++ --, 171213 cjg
 	//////RX_INDICATOR_LAMP_65428///////
 	public native int Get_PowerMaxStatus_802_PGN65428();
 	public native int Get_DecelerationStatus_803_PGN65428();
@@ -979,8 +978,7 @@ public class CommService extends Service{
 	public native void Set_BrakeOilLevelLow_566_PGN65427(int Data);
 	public native void Set_BrakeOilTemperatureHigh_567_PGN65427(int Data);
 	public native void Set_EmissionSystemFailLamp_357_PGN65427(int Data);
-	public native void Set_SeatBeltSwitchLamp_749_PGN65427(int Data);
-	public native void Set_SeatBeltRemindAlarm_750_PGN65427(int Data);
+	public native void Set_SeatBeltSwitchLamp_749_PGN65427(int Data); //++ --, 171213 cjg
 	//////TX_INDICATOR_LAMP_65428///////
 	public native void Set_PowerMaxStatus_802_PGN65428(int Data);
 	public native void Set_DecelerationStatus_803_PGN65428(int Data);
@@ -1319,12 +1317,14 @@ public class CommService extends Service{
 			case CAN1CommManager.RIGHT:
 				if(GetScreenTopFlag() == true || (CAN1Comm.CameraCurrentOnOff == true && CAN1Comm.CameraOnFlag != CAN1CommManager.STATE_CAMERA_REVERSEGEAR))
 				{
-					//if(Home.SeatBeltFlag == false || Home.SeatBelt30SecFlag == true) {
-					CAN1Comm.TxCMDToMCU(CAN1CommManager.CMD_BUZ, 0);
-					CAN1Comm.Set_RequestBuzzerStop_PGN65327(1);
-					CAN1Comm.TxCANToMCU(47);
-					StartBuzzerStopTimer();
-					//}
+					//++, 171213 cjg
+					if(Home.SeatBeltFlag == false || Home.SeatBelt30SecFlag == true) {
+						CAN1Comm.TxCMDToMCU(CAN1CommManager.CMD_BUZ, 0);
+						CAN1Comm.Set_RequestBuzzerStop_PGN65327(1);
+						CAN1Comm.TxCANToMCU(47);
+						StartBuzzerStopTimer();
+					}
+					//--, 171213 cjg
 					CAN1Comm.Callback_KeyButton(Data);
 				}
 				SoundPoolKeyButton.play(SoundID, fVolume, fVolume, 0, 0, 1);

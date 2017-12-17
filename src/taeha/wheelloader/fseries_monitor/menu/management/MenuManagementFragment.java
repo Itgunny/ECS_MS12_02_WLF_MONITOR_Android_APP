@@ -63,8 +63,13 @@ public class MenuManagementFragment extends MenuBodyList_ParentFragment{
 		
 		InitList();
 		ParentActivity._MenuBaseFragment._MenuListTitleFragment.setBackButtonEnable(false);
+		if(ParentActivity.OldScreenIndex == Home.SCREEN_STATE_SEATBELT_POPUP) {
+			ParentActivity.OldScreenIndex = Home.SCREEN_STATE_MENU_MANAGEMENT_TOP;
+			ParentActivity.ScreenIndex = Home.SCREEN_STATE_SEATBELT_POPUP;
+		} else {
 		ParentActivity.OldScreenIndex = Home.SCREEN_STATE_MENU_MANAGEMENT_TOP;
 		ParentActivity.ScreenIndex = Home.SCREEN_STATE_MENU_MANAGEMENT_TOP;
+		}
 		ParentActivity._MenuBaseFragment._MenuListTitleFragment.SetTitleText(ParentActivity.getResources().getString(R.string.Management), 197);
 		CursurDisplay(CursurIndex);
 		// ++, 150325 bwk

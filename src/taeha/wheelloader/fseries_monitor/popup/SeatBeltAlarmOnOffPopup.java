@@ -1,7 +1,5 @@
 package taeha.wheelloader.fseries_monitor.popup;
 
-import java.util.Timer;
-import java.util.TimerTask;
 
 import taeha.wheelloader.fseries_monitor.main.CAN1CommManager;
 import taeha.wheelloader.fseries_monitor.main.Home;
@@ -20,33 +18,38 @@ import android.view.ViewGroup.LayoutParams;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
-public class SeatBeltWarningPopup extends ParentPopup{
+public class SeatBeltAlarmOnOffPopup extends ParentPopup{
 	//CONSTANT////////////////////////////////////////
 	//////////////////////////////////////////////////
 	//RESOURCE////////////////////////////////////////
 	TextView textViewSeatBeltWarning;
 	
-	ImageButton imgbtnOK;
-	TextFitTextView textViewOK;
+	
+	ImageButton imgbtnOn;
+	ImageButton imgbtnOff;
+	
+	TextFitTextView textViewOn;
+	TextFitTextView textViewOff;
 	//////////////////////////////////////////////////
 	
 	//VALUABLE////////////////////////////////////////
+	int SeatBeltAlarm;
 	//////////////////////////////////////////////////
 	
 	//ANIMATION///////////////////////////////////////
-
+	
 	///////////////////////////////////////////////////
 	
 	//TEST////////////////////////////////////////////
 	
 	//////////////////////////////////////////////////
-	public SeatBeltWarningPopup(Context _context) {
+	public SeatBeltAlarmOnOffPopup(Context _context) {
 		super(_context);
 		// TODO Auto-generated constructor stub
-		TAG = "SeatBeltWarningPopup";
+		TAG = "SeatBeltAlarmOnOffPopup";
 		ParentActivity = (Home)_context;
 		inflater = (LayoutInflater)_context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-		mRoot = inflater.inflate(R.layout.popup_main_seatbelt_warning, null);
+		mRoot = inflater.inflate(R.layout.popup_main_sbr_alarm, null);
 		this.addContentView(mRoot,  new LayoutParams(448,288));
 		this.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
 	}
@@ -59,52 +62,73 @@ public class SeatBeltWarningPopup extends ParentPopup{
 		InitButtonListener();
 		InitValuable();
 		
-		ParentActivity.ScreenIndex = Home.SCREEN_STATE_SEATBELT_POPUP; 
+		ParentActivity.ScreenIndex = Home.SCREEN_STATE_MENU_MANAGEMENT_ASPHONE_SEATBELT_ALARM_POPUP; 
 	}
 	@Override
 	public boolean onTouchEvent(MotionEvent event) {
 		// TODO Auto-generated method stub
-		//ClickCancel();
-	
 		return false;
 	}	
 	@Override
 	public void InitValuable(){
 		super.InitValuable();
-		CursurIndex = 1;
-		CursurDisplay(CursurIndex);
+		SeatBeltAlarm = ParentActivity.SeatBeltAlarm;
+		DisplaySBRAlarm(SeatBeltAlarm);
 	}
 	@Override
 	public void dismiss() {
 		// TODO Auto-generated method stub
 		super.dismiss();
+		if(ParentActivity.SeatBeltPopupUsed == true) {
+			ParentActivity.ScreenIndex = Home.SCREEN_STATE_MENU_MANAGEMENT_ASPHONE_TOP;	
+		} else {
+			ParentActivity.ScreenIndex = Home.SCREEN_STATE_SEATBELT_POPUP;
+		}
+		
 	}
 
 	@Override
 	protected void InitResource() {
 		// TODO Auto-generated method stub
-		textViewSeatBeltWarning = (TextView)findViewById(R.id.textView_popup_main_seatbelt_warning_title);
-		textViewSeatBeltWarning.setText(getString(ParentActivity.getResources().getString(string.Seatbelt_Warning_Popup), 509));
+		textViewSeatBeltWarning = (TextView)findViewById(R.id.textView_popup_main_sbr_alarm_title);
+		textViewSeatBeltWarning.setText(getString(ParentActivity.getResources().getString(string.Seatbelt_Alarm_Warning), 512));
 		
-		imgbtnOK = (ImageButton)mRoot.findViewById(R.id.imageButton_popup_main_seatbelt_warning_ok);
-
-		textViewOK = (TextFitTextView)mRoot.findViewById(R.id.textView_popup_main_seatbelt_warning_ok);
-		textViewOK.setText(getString(ParentActivity.getResources().getString(R.string.OK), 15));
+		imgbtnOn = (ImageButton)mRoot.findViewById(R.id.imageButton_popup_main_sbr_alarm_on);
+		imgbtnOff = (ImageButton)mRoot.findViewById(R.id.imageButton_popup_main_sbr_alarm_off);
+		
+		textViewOn = (TextFitTextView)mRoot.findViewById(R.id.textView_popup_main_sbr_alarm_on);
+		textViewOn.setText(getString(ParentActivity.getResources().getString(R.string.On), 19));
+		
+		textViewOff = (TextFitTextView)mRoot.findViewById(R.id.textView_popup_main_sbr_alarm_off);
+		textViewOff.setText(getString(ParentActivity.getResources().getString(R.string.Off), 20));
 	}
 
 	@Override
 	protected void InitButtonListener() {
 		// TODO Auto-generated method stub
-		imgbtnOK.setOnClickListener(new View.OnClickListener() {
+		imgbtnOn.setOnClickListener(new View.OnClickListener() {
 			
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
-				ClickEnter();
+				ClickOn();
 			}
+
+
+		});
+		
+		imgbtnOff.setOnClickListener(new View.OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				ClickOff();
+			}
+
+
 		});
 	}
-
+	
 	@Override
 	protected void GetDataFromNative() {
 		// TODO Auto-generated method stub
@@ -117,39 +141,54 @@ public class SeatBeltWarningPopup extends ParentPopup{
 		
 	}
 	///////////////////////////////////////////////////////////////////////////////
-	public void ClickCancel(){
-		if(ParentActivity.ScreenIndex != Home.SCREEN_STATE_SEATBELT_POPUP)
-		{
-			Log.d(TAG,"Crash!!!AxleClickCancel:ScreenIndex="+Integer.toHexString(ParentActivity.ScreenIndex)+"OldScreenIndex="+Integer.toHexString(ParentActivity.OldScreenIndex));
-		}else if(ParentActivity.OldScreenIndex == Home.SCREEN_STATE_MAIN_CHECK_MACHINE_SERIAL) {
-			ParentActivity.ScreenIndex = Home.SCREEN_STATE_MAIN_CHECK_MACHINE_SERIAL;
-		}
+	
+	
+	private void ClickOn() {
+		// TODO Auto-generated method stub
+		if(ParentActivity.AnimationRunningFlag == true)
+			return;
 		else
-		{
-			ParentActivity.ScreenIndex = ParentActivity.OldScreenIndex;
-		}
+			ParentActivity.StartAnimationRunningTimer();
+		ParentActivity._MenuBaseFragment.showBodyManagementAnimation();
+		//ParentActivity._MenuBaseFragment._MenuModeFragment.setFirstScreen(Home.SCREEN_STATE_MENU_MANAGEMENT_TOP);
 		
+		
+		ParentActivity.SeatBeltAlarm = Home.STATE_SBR_ALARM_ON;
+		ParentActivity.SavePref();
+		this.dismiss();
+	}
+	private void ClickOff() {
+		// TODO Auto-generated method stub
+		if(ParentActivity.AnimationRunningFlag == true)
+			return;
+		else
+			ParentActivity.StartAnimationRunningTimer();
+		ParentActivity._MenuBaseFragment.showBodyManagementAnimation();
+		//ParentActivity._MenuBaseFragment._MenuModeFragment.setFirstScreen(Home.SCREEN_STATE_MENU_MANAGEMENT_TOP);
+		
+		ParentActivity.SeatBeltAlarm = Home.STATE_SBR_ALARM_OFF;
+		ParentActivity.SavePref();
+		this.dismiss();
+	}
+	public void ClickCancel(){
 		this.dismiss();
 	}
 	////////////////////////////////////////////////////////////////////////////////
-	//////////////////////////////////////////////////////////////////////
-	public void KeyButtonClick(final int key){
-		switch (key) {
-		case CAN1CommManager.ESC:
-			ClickESC();
-			break;
-		case CAN1CommManager.ENTER:
-			ClickEnter();
-			break;
-		default:
-			break;
-		}
-	}
 	public void ClickESC(){
 		ClickCancel();
 	}
 	public void ClickEnter(){
-		ClickCancel();
+		switch(CursurIndex) {
+		case 1:
+			ClickOn();
+			break;
+		case 2:
+			ClickOff();
+			break;
+		default:
+			break;
+			
+		}
 	}
 	public void ClickLeft(){
 		switch (CursurIndex) {
@@ -187,10 +226,26 @@ public class SeatBeltWarningPopup extends ParentPopup{
 	public void CursurDisplay(int Index){
 		switch (Index) {
 		case 1:
-			imgbtnOK.setPressed(true);
+			imgbtnOn.setPressed(true);
+			imgbtnOff.setPressed(false);
 			break;
 		case 2:
-			imgbtnOK.setPressed(false);
+			imgbtnOff.setPressed(true);
+			imgbtnOn.setPressed(false);
+			break;
+		default:
+			break;
+		}
+	}
+	public void DisplaySBRAlarm(int data) {
+		switch(data) {
+		case Home.STATE_SBR_ALARM_ON:
+			CursurIndex = 1;
+			CursurDisplay(CursurIndex);
+			break;
+		case Home.STATE_SBR_ALARM_OFF:
+			CursurIndex = 2;
+			CursurDisplay(CursurIndex);
 			break;
 		default:
 			break;

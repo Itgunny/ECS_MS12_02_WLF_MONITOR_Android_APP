@@ -2385,9 +2385,9 @@ typedef struct
 	unsigned char	Reserved0:4;
 
 	unsigned char	EmissionSystemFailLamp_357:3;
+	unsigned char	Reserved1:3;
 	unsigned char	SeatBeltSwitchLamp_749:2;
-	unsigned char	SeatBeltRemindAlarm_750:2;
-	unsigned char	Reserved1:1;
+
 
 
 }__attribute__((packed))  WARNING_LAMP_65427;

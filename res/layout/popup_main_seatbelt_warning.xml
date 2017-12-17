@@ -9,9 +9,9 @@
     <RelativeLayout
         android:id="@+id/RelativeLayout_popup_main_seatbelt_warning_title"
         android:layout_width="448dp"
-        android:layout_height="200dp"
+        android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="5dp"
+        android:layout_marginTop="60dp"
         android:splitMotionEvents="false">
         
        <TextView
@@ -42,8 +42,9 @@
         android:id="@+id/RelativeLayout_popup_main_seatbelt_warning_btn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="170dp"
+        android:layout_below="@+id/RelativeLayout_popup_main_seatbelt_warning_title"
         android:layout_centerHorizontal="true"
+        android:layout_marginTop="15dp"
         android:splitMotionEvents="false" >
 
         <ImageButton

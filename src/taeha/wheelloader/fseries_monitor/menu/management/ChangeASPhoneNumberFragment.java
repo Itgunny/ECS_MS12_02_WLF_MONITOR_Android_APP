@@ -9,6 +9,7 @@ import taeha.wheelloader.fseries_monitor.main.Home;
 import taeha.wheelloader.fseries_monitor.main.ParentFragment;
 import taeha.wheelloader.fseries_monitor.main.R;
 import taeha.wheelloader.fseries_monitor.main.TextFitTextView;
+import taeha.wheelloader.fseries_monitor.popup.SelectSeatbeltOrEntertainmentLockPopup;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
@@ -301,7 +302,8 @@ public class ChangeASPhoneNumberFragment extends ParentFragment{
 	/////////////////////////////////////////////////////////////////////	
 	public void ClickOK(){
 		if(strASNum.equals("65871126")){
-			ParentActivity.showEntertainmentLockPopup();
+			ParentActivity.showSelectSeatbeltOrEntertainmentLockPopup();
+			//ParentActivity.showEntertainmentLockPopup();
 		}else {
 		if(ParentActivity.AnimationRunningFlag == true)
 			return;

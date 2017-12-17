@@ -1828,9 +1828,18 @@ public class MenuBaseFragment extends ParentFragment{
 		case Home.SCREEN_STATE_MENU_MANAGEMENT_ASPHONE_ENTERTAINMENT_LOCK_POPUP:
 			ParentActivity._EntertainmentLockPopup.ClickLeft();
 			break;
+		case Home.SCREEN_STATE_MENU_MANAGEMENT_ASPHONE_SELECT_SEATBELT_OR_ENTER_POPUP:
+			ParentActivity._SelectSeatbeltOrEntertainmentLockPopup.ClickLeft();
+			break;
+		case Home.SCREEN_STATE_MENU_MANAGEMENT_ASPHONE_SEATBELT_ALARM_POPUP:
+			ParentActivity._SeatBeltAlarmOnOffPopup.ClickLeft();
+			break;
 		case Home.SCREEN_STATE_MENU_USERSWITCHING_POPUP:
 			ParentActivity._UserSwitchingLockingPopup.ClickLeft();
 			break;
+		case Home.SCREEN_STATE_MENU_MANAGEMENT_SERVICE_CONNECT_BEACON_SEATBELT_POPUP:
+			ParentActivity._ConnectBeaconSeatbeltPopup.ClickLeft();
+			break;		
 		default:
 			break;
 		}
@@ -2155,9 +2164,18 @@ public class MenuBaseFragment extends ParentFragment{
 		case Home.SCREEN_STATE_MENU_MANAGEMENT_ASPHONE_ENTERTAINMENT_LOCK_POPUP:
 			ParentActivity._EntertainmentLockPopup.ClickRight();
 			break;
+		case Home.SCREEN_STATE_MENU_MANAGEMENT_ASPHONE_SELECT_SEATBELT_OR_ENTER_POPUP:
+			ParentActivity._SelectSeatbeltOrEntertainmentLockPopup.ClickRight();
+			break;
+		case Home.SCREEN_STATE_MENU_MANAGEMENT_ASPHONE_SEATBELT_ALARM_POPUP:
+			ParentActivity._SeatBeltAlarmOnOffPopup.ClickRight();
+			break;
 		case Home.SCREEN_STATE_MENU_USERSWITCHING_POPUP:
 			ParentActivity._UserSwitchingLockingPopup.ClickRight();
 			break;
+		case Home.SCREEN_STATE_MENU_MANAGEMENT_SERVICE_CONNECT_BEACON_SEATBELT_POPUP:
+			ParentActivity._ConnectBeaconSeatbeltPopup.ClickRight();
+			break;	
 		default:
 			break;
 		}
@@ -2486,6 +2504,15 @@ public class MenuBaseFragment extends ParentFragment{
 			break;
 		case Home.SCREEN_STATE_MENU_MANAGEMENT_ASPHONE_ENTERTAINMENT_LOCK_POPUP:
 			ParentActivity._EntertainmentLockPopup.ClickESC();
+			break;
+		case Home.SCREEN_STATE_MENU_MANAGEMENT_ASPHONE_SELECT_SEATBELT_OR_ENTER_POPUP:
+			ParentActivity._SelectSeatbeltOrEntertainmentLockPopup.ClickESC();
+			break;
+		case Home.SCREEN_STATE_MENU_MANAGEMENT_ASPHONE_SEATBELT_ALARM_POPUP:
+			ParentActivity._SeatBeltAlarmOnOffPopup.ClickESC();
+			break;
+		case Home.SCREEN_STATE_MENU_MANAGEMENT_SERVICE_CONNECT_BEACON_SEATBELT_POPUP:
+			ParentActivity._ConnectBeaconSeatbeltPopup.ClickESC();	
 			break;	
 		default:
 			break;
@@ -2815,9 +2842,18 @@ public class MenuBaseFragment extends ParentFragment{
 		case Home.SCREEN_STATE_MENU_MANAGEMENT_ASPHONE_ENTERTAINMENT_LOCK_POPUP:
 			ParentActivity._EntertainmentLockPopup.ClickEnter();
 			break;
+		case Home.SCREEN_STATE_MENU_MANAGEMENT_ASPHONE_SELECT_SEATBELT_OR_ENTER_POPUP:
+			ParentActivity._SelectSeatbeltOrEntertainmentLockPopup.ClickEnter();
+			break;
+		case Home.SCREEN_STATE_MENU_MANAGEMENT_ASPHONE_SEATBELT_ALARM_POPUP:
+			ParentActivity._SeatBeltAlarmOnOffPopup.ClickEnter();
+			break;
 		case Home.SCREEN_STATE_MENU_USERSWITCHING_POPUP:
 			ParentActivity._UserSwitchingLockingPopup.ClickEnter();
 			break;
+		case Home.SCREEN_STATE_MENU_MANAGEMENT_SERVICE_CONNECT_BEACON_SEATBELT_POPUP:
+			ParentActivity._ConnectBeaconSeatbeltPopup.ClickEnter();
+			break;	
 		default:
 			break;
 		}
@@ -2842,6 +2878,9 @@ public class MenuBaseFragment extends ParentFragment{
 			case Home.SCREEN_STATE_MENU_USERSWITCHING_TOP:
 				ParentActivity.showUserSwitchingLockingPopup();
 				break;
+			/*case Home.SCREEN_STATE_MENU_MANAGEMENT_SERVICE_TOP:
+				ParentActivity.showConnectSeabeltBeaconPopup();
+				break;*/
 			default:
 				break;
 		}

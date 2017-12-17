@@ -370,6 +370,12 @@ public class CAN1CommManager extends ICAN1CommManager.Stub{		// ttySAC1(Linux), 
 	public static final int DATA_STATE_AVERAGE_FUEL_RATE_INFO_CLEAR						= 201;
 	public static final int DATA_STATE_A_DAYS_FUEL_USED_CLEAR							= 202;
 	
+	//++, 171213 cjg
+  	public static final int DATA_STATE_CONNECT_SEATBELT_BEACON_CONNECTED_OFF		 = 0;
+	public static final int DATA_STATE_CONNECT_SEATBELT_BEACON_CONNECTED_ON		 = 1;
+	//--, 171213 cjg
+	
+	
 	public static final int STATE_COMPONENTCODE_MCU									= 1;
 	public static final int STATE_COMPONENTCODE_ECM									= 5;	
 	public static final int STATE_COMPONENTCODE_TCU 								= 8;
@@ -1184,9 +1190,7 @@ public class CAN1CommManager extends ICAN1CommManager.Stub{		// ttySAC1(Linux), 
 	public int Get_BrakeOilLevelLow_566_PGN65427(){ return service.Get_BrakeOilLevelLow_566_PGN65427();}
 	public int Get_BrakeOilTemperatureHigh_567_PGN65427(){ return service.Get_BrakeOilTemperatureHigh_567_PGN65427();}
 	public int Get_EmissionSystemFailLamp_357_PGN65427(){ return service.Get_EmissionSystemFailLamp_357_PGN65427();}
-	public int Get_SeatBeltSwitchLamp_749_PGN65427(){ return service.Get_SeatBeltSwitchLamp_749_PGN65427();}
-	public int Get_SeatBeltRemindAlarm_750_PGN65427(){ return service.Get_SeatBeltRemindAlarm_750_PGN65427();}
-
+	public int Get_SeatBeltSwitchLamp_749_PGN65427(){ return service.Get_SeatBeltSwitchLamp_749_PGN65427();} //++ --, 171213 cjg
 	//////RX_INDICATOR_LAMP_65428///////
 	public int Get_PowerMaxStatus_802_PGN65428(){ return service.Get_PowerMaxStatus_802_PGN65428();}
 	public int Get_DecelerationStatus_803_PGN65428(){ return service.Get_DecelerationStatus_803_PGN65428();}
@@ -1650,8 +1654,7 @@ public class CAN1CommManager extends ICAN1CommManager.Stub{		// ttySAC1(Linux), 
 //	public void Set_BrakeOilLevelLow_566_PGN65427(int Data){ service.Set_BrakeOilLevelLow_566_PGN65427(Data);}
 //	public void Set_BrakeOilTemperatureHigh_567_PGN65427(int Data){ service.Set_BrakeOilTemperatureHigh_567_PGN65427(Data);}
 //	public void Set_EmissionSystemFailLamp_357_PGN65427(int Data){ service.Set_EmissionSystemFailLamp_357_PGN65427(Data);}
-//	public void Set_SeatBeltSwitchLamp_749_PGN65427(int Data){ service.Set_SeatBeltSwitchLamp_749_PGN65427(Data);}
-//	public void Set_SeatBeltRemindAlarm_750_PGN65427(int Data){ service.Set_SeatBeltRemindAlarm_750_PGN65427(Data);}
+//	public void Set_SeatBeltSwitchLamp_749_PGN65427(int Data){ service.Set_SeatBeltSwitchLamp_749_PGN65427(Data);} //++ --, 171213 cjg
 //	//////TX_INDICATOR_LAMP_65428///////
 //	public void Set_PowerMaxStatus_802_PGN65428(int Data){ service.Set_PowerMaxStatus_802_PGN65428(Data);}
 //	public void Set_DecelerationStatus_803_PGN65428(int Data){ service.Set_DecelerationStatus_803_PGN65428(Data);}

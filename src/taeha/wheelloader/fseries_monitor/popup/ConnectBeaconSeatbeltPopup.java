@@ -1,30 +1,34 @@
 package taeha.wheelloader.fseries_monitor.popup;
 
+import android.content.Context;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
+import android.util.Log;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup.LayoutParams;
+import android.widget.ImageButton;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
 import taeha.wheelloader.fseries_monitor.main.CAN1CommManager;
 import taeha.wheelloader.fseries_monitor.main.Home;
 import taeha.wheelloader.fseries_monitor.main.ParentPopup;
 import taeha.wheelloader.fseries_monitor.main.R;
+import taeha.wheelloader.fseries_monitor.main.R.string;
 import taeha.wheelloader.fseries_monitor.main.TextFitTextView;
-import android.content.Context;
-import android.graphics.Color;
-import android.graphics.drawable.ColorDrawable;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup.LayoutParams;
-import android.widget.TextView;
 
-public class KickDownPopup extends ParentPopup{
+public class ConnectBeaconSeatbeltPopup extends ParentPopup{
 	//CONSTANT////////////////////////////////////////
 
 	//////////////////////////////////////////////////
 	//RESOURCE////////////////////////////////////////
 	TextFitTextView textViewTitle;
-	TextFitTextView textViewMode1;
-	TextFitTextView textViewMode2;
+	TextFitTextView textViewOn;
+	TextFitTextView textViewOff;
 	//////////////////////////////////////////////////
 	
 	//VALUABLE////////////////////////////////////////
-	int KickDown;
+	int SeatBeltBeaconConnect;
 	//////////////////////////////////////////////////
 	
 	//ANIMATION///////////////////////////////////////
@@ -34,13 +38,13 @@ public class KickDownPopup extends ParentPopup{
 	//TEST////////////////////////////////////////////
 	
 	//////////////////////////////////////////////////
-	public KickDownPopup(Context _context) {
+	public ConnectBeaconSeatbeltPopup(Context _context) {
 		super(_context);
 		// TODO Auto-generated constructor stub
-		TAG = "KickDownPopup";
+		TAG = "ConnectBeaconSeatbeltPopup";
 		ParentActivity = (Home)_context;
 		inflater = (LayoutInflater)_context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-		mRoot = inflater.inflate(R.layout.popup_kickdown, null);
+		mRoot = inflater.inflate(R.layout.popup_seatbelt_beacon_connect, null);
 		this.addContentView(mRoot,  new LayoutParams(448,288));
 		this.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
 	}
@@ -53,48 +57,51 @@ public class KickDownPopup extends ParentPopup{
 		InitButtonListener();
 		InitValuable();
 		
-		ParentActivity.ScreenIndex = Home.SCREEN_STATE_MENU_MODE_ENGINETM_KICKDOWN;
+		ParentActivity.ScreenIndex = ParentActivity.SCREEN_STATE_MENU_MANAGEMENT_SERVICE_CONNECT_BEACON_SEATBELT_POPUP;
 	}
+
 	@Override
 	public void dismiss() {
 		// TODO Auto-generated method stub
 		super.dismiss();
-		ParentActivity.ScreenIndex = Home.SCREEN_STATE_MENU_MODE_ENGINETM_TOP;
+		ParentActivity.ScreenIndex = ParentActivity.SCREEN_STATE_MENU_MANAGEMENT_SERVICE_TOP;
 	}
 	@Override
 	public void InitValuable(){
 		super.InitValuable();
-		KickDown = CAN1Comm.Get_KickDownShiftMode_547_PGN65434();
-		KickDownDisplay(KickDown);
+		SeatBeltBeaconConnect = ParentActivity.SeatBeltBeaconConnect; 
+		SeatBeltBeaconDisplay(SeatBeltBeaconConnect);
 	}
 	@Override
 	protected void InitResource() {
 		// TODO Auto-generated method stub
-		textViewTitle = (TextFitTextView)mRoot.findViewById(R.id.textView_popup_kickdown_title);
-		textViewTitle.setText(getString(ParentActivity.getResources().getString(R.string.Kick_Down), 207));
-		textViewMode1 = (TextFitTextView)mRoot.findViewById(R.id.textView_popup_kickdown_mode1);
-		textViewMode1.setText(getString(ParentActivity.getResources().getString(R.string.MODE1_DOWN_UP), 221));
-		textViewMode2 = (TextFitTextView)mRoot.findViewById(R.id.textView_popup_kickdown_mode2);
-		textViewMode2.setText(getString(ParentActivity.getResources().getString(R.string.MODE2_DOWN_ONLY), 222));
+		textViewTitle = (TextFitTextView)mRoot.findViewById(R.id.textView_popup_seatbelt_beacon_title);
+		textViewTitle.setText("SeatBelt-Beacon Reminder");
+		
+		textViewOn = (TextFitTextView)mRoot.findViewById(R.id.textView_popup_seatbelt_beacon_on);
+		textViewOn.setText(getString(ParentActivity.getResources().getString(string.On), 19));
+		
+		textViewOff = (TextFitTextView)mRoot.findViewById(R.id.textView_popup_seatbelt_beacon_off);
+		textViewOff.setText(getString(ParentActivity.getResources().getString(string.Off), 20));
 	}
 
 	@Override
 	protected void InitButtonListener() {
 		// TODO Auto-generated method stub
-		textViewMode1.setOnClickListener(new View.OnClickListener() {
+		textViewOn.setOnClickListener(new View.OnClickListener() {
 			
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
-				ClickMode1();
+				ClickOn();
 			}
 		});
-		textViewMode2.setOnClickListener(new View.OnClickListener() {
+		textViewOff.setOnClickListener(new View.OnClickListener() {
 			
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
-				ClickMode2();
+				ClickOff();
 			}
 		});
 	}
@@ -111,14 +118,14 @@ public class KickDownPopup extends ParentPopup{
 		
 	}
 	///////////////////////////////////////////////////////////////////////////////
-	public void ClickMode1(){
-		CAN1Comm.Set_KickDownShiftMode_547_PGN61184_104(CAN1CommManager.DATA_STATE_KICKDOWN_UPDOWN);
-		CAN1Comm.TxCANToMCU(104);
+	public void ClickOn(){
+		ParentActivity.SeatBeltBeaconConnect = CAN1CommManager.DATA_STATE_CONNECT_SEATBELT_BEACON_CONNECTED_ON;
+		ParentActivity.SavePref();
 		this.dismiss();
 	}	
-	public void ClickMode2(){
-		CAN1Comm.Set_KickDownShiftMode_547_PGN61184_104(CAN1CommManager.DATA_STATE_KICKDOWN_DOWNONLY);
-		CAN1Comm.TxCANToMCU(104);
+	public void ClickOff(){
+		ParentActivity.SeatBeltBeaconConnect = CAN1CommManager.DATA_STATE_CONNECT_SEATBELT_BEACON_CONNECTED_OFF;
+		ParentActivity.SavePref();
 		this.dismiss();
 	}	
 	public void ClickLeft(){
@@ -159,10 +166,10 @@ public class KickDownPopup extends ParentPopup{
 	public void ClickEnter(){
 		switch (CursurIndex) {
 		case 1:
-			ClickMode1();
+			ClickOff();
 			break;
 		case 2:
-			ClickMode2();
+			ClickOn();
 			break;
 		default:
 			
@@ -173,28 +180,27 @@ public class KickDownPopup extends ParentPopup{
 	public void CursurDisplay(int Index){
 		switch (Index) {
 		case 1:
-			textViewMode1.setPressed(true);
-			textViewMode2.setPressed(false);
+			textViewOn.setPressed(false);
+			textViewOff.setPressed(true);
 			break;
 		case 2:
-			textViewMode1.setPressed(false);
-			textViewMode2.setPressed(true);
+			textViewOn.setPressed(true);
+			textViewOff.setPressed(false);
 			break;
 		default:
 			break;
 		}
 	}
-	public void KickDownDisplay(int data){
+	public void SeatBeltBeaconDisplay(int data){
 		switch (data) {
-		case CAN1CommManager.DATA_STATE_KICKDOWN_UPDOWN:
+		case CAN1CommManager.DATA_STATE_CONNECT_SEATBELT_BEACON_CONNECTED_OFF:
 			CursurIndex = 1;
 			CursurDisplay(CursurIndex);
 			break;
-		case CAN1CommManager.DATA_STATE_KICKDOWN_DOWNONLY:
+		case CAN1CommManager.DATA_STATE_CONNECT_SEATBELT_BEACON_CONNECTED_ON:
 			CursurIndex = 2;
 			CursurDisplay(CursurIndex);
 			break;
-
 		default:
 			break;
 		}

@@ -706,20 +706,45 @@ public class FaultHistoryActiveFragment extends ParentFragment{
 		switch(ModeSelectionStatus){
 		case 2:
 			Err_AAVM[5] = ModeSelectionStatus;
+			Err_AAVM[6] = 0;
+			Err_AAVM[7] = 0;
+			Err_AAVM[13] = 0;
+			Err_AAVM[14] = 0;
 			break;
 		case 3:
 			Err_AAVM[6] = ModeSelectionStatus;
+			Err_AAVM[5] = 0;
+			Err_AAVM[7] = 0;
+			Err_AAVM[13] = 0;
+			Err_AAVM[14] = 0;
 			break;
 		case 4:
 			Err_AAVM[7] = ModeSelectionStatus;
+			Err_AAVM[5] = 0;
+			Err_AAVM[6] = 0;
+			Err_AAVM[13] = 0;
+			Err_AAVM[14] = 0;
 			break;
 		case 5:
 			Err_AAVM[13] = ModeSelectionStatus;
+			Err_AAVM[5] = 0;
+			Err_AAVM[6] = 0;
+			Err_AAVM[7] = 0;
+			Err_AAVM[14] = 0;
 			break;
 		case 6:
 			Err_AAVM[14] = ModeSelectionStatus;
+			Err_AAVM[5] = 0;
+			Err_AAVM[6] = 0;
+			Err_AAVM[7] = 0;
+			Err_AAVM[13] = 0;
 			break;
 		default:
+			Err_AAVM[5] = 0;
+			Err_AAVM[6] = 0;
+			Err_AAVM[7] = 0;
+			Err_AAVM[13] = 0;
+			Err_AAVM[14] = 0;
 			break;
 		}
 		
@@ -730,17 +755,15 @@ public class FaultHistoryActiveFragment extends ParentFragment{
 		Err_AAVM[12] = (Err_AAVM_Data[1] >> 4) & 0x01;
 		Err_AAVM[15] = (Err_AAVM_Data[1] >> 5) & 0x01;
 		
+		Count = 0;
 		for(int i = 0; i < 24; i++){
 			if(Err_AAVM[i] >= 1){
-				
 				if(CursurIndex == 8 && CursurDetailIndex == Count)
 					adapter.addItem(new IconTextItemFault(null,ParentActivity.getResources().getDrawable(R.drawable.menu_information_fault_down_btn_selected), 
 							String.format("A%02d", i+1), "", ""));
 				else
 					adapter.addItem(new IconTextItemFault(null,ParentActivity.getResources().getDrawable(R.drawable.menu_information_fault_down_btn), 
 							String.format("A%02d", i+1), "", ""));
-				
-
 				Err_AAVM_List[Count++] = i;
 			}
 		}

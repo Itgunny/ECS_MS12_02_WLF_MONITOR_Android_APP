@@ -328,6 +328,7 @@ public class ServiceMenuSensorMonitoringHiddenFragment extends ParentFragment{
 		int rpm = CAN1Comm.Get_EngineSpeed_310_PGN65431();
 		int AlternatorVoltage = CAN1Comm.Get_AlternatorVoltage_707_PGN65360();
 		
+		
 		imgbtnDown.setClickable(false);
 		imgbtnUp.setClickable(false);
 		radioAuto.setClickable(false);

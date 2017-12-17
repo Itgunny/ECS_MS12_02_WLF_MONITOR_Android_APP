@@ -1139,9 +1139,6 @@ jint Get_EmissionSystemFailLamp_357_PGN65427(JNIEnv * env, jobject this) {
 jint Get_SeatBeltSwitchLamp_749_PGN65427(JNIEnv * env, jobject this) {
 	return RX_WARNING_LAMP_65427.SeatBeltSwitchLamp_749;
 }
-jint Get_SeatBeltRemindAlarm_750_PGN65427(JNIEnv * env, jobject this) {
-	return RX_WARNING_LAMP_65427.SeatBeltRemindAlarm_750;
-}
 //////RX_INDICATOR_LAMP_65428///////
 jint Get_PowerMaxStatus_802_PGN65428(JNIEnv * env, jobject this) {
 	return RX_INDICATOR_LAMP_65428.PowerMaxStatus_802;
@@ -2741,10 +2738,6 @@ void Set_EmissionSystemFailLamp_357_PGN65427(JNIEnv * env, jobject this,
 void Set_SeatBeltSwitchLamp_749_PGN65427(JNIEnv * env, jobject this,
 		int Data) {
 	TX_WARNING_LAMP_65427.SeatBeltSwitchLamp_749 = Data;
-}
-void Set_SeatBeltRemindAlarm_750_PGN65427(JNIEnv * env, jobject this,
-		int Data) {
-	TX_WARNING_LAMP_65427.SeatBeltRemindAlarm_750 = Data;
 }
 //////TX_INDICATOR_LAMP_65428///////
 void Set_PowerMaxStatus_802_PGN65428(JNIEnv * env, jobject this, int Data) {
@@ -4385,9 +4378,7 @@ static JNINativeMethod methods[] =
 						"Get_EmissionSystemFailLamp_357_PGN65427", "()I",
 						(void*) Get_EmissionSystemFailLamp_357_PGN65427 }, {
 						"Get_SeatBeltSwitchLamp_749_PGN65427", "()I",
-						(void*) Get_SeatBeltSwitchLamp_749_PGN65427 }, {
-						"Get_SeatBeltRemindAlarm_750_PGN65427", "()I",
-						(void*) Get_SeatBeltRemindAlarm_750_PGN65427 },
+						(void*) Get_SeatBeltSwitchLamp_749_PGN65427 },
 				//////RX_INDICATOR_LAMP_65428///////
 				{ "Get_PowerMaxStatus_802_PGN65428", "()I",
 						(void*) Get_PowerMaxStatus_802_PGN65428 }, {
@@ -5200,9 +5191,7 @@ static JNINativeMethod methods[] =
 						"Set_EmissionSystemFailLamp_357_PGN65427", "(I)V",
 						(void*) Set_EmissionSystemFailLamp_357_PGN65427 },  {
 						"Set_SeatBeltSwitchLamp_749_PGN65427", "(I)V",
-						(void*) Set_SeatBeltSwitchLamp_749_PGN65427 },  {
-						"Set_SeatBeltRemindAlarm_750_PGN65427", "(I)V",
-						(void*) Set_SeatBeltRemindAlarm_750_PGN65427 },
+						(void*) Set_SeatBeltSwitchLamp_749_PGN65427 },
 
 				//////TX_INDICATOR_LAMP_65428///////
 				{ "Set_PowerMaxStatus_802_PGN65428", "(I)V",
