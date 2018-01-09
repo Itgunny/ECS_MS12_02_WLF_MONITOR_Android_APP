@@ -96,7 +96,7 @@ public class Home extends Activity {
 	//
 	public static final int VERSION_HIGH 		= 2;
 	public static final int VERSION_LOW 		= 6;
-	public static final int VERSION_SUB_HIGH 	= 0;
+	public static final int VERSION_SUB_HIGH 	= 1;
 	public static final int VERSION_SUB_LOW 	= 0;
 	public static final int VERSION_TAEHA		= 0;
 	// UI B 안 최초 적용 2014.12.10
@@ -825,6 +825,8 @@ public class Home extends Activity {
 	//    - Seatbelt Alarm 기능 AS 연락처 변경 기능에 SBR Alarm On Off 기능 추가
 	//    - Seatbelt Timer Alarm 기능 추가
 	//    - Seatbelt Beacon 삭제.
+	//v2.6.1.00
+	// 1. Seatbelt 0xf -> 0x3
 	//////////////////////////////////////////////////////////////////////////////////////
 	// TAG
 
@@ -3845,7 +3847,7 @@ public class Home extends Activity {
 									SeatBeltFlag = true;
 									showSeatBeltWarningPopup();
 									StartSeatBeltTimer();
-								} else if(SeatBelt == 0 || SeatBelt == 0xff){
+								} else if(SeatBelt == 0 || SeatBelt == 3){
 									SeatBeltFlag = false;
 									SeatBelt30SecFlag = false;
 									if(CAN1Comm.BuzzerStatus == CAN1CommManager.BUZZER_ON){
